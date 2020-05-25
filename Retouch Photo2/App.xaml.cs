@@ -15,12 +15,21 @@ namespace Retouch_Photo2
 {
     public sealed partial class App : Application
     {
+
+        static ViewModel viewModel = new ViewModel();
+
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.ViewModel" />. </summary>
-        public static ViewModel ViewModel = new ViewModel();
+        public static ViewModel ViewModel => App.viewModel;
+
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.SelectionViewModel" />. </summary>
+        public static ViewModel SelectionViewModel => App.viewModel;
+
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.MethodViewModel" />. </summary>
+        public static ViewModel MethodViewModel => App.viewModel;
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.SettingViewModel" />. </summary>
         public static SettingViewModel SettingViewModel = new SettingViewModel();
-        
+
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.TipViewModel" />. </summary>
         public static TipViewModel TipViewModel = new TipViewModel(new NoneTool(), new MoveTool(), new TransformerTool(), new CreateTool())
         {

@@ -32,6 +32,7 @@ namespace Retouch_Photo2.Menus.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Converter
         private int FontSizeConverter(float fontSize) => (int)fontSize;
@@ -155,17 +156,17 @@ namespace Retouch_Photo2.Menus.Models
             this.FontAlignmentSegmented.AlignmentChanged += (s, fontAlignment) =>
             {
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
                     if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
                     {
-                        ITextLayer textLayer = (ITextLayer)layerage;
+                        ITextLayer textLayer = (ITextLayer)layer;
                         textLayer.FontAlignment = fontAlignment;
                     }
                 });
-                this.ViewModel.FontAlignment = fontAlignment;
+                this.SelectionViewModel.FontAlignment = fontAlignment;
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -178,22 +179,22 @@ namespace Retouch_Photo2.Menus.Models
             this.BoldButton.Click += (s, e) =>
             {
                 //Whether the judgment is small or large.
-                bool isBold = this.ViewModel.FontWeight.Weight == FontWeights.Bold.Weight;
+                bool isBold = this.SelectionViewModel.FontWeight.Weight == FontWeights.Bold.Weight;
                 // isBold ? ""Normal"" : ""Bold""
                 FontWeight fontWeight = isBold ? FontWeights.Normal : FontWeights.Bold;
 
                 //Selection
-                this.ViewModel.SetValue((laylayerageer) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
-                    ILayer layerage = laylayerageer.Self;
+                    ILayer layer = layerage.Self;
 
-                    if (layerage.Type == LayerType.TextArtistic || layerage.Type == LayerType.TextFrame)
+                    if (layer.Type == LayerType.TextArtistic || layer.Type == LayerType.TextFrame)
                     {
-                        ITextLayer textLayer = (ITextLayer)layerage;
+                        ITextLayer textLayer = (ITextLayer)layer;
                         textLayer.FontWeight = fontWeight;
                     }
                 });
-                this.ViewModel.FontWeight = fontWeight;
+                this.SelectionViewModel.FontWeight = fontWeight;
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -201,12 +202,12 @@ namespace Retouch_Photo2.Menus.Models
             this.ItalicButton.Click += (s, e) =>
             {
                 //Whether the judgment is Normal or Italic.
-                bool isNormal = this.ViewModel.FontStyle == FontStyle.Normal;
+                bool isNormal = this.SelectionViewModel.FontStyle == FontStyle.Normal;
                 // isNormal ? ""Italic"" : ""Normal""
                 FontStyle fontStyle = isNormal ? FontStyle.Italic : FontStyle.Normal;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -216,7 +217,7 @@ namespace Retouch_Photo2.Menus.Models
                         textLayer.FontStyle = fontStyle;
                     }
                 });
-                this.ViewModel.FontStyle = fontStyle;
+                this.SelectionViewModel.FontStyle = fontStyle;
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -240,7 +241,7 @@ namespace Retouch_Photo2.Menus.Models
             this.FontWeightControl.WeightChanged += (s, fontWeight) =>
             {
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -250,7 +251,7 @@ namespace Retouch_Photo2.Menus.Models
                         textLayer.FontWeight = fontWeight;
                     }
                 });
-                this.ViewModel.FontWeight = fontWeight;
+                this.SelectionViewModel.FontWeight = fontWeight;
 
                 this.ViewModel.Invalidate();//Invalidate
             };
@@ -277,7 +278,7 @@ namespace Retouch_Photo2.Menus.Models
                 if (e.ClickedItem is string value)
                 {
                     //Selection
-                    this.ViewModel.SetValue((layerage) =>
+                    this.SelectionViewModel.SetValue((layerage) =>
                     {
                         ILayer layer = layerage.Self;
 
@@ -287,7 +288,7 @@ namespace Retouch_Photo2.Menus.Models
                             textLayer.FontFamily = value;
                         }
                     });
-                    this.ViewModel.FontFamily = value;
+                    this.SelectionViewModel.FontFamily = value;
 
                     this.ViewModel.Invalidate();//Invalidate
                 }
@@ -326,7 +327,7 @@ namespace Retouch_Photo2.Menus.Models
         private void SetFontSize(float value)
         {
             //Selection
-            this.ViewModel.SetValue((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -336,9 +337,9 @@ namespace Retouch_Photo2.Menus.Models
                     textLayer.FontSize = value;
                 }
             });
-            this.ViewModel.FontSize = value;
+            this.SelectionViewModel.FontSize = value;
 
-            this.ViewModel.Transformer = this.ViewModel.RefactoringTransformer();//Refactoring
+            this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();//Refactoring
             this.ViewModel.Invalidate();//Invalidate
         }
 

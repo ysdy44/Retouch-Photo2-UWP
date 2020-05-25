@@ -20,6 +20,8 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar  
@@ -92,10 +94,10 @@ namespace Retouch_Photo2.Tools.Models
             if (mid < 0.0f) mid = 0.0f;
             if (mid > 1.0f) mid = 1.0f;
 
-            this.ViewModel.GeometryDiamondMid = mid;
+            this.SelectionViewModel.GeometryDiamondMid = mid;
 
             //Selection
-            this.ViewModel.SetValue((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -111,11 +113,11 @@ namespace Retouch_Photo2.Tools.Models
 
         private void MidMirror()
         {
-            float selectionMid = 1.0f - this.ViewModel.GeometryDiamondMid;
-            this.ViewModel.GeometryDiamondMid = selectionMid;
+            float selectionMid = 1.0f - this.SelectionViewModel.GeometryDiamondMid;
+            this.SelectionViewModel.GeometryDiamondMid = selectionMid;
 
             //Selection
-            this.ViewModel.SetValue((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
                 
@@ -174,9 +176,9 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryDiamondLayer
             {
-                Mid = this.ViewModel.GeometryDiamondMid,
+                Mid = this.SelectionViewModel.GeometryDiamondMid,
                 Transform = new Transform(transformer),
-                Style = this.ViewModel.GeometryStyle
+                Style = this.SelectionViewModel.GeometryStyle
             };
         }
 

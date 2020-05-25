@@ -15,13 +15,14 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public partial class MoveTool : IMoveTool
     {
-
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
         
-        Transformer Transformer { get => this.ViewModel.Transformer; set => this.ViewModel.Transformer = value; }
-        ListViewSelectionMode Mode => this.ViewModel.SelectionMode;
+        Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
+        ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
 
         MarqueeCompositeMode MarqueeCompositeMode => this.SettingViewModel.CompositeMode;
         BorderBorderSnap Snap => this.ViewModel.BorderBorderSnap;
@@ -38,13 +39,13 @@ namespace Retouch_Photo2.Tools
             if (isMove == false) return false;
 
             //Snap
-            if (this.IsSnap) this.ViewModel.BorderBorderSnapStarted(this.ViewModel.GetFirstSelectedLayerage());
+            if (this.IsSnap) this.ViewModel.BorderBorderSnapStarted(this.SelectionViewModel.GetFirstSelectedLayerage());
 
             //Selection
             if (this.IsSnap) this.Snap.StartingSource = new TransformerBorder(this.Transformer);
 
             //Method
-            this.ViewModel.MethodTransformAddStarted();
+            this.MethodViewModel.MethodTransformAddStarted();
             return true;
         }
 
@@ -61,7 +62,7 @@ namespace Retouch_Photo2.Tools
             if (this.IsSnap) canvasMove = this.Snap.Snap(canvasMove);
 
             //Method
-            this.ViewModel.MethodTransformAddDelta(canvasMove);
+            this.MethodViewModel.MethodTransformAddDelta(canvasMove);
             return true;
         }
         public bool Complete(Vector2 startingPoint, Vector2 point)
@@ -81,7 +82,7 @@ namespace Retouch_Photo2.Tools
             }
 
             //Method
-            this.ViewModel.MethodTransformAddComplete(canvasMove);
+            this.MethodViewModel.MethodTransformAddComplete(canvasMove);
             return true;
         }
 
@@ -94,7 +95,7 @@ namespace Retouch_Photo2.Tools
 
             if (selectedLayer == null)
             {
-                this.ViewModel.MethodSelectedNone();//Method
+                this.MethodViewModel.MethodSelectedNone();//Method
                 return false;
             }
 
@@ -102,10 +103,10 @@ namespace Retouch_Photo2.Tools
             switch (this.MarqueeCompositeMode)
             {
                 //Method
-                case MarqueeCompositeMode.New: this.ViewModel.MethodSelectedNew(selectedLayer); return true;
-                case MarqueeCompositeMode.Add: this.ViewModel.MethodSelectedAdd(selectedLayer); return true;
-                case MarqueeCompositeMode.Subtract: this.ViewModel.MethodSelectedSubtract(selectedLayer); return true;
-                case MarqueeCompositeMode.Intersect: this.ViewModel.MethodSelectedIntersect(selectedLayer); return true;
+                case MarqueeCompositeMode.New: this.MethodViewModel.MethodSelectedNew(selectedLayer); return true;
+                case MarqueeCompositeMode.Add: this.MethodViewModel.MethodSelectedAdd(selectedLayer); return true;
+                case MarqueeCompositeMode.Subtract: this.MethodViewModel.MethodSelectedSubtract(selectedLayer); return true;
+                case MarqueeCompositeMode.Intersect: this.MethodViewModel.MethodSelectedIntersect(selectedLayer); return true;
                 default: return false;
             }
         }
@@ -117,7 +118,7 @@ namespace Retouch_Photo2.Tools
 
             //Transformer
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            drawingSession.DrawBoundNodes(this.Transformer, matrix, this.ViewModel.AccentColor, this.ViewModel.DisabledRadian);
+            drawingSession.DrawBoundNodes(this.Transformer, matrix, this.ViewModel.AccentColor, this.SelectionViewModel.DisabledRadian);
 
             //Snapping
             if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
@@ -128,7 +129,7 @@ namespace Retouch_Photo2.Tools
         private Layerage GetClickSelectedLayerage(Vector2 canvasPoint)
         {
             //Select a layer of the same depth
-            Layerage delectedLayerage = this.ViewModel.GetFirstSelectedLayerage();
+            Layerage delectedLayerage = this.SelectionViewModel.GetFirstSelectedLayerage();
             IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(delectedLayerage);
 
             bool childasdsad(Layerage child)
@@ -160,12 +161,12 @@ namespace Retouch_Photo2.Tools
 
             if (selectedLayer == null)
             {
-                this.ViewModel.MethodSelectedNone();//Method
+                this.MethodViewModel.MethodSelectedNone();//Method
                 return false;
             }
             else
             {
-                this.ViewModel.MethodSelectedNew(selectedLayer);//Method
+                this.MethodViewModel.MethodSelectedNew(selectedLayer);//Method
                 return true;
             }
         }

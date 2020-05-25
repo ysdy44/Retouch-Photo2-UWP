@@ -16,17 +16,19 @@ namespace Retouch_Photo2.Tools
     {        
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
         
-        Transformer Transformer { get => this.ViewModel.Transformer; set => this.ViewModel.Transformer = value; }
-        ListViewSelectionMode Mode => this.ViewModel.SelectionMode;
+        Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
+        ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
 
         VectorBorderSnap Snap => this.ViewModel.VectorBorderSnap;
         bool IsSnap => this.SettingViewModel.IsSnap;
         bool IsRatio => this.SettingViewModel.IsRatio;
         bool IsCenter => this.SettingViewModel.IsCenter;
         bool IsStepFrequency => this.SettingViewModel.IsStepFrequency;
-        bool DisabledRadian => this.ViewModel.DisabledRadian;
+        bool DisabledRadian => this.SelectionViewModel.DisabledRadian;
 
 
         TransformerMode TransformerMode = TransformerMode.None;
@@ -41,10 +43,10 @@ namespace Retouch_Photo2.Tools
             if (this.TransformerMode == TransformerMode.None) return false;
 
             //Snap
-            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.ViewModel.GetFirstSelectedLayerage());
+            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.SelectionViewModel.GetFirstSelectedLayerage());
 
             //Method
-            this.ViewModel.MethodTransformMultipliesStarted();
+            this.MethodViewModel.MethodTransformMultipliesStarted();
             return true;
         }
         public bool Delta(Vector2 startingPoint, Vector2 point)
@@ -60,10 +62,10 @@ namespace Retouch_Photo2.Tools
             if (this.IsSnap && this.TransformerMode.IsScale()) canvasPoint = this.Snap.Snap(canvasPoint);
             
             //Selection
-            Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.ViewModel.StartingTransformer, this.IsRatio, this.IsCenter, this.IsStepFrequency);
+            Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.SelectionViewModel.StartingTransformer, this.IsRatio, this.IsCenter, this.IsStepFrequency);
       
             //Method
-            this.ViewModel.MethodTransformMultipliesDelta(transformer);
+            this.MethodViewModel.MethodTransformMultipliesDelta(transformer);
             return true;
         }
         public bool Complete(Vector2 startingPoint, Vector2 point)
@@ -83,10 +85,10 @@ namespace Retouch_Photo2.Tools
             }
 
             //Selection
-            Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.ViewModel.StartingTransformer, this.IsRatio, this.IsCenter, this.IsStepFrequency);
+            Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.SelectionViewModel.StartingTransformer, this.IsRatio, this.IsCenter, this.IsStepFrequency);
 
             //Method
-            this.ViewModel.MethodTransformMultipliesComplete(transformer);
+            this.MethodViewModel.MethodTransformMultipliesComplete(transformer);
             this.TransformerMode = TransformerMode.None;//TransformerMode
             return true;
         }
@@ -98,7 +100,7 @@ namespace Retouch_Photo2.Tools
 
             //Transformer
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            drawingSession.DrawBoundNodes(this.Transformer, matrix, this.ViewModel.AccentColor, this.ViewModel.DisabledRadian);
+            drawingSession.DrawBoundNodes(this.Transformer, matrix, this.ViewModel.AccentColor, this.SelectionViewModel.DisabledRadian);
 
             //Snapping
             if (this.IsSnap)

@@ -15,6 +15,7 @@ namespace Retouch_Photo2.Effects.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Construct
         public StraightenEffectPage()
@@ -59,7 +60,7 @@ namespace Retouch_Photo2.Effects.Models
             LayersPropertyHistory history = new LayersPropertyHistory("Set effect value");
 
             //Selection
-            this.ViewModel.SetValue((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -107,7 +108,7 @@ namespace Retouch_Photo2.Effects.Models
                 LayersPropertyHistory history = new LayersPropertyHistory("Set effect isOn");
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -142,7 +143,7 @@ namespace Retouch_Photo2.Effects.Models
                 history = new LayersPropertyHistory("Set effect value");
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
                     layer.Effect.CacheStraighten();
@@ -155,7 +156,7 @@ namespace Retouch_Photo2.Effects.Models
                 float radians = (float)value;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
                     layer.Effect.Straighten_Angle = radians;
@@ -168,7 +169,7 @@ namespace Retouch_Photo2.Effects.Models
                 float radians = (float)value;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 

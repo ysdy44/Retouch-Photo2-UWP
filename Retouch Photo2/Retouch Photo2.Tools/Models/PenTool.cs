@@ -19,11 +19,13 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         GeometryTool GeometryTool = new GeometryTool();
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
-        CurveLayer CurveLayer => this.ViewModel.CurveLayer;
+        CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
         NodeCollection Nodes => this.CurveLayer.Nodes;
 
         VectorVectorSnap Snap => this.ViewModel.VectorVectorSnap;
@@ -333,7 +335,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 IsSelected = true,
                 Transform = new Transform(transformer),
-                Style = this.ViewModel.CurveStyle,
+                Style = this.SelectionViewModel.CurveStyle,
             };
             Layerage curveLayerage = curveLayer.ToLayerage();
             Layer.Instances.Add(curveLayer);
@@ -341,7 +343,7 @@ namespace Retouch_Photo2.Tools.Models
             //Mezzanine
             LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, curveLayerage);
 
-            this.ViewModel.SetModeSingle(curveLayerage);//Selection
+            this.SelectionViewModel.SetModeSingle(curveLayerage);//Selection
             LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
             this.ViewModel.Invalidate();//Invalidate
         }

@@ -15,6 +15,7 @@ namespace Retouch_Photo2.Effects.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
 
 
         //@Construct
@@ -76,7 +77,7 @@ namespace Retouch_Photo2.Effects.Models
         LayersPropertyHistory history = new LayersPropertyHistory("Set effect value");
 
         //Selection
-        this.ViewModel.SetValue((layerage) =>
+        this.SelectionViewModel.SetValue((layerage) =>
         {
             ILayer layer = layerage.Self;
 
@@ -144,7 +145,7 @@ namespace Retouch_Photo2.Effects.Models
                 LayersPropertyHistory history = new LayersPropertyHistory("Set effect isOn");
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -179,7 +180,7 @@ namespace Retouch_Photo2.Effects.Models
                 history = new LayersPropertyHistory("Set effect value");
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -193,7 +194,7 @@ namespace Retouch_Photo2.Effects.Models
                 float radians = (float)value;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -207,7 +208,7 @@ namespace Retouch_Photo2.Effects.Models
                 float radians = (float)value;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -243,7 +244,7 @@ namespace Retouch_Photo2.Effects.Models
                 history = new LayersPropertyHistory("Set effect value");
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -257,7 +258,7 @@ namespace Retouch_Photo2.Effects.Models
                 float radians = (float)value;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -271,7 +272,7 @@ namespace Retouch_Photo2.Effects.Models
                 float radians = (float)value;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -306,7 +307,7 @@ namespace Retouch_Photo2.Effects.Models
                 history = new LayersPropertyHistory("Set effect value");
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -320,7 +321,7 @@ namespace Retouch_Photo2.Effects.Models
                 float radians = (float)value;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -334,7 +335,7 @@ namespace Retouch_Photo2.Effects.Models
                 float radians = (float)value;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -369,7 +370,7 @@ namespace Retouch_Photo2.Effects.Models
                 history = new LayersPropertyHistory("Set effect value");
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -383,7 +384,7 @@ namespace Retouch_Photo2.Effects.Models
                 float radians = (float)value;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -397,7 +398,7 @@ namespace Retouch_Photo2.Effects.Models
                 float radians = (float)value;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -435,7 +436,7 @@ namespace Retouch_Photo2.Effects.Models
 
                 //Selection
                 this.SolidColorBrush.Color = value;
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -472,7 +473,7 @@ namespace Retouch_Photo2.Effects.Models
 
                 //Selection
                 this.SolidColorBrush.Color = value;
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -485,7 +486,7 @@ namespace Retouch_Photo2.Effects.Models
             {
                 //Selection
                 this.SolidColorBrush.Color = value;
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                 ILayer layer = layerage.Self;
 
@@ -498,7 +499,7 @@ namespace Retouch_Photo2.Effects.Models
             {
                 //Selection
                 this.SolidColorBrush.Color = value;
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 

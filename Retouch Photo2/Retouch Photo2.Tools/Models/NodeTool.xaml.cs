@@ -20,11 +20,13 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
-        Layerage CurveLayerage => this.ViewModel.Layerage;
-        CurveLayer CurveLayer => this.ViewModel.CurveLayer;
+        Layerage CurveLayerage => this.SelectionViewModel.Layerage;
+        CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
         NodeCollection Nodes => this.CurveLayer.Nodes;
 
         VectorVectorSnap Snap => this.ViewModel.VectorVectorSnap;
@@ -53,7 +55,7 @@ namespace Retouch_Photo2.Tools.Models
 
                //     LayerCollection.RemoveLayer(this.ViewModel.LayerCollection, this.CurveLayer);
 
-               this.ViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
+               this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
                     LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
@@ -87,7 +89,7 @@ namespace Retouch_Photo2.Tools.Models
             //TODO: SVM.TR
             //The NodeTool may change the current CurveLayer's transformer.
      //       Transformer transformer = this.CurveLayer.GetActualDestinationWithRefactoringTransformer;
-         //   this.ViewModel.Transformer = transformer;
+         //   this.SelectionViewModel.Transformer = transformer;
         }
 
     }

@@ -24,9 +24,11 @@ namespace Retouch_Photo2.Menus.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
-        Transformer Transformer { get => this.ViewModel.Transformer; set => this.ViewModel.Transformer = value; }
+        Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
 
 
         #region DependencyProperty
@@ -181,7 +183,7 @@ namespace Retouch_Photo2.Menus.Models
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
-                this.ViewModel.MethodTransformMultiplies(matrix);//Method
+                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
 
             };
 
@@ -189,21 +191,21 @@ namespace Retouch_Photo2.Menus.Models
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
-                this.ViewModel.MethodTransformMultiplies(matrix);//Method
+                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
             this.RotateLeftButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(-FanKit.Math.PiOver2, transformer.Center);
-                this.ViewModel.MethodTransformMultiplies(matrix);//Method
+                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
             this.RotateRightButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(FanKit.Math.PiOver2, transformer.Center);
-                this.ViewModel.MethodTransformMultiplies(matrix);//Method
+                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
         }
@@ -214,9 +216,9 @@ namespace Retouch_Photo2.Menus.Models
 
             this.MoveBackButton.Click += (s, e) =>
             {
-                if (this.ViewModel.SelectionMode == ListViewSelectionMode.Single)
+                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
-                    Layerage destination = this.ViewModel.Layerage;
+                    Layerage destination = this.SelectionViewModel.Layerage;
                     IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
                     if (parentsChildren.Count < 2) return;
 
@@ -230,9 +232,9 @@ namespace Retouch_Photo2.Menus.Models
 
             this.BackOneButton.Click += (s, e) =>
             {
-                if (this.ViewModel.SelectionMode == ListViewSelectionMode.Single)
+                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
-                    Layerage destination = this.ViewModel.Layerage;
+                    Layerage destination = this.SelectionViewModel.Layerage;
                     IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
                     if (parentsChildren.Count < 2) return;
 
@@ -252,9 +254,9 @@ namespace Retouch_Photo2.Menus.Models
 
             this.ForwardOneButton.Click += (s, e) =>
             {
-                if (this.ViewModel.SelectionMode == ListViewSelectionMode.Single)
+                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
-                    Layerage destination = this.ViewModel.Layerage;                    
+                    Layerage destination = this.SelectionViewModel.Layerage;                    
                     IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);                    
                     if (parentsChildren.Count < 2) return;
 
@@ -274,9 +276,9 @@ namespace Retouch_Photo2.Menus.Models
 
             this.MoveFrontButton.Click += (s, e) =>
             {
-                if (this.ViewModel.SelectionMode == ListViewSelectionMode.Single)
+                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
-                    Layerage destination = this.ViewModel.Layerage;
+                    Layerage destination = this.SelectionViewModel.Layerage;
                     IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);                    
                     if (parentsChildren.Count < 2) return;
 
@@ -298,21 +300,21 @@ namespace Retouch_Photo2.Menus.Models
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0 - transformer.MinX, 0);
-                this.ViewModel.MethodTransformMultiplies(matrix);//Method
+                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
             this.CenterButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width / 2 - transformer.Center.X, 0);
-                this.ViewModel.MethodTransformMultiplies(matrix);//Method
+                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
             this.RightButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width - transformer.MaxX, 0);
-                this.ViewModel.MethodTransformMultiplies(matrix);//Method
+                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
             this.HorizontallySymmetryButton.Click += (s, e) =>
@@ -330,21 +332,21 @@ namespace Retouch_Photo2.Menus.Models
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, 0 - transformer.MinY);
-                this.ViewModel.MethodTransformMultiplies(matrix);//Method
+                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
             this.MiddleButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height / 2 - transformer.Center.Y);
-                this.ViewModel.MethodTransformMultiplies(matrix);//Method
+                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
             this.BottomButton.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height - transformer.MaxY);
-                this.ViewModel.MethodTransformMultiplies(matrix);//Method
+                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
             this.VerticallySymmetryButton.Click += (s, e) =>

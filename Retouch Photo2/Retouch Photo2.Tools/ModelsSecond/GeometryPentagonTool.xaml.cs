@@ -20,6 +20,8 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar  
@@ -89,10 +91,10 @@ namespace Retouch_Photo2.Tools.Models
             if (points < 3) points = 3;
             if (points > 36) points = 36;
 
-            this.ViewModel.GeometryPentagonPoints = points;
+            this.SelectionViewModel.GeometryPentagonPoints = points;
 
             //Selection
-            this.ViewModel.SetValue((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -150,7 +152,7 @@ namespace Retouch_Photo2.Tools.Models
             return new GeometryPentagonLayer
             {
                 Transform = new Transform(transformer),
-                Style = this.ViewModel.GeometryStyle
+                Style = this.SelectionViewModel.GeometryStyle
             };
         }
 

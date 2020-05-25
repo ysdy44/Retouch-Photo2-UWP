@@ -19,11 +19,13 @@ namespace Retouch_Photo2.Tools
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
-        Transformer Transformer { get => this.ViewModel.Transformer; set => this.ViewModel.Transformer = value; }
-        ListViewSelectionMode Mode => this.ViewModel.SelectionMode;
+        Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
+        ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
 
         VectorBorderSnap Snap => this.ViewModel.VectorBorderSnap;
@@ -56,12 +58,12 @@ namespace Retouch_Photo2.Tools
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
             //Snap         
-            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.ViewModel.GetFirstSelectedLayerage());
+            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.SelectionViewModel.GetFirstSelectedLayerage());
 
             //Selection
             Transformer transformer = new Transformer(canvasStartingPoint, canvasPoint, this.IsCenter, this.IsSquare);
             this.Transformer = transformer;
-            this.ViewModel.SetModeExtended();//Selection
+            this.SelectionViewModel.SetModeExtended();//Selection
 
             //History
             this.ViewModel.HistoryPushLayeragesHistory("Add layer");
@@ -133,7 +135,7 @@ namespace Retouch_Photo2.Tools
                     mezzanineLayer.IsSelected = true;
 
                     //Selection
-                    this.ViewModel.SetModeSingle(this.MezzanineLayer);
+                    this.SelectionViewModel.SetModeSingle(this.MezzanineLayer);
                     LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
                     LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
                     
@@ -147,7 +149,7 @@ namespace Retouch_Photo2.Tools
                     LayerCollection.RemoveMezzanineLayer(this.ViewModel.LayerCollection, this.MezzanineLayer);//Mezzanine
 
                     //Selection
-                    this.ViewModel.SetModeNone();
+                    this.SelectionViewModel.SetModeNone();
                     LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
                     LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
                 }

@@ -20,6 +20,8 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         Layerage MezzanineLayerage = null;
@@ -29,7 +31,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ClearButton.Click += (s, e) => this.ViewModel.Photocopier = new Photocopier();//Photocopier
+            this.ClearButton.Click += (s, e) => this.SelectionViewModel.Photocopier = new Photocopier();//Photocopier
 
             //Select
             this.SelectButton.Click += (s, e) => Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.SelectImage);
@@ -37,7 +39,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 if (photo == null) return;
 
-                this.ViewModel.Photocopier = photo.ToPhotocopier();//Photo
+                this.SelectionViewModel.Photocopier = photo.ToPhotocopier();//Photo
             };
 
             //Replace
@@ -51,7 +53,7 @@ namespace Retouch_Photo2.Tools.Models
                 Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -116,7 +118,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            Photocopier photocopier = this.ViewModel.Photocopier;
+            Photocopier photocopier = this.SelectionViewModel.Photocopier;
             if (photocopier.FolderRelativeId == null) { this.TipSelect(); return; }
 
             Photo photo = Photo.FindFirstPhoto(photocopier);
@@ -138,7 +140,7 @@ namespace Retouch_Photo2.Tools.Models
                 Photocopier = photocopier,
                 IsSelected = true,
                 Transform = new Transform(transformerSource, transformerDestination),
-                Style = this.ViewModel.GeometryStyle
+                Style = this.SelectionViewModel.GeometryStyle
             };
             Layerage imageLayerage = imageLayer.ToLayerage();
             Layer.Instances.Add(imageLayer);
@@ -147,7 +149,7 @@ namespace Retouch_Photo2.Tools.Models
             this.MezzanineLayerage = imageLayerage;
             LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, this.MezzanineLayerage);
 
-            this.ViewModel.Transformer = transformerDestination;//Selection
+            this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
@@ -161,7 +163,7 @@ namespace Retouch_Photo2.Tools.Models
             mezzanineLayer.Transform.Destination = transformerDestination;
 
             //Selection
-            this.ViewModel.Transformer = transformerDestination;//Selection
+            this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -176,7 +178,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
                 mezzanineLayer.Transform.Destination = transformerDestination;
-                this.ViewModel.Transformer = transformerDestination;//Selection
+                this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
                 foreach (Layerage child in this.ViewModel.LayerageCollection.RootLayerages)
                 {
@@ -190,7 +192,7 @@ namespace Retouch_Photo2.Tools.Models
             }
             else LayerageCollection.RemoveMezzanineLayer(this.ViewModel.LayerageCollection, this.MezzanineLayerage);//Mezzanine
 
-            this.ViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
+            this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
 
             LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
             LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);

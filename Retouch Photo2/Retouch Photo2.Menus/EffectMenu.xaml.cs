@@ -18,8 +18,10 @@ namespace Retouch_Photo2.Menus.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
 
-        
+
         private IEffectPage currentEffect;
         public IEffectPage CurrentEffect
         {
@@ -88,8 +90,8 @@ namespace Retouch_Photo2.Menus.Models
             this.InitializeComponent();
             this.ConstructDataContext
             (
-                 dataContext: this.ViewModel,
-                 path: nameof(this.ViewModel.Effect),
+                 dataContext: this.SelectionViewModel,
+                 path: nameof(this.SelectionViewModel.Effect),
                  dp: EffectMenu.EffectProperty
             );
             this.ConstructStrings();
@@ -169,7 +171,7 @@ namespace Retouch_Photo2.Menus.Models
             if (this.CurrentEffect == null) return;
 
             //Selection
-            this.ViewModel.SetValue((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
                 Effect effect = layer.Effect;

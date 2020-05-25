@@ -24,7 +24,9 @@ namespace Retouch_Photo2.Controls
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel ;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
 
@@ -46,7 +48,7 @@ namespace Retouch_Photo2.Controls
 
             this.Tapped += (s, e) =>
             {
-                this.ViewModel.SetModeNone();//Selection
+                this.SelectionViewModel.SetModeNone();//Selection
                 LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
                 this.ViewModel.Invalidate();
             };
@@ -78,7 +80,7 @@ namespace Retouch_Photo2.Controls
                 Layer.Instances.Add(imageLayer);
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -88,7 +90,7 @@ namespace Retouch_Photo2.Controls
                 //Mezzanine
                 LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, imageLayerage);
 
-                this.ViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
+                this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
                 LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };

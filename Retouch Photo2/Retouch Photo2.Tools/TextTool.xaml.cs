@@ -15,6 +15,8 @@ namespace Retouch_Photo2.Tools
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@VisualState
@@ -37,7 +39,7 @@ namespace Retouch_Photo2.Tools
                 string fontText = this.TextBox.Text;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -47,7 +49,7 @@ namespace Retouch_Photo2.Tools
                         textLayer.FontText = fontText;
                     }
                 });
-                this.ViewModel.FontText = fontText;
+                this.SelectionViewModel.FontText = fontText;
 
                 this.ViewModel.Invalidate();//Invalidate
             };

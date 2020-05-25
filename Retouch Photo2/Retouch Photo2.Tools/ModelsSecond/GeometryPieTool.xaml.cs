@@ -18,6 +18,8 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar  
@@ -89,10 +91,10 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void SweepAngleChange(float sweepAngle)
         {
-            this.ViewModel.GeometryPieSweepAngle = sweepAngle;
+            this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle;
 
             //Selection
-            this.ViewModel.SetValue((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -149,9 +151,9 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryPieLayer
             {
-                SweepAngle = this.ViewModel.GeometryPieSweepAngle,
+                SweepAngle = this.SelectionViewModel.GeometryPieSweepAngle,
                 Transform = new Transform(transformer),
-                Style = this.ViewModel.GeometryStyle
+                Style = this.SelectionViewModel.GeometryStyle
             };
         }
 

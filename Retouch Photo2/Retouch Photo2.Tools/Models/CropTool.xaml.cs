@@ -20,6 +20,8 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
@@ -45,7 +47,7 @@ namespace Retouch_Photo2.Tools.Models
                 LayersPropertyHistory history = new LayersPropertyHistory("Set transform crop");
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -75,7 +77,7 @@ namespace Retouch_Photo2.Tools.Models
                 LayersPropertyHistory history = new LayersPropertyHistory("Set transform crop");
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -148,7 +150,7 @@ namespace Retouch_Photo2.Tools.Models
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
 
-            Layerage firstLayerage = this.ViewModel.GetFirstSelectedLayerage();
+            Layerage firstLayerage = this.SelectionViewModel.GetFirstSelectedLayerage();
             if (firstLayerage == null) return;
             ILayer firstLayer = firstLayerage.Self;
 
@@ -219,13 +221,13 @@ namespace Retouch_Photo2.Tools.Models
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
-            switch (this.ViewModel.SelectionMode)
+            switch (this.SelectionViewModel.SelectionMode)
             {
                 case ListViewSelectionMode.None:
                     break;
                 case ListViewSelectionMode.Single:
                     {
-                        this._draw(drawingSession, this.ViewModel.Layerage, matrix);
+                        this._draw(drawingSession, this.SelectionViewModel.Layerage, matrix);
 
                         //Snapping
                         if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
@@ -233,7 +235,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
                 case ListViewSelectionMode.Multiple:
                     {
-                        foreach (Layerage layerage in this.ViewModel.Layerages)
+                        foreach (Layerage layerage in this.SelectionViewModel.Layerages)
                         {
                             this._draw(drawingSession, layerage, matrix);
                         }

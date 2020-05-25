@@ -113,8 +113,8 @@ namespace Retouch_Photo2
                 this.ViewModel.HistoryPush(history);
                 
                 //Selection
-                this.ViewModel.LayerName = name;
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.LayerName = name;
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -136,7 +136,7 @@ namespace Retouch_Photo2
             }
         private void ShowRenameDialog()
         {
-            this.RenameTextBox.Text = this.ViewModel.LayerName; 
+            this.RenameTextBox.Text = this.SelectionViewModel.LayerName; 
 
             this.RenameDialog.Show();
         }
@@ -171,20 +171,20 @@ namespace Retouch_Photo2
         {
             DrawPage.FillColorShowAt += (FrameworkElement placementTarget) =>
             {
-                switch (this.ViewModel.Fill.Type)
+                switch (this.SelectionViewModel.Fill.Type)
                 {
                     case BrushType.Color:
-                        this.FillColorPicker.Color = this.ViewModel.Fill.Color;
+                        this.FillColorPicker.Color = this.SelectionViewModel.Fill.Color;
                         break;
                 }
                 this.FillColorFlyout.ShowAt(placementTarget);
             };
 
-            this.FillColorPicker.ColorChanged += (s, value) => this.ViewModel.MethodFillColorChanged(value);
+            this.FillColorPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodFillColorChanged(value);
 
-            this.FillColorPicker.ColorChangeStarted += (s, value) => this.ViewModel.MethodFillColorChangeStarted(value);
-            this.FillColorPicker.ColorChangeDelta += (s, value) => this.ViewModel.MethodFillColorChangeDelta(value);
-            this.FillColorPicker.ColorChangeCompleted += (s, value) => this.ViewModel.MethodFillColorChangeCompleted(value);
+            this.FillColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.MethodFillColorChangeStarted(value);
+            this.FillColorPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.MethodFillColorChangeDelta(value);
+            this.FillColorPicker.ColorChangeCompleted += (s, value) => this.MethodViewModel.MethodFillColorChangeCompleted(value);
         }
 
 
@@ -193,10 +193,10 @@ namespace Retouch_Photo2
         {
             DrawPage.StrokeColorShowAt += (FrameworkElement placementTarget) =>
             {
-                switch (this.ViewModel.Stroke.Type)
+                switch (this.SelectionViewModel.Stroke.Type)
                 {
                     case BrushType.Color:
-                        this.StrokeColorPicker.Color = this.ViewModel.Stroke.Color;
+                        this.StrokeColorPicker.Color = this.SelectionViewModel.Stroke.Color;
                         break;
                 }
                 this.StrokeColorFlyout.ShowAt(placementTarget);
@@ -204,11 +204,11 @@ namespace Retouch_Photo2
 
 
 
-            this.StrokeColorPicker.ColorChanged += (s, value) => this.ViewModel.MethodStrokeColorChanged(value);
+            this.StrokeColorPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodStrokeColorChanged(value);
 
-            this.StrokeColorPicker.ColorChangeStarted += (s, value) => this.ViewModel.MethodStrokeColorChangeStarted(value);
-            this.StrokeColorPicker.ColorChangeDelta += (s, value) => this.ViewModel.MethodStrokeColorChangeDelta(value);
-            this.StrokeColorPicker.ColorChangeCompleted += (s, value) => this.ViewModel.MethodStrokeColorChangeCompleted(value);
+            this.StrokeColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeStarted(value);
+            this.StrokeColorPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.MethodStrokeColorChangeDelta(value);
+            this.StrokeColorPicker.ColorChangeCompleted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeCompleted(value);
         }
 
 

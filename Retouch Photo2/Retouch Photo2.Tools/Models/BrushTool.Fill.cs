@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Tools.Models
     {
 
         //@ViewModel
-        IBrush Fill { get => this.ViewModel.Fill; set => this.ViewModel.Fill = value; }
+        IBrush Fill { get => this.SelectionViewModel.Fill; set => this.SelectionViewModel.Fill = value; }
 
 
         private void ConstructFillImage()
@@ -73,7 +73,7 @@ namespace Retouch_Photo2.Tools.Models
 
             //Selection
             this.Fill.CacheTransform();
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -96,7 +96,7 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         //Selection
                         this.Fill.InitializeController(canvasStartingPoint, canvasPoint);
-                        this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+                        this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                         {
                             ILayer layer = layerage.Self;
                             layer.Style.Fill.InitializeController(canvasStartingPoint, canvasPoint);
@@ -110,7 +110,7 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         //Selection
                         this.Fill.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
-                        this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+                        this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                         {
                             ILayer layer = layerage.Self;
                             layer.Style.Fill.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
@@ -129,7 +129,7 @@ namespace Retouch_Photo2.Tools.Models
             LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
 
             //Selection
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -142,7 +142,7 @@ namespace Retouch_Photo2.Tools.Models
                     layer2.Style.Fill = previous.Clone();
                 });
 
-                this.ViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StyleLayerage = layerage;
             });
 
             //History
@@ -161,7 +161,7 @@ namespace Retouch_Photo2.Tools.Models
             bool _lock = false;
 
             //Selection
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -177,7 +177,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 Transformer transformer = layer.Transform.Destination;
                 layer.Style.Fill.TypeChange(brushType, transformer, photo);
-                this.ViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StyleLayerage = layerage;
 
 
                 // Set Fill Onces: lock
@@ -186,7 +186,7 @@ namespace Retouch_Photo2.Tools.Models
                     _lock = true;
                     this.Fill = layer.Style.Fill.Clone();
 
-                    if (this.Fill.Type == BrushType.Color) this.ViewModel.Color = this.Fill.Color;
+                    if (this.Fill.Type == BrushType.Color) this.SelectionViewModel.Color = this.Fill.Color;
                 }
             });
 
@@ -227,7 +227,7 @@ namespace Retouch_Photo2.Tools.Models
 
             //Selection
             this.Fill.Stops = (CanvasGradientStop[])array.Clone();
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -242,7 +242,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
                 layer.Style.Fill.Stops = (CanvasGradientStop[])array.Clone();
-                this.ViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StyleLayerage = layerage;
             });
 
             //History
@@ -259,7 +259,7 @@ namespace Retouch_Photo2.Tools.Models
             this.historyFill = new LayersPropertyHistory("Set fill");
 
             //Selection
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -271,7 +271,7 @@ namespace Retouch_Photo2.Tools.Models
         public void FillStopsChangeDelta(CanvasGradientStop[] array)
         {
             //Selection
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -285,7 +285,7 @@ namespace Retouch_Photo2.Tools.Models
             this.Fill.Stops = (CanvasGradientStop[])array.Clone();
 
             //Selection
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -297,7 +297,7 @@ namespace Retouch_Photo2.Tools.Models
                 });
 
                 layer.Style.Fill.Stops = (CanvasGradientStop[])array.Clone();
-                this.ViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StyleLayerage = layerage;
             });
 
             //History
@@ -314,7 +314,7 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.Fill.Extend = extend;
             this.ExtendComboBox.Extend = extend;
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -328,7 +328,7 @@ namespace Retouch_Photo2.Tools.Models
                 });
 
                 layer.Style.Fill.Extend = extend;
-                this.ViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StyleLayerage = layerage;
             });
 
             //History

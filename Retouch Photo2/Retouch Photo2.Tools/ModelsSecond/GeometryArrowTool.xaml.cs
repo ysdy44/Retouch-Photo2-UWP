@@ -33,6 +33,8 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar
@@ -110,10 +112,10 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ValueChange(float value)
         {
-            this.ViewModel.GeometryArrowValue = value;
+            this.SelectionViewModel.GeometryArrowValue = value;
 
             //Selection
-            this.ViewModel.SetValue((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -132,10 +134,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.LeftArrowTailTypeControl.ArrowTailTypeChanged += (s, tailType) =>
             {
-                this.ViewModel.GeometryArrowLeftTail = tailType;
+                this.SelectionViewModel.GeometryArrowLeftTail = tailType;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -155,10 +157,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.RightArrowTailTypeControl.ArrowTailTypeChanged += (s, tailType) =>
             {
-                this.ViewModel.GeometryArrowRightTail = tailType;
+                this.SelectionViewModel.GeometryArrowRightTail = tailType;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -220,10 +222,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryArrowLayer
             {
-                LeftTail = this.ViewModel.GeometryArrowLeftTail,
-                RightTail = this.ViewModel.GeometryArrowRightTail,
+                LeftTail = this.SelectionViewModel.GeometryArrowLeftTail,
+                RightTail = this.SelectionViewModel.GeometryArrowRightTail,
                 Transform = new Transform(transformer),
-                Style = this.ViewModel.GeometryStyle
+                Style = this.SelectionViewModel.GeometryStyle
             };
         }
 

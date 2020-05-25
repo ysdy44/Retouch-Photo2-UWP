@@ -28,6 +28,7 @@ namespace Retouch_Photo2.Menus.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
 
 
         //@VisualState
@@ -134,8 +135,8 @@ namespace Retouch_Photo2.Menus.Models
             this.InitializeComponent();
             this.ConstructDataContext
             (
-                 dataContext: this.ViewModel,
-                 path: nameof(this.ViewModel.Filter),
+                 dataContext: this.SelectionViewModel,
+                 path: nameof(this.SelectionViewModel.Filter),
                  dp: AdjustmentMenu.FilterProperty
             );
             this.ConstructStrings();
@@ -216,7 +217,7 @@ namespace Retouch_Photo2.Menus.Models
             AdjustmentMenu.GetGridDataContext(sender, out IAdjustment adjustment);
 
             //Selection
-            this.ViewModel.SetValue((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -302,7 +303,7 @@ namespace Retouch_Photo2.Menus.Models
                 if (e.ClickedItem is IAdjustmentPage item)
                 {
                     //Selection
-                    this.ViewModel.SetValue((layerage) =>
+                    this.SelectionViewModel.SetValue((layerage) =>
                     {
                         ILayer layer = layerage.Self;
 
@@ -329,7 +330,7 @@ namespace Retouch_Photo2.Menus.Models
                     IEnumerable<IAdjustment> clones = from a in filter.Adjustments select a.Clone();
 
                     //Selection
-                    this.ViewModel.SetValue((layerage) =>
+                    this.SelectionViewModel.SetValue((layerage) =>
                     {
                         ILayer layer = layerage.Self;
 

@@ -35,6 +35,8 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar  
@@ -117,10 +119,10 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void InnerRadiusChange(float innerRadius)
         {
-            this.ViewModel.GeometryCookieInnerRadius = innerRadius;
+            this.SelectionViewModel.GeometryCookieInnerRadius = innerRadius;
 
             //Selection
-            this.ViewModel.SetValue((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -169,10 +171,10 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void SweepAngleChange(float sweepAngle)
         {
-            this.ViewModel.GeometryCookieSweepAngle = sweepAngle;
+            this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle;
 
             //Selection
-            this.ViewModel.SetValue((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -230,10 +232,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryCookieLayer
             {
-                InnerRadius = this.ViewModel.GeometryCookieInnerRadius,
-                SweepAngle = this.ViewModel.GeometryCookieSweepAngle,
+                InnerRadius = this.SelectionViewModel.GeometryCookieInnerRadius,
+                SweepAngle = this.SelectionViewModel.GeometryCookieSweepAngle,
                 Transform = new Transform(transformer),
-                Style = this.ViewModel.GeometryStyle
+                Style = this.SelectionViewModel.GeometryStyle
             };
         }
 

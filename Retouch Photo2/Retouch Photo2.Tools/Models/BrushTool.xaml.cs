@@ -20,11 +20,13 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
-        ListViewSelectionMode Mode => this.ViewModel.SelectionMode;
-        FillOrStroke FillOrStroke { get => this.ViewModel.FillOrStroke; set => this.ViewModel.FillOrStroke = value; }
+        ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
+        FillOrStroke FillOrStroke { get => this.SelectionViewModel.FillOrStroke; set => this.SelectionViewModel.FillOrStroke = value; }
 
         VectorBorderSnap Snap => this.ViewModel.VectorBorderSnap;
         bool IsSnap => this.SettingViewModel.IsSnap;
@@ -132,7 +134,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void OnNavigatedTo() => this.ViewModel.SetModeStyle();
+        public void OnNavigatedTo() => this.SelectionViewModel.SetModeStyle();
         public void OnNavigatedFrom() { }
 
     }
@@ -178,7 +180,7 @@ namespace Retouch_Photo2.Tools.Models
             if (this.Mode == ListViewSelectionMode.None) return;
 
             //Snap
-            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.ViewModel.Transformer);
+            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.SelectionViewModel.Transformer);
 
             switch (this.FillOrStroke)
             {

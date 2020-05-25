@@ -14,6 +14,8 @@ namespace Retouch_Photo2.Tools.Elements
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
                
         //@Construct
@@ -22,12 +24,12 @@ namespace Retouch_Photo2.Tools.Elements
             this.InitializeComponent();
             this.Button.Click += (s, e) =>
             {
-                if (this.ViewModel.SelectionMode == ListViewSelectionMode.None) return;
+                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
                 //History
                 this.ViewModel.HistoryPushLayeragesHistory("Convert to curves");
 
-                this.ViewModel.SetValue((layerage)=>
+                this.SelectionViewModel.SetValue((layerage)=>
                 {
                     ILayer layer2 = layerage.Self;
 
@@ -53,7 +55,7 @@ namespace Retouch_Photo2.Tools.Elements
                 this.TipViewModel.ToolGroupType(ToolType.Node);
 
                 LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
-                this.ViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
+                this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             };
         }

@@ -71,7 +71,8 @@ namespace Retouch_Photo2.ViewModels
             layer.IsSelected = isSelected;
 
             this.SetMode(this.LayerageCollection);//Selection
-            LayerageCollection.ArrangeLayersBackgroundItemClick(selectedLayerage);
+            //LayerageCollection.ArrangeLayersBackgroundItemClick(selectedLayerage);
+            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerageCollection);
             this.Invalidate();//Invalidate
         }
 

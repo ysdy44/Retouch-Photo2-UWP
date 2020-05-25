@@ -23,6 +23,8 @@ namespace Retouch_Photo2.Menus.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@Converter
@@ -117,7 +119,7 @@ namespace Retouch_Photo2.Menus.Models
             this.OpacitySlider.ValueChangeStarted += (s, value) =>
             {
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
                     layer.CacheOpacity();
@@ -130,7 +132,7 @@ namespace Retouch_Photo2.Menus.Models
                 float opacity = (float)value;
 
                 //Selection
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
                     layer.Opacity = opacity;
@@ -146,8 +148,8 @@ namespace Retouch_Photo2.Menus.Models
                 LayersPropertyHistory history = new LayersPropertyHistory("Set opacity");
 
                 //Selection
-                this.ViewModel.Opacity = opacity;
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.Opacity = opacity;
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -176,7 +178,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.BlendModeButton.Click += (s, e) =>
             {
-                this.BlendModeComboBox.Mode = this.ViewModel.BlendMode;
+                this.BlendModeComboBox.Mode = this.SelectionViewModel.BlendMode;
 
                 this._Expander.IsSecondPage = true;
                 this._Expander.CurrentTitle = this.BlendModeTextBlock.Text;
@@ -187,8 +189,8 @@ namespace Retouch_Photo2.Menus.Models
                 LayersPropertyHistory history = new LayersPropertyHistory("Set blend mode");
 
                 //Selection
-                this.ViewModel.BlendMode = mode;
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.BlendMode = mode;
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -216,14 +218,14 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.VisibilityButton.Click += (s, e) =>
             {
-                Visibility value = (this.ViewModel.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+                Visibility value = (this.SelectionViewModel.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
 
                 //History
                 LayersPropertyHistory history = new LayersPropertyHistory("Set visibility");
 
                 //Selection
-                this.ViewModel.Visibility = value;
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.Visibility = value;
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -255,8 +257,8 @@ namespace Retouch_Photo2.Menus.Models
                 LayersPropertyHistory history = new LayersPropertyHistory("Set tag type");
 
                 //Selection
-                this.ViewModel.TagType = type;
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.TagType = type;
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
@@ -289,11 +291,11 @@ namespace Retouch_Photo2.Menus.Models
             //Follow
             this.FollowToggleControl.Tapped += (s, e) =>
             {
-                bool value = (this.ViewModel.IsFollowTransform) ? false : true;
+                bool value = (this.SelectionViewModel.IsFollowTransform) ? false : true;
 
                 //Selection
-                this.ViewModel.IsFollowTransform = value;
-                this.ViewModel.SetValue((layerage) =>
+                this.SelectionViewModel.IsFollowTransform = value;
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 

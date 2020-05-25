@@ -30,6 +30,8 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel ;
         TipViewModel TipViewModel => App.TipViewModel;
 
@@ -168,11 +170,11 @@ namespace Retouch_Photo2.Tools.Models
                         if (isOutNodeDistance)
                         {
                             //BoxChoose
-                            Layerage layer = this.ViewModel.GetFirstSelectedLayerage();
+                            Layerage layer = this.SelectionViewModel.GetFirstSelectedLayerage();
                             IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(layer);
                             this.BoxChoose(parentsChildren);
 
-                            this.ViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
+                            this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
 
                             LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
                             

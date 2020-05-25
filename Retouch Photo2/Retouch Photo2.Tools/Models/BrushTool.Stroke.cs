@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Tools.Models
     {
 
         //@ViewModel
-        IBrush Stroke { get => this.ViewModel.Stroke; set => this.ViewModel.Stroke = value; }
+        IBrush Stroke { get => this.SelectionViewModel.Stroke; set => this.SelectionViewModel.Stroke = value; }
 
 
         private void ConstructStrokeImage()
@@ -73,7 +73,7 @@ namespace Retouch_Photo2.Tools.Models
 
             //Selection
             this.Stroke.CacheTransform();
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -96,7 +96,7 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         //Selection
                         this.Stroke.InitializeController(canvasStartingPoint, canvasPoint);
-                        this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+                        this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                         {
                             ILayer layer = layerage.Self;
                             layer.Style.Stroke.InitializeController(canvasStartingPoint, canvasPoint);
@@ -110,7 +110,7 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         //Selection
                         this.Stroke.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
-                        this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+                        this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                         {
                             ILayer layer = layerage.Self;
                             layer.Style.Stroke.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
@@ -129,7 +129,7 @@ namespace Retouch_Photo2.Tools.Models
             LayersPropertyHistory history = new LayersPropertyHistory("Set stroke");
 
             //Selection
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -142,7 +142,7 @@ namespace Retouch_Photo2.Tools.Models
                     layer2.Style.Stroke = previous.Clone();
                 });
 
-                this.ViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StyleLayerage = layerage;
             });
 
             //History
@@ -161,7 +161,7 @@ namespace Retouch_Photo2.Tools.Models
             bool _lock = false;
 
             //Selection
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -177,7 +177,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 Transformer transformer = layer.Transform.Destination;
                 layer.Style.Stroke.TypeChange(brushType, transformer, photo);
-                this.ViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StyleLayerage = layerage;
 
 
                 // Set Stroke Onces: lock
@@ -186,7 +186,7 @@ namespace Retouch_Photo2.Tools.Models
                     _lock = true;
                     this.Stroke = layer.Style.Stroke.Clone();
 
-                    if (this.Stroke.Type == BrushType.Color) this.ViewModel.Color = this.Stroke.Color;
+                    if (this.Stroke.Type == BrushType.Color) this.SelectionViewModel.Color = this.Stroke.Color;
                 }
             });
 
@@ -227,7 +227,7 @@ namespace Retouch_Photo2.Tools.Models
 
             //Selection
             this.Stroke.Stops = (CanvasGradientStop[])array.Clone();
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -242,7 +242,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
                 layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
-                this.ViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StyleLayerage = layerage;
             });
 
             //History
@@ -259,7 +259,7 @@ namespace Retouch_Photo2.Tools.Models
             this.historyStroke = new LayersPropertyHistory("Set stroke");
 
             //Selection
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -271,7 +271,7 @@ namespace Retouch_Photo2.Tools.Models
         public void StrokeStopsChangeDelta(CanvasGradientStop[] array)
         {
             //Selection
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -285,7 +285,7 @@ namespace Retouch_Photo2.Tools.Models
             this.Stroke.Stops = (CanvasGradientStop[])array.Clone();
 
             //Selection
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -297,7 +297,7 @@ namespace Retouch_Photo2.Tools.Models
                 });
 
                 layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
-                this.ViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StyleLayerage = layerage;
             });
 
             //History
@@ -314,7 +314,7 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.Stroke.Extend = extend;
             this.ExtendComboBox.Extend = extend;
-            this.ViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -328,7 +328,7 @@ namespace Retouch_Photo2.Tools.Models
                 });
 
                 layer.Style.Stroke.Extend = extend;
-                this.ViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StyleLayerage = layerage;
             });
 
             //History

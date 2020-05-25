@@ -20,6 +20,8 @@ namespace Retouch_Photo2.Tools.Models
     {  
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
        
         //@TouchBar  
@@ -88,10 +90,10 @@ namespace Retouch_Photo2.Tools.Models
             if (corner < 0.0f) corner = 0.0f;
             if (corner > 0.5f) corner = 0.5f;
 
-            this.ViewModel.GeometryRoundRectCorner = corner;
+            this.SelectionViewModel.GeometryRoundRectCorner = corner;
 
             //Selection
-            this.ViewModel.SetValue((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -147,9 +149,9 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryRoundRectLayer
             {
-                Corner = this.ViewModel.GeometryRoundRectCorner,
+                Corner = this.SelectionViewModel.GeometryRoundRectCorner,
                 Transform = new Transform(transformer),
-                Style = this.ViewModel.GeometryStyle
+                Style = this.SelectionViewModel.GeometryStyle
             };
         }
 

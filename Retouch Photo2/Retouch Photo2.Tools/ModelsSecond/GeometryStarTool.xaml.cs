@@ -33,6 +33,8 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar  
@@ -116,10 +118,10 @@ namespace Retouch_Photo2.Tools.Models
             if (points < 3) points = 3;
             if (points > 36) points = 36;
 
-            this.ViewModel.GeometryStarPoints = points;
+            this.SelectionViewModel.GeometryStarPoints = points;
 
             //Selection
-            this.ViewModel.SetValue((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -169,10 +171,10 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void InnerRadiusChange(float innerRadius)
         {
-            this.ViewModel.GeometryStarInnerRadius = innerRadius;
+            this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
 
             //Selection
-            this.ViewModel.SetValue((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
@@ -230,10 +232,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryStarLayer
             {
-                Points = this.ViewModel.GeometryStarPoints,
-                InnerRadius = this.ViewModel.GeometryStarInnerRadius,
+                Points = this.SelectionViewModel.GeometryStarPoints,
+                InnerRadius = this.SelectionViewModel.GeometryStarInnerRadius,
                 Transform = new Transform(transformer),
-                Style = this.ViewModel.GeometryStyle
+                Style = this.SelectionViewModel.GeometryStyle
             };
         }
 

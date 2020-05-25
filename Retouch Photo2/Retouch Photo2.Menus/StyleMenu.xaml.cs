@@ -25,6 +25,8 @@ namespace Retouch_Photo2.Menus.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
 
         //@Construct
         public StyleMenu()
@@ -49,12 +51,12 @@ namespace Retouch_Photo2.Menus.Models
             {
                 List<string> sadas = new List<string>();
 
-                if (this.ViewModel.Layerage != null)
+                if (this.SelectionViewModel.Layerage != null)
                 {
-                    if (this.ViewModel.Layerage.Id != null)
+                    if (this.SelectionViewModel.Layerage.Id != null)
                     {
-                        ILayer layer2 = this.ViewModel.Layerage.Self;
-                        string sssss = $"   id:{layer2.Id} {this.ViewModel.Layerage.Parents == null}";
+                        ILayer layer2 = this.SelectionViewModel.Layerage.Self;
+                        string sssss = $"   id:{layer2.Id} {this.SelectionViewModel.Layerage.Parents == null}";
 
                         sadas.Add(sssss);
                     }
@@ -67,9 +69,9 @@ namespace Retouch_Photo2.Menus.Models
             {
                 List<string> sadas = new List<string>();
 
-                if (this.ViewModel.Layerages!=null)
+                if (this.SelectionViewModel.Layerages!=null)
                 {
-                    foreach (var item in this.ViewModel.Layerages)
+                    foreach (var item in this.SelectionViewModel.Layerages)
                     {
                         ILayer layer2 = item.Self;
                         string sssss = $"   id:{layer2.Id} {item.Parents== null}";

@@ -16,6 +16,8 @@ namespace Retouch_Photo2
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel ;
         TipViewModel TipViewModel => App.TipViewModel;
 
@@ -107,7 +109,7 @@ namespace Retouch_Photo2
 
                 if (isUndo)
                 {
-                    this.ViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection          
+                    this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection          
                     LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
                     LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
 

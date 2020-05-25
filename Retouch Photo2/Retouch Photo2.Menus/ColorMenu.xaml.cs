@@ -19,7 +19,8 @@ namespace Retouch_Photo2.Menus.Models
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
 
         //@Construct
         public ColorMenu()
@@ -27,8 +28,8 @@ namespace Retouch_Photo2.Menus.Models
             this.InitializeComponent();
             this._button.CenterContent = new ColorEllipse
              (
-                  dataContext: this.ViewModel,
-                  path: nameof(this.ViewModel.Color),
+                  dataContext: this.SelectionViewModel,
+                  path: nameof(this.SelectionViewModel.Color),
                   dp: ColorEllipse.ColorProperty
              );
             this.ConstructStrings();
@@ -44,13 +45,13 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.ColorPicker.ColorChanged += (s, value) =>
             {
-                switch (this.ViewModel.FillOrStroke)
+                switch (this.SelectionViewModel.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
-                        this.ViewModel.MethodFillColorChanged(value);
+                        this.MethodViewModel.MethodFillColorChanged(value);
                         break;
                     case FillOrStroke.Stroke:
-                        this.ViewModel.MethodStrokeColorChanged(value);
+                        this.MethodViewModel.MethodStrokeColorChanged(value);
                         break;
                 }
             };
@@ -61,37 +62,37 @@ namespace Retouch_Photo2.Menus.Models
             //Color
             this.ColorPicker.ColorChangeStarted += (s, value) =>
             {
-                switch (this.ViewModel.FillOrStroke)
+                switch (this.SelectionViewModel.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
-                        this.ViewModel.MethodFillColorChangeStarted(value);
+                        this.MethodViewModel.MethodFillColorChangeStarted(value);
                         break;
                     case FillOrStroke.Stroke:
-                        this.ViewModel.MethodStrokeColorChangeStarted(value);
+                        this.MethodViewModel.MethodStrokeColorChangeStarted(value);
                         break;
                 }
             };
             this.ColorPicker.ColorChangeDelta += (s, value) =>
             {
-                switch (this.ViewModel.FillOrStroke)
+                switch (this.SelectionViewModel.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
-                        this.ViewModel.MethodFillColorChangeDelta(value);
+                        this.MethodViewModel.MethodFillColorChangeDelta(value);
                         break;
                     case FillOrStroke.Stroke:
-                        this.ViewModel.MethodStrokeColorChangeDelta(value);
+                        this.MethodViewModel.MethodStrokeColorChangeDelta(value);
                         break;
                 }
             };
             this.ColorPicker.ColorChangeCompleted += (s, value) =>
             {
-                switch (this.ViewModel.FillOrStroke)
+                switch (this.SelectionViewModel.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
-                        this.ViewModel.MethodFillColorChangeCompleted(value);
+                        this.MethodViewModel.MethodFillColorChangeCompleted(value);
                         break;
                     case FillOrStroke.Stroke:
-                        this.ViewModel.MethodStrokeColorChangeCompleted(value);
+                        this.MethodViewModel.MethodStrokeColorChangeCompleted(value);
                         break;
                 }
             };

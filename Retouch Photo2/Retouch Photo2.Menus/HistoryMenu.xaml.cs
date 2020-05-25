@@ -11,6 +11,7 @@ namespace Retouch_Photo2.Menus.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
 
+
         //@Construct
         public HistoryMenu()
         {

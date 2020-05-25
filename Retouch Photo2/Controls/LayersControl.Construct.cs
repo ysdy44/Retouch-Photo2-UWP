@@ -85,7 +85,7 @@ namespace Retouch_Photo2.Controls
                 LayerageCollection.IsSelectedChanged += (layer) =>
                 {
                     Layerage layerage = this.ViewModel.LayerageCollection.FindLayerage_ByILayer(layer);
-                    this.ViewModel.MethodSelectedNot(layerage);//Method
+                    this.MethodViewModel.MethodSelectedNot(layerage);//Method
                  };
             }
 
@@ -123,7 +123,7 @@ namespace Retouch_Photo2.Controls
                 {
                     LayerageCollection.DragComplete(this.ViewModel.LayerageCollection, this.DragDestinationLayerage, this.DragSourceLayerage, this.DragLayerOverlayMode, this.DragLayerIsSelected);
 
-                    this.ViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
+                    this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
                     LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
                     LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
                     this.ViewModel.Invalidate();//Invalidate
@@ -142,18 +142,19 @@ namespace Retouch_Photo2.Controls
             ILayer selectedLayer = selectedLayerage.Self;
 
             //Is it independent of other layers?
-            bool isfreedom = this.SettingViewModel.KeyCtrl;
+            bool isfreedom = this.SettingViewModel.KeyCtrl | this.SettingViewModel.KeyShift;
+            //bool isfreedom = this.SettingViewModel.KeyCtrl;
             //Is select successively?
-            bool isLinear = this.SettingViewModel.KeyShift;
-
+            //bool isLinear = this.SettingViewModel.KeyShift;
 
             if (isfreedom)                           
-                this.ViewModel.MethodSelectedNot(selectedLayerage);//Method
+                this.MethodViewModel.MethodSelectedNot(selectedLayerage);//Method
             
-            else if (isLinear)       
-                LayerageCollection.ShiftSelectCurrentLayer(this.ViewModel.LayerageCollection, selectedLayerage);
-            
-            else this.ViewModel.MethodSelectedNew(selectedLayerage);  //Method
+           // else if (isLinear)       
+                //LayerageCollection.ShiftSelectCurrentLayer(this.ViewModel.LayerageCollection, selectedLayerage);
+
+            else
+                this.MethodViewModel.MethodSelectedNew(selectedLayerage);  //Method
         }
 
     }
