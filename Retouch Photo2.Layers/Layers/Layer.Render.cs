@@ -60,8 +60,9 @@ namespace Retouch_Photo2.Layers
             {
                 using (drawingSession.CreateLayer(1, geometry))
                 {
-                    foreach (Layerage child in children)
+                    for (int i = children.Count - 1; i >= 0; i--)
                     {
+                        Layerage child = children[i];
                         ILayer child2 = child.Self;
 
                         ICanvasImage childImage = child2.GetRender(resourceCreator, canvasToVirtualMatrix, child.Children);

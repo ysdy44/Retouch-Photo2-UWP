@@ -6,10 +6,10 @@ namespace Retouch_Photo2.Layers
     {
 
         /// <summary>
-        /// Gets all selected layers.
+        /// Gets all selected layerages.
         /// </summary>
-        /// <returns> The selected layers. </returns>
-        public static IEnumerable<Layerage> GetAllSelectedLayers(LayerageCollection layerageCollection) 
+        /// <returns> The selected layerages. </returns>
+        public static IEnumerable<Layerage> GetAllSelectedLayerages(LayerageCollection layerageCollection) 
          {
             IList<Layerage> selectedLayers = new List<Layerage>();
 
@@ -69,7 +69,7 @@ namespace Retouch_Photo2.Layers
 
 
         #region ShiftSelect
-
+        /*
 
         /// <summary>
         /// Select the current layer (hold **Shift** at the same time).
@@ -137,6 +137,7 @@ namespace Retouch_Photo2.Layers
         }
                
 
+         */
         #endregion
         
     }

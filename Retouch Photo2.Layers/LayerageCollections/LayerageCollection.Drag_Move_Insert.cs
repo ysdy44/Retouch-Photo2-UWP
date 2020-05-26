@@ -44,18 +44,19 @@ namespace Retouch_Photo2.Layers
             }
             else
             {
-                IEnumerable<Layerage> selectedLayers = LayerageCollection.GetAllSelectedLayers(layerageCollection);
+                //Layerages
+                IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
 
                 switch (destinationOverlayMode)
                 {
                     case OverlayMode.Top:
-                        LayerageCollection.InsertRange(layerageCollection, destination, selectedLayers, isBottomInsert: false);
+                        LayerageCollection.InsertRange(layerageCollection, destination, selectedLayerages, isBottomInsert: false);
                         break;
                     case OverlayMode.Center:
-                        LayerageCollection.AddRange(layerageCollection, destination, selectedLayers);
+                        LayerageCollection.AddRange(layerageCollection, destination, selectedLayerages);
                         break;
                     case OverlayMode.Bottom:
-                        LayerageCollection.InsertRange(layerageCollection, destination, selectedLayers, isBottomInsert: true);
+                        LayerageCollection.InsertRange(layerageCollection, destination, selectedLayerages, isBottomInsert: true);
                         break;
                 }
             }
@@ -78,6 +79,18 @@ namespace Retouch_Photo2.Layers
 
             parentsChildren.Remove(source);
             parentsChildren.Insert(index, source);
+
+            //IsRefactoringTransformer
+            if (source != null)
+            {
+                ILayer source2 = source.Self;
+                source2.IsRefactoringTransformer = true;
+            }
+            if (destination != null)
+            {
+                ILayer destination2 = destination.Self;
+                destination2.IsRefactoringTransformer = true;
+            }
         }
 
 
@@ -125,6 +138,18 @@ namespace Retouch_Photo2.Layers
                     //Insert
                     parentsChildren.Insert(index, child);
                 }
+            }
+
+            //IsRefactoringTransformer
+            if (source != null)
+            {
+                ILayer source2 = source.Self;
+                source2.IsRefactoringTransformer = true;
+            }
+            if (destination != null)
+            {
+                ILayer destination2 = destination.Self;
+                destination2.IsRefactoringTransformer = true;
             }
         }
 

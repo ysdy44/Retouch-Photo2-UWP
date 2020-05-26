@@ -23,8 +23,8 @@
             <tools:TouchbarButton x:Name="CountTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="CountTouchbarSlider" 
-                             Number="{x:Bind ViewModel.GeometryCogCount,Mode=OneWay}"
-                             Value="{x:Bind CountValueConverter(ViewModel.GeometryCogCount),Mode=OneWay}"
+                             Number="{x:Bind SelectionViewModel.GeometryCogCount,Mode=OneWay}"
+                             Value="{x:Bind CountValueConverter(SelectionViewModel.GeometryCogCount),Mode=OneWay}"
                              />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
@@ -35,8 +35,8 @@
             <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
-                    Number="{x:Bind InnerRadiusNumberConverter(ViewModel.GeometryCogInnerRadius),Mode=OneWay}"
-                    Value="{x:Bind InnerRadiusValueConverter(ViewModel.GeometryCogInnerRadius), Mode=OneWay}" 
+                    Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryCogInnerRadius),Mode=OneWay}"
+                    Value="{x:Bind InnerRadiusValueConverter(SelectionViewModel.GeometryCogInnerRadius), Mode=OneWay}" 
                      />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
@@ -47,8 +47,8 @@
             <tools:TouchbarButton x:Name="ToothTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="ToothTouchbarSlider"
-                    Number="{x:Bind ToothNumberConverter(ViewModel.GeometryCogTooth),Mode=OneWay}"
-                    Value="{x:Bind ToothValueConverter(ViewModel.GeometryCogTooth), Mode=OneWay}" 
+                    Number="{x:Bind ToothNumberConverter(SelectionViewModel.GeometryCogTooth),Mode=OneWay}"
+                    Value="{x:Bind ToothValueConverter(SelectionViewModel.GeometryCogTooth), Mode=OneWay}" 
                      />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
@@ -59,8 +59,8 @@
             <tools:TouchbarButton x:Name="NotchTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="NotchTouchbarSlider"
-                    Number="{x:Bind NotchNumberConverter(ViewModel.GeometryCogNotch),Mode=OneWay}"
-                    Value="{x:Bind NotchValueConverter(ViewModel.GeometryCogNotch), Mode=OneWay}" 
+                    Number="{x:Bind NotchNumberConverter(SelectionViewModel.GeometryCogNotch),Mode=OneWay}"
+                    Value="{x:Bind NotchValueConverter(SelectionViewModel.GeometryCogNotch), Mode=OneWay}" 
                      />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>

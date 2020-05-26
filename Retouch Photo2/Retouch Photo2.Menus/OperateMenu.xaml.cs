@@ -218,7 +218,7 @@ namespace Retouch_Photo2.Menus.Models
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
-                    Layerage destination = this.SelectionViewModel.Layerage;
+                    Layerage destination = this.SelectionViewModel.SelectionLayerage;
                     IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
                     if (parentsChildren.Count < 2) return;
 
@@ -234,7 +234,7 @@ namespace Retouch_Photo2.Menus.Models
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
-                    Layerage destination = this.SelectionViewModel.Layerage;
+                    Layerage destination = this.SelectionViewModel.SelectionLayerage;
                     IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
                     if (parentsChildren.Count < 2) return;
 
@@ -256,7 +256,7 @@ namespace Retouch_Photo2.Menus.Models
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
-                    Layerage destination = this.SelectionViewModel.Layerage;                    
+                    Layerage destination = this.SelectionViewModel.SelectionLayerage;                    
                     IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);                    
                     if (parentsChildren.Count < 2) return;
 
@@ -278,7 +278,7 @@ namespace Retouch_Photo2.Menus.Models
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
                 {
-                    Layerage destination = this.SelectionViewModel.Layerage;
+                    Layerage destination = this.SelectionViewModel.SelectionLayerage;
                     IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);                    
                     if (parentsChildren.Count < 2) return;
 

@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Controls
         TipViewModel TipViewModel => App.TipViewModel;
 
 
-        //LayerCollection
+        //LayerageCollection
         Layerage DragSourceLayerage;
         Layerage DragDestinationLayerage;
         bool DragLayerIsSelected;
@@ -41,15 +41,15 @@ namespace Retouch_Photo2.Controls
         public LayersControl()
         {
             this.InitializeComponent();
-            //LayerCollection
-            this.ConstructLayerCollection();
+            //LayerageCollection
+            this.ConstructLayerageCollection();
             this.ItemsControl.ItemsSource = this.ViewModel.LayerageCollection.RootControls;
 
 
             this.Tapped += (s, e) =>
             {
                 this.SelectionViewModel.SetModeNone();//Selection
-                LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
                 this.ViewModel.Invalidate();
             };
             this.RightTapped += (s, e) => this.ShowLayerMenu();

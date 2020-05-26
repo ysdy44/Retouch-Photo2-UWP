@@ -49,7 +49,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetModeNone();//Selection
-            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerageCollection);
+            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
             this.Invalidate();//Invalidate     
         }
 
@@ -72,7 +72,7 @@ namespace Retouch_Photo2.ViewModels
 
             this.SetMode(this.LayerageCollection);//Selection
             //LayerageCollection.ArrangeLayersBackgroundItemClick(selectedLayerage);
-            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerageCollection);
+            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
             this.Invalidate();//Invalidate
         }
 
@@ -125,7 +125,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetModeSingle(selectedLayerage);//Selection
-            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerageCollection);
+            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
             this.Invalidate();//Invalidate     
         }
 
@@ -154,7 +154,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetMode(this.LayerageCollection);//Selection
-            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerageCollection);
+            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
             this.Invalidate();//Invalidate
         }
 
@@ -183,7 +183,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetMode(this.LayerageCollection);//Selection
-            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerageCollection);
+            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
             this.Invalidate();//Invalidate
         }
 
@@ -222,7 +222,7 @@ namespace Retouch_Photo2.ViewModels
 
             this.SetModeSingle(selectedLayerage);//Selection
 
-            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerageCollection);
+            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
 
             this.Invalidate();//Invalidate
         }

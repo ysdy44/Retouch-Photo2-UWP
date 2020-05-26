@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
-        Layerage CurveLayerage => this.SelectionViewModel.Layerage;
+        Layerage CurveLayerage => this.SelectionViewModel.SelectionLayerage;
         CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
         NodeCollection Nodes => this.CurveLayer.Nodes;
 
@@ -53,9 +53,9 @@ namespace Retouch_Photo2.Tools.Models
                 if (isSuccessful == false)
                 {
 
-               //     LayerCollection.RemoveLayer(this.ViewModel.LayerCollection, this.CurveLayer);
+                    //     LayerageCollection.RemoveLayer(this.ViewModel.LayerageCollection, this.CurveLayer);
 
-               this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
+                    this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
                     LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }

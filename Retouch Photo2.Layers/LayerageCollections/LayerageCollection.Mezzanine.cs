@@ -18,9 +18,9 @@ namespace Retouch_Photo2.Layers
 
         private static void _mezzanine(LayerageCollection layerageCollection, Layerage mezzanineLayer, IEnumerable<Layerage> mezzanineLayers)
         {
-            //Layers
-            IEnumerable<Layerage> selectedLayers = LayerageCollection.GetAllSelectedLayers(layerageCollection);
-            Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(selectedLayers);
+            //Layerages
+            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
+            Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(selectedLayerages);
             //if (outermost == null) return; // If count = 0, it will be useless.
             IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(outermost);
             int index = parentsChildren.IndexOf(outermost);

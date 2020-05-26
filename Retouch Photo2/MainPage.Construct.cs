@@ -4,6 +4,7 @@ using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Imaging;
@@ -94,13 +95,48 @@ namespace Retouch_Photo2
             this.SettingViewModel.ConstructKey();
             if (this.SettingViewModel.Move == null)
             {
-                this.SettingViewModel.Move += (value) =>
+                this.SettingViewModel.Move += (moveMode) =>
                 {
-                    this.ViewModel.CanvasTransformer.Position += value;
+                    switch (moveMode)
+                    {
+                        case MoveMode.None: return;
+                        case MoveMode.Left: this.ViewModel.CanvasTransformer.Position += new Vector2(50, 0); break;
+                        case MoveMode.Up: this.ViewModel.CanvasTransformer.Position += new Vector2(0, 50); break;
+                        case MoveMode.Right: this.ViewModel.CanvasTransformer.Position -= new Vector2(50, 0); break;
+                        case MoveMode.Down: this.ViewModel.CanvasTransformer.Position -= new Vector2(0, 50); break;
+                    }
                     this.ViewModel.CanvasTransformer.ReloadMatrix();
                     this.ViewModel.Invalidate();//Invalidate
                 };
             }
+            if (this.SettingViewModel.Edit == null)
+            {
+                this.SettingViewModel.Edit += (editMode) =>
+                {
+                    switch (editMode)
+                    {
+                        case EditMode.None: return;
+
+                        case EditMode.Cut: this.MethodViewModel.MethodEditCut(); break;
+                        case EditMode.Duplicate: this.MethodViewModel.MethodEditDuplicate(); break;
+                        case EditMode.Copy: this.MethodViewModel.MethodEditCopy(); break;
+                        case EditMode.Paste: this.MethodViewModel.MethodEditPaste(); break;
+                        case EditMode.Clear: this.MethodViewModel.MethodEditClear(); break;
+
+                        case EditMode.All: this.MethodViewModel.MethodSelectAll(); break;
+                        case EditMode.Deselect: this.MethodViewModel.MethodSelectDeselect(); break;
+                        case EditMode.Invert: this.MethodViewModel.MethodSelectInvert(); break;
+
+                        case EditMode.Group: this.MethodViewModel.MethodGroupGroup(); break;
+                        case EditMode.UnGroup: this.MethodViewModel.MethodGroupUnGroup(); break;
+                        case EditMode.Release: this.MethodViewModel.MethodGroupRelease(); break;
+
+                        case EditMode.Undo: this.MethodViewModel.MethodEditUndo(); break;
+                    }
+                };
+            }
+
+
         }
 
 

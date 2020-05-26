@@ -170,7 +170,7 @@ namespace Retouch_Photo2.Menus.Models
 
                 if (this.FiltersListView.ItemsSource == null)
                 {
-                    IEnumerable<FilterCategory> filterCategorys = await XML.ConstructFiltersFile();
+                    IEnumerable<FilterCategory> filterCategorys = await Retouch_Photo2.XML.ConstructFiltersFile();
                     if (filterCategorys != null)
                     {
                         FilterCategory filterCategory = filterCategorys.FirstOrDefault();

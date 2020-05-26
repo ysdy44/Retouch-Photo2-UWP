@@ -55,7 +55,7 @@ namespace Retouch_Photo2.ViewModels
                 (
                     from menuType
                     in menuTypes.Elements()
-                    select XML.CreateMenuType(menuType.Value.ToString())
+                    select Retouch_Photo2.Menus.XML.CreateMenuType(menuType.Value.ToString())
                 ).ToList();
             }
 

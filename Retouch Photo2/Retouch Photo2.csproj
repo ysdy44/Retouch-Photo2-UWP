@@ -184,8 +184,8 @@
     <Compile Include="Retouch Photo2.Menus\OperateMenu.xaml.cs">
       <DependentUpon>OperateMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\SelectionMenu.xaml.cs">
-      <DependentUpon>SelectionMenu.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Menus\EditMenu.xaml.cs">
+      <DependentUpon>EditMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\TransformerMenu.xaml.cs">
       <DependentUpon>TransformerMenu.xaml</DependentUpon>
@@ -325,8 +325,8 @@
     <PRIResource Include="Strings\en-US\%24Loading.resw" />
     <PRIResource Include="Strings\zh-CN\Strokes.resw" />
     <PRIResource Include="Strings\en-US\Strokes.resw" />
-    <PRIResource Include="Strings\en-US\Selections.resw" />
-    <PRIResource Include="Strings\zh-CN\Selections.resw" />
+    <PRIResource Include="Strings\en-US\Edits.resw" />
+    <PRIResource Include="Strings\zh-CN\Edits.resw" />
     <PRIResource Include="Strings\en-US\Characters.resw" />
     <PRIResource Include="Strings\en-US\Blends.resw" />
     <PRIResource Include="Strings\en-US\Adjustments.resw" />
@@ -516,7 +516,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Retouch Photo2.Menus\SelectionMenu.xaml">
+    <Page Include="Retouch Photo2.Menus\EditMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -706,17 +706,21 @@
       <Project>{73ef3e4b-968b-4d54-83d2-5d7e8cd02caf}</Project>
       <Name>Retouch Photo2.Characters</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Edits\Retouch Photo2.Edits.csproj">
+      <Project>{ee851357-156d-438d-ace1-f8841ec966af}</Project>
+      <Name>Retouch Photo2.Edits</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Effects\Retouch Photo2.Effects.csproj">
       <Project>{c14d4618-e234-4d91-8ced-49cbd9f6f3c7}</Project>
       <Name>Retouch Photo2.Effects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Historys\Retouch Photo2.Historys.csproj">
+      <Project>{64e6052b-fbb1-489b-9ae3-fb05dc8fbe63}</Project>
+      <Name>Retouch Photo2.Historys</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Layers\Retouch Photo2.Layers.csproj">
       <Project>{15cbf0a7-0953-49f5-b541-f8bcaab40053}</Project>
       <Name>Retouch Photo2.Layers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Selections\Retouch Photo2.Selections.csproj">
-      <Project>{448fcfb4-cb3c-4874-b157-3f0dfff044bc}</Project>
-      <Name>Retouch Photo2.Selections</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Elements\Retouch Photo2.Elements.csproj">
       <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>

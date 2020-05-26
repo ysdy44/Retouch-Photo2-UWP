@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Layers.Models
             //TODO: GeometryCurveMultiLayer
             //   if (this.IsRefactoringTransformer)
             //  {
-            //      Transformer transformer = LayerCollection.RefactoringTransformer(this.Nodes);
+            //      Transformer transformer = LayerageCollection.RefactoringTransformer(this.Nodes);
             //        this.Transform.Source = transformer;
             //       this.Transform.Destination = transformer;
             //

@@ -30,11 +30,11 @@ namespace Retouch_Photo2.ViewModels
                     break;
 
                 case ListViewSelectionMode.Single:
-                    action(this.Layerage);
+                    action(this.SelectionLayerage);
                     break;
 
                 case ListViewSelectionMode.Multiple:
-                    foreach (Layerage child in this.Layerages)
+                    foreach (Layerage child in this.SelectionLayerages)
                     {
                         action(child);
                     }
@@ -53,11 +53,11 @@ namespace Retouch_Photo2.ViewModels
                     break;
 
                 case ListViewSelectionMode.Single:
-                    this._setValueWithChildren(this.Layerage, action);
+                    this._setValueWithChildren(this.SelectionLayerage, action);
                     break;
 
                 case ListViewSelectionMode.Multiple:
-                    foreach (Layerage child in this.Layerages)
+                    foreach (Layerage child in this.SelectionLayerages)
                     {
                         this._setValueWithChildren(child, action);
                     }
@@ -88,11 +88,11 @@ namespace Retouch_Photo2.ViewModels
                     break;
 
                 case ListViewSelectionMode.Single:
-                    this._setValueWithChildren(this.Layerage, action);
+                    this._setValueWithChildren(this.SelectionLayerage, action);
                     break;
 
                 case ListViewSelectionMode.Multiple:
-                    foreach (Layerage child in this.Layerages)
+                    foreach (Layerage child in this.SelectionLayerages)
                     {
                         this._setValueWithChildren(child, action);
                     }
@@ -127,11 +127,11 @@ namespace Retouch_Photo2.ViewModels
                     return new Transformer();
 
                 case ListViewSelectionMode.Single:
-                    return this.Layerage.GetActualTransformer();
+                    return this.SelectionLayerage.GetActualTransformer();
 
                 case ListViewSelectionMode.Multiple:
                     //TransformerBorder
-                    TransformerBorder border = new TransformerBorder(this.Layerages);
+                    TransformerBorder border = new TransformerBorder(this.SelectionLayerages);
                     return border.ToTransformer();
 
                 default:
@@ -153,9 +153,9 @@ namespace Retouch_Photo2.ViewModels
             {
                 case ListViewSelectionMode.None: return null;
                 case ListViewSelectionMode.Single:
-                    return this.Layerage;
+                    return this.SelectionLayerage;
                 case ListViewSelectionMode.Multiple:
-                    return this.Layerages.FirstOrDefault();
+                    return this.SelectionLayerages.FirstOrDefault();
                 default: return null;
             }
         }

@@ -103,19 +103,7 @@ namespace Retouch_Photo2
             this.ConstructExportDialog();
             this.HeadBarControl.ExportButton.Tapped += (s, e) => this.ShowExportDialog();
 
-            this.HeadBarControl.UndoButton.Tapped += (s, e) =>
-            {
-                bool isUndo = this.ViewModel.HistoryUndo();//History
-
-                if (isUndo)
-                {
-                    this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection          
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
-                    LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
-
-                    this.ViewModel.Invalidate();//Invalidate
-                }
-            };
+            this.HeadBarControl.UndoButton.Tapped += (s, e) => this.MethodViewModel.MethodEditUndo();
             //this.RedoButton.Click += (s, e) => { };
 
             this.ConstructSetupDialog();
@@ -123,8 +111,8 @@ namespace Retouch_Photo2
             
             this.HeadBarControl.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
 
-            this.UnFullScreenButton.Click += (s, e) => this.SettingViewModel.IsFullScreen = !this.SettingViewModel.IsFullScreen;
-            this.HeadBarControl.FullScreenButton.Tapped += (s, e) => this.SettingViewModel.IsFullScreen = !this.SettingViewModel.IsFullScreen;
+            this.UnFullScreenButton.Click += (s, e) => this.SettingViewModel.IsFullScreen = false;
+            this.HeadBarControl.FullScreenButton.Tapped += (s, e) => this.SettingViewModel.IsFullScreen = true;
 
 
             #endregion
@@ -134,6 +122,9 @@ namespace Retouch_Photo2
         //The current page becomes the active page
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //Key
+            this.SettingViewModel.KeyIsEnabled = true;
+
             if (this.SettingViewModel.IsFullScreen == false) return;
 
             if (e.Parameter is TransitionData data)
@@ -144,6 +135,8 @@ namespace Retouch_Photo2
         //The current page no longer becomes an active page
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            //Key
+            this.SettingViewModel.KeyIsEnabled = false;
         }
 
     }

@@ -51,12 +51,12 @@ namespace Retouch_Photo2.Menus.Models
             {
                 List<string> sadas = new List<string>();
 
-                if (this.SelectionViewModel.Layerage != null)
+                if (this.SelectionViewModel.SelectionLayerage != null)
                 {
-                    if (this.SelectionViewModel.Layerage.Id != null)
+                    if (this.SelectionViewModel.SelectionLayerage.Id != null)
                     {
-                        ILayer layer2 = this.SelectionViewModel.Layerage.Self;
-                        string sssss = $"   id:{layer2.Id} {this.SelectionViewModel.Layerage.Parents == null}";
+                        ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
+                        string sssss = $"   id:{layer2.Id} {this.SelectionViewModel.SelectionLayerage.Parents == null}";
 
                         sadas.Add(sssss);
                     }
@@ -69,9 +69,9 @@ namespace Retouch_Photo2.Menus.Models
             {
                 List<string> sadas = new List<string>();
 
-                if (this.SelectionViewModel.Layerages!=null)
+                if (this.SelectionViewModel.SelectionLayerages!=null)
                 {
-                    foreach (var item in this.SelectionViewModel.Layerages)
+                    foreach (var item in this.SelectionViewModel.SelectionLayerages)
                     {
                         ILayer layer2 = item.Self;
                         string sssss = $"   id:{layer2.Id} {item.Parents== null}";

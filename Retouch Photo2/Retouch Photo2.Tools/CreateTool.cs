@@ -137,7 +137,7 @@ namespace Retouch_Photo2.Tools
                     //Selection
                     this.SelectionViewModel.SetModeSingle(this.MezzanineLayer);
                     LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
-                    LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
+                    LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
                     
                     this.MezzanineLayer = null;
                     this.ViewModel.TextVisibility = Visibility.Collapsed;//Text
@@ -146,12 +146,12 @@ namespace Retouch_Photo2.Tools
                 /*
                 else
                 {
-                    LayerCollection.RemoveMezzanineLayer(this.ViewModel.LayerCollection, this.MezzanineLayer);//Mezzanine
+                    LayerageCollection.RemoveMezzanineLayer(this.ViewModel.LayerageCollection, this.MezzanineLayer);//Mezzanine
 
                     //Selection
                     this.SelectionViewModel.SetModeNone();
-                    LayerCollection.ArrangeLayersControls(this.ViewModel.LayerCollection);
-                    LayerCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerCollection);
+                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                    LayerageCollection.ArrangeLayersBackgroundLayerageCollection(this.ViewModel.LayerageCollection);
                 }
                  */
             }

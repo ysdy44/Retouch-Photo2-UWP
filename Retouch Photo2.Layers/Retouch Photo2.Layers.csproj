@@ -152,6 +152,7 @@
       <DependentUpon>TextFrameIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="LayerageCollections\LayerageCollection.Arrange_Parents_Controls_Background.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.Copy.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.Layerage.cs" />
     <Compile Include="Layers\ILayer.cs" />
     <Compile Include="Layerage.cs" />

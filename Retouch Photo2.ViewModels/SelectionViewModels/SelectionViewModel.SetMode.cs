@@ -20,11 +20,12 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         ///  Sets the mode and notify all properties.
         /// </summary>
-        /// <param name="layerCollection"> The layer-collection. </param>
-        public void SetMode(LayerageCollection layerCollection)
+        /// <param name="layerageCollection"> The layerage-collection. </param>
+        public void SetMode(LayerageCollection layerageCollection)
         {
-            IEnumerable<Layerage> selectedLayersRecursive = LayerageCollection.GetAllSelectedLayersRecursive(layerCollection);
-            int count = selectedLayersRecursive.Count();
+            //Layerages
+            IEnumerable<Layerage> selectedLayeragesRecursive = LayerageCollection.GetAllSelectedLayersRecursive(layerageCollection);
+            int count = selectedLayeragesRecursive.Count();
 
             if (count == 0)
             {
@@ -32,12 +33,12 @@ namespace Retouch_Photo2.ViewModels
             }
             else if (count == 1)
             {
-                Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(selectedLayersRecursive);
+                Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(selectedLayeragesRecursive);
                 this.SetModeSingle(outermost);//Single
             }
             else if (count >= 2)
             {
-                this.SetModeMultiple(selectedLayersRecursive);//Multiple
+                this.SetModeMultiple(selectedLayeragesRecursive);//Multiple
             }
         }
 
@@ -61,8 +62,8 @@ namespace Retouch_Photo2.ViewModels
             this.Transformer = new Transformer();
             this.DisabledRadian = false;
 
-            this.Layerage = null;
-            this.Layerages = null;
+            this.SelectionLayerage = null;
+            this.SelectionLayerages = null;
 
             //////////////////////////
 
@@ -114,8 +115,8 @@ namespace Retouch_Photo2.ViewModels
             this.Transformer = layerage.GetActualTransformer();
             this.DisabledRadian = false;
 
-            this.Layerage = layerage;
-            this.Layerages = null;
+            this.SelectionLayerage = layerage;
+            this.SelectionLayerages = null;
 
             //////////////////////////
 
@@ -166,8 +167,8 @@ namespace Retouch_Photo2.ViewModels
             this.SelectionUnNone = true;
             this.SelectionSingle = false;
 
-            this.Layerage = null;
-            this.Layerages = layerages;
+            this.SelectionLayerage = null;
+            this.SelectionLayerages = layerages;
 
             //TransformerBorder
             TransformerBorder border = new TransformerBorder(layerages);

@@ -19,6 +19,7 @@ namespace Retouch_Photo2.Tools
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
         //@VisualState
         public bool _vsIsFullScreen;
@@ -33,6 +34,10 @@ namespace Retouch_Photo2.Tools
         {
             this.InitializeComponent();
             this.ConstructStrings();
+
+            //Key
+            this.TextBox.GettingFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
+            this.TextBox.LosingFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
 
             this.TextBox.TextChanged += (s, e) =>
             {

@@ -171,8 +171,8 @@
   <data name="Operate" xml:space="preserve">
     <value>Operate</value>
   </data>
-  <data name="Selection" xml:space="preserve">
-    <value>Selection</value>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="Stroke" xml:space="preserve">
     <value>Stroke</value>

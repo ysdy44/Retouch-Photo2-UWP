@@ -289,12 +289,12 @@ namespace Retouch_Photo2.Tools.Models
             if (this._hasPreviewTempLeftPoint)
             {
                 this._hasPreviewTempLeftPoint = false;
-                this.CreateLayer(this.ViewModel.LayerageCollection, this._previewLeft, canvasPoint);
+                this.CreateLayer(this._previewLeft, canvasPoint);
             }
             else if (isOutNodeDistance)
             {
                 this._hasPreviewTempLeftPoint = false;
-                this.CreateLayer(this.ViewModel.LayerageCollection, canvasStartingPoint, canvasPoint);
+                this.CreateLayer(canvasStartingPoint, canvasPoint);
             }
             else
             {
@@ -325,8 +325,8 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
-        private void CreateLayer(LayerageCollection layerCollection, Vector2 canvasStartingPoint, Vector2 canvasPoint)
-        {      
+        private void CreateLayer(Vector2 canvasStartingPoint, Vector2 canvasPoint)
+        {
             //Transformer
             Transformer transformer = new Transformer(canvasPoint, canvasStartingPoint);
 

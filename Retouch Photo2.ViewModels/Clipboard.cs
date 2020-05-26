@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Layers;
+﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Layers;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
@@ -7,7 +8,7 @@ namespace Retouch_Photo2.ViewModels
 {
     public class Clipboard
     {
-        /// <summary> The single copyed layerage. </summary>
+        /// <summary> The all copyed layerage. </summary> 
         public Layerage Layerage { get; private set; }
 
         /// <summary> The all copyed layerages. </summary> 
@@ -17,24 +18,35 @@ namespace Retouch_Photo2.ViewModels
         public ListViewSelectionMode SelectionMode { get; set; }
         public bool CanPaste => this.SelectionMode == ListViewSelectionMode.Single || this.SelectionMode == ListViewSelectionMode.Multiple;
 
-        public void SetModeNone()
+        public void SetMode(LayerageCollection layerageCollection)
         {
-            this.Layerage = null;
-            this.Layerages = null;
-            this.SelectionMode = ListViewSelectionMode.None;
+            //Layerages
+            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
+            int count = selectedLayerages.Count();
+
+            if (count == 0)
+            {
+                this.SelectionMode = ListViewSelectionMode.None;//None
+
+                this.Layerage = null;
+                this.Layerages = null;
+            }
+            else if (count == 1)
+            {
+                this.SelectionMode = ListViewSelectionMode.Single;//None
+
+                Layerage layerage = selectedLayerages.Single();
+                this.Layerage = layerage.Clone();
+                this.Layerages = null;
+            }
+            else if (count >= 2)
+            {
+                this.SelectionMode = ListViewSelectionMode.Multiple;//None
+                this.Layerage = null;
+                this.Layerages = from layerage in selectedLayerages select layerage.Clone();
+            }
         }
-        public void SetModeSingle(Layerage layerage)
-        {
-            this.Layerage = layerage.Clone();
-            this.Layerages = null;
-            this.SelectionMode = ListViewSelectionMode.Single;
-        }
-        public void SetModeMultiple(IEnumerable<Layerage> layerage)
-        {
-            this.Layerage = null;
-            this.Layerages = from layer in layerage select layer.Clone();
-            this.SelectionMode = ListViewSelectionMode.Multiple;
-        }
+               
     }
 
 }

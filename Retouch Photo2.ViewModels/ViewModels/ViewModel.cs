@@ -48,7 +48,7 @@ namespace Retouch_Photo2.ViewModels
 
             //Arrange
             LayerageCollection.ArrangeLayersControls(this.LayerageCollection);
-            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.LayerageCollection);
+            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
         }
 
 

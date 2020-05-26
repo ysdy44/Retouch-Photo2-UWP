@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Layers
             this.InitializeComponent();
             this.ControlHeight = LayerageCollection.ControlsHeight;
 
-            //LayerCollection
+            //LayerageCollection
             {
                 this.Tapped += (s, e) =>
                 {
@@ -78,6 +78,16 @@ namespace Retouch_Photo2.Layers
                     e.Handled = true;
                 };
                 this.RightTapped += (s, e) =>
+                {
+                    LayerageCollection.RightTapped?.Invoke(layer);//Delegate
+                    e.Handled = true;
+                };
+                this.Holding += (s, e) =>
+                {
+                    LayerageCollection.RightTapped?.Invoke(layer);//Delegate
+                    e.Handled = true;
+                };
+                this.DoubleTapped += (s, e) =>
                 {
                     LayerageCollection.RightTapped?.Invoke(layer);//Delegate
                     e.Handled = true;

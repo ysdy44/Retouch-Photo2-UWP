@@ -149,11 +149,11 @@ namespace Retouch_Photo2.ViewModels
                     this.SetStyle(null);
                     break;
                 case ListViewSelectionMode.Single:
-                    ILayer layer = this.Layerage.Self;
+                    ILayer layer = this.SelectionLayerage.Self;
                     this.SetStyle(layer.Style);
                     break;
                 case ListViewSelectionMode.Multiple:
-                    ILayer layer2 = this.Layerages.First().Self;
+                    ILayer layer2 = this.SelectionLayerages.First().Self;
                     this.SetStyle(layer2.Style);
                     break;
             }

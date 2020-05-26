@@ -42,8 +42,8 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public static void UnGroupAllSelectedLayer(LayerageCollection layerageCollection)
         {
-            //Layers
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayers(layerageCollection);
+            //Layerages
+            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
             Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(selectedLayerages);
             if (outermost == null) return;
             IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(outermost);
@@ -79,12 +79,12 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary>
-        /// Group all selected layers.
+        /// Group all selected layerages.
         /// </summary>
         public static void GroupAllSelectedLayers(LayerageCollection layerageCollection)
-        {     
-            //Layers
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayers(layerageCollection);
+        {
+            //Layerages
+            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
             Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(selectedLayerages);
             if (outermost == null) return;
             IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(outermost);

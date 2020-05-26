@@ -12,7 +12,7 @@
 
     <elements:Expander x:Name="_Expander">
         <elements:Expander.MainPage>
-            <elements:ColorPicker2 x:Name="ColorPicker" Width="Auto" Color="{x:Bind ViewModel.Color,Mode=OneWay}"/>
+            <elements:ColorPicker2 x:Name="ColorPicker" Width="Auto" Color="{x:Bind SelectionViewModel.Color,Mode=OneWay}"/>
         </elements:Expander.MainPage>
     </elements:Expander>
 

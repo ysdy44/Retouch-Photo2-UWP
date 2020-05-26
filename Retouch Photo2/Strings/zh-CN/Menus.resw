@@ -171,8 +171,8 @@
   <data name="Operate" xml:space="preserve">
     <value>操作</value>
   </data>
-  <data name="Selection" xml:space="preserve">
-    <value>选择</value>
+  <data name="Edit" xml:space="preserve">
+    <value>编辑</value>
   </data>
   <data name="Stroke" xml:space="preserve">
     <value>描边</value>

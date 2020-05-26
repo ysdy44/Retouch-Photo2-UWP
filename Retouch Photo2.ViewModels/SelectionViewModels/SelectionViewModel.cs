@@ -60,11 +60,11 @@ namespace Retouch_Photo2.ViewModels
         private bool selectionSingle;
 
 
-        /// <summary> The single checked layerage. </summary>
-        public Layerage Layerage { get; private set; }
+        /// <summary> The single selected layerage. </summary>
+        public Layerage SelectionLayerage { get; private set; }
 
-        /// <summary> The all checked layerages. </summary>
-        public IEnumerable<Layerage> Layerages { get; private set; }
+        /// <summary> The all selected layerages. </summary>
+        public IEnumerable<Layerage> SelectionLayerages { get; private set; }
 
 
         /// <summary> Transformer of selection layers. </summary>

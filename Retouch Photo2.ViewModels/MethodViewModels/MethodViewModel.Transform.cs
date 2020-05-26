@@ -111,7 +111,7 @@ namespace Retouch_Photo2.ViewModels
             this.Invalidate(InvalidateMode.HD);//Invalidate
         }
 
-
+        
 
         public void MethodTransformAdd(Vector2 vector)
         {

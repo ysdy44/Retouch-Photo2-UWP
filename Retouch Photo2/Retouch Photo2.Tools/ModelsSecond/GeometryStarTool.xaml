@@ -23,8 +23,8 @@
             <tools:TouchbarButton x:Name="PointsTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="PointsTouchbarSlider" 
-                             Number="{x:Bind ViewModel.GeometryStarPoints,Mode=OneWay}"
-                             Value="{x:Bind PointsValueConverter(ViewModel.GeometryStarPoints),Mode=OneWay}"
+                             Number="{x:Bind SelectionViewModel.GeometryStarPoints,Mode=OneWay}"
+                             Value="{x:Bind PointsValueConverter(SelectionViewModel.GeometryStarPoints),Mode=OneWay}"
                              />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
@@ -35,8 +35,8 @@
             <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
-                    Number="{x:Bind InnerRadiusNumberConverter(ViewModel.GeometryStarInnerRadius),Mode=OneWay}"
-                    Value="{x:Bind InnerRadiusValueConverter(ViewModel.GeometryStarInnerRadius), Mode=OneWay}" 
+                    Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryStarInnerRadius),Mode=OneWay}"
+                    Value="{x:Bind InnerRadiusValueConverter(SelectionViewModel.GeometryStarInnerRadius), Mode=OneWay}" 
                      />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>

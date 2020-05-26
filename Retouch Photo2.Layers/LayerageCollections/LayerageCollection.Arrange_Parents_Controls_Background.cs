@@ -9,7 +9,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Arrange all layers's background.
         /// </summary>
-        public static void ArrangeLayersBackgroundLayerCollection(LayerageCollection layerageCollection)
+        public static void ArrangeLayersBackground(LayerageCollection layerageCollection)
         {
             foreach (Layerage layerage in layerageCollection.RootLayerages)
             {

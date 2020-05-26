@@ -63,8 +63,9 @@ namespace Retouch_Photo2.Layers.Models
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
             {
-                foreach (Layerage child in children)
+                for (int i = children.Count - 1; i >= 0; i--)
                 {
+                    Layerage child = children[i];
                     ILayer child2 = child.Self; 
 
                     if (child2.Visibility == Visibility.Collapsed) continue;

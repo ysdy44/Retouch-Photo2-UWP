@@ -5,11 +5,11 @@
     /// </summary>
     public enum MenuType
     {
-        /// <summary> Keyboard. </summary>
-        Keyboard,
+        /// <summary> Debug. </summary>
+        Debug,
 
-        /// <summary> Selection. </summary>
-        Selection,
+        /// <summary> Edit. </summary>
+        Edit,
         /// <summary> Operate. </summary>
         Operate,
 
@@ -36,6 +36,8 @@
         /// <summary> Layer. </summary>
         Layer,
         /// <summary> Color. </summary>
-        Color,        
+        Color,
+        /// <summary> Keyboard. </summary>
+        Keyboard,
     }
 }

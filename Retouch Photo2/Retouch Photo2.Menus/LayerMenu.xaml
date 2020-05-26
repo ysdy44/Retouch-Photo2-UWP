@@ -22,23 +22,23 @@
                 <TextBlock x:Name="NameTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Button x:Name="NameButton" Height="26" MinWidth="100" HorizontalAlignment="Left"
                         Style="{StaticResource AppNumberButtonStyle}"
-                        IsEnabled="{x:Bind ViewModel.SelectionUnNone, Mode=OneWay}" 
-                        Content="{x:Bind ViewModel.LayerName, Mode=OneWay}"/>
+                        IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
+                        Content="{x:Bind SelectionViewModel.LayerName, Mode=OneWay}"/>
 
 
                 <!--Opacity-->
                 <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Border Style="{StaticResource AppRoundedBorderStyle}">
                     <elements:SilderPicker x:Name="OpacitySlider"
-                           IsEnabled="{x:Bind ViewModel.SelectionUnNone, Mode=OneWay}" 
-                           Value="{x:Bind ViewModel.Opacity,Mode=OneWay}"/>
+                           IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
+                           Value="{x:Bind SelectionViewModel.Opacity,Mode=OneWay}"/>
                 </Border>
 
 
                 <!--Blend Mode-->
                 <TextBlock x:Name="BlendModeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Button x:Name="BlendModeButton" Style="{StaticResource AppIconRoundedButtonStyle}"
-                        IsEnabled="{x:Bind ViewModel.SelectionUnNone, Mode=OneWay}" 
+                        IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                         Content="{x:Bind BlendModeComboBox.Title, Mode=OneWay}">
                     <Button.Tag>
                         <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
@@ -61,7 +61,7 @@
 
                         <!--Follow-->
                         <ToggleButton x:Name="FollowToggleControl" Style="{StaticResource AppCircleToggleButtonStyle}"
-                                  IsChecked="{x:Bind ViewModel.IsFollowTransform,Mode=OneWay}" >
+                                  IsChecked="{x:Bind SelectionViewModel.IsFollowTransform,Mode=OneWay}" >
                             <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
                         </ToggleButton>
 
@@ -69,7 +69,7 @@
 
                         <!--Visibility-->
                         <ToggleButton x:Name="VisibilityButton" Style="{StaticResource AppCircleToggleButtonStyle}"
-                               IsEnabled="{x:Bind ViewModel.SelectionUnNone, Mode=OneWay}" 
+                               IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                                IsChecked="{x:Bind VisibilityToBoolConverter(ViewModel.Visibility),Mode=OneWay}" >
                             <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
                         </ToggleButton>
@@ -80,7 +80,7 @@
 
                 <!--Tag Type-->
                 <TextBlock x:Name="TagTypeTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}"/>
-                <blends:TagTypeControl x:Name="TagTypeControl" Type="{x:Bind ViewModel.TagType,Mode=OneWay}" />
+                <blends:TagTypeControl x:Name="TagTypeControl" Type="{x:Bind SelectionViewModel.TagType,Mode=OneWay}" />
 
             </StackPanel>
         </elements:Expander.MainPage>
@@ -88,7 +88,7 @@
 
         <elements:Expander.SecondPage>
             <ScrollViewer MaxHeight="300">
-                <blends:BlendModeComboBox x:Name="BlendModeComboBox" Mode="{x:Bind ViewModel.BlendMode, Mode=OneWay}"/>
+                <blends:BlendModeComboBox x:Name="BlendModeComboBox" Mode="{x:Bind SelectionViewModel.BlendMode, Mode=OneWay}"/>
             </ScrollViewer>
         </elements:Expander.SecondPage>
 

@@ -176,7 +176,7 @@ namespace Retouch_Photo2.Tools.Models
 
                             this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
 
-                            LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
+                            LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
                             
                             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                         }

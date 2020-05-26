@@ -23,8 +23,8 @@
             <tools:TouchbarButton x:Name="PointsTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="PointsTouchbarSlider" 
-                             Number="{x:Bind ViewModel.GeometryPentagonPoints,Mode=OneWay}"
-                             Value="{x:Bind PointsValueConverter(ViewModel.GeometryPentagonPoints),Mode=OneWay}"
+                             Number="{x:Bind SelectionViewModel.GeometryPentagonPoints,Mode=OneWay}"
+                             Value="{x:Bind PointsValueConverter(SelectionViewModel.GeometryPentagonPoints),Mode=OneWay}"
                              />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>

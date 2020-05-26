@@ -1,0 +1,71 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Menus.Models.EditMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
+    mc:Ignorable="d"
+    d:DesignWidth="200"
+    d:DesignHeight="400"
+    >
+
+
+    <elements:Expander x:Name="_Expander">
+        
+        
+        <elements:Expander.MainPage>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+
+                    <!--Edit-->
+                    <TextBlock x:Name="EditTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="CutButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="DuplicateButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="CopyButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="PasteButton" IsEnabled="{x:Bind MethodViewModel.ClipboardEnable, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="ClearButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+
+                    <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
+
+                    <!--Group-->
+                    <TextBlock x:Name="GroupTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="GroupButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="UnGroupButton" IsEnabled="{x:Bind SelectionViewModel.IsGroupLayer, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="ReleaseButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+
+                </StackPanel>
+
+                <Rectangle Grid.Column="1" Margin="0" Style="{ThemeResource AppSeparatorRectangleHorizontalStyle}" />
+
+                <StackPanel Grid.Column="2">
+
+                    <!--Select-->
+                    <TextBlock x:Name="SelectTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="AllButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="DeselectButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="InvertButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+
+                    <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
+
+                    <!--Combine-->
+                    <TextBlock x:Name="CombineTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="AddButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="SubtractButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="IntersectButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="DivideButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="CombineButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
+
+                </StackPanel>
+
+            </Grid>
+        </elements:Expander.MainPage>
+    </elements:Expander>
+
+</UserControl>

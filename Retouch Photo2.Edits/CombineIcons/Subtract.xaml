@@ -1,0 +1,57 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Edits.CombineIcons.SubtractIcon"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50"
+    >
+
+    <Viewbox Width="26" Height="26">
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--Disabled-->
+                <VisualState x:Name="Disabled">
+                    <VisualState.Setters>
+                        <Setter Target = "Canvas.Opacity" Value="0.5"/>
+                        <Setter Target = "BluePolygon.Fill" Value="Gray"/>
+                        <Setter Target = "WhitePolygon.Fill" Value="DarkGray"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Canvas x:Name="Canvas" Width="40" Height="40" >
+
+            <Polygon x:Name="BluePolygon" Fill="DodgerBlue">
+                <Polygon.Points>
+                    4,4 24,4 24,13 13,13 13,24 4,24
+                </Polygon.Points>
+            </Polygon>
+
+            <Polygon Fill="Gray">
+                <Polygon.Points>
+                    16,16 36,16 36,36 16,36
+                </Polygon.Points>
+            </Polygon>
+            
+            <Polygon x:Name="WhitePolygon" Fill="White">
+                <Polygon.Points>
+                    19,25 33,25 33,27 19,27
+                </Polygon.Points>
+            </Polygon>
+
+        </Canvas>
+
+    </Viewbox>
+
+</UserControl>

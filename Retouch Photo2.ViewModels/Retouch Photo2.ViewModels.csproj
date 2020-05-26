@@ -107,19 +107,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Clipboard.cs" />
+    <Compile Include="Enums\EditMode.cs" />
     <Compile Include="Enums\InvalidateMode.cs" />
+    <Compile Include="Enums\MoveMode.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Color.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.cs" />
+    <Compile Include="MethodViewModels\MethodViewModel.Edit.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Selected.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Transform.cs" />
-    <Compile Include="Retouch Photo2.Historys\Icon.xaml.cs">
-      <DependentUpon>Icon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Historys\IHistory.cs" />
-    <Compile Include="Retouch Photo2.Historys\LayeragesHistory.cs" />
-    <Compile Include="Retouch Photo2.Historys\LayerPropertyHistory.cs" />
-    <Compile Include="Retouch Photo2.Historys\LayersPropertyHistory.cs" />
     <Compile Include="Retouch Photo2.Menus\IMenu.cs" />
+    <Compile Include="Retouch Photo2.Menus\XMLs\XML.MenuTypeFactory.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.Key.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.cs" />
     <Compile Include="Retouch Photo2.Menus\MenuType.cs" />
@@ -144,7 +141,6 @@
     <Compile Include="ViewModels\ViewModel.History.cs" />
     <Compile Include="XMLs\XML.Project.cs" />
     <Compile Include="XMLs\XML.Setting.cs" />
-    <Compile Include="XMLs\XML.ThemeFactory.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.ViewModels.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +176,10 @@
       <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
       <Name>Retouch Photo2.Elements</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Historys\Retouch Photo2.Historys.csproj">
+      <Project>{64e6052b-fbb1-489b-9ae3-fb05dc8fbe63}</Project>
+      <Name>Retouch Photo2.Historys</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Layers\Retouch Photo2.Layers.csproj">
       <Project>{15cbf0a7-0953-49f5-b541-f8bcaab40053}</Project>
       <Name>Retouch Photo2.Layers</Name>
@@ -191,12 +191,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SelectionViewModels\SelectionViewModel.NotifyGeometry.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Retouch Photo2.Historys\Icon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

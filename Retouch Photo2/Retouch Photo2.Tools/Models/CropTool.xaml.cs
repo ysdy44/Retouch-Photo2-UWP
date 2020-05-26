@@ -227,7 +227,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
                 case ListViewSelectionMode.Single:
                     {
-                        this._draw(drawingSession, this.SelectionViewModel.Layerage, matrix);
+                        this._draw(drawingSession, this.SelectionViewModel.SelectionLayerage, matrix);
 
                         //Snapping
                         if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
@@ -235,7 +235,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
                 case ListViewSelectionMode.Multiple:
                     {
-                        foreach (Layerage layerage in this.SelectionViewModel.Layerages)
+                        foreach (Layerage layerage in this.SelectionViewModel.SelectionLayerages)
                         {
                             this._draw(drawingSession, layerage, matrix);
                         }

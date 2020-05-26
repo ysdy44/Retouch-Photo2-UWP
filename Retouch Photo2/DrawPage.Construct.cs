@@ -101,10 +101,13 @@ namespace Retouch_Photo2
         //Rename
         private void ConstructRenameDialog()
         {
-            this.RenameDialog.CloseButton.Click += (sender, args) => this.RenameDialog.Hide();
+            //Key
+            this.RenameTextBox.GettingFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
+            this.RenameTextBox.LosingFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
 
+            this.RenameDialog.CloseButton.Click += (sender, args) => this.RenameDialog.Hide();
             this.RenameDialog.PrimaryButton.Click += (_, __) =>
-            {         
+            {
                 this.RenameDialog.Hide();
                 string name = this.RenameTextBox.Text;
 
@@ -133,10 +136,10 @@ namespace Retouch_Photo2
                     }
                 });
             };
-            }
+        }
         private void ShowRenameDialog()
         {
-            this.RenameTextBox.Text = this.SelectionViewModel.LayerName; 
+            this.RenameTextBox.Text = this.SelectionViewModel.LayerName;
 
             this.RenameDialog.Show();
         }

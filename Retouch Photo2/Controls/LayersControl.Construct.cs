@@ -18,8 +18,8 @@ namespace Retouch_Photo2.Controls
     /// </summary>
     public partial class LayersControl : UserControl
     {
-
-        private void ConstructLayerCollection()
+        
+        private void ConstructLayerageCollection()
         {
             if (LayerageCollection.ItemClick == null)
             {
@@ -125,7 +125,7 @@ namespace Retouch_Photo2.Controls
 
                     this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
                     LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
-                    LayerageCollection.ArrangeLayersBackgroundLayerCollection(this.ViewModel.LayerageCollection);
+                    LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
                     this.ViewModel.Invalidate();//Invalidate
 
                     this.DragSourceLayerage = null;

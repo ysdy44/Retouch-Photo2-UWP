@@ -139,7 +139,7 @@ namespace Retouch_Photo2.Tools
                 return child2.FillContainsPoint(child, canvasPoint);
             };
 
-            return parentsChildren.LastOrDefault(layerage=> childasdsad(layerage));
+            return parentsChildren.FirstOrDefault(layerage=> childasdsad(layerage));
         }
 
         private bool GetIsSelectedLayer(Vector2 canvasStartingPoint)

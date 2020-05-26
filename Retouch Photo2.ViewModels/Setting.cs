@@ -19,9 +19,9 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> <see cref = "Setting" />'s menu-types. </summary>
         public IList<MenuType> MenuTypes = new List<MenuType>
         {
-               //MenuType.Keyboard,
+               //MenuType.Debug,
 
-               MenuType.Selection,
+               MenuType.Edit,
                MenuType.Operate,
 
                MenuType.Adjustment,
@@ -38,6 +38,7 @@ namespace Retouch_Photo2.ViewModels
 
                //MenuType.Layer,
                MenuType.Color,
+               //MenuType.Keyboard,
         };
 
     }
