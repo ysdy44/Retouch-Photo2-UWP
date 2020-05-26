@@ -40,11 +40,11 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel ;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
         bool IsRatio => this.SettingViewModel.IsRatio;
         Transformer SelectionTransformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
-               
+
 
         //@VisualState
         bool _vsDisabledTool;
@@ -72,10 +72,10 @@ namespace Retouch_Photo2.Menus.Models
             }
             set => this.SetTransformerMenuState(value);
         }
-        
+
         bool _isLoaded;
         IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
-        
+
 
         #region DependencyProperty
 
@@ -113,7 +113,7 @@ namespace Retouch_Photo2.Menus.Models
             return;
         }));
 
-        
+
         /// <summary> Gets or sets <see cref = "TransformerMenu" />'s selection mode. </summary>
         public ListViewSelectionMode Mode
         {
@@ -253,8 +253,8 @@ namespace Retouch_Photo2.Menus.Models
             this._Expander.Title =
             this._Expander.CurrentTitle = resource.GetString("/Menus/Transformer");
 
-            this.WidthTextBlock.Text = resource.GetString("/Menus/Transformer_Height");
-            this.HeightTextBlock.Text = resource.GetString("/Menus/Transformer_Width");
+            this.WidthTextBlock.Text = resource.GetString("/Menus/Transformer_Width");
+            this.HeightTextBlock.Text = resource.GetString("/Menus/Transformer_Height");
             this.RatioScalingToolTip.Content = resource.GetString("/Menus/Transformer_RatioScaling");
 
             this.RotateTextBlock.Text = resource.GetString("/Menus/Transformer_Rotate");
@@ -264,7 +264,7 @@ namespace Retouch_Photo2.Menus.Models
             this.XTextBlock.Text = resource.GetString("/Menus/Transformer_X");
             this.YTextBlock.Text = resource.GetString("/Menus/Transformer_Y");
             this.PositionRemoteToolTip.Content = resource.GetString("/Menus/Transformer_PositionRemote");
-           
+
             this.IndicatorToolTip.Content = resource.GetString("/Menus/Transformer_Indicator");
         }
 
@@ -328,11 +328,11 @@ namespace Retouch_Photo2.Menus.Models
                             Vector2 vertical = this._vsTransformer.Vertical;
 
                             //Radians
-                            float radians = this.GetRadians(horizontal);
+                            float radians = Transformer.GetRadians(horizontal);
                             this.RPicker.Value = (int)radians;
 
                             //Skew
-                            float skew = this.GetSkew(vertical, radians);
+                            float skew = Transformer.GetSkew(vertical, radians);
                             this.SPicker.Value = (int)skew;
 
                             //Width Height
@@ -340,7 +340,7 @@ namespace Retouch_Photo2.Menus.Models
                             this.HPicker.Value = (int)vertical.Length();
 
                             //X Y
-                            Vector2 vector = this.GetVectorWithIndicatorMode(this.Transformer, this.IndicatorMode);
+                            Vector2 vector = this._vsTransformer.GetIndicatorVector(this.IndicatorMode);
                             this.XPicker.Value = (int)vector.X;
                             this.YPicker.Value = (int)vector.Y;
 
@@ -384,7 +384,7 @@ namespace Retouch_Photo2.Menus.Models
                             this.HPicker.Value = (int)vertical.Length();
 
                             //X Y
-                            Vector2 vector = this.GetVectorWithIndicatorMode(this.Transformer, this.IndicatorMode);
+                            Vector2 vector = this._vsTransformer.GetIndicatorVector(this.IndicatorMode);
                             this.XPicker.Value = (int)vector.X;
                             this.YPicker.Value = (int)vector.Y;
 
@@ -476,28 +476,12 @@ namespace Retouch_Photo2.Menus.Models
 
             this.IndicatorControl.ModeChanged += (s, mode) =>
             {
-                {
-                    IndicatorMode startingMode = this.IndicatorMode;
-
-                    HorizontalAlignment newHorizontal = this.GetHorizontalAlignmentFormIndicatorMode(mode);
-                    HorizontalAlignment oldHorizontal = this.GetHorizontalAlignmentFormIndicatorMode(startingMode);
-
-                    VerticalAlignment newVertical = this.GetVerticalAlignmentFormIndicatorMode(mode);
-                    VerticalAlignment oldVertical = this.GetVerticalAlignmentFormIndicatorMode(startingMode);
-
-                    if (this._isLoaded)
-                    {
-                        if (newHorizontal != oldHorizontal) this.XEaseStoryboard.Begin();//Storyboard
-                        if (newVertical != oldVertical) this.YEaseStoryboard.Begin();//Storyboard
-                    }
-                }
-
                 this.IndicatorMode = mode;//IndicatorMode
 
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
                 Transformer transformer = this.SelectionTransformer;
-                Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
+                Vector2 vector = transformer.GetIndicatorVector(this.IndicatorMode);
 
                 this.XPicker.Value = (int)vector.X;
                 this.YPicker.Value = (int)vector.Y;
@@ -515,18 +499,8 @@ namespace Retouch_Photo2.Menus.Models
             this.WPicker.ValueChange += (sender, value) =>
             {
                 Transformer transformer = this.SelectionTransformer;
-                Vector2 horizontal = transformer.Horizontal;
-                Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
+                Matrix3x2 matrix = transformer.TransformWidth(value, this.IndicatorMode, this.IsRatio);
 
-                float canvasStartingRadian = FanKit.Math.VectorToRadians(transformer.CenterTop - transformer.Center);
-                float canvasStartingWidth = horizontal.Length();
-                float scale = value / canvasStartingWidth;
-
-                Matrix3x2 matrix =
-                Matrix3x2.CreateRotation(-canvasStartingRadian, vector) *
-                Matrix3x2.CreateScale(this.IsRatio ? scale : 1, scale, vector) *
-                Matrix3x2.CreateRotation(canvasStartingRadian, vector);
-                
                 //Method
                 this.MethodViewModel.MethodTransformMultiplies(matrix);
             };
@@ -537,18 +511,8 @@ namespace Retouch_Photo2.Menus.Models
             this.HPicker.ValueChange += (s, value) =>
             {
                 Transformer transformer = this.SelectionTransformer;
-                Vector2 vertical = transformer.Vertical;
-                Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
+                Matrix3x2 matrix = transformer.TransformHeight(value, this.IndicatorMode, this.IsRatio);
 
-                float canvasStartingRadian = FanKit.Math.VectorToRadians(transformer.CenterTop - transformer.Center);
-                float canvasStartingWidth = vertical.Length();
-                float scale = value / canvasStartingWidth;
-
-                Matrix3x2 matrix =
-                Matrix3x2.CreateRotation(-canvasStartingRadian, vector) *
-                Matrix3x2.CreateScale(scale, this.IsRatio ? scale : 1, vector) *
-                Matrix3x2.CreateRotation(canvasStartingRadian, vector);
-                
                 //Method
                 this.MethodViewModel.MethodTransformMultiplies(matrix);
             };
@@ -565,14 +529,8 @@ namespace Retouch_Photo2.Menus.Models
             this.RPicker.ValueChange += (s, value) =>
             {
                 Transformer transformer = this.SelectionTransformer;
-                Vector2 vector = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
+                Matrix3x2 matrix = transformer.TransformRotate(value, this.IndicatorMode);
 
-                float canvasRadian = value / 180.0f * FanKit.Math.Pi;
-                float canvasStartingRadian = FanKit.Math.VectorToRadians(transformer.CenterTop - transformer.Center);
-
-                float radian = canvasRadian - canvasStartingRadian - FanKit.Math.PiOver2;
-                Matrix3x2 matrix = Matrix3x2.CreateRotation(radian, vector);
-                
                 //Method
                 this.MethodViewModel.MethodTransformMultiplies(matrix);
             };
@@ -582,45 +540,8 @@ namespace Retouch_Photo2.Menus.Models
             this.SPicker.ValueChange += (s, value) =>
             {
                 Transformer transformer = this.SelectionTransformer;
-                float horizontalHalf = Vector2.Distance(transformer.Center, transformer.CenterRight);
+                Matrix3x2 matrix = transformer.TransformSkew(value, this.IndicatorMode);
 
-                Vector2 footPoint = FanKit.Math.FootPoint(transformer.Center, transformer.LeftBottom, transformer.RightBottom);
-                float verticalHalf = Vector2.Distance(transformer.Center, footPoint);
-
-                Vector2 horizontal = transformer.Horizontal;
-                float radians = this.GetRadians(horizontal) / 180.0f * FanKit.Math.Pi;
-                float skew = -value / 180.0f * FanKit.Math.Pi;
-
-                //Vector2
-                Vector2 postion;
-                Vector2 center;
-                switch (this.IndicatorMode)
-                {
-                    case IndicatorMode.LeftTop:
-                    case IndicatorMode.Top:
-                    case IndicatorMode.RightTop:
-                            postion = new Vector2(-horizontalHalf, 0);
-                            center = transformer.CenterTop;
-                        break;
-                    case IndicatorMode.LeftBottom:
-                    case IndicatorMode.Bottom:
-                    case IndicatorMode.RightBottom:
-                            postion = new Vector2(-horizontalHalf, -verticalHalf * 2);
-                            center = transformer.CenterBottom;
-                        break;
-                    default:
-                            postion = new Vector2(-horizontalHalf, -verticalHalf);
-                            center = transformer.Center;
-                        break;
-                }
-
-                //Matrix
-                Matrix3x2 matrix =
-                Matrix3x2.CreateSkew(skew, 0) *
-                Matrix3x2.CreateRotation(radians) *
-                Matrix3x2.CreateTranslation(center);
-                Transformer zeroTransformer = new Transformer(horizontalHalf * 2, verticalHalf * 2, postion);
-                
                 //Method
                 this.MethodViewModel.MethodTransformMultiplies(matrix);
             };
@@ -637,8 +558,7 @@ namespace Retouch_Photo2.Menus.Models
             this.XPicker.ValueChange += (s, value) =>
             {
                 Transformer transformer = this.SelectionTransformer;
-                Vector2 indicator = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
-                Vector2 vector = new Vector2(value - indicator.X, 0);
+                Vector2 vector = transformer.TransformX(value, this.IndicatorMode);
 
                 //Method
                 this.MethodViewModel.MethodTransformAdd(vector);
@@ -649,8 +569,7 @@ namespace Retouch_Photo2.Menus.Models
             this.YPicker.ValueChange += (s, value) =>
             {
                 Transformer transformer = this.SelectionTransformer;
-                Vector2 indicator = this.GetVectorWithIndicatorMode(transformer, this.IndicatorMode);
-                Vector2 vector = new Vector2(0, value - indicator.Y);
+                Vector2 vector = transformer.TransformY(value, this.IndicatorMode);
 
                 //Method
                 this.MethodViewModel.MethodTransformAdd(vector);
@@ -659,97 +578,5 @@ namespace Retouch_Photo2.Menus.Models
         }
 
     }
-       
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "TransformerMenu" />. 
-    /// </summary>
-    public sealed partial class TransformerMenu : UserControl, IMenu
-    {
 
-        /// <summary>
-        /// Gets vector by left, right, top, bottom.
-        /// </summary>
-        /// <param name="value"> Transformer </param>
-        /// <param name="mode"> IndicatorMode </param>
-        /// <returns></returns>
-        private Vector2 GetVectorWithIndicatorMode(Transformer value, IndicatorMode mode)
-        {
-            switch (this.IndicatorMode)
-            {
-                case IndicatorMode.LeftTop: return value.LeftTop;
-                case IndicatorMode.RightTop: return value.RightTop;
-                case IndicatorMode.RightBottom: return value.RightBottom;
-                case IndicatorMode.LeftBottom: return value.LeftBottom;
-
-                case IndicatorMode.Left: return value.CenterLeft;
-                case IndicatorMode.Top: return value.CenterTop;
-                case IndicatorMode.Right: return value.CenterRight;
-                case IndicatorMode.Bottom: return value.CenterBottom;
-
-                case IndicatorMode.Center: return value.Center;
-            }
-            return value.LeftTop;
-        }
-
-
-        private float GetRadians(Vector2 vector)
-        {
-            float radians = FanKit.Math.VectorToRadians(vector);
-            if (float.IsNaN(radians)) return 0.0f;
-
-            float value = radians * 180.0f / FanKit.Math.Pi;
-            return value % 180.0f;
-        }
-
-        private float GetSkew(Vector2 vector, float radians)
-        {
-            float skew = FanKit.Math.VectorToRadians(vector);
-            if (float.IsNaN(skew)) return 0;
-
-            skew = skew * 180.0f / FanKit.Math.Pi;
-            skew = skew - radians - 90.0f;
-
-            return skew % 180.0f;
-        }
-
-
-        //@Debug
-        //Indicator
-        private HorizontalAlignment GetHorizontalAlignmentFormIndicatorMode(IndicatorMode mode)
-        {
-            switch (mode)
-            {
-                case IndicatorMode.None: return HorizontalAlignment.Center;
-                case IndicatorMode.LeftTop: return HorizontalAlignment.Left;
-                case IndicatorMode.RightTop: return HorizontalAlignment.Right;
-                case IndicatorMode.RightBottom: return HorizontalAlignment.Right;
-                case IndicatorMode.LeftBottom: return HorizontalAlignment.Left;
-                case IndicatorMode.Left: return HorizontalAlignment.Left;
-                case IndicatorMode.Top: return HorizontalAlignment.Center;
-                case IndicatorMode.Right: return HorizontalAlignment.Right;
-                case IndicatorMode.Bottom: return HorizontalAlignment.Center;
-                case IndicatorMode.Center: return HorizontalAlignment.Center;
-                default: return HorizontalAlignment.Center;
-            }
-        }
-        private VerticalAlignment GetVerticalAlignmentFormIndicatorMode(IndicatorMode mode)
-        {
-            switch (mode)
-            {
-                case IndicatorMode.None: return VerticalAlignment.Center;
-                case IndicatorMode.LeftTop: return VerticalAlignment.Top;
-                case IndicatorMode.RightTop: return VerticalAlignment.Top;
-                case IndicatorMode.RightBottom: return VerticalAlignment.Bottom;
-                case IndicatorMode.LeftBottom: return VerticalAlignment.Bottom;
-                case IndicatorMode.Left: return VerticalAlignment.Center;
-                case IndicatorMode.Top: return VerticalAlignment.Top;
-                case IndicatorMode.Right: return VerticalAlignment.Center;
-                case IndicatorMode.Bottom: return VerticalAlignment.Bottom;
-                case IndicatorMode.Center: return VerticalAlignment.Center;
-                default: return VerticalAlignment.Center;
-            }
-        }
-
-    }
-    
 }

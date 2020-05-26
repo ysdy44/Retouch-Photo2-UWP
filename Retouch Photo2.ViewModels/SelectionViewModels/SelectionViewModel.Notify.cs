@@ -1,6 +1,8 @@
 ﻿using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
+using Retouch_Photo2.Filters;
+using Retouch_Photo2.Styles;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;

@@ -2,15 +2,22 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Stroke;
 using System.Numerics;
 
-namespace Retouch_Photo2.Brushs
+namespace Retouch_Photo2.Styles
 {
     /// <summary>
     /// Define the object used to draw geometry.
     /// </summary>
     public partial class Style : ICacheTransform
     {
+        /// <summary>
+        /// Name
+        /// </summary>
+        public string Name { get; set; } = string.Empty;
+
         /// <summary> Gets or sets whether the style follows the transform. </summary>
         public bool IsFollowTransform = true;
 

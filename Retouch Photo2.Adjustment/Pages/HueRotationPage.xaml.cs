@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.Angle = (float)(value * Math.PI / 180);
-                Filter.Invalidate?.Invoke();
+                AdjustmentBase.Invalidate?.Invoke();
             };
         }
 

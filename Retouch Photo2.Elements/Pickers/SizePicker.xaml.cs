@@ -15,11 +15,19 @@ namespace Retouch_Photo2.Elements
         /// <summary> HeightTextBlock's Text. </summary>
         public string HeightText { get => this.HeightTextBlock.Text; set => this.HeightTextBlock.Text = value; }
         /// <summary> Size. </summary>
-        public BitmapSize Size => new BitmapSize()
+        public BitmapSize Size
         {
-            Width = (uint)this.WidthNumberPicker.Value,
-            Height = (uint)this.HeighNumberPicker.Value
-        };
+            get => new BitmapSize()
+            {
+                Width = (uint)this.WidthNumberPicker.Value,
+                Height = (uint)this.HeighNumberPicker.Value
+            };
+            set
+            {
+                this.WidthNumberPicker.Value = (int)value.Width;
+                this.HeighNumberPicker.Value = (int)value.Height;
+            }
+        }
 
         //@Construct
         public SizePicker()

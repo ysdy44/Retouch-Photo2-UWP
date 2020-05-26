@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
 
-namespace Retouch_Photo2.Adjustments
+namespace Retouch_Photo2.Filters
 {
     /// <summary>
     /// Provide constant and static methods for XElement.
     /// </summary>
     public static partial class XML
     {
-
+        
         /// <summary>
         /// Saves the entire <see cref="Filter"/> to a XElement.
         /// </summary>
@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Adjustments
             (
                 from adjustment
                 in filter.Adjustments
-                select XML.SaveIAdjustment("Adjustment", adjustment)
+                select Retouch_Photo2.Adjustments.XML.SaveIAdjustment("Adjustment", adjustment)
             );
 
             return element;
@@ -44,7 +44,7 @@ namespace Retouch_Photo2.Adjustments
             (
                 from adjustment
                 in element.Elements()
-                select XML.LoadIAdjustment(adjustment)
+                select Retouch_Photo2.Adjustments.XML.LoadIAdjustment(adjustment)
             ).ToList();
 
             return filter;

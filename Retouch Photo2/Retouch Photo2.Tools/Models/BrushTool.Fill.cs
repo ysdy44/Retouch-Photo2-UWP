@@ -249,6 +249,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ViewModel.HistoryPush(history);
 
             this.ViewModel.Invalidate();//Invalidate
+            this.ShowControl.Invalidate();
         }
 
         //History
@@ -271,6 +272,7 @@ namespace Retouch_Photo2.Tools.Models
         public void FillStopsChangeDelta(CanvasGradientStop[] array)
         {
             //Selection
+            this.Fill.Stops = (CanvasGradientStop[])array.Clone();
             this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -285,6 +287,8 @@ namespace Retouch_Photo2.Tools.Models
             this.Fill.Stops = (CanvasGradientStop[])array.Clone();
 
             //Selection
+            this.ShowControl.Invalidate();
+            this.Fill.Stops = (CanvasGradientStop[])array.Clone();
             this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;

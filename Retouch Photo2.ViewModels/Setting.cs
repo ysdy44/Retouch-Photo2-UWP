@@ -19,26 +19,26 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> <see cref = "Setting" />'s menu-types. </summary>
         public IList<MenuType> MenuTypes = new List<MenuType>
         {
-               //MenuType.Debug,
+             //MenuType.Debug,
 
-               MenuType.Edit,
-               MenuType.Operate,
+             MenuType.Edit,
+             MenuType.Operate,
 
-               MenuType.Adjustment,
-               MenuType.Effect,
+             MenuType.Adjustment,
+             MenuType.Effect,
 
-               MenuType.Character,
-               //MenuType.Paragraph,
+             MenuType.Character,
+             //MenuType.Paragraph,
 
-               MenuType.Stroke,
-               //MenuType.Style,
+             MenuType.Stroke,
+             //MenuType.Style,
 
-               //MenuType.History,
-               MenuType.Transformer,
+             //MenuType.History,
+             MenuType.Transformer,
 
-               //MenuType.Layer,
-               MenuType.Color,
-               //MenuType.Keyboard,
+             //MenuType.Layer,
+             MenuType.Color,
+             //MenuType.Keyboard,
         };
 
     }

@@ -3,6 +3,8 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Adjustments;
+using Retouch_Photo2.Filters;
+using Retouch_Photo2.Styles;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
@@ -63,7 +65,7 @@ namespace Retouch_Photo2.Layers
         public bool IsRefactoringTransformer { get; set; }
         public virtual Transformer GetActualTransformer(Layerage layerage) => this.Transform.GetActualTransformer();
 
-        public Retouch_Photo2.Brushs.Style Style { get; set; } = new Retouch_Photo2.Brushs.Style();
+        public Retouch_Photo2.Styles.Style Style { get; set; } = new Retouch_Photo2.Styles.Style();
         public Transform Transform { get; set; } = new Transform();
         public Effect Effect { get; set; } = new Effect();
         public Filter Filter { get; set; } = new Filter();

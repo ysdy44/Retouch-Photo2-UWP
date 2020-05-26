@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
 
-namespace Retouch_Photo2.Adjustments
+namespace Retouch_Photo2.Filters
 {
     /// <summary>
     /// Provide constant and static methods for XElement.

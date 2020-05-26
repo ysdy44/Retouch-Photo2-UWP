@@ -3,6 +3,8 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Adjustments;
+using Retouch_Photo2.Filters;
+using Retouch_Photo2.Styles;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Effects;
 using System.Collections.Generic;
@@ -78,7 +80,7 @@ namespace Retouch_Photo2.Layers
         Transformer GetActualTransformer(Layerage layerage);
 
         /// <summary> Gets or sets ILayer's style. </summary>
-        Retouch_Photo2.Brushs.Style Style { get; set; }
+        Retouch_Photo2.Styles.Style Style { get; set; }
         /// <summary> Gets or sets ILayer's transform. </summary>
         Transform Transform { get; set; }
         /// <summary> Gets or sets ILayer's effect. </summary>

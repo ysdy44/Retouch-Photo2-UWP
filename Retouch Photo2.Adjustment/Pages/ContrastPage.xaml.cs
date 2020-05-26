@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.Contrast = (float)(value / 100);
-                Filter.Invalidate?.Invoke();
+                AdjustmentBase.Invalidate?.Invoke();
             };
         }
 

@@ -2,6 +2,8 @@
 using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Adjustments.Pages;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Filters;
+using Retouch_Photo2.Styles;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -142,7 +144,7 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructStrings();
             this.ConstructMenu();
 
-            Filter.Invalidate += () => this.ViewModel.Invalidate();
+            AdjustmentBase.Invalidate += () => this.ViewModel.Invalidate();
             this.ConstructAdjustmentPageListView();
             this.ConstructFilterListView();
 

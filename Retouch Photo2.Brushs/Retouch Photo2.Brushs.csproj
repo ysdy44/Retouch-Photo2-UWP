@@ -106,6 +106,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BrushExtensions.cs" />
     <Compile Include="Models\BrushBase.SaveLoad.cs" />
     <Compile Include="Models\BrushBase.TypeChange.cs" />
     <Compile Include="Models\BrushBase.Construct.cs" />
@@ -160,31 +161,6 @@
     </Compile>
     <Compile Include="IBrush.cs" />
     <Compile Include="Models\BrushBase.cs" />
-    <Compile Include="Retouch Photo2.Styles\Icon.xaml.cs">
-      <DependentUpon>Icon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Styles\ShowControl.xaml.cs">
-      <DependentUpon>ShowControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Strokes\CapSegmented.xaml.cs">
-      <DependentUpon>CapSegmented.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Strokes\DashSegmented.xaml.cs">
-      <DependentUpon>DashSegmented.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Strokes\Icon.xaml.cs">
-      <DependentUpon>Icon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Strokes\JoinSegmented.xaml.cs">
-      <DependentUpon>JoinSegmented.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Strokes\ShowControl.xaml.cs">
-      <DependentUpon>ShowControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Strokes\XMLs\XML.DashFactory.cs" />
-    <Compile Include="Retouch Photo2.Strokes\XMLs\XML.CapFactory.cs" />
-    <Compile Include="Retouch Photo2.Strokes\XMLs\XML.JoinFactory.cs" />
-    <Compile Include="Retouch Photo2.Strokes\XMLs\XML.StrokeStyle.cs" />
     <Compile Include="ShowControl.xaml.cs">
       <DependentUpon>ShowControl.xaml</DependentUpon>
     </Compile>
@@ -199,13 +175,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StopsPickers\StopsManager.cs" />
     <Compile Include="StopsPickers\StopsSize.cs" />
-    <Compile Include="StyleExtensions.cs" />
-    <Compile Include="Style.cs" />
     <Compile Include="XMLs\XML.GradientStop.cs" />
     <Compile Include="XMLs\XML.IBrush.cs" />
     <Compile Include="XMLs\XML.BrushTypeFactory.cs" />
     <Compile Include="XMLs\XML.ExtendFactory.cs" />
-    <Compile Include="XMLs\XML.Style.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Brushs.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -276,34 +249,6 @@
     <Page Include="FillOrStrokes\FillOrStrokeIcons\FillIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Styles\Icon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Styles\ShowControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Strokes\CapSegmented.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Strokes\DashSegmented.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Strokes\Icon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Strokes\JoinSegmented.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Strokes\ShowControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="ShowControl.xaml">
       <SubType>Designer</SubType>

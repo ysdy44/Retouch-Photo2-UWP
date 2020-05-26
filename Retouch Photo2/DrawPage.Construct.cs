@@ -89,10 +89,12 @@ namespace Retouch_Photo2
         }
         private void ShowSetupDialog()
         {
-            float width = this.ViewModel.CanvasTransformer.Width;
-            float height = this.ViewModel.CanvasTransformer.Height;
-            this.SetupSizePicker.Width = width;
-            this.SetupSizePicker.Height = height;
+            BitmapSize size = new BitmapSize
+            {
+                Width = (uint)this.ViewModel.CanvasTransformer.Width,
+                Height = (uint)this.ViewModel.CanvasTransformer.Height,
+            };
+            this.SetupSizePicker.Size = size;
 
             this.SetupDialog.Show();
         }

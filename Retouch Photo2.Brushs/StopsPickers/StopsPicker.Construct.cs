@@ -88,6 +88,7 @@ namespace Retouch_Photo2.Brushs
                         CanvasGradientStop stop = this.Manager.Stops[i];
                         this.StopChanged(stop.Color, (int)(stop.Position * 100), true);//Delegate
                         this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
+                        this.CanvasControl.Invalidate();
                         return;
                     }
                 }
@@ -99,6 +100,7 @@ namespace Retouch_Photo2.Brushs
                     this.Manager.IsLeft = true;
                     this.StopChanged(this.Manager.LeftColor, 0, false);//Delegate
                     this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
+                    this.CanvasControl.Invalidate();
                     return;
                 }
 
@@ -109,6 +111,7 @@ namespace Retouch_Photo2.Brushs
                     this.Manager.IsRight = true;
                     this.StopChanged(this.Manager.RightColor, 100, false);//Delegate
                     this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
+                    this.CanvasControl.Invalidate();
                     return;
                 }
 
@@ -120,12 +123,12 @@ namespace Retouch_Photo2.Brushs
                 this.Manager.Stops.Add(addStop);
                 this.Manager.Index = this.Manager.Count - 1;
 
-                CanvasGradientStop[]
-                    array = this.Manager.GenerateArrayFromDate();
+                CanvasGradientStop[] array = this.Manager.GenerateArrayFromDate();
                 this.SetArray(array);
 
                 this.StopChanged(addStop.Color, (int)(addStop.Position * 100), true);//Delegate
                 this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
+                this.CanvasControl.Invalidate();
                 return;
             };
             this.CanvasOperator.Single_Delta += (point) =>
@@ -138,8 +141,6 @@ namespace Retouch_Photo2.Brushs
                 float offset = this.Size.PositionToOffset(point.X);
                 this.SetOffset(offset);
 
-                this.OffsetChanged(offset);
-
                 this.CanvasControl.Invalidate();
                 this.StopsChangeDelta?.Invoke(this, this.array);//Delegate
             };
@@ -147,8 +148,26 @@ namespace Retouch_Photo2.Brushs
             {
                 if (this.array == null) return;
 
-                this.CanvasControl.Invalidate();
+                if (this.Manager.IsLeft)
+                {
+                    Color color = this.Manager.LeftColor;
+                    this.StopChanged(color, 0, false);//Delegate
+                }
+                else if (this.Manager.IsRight)
+                {
+                    Color color = this.Manager.RightColor;
+                    this.StopChanged(color, 1, false);//Delegate
+                }
+                else
+                {
+                    int i = this.Manager.Index;
+                    CanvasGradientStop stop = this.Manager.Stops[i];
+                    this.StopChanged(stop.Color, (int)(stop.Position * 100), true);//Delegate
+                    this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
+                }
+
                 this.StopsChangeCompleted?.Invoke(this, this.array);//Delegate
+                this.CanvasControl.Invalidate();
             };
         }
 
@@ -165,8 +184,8 @@ namespace Retouch_Photo2.Brushs
 
                 this.array = this.Manager.GenerateArrayFromDate();
 
-                this.CanvasControl.Invalidate();
                 this.StopsChanged?.Invoke(this, this.array);//Delegate
+                this.CanvasControl.Invalidate();
             };
 
             // Reserve all stops. 

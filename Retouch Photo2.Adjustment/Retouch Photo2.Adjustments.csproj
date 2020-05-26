@@ -106,9 +106,8 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="FilterCategory.cs" />
+    <Compile Include="AdjustmentBase.cs" />
     <Compile Include="IAdjustment.cs" />
-    <Compile Include="Filter.cs" />
     <Compile Include="AdjustmentType.cs" />
     <Compile Include="IAdjustmentPage.cs" />
     <Compile Include="Icons\BrightnessIcon.xaml.cs">
@@ -189,7 +188,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMLs\XML.AdjustmentFactory.cs" />
-    <Compile Include="XMLs\XML.Filter.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Adjustment.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -297,10 +295,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="XMLs\XML.FilterCategory.cs" />
-    <Compile Include="XMLs\XML.FilterCategorys.cs" />
     <Compile Include="XMLs\XML.IAdjustment.cs" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

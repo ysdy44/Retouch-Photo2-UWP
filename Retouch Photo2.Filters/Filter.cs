@@ -1,21 +1,19 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Adjustments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Retouch_Photo2.Adjustments
+namespace Retouch_Photo2.Filters
 {
     /// <summary> 
     /// <see cref = "IAdjustment" />'s. 
     /// </summary>
     public class Filter
     {
-        //@Static
         /// <summary>
-        /// Indicates that the contents of the CanvasControl need to be redrawn.
+        /// Name
         /// </summary>
-        public static Action Invalidate;
-
         public string Name { get; set; } = string.Empty;
 
         /// <summary>

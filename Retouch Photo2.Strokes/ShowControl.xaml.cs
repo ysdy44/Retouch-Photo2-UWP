@@ -1,8 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Stroke;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Strokes
 {

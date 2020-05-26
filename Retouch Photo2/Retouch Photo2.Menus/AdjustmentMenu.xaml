@@ -5,8 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:adjustments="using:Retouch_Photo2.Adjustments"
-    xmlns:menus="using:Retouch_Photo2.Menus"
     xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:filters="using:Retouch_Photo2.Filters"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
@@ -18,6 +18,15 @@
         <!--Flyout-->
         <Flyout x:Name="AdjustmentPageFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ListView x:Name="AdjustmentPageListView" Width="190" MaxHeight="400" SelectionMode="None" IsItemClickEnabled="True">
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Background" Value="{ThemeResource AppBackground}" />
+                        <Setter Property="Margin" Value="0,1" />
+                        <Setter Property="Height" Value="36" />
+                    </Style>
+                </ListView.ItemContainerStyle> 
+
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="adjustments:IAdjustmentPage">
                         <Grid>
@@ -30,36 +39,35 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                
             </ListView>
         </Flyout>
 
         <!--DataTemplate-->
         <DataTemplate x:Key="DataTemplate" x:DataType="adjustments:IAdjustment">
-            <Border Margin="0,1" Height="36" Background="{ThemeResource AppBackground}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
 
-                    <!--Text-->
-                    <TextBlock Text="{x:Bind Text}" Margin="12,0" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                <!--Text-->
+                <TextBlock Text="{x:Bind Text}" Margin="12,0" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
 
-                    <!--Edit-->
-                    <Button x:Name="EditButton" Grid.Column="1" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                <!--Edit-->
+                <Button x:Name="EditButton" Grid.Column="1" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                    Visibility="{x:Bind PageVisibility}" Tapped="EditButton_Tapped">
-                        <FontIcon FontSize="16" Glyph="&#xE104;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
-                    </Button>
+                    <FontIcon FontSize="16" Glyph="&#xE104;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                </Button>
 
-                    <!--Remove-->
-                    <Button x:Name="RemoveButton" Grid.Column="2" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                <!--Remove-->
+                <Button x:Name="RemoveButton" Grid.Column="2" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                            Tapped="RemoveButton_Tapped">
-                        <FontIcon FontSize="14" Glyph="&#xE8BB;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
-                    </Button>
+                    <FontIcon FontSize="14" Glyph="&#xE8BB;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                </Button>
 
-                </Grid>
-            </Border>
+            </Grid>
         </DataTemplate>
 
     </UserControl.Resources>
@@ -165,6 +173,7 @@
                 </Border>
 
                 <ListView x:Name="FiltersListView" Visibility="Collapsed" SelectionMode="None" IsItemClickEnabled="True">
+                 
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Background" Value="{ThemeResource AppForeground}" />
@@ -176,11 +185,13 @@
                             <Setter Property="VerticalAlignment" Value="Stretch" />
                         </Style>
                     </ListView.ItemContainerStyle>
+                    
                     <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="adjustments:Filter">
+                        <DataTemplate x:DataType="filters:Filter">
                             <TextBlock Text="{x:Bind Name}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+                    
                 </ListView>
 
             </Grid>

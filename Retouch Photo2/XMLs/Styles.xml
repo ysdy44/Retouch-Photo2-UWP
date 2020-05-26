@@ -1,6 +1,122 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <Root>
 
-  
+  <StyleCategory Name="Default">
+
+
+    <Style Name="Magenta">
+      <IsFollowTransform>true</IsFollowTransform>
+      <Fill Type="LinearGradient">
+        <Stops>
+          <Stop Position="0">
+            <Color A="255" R="254" G="115" B="255" />
+          </Stop>
+          <Stop Position="0.5">
+            <Color A="255" R="93" G="191" B="230" />
+          </Stop>
+          <Stop Position="1">
+            <Color A="255" R="3" G="234" B="216" />
+          </Stop>
+        </Stops>
+        <Extend>Clamp</Extend>
+        <Center X="0" Y="-1" />
+        <XPoint X="0" Y="0" />
+        <YPoint X="0" Y="1" />
+      </Fill>
+      <Stroke Type="None" />
+      <StrokeWidth>0</StrokeWidth>
+      <StrokeStyle DashStyle="Solid" DashCap="Square" StartCap="Flat" EndCap="Flat" DashOffset="0" MiterLimit="10" LineJoin="Miter" />
+    </Style>
+
+
+    <Style Name="Green">
+      <IsFollowTransform>true</IsFollowTransform>
+      <Fill Type="LinearGradient">
+        <Stops>
+          <Stop Position="0">
+            <Color A="255" R="29" G="71" B="181" />
+          </Stop>
+          <Stop Position="0.5">
+            <Color A="255" R="143" G="215" B="247" />
+          </Stop>
+          <Stop Position="1">
+            <Color A="255" R="231" G="178" B="112" />
+          </Stop>
+        </Stops>
+        <Extend>Clamp</Extend>
+        <Center X="0" Y="-1" />
+        <XPoint X="0" Y="0" />
+        <YPoint X="0" Y="1" />
+      </Fill>
+      <Stroke Type="None" />
+      <StrokeWidth>0</StrokeWidth>
+      <StrokeStyle DashStyle="Solid" DashCap="Square" StartCap="Flat" EndCap="Flat" DashOffset="0" MiterLimit="10" LineJoin="Miter" />
+    </Style>
+
+
+    <Style Name="Purple">
+      <IsFollowTransform>true</IsFollowTransform>
+      <Fill Type="LinearGradient">
+        <Stops>
+          <Stop Position="0">
+            <Color A="255" R="235" G="202" B="135" />
+          </Stop>
+          <Stop Position="0.5">
+            <Color A="255" R="235" G="97" B="175" />
+          </Stop>
+          <Stop Position="1">
+            <Color A="255" R="202" G="56" B="167" />
+          </Stop>
+        </Stops>
+        <Extend>Clamp</Extend>
+        <Center X="0" Y="-1" />
+        <XPoint X="0" Y="0" />
+        <YPoint X="0" Y="1" />
+      </Fill>
+      <Stroke Type="None" />
+      <StrokeWidth>0</StrokeWidth>
+      <StrokeStyle DashStyle="Solid" DashCap="Square" StartCap="Flat" EndCap="Flat" DashOffset="0" MiterLimit="10" LineJoin="Miter" />
+    </Style>
+
+    
+    
+
+    <Style Name="Dotted">
+      <Fill Type="Color">
+        <Color A="126" R="0" G="44" B="255" />
+      </Fill>
+      <Stroke Type="Color">
+        <Color A="255" R="0" G="57" B="133" />
+      </Stroke>
+      <StrokeWidth>12</StrokeWidth>
+      <StrokeStyle DashStyle="Dash" DashCap="Round" StartCap="Round" EndCap="Round" DashOffset="3.29633474" MiterLimit="10" LineJoin="Miter" />
+    </Style>
+    
+
+    <Style Name="Rect">
+      <IsFollowTransform>true</IsFollowTransform>
+      <Fill Type="Color">
+        <Color A="255" R="255" G="195" B="54" />
+      </Fill>
+      <Stroke Type="Color">
+        <Color A="255" R="153" G="101" B="13" />
+      </Stroke>
+      <StrokeWidth>91.40479</StrokeWidth>
+      <StrokeStyle DashStyle="Solid" DashCap="Triangle" StartCap="Triangle" EndCap="Triangle" DashOffset="3.29633474" MiterLimit="10" LineJoin="Bevel" />
+    </Style>
+    
+
+    <Style Name="Border">
+      <IsFollowTransform>true</IsFollowTransform>
+      <Fill Type="None" />
+      <Stroke Type="Color">
+        <Color A="255" R="239" G="77" B="216" />
+      </Stroke>
+      <StrokeWidth>40</StrokeWidth>
+      <StrokeStyle DashStyle="Solid" DashCap="Square" StartCap="Flat" EndCap="Flat" DashOffset="0" MiterLimit="10" LineJoin="Miter" />
+    </Style>
+
+    
+  </StyleCategory>
 
 </Root>

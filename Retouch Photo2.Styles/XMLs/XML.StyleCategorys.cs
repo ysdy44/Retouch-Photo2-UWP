@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Retouch_Photo2.Adjustments
+namespace Retouch_Photo2.Styles
 {
     /// <summary>
     /// Provide constant and static methods for XElement.
@@ -10,11 +10,11 @@ namespace Retouch_Photo2.Adjustments
     public static partial class XML
     {
         /// <summary>
-        /// Saves the entire <see cref="Filter"/>Categorys to a XDocument.
+        /// Saves the entire <see cref="Style"/>Categorys to a XDocument.
         /// </summary>
-        /// <param name="filters"> The source data. </param>
+        /// <param name="Styles"> The source data. </param>
         /// <returns> The saved XDocument. </returns>
-        public static XDocument SaveFilterCategorys(IEnumerable<FilterCategory> filterCategorys)
+        public static XDocument SaveStyleCategorys(IEnumerable<StyleCategory> StyleCategorys)
         {
             return new XDocument
             (
@@ -23,27 +23,27 @@ namespace Retouch_Photo2.Adjustments
                 new XElement
                 (
                     "Root",
-                     from filterCategory
-                     in filterCategorys
-                     select XML.SaveFilterCategory("FilterCategory", filterCategory)
+                     from StyleCategory
+                     in StyleCategorys
+                     select XML.SaveStyleCategory("StyleCategory", StyleCategory)
                 )
             );
         }
 
         /// <summary>
-        ///  Loads a <see cref="Filter"/>Categorys from an XElement.
+        ///  Loads a <see cref="Style"/>Categorys from an XElement.
         /// </summary>
         /// <param name="element"> The source XElement. </param>
-        /// <returns> The loaded <see cref="Filter"/>s. </returns>
-        public static IEnumerable<FilterCategory> LoadFilterCategorys(XDocument document)
+        /// <returns> The loaded <see cref="Style"/>s. </returns>
+        public static IEnumerable<StyleCategory> LoadStyleCategorys(XDocument document)
         {
             XElement root = document.Element("Root");
 
             return
             (
-                from filterCategory
+                from StyleCategory
                 in root.Elements()
-                select XML.LoadFilterCategory(filterCategory)
+                select XML.LoadStyleCategory(StyleCategory)
             );
         }
         

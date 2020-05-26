@@ -7,6 +7,7 @@ using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
+using Retouch_Photo2.Filters;
 using System.Collections.Generic;
 using System.Numerics;
 using Windows.UI.Xaml;

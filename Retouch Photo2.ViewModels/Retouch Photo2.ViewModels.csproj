@@ -115,11 +115,8 @@
     <Compile Include="MethodViewModels\MethodViewModel.Edit.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Selected.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Transform.cs" />
-    <Compile Include="Retouch Photo2.Menus\IMenu.cs" />
-    <Compile Include="Retouch Photo2.Menus\XMLs\XML.MenuTypeFactory.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.Key.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.cs" />
-    <Compile Include="Retouch Photo2.Menus\MenuType.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectionViewModels\SelectionViewModel.cs" />
@@ -176,6 +173,10 @@
       <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
       <Name>Retouch Photo2.Elements</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Filters\Retouch Photo2.Filters.csproj">
+      <Project>{71870425-D0E7-453D-B221-EB740ACAAE74}</Project>
+      <Name>Retouch Photo2.Filters</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Historys\Retouch Photo2.Historys.csproj">
       <Project>{64e6052b-fbb1-489b-9ae3-fb05dc8fbe63}</Project>
       <Name>Retouch Photo2.Historys</Name>
@@ -183,6 +184,18 @@
     <ProjectReference Include="..\Retouch Photo2.Layers\Retouch Photo2.Layers.csproj">
       <Project>{15cbf0a7-0953-49f5-b541-f8bcaab40053}</Project>
       <Name>Retouch Photo2.Layers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Menus\Retouch Photo2.Menus.csproj">
+      <Project>{f8c6dda8-afba-4cae-8f28-e795547eeced}</Project>
+      <Name>Retouch Photo2.Menus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Strokes\Retouch Photo2.Strokes.csproj">
+      <Project>{9ecf765e-1976-4100-8d69-71dde162adab}</Project>
+      <Name>Retouch Photo2.Strokes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Styles\Retouch Photo2.Styles.csproj">
+      <Project>{08675e81-29a5-440b-8dab-0554dc7a9914}</Project>
+      <Name>Retouch Photo2.Styles</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Tools\Retouch Photo2.Tools.csproj">
       <Project>{3f4ae427-651f-4791-a176-678a00a93b1e}</Project>

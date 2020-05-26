@@ -28,13 +28,13 @@ namespace Retouch_Photo2.Adjustments.Pages
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.Temperature = (float)(value / 100);
-                Filter.Invalidate?.Invoke();
+                AdjustmentBase.Invalidate?.Invoke();
             };
             this.TintSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.Tint = (float)(value / 100);
-                Filter.Invalidate?.Invoke();
+                AdjustmentBase.Invalidate?.Invoke();
             };
         }
 

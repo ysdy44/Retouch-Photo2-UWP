@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:styles="using:Retouch_Photo2.Styles"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
@@ -15,28 +16,36 @@
 
 
         <elements:Expander.MainPage>
-            <StackPanel x:Name="StackPanel" MinHeight="165" MaxHeight="300">
-               
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="Button" Style="{StaticResource AccentButtonStyle}">
-                        Layerages
-                    </Button>
-                    <Button x:Name="Button2" Style="{StaticResource AccentButtonStyle}">
-                        Layers
-                    </Button>
-                </StackPanel>
-                
-                    <StackPanel Orientation="Horizontal">
-                        <Button x:Name="Coo" Style="{StaticResource AccentButtonStyle}">
-                        Coo
-                    </Button>
-                    <Button x:Name="Re" Style="{StaticResource AccentButtonStyle}">
-                        Re
-                    </Button>
-                </StackPanel>
-                
-                <ItemsControl x:Name="ItemsControl"/>
-            </StackPanel>
+            <Border Margin="1,2" MinHeight="165" MaxHeight="300">                
+                <GridView x:Name="StylesGridView" SelectionMode="None" IsItemClickEnabled="True" >
+
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Width" Value="70"/>
+                            <Setter Property="Height" Value="70"/>
+                            <Setter Property="Margin" Value="1"/>
+                            <Setter Property="Padding" Value="4,0"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="styles:Style">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="36"/>
+                                </Grid.RowDefinitions>
+                               <styles:ShowControl Style2="{x:Bind}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{x:Bind Name}" Grid.Row="1" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+
+                </GridView>
+            </Border>
         </elements:Expander.MainPage>
 
 

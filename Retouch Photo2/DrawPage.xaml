@@ -11,6 +11,7 @@
     xmlns:elementDrawPages="using:Retouch_Photo2.Elements.DrawPages"
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:transformers="using:FanKit.Transformers"
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
     >
@@ -138,9 +139,22 @@
         <!--Dialog-->
         <elementDialog:DialogBase x:Name="SetupDialog">
             <elementDialog:DialogBase.CenterContent>
-                <elements:SizePicker x:Name="SetupSizePicker"/>
+                <StackPanel>
+                    <elements:SizePicker x:Name="SetupSizePicker"/>
+                    <ContentControl Height="6"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Width="90" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+                         扩张
+                        </Button>
+                        <Button Width="90" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+                            等比例
+                        </Button>
+                    </StackPanel>
+                    <transformers:IndicatorControl Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}"/>
+                </StackPanel>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
+        
         <elementDialog:DialogBase x:Name="ExportDialog">
             <elementDialog:DialogBase.CenterContent>
                 <StackPanel>

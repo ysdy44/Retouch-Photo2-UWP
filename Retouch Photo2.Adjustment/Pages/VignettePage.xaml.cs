@@ -28,13 +28,13 @@ namespace Retouch_Photo2.Adjustments.Pages
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.Amount = (float)(value / 100);
-                Filter.Invalidate?.Invoke();
+                AdjustmentBase.Invalidate?.Invoke();
             };
             this.CurveSlider.ValueChangeDelta += (s, value) =>
             {
                 if (this.Adjustment == null) return;
                 this.Adjustment.Curve = (float)(value / 100);
-                Filter.Invalidate?.Invoke();
+                AdjustmentBase.Invalidate?.Invoke();
             };
             this.ColorBorder.Tapped += (s, e) =>
             {
@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                 if (this.Adjustment == null) return;
 
                 this.Adjustment.Color = value;
-                Filter.Invalidate?.Invoke();
+                AdjustmentBase.Invalidate?.Invoke();
             };
         }
 

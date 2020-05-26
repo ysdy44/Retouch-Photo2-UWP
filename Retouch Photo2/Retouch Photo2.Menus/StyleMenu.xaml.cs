@@ -1,23 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+﻿using FanKit.Transformers;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.ViewModels;
-using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Styles;
+using Retouch_Photo2.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
+using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -35,87 +25,70 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructStrings();
             this.ConstructMenu();
 
-            this.Button.Click += (s, e) =>
+            this.Loaded += async (s, e) =>
             {
-                this.ItemsControl.ItemsSource = sadasd(this.ViewModel.LayerageCollection.RootLayerages,0);
-            };
-            this.Button2.Click += (s, e) =>
-            {
-                this.ItemsControl.ItemsSource = asdsadasdsdsssss();
-            };
-
-
-
-
-            this.Re.Click += (s, e) =>
-            {
-                List<string> sadas = new List<string>();
-
-                if (this.SelectionViewModel.SelectionLayerage != null)
+                if (this.StylesGridView.ItemsSource == null)
                 {
-                    if (this.SelectionViewModel.SelectionLayerage.Id != null)
+                    IEnumerable<StyleCategory> StyleCategorys = await Retouch_Photo2.XML.ConstructStylesFile();
+                    if (StyleCategorys != null)
                     {
-                        ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
-                        string sssss = $"   id:{layer2.Id} {this.SelectionViewModel.SelectionLayerage.Parents == null}";
-
-                        sadas.Add(sssss);
+                        StyleCategory styleCategory = StyleCategorys.FirstOrDefault();
+                        if (styleCategory != null)
+                        {
+                            IEnumerable<Retouch_Photo2.Styles.Style> Styles = styleCategory.Styles;
+                            this.StylesGridView.ItemsSource = Styles.ToList();
+                        }
                     }
                 }
-
-                this.ItemsControl.ItemsSource = sadas;
-             
             };
-            this.Coo.Click += (s, e) =>
-            {
-                List<string> sadas = new List<string>();
 
-                if (this.SelectionViewModel.SelectionLayerages!=null)
+            this.StylesGridView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is Retouch_Photo2.Styles.Style item)
                 {
-                    foreach (var item in this.SelectionViewModel.SelectionLayerages)
+                    //History
+                    LayersPropertyHistory history = new LayersPropertyHistory("Set style");
+
+                    //Selection
+                    Transformer transformer = this.SelectionViewModel.Transformer;
+                    this.SelectionViewModel.SetValue((layerage) =>
                     {
-                        ILayer layer2 = item.Self;
-                        string sssss = $"   id:{layer2.Id} {item.Parents== null}";
+                        ILayer layer = layerage.Self;
 
-                        sadas.Add(sssss);
+                        //History
+                        var previous = layer.Style.Clone();
+                        history.UndoActions.Push(() =>
+                        {
+                            ILayer layer2 = layerage.Self;
+
+                            layer2.Style = previous.Clone();
+                        });
+
+                        {
+                            Transformer transformer2 = layer.Transform.Destination;
+                            Style style2 = item.Clone();
+                            style2.CacheTransform();
+                            style2.DeliverBrushPoints(transformer2);
+                            layer.Style = style2;
+
+                            transformer = transformer2;
+                        }
+                        this.SelectionViewModel.StyleLayerage = layerage;
+                    });
+                    {
+                        Style style = item.Clone();
+                        style.CacheTransform();
+                        style.DeliverBrushPoints(transformer);
+                        this.SelectionViewModel.SetStyle(style);
                     }
-                }
 
-                this.ItemsControl.ItemsSource = sadas;
+                    //History
+                    this.ViewModel.HistoryPush(history);
+
+                    this.ViewModel.Invalidate();//Invalidate
+                }
             };
-        }
-        IEnumerable<Layerage> previous;
 
-        private IEnumerable<string> asdsadasdsdsssss()
-        {
-            foreach (var layer in Layer.Instances)
-            {
-                ILayer layer2 = layer;
-                yield return $"   {layer2.Id}";
-            }
-        }
-
-        private IEnumerable<string> sadasd(IList<Layerage> layers, int depht)
-        {
-
-            foreach (var layer in layers)
-            {
-                ILayer layer2 = layer.Self;
-                string sadas = $"de:{depht}  id:{layer2.Id} {layer2.IsSelected}";
-
-                if (layer.Parents!=null)
-                {
-                    sadas += $"  pa:{layer.Parents.Id}";
-                }
-                foreach (var sss in layer.Children)
-                {
-                    sadas += $"  {sss.Id}";
-                }
-                yield return sadas;
-                foreach (var child in sadasd( layer.Children, depht+1))
-                {
-                    yield return child;
-                }
-            }        
         }
     }
 
@@ -128,7 +101,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this._button.ToolTip.Content =
             this._Expander.Title =
-            this._Expander.CurrentTitle = "Style"; //resource.GetString("/Menus/Style");
+            this._Expander.CurrentTitle = resource.GetString("/Menus/Style");
         }
 
         //Menu

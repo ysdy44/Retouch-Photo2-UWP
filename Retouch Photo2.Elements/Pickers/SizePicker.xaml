@@ -21,6 +21,7 @@
             <RowDefinition Height="6"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="WidthTextBlock" Grid.Row="1" VerticalAlignment="Center">
@@ -30,10 +31,10 @@
             Height
         </TextBlock>
 
-        <hSVColorPickers:NumberPicker x:Name="WidthNumberPicker" Grid.Column="1" Grid.Row="1"
-                        ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hSVColorPickers:NumberPicker x:Name="WidthNumberPicker" Grid.Column="1" Grid.Row="1" 
+                        ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
         <hSVColorPickers:NumberPicker x:Name="HeighNumberPicker" Grid.Column="1" Grid.Row="3"
-                        ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                        ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
        
     </Grid>
 

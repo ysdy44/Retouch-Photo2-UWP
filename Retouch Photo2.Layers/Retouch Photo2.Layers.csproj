@@ -356,6 +356,14 @@
       <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
       <Name>Retouch Photo2.Elements</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Filters\Retouch Photo2.Filters.csproj">
+      <Project>{71870425-D0E7-453D-B221-EB740ACAAE74}</Project>
+      <Name>Retouch Photo2.Filters</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Styles\Retouch Photo2.Styles.csproj">
+      <Project>{08675e81-29a5-440b-8dab-0554dc7a9914}</Project>
+      <Name>Retouch Photo2.Styles</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

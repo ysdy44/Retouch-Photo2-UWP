@@ -1,6 +1,8 @@
 ﻿using Retouch_Photo2.Adjustments;
 using System;
 using System.Collections.Generic;
+using Retouch_Photo2.Filters;
+using Retouch_Photo2.Styles;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -42,7 +44,7 @@ namespace Retouch_Photo2
                 {
                     XDocument document = XDocument.Load(stream);
 
-                    IEnumerable<FilterCategory> source = Retouch_Photo2.Adjustments.XML.LoadFilterCategorys(document);
+                    IEnumerable<FilterCategory> source = Retouch_Photo2.Filters.XML.LoadFilterCategorys(document);
 
                     return source;
                 }
@@ -56,7 +58,7 @@ namespace Retouch_Photo2
         /// <param name="filterCategorys"> The filter categorys. </param>
         public static async Task SaveFiltersFile(IEnumerable<FilterCategory> filterCategorys)
         {
-            XDocument document = Retouch_Photo2.Adjustments.XML.SaveFilterCategorys(filterCategorys);
+            XDocument document = Retouch_Photo2.Filters.XML.SaveFilterCategorys(filterCategorys);
 
             //Save the Setting xml file.      
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Filters.xml", CreationCollisionOption.ReplaceExisting);

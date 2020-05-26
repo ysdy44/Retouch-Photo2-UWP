@@ -11,14 +11,6 @@ namespace Retouch_Photo2.Brushs
     {
         
         /// <summary>
-        ///  Occur when the offset changed.
-        /// </summary>
-        /// <param name="offset"> offset </param>
-        private void OffsetChanged(float offset)
-        {
-            int o = (int)(offset * 100);
-        }
-        /// <summary>
         ///  Occur when the stop changed.
         /// </summary>
         /// <param name="color"> The source stop color. </param>

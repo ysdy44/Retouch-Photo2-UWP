@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Styles;
 using System.ComponentModel;
 using System.Linq;
 using Windows.UI;
@@ -108,7 +109,7 @@ namespace Retouch_Photo2.ViewModels
         private CanvasStrokeStyle strokeStyle = new CanvasStrokeStyle();
 
         /// <summary> Sets style. </summary>  
-        private void SetStyle(Style style)
+        public void SetStyle(Style style)
         {
             if (style == null)
             {
