@@ -19,13 +19,13 @@ namespace Retouch_Photo2.Layers
             XElement element= new XElement
             (
                 elementName,
-                FanKit.Transformers.XML.SaveTransformer("Destination", transform.Destination)
+                FanKit.Transformers.XML.SaveTransformer("Transformer", transform.Transformer)
             );
 
             if (transform.IsCrop)
             {
                 element.Add(new XElement("IsCrop",true));
-                element.Add(FanKit.Transformers.XML.SaveTransformer("CropDestination", transform.CropDestination));
+                element.Add(FanKit.Transformers.XML.SaveTransformer("CropTransformer", transform.CropTransformer));
             }
             else
             {
@@ -44,12 +44,12 @@ namespace Retouch_Photo2.Layers
         {
             Transform transform = new Transform();
 
-            if (element.Element("Destination") is XElement destination) transform.Destination = FanKit.Transformers.XML.LoadTransformer(destination);
+            if (element.Element("Transformer") is XElement Transformer) transform.Transformer = FanKit.Transformers.XML.LoadTransformer(Transformer);
 
             if (element.Element("IsCrop") is XElement isCrop) transform.IsCrop = (bool)isCrop;
             if (transform.IsCrop)
             {
-                if (element.Element("CropDestination") is XElement cropDestination) transform.CropDestination = FanKit.Transformers.XML.LoadTransformer(cropDestination);
+                if (element.Element("CropTransformer") is XElement cropTransformer) transform.CropTransformer = FanKit.Transformers.XML.LoadTransformer(cropTransformer);
             }
 
             return transform;

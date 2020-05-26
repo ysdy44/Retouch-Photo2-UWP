@@ -46,7 +46,22 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.EllipticalGradient:
                 case BrushType.Image:
                     element.Add(new XElement("Extend", this.Extend));
+                    break;
+            }
 
+            
+            switch (this.Type)
+            {
+                case BrushType.LinearGradient:
+                    element.Add(FanKit.Transformers.XML.SaveVector2("StartPoint", this.Center));
+                    element.Add(FanKit.Transformers.XML.SaveVector2("EndPoint", this.YPoint));
+                    break;
+                case BrushType.RadialGradient:
+                    element.Add(FanKit.Transformers.XML.SaveVector2("Center", this.Center));
+                    element.Add(FanKit.Transformers.XML.SaveVector2("Point", this.YPoint));
+                    break;
+                case BrushType.EllipticalGradient:
+                case BrushType.Image:
                     element.Add(FanKit.Transformers.XML.SaveVector2("Center", this.Center));
                     element.Add(FanKit.Transformers.XML.SaveVector2("XPoint", this.XPoint));
                     element.Add(FanKit.Transformers.XML.SaveVector2("YPoint", this.YPoint));
@@ -85,14 +100,28 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.RadialGradient:
                 case BrushType.EllipticalGradient:
                 case BrushType.Image:
-
                     if (element.Element("Extend") is XElement extend) this.Extend = Retouch_Photo2.Brushs.XML.CreateExtend(extend.Value);
+                    break;
+            }
 
+            switch (this.Type)
+            {
+                case BrushType.LinearGradient:
+                    if (element.Element("StartPoint") is XElement startPoint) this.Center = FanKit.Transformers.XML.LoadVector2(startPoint);
+                    if (element.Element("EndPoint") is XElement endPoint) this.YPoint = FanKit.Transformers.XML.LoadVector2(endPoint);
+                    break;
+                case BrushType.RadialGradient:
                     if (element.Element("Center") is XElement center) this.Center = FanKit.Transformers.XML.LoadVector2(center);
+                    if (element.Element("Point") is XElement point) this.YPoint = FanKit.Transformers.XML.LoadVector2(point);
+                    break;
+                case BrushType.EllipticalGradient:
+                case BrushType.Image:
+                    if (element.Element("Center") is XElement center2) this.Center = FanKit.Transformers.XML.LoadVector2(center2);
                     if (element.Element("XPoint") is XElement xPoint) this.XPoint = FanKit.Transformers.XML.LoadVector2(xPoint);
                     if (element.Element("YPoint") is XElement yPoint) this.YPoint = FanKit.Transformers.XML.LoadVector2(yPoint);
                     break;
             }
+
         }
 
     }

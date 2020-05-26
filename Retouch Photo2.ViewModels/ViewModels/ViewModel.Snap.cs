@@ -83,7 +83,7 @@ namespace Retouch_Photo2.ViewModels
             //Parents
             if (firstLayer.Parents != null)
             {
-                Transformer transformer = firstLayer.Parents.Self.Transform.Destination;
+                Transformer transformer = firstLayer.Parents.Self.Transform.Transformer;
                 yield return new TransformerBorder(transformer);
             }
 
@@ -95,7 +95,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (layer.Self.IsSelected == false)
                 {
-                    Transformer transformer = layer.Self.Transform.Destination;
+                    Transformer transformer = layer.Self.Transform.Transformer;
                     yield return new TransformerBorder(transformer);
                 }
             }

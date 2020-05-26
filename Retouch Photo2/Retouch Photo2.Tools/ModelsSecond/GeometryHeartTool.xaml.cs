@@ -74,7 +74,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Content = resource.GetString("/ToolsSecond/GeometryHeart");
+            this._button.Content =
+                this.Title = resource.GetString("/ToolsSecond/GeometryHeart");
             this._button.Style = this.IconSelectedButtonStyle;
 
             this.SpreadTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryHeart_Spread");
@@ -85,6 +86,7 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.GeometryHeart;
+        public string Title { get; set; }
         public FrameworkElement Icon => this._icon;
         public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
 

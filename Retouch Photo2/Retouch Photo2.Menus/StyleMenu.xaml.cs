@@ -65,7 +65,7 @@ namespace Retouch_Photo2.Menus.Models
                         });
 
                         {
-                            Transformer transformer2 = layer.Transform.Destination;
+                            Transformer transformer2 = layer.Transform.Transformer;
                             Style style2 = item.Clone();
                             style2.CacheTransform();
                             style2.DeliverBrushPoints(transformer2);

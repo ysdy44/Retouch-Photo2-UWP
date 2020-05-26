@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Layers
             {
                 if (this.Transform.IsCrop)
                 {
-                    CanvasGeometry geometryCrop = this.Transform.CropDestination.ToRectangle(resourceCreator, canvasToVirtualMatrix);
+                    CanvasGeometry geometryCrop = this.Transform.CropTransformer.ToRectangle(resourceCreator, canvasToVirtualMatrix);
 
                     using (drawingSession.CreateLayer(1, geometryCrop))
                     {

@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using System.ComponentModel;
 using System.Numerics;
+using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Xaml;
 
@@ -29,39 +30,46 @@ namespace Retouch_Photo2.ViewModels
         private bool canvasHitTestVisible = true;
                
 
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.Text" />. </summary>
-        public string Text
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.TipText" />. </summary>
+        public string TipText
         {
-            get => this.text;
+            get => this.tipText;
             set
             {
-                this.text = value;
-                this.OnPropertyChanged(nameof(this.Text));//Notify 
+                this.tipText = value;
+                this.OnPropertyChanged(nameof(this.TipText));//Notify 
             }
         }
-        private string text = string.Empty;
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.TextVisibility" />. </summary>
-        public Visibility TextVisibility
+        private string tipText = string.Empty;
+        /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.TipTextVisibility" />. </summary>
+        public Visibility TipTextVisibility
         {
-            get => this.textVisibility;
+            get => this.tipTextVisibility;
             set
             {
-                this.textVisibility = value;
-                this.OnPropertyChanged(nameof(this.TextVisibility));//Notify 
+                this.tipTextVisibility = value;
+                this.OnPropertyChanged(nameof(this.TipTextVisibility));//Notify 
             }
         }
-        private Visibility textVisibility = Visibility.Collapsed;
+        private Visibility tipTextVisibility = Visibility.Collapsed;
 
-        public void SetText()
+        public async void TipTextBegin(string text)
         {
-            if (this.Text.Length > 44) this.Text = string.Empty;
-            else this.Text += "O";
+            this.TipText = text;
+            this.TipTextVisibility = Visibility.Visible;
+            await Task.Delay(2000);
+            this.TipTextVisibility = Visibility.Collapsed;
+        }
+        public void SetTipText()
+        {
+            if (this.TipText.Length > 44) this.TipText = string.Empty;
+            else this.TipText += "O";
         }
 
 
         int _width;
         int _height;
-        public void SetTextWidthHeight(Transformer transformer)
+        public void SetTipTextWidthHeight(Transformer transformer)
         {
             Vector2 horizontal = transformer.Horizontal;
             Vector2 vertical = transformer.Vertical;
@@ -73,13 +81,13 @@ namespace Retouch_Photo2.ViewModels
             {
                 this._width = width;
                 this._height = height;
-                this.Text = $"W: {width} px  H:{height} px";
+                this.TipText = $"W: {width} px  H:{height} px";
             }
         }
 
         int _x;
         int _y;
-        public void SetTextPosition()
+        public void SetTipTextPosition()
         {
             int x = (int)this.CanvasTransformer.Position.X;
             int y = (int)this.CanvasTransformer.Position.X;
@@ -88,19 +96,19 @@ namespace Retouch_Photo2.ViewModels
             {
                 this._x = x;
                 this._y = y;
-                this.Text = $"X: {x} px  Y:{y} px";
+                this.TipText = $"X: {x} px  Y:{y} px";
             }
         }
 
         int _percent;
-        public void SetTextScale()
+        public void SetTipTextScale()
         {
             int percent = (int)(this.CanvasTransformer.Scale * 100);
 
             if (this._percent != percent)
             {
                 this._percent = percent;
-                this.Text = $"{percent} %";
+                this.TipText = $"{percent} %";
             }
         }
         

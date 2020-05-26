@@ -75,7 +75,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Content = resource.GetString("/ToolsSecond/GeometryPentagon");
+            this._button.Content = 
+                this.Title = resource.GetString("/ToolsSecond/GeometryPentagon");
             this._button.Style = this.IconSelectedButtonStyle;
 
             this.PointsTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryPentagon_Points");
@@ -86,6 +87,7 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.GeometryPentagon;
+        public string Title { get; set; }
         public FrameworkElement Icon => this._icon;
         public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
 

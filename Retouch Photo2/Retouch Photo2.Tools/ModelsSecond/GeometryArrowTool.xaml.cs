@@ -97,7 +97,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Content = resource.GetString("/ToolsSecond/GeometryArrow");
+            this._button.Content = 
+                this.Title = resource.GetString("/ToolsSecond/GeometryArrow");
             this._button.Style = this.IconSelectedButtonStyle;
 
             this.ValueTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryArrow_Value");
@@ -111,7 +112,8 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryArrow;
+        public ToolType Type => ToolType.GeometryArrow; 
+        public string Title { get; set; }
         public FrameworkElement Icon => this._icon;
         public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
 

@@ -60,13 +60,13 @@ namespace Retouch_Photo2.Layers.Models
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            Transformer transformer = base.Transform.Destination;
+            Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateHeart(resourceCreator, transformer, canvasToVirtualMatrix, this.Spread);
         }
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
         {
-            Transformer transformer = base.Transform.Destination;
+            Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.ConvertToCurvesFromHeart(transformer, this.Spread);
         }

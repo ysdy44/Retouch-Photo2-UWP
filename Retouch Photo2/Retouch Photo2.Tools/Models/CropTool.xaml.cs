@@ -84,18 +84,18 @@ namespace Retouch_Photo2.Tools.Models
                     if (layer.Transform.IsCrop)
                     {
                         //History
-                        var previous1 = layer.Transform.Destination;
+                        var previous1 = layer.Transform.Transformer;
                         var previous2 = layer.Transform.IsCrop;
                         history.UndoActions.Push(() =>
                         {
                             ILayer layer2 = layerage.Self;
 
-                            layer2.Transform.Destination = previous1;
+                            layer2.Transform.Transformer = previous1;
                             layer2.Transform.IsCrop = previous2;
                         });
 
-                        Transformer cropTransformer = layer.Transform.CropDestination;
-                        layer.Transform.Destination = cropTransformer;
+                        Transformer cropTransformer = layer.Transform.CropTransformer;
+                        layer.Transform.Transformer = cropTransformer;
                         layer.Transform.IsCrop = false;
                     }
                 });
@@ -122,7 +122,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = resource.GetString("/Tools/Crop");
+            this._button.ToolTip.Content =
+                this.Title = resource.GetString("/Tools/Crop");
 
             this.ResetTextBlock.Text = resource.GetString("/Tools/Crop_Reset");//Reset Crop
             this.FitTextBlock.Text = resource.GetString("/Tools/Crop_Fit");//Fit Crop
@@ -131,6 +132,7 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.Crop;
+        public string Title { get; set; }
         public FrameworkElement Icon => this._icon;
         public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
 
@@ -164,7 +166,7 @@ namespace Retouch_Photo2.Tools.Models
             }
 
             //Snap
-            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(firstLayer.Transform.Destination);
+            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(firstLayer.Transform.Transformer);
 
 
             this.Layerage = firstLayerage;
@@ -257,7 +259,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void _started(ILayer firstLayer)
         {
-            firstLayer.Transform.CropDestination = firstLayer.Transform.Destination;
+            firstLayer.Transform.CropTransformer = firstLayer.Transform.Transformer;
 
             //History
             LayersPropertyHistory history = new LayersPropertyHistory("Set transform is crop");
@@ -283,8 +285,8 @@ namespace Retouch_Photo2.Tools.Models
             if (this.IsMove == false)//Transformer
             {
                 //Transformer
-                Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, layer.Transform.StartingCropDestination, this.IsRatio, this.IsCenter, this.IsStepFrequency);
-                layer.Transform.CropDestination = transformer;
+                Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, layer.Transform.StartingCropTransformer, this.IsRatio, this.IsCenter, this.IsStepFrequency);
+                layer.Transform.CropTransformer = transformer;
             }
             else//Move
             {
@@ -301,12 +303,12 @@ namespace Retouch_Photo2.Tools.Models
             LayersPropertyHistory history = new LayersPropertyHistory("Set transform crop");
 
             //History
-            var previous = layer.Transform.StartingCropDestination;
+            var previous = layer.Transform.StartingCropTransformer;
             history.UndoActions.Push(() =>
             {
                 ILayer layer2 = this.Layerage.Self;
 
-                layer2.Transform.CropDestination = previous;
+                layer2.Transform.CropTransformer = previous;
             });
 
             //History
@@ -322,15 +324,15 @@ namespace Retouch_Photo2.Tools.Models
             {
                 if (layer.Transform.IsCrop)
                 {
-                    Transformer transformer = layer.Transform.Destination;
+                    Transformer transformer = layer.Transform.Transformer;
                     drawingSession.DrawBound(transformer, matrix, this.ViewModel.AccentColor);
 
-                    Transformer cropTransformer = layer.Transform.CropDestination;
+                    Transformer cropTransformer = layer.Transform.CropTransformer;
                     drawingSession.DrawCrop(cropTransformer, matrix, Colors.BlueViolet);
                 }
                 else
                 {
-                    Transformer transformer = layer.Transform.Destination;
+                    Transformer transformer = layer.Transform.Transformer;
                     drawingSession.DrawCrop(transformer, matrix, this.ViewModel.AccentColor);
                 }
             }

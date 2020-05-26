@@ -101,7 +101,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             if (this.bitmap == null) return null;
 
-            Matrix3x2 matrix2 = Transformer.FindHomography(this.transformerRect, base.Transform.Destination);
+            Matrix3x2 matrix2 = Transformer.FindHomography(this.transformerRect, base.Transform.Transformer);
             Transform2DEffect effect = new Transform2DEffect
             {
                 TransformMatrix = matrix2 * canvasToVirtualMatrix,
@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Layers.Models
                 CanvasCommandList command = new CanvasCommandList(resourceCreator);
                 using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
                 {
-                    CanvasGeometry geometryCrop = this.Transform.CropDestination.ToRectangle(resourceCreator, canvasToVirtualMatrix);
+                    CanvasGeometry geometryCrop = this.Transform.CropTransformer.ToRectangle(resourceCreator, canvasToVirtualMatrix);
 
                     using (drawingSession.CreateLayer(1, geometryCrop))
                     {
@@ -129,13 +129,13 @@ namespace Retouch_Photo2.Layers.Models
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            Transformer transformer = base.Transform.Destination;
+            Transformer transformer = base.Transform.Transformer;
 
             return transformer.ToRectangle(resourceCreator, canvasToVirtualMatrix);
         }
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
         {
-            Transformer transformer = base.Transform.Destination;
+            Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.ConvertToCurvesFromRectangle(transformer);
         }
@@ -156,7 +156,7 @@ namespace Retouch_Photo2.Layers.Models
         public IBrush ToBrush()
         {
             Photocopier photocopier = this.Photocopier;
-            Transformer transformer = this.Transform.Destination;
+            Transformer transformer = this.Transform.Transformer;
             return BrushBase.ImageBrush(transformer, photocopier);
         }
 

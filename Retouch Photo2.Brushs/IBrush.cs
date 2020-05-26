@@ -27,11 +27,11 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets of sets the photocopier. </summary>
         Photocopier Photocopier { get; set; }
 
-        /// <summary> Gets of sets the center point. </summary>
+        /// <summary> Gets of sets the center point. (LinearGradientBrush.StartPoint) (RadialGradientBrush.Center) </summary>
         Vector2 Center { get; set; }
         /// <summary> Gets of sets the x-point. </summary>
         Vector2 XPoint { get; set; }
-        /// <summary> Gets of sets the y-point. </summary>
+        /// <summary> Gets of sets the y-point. (LinearGradientBrush.EndPoint) (RadialGradientBrush.Point) </summary>
         Vector2 YPoint { get; set; }
         
 

@@ -12,6 +12,7 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@Content
         public ToolType Type => ToolType.None;
+        public string Title { get; set; }
         public FrameworkElement Icon => null;
         public bool IsSelected { get; set; }
 

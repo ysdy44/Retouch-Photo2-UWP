@@ -117,7 +117,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Content = resource.GetString("/ToolsSecond/GeometryCog");
+            this._button.Content = 
+                this.Title = resource.GetString("/ToolsSecond/GeometryCog");
             this._button.Style = this.IconSelectedButtonStyle;
 
             this.CountTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_Count");
@@ -131,6 +132,7 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.GeometryCog;
+        public string Title { get; set; }
         public FrameworkElement Icon => this._icon;
         public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
 

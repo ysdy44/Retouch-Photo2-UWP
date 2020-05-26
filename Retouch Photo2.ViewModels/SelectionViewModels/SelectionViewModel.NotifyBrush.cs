@@ -213,7 +213,7 @@ namespace Retouch_Photo2.ViewModels
                     ILayer layer = this.geometryStyleLayerage.Self;
 
                     //CacheBrush
-                    Transformer transformer = layer.Transform.Destination;
+                    Transformer transformer = layer.Transform.Transformer;
                     Style style = layer.Style.Clone();
                     style.OneBrushPoints(transformer);
                     return style;
@@ -242,7 +242,7 @@ namespace Retouch_Photo2.ViewModels
                     ILayer layer = this.curveStyleLayerage.Self;
 
                     //CacheBrush
-                    Transformer transformer = layer.Transform.Destination;
+                    Transformer transformer = layer.Transform.Transformer;
                     Style style = layer.Style.Clone();
                     style.OneBrushPoints(transformer);
                     return style;
@@ -271,7 +271,7 @@ namespace Retouch_Photo2.ViewModels
                     ILayer layer = this.textStyleLayerage.Self;
 
                     //CacheBrush
-                    Transformer transformer = layer.Transform.Destination;
+                    Transformer transformer = layer.Transform.Transformer;
                     Style style = layer.Style.Clone();
                     style.OneBrushPoints(transformer);
                     return style;

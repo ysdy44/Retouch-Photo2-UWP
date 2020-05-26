@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Layers.Models
                 //TransformerBorder
                 TransformerBorder border = new TransformerBorder(layerage.Children);
                 Transformer transformer = border.ToTransformer();
-                this.Transform.Destination = transformer;
+                this.Transform.Transformer = transformer;
                 return transformer;
             }
 

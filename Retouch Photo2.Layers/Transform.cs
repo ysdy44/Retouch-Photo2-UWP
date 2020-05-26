@@ -13,10 +13,10 @@ namespace Retouch_Photo2.Layers
     public class Transform : ICacheTransform, IGetActualTransformer
     {
 
-        /// <summary> The destination transformer. </summary>
-        public Transformer Destination { get; set; }
-        /// <summary> The cache of <see cref="Transform.Destination"/>. </summary>
-        public Transformer StartingDestination { get; private set; }
+        /// <summary> The transformer. </summary>
+        public Transformer Transformer { get; set; }
+        /// <summary> The cache of <see cref="Transform.Transformer"/>. </summary>
+        public Transformer StartingTransformer { get; private set; }
 
 
         /// <summary> Is cropped? </summary>
@@ -24,10 +24,10 @@ namespace Retouch_Photo2.Layers
         /// <summary> The cache of <see cref="Transform.IsCrop"/>. </summary>
         public bool StartingIsCrop { get; set; }
 
-        /// <summary> The cropped destination transformer. </summary>
-        public Transformer CropDestination { get; set; }
-        /// <summary> The cache of <see cref="Transform.CropDestination"/>. </summary>
-        public Transformer StartingCropDestination { get; private set; }
+        /// <summary> The cropped transformer. </summary>
+        public Transformer CropTransformer { get; set; }
+        /// <summary> The cache of <see cref="Transform.CropTransformer"/>. </summary>
+        public Transformer StartingCropTransformer { get; private set; }
 
 
         //@Construct
@@ -41,7 +41,7 @@ namespace Retouch_Photo2.Layers
         /// <param name="transformer"> The transformer. </param>
         public Transform(Transformer transformer)
         {
-            this.Destination = transformer;
+            this.Transformer = transformer;
         }
         /// <summary>
         /// Initialize a <see cref = "Transform" />.
@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Layers
         /// <param name="destination"> The destination transformer. </param>
         public Transform(Transformer source, Transformer destination)
         {
-            this.Destination = destination;
+            this.Transformer = destination;
         }
         
         /// <summary>
@@ -61,42 +61,42 @@ namespace Retouch_Photo2.Layers
         {
             return new Transform
             {
-                Destination = this.Destination,
-                StartingDestination = this.StartingDestination,
+                Transformer = this.Transformer,
+                StartingTransformer = this.StartingTransformer,
 
 
                 IsCrop = this.IsCrop,
                 StartingIsCrop = this.StartingIsCrop,
 
-                CropDestination = this.CropDestination,
-                StartingCropDestination = this.StartingCropDestination,
+                CropTransformer = this.CropTransformer,
+                StartingCropTransformer = this.StartingCropTransformer,
             };
         }
 
 
         //@Abstract      
-        public Transformer GetActualTransformer() => this.IsCrop ? this.CropDestination : this.Destination;
+        public Transformer GetActualTransformer() => this.IsCrop ? this.CropTransformer : this.Transformer;
 
         public void CropTransformAdd(Vector2 vector)
         {
-            this.CropDestination = this.StartingCropDestination + vector;
+            this.CropTransformer = this.StartingCropTransformer + vector;
         }
 
         public void CacheTransform()
         {
-            this.StartingDestination = this.Destination;
+            this.StartingTransformer = this.Transformer;
             this.StartingIsCrop = this.IsCrop;
-            this.StartingCropDestination = this.GetActualTransformer();
+            this.StartingCropTransformer = this.GetActualTransformer();
         }
         public void TransformMultiplies(Matrix3x2 matrix)
         {
-            this.Destination = this.StartingDestination * matrix;
-            this.CropDestination = this.StartingCropDestination * matrix;
+            this.Transformer = this.StartingTransformer * matrix;
+            this.CropTransformer = this.StartingCropTransformer * matrix;
         }
         public void TransformAdd(Vector2 vector)
         {
-            this.Destination = this.StartingDestination + vector;
-            this.CropDestination = this.StartingCropDestination + vector;
+            this.Transformer = this.StartingTransformer + vector;
+            this.CropTransformer = this.StartingCropTransformer + vector;
         }
 
 
@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Layers
             if (transform.IsCrop == false) return image;
 
             
-            CanvasGeometry canvasGeometry = transform.CropDestination.ToRectangle(resourceCreator, matrix);
+            CanvasGeometry canvasGeometry = transform.CropTransformer.ToRectangle(resourceCreator, matrix);
             CanvasCommandList canvasCommandList = new CanvasCommandList(resourceCreator);
 
             using (CanvasDrawingSession drawingSession = canvasCommandList.CreateDrawingSession())

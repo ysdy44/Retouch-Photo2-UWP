@@ -75,7 +75,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Content = resource.GetString("/ToolsSecond/GeometryDiamond");
+            this._button.Content = 
+                this.Title = resource.GetString("/ToolsSecond/GeometryDiamond");
             this._button.Style = this.IconSelectedButtonStyle;
 
             this.MirrorTextBlock.Text = resource.GetString("/ToolsSecond/GeometryDiamond_Mirror");
@@ -87,6 +88,7 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.GeometryDiamond;
+        public string Title { get; set; }
         public FrameworkElement Icon => this._icon;
         public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
 

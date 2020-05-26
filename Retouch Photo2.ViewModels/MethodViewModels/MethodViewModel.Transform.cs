@@ -27,14 +27,14 @@ namespace Retouch_Photo2.ViewModels
                 ILayer layer = layerage.Self;
 
                 //History
-                var previous1 = layer.Transform.Destination;
-                var previous2 = layer.Transform.CropDestination;
+                var previous1 = layer.Transform.Transformer;
+                var previous2 = layer.Transform.CropTransformer;
                 history.UndoActions.Push(() =>
                 {
                     ILayer layer2 = layerage.Self;
 
-                    layer2.Transform.Destination = previous1;
-                    layer2.Transform.CropDestination = previous2;
+                    layer2.Transform.Transformer = previous1;
+                    layer2.Transform.CropTransformer = previous2;
                 });
 
                 layerage.RefactoringParentsTransformer();
@@ -91,14 +91,14 @@ namespace Retouch_Photo2.ViewModels
                 ILayer layer = layerage.Self;
 
                 //History
-                var previous1 = layer.Transform.StartingDestination;
-                var previous2 = layer.Transform.StartingCropDestination;
+                var previous1 = layer.Transform.StartingTransformer;
+                var previous2 = layer.Transform.StartingCropTransformer;
                 history.UndoActions.Push(() =>
                 {
                     ILayer layer2 = layerage.Self;
 
-                    layer2.Transform.Destination = previous1;
-                    layer2.Transform.CropDestination = previous2;
+                    layer2.Transform.Transformer = previous1;
+                    layer2.Transform.CropTransformer = previous2;
                 });
 
                 layerage.RefactoringParentsTransformer();
@@ -126,14 +126,14 @@ namespace Retouch_Photo2.ViewModels
                 ILayer layer = layerage.Self;
 
                 //History
-                var previous1 = layer.Transform.Destination;
-                var previous2 = layer.Transform.CropDestination;
+                var previous1 = layer.Transform.Transformer;
+                var previous2 = layer.Transform.CropTransformer;
                 history.UndoActions.Push(() =>
                 {
                     ILayer layer2 = layerage.Self;
 
-                    layer2.Transform.Destination = previous1;
-                    layer2.Transform.CropDestination = previous2;
+                    layer2.Transform.Transformer = previous1;
+                    layer2.Transform.CropTransformer = previous2;
                 });
 
                 layerage.RefactoringParentsTransformer();
@@ -191,12 +191,12 @@ namespace Retouch_Photo2.ViewModels
                 ILayer layer = layerage.Self;
 
                 //History
-                var previous = layer.Transform.StartingDestination;
+                var previous = layer.Transform.StartingTransformer;
                 history.UndoActions.Push(() =>
                 {
                     ILayer layer2 = layerage.Self;
 
-                    layer2.Transform.Destination = previous;
+                    layer2.Transform.Transformer = previous;
                 });
 
                 layerage.RefactoringParentsTransformer();

@@ -46,12 +46,14 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = resource.GetString("/Tools/TextArtistic");
+            this._button.ToolTip.Content = 
+                this.Title = resource.GetString("/Tools/TextArtistic");
         }
 
 
         //@Content
         public ToolType Type => ToolType.TextArtistic;
+        public string Title { get; set; }
         public FrameworkElement Icon => this._icon;
         public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
 

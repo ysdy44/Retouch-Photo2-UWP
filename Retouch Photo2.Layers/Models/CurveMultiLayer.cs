@@ -67,7 +67,7 @@ namespace Retouch_Photo2.Layers.Models
             //   }
 
 
-            return this.Transform.IsCrop ? this.Transform.CropDestination : this.Transform.Destination;
+            return this.Transform.IsCrop ? this.Transform.CropTransformer : this.Transform.Transformer;
         }
 
         public override void CacheTransform()

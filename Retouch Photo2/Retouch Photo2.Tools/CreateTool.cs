@@ -78,8 +78,8 @@ namespace Retouch_Photo2.Tools
             LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, this.MezzanineLayer);
 
             //Text
-            this.ViewModel.SetTextWidthHeight(transformer);
-            this.ViewModel.TextVisibility = Visibility.Visible;
+            this.ViewModel.SetTipTextWidthHeight(transformer);
+            this.ViewModel.TipTextVisibility = Visibility.Visible;
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
@@ -102,7 +102,7 @@ namespace Retouch_Photo2.Tools
                 mezzanineLayer.Transform = new Transform(transformer);
                 mezzanineLayer.Style.DeliverBrushPoints(transformer);
 
-                this.ViewModel.SetTextWidthHeight(transformer);//Text
+                this.ViewModel.SetTipTextWidthHeight(transformer);//Text
                 this.ViewModel.Invalidate();//Invalidate
             }
 
@@ -140,7 +140,7 @@ namespace Retouch_Photo2.Tools
                     LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
                     
                     this.MezzanineLayer = null;
-                    this.ViewModel.TextVisibility = Visibility.Collapsed;//Text
+                    this.ViewModel.TipTextVisibility = Visibility.Collapsed;//Text
                     this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                 }
                 /*

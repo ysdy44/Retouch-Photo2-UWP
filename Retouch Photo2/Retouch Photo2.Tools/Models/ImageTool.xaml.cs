@@ -93,7 +93,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = resource.GetString("/Tools/Image");
+            this._button.ToolTip.Content =
+                this.Title = resource.GetString("/Tools/Image");
 
             this.SelectTextBlock.Text = resource.GetString("/Tools/Image_Select");
             this.ReplaceTextBlock.Text = resource.GetString("/Tools/Image_Replace");
@@ -104,6 +105,7 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.Image;
+        public string Title { get; set; }
         public FrameworkElement Icon => this._icon;
         public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
 
@@ -160,7 +162,7 @@ namespace Retouch_Photo2.Tools.Models
             ILayer mezzanineLayer = this.MezzanineLayerage.Self;
 
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
-            mezzanineLayer.Transform.Destination = transformerDestination;
+            mezzanineLayer.Transform.Transformer = transformerDestination;
 
             //Selection
             this.SelectionViewModel.Transformer = transformerDestination;//Selection
@@ -177,7 +179,7 @@ namespace Retouch_Photo2.Tools.Models
                 ILayer mezzanineLayer = this.MezzanineLayerage.Self;
 
                 Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
-                mezzanineLayer.Transform.Destination = transformerDestination;
+                mezzanineLayer.Transform.Transformer = transformerDestination;
                 this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
                 foreach (Layerage child in this.ViewModel.LayerageCollection.RootLayerages)

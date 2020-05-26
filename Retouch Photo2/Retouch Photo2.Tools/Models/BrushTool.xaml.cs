@@ -149,7 +149,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = resource.GetString("/Tools/Brush");
+            this._button.ToolTip.Content =
+                this.Title = resource.GetString("/Tools/Brush");
 
             this.FillOrStrokeTextBlock.Text = resource.GetString("/Tools/Brush_FillOrStroke");
             this.BrushTypeTextBlock.Text = resource.GetString("/Tools/Brush_Type");
@@ -161,6 +162,7 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.Brush;
+        public string Title { get; set; }
         public FrameworkElement Icon => this._icon;
         public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
 

@@ -69,7 +69,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = resource.GetString("/Tools/Cursor");
+            this._button.ToolTip.Content =
+                this.Title = resource.GetString("/Tools/Cursor");
         }
 
         //ToolTip
@@ -90,7 +91,8 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.Cursor;
+        public ToolType Type => ToolType.Cursor;  
+        public string Title { get; set; }
         public FrameworkElement Icon => this._icon;
         public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
 

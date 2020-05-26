@@ -54,11 +54,11 @@ namespace Retouch_Photo2.Layers.Models
 
                 TransformerBorder border = new TransformerBorder(this.Nodes);
                 Transformer transformer = border.ToTransformer();
-                this.Transform.Destination = transformer;
-                return this.Transform.IsCrop ? this.Transform.CropDestination : transformer;
+                this.Transform.Transformer = transformer;
+                return this.Transform.IsCrop ? this.Transform.CropTransformer : transformer;
             }
 
-            return this.Transform.IsCrop ? this.Transform.CropDestination : this.Transform.Destination;
+            return this.Transform.IsCrop ? this.Transform.CropTransformer : this.Transform.Transformer;
         }
 
         public override void CacheTransform()

@@ -80,6 +80,7 @@ namespace Retouch_Photo2.Controls
                         this.TipViewModel.Tool = tool;
                         this.TipViewModel.ToolGroupType(tool.Type);
 
+                        this.ViewModel.TipTextBegin(tool.Title);
                         this.ViewModel.Invalidate();//Invalidate
                     };
                 }

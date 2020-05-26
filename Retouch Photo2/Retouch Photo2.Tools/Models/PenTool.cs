@@ -57,12 +57,14 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = resource.GetString("/Tools/Pen");
+            this._button.ToolTip.Content = 
+                this.Title = resource.GetString("/Tools/Pen");
         }
 
 
         //@Content
         public ToolType Type => ToolType.Pen;
+        public string Title { get; set; }
         public FrameworkElement Icon => this._icon;
         public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
 
@@ -117,7 +119,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -197,7 +199,7 @@ namespace Retouch_Photo2.Tools.Models
             this.CurveLayer.IsRefactoringTransformer = true;//RefactoringTransformer
             this.Mode = NodeCollectionMode.None;
 
-            this.ViewModel.Invalidate();//Invalidate
+            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
         public void Clicke(Vector2 point)
         {

@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Layers.Models
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            Transformer transformer = base.Transform.Destination;
+            Transformer transformer = base.Transform.Transformer;
 
 
             float scale = (canvasToVirtualMatrix.M11 + canvasToVirtualMatrix.M22) / 2;

@@ -175,7 +175,7 @@ namespace Retouch_Photo2.Tools.Models
                 });
 
 
-                Transformer transformer = layer.Transform.Destination;
+                Transformer transformer = layer.Transform.Transformer;
                 layer.Style.Fill.TypeChange(brushType, transformer, photo);
                 this.SelectionViewModel.StyleLayerage = layerage;
 

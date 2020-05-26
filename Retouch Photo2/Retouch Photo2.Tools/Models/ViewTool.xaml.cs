@@ -240,7 +240,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = resource.GetString("/Tools/View");
+            this._button.ToolTip.Content =
+                this.Title = resource.GetString("/Tools/View");
 
             this.RadianTouchbarButton.CenterContent = resource.GetString("/Tools/View_Radian");
             this.RadianClearToolTip.Content = resource.GetString("/Tools/View_RadianClear");
@@ -270,6 +271,7 @@ namespace Retouch_Photo2.Tools.Models
         
         //@Content
         public ToolType Type => ToolType.View;
+        public string Title { get; set; }
         public FrameworkElement Icon => this._icon;
         public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
 
@@ -283,8 +285,8 @@ namespace Retouch_Photo2.Tools.Models
         public void Started(Vector2 startingPoint, Vector2 point)
         {
             //Text
-            this.ViewModel.SetTextPosition();
-            this.ViewModel.TextVisibility = Visibility.Visible;
+            this.ViewModel.SetTipTextPosition();
+            this.ViewModel.TipTextVisibility = Visibility.Visible;
 
             this.ViewModel.CanvasTransformer.CacheMove(startingPoint);
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
@@ -292,7 +294,7 @@ namespace Retouch_Photo2.Tools.Models
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
             //Text
-            this.ViewModel.SetTextPosition();
+            this.ViewModel.SetTipTextPosition();
 
             this.ViewModel.CanvasTransformer.Move(point);
             this.ViewModel.Invalidate();//Invalidate
@@ -300,7 +302,7 @@ namespace Retouch_Photo2.Tools.Models
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
             //Text
-            this.ViewModel.TextVisibility = Visibility.Collapsed;
+            this.ViewModel.TipTextVisibility = Visibility.Collapsed;
 
             if (isOutNodeDistance) this.ViewModel.CanvasTransformer.Move(point);
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate

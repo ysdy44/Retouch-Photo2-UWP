@@ -48,12 +48,14 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = resource.GetString("/Tools/Ellipse");
+            this._button.ToolTip.Content =
+                this.Title = resource.GetString("/Tools/Ellipse");
         }
 
 
         //@Content
         public ToolType Type => ToolType.GeometryEllipse;
+        public string Title { get; set; }
         public FrameworkElement Icon => this._icon;
         public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
 

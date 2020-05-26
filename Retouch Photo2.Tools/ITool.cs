@@ -9,16 +9,18 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public interface ITool
     {
-        /// <summary> Gets IITool's type. </summary>
+        /// <summary> Gets the type. </summary>
         ToolType Type { get; }
-        /// <summary> Gets IITool's icon. </summary>
+        /// <summary> Gets or sets the title. </summary>
+        string Title { get; set; }
+        /// <summary> Gets the icon. </summary>
         FrameworkElement Icon { get; }
-        /// <summary> Sets IITool's IsSelected. </summary>
+        /// <summary> Sets the IsSelected. </summary>
         bool IsSelected { get; set; }
 
-        /// <summary> Gets IITool's button. </summary>
+        /// <summary> Gets the button. </summary>
         FrameworkElement Button { get; }
-        /// <summary> Gets IITool's page. </summary>
+        /// <summary> Gets the page. </summary>
         FrameworkElement Page { get; }
 
         

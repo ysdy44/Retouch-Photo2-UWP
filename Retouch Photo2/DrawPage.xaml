@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Retouch_Photo2.Controls"
     xmlns:elements="using:Retouch_Photo2.Elements"
-    xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
+    xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"   
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:elementDrawPages="using:Retouch_Photo2.Elements.DrawPages"
     xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
@@ -125,13 +126,23 @@
 
 
         <!--Tip-->
-        <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" 
-                        Visibility="{x:Bind ViewModel.TextVisibility, Mode=OneWay}">
-            <ToolTip Style="{StaticResource AppToolTipStyle}">
-                <TextBlock Text="{x:Bind ViewModel.Text, Mode=OneWay}" TextWrapping="Wrap"/>
-            </ToolTip>
-        </ContentControl>
+        <Border Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" CornerRadius="4" Height="24"  Width="Auto"  BorderThickness="1" Background="#b5d4f2"  BorderBrush="#3d9cf7" HorizontalAlignment="Center" VerticalAlignment="Top"
+                Visibility="{x:Bind ViewModel.TipTextVisibility, Mode=OneWay}">
+            <!--Visibility:Show-->
+            <animations:Implicit.ShowAnimations>
+                <animations:OpacityAnimation Duration="0:0:0.2" From="0.0" To="1.0"/>
+            </animations:Implicit.ShowAnimations>
 
+            <!--Visibility:Hide-->
+            <animations:Implicit.HideAnimations>
+                <animations:OpacityAnimation Duration="0:0:0.4" From="1.0" To="0.0"/>
+            </animations:Implicit.HideAnimations>
+            
+            <TextBlock Margin="20,0" FontSize="16"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#0055a4" 
+                        Text="{x:Bind ViewModel.TipText, Mode=OneWay}"/>
+        </Border>
+
+        
         <!--Load-->
         <elements:LoadingControl x:Name="LoadingControl"/>
 
