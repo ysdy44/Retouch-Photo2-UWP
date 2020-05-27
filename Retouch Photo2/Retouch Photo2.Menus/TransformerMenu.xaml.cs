@@ -265,7 +265,7 @@ namespace Retouch_Photo2.Menus.Models
             this.YTextBlock.Text = resource.GetString("/Menus/Transformer_Y");
             this.PositionRemoteToolTip.Content = resource.GetString("/Menus/Transformer_PositionRemote");
 
-            this.IndicatorToolTip.Content = resource.GetString("/Menus/Transformer_Indicator");
+            this.IndicatorToolTip.Content = resource.GetString("/Menus/Transformer_Anchor");
         }
 
         //ToolTip

@@ -186,9 +186,6 @@
   <data name="Transformer_Height" xml:space="preserve">
     <value>Height</value>
   </data>
-  <data name="Transformer_Indicator" xml:space="preserve">
-    <value>Indicator</value>
-  </data>
   <data name="Transformer_RatioScaling" xml:space="preserve">
     <value>Ratio Scaling</value>
   </data>
@@ -212,5 +209,8 @@
   </data>
   <data name="Transformer_Y" xml:space="preserve">
     <value>Y-axis</value>
+  </data>
+  <data name="Transformer_Anchor" xml:space="preserve">
+    <value>Anchor</value>
   </data>
 </root>

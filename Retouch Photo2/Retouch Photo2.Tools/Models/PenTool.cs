@@ -340,7 +340,7 @@ namespace Retouch_Photo2.Tools.Models
                 Style = this.SelectionViewModel.CurveStyle,
             };
             Layerage curveLayerage = curveLayer.ToLayerage();
-            Layer.Instances.Add(curveLayer);
+            LayerBase.Instances.Add(curveLayer);
 
             //Mezzanine
             LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, curveLayerage);

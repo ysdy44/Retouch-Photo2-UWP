@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s GeometryRectangleLayer .
+    /// <see cref="LayerBase"/>'s GeometryRectangleLayer .
     /// </summary>
-    public class GeometryRectangleLayer : Layer, ILayer
+    public class GeometryRectangleLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -37,7 +37,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             GeometryRectangleLayer rectangleLayer = new GeometryRectangleLayer();
 
-            Layer.CopyWith(resourceCreator, rectangleLayer, this);
+            LayerBase.CopyWith(resourceCreator, rectangleLayer, this);
             return rectangleLayer;
         }
 

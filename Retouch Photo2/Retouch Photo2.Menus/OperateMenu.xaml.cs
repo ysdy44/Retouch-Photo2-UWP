@@ -6,6 +6,7 @@ using Retouch_Photo2.Operates;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
@@ -29,6 +30,7 @@ namespace Retouch_Photo2.Menus.Models
         TipViewModel TipViewModel => App.TipViewModel;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
+        ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
 
 
         #region DependencyProperty
@@ -45,7 +47,7 @@ namespace Retouch_Photo2.Menus.Models
 
 
         #endregion
-        
+
 
         //@Construct
         public OperateMenu()
@@ -87,7 +89,7 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-            
+
             this._button.ToolTip.Content =
             this._Expander.Title =
             this._Expander.CurrentTitle = resource.GetString("/Menus/Operate");
@@ -138,7 +140,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             this._button.ToolTip.Opened += (s, e) =>
             {
-                if (this._Expander.IsSecondPage==false)
+                if (this._Expander.IsSecondPage == false)
                 {
                     if (this.Expander.State == ExpanderState.Overlay)
                     {
@@ -184,7 +186,6 @@ namespace Retouch_Photo2.Menus.Models
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
                 this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
-
             };
 
             this.FlipVerticalButton.Click += (s, e) =>
@@ -216,78 +217,86 @@ namespace Retouch_Photo2.Menus.Models
 
             this.MoveBackButton.Click += (s, e) =>
             {
-                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
-                {
-                    Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                    IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
-                    if (parentsChildren.Count < 2) return;
+                if (this.Mode != ListViewSelectionMode.Single) return;
 
-                    parentsChildren.Remove(destination);
-                    parentsChildren.Add(destination);
+                //History
+                this.ViewModel.HistoryPushLayeragesHistory("Layers arrange");
 
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
-                    this.ViewModel.Invalidate();//Invalidate
-                }
+                Layerage destination = this.SelectionViewModel.SelectionLayerage;
+                IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
+                if (parentsChildren.Count < 2) return;
+
+                parentsChildren.Remove(destination);
+                parentsChildren.Add(destination);
+
+                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                this.ViewModel.Invalidate();//Invalidate
             };
 
             this.BackOneButton.Click += (s, e) =>
             {
-                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
-                {
-                    Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                    IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
-                    if (parentsChildren.Count < 2) return;
+                if (this.Mode != ListViewSelectionMode.Single) return;
 
-                    int index = parentsChildren.IndexOf(destination);
-                    index++;
+                //History
+                this.ViewModel.HistoryPushLayeragesHistory("Layers arrange");
 
-                    if (index < 0) index = 0;
-                    if (index > parentsChildren.Count) index = parentsChildren.Count - 1;
+                Layerage destination = this.SelectionViewModel.SelectionLayerage;
+                IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
+                if (parentsChildren.Count < 2) return;
 
-                    parentsChildren.Remove(destination);
-                    parentsChildren.Insert(index, destination);
+                int index = parentsChildren.IndexOf(destination);
+                index++;
 
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
-                    this.ViewModel.Invalidate();//Invalidate
-                }
+                if (index < 0) index = 0;
+                if (index > parentsChildren.Count - 1) index = parentsChildren.Count - 1;
+
+                parentsChildren.Remove(destination);
+                parentsChildren.Insert(index, destination);
+
+                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                this.ViewModel.Invalidate();//Invalidate
             };
 
             this.ForwardOneButton.Click += (s, e) =>
             {
-                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
-                {
-                    Layerage destination = this.SelectionViewModel.SelectionLayerage;                    
-                    IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);                    
-                    if (parentsChildren.Count < 2) return;
+                if (this.Mode != ListViewSelectionMode.Single) return;
 
-                    int index = parentsChildren.IndexOf(destination);
-                    index--;
+                //History
+                this.ViewModel.HistoryPushLayeragesHistory("Layers arrange");
 
-                    if (index < 0) index = 0;
-                    if (index > parentsChildren.Count) index = parentsChildren.Count - 1;
+                Layerage destination = this.SelectionViewModel.SelectionLayerage;
+                IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
+                if (parentsChildren.Count < 2) return;
 
-                    parentsChildren.Remove(destination);
-                    parentsChildren.Insert(index, destination);
+                int index = parentsChildren.IndexOf(destination);
+                index--;
 
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
-                    this.ViewModel.Invalidate();//Invalidate
-                }
+                if (index < 0) index = 0;
+                if (index > parentsChildren.Count - 1) index = parentsChildren.Count - 1;
+
+                parentsChildren.Remove(destination);
+                parentsChildren.Insert(index, destination);
+
+                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                this.ViewModel.Invalidate();//Invalidate
             };
 
             this.MoveFrontButton.Click += (s, e) =>
             {
-                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.Single)
-                {
-                    Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                    IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);                    
-                    if (parentsChildren.Count < 2) return;
+                if (this.Mode != ListViewSelectionMode.Single) return;
 
-                    parentsChildren.Remove(destination);
-                    parentsChildren.Insert(0, destination);
+                //History
+                this.ViewModel.HistoryPushLayeragesHistory("Layers arrange");
 
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
-                    this.ViewModel.Invalidate();//Invalidate
-                }
+                Layerage destination = this.SelectionViewModel.SelectionLayerage;
+                IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
+                if (parentsChildren.Count < 2) return;
+
+                parentsChildren.Remove(destination);
+                parentsChildren.Insert(0, destination);
+
+                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                this.ViewModel.Invalidate();//Invalidate
             };
 
         }
@@ -295,65 +304,190 @@ namespace Retouch_Photo2.Menus.Models
         //Horizontally
         private void ConstructHorizontally()
         {
-
-            this.LeftButton.Click += (s, e) =>
-            {
-                Transformer transformer = this.Transformer;
-                Matrix3x2 matrix = Matrix3x2.CreateTranslation(0 - transformer.MinX, 0);
-                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
-            };
-
-            this.CenterButton.Click += (s, e) =>
-            {
-                Transformer transformer = this.Transformer;
-                Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width / 2 - transformer.Center.X, 0);
-                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
-            };
-
-            this.RightButton.Click += (s, e) =>
-            {
-                Transformer transformer = this.Transformer;
-                Matrix3x2 matrix = Matrix3x2.CreateTranslation(this.ViewModel.CanvasTransformer.Width - transformer.MaxX, 0);
-                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
-            };
-
-            this.HorizontallySymmetryButton.Click += (s, e) =>
-            {
-                this._Expander.IsSecondPage = true;
-            };
-
+            this.LeftButton.Click += (s, e) => this.TransformAlign(BorderMode.MinX, Orientation.Horizontal);
+            this.CenterButton.Click += (s, e) => this.TransformAlign(BorderMode.CenterX, Orientation.Horizontal);
+            this.RightButton.Click += (s, e) => this.TransformAlign(BorderMode.MaxX, Orientation.Horizontal);
+            this.HorizontallySymmetryButton.Click += (s, e) => this.TransformSapce(Orientation.Horizontal);
         }
 
         //Vertical
         private void ConstructVertically()
         {
+            this.TopButton.Click += (s, e) => this.TransformAlign(BorderMode.MinY, Orientation.Vertical);
+            this.MiddleButton.Click += (s, e) => this.TransformAlign(BorderMode.CenterY, Orientation.Vertical);
+            this.BottomButton.Click += (s, e) => this.TransformAlign(BorderMode.MaxY, Orientation.Vertical);
+            this.VerticallySymmetryButton.Click += (s, e) => this.TransformSapce(Orientation.Vertical);
+        }
 
-            this.TopButton.Click += (s, e) =>
+    }
+
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "OperateMenu" />. 
+    /// </summary>
+    public sealed partial class OperateMenu : UserControl, IMenu
+    {
+        
+        private void TransformAlign(BorderMode borderMode, Orientation orientation)
+        {
+            switch (this.Mode)
             {
-                Transformer transformer = this.Transformer;
-                Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, 0 - transformer.MinY);
-                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
-            };
+                case ListViewSelectionMode.Single:
+                    {
+                        float positionValue = this.ViewModel.CanvasTransformer.GetBorderValue(borderMode);
+                        this.TransformAlign(positionValue, borderMode, orientation);
+                    }
+                    break;
+                case ListViewSelectionMode.Multiple:
+                    {
+                        Transformer transformer = this.Transformer;
+                        float positionValue = transformer.GetBorderValue(borderMode);
+                        this.TransformAlign(positionValue, borderMode, orientation);
+                    }
+                    break;
+            }
+        }
+                
+        private void TransformAlign(float positionValue, BorderMode borderMode, Orientation orientation)
+        {
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Transform");
 
-            this.MiddleButton.Click += (s, e) =>
+            //Selection
+            this.SelectionViewModel.SetValueWithChildren((layerage) =>
             {
-                Transformer transformer = this.Transformer;
-                Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height / 2 - transformer.Center.Y);
-                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
-            };
+                ILayer layer = layerage.Self;
 
-            this.BottomButton.Click += (s, e) =>
+                Transformer transformer = layerage.GetActualTransformer();
+                float value = transformer.GetBorderValue(borderMode);
+
+                float distance = positionValue - value;
+                if (distance == 0) return;
+                Vector2 vector = orientation == Orientation.Horizontal ?
+                    new Vector2(distance, 0) :
+                    new Vector2(0, distance);
+
+                //History
+                var previous = TransformPosition.GetLayer(layer);
+                history.UndoActions.Push(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    TransformPosition.SetLayer(layer2, previous);
+                });
+
+                layer.CacheTransform();
+                layer.TransformAdd(vector);
+            });
+            this.Transformer = this.SelectionViewModel.RefactoringTransformer();
+
+            //History
+            this.ViewModel.HistoryPush(history);
+
+            this.ViewModel.Invalidate();//Invalidate}
+        }
+
+
+       ///////////////////////////////
+
+
+        private void TransformSapce(Orientation orientation)
+        {
+            if (this.Mode != ListViewSelectionMode.Multiple) return;
+
+            IEnumerable<Layerage> layerages = this.SelectionViewModel.SelectionLayerages;
+            int count = layerages.Count();
+            if (count < 3) return;
+
+            this.TransformSapce(layerages, count, orientation);
+        }
+
+        /// <summary>
+        /// Border: 
+        ///  Between previous and current
+        /// 
+        ///  Min            Center           Max             Min            Center           Max             Min            Center           Max
+        ///    |-------------o-------------|                  |-------------o-------------|                  |-------------o-------------|
+        ///    |__________Length_________|     space    |__________Length_________|     space    |__________Length_________|
+        /// 
+        /// </summary>
+        private void TransformSapce(IEnumerable<Layerage> layerages, int count, Orientation orientation)
+        {
+            //Layerage, Min, Center, Max, Length
+            var borders = orientation == Orientation.Horizontal ?
+                from layerage in layerages select this._getBorderX(layerage) :
+                from layerage in layerages select this._getBorderY(layerage);
+
+            float min = borders.Min(border => border.Min);//Min
+            float max = borders.Max(border => border.Max);//Max
+
+            float lengthSum = borders.Sum(border => border.Length);//Sum of Length
+            float space = ((max - min) - lengthSum) / (count - 1);//Between [ previous.Max ] and [ current.Min ].
+
+
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Transform");
+
+
+            float postionMin = min;//[ previous.Min ] + [ previous.Length ] + space.
+            var orderedBorders = borders.OrderBy(border => border.Min);
+
+            foreach (var border in orderedBorders)
             {
-                Transformer transformer = this.Transformer;
-                Matrix3x2 matrix = Matrix3x2.CreateTranslation(0, this.ViewModel.CanvasTransformer.Height - transformer.MaxY);
-                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
-            };
+                Layerage layerage = border.Layerage;
 
-            this.VerticallySymmetryButton.Click += (s, e) =>
-            {
-                this._Expander.IsSecondPage = true;
-            };
+                float distance = postionMin - border.Min;
+                postionMin += border.Length + space;//Sum
 
-        }        
+                if (distance == 0) continue;
+                Vector2 vector = orientation == Orientation.Horizontal ?
+                    new Vector2(distance, 0) :
+                    new Vector2(0, distance);
+
+
+                this.SelectionViewModel.SetLayerageValueWithChildren(layerage, (layerage2) =>
+                {
+                    ILayer layer = layerage2.Self;
+
+                    //History
+                    var previous = TransformPosition.GetLayer(layer);
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage2.Self;
+
+                        TransformPosition.SetLayer(layer2, previous);
+                    });
+
+                    layer.CacheTransform();
+                    layer.TransformAdd(vector);
+                });
+            }
+
+            //History
+            this.ViewModel.HistoryPush(history);
+
+            this.ViewModel.Invalidate();//Invalidate
+        }
+
+        private (Layerage Layerage, float Min, float Center, float Max, float Length) _getBorderX(Layerage layerage)
+        {
+            Transformer transformer = layerage.GetActualTransformer();
+
+            float min = transformer.MinX;
+            float center = transformer.Center.X;
+            float max = transformer.MaxX;
+
+            return (layerage, min, center, max, max - min);
+        }
+        private (Layerage Layerage, float Min, float Center, float Max, float Length) _getBorderY(Layerage layerage)
+        {
+            Transformer transformer = layerage.GetActualTransformer();
+
+            float min = transformer.MinY;
+            float center = transformer.Center.Y;
+            float max = transformer.MaxY;
+
+            return (layerage, min, center, max, max - min);
+        }
+
     }
 }

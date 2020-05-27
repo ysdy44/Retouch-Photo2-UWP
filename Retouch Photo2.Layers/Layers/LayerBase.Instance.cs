@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Layers
     /// <summary>
     /// Represents a layer that can have render properties. Provides a rendering method.
     /// </summary>
-    public abstract partial class Layer
+    public abstract partial class LayerBase
     {
 
         //@Static
@@ -31,14 +31,14 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary>
-        /// Find the first <see cref="Layer"/> by <see cref="Layer"/>.
+        /// Find the first <see cref="LayerBase"/> by <see cref="LayerBase"/>.
         /// </summary>
         /// <param name="layerage"> The source layerage</param>
         /// <returns> The product layer. </returns>
         public static ILayer FindFirstLayer(Layerage layerage)
         {
             string id = layerage.Id;
-            return Layer.Instances.FirstOrDefault(i => i.Id == id);
+            return LayerBase.Instances.FirstOrDefault(i => i.Id == id);
         }
 
 
@@ -56,7 +56,7 @@ namespace Retouch_Photo2.Layers
             {
                 this.Id = IIIII.ToString();
                 IIIII++;
-            } while (Layer.Instances.All(l => l.Id != this.Id) == false);
+            } while (LayerBase.Instances.All(l => l.Id != this.Id) == false);
 
             return new Layerage
             {
@@ -66,7 +66,7 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary>
-        /// Returns a boolean indicating whether the given <see cref="Layerage"/> is equal to this <see cref="Layer"/> instance.
+        /// Returns a boolean indicating whether the given <see cref="Layerage"/> is equal to this <see cref="LayerBase"/> instance.
         /// </summary>
         /// <param name="other"> The <see cref="Layerage"/> to compare this instance to. </param>
         /// <returns> True if the other <see cref="Layerage"/> is equal to this instance; False otherwise. </returns>
@@ -77,11 +77,11 @@ namespace Retouch_Photo2.Layers
             return true;
         }
         /// <summary>
-        /// Returns a boolean indicating whether the given <see cref="Layer"/> is equal to this <see cref="Layer"/> instance.
+        /// Returns a boolean indicating whether the given <see cref="LayerBase"/> is equal to this <see cref="LayerBase"/> instance.
         /// </summary>
-        /// <param name="other"> The <see cref="Layer"/> to compare this instance to. </param>
-        /// <returns> True if the other <see cref="Layer"/> is equal to this instance; False otherwise. </returns>
-        public bool Equals(Layer other)
+        /// <param name="other"> The <see cref="LayerBase"/> to compare this instance to. </param>
+        /// <returns> True if the other <see cref="LayerBase"/> is equal to this instance; False otherwise. </returns>
+        public bool Equals(LayerBase other)
         {
             if (this.Id != other.Id) return false;
 

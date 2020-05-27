@@ -6,10 +6,10 @@ namespace Retouch_Photo2.Layers
     /// <summary>
     /// Represents a layer that can have render properties. Provides a rendering method.
     /// </summary>
-    public abstract partial class Layer 
+    public abstract partial class LayerBase 
     {
 
-        /// <summary> Gets or sets <see cref = "Layer" />'s control. </summary>
+        /// <summary> Gets or sets <see cref = "LayerBase" />'s control. </summary>
         public LayerControl Control { get; protected set; } 
 
                

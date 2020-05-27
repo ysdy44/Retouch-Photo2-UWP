@@ -26,14 +26,20 @@ namespace Retouch_Photo2.Brushs
         CanvasGradientStop[] Stops { get; set; }
         /// <summary> Gets of sets the photocopier. </summary>
         Photocopier Photocopier { get; set; }
-
+        
         /// <summary> Gets of sets the center point. (LinearGradientBrush.StartPoint) (RadialGradientBrush.Center) </summary>
         Vector2 Center { get; set; }
+        /// <summary> Cache of <see cref="IBrush.Center"/>. </summary>
+        Vector2 StartingCenter { get; }
         /// <summary> Gets of sets the x-point. </summary>
         Vector2 XPoint { get; set; }
+        /// <summary> Cache of <see cref="IBrush.XPoint"/>. </summary>
+        Vector2 StartingXPoint { get; }
         /// <summary> Gets of sets the y-point. (LinearGradientBrush.EndPoint) (RadialGradientBrush.Point) </summary>
         Vector2 YPoint { get; set; }
-        
+        /// <summary> Cache of <see cref="IBrush.YPoint"/>. </summary>
+        Vector2 StartingYPoint { get; }
+
 
         /// <summary>
         /// Get own copy.

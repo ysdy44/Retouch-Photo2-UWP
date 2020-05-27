@@ -53,18 +53,18 @@ namespace Retouch_Photo2.ViewModels
                     break;
 
                 case ListViewSelectionMode.Single:
-                    this._setValueWithChildren(this.SelectionLayerage, action);
+                    this.SetLayerageValueWithChildren(this.SelectionLayerage, action);
                     break;
 
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage child in this.SelectionLayerages)
                     {
-                        this._setValueWithChildren(child, action);
+                        this.SetLayerageValueWithChildren(child, action);
                     }
                     break;
             }
         }
-        private void _setValueWithChildren(Layerage layerage, Action<Layerage> action)
+        public void SetLayerageValueWithChildren(Layerage layerage, Action<Layerage> action)
         {
             action(layerage);
 
@@ -72,7 +72,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 foreach (Layerage child in layerage.Children)
                 {
-                    this._setValueWithChildren(child, action);
+                    this.SetLayerageValueWithChildren(child, action);
                 }
             }
         }
@@ -88,18 +88,18 @@ namespace Retouch_Photo2.ViewModels
                     break;
 
                 case ListViewSelectionMode.Single:
-                    this._setValueWithChildren(this.SelectionLayerage, action);
+                    this.SetLayerageValueWithChildren(this.SelectionLayerage, action);
                     break;
 
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage child in this.SelectionLayerages)
                     {
-                        this._setValueWithChildren(child, action);
+                        this.SetLayerageValueWithChildren(child, action);
                     }
                     break;
             }
         }
-        private void _setValueWithChildrenOnlyGroup(Layerage layerage, Action<Layerage> action)
+        public void SetLayerageValueWithChildrenOnlyGroup(Layerage layerage, Action<Layerage> action)
         {
             action(layerage);
 
@@ -109,7 +109,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 foreach (Layerage child in layerage.Children)
                 {
-                    this._setValueWithChildren(child, action);
+                    this.SetLayerageValueWithChildren(child, action);
                 }
             }
         }

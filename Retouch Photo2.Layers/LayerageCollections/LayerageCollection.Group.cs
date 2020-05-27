@@ -100,7 +100,7 @@ namespace Retouch_Photo2.Layers
                 IsRefactoringTransformer = true,
             };
             Layerage groupLayerage = groupLayer.ToLayerage();
-            Layer.Instances.Add(groupLayer);
+            LayerBase.Instances.Add(groupLayer);
 
 
             //Temp

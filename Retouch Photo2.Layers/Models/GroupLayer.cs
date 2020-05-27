@@ -11,9 +11,9 @@ using Windows.UI.Xaml;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s GroupLayer .
+    /// <see cref="LayerBase"/>'s GroupLayer .
     /// </summary>
-    public class GroupLayer : Layer, ILayer
+    public class GroupLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             GroupLayer groupLayer = new GroupLayer();
 
-            Layer.CopyWith(resourceCreator, groupLayer, this);
+            LayerBase.CopyWith(resourceCreator, groupLayer, this);
             return groupLayer;
         }
 

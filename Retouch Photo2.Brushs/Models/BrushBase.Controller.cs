@@ -79,7 +79,7 @@ namespace Retouch_Photo2.Brushs
                             case BrushHandleMode.Center:
                                 {
                                     Vector2 center = point;
-                                    Vector2 yPoint = center + this._startingYPoint - this._startingCenter;
+                                    Vector2 yPoint = center + this.StartingYPoint - this.StartingCenter;
                                     this.Center = center;
                                     this.YPoint = yPoint;
                                 }
@@ -102,21 +102,21 @@ namespace Retouch_Photo2.Brushs
 
                                     Vector2 offset = point - startingPoint;
                                     this.Center = center;
-                                    this.XPoint = offset + this._startingXPoint;
-                                    this.YPoint = offset + this._startingYPoint;
+                                    this.XPoint = offset + this.StartingXPoint;
+                                    this.YPoint = offset + this.StartingYPoint;
                                 }
                                 return;
                             case BrushHandleMode.XPoint:
                                 {
-                                    float radiusY = Vector2.Distance(this._startingYPoint, this._startingCenter);
+                                    float radiusY = Vector2.Distance(this.StartingYPoint, this.StartingCenter);
                                     this.XPoint = point;
-                                    this.YPoint = BrushBase.XToY(point, this._startingCenter, radiusY);
+                                    this.YPoint = BrushBase.XToY(point, this.StartingCenter, radiusY);
                                 }
                                 return;
                             case BrushHandleMode.YPoint:
                                 {
-                                    float radiusX = Vector2.Distance(this._startingXPoint, this._startingCenter);
-                                    this.XPoint = BrushBase.YToX(point, this._startingCenter, radiusX);
+                                    float radiusX = Vector2.Distance(this.StartingXPoint, this.StartingCenter);
+                                    this.XPoint = BrushBase.YToX(point, this.StartingCenter, radiusX);
                                     this.YPoint = point;
                                 }
                                 return;

@@ -9,9 +9,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s GeometryCapsuleLayer .
+    /// <see cref="LayerBase"/>'s GeometryCapsuleLayer .
     /// </summary>
-    public class GeometryCapsuleLayer : Layer, ILayer
+    public class GeometryCapsuleLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             GeometryCapsuleLayer capsuleLayer = new GeometryCapsuleLayer();
 
-            Layer.CopyWith(resourceCreator, capsuleLayer, this);
+            LayerBase.CopyWith(resourceCreator, capsuleLayer, this);
             return capsuleLayer;
         }
 

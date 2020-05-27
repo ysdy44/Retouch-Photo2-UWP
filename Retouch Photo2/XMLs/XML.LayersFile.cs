@@ -14,7 +14,7 @@ namespace Retouch_Photo2
 
 
         /// <summary>
-        /// Load <see cref="Layer"/>s file from temporary folder.
+        /// Load <see cref="LayerBase"/>s file from temporary folder.
         /// </summary>
         /// <returns> The product layers. </returns>
         public static IEnumerable<ILayer> LoadLayersFile()

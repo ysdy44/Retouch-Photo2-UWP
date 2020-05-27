@@ -99,7 +99,7 @@
                         <ToolTip x:Name="RightToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
                 </Button>
-                <Button x:Name="HorizontallySymmetryButton" Visibility="Visible" Grid.Column="3" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}">
+                <Button x:Name="HorizontallySymmetryButton" Grid.Column="3" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}">
                     <ToolTipService.ToolTip>
                         <ToolTip x:Name="HorizontallySymmetryToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
@@ -123,7 +123,7 @@
                         <ToolTip x:Name="BottomToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
                 </Button>
-                <Button x:Name="VerticallySymmetryButton" Visibility="Visible" Grid.Column="3" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}">
+                <Button x:Name="VerticallySymmetryButton" Grid.Column="3" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}">
                     <ToolTipService.ToolTip>
                         <ToolTip x:Name="VerticallySymmetryToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>

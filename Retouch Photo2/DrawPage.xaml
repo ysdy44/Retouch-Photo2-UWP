@@ -126,8 +126,9 @@
 
 
         <!--Tip-->
-        <Border Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" CornerRadius="4" Height="24"  Width="Auto"  BorderThickness="1" Background="#b5d4f2"  BorderBrush="#3d9cf7" HorizontalAlignment="Center" VerticalAlignment="Top"
-                Visibility="{x:Bind ViewModel.TipTextVisibility, Mode=OneWay}">
+        <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" 
+                        Visibility="{x:Bind ViewModel.TipTextVisibility, Mode=OneWay}">
+       
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>
                 <animations:OpacityAnimation Duration="0:0:0.2" From="0.0" To="1.0"/>
@@ -137,10 +138,11 @@
             <animations:Implicit.HideAnimations>
                 <animations:OpacityAnimation Duration="0:0:0.4" From="1.0" To="0.0"/>
             </animations:Implicit.HideAnimations>
-            
-            <TextBlock Margin="20,0" FontSize="16"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#0055a4" 
-                        Text="{x:Bind ViewModel.TipText, Mode=OneWay}"/>
-        </Border>
+  
+            <ToolTip Style="{StaticResource AppToolTipStyle}">
+                <TextBlock Text="{x:Bind ViewModel.TipText, Mode=OneWay}" TextWrapping="Wrap"/>
+            </ToolTip>
+        </ContentControl>
 
         
         <!--Load-->
@@ -154,14 +156,12 @@
                     <elements:SizePicker x:Name="SetupSizePicker"/>
                     <ContentControl Height="6"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Width="90" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
-                         扩张
+                        <Button x:Name="SetupResizeButton" MinWidth="80" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
                         </Button>
-                        <Button Width="90" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
-                            等比例
+                        <Button x:Name="SetupAnchorButton" MinWidth="80" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
                         </Button>
                     </StackPanel>
-                    <transformers:IndicatorControl Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}"/>
+                    <transformers:IndicatorControl x:Name="SetupIndicatorControl" Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}"/>
                 </StackPanel>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
@@ -169,10 +169,10 @@
         <elementDialog:DialogBase x:Name="ExportDialog">
             <elementDialog:DialogBase.CenterContent>
                 <StackPanel>
-                    <TextBlock x:Name="FileFormatTextBlock" Text="File Format" Style="{StaticResource AppTextBlockStyle}"/>
+                    <TextBlock x:Name="ExportFileFormatTextBlock" Text="File Format" Style="{StaticResource AppTextBlockStyle}"/>
                     <elements:FileFormatComboBox x:Name="FileFormatComboBox"/>
-                    <TextBlock x:Name="QualityTextBlock" Text="Quality" Style="{StaticResource AppTextBlockStyle}"/>
-                    <elements:SilderPicker x:Name="QualityPicker" />
+                    <TextBlock x:Name="ExportQualityTextBlock" Text="Quality" Style="{StaticResource AppTextBlockStyle}"/>
+                    <elements:SilderPicker x:Name="ExportQualityPicker" />
                 </StackPanel>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>

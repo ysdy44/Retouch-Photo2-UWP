@@ -56,8 +56,6 @@ namespace Retouch_Photo2.ViewModels
         private void _setModeNone()
         {
             this.SelectionMode = ListViewSelectionMode.None;
-            this.SelectionUnNone = false;
-            this.SelectionSingle = false;
             
             this.Transformer = new Transformer();
             this.DisabledRadian = false;
@@ -109,8 +107,6 @@ namespace Retouch_Photo2.ViewModels
             ILayer layer = layerage.Self;
 
             this.SelectionMode = ListViewSelectionMode.Single;
-            this.SelectionUnNone = true;
-            this.SelectionSingle = true;
 
             this.Transformer = layerage.GetActualTransformer();
             this.DisabledRadian = false;
@@ -163,9 +159,7 @@ namespace Retouch_Photo2.ViewModels
             Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(layerages);
             ILayer outermostLayer = outermost.Self;
 
-            this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer     
-            this.SelectionUnNone = true;
-            this.SelectionSingle = false;
+            this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer
 
             this.SelectionLayerage = null;
             this.SelectionLayerages = layerages;

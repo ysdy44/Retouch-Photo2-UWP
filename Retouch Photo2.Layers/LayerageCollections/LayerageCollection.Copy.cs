@@ -32,7 +32,7 @@ namespace Retouch_Photo2.Layers
             ILayer child2 = child.Self;
             ILayer clone2 = child2.Clone(resourceCreator);
             Layerage clone = clone2.ToLayerage();
-            Layer.Instances.Add(clone2);
+            LayerBase.Instances.Add(clone2);
             //
 
             clone.Children = child.Children;
@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Layers
                 ILayer child2 = child.Self;
                 ILayer clone2 = child2.Clone(resourceCreator);
                 Layerage clone = clone2.ToLayerage();
-                Layer.Instances.Add(clone2);
+                LayerBase.Instances.Add(clone2);
                 //
 
                 children[i] = clone;

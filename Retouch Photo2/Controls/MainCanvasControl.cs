@@ -81,7 +81,7 @@ namespace Retouch_Photo2.Controls
                 Layerage currentLayer = this.ViewModel.LayerageCollection.RootLayerages[i];
                 ILayer currentLayer2 = currentLayer.Self;
 
-                previousImage = Layer.Render(this.ViewModel.CanvasDevice, currentLayer2, previousImage, canvasToVirtualMatrix, currentLayer.Children);
+                previousImage = LayerBase.Render(this.ViewModel.CanvasDevice, currentLayer2, previousImage, canvasToVirtualMatrix, currentLayer.Children);
             }
 
             return previousImage;

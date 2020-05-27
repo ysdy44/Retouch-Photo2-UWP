@@ -9,12 +9,18 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel>
+    <StackPanel Background="#272727" Padding="122">
 
-        <xaml:CanvasControl x:Name="CanvasControl" Height="200" CreateResources="CanvasControl_CreateResources" Draw="CanvasControl_Draw"/>
 
-        <Slider x:Name="Slider" Maximum="1" Minimum="0" StepFrequency="0.01" />
-        <TextBox x:Name="TextBox" Height="1000"/>
+        <Border Width="90" Height="28" CornerRadius="4" BorderThickness="0,0,0,1" BorderBrush="#454545"  Background="#272727">
+            <Border CornerRadius="4" BorderThickness="1" BorderBrush="#101010" Background="#272727">
+                <Border CornerRadius="4" BorderThickness="0,1,0,0" BorderBrush="#454545"  Background="#272727">
+                    <Button BorderThickness="0" Padding="0" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        OK
+                    </Button>
+                </Border>
+            </Border>
+        </Border>
 
 
     </StackPanel>

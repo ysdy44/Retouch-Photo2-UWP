@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Tools.Elements
                     //Turn to curve layer
                     ILayer curveLayer = this.GetCurveLayer(layerage);
                     Layerage curveLayerage = curveLayer.ToLayerage();
-                    Layer.Instances.Add(curveLayer);
+                    LayerBase.Instances.Add(curveLayer);
 
                     //set image brush
                     if (layer2.Type == LayerType.Image)
@@ -72,12 +72,12 @@ namespace Retouch_Photo2.Tools.Elements
             if (nodess.Count() == 1)
             {
                 CurveLayer curveLayer = new CurveLayer(nodess.Single());
-                Layer.CopyWith(this.ViewModel.CanvasDevice, curveLayer, layer);
+                LayerBase.CopyWith(this.ViewModel.CanvasDevice, curveLayer, layer);
                 return curveLayer;
             }
 
             CurveMultiLayer curveMultiLayer = new CurveMultiLayer(nodess);
-            Layer.CopyWith(this.ViewModel.CanvasDevice, curveMultiLayer, layer);
+            LayerBase.CopyWith(this.ViewModel.CanvasDevice, curveMultiLayer, layer);
             return curveMultiLayer;
         }
          

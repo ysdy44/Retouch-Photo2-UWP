@@ -11,9 +11,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s GeometryRoundRectLayer .
+    /// <see cref="LayerBase"/>'s GeometryRoundRectLayer .
     /// </summary>
-    public class GeometryRoundRectLayer : Layer, ILayer
+    public class GeometryRoundRectLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Layers.Models
                 Corner=this.Corner
             };
 
-            Layer.CopyWith(resourceCreator, roundRectLayer, this);
+            LayerBase.CopyWith(resourceCreator, roundRectLayer, this);
             return roundRectLayer;
         }
         

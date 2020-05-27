@@ -60,18 +60,19 @@ namespace Retouch_Photo2.Tools
             //Snap         
             if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.SelectionViewModel.GetFirstSelectedLayerage());
 
+            //History
+            this.ViewModel.MethodSelectedNone();
+            this.ViewModel.HistoryPushLayeragesHistory("Add layer");
+
             //Selection
             Transformer transformer = new Transformer(canvasStartingPoint, canvasPoint, this.IsCenter, this.IsSquare);
             this.Transformer = transformer;
             this.SelectionViewModel.SetModeExtended();//Selection
 
-            //History
-            this.ViewModel.HistoryPushLayeragesHistory("Add layer");
-
             //Mezzanine
             ILayer layer = createLayer(transformer);
             Layerage layerage = layer.ToLayerage();
-            Layer.Instances.Add(layer);
+            LayerBase.Instances.Add(layer);
 
             //Mezzanine
             this.MezzanineLayer = layerage;

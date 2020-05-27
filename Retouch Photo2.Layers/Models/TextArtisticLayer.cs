@@ -62,7 +62,7 @@ namespace Retouch_Photo2.Layers.Models
             TextArtisticLayer artisticLayer = new TextArtisticLayer();
          
             TextLayer.FontCopyWith(artisticLayer, this);
-            Layer.CopyWith(resourceCreator, artisticLayer, this);
+            LayerBase.CopyWith(resourceCreator, artisticLayer, this);
             return artisticLayer;
         }
 

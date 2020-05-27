@@ -154,6 +154,7 @@
     <Compile Include="LayerageCollections\LayerageCollection.Arrange_Parents_Controls_Background.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.Copy.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.Layerage.cs" />
+    <Compile Include="TransformPosition.cs" />
     <Compile Include="Layers\ILayer.cs" />
     <Compile Include="Layerage.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.FindOutermost.cs" />
@@ -162,7 +163,7 @@
     <Compile Include="Layers\ITextLayer.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.Add_Disengage.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.ControlHeight.cs" />
-    <Compile Include="Layers\Layer.Instance.cs" />
+    <Compile Include="Layers\LayerBase.Instance.cs" />
     <Compile Include="LayerType.cs" />
     <Compile Include="ModelsSecond\GeometryArrowLayer.cs" />
     <Compile Include="ModelsSecond\GeometryCapsuleLayer.cs" />
@@ -207,9 +208,9 @@
     </Compile>
     <Compile Include="LayerExtensions.cs" />
     <Compile Include="LayerMode\OverlayMode.cs" />
-    <Compile Include="Layers\Layer.Control.cs" />
-    <Compile Include="Layers\Layer.Render.cs" />
-    <Compile Include="Layers\Layer.Property.cs" />
+    <Compile Include="Layers\LayerBase.Control.cs" />
+    <Compile Include="Layers\LayerBase.Render.cs" />
+    <Compile Include="Layers\LayerBase.Property.cs" />
     <Compile Include="Models\CurveMultiLayer.cs" />
     <Compile Include="Layers\TextLayer.cs" />
     <Compile Include="Models\TextArtisticLayer.cs" />

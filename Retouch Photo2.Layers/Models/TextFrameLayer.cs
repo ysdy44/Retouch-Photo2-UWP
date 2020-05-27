@@ -34,7 +34,7 @@ namespace Retouch_Photo2.Layers.Models
             TextFrameLayer textFrameLayer = new TextFrameLayer();
 
             TextLayer.FontCopyWith(textFrameLayer, this);
-            Layer.CopyWith(resourceCreator, textFrameLayer, this);
+            LayerBase.CopyWith(resourceCreator, textFrameLayer, this);
             return textFrameLayer;
         }
 

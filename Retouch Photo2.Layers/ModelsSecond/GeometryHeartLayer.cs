@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s GeometryHeartLayer .
+    /// <see cref="LayerBase"/>'s GeometryHeartLayer .
     /// </summary>
-    public class GeometryHeartLayer : Layer, ILayer
+    public class GeometryHeartLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -44,7 +44,7 @@ namespace Retouch_Photo2.Layers.Models
                 Spread = this.Spread
             };
 
-            Layer.CopyWith(resourceCreator, heartLayer, this);
+            LayerBase.CopyWith(resourceCreator, heartLayer, this);
             return heartLayer;
         }
         

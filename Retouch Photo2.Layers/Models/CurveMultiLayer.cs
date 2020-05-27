@@ -11,9 +11,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s CurveMultiLayer .
+    /// <see cref="LayerBase"/>'s CurveMultiLayer .
     /// </summary>
-    public class CurveMultiLayer : Layer, ILayer
+    public class CurveMultiLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -103,7 +103,7 @@ namespace Retouch_Photo2.Layers.Models
                 Nodess = (from nodes in this.Nodess select nodes.Clone()).ToList()
             };
 
-            Layer.CopyWith(resourceCreator, curveMultiLayer, this);
+            LayerBase.CopyWith(resourceCreator, curveMultiLayer, this);
             return curveMultiLayer;
         }
 

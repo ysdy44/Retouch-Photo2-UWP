@@ -10,7 +10,7 @@ namespace Retouch_Photo2.Layers
     /// <summary>
     /// Represents a brush that provides an <see cref="Matrix3x2"/>.
     /// </summary>
-    public class Transform : ICacheTransform, IGetActualTransformer
+    public class Transform : ICacheTransform
     {
 
         /// <summary> The transformer. </summary>
@@ -74,8 +74,7 @@ namespace Retouch_Photo2.Layers
         }
 
 
-        //@Abstract      
-        public Transformer GetActualTransformer() => this.IsCrop ? this.CropTransformer : this.Transformer;
+        internal Transformer GetActualTransformer() => this.IsCrop ? this.CropTransformer : this.Transformer;
 
         public void CropTransformAdd(Vector2 vector)
         {

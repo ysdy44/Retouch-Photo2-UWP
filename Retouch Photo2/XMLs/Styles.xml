@@ -19,9 +19,8 @@
           </Stop>
         </Stops>
         <Extend>Clamp</Extend>
-        <Center X="0" Y="-1" />
-        <XPoint X="0" Y="0" />
-        <YPoint X="0" Y="1" />
+        <StartPoint X="0" Y="-1" />
+        <EndPoint X="0" Y="1" />
       </Fill>
       <Stroke Type="None" />
       <StrokeWidth>0</StrokeWidth>
@@ -44,9 +43,8 @@
           </Stop>
         </Stops>
         <Extend>Clamp</Extend>
-        <Center X="0" Y="-1" />
-        <XPoint X="0" Y="0" />
-        <YPoint X="0" Y="1" />
+        <StartPoint X="0" Y="-1" />
+        <EndPoint X="0" Y="1" />
       </Fill>
       <Stroke Type="None" />
       <StrokeWidth>0</StrokeWidth>
@@ -69,9 +67,8 @@
           </Stop>
         </Stops>
         <Extend>Clamp</Extend>
-        <Center X="0" Y="-1" />
-        <XPoint X="0" Y="0" />
-        <YPoint X="0" Y="1" />
+        <StartPoint X="0" Y="-1" />
+        <EndPoint X="0" Y="1" />
       </Fill>
       <Stroke Type="None" />
       <StrokeWidth>0</StrokeWidth>

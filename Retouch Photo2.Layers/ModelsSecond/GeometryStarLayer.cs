@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s GeometryStarLayer .
+    /// <see cref="LayerBase"/>'s GeometryStarLayer .
     /// </summary>
-    public class GeometryStarLayer : Layer, ILayer
+    public class GeometryStarLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -49,7 +49,7 @@ namespace Retouch_Photo2.Layers.Models
                 InnerRadius= this.InnerRadius,
             };
 
-            Layer.CopyWith(resourceCreator, starLayer, this);
+            LayerBase.CopyWith(resourceCreator, starLayer, this);
             return starLayer;
         }
         

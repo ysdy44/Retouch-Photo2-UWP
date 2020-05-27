@@ -87,7 +87,7 @@ namespace Retouch_Photo2.Menus.Models
 
         private IEnumerable<string> asdsadasdsdsssss()
         {
-            foreach (var layer in Layer.Instances)
+            foreach (var layer in LayerBase.Instances)
             {
                 ILayer layer2 = layer;
                 yield return $"   {layer2.Id}";

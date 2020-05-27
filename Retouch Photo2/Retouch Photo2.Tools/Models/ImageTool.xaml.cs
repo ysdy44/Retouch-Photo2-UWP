@@ -145,7 +145,7 @@ namespace Retouch_Photo2.Tools.Models
                 Style = this.SelectionViewModel.GeometryStyle
             };
             Layerage imageLayerage = imageLayer.ToLayerage();
-            Layer.Instances.Add(imageLayer);
+            LayerBase.Instances.Add(imageLayer);
 
 
             this.MezzanineLayerage = imageLayerage;

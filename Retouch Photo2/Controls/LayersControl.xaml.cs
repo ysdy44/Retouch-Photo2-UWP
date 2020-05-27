@@ -77,7 +77,7 @@ namespace Retouch_Photo2.Controls
                     Transform = new Transform(transformerSource)
                 };
                 Layerage imageLayerage = imageLayer.ToLayerage();
-                Layer.Instances.Add(imageLayer);
+                LayerBase.Instances.Add(imageLayer);
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>

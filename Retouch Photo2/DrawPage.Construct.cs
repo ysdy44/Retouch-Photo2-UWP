@@ -1,4 +1,6 @@
-﻿using Retouch_Photo2.Brushs;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
@@ -28,10 +30,14 @@ namespace Retouch_Photo2
             this.SetupDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/SetupDialog_Primary");
             this.SetupSizePicker.WidthText = resource.GetString("/$DrawPage/SetupSizePicker_Width");
             this.SetupSizePicker.HeightText = resource.GetString("/$DrawPage/SetupSizePicker_Height");
+            this.SetupResizeButton.Content = resource.GetString("/$DrawPage/SetupDialog_Resize");
+            this.SetupAnchorButton.Content = resource.GetString("/$DrawPage/SetupDialog_Anchor");
             
             this.ExportDialog.Title = resource.GetString("/$DrawPage/ExportDialog_Title");
             this.ExportDialog.CloseButton.Content = resource.GetString("/$DrawPage/ExportDialog_Close");
             this.ExportDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/ExportDialog_Primary");
+            this.ExportQualityTextBlock.Text = resource.GetString("/$DrawPage/ExportDialog_Quality");
+            this.ExportFileFormatTextBlock.Text = resource.GetString("/$DrawPage/ExportDialog_FileFormat");
 
             this.RenameDialog.Title = resource.GetString("/$DrawPage/RenameDialog_Title");
             this.RenameDialog.CloseButton.Content = resource.GetString("/$DrawPage/RenameDialog_Close");
@@ -42,8 +48,10 @@ namespace Retouch_Photo2
         //Export
         private void ConstructExportDialog()
         {
-            this.QualityPicker.Maximum = 1;
-            this.QualityPicker.Value = 1;
+            this.FileFormatComboBox.FileFormat = CanvasBitmapFileFormat.Jpeg; ;
+
+            this.ExportQualityPicker.Maximum = 1;
+            this.ExportQualityPicker.Value = 1;
 
             this.ExportDialog.CloseButton.Click += (sender, args) => this.ExportDialog.Hide();
 
@@ -65,7 +73,6 @@ namespace Retouch_Photo2
         }
         private void ShowExportDialog()
         {
-
             this.ExportDialog.Show();
         }
 
@@ -73,6 +80,24 @@ namespace Retouch_Photo2
         //Setup
         private void ConstructSetupDialog()
         {
+            this.SetupResizeButton.IsEnabled = false;
+            this.SetupAnchorButton.IsEnabled = true;
+            this.SetupIndicatorControl.Mode = IndicatorMode.None;
+
+            this.SetupResizeButton.Click += (sender, args) =>
+            {
+                this.SetupResizeButton.IsEnabled = false;
+                this.SetupAnchorButton.IsEnabled = true;
+                this.SetupIndicatorControl.Mode = IndicatorMode.None;
+            };
+            this.SetupAnchorButton.Click += (sender, args) =>
+            {
+                this.SetupResizeButton.IsEnabled = true;
+                this.SetupAnchorButton.IsEnabled = false;
+                this.SetupIndicatorControl.Mode = IndicatorMode.LeftTop;
+            };
+
+
             this.SetupDialog.CloseButton.Click += (sender, args) => this.SetupDialog.Hide();
 
             this.SetupDialog.PrimaryButton.Click += (_, __) =>
@@ -80,11 +105,12 @@ namespace Retouch_Photo2
                 this.SetupDialog.Hide();
 
                 BitmapSize size = this.SetupSizePicker.Size;
+                IndicatorMode mode = this.SetupIndicatorControl.Mode;
 
-                this.ViewModel.CanvasTransformer.Width = (int)size.Width;
-                this.ViewModel.CanvasTransformer.Height = (int)size.Height;
-
-                this.ViewModel.Invalidate();//Invalidate
+                if (mode== IndicatorMode.None)
+                    this.MethodViewModel.MethodSetup(size);
+                else
+                    this.MethodViewModel.MethodSetup(size, mode);
             };
         }
         private void ShowSetupDialog()

@@ -13,9 +13,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s ImageLayer .
+    /// <see cref="LayerBase"/>'s ImageLayer .
     /// </summary>
-    public class ImageLayer : Layer, ILayer
+    public class ImageLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -83,7 +83,7 @@ namespace Retouch_Photo2.Layers.Models
                 Photocopier = this.Photocopier,
             };
 
-            Layer.CopyWith(resourceCreator, imageLayer, this);
+            LayerBase.CopyWith(resourceCreator, imageLayer, this);
             return imageLayer;
         }
 

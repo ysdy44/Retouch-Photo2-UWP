@@ -186,8 +186,8 @@
   <data name="Transformer_Height" xml:space="preserve">
     <value>高度</value>
   </data>
-  <data name="Transformer_Indicator" xml:space="preserve">
-    <value>指示器</value>
+  <data name="Transformer_Anchor" xml:space="preserve">
+    <value>锚点</value>
   </data>
   <data name="Transformer_RatioScaling" xml:space="preserve">
     <value>等比例缩放</value>

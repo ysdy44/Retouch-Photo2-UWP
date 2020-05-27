@@ -42,11 +42,11 @@ namespace Retouch_Photo2.Brushs
 
 
         public Vector2 Center { get; set; }
-        Vector2 _startingCenter;
+        public Vector2 StartingCenter { get; private set; }
         public Vector2 XPoint { get; set; }
-        Vector2 _startingXPoint;
+        public Vector2 StartingXPoint { get; private set; }
         public Vector2 YPoint { get; set; }
-        Vector2 _startingYPoint;
+        public Vector2 StartingYPoint { get; private set; }
 
 
         public IBrush Clone()
@@ -70,13 +70,13 @@ namespace Retouch_Photo2.Brushs
             brush.Extend = this.Extend;
 
             brush.Center = this.Center;
-            brush._startingCenter = this._startingCenter;
+            brush.StartingCenter = this.StartingCenter;
 
             brush.XPoint = this.XPoint;
-            brush._startingXPoint = this._startingXPoint;
+            brush.StartingXPoint = this.StartingXPoint;
 
             brush.YPoint = this.YPoint;
-            brush._startingYPoint = this._startingYPoint;
+            brush.StartingYPoint = this.StartingYPoint;
 
             switch (this.Type)
             {
@@ -100,21 +100,21 @@ namespace Retouch_Photo2.Brushs
 
         public void CacheTransform()
         {
-            this._startingCenter = this.Center;
-            this._startingXPoint = this.XPoint;
-            this._startingYPoint = this.YPoint;
+            this.StartingCenter = this.Center;
+            this.StartingXPoint = this.XPoint;
+            this.StartingYPoint = this.YPoint;
         }
         public void TransformMultiplies(Matrix3x2 matrix)
         {
-            this.Center = Vector2.Transform(this._startingCenter, matrix);
-            this.XPoint = Vector2.Transform(this._startingXPoint, matrix);
-            this.YPoint = Vector2.Transform(this._startingYPoint, matrix);
+            this.Center = Vector2.Transform(this.StartingCenter, matrix);
+            this.XPoint = Vector2.Transform(this.StartingXPoint, matrix);
+            this.YPoint = Vector2.Transform(this.StartingYPoint, matrix);
         }
         public void TransformAdd(Vector2 vector)
         {
-            this.Center = Vector2.Add(this._startingCenter, vector);
-            this.XPoint = Vector2.Add(this._startingXPoint, vector);
-            this.YPoint = Vector2.Add(this._startingYPoint, vector);
+            this.Center = Vector2.Add(this.StartingCenter, vector);
+            this.XPoint = Vector2.Add(this.StartingXPoint, vector);
+            this.YPoint = Vector2.Add(this.StartingYPoint, vector);
         }
 
 

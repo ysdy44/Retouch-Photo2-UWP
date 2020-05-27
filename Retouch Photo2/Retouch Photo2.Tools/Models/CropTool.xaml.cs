@@ -157,7 +157,7 @@ namespace Retouch_Photo2.Tools.Models
             ILayer firstLayer = firstLayerage.Self;
 
             //Transformer
-            Transformer transformer = firstLayer.Transform.GetActualTransformer();
+            Transformer transformer = firstLayerage.GetActualTransformer();
             this.TransformerMode = Transformer.ContainsNodeMode(canvasStartingPoint, transformer, false);
             if (this.TransformerMode == TransformerMode.None)
             {

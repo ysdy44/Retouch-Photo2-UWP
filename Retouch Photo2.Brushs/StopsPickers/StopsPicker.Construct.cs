@@ -156,7 +156,7 @@ namespace Retouch_Photo2.Brushs
                 else if (this.Manager.IsRight)
                 {
                     Color color = this.Manager.RightColor;
-                    this.StopChanged(color, 1, false);//Delegate
+                    this.StopChanged(color, 100, false);//Delegate
                 }
                 else
                 {

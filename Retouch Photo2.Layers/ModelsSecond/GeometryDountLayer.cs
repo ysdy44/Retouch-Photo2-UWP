@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s GeometryDountLayer .
+    /// <see cref="LayerBase"/>'s GeometryDountLayer .
     /// </summary>
-    public partial class GeometryDountLayer : Layer, ILayer
+    public partial class GeometryDountLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -41,7 +41,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             GeometryDountLayer dountLayer = new GeometryDountLayer();
 
-            Layer.CopyWith(resourceCreator, dountLayer, this);
+            LayerBase.CopyWith(resourceCreator, dountLayer, this);
             return dountLayer;
         }
         

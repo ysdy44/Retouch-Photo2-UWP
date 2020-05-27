@@ -183,4 +183,16 @@
   <data name="Undo" xml:space="preserve">
     <value>Undo</value>
   </data>
+  <data name="SetupDialog_Anchor" xml:space="preserve">
+    <value>Anchor</value>
+  </data>
+  <data name="SetupDialog_Resize" xml:space="preserve">
+    <value>Resize</value>
+  </data>
+  <data name="ExportDialog_FileFormat" xml:space="preserve">
+    <value>File Format</value>
+  </data>
+  <data name="ExportDialog_Quality" xml:space="preserve">
+    <value>Quality</value>
+  </data>
 </root>

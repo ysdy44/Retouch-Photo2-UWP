@@ -25,6 +25,29 @@ namespace Retouch_Photo2.ViewModels
             get => this.selectionMode;
             private set
             {
+                switch (value)
+                {
+                    case ListViewSelectionMode.Single:
+                        this.SelectionUnNone = true;
+                        this.SelectionSingle = true;
+                        this.SelectionMultiple = false;
+                        break;
+                    case ListViewSelectionMode.Multiple:
+                        this.SelectionUnNone = true;
+                        this.SelectionSingle = false;
+                        this.SelectionMultiple = true;
+                        break;
+                    default:
+                        this.SelectionUnNone = false;
+                        this.SelectionSingle = false;
+                        this.SelectionMultiple = false;
+                        break;
+                }
+                this.OnPropertyChanged(nameof(this.SelectionUnNone));//Notify 
+                this.OnPropertyChanged(nameof(this.SelectionSingle));//Notify 
+                this.OnPropertyChanged(nameof(this.SelectionMultiple));//Notify 
+
+
                 this.selectionMode = value;
                 this.OnPropertyChanged(nameof(this.SelectionMode));//Notify 
             }
@@ -34,30 +57,18 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Gets selection-mode is not ""None"". 
         /// </summary>
-        public bool SelectionUnNone
-        {
-            get => this.selectionUnNone;
-            private set
-            {
-                this.selectionUnNone = value;
-                this.OnPropertyChanged(nameof(this.SelectionUnNone));//Notify 
-            }
-        }
-        private bool selectionUnNone;
-
+        public bool SelectionUnNone;
         /// <summary>
         /// Gets selection-mode is ""Single"". 
         /// </summary>
-        public bool SelectionSingle
-        {
-            get => this.selectionSingle;
-            private set
-            {
-                this.selectionSingle = value;
-                this.OnPropertyChanged(nameof(this.SelectionSingle));//Notify 
-            }
-        }
-        private bool selectionSingle;
+        public bool SelectionSingle;
+        /// <summary>
+        /// Gets selection-mode is ""Multiple"". 
+        /// </summary>
+        public bool SelectionMultiple;
+
+
+        //////////////////////////
 
 
         /// <summary> The single selected layerage. </summary>
@@ -65,6 +76,9 @@ namespace Retouch_Photo2.ViewModels
 
         /// <summary> The all selected layerages. </summary>
         public IEnumerable<Layerage> SelectionLayerages { get; private set; }
+
+
+        //////////////////////////
 
 
         /// <summary> Transformer of selection layers. </summary>

@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s GeometryDiamondLayer .
+    /// <see cref="LayerBase"/>'s GeometryDiamondLayer .
     /// </summary>
-    public class GeometryDiamondLayer : Layer, ILayer
+    public class GeometryDiamondLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -44,7 +44,7 @@ namespace Retouch_Photo2.Layers.Models
                 Mid = this.Mid
             };
 
-            Layer.CopyWith(resourceCreator, diamondLayer, this);
+            LayerBase.CopyWith(resourceCreator, diamondLayer, this);
             return diamondLayer;
         }
         

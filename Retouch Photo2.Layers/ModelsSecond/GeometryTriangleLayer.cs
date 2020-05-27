@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s GeometryTriangleLayer .
+    /// <see cref="LayerBase"/>'s GeometryTriangleLayer .
     /// </summary>
-    public class GeometryTriangleLayer : Layer, ILayer
+    public class GeometryTriangleLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -44,7 +44,7 @@ namespace Retouch_Photo2.Layers.Models
                 Center = this.Center,
             };
 
-            Layer.CopyWith(resourceCreator, triangleLayer, this);
+            LayerBase.CopyWith(resourceCreator, triangleLayer, this);
             return triangleLayer;
         }
         

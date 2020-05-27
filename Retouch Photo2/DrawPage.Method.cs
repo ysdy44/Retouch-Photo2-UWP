@@ -56,7 +56,7 @@ namespace Retouch_Photo2
                 suggestedFileName: this.ViewModel.Name,
 
                 fileFormat: this.FileFormatComboBox.FileFormat,
-                quality: this.QualityPicker.Value
+                quality: this.ExportQualityPicker.Value
             );
         }
 
@@ -88,7 +88,7 @@ namespace Retouch_Photo2
             
             //Save layers file.
             IEnumerable<Layerage> savedLayerages = LayerageCollection.GetLayerages(this.ViewModel.LayerageCollection.RootLayerages);
-            IEnumerable<ILayer> savedLayers = from layer in Layer.Instances where savedLayerages.Any(p => layer.Equals(p)) select layer;
+            IEnumerable<ILayer> savedLayers = from layer in LayerBase.Instances where savedLayerages.Any(p => layer.Equals(p)) select layer;
             await XML.SaveLayerFile(zipFolder, savedLayers);
 
             //Save photos file and Move photo file.
@@ -116,7 +116,7 @@ namespace Retouch_Photo2
             Photo.Instances.Clear();
 
             //Clear layers
-            Layer.Instances.Clear();
+            LayerBase.Instances.Clear();
 
             //FileUtil
             await FileUtil.DeleteInTemporaryFolder();

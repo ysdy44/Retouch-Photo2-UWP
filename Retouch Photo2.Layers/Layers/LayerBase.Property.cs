@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Layers
     /// <summary>
     /// Represents a layer that can have render properties. Provides a rendering method.
     /// </summary>
-    public abstract partial class Layer
+    public abstract partial class LayerBase
     {
 
         //@Abstract
@@ -77,31 +77,10 @@ namespace Retouch_Photo2.Layers
         public virtual void Load(XElement element) { }
 
 
-        public virtual void Fill(IBrush brush) { }
-        public virtual void Stroke(IBrush brush) { }
-        public virtual void StrokeWidth(float width) { }
-        public virtual void StrokeStyle(CanvasStrokeStyle strokeStyle) { }
-
-
         public virtual void CacheTransform()
         {
             this.Style.CacheTransform();
             this.Transform.CacheTransform();
-
-            //            foreach (Layer child in this.Children)
-            //        {
-            //          child.CacheTransform();
-            //      }
-
-            //RefactoringTransformer
-            //      if (this.Parents != null)
-            //    {
-            //        if (this.Parents.Type == LayerType.Group)
-            //      {
-            //         Layer groupLayer = this.Parents;
-            //        groupLayer.IsRefactoringTransformer = true;
-            //    }
-            //    }
         }
         public virtual void TransformMultiplies(Matrix3x2 matrix)
         {

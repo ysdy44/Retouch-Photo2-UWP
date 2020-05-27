@@ -186,4 +186,16 @@
   <data name="Undo" xml:space="preserve">
     <value>撤销</value>
   </data>
+  <data name="SetupDialog_Anchor" xml:space="preserve">
+    <value>锚点</value>
+  </data>
+  <data name="SetupDialog_Resize" xml:space="preserve">
+    <value>新尺寸</value>
+  </data>
+  <data name="ExportDialog_FileFormat" xml:space="preserve">
+    <value>文件格式</value>
+  </data>
+  <data name="ExportDialog_Quality" xml:space="preserve">
+    <value>质量</value>
+  </data>
 </root>

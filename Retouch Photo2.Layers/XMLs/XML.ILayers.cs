@@ -14,7 +14,7 @@ namespace Retouch_Photo2.Layers
     {
 
         /// <summary>
-        /// Saves the entire <see cref="Layer"/>s to a XDocument.
+        /// Saves the entire <see cref="LayerBase"/>s to a XDocument.
         /// </summary>
         /// <param name="layers"> The source data. </param>
         /// <returns> The saved XDocument. </returns>

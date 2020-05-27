@@ -108,10 +108,10 @@ namespace Retouch_Photo2
 
             //Load all layers. 
             IEnumerable<ILayer> layers = XML.LoadLayersFile();
-            Layer.Instances.Clear();
+            LayerBase.Instances.Clear();
             foreach (ILayer layer in layers)
             {
-                Layer.Instances.Add(layer);
+                LayerBase.Instances.Add(layer);
             }
 
 
@@ -165,7 +165,7 @@ namespace Retouch_Photo2
                 Photocopier = photocopier,
             };
             Layerage imageLayerage = imageLayer.ToLayerage();
-            Layer.Instances.Add(imageLayer);
+            LayerBase.Instances.Add(imageLayer);
 
             //Project
             {

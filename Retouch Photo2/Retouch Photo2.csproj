@@ -317,6 +317,7 @@
     <Content Include="Icons\2Logo-Small.png" />
     <Content Include="Icons\2Logo-Wide.png" />
     <Content Include="Icons\2Logo.png" />
+    <Content Include="Icons\AppRender.png" />
     <Content Include="Icons\Circle.jpg" />
     <Content Include="Icons\GrayAndWhite.jpg" />
     <Content Include="Icons\LoadFaill.jpg" />

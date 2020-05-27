@@ -39,7 +39,7 @@ namespace Retouch_Photo2.ViewModels
         {
             ILayer clone = source.Clone(this.CanvasDevice);
             Layerage layerageClone = clone.ToLayerage();
-            Layer.Instances.Add(clone);
+            LayerBase.Instances.Add(clone);
 
             return layerageClone;
         }

@@ -10,9 +10,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="Layer"/>'s GeometryCogLayer .
+    /// <see cref="LayerBase"/>'s GeometryCogLayer .
     /// </summary>
-    public class GeometryCogLayer : Layer, ILayer
+    public class GeometryCogLayer : LayerBase, ILayer
     {
 
         //@Override     
@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Layers.Models
                 Notch = this.Notch,
             };
 
-            Layer.CopyWith(resourceCreator, cogLayer, this);
+            LayerBase.CopyWith(resourceCreator, cogLayer, this);
             return cogLayer;
         }
         

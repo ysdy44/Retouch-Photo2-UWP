@@ -34,6 +34,9 @@ namespace Retouch_Photo2
             this.InitializeComponent();
             this.ConstructStrings();
             this.BackButton.Click += (s, e) => this.Frame.GoBack();
+            this.AboutButton.Click += (s, e) => this.AboutDialog.Show();
+            this.AboutDialog.CloseButton.Click += (s, e) => this.AboutDialog.Hide();
+            this.AboutDialog.PrimaryButton.Click += (s, e) => this.AboutDialog.Hide();
 
             this.ConstructTheme();
 
