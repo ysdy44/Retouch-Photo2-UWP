@@ -66,7 +66,7 @@ namespace Retouch_Photo2
                 foreach (StorageFolder folder in zipFolders)
                 {
                     // [StorageFolder] --> [projectViewItem]
-                    ProjectViewItem item = FileUtil.ConstructProjectViewItem(folder);
+                    IProjectViewItem item = FileUtil.ConstructProjectViewItem(folder);
                     if (item != null) this.ProjectViewItems.Add(item); //Notify
                 }
             }
@@ -82,7 +82,7 @@ namespace Retouch_Photo2
         /// </summary>
         private void SelectAllProjectViewItems(SelectMode selectMode)
         {
-            foreach (ProjectViewItem item in this.ProjectViewItems)
+            foreach (IProjectViewItem item in this.ProjectViewItems)
             {
                 item.SelectMode = selectMode;
             }
@@ -126,7 +126,7 @@ namespace Retouch_Photo2
             }
 
             //Rename
-            ProjectViewItem item = this.ProjectViewItems.First(p=>p.Name==oldName);
+            IProjectViewItem item = this.ProjectViewItems.First(p=>p.Name==oldName);
             await FileUtil.RenameZipFolder(oldName, newName, item);
 
             this.HideRenameDialog();
@@ -136,9 +136,9 @@ namespace Retouch_Photo2
         /// <summary>
         /// Delete all selected ProjectViewItem(s).
         /// </summary>
-        private async Task DeleteProjectViewItems(IList<ProjectViewItem> items)
+        private async Task DeleteProjectViewItems(IEnumerable<IProjectViewItem> items)
         {
-            foreach (ProjectViewItem item in items)
+            foreach (IProjectViewItem item in items.ToList())
             {
                 //Delete
                 string name = item.Name;
@@ -154,15 +154,15 @@ namespace Retouch_Photo2
         /// <summary>
         /// Duplicate all selected ProjectViewItem(s).
         /// </summary>     
-        private async Task DuplicateProjectViewItems(IList<ProjectViewItem> items)
+        private async Task DuplicateProjectViewItems(IEnumerable<IProjectViewItem> items)
         {
-            foreach (ProjectViewItem item in items)
+            foreach (IProjectViewItem item in items.ToList())
             {
                 string oldName = item.Name;
                 string newName = this.UntitledRenameByRecursive(oldName);
                 StorageFolder storageFolder = await FileUtil.DuplicateZipFolder(oldName, newName);
 
-                ProjectViewItem newItem = FileUtil.ConstructProjectViewItem(newName, storageFolder);
+                IProjectViewItem newItem = FileUtil.ConstructProjectViewItem(newName, storageFolder);
                 this.ProjectViewItems.Add(newItem);//Notify
             }
         }

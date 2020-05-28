@@ -33,7 +33,7 @@ namespace Retouch_Photo2
         /// </summary>
         /// <param name="folder"> The zip folder. </param>
         /// <returns> The product ProjectViewItem. </returns>
-        public static ProjectViewItem ConstructProjectViewItem(StorageFolder folder)
+        public static IProjectViewItem ConstructProjectViewItem(StorageFolder folder)
         {
             string name = folder.DisplayName.Replace(".photo2pk", "");
 
@@ -45,7 +45,7 @@ namespace Retouch_Photo2
         /// <param name="name"> The name. </param>
         /// <param name="folder"> The zip folder. </param>
         /// <returns> The product ProjectViewItem. </returns>
-        public static ProjectViewItem ConstructProjectViewItem(string name, StorageFolder folder)
+        public static IProjectViewItem ConstructProjectViewItem(string name, StorageFolder folder)
         {
             string thumbnail = $"{folder.Path}\\Thumbnail.png";
 
@@ -124,9 +124,9 @@ namespace Retouch_Photo2
 
         /// <summary>
         /// The file picker is displayed so that the user can select a file.
-        /// Then copy to the temporary folder, and return the copy
+        /// Then copy to the temporary folder, and return the copy.
         /// </summary>
-        /// <param name="location"> The destination LocationId. </param>
+        /// <param name="location"> The destination locationId. </param>
         /// <returns> The product file. </returns>
         public async static Task<StorageFile> PickAndCopySingleImageFileAsync(PickerLocationId location)
         {
@@ -150,6 +150,33 @@ namespace Retouch_Photo2
 
             StorageFile copyFile = await file.CopyAsync(ApplicationData.Current.TemporaryFolder, file.Name, NameCollisionOption.ReplaceExisting);
             return copyFile;
+        }
+
+        /// <summary>
+        /// Filter files that are not pictures.
+        /// Then copy to the temporary folder, and return the copy.
+        /// </summary>
+        /// <param name="item"> The destination item. </param>
+        /// <returns> The product file. </returns>
+        public async static Task<StorageFile> CopySingleImageFileAsync(IStorageItem item)
+        {
+            if (item is StorageFile file)
+            {
+                if (file == null) return null;
+
+                string fileType = file.FileType.ToUpper();
+                switch (fileType)
+                {
+                    case ".JPG":
+                    case ".JPEG":
+                    case ".PNG":
+                    case ".GIF":
+                    case ".BMP":
+                        StorageFile copyFile = await file.CopyAsync(ApplicationData.Current.TemporaryFolder, file.Name, NameCollisionOption.ReplaceExisting);
+                        return copyFile;
+                }
+            }
+            return null;
         }
 
 

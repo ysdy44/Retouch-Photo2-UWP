@@ -10,7 +10,7 @@ namespace Retouch_Photo2.Elements.MainPages
     /// <summary> 
     /// Item of <see cref="MainPage"/>. 
     /// </summary>
-    public sealed partial class ProjectViewItem : UserControl
+    public sealed partial class ProjectViewItem : UserControl, IProjectViewItem
     {
 
         //@Static
@@ -34,9 +34,6 @@ namespace Retouch_Photo2.Elements.MainPages
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
 
-        /// <summary>
-        /// Gets or sets the select-mode.
-        /// </summary>
         public SelectMode SelectMode
         {
             get => this._vsSelectMode;
@@ -63,21 +60,13 @@ namespace Retouch_Photo2.Elements.MainPages
 
             this._RootGrid.Tapped += (s, e) => ProjectViewItem.ItemClick?.Invoke(this);//Delegate
         }
-
-        /// <summary>
-        /// Rename.
-        /// </summary>
-        /// <param name="name"> The name. </param>
-        /// <param name="thumbnail"> The thumbnail path. </param>
+        
         public void Rename(string name,  string thumbnail)
         {
             this.Name = name;
             this.ImageEx.Source = new Uri(thumbnail, UriKind.Relative);
         }
-
-        /// <summary>
-        /// Switch the state.
-        /// </summary>
+        
         public void SwitchState()
         {
             switch (this.SelectMode)
@@ -90,22 +79,14 @@ namespace Retouch_Photo2.Elements.MainPages
                     break;
             }
         }
-
-        /// <summary>
-        /// Refresh image source.
-        /// </summary>
+        
         public void RefreshImageSource()
         {
             object url = this.ImageEx.Source;
             this.ImageEx.Source = null;
             this.ImageEx.Source = url;
         }
-
-
-        /// <summary>
-        /// Get the position and size of the image element relative to the visual element. 
-        /// </summary>
-        /// <returns> The calculated rect. </returns>
+                
         public Rect GetVisualRect(UIElement visual)
         {
             //Gets visual-postion in visual.

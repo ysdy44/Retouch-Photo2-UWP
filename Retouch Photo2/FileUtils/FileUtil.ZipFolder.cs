@@ -42,7 +42,7 @@ namespace Retouch_Photo2
         /// Rename zip folder and thumbnail.
         /// </summary>
         /// <param name="name"> The zip folder name. </param>
-        public static async Task RenameZipFolder(string oldName, string newName, ProjectViewItem item)
+        public static async Task RenameZipFolder(string oldName, string newName, IProjectViewItem item)
         {
             StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{oldName}.photo2pk");
             await zipFolder.RenameAsync($"{newName}.photo2pk");

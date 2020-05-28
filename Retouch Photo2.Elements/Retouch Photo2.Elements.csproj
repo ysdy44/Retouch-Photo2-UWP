@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="%24DrawPages\DrawLayout.Layout.cs" />
     <Compile Include="%24Loading\LoadingState.cs" />
+    <Compile Include="%24MainPages\IProjectViewItem.cs" />
     <Compile Include="%24MainPages\ProjectViewItem.xaml.cs">
       <DependentUpon>ProjectViewItem.xaml</DependentUpon>
     </Compile>

@@ -180,6 +180,9 @@
   <data name="Initial_Photo" xml:space="preserve">
     <value>从图库创建新项目</value>
   </data>
+  <data name="Initial_Sample" xml:space="preserve">
+    <value>打开样本项目</value>
+  </data>
   <data name="Initial_Tip" xml:space="preserve">
     <value>没有项目？你可以...</value>
   </data>

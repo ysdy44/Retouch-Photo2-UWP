@@ -6,8 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Imaging;
+using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -32,6 +34,7 @@ namespace Retouch_Photo2
             this.SelectAllButton.Content = resource.GetString("/$MainPage/Select_All");
 
             this.InitialTextBlock.Text = resource.GetString("/$MainPage/Initial_Tip");
+            this.InitialSampleTextBlock.Text = resource.GetString("/$MainPage/Initial_Sample");
             this.InitialAddTextBlock.Text = resource.GetString("/$MainPage/Initial_Add");
             this.InitialPhotoTextBlock.Text = resource.GetString("/$MainPage/Initial_Photo");
             this.InitialDestopTextBlock.Text = resource.GetString("/$MainPage/Initial_Destop");
@@ -143,9 +146,40 @@ namespace Retouch_Photo2
         //InitialControl
         private void ConstructInitialControl()
         {
+            this.InitialSampleButton.Click += async (s, e) =>
+            {
+                await FileUtil.ConstructSampleFile();
+                await this.LoadAllProjectViewItems();
+            };
             this.InitialAddButton.Click += (s, e) => this.ShowAddDialog();
             this.InitialPhotoButton.Click += async (s, e) => await this.NewFromPicture(PickerLocationId.PicturesLibrary);
             this.InitialDestopButton.Click += async (s, e) => await this.NewFromPicture(PickerLocationId.Desktop);
+        }
+
+
+        //DragAndDrop
+        private void ConstructDragAndDrop()
+        {
+            this.AllowDrop = true;
+            this.Drop += async (s, e) =>
+            {
+                if (e.DataView.Contains(StandardDataFormats.StorageItems))
+                {
+                    IReadOnlyList<IStorageItem> items = await e.DataView.GetStorageItemsAsync();
+                    if (items == null) return;
+                    IStorageItem item = items.FirstOrDefault();
+                    if (item == null) return;
+
+                    await this.NewFromPicture(item);
+                }
+            };
+            this.DragOver += (s, e) =>
+            {
+                e.AcceptedOperation = DataPackageOperation.Copy;
+                //e.DragUIOverride.Caption = App.resourceLoader.GetString("DropAcceptable_");//可以接受的图片
+                e.DragUIOverride.IsCaptionVisible = e.DragUIOverride.IsContentVisible = e.DragUIOverride.IsGlyphVisible = true;
+            };
+
         }
 
 
@@ -223,10 +257,10 @@ namespace Retouch_Photo2
             this.RenameDialog.CloseButton.Click += (sender, args) => this.HideRenameDialog();
             this.RenameDialog.PrimaryButton.Click += async (sender, args) =>
             {
-                await this.RenameProjectViewItem(this._rename, this.RenameTextBox.Name);
+                await this.RenameProjectViewItem(this._rename, this.RenameTextBox.Text);
             };
         }
-        private void ShowRenameDialog(ProjectViewItem item)
+        private void ShowRenameDialog(IProjectViewItem item)
         {
             this.MainLayout.MainPageState = MainPageState.Dialog;
 
@@ -256,8 +290,8 @@ namespace Retouch_Photo2
             {
                 this.LoadingControl.IsActive = true;
 
-                IEnumerable<ProjectViewItem> items = from i in this.ProjectViewItems where i.SelectMode == SelectMode.Selected select i;
-                await this.DeleteProjectViewItems(items.ToList());
+                IEnumerable<IProjectViewItem> items = from i in this.ProjectViewItems where i.SelectMode == SelectMode.Selected select i;
+                await this.DeleteProjectViewItems(items);
 
                 this.LoadingControl.IsActive = false;
 
@@ -278,8 +312,8 @@ namespace Retouch_Photo2
             {
                 this.LoadingControl.IsActive = true;
 
-                IEnumerable<ProjectViewItem> items = from i in this.ProjectViewItems where i.SelectMode == SelectMode.Selected select i;
-                await this.DuplicateProjectViewItems(items.ToList());
+                IEnumerable<IProjectViewItem> items = from i in this.ProjectViewItems where i.SelectMode == SelectMode.Selected select i;
+                await this.DuplicateProjectViewItems(items);
 
                 this.LoadingControl.IsActive = false;
 

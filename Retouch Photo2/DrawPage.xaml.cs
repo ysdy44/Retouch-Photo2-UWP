@@ -3,6 +3,7 @@ using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Numerics;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -72,25 +73,36 @@ namespace Retouch_Photo2
             #region Document
 
 
-            this.HeadBarControl.DocumentButton.Click += async (s, e) =>
+            async Task goBack()
             {
-                await this.Save();
                 await this.Exit();
-                this.ViewModel.IsUpdateThumbnailByName = true;
 
                 this.SettingViewModel.IsFullScreen = true;
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
                 this.Frame.GoBack();
+            }
+            this.HeadBarControl.DocumentButton.Click += async (s, e) =>
+            {
+                int countHistorys = this.ViewModel.Historys.Count;
+                int countLayerages = this.ViewModel.LayerageCollection.RootLayerages.Count;
+
+                if (countHistorys == 0 && countLayerages > 0)
+                {
+                    this.ViewModel.IsUpdateThumbnailByName = false;
+                    await goBack();
+                }
+                else
+                {
+                    await this.Save();
+                    this.ViewModel.IsUpdateThumbnailByName = true;
+                    await goBack();
+                }
             };
             this.HeadBarControl.DocumentUnSaveButton.Click += async (s, e) =>
             {
                 this.HeadBarControl.DocumentFlyout.Hide();
-                await this.Exit();
                 this.ViewModel.IsUpdateThumbnailByName = false;
-
-                this.SettingViewModel.IsFullScreen = true;
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
-                this.Frame.GoBack();
+                await goBack();
             };
 
 

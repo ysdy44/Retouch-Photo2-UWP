@@ -72,6 +72,8 @@ namespace Retouch_Photo2.Elements
         {
             string path = $"{ApplicationData.Current.TemporaryFolder.Path}\\{this.Name}{this.FileType}";
             StorageFile file = await StorageFile.GetFileFromPathAsync(path);
+            if (file == null) return;
+
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {
                 this.Source = await CanvasBitmap.LoadAsync(resourceCreator, fileStream);

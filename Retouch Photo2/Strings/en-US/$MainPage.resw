@@ -180,6 +180,9 @@
   <data name="Initial_Photo" xml:space="preserve">
     <value>New Project From Pictures</value>
   </data>
+  <data name="Initial_Sample" xml:space="preserve">
+    <value>Opne Sample Projects</value>
+  </data>
   <data name="Initial_Tip" xml:space="preserve">
     <value>No projects? You could...</value>
   </data>

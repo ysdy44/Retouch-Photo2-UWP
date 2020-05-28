@@ -68,7 +68,7 @@ namespace Retouch_Photo2
         /// Open from ProjectViewItem.
         /// </summary>
         /// <param name="projectViewItem"> The ProjectViewItem. </param>
-        private async void OpenFromProjectViewItem(ProjectViewItem projectViewItem)
+        private async void OpenFromProjectViewItem(IProjectViewItem projectViewItem)
         {
             this.LoadingControl.State = LoadingState.Loading;
             this.LoadingControl.IsActive = true;
@@ -142,11 +142,22 @@ namespace Retouch_Photo2
         /// <param name="pixels"> The picker locationId. </param>
         private async Task NewFromPicture(PickerLocationId location)
         {
+            StorageFile copyFile = await FileUtil.PickAndCopySingleImageFileAsync(location);
+
+            await this._newFromPicture(copyFile);
+        }
+        private async Task NewFromPicture(IStorageItem item)
+        {
+            StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(item);
+
+            await this._newFromPicture(copyFile);
+        }
+        private async Task _newFromPicture(StorageFile copyFile)
+        {
             this.LoadingControl.State = LoadingState.Loading;
             this.LoadingControl.IsActive = true;
 
             //Photo
-            StorageFile copyFile = await FileUtil.PickAndCopySingleImageFileAsync(location);
             if (copyFile == null) return;
             Photo photo = await Photo.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
             Photo.DuplicateChecking(photo);

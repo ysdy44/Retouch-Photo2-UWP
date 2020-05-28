@@ -22,7 +22,7 @@ namespace Retouch_Photo2
         SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         
-        ObservableCollection<ProjectViewItem> ProjectViewItems = new ObservableCollection<ProjectViewItem>();
+        ObservableCollection<IProjectViewItem> ProjectViewItems = new ObservableCollection<IProjectViewItem>();
 
 
         //@Construct
@@ -31,6 +31,7 @@ namespace Retouch_Photo2
             this.InitializeComponent();
             this.ConstructStrings();
             this.ConstructInitialControl();
+            this.ConstructDragAndDrop();
             this.ConstructSelectHead();
 
             this.MainLayout.ItemsSource = this.ProjectViewItems;
@@ -102,7 +103,9 @@ namespace Retouch_Photo2
             /// Occurs occuse after <see  cref="DrawPage.Frame.GoBack()"/>;
             if (this.ViewModel.IsUpdateThumbnailByName)
             {
-                ProjectViewItem item = this.ProjectViewItems.FirstOrDefault(i => i.Name == this.ViewModel.Name);
+                this.ViewModel.IsUpdateThumbnailByName = false;
+
+                IProjectViewItem item = this.ProjectViewItems.FirstOrDefault(i => i.Name == this.ViewModel.Name);
                 if (item != null)
                 {
                     item.RefreshImageSource();

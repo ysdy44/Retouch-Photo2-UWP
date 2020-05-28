@@ -4,7 +4,9 @@ using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -88,10 +90,11 @@ namespace Retouch_Photo2
             this.InitializeComponent();
             this.ConstructStrings();
             this.ConstructGridView();
+            this.ConstructDragAndDrop();
 
             this.BackButton.Click += (s, e) => this.Frame.GoBack();
-            this.AddButton.Click += async (s, e) => await this.Pick();
-
+            this.AddButton.Click += async (s, e) => await this.PickAndCopySingleImageFileAsync();
+            
 
             this.AddImageLayerButton.Click += (s, e) =>
             {
@@ -147,7 +150,7 @@ namespace Retouch_Photo2
 
                 if (Photo.Instances.Count == 0)
                 {
-                    await this.Pick();
+                    await this.PickAndCopySingleImageFileAsync();
                 }
             }
         }
@@ -180,7 +183,8 @@ namespace Retouch_Photo2
             this.ReplaceImageButton.Content = resource.GetString("/$PhotosPage/ReplaceImage");
         }
 
-        
+
+        //GridView
         private void ConstructGridView()
         {
             this.GridView.ItemsSource = Photo.Instances;
@@ -207,10 +211,46 @@ namespace Retouch_Photo2
         }
 
 
-        private async Task Pick()
+        //DragAndDrop
+        private void ConstructDragAndDrop()
+        {
+            this.AllowDrop = true;
+            this.Drop += async (s, e) =>
+            {
+                if (e.DataView.Contains(StandardDataFormats.StorageItems))
+                {
+                    IReadOnlyList<IStorageItem> items = await e.DataView.GetStorageItemsAsync();
+                    if (items == null) return;
+
+                    foreach (IStorageItem item in items)
+                    {
+                        await this.CopySingleImageFileAsync(item);
+                    }
+                }
+            };
+            this.DragOver += (s, e) =>
+            {
+                e.AcceptedOperation = DataPackageOperation.Copy;
+                //e.DragUIOverride.Caption = App.resourceLoader.GetString("DropAcceptable_");//可以接受的图片
+                e.DragUIOverride.IsCaptionVisible = e.DragUIOverride.IsContentVisible = e.DragUIOverride.IsGlyphVisible = true;
+            };
+
+        }
+
+
+
+        private async Task PickAndCopySingleImageFileAsync()
         {
             //Photo
             StorageFile copyFile = await FileUtil.PickAndCopySingleImageFileAsync(PickerLocationId.Desktop);
+            if (copyFile == null) return;
+            Photo photo = await Photo.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
+            Photo.DuplicateChecking(photo);
+        }
+        private async Task CopySingleImageFileAsync(IStorageItem item)
+        {
+            //Photo
+            StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(item);
             if (copyFile == null) return;
             Photo photo = await Photo.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
             Photo.DuplicateChecking(photo);

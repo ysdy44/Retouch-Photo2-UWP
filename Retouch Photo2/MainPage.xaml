@@ -80,6 +80,16 @@
                         <TextBlock x:Name="InitialTextBlock" HorizontalAlignment="Center" Foreground="{ThemeResource AppText}"/>
                         <ContentControl Height="6"/>
 
+                        <Button x:Name="InitialSampleButton" Style="{StaticResource AppIconAccentLineCircleButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE790;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                <ContentControl Width="8"/>
+                                <TextBlock x:Name="InitialSampleTextBlock" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
                         <Button x:Name="InitialAddButton" Style="{StaticResource AppIconAccentLineCircleButton}">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
@@ -88,7 +98,7 @@
                             </StackPanel>
                         </Button>
 
-                        <Rectangle Height="1" Fill="{ThemeResource AppBorderBrush}" HorizontalAlignment="Stretch"/>
+                        <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
                         <Button x:Name="InitialPhotoButton" Style="{StaticResource AppIconAccentLineCircleButton}">
                             <StackPanel Orientation="Horizontal">
@@ -105,7 +115,7 @@
                                 <TextBlock x:Name="InitialDestopTextBlock" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
-
+                                                
                     </StackPanel.Children>
 
                 </StackPanel>
