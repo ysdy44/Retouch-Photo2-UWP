@@ -10,6 +10,7 @@ namespace Retouch_Photo2.Layers
     public partial class Layerage : FanKit.Transformers.IGetActualTransformer
     {
         public ILayer Self => LayerBase.FindFirstLayer(this);
+        public ILayer ClipboardSelf => Clipboard.FindFirstLayer(this);
 
         public string Id { get; set; }
         public Layerage Parents { get; set; }

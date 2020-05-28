@@ -62,7 +62,7 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodEditCut()
         {
-            this.Clipboard.SetMode(this.LayerageCollection);//Clipboard
+            this.Clipboard.SetMode(this.CanvasDevice, this.LayerageCollection);//Clipboard
             this.ClipboardEnable = this.Clipboard.CanPaste;//PasteButton
 
             //History
@@ -78,7 +78,7 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodEditDuplicate()
         {
-            this.Clipboard.SetMode(this.LayerageCollection);//Clipboard
+            this.Clipboard.SetMode(this.CanvasDevice, this.LayerageCollection);//Clipboard
             this.ClipboardEnable = this.Clipboard.CanPaste;//PasteButton
 
             //Clipboard
@@ -91,7 +91,7 @@ namespace Retouch_Photo2.ViewModels
                         this.HistoryPushLayeragesHistory("Duplicate layers");
 
                         Layerage layerage = this.Clipboard.Layerage;
-                        Layerage layerageClone = LayerageCollection.CopyLayerage(this.CanvasDevice, layerage);
+                        Layerage layerageClone = LayerageCollection.PasteLayerage(this.CanvasDevice, layerage);
                         LayerageCollection.Mezzanine(this.LayerageCollection, layerageClone);
                     }
                     break;
@@ -101,7 +101,7 @@ namespace Retouch_Photo2.ViewModels
                         this.HistoryPushLayeragesHistory("Duplicate layers");
 
                         IEnumerable<Layerage> layerages = this.Clipboard.Layerages;
-                        IEnumerable<Layerage> layerageClones = LayerageCollection.CopyLayerages(this.CanvasDevice, layerages);
+                        IEnumerable<Layerage> layerageClones = LayerageCollection.PasteLayerages(this.CanvasDevice, layerages);
                         LayerageCollection.MezzanineRange(this.LayerageCollection, layerageClones);
                     }
                     break;
@@ -115,7 +115,7 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodEditCopy()
         {
-            this.Clipboard.SetMode(this.LayerageCollection);//Clipboard
+            this.Clipboard.SetMode(this.CanvasDevice, this.LayerageCollection);//Clipboard
             this.ClipboardEnable = this.Clipboard.CanPaste;//PasteButton
         }
         
@@ -131,7 +131,7 @@ namespace Retouch_Photo2.ViewModels
                         this.HistoryPushLayeragesHistory("Paste layers");
 
                         Layerage layerage = this.Clipboard.Layerage;
-                        Layerage layerageClone = LayerageCollection.CopyLayerage(this.CanvasDevice, layerage);
+                        Layerage layerageClone = LayerageCollection.PasteLayerage(this.CanvasDevice, layerage);
                         LayerageCollection.Mezzanine(this.LayerageCollection, layerageClone);
                     }
                     break;
@@ -141,7 +141,7 @@ namespace Retouch_Photo2.ViewModels
                         this.HistoryPushLayeragesHistory("Paste layers");
 
                         IEnumerable<Layerage> layerages = this.Clipboard.Layerages;
-                        IEnumerable<Layerage> layerageClones = LayerageCollection.CopyLayerages(this.CanvasDevice, layerages);
+                        IEnumerable<Layerage> layerageClones = LayerageCollection.PasteLayerages(this.CanvasDevice, layerages);
                         LayerageCollection.MezzanineRange(this.LayerageCollection, layerageClones);
                     }
                     break;

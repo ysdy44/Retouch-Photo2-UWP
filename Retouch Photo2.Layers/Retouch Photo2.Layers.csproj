@@ -106,6 +106,8 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Clipboards\Clipboard.cs" />
+    <Compile Include="Clipboards\Clipboard.Instance.cs" />
     <Compile Include="IconsSecond\GeometryArrowIcon.xaml.cs">
       <DependentUpon>GeometryArrowIcon.xaml</DependentUpon>
     </Compile>
@@ -152,7 +154,7 @@
       <DependentUpon>TextFrameIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="LayerageCollections\LayerageCollection.Arrange_Parents_Controls_Background.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.Copy.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.Clipboard.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.Layerage.cs" />
     <Compile Include="TransformPosition.cs" />
     <Compile Include="Layers\ILayer.cs" />

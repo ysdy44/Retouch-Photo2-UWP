@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.ViewModels
+namespace Retouch_Photo2.Layers
 {
-    public class Clipboard
+    public partial class Clipboard
     {
         /// <summary> The all copyed layerage. </summary> 
         public Layerage Layerage { get; private set; }
@@ -18,7 +18,7 @@ namespace Retouch_Photo2.ViewModels
         public ListViewSelectionMode SelectionMode { get; set; }
         public bool CanPaste => this.SelectionMode == ListViewSelectionMode.Single || this.SelectionMode == ListViewSelectionMode.Multiple;
 
-        public void SetMode(LayerageCollection layerageCollection)
+        public void SetMode(ICanvasResourceCreator resourceCreator, LayerageCollection layerageCollection)
         {
             //Layerages
             IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
@@ -30,6 +30,8 @@ namespace Retouch_Photo2.ViewModels
 
                 this.Layerage = null;
                 this.Layerages = null;
+
+                Clipboard.Instances.Clear();
             }
             else if (count == 1)
             {
@@ -38,12 +40,18 @@ namespace Retouch_Photo2.ViewModels
                 Layerage layerage = selectedLayerages.Single();
                 this.Layerage = layerage.Clone();
                 this.Layerages = null;
+
+                Clipboard.Instances.Clear();
+                LayerageCollection.CopyLayerage(resourceCreator, this.Layerage);
             }
             else if (count >= 2)
             {
                 this.SelectionMode = ListViewSelectionMode.Multiple;//None
                 this.Layerage = null;
                 this.Layerages = from layerage in selectedLayerages select layerage.Clone();
+
+                Clipboard.Instances.Clear();
+                LayerageCollection.CopyLayerages(resourceCreator, this.Layerages);
             }
         }
                

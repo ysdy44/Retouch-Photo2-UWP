@@ -106,7 +106,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Clipboard.cs" />
     <Compile Include="Enums\EditMode.cs" />
     <Compile Include="Enums\InvalidateMode.cs" />
     <Compile Include="Enums\MoveMode.cs" />

@@ -103,6 +103,8 @@ namespace Retouch_Photo2.Layers
         /// <param name="destination"> The destination ILayer. </param>
         public static void CopyWith(ICanvasResourceCreator resourceCreator, ILayer destination, ILayer source)
         {
+            destination.Id = source.Id;
+
             destination.Name = source.Name;
             destination.Opacity = source.Opacity;
             destination.BlendMode = source.BlendMode;
