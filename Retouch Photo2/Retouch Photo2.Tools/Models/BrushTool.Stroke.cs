@@ -43,6 +43,8 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
+        //////////////////////////
+
 
         public void StrokeStarted(Vector2 startingPoint, Vector2 point)
         {
@@ -150,6 +152,8 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
+        //////////////////////////
+
 
         public void StrokeTypeChanged(BrushType brushType, Photo photo = null)
         {
@@ -218,6 +222,8 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
+
+        //////////////////////////
 
 
         public void StrokeStopsChanged(CanvasGradientStop[] array)

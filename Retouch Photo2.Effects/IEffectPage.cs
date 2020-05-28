@@ -26,6 +26,6 @@ namespace Retouch_Photo2.Effects
         /// </summary>
         /// <param name="effect"> The effect. </param>
         /// <param name="isOnlyButton"> Only button follow. </param>
-        void FollowEffect(Effect effect, bool isOnlyButton);
+        void Follow(Effect effect, bool isOnlyButton);
     }
 }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Adjustments.Icons;
-using Retouch_Photo2.Adjustments.Pages;
 using System.Xml.Linq;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -14,31 +12,30 @@ namespace Retouch_Photo2.Adjustments.Models
     public class VignetteAdjustment : IAdjustment
     {
         //@Static
-        public static readonly VignettePage VignettePage = new VignettePage();
+        //@Generic
+        public static IAdjustmentGenericPage<VignetteAdjustment> GenericPage;// = new VignettePage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Vignette;
-        public FrameworkElement Icon { get; } = new VignetteIcon();
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page => VignetteAdjustment.VignettePage;
-        public string Text { get; private set; }
+        public UIElement Page => VignetteAdjustment.GenericPage.Self;
+        public string Text => VignetteAdjustment.GenericPage.Text;
+
 
         /// <summary> Specifies the size of the vignette region as a percentage of the full image. </summary>
         public float Amount = 0.0f;
+        public float StartingAmount { get; private set; }
+        public void CacheAmount() => this.StartingAmount = this.Amount;
+
         /// <summary> Specifies how quickly the vignette color bleeds in over the region being faded. </summary>
         public float Curve = 0.0f;
+        public float StartingCurve { get; private set; }
+        public void CacheCurve() => this.StartingCurve = this.Curve;
+
         /// <summary> Specifies the color to fade toward. Default value black. </summary>
         public Color Color = Colors.Black;
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a Vignette-adjustment.
-        /// </summary>
-        public VignetteAdjustment()
-        {
-            this.Text = VignetteAdjustment.VignettePage.Text;
-        }
+        public Color StartingColor { get; private set; }
+        public void CacheColor() => this.StartingColor = this.Color;
 
 
         public void Reset()
@@ -47,19 +44,19 @@ namespace Retouch_Photo2.Adjustments.Models
             this.Curve = 0.0f;
             this.Color = Colors.Black;
 
-            if (VignetteAdjustment.VignettePage.Adjustment == this)
+            if (VignetteAdjustment.GenericPage.Adjustment == this)
             {
-                VignetteAdjustment.VignettePage.Follow(this);
+                VignetteAdjustment.GenericPage.Reset();
             }
         }
         public void Follow()
         {
-            VignetteAdjustment.VignettePage.Adjustment = this;
-            VignetteAdjustment.VignettePage.Follow(this);
+            VignetteAdjustment.GenericPage.Adjustment = this;
+            VignetteAdjustment.GenericPage.Follow(this);
         }
         public void Close()
         {
-            VignetteAdjustment.VignettePage.Adjustment = null;
+            VignetteAdjustment.GenericPage.Adjustment = null;
         }
 
 

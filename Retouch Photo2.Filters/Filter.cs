@@ -19,7 +19,25 @@ namespace Retouch_Photo2.Filters
         /// <summary>
         /// The source data.
         /// </summary>
-        public List<IAdjustment> Adjustments { get; set; } = new List<IAdjustment>();
+        public IList<IAdjustment> Adjustments { get; set; } = new List<IAdjustment>();
+
+        /// <summary>
+        /// Get own copy.
+        /// </summary>
+        /// <returns> The cloned filter. </returns>
+        public Filter Clone()
+        {
+            return new Filter
+            {
+                Name= this.Name,
+                Adjustments=
+                (
+                    from adjustment
+                    in this.Adjustments
+                    select adjustment.Clone()
+                ).ToList()
+            };
+        }
 
         //@Static
         /// <summary>

@@ -1,7 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Adjustments.Icons;
-using Retouch_Photo2.Adjustments.Pages;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
 
@@ -13,46 +11,101 @@ namespace Retouch_Photo2.Adjustments.Models
     public class GammaTransferAdjustment : IAdjustment
     {
         //@Static
-        public static readonly GammaTransferPage GammaTransferPage = new GammaTransferPage();
+        //@Generic
+        public static IAdjustmentGenericPage<GammaTransferAdjustment> GenericPage;// = new GammaTransferPage();
 
+        //@Content
         public AdjustmentType Type => AdjustmentType.GammaTransfer;
-        public FrameworkElement Icon { get; } = new GammaTransferIcon();
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page => GammaTransferAdjustment.GammaTransferPage;
-        public string Text { get; private set; }
+        public UIElement Page => GammaTransferAdjustment.GenericPage.Self;
+        public string Text => GammaTransferAdjustment.GenericPage.Text;
 
         public bool ClampOutput= false;
 
+
+        #region Alpha
+
+
         public bool AlphaDisable = true;
+
         public float AlphaOffset = 0.0f;
+        public float StartingAlphaOffset { get; private set; }
+        public void CacheAlphaOffset() => this.StartingAlphaOffset = this.AlphaOffset;
+
         public float AlphaExponent = 1.0f;
+        public float StartingAlphaExponent { get; private set; }
+        public void CacheAlphaExponent() => this.StartingAlphaExponent = this.AlphaExponent;
+
         public float AlphaAmplitude = 1.0f;
+        public float StartingAlphaAmplitude { get; private set; }
+        public void CacheAlphaAmplitude() => this.StartingAlphaAmplitude = this.AlphaAmplitude;
+
+
+        #endregion
+
+
+        #region Red
+
 
         public bool RedDisable = true;
+
         public float RedOffset = 0.0f;
+        public float StartingRedOffset { get; private set; }
+        public void CacheRedOffset() => this.StartingRedOffset = this.RedOffset;
+
         public float RedExponent = 1.0f;
+        public float StartingRedExponent { get; private set; }
+        public void CacheRedExponent() => this.StartingRedExponent = this.RedExponent;
+
         public float RedAmplitude = 1.0f;
+        public float StartingRedAmplitude { get; private set; }
+        public void CacheRedAmplitude() => this.StartingRedAmplitude = this.RedAmplitude;
+
+
+        #endregion
+
+
+        #region Green
+
 
         public bool GreenDisable = true;
+
         public float GreenOffset = 0.0f;
+        public float StartingGreenOffset { get; private set; }
+        public void CacheGreenOffset() => this.StartingGreenOffset = this.GreenOffset;
+
         public float GreenExponent = 1.0f;
+        public float StartingGreenExponent { get; private set; }
+        public void CacheGreenExponent() => this.StartingGreenExponent = this.GreenExponent;
+
         public float GreenAmplitude = 1.0f;
+        public float StartingGreenAmplitude { get; private set; }
+        public void CacheGreenAmplitude() => this.StartingGreenAmplitude = this.GreenAmplitude;
+
+
+        #endregion
+
+
+        #region Blue
+
 
         public bool BlueDisable = true;
+
         public float BlueOffset = 0.0f;
+        public float StartingBlueOffset { get; private set; }
+        public void CacheBlueOffset() => this.StartingBlueOffset = this.BlueOffset;
+
         public float BlueExponent = 1.0f;
+        public float StartingBlueExponent { get; private set; }
+        public void CacheBlueExponent() => this.StartingBlueExponent = this.BlueExponent;
+
         public float BlueAmplitude = 1.0f;
+        public float StartingBlueAmplitude { get; private set; }
+        public void CacheBlueAmplitude() => this.StartingBlueAmplitude = this.BlueAmplitude;
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a gammaTransfer-adjustment.
-        /// </summary>
-        public GammaTransferAdjustment()
-        {
-            this.Text = GammaTransferAdjustment.GammaTransferPage.Text;
-        }
-
+        #endregion
+        
 
         public void Reset()
         {
@@ -78,19 +131,19 @@ namespace Retouch_Photo2.Adjustments.Models
             this.BlueExponent = 1;
             this.BlueAmplitude = 1;
 
-            if (GammaTransferAdjustment.GammaTransferPage.Adjustment == this)
+            if (GammaTransferAdjustment.GenericPage.Adjustment == this)
             {
-                GammaTransferAdjustment.GammaTransferPage.Follow(this);
+                GammaTransferAdjustment.GenericPage.Reset();
             }
         }
         public void Follow()
         {
-            GammaTransferAdjustment.GammaTransferPage.Adjustment = this;
-            GammaTransferAdjustment.GammaTransferPage.Follow(this);
+            GammaTransferAdjustment.GenericPage.Adjustment = this;
+            GammaTransferAdjustment.GenericPage.Follow(this);
         }
         public void Close()
         {
-            GammaTransferAdjustment.GammaTransferPage.Adjustment = null;
+            GammaTransferAdjustment.GenericPage.Adjustment = null;
         }
         
 

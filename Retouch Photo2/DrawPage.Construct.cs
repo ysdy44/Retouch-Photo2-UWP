@@ -233,8 +233,6 @@ namespace Retouch_Photo2
                 this.StrokeColorFlyout.ShowAt(placementTarget);
             };
 
-
-
             this.StrokeColorPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodStrokeColorChanged(value);
 
             this.StrokeColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeStarted(value);

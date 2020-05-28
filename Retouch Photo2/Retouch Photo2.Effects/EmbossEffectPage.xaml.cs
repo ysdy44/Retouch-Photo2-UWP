@@ -90,7 +90,7 @@ namespace Retouch_Photo2.Effects.Models
 
             this.Button.ToggleSwitch.IsOn = effect.Emboss_IsOn;
         }
-        public void FollowEffect(Effect effect, bool isOnlyButton)
+        public void Follow(Effect effect, bool isOnlyButton)
         {
             if (isOnlyButton == false)
             {

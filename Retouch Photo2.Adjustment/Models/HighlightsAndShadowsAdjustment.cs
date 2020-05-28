@@ -1,7 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Adjustments.Icons;
-using Retouch_Photo2.Adjustments.Pages;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
 
@@ -13,36 +11,39 @@ namespace Retouch_Photo2.Adjustments.Models
     public class HighlightsAndShadowsAdjustment : IAdjustment
     {
         //@Static
-        public static readonly HighlightsAndShadowsPage HighlightsAndShadowsPage = new HighlightsAndShadowsPage();
+        //@Generic
+        public static IAdjustmentGenericPage<HighlightsAndShadowsAdjustment> GenericPage;// = new HighlightsAndShadowsPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.HighlightsAndShadows;
-        public FrameworkElement Icon { get; } = new HighlightsAndShadowsIcon();
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page => HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage;
-        public string Text { get; private set; }
+        public UIElement Page => HighlightsAndShadowsAdjustment.GenericPage.Self;
+        public string Text => HighlightsAndShadowsAdjustment.GenericPage.Text;
+
 
         /// <summary> How much to increase or decrease the darker parts of the image.Default value 0, range -1 to 1. </summary>
         public float Shadows = 0.0f;
+        public float StartingShadows { get; private set; }
+        public void CacheShadows() => this.StartingShadows = this.Shadows;
+        
         /// <summary> How much to increase or decrease the brighter parts of the image.Default value 0, range -1 to 1. </summary>
         public float Highlights = 0.0f;
+        public float StartingHighlights { get; private set; }
+        public void CacheHighlights() => this.StartingHighlights = this.Highlights;
+        
         /// <summary> How much to increase or decrease the mid-tone contrast of the image.Default value 0, range -1 to 1. </summary>
         public float Clarity = 0.0f;
+        public float StartingClarity { get; private set; }
+        public void CacheClarity() => this.StartingClarity = this.Clarity;
+        
         /// <summary> Controls the size of the region used around a pixel to classify it as highlight or shadow. Lower values result in more localized adjustments. Default value 1.25, range 0 to 10. </summary>
         public float MaskBlurAmount = 1.25f;
+        public float StartingMaskBlurAmount { get; private set; }
+        public void CacheMaskBlurAmount() => this.StartingMaskBlurAmount = this.MaskBlurAmount;
+        
         /// <summary> Specifies whether the source image uses linear gamma as opposed to the default sRGB. </summary>
         public bool SourceIsLinearGamma = false;
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a HighlightsAndShadows-adjustment.
-        /// </summary>
-        public HighlightsAndShadowsAdjustment()
-        {
-            this.Text = HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage.Text;
-        }
-
+        
 
         public void Reset()
         {
@@ -52,19 +53,19 @@ namespace Retouch_Photo2.Adjustments.Models
             this.MaskBlurAmount = 1.25f;
             this.SourceIsLinearGamma = false;
 
-            if (HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage.Adjustment == this)
+            if (HighlightsAndShadowsAdjustment.GenericPage.Adjustment == this)
             {
-                HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage.Follow(this);
+                HighlightsAndShadowsAdjustment.GenericPage.Follow(this);
             }
         }
         public void Follow()
         {
-            HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage.Adjustment = this;
-            HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage.Follow(this);
+            HighlightsAndShadowsAdjustment.GenericPage.Adjustment = this;
+            HighlightsAndShadowsAdjustment.GenericPage.Follow(this);
         }
         public void Close()
         {
-            HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage.Adjustment = null;
+            HighlightsAndShadowsAdjustment.GenericPage.Adjustment = null;
         }
 
 

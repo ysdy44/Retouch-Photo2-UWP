@@ -1,7 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Adjustments.Icons;
-using Retouch_Photo2.Adjustments.Pages;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
 
@@ -13,46 +11,37 @@ namespace Retouch_Photo2.Adjustments.Models
     public class ContrastAdjustment : IAdjustment
     {
         //@Static
-        public static readonly ContrastPage ContrastPage = new ContrastPage();
-
+        //@Generic
+        public static IAdjustmentGenericPage<ContrastAdjustment> GenericPage;// = new ContrastPage();
+        
         //@Content
         public AdjustmentType Type => AdjustmentType.Contrast;
-        public FrameworkElement Icon { get; } = new ContrastIcon();
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page => ContrastAdjustment.ContrastPage;
-        public string Text { get; private set; }
+        public UIElement Page => ContrastAdjustment.GenericPage.Self;
+        public string Text => ContrastAdjustment.GenericPage.Text;
+
 
         /// <summary> Amount by which to adjust the contrast of the image. Default value 0,  -1 -> 1. </summary>
         public float Contrast = 0.0f;
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a contrast-adjustment.
-        /// </summary>
-        public ContrastAdjustment()
-        {
-            this.Text = ContrastAdjustment.ContrastPage.Text;
-        }
+        public float StartingContrast { get; private set; }
+        public void CacheContrast() => this.StartingContrast = this.Contrast;
 
 
         public void Reset()
         {
-            this.Contrast = 0.0f;
-
-            if (ContrastAdjustment.ContrastPage.Adjustment == this)
+            if (ContrastAdjustment.GenericPage.Adjustment == this)
             {
-                ContrastAdjustment.ContrastPage.Follow(this);
+                ContrastAdjustment.GenericPage.Reset();
             }
         }
         public void Follow()
         {
-            ContrastAdjustment.ContrastPage.Adjustment = this;
-            ContrastAdjustment.ContrastPage.Follow(this);
+            ContrastAdjustment.GenericPage.Adjustment = this;
+            ContrastAdjustment.GenericPage.Follow(this);
         }
         public void Close()
         {
-            ContrastAdjustment.ContrastPage.Adjustment = null;
+            ContrastAdjustment.GenericPage.Adjustment = null;
         }
 
         

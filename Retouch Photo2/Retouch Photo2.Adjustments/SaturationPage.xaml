@@ -10,18 +10,22 @@
     d:DesignWidth="200"
     >
 
+    <Page.Resources>
+
+        <!--Saturation-->
+        <LinearGradientBrush x:Name="SaturationBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Offset="0" Color="Gray"/>
+            <GradientStop Offset="1" Color="DodgerBlue"/>
+        </LinearGradientBrush>
+
+    </Page.Resources>
+
+
     <StackPanel>
 
         <!--Saturation-->
         <TextBlock x:Name="SaturationTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="SaturationSlider" Minimum="0" Maximum="200">
-            <hsvColorPickers:TouchSlider.SliderBrush>
-                <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
-                    <GradientStop Offset="0" Color="Gray"/>
-                    <GradientStop Offset="1" Color="DodgerBlue"/>
-                </LinearGradientBrush>
-            </hsvColorPickers:TouchSlider.SliderBrush>
-        </hsvColorPickers:TouchSlider>
-        
+        <hsvColorPickers:TouchSlider x:Name="SaturationSlider"/>
+
     </StackPanel>
 </Page>

@@ -11,7 +11,9 @@ namespace Retouch_Photo2.Effects
     /// </summary>
     public class Effect
     {
-        //GaussianBlur
+
+        #region GaussianBlur
+
         public bool GaussianBlur_IsOn;
         public float GaussianBlur_Radius, StartingGaussianBlur_Radius = 0;
         public void CacheGaussianBlur()
@@ -19,8 +21,11 @@ namespace Retouch_Photo2.Effects
             this.StartingGaussianBlur_Radius = this.GaussianBlur_Radius;
         }
 
+        #endregion
 
-        //DirectionalBlur
+
+        #region DirectionalBlur
+
         public bool DirectionalBlur_IsOn;
         public float DirectionalBlur_Radius, StartingDirectionalBlur_Radius = 0;
         public float DirectionalBlur_Angle, StartingDirectionalBlur_Angle = 0;
@@ -30,8 +35,11 @@ namespace Retouch_Photo2.Effects
             this.StartingDirectionalBlur_Angle = this.DirectionalBlur_Angle;
         }
 
+        #endregion
+        
 
-        //Sharpen
+        #region Sharpen
+
         public bool Sharpen_IsOn;
         public float Sharpen_Amount, StartingSharpen_Amount = 0;
         public void CacheSharpen()
@@ -39,7 +47,11 @@ namespace Retouch_Photo2.Effects
             this.StartingSharpen_Amount = this.Sharpen_Amount;
         }
 
-        //OuterShadow
+        #endregion
+
+
+        #region OuterShadow
+
         public bool OuterShadow_IsOn;
         public float OuterShadow_Radius, StartingOuterShadow_Radius = 0;
         public float OuterShadow_Opacity, StartingOuterShadow_Opacity = 0.5f;
@@ -76,8 +88,11 @@ namespace Retouch_Photo2.Effects
             this.StartingOuterShadow_Angle = this.OuterShadow_Angle;
         }
 
+        #endregion
 
-        //Outline
+
+        #region Outline
+
         public bool Outline_IsOn;
         public int outline_Size, StartingOutline_Size = 1;
         public int Outline_Size
@@ -102,8 +117,11 @@ namespace Retouch_Photo2.Effects
             this.StartingOutline_Size = this.Outline_Size;
         }
 
+        #endregion
 
-        //Emboss
+
+        #region Emboss
+
         public bool Emboss_IsOn;
         public float Emboss_Radius, StartingEmboss_Radius = 1;
         public float Emboss_Angle, StartingEmboss_Angle = 0;
@@ -113,14 +131,19 @@ namespace Retouch_Photo2.Effects
             this.StartingEmboss_Angle = this.Emboss_Angle;
         }
 
+        #endregion
 
-        //Straighten
+
+        #region Straighten
+
         public bool Straighten_IsOn;
         public float Straighten_Angle, StartingStraighten_Angle = 0;
         public void CacheStraighten()
         {
             this.StartingStraighten_Angle = this.Straighten_Angle;
         }
+
+        #endregion
 
 
         /// <summary>

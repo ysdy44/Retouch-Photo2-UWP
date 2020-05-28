@@ -11,12 +11,10 @@ namespace Retouch_Photo2.Adjustments
     {
         /// <summary> Gets IAdjustment's type. </summary>
         AdjustmentType Type { get; }
-        /// <summary> Gets IAdjustment's icon. </summary>
-        FrameworkElement Icon { get; }
         /// <summary> Gets whether page is visible. </summary>
         Visibility PageVisibility { get; }
         /// <summary> Gets IAdjustment's page. </summary>
-        IAdjustmentPage Page { get; }
+        UIElement Page { get; }
         /// <summary> Gets IAdjustment's text. </summary>
         string Text { get; }
 

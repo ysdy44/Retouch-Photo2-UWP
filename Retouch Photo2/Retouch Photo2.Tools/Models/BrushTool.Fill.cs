@@ -43,6 +43,8 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
+        //////////////////////////
+
 
         public void FillStarted(Vector2 startingPoint, Vector2 point)
         {
@@ -126,7 +128,7 @@ namespace Retouch_Photo2.Tools.Models
             if (this.Fill == null) return;
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set Fill");
 
             //Selection
             this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
@@ -150,13 +152,15 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
+        //////////////////////////
+
 
         public void FillTypeChanged(BrushType brushType, Photo photo = null)
         {
             if (this.Fill.Type == brushType) return;
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set fill type");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set Fill type");
 
             bool _lock = false;
 
@@ -219,11 +223,13 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
+        //////////////////////////
+
 
         public void FillStopsChanged(CanvasGradientStop[] array)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set Fill");
 
             //Selection
             this.Fill.Stops = (CanvasGradientStop[])array.Clone();
@@ -257,7 +263,7 @@ namespace Retouch_Photo2.Tools.Models
         public void FillStopsChangeStarted(CanvasGradientStop[] array)
         {
             //History
-            this.historyFill = new LayersPropertyHistory("Set fill");
+            this.historyFill = new LayersPropertyHistory("Set Fill");
 
             //Selection
             this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
@@ -313,7 +319,7 @@ namespace Retouch_Photo2.Tools.Models
         public void FillExtendChanged(CanvasEdgeBehavior extend)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set fill extend");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set Fill extend");
 
             //Selection
             this.Fill.Extend = extend;

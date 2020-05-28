@@ -21,8 +21,6 @@
 
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
-                        <Setter Property="Background" Value="{ThemeResource AppBackground}" />
-                        <Setter Property="Margin" Value="0,1" />
                         <Setter Property="Height" Value="36" />
                     </Style>
                 </ListView.ItemContainerStyle> 
@@ -45,7 +43,7 @@
 
         <!--DataTemplate-->
         <DataTemplate x:Key="DataTemplate" x:DataType="adjustments:IAdjustment">
-            <Grid>
+            <Grid Height="32" Background="{ThemeResource AppForeground}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="40"/>
@@ -140,7 +138,7 @@
 
                 
                 <!--Body-->
-                <Border Background="{ThemeResource AppForeground}"/>
+                <Border />
                 <ItemsControl x:Name="ItemsControl" Visibility="Collapsed" Margin="0,2" VerticalAlignment="Top" ItemTemplate="{StaticResource DataTemplate}"/>
                 <TextBlock x:Name="ZeroTextBlock" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
                 <TextBlock x:Name="DisableTextBlock" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>

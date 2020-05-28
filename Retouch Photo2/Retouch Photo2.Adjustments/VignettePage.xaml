@@ -12,43 +12,44 @@
     >
 
     <Page.Resources>
+
+        <!--Amount-->
+        <LinearGradientBrush x:Name="AmountBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="Gray" Offset="0"/>
+            <GradientStop x:Name="AmountRight" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!--Curve-->
+        <LinearGradientBrush x:Name="CurveBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="Gray" Offset="0"/>
+            <GradientStop x:Name="CurveRight" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!--Flyout-->
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:ColorPicker2 x:Name="ColorPicker" Width="200"/>
         </Flyout>
+
     </Page.Resources>
 
+    
     <StackPanel>
 
         <!--Amount-->
         <TextBlock x:Name="AmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="AmountSlider" Minimum="0" Maximum="100">
-            <hsvColorPickers:TouchSlider.SliderBrush>
-                <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
-                    <GradientStop Color="Gray" Offset="0"/>
-                    <GradientStop x:Name="AmountRight" Offset="1"/>
-                </LinearGradientBrush>
-            </hsvColorPickers:TouchSlider.SliderBrush>
-        </hsvColorPickers:TouchSlider>
+        <hsvColorPickers:TouchSlider x:Name="AmountSlider"/>
 
         <!--Curve-->
         <TextBlock x:Name="CurveTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="CurveSlider" Minimum="0" Maximum="100">
-            <hsvColorPickers:TouchSlider.SliderBrush>
-                <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
-                    <GradientStop Color="Gray" Offset="0"/>
-                    <GradientStop x:Name="CurveRight" Offset="1"/>
-                </LinearGradientBrush>
-            </hsvColorPickers:TouchSlider.SliderBrush>
-        </hsvColorPickers:TouchSlider>
+        <hsvColorPickers:TouchSlider x:Name="CurveSlider"/>
 
         <!--Color-->
         <TextBlock x:Name="ColorTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <Border x:Name="ColorBorder" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource AppCircleBorderStyle}">
             <Border.Background>
-                <SolidColorBrush x:Name="SolidColorBrush"/>
+                <SolidColorBrush x:Name="SolidColorBrush" Color="Black"/>
             </Border.Background>
         </Border>
 
-        <ContentControl Height="8"/>
     </StackPanel>
 </Page>

@@ -10,18 +10,21 @@
     d:DesignWidth="200"
     >
 
+    <Page.Resources>
+        
+        <!--Exposure-->
+        <LinearGradientBrush x:Name="ExposureBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Offset="0" Color="Black"/>
+            <GradientStop Offset="1" Color="White"/>
+        </LinearGradientBrush>
+        
+    </Page.Resources>
+    
     <StackPanel>
         
         <!--Exposure-->
         <TextBlock x:Name="ExposureTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="ExposureSlider" Minimum="-200" Maximum="200">
-            <hsvColorPickers:TouchSlider.SliderBrush>
-                <LinearGradientBrush  StartPoint="0,0.5" EndPoint="1,0.5">
-                    <GradientStop Offset="0" Color="Black"/>
-                    <GradientStop Offset="1" Color="White"/>
-                </LinearGradientBrush>
-            </hsvColorPickers:TouchSlider.SliderBrush>
-        </hsvColorPickers:TouchSlider>
-        
+        <hsvColorPickers:TouchSlider x:Name="ExposureSlider"/>
+
     </StackPanel>
 </Page>

@@ -110,7 +110,7 @@ namespace Retouch_Photo2.Effects.Models
             //History
             this.ViewModel.HistoryPush(history);
         }
-        public void FollowEffect(Effect effect, bool isOnlyButton)
+        public void Follow(Effect effect, bool isOnlyButton)
         {
             if (isOnlyButton == false)
             {

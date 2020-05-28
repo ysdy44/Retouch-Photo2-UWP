@@ -1,7 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Adjustments.Icons;
-using Retouch_Photo2.Adjustments.Pages;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
 
@@ -13,46 +11,39 @@ namespace Retouch_Photo2.Adjustments.Models
     public class ExposureAdjustment : IAdjustment
     {
         //@Static
-        public static readonly ExposurePage ExposurePage = new ExposurePage();
-
+        //@Generic
+        public static IAdjustmentGenericPage<ExposureAdjustment> GenericPage;// = new ExposurePage();
+        
         //@Content
         public AdjustmentType Type => AdjustmentType.Exposure;
-        public FrameworkElement Icon { get; } = new ExposureIcon();
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page => ExposureAdjustment.ExposurePage;
-        public string Text { get; private set; }
+        public UIElement Page => ExposureAdjustment.GenericPage.Self;
+        public string Text => ExposureAdjustment.GenericPage.Text;
+
 
         /// <summary> How much to increase or decrease the exposure of the image.Default value 0, range -2 -> 2. </summary>
         public float Exposure = 0.0f;
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a Exposure-adjustment.
-        /// </summary>
-        public ExposureAdjustment()
-        {
-            this.Text = ExposureAdjustment.ExposurePage.Text;
-        }
-
+        public float StartingExposure { get; private set; }
+        public void CacheExposure() => this.StartingExposure = this.Exposure;
+        
 
         public void Reset()
         {
             this.Exposure = 0.0f;
 
-            if (ExposureAdjustment.ExposurePage.Adjustment == this)
+            if (ExposureAdjustment.GenericPage.Adjustment == this)
             {
-                ExposureAdjustment.ExposurePage.Follow(this);
+                ExposureAdjustment.GenericPage.Reset();
             }
         }
         public void Follow()
         {
-            ExposureAdjustment.ExposurePage.Adjustment = this;
-            ExposureAdjustment.ExposurePage.Follow(this);
+            ExposureAdjustment.GenericPage.Adjustment = this;
+            ExposureAdjustment.GenericPage.Follow(this);
         }
         public void Close()
         {
-            ExposureAdjustment.ExposurePage.Adjustment = null;
+            ExposureAdjustment.GenericPage.Adjustment = null;
         }
 
 

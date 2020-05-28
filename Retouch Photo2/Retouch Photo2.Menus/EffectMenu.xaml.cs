@@ -69,7 +69,7 @@ namespace Retouch_Photo2.Menus.Models
                 foreach (IEffectPage effect in con.Effects)
                 {
                     effect.Button.IsEnabled = true;
-                    effect.FollowEffect(value, true);
+                    effect.Follow(value, true);
                 }
             }
             else
@@ -197,7 +197,7 @@ namespace Retouch_Photo2.Menus.Models
             ILayer layer = outermost.Self;
 
             Effect effect2 = layer.Effect;
-            effectPage.FollowEffect(effect2, false);
+            effectPage.Follow(effect2, false);
 
 
             this._Expander.IsSecondPage = true;

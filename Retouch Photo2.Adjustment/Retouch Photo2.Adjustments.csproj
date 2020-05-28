@@ -106,9 +106,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AdjustmentBase.cs" />
     <Compile Include="IAdjustment.cs" />
     <Compile Include="AdjustmentType.cs" />
+    <Compile Include="IAdjustmentGenericPage.cs" />
     <Compile Include="IAdjustmentPage.cs" />
     <Compile Include="Icons\BrightnessIcon.xaml.cs">
       <DependentUpon>BrightnessIcon.xaml</DependentUpon>
@@ -157,37 +157,9 @@
     <Compile Include="Models\SaturationAdjustment.cs" />
     <Compile Include="Models\TemperatureAdjustment.cs" />
     <Compile Include="Models\VignetteAdjustment.cs" />
-    <Compile Include="Pages\BrightnessPage.xaml.cs">
-      <DependentUpon>BrightnessPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ContrastPage.xaml.cs">
-      <DependentUpon>ContrastPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ExposurePage.xaml.cs">
-      <DependentUpon>ExposurePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\GammaTransferPage.xaml.cs">
-      <DependentUpon>GammaTransferPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\GrayPage.cs" />
-    <Compile Include="Pages\HighlightsAndShadowsPage.xaml.cs">
-      <DependentUpon>HighlightsAndShadowsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\HueRotationPage.xaml.cs">
-      <DependentUpon>HueRotationPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\InvertPage.cs" />
-    <Compile Include="Pages\SaturationPage.xaml.cs">
-      <DependentUpon>SaturationPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\TemperaturePage.xaml.cs">
-      <DependentUpon>TemperaturePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\VignettePage.xaml.cs">
-      <DependentUpon>VignettePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMLs\XML.AdjustmentFactory.cs" />
+    <Compile Include="XMLs\XML.IAdjustment.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Adjustment.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -247,42 +219,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\BrightnessPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\ContrastPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\ExposurePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\GammaTransferPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\HighlightsAndShadowsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\HueRotationPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\SaturationPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\TemperaturePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\VignettePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\FanKit.Transformers\FanKit.Transformers\FanKit.Transformers.csproj">
@@ -293,9 +229,6 @@
       <Project>{0E5AC58E-36BF-44FE-877E-830F024B7109}</Project>
       <Name>Retouch Photo2.Elements</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="XMLs\XML.IAdjustment.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

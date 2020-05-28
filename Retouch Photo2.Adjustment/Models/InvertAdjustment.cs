@@ -1,7 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Adjustments.Icons;
-using Retouch_Photo2.Adjustments.Pages;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
 
@@ -13,25 +11,15 @@ namespace Retouch_Photo2.Adjustments.Models
     public class InvertAdjustment : IAdjustment
     {
         //@Static
-        public static readonly InvertPage InvertPage = new InvertPage();
+        //@Generic
+        public static IAdjustmentGenericPage<InvertAdjustment> GenericPage;// = new InvertPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Invert;
-        public FrameworkElement Icon { get; } = new InvertIcon();
         public Visibility PageVisibility => Visibility.Collapsed;
-        public IAdjustmentPage Page => InvertAdjustment.InvertPage;
-        public string Text { get; private set; }
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a Invert-adjustment.
-        /// </summary>
-        public InvertAdjustment()
-        {
-            this.Text = InvertAdjustment.InvertPage.Text;
-        }
-
+        public UIElement Page => InvertAdjustment.GenericPage.Self;
+        public string Text => InvertAdjustment.GenericPage.Text;
+        
 
         public void Reset() { }
         public void Follow() { }

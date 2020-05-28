@@ -5,21 +5,25 @@
     /// </summary>
     public enum EffectType
     {
-        /// <summary> GaussianBlur (高斯模糊) </summary>
+        /// <summary> GaussianBlur </summary>
         GaussianBlur,
-        /// <summary> DirectionalBlur (定向模糊) </summary>
+
+        /// <summary> DirectionalBlur </summary>
         DirectionalBlur,
-        /// <summary> Sharpen (锐化) </summary>
+
+        /// <summary> Sharpen </summary>
         Sharpen,
-        /// <summary> OuterShadow (外部投影) </summary>
+
+        /// <summary> OuterShadow </summary>
         OuterShadow,
 
-        /// <summary> Outline (轮廓) </summary>
+        /// <summary> Outline </summary>
         Outline,
 
-        /// <summary> Emboss (浮雕) </summary>
+        /// <summary> Emboss </summary>
         Emboss,
-        /// <summary> Straighten (拉直) </summary>
+
+        /// <summary> Straighten </summary>
         Straighten
     }       
 }

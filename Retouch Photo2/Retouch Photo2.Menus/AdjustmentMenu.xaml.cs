@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
+using Retouch_Photo2.Historys;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -31,10 +32,10 @@ namespace Retouch_Photo2.Menus.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-
+        
 
         //@VisualState
-        List<IAdjustment> _vsAdjustments;
+        IList<IAdjustment> _vsAdjustments;
         public VisualState VisualState
         {
             get
@@ -60,33 +61,16 @@ namespace Retouch_Photo2.Menus.Models
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-        
 
-        private IAdjustment adjustment;
-        public IAdjustment Adjustment
+        /// <summary>
+        ///  Invalidate Adjustment ItemsControl.
+        /// </summary>
+        private void InvalidateItemsControl()
         {
-            get => this.adjustment;
-            set
-            {
-                if (this.adjustment == value) return;
+            if (this._vsAdjustments == null) return;
 
-                if (value == null)
-                {
-                    if (this.adjustment != null) this.adjustment.Close();
-                    this.AdjustmentPageBorder.Child = null;
-                }
-                else
-                {
-                    if (this.AdjustmentPageBorder.Child != value.Page.Self)
-                    {
-                        this.AdjustmentPageBorder.Child = value.Page.Self;
-                    }
-
-                    value.Follow();
-                }
-
-                this.adjustment = value;
-            }
+            this.ItemsControl.ItemsSource = null;
+            this.ItemsControl.ItemsSource = this._vsAdjustments;
         }
 
 
@@ -105,22 +89,54 @@ namespace Retouch_Photo2.Menus.Models
             AdjustmentMenu con = (AdjustmentMenu)sender;
 
             con._Expander.IsSecondPage = false;
+            con._Expander.CurrentTitle = con._Expander.Title;
 
             if (e.NewValue is Filter value)
             {
                 con._vsAdjustments = value.Adjustments;
+                con.VisualState = con.VisualState;//State
             }
             else
             {
                 con._vsAdjustments = null;
+                con.VisualState = con.VisualState;//State
             }
-
-            con.VisualState = con.VisualState;//State
         }));
 
 
         #endregion
 
+
+        private IAdjustment adjustment;
+        public IAdjustment Adjustment
+        {
+            get => this.adjustment;
+            set
+            {
+                if (this.adjustment == value) return;
+
+                if (value == null)
+                {
+                    if (this.adjustment != null)
+                    {
+                        this.adjustment.Close();
+                    }
+                    this.AdjustmentPageBorder.Child = null;
+                }
+                else
+                {
+                    if (this.AdjustmentPageBorder.Child != value.Page)
+                    {
+                        this.AdjustmentPageBorder.Child = value.Page;
+                    }
+
+                    value.Follow();
+                }
+
+                this.adjustment = value;
+            }
+        }
+               
         public bool AdjustmentPageOrFilters
         {
             set
@@ -144,30 +160,12 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructStrings();
             this.ConstructMenu();
 
-            AdjustmentBase.Invalidate += () => this.ViewModel.Invalidate();
-            this.ConstructAdjustmentPageListView();
-            this.ConstructFilterListView();
 
             this.Loaded += async (s, e) =>
             {
                 if (this.AdjustmentPageListView.ItemsSource == null)
                 {
-                    this.AdjustmentPageListView.ItemsSource = new List<IAdjustmentPage>()
-                    {
-                         GrayAdjustment.GrayPage,
-                         InvertAdjustment.InvertPage,
-
-                         ExposureAdjustment.ExposurePage,
-                         BrightnessAdjustment.BrightnessPage,
-                         SaturationAdjustment.SaturationPage,
-                         HueRotationAdjustment.HueRotationPage,
-                         ContrastAdjustment.ContrastPage,
-                         TemperatureAdjustment.TemperaturePage,
-
-                         HighlightsAndShadowsAdjustment.HighlightsAndShadowsPage,
-                         GammaTransferAdjustment.GammaTransferPage,
-                         VignetteAdjustment.VignettePage,
-                    };
+                    this.AdjustmentPageListView.ItemsSource = this.GetAdjustmentPages().ToList();
                 }
 
                 if (this.FiltersListView.ItemsSource == null)
@@ -187,6 +185,25 @@ namespace Retouch_Photo2.Menus.Models
                 this.VisualState = this.VisualState;//State
             };
 
+
+            this.AdjustmentPageListView.ItemClick += (s, e) =>
+            {
+                this.AdjustmentPageFlyout.Hide();
+
+                if (e.ClickedItem is IAdjustmentPage item)
+                {
+                    this.FilterAdd(item);
+                }
+            };
+            this.FiltersListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is Filter filter)
+                {
+                    this.FilterChanged(filter);
+                }
+            };
+
+
             this.AddButton.Click += (s, e) => this.AdjustmentPageFlyout.ShowAt(this.AddButton);
             this.FiltersButton.Click += (s, e) =>
             {
@@ -201,8 +218,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> DataTemplate's EditButton Tapped. </summary>
         private void EditButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            AdjustmentMenu.GetGridDataContext(sender, out IAdjustment adjustment);
-
+            IAdjustment adjustment = this.GetGridDataContext(sender);
             if (adjustment == null) return;
             if (adjustment.PageVisibility == Visibility.Collapsed) return;
 
@@ -216,22 +232,10 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> DataTemplate's RemoveButton Tapped. </summary>
         private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            AdjustmentMenu.GetGridDataContext(sender, out IAdjustment adjustment);
+            IAdjustment adjustment = this.GetGridDataContext(sender);
+            if (adjustment == null) return;
 
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                layer.Filter.Adjustments.Remove(adjustment);//Remove
-
-                this._vsAdjustments = layer.Filter.Adjustments;
-                this.VisualState = this.VisualState;//State
-
-                this.InvalidateItemsControl();//Invalidate
-                this.ViewModel.Invalidate();//Invalidate   
-                return;
-            });
+            this.FilterRemove(adjustment);
         }
 
     }
@@ -288,68 +292,6 @@ namespace Retouch_Photo2.Menus.Models
             this._Expander.Reset = this.Reset;
             this._Expander.Initialize();
         }
-    }
-
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "AdjustmentMenu" />. 
-    /// </summary>
-    public sealed partial class AdjustmentMenu : UserControl, IMenu
-    {
-
-        private void ConstructAdjustmentPageListView()
-        {
-            this.AdjustmentPageListView.ItemClick += (s, e) =>
-            {
-                this.AdjustmentPageFlyout.Hide();
-
-                if (e.ClickedItem is IAdjustmentPage item)
-                {
-                    //Selection
-                    this.SelectionViewModel.SetValue((layerage) =>
-                    {
-                        ILayer layer = layerage.Self;
-
-                        IAdjustment _new = item.GetNewAdjustment();
-                        layer.Filter.Adjustments.Add(_new);//Add
-
-                        this._vsAdjustments = layer.Filter.Adjustments;
-                        this.VisualState = this.VisualState;//State
-
-                        this.InvalidateItemsControl();//Invalidate
-                        this.ViewModel.Invalidate();//Invalidate
-                        return;
-                    });
-                }
-            };
-        }
-
-        private void ConstructFilterListView()
-        {
-            this.FiltersListView.ItemClick += (s, e) =>
-            {
-                if (e.ClickedItem is Filter filter)
-                {
-                    IEnumerable<IAdjustment> clones = from a in filter.Adjustments select a.Clone();
-
-                    //Selection
-                    this.SelectionViewModel.SetValue((layerage) =>
-                    {
-                        ILayer layer = layerage.Self;
-
-                        layer.Filter.Adjustments.Clear();//Clear
-                        layer.Filter.Adjustments.AddRange(clones);//Add
-
-                        this._vsAdjustments = layer.Filter.Adjustments;
-                        this.VisualState = this.VisualState;//State
-
-                        this.InvalidateItemsControl();//Invalidate
-                        this.ViewModel.Invalidate();//Invalidate     
-                        return;
-                    });
-                }
-            };
-        }
-
 
         private void Reset()
         {
@@ -358,42 +300,188 @@ namespace Retouch_Photo2.Menus.Models
             this.Adjustment.Reset();
             this.ViewModel.Invalidate();
         }
+    }
+    
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "AdjustmentMenu" />. 
+    /// </summary>
+    public sealed partial class AdjustmentMenu : UserControl, IMenu
+    {
 
-
-        /// <summary>
-        ///  Invalidate Adjustment ItemsControl.
-        /// </summary>
-        private void InvalidateItemsControl()
+        //@Generic
+        private IEnumerable<IAdjustmentPage> GetAdjustmentPages()
         {
-            if (this._vsAdjustments == null) return;
+            var grayPage = new GrayPage();
+            GrayAdjustment.GenericPage = grayPage;
+            yield return grayPage;
 
-            this.ItemsControl.ItemsSource = null;
-            this.ItemsControl.ItemsSource = this._vsAdjustments;
+            var invertPage = new InvertPage();
+            InvertAdjustment.GenericPage = invertPage;
+            yield return invertPage;
+
+            var exposurePage = new ExposurePage();
+            ExposureAdjustment.GenericPage = exposurePage;
+            yield return exposurePage;
+
+            var brightnessPage = new BrightnessPage();
+            BrightnessAdjustment.GenericPage = brightnessPage;
+            yield return brightnessPage;
+
+            var saturationPage = new SaturationPage();
+            SaturationAdjustment.GenericPage = saturationPage;
+            yield return saturationPage;
+
+            var hueRotationPage = new HueRotationPage();
+            HueRotationAdjustment.GenericPage = hueRotationPage;
+            yield return hueRotationPage;
+
+            var contrastPage = new ContrastPage();
+            ContrastAdjustment.GenericPage = contrastPage;
+            yield return contrastPage;
+
+            var temperaturePage = new TemperaturePage();
+            TemperatureAdjustment.GenericPage = temperaturePage;
+            yield return temperaturePage;
+
+            var highlightsAndShadowsPage = new HighlightsAndShadowsPage();
+            HighlightsAndShadowsAdjustment.GenericPage = highlightsAndShadowsPage;
+            yield return highlightsAndShadowsPage;
+
+            var gammaTransferPage = new GammaTransferPage();
+            GammaTransferAdjustment.GenericPage = gammaTransferPage;
+            yield return gammaTransferPage;
+
+            var vignettePage = new VignettePage();
+            VignetteAdjustment.GenericPage = vignettePage;
+            yield return vignettePage;
         }
 
 
-        //@Static
         /// <summary>
         /// Get the data context of the Grid.
         /// </summary>
         /// <param name="sender"> Button. </param>
-        /// <param name="adjustment"> DataContext. </param>
-        public static void GetGridDataContext(object sender, out IAdjustment adjustment)
+        private IAdjustment GetGridDataContext(object sender)
         {
             if (sender is Button button)
             {
                 if (button.Parent is Grid rootGrid)
                 {
-                    if (rootGrid.DataContext is IAdjustment adjustment2)
+                    if (rootGrid.DataContext is IAdjustment adjustment)
                     {
-                        adjustment = adjustment2;
-                        return;
+                        return adjustment;
                     }
                 }
             }
 
-            adjustment = null;
+            return null;
         }
 
+
+
+        private void FilterAdd(IAdjustmentPage adjustmentPage)
+        {
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set layer filter");
+
+            //Selection
+            this.SelectionViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+
+                var previous = layer.Filter.Clone();
+                history.UndoActions.Push((Action)(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    layer2.Filter = previous.Clone();
+                }));
+
+
+                layer.Filter.Adjustments.Add(adjustmentPage.GetNewAdjustment());
+                this._vsAdjustments = layer.Filter.Adjustments;
+            });
+
+            //History
+            this.ViewModel.HistoryPush(history);
+
+
+            this.VisualState = this.VisualState;//State
+
+            this.InvalidateItemsControl();//Invalidate
+            this.ViewModel.Invalidate();//Invalidate     
+        }
+
+
+        private void FilterRemove(IAdjustment removeAdjustment)
+        {
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set layer filter");
+
+            //Selection
+            this.SelectionViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+
+                var previous = layer.Filter.Clone();
+                history.UndoActions.Push((Action)(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    layer2.Filter = previous.Clone();
+                }));
+
+
+                layer.Filter.Adjustments.Remove(removeAdjustment);
+                this._vsAdjustments = layer.Filter.Adjustments;
+            });
+
+            //History
+            this.ViewModel.HistoryPush(history);
+
+
+            this.VisualState = this.VisualState;//State
+
+            this.InvalidateItemsControl();//Invalidate
+            this.ViewModel.Invalidate();//Invalidate     
+        }
+
+
+        private void FilterChanged(Filter filter)
+        {
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set layer filter");
+
+            //Selection
+            this.SelectionViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+
+                var previous = layer.Filter.Clone();
+                history.UndoActions.Push((Action)(() =>
+                {
+                    ILayer layer2 = layerage.Self;
+
+                    layer2.Filter = previous.Clone();
+                }));
+
+
+                layer.Filter = filter.Clone();
+                this._vsAdjustments = layer.Filter.Adjustments;
+            });
+
+            //History
+            this.ViewModel.HistoryPush(history);
+
+
+            this.VisualState = this.VisualState;//State
+
+            this.InvalidateItemsControl();//Invalidate
+            this.ViewModel.Invalidate();//Invalidate     
+        }
+        
     }
 }

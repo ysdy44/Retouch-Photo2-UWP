@@ -114,6 +114,60 @@
       <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileUtils\FileUtil.Sample.cs" />
+    <Compile Include="Retouch Photo2.Adjustments\BrightnessPage.xaml.cs">
+      <DependentUpon>BrightnessPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Adjustments\ContrastPage.xaml.cs">
+      <DependentUpon>ContrastPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Adjustments\ExposurePage.xaml.cs">
+      <DependentUpon>ExposurePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Adjustments\GammaTransferPage.Blue.cs" />
+    <Compile Include="Retouch Photo2.Adjustments\GammaTransferPage.Green.cs" />
+    <Compile Include="Retouch Photo2.Adjustments\GammaTransferPage.Red.cs" />
+    <Compile Include="Retouch Photo2.Adjustments\GammaTransferPage.xaml.cs">
+      <DependentUpon>GammaTransferPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Adjustments\GrayPage.cs" />
+    <Compile Include="Retouch Photo2.Adjustments\GammaTransferPage.Alpha.cs" />
+    <Compile Include="Retouch Photo2.Adjustments\HighlightsAndShadowsPage.xaml.cs">
+      <DependentUpon>HighlightsAndShadowsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Adjustments\HueRotationPage.xaml.cs">
+      <DependentUpon>HueRotationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Adjustments\InvertPage.cs" />
+    <Compile Include="Retouch Photo2.Adjustments\SaturationPage.xaml.cs">
+      <DependentUpon>SaturationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Adjustments\TemperaturePage.xaml.cs">
+      <DependentUpon>TemperaturePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Adjustments\VignettePage.xaml.cs">
+      <DependentUpon>VignettePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Effects\DirectionalBlurEffectPage.xaml.cs">
+      <DependentUpon>DirectionalBlurEffectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Effects\EmbossEffectPage.xaml.cs">
+      <DependentUpon>EmbossEffectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Effects\GaussianBlurEffectPage.xaml.cs">
+      <DependentUpon>GaussianBlurEffectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Effects\OuterShadowEffectPage.xaml.cs">
+      <DependentUpon>OuterShadowEffectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Effects\OutlineEffectPage.xaml.cs">
+      <DependentUpon>OutlineEffectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Effects\SharpenEffectPage.xaml.cs">
+      <DependentUpon>SharpenEffectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Effects\StraightenEffectPage.xaml.cs">
+      <DependentUpon>StraightenEffectPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Menus\HistoryMenu.xaml.cs">
       <DependentUpon>HistoryMenu.xaml</DependentUpon>
     </Compile>
@@ -143,27 +197,6 @@
     </Compile>
     <Compile Include="PhotosPage.xaml.cs">
       <DependentUpon>PhotosPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Effects\DirectionalBlurEffectPage.xaml.cs">
-      <DependentUpon>DirectionalBlurEffectPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Effects\EmbossEffectPage.xaml.cs">
-      <DependentUpon>EmbossEffectPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Effects\GaussianBlurEffectPage.xaml.cs">
-      <DependentUpon>GaussianBlurEffectPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Effects\OuterShadowEffectPage.xaml.cs">
-      <DependentUpon>OuterShadowEffectPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Effects\OutlineEffectPage.xaml.cs">
-      <DependentUpon>OutlineEffectPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Effects\SharpenEffectPage.xaml.cs">
-      <DependentUpon>SharpenEffectPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Effects\StraightenEffectPage.xaml.cs">
-      <DependentUpon>StraightenEffectPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\MenuButtons\MenuButton.xaml.cs">
       <DependentUpon>MenuButton.xaml</DependentUpon>
@@ -455,6 +488,42 @@
     <Page Include="PhotosPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Retouch Photo2.Adjustments\BrightnessPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Adjustments\ContrastPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Adjustments\ExposurePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Adjustments\GammaTransferPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Adjustments\HighlightsAndShadowsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Adjustments\HueRotationPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Adjustments\SaturationPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Adjustments\TemperaturePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Adjustments\VignettePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Effects\DirectionalBlurEffectPage.xaml">
       <Generator>MSBuild:Compile</Generator>
