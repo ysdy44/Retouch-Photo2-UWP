@@ -159,8 +159,11 @@
     <Compile Include="Retouch Photo2.Effects\OuterShadowEffectPage.xaml.cs">
       <DependentUpon>OuterShadowEffectPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Effects\OutlineEffectPage.xaml.cs">
-      <DependentUpon>OutlineEffectPage.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Effects\EdgeEffectPage.xaml.cs">
+      <DependentUpon>EdgeEffectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Effects\MorphologyEffectPage.xaml.cs">
+      <DependentUpon>MorphologyEffectPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Effects\SharpenEffectPage.xaml.cs">
       <DependentUpon>SharpenEffectPage.xaml</DependentUpon>
@@ -541,7 +544,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Effects\OutlineEffectPage.xaml">
+    <Page Include="Retouch Photo2.Effects\EdgeEffectPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Effects\MorphologyEffectPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

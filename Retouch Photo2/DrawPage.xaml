@@ -155,12 +155,16 @@
                 <StackPanel>
                     <elements:SizePicker x:Name="SetupSizePicker"/>
                     <ContentControl Height="6"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="SetupResizeButton" MinWidth="80" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
-                        </Button>
-                        <Button x:Name="SetupAnchorButton" MinWidth="80" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
-                        </Button>
-                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" MinWidth="80"/>
+                            <ColumnDefinition Width="Auto" MinWidth="80"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="SetupLayersTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                        <Button x:Name="SetupResizeButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}"/>
+                        <Button x:Name="SetupAnchorButton" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonRightStyle}"/>
+                    </Grid>
                     <transformers:IndicatorControl x:Name="SetupIndicatorControl" Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}"/>
                 </StackPanel>
             </elementDialog:DialogBase.CenterContent>
@@ -169,8 +173,11 @@
         <elementDialog:DialogBase x:Name="ExportDialog">
             <elementDialog:DialogBase.CenterContent>
                 <StackPanel>
+                    <elements:SizePicker x:Name="ExportSizePicker"/>
+                    <ContentControl Height="6"/>
                     <TextBlock x:Name="ExportFileFormatTextBlock" Text="File Format" Style="{StaticResource AppTextBlockStyle}"/>
                     <elements:FileFormatComboBox x:Name="FileFormatComboBox"/>
+                    <ContentControl Height="6"/>
                     <TextBlock x:Name="ExportQualityTextBlock" Text="Quality" Style="{StaticResource AppTextBlockStyle}"/>
                     <elements:SilderPicker x:Name="ExportQualityPicker" />
                 </StackPanel>

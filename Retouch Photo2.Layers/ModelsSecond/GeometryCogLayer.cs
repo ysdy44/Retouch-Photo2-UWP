@@ -81,6 +81,14 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator)
+        {
+            Transformer transformer = base.Transform.Transformer;
+
+            return TransformerGeometry.CreateCog(resourceCreator, transformer,
+                this.Count, this.InnerRadius,
+                this.Tooth, this.Notch);
+        }
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             Transformer transformer = base.Transform.Transformer;

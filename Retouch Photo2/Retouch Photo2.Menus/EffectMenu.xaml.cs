@@ -45,7 +45,8 @@ namespace Retouch_Photo2.Menus.Models
             new SharpenEffectPage(),
             new OuterShadowEffectPage(),
 
-            new OutlineEffectPage(),
+            new EdgeEffectPage(),
+            new MorphologyEffectPage(),
 
             new EmbossEffectPage(),
             new StraightenEffectPage(),
@@ -69,7 +70,12 @@ namespace Retouch_Photo2.Menus.Models
                 foreach (IEffectPage effect in con.Effects)
                 {
                     effect.Button.IsEnabled = true;
-                    effect.Follow(value, true);
+                    effect.FollowButton(value);
+
+                    if (effect== con.CurrentEffect)
+                    {
+                        effect.FollowPage(value);
+                    }
                 }
             }
             else
@@ -197,7 +203,7 @@ namespace Retouch_Photo2.Menus.Models
             ILayer layer = outermost.Self;
 
             Effect effect2 = layer.Effect;
-            effectPage.Follow(effect2, false);
+            effectPage.FollowPage(effect2);
 
 
             this._Expander.IsSecondPage = true;

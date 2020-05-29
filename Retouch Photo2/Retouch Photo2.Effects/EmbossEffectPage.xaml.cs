@@ -55,7 +55,7 @@ namespace Retouch_Photo2.Effects.Models
 
         public void Reset()
         {
-            this.RadiusSlider.Value = 0;
+            this.RadiusSlider.Value = 1;
             this.AnglePicker.Radians = 0;
             
             //History
@@ -76,31 +76,23 @@ namespace Retouch_Photo2.Effects.Models
                     layer2.Effect.Emboss_Angle = previous2;
                 });
 
-                layer.Effect.Emboss_Radius = 0;
+                layer.Effect.Emboss_Radius = 1;
                 layer.Effect.Emboss_Angle = 0;
             });
 
             //History
             this.ViewModel.HistoryPush(history);
         }
-        public void FollowEffect(Effect effect)
+        public void FollowButton(Effect effect)
         {
-            this.RadiusSlider.Value = effect.Emboss_Radius;
-            this.AnglePicker.Radians = effect.Emboss_Angle;
-
-            this.Button.ToggleSwitch.IsOn = effect.Emboss_IsOn;
-        }
-        public void Follow(Effect effect, bool isOnlyButton)
-        {
-            if (isOnlyButton == false)
-            {
-                this.RadiusSlider.Value = effect.Emboss_Radius;
-                this.AnglePicker.Radians = effect.Emboss_Angle;
-            }
-
             this.Button.IsButtonTapped = false;
             this.Button.ToggleSwitch.IsOn = effect.Emboss_IsOn;
             this.Button.IsButtonTapped = true;
+        }
+        public void FollowPage(Effect effect)
+        {
+            this.RadiusSlider.Value = effect.Emboss_Radius;
+            this.AnglePicker.Radians = effect.Emboss_Angle;
         }
     }
 
@@ -151,6 +143,9 @@ namespace Retouch_Photo2.Effects.Models
             LayersPropertyHistory history = null;
 
             //Radius
+            this.RadiusSlider.Value = 1;
+            this.RadiusSlider.Minimum = 0;
+            this.RadiusSlider.Maximum = 10;
             this.RadiusSlider.ValueChangeStarted += (s, value) =>
             {
                 history = new LayersPropertyHistory("Set effect emboss");

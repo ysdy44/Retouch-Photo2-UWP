@@ -58,7 +58,7 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
         {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
@@ -72,7 +72,7 @@ namespace Retouch_Photo2.Layers.Models
                     if (child2.Opacity == 0) continue;
 
                     //GetRender
-                    ICanvasImage currentImage = child2.GetRender(resourceCreator, canvasToVirtualMatrix, child.Children);
+                    ICanvasImage currentImage = child2.GetRender(resourceCreator, child.Children);
                     drawingSession.DrawImage(currentImage);
                 }
             }
@@ -87,7 +87,8 @@ namespace Retouch_Photo2.Layers.Models
             }
         }
 
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)=> null;
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator) => null;
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix) => null;
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
 
 

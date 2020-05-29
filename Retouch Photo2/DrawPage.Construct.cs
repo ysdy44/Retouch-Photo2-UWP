@@ -30,15 +30,18 @@ namespace Retouch_Photo2
             this.SetupDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/SetupDialog_Primary");
             this.SetupSizePicker.WidthText = resource.GetString("/$DrawPage/SetupSizePicker_Width");
             this.SetupSizePicker.HeightText = resource.GetString("/$DrawPage/SetupSizePicker_Height");
+            this.SetupLayersTextBlock.Text = resource.GetString("/$DrawPage/SetupDialog_Layers");
             this.SetupResizeButton.Content = resource.GetString("/$DrawPage/SetupDialog_Resize");
             this.SetupAnchorButton.Content = resource.GetString("/$DrawPage/SetupDialog_Anchor");
             
             this.ExportDialog.Title = resource.GetString("/$DrawPage/ExportDialog_Title");
             this.ExportDialog.CloseButton.Content = resource.GetString("/$DrawPage/ExportDialog_Close");
             this.ExportDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/ExportDialog_Primary");
+            this.ExportSizePicker.WidthText = resource.GetString("/$DrawPage/ExportSizePicker_Width");
+            this.ExportSizePicker.HeightText = resource.GetString("/$DrawPage/ExportSizePicker_Height");
             this.ExportQualityTextBlock.Text = resource.GetString("/$DrawPage/ExportDialog_Quality");
             this.ExportFileFormatTextBlock.Text = resource.GetString("/$DrawPage/ExportDialog_FileFormat");
-
+            
             this.RenameDialog.Title = resource.GetString("/$DrawPage/RenameDialog_Title");
             this.RenameDialog.CloseButton.Content = resource.GetString("/$DrawPage/RenameDialog_Close");
             this.RenameDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/RenameDialog_Primary");
@@ -73,6 +76,12 @@ namespace Retouch_Photo2
         }
         private void ShowExportDialog()
         {
+            BitmapSize size = new BitmapSize
+            {
+                Width = (uint)this.ViewModel.CanvasTransformer.Width,
+                Height = (uint)this.ViewModel.CanvasTransformer.Height,
+            };
+            this.ExportSizePicker.Size = size;
             this.ExportDialog.Show();
         }
 

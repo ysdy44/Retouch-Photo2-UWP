@@ -105,12 +105,12 @@ namespace Retouch_Photo2.Tools.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this._button.ToolTip.Content =
-                this.Title = resource.GetString("/Tools/Pen");
+                this.Title = resource.GetString("/Tools/Node");
 
-            this.RemoveTextBlock.Text = resource.GetString("/Tools/Pen_Remove");
-            this.InsertTextBlock.Text = resource.GetString("/Tools/Pen_Insert");
-            this.SharpTextBlock.Text = resource.GetString("/Tools/Pen_Sharp");
-            this.SmoothTextBlock.Text = resource.GetString("/Tools/Pen_Smooth");
+            this.RemoveTextBlock.Text = resource.GetString("/Tools/Node_Remove");
+            this.InsertTextBlock.Text = resource.GetString("/Tools/Node_Insert");
+            this.SharpTextBlock.Text = resource.GetString("/Tools/Node_Sharp");
+            this.SmoothTextBlock.Text = resource.GetString("/Tools/Node_Smooth");
         }
 
 

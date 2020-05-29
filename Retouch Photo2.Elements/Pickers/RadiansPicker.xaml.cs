@@ -111,7 +111,7 @@ namespace Retouch_Photo2.Elements
 
         //Manipulation
         Vector2 Vector;
-        bool IsRadians = false;
+        bool InRadians = false;
 
 
         #endregion
@@ -185,9 +185,9 @@ namespace Retouch_Photo2.Elements
             {
                 this.Vector = e.Position.ToVector2() - this.Center;
 
-                this.IsRadians = this.Vector.Length() < this.Radius;
+                this.InRadians = this.Vector.Length() < this.Radius;
 
-                if (!this.IsRadians) return;
+                if (!this.InRadians) return;
                 this._Radians = RadiansPicker.VectorToRadians(this.Vector);
 
                 this.ValueChangeStarted?.Invoke(this, this.Radians);//Delegate
@@ -196,7 +196,7 @@ namespace Retouch_Photo2.Elements
             {
                 this.Vector += e.Delta.Translation.ToVector2();
 
-                if (!this.IsRadians) return;
+                if (!this.InRadians) return;
                 this._Radians = RadiansPicker.VectorToRadians(this.Vector);
 
                 this.ValueChangeDelta?.Invoke(this, this.Radians);//Delegate

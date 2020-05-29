@@ -24,10 +24,10 @@
 
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="WidthTextBlock" Grid.Row="1" VerticalAlignment="Center">
+        <TextBlock x:Name="WidthTextBlock" Grid.Row="1" Style="{StaticResource AppTextBlockStyle}">
             Width
         </TextBlock>
-        <TextBlock x:Name="HeightTextBlock" Grid.Row="3" VerticalAlignment="Center">
+        <TextBlock x:Name="HeightTextBlock" Grid.Row="3" Style="{StaticResource AppTextBlockStyle}">
             Height
         </TextBlock>
 

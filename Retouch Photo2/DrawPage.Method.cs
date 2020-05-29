@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.Storage.Streams;
 using System.Linq;
 using Retouch_Photo2.Menus;
+using Microsoft.Graphics.Canvas.Effects;
 
 namespace Retouch_Photo2
 {
@@ -28,24 +29,9 @@ namespace Retouch_Photo2
         /// </summary>
         private async Task<bool> Export()
         {
-            float canvasWidth = this.ViewModel.CanvasTransformer.Width;
-            float canvasHeight = this.ViewModel.CanvasTransformer.Height;
-            
-            float fileWidth = this.ViewModel.CanvasTransformer.Width;//@Debug
-            float fileHeight = this.ViewModel.CanvasTransformer.Height;//@Debug
-
-            float scaleX = fileWidth / canvasWidth;
-            float scaleY = fileHeight / canvasHeight;
-            Matrix3x2 matrix = Matrix3x2.CreateScale(scaleX, scaleY);
-
             //Render
-            ICanvasResourceCreatorWithDpi canvasResource = this.MainCanvasControl.CanvasResourceCreatorWithDpi;
-            CanvasRenderTarget renderTarget = new CanvasRenderTarget(canvasResource, fileWidth, fileHeight);
-            ICanvasImage canvasImage = this.MainCanvasControl.Render(matrix);
-            using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
-            {
-                drawingSession.DrawImage(canvasImage);
-            }
+            BitmapSize size = this.ExportSizePicker.Size;
+            CanvasRenderTarget renderTarget = this.MainCanvasControl.Render(size);
 
             //Export
             return await FileUtil.SaveCanvasBitmapFile

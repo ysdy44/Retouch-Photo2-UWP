@@ -15,7 +15,8 @@ namespace Retouch_Photo2.Effects
         #region GaussianBlur
 
         public bool GaussianBlur_IsOn;
-        public float GaussianBlur_Radius, StartingGaussianBlur_Radius = 0;
+        public float GaussianBlur_Radius = 0;
+        public float StartingGaussianBlur_Radius { get; private set; }
         public void CacheGaussianBlur()
         {
             this.StartingGaussianBlur_Radius = this.GaussianBlur_Radius;
@@ -27,8 +28,10 @@ namespace Retouch_Photo2.Effects
         #region DirectionalBlur
 
         public bool DirectionalBlur_IsOn;
-        public float DirectionalBlur_Radius, StartingDirectionalBlur_Radius = 0;
-        public float DirectionalBlur_Angle, StartingDirectionalBlur_Angle = 0;
+        public float DirectionalBlur_Radius = 0;
+        public float StartingDirectionalBlur_Radius { get; private set; }
+        public float DirectionalBlur_Angle = 0;
+        public float StartingDirectionalBlur_Angle { get; private set; }
         public void CacheDirectionalBlur()
         {
             this.StartingDirectionalBlur_Radius = this.DirectionalBlur_Radius;
@@ -41,7 +44,8 @@ namespace Retouch_Photo2.Effects
         #region Sharpen
 
         public bool Sharpen_IsOn;
-        public float Sharpen_Amount, StartingSharpen_Amount = 0;
+        public float Sharpen_Amount = 0;
+        public float StartingSharpen_Amount { get; private set; }
         public void CacheSharpen()
         {
             this.StartingSharpen_Amount = this.Sharpen_Amount;
@@ -53,11 +57,15 @@ namespace Retouch_Photo2.Effects
         #region OuterShadow
 
         public bool OuterShadow_IsOn;
-        public float OuterShadow_Radius, StartingOuterShadow_Radius = 0;
-        public float OuterShadow_Opacity, StartingOuterShadow_Opacity = 0.5f;
-        public Color OuterShadow_Color, StartingOuterShadow_Color = Colors.Black;
+        public float OuterShadow_Radius = 12.0f;
+        public float StartingOuterShadow_Radius { get; private set; }
+        public float OuterShadow_Opacity = 0.5f;
+        public float StartingOuterShadow_Opacity { get; private set; }
+        public Color OuterShadow_Color = Colors.Black;
+        public Color StartingOuterShadow_Color { get; private set; } 
 
-        public float outerShadow_Offset, StartingOuterShadow_Offset = 0;
+        public float outerShadow_Offset = 0;
+        public float StartingOuterShadow_Offset { get; private set; }
         public float OuterShadow_Offset
         {
             get => this.outerShadow_Offset;
@@ -67,7 +75,8 @@ namespace Retouch_Photo2.Effects
                 this.outerShadow_Offset = value;
             }
         }
-        public float outerShadow_Angle, StartingOuterShadow_Angle = 0.78539816339744830961566084581988f;// 1/4 π
+        public float outerShadow_Angle = 0.78539816339744830961566084581988f;// 1/4 π
+        public float StartingOuterShadow_Angle { get; private set; }
         public float OuterShadow_Angle
         {
             get => this.outerShadow_Angle;
@@ -91,30 +100,50 @@ namespace Retouch_Photo2.Effects
         #endregion
 
 
-        #region Outline
+        #region Edge
 
-        public bool Outline_IsOn;
-        public int outline_Size, StartingOutline_Size = 1;
-        public int Outline_Size
+        public bool Edge_IsOn;
+        public float Edge_Amount = 0.5f;
+        public float StartingEdge_Amount { get; private set; }
+        public float Edge_Radius = 0.0f;
+        public float StartingEdge_Radius { get; private set; }
+        public void CacheEdge()
         {
-            get => this.outline_Size;
+            this.StartingEdge_Radius = this.Edge_Radius;
+            this.StartingEdge_Amount = this.Edge_Amount;
+        }
+
+        #endregion
+
+
+        #region Morphology
+
+        public bool Morphology_IsOn;
+        public int morphology_Size = 1;
+        public int StartingMorphology_Size { get; private set; }
+        public int Morphology_Size
+        {
+            get => this.morphology_Size;
             set
             {
-                this.Outline_Mode = (value > 0) ? MorphologyEffectMode.Dilate : MorphologyEffectMode.Erode;
+                this.Morphology_Mode = (value > 0) ? MorphologyEffectMode.Dilate : MorphologyEffectMode.Erode;
 
                 int s = Math.Abs(value);
-                this.Outline_Height = this.Outline_Width = s > 90 ? 90 : s;
+                if (s > 90) s = 90;
+                if (s < 1) s = 1;
+                this.Morphology_Height = s;
+                this.Morphology_Width = s;
 
-                this.outline_Size = value;
+                this.morphology_Size = value;
             }
         }
 
-        public MorphologyEffectMode Outline_Mode { get; private set; }
-        public int Outline_Width { get; private set; } = 1;
-        public int Outline_Height { get; private set; } = 1;
-        public void CacheOutline()
+        public MorphologyEffectMode Morphology_Mode { get; private set; }
+        public int Morphology_Width { get; private set; } = 1;
+        public int Morphology_Height { get; private set; } = 1;
+        public void CacheMorphology()
         {
-            this.StartingOutline_Size = this.Outline_Size;
+            this.StartingMorphology_Size = this.Morphology_Size;
         }
 
         #endregion
@@ -123,8 +152,10 @@ namespace Retouch_Photo2.Effects
         #region Emboss
 
         public bool Emboss_IsOn;
-        public float Emboss_Radius, StartingEmboss_Radius = 1;
-        public float Emboss_Angle, StartingEmboss_Angle = 0;
+        public float Emboss_Radius = 1;
+        public float StartingEmboss_Radius { get; private set; }
+        public float Emboss_Angle = 0;
+        public float StartingEmboss_Angle { get; private set; }
         public void CacheEmboss()
         {
             this.StartingEmboss_Radius = this.Emboss_Radius;
@@ -137,7 +168,8 @@ namespace Retouch_Photo2.Effects
         #region Straighten
 
         public bool Straighten_IsOn;
-        public float Straighten_Angle, StartingStraighten_Angle = 0;
+        public float Straighten_Angle = 0;
+        public float StartingStraighten_Angle { get; private set; }
         public void CacheStraighten()
         {
             this.StartingStraighten_Angle = this.Straighten_Angle;
@@ -177,9 +209,14 @@ namespace Retouch_Photo2.Effects
                 OuterShadow_Angle = this.OuterShadow_Angle,
                 OuterShadow_Position = this.OuterShadow_Position,
 
-                //Outline
-                Outline_IsOn = this.Outline_IsOn,
-                Outline_Size = this.Outline_Size,
+                //Edge
+                Edge_IsOn = this.Edge_IsOn,
+                Edge_Amount = this.Edge_Amount,
+                Edge_Radius = this.Edge_Radius,
+
+                //Morphology
+                Morphology_IsOn = this.Morphology_IsOn,
+                Morphology_Size = this.Morphology_Size,
 
                 //Emboss
                 Emboss_IsOn = this.Emboss_IsOn,
@@ -258,15 +295,26 @@ namespace Retouch_Photo2.Effects
                 };
             }
 
-            //Outline
-            if (effect.Outline_IsOn)
+            //Edge
+            if (effect.Edge_IsOn)
+            {
+                image = new Microsoft.Graphics.Canvas.Effects.EdgeDetectionEffect
+                {
+                    Source = image,
+                    Amount = effect.Edge_Amount,
+                    BlurAmount = effect.Edge_Radius,
+                };
+            }
+
+            //Morphology
+            if (effect.Morphology_IsOn)
             {
                 image = new Microsoft.Graphics.Canvas.Effects.MorphologyEffect
                 {
                     Source = image,
-                    Mode = effect.Outline_Mode,
-                    Width = effect.Outline_Width,
-                    Height = effect.Outline_Height,
+                    Mode = effect.Morphology_Mode,
+                    Width = effect.Morphology_Width,
+                    Height = effect.Morphology_Height,
                 };
             }
 

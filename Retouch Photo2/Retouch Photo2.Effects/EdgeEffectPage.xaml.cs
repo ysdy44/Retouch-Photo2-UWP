@@ -1,83 +1,84 @@
 ﻿using Retouch_Photo2.Effects.Icons;
-using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
+using Retouch_Photo2.Historys;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo2.Layers;
 
 namespace Retouch_Photo2.Effects.Models
 {
     /// <summary>
-    /// Page of <see cref = "Effect.DirectionalBlur_IsOn"/>.
+    /// Page of <see cref = "Effect.Edge_IsOn"/>.
     /// </summary>
-    public sealed partial class DirectionalBlurEffectPage : Page, IEffectPage
+    public sealed partial class EdgeEffectPage : Page, IEffectPage
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Construct
-        public DirectionalBlurEffectPage()
+        public EdgeEffectPage()
         {
             this.InitializeComponent();
             this.ConstructString();
             this.ConstructButton();
-            this.ConstructDirectionalBlur_Radius();
-            this.ConstructDirectionalBlur_Angle();
+            this.ConstructEdge_Amount();
+            this.ConstructEdge_Radius();
         }
     }
 
     /// <summary>
-    /// Page of <see cref = "Effect.DirectionalBlur_IsOn"/>.
+    /// Page of <see cref = "Effect.Edge_IsOn"/>.
     /// </summary>
-    public sealed partial class DirectionalBlurEffectPage : Page, IEffectPage
+    public sealed partial class EdgeEffectPage : Page, IEffectPage
     {
         //String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("/Effects/DirectionalBlur");
+            this.Button.Text = resource.GetString("/Effects/Edge");
 
-            this.RadiusTextBlock.Text = resource.GetString("/Effects/DirectionalBlur_Radius");
-            this.AngleTextBlock.Text = resource.GetString("/Effects/DirectionalBlur_Angle");
+            this.AmountTextBlock.Text = resource.GetString("/Effects/Edge_Amount");
+            this.RadiusTextBlock.Text = resource.GetString("/Effects/Edge_Radius");
         }
 
         //@Content
-        public EffectType Type => EffectType.DirectionalBlur;
+        public EffectType Type => EffectType.Edge;
         public FrameworkElement Page => this;
+        public ToggleSwitch ToggleSwitch => this.Button.ToggleSwitch;
         public EffectButton Button { get; } = new EffectButton
         {
-            Icon = new DirectionalBlurIcon()
+            Icon = new EdgeIcon()
         };
 
 
         public void Reset()
         {
+            this.AmountSlider.Value = 50;
             this.RadiusSlider.Value = 0;
-            this.AnglePicker.Radians = 0;
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set effect directional blur");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set effect outline");
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
-                var previous1 = layer.Effect.DirectionalBlur_Radius;
-                var previous2 = layer.Effect.DirectionalBlur_Angle;
+                var previous1 = layer.Effect.Edge_Amount;
+                var previous2 = layer.Effect.Edge_Radius;
                 history.UndoActions.Push(() =>
                 {
                     ILayer layer2 = layerage.Self;
 
-                    layer2.Effect.DirectionalBlur_Radius = previous1;
-                    layer2.Effect.DirectionalBlur_Angle = previous2;
+                    layer2.Effect.Edge_Amount = previous1;
+                    layer2.Effect.Edge_Radius = previous2;
                 });
 
-                layer.Effect.DirectionalBlur_Radius = 0;
-                layer.Effect.DirectionalBlur_Angle = 0;
+                layer.Effect.Edge_Amount = 0.5f;
+                layer.Effect.Edge_Radius = 0.0f;
             });
 
             //History
@@ -86,21 +87,22 @@ namespace Retouch_Photo2.Effects.Models
         public void FollowButton(Effect effect)
         {
             this.Button.IsButtonTapped = false;
-            this.Button.ToggleSwitch.IsOn = effect.DirectionalBlur_IsOn;
+            this.Button.ToggleSwitch.IsOn = effect.Edge_IsOn;
             this.Button.IsButtonTapped = true;
         }
         public void FollowPage(Effect effect)
         {
-            this.RadiusSlider.Value = effect.DirectionalBlur_Radius;
-            this.AnglePicker.Radians = effect.DirectionalBlur_Angle;
+            this.AmountSlider.Value = effect.Edge_Amount * 100.0f;
+            this.RadiusSlider.Value = effect.Edge_Radius;
         }
     }
-    
+
     /// <summary>
-    /// Page of <see cref = "Effect.DirectionalBlur_IsOn"/>.
+    /// Page of <see cref = "Effect.Edge_IsOn"/>.
     /// </summary>
-    public sealed partial class DirectionalBlurEffectPage : Page, IEffectPage
+    public sealed partial class EdgeEffectPage : Page, IEffectPage
     {
+
         private void ConstructButton()
         {
             this.Button.ToggleSwitch.Toggled += (s, e) =>
@@ -109,7 +111,7 @@ namespace Retouch_Photo2.Effects.Models
                 bool isOn = this.Button.ToggleSwitch.IsOn;
 
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect directional blur");
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect edge");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -117,15 +119,15 @@ namespace Retouch_Photo2.Effects.Models
                     ILayer layer = layerage.Self;
 
                     //History
-                    var previous = layer.Effect.DirectionalBlur_IsOn;
+                    var previous = layer.Effect.Edge_IsOn;
                     history.UndoActions.Push(() =>
                     {
                         ILayer layer2 = layerage.Self;
 
-                        layer2.Effect.DirectionalBlur_IsOn = previous;
+                        layer2.Effect.Edge_IsOn = previous;
                     });
 
-                    layer.Effect.DirectionalBlur_IsOn = isOn;
+                    layer.Effect.Edge_IsOn = isOn;
                 });
 
                 //History
@@ -136,43 +138,112 @@ namespace Retouch_Photo2.Effects.Models
         }
 
 
-        private void ConstructDirectionalBlur_Radius()
+        private void ConstructEdge_Amount()
         {
             //History
             LayersPropertyHistory history = null;
 
-            //Radius
-            this.RadiusSlider.ValueChangeStarted += (s, value) =>
+            //Amount
+            this.AmountSlider.Value = 50;
+            this.AmountSlider.Minimum = 0;
+            this.AmountSlider.Maximum = 100;
+            this.AmountSlider.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect directional blur");
+                history = new LayersPropertyHistory("Set edge effect amount");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
-                    layer.Effect.CacheDirectionalBlur();
+                    layer.Effect.CacheEdge();
+                });
+
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            };
+            this.AmountSlider.ValueChangeDelta += (s, value) =>
+            {
+                float amount = (float)value / 100.0f;
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    layer.Effect.Edge_Amount = amount;
+                });
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            this.AmountSlider.ValueChangeCompleted += (s, value) =>
+            {
+                float amount = (float)value / 100.0f;
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    //History
+                    var previous = layer.Effect.StartingEdge_Amount;
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage.Self;
+
+                        layer2.Effect.Edge_Amount = previous;
+                    });
+
+                    layer.Effect.Edge_Amount = amount;
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
+            };
+
+        }
+
+        private void ConstructEdge_Radius()
+        {
+            //History
+            LayersPropertyHistory history = null;
+
+            //Radius
+            this.RadiusSlider.Value = 0;
+            this.RadiusSlider.Minimum = 0;
+            this.RadiusSlider.Maximum = 10;
+            this.RadiusSlider.ValueChangeStarted += (s, value) =>
+            {
+                history = new LayersPropertyHistory("Set edge effect blur amount");
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    layer.Effect.CacheEdge();
                 });
 
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
             };
             this.RadiusSlider.ValueChangeDelta += (s, value) =>
             {
-                float radius = (float)value;
+                float blurAmount = (float)value;
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
-                    layer.Effect.DirectionalBlur_Radius = radius;
+                    layer.Effect.Edge_Radius = blurAmount;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.RadiusSlider.ValueChangeCompleted += (s, value) =>
             {
-                float radius = (float)value;
+                float blurAmount = (float)value;
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -180,15 +251,15 @@ namespace Retouch_Photo2.Effects.Models
                     ILayer layer = layerage.Self;
 
                     //History
-                    var previous = layer.Effect.StartingDirectionalBlur_Radius;
+                    var previous = layer.Effect.StartingEdge_Radius;
                     history.UndoActions.Push(() =>
                     {
                         ILayer layer2 = layerage.Self;
 
-                        layer2.Effect.DirectionalBlur_Radius = previous;
+                        layer2.Effect.Edge_Radius = previous;
                     });
 
-                    layer.Effect.DirectionalBlur_Radius = radius;
+                    layer.Effect.Edge_Radius = blurAmount;
                 });
 
                 //History
@@ -196,71 +267,8 @@ namespace Retouch_Photo2.Effects.Models
 
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
             };
+
         }
-
-
-        private void ConstructDirectionalBlur_Angle()
-        {
-            //History
-            LayersPropertyHistory history = null;
-
-            //Angle
-            this.AnglePicker.ValueChangeStarted += (s, value) =>
-            {
-                history = new LayersPropertyHistory("Set effect directional blur");
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    layer.Effect.CacheDirectionalBlur();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.AnglePicker.ValueChangeDelta += (s, value) =>
-            {
-                float radians = (float)value;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    layer.Effect.DirectionalBlur_Angle = radians;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.AnglePicker.ValueChangeCompleted += (s, value) =>
-            {
-                float radians = (float)value;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingDirectionalBlur_Angle;
-                    history.UndoActions.Push(() =>
-                    {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.DirectionalBlur_Angle = previous;
-                    });
-
-                    layer.Effect.DirectionalBlur_Angle = radians;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
-        }
-          
 
     }
 }

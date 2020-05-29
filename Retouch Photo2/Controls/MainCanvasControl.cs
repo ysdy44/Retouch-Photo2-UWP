@@ -4,6 +4,7 @@ using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
+using Windows.Graphics.Imaging;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -72,7 +73,7 @@ namespace Retouch_Photo2.Controls
         /// Render.
         /// </summary>
         /// <returns> The render image. </returns>
-        public ICanvasImage Render(Matrix3x2 canvasToVirtualMatrix)
+        public ICanvasImage Render()
         {
             ICanvasImage previousImage = new ColorSourceEffect { Color = Colors.White };
 
@@ -81,15 +82,64 @@ namespace Retouch_Photo2.Controls
                 Layerage currentLayer = this.ViewModel.LayerageCollection.RootLayerages[i];
                 ILayer currentLayer2 = currentLayer.Self;
 
-                previousImage = LayerBase.Render(this.ViewModel.CanvasDevice, currentLayer2, previousImage, canvasToVirtualMatrix, currentLayer.Children);
+                previousImage = LayerBase.Render(this.ViewModel.CanvasDevice, currentLayer2, previousImage, currentLayer.Children);
             }
 
             return previousImage;
         }
+        /// <summary>
+        /// Render.
+        /// </summary>
+        /// <param name="size"> The file size. </param>
+        /// <returns> The render target. </returns>
+        public CanvasRenderTarget Render(BitmapSize size)
+        {
+            ICanvasImage previousImage = this.Render();
+
+            int canvasWidth = this.ViewModel.CanvasTransformer.Width;
+            int canvasHeight = this.ViewModel.CanvasTransformer.Height;
+
+            int fileWidth = (int)size.Width;
+            int fileHeight = (int)size.Height;
+            CanvasRenderTarget renderTarget = new CanvasRenderTarget(this.CanvasResourceCreatorWithDpi, fileWidth, fileHeight);
+
+            if (canvasWidth == fileWidth && canvasHeight == fileHeight)
+            {
+                using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
+                {
+                    drawingSession.DrawImage(previousImage);
+                }
+                return renderTarget;
+            }
+            else
+            {
+                float scaleX = (float)fileWidth / (float)canvasWidth;
+                float scaleY = (float)fileHeight / (float)canvasHeight;
+                Matrix3x2 matrix = Matrix3x2.CreateScale(scaleX, scaleY);
+
+                ICanvasImage canvasImage = new Transform2DEffect
+                {
+                    TransformMatrix = matrix,
+                    Source = previousImage
+                };
+
+                using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
+                {
+                    drawingSession.DrawImage(canvasImage);
+                }
+                return renderTarget;
+            }
+        }
+
+
         private void _drawRenderAndCrad(CanvasDrawingSession drawingSession)
         {
             Matrix3x2 canvasToVirtualMatrix = this.ViewModel.CanvasTransformer.GetMatrix(MatrixTransformerMode.CanvasToVirtual);
-            ICanvasImage previousImage = this.Render(canvasToVirtualMatrix);
+            ICanvasImage previousImage = new Transform2DEffect
+            {
+                TransformMatrix = canvasToVirtualMatrix,
+                Source = this.Render()
+            };
 
             //Card
             drawingSession.DrawCard(previousImage, this.ViewModel.CanvasTransformer, this.ShadowColor);
@@ -113,6 +163,7 @@ namespace Retouch_Photo2.Controls
             this.TipViewModel.Tool.Draw(drawingSession);
         }
         
+
         /// <summary>
         /// Render thumbnail image.
         /// </summary>
@@ -140,7 +191,11 @@ namespace Retouch_Photo2.Controls
             CanvasRenderTarget thumbnail = new CanvasRenderTarget(resourceCreator, thumbnailWidth, thumbnailHeight, 96);
             {
                 Matrix3x2 matrix = Matrix3x2.CreateScale(scale);
-                ICanvasImage previousImage = this.Render(matrix);
+                ICanvasImage previousImage = new Transform2DEffect
+                {
+                    TransformMatrix = matrix,
+                    Source = this.Render()
+                };
 
                 using (CanvasDrawingSession drawingSession = thumbnail.CreateDrawingSession())
                 {

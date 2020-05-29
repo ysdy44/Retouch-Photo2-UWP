@@ -55,10 +55,6 @@
 
                     <StackPanel Orientation="Horizontal" RelativePanel.AlignRightWithPanel="True">
 
-                        <ToggleButton Style="{StaticResource AppCircleToggleButtonStyle}">
-                            <FontIcon Glyph="&#xE9E9;" FontFamily="Segoe MDL2 Assets"/>
-                        </ToggleButton>
-
                         <!--Follow-->
                         <ToggleButton x:Name="FollowToggleControl" Style="{StaticResource AppCircleToggleButtonStyle}"
                                   IsChecked="{x:Bind SelectionViewModel.IsFollowTransform,Mode=OneWay}" >

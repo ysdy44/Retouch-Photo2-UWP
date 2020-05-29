@@ -8,7 +8,7 @@ namespace Retouch_Photo2.Brushs
     public partial class BrushBase : IBrush
     {
 
-        public ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
+        public ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator)
         {
             switch (this.Type)
             {
@@ -17,10 +17,10 @@ namespace Retouch_Photo2.Brushs
             }
 
 
-            Vector2 center = Vector2.Transform(this.Center, matrix);
+            Vector2 center = this.Center;
 
-            Vector2 xPoint = Vector2.Transform(this.XPoint, matrix);
-            Vector2 yPoint = Vector2.Transform(this.YPoint, matrix);
+            Vector2 xPoint = this.XPoint;
+            Vector2 yPoint = this.YPoint;
 
             switch (this.Type)
             {

@@ -174,7 +174,6 @@
                  
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <Setter Property="Background" Value="{ThemeResource AppForeground}" />
                             <Setter Property="Margin" Value="2" />
                             <Setter Property="Padding" Value="8,0" />
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -183,13 +182,20 @@
                             <Setter Property="VerticalAlignment" Value="Stretch" />
                         </Style>
                     </ListView.ItemContainerStyle>
-                    
+
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="filters:Filter">
-                            <TextBlock Text="{x:Bind Name}"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="36"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Glyph="&#xE9E9;" FontFamily="Segoe MDL2 Assets"/>
+                                <TextBlock Text="{x:Bind Name}" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                            </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    
+
                 </ListView>
 
             </Grid>

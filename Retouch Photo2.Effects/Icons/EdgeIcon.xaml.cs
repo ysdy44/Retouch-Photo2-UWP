@@ -3,12 +3,12 @@
 namespace Retouch_Photo2.Effects.Icons
 {
     /// <summary>
-    /// Icon of <see cref = "OutlineEffect"/>.
+    /// Icon of <see cref = "EdgeEffect"/>.
     /// </summary>
-    public sealed partial class OutlineIcon : UserControl
+    public sealed partial class EdgeIcon : UserControl
     {
         //@Construct
-        public OutlineIcon()
+        public EdgeIcon()
         {
             this.InitializeComponent();
         }

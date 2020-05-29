@@ -1,0 +1,17 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Effects.Icons.MorphologyIcon"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+   d:DesignHeight="50"
+   d:DesignWidth="50"
+    >
+
+    <PathIcon Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}">
+        <PathIcon.Data>
+            M105.649,68.109L105.649,93.569L64,93.569L64,68.109L105.649,68.109ZM64,34.431L64,59.891L22.351,59.891L22.351,34.431L64,34.431Z</PathIcon.Data>
+    </PathIcon>
+    
+</UserControl>

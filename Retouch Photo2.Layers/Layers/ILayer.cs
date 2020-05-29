@@ -135,10 +135,9 @@ namespace Retouch_Photo2.Layers
         /// Gets a specific rended-layer.
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="canvasToVirtualMatrix"> The canvas-to-virtual matrix. </param>
         /// <param name="children"> The children layerage. </param>
         /// <returns> The rendered layer. </returns>
-        ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children);
+        ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children);
 
         /// <summary>
         /// Draw lines on bound.
@@ -155,10 +154,17 @@ namespace Retouch_Photo2.Layers
         /// Create a specific geometry.
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <returns> The product geometry. </returns>   
+        CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator);
+        /// <summary>
+        /// Create a specific geometry.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="canvasToVirtualMatrix"> The canvas-to-virtual matrix. </param>
         /// <returns> The product geometry. </returns>   
         CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix);
-     
+
+
         /// <summary>
         ///  Convert to curves.
         /// </summary>

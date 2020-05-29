@@ -12,7 +12,7 @@ namespace Retouch_Photo2.Controls
     /// </summary>
     public partial class MainCanvasControl : UserControl
     {
-        public ICanvasResourceCreatorWithDpi CanvasResourceCreatorWithDpi { get; private set; }
+        private ICanvasResourceCreatorWithDpi CanvasResourceCreatorWithDpi { get; set; }
 
         //@Construct
         public MainCanvasControl()

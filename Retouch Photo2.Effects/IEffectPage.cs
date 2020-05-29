@@ -22,10 +22,14 @@ namespace Retouch_Photo2.Effects
         /// <param name="effect"> The effect. </param>
         void Reset();
         /// <summary>
+        /// <see cref="EffectButton"/>'s value follows the <see cref="Effect"/>.
+        /// </summary>
+        /// <param name="effect"> The effect. </param>
+        void FollowButton(Effect effect);
+        /// <summary>
         /// <see cref="IEffectPage"/>'s value follows the <see cref="Effect"/>.
         /// </summary>
         /// <param name="effect"> The effect. </param>
-        /// <param name="isOnlyButton"> Only button follow. </param>
-        void Follow(Effect effect, bool isOnlyButton);
+        void FollowPage(Effect effect);
     }
 }

@@ -97,14 +97,14 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
         {
             if (this.bitmap == null) return null;
 
             Matrix3x2 matrix2 = Transformer.FindHomography(this.transformerRect, base.Transform.Transformer);
             Transform2DEffect effect = new Transform2DEffect
             {
-                TransformMatrix = matrix2 * canvasToVirtualMatrix,
+                TransformMatrix = matrix2,
                 Source = this.bitmap,
                 //TODO:  Cubic
                 //InterpolationMode= CanvasImageInterpolation.Cubic
@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Layers.Models
                 CanvasCommandList command = new CanvasCommandList(resourceCreator);
                 using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
                 {
-                    CanvasGeometry geometryCrop = this.Transform.CropTransformer.ToRectangle(resourceCreator, canvasToVirtualMatrix);
+                    CanvasGeometry geometryCrop = this.Transform.CropTransformer.ToRectangle(resourceCreator);
 
                     using (drawingSession.CreateLayer(1, geometryCrop))
                     {
@@ -127,6 +127,12 @@ namespace Retouch_Photo2.Layers.Models
             else return effect;
         }
 
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator)
+        {
+            Transformer transformer = base.Transform.Transformer;
+
+            return transformer.ToRectangle(resourceCreator);
+        }
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             Transformer transformer = base.Transform.Transformer;

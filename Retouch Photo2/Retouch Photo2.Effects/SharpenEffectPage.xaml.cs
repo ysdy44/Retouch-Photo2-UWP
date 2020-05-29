@@ -78,16 +78,15 @@ namespace Retouch_Photo2.Effects.Models
             //History
             this.ViewModel.HistoryPush(history);
         }
-        public void Follow(Effect effect, bool isOnlyButton)
+        public void FollowButton(Effect effect)
         {
-            if (isOnlyButton == false)
-            {
-                this.AmountSlider.Value = effect.Sharpen_Amount;
-            }
-
             this.Button.IsButtonTapped = false;
             this.ToggleSwitch.IsOn = effect.Sharpen_IsOn;
             this.Button.IsButtonTapped = true;
+        }
+        public void FollowPage(Effect effect)
+        {
+            this.AmountSlider.Value = effect.Sharpen_Amount;
         }
     }
 

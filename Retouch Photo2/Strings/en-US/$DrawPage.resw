@@ -184,7 +184,7 @@
     <value>Undo</value>
   </data>
   <data name="SetupDialog_Anchor" xml:space="preserve">
-    <value>Anchor</value>
+    <value>Anchor to Canvas</value>
   </data>
   <data name="SetupDialog_Resize" xml:space="preserve">
     <value>Resize</value>
@@ -194,5 +194,14 @@
   </data>
   <data name="ExportDialog_Quality" xml:space="preserve">
     <value>Quality</value>
+  </data>
+  <data name="ExportSizePicker_Height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="ExportSizePicker_Width" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="SetupDialog_Layers" xml:space="preserve">
+    <value>All layers</value>
   </data>
 </root>

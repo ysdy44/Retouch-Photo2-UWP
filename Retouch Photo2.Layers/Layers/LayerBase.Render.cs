@@ -21,37 +21,37 @@ namespace Retouch_Photo2.Layers
     {
         
         //@Abstract
-        public virtual ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
+        public virtual ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
         {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
             {
                 if (this.Transform.IsCrop)
                 {
-                    CanvasGeometry geometryCrop = this.Transform.CropTransformer.ToRectangle(resourceCreator, canvasToVirtualMatrix);
+                    CanvasGeometry geometryCrop = this.Transform.CropTransformer.ToRectangle(resourceCreator);
 
                     using (drawingSession.CreateLayer(1, geometryCrop))
                     {
-                        this._render(resourceCreator, drawingSession, canvasToVirtualMatrix, children);
+                        this._render(resourceCreator, drawingSession, children);
                     }
                 }
                 else
                 {
-                    this._render(resourceCreator, drawingSession, canvasToVirtualMatrix, children);
+                    this._render(resourceCreator, drawingSession, children);
                 }
             }
 
             return command;
         }
-        private void _render(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
+        private void _render(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, IList<Layerage> children)
         {
             //Stroke
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator, canvasToVirtualMatrix);
+            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
 
             // Fill a geometry with style.
             if (this.Style.Fill.Type != BrushType.None)
             {
-                ICanvasBrush canvasBrush = this.Style.Fill.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
+                ICanvasBrush canvasBrush = this.Style.Fill.GetICanvasBrush(resourceCreator);
                 drawingSession.FillGeometry(geometry, canvasBrush);
             }
 
@@ -66,7 +66,7 @@ namespace Retouch_Photo2.Layers
                         Layerage child = children[i];
                         ILayer child2 = child.Self;
 
-                        ICanvasImage childImage = child2.GetRender(resourceCreator, canvasToVirtualMatrix, child.Children);
+                        ICanvasImage childImage = child2.GetRender(resourceCreator, child.Children);
                         drawingSession.DrawImage(childImage);
                     }
                 }
@@ -79,8 +79,8 @@ namespace Retouch_Photo2.Layers
             {
                 if (this.Style.StrokeWidth != 0)
                 {
-                    ICanvasBrush canvasBrush = this.Style.Stroke.GetICanvasBrush(resourceCreator, canvasToVirtualMatrix);
-                    float strokeWidth = this.Style.StrokeWidth * (canvasToVirtualMatrix.M11 + canvasToVirtualMatrix.M22) / 2;
+                    ICanvasBrush canvasBrush = this.Style.Stroke.GetICanvasBrush(resourceCreator);
+                    float strokeWidth = this.Style.StrokeWidth;
                     drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth, this.Style.StrokeStyle);
                 }
             }
@@ -93,8 +93,9 @@ namespace Retouch_Photo2.Layers
         }
 
 
+        public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator);
         public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix);
-        
+
         public abstract IEnumerable<IEnumerable<Node>> ConvertToCurves();
 
 
@@ -119,13 +120,13 @@ namespace Retouch_Photo2.Layers
         /// <param name="canvasToVirtualMatrix"> The canvas-to-virtual matrix. </param>
         /// <param name="children"> The children layerage. </param>
         /// <returns> The rendered layer. </returns>
-        public static ICanvasImage Render(ICanvasResourceCreator resourceCreator, ILayer currentLayer, ICanvasImage previousImage, Matrix3x2 canvasToVirtualMatrix, IList<Layerage> children)
+        public static ICanvasImage Render(ICanvasResourceCreator resourceCreator, ILayer currentLayer, ICanvasImage previousImage,  IList<Layerage> children)
         {
             if (currentLayer.Visibility == Visibility.Collapsed) return previousImage;
             if (currentLayer.Opacity == 0) return previousImage;
 
             //Layer
-            ICanvasImage currentImage = currentLayer.GetRender(resourceCreator, canvasToVirtualMatrix, children);
+            ICanvasImage currentImage = currentLayer.GetRender(resourceCreator, children);
 
             //Effect
             currentImage = Effect.Render(currentLayer.Effect, currentImage);

@@ -130,6 +130,15 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator)
+        {
+            IEnumerable<CanvasGeometry> geometrys =
+                 from nodes
+                 in this.Nodess
+                 select nodes.CreateGeometry(resourceCreator);
+
+            return CanvasGeometry.CreateGroup(resourceCreator, geometrys.ToArray());
+        }
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
             IEnumerable<CanvasGeometry> geometrys =

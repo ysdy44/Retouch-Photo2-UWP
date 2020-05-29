@@ -106,6 +106,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Icons\EdgeIcon.xaml.cs">
+      <DependentUpon>EdgeIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Icons\SharpenIcon.xaml.cs">
       <DependentUpon>SharpenIcon.xaml</DependentUpon>
     </Compile>
@@ -126,8 +129,8 @@
     <Compile Include="Icons\OuterShadowIcon.xaml.cs">
       <DependentUpon>OuterShadowIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\OutlineIcon.xaml.cs">
-      <DependentUpon>OutlineIcon.xaml</DependentUpon>
+    <Compile Include="Icons\MorphologyIcon.xaml.cs">
+      <DependentUpon>MorphologyIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icons\StraightenIcon.xaml.cs">
       <DependentUpon>StraightenIcon.xaml</DependentUpon>
@@ -165,7 +168,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\OutlineIcon.xaml">
+    <Page Include="Icons\EdgeIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Icons\MorphologyIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

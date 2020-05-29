@@ -177,23 +177,26 @@
   <data name="Node" xml:space="preserve">
     <value>Node Tool</value>
   </data>
+  <data name="Node_Insert" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="Node_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Node_Sharp" xml:space="preserve">
+    <value>Sharp</value>
+  </data>
+  <data name="Node_Smooth" xml:space="preserve">
+    <value>Smooth</value>
+  </data>
   <data name="Pen" xml:space="preserve">
     <value>Pen Tool</value>
   </data>
-  <data name="Pen_Insert" xml:space="preserve">
-    <value>Insert</value>
-  </data>
-  <data name="Pen_Remove" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="Pen_Sharp" xml:space="preserve">
-    <value>Sharp</value>
-  </data>
-  <data name="Pen_Smooth" xml:space="preserve">
-    <value>Smooth</value>
-  </data>
   <data name="Rectangle" xml:space="preserve">
     <value>Rectangle Tool</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Node</value>
   </data>
   <data name="TextArtistic" xml:space="preserve">
     <value>Artistic Text Tool</value>

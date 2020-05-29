@@ -77,18 +77,16 @@ namespace Retouch_Photo2.Effects.Models
             //History
             this.ViewModel.HistoryPush(history);
         }
-        public void Follow(Effect effect, bool isOnlyButton)
+        public void FollowButton(Effect effect)
         {
-            if (isOnlyButton == false)
-            {
-                this.RadiusSlider.Value = effect.GaussianBlur_Radius;
-            }
-
             this.Button.IsButtonTapped = false;
             this.Button.ToggleSwitch.IsOn = effect.GaussianBlur_IsOn;
             this.Button.IsButtonTapped = true;
         }
-
+        public void FollowPage(Effect effect)
+        {
+            this.RadiusSlider.Value = effect.GaussianBlur_Radius;
+        }
     }
     
     /// <summary>

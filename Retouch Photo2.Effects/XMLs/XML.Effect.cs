@@ -59,12 +59,12 @@ namespace Retouch_Photo2.Effects
                 ));
             }
 
-            if (effect.Outline_IsOn)
+            if (effect.Morphology_IsOn)
             {
                 element.Add(new XElement
                 (
-                   "Outline",
-                   new XAttribute("Size", effect.Outline_Size)
+                   "Morphology",
+                   new XAttribute("Size", effect.Morphology_Size)
                 ));
             }
 
@@ -124,10 +124,10 @@ namespace Retouch_Photo2.Effects
                 if (outerShadow.Attribute("Offset") is XAttribute offset) effect.OuterShadow_Offset = (float)offset;
                 if (outerShadow.Attribute("Angle") is XAttribute angle) effect.OuterShadow_Angle = (float)angle;
             }
-            if (element.Element("Outline") is XElement outline)
+            if (element.Element("Morphology") is XElement morphology)
             {
-                effect.Outline_IsOn = true;
-                if (outline.Attribute("Size") is XAttribute size) effect.Outline_Size = (int)size;
+                effect.Morphology_IsOn = true;
+                if (morphology.Attribute("Size") is XAttribute size) effect.Morphology_Size = (int)size;
             }
             if (element.Element("Emboss") is XElement emboss)
             {

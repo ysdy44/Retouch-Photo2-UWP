@@ -9,92 +9,91 @@ using Retouch_Photo2.Layers;
 namespace Retouch_Photo2.Effects.Models
 {
     /// <summary>
-    /// Page of <see cref = "Effect.Outline_IsOn"/>.
+    /// Page of <see cref = "Effect.Morphology_IsOn"/>.
     /// </summary>
-    public sealed partial class OutlineEffectPage : Page, IEffectPage
+    public sealed partial class MorphologyEffectPage : Page, IEffectPage
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Construct
-        public OutlineEffectPage()
+        public MorphologyEffectPage()
         {
             this.InitializeComponent();
             this.ConstructString();
             this.ConstructButton();
-            this.ConstructOutline_Size();
+            this.ConstructMorphology_Size();
         }
     }
 
     /// <summary>
-    /// Page of <see cref = "Effect.Outline_IsOn"/>.
+    /// Page of <see cref = "Effect.Morphology_IsOn"/>.
     /// </summary>
-    public sealed partial class OutlineEffectPage : Page, IEffectPage
+    public sealed partial class MorphologyEffectPage : Page, IEffectPage
     {
         //String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("/Effects/Outline");
+            this.Button.Text = resource.GetString("/Effects/Morphology");
 
-            this.SizeTextBlock.Text = resource.GetString("/Effects/Outline_Size");
+            this.SizeTextBlock.Text = resource.GetString("/Effects/Morphology_Size");
         }
 
         //@Content
-        public EffectType Type => EffectType.Outline;
+        public EffectType Type => EffectType.Morphology;
         public FrameworkElement Page => this;
         public ToggleSwitch ToggleSwitch => this.Button.ToggleSwitch;
         public EffectButton Button { get; } = new EffectButton
         {
-            Icon = new OutlineIcon()
+            Icon = new MorphologyIcon()
         };
 
 
         public void Reset()
         {
-            this.SizeSlider.Value = 0;
+            this.SizeSlider.Value = 1;
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set effect outline");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set effect Morphology");
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
 
-                var previous = layer.Effect.Outline_Size;
+                var previous = layer.Effect.Morphology_Size;
                 history.UndoActions.Push(() =>
                 {
                     ILayer layer2 = layerage.Self;
 
-                    layer2.Effect.Outline_Size = previous;
+                    layer2.Effect.Morphology_Size = previous;
                 });
 
-                layer.Effect.Outline_Size = 0;
+                layer.Effect.Morphology_Size = 1;
             });
 
             //History
             this.ViewModel.HistoryPush(history);
         }
-        public void Follow(Effect effect, bool isOnlyButton)
+        public void FollowButton(Effect effect)
         {
-            if (isOnlyButton == false)
-            {
-                this.SizeSlider.Value = effect.Outline_Size;
-            }
-
             this.Button.IsButtonTapped = false;
-            this.Button.ToggleSwitch.IsOn = effect.Outline_IsOn;
+            this.Button.ToggleSwitch.IsOn = effect.Morphology_IsOn;
             this.Button.IsButtonTapped = true;
+        }
+        public void FollowPage(Effect effect)
+        {
+            this.SizeSlider.Value = effect.Morphology_Size;
         }
     }
 
     /// <summary>
-    /// Page of <see cref = "Effect.Outline_IsOn"/>.
+    /// Page of <see cref = "Effect.Morphology_IsOn"/>.
     /// </summary>
-    public sealed partial class OutlineEffectPage : Page, IEffectPage
+    public sealed partial class MorphologyEffectPage : Page, IEffectPage
     {
 
         private void ConstructButton()
@@ -105,7 +104,7 @@ namespace Retouch_Photo2.Effects.Models
                 bool isOn = this.Button.ToggleSwitch.IsOn;
 
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outline");
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect morphology");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -113,15 +112,15 @@ namespace Retouch_Photo2.Effects.Models
                     ILayer layer = layerage.Self;
 
                     //History
-                    var previous = layer.Effect.Outline_IsOn;
+                    var previous = layer.Effect.Morphology_IsOn;
                     history.UndoActions.Push(() =>
                     {
                         ILayer layer2 = layerage.Self;
 
-                        layer2.Effect.Outline_IsOn = previous;
+                        layer2.Effect.Morphology_IsOn = previous;
                     });
 
-                    layer.Effect.Outline_IsOn = isOn;
+                    layer.Effect.Morphology_IsOn = isOn;
                 });
 
                 //History
@@ -132,22 +131,25 @@ namespace Retouch_Photo2.Effects.Models
         }
 
 
-        private void ConstructOutline_Size()
+        private void ConstructMorphology_Size()
         {
             //History
             LayersPropertyHistory history = null;
 
             //Radius
+            this.SizeSlider.Value = 1;
+            this.SizeSlider.Minimum = -100;
+            this.SizeSlider.Maximum = 100;
             this.SizeSlider.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect outline");
+                history = new LayersPropertyHistory("Set effect morphology");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
 
-                    layer.Effect.CacheOutline();
+                    layer.Effect.CacheMorphology();
                 });
 
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
@@ -161,7 +163,7 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
-                    layer.Effect.Outline_Size = size;
+                    layer.Effect.Morphology_Size = size;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
@@ -176,15 +178,15 @@ namespace Retouch_Photo2.Effects.Models
                     ILayer layer = layerage.Self;
 
                     //History
-                    var previous = layer.Effect.StartingOutline_Size;
+                    var previous = layer.Effect.StartingMorphology_Size;
                     history.UndoActions.Push(() =>
                     {
                         ILayer layer2 = layerage.Self;
 
-                        layer2.Effect.Outline_Size = previous;
+                        layer2.Effect.Morphology_Size = previous;
                     });
 
-                    layer.Effect.Outline_Size = size;
+                    layer.Effect.Morphology_Size = size;
                 });
 
                 //History

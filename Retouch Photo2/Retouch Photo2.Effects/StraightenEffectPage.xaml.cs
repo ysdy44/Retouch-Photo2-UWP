@@ -78,16 +78,15 @@ namespace Retouch_Photo2.Effects.Models
             //History
             this.ViewModel.HistoryPush(history);
         }
-        public void Follow(Effect effect, bool isOnlyButton)
+        public void FollowButton(Effect effect)
         {
-            if (isOnlyButton == false)
-            {
-                this.AnglePicker.Radians = effect.Straighten_Angle;
-            }
-
             this.Button.IsButtonTapped = false;
             this.Button.ToggleSwitch.IsOn = effect.Straighten_IsOn;
             this.Button.IsButtonTapped = true;
+        }
+        public void FollowPage(Effect effect)
+        {
+            this.AnglePicker.Radians = effect.Straighten_Angle;
         }
     }
 

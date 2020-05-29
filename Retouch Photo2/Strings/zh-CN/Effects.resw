@@ -126,6 +126,15 @@
   <data name="DirectionalBlur_Radius" xml:space="preserve">
     <value>半径</value>
   </data>
+  <data name="Edge" xml:space="preserve">
+    <value>边缘</value>
+  </data>
+  <data name="Edge_Amount" xml:space="preserve">
+    <value>量</value>
+  </data>
+  <data name="Edge_Radius" xml:space="preserve">
+    <value>半径</value>
+  </data>
   <data name="Emboss" xml:space="preserve">
     <value>浮雕</value>
   </data>
@@ -159,10 +168,10 @@
   <data name="OuterShadow_Radius" xml:space="preserve">
     <value>半径</value>
   </data>
-  <data name="Outline" xml:space="preserve">
-    <value>轮廓线</value>
+  <data name="Morphology" xml:space="preserve">
+    <value>形态学</value>
   </data>
-  <data name="Outline_Size" xml:space="preserve">
+  <data name="Morphology_Size" xml:space="preserve">
     <value>尺寸</value>
   </data>
   <data name="Sharpen" xml:space="preserve">

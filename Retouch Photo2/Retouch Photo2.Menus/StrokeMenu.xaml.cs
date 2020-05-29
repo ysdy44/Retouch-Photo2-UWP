@@ -33,6 +33,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            this.ConstructToolTip();
             this.ConstructMenu();
          
             this.ConstructDash();
@@ -60,6 +61,29 @@ namespace Retouch_Photo2.Menus.Models
             this.JoinTextBlock.Text = resource.GetString("/Strokes/Join");
             this.OffsetTextBlock.Text = resource.GetString("/Strokes/Offset");
         }
+
+        //ToolTip
+        private void ConstructToolTip()
+        {
+            this._button.ToolTip.Opened += (s, e) =>
+            {
+                if (this._Expander.IsSecondPage) return;
+
+                if (this.Expander.State == ExpanderState.Overlay)
+                {
+                    this.DashSegmented.IsOpen = true;
+                    this.CapSegmented.IsOpen = true;
+                    this.JoinSegmented.IsOpen = true;
+                }
+            };
+            this._button.ToolTip.Closed += (s, e) =>
+            {
+                this.DashSegmented.IsOpen = false;
+                this.CapSegmented.IsOpen = false;
+                this.JoinSegmented.IsOpen = false;
+            };
+        }
+
 
         //Menu
         public MenuType Type => MenuType.Stroke;

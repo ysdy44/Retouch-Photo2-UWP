@@ -63,9 +63,8 @@ namespace Retouch_Photo2.Brushs
         /// Gets <see cref="ICanvasBrush"/>.
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="matrix"> The matrix. </param>
         /// <returns> The provided <see cref="ICanvasBrush"/>. </returns>
-        ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix);
+        ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator);
 
 
         /// <summary>

@@ -17,8 +17,11 @@
         /// <summary> OuterShadow </summary>
         OuterShadow,
 
-        /// <summary> Outline </summary>
-        Outline,
+        /// <summary> Edge </summary>
+        Edge,
+
+        /// <summary> Morphology </summary>
+        Morphology,
 
         /// <summary> Emboss </summary>
         Emboss,

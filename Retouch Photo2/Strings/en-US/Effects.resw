@@ -118,12 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DirectionalBlur" xml:space="preserve">
-    <value>DirectionalBlur</value>
+    <value>Directional Blur</value>
   </data>
   <data name="DirectionalBlur_Angle" xml:space="preserve">
     <value>Angle</value>
   </data>
   <data name="DirectionalBlur_Radius" xml:space="preserve">
+    <value>Radius</value>
+  </data>
+  <data name="Edge" xml:space="preserve">
+    <value>Edge</value>
+  </data>
+  <data name="Edge_Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="Edge_Radius" xml:space="preserve">
     <value>Radius</value>
   </data>
   <data name="Emboss" xml:space="preserve">
@@ -136,13 +145,13 @@
     <value>Radius</value>
   </data>
   <data name="GaussianBlur" xml:space="preserve">
-    <value>GaussianBlur</value>
+    <value>Gaussian Blur</value>
   </data>
   <data name="GaussianBlur_Radius" xml:space="preserve">
     <value>Radius</value>
   </data>
   <data name="OuterShadow" xml:space="preserve">
-    <value>OuterShadow</value>
+    <value>Outer Shadow</value>
   </data>
   <data name="OuterShadow_Angle" xml:space="preserve">
     <value>Angle</value>
@@ -159,10 +168,10 @@
   <data name="OuterShadow_Radius" xml:space="preserve">
     <value>Radius</value>
   </data>
-  <data name="Outline" xml:space="preserve">
-    <value>Outline</value>
+  <data name="Morphology" xml:space="preserve">
+    <value>Morphology</value>
   </data>
-  <data name="Outline_Size" xml:space="preserve">
+  <data name="Morphology_Size" xml:space="preserve">
     <value>Size</value>
   </data>
   <data name="Sharpen" xml:space="preserve">
