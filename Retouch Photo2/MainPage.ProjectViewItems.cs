@@ -59,47 +59,22 @@ namespace Retouch_Photo2
             IEnumerable<StorageFolder> zipFolders = await FileUtil.FIndZipFolders();
              
             //Refresh, when the count is not equal.
-            if (zipFolders.Count() != this.ProjectViewItems.Count)
+            if (zipFolders.Count() != this.MainLayout.Count)
             {
-                this.ProjectViewItems.Clear(); //Notify
+                this.MainLayout.Items.Clear(); //Notify
 
                 foreach (StorageFolder folder in zipFolders)
                 {
                     // [StorageFolder] --> [projectViewItem]
                     IProjectViewItem item = FileUtil.ConstructProjectViewItem(folder);
-                    if (item != null) this.ProjectViewItems.Add(item); //Notify
+                    if (item != null) this.MainLayout.Items.Add(item); //Notify
                 }
             }
 
-            if (this.ProjectViewItems.Count == 0)
-                this.MainLayout.MainPageState = MainPageState.Initial;
+            if (this.MainLayout.Count == 0)
+                this.MainLayout.State = MainPageState.Initial;
             else
-                this.MainLayout.MainPageState = MainPageState.Main;
-        }
-
-        /// <summary>
-        /// Refresh all photos select-mode.
-        /// </summary>
-        private void SelectAllProjectViewItems(SelectMode selectMode)
-        {
-            foreach (IProjectViewItem item in this.ProjectViewItems)
-            {
-                item.SelectMode = selectMode;
-            }
-        }
-
-        /// <summary>
-        /// Refresh the selected count.
-        /// </summary>
-        private void RefreshSelectCount()
-        {
-            int count = this.ProjectViewItems.Count(p => p.SelectMode == SelectMode.Selected);
-
-            this.SelectCountRun.Text = $"{count}";
-
-            bool isEnable = (count != 0);
-            this.DeletePrimaryButton.IsEnabled = isEnable;
-            this.DuplicatePrimaryButton.IsEnabled = isEnable;
+                this.MainLayout.State = MainPageState.Main;
         }
 
 
@@ -118,7 +93,7 @@ namespace Retouch_Photo2
             }
 
             //Name is already occupied.
-            bool hasRenamed = this.ProjectViewItems.Any(p => p.Name == newName);
+            bool hasRenamed = this.MainLayout.Items.Any(p => p.Name == newName);
             if (hasRenamed)
             {
                 this.RenameTipTextBlock.Visibility = Visibility.Visible;
@@ -126,11 +101,11 @@ namespace Retouch_Photo2
             }
 
             //Rename
-            IProjectViewItem item = this.ProjectViewItems.First(p=>p.Name==oldName);
+            IProjectViewItem item = this.MainLayout.Items.First(p=>p.Name==oldName);
             await FileUtil.RenameZipFolder(oldName, newName, item);
 
             this.HideRenameDialog();
-            this.MainLayout.MainPageState = MainPageState.Main;
+            this.MainLayout.State = MainPageState.Main;
         }
 
         /// <summary>
@@ -145,7 +120,7 @@ namespace Retouch_Photo2
                 await FileUtil.DeleteZipFolder(name);
 
                 item.Visibility = Visibility.Collapsed;
-                this.ProjectViewItems.Remove(item);//Notify
+                this.MainLayout.Items.Remove(item);//Notify
 
                 await Task.Delay(300);
             }
@@ -159,11 +134,11 @@ namespace Retouch_Photo2
             foreach (IProjectViewItem item in items.ToList())
             {
                 string oldName = item.Name;
-                string newName = this.UntitledRenameByRecursive(oldName);
+                string newName = this.MainLayout.UntitledRenameByRecursive(oldName);
                 StorageFolder storageFolder = await FileUtil.DuplicateZipFolder(oldName, newName);
 
                 IProjectViewItem newItem = FileUtil.ConstructProjectViewItem(newName, storageFolder);
-                this.ProjectViewItems.Add(newItem);//Notify
+                this.MainLayout.Items.Add(newItem);//Notify
             }
         }
 

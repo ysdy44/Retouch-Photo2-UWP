@@ -96,7 +96,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FootPageControl.cs" />
     <Compile Include="Controls\HeadBarControl.xaml.cs">
       <DependentUpon>HeadBarControl.xaml</DependentUpon>
     </Compile>
@@ -106,14 +105,15 @@
     </Compile>
     <Compile Include="Controls\MainCanvasControl.Construct.cs" />
     <Compile Include="Controls\MainCanvasControl.cs" />
+    <Compile Include="Controls\MenusExpanderCanvas.cs" />
     <Compile Include="Controls\ToolsControl.xaml.cs">
       <DependentUpon>ToolsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DrawPage.ToolAndMenu.cs" />
     <Compile Include="DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileUtils\FileUtil.Sample.cs" />
+    <Compile Include="PhotosPage.Construct.cs" />
     <Compile Include="Retouch Photo2.Adjustments\BrightnessPage.xaml.cs">
       <DependentUpon>BrightnessPage.xaml</DependentUpon>
     </Compile>
@@ -188,6 +188,7 @@
     </Compile>
     <Compile Include="Retouch Photo2.Tools\MoveTool.cs" />
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
+    <Compile Include="SettingPage.Construct.cs" />
     <Compile Include="XMLs\XML.Bitmap.cs" />
     <Compile Include="XMLs\XML.FilterFile.cs" />
     <Compile Include="XMLs\XML.LayersFile.cs" />

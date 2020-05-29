@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -54,6 +55,7 @@ namespace Retouch_Photo2.Controls
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            this.ConstructMenu();
 
             //Document            
             this._DocumentButton.Holding += (s, e) => this._DocumentFlyout.ShowAt(this._DocumentButton);
@@ -71,19 +73,30 @@ namespace Retouch_Photo2.Controls
         }
 
 
-        private void HeadGridSizeChange(double width)
+        //Menu
+        public void ConstructMenu()
         {
-            double arrangeWidth = width - 70 - 40;
-            double measureWidth = this.HeadRightStackPanel.ActualWidth;
-
-            bool isHeadLeft = arrangeWidth > measureWidth;
-            if (this._vsIsHeadLeft != isHeadLeft)
+            //Menu
+            foreach (IMenu menu in this.TipViewModel.Menus)
             {
-                this._vsIsHeadLeft = isHeadLeft;
-                this.VisualState = this.VisualState;//State 
+                this.ConstructMenuButton(menu);
             }
         }
 
+        public void ConstructMenuButton(IMenu menu)
+        {
+            if (menu == null) return;
+            UIElement button = menu.Expander.Button.Self;
+
+            this.HeadRightStackPanel.Children.Add(button);
+        }
+    }
+
+    /// <summary> 
+    /// Retouch_Photo2's the only <see cref = "FootPageControl" />. 
+    /// </summary>
+    public sealed partial class HeadBarControl : UserControl
+    {
 
         //Strings
         private void ConstructStrings()
@@ -109,5 +122,19 @@ namespace Retouch_Photo2.Controls
             this._FullScreenButton.Text = resource.GetString("/$DrawPage/FullScreen");
             this._TipButton.Text = resource.GetString("/$DrawPage/Tip");
         }
+
+        private void HeadGridSizeChange(double width)
+        {
+            double arrangeWidth = width - 70 - 40;
+            double measureWidth = this.HeadRightStackPanel.ActualWidth;
+
+            bool isHeadLeft = arrangeWidth > measureWidth;
+            if (this._vsIsHeadLeft != isHeadLeft)
+            {
+                this._vsIsHeadLeft = isHeadLeft;
+                this.VisualState = this.VisualState;//State 
+            }
+        }
+
     }
 }

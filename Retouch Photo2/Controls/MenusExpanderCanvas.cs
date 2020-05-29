@@ -1,16 +1,35 @@
-﻿using Retouch_Photo2.Menus;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Retouch_Photo2.Menus;
+using Retouch_Photo2.ViewModels;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace Retouch_Photo2
+namespace Retouch_Photo2.Controls
 {
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "DrawPage" />. 
-    /// </summary>
-    public sealed partial class DrawPage : Page
+    public class MenusExpanderCanvas : UserControl
     {
+        //@ViewModel
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
+
+        readonly Canvas OverlayCanvas = new Canvas();
+
+
+        public Action<UIElement> AddMenuButton;
+
+
+        //@Construct
+        public MenusExpanderCanvas()
+        {
+            this.Content = this.OverlayCanvas;
+            this.ConstructMenus();
+        }
 
         /// <summary>
         /// True if lightweight elimination is enabled for this control;
@@ -26,15 +45,12 @@ namespace Retouch_Photo2
             }
         }
 
-        /// <summary> Head panel of Menu. </summary>
-        UIElementCollection MenuHead => this.HeadBarControl.RightChildren;
 
         //Menu
         private void ConstructMenus()
         {
             foreach (IMenu menu in this.TipViewModel.Menus)
             {
-                this.ConstructMenuButton(menu);
                 this.ConstructMenuLayout(menu);
             }
 
@@ -57,16 +73,7 @@ namespace Retouch_Photo2
             };
         }
 
-
-        //Menu
-        public void ConstructMenuButton(IMenu menu)
-        {
-            if (menu == null) return;
-            UIElement button = menu.Expander.Button.Self;
-
-            this.MenuHead.Add(button);
-        }
-
+        
         public void ConstructMenuLayout(IMenu menu)
         {
             if (menu == null) return;

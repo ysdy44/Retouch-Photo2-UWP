@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Tools.Elements
                 //History
                 this.ViewModel.HistoryPushLayeragesHistory("Convert to curves");
 
-                this.SelectionViewModel.SetValue((layerage)=>
+                this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer2 = layerage.Self;
 
@@ -49,14 +49,20 @@ namespace Retouch_Photo2.Tools.Elements
                     curveLayer.IsSelected = true;
                 });
 
-
-                //Change tools group value.
-                this.TipViewModel.Tool = this.TipViewModel.Tools.First(t => t != null && t.Type == ToolType.Node);
-                this.TipViewModel.ToolGroupType(ToolType.Node);
-
                 LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
                 this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
-                this.ViewModel.Invalidate();//Invalidate
+
+                //Change tools group value.
+                {
+                    ITool tool = this.TipViewModel.Tools.First(t => t != null && t.Type == ToolType.Node);
+
+                    this.TipViewModel.Tool = tool;
+                    this.TipViewModel.ToolGroupType(ToolType.Node);
+                    this.SelectionViewModel.ToolType = ToolType.Node;
+
+                    this.ViewModel.TipTextBegin(tool.Title);
+                    this.ViewModel.Invalidate();//Invalidate
+                }
             };
         }
 

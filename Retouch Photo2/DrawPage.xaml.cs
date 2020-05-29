@@ -30,6 +30,7 @@ namespace Retouch_Photo2
 
         //@Converter
         private FrameworkElement IconConverter(ITool tool) => tool.Icon;
+        private FrameworkElement PageConverter(ITool tool) => tool.Page;
         private Visibility BoolToVisibilityConverter(bool boolean) => boolean ? Visibility.Visible : Visibility.Collapsed;
 
 
@@ -39,7 +40,7 @@ namespace Retouch_Photo2
             this.InitializeComponent();
             this.ConstructStrings();
             this.ConstructTransition();
-            this.ConstructMenus();            
+
             this.Loaded += (s, e) => this._lockLoaded();
             Retouch_Photo2.DrawPage.FrameNavigatePhotosPage += (mode) => this.Frame.Navigate(typeof(PhotosPage), mode);//Navigate   
 

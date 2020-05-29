@@ -73,33 +73,58 @@ namespace Retouch_Photo2.Menus.Models
             set => this.SetTransformerMenuState(value);
         }
 
-        bool _isLoaded;
-        IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
+        private IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
 
 
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets <see cref = "TransformerMenu" />'s tool. </summary>
-        public ITool Tool
+        /// <summary> Gets or sets <see cref = "TransformerMenu" />'s tool type. </summary>
+        public ToolType ToolType
         {
-            get { return (ITool)GetValue(ToolProperty); }
-            set { SetValue(ToolProperty, value); }
+            get { return (ToolType)GetValue(ToolTypeProperty); }
+            set { SetValue(ToolTypeProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "TransformerMenu.Tool" /> dependency property. </summary>
-        public static readonly DependencyProperty ToolProperty = DependencyProperty.Register(nameof(Tool), typeof(ITool), typeof(TransformerMenu), new PropertyMetadata(null, (sender, e) =>
+        /// <summary> Identifies the <see cref = "TransformerMenu.ToolType" /> dependency property. </summary>
+        public static readonly DependencyProperty ToolTypeProperty = DependencyProperty.Register(nameof(ToolType), typeof(ToolType), typeof(TransformerMenu), new PropertyMetadata(null, (sender, e) =>
         {
-            return;
             TransformerMenu con = (TransformerMenu)sender;
 
-            if (e.NewValue is ITool value)
+            if (e.NewValue is ToolType value)
             {
-                switch (value.Type)
+                switch (value)
                 {
                     case ToolType.Cursor:
                     case ToolType.View:
+
                     case ToolType.GeometryRectangle:
                     case ToolType.GeometryEllipse:
+
+                    case ToolType.TextFrame:
+                    case ToolType.TextArtistic:
+
+                    case ToolType.Image:
+                    case ToolType.Crop:
+
+                    //Geometry1
+                    case ToolType.GeometryRoundRect:
+                    case ToolType.GeometryTriangle:
+                    case ToolType.GeometryDiamond:
+
+                    //Geometry2
+                    case ToolType.GeometryPentagon:
+                    case ToolType.GeometryStar:
+                    case ToolType.GeometryCog:
+
+                    //Geometry3
+                    case ToolType.GeometryDount:
+                    case ToolType.GeometryPie:
+                    case ToolType.GeometryCookie:
+
+                    //Geometry4
+                    case ToolType.GeometryArrow:
+                    case ToolType.GeometryCapsule:
+                    case ToolType.GeometryHeart:
                         {
                             con._vsDisabledTool = false;
                             con.VisualState = con.VisualState;//State
@@ -194,18 +219,14 @@ namespace Retouch_Photo2.Menus.Models
                  path: nameof(this.SelectionViewModel.Transformer),
                  dp: TransformerMenu.TransformerProperty
             );
-            /*
             this.ConstructDataContext
             (
-                 path: nameof(this.TipViewModel.Tool),
-                 dp: TransformerMenu.ToolProperty
+                 path: nameof(this.SelectionViewModel.ToolType),
+                 dp: TransformerMenu.ToolTypeProperty
             );
-             */
             this.ConstructStrings();
             this.ConstructToolTip();
             this.ConstructMenu();
-
-            this.Loaded += (s, e) => this._isLoaded = true;
 
             this.ConstructWidthHeight();
             this.ConstructRadianSkew();

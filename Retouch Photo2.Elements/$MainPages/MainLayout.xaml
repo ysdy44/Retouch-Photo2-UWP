@@ -29,7 +29,7 @@
                     <VisualState.Setters>
                         
                         <!--Select-->
-                        <Setter Target = "_SelectCheckBox.Content" Value="Initial"/>
+                        <Setter Target = "SelectCheckBox.Content" Value="Initial"/>
                         
                         <!--Body-->
                         <Setter Target = "InitialBorder.Visibility" Value="Visible"/>
@@ -46,7 +46,7 @@
                     <VisualState.Setters>
 
                         <!--Select-->
-                        <Setter Target = "_SelectCheckBox.Content" Value="Main"/>
+                        <Setter Target = "SelectCheckBox.Content" Value="Main"/>
 
                         <!--Foot-->
                         <Setter Target = "MainBorder.Visibility" Value="Visible"/>
@@ -59,7 +59,7 @@
                     <VisualState.Setters>
 
                         <!--Select-->
-                        <Setter Target = "_SelectCheckBox.Content" Value="Dialog"/>
+                        <Setter Target = "SelectCheckBox.Content" Value="Dialog"/>
 
                         <!--Head-->
                         <Setter Target = "HeadBorder.Visibility" Value="Collapsed"/>
@@ -75,7 +75,7 @@
                     <VisualState.Setters>
 
                         <!--Select-->
-                        <Setter Target = "_SelectCheckBox.Content" Value="Pictures"/>
+                        <Setter Target = "SelectCheckBox.Content" Value="Pictures"/>
 
                         <!--Foot-->
                         <Setter Target = "PicturesBorder.Visibility" Value="Visible"/>
@@ -88,9 +88,9 @@
                     <VisualState.Setters>
 
                         <!--Select-->
-                        <Setter Target = "_SelectCheckBox.IsChecked" Value="{x:Null}"/>
-                        <Setter Target = "_SelectCheckBox.IsThreeState" Value="True"/>
-                        <Setter Target = "_SelectCheckBox.Content" Value="Rename"/>
+                        <Setter Target = "SelectCheckBox.IsChecked" Value="{x:Null}"/>
+                        <Setter Target = "SelectCheckBox.IsThreeState" Value="True"/>
+                        <Setter Target = "SelectCheckBox.Content" Value="Rename"/>
 
                         <!--Head-->
                         <Setter Target = "HeadBorder.Visibility" Value="Collapsed"/>
@@ -106,9 +106,9 @@
                     <VisualState.Setters>
 
                         <!--Select-->
-                        <Setter Target = "_SelectCheckBox.IsChecked" Value="true"/>
+                        <Setter Target = "SelectCheckBox.IsChecked" Value="true"/>
                         <Setter Target = "SelectBorder.Visibility" Value="Visible"/>
-                        <Setter Target = "_SelectCheckBox.Content" Value="Save"/>
+                        <Setter Target = "SelectCheckBox.Content" Value="Save"/>
 
                         <!--Foot-->
                         <Setter Target = "SaveBorder.Visibility" Value="Visible"/>
@@ -121,9 +121,9 @@
                     <VisualState.Setters>
 
                         <!--Select-->
-                        <Setter Target = "_SelectCheckBox.IsChecked" Value="true"/>
+                        <Setter Target = "SelectCheckBox.IsChecked" Value="true"/>
                         <Setter Target = "SelectBorder.Visibility" Value="Visible"/>
-                        <Setter Target = "_SelectCheckBox.Content" Value="Share"/>
+                        <Setter Target = "SelectCheckBox.Content" Value="Share"/>
 
                         <!--Foot-->
                         <Setter Target = "ShareBorder.Visibility" Value="Visible"/>
@@ -136,9 +136,9 @@
                     <VisualState.Setters>
 
                         <!--Select-->
-                        <Setter Target = "_SelectCheckBox.IsChecked" Value="true"/>
+                        <Setter Target = "SelectCheckBox.IsChecked" Value="true"/>
                         <Setter Target = "SelectBorder.Visibility" Value="Visible"/>
-                        <Setter Target = "_SelectCheckBox.Content" Value="Delete"/>
+                        <Setter Target = "SelectCheckBox.Content" Value="Delete"/>
 
                         <!--Foot-->
                         <Setter Target = "DeleteBorder.Visibility" Value="Visible"/>
@@ -151,9 +151,9 @@
                     <VisualState.Setters>
 
                         <!--Select-->
-                        <Setter Target = "_SelectCheckBox.IsChecked" Value="true"/>
+                        <Setter Target = "SelectCheckBox.IsChecked" Value="true"/>
                         <Setter Target = "SelectBorder.Visibility" Value="Visible"/>
-                        <Setter Target = "_SelectCheckBox.Content" Value="Duplicate"/>
+                        <Setter Target = "SelectCheckBox.Content" Value="Duplicate"/>
 
                         <!--Foot-->
                         <Setter Target = "DuplicateBorder.Visibility" Value="Visible"/>
@@ -184,7 +184,7 @@
 
                 <GridView.Header>
                     <Border Height="50">
-                        <CheckBox x:Name="_SelectCheckBox" HorizontalAlignment="Center" />
+                        <CheckBox x:Name="SelectCheckBox" HorizontalAlignment="Center" />
                     </Border>
                 </GridView.Header>
                 

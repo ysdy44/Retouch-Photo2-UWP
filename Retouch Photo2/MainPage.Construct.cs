@@ -183,35 +183,6 @@ namespace Retouch_Photo2
         }
 
 
-        //Head & Select
-        private void ConstructSelectHead()
-        {
-            this.MainLayout.SelectCheckBox.Unchecked += (s, e) => this.SelectAllProjectViewItems(SelectMode.None);
-            this.MainLayout.SelectCheckBox.Checked += (s, e) =>
-            {
-                this.SelectAllProjectViewItems(SelectMode.UnSelected);
-
-                this.RefreshSelectCount();
-            };
-
-            //Head
-            this.RefreshButton.Click += async (s, e) =>
-            {
-                await this.LoadAllProjectViewItems();
-            };
-            this.SettingButton.Click += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
-
-            //Select
-            this.SelectAllButton.Click += (s, e) =>
-            {
-                bool isAnyUnSelected = this.ProjectViewItems.Any(p => p.SelectMode == SelectMode.UnSelected);
-                SelectMode mode = isAnyUnSelected ? SelectMode.Selected : SelectMode.UnSelected;
-                this.SelectAllProjectViewItems(mode);
-
-                this.RefreshSelectCount();
-            };
-        }
-
 
         //AddDialog
         private void ConstructAddDialog()
@@ -227,15 +198,15 @@ namespace Retouch_Photo2
         }
         private void ShowAddDialog()
         {
-            this.MainLayout.MainPageState = MainPageState.Dialog;
+            this.MainLayout.State = MainPageState.Dialog;
             this.AddDialog.Show();
         }
         private void HideAddDialog()
         {
-            if (this.ProjectViewItems.Count == 0)
-                this.MainLayout.MainPageState = MainPageState.Initial;
+            if (this.MainLayout.Count == 0)
+                this.MainLayout.State = MainPageState.Initial;
             else
-                this.MainLayout.MainPageState = MainPageState.Main;
+                this.MainLayout.State = MainPageState.Main;
 
             this.AddDialog.Hide();
         }
@@ -246,7 +217,7 @@ namespace Retouch_Photo2
         {
             this.PicturesPhotoButton.Click += async (s, e) => await this.NewFromPicture(PickerLocationId.PicturesLibrary);
             this.PicturesDestopButton.Click += async (s, e) => await this.NewFromPicture(PickerLocationId.Desktop);
-            this.PicturesCloseButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
+            this.PicturesCloseButton.Click += (s, e) => this.MainLayout.State = MainPageState.Main;
         }
 
 
@@ -262,7 +233,7 @@ namespace Retouch_Photo2
         }
         private void ShowRenameDialog(IProjectViewItem item)
         {
-            this.MainLayout.MainPageState = MainPageState.Dialog;
+            this.MainLayout.State = MainPageState.Dialog;
 
             this.RenameDialog.Show();
 
@@ -275,7 +246,7 @@ namespace Retouch_Photo2
         {
             this.RenameTipTextBlock.Visibility = Visibility.Collapsed;
 
-            this.MainLayout.MainPageState = MainPageState.Rename;
+            this.MainLayout.State = MainPageState.Rename;
 
             this.RenameDialog.Hide();
         }
@@ -285,20 +256,19 @@ namespace Retouch_Photo2
         private void ConstructDeleteControl()
         {
             //Delete
-            this.DeleteCloseButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
+            this.DeleteCloseButton.Click += (s, e) => this.MainLayout.State = MainPageState.Main;
             this.DeletePrimaryButton.Click += async (s, e) =>
             {
                 this.LoadingControl.IsActive = true;
 
-                IEnumerable<IProjectViewItem> items = from i in this.ProjectViewItems where i.SelectMode == SelectMode.Selected select i;
-                await this.DeleteProjectViewItems(items);
+                await this.DeleteProjectViewItems(this.MainLayout.SelectedItems);
 
                 this.LoadingControl.IsActive = false;
 
-                if (this.ProjectViewItems.Count == 0)
-                    this.MainLayout.MainPageState = MainPageState.Initial;
+                if (this.MainLayout.Count == 0)
+                    this.MainLayout.State = MainPageState.Initial;
                 else
-                    this.MainLayout.MainPageState = MainPageState.Main;
+                    this.MainLayout.State = MainPageState.Main;
             };
         }
 
@@ -307,17 +277,16 @@ namespace Retouch_Photo2
         private void ConstructDuplicateControl()
         {
             //Duplicate
-            this.DuplicateCloseButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
+            this.DuplicateCloseButton.Click += (s, e) => this.MainLayout.State = MainPageState.Main;
             this.DuplicatePrimaryButton.Click += async (s, e) =>
             {
                 this.LoadingControl.IsActive = true;
 
-                IEnumerable<IProjectViewItem> items = from i in this.ProjectViewItems where i.SelectMode == SelectMode.Selected select i;
-                await this.DuplicateProjectViewItems(items);
+                await this.DuplicateProjectViewItems(this.MainLayout.SelectedItems);
 
                 this.LoadingControl.IsActive = false;
 
-                this.MainLayout.MainPageState = MainPageState.Main;
+                this.MainLayout.State = MainPageState.Main;
             };
         }
 

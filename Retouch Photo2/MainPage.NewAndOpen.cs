@@ -40,7 +40,7 @@ namespace Retouch_Photo2
             //Project
             {
                 string untitled = this.Untitled;
-                string name = this.UntitledRenameByRecursive(untitled);
+                string name = this.MainLayout.UntitledRenameByRecursive(untitled);
                 int width = (int)pixels.Width;
                 int height = (int)pixels.Height;
 
@@ -163,7 +163,7 @@ namespace Retouch_Photo2
             Photo.DuplicateChecking(photo);
 
             //Transformer
-            string name = this.UntitledRenameByRecursive($"{photo.Name}");
+            string name = this.MainLayout.UntitledRenameByRecursive($"{photo.Name}");
             int width = (int)photo.Width;
             int height = (int)photo.Height;
             Transformer transformerSource = new Transformer(width, height, Vector2.Zero);
@@ -202,34 +202,6 @@ namespace Retouch_Photo2
             this.LoadingControl.IsActive = false;
             this.LoadingControl.State = LoadingState.None;
             this.Frame.Navigate(typeof(DrawPage), data);//Navigate
-        }
-
-
-        /// <summary>
-        /// Get a name that doesn't have a rename.
-        /// If there are, add the number.
-        /// [Untitled] --> [Untitled1]   
-        /// </summary>
-        /// <param name="name"> The previous name. </param>
-        /// <returns> The new name. </returns>
-        private string UntitledRenameByRecursive(string name)
-        {
-            // Is there a re-named item?
-            if (this.ProjectViewItems.All(i => i.Name != name))
-                return name;
-
-            int num = 0;
-            string newName;
-
-            do
-            {
-                num++;
-                newName = $"{name}{num}";
-            }
-            // Is there a re-named item?
-            while (this.ProjectViewItems.Any(i => i.Name == newName));
-
-            return newName;
         }
 
     }

@@ -14,6 +14,7 @@ namespace Retouch_Photo2.Controls
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel = App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
         /// <summary> Left panel of Tool. </summary>
@@ -77,11 +78,15 @@ namespace Retouch_Photo2.Controls
 
                     element.Tapped += (s, e) =>
                     {
-                        this.TipViewModel.Tool = tool;
-                        this.TipViewModel.ToolGroupType(tool.Type);
+                        //Change tools group value.
+                        {
+                            this.TipViewModel.Tool = tool;
+                            this.TipViewModel.ToolGroupType(tool.Type);
+                            this.SelectionViewModel.ToolType = tool.Type;
 
-                        this.ViewModel.TipTextBegin(tool.Title);
-                        this.ViewModel.Invalidate();//Invalidate
+                            this.ViewModel.TipTextBegin(tool.Title);
+                            this.ViewModel.Invalidate();//Invalidate
+                        }
                     };
                 }
             }

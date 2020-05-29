@@ -73,18 +73,13 @@
         
         <elementDrawPages:DrawLayout x:Name="DrawLayout" 
                CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"
+            
                LeftIcon="{x:Bind IconConverter(TipViewModel.Tool), Mode=OneWay}"
+               FootPage="{x:Bind PageConverter(TipViewModel.Tool), Mode=OneWay}"
                Touchbar="{x:Bind TipViewModel.TouchbarControl, Mode=OneWay}"                                             
+             
                DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
                IsFullScreen="{x:Bind SettingViewModel.IsFullScreen, Mode=OneWay}">
-
-            <!--FootPage-->
-            <elementDrawPages:DrawLayout.FootPage>
-                <controls:FootPageControl x:Name="FootPageControl"       
-                    Tool="{x:Bind TipViewModel.Tool, Mode=OneWay}"                         
-                    Type="{x:Bind SelectionViewModel.LayerType, Mode=OneWay}"                         
-                    Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}" />
-            </elementDrawPages:DrawLayout.FootPage>
 
             <!--RightIcon-->
             <elementDrawPages:DrawLayout.RightIcon>
@@ -115,8 +110,8 @@
 
 
         <!--Menu-->
-        <Canvas x:Name="OverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"/>
-
+        <controls:MenusExpanderCanvas IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"/>
+        
 
         <!--FullScreen-->
         <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}"

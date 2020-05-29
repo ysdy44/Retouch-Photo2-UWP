@@ -131,13 +131,13 @@
                         <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button x:Name="RefreshButton" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
+                    <Button x:Name="DocumentationButton" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
                         <Button.Transitions>
                             <TransitionCollection>
                                 <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
                             </TransitionCollection>
                         </Button.Transitions>
-                        <FontIcon FontSize="20" Glyph="&#xE117;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon FontSize="20" Glyph="&#xE11B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
                     </Button>
 
                     <TextBlock x:Name="TitleTextBlock" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
@@ -166,7 +166,8 @@
 
                     <TextBlock Margin="12, 0" IsHitTestVisible="False" HorizontalAlignment="Left" VerticalAlignment="Center">                        
                         <Run x:Name="SelectItemsTextBlock"/>
-                        <Run x:Name="SelectCountRun">0</Run>
+                        <Run x:Name="SelectCountRun" 
+                             Text="{x:Bind MainLayout.SelectedCount, Mode=OneWay}"/>
                     </TextBlock>
 
                     <Button x:Name="SelectAllButton" Padding="8,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent"/>
@@ -273,7 +274,8 @@
                     </TextBlock>
 
                     <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Right">
-                        <Button x:Name="DeletePrimaryButton" Style="{StaticResource AppTabButtonStyle}">
+                        <Button x:Name="DeletePrimaryButton" Style="{StaticResource AppTabButtonStyle}"
+                                IsEnabled="{x:Bind MainLayout.SelectedIsEnabled, Mode=OneWay}">
                             <Button.Tag>
                                 <FontIcon Glyph="&#xF78C;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </Button.Tag>
@@ -299,7 +301,8 @@
                     </TextBlock>
 
                     <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Right">
-                        <Button x:Name="DuplicatePrimaryButton" Style="{StaticResource AppTabButtonStyle}">
+                        <Button x:Name="DuplicatePrimaryButton" Style="{StaticResource AppTabButtonStyle}"
+                                IsEnabled="{x:Bind MainLayout.SelectedIsEnabled, Mode=OneWay}">
                             <Button.Tag>
                                 <FontIcon Glyph="&#xF78C;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </Button.Tag>

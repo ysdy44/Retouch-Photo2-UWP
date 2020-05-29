@@ -1,10 +1,12 @@
 ﻿using Retouch_Photo2.Elements.MainPages;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.Storage.Pickers;
+using Windows.System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -21,8 +23,6 @@ namespace Retouch_Photo2
         ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        
-        ObservableCollection<IProjectViewItem> ProjectViewItems = new ObservableCollection<IProjectViewItem>();
 
 
         //@Construct
@@ -32,9 +32,13 @@ namespace Retouch_Photo2
             this.ConstructStrings();
             this.ConstructInitialControl();
             this.ConstructDragAndDrop();
-            this.ConstructSelectHead();
 
-            this.MainLayout.ItemsSource = this.ProjectViewItems;
+            //Select
+            this.SelectAllButton.Click += (s, e) => this.MainLayout.SelectAllAndDeselectIcon();
+            //Head
+            this.DocumentationButton.Click += async (s, e) => await Launcher.LaunchUriAsync(new Uri("https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README.md"));
+            this.SettingButton.Click += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
+            
 
             this.Loaded += async (s, e) =>
             {
@@ -53,17 +57,17 @@ namespace Retouch_Photo2
             this.AddButton.Click += (s, e) => this.ShowAddDialog();
 
             this.ConstructPicturesControl();
-            this.PicturesButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Pictures;
+            this.PicturesButton.Click += (s, e) => this.MainLayout.State = MainPageState.Pictures;
 
             this.ConstructRenameDialog();
-            this.RenameCloseButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Main;
-            this.RenameButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Rename;
+            this.RenameCloseButton.Click += (s, e) => this.MainLayout.State = MainPageState.Main;
+            this.RenameButton.Click += (s, e) => this.MainLayout.State = MainPageState.Rename;
 
             this.ConstructDeleteControl();
-            this.DeleteButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Delete;
+            this.DeleteButton.Click += (s, e) => this.MainLayout.State = MainPageState.Delete;
 
             this.ConstructDuplicateControl();
-            this.DuplicateButton.Click += (s, e) => this.MainLayout.MainPageState = MainPageState.Duplicate;
+            this.DuplicateButton.Click += (s, e) => this.MainLayout.State = MainPageState.Duplicate;
 
 
             #endregion
@@ -72,7 +76,7 @@ namespace Retouch_Photo2
             //ProjectViewItem
             ProjectViewItem.ItemClick += (item) =>
             {
-                switch (this.MainLayout.MainPageState)
+                switch (this.MainLayout.State)
                 {
                     case MainPageState.Main:
                         this.OpenFromProjectViewItem(item);
@@ -85,7 +89,7 @@ namespace Retouch_Photo2
                     case MainPageState.Delete:
                     case MainPageState.Duplicate:
                         item.SwitchState();
-                        this.RefreshSelectCount();
+                        this.MainLayout.RefreshSelectCount();
                         break;
 
                     default:
@@ -105,7 +109,7 @@ namespace Retouch_Photo2
             {
                 this.ViewModel.IsUpdateThumbnailByName = false;
 
-                IProjectViewItem item = this.ProjectViewItems.FirstOrDefault(i => i.Name == this.ViewModel.Name);
+                IProjectViewItem item = this.MainLayout.Items.FirstOrDefault(i => i.Name == this.ViewModel.Name);
                 if (item != null)
                 {
                     item.RefreshImageSource();

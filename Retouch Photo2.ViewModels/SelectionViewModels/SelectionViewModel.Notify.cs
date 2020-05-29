@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Windows.UI.Xaml;
+using Retouch_Photo2.Tools;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -19,6 +20,19 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
+
+        /// <summary> <see cref = "ViewModel" />'s tool type. </summary>
+        public ToolType ToolType
+        {
+            get => this.toolType;
+            set
+            {
+                this.toolType = value;
+                this.OnPropertyChanged(nameof(this.ToolType));//Notify 
+            }
+        }
+        private ToolType toolType = ToolType.None;
+
 
         /// <summary> <see cref = "ViewModel" />'s layer type. </summary>
         public LayerType LayerType
