@@ -29,21 +29,22 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         public void ResetBlue()
         {
-            this.BlueCheckBox.IsOn = true;
+            this.BlueToggleSwitch.IsOn = false;
             this.BlueOffsetSlider.Value = 0;
             this.BlueExponentSlider.Value = 100;
             this.BlueAmplitudeSlider.Value = 100;
         }
         public void FollowBlue(GammaTransferAdjustment adjustment)
         {
-            this.BlueCheckBox.IsOn = !adjustment.BlueDisable;
+            this.BlueToggleSwitch.IsOn = !adjustment.BlueDisable;
             this.BlueOffsetSlider.Value = adjustment.BlueOffset * 100.0f;
             this.BlueExponentSlider.Value = adjustment.BlueExponent * 100.0f;
             this.BlueAmplitudeSlider.Value = adjustment.BlueAmplitude * 100.0f;
         }
 
-        public void ConstructStringsBlue(string offset, string exponent, string amplitude)
+        public void ConstructStringsBlue(string title, string offset, string exponent, string amplitude)
         {
+            this.BlueTextBlock.Text = title;
             this.BlueOffsetTextBlock.Text = offset;
             this.BlueExponentTextBlock.Text = exponent;
             this.BlueAmplitudeTextBlock.Text = amplitude;
@@ -52,7 +53,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         public void ConstructBlueDisable()
         {
-            this.BlueRelativePanel.Tapped += (s, e) =>
+            this.BlueTitleGrid.Tapped += (s, e) =>
             {
                 switch (this.BlueIsExpaned)
                 {
@@ -65,11 +66,11 @@ namespace Retouch_Photo2.Adjustments.Pages
                 }
             };
 
-            this.BlueCheckBox.Toggled += (s, e) =>
+            this.BlueToggleSwitch.Toggled += (s, e) =>
             {
                 if (this.Adjustment is GammaTransferAdjustment adjustment)
                 {
-                    bool disable = !this.BlueCheckBox.IsOn;
+                    bool disable = !this.BlueToggleSwitch.IsOn;
                     if (adjustment.BlueDisable == disable) return;
 
 

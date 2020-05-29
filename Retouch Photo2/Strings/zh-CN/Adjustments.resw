@@ -147,14 +147,26 @@
   <data name="GammaTransfer" xml:space="preserve">
     <value>伽马传递</value>
   </data>
+  <data name="GammaTransfer_Alpha" xml:space="preserve">
+    <value>Alpha</value>
+  </data>
   <data name="GammaTransfer_Amplitude" xml:space="preserve">
     <value>振幅</value>
+  </data>
+  <data name="GammaTransfer_Blue" xml:space="preserve">
+    <value>蓝</value>
   </data>
   <data name="GammaTransfer_Exponent" xml:space="preserve">
     <value>指数</value>
   </data>
+  <data name="GammaTransfer_Green" xml:space="preserve">
+    <value>绿</value>
+  </data>
   <data name="GammaTransfer_Offset" xml:space="preserve">
     <value>位移</value>
+  </data>
+  <data name="GammaTransfer_Red" xml:space="preserve">
+    <value>红</value>
   </data>
   <data name="Gray" xml:space="preserve">
     <value>黑白</value>

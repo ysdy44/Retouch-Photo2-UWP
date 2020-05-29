@@ -29,21 +29,22 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         public void ResetGreen()
         {
-            this.GreenCheckBox.IsOn = true;
+            this.GreenToggleSwitch.IsOn = false;
             this.GreenOffsetSlider.Value = 0;
             this.GreenExponentSlider.Value = 100;
             this.GreenAmplitudeSlider.Value = 100;
         }
         public void FollowGreen(GammaTransferAdjustment adjustment)
         {
-            this.GreenCheckBox.IsOn = !adjustment.GreenDisable;
+            this.GreenToggleSwitch.IsOn = !adjustment.GreenDisable;
             this.GreenOffsetSlider.Value = adjustment.GreenOffset * 100.0f;
             this.GreenExponentSlider.Value = adjustment.GreenExponent * 100.0f;
             this.GreenAmplitudeSlider.Value = adjustment.GreenAmplitude * 100.0f;
         }
 
-        public void ConstructStringsGreen(string offset, string exponent, string amplitude)
+        public void ConstructStringsGreen(string title, string offset, string exponent, string amplitude)
         {
+            this.GreenTextBlock.Text = title;
             this.GreenOffsetTextBlock.Text = offset;
             this.GreenExponentTextBlock.Text = exponent;
             this.GreenAmplitudeTextBlock.Text = amplitude;
@@ -52,7 +53,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         public void ConstructGreenDisable()
         {
-            this.GreenRelativePanel.Tapped += (s, e) =>
+            this.GreenTitleGrid.Tapped += (s, e) =>
             {
                 switch (this.GreenIsExpaned)
                 {
@@ -65,11 +66,11 @@ namespace Retouch_Photo2.Adjustments.Pages
                 }
             };
 
-            this.GreenCheckBox.Toggled += (s, e) =>
+            this.GreenToggleSwitch.Toggled += (s, e) =>
             {
                 if (this.Adjustment is GammaTransferAdjustment adjustment)
                 {
-                    bool disable = !this.GreenCheckBox.IsOn;
+                    bool disable = !this.GreenToggleSwitch.IsOn;
                     if (adjustment.GreenDisable == disable) return;
 
 

@@ -29,21 +29,22 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         public void ResetRed()
         {
-            this.RedCheckBox.IsOn = true;
+            this.RedToggleSwitch.IsOn = false;
             this.RedOffsetSlider.Value = 0;
             this.RedExponentSlider.Value = 100;
             this.RedAmplitudeSlider.Value = 100;
         }
         public void FollowRed(GammaTransferAdjustment adjustment)
         {
-            this.RedCheckBox.IsOn = !adjustment.RedDisable;
+            this.RedToggleSwitch.IsOn = !adjustment.RedDisable;
             this.RedOffsetSlider.Value = adjustment.RedOffset * 100.0f;
             this.RedExponentSlider.Value = adjustment.RedExponent * 100.0f;
             this.RedAmplitudeSlider.Value = adjustment.RedAmplitude * 100.0f;
         }
 
-        public void ConstructStringsRed(string offset, string exponent, string amplitude)
+        public void ConstructStringsRed(string title, string offset, string exponent, string amplitude)
         {
+            this.RedTextBlock.Text = title;
             this.RedOffsetTextBlock.Text = offset;
             this.RedExponentTextBlock.Text = exponent;
             this.RedAmplitudeTextBlock.Text = amplitude;
@@ -52,7 +53,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         public void ConstructRedDisable()
         {
-            this.RedRelativePanel.Tapped += (s, e) =>
+            this.RedTitleGrid.Tapped += (s, e) =>
             {
                 switch (this.RedIsExpaned)
                 {
@@ -65,11 +66,11 @@ namespace Retouch_Photo2.Adjustments.Pages
                 }
             };
 
-            this.RedCheckBox.Toggled += (s, e) =>
+            this.RedToggleSwitch.Toggled += (s, e) =>
             {
                 if (this.Adjustment is GammaTransferAdjustment adjustment)
                 {
-                    bool disable = !this.RedCheckBox.IsOn;
+                    bool disable = !this.RedToggleSwitch.IsOn;
                     if (adjustment.RedDisable == disable) return;
 
 

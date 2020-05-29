@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         public GammaTransferAdjustment Adjustment { get; set; }
 
         //@Converter
-        private string VisibilityToGlyphConverter(Visibility visibility) => visibility == Visibility.Visible ? "\xE011" : "\xE014";
+        private string VisibilityToGlyphConverter(Visibility visibility) => visibility == Visibility.Visible ? "\xE011" : "\xE017";
 
 
         //@Construct
@@ -68,10 +68,14 @@ namespace Retouch_Photo2.Adjustments.Pages
             string exponent = resource.GetString("/Adjustments/GammaTransfer_Exponent");
             string amplitude = resource.GetString("/Adjustments/GammaTransfer_Amplitude");
 
-            this.ConstructStringsAlpha(offset, exponent, amplitude);
-            this.ConstructStringsRed(offset, exponent, amplitude);
-            this.ConstructStringsGreen(offset, exponent, amplitude);
-            this.ConstructStringsBlue(offset, exponent, amplitude);
+            string alpha = resource.GetString("/Adjustments/GammaTransfer_Alpha");
+            this.ConstructStringsAlpha(alpha, offset, exponent, amplitude);
+            string red = resource.GetString("/Adjustments/GammaTransfer_Red");
+            this.ConstructStringsRed(red, offset, exponent, amplitude);
+            string green = resource.GetString("/Adjustments/GammaTransfer_Green");
+            this.ConstructStringsGreen(green, offset, exponent, amplitude);
+            string blue = resource.GetString("/Adjustments/GammaTransfer_Blue");
+            this.ConstructStringsBlue(blue, offset, exponent, amplitude);
         }
         
         //@Content

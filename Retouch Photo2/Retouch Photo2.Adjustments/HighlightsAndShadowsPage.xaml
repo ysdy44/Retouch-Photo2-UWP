@@ -51,5 +51,6 @@
         <TextBlock x:Name="MaskBlurAmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <hsvColorPickers:TouchSlider x:Name="MaskBlurAmountSlider"/>
 
+        <ContentControl Height="4"/>
     </StackPanel>
 </Page>

@@ -51,5 +51,6 @@
             </Border.Background>
         </Border>
 
+        <ContentControl Height="4"/>
     </StackPanel>
 </Page>

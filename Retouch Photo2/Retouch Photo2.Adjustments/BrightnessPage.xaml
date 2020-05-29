@@ -57,5 +57,6 @@
         <TextBlock x:Name="BlackToDarkTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <hsvColorPickers:TouchSlider x:Name="BlackDarkSlider"/>
 
+        <ContentControl Height="4"/>
     </StackPanel>
 </Page>

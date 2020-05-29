@@ -29,21 +29,22 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         public void ResetAlpha()
         {
-            this.AlphaCheckBox.IsOn = true;
+            this.AlphaToggleSwitch.IsOn = false;
             this.AlphaOffsetSlider.Value = 0;
             this.AlphaExponentSlider.Value = 100;
             this.AlphaAmplitudeSlider.Value = 100;
         }
         public void FollowAlpha(GammaTransferAdjustment adjustment)
         {
-            this.AlphaCheckBox.IsOn = !adjustment.AlphaDisable;
+            this.AlphaToggleSwitch.IsOn = !adjustment.AlphaDisable;
             this.AlphaOffsetSlider.Value = adjustment.AlphaOffset * 100.0f;
             this.AlphaExponentSlider.Value = adjustment.AlphaExponent * 100.0f;
             this.AlphaAmplitudeSlider.Value = adjustment.AlphaAmplitude * 100.0f;
         }
 
-        public void ConstructStringsAlpha(string offset, string exponent, string amplitude)
+        public void ConstructStringsAlpha(string title, string offset, string exponent, string amplitude)
         {
+            this.AlphaTextBlock.Text = offset;
             this.AlphaOffsetTextBlock.Text = offset;
             this.AlphaExponentTextBlock.Text = exponent;
             this.AlphaAmplitudeTextBlock.Text = amplitude;
@@ -52,7 +53,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         public void ConstructAlphaDisable()
         {
-            this.AlphaRelativePanel.Tapped += (s, e) =>
+            this.AlphaTitleGrid.Tapped += (s, e) =>
             {
                 switch (this.AlphaIsExpaned)
                 {
@@ -65,11 +66,11 @@ namespace Retouch_Photo2.Adjustments.Pages
                 }
             };
 
-            this.AlphaCheckBox.Toggled += (s, e) =>
+            this.AlphaToggleSwitch.Toggled += (s, e) =>
             {
                 if (this.Adjustment is GammaTransferAdjustment adjustment)
                 {
-                    bool disable = !this.AlphaCheckBox.IsOn;
+                    bool disable = !this.AlphaToggleSwitch.IsOn;
                     if (adjustment.AlphaDisable == disable) return;
 
 

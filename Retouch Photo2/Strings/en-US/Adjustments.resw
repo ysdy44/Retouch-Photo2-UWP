@@ -147,14 +147,26 @@
   <data name="GammaTransfer" xml:space="preserve">
     <value>GammaTransfer</value>
   </data>
+  <data name="GammaTransfer_Alpha" xml:space="preserve">
+    <value>Alpha</value>
+  </data>
   <data name="GammaTransfer_Amplitude" xml:space="preserve">
     <value>Amplitude</value>
+  </data>
+  <data name="GammaTransfer_Blue" xml:space="preserve">
+    <value>Blue</value>
   </data>
   <data name="GammaTransfer_Exponent" xml:space="preserve">
     <value>Exponent</value>
   </data>
+  <data name="GammaTransfer_Green" xml:space="preserve">
+    <value>Green</value>
+  </data>
   <data name="GammaTransfer_Offset" xml:space="preserve">
     <value>Offset</value>
+  </data>
+  <data name="GammaTransfer_Red" xml:space="preserve">
+    <value>Red</value>
   </data>
   <data name="Gray" xml:space="preserve">
     <value>Gray</value>

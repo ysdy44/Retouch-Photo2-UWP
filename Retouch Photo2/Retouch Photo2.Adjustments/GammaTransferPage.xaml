@@ -28,7 +28,7 @@
             <GradientStop Color="{StaticResource AlphaRight}" Offset="1"/>
         </LinearGradientBrush>
 
-        
+
         <!--Red-->
         <Color x:Key="RedLeft" >#FFC67A</Color>
         <Color x:Key="RedRight" >#FF4f00</Color>
@@ -45,7 +45,7 @@
             <GradientStop Color="{StaticResource RedRight}" Offset="1"/>
         </LinearGradientBrush>
 
-        
+
         <!--Green-->
         <Color x:Key="GreenLeft" >#BFFFD5</Color>
         <Color x:Key="GreenRight">#00FF79</Color>
@@ -61,7 +61,7 @@
             <GradientStop Color="{StaticResource GreenRight}" Offset="0"/>
             <GradientStop Color="{StaticResource GreenRight}" Offset="1"/>
         </LinearGradientBrush>
-        
+
 
         <!--Blue-->
         <Color x:Key="BlueLeft">#92C7F7</Color>
@@ -82,88 +82,137 @@
     </Page.Resources>
 
 
-    <StackPanel>
+    <ScrollViewer>
+        <StackPanel>
 
 
-        <!--Alpha-->
-        <RelativePanel x:Name="AlphaRelativePanel" Background="{ThemeResource AppForeground}">
-            <ToggleSwitch x:Name="AlphaCheckBox" RelativePanel.AlignLeftWithPanel="True"/>
-            <Border Width="30" RelativePanel.AlignRightWithPanel="True">
-                <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+            <!--Alpha-->
+            <Grid x:Name="AlphaTitleGrid" Background="{ThemeResource AppForeground}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                          HorizontalAlignment="Center" VerticalAlignment="Center"
                           Glyph="{x:Bind VisibilityToGlyphConverter(AlphaIsExpaned), Mode=OneWay}"/>
-            </Border>
-        </RelativePanel>
+                <TextBlock x:Name="AlphaTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>
+                <ToggleSwitch x:Name="AlphaToggleSwitch" Grid.Column="2">
+                    <ToggleSwitch.Clip>
+                        <RectangleGeometry Rect="0,0,50,50"/>
+                    </ToggleSwitch.Clip>
+                </ToggleSwitch>
+            </Grid>
 
-        <TextBlock x:Name="AlphaOffsetTextBlock" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="AlphaOffsetSlider" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}" />
+            <TextBlock x:Name="AlphaOffsetTextBlock" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:TouchSlider x:Name="AlphaOffsetSlider" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}" />
 
-        <TextBlock x:Name="AlphaExponentTextBlock" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="AlphaExponentSlider" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}"/>
+            <TextBlock x:Name="AlphaExponentTextBlock" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:TouchSlider x:Name="AlphaExponentSlider" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}"/>
 
-        <TextBlock x:Name="AlphaAmplitudeTextBlock" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="AlphaAmplitudeSlider" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}"/>
+            <TextBlock x:Name="AlphaAmplitudeTextBlock" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:TouchSlider x:Name="AlphaAmplitudeSlider" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}"/>
 
+            <ContentControl Height="12" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}"/>
 
-
-        <!--Red-->
-        <RelativePanel x:Name="RedRelativePanel" Background="{ThemeResource AppForeground}">
-            <ToggleSwitch x:Name="RedCheckBox" RelativePanel.AlignLeftWithPanel="True"/>
-            <Border Width="30" RelativePanel.AlignRightWithPanel="True">
-                <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                          Glyph="{x:Bind VisibilityToGlyphConverter(RedIsExpaned), Mode=OneWay}"/>
-            </Border>
-        </RelativePanel>
-
-        <TextBlock x:Name="RedOffsetTextBlock" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="RedOffsetSlider" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}" />
-
-        <TextBlock x:Name="RedExponentTextBlock" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="RedExponentSlider" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}"/>
-
-        <TextBlock x:Name="RedAmplitudeTextBlock" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="RedAmplitudeSlider" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}"/>
+            <ContentControl Height="1"/>
 
 
+            <!--Red-->
+            <Grid x:Name="RedTitleGrid" Background="{ThemeResource AppForeground}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                          HorizontalAlignment="Center" VerticalAlignment="Center"
+                          Glyph="{x:Bind VisibilityToGlyphConverter(AlphaIsExpaned), Mode=OneWay}"/>
+                <TextBlock x:Name="RedTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>
+                <ToggleSwitch x:Name="RedToggleSwitch" Grid.Column="2">
+                    <ToggleSwitch.Clip>
+                        <RectangleGeometry Rect="0,0,50,50"/>
+                    </ToggleSwitch.Clip>
+                </ToggleSwitch>
+            </Grid>
 
-        <!--Green-->
-        <RelativePanel x:Name="GreenRelativePanel" Background="{ThemeResource AppForeground}">
-            <ToggleSwitch x:Name="GreenCheckBox" RelativePanel.AlignLeftWithPanel="True"/>
-            <Border Width="30" RelativePanel.AlignRightWithPanel="True">
-                <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                          Glyph="{x:Bind VisibilityToGlyphConverter(GreenIsExpaned), Mode=OneWay}"/>
-            </Border>
-        </RelativePanel>
+            <TextBlock x:Name="RedOffsetTextBlock" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:TouchSlider x:Name="RedOffsetSlider" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}" />
 
-        <TextBlock x:Name="GreenOffsetTextBlock" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="GreenOffsetSlider" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}" />
+            <TextBlock x:Name="RedExponentTextBlock" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:TouchSlider x:Name="RedExponentSlider" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}"/>
 
-        <TextBlock x:Name="GreenExponentTextBlock" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="GreenExponentSlider" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}"/>
+            <TextBlock x:Name="RedAmplitudeTextBlock" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:TouchSlider x:Name="RedAmplitudeSlider" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}"/>
 
-        <TextBlock x:Name="GreenAmplitudeTextBlock" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="GreenAmplitudeSlider" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}"/>
+            <ContentControl Height="12" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}"/>
+
+            <ContentControl Height="1"/>
 
 
+            <!--Green-->
+            <Grid x:Name="GreenTitleGrid" Background="{ThemeResource AppForeground}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                          HorizontalAlignment="Center" VerticalAlignment="Center"
+                          Glyph="{x:Bind VisibilityToGlyphConverter(AlphaIsExpaned), Mode=OneWay}"/>
+                <TextBlock x:Name="GreenTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>
+                <ToggleSwitch x:Name="GreenToggleSwitch" Grid.Column="2">
+                    <ToggleSwitch.Clip>
+                        <RectangleGeometry Rect="0,0,50,50"/>
+                    </ToggleSwitch.Clip>
+                </ToggleSwitch>
+            </Grid>
 
-        <!--Blue-->
-        <RelativePanel x:Name="BlueRelativePanel" Background="{ThemeResource AppForeground}">
-            <ToggleSwitch x:Name="BlueCheckBox" RelativePanel.AlignLeftWithPanel="True"/>
-            <Border Width="30" RelativePanel.AlignRightWithPanel="True">
-                <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                          Glyph="{x:Bind VisibilityToGlyphConverter(BlueIsExpaned), Mode=OneWay}"/>
-            </Border>
-        </RelativePanel>
+            <TextBlock x:Name="GreenOffsetTextBlock" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:TouchSlider x:Name="GreenOffsetSlider" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}" />
 
-        <TextBlock x:Name="BlueOffsetTextBlock" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="BlueOffsetSlider" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}" />
+            <TextBlock x:Name="GreenExponentTextBlock" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:TouchSlider x:Name="GreenExponentSlider" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}"/>
 
-        <TextBlock x:Name="BlueExponentTextBlock" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="BlueExponentSlider" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}"/>
+            <TextBlock x:Name="GreenAmplitudeTextBlock" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:TouchSlider x:Name="GreenAmplitudeSlider" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}"/>
 
-        <TextBlock x:Name="BlueAmplitudeTextBlock" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="BlueAmplitudeSlider" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}"/>
-    
-    
-    </StackPanel>
-    
+            <ContentControl Height="12" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}"/>
+
+            <ContentControl Height="1"/>
+
+
+            <!--Blue-->
+            <Grid x:Name="BlueTitleGrid" Background="{ThemeResource AppForeground}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                          HorizontalAlignment="Center" VerticalAlignment="Center"
+                          Glyph="{x:Bind VisibilityToGlyphConverter(AlphaIsExpaned), Mode=OneWay}"/>
+                <TextBlock x:Name="BlueTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>
+                <ToggleSwitch x:Name="BlueToggleSwitch" Grid.Column="2">
+                    <ToggleSwitch.Clip>
+                        <RectangleGeometry Rect="0,0,50,50"/>
+                    </ToggleSwitch.Clip>
+                </ToggleSwitch>
+            </Grid>
+
+            <TextBlock x:Name="BlueOffsetTextBlock" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:TouchSlider x:Name="BlueOffsetSlider" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}" />
+
+            <TextBlock x:Name="BlueExponentTextBlock" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:TouchSlider x:Name="BlueExponentSlider" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}"/>
+
+            <TextBlock x:Name="BlueAmplitudeTextBlock" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:TouchSlider x:Name="BlueAmplitudeSlider" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}"/>
+
+            <ContentControl Height="12" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}"/>
+
+
+        </StackPanel>
+    </ScrollViewer>
+
 </Page>
