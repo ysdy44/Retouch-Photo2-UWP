@@ -3,22 +3,32 @@ using System.Collections.Generic;
 
 namespace Retouch_Photo2.Historys
 {
-    public class LayersPropertyHistory : IHistory
+    /// <summary>
+    /// Represents a history used to change layer properties.
+    /// </summary>
+    public class LayersPropertyHistory : HistoryBase, IHistory
     {
-        public string Title { get; set; }
+        /// <summary>
+        /// Undo actions
+        /// </summary>
         public Stack<Action> UndoActions { get; set; } = new Stack<Action>();
 
-        public void Undo()
+        //@Construct
+        /// <summary>
+        /// Initializes a LayersPropertyHistory.
+        /// </summary>
+        /// <param name="title"> The title. </param>  
+        public LayersPropertyHistory(string title)
+        {
+            base.Title = title;
+        }
+
+        public override void Undo()
         {
             foreach (Action indoAction in UndoActions)
             {
-                indoAction();
+                indoAction?.Invoke();
             }
-        }
-
-        public LayersPropertyHistory(string title)
-        {
-            this.Title = title;
         }
     }
 }

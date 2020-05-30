@@ -7,15 +7,27 @@ namespace Retouch_Photo2.Layers
     /// <summary>
     /// ID of <see cref="Layerage"/>.
     /// </summary>
-    public partial class Layerage : FanKit.Transformers.IGetActualTransformer
+    public partial class Layerage : IGetActualTransformer
     {
+
+        /// <summary> Find layer from <see cref="LayerBase.Instances"/> </summary>
         public ILayer Self => LayerBase.FindFirstLayer(this);
+        /// <summary> Find layer from <see cref="Clipboard.Instances"/> </summary>
         public ILayer ClipboardSelf => Clipboard.FindFirstLayer(this);
 
+
+        /// <summary> Gets or sets the Id. </summary>
         public string Id { get; set; }
+        /// <summary> Gets or sets the Parents. </summary>
         public Layerage Parents { get; set; }
+        /// <summary> Gets or sets the Children. </summary>
         public IList<Layerage> Children { get; set; } = new List<Layerage>();
 
+
+        /// <summary>
+        /// Get own copy.
+        /// </summary>
+        /// <returns> The cloned Layerage. </returns>
         public Layerage Clone()
         {
             return new Layerage
@@ -27,6 +39,9 @@ namespace Retouch_Photo2.Layers
             };
         }
 
+        /// <summary>
+        ///  Get the actual transformer.
+        /// </summary>
         public Transformer GetActualTransformer()
         {
             ILayer layer = this.Self;
@@ -45,7 +60,7 @@ namespace Retouch_Photo2.Layers
                 ILayer layer = this.Parents.Self;
 
                 if (layer.Type == LayerType.Group)
-                {       
+                {
                     //Refactoring
                     ILayer groupLayer = layer;
                     groupLayer.IsRefactoringTransformer = true;

@@ -43,6 +43,9 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedFrom()
         {
             this.GeometryTool.OnNavigatedFrom();
+
+            //Refactoring
+            this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
         }
 
     }

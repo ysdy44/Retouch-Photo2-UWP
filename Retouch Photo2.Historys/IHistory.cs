@@ -5,8 +5,10 @@
     /// </summary>
     public interface IHistory
     {
+        /// <summary> Gets or sets the title. </summary>
         string Title { get; set; }
 
+        /// <summary> Undo method. </summary>
         void Undo();
     }
 }

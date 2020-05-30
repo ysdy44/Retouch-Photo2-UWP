@@ -67,22 +67,6 @@ namespace Retouch_Photo2.ViewModels
         }
         public void HistoryPushLayeragesHistory(string title)
         {
-            LayeragesHistory history = new LayeragesHistory(title);
-                       
-            foreach (var item in this.LayerageCollection.RootLayerages)
-            {
-                history.Layerages.Add(item.Clone());
-            }
-
-            history.UndoAction = () =>
-            {
-                this.LayerageCollection.RootLayerages.Clear();
-                foreach (Layerage layerage in history.Layerages)
-                {
-                    this.LayerageCollection.RootLayerages.Add(layerage.Clone());
-                }
-            };
-            this.HistoryPush(history);
         }
 
 

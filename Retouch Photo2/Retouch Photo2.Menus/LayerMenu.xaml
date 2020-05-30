@@ -20,7 +20,7 @@
 
                 <!--Name-->
                 <TextBlock x:Name="NameTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <Button x:Name="NameButton" Height="26" Width="Auto" MinWidth="100" MaxWidth="300" HorizontalAlignment="Stretch"
+                <Button x:Name="NameButton" Height="26" Width="Auto" MinWidth="100" MaxWidth="600" HorizontalAlignment="Stretch"
                         Style="{StaticResource AppNumberButtonStyle}"
                         IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                         Content="{x:Bind SelectionViewModel.LayerName, Mode=OneWay}"/>

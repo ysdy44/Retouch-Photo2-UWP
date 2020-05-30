@@ -126,7 +126,8 @@ namespace Retouch_Photo2.Controls
                 LayerageCollection.DragItemsCompleted += () =>
                 {
                     //History
-                    this.ViewModel.HistoryPushLayeragesHistory("Layers arrange");
+                    LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange", this.ViewModel.LayerageCollection);
+                    this.ViewModel.HistoryPush(history);
 
                     LayerageCollection.DragComplete(this.ViewModel.LayerageCollection, this.DragDestinationLayerage, this.DragSourceLayerage, this.DragLayerOverlayMode, this.DragLayerIsSelected);
 

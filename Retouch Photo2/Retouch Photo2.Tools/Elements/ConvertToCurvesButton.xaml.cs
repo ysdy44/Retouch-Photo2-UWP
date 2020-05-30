@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
@@ -27,7 +28,8 @@ namespace Retouch_Photo2.Tools.Elements
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
                 //History
-                this.ViewModel.HistoryPushLayeragesHistory("Convert to curves");
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Convert to curves", this.ViewModel.LayerageCollection);
+                this.ViewModel.HistoryPush(history);
 
                 this.SelectionViewModel.SetValue((layerage) =>
                 {

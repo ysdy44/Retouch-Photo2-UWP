@@ -24,36 +24,17 @@ namespace Retouch_Photo2.ViewModels
     public partial class ViewModel : INotifyPropertyChanged
     {
 
-        public void MethodSetup(BitmapSize size)
+        public void MethodSetup(BitmapSize bitmapSize)
         {
-            int previousWidth = this.CanvasTransformer.Width;
-            int previousHeight = this.CanvasTransformer.Height;
-            int width = (int)size.Width;
-            int height = (int)size.Height;
-            if (previousWidth == width && previousHeight == height) return;
-
-
-            Matrix3x2 matrix = Matrix3x2.CreateScale((float)width / (float)previousWidth, (float)height / (float)previousHeight);
+            if (this.CanvasTransformer == bitmapSize) return;
+            Vector2 scale = this.CanvasTransformer.GetScale(bitmapSize);
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set canvas size");
+            LayersSetupHistory history = new LayersSetupHistory("Set canvas size", this.CanvasTransformer);
 
             //CanvasTransformer
-            {
-                //History
-                var previous1 = previousWidth;
-                var previous2 = previousHeight;
-                history.UndoActions.Push(() =>
-                {
-                    this.CanvasTransformer.Width = previous1;
-                    this.CanvasTransformer.Height = previous2;
-                    this.CanvasTransformer.ReloadMatrix();
-                });
-
-                this.CanvasTransformer.Width = width;
-                this.CanvasTransformer.Height = height;
-                this.CanvasTransformer.ReloadMatrix();
-            }
+            this.CanvasTransformer.BitmapSize = bitmapSize;
+            this.CanvasTransformer.ReloadMatrix();
 
             //LayerageCollection
             foreach (Layerage layerage in this.LayerageCollection.RootLayerages)
@@ -64,20 +45,13 @@ namespace Retouch_Photo2.ViewModels
                     ILayer layer = layerage2.Self;
 
                     //History
-                    var previous = TransformPosition.GetLayer(layer);
-                    history.UndoActions.Push(() =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        TransformPosition.SetLayer(layer, previous);
-                    });
+                    history.PushTransform(layer);
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.CacheTransform();
-                    layer.TransformMultiplies(matrix);
+                    layer.TransformMultiplies(Matrix3x2.CreateScale(scale));
                 });
             }
 
@@ -90,36 +64,17 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        public void MethodSetup(BitmapSize size, IndicatorMode  indicatorMode)
+        public void MethodSetup(BitmapSize bitmapSize, IndicatorMode  indicatorMode)
         {
-            int previousWidth = this.CanvasTransformer.Width;
-            int previousHeight = this.CanvasTransformer.Height;
-            int width = (int)size.Width;
-            int height = (int)size.Height;
-            if (previousWidth == width && previousHeight == height) return;
-
-
+            if (this.CanvasTransformer == bitmapSize) return;
             Vector2 previousVector = this.CanvasTransformer.GetIndicatorVector(indicatorMode);
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set canvas size");
+            LayersSetupHistory history = new LayersSetupHistory("Set canvas size", this.CanvasTransformer);
 
             //CanvasTransformer
-            {
-                //History
-                var previous1 = previousWidth;
-                var previous2 = previousHeight;
-                history.UndoActions.Push(() =>
-                {
-                    this.CanvasTransformer.Width = previous1;
-                    this.CanvasTransformer.Height = previous2;
-                    this.CanvasTransformer.ReloadMatrix();
-                });
-
-                this.CanvasTransformer.Width = width;
-                this.CanvasTransformer.Height = height;
-                this.CanvasTransformer.ReloadMatrix();
-            }
+            this.CanvasTransformer.BitmapSize = bitmapSize;
+            this.CanvasTransformer.ReloadMatrix();
 
             Vector2 vector = this.CanvasTransformer.GetIndicatorVector(indicatorMode);
             Vector2 distance = vector - previousVector;
@@ -133,14 +88,7 @@ namespace Retouch_Photo2.ViewModels
                     ILayer layer = layerage2.Self;
 
                     //History
-                    var previous = TransformPosition.GetLayer(layer);
-                    history.UndoActions.Push(() =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        TransformPosition.SetLayer(layer, previous);
-                    });
+                    history.PushTransform(layer);
 
                     //Refactoring
                     layer.IsRefactoringRender = true;

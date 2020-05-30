@@ -220,7 +220,8 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
                 //History
-                this.ViewModel.HistoryPushLayeragesHistory("Layers arrange");
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange", this.ViewModel.LayerageCollection);
+                this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
                 IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
@@ -238,7 +239,8 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
                 //History
-                this.ViewModel.HistoryPushLayeragesHistory("Layers arrange");
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange", this.ViewModel.LayerageCollection);
+                this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
                 IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
@@ -262,7 +264,8 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
                 //History
-                this.ViewModel.HistoryPushLayeragesHistory("Layers arrange");
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange", this.ViewModel.LayerageCollection);
+                this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
                 IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
@@ -286,7 +289,8 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
                 //History
-                this.ViewModel.HistoryPushLayeragesHistory("Layers arrange");
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange", this.ViewModel.LayerageCollection);
+                this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
                 IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
@@ -350,7 +354,7 @@ namespace Retouch_Photo2.Menus.Models
         private void TransformAlign(float positionValue, BorderMode borderMode, Orientation orientation)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Transform");
+            LayersTransformHistory history = new LayersTransformHistory("Transform");
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
@@ -369,13 +373,7 @@ namespace Retouch_Photo2.Menus.Models
                     ILayer layer = layerage2.Self;
 
                     //History
-                    var previous = TransformPosition.GetLayer(layer);
-                    history.UndoActions.Push(() =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        TransformPosition.SetLayer(layer, previous);
-                    });
+                    history.PushTransform(layer);
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -430,10 +428,10 @@ namespace Retouch_Photo2.Menus.Models
             float lengthSum = borders.Sum(border => border.Length);//Sum of Length
             float space = ((max - min) - lengthSum) / (count - 1);//Between [ previous.Max ] and [ current.Min ].
 
-
+            
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Transform");
-
+            LayersTransformHistory history = new LayersTransformHistory("Transform");
+            
 
             float postionMin = min;//[ previous.Min ] + [ previous.Length ] + space.
             var orderedBorders = borders.OrderBy(border => border.Min);
@@ -456,13 +454,7 @@ namespace Retouch_Photo2.Menus.Models
                     ILayer layer = layerage2.Self;
 
                     //History
-                    var previous = TransformPosition.GetLayer(layer);
-                    history.UndoActions.Push(() =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        TransformPosition.SetLayer(layer, previous);
-                    });
+                    history.PushTransform(layer);
 
                     //Refactoring
                     layer.IsRefactoringRender = true;

@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Retouch_Photo2.Elements;
 using Windows.UI.Xaml.Controls.Primitives;
+using Retouch_Photo2.Historys;
 
 namespace Retouch_Photo2.Controls
 {
@@ -59,12 +60,11 @@ namespace Retouch_Photo2.Controls
             Retouch_Photo2.PhotosPage.AddCallBack += (photo) =>
             {
                 if (photo == null) return;
-
-
+                
                 //History
-                this.ViewModel.HistoryPushLayeragesHistory("Add layer");
-
-
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer", this.ViewModel.LayerageCollection);
+                this.ViewModel.HistoryPush(history);
+                
                 //Transformer
                 Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
 

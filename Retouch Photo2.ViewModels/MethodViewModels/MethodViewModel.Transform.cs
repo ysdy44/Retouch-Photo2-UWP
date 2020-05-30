@@ -16,7 +16,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodTransformMultiplies(Matrix3x2 matrix)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Transform");
+            LayersTransformHistory history = new LayersTransformHistory("Transform");
 
             //Selection 
             this.CacheTransformer();
@@ -27,14 +27,7 @@ namespace Retouch_Photo2.ViewModels
                 ILayer layer = layerage.Self;
 
                 //History
-                var previous = TransformPosition.GetLayer(layer); 
-                history.UndoActions.Push(() =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    TransformPosition.SetLayer(layer, previous);
-                });
+                history.PushTransform(layer);
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -85,7 +78,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodTransformMultipliesComplete(Transformer transformer)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Transform");
+            LayersTransformHistory history = new LayersTransformHistory("Transform");
 
             //Selection
             this.Transformer = transformer;
@@ -95,14 +88,7 @@ namespace Retouch_Photo2.ViewModels
                 ILayer layer = layerage.Self;
 
                 //History
-                var previous = TransformPosition.GetStartingLayer(layer);
-                history.UndoActions.Push(() =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    TransformPosition.SetLayer(layer, previous);
-                });
+                history.PushStartingTransform(layer);
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -122,7 +108,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodTransformAdd(Vector2 vector)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Move");
+            LayersTransformHistory history = new LayersTransformHistory("Move");
 
             //Selection
             this.CacheTransformer();
@@ -132,14 +118,7 @@ namespace Retouch_Photo2.ViewModels
                 ILayer layer = layerage.Self;
 
                 //History
-                var previous = TransformPosition.GetLayer(layer);
-                history.UndoActions.Push(() =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    TransformPosition.SetLayer(layer, previous);
-                });
+                history.PushTransform(layer);
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -191,7 +170,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodTransformAddComplete(Vector2 vector)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Move");
+            LayersTransformHistory history = new LayersTransformHistory("Move");
 
             //Selection
             Transformer transformer = Transformer.Add(this.StartingTransformer, vector);
@@ -199,16 +178,9 @@ namespace Retouch_Photo2.ViewModels
             this.SetValueWithChildren((layerage) =>
             {
                 ILayer layer = layerage.Self;
-
+                
                 //History
-                var previous = TransformPosition.GetStartingLayer(layer);
-                history.UndoActions.Push(() =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    TransformPosition.SetLayer(layer, previous);
-                });
+                history.PushStartingTransform(layer);
 
                 //Refactoring
                 layer.IsRefactoringRender = true;

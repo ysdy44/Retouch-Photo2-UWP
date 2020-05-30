@@ -76,7 +76,7 @@ namespace Retouch_Photo2.ViewModels
         {
             //CanvasTransformer
             float width = this.CanvasTransformer.Width;
-            float height = this.CanvasTransformer.Width;
+            float height = this.CanvasTransformer.Height;
             yield return new TransformerBorder(width, height);
 
 

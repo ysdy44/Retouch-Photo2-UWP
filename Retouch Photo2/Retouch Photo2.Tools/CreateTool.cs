@@ -63,7 +63,8 @@ namespace Retouch_Photo2.Tools
 
             //History
             this.ViewModel.MethodSelectedNone();
-            this.ViewModel.HistoryPushLayeragesHistory("Add layer");
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer", this.ViewModel.LayerageCollection);
+            this.ViewModel.HistoryPush(history);
 
             //Selection
             Transformer transformer = new Transformer(canvasStartingPoint, canvasPoint, this.IsCenter, this.IsSquare);
