@@ -1,15 +1,23 @@
-﻿using Retouch_Photo2.Tools;
+﻿using Retouch_Photo2.Menus;
+using Retouch_Photo2.Tools;
 using System.ComponentModel;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "TipViewModel" />.
+    /// Represents an ViewModel that contains <see cref="ITool"/> <see cref="IMenu"/> and <see cref="ToolTip.IsOpen"/>
     /// </summary>
     public partial class TipViewModel : INotifyPropertyChanged
     {
-
         //@Construct
+        /// <summary>
+        /// Initializes a TipViewModel.
+        /// </summary>
+        /// <param name="noneTool"> The none tool. </param>
+        /// <param name="moveTool"> The move tool. </param>
+        /// <param name="transformerTool"> The transformer tool. </param>
+        /// <param name="createTool"> The create tool. </param>
         public TipViewModel(ITool noneTool, IMoveTool moveTool, ITransformerTool transformerTool, ICreateTool createTool)
         {
             this.tool = noneTool;
@@ -19,7 +27,7 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        /// <summary> Retouch_Photo2's the only <see cref = "TipViewModel.IsOpen" />. </summary>
+        /// <summary> Gets or sets the <see cref="ToolTip.IsOpen"/>. </summary>
         public bool IsOpen
         {
             get => this.isOpen;

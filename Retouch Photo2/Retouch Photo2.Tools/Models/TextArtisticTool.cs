@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Tools.Models
                 FontText = "AAA",
                 IsSelected = true,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.TextStyle,
+                Style = this.SelectionViewModel.StandTextStyle,
             };
         }
 

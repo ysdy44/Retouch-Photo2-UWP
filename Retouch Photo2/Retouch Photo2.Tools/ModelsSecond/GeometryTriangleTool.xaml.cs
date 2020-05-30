@@ -104,7 +104,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Center = this.SelectionViewModel.GeometryTriangleCenter,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.SelectionViewModel.StandGeometryStyle
             };
         }
 
@@ -167,6 +167,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryTriangleLayer.IsRefactoringRender = true;
                         geometryTriangleLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryTriangleLayer.Center = center;
                     }
                 });
@@ -217,6 +219,7 @@ namespace Retouch_Photo2.Tools.Models
                    
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryTriangleLayer.Center = center;
                     }
                 });
@@ -254,6 +257,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryTriangleLayer.IsRefactoringRender = true;
                         geometryTriangleLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryTriangleLayer.Center = center;
                     }
                 });
@@ -294,6 +299,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryTriangleLayer.Center = 1.0f - geometryTriangleLayer.Center;
                     }
                 });

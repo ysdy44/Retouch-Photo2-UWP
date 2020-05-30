@@ -124,7 +124,8 @@ namespace Retouch_Photo2
         {
             //Setting
             this.SettingViewModel.Setting.LayersHeight = height;
-            LayerageCollection.SetControlHeight(height);
+            LayerageCollection.ControlsHeight = height;
+
             await this.Write();
         }
 

@@ -93,6 +93,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.BlueDisable = disable;
 
                         //History
@@ -138,6 +140,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.BlueOffset = offset;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -169,6 +172,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.BlueOffset = offset;
 
                         //History
@@ -214,6 +219,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.BlueExponent = exponent;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -245,6 +251,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.BlueExponent = exponent;
 
                         //History
@@ -290,6 +298,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.BlueAmplitude = amplitude;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -321,6 +330,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.BlueAmplitude = amplitude;
 
                         //History

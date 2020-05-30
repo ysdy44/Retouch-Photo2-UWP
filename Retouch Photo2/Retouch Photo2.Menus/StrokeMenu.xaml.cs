@@ -134,9 +134,11 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Style.StrokeStyle.DashStyle = dash;
 
-                    this.SelectionViewModel.StyleLayerage = layerage;
+                    this.SelectionViewModel.StandStyleLayerage = layerage;
                 });
 
                 //History
@@ -207,9 +209,11 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Style.StrokeWidth = width;
 
-                    this.SelectionViewModel.StyleLayerage = layerage;
+                    this.SelectionViewModel.StandStyleLayerage = layerage;
                 });
 
                 //History
@@ -249,6 +253,7 @@ namespace Retouch_Photo2.Menus.Models
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
                     layer.Style.StrokeStyle.DashOffset = offset;
                 });
 
@@ -282,9 +287,11 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Style.StrokeStyle.DashOffset = offset;
 
-                    this.SelectionViewModel.StyleLayerage = layerage;
+                    this.SelectionViewModel.StandStyleLayerage = layerage;
                 });
 
                 //History
@@ -326,11 +333,13 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Style.StrokeStyle.DashCap = cap;
                     layer.Style.StrokeStyle.StartCap = cap;
                     layer.Style.StrokeStyle.EndCap = cap;
 
-                    this.SelectionViewModel.StyleLayerage = layerage;
+                    this.SelectionViewModel.StandStyleLayerage = layerage;
                 });
 
                 //History
@@ -370,9 +379,11 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Style.StrokeStyle.LineJoin = join;
 
-                    this.SelectionViewModel.StyleLayerage = layerage;
+                    this.SelectionViewModel.StandStyleLayerage = layerage;
                 });
 
                 this.ViewModel.Invalidate();//Invalidate

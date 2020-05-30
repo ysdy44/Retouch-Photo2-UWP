@@ -9,7 +9,7 @@ using FanKit.Transformers;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "SettingViewModel" />. 
+    /// Represents an ViewModel that contains shortcut, layout and <see cref="ViewModels.Setting"/>.
     /// </summary>
     public partial class SettingViewModel : INotifyPropertyChanged
     {
@@ -25,6 +25,9 @@ namespace Retouch_Photo2.ViewModels
 
 
         //@Construct
+        /// <summary>
+        /// Initializes the key.
+        /// </summary>
         public void ConstructKey()
         {
             Window.Current.CoreWindow.KeyUp += (s, e) =>
@@ -151,7 +154,7 @@ namespace Retouch_Photo2.ViewModels
             else //if (this.KeyCtrl && this.KeyShift)       
                 this.CompositeMode = MarqueeCompositeMode.Intersect;//CompositeMode
         }
-
+        
 
         /// <summary> keyboard's the **SHIFT** key. </summary>
         public bool KeyShift;
@@ -168,8 +171,7 @@ namespace Retouch_Photo2.ViewModels
                 this.IsSquare = value;
             }
         }
-
-
+        
         /// <summary> keyboard's the **CTRL** key. </summary>
         public bool KeyCtrl;
         private void SetKeyCtrl(bool value)
@@ -184,8 +186,7 @@ namespace Retouch_Photo2.ViewModels
                 this.IsCenter = value;
             }
         }
-
-                
+                        
         /// <summary> keyboard's the **ALT** key. </summary>
         public bool KeyAlt;
         private void SetKeyAlt(bool value)
@@ -201,8 +202,6 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         
-
-
         /// <summary> keyboard's the **Escape** key. </summary>
         public bool KeyEscape;
         public void SetKeyEscape(bool value)
@@ -221,8 +220,7 @@ namespace Retouch_Photo2.ViewModels
                 }
             }
         }
-
-
+        
 
         /// <summary> keyboard's the **Left Up Right Down** key. </summary>
         public MoveMode MoveMode;
@@ -233,7 +231,7 @@ namespace Retouch_Photo2.ViewModels
             this.MoveMode = value;
             this.Move?.Invoke(value);//Delegate
         }
-
+        
 
         /// <summary> keyboard's the **ABCD...** key. </summary>
         public EditMode EditMode;

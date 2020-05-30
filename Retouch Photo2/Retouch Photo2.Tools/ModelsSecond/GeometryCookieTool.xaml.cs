@@ -134,7 +134,7 @@ namespace Retouch_Photo2.Tools.Models
                 InnerRadius = this.SelectionViewModel.GeometryCookieInnerRadius,
                 SweepAngle = this.SelectionViewModel.GeometryCookieSweepAngle,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.SelectionViewModel.StandGeometryStyle
             };
         }
 
@@ -197,6 +197,7 @@ namespace Retouch_Photo2.Tools.Models
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryCookieLayer.InnerRadius = innerRadius;
                     }
                 });
@@ -245,6 +246,7 @@ namespace Retouch_Photo2.Tools.Models
                    
                         //Refactoring
                         geometryCookieLayer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryCookieLayer.InnerRadius = innerRadius;
                     }
                 });
@@ -278,6 +280,7 @@ namespace Retouch_Photo2.Tools.Models
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryCookieLayer.InnerRadius = innerRadius;
                     }
                 });
@@ -327,11 +330,15 @@ namespace Retouch_Photo2.Tools.Models
                         {
                             //Refactoring
                             geometryCookieLayer.IsRefactoringRender = true;
+                            geometryCookieLayer.IsRefactoringIconRender = true;
                             geometryCookieLayer.SweepAngle = previous;
                         });
 
                         //Refactoring
                         geometryCookieLayer.IsRefactoringRender = true;
+                        geometryCookieLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryCookieLayer.SweepAngle = sweepAngle;
                     }
                 });
@@ -380,6 +387,7 @@ namespace Retouch_Photo2.Tools.Models
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryCookieLayer.SweepAngle = sweepAngle;
                     }
                 });
@@ -408,11 +416,15 @@ namespace Retouch_Photo2.Tools.Models
                         {
                             //Refactoring
                             geometryCookieLayer.IsRefactoringRender = true;
+                            geometryCookieLayer.IsRefactoringIconRender = true;
                             geometryCookieLayer.SweepAngle = previous;
                         });
 
                         //Refactoring
                         geometryCookieLayer.IsRefactoringRender = true;
+                        geometryCookieLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryCookieLayer.SweepAngle = sweepAngle;
                     }
                 });

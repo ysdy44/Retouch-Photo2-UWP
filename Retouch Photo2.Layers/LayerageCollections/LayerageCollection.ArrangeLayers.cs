@@ -3,18 +3,21 @@ using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers
 {
+    /// <summary>
+    /// Represents a collection of layers, including a sorting algorithm for layers
+    /// </summary>
     public partial class LayerageCollection
     {
 
         /// <summary>
         /// Arrange all layers's control, depth, parents and expand.
         /// </summary>
-        public static void ArrangeLayersControls(LayerageCollection layerageCollection)
+        public static void ArrangeLayers(LayerageCollection layerageCollection)
         {
             layerageCollection.RootControls.Clear();
-            LayerageCollection._arrangeLayersControls(layerageCollection, null, layerageCollection.RootLayerages, 0, Visibility.Visible);
+            LayerageCollection._arrangeLayers(layerageCollection, null, layerageCollection.RootLayerages, 0, Visibility.Visible);
         }
-        private static void _arrangeLayersControls(LayerageCollection layerageCollection, Layerage parents, IList<Layerage> layers, int depth, Visibility visibility)
+        private static void _arrangeLayers(LayerageCollection layerageCollection, Layerage parents, IList<Layerage> layers, int depth, Visibility visibility)
         {
             foreach (Layerage layerage in layers)
             {
@@ -34,7 +37,7 @@ namespace Retouch_Photo2.Layers
                 layerageCollection.RootControls.Add(layer.Control.Self);
 
                 //Recursive
-                LayerageCollection._arrangeLayersControls(layerageCollection, layerage, layerage.Children, depth + 1, childVisibility);
+                LayerageCollection._arrangeLayers(layerageCollection, layerage, layerage.Children, depth + 1, childVisibility);
             }
         }
 

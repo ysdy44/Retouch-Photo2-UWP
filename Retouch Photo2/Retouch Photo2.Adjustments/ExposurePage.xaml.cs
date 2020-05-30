@@ -81,6 +81,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     adjustment.Exposure = 0.0f;
 
                     //History
@@ -135,6 +137,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.Exposure = exposure;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -166,6 +169,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.Exposure = exposure;
 
                         //History

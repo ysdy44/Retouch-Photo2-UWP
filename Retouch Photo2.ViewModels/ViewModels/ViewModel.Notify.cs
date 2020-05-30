@@ -8,16 +8,16 @@ using Windows.UI.Xaml;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
+    /// Represents a ViewModel that contains some methods of the application
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
 
-        /// <summary> Retouch_Photo2's the only AccentColor. </summary>
+        /// <summary> Gets or sets the accent color. </summary>
         public Color AccentColor { get; set; }
 
-        
-        /// <summary> Sets or Gets the on state of the IsHitTestVisible on the canvas. </summary>
+
+        /// <summary> Gets or sets the on state of the IsHitTestVisible on the canvas. </summary>
         public bool CanvasHitTestVisible
         {
             get => this.canvasHitTestVisible;
@@ -28,9 +28,9 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private bool canvasHitTestVisible = true;
-               
 
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.TipText" />. </summary>
+
+        /// <summary> Gets or sets the tip text. </summary>
         public string TipText
         {
             get => this.tipText;
@@ -41,7 +41,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private string tipText = string.Empty;
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModel.TipTextVisibility" />. </summary>
+        /// <summary> Gets or sets the visibility of tip text. </summary>
         public Visibility TipTextVisibility
         {
             get => this.tipTextVisibility;
@@ -52,6 +52,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private Visibility tipTextVisibility = Visibility.Collapsed;
+
 
         public async void TipTextBegin(string text)
         {

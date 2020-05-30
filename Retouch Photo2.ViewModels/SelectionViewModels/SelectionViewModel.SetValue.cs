@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
+    /// Represents a ViewModel that contains some selection propertys of the application.
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
@@ -104,12 +104,11 @@ namespace Retouch_Photo2.ViewModels
             action(layerage);
 
             ILayer layer = layerage.Self;
-
             if (layer.Type == LayerType.Group)
             {
                 foreach (Layerage child in layerage.Children)
                 {
-                    this.SetLayerageValueWithChildren(child, action);
+                    this.SetLayerageValueWithChildrenOnlyGroup(child, action);
                 }
             }
         }

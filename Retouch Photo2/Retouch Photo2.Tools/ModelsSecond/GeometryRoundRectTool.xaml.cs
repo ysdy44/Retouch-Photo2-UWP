@@ -102,7 +102,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Corner = this.SelectionViewModel.GeometryRoundRectCorner,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.SelectionViewModel.StandGeometryStyle
             };
         }
 
@@ -165,6 +165,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryRoundRectLayer.IsRefactoringRender = true;
                         geometryRoundRectLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryRoundRectLayer.Corner = corner;
                     }
                 });
@@ -215,6 +217,7 @@ namespace Retouch_Photo2.Tools.Models
 
                         //Refactoring
                         geometryRoundRectLayer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryRoundRectLayer.Corner = corner;
                     }
                 });
@@ -252,6 +255,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryRoundRectLayer.IsRefactoringRender = true;
                         geometryRoundRectLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryRoundRectLayer.Corner = corner;
                     }
                 });

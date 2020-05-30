@@ -104,6 +104,7 @@ namespace Retouch_Photo2.Tools.Models
 
                             //Refactoring
                             layer.IsRefactoringRender = true;
+                            layerage.RefactoringParentsRender();
                             layer.Style.Stroke.InitializeController(canvasStartingPoint, canvasPoint);
                         });
 
@@ -122,6 +123,7 @@ namespace Retouch_Photo2.Tools.Models
 
                             //Refactoring
                             layer.IsRefactoringRender = true;
+                            layerage.RefactoringParentsRender();
                             layer.Style.Stroke.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
                         });
 
@@ -157,8 +159,10 @@ namespace Retouch_Photo2.Tools.Models
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
 
-                this.SelectionViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StandStyleLayerage = layerage;
             });
 
             //History
@@ -197,10 +201,12 @@ namespace Retouch_Photo2.Tools.Models
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 Transformer transformer = layer.Transform.Transformer;
                 layer.Style.Stroke.TypeChange(brushType, transformer, photo);
 
-                this.SelectionViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StandStyleLayerage = layerage;
 
 
                 // Set stroke Onces: lock
@@ -269,9 +275,11 @@ namespace Retouch_Photo2.Tools.Models
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
 
-                this.SelectionViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StandStyleLayerage = layerage;
             });
 
             //History
@@ -302,6 +310,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
+                layerage.RefactoringParentsRender();
                 layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
             });
 
@@ -333,9 +342,11 @@ namespace Retouch_Photo2.Tools.Models
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
 
-                this.SelectionViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StandStyleLayerage = layerage;
             });
 
             //History
@@ -370,9 +381,11 @@ namespace Retouch_Photo2.Tools.Models
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.Style.Stroke.Extend = extend;
 
-                this.SelectionViewModel.StyleLayerage = layerage;
+                this.SelectionViewModel.StandStyleLayerage = layerage;
             });
 
             //History

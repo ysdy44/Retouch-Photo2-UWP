@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Layers
             float height = (float)rect.Height;
             Vector2 center = new Vector2((float)rect.X + width / 2, (float)rect.Y + height / 2);
 
-            float min = System.Math.Min(width, height);
+            float min = System.Math.Max(width, height);
             float scale = actualHeight / min;
 
             float halfHeight = actualHeight / 2;

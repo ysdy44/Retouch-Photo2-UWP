@@ -91,10 +91,16 @@ namespace Retouch_Photo2.Adjustments.Pages
                             adjustment.AlphaDisable = previous;
                         });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
+                        adjustment.AlphaDisable = disable;
+
+                        //History
                         this.ViewModel.HistoryPush(history);
 
-
-                        adjustment.AlphaDisable = disable;
                         this.ViewModel.Invalidate();//Invalidate
                     }
                 }
@@ -135,6 +141,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.AlphaOffset = offset;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -166,6 +173,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.AlphaOffset = offset;
 
                         //History
@@ -211,6 +220,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.AlphaExponent = exponent;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -233,8 +243,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         var previous = adjustment.StartingAlphaExponent;
                         history.UndoActions.Push(() =>
                         {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
                             adjustment.AlphaExponent = previous;
                         });
@@ -242,6 +252,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.AlphaExponent = exponent;
 
                         //History
@@ -287,6 +299,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.AlphaAmplitude = amplitude;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -318,6 +331,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.AlphaAmplitude = amplitude;
 
                         //History

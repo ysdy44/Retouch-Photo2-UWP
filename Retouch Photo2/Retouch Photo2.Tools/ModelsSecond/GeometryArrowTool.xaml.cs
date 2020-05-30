@@ -130,7 +130,7 @@ namespace Retouch_Photo2.Tools.Models
                 LeftTail = this.SelectionViewModel.GeometryArrowLeftTail,
                 RightTail = this.SelectionViewModel.GeometryArrowRightTail,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.SelectionViewModel.StandGeometryStyle
             };
         }
 
@@ -197,6 +197,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryArrowLayer.IsRefactoringRender = true;
                         geometryArrowLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryArrowLayer.Value = value2;
                     }
                 });
@@ -247,6 +249,7 @@ namespace Retouch_Photo2.Tools.Models
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryArrowLayer.Value = value2;
                     }
                 });
@@ -284,6 +287,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryArrowLayer.Value = value2;
                     }
                 });
@@ -325,6 +330,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryArrowLayer.IsRefactoringRender = true;
                         geometryArrowLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryArrowLayer.LeftTail = tailType;
                     }
                 });
@@ -366,6 +373,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryArrowLayer.IsRefactoringRender = true;
                         geometryArrowLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryArrowLayer.RightTail = tailType;
                     }
                 });

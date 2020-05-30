@@ -80,6 +80,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     adjustment.Contrast = 0.0f;
 
                     //History
@@ -134,6 +136,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.Contrast = contrast;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -165,6 +168,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.Contrast = contrast;
 
                         //History

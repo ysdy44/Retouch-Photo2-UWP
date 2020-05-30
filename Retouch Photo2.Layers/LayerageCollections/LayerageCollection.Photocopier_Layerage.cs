@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace Retouch_Photo2.Layers
 {
+    /// <summary>
+    /// Represents a collection of layers, including a sorting algorithm for layers
+    /// </summary>
     public partial class LayerageCollection
     {
 
@@ -24,7 +27,7 @@ namespace Retouch_Photo2.Layers
                 }
 
                 //ImageLayer
-                if (child2.Type== LayerType.Image)
+                if (child2.Type == LayerType.Image)
                 {
                     ImageLayer imageLayer = (ImageLayer)child2;
                     yield return imageLayer.Photocopier;
@@ -42,6 +45,25 @@ namespace Retouch_Photo2.Layers
                 }
             }
         }
+        
+
+        /// <summary>
+        /// Gets all layerages
+        /// </summary>
+        /// <returns> The yield layerages. </returns>
+        public static IEnumerable<Layerage> GetLayerages(IEnumerable<Layerage> layerages)
+        {
+            foreach (Layerage child in layerages)
+            {
+                yield return child;
+
+                foreach (Layerage photocopier in LayerageCollection.GetLayerages(child.Children))
+                {
+                    yield return photocopier;
+                }
+            }
+        }
+
 
     }
 }

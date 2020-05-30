@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Tools
             if (isMove == false) return false;
 
             //Snap
-            if (this.IsSnap) this.ViewModel.BorderBorderSnapStarted(this.SelectionViewModel.GetFirstSelectedLayerage());
+            if (this.IsSnap) this.ViewModel.BorderBorderSnapInitiate(this.SelectionViewModel.GetFirstSelectedLayerage());
 
             //Selection
             if (this.IsSnap) this.Snap.StartingSource = new TransformerBorder(this.Transformer);

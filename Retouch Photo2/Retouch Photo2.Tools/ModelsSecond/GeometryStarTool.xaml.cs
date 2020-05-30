@@ -131,7 +131,7 @@ namespace Retouch_Photo2.Tools.Models
                 Points = this.SelectionViewModel.GeometryStarPoints,
                 InnerRadius = this.SelectionViewModel.GeometryStarInnerRadius,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.SelectionViewModel.StandGeometryStyle
             };
         }
 
@@ -197,6 +197,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryStarLayer.Points = points;
                     }
                 });
@@ -247,6 +249,7 @@ namespace Retouch_Photo2.Tools.Models
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryStarLayer.Points = points;
                     }
                 });
@@ -284,6 +287,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryStarLayer.Points = points;
                     }
                 });
@@ -342,6 +347,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryStarLayer.IsRefactoringRender = true;
                         geometryStarLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryStarLayer.InnerRadius = innerRadius;
                     }
                 });
@@ -392,6 +399,7 @@ namespace Retouch_Photo2.Tools.Models
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryStarLayer.InnerRadius = innerRadius;
                     }
                 });
@@ -429,6 +437,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryStarLayer.IsRefactoringRender = true;
                         geometryStarLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryStarLayer.InnerRadius = innerRadius;
                     }
                 });

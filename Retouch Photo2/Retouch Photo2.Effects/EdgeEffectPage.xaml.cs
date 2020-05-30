@@ -81,6 +81,8 @@ namespace Retouch_Photo2.Effects.Models
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.Effect.Edge_Amount = 0.5f;
                 layer.Effect.Edge_Radius = 0.0f;
             });
@@ -137,6 +139,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.Edge_IsOn = isOn;
                 });
 
@@ -176,6 +180,7 @@ namespace Retouch_Photo2.Effects.Models
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
                     layer.Effect.Edge_Amount = amount;
                 });
 
@@ -206,6 +211,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.Edge_Amount = amount;
                 });
 
@@ -245,6 +252,7 @@ namespace Retouch_Photo2.Effects.Models
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
                     layer.Effect.Edge_Radius = blurAmount;
                 });
 
@@ -275,6 +283,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.Edge_Radius = blurAmount;
                 });
 

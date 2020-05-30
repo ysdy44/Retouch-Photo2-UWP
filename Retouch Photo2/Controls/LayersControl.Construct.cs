@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Controls
             {
                 LayerageCollection.ItemClick += (layer) =>
                 {
-                    Layerage layerage = this.ViewModel.LayerageCollection.FindLayerage_ByILayer(layer);
+                    Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
 
                     //if (layer.IsSelected == true)
                     //{
@@ -41,7 +41,7 @@ namespace Retouch_Photo2.Controls
             {
                 LayerageCollection.RightTapped += (layer) =>
                 {
-                    Layerage layerage = this.ViewModel.LayerageCollection.FindLayerage_ByILayer(layer);
+                    Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
 
                     this.ShowLayerMenu(layerage);
                 };
@@ -51,6 +51,7 @@ namespace Retouch_Photo2.Controls
             {
                 LayerageCollection.VisibilityChanged += (layer) =>
                 {
+                    Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
                     Visibility value = (layer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
 
                     //History 
@@ -66,6 +67,8 @@ namespace Retouch_Photo2.Controls
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Visibility = value;
 
                     //History
@@ -80,7 +83,7 @@ namespace Retouch_Photo2.Controls
                 {
                     layer.IsExpand = !layer.IsExpand;
 
-                    Layerage layerage = this.ViewModel.LayerageCollection.FindLayerage_ByILayer(layer);
+                    Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
                     LayerageCollection.ArrangeLayersVisibility(layerage);
                 };
             }
@@ -88,7 +91,7 @@ namespace Retouch_Photo2.Controls
             {
                 LayerageCollection.IsSelectedChanged += (layer) =>
                 {
-                    Layerage layerage = this.ViewModel.LayerageCollection.FindLayerage_ByILayer(layer);
+                    Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
                     this.MethodViewModel.MethodSelectedNot(layerage);//Method
                  };
             }
@@ -97,7 +100,7 @@ namespace Retouch_Photo2.Controls
             {
                 LayerageCollection.DragItemsStarted += (layer, manipulationMode) =>
                 {
-                    Layerage layerage = this.ViewModel.LayerageCollection.FindLayerage_ByILayer(layer);
+                    Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
 
                     this.DragSourceLayerage = layerage;
 
@@ -115,7 +118,7 @@ namespace Retouch_Photo2.Controls
             {
                 LayerageCollection.DragItemsDelta += (layer, overlayMode) =>
                 {
-                    Layerage layerage = this.ViewModel.LayerageCollection.FindLayerage_ByILayer(layer);
+                    Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
 
                     this.DragDestinationLayerage = layerage;
                     this.DragLayerOverlayMode = overlayMode;
@@ -132,7 +135,7 @@ namespace Retouch_Photo2.Controls
                     LayerageCollection.DragComplete(this.ViewModel.LayerageCollection, this.DragDestinationLayerage, this.DragSourceLayerage, this.DragLayerOverlayMode, this.DragLayerIsSelected);
 
                     this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                    LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
                     LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
                     this.ViewModel.Invalidate();//Invalidate
 

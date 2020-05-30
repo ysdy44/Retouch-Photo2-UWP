@@ -75,6 +75,8 @@ namespace Retouch_Photo2.Effects.Models
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.Effect.GaussianBlur_Radius = 0;
             });
 
@@ -128,6 +130,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.GaussianBlur_IsOn = isOn;
                 });
 
@@ -165,6 +169,7 @@ namespace Retouch_Photo2.Effects.Models
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
                     layer.Effect.GaussianBlur_Radius = radius;
                 });
 
@@ -195,6 +200,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.GaussianBlur_Radius = radius;
                 });
 

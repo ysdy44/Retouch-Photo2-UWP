@@ -99,6 +99,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     adjustment.WhiteLight = 1.0f;
                     adjustment.WhiteDark = 1.0f;
                     adjustment.BlackLight = 0.0f;
@@ -161,6 +163,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.WhiteLight = light;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -192,6 +195,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.WhiteLight = light;
 
                         //History
@@ -236,6 +241,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.WhiteDark = dark;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -267,6 +273,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.WhiteDark = dark;
 
                         //History
@@ -312,6 +320,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.BlackLight = light;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -343,6 +352,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.BlackLight = light;
 
                         //History
@@ -387,6 +398,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.BlackDark = dark;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -418,6 +430,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.BlackDark = dark;
 
                         //History

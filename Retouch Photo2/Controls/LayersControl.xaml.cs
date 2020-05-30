@@ -91,7 +91,7 @@ namespace Retouch_Photo2.Controls
                 LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, imageLayerage);
 
                 this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
-                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
         }

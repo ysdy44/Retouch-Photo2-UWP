@@ -7,11 +7,10 @@ using System.Numerics;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
+    /// Represents a ViewModel that contains some methods of the application
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
-
 
         public void MethodTransformMultiplies(Matrix3x2 matrix)
         {
@@ -69,6 +68,7 @@ namespace Retouch_Photo2.ViewModels
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
+                layerage.RefactoringParentsRender();
                 layer.TransformMultiplies(matrix);
             });
 
@@ -91,9 +91,12 @@ namespace Retouch_Photo2.ViewModels
                 history.PushStartingTransform(layer);
 
                 //Refactoring
+                layer.IsRefactoringTransformer = true;
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsTransformer();
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.TransformMultiplies(matrix);
             });
 
@@ -121,9 +124,12 @@ namespace Retouch_Photo2.ViewModels
                 history.PushTransform(layer);
 
                 //Refactoring
+                layer.IsRefactoringTransformer = true;
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsTransformer();
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.CacheTransform();
                 layer.TransformAdd(vector);
             });
@@ -142,8 +148,6 @@ namespace Retouch_Photo2.ViewModels
             this.SetValueWithChildren((layerage) =>
             {
                 ILayer layer = layerage.Self;
-
-                layerage.RefactoringParentsTransformer();
                 layer.CacheTransform();
             });
 
@@ -161,6 +165,7 @@ namespace Retouch_Photo2.ViewModels
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
+                layerage.RefactoringParentsRender();
                 layer.TransformAdd(vector);
             });
 
@@ -183,9 +188,12 @@ namespace Retouch_Photo2.ViewModels
                 history.PushStartingTransform(layer);
 
                 //Refactoring
+                layer.IsRefactoringTransformer = true;
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsTransformer();
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.TransformAdd(vector);
             });
 

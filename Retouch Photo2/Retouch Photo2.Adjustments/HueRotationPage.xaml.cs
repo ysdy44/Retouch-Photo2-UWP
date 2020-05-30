@@ -77,14 +77,16 @@ namespace Retouch_Photo2.Adjustments.Pages
                         layer.IsRefactoringIconRender = true;
                         adjustment.Angle = previous;
                     });
-
-                    this.ViewModel.HistoryPush(history);
-
-
+                    
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     adjustment.Angle = 0.0f;
+
+                    //History
+                    this.ViewModel.HistoryPush(history);
 
                     this.ViewModel.Invalidate();//Invalidate
                 }
@@ -135,6 +137,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.Angle = angle;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -164,12 +167,15 @@ namespace Retouch_Photo2.Adjustments.Pages
                             adjustment.Angle = previous;
                         }));
 
-                        this.ViewModel.HistoryPush(history);
-
                         //Refactoring
                         layer.IsRefactoringTransformer = true;
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.Angle = angle;
+
+                        //History
+                        this.ViewModel.HistoryPush(history);
 
                         this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                     }

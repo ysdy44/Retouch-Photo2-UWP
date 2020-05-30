@@ -89,6 +89,15 @@ namespace Retouch_Photo2.Historys
 
                 layer.Transform.Transformer = position.Transform_Transformer;
                 layer.Transform.CropTransformer = position.Transform_CropTransformer;
+
+
+                //Refactoring
+                layer.IsRefactoringTransformer = true;
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
+                //undo.RefactoringParentsTransformer();
+                //undo.RefactoringParentsRender();
+                //undo.RefactoringParentsIconRender();
             }
         }
 

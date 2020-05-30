@@ -38,11 +38,14 @@ namespace Retouch_Photo2.Layers.Models
             {
                 this.IsRefactoringTransformer = false;
 
-                //TransformerBorder
-                TransformerBorder border = new TransformerBorder(layerage.Children);
-                Transformer transformer = border.ToTransformer();
-                this.Transform.Transformer = transformer;
-                return transformer;
+                if (layerage.Children.Count != 0)
+                {
+                    //TransformerBorder
+                    TransformerBorder border = new TransformerBorder(layerage.Children);
+                    Transformer transformer = border.ToTransformer();
+                    this.Transform.Transformer = transformer;
+                    return transformer;
+                }
             }
 
             return this.Transform.GetActualTransformer();

@@ -102,7 +102,7 @@ namespace Retouch_Photo2.Tools.Models
             return new GeometryPentagonLayer(customDevice)
             {
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.SelectionViewModel.StandGeometryStyle
             };
         }
 
@@ -164,6 +164,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryPentagonLayer.IsRefactoringRender = true;
                         geometryPentagonLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryPentagonLayer.Points = points;
                     }
                 });
@@ -214,6 +216,7 @@ namespace Retouch_Photo2.Tools.Models
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryPentagonLayer.Points = points;
                     }
                 });
@@ -251,6 +254,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryPentagonLayer.Points = points;
                     }
                 });

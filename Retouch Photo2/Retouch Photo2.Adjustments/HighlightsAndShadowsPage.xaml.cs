@@ -100,6 +100,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     adjustment.Shadows = 0.0f;
                     adjustment.Shadows = 0.0f;
                     adjustment.Clarity = 0.0f;
@@ -157,6 +159,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.Shadows = shadows;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -185,12 +188,15 @@ namespace Retouch_Photo2.Adjustments.Pages
                             adjustment.Shadows = previous;
                         });
 
-                        this.ViewModel.HistoryPush(history);
-
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.Shadows = shadows;
+
+                        //History
+                        this.ViewModel.HistoryPush(history);
 
                         this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                     }
@@ -231,6 +237,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.Highlights = highlights;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -264,6 +271,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.Highlights = highlights;
 
                         this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
@@ -305,6 +314,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.Clarity = clarity;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -338,6 +348,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.Clarity = clarity;
 
                         this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
@@ -379,6 +391,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         adjustment.MaskBlurAmount = maskBlurAmount;
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -394,8 +407,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                     if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
                     {
                         float maskBlurAmount = (float)value / 10.0f;
-
-
+                        
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment mask blur amount");
                         
@@ -413,6 +425,8 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         adjustment.MaskBlurAmount = maskBlurAmount;
 
                         this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate

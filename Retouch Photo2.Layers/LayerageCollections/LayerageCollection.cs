@@ -8,8 +8,14 @@ using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Layers
 {
+    /// <summary>
+    /// Represents a collection of layers, including a sorting algorithm for layers
+    /// </summary>
     public partial class LayerageCollection
     {
+        //@Static
+        /// <summary>  Gets or sets layer controls height. </summary>
+        public static int ControlsHeight { get; set; } = 40;
 
         //@Static
         /// <summary> Occurs when a layerage receive interaction. </summary>

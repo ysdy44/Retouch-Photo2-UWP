@@ -110,11 +110,11 @@
     <Compile Include="Enums\InvalidateMode.cs" />
     <Compile Include="Enums\MoveMode.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Color.cs" />
-    <Compile Include="MethodViewModels\MethodViewModel.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Edit.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Selected.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Setup.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Transform.cs" />
+    <Compile Include="SelectionViewModels\SelectionViewModel.StandStyle.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.Key.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.cs" />
     <Compile Include="Project.cs" />

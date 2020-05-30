@@ -68,6 +68,8 @@ namespace Retouch_Photo2.Menus.Models
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         Transformer transformer2 = layer.Transform.Transformer;
                         Style style2 = item.Clone();
                         style2.CacheTransform();
@@ -75,7 +77,7 @@ namespace Retouch_Photo2.Menus.Models
                         layer.Style = style2;
 
                         transformer = transformer2;
-                        this.SelectionViewModel.StyleLayerage = layerage;
+                        this.SelectionViewModel.StandStyleLayerage = layerage;
                     });
                     {
                         Style style = item.Clone();

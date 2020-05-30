@@ -108,17 +108,14 @@
   <ItemGroup>
     <Compile Include="Clipboards\Clipboard.cs" />
     <Compile Include="Clipboards\Clipboard.Instance.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.Arrange_Parents_Controls_Background.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.ArrangeLayersBackground.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.Clipboard.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.Layerage.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.Photocopier_Layerage.cs" />
     <Compile Include="Layers\ILayer.cs" />
     <Compile Include="Layerage.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.FindOutermost.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.Photocopier.cs" />
     <Compile Include="LayerMode\BackgroundMode.cs" />
     <Compile Include="Layers\ITextLayer.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.Add_Disengage.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.ControlHeight.cs" />
     <Compile Include="Layers\LayerBase.Instance.cs" />
     <Compile Include="LayerType.cs" />
     <Compile Include="ModelsSecond\GeometryArrowLayer.cs" />
@@ -138,12 +135,12 @@
     </Compile>
     <Compile Include="LayerageCollections\LayerageCollection.Mezzanine.cs" />
     <Compile Include="LayerControls\LayerControl.xaml.Control.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.Arrange_Parents_Controls.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.ArrangeLayers.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.Drag_Move_Insert.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.Drag_Move_Insert_Add.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.Group.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.Remove.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.Select_ShiftSelect_SelectedLayers.cs" />
+    <Compile Include="LayerageCollections\LayerageCollection.Selected.cs" />
     <Compile Include="LayerControls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>

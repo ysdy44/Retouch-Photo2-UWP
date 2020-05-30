@@ -151,7 +151,7 @@ namespace Retouch_Photo2.Tools.Models
                 Tooth = this.SelectionViewModel.GeometryCogTooth,
                 Notch = this.SelectionViewModel.GeometryCogNotch,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.SelectionViewModel.StandGeometryStyle
             };
         }
 
@@ -217,6 +217,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryCogLayer.Count = count;
                     }
                 });
@@ -266,6 +268,7 @@ namespace Retouch_Photo2.Tools.Models
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryCogLayer.Count = count;
                     }
                 });
@@ -305,6 +308,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryCogLayer.Count = count;
                     }
                 });
@@ -361,6 +366,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryCogLayer.InnerRadius = innerRadius;
                     }
                 });
@@ -409,6 +416,7 @@ namespace Retouch_Photo2.Tools.Models
 
                             //Refactoring
                             layer.IsRefactoringRender = true;
+                            layerage.RefactoringParentsRender();
                             geometryCogLayer.InnerRadius = innerRadius;
                         }
                     });
@@ -444,6 +452,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryCogLayer.InnerRadius = innerRadius;
                     }
                 });
@@ -500,6 +510,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryCogLayer.IsRefactoringRender = true;
                         geometryCogLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryCogLayer.Tooth = tooth;
                     }
                 });
@@ -548,6 +560,7 @@ namespace Retouch_Photo2.Tools.Models
                   
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryCogLayer.Tooth = tooth;
                     }
                 });
@@ -583,6 +596,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryCogLayer.IsRefactoringRender = true;
                         geometryCogLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryCogLayer.Tooth = tooth;
                     }
                 });
@@ -639,6 +654,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryCogLayer.IsRefactoringRender = true;
                         geometryCogLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryCogLayer.Notch = notch;
                     }
                 });
@@ -687,6 +704,7 @@ namespace Retouch_Photo2.Tools.Models
 
                         //Refactoring
                         geometryCogLayer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryCogLayer.Notch = notch;
                     }
                 });
@@ -722,6 +740,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryCogLayer.IsRefactoringRender = true;
                         geometryCogLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryCogLayer.Notch = notch;
                     }
                 });

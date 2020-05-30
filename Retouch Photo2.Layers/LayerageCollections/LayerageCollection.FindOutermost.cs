@@ -1,20 +1,18 @@
-﻿using FanKit.Transformers;
-using Retouch_Photo2.Layers.Models;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Retouch_Photo2.Layers
 {
+    /// <summary>
+    /// Represents a collection of layers, including a sorting algorithm for layers
+    /// </summary>
     public partial class LayerageCollection
     {
 
         /// <summary>
-        /// Find layerage 
-        /// by ILayer.
-        /// in all selected layers.
+        /// Find first layerage by <see cref="ILayer.Id">.
         /// </summary>
-        public Layerage FindLayerage_ByILayer(ILayer layer) => this._findLayerage_ByILayer(this.RootLayerages, layer);
-        private Layerage _findLayerage_ByILayer(IEnumerable<Layerage> layerages, ILayer layer)
+        public Layerage FindFirstLayerage(ILayer layer) => this._findFirstLayerage(this.RootLayerages, layer);
+        private Layerage _findFirstLayerage(IEnumerable<Layerage> layerages, ILayer layer)
         {
             foreach (Layerage child in layerages)
             {
@@ -23,7 +21,7 @@ namespace Retouch_Photo2.Layers
 
                 if (child.Children.Count != 0)
                 {
-                    Layerage find = this._findLayerage_ByILayer(child.Children, layer);
+                    Layerage find = this._findFirstLayerage(child.Children, layer);
                     if (find != null) return find;
                 }
             }
@@ -37,7 +35,7 @@ namespace Retouch_Photo2.Layers
         /// Find outermost layerage
         /// in all selected layers.
         /// </summary>
-        public static Layerage FindOutermost_FromLayerages(IEnumerable<Layerage> selectedLayerages)
+        public static Layerage FindOutermostLayerage(IEnumerable<Layerage> selectedLayerages)
         {
             int index = int.MaxValue;
             Layerage layerage = null;
@@ -55,6 +53,7 @@ namespace Retouch_Photo2.Layers
 
             return layerage;
         }
+
 
     }
 }

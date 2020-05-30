@@ -141,6 +141,7 @@ namespace Retouch_Photo2.Menus.Models
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
                     layer.Opacity = opacity;
                 });
 
@@ -172,6 +173,8 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Opacity = opacity;
                 });
 
@@ -218,6 +221,8 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.BlendMode = mode;
                 });
 
@@ -258,6 +263,8 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Visibility = value;
                 });
 
@@ -298,6 +305,8 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Style.IsFollowTransform = value;
                 });
 
@@ -336,6 +345,8 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.TagType = type;
                 });
 

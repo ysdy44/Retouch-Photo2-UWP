@@ -3,10 +3,12 @@ using HSVColorPickers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
+using Windows.Globalization;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -134,7 +136,15 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void OnNavigatedTo() => this.SelectionViewModel.SetModeStyle();
+        public void OnNavigatedTo()
+        {
+            Layerage layerage = this.SelectionViewModel.GetFirstSelectedLayerage();
+            if (layerage != null)
+            {
+                ILayer layer = layerage.Self;
+                this.SelectionViewModel.SetStyle(layer.Style);
+            }
+        }
         public void OnNavigatedFrom() { }
 
     }
@@ -182,7 +192,7 @@ namespace Retouch_Photo2.Tools.Models
             if (this.Mode == ListViewSelectionMode.None) return;
 
             //Snap
-            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.SelectionViewModel.Transformer);
+            if (this.IsSnap) this.ViewModel.VectorBorderSnapInitiate(this.SelectionViewModel.Transformer);
 
             switch (this.FillOrStroke)
             {

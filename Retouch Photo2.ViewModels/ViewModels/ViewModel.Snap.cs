@@ -1,30 +1,27 @@
 ﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.UI.Xaml;
 using Retouch_Photo2.Layers;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Numerics;
 using System.Linq;
-using Windows.Storage;
-using Windows.UI.Xaml;
-using Retouch_Photo2.Elements.MainPages;
 
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "ViewModel" />.
+    /// Represents a ViewModel that contains some methods of the application
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
 
+        /// <summary> Gets or sets the snap. </summary>
         public VectorVectorSnap VectorVectorSnap = new VectorVectorSnap();
+        /// <summary> Gets or sets the snap. </summary>
         public VectorBorderSnap VectorBorderSnap = new VectorBorderSnap();
+        /// <summary> Gets or sets the snap. </summary>
         public BorderBorderSnap BorderBorderSnap = new BorderBorderSnap();
 
 
-        public void VectorVectorSnapStarted(NodeCollection nodes)
+        /// <summary> Initiate the snap. </summary>
+        public void VectorVectorSnapInitiate(NodeCollection nodes)
         {
             this.VectorVectorSnap.Destinations =
                 from node
@@ -36,7 +33,8 @@ namespace Retouch_Photo2.ViewModels
             float scale = this.CanvasTransformer.Scale;
             this.VectorVectorSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
         }
-        public void VectorBorderSnapStarted(Transformer transformer)
+        /// <summary> Initiate the snap. </summary>
+        public void VectorBorderSnapInitiate(Transformer transformer)
         {
             this.VectorBorderSnap.Destinations = this.GetSnapDestinations(transformer);
 
@@ -44,7 +42,8 @@ namespace Retouch_Photo2.ViewModels
             float scale = this.CanvasTransformer.Scale;
             this.VectorBorderSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
         }
-        public void VectorBorderSnapStarted(Layerage firstLayer)
+        /// <summary> Initiate the snap. </summary>
+        public void VectorBorderSnapInitiate(Layerage firstLayer)
         {
             if (firstLayer != null)
             {
@@ -55,7 +54,8 @@ namespace Retouch_Photo2.ViewModels
             float scale = this.CanvasTransformer.Scale;
             this.VectorBorderSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
         }
-        public void BorderBorderSnapStarted(Layerage firstLayer)
+        /// <summary> Initiate the snap. </summary>
+        public void BorderBorderSnapInitiate(Layerage firstLayer)
         {
             if (firstLayer != null)
             {
@@ -100,7 +100,6 @@ namespace Retouch_Photo2.ViewModels
                 }
             }
         }
-
 
     }
 }

@@ -104,7 +104,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 HoleRadius = this.SelectionViewModel.GeometryDountHoleRadius,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.SelectionViewModel.StandGeometryStyle
             };
         }
 
@@ -168,6 +168,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryDountLayer.IsRefactoringRender = true;
                         geometryDountLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryDountLayer.HoleRadius = holeRadius;
                     }
                 });
@@ -218,6 +220,7 @@ namespace Retouch_Photo2.Tools.Models
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryDountLayer.HoleRadius = holeRadius;
                     }
                 });
@@ -255,6 +258,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryDountLayer.IsRefactoringRender = true;
                         geometryDountLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryDountLayer.HoleRadius = holeRadius;
                     }
                 });

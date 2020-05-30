@@ -4,18 +4,20 @@ using System.Collections.Generic;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary>
-    /// Retouch_Photo2 's Project
+    /// Represents a project class with width and layerages.
     /// </summary>
     public class Project
     {
-        /// <summary> <see cref = "Project" />'s name. </summary>
+        /// <summary> Gets or sets the name. </summary>
         public string Name { set; get; }
 
-        /// <summary> <see cref = "Project" />'s width. </summary>
+        /// <summary> Gets or sets the width. </summary>
         public int Width { set; get; }
-        /// <summary> <see cref = "Project" />'s height. </summary>
+
+        /// <summary> Gets or sets the height. </summary>
         public int Height { set; get; }
-        /// <summary> <see cref = "Project" />'s layerages. </summary>
+
+        /// <summary> Gets or sets the layerages. </summary>
         public IEnumerable<Layerage> Layerages;
     }
 }

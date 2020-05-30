@@ -1,21 +1,13 @@
-﻿using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Adjustments;
-using Retouch_Photo2.Blends;
-using Retouch_Photo2.Effects;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
+﻿using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Layers.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
+    /// Represents a ViewModel that contains some methods of the application
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
@@ -53,7 +45,7 @@ namespace Retouch_Photo2.ViewModels
             if (isUndo)
             {
                 this.SetMode(this.LayerageCollection);//Selection          
-                LayerageCollection.ArrangeLayersControls(this.LayerageCollection);
+                LayerageCollection.ArrangeLayers(this.LayerageCollection);
                 LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
 
                 this.Invalidate();//Invalidate
@@ -72,7 +64,7 @@ namespace Retouch_Photo2.ViewModels
             LayerageCollection.RemoveAllSelectedLayers(this.LayerageCollection);//Remove
 
             this.SetMode(this.LayerageCollection);//Selection
-            LayerageCollection.ArrangeLayersControls(this.LayerageCollection);
+            LayerageCollection.ArrangeLayers(this.LayerageCollection);
             LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
             this.Invalidate();//Invalidate
         }
@@ -110,7 +102,7 @@ namespace Retouch_Photo2.ViewModels
                     break;
             }
 
-            LayerageCollection.ArrangeLayersControls(this.LayerageCollection);
+            LayerageCollection.ArrangeLayers(this.LayerageCollection);
             LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
             this.SetMode(this.LayerageCollection);
             this.Invalidate();//Invalidate                          
@@ -154,7 +146,7 @@ namespace Retouch_Photo2.ViewModels
 
             this.SetMode(this.LayerageCollection);//Selection
 
-            LayerageCollection.ArrangeLayersControls(this.LayerageCollection);
+            LayerageCollection.ArrangeLayers(this.LayerageCollection);
             LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
 
             this.Invalidate();//Invalidate        
@@ -169,7 +161,7 @@ namespace Retouch_Photo2.ViewModels
             LayerageCollection.RemoveAllSelectedLayers(this.LayerageCollection);//Remove
 
             this.SetMode(this.LayerageCollection);//Selection
-            LayerageCollection.ArrangeLayersControls(this.LayerageCollection);
+            LayerageCollection.ArrangeLayers(this.LayerageCollection);
             LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
             this.Invalidate();//Invalidate
         }
@@ -204,7 +196,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetMode(this.LayerageCollection);//Selection
-            LayerageCollection.ArrangeLayersControls(this.LayerageCollection);
+            LayerageCollection.ArrangeLayers(this.LayerageCollection);
             LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
             this.Invalidate();//Invalidate
         }
@@ -237,7 +229,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetMode(this.LayerageCollection);//Selection
-            LayerageCollection.ArrangeLayersControls(this.LayerageCollection);
+            LayerageCollection.ArrangeLayers(this.LayerageCollection);
             LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
             this.Invalidate();//Invalidate
         }
@@ -254,7 +246,7 @@ namespace Retouch_Photo2.ViewModels
             LayerageCollection.GroupAllSelectedLayers(this.CanvasDevice, this.LayerageCollection);
 
             this.SetMode(this.LayerageCollection);
-            LayerageCollection.ArrangeLayersControls(this.LayerageCollection);
+            LayerageCollection.ArrangeLayers(this.LayerageCollection);
             LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
             this.Invalidate();//Invalidate
         }
@@ -268,7 +260,7 @@ namespace Retouch_Photo2.ViewModels
             LayerageCollection.UnGroupAllSelectedLayer(this.LayerageCollection);
 
             this.SetMode(this.LayerageCollection);
-            LayerageCollection.ArrangeLayersControls(this.LayerageCollection);
+            LayerageCollection.ArrangeLayers(this.LayerageCollection);
             LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
             this.Invalidate();//Invalidate
         }
@@ -286,7 +278,7 @@ namespace Retouch_Photo2.ViewModels
             });
 
             this.SetMode(this.LayerageCollection);
-            LayerageCollection.ArrangeLayersControls(this.LayerageCollection);
+            LayerageCollection.ArrangeLayers(this.LayerageCollection);
             LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
             this.Invalidate();//Invalidate
         }

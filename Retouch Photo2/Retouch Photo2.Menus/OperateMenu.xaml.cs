@@ -230,7 +230,7 @@ namespace Retouch_Photo2.Menus.Models
                 parentsChildren.Remove(destination);
                 parentsChildren.Add(destination);
 
-                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -255,7 +255,7 @@ namespace Retouch_Photo2.Menus.Models
                 parentsChildren.Remove(destination);
                 parentsChildren.Insert(index, destination);
 
-                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -280,7 +280,7 @@ namespace Retouch_Photo2.Menus.Models
                 parentsChildren.Remove(destination);
                 parentsChildren.Insert(index, destination);
 
-                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -299,7 +299,7 @@ namespace Retouch_Photo2.Menus.Models
                 parentsChildren.Remove(destination);
                 parentsChildren.Insert(0, destination);
 
-                LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -376,7 +376,12 @@ namespace Retouch_Photo2.Menus.Models
                     history.PushTransform(layer);
 
                     //Refactoring
+                    layer.IsRefactoringTransformer = true;
                     layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsTransformer();
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.CacheTransform();
                     layer.TransformAdd(vector);
                 });
@@ -458,6 +463,7 @@ namespace Retouch_Photo2.Menus.Models
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
                     layer.CacheTransform();
                     layer.TransformAdd(vector);
                 });

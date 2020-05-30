@@ -8,12 +8,12 @@ using Windows.UI.Xaml.Controls.Primitives;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "TipViewModel" />.
+    /// Represents an ViewModel that contains <see cref="ITool"/> <see cref="IMenu"/> and <see cref="ToolTip.IsOpen"/>
     /// </summary>
     public partial class TipViewModel : INotifyPropertyChanged
     {
 
-        /// <summary> Menus. </summary>
+        /// <summary> Gets or sets the all menus. </summary>   
         public IList<IMenu> Menus { get; set; } = new List<IMenu>();
 
 

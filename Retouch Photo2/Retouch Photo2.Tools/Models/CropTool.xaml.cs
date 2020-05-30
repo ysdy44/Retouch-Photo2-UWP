@@ -66,6 +66,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         layer.Transform.IsCrop = false;
                     }
                 });
@@ -174,7 +176,7 @@ namespace Retouch_Photo2.Tools.Models
             }
 
             //Snap
-            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(firstLayer.Transform.Transformer);
+            if (this.IsSnap) this.ViewModel.VectorBorderSnapInitiate(firstLayer.Transform.Transformer);
 
 
             this.Layerage = firstLayerage;
@@ -297,6 +299,7 @@ namespace Retouch_Photo2.Tools.Models
           
                 //Refactoring
                 layer.IsRefactoringRender = true;
+                this.Layerage.RefactoringParentsRender();
                 layer.Transform.CropTransformer = transformer;
             }
             else//Move
@@ -305,6 +308,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
+                this.Layerage.RefactoringParentsRender();
                 layer.Transform.CropTransformAdd(canvasMove);
             }
         }
@@ -332,6 +336,8 @@ namespace Retouch_Photo2.Tools.Models
             //Refactoring
             layer.IsRefactoringRender = true;
             layer.IsRefactoringIconRender = true;
+            this.Layerage.RefactoringParentsRender();
+            this.Layerage.RefactoringParentsIconRender();
         }
         
 

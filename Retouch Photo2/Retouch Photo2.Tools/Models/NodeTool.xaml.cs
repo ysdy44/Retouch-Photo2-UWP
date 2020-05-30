@@ -56,7 +56,7 @@ namespace Retouch_Photo2.Tools.Models
                     //     LayerageCollection.RemoveLayer(this.ViewModel.LayerageCollection, this.CurveLayer);
 
                     this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                    LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };
@@ -148,7 +148,7 @@ namespace Retouch_Photo2.Tools.Models
                 case NodeCollectionMode.Move:
                     {
                         //Snap
-                        if (this.IsSnap) this.ViewModel.VectorVectorSnapStarted(this.Nodes);
+                        if (this.IsSnap) this.ViewModel.VectorVectorSnapInitiate(this.Nodes);
 
                         this.Nodes.CacheTransform(isOnlySelected: true);
                     }
@@ -262,6 +262,11 @@ namespace Retouch_Photo2.Tools.Models
             this.CurveLayer.IsRefactoringTransformer = true;
             this.CurveLayer.IsRefactoringRender = true;
             this.CurveLayer.IsRefactoringIconRender = true;
+            //      this.CurveLayerage.RefactoringParentsTransformer();
+            //      this.CurveLayerage.RefactoringParentsRender();
+            //    this.CurveLayerage.RefactoringParentsIconRender();
+            //TODO:
+            //@Debug
             this.Mode = NodeCollectionMode.None;
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate

@@ -5,6 +5,9 @@ using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Layers
 {
+    /// <summary>
+    /// Represents a layer control.
+    /// </summary>
     public partial class LayerControl : UserControl
     {
 

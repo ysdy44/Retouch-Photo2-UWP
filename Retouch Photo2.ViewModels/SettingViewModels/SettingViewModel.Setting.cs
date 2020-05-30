@@ -9,15 +9,18 @@ using Windows.UI.Xaml;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "SettingViewModel" />. 
+    /// Represents an ViewModel that contains shortcut, layout and <see cref="ViewModels.Setting"/>.
     /// </summary>
     public partial class SettingViewModel : INotifyPropertyChanged
     {
 
-        //@Construct
+        /// <summary> Gets or sets the setting. </summary>
         public Setting Setting = new Setting();
 
         //@Construct
+        /// <summary>
+        /// Initializes the theme.
+        /// </summary>
         public void ConstructTheme()
         {
             if (Window.Current.Content is FrameworkElement frameworkElement)
@@ -30,12 +33,18 @@ namespace Retouch_Photo2.ViewModels
         }
 
         //@Construct
+        /// <summary>
+        /// Initializes the layers-height.
+        /// </summary>
         public void ConstructLayersHeight()
         {
-            LayerageCollection.SetControlHeight(this.Setting.LayersHeight);
+            LayerageCollection.ControlsHeight = this.Setting.LayersHeight;
         }
 
         //@Construct
+        /// <summary>
+        /// Initializes the menu-type.
+        /// </summary>
         public void ConstructMenuType(IEnumerable<IMenu> menus)
         {
             foreach (IMenu menu in menus)

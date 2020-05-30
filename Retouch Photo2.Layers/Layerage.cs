@@ -54,7 +54,6 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public void RefactoringParentsTransformer()
         {
-            //RefactoringTransformer
             if (this.Parents != null)
             {
                 ILayer layer = this.Parents.Self;
@@ -64,7 +63,36 @@ namespace Retouch_Photo2.Layers
                     //Refactoring
                     ILayer groupLayer = layer;
                     groupLayer.IsRefactoringTransformer = true;
+                    this.Parents.RefactoringParentsTransformer();
                 }
+            }
+        }
+        /// <summary>
+        /// Open the <see cref="ILayer.IsRefactoringRender"/> with <see cref="Layerage.Parents"/>.
+        /// </summary>
+        public void RefactoringParentsRender()
+        {
+            if (this.Parents != null)
+            {
+                ILayer layer = this.Parents.Self;
+
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                this.Parents.RefactoringParentsRender();
+            }
+        }
+        /// <summary>
+        /// Open the <see cref="ILayer.IsRefactoringIconRender"/> with <see cref="Layerage.Parents"/>.
+        /// </summary>
+        public void RefactoringParentsIconRender()
+        {
+            if (this.Parents != null)
+            {
+                ILayer layer = this.Parents.Self;
+
+                //Refactoring
+                layer.IsRefactoringIconRender = true;
+                this.Parents.RefactoringParentsIconRender();
             }
         }
 

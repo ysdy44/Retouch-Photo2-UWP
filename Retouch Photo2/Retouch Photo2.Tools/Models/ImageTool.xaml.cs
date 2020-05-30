@@ -142,7 +142,7 @@ namespace Retouch_Photo2.Tools.Models
                 Photocopier = photocopier,
                 IsSelected = true,
                 Transform = new Transform(transformerSource, transformerDestination),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.SelectionViewModel.StandGeometryStyle
             };
             Layerage imageLayerage = imageLayer.ToLayerage();
             LayerBase.Instances.Add(imageLayer);
@@ -167,6 +167,8 @@ namespace Retouch_Photo2.Tools.Models
             //Refactoring
             mezzanineLayer.IsRefactoringRender = true;
             mezzanineLayer.IsRefactoringIconRender = true;
+            this.MezzanineLayerage.RefactoringParentsRender();
+            this.MezzanineLayerage.RefactoringParentsIconRender();
 
 
             //Selection
@@ -192,6 +194,8 @@ namespace Retouch_Photo2.Tools.Models
                 //Refactoring
                 mezzanineLayer.IsRefactoringRender = true;
                 mezzanineLayer.IsRefactoringIconRender = true;
+                this.MezzanineLayerage.RefactoringParentsRender();
+                this.MezzanineLayerage.RefactoringParentsIconRender();
 
 
                 foreach (Layerage child in this.ViewModel.LayerageCollection.RootLayerages)
@@ -208,7 +212,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
 
-            LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+            LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
             LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate

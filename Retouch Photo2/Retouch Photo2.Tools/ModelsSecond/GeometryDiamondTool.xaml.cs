@@ -104,7 +104,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Mid = this.SelectionViewModel.GeometryDiamondMid,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.SelectionViewModel.StandGeometryStyle
             };
         }
 
@@ -168,6 +168,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryDiamondLayer.Mid = mid;
                     }
                 });
@@ -218,6 +220,7 @@ namespace Retouch_Photo2.Tools.Models
                   
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryDiamondLayer.Mid = mid;
                     }
                 });
@@ -255,6 +258,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryDiamondLayer.IsRefactoringRender = true;
                         geometryDiamondLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryDiamondLayer.Mid = mid;
                     }
                 });
@@ -295,6 +300,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryDiamondLayer.Mid = 1.0f - geometryDiamondLayer.Mid;
                     }
                 });

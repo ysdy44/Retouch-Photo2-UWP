@@ -1,6 +1,4 @@
 ﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Menus;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Numerics;
 using Windows.UI.Xaml;
@@ -8,12 +6,15 @@ using Windows.UI.Xaml;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "SettingViewModel" />. 
+    /// Represents an ViewModel that contains shortcut, layout and <see cref="ViewModels.Setting"/>.
     /// </summary>
     public partial class SettingViewModel : INotifyPropertyChanged
     {
 
         //@Construct
+        /// <summary>
+        /// Initializes the device-layout.
+        /// </summary>
         public void ConstructDeviceLayout()
         {
             Window.Current.SizeChanged += (s, e) =>
@@ -27,9 +28,9 @@ namespace Retouch_Photo2.ViewModels
             double width2 = Window.Current.Bounds.Width;
             this.DeviceLayoutType = this.Setting.DeviceLayout.GetActualType(width2);
         }
-        
 
-        /// <summary> Retouch_Photo2's the only device layout type. </summary>
+
+        /// <summary> Gets or sets the device layout type. </summary>
         public DeviceLayoutType DeviceLayoutType
         {
             get => this.deviceLayoutType;
@@ -61,7 +62,7 @@ namespace Retouch_Photo2.ViewModels
                 }
             }
         }
-        /// <summary> Gets the CenterChild width. </summary>
+        /// <summary> Gets the center child canvas width. </summary>
         public float CenterChildWidth
         {
             get
@@ -79,7 +80,7 @@ namespace Retouch_Photo2.ViewModels
                 }
             }
         }
-        /// <summary> Gets the CenterChild height. </summary>
+        /// <summary> Gets the center child canvas height. </summary>
         public float CenterChildHeight
         {
             get

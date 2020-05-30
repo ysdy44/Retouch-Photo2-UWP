@@ -76,6 +76,8 @@ namespace Retouch_Photo2.Effects.Models
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.Effect.Straighten_Angle = 0;
             });
 
@@ -130,6 +132,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.Straighten_IsOn = isOn;
                 });
 
@@ -166,6 +170,7 @@ namespace Retouch_Photo2.Effects.Models
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
                     layer.Effect.Straighten_Angle = radians;
                 });
 
@@ -196,6 +201,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.Straighten_Angle = radians;
                 });
 

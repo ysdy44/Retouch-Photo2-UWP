@@ -76,6 +76,8 @@ namespace Retouch_Photo2.Effects.Models
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.Effect.Morphology_Size = 1;
             });
 
@@ -130,6 +132,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.Morphology_IsOn = isOn;
                 });
 
@@ -170,6 +174,7 @@ namespace Retouch_Photo2.Effects.Models
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
                     layer.Effect.Morphology_Size = size;
                 });
 
@@ -200,6 +205,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.Morphology_Size = size;
                 });
 

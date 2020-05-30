@@ -101,6 +101,8 @@ namespace Retouch_Photo2.Effects.Models
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.Effect.OuterShadow_Radius = 12.0f;
                 layer.Effect.OuterShadow_Opacity = 0.5f;
                 layer.Effect.OuterShadow_Color = Windows.UI.Colors.Black;
@@ -164,6 +166,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.OuterShadow_IsOn = isOn;
                 });
 
@@ -204,6 +208,7 @@ namespace Retouch_Photo2.Effects.Models
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
                     layer.Effect.OuterShadow_Radius = radians;
                 });
 
@@ -235,6 +240,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.OuterShadow_Radius = radians;
                 });
 
@@ -275,6 +282,7 @@ namespace Retouch_Photo2.Effects.Models
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
                     layer.Effect.OuterShadow_Opacity = opacity;
                 });
 
@@ -305,6 +313,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.OuterShadow_Opacity = opacity;
                 });
 
@@ -343,6 +353,7 @@ namespace Retouch_Photo2.Effects.Models
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
                     layer.Effect.OuterShadow_Offset = radians;
                 });
 
@@ -373,6 +384,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.OuterShadow_Offset = radians;
                 });
 
@@ -410,6 +423,7 @@ namespace Retouch_Photo2.Effects.Models
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
                     layer.Effect.OuterShadow_Angle = radians;
                 });
 
@@ -440,6 +454,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.OuterShadow_Angle = radians;
                 });
 
@@ -484,6 +500,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.OuterShadow_Color = value;
                 });
 
@@ -521,6 +539,7 @@ namespace Retouch_Photo2.Effects.Models
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
                     layer.Effect.OuterShadow_Color = value;
                 });
 
@@ -552,6 +571,8 @@ namespace Retouch_Photo2.Effects.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Effect.OuterShadow_Color = value;
                 });
 

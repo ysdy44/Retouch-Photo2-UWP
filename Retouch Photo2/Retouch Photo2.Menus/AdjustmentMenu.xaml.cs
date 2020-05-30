@@ -396,14 +396,19 @@ namespace Retouch_Photo2.Menus.Models
                     ILayer layer2 = layerage.Self;
 
                     //Refactoring
-                    layer.IsRefactoringTransformer = true;
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer2.Filter = previous.Clone();
                 }));
 
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.Filter.Adjustments.Add(adjustmentPage.GetNewAdjustment());
+
                 this._vsAdjustments = layer.Filter.Adjustments;
             });
 
@@ -438,8 +443,13 @@ namespace Retouch_Photo2.Menus.Models
                     layer.Filter = previous.Clone();
                 }));
 
-
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.Filter.Adjustments.Remove(removeAdjustment);
+
                 this._vsAdjustments = layer.Filter.Adjustments;
             });
 
@@ -464,7 +474,6 @@ namespace Retouch_Photo2.Menus.Models
             {
                 ILayer layer = layerage.Self;
 
-
                 var previous = layer.Filter.Clone();
                 history.UndoActions.Push((() =>
                 {
@@ -473,9 +482,14 @@ namespace Retouch_Photo2.Menus.Models
                     layer.IsRefactoringIconRender = true;
                     layer.Filter = previous.Clone();
                 }));
-
-
+                
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.Filter = filter.Clone();
+
                 this._vsAdjustments = layer.Filter.Adjustments;
             });
 

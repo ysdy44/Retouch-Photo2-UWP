@@ -101,7 +101,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 SweepAngle = this.SelectionViewModel.GeometryPieSweepAngle,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.SelectionViewModel.StandGeometryStyle
             };
         }
 
@@ -165,6 +165,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryPieLayer.IsRefactoringRender = true;
                         geometryPieLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryPieLayer.SweepAngle = sweepAngle;
                     }
                 });
@@ -213,6 +215,7 @@ namespace Retouch_Photo2.Tools.Models
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryPieLayer.SweepAngle = sweepAngle;
                     }
                 });
@@ -248,6 +251,8 @@ namespace Retouch_Photo2.Tools.Models
                         //Refactoring
                         geometryPieLayer.IsRefactoringRender = true;
                         geometryPieLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryPieLayer.SweepAngle = sweepAngle;
                     }
                 });

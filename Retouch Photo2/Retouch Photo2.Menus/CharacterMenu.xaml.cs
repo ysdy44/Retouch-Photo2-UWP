@@ -292,6 +292,8 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     textLayer.FontAlignment = fontAlignment;
                 }
             });
@@ -330,6 +332,8 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     textLayer.FontWeight = fontWeight;
                 }
             });
@@ -368,6 +372,8 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     textLayer.FontStyle = fontStyle;
                 }
             });
@@ -406,6 +412,8 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     textLayer.FontFamily = fontFamily;
                 }
             });
@@ -444,6 +452,8 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     textLayer.FontSize = value;
                 }
             });

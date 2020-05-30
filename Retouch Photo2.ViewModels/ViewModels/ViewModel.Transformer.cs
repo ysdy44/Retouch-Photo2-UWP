@@ -1,16 +1,14 @@
 ﻿using FanKit.Transformers;
-using System;
-using System.Numerics;
 
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "ViewModel" />.
+    /// Represents a ViewModel that contains some methods of the application
     /// </summary>
     public partial class ViewModel
     {
 
-        /// <summary> Retouch_Photo2's the only <see cref = "FanKit.Transformers.CanvasTransformer" />. </summary>
+        /// <summary> Gets or sets the canvas transformer. </summary>
         public CanvasTransformer CanvasTransformer { get; } = new CanvasTransformer();
 
 

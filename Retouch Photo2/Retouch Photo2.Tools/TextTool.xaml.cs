@@ -101,6 +101,8 @@ namespace Retouch_Photo2.Tools
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     textLayer.FontText = fontText;
                 }
             });

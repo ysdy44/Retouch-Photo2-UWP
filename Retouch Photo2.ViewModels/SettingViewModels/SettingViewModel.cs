@@ -4,11 +4,11 @@ using System.ComponentModel;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "SettingViewModel" />. 
+    /// Represents an ViewModel that contains shortcut, layout and <see cref="ViewModels.Setting"/>.
     /// </summary>
     public partial class SettingViewModel : INotifyPropertyChanged
     {
-
+        
         /// <summary> Sets or Gets whether snaps a element to others's edge. </summary>
         public bool IsSnap
         {

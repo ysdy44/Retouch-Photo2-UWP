@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Tools
         bool IsCenter => this.SettingViewModel.IsCenter;
         bool IsSquare => this.SettingViewModel.IsSquare;
 
-        Layerage MezzanineLayer;
+        Layerage MezzanineLayerage;
 
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Tools
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
             //Snap         
-            if (this.IsSnap) this.ViewModel.VectorBorderSnapStarted(this.SelectionViewModel.GetFirstSelectedLayerage());
+            if (this.IsSnap) this.ViewModel.VectorBorderSnapInitiate(this.SelectionViewModel.GetFirstSelectedLayerage());
 
             //History
             this.ViewModel.MethodSelectedNone();
@@ -77,8 +77,8 @@ namespace Retouch_Photo2.Tools
             LayerBase.Instances.Add(layer);
 
             //Mezzanine
-            this.MezzanineLayer = layerage;
-            LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, this.MezzanineLayer);
+            this.MezzanineLayerage = layerage;
+            LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, this.MezzanineLayerage);
 
             //Text
             this.ViewModel.SetTipTextWidthHeight(transformer);
@@ -101,11 +101,12 @@ namespace Retouch_Photo2.Tools
                 this.Transformer = transformer;
 
                 //Mezzanine
-                ILayer mezzanineLayer = this.MezzanineLayer.Self;
+                ILayer mezzanineLayer = this.MezzanineLayerage.Self;
                 mezzanineLayer.Transform = new Transform(transformer);
                 mezzanineLayer.Style.DeliverBrushPoints(transformer);
                 //Refactoring
                 mezzanineLayer.IsRefactoringRender = true;
+                this.MezzanineLayerage.RefactoringParentsRender();
 
                 this.ViewModel.SetTipTextWidthHeight(transformer);//Text
                 this.ViewModel.Invalidate();//Invalidate
@@ -135,7 +136,7 @@ namespace Retouch_Photo2.Tools
                     this.Transformer = transformer;
 
                     //Mezzanine
-                    ILayer mezzanineLayer = this.MezzanineLayer.Self;
+                    ILayer mezzanineLayer = this.MezzanineLayerage.Self;
                     mezzanineLayer.Transform = new Transform(transformer);
                     mezzanineLayer.IsSelected = true;
                     //Refactoring
@@ -143,11 +144,11 @@ namespace Retouch_Photo2.Tools
                     mezzanineLayer.IsRefactoringIconRender = true;
 
                     //Selection
-                    this.SelectionViewModel.SetModeSingle(this.MezzanineLayer);
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+                    this.SelectionViewModel.SetModeSingle(this.MezzanineLayerage);
+                    LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
                     LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
                     
-                    this.MezzanineLayer = null;
+                    this.MezzanineLayerage = null;
                     this.ViewModel.TipTextVisibility = Visibility.Collapsed;//Text
                     this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                 }

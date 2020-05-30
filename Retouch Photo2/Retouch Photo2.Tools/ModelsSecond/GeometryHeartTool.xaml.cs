@@ -102,7 +102,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Spread = this.SelectionViewModel.GeometryHeartSpread,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.GeometryStyle
+                Style = this.SelectionViewModel.StandGeometryStyle
             };
         }
 
@@ -163,6 +163,8 @@ namespace Retouch_Photo2.Tools.Models
 
                         //Refactoring
                         geometryHeartLayer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryHeartLayer.Spread = spread;
                     }
                 });
@@ -213,6 +215,7 @@ namespace Retouch_Photo2.Tools.Models
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
+                        layerage.RefactoringParentsRender();
                         geometryHeartLayer.Spread = spread;
                     }
                 });
@@ -243,11 +246,15 @@ namespace Retouch_Photo2.Tools.Models
                         {
                             //Refactoring
                             geometryHeartLayer.IsRefactoringRender = true;
+                            geometryHeartLayer.IsRefactoringIconRender = true;
                             geometryHeartLayer.Spread = previous;
                         });
 
                         //Refactoring
                         geometryHeartLayer.IsRefactoringRender = true;
+                        geometryHeartLayer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
                         geometryHeartLayer.Spread = spread;
                     }
                 });

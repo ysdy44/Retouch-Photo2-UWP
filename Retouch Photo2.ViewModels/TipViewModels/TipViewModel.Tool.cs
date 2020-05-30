@@ -6,11 +6,12 @@ using Windows.UI.Xaml;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "TipViewModel" />.
+    /// Represents an ViewModel that contains <see cref="ITool"/> <see cref="IMenu"/> and <see cref="ToolTip.IsOpen"/>
     /// </summary>
     public partial class TipViewModel : INotifyPropertyChanged
     {        
-        /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.Tools.ITool" />. </summary>
+
+        /// <summary> Gets or sets the currnet tool. </summary>   
         public ITool Tool
         {
             get => this.tool ;
@@ -33,17 +34,19 @@ namespace Retouch_Photo2.ViewModels
         }
         private ITool tool;
 
-        /// <summary> MoveTool. </summary>
+        /// <summary> Gets or sets the move tool. </summary>   
         public IMoveTool MoveTool { get; private set; }
 
-        /// <summary> TransformerTool. </summary>
+        /// <summary> Gets or sets the transformer tool. </summary>   
         public ITransformerTool TransformerTool { get; private set; }
 
-        /// <summary> CreateTool. </summary>
+        /// <summary> Gets or sets the create tool. </summary>   
         public ICreateTool CreateTool { get; private set; }
 
-        /// <summary> Tools. </summary>
+
+        /// <summary> Gets or sets the all tools. </summary>   
         public IList<ITool> Tools { get; set; } = new List<ITool>();
+
 
         /// <summary>
         /// Change tools group value.
@@ -62,7 +65,8 @@ namespace Retouch_Photo2.ViewModels
             }
         }
 
-        /// <summary> Touchbar's control. </summary>
+
+        /// <summary> Gets or sets the currnet <see cref="TouchbarSlider"/>. </summary>   
         public UIElement TouchbarControl
         {
 
@@ -74,5 +78,6 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private UIElement touchbarControl;
+
     }
 }

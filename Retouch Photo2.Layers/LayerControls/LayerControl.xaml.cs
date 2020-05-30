@@ -6,6 +6,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Layers
 {
+    /// <summary>
+    /// Represents a layer control.
+    /// </summary>
     public partial class LayerControl : UserControl
     {
 
@@ -15,7 +18,7 @@ namespace Retouch_Photo2.Layers
         public string Type { get => this.TypeRun.Text; set => this.TypeRun.Text = value; }
 
 
-        private int controlHeight = 40;
+        /// <summary> Gets or sets <see cref = "LayerControl" />'s height. </summary>
         public int ControlHeight
         {
             get => this.controlHeight;
@@ -36,8 +39,10 @@ namespace Retouch_Photo2.Layers
                 this.controlHeight = value;
             }
         }
+        private int controlHeight = 40;
 
 
+        /// <summary> Gets or sets <see cref = "LayerControl" />'s icon. </summary>
         public ICanvasImage IconRender
         {
             get => this.iconRender;
@@ -48,9 +53,9 @@ namespace Retouch_Photo2.Layers
             }
         }
         private ICanvasImage iconRender = null;
-        
 
-        private int depth = 0;
+
+        /// <summary> Gets or sets <see cref = "LayerControl" />'s depth. </summary>
         public int Depth
         {
             get => this.depth;
@@ -63,6 +68,7 @@ namespace Retouch_Photo2.Layers
                 this.depth = value;
             }
         }
+        private int depth = 0;
 
 
         /// <summary> Gets or sets <see cref = "LayerControl" />'s overlay show status. </summary>

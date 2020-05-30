@@ -106,7 +106,7 @@ namespace Retouch_Photo2.Tools.Models
                 case NodeCollectionMode.Add:
                     {
                         //Snap
-                        if (this.IsSnap) this.ViewModel.VectorVectorSnapStarted(this.Nodes);
+                        if (this.IsSnap) this.ViewModel.VectorVectorSnapInitiate(this.Nodes);
 
                         Node node = new Node
                         {
@@ -203,7 +203,11 @@ namespace Retouch_Photo2.Tools.Models
             this.CurveLayer.IsRefactoringTransformer = true;
             this.CurveLayer.IsRefactoringRender = true;
             this.CurveLayer.IsRefactoringIconRender = true;
-
+      //      this.CurveLayerage.RefactoringParentsTransformer();
+      //      this.CurveLayerage.RefactoringParentsRender();
+        //    this.CurveLayerage.RefactoringParentsIconRender();
+        //TODO:
+        //@Debug
             this.Mode = NodeCollectionMode.None;
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
@@ -345,7 +349,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 IsSelected = true,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.CurveStyle,
+                Style = this.SelectionViewModel.StandCurveStyle,
             };
             Layerage curveLayerage = curveLayer.ToLayerage();
             LayerBase.Instances.Add(curveLayer);
@@ -354,7 +358,7 @@ namespace Retouch_Photo2.Tools.Models
             LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, curveLayerage);
 
             this.SelectionViewModel.SetModeSingle(curveLayerage);//Selection
-            LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
+            LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
             this.ViewModel.Invalidate();//Invalidate
         }
 

@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
+    /// Represents a ViewModel that contains some selection propertys of the application.
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
@@ -33,7 +33,7 @@ namespace Retouch_Photo2.ViewModels
             }
             else if (count == 1)
             {
-                Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(selectedLayeragesRecursive);
+                Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayeragesRecursive);
                 this.SetModeSingle(outermost);//Single
             }
             else if (count >= 2)
@@ -156,7 +156,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private void _setModeMultiple(IEnumerable<Layerage> layerages)
         {
-            Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(layerages);
+            Layerage outermost = LayerageCollection.FindOutermostLayerage(layerages);
             ILayer outermostLayer = outermost.Self;
 
             this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer

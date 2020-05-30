@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace Retouch_Photo2.Layers
 {
+    /// <summary>
+    /// Represents a collection of layers, including a sorting algorithm for layers
+    /// </summary>
     public partial class LayerageCollection
     {
 
@@ -31,9 +34,6 @@ namespace Retouch_Photo2.Layers
                 parentsChildren.Remove(layerage);
                 parentsParentsChildren.Insert(parentsIndex, layerage);
 
-                //Refactoring
-                parents2.IsRefactoringTransformer = true;
-
                 return true;
             }
             return false;
@@ -46,7 +46,7 @@ namespace Retouch_Photo2.Layers
         {
             //Layerages
             IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
-            Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(selectedLayerages);
+            Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayerages);
             if (outermost == null) return;
             IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(outermost);
             int index = parentsChildren.IndexOf(outermost);
@@ -68,8 +68,6 @@ namespace Retouch_Photo2.Layers
                     parentsChildren.Insert(index, layerage);
                 }
                 groupLayerage.Children.Clear();
-                //Refactoring
-                groupLayer.IsRefactoringTransformer = true;
 
                 //Remove
                 {
@@ -89,7 +87,7 @@ namespace Retouch_Photo2.Layers
         {
             //Layerages
             IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
-            Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(selectedLayerages);
+            Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayerages);
             if (outermost == null) return;
             IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(outermost);
             int index = parentsChildren.IndexOf(outermost);

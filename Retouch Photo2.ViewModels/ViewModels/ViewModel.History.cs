@@ -1,28 +1,23 @@
-﻿using FanKit.Transformers;
-using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
-using System;
-using System.Collections.Generic;
+﻿using Retouch_Photo2.Historys;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Numerics;
-using Windows.UI;
-using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "ViewModel" />. 
+    /// Represents a ViewModel that contains some methods of the application
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
 
+        /// <summary> Gets or sets the historys. </summary>
         public ObservableCollection<IHistory> Historys { get; private set; } = new ObservableCollection<IHistory>();
-        private int HistoryIndex = 0;        
 
+        /// <summary> Gets or sets the historys limit count. </summary>
         public int HistorysLimit = 20;
 
+        /// <summary> Gets or sets the availability of undo. </summary>
         public bool IsUndoEnabled
         {
             get => this.isUndoEnabled;
@@ -37,7 +32,9 @@ namespace Retouch_Photo2.ViewModels
 
         ////////////////////////////////////////
 
-        
+        /// <summary>
+        /// Undo the historys.
+        /// </summary>
         public bool HistoryUndo()
         {
             int count = this.Historys.Count;
@@ -47,7 +44,7 @@ namespace Retouch_Photo2.ViewModels
                 history.Undo();
                 this.Historys.Remove(history);
 
-                this.HistoryVS();
+                this.HistoryChanged();
                 return true;
             }
 
@@ -55,25 +52,23 @@ namespace Retouch_Photo2.ViewModels
             return false;
         }
 
-
+        /// <summary>
+        /// Undo a history into the historys.
+        /// </summary>
+        /// <param name="history"> The history. </param>
         public void HistoryPush(IHistory history)
         {
             this.Historys.Add(history);
             if (this.Historys.Count > this.HistorysLimit) this.Historys.RemoveAt(0);
 
-            this.HistoryIndex = this.Historys.Count - 1;
-
-            this.HistoryVS();
-        }
-        public void HistoryPushLayeragesHistory(string title)
-        {
+            this.HistoryChanged();
         }
 
 
         ////////////////////////////////////////
 
 
-        private void HistoryVS()
+        private void HistoryChanged()
         {
             int count = this.Historys.Count;
             if (count < 1)

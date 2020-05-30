@@ -155,7 +155,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
-                    
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
+
                     adjustment.AlphaDisable = true;
                     adjustment.AlphaOffset = 0.0f;
                     adjustment.AlphaExponent = 1.0f;

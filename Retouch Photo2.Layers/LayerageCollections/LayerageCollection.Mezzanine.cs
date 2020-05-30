@@ -2,6 +2,9 @@
 
 namespace Retouch_Photo2.Layers
 {
+    /// <summary>
+    /// Represents a collection of layers, including a sorting algorithm for layers
+    /// </summary>
     public partial class LayerageCollection
     {
         
@@ -10,6 +13,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <param name="mezzanineLayerage"> The mezzanine layerage. </param>
         public static void Mezzanine(LayerageCollection layerageCollection, Layerage mezzanineLayerage) => LayerageCollection._mezzanine(layerageCollection, mezzanineLayerage, null);
+       
         /// <summary>
         /// Mezzanine layers.
         /// </summary>
@@ -20,7 +24,7 @@ namespace Retouch_Photo2.Layers
         {
             //Layerages
             IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
-            Layerage outermost = LayerageCollection.FindOutermost_FromLayerages(selectedLayerages);
+            Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayerages);
             //if (outermost == null) return; // If count = 0, it will be useless.
             IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(outermost);
             int index = parentsChildren.IndexOf(outermost);
