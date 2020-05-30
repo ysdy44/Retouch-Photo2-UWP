@@ -20,7 +20,7 @@
 
                 <!--Name-->
                 <TextBlock x:Name="NameTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <Button x:Name="NameButton" Height="26" MinWidth="100" HorizontalAlignment="Left"
+                <Button x:Name="NameButton" Height="26" Width="Auto" MinWidth="100" MaxWidth="300" HorizontalAlignment="Stretch"
                         Style="{StaticResource AppNumberButtonStyle}"
                         IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                         Content="{x:Bind SelectionViewModel.LayerName, Mode=OneWay}"/>
@@ -31,7 +31,7 @@
                 <Border Style="{StaticResource AppRoundedBorderStyle}">
                     <elements:SilderPicker x:Name="OpacitySlider"
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
-                           Value="{x:Bind SelectionViewModel.Opacity,Mode=OneWay}"/>
+                           Value="{x:Bind OpacityToValueConverter(SelectionViewModel.Opacity), Mode=OneWay}"/>
                 </Border>
 
 
@@ -49,33 +49,37 @@
                 <ContentControl Height="4"/>
 
 
-                <!--Layers-->
-                <RelativePanel Padding="2,0">
-                    <TextBlock x:Name="LayersTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
-
-                    <StackPanel Orientation="Horizontal" RelativePanel.AlignRightWithPanel="True">
-
-                        <!--Follow-->
-                        <ToggleButton x:Name="FollowToggleControl" Style="{StaticResource AppCircleToggleButtonStyle}"
-                                  IsChecked="{x:Bind SelectionViewModel.IsFollowTransform,Mode=OneWay}" >
-                            <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-                        </ToggleButton>
-
-                        <ContentControl Width="4"/>
-
-                        <!--Visibility-->
-                        <ToggleButton x:Name="VisibilityButton" Style="{StaticResource AppCircleToggleButtonStyle}"
+                <!--Visibility-->
+                <RelativePanel>
+                    <TextBlock x:Name="VisibilityTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+                    <ToggleButton x:Name="VisibilityButton" RelativePanel.AlignRightWithPanel="True"
+                               Style="{StaticResource AppCircleToggleButtonStyle}"
                                IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                                IsChecked="{x:Bind VisibilityToBoolConverter(ViewModel.Visibility),Mode=OneWay}" >
-                            <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
-                        </ToggleButton>
+                        <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
+                    </ToggleButton>
+                </RelativePanel>
+                
 
-                    </StackPanel>
+                <ContentControl Height="6"/>
+                
+                
+                <!--FollowTransform-->
+                <RelativePanel>
+                    <TextBlock x:Name="FollowTransformTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+                    <ToggleButton x:Name="FollowTransformToggleButton" RelativePanel.AlignRightWithPanel="True"
+                                  Style="{StaticResource AppCircleToggleButtonStyle}"
+                                  IsChecked="{x:Bind SelectionViewModel.IsFollowTransform,Mode=OneWay}" >
+                        <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                    </ToggleButton>
                 </RelativePanel>
 
+                
+                <ContentControl Height="6"/>
 
+                
                 <!--Tag Type-->
-                <TextBlock x:Name="TagTypeTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}"/>
+                <TextBlock x:Name="TagTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <blends:TagTypeControl x:Name="TagTypeControl" Type="{x:Bind SelectionViewModel.TagType,Mode=OneWay}" />
 
             </StackPanel>

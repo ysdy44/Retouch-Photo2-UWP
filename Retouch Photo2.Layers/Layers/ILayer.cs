@@ -131,6 +131,21 @@ namespace Retouch_Photo2.Layers
         #region Render
 
 
+
+        /// <summary> Gets or sets ILayer is need to refactoring render. </summary>
+        bool IsRefactoringRender { get; set; }
+
+        /// <summary> Gets or sets ILayer is need to refactoring icon render. </summary>
+        bool IsIconRefactoringRender { get; set; }
+
+        /// <summary>
+        /// Gets a specific actual rended-layer (with icon render).
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="children"> The children layerage. </param>
+        /// <returns> The rendered layer. </returns>
+        ICanvasImage GetActualRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children);
+
         /// <summary>
         /// Gets a specific rended-layer.
         /// </summary>
@@ -138,6 +153,7 @@ namespace Retouch_Photo2.Layers
         /// <param name="children"> The children layerage. </param>
         /// <returns> The rendered layer. </returns>
         ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children);
+
 
         /// <summary>
         /// Draw lines on bound.

@@ -99,7 +99,7 @@ namespace Retouch_Photo2.Layers
                 LayerBase.Instances.Add(clone2);
                 //
 
-                children[i] = clone;
+                children[i].Id = clone.Id;
             }
         }
 

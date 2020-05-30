@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
     d:DesignHeight="40"
     d:DesignWidth="200"
@@ -38,7 +39,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="DepthColumn" Width="0"/>
             <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
@@ -49,10 +50,12 @@
         </Button>
 
         <!--Icon-->
-        <ContentControl x:Name="IconContentControl" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Border x:Name="IconBorder" Grid.Column="2" MinHeight="40" MinWidth="40" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{StaticResource AppForeground}" Background="White">
+            <canvas:CanvasControl x:Name="IconCanvasControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </Border>
 
         <!--Text-->
-        <TextBlock x:Name="TextBlock" Grid.Column="3" Margin="2,0" TextTrimming="WordEllipsis" VerticalAlignment="Center">
+        <TextBlock x:Name="TextBlock" Grid.Column="3" Margin="4,0,0,0" TextTrimming="WordEllipsis" VerticalAlignment="Center">
             <Run x:Name="NameRun" />
             (
             <Run x:Name="TypeRun" />
@@ -68,7 +71,7 @@
             </Button>
             
             <!--Expaned-->
-            <Button x:Name="ExpanedButton" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+            <Button x:Name="ExpanedButton" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
                 <FontIcon x:Name="ExpanedFontIcon" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
             

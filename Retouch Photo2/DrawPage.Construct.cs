@@ -53,8 +53,9 @@ namespace Retouch_Photo2
         {
             this.FileFormatComboBox.FileFormat = CanvasBitmapFileFormat.Jpeg; ;
 
-            this.ExportQualityPicker.Maximum = 1;
             this.ExportQualityPicker.Value = 1;
+            this.ExportQualityPicker.Minimum = 0;
+            this.ExportQualityPicker.Maximum = 1;
 
             this.ExportDialog.CloseButton.Click += (sender, args) => this.ExportDialog.Hide();
 

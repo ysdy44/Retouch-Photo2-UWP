@@ -10,6 +10,7 @@ using Retouch_Photo2.Effects;
 using Retouch_Photo2.Filters;
 using System.Collections.Generic;
 using System.Numerics;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers
@@ -19,8 +20,33 @@ namespace Retouch_Photo2.Layers
     /// </summary>
     public abstract partial class LayerBase
     {
-        
+
+        public bool IsRefactoringRender { get; set; } = true;
+
+        public bool IsIconRefactoringRender { get; set; } = true;
+
+
+        ICanvasImage Render2 = null;
+
         //@Abstract
+        public ICanvasImage GetActualRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
+        {
+            if (this.Render2 == null || this.IsRefactoringRender)
+            {
+                this.IsRefactoringRender = false;
+                this.Render2 = this.GetRender(resourceCreator, children);
+
+
+                if (this.IsIconRefactoringRender)
+                {
+                    this.IsIconRefactoringRender = false;
+                    this.Control.IconRender = this.Render2.GetHeightTransformEffect(resourceCreator, LayerageCollection.ControlsHeight);
+                }
+
+            }
+            return this.Render2;
+        }
+
         public virtual ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
         {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
@@ -40,9 +66,9 @@ namespace Retouch_Photo2.Layers
                     this._render(resourceCreator, drawingSession, children);
                 }
             }
-
             return command;
         }
+
         private void _render(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, IList<Layerage> children)
         {
             //Stroke
@@ -66,7 +92,7 @@ namespace Retouch_Photo2.Layers
                         Layerage child = children[i];
                         ILayer child2 = child.Self;
 
-                        ICanvasImage childImage = child2.GetRender(resourceCreator, child.Children);
+                        ICanvasImage childImage = child2.GetActualRender(resourceCreator, child.Children);
                         drawingSession.DrawImage(childImage);
                     }
                 }
@@ -85,6 +111,7 @@ namespace Retouch_Photo2.Layers
                 }
             }
         }
+        
 
         public virtual void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, IList<Layerage> children, Windows.UI.Color accentColor)
         {
@@ -126,7 +153,7 @@ namespace Retouch_Photo2.Layers
             if (currentLayer.Opacity == 0) return previousImage;
 
             //Layer
-            ICanvasImage currentImage = currentLayer.GetRender(resourceCreator, children);
+            ICanvasImage currentImage = currentLayer.GetActualRender(resourceCreator, children);
 
             //Effect
             currentImage = Effect.Render(currentLayer.Effect, currentImage);
@@ -147,7 +174,7 @@ namespace Retouch_Photo2.Layers
             //Blend
             if (currentLayer.BlendMode is BlendEffectMode blendMode)
             {
-                currentImage = new BlendEffect
+                return new BlendEffect
                 {
                     Background = currentImage,
                     Foreground = previousImage,

@@ -1,9 +1,52 @@
 ﻿using FanKit.Transformers;
+using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
+using Microsoft.Graphics.Canvas.Effects;
+using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Adjustments;
+using Retouch_Photo2.Blends;
+using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Effects;
+using Retouch_Photo2.Filters;
+using System.Collections.Generic;
+using System.Numerics;
+using Windows.Foundation;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers
 {
     public static class LayerExtensions
     {
+
+        public static Transform2DEffect GetHeightTransformEffect(this ICanvasImage canvasImage, ICanvasResourceCreator resourceCreator, float actualHeight)
+        {
+            Rect rect = canvasImage.GetBounds(resourceCreator);
+
+            return new Transform2DEffect
+            {
+                TransformMatrix = rect.GetHeightMatrix(LayerageCollection.ControlsHeight),
+                Source = canvasImage,
+            };
+        }
+
+        public static Matrix3x2 GetHeightMatrix(this Rect rect, float actualHeight)
+        {
+            float width = (float)rect.Width;
+            float height = (float)rect.Height;
+            Vector2 center = new Vector2((float)rect.X + width / 2, (float)rect.Y + height / 2);
+
+            float min = System.Math.Min(width, height);
+            float scale = actualHeight / min;
+
+            float halfHeight = actualHeight / 2;
+
+            return
+                Matrix3x2.CreateTranslation(-center) *
+                Matrix3x2.CreateScale(scale) *
+                Matrix3x2.CreateTranslation(new Vector2(halfHeight));
+        }
+
 
         public static bool IsText(this LayerType  layerType)
         {

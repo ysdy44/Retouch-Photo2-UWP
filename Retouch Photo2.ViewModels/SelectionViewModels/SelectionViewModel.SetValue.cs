@@ -88,13 +88,13 @@ namespace Retouch_Photo2.ViewModels
                     break;
 
                 case ListViewSelectionMode.Single:
-                    this.SetLayerageValueWithChildren(this.SelectionLayerage, action);
+                    this.SetLayerageValueWithChildrenOnlyGroup(this.SelectionLayerage, action);
                     break;
 
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage child in this.SelectionLayerages)
                     {
-                        this.SetLayerageValueWithChildren(child, action);
+                        this.SetLayerageValueWithChildrenOnlyGroup(child, action);
                     }
                     break;
             }

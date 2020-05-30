@@ -365,6 +365,7 @@
     <Compile Include="FileUtils\FileUtil.ZipFolder.cs" />
     <Content Include="FileUtils\Banner.photo2pk.zip" />
     <Content Include="FileUtils\MFY.photo2pk.zip" />
+    <Content Include="FileUtils\App.photo2pk.zip" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
     <PRIResource Include="Strings\zh-CN\%24Loading.resw" />
     <PRIResource Include="Strings\en-US\%24Loading.resw" />

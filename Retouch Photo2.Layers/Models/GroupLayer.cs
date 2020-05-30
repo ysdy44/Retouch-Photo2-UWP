@@ -72,12 +72,13 @@ namespace Retouch_Photo2.Layers.Models
                     if (child2.Opacity == 0) continue;
 
                     //GetRender
-                    ICanvasImage currentImage = child2.GetRender(resourceCreator, child.Children);
+                    ICanvasImage currentImage = child2.GetActualRender(resourceCreator, child.Children);
                     drawingSession.DrawImage(currentImage);
                 }
             }
             return command;
         }
+
         public override void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, IList<Layerage> children, Windows.UI.Color accentColor)
         {
             foreach (Layerage child in children)

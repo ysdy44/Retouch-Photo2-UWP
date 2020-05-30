@@ -60,7 +60,6 @@ namespace Retouch_Photo2.Layers
 
             if (value == BackgroundMode.Selected)
             {
-                this.IconContentControl.Foreground = this.CheckColor;
                 this.TextBlock.Foreground =
                     this.ExpanedFontIcon.Foreground =
                     this.SelectedFontIcon.Foreground =
@@ -69,7 +68,6 @@ namespace Retouch_Photo2.Layers
             }
             else
             {
-                this.IconContentControl.Foreground = this.HighlightColor;
                 this.TextBlock.Foreground =
                 this.ExpanedFontIcon.Foreground =
                 this.SelectedFontIcon.Foreground =
@@ -84,28 +82,16 @@ namespace Retouch_Photo2.Layers
             this.ExpanedFontIcon.Glyph = value ? "\xE011" : "\xE014";
         }
 
-
         public void SetChildrenZero(bool value)
         {
             this.ExpanedButton.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
         }
-
-
-
-
-
+        
         public void SetVisibility(Visibility value)
         {
-            switch (value)
-            {
-                case Visibility.Visible:
-                    this.VisualFontIcon.Opacity = 1.0;
-                    break;
-                case Visibility.Collapsed:
-                    this.VisualFontIcon.Opacity = 0.5;
-                    break;
-            }
+            this.VisualFontIcon.Opacity = value == Visibility.Visible ? 1.0 : 0.5;
         }
+
         public void SetTagType(TagType value)
         {
             this.TagColor.Color = TagTypeHelper.TagConverter(value);

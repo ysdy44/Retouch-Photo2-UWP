@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
+using Windows.UI;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -99,16 +100,28 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
         {
-            if (this.bitmap == null) return null;
+            if (this.bitmap == null)
+            {
+                CanvasCommandList command = new CanvasCommandList(resourceCreator);
+
+                Transformer transformer = base.Transform.GetActualTransformer();
+                CanvasGeometry geometry = transformer.ToRectangle(resourceCreator);
+
+                using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
+                {
+                    drawingSession.FillGeometry(geometry, Colors.White);
+                }
+                return command;
+            }
+
 
             Matrix3x2 matrix2 = Transformer.FindHomography(this.transformerRect, base.Transform.Transformer);
             Transform2DEffect effect = new Transform2DEffect
             {
                 TransformMatrix = matrix2,
                 Source = this.bitmap,
-                //TODO:  Cubic
-                //InterpolationMode= CanvasImageInterpolation.Cubic
             };
+
 
             if (this.Transform.IsCrop)
             {
@@ -124,6 +137,7 @@ namespace Retouch_Photo2.Layers.Models
                 }
                 return command;
             }
+
             else return effect;
         }
 

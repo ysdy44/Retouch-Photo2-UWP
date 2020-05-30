@@ -1,4 +1,6 @@
-﻿using Windows.Foundation;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.UI.Xaml;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -11,7 +13,7 @@ namespace Retouch_Photo2.Layers
         public LayerControl Self => this;
         public string Text { get => this.NameRun.Text; set=>this.NameRun.Text = value; }
         public string Type { get => this.TypeRun.Text; set => this.TypeRun.Text = value; }
-        public object Icon { get => this.IconContentControl.Content; set => this.IconContentControl.Content = value; }
+        public object Icon { get; set; }
 
 
         private int controlHeight = 40;
@@ -21,6 +23,8 @@ namespace Retouch_Photo2.Layers
             set
             {
                 this.Height = value;
+                this.IconBorder.Width = value;
+                this.IconBorder.Height = value;
 
                 //Overlay
                 {
@@ -33,6 +37,19 @@ namespace Retouch_Photo2.Layers
                 this.controlHeight = value;
             }
         }
+
+
+        public ICanvasImage IconRender
+        {
+            get => this.iconRender;
+            set
+            {
+                this.iconRender = value;
+                this.IconCanvasControl.Invalidate();
+            }
+        }
+        private ICanvasImage iconRender = null;
+        
 
         private int depth = 0;
         public int Depth
@@ -62,13 +79,22 @@ namespace Retouch_Photo2.Layers
         }
         private OverlayMode overlayMode;
 
-       
 
         //@Construct
         public LayerControl(ILayer layer)
         {
             this.InitializeComponent();
             this.ControlHeight = LayerageCollection.ControlsHeight;
+
+            //IconCanvasControl
+            this.IconCanvasControl.UseSharedDevice = true;
+            this.IconCanvasControl.CustomDevice = LayerBase.CanvasDevice;
+            this.IconCanvasControl.Draw += (s, arge) =>
+            {
+                if (this.IconRender == null) return;
+
+                arge.DrawingSession.DrawImage(this.IconRender);
+            };
 
             //LayerageCollection
             {

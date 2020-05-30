@@ -353,10 +353,8 @@ namespace Retouch_Photo2.Menus.Models
             LayersPropertyHistory history = new LayersPropertyHistory("Transform");
 
             //Selection
-            this.SelectionViewModel.SetValueWithChildren((layerage) =>
+            this.SelectionViewModel.SetValue((layerage) =>
             {
-                ILayer layer = layerage.Self;
-
                 Transformer transformer = layerage.GetActualTransformer();
                 float value = transformer.GetBorderValue(borderMode);
 
@@ -365,18 +363,24 @@ namespace Retouch_Photo2.Menus.Models
                 Vector2 vector = orientation == Orientation.Horizontal ?
                     new Vector2(distance, 0) :
                     new Vector2(0, distance);
-
-                //History
-                var previous = TransformPosition.GetLayer(layer);
-                history.UndoActions.Push(() =>
+                
+                this.SelectionViewModel.SetLayerageValueWithChildren(layerage, (layerage2) =>
                 {
-                    ILayer layer2 = layerage.Self;
+                    ILayer layer = layerage2.Self;
 
-                    TransformPosition.SetLayer(layer2, previous);
+                    //History
+                    var previous = TransformPosition.GetLayer(layer);
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage2.Self;
+
+                        TransformPosition.SetLayer(layer2, previous);
+                    });
+
+                    layer.CacheTransform();
+                    layer.TransformAdd(vector);
                 });
 
-                layer.CacheTransform();
-                layer.TransformAdd(vector);
             });
             this.Transformer = this.SelectionViewModel.RefactoringTransformer();
 

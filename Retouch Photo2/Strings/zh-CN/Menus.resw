@@ -159,9 +159,6 @@
   <data name="Layer_BlendMode" xml:space="preserve">
     <value>混合模式</value>
   </data>
-  <data name="Layer_Layers" xml:space="preserve">
-    <value>图层</value>
-  </data>
   <data name="Layer_Opacity" xml:space="preserve">
     <value>不透明度</value>
   </data>
@@ -212,5 +209,11 @@
   </data>
   <data name="Transformer_Y" xml:space="preserve">
     <value>Y-轴</value>
+  </data>
+  <data name="Layer_FollowTransform" xml:space="preserve">
+    <value>样式跟随变换</value>
+  </data>
+  <data name="Layer_Visibility" xml:space="preserve">
+    <value>可视</value>
   </data>
 </root>

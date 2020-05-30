@@ -156,8 +156,8 @@
   <data name="Layer_BlendMode" xml:space="preserve">
     <value>Blend Mode</value>
   </data>
-  <data name="Layer_Layers" xml:space="preserve">
-    <value>Layers</value>
+  <data name="Layer_Visibility" xml:space="preserve">
+    <value>Visibility</value>
   </data>
   <data name="Layer_Name" xml:space="preserve">
     <value>Name</value>
@@ -212,5 +212,8 @@
   </data>
   <data name="Transformer_Anchor" xml:space="preserve">
     <value>Anchor</value>
+  </data>
+  <data name="Layer_FollowTransform" xml:space="preserve">
+    <value>Style Follow Transform</value>
   </data>
 </root>

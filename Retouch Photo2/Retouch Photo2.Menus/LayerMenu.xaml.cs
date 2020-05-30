@@ -29,6 +29,7 @@ namespace Retouch_Photo2.Menus.Models
 
         //@Converter
         private bool VisibilityToBoolConverter(Visibility visibility) => visibility == Visibility.Visible;
+        private float OpacityToValueConverter(float opacity) => opacity * 100.0f;
 
 
         //@Construct
@@ -42,9 +43,8 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructOpacity();
             this.ConstructBlendMode();
             this.ConstructVisibility();
+            this.ConstructFollowTransform();
             this.ConstructTagType();
-
-            this.ConstructLayer();
         }
 
     }
@@ -83,7 +83,9 @@ namespace Retouch_Photo2.Menus.Models
 
             this.BlendModeTextBlock.Text = resource.GetString("/Menus/Layer_BlendMode");
 
-            this.LayersTextBlock.Text = resource.GetString("/Menus/Layer_Layers");
+            this.VisibilityTextBlock.Text = resource.GetString("/Menus/Layer_Visibility");
+
+            this.FollowTransformTextBlock.Text = resource.GetString("/Menus/Layer_FollowTransform");
 
             this.TagTypeTextBlock.Text = resource.GetString("/Menus/Layer_TagType");
         }
@@ -114,8 +116,9 @@ namespace Retouch_Photo2.Menus.Models
         //Opacity
         private void ConstructOpacity()
         {
+            this.OpacitySlider.Value = 100;
             this.OpacitySlider.Minimum = 0;
-            this.OpacitySlider.Maximum = 1;
+            this.OpacitySlider.Maximum = 100;
             this.OpacitySlider.ValueChangeStarted += (s, value) =>
             {
                 //Selection
@@ -129,7 +132,7 @@ namespace Retouch_Photo2.Menus.Models
             };
             this.OpacitySlider.ValueChangeDelta += (s, value) =>
             {
-                float opacity = (float)value;
+                float opacity = (float)value / 100.0f;
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -142,7 +145,7 @@ namespace Retouch_Photo2.Menus.Models
             };
             this.OpacitySlider.ValueChangeCompleted += (s, value) =>
             {
-                float opacity = (float)value;
+                float opacity = (float)value / 100.0f;
 
                 //History
                 LayersPropertyHistory history = new LayersPropertyHistory("Set opacity");
@@ -173,6 +176,7 @@ namespace Retouch_Photo2.Menus.Models
 
         }
         
+
         //Blend Mode
         private void ConstructBlendMode()
         {
@@ -213,6 +217,7 @@ namespace Retouch_Photo2.Menus.Models
             };
         }
 
+
         //Visibility
         private void ConstructVisibility()
         {
@@ -248,6 +253,43 @@ namespace Retouch_Photo2.Menus.Models
             };
         }
 
+
+        //FollowTransform
+        private void ConstructFollowTransform()
+        {
+            this.FollowTransformToggleButton.Click += (s, e) =>
+            {
+                bool value = !this.SelectionViewModel.IsFollowTransform;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set style follow transform");
+
+                //Selection
+                this.SelectionViewModel.IsFollowTransform = value;
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    //History
+                    var previous = layer.Style.IsFollowTransform;
+                    history.UndoActions.Push(() =>
+                    {
+                        ILayer layer2 = layerage.Self;
+
+                        layer2.Style.IsFollowTransform = previous;
+                    });
+
+                    layer.Style.IsFollowTransform = value;
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+
+
         //Tag Type
         private void ConstructTagType()
         {
@@ -279,32 +321,5 @@ namespace Retouch_Photo2.Menus.Models
             };
         }
 
-    }
-
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "LayerMenu" />. 
-    /// </summary>
-    public sealed partial class LayerMenu : UserControl, IMenu
-    {
-        private void ConstructLayer()
-        {
-            //Follow
-            this.FollowToggleControl.Tapped += (s, e) =>
-            {
-                bool value = (this.SelectionViewModel.IsFollowTransform) ? false : true;
-
-                //Selection
-                this.SelectionViewModel.IsFollowTransform = value;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    layer.Style.IsFollowTransform = value;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-        }
-        
     }
 }

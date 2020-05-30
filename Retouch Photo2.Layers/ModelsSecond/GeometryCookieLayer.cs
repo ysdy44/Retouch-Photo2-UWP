@@ -44,7 +44,11 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryCookieLayer cookieLayer = new GeometryCookieLayer();
+            GeometryCookieLayer cookieLayer = new GeometryCookieLayer
+            {
+                InnerRadius = this.InnerRadius,
+                SweepAngle = this.SweepAngle,
+            };
 
             LayerBase.CopyWith(resourceCreator, cookieLayer, this);
             return cookieLayer;

@@ -213,6 +213,8 @@ namespace Retouch_Photo2.Menus.Models
             //History
             LayersPropertyHistory history = null;
 
+            this.OffsetPicker.Value = 0;
+            this.OffsetPicker.Minimum = 0;
             this.OffsetPicker.Maximum = 10;
             this.OffsetPicker.ValueChangeStarted += (s, value) =>
             {

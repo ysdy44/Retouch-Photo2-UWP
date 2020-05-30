@@ -15,10 +15,12 @@ namespace Retouch_Photo2
         public static async Task ConstructSampleFile()
         {
             //Read the file from the package.
+            StorageFile file0 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///FileUtils/App.photo2pk.zip"));
             StorageFile file1 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///FileUtils/Banner.photo2pk.zip"));
             StorageFile file2 = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///FileUtils/MFY.photo2pk.zip"));
 
             //Unzip to LocalFolder
+            await FileUtil.ExtractToDirectory(file0);
             await FileUtil.ExtractToDirectory(file1);
             await FileUtil.ExtractToDirectory(file2);
         }

@@ -22,6 +22,8 @@ namespace Retouch_Photo2.Layers
     /// </summary>
     public abstract partial class LayerBase
     {
+        //@Static
+        public static CanvasDevice CanvasDevice = new CanvasDevice();
 
         //@Abstract
         public abstract LayerType Type { get; }
@@ -62,7 +64,7 @@ namespace Retouch_Photo2.Layers
             }
         }
 
-        public bool IsRefactoringTransformer { get; set; }
+        public bool IsRefactoringTransformer { get; set; } = true;
         public virtual Transformer GetActualTransformer(Layerage layerage) => this.Transform.GetActualTransformer();
 
         public Retouch_Photo2.Styles.Style Style { get; set; } = new Retouch_Photo2.Styles.Style();

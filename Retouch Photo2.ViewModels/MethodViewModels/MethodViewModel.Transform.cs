@@ -38,6 +38,9 @@ namespace Retouch_Photo2.ViewModels
                 layerage.RefactoringParentsTransformer();
                 layer.CacheTransform();
                 layer.TransformMultiplies(matrix);
+
+                layer.IsRefactoringRender = true;
+                layer.IsIconRefactoringRender = true;
             });
 
             //History
@@ -71,6 +74,8 @@ namespace Retouch_Photo2.ViewModels
                 ILayer layer = layerage.Self;
 
                 layer.TransformMultiplies(matrix);
+
+                layer.IsRefactoringRender = true;
             });
 
             this.Invalidate();//Invalidate
@@ -99,6 +104,9 @@ namespace Retouch_Photo2.ViewModels
 
                 layerage.RefactoringParentsTransformer();
                 layer.TransformMultiplies(matrix);
+
+                layer.IsRefactoringRender = true;
+                layer.IsIconRefactoringRender = true;
             });
 
             //History
@@ -133,6 +141,9 @@ namespace Retouch_Photo2.ViewModels
                 layerage.RefactoringParentsTransformer();
                 layer.CacheTransform();
                 layer.TransformAdd(vector);
+
+                layer.IsRefactoringRender = true;
+                layer.IsIconRefactoringRender = true;
             });
 
             //History
@@ -167,6 +178,8 @@ namespace Retouch_Photo2.ViewModels
                 ILayer layer = layerage.Self;
 
                 layer.TransformAdd(vector);
+
+                layer.IsRefactoringRender = true;
             });
 
             this.Invalidate();//Invalidate
@@ -195,6 +208,9 @@ namespace Retouch_Photo2.ViewModels
 
                 layerage.RefactoringParentsTransformer();
                 layer.TransformAdd(vector);
+
+                layer.IsRefactoringRender = true;
+                layer.IsIconRefactoringRender = true;
             });
 
             //History

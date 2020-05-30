@@ -39,7 +39,10 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryPieLayer pieLayer = new GeometryPieLayer();
+            GeometryPieLayer pieLayer = new GeometryPieLayer
+            {
+                SweepAngle = this.SweepAngle,
+            };
 
             LayerBase.CopyWith(resourceCreator, pieLayer, this);
             return pieLayer;

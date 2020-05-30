@@ -39,7 +39,10 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone(ICanvasResourceCreator resourceCreator)
         {
-            GeometryDountLayer dountLayer = new GeometryDountLayer();
+            GeometryDountLayer dountLayer = new GeometryDountLayer
+            {
+                HoleRadius = this.HoleRadius,
+            };
 
             LayerBase.CopyWith(resourceCreator, dountLayer, this);
             return dountLayer;
