@@ -53,17 +53,21 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodSelectedNot(Layerage selectedLayerage)
         {
-            ILayer selectedLayer = selectedLayerage.Self; 
+            ILayer selectedLayer = selectedLayerage.Self;
 
-             //History 
-             LayersPropertyHistory history = new LayersPropertyHistory("Set is selected");
+            //History 
+            LayersPropertyHistory history = new LayersPropertyHistory("Set is selected");
+
             var previous = selectedLayer.IsSelected;
             history.UndoActions.Push(() =>
             {
                 selectedLayer.IsSelected = previous;
             });
 
-            selectedLayer.IsSelected = selectedLayer.IsSelected;
+            selectedLayer.IsSelected = !selectedLayer.IsSelected;
+
+            //History 
+            this.HistoryPush(history);
 
             this.SetMode(this.LayerageCollection);//Selection
             //LayerageCollection.ArrangeLayersBackgroundItemClick(selectedLayerage);

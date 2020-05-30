@@ -183,4 +183,10 @@
   <data name="MenuTypeTip" xml:space="preserve">
     <value>Uncheck to hide menu buttons</value>
   </data>
+  <data name="LayersHeight" xml:space="preserve">
+    <value>Layers Height</value>
+  </data>
+  <data name="LayersHeightTip" xml:space="preserve">
+    <value>Click to change the layer control height</value>
+  </data>
 </root>

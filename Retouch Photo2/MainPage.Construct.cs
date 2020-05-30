@@ -55,6 +55,7 @@ namespace Retouch_Photo2
             this.RenameRunTitle.Text = resource.GetString("/$MainPage/RenameRun_Title");
             this.RenameRunContent.Text = resource.GetString("/$MainPage/RenameRun_Content");
             this.RenameCloseButton.Content = resource.GetString("/$MainPage/Rename_Close");
+
             this.RenameDialog.Title = resource.GetString("/$MainPage/RenameDialog_Title");
             this.RenameDialog.CloseButton.Content = resource.GetString("/$MainPage/RenameDialog_Close");
             this.RenameDialog.PrimaryButton.Content = resource.GetString("/$MainPage/RenameDialog_Primary");
@@ -91,6 +92,9 @@ namespace Retouch_Photo2
             //DeviceLayout
             this.SettingViewModel.ConstructDeviceLayout();
 
+            //DeviceLayout
+            this.SettingViewModel.ConstructLayersHeight();
+            
             //MenuType
             this.SettingViewModel.ConstructMenuType(this.TipViewModel.Menus);
 

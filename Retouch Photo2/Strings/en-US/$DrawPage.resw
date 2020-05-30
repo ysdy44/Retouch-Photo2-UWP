@@ -204,4 +204,7 @@
   <data name="SetupDialog_Layers" xml:space="preserve">
     <value>All layers</value>
   </data>
+  <data name="RenameDialog_PlaceholderText" xml:space="preserve">
+    <value>Enter a name here.</value>
+  </data>
 </root>

@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.Elements.SettingPages;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -76,6 +77,8 @@ namespace Retouch_Photo2
 
             this.ConstructDeviceLayout();
 
+            this.ConstructLayersHeight();
+
             this.ConstructMenuType();
 
             this.LocalButton.Click += async (s, e) =>
@@ -97,6 +100,7 @@ namespace Retouch_Photo2
             await XML.SaveSettingFile(this.SettingViewModel.Setting);
         }
         
+
         private async Task SetTheme(ElementTheme theme2)
         {
             //Setting
@@ -104,7 +108,7 @@ namespace Retouch_Photo2
             this.SettingViewModel.ConstructTheme();//Construct
             await this.Write();//Write
         }
-               
+                       
         private async Task SetType(DeviceLayoutType type2, bool isAdaptive2)
         {
             this.IsAdaptive = isAdaptive2;
@@ -113,6 +117,14 @@ namespace Retouch_Photo2
             //Setting
             this.SettingViewModel.Setting.DeviceLayout.IsAdaptive = isAdaptive2;
             this.SettingViewModel.Setting.DeviceLayout.FallBackType = type2;
+            await this.Write();
+        }
+
+        private async Task SetHeight(int height)
+        {
+            //Setting
+            this.SettingViewModel.Setting.LayersHeight = height;
+            LayerageCollection.SetControlHeight(height);
             await this.Write();
         }
 

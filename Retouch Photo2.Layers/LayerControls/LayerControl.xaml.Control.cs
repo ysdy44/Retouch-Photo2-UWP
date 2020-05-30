@@ -52,10 +52,10 @@ namespace Retouch_Photo2.Layers
         {
             switch (value)
             {
-                case BackgroundMode.UnSelected: this.RootGrid.Background = this.UnAccentColor; break;
-                case BackgroundMode.Selected: this.RootGrid.Background = this.AccentColor; break;
-                case BackgroundMode.ParentsSelected: this.RootGrid.Background = this.ThreeStateColor; break;
-                case BackgroundMode.ChildSelected: this.RootGrid.Background = this.FourStateColor; break;
+                case BackgroundMode.UnSelected: this.RootGrid.Background = this.RootGrid.BorderBrush = this.UnAccentColor; break;
+                case BackgroundMode.Selected: this.RootGrid.Background = this.RootGrid.BorderBrush = this.AccentColor; break;
+                case BackgroundMode.ParentsSelected: this.RootGrid.Background = this.RootGrid.BorderBrush = this.ThreeStateColor; break;
+                case BackgroundMode.ChildSelected: this.RootGrid.Background = this.RootGrid.BorderBrush = this.FourStateColor; break;
             }
 
             if (value == BackgroundMode.Selected)

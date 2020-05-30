@@ -16,6 +16,9 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> <see cref = "Setting" />'s device layout. </summary>
         public DeviceLayout DeviceLayout = DeviceLayout.Default;
 
+        /// <summary> <see cref = "Setting" />'s layer-control height. </summary>
+        public int LayersHeight = 40;
+
         /// <summary> <see cref = "Setting" />'s menu-types. </summary>
         public IList<MenuType> MenuTypes = new List<MenuType>
         {

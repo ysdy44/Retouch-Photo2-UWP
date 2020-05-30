@@ -83,6 +83,17 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Initializes a layer-control.
         /// </summary>      
+        /// <param name="controlHeight"> The control-height. </param>
+        /// <param name="type"> The type. </param>
+        public LayerControl(int controlHeight, string type)
+        {
+            this.InitializeComponent();
+            this.ControlHeight = controlHeight;
+            this.Type = type;
+        }
+        /// <summary>
+        /// Initializes a layer-control.
+        /// </summary>      
         /// <param name="customDevice"> The custom-device. </param>
         /// <param name="layer"> The layer. </param>
         public LayerControl(CanvasDevice customDevice, ILayer layer)

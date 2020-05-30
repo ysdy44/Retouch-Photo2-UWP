@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +27,12 @@ namespace Retouch_Photo2.ViewModels
                     frameworkElement.RequestedTheme = this.Setting.Theme;
                 }
             }
+        }
+
+        //@Construct
+        public void ConstructLayersHeight()
+        {
+            LayerageCollection.SetControlHeight(this.Setting.LayersHeight);
         }
 
         //@Construct

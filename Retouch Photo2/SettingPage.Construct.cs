@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,13 +35,16 @@ namespace Retouch_Photo2
             this.AdaptiveTextBlock.Text = resource.GetString("/$SettingPage/DeviceLayout_AdaptiveWidth");
             this.AdaptiveResetButton.Content = resource.GetString("/$SettingPage/DeviceLayout_ResetAdaptiveWidth");
 
+            this.LayersHeightTextBlock.Text = resource.GetString("/$SettingPage/LayersHeight");
+            this.LayersHeightTipTextBlock.Text = resource.GetString("/$SettingPage/LayersHeightTip");
+
             this.KeyTextBlock.Text = resource.GetString("/$SettingPage/Key");
             this.IsCenterToggleButton.Content = resource.GetString("/$SettingPage/Key_IsCenter");
             this.IsRatioToggleButton.Content = resource.GetString("/$SettingPage/Key_IsRatio");
             this.IsSquareToggleButton.Content = resource.GetString("/$SettingPage/Key_IsSquare");
             this.IsStepFrequencyToggleButton.Content = resource.GetString("/$SettingPage/Key_IsStepFrequency");
             this.FullScreenToggleButton.Content = resource.GetString("/$SettingPage/Key_FullScreen");
-
+            
             this.MenuTypeTextBlock.Text = resource.GetString("/$SettingPage/MenuType");
             this.MenuTypeTipTextBlock.Text = resource.GetString("/$SettingPage/MenuTypeTip");
 
@@ -131,6 +135,29 @@ namespace Retouch_Photo2
                 this.SettingViewModel.Setting.DeviceLayout.PadMaxWidth = pad2;
                 await this.Write();//Write
             };
+        }
+
+
+
+        //LayersHeight        
+        private void ConstructLayersHeight()
+        {
+            int height = this.SettingViewModel.Setting.LayersHeight;
+
+            this.ConstructLayersHeightButton(this.Height30Button, 30, height);
+            this.ConstructLayersHeightButton(this.Height40Button, 40, height);
+            this.ConstructLayersHeightButton(this.Height50Button, 50, height);
+            this.ConstructLayersHeightButton(this.Height60Button, 60, height);
+            this.ConstructLayersHeightButton(this.Height70Button, 70, height);
+            this.ConstructLayersHeightButton(this.Height80Button, 80, height);
+        }
+
+        private void ConstructLayersHeightButton(RadioButton radioButton, int value, int groupValue)
+        {
+            string type = this.LayersHeightTextBlock.Text;
+            radioButton.IsChecked = groupValue == value;
+            radioButton.Content = new LayerControl(value, type);
+            radioButton.Click += async (s, e) => await this.SetHeight(value);
         }
 
 

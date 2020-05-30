@@ -34,7 +34,19 @@ namespace Retouch_Photo2.Layers
             if (this.Render2 == null || this.IsRefactoringRender)
             {
                 this.IsRefactoringRender = false;
-                this.Render2 = this.GetRender(resourceCreator, children);
+
+                {
+                    //Layer
+                    ICanvasImage currentImage = this.GetRender(resourceCreator, children);
+
+                    //Effect
+                    currentImage = Effect.Render(this.Effect, currentImage);
+
+                    //Adjustment
+                    currentImage = Filter.Render(this.Filter, currentImage);
+
+                    this.Render2 = currentImage;
+                }
 
 
                 if (this.IsRefactoringIconRender)
@@ -156,10 +168,10 @@ namespace Retouch_Photo2.Layers
             ICanvasImage currentImage = currentLayer.GetActualRender(resourceCreator, children);
 
             //Effect
-            currentImage = Effect.Render(currentLayer.Effect, currentImage);
+            //currentImage = Effect.Render(currentLayer.Effect, currentImage);
 
             //Adjustment
-            currentImage = Filter.Render(currentLayer.Filter, currentImage);
+            //currentImage = Filter.Render(currentLayer.Filter, currentImage);
 
             //Opacity
             if (currentLayer.Opacity < 1.0)

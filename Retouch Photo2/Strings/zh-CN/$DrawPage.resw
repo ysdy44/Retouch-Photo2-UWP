@@ -207,4 +207,7 @@
   <data name="SetupDialog_Layers" xml:space="preserve">
     <value>所有图层</value>
   </data>
+  <data name="RenameDialog_PlaceholderText" xml:space="preserve">
+    <value>在此输入名字</value>
+  </data>
 </root>

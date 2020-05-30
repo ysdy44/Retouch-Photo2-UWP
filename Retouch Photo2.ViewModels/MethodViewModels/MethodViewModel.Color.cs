@@ -59,7 +59,7 @@ namespace Retouch_Photo2.ViewModels
             });
 
             //History
-            this.Historys.Add(history);
+            this.HistoryPush(history);
 
             this.Invalidate();//Invalidate
         }
@@ -167,7 +167,7 @@ namespace Retouch_Photo2.ViewModels
             });
 
             //History
-            this.Historys.Add(history);
+            this.HistoryPush(history);
 
             this.Invalidate();//Invalidate
         }

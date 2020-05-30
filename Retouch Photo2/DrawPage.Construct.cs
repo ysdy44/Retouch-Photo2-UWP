@@ -40,9 +40,10 @@ namespace Retouch_Photo2
             this.ExportSizePicker.WidthText = resource.GetString("/$DrawPage/ExportSizePicker_Width");
             this.ExportSizePicker.HeightText = resource.GetString("/$DrawPage/ExportSizePicker_Height");
             this.ExportQualityTextBlock.Text = resource.GetString("/$DrawPage/ExportDialog_Quality");
-            this.ExportFileFormatTextBlock.Text = resource.GetString("/$DrawPage/ExportDialog_FileFormat");
-            
+            this.ExportFileFormatTextBlock.Text = resource.GetString("/$DrawPage/ExportDialog_FileFormat"); 
+
             this.RenameDialog.Title = resource.GetString("/$DrawPage/RenameDialog_Title");
+            this.RenameTextBox.PlaceholderText = resource.GetString("/$DrawPage/RenameDialog_PlaceholderText");
             this.RenameDialog.CloseButton.Content = resource.GetString("/$DrawPage/RenameDialog_Close");
             this.RenameDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/RenameDialog_Primary");
         }
