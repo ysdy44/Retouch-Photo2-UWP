@@ -67,11 +67,15 @@ namespace Retouch_Photo2.ViewModels
                     var previous = TransformPosition.GetLayer(layer);
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage2.Self;
-
-                        TransformPosition.SetLayer(layer2, previous);
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        TransformPosition.SetLayer(layer, previous);
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.CacheTransform();
                     layer.TransformMultiplies(matrix);
                 });
@@ -132,11 +136,15 @@ namespace Retouch_Photo2.ViewModels
                     var previous = TransformPosition.GetLayer(layer);
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage2.Self;
-
-                        TransformPosition.SetLayer(layer2, previous);
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        TransformPosition.SetLayer(layer, previous);
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.CacheTransform();
                     layer.TransformAdd(distance);
                 });

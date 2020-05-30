@@ -65,9 +65,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryEllipseIcon();
         readonly ToolButton _button = new ToolButton(new GeometryEllipseIcon());
 
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new GeometryEllipseLayer
+            return new GeometryEllipseLayer(customDevice)
             {
                 IsSelected = true,
                 Transform = new Transform(transformer),

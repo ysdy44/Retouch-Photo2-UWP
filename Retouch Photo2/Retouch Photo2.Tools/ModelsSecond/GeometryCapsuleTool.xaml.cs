@@ -68,9 +68,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryCapsuleIcon();
         readonly Button _button = new Button { Tag = new GeometryCapsuleIcon()};
 
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new GeometryCapsuleLayer
+            return new GeometryCapsuleLayer(customDevice)
             {
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.GeometryStyle

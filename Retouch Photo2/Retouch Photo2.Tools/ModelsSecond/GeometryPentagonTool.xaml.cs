@@ -97,9 +97,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryPentagonIcon();
         readonly Button _button = new Button { Tag = new GeometryPentagonIcon()};
         
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new GeometryPentagonLayer
+            return new GeometryPentagonLayer(customDevice)
             {
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.GeometryStyle
@@ -155,11 +155,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryPentagonLayer.Points;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryPentagonLayer layer2 = geometryPentagonLayer;
-
-                            layer2.Points = previous;
+                            //Refactoring
+                            geometryPentagonLayer.IsRefactoringRender = true;
+                            geometryPentagonLayer.IsRefactoringIconRender = true;
+                            geometryPentagonLayer.Points = previous;
                         });
 
+                        //Refactoring
+                        geometryPentagonLayer.IsRefactoringRender = true;
+                        geometryPentagonLayer.IsRefactoringIconRender = true;
                         geometryPentagonLayer.Points = points;
                     }
                 });
@@ -172,16 +176,12 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ConstructPoints2()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Value
-            this.PointsTouchbarSlider.Minimum = 3d;
-            this.PointsTouchbarSlider.Maximum = 36d;
+            this.PointsTouchbarSlider.Value = 3;
+            this.PointsTouchbarSlider.Minimum = 3;
+            this.PointsTouchbarSlider.Maximum = 36;
             this.PointsTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                history = new LayersPropertyHistory("Set pentagon layer points");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -211,6 +211,9 @@ namespace Retouch_Photo2.Tools.Models
                     if (layer.Type == LayerType.GeometryPentagon)
                     {
                         GeometryPentagonLayer geometryPentagonLayer = (GeometryPentagonLayer)layer;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
                         geometryPentagonLayer.Points = points;
                     }
                 });
@@ -222,6 +225,9 @@ namespace Retouch_Photo2.Tools.Models
                 int points = (int)value;
                 if (points < 3) points = 3;
                 if (points > 36) points = 36;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set pentagon layer points");
 
                 //Selection
                 this.SelectionViewModel.GeometryPentagonPoints = points;
@@ -236,11 +242,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryPentagonLayer.StartingPoints;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryPentagonLayer layer2 = geometryPentagonLayer;
-
-                            layer2.Points = previous;
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            geometryPentagonLayer.Points = previous;
                         });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         geometryPentagonLayer.Points = points;
                     }
                 });

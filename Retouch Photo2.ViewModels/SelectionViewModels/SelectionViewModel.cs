@@ -14,7 +14,7 @@ namespace Retouch_Photo2.ViewModels
     {
 
         /// <summary>
-        /// Gets selection-mode by count of checked layers. 
+        /// Gets selection-mode by count of selected layers. 
         /// 0>None.
         /// 1>Single.
         /// 2>Multiple.

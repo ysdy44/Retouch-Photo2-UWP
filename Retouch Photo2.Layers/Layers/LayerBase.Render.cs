@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers
 
         public bool IsRefactoringRender { get; set; } = true;
 
-        public bool IsIconRefactoringRender { get; set; } = true;
+        public bool IsRefactoringIconRender { get; set; } = true;
 
 
         ICanvasImage Render2 = null;
@@ -37,9 +37,9 @@ namespace Retouch_Photo2.Layers
                 this.Render2 = this.GetRender(resourceCreator, children);
 
 
-                if (this.IsIconRefactoringRender)
+                if (this.IsRefactoringIconRender)
                 {
-                    this.IsIconRefactoringRender = false;
+                    this.IsRefactoringIconRender = false;
                     this.Control.IconRender = this.Render2.GetHeightTransformEffect(resourceCreator, LayerageCollection.ControlsHeight);
                 }
 

@@ -258,7 +258,10 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
 
-            this.CurveLayer.IsRefactoringTransformer = true;//RefactoringTransformer
+            //Refactoring
+            this.CurveLayer.IsRefactoringTransformer = true;
+            this.CurveLayer.IsRefactoringRender = true;
+            this.CurveLayer.IsRefactoringIconRender = true;
             this.Mode = NodeCollectionMode.None;
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate

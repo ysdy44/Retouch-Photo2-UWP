@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
@@ -28,29 +27,27 @@ namespace Retouch_Photo2.Layers.Models
         public void CacheSweepAngle() => this.StartingSweepAngle = this.SweepAngle;
 
         //@Construct
-        public GeometryCookieLayer(XElement element) : this() => this.Load(element);
         /// <summary>
         /// Initializes a pie-layer.
         /// </summary>
-        public GeometryCookieLayer()
+        public GeometryCookieLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new GeometryCookieIcon(),
                 Type = this.ConstructStrings(),
             };
         }
 
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(CanvasDevice customDevice)
         {
-            GeometryCookieLayer cookieLayer = new GeometryCookieLayer
+            GeometryCookieLayer cookieLayer = new GeometryCookieLayer(customDevice)
             {
                 InnerRadius = this.InnerRadius,
                 SweepAngle = this.SweepAngle,
             };
 
-            LayerBase.CopyWith(resourceCreator, cookieLayer, this);
+            LayerBase.CopyWith(customDevice, cookieLayer, this);
             return cookieLayer;
         }
 

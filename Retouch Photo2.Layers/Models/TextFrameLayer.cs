@@ -1,5 +1,4 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Layers.Icons;
 using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
@@ -18,23 +17,23 @@ namespace Retouch_Photo2.Layers.Models
         //@Construct
         /// <summary>
         /// Initializes a TextFrame-layer.
-        /// </summary>
-        public TextFrameLayer()
+        /// </summary>      
+        /// <param name="customDevice"> The custom-device. </param>
+        public TextFrameLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new TextFrameIcon(),
                 Type = this.ConstructStrings(),
             };
         }
 
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(CanvasDevice customDevice)
         {   
-            TextFrameLayer textFrameLayer = new TextFrameLayer();
+            TextFrameLayer textFrameLayer = new TextFrameLayer(customDevice);
 
             TextLayer.FontCopyWith(textFrameLayer, this);
-            LayerBase.CopyWith(resourceCreator, textFrameLayer, this);
+            LayerBase.CopyWith(customDevice, textFrameLayer, this);
             return textFrameLayer;
         }
 

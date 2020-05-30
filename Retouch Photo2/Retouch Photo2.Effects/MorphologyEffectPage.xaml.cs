@@ -67,16 +67,22 @@ namespace Retouch_Photo2.Effects.Models
                 var previous = layer.Effect.Morphology_Size;
                 history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.Effect.Morphology_Size = previous;
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layer.Effect.Morphology_Size = previous;
                 });
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layer.Effect.Morphology_Size = 1;
             });
 
             //History
             this.ViewModel.HistoryPush(history);
+
+            this.ViewModel.Invalidate();//Invalidate
         }
         public void FollowButton(Effect effect)
         {
@@ -115,11 +121,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.Morphology_IsOn;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.Morphology_IsOn = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.Morphology_IsOn = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.Morphology_IsOn = isOn;
                 });
 
@@ -133,17 +143,12 @@ namespace Retouch_Photo2.Effects.Models
 
         private void ConstructMorphology_Size()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Radius
             this.SizeSlider.Value = 1;
             this.SizeSlider.Minimum = -100;
             this.SizeSlider.Maximum = 100;
             this.SizeSlider.ValueChangeStarted += (s, value) =>
-            {
-                history = new LayersPropertyHistory("Set effect morphology");
-
+            {                
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -163,6 +168,8 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.Morphology_Size = size;
                 });
 
@@ -171,6 +178,9 @@ namespace Retouch_Photo2.Effects.Models
             this.SizeSlider.ValueChangeCompleted += (s, value) =>
             {
                 int size = (int)value;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect morphology");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -181,11 +191,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.StartingMorphology_Size;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.Morphology_Size = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.Morphology_Size = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.Morphology_Size = size;
                 });
 

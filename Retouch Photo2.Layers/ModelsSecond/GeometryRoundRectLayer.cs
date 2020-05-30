@@ -1,9 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
@@ -28,24 +26,24 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Initializes a roundRect-layer.
         /// </summary>
-        public GeometryRoundRectLayer()
+        /// <param name="customDevice"> The custom-device. </param>
+        public GeometryRoundRectLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new GeometryRoundRectIcon(),
                 Type = this.ConstructStrings(),
             };
         }
         
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(CanvasDevice customDevice)
         {
-            GeometryRoundRectLayer roundRectLayer = new GeometryRoundRectLayer
+            GeometryRoundRectLayer roundRectLayer = new GeometryRoundRectLayer(customDevice)
             {
                 Corner=this.Corner
             };
 
-            LayerBase.CopyWith(resourceCreator, roundRectLayer, this);
+            LayerBase.CopyWith(customDevice, roundRectLayer, this);
             return roundRectLayer;
         }
         

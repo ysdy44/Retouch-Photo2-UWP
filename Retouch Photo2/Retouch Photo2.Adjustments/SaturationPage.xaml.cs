@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -14,6 +15,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Generic
         public SaturationAdjustment Adjustment { get; set; }
@@ -55,27 +57,35 @@ namespace Retouch_Photo2.Adjustments.Pages
         public void Reset()
         {
             this.SaturationSlider.Value = 100;
-
-
-            if (this.Adjustment is SaturationAdjustment adjustment)
+            
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set saturation adjustment");
-                
-                var previous = adjustment.Saturation;
-                history.UndoActions.Push(() =>
+                ILayer layer = layerage.Self;
+
+                if (this.Adjustment is SaturationAdjustment adjustment)
                 {
-                    SaturationAdjustment adjustment2 = adjustment;
+                    //History
+                    LayersPropertyHistory history = new LayersPropertyHistory("Set saturation adjustment");
 
-                    adjustment2.Saturation = previous;
-                });
+                    var previous = adjustment.Saturation;
+                    history.UndoActions.Push(() =>
+                    {   
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.Saturation = previous;
+                    });
 
-                this.ViewModel.HistoryPush(history);
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    adjustment.Saturation = 1.0f;
 
+                    //History
+                    this.ViewModel.HistoryPush(history);
 
-                adjustment.Saturation = 1.0f;
-
-                this.ViewModel.Invalidate();
+                    this.ViewModel.Invalidate();//Invalidate
+                }
             }
         }
         public void Follow(SaturationAdjustment adjustment)
@@ -98,51 +108,69 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.SaturationSlider.SliderBrush = this.SaturationBrush;
 
-
-            //History
-            LayersPropertyHistory history = null;
-
-
             this.SaturationSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is SaturationAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set saturation adjustment saturation");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheSaturation();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is SaturationAdjustment adjustment)
+                    {
+                        adjustment.CacheSaturation();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.SaturationSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is SaturationAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float saturation = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
+                    
+                    if (this.Adjustment is SaturationAdjustment adjustment)
+                    {
+                        float saturation = (float)value / 100.0f;
 
-                    adjustment.Saturation = saturation;
-                    this.ViewModel.Invalidate();
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.Saturation = saturation;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.SaturationSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is SaturationAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float saturation = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingSaturation;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is SaturationAdjustment adjustment)
                     {
-                        SaturationAdjustment adjustment2 = adjustment;
+                        float saturation = (float)value / 100.0f;
 
-                        adjustment2.Saturation = previous;
-                    });
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set saturation adjustment saturation");
 
-                    this.ViewModel.HistoryPush(history);
+                        var previous = adjustment.StartingSaturation;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.Saturation = previous;
+                        });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.Saturation = saturation;
 
-                    adjustment.Saturation = saturation;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        //History
+                        this.ViewModel.HistoryPush(history);
+
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }

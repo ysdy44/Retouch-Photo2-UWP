@@ -43,12 +43,13 @@ namespace Retouch_Photo2.Tools
         /// <summary>
         /// Function of how to crate a layer.
         /// </summary>
+        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="transformer"> The source transformer. </param>
         /// <returns> The created layer. </returns>
         /// </param>
         /// <param name="startingPoint"> The starting pointer. </param>
         /// <param name="point"> The pointer. </param>
-        public void Started(Func<Transformer, ILayer> createLayer, Vector2 startingPoint, Vector2 point)
+        public void Started(Func<CanvasDevice, Transformer, ILayer> createLayer, Vector2 startingPoint, Vector2 point)
         {
             if (this.TransformerTool.Started(startingPoint, point)) return;//TransformerTool
 
@@ -70,7 +71,7 @@ namespace Retouch_Photo2.Tools
             this.SelectionViewModel.SetModeExtended();//Selection
 
             //Mezzanine
-            ILayer layer = createLayer(transformer);
+            ILayer layer = createLayer(this.ViewModel.CanvasDevice, transformer);
             Layerage layerage = layer.ToLayerage();
             LayerBase.Instances.Add(layer);
 
@@ -102,6 +103,8 @@ namespace Retouch_Photo2.Tools
                 ILayer mezzanineLayer = this.MezzanineLayer.Self;
                 mezzanineLayer.Transform = new Transform(transformer);
                 mezzanineLayer.Style.DeliverBrushPoints(transformer);
+                //Refactoring
+                mezzanineLayer.IsRefactoringRender = true;
 
                 this.ViewModel.SetTipTextWidthHeight(transformer);//Text
                 this.ViewModel.Invalidate();//Invalidate
@@ -134,6 +137,9 @@ namespace Retouch_Photo2.Tools
                     ILayer mezzanineLayer = this.MezzanineLayer.Self;
                     mezzanineLayer.Transform = new Transform(transformer);
                     mezzanineLayer.IsSelected = true;
+                    //Refactoring
+                    mezzanineLayer.IsRefactoringRender = true;
+                    mezzanineLayer.IsRefactoringIconRender = true;
 
                     //Selection
                     this.SelectionViewModel.SetModeSingle(this.MezzanineLayer);

@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -14,6 +15,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Generic
         public GammaTransferAdjustment Adjustment { get; set; }
@@ -51,10 +53,10 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
     }
 
-        /// <summary>
-        /// Page of <see cref = "GammaTransferAdjustment"/>.
-        /// </summary>
-        public sealed partial class GammaTransferPage : IAdjustmentGenericPage<GammaTransferAdjustment>
+    /// <summary>
+    /// Page of <see cref = "GammaTransferAdjustment"/>.
+    /// </summary>
+    public sealed partial class GammaTransferPage : IAdjustmentGenericPage<GammaTransferAdjustment>
     {
 
         //Strings
@@ -77,7 +79,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             string blue = resource.GetString("/Adjustments/GammaTransfer_Blue");
             this.ConstructStringsBlue(blue, offset, exponent, amplitude);
         }
-        
+
         //@Content
         public AdjustmentType Type => AdjustmentType.GammaTransfer;
         public FrameworkElement Icon { get; } = new GammaTransferIcon();
@@ -95,80 +97,90 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ResetGreen();
             this.ResetBlue();
 
-
-            if (this.Adjustment is GammaTransferAdjustment adjustment)
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment");
-                
-                var previousAlpha1 = adjustment.AlphaDisable;
-                var previousAlpha2 = adjustment.AlphaOffset;
-                var previousAlpha3 = adjustment.AlphaExponent;
-                var previousAlpha4 = adjustment.AlphaAmplitude;
+                ILayer layer = layerage.Self;
 
-                var previousRed1 = adjustment.RedDisable;
-                var previousRed2 = adjustment.RedOffset;
-                var previousRed3 = adjustment.RedExponent;
-                var previousRed4 = adjustment.RedAmplitude;
-
-                var previousGreen1 = adjustment.GreenDisable;
-                var previousGreen2 = adjustment.GreenOffset;
-                var previousGreen3 = adjustment.GreenExponent;
-                var previousGreen4 = adjustment.GreenAmplitude;
-
-                var previousBlue1 = adjustment.BlueDisable;
-                var previousBlue2 = adjustment.BlueOffset;
-                var previousBlue3 = adjustment.BlueExponent;
-                var previousBlue4 = adjustment.BlueAmplitude;
-                history.UndoActions.Push(() =>
+                if (this.Adjustment is GammaTransferAdjustment adjustment)
                 {
-                    GammaTransferAdjustment adjustment2 = adjustment;
+                    //History
+                    LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment");
 
-                    adjustment2.AlphaDisable = previousAlpha1;
-                    adjustment2.AlphaOffset = previousAlpha2;
-                    adjustment2.AlphaExponent = previousAlpha3;
-                    adjustment2.AlphaAmplitude = previousAlpha4;
+                    var previousAlpha1 = adjustment.AlphaDisable;
+                    var previousAlpha2 = adjustment.AlphaOffset;
+                    var previousAlpha3 = adjustment.AlphaExponent;
+                    var previousAlpha4 = adjustment.AlphaAmplitude;
 
-                    adjustment2.RedDisable = previousRed1;
-                    adjustment2.RedOffset = previousRed2;
-                    adjustment2.RedExponent = previousRed3;
-                    adjustment2.RedAmplitude = previousRed4;
+                    var previousRed1 = adjustment.RedDisable;
+                    var previousRed2 = adjustment.RedOffset;
+                    var previousRed3 = adjustment.RedExponent;
+                    var previousRed4 = adjustment.RedAmplitude;
 
-                    adjustment2.GreenDisable = previousGreen1;
-                    adjustment2.GreenOffset = previousGreen2;
-                    adjustment2.GreenExponent = previousGreen3;
-                    adjustment2.GreenAmplitude = previousGreen4;
+                    var previousGreen1 = adjustment.GreenDisable;
+                    var previousGreen2 = adjustment.GreenOffset;
+                    var previousGreen3 = adjustment.GreenExponent;
+                    var previousGreen4 = adjustment.GreenAmplitude;
 
-                    adjustment2.AlphaDisable = previousAlpha1;
-                    adjustment2.AlphaOffset = previousAlpha2;
-                    adjustment2.AlphaExponent = previousAlpha3;
-                    adjustment2.AlphaAmplitude = previousAlpha4;
-                });
+                    var previousBlue1 = adjustment.BlueDisable;
+                    var previousBlue2 = adjustment.BlueOffset;
+                    var previousBlue3 = adjustment.BlueExponent;
+                    var previousBlue4 = adjustment.BlueAmplitude;
+                    history.UndoActions.Push(() =>
+                    {
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
 
-                this.ViewModel.HistoryPush(history);
+                        adjustment.AlphaDisable = previousAlpha1;
+                        adjustment.AlphaOffset = previousAlpha2;
+                        adjustment.AlphaExponent = previousAlpha3;
+                        adjustment.AlphaAmplitude = previousAlpha4;
 
+                        adjustment.RedDisable = previousRed1;
+                        adjustment.RedOffset = previousRed2;
+                        adjustment.RedExponent = previousRed3;
+                        adjustment.RedAmplitude = previousRed4;
 
-                adjustment.AlphaDisable = true;
-                adjustment.AlphaOffset = 0.0f;
-                adjustment.AlphaExponent = 1.0f;
-                adjustment.AlphaAmplitude = 1.0f;
+                        adjustment.GreenDisable = previousGreen1;
+                        adjustment.GreenOffset = previousGreen2;
+                        adjustment.GreenExponent = previousGreen3;
+                        adjustment.GreenAmplitude = previousGreen4;
 
-                adjustment.RedDisable = true;
-                adjustment.RedOffset = 0.0f;
-                adjustment.RedExponent = 1.0f;
-                adjustment.RedAmplitude = 1.0f;
+                        adjustment.AlphaDisable = previousAlpha1;
+                        adjustment.AlphaOffset = previousAlpha2;
+                        adjustment.AlphaExponent = previousAlpha3;
+                        adjustment.AlphaAmplitude = previousAlpha4;
+                    });
 
-                adjustment.GreenDisable = true;
-                adjustment.GreenOffset = 0.0f;
-                adjustment.GreenExponent = 1.0f;
-                adjustment.GreenAmplitude = 1.0f;
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    
+                    adjustment.AlphaDisable = true;
+                    adjustment.AlphaOffset = 0.0f;
+                    adjustment.AlphaExponent = 1.0f;
+                    adjustment.AlphaAmplitude = 1.0f;
 
-                adjustment.BlueDisable = true;
-                adjustment.BlueOffset = 0.0f;
-                adjustment.BlueExponent = 1.0f;
-                adjustment.BlueAmplitude = 1.0f;
+                    adjustment.RedDisable = true;
+                    adjustment.RedOffset = 0.0f;
+                    adjustment.RedExponent = 1.0f;
+                    adjustment.RedAmplitude = 1.0f;
 
-                this.ViewModel.Invalidate();
+                    adjustment.GreenDisable = true;
+                    adjustment.GreenOffset = 0.0f;
+                    adjustment.GreenExponent = 1.0f;
+                    adjustment.GreenAmplitude = 1.0f;
+
+                    adjustment.BlueDisable = true;
+                    adjustment.BlueOffset = 0.0f;
+                    adjustment.BlueExponent = 1.0f;
+                    adjustment.BlueAmplitude = 1.0f;
+
+                    //History
+                    this.ViewModel.HistoryPush(history);
+
+                    this.ViewModel.Invalidate();//Invalidate
+                }
             }
         }
         public void Follow(GammaTransferAdjustment adjustment)

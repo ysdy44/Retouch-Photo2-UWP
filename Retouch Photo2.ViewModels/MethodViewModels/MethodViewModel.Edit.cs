@@ -187,9 +187,7 @@ namespace Retouch_Photo2.ViewModels
                 {
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.IsSelected = previous;
+                        layer.IsSelected = previous;
                     });
                 }
 
@@ -223,9 +221,7 @@ namespace Retouch_Photo2.ViewModels
                 var previous = layer.IsSelected;
                 history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.IsSelected = previous;
+                    layer.IsSelected = previous;
                 });
 
                 layer.IsSelected = !layer.IsSelected;
@@ -248,7 +244,7 @@ namespace Retouch_Photo2.ViewModels
             //History
             this.HistoryPushLayeragesHistory("Group layers");
 
-            LayerageCollection.GroupAllSelectedLayers(this.LayerageCollection);
+            LayerageCollection.GroupAllSelectedLayers(this.CanvasDevice, this.LayerageCollection);
 
             this.SetMode(this.LayerageCollection);
             LayerageCollection.ArrangeLayersControls(this.LayerageCollection);

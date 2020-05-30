@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -14,7 +15,8 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        
         //@Generic
         public TemperatureAdjustment Adjustment { get; set; }
 
@@ -60,29 +62,37 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.TemperatureSlider.Value = 0;
             this.TintSlider.Value = 0;
 
-
-            if (this.Adjustment is TemperatureAdjustment adjustment)
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set temperature adjustment");
-                
-                var previous1 = adjustment.Temperature;
-                var previous2 = adjustment.Tint;
-                history.UndoActions.Push(() =>
+                ILayer layer = layerage.Self;
+
+                if (this.Adjustment is TemperatureAdjustment adjustment)
                 {
-                    TemperatureAdjustment adjustment2 = adjustment;
+                    //History
+                    LayersPropertyHistory history = new LayersPropertyHistory("Set temperature adjustment");
 
-                    adjustment2.Temperature = previous1;
-                    adjustment2.Tint = previous2;
-                });
+                    var previous1 = adjustment.Temperature;
+                    var previous2 = adjustment.Tint;
+                    history.UndoActions.Push(() =>
+                    {
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.Temperature = previous1;
+                        adjustment.Tint = previous2;
+                    });
 
-                this.ViewModel.HistoryPush(history);
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    adjustment.Temperature = 0.0f;
+                    adjustment.Tint = 0.0f;
 
+                    //History
+                    this.ViewModel.HistoryPush(history);
 
-                adjustment.Temperature = 0.0f;
-                adjustment.Tint = 0.0f;
-
-                this.ViewModel.Invalidate();
+                    this.ViewModel.Invalidate();//Invalidate
+                }
             }
         }
         public void Follow(TemperatureAdjustment adjustment)
@@ -105,52 +115,70 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.TemperatureSlider.Maximum = 100;
 
             this.TemperatureSlider.SliderBrush = this.TemperatureBrush;
-
-
-            //History
-            LayersPropertyHistory history = null;
-
-
+            
             this.TemperatureSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is TemperatureAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set temperature adjustment temperature");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheTemperature();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is TemperatureAdjustment adjustment)
+                    {
+                        adjustment.CacheTemperature();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.TemperatureSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is TemperatureAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float temperature = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.Temperature = temperature;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is TemperatureAdjustment adjustment)
+                    {
+                        float temperature = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.Temperature = temperature;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.TemperatureSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is TemperatureAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float temperature = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingTemperature;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is TemperatureAdjustment adjustment)
                     {
-                        TemperatureAdjustment adjustment2 = adjustment;
+                        float temperature = (float)value / 100.0f;
 
-                        adjustment2.Temperature = previous;
-                    });
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set temperature adjustment temperature");
 
-                    this.ViewModel.HistoryPush(history);
+                        var previous = adjustment.StartingTemperature;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.Temperature = previous;
+                        });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.Temperature = temperature;
 
-                    adjustment.Temperature = temperature;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        //History
+                        this.ViewModel.HistoryPush(history);
+
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }
@@ -162,52 +190,70 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.TintSlider.Maximum = 100;
 
             this.TintSlider.SliderBrush = this.TintBrush;
-
-
-            //History
-            LayersPropertyHistory history = null;
-
-
+                       
             this.TintSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is TemperatureAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set temperature adjustment tint");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheTint();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is TemperatureAdjustment adjustment)
+                    {
+                        adjustment.CacheTint();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.TintSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is TemperatureAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float tint = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.Tint = tint;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is TemperatureAdjustment adjustment)
+                    {
+                        float tint = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.Tint = tint;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.TintSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is TemperatureAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float tint = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingTint;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is TemperatureAdjustment adjustment)
                     {
-                        TemperatureAdjustment adjustment2 = adjustment;
+                        float tint = (float)value / 100.0f;
 
-                        adjustment2.Tint = previous;
-                    });
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set temperature adjustment tint");
 
-                    this.ViewModel.HistoryPush(history);
+                        var previous = adjustment.StartingTint;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.Tint = previous;
+                        });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.Tint = tint;
 
-                    adjustment.Tint = tint;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        //History
+                        this.ViewModel.HistoryPush(history);
+
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }

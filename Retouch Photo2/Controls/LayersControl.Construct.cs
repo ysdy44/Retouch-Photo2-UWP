@@ -50,22 +50,26 @@ namespace Retouch_Photo2.Controls
             if (LayerageCollection.VisibilityChanged == null)
             {
                 LayerageCollection.VisibilityChanged += (layer) =>
-                { 
+                {
+                    Visibility value = (layer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+
                     //History 
                     LayersPropertyHistory history = new LayersPropertyHistory("Set visibility");
+
                     var previous = layer.Visibility;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layer;
-
-                        layer2.Visibility = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.Visibility = previous;
                     });
+
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.Visibility = value;
 
                     //History
                     this.ViewModel.HistoryPush(history);
-
-                    Visibility value = (layer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
-                    layer.Visibility = value;
 
                     this.ViewModel.Invalidate();//Invalidate
                 };
@@ -121,6 +125,9 @@ namespace Retouch_Photo2.Controls
             {
                 LayerageCollection.DragItemsCompleted += () =>
                 {
+                    //History
+                    this.ViewModel.HistoryPushLayeragesHistory("Layers arrange");
+
                     LayerageCollection.DragComplete(this.ViewModel.LayerageCollection, this.DragDestinationLayerage, this.DragSourceLayerage, this.DragLayerOverlayMode, this.DragLayerIsSelected);
 
                     this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection

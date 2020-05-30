@@ -56,12 +56,16 @@ namespace Retouch_Photo2.Tools.Models
                         //History
                         var previous = layer.Transform.IsCrop;
                         history.UndoActions.Push(() =>
-                        {
-                            ILayer layer2 = layerage.Self;
-
-                            layer2.Transform.IsCrop = previous;
+                        {               
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            layer.Transform.IsCrop = previous;
                         });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         layer.Transform.IsCrop = false;
                     }
                 });
@@ -88,13 +92,17 @@ namespace Retouch_Photo2.Tools.Models
                         var previous2 = layer.Transform.IsCrop;
                         history.UndoActions.Push(() =>
                         {
-                            ILayer layer2 = layerage.Self;
-
-                            layer2.Transform.Transformer = previous1;
-                            layer2.Transform.IsCrop = previous2;
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            layer.Transform.Transformer = previous1;
+                            layer.Transform.IsCrop = previous2;
                         });
 
                         Transformer cropTransformer = layer.Transform.CropTransformer;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         layer.Transform.Transformer = cropTransformer;
                         layer.Transform.IsCrop = false;
                     }
@@ -286,11 +294,17 @@ namespace Retouch_Photo2.Tools.Models
             {
                 //Transformer
                 Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, layer.Transform.StartingCropTransformer, this.IsRatio, this.IsCenter, this.IsStepFrequency);
+          
+                //Refactoring
+                layer.IsRefactoringRender = true;
                 layer.Transform.CropTransformer = transformer;
             }
             else//Move
             {
                 Vector2 canvasMove = canvasPoint - canvasStartingPoint;
+
+                //Refactoring
+                layer.IsRefactoringRender = true;
                 layer.Transform.CropTransformAdd(canvasMove);
             }
         }
@@ -305,14 +319,19 @@ namespace Retouch_Photo2.Tools.Models
             //History
             var previous = layer.Transform.StartingCropTransformer;
             history.UndoActions.Push(() =>
-            {
-                ILayer layer2 = this.Layerage.Self;
-
-                layer2.Transform.CropTransformer = previous;
+            {                
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
+                layer.Transform.CropTransformer = previous;
             });
 
             //History
             this.ViewModel.HistoryPush(history);
+
+            //Refactoring
+            layer.IsRefactoringRender = true;
+            layer.IsRefactoringIconRender = true;
         }
         
 

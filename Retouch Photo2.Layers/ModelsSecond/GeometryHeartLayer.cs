@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
@@ -27,24 +26,23 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Initializes a heart-layer.
         /// </summary>
-        public GeometryHeartLayer()
+        public GeometryHeartLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new GeometryHeartIcon(),
                 Type = this.ConstructStrings(),
             };
         }
 
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(CanvasDevice customDevice)
         {
-            GeometryHeartLayer heartLayer = new GeometryHeartLayer
+            GeometryHeartLayer heartLayer = new GeometryHeartLayer(customDevice)
             {
                 Spread = this.Spread
             };
 
-            LayerBase.CopyWith(resourceCreator, heartLayer, this);
+            LayerBase.CopyWith(customDevice, heartLayer, this);
             return heartLayer;
         }
         

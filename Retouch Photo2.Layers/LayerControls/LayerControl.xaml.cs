@@ -13,7 +13,6 @@ namespace Retouch_Photo2.Layers
         public LayerControl Self => this;
         public string Text { get => this.NameRun.Text; set=>this.NameRun.Text = value; }
         public string Type { get => this.TypeRun.Text; set => this.TypeRun.Text = value; }
-        public object Icon { get; set; }
 
 
         private int controlHeight = 40;
@@ -81,14 +80,19 @@ namespace Retouch_Photo2.Layers
 
 
         //@Construct
-        public LayerControl(ILayer layer)
+        /// <summary>
+        /// Initializes a layer-control.
+        /// </summary>      
+        /// <param name="customDevice"> The custom-device. </param>
+        /// <param name="layer"> The layer. </param>
+        public LayerControl(CanvasDevice customDevice, ILayer layer)
         {
             this.InitializeComponent();
             this.ControlHeight = LayerageCollection.ControlsHeight;
 
             //IconCanvasControl
             this.IconCanvasControl.UseSharedDevice = true;
-            this.IconCanvasControl.CustomDevice = LayerBase.CanvasDevice;
+            this.IconCanvasControl.CustomDevice = customDevice;
             this.IconCanvasControl.Draw += (s, arge) =>
             {
                 if (this.IconRender == null) return;

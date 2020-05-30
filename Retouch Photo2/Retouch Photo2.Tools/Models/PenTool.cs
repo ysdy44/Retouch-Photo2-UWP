@@ -196,7 +196,11 @@ namespace Retouch_Photo2.Tools.Models
                 this.Nodes.Add(node);
             }
 
-            this.CurveLayer.IsRefactoringTransformer = true;//RefactoringTransformer
+            //Refactoring
+            this.CurveLayer.IsRefactoringTransformer = true;
+            this.CurveLayer.IsRefactoringRender = true;
+            this.CurveLayer.IsRefactoringIconRender = true;
+
             this.Mode = NodeCollectionMode.None;
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
@@ -222,7 +226,8 @@ namespace Retouch_Photo2.Tools.Models
                 this.Nodes.Add(node);
             }
 
-            this.CurveLayer.IsRefactoringTransformer = true;//RefactoringTransformer
+            //Refactoring
+            this.CurveLayer.IsRefactoringTransformer = true;
             this.Mode = NodeCollectionMode.None;
 
             this.ViewModel.Invalidate();//Invalidate
@@ -291,12 +296,12 @@ namespace Retouch_Photo2.Tools.Models
             if (this._hasPreviewTempLeftPoint)
             {
                 this._hasPreviewTempLeftPoint = false;
-                this.CreateLayer(this._previewLeft, canvasPoint);
+                this.CreateLayer(this.ViewModel.CanvasDevice, this._previewLeft, canvasPoint);
             }
             else if (isOutNodeDistance)
             {
                 this._hasPreviewTempLeftPoint = false;
-                this.CreateLayer(canvasStartingPoint, canvasPoint);
+                this.CreateLayer(this.ViewModel.CanvasDevice, canvasStartingPoint, canvasPoint);
             }
             else
             {
@@ -327,13 +332,13 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
-        private void CreateLayer(Vector2 canvasStartingPoint, Vector2 canvasPoint)
+        private void CreateLayer(CanvasDevice customDevice, Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             //Transformer
             Transformer transformer = new Transformer(canvasPoint, canvasStartingPoint);
 
             //Layer
-            CurveLayer curveLayer = new CurveLayer(canvasStartingPoint, canvasPoint)
+            CurveLayer curveLayer = new CurveLayer(customDevice, canvasStartingPoint, canvasPoint)
             {
                 IsSelected = true,
                 Transform = new Transform(transformer),

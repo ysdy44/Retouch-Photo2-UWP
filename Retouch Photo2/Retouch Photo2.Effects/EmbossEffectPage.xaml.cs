@@ -70,18 +70,24 @@ namespace Retouch_Photo2.Effects.Models
                 var previous2 = layer.Effect.Emboss_Angle;
                 history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.Effect.Emboss_Radius = previous1;
-                    layer2.Effect.Emboss_Angle = previous2;
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layer.Effect.Emboss_Radius = previous1;
+                    layer.Effect.Emboss_Angle = previous2;
                 });
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layer.Effect.Emboss_Radius = 1;
                 layer.Effect.Emboss_Angle = 0;
             });
 
             //History
             this.ViewModel.HistoryPush(history);
+
+            this.ViewModel.Invalidate();//Invalidate
         }
         public void FollowButton(Effect effect)
         {
@@ -121,11 +127,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.Emboss_IsOn;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.Emboss_IsOn = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.Emboss_IsOn = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.Emboss_IsOn = isOn;
                 });
 
@@ -139,17 +149,12 @@ namespace Retouch_Photo2.Effects.Models
 
         private void ConstructEmboss_Radius()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Radius
             this.RadiusSlider.Value = 1;
             this.RadiusSlider.Minimum = 0;
             this.RadiusSlider.Maximum = 10;
             this.RadiusSlider.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect emboss");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -169,6 +174,8 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.Emboss_Radius = radius;
                 });
 
@@ -177,6 +184,9 @@ namespace Retouch_Photo2.Effects.Models
             this.RadiusSlider.ValueChangeCompleted += (s, value) =>
             {
                 float radius = (float)value;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect emboss");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -187,11 +197,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.StartingEmboss_Radius;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.Emboss_Radius = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.Emboss_Radius = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.Emboss_Radius = radius;
                 });
 
@@ -205,19 +219,13 @@ namespace Retouch_Photo2.Effects.Models
 
         private void ConstructEmboss_Angle()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Angle
             this.AnglePicker.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect emboss");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
-
                     layer.Effect.CacheEmboss();
                 });
 
@@ -232,6 +240,8 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.Emboss_Angle = radians;
                 });
 
@@ -240,6 +250,9 @@ namespace Retouch_Photo2.Effects.Models
             this.AnglePicker.ValueChangeCompleted += (s, value) =>
             {
                 float radians = (float)value;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect emboss");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -250,11 +263,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.StartingEmboss_Angle;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.Emboss_Angle = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.Emboss_Angle = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.Emboss_Angle = radians;
                 });
 

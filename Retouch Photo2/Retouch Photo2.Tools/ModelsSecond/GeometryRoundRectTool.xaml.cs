@@ -96,9 +96,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryRoundRectIcon();
         readonly Button _button = new Button { Tag = new GeometryRoundRectIcon()};
 
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new GeometryRoundRectLayer
+            return new GeometryRoundRectLayer(customDevice)
             {
                 Corner = this.SelectionViewModel.GeometryRoundRectCorner,
                 Transform = new Transform(transformer),
@@ -156,11 +156,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryRoundRectLayer.Corner;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryRoundRectLayer layer2 = geometryRoundRectLayer;
-
-                            layer2.Corner = previous;
+                            //Refactoring
+                            geometryRoundRectLayer.IsRefactoringRender = true;
+                            geometryRoundRectLayer.IsRefactoringIconRender = true;
+                            geometryRoundRectLayer.Corner = previous;
                         });
 
+                        //Refactoring
+                        geometryRoundRectLayer.IsRefactoringRender = true;
+                        geometryRoundRectLayer.IsRefactoringIconRender = true;
                         geometryRoundRectLayer.Corner = corner;
                     }
                 });
@@ -173,16 +177,12 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ConstructCorner2()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Value
-            this.CornerTouchbarSlider.Minimum = 0d;
-            this.CornerTouchbarSlider.Maximum = 50d;
+            this.CornerTouchbarSlider.Value = 0;
+            this.CornerTouchbarSlider.Minimum = 0;
+            this.CornerTouchbarSlider.Maximum = 50;
             this.CornerTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                history = new LayersPropertyHistory("Set round rect corner");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -212,6 +212,9 @@ namespace Retouch_Photo2.Tools.Models
                     if (layer.Type == LayerType.GeometryRoundRect)
                     {
                         GeometryRoundRectLayer geometryRoundRectLayer = (GeometryRoundRectLayer)layer;
+
+                        //Refactoring
+                        geometryRoundRectLayer.IsRefactoringRender = true;
                         geometryRoundRectLayer.Corner = corner;
                     }
                 });
@@ -223,6 +226,9 @@ namespace Retouch_Photo2.Tools.Models
                 float corner = (float)value / 100.0f;
                 if (corner < 0.0f) corner = 0.0f;
                 if (corner > 0.5f) corner = 0.5f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set round rect corner");
 
                 //Selection
                 this.SelectionViewModel.GeometryRoundRectCorner = corner;
@@ -237,11 +243,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryRoundRectLayer.StartingCorner;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryRoundRectLayer layer2 = geometryRoundRectLayer;
-
-                            layer2.Corner = previous;
+                            //Refactoring
+                            geometryRoundRectLayer.IsRefactoringRender = true;
+                            geometryRoundRectLayer.IsRefactoringIconRender = true;
+                            geometryRoundRectLayer.Corner = previous;
                         });
 
+                        //Refactoring
+                        geometryRoundRectLayer.IsRefactoringRender = true;
+                        geometryRoundRectLayer.IsRefactoringIconRender = true;
                         geometryRoundRectLayer.Corner = corner;
                     }
                 });

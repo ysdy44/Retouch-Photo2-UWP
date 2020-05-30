@@ -77,12 +77,12 @@ namespace Retouch_Photo2.Tools.Elements
             
             if (nodess.Count() == 1)
             {
-                CurveLayer curveLayer = new CurveLayer(nodess.Single());
+                CurveLayer curveLayer = new CurveLayer(this.ViewModel.CanvasDevice, nodess.Single());
                 LayerBase.CopyWith(this.ViewModel.CanvasDevice, curveLayer, layer);
                 return curveLayer;
             }
 
-            CurveMultiLayer curveMultiLayer = new CurveMultiLayer(nodess);
+            CurveMultiLayer curveMultiLayer = new CurveMultiLayer(this.ViewModel.CanvasDevice, nodess);
             LayerBase.CopyWith(this.ViewModel.CanvasDevice, curveMultiLayer, layer);
             return curveMultiLayer;
         }

@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
@@ -27,24 +26,24 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Initializes a triangle-layer.
         /// </summary>
-        public GeometryTriangleLayer()
+        /// <param name="customDevice"> The custom-device. </param>
+        public GeometryTriangleLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new GeometryTriangleIcon(),
                 Type = this.ConstructStrings(),
             };
         }
         
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(CanvasDevice customDevice)
         {
-            GeometryTriangleLayer triangleLayer = new GeometryTriangleLayer
+            GeometryTriangleLayer triangleLayer = new GeometryTriangleLayer(customDevice)
             {
                 Center = this.Center,
             };
 
-            LayerBase.CopyWith(resourceCreator, triangleLayer, this);
+            LayerBase.CopyWith(customDevice, triangleLayer, this);
             return triangleLayer;
         }
         

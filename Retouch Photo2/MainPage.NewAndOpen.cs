@@ -107,7 +107,7 @@ namespace Retouch_Photo2
             }
 
             //Load all layers. 
-            IEnumerable<ILayer> layers = XML.LoadLayersFile();
+            IEnumerable<ILayer> layers = XML.LoadLayersFile(this.ViewModel.CanvasDevice);
             LayerBase.Instances.Clear();
             foreach (ILayer layer in layers)
             {
@@ -170,7 +170,7 @@ namespace Retouch_Photo2
 
             //ImageLayer 
             Photocopier photocopier = photo.ToPhotocopier();
-            ImageLayer imageLayer = new ImageLayer
+            ImageLayer imageLayer = new ImageLayer(this.ViewModel.CanvasDevice)
             {
                 Transform = new Transform(transformerSource),
                 Photocopier = photocopier,

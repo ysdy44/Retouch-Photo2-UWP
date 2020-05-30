@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Layers;
+﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Layers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,8 +17,9 @@ namespace Retouch_Photo2
         /// <summary>
         /// Load <see cref="LayerBase"/>s file from temporary folder.
         /// </summary>
+        /// <param name="customDevice"> The custom-device. </param>
         /// <returns> The product layers. </returns>
-        public static IEnumerable<ILayer> LoadLayersFile()
+        public static IEnumerable<ILayer> LoadLayersFile(CanvasDevice customDevice)
         {
             //Create an XDocument object.
             string path = $"{ApplicationData.Current.TemporaryFolder.Path}/Layers.xml";
@@ -26,7 +28,7 @@ namespace Retouch_Photo2
             {
                 XDocument document = XDocument.Load(path);
 
-                IEnumerable<ILayer> layers = Retouch_Photo2.Layers.XML.LoadLayers(document);
+                IEnumerable<ILayer> layers = Retouch_Photo2.Layers.XML.LoadLayers(customDevice, document);
                 return layers;
             }
             catch (Exception)

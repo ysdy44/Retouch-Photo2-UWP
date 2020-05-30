@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
@@ -27,24 +26,24 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Initializes a diamond-layer.
         /// </summary>
-        public GeometryDiamondLayer()
+        /// <param name="customDevice"> The custom-device. </param>
+        public GeometryDiamondLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new GeometryDiamondIcon(),
                 Type = this.ConstructStrings(),
             };
         }
 
        
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(CanvasDevice customDevice)
         {
-            GeometryDiamondLayer diamondLayer = new GeometryDiamondLayer
+            GeometryDiamondLayer diamondLayer = new GeometryDiamondLayer(customDevice)
             {
                 Mid = this.Mid
             };
 
-            LayerBase.CopyWith(resourceCreator, diamondLayer, this);
+            LayerBase.CopyWith(customDevice, diamondLayer, this);
             return diamondLayer;
         }
         

@@ -64,8 +64,7 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> Retouch_Photo2's the only <see cref = "Microsoft.Graphics.Canvas.UI.Xaml.CanvasDevice" />. </summary>
-       // public CanvasDevice CanvasDevice { get; } = new CanvasDevice();
-        public CanvasDevice CanvasDevice => LayerBase.CanvasDevice;
+        public CanvasDevice CanvasDevice { get; } = new CanvasDevice();
 
 
         /// <summary>

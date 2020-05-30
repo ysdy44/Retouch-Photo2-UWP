@@ -372,17 +372,20 @@ namespace Retouch_Photo2.Menus.Models
                     var previous = TransformPosition.GetLayer(layer);
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage2.Self;
-
-                        TransformPosition.SetLayer(layer2, previous);
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        TransformPosition.SetLayer(layer, previous);
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.CacheTransform();
                     layer.TransformAdd(vector);
                 });
 
             });
-            this.Transformer = this.SelectionViewModel.RefactoringTransformer();
+            //Refactoring
+            this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
 
             //History
             this.ViewModel.HistoryPush(history);
@@ -447,7 +450,7 @@ namespace Retouch_Photo2.Menus.Models
                     new Vector2(distance, 0) :
                     new Vector2(0, distance);
 
-
+                //Selection
                 this.SelectionViewModel.SetLayerageValueWithChildren(layerage, (layerage2) =>
                 {
                     ILayer layer = layerage2.Self;
@@ -456,11 +459,13 @@ namespace Retouch_Photo2.Menus.Models
                     var previous = TransformPosition.GetLayer(layer);
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage2.Self;
-
-                        TransformPosition.SetLayer(layer2, previous);
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        TransformPosition.SetLayer(layer, previous);
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.CacheTransform();
                     layer.TransformAdd(vector);
                 });

@@ -30,17 +30,18 @@ namespace Retouch_Photo2.ViewModels
                 var previous = TransformPosition.GetLayer(layer); 
                 history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    TransformPosition.SetLayer(layer2, previous);
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    TransformPosition.SetLayer(layer, previous);
                 });
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsTransformer();
                 layer.CacheTransform();
                 layer.TransformMultiplies(matrix);
-
-                layer.IsRefactoringRender = true;
-                layer.IsIconRefactoringRender = true;
             });
 
             //History
@@ -73,9 +74,9 @@ namespace Retouch_Photo2.ViewModels
             {
                 ILayer layer = layerage.Self;
 
-                layer.TransformMultiplies(matrix);
-
+                //Refactoring
                 layer.IsRefactoringRender = true;
+                layer.TransformMultiplies(matrix);
             });
 
             this.Invalidate();//Invalidate
@@ -97,16 +98,17 @@ namespace Retouch_Photo2.ViewModels
                 var previous = TransformPosition.GetStartingLayer(layer);
                 history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    TransformPosition.SetLayer(layer2, previous);
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    TransformPosition.SetLayer(layer, previous);
                 });
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsTransformer();
                 layer.TransformMultiplies(matrix);
-
-                layer.IsRefactoringRender = true;
-                layer.IsIconRefactoringRender = true;
             });
 
             //History
@@ -133,17 +135,18 @@ namespace Retouch_Photo2.ViewModels
                 var previous = TransformPosition.GetLayer(layer);
                 history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    TransformPosition.SetLayer(layer2, previous);
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    TransformPosition.SetLayer(layer, previous);
                 });
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsTransformer();
                 layer.CacheTransform();
                 layer.TransformAdd(vector);
-
-                layer.IsRefactoringRender = true;
-                layer.IsIconRefactoringRender = true;
             });
 
             //History
@@ -177,9 +180,9 @@ namespace Retouch_Photo2.ViewModels
             {
                 ILayer layer = layerage.Self;
 
-                layer.TransformAdd(vector);
-
+                //Refactoring
                 layer.IsRefactoringRender = true;
+                layer.TransformAdd(vector);
             });
 
             this.Invalidate();//Invalidate
@@ -201,16 +204,17 @@ namespace Retouch_Photo2.ViewModels
                 var previous = TransformPosition.GetStartingLayer(layer);
                 history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    TransformPosition.SetLayer(layer2, previous);
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    TransformPosition.SetLayer(layer, previous);
                 });
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsTransformer();
                 layer.TransformAdd(vector);
-
-                layer.IsRefactoringRender = true;
-                layer.IsIconRefactoringRender = true;
             });
 
             //History

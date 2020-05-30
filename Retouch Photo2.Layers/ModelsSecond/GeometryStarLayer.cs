@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
@@ -31,25 +30,25 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Initializes a star-layer.
         /// </summary>
-        public GeometryStarLayer()
+        /// <param name="customDevice"> The custom-device. </param>
+        public GeometryStarLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new GeometryStarIcon(),
                 Type = this.ConstructStrings(),
             };
         }
 
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(CanvasDevice customDevice)
         {
-            GeometryStarLayer starLayer = new GeometryStarLayer
+            GeometryStarLayer starLayer = new GeometryStarLayer(customDevice)
             {
                 Points=this.Points,
                 InnerRadius= this.InnerRadius,
             };
 
-            LayerBase.CopyWith(resourceCreator, starLayer, this);
+            LayerBase.CopyWith(customDevice, starLayer, this);
             return starLayer;
         }
         

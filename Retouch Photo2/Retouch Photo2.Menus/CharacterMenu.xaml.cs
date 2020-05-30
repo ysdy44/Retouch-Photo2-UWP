@@ -283,11 +283,15 @@ namespace Retouch_Photo2.Menus.Models
                     var previous = textLayer.FontAlignment;
                     history.UndoActions.Push(() =>
                     {
-                        ITextLayer layer2 = textLayer;
-
-                        layer2.FontAlignment = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        textLayer.FontAlignment = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     textLayer.FontAlignment = fontAlignment;
                 }
             });
@@ -305,6 +309,7 @@ namespace Retouch_Photo2.Menus.Models
             LayersPropertyHistory history = new LayersPropertyHistory("Set font weight");
 
             //Selection
+            this.SelectionViewModel.FontWeight = fontWeight;
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -316,15 +321,21 @@ namespace Retouch_Photo2.Menus.Models
                     var previous = textLayer.FontWeight;
                     history.UndoActions.Push(() =>
                     {
-                        ITextLayer layer2 = textLayer;
-
-                        layer2.FontWeight = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        textLayer.FontWeight = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     textLayer.FontWeight = fontWeight;
                 }
             });
-            this.SelectionViewModel.FontWeight = fontWeight;
+
+            //History
+            this.ViewModel.HistoryPush(history);
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -336,6 +347,7 @@ namespace Retouch_Photo2.Menus.Models
             LayersPropertyHistory history = new LayersPropertyHistory("Set font style");
 
             //Selection
+            this.SelectionViewModel.FontStyle = fontStyle;
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -347,25 +359,33 @@ namespace Retouch_Photo2.Menus.Models
                     var previous = textLayer.FontStyle;
                     history.UndoActions.Push(() =>
                     {
-                        ITextLayer layer2 = textLayer;
-
-                        layer2.FontStyle = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        textLayer.FontStyle = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     textLayer.FontStyle = fontStyle;
                 }
             });
-            this.SelectionViewModel.FontStyle = fontStyle;
+
+            //History
+            this.ViewModel.HistoryPush(history);
 
             this.ViewModel.Invalidate();//Invalidate
         }
 
 
         private void SetFontFamily(string fontFamily)
-        {  //History
+        {
+            //History
             LayersPropertyHistory history = new LayersPropertyHistory("Set font family");
 
             //Selection
+            this.SelectionViewModel.FontFamily = fontFamily;
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -377,15 +397,21 @@ namespace Retouch_Photo2.Menus.Models
                     var previous = textLayer.FontFamily;
                     history.UndoActions.Push(() =>
                     {
-                        ITextLayer layer2 = textLayer;
-
-                        layer2.FontFamily = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        textLayer.FontFamily = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     textLayer.FontFamily = fontFamily;
                 }
             });
-            this.SelectionViewModel.FontFamily = fontFamily;
+
+            //History
+            this.ViewModel.HistoryPush(history);
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -393,12 +419,13 @@ namespace Retouch_Photo2.Menus.Models
 
         private void SetFontSize(float value)
         {
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set font size");
+
             //Selection
+            this.SelectionViewModel.FontSize = value;
             this.SelectionViewModel.SetValue((layerage) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set font size");
-
                 ILayer layer = layerage.Self;
 
                 if (layer.Type.IsText())
@@ -408,17 +435,24 @@ namespace Retouch_Photo2.Menus.Models
                     var previous = textLayer.FontSize;
                     history.UndoActions.Push(() =>
                     {
-                        ITextLayer layer2 = textLayer;
-
-                        layer2.FontSize = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        textLayer.FontSize = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     textLayer.FontSize = value;
                 }
             });
-            this.SelectionViewModel.FontSize = value;
+            //Refactoring
+            this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
 
-            this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();//Refactoring
+            //History
+            this.ViewModel.HistoryPush(history);
+
             this.ViewModel.Invalidate();//Invalidate
         }
 

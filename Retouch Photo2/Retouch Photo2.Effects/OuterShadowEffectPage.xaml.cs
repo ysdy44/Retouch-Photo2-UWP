@@ -84,31 +84,34 @@ namespace Retouch_Photo2.Effects.Models
                 var previous1 = layer.Effect.OuterShadow_Radius;
                 var previous2 = layer.Effect.OuterShadow_Opacity;
                 var previous3 = layer.Effect.OuterShadow_Color;
-
                 var previous4 = layer.Effect.OuterShadow_Offset;
                 var previous5 = layer.Effect.OuterShadow_Angle;
                 history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.Effect.OuterShadow_Radius = previous1;
-                    layer2.Effect.OuterShadow_Opacity = previous2;
-                    layer2.Effect.OuterShadow_Color = previous3;
-
-                    layer2.Effect.OuterShadow_Offset = previous4;
-                    layer2.Effect.OuterShadow_Angle = previous5;
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layer.Effect.OuterShadow_Radius = previous1;
+                    layer.Effect.OuterShadow_Opacity = previous2;
+                    layer.Effect.OuterShadow_Color = previous3;
+                    layer.Effect.OuterShadow_Offset = previous4;
+                    layer.Effect.OuterShadow_Angle = previous5;
                 });
-
+                
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layer.Effect.OuterShadow_Radius = 12.0f;
                 layer.Effect.OuterShadow_Opacity = 0.5f;
                 layer.Effect.OuterShadow_Color = Windows.UI.Colors.Black;
-
                 layer.Effect.OuterShadow_Offset = 0;
                 layer.Effect.OuterShadow_Angle = 0.78539816339744830961566084581988f;// 1/4 π
             });
 
             //History
             this.ViewModel.HistoryPush(history);
+
+            this.ViewModel.Invalidate();//Invalidate
         }
         public void FollowButton(Effect effect)
         {
@@ -152,11 +155,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.OuterShadow_IsOn;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.OuterShadow_IsOn = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.OuterShadow_IsOn = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.OuterShadow_IsOn = isOn;
                 });
 
@@ -170,17 +177,12 @@ namespace Retouch_Photo2.Effects.Models
 
         public void ConstructOuterShadow_Radius()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Radius
             this.RadiusSlider.Value = 0;
             this.RadiusSlider.Minimum = 0;
             this.RadiusSlider.Maximum = 100;
             this.RadiusSlider.ValueChangeStarted += (s, value) =>
-            {
-                history = new LayersPropertyHistory("Set effect outer shadow");
-
+            {             
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -200,6 +202,8 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.OuterShadow_Radius = radians;
                 });
 
@@ -209,6 +213,9 @@ namespace Retouch_Photo2.Effects.Models
             {
                 float radians = (float)value;
 
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
+                
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -217,12 +224,17 @@ namespace Retouch_Photo2.Effects.Models
                     //History
                     var previous = layer.Effect.StartingOuterShadow_Radius;
                     history.UndoActions.Push(() =>
-                    {
-                        ILayer layer2 = layerage.Self;
+                    {   
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
 
-                        layer2.Effect.OuterShadow_Radius = previous;
+                        layer.Effect.OuterShadow_Radius = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.OuterShadow_Radius = radians;
                 });
 
@@ -236,17 +248,12 @@ namespace Retouch_Photo2.Effects.Models
 
         public void ConstructOuterShadow_Opacity()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Opacity
             this.OpacitySlider.Value = 50;
             this.OpacitySlider.Minimum = 0;
             this.OpacitySlider.Maximum = 100;
             this.OpacitySlider.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect outer shadow");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -266,6 +273,8 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.OuterShadow_Opacity = opacity;
                 });
 
@@ -275,6 +284,9 @@ namespace Retouch_Photo2.Effects.Models
             {
                 float opacity = (float)value / 100.0f;
 
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
+
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -283,12 +295,16 @@ namespace Retouch_Photo2.Effects.Models
                     //History
                     var previous = layer.Effect.StartingOuterShadow_Opacity;
                     history.UndoActions.Push(() =>
-                    {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.OuterShadow_Opacity = previous;
+                    {    
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.OuterShadow_Opacity = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.OuterShadow_Opacity = opacity;
                 });
 
@@ -302,14 +318,10 @@ namespace Retouch_Photo2.Effects.Models
 
         public void ConstructOuterShadow_Offset()
         {
-            //History
-            LayersPropertyHistory history = null;
 
             //Radius
             this.OffsetSlider.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect outer shadow");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -329,6 +341,8 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.OuterShadow_Offset = radians;
                 });
 
@@ -337,6 +351,9 @@ namespace Retouch_Photo2.Effects.Models
             this.OffsetSlider.ValueChangeCompleted += (s, value) =>
             {
                 float radians = (float)value;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -347,11 +364,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.StartingOuterShadow_Offset;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.OuterShadow_Offset = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.OuterShadow_Offset = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.OuterShadow_Offset = radians;
                 });
 
@@ -365,14 +386,9 @@ namespace Retouch_Photo2.Effects.Models
 
         public void ConstructOuterShadow_Angle()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Angle
             this.AnglePicker.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect outer shadow");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -392,6 +408,8 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.OuterShadow_Angle = radians;
                 });
 
@@ -401,6 +419,9 @@ namespace Retouch_Photo2.Effects.Models
             {
                 float radians = (float)value;
 
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
+                
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -410,11 +431,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.StartingOuterShadow_Angle;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.OuterShadow_Angle = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.OuterShadow_Angle = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.OuterShadow_Angle = radians;
                 });
 
@@ -450,9 +475,15 @@ namespace Retouch_Photo2.Effects.Models
                     {
                         ILayer layer2 = layerage.Self;
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         layer2.Effect.OuterShadow_Color = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.OuterShadow_Color = value;
                 });
 
@@ -466,15 +497,9 @@ namespace Retouch_Photo2.Effects.Models
 
         private void ConstructColor2()
         {
-            //History
-            LayersPropertyHistory history = null;
-
-
             //Color
             this.ColorPicker.ColorChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect outer shadow");
-
                 //Selection
                 this.SolidColorBrush.Color = value;
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -494,6 +519,8 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.OuterShadow_Color = value;
                 });
 
@@ -501,6 +528,9 @@ namespace Retouch_Photo2.Effects.Models
             };
             this.ColorPicker.ColorChangeCompleted += (s, value) =>
             {
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
+
                 //Selection
                 this.SolidColorBrush.Color = value;
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -513,9 +543,15 @@ namespace Retouch_Photo2.Effects.Models
                     {
                         ILayer layer2 = layerage.Self;
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         layer2.Effect.OuterShadow_Color = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.OuterShadow_Color = value;
                 });
 

@@ -137,7 +137,7 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, photo.Width, photo.Height);
 
             //Mezzanine         
-            ImageLayer imageLayer = new ImageLayer
+            ImageLayer imageLayer = new ImageLayer(this.ViewModel.CanvasDevice)
             {
                 Photocopier = photocopier,
                 IsSelected = true,
@@ -164,6 +164,11 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
             mezzanineLayer.Transform.Transformer = transformerDestination;
 
+            //Refactoring
+            mezzanineLayer.IsRefactoringRender = true;
+            mezzanineLayer.IsRefactoringIconRender = true;
+
+
             //Selection
             this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
@@ -178,9 +183,16 @@ namespace Retouch_Photo2.Tools.Models
                 if (this.MezzanineLayerage == null) return;
                 ILayer mezzanineLayer = this.MezzanineLayerage.Self;
 
+
                 Transformer transformerDestination = this.CreateTransformer(startingPoint, point, this._sizeWidth, this._sizeHeight);
-                mezzanineLayer.Transform.Transformer = transformerDestination;
+
                 this.SelectionViewModel.Transformer = transformerDestination;//Selection
+                mezzanineLayer.Transform.Transformer = transformerDestination;
+
+                //Refactoring
+                mezzanineLayer.IsRefactoringRender = true;
+                mezzanineLayer.IsRefactoringIconRender = true;
+
 
                 foreach (Layerage child in this.ViewModel.LayerageCollection.RootLayerages)
                 {

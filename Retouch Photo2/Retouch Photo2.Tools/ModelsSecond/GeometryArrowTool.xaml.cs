@@ -123,9 +123,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryArrowIcon();
         readonly Button _button = new Button { Tag = new GeometryArrowIcon()};
 
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new GeometryArrowLayer
+            return new GeometryArrowLayer(customDevice)
             {
                 LeftTail = this.SelectionViewModel.GeometryArrowLeftTail,
                 RightTail = this.SelectionViewModel.GeometryArrowRightTail,
@@ -188,11 +188,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryArrowLayer.Value;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryArrowLayer layer2 = geometryArrowLayer;
-
-                            layer2.Value = previous;
+                            //Refactoring
+                            geometryArrowLayer.IsRefactoringRender = true;
+                            geometryArrowLayer.IsRefactoringIconRender = true;
+                            geometryArrowLayer.Value = previous;
                         });
 
+                        //Refactoring
+                        geometryArrowLayer.IsRefactoringRender = true;
+                        geometryArrowLayer.IsRefactoringIconRender = true;
                         geometryArrowLayer.Value = value2;
                     }
                 });
@@ -204,17 +208,13 @@ namespace Retouch_Photo2.Tools.Models
             };
         }
         private void ConstructValue2()
-        {
-            //History
-            LayersPropertyHistory history = null;
-
+        { 
             //Value
-            this.ValueTouchbarSlider.Minimum = 0d;
-            this.ValueTouchbarSlider.Maximum = 100d;
+            this.ValueTouchbarSlider.Value = 0;
+            this.ValueTouchbarSlider.Minimum = 0;
+            this.ValueTouchbarSlider.Maximum = 100;
             this.ValueTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                history = new LayersPropertyHistory("Set arrow layer value");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -244,6 +244,9 @@ namespace Retouch_Photo2.Tools.Models
                     if (layer.Type == LayerType.GeometryArrow)
                     {
                         GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
                         geometryArrowLayer.Value = value2;
                     }
                 });
@@ -255,6 +258,9 @@ namespace Retouch_Photo2.Tools.Models
                 float value2 = (float)value / 100.0f;
                 if (value2 < 0.0f) value2 = 0.0f;
                 if (value2 > 1.0f) value2 = 1.0f;
+                
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set arrow layer value");
 
                 //Selection
                 this.SelectionViewModel.GeometryArrowValue = value2;
@@ -269,11 +275,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryArrowLayer.StartingValue;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryArrowLayer layer2 = geometryArrowLayer;
-
-                            layer2.Value = previous;
+                            //Refactoring
+                            geometryArrowLayer.IsRefactoringRender = true;
+                            geometryArrowLayer.IsRefactoringIconRender = true;
+                            geometryArrowLayer.Value = previous;
                         });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         geometryArrowLayer.Value = value2;
                     }
                 });
@@ -306,11 +316,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryArrowLayer.LeftTail;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryArrowLayer layer2 = geometryArrowLayer;
-
-                            layer2.LeftTail = previous;
+                            //Refactoring
+                            geometryArrowLayer.IsRefactoringRender = true;
+                            geometryArrowLayer.IsRefactoringIconRender = true;
+                            geometryArrowLayer.LeftTail = previous;
                         });
 
+                        //Refactoring
+                        geometryArrowLayer.IsRefactoringRender = true;
+                        geometryArrowLayer.IsRefactoringIconRender = true;
                         geometryArrowLayer.LeftTail = tailType;
                     }
                 });
@@ -343,11 +357,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryArrowLayer.RightTail;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryArrowLayer layer2 = geometryArrowLayer;
-
-                            layer2.RightTail = previous;
+                            //Refactoring
+                            geometryArrowLayer.IsRefactoringRender = true;
+                            geometryArrowLayer.IsRefactoringIconRender = true;
+                            geometryArrowLayer.RightTail = previous;
                         });
 
+                        //Refactoring
+                        geometryArrowLayer.IsRefactoringRender = true;
+                        geometryArrowLayer.IsRefactoringIconRender = true;
                         geometryArrowLayer.RightTail = tailType;
                     }
                 });

@@ -127,9 +127,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryCookieIcon();
         readonly Button _button = new Button { Tag = new GeometryCookieIcon()};
         
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new GeometryCookieLayer
+            return new GeometryCookieLayer(customDevice)
             {
                 InnerRadius = this.SelectionViewModel.GeometryCookieInnerRadius,
                 SweepAngle = this.SelectionViewModel.GeometryCookieSweepAngle,
@@ -190,11 +190,13 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryCookieLayer.InnerRadius;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryCookieLayer layer2 = geometryCookieLayer;
-
-                            layer2.InnerRadius = previous;
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            geometryCookieLayer.InnerRadius = previous;
                         });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
                         geometryCookieLayer.InnerRadius = innerRadius;
                     }
                 });
@@ -207,17 +209,12 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ConstructInnerRadius2()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Value
-            this.InnerRadiusTouchbarSlider.Minimum = 0d;
-            this.InnerRadiusTouchbarSlider.Maximum = 100d;
+            this.InnerRadiusTouchbarSlider.Value = 0;
+            this.InnerRadiusTouchbarSlider.Minimum = 0;
+            this.InnerRadiusTouchbarSlider.Maximum = 100;
             this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //History
-                history = new LayersPropertyHistory("Set cookie layer inner radius");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -245,18 +242,21 @@ namespace Retouch_Photo2.Tools.Models
                     if (layer.Type == LayerType.GeometryCookie)
                     {
                         GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
+                   
+                        //Refactoring
+                        geometryCookieLayer.IsRefactoringRender = true;
                         geometryCookieLayer.InnerRadius = innerRadius;
                     }
                 });
-
-                //History
-                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float innerRadius = (float)value / 100f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set cookie layer inner radius");
 
                 //Selection
                 this.SelectionViewModel.GeometryCookieInnerRadius = innerRadius;
@@ -271,11 +271,13 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryCookieLayer.StartingInnerRadius;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryCookieLayer layer2 = geometryCookieLayer;
-
-                            layer2.InnerRadius = previous;
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            geometryCookieLayer.InnerRadius = previous;
                         });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
                         geometryCookieLayer.InnerRadius = innerRadius;
                     }
                 });
@@ -323,11 +325,13 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryCookieLayer.SweepAngle;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryCookieLayer layer2 = geometryCookieLayer;
-
-                            layer2.SweepAngle = previous;
+                            //Refactoring
+                            geometryCookieLayer.IsRefactoringRender = true;
+                            geometryCookieLayer.SweepAngle = previous;
                         });
 
+                        //Refactoring
+                        geometryCookieLayer.IsRefactoringRender = true;
                         geometryCookieLayer.SweepAngle = sweepAngle;
                     }
                 });
@@ -340,17 +344,12 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ConstructSweepAngle2()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Value
-            this.SweepAngleTouchbarSlider.Minimum = 0d;
-            this.SweepAngleTouchbarSlider.Maximum = 360d;
+            this.SweepAngleTouchbarSlider.Value = 0;
+            this.SweepAngleTouchbarSlider.Minimum = 0;
+            this.SweepAngleTouchbarSlider.Maximum = 360;
             this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //History
-                history = new LayersPropertyHistory("Set cookie layer sweep angle");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -378,18 +377,21 @@ namespace Retouch_Photo2.Tools.Models
                     if (layer.Type == LayerType.GeometryCookie)
                     {
                         GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
                         geometryCookieLayer.SweepAngle = sweepAngle;
                     }
                 });
-
-                //History
-                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.SweepAngleTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
+                
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set cookie layer sweep angle");
 
                 //Selection
                 this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle;
@@ -404,15 +406,17 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryCookieLayer.StartingSweepAngle;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryCookieLayer layer2 = geometryCookieLayer;
-
-                            layer2.SweepAngle = previous;
+                            //Refactoring
+                            geometryCookieLayer.IsRefactoringRender = true;
+                            geometryCookieLayer.SweepAngle = previous;
                         });
 
+                        //Refactoring
+                        geometryCookieLayer.IsRefactoringRender = true;
                         geometryCookieLayer.SweepAngle = sweepAngle;
                     }
                 });
-
+                
                 //History
                 this.ViewModel.HistoryPush(history);
 

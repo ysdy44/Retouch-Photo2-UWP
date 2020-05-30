@@ -71,18 +71,24 @@ namespace Retouch_Photo2.Effects.Models
                 var previous2 = layer.Effect.Edge_Radius;
                 history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.Effect.Edge_Amount = previous1;
-                    layer2.Effect.Edge_Radius = previous2;
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layer.Effect.Edge_Amount = previous1;
+                    layer.Effect.Edge_Radius = previous2;
                 });
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layer.Effect.Edge_Amount = 0.5f;
                 layer.Effect.Edge_Radius = 0.0f;
             });
 
             //History
             this.ViewModel.HistoryPush(history);
+
+            this.ViewModel.Invalidate();//Invalidate
         }
         public void FollowButton(Effect effect)
         {
@@ -122,11 +128,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.Edge_IsOn;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.Edge_IsOn = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.Edge_IsOn = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.Edge_IsOn = isOn;
                 });
 
@@ -140,22 +150,16 @@ namespace Retouch_Photo2.Effects.Models
 
         private void ConstructEdge_Amount()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Amount
             this.AmountSlider.Value = 50;
             this.AmountSlider.Minimum = 0;
             this.AmountSlider.Maximum = 100;
             this.AmountSlider.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set edge effect amount");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
-
                     layer.Effect.CacheEdge();
                 });
 
@@ -170,6 +174,8 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.Edge_Amount = amount;
                 });
 
@@ -178,6 +184,9 @@ namespace Retouch_Photo2.Effects.Models
             this.AmountSlider.ValueChangeCompleted += (s, value) =>
             {
                 float amount = (float)value / 100.0f;
+                
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set edge effect amount");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -187,12 +196,16 @@ namespace Retouch_Photo2.Effects.Models
                     //History
                     var previous = layer.Effect.StartingEdge_Amount;
                     history.UndoActions.Push(() =>
-                    {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.Edge_Amount = previous;
+                    {     
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.Edge_Amount = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.Edge_Amount = amount;
                 });
 
@@ -206,22 +219,16 @@ namespace Retouch_Photo2.Effects.Models
 
         private void ConstructEdge_Radius()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Radius
             this.RadiusSlider.Value = 0;
             this.RadiusSlider.Minimum = 0;
             this.RadiusSlider.Maximum = 10;
             this.RadiusSlider.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set edge effect blur amount");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
-
                     layer.Effect.CacheEdge();
                 });
 
@@ -236,6 +243,8 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.Edge_Radius = blurAmount;
                 });
 
@@ -245,6 +254,9 @@ namespace Retouch_Photo2.Effects.Models
             {
                 float blurAmount = (float)value;
 
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set edge effect blur amount");
+
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -253,12 +265,16 @@ namespace Retouch_Photo2.Effects.Models
                     //History
                     var previous = layer.Effect.StartingEdge_Radius;
                     history.UndoActions.Push(() =>
-                    {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.Edge_Radius = previous;
+                    {   
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.Edge_Radius = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.Edge_Radius = blurAmount;
                 });
 

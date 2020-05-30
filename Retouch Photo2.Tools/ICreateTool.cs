@@ -19,12 +19,13 @@ namespace Retouch_Photo2.Tools
         /// <summary>
         /// Function of how to crate a layer.
         /// </summary>
+        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="transformer"> The source transformer. </param>
         /// <returns> The created layer. </returns>
         /// </param>
         /// <param name="startingPoint"> The starting pointer. </param>
         /// <param name="point"> The pointer. </param>
-        void Started(Func<Transformer, ILayer> createLayer, Vector2 startingPoint, Vector2 point);
+        void Started(Func<CanvasDevice , Transformer, ILayer> createLayer, Vector2 startingPoint, Vector2 point);
         /// <summary>
         /// Occurs when the input device changes position during operation.
         /// </summary>

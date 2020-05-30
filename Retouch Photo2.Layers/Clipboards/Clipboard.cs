@@ -15,10 +15,23 @@ namespace Retouch_Photo2.Layers
         public IEnumerable<Layerage> Layerages { get; private set; }
 
 
+        /// <summary>
+        /// Gets selection-mode by count of selected layers. 
+        /// </summary>
         public ListViewSelectionMode SelectionMode { get; set; }
+        /// <summary>
+        /// Can paste by <see cref="Clipboard.SelectionMode"/>
+        /// </summary>
         public bool CanPaste => this.SelectionMode == ListViewSelectionMode.Single || this.SelectionMode == ListViewSelectionMode.Multiple;
 
-        public void SetMode(ICanvasResourceCreator resourceCreator, LayerageCollection layerageCollection)
+
+        /// <summary>
+        ///  Sets the mode and notify all properties.
+        ///  and copy all selected layerage.
+        /// </summary>     
+        /// <param name="customDevice"> The custom-device. </param>
+        /// <param name="layerageCollection"> The layerage-collection. </param>
+        public void SetMode(CanvasDevice customDevice, LayerageCollection layerageCollection)
         {
             //Layerages
             IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
@@ -42,7 +55,7 @@ namespace Retouch_Photo2.Layers
                 this.Layerages = null;
 
                 Clipboard.Instances.Clear();
-                LayerageCollection.CopyLayerage(resourceCreator, this.Layerage);
+                LayerageCollection.CopyLayerage(customDevice, this.Layerage);
             }
             else if (count >= 2)
             {
@@ -51,7 +64,7 @@ namespace Retouch_Photo2.Layers
                 this.Layerages = from layerage in selectedLayerages select layerage.Clone();
 
                 Clipboard.Instances.Clear();
-                LayerageCollection.CopyLayerages(resourceCreator, this.Layerages);
+                LayerageCollection.CopyLayerages(customDevice, this.Layerages);
             }
         }
                

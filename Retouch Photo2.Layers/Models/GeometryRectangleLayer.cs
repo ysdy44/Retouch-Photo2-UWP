@@ -1,10 +1,8 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Numerics;
-using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
@@ -22,22 +20,21 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Initializes a rectangle-layer.
         /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public GeometryRectangleLayer()
+        /// <param name="customDevice"> The custom-device. </param>
+        public GeometryRectangleLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new GeometryRectangleIcon(),
                 Type = this.ConstructStrings(),
             };
         }
         
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override  ILayer Clone(CanvasDevice customDevice)
         {
-            GeometryRectangleLayer rectangleLayer = new GeometryRectangleLayer();
+            GeometryRectangleLayer rectangleLayer = new GeometryRectangleLayer(customDevice);
 
-            LayerBase.CopyWith(resourceCreator, rectangleLayer, this);
+            LayerBase.CopyWith(customDevice, rectangleLayer, this);
             return rectangleLayer;
         }
 

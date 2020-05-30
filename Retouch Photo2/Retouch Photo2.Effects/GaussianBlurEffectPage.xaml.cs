@@ -66,16 +66,22 @@ namespace Retouch_Photo2.Effects.Models
                 var previous = layer.Effect.GaussianBlur_Radius;
                 history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.Effect.GaussianBlur_Radius = previous;
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layer.Effect.GaussianBlur_Radius = previous;
                 });
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layer.Effect.GaussianBlur_Radius = 0;
             });
 
             //History
             this.ViewModel.HistoryPush(history);
+
+            this.ViewModel.Invalidate();//Invalidate
         }
         public void FollowButton(Effect effect)
         {
@@ -113,11 +119,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.GaussianBlur_IsOn;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.GaussianBlur_IsOn = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.GaussianBlur_IsOn = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.GaussianBlur_IsOn = isOn;
                 });
 
@@ -131,14 +141,9 @@ namespace Retouch_Photo2.Effects.Models
 
         private void ConstructSharpen_Amount()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Radius
             this.RadiusSlider.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect gaussian blur");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -158,6 +163,8 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.GaussianBlur_Radius = radius;
                 });
 
@@ -166,6 +173,9 @@ namespace Retouch_Photo2.Effects.Models
             this.RadiusSlider.ValueChangeCompleted += (s, value) =>
             {
                 float radius = (float)value;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect gaussian blur");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -176,11 +186,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.StartingGaussianBlur_Radius;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.GaussianBlur_Radius = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.GaussianBlur_Radius = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.GaussianBlur_Radius = radius;
                 });
 

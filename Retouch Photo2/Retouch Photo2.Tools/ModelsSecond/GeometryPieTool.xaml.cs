@@ -95,9 +95,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryPieIcon();
         readonly Button _button = new Button { Tag = new GeometryPieIcon()};
 
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new GeometryPieLayer
+            return new GeometryPieLayer(customDevice)
             {
                 SweepAngle = this.SelectionViewModel.GeometryPieSweepAngle,
                 Transform = new Transform(transformer),
@@ -156,11 +156,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryPieLayer.SweepAngle;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryPieLayer layer2 = geometryPieLayer;
-
-                            layer2.SweepAngle = previous;
+                            //Refactoring
+                            geometryPieLayer.IsRefactoringRender = true;
+                            geometryPieLayer.IsRefactoringIconRender = true;
+                            geometryPieLayer.SweepAngle = previous;
                         });
 
+                        //Refactoring
+                        geometryPieLayer.IsRefactoringRender = true;
+                        geometryPieLayer.IsRefactoringIconRender = true;
                         geometryPieLayer.SweepAngle = sweepAngle;
                     }
                 });
@@ -173,17 +177,12 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ConstructSweepAngle2()
         {
-            //History
-            LayersPropertyHistory history = null;
-
-            //Value
-            this.SweepAngleTouchbarSlider.Minimum = 0d;
-            this.SweepAngleTouchbarSlider.Maximum = 360d;
+            //Value            
+            this.SweepAngleTouchbarSlider.Value = 0;
+            this.SweepAngleTouchbarSlider.Minimum = 0;
+            this.SweepAngleTouchbarSlider.Maximum = 360;
             this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //History
-                history = new LayersPropertyHistory("Set pie layer sweep angle");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -195,9 +194,6 @@ namespace Retouch_Photo2.Tools.Models
                         geometryPieLayer.CacheSweepAngle();
                     }
                 });
-
-                //History
-                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
             };
@@ -214,18 +210,21 @@ namespace Retouch_Photo2.Tools.Models
                     if (layer.Type == LayerType.GeometryPie)
                     {
                         GeometryPieLayer geometryPieLayer = (GeometryPieLayer)layer;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
                         geometryPieLayer.SweepAngle = sweepAngle;
                     }
                 });
-
-                //History
-                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.SweepAngleTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set pie layer sweep angle");
 
                 //Selection
                 this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle;
@@ -240,11 +239,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryPieLayer.StartingSweepAngle;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryPieLayer layer2 = geometryPieLayer;
-
-                            layer2.SweepAngle = previous;
+                            //Refactoring
+                            geometryPieLayer.IsRefactoringRender = true;
+                            geometryPieLayer.IsRefactoringIconRender = true;
+                            geometryPieLayer.SweepAngle = previous;
                         });
 
+                        //Refactoring
+                        geometryPieLayer.IsRefactoringRender = true;
+                        geometryPieLayer.IsRefactoringIconRender = true;
                         geometryPieLayer.SweepAngle = sweepAngle;
                     }
                 });

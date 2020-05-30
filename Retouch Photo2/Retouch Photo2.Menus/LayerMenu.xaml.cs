@@ -138,6 +138,9 @@ namespace Retouch_Photo2.Menus.Models
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
+
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Opacity = opacity;
                 });
 
@@ -159,12 +162,16 @@ namespace Retouch_Photo2.Menus.Models
                     //History
                     var previous = layer.StartingOpacity;
                     history.UndoActions.Push(() =>
-                    {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Opacity = previous;
+                    {    
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Opacity = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Opacity = opacity;
                 });
 
@@ -201,12 +208,16 @@ namespace Retouch_Photo2.Menus.Models
                     //History
                     var previous = layer.BlendMode;
                     history.UndoActions.Push(() =>
-                    {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.BlendMode = previous;
+                    {    
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.BlendMode = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.BlendMode = mode;
                 });
 
@@ -237,12 +248,16 @@ namespace Retouch_Photo2.Menus.Models
                     //History
                     var previous = layer.Visibility;
                     history.UndoActions.Push(() =>
-                    {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Visibility = previous;
+                    {   
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Visibility = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Visibility = value;
                 });
 
@@ -273,12 +288,16 @@ namespace Retouch_Photo2.Menus.Models
                     //History
                     var previous = layer.Style.IsFollowTransform;
                     history.UndoActions.Push(() =>
-                    {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Style.IsFollowTransform = previous;
+                    {   
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Style.IsFollowTransform = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Style.IsFollowTransform = value;
                 });
 
@@ -308,11 +327,15 @@ namespace Retouch_Photo2.Menus.Models
                     var previous = layer.TagType;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.TagType = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.TagType = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.TagType = type;
                 });
 

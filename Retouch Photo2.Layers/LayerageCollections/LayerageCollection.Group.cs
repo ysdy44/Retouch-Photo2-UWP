@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace Retouch_Photo2.Layers
                 parentsChildren.Remove(layerage);
                 parentsParentsChildren.Insert(parentsIndex, layerage);
 
+                //Refactoring
                 parents2.IsRefactoringTransformer = true;
 
                 return true;
@@ -66,6 +68,7 @@ namespace Retouch_Photo2.Layers
                     parentsChildren.Insert(index, layerage);
                 }
                 groupLayerage.Children.Clear();
+                //Refactoring
                 groupLayer.IsRefactoringTransformer = true;
 
                 //Remove
@@ -80,8 +83,9 @@ namespace Retouch_Photo2.Layers
 
         /// <summary>
         /// Group all selected layerages.
-        /// </summary>
-        public static void GroupAllSelectedLayers(LayerageCollection layerageCollection)
+        /// </summary>     
+        /// <param name="customDevice"> The custom-device. </param>
+        public static void GroupAllSelectedLayers(CanvasDevice customDevice, LayerageCollection layerageCollection)
         {
             //Layerages
             IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
@@ -93,10 +97,11 @@ namespace Retouch_Photo2.Layers
 
 
             //GroupLayer
-            GroupLayer groupLayer = new GroupLayer
+            GroupLayer groupLayer = new GroupLayer(customDevice)
             {
                 IsSelected = true,
                 IsExpand = false,
+                //Refactoring
                 IsRefactoringTransformer = true,
             };
             Layerage groupLayerage = groupLayer.ToLayerage();

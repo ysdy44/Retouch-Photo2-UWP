@@ -1,9 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -23,11 +21,11 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Initializes a group-layer.
         /// </summary>
-        public GroupLayer()
+        /// <param name="customDevice"> The custom-device. </param>
+        public GroupLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new GroupIcon(),
                 Type = this.ConstructStrings(),
             };
         }
@@ -35,6 +33,7 @@ namespace Retouch_Photo2.Layers.Models
 
         public override Transformer GetActualTransformer(Layerage layerage)
         {
+            //Refactoring
             if (this.IsRefactoringTransformer)
             {
                 this.IsRefactoringTransformer = false;
@@ -49,11 +48,11 @@ namespace Retouch_Photo2.Layers.Models
             return this.Transform.GetActualTransformer();
         }
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(CanvasDevice customDevice)
         {
-            GroupLayer groupLayer = new GroupLayer();
+            GroupLayer groupLayer = new GroupLayer(customDevice);
 
-            LayerBase.CopyWith(resourceCreator, groupLayer, this);
+            LayerBase.CopyWith(customDevice, groupLayer, this);
             return groupLayer;
         }
 

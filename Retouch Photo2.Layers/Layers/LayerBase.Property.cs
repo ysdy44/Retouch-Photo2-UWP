@@ -22,8 +22,6 @@ namespace Retouch_Photo2.Layers
     /// </summary>
     public abstract partial class LayerBase
     {
-        //@Static
-        public static CanvasDevice CanvasDevice = new CanvasDevice();
 
         //@Abstract
         public abstract LayerType Type { get; }
@@ -73,7 +71,7 @@ namespace Retouch_Photo2.Layers
         public Filter Filter { get; set; } = new Filter();
 
 
-        public abstract ILayer Clone(ICanvasResourceCreator resourceCreator);
+        public abstract ILayer Clone(CanvasDevice customDevice);
 
         public virtual void SaveWith(XElement element) { }
         public virtual void Load(XElement element) { }

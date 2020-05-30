@@ -108,51 +108,6 @@
   <ItemGroup>
     <Compile Include="Clipboards\Clipboard.cs" />
     <Compile Include="Clipboards\Clipboard.Instance.cs" />
-    <Compile Include="IconsSecond\GeometryArrowIcon.xaml.cs">
-      <DependentUpon>GeometryArrowIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="IconsSecond\GeometryCapsuleIcon.xaml.cs">
-      <DependentUpon>GeometryCapsuleIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="IconsSecond\GeometryCogIcon.xaml.cs">
-      <DependentUpon>GeometryCogIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="IconsSecond\GeometryDiamondIcon.xaml.cs">
-      <DependentUpon>GeometryDiamondIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="IconsSecond\GeometryHeartIcon.xaml.cs">
-      <DependentUpon>GeometryHeartIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="IconsSecond\GeometryPentagonIcon.xaml.cs">
-      <DependentUpon>GeometryPentagonIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="IconsSecond\GeometryCookieIcon.xaml.cs">
-      <DependentUpon>GeometryCookieIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="IconsSecond\GeometryDountIcon.xaml.cs">
-      <DependentUpon>GeometryDountIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="IconsSecond\GeometryPieIcon.xaml.cs">
-      <DependentUpon>GeometryPieIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="IconsSecond\GeometryRoundRectIcon.xaml.cs">
-      <DependentUpon>GeometryRoundRectIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="IconsSecond\GeometryStarIcon.xaml.cs">
-      <DependentUpon>GeometryStarIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="IconsSecond\GeometryTriangleIcon.xaml.cs">
-      <DependentUpon>GeometryTriangleIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\CurveMultiIcon.xaml.cs">
-      <DependentUpon>CurveMultiIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\TextArtisticIcon.xaml.cs">
-      <DependentUpon>TextArtisticIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\TextFrameIcon.xaml.cs">
-      <DependentUpon>TextFrameIcon.xaml</DependentUpon>
-    </Compile>
     <Compile Include="LayerageCollections\LayerageCollection.Arrange_Parents_Controls_Background.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.Clipboard.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.Layerage.cs" />
@@ -179,21 +134,6 @@
     <Compile Include="ModelsSecond\GeometryRoundRectLayer.cs" />
     <Compile Include="ModelsSecond\GeometryStarLayer.cs" />
     <Compile Include="ModelsSecond\GeometryTriangleLayer.cs" />
-    <Compile Include="Icons\CurveIcon.xaml.cs">
-      <DependentUpon>CurveIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\GeometryEllipseIcon.xaml.cs">
-      <DependentUpon>GeometryEllipseIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\GroupIcon.xaml.cs">
-      <DependentUpon>GroupIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\ImageIcon.xaml.cs">
-      <DependentUpon>ImageIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\GeometryRectangleIcon.xaml.cs">
-      <DependentUpon>GeometryRectangleIcon.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
@@ -241,87 +181,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="IconsSecond\GeometryArrowIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="IconsSecond\GeometryCapsuleIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="IconsSecond\GeometryCogIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="IconsSecond\GeometryDiamondIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="IconsSecond\GeometryHeartIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="IconsSecond\GeometryPentagonIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="IconsSecond\GeometryCookieIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="IconsSecond\GeometryDountIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="IconsSecond\GeometryPieIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="IconsSecond\GeometryRoundRectIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="IconsSecond\GeometryStarIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="IconsSecond\GeometryTriangleIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Icons\CurveIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Icons\CurveMultiIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Icons\GeometryEllipseIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Icons\GroupIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Icons\ImageIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Icons\GeometryRectangleIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Icon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Icons\TextArtisticIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Icons\TextFrameIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

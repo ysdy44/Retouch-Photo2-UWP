@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Controls
             {
                 this.SelectionViewModel.SetModeNone();//Selection
                 LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
-                this.ViewModel.Invalidate();
+                this.ViewModel.Invalidate();//Invalidate
             };
             this.RightTapped += (s, e) => this.ShowLayerMenu();
             this.Holding += (s, e) => this.ShowLayerMenu();
@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Controls
 
                 //Layer
                 Photocopier photocopier = photo.ToPhotocopier();
-                ImageLayer imageLayer = new ImageLayer
+                ImageLayer imageLayer = new ImageLayer(this.ViewModel.CanvasDevice)
                 {
                     Photocopier = photocopier,
                     IsSelected = true,

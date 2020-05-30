@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -14,7 +15,8 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        
         //@Generic
         public ExposureAdjustment Adjustment { get; set; }
 
@@ -58,26 +60,34 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.ExposureSlider.Value = 0;
 
-
-            if (this.Adjustment is ExposureAdjustment adjustment)
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set contrast adjustment");
-                
-                var previous = adjustment.Exposure;
-                history.UndoActions.Push(() =>
+                ILayer layer = layerage.Self;
+
+                if (this.Adjustment is ExposureAdjustment adjustment)
                 {
-                    ExposureAdjustment adjustment2 = adjustment;
+                    //History
+                    LayersPropertyHistory history = new LayersPropertyHistory("Set contrast adjustment");
 
-                    adjustment2.Exposure = previous;
-                });
+                    var previous = adjustment.Exposure;
+                    history.UndoActions.Push(() =>
+                    {
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.Exposure = previous;
+                    });
 
-                this.ViewModel.HistoryPush(history);
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    adjustment.Exposure = 0.0f;
 
+                    //History
+                    this.ViewModel.HistoryPush(history);
 
-                adjustment.Exposure = 0.0f;
-
-                this.ViewModel.Invalidate();
+                    this.ViewModel.Invalidate();//Invalidate
+                }
             }
         }
         public void Follow(ExposureAdjustment adjustment)
@@ -100,51 +110,69 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.ExposureSlider.SliderBrush = this.ExposureBrush;
 
-
-            //History
-            LayersPropertyHistory history = null;
-
-
             this.ExposureSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is ExposureAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set exposure adjustment exposure");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheExposure();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is ExposureAdjustment adjustment)
+                    {
+                        adjustment.CacheExposure();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.ExposureSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is ExposureAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float exposure = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.Exposure = exposure;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is ExposureAdjustment adjustment)
+                    {
+                        float exposure = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.Exposure = exposure;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.ExposureSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is ExposureAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float exposure = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingExposure;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is ExposureAdjustment adjustment)
                     {
-                        ExposureAdjustment adjustment2 = adjustment;
+                        float exposure = (float)value / 100.0f;
 
-                        adjustment2.Exposure = previous;
-                    });
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set exposure adjustment exposure");
 
-                    this.ViewModel.HistoryPush(history);
+                        var previous = adjustment.StartingExposure;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.Exposure = previous;
+                        });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.Exposure = exposure;
 
-                    adjustment.Exposure = exposure;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        //History
+                        this.ViewModel.HistoryPush(history);
+                        
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }

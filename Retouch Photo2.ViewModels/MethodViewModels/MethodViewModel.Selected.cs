@@ -36,9 +36,7 @@ namespace Retouch_Photo2.ViewModels
                     var previous = layer.IsSelected;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.IsSelected = previous;
+                        layer.IsSelected = previous;
                     });
                     
                     layer.IsSelected = false;
@@ -55,20 +53,17 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodSelectedNot(Layerage selectedLayerage)
         {
-            ILayer layer = selectedLayerage.Self;
+            ILayer selectedLayer = selectedLayerage.Self; 
 
-            //History 
-            LayersPropertyHistory history = new LayersPropertyHistory("Set is selected");
-            var previous = layer.IsSelected;
+             //History 
+             LayersPropertyHistory history = new LayersPropertyHistory("Set is selected");
+            var previous = selectedLayer.IsSelected;
             history.UndoActions.Push(() =>
             {
-                ILayer layer2 = selectedLayerage.Self;
-
-                layer2.IsSelected = previous;
+                selectedLayer.IsSelected = previous;
             });
 
-            bool isSelected = !layer.IsSelected;
-            layer.IsSelected = isSelected;
+            selectedLayer.IsSelected = selectedLayer.IsSelected;
 
             this.SetMode(this.LayerageCollection);//Selection
             //LayerageCollection.ArrangeLayersBackgroundItemClick(selectedLayerage);
@@ -90,9 +85,7 @@ namespace Retouch_Photo2.ViewModels
                 var previous = selectedLayer.IsSelected;
                 history.UndoActions.Push(() =>
                 {
-                    ILayer selectedLayer2 = selectedLayer;
-
-                    selectedLayer2.IsSelected = previous;
+                    selectedLayer.IsSelected = previous;
                 });
 
                 selectedLayer.IsSelected = true;
@@ -111,9 +104,7 @@ namespace Retouch_Photo2.ViewModels
                         var previous = layer.IsSelected;
                         history.UndoActions.Push(() =>
                         {
-                            ILayer layer2 = layerage.Self;
-
-                            layer2.IsSelected = previous;
+                            layer.IsSelected = previous;
                         });
 
                         layer.IsSelected = false;
@@ -142,9 +133,7 @@ namespace Retouch_Photo2.ViewModels
                 var previous = selectedLayer.IsSelected;
                 history.UndoActions.Push(() =>
                 {
-                    ILayer selectedLayer2 = selectedLayerage.Self;
-
-                    selectedLayer2.IsSelected = previous;
+                    selectedLayer.IsSelected = previous;
                 });
                 
                 selectedLayer.IsSelected = true;
@@ -171,9 +160,7 @@ namespace Retouch_Photo2.ViewModels
                 var previous = selectedLayer.IsSelected;
                 history.UndoActions.Push(() =>
                 {
-                    ILayer selectedLayer2 = selectedLayerage.Self;
-
-                    selectedLayer2.IsSelected = previous;
+                    selectedLayer.IsSelected = previous;
                 });
 
                 selectedLayer.IsSelected = false;
@@ -207,9 +194,7 @@ namespace Retouch_Photo2.ViewModels
                         var previous = selectedLayer.IsSelected;
                         history.UndoActions.Push(() =>
                         {
-                            ILayer selectedLayer2 = selectedLayer;
-
-                            selectedLayer2.IsSelected = previous;
+                            selectedLayer.IsSelected = previous;
                         });
 
                         layer.IsSelected = false;
@@ -221,9 +206,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetModeSingle(selectedLayerage);//Selection
-
             LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
-
             this.Invalidate();//Invalidate
         }
 

@@ -298,7 +298,7 @@ namespace Retouch_Photo2.Menus.Models
             if (this.Adjustment == null) return;
 
             this.Adjustment.Reset();
-            this.ViewModel.Invalidate();
+            this.ViewModel.Invalidate();//Invalidate
         }
     }
     
@@ -391,10 +391,14 @@ namespace Retouch_Photo2.Menus.Models
 
 
                 var previous = layer.Filter.Clone();
-                history.UndoActions.Push((Action)(() =>
+                history.UndoActions.Push((() =>
                 {
                     ILayer layer2 = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringTransformer = true;
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer2.Filter = previous.Clone();
                 }));
 
@@ -426,11 +430,12 @@ namespace Retouch_Photo2.Menus.Models
 
 
                 var previous = layer.Filter.Clone();
-                history.UndoActions.Push((Action)(() =>
-                {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.Filter = previous.Clone();
+                history.UndoActions.Push((() =>
+                {            
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layer.Filter = previous.Clone();
                 }));
 
 
@@ -461,11 +466,12 @@ namespace Retouch_Photo2.Menus.Models
 
 
                 var previous = layer.Filter.Clone();
-                history.UndoActions.Push((Action)(() =>
+                history.UndoActions.Push((() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.Filter = previous.Clone();
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layer.Filter = previous.Clone();
                 }));
 
 

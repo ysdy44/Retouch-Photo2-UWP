@@ -63,9 +63,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new TextFrameIcon();
         readonly ToolButton _button = new ToolButton(new TextFrameIcon());
 
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new TextFrameLayer
+            return new TextFrameLayer(customDevice)
             {
                 IsSelected = true,
                 Transform = new Transform(transformer),

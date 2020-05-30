@@ -92,9 +92,9 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Get own copy.
         /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="customDevice"> The custom-device. </param>
         /// <returns> The cloned ILayer. </returns>
-        ILayer Clone(ICanvasResourceCreator resourceCreator);
+        ILayer Clone(CanvasDevice customDevice);
 
         /// <summary>
         /// Saves the entire <see cref="ILayer"/> to a XElement.
@@ -136,7 +136,7 @@ namespace Retouch_Photo2.Layers
         bool IsRefactoringRender { get; set; }
 
         /// <summary> Gets or sets ILayer is need to refactoring icon render. </summary>
-        bool IsIconRefactoringRender { get; set; }
+        bool IsRefactoringIconRender { get; set; }
 
         /// <summary>
         /// Gets a specific actual rended-layer (with icon render).

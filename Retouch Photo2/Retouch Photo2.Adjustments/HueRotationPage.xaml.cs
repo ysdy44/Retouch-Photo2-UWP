@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System;
 using Windows.ApplicationModel.Resources;
@@ -15,6 +16,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Generic
         public HueRotationAdjustment Adjustment { get; set; }
@@ -58,26 +60,34 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.HueRotationSlider.Value = 0;
 
-
-            if (this.Adjustment is HueRotationAdjustment adjustment)
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set hue rotation adjustment");
-                
-                var previous = adjustment.Angle;
-                history.UndoActions.Push(() =>
+                ILayer layer = layerage.Self;
+
+                if (this.Adjustment is HueRotationAdjustment adjustment)
                 {
-                    HueRotationAdjustment adjustment2 = adjustment;
+                    //History
+                    LayersPropertyHistory history = new LayersPropertyHistory("Set hue rotation adjustment");
 
-                    adjustment2.Angle = previous;
-                });
+                    var previous = adjustment.Angle;
+                    history.UndoActions.Push(() =>
+                    {
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.Angle = previous;
+                    });
 
-                this.ViewModel.HistoryPush(history);
+                    this.ViewModel.HistoryPush(history);
 
 
-                adjustment.Angle = 0.0f;
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    adjustment.Angle = 0.0f;
 
-                this.ViewModel.Invalidate();
+                    this.ViewModel.Invalidate();//Invalidate
+                }
             }
         }
         public void Follow(HueRotationAdjustment adjustment)
@@ -100,51 +110,69 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.HueRotationSlider.SliderBrush = this.AngleBrush;
 
-
-            //History
-            LayersPropertyHistory history = null;
-
-
             this.HueRotationSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is HueRotationAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set hue rotation adjustment angle");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheAngle();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is HueRotationAdjustment adjustment)
+                    {
+                        adjustment.CacheAngle();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.HueRotationSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is HueRotationAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float angle = (float)value * FanKit.Math.Pi / 180.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.Angle = angle;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is HueRotationAdjustment adjustment)
+                    {
+                        float angle = (float)value * FanKit.Math.Pi / 180.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.Angle = angle;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.HueRotationSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is HueRotationAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float angle = (float)value * FanKit.Math.Pi / 180.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingAngle;
-                    history.UndoActions.Push((Action)(() =>
+                    if (this.Adjustment is HueRotationAdjustment adjustment)
                     {
-                        HueRotationAdjustment adjustment2 = adjustment;
-
-                        adjustment2.Angle = previous;
-                    }));
-
-                    this.ViewModel.HistoryPush(history);
+                        float angle = (float)value * FanKit.Math.Pi / 180.0f;
 
 
-                    adjustment.Angle = angle;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set hue rotation adjustment angle");
+
+                        var previous = adjustment.StartingAngle;
+                        history.UndoActions.Push((() =>
+                        {            
+                            //Refactoring
+                            layer.IsRefactoringTransformer = true;
+                            layer.IsRefactoringRender = true;
+                            adjustment.Angle = previous;
+                        }));
+
+                        this.ViewModel.HistoryPush(history);
+
+                        //Refactoring
+                        layer.IsRefactoringTransformer = true;
+                        layer.IsRefactoringRender = true;
+                        adjustment.Angle = angle;
+
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }

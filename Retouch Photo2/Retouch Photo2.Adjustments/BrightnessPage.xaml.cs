@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -14,6 +15,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Generic
         public BrightnessAdjustment Adjustment { get; set; }
@@ -67,39 +69,46 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.WhiteLightSlider.Value = 100;
             this.WhiteDarkSlider.Value = 100;
-
             this.BlackLightSlider.Value = 0;
             this.BlackDarkSlider.Value = 0;
 
-
-            if (this.Adjustment is BrightnessAdjustment adjustment)
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment");
-                
-                var previous1 = adjustment.WhiteLight;
-                var previous2 = adjustment.WhiteDark;
-                var previous3 = adjustment.BlackLight;
-                var previous4 = adjustment.BlackDark;
-                history.UndoActions.Push(() =>
+                ILayer layer = layerage.Self;
+
+                if (this.Adjustment is BrightnessAdjustment adjustment)
                 {
-                    BrightnessAdjustment adjustment2 = adjustment;
+                    //History
+                    LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment");
 
-                    adjustment2.WhiteLight = previous1;
-                    adjustment2.WhiteDark = previous2;
-                    adjustment2.BlackLight = previous3;
-                    adjustment2.BlackDark = previous4;
-                });
+                    var previous1 = adjustment.WhiteLight;
+                    var previous2 = adjustment.WhiteDark;
+                    var previous3 = adjustment.BlackLight;
+                    var previous4 = adjustment.BlackDark;
+                    history.UndoActions.Push(() =>
+                    {
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.WhiteLight = previous1;
+                        adjustment.WhiteDark = previous2;
+                        adjustment.BlackLight = previous3;
+                        adjustment.BlackDark = previous4;
+                    });
 
-                this.ViewModel.HistoryPush(history);
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    adjustment.WhiteLight = 1.0f;
+                    adjustment.WhiteDark = 1.0f;
+                    adjustment.BlackLight = 0.0f;
+                    adjustment.BlackDark = 0.0f;
 
+                    //History
+                    this.ViewModel.HistoryPush(history);
 
-                adjustment.WhiteLight = 1.0f;
-                adjustment.WhiteDark = 1.0f;
-                adjustment.BlackLight = 0.0f;
-                adjustment.BlackDark = 0.0f;
-
-                this.ViewModel.Invalidate();
+                    this.ViewModel.Invalidate();//Invalidate
+                }
             }
         }
         public void Follow(BrightnessAdjustment adjustment)
@@ -127,51 +136,69 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.WhiteLightSlider.SliderBrush = this.WhiteLightBrush;
 
-
-            //History
-            LayersPropertyHistory history = null;
-
-
             this.WhiteLightSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is BrightnessAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set brightness adjustment white light");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheWhiteLight();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is BrightnessAdjustment adjustment)
+                    {
+                        adjustment.CacheWhiteLight();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.WhiteLightSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is BrightnessAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float light = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.WhiteLight = light;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is BrightnessAdjustment adjustment)
+                    {
+                        float light = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.WhiteLight = light;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.WhiteLightSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is BrightnessAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float light = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingWhiteLight;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is BrightnessAdjustment adjustment)
                     {
-                        BrightnessAdjustment adjustment2 = adjustment;
+                        float light = (float)value / 100.0f;
 
-                        adjustment2.WhiteLight = previous;
-                    });
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment white light");
 
-                    this.ViewModel.HistoryPush(history);
+                        var previous = adjustment.StartingWhiteLight;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.WhiteLight = previous;
+                        });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.WhiteLight = light;
 
-                    adjustment.WhiteLight = light;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        //History
+                        this.ViewModel.HistoryPush(history);
+
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }
@@ -183,52 +210,70 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.WhiteDarkSlider.Maximum = 100;
 
             this.WhiteDarkSlider.SliderBrush = this.WhiteDarkBrush;
-
-
-            //History
-            LayersPropertyHistory history = null;
-
-
+            
             this.WhiteDarkSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is BrightnessAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set brightness adjustment white dark");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheWhiteDark();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is BrightnessAdjustment adjustment)
+                    {
+                        adjustment.CacheWhiteDark();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.WhiteDarkSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is BrightnessAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float dark = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.WhiteDark = dark;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is BrightnessAdjustment adjustment)
+                    {
+                        float dark = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.WhiteDark = dark;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.WhiteDarkSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is BrightnessAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float dark = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingWhiteDark;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is BrightnessAdjustment adjustment)
                     {
-                        BrightnessAdjustment adjustment2 = adjustment;
+                        float dark = (float)value / 100.0f;
 
-                        adjustment2.WhiteDark = previous;
-                    });
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment white dark");
 
-                    this.ViewModel.HistoryPush(history);
+                        var previous = adjustment.StartingWhiteDark;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.WhiteDark = previous;
+                        });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.WhiteDark = dark;
 
-                    adjustment.WhiteDark = dark;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        //History
+                        this.ViewModel.HistoryPush(history);
+
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }
@@ -242,51 +287,69 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.BlackLightSlider.SliderBrush = this.BlackLightBrush;
 
-
-            //History
-            LayersPropertyHistory history = null;
-
-
             this.BlackLightSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is BrightnessAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set brightness adjustment black light");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheBlackLight();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is BrightnessAdjustment adjustment)
+                    {
+                        adjustment.CacheBlackLight();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.BlackLightSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is BrightnessAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float light = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.BlackLight = light;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is BrightnessAdjustment adjustment)
+                    {
+                        float light = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.BlackLight = light;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.BlackLightSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is BrightnessAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float light = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingBlackLight;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is BrightnessAdjustment adjustment)
                     {
-                        BrightnessAdjustment adjustment2 = adjustment;
+                        float light = (float)value / 100.0f;
 
-                        adjustment2.BlackLight = previous;
-                    });
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment black light");
 
-                    this.ViewModel.HistoryPush(history);
+                        var previous = adjustment.StartingBlackLight;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.BlackLight = previous;
+                        });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.BlackLight = light;
 
-                    adjustment.BlackLight = light;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        //History
+                        this.ViewModel.HistoryPush(history);
+
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }
@@ -299,51 +362,69 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.BlackDarkSlider.SliderBrush = this.BlackDarkBrush;
 
-
-            //History
-            LayersPropertyHistory history = null;
-
-
             this.BlackDarkSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is BrightnessAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set brightness adjustment black dark");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheBlackDark();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is BrightnessAdjustment adjustment)
+                    {
+                        adjustment.CacheBlackDark();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.BlackDarkSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is BrightnessAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float dark = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
+                    
+                    if (this.Adjustment is BrightnessAdjustment adjustment)
+                    {
+                        float dark = (float)value / 100.0f;
 
-                    adjustment.BlackDark = dark;
-                    this.ViewModel.Invalidate();
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.BlackDark = dark;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.BlackDarkSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is BrightnessAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float dark = (float)value / 100.0f;
-
-
-                    var previous = adjustment.StartingBlackDark;
-                    history.UndoActions.Push(() =>
+                    ILayer layer = layerage.Self;
+                    
+                    if (this.Adjustment is BrightnessAdjustment adjustment)
                     {
-                        BrightnessAdjustment adjustment2 = adjustment;
+                        float dark = (float)value / 100.0f;
 
-                        adjustment2.BlackDark = previous;
-                    });
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment black dark");
 
-                    this.ViewModel.HistoryPush(history);
+                        var previous = adjustment.StartingBlackDark;
+                        history.UndoActions.Push(() =>
+                        {  
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.BlackDark = previous;
+                        });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.BlackDark = dark;
 
-                    adjustment.BlackDark = dark;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        //History
+                        this.ViewModel.HistoryPush(history);
+                        
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }

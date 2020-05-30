@@ -170,7 +170,7 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.CanvasTransformer.CachePinch(center, space);
 
                 this.ViewModel.NotifyCanvasTransformerScale();//Notify
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
                 this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
             };
@@ -186,7 +186,7 @@ namespace Retouch_Photo2.Controls
                 this._inputDevice = InputDevice.None;
 
                 this.ViewModel.NotifyCanvasTransformerScale();//Notify
-                this.ViewModel.Invalidate(InvalidateMode.HD);
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
 
                 this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
             };

@@ -96,9 +96,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryHeartIcon();
         readonly Button _button = new Button { Tag = new GeometryHeartIcon()};
 
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new GeometryHeartLayer
+            return new GeometryHeartLayer(customDevice)
             {
                 Spread = this.SelectionViewModel.GeometryHeartSpread,
                 Transform = new Transform(transformer),
@@ -156,11 +156,13 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryHeartLayer.Spread;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryHeartLayer layer2 = geometryHeartLayer;
-
-                            layer2.Spread = previous;
+                            //Refactoring
+                            geometryHeartLayer.IsRefactoringRender = true;
+                            geometryHeartLayer.Spread = previous;
                         });
 
+                        //Refactoring
+                        geometryHeartLayer.IsRefactoringRender = true;
                         geometryHeartLayer.Spread = spread;
                     }
                 });
@@ -173,16 +175,12 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ConstructSpread2()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Value
-            this.SpreadTouchbarSlider.Minimum = 0d;
-            this.SpreadTouchbarSlider.Maximum = 100d;
+            this.SpreadTouchbarSlider.Value = 0;
+            this.SpreadTouchbarSlider.Minimum = 0;
+            this.SpreadTouchbarSlider.Maximum = 100;
             this.SpreadTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                history = new LayersPropertyHistory("Set heart layer spread");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -212,6 +210,9 @@ namespace Retouch_Photo2.Tools.Models
                     if (layer.Type == LayerType.GeometryHeart)
                     {
                         GeometryHeartLayer geometryHeartLayer = (GeometryHeartLayer)layer;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
                         geometryHeartLayer.Spread = spread;
                     }
                 });
@@ -224,6 +225,9 @@ namespace Retouch_Photo2.Tools.Models
                 if (spread < 0.0f) spread = 0.0f;
                 if (spread > 1.0f) spread = 1.0f;
 
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set heart layer spread");
+                
                 //Selection
                 this.SelectionViewModel.GeometryHeartSpread = spread;
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -237,11 +241,13 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryHeartLayer.StartingSpread;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryHeartLayer layer2 = geometryHeartLayer;
-
-                            layer2.Spread = previous;
+                            //Refactoring
+                            geometryHeartLayer.IsRefactoringRender = true;
+                            geometryHeartLayer.Spread = previous;
                         });
 
+                        //Refactoring
+                        geometryHeartLayer.IsRefactoringRender = true;
                         geometryHeartLayer.Spread = spread;
                     }
                 });

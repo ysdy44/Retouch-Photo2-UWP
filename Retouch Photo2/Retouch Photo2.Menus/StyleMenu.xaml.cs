@@ -59,20 +59,22 @@ namespace Retouch_Photo2.Menus.Models
                         var previous = layer.Style.Clone();
                         history.UndoActions.Push(() =>
                         {
-                            ILayer layer2 = layerage.Self;
-
-                            layer2.Style = previous.Clone();
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            layer.Style = previous.Clone();
                         });
 
-                        {
-                            Transformer transformer2 = layer.Transform.Transformer;
-                            Style style2 = item.Clone();
-                            style2.CacheTransform();
-                            style2.DeliverBrushPoints(transformer2);
-                            layer.Style = style2;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        Transformer transformer2 = layer.Transform.Transformer;
+                        Style style2 = item.Clone();
+                        style2.CacheTransform();
+                        style2.DeliverBrushPoints(transformer2);
+                        layer.Style = style2;
 
-                            transformer = transformer2;
-                        }
+                        transformer = transformer2;
                         this.SelectionViewModel.StyleLayerage = layerage;
                     });
                     {

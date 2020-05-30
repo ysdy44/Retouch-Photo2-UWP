@@ -175,19 +175,8 @@ namespace Retouch_Photo2.Menus.Models
         private void Reset()
         {
             if (this.CurrentEffect == null) return;
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-                Effect effect = layer.Effect;
-
-                this.CurrentEffect.Reset();
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
+            this.CurrentEffect.Reset();
         }
-        
 
         //Navigate
         public void Navigate(IEffectPage effectPage)

@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Blends;
+﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Blends;
 using Retouch_Photo2.Layers.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,17 +37,18 @@ namespace Retouch_Photo2.Layers
 
         /// <summary>
         ///  Loads a <see cref="ILayer"/>s from an XDocument.
-        /// </summary>
+        /// </summary>    
+        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="document"> The source XDocument. </param>
         /// <returns> The loaded <see cref="ILayer"/>s. </returns>
-        public static IEnumerable<ILayer> LoadLayers(XDocument document)
+        public static IEnumerable<ILayer> LoadLayers(CanvasDevice customDevice, XDocument document)
         {
             XElement root = document.Element("Root");
 
             return
                 from layer
                 in root.Elements()
-                select XML.LoadILayer(layer);
+                select XML.LoadILayer(customDevice, layer);
         }
 
     }

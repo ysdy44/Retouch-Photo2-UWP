@@ -98,9 +98,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryDountIcon();
         readonly Button _button = new Button { Tag = new GeometryDountIcon()};
 
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new GeometryDountLayer
+            return new GeometryDountLayer(customDevice)
             {
                 HoleRadius = this.SelectionViewModel.GeometryDountHoleRadius,
                 Transform = new Transform(transformer),
@@ -159,11 +159,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryDountLayer.HoleRadius;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryDountLayer layer2 = geometryDountLayer;
-
-                            layer2.HoleRadius = previous;
+                            //Refactoring
+                            geometryDountLayer.IsRefactoringRender = true;
+                            geometryDountLayer.IsRefactoringIconRender = true;
+                            geometryDountLayer.HoleRadius = previous;
                         });
 
+                        //Refactoring
+                        geometryDountLayer.IsRefactoringRender = true;
+                        geometryDountLayer.IsRefactoringIconRender = true;
                         geometryDountLayer.HoleRadius = holeRadius;
                     }
                 });
@@ -176,17 +180,12 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ConstructHoleRadius2()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Value
             this.HoleRadiusTouchbarSlider.Unit = "%";
             this.HoleRadiusTouchbarSlider.NumberMinimum = 0;
             this.HoleRadiusTouchbarSlider.NumberMaximum = 100;
             this.HoleRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                history = new LayersPropertyHistory("Set dount layer hole radius");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -216,6 +215,9 @@ namespace Retouch_Photo2.Tools.Models
                     if (layer.Type == LayerType.GeometryDount)
                     {
                         GeometryDountLayer geometryDountLayer = (GeometryDountLayer)layer;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
                         geometryDountLayer.HoleRadius = holeRadius;
                     }
                 });
@@ -227,6 +229,9 @@ namespace Retouch_Photo2.Tools.Models
                 float holeRadius = (float)value / 100.0f;
                 if (holeRadius < 0.0f) holeRadius = 0.0f;
                 if (holeRadius > 1.0f) holeRadius = 1.0f;
+                
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set dount layer hole radius");
 
                 //Selection
                 this.SelectionViewModel.GeometryDountHoleRadius = holeRadius;
@@ -241,11 +246,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryDountLayer.StartingHoleRadius;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryDountLayer layer2 = geometryDountLayer;
-
-                            layer2.HoleRadius = previous;
+                            //Refactoring
+                            geometryDountLayer.IsRefactoringRender = true;
+                            geometryDountLayer.IsRefactoringIconRender = true;
+                            geometryDountLayer.HoleRadius = previous;
                         });
 
+                        //Refactoring
+                        geometryDountLayer.IsRefactoringRender = true;
+                        geometryDountLayer.IsRefactoringIconRender = true;
                         geometryDountLayer.HoleRadius = holeRadius;
                     }
                 });

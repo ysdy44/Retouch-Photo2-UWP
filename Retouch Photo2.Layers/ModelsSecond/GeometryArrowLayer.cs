@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
@@ -33,19 +32,18 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Initializes a arrow-layer.
         /// </summary>
-        public GeometryArrowLayer()
+        public GeometryArrowLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new GeometryArrowIcon(),
                 Type = this.ConstructStrings(),
             };
         }
 
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(CanvasDevice customDevice)
         {
-            GeometryArrowLayer arrowLayer = new GeometryArrowLayer
+            GeometryArrowLayer arrowLayer = new GeometryArrowLayer(customDevice)
             {
                 IsAbsolute = this.IsAbsolute,
                 Width = this.Width,
@@ -55,7 +53,7 @@ namespace Retouch_Photo2.Layers.Models
                 RightTail = this.RightTail,
             };
 
-            LayerBase.CopyWith(resourceCreator, arrowLayer, this);
+            LayerBase.CopyWith(customDevice, arrowLayer, this);
             return arrowLayer;
         }
         

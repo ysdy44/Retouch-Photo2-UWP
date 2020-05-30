@@ -69,19 +69,25 @@ namespace Retouch_Photo2.Effects.Models
                 var previous1 = layer.Effect.DirectionalBlur_Radius;
                 var previous2 = layer.Effect.DirectionalBlur_Angle;
                 history.UndoActions.Push(() =>
-                {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.Effect.DirectionalBlur_Radius = previous1;
-                    layer2.Effect.DirectionalBlur_Angle = previous2;
+                {   
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layer.Effect.DirectionalBlur_Radius = previous1;
+                    layer.Effect.DirectionalBlur_Angle = previous2;
                 });
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layer.Effect.DirectionalBlur_Radius = 0;
                 layer.Effect.DirectionalBlur_Angle = 0;
             });
 
             //History
             this.ViewModel.HistoryPush(history);
+
+            this.ViewModel.Invalidate();//Invalidate
         }
         public void FollowButton(Effect effect)
         {
@@ -120,11 +126,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.DirectionalBlur_IsOn;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.DirectionalBlur_IsOn = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.DirectionalBlur_IsOn = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.DirectionalBlur_IsOn = isOn;
                 });
 
@@ -138,14 +148,9 @@ namespace Retouch_Photo2.Effects.Models
 
         private void ConstructDirectionalBlur_Radius()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Radius
             this.RadiusSlider.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect directional blur");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -165,6 +170,8 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.DirectionalBlur_Radius = radius;
                 });
 
@@ -174,6 +181,9 @@ namespace Retouch_Photo2.Effects.Models
             {
                 float radius = (float)value;
 
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect directional blur");
+                
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -183,11 +193,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.StartingDirectionalBlur_Radius;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.DirectionalBlur_Radius = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.DirectionalBlur_Radius = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.DirectionalBlur_Radius = radius;
                 });
 
@@ -200,15 +214,10 @@ namespace Retouch_Photo2.Effects.Models
 
 
         private void ConstructDirectionalBlur_Angle()
-        {
-            //History
-            LayersPropertyHistory history = null;
-
+        { 
             //Angle
             this.AnglePicker.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect directional blur");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -228,6 +237,8 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.DirectionalBlur_Angle = radians;
                 });
 
@@ -237,6 +248,9 @@ namespace Retouch_Photo2.Effects.Models
             {
                 float radians = (float)value;
 
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect directional blur");
+                
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -246,11 +260,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.StartingDirectionalBlur_Angle;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.DirectionalBlur_Angle = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.DirectionalBlur_Angle = previous;
                     });
-
+                    
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.DirectionalBlur_Angle = radians;
                 });
 

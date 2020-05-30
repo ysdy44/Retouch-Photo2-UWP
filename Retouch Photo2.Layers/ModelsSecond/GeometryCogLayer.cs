@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
@@ -35,25 +34,25 @@ namespace Retouch_Photo2.Layers.Models
         public float Notch = 0.6f;
         public float StartingNotch { get; private set; }
         public void CacheNotch() => this.StartingNotch = this.Notch;
-    
+
 
         //@Construct
         /// <summary>
         /// Initializes a cog-layer.
         /// </summary>
-        public GeometryCogLayer()
+        /// <param name="customDevice"> The custom-device. </param>
+        public GeometryCogLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new GeometryCogIcon(),
                 Type = this.ConstructStrings(),
             };
         }
               
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(CanvasDevice customDevice)
         {
-            GeometryCogLayer cogLayer = new GeometryCogLayer
+            GeometryCogLayer cogLayer = new GeometryCogLayer(customDevice)
             {
                 Count = this.Count,
                 InnerRadius = this.InnerRadius,
@@ -61,7 +60,7 @@ namespace Retouch_Photo2.Layers.Models
                 Notch = this.Notch,
             };
 
-            LayerBase.CopyWith(resourceCreator, cogLayer, this);
+            LayerBase.CopyWith(customDevice, cogLayer, this);
             return cogLayer;
         }
         

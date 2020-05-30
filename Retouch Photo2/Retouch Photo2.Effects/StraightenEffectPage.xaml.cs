@@ -67,16 +67,22 @@ namespace Retouch_Photo2.Effects.Models
                 var previous = layer.Effect.Straighten_Angle;
                 history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.Effect.Straighten_Angle = previous;
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layer.Effect.Straighten_Angle = previous;
                 });
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layer.Effect.Straighten_Angle = 0;
             });
 
             //History
             this.ViewModel.HistoryPush(history);
+
+            this.ViewModel.Invalidate();//Invalidate
         }
         public void FollowButton(Effect effect)
         {
@@ -115,11 +121,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.Straighten_IsOn;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.Straighten_IsOn = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.Straighten_IsOn = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.Straighten_IsOn = isOn;
                 });
 
@@ -133,14 +143,9 @@ namespace Retouch_Photo2.Effects.Models
 
         private void ConstructStraighten_Angle()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Angle
             this.AnglePicker.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect straighten");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -158,6 +163,9 @@ namespace Retouch_Photo2.Effects.Models
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
+
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.Straighten_Angle = radians;
                 });
 
@@ -166,6 +174,9 @@ namespace Retouch_Photo2.Effects.Models
             this.AnglePicker.ValueChangeCompleted += (s, value) =>
             {
                 float radians = (float)value;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect straighten");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -176,11 +187,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.StartingStraighten_Angle;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.Straighten_Angle = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.Straighten_Angle = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.Straighten_Angle = radians;
                 });
 

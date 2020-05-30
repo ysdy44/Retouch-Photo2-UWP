@@ -98,9 +98,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryTriangleIcon();
         readonly Button _button = new Button { Tag = new GeometryTriangleIcon() };
 
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new GeometryTriangleLayer
+            return new GeometryTriangleLayer(customDevice)
             {
                 Center = this.SelectionViewModel.GeometryTriangleCenter,
                 Transform = new Transform(transformer),
@@ -158,11 +158,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryTriangleLayer.Center;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryTriangleLayer layer2 = geometryTriangleLayer;
-
-                            layer2.Center = previous;
+                            //Refactoring
+                            geometryTriangleLayer.IsRefactoringRender = true;
+                            geometryTriangleLayer.IsRefactoringIconRender = true;
+                            geometryTriangleLayer.Center = previous;
                         });
 
+                        //Refactoring
+                        geometryTriangleLayer.IsRefactoringRender = true;
+                        geometryTriangleLayer.IsRefactoringIconRender = true;
                         geometryTriangleLayer.Center = center;
                     }
                 });
@@ -175,16 +179,12 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ConstructCenter2()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Value
-            this.CenterTouchbarSlider.Minimum = 0d;
-            this.CenterTouchbarSlider.Maximum = 100d;
+            this.CenterTouchbarSlider.Value = 0;
+            this.CenterTouchbarSlider.Minimum = 0;
+            this.CenterTouchbarSlider.Maximum = 100;
             this.CenterTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                history = new LayersPropertyHistory("Set triangle layer center");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -214,6 +214,9 @@ namespace Retouch_Photo2.Tools.Models
                     if (layer.Type == LayerType.GeometryTriangle)
                     {
                         GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
+                   
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
                         geometryTriangleLayer.Center = center;
                     }
                 });
@@ -225,6 +228,9 @@ namespace Retouch_Photo2.Tools.Models
                 float center = (float)value / 100.0f;
                 if (center < 0.0f) center = 0.0f;
                 if (center > 1.0f) center = 1.0f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set triangle layer center");
 
                 //Selection
                 this.SelectionViewModel.GeometryTriangleCenter = center;
@@ -239,11 +245,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryTriangleLayer.StartingCenter;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryTriangleLayer layer2 = geometryTriangleLayer;
-
-                            layer2.Center = previous;
+                            //Refactoring
+                            geometryTriangleLayer.IsRefactoringRender = true;
+                            geometryTriangleLayer.IsRefactoringIconRender = true;
+                            geometryTriangleLayer.Center = previous;
                         });
 
+                        //Refactoring
+                        geometryTriangleLayer.IsRefactoringRender = true;
+                        geometryTriangleLayer.IsRefactoringIconRender = true;
                         geometryTriangleLayer.Center = center;
                     }
                 });
@@ -263,8 +273,7 @@ namespace Retouch_Photo2.Tools.Models
                 LayersPropertyHistory history = new LayersPropertyHistory("Set triangle layer center");
 
                 //Selection
-                float selectionCenter = 1.0f - this.SelectionViewModel.GeometryTriangleCenter;
-                this.SelectionViewModel.GeometryTriangleCenter = selectionCenter;
+                this.SelectionViewModel.GeometryTriangleCenter = 1.0f - this.SelectionViewModel.GeometryTriangleCenter;
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
@@ -275,14 +284,17 @@ namespace Retouch_Photo2.Tools.Models
 
                         var previous = geometryTriangleLayer.Center;
                         history.UndoActions.Push(() =>
-                        {
-                            GeometryTriangleLayer layer2 = geometryTriangleLayer;
-
-                            layer2.Center = previous;
+                        {     
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            geometryTriangleLayer.Center = previous;
                         });
 
-                        float center = 1.0f - geometryTriangleLayer.Center;
-                        geometryTriangleLayer.Center = center;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        geometryTriangleLayer.Center = 1.0f - geometryTriangleLayer.Center;
                     }
                 });
 

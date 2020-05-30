@@ -80,14 +80,15 @@ namespace Retouch_Photo2.Layers
             parentsChildren.Remove(source);
             parentsChildren.Insert(index, source);
 
-            //IsRefactoringTransformer
             if (source != null)
             {
-                ILayer source2 = source.Self;
+                //Refactoring
+                ILayer source2 = source.Self;       
                 source2.IsRefactoringTransformer = true;
             }
             if (destination != null)
             {
+                //Refactoring
                 ILayer destination2 = destination.Self;
                 destination2.IsRefactoringTransformer = true;
             }
@@ -140,14 +141,15 @@ namespace Retouch_Photo2.Layers
                 }
             }
 
-            //IsRefactoringTransformer
             if (source != null)
-            {
+            {         
+                //Refactoring
                 ILayer source2 = source.Self;
                 source2.IsRefactoringTransformer = true;
             }
             if (destination != null)
-            {
+            {         
+                //Refactoring
                 ILayer destination2 = destination.Self;
                 destination2.IsRefactoringTransformer = true;
             }

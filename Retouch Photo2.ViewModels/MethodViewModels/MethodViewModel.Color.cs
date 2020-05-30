@@ -22,9 +22,6 @@ namespace Retouch_Photo2.ViewModels
     {
 
 
-        //History
-        LayersPropertyHistory _historyMethodFillColor = null;
-
         public void MethodFillColorChanged(Color value)
         {
             //History
@@ -37,6 +34,7 @@ namespace Retouch_Photo2.ViewModels
                     this.Color = value;
                     break;
             }
+
             this.Fill = BrushBase.ColorBrush(value);
             this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
@@ -46,12 +44,17 @@ namespace Retouch_Photo2.ViewModels
                 var previous = layer.Style.Fill.Clone();
                 history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.Style.Fill = previous.Clone();
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layer.Style.Fill = previous.Clone();
                 });
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layer.Style.Fill = BrushBase.ColorBrush(value);
+
                 this.StyleLayerage = layerage;
             });
 
@@ -63,8 +66,6 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodFillColorChangeStarted(Color value)
         {
-            this._historyMethodFillColor = new LayersPropertyHistory("Set fill");
-
             //Selection
             this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
@@ -82,6 +83,8 @@ namespace Retouch_Photo2.ViewModels
             {
                 ILayer layer = layerage.Self;
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
                 layer.Style.Fill = BrushBase.ColorBrush(value);
             });
 
@@ -90,6 +93,9 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodFillColorChangeCompleted(Color value)
         {
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
+
             //Selection
             switch (this.FillOrStroke)
             {
@@ -97,6 +103,7 @@ namespace Retouch_Photo2.ViewModels
                     this.Color = value;
                     break;
             }
+
             this.Fill = BrushBase.ColorBrush(value);
             this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
@@ -104,28 +111,30 @@ namespace Retouch_Photo2.ViewModels
 
                 //History
                 var previous = layer.Style.StartingFill.Clone();
-                this._historyMethodFillColor.UndoActions.Push(() =>
+                history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.Style.Fill = previous.Clone();
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layer.Style.Fill = previous.Clone();
                 });
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layer.Style.Fill = BrushBase.ColorBrush(value);
+
                 this.StyleLayerage = layerage;
             });
 
             //History
-            this.HistoryPush(this._historyMethodFillColor);
+            this.HistoryPush(history);
 
             this.Invalidate(InvalidateMode.HD);//Invalidate 
         }
 
                
 
-
-        //History
-        LayersPropertyHistory _historyMethodStrokeColor = null;
 
         public void MethodStrokeColorChanged(Color value)
         {
@@ -165,8 +174,6 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodStrokeColorChangeStarted(Color value)
         {
-            this._historyMethodStrokeColor = new LayersPropertyHistory("Set stroke");
-
             //Selection
             this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
@@ -184,6 +191,8 @@ namespace Retouch_Photo2.ViewModels
             {
                 ILayer layer = layerage.Self;
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
                 layer.Style.Stroke = BrushBase.ColorBrush(value);
             });
 
@@ -192,6 +201,9 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodStrokeColorChangeCompleted(Color value)
         {
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set stroke");
+
             //Selection
             switch (this.FillOrStroke)
             {
@@ -199,6 +211,7 @@ namespace Retouch_Photo2.ViewModels
                     this.Color = value;
                     break;
             }
+
             this.Stroke = BrushBase.ColorBrush(value);
             this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
@@ -206,19 +219,24 @@ namespace Retouch_Photo2.ViewModels
 
                 //History
                 var previous = layer.Style.StartingStroke.Clone();
-                this._historyMethodStrokeColor.UndoActions.Push(() =>
+                history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.Style.Stroke = previous.Clone();
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layer.Style.Stroke = previous.Clone();
                 });
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layer.Style.Stroke = BrushBase.ColorBrush(value);
+
                 this.StyleLayerage = layerage;
             });
 
             //History
-            this.HistoryPush(this._historyMethodStrokeColor);
+            this.HistoryPush(history);
 
             this.Invalidate(InvalidateMode.HD);//Invalidate 
         }

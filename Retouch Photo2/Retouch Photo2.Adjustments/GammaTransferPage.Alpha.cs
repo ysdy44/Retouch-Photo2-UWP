@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml;
 
@@ -68,28 +69,34 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.AlphaToggleSwitch.Toggled += (s, e) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    bool disable = !this.AlphaToggleSwitch.IsOn;
-                    if (adjustment.AlphaDisable == disable) return;
+                    ILayer layer = layerage.Self;
 
-
-                    //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment alpha disable");
-
-                    var previous = adjustment.AlphaDisable;
-                    history.UndoActions.Push(()=> 
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
                     {
-                        GammaTransferAdjustment adjustment2 = adjustment;
-
-                        adjustment2.AlphaDisable = previous;
-                    });
-
-                    this.ViewModel.HistoryPush(history);
+                        bool disable = !this.AlphaToggleSwitch.IsOn;
+                        if (adjustment.AlphaDisable == disable) return;
 
 
-                    adjustment.AlphaDisable = disable;
-                    this.ViewModel.Invalidate();
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment alpha disable");
+
+                        var previous = adjustment.AlphaDisable;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.AlphaDisable = previous;
+                        });
+
+                        this.ViewModel.HistoryPush(history);
+
+
+                        adjustment.AlphaDisable = disable;
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
         }
@@ -102,52 +109,70 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.AlphaOffsetSlider.Maximum = 100;
 
             this.AlphaOffsetSlider.SliderBrush = this.AlphaLeftBrush;
-
-
-            //History
-            LayersPropertyHistory history = null;
-
-
+                       
             this.AlphaOffsetSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set gamma transfer adjustment alpha offset");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheAlphaOffset();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
+                    {
+                        adjustment.CacheAlphaOffset();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.AlphaOffsetSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float offset = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.AlphaOffset = offset;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
+                    {
+                        float offset = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.AlphaOffset = offset;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.AlphaOffsetSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float offset = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingAlphaOffset;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
                     {
-                        GammaTransferAdjustment adjustment2 = adjustment;
+                        float offset = (float)value / 100.0f;
+                        
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment alpha offset");
 
-                        adjustment2.AlphaOffset = previous;
-                    });
+                        var previous = adjustment.StartingAlphaOffset;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.AlphaOffset = previous;
+                        });
+                        
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.AlphaOffset = offset;
 
-                    this.ViewModel.HistoryPush(history);
+                        //History
+                        this.ViewModel.HistoryPush(history);
 
-
-                    adjustment.AlphaOffset = offset;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }
@@ -161,51 +186,69 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.AlphaExponentSlider.SliderBrush = this.AlphaLeftBrush;
 
-
-            //History
-            LayersPropertyHistory history = null;
-
-
             this.AlphaExponentSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set gamma transfer adjustment alpha exponent");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheAlphaExponent();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
+                    {
+                        adjustment.CacheAlphaExponent();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.AlphaExponentSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float exponent = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.AlphaExponent = exponent;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
+                    {
+                        float exponent = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.AlphaExponent = exponent;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.AlphaExponentSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float exponent = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingAlphaExponent;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
                     {
-                        GammaTransferAdjustment adjustment2 = adjustment;
+                        float exponent = (float)value / 100.0f;
+                        
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment alpha exponent");
 
-                        adjustment2.AlphaExponent = previous;
-                    });
+                        var previous = adjustment.StartingAlphaExponent;
+                        history.UndoActions.Push(() =>
+                        {
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.AlphaExponent = previous;
+                        });
 
-                    this.ViewModel.HistoryPush(history);
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.AlphaExponent = exponent;
 
+                        //History
+                        this.ViewModel.HistoryPush(history);
 
-                    adjustment.AlphaExponent = exponent;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }
@@ -219,51 +262,69 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.AlphaAmplitudeSlider.SliderBrush = this.AlphaLeftBrush;
 
-
-            //History
-            LayersPropertyHistory history = null;
-
-
             this.AlphaAmplitudeSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set gamma transfer adjustment alpha amplitude");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheAlphaAmplitude();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
+                    {
+                        adjustment.CacheAlphaAmplitude();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.AlphaAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float amplitude = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.AlphaAmplitude = amplitude;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
+                    {
+                        float amplitude = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.AlphaAmplitude = amplitude;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.AlphaAmplitudeSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float amplitude = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingAlphaAmplitude;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
                     {
-                        GammaTransferAdjustment adjustment2 = adjustment;
+                        float amplitude = (float)value / 100.0f;
+                        
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment alpha amplitude");
 
-                        adjustment2.AlphaAmplitude = previous;
-                    });
+                        var previous = adjustment.StartingAlphaAmplitude;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.AlphaAmplitude = previous;
+                        });
+                        
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.AlphaAmplitude = amplitude;
 
-                    this.ViewModel.HistoryPush(history);
+                        //History
+                        this.ViewModel.HistoryPush(history);
 
-
-                    adjustment.AlphaAmplitude = amplitude;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }

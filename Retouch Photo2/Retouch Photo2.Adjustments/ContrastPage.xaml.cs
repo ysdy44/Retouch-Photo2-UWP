@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -14,6 +15,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Generic
         public ContrastAdjustment Adjustment { get; set; }
@@ -57,26 +59,34 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.ContrastSlider.Value = 0;
 
-
-            if (this.Adjustment is ContrastAdjustment adjustment)
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set contrast adjustment");
-                
-                var previous = adjustment.Contrast;
-                history.UndoActions.Push(() =>
+                ILayer layer = layerage.Self;
+
+                if (this.Adjustment is ContrastAdjustment adjustment)
                 {
-                    ContrastAdjustment adjustment2 = adjustment;
+                    //History
+                    LayersPropertyHistory history = new LayersPropertyHistory("Set contrast adjustment");
 
-                    adjustment2.Contrast = previous;
-                });
+                    var previous = adjustment.Contrast;
+                    history.UndoActions.Push(() =>
+                    {
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.Contrast = previous;
+                    });
 
-                this.ViewModel.HistoryPush(history);
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    adjustment.Contrast = 0.0f;
 
+                    //History
+                    this.ViewModel.HistoryPush(history);
 
-                adjustment.Contrast = 0.0f;
-
-                this.ViewModel.Invalidate();
+                    this.ViewModel.Invalidate();//Invalidate
+                }
             }
         }
         public void Follow(ContrastAdjustment adjustment)
@@ -99,51 +109,69 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.ContrastSlider.SliderBrush = this.ContrastBrush;
 
-
-            //History
-            LayersPropertyHistory history = null;
-
-
             this.ContrastSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is ContrastAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set contrast adjustment contrast");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheContrast();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is ContrastAdjustment adjustment)
+                    {
+                        adjustment.CacheContrast();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.ContrastSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is ContrastAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float contrast = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.Contrast = contrast;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is ContrastAdjustment adjustment)
+                    {
+                        float contrast = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.Contrast = contrast;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.ContrastSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is ContrastAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float contrast = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingContrast;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is ContrastAdjustment adjustment)
                     {
-                        ContrastAdjustment adjustment2 = adjustment;
+                        float contrast = (float)value / 100.0f;
 
-                        adjustment2.Contrast = previous;
-                    });
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set contrast adjustment contrast");
 
-                    this.ViewModel.HistoryPush(history);
+                        var previous = adjustment.StartingContrast;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.Contrast = previous;
+                        });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.Contrast = contrast;
 
-                    adjustment.Contrast = contrast;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        //History
+                        this.ViewModel.HistoryPush(history);
+
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }

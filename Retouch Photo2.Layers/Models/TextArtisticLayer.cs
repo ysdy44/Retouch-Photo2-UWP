@@ -1,5 +1,4 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Layers.Icons;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
 
@@ -47,22 +46,21 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Initializes a TextArtistic-layer.
         /// </summary>
-        public TextArtisticLayer()
+        public TextArtisticLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new TextArtisticIcon(),
                 Type = this.ConstructStrings(),
             };
         }
 
         
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override  ILayer Clone(CanvasDevice customDevice)
         {
-            TextArtisticLayer artisticLayer = new TextArtisticLayer();
+            TextArtisticLayer artisticLayer = new TextArtisticLayer(customDevice);
          
             TextLayer.FontCopyWith(artisticLayer, this);
-            LayerBase.CopyWith(resourceCreator, artisticLayer, this);
+            LayerBase.CopyWith(customDevice, artisticLayer, this);
             return artisticLayer;
         }
 

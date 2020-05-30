@@ -63,9 +63,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new TextArtisticIcon();
         readonly ToolButton _button = new ToolButton(new TextArtisticIcon());
 
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new TextArtisticLayer
+            return new TextArtisticLayer(customDevice)
             {
                 FontText = "AAA",
                 IsSelected = true,

@@ -4,7 +4,6 @@ using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
@@ -52,39 +51,39 @@ namespace Retouch_Photo2.Layers.Models
         //@Construct   
         /// <summary>
         /// Initializes a image-layer.
-        /// </summary>
-        public ImageLayer()
+        /// </summary>       
+        /// <param name="customDevice"> The custom-device. </param>
+        public ImageLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new ImageIcon(),
                 Type = this.ConstructStrings(),
             };
         }
         /// <summary>
         /// Initializes a image-layer.
         /// </summary>
+        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="transformer"> The transformer. </param>
         /// <param name="photocopier"> The fill photocopier. </param>
-        public ImageLayer(Transformer transformer, Photocopier photocopier)
+        public ImageLayer(CanvasDevice customDevice, Transformer transformer, Photocopier photocopier)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new ImageIcon(),
                 Type = this.ConstructStrings(),
             };
             this.Photocopier = photocopier;
         }
 
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override  ILayer Clone(CanvasDevice customDevice)
         {
-            ImageLayer imageLayer = new ImageLayer()
+            ImageLayer imageLayer = new ImageLayer(customDevice)
             {
                 Photocopier = this.Photocopier,
             };
 
-            LayerBase.CopyWith(resourceCreator, imageLayer, this);
+            LayerBase.CopyWith(customDevice, imageLayer, this);
             return imageLayer;
         }
 

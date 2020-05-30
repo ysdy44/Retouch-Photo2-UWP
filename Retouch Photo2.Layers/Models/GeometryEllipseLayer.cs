@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
@@ -21,22 +20,21 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Initializes a ellipse-layer.
         /// </summary>
-        /// <param name="element"> The source XElement. </param>
-        public GeometryEllipseLayer()
+        /// <param name="customDevice"> The custom-device. </param>
+        public GeometryEllipseLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new GeometryEllipseIcon(),
                 Type = this.ConstructStrings(),
             };
         }               
 
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override  ILayer Clone(CanvasDevice customDevice)
         {
-            GeometryEllipseLayer ellipseLayer = new GeometryEllipseLayer();
+            GeometryEllipseLayer ellipseLayer = new GeometryEllipseLayer(customDevice);
 
-            LayerBase.CopyWith(resourceCreator, ellipseLayer, this);
+            LayerBase.CopyWith(customDevice, ellipseLayer, this);
             return ellipseLayer;
         }
 

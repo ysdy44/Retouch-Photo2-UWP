@@ -65,9 +65,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryRectangleIcon();
         readonly ToolButton _button = new ToolButton(new GeometryRectangleIcon());
 
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new GeometryRectangleLayer
+            return new GeometryRectangleLayer(customDevice)
             {
                 IsSelected = true,
                 Transform = new Transform(transformer),

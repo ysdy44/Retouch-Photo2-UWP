@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -25,25 +24,27 @@ namespace Retouch_Photo2.Layers.Models
         //@Construct
         /// <summary>
         /// Initializes a multi-curve-layer.
-        /// </summary>
-        public CurveMultiLayer()
+        /// </summary>   
+        /// <param name="customDevice"> The custom-device. </param>
+        public CurveMultiLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new CurveMultiIcon(),
                 Type = this.ConstructStrings(),
             };
         }
         /// <summary>
         /// Initializes a multi-curve-layer.
         /// </summary>
+        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="nodess"> The source nodes. </param>
-        public CurveMultiLayer(IList<NodeCollection> nodess) : this() => this.Nodess = nodess;
+        public CurveMultiLayer(CanvasDevice customDevice, IList<NodeCollection> nodess) : this(customDevice) => this.Nodess = nodess;
         /// <summary>
         /// Initializes a multi-curve-layer.
         /// </summary>
+        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="nodess"> The source nodes. </param>
-        public CurveMultiLayer(IEnumerable<IEnumerable<Node>> nodess) : this()
+        public CurveMultiLayer(CanvasDevice customDevice, IEnumerable<IEnumerable<Node>> nodess) : this(customDevice)
         {
             this.Nodess =
             (
@@ -96,14 +97,14 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override  ILayer Clone(CanvasDevice customDevice)
         {
-            CurveMultiLayer curveMultiLayer = new CurveMultiLayer
+            CurveMultiLayer curveMultiLayer = new CurveMultiLayer(customDevice)
             {
                 Nodess = (from nodes in this.Nodess select nodes.Clone()).ToList()
             };
 
-            LayerBase.CopyWith(resourceCreator, curveMultiLayer, this);
+            LayerBase.CopyWith(customDevice, curveMultiLayer, this);
             return curveMultiLayer;
         }
 

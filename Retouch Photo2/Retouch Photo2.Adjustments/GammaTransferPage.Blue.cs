@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml;
 
@@ -44,7 +45,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         public void ConstructStringsBlue(string title, string offset, string exponent, string amplitude)
         {
-            this.BlueTextBlock.Text = title;
+            this.BlueTextBlock.Text = offset;
             this.BlueOffsetTextBlock.Text = offset;
             this.BlueExponentTextBlock.Text = exponent;
             this.BlueAmplitudeTextBlock.Text = amplitude;
@@ -68,28 +69,37 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.BlueToggleSwitch.Toggled += (s, e) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    bool disable = !this.BlueToggleSwitch.IsOn;
-                    if (adjustment.BlueDisable == disable) return;
+                    ILayer layer = layerage.Self;
 
-
-                    //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment blue disable");
-
-                    var previous = adjustment.BlueDisable;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
                     {
-                        GammaTransferAdjustment adjustment2 = adjustment;
+                        bool disable = !this.BlueToggleSwitch.IsOn;
+                        if (adjustment.BlueDisable == disable) return;
+                        
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment blue disable");
 
-                        adjustment2.BlueDisable = previous;
-                    });
+                        var previous = adjustment.BlueDisable;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.BlueDisable = previous;
+                        });
 
-                    this.ViewModel.HistoryPush(history);
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.BlueDisable = disable;
 
+                        //History
+                        this.ViewModel.HistoryPush(history);
 
-                    adjustment.BlueDisable = disable;
-                    this.ViewModel.Invalidate();
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
         }
@@ -103,51 +113,69 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.BlueOffsetSlider.SliderBrush = this.BlueLeftBrush;
 
-
-            //History
-            LayersPropertyHistory history = null;
-
-
             this.BlueOffsetSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set gamma transfer adjustment blue offset");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheBlueOffset();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
+                    {
+                        adjustment.CacheBlueOffset();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.BlueOffsetSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float offset = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.BlueOffset = offset;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
+                    {
+                        float offset = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.BlueOffset = offset;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.BlueOffsetSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float offset = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingBlueOffset;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
                     {
-                        GammaTransferAdjustment adjustment2 = adjustment;
+                        float offset = (float)value / 100.0f;
+                        
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment blue offset");
 
-                        adjustment2.BlueOffset = previous;
-                    });
+                        var previous = adjustment.StartingBlueOffset;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.BlueOffset = previous;
+                        });
 
-                    this.ViewModel.HistoryPush(history);
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.BlueOffset = offset;
 
+                        //History
+                        this.ViewModel.HistoryPush(history);
 
-                    adjustment.BlueOffset = offset;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }
@@ -161,51 +189,69 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.BlueExponentSlider.SliderBrush = this.BlueLeftBrush;
 
-
-            //History
-            LayersPropertyHistory history = null;
-
-
             this.BlueExponentSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set gamma transfer adjustment blue exponent");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheBlueExponent();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
+                    {
+                        adjustment.CacheBlueExponent();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.BlueExponentSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float exponent = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.BlueExponent = exponent;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
+                    {
+                        float exponent = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.BlueExponent = exponent;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.BlueExponentSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float exponent = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingBlueExponent;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
                     {
-                        GammaTransferAdjustment adjustment2 = adjustment;
+                        float exponent = (float)value / 100.0f;
+                        
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment blue exponent");
 
-                        adjustment2.BlueExponent = previous;
-                    });
+                        var previous = adjustment.StartingBlueExponent;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.BlueExponent = previous;
+                        });
 
-                    this.ViewModel.HistoryPush(history);
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.BlueExponent = exponent;
 
+                        //History
+                        this.ViewModel.HistoryPush(history);
 
-                    adjustment.BlueExponent = exponent;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }
@@ -219,51 +265,69 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.BlueAmplitudeSlider.SliderBrush = this.BlueLeftBrush;
 
-
-            //History
-            LayersPropertyHistory history = null;
-
-
             this.BlueAmplitudeSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set gamma transfer adjustment blue amplitude");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheBlueAmplitude();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
+                    {
+                        adjustment.CacheBlueAmplitude();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.BlueAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float amplitude = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.BlueAmplitude = amplitude;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
+                    {
+                        float amplitude = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.BlueAmplitude = amplitude;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.BlueAmplitudeSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float amplitude = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingBlueAmplitude;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is GammaTransferAdjustment adjustment)
                     {
-                        GammaTransferAdjustment adjustment2 = adjustment;
+                        float amplitude = (float)value / 100.0f;
+                        
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment blue amplitude");
 
-                        adjustment2.BlueAmplitude = previous;
-                    });
+                        var previous = adjustment.StartingBlueAmplitude;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.BlueAmplitude = previous;
+                        });
 
-                    this.ViewModel.HistoryPush(history);
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.BlueAmplitude = amplitude;
 
+                        //History
+                        this.ViewModel.HistoryPush(history);
 
-                    adjustment.BlueAmplitude = amplitude;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }

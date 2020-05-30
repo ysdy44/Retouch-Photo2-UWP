@@ -67,16 +67,22 @@ namespace Retouch_Photo2.Effects.Models
                 var previous = layer.Effect.Sharpen_Amount;
                 history.UndoActions.Push(() =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.Effect.Sharpen_Amount = previous;
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layer.Effect.Sharpen_Amount = previous;
                 });
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
                 layer.Effect.Sharpen_Amount = 0;
             });
 
             //History
             this.ViewModel.HistoryPush(history);
+
+            this.ViewModel.Invalidate();//Invalidate
         }
         public void FollowButton(Effect effect)
         {
@@ -115,11 +121,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.Sharpen_IsOn;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.Sharpen_IsOn = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.Sharpen_IsOn = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.Sharpen_IsOn = isOn;
                 });
 
@@ -133,17 +143,12 @@ namespace Retouch_Photo2.Effects.Models
 
         private void ConstructSharpen_Amount()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Radius
             this.AmountSlider.Value = 0;
             this.AmountSlider.Minimum = 0;
             this.AmountSlider.Maximum = 10;
             this.AmountSlider.ValueChangeStarted += (s, value) =>
             {
-                history = new LayersPropertyHistory("Set effect sharpen");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -163,6 +168,8 @@ namespace Retouch_Photo2.Effects.Models
                 {
                     ILayer layer = layerage.Self;
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
                     layer.Effect.Sharpen_Amount = amount;
                 });
 
@@ -171,6 +178,9 @@ namespace Retouch_Photo2.Effects.Models
             this.AmountSlider.ValueChangeCompleted += (s, value) =>
             {
                 float amount = (float)value;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set effect sharpen");
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -181,11 +191,15 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.StartingSharpen_Amount;
                     history.UndoActions.Push(() =>
                     {
-                        ILayer layer2 = layerage.Self;
-
-                        layer2.Effect.Sharpen_Amount = previous;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Effect.Sharpen_Amount = previous;
                     });
 
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
                     layer.Effect.Sharpen_Amount = amount;
                 });
 

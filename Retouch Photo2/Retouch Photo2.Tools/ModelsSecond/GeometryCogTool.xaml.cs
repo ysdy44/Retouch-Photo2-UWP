@@ -142,9 +142,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryCogIcon();
         readonly Button _button = new Button { Tag = new GeometryCogIcon()};
 
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new GeometryCogLayer
+            return new GeometryCogLayer(customDevice)
             {
                 Count = this.SelectionViewModel.GeometryCogCount,
                 InnerRadius = this.SelectionViewModel.GeometryCogInnerRadius,
@@ -208,11 +208,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryCogLayer.Count;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryCogLayer layer2 = geometryCogLayer;
-
-                            layer2.Count = previous;
+                            //Refactoring
+                            geometryCogLayer.IsRefactoringRender = true;
+                            geometryCogLayer.IsRefactoringIconRender = true;
+                            geometryCogLayer.Count = previous;
                         });
-
+                        
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         geometryCogLayer.Count = count;
                     }
                 });
@@ -225,17 +229,12 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ConstructCount2()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Value
-            this.CountTouchbarSlider.Minimum = 4d;
-            this.CountTouchbarSlider.Maximum = 36d;
+            this.CountTouchbarSlider.Value = 4;
+            this.CountTouchbarSlider.Minimum = 4;
+            this.CountTouchbarSlider.Maximum = 36;
             this.CountTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //History
-                history = new LayersPropertyHistory("Set cog layer count");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -264,6 +263,9 @@ namespace Retouch_Photo2.Tools.Models
                     if (layer.Type == LayerType.GeometryCog)
                     {
                         GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
                         geometryCogLayer.Count = count;
                     }
                 });
@@ -275,6 +277,9 @@ namespace Retouch_Photo2.Tools.Models
                 int count = (int)value;
                 if (count < 4) count = 4;
                 if (count > 36) count = 36;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer count");
 
                 //Selection
                 this.SelectionViewModel.GeometryCogCount = count;
@@ -290,10 +295,16 @@ namespace Retouch_Photo2.Tools.Models
                         history.UndoActions.Push(() =>
                         {
                             GeometryCogLayer layer2 = geometryCogLayer;
-
+                            
+                            //Refactoring
+                            layer2.IsRefactoringRender = true;
+                            layer2.IsRefactoringIconRender = true;
                             layer2.Count = previous;
                         });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         geometryCogLayer.Count = count;
                     }
                 });
@@ -301,7 +312,7 @@ namespace Retouch_Photo2.Tools.Models
                 //History
                 this.ViewModel.HistoryPush(history);
 
-                this.ViewModel.Invalidate( InvalidateMode.HD);//Invalidate
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             };
         }
 
@@ -341,11 +352,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryCogLayer.InnerRadius;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryCogLayer layer2 = geometryCogLayer;
-
-                            layer2.InnerRadius = previous;
+                            //Refactoring
+                            geometryCogLayer.IsRefactoringRender = true;
+                            geometryCogLayer.IsRefactoringIconRender = true;
+                            geometryCogLayer.InnerRadius = previous;
                         });
-
+                        
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         geometryCogLayer.InnerRadius = innerRadius;
                     }
                 });
@@ -358,17 +373,12 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ConstructInnerRadius2()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Value
-            this.InnerRadiusTouchbarSlider.Minimum = 0d;
-            this.InnerRadiusTouchbarSlider.Maximum = 100d;
+            this.InnerRadiusTouchbarSlider.Value = 0;
+            this.InnerRadiusTouchbarSlider.Minimum = 0;
+            this.InnerRadiusTouchbarSlider.Maximum = 100;
             this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //History
-                history = new LayersPropertyHistory("Set cog layer inner radius");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -380,9 +390,6 @@ namespace Retouch_Photo2.Tools.Models
                         geometryCogLayer.CacheInnerRadius();
                     }
                 });
-
-                //History
-                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
             };
@@ -399,6 +406,9 @@ namespace Retouch_Photo2.Tools.Models
                         if (layer.Type == LayerType.GeometryCog)
                         {
                             GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
                             geometryCogLayer.InnerRadius = innerRadius;
                         }
                     });
@@ -408,6 +418,9 @@ namespace Retouch_Photo2.Tools.Models
             this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float innerRadius = (float)value / 100f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer inner radius");
 
                 //Selection
                 this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
@@ -422,11 +435,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryCogLayer.StartingInnerRadius;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryCogLayer layer2 = geometryCogLayer;
-
-                            layer2.InnerRadius = previous;
+                            //Refactoring
+                            geometryCogLayer.IsRefactoringRender = true;
+                            geometryCogLayer.IsRefactoringIconRender = true;
+                            geometryCogLayer.InnerRadius = previous;
                         });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         geometryCogLayer.InnerRadius = innerRadius;
                     }
                 });
@@ -474,11 +491,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryCogLayer.Tooth;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryCogLayer layer2 = geometryCogLayer;
-
-                            layer2.Tooth = previous;
+                            //Refactoring
+                            geometryCogLayer.IsRefactoringRender = true;
+                            geometryCogLayer.IsRefactoringIconRender = true;
+                            geometryCogLayer.Tooth = previous;
                         });
 
+                        //Refactoring
+                        geometryCogLayer.IsRefactoringRender = true;
+                        geometryCogLayer.IsRefactoringIconRender = true;
                         geometryCogLayer.Tooth = tooth;
                     }
                 });
@@ -491,17 +512,12 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ConstructTooth2()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Value
-            this.ToothTouchbarSlider.Minimum = 0d;
-            this.ToothTouchbarSlider.Maximum = 50d;
+            this.ToothTouchbarSlider.Value = 0;
+            this.ToothTouchbarSlider.Minimum = 0;
+            this.ToothTouchbarSlider.Maximum = 50;
             this.ToothTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //History
-                history = new LayersPropertyHistory("Set cog layer tooth");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -513,9 +529,6 @@ namespace Retouch_Photo2.Tools.Models
                         geometryCogLayer.CacheTooth();
                     }
                 });
-
-                //History
-                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
             };
@@ -532,6 +545,9 @@ namespace Retouch_Photo2.Tools.Models
                     if (layer.Type == LayerType.GeometryCog)
                     {
                         GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+                  
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
                         geometryCogLayer.Tooth = tooth;
                     }
                 });
@@ -541,6 +557,9 @@ namespace Retouch_Photo2.Tools.Models
             this.ToothTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float tooth = (float)value / 100f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer tooth");
 
                 //Selection
                 this.SelectionViewModel.GeometryCogTooth = tooth;
@@ -555,11 +574,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryCogLayer.StartingTooth;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryCogLayer layer2 = geometryCogLayer;
-
-                            layer2.Tooth = previous;
+                            //Refactoring
+                            geometryCogLayer.IsRefactoringRender = true;
+                            geometryCogLayer.IsRefactoringIconRender = true;
+                            geometryCogLayer.Tooth = previous;
                         });
 
+                        //Refactoring
+                        geometryCogLayer.IsRefactoringRender = true;
+                        geometryCogLayer.IsRefactoringIconRender = true;
                         geometryCogLayer.Tooth = tooth;
                     }
                 });
@@ -607,11 +630,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryCogLayer.Notch;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryCogLayer layer2 = geometryCogLayer;
-
-                            layer2.Notch = previous;
+                            //Refactoring
+                            geometryCogLayer.IsRefactoringRender = true;
+                            geometryCogLayer.IsRefactoringIconRender = true;
+                            geometryCogLayer.Notch = previous;
                         });
 
+                        //Refactoring
+                        geometryCogLayer.IsRefactoringRender = true;
+                        geometryCogLayer.IsRefactoringIconRender = true;
                         geometryCogLayer.Notch = notch;
                     }
                 });
@@ -624,17 +651,12 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ConstructNotch2()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Value
-            this.NotchTouchbarSlider.Minimum = 0d;
-            this.NotchTouchbarSlider.Maximum = 60d;
+            this.NotchTouchbarSlider.Value = 0;
+            this.NotchTouchbarSlider.Minimum = 0;
+            this.NotchTouchbarSlider.Maximum = 60;
             this.NotchTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //History
-                history = new LayersPropertyHistory("Set cog layer notch");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -646,9 +668,6 @@ namespace Retouch_Photo2.Tools.Models
                         geometryCogLayer.CacheNotch();
                     }
                 });
-
-                //History
-                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
             };
@@ -665,6 +684,9 @@ namespace Retouch_Photo2.Tools.Models
                     if (layer.Type == LayerType.GeometryCog)
                     {
                         GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
+
+                        //Refactoring
+                        geometryCogLayer.IsRefactoringRender = true;
                         geometryCogLayer.Notch = notch;
                     }
                 });
@@ -674,6 +696,9 @@ namespace Retouch_Photo2.Tools.Models
             this.NotchTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float notch = (float)value / 100f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer notch");
 
                 //Selection
                 this.SelectionViewModel.GeometryCogNotch = notch;
@@ -688,11 +713,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryCogLayer.StartingNotch;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryCogLayer layer2 = geometryCogLayer;
-
-                            layer2.Notch = previous;
+                            //Refactoring
+                            geometryCogLayer.IsRefactoringRender = true;
+                            geometryCogLayer.IsRefactoringIconRender = true;
+                            geometryCogLayer.Notch = previous;
                         });
 
+                        //Refactoring
+                        geometryCogLayer.IsRefactoringRender = true;
+                        geometryCogLayer.IsRefactoringIconRender = true;
                         geometryCogLayer.Notch = notch;
                     }
                 });

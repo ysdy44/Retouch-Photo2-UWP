@@ -151,7 +151,6 @@ namespace Retouch_Photo2
 
                 //History
                 LayersPropertyHistory history = new LayersPropertyHistory("Set name");
-                this.ViewModel.HistoryPush(history);
                 
                 //Selection
                 this.SelectionViewModel.LayerName = name;
@@ -165,14 +164,15 @@ namespace Retouch_Photo2
                         var previous = layer.Name;
                         history.UndoActions.Push(() =>
                         {
-                            ILayer layer2 = layerage.Self;
-
-                            layer2.Name = previous;
+                            layer.Name = previous;
                         });
                         
                         layer.Name = name;
                     }
                 });
+
+                //History
+                this.ViewModel.HistoryPush(history);
             };
         }
         private void ShowRenameDialog()

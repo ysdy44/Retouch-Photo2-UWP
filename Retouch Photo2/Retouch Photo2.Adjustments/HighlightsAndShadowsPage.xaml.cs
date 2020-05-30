@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -14,7 +15,8 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        
         //@Generic
         public HighlightsAndShadowsAdjustment Adjustment { get; set; }
 
@@ -68,35 +70,43 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.MaskBlurAmountSlider.Value = 12.5;
 
 
-            if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment");
+                ILayer layer = layerage.Self;
 
-
-                var previous1 = adjustment.Shadows;
-                var previous2 = adjustment.Highlights;
-                var previous3 = adjustment.Clarity;
-                var previous4 = adjustment.MaskBlurAmount;
-                history.UndoActions.Push(() =>
+                if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
                 {
-                    HighlightsAndShadowsAdjustment adjustment2 = adjustment;
-
-                    adjustment2.Shadows = previous1;
-                    adjustment2.Highlights = previous2;
-                    adjustment2.Clarity = previous3;
-                    adjustment2.MaskBlurAmount = previous4;
-                });
-
-                this.ViewModel.HistoryPush(history);
+                    //History
+                    LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment");
 
 
-                adjustment.Shadows = 0.0f;
-                adjustment.Shadows = 0.0f;
-                adjustment.Clarity = 0.0f;
-                adjustment.MaskBlurAmount = 1.25f;
+                    var previous1 = adjustment.Shadows;
+                    var previous2 = adjustment.Highlights;
+                    var previous3 = adjustment.Clarity;
+                    var previous4 = adjustment.MaskBlurAmount;
+                    history.UndoActions.Push(() =>
+                    {
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.Shadows = previous1;
+                        adjustment.Highlights = previous2;
+                        adjustment.Clarity = previous3;
+                        adjustment.MaskBlurAmount = previous4;
+                    });
 
-                this.ViewModel.Invalidate();
+                    this.ViewModel.HistoryPush(history);
+                    
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    adjustment.Shadows = 0.0f;
+                    adjustment.Shadows = 0.0f;
+                    adjustment.Clarity = 0.0f;
+                    adjustment.MaskBlurAmount = 1.25f;
+
+                    this.ViewModel.Invalidate();//Invalidate
+                }
             }
         }
         public void Follow(HighlightsAndShadowsAdjustment adjustment)
@@ -121,52 +131,69 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ShadowsSlider.Maximum = 100;
 
             this.ShadowsSlider.SliderBrush = this.ShadowsBrush;
-
-
-            //History
-            LayersPropertyHistory history = null;
-
-
+                       
             this.ShadowsSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set highlights and shadows adjustment shadows");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheShadows();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                    {
+                        adjustment.CacheShadows();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.ShadowsSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float shadows = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.Shadows = shadows;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                    {
+                        float shadows = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.Shadows = shadows;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.ShadowsSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float shadows = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingShadows;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
                     {
-                        HighlightsAndShadowsAdjustment adjustment2 = adjustment;
+                        float shadows = (float)value / 100.0f;
 
-                        adjustment2.Shadows = previous;
-                    });
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment shadows");
 
-                    this.ViewModel.HistoryPush(history);
+                        var previous = adjustment.StartingShadows;
+                        history.UndoActions.Push(() =>
+                        {  
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.Shadows = previous;
+                        });
 
+                        this.ViewModel.HistoryPush(history);
 
-                    adjustment.Shadows = shadows;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.Shadows = shadows;
+
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }
@@ -179,51 +206,68 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.HighlightsSlider.SliderBrush = this.HighlightsBrush;
 
-
-            //History
-            LayersPropertyHistory history = null;
-
-
             this.HighlightsSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set highlights and shadows adjustment highlights");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheHighlights();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                    {
+                        adjustment.CacheHighlights();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.HighlightsSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float highlights = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.Highlights = highlights;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                    {
+                        float highlights = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.Highlights = highlights;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.HighlightsSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float highlights = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingHighlights;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
                     {
-                        HighlightsAndShadowsAdjustment adjustment2 = adjustment;
+                        float highlights = (float)value / 100.0f;
+                        
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment highlights");
 
-                        adjustment2.Highlights = previous;
-                    });
+                        var previous = adjustment.StartingHighlights;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.Highlights = previous;
+                        });
 
-                    this.ViewModel.HistoryPush(history);
+                        this.ViewModel.HistoryPush(history);
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.Highlights = highlights;
 
-                    adjustment.Highlights = highlights;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }
@@ -235,52 +279,69 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ClaritySlider.Maximum = 100;
 
             this.ClaritySlider.SliderBrush = this.ClarityBrush;
-
-
-            //History
-            LayersPropertyHistory history = null;
-
-
+            
             this.ClaritySlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set highlights and shadows adjustment clarity");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheClarity();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                    {
+                        adjustment.CacheClarity();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.ClaritySlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float clarity = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.Clarity = clarity;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                    {
+                        float clarity = (float)value / 100.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.Clarity = clarity;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.ClaritySlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float clarity = (float)value / 100.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingClarity;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
                     {
-                        HighlightsAndShadowsAdjustment adjustment2 = adjustment;
+                        float clarity = (float)value / 100.0f;
+                        
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment clarity");
 
-                        adjustment2.Clarity = previous;
-                    });
+                        var previous = adjustment.StartingClarity;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.Clarity = previous;
+                        });
 
-                    this.ViewModel.HistoryPush(history);
+                        this.ViewModel.HistoryPush(history);
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.Clarity = clarity;
 
-                    adjustment.Clarity = clarity;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }
@@ -293,51 +354,69 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.MaskBlurAmountSlider.SliderBrush = this.MaskBlurAmountBrush;
 
-
-            //History
-            LayersPropertyHistory history = null;
-
-
             this.MaskBlurAmountSlider.ValueChangeStarted += (s, value) =>
             {
-                if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    history = new LayersPropertyHistory("Set highlights and shadows adjustment mask blur amount");
+                    ILayer layer = layerage.Self;
 
-                    adjustment.CacheMaskBlurAmount();
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);
+                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                    {
+                        adjustment.CacheMaskBlurAmount();
+                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                    }
                 }
             };
             this.MaskBlurAmountSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float maskBlurAmount = (float)value / 10.0f;
+                    ILayer layer = layerage.Self;
 
-                    adjustment.MaskBlurAmount = maskBlurAmount;
-                    this.ViewModel.Invalidate();
+                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                    {
+                        float maskBlurAmount = (float)value / 10.0f;
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        adjustment.MaskBlurAmount = maskBlurAmount;
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 }
             };
             this.MaskBlurAmountSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    float maskBlurAmount = (float)value / 10.0f;
+                    ILayer layer = layerage.Self;
 
-
-                    var previous = adjustment.StartingMaskBlurAmount;
-                    history.UndoActions.Push(() =>
+                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
                     {
-                        HighlightsAndShadowsAdjustment adjustment2 = adjustment;
-
-                        adjustment2.MaskBlurAmount = previous;
-                    });
-
-                    this.ViewModel.HistoryPush(history);
+                        float maskBlurAmount = (float)value / 10.0f;
 
 
-                    adjustment.MaskBlurAmount = maskBlurAmount;
-                    this.ViewModel.Invalidate(InvalidateMode.HD);
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment mask blur amount");
+                        
+                        var previous = adjustment.StartingMaskBlurAmount;
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment.MaskBlurAmount = previous;
+                        });
+
+                        this.ViewModel.HistoryPush(history);
+                                               
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        adjustment.MaskBlurAmount = maskBlurAmount;
+
+                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    }
                 }
             };
         }

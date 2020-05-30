@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Layers.Icons;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
@@ -27,24 +26,24 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Initializes a pie-layer.
         /// </summary>
-        public GeometryPieLayer()
+        /// <param name="customDevice"> The custom-device. </param>
+        public GeometryPieLayer(CanvasDevice customDevice)
         {
-            base.Control = new LayerControl(this)
+            base.Control = new LayerControl(customDevice, this)
             {
-                Icon = new GeometryPieIcon(),
                 Type = this.ConstructStrings(),
             };
         }
         
 
-        public override ILayer Clone(ICanvasResourceCreator resourceCreator)
+        public override ILayer Clone(CanvasDevice customDevice)
         {
-            GeometryPieLayer pieLayer = new GeometryPieLayer
+            GeometryPieLayer pieLayer = new GeometryPieLayer(customDevice)
             {
                 SweepAngle = this.SweepAngle,
             };
 
-            LayerBase.CopyWith(resourceCreator, pieLayer, this);
+            LayerBase.CopyWith(customDevice, pieLayer, this);
             return pieLayer;
         }
 

@@ -98,9 +98,9 @@ namespace Retouch_Photo2.Tools.Models
         readonly FrameworkElement _icon = new GeometryDiamondIcon();
         readonly Button _button = new Button { Tag = new GeometryDiamondIcon()};
 
-        private ILayer CreateLayer(Transformer transformer)
+        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
-            return new GeometryDiamondLayer
+            return new GeometryDiamondLayer(customDevice)
             {
                 Mid = this.SelectionViewModel.GeometryDiamondMid,
                 Transform = new Transform(transformer),
@@ -158,12 +158,16 @@ namespace Retouch_Photo2.Tools.Models
 
                         var previous = geometryDiamondLayer.Mid;
                         history.UndoActions.Push(() =>
-                        {
-                            GeometryDiamondLayer layer2 = geometryDiamondLayer;
-
-                            layer2.Mid = previous;
+                        {   
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            geometryDiamondLayer.Mid = previous;
                         });
 
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         geometryDiamondLayer.Mid = mid;
                     }
                 });
@@ -176,16 +180,12 @@ namespace Retouch_Photo2.Tools.Models
         }
         private void ConstructMid2()
         {
-            //History
-            LayersPropertyHistory history = null;
-
             //Value
-            this.MidTouchbarSlider.Minimum = 0d;
-            this.MidTouchbarSlider.Maximum = 100d;
+            this.MidTouchbarSlider.Value = 0;
+            this.MidTouchbarSlider.Minimum = 0;
+            this.MidTouchbarSlider.Maximum = 100;
             this.MidTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                history = new LayersPropertyHistory("Set diamond layer mid");
-
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -215,6 +215,9 @@ namespace Retouch_Photo2.Tools.Models
                     if (layer.Type == LayerType.GeometryDiamond)
                     {
                         GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
+                  
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
                         geometryDiamondLayer.Mid = mid;
                     }
                 });
@@ -226,6 +229,9 @@ namespace Retouch_Photo2.Tools.Models
                 float mid = (float)value / 100.0f;
                 if (mid < 0.0f) mid = 0.0f;
                 if (mid > 1.0f) mid = 1.0f;
+
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set diamond layer mid");
 
                 //Selection
                 this.SelectionViewModel.GeometryDiamondMid = mid;
@@ -240,11 +246,15 @@ namespace Retouch_Photo2.Tools.Models
                         var previous = geometryDiamondLayer.StartingMid;
                         history.UndoActions.Push(() =>
                         {
-                            GeometryDiamondLayer layer2 = geometryDiamondLayer;
-
-                            layer2.Mid = previous;
+                            //Refactoring
+                            geometryDiamondLayer.IsRefactoringRender = true;
+                            geometryDiamondLayer.IsRefactoringIconRender = true;
+                            geometryDiamondLayer.Mid = previous;
                         });
 
+                        //Refactoring
+                        geometryDiamondLayer.IsRefactoringRender = true;
+                        geometryDiamondLayer.IsRefactoringIconRender = true;
                         geometryDiamondLayer.Mid = mid;
                     }
                 });
@@ -264,8 +274,7 @@ namespace Retouch_Photo2.Tools.Models
                 LayersPropertyHistory history = new LayersPropertyHistory("Set diamond layer center");
 
                 //Selection
-                float selectionMid = 1.0f - this.SelectionViewModel.GeometryDiamondMid;
-                this.SelectionViewModel.GeometryDiamondMid = selectionMid;
+                this.SelectionViewModel.GeometryDiamondMid = 1.0f - this.SelectionViewModel.GeometryDiamondMid;
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer = layerage.Self;
@@ -276,14 +285,17 @@ namespace Retouch_Photo2.Tools.Models
 
                         var previous = geometryDiamondLayer.Mid;
                         history.UndoActions.Push(() =>
-                        {
-                            GeometryDiamondLayer layer2 = geometryDiamondLayer;
-
-                            layer2.Mid = previous;
+                        {    
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            geometryDiamondLayer.Mid = previous;
                         });
 
-                        float center = 1.0f - geometryDiamondLayer.Mid;
-                        geometryDiamondLayer.Mid = center;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        geometryDiamondLayer.Mid = 1.0f - geometryDiamondLayer.Mid;
                     }
                 });
 
