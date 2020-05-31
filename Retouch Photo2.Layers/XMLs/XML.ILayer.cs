@@ -29,6 +29,7 @@ namespace Retouch_Photo2.Layers
                 if (layer.Name != null) element.Add(new XAttribute("Name", layer.Name));
                 element.Add(new XAttribute("Opacity", layer.Opacity));
                 element.Add(new XAttribute("BlendMode", layer.BlendMode == null ? "None" : $"{layer.BlendMode}"));
+
                 element.Add(new XAttribute("Visibility", layer.Visibility));
                 element.Add(new XAttribute("TagType", layer.TagType));
 
@@ -65,6 +66,7 @@ namespace Retouch_Photo2.Layers
                     if (element.Attribute("Name") is XAttribute name) layer.Name = name.Value;
                     if (element.Attribute("Opacity") is XAttribute opacity) layer.Opacity = (float)opacity;
                     if (element.Attribute("BlendMode") is XAttribute blendMode) layer.BlendMode = Retouch_Photo2.Blends.XML.CreateBlendMode(blendMode.Value);
+
                     if (element.Attribute("Visibility") is XAttribute visibility) layer.Visibility = XML.CreateVisibility(visibility.Value);
                     if (element.Attribute("TagType") is XAttribute tagType) layer.TagType = Retouch_Photo2.Blends.XML.CreateTagType(tagType.Value);
 

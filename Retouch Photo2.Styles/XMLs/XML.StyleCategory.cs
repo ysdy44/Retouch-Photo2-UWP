@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Styles
             StyleCategory.Styles =
             (
                 from Style
-                in element.Elements()
+                in element.Elements("Style")
                 select XML.LoadStyle(Style)
             ).ToList();
 

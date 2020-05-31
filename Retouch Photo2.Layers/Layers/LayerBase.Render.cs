@@ -3,14 +3,11 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Adjustments;
-using Retouch_Photo2.Blends;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Filters;
 using System.Collections.Generic;
 using System.Numerics;
-using Windows.Foundation;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers
@@ -28,7 +25,6 @@ namespace Retouch_Photo2.Layers
 
         ICanvasImage Render2 = null;
 
-        //@Abstract
         public ICanvasImage GetActualRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
         {
             if (this.Render2 == null || this.IsRefactoringRender)
@@ -59,6 +55,7 @@ namespace Retouch_Photo2.Layers
             return this.Render2;
         }
 
+        //@Abstract
         public virtual ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
         {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
@@ -134,8 +131,6 @@ namespace Retouch_Photo2.Layers
 
         public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator);
         public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix);
-
-        public abstract IEnumerable<IEnumerable<Node>> ConvertToCurves();
 
 
         public virtual bool FillContainsPoint(Layerage layerage, Vector2 point)

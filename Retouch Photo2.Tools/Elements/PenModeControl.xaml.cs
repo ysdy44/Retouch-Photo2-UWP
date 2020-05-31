@@ -53,14 +53,6 @@ namespace Retouch_Photo2.Tools.Elements
         public EachControlPointLengthMode EachLengthMode = EachControlPointLengthMode.Equal;
         public EachControlPointAngleMode EachAngleMode = EachControlPointAngleMode.Asymmetric;
 
-        
-        /// <summary> 
-        /// Controllers for control points. 
-        /// </summary>
-        public Node Controller(Vector2 point, Node startingNode, bool isLeftControlPoint)
-        {
-            return Node.Controller(this.SelfMode, this.EachLengthMode, this.EachAngleMode, point, startingNode, isLeftControlPoint);
-        }
 
 
         //@Construct

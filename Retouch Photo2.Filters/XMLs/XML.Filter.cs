@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Filters
             filter.Adjustments =
             (
                 from adjustment
-                in element.Elements()
+                in element.Elements("Adjustment")
                 select Retouch_Photo2.Adjustments.XML.LoadIAdjustment(adjustment)
             ).ToList();
 

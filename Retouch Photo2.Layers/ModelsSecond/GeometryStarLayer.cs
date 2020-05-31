@@ -76,6 +76,8 @@ namespace Retouch_Photo2.Layers.Models
 
             return TransformerGeometry.CreateStar(resourceCreator, transformer, canvasToVirtualMatrix, this.Points, this.InnerRadius);
         }
+
+
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
         {
             Transformer transformer = base.Transform.Transformer;

@@ -48,7 +48,7 @@ namespace Retouch_Photo2.Elements
 
             return 
                 from photo
-                in root.Elements()
+                in root.Elements("Photo")
                 select new Photo
                 {
                     Name = photo.Element("Name").Value,

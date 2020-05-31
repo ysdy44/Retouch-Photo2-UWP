@@ -69,6 +69,8 @@ namespace Retouch_Photo2.Layers.Models
 
             return TransformerGeometry.CreatePie(resourceCreator, transformer, canvasToVirtualMatrix, this.SweepAngle);
         }
+
+
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
         {
             Transformer transformer = base.Transform.Transformer;

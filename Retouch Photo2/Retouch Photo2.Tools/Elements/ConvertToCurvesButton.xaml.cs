@@ -52,6 +52,7 @@ namespace Retouch_Photo2.Tools.Elements
                 });
 
                 LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
                 this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
 
                 //Change tools group value.

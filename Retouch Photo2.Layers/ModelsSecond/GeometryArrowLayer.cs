@@ -93,6 +93,8 @@ namespace Retouch_Photo2.Layers.Models
                 this.IsAbsolute, this.Width, this.Value,
                 this.LeftTail, this.RightTail);
         }
+
+
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
         {
             Transformer transformer = base.Transform.Transformer;

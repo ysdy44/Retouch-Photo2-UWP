@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Filters
             return
             (
                 from filterCategory
-                in root.Elements()
+                in root.Elements("FilterCategory")
                 select XML.LoadFilterCategory(filterCategory)
             );
         }

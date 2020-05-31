@@ -68,6 +68,8 @@ namespace Retouch_Photo2.Layers.Models
 
             return TransformerGeometry.CreateHeart(resourceCreator, transformer, canvasToVirtualMatrix, this.Spread);
         }
+
+
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
         {
             Transformer transformer = base.Transform.Transformer;

@@ -83,7 +83,7 @@ namespace Retouch_Photo2.Brushs
                     if (element.Element("Stops") is XElement stops) this.Stops =
                     (
                         from stop
-                        in stops.Elements()
+                        in stops.Elements("Stop")
                         select XML.LoadStop(stop)
                     ).ToArray();
                     break;

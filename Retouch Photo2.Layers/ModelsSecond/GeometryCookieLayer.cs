@@ -75,6 +75,8 @@ namespace Retouch_Photo2.Layers.Models
 
             return TransformerGeometry.CreateCookie(resourceCreator, transformer, canvasToVirtualMatrix, this.InnerRadius, this.SweepAngle);
         }
+
+
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
         {
             Transformer transformer = base.Transform.Transformer;

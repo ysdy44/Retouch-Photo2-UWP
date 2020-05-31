@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Filters
             filterCategory.Filters =
             (
                 from filter
-                in element.Elements()
+                in element.Elements("Filter")
                 select XML.LoadFilter(filter)
             ).ToList();
 

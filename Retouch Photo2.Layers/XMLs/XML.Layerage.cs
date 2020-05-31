@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Layers
                 layerage.Children =
                 (
                     from child
-                    in children.Elements()
+                    in children.Elements("Layerage")
                     select XML.LoadLayerage(child)
                 ).ToList();
             }

@@ -69,6 +69,8 @@ namespace Retouch_Photo2.Layers.Models
 
             return TransformerGeometry.CreateTriangle(resourceCreator, transformer, canvasToVirtualMatrix, this.Center);
         }
+
+
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
         {
             Transformer transformer = base.Transform.Transformer;

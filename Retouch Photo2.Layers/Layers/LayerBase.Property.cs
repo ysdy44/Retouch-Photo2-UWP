@@ -1,18 +1,12 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Adjustments;
-using Retouch_Photo2.Filters;
-using Retouch_Photo2.Styles;
 using Retouch_Photo2.Blends;
-using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Effects;
-using Retouch_Photo2.Layers.Models;
-using System.Collections.Generic;
+using Retouch_Photo2.Filters;
 using System.Numerics;
 using System.Xml.Linq;
-using Windows.UI;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers
@@ -22,6 +16,10 @@ namespace Retouch_Photo2.Layers
     /// </summary>
     public abstract partial class LayerBase
     {
+
+        /// <summary> Gets or sets <see cref = "LayerBase" />'s control. </summary>
+        public LayerControl Control { get; protected set; }
+
 
         //@Abstract
         public abstract LayerType Type { get; }
@@ -61,9 +59,32 @@ namespace Retouch_Photo2.Layers
                 this.tagType = value;
             }
         }
+        
+        public bool IsExpand
+        {
+            get => this.isExpand;
+            set
+            {
+                this.Control.SetIsExpand(value);
+                this.isExpand = value;
+            }
+        }
+        private bool isExpand;
+        public bool IsSelected
+        {
+            get => this.isSelected;
+            set
+            {
+                this.Control.SetIsSelected(value);
+                this.isSelected = value;
+            }
+        }
+        private bool isSelected;
+
 
         public bool IsRefactoringTransformer { get; set; } = true;
         public virtual Transformer GetActualTransformer(Layerage layerage) => this.Transform.GetActualTransformer();
+
 
         public Retouch_Photo2.Styles.Style Style { get; set; } = new Retouch_Photo2.Styles.Style();
         public Transform Transform { get; set; } = new Transform();

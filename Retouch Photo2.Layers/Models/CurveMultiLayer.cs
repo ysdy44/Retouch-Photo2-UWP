@@ -12,14 +12,14 @@ namespace Retouch_Photo2.Layers.Models
     /// <summary>
     /// <see cref="LayerBase"/>'s CurveMultiLayer .
     /// </summary>
-    public class CurveMultiLayer : LayerBase, ILayer
+    public partial class CurveMultiLayer : LayerBase, ILayer
     {
 
         //@Override     
         public override LayerType Type => LayerType.CurveMulti;
 
         //@Content 
-        public IList<NodeCollection> Nodess { get; private set; }
+        public NodeCollectionCollection Nodess { get; private set; }
 
         //@Construct
         /// <summary>
@@ -38,35 +38,27 @@ namespace Retouch_Photo2.Layers.Models
         /// </summary>
         /// <param name="customDevice"> The custom-device. </param>
         /// <param name="nodess"> The source nodes. </param>
-        public CurveMultiLayer(CanvasDevice customDevice, IList<NodeCollection> nodess) : this(customDevice) => this.Nodess = nodess;
+        public CurveMultiLayer(CanvasDevice customDevice, IList<NodeCollection> nodess) : this(customDevice) => this.Nodess = new NodeCollectionCollection(nodess);
         /// <summary>
         /// Initializes a multi-curve-layer.
         /// </summary>
         /// <param name="customDevice"> The custom-device. </param>
         /// <param name="nodess"> The source nodes. </param>
-        public CurveMultiLayer(CanvasDevice customDevice, IEnumerable<IEnumerable<Node>> nodess) : this(customDevice)
-        {
-            this.Nodess =
-            (
-                from nodes
-                in nodess
-                select new NodeCollection(nodes)
-            ).ToList();
-        }
+        public CurveMultiLayer(CanvasDevice customDevice, IEnumerable<IEnumerable<Node>> nodess) : this(customDevice) => this.Nodess = new NodeCollectionCollection(nodess);
 
 
         public override Transformer GetActualTransformer(Layerage layerage)
         {
-            //TODO: GeometryCurveMultiLayer
-            //   if (this.IsRefactoringTransformer)
-            //  {
-            //      Transformer transformer = LayerageCollection.RefactoringTransformer(this.Nodes);
-            //        this.Transform.Source = transformer;
-            //       this.Transform.Destination = transformer;
-            //
-            //       this.IsRefactoringTransformer = false;
-            //   }
+            //Refactoring
+            if (this.IsRefactoringTransformer)
+            {
+                this.IsRefactoringTransformer = false;
 
+                TransformerBorder border = new TransformerBorder(this.Nodess);
+                Transformer transformer = border.ToTransformer();
+                this.Transform.Transformer = transformer;
+                return this.Transform.IsCrop ? this.Transform.CropTransformer : transformer;
+            }
 
             return this.Transform.IsCrop ? this.Transform.CropTransformer : this.Transform.Transformer;
         }
@@ -74,34 +66,25 @@ namespace Retouch_Photo2.Layers.Models
         public override void CacheTransform()
         {
             base.CacheTransform();
-            foreach (NodeCollection ndoes in this.Nodess)
-            {
-                ndoes.CacheTransform();
-            }
+            this.Nodess.CacheTransform();
         }
         public override void TransformMultiplies(Matrix3x2 matrix)
         {
             base.TransformMultiplies(matrix);
-            foreach (NodeCollection ndoes in this.Nodess)
-            {
-                ndoes.TransformMultiplies(matrix);
-            }
+            this.Nodess.TransformMultiplies(matrix);
         }
         public override void TransformAdd(Vector2 vector)
         {
             base.TransformAdd(vector);
-            foreach (NodeCollection ndoes in this.Nodess)
-            {
-                ndoes.TransformAdd(vector);
-            }
+            this.Nodess.TransformAdd(vector);
         }
 
 
-        public override  ILayer Clone(CanvasDevice customDevice)
+        public override ILayer Clone(CanvasDevice customDevice)
         {
             CurveMultiLayer curveMultiLayer = new CurveMultiLayer(customDevice)
             {
-                Nodess = (from nodes in this.Nodess select nodes.Clone()).ToList()
+                Nodess = this.Nodess.Clone()
             };
 
             LayerBase.CopyWith(customDevice, curveMultiLayer, this);
@@ -110,47 +93,29 @@ namespace Retouch_Photo2.Layers.Models
 
         public override void SaveWith(XElement element)
         {
-            element.Add(new XElement
-            (
-                "Nodess",
-                from nodes
-                in this.Nodess
-                select FanKit.Transformers.XML.SaveNodeCollection("Nodes", "Node", nodes)
-            ));
+            element.Add(FanKit.Transformers.XML.SaveNodeCollectionCollection("Nodess", this.Nodess));
         }
         public override void Load(XElement element)
         {
-            XElement nodess = element.Element("Nodess");
-
-            this.Nodess =
-            (
-                from nodes
-                in nodess.Elements()
-                select FanKit.Transformers.XML.LoadNodeCollection("Node", nodes.Element("Nodes"))
-           ).ToList();
+            this.Nodess = FanKit.Transformers.XML.LoadNodeCollectionCollection(element.Element("Nodess"));
         }
 
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator)
         {
-            IEnumerable<CanvasGeometry> geometrys =
-                 from nodes
-                 in this.Nodess
-                 select nodes.CreateGeometry(resourceCreator);
-
-            return CanvasGeometry.CreateGroup(resourceCreator, geometrys.ToArray());
+            return this.Nodess.CreateGeometry(resourceCreator);
         }
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
         {
-            IEnumerable<CanvasGeometry> geometrys =
-                 from nodes
-                 in this.Nodess
-                 select nodes.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
-
-            return CanvasGeometry.CreateGroup(resourceCreator, geometrys.ToArray());
+            return this.Nodess.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
         }
-        public override IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
+    }
 
+    /// <summary>
+    /// <see cref="LayerBase"/>'s CurveMultiLayer .
+    /// </summary>
+    public partial class CurveMultiLayer : LayerBase, ILayer
+    {
 
         //Strings
         private string ConstructStrings()
@@ -159,6 +124,47 @@ namespace Retouch_Photo2.Layers.Models
 
             return resource.GetString("/Layers/CurveMulti");
         }
+
+        public override IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
+
+        public override void DrawNode(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        {
+            foreach (NodeCollection ndoes in this.Nodess)
+            {
+                drawingSession.DrawNodeCollection(ndoes, matrix, accentColor);
+            }
+        }
+
+        public override NodeCollectionMode ContainsNodeCollectionMode(Vector2 point, Matrix3x2 matrix)
+        {
+            return NodeCollectionCollection.ContainsNodeCollectionMode(point, this.Nodess, matrix);
+        }
+
+        public override void NodeCacheTransform() => this.Nodess.CacheTransform();
+        public override void NodeTransformMultiplies(Matrix3x2 matrix) => this.Nodess.TransformMultipliesOnlySelected(matrix);
+        public override void NodeTransformAdd(Vector2 vector) => this.Nodess.TransformAddOnlySelected(vector);
+        
+        public override bool NodeSelectionOnlyOne(Vector2 point, Matrix3x2 matrix) => this.Nodess.SelectionOnlyOne(point, matrix);
+
+        public override void NodeBoxChoose(TransformerRect boxRect) => this.Nodess.BoxChoose(boxRect);
+
+        public override void NodeMovePoint(Vector2 point)
+        {
+            NodeCollection nodes = this.Nodess.SelectedItem;
+            Node node = nodes.SelectedItem;
+            Node.Move(point, node);
+        }
+        public override void NodeControllerControlPoint(SelfControlPointMode mode, EachControlPointLengthMode lengthMode, EachControlPointAngleMode angleMode, Vector2 point, bool isLeftControlPoint)
+        {
+            NodeCollection nodes = this.Nodess.SelectedItem;
+            Node node = nodes.SelectedItem;
+            Node.Controller(mode, lengthMode, angleMode, point, node, isLeftControlPoint);
+        }
+
+        public override NodeRemoveMode NodeRemoveCheckedNodes() => NodeCollectionCollection.RemoveCheckedNodes(this.Nodess);
+        public override void NodeInterpolationCheckedNodes() => NodeCollectionCollection.InterpolationCheckedNodes(this.Nodess);
+        public override void NodeSharpCheckedNodes() => NodeCollectionCollection.SharpCheckedNodes(this.Nodess);
+        public override void NodeSmoothCheckedNodes() => NodeCollectionCollection.SmoothCheckedNodes(this.Nodess);
 
     }
 }

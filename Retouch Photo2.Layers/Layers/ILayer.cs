@@ -2,11 +2,9 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Adjustments;
-using Retouch_Photo2.Filters;
-using Retouch_Photo2.Styles;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Effects;
+using Retouch_Photo2.Filters;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
@@ -19,6 +17,10 @@ namespace Retouch_Photo2.Layers
     /// </summary>
     public interface ILayer : ICacheTransform
     {
+
+        /// <summary> Gets or sets ILayer's control. </summary>
+        LayerControl Control { get; }
+
 
         #region Instance
 
@@ -71,6 +73,12 @@ namespace Retouch_Photo2.Layers
         /// <summary> Gets or sets ILayer's tag-type. </summary>
         TagType TagType { get; set; }
 
+        /// <summary> Gets or sets ILayer's expand. </summary>
+        bool IsExpand { get; set; }
+        /// <summary> Gets or sets ILayer's selected. </summary>
+        bool IsSelected { get; set; }
+
+
         /// <summary> Gets or sets ILayer is need to refactoring transformer. </summary>
         bool IsRefactoringTransformer { get; set; }
         /// <summary>
@@ -78,6 +86,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <param name="layerage"> The layerage. </param>
         Transformer GetActualTransformer(Layerage layerage);
+
 
         /// <summary> Gets or sets ILayer's style. </summary>
         Retouch_Photo2.Styles.Style Style { get; set; }
@@ -111,25 +120,7 @@ namespace Retouch_Photo2.Layers
         #endregion
 
 
-        #region Control
-
-
-        /// <summary> Gets or sets ILayer's control. </summary>
-        LayerControl Control { get; }
-
-
-        /// <summary> Gets or sets ILayer's expand. </summary>
-        bool IsExpand { get; set; }
-
-        /// <summary> Gets or sets ILayer's selected. </summary>
-        bool IsSelected { get; set; }
-
-
-        #endregion
-
-
         #region Render
-
 
 
         /// <summary> Gets or sets ILayer is need to refactoring render. </summary>
@@ -179,6 +170,18 @@ namespace Retouch_Photo2.Layers
         /// <param name="canvasToVirtualMatrix"> The canvas-to-virtual matrix. </param>
         /// <returns> The product geometry. </returns>   
         CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix);
+        
+
+        /// <summary>
+        /// Returns whether the area filled by the layer contains the specified point.
+        /// </summary>
+        bool FillContainsPoint(Layerage layerage, Vector2 point);
+
+
+        #endregion
+
+
+        #region Node
 
 
         /// <summary>
@@ -186,12 +189,86 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <returns> The product curves. </returns>
         IEnumerable<IEnumerable<Node>> ConvertToCurves();
+        /// <summary>
+        /// Draw nodes.
+        /// </summary>
+        /// <param name="drawingSession"> The drawing-session. </param>
+        /// <param name="matrix"> The matrix. </param>
+        /// <param name="accentColor"> The accent color. </param>
+        void DrawNode(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor);
+        
+
+        /// <summary>
+        /// Gets the all points by the NodeCollection contains the specified point. 
+        /// </summary>
+        /// <param name="point"> The input point. </param>
+        /// <param name="matrix"> The matrix. </param>
+        /// <returns> The NodeCollection mode. </returns>
+        NodeCollectionMode ContainsNodeCollectionMode(Vector2 point, Matrix3x2 matrix);
 
 
         /// <summary>
-        /// Returns whether the area filled by the layer contains the specified point.
+        ///  Cache the NodeCollection's transformer.
         /// </summary>
-        bool FillContainsPoint(Layerage layerage, Vector2 point);
+        void NodeCacheTransform();
+        /// <summary>
+        ///  Transforms the node by the given vector.
+        /// </summary>
+        /// <param name="vector"> The add value use to summed. </param>
+        void NodeTransformMultiplies(Matrix3x2 matrix);
+        /// <summary>
+        ///  Transforms the node by the given matrix.
+        /// </summary>
+        /// <param name="matrix"> The resulting matrix. </param>
+        void NodeTransformAdd(Vector2 vector);
+
+
+        /// <summary>
+        /// Select only one node.
+        /// </summary>
+        /// <param name="point"> The point. </param>
+        /// <param name="matrix"> The matrix. </param>
+        bool NodeSelectionOnlyOne(Vector2 point, Matrix3x2 matrix);
+
+        /// <summary>
+        /// Check node which in the rect.
+        /// </summary>
+        /// <param name="boxRect"> The destination rectangle. </param>
+        void NodeBoxChoose(TransformerRect boxRect);
+        
+
+        /// <summary>
+        /// Move a node's point. 
+        /// </summary>
+        /// <param name="point"> The point. </param>
+        void NodeMovePoint(Vector2 point);
+        /// <summary>
+        /// It controls the transformation of node contol point.
+        /// </summary>
+        /// <param name="mode"> The mode. </param>
+        /// <param name="lengthMode"> The length mode. </param>
+        /// <param name="angleMode"> The angle mode. </param>
+        /// <param name="point"> The point. </param>
+        /// <param name="isLeftControlPoint"> <see cref="Node.LeftControlPoint"/> or <see cref="Node.RightControlPoint"/>. </param>
+        void NodeControllerControlPoint(SelfControlPointMode mode, EachControlPointLengthMode lengthMode, EachControlPointAngleMode angleMode, Vector2 point, bool isLeftControlPoint);
+
+
+        /// <summary>
+        /// Remove all checked nodes.
+        /// </summary>
+        NodeRemoveMode NodeRemoveCheckedNodes();
+        /// <summary>
+        /// Insert a new point between checked points
+        /// </summary>
+        void NodeInterpolationCheckedNodes();
+        /// <summary>
+        /// Sharpen all checked nodes.
+        /// </summary>
+        void NodeSharpCheckedNodes();
+        /// <summary>
+        /// Smoothly all checked nodes.
+        /// </summary>
+        void NodeSmoothCheckedNodes();
 
 
         #endregion

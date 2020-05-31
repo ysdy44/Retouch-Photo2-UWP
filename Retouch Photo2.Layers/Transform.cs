@@ -8,7 +8,7 @@ using Windows.UI;
 namespace Retouch_Photo2.Layers
 {
     /// <summary>
-    /// Represents a brush that provides an <see cref="Matrix3x2"/>.
+    /// Represents a transform that provides an <see cref="Transformer"/>.
     /// </summary>
     public class Transform : ICacheTransform
     {
@@ -96,6 +96,30 @@ namespace Retouch_Photo2.Layers
         {
             this.Transformer = this.StartingTransformer + vector;
             this.CropTransformer = this.StartingCropTransformer + vector;
+        }
+
+
+        /// <summary>
+        /// Occurs when the canvas is drawn.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="matrix"> The matrix. </param>
+        /// <param name="accentColor"> The accent color. </param>
+        public void DrawCrop(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        {
+            if (this.IsCrop)
+            {
+                Transformer transformer = this.Transformer;
+                drawingSession.DrawBound(transformer, matrix, accentColor);
+
+                Transformer cropTransformer = this.CropTransformer;
+                drawingSession.DrawCrop(cropTransformer, matrix, Colors.BlueViolet);
+            }
+            else
+            {
+                Transformer transformer = this.Transformer;
+                drawingSession.DrawCrop(transformer, matrix, accentColor);
+            }
         }
 
 

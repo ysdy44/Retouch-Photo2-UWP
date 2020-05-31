@@ -54,7 +54,7 @@ namespace Retouch_Photo2.ViewModels
          
                 Layerages =
                     from layerage
-                    in rootLayerages.Elements()
+                    in rootLayerages.Elements("Layerage")
                     select Retouch_Photo2.Layers.XML.LoadLayerage(layerage)
             };
 

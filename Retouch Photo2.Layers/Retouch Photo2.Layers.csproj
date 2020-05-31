@@ -117,6 +117,7 @@
     <Compile Include="LayerMode\BackgroundMode.cs" />
     <Compile Include="Layers\ITextLayer.cs" />
     <Compile Include="Layers\LayerBase.Instance.cs" />
+    <Compile Include="Layers\LayerBase.Node.cs" />
     <Compile Include="LayerType.cs" />
     <Compile Include="ModelsSecond\GeometryArrowLayer.cs" />
     <Compile Include="ModelsSecond\GeometryCapsuleLayer.cs" />
@@ -146,7 +147,6 @@
     </Compile>
     <Compile Include="LayerExtensions.cs" />
     <Compile Include="LayerMode\OverlayMode.cs" />
-    <Compile Include="Layers\LayerBase.Control.cs" />
     <Compile Include="Layers\LayerBase.Render.cs" />
     <Compile Include="Layers\LayerBase.Property.cs" />
     <Compile Include="Models\CurveMultiLayer.cs" />

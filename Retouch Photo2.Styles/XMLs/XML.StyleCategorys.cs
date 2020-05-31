@@ -41,9 +41,9 @@ namespace Retouch_Photo2.Styles
 
             return
             (
-                from StyleCategory
-                in root.Elements()
-                select XML.LoadStyleCategory(StyleCategory)
+                from styleCategory
+                in root.Elements("StyleCategory")
+                select XML.LoadStyleCategory(styleCategory)
             );
         }
         

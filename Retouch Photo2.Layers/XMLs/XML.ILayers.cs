@@ -47,7 +47,7 @@ namespace Retouch_Photo2.Layers
 
             return
                 from layer
-                in root.Elements()
+                in root.Elements("Layer")
                 select XML.LoadILayer(customDevice, layer);
         }
 

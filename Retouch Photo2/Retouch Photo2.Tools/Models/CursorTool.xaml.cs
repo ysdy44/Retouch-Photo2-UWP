@@ -210,7 +210,7 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
-        //TODO
+
         //Box
         private void BoxChoose(IList<Layerage> layerages)
         {

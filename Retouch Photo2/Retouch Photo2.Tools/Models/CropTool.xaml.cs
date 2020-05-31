@@ -25,6 +25,8 @@ namespace Retouch_Photo2.Tools.Models
         SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
+        ListViewSelectionMode SelectionMode => this.SelectionViewModel.SelectionMode;
+
         ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
         MarqueeCompositeMode MarqueeCompositeMode => this.SettingViewModel.CompositeMode;
         bool IsRatio => this.SettingViewModel.IsRatio;
@@ -159,29 +161,32 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
-            Layerage firstLayerage = this.SelectionViewModel.GetFirstSelectedLayerage();
-            if (firstLayerage == null) return;
-            ILayer firstLayer = firstLayerage.Self;
+            Layerage layerage = this.GetTransformerLayer(startingPoint, matrix);
+            if (layerage == null) return;
+            ILayer layer = layerage.Self;
+
 
             //Transformer
-            Transformer transformer = firstLayerage.GetActualTransformer();
-            this.TransformerMode = Transformer.ContainsNodeMode(canvasStartingPoint, transformer, false);
+            Transformer transformer = layerage.GetActualTransformer();
             if (this.TransformerMode == TransformerMode.None)
             {
+                Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+                Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+
                 this.IsMove = transformer.FillContainsPoint(canvasStartingPoint);
                 if (this.IsMove == false) return;
             }
 
+
             //Snap
-            if (this.IsSnap) this.ViewModel.VectorBorderSnapInitiate(firstLayer.Transform.Transformer);
+            if (this.IsSnap) this.ViewModel.VectorBorderSnapInitiate(layer.Transform.Transformer);
 
 
-            this.Layerage = firstLayerage;
-            firstLayer.Transform.CacheTransform();
-            if (firstLayer.Transform.IsCrop == false) this._started(firstLayer);
+            this.Layerage = layerage;
+            layer.Transform.CacheTransform();
+            if (layer.Transform.IsCrop == false) this._started(layer);
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
@@ -235,28 +240,22 @@ namespace Retouch_Photo2.Tools.Models
 
             switch (this.SelectionViewModel.SelectionMode)
             {
-                case ListViewSelectionMode.None:
-                    break;
+                case ListViewSelectionMode.None: return;
                 case ListViewSelectionMode.Single:
-                    {
-                        this._draw(drawingSession, this.SelectionViewModel.SelectionLayerage, matrix);
-
-                        //Snapping
-                        if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
-                    }
+                    ILayer layer = this.SelectionViewModel.SelectionLayerage.Self;
+                    layer.Transform.DrawCrop(drawingSession, matrix, this.ViewModel.AccentColor);
                     break;
                 case ListViewSelectionMode.Multiple:
+                    foreach (Layerage layerage in this.SelectionViewModel.SelectionLayerages)
                     {
-                        foreach (Layerage layerage in this.SelectionViewModel.SelectionLayerages)
-                        {
-                            this._draw(drawingSession, layerage, matrix);
-                        }
-
-                        //Snapping
-                        if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
+                        ILayer layer2 = layerage.Self;
+                        layer2.Transform.DrawCrop(drawingSession, matrix, this.ViewModel.AccentColor);
                     }
                     break;
             }
+
+            //Snapping
+            if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
         }
     }
 
@@ -266,6 +265,41 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public sealed partial class CropTool : Page, ITool
     {
+
+        private Layerage GetTransformerLayer(Vector2 startingPoint, Matrix3x2 matrix)
+        {
+            switch (this.SelectionMode)
+            {
+                case ListViewSelectionMode.None: return null;
+
+                case ListViewSelectionMode.Single:
+                    {
+                        Layerage layerage = this.SelectionViewModel.SelectionLayerage;
+                        if (layerage == null) return null;
+
+                        //Transformer
+                        Transformer transformer = layerage.GetActualTransformer();
+                        this.TransformerMode = Transformer.ContainsNodeMode(startingPoint, transformer, matrix, false);
+
+                        return layerage;
+                    }
+
+                case ListViewSelectionMode.Multiple:
+                    foreach (Layerage layerage in this.SelectionViewModel.SelectionLayerages)
+                    {
+                        //Transformer
+                        Transformer transformer = layerage.GetActualTransformer();
+                        TransformerMode mode = Transformer.ContainsNodeMode(startingPoint, transformer, matrix, false);
+                        if (mode != TransformerMode.None)
+                        {
+                            this.TransformerMode = mode;
+                            return layerage;
+                        }
+                    }
+                    break;
+            }
+            return null;
+        }
 
         private void _started(ILayer firstLayer)
         {
@@ -338,29 +372,6 @@ namespace Retouch_Photo2.Tools.Models
             layer.IsRefactoringIconRender = true;
             this.Layerage.RefactoringParentsRender();
             this.Layerage.RefactoringParentsIconRender();
-        }
-        
-
-        private void _draw(CanvasDrawingSession drawingSession, Layerage layerage, Matrix3x2 matrix)
-        {
-            ILayer layer = layerage.Self;
-
-            if (layer.IsSelected == true)
-            {
-                if (layer.Transform.IsCrop)
-                {
-                    Transformer transformer = layer.Transform.Transformer;
-                    drawingSession.DrawBound(transformer, matrix, this.ViewModel.AccentColor);
-
-                    Transformer cropTransformer = layer.Transform.CropTransformer;
-                    drawingSession.DrawCrop(cropTransformer, matrix, Colors.BlueViolet);
-                }
-                else
-                {
-                    Transformer transformer = layer.Transform.Transformer;
-                    drawingSession.DrawCrop(transformer, matrix, this.ViewModel.AccentColor);
-                }
-            }
         }
 
     }

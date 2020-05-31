@@ -82,6 +82,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             return this.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
         }
+
         
         public override IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
 
