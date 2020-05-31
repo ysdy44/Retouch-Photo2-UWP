@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        
+
         //@Generic
         public TemperatureAdjustment Adjustment { get; set; }
 
@@ -71,15 +71,21 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory("Set temperature adjustment");
 
+                    var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                     var previous1 = adjustment.Temperature;
                     var previous2 = adjustment.Tint;
                     history.UndoActions.Push(() =>
                     {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        adjustment.Temperature = previous1;
-                        adjustment.Tint = previous2;
+                        if (previous < 0) return;
+                        if (previous > layer.Filter.Adjustments.Count - 1) return;
+                        if (layer.Filter.Adjustments[previous] is TemperatureAdjustment adjustment2)
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment2.Temperature = previous1;
+                            adjustment2.Tint = previous2;
+                        }
                     });
 
                     //Refactoring
@@ -109,7 +115,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// </summary>
     public sealed partial class TemperaturePage : IAdjustmentGenericPage<TemperatureAdjustment>
     {
-        
+
         public void ConstructTemperature()
         {
             this.TemperatureSlider.Value = 0;
@@ -117,7 +123,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.TemperatureSlider.Maximum = 100;
 
             this.TemperatureSlider.SliderBrush = this.TemperatureBrush;
-            
+
             this.TemperatureSlider.ValueChangeStarted += (s, value) =>
             {
                 if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
@@ -163,13 +169,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set temperature adjustment temperature");
 
-                        var previous = adjustment.StartingTemperature;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingTemperature;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.Temperature = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is TemperatureAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.Temperature = previous1;
+                            }
                         });
 
                         //Refactoring
@@ -195,7 +207,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.TintSlider.Maximum = 100;
 
             this.TintSlider.SliderBrush = this.TintBrush;
-                       
+
             this.TintSlider.ValueChangeStarted += (s, value) =>
             {
                 if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
@@ -241,13 +253,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set temperature adjustment tint");
 
-                        var previous = adjustment.StartingTint;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingTint;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.Tint = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is TemperatureAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.Tint = previous1;
+                            }
                         });
 
                         //Refactoring

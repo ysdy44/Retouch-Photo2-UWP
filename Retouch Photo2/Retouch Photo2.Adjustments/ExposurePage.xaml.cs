@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        
+
         //@Generic
         public ExposureAdjustment Adjustment { get; set; }
 
@@ -69,13 +69,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory("Set contrast adjustment");
 
-                    var previous = adjustment.Exposure;
+                    var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                    var previous1 = adjustment.Exposure;
                     history.UndoActions.Push(() =>
                     {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        adjustment.Exposure = previous;
+                        if (previous < 0) return;
+                        if (previous > layer.Filter.Adjustments.Count - 1) return;
+                        if (layer.Filter.Adjustments[previous] is ExposureAdjustment adjustment2)
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment2.Exposure = previous1;
+                        }
                     });
 
                     //Refactoring
@@ -157,13 +163,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set exposure adjustment exposure");
 
-                        var previous = adjustment.StartingExposure;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingExposure;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.Exposure = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is ExposureAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.Exposure = previous1;
+                            }
                         });
 
                         //Refactoring
@@ -175,7 +187,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         //History
                         this.ViewModel.HistoryPush(history);
-                        
+
                         this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                     }
                 }

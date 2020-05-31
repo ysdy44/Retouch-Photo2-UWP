@@ -81,19 +81,25 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment");
 
+                    var previous = layer.Filter.Adjustments.IndexOf(adjustment); 
                     var previous1 = adjustment.WhiteLight;
                     var previous2 = adjustment.WhiteDark;
                     var previous3 = adjustment.BlackLight;
                     var previous4 = adjustment.BlackDark;
                     history.UndoActions.Push(() =>
                     {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        adjustment.WhiteLight = previous1;
-                        adjustment.WhiteDark = previous2;
-                        adjustment.BlackLight = previous3;
-                        adjustment.BlackDark = previous4;
+                        if (previous < 0) return;
+                        if (previous > layer.Filter.Adjustments.Count - 1) return;
+                        if (layer.Filter.Adjustments[previous] is BrightnessAdjustment adjustment2)
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment2.WhiteLight = previous1;
+                            adjustment2.WhiteDark = previous2;
+                            adjustment2.BlackLight = previous3;
+                            adjustment2.BlackDark = previous4;
+                        }
                     });
 
                     //Refactoring
@@ -183,13 +189,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment white light");
 
-                        var previous = adjustment.StartingWhiteLight;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingWhiteLight;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.WhiteLight = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is BrightnessAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.WhiteLight = previous1;
+                            }
                         });
 
                         //Refactoring
@@ -261,13 +273,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment white dark");
 
-                        var previous = adjustment.StartingWhiteDark;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingWhiteDark;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.WhiteDark = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is BrightnessAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.WhiteDark = previous1;
+                            }
                         });
 
                         //Refactoring
@@ -340,13 +358,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment black light");
 
-                        var previous = adjustment.StartingBlackLight;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingBlackLight;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.BlackLight = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is BrightnessAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.BlackLight = previous1;
+                            }
                         });
 
                         //Refactoring
@@ -418,13 +442,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment black dark");
 
-                        var previous = adjustment.StartingBlackDark;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingBlackDark;
                         history.UndoActions.Push(() =>
-                        {  
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.BlackDark = previous;
+                        {
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is BrightnessAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.BlackDark = previous1;
+                            }
                         });
 
                         //Refactoring

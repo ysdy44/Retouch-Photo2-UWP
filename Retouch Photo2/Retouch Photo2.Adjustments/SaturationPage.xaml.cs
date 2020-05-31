@@ -57,7 +57,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         public void Reset()
         {
             this.SaturationSlider.Value = 100;
-            
+
             if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
                 ILayer layer = layerage.Self;
@@ -67,13 +67,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory("Set saturation adjustment");
 
-                    var previous = adjustment.Saturation;
+                    var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                    var previous1 = adjustment.Saturation;
                     history.UndoActions.Push(() =>
-                    {   
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        adjustment.Saturation = previous;
+                    {
+                        if (previous < 0) return;
+                        if (previous > layer.Filter.Adjustments.Count - 1) return;
+                        if (layer.Filter.Adjustments[previous] is SaturationAdjustment adjustment2)
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment2.Saturation = previous1;
+                        }
                     });
 
                     //Refactoring
@@ -128,7 +134,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                 if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
                     ILayer layer = layerage.Self;
-                    
+
                     if (this.Adjustment is SaturationAdjustment adjustment)
                     {
                         float saturation = (float)value / 100.0f;
@@ -155,13 +161,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set saturation adjustment saturation");
 
-                        var previous = adjustment.StartingSaturation;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingSaturation;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.Saturation = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is SaturationAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.Saturation = previous1;
+                            }
                         });
 
                         //Refactoring

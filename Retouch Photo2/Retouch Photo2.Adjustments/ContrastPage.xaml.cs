@@ -68,13 +68,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory("Set contrast adjustment");
 
-                    var previous = adjustment.Contrast;
+                    var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                    var previous1 = adjustment.Contrast;
                     history.UndoActions.Push(() =>
                     {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        adjustment.Contrast = previous;
+                        if (previous < 0) return;
+                        if (previous > layer.Filter.Adjustments.Count - 1) return;
+                        if (layer.Filter.Adjustments[previous] is ContrastAdjustment adjustment2)
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment2.Contrast = previous1;
+                        }
                     });
 
                     //Refactoring
@@ -156,13 +162,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set contrast adjustment contrast");
 
-                        var previous = adjustment.StartingContrast;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingContrast;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.Contrast = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is ContrastAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.Contrast = previous1;
+                            }
                         });
 
                         //Refactoring

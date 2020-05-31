@@ -69,13 +69,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory("Set hue rotation adjustment");
 
-                    var previous = adjustment.Angle;
+                    var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                    var previous1 = adjustment.Angle;
                     history.UndoActions.Push(() =>
                     {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        adjustment.Angle = previous;
+                        if (previous < 0) return;
+                        if (previous > layer.Filter.Adjustments.Count - 1) return;
+                        if (layer.Filter.Adjustments[previous] is HueRotationAdjustment adjustment2)
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment2.Angle = previous1;
+                        }
                     });
                     
                     //Refactoring
@@ -153,18 +159,23 @@ namespace Retouch_Photo2.Adjustments.Pages
                     if (this.Adjustment is HueRotationAdjustment adjustment)
                     {
                         float angle = (float)value * FanKit.Math.Pi / 180.0f;
-
-
+                        
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set hue rotation adjustment angle");
 
-                        var previous = adjustment.StartingAngle;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingAngle;
                         history.UndoActions.Push((() =>
-                        {            
-                            //Refactoring
-                            layer.IsRefactoringTransformer = true;
-                            layer.IsRefactoringRender = true;
-                            adjustment.Angle = previous;
+                        {
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is HueRotationAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringTransformer = true;
+                                layer.IsRefactoringRender = true;
+                                adjustment2.Angle = previous1;
+                            }
                         }));
 
                         //Refactoring

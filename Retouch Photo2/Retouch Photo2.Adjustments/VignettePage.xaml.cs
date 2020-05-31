@@ -17,7 +17,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        
+
         public Color Color
         {
             get => this.SolidColorBrush.Color;
@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         //@Generic
         public VignetteAdjustment Adjustment { get; set; }
-        
+
         //@Construct
         public VignettePage()
         {
@@ -89,7 +89,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.AmountSlider.Value = 0;
             this.CurveSlider.Value = 0;
             this.Color = Colors.Black;
-            
+
             if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
                 ILayer layer = layerage.Self;
@@ -99,17 +99,23 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory("Set vignette adjustment");
 
+                    var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                     var previous1 = adjustment.Amount;
                     var previous2 = adjustment.Curve;
                     var previous3 = adjustment.Color;
                     history.UndoActions.Push(() =>
-                    {    
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        adjustment.Amount = previous1;
-                        adjustment.Curve = previous2;
-                        adjustment.Color = previous3;
+                    {
+                        if (previous < 0) return;
+                        if (previous > layer.Filter.Adjustments.Count - 1) return;
+                        if (layer.Filter.Adjustments[previous] is VignetteAdjustment adjustment2)
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment2.Amount = previous1;
+                            adjustment2.Curve = previous2;
+                            adjustment2.Color = previous3;
+                        }
                     });
 
                     //Refactoring
@@ -141,7 +147,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// </summary>
     public sealed partial class VignettePage : IAdjustmentGenericPage<VignetteAdjustment>
     {
-        
+
         public void ConstructAmount()
         {
             this.AmountSlider.Value = 0;
@@ -194,14 +200,20 @@ namespace Retouch_Photo2.Adjustments.Pages
                     if (this.Adjustment is VignetteAdjustment adjustment)
                     {
                         float amount = (float)value / 100.0f;
-                        
-                        var previous = adjustment.StartingAmount;
+
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingAmount;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.Amount = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is VignetteAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.Amount = previous1;
+                            }
                         });
 
                         //Refactoring
@@ -273,13 +285,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set vignette adjustment curve");
 
-                        var previous = adjustment.StartingCurve;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingCurve;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.Curve = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is VignetteAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.Curve = previous1;
+                            }
                         });
 
                         //Refactoring
@@ -324,13 +342,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set vignette adjustment color");
 
-                        var previous = adjustment.Color;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.Color;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.Color = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is VignetteAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.Color = previous1;
+                            }
                         });
 
                         //Refactoring
@@ -397,13 +421,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set vignette adjustment color");
 
-                        var previous = adjustment.StartingColor;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingColor;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.Color = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is VignetteAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.Color = previous1;
+                            }
                         });
 
                         //Refactoring

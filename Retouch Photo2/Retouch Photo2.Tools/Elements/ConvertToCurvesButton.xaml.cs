@@ -37,18 +37,22 @@ namespace Retouch_Photo2.Tools.Elements
 
                     //Turn to curve layer
                     ILayer curveLayer = this.GetCurveLayer(layerage);
-                    Layerage curveLayerage = curveLayer.ToLayerage();
-                    LayerBase.Instances.Add(curveLayer);
 
-                    //set image brush
-                    if (layer2.Type == LayerType.Image)
+                    if (curveLayer != null)
                     {
-                        ImageLayer imageLayer = (ImageLayer)layer2;
-                        curveLayer.Style.Fill = imageLayer.ToBrush();
-                    }
+                        Layerage curveLayerage = curveLayer.ToLayerage();
+                        LayerBase.Instances.Add(curveLayer);
 
-                    this.Replace(curveLayerage, layerage);
-                    curveLayer.IsSelected = true;
+                        //set image brush
+                        if (layer2.Type == LayerType.Image)
+                        {
+                            ImageLayer imageLayer = (ImageLayer)layer2;
+                            curveLayer.Style.Fill = imageLayer.ToBrush();
+                        }
+
+                        this.Replace(curveLayerage, layerage);
+                        curveLayer.IsSelected = true;
+                    }
                 });
 
                 LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);

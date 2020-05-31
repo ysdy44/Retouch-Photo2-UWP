@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        
+
         //@Generic
         public HighlightsAndShadowsAdjustment Adjustment { get; set; }
 
@@ -79,24 +79,29 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment");
 
-
+                    var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                     var previous1 = adjustment.Shadows;
                     var previous2 = adjustment.Highlights;
                     var previous3 = adjustment.Clarity;
                     var previous4 = adjustment.MaskBlurAmount;
                     history.UndoActions.Push(() =>
                     {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        adjustment.Shadows = previous1;
-                        adjustment.Highlights = previous2;
-                        adjustment.Clarity = previous3;
-                        adjustment.MaskBlurAmount = previous4;
+                        if (previous < 0) return;
+                        if (previous > layer.Filter.Adjustments.Count - 1) return;
+                        if (layer.Filter.Adjustments[previous] is HighlightsAndShadowsAdjustment adjustment2)
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            adjustment2.Shadows = previous1;
+                            adjustment2.Highlights = previous2;
+                            adjustment2.Clarity = previous3;
+                            adjustment2.MaskBlurAmount = previous4;
+                        }
                     });
 
                     this.ViewModel.HistoryPush(history);
-                    
+
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
@@ -133,7 +138,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ShadowsSlider.Maximum = 100;
 
             this.ShadowsSlider.SliderBrush = this.ShadowsBrush;
-                       
+
             this.ShadowsSlider.ValueChangeStarted += (s, value) =>
             {
                 if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
@@ -179,13 +184,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment shadows");
 
-                        var previous = adjustment.StartingShadows;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingShadows;
                         history.UndoActions.Push(() =>
-                        {  
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.Shadows = previous;
+                        {
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is HighlightsAndShadowsAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.Shadows = previous1;
+                            }
                         });
 
                         //Refactoring
@@ -253,17 +264,23 @@ namespace Retouch_Photo2.Adjustments.Pages
                     if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
                     {
                         float highlights = (float)value / 100.0f;
-                        
+
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment highlights");
 
-                        var previous = adjustment.StartingHighlights;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingHighlights;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.Highlights = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is HighlightsAndShadowsAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.Highlights = previous1;
+                            }
                         });
 
                         this.ViewModel.HistoryPush(history);
@@ -288,7 +305,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ClaritySlider.Maximum = 100;
 
             this.ClaritySlider.SliderBrush = this.ClarityBrush;
-            
+
             this.ClaritySlider.ValueChangeStarted += (s, value) =>
             {
                 if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
@@ -330,17 +347,23 @@ namespace Retouch_Photo2.Adjustments.Pages
                     if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
                     {
                         float clarity = (float)value / 100.0f;
-                        
+
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment clarity");
 
-                        var previous = adjustment.StartingClarity;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingClarity;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.Clarity = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is HighlightsAndShadowsAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.Clarity = previous1;
+                            }
                         });
 
                         this.ViewModel.HistoryPush(history);
@@ -407,21 +430,27 @@ namespace Retouch_Photo2.Adjustments.Pages
                     if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
                     {
                         float maskBlurAmount = (float)value / 10.0f;
-                        
+
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment mask blur amount");
-                        
-                        var previous = adjustment.StartingMaskBlurAmount;
+
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingMaskBlurAmount;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.MaskBlurAmount = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is HighlightsAndShadowsAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.MaskBlurAmount = previous1;
+                            }
                         });
 
                         this.ViewModel.HistoryPush(history);
-                                               
+
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;

@@ -77,17 +77,23 @@ namespace Retouch_Photo2.Adjustments.Pages
                     {
                         bool disable = !this.RedToggleSwitch.IsOn;
                         if (adjustment.RedDisable == disable) return;
-                        
+
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment red disable");
 
-                        var previous = adjustment.RedDisable;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.RedDisable;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.RedDisable = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.RedDisable = previous1;
+                            }
                         });
 
                         //Refactoring
@@ -156,17 +162,23 @@ namespace Retouch_Photo2.Adjustments.Pages
                     if (this.Adjustment is GammaTransferAdjustment adjustment)
                     {
                         float offset = (float)value / 100.0f;
-                        
+
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment red offset");
 
-                        var previous = adjustment.StartingRedOffset;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingRedOffset;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.RedOffset = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.RedOffset = previous1;
+                            }
                         });
 
                         //Refactoring
@@ -235,17 +247,23 @@ namespace Retouch_Photo2.Adjustments.Pages
                     if (this.Adjustment is GammaTransferAdjustment adjustment)
                     {
                         float exponent = (float)value / 100.0f;
-                        
+
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment red exponent");
 
-                        var previous = adjustment.StartingRedExponent;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingRedExponent;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.RedExponent = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.RedExponent = previous1;
+                            }
                         });
 
                         //Refactoring
@@ -314,17 +332,23 @@ namespace Retouch_Photo2.Adjustments.Pages
                     if (this.Adjustment is GammaTransferAdjustment adjustment)
                     {
                         float amplitude = (float)value / 100.0f;
-                        
+
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment red amplitude");
 
-                        var previous = adjustment.StartingRedAmplitude;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingRedAmplitude;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.RedAmplitude = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.RedAmplitude = previous1;
+                            }
                         });
 
                         //Refactoring

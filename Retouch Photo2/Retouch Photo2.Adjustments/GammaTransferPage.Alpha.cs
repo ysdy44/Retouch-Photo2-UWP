@@ -78,17 +78,22 @@ namespace Retouch_Photo2.Adjustments.Pages
                         bool disable = !this.AlphaToggleSwitch.IsOn;
                         if (adjustment.AlphaDisable == disable) return;
 
-
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment alpha disable");
 
-                        var previous = adjustment.AlphaDisable;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.AlphaDisable;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.AlphaDisable = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.AlphaDisable = previous1;
+                            }
                         });
 
                         //Refactoring
@@ -115,7 +120,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.AlphaOffsetSlider.Maximum = 100;
 
             this.AlphaOffsetSlider.SliderBrush = this.AlphaLeftBrush;
-                       
+
             this.AlphaOffsetSlider.ValueChangeStarted += (s, value) =>
             {
                 if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
@@ -157,19 +162,25 @@ namespace Retouch_Photo2.Adjustments.Pages
                     if (this.Adjustment is GammaTransferAdjustment adjustment)
                     {
                         float offset = (float)value / 100.0f;
-                        
+
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment alpha offset");
 
-                        var previous = adjustment.StartingAlphaOffset;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingAlphaOffset;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.AlphaOffset = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.AlphaOffset = previous1;
+                            }
                         });
-                        
+
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
@@ -186,7 +197,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-               
+
         public void ConstructAlphaExponent()
         {
             this.AlphaExponentSlider.Value = 100;
@@ -236,17 +247,23 @@ namespace Retouch_Photo2.Adjustments.Pages
                     if (this.Adjustment is GammaTransferAdjustment adjustment)
                     {
                         float exponent = (float)value / 100.0f;
-                        
+
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment alpha exponent");
 
-                        var previous = adjustment.StartingAlphaExponent;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingAlphaExponent;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.AlphaExponent = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.AlphaExponent = previous1;
+                            }
                         });
 
                         //Refactoring
@@ -315,19 +332,25 @@ namespace Retouch_Photo2.Adjustments.Pages
                     if (this.Adjustment is GammaTransferAdjustment adjustment)
                     {
                         float amplitude = (float)value / 100.0f;
-                        
+
                         //History
                         LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment alpha amplitude");
 
-                        var previous = adjustment.StartingAlphaAmplitude;
+                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
+                        var previous1 = adjustment.StartingAlphaAmplitude;
                         history.UndoActions.Push(() =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment.AlphaAmplitude = previous;
+                            if (previous < 0) return;
+                            if (previous > layer.Filter.Adjustments.Count - 1) return;
+                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                adjustment2.AlphaAmplitude = previous1;
+                            }
                         });
-                        
+
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;

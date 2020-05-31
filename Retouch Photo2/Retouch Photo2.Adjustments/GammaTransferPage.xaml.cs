@@ -106,6 +106,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment");
 
+                    var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                     var previousAlpha1 = adjustment.AlphaDisable;
                     var previousAlpha2 = adjustment.AlphaOffset;
                     var previousAlpha3 = adjustment.AlphaExponent;
@@ -127,29 +128,34 @@ namespace Retouch_Photo2.Adjustments.Pages
                     var previousBlue4 = adjustment.BlueAmplitude;
                     history.UndoActions.Push(() =>
                     {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
+                        if (previous < 0) return;
+                        if (previous > layer.Filter.Adjustments.Count - 1) return;
+                        if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
 
-                        adjustment.AlphaDisable = previousAlpha1;
-                        adjustment.AlphaOffset = previousAlpha2;
-                        adjustment.AlphaExponent = previousAlpha3;
-                        adjustment.AlphaAmplitude = previousAlpha4;
+                            adjustment2.AlphaDisable = previousAlpha1;
+                            adjustment2.AlphaOffset = previousAlpha2;
+                            adjustment2.AlphaExponent = previousAlpha3;
+                            adjustment2.AlphaAmplitude = previousAlpha4;
 
-                        adjustment.RedDisable = previousRed1;
-                        adjustment.RedOffset = previousRed2;
-                        adjustment.RedExponent = previousRed3;
-                        adjustment.RedAmplitude = previousRed4;
+                            adjustment2.RedDisable = previousRed1;
+                            adjustment2.RedOffset = previousRed2;
+                            adjustment2.RedExponent = previousRed3;
+                            adjustment2.RedAmplitude = previousRed4;
 
-                        adjustment.GreenDisable = previousGreen1;
-                        adjustment.GreenOffset = previousGreen2;
-                        adjustment.GreenExponent = previousGreen3;
-                        adjustment.GreenAmplitude = previousGreen4;
+                            adjustment2.GreenDisable = previousGreen1;
+                            adjustment2.GreenOffset = previousGreen2;
+                            adjustment2.GreenExponent = previousGreen3;
+                            adjustment2.GreenAmplitude = previousGreen4;
 
-                        adjustment.AlphaDisable = previousAlpha1;
-                        adjustment.AlphaOffset = previousAlpha2;
-                        adjustment.AlphaExponent = previousAlpha3;
-                        adjustment.AlphaAmplitude = previousAlpha4;
+                            adjustment2.AlphaDisable = previousAlpha1;
+                            adjustment2.AlphaOffset = previousAlpha2;
+                            adjustment2.AlphaExponent = previousAlpha3;
+                            adjustment2.AlphaAmplitude = previousAlpha4;
+                        }
                     });
 
                     //Refactoring
