@@ -172,7 +172,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Gets or sets the current photocopier. </summary>
         public Photocopier Photocopier
         {
-            get => this.;
+            get => this.photocopier;
             set
             {
                 this.photocopier = value;

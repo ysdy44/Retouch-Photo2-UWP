@@ -62,14 +62,11 @@ namespace Retouch_Photo2.Tools
             if (this.IsSnap) this.ViewModel.VectorBorderSnapInitiate(this.SelectionViewModel.GetFirstSelectedLayerage());
 
             //History
-            this.ViewModel.MethodSelectedNone();
             LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer", this.ViewModel.LayerageCollection);
             this.ViewModel.HistoryPush(history);
 
             //Selection
             Transformer transformer = new Transformer(canvasStartingPoint, canvasPoint, this.IsCenter, this.IsSquare);
-            this.Transformer = transformer;
-            this.SelectionViewModel.SetModeExtended();//Selection
 
             //Mezzanine
             ILayer layer = createLayer(this.ViewModel.CanvasDevice, transformer);
@@ -80,9 +77,16 @@ namespace Retouch_Photo2.Tools
             this.MezzanineLayerage = layerage;
             LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, this.MezzanineLayerage);
 
+            //History
+            this.ViewModel.MethodSelectedNone();
+
             //Text
             this.ViewModel.SetTipTextWidthHeight(transformer);
             this.ViewModel.TipTextVisibility = Visibility.Visible;
+     
+            //Selection
+            this.Transformer = transformer;
+            this.SelectionViewModel.SetModeExtended();
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
