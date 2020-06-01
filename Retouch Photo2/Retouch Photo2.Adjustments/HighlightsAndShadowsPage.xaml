@@ -41,15 +41,15 @@
 
         <!--Highlights-->
         <TextBlock x:Name="HighlightsTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="HighlightsSlider"/>
+        <hsvColorPickers:TouchSlider x:Name="HighlightsSlider" Margin="2,0"/>
 
         <!--Clarity-->
         <TextBlock x:Name="ClarityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="ClaritySlider"/>
+        <hsvColorPickers:TouchSlider x:Name="ClaritySlider" Margin="2,0"/>
 
         <!--MaskBlurAmount-->
         <TextBlock x:Name="MaskBlurAmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="MaskBlurAmountSlider"/>
+        <hsvColorPickers:TouchSlider x:Name="MaskBlurAmountSlider" Margin="2,0"/>
 
         <ContentControl Height="4"/>
     </StackPanel>

@@ -43,19 +43,19 @@
 
         <!--White to Light-->
         <TextBlock x:Name="WhiteToLightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="WhiteLightSlider"/>
+        <hsvColorPickers:TouchSlider x:Name="WhiteLightSlider" Margin="2,0"/>
 
         <!--White to Dark-->
         <TextBlock x:Name="WhiteToDarkTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="WhiteDarkSlider"/>
+        <hsvColorPickers:TouchSlider x:Name="WhiteDarkSlider" Margin="2,0"/>
 
         <!--Black to Light-->
         <TextBlock x:Name="BlackToLightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="BlackLightSlider"/>
+        <hsvColorPickers:TouchSlider x:Name="BlackLightSlider" Margin="2,0"/>
 
         <!--Black to Dark-->
         <TextBlock x:Name="BlackToDarkTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="BlackDarkSlider"/>
+        <hsvColorPickers:TouchSlider x:Name="BlackDarkSlider" Margin="2,0"/>
 
         <ContentControl Height="4"/>
     </StackPanel>

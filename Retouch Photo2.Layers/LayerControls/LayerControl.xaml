@@ -13,29 +13,103 @@
 
     <UserControl.Resources>
 
-        <!--Background-->
-        <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
-        <SolidColorBrush x:Name="UnAccentColor" Color="Transparent"/>
-        <SolidColorBrush x:Name="ThreeStateColor" Opacity="0.4" Color="{ThemeResource SystemAccentColor}"/>
-        <SolidColorBrush x:Name="FourStateColor" Opacity="0.15" Color="{ThemeResource SystemAccentColor}"/>
-
-        <!--Foreground-->
-        <SolidColorBrush x:Name="CheckColor" Color="White"/>
-        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
-        <SolidColorBrush x:Name="HighlightColor" Color="{ThemeResource AppTextColor}"/>
-
+        <!--Pointer -->
+        <SolidColorBrush x:Name="PointerOverColor" Color="{ThemeResource SystemBaseLowColor}"/>
+        <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
+      
         <!--Style-->
         <Style x:Key="OverlayStyle" TargetType="Border">
             <Setter Property="IsHitTestVisible" Value="False"/>
             <Setter Property="Visibility" Value="Collapsed"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="Red"/>
+            <Setter Property="BorderBrush" Value="{StaticResource SystemAccentColor}"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Opacity="0.4" Color="{ThemeResource SystemAccentColor}"/>
+                </Setter.Value>
+            </Setter>
         </Style>
 
     </UserControl.Resources>
 
 
-    <Grid x:Name="RootGrid" BorderThickness="0,1">
+    <Grid x:Name="RootGrid" BorderThickness="0,1" Background="Transparent">
+        
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="CommonStates">
+
+                <VisualState x:Name="Normal"/>
+
+                <VisualState x:Name="PointerOver">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PointerOverColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <VisualState x:Name="Pressed">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PressedColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+
+                <VisualState x:Name="Selected">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Foreground">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanedFontIcon" Storyboard.TargetProperty="Foreground">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SelectedFontIcon" Storyboard.TargetProperty="Foreground">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualFontIcon" Storyboard.TargetProperty="Foreground">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SystemAccentColor}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                    </Storyboard>
+                </VisualState>
+
+
+                <VisualState x:Name="ParentsSelected">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" >
+                                <DiscreteObjectKeyFrame.Value>
+                                    <SolidColorBrush Opacity="0.2" Color="{ThemeResource SystemAccentColor}"/>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                    </Storyboard>
+                </VisualState>
+
+                <VisualState x:Name="ChildSelected">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" >
+                                <DiscreteObjectKeyFrame.Value>
+                                    <SolidColorBrush Opacity="0.2" Color="{ThemeResource SystemAccentColor}"/>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                    </Storyboard>
+                </VisualState>
+                
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="DepthColumn" Width="0"/>
             <ColumnDefinition Width="30"/>
@@ -46,20 +120,22 @@
 
         <!--Selected-->
         <Button x:Name="SelectedButton" Grid.Column="1" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-            <FontIcon x:Name="SelectedFontIcon" Glyph="&#xECCA;" FontSize="18" Foreground="{StaticResource UnCheckColor}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            <FontIcon x:Name="SelectedFontIcon" Glyph="&#xECCA;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
 
+        
         <!--Icon-->
         <Border x:Name="IconBorder" Grid.Column="2" MinHeight="20" MinWidth="20" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{StaticResource AppForeground}" Background="White">
             <canvas:CanvasControl x:Name="IconCanvasControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Border>
 
+        
         <!--Text-->
-        <TextBlock x:Name="TextBlock" Grid.Column="3" Margin="4,0,0,0" TextTrimming="WordEllipsis" VerticalAlignment="Center">
+        <TextBlock x:Name="TextBlock" Grid.Column="3" TextTrimming="CharacterEllipsis" Style="{ StaticResource AppTextBlockStyle}">
             <Run x:Name="NameRun" />
-            (
-            <Run x:Name="TypeRun" />
-            )
+             (
+             <Run x:Name="TypeRun" />
+             )
         </TextBlock>
 
         
@@ -67,12 +143,12 @@
 
             <!--Visual-->
             <Button x:Name="VisualButton" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                <FontIcon x:Name="VisualFontIcon" Glyph="&#xE7B3;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}" />
+                <FontIcon x:Name="VisualFontIcon" Glyph="&#xE7B3;" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}" />
             </Button>
             
             <!--Expaned-->
             <Button x:Name="ExpanedButton" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                <FontIcon x:Name="ExpanedFontIcon" Glyph="&#xE011;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                <FontIcon x:Name="ExpanedFontIcon" Glyph="&#xEDD9;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
             
         </StackPanel>
@@ -86,32 +162,15 @@
             </Rectangle.Fill>
         </Rectangle>
 
+        
         <!--Overlay-->
         <Border x:Name="OverlayShowTopBorder" Grid.Column="0" Grid.ColumnSpan="5" Height="14.3" VerticalAlignment="Top" Style="{StaticResource OverlayStyle}">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                    <GradientStop Color="#FFFF0000" Offset="0"/>
-                    <GradientStop Color="#00FF0000" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
             <FontIcon Glyph="&#x25B2;" FontSize="18" FontFamily="Segoe UI Symbol"/>
         </Border>
         <Border x:Name="OverlayShowCenterBorder" Grid.Column="0" Grid.ColumnSpan="5" Height="21.4" VerticalAlignment="Center" Style="{StaticResource OverlayStyle}">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                    <GradientStop Color="#00FF0000" Offset="0"/>
-                    <GradientStop Color="#FFFF0000" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
             <FontIcon Glyph="&#x25B6;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
         </Border>
         <Border x:Name="OverlayShowBottomBorder" Grid.Column="0" Grid.ColumnSpan="5" Height="14.3" VerticalAlignment="Bottom" Style="{StaticResource OverlayStyle}">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                    <GradientStop Color="#00FF0000" Offset="0"/>
-                    <GradientStop Color="#FFFF0000" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
             <FontIcon Glyph="&#x25BC;" FontSize="18" FontFamily="Segoe UI Symbol"/>
         </Border>
 

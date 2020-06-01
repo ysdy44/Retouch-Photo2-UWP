@@ -33,7 +33,7 @@
 
         <!--Contrast-->
         <TextBlock x:Name="ContrastTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="ContrastSlider"/>
+        <hsvColorPickers:TouchSlider x:Name="ContrastSlider" Margin="2,0"/>
 
     </StackPanel>
 </Page>

@@ -37,11 +37,11 @@
 
         <!--Amount-->
         <TextBlock x:Name="AmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="AmountSlider"/>
+        <hsvColorPickers:TouchSlider x:Name="AmountSlider" Margin="2,0"/>
 
         <!--Curve-->
         <TextBlock x:Name="CurveTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="CurveSlider"/>
+        <hsvColorPickers:TouchSlider x:Name="CurveSlider" Margin="2,0"/>
 
         <!--Color-->
         <TextBlock x:Name="ColorTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

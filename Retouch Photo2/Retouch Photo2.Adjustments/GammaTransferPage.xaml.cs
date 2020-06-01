@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         public GammaTransferAdjustment Adjustment { get; set; }
 
         //@Converter
-        private string VisibilityToGlyphConverter(Visibility visibility) => visibility == Visibility.Visible ? "\xE011" : "\xE017";
+        private string VisibilityToGlyphConverter(Visibility visibility) => visibility == Visibility.Visible ? "\xEDDC" : "\xEDDA";
 
 
         //@Construct

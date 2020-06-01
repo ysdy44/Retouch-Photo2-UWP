@@ -20,15 +20,15 @@
 
         <!--Radius-->
         <TextBlock x:Name="RadiusTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <elements:SilderPicker x:Name="RadiusSlider"/>
+        <elements:SilderPicker x:Name="RadiusSlider" Margin="2,0"/>
 
         <!--Opacity-->
         <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <elements:SilderPicker x:Name="OpacitySlider"/>
+        <elements:SilderPicker x:Name="OpacitySlider" Margin="2,0"/>
 
         <!--Offset-->
         <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <elements:SilderPicker x:Name="OffsetSlider"/>
+        <elements:SilderPicker x:Name="OffsetSlider" Margin="2,0"/>
 
         <Grid>
             <Grid.ColumnDefinitions>

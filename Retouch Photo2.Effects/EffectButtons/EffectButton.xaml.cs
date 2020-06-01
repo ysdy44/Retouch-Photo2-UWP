@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Effects
 
 
         //@VisualState
-        bool _vsIsEnabled;
+        bool _vsIsEnabled = true;
         ClickMode _vsClickMode;
         public VisualState VisualState
         {

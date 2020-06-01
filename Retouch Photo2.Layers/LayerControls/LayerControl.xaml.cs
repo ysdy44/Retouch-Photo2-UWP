@@ -1,7 +1,4 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.UI.Xaml;
-using Windows.Foundation;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Layers
@@ -14,64 +11,35 @@ namespace Retouch_Photo2.Layers
 
         //@Content
         public LayerControl Self => this;
-        public string Text { get => this.NameRun.Text; set=>this.NameRun.Text = value; }
+        public string Text { get => this.NameRun.Text; set => this.NameRun.Text = value; }
         public string Type { get => this.TypeRun.Text; set => this.TypeRun.Text = value; }
 
 
-        /// <summary> Gets or sets <see cref = "LayerControl" />'s height. </summary>
+        /// <summary> Gets or sets the height. </summary>
         public int ControlHeight
         {
             get => this.controlHeight;
             set
             {
-                this.Height = value;
-                this.IconBorder.Width = value;
-                this.IconBorder.Height = value;
-
-                //Overlay
-                {
-                    double heightOver7 = value / 7;
-                    this.OverlayShowTopBorder.Height = heightOver7 + heightOver7;
-                    this.OverlayShowCenterBorder.Height = heightOver7 + heightOver7 + heightOver7;
-                    this.OverlayShowBottomBorder.Height = heightOver7 + heightOver7;
-                }
-
+                this.SetControlHeight(value);
                 this.controlHeight = value;
             }
         }
         private int controlHeight = 40;
 
-
-        /// <summary> Gets or sets <see cref = "LayerControl" />'s icon. </summary>
-        public ICanvasImage IconRender
-        {
-            get => this.iconRender;
-            set
-            {
-                this.iconRender = value;
-                this.IconCanvasControl.Invalidate();
-            }
-        }
-        private ICanvasImage iconRender = null;
-
-
-        /// <summary> Gets or sets <see cref = "LayerControl" />'s depth. </summary>
+        /// <summary> Gets or sets the depth. </summary>
         public int Depth
         {
             get => this.depth;
             set
             {
-                double pixels = value * 20.0d;
-                GridLength gridLength = new GridLength(pixels, GridUnitType.Pixel);
-                this.DepthColumn.Width = gridLength;
-
+                this.SetDepth(value);
                 this.depth = value;
             }
         }
         private int depth = 0;
 
-
-        /// <summary> Gets or sets <see cref = "LayerControl" />'s overlay show status. </summary>
+        /// <summary> Gets or sets the overlay show status. </summary>
         public OverlayMode OverlayMode
         {
             get => this.overlayMode;
@@ -83,6 +51,18 @@ namespace Retouch_Photo2.Layers
             }
         }
         private OverlayMode overlayMode;
+
+        /// <summary> Gets or sets the icon. </summary>
+        public ICanvasImage IconRender
+        {
+            get => this.iconRender;
+            set
+            {
+                this.iconRender = value;
+                this.IconCanvasControl.Invalidate();
+            }
+        }
+        private ICanvasImage iconRender = null;
 
 
         //@Construct
@@ -106,97 +86,12 @@ namespace Retouch_Photo2.Layers
         {
             this.InitializeComponent();
             this.ControlHeight = LayerageCollection.ControlsHeight;
-
-            //IconCanvasControl
-            this.IconCanvasControl.UseSharedDevice = true;
-            this.IconCanvasControl.CustomDevice = customDevice;
-            this.IconCanvasControl.Draw += (s, arge) =>
-            {
-                if (this.IconRender == null) return;
-
-                arge.DrawingSession.DrawImage(this.IconRender);
-            };
-
-            //LayerageCollection
-            {
-                this.Tapped += (s, e) =>
-                {
-                    LayerageCollection.ItemClick?.Invoke(layer);//Delegate
-                    e.Handled = true;
-                };
-                this.RightTapped += (s, e) =>
-                {
-                    LayerageCollection.RightTapped?.Invoke(layer);//Delegate
-                    e.Handled = true;
-                };
-                this.Holding += (s, e) =>
-                {
-                    LayerageCollection.RightTapped?.Invoke(layer);//Delegate
-                    e.Handled = true;
-                };
-                this.DoubleTapped += (s, e) =>
-                {
-                    LayerageCollection.RightTapped?.Invoke(layer);//Delegate
-                    e.Handled = true;
-                };
-                this.VisualButton.Tapped += (s, e) =>
-                {
-                    LayerageCollection.VisibilityChanged?.Invoke(layer);//Delegate
-                    e.Handled = true;
-                };
-            }
-
-            //Mode
-            {
-                this.ExpanedButton.Tapped += (s, e) =>
-                {
-                    LayerageCollection.IsExpandChanged?.Invoke(layer);//Delegate   
-                    e.Handled = true;
-                };
-                this.SelectedButton.Tapped += (s, e) =>
-                {
-                    LayerageCollection.IsSelectedChanged?.Invoke(layer);//Delegate   
-                    e.Handled = true;
-                };
-            }
-
-            //Manipulation
-            {
-                this.ManipulationStarted += (s, e) =>
-                {
-                    LayerageCollection.IsOverlay = true;
-                    LayerageCollection.DragItemsStarted?.Invoke(layer, this.ManipulationMode);//Delegate     
-                };
-                this.ManipulationCompleted += (s, e) =>
-                {
-                    if (LayerageCollection.IsOverlay)
-                    {
-                        LayerageCollection.DragItemsCompleted?.Invoke();//Delegate
-
-                        LayerageCollection.IsOverlay = false;
-                        this.OverlayMode = OverlayMode.None;
-                    }
-                };
-            }
-
-            //Pointer
-            {
-                this.PointerMoved += (s, e) =>
-                {
-                    if (LayerageCollection.IsOverlay)
-                    {
-                        Point position = e.GetCurrentPoint(this).Position;
-                        OverlayMode overlayMode = this.GetOverlay(position.Y);
-
-                        this.OverlayMode = overlayMode;
-                        LayerageCollection.DragItemsDelta?.Invoke(layer, overlayMode);//Delegate
-                    }
-                };
-                this.PointerExited += (s, e) => this.OverlayMode = OverlayMode.None;
-                this.PointerReleased += (s, e) => this.OverlayMode = OverlayMode.None;
-            }
+            this.ConstructIcon(customDevice);
+            this.ConstructTapped(layer);
+            this.ConstructButton(layer);
+            this.ConstructManipulation(layer);
+            this.ConstructPointer(layer);
         }
-
 
     }
 }

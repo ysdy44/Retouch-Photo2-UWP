@@ -127,7 +127,7 @@
                 </Grid.ColumnDefinitions>
                 <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
                           HorizontalAlignment="Center" VerticalAlignment="Center"
-                          Glyph="{x:Bind VisibilityToGlyphConverter(AlphaIsExpaned), Mode=OneWay}"/>
+                          Glyph="{x:Bind VisibilityToGlyphConverter(RedIsExpaned), Mode=OneWay}"/>
                 <TextBlock x:Name="RedTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>
                 <ToggleSwitch x:Name="RedToggleSwitch" Grid.Column="2">
                     <ToggleSwitch.Clip>
@@ -159,7 +159,7 @@
                 </Grid.ColumnDefinitions>
                 <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
                           HorizontalAlignment="Center" VerticalAlignment="Center"
-                          Glyph="{x:Bind VisibilityToGlyphConverter(AlphaIsExpaned), Mode=OneWay}"/>
+                          Glyph="{x:Bind VisibilityToGlyphConverter(GreenIsExpaned), Mode=OneWay}"/>
                 <TextBlock x:Name="GreenTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>
                 <ToggleSwitch x:Name="GreenToggleSwitch" Grid.Column="2">
                     <ToggleSwitch.Clip>
@@ -191,7 +191,7 @@
                 </Grid.ColumnDefinitions>
                 <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
                           HorizontalAlignment="Center" VerticalAlignment="Center"
-                          Glyph="{x:Bind VisibilityToGlyphConverter(AlphaIsExpaned), Mode=OneWay}"/>
+                          Glyph="{x:Bind VisibilityToGlyphConverter(BlueIsExpaned), Mode=OneWay}"/>
                 <TextBlock x:Name="BlueTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>
                 <ToggleSwitch x:Name="BlueToggleSwitch" Grid.Column="2">
                     <ToggleSwitch.Clip>
