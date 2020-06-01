@@ -187,6 +187,7 @@
       <DependentUpon>StyleMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Models\NodeTool.Construct.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\PenTool.Construct.cs" />
     <Compile Include="Retouch Photo2.Tools\MoveTool.cs" />
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
     <Compile Include="SettingPage.Construct.cs" />

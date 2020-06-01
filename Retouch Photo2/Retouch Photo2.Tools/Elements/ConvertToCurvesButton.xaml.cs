@@ -78,20 +78,18 @@ namespace Retouch_Photo2.Tools.Elements
         private ILayer GetCurveLayer(Layerage layerage)
         {
             ILayer layer = layerage.Self;
+
+            NodeCollection nodes = layer.ConvertToCurves(this.ViewModel.CanvasDevice);
+            if (nodes == null) return null;
             
-            IEnumerable<IEnumerable<Node>> nodess = layer.ConvertToCurves();
-            if (nodess == null) return null;
-            
-            if (nodess.Count() == 1)
+            if (nodes.Count >2)
             {
-                CurveLayer curveLayer = new CurveLayer(this.ViewModel.CanvasDevice, nodess.Single());
+                CurveLayer curveLayer = new CurveLayer(this.ViewModel.CanvasDevice, nodes);
                 LayerBase.CopyWith(this.ViewModel.CanvasDevice, curveLayer, layer);
                 return curveLayer;
             }
 
-            CurveMultiLayer curveMultiLayer = new CurveMultiLayer(this.ViewModel.CanvasDevice, nodess);
-            LayerBase.CopyWith(this.ViewModel.CanvasDevice, curveMultiLayer, layer);
-            return curveMultiLayer;
+            return null;
         }
          
         

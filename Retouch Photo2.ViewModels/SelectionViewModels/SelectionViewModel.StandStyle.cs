@@ -31,7 +31,6 @@ namespace Retouch_Photo2.ViewModels
                 switch (layer.Type)
                 {
                     case LayerType.Curve:
-                    case LayerType.CurveMulti:
                         if (value != standStyleCurveLayerage)
                             this.standStyleCurveLayerage = value;
                         break;

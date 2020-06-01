@@ -149,7 +149,6 @@
     <Compile Include="LayerMode\OverlayMode.cs" />
     <Compile Include="Layers\LayerBase.Render.cs" />
     <Compile Include="Layers\LayerBase.Property.cs" />
-    <Compile Include="Models\CurveMultiLayer.cs" />
     <Compile Include="Layers\TextLayer.cs" />
     <Compile Include="Models\TextArtisticLayer.cs" />
     <Compile Include="Models\TextFrameLayer.cs" />

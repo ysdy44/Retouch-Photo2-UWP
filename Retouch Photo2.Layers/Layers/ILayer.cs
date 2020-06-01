@@ -188,7 +188,7 @@ namespace Retouch_Photo2.Layers
         ///  Convert to curves.
         /// </summary>
         /// <returns> The product curves. </returns>
-        IEnumerable<IEnumerable<Node>> ConvertToCurves();
+        NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator);
         /// <summary>
         /// Draw nodes.
         /// </summary>

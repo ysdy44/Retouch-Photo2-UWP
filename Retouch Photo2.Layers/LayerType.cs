@@ -16,8 +16,6 @@
 
         /// <summary> Curve. </summary>
         Curve,
-        /// <summary> Multi-curve. </summary>
-        CurveMulti,
 
         /// <summary> Frame Text. </summary>
         TextFrame,
@@ -28,6 +26,9 @@
         Image,
         /// <summary> Group. </summary>
         Group,
+
+        /// <summary> Combine-add. </summary>
+        CombineAdd,
 
         //Geometry1
         /// <summary> Round-rect geometry. </summary>

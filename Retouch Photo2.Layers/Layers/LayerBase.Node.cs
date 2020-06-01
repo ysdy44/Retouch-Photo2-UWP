@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Layers
     public abstract partial class LayerBase
     {
 
-        public abstract IEnumerable<IEnumerable<Node>> ConvertToCurves();
+        public abstract NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator);
 
 
         public virtual void DrawNode(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor) { }

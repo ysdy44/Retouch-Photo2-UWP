@@ -94,7 +94,7 @@ namespace Retouch_Photo2.Layers.Models
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix) => null;
 
 
-        public override IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
+        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator) => null;
 
 
         //Strings

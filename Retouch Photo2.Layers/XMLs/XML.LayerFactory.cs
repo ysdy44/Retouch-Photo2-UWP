@@ -25,7 +25,6 @@ namespace Retouch_Photo2.Layers
                 case "GeometryEllipse": return new GeometryEllipseLayer(customDevice);
 
                 case "Curve": return new CurveLayer(customDevice);
-                case "CurveMulti": return new CurveMultiLayer(customDevice);
 
                 case "TextArtistic": return new TextArtisticLayer(customDevice);
                 case "TextFrame": return new TextFrameLayer(customDevice);

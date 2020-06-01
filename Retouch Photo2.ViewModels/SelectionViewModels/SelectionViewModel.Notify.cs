@@ -196,29 +196,32 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
+        /// <summary> Gets or sets the current curve layerage. </summary>
+        public Layerage CurveLayerage { get; set; }
         /// <summary> Gets or sets the current curve layer. </summary>
         public CurveLayer CurveLayer { get; set; }
         /// <summary> Sets the CurveLayer. </summary>     
-        private void SetCurveLayer(ILayer layer)
+        private void SetCurveLayer()
+        {
+            this.CurveLayerage = null;
+            this.CurveLayer = null;
+        }
+        private void SetCurveLayer(Layerage layerage, ILayer layer)
         {
             if (layer == null)
             {
-                this.CurveLayer = null;
+                this.SetCurveLayer();
                 return;
             }
 
-            switch (layer.Type)
+            if (layer.Type == LayerType.Curve)
             {
-                case LayerType.Curve:
-                    this.CurveLayer = (CurveLayer)layer;
-                    break;
-
-                case LayerType.CurveMulti:
-                    break;
-
-                default:
-                    this.CurveLayer = null;
-                    break;
+                this.CurveLayerage = layerage;
+                this.CurveLayer = (CurveLayer)layer;
+            }
+            else
+            {
+                this.SetCurveLayer();
             }
         }
 

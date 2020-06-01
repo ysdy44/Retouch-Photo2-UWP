@@ -39,6 +39,12 @@ namespace Retouch_Photo2.Layers.Models
         /// <param name="nodes"> The source nodes. </param>
         public CurveLayer(CanvasDevice customDevice, IEnumerable<Node> nodes) : this(customDevice) => this.Nodes = new NodeCollection(nodes);
         /// <summary>
+        /// Initializes a curve-layer.
+        /// </summary>     
+        /// <param name="customDevice"> The custom-device. </param>
+        /// <param name="nodes"> The source nodes. </param>
+        public CurveLayer(CanvasDevice customDevice, NodeCollection nodes) : this(customDevice) => this.Nodes = nodes;
+        /// <summary>
         /// Initializes a curve-layer from a line.
         /// </summary>
         /// <param name="customDevice"> The custom-device. </param>
@@ -125,7 +131,7 @@ namespace Retouch_Photo2.Layers.Models
             return resource.GetString("/Layers/Curve");
         }
 
-        public override IEnumerable<IEnumerable<Node>> ConvertToCurves() => null;
+        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator) => null;
 
         public override void DrawNode(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {

@@ -82,7 +82,7 @@ namespace Retouch_Photo2.ViewModels
 
             this.SetGroupLayer();
             this.SetImageLayer(null);
-            this.SetCurveLayer(null);
+            this.SetCurveLayer();
             this.SetFontLayer(null);
             
             //////////////////////////
@@ -133,7 +133,7 @@ namespace Retouch_Photo2.ViewModels
 
             this.SetGroupLayer(layer);
             this.SetImageLayer(layer);
-            this.SetCurveLayer(layer);
+            this.SetCurveLayer(layerage, layer);
             this.SetFontLayer(layer);
 
             //////////////////////////
@@ -187,7 +187,7 @@ namespace Retouch_Photo2.ViewModels
 
             this.SetGroupLayer(layerages);
             this.SetImageLayer(outermostLayer);
-            this.SetCurveLayer(null);
+            this.SetCurveLayer();
             this.SetFontLayer(null);
 
             //////////////////////////

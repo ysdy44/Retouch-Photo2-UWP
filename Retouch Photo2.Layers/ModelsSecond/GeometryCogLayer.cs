@@ -98,13 +98,11 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override IEnumerable<IEnumerable<Node>> ConvertToCurves()
+        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
         {
-            Transformer transformer = base.Transform.Transformer;
+            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
 
-            return TransformerGeometry.ConvertToCurvesFromCog(transformer,
-                this.Count, this.InnerRadius,
-                this.Tooth, this.Notch);
+            return new NodeCollection(geometry);
         }
 
 
