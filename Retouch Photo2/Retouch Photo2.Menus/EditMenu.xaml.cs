@@ -108,9 +108,9 @@ namespace Retouch_Photo2.Menus.Models
             this.UnionButton.Content = resource.GetString("/Edits/Combine_Union");
             this.UnionButton.Tag = new UnionIcon();
             this.ExcludeButton.Content = resource.GetString("/Edits/Combine_Exclude");
-            this.ExcludeButton.Tag = new XorIcon(); 
+            this.ExcludeButton.Tag = new ExcludeIcon(); 
             this.XorButton.Content = resource.GetString("/Edits/Combine_Xor");
-            this.XorButton.Tag = new ExcludeIcon();
+            this.XorButton.Tag = new XorIcon();
             this.IntersectButton.Content = resource.GetString("/Edits/Combine_Intersect");
             this.IntersectButton.Tag = new IntersectIcon();
             this.ExpandStrokeButton.Content = resource.GetString("/Edits/Combine_ExpandStroke");

@@ -115,11 +115,11 @@
     <Compile Include="CombineIcons\XorIcon.xaml.cs">
       <DependentUpon>XorIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CombineIcons\ExcludeIcon.xaml.cs">
-      <DependentUpon>ExcludeIcon.xaml</DependentUpon>
-    </Compile>
     <Compile Include="CombineIcons\IntersectIcon.xaml.cs">
       <DependentUpon>IntersectIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CombineIcons\ExcludeIcon.xaml.cs">
+      <DependentUpon>ExcludeIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditIcons\ClearIcon.xaml.cs">
       <DependentUpon>ClearIcon.xaml</DependentUpon>
@@ -184,11 +184,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CombineIcons\ExcludeIcon.xaml">
+    <Page Include="CombineIcons\IntersectIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CombineIcons\IntersectIcon.xaml">
+    <Page Include="CombineIcons\ExcludeIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

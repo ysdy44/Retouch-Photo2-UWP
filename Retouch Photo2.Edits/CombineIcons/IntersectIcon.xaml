@@ -23,7 +23,6 @@
                     <VisualState.Setters>
                         <Setter Target = "Canvas.Opacity" Value="0.5"/>
                         <Setter Target = "BluePolygon.Fill" Value="Gray"/>
-                        <Setter Target = "WhitePolygon.Fill" Value="DarkGray"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -32,21 +31,21 @@
 
         <Canvas x:Name="Canvas" Width="40" Height="40" >
 
-            <Polygon x:Name="BluePolygon" Fill="DodgerBlue">
+            <Polygon Fill="Gray">
                 <Polygon.Points>
                     4,4 24,4 24,13 13,13 13,24 4,24
                 </Polygon.Points>
             </Polygon>
-
+            
             <Polygon Fill="Gray">
                 <Polygon.Points>
-                    16,16 36,16 36,36 16,36
+                    27,27 27,16 36,16 36,36 16,36 16,27
                 </Polygon.Points>
             </Polygon>
             
-            <Polygon x:Name="WhitePolygon" Fill="White">
+            <Polygon x:Name="BluePolygon" Fill="DodgerBlue">
                 <Polygon.Points>
-                    19,25 33,25 33,27 19,27
+                    15,15 15,25 25,25 25,15
                 </Polygon.Points>
             </Polygon>
 
