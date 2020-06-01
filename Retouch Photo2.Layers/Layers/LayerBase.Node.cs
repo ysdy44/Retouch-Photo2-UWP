@@ -18,34 +18,10 @@ namespace Retouch_Photo2.Layers
     public abstract partial class LayerBase
     {
 
+        public NodeCollection Nodes { get; protected set; } = null;
+
+
         public abstract NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator);
-
-
-        public virtual void DrawNode(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor) { }
-
-
-        public virtual NodeCollectionMode ContainsNodeCollectionMode(Vector2 point, Matrix3x2 matrix) => NodeCollectionMode.None;
-
-
-        public virtual void NodeCacheTransform() { }
-        public virtual void NodeTransformMultiplies(Matrix3x2 matrix) { }
-        public virtual void NodeTransformAdd(Vector2 vector) { }
-
-
-        public virtual bool NodeSelectionOnlyOne(Vector2 point, Matrix3x2 matrix) => false;
-
-
-        public virtual void NodeBoxChoose(TransformerRect boxRect) { }
-
-
-        public virtual void NodeMovePoint(Vector2 point) { }
-        public virtual void NodeControllerControlPoint(SelfControlPointMode mode, EachControlPointLengthMode lengthMode, EachControlPointAngleMode angleMode, Vector2 point, bool isLeftControlPoint) { }
-
-
-        public virtual NodeRemoveMode NodeRemoveCheckedNodes() => NodeRemoveMode.None;
-        public virtual void NodeInterpolationCheckedNodes() { }
-        public virtual void NodeSharpCheckedNodes() { }
-        public virtual void NodeSmoothCheckedNodes() { }
 
     }
 }

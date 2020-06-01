@@ -3,7 +3,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Edits.CombineIcons
 {
-    public sealed partial class DivideIcon : UserControl
+    public sealed partial class XorIcon : UserControl
     {
         //@VisualState
         bool _vsIsEnabled => this.IsEnabled;
@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Edits.CombineIcons
         }
         
         //@Construct
-        public DivideIcon()
+        public XorIcon()
         {
             this.InitializeComponent();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State

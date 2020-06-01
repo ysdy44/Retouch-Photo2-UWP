@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Retouch_Photo2.Adjustments;
-using Retouch_Photo2.Elements;
+﻿using Retouch_Photo2.Elements;
 using System;
 using System.Collections.Generic;
 using System.IO;

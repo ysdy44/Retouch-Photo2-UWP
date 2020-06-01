@@ -151,22 +151,20 @@ namespace Retouch_Photo2.Tools
                     this.SelectionViewModel.SetModeSingle(this.MezzanineLayerage);
                     LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
                     LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
-                    
-                    this.MezzanineLayerage = null;
-                    this.ViewModel.TipTextVisibility = Visibility.Collapsed;//Text
-                    this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                 }
-                /*
                 else
                 {
-                    LayerageCollection.RemoveMezzanineLayer(this.ViewModel.LayerageCollection, this.MezzanineLayer);//Mezzanine
+                    LayerageCollection.RemoveMezzanineLayer(this.ViewModel.LayerageCollection, this.MezzanineLayerage);//Mezzanine
 
                     //Selection
                     this.SelectionViewModel.SetModeNone();
-                    LayerageCollection.ArrangeLayersControls(this.ViewModel.LayerageCollection);
-                    LayerageCollection.ArrangeLayersBackgroundLayerageCollection(this.ViewModel.LayerageCollection);
+                    LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
+                    LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
                 }
-                 */
+
+                this.MezzanineLayerage = null;
+                this.ViewModel.TipTextVisibility = Visibility.Collapsed;//Text
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             }
 
             if (this.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool

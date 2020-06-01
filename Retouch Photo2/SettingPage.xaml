@@ -53,6 +53,7 @@
                         <Style x:Name="KeyContentControlStyle" TargetType="ContentControl">
                             <Setter Property="Padding" Value="12,0"/>
                             <Setter Property="Height" Value="44"/>
+                            <Setter Property="MaxWidth" Value="Auto"/>
                             <Setter Property="VerticalContentAlignment" Value="Center"/>
                             <Setter Property="Template">
                                 <Setter.Value>
@@ -60,7 +61,7 @@
                                         <Grid Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" >
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="40"/>
+                                                <ColumnDefinition MinWidth="40"/>
                                             </Grid.ColumnDefinitions>
 
                                             <ContentControl x:Name="ContentControl"           
@@ -81,6 +82,9 @@
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
+                        </Style>
+                        <Style x:Name="KeyContentControlBackgroundStyle" TargetType="ContentControl" BasedOn="{StaticResource KeyContentControlStyle}">
+                            <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
                         </Style>
 
                         <Style x:Key="LayerHeightRadioButton" TargetType="RadioButton">
@@ -423,14 +427,44 @@
                         <TextBlock x:Name="KeyTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                         <Border Height="Auto" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel>
-                                <ContentControl x:Name="IsCenterToggleButton" Tag="Ctrl" Style="{StaticResource KeyContentControlStyle}"/>
-                                <ContentControl x:Name="IsRatioToggleButton" Tag="Shift" Background="{ThemeResource AppBackground}" Style="{StaticResource KeyContentControlStyle}"/>
-                                <ContentControl x:Name="IsSquareToggleButton" Tag="Shift" Style="{StaticResource KeyContentControlStyle}"/>
-                                <ContentControl x:Name="IsStepFrequencyToggleButton" Tag="Space" Background="{ThemeResource AppBackground}" Style="{StaticResource KeyContentControlStyle}"/>
-                                <ContentControl x:Name="FullScreenToggleButton" Tag="Esc" Style="{StaticResource KeyContentControlStyle}"/>
+                                <ContentControl x:Name="IsCenterControl" Style="{StaticResource KeyContentControlStyle}"/>
+                                <ContentControl x:Name="IsRatioControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                                <ContentControl x:Name="IsSquareControl" Style="{StaticResource KeyContentControlStyle}"/>
+                                <ContentControl x:Name="IsStepFrequencyControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                                <ContentControl x:Name="IsFullScreenControl" Style="{StaticResource KeyContentControlStyle}"/>
                             </StackPanel>
                         </Border>
-
+                        
+                        <ContentControl Height="12"/>
+                        
+                        <Border Height="Auto" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel>
+                                <ContentControl x:Name="LeftControl" Style="{StaticResource KeyContentControlStyle}"/>
+                                <ContentControl x:Name="UpControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                                <ContentControl x:Name="RightControl" Style="{StaticResource KeyContentControlStyle}"/>
+                                <ContentControl x:Name="DownControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <ContentControl Height="12"/>
+                        
+                        <Border Height="Auto" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel>
+                                <ContentControl x:Name="CutControl" Style="{StaticResource KeyContentControlStyle}"/>
+                                <ContentControl x:Name="DuplicateControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                                <ContentControl x:Name="CopyControl" Style="{StaticResource KeyContentControlStyle}"/>
+                                <ContentControl x:Name="PasteControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                                <ContentControl x:Name="ClearControl" Style="{StaticResource KeyContentControlStyle}"/>
+                                <ContentControl x:Name="AllControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                                <ContentControl x:Name="DeselectControl" Style="{StaticResource KeyContentControlStyle}"/>
+                                <ContentControl x:Name="InvertControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                                <ContentControl x:Name="GroupControl" Style="{StaticResource KeyContentControlStyle}"/>
+                                <ContentControl x:Name="UnGroupControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                                <ContentControl x:Name="ReleaseControl" Style="{StaticResource KeyContentControlStyle}"/>
+                                <ContentControl x:Name="UndoControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                            </StackPanel>
+                        </Border>
+                        
                         <ContentControl Height="12"/>
 
 

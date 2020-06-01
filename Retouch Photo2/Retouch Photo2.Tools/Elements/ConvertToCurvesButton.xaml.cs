@@ -1,6 +1,4 @@
 ﻿using FanKit.Transformers;
-using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -11,14 +9,17 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Elements
 {
+    /// <summary>
+    /// Convert to curves layer.
+    /// </summary>
     public sealed partial class ConvertToCurvesButton : UserControl
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-               
+
+
         //@Construct
         public ConvertToCurvesButton()
         {
@@ -36,7 +37,7 @@ namespace Retouch_Photo2.Tools.Elements
                     ILayer layer2 = layerage.Self;
 
                     //Turn to curve layer
-                    ILayer curveLayer = this.GetCurveLayer(layerage);
+                    ILayer curveLayer = this.CreateCurveLayer(layerage);
 
                     if (curveLayer != null)
                     {
@@ -50,8 +51,7 @@ namespace Retouch_Photo2.Tools.Elements
                             curveLayer.Style.Fill = imageLayer.ToBrush();
                         }
 
-                        this.Replace(curveLayerage, layerage);
-                        curveLayer.IsSelected = true;
+                        this.ReplaceLayerage(curveLayerage, layerage);
                     }
                 });
 
@@ -72,33 +72,42 @@ namespace Retouch_Photo2.Tools.Elements
                 }
             };
         }
+    }
 
+    /// <summary>
+    /// Convert to curves layer.
+    /// </summary>
+    public sealed partial class ConvertToCurvesButton : UserControl
+    {
 
-        //Get curve layer
-        private ILayer GetCurveLayer(Layerage layerage)
+        //Create curve layer
+        private ILayer CreateCurveLayer(Layerage layerage)
         {
             ILayer layer = layerage.Self;
 
             NodeCollection nodes = layer.ConvertToCurves(this.ViewModel.CanvasDevice);
             if (nodes == null) return null;
             
-            if (nodes.Count >2)
+            if (nodes.Count >3)
             {
-                CurveLayer curveLayer = new CurveLayer(this.ViewModel.CanvasDevice, nodes);
+                CurveLayer curveLayer = new CurveLayer(this.ViewModel.CanvasDevice, nodes)
+                {
+                    IsSelected = true,
+                };
                 LayerBase.CopyWith(this.ViewModel.CanvasDevice, curveLayer, layer);
                 return curveLayer;
             }
 
             return null;
         }
-         
-        
-        //Replace curveLayer to layer
-        private void Replace(Layerage curveLayer, Layerage layer)
+
+
+        //Replace curveLayerage to layerage
+        private void ReplaceLayerage(Layerage curveLayerage, Layerage layerage)
         {
-            IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(layer);
-            int index = parentsChildren.IndexOf(layer);
-            parentsChildren[index] = curveLayer;
+            IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(layerage);
+            int index = parentsChildren.IndexOf(layerage);
+            parentsChildren[index] = curveLayerage;
         }
 
 

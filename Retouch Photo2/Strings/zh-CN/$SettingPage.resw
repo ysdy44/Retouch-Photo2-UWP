@@ -120,8 +120,8 @@
   <data name="Key" xml:space="preserve">
     <value>快捷键</value>
   </data>
-  <data name="Key_FullScreen" xml:space="preserve">
-    <value>全屏</value>
+  <data name="Key_IsFullScreen" xml:space="preserve">
+    <value>是否全屏</value>
   </data>
   <data name="Key_IsCenter" xml:space="preserve">
     <value>是否居中</value>
@@ -135,6 +135,57 @@
   <data name="Key_IsStepFrequency" xml:space="preserve">
     <value>是否步频</value>
   </data>
+  <data name="Key_MoveLeft" xml:space="preserve">
+    <value>画布向左移动</value>
+  </data>
+  <data name="Key_MoveUp" xml:space="preserve">
+    <value>画布向上移动</value>
+  </data>
+  <data name="Key_MoveRight" xml:space="preserve">
+    <value>画布向右移动</value>
+  </data>
+  <data name="Key_MoveDown" xml:space="preserve">
+    <value>画布向下移动</value>
+  </data>
+  
+  <data name="Key_EditCut" xml:space="preserve">
+    <value>剪切</value>
+  </data>
+  <data name="Key_EditDuplicate" xml:space="preserve">
+    <value>副本</value>
+  </data>
+  <data name="Key_EditCopy" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="Key_EditPaste" xml:space="preserve">
+    <value>粘贴</value>
+  </data>
+  <data name="Key_EditClear" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="Key_EditAll" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="Key_EditDeselect" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Key_EditInvert" xml:space="preserve">
+    <value>反选</value>
+  </data>
+  <data name="Key_EditGroup" xml:space="preserve">
+    <value>分组</value>
+  </data>
+  <data name="Key_EditUnGroup" xml:space="preserve">
+    <value>取消分组</value>
+  </data>
+  <data name="Key_EditRelease" xml:space="preserve">
+    <value>释放</value>
+  </data>
+  <data name="Key_EditUndo" xml:space="preserve">
+    <value>撤销</value>
+  </data>
+
+
   <data name="Local" xml:space="preserve">
     <value>本地文件夹</value>
   </data>

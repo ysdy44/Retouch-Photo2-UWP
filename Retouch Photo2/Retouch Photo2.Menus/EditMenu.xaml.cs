@@ -1,18 +1,23 @@
-﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Edits.CombineIcons;
 using Retouch_Photo2.Edits.EditIcons;
 using Retouch_Photo2.Edits.GroupIcons;
 using Retouch_Photo2.Edits.SelectIcons;
+using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
-{        
+{
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "EditMenu" />. 
     /// </summary>
@@ -29,10 +34,30 @@ namespace Retouch_Photo2.Menus.Models
             this.InitializeComponent();
             this.ConstructStrings();
             this.ConstructMenu();
-            
-            this.ConstructEdit();
-            this.ConstructSelect();
-            this.ConstructGroup();
+
+            //Edit
+            this.CutButton.Click += (s, e) => this.MethodViewModel.MethodEditCut();
+            this.DuplicateButton.Click += (s, e) => this.MethodViewModel.MethodEditDuplicate();
+            this.CopyButton.Click += (s, e) => this.MethodViewModel.MethodEditCopy();
+            this.PasteButton.Click += (s, e) => this.MethodViewModel.MethodEditPaste();
+            this.ClearButton.Click += (s, e) => this.MethodViewModel.MethodEditClear();
+
+            //Select
+            this.AllButton.Click += (s, e) => this.MethodViewModel.MethodSelectAll();
+            this.DeselectButton.Click += (s, e) => this.MethodViewModel.MethodSelectDeselect();
+            this.InvertButton.Click += (s, e) => this.MethodViewModel.MethodSelectInvert();
+
+            //Group
+            this.GroupButton.Click += (s, e) => this.MethodViewModel.MethodGroupGroup();
+            this.UnGroupButton.Click += (s, e) => this.MethodViewModel.MethodGroupUnGroup();
+            this.ReleaseButton.Click += (s, e) => this.MethodViewModel.MethodGroupRelease();
+
+            //Combine
+            this.UnionButton.Click += (s, e) => this.Combine(CanvasGeometryCombine.Union);
+            this.ExcludeButton.Click += (s, e) => this.Combine(CanvasGeometryCombine.Exclude);
+            this.XorButton.Click += (s, e) => this.Combine(CanvasGeometryCombine.Xor);
+            this.IntersectButton.Click += (s, e) => this.Combine(CanvasGeometryCombine.Intersect);
+            this.ExpandStrokeButton.Click += (s, e) => this.ExpandStroke();
         }
     }
 
@@ -80,16 +105,16 @@ namespace Retouch_Photo2.Menus.Models
             this.InvertButton.Tag = new InvertIcon();
             
             this.CombineTextBlock.Text = resource.GetString("/Edits/Combine");
-            this.AddButton.Content = resource.GetString("/Edits/Combine_Add");
-            this.AddButton.Tag = new AddIcon();
-            this.SubtractButton.Content = resource.GetString("/Edits/Combine_Subtract");
-            this.SubtractButton.Tag = new SubtractIcon();
+            this.UnionButton.Content = resource.GetString("/Edits/Combine_Union");
+            this.UnionButton.Tag = new UnionIcon();
+            this.ExcludeButton.Content = resource.GetString("/Edits/Combine_Exclude");
+            this.ExcludeButton.Tag = new XorIcon(); 
+            this.XorButton.Content = resource.GetString("/Edits/Combine_Xor");
+            this.XorButton.Tag = new ExcludeIcon();
             this.IntersectButton.Content = resource.GetString("/Edits/Combine_Intersect");
             this.IntersectButton.Tag = new IntersectIcon();
-            this.DivideButton.Content = resource.GetString("/Edits/Combine_Divide");
-            this.DivideButton.Tag = new DivideIcon();
-            this.CombineButton.Content = resource.GetString("/Edits/Combine_Combine");
-            this.CombineButton.Tag = new CombineIcon();
+            this.ExpandStrokeButton.Content = resource.GetString("/Edits/Combine_ExpandStroke");
+            this.ExpandStrokeButton.Tag = new ExpandStrokeIcon();
         }
 
         //Menu
@@ -106,52 +131,170 @@ namespace Retouch_Photo2.Menus.Models
             this._Expander.Button = this._button;
             this._Expander.Initialize();
         }
-    }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "EditMenu" />. 
-    /// </summary>
-    public sealed partial class EditMenu : UserControl, IMenu
-    {
 
-        //Edit
-        private void ConstructEdit()
+        /// <summary>
+        /// Expand Stroke.
+        /// </summary>
+        private void ExpandStroke()
         {
-            this.CutButton.Click += (s, e) => this.MethodViewModel.MethodEditCut();
-            this.DuplicateButton.Click += (s, e) => this.MethodViewModel.MethodEditDuplicate();
-            this.CopyButton.Click += (s, e) => this.MethodViewModel.MethodEditCopy();
-            this.PasteButton.Click += (s, e) => this.MethodViewModel.MethodEditPaste();
-            this.ClearButton.Click += (s, e) => this.MethodViewModel.MethodEditClear();
+            IList<Layerage> layerages = new List<Layerage>();
+
+            //Selection
+            this.SelectionViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                Styles.Style style = layer.Style;
+                if (style.Stroke.Type == BrushType.None) return;
+                if (style.StrokeWidth == 0) return;
+                
+                if (layer.CreateGeometry(this.ViewModel.CanvasDevice) is CanvasGeometry geometry2)
+                {
+                    CanvasGeometry strokeGeometry = geometry2.Stroke(style.StrokeWidth, style.StrokeStyle);
+                    Styles.Style strokeStyle = new Styles.Style
+                    {
+                        Fill= style.Stroke.Clone()
+                    };
+
+                    //Turn to curve layer
+                    ILayer curveLayer = this.CreateCurveLayer(strokeGeometry, strokeStyle);
+                    if (curveLayer != null)
+                    {
+                        Layerage curveLayerage = curveLayer.ToLayerage();
+                        LayerBase.Instances.Add(curveLayer);
+
+                        layerages.Add(curveLayerage);
+                    }
+                }
+            });
+
+
+            if (layerages.Count == 0) return;
+
+            if (layerages.Count == 1)
+            {
+                Layerage curveLayerage = layerages.Single();
+
+                //History
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add expand stroke curve layer", this.ViewModel.LayerageCollection);
+                this.ViewModel.HistoryPush(history);
+
+                //Mezzanine
+                LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, curveLayerage);
+
+                //History
+                this.ViewModel.MethodSelectedNone();
+
+                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
+                this.SelectionViewModel.SetModeSingle(curveLayerage);//Selection
+                this.ViewModel.Invalidate();//Invalidate
+            }
+
+
+            if (layerages.Count > 1)
+            {
+                //History
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add expand stroke curve layers", this.ViewModel.LayerageCollection);
+                this.ViewModel.HistoryPush(history);
+
+                //Mezzanine
+                LayerageCollection.MezzanineRange(this.ViewModel.LayerageCollection, layerages);
+
+                //History
+                this.ViewModel.MethodSelectedNone();
+
+                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
+                this.SelectionViewModel.SetModeMultiple(layerages);//Selection
+                this.ViewModel.Invalidate();//Invalidate
+            }
         }
 
 
-        //Select
-        private void ConstructSelect()
+        /// <summary>
+        /// Combine.
+        /// </summary>
+        /// <param name="combine"> The combine mode. </param>
+        private void Combine(CanvasGeometryCombine combine)
         {
-            this.AllButton.Click += (s, e) => this.MethodViewModel.MethodSelectAll();
-            this.DeselectButton.Click += (s, e) => this.MethodViewModel.MethodSelectDeselect();
-            this.InvertButton.Click += (s, e) => this.MethodViewModel.MethodSelectInvert();
+            CanvasGeometry geometry = null;
+            Styles.Style style = null;
+
+            CanvasGeometry other = null;
+
+            //Selection
+            this.SelectionViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                if (layer.CreateGeometry(this.ViewModel.CanvasDevice) is CanvasGeometry geometry2)
+                {
+                    if (geometry == null)
+                    {
+                        geometry = geometry2;
+                        style = layer.Style.Clone();
+                    }
+                    else
+                    {
+                        if (other == null)
+                            other = geometry2;
+                        else
+                            other = other.CombineWith(geometry2, Matrix3x2.CreateTranslation(Vector2.Zero), CanvasGeometryCombine.Union);
+                    }
+                }
+            });
+
+
+            if (geometry != null && other != null)
+            {
+                CanvasGeometry combineGeometry = geometry.CombineWith(other, Matrix3x2.CreateTranslation(Vector2.Zero), combine);
+
+                //Turn to curve layer
+                ILayer curveLayer = this.CreateCurveLayer(combineGeometry, style);
+                if (curveLayer != null)
+                {
+                    Layerage curveLayerage = curveLayer.ToLayerage();
+                    LayerBase.Instances.Add(curveLayer);
+
+                    //History
+                    LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add combine curve layer", this.ViewModel.LayerageCollection);
+                    this.ViewModel.HistoryPush(history);
+
+                    //Mezzanine
+                    LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, curveLayerage);
+
+                    //History
+                    this.ViewModel.MethodSelectedNone();
+
+                    LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
+                    LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
+                    this.SelectionViewModel.SetModeSingle(curveLayerage);//Selection
+                    this.ViewModel.Invalidate();//Invalidate
+                }
+            }
         }
 
 
-        //Group
-        private void ConstructGroup()
+        //Create curve layer
+        private ILayer CreateCurveLayer(CanvasGeometry geometry, Styles.Style style)
         {
-            this.GroupButton.Click += (s, e) => this.MethodViewModel.MethodGroupGroup();
-            this.UnGroupButton.Click += (s, e) => this.MethodViewModel.MethodGroupUnGroup();
-            this.ReleaseButton.Click += (s, e) => this.MethodViewModel.MethodGroupRelease();
+            NodeCollection nodes = new NodeCollection(geometry);
+            if (nodes == null) return null;
+
+            if (nodes.Count > 3)
+            {
+                CurveLayer curveLayer = new CurveLayer(this.ViewModel.CanvasDevice, nodes)
+                {
+                    Style = style,
+                    IsSelected = true,
+                };
+                return curveLayer;
+            }
+
+            return null;
         }
-
-
-        //Combine
-        private void ConstructCombine()
-        {
-            this.AddButton.Click += (s, e) => { };
-            this.SubtractButton.Click += (s, e) => { };
-            this.IntersectButton.Click += (s, e) => { };
-            this.DivideButton.Click += (s, e) => { };
-            this.CombineButton.Click += (s, e) => { };
-        }
-
+                     
     }
 }

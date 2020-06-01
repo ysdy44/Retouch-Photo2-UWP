@@ -57,7 +57,6 @@ namespace Retouch_Photo2.ViewModels
                 case VirtualKey.Space: this.SetKeyAlt(true); break;
 
 
-                case VirtualKey.Delete: break;
                 case VirtualKey.Escape: this.SetKeyEscape(true); break;
 
 
@@ -70,7 +69,8 @@ namespace Retouch_Photo2.ViewModels
                 case VirtualKey.X: this.SetKeyEdit(EditMode.Cut); break;
                 case VirtualKey.J: this.SetKeyEdit(EditMode.Duplicate); break;
                 case VirtualKey.C: this.SetKeyEdit(EditMode.Copy); break;
-                //case VirtualKey.Delete: this.SetKeyEdit(EditMode.Clear); break;
+                case VirtualKey.V: this.SetKeyEdit(EditMode.Paste); break;
+                case VirtualKey.Delete: this.SetKeyEditClear(true); break;
 
                 case VirtualKey.A: this.SetKeyEdit(EditMode.All); break;
                 case VirtualKey.D: this.SetKeyEdit(EditMode.Deselect); break;
@@ -80,11 +80,11 @@ namespace Retouch_Photo2.ViewModels
                 case VirtualKey.U: this.SetKeyEdit(EditMode.UnGroup); break;
                 case VirtualKey.R: this.SetKeyEdit(EditMode.Release); break;
 
-                //case VirtualKey.Add: this.SetKeyEdit(EditMode.Add); break;
-                //case VirtualKey.Subtract: this.SetKeyEdit(EditMode.Subtract); break;
-                //case VirtualKey.Intersect: this.SetKeyEdit(EditMode.Intersect); break;
-                //case VirtualKey.Divide: this.SetKeyEdit(EditMode.Divide); break;
-                //case VirtualKey.Combine: this.SetKeyEdit(EditMode.Combine); break;
+                //case VirtualKey.O: this.SetKeyEdit(EditMode.Union); break;
+                //case VirtualKey.E: this.SetKeyEdit(EditMode.Exclude); break;
+                //case VirtualKey.X: this.SetKeyEdit(EditMode.Xor); break;
+                //case VirtualKey.I: this.SetKeyEdit(EditMode.Intersect); break;
+                //case VirtualKey.S: this.SetKeyEdit(EditMode.ExpandStroke); break;
 
                 case VirtualKey.Z: this.SetKeyEdit(EditMode.Undo); break;
                 case VirtualKey.Y: this.SetKeyEdit(EditMode.Redo); break;
@@ -102,8 +102,6 @@ namespace Retouch_Photo2.ViewModels
                 case VirtualKey.Control: this.SetKeyCtrl(false); break;
                 case VirtualKey.Space: this.SetKeyAlt(false); break;
 
-                case VirtualKey.Delete: break;
-
                 case VirtualKey.Escape: this.SetKeyEscape(false); break;
 
                 case VirtualKey.Left:
@@ -115,28 +113,30 @@ namespace Retouch_Photo2.ViewModels
 
 
                 case VirtualKey.X: 
-                case VirtualKey.J:
-                case VirtualKey.C:
-                //case VirtualKey.Delete: 
+                case VirtualKey.J: 
+                case VirtualKey.C: 
+                case VirtualKey.V: 
 
-                case VirtualKey.A:
+                case VirtualKey.A: 
                 case VirtualKey.D:
                 case VirtualKey.I: 
 
                 case VirtualKey.G: 
-                case VirtualKey.U:
+                case VirtualKey.U: 
                 case VirtualKey.R: 
 
-                //case VirtualKey.Add: 
-                //case VirtualKey.Subtract: 
-                //case VirtualKey.Intersect: 
-                //case VirtualKey.Divide: 
-                //case VirtualKey.Combine: 
+                //case VirtualKey.O: 
+                //case VirtualKey.E: 
+                //case VirtualKey.X:
+                //case VirtualKey.I: 
+                //case VirtualKey.S:
 
-                case VirtualKey.Z:
+                case VirtualKey.Z: 
                 case VirtualKey.Y:
                     this.SetKeyEdit(EditMode.None);
                     break;
+
+                case VirtualKey.Delete: this.SetKeyEditClear(false); break;
 
 
                 default: break;
@@ -237,11 +237,36 @@ namespace Retouch_Photo2.ViewModels
         public EditMode EditMode;
         public void SetKeyEdit(EditMode value)
         {
-            if (this.KeyCtrl == false) return;
-            if (this.EditMode == value) return;
+            if (value!= EditMode.None)
+            {
+                if (this.KeyCtrl == false) return;
+                if (this.EditMode == value) return;
 
-            this.EditMode = value;
-            this.Edit?.Invoke(value);//Delegate
+                this.EditMode = value;
+                this.Edit?.Invoke(value);//Delegate
+            }
+            else
+            {
+                if (this.EditMode == EditMode.None) return;
+
+                this.EditMode = EditMode.None;
+            }
+        }
+        public void SetKeyEditClear(bool isClear)
+        {
+            if (isClear)
+            {
+                if (this.EditMode == EditMode.Clear) return;
+
+                this.EditMode = EditMode.Clear;
+                this.Edit?.Invoke(EditMode.Clear);//Delegate
+            }
+            else
+            {
+                if (this.EditMode == EditMode.None) return;
+
+                this.EditMode = EditMode.None;
+            }   
         }
 
     }

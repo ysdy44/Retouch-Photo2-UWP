@@ -38,13 +38,55 @@ namespace Retouch_Photo2
             this.LayersHeightTextBlock.Text = resource.GetString("/$SettingPage/LayersHeight");
             this.LayersHeightTipTextBlock.Text = resource.GetString("/$SettingPage/LayersHeightTip");
 
+
             this.KeyTextBlock.Text = resource.GetString("/$SettingPage/Key");
-            this.IsCenterToggleButton.Content = resource.GetString("/$SettingPage/Key_IsCenter");
-            this.IsRatioToggleButton.Content = resource.GetString("/$SettingPage/Key_IsRatio");
-            this.IsSquareToggleButton.Content = resource.GetString("/$SettingPage/Key_IsSquare");
-            this.IsStepFrequencyToggleButton.Content = resource.GetString("/$SettingPage/Key_IsStepFrequency");
-            this.FullScreenToggleButton.Content = resource.GetString("/$SettingPage/Key_FullScreen");
+
+            this.IsCenterControl.Tag = "Ctrl";
+            this.IsCenterControl.Content = resource.GetString("/$SettingPage/Key_IsCenter");
+            this.IsRatioControl.Tag = "Shift";
+            this.IsRatioControl.Content = resource.GetString("/$SettingPage/Key_IsRatio");
+            this.IsSquareControl.Tag = "Shift";
+            this.IsSquareControl.Content = resource.GetString("/$SettingPage/Key_IsSquare");
+            this.IsStepFrequencyControl.Tag = "Space";
+            this.IsStepFrequencyControl.Content = resource.GetString("/$SettingPage/Key_IsStepFrequency");
+            this.IsFullScreenControl.Tag = "Esc";
+            this.IsFullScreenControl.Content = resource.GetString("/$SettingPage/Key_IsFullScreen");
+
+            this.LeftControl.Tag = "←";
+            this.LeftControl.Content = resource.GetString("/$SettingPage/Key_MoveLeft ");
+            this.UpControl.Tag = "↑";
+            this.UpControl.Content = resource.GetString("/$SettingPage/Key_MoveUp ");
+            this.RightControl.Tag = "→";
+            this.RightControl.Content = resource.GetString("/$SettingPage/Key_MoveRight ");
+            this.DownControl.Tag = "↓";
+            this.DownControl.Content = resource.GetString("/$SettingPage/Key_MoveDown ");
+
+            this.CutControl.Tag = "Ctrl + X";
+            this.CutControl.Content = resource.GetString("/$SettingPage/Key_EditCut");
+            this.DuplicateControl.Tag = "Ctrl + J";
+            this.DuplicateControl.Content = resource.GetString("/$SettingPage/Key_EditDuplicate");
+            this.CopyControl.Tag = "Ctrl + C";
+            this.CopyControl.Content = resource.GetString("/$SettingPage/Key_EditCopy");
+            this.PasteControl.Tag = "Ctrl + V";
+            this.PasteControl.Content = resource.GetString("/$SettingPage/Key_EditPaste");
+            this.ClearControl.Tag = "Delete";
+            this.ClearControl.Content = resource.GetString("/$SettingPage/Key_EditClear");
+            this.AllControl.Tag = "Ctrl + A";
+            this.AllControl.Content = resource.GetString("/$SettingPage/Key_EditAll");
+            this.DeselectControl.Tag = "Ctrl + D";
+            this.DeselectControl.Content = resource.GetString("/$SettingPage/Key_EditDeselect");
+            this.InvertControl.Tag = "Ctrl + I";
+            this.InvertControl.Content = resource.GetString("/$SettingPage/Key_EditInvert");
+            this.GroupControl.Tag = "Ctrl + G";
+            this.GroupControl.Content = resource.GetString("/$SettingPage/Key_EditGroup");
+            this.UnGroupControl.Tag = "Ctrl + U";
+            this.UnGroupControl.Content = resource.GetString("/$SettingPage/Key_EditUnGroup");
+            this.ReleaseControl.Tag = "Ctrl + R";
+            this.ReleaseControl.Content = resource.GetString("/$SettingPage/Key_EditRelease");
+            this.UndoControl.Tag = "Ctrl + Z";
+            this.UndoControl.Content = resource.GetString("/$SettingPage/Key_EditUndo");
             
+
             this.MenuTypeTextBlock.Text = resource.GetString("/$SettingPage/MenuType");
             this.MenuTypeTipTextBlock.Text = resource.GetString("/$SettingPage/MenuTypeTip");
 

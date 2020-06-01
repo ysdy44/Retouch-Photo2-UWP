@@ -36,7 +36,7 @@ namespace Retouch_Photo2
             //Select
             this.SelectAllButton.Click += (s, e) => this.MainLayout.SelectAllAndDeselectIcon();
             //Head
-            this.DocumentationButton.Click += async (s, e) => await Launcher.LaunchUriAsync(new Uri("https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README.md"));
+            this.DocumentationButton.Click += async (s, e) => await Launcher.LaunchUriAsync(new Uri(this.DocumentationLink));
             this.SettingButton.Click += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
             
 

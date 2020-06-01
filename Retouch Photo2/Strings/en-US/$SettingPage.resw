@@ -120,8 +120,8 @@
   <data name="Key" xml:space="preserve">
     <value>Shortcuts</value>
   </data>
-  <data name="Key_FullScreen" xml:space="preserve">
-    <value>FullScreen</value>
+  <data name="Key_IsFullScreen" xml:space="preserve">
+    <value>IsFullScreen</value>
   </data>
   <data name="Key_IsCenter" xml:space="preserve">
     <value>IsCenter</value>
@@ -135,6 +135,58 @@
   <data name="Key_IsStepFrequency" xml:space="preserve">
     <value>IsStepFrequency</value>
   </data>
+  <data name="Key_MoveLeft" xml:space="preserve">
+    <value>Canvas moves to the left</value>
+  </data>
+  <data name="Key_MoveUp" xml:space="preserve">
+    <value>Canvas Up</value>
+  </data>
+  <data name="Key_MoveRight" xml:space="preserve">
+    <value>Canvas moves to the right</value>
+  </data>
+  <data name="Key_MoveDown" xml:space="preserve">
+    <value>Canvas Down</value>
+  </data>
+
+  <data name="Key_EditCut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="Key_EditDuplicate" xml:space="preserve">
+    <value>Duplicate</value>
+  </data>
+  <data name="Key_EditCopy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Key_EditPaste" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="Key_EditClear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="Key_EditAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Key_EditDeselect" xml:space="preserve">
+    <value>Deselect</value>
+  </data>
+  <data name="Key_EditInvert" xml:space="preserve">
+    <value>Invert</value>
+  </data>
+  <data name="Key_EditGroup" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="Key_EditUnGroup" xml:space="preserve">
+    <value>UnGroup</value>
+  </data>
+  <data name="Key_EditRelease" xml:space="preserve">
+    <value>Release</value>
+  </data>
+  <data name="Key_EditUndo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+
+
+
   <data name="DeviceLayout" xml:space="preserve">
     <value>DeviceLayout</value>
   </data>

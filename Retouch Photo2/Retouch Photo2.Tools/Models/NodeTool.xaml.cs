@@ -3,6 +3,7 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Elements;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
 
@@ -44,31 +45,43 @@ namespace Retouch_Photo2.Tools.Models
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
                     ILayer layer2 = layerage.Self;
-                    NodeRemoveMode removeMode = layer2.NodeRemoveCheckedNodes();
 
-                    switch (removeMode)
+                    if (layer2.Type == LayerType.Curve)
                     {
-                        case NodeRemoveMode.RemoveCurve:
-                            removeLayerage.Add(layerage);
-                            break;
+                        NodeBorderCollection nodeBorderCollection = new NodeBorderCollection(layer2.Nodes);
+                        NodeRemoveMode removeMode = nodeBorderCollection.GetRemoveMode();
+                        
+                        switch (removeMode)
+                        {
+                            case NodeRemoveMode.RemoveCurve:
+                                {
+                                    removeLayerage.Add(layerage);
+                                }
+                                break;
 
-                        case NodeRemoveMode.RemovedNodes:
-                            //Refactoring
-                            layer2.IsRefactoringTransformer = true;
-                            layer2.IsRefactoringRender = true;
-                            layer2.IsRefactoringIconRender = true;
-                            layerage.RefactoringParentsTransformer();
-                            layerage.RefactoringParentsRender();
-                            layerage.RefactoringParentsIconRender();
-                            break;
+                            case NodeRemoveMode.RemovedNodes:
+                                {
+                                    //Refactoring
+                                    layer2.IsRefactoringTransformer = true;
+                                    layer2.IsRefactoringRender = true;
+                                    layer2.IsRefactoringIconRender = true;
+                                    layerage.RefactoringParentsTransformer();
+                                    layerage.RefactoringParentsRender();
+                                    layerage.RefactoringParentsIconRender();
+                                    IEnumerable<Node> uncheckedNodes = nodeBorderCollection.GetUnCheckedNodes();
+                                    layer2.Nodes.NodesReplace(uncheckedNodes);
+                                }
+                                break;
 
-                        default:
-                            break;
-                    }                   
+                            default:
+                                break;
+                        }
+                    }
                 });
 
 
-                if (removeLayerage.Count!=0)
+                //Remove
+                if (removeLayerage.Count != 0)
                 {
                     foreach (Layerage remove in removeLayerage)
                     {
@@ -89,14 +102,17 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     ILayer layer2 = layerage.Self;
 
-                    //Refactoring
-                    layer2.IsRefactoringTransformer = true;
-                    layer2.IsRefactoringRender = true;
-                    layer2.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsTransformer();
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer2.NodeInterpolationCheckedNodes();
+                    if (layer2.Type == LayerType.Curve)
+                    {
+                        //Refactoring
+                        layer2.IsRefactoringTransformer = true;
+                        layer2.IsRefactoringRender = true;
+                        layer2.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsTransformer();
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
+                        NodeCollection.InterpolationCheckedNodes(layer2.Nodes);
+                    }
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
@@ -109,14 +125,17 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     ILayer layer2 = layerage.Self;
 
-                    //Refactoring
-                    layer2.IsRefactoringTransformer = true;
-                    layer2.IsRefactoringRender = true;
-                    layer2.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsTransformer();
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer2.NodeSharpCheckedNodes();
+                    if (layer2.Type == LayerType.Curve)
+                    {
+                        //Refactoring
+                        layer2.IsRefactoringTransformer = true;
+                        layer2.IsRefactoringRender = true;
+                        layer2.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsTransformer();
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
+                        NodeCollection.SharpCheckedNodes(layer2.Nodes);
+                    }
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
@@ -128,14 +147,17 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     ILayer layer2 = layerage.Self;
 
-                    //Refactoring
-                    layer2.IsRefactoringTransformer = true;
-                    layer2.IsRefactoringRender = true;
-                    layer2.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsTransformer();
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer2.NodeSmoothCheckedNodes();
+                    if (layer2.Type == LayerType.Curve)
+                    {
+                        //Refactoring
+                        layer2.IsRefactoringTransformer = true;
+                        layer2.IsRefactoringRender = true;
+                        layer2.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsTransformer();
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
+                        NodeCollection.SmoothCheckedNodes(layer2.Nodes);
+                    }
                 });
 
                 this.ViewModel.Invalidate();//Invalidate
@@ -155,7 +177,6 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public partial class NodeTool : Page, ITool
     {
-        
 
         private Layerage GetNodeCollectionLayer(Vector2 startingPoint, Matrix3x2 matrix)
         {
@@ -169,23 +190,29 @@ namespace Retouch_Photo2.Tools.Models
                         if (layerage == null) return null;
                         ILayer layer = layerage.Self;
 
-                        layer.NodeCacheTransform();
-                        this.NodeCollectionMode = layer.ContainsNodeCollectionMode(startingPoint, matrix);
-
-                        return layerage;
+                        if (layer.Type == LayerType.Curve)
+                        {
+                            layer.Nodes.CacheTransform();
+                            this.NodeCollectionMode = NodeCollection.ContainsNodeCollectionMode(startingPoint, layer.Nodes, matrix);
+                            return layerage;
+                        }
                     }
+                    break;
 
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage layerage in this.SelectionViewModel.SelectionLayerages)
                     {
                         ILayer layer = layerage.Self;
 
-                        layer.NodeCacheTransform();
-                        NodeCollectionMode mode = layer.ContainsNodeCollectionMode(startingPoint, matrix);
-                        if (mode != NodeCollectionMode.None)
+                        if (layer.Type == LayerType.Curve)
                         {
-                            this.NodeCollectionMode = mode;
-                            return layerage;
+                            layer.Nodes.CacheTransform();
+                            NodeCollectionMode mode = NodeCollection.ContainsNodeCollectionMode(startingPoint, layer.Nodes, matrix);
+                            if (mode != NodeCollectionMode.None)
+                            {
+                                this.NodeCollectionMode = mode;
+                                return layerage;
+                            }
                         }
                     }
                     break;

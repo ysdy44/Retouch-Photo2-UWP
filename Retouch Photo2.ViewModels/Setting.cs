@@ -21,7 +21,7 @@ namespace Retouch_Photo2.ViewModels
 
         /// <summary> Gets or sets the menu-types. </summary>
         public IList<MenuType> MenuTypes = new List<MenuType>
-       {
+        {
              //MenuType.Debug,
 
              MenuType.Edit,
@@ -42,7 +42,7 @@ namespace Retouch_Photo2.ViewModels
              //MenuType.Layer,
              MenuType.Color,
              //MenuType.Keyboard,
-        };
+         };
 
     }
 }

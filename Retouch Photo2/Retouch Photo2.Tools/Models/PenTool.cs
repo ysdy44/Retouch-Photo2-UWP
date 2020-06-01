@@ -23,7 +23,6 @@ namespace Retouch_Photo2.Tools.Models
 
          Layerage CurveLayerage => this.SelectionViewModel.CurveLayerage;
         CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
-        NodeCollection Nodes => this.CurveLayer.Nodes;
 
         VectorVectorSnap Snap => this.ViewModel.VectorVectorSnap;
         bool IsSnap => this.SettingViewModel.IsSnap;
@@ -52,6 +51,7 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public partial class PenTool : ITool
     {
+
         Vector2 _previewLeft;
         Vector2 _previewRight;
 

@@ -1,8 +1,6 @@
-﻿using Retouch_Photo2.Adjustments;
+﻿using Retouch_Photo2.Styles;
 using System;
 using System.Collections.Generic;
-using Retouch_Photo2.Styles;
-using Retouch_Photo2.Styles;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;

@@ -159,22 +159,22 @@
   <data name="Combine" xml:space="preserve">
     <value>Combine</value>
   </data>
-  <data name="Combine_Add" xml:space="preserve">
-    <value>Add</value>
+  <data name="Select_Invert" xml:space="preserve">
+    <value>Invert</value>
   </data>
-  <data name="Combine_Combine" xml:space="preserve">
-    <value>Combine</value>
-  </data>
-  <data name="Combine_Divide" xml:space="preserve">
-    <value>Divide</value>
+  <data name="Combine_Exclude" xml:space="preserve">
+    <value>Exclude</value>
   </data>
   <data name="Combine_Intersect" xml:space="preserve">
     <value>Intersect</value>
   </data>
-  <data name="Combine_Subtract" xml:space="preserve">
-    <value>Subtract</value>
+  <data name="Combine_Union" xml:space="preserve">
+    <value>Union</value>
   </data>
-  <data name="Select_Invert" xml:space="preserve">
-    <value>Invert</value>
+  <data name="Combine_Xor" xml:space="preserve">
+    <value>Xor</value>
+  </data>
+  <data name="Combine_ExpandStroke" xml:space="preserve">
+    <value>Expand Stroke</value>
   </data>
 </root>

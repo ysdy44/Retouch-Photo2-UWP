@@ -66,7 +66,7 @@ namespace Retouch_Photo2.Tools.Models
                 case NodeCollectionMode.Add:
                     {
                         //Snap
-                        if (this.IsSnap) this.ViewModel.VectorVectorSnapInitiate(this.Nodes);
+                        if (this.IsSnap) this.ViewModel.VectorVectorSnapInitiate(this.CurveLayer.Nodes);
 
                         Node node = new Node
                         {
@@ -157,7 +157,7 @@ namespace Retouch_Photo2.Tools.Models
                     IsChecked = false,
                     IsSmooth = false,
                 };
-                this.Nodes.PenAdd(node);
+                this.CurveLayer.Nodes.PenAdd(node);
             }
 
             //Refactoring
@@ -189,7 +189,7 @@ namespace Retouch_Photo2.Tools.Models
                     IsChecked = false,
                     IsSmooth = false,
                 };
-                this.Nodes.PenAdd(node);
+                this.CurveLayer.Nodes.PenAdd(node);
             }
 
             //Refactoring
@@ -212,7 +212,7 @@ namespace Retouch_Photo2.Tools.Models
             }
 
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            drawingSession.DrawNodeCollection(this.Nodes, matrix);
+            drawingSession.DrawNodeCollection(this.CurveLayer.Nodes, matrix);
 
             switch (this.Mode)
             {

@@ -106,20 +106,20 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CombineIcons\AddIcon.xaml.cs">
-      <DependentUpon>AddIcon.xaml</DependentUpon>
+    <Compile Include="CombineIcons\ExpandStrokeIcon.xaml.cs">
+      <DependentUpon>ExpandStrokeIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CombineIcons\CombineIcon.xaml.cs">
-      <DependentUpon>CombineIcon.xaml</DependentUpon>
+    <Compile Include="CombineIcons\UnionIcon.xaml.cs">
+      <DependentUpon>UnionIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CombineIcons\DivideIcon.xaml.cs">
-      <DependentUpon>DivideIcon.xaml</DependentUpon>
+    <Compile Include="CombineIcons\XorIcon.xaml.cs">
+      <DependentUpon>XorIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CombineIcons\ExcludeIcon.xaml.cs">
+      <DependentUpon>ExcludeIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="CombineIcons\IntersectIcon.xaml.cs">
       <DependentUpon>IntersectIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CombineIcons\Subtract.xaml.cs">
-      <DependentUpon>Subtract.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditIcons\ClearIcon.xaml.cs">
       <DependentUpon>ClearIcon.xaml</DependentUpon>
@@ -172,23 +172,23 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CombineIcons\AddIcon.xaml">
+    <Page Include="CombineIcons\ExpandStrokeIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CombineIcons\UnionIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CombineIcons\CombineIcon.xaml">
+    <Page Include="CombineIcons\XorIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CombineIcons\DivideIcon.xaml">
+    <Page Include="CombineIcons\ExcludeIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="CombineIcons\IntersectIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="CombineIcons\Subtract.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

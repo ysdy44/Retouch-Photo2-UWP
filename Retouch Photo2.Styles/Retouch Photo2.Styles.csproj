@@ -139,10 +139,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\FanKit.Transformers\FanKit.Transformers\FanKit.Transformers.csproj">
-      <Project>{a98a4671-07f5-46c7-bad2-9fa0242d2855}</Project>
-      <Name>FanKit.Transformers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Brushs\Retouch Photo2.Brushs.csproj">
       <Project>{00e87876-1aa4-4b48-af1c-f1db75fbf587}</Project>
       <Name>Retouch Photo2.Brushs</Name>

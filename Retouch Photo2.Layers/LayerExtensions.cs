@@ -1,18 +1,8 @@
 ﻿using FanKit.Transformers;
-using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Effects;
-using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Adjustments;
-using Retouch_Photo2.Blends;
-using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Effects;
-using Retouch_Photo2.Filters;
-using System.Collections.Generic;
 using System.Numerics;
 using Windows.Foundation;
-using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers
 {

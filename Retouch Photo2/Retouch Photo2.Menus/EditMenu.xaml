@@ -30,6 +30,7 @@
                     <Button x:Name="DuplicateButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
                     <Button x:Name="CopyButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
                     <Button x:Name="PasteButton" IsEnabled="{x:Bind MethodViewModel.ClipboardEnable, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
                     <Button x:Name="ClearButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
 
                     <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
@@ -38,6 +39,7 @@
                     <TextBlock x:Name="GroupTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                     <Button x:Name="GroupButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
                     <Button x:Name="UnGroupButton" IsEnabled="{x:Bind SelectionViewModel.IsGroupLayer, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
                     <Button x:Name="ReleaseButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
 
                 </StackPanel>
@@ -50,18 +52,20 @@
                     <TextBlock x:Name="SelectTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                     <Button x:Name="AllButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
                     <Button x:Name="DeselectButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+                    <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
                     <Button x:Name="InvertButton" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
 
                     <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
 
                     <!--Combine-->
                     <TextBlock x:Name="CombineTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <Button x:Name="AddButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="SubtractButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="IntersectButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="DivideButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
-                    <Button x:Name="CombineButton" IsEnabled="False" Style="{StaticResource AppIconButton}"/>
-
+                    <Button x:Name="UnionButton" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="ExcludeButton" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="XorButton" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Button x:Name="IntersectButton" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
+                    <Button x:Name="ExpandStrokeButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+                    
                 </StackPanel>
 
             </Grid>

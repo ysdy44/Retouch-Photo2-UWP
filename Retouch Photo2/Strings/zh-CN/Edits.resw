@@ -159,22 +159,22 @@
   <data name="Combine" xml:space="preserve">
     <value>结合</value>
   </data>
-  <data name="Combine_Add" xml:space="preserve">
-    <value>增加</value>
+  <data name="Select_Invert" xml:space="preserve">
+    <value>反选</value>
   </data>
-  <data name="Combine_Combine" xml:space="preserve">
-    <value>组合</value>
-  </data>
-  <data name="Combine_Divide" xml:space="preserve">
-    <value>分割</value>
+  <data name="Combine_Exclude" xml:space="preserve">
+    <value>减少</value>
   </data>
   <data name="Combine_Intersect" xml:space="preserve">
     <value>相交</value>
   </data>
-  <data name="Combine_Subtract" xml:space="preserve">
-    <value>减去</value>
+  <data name="Combine_Union" xml:space="preserve">
+    <value>联合</value>
   </data>
-  <data name="Select_Invert" xml:space="preserve">
-    <value>反选</value>
+  <data name="Combine_Xor" xml:space="preserve">
+    <value>差异</value>
+  </data>
+  <data name="Combine_ExpandStroke" xml:space="preserve">
+    <value>展开描边</value>
   </data>
 </root>

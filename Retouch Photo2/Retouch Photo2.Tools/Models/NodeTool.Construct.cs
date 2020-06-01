@@ -67,8 +67,12 @@ namespace Retouch_Photo2.Tools.Models
                         //Selection
                         this.SelectionViewModel.SetValue((layerage) =>
                         {
-                            ILayer layer2 = layerage.Self;
-                            layer2.NodeCacheTransform();
+                            ILayer layer = layerage.Self;
+
+                            if (layer.Type == LayerType.Curve)
+                            {
+                                layer.Nodes.CacheTransformOnlySelected();
+                            }
                         });
                     }
                     break;
@@ -77,8 +81,12 @@ namespace Retouch_Photo2.Tools.Models
                         //Selection
                         this.SelectionViewModel.SetValue((layerage) =>
                         {
-                            ILayer layer2 = layerage.Self;
-                            layer2.NodeSelectionOnlyOne(startingPoint, matrix);
+                            ILayer layer = layerage.Self;
+
+                            if (layer.Type == LayerType.Curve)
+                            {
+                                layer.Nodes.SelectionOnlyOne(startingPoint, matrix);
+                            }
                         });
                     }
                     break;
@@ -118,12 +126,15 @@ namespace Retouch_Photo2.Tools.Models
                         //Selection
                         this.SelectionViewModel.SetValue((layerage) =>
                         {
-                            ILayer layer2 = layerage.Self;
+                            ILayer layer = layerage.Self;
 
-                            //Refactoring
-                            layer2.IsRefactoringRender = true;
-                            layerage.RefactoringParentsRender();
-                            layer2.NodeTransformAdd(canvasMove);
+                            if (layer.Type == LayerType.Curve)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layerage.RefactoringParentsRender();
+                                layer.Nodes.TransformAddOnlySelected(canvasMove);
+                            }
                         });
                     }
                     break;
@@ -132,12 +143,16 @@ namespace Retouch_Photo2.Tools.Models
                         //Selection
                         this.SelectionViewModel.SetValue((layerage) =>
                         {
-                            ILayer layer2 = layerage.Self;
+                            ILayer layer = layerage.Self;
 
-                            //Refactoring
-                            layer2.IsRefactoringRender = true;
-                            layerage.RefactoringParentsRender();
-                            layer2.NodeMovePoint(canvasPoint);
+                            if (layer.Type == LayerType.Curve)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layerage.RefactoringParentsRender();
+                                Node node = layer.Nodes.SelectedItem;
+                                Node.Move(point, node);
+                            }
                         });
                     }
                     break;
@@ -146,12 +161,16 @@ namespace Retouch_Photo2.Tools.Models
                         //Selection
                         this.SelectionViewModel.SetValue((layerage) =>
                         {
-                            ILayer layer2 = layerage.Self;
+                            ILayer layer = layerage.Self;
 
-                            //Refactoring
-                            layer2.IsRefactoringRender = true;
-                            layerage.RefactoringParentsRender();
-                            layer2.NodeControllerControlPoint(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, isLeftControlPoint: true);
+                            if (layer.Type == LayerType.Curve)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layerage.RefactoringParentsRender();
+                                Node node = layer.Nodes.SelectedItem;
+                                Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: true);
+                            }
                         });
                     }
                     break;
@@ -160,12 +179,16 @@ namespace Retouch_Photo2.Tools.Models
                         //Selection
                         this.SelectionViewModel.SetValue((layerage) =>
                         {
-                            ILayer layer2 = layerage.Self;
+                            ILayer layer = layerage.Self;
 
-                            //Refactoring
-                            layer2.IsRefactoringRender = true;
-                            layerage.RefactoringParentsRender();
-                            layer2.NodeControllerControlPoint(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, isLeftControlPoint: false); 
+                            if (layer.Type == LayerType.Curve)
+                            {
+                                //Refactoring
+                                layer.IsRefactoringRender = true;
+                                layerage.RefactoringParentsRender();
+                                Node node = layer.Nodes.SelectedItem;
+                                Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: false);
+                            }
                         });
                     }
                     break;
@@ -176,8 +199,12 @@ namespace Retouch_Photo2.Tools.Models
                         //Selection
                         this.SelectionViewModel.SetValue((layerage) =>
                         {
-                            ILayer layer2 = layerage.Self;
-                            layer2.NodeBoxChoose(this.TransformerRect);
+                            ILayer layer = layerage.Self;
+
+                            if (layer.Type == LayerType.Curve)
+                            {
+                                layer.Nodes.BoxChoose(this.TransformerRect);
+                            }
                         });
                     }
                     break;
@@ -204,16 +231,19 @@ namespace Retouch_Photo2.Tools.Models
                             //Selection
                             this.SelectionViewModel.SetValue((layerage) =>
                             {
-                                ILayer layer2 = layerage.Self;
-
-                                //Refactoring
-                                layer2.IsRefactoringTransformer = true;
-                                layer2.IsRefactoringRender = true;
-                                layer2.IsRefactoringIconRender = true;
-                                layerage.RefactoringParentsTransformer();
-                                layerage.RefactoringParentsRender();
-                                layerage.RefactoringParentsIconRender();
-                                layer2.NodeTransformAdd(canvasMove);
+                                ILayer layer = layerage.Self;
+                                
+                                if (layer.Type == LayerType.Curve)
+                                {
+                                    //Refactoring
+                                    layer.IsRefactoringTransformer = true;
+                                    layer.IsRefactoringRender = true;
+                                    layer.IsRefactoringIconRender = true;
+                                    layerage.RefactoringParentsTransformer();
+                                    layerage.RefactoringParentsRender();
+                                    layerage.RefactoringParentsIconRender();
+                                    layer.Nodes.TransformAddOnlySelected(canvasMove);
+                                }
                             });
                         }
                         break;
@@ -222,16 +252,20 @@ namespace Retouch_Photo2.Tools.Models
                             //Selection
                             this.SelectionViewModel.SetValue((layerage) =>
                             {
-                                ILayer layer2 = layerage.Self;
+                                ILayer layer = layerage.Self;
 
-                                //Refactoring
-                                layer2.IsRefactoringTransformer = true;
-                                layer2.IsRefactoringRender = true;
-                                layer2.IsRefactoringIconRender = true;
-                                layerage.RefactoringParentsTransformer();
-                                layerage.RefactoringParentsRender();
-                                layerage.RefactoringParentsIconRender();
-                                layer2.NodeMovePoint(canvasPoint);
+                                if (layer.Type == LayerType.Curve)
+                                {
+                                    //Refactoring
+                                    layer.IsRefactoringTransformer = true;
+                                    layer.IsRefactoringRender = true;
+                                    layer.IsRefactoringIconRender = true;
+                                    layerage.RefactoringParentsTransformer();
+                                    layerage.RefactoringParentsRender();
+                                    layerage.RefactoringParentsIconRender();
+                                    Node node = layer.Nodes.SelectedItem;
+                                    Node.Move(canvasPoint, node);
+                                }
                             });
                         }
                         break;
@@ -240,16 +274,20 @@ namespace Retouch_Photo2.Tools.Models
                             //Selection
                             this.SelectionViewModel.SetValue((layerage) =>
                             {
-                                ILayer layer2 = layerage.Self;
+                                ILayer layer = layerage.Self;
 
-                                //Refactoring
-                                layer2.IsRefactoringTransformer = true;
-                                layer2.IsRefactoringRender = true;
-                                layer2.IsRefactoringIconRender = true;
-                                layerage.RefactoringParentsTransformer();
-                                layerage.RefactoringParentsRender();
-                                layerage.RefactoringParentsIconRender();
-                                layer2.NodeControllerControlPoint(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, isLeftControlPoint: true);
+                                if (layer.Type == LayerType.Curve)
+                                {
+                                    //Refactoring
+                                    layer.IsRefactoringTransformer = true;
+                                    layer.IsRefactoringRender = true;
+                                    layer.IsRefactoringIconRender = true;
+                                    layerage.RefactoringParentsTransformer();
+                                    layerage.RefactoringParentsRender();
+                                    layerage.RefactoringParentsIconRender();
+                                    Node node = layer.Nodes.SelectedItem;
+                                    Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: true);
+                                }
                             });
                         }
                         break;
@@ -258,16 +296,20 @@ namespace Retouch_Photo2.Tools.Models
                             //Selection
                             this.SelectionViewModel.SetValue((layerage) =>
                             {
-                                ILayer layer2 = layerage.Self;
+                                ILayer layer = layerage.Self;
 
-                                //Refactoring
-                                layer2.IsRefactoringTransformer = true;
-                                layer2.IsRefactoringRender = true;
-                                layer2.IsRefactoringIconRender = true;
-                                layerage.RefactoringParentsTransformer();
-                                layerage.RefactoringParentsRender();
-                                layerage.RefactoringParentsIconRender();
-                                layer2.NodeControllerControlPoint(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, isLeftControlPoint: false); 
+                                if (layer.Type == LayerType.Curve)
+                                {
+                                    //Refactoring
+                                    layer.IsRefactoringTransformer = true;
+                                    layer.IsRefactoringRender = true;
+                                    layer.IsRefactoringIconRender = true;
+                                    layerage.RefactoringParentsTransformer();
+                                    layerage.RefactoringParentsRender();
+                                    layerage.RefactoringParentsIconRender();
+                                    Node node = layer.Nodes.SelectedItem;
+                                    Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: false);
+                                }
                             });
                         }
                         break;
@@ -278,8 +320,12 @@ namespace Retouch_Photo2.Tools.Models
                             //Selection
                             this.SelectionViewModel.SetValue((layerage) =>
                             {
-                                ILayer layer2 = layerage.Self;
-                                layer2.NodeBoxChoose(this.TransformerRect);
+                                ILayer layer = layerage.Self;
+
+                                if (layer.Type == LayerType.Curve)
+                                {
+                                    layer.Nodes.BoxChoose(this.TransformerRect);
+                                }
                             });
                         }
                         break;
@@ -298,8 +344,12 @@ namespace Retouch_Photo2.Tools.Models
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
             {
-                ILayer layer2 = layerage.Self;
-                layer2.NodeSelectionOnlyOne(point, matrix);
+                ILayer layer = layerage.Self;
+
+                if (layer.Type == LayerType.Curve)
+                {
+                    layer.Nodes.SelectionOnlyOne(point, matrix);
+                }
             });
 
             this.ViewModel.Invalidate();//Invalidate
@@ -314,14 +364,24 @@ namespace Retouch_Photo2.Tools.Models
             {
                 case ListViewSelectionMode.None: break;
                 case ListViewSelectionMode.Single:
-                    ILayer layer = this.SelectionViewModel.SelectionLayerage.Self;
-                    layer.DrawNode(drawingSession, matrix, this.ViewModel.AccentColor);
+                    {
+                        ILayer layer = this.SelectionViewModel.SelectionLayerage.Self;
+
+                        if (layer.Type == LayerType.Curve)
+                        {
+                            drawingSession.DrawNodeCollection(layer.Nodes, matrix, this.ViewModel.AccentColor);
+                        }
+                    }
                     break;
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage layerage in this.SelectionViewModel.SelectionLayerages)
                     {
-                        ILayer layer2 = layerage.Self;
-                        layer2.DrawNode(drawingSession, matrix, this.ViewModel.AccentColor);
+                        ILayer layer = layerage.Self;
+
+                        if (layer.Type == LayerType.Curve)
+                        {
+                            drawingSession.DrawNodeCollection(layer.Nodes, matrix, this.ViewModel.AccentColor);
+                        }
                     }
                     break;
             }

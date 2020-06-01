@@ -3,7 +3,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Edits.CombineIcons
 {
-    public sealed partial class AddIcon : UserControl
+    public sealed partial class ExpandStrokeIcon : UserControl
     {
         //@VisualState
         bool _vsIsEnabled => this.IsEnabled;
@@ -16,9 +16,9 @@ namespace Retouch_Photo2.Edits.CombineIcons
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-        
+
         //@Construct
-        public AddIcon()
+        public ExpandStrokeIcon()
         {
             this.InitializeComponent();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State

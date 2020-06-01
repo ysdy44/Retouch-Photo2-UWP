@@ -26,7 +26,6 @@ namespace Retouch_Photo2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private string Untitled = "Untitled";
 
         /// <summary>
         /// New from size.

@@ -184,91 +184,14 @@ namespace Retouch_Photo2.Layers
         #region Node
 
 
+        /// <summary> Gets or sets ILayer's nodes. </summary>
+        NodeCollection Nodes { get; }
+
         /// <summary>
         ///  Convert to curves.
         /// </summary>
         /// <returns> The product curves. </returns>
         NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator);
-        /// <summary>
-        /// Draw nodes.
-        /// </summary>
-        /// <param name="drawingSession"> The drawing-session. </param>
-        /// <param name="matrix"> The matrix. </param>
-        /// <param name="accentColor"> The accent color. </param>
-        void DrawNode(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor);
-        
-
-        /// <summary>
-        /// Gets the all points by the NodeCollection contains the specified point. 
-        /// </summary>
-        /// <param name="point"> The input point. </param>
-        /// <param name="matrix"> The matrix. </param>
-        /// <returns> The NodeCollection mode. </returns>
-        NodeCollectionMode ContainsNodeCollectionMode(Vector2 point, Matrix3x2 matrix);
-
-
-        /// <summary>
-        ///  Cache the NodeCollection's transformer.
-        /// </summary>
-        void NodeCacheTransform();
-        /// <summary>
-        ///  Transforms the node by the given vector.
-        /// </summary>
-        /// <param name="vector"> The add value use to summed. </param>
-        void NodeTransformMultiplies(Matrix3x2 matrix);
-        /// <summary>
-        ///  Transforms the node by the given matrix.
-        /// </summary>
-        /// <param name="matrix"> The resulting matrix. </param>
-        void NodeTransformAdd(Vector2 vector);
-
-
-        /// <summary>
-        /// Select only one node.
-        /// </summary>
-        /// <param name="point"> The point. </param>
-        /// <param name="matrix"> The matrix. </param>
-        bool NodeSelectionOnlyOne(Vector2 point, Matrix3x2 matrix);
-
-        /// <summary>
-        /// Check node which in the rect.
-        /// </summary>
-        /// <param name="boxRect"> The destination rectangle. </param>
-        void NodeBoxChoose(TransformerRect boxRect);
-        
-
-        /// <summary>
-        /// Move a node's point. 
-        /// </summary>
-        /// <param name="point"> The point. </param>
-        void NodeMovePoint(Vector2 point);
-        /// <summary>
-        /// It controls the transformation of node contol point.
-        /// </summary>
-        /// <param name="mode"> The mode. </param>
-        /// <param name="lengthMode"> The length mode. </param>
-        /// <param name="angleMode"> The angle mode. </param>
-        /// <param name="point"> The point. </param>
-        /// <param name="isLeftControlPoint"> <see cref="Node.LeftControlPoint"/> or <see cref="Node.RightControlPoint"/>. </param>
-        void NodeControllerControlPoint(SelfControlPointMode mode, EachControlPointLengthMode lengthMode, EachControlPointAngleMode angleMode, Vector2 point, bool isLeftControlPoint);
-
-
-        /// <summary>
-        /// Remove all checked nodes.
-        /// </summary>
-        NodeRemoveMode NodeRemoveCheckedNodes();
-        /// <summary>
-        /// Insert a new point between checked points
-        /// </summary>
-        void NodeInterpolationCheckedNodes();
-        /// <summary>
-        /// Sharpen all checked nodes.
-        /// </summary>
-        void NodeSharpCheckedNodes();
-        /// <summary>
-        /// Smoothly all checked nodes.
-        /// </summary>
-        void NodeSmoothCheckedNodes();
 
 
         #endregion

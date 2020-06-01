@@ -21,14 +21,21 @@ namespace Retouch_Photo2
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private string Title = "Retouch Photo2";
+        private string Untitled = "Untitled";
+        private string DocumentationLink = "https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README.md";
+
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Untitled = resource.GetString("/$MainPage/Untitled");
+            this.Title = resource.GetString("/resources/Title");
+            this.Untitled = resource.GetString("/resources/Untitled");
+            this.DocumentationLink = resource.GetString("/resources/DocumentationLink");
 
-            this.TitleTextBlock.Text = resource.GetString("/$MainPage/Title");
+
+            this.TitleTextBlock.Text = this.Title;
 
             this.SelectItemsTextBlock.Text = resource.GetString("/$MainPage/Select_Items");
             this.SelectAllButton.Content = resource.GetString("/$MainPage/Select_All");
@@ -38,7 +45,7 @@ namespace Retouch_Photo2
             this.InitialAddTextBlock.Text = resource.GetString("/$MainPage/Initial_Add");
             this.InitialPhotoTextBlock.Text = resource.GetString("/$MainPage/Initial_Photo");
             this.InitialDestopTextBlock.Text = resource.GetString("/$MainPage/Initial_Destop");
-
+            
             this.AddButton.Content = resource.GetString("/$MainPage/Add");
             this.AddDialog.Title = resource.GetString("/$MainPage/AddDialog_Title");
             this.AddDialog.CloseButton.Content = resource.GetString("/$MainPage/AddDialog_Close");

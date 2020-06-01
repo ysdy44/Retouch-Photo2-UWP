@@ -99,7 +99,7 @@ namespace Retouch_Photo2
             //Menu
             Menus = new List<IMenu>
             {
-                new DebugMenu(),
+                //new DebugMenu(),
 
                 new EditMenu(),
                 new OperateMenu(),
@@ -108,7 +108,7 @@ namespace Retouch_Photo2
                 new EffectMenu(),
 
                 new CharacterMenu(),
-                new ParagraphMenu(),
+                //new ParagraphMenu(),
 
                 new StrokeMenu(),
                 new StyleMenu(),
@@ -118,7 +118,7 @@ namespace Retouch_Photo2
 
                 new LayerMenu(),
                 new ColorMenu(),
-                new KeyboardMenu(),
+                //new KeyboardMenu(),
             },
         };
 

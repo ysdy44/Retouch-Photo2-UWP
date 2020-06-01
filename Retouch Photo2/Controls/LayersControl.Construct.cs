@@ -1,15 +1,8 @@
 ﻿using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Tools;
 using Windows.UI.Xaml;
-using FanKit.Transformers;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Numerics;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Controls
 {

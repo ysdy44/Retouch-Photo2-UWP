@@ -37,16 +37,16 @@
         Release,
 
         //Combine
-        /// <summary> Add </summary>
-        Add,
-        /// <summary> Subtract </summary>
-        Subtract,
+        /// <summary> Union </summary>
+        Union,
+        /// <summary> Exclude </summary>
+        Exclude,
+        /// <summary> Xor </summary>
+        Xor,
         /// <summary> Intersect </summary>
         Intersect,
-        /// <summary> Divide </summary>
-        Divide,
-        /// <summary> Combine </summary>
-        Combine,
+        /// <summary> Expand Stroke </summary>
+        ExpandStroke,
 
         //Undo
         /// <summary> Undo </summary>
