@@ -41,6 +41,16 @@ namespace Retouch_Photo2.Layers
                     //Adjustment
                     currentImage = Filter.Render(this.Filter, currentImage);
 
+                    //Opacity
+                    if (this.Opacity < 1.0)
+                    {
+                        currentImage = new OpacityEffect
+                        {
+                            Opacity = this.Opacity,
+                            Source = currentImage
+                        };
+                    }
+
                     this.Render2 = currentImage;
                 }
 
@@ -64,7 +74,7 @@ namespace Retouch_Photo2.Layers
                 if (this.Transform.IsCrop)
                 {
                     CanvasGeometry geometryCrop = this.Transform.CropTransformer.ToRectangle(resourceCreator);
-
+                    
                     using (drawingSession.CreateLayer(1, geometryCrop))
                     {
                         this._render(resourceCreator, drawingSession, children);
@@ -98,10 +108,13 @@ namespace Retouch_Photo2.Layers
                 {
                     for (int i = children.Count - 1; i >= 0; i--)
                     {
-                        Layerage child = children[i];
-                        ILayer child2 = child.Self;
+                        Layerage layerage = children[i];
+                        ILayer layer = layerage.Self;
+                    
+                        if (layer.Visibility == Visibility.Collapsed) continue;
+                        if (layer.Opacity == 0) continue;
 
-                        ICanvasImage childImage = child2.GetActualRender(resourceCreator, child.Children);
+                        ICanvasImage childImage = layer.GetActualRender(resourceCreator, layerage.Children);
                         drawingSession.DrawImage(childImage);
                     }
                 }
@@ -169,14 +182,14 @@ namespace Retouch_Photo2.Layers
             //currentImage = Filter.Render(currentLayer.Filter, currentImage);
 
             //Opacity
-            if (currentLayer.Opacity < 1.0)
-            {
-                currentImage = new OpacityEffect
-                {
-                    Opacity = currentLayer.Opacity,
-                    Source = currentImage
-                };
-            }
+            //if (currentLayer.Opacity < 1.0)
+            //{
+            //    currentImage = new OpacityEffect
+            //    {
+            //       Opacity = currentLayer.Opacity,
+            //       Source = currentImage
+            //     };
+            //}
 
             //Blend
             if (currentLayer.BlendMode is BlendEffectMode blendMode)

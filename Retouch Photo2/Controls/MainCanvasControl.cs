@@ -87,49 +87,6 @@ namespace Retouch_Photo2.Controls
 
             return previousImage;
         }
-        /// <summary>
-        /// Render.
-        /// </summary>
-        /// <param name="size"> The file size. </param>
-        /// <returns> The render target. </returns>
-        public CanvasRenderTarget Render(BitmapSize size)
-        {
-            ICanvasImage previousImage = this.Render();
-
-            int canvasWidth = this.ViewModel.CanvasTransformer.Width;
-            int canvasHeight = this.ViewModel.CanvasTransformer.Height;
-
-            int fileWidth = (int)size.Width;
-            int fileHeight = (int)size.Height;
-            CanvasRenderTarget renderTarget = new CanvasRenderTarget(this.CanvasResourceCreatorWithDpi, fileWidth, fileHeight);
-
-            if (canvasWidth == fileWidth && canvasHeight == fileHeight)
-            {
-                using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
-                {
-                    drawingSession.DrawImage(previousImage);
-                }
-                return renderTarget;
-            }
-            else
-            {
-                float scaleX = (float)fileWidth / (float)canvasWidth;
-                float scaleY = (float)fileHeight / (float)canvasHeight;
-                Matrix3x2 matrix = Matrix3x2.CreateScale(scaleX, scaleY);
-
-                ICanvasImage canvasImage = new Transform2DEffect
-                {
-                    TransformMatrix = matrix,
-                    Source = previousImage
-                };
-
-                using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
-                {
-                    drawingSession.DrawImage(canvasImage);
-                }
-                return renderTarget;
-            }
-        }
 
 
         private void _drawRenderAndCrad(CanvasDrawingSession drawingSession)

@@ -114,10 +114,10 @@ namespace Retouch_Photo2.Layers.Models
             }
 
 
-            Matrix3x2 matrix2 = Transformer.FindHomography(this.transformerRect, base.Transform.Transformer);
+            Matrix3x2 matrix = Transformer.FindHomography(this.transformerRect, base.Transform.Transformer);
             Transform2DEffect effect = new Transform2DEffect
             {
-                TransformMatrix = matrix2,
+                TransformMatrix = matrix,
                 Source = this.bitmap,
             };
 

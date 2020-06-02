@@ -52,7 +52,8 @@ namespace Retouch_Photo2
         //Export
         private void ConstructExportDialog()
         {
-            this.FileFormatComboBox.FileFormat = CanvasBitmapFileFormat.Jpeg; ;
+            this.DPIComboBox.DPI = DPI.DPI144;
+            this.FileFormatComboBox.FileFormat = CanvasBitmapFileFormat.Jpeg;
 
             this.ExportQualityPicker.Value = 1;
             this.ExportQualityPicker.Minimum = 0;
@@ -72,8 +73,8 @@ namespace Retouch_Photo2
                 this.LoadingControl.State = isSuccesful ? LoadingState.SaveSuccess : LoadingState.SaveFailed;
                 await Task.Delay(1000);
 
-                this.LoadingControl.IsActive = false;
                 this.LoadingControl.State = LoadingState.None;
+                this.LoadingControl.IsActive = false;
             };
         }
         private void ShowExportDialog()

@@ -26,7 +26,7 @@ namespace Retouch_Photo2.ViewModels
             this.VectorVectorSnap.Destinations =
                 from node
                 in nodes
-                where node.IsChecked == false
+                where node.IsChecked == false && node.Type != NodeType.EndFigure
                 select node.Point;
 
             //NodeRadius

@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Elements;
 using Retouch_Photo2.ViewModels;
@@ -41,48 +42,74 @@ namespace Retouch_Photo2.Tools.Models
             {
                 IList<Layerage> removeLayerage = new List<Layerage>();
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
+
                 {
-                    ILayer layer2 = layerage.Self;
+                    //History
+                    LayersPropertyHistory history = new LayersPropertyHistory("Remove nodes");
 
-                    if (layer2.Type == LayerType.Curve)
+                    //Selection
+                    this.SelectionViewModel.SetValue((layerage) =>
                     {
-                        NodeBorderCollection nodeBorderCollection = new NodeBorderCollection(layer2.Nodes);
-                        NodeRemoveMode removeMode = nodeBorderCollection.GetRemoveMode();
-                        
-                        switch (removeMode)
+                        ILayer layer = layerage.Self;
+
+                        if (layer.Type == LayerType.Curve)
                         {
-                            case NodeRemoveMode.RemoveCurve:
-                                {
-                                    removeLayerage.Add(layerage);
-                                }
-                                break;
+                            NodeBorderCollection nodeBorderCollection = new NodeBorderCollection(layer.Nodes);
+                            NodeRemoveMode removeMode = nodeBorderCollection.GetRemoveMode();
 
-                            case NodeRemoveMode.RemovedNodes:
-                                {
-                                    //Refactoring
-                                    layer2.IsRefactoringTransformer = true;
-                                    layer2.IsRefactoringRender = true;
-                                    layer2.IsRefactoringIconRender = true;
-                                    layerage.RefactoringParentsTransformer();
-                                    layerage.RefactoringParentsRender();
-                                    layerage.RefactoringParentsIconRender();
-                                    IEnumerable<Node> uncheckedNodes = nodeBorderCollection.GetUnCheckedNodes();
-                                    layer2.Nodes.NodesReplace(uncheckedNodes);
-                                }
-                                break;
+                            switch (removeMode)
+                            {
+                                case NodeRemoveMode.RemoveCurve:
+                                    {
+                                        removeLayerage.Add(layerage);
+                                    }
+                                    break;
 
-                            default:
-                                break;
+                                case NodeRemoveMode.RemovedNodes:
+                                    {
+                                        var previous = layer.Nodes.NodesClone().ToList();
+                                        history.UndoActions.Push(() =>
+                                        {
+                                            //Refactoring
+                                            layer.IsRefactoringTransformer = true;
+                                            layer.IsRefactoringRender = true;
+                                            layer.IsRefactoringIconRender = true;
+                                            layerage.RefactoringParentsTransformer();
+                                            layerage.RefactoringParentsRender();
+                                            layerage.RefactoringParentsIconRender();
+                                            layer.Nodes.NodesReplace(previous);
+                                        });
+
+                                        //Refactoring
+                                        layer.IsRefactoringTransformer = true;
+                                        layer.IsRefactoringRender = true;
+                                        layer.IsRefactoringIconRender = true;
+                                        layerage.RefactoringParentsTransformer();
+                                        layerage.RefactoringParentsRender();
+                                        layerage.RefactoringParentsIconRender();
+                                        IEnumerable<Node> uncheckedNodes = nodeBorderCollection.GetUnCheckedNodes();
+                                        layer.Nodes.NodesReplace(uncheckedNodes);
+                                    }
+                                    break;
+
+                                default:
+                                    break;
+                            }
                         }
-                    }
-                });
+                    });
+
+                    //History
+                    this.ViewModel.HistoryPush(history);
+                }
 
 
                 //Remove
                 if (removeLayerage.Count != 0)
                 {
+                    //History
+                    LayeragesArrangeHistory history = new LayeragesArrangeHistory("Remove layers", this.ViewModel.LayerageCollection);
+                    this.ViewModel.HistoryPush(history);
+
                     foreach (Layerage remove in removeLayerage)
                     {
                         LayerageCollection.RemoveLayer(this.ViewModel.LayerageCollection, remove);
@@ -96,69 +123,130 @@ namespace Retouch_Photo2.Tools.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.InsertButton.Click += (s, e) =>
-            {
+            {                 
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Insert nodes");
+                
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
-                    ILayer layer2 = layerage.Self;
+                    ILayer layer = layerage.Self;
 
-                    if (layer2.Type == LayerType.Curve)
+                    if (layer.Type == LayerType.Curve)
                     {
+                        var previous = layer.Nodes.NodesStartingClone().ToList();
+                        history.UndoActions.Push(() =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringTransformer = true;
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            layerage.RefactoringParentsTransformer();
+                            layerage.RefactoringParentsRender();
+                            layerage.RefactoringParentsIconRender();
+                            layer.Nodes.NodesReplace(previous);
+                        });
+
                         //Refactoring
-                        layer2.IsRefactoringTransformer = true;
-                        layer2.IsRefactoringRender = true;
-                        layer2.IsRefactoringIconRender = true;
+                        layer.IsRefactoringTransformer = true;
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         layerage.RefactoringParentsTransformer();
                         layerage.RefactoringParentsRender();
                         layerage.RefactoringParentsIconRender();
-                        NodeCollection.InterpolationCheckedNodes(layer2.Nodes);
+                        NodeCollection.InterpolationCheckedNodes(layer.Nodes);
                     }
                 });
+
+                //History
+                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
 
             this.SharpButton.Click += (s, e) =>
-            {
+            {         
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Sharp nodes");
+                
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
-                    ILayer layer2 = layerage.Self;
+                    ILayer layer = layerage.Self;
 
-                    if (layer2.Type == LayerType.Curve)
+                    if (layer.Type == LayerType.Curve)
                     {
                         //Refactoring
-                        layer2.IsRefactoringTransformer = true;
-                        layer2.IsRefactoringRender = true;
-                        layer2.IsRefactoringIconRender = true;
+                        layer.IsRefactoringTransformer = true;
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         layerage.RefactoringParentsTransformer();
                         layerage.RefactoringParentsRender();
                         layerage.RefactoringParentsIconRender();
-                        NodeCollection.SharpCheckedNodes(layer2.Nodes);
+                        layer.Nodes.CacheTransformOnlySelected();
+                        bool isSuccessful = NodeCollection.SharpCheckedNodes(layer.Nodes);
+
+                        if (isSuccessful)
+                        {
+                            //History
+                            var previous = layer.Nodes.NodesStartingClone().ToList();
+                            history.UndoActions.Push(() =>
+                            {
+                                //Refactoring
+                                layer.IsRefactoringTransformer = true;
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                layer.Nodes.NodesReplace(previous);
+                            });
+                        }
                     }
-                });
+                });        
+                
+                //History
+                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };
             this.SmoothButton.Click += (s, e) =>
             {
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Smooth nodes");
+
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
-                    ILayer layer2 = layerage.Self;
+                    ILayer layer = layerage.Self;
 
-                    if (layer2.Type == LayerType.Curve)
+                    if (layer.Type == LayerType.Curve)
                     {
                         //Refactoring
-                        layer2.IsRefactoringTransformer = true;
-                        layer2.IsRefactoringRender = true;
-                        layer2.IsRefactoringIconRender = true;
+                        layer.IsRefactoringTransformer = true;
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         layerage.RefactoringParentsTransformer();
                         layerage.RefactoringParentsRender();
                         layerage.RefactoringParentsIconRender();
-                        NodeCollection.SmoothCheckedNodes(layer2.Nodes);
+                        layer.Nodes.CacheTransformOnlySelected();
+                        bool isSuccessful = NodeCollection.SmoothCheckedNodes(layer.Nodes);
+
+                        if (isSuccessful)
+                        {
+                            //History
+                            var previous = layer.Nodes.NodesStartingClone().ToList();
+                            history.UndoActions.Push(() =>
+                            {
+                                //Refactoring
+                                layer.IsRefactoringTransformer = true;
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                layer.Nodes.NodesReplace(previous);
+                            });
+                        }
                     }
                 });
+
+                //History
+                this.ViewModel.HistoryPush(history);
 
                 this.ViewModel.Invalidate();//Invalidate
             };

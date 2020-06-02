@@ -170,6 +170,9 @@
                 <StackPanel>
                     <elements:SizePicker x:Name="ExportSizePicker"/>
                     <ContentControl Height="6"/>
+                    <TextBlock Text="DPI" Style="{StaticResource AppTextBlockStyle}"/>
+                    <elements:DPIComboBox x:Name="DPIComboBox"/>
+                    <ContentControl Height="6"/>
                     <TextBlock x:Name="ExportFileFormatTextBlock" Text="File Format" Style="{StaticResource AppTextBlockStyle}"/>
                     <elements:FileFormatComboBox x:Name="FileFormatComboBox"/>
                     <ContentControl Height="6"/>

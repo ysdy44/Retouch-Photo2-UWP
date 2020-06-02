@@ -119,6 +119,9 @@
     <Compile Include="Expanders\IExpander.cs" />
     <Compile Include="Expanders\IExpanderButton.cs" />
     <Compile Include="DeviceLayout.cs" />
+    <Compile Include="DPIComboBox.xaml.cs">
+      <DependentUpon>DPIComboBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pickers\CirclePicker.xaml.cs">
       <DependentUpon>CirclePicker.xaml</DependentUpon>
     </Compile>
@@ -234,7 +237,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FanKit.Transformers">
-      <Version>1.4.0</Version>
+      <Version>1.4.1</Version>
     </PackageReference>
     <PackageReference Include="HSVColorPickers">
       <Version>1.4.1</Version>
@@ -257,6 +260,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="%24MainPages\ProjectViewItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DPIComboBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

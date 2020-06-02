@@ -1,0 +1,109 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Elements.DPIComboBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="200"
+    >
+    
+
+    <Grid>
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--DPI72-->
+                <VisualState x:Name="DPI72">
+                    <VisualState.Setters>
+                        <Setter Target = "DPI72Button.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--DPI96-->
+                <VisualState x:Name="DPI96">
+                    <VisualState.Setters>
+                        <Setter Target = "DPI96Button.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--DPI144-->
+                <VisualState x:Name="DPI144">
+                    <VisualState.Setters>
+                        <Setter Target = "DPI144Button.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--DPI192-->
+                <VisualState x:Name="DPI192">
+                    <VisualState.Setters>
+                        <Setter Target = "DPI192Button.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--DPI300-->
+                <VisualState x:Name="DPI300">
+                    <VisualState.Setters>
+                        <Setter Target = "DPI300Button.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--DPI400-->
+                <VisualState x:Name="DPI400">
+                    <VisualState.Setters>
+                        <Setter Target = "DPI400Button.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <!--DPI72-->
+        <Button x:Name="DPI72Button" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+            72
+        </Button>
+
+        <!--DPI96-->
+        <Button x:Name="DPI96Button" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+            96
+        </Button>
+
+        <!--DPI144-->
+        <Button x:Name="DPI144Button" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+            144
+        </Button>
+
+        <!--DPI192-->
+        <Button x:Name="DPI192Button" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+            192
+        </Button>
+
+        <!--DPI300-->
+        <Button x:Name="DPI300Button" Grid.Column="4" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+            300
+        </Button>
+
+        <!--DPI400-->
+        <Button x:Name="DPI400Button" Grid.Column="5" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+            400
+        </Button>
+
+    </Grid>
+
+</UserControl>

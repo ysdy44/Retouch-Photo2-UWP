@@ -129,8 +129,8 @@ namespace Retouch_Photo2
                 PageSize = new Size(this.ActualWidth, this.ActualHeight - 50)
             };
 
-            this.LoadingControl.IsActive = false;
             this.LoadingControl.State = LoadingState.None;
+            this.LoadingControl.IsActive = false;
             this.Frame.Navigate(typeof(DrawPage), data);//Navigate   
         }
 
@@ -198,8 +198,8 @@ namespace Retouch_Photo2
                 Type = TransitionType.Size
             };
 
-            this.LoadingControl.IsActive = false;
             this.LoadingControl.State = LoadingState.None;
+            this.LoadingControl.IsActive = false;
             this.Frame.Navigate(typeof(DrawPage), data);//Navigate
         }
 

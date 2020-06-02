@@ -34,11 +34,11 @@
 
                 <!--Width-->
                 <TextBlock x:Name="WidthTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}"/>
-                <hSVColorPickers:NumberPicker x:Name="WPicker" Grid.Column="0" Grid.Row="1" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                <hSVColorPickers:NumberPicker x:Name="WPicker" Grid.Column="0" Grid.Row="1" Width="Auto" Unit="px" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
                 <!--Height-->
                 <TextBlock x:Name="HeightTextBlock" Grid.Column="2" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}"/>
-                <hSVColorPickers:NumberPicker x:Name="HPicker" Grid.Column="2" Grid.Row="1" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                <hSVColorPickers:NumberPicker x:Name="HPicker" Grid.Column="2" Grid.Row="1" Width="Auto" Unit="px" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
                 <!--Ratio-->
                 <ToggleButton x:Name="RatioToggleControl" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Style="{StaticResource AppCircleToggleButtonStyle}"
@@ -53,11 +53,11 @@
 
                 <!--Rotate-->
                 <TextBlock x:Name="RotateTextBlock" Grid.Column="0" Grid.Row="2" Style="{StaticResource AppTextBlockStyle}"/>
-                <hSVColorPickers:NumberPicker x:Name="RPicker" Grid.Column="0" Grid.Row="3" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                <hSVColorPickers:NumberPicker x:Name="RPicker" Grid.Column="0" Grid.Row="3" Width="Auto" Unit="px" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
                 <!--Skew-->
                 <TextBlock x:Name="SkewTextBlock" Grid.Column="2" Grid.Row="2" Style="{StaticResource AppTextBlockStyle}"/>
-                <hSVColorPickers:NumberPicker x:Name="SPicker" Grid.Column="2" Grid.Row="3" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                <hSVColorPickers:NumberPicker x:Name="SPicker" Grid.Column="2" Grid.Row="3" Width="Auto" Unit="px" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
                 <!--StepFrequency-->
                 <ToggleButton x:Name="StepFrequencyButton" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Style="{StaticResource AppCircleToggleButtonStyle}"
@@ -76,11 +76,11 @@
 
                 <!--X-->
                 <TextBlock x:Name="XTextBlock" Grid.Column="0" Grid.Row="4" Style="{StaticResource AppTextBlockStyle}"/>
-                <hSVColorPickers:NumberPicker x:Name="XPicker" Grid.Column="0" Grid.Row="5" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                <hSVColorPickers:NumberPicker x:Name="XPicker" Grid.Column="0" Grid.Row="5" Width="Auto" Unit="px" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
                 <!--Y-->
                 <TextBlock x:Name="YTextBlock" Grid.Column="2" Grid.Row="4" Style="{StaticResource AppTextBlockStyle}"/>
-                <hSVColorPickers:NumberPicker x:Name="YPicker" Grid.Column="2" Grid.Row="5" Width="Auto" Unit="dp" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                <hSVColorPickers:NumberPicker x:Name="YPicker" Grid.Column="2" Grid.Row="5" Width="Auto" Unit="px" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
                 <!--RemoteButton-->
                 <Button x:Name="PositionRemoteButton" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" Style="{StaticResource AppCircleButtonStyle}">

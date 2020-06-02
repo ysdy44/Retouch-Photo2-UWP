@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Tools
         /// <summary>
         /// Occurs when the canvas is drawn.
         /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="drawingSession"> The drawing-session. </param>
         void Draw(CanvasDrawingSession drawingSession);
 
     }

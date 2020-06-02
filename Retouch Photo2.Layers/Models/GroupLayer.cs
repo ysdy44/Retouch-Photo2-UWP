@@ -65,21 +65,38 @@ namespace Retouch_Photo2.Layers.Models
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
             {
-                for (int i = children.Count - 1; i >= 0; i--)
+                if (this.Transform.IsCrop)
                 {
-                    Layerage child = children[i];
-                    ILayer child2 = child.Self; 
+                    CanvasGeometry geometryCrop = this.Transform.CropTransformer.ToRectangle(resourceCreator);
 
-                    if (child2.Visibility == Visibility.Collapsed) continue;
-                    if (child2.Opacity == 0) continue;
-
-                    //GetRender
-                    ICanvasImage currentImage = child2.GetActualRender(resourceCreator, child.Children);
-                    drawingSession.DrawImage(currentImage);
+                    using (drawingSession.CreateLayer(1, geometryCrop))
+                    {
+                        this._render(resourceCreator, drawingSession, children);
+                    }
+                }
+                else
+                {
+                    this._render(resourceCreator, drawingSession, children);
                 }
             }
             return command;
         }
+        private void _render(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, IList<Layerage> children)
+        {
+            for (int i = children.Count - 1; i >= 0; i--)
+            {
+                Layerage child = children[i];
+                ILayer child2 = child.Self;
+
+                if (child2.Visibility == Visibility.Collapsed) continue;
+                if (child2.Opacity == 0) continue;
+
+                //GetRender
+                ICanvasImage currentImage = child2.GetActualRender(resourceCreator, child.Children);
+                drawingSession.DrawImage(currentImage);
+            }
+        }
+
 
         public override void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, IList<Layerage> children, Windows.UI.Color accentColor)
         {

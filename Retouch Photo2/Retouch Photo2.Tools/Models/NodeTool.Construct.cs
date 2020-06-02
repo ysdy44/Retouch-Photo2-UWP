@@ -1,12 +1,14 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Elements;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -64,6 +66,8 @@ namespace Retouch_Photo2.Tools.Models
                     break;
                 case NodeCollectionMode.Move:
                     {
+                        if (this.Layerage == null) break;
+
                         //Selection
                         this.SelectionViewModel.SetValue((layerage) =>
                         {
@@ -74,25 +78,48 @@ namespace Retouch_Photo2.Tools.Models
                                 layer.Nodes.CacheTransformOnlySelected();
                             }
                         });
+
+                        {
+                            //Selection
+                            ILayer layer = this.Layerage.Self;
+
+                            if (layer.Type == LayerType.Curve)
+                            {
+                                //Snap
+                                if (this.IsSnap) this.ViewModel.VectorVectorSnapInitiate(layer.Nodes);
+                            }
+                        }
                     }
                     break;
                 case NodeCollectionMode.MoveSingleNodePoint:
                     {
-                        //Selection
-                        this.SelectionViewModel.SetValue((layerage) =>
-                        {
-                            ILayer layer = layerage.Self;
+                        if (this.Layerage == null) break;
 
-                            if (layer.Type == LayerType.Curve)
-                            {
-                                layer.Nodes.SelectionOnlyOne(startingPoint, matrix);
-                            }
-                        });
+                        //Selection
+                        ILayer layer = this.Layerage.Self;
+
+                        if (layer.Type == LayerType.Curve)
+                        {
+                            layer.Nodes.SelectionOnlyOne(startingPoint, matrix);
+
+                            //Snap
+                            if (this.IsSnap) this.ViewModel.VectorVectorSnapInitiate(layer.Nodes);
+                        }
                     }
                     break;
                 case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
-                    break;
                 case NodeCollectionMode.MoveSingleNodeRightControlPoint:
+                    {
+                        if (this.Layerage == null) break;
+
+                        //Selection
+                        ILayer layer = this.Layerage.Self;
+
+                        if (layer.Type == LayerType.Curve)
+                        {
+                            layer.Nodes.SelectedItem.CacheTransform();
+                        }
+                    }
                     break;
                 case NodeCollectionMode.RectChoose:
                     {
@@ -101,6 +128,17 @@ namespace Retouch_Photo2.Tools.Models
                         Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
                         this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
+
+                        //Selection
+                        this.SelectionViewModel.SetValue((layerage) =>
+                        {
+                            ILayer layer = layerage.Self;
+
+                            if (layer.Type == LayerType.Curve)
+                            {
+                                layer.Nodes.CacheTransform();
+                            }
+                        });
                     }
                     break;
             }
@@ -109,8 +147,6 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
-            if (this.Layerage == null) return;
-
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
@@ -121,6 +157,10 @@ namespace Retouch_Photo2.Tools.Models
                     break;
                 case NodeCollectionMode.Move:
                     {
+                        if (this.Layerage == null) break;
+
+                        //Snap
+                        if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
                         Vector2 canvasMove = canvasPoint - canvasStartingPoint;
 
                         //Selection
@@ -140,56 +180,53 @@ namespace Retouch_Photo2.Tools.Models
                     break;
                 case NodeCollectionMode.MoveSingleNodePoint:
                     {
-                        //Selection
-                        this.SelectionViewModel.SetValue((layerage) =>
-                        {
-                            ILayer layer = layerage.Self;
+                        if (this.Layerage == null) break;
+                        ILayer layer = this.Layerage.Self;
 
-                            if (layer.Type == LayerType.Curve)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layerage.RefactoringParentsRender();
-                                Node node = layer.Nodes.SelectedItem;
-                                Node.Move(point, node);
-                            }
-                        });
+                        if (layer.Type == LayerType.Curve)
+                        {
+                            Node node = layer.Nodes.SelectedItem;
+
+                            //Snap
+                            if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
+
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            this.Layerage.RefactoringParentsRender();
+                            Node.Move(canvasPoint, node);
+                        }
                     }
                     break;
                 case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
                     {
-                        //Selection
-                        this.SelectionViewModel.SetValue((layerage) =>
-                        {
-                            ILayer layer = layerage.Self;
+                        if (this.Layerage == null) break;
+                        ILayer layer = this.Layerage.Self;
 
-                            if (layer.Type == LayerType.Curve)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layerage.RefactoringParentsRender();
-                                Node node = layer.Nodes.SelectedItem;
-                                Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: true);
-                            }
-                        });
+                        if (layer.Type == LayerType.Curve)
+                        {
+                            Node node = layer.Nodes.SelectedItem;
+
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            this.Layerage.RefactoringParentsRender();
+                            Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: true);
+                        }
                     }
                     break;
                 case NodeCollectionMode.MoveSingleNodeRightControlPoint:
                     {
-                        //Selection
-                        this.SelectionViewModel.SetValue((layerage) =>
-                        {
-                            ILayer layer = layerage.Self;
+                        if (this.Layerage == null) break;
+                        ILayer layer = this.Layerage.Self;
 
-                            if (layer.Type == LayerType.Curve)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layerage.RefactoringParentsRender();
-                                Node node = layer.Nodes.SelectedItem;
-                                Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: false);
-                            }
-                        });
+                        if (layer.Type == LayerType.Curve)
+                        {
+                            Node node = layer.Nodes.SelectedItem;
+
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            this.Layerage.RefactoringParentsRender();
+                            Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: false);
+                        }
                     }
                     break;
                 case NodeCollectionMode.RectChoose:
@@ -218,23 +255,43 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            if (this.Layerage == null) return;
-
             if (isOutNodeDistance)
             {
                 switch (this.NodeCollectionMode)
                 {
                     case NodeCollectionMode.Move:
                         {
-                            Vector2 canvasMove = canvasPoint - canvasStartingPoint;
+                            if (this.Layerage == null) break;
 
+                            //Snap
+                            if (this.IsSnap)
+                            {
+                                canvasPoint = this.Snap.Snap(canvasPoint);
+                                this.Snap.Default();
+                            }
+                            Vector2 canvasMove = canvasPoint - canvasStartingPoint;
+                       
+                            //History
+                            LayersPropertyHistory history = new LayersPropertyHistory("Move nodes");
+                            
                             //Selection
                             this.SelectionViewModel.SetValue((layerage) =>
                             {
                                 ILayer layer = layerage.Self;
-                                
+
                                 if (layer.Type == LayerType.Curve)
                                 {
+                                    //History
+                                    var previous = layer.Nodes.NodesStartingClone().ToList();
+                                    history.UndoActions.Push(() =>
+                                    {
+                                        //Refactoring
+                                        layer.IsRefactoringTransformer = true;
+                                        layer.IsRefactoringRender = true;
+                                        layer.IsRefactoringIconRender = true;
+                                        layer.Nodes.NodesReplace(previous);
+                                    });
+
                                     //Refactoring
                                     layer.IsRefactoringTransformer = true;
                                     layer.IsRefactoringRender = true;
@@ -245,78 +302,144 @@ namespace Retouch_Photo2.Tools.Models
                                     layer.Nodes.TransformAddOnlySelected(canvasMove);
                                 }
                             });
+
+                            //History
+                            this.ViewModel.HistoryPush(history);
                         }
                         break;
                     case NodeCollectionMode.MoveSingleNodePoint:
                         {
-                            //Selection
-                            this.SelectionViewModel.SetValue((layerage) =>
-                            {
-                                ILayer layer = layerage.Self;
+                            if (this.Layerage == null) break;
+                            ILayer layer = this.Layerage.Self;
 
-                                if (layer.Type == LayerType.Curve)
+                            if (layer.Type == LayerType.Curve)
+                            {
+                                Node node = layer.Nodes.SelectedItem;
+
+                                //Snap
+                                if (this.IsSnap)
+                                {
+                                    canvasPoint = this.Snap.Snap(canvasPoint);
+                                    this.Snap.Default();
+                                }
+
+                                //History
+                                LayersPropertyHistory history = new LayersPropertyHistory("Move node");
+
+                                var previous = layer.Nodes.Index;
+                                var previous1 = node.Clone();
+                                history.UndoActions.Push(() =>
                                 {
                                     //Refactoring
                                     layer.IsRefactoringTransformer = true;
                                     layer.IsRefactoringRender = true;
                                     layer.IsRefactoringIconRender = true;
-                                    layerage.RefactoringParentsTransformer();
-                                    layerage.RefactoringParentsRender();
-                                    layerage.RefactoringParentsIconRender();
-                                    Node node = layer.Nodes.SelectedItem;
-                                    Node.Move(canvasPoint, node);
-                                }
-                            });
+                                    layer.Nodes[previous] = previous1;
+                                });
+
+                                //Refactoring
+                                layer.IsRefactoringTransformer = true;
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                this.Layerage.RefactoringParentsTransformer();
+                                this.Layerage.RefactoringParentsRender();
+                                this.Layerage.RefactoringParentsIconRender();
+                                Node.Move(canvasPoint, node);
+
+                                //History
+                                this.ViewModel.HistoryPush(history);
+                            }
                         }
                         break;
                     case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
                         {
-                            //Selection
-                            this.SelectionViewModel.SetValue((layerage) =>
-                            {
-                                ILayer layer = layerage.Self;
+                            if (this.Layerage == null) break;
+                            ILayer layer = this.Layerage.Self;
 
-                                if (layer.Type == LayerType.Curve)
+                            if (layer.Type == LayerType.Curve)
+                            {
+                                Node node = layer.Nodes.SelectedItem;
+
+                            //History
+                            LayersPropertyHistory history = new LayersPropertyHistory("Move node control point");
+
+                                var previous = layer.Nodes.Index;
+                                var previous1 = node.StartingLeftControlPoint;
+                                var previous2 = node.StartingRightControlPoint;
+                                history.UndoActions.Push(() =>
                                 {
+                                    Node node2 = layer.Nodes[previous];
+
                                     //Refactoring
                                     layer.IsRefactoringTransformer = true;
                                     layer.IsRefactoringRender = true;
                                     layer.IsRefactoringIconRender = true;
-                                    layerage.RefactoringParentsTransformer();
-                                    layerage.RefactoringParentsRender();
-                                    layerage.RefactoringParentsIconRender();
-                                    Node node = layer.Nodes.SelectedItem;
-                                    Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: true);
-                                }
-                            });
+                                    node2.LeftControlPoint = previous1;
+                                    node2.RightControlPoint = previous2;
+                                });
+
+                                //Refactoring
+                                layer.IsRefactoringTransformer = true;
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                this.Layerage.RefactoringParentsTransformer();
+                                this.Layerage.RefactoringParentsRender();
+                                this.Layerage.RefactoringParentsIconRender();
+                                Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: true);
+                            
+                            //History
+                            this.ViewModel.HistoryPush(history);
+                            }       
                         }
                         break;
                     case NodeCollectionMode.MoveSingleNodeRightControlPoint:
                         {
-                            //Selection
-                            this.SelectionViewModel.SetValue((layerage) =>
-                            {
-                                ILayer layer = layerage.Self;
+                            if (this.Layerage == null) break;
+                            ILayer layer = this.Layerage.Self;
 
-                                if (layer.Type == LayerType.Curve)
+                            if (layer.Type == LayerType.Curve)
+                            {
+                                Node node = layer.Nodes.SelectedItem;
+
+                                //History
+                                LayersPropertyHistory history = new LayersPropertyHistory("Move node control point");
+
+                                var previous = layer.Nodes.Index;
+                                var previous1 = node.StartingLeftControlPoint;
+                                var previous2 = node.StartingRightControlPoint;
+                                history.UndoActions.Push(() =>
                                 {
+                                    Node node2 = layer.Nodes[previous];
+
                                     //Refactoring
                                     layer.IsRefactoringTransformer = true;
                                     layer.IsRefactoringRender = true;
                                     layer.IsRefactoringIconRender = true;
-                                    layerage.RefactoringParentsTransformer();
-                                    layerage.RefactoringParentsRender();
-                                    layerage.RefactoringParentsIconRender();
-                                    Node node = layer.Nodes.SelectedItem;
-                                    Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: false);
-                                }
-                            });
+                                    node2.LeftControlPoint = previous1;
+                                    node2.RightControlPoint = previous2;
+                                });
+
+                                //Refactoring
+                                layer.IsRefactoringTransformer = true;
+                                layer.IsRefactoringRender = true;
+                                layer.IsRefactoringIconRender = true;
+                                this.Layerage.RefactoringParentsTransformer();
+                                this.Layerage.RefactoringParentsRender();
+                                this.Layerage.RefactoringParentsIconRender();
+                                Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: false);
+
+                            //History
+                            this.ViewModel.HistoryPush(history);
+                            }
                         }
                         break;
                     case NodeCollectionMode.RectChoose:
                         {
                             this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
-
+                            
+                            //History
+                            LayersPropertyHistory history = new LayersPropertyHistory("Set nodes is checked");
+                                                                                                          
                             //Selection
                             this.SelectionViewModel.SetValue((layerage) =>
                             {
@@ -325,8 +448,22 @@ namespace Retouch_Photo2.Tools.Models
                                 if (layer.Type == LayerType.Curve)
                                 {
                                     layer.Nodes.BoxChoose(this.TransformerRect);
+
+                                    //History
+                                    var previous = layer.Nodes.NodesStartingClone().ToList();
+                                    history.UndoActions.Push(() =>
+                                    {
+                                        //Refactoring
+                                        layer.IsRefactoringTransformer = true;
+                                        layer.IsRefactoringRender = true;
+                                        layer.IsRefactoringIconRender = true;
+                                        layer.Nodes.NodesReplace(previous);
+                                    });
                                 }
                             });
+
+                            //History
+                            this.ViewModel.HistoryPush(history);
                         }
                         break;
                 }
@@ -340,6 +477,9 @@ namespace Retouch_Photo2.Tools.Models
         public void Clicke(Vector2 point)
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+            
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory("Set nodes is checked");
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
@@ -348,9 +488,21 @@ namespace Retouch_Photo2.Tools.Models
 
                 if (layer.Type == LayerType.Curve)
                 {
+                    layer.Nodes.CacheTransform();
                     layer.Nodes.SelectionOnlyOne(point, matrix);
+
+                    //History
+                    var previous = layer.Nodes.NodesStartingClone().ToList();
+                    history.UndoActions.Push(() =>
+                    {
+                        //Refactoring
+                        layer.Nodes.NodesReplace(previous);
+                    });
                 }
             });
+
+            //History
+            this.ViewModel.HistoryPush(history);
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -388,6 +540,17 @@ namespace Retouch_Photo2.Tools.Models
 
             switch (this.NodeCollectionMode)
             {
+                case NodeCollectionMode.Move:
+                case NodeCollectionMode.MoveSingleNodePoint:
+                    {
+                        //Snapping
+                        if (this.IsSnap)
+                        {
+                            this.Snap.Draw(drawingSession, matrix);
+                            this.Snap.DrawNode2(drawingSession, matrix);
+                        }
+                    }
+                    break;
                 case NodeCollectionMode.RectChoose:
                     {
                         CanvasGeometry canvasGeometry = this.TransformerRect.ToRectangle(this.ViewModel.CanvasDevice);
@@ -396,13 +559,6 @@ namespace Retouch_Photo2.Tools.Models
                     }
                     break;
             }
-
-            //Snapping
-            //  if (this.IsSnap)
-            //   {
-            //       this.Snap.Draw(drawingSession, matrix);
-            //       this.Snap.DrawNode2(drawingSession, matrix);
-            //   }
         }
 
     }

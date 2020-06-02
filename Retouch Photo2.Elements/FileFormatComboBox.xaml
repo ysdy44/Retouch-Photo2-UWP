@@ -8,15 +8,6 @@
     d:DesignHeight="50"
     d:DesignWidth="200"
     >
-    <UserControl.Resources>
-        <!--Color-->
-        <Color x:Key="JpegColor">#7ADB8E</Color>
-        <Color x:Key="PngColor">#DF7BD3</Color>
-        <Color x:Key="BmpColor">#9F00FF</Color>
-        <Color x:Key="GifColor">#007CFF</Color>
-        <Color x:Key="TiffColor">#90C7C2</Color>
-    </UserControl.Resources>
-
 
 
     <Grid>

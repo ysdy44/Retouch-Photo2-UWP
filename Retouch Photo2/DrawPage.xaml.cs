@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Layers;
+﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -74,36 +75,55 @@ namespace Retouch_Photo2
             #region Document
 
 
-            async Task goBack()
-            {
-                await this.Exit();
-
-                this.SettingViewModel.IsFullScreen = true;
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
-                this.Frame.GoBack();
-            }
             this.HeadBarControl.DocumentButton.Click += async (s, e) =>
             {
+                this.LoadingControl.State = LoadingState.Saving;
+                this.LoadingControl.IsActive = true;
+
                 int countHistorys = this.ViewModel.Historys.Count;
                 int countLayerages = this.ViewModel.LayerageCollection.RootLayerages.Count;
 
                 if (countHistorys == 0 && countLayerages > 0)
                 {
                     this.ViewModel.IsUpdateThumbnailByName = false;
-                    await goBack();
+
+                    await this.Exit();
+                    this.SettingViewModel.IsFullScreen = true;
+                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+
+                    this.LoadingControl.State = LoadingState.None;
+                    this.LoadingControl.IsActive = false;
+                    this.Frame.GoBack();
                 }
                 else
                 {
                     await this.Save();
                     this.ViewModel.IsUpdateThumbnailByName = true;
-                    await goBack();
+
+                    await this.Exit();
+                    this.SettingViewModel.IsFullScreen = true;
+                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
+
+                    this.LoadingControl.State = LoadingState.None;
+                    this.LoadingControl.IsActive = false;
+                    this.Frame.GoBack();
                 }
             };
             this.HeadBarControl.DocumentUnSaveButton.Click += async (s, e) =>
             {
+                this.LoadingControl.State = LoadingState.Saving;
+                this.LoadingControl.IsActive = true;
+
                 this.HeadBarControl.DocumentFlyout.Hide();
                 this.ViewModel.IsUpdateThumbnailByName = false;
-                await goBack();
+
+                await this.Exit();
+                this.SettingViewModel.IsFullScreen = true;
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+
+                this.LoadingControl.State = LoadingState.None;
+                this.LoadingControl.IsActive = false;
+                this.Frame.GoBack();
             };
 
 
