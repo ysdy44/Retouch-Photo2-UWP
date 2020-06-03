@@ -132,7 +132,7 @@ namespace Retouch_Photo2.Layers
 
 
         public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator);
-        public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix);
+        public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix);
 
 
         public virtual bool FillContainsPoint(Layerage layerage, Vector2 point)

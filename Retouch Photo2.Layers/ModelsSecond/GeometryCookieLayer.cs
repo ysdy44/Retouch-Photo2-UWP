@@ -69,11 +69,11 @@ namespace Retouch_Photo2.Layers.Models
 
             return TransformerGeometry.CreateCookie(resourceCreator, transformer, this.InnerRadius, this.SweepAngle);
         }
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
         {
             Transformer transformer = base.Transform.Transformer;
 
-            return TransformerGeometry.CreateCookie(resourceCreator, transformer, canvasToVirtualMatrix, this.InnerRadius, this.SweepAngle);
+            return TransformerGeometry.CreateCookie(resourceCreator, transformer, matrix, this.InnerRadius, this.SweepAngle);
         }
 
 

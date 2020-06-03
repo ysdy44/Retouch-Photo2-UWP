@@ -63,11 +63,11 @@ namespace Retouch_Photo2.Layers.Models
 
             return TransformerGeometry.CreatePentagon(resourceCreator, transformer, this.Points);
         }
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
         {
             Transformer transformer = base.Transform.Transformer;
 
-            return TransformerGeometry.CreatePentagon(resourceCreator, transformer, canvasToVirtualMatrix, this.Points);
+            return TransformerGeometry.CreatePentagon(resourceCreator, transformer, matrix, this.Points);
         }
 
 

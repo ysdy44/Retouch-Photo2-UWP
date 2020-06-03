@@ -48,7 +48,6 @@ namespace Retouch_Photo2.Tools
             this.MethodViewModel.MethodTransformAddStarted();
             return true;
         }
-
         public bool Delta(Vector2 startingPoint, Vector2 point)
         {
             if (this.Mode == ListViewSelectionMode.None) return false;

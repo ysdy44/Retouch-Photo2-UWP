@@ -141,9 +141,6 @@
     <EmbeddedResource Include="Properties\Retouch_Photo2.ViewModels.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FanKit.Transformers">
-      <Version>1.4.1</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.7</Version>
     </PackageReference>

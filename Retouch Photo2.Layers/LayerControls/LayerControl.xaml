@@ -22,7 +22,7 @@
             <Setter Property="IsHitTestVisible" Value="False"/>
             <Setter Property="Visibility" Value="Collapsed"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="{StaticResource SystemAccentColor}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemAccentColor}"/>
             <Setter Property="Background">
                 <Setter.Value>
                     <SolidColorBrush Opacity="0.4" Color="{ThemeResource SystemAccentColor}"/>
@@ -73,7 +73,7 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SystemAccentColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>

@@ -17,9 +17,10 @@ namespace Retouch_Photo2.ViewModels
         {
             if (this.CanvasTransformer == bitmapSize) return;
             Vector2 scale = this.CanvasTransformer.GetScale(bitmapSize);
+            Matrix3x2 matrix = Matrix3x2.CreateScale(scale);
 
             //History
-            LayersSetupHistory history = new LayersSetupHistory("Set canvas size", this.CanvasTransformer);
+            LayersSetupTransformMultipliesHistory history = new LayersSetupTransformMultipliesHistory("Set canvas size", this.CanvasTransformer);
 
             //CanvasTransformer
             this.CanvasTransformer.BitmapSize = bitmapSize;
@@ -44,7 +45,7 @@ namespace Retouch_Photo2.ViewModels
                     //layerage.RefactoringParentsRender();
                     //layerage.RefactoringParentsIconRender();
                     layer.CacheTransform();
-                    layer.TransformMultiplies(Matrix3x2.CreateScale(scale));
+                    layer.TransformMultiplies(matrix);
                 });
             }
 
@@ -63,7 +64,7 @@ namespace Retouch_Photo2.ViewModels
             Vector2 previousVector = this.CanvasTransformer.GetIndicatorVector(indicatorMode);
 
             //History
-            LayersSetupHistory history = new LayersSetupHistory("Set canvas size", this.CanvasTransformer);
+            LayersSetupTransformAddHistory history = new LayersSetupTransformAddHistory("Set canvas size", this.CanvasTransformer);
 
             //CanvasTransformer
             this.CanvasTransformer.BitmapSize = bitmapSize;
@@ -81,7 +82,7 @@ namespace Retouch_Photo2.ViewModels
                     ILayer layer = layerage2.Self;
 
                     //History
-                    history.PushTransform(layer);
+                    history.PushTransform(layer, distance);
 
                     //Refactoring
                     layer.IsRefactoringTransformer = true;

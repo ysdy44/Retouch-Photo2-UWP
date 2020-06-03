@@ -45,11 +45,11 @@ namespace Retouch_Photo2.Layers.Models
 
             return transformer.ToRectangle(resourceCreator);
         }
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
         {
             Transformer transformer = base.Transform.Transformer;
 
-            return transformer.ToRectangle(resourceCreator, canvasToVirtualMatrix);
+            return transformer.ToRectangle(resourceCreator, matrix);
         }
 
 

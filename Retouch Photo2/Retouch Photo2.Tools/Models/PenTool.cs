@@ -72,12 +72,12 @@ namespace Retouch_Photo2.Tools.Models
             if (this._hasPreviewTempLeftPoint)
             {
                 this._hasPreviewTempLeftPoint = false;
-                this.CreateLayer(this.ViewModel.CanvasDevice, this._previewLeft, canvasPoint);
+                this.CreateLayer(this._previewLeft, canvasPoint);
             }
             else if (isOutNodeDistance)
             {
                 this._hasPreviewTempLeftPoint = false;
-                this.CreateLayer(this.ViewModel.CanvasDevice, canvasStartingPoint, canvasPoint);
+                this.CreateLayer(canvasStartingPoint, canvasPoint);
             }
             else
             {
@@ -108,13 +108,13 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
-        private void CreateLayer(CanvasDevice customDevice, Vector2 canvasStartingPoint, Vector2 canvasPoint)
+        private void CreateLayer(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             //Transformer
             Transformer transformer = new Transformer(canvasPoint, canvasStartingPoint);
 
             //Layer
-            CurveLayer curveLayer = new CurveLayer(customDevice, canvasStartingPoint, canvasPoint)
+            CurveLayer curveLayer = new CurveLayer(this.ViewModel.CanvasDevice, canvasStartingPoint, canvasPoint)
             {
                 IsSelected = true,
                 Transform = new Transform(transformer),

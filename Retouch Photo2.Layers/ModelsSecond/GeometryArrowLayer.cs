@@ -85,11 +85,11 @@ namespace Retouch_Photo2.Layers.Models
                 this.IsAbsolute, this.Width, this.Value,
                 this.LeftTail, this.RightTail);
         }
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
         {
             Transformer transformer = base.Transform.Transformer;
 
-            return TransformerGeometry.CreateArrow(resourceCreator, transformer, canvasToVirtualMatrix,
+            return TransformerGeometry.CreateArrow(resourceCreator, transformer, matrix,
                 this.IsAbsolute, this.Width, this.Value,
                 this.LeftTail, this.RightTail);
         }

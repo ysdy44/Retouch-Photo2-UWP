@@ -108,9 +108,9 @@ namespace Retouch_Photo2.Layers.Models
         {
             return base.Nodes.CreateGeometry(resourceCreator);
         }
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
         {
-            return base.Nodes.CreateGeometry(resourceCreator).Transform(canvasToVirtualMatrix);
+            return base.Nodes.CreateGeometry(resourceCreator).Transform(matrix);
         }
 
 

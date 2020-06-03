@@ -15,7 +15,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodTransformMultiplies(Matrix3x2 matrix)
         {
             //History
-            LayersTransformHistory history = new LayersTransformHistory("Transform");
+            LayersTransformMultipliesHistory history = new LayersTransformMultipliesHistory("Transform");
 
             //Selection 
             this.CacheTransformer();
@@ -78,7 +78,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodTransformMultipliesComplete(Transformer transformer)
         {
             //History
-            LayersTransformHistory history = new LayersTransformHistory("Transform");
+            LayersTransformMultipliesHistory history = new LayersTransformMultipliesHistory("Transform");
 
             //Selection
             this.Transformer = transformer;
@@ -111,7 +111,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodTransformAdd(Vector2 vector)
         {
             //History
-            LayersTransformHistory history = new LayersTransformHistory("Move");
+            LayersTransformAddHistory history = new LayersTransformAddHistory("Move");
 
             //Selection
             this.CacheTransformer();
@@ -121,7 +121,7 @@ namespace Retouch_Photo2.ViewModels
                 ILayer layer = layerage.Self;
 
                 //History
-                history.PushTransform(layer);
+                history.PushTransform(layer, vector);
 
                 //Refactoring
                 layer.IsRefactoringTransformer = true;
@@ -175,7 +175,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodTransformAddComplete(Vector2 vector)
         {
             //History
-            LayersTransformHistory history = new LayersTransformHistory("Move");
+            LayersTransformAddHistory history = new LayersTransformAddHistory("Move");
 
             //Selection
             Transformer transformer = Transformer.Add(this.StartingTransformer, vector);
@@ -185,7 +185,7 @@ namespace Retouch_Photo2.ViewModels
                 ILayer layer = layerage.Self;
                 
                 //History
-                history.PushStartingTransform(layer);
+                history.PushTransform(layer, vector);
 
                 //Refactoring
                 layer.IsRefactoringTransformer = true;

@@ -62,11 +62,11 @@ namespace Retouch_Photo2.Layers.Models
 
             return TransformerGeometry.CreateHeart(resourceCreator, transformer, this.Spread);
         }
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
         {
             Transformer transformer = base.Transform.Transformer;
 
-            return TransformerGeometry.CreateHeart(resourceCreator, transformer, canvasToVirtualMatrix, this.Spread);
+            return TransformerGeometry.CreateHeart(resourceCreator, transformer, matrix, this.Spread);
         }
 
 

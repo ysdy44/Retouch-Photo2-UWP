@@ -549,7 +549,7 @@
                         <Image Width="180" Height="180" Source="ms-appx:///Icons\AppRender.png"/>
 
                         <TextBlock HorizontalAlignment="Center" Style="{StaticResource AppTextBlockStyle}">
-                            2020-6-3
+                            2020-6-4
                         </TextBlock>
                         <Border Padding="12,0" Height="24" 
                                 HorizontalAlignment="Center" 
@@ -560,7 +560,7 @@
                                 CornerRadius="{StaticResource AppCornerRadius}"
                                 >
                             <TextBlock>                    
-                                1.0.0
+                                1.1.2
                             </TextBlock>
                         </Border>
 

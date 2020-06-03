@@ -354,7 +354,7 @@ namespace Retouch_Photo2.Menus.Models
         private void TransformAlign(float positionValue, BorderMode borderMode, Orientation orientation)
         {
             //History
-            LayersTransformHistory history = new LayersTransformHistory("Transform");
+            LayersTransformAddHistory history = new LayersTransformAddHistory("Transform");
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
@@ -373,7 +373,7 @@ namespace Retouch_Photo2.Menus.Models
                     ILayer layer = layerage2.Self;
 
                     //History
-                    history.PushTransform(layer);
+                    history.PushTransform(layer, vector);
 
                     //Refactoring
                     layer.IsRefactoringTransformer = true;
@@ -433,9 +433,9 @@ namespace Retouch_Photo2.Menus.Models
             float lengthSum = borders.Sum(border => border.Length);//Sum of Length
             float space = ((max - min) - lengthSum) / (count - 1);//Between [ previous.Max ] and [ current.Min ].
 
-            
+
             //History
-            LayersTransformHistory history = new LayersTransformHistory("Transform");
+            LayersTransformAddHistory history = new LayersTransformAddHistory("Transform");
             
 
             float postionMin = min;//[ previous.Min ] + [ previous.Length ] + space.
@@ -459,7 +459,7 @@ namespace Retouch_Photo2.Menus.Models
                     ILayer layer = layerage2.Self;
 
                     //History
-                    history.PushTransform(layer);
+                    history.PushTransform(layer, vector);
 
                     //Refactoring
                     layer.IsRefactoringRender = true;

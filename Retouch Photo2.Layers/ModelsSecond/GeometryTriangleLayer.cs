@@ -63,11 +63,11 @@ namespace Retouch_Photo2.Layers.Models
 
             return TransformerGeometry.CreateTriangle(resourceCreator, transformer, this.Center);
         }
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
         {
             Transformer transformer = base.Transform.Transformer;
 
-            return TransformerGeometry.CreateTriangle(resourceCreator, transformer, canvasToVirtualMatrix, this.Center);
+            return TransformerGeometry.CreateTriangle(resourceCreator, transformer, matrix, this.Center);
         }
 
 

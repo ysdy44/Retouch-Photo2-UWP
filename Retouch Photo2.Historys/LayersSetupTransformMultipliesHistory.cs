@@ -6,7 +6,7 @@ namespace Retouch_Photo2.Historys
     /// <summary>
     /// Represents a history used to change document serup.
     /// </summary>
-    public class LayersSetupHistory : LayersTransformHistory
+    public class LayersSetupTransformMultipliesHistory : LayersTransformMultipliesHistory
     {
 
         int Width = 1024;
@@ -17,11 +17,11 @@ namespace Retouch_Photo2.Historys
 
         //@Construct
         /// <summary>
-        /// Initializes a LayersSetupHistory.
+        /// Initializes a LayersSetupTransformMultipliesHistory.
         /// </summary>
         /// <param name="title"> The title. </param>  
         /// <param name="canvasTransformer"> The canvas-transformer. </param>  
-        public LayersSetupHistory(string title, CanvasTransformer canvasTransformer) : base(title)
+        public LayersSetupTransformMultipliesHistory(string title, CanvasTransformer canvasTransformer) : base(title)
         {
             this.Width = canvasTransformer.Width;
             this.Height = canvasTransformer.Height;

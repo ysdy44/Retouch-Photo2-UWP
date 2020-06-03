@@ -70,11 +70,11 @@ namespace Retouch_Photo2.Layers.Models
 
             return TransformerGeometry.CreateStar(resourceCreator, transformer, this.Points, this.InnerRadius);
         }
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 canvasToVirtualMatrix)
+        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
         {
             Transformer transformer = base.Transform.Transformer;
 
-            return TransformerGeometry.CreateStar(resourceCreator, transformer, canvasToVirtualMatrix, this.Points, this.InnerRadius);
+            return TransformerGeometry.CreateStar(resourceCreator, transformer, matrix, this.Points, this.InnerRadius);
         }
 
 
