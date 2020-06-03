@@ -1,36 +1,29 @@
 ﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.UI.Xaml;
 using Retouch_Photo2.ViewModels;
-using Windows.Foundation;
+using System.Numerics;
+using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Controls
 {
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "MainCanvasControl" />. 
-    /// </summary>
-    public partial class MainCanvasControl : UserControl
+    public sealed partial class MainCanvasControl : UserControl
     {
-        private ICanvasResourceCreatorWithDpi CanvasResourceCreatorWithDpi { get; set; }
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
+
+        bool _isSingleStarted;
+        Vector2 _singleStartingPoint;
+        InputDevice _inputDevice = InputDevice.None;
+
 
         //@Construct
         public MainCanvasControl()
         {
-            CanvasControl canvasControl = new CanvasControl
-            {
-                CustomDevice = this.ViewModel.CanvasDevice,
-                UseSharedDevice = true,
-            };
-            CanvasOperator canvasOperator = new CanvasOperator
-            {
-                DestinationControl = canvasControl
-            };
-
-            this.Content = canvasControl;
-            this.CanvasResourceCreatorWithDpi = canvasControl;
-
-            canvasControl.SizeChanged += (s, e) =>
+            this.InitializeComponent();
+            this.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
                 this.ViewModel.CanvasTransformer.Size = e.NewSize;
@@ -41,14 +34,15 @@ namespace Retouch_Photo2.Controls
                 switch (mode)
                 {
                     case InvalidateMode.Thumbnail:
-                        canvasControl.DpiScale = 0.4f;
+                        this.CanvasControl.DpiScale = 0.4f;
                         break;
                     case InvalidateMode.HD:
-                        canvasControl.DpiScale = 1.0f;
+                        this.CanvasControl.DpiScale = 1.0f;
                         break;
                 }
 
-                canvasControl.Invalidate();//Invalidate
+                this.CanvasControl.Invalidate();
+                this.ToolCanvasControl.Invalidate();
             };
 
 
@@ -56,11 +50,22 @@ namespace Retouch_Photo2.Controls
 
 
             //Draw
-            canvasControl.Draw += (sender, args) =>
+            this.CanvasControl.UseSharedDevice = true;
+            this.CanvasControl.CustomDevice = this.ViewModel.CanvasDevice;
+
+            this.CanvasControl.Draw += (sender, args) =>
             {
                 //Render & Crad
                 this._drawRenderAndCrad(args.DrawingSession);
+            };
 
+
+            //Draw
+            this.ToolCanvasControl.UseSharedDevice = true;
+            this.ToolCanvasControl.CustomDevice = this.ViewModel.CanvasDevice;
+
+            this.ToolCanvasControl.Draw += (sender, args) =>
+            { 
                 switch (this._inputDevice)
                 {
                     case InputDevice.None:
@@ -68,14 +73,14 @@ namespace Retouch_Photo2.Controls
                         {
                             //Tool & Bound
                             this._drawToolAndBound(sender, args.DrawingSession);
-
-                            //Ruler
-                            if (this.SettingViewModel.IsRuler)
-                            {
-                                args.DrawingSession.DrawRuler(this.ViewModel.CanvasTransformer);
-                            }
                         }
                         break;
+                }
+
+                //Ruler
+                if (this.SettingViewModel.IsRuler)
+                {
+                    args.DrawingSession.DrawRuler(this.ViewModel.CanvasTransformer);
                 }
             };
 
@@ -85,6 +90,11 @@ namespace Retouch_Photo2.Controls
 
             #region CanvasOperator
 
+
+            CanvasOperator canvasOperator = new CanvasOperator
+            {
+                DestinationControl = this.ToolCanvasControl
+            };
 
             //Single
             canvasOperator.Single_Start += (point) =>
@@ -120,7 +130,7 @@ namespace Retouch_Photo2.Controls
             {
                 this._inputDevice = InputDevice.None;
 
-                if (this._isSingleStarted==false)
+                if (this._isSingleStarted == false)
                 {
                     //Tool
                     this.TipViewModel.Tool.Clicke(this._singleStartingPoint);//Complete
@@ -207,6 +217,5 @@ namespace Retouch_Photo2.Controls
             #endregion
 
         }
-
     }
 }

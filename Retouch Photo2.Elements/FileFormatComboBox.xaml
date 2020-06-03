@@ -54,10 +54,18 @@
                     </VisualState.Setters>
                 </VisualState>
 
+                <!--JpegXR-->
+                <VisualState x:Name="JpegXR">
+                    <VisualState.Setters>
+                        <Setter Target = "JpegXRButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState> 
+
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -87,9 +95,16 @@
         </Button>
 
         <!--Tiff-->
-        <Button x:Name="TiffButton" Grid.Column="4" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+        <Button x:Name="TiffButton" Grid.Column="4" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
             TIFF
         </Button>
+
+        <!--JpegXR-->
+        <Button x:Name="JpegXRButton" Grid.Column="5" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+            JPEG XR
+        </Button>
+        
+        
 
     </Grid>
 

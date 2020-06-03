@@ -3,11 +3,8 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools.Elements;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
-using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
@@ -16,7 +13,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
-
     /// <summary>
     /// <see cref="ITool"/>'s NodeTool.
     /// </summary>
@@ -57,89 +53,34 @@ namespace Retouch_Photo2.Tools.Models
         public void Started(Vector2 startingPoint, Vector2 point)
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-
+            
             this.Layerage = this.GetNodeCollectionLayer(startingPoint, matrix);
+            if (this.Layerage == null)
+            {
+                Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
+                Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+                Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
+
+                this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
+                this.NodeCollectionMode = NodeCollectionMode.RectChoose;
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                return;
+            }
 
             switch (this.NodeCollectionMode)
             {
-                case NodeCollectionMode.None:
-                    break;
                 case NodeCollectionMode.Move:
-                    {
-                        if (this.Layerage == null) break;
-
-                        //Selection
-                        this.SelectionViewModel.SetValue((layerage) =>
-                        {
-                            ILayer layer = layerage.Self;
-
-                            if (layer.Type == LayerType.Curve)
-                            {
-                                layer.Nodes.CacheTransformOnlySelected();
-                            }
-                        });
-
-                        {
-                            //Selection
-                            ILayer layer = this.Layerage.Self;
-
-                            if (layer.Type == LayerType.Curve)
-                            {
-                                //Snap
-                                if (this.IsSnap) this.ViewModel.VectorVectorSnapInitiate(layer.Nodes);
-                            }
-                        }
-                    }
+                    this.MoveStarted();
                     break;
                 case NodeCollectionMode.MoveSingleNodePoint:
-                    {
-                        if (this.Layerage == null) break;
-
-                        //Selection
-                        ILayer layer = this.Layerage.Self;
-
-                        if (layer.Type == LayerType.Curve)
-                        {
-                            layer.Nodes.SelectionOnlyOne(startingPoint, matrix);
-
-                            //Snap
-                            if (this.IsSnap) this.ViewModel.VectorVectorSnapInitiate(layer.Nodes);
-                        }
-                    }
+                    this.MoveSingleNodePointStarted(startingPoint, matrix);
                     break;
                 case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
                 case NodeCollectionMode.MoveSingleNodeRightControlPoint:
-                    {
-                        if (this.Layerage == null) break;
-
-                        //Selection
-                        ILayer layer = this.Layerage.Self;
-
-                        if (layer.Type == LayerType.Curve)
-                        {
-                            layer.Nodes.SelectedItem.CacheTransform();
-                        }
-                    }
+                    this.MoveSingleNodeControlPointStarted();
                     break;
                 case NodeCollectionMode.RectChoose:
-                    {
-                        Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-                        Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
-                        Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
-
-                        this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
-
-                        //Selection
-                        this.SelectionViewModel.SetValue((layerage) =>
-                        {
-                            ILayer layer = layerage.Self;
-
-                            if (layer.Type == LayerType.Curve)
-                            {
-                                layer.Nodes.CacheTransform();
-                            }
-                        });
-                    }
+                    this.RectChooseStarted(startingPoint, point);
                     break;
             }
 
@@ -151,99 +92,29 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
+            if (this.Layerage == null)
+            {
+                this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
+                this.ViewModel.Invalidate();//Invalidate
+                return;
+            }
+
             switch (this.NodeCollectionMode)
             {
-                case NodeCollectionMode.None:
-                    break;
                 case NodeCollectionMode.Move:
-                    {
-                        if (this.Layerage == null) break;
-
-                        //Snap
-                        if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
-                        Vector2 canvasMove = canvasPoint - canvasStartingPoint;
-
-                        //Selection
-                        this.SelectionViewModel.SetValue((layerage) =>
-                        {
-                            ILayer layer = layerage.Self;
-
-                            if (layer.Type == LayerType.Curve)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layerage.RefactoringParentsRender();
-                                layer.Nodes.TransformAddOnlySelected(canvasMove);
-                            }
-                        });
-                    }
+                    this.MoveDelta(canvasStartingPoint, canvasPoint);
                     break;
                 case NodeCollectionMode.MoveSingleNodePoint:
-                    {
-                        if (this.Layerage == null) break;
-                        ILayer layer = this.Layerage.Self;
-
-                        if (layer.Type == LayerType.Curve)
-                        {
-                            Node node = layer.Nodes.SelectedItem;
-
-                            //Snap
-                            if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
-
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            this.Layerage.RefactoringParentsRender();
-                            Node.Move(canvasPoint, node);
-                        }
-                    }
+                    this.MoveSingleNodePointDelta(canvasPoint);
                     break;
                 case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
-                    {
-                        if (this.Layerage == null) break;
-                        ILayer layer = this.Layerage.Self;
-
-                        if (layer.Type == LayerType.Curve)
-                        {
-                            Node node = layer.Nodes.SelectedItem;
-
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            this.Layerage.RefactoringParentsRender();
-                            Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: true);
-                        }
-                    }
+                    this.MoveSingleNodeControlPointDelta(canvasPoint, isLeftControlPoint: true);
                     break;
                 case NodeCollectionMode.MoveSingleNodeRightControlPoint:
-                    {
-                        if (this.Layerage == null) break;
-                        ILayer layer = this.Layerage.Self;
-
-                        if (layer.Type == LayerType.Curve)
-                        {
-                            Node node = layer.Nodes.SelectedItem;
-
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            this.Layerage.RefactoringParentsRender();
-                            Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: false);
-                        }
-                    }
+                    this.MoveSingleNodeControlPointDelta(canvasPoint, isLeftControlPoint: false);
                     break;
                 case NodeCollectionMode.RectChoose:
-                    {
-                        this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
-
-                        //Selection
-                        this.SelectionViewModel.SetValue((layerage) =>
-                        {
-                            ILayer layer = layerage.Self;
-
-                            if (layer.Type == LayerType.Curve)
-                            {
-                                layer.Nodes.BoxChoose(this.TransformerRect);
-                            }
-                        });
-                    }
+                    this.RectChooseDelta(canvasStartingPoint, canvasPoint);
                     break;
             }
 
@@ -255,225 +126,41 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
+            if (this.Layerage == null)
+            {
+                this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
+                this.NodeCollectionMode = NodeCollectionMode.None;
+                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                return;
+            }
+
             if (isOutNodeDistance)
             {
                 switch (this.NodeCollectionMode)
                 {
                     case NodeCollectionMode.Move:
-                        {
-                            if (this.Layerage == null) break;
-
-                            //Snap
-                            if (this.IsSnap)
-                            {
-                                canvasPoint = this.Snap.Snap(canvasPoint);
-                                this.Snap.Default();
-                            }
-                            Vector2 canvasMove = canvasPoint - canvasStartingPoint;
-                       
-                            //History
-                            LayersPropertyHistory history = new LayersPropertyHistory("Move nodes");
-                            
-                            //Selection
-                            this.SelectionViewModel.SetValue((layerage) =>
-                            {
-                                ILayer layer = layerage.Self;
-
-                                if (layer.Type == LayerType.Curve)
-                                {
-                                    //History
-                                    var previous = layer.Nodes.NodesStartingClone().ToList();
-                                    history.UndoActions.Push(() =>
-                                    {
-                                        //Refactoring
-                                        layer.IsRefactoringTransformer = true;
-                                        layer.IsRefactoringRender = true;
-                                        layer.IsRefactoringIconRender = true;
-                                        layer.Nodes.NodesReplace(previous);
-                                    });
-
-                                    //Refactoring
-                                    layer.IsRefactoringTransformer = true;
-                                    layer.IsRefactoringRender = true;
-                                    layer.IsRefactoringIconRender = true;
-                                    layerage.RefactoringParentsTransformer();
-                                    layerage.RefactoringParentsRender();
-                                    layerage.RefactoringParentsIconRender();
-                                    layer.Nodes.TransformAddOnlySelected(canvasMove);
-                                }
-                            });
-
-                            //History
-                            this.ViewModel.HistoryPush(history);
-                        }
+                        this.MoveComplete(canvasStartingPoint, canvasPoint);
                         break;
                     case NodeCollectionMode.MoveSingleNodePoint:
-                        {
-                            if (this.Layerage == null) break;
-                            ILayer layer = this.Layerage.Self;
-
-                            if (layer.Type == LayerType.Curve)
-                            {
-                                Node node = layer.Nodes.SelectedItem;
-
-                                //Snap
-                                if (this.IsSnap)
-                                {
-                                    canvasPoint = this.Snap.Snap(canvasPoint);
-                                    this.Snap.Default();
-                                }
-
-                                //History
-                                LayersPropertyHistory history = new LayersPropertyHistory("Move node");
-
-                                var previous = layer.Nodes.Index;
-                                var previous1 = node.Clone();
-                                history.UndoActions.Push(() =>
-                                {
-                                    //Refactoring
-                                    layer.IsRefactoringTransformer = true;
-                                    layer.IsRefactoringRender = true;
-                                    layer.IsRefactoringIconRender = true;
-                                    layer.Nodes[previous] = previous1;
-                                });
-
-                                //Refactoring
-                                layer.IsRefactoringTransformer = true;
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                this.Layerage.RefactoringParentsTransformer();
-                                this.Layerage.RefactoringParentsRender();
-                                this.Layerage.RefactoringParentsIconRender();
-                                Node.Move(canvasPoint, node);
-
-                                //History
-                                this.ViewModel.HistoryPush(history);
-                            }
-                        }
+                        this.MoveSingleNodePointComplete(canvasPoint);
                         break;
                     case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
-                        {
-                            if (this.Layerage == null) break;
-                            ILayer layer = this.Layerage.Self;
-
-                            if (layer.Type == LayerType.Curve)
-                            {
-                                Node node = layer.Nodes.SelectedItem;
-
-                            //History
-                            LayersPropertyHistory history = new LayersPropertyHistory("Move node control point");
-
-                                var previous = layer.Nodes.Index;
-                                var previous1 = node.StartingLeftControlPoint;
-                                var previous2 = node.StartingRightControlPoint;
-                                history.UndoActions.Push(() =>
-                                {
-                                    Node node2 = layer.Nodes[previous];
-
-                                    //Refactoring
-                                    layer.IsRefactoringTransformer = true;
-                                    layer.IsRefactoringRender = true;
-                                    layer.IsRefactoringIconRender = true;
-                                    node2.LeftControlPoint = previous1;
-                                    node2.RightControlPoint = previous2;
-                                });
-
-                                //Refactoring
-                                layer.IsRefactoringTransformer = true;
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                this.Layerage.RefactoringParentsTransformer();
-                                this.Layerage.RefactoringParentsRender();
-                                this.Layerage.RefactoringParentsIconRender();
-                                Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: true);
-                            
-                            //History
-                            this.ViewModel.HistoryPush(history);
-                            }       
-                        }
+                        this.MoveSingleNodeControlPointComplete(canvasPoint, isLeftControlPoint: true);
                         break;
                     case NodeCollectionMode.MoveSingleNodeRightControlPoint:
-                        {
-                            if (this.Layerage == null) break;
-                            ILayer layer = this.Layerage.Self;
-
-                            if (layer.Type == LayerType.Curve)
-                            {
-                                Node node = layer.Nodes.SelectedItem;
-
-                                //History
-                                LayersPropertyHistory history = new LayersPropertyHistory("Move node control point");
-
-                                var previous = layer.Nodes.Index;
-                                var previous1 = node.StartingLeftControlPoint;
-                                var previous2 = node.StartingRightControlPoint;
-                                history.UndoActions.Push(() =>
-                                {
-                                    Node node2 = layer.Nodes[previous];
-
-                                    //Refactoring
-                                    layer.IsRefactoringTransformer = true;
-                                    layer.IsRefactoringRender = true;
-                                    layer.IsRefactoringIconRender = true;
-                                    node2.LeftControlPoint = previous1;
-                                    node2.RightControlPoint = previous2;
-                                });
-
-                                //Refactoring
-                                layer.IsRefactoringTransformer = true;
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                this.Layerage.RefactoringParentsTransformer();
-                                this.Layerage.RefactoringParentsRender();
-                                this.Layerage.RefactoringParentsIconRender();
-                                Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint: false);
-
-                            //History
-                            this.ViewModel.HistoryPush(history);
-                            }
-                        }
+                        this.MoveSingleNodeControlPointComplete(canvasPoint, isLeftControlPoint: false);
                         break;
                     case NodeCollectionMode.RectChoose:
-                        {
-                            this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
-                            
-                            //History
-                            LayersPropertyHistory history = new LayersPropertyHistory("Set nodes is checked");
-                                                                                                          
-                            //Selection
-                            this.SelectionViewModel.SetValue((layerage) =>
-                            {
-                                ILayer layer = layerage.Self;
-
-                                if (layer.Type == LayerType.Curve)
-                                {
-                                    layer.Nodes.BoxChoose(this.TransformerRect);
-
-                                    //History
-                                    var previous = layer.Nodes.NodesStartingClone().ToList();
-                                    history.UndoActions.Push(() =>
-                                    {
-                                        //Refactoring
-                                        layer.IsRefactoringTransformer = true;
-                                        layer.IsRefactoringRender = true;
-                                        layer.IsRefactoringIconRender = true;
-                                        layer.Nodes.NodesReplace(previous);
-                                    });
-                                }
-                            });
-
-                            //History
-                            this.ViewModel.HistoryPush(history);
-                        }
+                        this.RectChooseComplete(canvasStartingPoint, canvasPoint);
                         break;
                 }
             }
-
 
             this.NodeCollectionMode = NodeCollectionMode.None;
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
+
         public void Clicke(Vector2 point)
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();

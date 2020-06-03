@@ -71,30 +71,17 @@ namespace Retouch_Photo2.Layers.Models
 
                     using (drawingSession.CreateLayer(1, geometryCrop))
                     {
-                        this._render(resourceCreator, drawingSession, children);
+                        ICanvasImage childImage = LayerBase.Render(resourceCreator, children);
+                        drawingSession.DrawImage(childImage);
                     }
                 }
                 else
                 {
-                    this._render(resourceCreator, drawingSession, children);
+                    ICanvasImage childImage = LayerBase.Render(resourceCreator, children);
+                    drawingSession.DrawImage(childImage);
                 }
             }
             return command;
-        }
-        private void _render(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, IList<Layerage> children)
-        {
-            for (int i = children.Count - 1; i >= 0; i--)
-            {
-                Layerage child = children[i];
-                ILayer child2 = child.Self;
-
-                if (child2.Visibility == Visibility.Collapsed) continue;
-                if (child2.Opacity == 0) continue;
-
-                //GetRender
-                ICanvasImage currentImage = child2.GetActualRender(resourceCreator, child.Children);
-                drawingSession.DrawImage(currentImage);
-            }
         }
 
 

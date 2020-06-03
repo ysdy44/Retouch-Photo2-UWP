@@ -23,6 +23,7 @@ namespace Retouch_Photo2.Elements
                     case CanvasBitmapFileFormat.Bmp: return this.Bmp;
                     case CanvasBitmapFileFormat.Gif: return this.Gif;
                     case CanvasBitmapFileFormat.Tiff: return this.Tiff;
+                    case CanvasBitmapFileFormat.JpegXR: return this.JpegXR;
                     default: return this.Normal;
                 }
             }
@@ -64,8 +65,9 @@ namespace Retouch_Photo2.Elements
             this.BmpButton.Click += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Bmp;
             this.GifButton.Click += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Gif;
             this.TiffButton.Click += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Tiff;
+            this.JpegXRButton.Click += (s, e) => this.FileFormat = CanvasBitmapFileFormat.JpegXR;
         }
-        
+
 
         /// <summary> File Choices. </summary>
         public string FileChoices
@@ -79,7 +81,26 @@ namespace Retouch_Photo2.Elements
                     case CanvasBitmapFileFormat.Bmp: return ".Bmp";
                     case CanvasBitmapFileFormat.Gif: return ".Gif";
                     case CanvasBitmapFileFormat.Tiff: return ".Tiff";
+                    case CanvasBitmapFileFormat.JpegXR: return ".JpegXR";
                     default: return ".Jpeg";
+                }
+            }
+        }
+
+        /// <summary> Clears to the white color. </summary>
+        public bool IsClearWhite
+        {
+            get
+            {
+                switch (this.FileFormat)
+                {
+                    case CanvasBitmapFileFormat.Jpeg: return true;
+                    case CanvasBitmapFileFormat.Png: return false;
+                    case CanvasBitmapFileFormat.Bmp: return false;
+                    case CanvasBitmapFileFormat.Gif: return false;
+                    case CanvasBitmapFileFormat.Tiff: return false;
+                    case CanvasBitmapFileFormat.JpegXR: return true;
+                    default: return true;
                 }
             }
         }

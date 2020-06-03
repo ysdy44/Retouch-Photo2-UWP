@@ -32,7 +32,8 @@ namespace Retouch_Photo2
             //Render
             BitmapSize size = this.ExportSizePicker.Size;
             int dpi = (int)this.DPIComboBox.DPI;
-            CanvasRenderTarget renderTarget = this._exportRender(size, dpi);
+            bool isClearWhite = this.FileFormatComboBox.IsClearWhite;
+            CanvasRenderTarget renderTarget = this.MainCanvasControl.Render(size, dpi, isClearWhite);
 
             //Export
             return await FileUtil.SaveCanvasBitmapFile
@@ -45,44 +46,6 @@ namespace Retouch_Photo2
                 fileFormat: this.FileFormatComboBox.FileFormat,
                 quality: this.ExportQualityPicker.Value
             );
-        }
-        private CanvasRenderTarget _exportRender(BitmapSize size, float dpi)
-        {
-            ICanvasImage previousImage = this.MainCanvasControl.Render();
-
-            int canvasWidth = this.ViewModel.CanvasTransformer.Width;
-            int canvasHeight = this.ViewModel.CanvasTransformer.Height;
-
-            int fileWidth = (int)size.Width;
-            int fileHeight = (int)size.Height;
-            CanvasRenderTarget renderTarget = new CanvasRenderTarget(this.ViewModel.CanvasDevice, fileWidth, fileHeight, dpi);
-
-            if (canvasWidth == fileWidth && canvasHeight == fileHeight)
-            {
-                using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
-                {
-                    drawingSession.DrawImage(previousImage);
-                }
-                return renderTarget;
-            }
-            else
-            {
-                float scaleX = (float)fileWidth / (float)canvasWidth;
-                float scaleY = (float)fileHeight / (float)canvasHeight;
-                Matrix3x2 matrix = Matrix3x2.CreateScale(scaleX, scaleY);
-
-                ICanvasImage canvasImage = new Transform2DEffect
-                {
-                    TransformMatrix = matrix,
-                    Source = previousImage
-                };
-
-                using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
-                {
-                    drawingSession.DrawImage(canvasImage);
-                }
-                return renderTarget;
-            }
         }
 
 
@@ -108,7 +71,7 @@ namespace Retouch_Photo2
             await Retouch_Photo2.XML.SaveProjectFile(zipFolder, project);
 
             //Save thumbnail file.
-            CanvasRenderTarget thumbnail = this.MainCanvasControl.RenderThumbnail(this.ViewModel.CanvasDevice, width, height);
+            CanvasRenderTarget thumbnail = this.MainCanvasControl.Render(width, height);
             await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
             
             //Save layers file.

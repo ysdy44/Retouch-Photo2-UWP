@@ -100,26 +100,15 @@ namespace Retouch_Photo2.Layers
                 drawingSession.FillGeometry(geometry, canvasBrush);
             }
 
-
             //CanvasActiveLayer
             if (children.Count != 0)
             {
                 using (drawingSession.CreateLayer(1, geometry))
                 {
-                    for (int i = children.Count - 1; i >= 0; i--)
-                    {
-                        Layerage layerage = children[i];
-                        ILayer layer = layerage.Self;
-                    
-                        if (layer.Visibility == Visibility.Collapsed) continue;
-                        if (layer.Opacity == 0) continue;
-
-                        ICanvasImage childImage = layer.GetActualRender(resourceCreator, layerage.Children);
-                        drawingSession.DrawImage(childImage);
-                    }
+                    ICanvasImage childImage = LayerBase.Render(resourceCreator, children);
+                    drawingSession.DrawImage(childImage);
                 }
             }
-
 
             //Stroke
             // Draw a geometry with style.
@@ -155,62 +144,63 @@ namespace Retouch_Photo2.Layers
             return transformer.FillContainsPoint(point);
         }
 
-
-
+                     
         //@Static
         /// <summary>
-        /// Render images and layers together.
+        /// Render layers.
         /// </summary>  
         /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="currentLayer"> The current layer. </param>
-        /// <param name="previousImage"> Previous rendered images. </param>
-        /// <param name="canvasToVirtualMatrix"> The canvas-to-virtual matrix. </param>
         /// <param name="children"> The children layerage. </param>
-        /// <returns> The rendered layer. </returns>
-        public static ICanvasImage Render(ICanvasResourceCreator resourceCreator, ILayer currentLayer, ICanvasImage previousImage,  IList<Layerage> children)
+        /// <returns> The render image. </returns>
+        public static ICanvasImage Render(ICanvasResourceCreator resourceCreator, IList<Layerage> layerages)
         {
-            if (currentLayer.Visibility == Visibility.Collapsed) return previousImage;
-            if (currentLayer.Opacity == 0) return previousImage;
+            ICanvasImage previousImage = null;
 
-            //Layer
-            ICanvasImage currentImage = currentLayer.GetActualRender(resourceCreator, children);
-
-            //Effect
-            //currentImage = Effect.Render(currentLayer.Effect, currentImage);
-
-            //Adjustment
-            //currentImage = Filter.Render(currentLayer.Filter, currentImage);
-
-            //Opacity
-            //if (currentLayer.Opacity < 1.0)
-            //{
-            //    currentImage = new OpacityEffect
-            //    {
-            //       Opacity = currentLayer.Opacity,
-            //       Source = currentImage
-            //     };
-            //}
-
-            //Blend
-            if (currentLayer.BlendMode is BlendEffectMode blendMode)
+            for (int i = layerages.Count - 1; i >= 0; i--)
             {
-                return new BlendEffect
+                Layerage currentLayerage = layerages[i];
+                ILayer currentLayer = currentLayerage.Self;
+
+                if (currentLayer.Visibility == Visibility.Collapsed) continue;
+                if (currentLayer.Opacity == 0) continue;
+
+
+                //Layer
+                ICanvasImage currentImage = currentLayer.GetActualRender(resourceCreator, currentLayerage.Children);
+                if (currentImage == null) continue;
+                if (previousImage == null)
                 {
-                    Background = currentImage,
-                    Foreground = previousImage,
-                    Mode = blendMode
+                    previousImage = currentImage;
+                    continue;
+                }
+
+
+                //Blend
+                if (currentLayer.BlendMode is BlendEffectMode blendMode)
+                {
+                    previousImage = new BlendEffect
+                    {
+                        Background = currentImage,
+                        Foreground = previousImage,
+                        Mode = blendMode
+                    };
+                    continue;
+                }
+
+                //Composite
+                previousImage = new CompositeEffect
+                {
+                    Sources =
+                    {
+                        previousImage,
+                        currentImage,
+                    }
                 };
+                continue;
             }
 
-            return new CompositeEffect
-            {
-                Sources =
-                {
-                    previousImage,
-                    currentImage,
-                }
-            };
+            return previousImage;
         }
-        
+
     }
 }

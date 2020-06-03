@@ -5,9 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"  
-    xmlns:elements="using:Retouch_Photo2.Elements"   
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     Background="{ThemeResource AppBackground}"
     NavigationCacheMode="Required"    
@@ -81,7 +80,7 @@
 
 
         <!--Body-->
-        <ScrollViewer x:Name="ScrollViewer" Grid.RowSpan="2">
+        <ScrollViewer x:Name="ScrollViewer" Grid.RowSpan="3">
             <GridView x:Name="GridView" IsItemClickEnabled="True" ReorderMode="Disabled" SelectionMode="Single">
 
                 <GridView.ItemTemplate>
@@ -91,9 +90,7 @@
                 </GridView.ItemTemplate>
 
                 <GridView.Header>
-                    <Border Height="50">
-                        <CheckBox x:Name="_SelectCheckBox" HorizontalAlignment="Center" />
-                    </Border>
+                    <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseHeader}"/>
                 </GridView.Header>
 
                 <GridView.ItemContainerTransitions>
@@ -105,6 +102,10 @@
                     </TransitionCollection>
                 </GridView.ItemContainerTransitions>
 
+                <GridView.Footer>
+                    <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseFooter}"/>
+                </GridView.Footer>
+                
             </GridView>
         </ScrollViewer>
 

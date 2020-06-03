@@ -147,7 +147,6 @@
   <data name="Key_MoveDown" xml:space="preserve">
     <value>画布向下移动</value>
   </data>
-  
   <data name="Key_EditCut" xml:space="preserve">
     <value>剪切</value>
   </data>
@@ -184,8 +183,6 @@
   <data name="Key_EditUndo" xml:space="preserve">
     <value>撤销</value>
   </data>
-
-
   <data name="Local" xml:space="preserve">
     <value>本地文件夹</value>
   </data>
@@ -238,6 +235,6 @@
     <value>图层高度</value>
   </data>
   <data name="LayersHeightTip" xml:space="preserve">
-    <value>单击以更改图层控制高度</value>
+    <value>单击以更改图层控件高度</value>
   </data>
 </root>

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Retouch_Photo2</RootNamespace>
     <AssemblyName>Retouch Photo2</AssemblyName>
-    <DefaultLanguage>zh-CN</DefaultLanguage>
+    <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
@@ -17,7 +17,14 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
-    <PackageCertificateKeyFile>Retouch Photo_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Retouch Photo2_StoreKey.pfx</PackageCertificateKeyFile>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>34934B82045685586293EDD9EF0C5651AE94AE62</PackageCertificateThumbprint>
+    <AppInstallerUpdateFrequency>1</AppInstallerUpdateFrequency>
+    <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -103,8 +110,10 @@
     <Compile Include="Controls\LayersControl.xaml.cs">
       <DependentUpon>LayersControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MainCanvasControl.Construct.cs" />
-    <Compile Include="Controls\MainCanvasControl.cs" />
+    <Compile Include="Controls\MainCanvasControl.Render.cs" />
+    <Compile Include="Controls\MainCanvasControl.xaml.cs">
+      <DependentUpon>MainCanvasControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MenusExpanderCanvas.cs" />
     <Compile Include="Controls\ToolsControl.xaml.cs">
       <DependentUpon>ToolsControl.xaml</DependentUpon>
@@ -189,6 +198,7 @@
     <Compile Include="Retouch Photo2.Tools\Models\NodeTool.Construct.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.Construct.cs" />
     <Compile Include="Retouch Photo2.Tools\MoveTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\NodeTool.Method.cs" />
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
     <Compile Include="SettingPage.Construct.cs" />
     <Compile Include="XMLs\XML.Bitmap.cs" />
@@ -253,7 +263,7 @@
     <Compile Include="Retouch Photo2.Tools\TextTool.xaml.cs">
       <DependentUpon>TextTool.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Models\MoreTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsOthers\MoreTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\ViewRadianConverter.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\ViewScaleConverter.cs" />
     <Compile Include="Retouch Photo2.Tools\ToolButtons\ToolButton.xaml.cs">
@@ -331,7 +341,7 @@
       <DependentUpon>TransparencyTool.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\CreateTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\NoneTool.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsOthers\NoneTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\BrushTool.xaml.cs">
       <DependentUpon>BrushTool.xaml</DependentUpon>
     </Compile>
@@ -352,6 +362,7 @@
     <Content Include="Assets\Fonts\OpenSans.ttf" />
     <Content Include="Assets\Fonts\PTSerif.ttf" />
     <Content Include="Assets\Fonts\Roboto.ttf" />
+    <Content Include="Assets\StoreLogo.backup.png" />
     <Content Include="Icons\2Logo-Big.png" />
     <Content Include="Icons\2Logo-Medium.png" />
     <Content Include="Icons\2Logo-Small.png" />
@@ -361,6 +372,7 @@
     <Content Include="Icons\Circle.jpg" />
     <Content Include="Icons\GrayAndWhite.jpg" />
     <Content Include="Icons\LoadFaill.jpg" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="XMLs\Styles.xml" />
     <Content Include="XMLs\Filters.xml" />
     <Content Include="XMLs\FilterOriginal.xml" />
@@ -368,6 +380,7 @@
     <Content Include="FileUtils\Banner.photo2pk.zip" />
     <Content Include="FileUtils\App.photo2pk.zip" />
     <Content Include="FileUtils\MFY.photo2pk.zip" />
+    <None Include="Retouch Photo2_StoreKey.pfx" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
     <PRIResource Include="Strings\zh-CN\%24Loading.resw" />
     <PRIResource Include="Strings\en-US\%24Loading.resw" />
@@ -446,7 +459,6 @@
     <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
-    <Content Include="Assets\StoreLogo.backup.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-125.png" />
     <Content Include="Assets\StoreLogo.scale-150.png" />
@@ -479,6 +491,10 @@
     <Page Include="Controls\LayersControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MainCanvasControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ToolsControl.xaml">
       <SubType>Designer</SubType>

@@ -76,6 +76,12 @@ namespace Retouch_Photo2
             this.ConstructTheme();
 
             this.ConstructDeviceLayout();
+            this.SizeChanged += (s, e) =>
+            {
+                if (e.NewSize == e.PreviousSize) return;
+                int width = (int)e.NewSize.Width;
+                this.AdaptiveWidthTextBlock.Text = width.ToString();
+              };
 
             this.ConstructLayersHeight();
 

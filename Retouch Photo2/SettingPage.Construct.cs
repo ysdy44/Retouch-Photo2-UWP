@@ -198,7 +198,7 @@ namespace Retouch_Photo2
         {
             string type = this.LayersHeightTextBlock.Text;
             radioButton.IsChecked = groupValue == value;
-            radioButton.Content = new LayerControl(value, type);
+            radioButton.Content = new LayerControl(value, $"{type} {value}");
             radioButton.Click += async (s, e) => await this.SetHeight(value);
         }
 

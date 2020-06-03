@@ -179,13 +179,11 @@
         <Border x:Name="InitialBorder" Grid.Row="1" Grid.RowSpan="2" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
         </Border>
 
-        <ScrollViewer x:Name="ScrollViewer" Grid.Row="0" Grid.RowSpan="3" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="ScrollViewer" Grid.RowSpan="3" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <GridView x:Name="GridView" ReorderMode="Disabled" SelectionMode="None">
 
                 <GridView.Header>
-                    <Border Height="50">
-                        <CheckBox x:Name="SelectCheckBox" HorizontalAlignment="Center" />
-                    </Border>
+                    <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseHeader}"/>
                 </GridView.Header>
                 
                 <GridView.ItemContainerTransitions>
@@ -196,6 +194,10 @@
                         <EntranceThemeTransition IsStaggeringEnabled="False" />
                     </TransitionCollection>
                 </GridView.ItemContainerTransitions>
+
+                <GridView.Footer>
+                    <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseFooter}"/>
+                </GridView.Footer>
                 
             </GridView>
         </ScrollViewer>
@@ -220,6 +222,8 @@
 
 
         <!--Head-->
+        <CheckBox x:Name="SelectCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        
         <Border x:Name="HeadBorder" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
         </Border>
 

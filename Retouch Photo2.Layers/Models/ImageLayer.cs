@@ -114,15 +114,17 @@ namespace Retouch_Photo2.Layers.Models
             }
 
 
+            //Image
             Matrix3x2 matrix = Transformer.FindHomography(this.transformerRect, base.Transform.Transformer);
             Transform2DEffect effect = new Transform2DEffect
             {
                 TransformMatrix = matrix,
                 Source = this.bitmap,
             };
+            if (this.Transform.IsCrop == false) return effect;
 
 
-            if (this.Transform.IsCrop)
+            //Crop
             {
                 CanvasCommandList command = new CanvasCommandList(resourceCreator);
                 using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
@@ -136,8 +138,6 @@ namespace Retouch_Photo2.Layers.Models
                 }
                 return command;
             }
-
-            else return effect;
         }
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator)

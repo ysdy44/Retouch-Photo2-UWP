@@ -60,11 +60,10 @@
             Background="{ThemeResource AppStroke}">
 
         <Border x:Name="RootGrid" 
-              Padding="24,18,24,24"
               HorizontalAlignment="Center"
               VerticalAlignment="Center"
               Width="320"
-              MinHeight="200"
+              MinHeight="120"
               BorderThickness="1"
               BorderBrush="{ThemeResource AppBorderBrush}" 
               Background="{ThemeResource AppBackground}"                               
@@ -85,13 +84,15 @@
                 </Grid.RowDefinitions>
 
                 <!--Head-->
-                <ContentControl x:Name="ContentControl" FontSize="22" FontWeight="Light"/>
+                <ContentControl x:Name="ContentControl" Margin="14,14" FontSize="22" FontWeight="Light"/>
 
                 <!--Body-->
-                <ContentPresenter x:Name="ContentPresenter" Grid.Row="2"/>
+                <ScrollViewer Grid.Row="2" Padding="14,0">
+                    <ContentPresenter x:Name="ContentPresenter"/>
+                </ScrollViewer>
 
                 <!--Foot-->
-                <Grid Grid.Row="4">
+                <Grid Grid.Row="4" Margin="14,14">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2"/>
                         <ColumnDefinition Width="1*"/>
@@ -106,6 +107,7 @@
                         OK
                     </Button>
                 </Grid>
+
 
             </Grid>
 

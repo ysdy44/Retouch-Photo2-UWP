@@ -27,7 +27,6 @@ namespace Retouch_Photo2.Tools.Models
 
         ListViewSelectionMode SelectionMode => this.SelectionViewModel.SelectionMode;
 
-        ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
         MarqueeCompositeMode MarqueeCompositeMode => this.SettingViewModel.CompositeMode;
         bool IsRatio => this.SettingViewModel.IsRatio;
         bool IsCenter => this.SettingViewModel.IsCenter;
@@ -120,7 +119,10 @@ namespace Retouch_Photo2.Tools.Models
         }
 
         public void OnNavigatedTo() { }
-        public void OnNavigatedFrom() { }
+        public void OnNavigatedFrom()
+        {
+            this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
+        }
 
     }
 
@@ -186,7 +188,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.Layerage = layerage;
             layer.Transform.CacheTransform();
-            if (layer.Transform.IsCrop == false) this._started(layer);
+            if (layer.Transform.IsCrop == false) this.CropStarted(layer);
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
@@ -202,7 +204,7 @@ namespace Retouch_Photo2.Tools.Models
             //Snap
             if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
 
-            this._delta(canvasStartingPoint, canvasPoint);
+            this.CropDelta(canvasStartingPoint, canvasPoint);
 
             this.ViewModel.Invalidate();//Invalidate
         }
@@ -222,8 +224,8 @@ namespace Retouch_Photo2.Tools.Models
                 this.Snap.Default();
             }
 
-            this._delta(canvasStartingPoint, canvasPoint);
-            this._complete();
+            this.CropDelta(canvasStartingPoint, canvasPoint);
+            this.CropComplete();
 
             this.Layerage = null;
             this.IsMove = false;
@@ -266,7 +268,7 @@ namespace Retouch_Photo2.Tools.Models
     public sealed partial class CropTool : Page, ITool
     {
 
-        private Layerage GetTransformerLayer(Vector2 startingPoint, Matrix3x2 matrix)
+        public Layerage GetTransformerLayer(Vector2 startingPoint, Matrix3x2 matrix)
         {
             switch (this.SelectionMode)
             {
@@ -301,7 +303,7 @@ namespace Retouch_Photo2.Tools.Models
             return null;
         }
 
-        private void _started(ILayer firstLayer)
+        public void CropStarted(ILayer firstLayer)
         {
             firstLayer.Transform.CropTransformer = firstLayer.Transform.Transformer;
 
@@ -323,7 +325,7 @@ namespace Retouch_Photo2.Tools.Models
             firstLayer.Transform.IsCrop = true;
         }
 
-        private void _delta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
+        public void CropDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             ILayer layer = this.Layerage.Self;
             if (this.IsMove == false)//Transformer
@@ -347,7 +349,7 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
-        private void _complete()
+        public void CropComplete()
         {
             ILayer layer = this.Layerage.Self;
 
@@ -373,6 +375,6 @@ namespace Retouch_Photo2.Tools.Models
             this.Layerage.RefactoringParentsRender();
             this.Layerage.RefactoringParentsIconRender();
         }
-
+        
     }
 }
