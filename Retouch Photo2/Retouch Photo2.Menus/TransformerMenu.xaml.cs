@@ -348,17 +348,20 @@ namespace Retouch_Photo2.Menus.Models
                             Vector2 horizontal = this._vsTransformer.Horizontal;
                             Vector2 vertical = this._vsTransformer.Vertical;
 
-                            //Radians
+                            //Radians Skew
                             float radians = Transformer.GetRadians(horizontal);
-                            this.RPicker.Value = (int)radians;
-
-                            //Skew
                             float skew = Transformer.GetSkew(vertical, radians);
+                            this.RPicker.Value = (int)radians;
                             this.SPicker.Value = (int)skew;
 
                             //Width Height
-                            this.WPicker.Value = (int)horizontal.Length();
-                            this.HPicker.Value = (int)vertical.Length();
+                            //float width = horizontal.Length();
+                            //float height = vertical.Length();
+                            //@Release
+                            double width = Math.Sqrt(horizontal.X * horizontal.X + horizontal.Y * horizontal.Y);
+                            double height = Math.Sqrt(vertical.X * vertical.X + vertical.Y * vertical.Y);
+                            this.WPicker.Value = (int)width;
+                            this.HPicker.Value = (int)height;
 
                             //X Y
                             Vector2 vector = this._vsTransformer.GetIndicatorVector(this.IndicatorMode);
@@ -370,19 +373,20 @@ namespace Retouch_Photo2.Menus.Models
                         }
                         //IsEnabled
                         {
-                            this.WPicker.IsEnabled = true;
-                            this.HPicker.IsEnabled = true;
-
                             this.RPicker.IsEnabled = true;
                             this.SPicker.IsEnabled = true;
+
+                            this.WPicker.IsEnabled = true;
+                            this.HPicker.IsEnabled = true;
 
                             this.XPicker.IsEnabled = true;
                             this.YPicker.IsEnabled = true;
 
                             this.RatioToggleControl.IsEnabled = true;
                             this.StepFrequencyButton.IsEnabled = true;
-                            this.PositionRemoteButton.IsEnabled = true;
+
                             this.IndicatorControl.Mode = this.IndicatorMode;
+                            this.PositionRemoteButton.IsEnabled = true;
                         }
                     }
                     break;
@@ -394,15 +398,18 @@ namespace Retouch_Photo2.Menus.Models
                             Vector2 horizontal = this._vsTransformer.Horizontal;
                             Vector2 vertical = this._vsTransformer.Vertical;
 
-                            //Radians
+                            //Radians Skew
                             this.RPicker.Value = 0;
-
-                            //Skew
                             this.SPicker.Value = 0;
 
                             //Width Height
-                            this.WPicker.Value = (int)horizontal.Length();
-                            this.HPicker.Value = (int)vertical.Length();
+                            //float width = horizontal.Length();
+                            //float height = vertical.Length();
+                            //@Release
+                            double width = Math.Sqrt(horizontal.X * horizontal.X + horizontal.Y * horizontal.Y);
+                            double height = Math.Sqrt(vertical.X * vertical.X + vertical.Y * vertical.Y);
+                            this.WPicker.Value = (int)width;
+                            this.HPicker.Value = (int)height;
 
                             //X Y
                             Vector2 vector = this._vsTransformer.GetIndicatorVector(this.IndicatorMode);
@@ -414,19 +421,19 @@ namespace Retouch_Photo2.Menus.Models
                         }
                         //IsEnabled
                         {
-                            this.WPicker.IsEnabled = true;
-                            this.HPicker.IsEnabled = true;
-
                             this.RPicker.IsEnabled = false;
                             this.SPicker.IsEnabled = false;
 
+                            this.WPicker.IsEnabled = true;
+                            this.HPicker.IsEnabled = true;
+
                             this.XPicker.IsEnabled = true;
                             this.YPicker.IsEnabled = true;
-
+                            
+                            this.IndicatorControl.Mode = this.IndicatorMode;
+                            this.PositionRemoteButton.IsEnabled = true;
                             this.RatioToggleControl.IsEnabled = true;
                             this.StepFrequencyButton.IsEnabled = true;
-                            this.PositionRemoteButton.IsEnabled = true;
-                            this.IndicatorControl.Mode = this.IndicatorMode;
                         }
                     }
                     break;
@@ -435,10 +442,8 @@ namespace Retouch_Photo2.Menus.Models
                     {
                         //Value
                         {
-                            //Radians
+                            //Radians Skew
                             this.RPicker.Value = 0;
-
-                            //Skew
                             this.SPicker.Value = 0;
 
                             //Width Height
@@ -463,10 +468,10 @@ namespace Retouch_Photo2.Menus.Models
                             this.XPicker.IsEnabled = false;
                             this.YPicker.IsEnabled = false;
 
+                            this.IndicatorControl.Mode = IndicatorMode.None;
+                            this.PositionRemoteButton.IsEnabled = false;
                             this.RatioToggleControl.IsEnabled = false;
                             this.StepFrequencyButton.IsEnabled = false;
-                            this.PositionRemoteButton.IsEnabled = false;
-                            this.IndicatorControl.Mode = IndicatorMode.None;
                         }
                     }
                     break;

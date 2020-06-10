@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Layers.Models
         /// Initializes a curve-layer.
         /// </summary>
         /// <param name="customDevice"> The custom-device. </param>  
-        public CurveLayer(CanvasDevice customDevice)
+        internal CurveLayer(CanvasDevice customDevice)
         {
             base.Control = new LayerControl(customDevice, this)
             {
@@ -57,8 +57,39 @@ namespace Retouch_Photo2.Layers.Models
             {
                 this.IsRefactoringTransformer = false;
 
-                TransformerBorder border = new TransformerBorder(base.Nodes);
-                Transformer transformer = border.ToTransformer();
+
+                //@Release
+                float left = float.MaxValue;
+                float top = float.MaxValue;
+                float right = float.MinValue;
+                float bottom = float.MinValue;
+
+                foreach (Node node in base.Nodes)
+                {
+                    Vector2 vector = node.Point;
+
+                    switch (node.Type)
+                    {
+                        case NodeType.BeginFigure:
+                        case NodeType.Node:
+                            {
+                                if (left > vector.X) left = vector.X;
+                                if (top > vector.Y) top = vector.Y;
+                                if (right < vector.X) right = vector.X;
+                                if (bottom < vector.Y) bottom = vector.Y;
+                            }
+                            break;
+                    }
+                }
+                
+                Transformer transformer = new Transformer(left, top, right, bottom);
+                //@Release
+
+
+                //TransformerBorder border = new TransformerBorder(base.Nodes);
+                //Transformer transformer = border.ToTransformer();
+
+
                 this.Transform.Transformer = transformer;
                 return this.Transform.IsCrop ? this.Transform.CropTransformer : transformer;
             }

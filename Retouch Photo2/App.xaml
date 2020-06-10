@@ -39,7 +39,7 @@
 
                 <ResourceDictionary x:Key="Dark">
 
-                    <Color x:Key="AppForegroundColor" >#191919</Color>
+                    <Color x:Key="AppForegroundColor" >#1F1F1F</Color>
                     <Color x:Key="AppBackgroundColor" >#0E0E0E</Color>
                     <Color x:Key="AppBorderBrushColor" >#202020</Color>
 

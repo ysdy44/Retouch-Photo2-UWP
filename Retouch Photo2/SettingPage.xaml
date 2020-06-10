@@ -560,7 +560,7 @@
                                 CornerRadius="{StaticResource AppCornerRadius}"
                                 >
                             <TextBlock>                    
-                                1.1.2
+                                1.1.3
                             </TextBlock>
                         </Border>
 
