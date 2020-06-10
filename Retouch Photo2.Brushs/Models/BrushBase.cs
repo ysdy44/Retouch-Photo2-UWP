@@ -7,9 +7,12 @@ using Windows.UI;
 
 namespace Retouch_Photo2.Brushs
 {
+    /// <summary>
+    /// Represents a brush that can have fill properties. Provides a filling method.
+    /// </summary>
     public partial class BrushBase : IBrush
     {
-        public BrushType Type { get;internal set; }
+        public BrushType Type { get; internal set; }
 
         public Color Color { get; set; }
 

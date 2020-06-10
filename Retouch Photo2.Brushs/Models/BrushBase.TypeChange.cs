@@ -9,6 +9,9 @@ using FanKit.Transformers;
 
 namespace Retouch_Photo2.Brushs
 {
+    /// <summary>
+    /// Represents a brush that can have fill properties. Provides a filling method.
+    /// </summary>
     public partial class BrushBase : IBrush
     { 
 

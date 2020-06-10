@@ -86,7 +86,7 @@ namespace Retouch_Photo2.Menus.Models
             set { SetValue(ToolTypeProperty, value); }
         }
         /// <summary> Identifies the <see cref = "TransformerMenu.ToolType" /> dependency property. </summary>
-        public static readonly DependencyProperty ToolTypeProperty = DependencyProperty.Register(nameof(ToolType), typeof(ToolType), typeof(TransformerMenu), new PropertyMetadata(null, (sender, e) =>
+        public static readonly DependencyProperty ToolTypeProperty = DependencyProperty.Register(nameof(ToolType), typeof(ToolType), typeof(TransformerMenu), new PropertyMetadata(ToolType.Cursor, (sender, e) =>
         {
             TransformerMenu con = (TransformerMenu)sender;
 

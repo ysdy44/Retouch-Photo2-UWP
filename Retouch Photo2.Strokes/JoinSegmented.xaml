@@ -62,7 +62,7 @@
         </Grid.ColumnDefinitions>
 
         <!--Miter-->
-        <Button x:Name="MiterButton" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+        <Button x:Name="MiterButton" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="MiterToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
@@ -70,7 +70,7 @@
         </Button>
 
         <!--Bevel-->
-        <Button x:Name="BevelButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <Button x:Name="BevelButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="BevelToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>

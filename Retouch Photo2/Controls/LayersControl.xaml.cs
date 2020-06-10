@@ -47,12 +47,7 @@ namespace Retouch_Photo2.Controls
             this.ItemsControl.ItemsSource = this.ViewModel.LayerageCollection.RootControls;
 
 
-            this.Tapped += (s, e) =>
-            {
-                this.SelectionViewModel.SetModeNone();//Selection
-                LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
-                this.ViewModel.Invalidate();//Invalidate
-            };
+            this.Tapped += (s, e) => this.MethodViewModel.MethodSelectedNone();//Method
             this.RightTapped += (s, e) => this.ShowLayerMenu();
             this.Holding += (s, e) => this.ShowLayerMenu();
 

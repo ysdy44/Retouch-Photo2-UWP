@@ -118,7 +118,8 @@ namespace Retouch_Photo2.Layers
                 {
                     ICanvasBrush canvasBrush = this.Style.Stroke.GetICanvasBrush(resourceCreator);
                     float strokeWidth = this.Style.StrokeWidth;
-                    drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth, this.Style.StrokeStyle);
+                    CanvasStrokeStyle strokeStyle = this.Style.StrokeStyle;
+                    drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth, strokeStyle);
                 }
             }
         }

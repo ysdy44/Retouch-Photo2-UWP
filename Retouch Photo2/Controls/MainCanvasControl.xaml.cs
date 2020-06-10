@@ -29,21 +29,39 @@ namespace Retouch_Photo2.Controls
                 this.ViewModel.CanvasTransformer.Size = e.NewSize;
             };
 
-            this.ViewModel.InvalidateAction += (InvalidateMode mode) =>
-            {
-                switch (mode)
-                {
-                    case InvalidateMode.Thumbnail:
-                        this.CanvasControl.DpiScale = 0.4f;
-                        break;
-                    case InvalidateMode.HD:
-                        this.CanvasControl.DpiScale = 1.0f;
-                        break;
-                }
 
-                this.CanvasControl.Invalidate();
-                this.ToolCanvasControl.Invalidate();
-            };
+            //High-Display screen
+            if (this.CanvasControl.Dpi > 96.0f)
+            {
+                float dpiScale = 96.0f / this.CanvasControl.Dpi;
+                if (dpiScale < 0.4f) dpiScale = 0.4f;
+                if (dpiScale>1.0f) dpiScale = 1.0f;
+
+                this.ViewModel.InvalidateAction += (InvalidateMode mode) =>
+                {
+                    switch (mode)
+                    {
+                        case InvalidateMode.Thumbnail:
+                            this.CanvasControl.DpiScale = dpiScale;
+                            break;
+                        case InvalidateMode.HD:
+                            this.CanvasControl.DpiScale = 1.0f;
+                            break;
+                    }
+
+                    this.CanvasControl.Invalidate();
+                    this.ToolCanvasControl.Invalidate();
+                };
+            }
+            //Low-Display screen
+            else
+            {
+                this.ViewModel.InvalidateAction += (_) =>
+                {
+                    this.CanvasControl.Invalidate();
+                    this.ToolCanvasControl.Invalidate();
+                };
+            }
 
 
             #region Draw

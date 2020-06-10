@@ -62,7 +62,7 @@
         </Grid.ColumnDefinitions>
 
         <!--Flat-->
-        <Button x:Name="FlatButton" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+        <Button x:Name="FlatButton" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="FlatToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
@@ -70,7 +70,7 @@
         </Button>
         
         <!--Square-->
-        <Button x:Name="SquareButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <Button x:Name="SquareButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="SquareToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>

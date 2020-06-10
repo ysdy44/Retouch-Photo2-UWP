@@ -37,7 +37,7 @@ namespace Retouch_Photo2
         }
 
 
-        public static async Task SavePhotoFile(StorageFolder zipFolder, IEnumerable<Photo> photos)
+        public static async Task SavePhotosFile(StorageFolder zipFolder, IEnumerable<Photo> photos)
         {
             XDocument document = Retouch_Photo2.Elements.XML.SavePhotos(photos);
 

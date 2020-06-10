@@ -83,7 +83,7 @@ namespace Retouch_Photo2
                 int countHistorys = this.ViewModel.Historys.Count;
                 int countLayerages = this.ViewModel.LayerageCollection.RootLayerages.Count;
 
-                if (countHistorys == 0 && countLayerages > 0)
+                if (countHistorys == 0 && countLayerages > 1)
                 {
                     this.ViewModel.IsUpdateThumbnailByName = false;
 

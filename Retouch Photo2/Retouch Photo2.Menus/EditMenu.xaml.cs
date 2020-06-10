@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Edits.CombineIcons;
@@ -145,20 +146,25 @@ namespace Retouch_Photo2.Menus.Models
             {
                 ILayer layer = layerage.Self;
 
-                Styles.Style style = layer.Style;
-                if (style.Stroke.Type == BrushType.None) return;
-                if (style.StrokeWidth == 0) return;
-                
+                IBrush stroke = layer.Style.Stroke;
+                float strokeWidth = layer.Style.StrokeWidth;
+                CanvasStrokeStyle strokeStyle = layer.Style.StrokeStyle;
+
+
+                if (stroke.Type == BrushType.None) return;
+                if (strokeWidth == 0) return;
+
                 if (layer.CreateGeometry(this.ViewModel.CanvasDevice) is CanvasGeometry geometry2)
                 {
-                    CanvasGeometry strokeGeometry = geometry2.Stroke(style.StrokeWidth, style.StrokeStyle);
-                    Styles.Style strokeStyle = new Styles.Style
+                    CanvasGeometry strokeGeometry = geometry2.Stroke(strokeWidth, strokeStyle);
+                    Styles.Style strokeStyleClone = new Styles.Style
                     {
-                        Fill= style.Stroke.Clone()
+                        Fill = stroke.Clone()
                     };
 
+
                     //Turn to curve layer
-                    ILayer curveLayer = this.CreateCurveLayer(strokeGeometry, strokeStyle);
+                    ILayer curveLayer = this.CreateCurveLayer(strokeGeometry, strokeStyleClone);
                     if (curveLayer != null)
                     {
                         Layerage curveLayerage = curveLayer.ToLayerage();

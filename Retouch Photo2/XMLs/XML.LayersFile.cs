@@ -39,7 +39,7 @@ namespace Retouch_Photo2
         }
 
 
-        public static async Task SaveLayerFile(StorageFolder zipFolder, IEnumerable<ILayer> layers)
+        public static async Task SaveLayersFile(StorageFolder zipFolder, IEnumerable<ILayer> layers)
         {
             XDocument document = Retouch_Photo2.Layers.XML.SaveLayers(layers);
 

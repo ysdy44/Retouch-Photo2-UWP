@@ -13,9 +13,7 @@ namespace Retouch_Photo2.Styles
     /// </summary>
     public partial class Style : ICacheTransform
     {
-        /// <summary>
-        /// Name
-        /// </summary>
+        /// <summary> Name </summary>
         public string Name { get; set; } = string.Empty;
 
         /// <summary> Gets or sets whether the style follows the transform. </summary>

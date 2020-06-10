@@ -115,7 +115,7 @@
     <Compile Include="Layers\ILayer.cs" />
     <Compile Include="Layerage.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.FindOutermost.cs" />
-    <Compile Include="LayerMode\BackgroundMode.cs" />
+    <Compile Include="LayerControls\BackgroundMode.cs" />
     <Compile Include="Layers\ITextLayer.cs" />
     <Compile Include="Layers\LayerBase.Instance.cs" />
     <Compile Include="Layers\LayerBase.Node.cs" />
@@ -147,7 +147,7 @@
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="LayerExtensions.cs" />
-    <Compile Include="LayerMode\OverlayMode.cs" />
+    <Compile Include="LayerControls\OverlayMode.cs" />
     <Compile Include="Layers\LayerBase.Render.cs" />
     <Compile Include="Layers\LayerBase.Property.cs" />
     <Compile Include="Layers\TextLayer.cs" />

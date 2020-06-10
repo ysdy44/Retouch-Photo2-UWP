@@ -77,15 +77,23 @@ namespace Retouch_Photo2
             //Save layers file.
             IEnumerable<Layerage> savedLayerages = LayerageCollection.GetLayerages(this.ViewModel.LayerageCollection.RootLayerages);
             IEnumerable<ILayer> savedLayers = from layer in LayerBase.Instances where savedLayerages.Any(p => layer.Equals(p)) select layer;
-            await XML.SaveLayerFile(zipFolder, savedLayers);
+            await XML.SaveLayersFile(zipFolder, savedLayers);
 
-            //Save photos file and Move photo file.
+            //Save photos file.
             IEnumerable<Photocopier> savedPhotocopiers = LayerageCollection.GetPhotocopiers(savedLayerages);
             IEnumerable<Photo> savedPhotos = from photo in Photo.Instances where savedPhotocopiers.Any(p => photo.Equals(p)) select photo;
-            await XML.SavePhotoFile(zipFolder, savedPhotos);
+            await XML.SavePhotosFile(zipFolder, savedPhotos);
+
+            //Move photo file.
             foreach (Photo photo in savedPhotos)
             {
-                await photo.MoveFile(zipFolder);
+                //await photo.MoveFile(zipFolder);
+                //@Release
+                {
+                    //Move photo file.
+                    StorageFile item = await StorageFile.GetFileFromPathAsync(photo.ImageFilePath);
+                    await item.CopyAsync(zipFolder);
+                }
             }
         }
 

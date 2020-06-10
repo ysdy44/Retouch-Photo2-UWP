@@ -6,9 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     xmlns:elements="using:Retouch_Photo2.Elements"
-    xmlns:elementsSettingPages="using:Retouch_Photo2.Elements.SettingPages"
     xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
-    xmlns:layers="using:Retouch_Photo2.Layers"
+    xmlns:elementsSettingPages="using:Retouch_Photo2.Elements.SettingPages"
     mc:Ignorable="d"
     Background="{ThemeResource AppBackground}"
     NavigationCacheMode="Required"    
@@ -549,7 +548,7 @@
                         <Image Width="180" Height="180" Source="ms-appx:///Icons\AppRender.png"/>
 
                         <TextBlock HorizontalAlignment="Center" Style="{StaticResource AppTextBlockStyle}">
-                            2020-6-4
+                            2020-6-10
                         </TextBlock>
                         <Border Padding="12,0" Height="24" 
                                 HorizontalAlignment="Center" 
@@ -560,7 +559,7 @@
                                 CornerRadius="{StaticResource AppCornerRadius}"
                                 >
                             <TextBlock>                    
-                                1.1.3
+                                1.1.5
                             </TextBlock>
                         </Border>
 

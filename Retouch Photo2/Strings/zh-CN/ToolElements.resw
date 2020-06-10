@@ -205,7 +205,7 @@
     <value>等比例缩放</value>
   </data>
   <data name="PenMode_Mode" xml:space="preserve">
-    <value>模式</value>
+    <value>控制点模式</value>
   </data>
   <data name="PenMode_Mode_Asymmetric" xml:space="preserve">
     <value>非对称</value>
@@ -217,7 +217,7 @@
     <value>对称</value>
   </data>
   <data name="PenMode_Restriction" xml:space="preserve">
-    <value>限制</value>
+    <value>控制点限制</value>
   </data>
   <data name="PenMode_Restriction_Angle" xml:space="preserve">
     <value>角度</value>

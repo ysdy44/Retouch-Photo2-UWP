@@ -1,8 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Icons;
-using Retouch_Photo2.ViewModels;
-using System.Linq;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -41,16 +40,8 @@ namespace Retouch_Photo2.Tools.Models
         //Pen
         public NodeCollectionMode Mode = NodeCollectionMode.None;
 
-        //Add
-        Node _addEndNode;
-        Node _addLastNode;
-
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Vector2 canvasPoint = Vector2.Transform(startingPoint, inverseMatrix);
-
             if (this.CurveLayer == null)
                 this.Mode = NodeCollectionMode.Preview;
             else
@@ -61,71 +52,34 @@ namespace Retouch_Photo2.Tools.Models
                 case NodeCollectionMode.None:
                     break;
                 case NodeCollectionMode.Preview:
-                    this.PreviewStart(canvasPoint);//PreviewNode
+                    this.PreviewStart(startingPoint);
                     break;
                 case NodeCollectionMode.Add:
-                    {
-                        //Snap
-                        if (this.IsSnap) this.ViewModel.VectorVectorSnapInitiate(this.CurveLayer.Nodes);
-
-                        Node node = new Node
-                        {
-                            Point = canvasPoint,
-                            LeftControlPoint = canvasPoint,
-                            RightControlPoint = canvasPoint,
-                            IsChecked = false,
-                            IsSmooth = false,
-                        };
-
-                        this._addEndNode = this.CurveLayer.Nodes.Last(n => n.Type == NodeType.Node);
-                        this._addLastNode = this.CurveLayer.Nodes.Last(n => n.Type == NodeType.Node);
-                    }
+                    this.AddStart();
                     break;
             }
-
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            if (this.CurveLayer == null)
+            switch (this.Mode)
             {
-                if (this.Mode == NodeCollectionMode.Preview)
-                {
+                case NodeCollectionMode.None:
+                    break;
+                case NodeCollectionMode.Preview:
                     this.PreviewDelta(canvasPoint);//PreviewNode
-                }
-            }
-            else
-            {
-                switch (this.Mode)
-                {
-                    case NodeCollectionMode.None:
-                        break;
-                    case NodeCollectionMode.Preview:
-                        break;
-                    case NodeCollectionMode.Add:
+                    break;
+                case NodeCollectionMode.Add:
+                    {
+                        if (this.CurveLayer != null)
                         {
-                            //Snap
-                            if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
-
-                            Node node = new Node
-                            {
-                                Point = canvasPoint,
-                                LeftControlPoint = canvasPoint,
-                                RightControlPoint = canvasPoint,
-                                IsChecked = false,
-                                IsSmooth = false,
-                            };
-                            this._addEndNode = node;
+                            this.AddDelta(canvasPoint);
                         }
-                        break;
-                }
+                    }
+                    break;
             }
-
-            this.ViewModel.Invalidate();//Invalidate
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
@@ -133,44 +87,24 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            if (this.CurveLayer == null)
+            switch (this.Mode)
             {
-                if (this.Mode == NodeCollectionMode.Preview)
-                {
+                case NodeCollectionMode.None:
+                    break;
+                case NodeCollectionMode.Preview:
                     this.PreviewComplete(canvasStartingPoint, canvasPoint, isOutNodeDistance);//PreviewNode
-                }
+                    break;
+                case NodeCollectionMode.Add:
+                    {
+                        if (this.CurveLayer != null)
+                        {
+                            this.AddComplete(canvasPoint);
+                        }
+                    }
+                    break;
             }
-            else if (this.Mode == NodeCollectionMode.Add)
-            {
-                //Snap
-                if (this.IsSnap)
-                {
-                    canvasPoint = this.Snap.Snap(canvasPoint);
-                    this.Snap.Default();
-                }
-
-                Node node = new Node
-                {
-                    Point = canvasPoint,
-                    LeftControlPoint = canvasPoint,
-                    RightControlPoint = canvasPoint,
-                    IsChecked = false,
-                    IsSmooth = false,
-                };
-                this.CurveLayer.Nodes.PenAdd(node);
-            }
-
-            //Refactoring
-            this.CurveLayer.IsRefactoringTransformer = true;
-            this.CurveLayer.IsRefactoringRender = true;
-            this.CurveLayer.IsRefactoringIconRender = true;
-            this.CurveLayerage.RefactoringParentsTransformer();
-            this.CurveLayerage.RefactoringParentsRender();
-            this.CurveLayerage.RefactoringParentsIconRender();
 
             this.Mode = NodeCollectionMode.None;
-
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
         public void Clicke(Vector2 point)
         {
@@ -178,60 +112,43 @@ namespace Retouch_Photo2.Tools.Models
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
-            
-            if (this.Mode == NodeCollectionMode.Add)
+
+            switch (this.Mode)
             {
-                Node node = new Node
-                {
-                    Point = canvasPoint,
-                    LeftControlPoint = canvasPoint,
-                    RightControlPoint = canvasPoint,
-                    IsChecked = false,
-                    IsSmooth = false,
-                };
-                this.CurveLayer.Nodes.PenAdd(node);
+                case NodeCollectionMode.Add:
+                    this.AddComplete(canvasPoint);
+                    break;
             }
-
-            //Refactoring
-            this.CurveLayer.IsRefactoringTransformer = true;
-            this.Mode = NodeCollectionMode.None;
-
-            this.ViewModel.Invalidate();//Invalidate
         }
 
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
-            if (this.CurveLayer == null)
-            {
-                if (this.Mode == NodeCollectionMode.Preview)
-                {
-                    this.PreviewDraw(drawingSession);//PreviewNode
-                }
-                return;
-            }
-
-            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            drawingSession.DrawNodeCollection(this.CurveLayer.Nodes, matrix, this.ViewModel.AccentColor);
-
             switch (this.Mode)
             {
+                case NodeCollectionMode.Preview:
+                    this.PreviewDraw(drawingSession);
+                    break;
                 case NodeCollectionMode.Add:
                     {
-                        Vector2 lastPoint = Vector2.Transform(this._addLastNode.Point, matrix);
-                        Vector2 endPoint = Vector2.Transform(this._addEndNode.Point, matrix);
-
-                        drawingSession.DrawLineDodgerBlue(lastPoint, endPoint);
-                        drawingSession.DrawNode4(endPoint);
+                        if (this.CurveLayer != null)
+                        {
+                            this.AddDraw(drawingSession);
+                        }
                     }
                     break;
-            }
+                default:
+                    {
+                        if (this.CurveLayer != null)
+                        {
+                            ILayer layer = this.CurveLayer;
 
-            //Snapping
-            if (this.IsSnap)
-            {
-                this.Snap.Draw(drawingSession, matrix);
-                this.Snap.DrawNode2(drawingSession, matrix);
+                            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+
+                            drawingSession.DrawNodeCollection(layer.Nodes, matrix, this.ViewModel.AccentColor);
+                        }
+                    }
+                    break;
             }
         }
 

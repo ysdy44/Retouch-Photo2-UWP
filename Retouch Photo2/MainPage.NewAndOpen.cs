@@ -96,8 +96,10 @@ namespace Retouch_Photo2
             }
 
 
-            //Load all photos. 
+            //Load all photos file. 
             IEnumerable<Photo> photos = XML.LoadPhotosFile();
+            this.ViewModel.TipText = photos.Count().ToString();
+            this.ViewModel.TipTextVisibility = Visibility.Visible;
             Photo.Instances.Clear();
             foreach (Photo photo in photos)
             {
@@ -105,7 +107,7 @@ namespace Retouch_Photo2
                 Photo.Instances.Add(photo);
             }
 
-            //Load all layers. 
+            //Load all layers file. 
             IEnumerable<ILayer> layers = XML.LoadLayersFile(this.ViewModel.CanvasDevice);
             LayerBase.Instances.Clear();
             foreach (ILayer layer in layers)
@@ -113,13 +115,11 @@ namespace Retouch_Photo2
                 LayerBase.Instances.Add(layer);
             }
 
+            //Load project file. 
+            Project project = XML.LoadProjectFile(name);
+            this.ViewModel.LoadFromProject(project);
+            this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
 
-            //Project
-            {
-                Project project = XML.LoadProjectFile(name);
-                this.ViewModel.LoadFromProject(project);
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
-            }
 
             //Transition
             TransitionData data = new TransitionData

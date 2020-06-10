@@ -205,7 +205,7 @@
     <value>Ratio Scaling</value>
   </data>
   <data name="PenMode_Mode" xml:space="preserve">
-    <value>Mode</value>
+    <value>Control Point Mode</value>
   </data>
   <data name="PenMode_Mode_Asymmetric" xml:space="preserve">
     <value>Asymmetric</value>
@@ -217,7 +217,7 @@
     <value>Mirrored</value>
   </data>
   <data name="PenMode_Restriction" xml:space="preserve">
-    <value>Restriction</value>
+    <value>Control Point Restriction</value>
   </data>
   <data name="PenMode_Restriction_Angle" xml:space="preserve">
     <value>Angle</value>

@@ -76,7 +76,7 @@ namespace Retouch_Photo2.ViewModels
                 return new Style
                 {
                     Fill = BrushBase.ColorBrush(Colors.LightGray),
-                    Stroke = new BrushBase(),
+                    Stroke = BrushBase.ColorBrush(Colors.Black),
                     StrokeWidth = 0,
                     StrokeStyle = new CanvasStrokeStyle(),
                 };

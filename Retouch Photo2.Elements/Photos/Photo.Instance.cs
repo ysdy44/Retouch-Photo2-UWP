@@ -57,7 +57,7 @@ namespace Retouch_Photo2.Elements
         {
             //Move photo file.
             StorageFile item = await StorageFile.GetFileFromPathAsync(this.ImageFilePath);
-            await item.MoveAsync(zipFolder);
+            await item.CopyAsync(zipFolder);
         }
         
 

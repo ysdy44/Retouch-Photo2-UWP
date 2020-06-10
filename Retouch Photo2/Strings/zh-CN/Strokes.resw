@@ -139,10 +139,10 @@
     <value>破折</value>
   </data>
   <data name="Dash_DashDot" xml:space="preserve">
-    <value>破折 点</value>
+    <value>破折 端点</value>
   </data>
   <data name="Dash_Dot" xml:space="preserve">
-    <value>点</value>
+    <value>端点</value>
   </data>
   <data name="Dash_Solid" xml:space="preserve">
     <value>固体</value>

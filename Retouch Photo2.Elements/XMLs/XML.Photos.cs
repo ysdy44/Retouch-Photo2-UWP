@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Elements
                     in photos
                     select new XElement
                     (
-                         "Photos",
+                         "Photo",
                          new XElement("Name", photo.Name),
                          new XElement("FileType", photo.FileType),
                          new XElement("FolderRelativeId", photo.FolderRelativeId)

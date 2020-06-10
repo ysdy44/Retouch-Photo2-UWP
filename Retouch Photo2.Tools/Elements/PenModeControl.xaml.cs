@@ -12,8 +12,8 @@ namespace Retouch_Photo2.Tools.Elements
     public sealed partial class PenModeControl : UserControl
     {
 
-        //@Content
-        private SelfControlPointMode selfMode;
+        //@Content    
+        private SelfControlPointMode selfMode = SelfControlPointMode.None;
         public SelfControlPointMode SelfMode
         {
             get => this.selfMode;
@@ -49,7 +49,6 @@ namespace Retouch_Photo2.Tools.Elements
                 this.selfMode = value;
             }
         }
-
         public EachControlPointLengthMode EachLengthMode = EachControlPointLengthMode.Equal;
         public EachControlPointAngleMode EachAngleMode = EachControlPointAngleMode.Asymmetric;
 
@@ -62,20 +61,13 @@ namespace Retouch_Photo2.Tools.Elements
             this.ConstructStrings();
             this.ConstructSelfMode();
             this.ConstructEachMode();
-            this.Loaded += (s, e) =>
-            {
-                this.MirroredRadioButton.IsChecked = true;
-
-                this.EachLengthMode = EachControlPointLengthMode.Equal;
-                this.EachAngleMode = EachControlPointAngleMode.Asymmetric;
-            };
         }
 
 
         //SelfMode
         private void ConstructSelfMode()
         {
-            this.AngleCheckBox.Tapped += (s, e) =>
+            this.AngleCheckBox.Click += (s, e) =>
             {
                 switch (this.SelfMode)
                 {
@@ -85,7 +77,7 @@ namespace Retouch_Photo2.Tools.Elements
                     case SelfControlPointMode.Disable: this.SelfMode = SelfControlPointMode.None; break;
                 }
             };
-            this.LengthCheckBox.Tapped += (s, e) =>
+            this.LengthCheckBox.Click += (s, e) =>
             {
                 switch (this.SelfMode)
                 {
@@ -100,17 +92,17 @@ namespace Retouch_Photo2.Tools.Elements
         //EachMode
         private void ConstructEachMode()
         {
-            this.MirroredRadioButton.Click += (s, e) =>
+            this.MirroredRadioButton.Checked += (s, e) =>
             {
                 this.EachLengthMode = EachControlPointLengthMode.Equal;
                 this.EachAngleMode = EachControlPointAngleMode.Asymmetric;
             };
-            this.DisconnectedRadioButton.Click += (s, e) =>
+            this.DisconnectedRadioButton.Checked += (s, e) =>
             {
                 this.EachLengthMode = EachControlPointLengthMode.None;
                 this.EachAngleMode = EachControlPointAngleMode.None;
             };
-            this.AsymmetricRadioButton.Click += (s, e) =>
+            this.AsymmetricRadioButton.Checked += (s, e) =>
             {
                 this.EachLengthMode = EachControlPointLengthMode.None;
                 this.EachAngleMode = EachControlPointAngleMode.Asymmetric;
