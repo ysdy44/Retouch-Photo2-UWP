@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using Windows.UI.Text;
 
-namespace Retouch_Photo2.Characters
+namespace Retouch_Photo2.Texts
 {
     /// <summary>
     /// Provide constant and static methods for XElement.

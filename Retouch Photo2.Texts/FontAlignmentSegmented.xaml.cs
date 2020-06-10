@@ -4,7 +4,7 @@ using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Characters
+namespace Retouch_Photo2.Texts
 {
     /// <summary>
     /// Represents the segmented that is used to select font alignment.
@@ -81,25 +81,25 @@ namespace Retouch_Photo2.Characters
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.LeftToolTip.Content = resource.GetString("/Characters/FontAlignment_Left");
+            this.LeftToolTip.Content = resource.GetString("/Texts/FontAlignment_Left");
             this.LeftButton.Click += (s, e) =>
             {
                 this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Left);//Delegate
             };
 
-            this.CenterToolTip.Content = resource.GetString("/Characters/FontAlignment_Center");
+            this.CenterToolTip.Content = resource.GetString("/Texts/FontAlignment_Center");
             this.CenterButton.Click += (s, e) =>
             {
                 this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Center);//Delegate
             };
 
-            this.RightToolTip.Content = resource.GetString("/Characters/FontAlignment_Right");
+            this.RightToolTip.Content = resource.GetString("/Texts/FontAlignment_Right");
             this.RightButton.Click += (s, e) =>
             {
                 this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Right);//Delegate
             };
 
-            this.JustifiedToolTip.Content = resource.GetString("/Characters/FontAlignment_Justified");
+            this.JustifiedToolTip.Content = resource.GetString("/Texts/FontAlignment_Justified");
             this.JustifiedButton.Click += (s, e) =>
             {
                 this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Justified);//Delegate

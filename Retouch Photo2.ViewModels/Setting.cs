@@ -30,9 +30,6 @@ namespace Retouch_Photo2.ViewModels
              MenuType.Adjustment,
              MenuType.Effect,
 
-             MenuType.Character,
-             //MenuType.Paragraph,
-
              MenuType.Stroke,
              //MenuType.Style,
 

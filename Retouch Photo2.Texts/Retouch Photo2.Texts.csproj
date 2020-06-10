@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{73EF3E4B-968B-4D54-83D2-5D7E8CD02CAF}</ProjectGuid>
+    <ProjectGuid>{37FB331D-210A-4C2E-8C95-7B1F2D162103}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Retouch_Photo2.Characters</RootNamespace>
-    <AssemblyName>Retouch Photo2.Characters</AssemblyName>
+    <RootNamespace>Retouch_Photo2.Texts</RootNamespace>
+    <AssemblyName>Retouch Photo2.Texts</AssemblyName>
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
@@ -106,20 +106,20 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="FontWeightComboBox.xaml.cs">
-      <DependentUpon>FontWeightComboBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="FontAlignmentSegmented.xaml.cs">
       <DependentUpon>FontAlignmentSegmented.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FontWeightComboBox.xaml.cs">
+      <DependentUpon>FontWeightComboBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XMLs\XML.FontStyleFactory.cs" />
     <Compile Include="XMLs\XML.FontWeightFactory.cs" />
     <Compile Include="XMLs\XML.HorizontalAlignmentFactory.cs" />
-    <Compile Include="XMLs\XML.FontStyleFactory.cs" />
-    <EmbeddedResource Include="Properties\Retouch_Photo2.Characters.rd.xml" />
+    <EmbeddedResource Include="Properties\Retouch_Photo2.Texts.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
@@ -130,13 +130,13 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="FontWeightComboBox.xaml">
+    <Page Include="FontAlignmentSegmented.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="FontAlignmentSegmented.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="FontWeightComboBox.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Icon.xaml">
       <Generator>MSBuild:Compile</Generator>

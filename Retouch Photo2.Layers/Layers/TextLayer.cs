@@ -2,7 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
-using Retouch_Photo2.Characters;
+using Retouch_Photo2.Texts;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
@@ -46,9 +46,9 @@ namespace Retouch_Photo2.Layers.Models
             if (element.Element("FontSize") is XElement fontSize) this.FontSize = (float)fontSize;
             if (element.Element("FontFamily") is XElement fontFamily) this.FontFamily = fontFamily.Value;
 
-            if (element.Element("HorizontalAlignment") is XElement horizontalAlignment) this.FontAlignment = Retouch_Photo2.Characters.XML.CreateHorizontalAlignment(horizontalAlignment.Value);
-            if (element.Element("FontStyle") is XElement fontStyle) this.FontStyle = Retouch_Photo2.Characters.XML.CreateFontStyle(fontStyle.Value);
-            if (element.Element("FontWeight") is XElement fontWeight) this.FontWeight= Retouch_Photo2.Characters.XML.CreateFontWeight(fontWeight.Value);
+            if (element.Element("HorizontalAlignment") is XElement horizontalAlignment) this.FontAlignment = Retouch_Photo2.Texts.XML.CreateHorizontalAlignment(horizontalAlignment.Value);
+            if (element.Element("FontStyle") is XElement fontStyle) this.FontStyle = Retouch_Photo2.Texts.XML.CreateFontStyle(fontStyle.Value);
+            if (element.Element("FontWeight") is XElement fontWeight) this.FontWeight= Retouch_Photo2.Texts.XML.CreateFontWeight(fontWeight.Value);
         }
 
 

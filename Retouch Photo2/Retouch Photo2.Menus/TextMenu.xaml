@@ -1,11 +1,11 @@
 ﻿<UserControl
-    x:Class="Retouch_Photo2.Menus.Models.CharacterMenu"
+    x:Class="Retouch_Photo2.Menus.Models.TextMenu"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hSVColorPickers="using:HSVColorPickers"
-    xmlns:characters="using:Retouch_Photo2.Characters"
+    xmlns:texts="using:Retouch_Photo2.Texts"
     xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignWidth="200"
@@ -21,7 +21,7 @@
 
                 <!--Align-->
                 <TextBlock x:Name="FontAlignmentTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <characters:FontAlignmentSegmented x:Name="FontAlignmentSegmented" Alignment="{x:Bind SelectionViewModel.FontAlignment, Mode=OneWay}"/>
+                <texts:FontAlignmentSegmented x:Name="FontAlignmentSegmented" Alignment="{x:Bind SelectionViewModel.FontAlignment, Mode=OneWay}"/>
 
 
                 <!--FontStyle-->
@@ -126,7 +126,7 @@
 
                 <!--FontWeight-->
                 <ScrollViewer x:Name="FontWeightScrollViewer" Visibility="Collapsed">
-                    <characters:FontWeightComboBox x:Name="FontWeightControl" Weight="{x:Bind SelectionViewModel.FontWeight, Mode=OneWay}"/>
+                    <texts:FontWeightComboBox x:Name="FontWeightControl" Weight="{x:Bind SelectionViewModel.FontWeight, Mode=OneWay}"/>
                 </ScrollViewer>
 
             </Grid>

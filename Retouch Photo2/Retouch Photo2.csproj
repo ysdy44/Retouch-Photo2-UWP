@@ -186,9 +186,6 @@
     <Compile Include="Retouch Photo2.Menus\DebugMenu.xaml.cs">
       <DependentUpon>DebugMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\ParagraphMenu.xaml.cs">
-      <DependentUpon>ParagraphMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Retouch Photo2.Menus\StrokeMenu.xaml.cs">
       <DependentUpon>StrokeMenu.xaml</DependentUpon>
     </Compile>
@@ -220,8 +217,8 @@
     <Compile Include="Retouch Photo2.Menus\AdjustmentMenu.xaml.cs">
       <DependentUpon>AdjustmentMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\CharacterMenu.xaml.cs">
-      <DependentUpon>CharacterMenu.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Menus\TextMenu.xaml.cs">
+      <DependentUpon>TextMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\ColorMenu.xaml.cs">
       <DependentUpon>ColorMenu.xaml</DependentUpon>
@@ -388,7 +385,7 @@
     <PRIResource Include="Strings\en-US\Strokes.resw" />
     <PRIResource Include="Strings\en-US\Edits.resw" />
     <PRIResource Include="Strings\zh-CN\Edits.resw" />
-    <PRIResource Include="Strings\en-US\Characters.resw" />
+    <PRIResource Include="Strings\en-US\Texts.resw" />
     <PRIResource Include="Strings\en-US\Blends.resw" />
     <PRIResource Include="Strings\en-US\Adjustments.resw" />
     <PRIResource Include="Strings\en-US\%24SettingPage.resw" />
@@ -407,7 +404,7 @@
     <PRIResource Include="Strings\zh-CN\Adjustments.resw" />
     <PRIResource Include="Strings\zh-CN\Effects.resw" />
     <PRIResource Include="Strings\zh-CN\Operates.resw" />
-    <PRIResource Include="Strings\zh-CN\Characters.resw" />
+    <PRIResource Include="Strings\zh-CN\Texts.resw" />
     <PRIResource Include="Strings\zh-CN\Menus.resw" />
     <PRIResource Include="Strings\zh-CN\ToolsSecond.resw" />
     <PRIResource Include="Strings\zh-CN\Tools.resw" />
@@ -596,7 +593,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Menus\CharacterMenu.xaml">
+    <Page Include="Retouch Photo2.Menus\TextMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -619,10 +616,6 @@
     <Page Include="Retouch Photo2.Menus\OperateMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Menus\ParagraphMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Menus\EditMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -795,7 +788,9 @@
       <Version>1.23.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Retouch Photo2.Adjustment\Retouch Photo2.Adjustments.csproj">
       <Project>{7256c005-0e5d-4c38-9115-e4eef9978233}</Project>
@@ -808,10 +803,6 @@
     <ProjectReference Include="..\Retouch Photo2.Brushs\Retouch Photo2.Brushs.csproj">
       <Project>{00e87876-1aa4-4b48-af1c-f1db75fbf587}</Project>
       <Name>Retouch Photo2.Brushs</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Characters\Retouch Photo2.Characters.csproj">
-      <Project>{73ef3e4b-968b-4d54-83d2-5d7e8cd02caf}</Project>
-      <Name>Retouch Photo2.Characters</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Edits\Retouch Photo2.Edits.csproj">
       <Project>{ee851357-156d-438d-ace1-f8841ec966af}</Project>
@@ -852,6 +843,10 @@
     <ProjectReference Include="..\Retouch Photo2.Styles\Retouch Photo2.Styles.csproj">
       <Project>{08675e81-29a5-440b-8dab-0554dc7a9914}</Project>
       <Name>Retouch Photo2.Styles</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Texts\Retouch Photo2.Texts.csproj">
+      <Project>{37fb331d-210a-4c2e-8c95-7b1f2d162103}</Project>
+      <Name>Retouch Photo2.Texts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Tools\Retouch Photo2.Tools.csproj">
       <Project>{3f4ae427-651f-4791-a176-678a00a93b1e}</Project>

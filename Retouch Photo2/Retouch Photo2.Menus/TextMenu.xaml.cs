@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Menus.Models
 {
-    internal enum CharacterState
+    internal enum TextMenuState
     {
         None,
         FontFamily,
@@ -27,9 +27,9 @@ namespace Retouch_Photo2.Menus.Models
     }
 
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "CharacterMenu" />. 
+    /// Retouch_Photo2's the only <see cref = "TextMenu" />. 
     /// </summary>
-    public sealed partial class CharacterMenu : UserControl, IMenu
+    public sealed partial class TextMenu : UserControl, IMenu
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
@@ -38,13 +38,13 @@ namespace Retouch_Photo2.Menus.Models
         //@Converter
         private int FontSizeConverter(float fontSize) => (int)fontSize;
 
-        CharacterState CharacterState
+        TextMenuState State
         {
             set
             {
-                this.FontFamilyListView.Visibility = (value == CharacterState.FontFamily) ? Visibility.Visible : Visibility.Collapsed;
-                this.FontSizeListView.Visibility = (value == CharacterState.FontSize) ? Visibility.Visible : Visibility.Collapsed;
-                this.FontWeightScrollViewer.Visibility = (value == CharacterState.FontWeight) ? Visibility.Visible : Visibility.Collapsed;
+                this.FontFamilyListView.Visibility = (value == TextMenuState.FontFamily) ? Visibility.Visible : Visibility.Collapsed;
+                this.FontSizeListView.Visibility = (value == TextMenuState.FontSize) ? Visibility.Visible : Visibility.Collapsed;
+                this.FontWeightScrollViewer.Visibility = (value == TextMenuState.FontWeight) ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 
@@ -58,14 +58,14 @@ namespace Retouch_Photo2.Menus.Models
             set { SetValue(IsOpenProperty, value); }
         }
         /// <summary> Identifies the <see cref = "OperateMenu.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(CharacterMenu), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(TextMenu), new PropertyMetadata(false));
 
 
         #endregion
 
 
         //@Construct
-        public CharacterMenu()
+        public TextMenu()
         {
             this.InitializeComponent();
             this.ConstructStrings();
@@ -81,9 +81,9 @@ namespace Retouch_Photo2.Menus.Models
     }
 
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "CharacterMenu" />. 
+    /// Retouch_Photo2's the only <see cref = "TextMenu" />. 
     /// </summary>
-    public sealed partial class CharacterMenu : UserControl, IMenu
+    public sealed partial class TextMenu : UserControl, IMenu
     {
         //Strings
         private void ConstructStrings()
@@ -92,20 +92,20 @@ namespace Retouch_Photo2.Menus.Models
 
             this._button.ToolTip.Content =
             this._Expander.Title =
-            this._Expander.CurrentTitle = resource.GetString("/Menus/Character");
+            this._Expander.CurrentTitle = resource.GetString("/Menus/Text");
 
-            this.FontAlignmentTextBlock.Text = resource.GetString("/Characters/FontAlignment");
+            this.FontAlignmentTextBlock.Text = resource.GetString("/Texts/FontAlignment");
 
-            this.FontStyleTextBlock.Text = resource.GetString("/Characters/FontStyle");
-            this.BoldToolTip.Content = resource.GetString("/Characters/FontStyle_Bold");
-            this.ItalicToolTip.Content = resource.GetString("/Characters/FontStyle_Italic");
-            this.UnderLineToolTip.Content = resource.GetString("/Characters/FontStyle_UnderLine");
+            this.FontStyleTextBlock.Text = resource.GetString("/Texts/FontStyle");
+            this.BoldToolTip.Content = resource.GetString("/Texts/FontStyle_Bold");
+            this.ItalicToolTip.Content = resource.GetString("/Texts/FontStyle_Italic");
+            this.UnderLineToolTip.Content = resource.GetString("/Texts/FontStyle_UnderLine");
 
-            this.FontWeightTextBlock.Text = resource.GetString("/Characters/FontWeight");
+            this.FontWeightTextBlock.Text = resource.GetString("/Texts/FontWeight");
 
-            this.FontFamilyTextBlock.Text = resource.GetString("/Characters/FontFamily");
+            this.FontFamilyTextBlock.Text = resource.GetString("/Texts/FontFamily");
 
-            this.FontSizeTextBlock.Text = resource.GetString("/Characters/FontSize");
+            this.FontSizeTextBlock.Text = resource.GetString("/Texts/FontSize");
         }
 
         //ToolTip
@@ -130,13 +130,13 @@ namespace Retouch_Photo2.Menus.Models
         }
 
         //Menu  
-        public MenuType Type => MenuType.Character;
+        public MenuType Type => MenuType.Text;
         public IExpander Expander => this._Expander;
         MenuButton _button = new MenuButton
         {
-            CenterContent = new Retouch_Photo2.Characters.Icon()
+            CenterContent = new Retouch_Photo2.Texts.Icon()
         };
-
+        
         public void ConstructMenu()
         {
             this._Expander.Layout = this;
@@ -146,9 +146,9 @@ namespace Retouch_Photo2.Menus.Models
     }
 
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "CharacterMenu" />. 
+    /// Retouch_Photo2's the only <see cref = "TextMenu" />. 
     /// </summary>
-    public sealed partial class CharacterMenu : UserControl, IMenu
+    public sealed partial class TextMenu : UserControl, IMenu
     {
 
         //FontAlignment
@@ -195,7 +195,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.FontWeightButton.Click += (s, e) =>
             {
-                this.CharacterState = CharacterState.FontWeight;
+                this.State = TextMenuState.FontWeight;
                 this._Expander.IsSecondPage = true;
                 this._Expander.CurrentTitle = this.FontWeightTextBlock.Text;
             };
@@ -213,7 +213,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this.FontFamilyButton.Click += (s, e) =>
             {
-                this.CharacterState = CharacterState.FontFamily;
+                this.State = TextMenuState.FontFamily;
                 this._Expander.IsSecondPage = true;
                 this._Expander.CurrentTitle = this.FontFamilyTextBlock.Text;
             };
@@ -240,7 +240,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this.FontSizeButton.Click += (s, e) =>
             {
-                this.CharacterState = CharacterState.FontSize;
+                this.State = TextMenuState.FontSize;
                 this._Expander.IsSecondPage = true;
                 this._Expander.CurrentTitle = this.FontSizeTextBlock.Text;
             };
@@ -260,9 +260,9 @@ namespace Retouch_Photo2.Menus.Models
     }
 
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "CharacterMenu" />. 
+    /// Retouch_Photo2's the only <see cref = "TextMenu" />. 
     /// </summary>
-    public sealed partial class CharacterMenu : UserControl, IMenu
+    public sealed partial class TextMenu : UserControl, IMenu
     {
 
         private void SetFontAlignment(CanvasHorizontalAlignment fontAlignment)

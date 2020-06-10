@@ -25,8 +25,7 @@ namespace Retouch_Photo2.Menus
                 case "Adjustment": return MenuType.Adjustment;
                 case "Effect": return MenuType.Effect;
 
-                case "Character": return MenuType.Character;
-                case "Paragraph": return MenuType.Paragraph;
+                case "Text": return MenuType.Text;
 
                 case "Stroke": return MenuType.Stroke;
                 case "Style": return MenuType.Style;

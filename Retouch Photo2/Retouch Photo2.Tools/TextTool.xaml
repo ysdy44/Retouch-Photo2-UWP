@@ -61,7 +61,7 @@
                  BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}"
                  Text="{x:Bind SelectionViewModel.FontText, Mode=OneWay}"/>
 
-        <Button x:Name="CharacterButton" Grid.Column="0" Grid.Row="1" Style="{StaticResource AppCircleButtonStyle}">
+        <Button x:Name="TextButton" Grid.Column="0" Grid.Row="1" Style="{StaticResource AppCircleButtonStyle}">
             <FontIcon Glyph="&#xE185;" FontSize="24" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
         </Button>
 

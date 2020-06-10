@@ -135,8 +135,8 @@
   <data name="Arrange" xml:space="preserve">
     <value>Arrange</value>
   </data>
-  <data name="Character" xml:space="preserve">
-    <value>Character</value>
+  <data name="Text" xml:space="preserve">
+    <value>Text</value>
   </data>
   <data name="Color" xml:space="preserve">
     <value>Color</value>

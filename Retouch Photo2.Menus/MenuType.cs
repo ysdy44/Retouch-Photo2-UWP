@@ -18,10 +18,12 @@
         /// <summary> Effect. </summary>
         Effect,
 
+        /// <summary> Text. </summary>
+        Text,
         /// <summary> Character. </summary>
-        Character,
+        //Character,
         /// <summary> Paragraph. </summary>
-        Paragraph,
+        //Paragraph,
 
         /// <summary> Stroke. </summary>
         Stroke,

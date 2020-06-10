@@ -199,10 +199,6 @@
       <Project>{00e87876-1aa4-4b48-af1c-f1db75fbf587}</Project>
       <Name>Retouch Photo2.Brushs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Characters\Retouch Photo2.Characters.csproj">
-      <Project>{73ef3e4b-968b-4d54-83d2-5d7e8cd02caf}</Project>
-      <Name>Retouch Photo2.Characters</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Effects\Retouch Photo2.Effects.csproj">
       <Project>{c14d4618-e234-4d91-8ced-49cbd9f6f3c7}</Project>
       <Name>Retouch Photo2.Effects</Name>
@@ -218,6 +214,10 @@
     <ProjectReference Include="..\Retouch Photo2.Styles\Retouch Photo2.Styles.csproj">
       <Project>{08675e81-29a5-440b-8dab-0554dc7a9914}</Project>
       <Name>Retouch Photo2.Styles</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Texts\Retouch Photo2.Texts.csproj">
+      <Project>{37fb331d-210a-4c2e-8c95-7b1f2d162103}</Project>
+      <Name>Retouch Photo2.Texts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

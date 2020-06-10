@@ -107,7 +107,7 @@ namespace Retouch_Photo2
                 new AdjustmentMenu(),
                 new EffectMenu(),
 
-                new CharacterMenu(),
+                new TextMenu(),
                 //new ParagraphMenu(),
 
                 new StrokeMenu(),
