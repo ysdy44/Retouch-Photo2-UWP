@@ -83,7 +83,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                         var previous1 = adjustment.BlueDisable;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             if (previous < 0) return;
                             if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -94,7 +94,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                                 layer.IsRefactoringIconRender = true;
                                 adjustment2.BlueDisable = previous1;
                             }
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
@@ -168,7 +168,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                         var previous1 = adjustment.StartingBlueOffset;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             if (previous < 0) return;
                             if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -179,7 +179,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                                 layer.IsRefactoringIconRender = true;
                                 adjustment2.BlueOffset = previous1;
                             }
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
@@ -253,7 +253,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                         var previous1 = adjustment.StartingBlueExponent;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             if (previous < 0) return;
                             if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -264,7 +264,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                                 layer.IsRefactoringIconRender = true;
                                 adjustment2.BlueExponent = previous1;
                             }
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
@@ -338,7 +338,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                         var previous1 = adjustment.StartingBlueAmplitude;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             if (previous < 0) return;
                             if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -349,7 +349,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                                 layer.IsRefactoringIconRender = true;
                                 adjustment2.BlueAmplitude = previous1;
                             }
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;

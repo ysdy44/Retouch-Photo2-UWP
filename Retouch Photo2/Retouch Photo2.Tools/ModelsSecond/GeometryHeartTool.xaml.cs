@@ -154,12 +154,12 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryHeartLayer geometryHeartLayer = (GeometryHeartLayer)layer;
 
                         var previous = geometryHeartLayer.Spread;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryHeartLayer.IsRefactoringRender = true;
                             geometryHeartLayer.Spread = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryHeartLayer.IsRefactoringRender = true;
@@ -242,13 +242,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryHeartLayer geometryHeartLayer = (GeometryHeartLayer)layer;
 
                         var previous = geometryHeartLayer.StartingSpread;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryHeartLayer.IsRefactoringRender = true;
                             geometryHeartLayer.IsRefactoringIconRender = true;
                             geometryHeartLayer.Spread = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryHeartLayer.IsRefactoringRender = true;

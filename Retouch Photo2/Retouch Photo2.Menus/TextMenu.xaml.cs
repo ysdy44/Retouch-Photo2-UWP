@@ -281,13 +281,13 @@ namespace Retouch_Photo2.Menus.Models
                     ITextLayer textLayer = (ITextLayer)layer;
 
                     var previous = textLayer.FontAlignment;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         textLayer.FontAlignment = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -321,13 +321,13 @@ namespace Retouch_Photo2.Menus.Models
                     ITextLayer textLayer = (ITextLayer)layer;
 
                     var previous = textLayer.FontWeight;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         textLayer.FontWeight = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -361,13 +361,13 @@ namespace Retouch_Photo2.Menus.Models
                     ITextLayer textLayer = (ITextLayer)layer;
 
                     var previous = textLayer.FontStyle;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         textLayer.FontStyle = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -401,13 +401,13 @@ namespace Retouch_Photo2.Menus.Models
                     ITextLayer textLayer = (ITextLayer)layer;
 
                     var previous = textLayer.FontFamily;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         textLayer.FontFamily = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -441,13 +441,13 @@ namespace Retouch_Photo2.Menus.Models
                     ITextLayer textLayer = (ITextLayer)layer;
 
                     var previous = textLayer.FontSize;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         textLayer.FontSize = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;

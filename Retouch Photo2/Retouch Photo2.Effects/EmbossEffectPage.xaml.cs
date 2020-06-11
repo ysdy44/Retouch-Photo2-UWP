@@ -68,14 +68,14 @@ namespace Retouch_Photo2.Effects.Models
 
                 var previous1 = layer.Effect.Emboss_Radius;
                 var previous2 = layer.Effect.Emboss_Angle;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Effect.Emboss_Radius = previous1;
                     layer.Effect.Emboss_Angle = previous2;
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -127,13 +127,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.Emboss_IsOn;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.Emboss_IsOn = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -200,13 +200,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingEmboss_Radius;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.Emboss_Radius = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -269,13 +269,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingEmboss_Angle;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.Emboss_Angle = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;

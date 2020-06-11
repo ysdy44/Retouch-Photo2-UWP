@@ -69,14 +69,14 @@ namespace Retouch_Photo2.Effects.Models
 
                 var previous1 = layer.Effect.Edge_Amount;
                 var previous2 = layer.Effect.Edge_Radius;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Effect.Edge_Amount = previous1;
                     layer.Effect.Edge_Radius = previous2;
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -128,13 +128,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.Edge_IsOn;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.Edge_IsOn = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -200,13 +200,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingEdge_Amount;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {     
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.Edge_Amount = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -272,13 +272,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingEdge_Radius;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {   
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.Edge_Radius = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;

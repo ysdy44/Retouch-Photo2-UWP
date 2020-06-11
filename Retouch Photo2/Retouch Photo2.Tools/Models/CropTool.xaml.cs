@@ -56,13 +56,13 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         //History
                         var previous = layer.Transform.IsCrop;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {               
                             //Refactoring
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
                             layer.Transform.IsCrop = previous;
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
@@ -93,14 +93,14 @@ namespace Retouch_Photo2.Tools.Models
                         //History
                         var previous1 = layer.Transform.Transformer;
                         var previous2 = layer.Transform.IsCrop;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
                             layer.Transform.Transformer = previous1;
                             layer.Transform.IsCrop = previous2;
-                        });
+                        };
 
                         Transformer cropTransformer = layer.Transform.CropTransformer;
                         //Refactoring
@@ -312,12 +312,12 @@ namespace Retouch_Photo2.Tools.Models
 
             //History
             var previous = firstLayer.Transform.IsCrop;
-            history.UndoActions.Push(() =>
+            history.UndoAction += () =>
             {
                 ILayer firstLayer2 = firstLayer;
 
                 firstLayer2.Transform.IsCrop = previous;
-            });
+            };
 
             //History
             this.ViewModel.HistoryPush(history);
@@ -358,13 +358,13 @@ namespace Retouch_Photo2.Tools.Models
 
             //History
             var previous = layer.Transform.StartingCropTransformer;
-            history.UndoActions.Push(() =>
+            history.UndoAction += () =>
             {                
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layer.Transform.CropTransformer = previous;
-            });
+            };
 
             //History
             this.ViewModel.HistoryPush(history);

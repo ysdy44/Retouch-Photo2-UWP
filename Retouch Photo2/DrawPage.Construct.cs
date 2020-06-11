@@ -164,11 +164,11 @@ namespace Retouch_Photo2
                     {
                         //History
                         var previous = layer.Name;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             layer.Name = previous;
-                        });
-                        
+                        };
+
                         layer.Name = name;
                     }
                 });

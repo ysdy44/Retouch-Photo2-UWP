@@ -32,13 +32,13 @@ namespace Retouch_Photo2.ViewModels
 
                 //History
                 var previous = layer.Style.Fill.Clone();
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Style.Fill = previous.Clone();
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -102,13 +102,13 @@ namespace Retouch_Photo2.ViewModels
 
                 //History
                 var previous = layer.Style.StartingFill.Clone();
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Style.Fill = previous.Clone();
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -148,12 +148,12 @@ namespace Retouch_Photo2.ViewModels
 
                 //History
                 var previous = layer.Style.Stroke.Clone();
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     ILayer layer2 = layerage.Self;
 
                     layer2.Style.Stroke = previous.Clone();
-                });
+                };
 
                 layer.Style.Stroke = BrushBase.ColorBrush(value);
                 this.StandStyleLayerage = layerage;
@@ -212,13 +212,13 @@ namespace Retouch_Photo2.ViewModels
 
                 //History
                 var previous = layer.Style.StartingStroke.Clone();
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Style.Stroke = previous.Clone();
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;

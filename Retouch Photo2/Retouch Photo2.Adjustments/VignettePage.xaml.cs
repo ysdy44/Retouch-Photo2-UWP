@@ -103,7 +103,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                     var previous1 = adjustment.Amount;
                     var previous2 = adjustment.Curve;
                     var previous3 = adjustment.Color;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         if (previous < 0) return;
                         if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -116,7 +116,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                             adjustment2.Curve = previous2;
                             adjustment2.Color = previous3;
                         }
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -203,7 +203,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                         var previous1 = adjustment.StartingAmount;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             if (previous < 0) return;
                             if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -214,7 +214,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                                 layer.IsRefactoringIconRender = true;
                                 adjustment2.Amount = previous1;
                             }
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
@@ -287,7 +287,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                         var previous1 = adjustment.StartingCurve;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             if (previous < 0) return;
                             if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -298,7 +298,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                                 layer.IsRefactoringIconRender = true;
                                 adjustment2.Curve = previous1;
                             }
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
@@ -344,7 +344,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                         var previous1 = adjustment.Color;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             if (previous < 0) return;
                             if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -355,7 +355,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                                 layer.IsRefactoringIconRender = true;
                                 adjustment2.Color = previous1;
                             }
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
@@ -423,7 +423,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                         var previous1 = adjustment.StartingColor;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             if (previous < 0) return;
                             if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -434,7 +434,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                                 layer.IsRefactoringIconRender = true;
                                 adjustment2.Color = previous1;
                             }
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;

@@ -148,13 +148,13 @@ namespace Retouch_Photo2.Tools.Models
 
                 //History
                 var previous = layer.Style.StartingFill.Clone();
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Style.Fill = previous.Clone();
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -189,13 +189,13 @@ namespace Retouch_Photo2.Tools.Models
 
                 //History
                 var previous = layer.Style.Fill.Clone(); ;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Style.Fill = previous.Clone();
-                });
+                };
 
 
                 //Refactoring
@@ -264,13 +264,13 @@ namespace Retouch_Photo2.Tools.Models
 
                 //History
                 var previous = layer.Style.Fill.Clone();
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Style.Fill = previous.Clone();
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -331,13 +331,13 @@ namespace Retouch_Photo2.Tools.Models
 
                 //History
                 var previous = layer.Style.Fill.Clone();
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Style.Fill = previous.Clone();
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -370,13 +370,13 @@ namespace Retouch_Photo2.Tools.Models
 
                 //History
                 var previous = layer.Style.Fill.Extend;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Style.Fill.Extend = previous;
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;

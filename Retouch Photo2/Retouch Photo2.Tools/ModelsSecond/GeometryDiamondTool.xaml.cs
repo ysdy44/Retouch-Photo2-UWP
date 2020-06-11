@@ -157,13 +157,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
 
                         var previous = geometryDiamondLayer.Mid;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {   
                             //Refactoring
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
                             geometryDiamondLayer.Mid = previous;
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
@@ -247,13 +247,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
 
                         var previous = geometryDiamondLayer.StartingMid;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryDiamondLayer.IsRefactoringRender = true;
                             geometryDiamondLayer.IsRefactoringIconRender = true;
                             geometryDiamondLayer.Mid = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryDiamondLayer.IsRefactoringRender = true;
@@ -289,13 +289,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
 
                         var previous = geometryDiamondLayer.Mid;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {    
                             //Refactoring
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
                             geometryDiamondLayer.Mid = previous;
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;

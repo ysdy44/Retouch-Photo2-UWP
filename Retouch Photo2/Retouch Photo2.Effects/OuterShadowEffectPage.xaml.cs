@@ -86,7 +86,7 @@ namespace Retouch_Photo2.Effects.Models
                 var previous3 = layer.Effect.OuterShadow_Color;
                 var previous4 = layer.Effect.OuterShadow_Offset;
                 var previous5 = layer.Effect.OuterShadow_Angle;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -96,7 +96,7 @@ namespace Retouch_Photo2.Effects.Models
                     layer.Effect.OuterShadow_Color = previous3;
                     layer.Effect.OuterShadow_Offset = previous4;
                     layer.Effect.OuterShadow_Angle = previous5;
-                });
+                };
                 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -155,13 +155,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.OuterShadow_IsOn;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.OuterShadow_IsOn = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -228,14 +228,14 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingOuterShadow_Radius;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {   
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
 
                         layer.Effect.OuterShadow_Radius = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -302,13 +302,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingOuterShadow_Opacity;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {    
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.OuterShadow_Opacity = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -373,13 +373,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingOuterShadow_Offset;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.OuterShadow_Offset = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -443,13 +443,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingOuterShadow_Angle;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.OuterShadow_Angle = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -487,7 +487,7 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingOuterShadow_Color;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         ILayer layer2 = layerage.Self;
 
@@ -495,7 +495,7 @@ namespace Retouch_Photo2.Effects.Models
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer2.Effect.OuterShadow_Color = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -558,7 +558,7 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingOuterShadow_Color;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         ILayer layer2 = layerage.Self;
 
@@ -566,7 +566,7 @@ namespace Retouch_Photo2.Effects.Models
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer2.Effect.OuterShadow_Color = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;

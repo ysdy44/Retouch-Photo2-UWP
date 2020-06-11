@@ -69,7 +69,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                     var previous1 = adjustment.Saturation;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         if (previous < 0) return;
                         if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -80,7 +80,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                             layer.IsRefactoringIconRender = true;
                             adjustment2.Saturation = previous1;
                         }
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -163,7 +163,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                         var previous1 = adjustment.StartingSaturation;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             if (previous < 0) return;
                             if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -174,7 +174,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                                 layer.IsRefactoringIconRender = true;
                                 adjustment2.Saturation = previous1;
                             }
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;

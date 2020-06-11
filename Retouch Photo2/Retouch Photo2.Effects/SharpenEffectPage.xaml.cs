@@ -65,13 +65,13 @@ namespace Retouch_Photo2.Effects.Models
                 ILayer layer = layerage.Self;
 
                 var previous = layer.Effect.Sharpen_Amount;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Effect.Sharpen_Amount = previous;
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -121,13 +121,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.Sharpen_IsOn;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.Sharpen_IsOn = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -194,13 +194,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingSharpen_Amount;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.Sharpen_Amount = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;

@@ -186,13 +186,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
 
                         var previous = geometryStarLayer.Points;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryStarLayer.IsRefactoringRender = true;
                             geometryStarLayer.IsRefactoringIconRender = true;
                             geometryStarLayer.Points = previous;
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
@@ -276,13 +276,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
 
                         var previous = geometryStarLayer.StartingPoints;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryStarLayer.IsRefactoringRender = true;
                             geometryStarLayer.IsRefactoringIconRender = true;
                             geometryStarLayer.Points = previous;
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
@@ -336,13 +336,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
 
                         var previous = geometryStarLayer.InnerRadius;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryStarLayer.IsRefactoringRender = true;
                             geometryStarLayer.IsRefactoringIconRender = true;
                             geometryStarLayer.InnerRadius = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryStarLayer.IsRefactoringRender = true;
@@ -426,13 +426,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
 
                         var previous = geometryStarLayer.StartingInnerRadius;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryStarLayer.IsRefactoringRender = true;
                             geometryStarLayer.IsRefactoringIconRender = true;
                             geometryStarLayer.InnerRadius = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryStarLayer.IsRefactoringRender = true;

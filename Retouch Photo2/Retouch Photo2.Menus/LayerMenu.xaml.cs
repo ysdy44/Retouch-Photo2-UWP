@@ -162,13 +162,13 @@ namespace Retouch_Photo2.Menus.Models
 
                     //History
                     var previous = layer.StartingOpacity;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {    
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Opacity = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -210,13 +210,13 @@ namespace Retouch_Photo2.Menus.Models
 
                     //History
                     var previous = layer.BlendMode;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {    
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.BlendMode = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -252,13 +252,13 @@ namespace Retouch_Photo2.Menus.Models
 
                     //History
                     var previous = layer.Visibility;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {   
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Visibility = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -294,13 +294,13 @@ namespace Retouch_Photo2.Menus.Models
 
                     //History
                     var previous = layer.Style.IsFollowTransform;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {   
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Style.IsFollowTransform = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -334,13 +334,13 @@ namespace Retouch_Photo2.Menus.Models
 
                     //History
                     var previous = layer.TagType;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.TagType = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;

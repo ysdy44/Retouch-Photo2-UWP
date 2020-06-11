@@ -154,13 +154,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryRoundRectLayer geometryRoundRectLayer = (GeometryRoundRectLayer)layer;
 
                         var previous = geometryRoundRectLayer.Corner;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryRoundRectLayer.IsRefactoringRender = true;
                             geometryRoundRectLayer.IsRefactoringIconRender = true;
                             geometryRoundRectLayer.Corner = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryRoundRectLayer.IsRefactoringRender = true;
@@ -244,13 +244,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryRoundRectLayer geometryRoundRectLayer = (GeometryRoundRectLayer)layer;
 
                         var previous = geometryRoundRectLayer.StartingCorner;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryRoundRectLayer.IsRefactoringRender = true;
                             geometryRoundRectLayer.IsRefactoringIconRender = true;
                             geometryRoundRectLayer.Corner = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryRoundRectLayer.IsRefactoringRender = true;

@@ -98,8 +98,6 @@ namespace Retouch_Photo2
 
             //Load all photos file. 
             IEnumerable<Photo> photos = XML.LoadPhotosFile();
-            this.ViewModel.TipText = photos.Count().ToString();
-            this.ViewModel.TipTextVisibility = Visibility.Visible;
             Photo.Instances.Clear();
             foreach (Photo photo in photos)
             {

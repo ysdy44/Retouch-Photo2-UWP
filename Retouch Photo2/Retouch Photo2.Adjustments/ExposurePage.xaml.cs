@@ -71,7 +71,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                     var previous1 = adjustment.Exposure;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         if (previous < 0) return;
                         if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -82,7 +82,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                             layer.IsRefactoringIconRender = true;
                             adjustment2.Exposure = previous1;
                         }
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -165,7 +165,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                         var previous1 = adjustment.StartingExposure;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             if (previous < 0) return;
                             if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -176,7 +176,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                                 layer.IsRefactoringIconRender = true;
                                 adjustment2.Exposure = previous1;
                             }
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;

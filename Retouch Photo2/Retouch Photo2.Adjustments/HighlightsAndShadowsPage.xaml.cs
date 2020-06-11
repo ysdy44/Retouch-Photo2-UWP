@@ -84,7 +84,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                     var previous2 = adjustment.Highlights;
                     var previous3 = adjustment.Clarity;
                     var previous4 = adjustment.MaskBlurAmount;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         if (previous < 0) return;
                         if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -98,7 +98,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                             adjustment2.Clarity = previous3;
                             adjustment2.MaskBlurAmount = previous4;
                         }
-                    });
+                    };
 
                     this.ViewModel.HistoryPush(history);
 
@@ -186,7 +186,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                         var previous1 = adjustment.StartingShadows;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             if (previous < 0) return;
                             if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -197,7 +197,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                                 layer.IsRefactoringIconRender = true;
                                 adjustment2.Shadows = previous1;
                             }
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
@@ -270,7 +270,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                         var previous1 = adjustment.StartingHighlights;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             if (previous < 0) return;
                             if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -281,7 +281,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                                 layer.IsRefactoringIconRender = true;
                                 adjustment2.Highlights = previous1;
                             }
-                        });
+                        };
 
                         this.ViewModel.HistoryPush(history);
 
@@ -353,7 +353,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                         var previous1 = adjustment.StartingClarity;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             if (previous < 0) return;
                             if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -364,7 +364,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                                 layer.IsRefactoringIconRender = true;
                                 adjustment2.Clarity = previous1;
                             }
-                        });
+                        };
 
                         this.ViewModel.HistoryPush(history);
 
@@ -436,7 +436,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
                         var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                         var previous1 = adjustment.StartingMaskBlurAmount;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             if (previous < 0) return;
                             if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -447,7 +447,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                                 layer.IsRefactoringIconRender = true;
                                 adjustment2.MaskBlurAmount = previous1;
                             }
-                        });
+                        };
 
                         this.ViewModel.HistoryPush(history);
 

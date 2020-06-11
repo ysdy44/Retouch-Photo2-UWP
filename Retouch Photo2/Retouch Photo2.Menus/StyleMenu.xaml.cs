@@ -57,13 +57,13 @@ namespace Retouch_Photo2.Menus.Models
 
                         //History
                         var previous = layer.Style.Clone();
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
                             layer.Style = previous.Clone();
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;

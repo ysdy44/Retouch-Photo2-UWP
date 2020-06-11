@@ -126,7 +126,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                     var previousBlue2 = adjustment.BlueOffset;
                     var previousBlue3 = adjustment.BlueExponent;
                     var previousBlue4 = adjustment.BlueAmplitude;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         if (previous < 0) return;
                         if (previous > layer.Filter.Adjustments.Count - 1) return;
@@ -156,7 +156,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                             adjustment2.AlphaExponent = previousAlpha3;
                             adjustment2.AlphaAmplitude = previousAlpha4;
                         }
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;

@@ -156,13 +156,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
 
                         var previous = geometryTriangleLayer.Center;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryTriangleLayer.IsRefactoringRender = true;
                             geometryTriangleLayer.IsRefactoringIconRender = true;
                             geometryTriangleLayer.Center = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryTriangleLayer.IsRefactoringRender = true;
@@ -246,13 +246,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
 
                         var previous = geometryTriangleLayer.StartingCenter;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryTriangleLayer.IsRefactoringRender = true;
                             geometryTriangleLayer.IsRefactoringIconRender = true;
                             geometryTriangleLayer.Center = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryTriangleLayer.IsRefactoringRender = true;
@@ -288,13 +288,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
 
                         var previous = geometryTriangleLayer.Center;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {     
                             //Refactoring
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
                             geometryTriangleLayer.Center = previous;
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;

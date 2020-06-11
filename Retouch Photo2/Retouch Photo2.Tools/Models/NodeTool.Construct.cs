@@ -180,11 +180,11 @@ namespace Retouch_Photo2.Tools.Models
 
                     //History
                     var previous = layer.Nodes.NodesStartingClone().ToList();
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.Nodes.NodesReplace(previous);
-                    });
+                    };
                 }
             });
 

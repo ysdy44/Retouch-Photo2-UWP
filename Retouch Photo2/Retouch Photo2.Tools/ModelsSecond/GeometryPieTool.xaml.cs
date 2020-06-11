@@ -154,13 +154,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryPieLayer geometryPieLayer = (GeometryPieLayer)layer;
 
                         var previous = geometryPieLayer.SweepAngle;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryPieLayer.IsRefactoringRender = true;
                             geometryPieLayer.IsRefactoringIconRender = true;
                             geometryPieLayer.SweepAngle = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryPieLayer.IsRefactoringRender = true;
@@ -240,13 +240,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryPieLayer geometryPieLayer = (GeometryPieLayer)layer;
 
                         var previous = geometryPieLayer.StartingSweepAngle;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryPieLayer.IsRefactoringRender = true;
                             geometryPieLayer.IsRefactoringIconRender = true;
                             geometryPieLayer.SweepAngle = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryPieLayer.IsRefactoringRender = true;

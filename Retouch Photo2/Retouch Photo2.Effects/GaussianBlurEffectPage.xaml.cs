@@ -64,13 +64,13 @@ namespace Retouch_Photo2.Effects.Models
                 ILayer layer = layerage.Self;
 
                 var previous = layer.Effect.GaussianBlur_Radius;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Effect.GaussianBlur_Radius = previous;
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -119,13 +119,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.GaussianBlur_IsOn;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.GaussianBlur_IsOn = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -189,13 +189,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingGaussianBlur_Radius;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.GaussianBlur_Radius = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;

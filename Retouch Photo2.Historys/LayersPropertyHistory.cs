@@ -9,9 +9,9 @@ namespace Retouch_Photo2.Historys
     public class LayersPropertyHistory : HistoryBase, IHistory
     {
         /// <summary>
-        /// Undo actions
+        /// Undo action
         /// </summary>
-        public Stack<Action> UndoActions { get; set; } = new Stack<Action>();
+        public Action UndoAction { get; set; }
 
         //@Construct
         /// <summary>
@@ -25,10 +25,7 @@ namespace Retouch_Photo2.Historys
 
         public override void Undo()
         {
-            foreach (Action indoAction in UndoActions)
-            {
-                indoAction?.Invoke();
-            }
+            this.UndoAction?.Invoke();
         }
     }
 }

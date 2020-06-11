@@ -183,10 +183,10 @@ namespace Retouch_Photo2.ViewModels
                 var previous = layer.IsSelected;
                 if (previous != isSelected)
                 {
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         layer.IsSelected = previous;
-                    });
+                    };
                 }
 
                 layer.IsSelected = isSelected;
@@ -217,10 +217,10 @@ namespace Retouch_Photo2.ViewModels
 
                 //History
                 var previous = layer.IsSelected;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     layer.IsSelected = previous;
-                });
+                };
 
                 layer.IsSelected = !layer.IsSelected;
             }

@@ -131,14 +131,14 @@ namespace Retouch_Photo2.Tools.Models
                        
             //History
             var previous = layer.Nodes.NodesClone().ToList();
-            history.UndoActions.Push(() =>
+            history.UndoAction += () =>
             {
                 //Refactoring
                 layer.IsRefactoringTransformer = true;
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
                 layer.Nodes.NodesReplace(previous);
-            });
+            };
 
             //History
             this.ViewModel.HistoryPush(history);

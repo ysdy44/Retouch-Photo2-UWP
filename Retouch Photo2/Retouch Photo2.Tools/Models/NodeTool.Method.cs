@@ -79,14 +79,14 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     //History
                     var previous = layer.Nodes.NodesStartingClone().ToList();
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringTransformer = true;
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Nodes.NodesReplace(previous);
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringTransformer = true;
@@ -154,14 +154,14 @@ namespace Retouch_Photo2.Tools.Models
 
                 var previous = layer.Nodes.Index;
                 var previous1 = node.Clone();
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringTransformer = true;
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Nodes[previous] = previous1;
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringTransformer = true;
@@ -216,7 +216,7 @@ namespace Retouch_Photo2.Tools.Models
                 var previous = layer.Nodes.Index;
                 var previous1 = node.StartingLeftControlPoint;
                 var previous2 = node.StartingRightControlPoint;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     Node node2 = layer.Nodes[previous];
 
@@ -226,7 +226,7 @@ namespace Retouch_Photo2.Tools.Models
                     layer.IsRefactoringIconRender = true;
                     node2.LeftControlPoint = previous1;
                     node2.RightControlPoint = previous2;
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringTransformer = true;
@@ -295,14 +295,14 @@ namespace Retouch_Photo2.Tools.Models
 
                     //History
                     var previous = layer.Nodes.NodesStartingClone().ToList();
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringTransformer = true;
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Nodes.NodesReplace(previous);
-                    });
+                    };
                 }
             });
 

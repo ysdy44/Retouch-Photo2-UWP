@@ -19,15 +19,8 @@ namespace Retouch_Photo2.Controls
                 LayerageCollection.ItemClick += (layer) =>
                 {
                     Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
-
-                    //if (layer.IsSelected == true)
-                    //{
-                    // this.ShowLayerMenu(layerage);
-                    //}
-                    //else
-                    //{
+                    
                     this.ItemClick(layerage);
-                    //}
                 };
             }
             if (LayerageCollection.RightTapped == null)
@@ -51,12 +44,12 @@ namespace Retouch_Photo2.Controls
                     LayersPropertyHistory history = new LayersPropertyHistory("Set visibility");
 
                     var previous = layer.Visibility;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.Visibility = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;

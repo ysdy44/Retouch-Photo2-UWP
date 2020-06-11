@@ -157,13 +157,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryDountLayer geometryDountLayer = (GeometryDountLayer)layer;
 
                         var previous = geometryDountLayer.HoleRadius;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryDountLayer.IsRefactoringRender = true;
                             geometryDountLayer.IsRefactoringIconRender = true;
                             geometryDountLayer.HoleRadius = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryDountLayer.IsRefactoringRender = true;
@@ -247,13 +247,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryDountLayer geometryDountLayer = (GeometryDountLayer)layer;
 
                         var previous = geometryDountLayer.StartingHoleRadius;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryDountLayer.IsRefactoringRender = true;
                             geometryDountLayer.IsRefactoringIconRender = true;
                             geometryDountLayer.HoleRadius = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryDountLayer.IsRefactoringRender = true;

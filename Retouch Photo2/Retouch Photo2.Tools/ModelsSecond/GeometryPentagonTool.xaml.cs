@@ -153,13 +153,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryPentagonLayer geometryPentagonLayer = (GeometryPentagonLayer)layer;
 
                         var previous = geometryPentagonLayer.Points;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryPentagonLayer.IsRefactoringRender = true;
                             geometryPentagonLayer.IsRefactoringIconRender = true;
                             geometryPentagonLayer.Points = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryPentagonLayer.IsRefactoringRender = true;
@@ -243,13 +243,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryPentagonLayer geometryPentagonLayer = (GeometryPentagonLayer)layer;
 
                         var previous = geometryPentagonLayer.StartingPoints;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
                             geometryPentagonLayer.Points = previous;
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;

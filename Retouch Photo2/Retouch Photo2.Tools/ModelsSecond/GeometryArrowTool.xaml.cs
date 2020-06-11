@@ -186,13 +186,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
 
                         var previous = geometryArrowLayer.Value;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryArrowLayer.IsRefactoringRender = true;
                             geometryArrowLayer.IsRefactoringIconRender = true;
                             geometryArrowLayer.Value = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryArrowLayer.IsRefactoringRender = true;
@@ -276,13 +276,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
 
                         var previous = geometryArrowLayer.StartingValue;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryArrowLayer.IsRefactoringRender = true;
                             geometryArrowLayer.IsRefactoringIconRender = true;
                             geometryArrowLayer.Value = previous;
-                        });
+                        };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
@@ -319,13 +319,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
 
                         var previous = geometryArrowLayer.LeftTail;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryArrowLayer.IsRefactoringRender = true;
                             geometryArrowLayer.IsRefactoringIconRender = true;
                             geometryArrowLayer.LeftTail = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryArrowLayer.IsRefactoringRender = true;
@@ -362,13 +362,13 @@ namespace Retouch_Photo2.Tools.Models
                         GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
 
                         var previous = geometryArrowLayer.RightTail;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             //Refactoring
                             geometryArrowLayer.IsRefactoringRender = true;
                             geometryArrowLayer.IsRefactoringIconRender = true;
                             geometryArrowLayer.RightTail = previous;
-                        });
+                        };
 
                         //Refactoring
                         geometryArrowLayer.IsRefactoringRender = true;

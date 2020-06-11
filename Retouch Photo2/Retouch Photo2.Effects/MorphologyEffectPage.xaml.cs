@@ -65,13 +65,13 @@ namespace Retouch_Photo2.Effects.Models
                 ILayer layer = layerage.Self;
 
                 var previous = layer.Effect.Morphology_Size;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Effect.Morphology_Size = previous;
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -121,13 +121,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.Morphology_IsOn;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.Morphology_IsOn = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -194,13 +194,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingMorphology_Size;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.Morphology_Size = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;

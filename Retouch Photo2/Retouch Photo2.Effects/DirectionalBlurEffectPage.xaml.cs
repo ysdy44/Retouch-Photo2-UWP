@@ -68,14 +68,14 @@ namespace Retouch_Photo2.Effects.Models
 
                 var previous1 = layer.Effect.DirectionalBlur_Radius;
                 var previous2 = layer.Effect.DirectionalBlur_Angle;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {   
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Effect.DirectionalBlur_Radius = previous1;
                     layer.Effect.DirectionalBlur_Angle = previous2;
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -126,13 +126,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.DirectionalBlur_IsOn;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.DirectionalBlur_IsOn = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -196,13 +196,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingDirectionalBlur_Radius;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.DirectionalBlur_Radius = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -266,13 +266,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingDirectionalBlur_Angle;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.DirectionalBlur_Angle = previous;
-                    });
+                    };
                     
                     //Refactoring
                     layer.IsRefactoringRender = true;

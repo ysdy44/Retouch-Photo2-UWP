@@ -3,24 +3,16 @@ using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Adjustments.Pages;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Filters;
-using Retouch_Photo2.Styles;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
-using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Retouch_Photo2.Historys;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -32,7 +24,7 @@ namespace Retouch_Photo2.Menus.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        
+
 
         //@VisualState
         IList<IAdjustment> _vsAdjustments;
@@ -136,7 +128,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.adjustment = value;
             }
         }
-               
+
         public bool AdjustmentPageOrFilters
         {
             set
@@ -244,7 +236,7 @@ namespace Retouch_Photo2.Menus.Models
     /// Retouch_Photo2's the only <see cref = "AdjustmentMenu" />. 
     /// </summary>
     public sealed partial class AdjustmentMenu : UserControl, IMenu
-    {    
+    {
         //DataContext
         public void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
         {
@@ -266,8 +258,8 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = 
-            this._Expander.Title = 
+            this._button.ToolTip.Content =
+            this._Expander.Title =
             this._Expander.CurrentTitle = resource.GetString("/Menus/Adjustment");
 
             this.ZeroTextBlock.Text = resource.GetString("/Menus/Adjustment_ZeroTip");
@@ -301,7 +293,7 @@ namespace Retouch_Photo2.Menus.Models
             this.ViewModel.Invalidate();//Invalidate
         }
     }
-    
+
     /// <summary> 
     /// Retouch_Photo2's the only <see cref = "AdjustmentMenu" />. 
     /// </summary>
@@ -391,7 +383,7 @@ namespace Retouch_Photo2.Menus.Models
 
 
                 var previous = layer.Filter.Clone();
-                history.UndoActions.Push((() =>
+                history.UndoAction += () =>
                 {
                     ILayer layer2 = layerage.Self;
 
@@ -399,7 +391,7 @@ namespace Retouch_Photo2.Menus.Models
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer2.Filter = previous.Clone();
-                }));
+                };
 
 
                 //Refactoring
@@ -435,13 +427,13 @@ namespace Retouch_Photo2.Menus.Models
 
 
                 var previous = layer.Filter.Clone();
-                history.UndoActions.Push((() =>
-                {            
+                history.UndoAction += () =>
+                {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Filter = previous.Clone();
-                }));
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -475,14 +467,14 @@ namespace Retouch_Photo2.Menus.Models
                 ILayer layer = layerage.Self;
 
                 var previous = layer.Filter.Clone();
-                history.UndoActions.Push((() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Filter = previous.Clone();
-                }));
-                
+                };
+
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
@@ -502,6 +494,6 @@ namespace Retouch_Photo2.Menus.Models
             this.InvalidateItemsControl();//Invalidate
             this.ViewModel.Invalidate();//Invalidate     
         }
-        
+
     }
 }

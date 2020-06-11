@@ -65,13 +65,13 @@ namespace Retouch_Photo2.Effects.Models
                 ILayer layer = layerage.Self;
 
                 var previous = layer.Effect.Straighten_Angle;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
                     layer.Effect.Straighten_Angle = previous;
-                });
+                };
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
@@ -121,13 +121,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.Straighten_IsOn;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.Straighten_IsOn = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
@@ -190,13 +190,13 @@ namespace Retouch_Photo2.Effects.Models
 
                     //History
                     var previous = layer.Effect.StartingStraighten_Angle;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Effect.Straighten_Angle = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;

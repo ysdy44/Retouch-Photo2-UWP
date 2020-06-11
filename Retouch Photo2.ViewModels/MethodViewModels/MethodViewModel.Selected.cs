@@ -24,11 +24,11 @@ namespace Retouch_Photo2.ViewModels
                 {
                     //History
                     var previous = layer.IsSelected;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         layer.IsSelected = previous;
-                    });
-                    
+                    };
+
                     layer.IsSelected = false;
                 }
             });
@@ -49,10 +49,10 @@ namespace Retouch_Photo2.ViewModels
             LayersPropertyHistory history = new LayersPropertyHistory("Set is selected");
 
             var previous = selectedLayer.IsSelected;
-            history.UndoActions.Push(() =>
+            history.UndoAction += () =>
             {
                 selectedLayer.IsSelected = previous;
-            });
+            };
 
             selectedLayer.IsSelected = !selectedLayer.IsSelected;
 
@@ -77,10 +77,10 @@ namespace Retouch_Photo2.ViewModels
             if (selectedLayer.IsSelected == false)
             {
                 var previous = selectedLayer.IsSelected;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     selectedLayer.IsSelected = previous;
-                });
+                };
 
                 selectedLayer.IsSelected = true;
             }
@@ -96,10 +96,10 @@ namespace Retouch_Photo2.ViewModels
                     {
                         //History
                         var previous = layer.IsSelected;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             layer.IsSelected = previous;
-                        });
+                        };
 
                         layer.IsSelected = false;
                     }
@@ -125,11 +125,11 @@ namespace Retouch_Photo2.ViewModels
             {
                 //History
                 var previous = selectedLayer.IsSelected;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     selectedLayer.IsSelected = previous;
-                });
-                
+                };
+
                 selectedLayer.IsSelected = true;
             }
 
@@ -152,10 +152,10 @@ namespace Retouch_Photo2.ViewModels
             {
                 //History
                 var previous = selectedLayer.IsSelected;
-                history.UndoActions.Push(() =>
+                history.UndoAction += () =>
                 {
                     selectedLayer.IsSelected = previous;
-                });
+                };
 
                 selectedLayer.IsSelected = false;
             }
@@ -186,10 +186,10 @@ namespace Retouch_Photo2.ViewModels
                     {
                         //History
                         var previous = selectedLayer.IsSelected;
-                        history.UndoActions.Push(() =>
+                        history.UndoAction += () =>
                         {
                             selectedLayer.IsSelected = previous;
-                        });
+                        };
 
                         layer.IsSelected = false;
                     }

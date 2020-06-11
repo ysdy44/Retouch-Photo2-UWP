@@ -90,13 +90,13 @@ namespace Retouch_Photo2.Tools
                     ITextLayer textLayer = (ITextLayer)layer;
                     
                     var previous = textLayer.FontText;
-                    history.UndoActions.Push(() =>
+                    history.UndoAction += () =>
                     {
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         textLayer.FontText = previous;
-                    });
+                    };
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
