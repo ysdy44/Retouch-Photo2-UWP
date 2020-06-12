@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class NodeIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a NodeIcon. 
+        /// </summary>
         public NodeIcon()
         {
             this.InitializeComponent();

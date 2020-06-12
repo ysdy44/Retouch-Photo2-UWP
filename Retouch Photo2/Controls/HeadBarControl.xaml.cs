@@ -7,8 +7,8 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Controls
 {
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "FootPageControl" />. 
+    /// <summary>
+    /// Represents a header bar control that containing some <see cref="ExpandAppbarButton"/>。
     /// </summary>
     public sealed partial class HeadBarControl : UserControl
     {
@@ -43,6 +43,9 @@ namespace Retouch_Photo2.Controls
 
         //@VisualState
         bool _vsIsHeadLeft;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get => this._vsIsHeadLeft ? this.HeadLeftStar : this.HeadRightStar;
@@ -51,6 +54,9 @@ namespace Retouch_Photo2.Controls
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a HeadBarControl. 
+        /// </summary>
         public HeadBarControl()
         {
             this.InitializeComponent();
@@ -74,7 +80,7 @@ namespace Retouch_Photo2.Controls
 
 
         //Menu
-        public void ConstructMenu()
+        private void ConstructMenu()
         {
             //Menu
             foreach (IMenu menu in this.TipViewModel.Menus)
@@ -83,7 +89,7 @@ namespace Retouch_Photo2.Controls
             }
         }
 
-        public void ConstructMenuButton(IMenu menu)
+        private void ConstructMenuButton(IMenu menu)
         {
             if (menu == null) return;
             UIElement button = menu.Expander.Button.Self;
@@ -92,8 +98,8 @@ namespace Retouch_Photo2.Controls
         }
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "FootPageControl" />. 
+    /// <summary>
+    /// Represents a header bar control, that containing some <see cref="ExpandAppbarButton"/>。
     /// </summary>
     public sealed partial class HeadBarControl : UserControl
     {

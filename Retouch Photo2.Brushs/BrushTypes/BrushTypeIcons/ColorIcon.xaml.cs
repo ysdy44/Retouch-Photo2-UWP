@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Brushs.BrushTypeIcons
     public sealed partial class ColorIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a ColorIcon. 
+        /// </summary>
         public ColorIcon()
         {
             this.InitializeComponent();

@@ -18,6 +18,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Generic
+        /// <summary> Gets IAdjustment's adjustment. </summary>
         public GammaTransferAdjustment Adjustment { get; set; }
 
         //@Converter
@@ -25,6 +26,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a GammaTransferPage. 
+        /// </summary>
         public GammaTransferPage()
         {
             this.InitializeComponent();
@@ -60,7 +64,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
 
         //Strings
-        public void ConstructStrings()
+        private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
@@ -81,15 +85,21 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
         //@Content
+        /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.GammaTransfer;
+        /// <summary> Gets the icon. </summary>
         public FrameworkElement Icon { get; } = new GammaTransferIcon();
+        /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
+        /// <summary> Gets the text. </summary>
         public string Text { get; private set; }
 
-
+        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new GammaTransferAdjustment();
-
-
+        
+        /// <summary>
+        /// Reset the <see cref="IAdjustmentPage"/>'s data.
+        /// </summary>
         public void Reset()
         {
             this.ResetAlpha();
@@ -191,6 +201,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                 }
             }
         }
+        /// <summary>
+        /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
+        /// </summary>
+        /// <param name="adjustment"> The adjustment. </param>
         public void Follow(GammaTransferAdjustment adjustment)
         {
             this.FollowAlpha(adjustment);

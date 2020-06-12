@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Retouch_Photo2.Historys
 {
@@ -23,6 +22,7 @@ namespace Retouch_Photo2.Historys
             base.Title = title;
         }
 
+        /// <summary> Undo method. </summary>
         public override void Undo()
         {
             this.UndoAction?.Invoke();

@@ -50,6 +50,9 @@ namespace Retouch_Photo2.Elements.MainPages
 
         //@VisualState
         MainPageState _vsState = MainPageState.Main;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get

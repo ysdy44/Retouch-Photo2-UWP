@@ -7,23 +7,25 @@ namespace Retouch_Photo2.Layers
     /// </summary>
     public partial class LayerageCollection
     {
-        
+
         /// <summary>
         /// Mezzanine a layerage.
         /// </summary>
+        /// <param name="layerageCollection"> The layerage-collection. </param>
         /// <param name="mezzanineLayerage"> The mezzanine layerage. </param>
         public static void Mezzanine(LayerageCollection layerageCollection, Layerage mezzanineLayerage) => LayerageCollection._mezzanine(layerageCollection, mezzanineLayerage, null);
-       
+
         /// <summary>
         /// Mezzanine layers.
         /// </summary>
+        /// <param name="layerageCollection"> The layerage-collection. </param>
         /// <param name="mezzanineLayerages"> The mezzanine layers. </param>
         public static void MezzanineRange(LayerageCollection layerageCollection, IEnumerable<Layerage> mezzanineLayerages) => LayerageCollection._mezzanine(layerageCollection, null, mezzanineLayerages);
 
         private static void _mezzanine(LayerageCollection layerageCollection, Layerage mezzanineLayer, IEnumerable<Layerage> mezzanineLayers)
         {
             //Layerages
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
+            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected(layerageCollection);
             Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayerages);
             //if (outermost == null) return; // If count = 0, it will be useless.
             IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(outermost);
@@ -49,7 +51,9 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Remove the mezzanine layerage.
         /// </summary>
-        public static void RemoveMezzanineLayer(LayerageCollection layerageCollection, Layerage mezzanineLayerage)
+        /// <param name="layerageCollection"> The layerage-collection. </param>
+        /// <param name="mezzanineLayerage"> The mezzanine-layerage. </param>
+        public static void RemoveMezzanine(LayerageCollection layerageCollection, Layerage mezzanineLayerage)
         {
             if (mezzanineLayerage == null) return;
      

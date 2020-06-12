@@ -1,6 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
-using Retouch_Photo2.Elements;
 using System.Numerics;
 
 namespace Retouch_Photo2.Brushs
@@ -11,6 +10,11 @@ namespace Retouch_Photo2.Brushs
     public partial class BrushBase : IBrush
     {
 
+        /// <summary>
+        /// Gets <see cref="ICanvasBrush"/>.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <returns> The provided <see cref="ICanvasBrush"/>. </returns>
         public ICanvasBrush GetICanvasBrush(ICanvasResourceCreator resourceCreator)
         {
             switch (this.Type)

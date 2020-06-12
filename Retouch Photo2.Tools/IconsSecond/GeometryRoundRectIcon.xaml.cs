@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class GeometryRoundRectIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryRoundRectIcon. 
+        /// </summary>
         public GeometryRoundRectIcon()
         {
             this.InitializeComponent();

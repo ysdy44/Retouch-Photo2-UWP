@@ -1,5 +1,4 @@
-﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.ViewModels;
+﻿using Retouch_Photo2.ViewModels;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -9,6 +8,9 @@ using Windows.Storage.Streams;
 
 namespace Retouch_Photo2
 {
+    /// <summary>
+    /// Provide constant and static methods for XElement.
+    /// </summary>
     public static partial class XML
     {
         

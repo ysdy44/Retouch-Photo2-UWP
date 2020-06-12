@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Brushs.BrushTypeIcons
     public sealed partial class RadialGradientIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a RadialGradientIcon. 
+        /// </summary>
         public RadialGradientIcon()
         {
             this.InitializeComponent();

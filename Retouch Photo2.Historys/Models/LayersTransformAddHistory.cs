@@ -9,9 +9,7 @@ namespace Retouch_Photo2.Historys
     /// </summary>
     public class LayersTransformAddHistory : HistoryBase, IHistory
     {
-        /// <summary>
-        /// Undo actions
-        /// </summary>
+
         readonly IDictionary<ILayer, Vector2> UndoActions = new Dictionary<ILayer, Vector2>();
 
         //@Construct
@@ -36,6 +34,7 @@ namespace Retouch_Photo2.Historys
             this.UndoActions.Add(layer, previous);
         }
 
+        /// <summary> Undo method. </summary>
         public override void Undo()
         {
             foreach (var undo in this.UndoActions)

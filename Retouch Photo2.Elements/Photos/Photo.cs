@@ -4,7 +4,7 @@ using Windows.Storage;
 namespace Retouch_Photo2.Elements
 {
     /// <summary>
-    /// Image of <see cref="Photo">.
+    /// Represents a photothat contains dpi, width, height information.
     /// </summary>
     public partial class Photo
     {

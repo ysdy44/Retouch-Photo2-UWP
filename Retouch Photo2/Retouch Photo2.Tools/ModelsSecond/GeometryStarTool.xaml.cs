@@ -12,9 +12,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    /// <summary>
-    /// Enum of <see cref="GeometryStarTool"/>.
-    /// </summary>
     internal enum GeometryStarMode
     {
         /// <summary> Normal. </summary>
@@ -39,7 +36,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar  
-        internal GeometryStarMode TouchBarMode
+        private GeometryStarMode TouchBarMode
         {
             set
             {
@@ -73,6 +70,9 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryStarTool. 
+        /// </summary>
         public GeometryStarTool()
         {
             this.InitializeComponent();

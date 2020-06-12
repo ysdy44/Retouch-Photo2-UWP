@@ -96,6 +96,9 @@ namespace Retouch_Photo2.Elements.SettingPages
         #endregion
 
         //@Construct
+        /// <summary>
+        /// Initializes a AdaptiveWidthGrid. 
+        /// </summary>
         public AdaptiveWidthGrid()
         {
             this.InitializeComponent();

@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //Pen
-        public NodeCollectionMode Mode = NodeCollectionMode.None;
+        NodeCollectionMode Mode = NodeCollectionMode.None;
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {

@@ -26,8 +26,8 @@ namespace Retouch_Photo2.Menus.Models
         FontWeight,
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "TextMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Texts"/>.
     /// </summary>
     public sealed partial class TextMenu : UserControl, IMenu
     {
@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Menus.Models
         //@Converter
         private int FontSizeConverter(float fontSize) => (int)fontSize;
 
-        TextMenuState State
+        private TextMenuState State
         {
             set
             {
@@ -65,6 +65,9 @@ namespace Retouch_Photo2.Menus.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a TextMenu. 
+        /// </summary>
         public TextMenu()
         {
             this.InitializeComponent();
@@ -80,11 +83,12 @@ namespace Retouch_Photo2.Menus.Models
         }
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "TextMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Texts"/>.
     /// </summary>
     public sealed partial class TextMenu : UserControl, IMenu
     {
+
         //Strings
         private void ConstructStrings()
         {
@@ -130,14 +134,16 @@ namespace Retouch_Photo2.Menus.Models
         }
 
         //Menu  
+        /// <summary> Gets the type. </summary>
         public MenuType Type => MenuType.Text;
+        /// <summary> Gets the expander. </summary>
         public IExpander Expander => this._Expander;
         MenuButton _button = new MenuButton
         {
             CenterContent = new Retouch_Photo2.Texts.Icon()
         };
         
-        public void ConstructMenu()
+        private void ConstructMenu()
         {
             this._Expander.Layout = this;
             this._Expander.Button = this._button;
@@ -145,8 +151,8 @@ namespace Retouch_Photo2.Menus.Models
         }
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "TextMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Texts"/>.
     /// </summary>
     public sealed partial class TextMenu : UserControl, IMenu
     {
@@ -259,8 +265,8 @@ namespace Retouch_Photo2.Menus.Models
 
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "TextMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Texts"/>.
     /// </summary>
     public sealed partial class TextMenu : UserControl, IMenu
     {

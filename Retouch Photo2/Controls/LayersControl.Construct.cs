@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Input;
 namespace Retouch_Photo2.Controls
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "LayersControl" />. 
+    /// Represents a control that arranges <see cref="LayerControl"/> vertically.
     /// </summary>
     public partial class LayersControl : UserControl
     {

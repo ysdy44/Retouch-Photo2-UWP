@@ -9,13 +9,13 @@ namespace Retouch_Photo2.Adjustments
     /// </summary>
     public interface IAdjustment
     {
-        /// <summary> Gets IAdjustment's type. </summary>
+        /// <summary> Gets the type. </summary>
         AdjustmentType Type { get; }
         /// <summary> Gets whether page is visible. </summary>
         Visibility PageVisibility { get; }
-        /// <summary> Gets IAdjustment's page. </summary>
+        /// <summary> Gets the page. </summary>
         UIElement Page { get; }
-        /// <summary> Gets IAdjustment's text. </summary>
+        /// <summary> Gets the text. </summary>
         string Text { get; }
 
         /// <summary> Reset the adjustment. </summary>

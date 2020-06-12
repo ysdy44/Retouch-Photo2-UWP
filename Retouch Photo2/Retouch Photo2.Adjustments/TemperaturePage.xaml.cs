@@ -18,9 +18,13 @@ namespace Retouch_Photo2.Adjustments.Pages
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Generic
+        /// <summary> Gets IAdjustment's adjustment. </summary>
         public TemperatureAdjustment Adjustment { get; set; }
 
         //@Construct
+        /// <summary>
+        /// Initializes a TemperaturePage. 
+        /// </summary>
         public TemperaturePage()
         {
             this.InitializeComponent();
@@ -38,7 +42,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
 
         //Strings
-        public void ConstructStrings()
+        private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
@@ -49,14 +53,21 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
         //@Content
+        /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Temperature;
+        /// <summary> Gets the icon. </summary>
         public FrameworkElement Icon { get; } = new TemperatureIcon();
+        /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
+        /// <summary> Gets the text. </summary>
         public string Text { get; private set; }
 
-
+        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new TemperatureAdjustment();
 
+        /// <summary>
+        /// Reset the <see cref="IAdjustmentPage"/>'s data.
+        /// </summary>
         public void Reset()
         {
             this.TemperatureSlider.Value = 0;
@@ -103,6 +114,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                 }
             }
         }
+        /// <summary>
+        /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
+        /// </summary>
+        /// <param name="adjustment"> The adjustment. </param>
         public void Follow(TemperatureAdjustment adjustment)
         {
             this.TemperatureSlider.Value = adjustment.Temperature * 100;
@@ -116,7 +131,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class TemperaturePage : IAdjustmentGenericPage<TemperatureAdjustment>
     {
 
-        public void ConstructTemperature()
+        private void ConstructTemperature()
         {
             this.TemperatureSlider.Value = 0;
             this.TemperatureSlider.Minimum = -100;
@@ -200,7 +215,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        public void ConstructTint()
+        private void ConstructTint()
         {
             this.TintSlider.Value = 0;
             this.TintSlider.Minimum = -100;

@@ -1,19 +1,15 @@
 ﻿using Retouch_Photo2.Elements.MainPages;
-using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using Windows.Storage.Pickers;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo2
 {
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "MainPage" />. 
+    /// <summary>
+    /// Represents a page used to manipulate some items in local folder.
     /// </summary>
     public sealed partial class MainPage : Page
     {
@@ -26,6 +22,9 @@ namespace Retouch_Photo2
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a MainPage. 
+        /// </summary>
         public MainPage()
         {
             this.InitializeComponent();
@@ -99,12 +98,12 @@ namespace Retouch_Photo2
 
         }
 
-        //The current page becomes the active page
+        /// <summary> The current page becomes the active page. </summary>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             await this._lockOnNavigatedTo();
 
-            /// Occurs occuse after <see  cref="DrawPage.Frame.GoBack()"/>;
+            // Occurs occuse after <see  cref="DrawPage.Frame.GoBack()"/>;
             if (this.ViewModel.IsUpdateThumbnailByName)
             {
                 this.ViewModel.IsUpdateThumbnailByName = false;
@@ -116,10 +115,8 @@ namespace Retouch_Photo2
                 }
             }
         }
-        //The current page no longer becomes an active page
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-        }
+        /// <summary> The current page no longer becomes an active page. </summary>
+        protected override void OnNavigatedFrom(NavigationEventArgs e) { }
 
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -8,15 +7,20 @@ using Windows.UI.Xaml.Media;
 namespace Retouch_Photo2.Blends
 {
     /// <summary>
-    /// Retouch_Photo2 Tag 's Control.
+    /// Segmented of <see cref="TagType"/>
     /// </summary>
-    public sealed partial class TagTypeControl : UserControl
+    public sealed partial class TagTypeSegmented : UserControl
     {
+
         //@Delegate
+        /// <summary> Occurs when tag-type change. </summary>
         public EventHandler<TagType> TypeChanged;
 
         //@VisualState
         TagType _vsTagType;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -45,10 +49,10 @@ namespace Retouch_Photo2.Blends
             get { return (TagType)GetValue(TypeProperty); }
             set { SetValue(TypeProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "TagTypeControl.Type" /> dependency property. </summary>
-        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(TagType), typeof(TagTypeControl), new PropertyMetadata(TagType.None, (sender, e) =>
+        /// <summary> Identifies the <see cref = "TagTypeSegmented.Type" /> dependency property. </summary>
+        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(TagType), typeof(TagTypeSegmented), new PropertyMetadata(TagType.None, (sender, e) =>
         {
-            TagTypeControl con = (TagTypeControl)sender;
+            TagTypeSegmented con = (TagTypeSegmented)sender;
 
             if (e.NewValue is TagType value)
             {
@@ -62,7 +66,10 @@ namespace Retouch_Photo2.Blends
 
 
         //@Construct
-        public TagTypeControl()
+        /// <summary>
+        /// Initializes a TagTypeControl. 
+        /// </summary>
+        public TagTypeSegmented()
         {
             this.InitializeComponent();
 
@@ -80,7 +87,7 @@ namespace Retouch_Photo2.Blends
 
         private void ConstructRadioButton(RadioButton radioButton, TagType tagType)
         {
-            Color color = TagTypeHelper.TagConverter(tagType);
+            Color color = tagType.ToColor();
 
             radioButton.Background = new SolidColorBrush(color);
             radioButton.Click += (s, e) =>

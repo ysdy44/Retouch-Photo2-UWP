@@ -90,6 +90,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
+    <DocumentationFile>bin\x64\Debug\Retouch Photo2.Historys.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <PlatformTarget>x64</PlatformTarget>
@@ -111,12 +112,12 @@
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="IHistory.cs" />
-    <Compile Include="LayeragesArrangeHistory.cs" />
-    <Compile Include="LayersPropertyHistory.cs" />
-    <Compile Include="LayersSetupTransformAddHistory.cs" />
-    <Compile Include="LayersSetupTransformMultipliesHistory.cs" />
-    <Compile Include="LayersTransformAddHistory.cs" />
-    <Compile Include="LayersTransformMultipliesHistory.cs" />
+    <Compile Include="Models\LayeragesArrangeHistory.cs" />
+    <Compile Include="Models\LayersPropertyHistory.cs" />
+    <Compile Include="Models\LayersSetupTransformAddHistory.cs" />
+    <Compile Include="Models\LayersSetupTransformMultipliesHistory.cs" />
+    <Compile Include="Models\LayersTransformAddHistory.cs" />
+    <Compile Include="Models\LayersTransformMultipliesHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Historys.rd.xml" />
   </ItemGroup>

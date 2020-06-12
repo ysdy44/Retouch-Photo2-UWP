@@ -4,8 +4,8 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2.Elements
 {
-    /// <summary>
-    /// Interface of <see cref="Expander">.
+    /// <summary> 
+    /// Represents the control that a drawer can be folded.
     /// </summary>
     public interface IExpander
     {

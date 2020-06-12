@@ -28,14 +28,14 @@ namespace Retouch_Photo2.Adjustments.Pages
         #endregion
 
 
-        public void ResetRed()
+        private void ResetRed()
         {
             this.RedToggleSwitch.IsOn = false;
             this.RedOffsetSlider.Value = 0;
             this.RedExponentSlider.Value = 100;
             this.RedAmplitudeSlider.Value = 100;
         }
-        public void FollowRed(GammaTransferAdjustment adjustment)
+        private void FollowRed(GammaTransferAdjustment adjustment)
         {
             this.RedToggleSwitch.IsOn = !adjustment.RedDisable;
             this.RedOffsetSlider.Value = adjustment.RedOffset * 100.0f;
@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.RedAmplitudeSlider.Value = adjustment.RedAmplitude * 100.0f;
         }
 
-        public void ConstructStringsRed(string title, string offset, string exponent, string amplitude)
+        private void ConstructStringsRed(string title, string offset, string exponent, string amplitude)
         {
             this.RedTextBlock.Text = offset;
             this.RedOffsetTextBlock.Text = offset;
@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructRedDisable()
+        private void ConstructRedDisable()
         {
             this.RedTitleGrid.Tapped += (s, e) =>
             {
@@ -113,7 +113,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructRedOffset()
+        private void ConstructRedOffset()
         {
             this.RedOffsetSlider.Value = 0;
             this.RedOffsetSlider.Minimum = 0;
@@ -198,7 +198,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructRedExponent()
+        private void ConstructRedExponent()
         {
             this.RedExponentSlider.Value = 100;
             this.RedExponentSlider.Minimum = 0;
@@ -283,7 +283,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructRedAmplitude()
+        private void ConstructRedAmplitude()
         {
             this.RedAmplitudeSlider.Value = 100;
             this.RedAmplitudeSlider.Minimum = 0;

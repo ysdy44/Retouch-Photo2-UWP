@@ -16,7 +16,8 @@ namespace Retouch_Photo2.Layers
         /// Remove a layerage from a parents's children,
         /// and insert to parents's parents's children
         /// </summary>
-        /// <param name="child"> The child. </param>
+        /// <param name="layerageCollection"> The layerage-collection. </param>
+        /// <param name="layerage"> The layerage. </param>
         public static bool ReleaseGroupLayer(LayerageCollection layerageCollection, Layerage layerage)
         {
             Layerage parents = layerage.Parents;
@@ -45,7 +46,7 @@ namespace Retouch_Photo2.Layers
         public static void UnGroupAllSelectedLayer(LayerageCollection layerageCollection)
         {
             //Layerages
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
+            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected(layerageCollection);
             Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayerages);
             if (outermost == null) return;
             IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(outermost);
@@ -83,10 +84,11 @@ namespace Retouch_Photo2.Layers
         /// Group all selected layerages.
         /// </summary>     
         /// <param name="customDevice"> The custom-device. </param>
+        /// <param name="layerageCollection"> The layerage-collection. </param>
         public static void GroupAllSelectedLayers(CanvasDevice customDevice, LayerageCollection layerageCollection)
         {
             //Layerages
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
+            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected(layerageCollection);
             Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayerages);
             if (outermost == null) return;
             IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(outermost);

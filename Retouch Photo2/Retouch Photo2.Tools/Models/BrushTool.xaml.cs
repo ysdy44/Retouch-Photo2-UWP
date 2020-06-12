@@ -35,6 +35,9 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a BrushTool. 
+        /// </summary>
         public BrushTool()
         {
             this.InitializeComponent();
@@ -146,7 +149,6 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
         public void OnNavigatedFrom() { }
-
     }
 
     /// <summary>
@@ -183,7 +185,7 @@ namespace Retouch_Photo2.Tools.Models
         readonly ToolButton _button = new ToolButton(new BrushIcon());
 
 
-        BrushHandleMode OperateMode = BrushHandleMode.None;
+        BrushHandleMode HandleMode = BrushHandleMode.None;
 
 
         public void Started(Vector2 startingPoint, Vector2 point)
@@ -258,7 +260,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
 
-            this.OperateMode = BrushHandleMode.None;
+            this.HandleMode = BrushHandleMode.None;
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
         public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);

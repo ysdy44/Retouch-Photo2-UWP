@@ -10,15 +10,17 @@ using Windows.Storage.Streams;
 
 namespace Retouch_Photo2
 {
+    /// <summary>
+    /// Provide constant and static methods for XElement.
+    /// </summary>
     public static partial class XML
     {
 
-
         /// <summary>
-        /// Load <see cref="LayerBase"/>s file from temporary folder.
+        /// Load <see cref="ILayer"/>s file from temporary folder.
         /// </summary>
         /// <param name="customDevice"> The custom-device. </param>
-        /// <returns> The product layers. </returns>
+        /// <returns> The product <see cref="ILayer"/>s. </returns>
         public static IEnumerable<ILayer> LoadLayersFile(CanvasDevice customDevice)
         {
             //Create an XDocument object.
@@ -37,8 +39,12 @@ namespace Retouch_Photo2
                 return layers;
             }
         }
-
-
+        
+        /// <summary>
+        /// Save <see cref="ILayer"/>s to zip folder.
+        /// </summary>
+        /// <param name="zipFolder"> The zip folder. </param>
+        /// <param name="layers"> The layers. </param>
         public static async Task SaveLayersFile(StorageFolder zipFolder, IEnumerable<ILayer> layers)
         {
             XDocument document = Retouch_Photo2.Layers.XML.SaveLayers(layers);

@@ -9,8 +9,8 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Elements
 {
-    /// <summary>
-    /// Convert to curves layer.
+    /// <summary> 
+    /// Represents a control that convert layer to curves layer.
     /// </summary>
     public sealed partial class ConvertToCurvesButton : UserControl
     {
@@ -21,6 +21,9 @@ namespace Retouch_Photo2.Tools.Elements
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a ConvertToCurvesButton. 
+        /// </summary>
         public ConvertToCurvesButton()
         {
             this.InitializeComponent();

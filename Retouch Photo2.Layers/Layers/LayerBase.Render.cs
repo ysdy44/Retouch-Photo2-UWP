@@ -18,13 +18,20 @@ namespace Retouch_Photo2.Layers
     public abstract partial class LayerBase
     {
 
+        /// <summary> Gets or sets ILayer is need to refactoring render. </summary>
         public bool IsRefactoringRender { get; set; } = true;
 
+        /// <summary> Gets or sets ILayer is need to refactoring icon render. </summary>
         public bool IsRefactoringIconRender { get; set; } = true;
 
 
-        ICanvasImage Render2 = null;
 
+        /// <summary>
+        /// Gets a specific actual rended-layer (with icon render).
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="children"> The children layerage. </param>
+        /// <returns> The rendered layer. </returns>
         public ICanvasImage GetActualRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
         {
             if (this.Render2 == null || this.IsRefactoringRender)
@@ -58,14 +65,23 @@ namespace Retouch_Photo2.Layers
                 if (this.IsRefactoringIconRender)
                 {
                     this.IsRefactoringIconRender = false;
-                    this.Control.IconRender = this.Render2.GetHeightTransformEffect(resourceCreator, LayerageCollection.ControlsHeight);
+                    this.Control.IconRender = this.Render2.ToIconRenderImage(resourceCreator, LayerageCollection.ControlsHeight);
                 }
 
             }
             return this.Render2;
         }
+        ICanvasImage Render2 = null;
+
+
 
         //@Abstract
+        /// <summary>
+        /// Gets a specific rended-layer.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="children"> The children layerage. </param>
+        /// <returns> The rendered layer. </returns>
         public virtual ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
         {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
@@ -87,7 +103,6 @@ namespace Retouch_Photo2.Layers
             }
             return command;
         }
-
         private void _render(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, IList<Layerage> children)
         {
             //Stroke
@@ -123,8 +138,17 @@ namespace Retouch_Photo2.Layers
                 }
             }
         }
-        
 
+
+
+        /// <summary>
+        /// Draw lines on bound.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="drawingSession"> The drawing-session. </param>
+        /// <param name="matrix"> The matrix. </param>
+        /// <param name="accentColor"> The accent color. </param>
+        /// <param name="children"> The children layerage. </param>
         public virtual void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, IList<Layerage> children, Windows.UI.Color accentColor)
         {
             CanvasGeometry geometry = this.CreateGeometry(resourceCreator, matrix);
@@ -132,10 +156,26 @@ namespace Retouch_Photo2.Layers
         }
 
 
+
+        /// <summary>
+        /// Create a specific geometry.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <returns> The product geometry. </returns>   
         public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator);
+        /// <summary>
+        /// Create a specific geometry.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="matrix"> The matrix. </param>
+        /// <returns> The product geometry. </returns>   
         public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix);
 
 
+
+        /// <summary>
+        /// Returns whether the area filled by the layer contains the specified point.
+        /// </summary>
         public virtual bool FillContainsPoint(Layerage layerage, Vector2 point)
         {
             if (this.Visibility == Visibility.Collapsed) return false;
@@ -145,13 +185,13 @@ namespace Retouch_Photo2.Layers
             return transformer.FillContainsPoint(point);
         }
 
-                     
+
         //@Static
         /// <summary>
         /// Render layers.
         /// </summary>  
         /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="children"> The children layerage. </param>
+        /// <param name="layerages"> The layerage. </param>
         /// <returns> The render image. </returns>
         public static ICanvasImage Render(ICanvasResourceCreator resourceCreator, IList<Layerage> layerages)
         {

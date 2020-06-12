@@ -3,10 +3,17 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Operates
 {
+    /// <summary>
+    /// Icon of Middle.
+    /// </summary>
     public sealed partial class MiddleIcon : UserControl
     {
+
         //@VisualState
         bool _vsIsEnabled;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -18,6 +25,9 @@ namespace Retouch_Photo2.Operates
         }
 
         //@Construct
+        /// <summary>
+        /// Initializes a MiddleIcon. 
+        /// </summary>
         public MiddleIcon()
         {
             this.InitializeComponent();

@@ -3,7 +3,7 @@
 namespace Retouch_Photo2.Tools
 {
     /// <summary>
-    /// Retouch_Photo2 Tools 's Button.
+    /// Button of <see cref="ITool"/>.
     /// </summary>
     public sealed partial class ToolMoreButton : UserControl
     {
@@ -12,6 +12,9 @@ namespace Retouch_Photo2.Tools
         public UIElementCollection Children => this.StackPanel.Children;
 
         //@Construct
+        /// <summary>
+        /// Initializes a ToolButton. 
+        /// </summary>
         public ToolMoreButton()
         {
             this.InitializeComponent();

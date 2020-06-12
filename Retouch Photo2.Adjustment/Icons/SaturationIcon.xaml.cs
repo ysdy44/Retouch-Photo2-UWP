@@ -9,6 +9,9 @@ namespace Retouch_Photo2.Adjustments.Icons
     public sealed partial class SaturationIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a SaturationIcon. 
+        /// </summary>
         public SaturationIcon()
         {
             this.InitializeComponent();

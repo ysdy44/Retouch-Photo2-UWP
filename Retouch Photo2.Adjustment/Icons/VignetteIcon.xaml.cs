@@ -9,6 +9,9 @@ namespace Retouch_Photo2.Adjustments.Icons
     public sealed partial class VignetteIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a VignetteIcon. 
+        /// </summary>
         public VignetteIcon()
         {
             this.InitializeComponent();

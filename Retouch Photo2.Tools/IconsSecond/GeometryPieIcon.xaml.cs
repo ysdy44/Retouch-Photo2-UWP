@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class GeometryPieIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryPieIcon. 
+        /// </summary>
         public GeometryPieIcon()
         {
             this.InitializeComponent();

@@ -7,10 +7,17 @@ using Windows.UI.Xaml.Shapes;
 
 namespace Retouch_Photo2.Brushs
 {
+    /// <summary>
+    /// Extensions of <see cref = "IBrush" />.
+    /// </summary>
     public static class BrushExtensions
     {
 
-        //Brush
+        /// <summary>
+        /// Turn into brush.
+        /// </summary>
+        /// <param name="brush"> The source brush. </param>
+        /// <returns> The product brush. </returns>
         public static Brush ToBrush(this IBrush brush)
         {
             if (brush == null) return null;
@@ -52,7 +59,14 @@ namespace Retouch_Photo2.Brushs
                 default: return null;
             }
         }
-        public static Brush ToWidthBrush(this IBrush brush)
+
+
+        /// <summary>
+        /// Turn into weight brush.
+        /// </summary>
+        /// <param name="brush"> The source brush. </param>
+        /// <returns> The product brush. </returns>
+        public static Brush ToWeightBrush(this IBrush brush)
         {
             if (brush == null) return null;
 
@@ -94,6 +108,12 @@ namespace Retouch_Photo2.Brushs
             }
         }
 
+
+        /// <summary>
+        /// Turn into GradientStopCollection.
+        /// </summary>
+        /// <param name="stops"> The source stops. </param>
+        /// <returns> The product GradientStopCollection. </returns>
         public static GradientStopCollection ToStops(this CanvasGradientStop[] stops)
         {
             GradientStopCollection gradientStops = new GradientStopCollection();

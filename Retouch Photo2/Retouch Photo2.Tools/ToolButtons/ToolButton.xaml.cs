@@ -1,11 +1,10 @@
 ﻿using Retouch_Photo2.ViewModels;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools
 {
     /// <summary>
-    /// Retouch_Photo2 Tools 's Button.
+    /// Button of <see cref="ITool"/>.
     /// </summary>
     public sealed partial class ToolButton : UserControl
     {
@@ -21,14 +20,20 @@ namespace Retouch_Photo2.Tools
         public ToolTip ToolTip => this._ToolTip;
 
         //@Construct
+        /// <summary>
+        /// Initializes a ToolButton. 
+        /// </summary>
         public ToolButton()
         {
             this.InitializeComponent();
         }
-        public ToolButton(object centerContent) : this()
+        /// <summary>
+        /// Initializes a ToolButton. 
+        /// </summary>
+        /// <param name="content"> The content. </param>
+        public ToolButton(object content) : this()
         {
-            this.Button.Content = centerContent;
+            this.Button.Content = content; 
         }
-
     }
 }

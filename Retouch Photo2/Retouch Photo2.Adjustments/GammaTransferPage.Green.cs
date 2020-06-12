@@ -28,14 +28,14 @@ namespace Retouch_Photo2.Adjustments.Pages
         #endregion
 
 
-        public void ResetGreen()
+        private void ResetGreen()
         {
             this.GreenToggleSwitch.IsOn = false;
             this.GreenOffsetSlider.Value = 0;
             this.GreenExponentSlider.Value = 100;
             this.GreenAmplitudeSlider.Value = 100;
         }
-        public void FollowGreen(GammaTransferAdjustment adjustment)
+        private void FollowGreen(GammaTransferAdjustment adjustment)
         {
             this.GreenToggleSwitch.IsOn = !adjustment.GreenDisable;
             this.GreenOffsetSlider.Value = adjustment.GreenOffset * 100.0f;
@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.GreenAmplitudeSlider.Value = adjustment.GreenAmplitude * 100.0f;
         }
 
-        public void ConstructStringsGreen(string title, string offset, string exponent, string amplitude)
+        private void ConstructStringsGreen(string title, string offset, string exponent, string amplitude)
         {
             this.GreenTextBlock.Text = offset;
             this.GreenOffsetTextBlock.Text = offset;
@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructGreenDisable()
+        private void ConstructGreenDisable()
         {
             this.GreenTitleGrid.Tapped += (s, e) =>
             {
@@ -113,7 +113,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructGreenOffset()
+        private void ConstructGreenOffset()
         {
             this.GreenOffsetSlider.Value = 0;
             this.GreenOffsetSlider.Minimum = 0;
@@ -198,7 +198,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructGreenExponent()
+        private void ConstructGreenExponent()
         {
             this.GreenExponentSlider.Value = 100;
             this.GreenExponentSlider.Minimum = 0;
@@ -283,7 +283,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructGreenAmplitude()
+        private void ConstructGreenAmplitude()
         {
             this.GreenAmplitudeSlider.Value = 100;
             this.GreenAmplitudeSlider.Minimum = 0;

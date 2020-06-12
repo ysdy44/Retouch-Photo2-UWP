@@ -18,6 +18,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
+        /// <summary> Color </summary>
         public Color Color
         {
             get => this.SolidColorBrush.Color;
@@ -30,9 +31,13 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
         //@Generic
+        /// <summary> Gets IAdjustment's adjustment. </summary>
         public VignetteAdjustment Adjustment { get; set; }
 
         //@Construct
+        /// <summary>
+        /// Initializes a VignettePage. 
+        /// </summary>
         public VignettePage()
         {
             this.InitializeComponent();
@@ -63,7 +68,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class VignettePage : IAdjustmentGenericPage<VignetteAdjustment>
     {
         //Strings
-        public void ConstructStrings()
+        private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
@@ -75,15 +80,21 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
         //@Content
+        /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Vignette;
+        /// <summary> Gets the icon. </summary>
         public FrameworkElement Icon { get; } = new VignetteIcon();
+        /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
+        /// <summary> Gets the text. </summary>
         public string Text { get; private set; }
 
-
+        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new VignetteAdjustment();
-
-
+        
+        /// <summary>
+        /// Reset the <see cref="IAdjustmentPage"/>'s data.
+        /// </summary>
         public void Reset()
         {
             this.AmountSlider.Value = 0;
@@ -134,6 +145,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                 }
             }
         }
+        /// <summary>
+        /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
+        /// </summary>
+        /// <param name="adjustment"> The adjustment. </param>
         public void Follow(VignetteAdjustment adjustment)
         {
             this.AmountSlider.Value = adjustment.Amount * 100;
@@ -148,7 +163,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class VignettePage : IAdjustmentGenericPage<VignetteAdjustment>
     {
 
-        public void ConstructAmount()
+        private void ConstructAmount()
         {
             this.AmountSlider.Value = 0;
             this.AmountSlider.Minimum = 0;
@@ -232,7 +247,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        public void ConstructCurve()
+        private void ConstructCurve()
         {
             this.CurveSlider.Value = 0;
             this.CurveSlider.Minimum = 0;
@@ -317,7 +332,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructColor1()
+        private void ConstructColor1()
         {
             this.ColorBorder.Tapped += (s, e) =>
             {
@@ -373,7 +388,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        public void ConstructColor2()
+        private void ConstructColor2()
         {
             this.ColorPicker.ColorChangeStarted += (s, value) =>
             {

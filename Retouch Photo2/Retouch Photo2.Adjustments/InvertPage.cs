@@ -11,9 +11,13 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class InvertPage : IAdjustmentGenericPage<InvertAdjustment>
     {
         //@Generic
+        /// <summary> Gets IAdjustment's adjustment. </summary>
         public InvertAdjustment Adjustment { get; set; }
 
         //@Construct
+        /// <summary>
+        /// Initializes a InvertPage. 
+        /// </summary>
         public InvertPage()
         {
             this.ConstructStrings();
@@ -26,7 +30,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class InvertPage : IAdjustmentGenericPage<InvertAdjustment>
     {
         //Strings
-        public void ConstructStrings()
+        private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
@@ -34,14 +38,26 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
         //@Content
+        /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Invert;
+        /// <summary> Gets the icon. </summary>
         public FrameworkElement Icon { get; } = new InvertIcon();
+        /// <summary> Gets the self. </summary>
         public FrameworkElement Self => null;
+        /// <summary> Gets the text. </summary>
         public string Text { get; private set; }
 
+        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new InvertAdjustment();
 
+        /// <summary>
+        /// Reset the <see cref="IAdjustmentPage"/>'s data.
+        /// </summary>
         public void Reset() { }
+        /// <summary>
+        /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
+        /// </summary>
+        /// <param name="adjustment"> The adjustment. </param>
         public void Follow(InvertAdjustment adjustment) { }
     }
 }

@@ -18,6 +18,9 @@ namespace Retouch_Photo2.Effects.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Construct
+        /// <summary>
+        /// Initializes a StraightenEffectPage. 
+        /// </summary>
         public StraightenEffectPage()
         {
             this.InitializeComponent();
@@ -43,15 +46,16 @@ namespace Retouch_Photo2.Effects.Models
         }
 
         //@Content
+        /// <summary> Gets the type. </summary>
         public EffectType Type => EffectType.Straighten;
+        /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
-        public ToggleSwitch ToggleSwitch => this.Button.ToggleSwitch;
+        /// <summary> Gets the button. </summary>
         public EffectButton Button { get; } = new EffectButton
         {
             Icon = new StraightenIcon()
         };
-
-
+        
         public void Reset()
         {
             this.AnglePicker.Radians = 0;
@@ -88,9 +92,7 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowButton(Effect effect)
         {
-            this.Button.IsButtonTapped = false;
-            this.Button.ToggleSwitch.IsOn = effect.Straighten_IsOn;
-            this.Button.IsButtonTapped = true;
+            this.Button.IsOn = effect.Straighten_IsOn;
         }
         public void FollowPage(Effect effect)
         {
@@ -106,11 +108,8 @@ namespace Retouch_Photo2.Effects.Models
 
         private void ConstructButton()
         {
-            this.Button.ToggleSwitch.Toggled += (s, e) =>
+            this.Button.Toggled += (isOn) =>
             {
-                if (this.Button.IsButtonTapped == false) return;
-                bool isOn = this.Button.ToggleSwitch.IsOn;
-
                 //History
                 LayersPropertyHistory history = new LayersPropertyHistory("Set effect straighten");
 

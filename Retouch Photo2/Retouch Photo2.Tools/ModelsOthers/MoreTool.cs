@@ -25,10 +25,8 @@ namespace Retouch_Photo2.Tools.Models
         public void Clicke(Vector2 point) { }
 
         public void Draw(CanvasDrawingSession drawingSession) { }
-
-
+        
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom() { }
-
     }
 }

@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class TransparencyIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a TransparencyIcon. 
+        /// </summary>
         public TransparencyIcon()
         {
             this.InitializeComponent();

@@ -9,6 +9,9 @@ namespace Retouch_Photo2.Adjustments.Icons
     public sealed partial class InvertIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a InvertIcon. 
+        /// </summary>
         public InvertIcon()
         {
             this.InitializeComponent();

@@ -1,6 +1,5 @@
 ﻿using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Stroke;
-using System.Xml.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -20,7 +19,7 @@ namespace Retouch_Photo2.Styles
             get { return (Retouch_Photo2.Styles.Style)GetValue(Style2Property); }
             set { SetValue(Style2Property, value); }
         }
-        /// <summary> Identifies the <see cref = "ShowControl.Style" /> dependency property. </summary>
+        /// <summary> Identifies the <see cref = "ShowControl.Style2" /> dependency property. </summary>
         public static readonly DependencyProperty Style2Property = DependencyProperty.Register(nameof(Style2), typeof(Retouch_Photo2.Styles.Style), typeof(ShowControl), new PropertyMetadata(null, (sender, e) =>
         {
             ShowControl con = (ShowControl)sender;
@@ -43,6 +42,9 @@ namespace Retouch_Photo2.Styles
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a ShowControl. 
+        /// </summary>
         public ShowControl()
         {
             this.InitializeComponent();

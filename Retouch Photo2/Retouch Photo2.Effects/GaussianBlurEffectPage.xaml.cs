@@ -18,6 +18,9 @@ namespace Retouch_Photo2.Effects.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Construct
+        /// <summary>
+        /// Initializes a GaussianBlurEffectPage. 
+        /// </summary>
         public GaussianBlurEffectPage()
         {
             this.InitializeComponent();
@@ -43,14 +46,16 @@ namespace Retouch_Photo2.Effects.Models
         }
 
         //@Content
+        /// <summary> Gets the type. </summary>
         public EffectType Type => EffectType.GaussianBlur;
+        /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
+        /// <summary> Gets the button. </summary>
         public EffectButton Button { get; } = new EffectButton
         {
             Icon = new GaussianBlurIcon()
         };
-
-
+        
         public void Reset()
         {
             this.RadiusSlider.Value = 0;
@@ -87,9 +92,7 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowButton(Effect effect)
         {
-            this.Button.IsButtonTapped = false;
-            this.Button.ToggleSwitch.IsOn = effect.GaussianBlur_IsOn;
-            this.Button.IsButtonTapped = true;
+            this.Button.IsOn = effect.GaussianBlur_IsOn;
         }
         public void FollowPage(Effect effect)
         {
@@ -104,11 +107,8 @@ namespace Retouch_Photo2.Effects.Models
     {
         private void ConstructButton()
         {
-            this.Button.ToggleSwitch.Toggled += (s, e) =>
-            {
-                if (this.Button.IsButtonTapped == false) return;
-                bool isOn = this.Button.ToggleSwitch.IsOn;
-
+            this.Button.Toggled += (isOn) =>
+            {               
                 //History
                 LayersPropertyHistory history = new LayersPropertyHistory("Set effect gaussian blur");
 

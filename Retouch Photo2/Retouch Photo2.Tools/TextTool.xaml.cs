@@ -22,7 +22,10 @@ namespace Retouch_Photo2.Tools
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
         //@VisualState
-        public bool _vsIsFullScreen;
+        bool _vsIsFullScreen;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get => this._vsIsFullScreen ? this.FullScreen : this.Normal;
@@ -30,6 +33,9 @@ namespace Retouch_Photo2.Tools
         }
 
         //@Construct
+        /// <summary>
+        /// Initializes a TextTool. 
+        /// </summary>
         public TextTool()
         {
             this.InitializeComponent();

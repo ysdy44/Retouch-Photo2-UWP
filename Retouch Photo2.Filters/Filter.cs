@@ -1,19 +1,17 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Adjustments;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Retouch_Photo2.Filters
 {
     /// <summary> 
-    /// <see cref = "IAdjustment" />'s. 
+    /// Represents a filter that contains many adjustments.
     /// </summary>
     public class Filter
-    {
-        /// <summary>
-        /// Name
-        /// </summary>
+    {      
+
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
@@ -24,7 +22,7 @@ namespace Retouch_Photo2.Filters
         /// <summary>
         /// Get own copy.
         /// </summary>
-        /// <returns> The cloned filter. </returns>
+        /// <returns> The cloned <see cref="Filter"/>. </returns>
         public Filter Clone()
         {
             return new Filter

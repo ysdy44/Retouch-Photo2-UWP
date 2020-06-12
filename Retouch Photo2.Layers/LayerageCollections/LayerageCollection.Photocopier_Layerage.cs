@@ -14,10 +14,11 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Gets all photocopiers, which in ( layer and children )'s style manager.
         /// </summary>
+        /// <param name="layerages"> The layerages. </param>
         /// <returns> The yield photocopiers. </returns>
-        public static IEnumerable<Photocopier> GetPhotocopiers(IEnumerable<Layerage> layers)
+        public static IEnumerable<Photocopier> GetPhotocopiers(IEnumerable<Layerage> layerages)
         {
-            foreach (Layerage child in layers)
+            foreach (Layerage child in layerages)
             {
                 ILayer child2 = child.Self;
 
@@ -45,19 +46,20 @@ namespace Retouch_Photo2.Layers
                 }
             }
         }
-        
+
 
         /// <summary>
-        /// Gets all layerages
+        /// Gets un-uesting layerages
         /// </summary>
+        /// <param name="layerages"> The layerages. </param>
         /// <returns> The yield layerages. </returns>
-        public static IEnumerable<Layerage> GetLayerages(IEnumerable<Layerage> layerages)
+        public static IEnumerable<Layerage> GetUnUestingLayerages(IEnumerable<Layerage> layerages)
         {
             foreach (Layerage child in layerages)
             {
                 yield return child;
 
-                foreach (Layerage photocopier in LayerageCollection.GetLayerages(child.Children))
+                foreach (Layerage photocopier in LayerageCollection.GetUnUestingLayerages(child.Children))
                 {
                     yield return photocopier;
                 }

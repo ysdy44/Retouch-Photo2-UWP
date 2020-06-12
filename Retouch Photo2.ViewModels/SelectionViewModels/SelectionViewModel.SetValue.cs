@@ -64,6 +64,11 @@ namespace Retouch_Photo2.ViewModels
                     break;
             }
         }
+        /// <summary>
+        /// Set layerage;s value with children.
+        /// </summary>
+        /// <param name="layerage"> The layerage. </param>
+        /// <param name="action"> action </param>
         public void SetLayerageValueWithChildren(Layerage layerage, Action<Layerage> action)
         {
             action(layerage);
@@ -99,6 +104,11 @@ namespace Retouch_Photo2.ViewModels
                     break;
             }
         }
+        /// <summary>
+        /// Set layerage;s value with group layerage's children.
+        /// </summary>
+        /// <param name="layerage"> The layerage. </param>
+        /// <param name="action"> action </param>
         public void SetLayerageValueWithChildrenOnlyGroup(Layerage layerage, Action<Layerage> action)
         {
             action(layerage);

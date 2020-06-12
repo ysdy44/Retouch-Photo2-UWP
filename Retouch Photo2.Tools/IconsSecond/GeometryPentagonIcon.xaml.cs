@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class GeometryPentagonIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryPentagonIcon. 
+        /// </summary>
         public GeometryPentagonIcon()
         {
             this.InitializeComponent();

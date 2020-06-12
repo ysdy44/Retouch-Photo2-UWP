@@ -20,10 +20,10 @@ namespace Retouch_Photo2
 
         /// <summary> Add a <see cref="ImageLayer"/>. </summary>
         AddImager,
-        
-        /// <summary> Make <see cref="Brushs.Style.Fill"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
+
+        /// <summary> Make <see cref="Retouch_Photo2.Styles.Style.Fill"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
         FillImage,
-        /// <summary> Make <see cref="Brushs.Style.Stroke"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
+        /// <summary> Make <see cref="Retouch_Photo2.Styles.Style.Stroke"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
         StrokeImage,
 
         /// <summary> Select a image in <see cref= "ImageTool" />. </summary>
@@ -33,7 +33,7 @@ namespace Retouch_Photo2
     }
 
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "PhotosPage" />. 
+    /// Represents a page to select a photo.
     /// </summary>
     public sealed partial class PhotosPage : Page
     {
@@ -43,19 +43,27 @@ namespace Retouch_Photo2
         ViewModel MethodViewModel => App.MethodViewModel;
 
 
-        //@Static
+        //@Static       
+        /// <summary> Add a <see cref="ImageLayer"/>. </summary>
         public static Action<Photo> AddCallBack;
 
+        /// <summary> Make <see cref="Retouch_Photo2.Styles.Style.Fill"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
         public static Action<Photo> FillImageCallBack;
+        /// <summary> Make <see cref="Retouch_Photo2.Styles.Style.Stroke"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
         public static Action<Photo> StrokeImageCallBack;
 
+        /// <summary> Select a image in <see cref= "ImageTool" />. </summary>
         public static Action<Photo> SelectCallBack;
+        /// <summary> Replace a image in <see cref= "ImageTool" />. </summary>
         public static Action<Photo> ReplaceCallBack;
 
 
         //@VisualState
         Photo _vsPhoto = null;
         PhotosPageMode _vsMode = PhotosPageMode.None;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -79,6 +87,9 @@ namespace Retouch_Photo2
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a PhotosPage. 
+        /// </summary>
         public PhotosPage()
         {
             this.InitializeComponent();
@@ -94,7 +105,7 @@ namespace Retouch_Photo2
             {
                 //Photo
                 Photo photo = this._vsPhoto;
-                Retouch_Photo2.PhotosPage.AddCallBack?.Invoke(photo);
+                Retouch_Photo2.PhotosPage.AddCallBack?.Invoke(photo);//Delegate
 
                 this.Frame.GoBack();
             };
@@ -103,7 +114,7 @@ namespace Retouch_Photo2
             {
                 //Photo
                 Photo photo = this._vsPhoto;
-                Retouch_Photo2.PhotosPage.FillImageCallBack?.Invoke(photo);
+                Retouch_Photo2.PhotosPage.FillImageCallBack?.Invoke(photo);//Delegate
 
                 this.Frame.GoBack();
             };
@@ -111,7 +122,7 @@ namespace Retouch_Photo2
             {
                 //Photo
                 Photo photo = this._vsPhoto;
-                Retouch_Photo2.PhotosPage.StrokeImageCallBack?.Invoke(photo);
+                Retouch_Photo2.PhotosPage.StrokeImageCallBack?.Invoke(photo);//Delegate
 
                 this.Frame.GoBack();
             };
@@ -120,7 +131,7 @@ namespace Retouch_Photo2
             {
                 //Photo
                 Photo photo = this._vsPhoto;
-                Retouch_Photo2.PhotosPage.SelectCallBack?.Invoke(photo);
+                Retouch_Photo2.PhotosPage.SelectCallBack?.Invoke(photo);//Delegate
 
                 this.Frame.GoBack();
             };
@@ -128,13 +139,13 @@ namespace Retouch_Photo2
             {
                 //Photo
                 Photo photo = this._vsPhoto;
-                Retouch_Photo2.PhotosPage.ReplaceCallBack?.Invoke(photo);
+                Retouch_Photo2.PhotosPage.ReplaceCallBack?.Invoke(photo);//Delegate
 
                 this.Frame.GoBack();
             };
         }
 
-        //The current page becomes the active page
+        /// <summary> The current page becomes the active page. </summary>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter is PhotosPageMode mode)
@@ -148,7 +159,7 @@ namespace Retouch_Photo2
                 }
             }
         }
-        //The current page no longer becomes an active page
+        /// <summary> The current page no longer becomes an active page. </summary>
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             this._vsMode = PhotosPageMode.None;

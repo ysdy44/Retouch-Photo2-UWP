@@ -1,11 +1,13 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Layers;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Layers
 {
+    /// <summary>
+    /// Represents a cutboard used to paste layer(s).
+    /// </summary>
     public partial class Clipboard
     {
         /// <summary> The all copyed layerage. </summary> 
@@ -34,7 +36,7 @@ namespace Retouch_Photo2.Layers
         public void SetMode(CanvasDevice customDevice, LayerageCollection layerageCollection)
         {
             //Layerages
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
+            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected(layerageCollection);
             int count = selectedLayerages.Count();
 
             if (count == 0)

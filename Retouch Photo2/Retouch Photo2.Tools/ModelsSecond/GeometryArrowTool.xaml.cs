@@ -12,9 +12,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    /// <summary>
-    /// Enum of <see cref="GeometryArrowTool"/>.
-    /// </summary>
     internal enum GeometryArrowMode
     {
         /// <summary> Normal. </summary>
@@ -39,7 +36,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar
-        internal GeometryArrowMode TouchBarMode
+        private GeometryArrowMode TouchBarMode
         {
             set
             {
@@ -65,9 +62,12 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private int ValueNumberConverter(float value) => (int)(value * 100.0f);
         private double ValueValueConverter(float value) => value * 100d;
-        
+
 
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryArrowTool. 
+        /// </summary>
         public GeometryArrowTool()
         {
             this.InitializeComponent();
@@ -92,6 +92,7 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public partial class GeometryArrowTool : Page, ITool
     {
+
         //Strings
         private void ConstructStrings()
         {
@@ -303,7 +304,7 @@ namespace Retouch_Photo2.Tools.Models
         //LeftTail
         private void ConstructLeftTail()
         {
-            this.LeftArrowTailTypeControl.ArrowTailTypeChanged += (s, tailType) =>
+            this.LeftArrowTailTypeControl.TypeChanged += (s, tailType) =>
             {
                 //History
                 LayersPropertyHistory history = new LayersPropertyHistory("Set arrow layer left tail type");
@@ -346,7 +347,7 @@ namespace Retouch_Photo2.Tools.Models
         //RightTail
         private void ConstructRightTail()
         {
-            this.RightArrowTailTypeControl.ArrowTailTypeChanged += (s, tailType) =>
+            this.RightArrowTailTypeControl.TypeChanged += (s, tailType) =>
             {
                 //History
                 LayersPropertyHistory history = new LayersPropertyHistory("Set arrow layer right tail type");

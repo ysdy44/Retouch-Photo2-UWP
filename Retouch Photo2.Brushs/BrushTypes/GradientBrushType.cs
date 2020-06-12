@@ -1,7 +1,7 @@
 ﻿namespace Retouch_Photo2.Brushs
 {
     /// <summary>
-    /// Type of <see cref="Brush">.
+    /// Type of <see cref="IBrush"/>.
     /// </summary>
     public enum GradientBrushType
     {

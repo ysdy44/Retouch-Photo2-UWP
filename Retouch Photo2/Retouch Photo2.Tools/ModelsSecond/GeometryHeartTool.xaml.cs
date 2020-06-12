@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
         
         //@TouchBar  
-        internal bool TouchBarMode
+        private bool TouchBarMode
         {
             set
             {
@@ -46,8 +46,11 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private int SpreadNumberConverter(float spread) => (int)(spread * 100.0f);
         private double SpreadValueConverter(float spread) => spread * 100d;
-        
+
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryHeartTool. 
+        /// </summary>
         public GeometryHeartTool()
         {
             this.InitializeComponent();

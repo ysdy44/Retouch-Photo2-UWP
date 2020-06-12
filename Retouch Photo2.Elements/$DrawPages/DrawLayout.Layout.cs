@@ -13,6 +13,9 @@ namespace Retouch_Photo2.Elements.DrawPages
         bool _vsIsFullScreen;
         DeviceLayoutType _vsDeviceLayoutType = DeviceLayoutType.PC;
         PhoneLayoutType _vsPhoneType = PhoneLayoutType.Hided;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get

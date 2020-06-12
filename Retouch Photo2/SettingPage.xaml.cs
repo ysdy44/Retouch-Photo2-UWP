@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Navigation;
 namespace Retouch_Photo2
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "SettingPage" />. 
+    /// Represents a page used to set options.
     /// </summary>
     public sealed partial class SettingPage : Page
     {
@@ -64,6 +64,9 @@ namespace Retouch_Photo2
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a SettingPage. 
+        /// </summary>
         public SettingPage()
         {
             this.InitializeComponent();
@@ -81,7 +84,7 @@ namespace Retouch_Photo2
                 if (e.NewSize == e.PreviousSize) return;
                 int width = (int)e.NewSize.Width;
                 this.AdaptiveWidthTextBlock.Text = width.ToString();
-              };
+            };
 
             this.ConstructLayersHeight();
 
@@ -95,11 +98,17 @@ namespace Retouch_Photo2
         }
 
 
-        //The current page becomes the active page
+        /// <summary> The current page becomes the active page. </summary>
         protected override void OnNavigatedTo(NavigationEventArgs e) { }
-        //The current page no longer becomes an active page
+        /// <summary> The current page no longer becomes an active page. </summary>
         protected override void OnNavigatedFrom(NavigationEventArgs e) { }
+    }
 
+    /// <summary> 
+    /// Represents a page used to set options.
+    /// </summary>
+    public sealed partial class SettingPage : Page
+    {
 
         private async Task Write()
         {

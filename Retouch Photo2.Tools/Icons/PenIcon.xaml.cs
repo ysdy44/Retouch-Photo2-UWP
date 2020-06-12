@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class PenIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a PenIcon. 
+        /// </summary>
         public PenIcon()
         {
             this.InitializeComponent();

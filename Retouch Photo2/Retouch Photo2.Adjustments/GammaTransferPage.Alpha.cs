@@ -28,14 +28,14 @@ namespace Retouch_Photo2.Adjustments.Pages
         #endregion
 
 
-        public void ResetAlpha()
+        private void ResetAlpha()
         {
             this.AlphaToggleSwitch.IsOn = false;
             this.AlphaOffsetSlider.Value = 0;
             this.AlphaExponentSlider.Value = 100;
             this.AlphaAmplitudeSlider.Value = 100;
         }
-        public void FollowAlpha(GammaTransferAdjustment adjustment)
+        private void FollowAlpha(GammaTransferAdjustment adjustment)
         {
             this.AlphaToggleSwitch.IsOn = !adjustment.AlphaDisable;
             this.AlphaOffsetSlider.Value = adjustment.AlphaOffset * 100.0f;
@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.AlphaAmplitudeSlider.Value = adjustment.AlphaAmplitude * 100.0f;
         }
 
-        public void ConstructStringsAlpha(string title, string offset, string exponent, string amplitude)
+        private void ConstructStringsAlpha(string title, string offset, string exponent, string amplitude)
         {
             this.AlphaTextBlock.Text = offset;
             this.AlphaOffsetTextBlock.Text = offset;
@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructAlphaDisable()
+        private void ConstructAlphaDisable()
         {
             this.AlphaTitleGrid.Tapped += (s, e) =>
             {
@@ -113,7 +113,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructAlphaOffset()
+        private void ConstructAlphaOffset()
         {
             this.AlphaOffsetSlider.Value = 0;
             this.AlphaOffsetSlider.Minimum = 0;
@@ -198,7 +198,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructAlphaExponent()
+        private void ConstructAlphaExponent()
         {
             this.AlphaExponentSlider.Value = 100;
             this.AlphaExponentSlider.Minimum = 0;
@@ -283,7 +283,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructAlphaAmplitude()
+        private void ConstructAlphaAmplitude()
         {
             this.AlphaAmplitudeSlider.Value = 100;
             this.AlphaAmplitudeSlider.Minimum = 0;

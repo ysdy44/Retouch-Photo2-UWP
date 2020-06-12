@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class BrushIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a BrushIcon. 
+        /// </summary>
         public BrushIcon()
         {
             this.InitializeComponent();

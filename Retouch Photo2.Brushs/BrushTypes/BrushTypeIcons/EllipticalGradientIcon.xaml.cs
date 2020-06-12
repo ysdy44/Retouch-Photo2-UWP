@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Brushs.BrushTypeIcons
     public sealed partial class EllipticalGradientIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a EllipticalGradientIcon. 
+        /// </summary>
         public EllipticalGradientIcon()
         {
             this.InitializeComponent();

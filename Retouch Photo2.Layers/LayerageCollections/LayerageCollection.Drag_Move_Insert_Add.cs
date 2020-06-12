@@ -11,6 +11,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Drag complete.
         /// </summary>
+        /// <param name="layerageCollection"> The layerage-collection. </param>
         /// <param name="destination"> The destination layerage. </param>
         /// <param name="source"> The source layerage. </param>
         /// <param name="destinationOverlayMode"> The destination OverlayMode. </param>
@@ -48,7 +49,7 @@ namespace Retouch_Photo2.Layers
             else
             {
                 //Layerages
-                IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(layerageCollection);
+                IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected(layerageCollection);
 
                 switch (destinationOverlayMode)
                 {
@@ -71,7 +72,8 @@ namespace Retouch_Photo2.Layers
 
         /// <summary>
         /// Move a layerage to the top of destination layerage.
-        /// </summary>
+        /// </summary>   
+        /// <param name="layerageCollection"> The layerage-collection. </param>
         /// <param name="destination"> The destination layerage. </param>
         /// <param name="source"> The source layerage. </param>
         /// <param name="isBottomInsert"> Insert to the top or bottom. </param>
@@ -123,6 +125,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Insert a layerage to the top of destination layerage.
         /// </summary>
+        /// <param name="layerageCollection"> The layerage-collection. </param>
         /// <param name="destination"> The destination layerage. </param>
         /// <param name="source"> The source layerage. </param>
         /// <param name="isBottomInsert"> Insert to the top or bottom. </param>
@@ -131,6 +134,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Insert some layers to the top of destination layerage.
         /// </summary>
+        /// <param name="layerageCollection"> The layerage-collection. </param>
         /// <param name="destination"> The destination layerage. </param>
         /// <param name="sources"> The source layers. </param>
         /// <param name="isBottomInsert"> Insert to the top or bottom. </param>
@@ -223,6 +227,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Add a current-layerage into source-layerage's children.
         /// </summary>
+        /// <param name="layerageCollection"> The layerage-collection. </param>
         /// <param name="currentLayerage"> The current layerage. </param>
         /// <param name="layerage"> The source layerage. </param>
         public static void Add(LayerageCollection layerageCollection, Layerage currentLayerage, Layerage layerage) => LayerageCollection._add(layerageCollection, currentLayerage, layerage, null);
@@ -230,6 +235,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Add some layerages into children.
         /// </summary>
+        /// <param name="layerageCollection"> The layerage-collection. </param>
         /// <param name="currentLayerage"> The current layerages. </param>
         /// <param name="layerages"> The source layerages. </param>
         public static void AddRange(LayerageCollection layerageCollection, Layerage currentLayerage, IEnumerable<Layerage> layerages) => LayerageCollection._add(layerageCollection, currentLayerage, null, layerages);

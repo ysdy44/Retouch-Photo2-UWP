@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class GeometryDountIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryDountIcon. 
+        /// </summary>
         public GeometryDountIcon()
         {
             this.InitializeComponent();

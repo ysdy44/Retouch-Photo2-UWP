@@ -37,6 +37,9 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a CropTool. 
+        /// </summary>
         public CropTool()
         {
             this.InitializeComponent();
@@ -123,7 +126,6 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
         }
-
     }
 
     /// <summary>
@@ -268,7 +270,7 @@ namespace Retouch_Photo2.Tools.Models
     public sealed partial class CropTool : Page, ITool
     {
 
-        public Layerage GetTransformerLayer(Vector2 startingPoint, Matrix3x2 matrix)
+        private Layerage GetTransformerLayer(Vector2 startingPoint, Matrix3x2 matrix)
         {
             switch (this.SelectionMode)
             {
@@ -303,7 +305,7 @@ namespace Retouch_Photo2.Tools.Models
             return null;
         }
 
-        public void CropStarted(ILayer firstLayer)
+        private void CropStarted(ILayer firstLayer)
         {
             firstLayer.Transform.CropTransformer = firstLayer.Transform.Transformer;
 
@@ -325,7 +327,7 @@ namespace Retouch_Photo2.Tools.Models
             firstLayer.Transform.IsCrop = true;
         }
 
-        public void CropDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
+        private void CropDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             ILayer layer = this.Layerage.Self;
             if (this.IsMove == false)//Transformer
@@ -349,7 +351,7 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
-        public void CropComplete()
+        private void CropComplete()
         {
             ILayer layer = this.Layerage.Self;
 

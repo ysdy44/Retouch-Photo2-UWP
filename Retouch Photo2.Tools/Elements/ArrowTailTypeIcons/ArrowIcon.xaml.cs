@@ -9,6 +9,9 @@ namespace Retouch_Photo2.Tools.Elements.ArrowTailTypeIcons
     public sealed partial class ArrowIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a ArrowIcon. 
+        /// </summary>
         public ArrowIcon()
         {
             this.InitializeComponent();

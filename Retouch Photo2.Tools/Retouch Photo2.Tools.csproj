@@ -90,6 +90,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
+    <DocumentationFile>bin\x64\Debug\Retouch Photo2.Tools.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <PlatformTarget>x64</PlatformTarget>
@@ -106,14 +107,17 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Elements\ArrowTailTypeControl.xaml.cs">
-      <DependentUpon>ArrowTailTypeControl.xaml</DependentUpon>
+    <Compile Include="Elements\ArrowTailTypeComboBox.xaml.cs">
+      <DependentUpon>ArrowTailTypeComboBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Elements\ArrowTailTypeIcons\NoneIcon.xaml.cs">
       <DependentUpon>NoneIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Elements\ArrowTailTypeIcons\ArrowIcon.xaml.cs">
       <DependentUpon>ArrowIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\PenModeControl.xaml.cs">
+      <DependentUpon>PenModeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Elements\PenModeControlIcons\AsymmetricIcon.xaml.cs">
       <DependentUpon>AsymmetricIcon.xaml</DependentUpon>
@@ -196,9 +200,6 @@
     <Compile Include="Icons\ViewIcon.xaml.cs">
       <DependentUpon>ViewIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Elements\PenModeControl.xaml.cs">
-      <DependentUpon>PenModeControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
@@ -225,7 +226,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Elements\ArrowTailTypeControl.xaml">
+    <Page Include="Elements\ArrowTailTypeComboBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -234,6 +235,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Elements\ArrowTailTypeIcons\ArrowIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Elements\PenModeControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -344,10 +349,6 @@
     <Page Include="Icons\ViewIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Elements\PenModeControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Icon.xaml">
       <SubType>Designer</SubType>

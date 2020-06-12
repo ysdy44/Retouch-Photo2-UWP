@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Strokes
 {
     /// <summary>
-    /// A control used to show a stroke-style.
+    /// Represents a control used to show a stroke-style.
     /// </summary>
     public sealed partial class ShowControl : UserControl
     {
@@ -34,6 +34,9 @@ namespace Retouch_Photo2.Strokes
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a ShowControl. 
+        /// </summary>
         public ShowControl()
         {
             this.InitializeComponent();

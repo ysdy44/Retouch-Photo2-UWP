@@ -9,6 +9,9 @@ namespace Retouch_Photo2.Adjustments.Icons
     public sealed partial class ContrastIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a ContrastIcon. 
+        /// </summary>
         public ContrastIcon()
         {
             this.InitializeComponent();

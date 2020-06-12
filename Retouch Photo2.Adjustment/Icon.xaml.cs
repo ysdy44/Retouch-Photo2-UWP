@@ -3,11 +3,14 @@
 namespace Retouch_Photo2.Adjustments
 {
     /// <summary>
-    /// Retouch_Photo2 Adjustments 's Icon.
+    /// Icon of <see cref="Retouch_Photo2.Adjustments"/>.
     /// </summary>
     public sealed partial class Icon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a Icon. 
+        /// </summary>
         public Icon()
         {
             this.InitializeComponent();

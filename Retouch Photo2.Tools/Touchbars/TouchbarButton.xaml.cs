@@ -11,12 +11,16 @@ namespace Retouch_Photo2.Tools
     public sealed partial class TouchbarButton : UserControl
     {
         //@Delegate  
+        /// <summary> Occurs when toggle. </summary>
         public EventHandler<bool> Toggle;
 
 
         //@VisualState
         bool _vsIsSelected;
         ClickMode _vsClickMode;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -33,7 +37,7 @@ namespace Retouch_Photo2.Tools
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-
+        /// <summary> VisualState's ClickMode. </summary>
         private ClickMode ClickMode
         {
             set

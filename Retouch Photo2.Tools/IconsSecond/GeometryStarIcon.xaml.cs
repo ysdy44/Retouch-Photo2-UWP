@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class GeometryStarIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryStarIcon. 
+        /// </summary>
         public GeometryStarIcon()
         {
             this.InitializeComponent();

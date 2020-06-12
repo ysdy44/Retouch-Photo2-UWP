@@ -9,6 +9,9 @@ namespace Retouch_Photo2.Adjustments.Icons
     public sealed partial class HighlightsAndShadowsIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a HighlightsAndShadowsIcon. 
+        /// </summary>
         public HighlightsAndShadowsIcon()
         {
             this.InitializeComponent();

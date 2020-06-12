@@ -1,6 +1,4 @@
 ﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Elements.MainPages;
 using Retouch_Photo2.Layers;
@@ -8,21 +6,19 @@ using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2
 {
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "MainPage" />. 
+    /// <summary>
+    /// Represents a page used to manipulate some items in local folder.
     /// </summary>
     public sealed partial class MainPage : Page
     {
@@ -31,7 +27,7 @@ namespace Retouch_Photo2
         /// New from size.
         /// </summary>
         /// <param name="pixels"> The bitmap size. </param>
-        private void NewFromSize(BitmapSize pixels)
+        public void NewFromSize(BitmapSize pixels)
         {
             this.LoadingControl.State = LoadingState.Loading;
             this.LoadingControl.IsActive = true;
@@ -63,11 +59,12 @@ namespace Retouch_Photo2
             this.Frame.Navigate(typeof(DrawPage), data);//Navigate
         }
 
+
         /// <summary>
         /// Open from ProjectViewItem.
         /// </summary>
         /// <param name="projectViewItem"> The ProjectViewItem. </param>
-        private async void OpenFromProjectViewItem(IProjectViewItem projectViewItem)
+        public async void OpenFromProjectViewItem(IProjectViewItem projectViewItem)
         {
             this.LoadingControl.State = LoadingState.Loading;
             this.LoadingControl.IsActive = true;
@@ -136,14 +133,18 @@ namespace Retouch_Photo2
         /// <summary>
         /// New from Picture.
         /// </summary>
-        /// <param name="pixels"> The picker locationId. </param>
-        private async Task NewFromPicture(PickerLocationId location)
+        /// <param name="location"> The picker locationId. </param>
+        public async Task NewFromPicture(PickerLocationId location)
         {
             StorageFile copyFile = await FileUtil.PickAndCopySingleImageFileAsync(location);
 
             await this._newFromPicture(copyFile);
         }
-        private async Task NewFromPicture(IStorageItem item)
+        /// <summary>
+        /// New from Picture.
+        /// </summary>
+        /// <param name="item"> The storage item. </param>
+        public async Task NewFromPicture(IStorageItem item)
         {
             StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(item);
 

@@ -32,7 +32,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 if (brushType == BrushType.Image)
                 {
-                    Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.FillImage);
+                    Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.FillImage);//Delegate
                 }
                 else
                 {
@@ -46,16 +46,16 @@ namespace Retouch_Photo2.Tools.Models
         //////////////////////////
 
 
-        public void FillStarted(Vector2 startingPoint, Vector2 point)
+        private void FillStarted(Vector2 startingPoint, Vector2 point)
         {
             if (this.Fill == null) return;
 
             //Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            this.OperateMode = this.Fill.ContainsOperateMode(startingPoint, matrix);
+            this.HandleMode = this.Fill.ContainsHandleMode(startingPoint, matrix);
 
             //InitializeController
-            if (this.OperateMode == BrushHandleMode.None)
+            if (this.HandleMode == BrushHandleMode.None)
             {
                 switch (this.Fill.Type)
                 {
@@ -86,12 +86,12 @@ namespace Retouch_Photo2.Tools.Models
             });
         }
 
-        public void FillDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
+        private void FillDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             //Selection
             if (this.Fill == null) return;
 
-            switch (this.OperateMode)
+            switch (this.HandleMode)
             {
                 //InitializeController
                 case BrushHandleMode.None:
@@ -116,7 +116,7 @@ namespace Retouch_Photo2.Tools.Models
                 default:
                     {
                         //Selection
-                        this.Fill.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
+                        this.Fill.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
                         this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                         {
                             ILayer layer = layerage.Self;
@@ -124,7 +124,7 @@ namespace Retouch_Photo2.Tools.Models
                             //Refactoring
                             layer.IsRefactoringRender = true;
                             layerage.RefactoringParentsRender();
-                            layer.Style.Fill.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
+                            layer.Style.Fill.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
                         });
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -133,7 +133,7 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
-        public void FillComplete()
+        private void FillComplete()
         {
             //Selection
             if (this.Fill == null) return;
@@ -173,7 +173,7 @@ namespace Retouch_Photo2.Tools.Models
         //////////////////////////
 
 
-        public void FillTypeChanged(BrushType brushType, Photo photo = null)
+        private void FillTypeChanged(BrushType brushType, Photo photo = null)
         {
             if (this.Fill.Type == brushType) return;
 
@@ -226,7 +226,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ViewModel.Invalidate();//Invalidate
         }
 
-        public void FillShow()
+        private void FillShow()
         {
             if (this.Fill == null) return;
 
@@ -251,7 +251,7 @@ namespace Retouch_Photo2.Tools.Models
         //////////////////////////
 
 
-        public void FillStopsChanged(CanvasGradientStop[] array)
+        private void FillStopsChanged(CanvasGradientStop[] array)
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
@@ -289,7 +289,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ShowControl.Invalidate();//Invalidate
         }
 
-        public void FillStopsChangeStarted(CanvasGradientStop[] array)
+        private void FillStopsChangeStarted(CanvasGradientStop[] array)
         {
             //Selection
             this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
@@ -300,7 +300,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
-        public void FillStopsChangeDelta(CanvasGradientStop[] array)
+        private void FillStopsChangeDelta(CanvasGradientStop[] array)
         {
             //Selection
             this.Fill.Stops = (CanvasGradientStop[])array.Clone();
@@ -316,7 +316,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate();//Invalidate
         }
-        public void FillStopsChangeCompleted(CanvasGradientStop[] array)
+        private void FillStopsChangeCompleted(CanvasGradientStop[] array)
         {
             this.Fill.Stops = (CanvasGradientStop[])array.Clone();
 
@@ -356,7 +356,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ShowControl.Invalidate();//Invalidate
         }
 
-        public void FillExtendChanged(CanvasEdgeBehavior extend)
+        private void FillExtendChanged(CanvasEdgeBehavior extend)
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory("Set fill extend");

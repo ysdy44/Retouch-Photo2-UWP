@@ -6,25 +6,41 @@ using Windows.Foundation;
 
 namespace Retouch_Photo2.Layers
 {
+    /// <summary>
+    /// Extensions of <see cref="ILayer"/>.
+    /// </summary>
     public static class LayerExtensions
     {
 
-        public static Transform2DEffect GetHeightTransformEffect(this ICanvasImage canvasImage, ICanvasResourceCreator resourceCreator, float actualHeight)
+        /// <summary>
+        /// Turn into icon render image.
+        /// </summary>
+        /// <param name="canvasImage"> The canvas image. </param>
+        /// <param name="resourceCreator"> The resource creator. </param>
+        /// <param name="actualHeight"> The actual height. </param>
+        /// <returns> The product image. </returns>
+        public static ICanvasImage ToIconRenderImage(this ICanvasImage canvasImage, ICanvasResourceCreator resourceCreator, float actualHeight)
         {
-            Rect rect = canvasImage.GetBounds(resourceCreator);
+            Rect bound = canvasImage.GetBounds(resourceCreator);
 
             return new Transform2DEffect
             {
-                TransformMatrix = rect.GetHeightMatrix(LayerageCollection.ControlsHeight),
+                TransformMatrix = bound.ToIconRenderMatrix(LayerageCollection.ControlsHeight),
                 Source = canvasImage,
             };
         }
 
-        public static Matrix3x2 GetHeightMatrix(this Rect rect, float actualHeight)
+        /// <summary>
+        /// Turn into icon render matrix.
+        /// </summary>
+        /// <param name="bound"> The icon bound. </param>
+        /// <param name="actualHeight"> The actual height. </param>
+        /// <returns> The product matrix. </returns>
+        public static Matrix3x2 ToIconRenderMatrix(this Rect bound, float actualHeight)
         {
-            float width = (float)rect.Width;
-            float height = (float)rect.Height;
-            Vector2 center = new Vector2((float)rect.X + width / 2, (float)rect.Y + height / 2);
+            float width = (float)bound.Width;
+            float height = (float)bound.Height;
+            Vector2 center = new Vector2((float)bound.X + width / 2, (float)bound.Y + height / 2);
 
             float min = System.Math.Max(width, height);
             float scale = actualHeight / min;
@@ -37,8 +53,11 @@ namespace Retouch_Photo2.Layers
                 Matrix3x2.CreateTranslation(new Vector2(halfHeight));
         }
 
-
-        public static bool IsText(this LayerType  layerType)
+        /// <summary>
+        /// Is text type?
+        /// </summary>
+        /// <param name="layerType"> The layer type. </param>
+        public static bool IsText(this LayerType layerType)
         {
             switch (layerType)
             {
@@ -50,6 +69,10 @@ namespace Retouch_Photo2.Layers
             }
         }
 
+        /// <summary>
+        /// Is scale mode?
+        /// </summary>
+        /// <param name="transformerMode"> The transformer mode. </param>
         public static bool IsScale(this TransformerMode transformerMode)
         {
             switch (transformerMode)

@@ -3,10 +3,17 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Edits.EditIcons
 {
+    /// <summary>
+    /// Icon of Copy.
+    /// </summary>
     public sealed partial class CopyIcon : UserControl
     {
+
         //@VisualState
         bool _vsIsEnabled => this.IsEnabled;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -18,6 +25,9 @@ namespace Retouch_Photo2.Edits.EditIcons
         }
 
         //@Construct
+        /// <summary>
+        /// Initializes a CopyIcon. 
+        /// </summary>
         public CopyIcon()
         {
             this.InitializeComponent();

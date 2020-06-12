@@ -12,6 +12,12 @@ namespace Retouch_Photo2.Brushs
     public partial class BrushBase : IBrush
     {
 
+        /// <summary>
+        /// Draw stops and lines between all control points.
+        /// </summary>
+        /// <param name="drawingSession"> The drawing-session. </param>
+        /// <param name="matrix"> The matrix. </param>
+        /// <param name="accentColor"> The accent color. </param>
         public void Draw(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Color accentColor)
         {
             switch (this.Type)

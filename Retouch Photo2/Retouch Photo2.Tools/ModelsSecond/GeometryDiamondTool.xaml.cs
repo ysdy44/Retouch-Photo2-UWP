@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar  
-        internal bool TouchBarMode
+        private bool TouchBarMode
         {
             set
             {
@@ -46,8 +46,11 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private int MidNumberConverter(float mid) => (int)(mid * 100.0f);
         private double MidValueConverter(float mid) => mid * 100d;
-        
+
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryDiamondTool. 
+        /// </summary>
         public GeometryDiamondTool()
         {
             this.InitializeComponent();
@@ -70,6 +73,7 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public sealed partial class GeometryDiamondTool : Page, ITool
     {
+
         //Strings
         private void ConstructStrings()
         {

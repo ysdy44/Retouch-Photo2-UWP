@@ -7,9 +7,11 @@ using Windows.Storage;
 
 namespace Retouch_Photo2
 {
+    /// <summary>
+    /// A collection of file-processing util methods.
+    /// </summary>
     public static partial class FileUtil
     {
-
 
         /// <summary>
         /// Find all zip folders in local folder.
@@ -32,7 +34,7 @@ namespace Retouch_Photo2
 
             return zipFolders;
         }
-        
+
 
 
         #region ZipFolder
@@ -41,7 +43,9 @@ namespace Retouch_Photo2
         /// <summary>
         /// Rename zip folder and thumbnail.
         /// </summary>
-        /// <param name="name"> The zip folder name. </param>
+        /// <param name="oldName"> The old name. </param>
+        /// <param name="newName"> The new name. </param>
+        /// <param name="item"> The IProjectViewItem. </param>
         public static async Task RenameZipFolder(string oldName, string newName, IProjectViewItem item)
         {
             StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{oldName}.photo2pk");

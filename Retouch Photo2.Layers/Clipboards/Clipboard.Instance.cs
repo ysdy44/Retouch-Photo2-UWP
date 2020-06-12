@@ -1,12 +1,11 @@
-﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Layers;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Layers
 {
+    /// <summary>
+    /// Represents a cutboard used to paste layer(s).
+    /// </summary>
     public partial class Clipboard
     {
 

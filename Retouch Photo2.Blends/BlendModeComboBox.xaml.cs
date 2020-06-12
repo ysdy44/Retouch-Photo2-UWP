@@ -1,7 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Blends.Icons;
 using System;
-using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -9,15 +8,17 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Blends
 {
     /// <summary>
-    /// Represents the combo box that is used to select blend mode.
+    /// ComboBox of <see cref="BlendEffect"/>
     /// </summary>
     public sealed partial class BlendModeComboBox : UserControl
     {
 
         //@Delegate
+        /// <summary> Occurs when mode change. </summary>
         public EventHandler<BlendEffectMode?> ModeChanged;
 
         //@Group
+        /// <summary> Occurs when group change. </summary>
         private EventHandler<BlendEffectMode?> Group;
         
         #region DependencyProperty
@@ -56,9 +57,12 @@ namespace Retouch_Photo2.Blends
 
 
         #endregion
-        
+
 
         //@Construct
+        /// <summary>
+        /// Initializes a BlendModeComboBox. 
+        /// </summary>
         public BlendModeComboBox()
         {
             this.InitializeComponent();

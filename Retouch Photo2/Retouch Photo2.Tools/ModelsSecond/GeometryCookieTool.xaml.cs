@@ -14,9 +14,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    /// <summary>
-    /// Enum of <see cref="GeometryCookieTool">.
-    /// </summary>
     internal enum GeometryCookieMode
     {
         /// <summary> Normal. </summary>
@@ -41,7 +38,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar  
-        internal GeometryCookieMode TouchBarMode
+        private GeometryCookieMode TouchBarMode
         {
             set
             {
@@ -76,6 +73,9 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryCookieTool. 
+        /// </summary>
         public GeometryCookieTool()
         {
             this.InitializeComponent();

@@ -12,7 +12,11 @@ namespace Retouch_Photo2.Brushs
     /// </summary>
     public partial class BrushBase : IBrush
     {
-        
+
+        /// <summary>
+        /// Saves the entire <see cref="IBrush"/> to a XElement.
+        /// </summary>
+        /// <param name="element"> The destination XElement. </param>
         public void SaveWith(XElement element)
         { 
             switch (this.Type)
@@ -72,6 +76,10 @@ namespace Retouch_Photo2.Brushs
             }
         }
 
+        /// <summary>
+        /// Load the entire <see cref="IBrush"/> form a XElement.
+        /// </summary>
+        /// <param name="element"> The destination XElement. </param>
         public void Load(XElement element)
         {
             switch (this.Type)

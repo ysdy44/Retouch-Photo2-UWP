@@ -1,9 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Retouch_Photo2
@@ -35,6 +31,7 @@ namespace Retouch_Photo2
         /// <summary>
         ///  Loads a <see cref="CanvasBitmap"/> from an XElement.
         /// </summary>
+        /// <param name="canvasResource"> The canvas-resource. </param>
         /// <param name="element"> The source XElement. </param>
         /// <returns> The loaded <see cref="CanvasBitmap"/>. </returns>
         public static CanvasBitmap LoadBitmap(ICanvasResourceCreatorWithDpi canvasResource, XElement element)

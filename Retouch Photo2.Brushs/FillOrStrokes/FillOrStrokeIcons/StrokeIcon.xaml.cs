@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Brushs.FillOrStrokeIcons
     public sealed partial class StrokeIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a StrokeIcon. 
+        /// </summary>
         public StrokeIcon()
         {
             this.InitializeComponent();

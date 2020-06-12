@@ -14,9 +14,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    /// <summary>
-    /// Enum of <see cref="GeometryCogTool">.
-    /// </summary>
     internal enum GeometryCogMode
     {
         /// <summary> Normal. </summary>
@@ -47,7 +44,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar
-        internal GeometryCogMode TouchBarMode
+        private GeometryCogMode TouchBarMode
         {
             set
             {
@@ -82,6 +79,9 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryCogTool. 
+        /// </summary>
         public GeometryCogTool()
         {
             this.InitializeComponent();

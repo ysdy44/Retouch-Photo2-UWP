@@ -9,6 +9,9 @@ namespace Retouch_Photo2.Brushs.ExtendIcons
     public sealed partial class ClampIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a ClampIcon. 
+        /// </summary>
         public ClampIcon()
         {
             this.InitializeComponent();

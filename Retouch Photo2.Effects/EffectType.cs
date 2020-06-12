@@ -1,7 +1,7 @@
 ﻿namespace Retouch_Photo2.Effects
 {
     /// <summary> 
-    /// Type of Effect.
+    /// Type of <see cref="Effect"/>.
     /// </summary>
     public enum EffectType
     {

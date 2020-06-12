@@ -14,7 +14,7 @@ namespace Retouch_Photo2.Adjustments
         /// Saves the entire <see cref="IAdjustment"/> to a XElement.
         /// </summary>
         /// <param name="elementName"> The element name. </param>
-        /// <param name="Adjustment"> The destination <see cref="IAdjustment"/>. </param>
+        /// <param name="adjustment"> The destination <see cref="IAdjustment"/>. </param>
         public static XElement SaveIAdjustment(string elementName, IAdjustment adjustment)
         {
             XElement element = new XElement(elementName);

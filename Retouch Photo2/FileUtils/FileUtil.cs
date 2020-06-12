@@ -9,6 +9,9 @@ using Windows.Storage.Streams;
 
 namespace Retouch_Photo2
 {
+    /// <summary>
+    /// A collection of file-processing util methods.
+    /// </summary>
     public static partial class FileUtil
     {
 

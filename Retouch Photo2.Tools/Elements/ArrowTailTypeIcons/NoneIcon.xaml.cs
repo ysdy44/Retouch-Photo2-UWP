@@ -9,6 +9,9 @@ namespace Retouch_Photo2.Tools.Elements.ArrowTailTypeIcons
     public sealed partial class NoneIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a NoneIcon. 
+        /// </summary>
         public NoneIcon()
         {
             this.InitializeComponent();

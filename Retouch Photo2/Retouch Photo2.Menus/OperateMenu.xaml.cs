@@ -4,22 +4,18 @@ using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Operates;
 using Retouch_Photo2.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Menus.Models
 {
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "OperateMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
     /// </summary>
     public sealed partial class OperateMenu : UserControl, IMenu
     {
@@ -50,6 +46,9 @@ namespace Retouch_Photo2.Menus.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a OperateMenu. 
+        /// </summary>
         public OperateMenu()
         {
             this.InitializeComponent();
@@ -64,13 +63,14 @@ namespace Retouch_Photo2.Menus.Models
         }
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "OperateMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
     /// </summary>
     public sealed partial class OperateMenu : UserControl, IMenu
     {
+
         //DataContext
-        public void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
+        private void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
         {
             this.DataContext = dataContext;
 
@@ -154,16 +154,17 @@ namespace Retouch_Photo2.Menus.Models
             };
         }
 
-
         //Menu
+        /// <summary> Gets the type. </summary>
         public MenuType Type => MenuType.Operate;
+        /// <summary> Gets the expander. </summary>
         public IExpander Expander => this._Expander;
         MenuButton _button = new MenuButton
         {
             CenterContent = new Retouch_Photo2.Operates.Icon()
         };
 
-        public void ConstructMenu()
+        private void ConstructMenu()
         {
             this._Expander.Layout = this;
             this._Expander.Button = this._button;
@@ -171,8 +172,8 @@ namespace Retouch_Photo2.Menus.Models
         }
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "OperateMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
     /// </summary>
     public sealed partial class OperateMenu : UserControl, IMenu
     {
@@ -325,8 +326,8 @@ namespace Retouch_Photo2.Menus.Models
 
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "OperateMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
     /// </summary>
     public sealed partial class OperateMenu : UserControl, IMenu
     {

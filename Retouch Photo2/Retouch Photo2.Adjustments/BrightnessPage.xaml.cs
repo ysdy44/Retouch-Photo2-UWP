@@ -17,10 +17,14 @@ namespace Retouch_Photo2.Adjustments.Pages
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
-        //@Generic
+        //@Generic      
+        /// <summary> Gets IAdjustment's adjustment. </summary>
         public BrightnessAdjustment Adjustment { get; set; }
 
         //@Construct
+        /// <summary>
+        /// Initializes a BrightnessPage. 
+        /// </summary>
         public BrightnessPage()
         {
             this.InitializeComponent();
@@ -41,7 +45,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
 
         //Strings
-        public void ConstructStrings()
+        private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
@@ -56,15 +60,22 @@ namespace Retouch_Photo2.Adjustments.Pages
 
 
         //@Content
+        /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Brightness;
+        /// <summary> Gets the icon. </summary>
         public FrameworkElement Icon { get; } = new BrightnessIcon();
+        /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
+        /// <summary> Gets the text. </summary>
         public string Text { get; private set; }
 
-
+        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new BrightnessAdjustment();
 
 
+        /// <summary>
+        /// Reset the <see cref="IAdjustmentPage"/>'s data.
+        /// </summary>
         public void Reset()
         {
             this.WhiteLightSlider.Value = 100;
@@ -119,6 +130,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                 }
             }
         }
+        /// <summary>
+        /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
+        /// </summary>
+        /// <param name="adjustment"> The adjustment. </param>
         public void Follow(BrightnessAdjustment adjustment)
         {
             this.WhiteLightSlider.Value = adjustment.WhiteLight * 100;
@@ -136,7 +151,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class BrightnessPage : IAdjustmentGenericPage<BrightnessAdjustment>
     { 
 
-        public void ConstructWhiteLight()
+        private void ConstructWhiteLight()
         {
             this.WhiteLightSlider.Value = 100;
             this.WhiteLightSlider.Minimum = 50;
@@ -220,7 +235,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        public void ConstructWhiteDark()
+        private void ConstructWhiteDark()
         {
             this.WhiteDarkSlider.Value = 100;
             this.WhiteDarkSlider.Minimum = 50;
@@ -305,7 +320,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructBlackLight()
+        private void ConstructBlackLight()
         {
             this.BlackLightSlider.Value = 0;
             this.BlackLightSlider.Minimum = 0;
@@ -389,7 +404,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             };
         }
 
-        public void ConstructBlackDark()
+        private void ConstructBlackDark()
         {
             this.BlackDarkSlider.Value = 0;
             this.BlackDarkSlider.Minimum = 0;

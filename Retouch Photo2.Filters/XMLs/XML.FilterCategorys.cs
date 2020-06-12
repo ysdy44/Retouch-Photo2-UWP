@@ -9,10 +9,11 @@ namespace Retouch_Photo2.Filters
     /// </summary>
     public static partial class XML
     {
+
         /// <summary>
         /// Saves the entire <see cref="Filter"/>Categorys to a XDocument.
         /// </summary>
-        /// <param name="filters"> The source data. </param>
+        /// <param name="filterCategorys"> The source data. </param>
         /// <returns> The saved XDocument. </returns>
         public static XDocument SaveFilterCategorys(IEnumerable<FilterCategory> filterCategorys)
         {
@@ -33,7 +34,7 @@ namespace Retouch_Photo2.Filters
         /// <summary>
         ///  Loads a <see cref="Filter"/>Categorys from an XElement.
         /// </summary>
-        /// <param name="element"> The source XElement. </param>
+        /// <param name="document"> The source XDocument. </param>
         /// <returns> The loaded <see cref="Filter"/>s. </returns>
         public static IEnumerable<FilterCategory> LoadFilterCategorys(XDocument document)
         {

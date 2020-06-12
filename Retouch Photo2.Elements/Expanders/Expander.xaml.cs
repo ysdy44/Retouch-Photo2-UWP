@@ -43,6 +43,9 @@ namespace Retouch_Photo2.Elements
         //@VisualState
         bool _vsIsSecondPage = false;
         ExpanderState _vsState = ExpanderState.Hide;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get

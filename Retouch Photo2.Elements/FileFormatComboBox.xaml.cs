@@ -12,6 +12,9 @@ namespace Retouch_Photo2.Elements
 
         //@VisualState
         CanvasBitmapFileFormat _vsFileFormat;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get

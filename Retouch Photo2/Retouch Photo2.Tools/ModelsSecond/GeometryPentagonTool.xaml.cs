@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar  
-        internal bool TouchBarMode
+        private bool TouchBarMode
         {
             set
             {
@@ -42,13 +42,14 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
         }
-
-
+        
         //@Converter
         private double PointsValueConverter(float points) => points;
 
-
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryPentagonTool. 
+        /// </summary>
         public GeometryPentagonTool()
         {
             this.InitializeComponent();

@@ -35,7 +35,10 @@ namespace Retouch_Photo2.Elements
 
         //@VisualState
         bool _vsIsSelected;
-        bool _vsIsSecondPage;        
+        bool _vsIsSecondPage;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get

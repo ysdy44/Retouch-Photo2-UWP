@@ -32,7 +32,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 if (brushType == BrushType.Image)
                 {
-                    Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.StrokeImage);
+                    Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.StrokeImage);//Delegate
                 }
                 else
                 {
@@ -46,16 +46,16 @@ namespace Retouch_Photo2.Tools.Models
         //////////////////////////
 
 
-        public void StrokeStarted(Vector2 startingPoint, Vector2 point)
+        private void StrokeStarted(Vector2 startingPoint, Vector2 point)
         {
             if (this.Stroke == null) return;
 
             //Contains Operate Mode
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            this.OperateMode = this.Stroke.ContainsOperateMode(startingPoint, matrix);
+            this.HandleMode = this.Stroke.ContainsHandleMode(startingPoint, matrix);
 
             //InitializeController
-            if (this.OperateMode == BrushHandleMode.None)
+            if (this.HandleMode == BrushHandleMode.None)
             {
                 switch (this.Stroke.Type)
                 {
@@ -86,12 +86,12 @@ namespace Retouch_Photo2.Tools.Models
             });
         }
 
-        public void StrokeDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
+        private void StrokeDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             //Selection
             if (this.Stroke == null) return;
 
-            switch (this.OperateMode)
+            switch (this.HandleMode)
             {
                 //InitializeController
                 case BrushHandleMode.None:
@@ -116,7 +116,7 @@ namespace Retouch_Photo2.Tools.Models
                 default:
                     {
                         //Selection
-                        this.Stroke.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
+                        this.Stroke.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
                         this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
                         {
                             ILayer layer = layerage.Self;
@@ -124,7 +124,7 @@ namespace Retouch_Photo2.Tools.Models
                             //Refactoring
                             layer.IsRefactoringRender = true;
                             layerage.RefactoringParentsRender();
-                            layer.Style.Stroke.Controller(this.OperateMode, canvasStartingPoint, canvasPoint);
+                            layer.Style.Stroke.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
                         });
 
                         this.ViewModel.Invalidate();//Invalidate
@@ -133,7 +133,7 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
-        public void StrokeComplete()
+        private void StrokeComplete()
         {
             //Selection
             if (this.Stroke == null) return;
@@ -173,7 +173,7 @@ namespace Retouch_Photo2.Tools.Models
         //////////////////////////
 
 
-        public void StrokeTypeChanged(BrushType brushType, Photo photo = null)
+        private void StrokeTypeChanged(BrushType brushType, Photo photo = null)
         {
             if (this.Stroke.Type == brushType) return;
 
@@ -226,7 +226,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ViewModel.Invalidate();//Invalidate
         }
 
-        public void StrokeShow()
+        private void StrokeShow()
         {
             if (this.Stroke == null) return;
 
@@ -251,7 +251,7 @@ namespace Retouch_Photo2.Tools.Models
         //////////////////////////
 
 
-        public void StrokeStopsChanged(CanvasGradientStop[] array)
+        private void StrokeStopsChanged(CanvasGradientStop[] array)
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory("Set stroke");
@@ -289,7 +289,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ShowControl.Invalidate();//Invalidate
         }
 
-        public void StrokeStopsChangeStarted(CanvasGradientStop[] array)
+        private void StrokeStopsChangeStarted(CanvasGradientStop[] array)
         {
             //Selection
             this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
@@ -300,7 +300,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
-        public void StrokeStopsChangeDelta(CanvasGradientStop[] array)
+        private void StrokeStopsChangeDelta(CanvasGradientStop[] array)
         {
             //Selection
             this.Stroke.Stops = (CanvasGradientStop[])array.Clone();
@@ -316,7 +316,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate();//Invalidate
         }
-        public void StrokeStopsChangeCompleted(CanvasGradientStop[] array)
+        private void StrokeStopsChangeCompleted(CanvasGradientStop[] array)
         {
             this.Stroke.Stops = (CanvasGradientStop[])array.Clone();
 
@@ -356,7 +356,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ShowControl.Invalidate();//Invalidate
         }
 
-        public void StrokeExtendChanged(CanvasEdgeBehavior extend)
+        private void StrokeExtendChanged(CanvasEdgeBehavior extend)
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory("Set stroke extend");

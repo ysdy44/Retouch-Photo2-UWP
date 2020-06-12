@@ -1,7 +1,7 @@
 ﻿namespace Retouch_Photo2.Layers
 {
     /// <summary> 
-    /// Type of Layer.
+    /// Type of <see cref="ILayer"/>.
     /// </summary>
     public enum LayerType
     {

@@ -9,6 +9,9 @@ namespace Retouch_Photo2.Adjustments.Icons
     public sealed partial class TemperatureIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a TemperatureIcon. 
+        /// </summary>
         public TemperatureIcon()
         {
             this.InitializeComponent();

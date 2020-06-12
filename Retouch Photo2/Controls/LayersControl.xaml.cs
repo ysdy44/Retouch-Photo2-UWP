@@ -1,25 +1,18 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.Foundation;
-using Windows.Storage.Pickers;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using System.Linq;
-using System.Threading.Tasks;
-using Retouch_Photo2.Elements;
 using Windows.UI.Xaml.Controls.Primitives;
-using Retouch_Photo2.Historys;
 
 namespace Retouch_Photo2.Controls
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "LayersControl" />. 
+    /// Represents a control that arranges <see cref="LayerControl"/> vertically.
     /// </summary>
     public partial class LayersControl : UserControl
     {
@@ -39,6 +32,9 @@ namespace Retouch_Photo2.Controls
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a LayersControl. 
+        /// </summary>
         public LayersControl()
         {
             this.InitializeComponent();

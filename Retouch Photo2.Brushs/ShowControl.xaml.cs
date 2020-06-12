@@ -52,6 +52,9 @@ namespace Retouch_Photo2.Brushs
         FillOrStroke _vsFillOrStroke;
         IBrush _vsFill;
         IBrush _vsStroke;
+        /// <summary>
+        /// Invalidate.
+        /// </summary>
         public void Invalidate()
         {
             switch (this._vsFillOrStroke)
@@ -67,6 +70,9 @@ namespace Retouch_Photo2.Brushs
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a ShowControl. 
+        /// </summary>
         public ShowControl()
         {
             this.InitializeComponent();

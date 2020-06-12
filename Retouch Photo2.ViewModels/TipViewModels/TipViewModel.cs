@@ -10,6 +10,7 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class TipViewModel : INotifyPropertyChanged
     {
+
         //@Construct
         /// <summary>
         /// Initializes a TipViewModel.

@@ -19,6 +19,9 @@ namespace Retouch_Photo2.Tools
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryTool. 
+        /// </summary>
         public GeometryTool()
         {
             this.InitializeComponent();

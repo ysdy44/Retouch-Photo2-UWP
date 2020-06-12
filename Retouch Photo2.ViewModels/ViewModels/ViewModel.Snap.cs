@@ -43,11 +43,11 @@ namespace Retouch_Photo2.ViewModels
             this.VectorBorderSnap.NodeRadius = FanKit.Math.NodeRadius / scale;
         }
         /// <summary> Initiate the snap. </summary>
-        public void VectorBorderSnapInitiate(Layerage firstLayer)
+        public void VectorBorderSnapInitiate(Layerage firstLayerages)
         {
-            if (firstLayer != null)
+            if (firstLayerages != null)
             {
-                this.VectorBorderSnap.Destinations = this.GetSnapDestinations(firstLayer);
+                this.VectorBorderSnap.Destinations = this.GetSnapDestinations(firstLayerages);
             }
 
             //NodeRadius
@@ -89,13 +89,13 @@ namespace Retouch_Photo2.ViewModels
 
 
             //Layers
-            IList<Layerage> layers = this.LayerageCollection.GetParentsChildren(firstLayer);
+            IList<Layerage> layerages = this.LayerageCollection.GetParentsChildren(firstLayer);
 
-            foreach (Layerage layer in layers)
+            foreach (Layerage layerage in layerages)
             {
-                if (layer.Self.IsSelected == false)
+                if (layerage.Self.IsSelected == false)
                 {
-                    Transformer transformer = layer.Self.Transform.Transformer;
+                    Transformer transformer = layerage.Self.Transform.Transformer;
                     yield return new TransformerBorder(transformer);
                 }
             }

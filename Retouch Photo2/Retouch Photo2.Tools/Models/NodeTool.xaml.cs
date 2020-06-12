@@ -32,6 +32,9 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a NodeTool. 
+        /// </summary>
         public NodeTool()
         {
             this.InitializeComponent();
@@ -112,7 +115,7 @@ namespace Retouch_Photo2.Tools.Models
 
                     foreach (Layerage remove in removeLayerage)
                     {
-                        LayerageCollection.RemoveLayer(this.ViewModel.LayerageCollection, remove);
+                        LayerageCollection.Remove(this.ViewModel.LayerageCollection, remove);
                     }
 
                     //Selection
@@ -251,8 +254,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
         }
-
-
+        
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {

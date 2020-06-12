@@ -3,10 +3,17 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Edits.CombineIcons
 {
+    /// <summary>
+    /// Icon of Intersect.
+    /// </summary>
     public sealed partial class IntersectIcon : UserControl
     {
+
         //@VisualState
         bool _vsIsEnabled => this.IsEnabled;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -16,8 +23,11 @@ namespace Retouch_Photo2.Edits.CombineIcons
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-        
+
         //@Construct
+        /// <summary>
+        /// Initializes a IntersectIcon. 
+        /// </summary>
         public IntersectIcon()
         {
             this.InitializeComponent();

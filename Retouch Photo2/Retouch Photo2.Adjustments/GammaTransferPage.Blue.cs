@@ -28,14 +28,14 @@ namespace Retouch_Photo2.Adjustments.Pages
         #endregion
 
 
-        public void ResetBlue()
+        private void ResetBlue()
         {
             this.BlueToggleSwitch.IsOn = false;
             this.BlueOffsetSlider.Value = 0;
             this.BlueExponentSlider.Value = 100;
             this.BlueAmplitudeSlider.Value = 100;
         }
-        public void FollowBlue(GammaTransferAdjustment adjustment)
+        private void FollowBlue(GammaTransferAdjustment adjustment)
         {
             this.BlueToggleSwitch.IsOn = !adjustment.BlueDisable;
             this.BlueOffsetSlider.Value = adjustment.BlueOffset * 100.0f;
@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.BlueAmplitudeSlider.Value = adjustment.BlueAmplitude * 100.0f;
         }
 
-        public void ConstructStringsBlue(string title, string offset, string exponent, string amplitude)
+        private void ConstructStringsBlue(string title, string offset, string exponent, string amplitude)
         {
             this.BlueTextBlock.Text = offset;
             this.BlueOffsetTextBlock.Text = offset;
@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructBlueDisable()
+        private void ConstructBlueDisable()
         {
             this.BlueTitleGrid.Tapped += (s, e) =>
             {
@@ -113,7 +113,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructBlueOffset()
+        private void ConstructBlueOffset()
         {
             this.BlueOffsetSlider.Value = 0;
             this.BlueOffsetSlider.Minimum = 0;
@@ -198,7 +198,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructBlueExponent()
+        private void ConstructBlueExponent()
         {
             this.BlueExponentSlider.Value = 100;
             this.BlueExponentSlider.Minimum = 0;
@@ -283,7 +283,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
-        public void ConstructBlueAmplitude()
+        private void ConstructBlueAmplitude()
         {
             this.BlueAmplitudeSlider.Value = 100;
             this.BlueAmplitudeSlider.Minimum = 0;

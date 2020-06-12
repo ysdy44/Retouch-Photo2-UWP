@@ -16,9 +16,11 @@ namespace Retouch_Photo2.Effects.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-
-
+        
         //@Construct
+        /// <summary>
+        /// Initializes a OuterShadowEffectPage. 
+        /// </summary>
         public OuterShadowEffectPage()
         {
             this.InitializeComponent();
@@ -55,15 +57,16 @@ namespace Retouch_Photo2.Effects.Models
         }
 
         //@Content
+        /// <summary> Gets the type. </summary>
         public EffectType Type => EffectType.OuterShadow;
+        /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
-        public ToggleSwitch ToggleSwitch => this.Button.ToggleSwitch;
+        /// <summary> Gets the button. </summary>
         public EffectButton Button { get; } = new EffectButton
         {
             Icon = new OuterShadowIcon()
         };
-
-
+        
         public void Reset()
         {
             this.RadiusSlider.Value = 12;
@@ -117,9 +120,7 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowButton(Effect effect)
         {
-            this.Button.IsButtonTapped = false;
-            this.Button.ToggleSwitch.IsOn = effect.OuterShadow_IsOn;
-            this.Button.IsButtonTapped = true;
+            this.Button.IsOn = effect.OuterShadow_IsOn;
         }
         public void FollowPage(Effect effect)
         {
@@ -140,11 +141,8 @@ namespace Retouch_Photo2.Effects.Models
 
         private void ConstructButton()
         {
-            this.Button.ToggleSwitch.Toggled += (s, e) =>
+            this.Button.Toggled += (isOn) =>
             {
-                if (this.Button.IsButtonTapped == false) return;
-                bool isOn = this.Button.ToggleSwitch.IsOn;
-
                 //History
                 LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
 
@@ -179,7 +177,7 @@ namespace Retouch_Photo2.Effects.Models
         }
 
 
-        public void ConstructOuterShadow_Radius()
+        private void ConstructOuterShadow_Radius()
         {
             //Radius
             this.RadiusSlider.Value = 0;
@@ -253,7 +251,7 @@ namespace Retouch_Photo2.Effects.Models
         }
 
 
-        public void ConstructOuterShadow_Opacity()
+        private void ConstructOuterShadow_Opacity()
         {
             //Opacity
             this.OpacitySlider.Value = 50;
@@ -326,7 +324,7 @@ namespace Retouch_Photo2.Effects.Models
         }
 
 
-        public void ConstructOuterShadow_Offset()
+        private void ConstructOuterShadow_Offset()
         {
 
             //Radius
@@ -397,7 +395,7 @@ namespace Retouch_Photo2.Effects.Models
         }
 
 
-        public void ConstructOuterShadow_Angle()
+        private void ConstructOuterShadow_Angle()
         {
             //Angle
             this.AnglePicker.ValueChangeStarted += (s, value) =>

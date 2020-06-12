@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar  
-        internal bool TouchBarMode
+        private bool TouchBarMode
         {
             set
             {
@@ -46,9 +46,11 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private int CenterNumberConverter(float center) => (int)(center * 100.0f);
         private double CenterValueConverter(float center) => center * 100d;
-
-
+        
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryTriangleTool. 
+        /// </summary>
         public GeometryTriangleTool()
         {
             this.InitializeComponent();

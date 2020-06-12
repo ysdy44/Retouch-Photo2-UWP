@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class GeometryHeartIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryHeartIcon. 
+        /// </summary>
         public GeometryHeartIcon()
         {
             this.InitializeComponent();

@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
 
         //@TouchBar  
-        internal bool TouchBarMode
+        private bool TouchBarMode
         {
             set
             {
@@ -45,8 +45,11 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private int SweepAngleNumberConverter(float sweepAngle) => (int)(sweepAngle / FanKit.Math.Pi * 180f);
         private double SweepAngleValueConverter(float sweepAngle) => sweepAngle / System.Math.PI * 180d;
-        
+
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryPieTool. 
+        /// </summary>
         public GeometryPieTool()
         {
             this.InitializeComponent();

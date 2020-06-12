@@ -16,8 +16,8 @@ using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Menus.Models
 {
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "AdjustmentMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Adjustments.IAdjustment"/>.
     /// </summary>
     public sealed partial class AdjustmentMenu : UserControl, IMenu
     {
@@ -28,6 +28,9 @@ namespace Retouch_Photo2.Menus.Models
 
         //@VisualState
         IList<IAdjustment> _vsAdjustments;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -99,7 +102,7 @@ namespace Retouch_Photo2.Menus.Models
         #endregion
 
 
-        private IAdjustment adjustment;
+        /// <summary> Gets or sets the current adjustment. </summary>
         public IAdjustment Adjustment
         {
             get => this.adjustment;
@@ -128,7 +131,9 @@ namespace Retouch_Photo2.Menus.Models
                 this.adjustment = value;
             }
         }
+        private IAdjustment adjustment;
 
+        /// <summary> Sets the state of the menu page. </summary>
         public bool AdjustmentPageOrFilters
         {
             set
@@ -140,6 +145,9 @@ namespace Retouch_Photo2.Menus.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a AdjustmentMenu. 
+        /// </summary>
         public AdjustmentMenu()
         {
             this.InitializeComponent();
@@ -232,13 +240,14 @@ namespace Retouch_Photo2.Menus.Models
 
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "AdjustmentMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Adjustments.IAdjustment"/>.
     /// </summary>
     public sealed partial class AdjustmentMenu : UserControl, IMenu
     {
+
         //DataContext
-        public void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
+        private void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
         {
             this.DataContext = dataContext;
 
@@ -269,15 +278,17 @@ namespace Retouch_Photo2.Menus.Models
             this.FiltersButton.Content = resource.GetString("/Menus/Adjustment_Filters");
         }
 
-        //Menu
+        //Menu      
+        /// <summary> Gets the type. </summary>
         public MenuType Type => MenuType.Adjustment;
+        /// <summary> Gets the expander. </summary>
         public IExpander Expander => this._Expander;
         MenuButton _button = new MenuButton
         {
             CenterContent = new Retouch_Photo2.Adjustments.Icon()
         };
 
-        public void ConstructMenu()
+        private void ConstructMenu()
         {
             this._Expander.Layout = this;
             this._Expander.Button = this._button;
@@ -294,8 +305,8 @@ namespace Retouch_Photo2.Menus.Models
         }
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "AdjustmentMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Adjustments.IAdjustment"/>.
     /// </summary>
     public sealed partial class AdjustmentMenu : UserControl, IMenu
     {

@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class ViewIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a ViewIcon. 
+        /// </summary>
         public ViewIcon()
         {
             this.InitializeComponent();

@@ -4,9 +4,15 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
 {
+    /// <summary>
+    /// Menu of Keyboard.
+    /// </summary>
     public sealed partial class KeyboardMenu : UserControl, IMenu
     {
         //@Construct
+        /// <summary>
+        /// Initializes a KeyboardMenu. 
+        /// </summary>
         public KeyboardMenu()
         {
             this.InitializeComponent();
@@ -15,8 +21,12 @@ namespace Retouch_Photo2.Menus.Models
         }
     }
 
+    /// <summary>
+    /// Menu of Keyboard.
+    /// </summary>
     public sealed partial class KeyboardMenu : UserControl, IMenu
     {
+
         //Strings
         private void ConstructStrings()
         {
@@ -26,14 +36,16 @@ namespace Retouch_Photo2.Menus.Models
         }
 
         //Menu
+        /// <summary> Gets the type. </summary>
         public MenuType Type => MenuType.Keyboard;
+        /// <summary> Gets the expander. </summary>
         public IExpander Expander => this._Expander;
         MenuButton _button = new MenuButton
         {
             CenterContent = "Key"
         };
 
-        public void ConstructMenu()
+        private void ConstructMenu()
         {
             this._Expander.Layout = this;
             this._Expander.Button = this._button;

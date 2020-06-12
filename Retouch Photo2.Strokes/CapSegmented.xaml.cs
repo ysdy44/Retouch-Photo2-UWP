@@ -7,16 +7,20 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Strokes
 {
     /// <summary>
-    /// Represents the segmented that is used to select cap style.
+    /// Segmented of <see cref="CanvasCapStyle"/>.
     /// </summary>
     public sealed partial class CapSegmented : UserControl
     {
 
         //@Delegate
+        /// <summary> Occurs when cap change. </summary>
         public EventHandler<CanvasCapStyle> CapChanged;
 
         //@VisualState
         CanvasCapStyle _vsCap;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -69,6 +73,9 @@ namespace Retouch_Photo2.Strokes
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a CapSegmented. 
+        /// </summary>
         public CapSegmented()
         {
             this.InitializeComponent();

@@ -9,6 +9,9 @@ namespace Retouch_Photo2.Adjustments.Icons
     public sealed partial class GrayIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a GrayIcon. 
+        /// </summary>
         public GrayIcon()
         {
             this.InitializeComponent();

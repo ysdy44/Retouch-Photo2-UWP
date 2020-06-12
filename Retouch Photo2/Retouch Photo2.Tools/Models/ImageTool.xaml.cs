@@ -27,6 +27,9 @@ namespace Retouch_Photo2.Tools.Models
         Layerage MezzanineLayerage = null;
 
         //@Construct
+        /// <summary>
+        /// Initializes a ImageTool. 
+        /// </summary>
         public ImageTool()
         {
             this.InitializeComponent();
@@ -34,7 +37,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ClearButton.Click += (s, e) => this.SelectionViewModel.Photocopier = new Photocopier();//Photocopier
 
             //Select
-            this.SelectButton.Click += (s, e) => Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.SelectImage);
+            this.SelectButton.Click += (s, e) => Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.SelectImage);//Delegate
             Retouch_Photo2.PhotosPage.SelectCallBack += (photo) =>
             {
                 if (photo == null) return;
@@ -43,7 +46,7 @@ namespace Retouch_Photo2.Tools.Models
             };
 
             //Replace
-            this.ReplaceButton.Click += (s, e) => Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.ReplaceImage);
+            this.ReplaceButton.Click += (s, e) => Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.ReplaceImage);//Delegate
             Retouch_Photo2.PhotosPage.ReplaceCallBack += (photo) =>
             {
                 if (photo == null) return;
@@ -76,11 +79,9 @@ namespace Retouch_Photo2.Tools.Models
             Transformer canvasTransformer = Transformer.CreateWithAspectRatio(startingPoint, point, sizeWidth, sizeHeight);
             return canvasTransformer * inverseMatrix;
         }
-
-
+        
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom() { }
-
     }
 
     /// <summary>
@@ -208,7 +209,7 @@ namespace Retouch_Photo2.Tools.Models
                 mezzanineLayer.IsSelected = true;
                 this.MezzanineLayerage = null;
             }
-            else LayerageCollection.RemoveMezzanineLayer(this.ViewModel.LayerageCollection, this.MezzanineLayerage);//Mezzanine
+            else LayerageCollection.RemoveMezzanine(this.ViewModel.LayerageCollection, this.MezzanineLayerage);//Mezzanine
 
             this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
 

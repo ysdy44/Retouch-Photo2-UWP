@@ -10,10 +10,11 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "SettingPage" />. 
+    /// Represents a page used to set options.
     /// </summary>
     public sealed partial class SettingPage : Page
     {
+
         //Strings
         private void ConstructStrings()
         {

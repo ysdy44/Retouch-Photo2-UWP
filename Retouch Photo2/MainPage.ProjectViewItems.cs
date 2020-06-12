@@ -1,5 +1,4 @@
 ﻿using Retouch_Photo2.Elements.MainPages;
-using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +9,15 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2
 {
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "MainPage" />. 
+    /// <summary>
+    /// Represents a page used to manipulate some items in local folder.
     /// </summary>
     public sealed partial class MainPage : Page
     {
 
         //@Static
         /// <summary> Is this Loaded? </summary>
-        static bool _lockIsLoaded = false;
+        private static bool _lockIsLoaded = false;
 
         #region Lock
 
@@ -38,7 +37,6 @@ namespace Retouch_Photo2
         /// <summary>
         /// OnNavigatedTo.
         /// </summary>
-        /// <param name="data"> The data. </param>
         private async Task _lockOnNavigatedTo()
         {
             if (MainPage._lockIsLoaded)
@@ -54,7 +52,7 @@ namespace Retouch_Photo2
         /// <summary>
         /// Load all ProjectViewItems in GridView children.
         /// </summary>
-        private async Task LoadAllProjectViewItems()
+        public async Task LoadAllProjectViewItems()
         {
             IEnumerable<StorageFolder> zipFolders = await FileUtil.FIndZipFolders();
              
@@ -83,7 +81,7 @@ namespace Retouch_Photo2
         /// </summary>
         /// <param name="oldName"> The old name. </param>
         /// <param name="newName"> The new name. </param>
-        private async Task RenameProjectViewItem(string oldName, string newName)
+        public async Task RenameProjectViewItem(string oldName, string newName)
         {
             //Same name. 
             if (oldName == newName)
@@ -108,10 +106,12 @@ namespace Retouch_Photo2
             this.MainLayout.State = MainPageState.Main;
         }
 
+
         /// <summary>
         /// Delete all selected ProjectViewItem(s).
         /// </summary>
-        private async Task DeleteProjectViewItems(IEnumerable<IProjectViewItem> items)
+        /// <param name="items"> The items. </param>
+        public async Task DeleteProjectViewItems(IEnumerable<IProjectViewItem> items)
         {
             foreach (IProjectViewItem item in items.ToList())
             {
@@ -126,10 +126,12 @@ namespace Retouch_Photo2
             }
         }
 
+
         /// <summary>
         /// Duplicate all selected ProjectViewItem(s).
         /// </summary>     
-        private async Task DuplicateProjectViewItems(IEnumerable<IProjectViewItem> items)
+        /// <param name="items"> The items. </param>
+        public async Task DuplicateProjectViewItems(IEnumerable<IProjectViewItem> items)
         {
             foreach (IProjectViewItem item in items.ToList())
             {

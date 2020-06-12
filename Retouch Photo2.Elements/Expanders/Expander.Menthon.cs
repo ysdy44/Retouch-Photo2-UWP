@@ -56,7 +56,6 @@ namespace Retouch_Photo2.Elements
         /// Gets bound-postion X in windows.
         /// </summary>
         /// <param name="postionX"> The source postion X. </param>
-        /// <param name="element"> The source element. </param>
         /// <returns> The croped postion. </returns>
         private double GetBoundPostionX(double postionX)
         {
@@ -73,8 +72,7 @@ namespace Retouch_Photo2.Elements
         /// <summary>
         /// Gets bound-postion Y in windows.
         /// </summary>
-        /// <param name="postion"> The source postion. </param>
-        /// <param name="element"> The source element. </param>
+        /// <param name="postionY"> The source postion Y. </param>
         /// <returns> The croped postion. </returns>
         private double GetBoundPostionY(double postionY)
         {

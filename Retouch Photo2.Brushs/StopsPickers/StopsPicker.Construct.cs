@@ -81,7 +81,7 @@ namespace Retouch_Photo2.Brushs
                 //Stops
                 for (int i = this.Manager.Count - 1; i >= 0; i--)
                 {
-                    float x = this.Size.OffsetToPosition(this.Manager.Stops[i].Position);
+                    float x = this.Size.OffsetToPositionConverter(this.Manager.Stops[i].Position);
                     if (Math.Abs(x - point.X) < StopsSize.Radius)
                     {
                         this.Manager.Index = i;
@@ -117,7 +117,7 @@ namespace Retouch_Photo2.Brushs
 
 
                 //Add
-                float offset = this.Size.PositionToOffset(point.X);
+                float offset = this.Size.PositionToOffsetConverter(point.X);
                 CanvasGradientStop addStop = this.Manager.InsertNewStepByOffset(offset);
 
                 this.Manager.Stops.Add(addStop);
@@ -138,7 +138,7 @@ namespace Retouch_Photo2.Brushs
                 if (this.Manager.IsLeft) return;
                 if (this.Manager.IsRight) return;
 
-                float offset = this.Size.PositionToOffset(point.X);
+                float offset = this.Size.PositionToOffsetConverter(point.X);
                 this.SetOffset(offset);
 
                 this.CanvasControl.Invalidate();

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Windows.UI.Xaml;
-
-namespace Retouch_Photo2.Layers
+﻿namespace Retouch_Photo2.Layers
 {
     /// <summary>
     /// Represents a collection of layers, including a sorting algorithm for layers
@@ -19,12 +16,12 @@ namespace Retouch_Photo2.Layers
                 LayerageCollection._arrangeLayersBackgroundNullParents(layerage);
             }
         }
-        public static void ArrangeLayersBackgroundItemClick(Layerage layerage)
-        {
-            bool hasParentsSelected = LayerageCollection._getLayersParentsIsSelected(layerage);
-            if (hasParentsSelected) return;
-            else LayerageCollection._arrangeLayersBackgroundNullParents(layerage);
-        }
+        //public static void ArrangeLayersBackgroundItemClick(Layerage layerage)
+        //{
+        //    bool hasParentsSelected = LayerageCollection._getLayersParentsIsSelected(layerage);
+        //    if (hasParentsSelected) return;
+        //    else LayerageCollection._arrangeLayersBackgroundNullParents(layerage);
+        //}
 
         //Judge Recursive
         private static void _arrangeLayersBackgroundNullParents(Layerage layerage)
@@ -33,7 +30,7 @@ namespace Retouch_Photo2.Layers
 
             if (layer.IsSelected)
             {
-                layer.Control.SetBackground(BackgroundMode.Selected);
+                layer.Control.BackgroundMode = BackgroundMode.Selected;
                 foreach (Layerage child in layerage.Children)
                 {
                     LayerageCollection._arrangeLayersBackgroundHasParentsSelected(child);
@@ -50,7 +47,9 @@ namespace Retouch_Photo2.Layers
         }
         private static void _arrangeLayersBackgroundWithoutParentsSelected(Layerage layerage)
         {
-            layerage.Self.Control.SetBackground(BackgroundMode.ChildSelected);
+            ILayer layer = layerage.Self;
+
+            layer.Control.BackgroundMode = BackgroundMode.ChildSelected;
 
             foreach (Layerage child in layerage.Children)
             {
@@ -61,7 +60,10 @@ namespace Retouch_Photo2.Layers
         //Self Recursive
         private static void _arrangeLayersBackgroundHasParentsSelected(Layerage layerage)
         {
-            layerage.Self.Control.SetBackground(BackgroundMode.ParentsSelected);
+            ILayer layer = layerage.Self;
+
+            layer.Control.BackgroundMode = BackgroundMode.ParentsSelected;
+
             foreach (Layerage child in layerage.Children)
             {
                 LayerageCollection._arrangeLayersBackgroundHasParentsSelected(child);
@@ -69,7 +71,10 @@ namespace Retouch_Photo2.Layers
         }
         private static void _arrangeLayersBackgroundIsNotSelected(Layerage layerage)
         {
-            layerage.Self.Control.SetBackground(BackgroundMode.UnSelected);
+            ILayer layer = layerage.Self;
+
+            layer.Control.BackgroundMode = BackgroundMode.UnSelected;
+
             foreach (Layerage child in layerage.Children)
             {
                 LayerageCollection._arrangeLayersBackgroundIsNotSelected(child);

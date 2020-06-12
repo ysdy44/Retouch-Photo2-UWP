@@ -1,10 +1,8 @@
 ﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Numerics;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -12,7 +10,7 @@ using Windows.UI.Xaml.Navigation;
 namespace Retouch_Photo2
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "DrawPage" />. 
+    /// Represents a page used to draw vector graphics.
     /// </summary>
     public sealed partial class DrawPage : Page
     {
@@ -36,6 +34,9 @@ namespace Retouch_Photo2
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a DrawPage. 
+        /// </summary>
         public DrawPage()
         {
             this.InitializeComponent();
@@ -152,9 +153,9 @@ namespace Retouch_Photo2
 
         }
 
-        //The current page becomes the active page
+        /// <summary> The current page becomes the active page. </summary>
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
+        {            
             //Key
             this.SettingViewModel.KeyIsEnabled = true;
 
@@ -165,7 +166,7 @@ namespace Retouch_Photo2
                 this._lockOnNavigatedTo(data);
             }
         }
-        //The current page no longer becomes an active page
+        /// <summary> The current page no longer becomes an active page. </summary>
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             //Key

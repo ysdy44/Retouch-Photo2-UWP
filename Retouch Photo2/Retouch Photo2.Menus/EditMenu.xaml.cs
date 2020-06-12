@@ -19,8 +19,8 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
 {
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "EditMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Edits"/>.
     /// </summary>
     public sealed partial class EditMenu : UserControl, IMenu
     {
@@ -30,6 +30,9 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel MethodViewModel => App.MethodViewModel;
 
         //@Construct
+        /// <summary>
+        /// Initializes a EditMenu. 
+        /// </summary>
         public EditMenu()
         {
             this.InitializeComponent();
@@ -62,8 +65,8 @@ namespace Retouch_Photo2.Menus.Models
         }
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "EditMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Edits"/>.
     /// </summary>
     public sealed partial class EditMenu : UserControl, IMenu
     {
@@ -119,14 +122,16 @@ namespace Retouch_Photo2.Menus.Models
         }
 
         //Menu
+        /// <summary> Gets the type. </summary>
         public MenuType Type => MenuType.Edit;
+        /// <summary> Gets the expander. </summary>
         public IExpander Expander => this._Expander;
         MenuButton _button = new MenuButton
         {
             CenterContent = new Retouch_Photo2.Edits.Icon()
         };
 
-        public void ConstructMenu()
+        private void ConstructMenu()
         {
             this._Expander.Layout = this;
             this._Expander.Button = this._button;

@@ -9,14 +9,16 @@ using Windows.Storage.Streams;
 
 namespace Retouch_Photo2
 {
+    /// <summary>
+    /// Provide constant and static methods for XElement.
+    /// </summary>
     public static partial class XML
     {
-
 
         /// <summary>
         /// Load <see cref="Photo"/>s file from temporary folder.
         /// </summary>
-        /// <returns> The product photos. </returns>
+        /// <returns> The product <see cref="Photo"/>s. </returns>
         public static IEnumerable<Photo> LoadPhotosFile()
         {
             //Create an XDocument object.
@@ -36,7 +38,11 @@ namespace Retouch_Photo2
             }
         }
 
-
+        /// <summary>
+        /// Save <see cref="Photo"/>s to zip folder.
+        /// </summary>
+        /// <param name="zipFolder"> The zip folder. </param>
+        /// <param name="photos"> The photos. </param>
         public static async Task SavePhotosFile(StorageFolder zipFolder, IEnumerable<Photo> photos)
         {
             XDocument document = Retouch_Photo2.Elements.XML.SavePhotos(photos);

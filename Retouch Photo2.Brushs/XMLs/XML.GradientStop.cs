@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Brushs
         /// Saves the entire <see cref="CanvasGradientStop"/> to a XElement.
         /// </summary>
         /// <param name="elementName"> The element name. </param>
-        /// <param name="array"> The source data. </param>
+        /// <param name="stop"> The source data. </param>
         /// <returns> The saved XElement. </returns>
         public static XElement SaveStop(string elementName, CanvasGradientStop stop)
         {

@@ -12,6 +12,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Arrange all layers's control, depth, parents and expand.
         /// </summary>
+        /// <param name="layerageCollection"> The layerage-collection. </param>
         public static void ArrangeLayers(LayerageCollection layerageCollection)
         {
             layerageCollection.RootControls.Clear();
@@ -30,9 +31,8 @@ namespace Retouch_Photo2.Layers
                 //IsExpand
                 layer.Control.Self.Visibility = visibility;
                 Visibility childVisibility = (layer.IsExpand && visibility == Visibility.Visible) ? Visibility.Visible : Visibility.Collapsed;
-                //IsExpand
-                bool isZero = layerage.Children.Count == 0;
-                layer.Control.SetChildrenZero(isZero);
+                //Children
+                layer.Control.ChildrenCount = layerage.Children.Count;
 
                 layerageCollection.RootControls.Add(layer.Control.Self);
 
@@ -46,20 +46,21 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Arrange all layers's parents.
         /// </summary>
+        /// <param name="layerageCollection"> The layerage-collection. </param>
         public static void ArrangeLayersParents(LayerageCollection layerageCollection) 
         {
-            foreach (Layerage layer in layerageCollection.RootLayerages)
+            foreach (Layerage layerage in layerageCollection.RootLayerages)
             {
-                layer.Parents = null;
-                LayerageCollection._arrangeLayersParents(layer, layer.Children);
+                layerage.Parents = null;
+                LayerageCollection._arrangeLayersParents(layerage, layerage.Children);
             }
         }
-        private static void _arrangeLayersParents(Layerage parents, IEnumerable<Layerage> layers)
+        private static void _arrangeLayersParents(Layerage parents, IEnumerable<Layerage> layerages)
         {
-            foreach (Layerage layer in layers)
+            foreach (Layerage layerage in layerages)
             {
-                layer.Parents = parents;
-                LayerageCollection._arrangeLayersParents(layer, layer.Children);
+                layerage.Parents = parents;
+                LayerageCollection._arrangeLayersParents(layerage, layerage.Children);
             }
         }
 
@@ -68,13 +69,17 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Arrange all layers's depth.
         /// </summary>
+        /// <param name="layerageCollection"> The layerage-collection. </param>
         public static void ArrangeLayersDepth(LayerageCollection layerageCollection) => LayerageCollection._arrangeLayersDepth(layerageCollection.RootLayerages, 0);
-        private static void _arrangeLayersDepth(IEnumerable<Layerage> layers, int depth)
+        private static void _arrangeLayersDepth(IEnumerable<Layerage> layerages, int depth)
         {
-            foreach (Layerage layer in layers)
+            foreach (Layerage layerage in layerages)
             {
-                layer.Self.Control.Depth = depth;
-                LayerageCollection._arrangeLayersDepth(layer.Children, depth + 1);
+                ILayer layer = layerage.Self;
+
+                layer.Control.Depth = depth;
+
+                LayerageCollection._arrangeLayersDepth(layerage.Children, depth + 1);
             }
         }
 
@@ -89,13 +94,15 @@ namespace Retouch_Photo2.Layers
         }
         private static void _arrangeLayersExpaned(IList<Layerage> layerages, Visibility visibility)
         {
-            foreach (Layerage layer in layerages)
+            foreach (Layerage layerage in layerages)
             {
-                layer.Self.Control.Self.Visibility = visibility;
+                ILayer layer = layerage.Self;
+
+                layer.Control.Self.Visibility = visibility;
 
                 //Recursive
-                Visibility childVisibility = (layer.Self.IsExpand && visibility == Visibility.Visible) ? Visibility.Visible : Visibility.Collapsed;
-                LayerageCollection._arrangeLayersExpaned(layer.Children, childVisibility);
+                Visibility childVisibility = (layerage.Self.IsExpand && visibility == Visibility.Visible) ? Visibility.Visible : Visibility.Collapsed;
+                LayerageCollection._arrangeLayersExpaned(layerage.Children, childVisibility);
             }
         }
 
@@ -105,14 +112,15 @@ namespace Retouch_Photo2.Layers
         /// Arrange all layers's "children is zero".
         /// </summary>
         public static void ArrangeLayersChildrenZero(LayerageCollection layerageCollection) => LayerageCollection._arrangeLayersChildrenZero(layerageCollection.RootLayerages);
-        public static void _arrangeLayersChildrenZero(IEnumerable<Layerage> layerages)
+        private static void _arrangeLayersChildrenZero(IEnumerable<Layerage> layerages)
         {
-            foreach (Layerage child in layerages)
+            foreach (Layerage layerage in layerages)
             {
-                bool isZero = child.Children.Count == 0;
-                child.Self.Control.SetChildrenZero(isZero);
+                ILayer layer = layerage.Self;
+                
+                layer.Control.ChildrenCount = layerage.Children.Count;
 
-                LayerageCollection._arrangeLayersChildrenZero(child.Children);
+                LayerageCollection._arrangeLayersChildrenZero(layerage.Children);
             }
         }
 

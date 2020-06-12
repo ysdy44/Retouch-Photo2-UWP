@@ -13,9 +13,11 @@ namespace Retouch_Photo2.Layers
     /// </summary>
     public partial class LayerageCollection
     {
+
         //@Static
         /// <summary>  Gets or sets layer controls height. </summary>
         public static int ControlsHeight { get; set; } = 40;
+
 
         //@Static
         /// <summary> Occurs when a layerage receive interaction. </summary>
@@ -28,6 +30,7 @@ namespace Retouch_Photo2.Layers
         public static Action<ILayer> IsSelectedChanged;
         /// <summary> Occurs when the expaned has changed </summary>
         public static Action<ILayer> IsExpandChanged;
+
 
         //Overlay
         /// <summary>
@@ -46,6 +49,7 @@ namespace Retouch_Photo2.Layers
         /// Occurs when drag items is completed.
         /// </summary>
         public static Action DragItemsCompleted;
+
 
         //Root
         /// <summary>

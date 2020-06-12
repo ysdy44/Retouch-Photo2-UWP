@@ -9,7 +9,7 @@ using Windows.Storage.Streams;
 namespace Retouch_Photo2.Elements
 {
     /// <summary>
-    /// Image of <see cref="Photo">.
+    /// Represents a photothat contains dpi, width, height information.
     /// </summary>
     public partial class Photo
     {
@@ -64,10 +64,7 @@ namespace Retouch_Photo2.Elements
         /// <summary>
         /// Construct the <see cref="Photo.Source"/> by self.
         /// </summary>
-        /// <param name=""></param>
         /// <param name="resourceCreator"> The resource creator. </param>
-        /// <param name="photo"></param>
-        /// <returns></returns>
         public async Task ConstructPhotoSource(ICanvasResourceCreator resourceCreator)
         {
             string path = $"{ApplicationData.Current.TemporaryFolder.Path}\\{this.Name}{this.FileType}";

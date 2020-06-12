@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Brushs.FillOrStrokeIcons
     public sealed partial class FillIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a FillIcon. 
+        /// </summary>
         public FillIcon()
         {
             this.InitializeComponent();

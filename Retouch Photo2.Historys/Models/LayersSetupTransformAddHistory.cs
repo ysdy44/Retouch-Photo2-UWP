@@ -9,10 +9,9 @@ namespace Retouch_Photo2.Historys
     public class LayersSetupTransformAddHistory : LayersTransformAddHistory
     {
 
-        int Width = 1024;
-        int Height = 1024;
-
-        readonly Action SizeAction;
+        private int Width = 1024;
+        private int Height = 1024;
+        private readonly Action SizeAction;
 
 
         //@Construct
@@ -34,6 +33,7 @@ namespace Retouch_Photo2.Historys
             };
         }
 
+        /// <summary> Undo method. </summary>
         public override void Undo()
         {
             base.Undo();

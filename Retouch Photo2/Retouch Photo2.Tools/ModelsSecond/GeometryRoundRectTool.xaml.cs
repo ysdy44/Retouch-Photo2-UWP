@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
        
         //@TouchBar  
-        internal bool TouchBarMode
+        private bool TouchBarMode
         {
             set
             {
@@ -47,8 +47,10 @@ namespace Retouch_Photo2.Tools.Models
         private int CornerNumberConverter(float corner) => (int)(corner * 100.0f);
         private double CornerValueConverter(float corner) => corner * 100d;
 
-
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryRoundRectTool. 
+        /// </summary>
         public GeometryRoundRectTool()
         {
             this.InitializeComponent();

@@ -5,7 +5,7 @@
     /// </summary>
     public interface IAdjustmentGenericPage<T> : IAdjustmentPage
     {
-        /// <summary> Gets IAdjustment's adjustment. </summary>
+        /// <summary> Gets the adjustment. </summary>
         T Adjustment { get; set; }
 
         /// <summary>

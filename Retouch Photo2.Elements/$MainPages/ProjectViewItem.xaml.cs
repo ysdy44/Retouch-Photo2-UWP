@@ -20,6 +20,9 @@ namespace Retouch_Photo2.Elements.MainPages
 
         //@VisualState
         SelectMode _vsSelectMode = SelectMode.None;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get

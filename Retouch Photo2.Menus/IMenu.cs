@@ -7,10 +7,10 @@ namespace Retouch_Photo2.Menus
     /// </summary>
     public interface IMenu
     {        
-        /// <summary> Gets IMenu's type. </summary>
+        /// <summary> Gets the type. </summary>
         MenuType Type { get; }
 
-        /// <summary> Gets IMenu's expander. </summary>
+        /// <summary> Gets the expander. </summary>
         IExpander Expander { get; }
     }
 }

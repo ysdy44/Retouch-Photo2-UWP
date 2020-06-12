@@ -10,11 +10,12 @@ namespace Retouch_Photo2.Tools.Elements
     /// <summary>
     /// Represents the contorl that is used to select none or arrow.
     /// </summary>
-    public sealed partial class ArrowTailTypeControl : UserControl
+    public sealed partial class ArrowTailTypeComboBox : UserControl
     {
 
         //@Delegate
-        public EventHandler<GeometryArrowTailType> ArrowTailTypeChanged;
+        /// <summary> Occurs when type change. </summary>
+        public EventHandler<GeometryArrowTailType> TypeChanged;
 
 
         #region DependencyProperty
@@ -26,14 +27,14 @@ namespace Retouch_Photo2.Tools.Elements
             get { return (GeometryArrowTailType)GetValue(ArrowTailTypeProperty); }
             set { SetValue(ArrowTailTypeProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "ArrowTailTypeControl.ArrowTailType" /> dependency property. </summary>
-        public static readonly DependencyProperty ArrowTailTypeProperty = DependencyProperty.Register(nameof(ArrowTailType), typeof(GeometryArrowTailType), typeof(ArrowTailTypeControl), new PropertyMetadata(GeometryArrowTailType.None, (sender, e) =>
+        /// <summary> Identifies the <see cref = "ArrowTailTypeComboBox.ArrowTailType" /> dependency property. </summary>
+        public static readonly DependencyProperty ArrowTailTypeProperty = DependencyProperty.Register(nameof(ArrowTailType), typeof(GeometryArrowTailType), typeof(ArrowTailTypeComboBox), new PropertyMetadata(GeometryArrowTailType.None, (sender, e) =>
         {
-            ArrowTailTypeControl con = (ArrowTailTypeControl)sender;
+            ArrowTailTypeComboBox con = (ArrowTailTypeComboBox)sender;
 
             if (e.NewValue is GeometryArrowTailType value)
             {
-                con._vsArrowTailType = value;
+                con._vsType = value;
                 con.VisualState = con.VisualState;//State
             }
         }));
@@ -43,12 +44,15 @@ namespace Retouch_Photo2.Tools.Elements
 
 
         //@VisualState
-        GeometryArrowTailType _vsArrowTailType;
+        GeometryArrowTailType _vsType;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
             {
-                switch (this._vsArrowTailType)
+                switch (this._vsType)
                 {
                     case GeometryArrowTailType.None: return this.None;
                     case GeometryArrowTailType.Arrow: return this.Arrow;
@@ -60,7 +64,10 @@ namespace Retouch_Photo2.Tools.Elements
 
 
         //@Construct
-        public ArrowTailTypeControl()
+        /// <summary>
+        /// Initializes a ArrowTailTypeComboBox. 
+        /// </summary>
+        public ArrowTailTypeComboBox()
         {
             this.InitializeComponent();
             this.ConstructStrings();
@@ -78,7 +85,7 @@ namespace Retouch_Photo2.Tools.Elements
             this.NoneButton.Tag = new NoneIcon();
             this.NoneButton.Click += (s, e) =>
             {
-                this.ArrowTailTypeChanged?.Invoke(this, GeometryArrowTailType.None); //Delegate
+                this.TypeChanged?.Invoke(this, GeometryArrowTailType.None); //Delegate
                 this.Flyout.Hide();
             };
 
@@ -86,7 +93,7 @@ namespace Retouch_Photo2.Tools.Elements
             this.ArrowButton.Tag = new ArrowIcon();
             this.ArrowButton.Click += (s, e) =>
             {
-                this.ArrowTailTypeChanged?.Invoke(this, GeometryArrowTailType.Arrow); //Delegate
+                this.TypeChanged?.Invoke(this, GeometryArrowTailType.Arrow); //Delegate
                 this.Flyout.Hide();
             };
         }

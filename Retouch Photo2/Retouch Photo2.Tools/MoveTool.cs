@@ -90,9 +90,9 @@ namespace Retouch_Photo2.Tools
             //SelectedLayer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
-            Layerage selectedLayer = this.GetClickSelectedLayerage(canvasPoint);
+            Layerage selectedLayerage = this.GetClickSelectedLayerage(canvasPoint);
 
-            if (selectedLayer == null)
+            if (selectedLayerage == null)
             {
                 this.MethodViewModel.MethodSelectedNone();//Method
                 return false;
@@ -102,10 +102,10 @@ namespace Retouch_Photo2.Tools
             switch (this.MarqueeCompositeMode)
             {
                 //Method
-                case MarqueeCompositeMode.New: this.MethodViewModel.MethodSelectedNew(selectedLayer); return true;
-                case MarqueeCompositeMode.Add: this.MethodViewModel.MethodSelectedAdd(selectedLayer); return true;
-                case MarqueeCompositeMode.Subtract: this.MethodViewModel.MethodSelectedSubtract(selectedLayer); return true;
-                case MarqueeCompositeMode.Intersect: this.MethodViewModel.MethodSelectedIntersect(selectedLayer); return true;
+                case MarqueeCompositeMode.New: this.MethodViewModel.MethodSelectedNew(selectedLayerage); return true;
+                case MarqueeCompositeMode.Add: this.MethodViewModel.MethodSelectedAdd(selectedLayerage); return true;
+                case MarqueeCompositeMode.Subtract: this.MethodViewModel.MethodSelectedSubtract(selectedLayerage); return true;
+                case MarqueeCompositeMode.Intersect: this.MethodViewModel.MethodSelectedIntersect(selectedLayerage); return true;
                 default: return false;
             }
         }
@@ -155,17 +155,17 @@ namespace Retouch_Photo2.Tools
                     break;
             }
 
-            //SelectedLayer
-            Layerage selectedLayer = this.GetClickSelectedLayerage(canvasStartingPoint);
-
-            if (selectedLayer == null)
+            //SelectedLayerage
+            Layerage selectedLayerage = this.GetClickSelectedLayerage(canvasStartingPoint);
+            
+            if (selectedLayerage == null)
             {
                 this.MethodViewModel.MethodSelectedNone();//Method
                 return false;
             }
             else
             {
-                this.MethodViewModel.MethodSelectedNew(selectedLayer);//Method
+                this.MethodViewModel.MethodSelectedNew(selectedLayerage);//Method
                 return true;
             }
         }

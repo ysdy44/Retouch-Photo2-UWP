@@ -16,8 +16,8 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2
 {
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "MainPage" />. 
+    /// <summary>
+    /// Represents a page used to manipulate some items in local folder.
     /// </summary>
     public sealed partial class MainPage : Page
     {

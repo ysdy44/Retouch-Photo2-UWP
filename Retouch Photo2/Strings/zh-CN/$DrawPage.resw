@@ -165,9 +165,6 @@
   <data name="SetupSizePicker_Width" xml:space="preserve">
     <value>宽度</value>
   </data>
-  <data name="Setup_ToolTip" xml:space="preserve">
-    <value>设定</value>
-  </data>
   <data name="RenameDialog_Close" xml:space="preserve">
     <value>取消</value>
   </data>

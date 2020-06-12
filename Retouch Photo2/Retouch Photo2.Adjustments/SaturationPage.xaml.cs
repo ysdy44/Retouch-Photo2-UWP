@@ -18,9 +18,13 @@ namespace Retouch_Photo2.Adjustments.Pages
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Generic
+        /// <summary> Gets IAdjustment's adjustment. </summary>
         public SaturationAdjustment Adjustment { get; set; }
 
         //@Construct
+        /// <summary>
+        /// Initializes a SaturationPage. 
+        /// </summary>
         public SaturationPage()
         {
             this.InitializeComponent();
@@ -36,7 +40,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class SaturationPage : IAdjustmentGenericPage<SaturationAdjustment>
     {
         //Strings
-        public void ConstructStrings()
+        private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
@@ -46,14 +50,21 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
         //@Content
+        /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Saturation;
+        /// <summary> Gets the icon. </summary>
         public FrameworkElement Icon { get; } = new SaturationIcon();
+        /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
+        /// <summary> Gets the text. </summary>
         public string Text { get; private set; }
 
-
+        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new SaturationAdjustment();
-
+                     
+        /// <summary>
+        /// Reset the <see cref="IAdjustmentPage"/>'s data.
+        /// </summary>
         public void Reset()
         {
             this.SaturationSlider.Value = 100;
@@ -96,6 +107,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                 }
             }
         }
+        /// <summary>
+        /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
+        /// </summary>
+        /// <param name="adjustment"> The adjustment. </param>
         public void Follow(SaturationAdjustment adjustment)
         {
             this.SaturationSlider.Value = adjustment.Saturation * 100.0f;
@@ -108,7 +123,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class SaturationPage : IAdjustmentGenericPage<SaturationAdjustment>
     {
 
-        public void ConstructSaturation()
+        private void ConstructSaturation()
         {
             this.SaturationSlider.Value = 100;
             this.SaturationSlider.Minimum = 0;

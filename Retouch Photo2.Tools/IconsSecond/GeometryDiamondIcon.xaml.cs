@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class GeometryDiamondIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryDiamondIcon. 
+        /// </summary>
         public GeometryDiamondIcon()
         {
             this.InitializeComponent();

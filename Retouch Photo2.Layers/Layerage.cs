@@ -5,7 +5,7 @@ using FanKit.Transformers;
 namespace Retouch_Photo2.Layers
 {
     /// <summary>
-    /// ID of <see cref="Layerage"/>.
+    /// ID of <see cref="ILayer"/>.
     /// </summary>
     public partial class Layerage : IGetActualTransformer
     {

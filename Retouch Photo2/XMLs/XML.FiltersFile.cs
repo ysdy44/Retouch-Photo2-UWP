@@ -1,8 +1,6 @@
-﻿using Retouch_Photo2.Adjustments;
+﻿using Retouch_Photo2.Filters;
 using System;
 using System.Collections.Generic;
-using Retouch_Photo2.Filters;
-using Retouch_Photo2.Styles;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -11,9 +9,11 @@ using Windows.Storage.Streams;
 
 namespace Retouch_Photo2
 {
+    /// <summary>
+    /// Provide constant and static methods for XElement.
+    /// </summary>
     public static partial class XML
     {
-
 
         /// <summary>
         /// Construct <see cref="FilterCategory"/>s File (Open from Application, Save from LocalFolder)

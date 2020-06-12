@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Controls
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "MainCanvasControl" />. 
+    /// Represents a control that displays the canvas and elements on the screen.
     /// </summary>
     public partial class MainCanvasControl : UserControl
     {
@@ -111,25 +111,26 @@ namespace Retouch_Photo2.Controls
         /// </summary>
         /// <param name="fileWidth"> The file width.</param>
         /// <param name="fileHeight"> The file height.</param>
+        /// <param name="isClearWhite"> Clears to the white color. </param>
         /// <returns> The file image. </returns>
-        public CanvasRenderTarget Render( int fileWidth = 256, int fileHeight = 256, bool isClearWhite = true)
+        public CanvasRenderTarget Render(int fileWidth = 256, int fileHeight = 256, bool isClearWhite = true)
         {
             ICanvasImage canvasImage = this.Render();
-            
+
             int canvasWidth = this.ViewModel.CanvasTransformer.Width;
             int canvasHeight = this.ViewModel.CanvasTransformer.Height;
-            
+
             CanvasRenderTarget renderTarget = new CanvasRenderTarget(this.ViewModel.CanvasDevice, fileWidth, fileHeight, 96);
             if (canvasImage == null) return renderTarget;
 
 
             float scaleX = (float)fileWidth / (float)canvasWidth;
             float scaleY = (float)fileHeight / (float)canvasHeight;
-            Matrix3x2 matrix = 
+            Matrix3x2 matrix =
                 Matrix3x2.CreateTranslation(-canvasWidth / 2, -canvasHeight / 2) *
                 Matrix3x2.CreateScale(Math.Min(scaleX, scaleY)) *
                 Matrix3x2.CreateTranslation(fileWidth / 2, fileHeight / 2);
-            
+
             using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
             {
                 if (isClearWhite) drawingSession.Clear(Colors.White);
@@ -147,7 +148,6 @@ namespace Retouch_Photo2.Controls
         /// <summary>
         /// Render image.
         /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="size"> The size. </param>
         /// <param name="dpi"> The dpi. </param>
         /// <param name="isClearWhite"> Clears to the white color. </param>

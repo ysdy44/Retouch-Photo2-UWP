@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Layers
     public interface ILayer : ICacheTransform
     {
 
-        /// <summary> Gets or sets ILayer's control. </summary>
+        /// <summary> Gets or sets the control. </summary>
         LayerControl Control { get; }
 
 
@@ -54,47 +54,47 @@ namespace Retouch_Photo2.Layers
         #region Property
 
 
-        /// <summary> Gets ILayer's type. </summary>
+        /// <summary> Gets the type. </summary>
         LayerType Type { get; }
-        /// <summary> Gets or sets ILayer's name. </summary>
+        /// <summary> Gets or sets the name. </summary>
         string Name { get; set; } 
-        /// <summary> Gets or sets ILayer's blend mode. </summary>
+        /// <summary> Gets or sets the blend mode. </summary>
         BlendEffectMode? BlendMode { get; set; }
         
-        /// <summary> Gets or sets ILayer's opacity. </summary>
+        /// <summary> Gets or sets the opacity. </summary>
         float Opacity { get; set; }
         /// <summary> The cache of <see cref="ILayer.Opacity"/>. </summary>
         float StartingOpacity { get; }
         /// <summary> Cache the <see cref="ILayer.Opacity"/>. </summary>
         void CacheOpacity();
 
-        /// <summary> Gets or sets ILayer's visibility. </summary>
+        /// <summary> Gets or sets the visibility. </summary>
         Visibility Visibility { get; set; }
-        /// <summary> Gets or sets ILayer's tag-type. </summary>
+        /// <summary> Gets or sets the tag type. </summary>
         TagType TagType { get; set; }
 
-        /// <summary> Gets or sets ILayer's expand. </summary>
+        /// <summary> Gets or sets the expand. </summary>
         bool IsExpand { get; set; }
-        /// <summary> Gets or sets ILayer's selected. </summary>
+        /// <summary> Gets or sets the selected. </summary>
         bool IsSelected { get; set; }
 
 
         /// <summary> Gets or sets ILayer is need to refactoring transformer. </summary>
         bool IsRefactoringTransformer { get; set; }
         /// <summary>
-        /// Gets ILayer's actually transformer.
+        /// Gets the actually transformer.
         /// </summary>
         /// <param name="layerage"> The layerage. </param>
         Transformer GetActualTransformer(Layerage layerage);
 
 
-        /// <summary> Gets or sets ILayer's style. </summary>
+        /// <summary> Gets or sets the style. </summary>
         Retouch_Photo2.Styles.Style Style { get; set; }
-        /// <summary> Gets or sets ILayer's transform. </summary>
+        /// <summary> Gets or sets the transform. </summary>
         Transform Transform { get; set; }
-        /// <summary> Gets or sets ILayer's effect. </summary>
+        /// <summary> Gets or sets the effect. </summary>
         Effect Effect { get; set; }
-        /// <summary> Gets or sets ILayer's filter. </summary>
+        /// <summary> Gets or sets the filter. </summary>
         Filter Filter { get; set; }
 
 
@@ -102,7 +102,7 @@ namespace Retouch_Photo2.Layers
         /// Get own copy.
         /// </summary>
         /// <param name="customDevice"> The custom-device. </param>
-        /// <returns> The cloned ILayer. </returns>
+        /// <returns> The cloned <see cref="ILayer"/>. </returns>
         ILayer Clone(CanvasDevice customDevice);
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Retouch_Photo2.Layers
         #region Node
 
 
-        /// <summary> Gets or sets ILayer's nodes. </summary>
+        /// <summary> Gets or sets the nodes. </summary>
         NodeCollection Nodes { get; }
 
         /// <summary>

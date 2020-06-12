@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Tools.Models
     public partial class NodeTool : Page, ITool
     {
 
-        public void MoveStarted()
+        private void MoveStarted()
         {
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
@@ -37,7 +37,7 @@ namespace Retouch_Photo2.Tools.Models
                 }
             }
         }
-        public void MoveDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
+        private void MoveDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             //Snap
             if (this.IsSnap) canvasPoint = this.Snap.Snap(canvasPoint);
@@ -57,7 +57,7 @@ namespace Retouch_Photo2.Tools.Models
                 }
             });
         }
-        public void MoveComplete(Vector2 canvasStartingPoint, Vector2 canvasPoint)
+        private void MoveComplete(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             //Snap
             if (this.IsSnap)
@@ -104,7 +104,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void MoveSingleNodePointStarted(Vector2 startingPoint, Matrix3x2 matrix)
+        private void MoveSingleNodePointStarted(Vector2 startingPoint, Matrix3x2 matrix)
         {
             //Selection
             ILayer layer = this.Layerage.Self;
@@ -117,7 +117,7 @@ namespace Retouch_Photo2.Tools.Models
                 if (this.IsSnap) this.ViewModel.VectorVectorSnapInitiate(layer.Nodes);
             }
         }
-        public void MoveSingleNodePointDelta(Vector2 canvasPoint)
+        private void MoveSingleNodePointDelta(Vector2 canvasPoint)
         {
             ILayer layer = this.Layerage.Self;
 
@@ -134,7 +134,7 @@ namespace Retouch_Photo2.Tools.Models
                 Node.Move(canvasPoint, node);
             }
         }
-        public void MoveSingleNodePointComplete(Vector2 canvasPoint)
+        private void MoveSingleNodePointComplete(Vector2 canvasPoint)
         {
             ILayer layer = this.Layerage.Self;
 
@@ -178,7 +178,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void MoveSingleNodeControlPointStarted()
+        private void MoveSingleNodeControlPointStarted()
         {
             //Selection
             ILayer layer = this.Layerage.Self;
@@ -188,7 +188,7 @@ namespace Retouch_Photo2.Tools.Models
                 layer.Nodes.SelectedItem.CacheTransform();
             }
         }
-        public void MoveSingleNodeControlPointDelta(Vector2 canvasPoint, bool isLeftControlPoint)
+        private void MoveSingleNodeControlPointDelta(Vector2 canvasPoint, bool isLeftControlPoint)
         {
             ILayer layer = this.Layerage.Self;
 
@@ -202,7 +202,7 @@ namespace Retouch_Photo2.Tools.Models
                 Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint);
             }
         }
-        public void MoveSingleNodeControlPointComplete(Vector2 canvasPoint, bool isLeftControlPoint)
+        private void MoveSingleNodeControlPointComplete(Vector2 canvasPoint, bool isLeftControlPoint)
         {
             ILayer layer = this.Layerage.Self;
 
@@ -243,7 +243,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void RectChooseStarted(Vector2 startingPoint, Vector2 point)
+        private void RectChooseStarted(Vector2 startingPoint, Vector2 point)
         {
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
@@ -262,7 +262,7 @@ namespace Retouch_Photo2.Tools.Models
                 }
             });
         }
-        public void RectChooseDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
+        private void RectChooseDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
 
@@ -277,7 +277,7 @@ namespace Retouch_Photo2.Tools.Models
                 }
             });
         }
-        public void RectChooseComplete(Vector2 canvasStartingPoint, Vector2 canvasPoint)
+        private void RectChooseComplete(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
 

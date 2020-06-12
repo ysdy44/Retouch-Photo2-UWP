@@ -7,11 +7,11 @@ namespace Retouch_Photo2.Texts
     /// </summary>
     public static partial class XML
     {
-        
+
         /// <summary>
         /// Create a blend mode from the string.
         /// </summary>
-        /// <param name="mode"> The source string. </param>
+        /// <param name="horizontalAlignment"> The source data. </param>
         /// <returns> The created type. </returns>
         public static CanvasHorizontalAlignment CreateHorizontalAlignment(string horizontalAlignment)
         {

@@ -7,15 +7,17 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Texts
 {
     /// <summary>
-    /// Represents the combo box that is used to select font weight.
+    /// Segmented of <see cref="FontWeight"/>.
     /// </summary>
     public sealed partial class FontWeightComboBox : UserControl
     {
 
         //@Delegate
+        /// <summary> Occurs when weight change. </summary>
         public EventHandler<FontWeight> WeightChanged;
 
         //@Group
+        /// <summary> Occurs when group change. </summary>
         private EventHandler<FontWeight> Group;
 
         #region DependencyProperty
@@ -53,6 +55,9 @@ namespace Retouch_Photo2.Texts
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a FontWeightComboBox. 
+        /// </summary>
         public FontWeightComboBox()
         {
             this.InitializeComponent();

@@ -19,6 +19,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Generic
+        /// <summary> Gets IAdjustment's adjustment. </summary>
         public HueRotationAdjustment Adjustment { get; set; }
         
         //@Construct
@@ -38,7 +39,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
 
         //Strings
-        public void ConstructStrings()
+        private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
@@ -110,7 +111,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class HueRotationPage : IAdjustmentGenericPage<HueRotationAdjustment>
     {
 
-        public void ConstructHueRotation()
+        private void ConstructHueRotation()
         {
             this.HueRotationSlider.Value = 0;
             this.HueRotationSlider.Minimum = 0;

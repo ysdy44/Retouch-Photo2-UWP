@@ -9,7 +9,13 @@ namespace Retouch_Photo2.Brushs
     {
 
 
-        public BrushHandleMode ContainsOperateMode(Vector2 point, Matrix3x2 matrix)
+        /// <summary>
+        /// Gets the all points by the brush contains the specified point. 
+        /// </summary>
+        /// <param name="point"> The input point. </param>
+        /// <param name="matrix"> The matrix. </param>
+        /// <returns> The operate-mode. </returns>
+        public BrushHandleMode ContainsHandleMode(Vector2 point, Matrix3x2 matrix)
         {
             switch (this.Type)
             {
@@ -55,6 +61,13 @@ namespace Retouch_Photo2.Brushs
             }
         }
 
+
+        /// <summary>
+        /// It controls the transformation of brush.
+        /// </summary>
+        /// <param name="mode"> The mode. </param>
+        /// <param name="startingPoint"> The starting point. </param>
+        /// <param name="point"> The point. </param>
         public void Controller(BrushHandleMode mode, Vector2 startingPoint, Vector2 point)
         {
             switch (this.Type)
@@ -131,6 +144,12 @@ namespace Retouch_Photo2.Brushs
             }
         }
 
+
+        /// <summary>
+        /// It initialize and controls the transformation of brush.
+        /// </summary>
+        /// <param name="startingPoint"> The starting point. </param>
+        /// <param name="point"> The point. </param>
         public void InitializeController(Vector2 startingPoint, Vector2 point)
         {
             switch (this.Type)

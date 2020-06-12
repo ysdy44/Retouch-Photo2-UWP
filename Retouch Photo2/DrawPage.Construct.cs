@@ -4,7 +4,6 @@ using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.ViewModels;
 using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
@@ -15,7 +14,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "DrawPage" />. 
+    /// Represents a page used to draw vector graphics.
     /// </summary>
     public sealed partial class DrawPage : Page
     {
@@ -192,12 +191,10 @@ namespace Retouch_Photo2
         /// <summary>
         /// Displays the fill-color flyout relative to the specified element.
         /// </summary>
-        /// <param name="FrameworkElement"> The element to be used as the target for the location of the flyout. </param>
         public static Action<FrameworkElement> FillColorShowAt;
         /// <summary>
         /// Displays the stroke-color flyout relative to the specified element.
         /// </summary>
-        /// <param name="FrameworkElement"> The element to be used as the target for the location of the flyout. </param>
         public static Action<FrameworkElement> StrokeColorShowAt;
 
 

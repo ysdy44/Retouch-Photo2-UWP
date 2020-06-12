@@ -12,6 +12,7 @@ namespace Retouch_Photo2.Styles
         /// <summary>
         /// Saves the entire <see cref="StyleCategory"/> to a XDocument.
         /// </summary>
+        /// <param name="elementName"> The element name. </param>
         /// <param name="StyleCategory"> The source data. </param>
         /// <returns> The saved XDocument. </returns>
         public static XElement SaveStyleCategory(string elementName, StyleCategory StyleCategory)

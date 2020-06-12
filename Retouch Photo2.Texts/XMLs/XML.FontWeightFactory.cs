@@ -8,7 +8,12 @@ namespace Retouch_Photo2.Texts
     /// </summary>
     public static partial class XML
     {
-        
+
+        /// <summary>
+        /// Turn into string.
+        /// </summary>
+        /// <param name="fontWeight"> The font weight. </param>
+        /// <returns> The product string. </returns>
         public static string ToWeightsString(this FontWeight fontWeight)
         {
             ushort weight = fontWeight.Weight;

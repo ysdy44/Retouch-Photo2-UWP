@@ -7,15 +7,17 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Brushs
 {
     /// <summary>
-    /// Represents the combo box that is used to select fill or stroke.
+    /// ComboBox OF <see cref="Retouch_Photo2.Brushs.FillOrStroke"/>.
     /// </summary>
     public sealed partial class FillOrStrokeComboBox : UserControl
     {
 
         //@Delegate
+        /// <summary> Occurs when fill or stroke change. </summary>
         public EventHandler<FillOrStroke> FillOrStrokeChanged;
 
         //@Group
+        /// <summary> Occurs when group change. </summary>
         private EventHandler<FillOrStroke> Group;
 
         #region DependencyProperty
@@ -43,6 +45,9 @@ namespace Retouch_Photo2.Brushs
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a FillOrStrokeComboBox. 
+        /// </summary>
         public FillOrStrokeComboBox()
         {
             this.InitializeComponent();

@@ -9,11 +9,17 @@ namespace Retouch_Photo2.Elements
     /// </summary>
     public enum DPI
     {
+        /// <summary> 72 </summary>
         DPI72 = 72,
+        /// <summary> 96 </summary>
         DPI96 = 96,
+        /// <summary> 144 </summary>
         DPI144 = 144,
+        /// <summary> 192 </summary>
         DPI192 = 192,
+        /// <summary> 300 </summary>
         DPI300 = 300,
+        /// <summary> 400 </summary>
         DPI400 = 400,
     }
 
@@ -25,6 +31,9 @@ namespace Retouch_Photo2.Elements
 
         //@VisualState
         DPI _vsDPI;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -67,8 +76,10 @@ namespace Retouch_Photo2.Elements
 
         #endregion
 
-        
+
         //@Construct
+        /// <summary>
+        /// Initializes a DPIComboBox.
         public DPIComboBox()
         {
             this.InitializeComponent();

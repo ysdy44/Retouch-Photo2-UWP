@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class GeometryCookieIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryCookieIcon. 
+        /// </summary>
         public GeometryCookieIcon()
         {
             this.InitializeComponent();

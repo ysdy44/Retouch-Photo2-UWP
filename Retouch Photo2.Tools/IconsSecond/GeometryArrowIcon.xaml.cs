@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class GeometryArrowIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryArrowIcon. 
+        /// </summary>
         public GeometryArrowIcon()
         {
             this.InitializeComponent();

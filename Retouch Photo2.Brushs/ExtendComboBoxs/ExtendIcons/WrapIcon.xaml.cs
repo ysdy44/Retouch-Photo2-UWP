@@ -7,8 +7,11 @@ namespace Retouch_Photo2.Brushs.ExtendIcons
     /// Icon of <see cref = "CanvasEdgeBehavior.Wrap"/>.
     /// </summary>
     public sealed partial class WrapIcon : UserControl
-    {        
+    {
         //@Construct
+        /// <summary>
+        /// Initializes a WrapIcon. 
+        /// </summary>
         public WrapIcon()
         {
             this.InitializeComponent();

@@ -1,6 +1,4 @@
 ﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Stroke;
@@ -13,6 +11,7 @@ namespace Retouch_Photo2.Styles
     /// </summary>
     public partial class Style : ICacheTransform
     {
+
         /// <summary> Name </summary>
         public string Name { get; set; } = string.Empty;
 
@@ -47,11 +46,11 @@ namespace Retouch_Photo2.Styles
         /// <summary> Cache the <see cref="Style.StrokeStyle"/>. </summary>
         public void CacheStrokeStyle() => this.StartingStrokeStyle = this.StrokeStyle.Clone();
                
-        /// <summary> Gets or sets Style's transparency. </summary>
+        // <summary> Gets or sets Style's transparency. </summary>
         //public IBrush Transparency = new BrushBase();
-        /// <summary> The cache of <see cref="Style.Transparency"/>. </summary>
+        // <summary> The cache of <see cref="Style.Transparency"/>. </summary>
         //public IBrush StartingTransparency { get; private set; }
-        /// <summary> Cache the <see cref="Style.Transparency"/>. </summary>
+        // <summary> Cache the <see cref="Style.Transparency"/>. </summary>
         //public void CacheTransparency() => this.StartingTransparency = this.Transparency.Clone();
         
         //@Interface

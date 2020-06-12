@@ -27,6 +27,9 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a PenTool. 
+        /// </summary>
         public PenTool()
         {
             this.Content = this.GeometryTool;

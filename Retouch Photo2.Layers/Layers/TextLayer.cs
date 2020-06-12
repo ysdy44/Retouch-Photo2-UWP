@@ -3,7 +3,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Texts;
-using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.UI.Text;
@@ -15,21 +14,30 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public abstract class TextLayer : LayerBase
     {
-        
-        //@Content       
-        public string FontText { get; set; } = string.Empty;
 
-        public abstract float FontSize { get; set; } 
+        //@Content       
+        /// <summary> Gets or sets the text. </summary>
+        public string FontText { get; set; } = string.Empty;
+        /// <summary> Gets or sets the size. </summary>
+        public abstract float FontSize { get; set; }
+        /// <summary> Gets or sets the FontFamily. </summary>
         public string FontFamily { get; set; } = "Arial";
 
+        /// <summary> Gets or sets the HorizontalAlignment. </summary>
         public CanvasHorizontalAlignment FontAlignment { get; set; } = CanvasHorizontalAlignment.Left;
+        /// <summary> Gets or sets the style. </summary>
         public FontStyle FontStyle { get; set; } = FontStyle.Normal;
+        /// <summary> Gets or sets the weight. </summary>
         public FontWeight FontWeight { get; set; } = new FontWeight
         {
             Weight = 100,
         };
-        
 
+
+        /// <summary>
+        /// Saves the entire <see cref="ILayer"/> to a XElement.
+        /// </summary>
+        /// <param name="element"> The destination XElement. </param>
         public override void SaveWith(XElement element)
         {
             element.Add(new XElement("Text", this.FontText));
@@ -40,6 +48,10 @@ namespace Retouch_Photo2.Layers.Models
             element.Add(new XElement("FontStyle", this.FontStyle));
             element.Add(new XElement("FontWeight", this.FontWeight.ToWeightsString()));
         }
+        /// <summary>
+        /// Load the entire <see cref="ILayer"/> form a XElement.
+        /// </summary>
+        /// <param name="element"> The destination XElement. </param>
         public override void Load(XElement element)
         {
             if (element.Element("Text") is XElement text) this.FontText = text.Value;
@@ -52,6 +64,12 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
+
+        /// <summary>
+        /// Create a specific geometry.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <returns> The product geometry. </returns>   
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator)
         {
             Transformer transformer = base.Transform.Transformer;
@@ -78,18 +96,31 @@ namespace Retouch_Photo2.Layers.Models
 
             return geometry;
         }
+        /// <summary>
+        /// Create a specific geometry.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="matrix"> The matrix. </param>
+        /// <returns> The product geometry. </returns>   
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
         {
             return this.CreateGeometry(resourceCreator).Transform(matrix);
         }
 
-        
+
+
+        /// <summary>
+        /// Convert to curves layer.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <returns> The product nodes. </returns>
         public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
         {
             CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
 
             return new NodeCollection(geometry);
         }
+
 
 
         //@Static

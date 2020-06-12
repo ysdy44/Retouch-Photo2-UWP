@@ -61,7 +61,7 @@ namespace Retouch_Photo2.ViewModels
             LayeragesArrangeHistory history = new LayeragesArrangeHistory("Cut layers", this.LayerageCollection);
             this.HistoryPush(history);
 
-            LayerageCollection.RemoveAllSelectedLayers(this.LayerageCollection);//Remove
+            LayerageCollection.RemoveAllSelected(this.LayerageCollection);//Remove
 
             this.SetMode(this.LayerageCollection);//Selection
             LayerageCollection.ArrangeLayers(this.LayerageCollection);
@@ -158,7 +158,7 @@ namespace Retouch_Photo2.ViewModels
             LayeragesArrangeHistory history = new LayeragesArrangeHistory("Clear layers", this.LayerageCollection);
             this.HistoryPush(history);
 
-            LayerageCollection.RemoveAllSelectedLayers(this.LayerageCollection);//Remove
+            LayerageCollection.RemoveAllSelected(this.LayerageCollection);//Remove
 
             this.SetMode(this.LayerageCollection);//Selection
             LayerageCollection.ArrangeLayers(this.LayerageCollection);

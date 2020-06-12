@@ -12,6 +12,7 @@ namespace Retouch_Photo2.Filters
         /// <summary>
         /// Saves the entire <see cref="FilterCategory"/> to a XDocument.
         /// </summary>
+        /// <param name="elementName"> The element name. </param>
         /// <param name="filterCategory"> The source data. </param>
         /// <returns> The saved XDocument. </returns>
         public static XElement SaveFilterCategory(string elementName, FilterCategory filterCategory)

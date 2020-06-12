@@ -7,16 +7,20 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Texts
 {
     /// <summary>
-    /// Represents the segmented that is used to select font alignment.
+    /// Segmented of <see cref="CanvasHorizontalAlignment"/>.
     /// </summary>
     public sealed partial class FontAlignmentSegmented : UserControl
     {
-        
+
         //@Delegate
+        /// <summary> Occurs when alignment change. </summary>
         public EventHandler<CanvasHorizontalAlignment> AlignmentChanged;
 
         //@VisualState
         CanvasHorizontalAlignment _vsAlignment;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -69,6 +73,9 @@ namespace Retouch_Photo2.Texts
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a FontAlignmentSegmented. 
+        /// </summary>
         public FontAlignmentSegmented()
         {
             this.InitializeComponent();

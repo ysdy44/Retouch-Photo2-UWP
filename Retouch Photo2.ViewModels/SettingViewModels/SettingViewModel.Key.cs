@@ -1,10 +1,8 @@
-﻿using Windows.System;
-using Windows.UI.Xaml;
-using System.ComponentModel;
-using Retouch_Photo2.Elements;
+﻿using FanKit.Transformers;
 using System;
-using System.Numerics;
-using FanKit.Transformers;
+using System.ComponentModel;
+using Windows.System;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -13,6 +11,7 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class SettingViewModel : INotifyPropertyChanged
     {
+
         //@Delegate  
         /// <summary> Occurs when the canvas position moved. </summary>
         public Action<MoveMode> Move { get; set; }
@@ -204,7 +203,7 @@ namespace Retouch_Photo2.ViewModels
         
         /// <summary> keyboard's the **Escape** key. </summary>
         public bool KeyEscape;
-        public void SetKeyEscape(bool value)
+        private void SetKeyEscape(bool value)
         {
             if (this.KeyEscape == value) return;
 
@@ -224,7 +223,7 @@ namespace Retouch_Photo2.ViewModels
 
         /// <summary> keyboard's the **Left Up Right Down** key. </summary>
         public MoveMode MoveMode;
-        public void SetKeyMove(MoveMode value)
+        private void SetKeyMove(MoveMode value)
         {
             if (this.MoveMode == value) return;
 
@@ -235,7 +234,7 @@ namespace Retouch_Photo2.ViewModels
 
         /// <summary> keyboard's the **ABCD...** key. </summary>
         public EditMode EditMode;
-        public void SetKeyEdit(EditMode value)
+        private void SetKeyEdit(EditMode value)
         {
             if (value!= EditMode.None)
             {
@@ -252,7 +251,7 @@ namespace Retouch_Photo2.ViewModels
                 this.EditMode = EditMode.None;
             }
         }
-        public void SetKeyEditClear(bool isClear)
+        private void SetKeyEditClear(bool isClear)
         {
             if (isClear)
             {

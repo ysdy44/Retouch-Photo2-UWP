@@ -24,16 +24,17 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a TextArtisticTool. 
+        /// </summary>
         public TextArtisticTool()
         {
             this.Content = new TextTool();
             this.ConstructStrings();
         }
-
-
+        
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom() { }
-
     }
 
     /// <summary>

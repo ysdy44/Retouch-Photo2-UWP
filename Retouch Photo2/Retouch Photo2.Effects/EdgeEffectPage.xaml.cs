@@ -18,6 +18,9 @@ namespace Retouch_Photo2.Effects.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Construct
+        /// <summary>
+        /// Initializes a EdgeEffectPage. 
+        /// </summary>
         public EdgeEffectPage()
         {
             this.InitializeComponent();
@@ -45,15 +48,16 @@ namespace Retouch_Photo2.Effects.Models
         }
 
         //@Content
+        /// <summary> Gets the type. </summary>
         public EffectType Type => EffectType.Edge;
+        /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
-        public ToggleSwitch ToggleSwitch => this.Button.ToggleSwitch;
+        /// <summary> Gets the button. </summary>
         public EffectButton Button { get; } = new EffectButton
         {
             Icon = new EdgeIcon()
         };
-
-
+        
         public void Reset()
         {
             this.AmountSlider.Value = 50;
@@ -94,9 +98,7 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowButton(Effect effect)
         {
-            this.Button.IsButtonTapped = false;
-            this.Button.ToggleSwitch.IsOn = effect.Edge_IsOn;
-            this.Button.IsButtonTapped = true;
+            this.Button.IsOn = effect.Edge_IsOn;
         }
         public void FollowPage(Effect effect)
         {
@@ -113,11 +115,8 @@ namespace Retouch_Photo2.Effects.Models
 
         private void ConstructButton()
         {
-            this.Button.ToggleSwitch.Toggled += (s, e) =>
+            this.Button.Toggled += (isOn) =>
             {
-                if (this.Button.IsButtonTapped == false) return;
-                bool isOn = this.Button.ToggleSwitch.IsOn;
-
                 //History
                 LayersPropertyHistory history = new LayersPropertyHistory("Set effect edge");
 

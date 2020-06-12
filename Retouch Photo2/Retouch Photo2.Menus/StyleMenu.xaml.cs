@@ -11,6 +11,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
 {
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Styles.Style"/>.
+    /// </summary>
     public sealed partial class StyleMenu : UserControl, IMenu
     {
         //@ViewModel
@@ -19,6 +22,9 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel MethodViewModel => App.MethodViewModel;
 
         //@Construct
+        /// <summary>
+        /// Initializes a StyleMenu. 
+        /// </summary>
         public StyleMenu()
         {
             this.InitializeComponent();
@@ -96,8 +102,12 @@ namespace Retouch_Photo2.Menus.Models
         }
     }
 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Styles.Style"/>.
+    /// </summary>
     public sealed partial class StyleMenu : UserControl, IMenu
     {
+
         //Strings
         private void ConstructStrings()
         {
@@ -109,14 +119,16 @@ namespace Retouch_Photo2.Menus.Models
         }
 
         //Menu
+        /// <summary> Gets the type. </summary>
         public MenuType Type => MenuType.Style;
+        /// <summary> Gets the expander. </summary>
         public IExpander Expander => this._Expander;
         MenuButton _button = new MenuButton
         {
             CenterContent = new Retouch_Photo2.Styles.Icon()
         };
 
-        public void ConstructMenu()
+        private void ConstructMenu()
         {
             this._Expander.Layout = this;
             this._Expander.Button = this._button;

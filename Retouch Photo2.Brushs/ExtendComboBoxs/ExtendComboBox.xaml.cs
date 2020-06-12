@@ -8,15 +8,17 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Brushs
 {
     /// <summary>
-    /// Represents the combo box that is used to select edge behavior.
+    /// ComboBox of <see cref="CanvasEdgeBehavior"/>.
     /// </summary>
     public sealed partial class ExtendComboBox : UserControl
     {
-        
+
         //@Delegate
+        /// <summary> Occurs when extend change. </summary>
         public EventHandler<CanvasEdgeBehavior> ExtendChanged;
 
         //@Group
+        /// <summary> Occurs when group change. </summary>
         private EventHandler<CanvasEdgeBehavior> Group;
         
 
@@ -77,6 +79,9 @@ namespace Retouch_Photo2.Brushs
         FillOrStroke _vsFillOrStroke;
         IBrush _vsFill;
         IBrush _vsStroke;
+        /// <summary>
+        /// Invalidate. 
+        /// </summary>
         public void Invalidate()
         {
             switch (this._vsFillOrStroke)
@@ -92,6 +97,9 @@ namespace Retouch_Photo2.Brushs
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a ExtendComboBox. 
+        /// </summary>
         public ExtendComboBox()
         {
             this.InitializeComponent();

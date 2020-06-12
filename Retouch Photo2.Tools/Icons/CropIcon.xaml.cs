@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class CropIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a CropIcon. 
+        /// </summary>
         public CropIcon()
         {
             this.InitializeComponent();

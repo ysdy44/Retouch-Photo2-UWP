@@ -27,6 +27,9 @@ namespace Retouch_Photo2.Layers
 
 
         static int IIIII;
+        /// <summary>
+        /// ID
+        /// </summary>
         public string Id { get; set; }
 
 

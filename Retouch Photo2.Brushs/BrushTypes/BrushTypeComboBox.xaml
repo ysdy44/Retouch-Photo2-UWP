@@ -12,7 +12,7 @@
     <UserControl.Resources>
 
         <!--Storyboard-->
-        <Storyboard x:Name="_EaseStoryboard">
+        <Storyboard x:Name="EaseStoryboard">
             <ColorAnimation From="{ThemeResource SystemBaseHighColor}" To="{ThemeResource AppBorderBrushColor}" Storyboard.TargetProperty="Color" Storyboard.TargetName="ButtonBorderBrush" d:IsOptimized="True">
                 <ColorAnimation.EasingFunction>
                     <BounceEase EasingMode="EaseOut"/>

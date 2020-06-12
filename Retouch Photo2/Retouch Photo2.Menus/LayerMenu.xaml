@@ -80,7 +80,7 @@
                 
                 <!--Tag Type-->
                 <TextBlock x:Name="TagTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <blends:TagTypeControl x:Name="TagTypeControl" Type="{x:Bind SelectionViewModel.TagType,Mode=OneWay}" />
+                <blends:TagTypeSegmented x:Name="TagTypeSegmented" Type="{x:Bind SelectionViewModel.TagType,Mode=OneWay}" />
 
             </StackPanel>
         </elements:Expander.MainPage>

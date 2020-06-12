@@ -9,8 +9,10 @@ namespace Retouch_Photo2.Layers
     {
 
         /// <summary>
-        /// Find first layerage by <see cref="ILayer.Id">.
+        /// Find first layerage by <see cref="ILayer.Id"/>.
         /// </summary>
+        /// <param name="layer"> The layer. </param>
+        /// <returns> The found layerage. </returns>
         public Layerage FindFirstLayerage(ILayer layer) => this._findFirstLayerage(this.RootLayerages, layer);
         private Layerage _findFirstLayerage(IEnumerable<Layerage> layerages, ILayer layer)
         {
@@ -32,9 +34,9 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary>
-        /// Find outermost layerage
-        /// in all selected layers.
+        /// Find outermost layerage  in all selected layers.
         /// </summary>
+        /// <returns> The found layerage. </returns>
         public static Layerage FindOutermostLayerage(IEnumerable<Layerage> selectedLayerages)
         {
             int index = int.MaxValue;

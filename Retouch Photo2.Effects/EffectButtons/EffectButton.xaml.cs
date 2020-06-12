@@ -1,23 +1,43 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Effects
 {
+    /// <summary>
+    /// Button of <see cref="Effect"/>.
+    /// </summary>
     public sealed partial class EffectButton : UserControl
     {
         //@Content 
         /// <summary> Viewbox's icon. </summary>
         public UIElement Icon { get => this.Viewbox.Child; set => this.Viewbox.Child = value; }
-        /// <summary> TextBlock' text. </summary>
+        /// <summary> TextBlock's text. </summary>
         public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
-        /// <summary> EffectButton' ToggleSwitch. </summary>
-        public ToggleSwitch ToggleSwitch => this._ToggleSwitch;
-        public bool IsButtonTapped = true;
+
+
+        private bool _isButtonTapped = true;
+        /// <summary> ToggleSwitch's Toggled. </summary>
+        public Action<bool> Toggled;
+        /// <summary> ToggleSwitch's IsOn. </summary>
+        public bool IsOn
+        {
+            get => this.ToggleSwitch.IsOn;
+            set
+            {
+                this._isButtonTapped = false;
+                this.ToggleSwitch.IsOn = value;
+                this._isButtonTapped = true;
+            }
+        }
 
 
         //@VisualState
         bool _vsIsEnabled = true;
         ClickMode _vsClickMode;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -34,7 +54,7 @@ namespace Retouch_Photo2.Effects
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-
+        /// <summary> VisualState's ClickMode. </summary>
         private ClickMode ClickMode
         {
             set
@@ -45,6 +65,9 @@ namespace Retouch_Photo2.Effects
         }
 
         //@Construct
+        /// <summary>
+        /// Initializes a EffectButton. 
+        /// </summary>
         public EffectButton()
         {
             this.InitializeComponent();
@@ -59,6 +82,15 @@ namespace Retouch_Photo2.Effects
             this.PointerPressed += (s, e) => this.ClickMode = ClickMode.Press;
             this.PointerReleased += (s, e) => this.ClickMode = ClickMode.Release;
             this.PointerExited += (s, e) => this.ClickMode = ClickMode.Release;
+
+
+            this.ToggleSwitch.Toggled += (s, e) =>
+            {
+                if (this._isButtonTapped == false) return;
+                bool isOn = this.ToggleSwitch.IsOn;
+
+                this.Toggled?.Invoke(isOn);//Delegate
+            };
         }
     }
 }

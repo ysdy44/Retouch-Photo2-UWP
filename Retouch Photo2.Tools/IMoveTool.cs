@@ -3,7 +3,6 @@ using System.Numerics;
 
 namespace Retouch_Photo2.Tools
 {
-
     /// <summary> 
     /// Represents a tool that can be moved. Method has bool type return value.
     /// </summary>

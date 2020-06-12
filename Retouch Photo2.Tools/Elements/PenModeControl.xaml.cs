@@ -1,19 +1,18 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Tools.Elements.PenModeControlIcons;
-using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Elements
 {
     /// <summary>
-    /// Mode-contorl of <see cref = "PenTool"/>.
+    /// Mode contorl of <see cref="PenTool"/>.
     /// </summary>
     public sealed partial class PenModeControl : UserControl
     {
 
         //@Content    
-        private SelfControlPointMode selfMode = SelfControlPointMode.None;
+        /// <summary> Gets or sets the self control-point's mode </summary>
         public SelfControlPointMode SelfMode
         {
             get => this.selfMode;
@@ -49,12 +48,19 @@ namespace Retouch_Photo2.Tools.Elements
                 this.selfMode = value;
             }
         }
+        private SelfControlPointMode selfMode = SelfControlPointMode.None;
+
+        /// <summary> Gets or sets the each control-point's length-mode </summary>
         public EachControlPointLengthMode EachLengthMode = EachControlPointLengthMode.Equal;
+        /// <summary> Gets or sets the each control-point's angle-mode </summary>
         public EachControlPointAngleMode EachAngleMode = EachControlPointAngleMode.Asymmetric;
 
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a PenModeControl. 
+        /// </summary>
         public PenModeControl()
         {
             this.InitializeComponent();

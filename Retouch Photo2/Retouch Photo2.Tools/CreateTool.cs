@@ -141,7 +141,7 @@ namespace Retouch_Photo2.Tools
                 }
                 else
                 {
-                    LayerageCollection.RemoveMezzanineLayer(this.ViewModel.LayerageCollection, this.MezzanineLayerage);//Mezzanine
+                    LayerageCollection.RemoveMezzanine(this.ViewModel.LayerageCollection, this.MezzanineLayerage);//Mezzanine
 
                     //Selection
                     this.SelectionViewModel.SetModeNone();

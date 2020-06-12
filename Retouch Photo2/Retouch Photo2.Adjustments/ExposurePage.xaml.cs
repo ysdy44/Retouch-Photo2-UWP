@@ -18,9 +18,13 @@ namespace Retouch_Photo2.Adjustments.Pages
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Generic
+        /// <summary> Gets IAdjustment's adjustment. </summary>
         public ExposureAdjustment Adjustment { get; set; }
 
         //@Construct
+        /// <summary>
+        /// Initializes a BrightnessPage. 
+        /// </summary>
         public ExposurePage()
         {
             this.InitializeComponent();
@@ -37,7 +41,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
 
         //Strings
-        public void ConstructStrings()
+        private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
@@ -47,15 +51,21 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
         //@Content
+        /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Exposure;
+        /// <summary> Gets the icon. </summary>
         public FrameworkElement Icon { get; } = new ExposureIcon();
+        /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
+        /// <summary> Gets the text. </summary>
         public string Text { get; private set; }
 
-
+        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new ExposureAdjustment();
 
-
+        /// <summary>
+        /// Reset the <see cref="IAdjustmentPage"/>'s data.
+        /// </summary>
         public void Reset()
         {
             this.ExposureSlider.Value = 0;
@@ -98,6 +108,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                 }
             }
         }
+        /// <summary>
+        /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
+        /// </summary>
+        /// <param name="adjustment"> The adjustment. </param>
         public void Follow(ExposureAdjustment adjustment)
         {
             this.ExposureSlider.Value = adjustment.Exposure * 100;
@@ -110,7 +124,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class ExposurePage : IAdjustmentGenericPage<ExposureAdjustment>
     {
 
-        public void ConstructExposure()
+        private void ConstructExposure()
         {
             this.ExposureSlider.Value = 0;
             this.ExposureSlider.Minimum = -200;

@@ -21,16 +21,17 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a TransparencyTool. 
+        /// </summary>
         public TransparencyTool()
         {
             this.InitializeComponent();
             this.ConstructStrings();
         }
-
-
+        
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom() { }
-
     }
 
     /// <summary>

@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Brushs.BrushTypeIcons
     public sealed partial class LinearGradientIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a LinearGradientIcon. 
+        /// </summary>
         public LinearGradientIcon()
         {
             this.InitializeComponent();

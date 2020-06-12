@@ -13,8 +13,14 @@ namespace Retouch_Photo2.Brushs
     /// Represents a brush that can have fill properties. Provides a filling method.
     /// </summary>
     public partial class BrushBase : IBrush
-    { 
+    {
 
+        /// <summary>
+        /// Change the brush's type.
+        /// </summary>
+        /// <param name="type"> The new type. </param>
+        /// <param name="transformer"> The transformer. </param>
+        /// <param name="photo"> The photo. </param>
         public void TypeChange(BrushType type, Transformer transformer, Photo photo = null)
         {
             switch (type)

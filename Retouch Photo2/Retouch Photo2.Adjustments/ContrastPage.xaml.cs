@@ -18,9 +18,13 @@ namespace Retouch_Photo2.Adjustments.Pages
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
         //@Generic
+        /// <summary> Gets IAdjustment's adjustment. </summary>
         public ContrastAdjustment Adjustment { get; set; }
 
         //@Construct
+        /// <summary>
+        /// Initializes a ContrastPage. 
+        /// </summary>
         public ContrastPage()
         {
             this.InitializeComponent();
@@ -36,7 +40,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class ContrastPage : IAdjustmentGenericPage<ContrastAdjustment>
     {
         //Strings
-        public void ConstructStrings()
+        private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
@@ -46,15 +50,22 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
         //@Content
+        /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Contrast;
+        /// <summary> Gets the icon. </summary>
         public FrameworkElement Icon { get; } = new ContrastIcon();
+        /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
+        /// <summary> Gets the text. </summary>
         public string Text { get; private set; }
 
-
+        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new ContrastAdjustment();
 
 
+        /// <summary>
+        /// Reset the <see cref="IAdjustmentPage"/>'s data.
+        /// </summary>
         public void Reset()
         {
             this.ContrastSlider.Value = 0;
@@ -97,6 +108,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                 }
             }
         }
+        /// <summary>
+        /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
+        /// </summary>
+        /// <param name="adjustment"> The adjustment. </param>
         public void Follow(ContrastAdjustment adjustment)
         {
             this.ContrastSlider.Value = adjustment.Contrast * 100;
@@ -109,7 +124,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     public sealed partial class ContrastPage : IAdjustmentGenericPage<ContrastAdjustment>
     {
 
-        public void ConstructContrast()
+        private void ConstructContrast()
         {
             this.ContrastSlider.Value = 0;
             this.ContrastSlider.Minimum = -100;

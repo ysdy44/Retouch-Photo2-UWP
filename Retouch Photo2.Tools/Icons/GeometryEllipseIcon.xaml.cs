@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class GeometryEllipseIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryEllipseIcon. 
+        /// </summary>
         public GeometryEllipseIcon()
         {
             this.InitializeComponent();

@@ -4,10 +4,17 @@ using Windows.UI.Xaml.Shapes;
 
 namespace Retouch_Photo2.Stroke
 {
-    public static class StrokeExtensions
+    /// <summary>
+    /// Extensions of <see cref="CanvasStrokeStyle"/>.
+    /// </summary>
+    public static class StrokeStyleExtensions
     {
 
-        //StrokeStyle
+        /// <summary>
+        /// Turn into stroke style.
+        /// </summary>
+        /// <param name="shape"> The destination shape. </param>
+        /// <param name="strokeStyle"> The stroke style style. </param>
         public static void SetStrokeStyle(this Shape shape, CanvasStrokeStyle strokeStyle)
         {
             if (strokeStyle == null) return;
@@ -19,6 +26,11 @@ namespace Retouch_Photo2.Stroke
             shape.StrokeDashOffset = strokeStyle.DashOffset;
         }
 
+        /// <summary>
+        /// Turn into pen line cap.
+        /// </summary>
+        /// <param name="cap"> The cap. </param>     
+        /// <returns> The product cap. </returns>
         public static PenLineCap ToPenLineCap(this CanvasCapStyle cap)
         {
             switch (cap)
@@ -31,6 +43,11 @@ namespace Retouch_Photo2.Stroke
             }
         }
 
+        /// <summary>
+        /// Turn into DoubleCollection.
+        /// </summary>
+        /// <param name="style"> The style. </param>
+        /// <returns> The product DoubleCollection. </returns>
         public static DoubleCollection ToDoubleCollection(this CanvasDashStyle style)
         {
             switch (style)
@@ -45,7 +62,11 @@ namespace Retouch_Photo2.Stroke
         }
 
 
-        //Clone
+        /// <summary>
+        /// Get own copy.
+        /// </summary>
+        /// <param name="strokeStyle"> The stroke style. </param>
+        /// <returns> The cloned <see cref="CanvasStrokeStyle"/>. </returns>
         public static CanvasStrokeStyle Clone(this CanvasStrokeStyle strokeStyle)
         {
             if (strokeStyle == null) return new CanvasStrokeStyle();
@@ -65,6 +86,11 @@ namespace Retouch_Photo2.Stroke
             };
         }
 
+        /// <summary>
+        /// Copy with self.
+        /// </summary>
+        /// <param name="strokeStyle"> The stroke style. </param>
+        /// <param name="other"> The other. </param>
         public static void CopyWith(this CanvasStrokeStyle strokeStyle, CanvasStrokeStyle other)
         {
             if (strokeStyle == null) return;

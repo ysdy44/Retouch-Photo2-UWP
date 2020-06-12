@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using Windows.UI;
@@ -12,6 +13,9 @@ using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Controls
 {
+    /// <summary>
+    /// Represents a canvas control, that containing some <see cref="Expander"/>。
+    /// </summary>
     public class MenusExpanderCanvas : UserControl
     {
         //@ViewModel
@@ -21,20 +25,10 @@ namespace Retouch_Photo2.Controls
         readonly Canvas OverlayCanvas = new Canvas();
 
 
-        public Action<UIElement> AddMenuButton;
-
-
-        //@Construct
-        public MenusExpanderCanvas()
-        {
-            this.Content = this.OverlayCanvas;
-            this.ConstructMenus();
-        }
-
         /// <summary>
         /// True if lightweight elimination is enabled for this control;
         /// </summary>
-        bool IsOverlayDismiss
+        public bool IsOverlayDismiss
         {
             set
             {
@@ -43,6 +37,16 @@ namespace Retouch_Photo2.Controls
                 else
                     this.OverlayCanvas.Background = null;
             }
+        }
+
+        //@Construct
+        /// <summary>
+        /// Initializes a MenusExpanderCanvas. 
+        /// </summary>
+        public MenusExpanderCanvas()
+        {
+            this.Content = this.OverlayCanvas;
+            this.ConstructMenus();
         }
 
 
@@ -73,8 +77,8 @@ namespace Retouch_Photo2.Controls
             };
         }
 
-        
-        public void ConstructMenuLayout(IMenu menu)
+
+        private void ConstructMenuLayout(IMenu menu)
         {
             if (menu == null) return;
             FrameworkElement layout = menu.Expander.Layout;

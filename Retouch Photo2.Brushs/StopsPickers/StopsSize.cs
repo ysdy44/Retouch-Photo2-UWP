@@ -7,7 +7,7 @@ using Windows.UI;
 namespace Retouch_Photo2.Brushs
 {
     /// <summary>
-    /// Size of <see cref="StopsPicker">.
+    /// Size of <see cref="StopsPicker"/>.
     /// </summary>
     public class StopsSize
     {
@@ -20,8 +20,19 @@ namespace Retouch_Photo2.Brushs
 
 
         //@Converter
-        public float OffsetToPosition(float offset) => StopsSize.Radius + this.InnerWidth * offset;
-        public float PositionToOffset(float position) => (position - StopsSize.Radius) / this.InnerWidth;
+        /// <summary>
+        /// Converter Offset to Position.
+        /// </summary>
+        /// <param name="offset"> The offset. </param>
+        /// <returns> The product position. </returns>
+        public float OffsetToPositionConverter(float offset) => StopsSize.Radius + this.InnerWidth * offset;
+        /// <summary>
+        /// Converter Position to Offset.
+        /// </summary>
+        /// <param name="position"> The position. </param>
+        /// <returns> The product offset. </returns>
+        public float PositionToOffsetConverter(float position) => (position - StopsSize.Radius) / this.InnerWidth;
+
 
         /// <summary>
         /// Occurs when canvas size changed.
@@ -85,7 +96,7 @@ namespace Retouch_Photo2.Brushs
             for (int i = 0; i < manager.Count; i++)
             {
                 CanvasGradientStop stop = manager.Stops[i];
-                Vector2 position = new Vector2(this.OffsetToPosition(stop.Position), this.Center);
+                Vector2 position = new Vector2(this.OffsetToPositionConverter(stop.Position), this.Center);
                 if (manager.Index == i) drawingSession.FillCircle(position, 11, Colors.Black);
                 drawingSession.DrawNode2(position, stop.Color);
             }

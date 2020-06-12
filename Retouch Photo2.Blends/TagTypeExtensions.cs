@@ -3,17 +3,17 @@
 namespace Retouch_Photo2.Blends
 {
     /// <summary>
-    /// Provides static TagType rendering method.
+    /// Extensions of <see cref = "TagType" />.
     /// </summary>
-    public static class TagTypeHelper
+    public static class TagTypeExtensions
     {
-        
+
         /// <summary>
-        /// Turn TagType into color.
+        /// Turn into color.
         /// </summary>
-        /// <param name="tagType"></param>
-        /// <returns></returns>
-        public static Color TagConverter(TagType tagType)
+        /// <param name="tagType"> The source tag type. </param>
+        /// <returns> The product color. </returns>
+        public static Color ToColor(this TagType tagType)
         {
             switch (tagType)
             {

@@ -31,11 +31,11 @@ namespace Retouch_Photo2.ViewModels
             this.LayerageCollection.RootLayerages.Clear();
             if (project.Layerages != null)
             {
-                foreach (Layerage layer in project.Layerages)
+                foreach (Layerage layerage in project.Layerages)
                 {
-                    if (layer != null)
+                    if (layerage != null)
                     {
-                        this.LayerageCollection.RootLayerages.Add(layer);
+                        this.LayerageCollection.RootLayerages.Add(layerage);
                     }
                 }
             }

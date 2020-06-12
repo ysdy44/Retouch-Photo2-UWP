@@ -10,59 +10,8 @@ namespace Retouch_Photo2.Layers
     {
 
         //@Content
+        /// <summary> Self </summary>
         public LayerControl Self => this;
-        public string Text { get => this.NameRun.Text; set => this.NameRun.Text = value; }
-        public string Type { get => this.TypeRun.Text; set => this.TypeRun.Text = value; }
-
-
-        /// <summary> Gets or sets the height. </summary>
-        public int ControlHeight
-        {
-            get => this.controlHeight;
-            set
-            {
-                this.SetControlHeight(value);
-                this.controlHeight = value;
-            }
-        }
-        private int controlHeight = 40;
-
-        /// <summary> Gets or sets the depth. </summary>
-        public int Depth
-        {
-            get => this.depth;
-            set
-            {
-                this.SetDepth(value);
-                this.depth = value;
-            }
-        }
-        private int depth = 0;
-
-        /// <summary> Gets or sets the overlay show status. </summary>
-        public OverlayMode OverlayMode
-        {
-            get => this.overlayMode;
-            set
-            {
-                if (this.overlayMode == value) return;
-                this.SetOverlayMode(value);
-                this.overlayMode = value;
-            }
-        }
-        private OverlayMode overlayMode;
-
-        /// <summary> Gets or sets the icon. </summary>
-        public ICanvasImage IconRender
-        {
-            get => this.iconRender;
-            set
-            {
-                this.iconRender = value;
-                this.IconCanvasControl.Invalidate();
-            }
-        }
-        private ICanvasImage iconRender = null;
 
 
         //@Construct

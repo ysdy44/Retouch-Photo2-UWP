@@ -13,10 +13,14 @@ namespace Retouch_Photo2.Strokes
     {
 
         //@Delegate
+        /// <summary> Occurs when join change. </summary>
         public EventHandler<CanvasLineJoin> JoinChanged;
 
         //@VisualState
         CanvasLineJoin _vsJoin;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -69,6 +73,9 @@ namespace Retouch_Photo2.Strokes
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a JoinSegmented. 
+        /// </summary>
         public JoinSegmented()
         {
             this.InitializeComponent();

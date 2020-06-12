@@ -34,7 +34,7 @@ namespace Retouch_Photo2
     }
 
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "DrawPage" />. 
+    /// Represents a page used to draw vector graphics.
     /// </summary>
     public sealed partial class DrawPage : Page
     {

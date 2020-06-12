@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    public enum CursorMode
+    internal enum CursorMode
     {
         None,
 
@@ -41,6 +41,9 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a CursorTool. 
+        /// </summary>
         public CursorTool()
         {
             this.InitializeComponent();
@@ -56,7 +59,6 @@ namespace Retouch_Photo2.Tools.Models
 
         public void OnNavigatedTo() => this.CursorMode = CursorMode.None;
         public void OnNavigatedFrom() => this.CursorMode = CursorMode.None;
-
     }
 
     /// <summary>
@@ -171,9 +173,9 @@ namespace Retouch_Photo2.Tools.Models
                     {
                         if (isOutNodeDistance)
                         {
-                            //BoxChoose
-                            Layerage layer = this.SelectionViewModel.GetFirstSelectedLayerage();
-                            IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(layer);
+                            //BoxChoose 
+                            Layerage layerage = this.SelectionViewModel.GetFirstSelectedLayerage();
+                            IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(layerage);
                             this.BoxChoose(parentsChildren);
 
                             this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection

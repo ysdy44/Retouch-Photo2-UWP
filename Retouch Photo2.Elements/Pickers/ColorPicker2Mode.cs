@@ -5,19 +5,28 @@
     /// </summary>
     public enum ColorPicker2Mode
     {
+        /// <summary> Normal </summary>
         None,
 
+        /// <summary> Swatches </summary>
         Swatches,
 
+        /// <summary> Wheel </summary>
         Wheel,
 
+        /// <summary> RGB </summary>
         RGB,
+        /// <summary> HSV </summary>
         HSV,
 
-        PaletteHue,
-        PaletteSaturation,
+        /// <summary> Hue Palette </summary>
+        PaletteHue,       
+        /// <summary> Saturation Palette </summary>
+        PaletteSaturation,       
+        /// <summary> Value Palette </summary>
         PaletteValue,
 
+        /// <summary> Circle </summary>
         Circle,
     }
 }

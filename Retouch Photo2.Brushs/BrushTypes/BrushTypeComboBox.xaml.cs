@@ -3,25 +3,25 @@ using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
 
 namespace Retouch_Photo2.Brushs
 {
     /// <summary>
-    /// Represents the combo box that is used to select brush type.
+    /// ComboBox of <see cref="BrushType"/>
     /// </summary>
     public sealed partial class BrushTypeComboBox : UserControl
     {
 
         //@Delegate
+        /// <summary> Occurs when fill type change. </summary>
         public EventHandler<BrushType> FillTypeChanged;
+        /// <summary> Occurs when stroke type change. </summary>
         public EventHandler<BrushType> StrokeTypeChanged;
 
         //@Group
+        /// <summary> Occurs when group change. </summary>
         private EventHandler<BrushType> Group;
 
-        //@Content
-        public Storyboard EaseStoryboard => this._EaseStoryboard;
 
         #region DependencyProperty
 
@@ -73,6 +73,7 @@ namespace Retouch_Photo2.Brushs
             }
         }));
 
+        /// <summary> Gets or sets the fill type. </summary>
         public BrushType FillType
         {
             get => this.fillType;
@@ -111,6 +112,7 @@ namespace Retouch_Photo2.Brushs
             }
         }));
 
+        /// <summary> Gets or sets the stroke type. </summary>
         public BrushType StrokeType
         {
             get => this.strokeType;
@@ -132,6 +134,9 @@ namespace Retouch_Photo2.Brushs
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a BrushTypeComboBox. 
+        /// </summary>
         public BrushTypeComboBox()
         {
             this.InitializeComponent();

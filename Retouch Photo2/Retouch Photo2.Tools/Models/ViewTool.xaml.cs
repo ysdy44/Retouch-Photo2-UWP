@@ -9,18 +9,12 @@ using Windows.UI.Xaml.Media.Animation;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    /// <summary>
-    /// Enum of <see cref="ViewTool"/>.
-    /// </summary>
     internal enum ViewMode
     {
-        /// <summary> Normal. </summary>
         None,
 
-        /// <summary> Radian. </summary>
         Radian,
 
-        /// <summary> Scale. </summary>
         Scale,
     }
 
@@ -34,9 +28,9 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        
+
         //@TouchBar
-        ViewMode _mode
+        private ViewMode TouchBarMode
         {
             set
             {
@@ -109,9 +103,12 @@ namespace Retouch_Photo2.Tools.Models
 
 
         #endregion
-        
+
 
         //@Construct
+        /// <summary>
+        /// Initializes a ViewTool. 
+        /// </summary>
         public ViewTool()
         {
             this.InitializeComponent();
@@ -146,9 +143,9 @@ namespace Retouch_Photo2.Tools.Models
             this.RadianTouchbarButton.Toggle += (s, value) =>
             {
                 if (value)
-                    this._mode = ViewMode.Radian;
+                    this.TouchBarMode = ViewMode.Radian;
                 else
-                    this._mode = ViewMode.None;
+                    this.TouchBarMode = ViewMode.None;
             };
 
             //Number
@@ -194,9 +191,9 @@ namespace Retouch_Photo2.Tools.Models
             this.ScaleTouchbarButton.Toggle += (s, value) =>
             {
                 if (value)
-                    this._mode = ViewMode.Scale;
+                    this.TouchBarMode = ViewMode.Scale;
                 else
-                    this._mode = ViewMode.None;
+                    this.TouchBarMode = ViewMode.None;
             };
 
             //Number
@@ -220,14 +217,12 @@ namespace Retouch_Photo2.Tools.Models
             };
             this.ScaleTouchbarSlider.ValueChangeCompleted += (sender, value) => { };
         }
-
-        
+                
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
-            this._mode = ViewMode.None;
+            this.TouchBarMode = ViewMode.None;
         }
-
     }
     
     /// <summary>

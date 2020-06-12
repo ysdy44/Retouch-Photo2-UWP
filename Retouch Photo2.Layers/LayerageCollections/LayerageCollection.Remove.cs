@@ -10,9 +10,11 @@ namespace Retouch_Photo2.Layers
     {
 
         /// <summary>
-        /// Remove a layer.
+        /// Remove a layerage.
         /// </summary>      
-        public static void RemoveLayer(LayerageCollection layerageCollection, Layerage removeLayerage)
+        /// <param name="layerageCollection"> The layerage-collection. </param>
+        /// <param name="removeLayerage"> The remove Layerage. </param>
+        public static void Remove(LayerageCollection layerageCollection, Layerage removeLayerage)
         {
             IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(removeLayerage);
 
@@ -20,12 +22,13 @@ namespace Retouch_Photo2.Layers
         }
 
         /// <summary>
-        /// Remove all selected layers.
+        /// Remove all selected layerages.
         /// </summary>
-        public static void RemoveAllSelectedLayers(LayerageCollection layerageCollection) => LayerageCollection._removeAllSelectedLayers(layerageCollection, layerageCollection.RootLayerages);
+        /// <param name="layerageCollection"> The layerage-collection. </param>
+        public static void RemoveAllSelected(LayerageCollection layerageCollection) => LayerageCollection._removeAllSelected(layerageCollection, layerageCollection.RootLayerages);
 
 
-        private static void _removeAllSelectedLayers(LayerageCollection layerageCollection, IList<Layerage> layerages)
+        private static void _removeAllSelected(LayerageCollection layerageCollection, IList<Layerage> layerages)
         {        
             foreach (Layerage child in layerages)
             {
@@ -33,10 +36,10 @@ namespace Retouch_Photo2.Layers
 
                 //Recursive
                 if (layer.IsSelected == true)
-                    LayerageCollection._removeAllLayers(layerageCollection, child.Children);
+                    LayerageCollection._removeAll(layerageCollection, child.Children);
                 //Recursive
                 else
-                    LayerageCollection._removeAllSelectedLayers(layerageCollection, child.Children);
+                    LayerageCollection._removeAllSelected(layerageCollection, child.Children);
             }
 
             //Remove
@@ -50,14 +53,14 @@ namespace Retouch_Photo2.Layers
             while (removeLayerage != null);
         }
 
-        private static void _removeAllLayers(LayerageCollection layerageCollection, IList<Layerage> layerages)
+        private static void _removeAll(LayerageCollection layerageCollection, IList<Layerage> layerages)
         {         
             foreach (Layerage child in layerages)
             {
                 ILayer child2 = child.Self;
 
                 //Recursive
-                LayerageCollection._removeAllLayers(layerageCollection, child.Children);
+                LayerageCollection._removeAll(layerageCollection, child.Children);
 
                 layerageCollection.RootControls.Remove(child2.Control.Self);
             }

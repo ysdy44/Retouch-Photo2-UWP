@@ -14,7 +14,7 @@ namespace Retouch_Photo2.Brushs
     public interface IBrush: ICacheTransform
     {
 
-        /// <summary> Gets of sets the type. </summary>
+        /// <summary> Gets the type. </summary>
         BrushType Type { get; }
 
         /// <summary> Gets of sets the color. </summary>
@@ -73,7 +73,7 @@ namespace Retouch_Photo2.Brushs
         /// <param name="point"> The input point. </param>
         /// <param name="matrix"> The matrix. </param>
         /// <returns> The operate-mode. </returns>
-        BrushHandleMode ContainsOperateMode(Vector2 point, Matrix3x2 matrix);
+        BrushHandleMode ContainsHandleMode(Vector2 point, Matrix3x2 matrix);
         /// <summary>
         /// It controls the transformation of brush.
         /// </summary>

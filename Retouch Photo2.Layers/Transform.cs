@@ -8,7 +8,7 @@ using Windows.UI;
 namespace Retouch_Photo2.Layers
 {
     /// <summary>
-    /// Represents a transform that provides an <see cref="Transformer"/>.
+    /// Represents a transform that provides an <see cref="FanKit.Transformers.Transformer"/>.
     /// </summary>
     public class Transform : ICacheTransform
     {
@@ -17,7 +17,7 @@ namespace Retouch_Photo2.Layers
         public Transformer Transformer { get; set; }
         /// <summary> The cache of <see cref="Transform.Transformer"/>. </summary>
         public Transformer StartingTransformer { get; private set; }
-
+        
 
         /// <summary> Is cropped? </summary>
         public bool IsCrop { get; set; }
@@ -76,33 +76,48 @@ namespace Retouch_Photo2.Layers
 
         internal Transformer GetActualTransformer() => this.IsCrop ? this.CropTransformer : this.Transformer;
 
-        public void CropTransformAdd(Vector2 vector)
-        {
-            this.CropTransformer = this.StartingCropTransformer + vector;
-        }
 
-        public void CacheTransform()
+        /// <summary>
+        /// Cache the class's transformer. Ex: _oldTransformer = Transformer.
+        /// </summary>
+        public virtual void CacheTransform()
         {
             this.StartingTransformer = this.Transformer;
             this.StartingIsCrop = this.IsCrop;
             this.StartingCropTransformer = this.GetActualTransformer();
         }
-        public void TransformMultiplies(Matrix3x2 matrix)
-        {
-            this.Transformer = this.StartingTransformer * matrix;
-            this.CropTransformer = this.StartingCropTransformer * matrix;
-        }
-        public void TransformAdd(Vector2 vector)
+        /// <summary>
+        /// Transforms the class by the given vector. Ex: Transformer.Add()
+        /// </summary>
+        /// <param name="vector"> The add value use to summed. </param>
+        public virtual void TransformAdd(Vector2 vector)
         {
             this.Transformer = this.StartingTransformer + vector;
             this.CropTransformer = this.StartingCropTransformer + vector;
+        }
+        /// <summary>
+        /// Transforms the class by the given vector. Ex: Transformer.Add()
+        /// </summary>
+        /// <param name="vector"> The add value use to summed. </param>
+        public virtual void CropTransformAdd(Vector2 vector)
+        {
+            this.CropTransformer = this.StartingCropTransformer + vector;
+        }
+        /// <summary>
+        /// Transforms the class by the given matrix. Ex: Transformer.Multiplies()
+        /// </summary>
+        /// <param name="matrix"> The resulting matrix. </param>
+        public virtual void TransformMultiplies(Matrix3x2 matrix)
+        {
+            this.Transformer = this.StartingTransformer * matrix;
+            this.CropTransformer = this.StartingCropTransformer * matrix;
         }
 
 
         /// <summary>
         /// Occurs when the canvas is drawn.
         /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="drawingSession"> The drawing-session. </param>
         /// <param name="matrix"> The matrix. </param>
         /// <param name="accentColor"> The accent color. </param>
         public void DrawCrop(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
@@ -127,8 +142,10 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Gets a specific rended-layer.
         /// </summary>
-        /// <param name="filter"> The filter. </param>
+        /// <param name="transform"> The transform. </param>
+        /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="image"> The source image. </param>
+        /// <param name="matrix"> The matrix. </param>
         /// <returns> The rendered image. </returns>
         public static ICanvasImage Render(Transform transform, ICanvasResourceCreator resourceCreator, ICanvasImage image, Matrix3x2 matrix)
         {

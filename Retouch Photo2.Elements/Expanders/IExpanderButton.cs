@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Elements
 {
     /// <summary>
-    /// Button of <see cref="Expander">.
+    /// Button of <see cref="IExpander"/>.
     /// </summary>
     public interface IExpanderButton
     {
@@ -13,6 +13,6 @@ namespace Retouch_Photo2.Elements
         FrameworkElement Self { get; }
 
         /// <summary> Gets or sets the state. </summary>
-        ExpanderState State { set; }
+        ExpanderState ExpanderState { set; }
     }
 }

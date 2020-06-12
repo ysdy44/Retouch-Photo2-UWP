@@ -12,9 +12,9 @@ namespace Retouch_Photo2.Styles
         /// <summary>
         /// Saves the entire <see cref="Style"/>Categorys to a XDocument.
         /// </summary>
-        /// <param name="Styles"> The source data. </param>
+        /// <param name="styleCategorys"> The source data. </param>
         /// <returns> The saved XDocument. </returns>
-        public static XDocument SaveStyleCategorys(IEnumerable<StyleCategory> StyleCategorys)
+        public static XDocument SaveStyleCategorys(IEnumerable<StyleCategory> styleCategorys)
         {
             return new XDocument
             (
@@ -23,9 +23,9 @@ namespace Retouch_Photo2.Styles
                 new XElement
                 (
                     "Root",
-                     from StyleCategory
-                     in StyleCategorys
-                     select XML.SaveStyleCategory("StyleCategory", StyleCategory)
+                     from style
+                     in styleCategorys
+                     select XML.SaveStyleCategory("StyleCategory", style)
                 )
             );
         }
@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Styles
         /// <summary>
         ///  Loads a <see cref="Style"/>Categorys from an XElement.
         /// </summary>
-        /// <param name="element"> The source XElement. </param>
+        /// <param name="document"> The source XDocument. </param>
         /// <returns> The loaded <see cref="Style"/>s. </returns>
         public static IEnumerable<StyleCategory> LoadStyleCategorys(XDocument document)
         {

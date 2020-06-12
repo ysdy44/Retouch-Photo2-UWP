@@ -1,25 +1,20 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
-using System.Collections.Generic;
-using System.Numerics;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.Storage.Streams;
-using System.Linq;
-using Retouch_Photo2.Menus;
-using Microsoft.Graphics.Canvas.Effects;
 
 namespace Retouch_Photo2
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "DrawPage" />. 
+    /// Represents a page used to draw vector graphics.
     /// </summary>
     public sealed partial class DrawPage : Page
     {        
@@ -75,7 +70,7 @@ namespace Retouch_Photo2
             await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
             
             //Save layers file.
-            IEnumerable<Layerage> savedLayerages = LayerageCollection.GetLayerages(this.ViewModel.LayerageCollection.RootLayerages);
+            IEnumerable<Layerage> savedLayerages = LayerageCollection.GetUnUestingLayerages(this.ViewModel.LayerageCollection.RootLayerages);
             IEnumerable<ILayer> savedLayers = from layer in LayerBase.Instances where savedLayerages.Any(p => layer.Equals(p)) select layer;
             await XML.SaveLayersFile(zipFolder, savedLayers);
 

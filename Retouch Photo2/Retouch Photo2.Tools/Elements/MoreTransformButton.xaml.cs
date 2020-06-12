@@ -10,9 +10,13 @@ namespace Retouch_Photo2.Tools.Elements
     public sealed partial class MoreTransformButton : UserControl
     {
         //@Static
+        /// <summary> Flyout </summary>
         public static Flyout Flyout;
 
         //@Construct
+        /// <summary>
+        /// Initializes a MoreTransformButton. 
+        /// </summary>
         public MoreTransformButton()
         {
             this.InitializeComponent();

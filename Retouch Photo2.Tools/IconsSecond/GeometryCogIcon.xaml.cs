@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class GeometryCogIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryCogIcon. 
+        /// </summary>
         public GeometryCogIcon()
         {
             this.InitializeComponent();

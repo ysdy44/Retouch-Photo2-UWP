@@ -14,6 +14,9 @@ namespace Retouch_Photo2.Tools.Elements
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
         //@Construct
+        /// <summary>
+        /// Initializes a MoreTransformControl. 
+        /// </summary>
         public MoreTransformControl()
         {
             this.InitializeComponent();

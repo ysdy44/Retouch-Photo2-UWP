@@ -1,7 +1,6 @@
 ﻿using Retouch_Photo2.Layers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Retouch_Photo2.Historys
 {
@@ -10,8 +9,9 @@ namespace Retouch_Photo2.Historys
     /// </summary>
     public class LayeragesArrangeHistory : HistoryBase, IHistory
     {
-        public Action UndoAction { get; set; }
-        public IList<Layerage> Layerages { get; private set; } = new List<Layerage>();
+
+        private readonly Action UndoAction;
+        private IList<Layerage> Layerages = new List<Layerage>();
 
         //@Construct
         /// <summary>
@@ -38,6 +38,7 @@ namespace Retouch_Photo2.Historys
             };
         }
 
+        /// <summary> Undo method. </summary>
         public override void Undo()
         {
             this.UndoAction?.Invoke();

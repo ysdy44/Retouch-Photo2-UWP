@@ -20,6 +20,9 @@ namespace Retouch_Photo2.Elements
         bool _vsIsEnabled = true;
         ClickMode _vsClickMode;
         bool _vsIsSecondPage;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -50,7 +53,7 @@ namespace Retouch_Photo2.Elements
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-
+        /// <summary> VisualState's ClickMode. </summary>
         private ClickMode ClickMode
         {
             set

@@ -9,6 +9,9 @@ namespace Retouch_Photo2.Brushs.ExtendIcons
     public sealed partial class MirrorIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a MirrorIcon. 
+        /// </summary>
         public MirrorIcon()
         {
             this.InitializeComponent();

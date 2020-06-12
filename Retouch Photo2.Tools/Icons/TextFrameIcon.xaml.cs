@@ -8,6 +8,9 @@ namespace Retouch_Photo2.Tools.Icons
     public sealed partial class TextFrameIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a TextFrameIcon. 
+        /// </summary>
         public TextFrameIcon()
         {
             this.InitializeComponent();

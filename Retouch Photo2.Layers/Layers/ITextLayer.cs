@@ -8,18 +8,18 @@ namespace Retouch_Photo2.Layers
     /// </summary>
     public interface ITextLayer
     {
-        /// <summary> Gets or sets ITextLayer's text. </summary>
+        /// <summary> Gets or sets the text. </summary>
         string FontText { get; set; }
-        /// <summary> Gets or sets ITextLayer's size. </summary>
+        /// <summary> Gets or sets the size. </summary>
         float FontSize { get; set; }
-        /// <summary> Gets or sets ITextLayer's FontFamily. </summary>
+        /// <summary> Gets or sets the FontFamily. </summary>
         string FontFamily { get; set; }
 
-        /// <summary> Gets or sets ITextLayer's HorizontalAlignment. </summary>
+        /// <summary> Gets or sets the HorizontalAlignment. </summary>
         CanvasHorizontalAlignment FontAlignment { get; set; }
-        /// <summary> Gets or sets ITextLayer's style. </summary>
+        /// <summary> Gets or sets the style. </summary>
         FontStyle FontStyle { get; set; }
-        /// <summary> Gets or sets ITextLayer's weight. </summary>
+        /// <summary> Gets or sets the weight. </summary>
         FontWeight FontWeight { get; set; }
     }
 }

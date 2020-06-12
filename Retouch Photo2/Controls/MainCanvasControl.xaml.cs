@@ -7,6 +7,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Controls
 {
+    /// <summary> 
+    /// Represents a control that displays the canvas and elements on the screen.
+    /// </summary>
     public sealed partial class MainCanvasControl : UserControl
     {
         //@ViewModel
@@ -20,6 +23,9 @@ namespace Retouch_Photo2.Controls
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a MainCanvasControl. 
+        /// </summary>
         public MainCanvasControl()
         {
             this.InitializeComponent();

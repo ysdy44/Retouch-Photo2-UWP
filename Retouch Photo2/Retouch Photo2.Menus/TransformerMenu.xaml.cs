@@ -1,17 +1,13 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -31,7 +27,7 @@ namespace Retouch_Photo2.Menus.Models
     }
 
     /// <summary>
-    /// Retouch_Photo2's the only <see cref = "TransformerMenu" />. 
+    /// Menu of <see cref = "FanKit.Transformers.Transformer"/>.
     /// </summary>
     public sealed partial class TransformerMenu : UserControl, IMenu
     {
@@ -51,6 +47,9 @@ namespace Retouch_Photo2.Menus.Models
         bool _vsDisabledRadian;
         Transformer _vsTransformer;
         ListViewSelectionMode _vsMode;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public TransformerMenuState VisualState
         {
             get
@@ -177,7 +176,7 @@ namespace Retouch_Photo2.Menus.Models
         }));
 
 
-
+        /// <summary> Gets or sets <see cref = "TransformerMenu" /> is disable rotate radian? Defult **false**. </summary>
         public bool DisabledRadian
         {
             get { return (bool)GetValue(DisabledRadianProperty); }
@@ -200,6 +199,9 @@ namespace Retouch_Photo2.Menus.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a TransformerMenu. 
+        /// </summary>
         public TransformerMenu()
         {
             this.InitializeComponent();
@@ -246,13 +248,14 @@ namespace Retouch_Photo2.Menus.Models
 
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "TransformerMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "FanKit.Transformers.Transformer"/>.
     /// </summary>
     public sealed partial class TransformerMenu : UserControl, IMenu
     {
+
         //DataContext
-        public void ConstructDataContext(string path, DependencyProperty dp)
+        private void ConstructDataContext(string path, DependencyProperty dp)
         {
             // Create the binding description.
             Binding binding = new Binding
@@ -314,14 +317,16 @@ namespace Retouch_Photo2.Menus.Models
         }
 
         //Menu
+        /// <summary> Gets the type. </summary>
         public MenuType Type => MenuType.Transformer;
+        /// <summary> Gets the expander. </summary>
         public IExpander Expander => this._Expander;
         MenuButton _button = new MenuButton
         {
             CenterContent = new FanKit.Transformers.Icon()
         };
 
-        public void ConstructMenu()
+        private void ConstructMenu()
         {
             this._Expander.Layout = this;
             this._Expander.Button = this._button;
@@ -329,8 +334,8 @@ namespace Retouch_Photo2.Menus.Models
         }
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "TransformerMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "FanKit.Transformers.Transformer"/>.
     /// </summary>
     public sealed partial class TransformerMenu : UserControl, IMenu
     {
@@ -604,5 +609,4 @@ namespace Retouch_Photo2.Menus.Models
         }
 
     }
-
 }

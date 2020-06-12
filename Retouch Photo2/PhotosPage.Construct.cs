@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2
 {
     /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "PhotosPage" />. 
+    /// Represents a page to select a photo.
     /// </summary>
     public sealed partial class PhotosPage : Page
     {

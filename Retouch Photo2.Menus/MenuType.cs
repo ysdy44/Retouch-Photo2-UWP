@@ -1,7 +1,7 @@
 ﻿namespace Retouch_Photo2.Menus
 {
     /// <summary> 
-    /// Type of Menu.
+    /// Type of <see cref="IMenu"/>.
     /// </summary>
     public enum MenuType
     {
@@ -20,9 +20,9 @@
 
         /// <summary> Text. </summary>
         Text,
-        /// <summary> Character. </summary>
+        // <summary> Character. </summary>
         //Character,
-        /// <summary> Paragraph. </summary>
+        // <summary> Paragraph. </summary>
         //Paragraph,
 
         /// <summary> Stroke. </summary>

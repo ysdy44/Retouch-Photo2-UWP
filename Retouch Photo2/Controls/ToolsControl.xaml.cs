@@ -7,8 +7,8 @@ using Windows.UI.Xaml.Shapes;
 
 namespace Retouch_Photo2.Controls
 {
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "ToolsControl" />. 
+    /// <summary>
+    /// Represents a tools control, that containing some <see cref="ToolButton"/>。
     /// </summary>
     public sealed partial class ToolsControl : UserControl
     {
@@ -18,12 +18,15 @@ namespace Retouch_Photo2.Controls
         TipViewModel TipViewModel => App.TipViewModel;
 
         /// <summary> Left panel of Tool. </summary>
-        UIElementCollection ToolLeft => this.StackPanel.Children;
+        public UIElementCollection ToolLeft => this.StackPanel.Children;
         /// <summary> Left more button's flyout panel's children. </summary>
-        UIElementCollection ToolLeftMore = null;
+        public UIElementCollection ToolLeftMore = null;
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a ToolsControl. 
+        /// </summary>
         public ToolsControl()
         {
             this.InitializeComponent();

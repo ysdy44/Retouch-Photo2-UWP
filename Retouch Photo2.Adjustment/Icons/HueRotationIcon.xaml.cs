@@ -9,6 +9,9 @@ namespace Retouch_Photo2.Adjustments.Icons
     public sealed partial class HueRotationIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a HueRotationIcon. 
+        /// </summary>
         public HueRotationIcon()
         {
             this.InitializeComponent();

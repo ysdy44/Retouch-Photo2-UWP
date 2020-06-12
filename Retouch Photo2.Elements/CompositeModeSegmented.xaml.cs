@@ -13,6 +13,9 @@ namespace Retouch_Photo2.Elements
 
         //@VisualState
         MarqueeCompositeMode _vsMode;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -62,9 +65,12 @@ namespace Retouch_Photo2.Elements
 
 
         #endregion
-        
+
 
         //@Construct
+        /// <summary>
+        /// Initializes a CompositeModeSegmented. 
+        /// </summary>
         public CompositeModeSegmented()
         {
             this.InitializeComponent();

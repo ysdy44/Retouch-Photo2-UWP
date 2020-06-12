@@ -49,6 +49,9 @@ namespace Retouch_Photo2.Brushs
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a StopsPicker. 
+        /// </summary>
         public StopsPicker()
         {
             this.InitializeComponent();

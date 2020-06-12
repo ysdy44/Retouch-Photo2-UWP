@@ -82,7 +82,8 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DocumentationFile>bin\x64\Debug\Retouch Photo2.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -200,7 +201,7 @@
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
     <Compile Include="SettingPage.Construct.cs" />
     <Compile Include="XMLs\XML.Bitmap.cs" />
-    <Compile Include="XMLs\XML.FilterFile.cs" />
+    <Compile Include="XMLs\XML.FiltersFile.cs" />
     <Compile Include="XMLs\XML.LayersFile.cs" />
     <Compile Include="XMLs\XML.StylesFile.cs" />
     <Compile Include="XMLs\XML.PhotosFile.cs" />

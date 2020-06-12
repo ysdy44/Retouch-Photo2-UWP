@@ -7,8 +7,12 @@ using Windows.Storage;
 
 namespace Retouch_Photo2
 {
+    /// <summary>
+    /// A collection of file-processing util methods.
+    /// </summary>
     public static partial class FileUtil
     {
+
         /// <summary>
         /// Construct Samples File (Open from Application, Save from LocalFolder)
         /// </summary>
@@ -28,7 +32,7 @@ namespace Retouch_Photo2
         /// <summary>
         /// Load project and extract zip to LocalFolder.
         /// </summary>
-        /// <param name="zipFilePath"> The path of zip file. </param>
+        /// <param name="file"> The file. </param>
         /// <returns> The extract project. </returns>
         public static async Task ExtractToDirectory(StorageFile file)
         {

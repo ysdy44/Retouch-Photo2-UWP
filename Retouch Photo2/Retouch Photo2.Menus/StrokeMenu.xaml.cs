@@ -11,6 +11,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
 {
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Strokes"/>.
+    /// </summary>
     public sealed partial class StrokeMenu : UserControl, IMenu
     {
         //@ViewModel
@@ -29,6 +32,9 @@ namespace Retouch_Photo2.Menus.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a StrokeMenu. 
+        /// </summary>
         public StrokeMenu()
         {
             this.InitializeComponent();
@@ -44,8 +50,12 @@ namespace Retouch_Photo2.Menus.Models
         }
     }
 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Strokes"/>.
+    /// </summary>
     public sealed partial class StrokeMenu : UserControl, IMenu
     {
+
         //Strings
         private void ConstructStrings()
         {
@@ -83,30 +93,33 @@ namespace Retouch_Photo2.Menus.Models
                 this.JoinSegmented.IsOpen = false;
             };
         }
-
-
+        
         //Menu
+        /// <summary> Gets the type. </summary>
         public MenuType Type => MenuType.Stroke;
+        /// <summary> Gets the expander. </summary>
         public IExpander Expander => this._Expander;
         MenuButton _button = new MenuButton
         {
             CenterContent = new Retouch_Photo2.Strokes.Icon()
         };
 
-        public void ConstructMenu()
+        private void ConstructMenu()
         {
             this._Expander.Layout = this;
             this._Expander.Button = this._button;
             this._Expander.Initialize();
         }
     }
-    
 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Strokes"/>.
+    /// </summary>
     public sealed partial class StrokeMenu : UserControl, IMenu
     {
 
         //Dash
-        public void ConstructDash()
+        private void ConstructDash()
         {
             this.DashSegmented.DashChanged += (s, dash) =>
             {                        
@@ -150,7 +163,7 @@ namespace Retouch_Photo2.Menus.Models
 
 
         //Width
-        public void ConstructWidth()
+        private void ConstructWidth()
         {
             this.WidthPicker.Value = 0;
             this.WidthPicker.Minimum = 0;
@@ -225,7 +238,7 @@ namespace Retouch_Photo2.Menus.Models
         
 
         //Offset
-        public void ConstructOffset()
+        private void ConstructOffset()
         {
             this.OffsetPicker.Value = 0;
             this.OffsetPicker.Minimum = 0;
@@ -303,7 +316,7 @@ namespace Retouch_Photo2.Menus.Models
         
 
         //Cap
-        public void ConstructCap()
+        private void ConstructCap()
         {       
             this.CapSegmented.CapChanged += (s, cap) =>
             {
@@ -351,7 +364,7 @@ namespace Retouch_Photo2.Menus.Models
 
 
         //Join
-        public void ConstructJoin()
+        private void ConstructJoin()
         {
             this.JoinSegmented.JoinChanged += (s, join) =>
             {

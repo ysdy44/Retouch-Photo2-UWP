@@ -7,23 +7,29 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Menus
 {
     /// <summary>
-    /// Retouch_Photo2 Menu 's Button.
+    /// Button of <see cref="IMenu"/>.
     /// </summary>
     public sealed partial class MenuButton : UserControl, IExpanderButton
     {
         //@ViewModel
         TipViewModel TipViewModel => App.TipViewModel;
-        
-      
-        public object CenterContent { set => this.ContentPresenter.Content = value; get => this.ContentPresenter.Content; }
-        public ToolTip ToolTip => this._ToolTip;
 
+
+        //@Content       
+        /// <summary> ContentPresenter's Child. </summary>
+        public object CenterContent { set => this.ContentPresenter.Content = value; get => this.ContentPresenter.Content; }
+        /// <summary> ToolTip </summary>  
+        public ToolTip ToolTip => this._ToolTip;
+        /// <summary> Self </summary>  
         public FrameworkElement Self => this;
 
 
         //@VisualState
         ClickMode _vsClickMode;
         ExpanderState _vsMenuState = ExpanderState.Hide;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -53,8 +59,8 @@ namespace Retouch_Photo2.Menus
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-        
-        private ClickMode ClickMode
+        /// <summary> VisualState's ClickMode. </summary>
+        public ClickMode ClickMode
         {
             set
             {
@@ -62,8 +68,8 @@ namespace Retouch_Photo2.Menus
                 this.VisualState = this.VisualState;//State
             }
         }
-
-        public ExpanderState State
+        /// <summary> VisualState's ExpanderState. </summary>
+        public ExpanderState ExpanderState
         {
             set
             {
@@ -74,6 +80,9 @@ namespace Retouch_Photo2.Menus
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a MenuButton. 
+        /// </summary>
         public MenuButton()
         {
             this.InitializeComponent();

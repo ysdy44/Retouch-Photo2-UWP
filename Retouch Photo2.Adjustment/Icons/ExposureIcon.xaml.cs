@@ -9,6 +9,9 @@ namespace Retouch_Photo2.Adjustments.Icons
     public sealed partial class ExposureIcon : UserControl
     {
         //@Construct
+        /// <summary>
+        /// Initializes a ExposureIcon. 
+        /// </summary>
         public ExposureIcon()
         {
             this.InitializeComponent();

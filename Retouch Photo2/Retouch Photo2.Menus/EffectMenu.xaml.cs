@@ -11,8 +11,8 @@ using Windows.UI.Xaml.Data;
 
 namespace Retouch_Photo2.Menus.Models
 {
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "EffectMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Effects.Effect"/>.
     /// </summary>
     public sealed partial class EffectMenu : UserControl, IMenu
     {
@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel MethodViewModel => App.MethodViewModel;
 
 
-        private IEffectPage currentEffect;
+        /// <summary> Gets the current effect. </summary>
         public IEffectPage CurrentEffect
         {
             get => this.currentEffect;
@@ -38,7 +38,9 @@ namespace Retouch_Photo2.Menus.Models
                 this.currentEffect = value;
             }
         }
-        public List<IEffectPage> Effects = new List<IEffectPage>
+        private IEffectPage currentEffect;
+        /// <summary> Gets the effects. </summary>
+        public IList<IEffectPage> Effects { get; } = new List<IEffectPage>
         {
             new GaussianBlurEffectPage(),
             new DirectionalBlurEffectPage(),
@@ -91,6 +93,9 @@ namespace Retouch_Photo2.Menus.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a EffectMenu. 
+        /// </summary>
         public EffectMenu()
         {
             this.InitializeComponent();
@@ -107,13 +112,14 @@ namespace Retouch_Photo2.Menus.Models
         }
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "EffectMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Effects.Effect"/>.
     /// </summary>
     public sealed partial class EffectMenu : UserControl, IMenu
     {
+
         //DataContext
-        public void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
+        private void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
         {
             this.DataContext = dataContext;
 
@@ -139,14 +145,16 @@ namespace Retouch_Photo2.Menus.Models
         }
 
         //Menu
+        /// <summary> Gets the type. </summary>
         public MenuType Type => MenuType.Effect;
+        /// <summary> Gets the expander. </summary>
         public IExpander Expander => this._Expander;
         MenuButton _button { get; } = new MenuButton
         {
             CenterContent = new Retouch_Photo2.Effects.Icon()
         };
 
-        public void ConstructMenu()
+        private void ConstructMenu()
         {
             this._Expander.Layout = this;
             this._Expander.Button = this._button;
@@ -155,11 +163,12 @@ namespace Retouch_Photo2.Menus.Models
         }
     }
 
-    /// <summary> 
-    /// Retouch_Photo2's the only <see cref = "EffectMenu" />. 
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Effects.Effect"/>.
     /// </summary>
     public sealed partial class EffectMenu : UserControl, IMenu
     {
+
         //Effects
         private void ConstructEffects()
         {
@@ -187,7 +196,7 @@ namespace Retouch_Photo2.Menus.Models
 
 
             //Layers
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelectedLayerages(this.ViewModel.LayerageCollection);
+            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected(this.ViewModel.LayerageCollection);
             Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayerages);
             ILayer layer = outermost.Self;
 

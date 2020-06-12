@@ -26,16 +26,17 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryCapsuleTool. 
+        /// </summary>
         public GeometryCapsuleTool()
         {
             this.InitializeComponent();
             this.ConstructStrings();
         }
-
-
+        
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom() { }
-
     }
 
     /// <summary>
@@ -43,6 +44,7 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public partial class GeometryCapsuleTool : Page, ITool
     {
+
         //Strings
         private void ConstructStrings()
         {

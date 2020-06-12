@@ -21,9 +21,12 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        GeometryTool GeometryTool = new GeometryTool(); 
+        GeometryTool GeometryTool = new GeometryTool();
 
         //@Construct
+        /// <summary>
+        /// Initializes a GeometryRectangleTool. 
+        /// </summary>
         public GeometryRectangleTool()
         {
             this.Content = this.GeometryTool;
@@ -35,7 +38,6 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.GeometryTool.OnNavigatedFrom();
         }
-
     }
 
     /// <summary>

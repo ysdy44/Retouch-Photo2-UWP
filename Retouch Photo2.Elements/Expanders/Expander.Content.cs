@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Elements
                         break;
                 }
 
-                this.Button.State = value;
+                this.Button.ExpanderState = value;
                 this._vsState = value;
                 this.VisualState = this.VisualState; //State
             }

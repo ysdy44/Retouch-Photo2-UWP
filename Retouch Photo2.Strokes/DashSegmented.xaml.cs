@@ -13,10 +13,14 @@ namespace Retouch_Photo2.Strokes
     {
 
         //@Delegate
+        /// <summary> Occurs when dash change. </summary>
         public EventHandler<CanvasDashStyle> DashChanged;
 
         //@VisualState
         CanvasDashStyle _vsDash;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
         public VisualState VisualState
         {
             get
@@ -69,6 +73,9 @@ namespace Retouch_Photo2.Strokes
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a DashSegmented. 
+        /// </summary>
         public DashSegmented()
         {
             this.InitializeComponent();
