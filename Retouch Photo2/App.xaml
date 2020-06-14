@@ -22,9 +22,9 @@
 
                     <Color x:Key="AppForegroundColor" >#F8F8F8</Color>
                     <Color x:Key="AppBackgroundColor" >#F0F0F2</Color>
-                    <Color x:Key="AppBorderBrushColor" >#BEBCC7</Color>  
+                    <Color x:Key="AppBorderBrushColor" >#BEBCC7</Color>
 
-                    <Color x:Key="AppStrokeColor" >#666b6791</Color>
+                    <Color x:Key="AppStrokeColor" >#66817F91</Color>
                     <Color x:Key="AppTextColor" >#99000000</Color>
 
                     <LinearGradientBrush x:Key="AppLinearBrush" StartPoint="0.5,0" EndPoint="0.5,1">
@@ -39,19 +39,19 @@
 
                 <ResourceDictionary x:Key="Dark">
 
-                    <Color x:Key="AppForegroundColor" >#191919</Color>
+                    <Color x:Key="AppForegroundColor" >#222222</Color>
                     <Color x:Key="AppBackgroundColor" >#0E0E0E</Color>
-                    <Color x:Key="AppBorderBrushColor" >#202020</Color>
+                    <Color x:Key="AppBorderBrushColor" >#000000</Color>
 
-                    <Color x:Key="AppStrokeColor" >#AA000000</Color>
+                    <Color x:Key="AppStrokeColor" >#AA110011</Color>
                     <Color x:Key="AppTextColor" >#BBFFFFFF</Color>
 
                     <LinearGradientBrush x:Key="AppLinearBrush" StartPoint="0.5,0" EndPoint="0.5,1">
-                        <GradientStop Color="#232323" Offset="0"/>
-                        <GradientStop Color="#212121" Offset="0.25"/>
-                        <GradientStop Color="#202020" Offset="0.5"/>
-                        <GradientStop Color="#1F1F1F" Offset="0.75"/>
-                        <GradientStop Color="#1C1C1C" Offset="1"/>
+                        <GradientStop Color="#111111" Offset="0"/>
+                        <GradientStop Color="#101010" Offset="0.25"/>
+                        <GradientStop Color="#0F0F0F" Offset="0.5"/>
+                        <GradientStop Color="#0E0E0E" Offset="0.75"/>
+                        <GradientStop Color="#030303" Offset="1"/>
                     </LinearGradientBrush>
                     
                 </ResourceDictionary>

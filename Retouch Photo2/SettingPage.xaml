@@ -308,7 +308,7 @@
 
                         <!--Layout-->
                         <Border x:Name="LayoutBorder" Width="330" Height="210" Background="White" HorizontalAlignment="Left">
-                            <!--Layout-->
+                            <elementsSettingPages:AdaptiveWidthLayout Type="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"/>
                         </Border>
 
 
@@ -550,14 +550,7 @@
                         <TextBlock HorizontalAlignment="Center" Style="{StaticResource AppTextBlockStyle}">
                             2020-6-10
                         </TextBlock>
-                        <Border Padding="12,0" Height="24" 
-                                HorizontalAlignment="Center" 
-                                VerticalAlignment="Center"                          
-                                BorderThickness="0"                       
-                                BorderBrush="{ThemeResource AppBorderBrush}"                          
-                                Background="{ThemeResource AppForeground}"                         
-                                CornerRadius="{StaticResource AppCornerRadius}"
-                                >
+                        <Border Padding="12,0" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource AppRoundedBorderStyle}">
                             <TextBlock>                    
                                 1.1.5
                             </TextBlock>
@@ -598,8 +591,6 @@
                             </HyperlinkButton.NavigateUri>
                             ysdy44@outlook.com
                         </HyperlinkButton>
-
-                        <ContentControl Height="12"/>
 
                     </StackPanel.Children>
 

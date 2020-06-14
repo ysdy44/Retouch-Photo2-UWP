@@ -23,10 +23,7 @@ namespace Retouch_Photo2.ViewModels
                 double width = e.Size.Width;
                 this.DeviceLayoutType = this.Setting.DeviceLayout.GetActualType(width);
             };
-
-            //Width
-            double width2 = Window.Current.Bounds.Width;
-            this.DeviceLayoutType = this.Setting.DeviceLayout.GetActualType(width2);
+            this.NotifyDeviceLayoutType();
         }
 
 
@@ -41,6 +38,16 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private DeviceLayoutType deviceLayoutType = DeviceLayoutType.PC;
+
+        /// <summary>
+        /// Notify <see cref="SettingViewModel.DeviceLayoutType"/>.
+        /// </summary>
+        public void NotifyDeviceLayoutType()
+        {
+            //Width
+            double width = Window.Current.Bounds.Width;
+            this.DeviceLayoutType = this.Setting.DeviceLayout.GetActualType(width);
+        }
 
 
         /// <summary>

@@ -155,7 +155,10 @@ namespace Retouch_Photo2
 
         /// <summary> The current page becomes the active page. </summary>
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {            
+        {
+            //Extension
+            this.AVTBBE.Invalidate();
+
             //Key
             this.SettingViewModel.KeyIsEnabled = true;
 

@@ -27,14 +27,27 @@ namespace Retouch_Photo2.Elements
 
             if (e.NewValue is Color value)
             {
-                Color color = value;
-                ApplicationViewTitleBarBackgroundExtension.TitleBar.BackgroundColor = color;
-                ApplicationViewTitleBarBackgroundExtension.TitleBar.InactiveBackgroundColor = color;
-                ApplicationViewTitleBarBackgroundExtension.TitleBar.ButtonBackgroundColor = color;
-                ApplicationViewTitleBarBackgroundExtension.TitleBar.ButtonInactiveBackgroundColor = color;
+                ApplicationViewTitleBarBackgroundExtension.Invalidate(value);
             }
         }));
 
         #endregion
+                     
+        /// <summary>
+        /// Indicates that the contents of the CanvasControl need to be redrawn.
+        /// </summary>
+        public void Invalidate()
+        {
+            ApplicationViewTitleBarBackgroundExtension.Invalidate(this.TitleBarColor);
+        }
+        
+        private static void Invalidate(Color color)
+        {
+            ApplicationViewTitleBarBackgroundExtension.TitleBar.BackgroundColor = color;
+            ApplicationViewTitleBarBackgroundExtension.TitleBar.InactiveBackgroundColor = color;
+            ApplicationViewTitleBarBackgroundExtension.TitleBar.ButtonBackgroundColor = color;
+            ApplicationViewTitleBarBackgroundExtension.TitleBar.ButtonInactiveBackgroundColor = color;
+        }
+
     }
 }

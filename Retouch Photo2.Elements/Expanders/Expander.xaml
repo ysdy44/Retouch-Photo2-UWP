@@ -239,14 +239,14 @@
         <Border x:Name="RootGrid" CornerRadius="{StaticResource AppCornerRadius}" Width="222" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="Transparent">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40" MinHeight="40" MaxHeight="40"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
 
                 <!--@Acrylic-->
                 <!--Body-->
-                <Rectangle x:Name="HeightRectangle" Grid.Row="1" Height="Auto" VerticalAlignment="Stretch"
+                <Rectangle x:Name="HeightRectangle" Grid.RowSpan="2" Height="Auto" VerticalAlignment="Stretch" 
                           apiContractNotPresent5:Fill="{ThemeResource AppBackground}"
                           apiContractPresent5:Fill="{ThemeResource AppAcrylicElementBrush}"  />
                 <Border x:Name="MainPageBorder" Visibility="Collapsed" Height="Auto" Grid.Row="1" VerticalAlignment="Top">
@@ -257,11 +257,8 @@
                 </Border>
 
 
-                <!--@Acrylic-->
                 <!--Head-->
-                <Grid x:Name="TitleGrid"
-                          apiContractNotPresent5:Background="{ThemeResource AppBackground}"
-                          apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
+                <Grid x:Name="TitleGrid" Grid.Row="0" Background="Transparent">
 
                     <StackPanel x:Name="TitleStackPanel" Orientation="Horizontal" HorizontalAlignment="Left">
                         <StackPanel.RenderTransform>

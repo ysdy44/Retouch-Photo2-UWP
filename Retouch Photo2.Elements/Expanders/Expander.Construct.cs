@@ -95,30 +95,30 @@ namespace Retouch_Photo2.Elements
             this.HeightKeyFramesMainToSecond.Completed += (s, e) => this.HeightStretch();
             this.HeightKeyFramesSecondToMain.Completed += (s, e) => this.HeightStretch();
             
-            this.HeightKeyFramesZeroToMain.From = 0;
-            this.HeightKeyFramesZeroToSecond.From = 0;
-            this.HeightKeyFramesMainToZero.To = 0;
-            this.HeightKeyFramesSecondToZero.To = 0;
+            this.HeightKeyFramesZeroToMain.From = 40;
+            this.HeightKeyFramesZeroToSecond.From = 40;
+            this.HeightKeyFramesMainToZero.To = 40;
+            this.HeightKeyFramesSecondToZero.To = 40;
             
             this.MainPageBorder.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
 
                 double height = e.NewSize.Height;
-                this.HeightKeyFramesZeroToMain.To = height;
-                this.HeightKeyFramesMainToZero.From = height;
-                this.HeightKeyFramesMainToSecond.From = height;
-                this.HeightKeyFramesSecondToMain.To = height;
+                this.HeightKeyFramesZeroToMain.To = height + 40;
+                this.HeightKeyFramesMainToZero.From = height + 40;
+                this.HeightKeyFramesMainToSecond.From = height + 40;
+                this.HeightKeyFramesSecondToMain.To = height + 40;
             };
             this.SecondPageBorder.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
 
                 double height = e.NewSize.Height;
-                this.HeightKeyFramesZeroToSecond.From = height;
-                this.HeightKeyFramesSecondToZero.To = height;
-                this.HeightKeyFramesMainToSecond.To = height;
-                this.HeightKeyFramesSecondToMain.From = height;
+                this.HeightKeyFramesZeroToSecond.From = height + 40;
+                this.HeightKeyFramesSecondToZero.To = height + 40;
+                this.HeightKeyFramesMainToSecond.To = height + 40;
+                this.HeightKeyFramesSecondToMain.From = height + 40;
             };
         }
 

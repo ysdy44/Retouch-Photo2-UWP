@@ -101,6 +101,9 @@ namespace Retouch_Photo2
         /// <summary> The current page becomes the active page. </summary>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            //Extension
+            this.AVTBBE.Invalidate();
+
             await this._lockOnNavigatedTo();
 
             // Occurs occuse after <see  cref="DrawPage.Frame.GoBack()"/>;

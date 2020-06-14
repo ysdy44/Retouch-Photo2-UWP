@@ -64,7 +64,7 @@
         <Setter Property="OffsetX" Value="4"/>
         <Setter Property="OffsetY" Value="6"/>
         <Setter Property="BlurRadius" Value="12"/>
-        <Setter Property="ShadowOpacity" Value="0.8"/>
+        <Setter Property="ShadowOpacity" Value="1"/>
     </Style>
 
     

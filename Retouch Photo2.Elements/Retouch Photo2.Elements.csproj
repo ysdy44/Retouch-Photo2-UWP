@@ -114,6 +114,7 @@
       <DependentUpon>ProjectViewItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="%24MainPages\SelectMode.cs" />
+    <Compile Include="%24SettingPages\AdaptiveWidthLayout.cs" />
     <Compile Include="Expanders\Expander.Content.cs" />
     <Compile Include="Expanders\Expander.Construct.cs" />
     <Compile Include="Expanders\Expander.Menthon.cs" />

@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Layers
             get => this.controlHeight;
             set
             {
-                this.Height = value;
+                this.Height = value + 2;
                 this.IconBorder.Width = value;
                 this.IconBorder.Height = value;
 

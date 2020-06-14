@@ -36,22 +36,7 @@ namespace Retouch_Photo2
             }
         }
 
-
-        PhoneLayout PhoneLayout = new PhoneLayout();
-        PadLayout PadLayout = new PadLayout();
-        PCLayout PCLayout = new PCLayout();
-        DeviceLayoutType DeviceLayoutType
-        {
-            set
-            {
-                switch (value)
-                {
-                    case DeviceLayoutType.Phone: this.LayoutBorder.Child = this.PhoneLayout; break;
-                    case DeviceLayoutType.Pad: this.LayoutBorder.Child = this.PadLayout; break;
-                    case DeviceLayoutType.PC: this.LayoutBorder.Child = this.PCLayout; break;
-                }
-            }
-        }
+        
         bool IsAdaptive
         {
             set
@@ -127,11 +112,11 @@ namespace Retouch_Photo2
         private async Task SetType(DeviceLayoutType type2, bool isAdaptive2)
         {
             this.IsAdaptive = isAdaptive2;
-            this.DeviceLayoutType = type2;
 
             //Setting
             this.SettingViewModel.Setting.DeviceLayout.IsAdaptive = isAdaptive2;
             this.SettingViewModel.Setting.DeviceLayout.FallBackType = type2;
+            this.SettingViewModel.NotifyDeviceLayoutType();
             await this.Write();
         }
 

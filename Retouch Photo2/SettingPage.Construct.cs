@@ -123,7 +123,6 @@ namespace Retouch_Photo2
 
         private void ConstructDeviceLayoutType(DeviceLayoutType type, bool isAdaptive)
         {
-            this.DeviceLayoutType = type;
             this.IsAdaptive = isAdaptive;
             this.PhoneButton.IsChecked = (isAdaptive == false && type == DeviceLayoutType.Phone);
             this.PadButton.IsChecked = (isAdaptive == false && type == DeviceLayoutType.Pad);
@@ -153,12 +152,14 @@ namespace Retouch_Photo2
             {
                 //Setting
                 this.SettingViewModel.Setting.DeviceLayout.PhoneMaxWidth = value;
+                this.SettingViewModel.NotifyDeviceLayoutType();
                 await this.Write();
             };
             this.AdaptiveGrid.PadWidthChanged += async (s, value) =>
             {
                 //Setting
                 this.SettingViewModel.Setting.DeviceLayout.PadMaxWidth = value;
+                this.SettingViewModel.NotifyDeviceLayoutType();
                 await this.Write();
             };
 
@@ -176,6 +177,7 @@ namespace Retouch_Photo2
                 //Setting
                 this.SettingViewModel.Setting.DeviceLayout.PhoneMaxWidth = phone2;
                 this.SettingViewModel.Setting.DeviceLayout.PadMaxWidth = pad2;
+                this.SettingViewModel.NotifyDeviceLayoutType();
                 await this.Write();//Write
             };
         }

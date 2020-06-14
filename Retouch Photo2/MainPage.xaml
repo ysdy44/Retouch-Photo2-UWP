@@ -17,7 +17,7 @@
 
     <Page.Resources>
         <!--Extensions-->
-        <elements:ApplicationViewTitleBarBackgroundExtension x:Key="AVTBBE" TitleBarColor="{ThemeResource AppForegroundColor}"/>
+        <elements:ApplicationViewTitleBarBackgroundExtension x:Name="AVTBBE" TitleBarColor="{ThemeResource AppForegroundColor}"/>
     </Page.Resources>
 
 

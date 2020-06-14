@@ -7,10 +7,10 @@
     <x:Double x:Key="AppRoundedHeight">36</x:Double>
 
 
-    <Thickness x:Key="AppThickness">1,1,1,2</Thickness>
-    <Thickness x:Key="AppLeftThickness">1,1,0,2</Thickness>
-    <Thickness x:Key="AppCenterThickness">0,1,0,2</Thickness>
-    <Thickness x:Key="AppRightThickness">0,1,1,2</Thickness>
+    <Thickness x:Key="AppThickness">0.5,0.5,0.5,1.5</Thickness>
+    <Thickness x:Key="AppLeftThickness">0.5,0.5,0,1.5</Thickness>
+    <Thickness x:Key="AppCenterThickness">0,0.5,0,1.5</Thickness>
+    <Thickness x:Key="AppRightThickness">0,0.5,0.5,1.5</Thickness>
 
 
     <Thickness x:Key="AppMargin">1,0</Thickness>
@@ -23,7 +23,7 @@
     <CornerRadius x:Key="AppLeftCornerRadius">4,0,0,4</CornerRadius>
     <CornerRadius x:Key="AppCenterCornerRadius">0</CornerRadius>
     <CornerRadius x:Key="AppRightCornerRadius">0,4,4,0</CornerRadius>
-
+    
     <CornerRadius x:Key="AppCircleCornerRadius">20</CornerRadius>
 
 

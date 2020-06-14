@@ -40,7 +40,7 @@
     </UserControl.Resources>
 
 
-    <Grid x:Name="RootGrid" BorderThickness="0,1" Background="Transparent">
+    <Grid x:Name="RootGrid" Background="Transparent">
         
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -132,7 +132,7 @@
 
         
         <!--Icon-->
-        <Border x:Name="IconBorder" Grid.Column="2" MinHeight="20" MinWidth="20" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{StaticResource AppForeground}" Background="White">
+        <Border x:Name="IconBorder" Grid.Column="2" MinHeight="20" MinWidth="20" Margin="0,1" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{StaticResource AppForeground}" Background="White">
             <canvas:CanvasControl x:Name="IconCanvasControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Border>
 
