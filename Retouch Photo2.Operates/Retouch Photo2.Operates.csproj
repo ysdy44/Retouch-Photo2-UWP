@@ -128,8 +128,8 @@
     <Compile Include="Horizontally\RightIcon.xaml.cs">
       <DependentUpon>RightIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Horizontally\HorizontallySymmetryIcon.xaml.cs">
-      <DependentUpon>HorizontallySymmetryIcon.xaml</DependentUpon>
+    <Compile Include="Horizontally\HorizontallySpaceIcon.xaml.cs">
+      <DependentUpon>HorizontallySpaceIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Transform\FlipVerticalIcon.xaml.cs">
       <DependentUpon>FlipVerticalIcon.xaml</DependentUpon>
@@ -149,8 +149,8 @@
     <Compile Include="Vertically\MiddleIcon.xaml.cs">
       <DependentUpon>MiddleIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vertically\VerticallySymmetryIcon.xaml.cs">
-      <DependentUpon>VerticallySymmetryIcon.xaml</DependentUpon>
+    <Compile Include="Vertically\VerticallySpaceIcon.xaml.cs">
+      <DependentUpon>VerticallySpaceIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vertically\TopIcon.xaml.cs">
       <DependentUpon>TopIcon.xaml</DependentUpon>
@@ -195,7 +195,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Horizontally\HorizontallySymmetryIcon.xaml">
+    <Page Include="Horizontally\HorizontallySpaceIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -223,7 +223,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Vertically\VerticallySymmetryIcon.xaml">
+    <Page Include="Vertically\VerticallySpaceIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -99,9 +99,9 @@
                         <ToolTip x:Name="RightToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
                 </Button>
-                <Button x:Name="HorizontallySymmetryButton" Grid.Column="3" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}">
+                <Button x:Name="HorizontallySpaceButton" Grid.Column="3" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}">
                     <ToolTipService.ToolTip>
-                        <ToolTip x:Name="HorizontallySymmetryToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                        <ToolTip x:Name="HorizontallySpaceToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
                 </Button>
 
@@ -123,9 +123,9 @@
                         <ToolTip x:Name="BottomToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
                 </Button>
-                <Button x:Name="VerticallySymmetryButton" Grid.Column="3" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}">
+                <Button x:Name="VerticallySpaceButton" Grid.Column="3" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}">
                     <ToolTipService.ToolTip>
-                        <ToolTip x:Name="VerticallySymmetryToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                        <ToolTip x:Name="VerticallySpaceToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
                 </Button>
 

@@ -121,8 +121,8 @@ namespace Retouch_Photo2.Menus.Models
             this.CenterButton.Content = new CenterIcon();
             this.RightToolTip.Content = resource.GetString("/Operates/Horizontally_Right");
             this.RightButton.Content = new RightIcon();
-            this.HorizontallySymmetryToolTip.Content = resource.GetString("/Operates/Horizontally_Symmetry");
-            this.HorizontallySymmetryButton.Content = new HorizontallySymmetryIcon();
+            this.HorizontallySpaceToolTip.Content = resource.GetString("/Operates/Horizontally_Space");
+            this.HorizontallySpaceButton.Content = new HorizontallySpaceIcon();
 
             this.VerticallyTextBlock.Text = resource.GetString("/Operates/Vertically");
             this.TopToolTip.Content = resource.GetString("/Operates/Vertically_Top");
@@ -131,8 +131,8 @@ namespace Retouch_Photo2.Menus.Models
             this.MiddleButton.Content = new MiddleIcon();
             this.BottomToolTip.Content = resource.GetString("/Operates/Vertically_Bottom");
             this.BottomButton.Content = new BottomIcon();
-            this.VerticallySymmetryToolTip.Content = resource.GetString("/Operates/Vertically_Symmetry");
-            this.VerticallySymmetryButton.Content = new VerticallySymmetryIcon();
+            this.VerticallySpaceToolTip.Content = resource.GetString("/Operates/Vertically_Space");
+            this.VerticallySpaceButton.Content = new VerticallySpaceIcon();
         }
 
         //ToolTip
@@ -312,7 +312,7 @@ namespace Retouch_Photo2.Menus.Models
             this.LeftButton.Click += (s, e) => this.TransformAlign(BorderMode.MinX, Orientation.Horizontal);
             this.CenterButton.Click += (s, e) => this.TransformAlign(BorderMode.CenterX, Orientation.Horizontal);
             this.RightButton.Click += (s, e) => this.TransformAlign(BorderMode.MaxX, Orientation.Horizontal);
-            this.HorizontallySymmetryButton.Click += (s, e) => this.TransformSapce(Orientation.Horizontal);
+            this.HorizontallySpaceButton.Click += (s, e) => this.TransformSapce(Orientation.Horizontal);
         }
 
         //Vertical
@@ -321,7 +321,7 @@ namespace Retouch_Photo2.Menus.Models
             this.TopButton.Click += (s, e) => this.TransformAlign(BorderMode.MinY, Orientation.Vertical);
             this.MiddleButton.Click += (s, e) => this.TransformAlign(BorderMode.CenterY, Orientation.Vertical);
             this.BottomButton.Click += (s, e) => this.TransformAlign(BorderMode.MaxY, Orientation.Vertical);
-            this.VerticallySymmetryButton.Click += (s, e) => this.TransformSapce(Orientation.Vertical);
+            this.VerticallySpaceButton.Click += (s, e) => this.TransformSapce(Orientation.Vertical);
         }
 
     }

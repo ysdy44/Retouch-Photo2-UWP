@@ -4,9 +4,9 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Operates
 {
     /// <summary>
-    /// Icon of VerticallySymmetry.
-    /// </summary>
-    public sealed partial class VerticallySymmetryIcon : UserControl
+    /// Icon of HorizontallySymmetry.
+    /// </summary>    
+    public sealed partial class HorizontallySpaceIcon : UserControl
     {
 
         //@VisualState
@@ -26,9 +26,9 @@ namespace Retouch_Photo2.Operates
 
         //@Construct
         /// <summary>
-        /// Initializes a VerticallySymmetryIcon. 
+        /// Initializes a HorizontallySymmetryIcon. 
         /// </summary>
-        public VerticallySymmetryIcon()
+        public HorizontallySpaceIcon()
         {
             this.InitializeComponent();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State

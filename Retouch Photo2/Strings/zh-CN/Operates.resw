@@ -144,8 +144,8 @@
   <data name="Horizontally_Right" xml:space="preserve">
     <value>右对齐</value>
   </data>
-  <data name="Horizontally_Symmetry" xml:space="preserve">
-    <value>对称</value>
+  <data name="Horizontally_Space" xml:space="preserve">
+    <value>水平间隔</value>
   </data>
   <data name="Transform" xml:space="preserve">
     <value>变换</value>
@@ -171,8 +171,8 @@
   <data name="Vertically_Middle" xml:space="preserve">
     <value>中间对齐</value>
   </data>
-  <data name="Vertically_Symmetry" xml:space="preserve">
-    <value>对称</value>
+  <data name="Vertically_Space" xml:space="preserve">
+    <value>垂直间隔</value>
   </data>
   <data name="Vertically_Top" xml:space="preserve">
     <value>顶部对齐</value>

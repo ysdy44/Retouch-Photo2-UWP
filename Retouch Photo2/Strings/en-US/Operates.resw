@@ -144,8 +144,8 @@
   <data name="Horizontally_Right" xml:space="preserve">
     <value>Align Right</value>
   </data>
-  <data name="Horizontally_Symmetry" xml:space="preserve">
-    <value>Symmetry</value>
+  <data name="Horizontally_Space" xml:space="preserve">
+    <value>Space Horizontally</value>
   </data>
   <data name="Transform" xml:space="preserve">
     <value>Transform</value>
@@ -171,8 +171,8 @@
   <data name="Vertically_Middle" xml:space="preserve">
     <value>Align Middle</value>
   </data>
-  <data name="Vertically_Symmetry" xml:space="preserve">
-    <value>Symmetry</value>
+  <data name="Vertically_Space" xml:space="preserve">
+    <value>Space Vertically</value>
   </data>
   <data name="Vertically_Top" xml:space="preserve">
     <value>Align Top</value>
