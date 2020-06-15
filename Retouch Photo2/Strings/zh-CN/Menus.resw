@@ -142,7 +142,7 @@
     <value>颜色</value>
   </data>
   <data name="Effect" xml:space="preserve">
-    <value>特效</value>
+    <value>图层FX</value>
   </data>
   <data name="History" xml:space="preserve">
     <value>历史</value>

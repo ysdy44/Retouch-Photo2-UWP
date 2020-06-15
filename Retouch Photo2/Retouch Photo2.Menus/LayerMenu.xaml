@@ -28,12 +28,12 @@
 
                 <!--Opacity-->
                 <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <Border Style="{StaticResource AppRoundedBorderStyle}">
+                <Border Height="{StaticResource AppCircleHeight}">
                     <elements:SilderPicker x:Name="OpacitySlider"
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                            Value="{x:Bind OpacityToValueConverter(SelectionViewModel.Opacity), Mode=OneWay}"/>
                 </Border>
-
+                
 
                 <!--Blend Mode-->
                 <TextBlock x:Name="BlendModeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
