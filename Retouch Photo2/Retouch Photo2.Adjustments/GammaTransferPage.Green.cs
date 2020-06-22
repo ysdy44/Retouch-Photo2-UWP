@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructStringsGreen(string title, string offset, string exponent, string amplitude)
         {
-            this.GreenTextBlock.Text = offset;
+            this.GreenTextBlock.Text = title;
             this.GreenOffsetTextBlock.Text = offset;
             this.GreenExponentTextBlock.Text = exponent;
             this.GreenAmplitudeTextBlock.Text = amplitude;

@@ -548,11 +548,11 @@
                         <Image Width="180" Height="180" Source="ms-appx:///Icons\AppRender.png"/>
 
                         <TextBlock HorizontalAlignment="Center" Style="{StaticResource AppTextBlockStyle}">
-                            2020-6-10
+                            2020-6-22
                         </TextBlock>
                         <Border Padding="12,0" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource AppRoundedBorderStyle}">
                             <TextBlock>                    
-                                1.1.5
+                                1.1.6
                             </TextBlock>
                         </Border>
 

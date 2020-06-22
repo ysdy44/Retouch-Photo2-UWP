@@ -105,9 +105,9 @@ namespace Retouch_Photo2.Layers
         }
         private void _render(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, IList<Layerage> children)
         {
-            //Stroke
             CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
 
+            //Fill
             // Fill a geometry with style.
             if (this.Style.Fill.Type != BrushType.None)
             {
@@ -121,7 +121,11 @@ namespace Retouch_Photo2.Layers
                 using (drawingSession.CreateLayer(1, geometry))
                 {
                     ICanvasImage childImage = LayerBase.Render(resourceCreator, children);
-                    drawingSession.DrawImage(childImage);
+
+                    if (childImage != null)
+                    {
+                        drawingSession.DrawImage(childImage);
+                    }
                 }
             }
 

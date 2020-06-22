@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructStringsBlue(string title, string offset, string exponent, string amplitude)
         {
-            this.BlueTextBlock.Text = offset;
+            this.BlueTextBlock.Text = title;
             this.BlueOffsetTextBlock.Text = offset;
             this.BlueExponentTextBlock.Text = exponent;
             this.BlueAmplitudeTextBlock.Text = amplitude;

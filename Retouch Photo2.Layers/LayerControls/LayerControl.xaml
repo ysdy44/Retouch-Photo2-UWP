@@ -132,7 +132,7 @@
 
         
         <!--Icon-->
-        <Border x:Name="IconBorder" Grid.Column="2" MinHeight="20" MinWidth="20" Margin="0,1" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{StaticResource AppForeground}" Background="White">
+        <Border x:Name="IconBorder" Grid.Column="2" MinHeight="20" MinWidth="20" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{StaticResource AppStroke}" Background="White">
             <canvas:CanvasControl x:Name="IconCanvasControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Border>
 
@@ -162,8 +162,18 @@
 
 
         <!--TagType-->
-        <Rectangle IsHitTestVisible="False" Grid.Column="0" Fill="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
-        <Rectangle IsHitTestVisible="False" Grid.Column="1" Margin="0,2" Width="2" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+        <Rectangle IsHitTestVisible="False" Grid.Column="0" Margin="0,1" HorizontalAlignment="Stretch">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0, 0.5" EndPoint="1, 0.5">
+                    <GradientStop Color="#00888888" Offset="0"/>
+                    <GradientStop Color="#11888888" Offset="0.25"/>
+                    <GradientStop Color="#22888888" Offset="0.5"/>
+                    <GradientStop Color="#44888888" Offset="0.75"/>
+                    <GradientStop Color="#88888888" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle IsHitTestVisible="False" Grid.Column="1" Margin="0,1" Width="3" HorizontalAlignment="Left" VerticalAlignment="Stretch">
             <Rectangle.Fill>
                 <SolidColorBrush x:Name="TagColor" Color="Transparent"/>
             </Rectangle.Fill>

@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructStringsAlpha(string title, string offset, string exponent, string amplitude)
         {
-            this.AlphaTextBlock.Text = offset;
+            this.AlphaTextBlock.Text = title;
             this.AlphaOffsetTextBlock.Text = offset;
             this.AlphaExponentTextBlock.Text = exponent;
             this.AlphaAmplitudeTextBlock.Text = amplitude;

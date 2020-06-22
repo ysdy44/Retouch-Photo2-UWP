@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructStringsRed(string title, string offset, string exponent, string amplitude)
         {
-            this.RedTextBlock.Text = offset;
+            this.RedTextBlock.Text = title;
             this.RedOffsetTextBlock.Text = offset;
             this.RedExponentTextBlock.Text = exponent;
             this.RedAmplitudeTextBlock.Text = amplitude;
