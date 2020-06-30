@@ -20,17 +20,17 @@ namespace Retouch_Photo2.Layers
         {     
             if (source == null) return;
             if (destination == null) return;
-            ILayer destination2 = destination.Self;
-            ILayer source2 = source.Self;
+            ILayer destinationLayer = destination.Self;
+            ILayer sourceLayer = source.Self;
 
-            destination2.Control.OverlayMode = OverlayMode.None;
-            if (destination2.IsSelected) return;
+            destinationLayer.Control.OverlayMode = OverlayMode.None;
+            if (destinationLayer.IsSelected) return;
             if (destinationOverlayMode == OverlayMode.None) return;
 
             if (source == destination) return;
 
 
-            bool isSelected = source2.IsSelected;
+            bool isSelected = sourceLayer.IsSelected;
             if (isSelected == false)
             {
                 switch (destinationOverlayMode)

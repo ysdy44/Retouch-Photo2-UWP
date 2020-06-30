@@ -54,15 +54,15 @@ namespace Retouch_Photo2.Layers
         }
 
         private static void _removeAll(LayerageCollection layerageCollection, IList<Layerage> layerages)
-        {         
-            foreach (Layerage child in layerages)
+        {
+            foreach (Layerage layerage in layerages)
             {
-                ILayer child2 = child.Self;
+                ILayer  layer = layerage.Self;
 
                 //Recursive
-                LayerageCollection._removeAll(layerageCollection, child.Children);
+                LayerageCollection._removeAll(layerageCollection, layerage.Children);
 
-                layerageCollection.RootControls.Remove(child2.Control.Self);
+                layerageCollection.RootControls.Remove(layer.Control.Self);
             }
             layerages.Clear();
         }

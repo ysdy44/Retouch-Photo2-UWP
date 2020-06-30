@@ -18,9 +18,9 @@ namespace Retouch_Photo2.Layers
         /// <returns> The yield photocopiers. </returns>
         public static IEnumerable<Photocopier> GetPhotocopiers(IEnumerable<Layerage> layerages)
         {
-            foreach (Layerage child in layerages)
+            foreach (Layerage layerage in layerages)
             {
-                ILayer child2 = child.Self;
+                ILayer layer = layerage.Self;
 
                 foreach (Photocopier photocopier in LayerageCollection.GetPhotocopiers(child.Children))
                 {
@@ -28,21 +28,21 @@ namespace Retouch_Photo2.Layers
                 }
 
                 //ImageLayer
-                if (child2.Type == LayerType.Image)
+                if (layer.Type == LayerType.Image)
                 {
-                    ImageLayer imageLayer = (ImageLayer)child2;
+                    ImageLayer imageLayer = (ImageLayer)layer;
                     yield return imageLayer.Photocopier;
                 }
 
                 //Fill
-                if (child2.Style.Fill.Type == BrushType.Image)
+                if (layer.Style.Fill.Type == BrushType.Image)
                 {
-                    yield return child2.Style.Fill.Photocopier;
+                    yield return layer.Style.Fill.Photocopier;
                 }
                 //Stroke
-                if (child2.Style.Stroke.Type == BrushType.Image)
+                if (layer.Style.Stroke.Type == BrushType.Image)
                 {
-                    yield return child2.Style.Stroke.Photocopier;
+                    yield return layer.Style.Stroke.Photocopier;
                 }
             }
         }

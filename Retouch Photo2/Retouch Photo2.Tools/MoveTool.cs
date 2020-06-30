@@ -131,14 +131,14 @@ namespace Retouch_Photo2.Tools
             Layerage delectedLayerage = this.SelectionViewModel.GetFirstSelectedLayerage();
             IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(delectedLayerage);
 
-            bool childasdsad(Layerage child)
+            bool FillContainsPoint(Layerage layerage)
             {
-                ILayer child2 = child.Self;
+                ILayer layer = layerage.Self;
 
-                return child2.FillContainsPoint(child, canvasPoint);
+                return layer.FillContainsPoint(layerage, canvasPoint);
             };
 
-            return parentsChildren.FirstOrDefault(layerage=> childasdsad(layerage));
+            return parentsChildren.FirstOrDefault(layerage=> FillContainsPoint(layerage));
         }
 
         private bool GetIsSelectedLayer(Vector2 canvasStartingPoint)

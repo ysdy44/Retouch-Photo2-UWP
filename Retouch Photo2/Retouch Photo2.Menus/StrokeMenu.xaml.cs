@@ -191,6 +191,8 @@ namespace Retouch_Photo2.Menus.Models
 
                     //Refactoring
                     layer.IsRefactoringRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Style.StrokeWidth = width;
                 });
 
@@ -267,6 +269,8 @@ namespace Retouch_Photo2.Menus.Models
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
                     layer.Style.StrokeStyle.DashOffset = offset;
                 });
 

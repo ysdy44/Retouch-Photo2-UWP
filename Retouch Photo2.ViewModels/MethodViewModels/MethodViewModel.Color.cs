@@ -43,6 +43,8 @@ namespace Retouch_Photo2.ViewModels
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.Style.Fill = BrushBase.ColorBrush(value);
 
                 this.StandStyleLayerage = layerage;
@@ -126,13 +128,13 @@ namespace Retouch_Photo2.ViewModels
             this.Invalidate(InvalidateMode.HD);//Invalidate 
         }
 
-               
+
 
 
         public void MethodStrokeColorChanged(Color value)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set stroke");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
 
             //Selection
             switch (this.FillOrStroke)
@@ -141,6 +143,7 @@ namespace Retouch_Photo2.ViewModels
                     this.Color = value;
                     break;
             }
+
             this.Stroke = BrushBase.ColorBrush(value);
             this.SetValueWithChildrenOnlyGroup((layerage) =>
             {
@@ -150,12 +153,19 @@ namespace Retouch_Photo2.ViewModels
                 var previous = layer.Style.Stroke.Clone();
                 history.UndoAction += () =>
                 {
-                    ILayer layer2 = layerage.Self;
-
-                    layer2.Style.Stroke = previous.Clone();
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layer.Style.Stroke = previous.Clone();
                 };
 
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.Style.Stroke = BrushBase.ColorBrush(value);
+
                 this.StandStyleLayerage = layerage;
             });
 
@@ -186,6 +196,7 @@ namespace Retouch_Photo2.ViewModels
 
                 //Refactoring
                 layer.IsRefactoringRender = true;
+                layerage.RefactoringParentsRender();
                 layer.Style.Stroke = BrushBase.ColorBrush(value);
             });
 
@@ -195,7 +206,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodStrokeColorChangeCompleted(Color value)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set stroke");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
 
             //Selection
             switch (this.FillOrStroke)
@@ -223,6 +234,8 @@ namespace Retouch_Photo2.ViewModels
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
                 layer.Style.Stroke = BrushBase.ColorBrush(value);
 
                 this.StandStyleLayerage = layerage;

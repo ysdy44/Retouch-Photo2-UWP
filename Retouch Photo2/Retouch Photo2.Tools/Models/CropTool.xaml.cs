@@ -244,16 +244,21 @@ namespace Retouch_Photo2.Tools.Models
 
             switch (this.SelectionViewModel.SelectionMode)
             {
-                case ListViewSelectionMode.None: return;
+                case ListViewSelectionMode.None:
+                    return;
+
                 case ListViewSelectionMode.Single:
-                    ILayer layer = this.SelectionViewModel.SelectionLayerage.Self;
-                    layer.Transform.DrawCrop(drawingSession, matrix, this.ViewModel.AccentColor);
+                    {
+                        ILayer layer = this.SelectionViewModel.SelectionLayerage.Self;
+                        layer.Transform.DrawCrop(drawingSession, matrix, this.ViewModel.AccentColor);
+                    }
                     break;
+
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage layerage in this.SelectionViewModel.SelectionLayerages)
                     {
-                        ILayer layer2 = layerage.Self;
-                        layer2.Transform.DrawCrop(drawingSession, matrix, this.ViewModel.AccentColor);
+                        ILayer layer = layerage.Self;
+                        layer.Transform.DrawCrop(drawingSession, matrix, this.ViewModel.AccentColor);
                     }
                     break;
             }

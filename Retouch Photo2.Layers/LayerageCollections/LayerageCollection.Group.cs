@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Layers
 
             if (parents != null)
             {
-                ILayer parents2 = parents.Self;
+                ILayer parentsLayer = parents.Self;
 
                 IList<Layerage> parentsParentsChildren = layerageCollection.GetParentsChildren(parents);
                 IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(layerage);
@@ -109,15 +109,15 @@ namespace Retouch_Photo2.Layers
 
 
             //Temp
-            foreach (Layerage child in selectedLayerages)
+            foreach (Layerage layerage in selectedLayerages)
             {
-                ILayer child2 = child.Self;
+                ILayer layer = layerage.Self;
 
-                IList<Layerage> childParentsChildren = layerageCollection.GetParentsChildren(child);
-                childParentsChildren.Remove(child);
-                child2.IsSelected = false;
+                IList<Layerage> childParentsChildren = layerageCollection.GetParentsChildren(layerage);
+                childParentsChildren.Remove(layerage);
+                layer.IsSelected = false;
 
-                groupLayerage.Children.Add(child);
+                groupLayerage.Children.Add(layerage);
             }
 
             //Insert

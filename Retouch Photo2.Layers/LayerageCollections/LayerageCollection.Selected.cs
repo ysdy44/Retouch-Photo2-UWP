@@ -19,18 +19,18 @@ namespace Retouch_Photo2.Layers
    
             void addLayer(IList<Layerage> layerages)
             {
-                foreach (Layerage child in layerages)
+                foreach (Layerage layerage in layerages)
                 {
-                    ILayer child2 = child.Self;
+                    ILayer layer = layerage.Self;
 
-                    if (child2.IsSelected == true)
+                    if (layer.IsSelected == true)
                     {
-                        selectedLayerages.Add(child);
+                        selectedLayerages.Add(layerage);
                     }
                     else
                     {
                         //Recursive
-                        addLayer(child.Children);
+                        addLayer(layerage.Children);
                     }
                 }
             }
@@ -52,17 +52,17 @@ namespace Retouch_Photo2.Layers
 
             void addLayer(IList<Layerage> layerages)
             {
-                foreach (Layerage child in layerages)
+                foreach (Layerage layerage in layerages)
                 {
-                    ILayer child2 = child.Self;
+                    ILayer layer = layerage.Self;
 
-                    if (child2.IsSelected == true)
+                    if (layer.IsSelected == true)
                     {
-                        selectedLayerages.Add(child);
+                        selectedLayerages.Add(layerage);
                     }
 
                     //Recursive
-                    addLayer(child.Children);
+                    addLayer(layerage.Children);
                 }
             }
 

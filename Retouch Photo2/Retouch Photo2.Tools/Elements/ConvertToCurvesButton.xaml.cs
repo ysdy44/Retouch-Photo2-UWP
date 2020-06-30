@@ -37,7 +37,7 @@ namespace Retouch_Photo2.Tools.Elements
 
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
-                    ILayer layer2 = layerage.Self;
+                    ILayer layer = layerage.Self;
 
                     //Turn to curve layer
                     ILayer curveLayer = this.CreateCurveLayer(layerage);
@@ -48,9 +48,9 @@ namespace Retouch_Photo2.Tools.Elements
                         LayerBase.Instances.Add(curveLayer);
 
                         //set image brush
-                        if (layer2.Type == LayerType.Image)
+                        if (layer.Type == LayerType.Image)
                         {
-                            ImageLayer imageLayer = (ImageLayer)layer2;
+                            ImageLayer imageLayer = (ImageLayer)layer;
                             curveLayer.Style.Fill = imageLayer.ToBrush();
                         }
 

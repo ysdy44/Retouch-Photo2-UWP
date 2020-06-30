@@ -198,12 +198,12 @@ namespace Retouch_Photo2.Tools.Models
                 this.MezzanineLayerage.RefactoringParentsRender();
                 this.MezzanineLayerage.RefactoringParentsIconRender();
 
-
-                foreach (Layerage child in this.ViewModel.LayerageCollection.RootLayerages)
+           
+                foreach (Layerage layerage in this.ViewModel.LayerageCollection.RootLayerages)
                 {
-                    ILayer child2 = child.Self;
+                    ILayer layer = layerage.Self;
 
-                    child2.IsSelected = false;
+                    layer.IsSelected = false;
                 }
 
                 mezzanineLayer.IsSelected = true;

@@ -24,8 +24,8 @@ namespace Retouch_Photo2.Layers
         public static void CopyLayerage(CanvasDevice customDevice, Layerage layerage)
         {
             //
-            ILayer layerage2 = layerage.Self;
-            ILayer clone2 = layerage2.Clone(customDevice);
+            ILayer layer = layerage.Self;
+            ILayer clone2 = layer.Clone(customDevice);
             Clipboard.Instances.Add(clone2);
             //
 
@@ -48,14 +48,14 @@ namespace Retouch_Photo2.Layers
 
         private static void _copyLayerage(CanvasDevice customDevice, IList<Layerage> children)
         {
-            foreach (Layerage child in children)
+            foreach (Layerage layerage in children)
             {
-                LayerageCollection._copyLayerage(customDevice, child.Children);
+                LayerageCollection._copyLayerage(customDevice, layerage.Children);
 
                 //
-                ILayer child2 = child.Self;
-                ILayer clone2 = child2.Clone(customDevice);
-                Clipboard.Instances.Add(clone2);
+                ILayer layer = layerage.Self;
+                ILayer clone = layer.Clone(customDevice);
+                Clipboard.Instances.Add(clone);
                 //
             }
         }

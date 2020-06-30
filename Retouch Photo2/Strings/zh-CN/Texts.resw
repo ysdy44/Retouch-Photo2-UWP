@@ -151,7 +151,7 @@
     <value>下划线</value>
   </data>
   <data name="FontWeight" xml:space="preserve">
-    <value>字体权重</value>
+    <value>字体粗细</value>
   </data>
   <data name="FontWeight_Black" xml:space="preserve">
     <value>黑体</value>

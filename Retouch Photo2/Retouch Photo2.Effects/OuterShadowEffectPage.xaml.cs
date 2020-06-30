@@ -487,12 +487,10 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.StartingOuterShadow_Color;
                     history.UndoAction += () =>
                     {
-                        ILayer layer2 = layerage.Self;
-
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
-                        layer2.Effect.OuterShadow_Color = previous;
+                        layer.Effect.OuterShadow_Color = previous;
                     };
 
                     //Refactoring
@@ -558,12 +556,10 @@ namespace Retouch_Photo2.Effects.Models
                     var previous = layer.Effect.StartingOuterShadow_Color;
                     history.UndoAction += () =>
                     {
-                        ILayer layer2 = layerage.Self;
-
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
-                        layer2.Effect.OuterShadow_Color = previous;
+                        layer.Effect.OuterShadow_Color = previous;
                     };
 
                     //Refactoring

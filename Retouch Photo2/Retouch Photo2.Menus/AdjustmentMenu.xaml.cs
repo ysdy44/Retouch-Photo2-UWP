@@ -391,17 +391,14 @@ namespace Retouch_Photo2.Menus.Models
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
-
-
+                
                 var previous = layer.Filter.Clone();
                 history.UndoAction += () =>
                 {
-                    ILayer layer2 = layerage.Self;
-
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layer.IsRefactoringIconRender = true;
-                    layer2.Filter = previous.Clone();
+                    layer.Filter = previous.Clone();
                 };
 
 
