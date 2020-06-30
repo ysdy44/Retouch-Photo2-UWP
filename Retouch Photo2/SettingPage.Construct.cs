@@ -21,6 +21,8 @@ namespace Retouch_Photo2
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.TitleTextBlock.Text = resource.GetString("/$SettingPage/Title");
+            this.BackToolTip.Content = resource.GetString("/$SettingPage/Page_Back");
+            this.AboutToolTip.Content = resource.GetString("/$SettingPage/Page_About");
 
             this.ThemeTextBlock.Text = resource.GetString("/$SettingPage/Theme");
             this.LightRadioButton.Content = resource.GetString("/$SettingPage/Theme_Light");

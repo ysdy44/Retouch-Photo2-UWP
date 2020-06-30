@@ -48,7 +48,7 @@ namespace Retouch_Photo2
 
 
             //DrawLayout
-            this.DrawLayout.RightAddButton.Click += (s, e) => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImager);//Navigate   
+            this.DrawLayout.RightPhotosButton.Click += (s, e) => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImager);//Navigate   
             this.DrawLayout.IsFullScreenChanged += (isFullScreen) =>
             {
                 Vector2 offset = this.SettingViewModel.FullScreenOffset;

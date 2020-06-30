@@ -122,7 +122,7 @@
                         <Setter Target = "RightBorder.Margin" Value="0,20"/>
                         <Setter Target = "RightBorder.BorderThickness" Value="1,1,0,1"/>
 
-                        <Setter Target = "WidthButton.Visibility" Value="Visible"/>
+                        <Setter Target = "_RightWidthButton.Visibility" Value="Visible"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -248,16 +248,22 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="42"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="42"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="_RightAddButton" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                <Button x:Name="_RightPhotosButton" Style="{StaticResource AppButtonStyle}">
+                    <ToolTipService.ToolTip>
+                        <ToolTip x:Name="_RightPhotosToolTip" Placement="Left" Style="{StaticResource AppToolTipStyle}"/>
+                    </ToolTipService.ToolTip>
                     <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>
                 <Border x:Name="RightCenterBorder" Grid.Row="1"/>
-                <Button x:Name="WidthButton" Visibility="Collapsed" Grid.Row="2" Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                    <FontIcon x:Name="WidthIcon" Glyph="&#xE127;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                <Button x:Name="_RightWidthButton" Visibility="Collapsed" Grid.Row="2" Style="{StaticResource AppButtonStyle}">
+                    <ToolTipService.ToolTip>
+                        <ToolTip x:Name="_RightWidthToolTip" Placement="Left" Style="{StaticResource AppToolTipStyle}"/>
+                    </ToolTipService.ToolTip>
+                    <FontIcon x:Name="RightWidthIcon" Glyph="&#xE127;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>
             </Grid>
 

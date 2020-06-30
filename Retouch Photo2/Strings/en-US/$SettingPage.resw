@@ -147,7 +147,6 @@
   <data name="Key_MoveDown" xml:space="preserve">
     <value>Canvas Down</value>
   </data>
-
   <data name="Key_EditCut" xml:space="preserve">
     <value>Cut</value>
   </data>
@@ -184,9 +183,6 @@
   <data name="Key_EditUndo" xml:space="preserve">
     <value>Undo</value>
   </data>
-
-
-
   <data name="DeviceLayout" xml:space="preserve">
     <value>DeviceLayout</value>
   </data>
@@ -240,5 +236,11 @@
   </data>
   <data name="LayersHeightTip" xml:space="preserve">
     <value>Click to change the layer control height</value>
+  </data>
+  <data name="Page_About" xml:space="preserve">
+    <value>About...</value>
+  </data>
+  <data name="Page_Back" xml:space="preserve">
+    <value>Back</value>
   </data>
 </root>

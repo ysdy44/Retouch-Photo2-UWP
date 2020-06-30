@@ -24,6 +24,12 @@
     </Page.Transitions>
 
 
+    <Page.Resources>
+        <!--Extension-->
+        <elements:ApplicationViewTitleBarBackgroundExtension x:Name="AVTBBE" TitleBarColor="{ThemeResource AppForegroundColor}"/>
+    </Page.Resources>
+    
+
     <Grid>
 
         <!--VisualState-->
@@ -32,6 +38,13 @@
 
                 <!--Normal-->
                 <VisualState x:Name="Normal"/>
+
+                <!--ZeroPhotos-->
+                <VisualState x:Name="ZeroPhotos">
+                    <VisualState.Setters>
+                        <Setter Target = "ZeroAddBorder.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
 
                 <!--AddImageLayer-->
                 <VisualState x:Name="AddImageLayer">
@@ -80,7 +93,7 @@
 
 
         <!--Body-->
-        <ScrollViewer x:Name="ScrollViewer" Grid.RowSpan="3">
+        <Border Grid.RowSpan="3">
             <GridView x:Name="GridView" IsItemClickEnabled="True" ReorderMode="Disabled" SelectionMode="Single">
 
                 <GridView.ItemTemplate>
@@ -107,7 +120,14 @@
                 </GridView.Footer>
                 
             </GridView>
-        </ScrollViewer>
+        </Border>
+
+        <Border x:Name="ZeroAddBorder" Visibility="Collapsed" Grid.Row="1" Width="100" Height="100" HorizontalAlignment="Center">
+            <Button x:Name="ZeroAddButton" Style="{StaticResource AppButtonStyle}">
+                <FontIcon Glyph="&#xEB9F;" FontSize="44" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+            </Button>
+        </Border>
+
 
         <!--Foot-->
         <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2" Visibility="Collapsed" Background="{ThemeResource AppForeground}">
@@ -143,7 +163,10 @@
                 <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="BackButton" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
+            <Button x:Name="BackButton" Style="{StaticResource AppButtonStyle}">
+                <ToolTipService.ToolTip>
+                    <ToolTip x:Name="BackToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
                 <Button.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
@@ -160,7 +183,10 @@
                 </TextBlock.Transitions>
             </TextBlock>
 
-            <Button x:Name="AddButton" Grid.Column="2" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
+            <Button x:Name="AddButton" Grid.Column="2" Style="{StaticResource AppButtonStyle}">
+                <ToolTipService.ToolTip>
+                    <ToolTip x:Name="AddToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
                 <Button.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>

@@ -36,6 +36,9 @@ namespace Retouch_Photo2
 
 
             this.TitleTextBlock.Text = this.Title;
+            this.DocumentationToolTip.Content = resource.GetString("/$MainPage/Page_Documentation");
+            this.SettingToolTip.Content = resource.GetString("/$MainPage/Page_Setting");
+
 
             this.SelectItemsTextBlock.Text = resource.GetString("/$MainPage/Select_Items");
             this.SelectAllButton.Content = resource.GetString("/$MainPage/Select_All");

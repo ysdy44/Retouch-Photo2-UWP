@@ -186,6 +186,12 @@
   <data name="Initial_Tip" xml:space="preserve">
     <value>没有项目？你可以...</value>
   </data>
+  <data name="Page_Documentation" xml:space="preserve">
+    <value>打开文档网页</value>
+  </data>
+  <data name="Page_Setting" xml:space="preserve">
+    <value>打开设置页面</value>
+  </data>
   <data name="Pictures" xml:space="preserve">
     <value>图片</value>
   </data>

@@ -131,7 +131,10 @@
                         <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button x:Name="DocumentationButton" Grid.Column="0" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
+                    <Button x:Name="DocumentationButton" Grid.Column="0" Style="{StaticResource AppButtonStyle}">
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="DocumentationToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                        </ToolTipService.ToolTip>
                         <Button.Transitions>
                             <TransitionCollection>
                                 <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
@@ -148,7 +151,10 @@
                         </TextBlock.Transitions>
                     </TextBlock>
 
-                    <Button x:Name="SettingButton" Grid.Column="2" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent">
+                    <Button x:Name="SettingButton" Grid.Column="2" Style="{StaticResource AppButtonStyle}">
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="SettingToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                        </ToolTipService.ToolTip>
                         <Button.Transitions>
                             <TransitionCollection>
                                 <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>

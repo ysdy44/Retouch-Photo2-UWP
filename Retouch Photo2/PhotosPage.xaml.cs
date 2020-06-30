@@ -59,6 +59,7 @@ namespace Retouch_Photo2
 
 
         //@VisualState
+        int _vsPhotosCount = 0;
         Photo _vsPhoto = null;
         PhotosPageMode _vsMode = PhotosPageMode.None;
         /// <summary> 
@@ -68,6 +69,8 @@ namespace Retouch_Photo2
         {
             get
             {
+                if (this._vsPhotosCount ==0) return this.ZeroPhotos;
+
                 switch (this._vsMode)
                 {
                     case PhotosPageMode.None: return this.Normal;
@@ -97,66 +100,38 @@ namespace Retouch_Photo2
             this.ConstructGridView();
             this.ConstructDragAndDrop();
 
+
             this.BackButton.Click += (s, e) => this.Frame.GoBack();
             this.AddButton.Click += async (s, e) => await this.PickAndCopySingleImageFileAsync();
-            
-
-            this.AddImageLayerButton.Click += (s, e) =>
+            this.ZeroAddButton.Click += async (s, e) =>
             {
-                //Photo
-                Photo photo = this._vsPhoto;
-                Retouch_Photo2.PhotosPage.AddCallBack?.Invoke(photo);//Delegate
+                await this.PickAndCopySingleImageFileAsync();
 
-                this.Frame.GoBack();
+                this._vsPhotosCount = Photo.Instances.Count;
+                this.VisualState = this.VisualState;//State
             };
 
-            this.FillImageButton.Click += (s, e) =>
-            {
-                //Photo
-                Photo photo = this._vsPhoto;
-                Retouch_Photo2.PhotosPage.FillImageCallBack?.Invoke(photo);//Delegate
 
-                this.Frame.GoBack();
-            };
-            this.StrokeImageButton.Click += (s, e) =>
-            {
-                //Photo
-                Photo photo = this._vsPhoto;
-                Retouch_Photo2.PhotosPage.StrokeImageCallBack?.Invoke(photo);//Delegate
+            this.AddImageLayerButton.Click += (s, e) => this.ButtonClick(PhotosPageMode.AddImager);
 
-                this.Frame.GoBack();
-            };
+            this.FillImageButton.Click += (s, e) => this.ButtonClick(PhotosPageMode.FillImage);
+            this.StrokeImageButton.Click += (s, e) => this.ButtonClick(PhotosPageMode.StrokeImage);
 
-            this.SelectImageButton.Click += (s, e) =>
-            {
-                //Photo
-                Photo photo = this._vsPhoto;
-                Retouch_Photo2.PhotosPage.SelectCallBack?.Invoke(photo);//Delegate
-
-                this.Frame.GoBack();
-            };
-            this.ReplaceImageButton.Click += (s, e) =>
-            {
-                //Photo
-                Photo photo = this._vsPhoto;
-                Retouch_Photo2.PhotosPage.ReplaceCallBack?.Invoke(photo);//Delegate
-
-                this.Frame.GoBack();
-            };
+            this.SelectImageButton.Click += (s, e) => this.ButtonClick(PhotosPageMode.SelectImage);
+            this.ReplaceImageButton.Click += (s, e) => this.ButtonClick(PhotosPageMode.ReplaceImage);
         }
 
         /// <summary> The current page becomes the active page. </summary>
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //Extension
+            this.AVTBBE.Invalidate();
+
             if (e.Parameter is PhotosPageMode mode)
-            {
+            {                
+                this._vsPhotosCount = Photo.Instances.Count;
                 this._vsMode = mode;
                 this.VisualState = this.VisualState;//State
-
-                if (Photo.Instances.Count == 0)
-                {
-                    await this.PickAndCopySingleImageFileAsync();
-                }
             }
         }
         /// <summary> The current page no longer becomes an active page. </summary>

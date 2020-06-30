@@ -40,11 +40,20 @@ namespace Retouch_Photo2.Elements.DrawPages
         //Right
         /// <summary> RightCenterBorder's Child. </summary>
         public UIElement RightCenterPanel { get => this.RightCenterBorder.Child; set => this.RightCenterBorder.Child = value; }
-        /// <summary> RightAddButton. </summary>   
-        public Button RightAddButton => this._RightAddButton;
+        /// <summary> RightPhotosButton. </summary>   
+        public Button RightPhotosButton => this._RightPhotosButton;
+        /// <summary> RightPhotosToolTip. </summary>   
+        public ToolTip RightPhotosToolTip => this._RightPhotosToolTip;
+        /// <summary> RightWidthButton. </summary>   
+        public Button RightWidthButton => this._RightWidthButton;
+        /// <summary> RightWidthToolTip. </summary>   
+        public ToolTip RightWidthToolTip => this._RightWidthToolTip;
 
-        
+
         //@Construct
+        /// <summary>
+        /// Initializes a DrawLayout. 
+        /// </summary>
         public DrawLayout()
         {
             this.InitializeComponent();
@@ -65,16 +74,16 @@ namespace Retouch_Photo2.Elements.DrawPages
             Storyboard.SetTarget(this.WidthKeyFrames, this.RightBorder);
             Storyboard.SetTargetProperty(this.WidthKeyFrames, "(UIElement.Width)");
 
-            this.WidthButton.Click += (s, e) =>
+            this._RightWidthButton.Click += (s, e) =>
             {
                 if (this.RightBorder.ActualWidth < 100)
                 {
-                    this.WidthIcon.Glyph = "\uE126";
+                    this.RightWidthIcon.Glyph = "\uE126";
                     this.WidthFrame.Value = 220;
                 }
                 else
                 {
-                    this.WidthIcon.Glyph = "\uE127";
+                    this.RightWidthIcon.Glyph = "\uE127";
                     this.WidthFrame.Value = 70;
                 }
                 this.WidthStoryboard.Begin();//Storyboard

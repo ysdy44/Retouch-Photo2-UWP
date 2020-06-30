@@ -33,7 +33,6 @@
                         
                         <!--Body-->
                         <Setter Target = "InitialBorder.Visibility" Value="Visible"/>
-                        <Setter Target = "ScrollViewer.Visibility" Value="Collapsed"/>
 
                         <!--Foot-->
                         <Setter Target = "RadiusAnimaPanel.Visibility" Value="Collapsed"/>
@@ -176,10 +175,7 @@
 
         
         <!--Body-->
-        <Border x:Name="InitialBorder" Grid.Row="1" Grid.RowSpan="2" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
-        </Border>
-
-        <ScrollViewer x:Name="ScrollViewer" Grid.RowSpan="3" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <Border Grid.RowSpan="3">
             <GridView x:Name="GridView" ReorderMode="Disabled" SelectionMode="None">
 
                 <GridView.Header>
@@ -200,7 +196,10 @@
                 </GridView.Footer>
                 
             </GridView>
-        </ScrollViewer>
+        </Border>
+        
+        <Border x:Name="InitialBorder" Grid.Row="1" Grid.RowSpan="2" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
+        </Border>
 
 
         <!--Foot-->        

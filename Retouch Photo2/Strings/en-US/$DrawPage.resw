@@ -207,4 +207,10 @@
   <data name="RenameDialog_PlaceholderText" xml:space="preserve">
     <value>Enter a name here.</value>
   </data>
+  <data name="Page_Photos" xml:space="preserve">
+    <value>Open Photos Page</value>
+  </data>
+  <data name="Page_Width" xml:space="preserve">
+    <value>Switch Layout Widths</value>
+  </data>
 </root>

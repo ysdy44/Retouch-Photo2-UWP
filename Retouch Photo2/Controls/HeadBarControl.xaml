@@ -88,7 +88,7 @@
 
 
         <!--Document-->
-        <Button x:Name="_DocumentButton" Width="Auto" FontWeight="Bold" Padding="10, 0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Foreground="{ThemeResource AppText}"/>
+        <Button x:Name="_DocumentButton" Padding="10, 0" FontWeight="Bold" Style="{StaticResource AppButtonStyle}"/>
 
 
         <!--ExpandAppbar-->

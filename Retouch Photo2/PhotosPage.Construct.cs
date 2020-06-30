@@ -23,6 +23,8 @@ namespace Retouch_Photo2
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.TitleTextBlock.Text = resource.GetString("/$PhotosPage/Title");
+            this.BackToolTip.Content = resource.GetString("/$PhotosPage/Page_Back");
+            this.AddToolTip.Content = resource.GetString("/$PhotosPage/Page_Add");
 
             this.AddImageLayerButton.Content = resource.GetString("/$PhotosPage/AddImage");
 
@@ -104,6 +106,40 @@ namespace Retouch_Photo2
             if (copyFile == null) return;
             Photo photo = await Photo.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
             Photo.DuplicateChecking(photo);
+        }
+               
+
+        private void ButtonClick(PhotosPageMode mode)
+        {
+            //Photo
+            Photo photo = this._vsPhoto;
+
+            switch (mode)
+            {
+                case PhotosPageMode.None:
+                    return;
+                case PhotosPageMode.AddImager:
+                    Retouch_Photo2.PhotosPage.AddCallBack?.Invoke(photo);//Delegate
+                    break;
+
+                case PhotosPageMode.FillImage:
+                    Retouch_Photo2.PhotosPage.FillImageCallBack?.Invoke(photo);//Delegate
+                    break;
+                case PhotosPageMode.StrokeImage:
+                    Retouch_Photo2.PhotosPage.StrokeImageCallBack?.Invoke(photo);//Delegate
+                    break;
+
+                case PhotosPageMode.SelectImage:
+                    Retouch_Photo2.PhotosPage.SelectCallBack?.Invoke(photo);//Delegate
+                    break;
+                case PhotosPageMode.ReplaceImage:
+                    Retouch_Photo2.PhotosPage.ReplaceCallBack?.Invoke(photo);//Delegate
+                    break;
+                default:
+                    return;
+            }
+
+            this.Frame.GoBack();
         }
 
     }

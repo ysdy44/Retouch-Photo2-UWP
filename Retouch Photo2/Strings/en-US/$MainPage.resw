@@ -186,6 +186,12 @@
   <data name="Initial_Tip" xml:space="preserve">
     <value>No projects? You could...</value>
   </data>
+  <data name="Page_Documentation" xml:space="preserve">
+    <value>Open Documentation Web Page</value>
+  </data>
+  <data name="Page_Setting" xml:space="preserve">
+    <value>Open Setting Page</value>
+  </data>
   <data name="Pictures" xml:space="preserve">
     <value>Pictures</value>
   </data>

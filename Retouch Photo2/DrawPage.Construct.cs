@@ -23,7 +23,10 @@ namespace Retouch_Photo2
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-            
+
+            this.DrawLayout.RightPhotosToolTip.Content = resource.GetString("/$DrawPage/Page_Photos");
+            this.DrawLayout.RightWidthToolTip.Content = resource.GetString("/$DrawPage/Page_Width");
+
             this.SetupDialog.Title = resource.GetString("/$DrawPage/SetupDialog_Title");
             this.SetupDialog.CloseButton.Content = resource.GetString("/$DrawPage/SetupDialog_Close");
             this.SetupDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/SetupDialog_Primary");

@@ -123,6 +123,12 @@
   <data name="FillImage" xml:space="preserve">
     <value>Fill</value>
   </data>
+  <data name="Page_Add" xml:space="preserve">
+    <value>Add Local Photo</value>
+  </data>
+  <data name="Page_Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
   <data name="ReplaceImage" xml:space="preserve">
     <value>Replace</value>
   </data>

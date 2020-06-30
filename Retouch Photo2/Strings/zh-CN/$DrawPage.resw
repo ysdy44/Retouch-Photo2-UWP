@@ -207,4 +207,10 @@
   <data name="RenameDialog_PlaceholderText" xml:space="preserve">
     <value>在此输入名字</value>
   </data>
+  <data name="Page_Photos" xml:space="preserve">
+    <value>打开图库页面</value>
+  </data>
+  <data name="Page_Width" xml:space="preserve">
+    <value>切换布局宽度</value>
+  </data>
 </root>

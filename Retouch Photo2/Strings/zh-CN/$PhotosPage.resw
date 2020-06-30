@@ -123,6 +123,12 @@
   <data name="FillImage" xml:space="preserve">
     <value>填充</value>
   </data>
+  <data name="Page_Add" xml:space="preserve">
+    <value>添加本地图片</value>
+  </data>
+  <data name="Page_Back" xml:space="preserve">
+    <value>返回</value>
+  </data>
   <data name="ReplaceImage" xml:space="preserve">
     <value>替换</value>
   </data>

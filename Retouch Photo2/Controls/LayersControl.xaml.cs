@@ -83,6 +83,7 @@ namespace Retouch_Photo2.Controls
 
                 this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
                 LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
                 this.ViewModel.Invalidate();//Invalidate
             };
         }

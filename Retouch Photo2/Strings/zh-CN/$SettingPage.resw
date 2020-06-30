@@ -237,4 +237,10 @@
   <data name="LayersHeightTip" xml:space="preserve">
     <value>单击以更改图层控件高度</value>
   </data>
+  <data name="Page_About" xml:space="preserve">
+    <value>关于...</value>
+  </data>
+  <data name="Page_Back" xml:space="preserve">
+    <value>返回</value>
+  </data>
 </root>
