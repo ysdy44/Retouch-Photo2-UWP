@@ -1,0 +1,105 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Elements.Photo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    Width="150"
+    Height="Auto"
+    Padding="4"
+    >
+
+
+    <UserControl.Resources>
+        <!--Storyboard-->
+        <Storyboard x:Name="ShowStoryboard">
+            <DoubleAnimation Duration="0:0:0.6" To="1.0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="BackgroundDropShadowPanel" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="0:0:0.6" To="1.04" Storyboard.TargetProperty="ScaleX" Storyboard.TargetName="ScaleTransform" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="0:0:0.6" To="1.04" Storyboard.TargetProperty="ScaleY" Storyboard.TargetName="ScaleTransform" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="FadeStoryboard">
+            <DoubleAnimation Duration="0:0:0.4" To="0.0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="BackgroundDropShadowPanel" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="0:0:0.4" To="1.0" Storyboard.TargetProperty="ScaleX" Storyboard.TargetName="ScaleTransform" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="0:0:0.4" To="1.0" Storyboard.TargetProperty="ScaleY" Storyboard.TargetName="ScaleTransform" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </UserControl.Resources>
+
+
+    <Grid x:Name="RootGrid" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+             
+        <!--Shadow-->
+        <controls:DropShadowPanel x:Name="BackgroundDropShadowPanel" 
+                 IsHitTestVisible="False" Grid.Row="1" Opacity="0.0" Margin="12,8"
+                 BlurRadius="32" ShadowOpacity="1.0" OffsetX="0" OffsetY="2"
+                 Color="{ThemeResource AppStrokeColor}">
+            <Rectangle x:Name="BackgroundRectangle" Fill="Gray"/>
+        </controls:DropShadowPanel>
+
+        <!--Image-->
+        <controls:ImageEx x:Name="Image"
+               IsHitTestVisible="False" Grid.Row="1" Margin="12,8" Stretch="Uniform"
+               Background="White"
+               RenderTransformOrigin="0.5,0.5"
+               Source="{x:Bind ImageFilePath}"
+              >
+            <controls:ImageEx.RenderTransform>
+                <ScaleTransform x:Name="ScaleTransform" ScaleX="1" ScaleY="1"/>
+            </controls:ImageEx.RenderTransform>
+        </controls:ImageEx>
+
+        <!--Flag
+        <elements:SampleStateFlag Grid.Row="1" State="{x:Bind State}"/>
+         -->
+
+        <Grid Grid.Row="2" Margin="12,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Name-->
+            <TextBlock x:Name="NameTextBlock" FontWeight="Medium" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}"
+               Text="{x:Bind Name}"/>
+
+            <!--Button-->
+            <Button x:Name="FlyoutButton" Grid.Column="1" Width="36" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{ThemeResource EllipsisButton}">
+                <FontIcon Glyph="&#xE946;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
+            </Button>
+            
+        </Grid>
+
+    </Grid>
+</UserControl>

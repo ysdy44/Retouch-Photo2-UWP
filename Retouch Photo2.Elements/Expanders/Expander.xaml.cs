@@ -79,6 +79,9 @@ namespace Retouch_Photo2.Elements
 
 
         //@Construct     
+        /// <summary>
+        /// Initializes a Expander. 
+        /// </summary>
         public Expander()
         {
             this.InitializeComponent();

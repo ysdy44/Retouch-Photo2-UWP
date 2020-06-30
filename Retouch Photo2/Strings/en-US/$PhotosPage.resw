@@ -117,26 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddImage" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="FillImage" xml:space="preserve">
-    <value>Fill</value>
-  </data>
   <data name="Page_Add" xml:space="preserve">
     <value>Add Local Photo</value>
   </data>
   <data name="Page_Back" xml:space="preserve">
     <value>Back</value>
-  </data>
-  <data name="ReplaceImage" xml:space="preserve">
-    <value>Replace</value>
-  </data>
-  <data name="SelectImage" xml:space="preserve">
-    <value>Select</value>
-  </data>
-  <data name="StrokeImage" xml:space="preserve">
-    <value>Stroke</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Gallery</value>

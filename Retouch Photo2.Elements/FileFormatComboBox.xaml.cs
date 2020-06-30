@@ -59,6 +59,9 @@ namespace Retouch_Photo2.Elements
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a FileFormatComboBox. 
+        /// </summary>
         public FileFormatComboBox()
         {
             this.InitializeComponent();

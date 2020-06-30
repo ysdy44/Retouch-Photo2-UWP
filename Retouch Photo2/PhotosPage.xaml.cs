@@ -60,7 +60,6 @@ namespace Retouch_Photo2
 
         //@VisualState
         int _vsPhotosCount = 0;
-        Photo _vsPhoto = null;
         PhotosPageMode _vsMode = PhotosPageMode.None;
         /// <summary> 
         /// Represents the visual appearance of UI elements in a specific state.
@@ -70,25 +69,13 @@ namespace Retouch_Photo2
             get
             {
                 if (this._vsPhotosCount ==0) return this.ZeroPhotos;
-
-                switch (this._vsMode)
-                {
-                    case PhotosPageMode.None: return this.Normal;
-
-                    case PhotosPageMode.AddImager: return this.AddImageLayer;
-
-                    case PhotosPageMode.FillImage: return this.FillImage;
-                    case PhotosPageMode.StrokeImage: return this.StrokeImage;
-
-                    case PhotosPageMode.SelectImage: return this.SelectImage;
-                    case PhotosPageMode.ReplaceImage: return this.ReplaceImage;
-                }
+                             
                 return this.Normal;
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
 
-
+        
         //@Construct
         /// <summary>
         /// Initializes a PhotosPage. 
@@ -97,8 +84,8 @@ namespace Retouch_Photo2
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructGridView();
             this.ConstructDragAndDrop();
+            this.GridView.ItemsSource = Photo.Instances;
 
 
             this.BackButton.Click += (s, e) => this.Frame.GoBack();
@@ -112,13 +99,26 @@ namespace Retouch_Photo2
             };
 
 
-            this.AddImageLayerButton.Click += (s, e) => this.ButtonClick(PhotosPageMode.AddImager);
+            #region Photo
 
-            this.FillImageButton.Click += (s, e) => this.ButtonClick(PhotosPageMode.FillImage);
-            this.StrokeImageButton.Click += (s, e) => this.ButtonClick(PhotosPageMode.StrokeImage);
+            Photo.ItemClick += (sender, photo) =>
+            {
+                this.ButtonClick(photo, this._vsMode);
+            };
 
-            this.SelectImageButton.Click += (s, e) => this.ButtonClick(PhotosPageMode.SelectImage);
-            this.ReplaceImageButton.Click += (s, e) => this.ButtonClick(PhotosPageMode.ReplaceImage);
+            Photo.FlyoutShow += (sender, photo) =>
+            {
+                FrameworkElement element = (FrameworkElement)sender;
+                this.Billboard.CalculatePostion(element);
+                this.Billboard.Photo = photo;
+
+                this.BillboardCanvas.Visibility = Visibility.Visible;
+            };
+
+            this.BillboardCanvas.Tapped += (s, e) => this.BillboardCanvas.Visibility = Visibility.Collapsed;
+            this.BillboardCanvas.Visibility = Visibility.Collapsed;
+
+            #endregion
         }
 
         /// <summary> The current page becomes the active page. </summary>

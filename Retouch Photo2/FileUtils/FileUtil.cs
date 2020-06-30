@@ -20,10 +20,16 @@ namespace Retouch_Photo2
         /// </summary>
         public static async Task DeleteInTemporaryFolder()
         {
-            IReadOnlyList<StorageFile> items = await ApplicationData.Current.TemporaryFolder.GetFilesAsync();
-            foreach (StorageFile item in items)
+            try
             {
-                await item.DeleteAsync();
+                IReadOnlyList<StorageFile> items = await ApplicationData.Current.TemporaryFolder.GetFilesAsync();
+                foreach (StorageFile item in items)
+                {
+                    await item.DeleteAsync();
+                }
+            }
+            catch (Exception)
+            {
             }
         }
 

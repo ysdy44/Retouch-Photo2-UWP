@@ -5,13 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Elements
 {
     /// <summary>
-    /// Represents a photothat contains dpi, width, height information.
+    /// Represents a photo that contains dpi, width, height information.
     /// </summary>
-    public partial class Photo
+    public partial class Photo : UserControl
     {
 
         //@Static

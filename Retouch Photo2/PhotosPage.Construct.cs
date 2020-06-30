@@ -25,43 +25,8 @@ namespace Retouch_Photo2
             this.TitleTextBlock.Text = resource.GetString("/$PhotosPage/Title");
             this.BackToolTip.Content = resource.GetString("/$PhotosPage/Page_Back");
             this.AddToolTip.Content = resource.GetString("/$PhotosPage/Page_Add");
-
-            this.AddImageLayerButton.Content = resource.GetString("/$PhotosPage/AddImage");
-
-            this.FillImageButton.Content = resource.GetString("/$PhotosPage/FillImage");
-            this.StrokeImageButton.Content = resource.GetString("/$PhotosPage/StrokeImage");
-
-            this.SelectImageButton.Content = resource.GetString("/$PhotosPage/SelectImage");
-            this.ReplaceImageButton.Content = resource.GetString("/$PhotosPage/ReplaceImage");
         }
-
-
-        //GridView
-        private void ConstructGridView()
-        {
-            this.GridView.ItemsSource = Photo.Instances;
-            this.GridView.ItemClick += async (s, e) =>
-            {
-                if (e.ClickedItem is Photo photo)
-                {
-                    if (this._vsPhoto == photo)
-                    {
-                        this._vsPhoto = null;
-                        this.RadiusAnimaPanel.Visibility = Visibility.Collapsed;
-                        this.GridView.SelectionMode = ListViewSelectionMode.None;
-                        await Task.Delay(100);
-                        this.GridView.SelectionMode = ListViewSelectionMode.Single;
-                    }
-                    else
-                    {
-                        this._vsPhoto = photo;
-                        this.TextBlock.Text = $"{photo.Name}{photo.FileType}";
-                        this.RadiusAnimaPanel.Visibility = Visibility.Visible;
-                    }
-                }
-            };
-        }
-
+        
 
         //DragAndDrop
         private void ConstructDragAndDrop()
@@ -97,6 +62,7 @@ namespace Retouch_Photo2
             StorageFile copyFile = await FileUtil.PickAndCopySingleImageFileAsync(PickerLocationId.Desktop);
             if (copyFile == null) return;
             Photo photo = await Photo.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
+            if (photo == null) return;
             Photo.DuplicateChecking(photo);
         }
         private async Task CopySingleImageFileAsync(IStorageItem item)
@@ -107,13 +73,10 @@ namespace Retouch_Photo2
             Photo photo = await Photo.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
             Photo.DuplicateChecking(photo);
         }
-               
 
-        private void ButtonClick(PhotosPageMode mode)
+
+        private void ButtonClick(Photo photo, PhotosPageMode mode)
         {
-            //Photo
-            Photo photo = this._vsPhoto;
-
             switch (mode)
             {
                 case PhotosPageMode.None:

@@ -1,0 +1,62 @@
+﻿<UserControl
+    x:Name="UserControl"
+    x:Class="Retouch_Photo2.Elements.Billboard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
+    mc:Ignorable="d"
+    HorizontalAlignment="Left"
+    VerticalAlignment="Top"
+    Padding="12"
+    Width="200"
+    BorderThickness="1" 
+    BorderBrush="{ThemeResource AppBorderBrush}" 
+    Background="{ThemeResource AppBackground}" 
+    extensions:VisualExtensions.CenterPoint="100,100,0"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    >
+
+    
+    <!--Visibility:Show-->
+    <animations:Implicit.ShowAnimations>
+        <animations:Vector3Animation Target="Scale" Duration="0:0:0.3" To="1.0"/>
+        <animations:OpacityAnimation Duration="0:0:0.3" From="0.0" To="1.0"/>
+    </animations:Implicit.ShowAnimations>
+
+    <!--Visibility:Hide-->
+    <animations:Implicit.HideAnimations>
+        <animations:Vector3Animation Target="Scale" Duration="0:0:0.5" To="0.6"/>
+        <animations:OpacityAnimation Duration="0:0:0.5" From="1.0" To="0.0"/>
+    </animations:Implicit.HideAnimations>
+
+    
+    <controls:DropShadowPanel x:Name="BackgroundDropShadowPanel"
+                 BlurRadius="32" ShadowOpacity="0.4" OffsetX="2" OffsetY="4"
+                 Color="{ThemeResource AppStrokeColor}">
+    
+        <Border 
+            Width="{x:Bind UserControl.Width,Mode=OneWay}"
+            Padding="{x:Bind UserControl.Padding,Mode=OneWay}"
+            BorderThickness="{x:Bind UserControl.BorderThickness,Mode=OneWay}"
+            BorderBrush="{x:Bind UserControl.BorderBrush,Mode=OneWay}"
+            Background="{x:Bind UserControl.Background,Mode=OneWay}"
+            >
+            <StackPanel>
+                <controls:ImageEx x:Name="Image" Stretch="Uniform" Background="White"
+                          Source="{x:Bind Photo.ImageFilePath, Mode=OneWay}"/>
+                <ContentControl Height="12"/>
+                <TextBlock x:Name="NameTextbolck" VerticalAlignment="Center" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"
+                          Text="{x:Bind Photo.Name, Mode=OneWay}"/>
+                <ContentControl Height="6"/>
+                <TextBlock x:Name="SummaryTextBlock" TextWrapping="Wrap"
+                          Text="{x:Bind Photo, Mode=OneWay}"/>
+            </StackPanel>
+        </Border>
+        
+    </controls:DropShadowPanel>
+</UserControl>
