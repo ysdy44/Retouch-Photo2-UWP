@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Layers
             {
                 ILayer layer = layerage.Self;
 
-                foreach (Photocopier photocopier in LayerageCollection.GetPhotocopiers(child.Children))
+                foreach (Photocopier photocopier in LayerageCollection.GetPhotocopiers(layerage.Children))
                 {
                     yield return photocopier;
                 }
