@@ -141,39 +141,21 @@ namespace Retouch_Photo2.Elements
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a SilderPicker. 
+        /// </summary>
         public SilderPicker()
         {
             this.InitializeComponent();
-            this.IsEnabledChanged += (s, e) =>
-            {
-                this._vsIsEnabled = this.IsEnabled;
-                this.VisualState = this.VisualState;//State
-            };
+            this.IsEnabledChanged += (s, e) => this.IsEnabledChange();
+            this.Loaded += (s, e) => this.IsEnabledChange();
 
             this.PointerEntered += (s, e) => this.ClickMode = ClickMode.Hover;
             this.PointerPressed += (s, e) => this.ClickMode = ClickMode.Press;
             this.PointerReleased += (s, e) => this.ClickMode = ClickMode.Release;
             this.PointerExited += (s, e) => this.ClickMode = ClickMode.Release;
 
-
-            this.Loaded += (s, e) =>
-            {
-                this.VisualState = this.VisualState;//State
-
-                if (this.Value < this.Minimum)
-                {
-                    this.Value = this.Minimum;
-                }
-                else if (this.Value > this.Maximum)
-                {
-                    this.Value = this.Maximum;
-                }
-                else
-                {
-                    this.Value = this.Value;
-                }
-            };
-
+            
             this.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
@@ -195,6 +177,7 @@ namespace Retouch_Photo2.Elements
                 Canvas.SetTop(this.Thumb2, heightHalf - 10);
                 Canvas.SetTop(this.Thumb1, heightHalf - 9);
             };
+
 
             //Manipulation
             this.RootGrid.ManipulationMode = ManipulationModes.All;
@@ -220,6 +203,19 @@ namespace Retouch_Photo2.Elements
 
                 this.ValueChangeCompleted?.Invoke(this, this.Value);//Delegate
             };
+        }
+        
+        private void IsEnabledChange()
+        {
+            this._vsIsEnabled = this.IsEnabled;
+            this.VisualState = this.VisualState;//State
+
+            if (this.Value < this.Minimum)
+                this.Value = this.Minimum;
+            else if (this.Value > this.Maximum)
+                this.Value = this.Maximum;
+            else
+                this.Value = this.Value;
         }
 
     }
