@@ -236,6 +236,7 @@
     <Compile Include="%24PhotosPages\Photo.xaml.cs">
       <DependentUpon>Photo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XMLs\XML.Photo.cs" />
     <Compile Include="XMLs\XML.Photos.cs" />
     <Compile Include="XMLs\XML.ThemeFactory.cs" />
     <Compile Include="XMLs\XML.DeviceLayout.cs" />

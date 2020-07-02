@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            this.Mid = (float)element.Element("Mid");
+            if (element.Element("Mid") is XElement mid) this.Mid = (float)mid;
         }
 
 

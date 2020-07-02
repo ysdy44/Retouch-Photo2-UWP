@@ -94,24 +94,39 @@ namespace Retouch_Photo2
 
 
             //Load all photos file. 
-            IEnumerable<Photo> photos = XML.LoadPhotosFile();
             Photo.Instances.Clear();
-            foreach (Photo photo in photos)
+            IEnumerable<Photo> photos = XML.LoadPhotosFile();
+            if (photos != null)
             {
-                await photo.ConstructPhotoSource(this.ViewModel.CanvasDevice);
-                Photo.Instances.Add(photo);
+                foreach (Photo photo in photos)
+                {
+                    await photo.ConstructPhotoSource(this.ViewModel.CanvasDevice);
+                    Photo.Instances.Add(photo);
+                }
             }
 
             //Load all layers file. 
-            IEnumerable<ILayer> layers = XML.LoadLayersFile(this.ViewModel.CanvasDevice);
             LayerBase.Instances.Clear();
-            foreach (ILayer layer in layers)
+            IEnumerable<ILayer> layers = XML.LoadLayersFile(this.ViewModel.CanvasDevice);
+            if (layers != null)
             {
-                LayerBase.Instances.Add(layer);
+                foreach (ILayer layer in layers)
+                {
+                    LayerBase.Instances.Add(layer);
+                }
             }
 
             //Load project file. 
             Project project = XML.LoadProjectFile(name);
+            if (project == null)
+            {
+                this.LoadingControl.IsActive = false;
+                this.LoadingControl.State = LoadingState.LoadFailed;
+                await Task.Delay(800);
+                this.LoadingControl.State = LoadingState.None;
+                return;
+            }
+
             this.ViewModel.LoadFromProject(project);
             this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
 

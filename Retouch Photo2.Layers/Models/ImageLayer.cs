@@ -93,7 +93,7 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            this.Photocopier = Retouch_Photo2.Elements.XML.LoadPhotocopier(element.Element("Photocopier"));
+            if (element.Element("Photocopier") is XElement photocopier) this.Photocopier = Retouch_Photo2.Elements.XML.LoadPhotocopier(photocopier);
         }
 
 

@@ -151,7 +151,9 @@ namespace Retouch_Photo2.ViewModels
             else if (this.KeyCtrl && this.KeyShift == false)
                 this.CompositeMode = MarqueeCompositeMode.Subtract;//CompositeMode
             else //if (this.KeyCtrl && this.KeyShift)       
-                this.CompositeMode = MarqueeCompositeMode.Intersect;//CompositeMode
+                this.CompositeMode = MarqueeCompositeMode.New;//CompositeMode
+            //else //if (this.KeyCtrl && this.KeyShift)       
+                //this.CompositeMode = MarqueeCompositeMode.Intersect;//CompositeMode
         }
         
 

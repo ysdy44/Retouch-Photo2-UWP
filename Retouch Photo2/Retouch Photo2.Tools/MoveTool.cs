@@ -105,7 +105,7 @@ namespace Retouch_Photo2.Tools
                 case MarqueeCompositeMode.New: this.MethodViewModel.MethodSelectedNew(selectedLayerage); return true;
                 case MarqueeCompositeMode.Add: this.MethodViewModel.MethodSelectedAdd(selectedLayerage); return true;
                 case MarqueeCompositeMode.Subtract: this.MethodViewModel.MethodSelectedSubtract(selectedLayerage); return true;
-                case MarqueeCompositeMode.Intersect: this.MethodViewModel.MethodSelectedIntersect(selectedLayerage); return true;
+                //case MarqueeCompositeMode.Intersect: this.MethodViewModel.MethodSelectedIntersect(selectedLayerage); return true;
                 default: return false;
             }
         }

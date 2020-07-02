@@ -37,14 +37,20 @@ namespace Retouch_Photo2.Styles
         /// <returns> The loaded <see cref="Style"/>s. </returns>
         public static IEnumerable<StyleCategory> LoadStyleCategorys(XDocument document)
         {
-            XElement root = document.Element("Root");
+            if (document.Element("Root") is XElement root)
+            {
+                if (document.Elements("StyleCategory") is IEnumerable<XElement> styleCategorys)
+                {
+                    return
+                    (
+                        from styleCategory
+                        in styleCategorys
+                        select XML.LoadStyleCategory(styleCategory)
+                    );
+                }
+            }
 
-            return
-            (
-                from styleCategory
-                in root.Elements("StyleCategory")
-                select XML.LoadStyleCategory(styleCategory)
-            );
+            return null;
         }
         
     }

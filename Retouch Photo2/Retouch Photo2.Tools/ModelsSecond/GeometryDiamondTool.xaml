@@ -23,8 +23,8 @@
             <tools:TouchbarButton x:Name="MidTouchbarButton">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="MidTouchbarSlider" 
-                             Number="{x:Bind MidNumberConverter(ViewModel.GeometryDiamondMid),Mode=OneWay}"
-                             Value="{x:Bind MidValueConverter(ViewModel.GeometryDiamondMid),Mode=OneWay}"
+                             Number="{x:Bind MidNumberConverter(SelectionViewModel.GeometryDiamondMid),Mode=OneWay}"
+                             Value="{x:Bind MidValueConverter(SelectionViewModel.GeometryDiamondMid),Mode=OneWay}"
                              />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>

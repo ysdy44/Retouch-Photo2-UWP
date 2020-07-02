@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace Retouch_Photo2.ViewModels
@@ -45,23 +46,31 @@ namespace Retouch_Photo2.ViewModels
         /// <returns> The loaded <see cref="Project"/>. </returns>
         public static Project LoadProject(string name, XDocument document)
         {
-            XElement root = document.Element("Root");
-            XElement rootLayerages= root.Element("Layerages");
-                       
-            Project project =new Project
+            if (document.Element("Root") is XElement root)
             {
-                Name = name,         
-         
-                Layerages =
-                    from layerage
-                    in rootLayerages.Elements("Layerage")
-                    select Retouch_Photo2.Layers.XML.LoadLayerage(layerage)
-            };
+                Project project = new Project
+                {
+                    Name = name,
+                };
 
-            if (root.Element("Width") is XElement width) project.Width = (int)width;
-            if (root.Element("Height") is XElement height) project.Height = (int)height;
+                if (document.Element("Layerages") is XElement layerages)
+                {
+                    if (layerages.Elements("Layerage") is IEnumerable<XElement> layerages2)
+                    {
+                        project.Layerages =
+                            from layerage
+                            in layerages2
+                            select Retouch_Photo2.Layers.XML.LoadLayerage(layerage);
+                    }
+                }
 
-            return project;
+                if (root.Element("Width") is XElement width) project.Width = (int)width;
+                if (root.Element("Height") is XElement height) project.Height = (int)height;
+
+                return project;
+            }
+
+            return null;
         }
 
     }

@@ -38,14 +38,17 @@ namespace Retouch_Photo2.Filters
         /// <returns> The loaded <see cref="Filter"/>s. </returns>
         public static IEnumerable<FilterCategory> LoadFilterCategorys(XDocument document)
         {
-            XElement root = document.Element("Root");
+            if (document.Element("Root") is XElement root)
+            {
+                return
+                (
+                    from filterCategory
+                    in root.Elements("FilterCategory")
+                    select XML.LoadFilterCategory(filterCategory)
+                );
+            }
 
-            return
-            (
-                from filterCategory
-                in root.Elements("FilterCategory")
-                select XML.LoadFilterCategory(filterCategory)
-            );
+            return null;
         }
         
     }

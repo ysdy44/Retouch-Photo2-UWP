@@ -48,7 +48,7 @@
 
 
         //Geometry1
-        /// <summary> Create round-rect, geometry. </summary>
+        /// <summary> Create round-rect geometry. </summary>
         GeometryRoundRect,
         /// <summary> Create triangle geometry. </summary>
         GeometryTriangle,

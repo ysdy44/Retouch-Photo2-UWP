@@ -234,9 +234,9 @@ namespace Retouch_Photo2.Tools.Models
                     case MarqueeCompositeMode.Subtract:
                         if (contained) layer.IsSelected = false;
                         break;
-                    case MarqueeCompositeMode.Intersect:
-                        if (contained == false) layer.IsSelected = false;
-                        break;
+                        //case MarqueeCompositeMode.Intersect:
+                        //if (contained == false) layer.IsSelected = false;
+                        //break;
                 }
             }
         }

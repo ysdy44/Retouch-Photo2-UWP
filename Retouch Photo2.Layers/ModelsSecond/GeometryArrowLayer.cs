@@ -68,12 +68,12 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            this.IsAbsolute = (bool)element.Element("IsAbsolute");
-            this.Width = (float)element.Element("Width");
-            this.Value = (float)element.Element("Value");
+            if (element.Element("IsAbsolute") is XElement isAbsolute) this.IsAbsolute = (bool)isAbsolute;
+            if (element.Element("Width") is XElement width) this.Width = (float)width;
+            if (element.Element("Value") is XElement value) this.Value = (float)value;
 
-            this.LeftTail = FanKit.Transformers.XML.CreateGeometryArrowTailType(element.Element("LeftTail").Value);
-            this.RightTail = FanKit.Transformers.XML.CreateGeometryArrowTailType(element.Element("RightTail").Value);
+            if (element.Element("LeftTail") is XElement leftTail) this.LeftTail = FanKit.Transformers.XML.CreateGeometryArrowTailType(leftTail.Value);
+            if (element.Element("RightTail") is XElement rightTail) this.RightTail = FanKit.Transformers.XML.CreateGeometryArrowTailType(rightTail.Value);
         }
 
 

@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            this.Corner = (float)element.Element("Corner");
+            if (element.Element("Corner") is XElement corner) this.Corner = (float)corner;
         }
 
 

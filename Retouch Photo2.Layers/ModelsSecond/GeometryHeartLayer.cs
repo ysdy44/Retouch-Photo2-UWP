@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            this.Spread = (float)element.Element("Spread");
+            if (element.Element("Spread") is XElement spread) this.Spread = (float)spread;
         }
 
 

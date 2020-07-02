@@ -31,6 +31,8 @@ namespace Retouch_Photo2
                 XDocument document = XDocument.Load(path);
 
                 IEnumerable<ILayer> layers = Retouch_Photo2.Layers.XML.LoadLayers(customDevice, document);
+                if (layers == null) return null;
+
                 return layers;
             }
             catch (Exception)

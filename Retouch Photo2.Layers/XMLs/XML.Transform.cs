@@ -44,7 +44,7 @@ namespace Retouch_Photo2.Layers
         {
             Transform transform = new Transform();
 
-            if (element.Element("Transformer") is XElement Transformer) transform.Transformer = FanKit.Transformers.XML.LoadTransformer(Transformer);
+            if (element.Element("Transformer") is XElement transformer) transform.Transformer = FanKit.Transformers.XML.LoadTransformer(transformer);
 
             if (element.Element("IsCrop") is XElement isCrop) transform.IsCrop = (bool)isCrop;
             if (transform.IsCrop)

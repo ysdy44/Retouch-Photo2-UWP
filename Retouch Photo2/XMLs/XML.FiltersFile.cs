@@ -45,6 +45,7 @@ namespace Retouch_Photo2
                     XDocument document = XDocument.Load(stream);
 
                     IEnumerable<FilterCategory> source = Retouch_Photo2.Filters.XML.LoadFilterCategorys(document);
+                    if (source == null) return null;
 
                     return source;
                 }

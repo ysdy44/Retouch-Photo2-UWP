@@ -168,41 +168,43 @@ namespace Retouch_Photo2.ViewModels
             this.Invalidate();//Invalidate
         }
 
-        public void MethodSelectedIntersect(Layerage selectedLayerage)
+        /*
+    public void MethodSelectedIntersect(Layerage selectedLayerage)
+    {
+        ILayer selectedLayer = selectedLayerage.Self;
+
+        //History
+        LayersPropertyHistory history = new LayersPropertyHistory("Set select mode");
+
+        //Selection
+        this.SetValue((layerage) =>
         {
-            ILayer selectedLayer = selectedLayerage.Self;
-
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set select mode");
-
-            //Selection
-            this.SetValue((layerage) =>
+            if (layerage != selectedLayerage)
             {
-                if (layerage != selectedLayerage)
+                ILayer layer = layerage.Self;
+
+                if (layer.IsSelected == true)
                 {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.IsSelected == true)
+                    //History
+                    var previous = selectedLayer.IsSelected;
+                    history.UndoAction += () =>
                     {
-                        //History
-                        var previous = selectedLayer.IsSelected;
-                        history.UndoAction += () =>
-                        {
-                            selectedLayer.IsSelected = previous;
-                        };
+                        selectedLayer.IsSelected = previous;
+                    };
 
-                        layer.IsSelected = false;
-                    }
+                    layer.IsSelected = false;
                 }
-            });
+            }
+        });
 
-            //History
-            this.HistoryPush(history);
+        //History
+        this.HistoryPush(history);
 
-            this.SetModeSingle(selectedLayerage);//Selection
-            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
-            this.Invalidate();//Invalidate
-        }
+        this.SetModeSingle(selectedLayerage);//Selection
+        LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
+        this.Invalidate();//Invalidate
+    }
+        */
 
 
     }

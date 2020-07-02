@@ -131,7 +131,7 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            base.Nodes = FanKit.Transformers.XML.LoadNodeCollection(element.Element("Nodes"));
+            if (element.Element("Nodes") is XElement nodes) base.Nodes = FanKit.Transformers.XML.LoadNodeCollection(nodes);
         }
 
 

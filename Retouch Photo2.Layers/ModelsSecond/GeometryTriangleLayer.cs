@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            this.Center = (float)element.Element("Center");
+            if (element.Element("Center") is XElement center) this.Center = (float)center;
         }
 
 

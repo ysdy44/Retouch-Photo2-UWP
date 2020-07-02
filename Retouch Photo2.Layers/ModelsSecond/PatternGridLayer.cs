@@ -81,9 +81,9 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            this.GridType = XML.CreatePatternGridMode(element.Element("GridType").Value);
-            this.HorizontalStep = (float)element.Element("HorizontalStep");
-            this.VerticalStep = (float)element.Element("VerticalStep");
+            if (element.Element("GridType") is XElement gridType) this.GridType = XML.CreatePatternGridMode(gridType.Value);
+            if (element.Element("HorizontalStep") is XElement horizontalStep) this.HorizontalStep = (float)horizontalStep;
+            if (element.Element("VerticalStep") is XElement verticalStep) this.VerticalStep = (float)verticalStep;
         }
 
 

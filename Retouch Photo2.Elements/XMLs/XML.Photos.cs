@@ -26,13 +26,7 @@ namespace Retouch_Photo2.Elements
                     "Root",
                     from photo
                     in photos
-                    select new XElement
-                    (
-                         "Photo",
-                         new XElement("Name", photo.Name),
-                         new XElement("FileType", photo.FileType),
-                         new XElement("FolderRelativeId", photo.FolderRelativeId)
-                    )
+                    select XML.SavePhoto("Photo", photo)
                 )
             );
         }
@@ -44,17 +38,18 @@ namespace Retouch_Photo2.Elements
         /// <returns> The loaded <see cref="Photo"/>s. </returns>
         public static IEnumerable<Photo> LoadPhotos(XDocument document)
         {
-            XElement root = document.Element("Root");
-
-            return 
-                from photo
-                in root.Elements("Photo")
-                select new Photo
+            if (document.Element("Root") is XElement root)
+            {
+                if (document.Elements("Photo") is IEnumerable<XElement> photos)
                 {
-                    Name = photo.Element("Name").Value,
-                    FileType = photo.Element("FileType").Value,
-                    FolderRelativeId = photo.Element("FolderRelativeId").Value,
-                };
+                    return
+                        from photo
+                        in photos
+                        select XML.LoadPhoto(photo);
+                }
+            }
+
+            return null;
         }
 
     }

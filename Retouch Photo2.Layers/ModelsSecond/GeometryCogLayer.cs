@@ -73,10 +73,10 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            this.Count = (int)element.Element("Count");
-            this.InnerRadius = (float)element.Element("InnerRadius");
-            this.Tooth = (float)element.Element("Tooth");
-            this.Notch = (float)element.Element("Notch");
+            if (element.Element("Count") is XElement count) this.Count = (int)count;
+            if (element.Element("InnerRadius") is XElement innerRadius) this.InnerRadius = (float)innerRadius;
+            if (element.Element("Tooth") is XElement tooth) this.Tooth = (float)tooth;
+            if (element.Element("Notch") is XElement notch) this.Notch = (float)notch;
         }
 
 

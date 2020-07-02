@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Menus;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -44,24 +45,30 @@ namespace Retouch_Photo2.ViewModels
         /// <returns> The loaded <see cref="Setting"/>. </returns>
         public static Setting LoadSetting(XDocument document)
         {
-            XElement root = document.Element("Root");
-
-            Setting setting = new Setting();
-
-            if (root.Element("Theme") is XElement theme) setting.Theme = Retouch_Photo2.Elements.XML.CreateTheme(theme.Value);
-            if (root.Element("DeviceLayout") is XElement deviceLayout) setting.DeviceLayout = Retouch_Photo2.Elements.XML.LoadDeviceLayout(deviceLayout);
-            if (root.Element("LayersHeight") is XElement layersHeight) setting.LayersHeight = (int)layersHeight;
-            if (root.Element("MenuTypes") is XElement menuTypes)
+            if (document.Element("Root") is XElement root)
             {
-                setting.MenuTypes =
-                (
-                    from menuType
-                    in menuTypes.Elements("MenuType")
-                    select Retouch_Photo2.Menus.XML.CreateMenuType(menuType.Value.ToString())
-                ).ToList();
+                Setting setting = new Setting();
+
+                if (root.Element("Theme") is XElement theme) setting.Theme = Retouch_Photo2.Elements.XML.CreateTheme(theme.Value);
+                if (root.Element("DeviceLayout") is XElement deviceLayout) setting.DeviceLayout = Retouch_Photo2.Elements.XML.LoadDeviceLayout(deviceLayout);
+                if (root.Element("LayersHeight") is XElement layersHeight) setting.LayersHeight = (int)layersHeight;
+                if (root.Element("MenuTypes") is XElement menuTypes)
+                {
+                    if (menuTypes.Elements("MenuType") is IEnumerable<XElement> menuTypes2)
+                    {
+                        setting.MenuTypes =
+                        (
+                            from menuType
+                            in menuTypes2
+                            select Retouch_Photo2.Menus.XML.CreateMenuType(menuType.Value.ToString())
+                        ).ToList();
+                    }
+                }
+
+                return setting;
             }
 
-            return setting;
+            return null;
         }
 
     }

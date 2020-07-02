@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            this.SweepAngle = (float)element.Element("SweepAngle");
+            if (element.Element("SweepAngle") is XElement sweepAngle) this.SweepAngle = (float)sweepAngle;
         }
 
 

@@ -43,12 +43,15 @@ namespace Retouch_Photo2.Layers
         /// <returns> The loaded <see cref="ILayer"/>s. </returns>
         public static IEnumerable<ILayer> LoadLayers(CanvasDevice customDevice, XDocument document)
         {
-            XElement root = document.Element("Root");
+            if (document.Element("Root") is XElement root)
+            {
+                return
+                    from layer
+                    in root.Elements("Layer")
+                    select XML.LoadILayer(customDevice, layer);
+            }
 
-            return
-                from layer
-                in root.Elements("Layer")
-                select XML.LoadILayer(customDevice, layer);
+            return null;
         }
 
     }

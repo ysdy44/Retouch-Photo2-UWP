@@ -26,29 +26,29 @@
                 />
 
             <ContentControl Width="4"
-                            Visibility="{x:Bind HorizontalStepVisibilityConverter(ViewModel.PatternGridType), Mode=OneWay}"/>
+                            Visibility="{x:Bind HorizontalStepVisibilityConverter(SelectionViewModel.PatternGridType), Mode=OneWay}"/>
 
             <!--Horizontal-->
             <tools:TouchbarButton x:Name="HorizontalStepTouchbarButton"
-                            Visibility="{x:Bind HorizontalStepVisibilityConverter(ViewModel.PatternGridType), Mode=OneWay}">
+                            Visibility="{x:Bind HorizontalStepVisibilityConverter(SelectionViewModel.PatternGridType), Mode=OneWay}">
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="HorizontalStepTouchbarSlider" 
-                             Number="{x:Bind Converter(ViewModel.PatternGridHorizontalStep),Mode=OneWay}"
-                             Value="{x:Bind ViewModel.PatternGridHorizontalStep,Mode=OneWay}"
+                             Number="{x:Bind Converter(SelectionViewModel.PatternGridHorizontalStep),Mode=OneWay}"
+                             Value="{x:Bind SelectionViewModel.PatternGridHorizontalStep,Mode=OneWay}"
                              />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
 
             <ContentControl Width="4"
-                            Visibility="{x:Bind VerticalStepVisibilityConverter(ViewModel.PatternGridType), Mode=OneWay}"/>
+                            Visibility="{x:Bind VerticalStepVisibilityConverter(SelectionViewModel.PatternGridType), Mode=OneWay}"/>
 
             <!--Vertical-->
             <tools:TouchbarButton x:Name="VerticalStepTouchbarButton"
-                            Visibility="{x:Bind VerticalStepVisibilityConverter(ViewModel.PatternGridType), Mode=OneWay}">
+                            Visibility="{x:Bind VerticalStepVisibilityConverter(SelectionViewModel.PatternGridType), Mode=OneWay}">
             <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="VerticalStepTouchbarSlider" 
-                             Number="{x:Bind Converter(ViewModel.PatternGridVerticalStep),Mode=OneWay}"
-                             Value="{x:Bind ViewModel.PatternGridVerticalStep,Mode=OneWay}"
+                             Number="{x:Bind Converter(SelectionViewModel.PatternGridVerticalStep),Mode=OneWay}"
+                             Value="{x:Bind SelectionViewModel.PatternGridVerticalStep,Mode=OneWay}"
                              />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>

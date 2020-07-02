@@ -41,19 +41,20 @@
                     </VisualState.Setters>
                 </VisualState>
 
-                <!--Intersect-->
+                <!--Intersect
                 <VisualState x:Name="Intersect">
                     <VisualState.Setters>
                         <Setter Target = "IntersectButton.IsEnabled" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
+                -->
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         
         
         <!--New-->
-        <Button x:Name="NewButton" Width="60" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+        <Button x:Name="NewButton" Width="60" Style="{StaticResource AppRoundedSelectedButtonStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="NewToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
@@ -61,7 +62,7 @@
         </Button>
 
         <!--Add-->
-        <Button x:Name="AddButton" Width="60" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <Button x:Name="AddButton" Width="60" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="AddToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
@@ -73,7 +74,7 @@
         </Button>
 
         <!--Subtract-->
-        <Button x:Name="SubtractButton" Width="60" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <Button x:Name="SubtractButton" Width="60" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="SubtractToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
@@ -84,7 +85,7 @@
             </PathIcon>
         </Button>
 
-        <!--Intersect-->
+        <!--Intersect
         <Button x:Name="IntersectButton" Width="60" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="IntersectToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
@@ -95,7 +96,8 @@
                 </PathIcon.Data>
             </PathIcon>
         </Button>
-
+        -->
+        
     </StackPanel>
 
 </UserControl>

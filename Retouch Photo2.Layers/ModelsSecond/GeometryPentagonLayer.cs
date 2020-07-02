@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            this.Points = (int)element.Element("Points");
+            if (element.Element("Points") is XElement points) this.Points = (int)points;
         }
 
 

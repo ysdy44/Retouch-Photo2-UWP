@@ -45,6 +45,7 @@ namespace Retouch_Photo2
                     XDocument document = XDocument.Load(stream);
 
                     IEnumerable<StyleCategory> source = Retouch_Photo2.Styles.XML.LoadStyleCategorys(document);
+                    if (source != null) return null;
 
                     return source;
                 }

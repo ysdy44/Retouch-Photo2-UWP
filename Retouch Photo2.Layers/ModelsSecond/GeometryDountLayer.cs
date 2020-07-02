@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            this.HoleRadius = (float)element.Element("HoleRadius");
+            if (element.Element("HoleRadius") is XElement holeRadius) this.HoleRadius = (float)holeRadius;
         }
 
 

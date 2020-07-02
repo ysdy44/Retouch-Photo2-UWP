@@ -59,8 +59,8 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            this.Points = (int)element.Element("Points");
-            this.InnerRadius = (float)element.Element("InnerRadius");
+            if (element.Element("Points") is XElement points) this.Points = (int)points;
+            if (element.Element("InnerRadius") is XElement innerRadius) this.InnerRadius = (float)innerRadius;
         }
 
 

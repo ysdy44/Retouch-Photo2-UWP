@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Elements
                     case MarqueeCompositeMode.New: return this.New;
                     case MarqueeCompositeMode.Add: return this.Add;
                     case MarqueeCompositeMode.Subtract: return this.Subtract;
-                    case MarqueeCompositeMode.Intersect: return this.Intersect;
+                    //case MarqueeCompositeMode.Intersect: return this.Intersect;
                     default: return this.Normal;
                 }
             }
@@ -80,7 +80,7 @@ namespace Retouch_Photo2.Elements
             this.NewButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.New;
             this.AddButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.Add;
             this.SubtractButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.Subtract;
-            this.IntersectButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.Intersect;
+            //this.IntersectButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.Intersect;
         }
         
         //Strings
@@ -91,7 +91,7 @@ namespace Retouch_Photo2.Elements
             this.NewToolTip.Content = resource.GetString("/ToolElements/CompositeMode_New");
             this.AddToolTip.Content = resource.GetString("/ToolElements/CompositeMode_Add");
             this.SubtractToolTip.Content = resource.GetString("/ToolElements/CompositeMode_Subtract");
-            this.IntersectToolTip.Content = resource.GetString("/ToolElements/CompositeMode_Intersect");
+            //this.IntersectToolTip.Content = resource.GetString("/ToolElements/CompositeMode_Intersect");
         }
 
     }

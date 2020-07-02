@@ -58,8 +58,8 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            this.InnerRadius = (float)element.Element("InnerRadius");
-            this.SweepAngle = (float)element.Element("SweepAngle");
+            if (element.Element("InnerRadius") is XElement innerRadius) this.InnerRadius = (float)innerRadius;
+            if (element.Element("SweepAngle") is XElement sweepAngle) this.SweepAngle = (float)sweepAngle;
         }
 
 
