@@ -43,6 +43,10 @@
         More,
 
 
+        /// <summary> Pattern grid. </summary>
+        PatternGrid,
+
+
         //Geometry1
         /// <summary> Create round-rect, geometry. </summary>
         GeometryRoundRect,

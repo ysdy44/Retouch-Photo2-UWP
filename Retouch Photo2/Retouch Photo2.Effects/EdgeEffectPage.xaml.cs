@@ -154,7 +154,6 @@ namespace Retouch_Photo2.Effects.Models
         private void ConstructEdge_Amount()
         {
             //Amount
-            this.AmountSlider.Value = 50;
             this.AmountSlider.Minimum = 0;
             this.AmountSlider.Maximum = 100;
             this.AmountSlider.ValueChangeStarted += (s, value) =>
@@ -226,7 +225,6 @@ namespace Retouch_Photo2.Effects.Models
         private void ConstructEdge_Radius()
         {
             //Radius
-            this.RadiusSlider.Value = 0;
             this.RadiusSlider.Minimum = 0;
             this.RadiusSlider.Maximum = 10;
             this.RadiusSlider.ValueChangeStarted += (s, value) =>

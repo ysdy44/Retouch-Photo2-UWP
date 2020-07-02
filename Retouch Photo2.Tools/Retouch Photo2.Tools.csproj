@@ -116,6 +116,18 @@
     <Compile Include="Elements\ArrowTailTypeIcons\ArrowIcon.xaml.cs">
       <DependentUpon>ArrowIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Elements\PatternGridTypeComboBox.xaml.cs">
+      <DependentUpon>PatternGridTypeComboBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\PatternGridTypeIcons\VerticalIcon.xaml.cs">
+      <DependentUpon>VerticalIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\PatternGridTypeIcons\HorizontalIcon.xaml.cs">
+      <DependentUpon>HorizontalIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\PatternGridTypeIcons\GridIcon.xaml.cs">
+      <DependentUpon>GridIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Elements\PenModeControl.xaml.cs">
       <DependentUpon>PenModeControl.xaml</DependentUpon>
     </Compile>
@@ -157,6 +169,9 @@
     </Compile>
     <Compile Include="IconsSecond\GeometryTriangleIcon.xaml.cs">
       <DependentUpon>GeometryTriangleIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IconsSecond\PatternGridIcon.xaml.cs">
+      <DependentUpon>PatternGridIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icons\NodeIcon.xaml.cs">
       <DependentUpon>NodeIcon.xaml</DependentUpon>
@@ -238,6 +253,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Elements\PatternGridTypeComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Elements\PatternGridTypeIcons\VerticalIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Elements\PatternGridTypeIcons\HorizontalIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Elements\PatternGridTypeIcons\GridIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Elements\PenModeControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -291,6 +322,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="IconsSecond\GeometryTriangleIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IconsSecond\PatternGridIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -369,6 +404,7 @@
       <Name>Retouch Photo2.Layers</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

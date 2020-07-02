@@ -62,6 +62,11 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
         {
+            if (children.Count == 0) return null;
+
+            ICanvasImage childImage = LayerBase.Render(resourceCreator, children);
+            if (childImage == null) return null;
+
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
             {
@@ -71,13 +76,11 @@ namespace Retouch_Photo2.Layers.Models
 
                     using (drawingSession.CreateLayer(1, geometryCrop))
                     {
-                        ICanvasImage childImage = LayerBase.Render(resourceCreator, children);
                         drawingSession.DrawImage(childImage);
                     }
                 }
                 else
                 {
-                    ICanvasImage childImage = LayerBase.Render(resourceCreator, children);
                     drawingSession.DrawImage(childImage);
                 }
             }

@@ -147,7 +147,6 @@ namespace Retouch_Photo2.Effects.Models
         private void ConstructMorphology_Size()
         {
             //Radius
-            this.SizeSlider.Value = 1;
             this.SizeSlider.Minimum = -100;
             this.SizeSlider.Maximum = 100;
             this.SizeSlider.ValueChangeStarted += (s, value) =>

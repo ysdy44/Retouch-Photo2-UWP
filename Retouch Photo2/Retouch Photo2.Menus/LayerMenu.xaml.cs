@@ -114,7 +114,6 @@ namespace Retouch_Photo2.Menus.Models
         //Opacity
         private void ConstructOpacity()
         {
-            this.OpacitySlider.Value = 100;
             this.OpacitySlider.Minimum = 0;
             this.OpacitySlider.Maximum = 100;
             this.OpacitySlider.ValueChangeStarted += (s, value) =>

@@ -1,0 +1,65 @@
+﻿<UserControl   
+    x:Class="Retouch_Photo2.Tools.Elements.PatternGridTypeComboBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="200"
+    d:DesignWidth="200"
+    >
+
+    <UserControl.Resources>
+        <!--Flyout-->
+        <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button x:Name="GridButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="HorizontalButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="VerticalButton" Style="{StaticResource AppIconSelectedButton}"/>
+            </StackPanel>
+        </Flyout>
+    </UserControl.Resources>
+
+
+    <Button x:Name="Button" Style="{StaticResource AppIconRoundedButtonStyle}">
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--Grid-->
+                <VisualState x:Name="Grid">
+                    <VisualState.Setters>
+                        <Setter Target = "GridButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind GridButton.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Horizontal-->
+                <VisualState x:Name="Horizontal">
+                    <VisualState.Setters>
+                        <Setter Target = "HorizontalButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind HorizontalButton.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Vertical-->
+                <VisualState x:Name="Vertical">
+                    <VisualState.Setters>
+                        <Setter Target = "VerticalButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind VerticalButton.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Button.Tag>
+            <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+        </Button.Tag>
+    </Button>
+
+</UserControl>

@@ -193,6 +193,11 @@
     <Compile Include="Retouch Photo2.Menus\StyleMenu.xaml.cs">
       <DependentUpon>StyleMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\PatternGridTool.Horizontal.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\PatternGridTool.Vertical.cs" />
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\PatternGridTool.xaml.cs">
+      <DependentUpon>PatternGridTool.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Tools\Models\NodeTool.Construct.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.Construct.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.Method.cs" />
@@ -636,6 +641,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Tools\GeometryTool.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\ModelsSecond\PatternGridTool.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

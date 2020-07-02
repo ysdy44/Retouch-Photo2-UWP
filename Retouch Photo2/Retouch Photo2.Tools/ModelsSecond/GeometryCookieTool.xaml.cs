@@ -211,7 +211,7 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructInnerRadius2()
         {
             //Value
-            this.InnerRadiusTouchbarSlider.Value = 0;
+            this.InnerRadiusTouchbarSlider.Value = 50;
             this.InnerRadiusTouchbarSlider.Minimum = 0;
             this.InnerRadiusTouchbarSlider.Maximum = 100;
             this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>

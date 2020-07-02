@@ -33,7 +33,7 @@
 
             <!--LeftTail-->
             <TextBlock x:Name="LeftTailTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:ArrowTailTypeComboBox x:Name="LeftArrowTailTypeControl"
+            <toolsElements:ArrowTailTypeComboBox x:Name="LeftArrowTailTypeComboBox"
                  ArrowTailType="{x:Bind SelectionViewModel.GeometryArrowLeftTail, Mode=OneWay}"
                 />
 
@@ -41,7 +41,7 @@
 
             <!--RightTail-->
             <TextBlock x:Name="RightTailTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:ArrowTailTypeComboBox x:Name="RightArrowTailTypeControl"
+            <toolsElements:ArrowTailTypeComboBox x:Name="RightArrowTailTypeComboBox"
                  ArrowTailType="{x:Bind SelectionViewModel.GeometryArrowRightTail, Mode=OneWay}"
                 />
 

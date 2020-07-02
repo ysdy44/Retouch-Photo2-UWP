@@ -30,6 +30,9 @@
         /// <summary> Combine-add. </summary>
         CombineAdd,
 
+        /// <summary> Grid pattern. </summary>
+        PatternGrid,
+
         //Geometry1
         /// <summary> Round-rect geometry. </summary>
         GeometryRoundRect,

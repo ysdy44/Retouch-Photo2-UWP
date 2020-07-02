@@ -204,6 +204,15 @@
   <data name="MoreTransform_Ratio" xml:space="preserve">
     <value>等比例缩放</value>
   </data>
+  <data name="PatternGrid_Grid" xml:space="preserve">
+    <value>网格</value>
+  </data>
+  <data name="PatternHorizontal_Horizontal" xml:space="preserve">
+    <value>水平线</value>
+  </data>
+  <data name="PatternVertical_Vertical" xml:space="preserve">
+    <value>垂直线</value>
+  </data>
   <data name="PenMode_Mode" xml:space="preserve">
     <value>控制点模式</value>
   </data>

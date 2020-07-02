@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Retouch_Photo2.Tools.Icons.NodeIcon"
+    x:Class="Retouch_Photo2.Tools.Elements.PatternGridTypeIcons.GridIcon"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,10 +9,6 @@
     d:DesignWidth="50"
     >
 
-    <Polygon StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="DeepSkyBlue">
-        <Polygon.Points>
-            0,24 12,2 14,12 23,16
-        </Polygon.Points>
-    </Polygon>
+    <FontIcon Glyph="&#xE80A;" FontSize="19" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource SystemBaseHighColor}" />
 
 </UserControl>

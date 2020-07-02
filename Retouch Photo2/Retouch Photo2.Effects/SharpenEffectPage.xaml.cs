@@ -147,7 +147,6 @@ namespace Retouch_Photo2.Effects.Models
         private void ConstructSharpen_Amount()
         {
             //Radius
-            this.AmountSlider.Value = 0;
             this.AmountSlider.Minimum = 0;
             this.AmountSlider.Maximum = 10;
             this.AmountSlider.ValueChangeStarted += (s, value) =>

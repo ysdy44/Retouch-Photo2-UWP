@@ -213,4 +213,16 @@
   <data name="GeometryTriangle_Mirror" xml:space="preserve">
     <value>Mirror</value>
   </data>
+  <data name="PatternGrid" xml:space="preserve">
+    <value>Grid</value>
+  </data>
+  <data name="PatternGrid_Horizontal" xml:space="preserve">
+    <value>Horizontal Step</value>
+  </data>
+  <data name="PatternGrid_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="PatternGrid_Vertical" xml:space="preserve">
+    <value>Vertical Step</value>
+  </data>
 </root>

@@ -204,6 +204,15 @@
   <data name="MoreTransform_Ratio" xml:space="preserve">
     <value>Ratio Scaling</value>
   </data>
+  <data name="PatternGrid_Grid" xml:space="preserve">
+    <value>Grid</value>
+  </data>
+  <data name="PatternHorizontal_Horizontal" xml:space="preserve">
+    <value>Horizontal Lines</value>
+  </data>
+  <data name="PatternVertical_Vertical" xml:space="preserve">
+    <value>Vertical Lines</value>
+  </data>
   <data name="PenMode_Mode" xml:space="preserve">
     <value>Control Point Mode</value>
   </data>

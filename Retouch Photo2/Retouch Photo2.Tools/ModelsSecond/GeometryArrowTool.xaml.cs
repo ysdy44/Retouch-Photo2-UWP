@@ -304,7 +304,7 @@ namespace Retouch_Photo2.Tools.Models
         //LeftTail
         private void ConstructLeftTail()
         {
-            this.LeftArrowTailTypeControl.TypeChanged += (s, tailType) =>
+            this.LeftArrowTailTypeComboBox.TypeChanged += (s, tailType) =>
             {
                 //History
                 LayersPropertyHistory history = new LayersPropertyHistory("Set arrow layer left tail type");
@@ -347,7 +347,7 @@ namespace Retouch_Photo2.Tools.Models
         //RightTail
         private void ConstructRightTail()
         {
-            this.RightArrowTailTypeControl.TypeChanged += (s, tailType) =>
+            this.RightArrowTailTypeComboBox.TypeChanged += (s, tailType) =>
             {
                 //History
                 LayersPropertyHistory history = new LayersPropertyHistory("Set arrow layer right tail type");

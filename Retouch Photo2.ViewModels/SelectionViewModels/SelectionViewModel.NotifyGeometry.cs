@@ -11,6 +11,71 @@ namespace Retouch_Photo2.ViewModels
     public partial class ViewModel : INotifyPropertyChanged
     {
 
+
+        /// <summary> Sets the IPatternLayer. </summary>     
+        private void SetIPatternLayer(ILayer layer)
+        {
+            if (layer == null) return;
+
+            switch (layer.Type)
+            {
+                case LayerType.PatternGrid:
+                    PatternGridLayer gridLayer = (PatternGridLayer)layer;
+                    this.PatternGridType = gridLayer.GridType;
+                    this.PatternGridHorizontalStep = gridLayer.HorizontalStep;
+                    this.PatternGridVerticalStep = gridLayer.VerticalStep;
+                    break;
+            }
+        }
+
+
+        #region asdasdasdsa
+
+
+        /// <summary> PatternGridLayer's Type. </summary>     
+        public PatternGridType PatternGridType
+        {
+            get => this.patternGridType;
+            set
+            {
+                if (this.patternGridType == value) return;
+                this.patternGridType = value;
+                this.OnPropertyChanged(nameof(this.PatternGridType));//Notify 
+            }
+        }
+        private PatternGridType patternGridType = PatternGridType.Grid;
+                
+        /// <summary> PatternGridLayer's HorizontalStep. </summary>     
+        public float PatternGridHorizontalStep
+        {
+            get => this.patternGridHorizontalStep;
+            set
+            {
+                if (this.patternGridHorizontalStep == value) return;
+                this.patternGridHorizontalStep = value;
+                this.OnPropertyChanged(nameof(this.PatternGridHorizontalStep));//Notify 
+            }
+        }
+        private float patternGridHorizontalStep = 30.0f;
+
+        /// <summary> PatternGridLayer's VerticalStep. </summary>     
+        public float PatternGridVerticalStep
+        {
+            get => this.patternGridVerticalStep;
+            set
+            {
+                if (this.patternGridVerticalStep == value) return;
+                this.patternGridVerticalStep = value;
+                this.OnPropertyChanged(nameof(this.PatternGridVerticalStep));//Notify 
+            }
+        }
+        private float patternGridVerticalStep = 30.0f;
+
+
+        #endregion
+
+
+
         /// <summary> Sets the IGeometryLayer. </summary>     
         private void SetIGeometryLayer(ILayer layer)
         {
@@ -262,7 +327,7 @@ namespace Retouch_Photo2.ViewModels
                 this.OnPropertyChanged(nameof(this.GeometryCookieSweepAngle));//Notify 
             }
         }
-        private float geometryCookieSweepAngle = FanKit.Math.Pi / 2f;
+        private float geometryCookieSweepAngle = FanKit.Math.PiOver2;
 
 
         #endregion

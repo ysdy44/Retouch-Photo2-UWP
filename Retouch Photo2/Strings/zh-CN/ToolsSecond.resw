@@ -213,4 +213,16 @@
   <data name="GeometryTriangle_Mirror" xml:space="preserve">
     <value>镜像</value>
   </data>
+  <data name="PatternGrid" xml:space="preserve">
+    <value>网格工具</value>
+  </data>
+  <data name="PatternGrid_Horizontal" xml:space="preserve">
+    <value>水平步</value>
+  </data>
+  <data name="PatternGrid_Type" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="PatternGrid_Vertical" xml:space="preserve">
+    <value>垂直步</value>
+  </data>
 </root>

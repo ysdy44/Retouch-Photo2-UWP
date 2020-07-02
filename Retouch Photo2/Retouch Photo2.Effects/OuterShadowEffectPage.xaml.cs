@@ -180,7 +180,6 @@ namespace Retouch_Photo2.Effects.Models
         private void ConstructOuterShadow_Radius()
         {
             //Radius
-            this.RadiusSlider.Value = 0;
             this.RadiusSlider.Minimum = 0;
             this.RadiusSlider.Maximum = 100;
             this.RadiusSlider.ValueChangeStarted += (s, value) =>
@@ -254,7 +253,6 @@ namespace Retouch_Photo2.Effects.Models
         private void ConstructOuterShadow_Opacity()
         {
             //Opacity
-            this.OpacitySlider.Value = 50;
             this.OpacitySlider.Minimum = 0;
             this.OpacitySlider.Maximum = 100;
             this.OpacitySlider.ValueChangeStarted += (s, value) =>

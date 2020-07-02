@@ -69,7 +69,10 @@ namespace Retouch_Photo2
                  
 
                  new MoreTool(),
-                 
+
+
+                 new PatternGridTool(),
+                 null,
 
                  //Geometry1
                  new GeometryRoundRectTool(),

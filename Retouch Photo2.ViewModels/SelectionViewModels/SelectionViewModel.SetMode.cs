@@ -84,9 +84,10 @@ namespace Retouch_Photo2.ViewModels
             this.SetImageLayer(null);
             this.SetCurveLayer();
             this.SetFontLayer(null);
-            
+
             //////////////////////////
 
+            this.SetIPatternLayer(null);
             this.SetIGeometryLayer(null);            
         }
 
@@ -138,6 +139,7 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
+            this.SetIPatternLayer(layer);
             this.SetIGeometryLayer(layer);
         }
 
@@ -191,6 +193,7 @@ namespace Retouch_Photo2.ViewModels
 
             //////////////////////////
 
+            this.SetIPatternLayer(outermostLayer);
             this.SetIGeometryLayer(outermostLayer);
         }
 

@@ -152,6 +152,7 @@
     <Compile Include="Layers\LayerBase.Render.cs" />
     <Compile Include="Layers\LayerBase.Property.cs" />
     <Compile Include="Layers\TextLayer.cs" />
+    <Compile Include="ModelsSecond\PatternGridLayer.cs" />
     <Compile Include="Models\TextArtisticLayer.cs" />
     <Compile Include="Models\TextFrameLayer.cs" />
     <Compile Include="Transform.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="XMLs\XML.LayerFactory.cs" />
     <Compile Include="XMLs\XML.ILayers.cs" />
     <Compile Include="XMLs\XML.Transform.cs" />
+    <Compile Include="XMLs\XML.PatternGridModeFactory.cs" />
     <Compile Include="XMLs\XML.VisibilityFactory.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Layers.rd.xml" />
   </ItemGroup>

@@ -154,7 +154,6 @@ namespace Retouch_Photo2.Effects.Models
         private void ConstructEmboss_Radius()
         {
             //Radius
-            this.RadiusSlider.Value = 1;
             this.RadiusSlider.Minimum = 0;
             this.RadiusSlider.Maximum = 10;
             this.RadiusSlider.ValueChangeStarted += (s, value) =>

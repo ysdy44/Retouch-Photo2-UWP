@@ -65,7 +65,8 @@ namespace Retouch_Photo2.Layers
                 if (this.IsRefactoringIconRender)
                 {
                     this.IsRefactoringIconRender = false;
-                    this.Control.IconRender = this.Render2.ToIconRenderImage(resourceCreator, LayerageCollection.ControlsHeight);
+
+                    this.Control.IconRender = this.Render2?.ToIconRenderImage(resourceCreator, LayerageCollection.ControlsHeight);
                 }
 
             }

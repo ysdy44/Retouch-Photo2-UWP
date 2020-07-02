@@ -1,0 +1,59 @@
+﻿<Page
+    x:Class="Retouch_Photo2.Tools.Models.PatternGridTool"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:tools="using:Retouch_Photo2.Tools"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="400"
+    >
+
+    <Page.Resources>
+        <Style x:Name="IconSelectedButtonStyle" TargetType="Button" BasedOn="{StaticResource AppIconSelectedButton}"/>
+    </Page.Resources>
+
+
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
+        <StackPanel Orientation="Horizontal">
+
+            <!--Type-->
+            <TextBlock x:Name="TypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <toolsElements:PatternGridTypeComboBox x:Name="PatternGridTypeComboBox"
+                 GridType="{x:Bind SelectionViewModel.PatternGridType, Mode=OneWay}"
+                />
+
+            <ContentControl Width="4"
+                            Visibility="{x:Bind HorizontalStepVisibilityConverter(ViewModel.PatternGridType), Mode=OneWay}"/>
+
+            <!--Horizontal-->
+            <tools:TouchbarButton x:Name="HorizontalStepTouchbarButton"
+                            Visibility="{x:Bind HorizontalStepVisibilityConverter(ViewModel.PatternGridType), Mode=OneWay}">
+                <tools:TouchbarButton.TouchbarSlider>
+                    <tools:TouchbarSlider x:Name="HorizontalStepTouchbarSlider" 
+                             Number="{x:Bind Converter(ViewModel.PatternGridHorizontalStep),Mode=OneWay}"
+                             Value="{x:Bind ViewModel.PatternGridHorizontalStep,Mode=OneWay}"
+                             />
+                </tools:TouchbarButton.TouchbarSlider>
+            </tools:TouchbarButton>
+
+            <ContentControl Width="4"
+                            Visibility="{x:Bind VerticalStepVisibilityConverter(ViewModel.PatternGridType), Mode=OneWay}"/>
+
+            <!--Vertical-->
+            <tools:TouchbarButton x:Name="VerticalStepTouchbarButton"
+                            Visibility="{x:Bind VerticalStepVisibilityConverter(ViewModel.PatternGridType), Mode=OneWay}">
+            <tools:TouchbarButton.TouchbarSlider>
+                    <tools:TouchbarSlider x:Name="VerticalStepTouchbarSlider" 
+                             Number="{x:Bind Converter(ViewModel.PatternGridVerticalStep),Mode=OneWay}"
+                             Value="{x:Bind ViewModel.PatternGridVerticalStep,Mode=OneWay}"
+                             />
+                </tools:TouchbarButton.TouchbarSlider>
+            </tools:TouchbarButton>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</Page>

@@ -165,9 +165,8 @@ namespace Retouch_Photo2.Menus.Models
         //Width
         private void ConstructWidth()
         {
-            this.WidthPicker.Value = 0;
             this.WidthPicker.Minimum = 0;
-            this.WidthPicker.Maximum = 512;
+            this.WidthPicker.Maximum = 128;
             this.WidthPicker.ValueChangeStarted += (s, value) =>
             {             
                 //Selection
@@ -242,7 +241,6 @@ namespace Retouch_Photo2.Menus.Models
         //Offset
         private void ConstructOffset()
         {
-            this.OffsetPicker.Value = 0;
             this.OffsetPicker.Minimum = 0;
             this.OffsetPicker.Maximum = 10;
             this.OffsetPicker.ValueChangeStarted += (s, value) =>

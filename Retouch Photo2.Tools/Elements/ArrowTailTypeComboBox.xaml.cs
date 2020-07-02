@@ -21,7 +21,7 @@ namespace Retouch_Photo2.Tools.Elements
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets the None or Arrow. </summary>
+        /// <summary> Gets or sets the none or arrow. </summary>
         public GeometryArrowTailType ArrowTailType
         {
             get { return (GeometryArrowTailType)GetValue(ArrowTailTypeProperty); }

@@ -1,0 +1,19 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Tools.Elements.PatternGridTypeIcons.VerticalIcon"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50"
+    >
+
+    <Canvas Width="20" Height="20" >
+        <Line X1="0" Y1="0" X2="0" Y2="18" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeThickness="2" Stroke="{ThemeResource SystemBaseHighColor}"/>
+        <Line X1="6" Y1="0" X2="6" Y2="18" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeThickness="2" Stroke="{ThemeResource SystemBaseHighColor}"/>
+        <Line X1="12" Y1="0" X2="12" Y2="18" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeThickness="2" Stroke="{ThemeResource SystemBaseHighColor}"/>
+        <Line X1="18" Y1="0" X2="18" Y2="18" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeThickness="2" Stroke="{ThemeResource SystemBaseHighColor}"/>
+    </Canvas>
+
+</UserControl>
