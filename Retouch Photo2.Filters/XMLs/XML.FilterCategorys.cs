@@ -40,12 +40,15 @@ namespace Retouch_Photo2.Filters
         {
             if (document.Element("Root") is XElement root)
             {
-                return
-                (
-                    from filterCategory
-                    in root.Elements("FilterCategory")
-                    select XML.LoadFilterCategory(filterCategory)
-                );
+                if (root.Elements("FilterCategory") is IEnumerable<XElement> filterCategorys)
+                {
+                    return
+                    (
+                        from filterCategory
+                        in filterCategorys
+                        select XML.LoadFilterCategory(filterCategory)
+                    );
+                }
             }
 
             return null;

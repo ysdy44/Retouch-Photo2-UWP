@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Styles
         {
             if (document.Element("Root") is XElement root)
             {
-                if (document.Elements("StyleCategory") is IEnumerable<XElement> styleCategorys)
+                if (root.Elements("StyleCategory") is IEnumerable<XElement> styleCategorys)
                 {
                     return
                     (

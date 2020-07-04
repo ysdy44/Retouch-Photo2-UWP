@@ -1,8 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -83,6 +80,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ConstructInnerRadius1();
             this.ConstructInnerRadius2();
+
             this.ConstructSweepAngle1();
             this.ConstructSweepAngle2();
         }
@@ -174,123 +172,51 @@ namespace Retouch_Photo2.Tools.Models
             {
                 float innerRadius = (float)value / 100f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set cookie layer inner radius");
+                this.MethodViewModel.TLayerChanged<float, GeometryCookieLayer>
+                (
+                    layerType: LayerType.GeometryCookie,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCookieSweepAngle = innerRadius,
+                    set: (tLayer) => tLayer.SweepAngle = innerRadius,
 
-                //Selection
-                this.SelectionViewModel.GeometryCookieInnerRadius = innerRadius;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCookie)
-                    {
-                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
-
-                        var previous = geometryCookieLayer.InnerRadius;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            geometryCookieLayer.InnerRadius = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryCookieLayer.InnerRadius = innerRadius;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set cookie layer inner radius",
+                    getHistory: (tLayer) => tLayer.SweepAngle,
+                    setHistory: (tLayer, previous) => tLayer.SweepAngle = previous
+                );
             };
         }
         private void ConstructInnerRadius2()
         {
             //Value
-            this.InnerRadiusTouchbarSlider.Value = 50;
-            this.InnerRadiusTouchbarSlider.Minimum = 0;
-            this.InnerRadiusTouchbarSlider.Maximum = 100;
-            this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCookie)
-                    {
-                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
-                        geometryCookieLayer.CacheInnerRadius();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float innerRadius = (float)value / 100f;
-
-                //Selection
-                this.SelectionViewModel.GeometryCookieInnerRadius = innerRadius;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCookie)
-                    {
-                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
-                   
-                        //Refactoring
-                        geometryCookieLayer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryCookieLayer.InnerRadius = innerRadius;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
+            this.InnerRadiusTouchbarSlider.Value = 0.5;
+            this.InnerRadiusTouchbarSlider.Minimum = 0.0f;
+            this.InnerRadiusTouchbarSlider.Maximum = 1.0f;
+            this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCookieLayer>
+            (
+                layerType: LayerType.GeometryCookie,
+                cache: (tLayer) => tLayer.CacheInnerRadius()
+            );
+            this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryCookieLayer>
+            (
+                layerType: LayerType.GeometryCookie,
+                set: (tLayer) => tLayer.InnerRadius = (float)value / 100f
+            );
             this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float innerRadius = (float)value / 100f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set cookie layer inner radius");
+                this.MethodViewModel.TLayerChangeCompleted<float, GeometryCookieLayer>
+                (
+                    layerType: LayerType.GeometryCookie,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCookieInnerRadius = innerRadius,
+                    set: (tLayer) => tLayer.InnerRadius = innerRadius,
 
-                //Selection
-                this.SelectionViewModel.GeometryCookieInnerRadius = innerRadius;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCookie)
-                    {
-                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
-
-                        var previous = geometryCookieLayer.StartingInnerRadius;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            geometryCookieLayer.InnerRadius = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryCookieLayer.InnerRadius = innerRadius;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set cookie layer inner radius",
+                    getHistory: (tLayer) => tLayer.StartingInnerRadius,
+                    setHistory: (tLayer, previous) => tLayer.InnerRadius = previous
+                );
             };
         }
+
 
         //SweepAngle
         private void ConstructSweepAngle1()
@@ -312,41 +238,16 @@ namespace Retouch_Photo2.Tools.Models
             {
                 float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set cookie layer sweep angle");
+                this.MethodViewModel.TLayerChanged<float, GeometryCookieLayer>
+                (
+                    layerType: LayerType.GeometryCookie,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCookieInnerRadius = sweepAngle,
+                    set: (tLayer) => tLayer.InnerRadius = sweepAngle,
 
-                //Selection
-                this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCookie)
-                    {
-                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
-
-                        var previous = geometryCookieLayer.SweepAngle;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryCookieLayer.IsRefactoringRender = true;
-                            geometryCookieLayer.IsRefactoringIconRender = true;
-                            geometryCookieLayer.SweepAngle = previous;
-                        };
-
-                        //Refactoring
-                        geometryCookieLayer.IsRefactoringRender = true;
-                        geometryCookieLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryCookieLayer.SweepAngle = sweepAngle;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set cookie layer sweep angle",
+                    getHistory: (tLayer) => tLayer.SweepAngle,
+                    setHistory: (tLayer, previous) => tLayer.SweepAngle = previous
+                );
             };
         }
         private void ConstructSweepAngle2()
@@ -357,82 +258,36 @@ namespace Retouch_Photo2.Tools.Models
             this.SweepAngleTouchbarSlider.Maximum = 360;
             this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCookie)
-                    {
-                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
-                        geometryCookieLayer.CacheSweepAngle();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.MethodViewModel.TLayerChangeStarted<GeometryCookieLayer>
+                (
+                    LayerType.GeometryCookie,
+                    (tLayer) => tLayer.CacheSweepAngle()
+                );
             };
             this.SweepAngleTouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
                 float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
 
-                //Selection
-                this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCookie)
-                    {
-                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryCookieLayer.SweepAngle = sweepAngle;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.MethodViewModel.TLayerChangeDelta<GeometryCookieLayer>
+                (
+                    LayerType.GeometryCookie,
+                    (tLayer) => tLayer.SweepAngle = sweepAngle
+                );
             };
             this.SweepAngleTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
-                
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set cookie layer sweep angle");
 
-                //Selection
-                this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+                this.MethodViewModel.TLayerChangeCompleted<float, GeometryCookieLayer>
+                (
+                    layerType: LayerType.GeometryCookie,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle,
+                    set: (tLayer) => tLayer.SweepAngle = sweepAngle,
 
-                    if (layer.Type == LayerType.GeometryCookie)
-                    {
-                        GeometryCookieLayer geometryCookieLayer = (GeometryCookieLayer)layer;
-
-                        var previous = geometryCookieLayer.StartingSweepAngle;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryCookieLayer.IsRefactoringRender = true;
-                            geometryCookieLayer.IsRefactoringIconRender = true;
-                            geometryCookieLayer.SweepAngle = previous;
-                        };
-
-                        //Refactoring
-                        geometryCookieLayer.IsRefactoringRender = true;
-                        geometryCookieLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryCookieLayer.SweepAngle = sweepAngle;
-                    }
-                });
-                
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set cookie layer sweep angle",
+                    getHistory: (tLayer) => tLayer.StartingSweepAngle,
+                    setHistory: (tLayer, previous) => tLayer.SweepAngle = previous
+                );
             };
         }
 

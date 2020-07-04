@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Tools.Elements.PatternGridTypeIcons;
+using System;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using FanKit.Transformers;
-using Retouch_Photo2.Tools.Elements.PatternGridTypeIcons;
-using Windows.ApplicationModel.Resources;
-using Retouch_Photo2.Layers.Models;
 
 namespace Retouch_Photo2.Tools.Elements
 {

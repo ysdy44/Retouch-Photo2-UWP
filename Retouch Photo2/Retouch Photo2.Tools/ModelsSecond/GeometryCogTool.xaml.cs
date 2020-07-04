@@ -192,41 +192,16 @@ namespace Retouch_Photo2.Tools.Models
                 if (count < 4) count = 4;
                 if (count > 36) count = 36;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer count");
+                this.MethodViewModel.TLayerChanged<int, GeometryCogLayer>
+                (
+                    layerType: LayerType.GeometryCog,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogCount = count,
+                    set: (tLayer) => tLayer.Count = count,
 
-                //Selection
-                this.SelectionViewModel.GeometryCogCount = count;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-
-                        var previous = geometryCogLayer.Count;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryCogLayer.IsRefactoringRender = true;
-                            geometryCogLayer.IsRefactoringIconRender = true;
-                            geometryCogLayer.Count = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryCogLayer.Count = count;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set cog layer count",
+                    getHistory: (tLayer) => tLayer.Count = count,
+                    setHistory: (tLayer, previous) => tLayer.Count = previous
+                );
             };
         }
         private void ConstructCount2()
@@ -237,19 +212,11 @@ namespace Retouch_Photo2.Tools.Models
             this.CountTouchbarSlider.Maximum = 36;
             this.CountTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-                        geometryCogLayer.CacheCount();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
+                (
+                    LayerType.GeometryCog,
+                    (tLayer) => tLayer.CacheCount()
+                );
             };
             this.CountTouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
@@ -257,23 +224,11 @@ namespace Retouch_Photo2.Tools.Models
                 if (count < 4) count = 4;
                 if (count > 36) count = 36;
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryCogLayer.Count = count;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
+                (
+                    LayerType.GeometryCog,
+                    (tLayer) => tLayer.Count = count
+                );
             };
             this.CountTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
@@ -281,45 +236,19 @@ namespace Retouch_Photo2.Tools.Models
                 if (count < 4) count = 4;
                 if (count > 36) count = 36;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer count");
+                this.MethodViewModel.TLayerChangeCompleted<int, GeometryCogLayer>
+                (
+                    layerType: LayerType.GeometryCog,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogCount = count,
+                    set: (tLayer) => tLayer.Count = count,
 
-                //Selection
-                this.SelectionViewModel.GeometryCogCount = count;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-
-                        var previous = geometryCogLayer.StartingCount;
-                        history.UndoAction += () =>
-                        {
-                            GeometryCogLayer layer2 = geometryCogLayer;
-
-                            //Refactoring
-                            layer2.IsRefactoringRender = true;
-                            layer2.IsRefactoringIconRender = true;
-                            layer2.Count = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryCogLayer.Count = count;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set cog layer count",
+                    getHistory: (tLayer) => tLayer.StartingCount,
+                    setHistory: (tLayer, previous) => tLayer.Count = previous
+                );
             };
         }
+
 
         //InnerRadius
         private void ConstructInnerRadius1()
@@ -341,41 +270,16 @@ namespace Retouch_Photo2.Tools.Models
             {
                 float innerRadius = (float)value / 100f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer inner radius");
+                this.MethodViewModel.TLayerChanged<float, GeometryCogLayer>
+                (
+                    layerType: LayerType.GeometryCog,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogInnerRadius = innerRadius,
+                    set: (tLayer) => tLayer.InnerRadius = innerRadius,
 
-                //Selection
-                this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-
-                        var previous = geometryCogLayer.InnerRadius;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryCogLayer.IsRefactoringRender = true;
-                            geometryCogLayer.IsRefactoringIconRender = true;
-                            geometryCogLayer.InnerRadius = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryCogLayer.InnerRadius = innerRadius;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set cog layer inner radius",
+                    getHistory: (tLayer) => tLayer.InnerRadius,
+                    setHistory: (tLayer, previous) => tLayer.InnerRadius = previous
+                );
             };
         }
         private void ConstructInnerRadius2()
@@ -386,84 +290,39 @@ namespace Retouch_Photo2.Tools.Models
             this.InnerRadiusTouchbarSlider.Maximum = 100;
             this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-                        geometryCogLayer.CacheInnerRadius();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
+                (
+                    LayerType.GeometryCog,
+                    (tLayer) => tLayer.CacheInnerRadius()
+                );
             };
             this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
                 float innerRadius = (float)value / 100f;
 
-                //Selection
-                this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryCogLayer.InnerRadius = innerRadius;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
+                (
+                    LayerType.GeometryCog,
+                    (tLayer) => tLayer.InnerRadius = innerRadius
+                );
             };
             this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float innerRadius = (float)value / 100f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer inner radius");
+                this.MethodViewModel.TLayerChangeCompleted<float, GeometryCogLayer>
+                (
+                    layerType: LayerType.GeometryCog,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogInnerRadius = innerRadius,
+                    set: (tLayer) => tLayer.InnerRadius = innerRadius,
 
-                //Selection
-                this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-
-                        var previous = geometryCogLayer.StartingInnerRadius;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryCogLayer.IsRefactoringRender = true;
-                            geometryCogLayer.IsRefactoringIconRender = true;
-                            geometryCogLayer.InnerRadius = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryCogLayer.InnerRadius = innerRadius;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set cog layer inner radius",
+                    getHistory: (tLayer) => tLayer.StartingInnerRadius,
+                    setHistory: (tLayer, previous) => tLayer.InnerRadius = previous
+                );
             };
         }
+
 
         //Tooth
         private void ConstructTooth1()
@@ -485,41 +344,16 @@ namespace Retouch_Photo2.Tools.Models
             {
                 float tooth = (float)value / 100f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer tooth");
+                this.MethodViewModel.TLayerChanged<float, GeometryCogLayer>
+                (
+                    layerType: LayerType.GeometryCog,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogTooth = tooth,
+                    set: (tLayer) => tLayer.Tooth = tooth,
 
-                //Selection
-                this.SelectionViewModel.GeometryCogTooth = tooth;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-
-                        var previous = geometryCogLayer.Tooth;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryCogLayer.IsRefactoringRender = true;
-                            geometryCogLayer.IsRefactoringIconRender = true;
-                            geometryCogLayer.Tooth = previous;
-                        };
-
-                        //Refactoring
-                        geometryCogLayer.IsRefactoringRender = true;
-                        geometryCogLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryCogLayer.Tooth = tooth;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set cog layer tooth",
+                    getHistory: (tLayer) => tLayer.Tooth,
+                    setHistory: (tLayer, previous) => tLayer.Tooth = previous
+                );
             };
         }
         private void ConstructTooth2()
@@ -530,84 +364,39 @@ namespace Retouch_Photo2.Tools.Models
             this.ToothTouchbarSlider.Maximum = 50;
             this.ToothTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-                        geometryCogLayer.CacheTooth();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
+                (
+                    LayerType.GeometryCog,
+                    (tLayer) => tLayer.CacheTooth()
+                );
             };
             this.ToothTouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
                 float tooth = (float)value / 100f;
 
-                //Selection
-                this.SelectionViewModel.GeometryCogTooth = tooth;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryCogLayer.Tooth = tooth;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
+                (
+                    LayerType.GeometryCog,
+                    (tLayer) => tLayer.Tooth = tooth
+                );
             };
             this.ToothTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float tooth = (float)value / 100f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer tooth");
+                this.MethodViewModel.TLayerChangeCompleted<float, GeometryCogLayer>
+                (
+                    layerType: LayerType.GeometryCog,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogTooth = tooth,
+                    set: (tLayer) => tLayer.Tooth = tooth,
 
-                //Selection
-                this.SelectionViewModel.GeometryCogTooth = tooth;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-
-                        var previous = geometryCogLayer.StartingTooth;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryCogLayer.IsRefactoringRender = true;
-                            geometryCogLayer.IsRefactoringIconRender = true;
-                            geometryCogLayer.Tooth = previous;
-                        };
-
-                        //Refactoring
-                        geometryCogLayer.IsRefactoringRender = true;
-                        geometryCogLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryCogLayer.Tooth = tooth;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set cog layer tooth",
+                    getHistory: (tLayer) => tLayer.StartingTooth,
+                    setHistory: (tLayer, previous) => tLayer.Tooth = previous
+                );
             };
         }
+
 
         //Notch
         private void ConstructNotch1()
@@ -629,41 +418,16 @@ namespace Retouch_Photo2.Tools.Models
             {
                 float notch = (float)value / 100f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer notch");
+                this.MethodViewModel.TLayerChanged<float, GeometryCogLayer>
+                (
+                    layerType: LayerType.GeometryCog,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogNotch = notch,
+                    set: (tLayer) => tLayer.Notch = notch,
 
-                //Selection
-                this.SelectionViewModel.GeometryCogNotch = notch;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-
-                        var previous = geometryCogLayer.Notch;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryCogLayer.IsRefactoringRender = true;
-                            geometryCogLayer.IsRefactoringIconRender = true;
-                            geometryCogLayer.Notch = previous;
-                        };
-
-                        //Refactoring
-                        geometryCogLayer.IsRefactoringRender = true;
-                        geometryCogLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryCogLayer.Notch = notch;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set cog layer notch",
+                    getHistory: (tLayer) => tLayer.Notch,
+                    setHistory: (tLayer, previous) => tLayer.Notch = previous
+                );
             };
         }
         private void ConstructNotch2()
@@ -674,82 +438,36 @@ namespace Retouch_Photo2.Tools.Models
             this.NotchTouchbarSlider.Maximum = 60;
             this.NotchTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-                        geometryCogLayer.CacheNotch();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
+                (
+                    LayerType.GeometryCog,
+                    (tLayer) => tLayer.CacheNotch()
+                );
             };
             this.NotchTouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
                 float notch = (float)value / 100f;
 
-                //Selection
-                this.SelectionViewModel.GeometryCogNotch = notch;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-
-                        //Refactoring
-                        geometryCogLayer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryCogLayer.Notch = notch;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
+                (
+                    LayerType.GeometryCog,
+                    (tLayer) => tLayer.Notch = notch
+                );
             };
             this.NotchTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float notch = (float)value / 100f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set cog layer notch");
+                this.MethodViewModel.TLayerChangeCompleted<float, GeometryCogLayer>
+                (
+                    layerType: LayerType.GeometryCog,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogNotch = notch,
+                    set: (tLayer) => tLayer.Notch = notch,
 
-                //Selection
-                this.SelectionViewModel.GeometryCogNotch = notch;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryCog)
-                    {
-                        GeometryCogLayer geometryCogLayer = (GeometryCogLayer)layer;
-
-                        var previous = geometryCogLayer.StartingNotch;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryCogLayer.IsRefactoringRender = true;
-                            geometryCogLayer.IsRefactoringIconRender = true;
-                            geometryCogLayer.Notch = previous;
-                        };
-
-                        //Refactoring
-                        geometryCogLayer.IsRefactoringRender = true;
-                        geometryCogLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryCogLayer.Notch = notch;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set cog layer notch",
+                    getHistory: (tLayer) => tLayer.StartingNotch,
+                    setHistory: (tLayer, previous) => tLayer.Notch = previous
+                );
             };
         }
 

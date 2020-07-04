@@ -124,6 +124,7 @@ namespace Retouch_Photo2.Tools.Models
     public sealed partial class GeometryRoundRectTool : Page, ITool
     {
 
+        //Corner
         private void ConstructCorner1()
         {
             //Button
@@ -142,41 +143,16 @@ namespace Retouch_Photo2.Tools.Models
                 if (corner < 0.0f) corner = 0.0f;
                 if (corner > 0.5f) corner = 0.5f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set round rect corner");
+                this.MethodViewModel.TLayerChanged<float, GeometryRoundRectLayer>
+                (
+                    layerType: LayerType.GeometryRoundRect,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryRoundRectCorner = corner,
+                    set: (tLayer) => tLayer.Corner = corner,
 
-                //Selection
-                this.SelectionViewModel.GeometryRoundRectCorner = corner;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryRoundRect)
-                    {
-                        GeometryRoundRectLayer geometryRoundRectLayer = (GeometryRoundRectLayer)layer;
-
-                        var previous = geometryRoundRectLayer.Corner;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryRoundRectLayer.IsRefactoringRender = true;
-                            geometryRoundRectLayer.IsRefactoringIconRender = true;
-                            geometryRoundRectLayer.Corner = previous;
-                        };
-
-                        //Refactoring
-                        geometryRoundRectLayer.IsRefactoringRender = true;
-                        geometryRoundRectLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryRoundRectLayer.Corner = corner;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set round rect layer corner",
+                    getHistory: (tLayer) => tLayer.Corner,
+                    setHistory: (tLayer, previous) => tLayer.Corner = previous
+                );
             };
         }
         private void ConstructCorner2()
@@ -187,19 +163,11 @@ namespace Retouch_Photo2.Tools.Models
             this.CornerTouchbarSlider.Maximum = 50;
             this.CornerTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryRoundRect)
-                    {
-                        GeometryRoundRectLayer geometryRoundRectLayer = (GeometryRoundRectLayer)layer;
-                        geometryRoundRectLayer.CacheCorner();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.MethodViewModel.TLayerChangeStarted<GeometryRoundRectLayer>
+                (
+                    LayerType.GeometryRoundRect,
+                    (tLayer) => tLayer.CacheCorner()
+                );
             };
             this.CornerTouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
@@ -207,24 +175,11 @@ namespace Retouch_Photo2.Tools.Models
                 if (corner < 0.0f) corner = 0.0f;
                 if (corner > 0.5f) corner = 0.5f;
 
-                //Selection
-                this.SelectionViewModel.GeometryRoundRectCorner = corner;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryRoundRect)
-                    {
-                        GeometryRoundRectLayer geometryRoundRectLayer = (GeometryRoundRectLayer)layer;
-
-                        //Refactoring
-                        geometryRoundRectLayer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryRoundRectLayer.Corner = corner;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.MethodViewModel.TLayerChangeDelta<GeometryRoundRectLayer>
+                (
+                    LayerType.GeometryRoundRect,
+                    (tLayer) => tLayer.Corner = corner
+                );
             };
             this.CornerTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
@@ -232,41 +187,16 @@ namespace Retouch_Photo2.Tools.Models
                 if (corner < 0.0f) corner = 0.0f;
                 if (corner > 0.5f) corner = 0.5f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set round rect corner");
+                this.MethodViewModel.TLayerChangeCompleted<float, GeometryRoundRectLayer>
+                (
+                    layerType: LayerType.GeometryRoundRect,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryRoundRectCorner = corner,
+                    set: (tLayer) => tLayer.Corner = corner,
 
-                //Selection
-                this.SelectionViewModel.GeometryRoundRectCorner = corner;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryRoundRect)
-                    {
-                        GeometryRoundRectLayer geometryRoundRectLayer = (GeometryRoundRectLayer)layer;
-
-                        var previous = geometryRoundRectLayer.StartingCorner;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryRoundRectLayer.IsRefactoringRender = true;
-                            geometryRoundRectLayer.IsRefactoringIconRender = true;
-                            geometryRoundRectLayer.Corner = previous;
-                        };
-
-                        //Refactoring
-                        geometryRoundRectLayer.IsRefactoringRender = true;
-                        geometryRoundRectLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryRoundRectLayer.Corner = corner;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set round rect layer corner",
+                    getHistory: (tLayer) => tLayer.StartingCorner,
+                    setHistory: (tLayer, previous) => tLayer.Corner = previous
+                );
             };
         }
 

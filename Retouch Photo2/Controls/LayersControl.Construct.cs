@@ -37,30 +37,17 @@ namespace Retouch_Photo2.Controls
             {
                 LayerageCollection.VisibilityChanged += (layer) =>
                 {
-                    Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
                     Visibility value = (layer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
 
-                    //History 
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set visibility");
+                    this.MethodViewModel.ILayerChanged<Visibility>
+                    (
+                        setSelectionViewModel: () => this.SelectionViewModel.Visibility = value,
+                        set: (iLayer) => iLayer.Visibility = value,
 
-                    var previous = layer.Visibility;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.Visibility = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Visibility = value;
-
-                    //History
-                    this.ViewModel.HistoryPush(history);
-
-                    this.ViewModel.Invalidate();//Invalidate
+                        historyTitle: "Set visibility",
+                        getHistory: (iLayer) => iLayer.Visibility,
+                        setHistory: (iLayer, previous) => iLayer.Visibility = previous
+                    );
                 };
             }
             if (LayerageCollection.IsExpandChanged == null)

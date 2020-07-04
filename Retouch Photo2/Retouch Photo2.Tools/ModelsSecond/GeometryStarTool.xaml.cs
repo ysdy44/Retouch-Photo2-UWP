@@ -172,41 +172,16 @@ namespace Retouch_Photo2.Tools.Models
                 if (points < 3) points = 3;
                 if (points > 36) points = 36;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set star layer points");
+                this.MethodViewModel.TLayerChanged<int, GeometryStarLayer>
+                (
+                    layerType: LayerType.GeometryStar,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryStarPoints = points,
+                    set: (tLayer) => tLayer.Points = points,
 
-                //Selection
-                this.SelectionViewModel.GeometryStarPoints = points;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryStar)
-                    {
-                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
-
-                        var previous = geometryStarLayer.Points;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryStarLayer.IsRefactoringRender = true;
-                            geometryStarLayer.IsRefactoringIconRender = true;
-                            geometryStarLayer.Points = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryStarLayer.Points = points;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set star layer points",
+                    getHistory: (tLayer) => tLayer.Points = points,
+                    setHistory: (tLayer, previous) => tLayer.Points = previous
+                );
             };
         }
         private void ConstructPoints2()
@@ -217,19 +192,11 @@ namespace Retouch_Photo2.Tools.Models
             this.PointsTouchbarSlider.Maximum = 36;
             this.PointsTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryStar)
-                    {
-                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
-                        geometryStarLayer.CachePoints();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.MethodViewModel.TLayerChangeStarted<GeometryStarLayer>
+                (
+                    LayerType.GeometryStar,
+                    (tLayer) => tLayer.CachePoints()
+                );
             };
             this.PointsTouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
@@ -237,68 +204,31 @@ namespace Retouch_Photo2.Tools.Models
                 if (points < 3) points = 3;
                 if (points > 36) points = 36;
 
-                //Selection
-                this.SelectionViewModel.GeometryStarPoints = points;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryStar)
-                    {
-                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryStarLayer.Points = points;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.MethodViewModel.TLayerChangeDelta<GeometryStarLayer>
+                (
+                    LayerType.GeometryStar,
+                    (tLayer) => tLayer.Points = points
+                );
             };
             this.PointsTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 int points = (int)value;
                 if (points < 3) points = 3;
                 if (points > 36) points = 36;
-                
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set star layer points");
 
-                //Selection
-                this.SelectionViewModel.GeometryStarPoints = points;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+                this.MethodViewModel.TLayerChangeCompleted<int, GeometryStarLayer>
+                (
+                    layerType: LayerType.GeometryStar,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryStarPoints = points,
+                    set: (tLayer) => tLayer.Points = points,
 
-                    if (layer.Type == LayerType.GeometryStar)
-                    {
-                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
-
-                        var previous = geometryStarLayer.StartingPoints;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryStarLayer.IsRefactoringRender = true;
-                            geometryStarLayer.IsRefactoringIconRender = true;
-                            geometryStarLayer.Points = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryStarLayer.Points = points;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set star layer points",
+                    getHistory: (tLayer) => tLayer.StartingPoints,
+                    setHistory: (tLayer, previous) => tLayer.Points = previous
+                );
             };
         }
+
 
         //InnerRadius
         private void ConstructInnerRadius1()
@@ -322,41 +252,16 @@ namespace Retouch_Photo2.Tools.Models
                 if (innerRadius < 0.0f) innerRadius = 0.0f;
                 if (innerRadius > 1.0f) innerRadius = 1.0f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set star layer inner radius");
+                this.MethodViewModel.TLayerChanged<float, GeometryStarLayer>
+                (
+                    layerType: LayerType.GeometryStar,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryStarInnerRadius = innerRadius,
+                    set: (tLayer) => tLayer.InnerRadius = innerRadius,
 
-                //Selection
-                this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryStar)
-                    {
-                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
-
-                        var previous = geometryStarLayer.InnerRadius;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryStarLayer.IsRefactoringRender = true;
-                            geometryStarLayer.IsRefactoringIconRender = true;
-                            geometryStarLayer.InnerRadius = previous;
-                        };
-
-                        //Refactoring
-                        geometryStarLayer.IsRefactoringRender = true;
-                        geometryStarLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryStarLayer.InnerRadius = innerRadius;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set star layer inner radius",
+                    getHistory: (tLayer) => tLayer.InnerRadius,
+                    setHistory: (tLayer, previous) => tLayer.InnerRadius = previous
+                );
             };
         }
         private void ConstructInnerRadius2()
@@ -367,19 +272,11 @@ namespace Retouch_Photo2.Tools.Models
             this.InnerRadiusTouchbarSlider.Maximum = 100;
             this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryStar)
-                    {
-                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
-                        geometryStarLayer.CacheInnerRadius();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.MethodViewModel.TLayerChangeStarted<GeometryStarLayer>
+                (
+                    LayerType.GeometryStar,
+                    (tLayer) => tLayer.CacheInnerRadius()
+                );
             };
             this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
@@ -387,66 +284,28 @@ namespace Retouch_Photo2.Tools.Models
                 if (innerRadius < 0.0f) innerRadius = 0.0f;
                 if (innerRadius > 1.0f) innerRadius = 1.0f;
 
-                //Selection
-                this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryStar)
-                    {
-                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryStarLayer.InnerRadius = innerRadius;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.MethodViewModel.TLayerChangeDelta<GeometryStarLayer>
+                (
+                    LayerType.GeometryStar,
+                    (tLayer) => tLayer.InnerRadius = innerRadius
+                );
             };
             this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float innerRadius = (float)value / 100.0f;
                 if (innerRadius < 0.0f) innerRadius = 0.0f;
                 if (innerRadius > 1.0f) innerRadius = 1.0f;
-                
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set star layer innerRadius");
 
-                //Selection
-                this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+                this.MethodViewModel.TLayerChangeCompleted<int, GeometryStarLayer>
+                (
+                    layerType: LayerType.GeometryStar,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryStarInnerRadius = innerRadius,
+                    set: (tLayer) => tLayer.InnerRadius = innerRadius,
 
-                    if (layer.Type == LayerType.GeometryStar)
-                    {
-                        GeometryStarLayer geometryStarLayer = (GeometryStarLayer)layer;
-
-                        var previous = geometryStarLayer.StartingInnerRadius;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryStarLayer.IsRefactoringRender = true;
-                            geometryStarLayer.IsRefactoringIconRender = true;
-                            geometryStarLayer.InnerRadius = previous;
-                        };
-
-                        //Refactoring
-                        geometryStarLayer.IsRefactoringRender = true;
-                        geometryStarLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryStarLayer.InnerRadius = innerRadius;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set star layer inner radius",
+                    getHistory: (tLayer) => tLayer.StartingPoints,
+                    setHistory: (tLayer, previous) => tLayer.InnerRadius = previous
+                );
             };
         }
 

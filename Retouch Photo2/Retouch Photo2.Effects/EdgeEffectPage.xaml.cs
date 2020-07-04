@@ -16,7 +16,8 @@ namespace Retouch_Photo2.Effects.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-
+        ViewModel MethodViewModel => App.MethodViewModel;
+        
         //@Construct
         /// <summary>
         /// Initializes a EdgeEffectPage. 
@@ -25,6 +26,7 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.InitializeComponent();
             this.ConstructString();
+
             this.ConstructButton();
             this.ConstructEdge_Amount();
             this.ConstructEdge_Radius();
@@ -113,184 +115,56 @@ namespace Retouch_Photo2.Effects.Models
     public sealed partial class EdgeEffectPage : Page, IEffectPage
     {
 
+        //IsOn
         private void ConstructButton()
         {
             this.Button.Toggled += (isOn) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect edge");
+                this.MethodViewModel.EffectChanged<bool>
+                (
+                    set: (effect) => effect.Edge_IsOn = isOn,
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.Edge_IsOn;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.Edge_IsOn = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.Edge_IsOn = isOn;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set effect edge is on",
+                    getHistory: (effect) => effect.Edge_IsOn,
+                    setHistory: (effect, previous) => effect.Edge_IsOn = previous
+                );
             };
         }
 
 
+        //Edge_Amount
         private void ConstructEdge_Amount()
         {
-            //Amount
             this.AmountSlider.Minimum = 0;
             this.AmountSlider.Maximum = 100;
-            this.AmountSlider.ValueChangeStarted += (s, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-                    layer.Effect.CacheEdge();
-                });
+            this.AmountSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEdge());
+            this.AmountSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Edge_Amount = (float)value / 100.0f);
+            this.AmountSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
+            (
+                set: (effect) => effect.Edge_Amount = (float)value / 100.0f,
 
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.AmountSlider.ValueChangeDelta += (s, value) =>
-            {
-                float amount = (float)value / 100.0f;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Effect.Edge_Amount = amount;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.AmountSlider.ValueChangeCompleted += (s, value) =>
-            {
-                float amount = (float)value / 100.0f;
-                
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set edge effect amount");
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingEdge_Amount;
-                    history.UndoAction += () =>
-                    {     
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.Edge_Amount = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.Edge_Amount = amount;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
-
+                historyTitle: "Set effect edge amount",
+                getHistory: (effect) => effect.StartingEdge_Amount,
+                setHistory: (effect, previous) => effect.Edge_Amount = previous
+            );
         }
 
+
+        //Edge_Radius
         private void ConstructEdge_Radius()
         {
-            //Radius
             this.RadiusSlider.Minimum = 0;
             this.RadiusSlider.Maximum = 10;
-            this.RadiusSlider.ValueChangeStarted += (s, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-                    layer.Effect.CacheEdge();
-                });
+            this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEdge());
+            this.RadiusSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Edge_Radius = (float)value);
+            this.RadiusSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
+            (
+                set: (effect) => effect.Edge_Radius = (float)value,
 
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.RadiusSlider.ValueChangeDelta += (s, value) =>
-            {
-                float blurAmount = (float)value;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Effect.Edge_Radius = blurAmount;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.RadiusSlider.ValueChangeCompleted += (s, value) =>
-            {
-                float blurAmount = (float)value;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set edge effect blur amount");
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingEdge_Radius;
-                    history.UndoAction += () =>
-                    {   
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.Edge_Radius = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.Edge_Radius = blurAmount;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
-
+                historyTitle: "Set effect edge radius",
+                getHistory: (effect) => effect.StartingEdge_Radius,
+                setHistory: (effect, previous) => effect.Edge_Radius = previous
+            );
         }
 
     }

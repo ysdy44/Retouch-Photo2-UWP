@@ -110,6 +110,7 @@
     <Compile Include="Enums\EditMode.cs" />
     <Compile Include="Enums\InvalidateMode.cs" />
     <Compile Include="Enums\MoveMode.cs" />
+    <Compile Include="MethodViewModels\MethodViewModel.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Color.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Edit.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Selected.cs" />

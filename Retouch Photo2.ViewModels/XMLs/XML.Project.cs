@@ -53,7 +53,7 @@ namespace Retouch_Photo2.ViewModels
                     Name = name,
                 };
 
-                if (document.Element("Layerages") is XElement layerages)
+                if (root.Element("Layerages") is XElement layerages)
                 {
                     if (layerages.Elements("Layerage") is IEnumerable<XElement> layerages2)
                     {

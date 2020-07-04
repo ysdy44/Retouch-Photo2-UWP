@@ -122,6 +122,7 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public sealed partial class GeometryPentagonTool : Page, ITool
     {
+
         //Points
         private void ConstructPoints1()
         {
@@ -140,41 +141,16 @@ namespace Retouch_Photo2.Tools.Models
                 if (points < 3) points = 3;
                 if (points > 36) points = 36;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set pentagon layer points");
+                this.MethodViewModel.TLayerChanged<int, GeometryPentagonLayer>
+                (
+                    layerType: LayerType.GeometryPentagon,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryPentagonPoints = points,
+                    set: (tLayer) => tLayer.Points = points,
 
-                //Selection
-                this.SelectionViewModel.GeometryPentagonPoints = points;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryPentagon)
-                    {
-                        GeometryPentagonLayer geometryPentagonLayer = (GeometryPentagonLayer)layer;
-
-                        var previous = geometryPentagonLayer.Points;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryPentagonLayer.IsRefactoringRender = true;
-                            geometryPentagonLayer.IsRefactoringIconRender = true;
-                            geometryPentagonLayer.Points = previous;
-                        };
-
-                        //Refactoring
-                        geometryPentagonLayer.IsRefactoringRender = true;
-                        geometryPentagonLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryPentagonLayer.Points = points;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set pentagon layer points",
+                    getHistory: (tLayer) => tLayer.Points = points,
+                    setHistory: (tLayer, previous) => tLayer.Points = previous
+                );
             };
         }
         private void ConstructPoints2()
@@ -185,19 +161,11 @@ namespace Retouch_Photo2.Tools.Models
             this.PointsTouchbarSlider.Maximum = 36;
             this.PointsTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryPentagon)
-                    {
-                        GeometryPentagonLayer geometryPentagonLayer = (GeometryPentagonLayer)layer;
-                        geometryPentagonLayer.CachePoints();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.MethodViewModel.TLayerChangeStarted<GeometryPentagonLayer>
+                (
+                    LayerType.GeometryPentagon,
+                    (tLayer) => tLayer.CachePoints()
+                );
             };
             this.PointsTouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
@@ -205,24 +173,11 @@ namespace Retouch_Photo2.Tools.Models
                 if (points < 3) points = 3;
                 if (points > 36) points = 36;
 
-                //Selection
-                this.SelectionViewModel.GeometryPentagonPoints = points;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryPentagon)
-                    {
-                        GeometryPentagonLayer geometryPentagonLayer = (GeometryPentagonLayer)layer;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryPentagonLayer.Points = points;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.MethodViewModel.TLayerChangeDelta<GeometryPentagonLayer>
+                (
+                    LayerType.GeometryPentagon,
+                    (tLayer) => tLayer.Points = points
+                );
             };
             this.PointsTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
@@ -230,41 +185,16 @@ namespace Retouch_Photo2.Tools.Models
                 if (points < 3) points = 3;
                 if (points > 36) points = 36;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set pentagon layer points");
+                this.MethodViewModel.TLayerChangeCompleted<int, GeometryPentagonLayer>
+                (
+                    layerType: LayerType.GeometryPentagon,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryPentagonPoints = points,
+                    set: (tLayer) => tLayer.Points = points,
 
-                //Selection
-                this.SelectionViewModel.GeometryPentagonPoints = points;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryPentagon)
-                    {
-                        GeometryPentagonLayer geometryPentagonLayer = (GeometryPentagonLayer)layer;
-
-                        var previous = geometryPentagonLayer.StartingPoints;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            geometryPentagonLayer.Points = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryPentagonLayer.Points = points;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set pentagon layer points",
+                    getHistory: (tLayer) => tLayer.StartingPoints,
+                    setHistory: (tLayer, previous) => tLayer.Points = previous
+                );
             };
         }
 

@@ -16,7 +16,8 @@ namespace Retouch_Photo2.Effects.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-
+        ViewModel MethodViewModel => App.MethodViewModel;
+        
         //@Construct
         /// <summary>
         /// Initializes a StraightenEffectPage. 
@@ -60,35 +61,14 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.AnglePicker.Radians = 0;
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set effect straighten");
+            this.MethodViewModel.EffectChanged
+            (
+                set: (effect) => effect.Straighten_Angle = 0,
 
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                var previous = layer.Effect.Straighten_Angle;
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Effect.Straighten_Angle = previous;
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                layer.Effect.Straighten_Angle = 0;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+                historyTitle: "Set effect straighten",
+                getHistory: (effect) => effect.Straighten_Angle,
+                setHistory: (effect, previous) => effect.Straighten_Angle = previous
+            );
         }
         public void FollowButton(Effect effect)
         {
@@ -106,110 +86,38 @@ namespace Retouch_Photo2.Effects.Models
     public sealed partial class StraightenEffectPage : Page, IEffectPage
     {
 
+        //IsOn
         private void ConstructButton()
         {
             this.Button.Toggled += (isOn) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect straighten");
+                this.MethodViewModel.EffectChanged<bool>
+                (
+                    set: (effect) => effect.Straighten_IsOn = isOn,
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.Straighten_IsOn;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.Straighten_IsOn = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.Straighten_IsOn = isOn;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set effect straighten is on",
+                    getHistory: (effect) => effect.Straighten_IsOn,
+                    setHistory: (effect, previous) => effect.Straighten_IsOn = previous
+                );
             };
         }
 
 
+        //Straighten_Angle
         private void ConstructStraighten_Angle()
         {
-            //Angle
-            this.AnglePicker.ValueChangeStarted += (s, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-                    layer.Effect.CacheStraighten();
-                });
+            //this.AnglePicker.Minimum = 0;
+            //this.AnglePicker.Maximum = FanKit.Math.PiTwice;
+            this.AnglePicker.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheStraighten());
+            this.AnglePicker.ValueChangeDelta += (s, value) =>                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Straighten_Angle = (float)value);
+            this.AnglePicker.ValueChangeCompleted += (s, value) =>    this.MethodViewModel.EffectChangeCompleted<float>
+            (
+                set: (effect) => effect.Straighten_Angle = (float)value,
 
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.AnglePicker.ValueChangeDelta += (s, value) =>
-            {
-                float radians = (float)value;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Effect.Straighten_Angle = radians;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.AnglePicker.ValueChangeCompleted += (s, value) =>
-            {
-                float radians = (float)value;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect straighten");
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingStraighten_Angle;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.Straighten_Angle = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.Straighten_Angle = radians;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
+                historyTitle: "Set effect straighten angle",
+                getHistory: (effect) => effect.Straighten_Angle,
+                setHistory: (effect, previous) => effect.Straighten_Angle = previous
+            );        
         }
 
     }

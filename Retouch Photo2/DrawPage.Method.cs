@@ -39,7 +39,7 @@ namespace Retouch_Photo2
                 suggestedFileName: this.ViewModel.Name,
 
                 fileFormat: this.FileFormatComboBox.FileFormat,
-                quality: this.ExportQualityPicker.Value
+                quality: (float)this.ExportQualityPicker.Value
             );
         }
 

@@ -142,42 +142,17 @@ namespace Retouch_Photo2.Tools.Models
             this.SweepAngleTouchbarSlider.ValueChanged += (sender, value) =>
             {
                 float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
+                
+                this.MethodViewModel.TLayerChanged<float, GeometryPieLayer>
+                (
+                    layerType: LayerType.GeometryPie,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle,
+                    set: (tLayer) => tLayer.SweepAngle = sweepAngle,
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set pie layer sweep angle");
-
-                //Selection
-                this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryPie)
-                    {
-                        GeometryPieLayer geometryPieLayer = (GeometryPieLayer)layer;
-
-                        var previous = geometryPieLayer.SweepAngle;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryPieLayer.IsRefactoringRender = true;
-                            geometryPieLayer.IsRefactoringIconRender = true;
-                            geometryPieLayer.SweepAngle = previous;
-                        };
-
-                        //Refactoring
-                        geometryPieLayer.IsRefactoringRender = true;
-                        geometryPieLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryPieLayer.SweepAngle = sweepAngle;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set pie layer sweep angle",
+                    getHistory: (tLayer) => tLayer.SweepAngle,
+                    setHistory: (tLayer, previous) => tLayer.SweepAngle = previous
+                );
             };
         }
         private void ConstructSweepAngle2()
@@ -188,82 +163,36 @@ namespace Retouch_Photo2.Tools.Models
             this.SweepAngleTouchbarSlider.Maximum = 360;
             this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryPie)
-                    {
-                        GeometryPieLayer geometryPieLayer = (GeometryPieLayer)layer;
-                        geometryPieLayer.CacheSweepAngle();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.MethodViewModel.TLayerChangeStarted<GeometryPieLayer>
+                (
+                    LayerType.GeometryPie,
+                    (tLayer) => tLayer.CacheSweepAngle()
+                );
             };
             this.SweepAngleTouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
                 float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
 
-                //Selection
-                this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryPie)
-                    {
-                        GeometryPieLayer geometryPieLayer = (GeometryPieLayer)layer;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryPieLayer.SweepAngle = sweepAngle;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.MethodViewModel.TLayerChangeDelta<GeometryPieLayer>
+                (
+                    LayerType.GeometryPie,
+                    (tLayer) => tLayer.SweepAngle = sweepAngle
+                );
             };
             this.SweepAngleTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set pie layer sweep angle");
+                this.MethodViewModel.TLayerChangeCompleted<float, GeometryPieLayer>
+                (
+                    layerType: LayerType.GeometryPie,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle,
+                    set: (tLayer) => tLayer.SweepAngle = sweepAngle,
 
-                //Selection
-                this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryPie)
-                    {
-                        GeometryPieLayer geometryPieLayer = (GeometryPieLayer)layer;
-
-                        var previous = geometryPieLayer.StartingSweepAngle;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryPieLayer.IsRefactoringRender = true;
-                            geometryPieLayer.IsRefactoringIconRender = true;
-                            geometryPieLayer.SweepAngle = previous;
-                        };
-
-                        //Refactoring
-                        geometryPieLayer.IsRefactoringRender = true;
-                        geometryPieLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryPieLayer.SweepAngle = sweepAngle;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set pie layer sweep angle",
+                    getHistory: (tLayer) => tLayer.StartingSweepAngle,
+                    setHistory: (tLayer, previous) => tLayer.SweepAngle = previous
+                );
             };
         }
 

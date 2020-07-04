@@ -21,13 +21,13 @@ namespace Retouch_Photo2
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.ViewModel" />. </summary>
         public static ViewModel ViewModel => App.viewModel;
 
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.SelectionViewModel" />. </summary>
+        /// <summary> Retouch_Photo2's the only Selection<see cref = "ViewModels.ViewModel" />. </summary>
         public static ViewModel SelectionViewModel => App.viewModel;
 
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.MethodViewModel" />. </summary>
+        /// <summary> Retouch_Photo2's the only Method<see cref = "ViewModels.ViewModel" />. </summary>
         public static ViewModel MethodViewModel => App.viewModel;
 
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.SettingViewModel" />. </summary>
+        /// <summary> Retouch_Photo2's the only Setting<see cref = "ViewModels.ViewModel" />. </summary>
         public static SettingViewModel SettingViewModel = new SettingViewModel();
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.TipViewModel" />. </summary>

@@ -16,7 +16,8 @@ namespace Retouch_Photo2.Effects.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-
+        ViewModel MethodViewModel => App.MethodViewModel;
+        
         //@Construct
         /// <summary>
         /// Initializes a EmbossEffectPage. 
@@ -113,182 +114,56 @@ namespace Retouch_Photo2.Effects.Models
     public sealed partial class EmbossEffectPage : Page, IEffectPage
     {
 
+        //IsOn
         private void ConstructButton()
         {
             this.Button.Toggled += (isOn) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect emboss");
+                this.MethodViewModel.EffectChanged<bool>
+                (
+                    set: (effect) => effect.Emboss_IsOn = isOn,
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.Emboss_IsOn;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.Emboss_IsOn = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.Emboss_IsOn = isOn;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set effect emboss is on",
+                    getHistory: (effect) => effect.Emboss_IsOn,
+                    setHistory: (effect, previous) => effect.Emboss_IsOn = previous
+                );
             };
         }
 
 
+        //Emboss_Radius
         private void ConstructEmboss_Radius()
         {
-            //Radius
             this.RadiusSlider.Minimum = 0;
             this.RadiusSlider.Maximum = 10;
-            this.RadiusSlider.ValueChangeStarted += (s, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+            this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEmboss());
+            this.RadiusSlider.ValueChangeDelta += (s, value) =>  this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Emboss_Radius = (float)value);
+            this.RadiusSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
+            (
+                set: (effect) => effect.Emboss_Radius = (float)value,
 
-                    layer.Effect.CacheEmboss();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.RadiusSlider.ValueChangeDelta += (s, value) =>
-            {
-                float radius = (float)value;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Effect.Emboss_Radius = radius;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.RadiusSlider.ValueChangeCompleted += (s, value) =>
-            {
-                float radius = (float)value;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect emboss");
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingEmboss_Radius;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.Emboss_Radius = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.Emboss_Radius = radius;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
+                historyTitle: "Set effect emboss radius",
+                getHistory: (effect) => effect.StartingEmboss_Radius,
+                setHistory: (effect, previous) => effect.Emboss_Radius = previous
+            );
         }
 
 
+        //Emboss_Angle
         private void ConstructEmboss_Angle()
         {
-            //Angle
-            this.AnglePicker.ValueChangeStarted += (s, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-                    layer.Effect.CacheEmboss();
-                });
+            //this.AnglePicker.Minimum = 0;
+            //this.AnglePicker.Maximum = FanKit.Math.PiTwice;
+            this.AnglePicker.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEmboss());
+            this.AnglePicker.ValueChangeDelta += (s, value) =>   this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Emboss_Angle = (float)value);
+            this.AnglePicker.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
+            (
+                set: (effect) => effect.Emboss_Angle = (float)value,
 
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.AnglePicker.ValueChangeDelta += (s, value) =>
-            {
-                float radians = (float)value;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Effect.Emboss_Angle = radians;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.AnglePicker.ValueChangeCompleted += (s, value) =>
-            {
-                float radians = (float)value;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect emboss");
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingEmboss_Angle;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.Emboss_Angle = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.Emboss_Angle = radians;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
+                historyTitle: "Set effect emboss angle",
+                getHistory: (effect) => effect.StartingEmboss_Angle,
+                setHistory: (effect, previous) => effect.Emboss_Angle = previous
+            );
         }
 
     }

@@ -55,6 +55,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
+
             this.ConstructCenter1();
             this.ConstructCenter2();
             this.ConstructMirror();
@@ -144,41 +145,16 @@ namespace Retouch_Photo2.Tools.Models
                 if (center < 0.0f) center = 0.0f;
                 if (center > 1.0f) center = 1.0f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set triangle layer center");
+                this.MethodViewModel.TLayerChanged<float, GeometryTriangleLayer>
+                (
+                    LayerType.GeometryTriangle,
+                    () => this.SelectionViewModel.GeometryTriangleCenter = center,
+                    (tLayer) => tLayer.Center = center,
 
-                //Selection
-                this.SelectionViewModel.GeometryTriangleCenter = center;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryTriangle)
-                    {
-                        GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
-
-                        var previous = geometryTriangleLayer.Center;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryTriangleLayer.IsRefactoringRender = true;
-                            geometryTriangleLayer.IsRefactoringIconRender = true;
-                            geometryTriangleLayer.Center = previous;
-                        };
-
-                        //Refactoring
-                        geometryTriangleLayer.IsRefactoringRender = true;
-                        geometryTriangleLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryTriangleLayer.Center = center;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    "Set triangle layer center",
+                    (tLayer) => tLayer.Center = center,
+                    (tLayer, previous) => tLayer.Center = previous
+                );
             };
         }
         private void ConstructCenter2()
@@ -187,88 +163,39 @@ namespace Retouch_Photo2.Tools.Models
             this.CenterTouchbarSlider.Value = 0;
             this.CenterTouchbarSlider.Minimum = 0;
             this.CenterTouchbarSlider.Maximum = 100;
-            this.CenterTouchbarSlider.ValueChangeStarted += (sender, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryTriangle)
-                    {
-                        GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
-                        geometryTriangleLayer.CacheCenter();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.CenterTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            this.CenterTouchbarSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TLayerChangeStarted<GeometryTriangleLayer>
+            (
+                LayerType.GeometryTriangle,
+                (tLayer) => tLayer.CacheCenter()
+            );
+            this.CenterTouchbarSlider.ValueChangeDelta += (s, value) =>
             {
                 float center = (float)value / 100.0f;
                 if (center < 0.0f) center = 0.0f;
                 if (center > 1.0f) center = 1.0f;
 
-                //Selection
-                this.SelectionViewModel.GeometryTriangleCenter = center;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryTriangle)
-                    {
-                        GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
-                   
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryTriangleLayer.Center = center;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.MethodViewModel.TLayerChangeDelta<GeometryTriangleLayer>
+                (
+                    LayerType.GeometryTriangle,
+                    (tLayer) => tLayer.Center = center
+                );
             };
-            this.CenterTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.CenterTouchbarSlider.ValueChangeCompleted += (s, value) =>
             {
                 float center = (float)value / 100.0f;
                 if (center < 0.0f) center = 0.0f;
                 if (center > 1.0f) center = 1.0f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set triangle layer center");
+                this.MethodViewModel.TLayerChangeCompleted<float, GeometryTriangleLayer>
+                (
+                    LayerType.GeometryTriangle,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryTriangleCenter = center,
+                    set: (tLayer) => tLayer.Center = center,
 
-                //Selection
-                this.SelectionViewModel.GeometryTriangleCenter = center;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryTriangle)
-                    {
-                        GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
-
-                        var previous = geometryTriangleLayer.StartingCenter;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryTriangleLayer.IsRefactoringRender = true;
-                            geometryTriangleLayer.IsRefactoringIconRender = true;
-                            geometryTriangleLayer.Center = previous;
-                        };
-
-                        //Refactoring
-                        geometryTriangleLayer.IsRefactoringRender = true;
-                        geometryTriangleLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryTriangleLayer.Center = center;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set triangle layer center",
+                    getHistory: (tLayer) => tLayer.StartingCenter,
+                    setHistory: (tLayer, previous) => tLayer.Center = previous
+                );
             };
         }
 
@@ -276,41 +203,18 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.MirrorButton.Click += (s, e) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set triangle layer center");
+                float center = 1.0f - this.SelectionViewModel.GeometryTriangleCenter;
 
-                //Selection
-                this.SelectionViewModel.GeometryTriangleCenter = 1.0f - this.SelectionViewModel.GeometryTriangleCenter;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+                this.MethodViewModel.TLayerChanged<float, GeometryTriangleLayer>
+                (
+                    LayerType.GeometryTriangle,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryTriangleCenter = center,
+                    set: (tLayer) => tLayer.Center = 1.0f - tLayer.Center,
 
-                    if (layer.Type == LayerType.GeometryTriangle)
-                    {
-                        GeometryTriangleLayer geometryTriangleLayer = (GeometryTriangleLayer)layer;
-
-                        var previous = geometryTriangleLayer.Center;
-                        history.UndoAction += () =>
-                        {     
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            geometryTriangleLayer.Center = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryTriangleLayer.Center = 1.0f - geometryTriangleLayer.Center;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set triangle layer center",
+                    getHistory: (tLayer) => tLayer.Center,
+                    setHistory: (tLayer, previous) => tLayer.Center = previous
+                );
             };
         }
 

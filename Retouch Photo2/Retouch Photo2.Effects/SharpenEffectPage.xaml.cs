@@ -16,7 +16,8 @@ namespace Retouch_Photo2.Effects.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-
+        ViewModel MethodViewModel => App.MethodViewModel;
+        
         //@Construct
         /// <summary>
         /// Initializes a SharpenEffectPage. 
@@ -60,35 +61,14 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.AmountSlider.Value = 0;
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set effect sharpen");
+            this.MethodViewModel.EffectChanged<float>
+            (
+                set: (effect) => effect.Sharpen_Amount = 0,
 
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                var previous = layer.Effect.Sharpen_Amount;
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Effect.Sharpen_Amount = previous;
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                layer.Effect.Sharpen_Amount = 0;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+                historyTitle: "Set effect sharpen",
+                getHistory: (effect) => effect.Sharpen_Amount,
+                setHistory: (effect, previous) => effect.Sharpen_Amount = previous
+            );
         }
         public void FollowButton(Effect effect)
         {
@@ -106,113 +86,38 @@ namespace Retouch_Photo2.Effects.Models
     public sealed partial class SharpenEffectPage : Page, IEffectPage
     {
 
+        //IsOn
         private void ConstructButton()
         {
             this.Button.Toggled += (isOn) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect sharpen");
+                this.MethodViewModel.EffectChanged<bool>
+                (
+                    set: (effect) => effect.Straighten_IsOn = isOn,
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.Sharpen_IsOn;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.Sharpen_IsOn = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.Sharpen_IsOn = isOn;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set effect sharpen is on",
+                    getHistory: (effect) => effect.Sharpen_IsOn,
+                    setHistory: (effect, previous) => effect.Sharpen_IsOn = previous
+                );
             };
         }
 
 
+        //Sharpen_Amount
         private void ConstructSharpen_Amount()
         {
-            //Radius
             this.AmountSlider.Minimum = 0;
             this.AmountSlider.Maximum = 10;
-            this.AmountSlider.ValueChangeStarted += (s, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+            this.AmountSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheSharpen());
+            this.AmountSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Sharpen_Amount = (float)value);
+            this.AmountSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
+            (
+                set: (effect) => effect.Sharpen_Amount = (float)value,
 
-                    layer.Effect.CacheSharpen();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.AmountSlider.ValueChangeDelta += (s, value) =>
-            {
-                float amount = (float)value;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Effect.Sharpen_Amount = amount;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.AmountSlider.ValueChangeCompleted += (s, value) =>
-            {
-                float amount = (float)value;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect sharpen");
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingSharpen_Amount;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.Sharpen_Amount = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.Sharpen_Amount = amount;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
+                historyTitle: "Set effect sharpen amount",
+                getHistory: (effect) => effect.StartingSharpen_Amount,
+                setHistory: (effect, previous) => effect.Sharpen_Amount = previous
+            );
         }
 
     }

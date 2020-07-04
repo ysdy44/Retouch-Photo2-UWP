@@ -16,7 +16,8 @@ namespace Retouch_Photo2.Effects.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-
+        ViewModel MethodViewModel => App.MethodViewModel;
+        
         //@Construct
         /// <summary>
         /// Initializes a MorphologyEffectPage. 
@@ -61,7 +62,7 @@ namespace Retouch_Photo2.Effects.Models
             this.SizeSlider.Value = 1;
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set effect Morphology");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set effect morphology");
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
@@ -106,114 +107,38 @@ namespace Retouch_Photo2.Effects.Models
     public sealed partial class MorphologyEffectPage : Page, IEffectPage
     {
 
+        //IsOn
         private void ConstructButton()
         {
             this.Button.Toggled += (isOn) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect morphology");
+                this.MethodViewModel.EffectChanged<bool>
+                (
+                    set: (effect) => effect.Morphology_IsOn = isOn,
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.Morphology_IsOn;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.Morphology_IsOn = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.Morphology_IsOn = isOn;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set effect morphology is on",
+                    getHistory: (effect) => effect.Morphology_IsOn,
+                    setHistory: (effect, previous) => effect.Morphology_IsOn = previous
+                );
             };
         }
 
 
+        //Morphology_Size
         private void ConstructMorphology_Size()
         {
-            //Radius
             this.SizeSlider.Minimum = -100;
             this.SizeSlider.Maximum = 100;
-            this.SizeSlider.ValueChangeStarted += (s, value) =>
-            {                
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+            this.SizeSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheMorphology());
+            this.SizeSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Morphology_Size = (int)value);
+            this.SizeSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<int>
+            (
+                set: (effect) => effect.Morphology_Size = (int)value,
 
-                    layer.Effect.CacheMorphology();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.SizeSlider.ValueChangeDelta += (s, value) =>
-            {
-                int size = (int)value;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Effect.Morphology_Size = size;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.SizeSlider.ValueChangeCompleted += (s, value) =>
-            {
-                int size = (int)value;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect morphology");
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingMorphology_Size;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.Morphology_Size = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.Morphology_Size = size;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
-
+                historyTitle: "Set effect morphology size",
+                getHistory: (effect) => effect.StartingMorphology_Size,
+                setHistory: (effect, previous) => effect.Morphology_Size = previous
+            );
         }
 
     }

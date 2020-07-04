@@ -156,45 +156,18 @@ namespace Retouch_Photo2.Tools.Models
         //GridType
         private void ConstructGridType()
         {
-            this.PatternGridTypeComboBox.TypeChanged += (s, gridType) =>
-            {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set grid layer type");
+            this.PatternGridTypeComboBox.TypeChanged += (s, gridType) => this.MethodViewModel.TLayerChanged<PatternGridType, PatternGridLayer>
+            (
+                layerType: LayerType.PatternGrid,
+                setSelectionViewModel: () => this.SelectionViewModel.PatternGridType = gridType,
+                set: (tLayer) => tLayer.GridType = gridType,
 
-                //Selection
-                this.SelectionViewModel.PatternGridType = gridType;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.PatternGrid)
-                    {
-                        PatternGridLayer geometryArrowLayer = (PatternGridLayer)layer;
-
-                        var previous = geometryArrowLayer.GridType;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryArrowLayer.IsRefactoringRender = true;
-                            geometryArrowLayer.IsRefactoringIconRender = true;
-                            geometryArrowLayer.GridType = previous;
-                        };
-
-                        //Refactoring
-                        geometryArrowLayer.IsRefactoringRender = true;
-                        geometryArrowLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryArrowLayer.GridType = gridType;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
+                historyTitle: "Set grid layer type",
+                getHistory: (tLayer) => tLayer.GridType,
+                setHistory: (tLayer, previous) => tLayer.GridType = previous
+            );
         }
-        
+
+
     }
 }

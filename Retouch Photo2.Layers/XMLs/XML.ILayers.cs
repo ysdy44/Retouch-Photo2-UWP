@@ -45,10 +45,13 @@ namespace Retouch_Photo2.Layers
         {
             if (document.Element("Root") is XElement root)
             {
-                return
-                    from layer
-                    in root.Elements("Layer")
-                    select XML.LoadILayer(customDevice, layer);
+                if (root.Elements("Layer") is IEnumerable<XElement> layers)
+                {
+                    return
+                        from layer
+                        in layers
+                        select XML.LoadILayer(customDevice, layer);
+                }
             }
 
             return null;

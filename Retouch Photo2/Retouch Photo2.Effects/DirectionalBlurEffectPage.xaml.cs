@@ -16,6 +16,7 @@ namespace Retouch_Photo2.Effects.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
 
         //@Construct
         /// <summary>
@@ -112,181 +113,57 @@ namespace Retouch_Photo2.Effects.Models
     /// </summary>
     public sealed partial class DirectionalBlurEffectPage : Page, IEffectPage
     {
+
+        //IsOn
         private void ConstructButton()
         {
             this.Button.Toggled += (isOn) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect directional blur");
+                this.MethodViewModel.EffectChanged<bool>
+                (
+                    set: (effect) => effect.DirectionalBlur_IsOn = isOn,
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.DirectionalBlur_IsOn;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.DirectionalBlur_IsOn = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.DirectionalBlur_IsOn = isOn;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set effect directional blur is on",
+                    getHistory: (effect) => effect.DirectionalBlur_IsOn,
+                    setHistory: (effect, previous) => effect.DirectionalBlur_IsOn = previous
+                );
             };
         }
 
 
+        //DirectionalBlur_Radius
         private void ConstructDirectionalBlur_Radius()
         {
-            //Radius
-            this.RadiusSlider.ValueChangeStarted += (s, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+            this.RadiusSlider.Minimum = 0;
+            this.RadiusSlider.Maximum = 100;
+            this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheDirectionalBlur());
+            this.RadiusSlider.ValueChangeDelta += (s, value) =>  this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.DirectionalBlur_Radius = (float)value);
+            this.RadiusSlider.ValueChangeCompleted += (s, value) =>   this.MethodViewModel.EffectChangeCompleted<float>
+            (
+                set: (effect) => effect.DirectionalBlur_Radius = (float)value,
 
-                    layer.Effect.CacheDirectionalBlur();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.RadiusSlider.ValueChangeDelta += (s, value) =>
-            {
-                float radius = (float)value;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Effect.DirectionalBlur_Radius = radius;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.RadiusSlider.ValueChangeCompleted += (s, value) =>
-            {
-                float radius = (float)value;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect directional blur");
-                
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingDirectionalBlur_Radius;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.DirectionalBlur_Radius = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.DirectionalBlur_Radius = radius;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
+                historyTitle: "Set effect directional blur",
+                getHistory: (effect) => effect.StartingDirectionalBlur_Radius,
+                setHistory: (effect, previous) => effect.DirectionalBlur_Radius = previous
+            );
         }
 
 
+        //DirectionalBlur_Angle
         private void ConstructDirectionalBlur_Angle()
-        { 
-            //Angle
-            this.AnglePicker.ValueChangeStarted += (s, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+        {
+            //this.AnglePicker.Minimum = 0;
+            //this.AnglePicker.Maximum = FanKit.Math.PiTwice;
+            this.AnglePicker.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheDirectionalBlur());
+            this.AnglePicker.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.DirectionalBlur_Angle = (float)value);
+            this.AnglePicker.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
+            (
+                set: (effect) => effect.DirectionalBlur_Angle = (float)value,
 
-                    layer.Effect.CacheDirectionalBlur();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.AnglePicker.ValueChangeDelta += (s, value) =>
-            {
-                float radians = (float)value;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Effect.DirectionalBlur_Angle = radians;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.AnglePicker.ValueChangeCompleted += (s, value) =>
-            {
-                float radians = (float)value;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect directional blur");
-                
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingDirectionalBlur_Angle;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.DirectionalBlur_Angle = previous;
-                    };
-                    
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.DirectionalBlur_Angle = radians;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
+                historyTitle: "Set effect directional blur angle",
+                getHistory: (effect) => effect.StartingDirectionalBlur_Angle,
+                setHistory: (effect, previous) => effect.DirectionalBlur_Angle = previous
+            );
         }
           
 

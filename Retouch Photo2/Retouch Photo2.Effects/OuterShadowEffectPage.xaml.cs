@@ -5,6 +5,7 @@ using Retouch_Photo2.Historys;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.Layers;
+using Windows.UI;
 
 namespace Retouch_Photo2.Effects.Models
 {
@@ -16,6 +17,7 @@ namespace Retouch_Photo2.Effects.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         
         //@Construct
         /// <summary>
@@ -77,7 +79,7 @@ namespace Retouch_Photo2.Effects.Models
             this.AnglePicker.Radians = 0.78539816339744830961566084581988f;// 1/4 π
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set effect value");
+            LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
@@ -139,330 +141,96 @@ namespace Retouch_Photo2.Effects.Models
     public sealed partial class OuterShadowEffectPage : Page, IEffectPage
     {
 
+        //IsOn
         private void ConstructButton()
         {
             this.Button.Toggled += (isOn) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
+                this.MethodViewModel.EffectChanged<bool>
+                (
+                    set: (effect) => effect.OuterShadow_IsOn = isOn,
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.OuterShadow_IsOn;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.OuterShadow_IsOn = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.OuterShadow_IsOn = isOn;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set effect outer shadow is on",
+                    getHistory: (effect) => effect.OuterShadow_IsOn,
+                    setHistory: (effect, previous) => effect.OuterShadow_IsOn = previous
+                );
             };
         }
 
 
+        //OuterShadow_Radius
         private void ConstructOuterShadow_Radius()
         {
-            //Radius
             this.RadiusSlider.Minimum = 0;
             this.RadiusSlider.Maximum = 100;
-            this.RadiusSlider.ValueChangeStarted += (s, value) =>
-            {             
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+            this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
+            this.RadiusSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Radius = (float)value);
+            this.RadiusSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
+            (
+                set: (effect) => effect.OuterShadow_Radius = (float)value,
 
-                    layer.Effect.CacheOuterShadow();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.RadiusSlider.ValueChangeDelta += (s, value) =>
-            {
-                float radians = (float)value;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Effect.OuterShadow_Radius = radians;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.RadiusSlider.ValueChangeCompleted += (s, value) =>
-            {
-                float radians = (float)value;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
-                
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingOuterShadow_Radius;
-                    history.UndoAction += () =>
-                    {   
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-
-                        layer.Effect.OuterShadow_Radius = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.OuterShadow_Radius = radians;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
+                historyTitle: "Set effect outer shadow radius",
+                getHistory: (effect) => effect.StartingOuterShadow_Radius,
+                setHistory: (effect, previous) => effect.OuterShadow_Radius = previous
+            );
         }
 
 
+        //OuterShadow_Opacity
         private void ConstructOuterShadow_Opacity()
         {
-            //Opacity
             this.OpacitySlider.Minimum = 0;
             this.OpacitySlider.Maximum = 100;
-            this.OpacitySlider.ValueChangeStarted += (s, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+            this.OpacitySlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
+            this.OpacitySlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Opacity = (float)value / 100.0f);
+            this.OpacitySlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
+            (
+                set: (effect) => effect.OuterShadow_Opacity = (float)value / 100.0f,
 
-                    layer.Effect.CacheOuterShadow();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.OpacitySlider.ValueChangeDelta += (s, value) =>
-            {
-                float opacity = (float)value / 100.0f;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Effect.OuterShadow_Opacity = opacity;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.OpacitySlider.ValueChangeCompleted += (s, value) =>
-            {
-                float opacity = (float)value / 100.0f;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingOuterShadow_Opacity;
-                    history.UndoAction += () =>
-                    {    
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.OuterShadow_Opacity = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.OuterShadow_Opacity = opacity;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
+                historyTitle: "Set effect outer shadow opacity",
+                getHistory: (effect) => effect.StartingOuterShadow_Opacity,
+                setHistory: (effect, previous) => effect.OuterShadow_Opacity = previous
+            );
         }
 
 
+        //OuterShadow_Offset
         private void ConstructOuterShadow_Offset()
         {
+            this.OffsetSlider.Minimum = 0;
+            this.OffsetSlider.Maximum = 100;
+            this.OffsetSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
+            this.OffsetSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Offset = (float)value);
+            this.OffsetSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
+            (
+                set: (effect) => effect.OuterShadow_Offset = (float)value,
 
-            //Radius
-            this.OffsetSlider.ValueChangeStarted += (s, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    layer.Effect.CacheOuterShadow();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.OffsetSlider.ValueChangeDelta += (s, value) =>
-            {
-                float radians = (float)value;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Effect.OuterShadow_Offset = radians;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.OffsetSlider.ValueChangeCompleted += (s, value) =>
-            {
-                float radians = (float)value;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingOuterShadow_Offset;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.OuterShadow_Offset = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.OuterShadow_Offset = radians;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
+                historyTitle: "Set effect outer shadow offset",
+                getHistory: (effect) => effect.StartingOuterShadow_Offset,
+                setHistory: (effect, previous) => effect.OuterShadow_Offset = previous
+            );
         }
 
 
+        //Angle
         private void ConstructOuterShadow_Angle()
         {
-            //Angle
-            this.AnglePicker.ValueChangeStarted += (s, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+            //this.AnglePicker.Minimum = 0;
+            //this.AnglePicker.Maximum = FanKit.Math.PiTwice;
+            this.AnglePicker.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
+            this.AnglePicker.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Angle = (float)value);
+            this.AnglePicker.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
+            (
+                set: (effect) => effect.OuterShadow_Angle = (float)value,
 
-                    layer.Effect.CacheOuterShadow();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.AnglePicker.ValueChangeDelta += (s, value) =>
-            {
-                float radians = (float)value;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Effect.OuterShadow_Angle = radians;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.AnglePicker.ValueChangeCompleted += (s, value) =>
-            {
-                float radians = (float)value;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
-                
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingOuterShadow_Angle;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.OuterShadow_Angle = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.OuterShadow_Angle = radians;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
+                historyTitle: "Set effect outer shadow angle",
+                getHistory: (effect) => effect.StartingOuterShadow_Angle,
+                setHistory: (effect, previous) => effect.OuterShadow_Angle = previous
+            );
         }
 
 
+        //Color
         private void ConstructColor1()
         {
             this.ColorBorder.Tapped += (s, e) =>
@@ -470,109 +238,28 @@ namespace Retouch_Photo2.Effects.Models
                 this.ColorFlyout.ShowAt(this.ColorBorder);
                 this.ColorPicker.Color = this.SolidColorBrush.Color;
             };
-            this.ColorPicker.ColorChanged += (s, value) =>
-            {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
+            this.ColorPicker.ColorChanged += (s, value) => this.MethodViewModel.EffectChangeCompleted<Color>
+            (
+                set: (effect) => effect.OuterShadow_Color = (Color)value,
 
-                //Selection
-                this.SolidColorBrush.Color = value;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingOuterShadow_Color;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.OuterShadow_Color = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.OuterShadow_Color = value;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
+                historyTitle: "Set effect outer shadow color",
+                getHistory: (effect) => effect.OuterShadow_Color,
+                setHistory: (effect, previous) => effect.OuterShadow_Color = previous
+            );
         }
-
 
         private void ConstructColor2()
         {
-            //Color
-            this.ColorPicker.ColorChangeStarted += (s, value) =>
-            {
-                //Selection
-                this.SolidColorBrush.Color = value;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+            this.ColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow()); 
+            this.ColorPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Color = (Color)value);
+            this.ColorPicker.ColorChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<Color>
+            (
+                set: (effect) => effect.OuterShadow_Color = (Color)value,
 
-                    layer.Effect.CacheGaussianBlur();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.ColorPicker.ColorChangeDelta += (s, value) =>
-            {
-                //Selection
-                this.SolidColorBrush.Color = value;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Effect.OuterShadow_Color = value;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.ColorPicker.ColorChangeCompleted += (s, value) =>
-            {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
-
-                //Selection
-                this.SolidColorBrush.Color = value;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Effect.StartingOuterShadow_Color;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Effect.OuterShadow_Color = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Effect.OuterShadow_Color = value;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate 
-            };
+                historyTitle: "Set effect outer shadow color",
+                getHistory: (effect) => effect.StartingOuterShadow_Color,
+                setHistory: (effect, previous) => effect.OuterShadow_Color = previous
+            );
         }
 
 

@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Elements
         {
             if (document.Element("Root") is XElement root)
             {
-                if (document.Elements("Photo") is IEnumerable<XElement> photos)
+                if (root.Elements("Photo") is IEnumerable<XElement> photos)
                 {
                     return
                         from photo

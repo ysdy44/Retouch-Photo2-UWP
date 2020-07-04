@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Elements;
+﻿using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
@@ -27,7 +28,7 @@ namespace Retouch_Photo2.Menus.Models
 
         //@Construct
         /// <summary>
-        /// Initializes a aaaaaaaaaaaaaaaaaaaaaaaaa. 
+        /// Initializes a LayerMenu. 
         /// </summary>
         public LayerMenu()
         {
@@ -116,71 +117,22 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.OpacitySlider.Minimum = 0;
             this.OpacitySlider.Maximum = 100;
-            this.OpacitySlider.ValueChangeStarted += (s, value) =>
-            {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-                    layer.CacheOpacity();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.OpacitySlider.ValueChangeDelta += (s, value) =>
-            {
-                float opacity = (float)value / 100.0f;
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layer.Opacity = opacity;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
+            this.OpacitySlider.ValueChangeStarted += (s, value) => this.MethodViewModel.ILayerChangeStarted(cache: (iLayer) => iLayer.CacheOpacity());
+            this.OpacitySlider.ValueChangeDelta += (s, value) => this.MethodViewModel.ILayerChangeDelta((iLayer) => iLayer.Opacity = (float)value / 100.0f);
             this.OpacitySlider.ValueChangeCompleted += (s, value) =>
             {
                 float opacity = (float)value / 100.0f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set opacity");
+                this.MethodViewModel.ILayerChangeCompleted<float>
+                (
+                    setSelectionViewModel: () => this.SelectionViewModel.Opacity = opacity,
+                    set: (iLayer) => iLayer.Opacity = opacity,
 
-                //Selection
-                this.SelectionViewModel.Opacity = opacity;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.StartingOpacity;
-                    history.UndoAction += () =>
-                    {    
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Opacity = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Opacity = opacity;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set opacity",
+                    getHistory: (iLayer) => iLayer.StartingOpacity,
+                    setHistory: (iLayer, previous) => iLayer.Opacity = previous
+                );
             };
-
         }
         
 
@@ -194,40 +146,15 @@ namespace Retouch_Photo2.Menus.Models
                 this._Expander.IsSecondPage = true;
                 this._Expander.CurrentTitle = this.BlendModeTextBlock.Text;
             };
-            this.BlendModeComboBox.ModeChanged += (s, mode) =>
-            {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set blend mode");
+            this.BlendModeComboBox.ModeChanged += (s, mode) => this.MethodViewModel.ILayerChanged<BlendEffectMode?>
+            (
+                setSelectionViewModel: () => this.SelectionViewModel.BlendMode = mode,
+                set: (iLayer) => iLayer.BlendMode = mode,
 
-                //Selection
-                this.SelectionViewModel.BlendMode = mode;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.BlendMode;
-                    history.UndoAction += () =>
-                    {    
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.BlendMode = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.BlendMode = mode;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
+                historyTitle: "Set blend mode",
+                getHistory: (iLayer) => iLayer.BlendMode,
+                setHistory: (iLayer, previous) => iLayer.BlendMode = previous
+            );
         }
 
 
@@ -238,37 +165,15 @@ namespace Retouch_Photo2.Menus.Models
             {
                 Visibility value = (this.SelectionViewModel.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set visibility");
+                this.MethodViewModel.ILayerChanged<Visibility>
+                (
+                    setSelectionViewModel: () => this.SelectionViewModel.Visibility = value,
+                    set: (iLayer) => iLayer.Visibility = value,
 
-                //Selection
-                this.SelectionViewModel.Visibility = value;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Visibility;
-                    history.UndoAction += () =>
-                    {   
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Visibility = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Visibility = value;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set visibility",
+                    getHistory: (iLayer) => iLayer.Visibility,
+                    setHistory: (iLayer, previous) => iLayer.Visibility = previous
+                );
             };
         }
 
@@ -280,37 +185,15 @@ namespace Retouch_Photo2.Menus.Models
             {
                 bool value = !this.SelectionViewModel.IsFollowTransform;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set style follow transform");
+                this.MethodViewModel.ILayerChanged<bool>
+                (
+                    setSelectionViewModel: () => this.SelectionViewModel.IsFollowTransform = value,
+                    set: (iLayer) => iLayer.Style.IsFollowTransform = value,
 
-                //Selection
-                this.SelectionViewModel.IsFollowTransform = value;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Style.IsFollowTransform;
-                    history.UndoAction += () =>
-                    {   
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Style.IsFollowTransform = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Style.IsFollowTransform = value;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set style follow transform",
+                    getHistory: (iLayer) => iLayer.Style.IsFollowTransform,
+                    setHistory: (iLayer, previous) => iLayer.Style.IsFollowTransform = previous
+                );
             };
         }
 
@@ -318,38 +201,15 @@ namespace Retouch_Photo2.Menus.Models
         //Tag Type
         private void ConstructTagType()
         {
-            this.TagTypeSegmented.TypeChanged += (s, type) =>
-            {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set tag type");
+            this.TagTypeSegmented.TypeChanged += (s, type) => this.MethodViewModel.ILayerChanged<Retouch_Photo2.Blends.TagType>
+            (
+                setSelectionViewModel: () => this.SelectionViewModel.TagType = type,
+                set: (iLayer) => iLayer.TagType = type,
 
-                //Selection
-                this.SelectionViewModel.TagType = type;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.TagType;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.TagType = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.TagType = type;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-            };
+                historyTitle: "Set tag type",
+                getHistory: (iLayer) => iLayer.TagType,
+                setHistory: (iLayer, previous) => iLayer.TagType = previous
+            );
         }
 
     }

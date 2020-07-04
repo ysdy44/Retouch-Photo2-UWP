@@ -528,6 +528,7 @@
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="RootGrid" 
                             CornerRadius="{StaticResource AppCornerRadius}"
+                            Padding="{TemplateBinding Padding}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"   
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
@@ -574,6 +575,7 @@
                         <ContentPresenter x:Name="ContentPresenter"
                                   FontSize="{TemplateBinding FontSize}" 
                                   Content="{TemplateBinding Content}"
+                                  Margin="{TemplateBinding Padding}"
                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                   ContentTransitions="{TemplateBinding ContentTransitions}"

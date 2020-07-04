@@ -173,41 +173,16 @@ namespace Retouch_Photo2.Tools.Models
                 if (value2 < 0.0f) value2 = 0.0f;
                 if (value2 > 1.0f) value2 = 1.0f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set arrow layer value");
+                this.MethodViewModel.TLayerChanged<float, GeometryArrowLayer>
+                (
+                    layerType: LayerType.GeometryArrow,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowValue = value2,
+                    set: (tLayer) => tLayer.Value = value2,
 
-                //Selection
-                this.SelectionViewModel.GeometryArrowValue = value2;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryArrow)
-                    {
-                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
-
-                        var previous = geometryArrowLayer.Value;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryArrowLayer.IsRefactoringRender = true;
-                            geometryArrowLayer.IsRefactoringIconRender = true;
-                            geometryArrowLayer.Value = previous;
-                        };
-
-                        //Refactoring
-                        geometryArrowLayer.IsRefactoringRender = true;
-                        geometryArrowLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryArrowLayer.Value = value2;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set pie layer sweep angle",
+                    getHistory: (tLayer) => tLayer.Value,
+                    setHistory: (tLayer, previous) => tLayer.Value = previous
+                );
             };
         }
         private void ConstructValue2()
@@ -218,129 +193,59 @@ namespace Retouch_Photo2.Tools.Models
             this.ValueTouchbarSlider.Maximum = 100;
             this.ValueTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryArrow)
-                    {
-                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
-                        geometryArrowLayer.CacheValue();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.MethodViewModel.TLayerChangeStarted<GeometryArrowLayer>
+                (
+                    LayerType.GeometryArrow,
+                    (tLayer) => tLayer.CacheValue()
+                );
             };
-            this.ValueTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            this.ValueTouchbarSlider.ValueChangeDelta += (sender, value2) =>
             {
-                float value2 = (float)value / 100.0f;
-                if (value2 < 0.0f) value2 = 0.0f;
-                if (value2 > 1.0f) value2 = 1.0f;
+                float value3 = (float)value2 / 100.0f;
+                if (value3 < 0.0f) value3 = 0.0f;
+                if (value3 > 1.0f) value3 = 1.0f;
 
-                //Selection
-                this.SelectionViewModel.GeometryArrowValue = value2;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryArrow)
-                    {
-                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryArrowLayer.Value = value2;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.MethodViewModel.TLayerChangeDelta<GeometryArrowLayer>
+                (
+                    LayerType.GeometryArrow,
+                    (tLayer) => tLayer.Value = value3
+                );
             };
-            this.ValueTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.ValueTouchbarSlider.ValueChangeCompleted += (sender, value2) =>
             {
-                float value2 = (float)value / 100.0f;
-                if (value2 < 0.0f) value2 = 0.0f;
-                if (value2 > 1.0f) value2 = 1.0f;
+                float value3 = (float)value2 / 100.0f;
+                if (value3 < 0.0f) value3 = 0.0f;
+                if (value3 > 1.0f) value3 = 1.0f;
                 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set arrow layer value");
+                this.MethodViewModel.TLayerChangeCompleted<float, GeometryArrowLayer>
+                (
+                    layerType: LayerType.GeometryArrow,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowValue = value3,
+                    set: (tLayer) => tLayer.Value = value3,
 
-                //Selection
-                this.SelectionViewModel.GeometryArrowValue = value2;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryArrow)
-                    {
-                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
-
-                        var previous = geometryArrowLayer.StartingValue;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryArrowLayer.IsRefactoringRender = true;
-                            geometryArrowLayer.IsRefactoringIconRender = true;
-                            geometryArrowLayer.Value = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryArrowLayer.Value = value2;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set pie layer sweep angle",
+                    getHistory: (tLayer) => tLayer.StartingValue,
+                    setHistory: (tLayer, previous) => tLayer.Value = previous
+                );
             };
         }
+
                
         //LeftTail
         private void ConstructLeftTail()
         {
             this.LeftArrowTailTypeComboBox.TypeChanged += (s, tailType) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set arrow layer left tail type");
-                
-                //Selection
-                this.SelectionViewModel.GeometryArrowLeftTail = tailType;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+                this.MethodViewModel.TLayerChanged<GeometryArrowTailType, GeometryArrowLayer>
+                (
+                    layerType: LayerType.GeometryArrow,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowLeftTail = tailType,
+                    set: (tLayer) => tLayer.LeftTail = tailType,
 
-                    if (layer.Type == LayerType.GeometryArrow)
-                    {
-                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
-
-                        var previous = geometryArrowLayer.LeftTail;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryArrowLayer.IsRefactoringRender = true;
-                            geometryArrowLayer.IsRefactoringIconRender = true;
-                            geometryArrowLayer.LeftTail = previous;
-                        };
-
-                        //Refactoring
-                        geometryArrowLayer.IsRefactoringRender = true;
-                        geometryArrowLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryArrowLayer.LeftTail = tailType;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set arrow layer tail type",
+                    getHistory: (tLayer) => tLayer.LeftTail,
+                    setHistory: (tLayer, previous) => tLayer.LeftTail = previous
+                );
             };
         }
 
@@ -349,41 +254,16 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.RightArrowTailTypeComboBox.TypeChanged += (s, tailType) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set arrow layer right tail type");
+                this.MethodViewModel.TLayerChanged<GeometryArrowTailType, GeometryArrowLayer>
+                (
+                    layerType: LayerType.GeometryArrow,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowRightTail = tailType,
+                    set: (tLayer) => tLayer.RightTail = tailType,
 
-                //Selection
-                this.SelectionViewModel.GeometryArrowRightTail = tailType;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryArrow)
-                    {
-                        GeometryArrowLayer geometryArrowLayer = (GeometryArrowLayer)layer;
-
-                        var previous = geometryArrowLayer.RightTail;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryArrowLayer.IsRefactoringRender = true;
-                            geometryArrowLayer.IsRefactoringIconRender = true;
-                            geometryArrowLayer.RightTail = previous;
-                        };
-
-                        //Refactoring
-                        geometryArrowLayer.IsRefactoringRender = true;
-                        geometryArrowLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryArrowLayer.RightTail = tailType;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set arrow layer tail type",
+                    getHistory: (tLayer) => tLayer.RightTail,
+                    setHistory: (tLayer, previous) => tLayer.RightTail = previous
+                );
             };
         }
 

@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Historys
             foreach (var undo in this.UndoActions)
             {
                 ILayer layer = undo.Key;
-                Vector2 vector = undo.Value;
+                Vector2 previous = undo.Value;
 
                 //Refactoring
                 layer.IsRefactoringTransformer = true;
@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Historys
                 //undo.RefactoringParentsRender();
                 //undo.RefactoringParentsIconRender();
                 layer.CacheTransform();
-                layer.TransformAdd(-vector);
+                layer.TransformAdd(-previous);
             }
         }
 

@@ -1,7 +1,5 @@
-﻿using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
+﻿using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
@@ -30,45 +28,18 @@ namespace Retouch_Photo2.Tools.Models
             this.HorizontalStepTouchbarSlider.NumberMaximum = 100;
             this.HorizontalStepTouchbarSlider.ValueChanged += (sender, value) =>
             {
-                float step = (float)value;
-                if (step < 5.0f) step = 5.0f;
-                if (step > 100.0f) step = 100.0f;
+                float horizontalStep = (float)value;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set grid layer step");
+                this.MethodViewModel.TLayerChanged<float, PatternGridLayer>
+                (
+                    layerType: LayerType.PatternGrid,
+                    setSelectionViewModel: () => this.SelectionViewModel.PatternGridHorizontalStep = horizontalStep,
+                    set: (tLayer) => tLayer.HorizontalStep = horizontalStep,
 
-                //Selection
-                this.SelectionViewModel.PatternGridHorizontalStep = step;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.PatternGrid)
-                    {
-                        PatternGridLayer patternGridLayer = (PatternGridLayer)layer;
-
-                        var previous = patternGridLayer.HorizontalStep;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            patternGridLayer.IsRefactoringRender = true;
-                            patternGridLayer.IsRefactoringIconRender = true;
-                            patternGridLayer.HorizontalStep = previous;
-                        };
-
-                        //Refactoring
-                        patternGridLayer.IsRefactoringRender = true;
-                        patternGridLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        patternGridLayer.HorizontalStep = step;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set grid layer step",
+                    getHistory: (tLayer) => tLayer.HorizontalStep,
+                    setHistory: (tLayer, previous) => tLayer.HorizontalStep = previous
+                );
             };
         }
         private void ConstructHorizontalStep2()
@@ -79,86 +50,40 @@ namespace Retouch_Photo2.Tools.Models
             this.HorizontalStepTouchbarSlider.Maximum = 100;
             this.HorizontalStepTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.PatternGrid)
-                    {
-                        PatternGridLayer patternGridLayer = (PatternGridLayer)layer;
-                        patternGridLayer.CacheHorizontalStep();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.MethodViewModel.TLayerChangeStarted<PatternGridLayer>
+                (
+                    LayerType.PatternGrid,
+                    (tLayer) => tLayer.CacheHorizontalStep()
+                );
             };
             this.HorizontalStepTouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
-                float step = (float)value;
-                if (step < 5.0f) step = 5.0f;
-                if (step > 100.0f) step = 100.0f;
+                float horizontalStep = (float)value;
+                if (horizontalStep < 5.0f) horizontalStep = 5.0f;
+                if (horizontalStep > 100.0f) horizontalStep = 100.0f;
 
-                //Selection
-                this.SelectionViewModel.PatternGridHorizontalStep = step;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.PatternGrid)
-                    {
-                        PatternGridLayer patternGridLayer = (PatternGridLayer)layer;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        patternGridLayer.HorizontalStep = step;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.MethodViewModel.TLayerChangeDelta<PatternGridLayer>
+                (
+                    LayerType.PatternGrid,
+                    (tLayer) => tLayer.HorizontalStep = horizontalStep
+                );
             };
-            this.HorizontalStepTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.HorizontalStepTouchbarSlider.ValueChangeCompleted += (sender, value2) =>
             {
-                float step = (float)value;
-                if (step < 5.0f) step = 5.0f;
-                if (step > 100.0f) step = 100.0f;
+                float horizontalStep = (float)value2;
+                if (horizontalStep < 5.0f) horizontalStep = 5.0f;
+                if (horizontalStep > 100.0f) horizontalStep = 100.0f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set grid layer step");
+                this.MethodViewModel.TLayerChangeCompleted<float, PatternGridLayer>
+                (
+                    layerType: LayerType.PatternGrid,
+                    setSelectionViewModel: () => this.SelectionViewModel.PatternGridHorizontalStep = horizontalStep,
+                    set: (tLayer) => tLayer.HorizontalStep = horizontalStep,
 
-                //Selection
-                this.SelectionViewModel.PatternGridHorizontalStep = step;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.PatternGrid)
-                    {
-                        PatternGridLayer patternGridLayer = (PatternGridLayer)layer;
-
-                        var previous = patternGridLayer.StartingHorizontalStep;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            patternGridLayer.IsRefactoringRender = true;
-                            patternGridLayer.IsRefactoringIconRender = true;
-                            patternGridLayer.HorizontalStep = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        patternGridLayer.HorizontalStep = step;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set grid layer step",
+                    getHistory: (tLayer) => tLayer.StartingHorizontalStep,
+                    setHistory: (tLayer, previous) => tLayer.HorizontalStep = previous
+                );
             };
         }
 

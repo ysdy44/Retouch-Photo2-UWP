@@ -147,41 +147,16 @@ namespace Retouch_Photo2.Tools.Models
                 if (mid < 0.0f) mid = 0.0f;
                 if (mid > 1.0f) mid = 1.0f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set diamond layer mid");
+                this.MethodViewModel.TLayerChanged<float, GeometryDiamondLayer>
+                (
+                    layerType: LayerType.GeometryDiamond,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryDiamondMid = mid,
+                    set: (tLayer) => tLayer.Mid = mid,
 
-                //Selection
-                this.SelectionViewModel.GeometryDiamondMid = mid;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryDiamond)
-                    {
-                        GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
-
-                        var previous = geometryDiamondLayer.Mid;
-                        history.UndoAction += () =>
-                        {   
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            geometryDiamondLayer.Mid = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryDiamondLayer.Mid = mid;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set diamond layer mid",
+                    getHistory: (tLayer) => tLayer.Mid,
+                    setHistory: (tLayer, previous) => tLayer.Mid = previous
+                );
             };
         }
         private void ConstructMid2()
@@ -192,25 +167,24 @@ namespace Retouch_Photo2.Tools.Models
             this.MidTouchbarSlider.Maximum = 100;
             this.MidTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryDiamond)
-                    {
-                        GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
-                        geometryDiamondLayer.CacheMid();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.MethodViewModel.TLayerChangeStarted<GeometryDiamondLayer>
+                (
+                    LayerType.GeometryDiamond,
+                    (tLayer) => tLayer.CacheMid()
+                );
             };
             this.MidTouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
                 float mid = (float)value / 100.0f;
                 if (mid < 0.0f) mid = 0.0f;
                 if (mid > 1.0f) mid = 1.0f;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryDiamondLayer>
+                (
+                    LayerType.GeometryDiamond,
+                    (tLayer) => tLayer.Mid = mid
+                );
+
 
                 //Selection
                 this.SelectionViewModel.GeometryDiamondMid = mid;
@@ -231,47 +205,22 @@ namespace Retouch_Photo2.Tools.Models
 
                 this.ViewModel.Invalidate();//Invalidate
             };
-            this.MidTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.MidTouchbarSlider.ValueChangeCompleted += (sender, value2) =>
             {
-                float mid = (float)value / 100.0f;
+                float mid = (float)value2 / 100.0f;
                 if (mid < 0.0f) mid = 0.0f;
                 if (mid > 1.0f) mid = 1.0f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set diamond layer mid");
+                this.MethodViewModel.TLayerChangeCompleted<float, GeometryDiamondLayer>
+                (
+                    layerType: LayerType.GeometryDiamond,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryDiamondMid = mid,
+                    set: (tLayer) => tLayer.Mid = mid,
 
-                //Selection
-                this.SelectionViewModel.GeometryDiamondMid = mid;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryDiamond)
-                    {
-                        GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
-
-                        var previous = geometryDiamondLayer.StartingMid;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryDiamondLayer.IsRefactoringRender = true;
-                            geometryDiamondLayer.IsRefactoringIconRender = true;
-                            geometryDiamondLayer.Mid = previous;
-                        };
-
-                        //Refactoring
-                        geometryDiamondLayer.IsRefactoringRender = true;
-                        geometryDiamondLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryDiamondLayer.Mid = mid;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set diamond layer mid",
+                    getHistory: (tLayer) => tLayer.StartingMid,
+                    setHistory: (tLayer, previous) => tLayer.Mid = previous
+                );
             };
         }
 
@@ -279,41 +228,18 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.MirrorButton.Click += (s, e) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set diamond layer center");
+                float mid= 1.0f - this.SelectionViewModel.GeometryDiamondMid;
 
-                //Selection
-                this.SelectionViewModel.GeometryDiamondMid = 1.0f - this.SelectionViewModel.GeometryDiamondMid;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+                this.MethodViewModel.TLayerChanged<float, GeometryDiamondLayer>
+                (
+                    layerType: LayerType.GeometryDiamond,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryDiamondMid = mid,
+                    set: (tLayer) => tLayer.Mid = 1.0f - tLayer.Mid,
 
-                    if (layer.Type == LayerType.GeometryDiamond)
-                    {
-                        GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
-
-                        var previous = geometryDiamondLayer.Mid;
-                        history.UndoAction += () =>
-                        {    
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            geometryDiamondLayer.Mid = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryDiamondLayer.Mid = 1.0f - geometryDiamondLayer.Mid;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set diamond layer mid",
+                    getHistory: (tLayer) => tLayer.Mid,
+                    setHistory: (tLayer, previous) => tLayer.Mid = previous
+                );
             };
         }
 

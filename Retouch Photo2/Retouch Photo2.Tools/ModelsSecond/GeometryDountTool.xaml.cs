@@ -146,41 +146,16 @@ namespace Retouch_Photo2.Tools.Models
                 if (holeRadius < 0.0f) holeRadius = 0.0f;
                 if (holeRadius > 1.0f) holeRadius = 1.0f;
 
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set dount layer HoleRadius");
+                this.MethodViewModel.TLayerChanged<float, GeometryDountLayer>
+                (
+                    layerType: LayerType.GeometryDount,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryDountHoleRadius = holeRadius,
+                    set: (tLayer) => tLayer.HoleRadius = holeRadius,
 
-                //Selection
-                this.SelectionViewModel.GeometryDountHoleRadius = holeRadius;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryDount)
-                    {
-                        GeometryDountLayer geometryDountLayer = (GeometryDountLayer)layer;
-
-                        var previous = geometryDountLayer.HoleRadius;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryDountLayer.IsRefactoringRender = true;
-                            geometryDountLayer.IsRefactoringIconRender = true;
-                            geometryDountLayer.HoleRadius = previous;
-                        };
-
-                        //Refactoring
-                        geometryDountLayer.IsRefactoringRender = true;
-                        geometryDountLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryDountLayer.HoleRadius = holeRadius;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set dount layer hole radius",
+                    getHistory: (tLayer) => tLayer.HoleRadius,
+                    setHistory: (tLayer, previous) => tLayer.HoleRadius = previous
+                );
             };
         }
         private void ConstructHoleRadius2()
@@ -191,19 +166,11 @@ namespace Retouch_Photo2.Tools.Models
             this.HoleRadiusTouchbarSlider.NumberMaximum = 100;
             this.HoleRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>
             {
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryDount)
-                    {
-                        GeometryDountLayer geometryDountLayer = (GeometryDountLayer)layer;
-                        geometryDountLayer.CacheHoleRadius();
-                    }
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+                this.MethodViewModel.TLayerChangeStarted<GeometryDountLayer>
+                (
+                    LayerType.GeometryDount,
+                    (tLayer) => tLayer.CacheHoleRadius()
+                );
             };
             this.HoleRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>
             {
@@ -211,66 +178,28 @@ namespace Retouch_Photo2.Tools.Models
                 if (holeRadius < 0.0f) holeRadius = 0.0f;
                 if (holeRadius > 1.0f) holeRadius = 1.0f;
 
-                //Selection
-                this.SelectionViewModel.GeometryDountHoleRadius = holeRadius;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryDount)
-                    {
-                        GeometryDountLayer geometryDountLayer = (GeometryDountLayer)layer;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryDountLayer.HoleRadius = holeRadius;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
+                this.MethodViewModel.TLayerChangeDelta<GeometryDountLayer>
+                (
+                    LayerType.GeometryDount,
+                    (tLayer) => tLayer.HoleRadius = holeRadius
+                );
             };
             this.HoleRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float holeRadius = (float)value / 100.0f;
                 if (holeRadius < 0.0f) holeRadius = 0.0f;
                 if (holeRadius > 1.0f) holeRadius = 1.0f;
-                
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set dount layer hole radius");
 
-                //Selection
-                this.SelectionViewModel.GeometryDountHoleRadius = holeRadius;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
+                this.MethodViewModel.TLayerChangeCompleted<float, GeometryDountLayer>
+                (
+                    layerType: LayerType.GeometryDount,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryDountHoleRadius = holeRadius,
+                    set: (tLayer) => tLayer.HoleRadius = holeRadius,
 
-                    if (layer.Type == LayerType.GeometryDount)
-                    {
-                        GeometryDountLayer geometryDountLayer = (GeometryDountLayer)layer;
-
-                        var previous = geometryDountLayer.StartingHoleRadius;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            geometryDountLayer.IsRefactoringRender = true;
-                            geometryDountLayer.IsRefactoringIconRender = true;
-                            geometryDountLayer.HoleRadius = previous;
-                        };
-
-                        //Refactoring
-                        geometryDountLayer.IsRefactoringRender = true;
-                        geometryDountLayer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        geometryDountLayer.HoleRadius = holeRadius;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                    historyTitle: "Set dount layer hole radius",
+                    getHistory: (tLayer) => tLayer.StartingHoleRadius,
+                    setHistory: (tLayer, previous) => tLayer.HoleRadius = previous
+                );
             };
         }
 
