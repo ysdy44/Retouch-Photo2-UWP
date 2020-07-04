@@ -76,7 +76,7 @@ namespace Retouch_Photo2.Effects.Models
             this.SolidColorBrush.Color = Windows.UI.Colors.Black;
 
             this.OffsetSlider.Value = 0;
-            this.AnglePicker.Radians = 0.78539816339744830961566084581988f;// 1/4 π
+            this.AnglePicker.Radians = FanKit.Math.PiOver4;
 
             //History
             LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Effects.Models
                 layer.Effect.OuterShadow_Opacity = 0.5f;
                 layer.Effect.OuterShadow_Color = Windows.UI.Colors.Black;
                 layer.Effect.OuterShadow_Offset = 0;
-                layer.Effect.OuterShadow_Angle = 0.78539816339744830961566084581988f;// 1/4 π
+                layer.Effect.OuterShadow_Angle = FanKit.Math.PiOver4;
             });
 
             //History
@@ -144,17 +144,14 @@ namespace Retouch_Photo2.Effects.Models
         //IsOn
         private void ConstructButton()
         {
-            this.Button.Toggled += (isOn) =>
-            {
-                this.MethodViewModel.EffectChanged<bool>
-                (
-                    set: (effect) => effect.OuterShadow_IsOn = isOn,
+            this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
+            (
+                set: (effect) => effect.OuterShadow_IsOn = isOn,
 
-                    historyTitle: "Set effect outer shadow is on",
-                    getHistory: (effect) => effect.OuterShadow_IsOn,
-                    setHistory: (effect, previous) => effect.OuterShadow_IsOn = previous
-                );
-            };
+                historyTitle: "Set effect outer shadow is on",
+                getHistory: (effect) => effect.OuterShadow_IsOn,
+                setHistory: (effect, previous) => effect.OuterShadow_IsOn = previous
+            );
         }
 
 
@@ -162,7 +159,7 @@ namespace Retouch_Photo2.Effects.Models
         private void ConstructOuterShadow_Radius()
         {
             this.RadiusSlider.Minimum = 0;
-            this.RadiusSlider.Maximum = 100;
+            this.RadiusSlider.Maximum = 100.0d;
             this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
             this.RadiusSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Radius = (float)value);
             this.RadiusSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
@@ -179,13 +176,13 @@ namespace Retouch_Photo2.Effects.Models
         //OuterShadow_Opacity
         private void ConstructOuterShadow_Opacity()
         {
-            this.OpacitySlider.Minimum = 0;
-            this.OpacitySlider.Maximum = 100;
+            this.OpacitySlider.Minimum = 0.0d;
+            this.OpacitySlider.Maximum = 1.0d;
             this.OpacitySlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
             this.OpacitySlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Opacity = (float)value / 100.0f);
             this.OpacitySlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
             (
-                set: (effect) => effect.OuterShadow_Opacity = (float)value / 100.0f,
+                set: (effect) => effect.OuterShadow_Opacity = (float)value,
 
                 historyTitle: "Set effect outer shadow opacity",
                 getHistory: (effect) => effect.StartingOuterShadow_Opacity,
@@ -198,7 +195,7 @@ namespace Retouch_Photo2.Effects.Models
         private void ConstructOuterShadow_Offset()
         {
             this.OffsetSlider.Minimum = 0;
-            this.OffsetSlider.Maximum = 100;
+            this.OffsetSlider.Maximum = 100.0d;
             this.OffsetSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
             this.OffsetSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Offset = (float)value);
             this.OffsetSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
@@ -261,7 +258,6 @@ namespace Retouch_Photo2.Effects.Models
                 setHistory: (effect, previous) => effect.OuterShadow_Color = previous
             );
         }
-
 
     }
 }

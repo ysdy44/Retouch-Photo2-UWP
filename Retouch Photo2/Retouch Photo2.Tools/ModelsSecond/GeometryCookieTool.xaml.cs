@@ -44,17 +44,20 @@ namespace Retouch_Photo2.Tools.Models
                     case GeometryCookieMode.None:
                         this.InnerRadiusTouchbarButton.IsSelected = false;
                         this.SweepAngleTouchbarButton.IsSelected = false;
-                        this.TipViewModel.TouchbarControl = null;
+                        this.TipViewModel.TouchbarPicker = null;
+                        this.TipViewModel.TouchbarSlider = null;
                         break;
                     case GeometryCookieMode.InnerRadius:
                         this.InnerRadiusTouchbarButton.IsSelected = true;
                         this.SweepAngleTouchbarButton.IsSelected = false;
-                        this.TipViewModel.TouchbarControl = this.InnerRadiusTouchbarSlider;
+                        this.TipViewModel.TouchbarPicker = this.InnerRadiusTouchbarPicker;
+                        this.TipViewModel.TouchbarSlider = this.InnerRadiusTouchbarSlider;
                         break;
                     case GeometryCookieMode.SweepAngle:
                         this.InnerRadiusTouchbarButton.IsSelected = false;
                         this.SweepAngleTouchbarButton.IsSelected = true;
-                        this.TipViewModel.TouchbarControl = this.SweepAngleTouchbarSlider;
+                        this.TipViewModel.TouchbarPicker = this.SweepAngleTouchbarPicker;
+                        this.TipViewModel.TouchbarSlider = this.SweepAngleTouchbarSlider;
                         break;
                 }
             }
@@ -165,10 +168,10 @@ namespace Retouch_Photo2.Tools.Models
             };
 
             //Number
-            this.InnerRadiusTouchbarSlider.Unit = "%";
-            this.InnerRadiusTouchbarSlider.NumberMinimum = 0;
-            this.InnerRadiusTouchbarSlider.NumberMaximum = 100;
-            this.InnerRadiusTouchbarSlider.ValueChanged += (sender, value) =>
+            this.InnerRadiusTouchbarPicker.Unit = "%";
+            this.InnerRadiusTouchbarPicker.Minimum = 0;
+            this.InnerRadiusTouchbarPicker.Maximum = 100;
+            this.InnerRadiusTouchbarPicker.ValueChange += (sender, value) =>
             {
                 float innerRadius = (float)value / 100f;
 
@@ -184,10 +187,9 @@ namespace Retouch_Photo2.Tools.Models
                 );
             };
         }
+
         private void ConstructInnerRadius2()
         {
-            //Value
-            this.InnerRadiusTouchbarSlider.Value = 0.5;
             this.InnerRadiusTouchbarSlider.Minimum = 0.0f;
             this.InnerRadiusTouchbarSlider.Maximum = 1.0f;
             this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCookieLayer>
@@ -198,11 +200,11 @@ namespace Retouch_Photo2.Tools.Models
             this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryCookieLayer>
             (
                 layerType: LayerType.GeometryCookie,
-                set: (tLayer) => tLayer.InnerRadius = (float)value / 100f
+                set: (tLayer) => tLayer.InnerRadius = (float)value
             );
             this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
-                float innerRadius = (float)value / 100f;
+                float innerRadius = (float)value;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryCookieLayer>
                 (
@@ -230,11 +232,10 @@ namespace Retouch_Photo2.Tools.Models
                     this.TouchBarMode = GeometryCookieMode.None;
             };
 
-            //Number
-            this.SweepAngleTouchbarSlider.Unit = "º";
-            this.SweepAngleTouchbarSlider.NumberMinimum = 0;
-            this.SweepAngleTouchbarSlider.NumberMaximum = 360;
-            this.SweepAngleTouchbarSlider.ValueChanged += (sender, value) =>
+            this.SweepAngleTouchbarPicker.Unit = "º";
+            this.SweepAngleTouchbarPicker.Minimum = 0;
+            this.SweepAngleTouchbarPicker.Maximum = 360;
+            this.SweepAngleTouchbarPicker.ValueChange += (sender, value) =>
             {
                 float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
 
@@ -250,33 +251,24 @@ namespace Retouch_Photo2.Tools.Models
                 );
             };
         }
+
         private void ConstructSweepAngle2()
         {
-            //Value
-            this.SweepAngleTouchbarSlider.Value = 0;
             this.SweepAngleTouchbarSlider.Minimum = 0;
-            this.SweepAngleTouchbarSlider.Maximum = 360;
-            this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) =>
-            {
-                this.MethodViewModel.TLayerChangeStarted<GeometryCookieLayer>
-                (
-                    LayerType.GeometryCookie,
-                    (tLayer) => tLayer.CacheSweepAngle()
-                );
-            };
-            this.SweepAngleTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
-
-                this.MethodViewModel.TLayerChangeDelta<GeometryCookieLayer>
-                (
-                    LayerType.GeometryCookie,
-                    (tLayer) => tLayer.SweepAngle = sweepAngle
-                );
-            };
+            this.SweepAngleTouchbarSlider.Maximum = FanKit.Math.PiTwice;
+            this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCookieLayer>
+            (
+                layerType: LayerType.GeometryCookie,
+                cache: (tLayer) => tLayer.CacheSweepAngle()
+            );
+            this.SweepAngleTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryCookieLayer>
+            (
+                layerType: LayerType.GeometryCookie,
+                set: (tLayer) => tLayer.SweepAngle = (float)value
+            );
             this.SweepAngleTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
-                float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
+                float sweepAngle = (float)value;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryCookieLayer>
                 (

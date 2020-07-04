@@ -76,7 +76,9 @@
             
                LeftIcon="{x:Bind IconConverter(TipViewModel.Tool), Mode=OneWay}"
                FootPage="{x:Bind PageConverter(TipViewModel.Tool), Mode=OneWay}"
-               Touchbar="{x:Bind TipViewModel.TouchbarControl, Mode=OneWay}"                                             
+            
+               TouchbarPicker="{x:Bind TipViewModel.TouchbarPicker, Mode=OneWay}"              
+               TouchbarSlider="{x:Bind TipViewModel.TouchbarSlider, Mode=OneWay}"                                             
              
                DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
                IsFullScreen="{x:Bind SettingViewModel.IsFullScreen, Mode=OneWay}">
@@ -177,7 +179,7 @@
                     <elements:FileFormatComboBox x:Name="FileFormatComboBox"/>
                     <ContentControl Height="6"/>
                     <TextBlock x:Name="ExportQualityTextBlock" Text="Quality" Style="{StaticResource AppTextBlockStyle}"/>
-                    <elements:SilderPicker x:Name="ExportQualityPicker" />
+                    <elements:SliderPicker x:Name="ExportQualityPicker" />
                 </StackPanel>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>

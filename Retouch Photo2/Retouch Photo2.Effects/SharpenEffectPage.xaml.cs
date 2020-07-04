@@ -89,17 +89,14 @@ namespace Retouch_Photo2.Effects.Models
         //IsOn
         private void ConstructButton()
         {
-            this.Button.Toggled += (isOn) =>
-            {
-                this.MethodViewModel.EffectChanged<bool>
-                (
-                    set: (effect) => effect.Straighten_IsOn = isOn,
+            this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
+            (
+                set: (effect) => effect.Straighten_IsOn = isOn,
 
-                    historyTitle: "Set effect sharpen is on",
-                    getHistory: (effect) => effect.Sharpen_IsOn,
-                    setHistory: (effect, previous) => effect.Sharpen_IsOn = previous
-                );
-            };
+                historyTitle: "Set effect sharpen is on",
+                getHistory: (effect) => effect.Sharpen_IsOn,
+                setHistory: (effect, previous) => effect.Sharpen_IsOn = previous
+            );
         }
 
 

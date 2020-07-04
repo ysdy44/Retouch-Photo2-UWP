@@ -155,7 +155,7 @@ namespace Retouch_Photo2.Effects.Models
             //this.AnglePicker.Minimum = 0;
             //this.AnglePicker.Maximum = FanKit.Math.PiTwice;
             this.AnglePicker.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEmboss());
-            this.AnglePicker.ValueChangeDelta += (s, value) =>   this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Emboss_Angle = (float)value);
+            this.AnglePicker.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Emboss_Angle = (float)value);
             this.AnglePicker.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
             (
                 set: (effect) => effect.Emboss_Angle = (float)value,

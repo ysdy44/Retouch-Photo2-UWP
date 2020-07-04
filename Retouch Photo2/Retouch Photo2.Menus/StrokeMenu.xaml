@@ -28,7 +28,7 @@
                 <!--Width-->
                 <TextBlock x:Name="WidthTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Border Height="{StaticResource AppCircleHeight}">
-                    <elements:SilderPicker x:Name="WidthPicker"
+                    <elements:SliderPicker x:Name="WidthPicker"
                              Value="{x:Bind SelectionViewModel.StrokeWidth, Mode=OneWay}"/>
                 </Border>
                 
@@ -48,7 +48,7 @@
                 <!--Offset-->
                 <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Border Height="{StaticResource AppCircleHeight}">
-                    <elements:SilderPicker x:Name="OffsetPicker"
+                    <elements:SliderPicker x:Name="OffsetPicker"
                              Value="{x:Bind OffsetConverter(SelectionViewModel.StrokeStyle), Mode=OneWay}"/>
                 </Border>
 

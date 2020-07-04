@@ -32,11 +32,13 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     case false:
                         this.SweepAngleTouchbarButton.IsSelected = false;
-                        this.TipViewModel.TouchbarControl = null;
+                        this.TipViewModel.TouchbarPicker = null;
+                        this.TipViewModel.TouchbarSlider = null;
                         break;
                     case true:
                         this.SweepAngleTouchbarButton.IsSelected = true;
-                        this.TipViewModel.TouchbarControl = this.SweepAngleTouchbarSlider;
+                        this.TipViewModel.TouchbarPicker = this.SweepAngleTouchbarPicker;
+                        this.TipViewModel.TouchbarSlider = this.SweepAngleTouchbarSlider;
                         break;
                 }
             }
@@ -135,11 +137,10 @@ namespace Retouch_Photo2.Tools.Models
                     this.TouchBarMode = false;
             };
 
-            //Number
-            this.SweepAngleTouchbarSlider.Unit = "º";
-            this.SweepAngleTouchbarSlider.NumberMinimum = 0;
-            this.SweepAngleTouchbarSlider.NumberMaximum = 360;
-            this.SweepAngleTouchbarSlider.ValueChanged += (sender, value) =>
+            this.SweepAngleTouchbarPicker.Unit = "º";
+            this.SweepAngleTouchbarPicker.Minimum = 0;
+            this.SweepAngleTouchbarPicker.Maximum = 360;
+            this.SweepAngleTouchbarPicker.ValueChange += (sender, value) =>
             {
                 float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
                 
@@ -155,33 +156,24 @@ namespace Retouch_Photo2.Tools.Models
                 );
             };
         }
+
         private void ConstructSweepAngle2()
         {
-            //Value            
-            this.SweepAngleTouchbarSlider.Value = 0;
-            this.SweepAngleTouchbarSlider.Minimum = 0;
-            this.SweepAngleTouchbarSlider.Maximum = 360;
-            this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) =>
-            {
-                this.MethodViewModel.TLayerChangeStarted<GeometryPieLayer>
-                (
-                    LayerType.GeometryPie,
-                    (tLayer) => tLayer.CacheSweepAngle()
-                );
-            };
-            this.SweepAngleTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
-
-                this.MethodViewModel.TLayerChangeDelta<GeometryPieLayer>
-                (
-                    LayerType.GeometryPie,
-                    (tLayer) => tLayer.SweepAngle = sweepAngle
-                );
-            };
+            this.SweepAngleTouchbarSlider.Minimum = 0.0d;
+            this.SweepAngleTouchbarSlider.Maximum = FanKit.Math.PiTwice;
+            this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryPieLayer>
+            (
+                layerType: LayerType.GeometryPie,
+                cache: (tLayer) => tLayer.CacheSweepAngle()
+            );
+            this.SweepAngleTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryPieLayer>
+            (
+                layerType: LayerType.GeometryPie,
+                set: (tLayer) => tLayer.SweepAngle = (float)value
+            );
             this.SweepAngleTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
-                float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
+                float sweepAngle = (float)value;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryPieLayer>
                 (

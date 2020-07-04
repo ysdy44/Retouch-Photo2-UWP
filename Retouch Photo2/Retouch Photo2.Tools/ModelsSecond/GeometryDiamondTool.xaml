@@ -4,8 +4,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:hsvcolorpickers="using:HSVColorPickers"
     xmlns:tools="using:Retouch_Photo2.Tools"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -21,11 +22,13 @@
 
             <!--Mid-->
             <tools:TouchbarButton x:Name="MidTouchbarButton">
+                <tools:TouchbarButton.TouchbarPicker>
+                    <hsvcolorpickers:NumberPicker x:Name="MidTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}"
+                             Value="{x:Bind MidNumberConverter(SelectionViewModel.GeometryDiamondMid),Mode=OneWay}"/>
+                </tools:TouchbarButton.TouchbarPicker>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="MidTouchbarSlider" 
-                             Number="{x:Bind MidNumberConverter(SelectionViewModel.GeometryDiamondMid),Mode=OneWay}"
-                             Value="{x:Bind MidValueConverter(SelectionViewModel.GeometryDiamondMid),Mode=OneWay}"
-                             />
+                             Value="{x:Bind MidValueConverter(SelectionViewModel.GeometryDiamondMid),Mode=OneWay}"/>
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
 

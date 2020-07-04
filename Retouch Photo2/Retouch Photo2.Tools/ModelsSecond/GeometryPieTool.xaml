@@ -4,8 +4,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:hsvcolorpickers="using:HSVColorPickers"
     xmlns:tools="using:Retouch_Photo2.Tools"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -21,11 +22,13 @@
 
             <!--SweepAngle-->
             <tools:TouchbarButton x:Name="SweepAngleTouchbarButton">
+                <tools:TouchbarButton.TouchbarPicker>
+                    <hsvcolorpickers:NumberPicker x:Name="SweepAngleTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}"
+                          Value="{x:Bind SweepAngleNumberConverter(SelectionViewModel.GeometryPieSweepAngle),Mode=OneWay}"/>
+                </tools:TouchbarButton.TouchbarPicker>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="SweepAngleTouchbarSlider"
-                    Number="{x:Bind SweepAngleNumberConverter(SelectionViewModel.GeometryPieSweepAngle),Mode=OneWay}"
-                    Value="{x:Bind SweepAngleValueConverter(SelectionViewModel.GeometryPieSweepAngle), Mode=OneWay}" 
-                     />
+                          Value="{x:Bind SweepAngleValueConverter(SelectionViewModel.GeometryPieSweepAngle), Mode=OneWay}" />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
 

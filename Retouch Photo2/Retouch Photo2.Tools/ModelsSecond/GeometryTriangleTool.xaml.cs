@@ -1,8 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -33,12 +30,14 @@ namespace Retouch_Photo2.Tools.Models
                 if (value == false)
                 {
                     this.CenterTouchbarButton.IsSelected = false;
-                    this.TipViewModel.TouchbarControl = null;
+                    this.TipViewModel.TouchbarPicker = null;
+                    this.TipViewModel.TouchbarSlider = null;
                 }
                 else
                 {
                     this.CenterTouchbarButton.IsSelected = true;
-                    this.TipViewModel.TouchbarControl = this.CenterTouchbarSlider;
+                    this.TipViewModel.TouchbarPicker = this.CenterTouchbarPicker;
+                    this.TipViewModel.TouchbarSlider = this.CenterTouchbarSlider;
                 }
             }
         }
@@ -135,56 +134,43 @@ namespace Retouch_Photo2.Tools.Models
                 this.TouchBarMode = value;
             };
 
-            //Number
-            this.CenterTouchbarSlider.Unit = "%";
-            this.CenterTouchbarSlider.NumberMinimum = 0;
-            this.CenterTouchbarSlider.NumberMaximum = 100;
-            this.CenterTouchbarSlider.ValueChanged += (sender, value) =>
+            this.CenterTouchbarPicker.Unit = "%";
+            this.CenterTouchbarPicker.Minimum = 0;
+            this.CenterTouchbarPicker.Maximum = 100;
+            this.CenterTouchbarPicker.ValueChange += (sender, value) =>
             {
                 float center = (float)value / 100.0f;
-                if (center < 0.0f) center = 0.0f;
-                if (center > 1.0f) center = 1.0f;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryTriangleLayer>
                 (
-                    LayerType.GeometryTriangle,
-                    () => this.SelectionViewModel.GeometryTriangleCenter = center,
-                    (tLayer) => tLayer.Center = center,
+                    layerType: LayerType.GeometryTriangle,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryTriangleCenter = center,
+                    set: (tLayer) => tLayer.Center = center,
 
-                    "Set triangle layer center",
-                    (tLayer) => tLayer.Center = center,
-                    (tLayer, previous) => tLayer.Center = previous
+                    historyTitle: "Set triangle layer center",
+                    getHistory: (tLayer) => tLayer.Center = center,
+                    setHistory: (tLayer, previous) => tLayer.Center = previous
                 );
             };
         }
+
         private void ConstructCenter2()
         {
-            //Value
-            this.CenterTouchbarSlider.Value = 0;
-            this.CenterTouchbarSlider.Minimum = 0;
-            this.CenterTouchbarSlider.Maximum = 100;
+            this.CenterTouchbarSlider.Minimum = 0.0d;
+            this.CenterTouchbarSlider.Maximum = 1.0d;
             this.CenterTouchbarSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TLayerChangeStarted<GeometryTriangleLayer>
             (
-                LayerType.GeometryTriangle,
-                (tLayer) => tLayer.CacheCenter()
+                layerType: LayerType.GeometryTriangle,
+                cache: (tLayer) => tLayer.CacheCenter()
             );
-            this.CenterTouchbarSlider.ValueChangeDelta += (s, value) =>
-            {
-                float center = (float)value / 100.0f;
-                if (center < 0.0f) center = 0.0f;
-                if (center > 1.0f) center = 1.0f;
-
-                this.MethodViewModel.TLayerChangeDelta<GeometryTriangleLayer>
-                (
-                    LayerType.GeometryTriangle,
-                    (tLayer) => tLayer.Center = center
-                );
-            };
+            this.CenterTouchbarSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.TLayerChangeDelta<GeometryTriangleLayer>
+            (
+                layerType: LayerType.GeometryTriangle,
+                set: (tLayer) => tLayer.Center = (float)value
+            );
             this.CenterTouchbarSlider.ValueChangeCompleted += (s, value) =>
             {
-                float center = (float)value / 100.0f;
-                if (center < 0.0f) center = 0.0f;
-                if (center > 1.0f) center = 1.0f;
+                float center = (float)value;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryTriangleLayer>
                 (

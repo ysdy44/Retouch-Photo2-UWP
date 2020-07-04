@@ -34,11 +34,13 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     case false:
                         this.HoleRadiusTouchbarButton.IsSelected = false;
-                        this.TipViewModel.TouchbarControl = null;
+                        this.TipViewModel.TouchbarPicker = null;
+                        this.TipViewModel.TouchbarSlider = null;
                         break;
                     case true:
                         this.HoleRadiusTouchbarButton.IsSelected = true;
-                        this.TipViewModel.TouchbarControl = this.HoleRadiusTouchbarSlider;
+                        this.TipViewModel.TouchbarPicker = this.HoleRadiusTouchbarPicker;
+                        this.TipViewModel.TouchbarSlider = this.HoleRadiusTouchbarSlider;
                         break;
                 }
             }
@@ -136,15 +138,12 @@ namespace Retouch_Photo2.Tools.Models
                 this.TouchBarMode = value;
             };
 
-            //Number
-            this.HoleRadiusTouchbarSlider.Unit = "%";
-            this.HoleRadiusTouchbarSlider.NumberMinimum = 0;
-            this.HoleRadiusTouchbarSlider.NumberMaximum = 100;
-            this.HoleRadiusTouchbarSlider.ValueChanged += (sender, value) =>
+            this.HoleRadiusTouchbarPicker.Unit = "%";
+            this.HoleRadiusTouchbarPicker.Minimum = 0;
+            this.HoleRadiusTouchbarPicker.Maximum = 100;
+            this.HoleRadiusTouchbarPicker.ValueChange += (sender, value) =>
             {
                 float holeRadius = (float)value / 100.0f;
-                if (holeRadius < 0.0f) holeRadius = 0.0f;
-                if (holeRadius > 1.0f) holeRadius = 1.0f;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryDountLayer>
                 (
@@ -158,37 +157,24 @@ namespace Retouch_Photo2.Tools.Models
                 );
             };
         }
+
         private void ConstructHoleRadius2()
         {
-            //Value
-            this.HoleRadiusTouchbarSlider.Unit = "%";
-            this.HoleRadiusTouchbarSlider.NumberMinimum = 0;
-            this.HoleRadiusTouchbarSlider.NumberMaximum = 100;
-            this.HoleRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>
-            {
-                this.MethodViewModel.TLayerChangeStarted<GeometryDountLayer>
-                (
-                    LayerType.GeometryDount,
-                    (tLayer) => tLayer.CacheHoleRadius()
-                );
-            };
-            this.HoleRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float holeRadius = (float)value / 100.0f;
-                if (holeRadius < 0.0f) holeRadius = 0.0f;
-                if (holeRadius > 1.0f) holeRadius = 1.0f;
-
-                this.MethodViewModel.TLayerChangeDelta<GeometryDountLayer>
-                (
-                    LayerType.GeometryDount,
-                    (tLayer) => tLayer.HoleRadius = holeRadius
-                );
-            };
+            this.HoleRadiusTouchbarSlider.Minimum = 0.0d;
+            this.HoleRadiusTouchbarSlider.Maximum = 1.0d;
+            this.HoleRadiusTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryDountLayer>
+            (
+                layerType: LayerType.GeometryDount,
+                cache: (tLayer) => tLayer.CacheHoleRadius()
+            );
+            this.HoleRadiusTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryDountLayer>
+            (
+                layerType: LayerType.GeometryDount,
+                set: (tLayer) => tLayer.HoleRadius = (float)value
+            );
             this.HoleRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
-                float holeRadius = (float)value / 100.0f;
-                if (holeRadius < 0.0f) holeRadius = 0.0f;
-                if (holeRadius > 1.0f) holeRadius = 1.0f;
+                float holeRadius = (float)value;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryDountLayer>
                 (

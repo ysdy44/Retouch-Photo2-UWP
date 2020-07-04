@@ -106,8 +106,10 @@
                         <!--Foot-->
                         <Setter Target = "LeftRadiusAnimaIcon.Visibility" Value="Collapsed"/>
                         <Setter Target = "RightRadiusAnimaIcon.Visibility" Value="Collapsed"/>
-                        <Setter Target = "TouchbarBorder.Margin" Value="82,0,82,70"/>
-                        
+
+                        <!--Touchbar-->
+                        <Setter Target="TouchbarBorder.Margin" Value="82,0,82,70"/>
+
                         <!--Left-->
                         <Setter Target = "LeftBorder.(Grid.Row)" Value="1"/>
                         <Setter Target = "LeftBorder.(Grid.RowSpan)" Value="1"/>
@@ -185,7 +187,15 @@
 
 
         <!--Touchbar-->
-        <Border x:Name="TouchbarBorder" Grid.Column="1" Grid.Row="1" Margin="12,0,12,70" MinWidth="200" MaxWidth="800" VerticalAlignment="Bottom"/>
+        <Grid x:Name="TouchbarBorder" Grid.Column="1" Grid.Row="1" Margin="12,0,12,70" MinWidth="200" MaxWidth="800" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" MaxWidth="90"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Border x:Name="TouchbarPickerBorder" Grid.Column="0"/>
+            <Border x:Name="TouchbarSliderBorder" Grid.Column="2"/>
+        </Grid>
         <!--Foot-->
         <Grid MinHeight="70" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>

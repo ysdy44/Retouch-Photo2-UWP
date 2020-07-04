@@ -44,15 +44,18 @@ namespace Retouch_Photo2.Tools.Models
                 {
                     case GeometryArrowMode.None:
                         this.ValueTouchbarButton.IsSelected = false;
-                        this.TipViewModel.TouchbarControl = null;
+                        this.TipViewModel.TouchbarPicker = null;
+                        this.TipViewModel.TouchbarSlider = null;
                         break;
                     case GeometryArrowMode.Width:
                         this.ValueTouchbarButton.IsSelected = false;
-                        this.TipViewModel.TouchbarControl = null;
+                        this.TipViewModel.TouchbarPicker = null;
+                        this.TipViewModel.TouchbarSlider = null;
                         break;
                     case GeometryArrowMode.Value:
                         this.ValueTouchbarButton.IsSelected = true;
-                        this.TipViewModel.TouchbarControl = this.ValueTouchbarSlider;
+                        this.TipViewModel.TouchbarPicker = this.ValueTouchbarPicker;
+                        this.TipViewModel.TouchbarSlider = this.ValueTouchbarSlider;
                         break;
                 }
             }
@@ -163,15 +166,12 @@ namespace Retouch_Photo2.Tools.Models
                     this.TouchBarMode = GeometryArrowMode.None;
             };
 
-            //Number
-            this.ValueTouchbarSlider.Unit = "%";
-            this.ValueTouchbarSlider.NumberMinimum = 0;
-            this.ValueTouchbarSlider.NumberMaximum = 100;
-            this.ValueTouchbarSlider.ValueChanged += (sender, value) =>
+            this.ValueTouchbarPicker.Unit = "%";
+            this.ValueTouchbarPicker.Minimum = 0;
+            this.ValueTouchbarPicker.Maximum = 100;
+            this.ValueTouchbarPicker.ValueChange += (sender, value) =>
             {
                 float value2 = (float)value / 100.0f;
-                if (value2 < 0.0f) value2 = 0.0f;
-                if (value2 > 1.0f) value2 = 1.0f;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryArrowLayer>
                 (
@@ -179,51 +179,38 @@ namespace Retouch_Photo2.Tools.Models
                     setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowValue = value2,
                     set: (tLayer) => tLayer.Value = value2,
 
-                    historyTitle: "Set pie layer sweep angle",
+                    historyTitle: "Set arrow layer value",
                     getHistory: (tLayer) => tLayer.Value,
                     setHistory: (tLayer, previous) => tLayer.Value = previous
                 );
             };
         }
+
         private void ConstructValue2()
         { 
-            //Value
-            this.ValueTouchbarSlider.Value = 0;
-            this.ValueTouchbarSlider.Minimum = 0;
-            this.ValueTouchbarSlider.Maximum = 100;
-            this.ValueTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            this.ValueTouchbarSlider.Minimum = 0.0d;
+            this.ValueTouchbarSlider.Maximum = 1.0d;
+            this.ValueTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryArrowLayer>
+            (
+                layerType: LayerType.GeometryArrow,
+                cache: (tLayer) => tLayer.CacheValue()
+            );
+            this.ValueTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryArrowLayer>
+            (
+                layerType: LayerType.GeometryArrow,
+                set: (tLayer) => tLayer.Value = (float)value
+            );
+            this.ValueTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
-                this.MethodViewModel.TLayerChangeStarted<GeometryArrowLayer>
-                (
-                    LayerType.GeometryArrow,
-                    (tLayer) => tLayer.CacheValue()
-                );
-            };
-            this.ValueTouchbarSlider.ValueChangeDelta += (sender, value2) =>
-            {
-                float value3 = (float)value2 / 100.0f;
-                if (value3 < 0.0f) value3 = 0.0f;
-                if (value3 > 1.0f) value3 = 1.0f;
-
-                this.MethodViewModel.TLayerChangeDelta<GeometryArrowLayer>
-                (
-                    LayerType.GeometryArrow,
-                    (tLayer) => tLayer.Value = value3
-                );
-            };
-            this.ValueTouchbarSlider.ValueChangeCompleted += (sender, value2) =>
-            {
-                float value3 = (float)value2 / 100.0f;
-                if (value3 < 0.0f) value3 = 0.0f;
-                if (value3 > 1.0f) value3 = 1.0f;
+                float value2 = (float)value;
                 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryArrowLayer>
                 (
                     layerType: LayerType.GeometryArrow,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowValue = value3,
-                    set: (tLayer) => tLayer.Value = value3,
+                    setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowValue = value2,
+                    set: (tLayer) => tLayer.Value = value2,
 
-                    historyTitle: "Set pie layer sweep angle",
+                    historyTitle: "Set arrow layer value",
                     getHistory: (tLayer) => tLayer.StartingValue,
                     setHistory: (tLayer, previous) => tLayer.Value = previous
                 );
@@ -234,37 +221,31 @@ namespace Retouch_Photo2.Tools.Models
         //LeftTail
         private void ConstructLeftTail()
         {
-            this.LeftArrowTailTypeComboBox.TypeChanged += (s, tailType) =>
-            {
-                this.MethodViewModel.TLayerChanged<GeometryArrowTailType, GeometryArrowLayer>
-                (
-                    layerType: LayerType.GeometryArrow,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowLeftTail = tailType,
-                    set: (tLayer) => tLayer.LeftTail = tailType,
+            this.LeftArrowTailTypeComboBox.TypeChanged += (s, tailType) => this.MethodViewModel.TLayerChanged<GeometryArrowTailType, GeometryArrowLayer>
+            (
+                layerType: LayerType.GeometryArrow,
+                setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowLeftTail = tailType,
+                set: (tLayer) => tLayer.LeftTail = tailType,
 
-                    historyTitle: "Set arrow layer tail type",
-                    getHistory: (tLayer) => tLayer.LeftTail,
-                    setHistory: (tLayer, previous) => tLayer.LeftTail = previous
-                );
-            };
+                historyTitle: "Set arrow layer tail type",
+                getHistory: (tLayer) => tLayer.LeftTail,
+                setHistory: (tLayer, previous) => tLayer.LeftTail = previous
+            );
         }
 
         //RightTail
         private void ConstructRightTail()
         {
-            this.RightArrowTailTypeComboBox.TypeChanged += (s, tailType) =>
-            {
-                this.MethodViewModel.TLayerChanged<GeometryArrowTailType, GeometryArrowLayer>
-                (
-                    layerType: LayerType.GeometryArrow,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowRightTail = tailType,
-                    set: (tLayer) => tLayer.RightTail = tailType,
+            this.RightArrowTailTypeComboBox.TypeChanged += (s, tailType) => this.MethodViewModel.TLayerChanged<GeometryArrowTailType, GeometryArrowLayer>
+            (
+                layerType: LayerType.GeometryArrow,
+                setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowRightTail = tailType,
+                set: (tLayer) => tLayer.RightTail = tailType,
 
-                    historyTitle: "Set arrow layer tail type",
-                    getHistory: (tLayer) => tLayer.RightTail,
-                    setHistory: (tLayer, previous) => tLayer.RightTail = previous
-                );
-            };
+                historyTitle: "Set arrow layer tail type",
+                getHistory: (tLayer) => tLayer.RightTail,
+                setHistory: (tLayer, previous) => tLayer.RightTail = previous
+            );
         }
 
     }

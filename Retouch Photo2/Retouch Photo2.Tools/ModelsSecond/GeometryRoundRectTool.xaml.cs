@@ -1,8 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -33,12 +30,14 @@ namespace Retouch_Photo2.Tools.Models
                 if (value == false)
                 {
                     this.CornerTouchbarButton.IsSelected = false;
-                    this.TipViewModel.TouchbarControl = null;
+                    this.TipViewModel.TouchbarPicker = null;
+                    this.TipViewModel.TouchbarSlider = null;
                 }
                 else
                 {
                     this.CornerTouchbarButton.IsSelected = true;
-                    this.TipViewModel.TouchbarControl = this.CornerTouchbarSlider;
+                    this.TipViewModel.TouchbarPicker = this.CornerTouchbarPicker;
+                    this.TipViewModel.TouchbarSlider = this.CornerTouchbarSlider;
                 }
             }
         }
@@ -133,15 +132,12 @@ namespace Retouch_Photo2.Tools.Models
                 this.TouchBarMode = value;
             };
 
-            //Number
-            this.CornerTouchbarSlider.Unit = "%";
-            this.CornerTouchbarSlider.NumberMinimum = 0;
-            this.CornerTouchbarSlider.NumberMaximum = 50;
-            this.CornerTouchbarSlider.ValueChanged += (sender, value) =>
+            this.CornerTouchbarPicker.Unit = "%";
+            this.CornerTouchbarPicker.Minimum = 0;
+            this.CornerTouchbarPicker.Maximum = 50;
+            this.CornerTouchbarPicker.ValueChange += (sender, value) =>
             {
                 float corner = (float)value / 100.0f;
-                if (corner < 0.0f) corner = 0.0f;
-                if (corner > 0.5f) corner = 0.5f;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryRoundRectLayer>
                 (
@@ -155,37 +151,24 @@ namespace Retouch_Photo2.Tools.Models
                 );
             };
         }
+
         private void ConstructCorner2()
         {
-            //Value
-            this.CornerTouchbarSlider.Value = 0;
-            this.CornerTouchbarSlider.Minimum = 0;
-            this.CornerTouchbarSlider.Maximum = 50;
-            this.CornerTouchbarSlider.ValueChangeStarted += (sender, value) =>
-            {
-                this.MethodViewModel.TLayerChangeStarted<GeometryRoundRectLayer>
-                (
-                    LayerType.GeometryRoundRect,
-                    (tLayer) => tLayer.CacheCorner()
-                );
-            };
-            this.CornerTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float corner = (float)value / 100.0f;
-                if (corner < 0.0f) corner = 0.0f;
-                if (corner > 0.5f) corner = 0.5f;
-
-                this.MethodViewModel.TLayerChangeDelta<GeometryRoundRectLayer>
-                (
-                    LayerType.GeometryRoundRect,
-                    (tLayer) => tLayer.Corner = corner
-                );
-            };
+            this.CornerTouchbarSlider.Minimum = 0.0d;
+            this.CornerTouchbarSlider.Maximum = 0.5d;
+            this.CornerTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryRoundRectLayer>
+            (
+                layerType: LayerType.GeometryRoundRect,
+                cache: (tLayer) => tLayer.CacheCorner()
+            );
+            this.CornerTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryRoundRectLayer>
+            (
+                layerType: LayerType.GeometryRoundRect,
+                set: (tLayer) => tLayer.Corner = (float)value
+            );
             this.CornerTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
-                float corner = (float)value / 100.0f;
-                if (corner < 0.0f) corner = 0.0f;
-                if (corner > 0.5f) corner = 0.5f;
+                float corner = (float)value;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryRoundRectLayer>
                 (

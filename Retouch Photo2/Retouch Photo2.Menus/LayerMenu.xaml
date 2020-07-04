@@ -29,7 +29,7 @@
                 <!--Opacity-->
                 <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <Border Height="{StaticResource AppCircleHeight}">
-                    <elements:SilderPicker x:Name="OpacitySlider"
+                    <elements:SliderPicker x:Name="OpacitySlider"
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                            Value="{x:Bind OpacityToValueConverter(SelectionViewModel.Opacity), Mode=OneWay}"/>
                 </Border>

@@ -117,17 +117,14 @@ namespace Retouch_Photo2.Effects.Models
         //IsOn
         private void ConstructButton()
         {
-            this.Button.Toggled += (isOn) =>
-            {
-                this.MethodViewModel.EffectChanged<bool>
-                (
-                    set: (effect) => effect.DirectionalBlur_IsOn = isOn,
+            this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
+            (
+                set: (effect) => effect.DirectionalBlur_IsOn = isOn,
 
-                    historyTitle: "Set effect directional blur is on",
-                    getHistory: (effect) => effect.DirectionalBlur_IsOn,
-                    setHistory: (effect, previous) => effect.DirectionalBlur_IsOn = previous
-                );
-            };
+                historyTitle: "Set effect directional blur is on",
+                getHistory: (effect) => effect.DirectionalBlur_IsOn,
+                setHistory: (effect, previous) => effect.DirectionalBlur_IsOn = previous
+            );            
         }
 
 
@@ -142,7 +139,7 @@ namespace Retouch_Photo2.Effects.Models
             (
                 set: (effect) => effect.DirectionalBlur_Radius = (float)value,
 
-                historyTitle: "Set effect directional blur",
+                historyTitle: "Set effect directional blur radius",
                 getHistory: (effect) => effect.StartingDirectionalBlur_Radius,
                 setHistory: (effect, previous) => effect.DirectionalBlur_Radius = previous
             );
@@ -164,8 +161,7 @@ namespace Retouch_Photo2.Effects.Models
                 getHistory: (effect) => effect.StartingDirectionalBlur_Angle,
                 setHistory: (effect, previous) => effect.DirectionalBlur_Angle = previous
             );
-        }
-          
+        }          
 
     }
 }

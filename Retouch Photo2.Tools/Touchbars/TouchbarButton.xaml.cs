@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HSVColorPickers;
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -51,8 +52,10 @@ namespace Retouch_Photo2.Tools
         #region DependencyProperty
 
 
+        /// <summary> Gets or sets the picker of <see cref = "TouchbarButton" />. </summary>
+        public NumberPicker TouchbarPicker { get; set; }
         /// <summary> Gets or sets the slider of <see cref = "TouchbarButton" />. </summary>
-        public TouchbarSlider TouchbarSlider { get; set; }
+        public TouchSliderBase TouchbarSlider { get; set; }
 
         /// <summary> Gets or sets the selected state of <see cref = "TouchbarButton" />. </summary>
         public bool IsSelected

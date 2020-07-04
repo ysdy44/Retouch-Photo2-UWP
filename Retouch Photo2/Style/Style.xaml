@@ -745,4 +745,16 @@
     </Style>
 
 
+    <!--Touchbar-->
+    <SolidColorBrush x:Key="ColorBorderBrush" Color="Black"/>
+    <SolidColorBrush x:Key="ColorBackground" Color="#AAFFFFFF"/>
+    <SolidColorBrush x:Key="ColorForeground" Color="White"/>
+    <Style x:Key="AppNumberTouchbarButtonStyle" BasedOn="{StaticResource NumberButtonStyle}" TargetType="Button">
+        <Setter Property="Margin" Value="0,4"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ColorBorderBrush}"/>
+        <Setter Property="Background" Value="{StaticResource ColorBackground}"/>
+        <Setter Property="Foreground" Value="{StaticResource ColorBorderBrush}"/>
+    </Style>
+
+
 </ResourceDictionary>

@@ -4,8 +4,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:hsvcolorpickers="using:HSVColorPickers"
     xmlns:tools="using:Retouch_Photo2.Tools"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -21,11 +22,13 @@
 
             <!--Points-->
             <tools:TouchbarButton x:Name="PointsTouchbarButton">
+                <tools:TouchbarButton.TouchbarPicker>
+                    <hsvcolorpickers:NumberPicker x:Name="PointsTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}"
+                             Value="{x:Bind SelectionViewModel.GeometryStarPoints,Mode=OneWay}"/>
+                </tools:TouchbarButton.TouchbarPicker>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="PointsTouchbarSlider" 
-                             Number="{x:Bind SelectionViewModel.GeometryStarPoints,Mode=OneWay}"
-                             Value="{x:Bind PointsValueConverter(SelectionViewModel.GeometryStarPoints),Mode=OneWay}"
-                             />
+                             Value="{x:Bind PointsValueConverter(SelectionViewModel.GeometryStarPoints),Mode=OneWay}"/>
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
 
@@ -33,11 +36,13 @@
 
             <!--InnerRadius-->
             <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton">
+                <tools:TouchbarButton.TouchbarPicker>
+                    <hsvcolorpickers:NumberPicker x:Name="InnerRadiusTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}"
+                          Value="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryStarInnerRadius),Mode=OneWay}"/>
+                </tools:TouchbarButton.TouchbarPicker>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
-                    Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryStarInnerRadius),Mode=OneWay}"
-                    Value="{x:Bind InnerRadiusValueConverter(SelectionViewModel.GeometryStarInnerRadius), Mode=OneWay}" 
-                     />
+                          Value="{x:Bind InnerRadiusValueConverter(SelectionViewModel.GeometryStarInnerRadius), Mode=OneWay}" />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
 

@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     xmlns:tools="using:Retouch_Photo2.Tools"
+    xmlns:hsvcolorpickers="using:HSVColorPickers"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -21,11 +22,13 @@
 
             <!--InnerRadius-->
             <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton">
+                <tools:TouchbarButton.TouchbarPicker>
+                    <hsvcolorpickers:NumberPicker x:Name="InnerRadiusTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}"
+                             Value="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryCookieInnerRadius),Mode=OneWay}"/>
+                </tools:TouchbarButton.TouchbarPicker>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
-                    Number="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryCookieInnerRadius),Mode=OneWay}"
-                    Value="{x:Bind InnerRadiusValueConverter(SelectionViewModel.GeometryCookieInnerRadius), Mode=OneWay}" 
-                     />
+                             Value="{x:Bind InnerRadiusValueConverter(SelectionViewModel.GeometryCookieInnerRadius), Mode=OneWay}" />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
 
@@ -33,11 +36,13 @@
 
             <!--SweepAngle-->
             <tools:TouchbarButton x:Name="SweepAngleTouchbarButton">
+                <tools:TouchbarButton.TouchbarPicker>
+                    <hsvcolorpickers:NumberPicker x:Name="SweepAngleTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}"
+                             Value="{x:Bind SweepAngleNumberConverter(SelectionViewModel.GeometryCookieSweepAngle),Mode=OneWay}"/>
+                </tools:TouchbarButton.TouchbarPicker>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="SweepAngleTouchbarSlider"
-                    Number="{x:Bind SweepAngleNumberConverter(SelectionViewModel.GeometryCookieSweepAngle),Mode=OneWay}"
-                    Value="{x:Bind SweepAngleValueConverter(SelectionViewModel.GeometryCookieSweepAngle), Mode=OneWay}" 
-                     />
+                             Value="{x:Bind SweepAngleValueConverter(SelectionViewModel.GeometryCookieSweepAngle), Mode=OneWay}" />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
 

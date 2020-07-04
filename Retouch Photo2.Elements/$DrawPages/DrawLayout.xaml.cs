@@ -20,9 +20,13 @@ namespace Retouch_Photo2.Elements.DrawPages
         /// <summary> CenterBorder's Child. </summary>
         public UIElement CenterChild { get => this.CenterBorder.Child; set => this.CenterBorder.Child = value; }
 
+        //Touchbar
+        /// <summary> TouchbarPickerBorder's Child. </summary>
+        public UIElement TouchbarPicker { get => this.TouchbarPickerBorder.Child; set => this.TouchbarPickerBorder.Child = value; }
+        /// <summary> TouchbarSliderBorder's Child. </summary>
+        public UIElement TouchbarSlider { get => this.TouchbarSliderBorder.Child; set => this.TouchbarSliderBorder.Child = value; }
+
         //Foot
-        /// <summary> TouchbarBorder's Child. </summary>
-        public UIElement Touchbar { get => this.TouchbarBorder.Child; set => this.TouchbarBorder.Child = value; }
         /// <summary> Gets or sets RadiusAnimaPanel's content. </summary>
         public FrameworkElement FootPage { set => this.RadiusAnimaPanel.CenterContent = value; }
         /// <summary> LeftRadiusAnimaIcon's CenterContent. </summary>

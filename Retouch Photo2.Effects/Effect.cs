@@ -75,7 +75,7 @@ namespace Retouch_Photo2.Effects
                 this.outerShadow_Offset = value;
             }
         }
-        public float outerShadow_Angle = 0.78539816339744830961566084581988f;// 1/4 π
+        public float outerShadow_Angle = FanKit.Math.PiOver4;
         public float StartingOuterShadow_Angle { get; private set; }
         public float OuterShadow_Angle
         {

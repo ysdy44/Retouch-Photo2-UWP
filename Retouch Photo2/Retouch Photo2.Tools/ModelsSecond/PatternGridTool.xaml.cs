@@ -43,19 +43,22 @@ namespace Retouch_Photo2.Tools.Models
                 switch (value)
                 {
                     case PatternGridMode.None:
-                            this.HorizontalStepTouchbarButton.IsSelected = false;
-                            this.VerticalStepTouchbarButton.IsSelected = false;
-                            this.TipViewModel.TouchbarControl = null;
+                        this.HorizontalStepTouchbarButton.IsSelected = false;
+                        this.VerticalStepTouchbarButton.IsSelected = false;
+                        this.TipViewModel.TouchbarSlider = null;
+                        this.TipViewModel.TouchbarPicker = null;
                         break;
                     case PatternGridMode.HorizontalStep:
-                            this.HorizontalStepTouchbarButton.IsSelected = true; 
-                            this.VerticalStepTouchbarButton.IsSelected = false;
-                            this.TipViewModel.TouchbarControl = this.HorizontalStepTouchbarSlider;
+                        this.HorizontalStepTouchbarButton.IsSelected = true;
+                        this.VerticalStepTouchbarButton.IsSelected = false;
+                        this.TipViewModel.TouchbarPicker = this.HorizontalStepTouchbarPicker;
+                        this.TipViewModel.TouchbarSlider = this.HorizontalStepTouchbarSlider;
                         break;
                     case PatternGridMode.VerticalStep:
-                            this.HorizontalStepTouchbarButton.IsSelected = false;
-                            this.VerticalStepTouchbarButton.IsSelected = true;
-                            this.TipViewModel.TouchbarControl = this.VerticalStepTouchbarSlider;
+                        this.HorizontalStepTouchbarButton.IsSelected = false;
+                        this.VerticalStepTouchbarButton.IsSelected = true;
+                        this.TipViewModel.TouchbarPicker = this.VerticalStepTouchbarPicker;
+                        this.TipViewModel.TouchbarSlider = this.VerticalStepTouchbarSlider;
                         break;
                 }
             }

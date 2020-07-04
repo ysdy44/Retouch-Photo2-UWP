@@ -22,11 +22,10 @@ namespace Retouch_Photo2.Tools.Models
                     this.TouchBarMode = PatternGridMode.None;
             };
 
-            //Number
-            this.VerticalStepTouchbarSlider.Unit = "";
-            this.VerticalStepTouchbarSlider.NumberMinimum = 5;
-            this.VerticalStepTouchbarSlider.NumberMaximum = 100;
-            this.VerticalStepTouchbarSlider.ValueChanged += (sender, value) =>
+            this.VerticalStepTouchbarPicker.Unit = "";
+            this.VerticalStepTouchbarPicker.Minimum = 5;
+            this.VerticalStepTouchbarPicker.Maximum = 100;
+            this.VerticalStepTouchbarPicker.ValueChange += (sender, value) =>
             {
                 float verticalStep = (float)value;
 
@@ -42,12 +41,11 @@ namespace Retouch_Photo2.Tools.Models
                 );
             };
         }
+
         private void ConstructVerticalStep2()
         {
-            //VerticalStep
-            this.VerticalStepTouchbarSlider.Value = 30;
-            this.VerticalStepTouchbarSlider.Minimum = 5;
-            this.VerticalStepTouchbarSlider.Maximum = 100;
+            this.VerticalStepTouchbarSlider.Minimum = 5.0d;
+            this.VerticalStepTouchbarSlider.Maximum = 100.0d;
             this.VerticalStepTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<PatternGridLayer>
             (
                 layerType: LayerType.PatternGrid,
@@ -58,9 +56,9 @@ namespace Retouch_Photo2.Tools.Models
                 layerType: LayerType.PatternGrid,
                 set: (tLayer) => tLayer.VerticalStep = (float)value
             );
-            this.VerticalStepTouchbarSlider.ValueChangeCompleted += (sender, value2) =>
+            this.VerticalStepTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
-                float verticalStep = (float)value2;
+                float verticalStep = (float)value;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, PatternGridLayer>
                 (

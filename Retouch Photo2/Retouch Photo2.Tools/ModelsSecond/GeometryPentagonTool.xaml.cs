@@ -1,8 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -33,12 +30,14 @@ namespace Retouch_Photo2.Tools.Models
                 if (value == false)
                 {
                     this.PointsTouchbarButton.IsSelected = false;
-                    this.TipViewModel.TouchbarControl = null;
+                    this.TipViewModel.TouchbarPicker = null;
+                    this.TipViewModel.TouchbarSlider = null;
                 }
                 else
                 {
                     this.PointsTouchbarButton.IsSelected = true;
-                    this.TipViewModel.TouchbarControl = this.PointsTouchbarSlider;
+                    this.TipViewModel.TouchbarPicker = this.PointsTouchbarPicker;
+                    this.TipViewModel.TouchbarSlider = this.PointsTouchbarSlider;
                 }
             }
         }
@@ -132,14 +131,11 @@ namespace Retouch_Photo2.Tools.Models
                 this.TouchBarMode = value;
             };
 
-            //Number
-            this.PointsTouchbarSlider.NumberMinimum = 3;
-            this.PointsTouchbarSlider.NumberMaximum = 36;
-            this.PointsTouchbarSlider.ValueChanged += (sender, value) =>
+            this.PointsTouchbarPicker.Minimum = 3;
+            this.PointsTouchbarPicker.Maximum = 36;
+            this.PointsTouchbarPicker.ValueChange += (sender, value) =>
             {
                 int points = (int)value;
-                if (points < 3) points = 3;
-                if (points > 36) points = 36;
 
                 this.MethodViewModel.TLayerChanged<int, GeometryPentagonLayer>
                 (
@@ -153,37 +149,24 @@ namespace Retouch_Photo2.Tools.Models
                 );
             };
         }
+
         private void ConstructPoints2()
         {
-            //Value
-            this.PointsTouchbarSlider.Value = 3;
             this.PointsTouchbarSlider.Minimum = 3;
             this.PointsTouchbarSlider.Maximum = 36;
-            this.PointsTouchbarSlider.ValueChangeStarted += (sender, value) =>
-            {
-                this.MethodViewModel.TLayerChangeStarted<GeometryPentagonLayer>
-                (
-                    LayerType.GeometryPentagon,
-                    (tLayer) => tLayer.CachePoints()
-                );
-            };
-            this.PointsTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                int points = (int)value;
-                if (points < 3) points = 3;
-                if (points > 36) points = 36;
-
-                this.MethodViewModel.TLayerChangeDelta<GeometryPentagonLayer>
-                (
-                    LayerType.GeometryPentagon,
-                    (tLayer) => tLayer.Points = points
-                );
-            };
+            this.PointsTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryPentagonLayer>
+            (
+                layerType: LayerType.GeometryPentagon,
+                cache: (tLayer) => tLayer.CachePoints()
+            );
+            this.PointsTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryPentagonLayer>
+            (
+                layerType: LayerType.GeometryPentagon,
+                set: (tLayer) => tLayer.Points = (int)value
+            );
             this.PointsTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 int points = (int)value;
-                if (points < 3) points = 3;
-                if (points > 36) points = 36;
 
                 this.MethodViewModel.TLayerChangeCompleted<int, GeometryPentagonLayer>
                 (

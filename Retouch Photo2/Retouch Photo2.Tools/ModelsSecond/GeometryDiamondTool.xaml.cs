@@ -1,8 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -33,12 +30,14 @@ namespace Retouch_Photo2.Tools.Models
                 if (value == false)
                 {
                     this.MidTouchbarButton.IsSelected = false;
-                    this.TipViewModel.TouchbarControl = null;
+                    this.TipViewModel.TouchbarPicker = null;
+                    this.TipViewModel.TouchbarSlider = null;
                 }
                 else
                 {
                     this.MidTouchbarButton.IsSelected = true;
-                    this.TipViewModel.TouchbarControl = this.MidTouchbarSlider;
+                    this.TipViewModel.TouchbarPicker = this.MidTouchbarPicker;
+                    this.TipViewModel.TouchbarSlider = this.MidTouchbarSlider;
                 }
             }
         }
@@ -137,15 +136,12 @@ namespace Retouch_Photo2.Tools.Models
                 this.TouchBarMode = value;
             };
 
-            //Number
-            this.MidTouchbarSlider.Unit = "%";
-            this.MidTouchbarSlider.NumberMinimum = 0;
-            this.MidTouchbarSlider.NumberMaximum = 100;
-            this.MidTouchbarSlider.ValueChanged += (sender, value) =>
+            this.MidTouchbarPicker.Unit = "%";
+            this.MidTouchbarPicker.Minimum = 0;
+            this.MidTouchbarPicker.Maximum = 100;
+            this.MidTouchbarPicker.ValueChange += (sender, value) =>
             {
                 float mid = (float)value / 100.0f;
-                if (mid < 0.0f) mid = 0.0f;
-                if (mid > 1.0f) mid = 1.0f;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryDiamondLayer>
                 (
@@ -159,57 +155,24 @@ namespace Retouch_Photo2.Tools.Models
                 );
             };
         }
+
         private void ConstructMid2()
         {
-            //Value
-            this.MidTouchbarSlider.Value = 0;
-            this.MidTouchbarSlider.Minimum = 0;
-            this.MidTouchbarSlider.Maximum = 100;
-            this.MidTouchbarSlider.ValueChangeStarted += (sender, value) =>
+            this.MidTouchbarSlider.Minimum = 0.0d;
+            this.MidTouchbarSlider.Maximum = 1.0d;
+            this.MidTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryDiamondLayer>
+            (
+                layerType: LayerType.GeometryDiamond,
+                cache: (tLayer) => tLayer.CacheMid()
+            );
+            this.MidTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryDiamondLayer>
+            (
+                layerType: LayerType.GeometryDiamond,
+                set: (tLayer) => tLayer.Mid = (float)value
+            );
+            this.MidTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
-                this.MethodViewModel.TLayerChangeStarted<GeometryDiamondLayer>
-                (
-                    LayerType.GeometryDiamond,
-                    (tLayer) => tLayer.CacheMid()
-                );
-            };
-            this.MidTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float mid = (float)value / 100.0f;
-                if (mid < 0.0f) mid = 0.0f;
-                if (mid > 1.0f) mid = 1.0f;
-
-                this.MethodViewModel.TLayerChangeDelta<GeometryDiamondLayer>
-                (
-                    LayerType.GeometryDiamond,
-                    (tLayer) => tLayer.Mid = mid
-                );
-
-
-                //Selection
-                this.SelectionViewModel.GeometryDiamondMid = mid;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.GeometryDiamond)
-                    {
-                        GeometryDiamondLayer geometryDiamondLayer = (GeometryDiamondLayer)layer;
-                  
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        geometryDiamondLayer.Mid = mid;
-                    }
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.MidTouchbarSlider.ValueChangeCompleted += (sender, value2) =>
-            {
-                float mid = (float)value2 / 100.0f;
-                if (mid < 0.0f) mid = 0.0f;
-                if (mid > 1.0f) mid = 1.0f;
+                float mid = (float)value;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryDiamondLayer>
                 (

@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Tools;
+﻿using HSVColorPickers;
+using Retouch_Photo2.Tools;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Windows.UI.Xaml;
@@ -66,18 +67,29 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        /// <summary> Gets or sets the currnet <see cref="TouchbarSlider"/>. </summary>   
-        public UIElement TouchbarControl
+        /// <summary> Gets or sets the button <see cref="TouchbarButton"/>. </summary>   
+        public NumberPicker TouchbarPicker
         {
-
-            get => this.touchbarControl;
+            get => this.touchbarPicker;
             set
             {
-                this.touchbarControl = value;
-                this.OnPropertyChanged(nameof(this.TouchbarControl));//Notify 
+                this.touchbarPicker = value;
+                this.OnPropertyChanged(nameof(this.TouchbarPicker));//Notify 
             }
         }
-        private UIElement touchbarControl;
+        private NumberPicker touchbarPicker;
+        /// <summary> Gets or sets the slider <see cref="TouchbarButton"/>. </summary>   
+        public TouchSliderBase TouchbarSlider
+        {
+
+            get => this.touchbarSlider;
+            set
+            {
+                this.touchbarSlider = value;
+                this.OnPropertyChanged(nameof(this.TouchbarSlider));//Notify 
+            }
+        }
+        private TouchSliderBase touchbarSlider; 
 
     }
 }

@@ -15,7 +15,7 @@
 
         <!--Radius-->
         <TextBlock x:Name="RadiusTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <elements:SilderPicker x:Name="RadiusSlider" Margin="2,0"/>
+        <elements:SliderPicker x:Name="RadiusSlider" Margin="2,0"/>
         
         <!--Angle-->
         <TextBlock x:Name="AngleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

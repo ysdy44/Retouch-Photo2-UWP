@@ -399,6 +399,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Retouch Photo2.Elements\Retouch Photo2.Elements.csproj">
+      <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
+      <Name>Retouch Photo2.Elements</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Layers\Retouch Photo2.Layers.csproj">
       <Project>{15cbf0a7-0953-49f5-b541-f8bcaab40053}</Project>
       <Name>Retouch Photo2.Layers</Name>

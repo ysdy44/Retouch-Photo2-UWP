@@ -55,11 +55,26 @@ namespace Retouch_Photo2.Tools.Models
 
                 switch (value)
                 {
-                    case GeometryCogMode.None: this.TipViewModel.TouchbarControl = null; break;
-                    case GeometryCogMode.Count: this.TipViewModel.TouchbarControl = this.CountTouchbarSlider; break;
-                    case GeometryCogMode.InnerRadius: this.TipViewModel.TouchbarControl = this.InnerRadiusTouchbarSlider; break;
-                    case GeometryCogMode.Tooth: this.TipViewModel.TouchbarControl = this.ToothTouchbarSlider; break;
-                    case GeometryCogMode.Notch: this.TipViewModel.TouchbarControl = this.NotchTouchbarSlider; break;
+                    case GeometryCogMode.None:
+                        this.TipViewModel.TouchbarPicker = null;
+                        this.TipViewModel.TouchbarSlider = null;
+                        break;
+                    case GeometryCogMode.Count:
+                        this.TipViewModel.TouchbarPicker = this.CountTouchbarPicker;
+                        this.TipViewModel.TouchbarSlider = this.CountTouchbarSlider;
+                        break;
+                    case GeometryCogMode.InnerRadius:
+                        this.TipViewModel.TouchbarPicker = this.InnerRadiusTouchbarPicker;
+                        this.TipViewModel.TouchbarSlider = this.InnerRadiusTouchbarSlider;
+                        break;
+                    case GeometryCogMode.Tooth:
+                        this.TipViewModel.TouchbarPicker = this.ToothTouchbarPicker;
+                        this.TipViewModel.TouchbarSlider = this.ToothTouchbarSlider;
+                        break;
+                    case GeometryCogMode.Notch:
+                        this.TipViewModel.TouchbarPicker = this.NotchTouchbarPicker;
+                        this.TipViewModel.TouchbarSlider = this.NotchTouchbarSlider;
+                        break;
                 }
             }
         }
@@ -183,14 +198,12 @@ namespace Retouch_Photo2.Tools.Models
                     this.TouchBarMode = GeometryCogMode.None;
             };
 
-            //Number
-            this.CountTouchbarSlider.NumberMinimum = 4;
-            this.CountTouchbarSlider.NumberMaximum = 36;
-            this.CountTouchbarSlider.ValueChanged += (sender, value) =>
+            this.CountTouchbarPicker.Unit = null;
+            this.CountTouchbarPicker.Minimum = 4;
+            this.CountTouchbarPicker.Maximum = 36;
+            this.CountTouchbarPicker.ValueChange += (sender, value) =>
             {
                 int count = (int)value;
-                if (count < 4) count = 4;
-                if (count > 36) count = 36;
 
                 this.MethodViewModel.TLayerChanged<int, GeometryCogLayer>
                 (
@@ -204,37 +217,24 @@ namespace Retouch_Photo2.Tools.Models
                 );
             };
         }
+
         private void ConstructCount2()
         {
-            //Value
-            this.CountTouchbarSlider.Value = 4;
             this.CountTouchbarSlider.Minimum = 4;
             this.CountTouchbarSlider.Maximum = 36;
-            this.CountTouchbarSlider.ValueChangeStarted += (sender, value) =>
-            {
-                this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
-                (
-                    LayerType.GeometryCog,
-                    (tLayer) => tLayer.CacheCount()
-                );
-            };
-            this.CountTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                int count = (int)value;
-                if (count < 4) count = 4;
-                if (count > 36) count = 36;
-
-                this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
-                (
-                    LayerType.GeometryCog,
-                    (tLayer) => tLayer.Count = count
-                );
-            };
+            this.CountTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
+            (
+                 layerType: LayerType.GeometryCog,
+                 cache: (tLayer) => tLayer.CacheCount()
+            );
+            this.CountTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
+            (
+                 layerType: LayerType.GeometryCog,
+                 set: (tLayer) => tLayer.Count = (int)value
+            );
             this.CountTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 int count = (int)value;
-                if (count < 4) count = 4;
-                if (count > 36) count = 36;
 
                 this.MethodViewModel.TLayerChangeCompleted<int, GeometryCogLayer>
                 (
@@ -262,11 +262,10 @@ namespace Retouch_Photo2.Tools.Models
                     this.TouchBarMode = GeometryCogMode.None;
             };
 
-            //Number
-            this.InnerRadiusTouchbarSlider.Unit = "%";
-            this.InnerRadiusTouchbarSlider.NumberMinimum = 0;
-            this.InnerRadiusTouchbarSlider.NumberMaximum = 100;
-            this.InnerRadiusTouchbarSlider.ValueChanged += (sender, value) =>
+            this.InnerRadiusTouchbarPicker.Unit = "%";
+            this.InnerRadiusTouchbarPicker.Minimum = 0;
+            this.InnerRadiusTouchbarPicker.Maximum = 100;
+            this.InnerRadiusTouchbarPicker.ValueChange += (sender, value) =>
             {
                 float innerRadius = (float)value / 100f;
 
@@ -282,33 +281,24 @@ namespace Retouch_Photo2.Tools.Models
                 );
             };
         }
+
         private void ConstructInnerRadius2()
         {
-            //Value
-            this.InnerRadiusTouchbarSlider.Value = 0;
-            this.InnerRadiusTouchbarSlider.Minimum = 0;
-            this.InnerRadiusTouchbarSlider.Maximum = 100;
-            this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>
-            {
-                this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
-                (
-                    LayerType.GeometryCog,
-                    (tLayer) => tLayer.CacheInnerRadius()
-                );
-            };
-            this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float innerRadius = (float)value / 100f;
-
-                this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
-                (
-                    LayerType.GeometryCog,
-                    (tLayer) => tLayer.InnerRadius = innerRadius
-                );
-            };
+            this.InnerRadiusTouchbarSlider.Minimum = 0.0d;
+            this.InnerRadiusTouchbarSlider.Maximum = 1.0d;
+            this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
+            (
+                layerType: LayerType.GeometryCog,
+                cache: (tLayer) => tLayer.CacheInnerRadius()
+            );
+            this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
+            (
+                layerType: LayerType.GeometryCog,
+                set: (tLayer) => tLayer.InnerRadius = (float)value
+            );
             this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
-                float innerRadius = (float)value / 100f;
+                float innerRadius = (float)value;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryCogLayer>
                 (
@@ -336,11 +326,10 @@ namespace Retouch_Photo2.Tools.Models
                     this.TouchBarMode = GeometryCogMode.None;
             };
 
-            //Number
-            this.ToothTouchbarSlider.Unit = "%";
-            this.ToothTouchbarSlider.NumberMinimum = 0;
-            this.ToothTouchbarSlider.NumberMaximum = 50;
-            this.ToothTouchbarSlider.ValueChanged += (sender, value) =>
+            this.ToothTouchbarPicker.Unit = "%";
+            this.ToothTouchbarPicker.Minimum = 0;
+            this.ToothTouchbarPicker.Maximum = 50;
+            this.ToothTouchbarPicker.ValueChange += (sender, value) =>
             {
                 float tooth = (float)value / 100f;
 
@@ -356,33 +345,24 @@ namespace Retouch_Photo2.Tools.Models
                 );
             };
         }
+
         private void ConstructTooth2()
         {
-            //Value
-            this.ToothTouchbarSlider.Value = 0;
-            this.ToothTouchbarSlider.Minimum = 0;
-            this.ToothTouchbarSlider.Maximum = 50;
-            this.ToothTouchbarSlider.ValueChangeStarted += (sender, value) =>
-            {
-                this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
-                (
-                    LayerType.GeometryCog,
-                    (tLayer) => tLayer.CacheTooth()
-                );
-            };
-            this.ToothTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float tooth = (float)value / 100f;
-
-                this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
-                (
-                    LayerType.GeometryCog,
-                    (tLayer) => tLayer.Tooth = tooth
-                );
-            };
+            this.ToothTouchbarSlider.Minimum = 0.0d;
+            this.ToothTouchbarSlider.Maximum = 0.5d;
+            this.ToothTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
+            (
+                layerType: LayerType.GeometryCog,
+                cache: (tLayer) => tLayer.CacheTooth()
+            );
+            this.ToothTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
+            (
+                layerType: LayerType.GeometryCog,
+                set: (tLayer) => tLayer.Tooth = (float)value
+            );
             this.ToothTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
-                float tooth = (float)value / 100f;
+                float tooth = (float)value;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryCogLayer>
                 (
@@ -410,11 +390,10 @@ namespace Retouch_Photo2.Tools.Models
                     this.TouchBarMode = GeometryCogMode.None;
             };
 
-            //Number
-            this.NotchTouchbarSlider.Unit = "%";
-            this.NotchTouchbarSlider.NumberMinimum = 0;
-            this.NotchTouchbarSlider.NumberMaximum = 60;
-            this.NotchTouchbarSlider.ValueChanged += (sender, value) =>
+            this.NotchTouchbarPicker.Unit = "%";
+            this.NotchTouchbarPicker.Minimum = 0;
+            this.NotchTouchbarPicker.Maximum = 60;
+            this.NotchTouchbarPicker.ValueChange += (sender, value) =>
             {
                 float notch = (float)value / 100f;
 
@@ -430,33 +409,24 @@ namespace Retouch_Photo2.Tools.Models
                 );
             };
         }
+
         private void ConstructNotch2()
         {
-            //Value
-            this.NotchTouchbarSlider.Value = 0;
-            this.NotchTouchbarSlider.Minimum = 0;
-            this.NotchTouchbarSlider.Maximum = 60;
-            this.NotchTouchbarSlider.ValueChangeStarted += (sender, value) =>
-            {
-                this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
-                (
-                    LayerType.GeometryCog,
-                    (tLayer) => tLayer.CacheNotch()
-                );
-            };
-            this.NotchTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float notch = (float)value / 100f;
-
-                this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
-                (
-                    LayerType.GeometryCog,
-                    (tLayer) => tLayer.Notch = notch
-                );
-            };
+            this.NotchTouchbarSlider.Minimum = 0.0d;
+            this.NotchTouchbarSlider.Maximum = 0.6d;
+            this.NotchTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
+            (
+                layerType: LayerType.GeometryCog,
+                cache: (tLayer) => tLayer.CacheNotch()
+            );
+            this.NotchTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
+            (
+                layerType: LayerType.GeometryCog,
+                set: (tLayer) => tLayer.Notch = (float)value
+            );
             this.NotchTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
-                float notch = (float)value / 100f;
+                float notch = (float)value;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryCogLayer>
                 (

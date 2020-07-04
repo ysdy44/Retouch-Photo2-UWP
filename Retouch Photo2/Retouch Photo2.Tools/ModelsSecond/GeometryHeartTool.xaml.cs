@@ -1,8 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -33,12 +30,14 @@ namespace Retouch_Photo2.Tools.Models
                 if (value == false)
                 {
                     this.SpreadTouchbarButton.IsSelected = false;
-                    this.TipViewModel.TouchbarControl = null;
+                    this.TipViewModel.TouchbarPicker = null;
+                    this.TipViewModel.TouchbarSlider = null;
                 }
                 else
                 {
                     this.SpreadTouchbarButton.IsSelected = true;
-                    this.TipViewModel.TouchbarControl = this.SpreadTouchbarSlider;
+                    this.TipViewModel.TouchbarPicker = this.SpreadTouchbarPicker;
+                    this.TipViewModel.TouchbarSlider = this.SpreadTouchbarSlider;
                 }
             }
         }
@@ -134,15 +133,12 @@ namespace Retouch_Photo2.Tools.Models
                 this.TouchBarMode = value;
             };
 
-            //Number
-            this.SpreadTouchbarSlider.Unit = "%";
-            this.SpreadTouchbarSlider.NumberMinimum = 0;
-            this.SpreadTouchbarSlider.NumberMaximum = 100;
-            this.SpreadTouchbarSlider.ValueChanged += (sender, value) =>
+            this.SpreadTouchbarPicker.Unit = "%";
+            this.SpreadTouchbarPicker.Minimum = 0;
+            this.SpreadTouchbarPicker.Maximum = 100;
+            this.SpreadTouchbarPicker.ValueChange += (sender, value) =>
             {
                 float spread = (float)value / 100.0f;
-                if (spread < 0.0f) spread = 0.0f;
-                if (spread > 1.0f) spread = 1.0f;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryHeartLayer>
                 (
@@ -156,37 +152,24 @@ namespace Retouch_Photo2.Tools.Models
                 );
             };
         }
+
         private void ConstructSpread2()
         {
-            //Value
-            this.SpreadTouchbarSlider.Value = 0;
-            this.SpreadTouchbarSlider.Minimum = 0;
-            this.SpreadTouchbarSlider.Maximum = 100;
-            this.SpreadTouchbarSlider.ValueChangeStarted += (sender, value) =>
-            {
-                this.MethodViewModel.TLayerChangeStarted<GeometryHeartLayer>
-                (
-                    LayerType.GeometryHeart,
-                    (tLayer) => tLayer.CacheSpread()
-                );
-            };
-            this.SpreadTouchbarSlider.ValueChangeDelta += (sender, value) =>
-            {
-                float spread = (float)value / 100.0f;
-                if (spread < 0.0f) spread = 0.0f;
-                if (spread > 1.0f) spread = 1.0f;
-
-                this.MethodViewModel.TLayerChangeDelta<GeometryHeartLayer>
-                (
-                    LayerType.GeometryHeart,
-                    (tLayer) => tLayer.Spread = spread
-                );
-            };
+            this.SpreadTouchbarSlider.Minimum = 0.0d;
+            this.SpreadTouchbarSlider.Maximum = 1.0d;
+            this.SpreadTouchbarSlider.ValueChangeStarted += (sender, value) =>    this.MethodViewModel.TLayerChangeStarted<GeometryHeartLayer>
+            (
+                layerType: LayerType.GeometryHeart,
+                cache: (tLayer) => tLayer.CacheSpread()
+            );
+            this.SpreadTouchbarSlider.ValueChangeDelta += (sender, value) =>this.MethodViewModel.TLayerChangeDelta<GeometryHeartLayer>
+            (
+                layerType: LayerType.GeometryHeart,
+                set: (tLayer) => tLayer.Spread = (float)value
+            );
             this.SpreadTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
-                float spread = (float)value / 100.0f;
-                if (spread < 0.0f) spread = 0.0f;
-                if (spread > 1.0f) spread = 1.0f;
+                float spread = (float)value;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryHeartLayer>
                 (

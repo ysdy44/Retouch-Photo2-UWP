@@ -4,8 +4,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:hsvcolorpickers="using:HSVColorPickers"
     xmlns:tools="using:Retouch_Photo2.Tools"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -19,13 +20,15 @@
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
 
-            <!--Width-->
+            <!--Value-->
             <tools:TouchbarButton x:Name="ValueTouchbarButton">
+                <tools:TouchbarButton.TouchbarPicker>
+                    <hsvcolorpickers:NumberPicker x:Name="ValueTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}"
+                          Value="{x:Bind ValueNumberConverter(SelectionViewModel.GeometryArrowValue),Mode=OneWay}"/>
+                </tools:TouchbarButton.TouchbarPicker>
                 <tools:TouchbarButton.TouchbarSlider>
                     <tools:TouchbarSlider x:Name="ValueTouchbarSlider"
-                    Number="{x:Bind ValueNumberConverter(SelectionViewModel.GeometryArrowValue),Mode=OneWay}"
-                    Value="{x:Bind ValueValueConverter(SelectionViewModel.GeometryArrowValue), Mode=OneWay}" 
-                     />
+                          Value="{x:Bind ValueValueConverter(SelectionViewModel.GeometryArrowValue), Mode=OneWay}" />
                 </tools:TouchbarButton.TouchbarSlider>
             </tools:TouchbarButton>
 

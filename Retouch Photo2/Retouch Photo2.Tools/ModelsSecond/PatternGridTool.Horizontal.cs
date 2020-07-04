@@ -22,11 +22,10 @@ namespace Retouch_Photo2.Tools.Models
                     this.TouchBarMode = PatternGridMode.None;
             };
 
-            //Number
-            this.HorizontalStepTouchbarSlider.Unit = "";
-            this.HorizontalStepTouchbarSlider.NumberMinimum = 5;
-            this.HorizontalStepTouchbarSlider.NumberMaximum = 100;
-            this.HorizontalStepTouchbarSlider.ValueChanged += (sender, value) =>
+            this.HorizontalStepTouchbarPicker.Unit = "";
+            this.HorizontalStepTouchbarPicker.Minimum = 5;
+            this.HorizontalStepTouchbarPicker.Maximum = 100;
+            this.HorizontalStepTouchbarPicker.ValueChange += (sender, value) =>
             {
                 float horizontalStep = (float)value;
 
@@ -42,37 +41,24 @@ namespace Retouch_Photo2.Tools.Models
                 );
             };
         }
+
         private void ConstructHorizontalStep2()
         {
-            //HorizontalStep
-            this.HorizontalStepTouchbarSlider.Value = 30;
             this.HorizontalStepTouchbarSlider.Minimum = 5;
             this.HorizontalStepTouchbarSlider.Maximum = 100;
-            this.HorizontalStepTouchbarSlider.ValueChangeStarted += (sender, value) =>
-            {
-                this.MethodViewModel.TLayerChangeStarted<PatternGridLayer>
-                (
-                    LayerType.PatternGrid,
-                    (tLayer) => tLayer.CacheHorizontalStep()
-                );
-            };
-            this.HorizontalStepTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            this.HorizontalStepTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<PatternGridLayer>
+            (
+                LayerType.PatternGrid,
+                (tLayer) => tLayer.CacheHorizontalStep()
+            );
+            this.HorizontalStepTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<PatternGridLayer>
+            (
+                LayerType.PatternGrid,
+                (tLayer) => tLayer.HorizontalStep = (float)value
+            );
+            this.HorizontalStepTouchbarSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float horizontalStep = (float)value;
-                if (horizontalStep < 5.0f) horizontalStep = 5.0f;
-                if (horizontalStep > 100.0f) horizontalStep = 100.0f;
-
-                this.MethodViewModel.TLayerChangeDelta<PatternGridLayer>
-                (
-                    LayerType.PatternGrid,
-                    (tLayer) => tLayer.HorizontalStep = horizontalStep
-                );
-            };
-            this.HorizontalStepTouchbarSlider.ValueChangeCompleted += (sender, value2) =>
-            {
-                float horizontalStep = (float)value2;
-                if (horizontalStep < 5.0f) horizontalStep = 5.0f;
-                if (horizontalStep > 100.0f) horizontalStep = 100.0f;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, PatternGridLayer>
                 (
