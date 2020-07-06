@@ -181,17 +181,29 @@
     <Compile Include="Retouch Photo2.Effects\StraightenEffectPage.xaml.cs">
       <DependentUpon>StraightenEffectPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\HistoryMenu.xaml.cs">
-      <DependentUpon>HistoryMenu.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Menus\ColorMenu.xaml.cs">
+      <DependentUpon>ColorMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\DebugMenu.xaml.cs">
       <DependentUpon>DebugMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Menus\EditMenu.xaml.cs">
+      <DependentUpon>EditMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Menus\HistoryMenu.xaml.cs">
+      <DependentUpon>HistoryMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\StrokeMenu.xaml.cs">
       <DependentUpon>StrokeMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\StyleMenu.xaml.cs">
       <DependentUpon>StyleMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Menus\TextMenu.xaml.cs">
+      <DependentUpon>TextMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Retouch Photo2.Menus\TransformerMenu.xaml.cs">
+      <DependentUpon>TransformerMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\ModelsSecond\PatternGridTool.Horizontal.cs" />
     <Compile Include="Retouch Photo2.Tools\ModelsSecond\PatternGridTool.Vertical.cs" />
@@ -203,6 +215,7 @@
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.Method.cs" />
     <Compile Include="Retouch Photo2.Tools\MoveTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\NodeTool.Method.cs" />
+    <Compile Include="Retouch Photo2.Tools\ToolBase.cs" />
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
     <Compile Include="SettingPage.Construct.cs" />
     <Compile Include="XMLs\XML.Bitmap.cs" />
@@ -218,17 +231,8 @@
     <Compile Include="PhotosPage.xaml.cs">
       <DependentUpon>PhotosPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\MenuButtons\MenuButton.xaml.cs">
-      <DependentUpon>MenuButton.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Retouch Photo2.Menus\AdjustmentMenu.xaml.cs">
       <DependentUpon>AdjustmentMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Menus\TextMenu.xaml.cs">
-      <DependentUpon>TextMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Menus\ColorMenu.xaml.cs">
-      <DependentUpon>ColorMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\EffectMenu.xaml.cs">
       <DependentUpon>EffectMenu.xaml</DependentUpon>
@@ -241,12 +245,6 @@
     </Compile>
     <Compile Include="Retouch Photo2.Menus\OperateMenu.xaml.cs">
       <DependentUpon>OperateMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Menus\EditMenu.xaml.cs">
-      <DependentUpon>EditMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Menus\TransformerMenu.xaml.cs">
-      <DependentUpon>TransformerMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\GeometryTool.xaml.cs">
       <DependentUpon>GeometryTool.xaml</DependentUpon>
@@ -267,15 +265,8 @@
     <Compile Include="Retouch Photo2.Tools\TextTool.xaml.cs">
       <DependentUpon>TextTool.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\ModelsOthers\MoreTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\ViewRadianConverter.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\ViewScaleConverter.cs" />
-    <Compile Include="Retouch Photo2.Tools\ToolButtons\ToolButton.xaml.cs">
-      <DependentUpon>ToolButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\ToolButtons\ToolMoreButton.xaml.cs">
-      <DependentUpon>ToolMoreButton.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
@@ -345,7 +336,6 @@
       <DependentUpon>TransparencyTool.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\CreateTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\ModelsOthers\NoneTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\BrushTool.xaml.cs">
       <DependentUpon>BrushTool.xaml</DependentUpon>
     </Compile>
@@ -584,15 +574,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Menus\HistoryMenu.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Retouch Photo2.Menus\ColorMenu.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Menus\DebugMenu.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Retouch Photo2.Menus\MenuButtons\MenuButton.xaml">
+    <Page Include="Retouch Photo2.Menus\EditMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Retouch Photo2.Menus\HistoryMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -601,12 +595,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Menus\TextMenu.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Menus\ColorMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Menus\EffectMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -624,10 +614,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Menus\EditMenu.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Retouch Photo2.Menus\StrokeMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -637,8 +623,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Menus\TransformerMenu.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Tools\GeometryTool.xaml">
       <SubType>Designer</SubType>
@@ -659,14 +645,6 @@
     <Page Include="Retouch Photo2.Tools\TextTool.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\ToolButtons\ToolButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\ToolButtons\ToolMoreButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="SettingPage.xaml">
       <SubType>Designer</SubType>

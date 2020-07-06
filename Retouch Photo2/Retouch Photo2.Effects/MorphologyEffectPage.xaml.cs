@@ -13,10 +13,12 @@ namespace Retouch_Photo2.Effects.Models
     /// </summary>
     public sealed partial class MorphologyEffectPage : Page, IEffectPage
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+        
         
         //@Construct
         /// <summary>
@@ -127,8 +129,8 @@ namespace Retouch_Photo2.Effects.Models
         //Morphology_Size
         private void ConstructMorphology_Size()
         {
-            this.SizeSlider.Minimum = -100;
-            this.SizeSlider.Maximum = 100;
+            this.SizeSlider.Minimum = -100.0d;
+            this.SizeSlider.Maximum = 100.0d;
             this.SizeSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheMorphology());
             this.SizeSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Morphology_Size = (int)value);
             this.SizeSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<int>

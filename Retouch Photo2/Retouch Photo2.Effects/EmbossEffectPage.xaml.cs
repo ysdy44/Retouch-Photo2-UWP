@@ -13,11 +13,13 @@ namespace Retouch_Photo2.Effects.Models
     /// </summary>
     public sealed partial class EmbossEffectPage : Page, IEffectPage
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         
+
         //@Construct
         /// <summary>
         /// Initializes a EmbossEffectPage. 
@@ -134,8 +136,8 @@ namespace Retouch_Photo2.Effects.Models
         //Emboss_Radius
         private void ConstructEmboss_Radius()
         {
-            this.RadiusSlider.Minimum = 0;
-            this.RadiusSlider.Maximum = 10;
+            this.RadiusSlider.Minimum = 0.0d;
+            this.RadiusSlider.Maximum = 10.0d;
             this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEmboss());
             this.RadiusSlider.ValueChangeDelta += (s, value) =>  this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Emboss_Radius = (float)value);
             this.RadiusSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>

@@ -18,12 +18,7 @@
     </animations:Implicit.ShowAnimations>
 
 
-    <UserControl.Resources>
-
-        <!--Pointer -->
-        <SolidColorBrush x:Name="PointerOverColor" Color="{ThemeResource SystemBaseLowColor}"/>
-        <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
-      
+    <UserControl.Resources>      
         <!--Style-->
         <Style x:Key="OverlayStyle" TargetType="Border">
             <Setter Property="IsHitTestVisible" Value="False"/>
@@ -36,7 +31,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
     </UserControl.Resources>
 
 
@@ -51,7 +45,7 @@
                 <VisualState x:Name="PointerOver">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PointerOverColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemBaseLowColor}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -59,7 +53,7 @@
                 <VisualState x:Name="Pressed">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PressedColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemBaseMediumLowColor}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>

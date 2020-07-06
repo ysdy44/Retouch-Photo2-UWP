@@ -5,32 +5,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvcolorpickers="using:HSVColorPickers"
-    xmlns:tools="using:Retouch_Photo2.Tools"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
 
-    <Page.Resources>
-        <Style x:Name="IconSelectedButtonStyle" TargetType="Button" BasedOn="{StaticResource AppIconSelectedButton}"/>
-    </Page.Resources>
-
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
 
             <!--SweepAngle-->
-            <tools:TouchbarButton x:Name="SweepAngleTouchbarButton">
-                <tools:TouchbarButton.TouchbarPicker>
-                    <hsvcolorpickers:NumberPicker x:Name="SweepAngleTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}"
-                          Value="{x:Bind SweepAngleNumberConverter(SelectionViewModel.GeometryPieSweepAngle),Mode=OneWay}"/>
-                </tools:TouchbarButton.TouchbarPicker>
-                <tools:TouchbarButton.TouchbarSlider>
-                    <tools:TouchbarSlider x:Name="SweepAngleTouchbarSlider"
-                          Value="{x:Bind SweepAngleValueConverter(SelectionViewModel.GeometryPieSweepAngle), Mode=OneWay}" />
-                </tools:TouchbarButton.TouchbarSlider>
-            </tools:TouchbarButton>
+            <elements:TouchbarButton x:Name="SweepAngleTouchbarButton">
+                <elements:TouchbarButton.TouchbarPicker>
+                    <hsvcolorpickers:NumberPicker x:Name="SweepAngleTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                          Value="{x:Bind SweepAngleNumberConverter(SelectionViewModel.GeometryPieSweepAngle), Mode=OneWay}"/>
+                </elements:TouchbarButton.TouchbarPicker>
+                <elements:TouchbarButton.TouchbarSlider>
+                    <elements:TouchbarSlider x:Name="SweepAngleTouchbarSlider"
+                          Value="{x:Bind SelectionViewModel.GeometryPieSweepAngle, Mode=OneWay}" />
+                </elements:TouchbarButton.TouchbarSlider>
+            </elements:TouchbarButton>
 
             <ContentControl Width="4"/>
 

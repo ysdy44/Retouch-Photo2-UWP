@@ -4,18 +4,10 @@ using Windows.UI.Xaml.Media.Animation;
 
 namespace Retouch_Photo2.Elements
 {
-    internal enum ExpanderWidth
-    {
-        Width222 = 222,
-        Width272 = 272,
-        Width322 = 322,
-        Width372 = 372,
-    }
-
     /// <summary> 
     /// Represents the control that a drawer can be folded.
     /// </summary>
-    public partial class Expander : UserControl, IExpander
+    public abstract partial class Expander : UserControl
     {
 
         //Width

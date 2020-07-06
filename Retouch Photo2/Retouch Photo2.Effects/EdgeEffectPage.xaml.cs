@@ -13,11 +13,13 @@ namespace Retouch_Photo2.Effects.Models
     /// </summary>
     public sealed partial class EdgeEffectPage : Page, IEffectPage
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         
+
         //@Construct
         /// <summary>
         /// Initializes a EdgeEffectPage. 
@@ -135,8 +137,8 @@ namespace Retouch_Photo2.Effects.Models
         //Edge_Amount
         private void ConstructEdge_Amount()
         {
-            this.AmountSlider.Minimum = 0;
-            this.AmountSlider.Maximum = 100;
+            this.AmountSlider.Minimum = 0.0d;
+            this.AmountSlider.Maximum = 100.0d;
             this.AmountSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEdge());
             this.AmountSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Edge_Amount = (float)value / 100.0f);
             this.AmountSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
@@ -153,8 +155,8 @@ namespace Retouch_Photo2.Effects.Models
         //Edge_Radius
         private void ConstructEdge_Radius()
         {
-            this.RadiusSlider.Minimum = 0;
-            this.RadiusSlider.Maximum = 10;
+            this.RadiusSlider.Minimum = 0.0d;
+            this.RadiusSlider.Maximum = 1.0d;
             this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEdge());
             this.RadiusSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Edge_Radius = (float)value);
             this.RadiusSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>

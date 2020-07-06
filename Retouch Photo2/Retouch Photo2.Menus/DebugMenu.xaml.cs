@@ -1,19 +1,29 @@
-﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.ViewModels;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Retouch_Photo2.Elements;
 using Windows.ApplicationModel.Resources;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo2.Menus.Models
 {
     /// <summary>
     /// Menu of Debug.
     /// </summary>
-    public sealed partial class DebugMenu : UserControl, IMenu
+    public sealed partial class DebugMenu : Expander, IMenu 
     {
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
+        //@Content
+        TextMainPage TextMainPage = new TextMainPage();
 
         //@Construct
         /// <summary>
@@ -23,28 +33,15 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructMenu();
 
-            this.Button.Click += (s, e) =>
-            {
-            };
-            this.Button2.Click += (s, e) =>
-            {
-            };
-
-            this.Re.Click += (s, e) =>
-            {
-            };
-            this.Coo.Click += (s, e) =>
-            {
-            };
+            this.MainPage = this.TextMainPage;
         }
     }
 
     /// <summary>
     /// Menu of Debug.
     /// </summary>
-    public sealed partial class DebugMenu : UserControl, IMenu
+    public sealed partial class DebugMenu : Expander, IMenu 
     {
 
         //Strings
@@ -52,26 +49,36 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content =
-            this._Expander.Title =
-            this._Expander.CurrentTitle = "Debug"; //resource.GetString("/Menus/Debug");
+            this.Button.Title =
+            this.Title = "Debug";
         }
 
         //Menu
         /// <summary> Gets the type. </summary>
         public MenuType Type => MenuType.Debug;
-        /// <summary> Gets the expander. </summary>
-        public IExpander Expander => this._Expander;
-        MenuButton _button = new MenuButton
+        /// <summary> Gets or sets the button. </summary>
+        public override IExpanderButton Button { get; } = new MenuButton
         {
             CenterContent = "?"
         };
+        /// <summary> Reset Expander. </summary>
+        public override void Reset() { }
 
-        private void ConstructMenu()
+    }
+
+
+    /// <summary>
+    /// MainPage of <see cref = "DebugMenu"/>.
+    /// </summary>
+    public sealed partial class DebugMainPage : Page
+    {
+        //@Construct
+        /// <summary>
+        /// Initializes a DebugMainPage. 
+        /// </summary>
+        public DebugMainPage()
         {
-            this._Expander.Layout = this;
-            this._Expander.Button = this._button;
-            this._Expander.Initialize();
+            this.InitializeComponent();
         }
     }
 }

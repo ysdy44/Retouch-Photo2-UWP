@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -16,35 +17,16 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public sealed partial class GeometryHeartTool : Page, ITool
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
         
-        //@TouchBar  
-        private bool TouchBarMode
-        {
-            set
-            {
-                if (value == false)
-                {
-                    this.SpreadTouchbarButton.IsSelected = false;
-                    this.TipViewModel.TouchbarPicker = null;
-                    this.TipViewModel.TouchbarSlider = null;
-                }
-                else
-                {
-                    this.SpreadTouchbarButton.IsSelected = true;
-                    this.TipViewModel.TouchbarPicker = this.SpreadTouchbarPicker;
-                    this.TipViewModel.TouchbarSlider = this.SpreadTouchbarSlider;
-                }
-            }
-        }
-        
+
         //@Converter
         private int SpreadNumberConverter(float spread) => (int)(spread * 100.0f);
-        private double SpreadValueConverter(float spread) => spread * 100d;
+
 
         //@Construct
         /// <summary>
@@ -62,8 +44,9 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
-            this.TouchBarMode = false;
+            TouchbarButton.Instance = null;
         }        
+
     }
     
     /// <summary>
@@ -71,14 +54,13 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public partial class GeometryHeartTool : Page, ITool
     {
+
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Content =
-                this.Title = resource.GetString("/ToolsSecond/GeometryHeart");
-            this._button.Style = this.IconSelectedButtonStyle;
+            this.Button.Title = resource.GetString("/ToolsSecond/GeometryHeart");
 
             this.SpreadTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryHeart_Spread");
 
@@ -88,15 +70,13 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.GeometryHeart;
-        public string Title { get; set; }
-        public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
-
-        public FrameworkElement Button => this._button;
+        public FrameworkElement Icon { get; } = new GeometryHeartIcon();
+        public IToolButton Button { get; } = new ToolSecondButton
+        {
+            CenterContent = new GeometryHeartIcon()
+        };
         public FrameworkElement Page => this;
 
-        readonly FrameworkElement _icon = new GeometryHeartIcon();
-        readonly Button _button = new Button { Tag = new GeometryHeartIcon()};
 
         private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
@@ -109,12 +89,12 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
+        public void Started(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => ToolBase.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
+        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
 
-        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+        public void Draw(CanvasDrawingSession drawingSession) => ToolBase.CreateTool.Draw(drawingSession);
 
     }
 
@@ -127,12 +107,6 @@ namespace Retouch_Photo2.Tools.Models
         //Spead
         private void ConstructSpread1()
         {
-            //Button
-            this.SpreadTouchbarButton.Toggle += (s, value) =>
-            {
-                this.TouchBarMode = value;
-            };
-
             this.SpreadTouchbarPicker.Unit = "%";
             this.SpreadTouchbarPicker.Minimum = 0;
             this.SpreadTouchbarPicker.Maximum = 100;

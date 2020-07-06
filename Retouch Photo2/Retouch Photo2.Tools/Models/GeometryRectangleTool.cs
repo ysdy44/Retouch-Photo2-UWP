@@ -16,12 +16,14 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public partial class GeometryRectangleTool : Page, ITool
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
+
         GeometryTool GeometryTool = new GeometryTool();
+
 
         //@Construct
         /// <summary>
@@ -50,22 +52,19 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content =
-                this.Title = resource.GetString("/Tools/Rectangle");
+            this.Button.Title = resource.GetString("/Tools/Rectangle");
         }
 
 
         //@Content
         public ToolType Type => ToolType.GeometryRectangle;
-        public string Title { get; set; }
-        public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
-
-        public FrameworkElement Button => this._button;
+        public FrameworkElement Icon { get; } = new GeometryRectangleIcon();
+        public IToolButton Button { get; } = new ToolButton
+        {
+            CenterContent = new GeometryRectangleIcon()
+        };
         public FrameworkElement Page => this;
 
-        readonly FrameworkElement _icon = new GeometryRectangleIcon();
-        readonly ToolButton _button = new ToolButton(new GeometryRectangleIcon());
 
         private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
@@ -78,12 +77,12 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
+        public void Started(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => ToolBase.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
+        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
 
-        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+        public void Draw(CanvasDrawingSession drawingSession) => ToolBase.CreateTool.Draw(drawingSession);
 
     }
 }

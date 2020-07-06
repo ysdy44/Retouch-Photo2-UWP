@@ -3,21 +3,71 @@ using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Media.Animation;
 
 namespace Retouch_Photo2.Elements
 {
     /// <summary> 
     /// Represents the control that a drawer can be folded.
     /// </summary>
-    public partial class Expander : UserControl, IExpander
+    public abstract partial class Expander : UserControl
     {
-
+          
         //@Delegate
-        public Action Move { get; set; }
-        public Action Closed { get; set; }
-        public Action Opened { get; set; }
-        public Action Overlaid { get; set; }
+        /// <summary> 
+        /// Occurs when the position changes, Move the menu to top.
+        /// </summary>
+        public void Move()
+        {
+            if (Expander.OverlayCanvas.Children.Contains(this))
+            {
+                int index = Expander.OverlayCanvas.Children.IndexOf(this);
+                int count = Expander.OverlayCanvas.Children.Count;
+                Expander.OverlayCanvas.Children.Move((uint)index, (uint)count - 1); ;
+            }
+        }
+        /// <summary>
+        /// Occurs when the flyout opened, Disable all menus, except the current menu.
+        /// </summary>
+        public void Opened()
+        {
+            foreach (UIElement menu in Expander.OverlayCanvas.Children)
+            {
+                menu.IsHitTestVisible = false;
+            }
+            this.IsHitTestVisible = true;
+
+            this.Move();
+            this.Visibility = Visibility.Visible;
+            Expander.IsOverlayDismiss = true;
+        }
+
+        /// <summary> 
+        /// Occurs when the flyout closed, Enable all menus.     
+        /// </summary>
+        public void Closed()
+        {
+            foreach (UIElement menu in Expander.OverlayCanvas.Children)
+            {
+                menu.IsHitTestVisible = true;
+            }
+
+            this.Visibility = Visibility.Collapsed;
+            Expander.IsOverlayDismiss = false;
+        }
+
+        /// <summary>
+        /// Occurs when the flyout overlaid, Enable all menus.  
+        /// </summary>
+        public void Overlaid()
+        {
+            foreach (UIElement menu in Expander.OverlayCanvas.Children)
+            {
+                menu.IsHitTestVisible = true;
+            }
+
+            Expander.IsOverlayDismiss = false;
+        }
+
 
 
         //@Content
@@ -30,12 +80,12 @@ namespace Retouch_Photo2.Elements
                 {
                     case ExpanderState.Hide:
                         this.HeightStretch();
-                        this.Closed?.Invoke(); //Delegate
+                        this.Closed(); //Delegate
                         break;
 
                     case ExpanderState.FlyoutShow:
                         this.HeightStretch();
-                        if (this._vsState == ExpanderState.Hide) this.Opened?.Invoke(); //Delegate 
+                        if (this._vsState == ExpanderState.Hide) this.Opened(); //Delegate 
                         break;
 
                     case ExpanderState.OverlayNotExpanded:
@@ -52,7 +102,7 @@ namespace Retouch_Photo2.Elements
                             else this.HeightStoryboardZeroToMain.Begin();//Storyboard
                         }
 
-                        this.Overlaid?.Invoke(); //Delegate 
+                        this.Overlaid(); //Delegate 
                         break;
 
                     default:
@@ -65,8 +115,8 @@ namespace Retouch_Photo2.Elements
             }
         }
         public FlyoutPlacementMode PlacementMode { get; set; } = FlyoutPlacementMode.Bottom;
-        public FrameworkElement Layout { get; set; }
-        public IExpanderButton Button { get; set; }
+        public abstract IExpanderButton Button { get; }
+
 
         bool _lockLoad = false;
         public void CalculatePostion(FrameworkElement placementTarget, FlyoutPlacementMode placementMode)
@@ -74,7 +124,7 @@ namespace Retouch_Photo2.Elements
             //@Debug: 
             // if unloaded, the height will < 70
             // so it must re-Load and re-CalculatePostion
-            if (this._lockLoad == false && this.Layout.ActualHeight < 70)
+            if (this._lockLoad == false && this.ActualHeight < 70)
             {
                 this.Loaded += (s, e) =>
                 {
@@ -102,7 +152,7 @@ namespace Retouch_Photo2.Elements
                     break;
             }
 
-            this.Layout.IsHitTestVisible = true;
+            this.IsHitTestVisible = true;
         }
 
         public void CropLayout()

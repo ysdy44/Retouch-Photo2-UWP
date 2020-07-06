@@ -13,11 +13,13 @@ namespace Retouch_Photo2.Effects.Models
     /// </summary>
     public sealed partial class SharpenEffectPage : Page, IEffectPage
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         
+
         //@Construct
         /// <summary>
         /// Initializes a SharpenEffectPage. 
@@ -103,8 +105,8 @@ namespace Retouch_Photo2.Effects.Models
         //Sharpen_Amount
         private void ConstructSharpen_Amount()
         {
-            this.AmountSlider.Minimum = 0;
-            this.AmountSlider.Maximum = 10;
+            this.AmountSlider.Minimum = 0.0d;
+            this.AmountSlider.Maximum = 10.0d;
             this.AmountSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheSharpen());
             this.AmountSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Sharpen_Amount = (float)value);
             this.AmountSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>

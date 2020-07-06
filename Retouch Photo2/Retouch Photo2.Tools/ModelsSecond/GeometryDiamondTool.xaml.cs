@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -16,35 +17,16 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public partial class GeometryDiamondTool : Page, ITool
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
 
-        //@TouchBar  
-        private bool TouchBarMode
-        {
-            set
-            {
-                if (value == false)
-                {
-                    this.MidTouchbarButton.IsSelected = false;
-                    this.TipViewModel.TouchbarPicker = null;
-                    this.TipViewModel.TouchbarSlider = null;
-                }
-                else
-                {
-                    this.MidTouchbarButton.IsSelected = true;
-                    this.TipViewModel.TouchbarPicker = this.MidTouchbarPicker;
-                    this.TipViewModel.TouchbarSlider = this.MidTouchbarSlider;
-                }
-            }
-        }
-        
+
         //@Converter
         private int MidNumberConverter(float mid) => (int)(mid * 100.0f);
-        private double MidValueConverter(float mid) => mid * 100d;
+
 
         //@Construct
         /// <summary>
@@ -63,7 +45,7 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
-            this.TouchBarMode = false;
+            TouchbarButton.Instance = null;
         }
     }
 
@@ -78,9 +60,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Content = 
-                this.Title = resource.GetString("/ToolsSecond/GeometryDiamond");
-            this._button.Style = this.IconSelectedButtonStyle;
+            this.Button.Title = resource.GetString("/ToolsSecond/GeometryDiamond");
 
             this.MirrorTextBlock.Text = resource.GetString("/ToolsSecond/GeometryDiamond_Mirror");
             this.MidTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryDiamond_Mid");
@@ -91,15 +71,13 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.GeometryDiamond;
-        public string Title { get; set; }
-        public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
-
-        public FrameworkElement Button => this._button;
+        public FrameworkElement Icon { get; } = new GeometryDiamondIcon();
+        public IToolButton Button { get; } = new ToolSecondButton
+        {
+            CenterContent = new GeometryDiamondIcon()
+        };
         public FrameworkElement Page => this;
 
-        readonly FrameworkElement _icon = new GeometryDiamondIcon();
-        readonly Button _button = new Button { Tag = new GeometryDiamondIcon()};
 
         private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
@@ -112,12 +90,12 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
+        public void Started(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => ToolBase.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
+        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
 
-        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+        public void Draw(CanvasDrawingSession drawingSession) => ToolBase.CreateTool.Draw(drawingSession);
 
     }
        
@@ -130,12 +108,6 @@ namespace Retouch_Photo2.Tools.Models
         //Mid
         private void ConstructMid1()
         {
-            //Button
-            this.MidTouchbarButton.Toggle += (s, value) =>
-            {
-                this.TouchBarMode = value;
-            };
-
             this.MidTouchbarPicker.Unit = "%";
             this.MidTouchbarPicker.Minimum = 0;
             this.MidTouchbarPicker.Maximum = 100;

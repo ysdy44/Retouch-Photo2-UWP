@@ -14,20 +14,9 @@
     d:DesignWidth="200"
     mc:Ignorable="d"
     IsEnabled="False"
-    >
-
-
-    <UserControl.Resources>
-        <!--Pointer -->
-        <SolidColorBrush x:Name="PointerOverColor" Color="{ThemeResource SystemBaseLowColor}"/>
-        <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
-
-        <SolidColorBrush x:Name="CheckColor" Color="{ThemeResource SystemBaseHighColor}"/>
-        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource AppTextColor}"/>
-    </UserControl.Resources>
-
-
-    <Grid x:Name="RootGrid" Padding="{x:Bind UserControl.Padding,Mode=OneWay}" Background="Transparent">
+    >    
+    
+    <Grid x:Name="RootGrid" Padding="{x:Bind UserControl.Padding, Mode=OneWay}" Background="Transparent">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -42,7 +31,7 @@
                 <VisualState x:Name="PointerOver">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PointerOverColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemBaseLowColor}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -50,7 +39,7 @@
                 <VisualState x:Name="Pressed">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PressedColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemBaseMediumLowColor}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -61,7 +50,7 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="0.5" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Foreground">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppTextColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
@@ -79,7 +68,7 @@
         <!--Icon-->
         <Viewbox x:Name="Viewbox" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <TextBlock x:Name="TextBlock" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" FontWeight="Medium" Foreground="{StaticResource CheckColor}"/>
+        <TextBlock x:Name="TextBlock" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" FontWeight="Medium" Foreground="{ThemeResource SystemBaseHighColor}"/>
         
         <!--ToggleSwitch-->
         <ToggleSwitch x:Name="ToggleSwitch" Grid.Column="2" IsOn="False">

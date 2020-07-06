@@ -12,11 +12,8 @@ namespace Retouch_Photo2.Tools.Models
     {
         //@Content
         public ToolType Type => ToolType.More;
-        public string Title { get; set; }
         public FrameworkElement Icon => null;
-        public bool IsSelected { get; set; }
-
-        public FrameworkElement Button => new ToolMoreButton();
+        public IToolButton Button { get; } = new ToolMoreButton();
         public FrameworkElement Page => null;
 
         public void Started(Vector2 startingPoint, Vector2 point) { }

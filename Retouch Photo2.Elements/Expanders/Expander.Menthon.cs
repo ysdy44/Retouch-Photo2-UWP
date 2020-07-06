@@ -8,7 +8,7 @@ namespace Retouch_Photo2.Elements
     /// <summary> 
     /// Represents the control that a drawer can be folded.
     /// </summary>
-    public partial class Expander : UserControl, IExpander
+    public abstract partial class Expander : UserControl
     {
 
         /// <summary>
@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Elements
         /// </summary>
         private double GetFlyoutPostionX(double buttonPostionX, double buttonWidth, FlyoutPlacementMode placementMode)
         {
-            double layoutWidth = this.Layout.ActualWidth;
+            double layoutWidth = this.ActualWidth;
             if (layoutWidth < 222) layoutWidth = 222;
 
             switch (placementMode)
@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Elements
         /// </summary>
         private double GetFlyoutPostionY(double buttonPostionY, double buttonHeight, FlyoutPlacementMode placementMode)
         {
-            double layoutHeight = this.Layout.ActualHeight;
+            double layoutHeight = this.ActualHeight;
             if (layoutHeight < 50) layoutHeight = 50;
 
             switch (placementMode)
@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Elements
         /// <returns> The croped postion. </returns>
         private double GetBoundPostionX(double postionX)
         {
-            double width = this.Layout.ActualWidth;
+            double width = this.ActualWidth;
 
             if (width < 222) width = 222;
 
@@ -76,7 +76,7 @@ namespace Retouch_Photo2.Elements
         /// <returns> The croped postion. </returns>
         private double GetBoundPostionY(double postionY)
         {
-            double height = this.Layout.ActualHeight;
+            double height = this.ActualHeight;
 
             if (height < 40) height = 40;
 

@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -28,48 +29,16 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public partial class GeometryCookieTool : Page, ITool
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
-
-        //@TouchBar  
-        private GeometryCookieMode TouchBarMode
-        {
-            set
-            {
-                switch (value)
-                {
-                    case GeometryCookieMode.None:
-                        this.InnerRadiusTouchbarButton.IsSelected = false;
-                        this.SweepAngleTouchbarButton.IsSelected = false;
-                        this.TipViewModel.TouchbarPicker = null;
-                        this.TipViewModel.TouchbarSlider = null;
-                        break;
-                    case GeometryCookieMode.InnerRadius:
-                        this.InnerRadiusTouchbarButton.IsSelected = true;
-                        this.SweepAngleTouchbarButton.IsSelected = false;
-                        this.TipViewModel.TouchbarPicker = this.InnerRadiusTouchbarPicker;
-                        this.TipViewModel.TouchbarSlider = this.InnerRadiusTouchbarSlider;
-                        break;
-                    case GeometryCookieMode.SweepAngle:
-                        this.InnerRadiusTouchbarButton.IsSelected = false;
-                        this.SweepAngleTouchbarButton.IsSelected = true;
-                        this.TipViewModel.TouchbarPicker = this.SweepAngleTouchbarPicker;
-                        this.TipViewModel.TouchbarSlider = this.SweepAngleTouchbarSlider;
-                        break;
-                }
-            }
-        }
-
+        
 
         //@Converter
         private int InnerRadiusNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
-        private double InnerRadiusValueConverter(float innerRadius) => innerRadius * 100d;
-
         private int SweepAngleNumberConverter(float sweepAngle) => (int)(sweepAngle / FanKit.Math.Pi * 180f);
-        private double SweepAngleValueConverter(float sweepAngle) => sweepAngle / System.Math.PI * 180d;
 
 
         //@Construct
@@ -91,8 +60,9 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
-            this.TouchBarMode = GeometryCookieMode.None;
+            TouchbarButton.Instance = null;
         }
+
     }
 
     /// <summary>
@@ -105,9 +75,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Content =
-                this.Title = resource.GetString("/ToolsSecond/GeometryCookie");
-            this._button.Style = this.IconSelectedButtonStyle;
+            this.Button.Title = resource.GetString("/ToolsSecond/GeometryCookie");
 
             this.InnerRadiusTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCookie_InnerRadius");
             this.SweepAngleTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCookie_SweepAngle");
@@ -118,16 +86,14 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.GeometryCookie;
-        public string Title { get; set; }
-        public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
-
-        public FrameworkElement Button => this._button;
+        public FrameworkElement Icon { get; } = new GeometryCookieIcon();
+        public IToolButton Button { get; } = new ToolSecondButton
+        {
+            CenterContent = new GeometryCookieIcon()
+        };
         public FrameworkElement Page => this;
 
-        readonly FrameworkElement _icon = new GeometryCookieIcon();
-        readonly Button _button = new Button { Tag = new GeometryCookieIcon()};
-        
+
         private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
             return new GeometryCookieLayer(customDevice)
@@ -140,12 +106,12 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
+        public void Started(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => ToolBase.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
+        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
 
-        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+        public void Draw(CanvasDrawingSession drawingSession) => ToolBase.CreateTool.Draw(drawingSession);
 
     }
 
@@ -158,16 +124,6 @@ namespace Retouch_Photo2.Tools.Models
         //InnerRadius
         private void ConstructInnerRadius1()
         {
-            //Button
-            this.InnerRadiusTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryCookieMode.InnerRadius;
-                else
-                    this.TouchBarMode = GeometryCookieMode.None;
-            };
-
-            //Number
             this.InnerRadiusTouchbarPicker.Unit = "%";
             this.InnerRadiusTouchbarPicker.Minimum = 0;
             this.InnerRadiusTouchbarPicker.Maximum = 100;
@@ -190,8 +146,8 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructInnerRadius2()
         {
-            this.InnerRadiusTouchbarSlider.Minimum = 0.0f;
-            this.InnerRadiusTouchbarSlider.Maximum = 1.0f;
+            this.InnerRadiusTouchbarSlider.Minimum = 0.0d;
+            this.InnerRadiusTouchbarSlider.Maximum = 1.0d;
             this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCookieLayer>
             (
                 layerType: LayerType.GeometryCookie,
@@ -223,15 +179,6 @@ namespace Retouch_Photo2.Tools.Models
         //SweepAngle
         private void ConstructSweepAngle1()
         {
-            //Button
-            this.SweepAngleTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryCookieMode.SweepAngle;
-                else
-                    this.TouchBarMode = GeometryCookieMode.None;
-            };
-
             this.SweepAngleTouchbarPicker.Unit = "º";
             this.SweepAngleTouchbarPicker.Minimum = 0;
             this.SweepAngleTouchbarPicker.Maximum = 360;
@@ -254,7 +201,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructSweepAngle2()
         {
-            this.SweepAngleTouchbarSlider.Minimum = 0;
+            this.SweepAngleTouchbarSlider.Minimum = 0.0d;
             this.SweepAngleTouchbarSlider.Maximum = FanKit.Math.PiTwice;
             this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCookieLayer>
             (

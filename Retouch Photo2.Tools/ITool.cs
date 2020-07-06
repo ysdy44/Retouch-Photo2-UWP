@@ -11,15 +11,10 @@ namespace Retouch_Photo2.Tools
     {
         /// <summary> Gets the type. </summary>
         ToolType Type { get; }
-        /// <summary> Gets or sets the title. </summary>
-        string Title { get; set; }
         /// <summary> Gets the icon. </summary>
         FrameworkElement Icon { get; }
-        /// <summary> Sets the IsSelected. </summary>
-        bool IsSelected { get; set; }
-
         /// <summary> Gets the button. </summary>
-        FrameworkElement Button { get; }
+        IToolButton Button { get; }
         /// <summary> Gets the page. </summary>
         FrameworkElement Page { get; }
 

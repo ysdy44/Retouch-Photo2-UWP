@@ -10,7 +10,8 @@
     >
 
     <ToolTipService.ToolTip>
-        <ToolTip x:Name="_ToolTip" Placement="Right" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+        <ToolTip x:Name="_ToolTip" Placement="Right" Style="{StaticResource AppToolTipStyle}"
+               Content="{x:Bind Title, Mode=OneWay}" />
     </ToolTipService.ToolTip>
 
     <Button x:Name="Button" Height="50" BorderThickness="0" Background="Transparent" VerticalAlignment="Stretch" Style="{StaticResource AppRoundedSelectedButtonStyle}"/>

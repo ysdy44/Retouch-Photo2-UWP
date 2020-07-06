@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -23,41 +24,12 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public partial class ViewTool : Page, ITool
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
 
-        //@TouchBar
-        private ViewMode TouchBarMode
-        {
-            set
-            {
-                switch (value)
-                {
-                    case ViewMode.None:
-                        this.RadianTouchbarButton.IsSelected = false;
-                        this.ScaleTouchbarButton.IsSelected = false;
-                        this.TipViewModel.TouchbarPicker = null;
-                        this.TipViewModel.TouchbarSlider = null;
-                        break;
-                    case ViewMode.Radian:
-                        this.RadianTouchbarButton.IsSelected = true;
-                        this.ScaleTouchbarButton.IsSelected = false;
-                        this.TipViewModel.TouchbarPicker = this.RadianTouchbarPicker;
-                        this.TipViewModel.TouchbarSlider = this.RadianTouchbarSlider;
-                        break;
-                    case ViewMode.Scale:
-                        this.RadianTouchbarButton.IsSelected = false;
-                        this.ScaleTouchbarButton.IsSelected = true;
-                        this.TipViewModel.TouchbarPicker = this.RadianTouchbarPicker;
-                        this.TipViewModel.TouchbarSlider = this.RadianTouchbarSlider;
-                        break;
-                }
-            }
-        }
-        
 
         //@Converter
         private int ScaleNumberConverter(float scale) => ViewScaleConverter.ScaleToNumber(scale);
@@ -65,7 +37,8 @@ namespace Retouch_Photo2.Tools.Models
 
         private int RadianNumberConverter(float radian) => ViewRadianConverter.RadianToNumber(radian);
         private double RadianValueConverter(float radian) => ViewRadianConverter.RadianToValue(radian);
-        
+
+
         #region DependencyProperty
 
 
@@ -118,7 +91,6 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructToolTip();
 
             this.ConstructRadianStoryboard();
             this.ConstructRadian1();
@@ -129,6 +101,87 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructScale2();
         }
 
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom()
+        {
+            TouchbarButton.Instance = null;
+        }
+
+    }
+    
+    /// <summary>
+    /// <see cref="ITool"/>'s ViewTool.
+    /// </summary>
+    public partial class ViewTool : Page, ITool
+    {
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Button.Title = resource.GetString("/Tools/View");
+
+            this.Button.ToolTip.Closed += (s, e) => this.RadianClearToolTip.IsOpen = this.ScaleClearToolTip.IsOpen = false;
+            this.Button.ToolTip.Opened += (s, e) =>
+            {
+                if (this.Button.IsSelected == false) return;
+
+                this.RadianClearToolTip.IsOpen = this.ScaleClearToolTip.IsOpen = true;
+            };
+
+            this.RadianTouchbarButton.CenterContent = resource.GetString("/Tools/View_Radian");
+            this.RadianClearToolTip.Content = resource.GetString("/Tools/View_RadianClear");
+
+            this.ScaleTouchbarButton.CenterContent = resource.GetString("/Tools/View_Scale");
+            this.ScaleClearToolTip.Content = resource.GetString("/Tools/View_ScaleClear");
+        }
+
+        //@Content
+        public ToolType Type => ToolType.View;
+        public FrameworkElement Icon { get; } = new ViewIcon();
+        public IToolButton Button { get; } = new ToolButton
+        {
+            CenterContent = new ViewIcon()
+        };
+        public FrameworkElement Page => this;
+
+
+        public void Started(Vector2 startingPoint, Vector2 point)
+        {
+            //Text
+            this.ViewModel.SetTipTextPosition();
+            this.ViewModel.TipTextVisibility = Visibility.Visible;
+
+            this.ViewModel.CanvasTransformer.CacheMove(startingPoint);
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+        }
+        public void Delta(Vector2 startingPoint, Vector2 point)
+        {
+            //Text
+            this.ViewModel.SetTipTextPosition();
+
+            this.ViewModel.CanvasTransformer.Move(point);
+            this.ViewModel.Invalidate();//Invalidate
+        }
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
+        {
+            //Text
+            this.ViewModel.TipTextVisibility = Visibility.Collapsed;
+
+            if (isOutNodeDistance) this.ViewModel.CanvasTransformer.Move(point);
+            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+        }
+        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
+
+        public void Draw(CanvasDrawingSession drawingSession) { }
+
+    }
+
+    /// <summary>
+    /// <see cref="ITool"/>'s ViewTool.
+    /// </summary>
+    public partial class ViewTool : Page, ITool
+    {
 
         private void ConstructRadianStoryboard()
         {
@@ -147,15 +200,6 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructRadian1()
         {
-            //Button
-            this.RadianTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = ViewMode.Radian;
-                else
-                    this.TouchBarMode = ViewMode.None;
-            };
-
             this.RadianTouchbarPicker.Unit = "º";
             this.RadianTouchbarPicker.Minimum = ViewRadianConverter.MinNumber;
             this.RadianTouchbarPicker.Maximum = ViewRadianConverter.MaxNumber;
@@ -196,18 +240,9 @@ namespace Retouch_Photo2.Tools.Models
                 this.ScaleStoryboard.Begin();//Storyboard
             };
         }
-        
+
         private void ConstructScale1()
         {
-            //Button
-            this.ScaleTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = ViewMode.Scale;
-                else
-                    this.TouchBarMode = ViewMode.None;
-            };
-
             this.ScaleTouchbarPicker.Unit = "%";
             this.ScaleTouchbarPicker.Minimum = ViewScaleConverter.MinNumber;
             this.ScaleTouchbarPicker.Maximum = ViewScaleConverter.MaxNumber;
@@ -232,94 +267,6 @@ namespace Retouch_Photo2.Tools.Models
             };
             this.ScaleTouchbarSlider.ValueChangeCompleted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-                
-        public void OnNavigatedTo() { }
-        public void OnNavigatedFrom()
-        {
-            this.TouchBarMode = ViewMode.None;
-        }
-    }
-    
-    /// <summary>
-    /// <see cref="ITool"/>'s ViewTool.
-    /// </summary>
-    public partial class ViewTool : Page, ITool
-    {
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content =
-                this.Title = resource.GetString("/Tools/View");
-
-            this.RadianTouchbarButton.CenterContent = resource.GetString("/Tools/View_Radian");
-            this.RadianClearToolTip.Content = resource.GetString("/Tools/View_RadianClear");
-
-            this.ScaleTouchbarButton.CenterContent = resource.GetString("/Tools/View_Scale");
-            this.ScaleClearToolTip.Content = resource.GetString("/Tools/View_ScaleClear");
-        }
-
-        //ToolTip
-        private void ConstructToolTip()
-        {
-            this._button.ToolTip.Opened += (s, e) =>
-            {
-                if (this.IsSelected)
-                {
-                    this.RadianClearToolTip.IsOpen = true;
-                    this.ScaleClearToolTip.IsOpen = true;
-                }
-            };
-            this._button.ToolTip.Closed += (s, e) =>
-            {
-                this.RadianClearToolTip.IsOpen = false;
-                this.ScaleClearToolTip.IsOpen = false;
-            };
-        }
-
-        
-        //@Content
-        public ToolType Type => ToolType.View;
-        public string Title { get; set; }
-        public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
-
-        public FrameworkElement Button => this._button;
-        public FrameworkElement Page => this;
-
-        readonly FrameworkElement _icon = new ViewIcon();
-        readonly ToolButton _button = new ToolButton(new ViewIcon());
-
-
-        public void Started(Vector2 startingPoint, Vector2 point)
-        {
-            //Text
-            this.ViewModel.SetTipTextPosition();
-            this.ViewModel.TipTextVisibility = Visibility.Visible;
-
-            this.ViewModel.CanvasTransformer.CacheMove(startingPoint);
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-        }
-        public void Delta(Vector2 startingPoint, Vector2 point)
-        {
-            //Text
-            this.ViewModel.SetTipTextPosition();
-
-            this.ViewModel.CanvasTransformer.Move(point);
-            this.ViewModel.Invalidate();//Invalidate
-        }
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
-        {
-            //Text
-            this.ViewModel.TipTextVisibility = Visibility.Collapsed;
-
-            if (isOutNodeDistance) this.ViewModel.CanvasTransformer.Move(point);
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-        }
-        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
-
-        public void Draw(CanvasDrawingSession drawingSession) { }
-                              
     }
 }

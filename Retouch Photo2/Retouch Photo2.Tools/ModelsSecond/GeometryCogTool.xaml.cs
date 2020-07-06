@@ -1,8 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -37,60 +35,17 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public sealed partial class GeometryCogTool : Page, ITool
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
-
-        //@TouchBar
-        private GeometryCogMode TouchBarMode
-        {
-            set
-            {
-                this.CountTouchbarButton.IsSelected = (value == GeometryCogMode.Count);
-                this.InnerRadiusTouchbarButton.IsSelected = (value == GeometryCogMode.InnerRadius);
-                this.ToothTouchbarButton.IsSelected = (value == GeometryCogMode.Tooth);
-                this.NotchTouchbarButton.IsSelected = (value == GeometryCogMode.Notch);
-
-                switch (value)
-                {
-                    case GeometryCogMode.None:
-                        this.TipViewModel.TouchbarPicker = null;
-                        this.TipViewModel.TouchbarSlider = null;
-                        break;
-                    case GeometryCogMode.Count:
-                        this.TipViewModel.TouchbarPicker = this.CountTouchbarPicker;
-                        this.TipViewModel.TouchbarSlider = this.CountTouchbarSlider;
-                        break;
-                    case GeometryCogMode.InnerRadius:
-                        this.TipViewModel.TouchbarPicker = this.InnerRadiusTouchbarPicker;
-                        this.TipViewModel.TouchbarSlider = this.InnerRadiusTouchbarSlider;
-                        break;
-                    case GeometryCogMode.Tooth:
-                        this.TipViewModel.TouchbarPicker = this.ToothTouchbarPicker;
-                        this.TipViewModel.TouchbarSlider = this.ToothTouchbarSlider;
-                        break;
-                    case GeometryCogMode.Notch:
-                        this.TipViewModel.TouchbarPicker = this.NotchTouchbarPicker;
-                        this.TipViewModel.TouchbarSlider = this.NotchTouchbarSlider;
-                        break;
-                }
-            }
-        }
 
 
         //@Converter    
-        private double CountValueConverter(float count) => count;
-
         private int InnerRadiusNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
-        private double InnerRadiusValueConverter(float innerRadius) => innerRadius * 100d;
-
         private int ToothNumberConverter(float tooth) => (int)(tooth * 100.0f);
-        private double ToothValueConverter(float tooth) => tooth * 100d;
-
         private int NotchNumberConverter(float notch) => (int)(notch * 100.0f);
-        private double NotchValueConverter(float notch) => notch * 100d;
 
 
         //@Construct
@@ -118,8 +73,9 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
-            this.TouchBarMode = GeometryCogMode.None;
+            TouchbarButton.Instance = null;
         }
+
     }
 
     /// <summary>
@@ -132,9 +88,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.Content =
-                this.Title = resource.GetString("/ToolsSecond/GeometryCog");
-            this._button.Style = this.IconSelectedButtonStyle;
+            this.Button.Title = resource.GetString("/ToolsSecond/GeometryCog");
 
             this.CountTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_Count");
             this.InnerRadiusTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_InnerRadius");
@@ -147,15 +101,13 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.GeometryCog;
-        public string Title { get; set; }
-        public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => !this._button.IsEnabled; set => this._button.IsEnabled = !value; }
-
-        public FrameworkElement Button => this._button;
+        public FrameworkElement Icon { get; } = new GeometryCogIcon();
+        public IToolButton Button { get; } = new ToolSecondButton
+        {
+            CenterContent = new GeometryCogIcon()
+        };
         public FrameworkElement Page => this;
 
-        readonly FrameworkElement _icon = new GeometryCogIcon();
-        readonly Button _button = new Button { Tag = new GeometryCogIcon() };
 
         private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
@@ -171,12 +123,12 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
+        public void Started(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => ToolBase.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
+        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
 
-        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+        public void Draw(CanvasDrawingSession drawingSession) => ToolBase.CreateTool.Draw(drawingSession);
 
     }
 
@@ -189,15 +141,6 @@ namespace Retouch_Photo2.Tools.Models
         //Count
         private void ConstructCount1()
         {
-            //Button
-            this.CountTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryCogMode.Count;
-                else
-                    this.TouchBarMode = GeometryCogMode.None;
-            };
-
             this.CountTouchbarPicker.Unit = null;
             this.CountTouchbarPicker.Minimum = 4;
             this.CountTouchbarPicker.Maximum = 36;
@@ -253,15 +196,6 @@ namespace Retouch_Photo2.Tools.Models
         //InnerRadius
         private void ConstructInnerRadius1()
         {
-            //Button
-            this.InnerRadiusTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryCogMode.InnerRadius;
-                else
-                    this.TouchBarMode = GeometryCogMode.None;
-            };
-
             this.InnerRadiusTouchbarPicker.Unit = "%";
             this.InnerRadiusTouchbarPicker.Minimum = 0;
             this.InnerRadiusTouchbarPicker.Maximum = 100;
@@ -317,15 +251,6 @@ namespace Retouch_Photo2.Tools.Models
         //Tooth
         private void ConstructTooth1()
         {
-            //Button
-            this.ToothTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryCogMode.Tooth;
-                else
-                    this.TouchBarMode = GeometryCogMode.None;
-            };
-
             this.ToothTouchbarPicker.Unit = "%";
             this.ToothTouchbarPicker.Minimum = 0;
             this.ToothTouchbarPicker.Maximum = 50;
@@ -381,15 +306,6 @@ namespace Retouch_Photo2.Tools.Models
         //Notch
         private void ConstructNotch1()
         {
-            //Button
-            this.NotchTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = GeometryCogMode.Notch;
-                else
-                    this.TouchBarMode = GeometryCogMode.None;
-            };
-
             this.NotchTouchbarPicker.Unit = "%";
             this.NotchTouchbarPicker.Minimum = 0;
             this.NotchTouchbarPicker.Maximum = 60;

@@ -248,11 +248,11 @@
                 <!--Body-->
                 <Rectangle x:Name="HeightRectangle" Grid.RowSpan="2" Height="Auto" VerticalAlignment="Stretch" 
                           apiContractNotPresent5:Fill="{ThemeResource AppBackground}"
-                          apiContractPresent5:Fill="{ThemeResource AppAcrylicElementBrush}"  />
+                          apiContractPresent5:Fill="{ThemeResource AppAcrylicElementBrush}" />
                 <Border x:Name="MainPageBorder" Visibility="Collapsed" Height="Auto" Grid.Row="1" VerticalAlignment="Top">
                     <!--Content-->
                 </Border>
-                <Border x:Name="SecondPageBorder" Visibility="Collapsed" Height="Auto" Grid.Row="1" VerticalAlignment="Top">
+                <Border x:Name="SecondPageBorder" Visibility="Collapsed" Height="Auto" MinHeight = "165" MaxHeight = "300" Grid.Row="1" VerticalAlignment="Top">
                     <!--Content-->
                 </Border>
 

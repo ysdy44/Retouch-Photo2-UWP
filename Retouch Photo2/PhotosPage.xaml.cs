@@ -37,6 +37,7 @@ namespace Retouch_Photo2
     /// </summary>
     public sealed partial class PhotosPage : Page
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;

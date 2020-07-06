@@ -37,11 +37,11 @@
     </UserControl.Resources>
 
 
-    <Grid Background="Transparent" Margin="{x:Bind UserControl.Margin,Mode=OneWay}" HorizontalAlignment="{x:Bind UserControl.HorizontalAlignment,Mode=OneWay}" VerticalAlignment="{x:Bind UserControl.VerticalAlignment,Mode=OneWay}">
+    <Grid Background="Transparent" Margin="{x:Bind UserControl.Margin, Mode=OneWay}" HorizontalAlignment="{x:Bind UserControl.HorizontalAlignment, Mode=OneWay}" VerticalAlignment="{x:Bind UserControl.VerticalAlignment, Mode=OneWay}">
 
         <!--Shadow-->
         <controls:DropShadowPanel Style="{StaticResource AppDropShadowPanelStyle}">
-            <Rectangle x:Name="Rectangle" RadiusX="25" RadiusY="25" StrokeThickness="1" Stroke="{x:Bind UserControl.BorderBrush, Mode=OneWay}" Fill="{x:Bind UserControl.Background,Mode=OneWay}"/>
+            <Rectangle x:Name="Rectangle" RadiusX="25" RadiusY="25" StrokeThickness="1" Stroke="{x:Bind UserControl.BorderBrush, Mode=OneWay}" Fill="{x:Bind UserControl.Background, Mode=OneWay}"/>
         </controls:DropShadowPanel>
 
         <!--Content-->

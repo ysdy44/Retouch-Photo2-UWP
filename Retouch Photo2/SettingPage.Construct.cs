@@ -221,7 +221,7 @@ namespace Retouch_Photo2
 
                 CheckBox checkBox = new CheckBox
                 {
-                    Content = menu.Expander.Title,
+                    Content = menu.Button.Title,
                     IsChecked = isVisible,
                 };
                 checkBox.Checked += async (s, e) => await this.AddMenu(menu.Type);

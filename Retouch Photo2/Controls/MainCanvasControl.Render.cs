@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Tools.Models;
 using System;
 using System.Numerics;
 using Windows.Graphics.Imaging;
@@ -102,7 +103,7 @@ namespace Retouch_Photo2.Controls
 
 
             //Tool
-            this.TipViewModel.Tool.Draw(drawingSession);
+            ToolBase.Instance.Draw(drawingSession);
         }
 
 

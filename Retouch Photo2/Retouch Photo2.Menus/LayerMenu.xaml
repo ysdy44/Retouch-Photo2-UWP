@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Retouch_Photo2.Menus.Models.LayerMenu"
+    x:Class="Retouch_Photo2.Menus.Models.LayerMainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -11,88 +11,72 @@
     d:DesignHeight="400"
     >
 
+    <StackPanel MinHeight="165" Padding="1,2">
 
-    <elements:Expander x:Name="_Expander">
-
-
-        <elements:Expander.MainPage>
-            <StackPanel MinHeight="165" Padding="1,2">
-
-                <!--Name-->
-                <TextBlock x:Name="NameTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <Button x:Name="NameButton" Height="26" Width="Auto" MinWidth="100" MaxWidth="600" HorizontalAlignment="Stretch"
+        <!--Name-->
+        <TextBlock x:Name="NameTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <Button x:Name="NameButton" Height="26" Width="Auto" MinWidth="100" MaxWidth="600" HorizontalAlignment="Stretch"
                         Style="{StaticResource AppNumberButtonStyle}"
                         IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                         Content="{x:Bind SelectionViewModel.LayerName, Mode=OneWay}"/>
 
 
-                <!--Opacity-->
-                <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <Border Height="{StaticResource AppCircleHeight}">
-                    <elements:SliderPicker x:Name="OpacitySlider"
+        <!--Opacity-->
+        <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <Border Height="{StaticResource AppCircleHeight}">
+            <elements:SliderPicker x:Name="OpacitySlider"
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                            Value="{x:Bind OpacityToValueConverter(SelectionViewModel.Opacity), Mode=OneWay}"/>
-                </Border>
-                
+        </Border>
 
-                <!--Blend Mode-->
-                <TextBlock x:Name="BlendModeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <Button x:Name="BlendModeButton" Style="{StaticResource AppIconRoundedButtonStyle}"
+
+        <!--Blend Mode-->
+        <TextBlock x:Name="BlendModeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <Button x:Name="BlendModeButton" Style="{StaticResource AppIconRoundedButtonStyle}"
                         IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                         Content="{x:Bind BlendModeComboBox.Title, Mode=OneWay}">
-                    <Button.Tag>
-                        <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
-                    </Button.Tag>
-                </Button>
-
-                
-                <ContentControl Height="4"/>
+            <Button.Tag>
+                <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+            </Button.Tag>
+        </Button>
 
 
-                <!--Visibility-->
-                <RelativePanel>
-                    <TextBlock x:Name="VisibilityTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
-                    <ToggleButton x:Name="VisibilityButton" RelativePanel.AlignRightWithPanel="True"
+        <ContentControl Height="4"/>
+
+
+        <!--Visibility-->
+        <RelativePanel>
+            <TextBlock x:Name="VisibilityTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+            <ToggleButton x:Name="VisibilityButton" RelativePanel.AlignRightWithPanel="True"
                                Style="{StaticResource AppCircleToggleButtonStyle}"
                                IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
-                               IsChecked="{x:Bind VisibilityToBoolConverter(ViewModel.Visibility),Mode=OneWay}" >
-                        <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
-                    </ToggleButton>
-                </RelativePanel>
-                
+                               IsChecked="{x:Bind VisibilityToBoolConverter(ViewModel.Visibility), Mode=OneWay}" >
+                <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
+            </ToggleButton>
+        </RelativePanel>
 
-                <ContentControl Height="6"/>
-                
-                
-                <!--FollowTransform-->
-                <RelativePanel>
-                    <TextBlock x:Name="FollowTransformTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
-                    <ToggleButton x:Name="FollowTransformToggleButton" RelativePanel.AlignRightWithPanel="True"
+
+        <ContentControl Height="6"/>
+
+
+        <!--FollowTransform-->
+        <RelativePanel>
+            <TextBlock x:Name="FollowTransformTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+            <ToggleButton x:Name="FollowTransformToggleButton" RelativePanel.AlignRightWithPanel="True"
                                   Style="{StaticResource AppCircleToggleButtonStyle}"
-                                  IsChecked="{x:Bind SelectionViewModel.IsFollowTransform,Mode=OneWay}" >
-                        <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-                    </ToggleButton>
-                </RelativePanel>
-
-                
-                <ContentControl Height="6"/>
-
-                
-                <!--Tag Type-->
-                <TextBlock x:Name="TagTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <blends:TagTypeSegmented x:Name="TagTypeSegmented" Type="{x:Bind SelectionViewModel.TagType,Mode=OneWay}" />
-
-            </StackPanel>
-        </elements:Expander.MainPage>
+                                  IsChecked="{x:Bind SelectionViewModel.IsFollowTransform, Mode=OneWay}" >
+                <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+            </ToggleButton>
+        </RelativePanel>
 
 
-        <elements:Expander.SecondPage>
-            <ScrollViewer MaxHeight="300">
-                <blends:BlendModeComboBox x:Name="BlendModeComboBox" Mode="{x:Bind SelectionViewModel.BlendMode, Mode=OneWay}"/>
-            </ScrollViewer>
-        </elements:Expander.SecondPage>
+        <ContentControl Height="6"/>
 
 
-    </elements:Expander>
+        <!--Tag Type-->
+        <TextBlock x:Name="TagTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <blends:TagTypeSegmented x:Name="TagTypeSegmented" Type="{x:Bind SelectionViewModel.TagType, Mode=OneWay}" />
+
+    </StackPanel>
 
 </UserControl>

@@ -18,12 +18,12 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public sealed partial class CropTool : Page, ITool
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
 
         ListViewSelectionMode SelectionMode => this.SelectionViewModel.SelectionMode;
 
@@ -138,8 +138,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content =
-                this.Title = resource.GetString("/Tools/Crop");
+            this.Button.Title = resource.GetString("/Tools/Crop");
 
             this.ResetTextBlock.Text = resource.GetString("/Tools/Crop_Reset");//Reset Crop
             this.FitTextBlock.Text = resource.GetString("/Tools/Crop_Fit");//Fit Crop
@@ -148,15 +147,12 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.Crop;
-        public string Title { get; set; }
-        public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
-
-        public FrameworkElement Button => this._button;
+        public FrameworkElement Icon { get; } = new CropIcon();
+        public IToolButton Button { get; } = new ToolButton
+        {
+            CenterContent = new CropIcon()
+        };
         public FrameworkElement Page => this;
-
-        readonly FrameworkElement _icon = new CropIcon();
-        readonly ToolButton _button = new ToolButton(new CropIcon());
 
 
         Layerage Layerage;
@@ -235,7 +231,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
+        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)

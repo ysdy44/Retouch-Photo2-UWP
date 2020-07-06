@@ -1,8 +1,5 @@
-﻿using System;
-using Windows.Foundation;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Elements
@@ -10,11 +7,13 @@ namespace Retouch_Photo2.Elements
     /// <summary> 
     /// Represents the control that a drawer can be folded.
     /// </summary>
-    public partial class Expander : UserControl, IExpander
+    public abstract partial class Expander : UserControl
     {
+        
         //@Content
-        public string Title { get; set; }
-        public string CurrentTitle { get => this.TitleTextBlock.Text; set => this.TitleTextBlock.Text = value; }
+        public string Title { get => this.TitleTextBlock.Text; protected set => this.TitleTextBlock.Text = value; }
+        public FrameworkElement Self => this;
+
         public UIElement MainPage { get => this.MainPageBorder.Child; set => this.MainPageBorder.Child = value; }
         public UIElement SecondPage { get => this.SecondPageBorder.Child; set => this.SecondPageBorder.Child = value; }
         public bool IsSecondPage
@@ -37,7 +36,7 @@ namespace Retouch_Photo2.Elements
             }
         }
         public Visibility ResetButtonVisibility { get => this.ResetButton.Visibility; set => this.ResetButton.Visibility = value; }
-        public Action Reset { get; set; }
+        public abstract void Reset();
 
 
         //@VisualState
@@ -74,8 +73,8 @@ namespace Retouch_Photo2.Elements
 
         double _postionX;
         double _postionY;
-        public double PostionX { get => Canvas.GetLeft(this.Layout); set => Canvas.SetLeft(this.Layout, value); }
-        public double PostionY { get => Canvas.GetTop(this.Layout); set => Canvas.SetTop(this.Layout, value); }
+        private double PostionX { get => Canvas.GetLeft(this); set => Canvas.SetLeft(this, value); }
+        private double PostionY { get => Canvas.GetTop(this); set => Canvas.SetTop(this, value); }
 
 
         //@Construct     
@@ -85,15 +84,14 @@ namespace Retouch_Photo2.Elements
         public Expander()
         {
             this.InitializeComponent();
+            this.InitializeExpander();
             this.ConstructWidthStoryboard();
             this.ConstructHeightStoryboard();
             this.Tapped += (s, e) => e.Handled = true;
         }
 
-        /// <summary>
-        /// Initialize
-        /// </summary>
-        public void Initialize()
+
+        private void InitializeExpander()
         {
             this.VisualState = this.VisualState;//State 
 
@@ -111,10 +109,10 @@ namespace Retouch_Photo2.Elements
 
             this.BackButton.Click += (s, e) =>
             {
-                this.CurrentTitle = this.Title;
+                this.Title = this.Button.Title;
                 this.IsSecondPage = false;
             };
-            if (this.Reset != null) this.ResetButton.Click += (s, e) => this.Reset();
+            this.ResetButton.Click += (s, e) => this.Reset();
 
             /////////////////////////////////
 
@@ -128,7 +126,7 @@ namespace Retouch_Photo2.Elements
                 this._postionX = this.PostionX;
                 this._postionY = this.PostionY;
 
-                this.Move?.Invoke(); //Delegate
+                this.Move(); //Delegate
             };
             this.TitleGrid.ManipulationDelta += (s, e) =>
             {
@@ -146,7 +144,6 @@ namespace Retouch_Photo2.Elements
                 this._postionY = this.PostionY;
             };
         }
-
-
+        
     }
 }

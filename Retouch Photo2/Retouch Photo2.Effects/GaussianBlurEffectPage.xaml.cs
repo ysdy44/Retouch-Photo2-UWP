@@ -13,11 +13,13 @@ namespace Retouch_Photo2.Effects.Models
     /// </summary>
     public sealed partial class GaussianBlurEffectPage : Page, IEffectPage
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         
+
         //@Construct
         /// <summary>
         /// Initializes a GaussianBlurEffectPage. 
@@ -127,8 +129,8 @@ namespace Retouch_Photo2.Effects.Models
         //GaussianBlur_Radius
         private void ConstructGaussianBlur_Radius()
         {
-            this.RadiusSlider.Minimum = 0;
-            this.RadiusSlider.Maximum = 100;
+            this.RadiusSlider.Minimum = 0.0d;
+            this.RadiusSlider.Maximum = 100.0d;
             this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheGaussianBlur());
             this.RadiusSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.GaussianBlur_Radius = (float)value);
             this.RadiusSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>

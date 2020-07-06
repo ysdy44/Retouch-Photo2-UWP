@@ -14,12 +14,18 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Styles.Style"/>.
     /// </summary>
-    public sealed partial class StyleMenu : UserControl, IMenu
+    public sealed partial class StyleMenu : Expander, IMenu 
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Content
+        StyleMainPage StyleMainPage = new StyleMainPage();
+
 
         //@Construct
         /// <summary>
@@ -29,7 +35,60 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructMenu();
+
+            this.MainPage = this.StyleMainPage;
+        }
+    }
+
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Styles.Style"/>.
+    /// </summary>
+    public sealed partial class StyleMenu : Expander, IMenu 
+    {
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Button.Title =
+            this.Title = resource.GetString("/Menus/Style");
+        }
+
+        //Menu
+        /// <summary> Gets the type. </summary>
+        public MenuType Type => MenuType.Style;
+        /// <summary> Gets or sets the button. </summary>
+        public override IExpanderButton Button { get; } = new MenuButton
+        {
+            CenterContent = new Retouch_Photo2.Styles.Icon()
+        };
+        /// <summary> Reset Expander. </summary>
+        public override void Reset() { }
+
+    }
+
+
+
+    /// <summary>
+    /// MainPage of <see cref = "StyleMenu"/>.
+    /// </summary>
+    public sealed partial class StyleMainPage : UserControl
+    {
+
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a StyleMainPage. 
+        /// </summary>
+        public StyleMainPage()
+        {
+            this.InitializeComponent();
 
             this.Loaded += async (s, e) =>
             {
@@ -99,40 +158,6 @@ namespace Retouch_Photo2.Menus.Models
                 }
             };
 
-        }
-    }
-
-    /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Styles.Style"/>.
-    /// </summary>
-    public sealed partial class StyleMenu : UserControl, IMenu
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this._button.ToolTip.Content =
-            this._Expander.Title =
-            this._Expander.CurrentTitle = resource.GetString("/Menus/Style");
-        }
-
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Style;
-        /// <summary> Gets the expander. </summary>
-        public IExpander Expander => this._Expander;
-        MenuButton _button = new MenuButton
-        {
-            CenterContent = new Retouch_Photo2.Styles.Icon()
-        };
-
-        private void ConstructMenu()
-        {
-            this._Expander.Layout = this;
-            this._Expander.Button = this._button;
-            this._Expander.Initialize();
         }
     }
 }

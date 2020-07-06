@@ -14,6 +14,7 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public partial class TransformerTool : ITransformerTool
     {        
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;

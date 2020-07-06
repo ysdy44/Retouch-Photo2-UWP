@@ -5,46 +5,42 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvcolorpickers="using:HSVColorPickers"
-    xmlns:tools="using:Retouch_Photo2.Tools"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
 
-    <Page.Resources>
-        <Style x:Name="IconSelectedButtonStyle" TargetType="Button" BasedOn="{StaticResource AppIconSelectedButton}"/>
-    </Page.Resources>
-
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
 
             <!--Points-->
-            <tools:TouchbarButton x:Name="PointsTouchbarButton">
-                <tools:TouchbarButton.TouchbarPicker>
-                    <hsvcolorpickers:NumberPicker x:Name="PointsTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}"
-                             Value="{x:Bind SelectionViewModel.GeometryStarPoints,Mode=OneWay}"/>
-                </tools:TouchbarButton.TouchbarPicker>
-                <tools:TouchbarButton.TouchbarSlider>
-                    <tools:TouchbarSlider x:Name="PointsTouchbarSlider" 
-                             Value="{x:Bind PointsValueConverter(SelectionViewModel.GeometryStarPoints),Mode=OneWay}"/>
-                </tools:TouchbarButton.TouchbarSlider>
-            </tools:TouchbarButton>
+            <elements:TouchbarButton x:Name="PointsTouchbarButton">
+                <elements:TouchbarButton.TouchbarPicker>
+                    <hsvcolorpickers:NumberPicker x:Name="PointsTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                             Value="{x:Bind SelectionViewModel.GeometryStarPoints, Mode=OneWay}"/>
+                </elements:TouchbarButton.TouchbarPicker>
+                <elements:TouchbarButton.TouchbarSlider>
+                    <elements:TouchbarSlider x:Name="PointsTouchbarSlider" 
+                             Value="{x:Bind SelectionViewModel.GeometryStarPoints, Mode=OneWay}"/>
+                </elements:TouchbarButton.TouchbarSlider>
+            </elements:TouchbarButton>
 
             <ContentControl Width="4"/>
 
             <!--InnerRadius-->
-            <tools:TouchbarButton x:Name="InnerRadiusTouchbarButton">
-                <tools:TouchbarButton.TouchbarPicker>
-                    <hsvcolorpickers:NumberPicker x:Name="InnerRadiusTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}"
-                          Value="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryStarInnerRadius),Mode=OneWay}"/>
-                </tools:TouchbarButton.TouchbarPicker>
-                <tools:TouchbarButton.TouchbarSlider>
-                    <tools:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
-                          Value="{x:Bind InnerRadiusValueConverter(SelectionViewModel.GeometryStarInnerRadius), Mode=OneWay}" />
-                </tools:TouchbarButton.TouchbarSlider>
-            </tools:TouchbarButton>
+            <elements:TouchbarButton x:Name="InnerRadiusTouchbarButton">
+                <elements:TouchbarButton.TouchbarPicker>
+                    <hsvcolorpickers:NumberPicker x:Name="InnerRadiusTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                          Value="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryStarInnerRadius), Mode=OneWay}"/>
+                </elements:TouchbarButton.TouchbarPicker>
+                <elements:TouchbarButton.TouchbarSlider>
+                    <elements:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
+                          Value="{x:Bind SelectionViewModel.GeometryStarInnerRadius, Mode=OneWay}" />
+                </elements:TouchbarButton.TouchbarSlider>
+            </elements:TouchbarButton>
 
             <ContentControl Width="4"/>
 

@@ -22,9 +22,23 @@ namespace Retouch_Photo2.Elements.DrawPages
 
         //Touchbar
         /// <summary> TouchbarPickerBorder's Child. </summary>
-        public UIElement TouchbarPicker { get => this.TouchbarPickerBorder.Child; set => this.TouchbarPickerBorder.Child = value; }
+        public FrameworkElement TouchbarPicker
+        {
+            set
+            {
+                this.TouchbarBorder.Children.Add(value);
+            }
+        }
         /// <summary> TouchbarSliderBorder's Child. </summary>
-        public UIElement TouchbarSlider { get => this.TouchbarSliderBorder.Child; set => this.TouchbarSliderBorder.Child = value; }
+        public FrameworkElement TouchbarSlider
+        {
+            set
+            {
+                Grid.SetColumn(value, 2);
+                this.TouchbarBorder.Children.Add(value);
+            }
+        }
+
 
         //Foot
         /// <summary> Gets or sets RadiusAnimaPanel's content. </summary>

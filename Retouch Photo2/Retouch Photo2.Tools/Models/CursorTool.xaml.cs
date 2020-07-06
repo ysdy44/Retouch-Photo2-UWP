@@ -28,15 +28,14 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public partial class CursorTool : Page, ITool
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel ;
         TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel ;
 
-        IMoveTool MoveTool => this.TipViewModel.MoveTool;
-        ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
         MarqueeCompositeMode MarqueeCompositeMode => this.SettingViewModel.CompositeMode;
 
 
@@ -48,7 +47,6 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructToolTip();
 
             this.CountButton.Click += (s, e) =>
             {
@@ -71,39 +69,27 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content =
-                this.Title = resource.GetString("/Tools/Cursor");
-        }
+            this.Button.Title = resource.GetString("/Tools/Cursor");
 
-        //ToolTip
-        private void ConstructToolTip()
-        {
-            this._button.ToolTip.Opened += (s, e) =>
+            this.Button.ToolTip.Closed += (s, e) =>    this.ModeControl.IsOpen = false;
+            this.Button.ToolTip.Opened += (s, e) =>
             {
-                if (this.IsSelected)
-                {
-                    this.ModeControl.IsOpen = true;
-                }
-            };
-            this._button.ToolTip.Closed += (s, e) =>
-            {
-                this.ModeControl.IsOpen = false;
-            };
+                if (this.Button.IsSelected == false) return;
+
+                this.ModeControl.IsOpen = true;                
+            };            
         }
 
 
         //@Content
         public ToolType Type => ToolType.Cursor;  
-        public string Title { get; set; }
-        public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
-
-        public FrameworkElement Button => this._button;
+        public FrameworkElement Icon { get; } = new CursorIcon();
+        public IToolButton Button { get; } = new ToolButton
+        {
+            CenterContent = new CursorIcon()
+        };
         public FrameworkElement Page => this;
-
-        readonly FrameworkElement _icon = new CursorIcon();
-        readonly ToolButton _button = new ToolButton(new CursorIcon());
-
+        
 
         CursorMode CursorMode;
         TransformerRect BoxRect;
@@ -112,13 +98,13 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.CursorMode = CursorMode.None;
 
-            if (this.TransformerTool.Started(startingPoint, point))//TransformerTool
+            if (ToolBase.TransformerTool.Started(startingPoint, point))//TransformerTool
             {
                 this.CursorMode = CursorMode.Transformer;
                 return;
             }
 
-            if (this.MoveTool.Started(startingPoint, point))//MoveTool
+            if (ToolBase.MoveTool.Started(startingPoint, point))//MoveTool
             {
                 this.CursorMode = CursorMode.Move;
                 return;
@@ -139,10 +125,10 @@ namespace Retouch_Photo2.Tools.Models
             switch (this.CursorMode)
             {
                 case CursorMode.Transformer:
-                    this.TransformerTool.Delta(startingPoint, point);//TransformerTool
+                    ToolBase.TransformerTool.Delta(startingPoint, point);//TransformerTool
                     break;
                 case CursorMode.Move:
-                    this.MoveTool.Delta(startingPoint, point);//MoveTool
+                    ToolBase.MoveTool.Delta(startingPoint, point);//MoveTool
                     break;
                 case CursorMode.BoxChoose:
                     {
@@ -164,10 +150,10 @@ namespace Retouch_Photo2.Tools.Models
             switch (cursorMode)
             {
                 case CursorMode.Transformer:
-                    this.TransformerTool.Complete(startingPoint, point); //TransformerTool
+                    ToolBase.TransformerTool.Complete(startingPoint, point); //TransformerTool
                     break;
                 case CursorMode.Move:
-                    this.MoveTool.Complete(startingPoint, point);//MoveTool
+                    ToolBase.MoveTool.Complete(startingPoint, point);//MoveTool
                     break;
                 case CursorMode.BoxChoose:
                     {
@@ -188,7 +174,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
         }
-        public void Clicke(Vector2 point) => this.MoveTool.Clicke(point);
+        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)
@@ -197,10 +183,10 @@ namespace Retouch_Photo2.Tools.Models
             {
                 case CursorMode.None:
                 case CursorMode.Transformer:
-                    this.TransformerTool.Draw(drawingSession);//TransformerTool
+                    ToolBase.TransformerTool.Draw(drawingSession);//TransformerTool
                     break;
                 case CursorMode.Move:
-                    this.MoveTool.Draw(drawingSession);//MoveTool
+                    ToolBase.MoveTool.Draw(drawingSession);//MoveTool
                     break;
                 case CursorMode.BoxChoose:
                     {

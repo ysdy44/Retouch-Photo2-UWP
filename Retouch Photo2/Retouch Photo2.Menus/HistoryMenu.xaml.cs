@@ -1,7 +1,6 @@
 ﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
@@ -9,10 +8,15 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Historys.IHistory"/>.
     /// </summary>
-    public sealed partial class HistoryMenu : UserControl, IMenu
-    { 
+    public sealed partial class HistoryMenu : Expander, IMenu 
+    {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+
+
+        //@Content
+        HistoryMainPage HistoryMainPage = new HistoryMainPage();
 
 
         //@Construct
@@ -23,16 +27,15 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructMenu();
-            
-            this.ListView.ItemsSource = this.ViewModel.Historys;
+
+            this.MainPage = this.HistoryMainPage;
         }
     }
 
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Historys.IHistory"/>.
     /// </summary>
-    public sealed partial class HistoryMenu : UserControl, IMenu
+    public sealed partial class HistoryMenu : Expander, IMenu 
     {
 
         //Strings
@@ -40,26 +43,44 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content =
-            this._Expander.Title =
-            this._Expander.CurrentTitle = resource.GetString("/Menus/History");
+            this.Button.Title =
+            this.Title = resource.GetString("/Menus/History");
         }
 
         //Menu
         /// <summary> Gets the type. </summary>
         public MenuType Type => MenuType.History;
-        /// <summary> Gets the expander. </summary>
-        public IExpander Expander => this._Expander;
-        MenuButton _button = new MenuButton
+        /// <summary> Gets or sets the button. </summary>
+        public override IExpanderButton Button { get; } = new MenuButton
         {
             CenterContent = new Retouch_Photo2.Historys.Icon()
         };
+        /// <summary> Reset Expander. </summary>
+        public override void Reset() { }
 
-        private void ConstructMenu()
+    }
+
+
+
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Historys.IHistory"/>.
+    /// </summary>
+    public sealed partial class HistoryMainPage : UserControl
+    {
+
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a HistoryMainPage. 
+        /// </summary>
+        public HistoryMainPage()
         {
-            this._Expander.Layout = this;
-            this._Expander.Button = this._button;
-            this._Expander.Initialize();
+            this.InitializeComponent();
+
+            this.ListView.ItemsSource = this.ViewModel.Historys;
         }
     }
 }

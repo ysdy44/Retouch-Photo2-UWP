@@ -9,9 +9,11 @@ namespace Retouch_Photo2.Tools.Elements
     /// </summary>
     public sealed partial class MoreTransformControl : UserControl
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
+
 
         //@Construct
         /// <summary>

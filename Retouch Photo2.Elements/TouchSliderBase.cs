@@ -80,10 +80,7 @@ namespace HSVColorPickers
         /// </summary>
         public void InitializeComponent()
         {
-            this.SizeChanged += (s, e) => this.SetGridLength(this.Value);
-            this.Loaded += (s, e) => this.SetGridLength(this.Value);
-
-            this.RootGrid.ManipulationMode = ManipulationModes.All;
+            this.RootGrid.ManipulationMode = ManipulationModes.TranslateX;
             this.RootGrid.ManipulationStarted += (sender, e) =>
             {
                 this._offset = e.Position.X;

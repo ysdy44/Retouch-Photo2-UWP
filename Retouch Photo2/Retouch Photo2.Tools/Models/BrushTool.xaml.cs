@@ -20,11 +20,11 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public sealed partial class BrushTool : Page, ITool
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
@@ -161,8 +161,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content =
-                this.Title = resource.GetString("/Tools/Brush");
+            this.Button.Title = resource.GetString("/Tools/Brush");
 
             this.FillOrStrokeTextBlock.Text = resource.GetString("/Tools/Brush_FillOrStroke");
             this.BrushTypeTextBlock.Text = resource.GetString("/Tools/Brush_Type");
@@ -174,15 +173,12 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.Brush;
-        public string Title { get; set; }
-        public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
-
-        public FrameworkElement Button => this._button;
+        public FrameworkElement Icon { get; } = new BrushIcon();
+        public IToolButton Button { get; } = new ToolButton
+        {
+            CenterContent = new BrushIcon()
+        };
         public FrameworkElement Page => this;
-
-        readonly FrameworkElement _icon = new BrushIcon();
-        readonly ToolButton _button = new ToolButton(new BrushIcon());
 
 
         BrushHandleMode HandleMode = BrushHandleMode.None;
@@ -263,7 +259,7 @@ namespace Retouch_Photo2.Tools.Models
             this.HandleMode = BrushHandleMode.None;
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
+        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)

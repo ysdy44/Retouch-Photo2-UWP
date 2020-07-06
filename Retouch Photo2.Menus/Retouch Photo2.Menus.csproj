@@ -108,6 +108,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="IMenu.cs" />
+    <Compile Include="MenuButtons\MenuButton.xaml.cs">
+      <DependentUpon>MenuButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MenuType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMLs\XML.MenuTypeFactory.cs" />
@@ -123,6 +126,12 @@
       <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
       <Name>Retouch Photo2.Elements</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MenuButtons\MenuButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

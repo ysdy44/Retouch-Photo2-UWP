@@ -2,66 +2,33 @@
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Texts;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
 using Windows.Globalization;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Data;
 
 namespace Retouch_Photo2.Menus.Models
 {
-    internal enum TextMenuState
-    {
-        None,
-        FontFamily,
-        FontSize,
-        FontWeight,
-    }
-
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Texts"/>.
     /// </summary>
-    public sealed partial class TextMenu : UserControl, IMenu
+    public sealed partial class TextMenu : Expander, IMenu 
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
-        //@Converter
-        private int FontSizeConverter(float fontSize) => (int)fontSize;
 
-        private TextMenuState State
-        {
-            set
-            {
-                this.FontFamilyListView.Visibility = (value == TextMenuState.FontFamily) ? Visibility.Visible : Visibility.Collapsed;
-                this.FontSizeListView.Visibility = (value == TextMenuState.FontSize) ? Visibility.Visible : Visibility.Collapsed;
-                this.FontWeightScrollViewer.Visibility = (value == TextMenuState.FontWeight) ? Visibility.Visible : Visibility.Collapsed;
-            }
-        }
-
-        #region DependencyProperty
-
-
-        /// <summary> Gets or sets <see cref = "OperateMenu" />'s IsOpen. </summary>
-        public bool IsOpen
-        {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "OperateMenu.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(TextMenu), new PropertyMetadata(false));
-
-
-        #endregion
+        //@Content
+        TextMainPage TextMainPage = new TextMainPage();
 
 
         //@Construct
@@ -72,21 +39,22 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructToolTip();
-            this.ConstructMenu();
 
-            this.ConstructAlign();
-            this.ConstructFontStyle();
-            this.ConstructFontWeight();
-            this.ConstructFontFamily();
-            this.ConstructFontSize();
+            this.MainPage = this.TextMainPage;
+            this.TextMainPage.SecondPageChanged += (title, secondPage) =>
+            {
+                if (this.SecondPage != secondPage) this.SecondPage = secondPage;
+                this.IsSecondPage = true;
+                this.Title = (string)title;
+            };
         }
+
     }
 
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Texts"/>.
     /// </summary>
-    public sealed partial class TextMenu : UserControl, IMenu
+    public sealed partial class TextMenu : Expander, IMenu 
     {
 
         //Strings
@@ -94,9 +62,129 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content =
-            this._Expander.Title =
-            this._Expander.CurrentTitle = resource.GetString("/Menus/Text");
+            this.Button.ToolTip.Content =
+            this.Button.Title =
+            this.Title = resource.GetString("/Menus/Text");
+
+            this.Button.ToolTip.Closed += (s, e) => this.TextMainPage.IsOpen = false;
+            this.Button.ToolTip.Opened += (s, e) =>
+            {
+                if (this.IsSecondPage) return;
+                if (this.State != ExpanderState.Overlay) return;
+
+                this.TextMainPage.IsOpen = true;
+            };
+        }
+
+        //Menu  
+        /// <summary> Gets the type. </summary>
+        public MenuType Type => MenuType.Text;
+        /// <summary> Gets or sets the button. </summary>
+        public override IExpanderButton Button { get; } = new MenuButton
+        {
+            CenterContent = new Retouch_Photo2.Texts.Icon()
+        };
+        /// <summary> Reset Expander. </summary>
+        public override void Reset() { }
+
+    }
+
+
+
+    /// <summary>
+    /// MainPage of <see cref = "TextMenu"/>.
+    /// </summary>
+    public sealed partial class TextMainPage : UserControl
+    {
+
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+
+
+        //@Delegate
+        /// <summary> Occurs when second-page change. </summary>
+        public event EventHandler<UIElement> SecondPageChanged;
+
+
+        //@Content
+        /// <summary> FontWeight ComboBox. </summary>
+        public FontWeightComboBox FontWeightComboBox { get; } = new FontWeightComboBox();
+        /// <summary> FontFamily ListView. </summary>
+        public ListView FontFamilyListView { get; private set; }
+        /// <summary> FontSize ListView. </summary>
+        public ListView FontSizeListView { get; private set; }
+        
+        //@Converter
+        private int FontSizeConverter(float fontSize) => (int)fontSize;
+
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "TextMainPage" />'s IsOpen. </summary>
+        public bool IsOpen
+        {
+            get { return (bool)GetValue(IsOpenProperty); }
+            set { SetValue(IsOpenProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "TextMainPage.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(TextMainPage), new PropertyMetadata(false));
+
+
+        #endregion
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a TextMainPage. 
+        /// </summary>
+        public TextMainPage()
+        {
+            this.InitializeComponent();
+            this.ConstructFontWeightDataContext
+            (
+                 dataContext: this.SelectionViewModel,
+                 path: nameof(this.SelectionViewModel.FontWeight),
+                 dp: FontWeightComboBox.FontWeight2Property
+            );
+            this.ConstructStrings();
+
+            this.ConstructAlign();
+            this.ConstructFontStyle();
+            this.ConstructFontWeight();
+            this.ConstructFontFamily();
+            this.ConstructFontSize();
+        }
+        
+    }
+
+    /// <summary>
+    /// MainPage of <see cref = "TextMenu"/>.
+    /// </summary>
+    public sealed partial class TextMainPage : UserControl
+    {
+
+        //DataContext
+        private void ConstructFontWeightDataContext(object dataContext, string path, DependencyProperty dp)
+        {
+            this.FontWeightComboBox.DataContext = dataContext;
+
+            // Create the binding description.
+            Binding binding = new Binding
+            {
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath(path)
+            };
+
+            // Attach the binding to the target.
+            this.FontWeightComboBox.SetBinding(dp, binding);
+        }
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.FontAlignmentTextBlock.Text = resource.GetString("/Texts/FontAlignment");
 
@@ -112,49 +200,12 @@ namespace Retouch_Photo2.Menus.Models
             this.FontSizeTextBlock.Text = resource.GetString("/Texts/FontSize");
         }
 
-        //ToolTip
-        private void ConstructToolTip()
-        {
-            this._button.ToolTip.Opened += (s, e) =>
-            {
-                if (this._Expander.IsSecondPage == false)
-                {
-                    if (this.Expander.State == ExpanderState.Overlay)
-                    {
-                        this.IsOpen = true;
-                        this.FontAlignmentSegmented.IsOpen = true;
-                    }
-                }
-            };
-            this._button.ToolTip.Closed += (s, e) =>
-            {
-                this.IsOpen = false;
-                this.FontAlignmentSegmented.IsOpen = false;
-            };
-        }
-
-        //Menu  
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Text;
-        /// <summary> Gets the expander. </summary>
-        public IExpander Expander => this._Expander;
-        MenuButton _button = new MenuButton
-        {
-            CenterContent = new Retouch_Photo2.Texts.Icon()
-        };
-        
-        private void ConstructMenu()
-        {
-            this._Expander.Layout = this;
-            this._Expander.Button = this._button;
-            this._Expander.Initialize();
-        }
     }
 
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Texts"/>.
+    /// MainPage of <see cref = "TextMenu"/>.
     /// </summary>
-    public sealed partial class TextMenu : UserControl, IMenu
+    public sealed partial class TextMainPage : UserControl
     {
 
         //FontAlignment
@@ -201,27 +252,34 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.FontWeightButton.Click += (s, e) =>
             {
-                this.State = TextMenuState.FontWeight;
-                this._Expander.IsSecondPage = true;
-                this._Expander.CurrentTitle = this.FontWeightTextBlock.Text;
+                string title = this.FontWeightTextBlock.Text;
+                UIElement secondPage = this.FontWeightComboBox;
+                this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
             };
 
-            this.FontWeightControl.WeightChanged += (s, fontWeight) => this.SetFontWeight(fontWeight);
+            this.FontWeightComboBox.WeightChanged += (s, fontWeight) => this.SetFontWeight(fontWeight);
         }
 
 
         //FontFamily
         private void ConstructFontFamily()
         {
-            // Get all FontFamilys in your device.
-            IOrderedEnumerable<string> fontFamilys = CanvasTextFormat.GetSystemFontFamilies(ApplicationLanguages.Languages).OrderBy(k => k);
-            this.FontFamilyListView.ItemsSource = fontFamilys;
+            this.FontFamilyListView = new ListView
+            {
+                IsItemClickEnabled = true,
+                SelectionMode = ListViewSelectionMode.Single,
+
+                ItemTemplate = this.FontFamilyDataTemplate,
+             
+                // Get all FontFamilys in your device.
+                ItemsSource = CanvasTextFormat.GetSystemFontFamilies(ApplicationLanguages.Languages).OrderBy(k => k)
+            };
 
             this.FontFamilyButton.Click += (s, e) =>
             {
-                this.State = TextMenuState.FontFamily;
-                this._Expander.IsSecondPage = true;
-                this._Expander.CurrentTitle = this.FontFamilyTextBlock.Text;
+                string title = this.FontFamilyTextBlock.Text;
+                UIElement secondPage = this.FontFamilyListView;
+                this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
             };
 
             this.FontFamilyListView.ItemClick += (s, e) =>
@@ -231,24 +289,31 @@ namespace Retouch_Photo2.Menus.Models
                     this.SetFontFamily(value);
                 }
             };
-
         }
+
 
         //FontSize
         private void ConstructFontSize()
-        {
-            // Get all fontSizes in your device.
-            List<int> fontSizes = new List<int>
+        {          
+            this.FontSizeListView = new ListView
             {
-                5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 24, 30, 36, 48, 64, 72, 96, 144, 288,
+                IsItemClickEnabled = true,
+                SelectionMode = ListViewSelectionMode.Single,
+
+                ItemTemplate = this.FontSizeDataTemplate,
+
+                // Get all fontSizes in your device.
+                ItemsSource = new List<int>
+                {
+                     5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 24, 30, 36, 48, 64, 72, 96, 144, 288,
+                }
             };
-            this.FontSizeListView.ItemsSource = fontSizes;
 
             this.FontSizeButton.Click += (s, e) =>
             {
-                this.State = TextMenuState.FontSize;
-                this._Expander.IsSecondPage = true;
-                this._Expander.CurrentTitle = this.FontSizeTextBlock.Text;
+                string title = this.FontSizeTextBlock.Text;
+                UIElement secondPage = this.FontSizeListView;
+                this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
             };
 
             this.FontSizePicker.ValueChange += (s, value) => this.SetFontSize(value);
@@ -262,13 +327,13 @@ namespace Retouch_Photo2.Menus.Models
                 }
             };
         }
-
     }
 
+
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Texts"/>.
+    /// MainPage of <see cref = "TextMenu"/>.
     /// </summary>
-    public sealed partial class TextMenu : UserControl, IMenu
+    public sealed partial class TextMainPage : UserControl
     {
 
         private void SetFontAlignment(CanvasHorizontalAlignment fontAlignment)

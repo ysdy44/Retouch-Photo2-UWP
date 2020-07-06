@@ -19,23 +19,19 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content =
-                this.Title = resource.GetString("/Tools/Pen");
+            this.Button.Title = resource.GetString("/Tools/Pen");
         }
 
 
         //@Content
         public ToolType Type => ToolType.Pen;
-        public string Title { get; set; }
-        public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
-
-        public FrameworkElement Button => this._button;
+        public FrameworkElement Icon { get; } = new PenIcon();
+        public IToolButton Button { get; } = new ToolButton
+        {
+            CenterContent = new PenIcon()
+        };
         public FrameworkElement Page => this;
-
-        readonly FrameworkElement _icon = new PenIcon();
-        readonly ToolButton _button = new ToolButton(new PenIcon());
-
+        
 
         //Pen
         NodeCollectionMode Mode = NodeCollectionMode.None;

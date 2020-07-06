@@ -15,11 +15,11 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public partial class NodeTool : Page, ITool
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
         ListViewSelectionMode SelectionMode => this.SelectionViewModel.SelectionMode;
@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Tools.Models
         bool IsSnap => this.SettingViewModel.IsSnap;
 
         /// <summary> PenPage's Flyout. </summary>
-        public PenModeControl PenFlyout => this._penFlyout;
+        public PenModeControl PenFlyout => this._PenFlyout;
 
 
         //@Construct

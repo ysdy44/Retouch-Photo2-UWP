@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Elements;
+﻿using Windows.UI.Xaml.Controls;
+using Retouch_Photo2.Elements;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -7,8 +8,11 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of Keyboard.
     /// </summary>
-    public sealed partial class KeyboardMenu : UserControl, IMenu
+    public sealed partial class KeyboardMenu : Expander, IMenu 
     {
+        //@Content
+        TextMainPage TextMainPage = new TextMainPage();
+
         //@Construct
         /// <summary>
         /// Initializes a KeyboardMenu. 
@@ -17,39 +21,52 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructMenu();
+
+            this.MainPage = this.TextMainPage;
         }
     }
 
     /// <summary>
     /// Menu of Keyboard.
     /// </summary>
-    public sealed partial class KeyboardMenu : UserControl, IMenu
+    public sealed partial class KeyboardMenu : Expander, IMenu 
     {
 
         //Strings
         private void ConstructStrings()
         {
-            this._button.ToolTip.Content =
-            this._Expander.Title =
-            this._Expander.CurrentTitle = "Keyboard";
+            this.Button.ToolTip.Content =
+            this.Button.Title =
+            this.Title = "Keyboard";
         }
 
         //Menu
         /// <summary> Gets the type. </summary>
         public MenuType Type => MenuType.Keyboard;
-        /// <summary> Gets the expander. </summary>
-        public IExpander Expander => this._Expander;
-        MenuButton _button = new MenuButton
+        /// <summary> Gets or sets the button. </summary>
+        public override IExpanderButton Button { get; } = new MenuButton
         {
             CenterContent = "Key"
         };
+        /// <summary> Reset Expander. </summary>
+        public override void Reset() { }
 
-        private void ConstructMenu()
+    }
+
+
+
+    /// <summary>
+    /// MainPage of <see cref="KeyboardMenu"/>.
+    /// </summary>
+    public sealed partial class KeyboardMainPage : UserControl
+    {
+        //@Construct
+        /// <summary>
+        /// Initializes a KeyboardMainPage. 
+        /// </summary>
+        public KeyboardMainPage()
         {
-            this._Expander.Layout = this;
-            this._Expander.Button = this._button;
-            this._Expander.Initialize();
+            this.InitializeComponent();
         }
     }
 }

@@ -21,7 +21,7 @@
             <ContentControl Width="4"/>
 
             <!--Multi-Mode-->
-            <elements:CompositeModeSegmented x:Name="ModeControl" Mode="{x:Bind SettingViewModel.CompositeMode,Mode=TwoWay}"/>
+            <elements:CompositeModeSegmented x:Name="ModeControl" Mode="{x:Bind SettingViewModel.CompositeMode, Mode=TwoWay}"/>
 
             <ContentControl Width="4"/>
 

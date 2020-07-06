@@ -1,8 +1,12 @@
 ﻿using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
+using Retouch_Photo2.Blends;
 using Retouch_Photo2.ViewModels;
+using System;
+using Retouch_Photo2.Elements;
+using Retouch_Photo2.ViewModels;
+using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -13,17 +17,17 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Layers.ILayer"/>.
     /// </summary>
-    public sealed partial class LayerMenu : UserControl, IMenu
+    public sealed partial class LayerMenu : Expander, IMenu 
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
 
-        //@Converter
-        private bool VisibilityToBoolConverter(Visibility visibility) => visibility == Visibility.Visible;
-        private float OpacityToValueConverter(float opacity) => opacity * 100.0f;
+
+        //@Content
+        LayerMainPage LayerMainPage = new LayerMainPage();
 
 
         //@Construct
@@ -34,14 +38,14 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructMenu();
 
-            this.NameButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowRename?.Invoke();
-            this.ConstructOpacity();
-            this.ConstructBlendMode();
-            this.ConstructVisibility();
-            this.ConstructFollowTransform();
-            this.ConstructTagType();
+            this.MainPage = this.LayerMainPage;
+            this.LayerMainPage.SecondPageChanged += (title, secondPage) =>
+            {
+                if (this.SecondPage != secondPage) this.SecondPage = secondPage;
+                this.IsSecondPage = true;
+                this.Title = (string)title;
+            };
         }
 
     }
@@ -49,7 +53,7 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Layers.ILayer"/>.
     /// </summary>
-    public sealed partial class LayerMenu : UserControl, IMenu
+    public sealed partial class LayerMenu : Expander, IMenu 
     {
 
         //DataContext
@@ -71,9 +75,103 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content =
-            this._Expander.Title =
-            this._Expander.CurrentTitle = resource.GetString("/Menus/Layer");
+            this.Button.ToolTip.Content =
+            this.Button.Title =
+            this.Title = resource.GetString("/Menus/Layer");
+        }
+
+        //Menu
+        /// <summary> Gets the type. </summary>
+        public MenuType Type => MenuType.Layer;
+        /// <summary> Gets or sets the button. </summary>
+        public override IExpanderButton Button { get; } = new MenuButton
+        {
+            CenterContent = new Retouch_Photo2.Layers.Icon()
+        };
+        /// <summary> Reset Expander. </summary>
+        public override void Reset() { }
+
+    }
+
+
+
+    /// <summary>
+    /// MainPage of <see cref = "LayerMenu"/>.
+    /// </summary>
+    public sealed partial class LayerMainPage : UserControl
+    {
+
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+        
+
+        //@Delegate
+        /// <summary> Occurs when second-page change. </summary>
+        public event EventHandler<UIElement> SecondPageChanged;
+
+
+        //@Content
+        BlendModeComboBox BlendModeComboBox = new BlendModeComboBox();
+
+
+        //@Converter
+        private bool VisibilityToBoolConverter(Visibility visibility) => visibility == Visibility.Visible;
+        private float OpacityToValueConverter(float opacity) => opacity * 100.0f;
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a LayerMainPage. 
+        /// </summary>
+        public LayerMainPage()
+        {
+            this.InitializeComponent();
+            this.ConstructBlendModeDataContext
+            (
+                 dataContext: this.SelectionViewModel,
+                 path: nameof(this.SelectionViewModel.BlendMode),
+                 dp: BlendModeComboBox.ModeProperty
+            );
+            this.ConstructStrings();
+
+            this.NameButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowRename?.Invoke();
+            this.ConstructOpacity();
+            this.ConstructBlendMode();
+            this.ConstructVisibility();
+            this.ConstructFollowTransform();
+            this.ConstructTagType();
+        }
+
+    }
+
+    /// <summary>
+    /// MainPage of <see cref = "LayerMenu"/>.
+    /// </summary>
+    public sealed partial class LayerMainPage : UserControl
+    {
+
+        //DataContext
+        private void ConstructBlendModeDataContext(object dataContext, string path, DependencyProperty dp)
+        {
+            this.BlendModeComboBox.DataContext = dataContext;
+
+            // Create the binding description.
+            Binding binding = new Binding
+            {
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath(path)
+            };
+
+            // Attach the binding to the target.
+            this.BlendModeComboBox.SetBinding(dp, binding);
+        }
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.NameTextBlock.Text = resource.GetString("/Menus/Layer_Name");
 
@@ -87,41 +185,25 @@ namespace Retouch_Photo2.Menus.Models
 
             this.TagTypeTextBlock.Text = resource.GetString("/Menus/Layer_TagType");
         }
-        
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Layer;
-        /// <summary> Gets the expander. </summary>
-        public IExpander Expander => this._Expander;
-        MenuButton _button = new MenuButton
-        {
-            CenterContent = new Retouch_Photo2.Layers.Icon()
-        };
 
-        private void ConstructMenu()
-        {
-            this._Expander.Layout = this;
-            this._Expander.Button = this._button;
-            this._Expander.Initialize();
-        }
     }
 
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Layers.ILayer"/>.
+    /// MainPage of <see cref = "LayerMenu"/>.
     /// </summary>
-    public sealed partial class LayerMenu : UserControl, IMenu
+    public sealed partial class LayerMainPage : UserControl
     {
 
         //Opacity
         private void ConstructOpacity()
         {
-            this.OpacitySlider.Minimum = 0;
-            this.OpacitySlider.Maximum = 100;
+            this.OpacitySlider.Minimum = 0.0d;
+            this.OpacitySlider.Maximum = 1.0d;
             this.OpacitySlider.ValueChangeStarted += (s, value) => this.MethodViewModel.ILayerChangeStarted(cache: (iLayer) => iLayer.CacheOpacity());
-            this.OpacitySlider.ValueChangeDelta += (s, value) => this.MethodViewModel.ILayerChangeDelta((iLayer) => iLayer.Opacity = (float)value / 100.0f);
+            this.OpacitySlider.ValueChangeDelta += (s, value) => this.MethodViewModel.ILayerChangeDelta((iLayer) => iLayer.Opacity = (float)value);
             this.OpacitySlider.ValueChangeCompleted += (s, value) =>
             {
-                float opacity = (float)value / 100.0f;
+                float opacity = (float)value;
 
                 this.MethodViewModel.ILayerChangeCompleted<float>
                 (
@@ -141,11 +223,11 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.BlendModeButton.Click += (s, e) =>
             {
-                this.BlendModeComboBox.Mode = this.SelectionViewModel.BlendMode;
-
-                this._Expander.IsSecondPage = true;
-                this._Expander.CurrentTitle = this.BlendModeTextBlock.Text;
+                string title = this.BlendModeTextBlock.Text;
+                UIElement secondPage = this.BlendModeComboBox;
+                this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
             };
+
             this.BlendModeComboBox.ModeChanged += (s, mode) => this.MethodViewModel.ILayerChanged<BlendEffectMode?>
             (
                 setSelectionViewModel: () => this.SelectionViewModel.BlendMode = mode,

@@ -23,8 +23,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content =
-                this.Title = resource.GetString("/Tools/Node");
+            this.Button.Title = resource.GetString("/Tools/Node");
 
             this.RemoveTextBlock.Text = resource.GetString("/Tools/Node_Remove");
             this.InsertTextBlock.Text = resource.GetString("/Tools/Node_Insert");
@@ -35,16 +34,13 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.Node;
-        public string Title { get; set; }
-        public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
-
-        public FrameworkElement Button => this._button;
+        public FrameworkElement Icon { get; } = new NodeIcon();
+        public IToolButton Button { get; } = new ToolButton
+        {
+            CenterContent = new NodeIcon()
+        };
         public FrameworkElement Page => this;
-
-        readonly FrameworkElement _icon = new NodeIcon();
-        readonly ToolButton _button = new ToolButton(new NodeIcon());
-
+        
 
         Layerage Layerage;
         NodeCollectionMode NodeCollectionMode;

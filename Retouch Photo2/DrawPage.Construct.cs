@@ -57,9 +57,9 @@ namespace Retouch_Photo2
             this.DPIComboBox.DPI = DPI.DPI144;
             this.FileFormatComboBox.FileFormat = CanvasBitmapFileFormat.Jpeg;
 
-            this.ExportQualityPicker.Value = 1;
-            this.ExportQualityPicker.Minimum = 0;
-            this.ExportQualityPicker.Maximum = 1;
+            this.ExportQualityPicker.Value = 1.0d;
+            this.ExportQualityPicker.Minimum = 0.0d;
+            this.ExportQualityPicker.Maximum = 1.0d;
 
             this.ExportDialog.CloseButton.Click += (sender, args) => this.ExportDialog.Hide();
 

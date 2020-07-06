@@ -3,6 +3,7 @@ using Retouch_Photo2.Effects.Models;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
+using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -14,33 +15,92 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Effects.Effect"/>.
     /// </summary>
-    public sealed partial class EffectMenu : UserControl, IMenu
+    public sealed partial class EffectMenu : Expander, IMenu 
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
 
 
-        /// <summary> Gets the current effect. </summary>
-        public IEffectPage CurrentEffect
+        //@Content
+        EffectMainPage EffectMainPage = new EffectMainPage();
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a EffectMenu. 
+        /// </summary>
+        public EffectMenu()
         {
-            get => this.currentEffect;
-            set
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.MainPage = this.EffectMainPage;
+            this.EffectMainPage.SecondPageChanged += (title, secondPage) =>
             {
-                if (this.currentEffect == value) return;
-
-                if (value == null)
-                    this.EffectBoder.Child = null;
-                else
-                    this.EffectBoder.Child = value.Page;
-
-                this.currentEffect = value;
-            }
+                if (this.SecondPage != secondPage) this.SecondPage = secondPage;
+                this.IsSecondPage = true;
+                this.Title = (string)title;
+            };
         }
-        private IEffectPage currentEffect;
-        /// <summary> Gets the effects. </summary>
-        public IList<IEffectPage> Effects { get; } = new List<IEffectPage>
+    }
+
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Effects.Effect"/>.
+    /// </summary>
+    public sealed partial class EffectMenu : Expander, IMenu 
+    {
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Button.Title =
+            this.Title = resource.GetString("/Menus/Effect");
+        }
+
+        //Menu
+        /// <summary> Gets the type. </summary>
+        public MenuType Type => MenuType.Effect;
+        /// <summary> Gets or sets the button. </summary>
+        public override IExpanderButton Button { get; } = new MenuButton
+        {
+            CenterContent = new Retouch_Photo2.Effects.Icon()
+        };
+        /// <summary> Reset Expander. </summary>
+        public override void Reset()
+        {
+            this.EffectMainPage.Reset();
+        }
+
+    }
+
+
+
+    /// <summary>
+    /// MainPage of <see cref = "EffectMenu"/>.
+    /// </summary>
+    public sealed partial class EffectMainPage : UserControl
+    {
+
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Delegate
+        /// <summary> Occurs when second-page change. </summary>
+        public event EventHandler<UIElement> SecondPageChanged;
+
+
+        IEffectPage EffectPage = null;
+
+        /// <summary> Gets the effect pages. </summary>
+        public IList<IEffectPage> EffectPages { get; } = new List<IEffectPage>
         {
             new GaussianBlurEffectPage(),
             new DirectionalBlurEffectPage(),
@@ -56,33 +116,33 @@ namespace Retouch_Photo2.Menus.Models
 
         #region DependencyProperty
 
-        /// <summary> Gets or sets <see cref = "EffectMenu" />'s Effect. </summary>
+        /// <summary> Gets or sets <see cref = "EffectMainPage" />'s Effect. </summary>
         public Effect Effect
         {
             get { return (Effect)GetValue(EffectProperty); }
             set { SetValue(EffectProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "EffectMenu.Effect" /> dependency property. </summary>
-        public static readonly DependencyProperty EffectProperty = DependencyProperty.Register(nameof(Effect), typeof(Effect), typeof(EffectMenu), new PropertyMetadata(null, (sender, e) =>
+        /// <summary> Identifies the <see cref = "EffectMainPage.Effect" /> dependency property. </summary>
+        public static readonly DependencyProperty EffectProperty = DependencyProperty.Register(nameof(Effect), typeof(Effect), typeof(EffectMainPage), new PropertyMetadata(null, (sender, e) =>
         {
-            EffectMenu con = (EffectMenu)sender;
+            EffectMainPage con = (EffectMainPage)sender;
 
             if (e.NewValue is Effect value)
             {
-                foreach (IEffectPage effect in con.Effects)
+                foreach (IEffectPage effectPage in con.EffectPages)
                 {
-                    effect.Button.IsEnabled = true;
-                    effect.FollowButton(value);
+                    effectPage.Button.IsEnabled = true;
+                    effectPage.FollowButton(value);
 
-                    if (effect== con.CurrentEffect)
+                    if (effectPage == con.EffectPage)
                     {
-                        effect.FollowPage(value);
+                        effectPage.FollowPage(value);
                     }
                 }
             }
             else
             {
-                foreach (IEffectPage effect in con.Effects)
+                foreach (IEffectPage effect in con.EffectPages)
                 {
                     effect.Button.IsEnabled = false;
                 }
@@ -94,28 +154,26 @@ namespace Retouch_Photo2.Menus.Models
 
         //@Construct
         /// <summary>
-        /// Initializes a EffectMenu. 
+        /// Initializes a EffectMainPage. 
         /// </summary>
-        public EffectMenu()
+        public EffectMainPage()
         {
             this.InitializeComponent();
             this.ConstructDataContext
             (
                  dataContext: this.SelectionViewModel,
                  path: nameof(this.SelectionViewModel.Effect),
-                 dp: EffectMenu.EffectProperty
+                 dp: EffectMainPage.EffectProperty
             );
-            this.ConstructStrings();
-            this.ConstructMenu();
 
-            this.ConstructEffects();                        
+            this.ConstructEffects();
         }
     }
 
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Effects.Effect"/>.
+    /// MainPage of <see cref = "EffectMenu"/>.
     /// </summary>
-    public sealed partial class EffectMenu : UserControl, IMenu
+    public sealed partial class EffectMainPage : UserControl
     {
 
         //DataContext
@@ -134,45 +192,18 @@ namespace Retouch_Photo2.Menus.Models
             this.SetBinding(dp, binding);
         }
 
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this._button.ToolTip.Content = 
-            this._Expander.Title =
-            this._Expander.CurrentTitle = resource.GetString("/Menus/Effect");
-        }
-
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Effect;
-        /// <summary> Gets the expander. </summary>
-        public IExpander Expander => this._Expander;
-        MenuButton _button { get; } = new MenuButton
-        {
-            CenterContent = new Retouch_Photo2.Effects.Icon()
-        };
-
-        private void ConstructMenu()
-        {
-            this._Expander.Layout = this;
-            this._Expander.Button = this._button;
-            this._Expander.Reset = this.Reset;
-            this._Expander.Initialize();
-        }
     }
 
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Effects.Effect"/>.
+    /// MainPage of <see cref = "EffectMenu"/>.
     /// </summary>
-    public sealed partial class EffectMenu : UserControl, IMenu
+    public sealed partial class EffectMainPage : UserControl
     {
 
         //Effects
         private void ConstructEffects()
         {
-            foreach (IEffectPage effectPage in this.Effects)
+            foreach (IEffectPage effectPage in this.EffectPages)
             {
                 this.EffectsStackPanel.Children.Add(effectPage.Button);
 
@@ -181,10 +212,13 @@ namespace Retouch_Photo2.Menus.Models
         }
 
         //Reset
-        private void Reset()
+        public void Reset()
         {
-            if (this.CurrentEffect == null) return;
-            this.CurrentEffect.Reset();
+            if (this.EffectPage is IEffectPage effectPage)
+            {
+                effectPage.Reset();
+                this.ViewModel.Invalidate();//Invalidate
+            }
         }
 
         //Navigate
@@ -192,21 +226,18 @@ namespace Retouch_Photo2.Menus.Models
         {        
             if (effectPage == null) return;
 
-            this.CurrentEffect = effectPage;
-
-
             //Layers
             IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected(this.ViewModel.LayerageCollection);
             Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayerages);
             ILayer layer = outermost.Self;
 
-            Effect effect2 = layer.Effect;
-            effectPage.FollowPage(effect2);
+            Effect effect = layer.Effect;
+            effectPage.FollowPage(effect);
+            this.EffectPage = effectPage;
 
-
-            this._Expander.IsSecondPage = true;
-            this._Expander.ResetButtonVisibility = Visibility.Visible;
-            this._Expander.CurrentTitle = effectPage.Button.Text;
+            string title = effectPage.Button.Text;
+            UIElement secondPage = effectPage.Page;
+            this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
         }
     }
 }

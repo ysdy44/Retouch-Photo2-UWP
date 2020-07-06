@@ -73,20 +73,9 @@
         
         <elementDrawPages:DrawLayout x:Name="DrawLayout" 
                CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"
-            
-               LeftIcon="{x:Bind IconConverter(TipViewModel.Tool), Mode=OneWay}"
-               FootPage="{x:Bind PageConverter(TipViewModel.Tool), Mode=OneWay}"
-            
-               TouchbarPicker="{x:Bind TipViewModel.TouchbarPicker, Mode=OneWay}"              
-               TouchbarSlider="{x:Bind TipViewModel.TouchbarSlider, Mode=OneWay}"                                             
              
                DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
                IsFullScreen="{x:Bind SettingViewModel.IsFullScreen, Mode=OneWay}">
-
-            <!--RightIcon-->
-            <elementDrawPages:DrawLayout.RightIcon>
-                <layers:Icon/>
-            </elementDrawPages:DrawLayout.RightIcon>
 
             <!--RightPane-->
             <elementDrawPages:DrawLayout.RightCenterPanel>

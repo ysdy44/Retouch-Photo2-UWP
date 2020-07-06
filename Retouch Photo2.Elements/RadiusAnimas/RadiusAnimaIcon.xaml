@@ -33,7 +33,7 @@
 
         <!--Shadow-->
         <controls:DropShadowPanel Style="{StaticResource AppDropShadowPanelStyle}">
-            <Rectangle x:Name="Rectangle" RadiusX="25" RadiusY="25" Width="50" Height="50" StrokeThickness="1" Stroke="{x:Bind UserControl.BorderBrush, Mode=OneWay}" Fill="{x:Bind UserControl.Background,Mode=OneWay}"/>
+            <Rectangle x:Name="Rectangle" RadiusX="25" RadiusY="25" Width="50" Height="50" StrokeThickness="1" Stroke="{x:Bind UserControl.BorderBrush, Mode=OneWay}" Fill="{x:Bind UserControl.Background, Mode=OneWay}"/>
         </controls:DropShadowPanel>
 
         <!--Content-->

@@ -13,10 +13,12 @@ namespace Retouch_Photo2.Effects.Models
     /// </summary>
     public sealed partial class DirectionalBlurEffectPage : Page, IEffectPage
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+
 
         //@Construct
         /// <summary>
@@ -131,8 +133,8 @@ namespace Retouch_Photo2.Effects.Models
         //DirectionalBlur_Radius
         private void ConstructDirectionalBlur_Radius()
         {
-            this.RadiusSlider.Minimum = 0;
-            this.RadiusSlider.Maximum = 100;
+            this.RadiusSlider.Minimum = 0.0d;
+            this.RadiusSlider.Maximum = 100.0d;
             this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheDirectionalBlur());
             this.RadiusSlider.ValueChangeDelta += (s, value) =>  this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.DirectionalBlur_Radius = (float)value);
             this.RadiusSlider.ValueChangeCompleted += (s, value) =>   this.MethodViewModel.EffectChangeCompleted<float>

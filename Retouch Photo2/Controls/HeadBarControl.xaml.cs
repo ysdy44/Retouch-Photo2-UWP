@@ -12,10 +12,11 @@ namespace Retouch_Photo2.Controls
     /// </summary>
     public sealed partial class HeadBarControl : UserControl
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Content
@@ -92,7 +93,7 @@ namespace Retouch_Photo2.Controls
         private void ConstructMenuButton(IMenu menu)
         {
             if (menu == null) return;
-            UIElement button = menu.Expander.Button.Self;
+            UIElement button = menu.Button.Self;
 
             this.HeadRightStackPanel.Children.Add(button);
         }

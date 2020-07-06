@@ -17,13 +17,84 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
     /// </summary>
-    public sealed partial class OperateMenu : UserControl, IMenu
+    public sealed partial class OperateMenu : Expander, IMenu 
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
+
+        Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
+        ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
+
+
+        //@Content
+        OperateMainPage OperateMainPage = new OperateMainPage();
+
+        //@Construct
+        /// <summary>
+        /// Initializes a OperateMenu. 
+        /// </summary>
+        public OperateMenu()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.MainPage = this.OperateMainPage;
+        }
+    }
+
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
+    /// </summary>
+    public sealed partial class OperateMenu : Expander, IMenu 
+    {
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Button.ToolTip.Content =
+            this.Button.Title =
+            this.Title = resource.GetString("/Menus/Operate");
+
+            this.Button.ToolTip.Closed += (s, e) => this.OperateMainPage.IsOpen = false;
+            this.Button.ToolTip.Opened += (s, e) =>
+            {
+                if (this.IsSecondPage) return;
+                if (this.State != ExpanderState.Overlay) return;
+
+                this.OperateMainPage.IsOpen = true;
+            };
+        }
+
+        //Menu
+        /// <summary> Gets the type. </summary>
+        public MenuType Type => MenuType.Operate;
+        /// <summary> Gets or sets the button. </summary>
+        public override IExpanderButton Button { get; } = new MenuButton
+        {
+            CenterContent = new Retouch_Photo2.Operates.Icon()
+        };
+        /// <summary> Reset Expander. </summary>
+        public override void Reset() { }
+
+    }
+
+
+
+    /// <summary>
+    /// MainPag of <see cref = "OperateMenu"/>.
+    /// </summary>
+    public sealed partial class OperateMainPage : UserControl
+    {
+
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
@@ -47,14 +118,12 @@ namespace Retouch_Photo2.Menus.Models
 
         //@Construct
         /// <summary>
-        /// Initializes a OperateMenu. 
+        /// Initializes a OperateMainPage. 
         /// </summary>
-        public OperateMenu()
+        public OperateMainPage()
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructToolTip();
-            this.ConstructMenu();
 
             this.ConstructTransform();
             this.ConstructArrange();
@@ -64,9 +133,9 @@ namespace Retouch_Photo2.Menus.Models
     }
 
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
+    /// MainPag of <see cref = "OperateMenu"/>.
     /// </summary>
-    public sealed partial class OperateMenu : UserControl, IMenu
+    public sealed partial class OperateMainPage : UserControl
     {
 
         //DataContext
@@ -89,10 +158,6 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this._button.ToolTip.Content =
-            this._Expander.Title =
-            this._Expander.CurrentTitle = resource.GetString("/Menus/Operate");
 
             this.TransformTextBlock.Text = resource.GetString("/Operates/Transform");
             this.FlipHorizontalToolTip.Content = resource.GetString("/Operates/Transform_FlipHorizontal");
@@ -135,47 +200,12 @@ namespace Retouch_Photo2.Menus.Models
             this.VerticallySpaceButton.Content = new VerticallySpaceIcon();
         }
 
-        //ToolTip
-        private void ConstructToolTip()
-        {
-            this._button.ToolTip.Opened += (s, e) =>
-            {
-                if (this._Expander.IsSecondPage == false)
-                {
-                    if (this.Expander.State == ExpanderState.Overlay)
-                    {
-                        this.IsOpen = true;
-                    }
-                }
-            };
-            this._button.ToolTip.Closed += (s, e) =>
-            {
-                this.IsOpen = false;
-            };
-        }
-
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Operate;
-        /// <summary> Gets the expander. </summary>
-        public IExpander Expander => this._Expander;
-        MenuButton _button = new MenuButton
-        {
-            CenterContent = new Retouch_Photo2.Operates.Icon()
-        };
-
-        private void ConstructMenu()
-        {
-            this._Expander.Layout = this;
-            this._Expander.Button = this._button;
-            this._Expander.Initialize();
-        }
     }
 
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
+    /// MainPag of <see cref = "OperateMenu"/>.
     /// </summary>
-    public sealed partial class OperateMenu : UserControl, IMenu
+    public sealed partial class OperateMainPage : UserControl
     {
 
         //Transform
@@ -327,9 +357,9 @@ namespace Retouch_Photo2.Menus.Models
     }
 
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
+    /// MainPag of <see cref = "OperateMenu"/>.
     /// </summary>
-    public sealed partial class OperateMenu : UserControl, IMenu
+    public sealed partial class OperateMainPage : UserControl
     {
         
         private void TransformAlign(BorderMode borderMode, Orientation orientation)

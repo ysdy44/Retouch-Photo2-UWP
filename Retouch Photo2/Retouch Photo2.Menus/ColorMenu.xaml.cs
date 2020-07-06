@@ -9,12 +9,18 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "HSVColorPickers.ColorPicker"/>.
     /// </summary>
-    public sealed partial class ColorMenu : UserControl, IMenu
+    public sealed partial class ColorMenu : Expander, IMenu 
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Content
+        ColorMainPage ColorMainPage = new ColorMainPage();
+
 
         //@Construct
         /// <summary>
@@ -23,19 +29,68 @@ namespace Retouch_Photo2.Menus.Models
         public ColorMenu()
         {
             this.InitializeComponent();
-            this._button.CenterContent = new ColorEllipse
-             (
-                  dataContext: this.SelectionViewModel,
-                  path: nameof(this.SelectionViewModel.Color),
-                  dp: ColorEllipse.ColorProperty
-             );
+            this.Button.CenterContent = new ColorEllipse
+            (
+                 dataContext: this.SelectionViewModel,
+                 path: nameof(this.SelectionViewModel.Color),
+                 dp: ColorEllipse.ColorProperty
+            );
             this.ConstructStrings();
-            this.ConstructMenu();
+
+            this.MainPage = this.ColorMainPage;
+        }
+
+    }
+
+    /// <summary>
+    /// Menu of <see cref = "HSVColorPickers.ColorPicker"/>.
+    /// </summary>
+    public sealed partial class ColorMenu : Expander, IMenu 
+    {
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Button.ToolTip.Content =
+            this.Button.Title =
+            base.Title = resource.GetString("/Menus/Color");
+        }
+
+        //Menu
+        /// <summary> Gets the type. </summary>
+        public MenuType Type => MenuType.Transformer;
+        /// <summary> Gets or sets the button. </summary>
+        public override IExpanderButton Button { get; } = new MenuButton();
+        /// <summary> Reset Expander. </summary>
+        public override void Reset() { }
+
+    }
+
+
+
+    /// <summary>
+    /// MainPage of <see cref="ColorMenu"/>.
+    /// </summary>
+    public sealed partial class ColorMainPage : UserControl
+    {
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+
+        //@Construct
+        /// <summary>
+        /// Initializes a ColorMainPage. 
+        /// </summary>
+        public ColorMainPage()
+        {
+            this.InitializeComponent();
 
             this.ConstructColor1();
             this.ConstructColor2();
         }
-
 
 
         private void ConstructColor1()
@@ -95,36 +150,5 @@ namespace Retouch_Photo2.Menus.Models
             };
         }
 
-    }
-
-    /// <summary>
-    /// Menu of <see cref = "HSVColorPickers.ColorPicker"/>.
-    /// </summary>
-    public sealed partial class ColorMenu : UserControl, IMenu
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this._button.ToolTip.Content =
-            this._Expander.Title =
-            this._Expander.CurrentTitle = resource.GetString("/Menus/Color");
-        }
-
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Transformer;
-        /// <summary> Gets the expander. </summary>
-        public IExpander Expander => this._Expander;
-        MenuButton _button = new MenuButton();
-
-        private void ConstructMenu()
-        {
-            this._Expander.Layout = this;
-            this._Expander.Button = this._button;
-            this._Expander.Initialize();
-        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using HSVColorPickers;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Tools
+namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// Represents the TouchBar that is used to adjust value.

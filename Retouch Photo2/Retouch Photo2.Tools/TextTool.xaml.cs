@@ -14,12 +14,14 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public sealed partial class TextTool : UserControl
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
+        
 
         //@VisualState
         bool _vsIsFullScreen;
@@ -31,6 +33,7 @@ namespace Retouch_Photo2.Tools
             get => this._vsIsFullScreen ? this.FullScreen : this.Normal;
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
+
 
         //@Construct
         /// <summary>

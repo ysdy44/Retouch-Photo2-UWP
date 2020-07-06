@@ -14,7 +14,8 @@
     >
 
     <ToolTipService.ToolTip>
-        <ToolTip x:Name="_ToolTip" Placement="Bottom" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+        <ToolTip x:Name="_ToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"
+                 Content="{x:Bind Title, Mode=OneWay}" />
     </ToolTipService.ToolTip>
 
 

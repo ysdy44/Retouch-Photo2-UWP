@@ -13,9 +13,11 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// </summary>
     public sealed partial class ExposurePage : IAdjustmentGenericPage<ExposureAdjustment>
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+
 
         //@Generic
         /// <summary> Gets IAdjustment's adjustment. </summary>

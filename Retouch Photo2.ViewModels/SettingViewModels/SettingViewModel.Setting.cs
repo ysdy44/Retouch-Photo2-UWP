@@ -45,12 +45,12 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Initializes the menu-type.
         /// </summary>
-        public void ConstructMenuType(IEnumerable<IMenu> menus)
+        public void ConstructMenuType(IEnumerable<IMenu > menus)
         {
             foreach (IMenu menu in menus)
             {
                 bool isVisible = this.Setting.MenuTypes.Any(m => m == menu.Type);
-                menu.Expander.Button.Self.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
+                menu.Button.Self.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 

@@ -13,13 +13,16 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// </summary>
     public sealed partial class ContrastPage : IAdjustmentGenericPage<ContrastAdjustment>
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
+
         //@Generic
         /// <summary> Gets IAdjustment's adjustment. </summary>
         public ContrastAdjustment Adjustment { get; set; }
+
 
         //@Construct
         /// <summary>

@@ -31,7 +31,7 @@ namespace Retouch_Photo2
         public static SettingViewModel SettingViewModel = new SettingViewModel();
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.TipViewModel" />. </summary>
-        public static TipViewModel TipViewModel = new TipViewModel(new NoneTool(), new MoveTool(), new TransformerTool(), new CreateTool())
+        public static TipViewModel TipViewModel = new TipViewModel
         {
             //Tool
             Tools = new List<ITool>

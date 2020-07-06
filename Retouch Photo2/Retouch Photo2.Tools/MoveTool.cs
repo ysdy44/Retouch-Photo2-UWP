@@ -15,6 +15,7 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public partial class MoveTool : IMoveTool
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;

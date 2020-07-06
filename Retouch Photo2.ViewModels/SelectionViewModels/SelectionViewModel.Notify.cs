@@ -31,7 +31,7 @@ namespace Retouch_Photo2.ViewModels
                 this.OnPropertyChanged(nameof(this.ToolType));//Notify 
             }
         }
-        private ToolType toolType = ToolType.None;
+        private ToolType toolType = ToolType.Cursor;
 
 
         /// <summary> Gets or sets the layer type. </summary>

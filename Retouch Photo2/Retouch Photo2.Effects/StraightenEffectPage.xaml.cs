@@ -13,11 +13,13 @@ namespace Retouch_Photo2.Effects.Models
     /// </summary>
     public sealed partial class StraightenEffectPage : Page, IEffectPage
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         
+
         //@Construct
         /// <summary>
         /// Initializes a StraightenEffectPage. 

@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,16 +18,15 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public class CreateTool : ICreateTool
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
-        ITransformerTool TransformerTool => this.TipViewModel.TransformerTool;
 
         VectorBorderSnap Snap => this.ViewModel.VectorBorderSnap;
         bool IsSnap => this.SettingViewModel.IsSnap;
@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Tools
 
         public void Started(Func<CanvasDevice, Transformer, ILayer> createLayer, Vector2 startingPoint, Vector2 point)
         {
-            if (this.TransformerTool.Started(startingPoint, point)) return;//TransformerTool
+            if (ToolBase.TransformerTool.Started(startingPoint, point)) return;//TransformerTool
 
             //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
@@ -103,7 +103,7 @@ namespace Retouch_Photo2.Tools
                 this.ViewModel.Invalidate();//Invalidate
             }
 
-            if (this.TransformerTool.Delta(startingPoint, point)) return;//TransformerTool
+            if (ToolBase.TransformerTool.Delta(startingPoint, point)) return;//TransformerTool
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
@@ -154,7 +154,7 @@ namespace Retouch_Photo2.Tools
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             }
 
-            if (this.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool
+            if (ToolBase.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool
         }
 
 
@@ -166,7 +166,7 @@ namespace Retouch_Photo2.Tools
                     break;
                 case ListViewSelectionMode.Single:
                 case ListViewSelectionMode.Multiple:
-                    this.TransformerTool.Draw(drawingSession); //TransformerTool
+                    ToolBase.TransformerTool.Draw(drawingSession); //TransformerTool
                     break;
                 case ListViewSelectionMode.Extended:
                     {

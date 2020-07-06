@@ -40,11 +40,11 @@
                  Color="{ThemeResource AppStrokeColor}">
     
         <Border 
-            Width="{x:Bind UserControl.Width,Mode=OneWay}"
-            Padding="{x:Bind UserControl.Padding,Mode=OneWay}"
-            BorderThickness="{x:Bind UserControl.BorderThickness,Mode=OneWay}"
-            BorderBrush="{x:Bind UserControl.BorderBrush,Mode=OneWay}"
-            Background="{x:Bind UserControl.Background,Mode=OneWay}"
+            Width="{x:Bind UserControl.Width, Mode=OneWay}"
+            Padding="{x:Bind UserControl.Padding, Mode=OneWay}"
+            BorderThickness="{x:Bind UserControl.BorderThickness, Mode=OneWay}"
+            BorderBrush="{x:Bind UserControl.BorderBrush, Mode=OneWay}"
+            Background="{x:Bind UserControl.Background, Mode=OneWay}"
             >
             <StackPanel>
                 <controls:ImageEx x:Name="Image" Stretch="Uniform" Background="White"

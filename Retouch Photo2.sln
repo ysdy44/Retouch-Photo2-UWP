@@ -31,11 +31,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Strokes", "R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Styles", "Retouch Photo2.Styles\Retouch Photo2.Styles.csproj", "{08675E81-29A5-440B-8DAB-0554DC7A9914}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Menus", "Retouch Photo2.Menus\Retouch Photo2.Menus.csproj", "{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Filters", "Retouch Photo2.Filters\Retouch Photo2.Filters.csproj", "{71870425-D0E7-453D-B221-EB740ACAAE74}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Texts", "Retouch Photo2.Texts\Retouch Photo2.Texts.csproj", "{37FB331D-210A-4C2E-8C95-7B1F2D162103}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Menus", "Retouch Photo2.Menus\Retouch Photo2.Menus.csproj", "{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -277,22 +277,6 @@ Global
 		{08675E81-29A5-440B-8DAB-0554DC7A9914}.Release|x64.Build.0 = Release|x64
 		{08675E81-29A5-440B-8DAB-0554DC7A9914}.Release|x86.ActiveCfg = Release|x86
 		{08675E81-29A5-440B-8DAB-0554DC7A9914}.Release|x86.Build.0 = Release|x86
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|ARM.ActiveCfg = Debug|ARM
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|ARM.Build.0 = Debug|ARM
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|x64.ActiveCfg = Debug|x64
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|x64.Build.0 = Debug|x64
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|x86.ActiveCfg = Debug|x86
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|x86.Build.0 = Debug|x86
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|ARM.ActiveCfg = Release|ARM
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|ARM.Build.0 = Release|ARM
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|x64.ActiveCfg = Release|x64
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|x64.Build.0 = Release|x64
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|x86.ActiveCfg = Release|x86
-		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|x86.Build.0 = Release|x86
 		{71870425-D0E7-453D-B221-EB740ACAAE74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{71870425-D0E7-453D-B221-EB740ACAAE74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71870425-D0E7-453D-B221-EB740ACAAE74}.Debug|ARM.ActiveCfg = Debug|ARM
@@ -325,6 +309,22 @@ Global
 		{37FB331D-210A-4C2E-8C95-7B1F2D162103}.Release|x64.Build.0 = Release|x64
 		{37FB331D-210A-4C2E-8C95-7B1F2D162103}.Release|x86.ActiveCfg = Release|x86
 		{37FB331D-210A-4C2E-8C95-7B1F2D162103}.Release|x86.Build.0 = Release|x86
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|ARM.Build.0 = Debug|ARM
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|x64.ActiveCfg = Debug|x64
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|x64.Build.0 = Debug|x64
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|x86.ActiveCfg = Debug|x86
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Debug|x86.Build.0 = Debug|x86
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|ARM.ActiveCfg = Release|ARM
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|ARM.Build.0 = Release|ARM
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|x64.ActiveCfg = Release|x64
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|x64.Build.0 = Release|x64
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|x86.ActiveCfg = Release|x86
+		{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

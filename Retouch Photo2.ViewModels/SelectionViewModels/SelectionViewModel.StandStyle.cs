@@ -30,17 +30,21 @@ namespace Retouch_Photo2.ViewModels
                 //Switch
                 switch (layer.Type)
                 {
+                    //Curve & Pattern
                     case LayerType.Curve:
+                    case LayerType.PatternGrid:
                         if (value != standStyleCurveLayerage)
                             this.standStyleCurveLayerage = value;
                         break;
 
+                    //Text
                     case LayerType.TextFrame:
                     case LayerType.TextArtistic:
                         if (value != standStyleTextLayerage)
                             this.standStyleTextLayerage = value;
                         break;
 
+                    //Geometry
                     default:
                         if (value != StandStyleGeometryLayerage)
                             this.StandStyleGeometryLayerage = value;

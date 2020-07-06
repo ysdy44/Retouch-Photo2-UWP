@@ -87,8 +87,7 @@ namespace Retouch_Photo2.Elements.DrawPages
                 this.LeftBorder.IsHitTestVisible = value;
                 this.RightBorder.IsHitTestVisible = value;
 
-                this.TouchbarPickerBorder.IsHitTestVisible = value;
-                this.TouchbarSliderBorder.IsHitTestVisible = value;
+                this.TouchbarBorder.IsHitTestVisible = value;
 
                 this.RadiusAnimaPanel.IsHitTestVisible = value;
                 this.LeftRadiusAnimaIcon.IsHitTestVisible = value;

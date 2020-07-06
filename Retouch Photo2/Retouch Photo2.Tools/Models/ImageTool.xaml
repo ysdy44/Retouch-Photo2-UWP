@@ -26,7 +26,7 @@
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
 
-            <TextBlock Text="{x:Bind SelectionViewModel.Photocopier,Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
+            <TextBlock Text="{x:Bind SelectionViewModel.Photocopier, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
 
             <ContentControl Width="4"/>
 
@@ -44,7 +44,7 @@
             <!--Replace-->
             <TextBlock x:Name="ReplaceTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <Button x:Name="ReplaceButton" Style="{StaticResource AppCircleButtonStyle}"
-                 IsEnabled="{x:Bind SelectionViewModel.IsImageLayer,Mode=OneWay}">
+                 IsEnabled="{x:Bind SelectionViewModel.IsImageLayer, Mode=OneWay}">
                 <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
 

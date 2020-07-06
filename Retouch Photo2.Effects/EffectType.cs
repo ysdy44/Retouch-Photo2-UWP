@@ -5,6 +5,9 @@
     /// </summary>
     public enum EffectType
     {
+        /// <summary> Nornal </summary>
+        None,
+
         /// <summary> GaussianBlur </summary>
         GaussianBlur,
 

@@ -18,13 +18,14 @@ namespace Retouch_Photo2
     /// </summary>
     public sealed partial class SettingPage : Page
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-
+        SettingViewModel SettingViewModel => App.SettingViewModel;
+        
 
         bool _isParity = false;
         private Style MenuBorderStyle

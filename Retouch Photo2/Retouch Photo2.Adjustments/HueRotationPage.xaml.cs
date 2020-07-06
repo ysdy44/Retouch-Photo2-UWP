@@ -14,14 +14,17 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// </summary>
     public sealed partial class HueRotationPage : IAdjustmentGenericPage<HueRotationAdjustment>
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+
 
         //@Generic
         /// <summary> Gets IAdjustment's adjustment. </summary>
         public HueRotationAdjustment Adjustment { get; set; }
         
+
         //@Construct
         public HueRotationPage()
         {

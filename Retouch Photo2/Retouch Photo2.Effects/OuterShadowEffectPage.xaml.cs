@@ -14,11 +14,13 @@ namespace Retouch_Photo2.Effects.Models
     /// </summary>
     public sealed partial class OuterShadowEffectPage : Page, IEffectPage
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         
+
         //@Construct
         /// <summary>
         /// Initializes a OuterShadowEffectPage. 
@@ -158,7 +160,7 @@ namespace Retouch_Photo2.Effects.Models
         //OuterShadow_Radius
         private void ConstructOuterShadow_Radius()
         {
-            this.RadiusSlider.Minimum = 0;
+            this.RadiusSlider.Minimum = 0.0d;
             this.RadiusSlider.Maximum = 100.0d;
             this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
             this.RadiusSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Radius = (float)value);
@@ -194,7 +196,7 @@ namespace Retouch_Photo2.Effects.Models
         //OuterShadow_Offset
         private void ConstructOuterShadow_Offset()
         {
-            this.OffsetSlider.Minimum = 0;
+            this.OffsetSlider.Minimum = 0.0d;
             this.OffsetSlider.Maximum = 100.0d;
             this.OffsetSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
             this.OffsetSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Offset = (float)value);

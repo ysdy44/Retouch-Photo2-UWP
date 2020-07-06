@@ -16,6 +16,7 @@ namespace Retouch_Photo2.Controls
     /// </summary>
     public partial class LayersControl : UserControl
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;

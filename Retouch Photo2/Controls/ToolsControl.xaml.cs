@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Tools;
+using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System.Linq;
 using Windows.UI.Xaml;
@@ -12,10 +13,12 @@ namespace Retouch_Photo2.Controls
     /// </summary>
     public sealed partial class ToolsControl : UserControl
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel = App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
+
 
         /// <summary> Left panel of Tool. </summary>
         public UIElementCollection ToolLeft => this.StackPanel.Children;
@@ -83,11 +86,10 @@ namespace Retouch_Photo2.Controls
                     {
                         //Change tools group value.
                         {
-                            this.TipViewModel.Tool = tool;
-                            this.TipViewModel.ToolGroupType(tool.Type);
+                            ToolBase.Instance = tool;
                             this.SelectionViewModel.ToolType = tool.Type;
 
-                            this.ViewModel.TipTextBegin(tool.Title);
+                            this.ViewModel.TipTextBegin(tool.Button.Title);
                             this.ViewModel.Invalidate();//Invalidate
                         }
                     };
@@ -106,8 +108,7 @@ namespace Retouch_Photo2.Controls
             ITool tool = this.TipViewModel.Tools.FirstOrDefault();
             if (tool != null)
             {
-                this.TipViewModel.Tool = tool;
-                this.TipViewModel.ToolGroupType(tool.Type);
+                ToolBase.Instance = tool;
             }
         }
 

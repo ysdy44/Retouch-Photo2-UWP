@@ -1,5 +1,6 @@
 ﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.Tools;
+using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Numerics;
@@ -14,18 +15,21 @@ namespace Retouch_Photo2
     /// </summary>
     public sealed partial class DrawPage : Page
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel ;
         TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
+
 
         //@Static
         /// <summary> Navigate to <see cref="PhotosPage"/> </summary>
         public static Action<PhotosPageMode> FrameNavigatePhotosPage;
         /// <summary> Show <see cref="RenameDialog"/> </summary>
         public static Action ShowRename;
+
 
         //@Converter
         private FrameworkElement IconConverter(ITool tool) => tool.Icon;
@@ -48,6 +52,11 @@ namespace Retouch_Photo2
 
 
             //DrawLayout
+            this.DrawLayout.LeftIcon = ToolBase.IconBorder;
+            this.DrawLayout.RightIcon = new Retouch_Photo2.Layers.Icon();
+            this.DrawLayout.FootPage = ToolBase.PageBorder;
+            this.DrawLayout.TouchbarPicker = TouchbarButton.TouchbarPickerBorder;
+            this.DrawLayout.TouchbarSlider = TouchbarButton.TouchbarSliderBorder;
             this.DrawLayout.RightPhotosButton.Click += (s, e) => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImager);//Navigate   
             this.DrawLayout.IsFullScreenChanged += (isFullScreen) =>
             {

@@ -13,13 +13,16 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// </summary>
     public sealed partial class GammaTransferPage : IAdjustmentGenericPage<GammaTransferAdjustment>
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
+
         //@Generic
         /// <summary> Gets IAdjustment's adjustment. </summary>
         public GammaTransferAdjustment Adjustment { get; set; }
+
 
         //@Converter
         private string VisibilityToGlyphConverter(Visibility visibility) => visibility == Visibility.Visible ? "\xEDDC" : "\xEDDA";

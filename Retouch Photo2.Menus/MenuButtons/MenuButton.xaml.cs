@@ -1,28 +1,35 @@
 ﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.ViewModels;
-using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus
 {
     /// <summary>
-    /// Button of <see cref="IMenu"/>.
+    /// Button of <see cref="IMenu "/>.
     /// </summary>
     public sealed partial class MenuButton : UserControl, IExpanderButton
     {
-        //@ViewModel
-        TipViewModel TipViewModel => App.TipViewModel;
 
-
-        //@Content       
-        /// <summary> ContentPresenter's Child. </summary>
-        public object CenterContent { set => this.ContentPresenter.Content = value; get => this.ContentPresenter.Content; }
-        /// <summary> ToolTip </summary>  
-        public ToolTip ToolTip => this._ToolTip;
-        /// <summary> Self </summary>  
+        //@Content   
+        /// <summary> Gets or sets the title. </summary>
+        public string Title { get; set; }
+        /// <summary> Gets or sets the state. </summary>
+        public ExpanderState ExpanderState
+        {
+            set
+            {
+                this._vsMenuState = value;
+                this.VisualState = this.VisualState;//State         
+            }
+        }
+        /// <summary> Get the self. </summary>
         public FrameworkElement Self => this;
 
+        /// <summary> Sets the center content. </summary>
+        public object CenterContent { set => this.ContentPresenter.Content = value; }
+        /// <summary> Gets the ToolTip. </summary>
+        public ToolTip ToolTip => this._ToolTip;
+        
 
         //@VisualState
         ClickMode _vsClickMode;
@@ -66,15 +73,6 @@ namespace Retouch_Photo2.Menus
             {
                 this._vsClickMode = value;
                 this.VisualState = this.VisualState;//State
-            }
-        }
-        /// <summary> VisualState's ExpanderState. </summary>
-        public ExpanderState ExpanderState
-        {
-            set
-            {
-                this._vsMenuState = value;
-                this.VisualState = this.VisualState;//State         
             }
         }
 

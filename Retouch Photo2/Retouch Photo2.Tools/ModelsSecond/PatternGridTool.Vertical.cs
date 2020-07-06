@@ -13,15 +13,6 @@ namespace Retouch_Photo2.Tools.Models
         //VerticalStep
         private void ConstructVerticalStep1()
         {
-            //Button
-            this.VerticalStepTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = PatternGridMode.VerticalStep;
-                else
-                    this.TouchBarMode = PatternGridMode.None;
-            };
-
             this.VerticalStepTouchbarPicker.Unit = "";
             this.VerticalStepTouchbarPicker.Minimum = 5;
             this.VerticalStepTouchbarPicker.Maximum = 100;

@@ -1,5 +1,4 @@
 ﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Edits.CombineIcons;
@@ -22,12 +21,15 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Edits"/>.
     /// </summary>
-    public sealed partial class EditMenu : UserControl, IMenu
+    public sealed partial class EditMenu : Expander, IMenu 
     {
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+
+        //@Content
+        EditMainPage EditMainPage = new EditMainPage();
 
         //@Construct
         /// <summary>
@@ -37,7 +39,60 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructMenu();
+
+            this.MainPage = this.EditMainPage;
+        }
+
+    }
+
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Edits"/>.
+    /// </summary>
+    public sealed partial class EditMenu : Expander, IMenu 
+    {
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Button.Title =
+            this.Title = resource.GetString("/Menus/Edit");
+        }
+
+        //Menu
+        /// <summary> Gets the type. </summary>
+        public MenuType Type => MenuType.Edit;
+        /// <summary> Gets or sets the button. </summary>
+        public override IExpanderButton Button { get; } = new MenuButton
+        {
+            CenterContent = new Retouch_Photo2.Edits.Icon()
+        };
+        /// <summary> Reset Expander. </summary>
+        public override void Reset() { }
+
+    }
+
+
+
+    /// <summary>
+    /// MainPage of <see cref = "EditMenu"/>.
+    /// </summary>
+    public sealed partial class EditMainPage : UserControl
+    {
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+
+        //@Construct
+        /// <summary>
+        /// Initializes a EditMainPage. 
+        /// </summary>
+        public EditMainPage()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
 
             //Edit
             this.CutButton.Click += (s, e) => this.MethodViewModel.MethodEditCut();
@@ -63,22 +118,21 @@ namespace Retouch_Photo2.Menus.Models
             this.IntersectButton.Click += (s, e) => this.Combine(CanvasGeometryCombine.Intersect);
             this.ExpandStrokeButton.Click += (s, e) => this.ExpandStroke();
         }
+
     }
 
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Edits"/>.
+    /// MainPage of <see cref = "EditMenu"/>.
     /// </summary>
-    public sealed partial class EditMenu : UserControl, IMenu
+    public sealed partial class EditMainPage : UserControl
     {
+
+
 
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this._button.ToolTip.Content =
-            this._Expander.Title =
-            this._Expander.CurrentTitle = resource.GetString("/Menus/Edit");
 
             this.EditTextBlock.Text = resource.GetString("/Edits/Edit");
             this.CutButton.Content = resource.GetString("/Edits/Edit_Cut");
@@ -107,35 +161,18 @@ namespace Retouch_Photo2.Menus.Models
             this.DeselectButton.Tag = new DeselectIcon();
             this.InvertButton.Content = resource.GetString("/Edits/Select_Invert");
             this.InvertButton.Tag = new InvertIcon();
-            
+
             this.CombineTextBlock.Text = resource.GetString("/Edits/Combine");
             this.UnionButton.Content = resource.GetString("/Edits/Combine_Union");
             this.UnionButton.Tag = new UnionIcon();
             this.ExcludeButton.Content = resource.GetString("/Edits/Combine_Exclude");
-            this.ExcludeButton.Tag = new ExcludeIcon(); 
+            this.ExcludeButton.Tag = new ExcludeIcon();
             this.XorButton.Content = resource.GetString("/Edits/Combine_Xor");
             this.XorButton.Tag = new XorIcon();
             this.IntersectButton.Content = resource.GetString("/Edits/Combine_Intersect");
             this.IntersectButton.Tag = new IntersectIcon();
             this.ExpandStrokeButton.Content = resource.GetString("/Edits/Combine_ExpandStroke");
             this.ExpandStrokeButton.Tag = new ExpandStrokeIcon();
-        }
-
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Edit;
-        /// <summary> Gets the expander. </summary>
-        public IExpander Expander => this._Expander;
-        MenuButton _button = new MenuButton
-        {
-            CenterContent = new Retouch_Photo2.Edits.Icon()
-        };
-
-        private void ConstructMenu()
-        {
-            this._Expander.Layout = this;
-            this._Expander.Button = this._button;
-            this._Expander.Initialize();
         }
 
 
@@ -306,6 +343,6 @@ namespace Retouch_Photo2.Menus.Models
 
             return null;
         }
-                     
+
     }
 }

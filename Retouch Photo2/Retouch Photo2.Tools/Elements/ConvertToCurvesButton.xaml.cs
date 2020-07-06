@@ -2,6 +2,7 @@
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Retouch_Photo2.Tools.Elements
     /// </summary>
     public sealed partial class ConvertToCurvesButton : UserControl
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
@@ -66,11 +68,10 @@ namespace Retouch_Photo2.Tools.Elements
                 {
                     ITool tool = this.TipViewModel.Tools.First(t => t != null && t.Type == ToolType.Node);
 
-                    this.TipViewModel.Tool = tool;
-                    this.TipViewModel.ToolGroupType(ToolType.Node);
+                    ToolBase.Instance = tool;
                     this.SelectionViewModel.ToolType = ToolType.Node;
 
-                    this.ViewModel.TipTextBegin(tool.Title);
+                    this.ViewModel.TipTextBegin(tool.Button.Title);
                     this.ViewModel.Invalidate();//Invalidate
                 }
             };

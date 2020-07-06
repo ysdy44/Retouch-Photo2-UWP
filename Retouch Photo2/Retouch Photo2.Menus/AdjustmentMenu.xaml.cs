@@ -6,6 +6,7 @@ using Retouch_Photo2.Filters;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.Resources;
@@ -19,11 +20,89 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Adjustments.IAdjustment"/>.
     /// </summary>
-    public sealed partial class AdjustmentMenu : UserControl, IMenu
+    public sealed partial class AdjustmentMenu : Expander, IMenu 
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+
+
+        //@Content
+        AdjustmentMainPage AdjustmentMainPage = new AdjustmentMainPage();
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a AdjustmentMenu. 
+        /// </summary>
+        public AdjustmentMenu()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.MainPage = this.AdjustmentMainPage;
+            this.AdjustmentMainPage.SecondPageChanged += (title, secondPage) =>
+            {
+                if (this.SecondPage != secondPage) this.SecondPage = secondPage;
+                this.IsSecondPage = true;
+                this.Title = (string)title;
+            };
+        }
+
+    }
+
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Adjustments.IAdjustment"/>.
+    /// </summary>
+    public sealed partial class AdjustmentMenu : Expander, IMenu 
+    {
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Button.Title =
+            this.Title = resource.GetString("/Menus/Adjustment");
+        }
+
+        //Menu      
+        /// <summary> Gets the type. </summary>
+        public MenuType Type => MenuType.Adjustment;
+        /// <summary> Gets or sets the button. </summary>
+        public override IExpanderButton Button { get; } = new MenuButton
+        {
+            CenterContent = new Retouch_Photo2.Adjustments.Icon()
+        };
+        /// <summary> Reset Expander. </summary>
+        public override void Reset()
+        {
+             this.AdjustmentMainPage.Reset();
+        }
+
+    }
+
+
+
+    /// <summary>
+    /// MainPage of <see cref = "AdjustmentMenu"/>.
+    /// </summary>
+    public sealed partial class AdjustmentMainPage : UserControl
+    {
+
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+
+
+        //@Delegate
+        /// <summary> Occurs when second-page change. </summary>
+        public event EventHandler<UIElement> SecondPageChanged;
+
+        //@Content
+        /// <summary> Filter ListView. </summary>
+        public ListView FilterListView { get; private set; }
 
 
         //@VisualState
@@ -72,19 +151,16 @@ namespace Retouch_Photo2.Menus.Models
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets <see cref = "AdjustmentMenu" />'s filter. </summary>
+        /// <summary> Gets or sets <see cref = "AdjustmentMainPage" />'s filter. </summary>
         public Filter Filter
         {
             get { return (Filter)GetValue(FilterProperty); }
             set { SetValue(FilterProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "AdjustmentMenu.Filter" /> dependency property. </summary>
-        public static readonly DependencyProperty FilterProperty = DependencyProperty.Register(nameof(Filter), typeof(Filter), typeof(AdjustmentMenu), new PropertyMetadata(null, (sender, e) =>
+        /// <summary> Identifies the <see cref = "AdjustmentMainPage.Filter" /> dependency property. </summary>
+        public static readonly DependencyProperty FilterProperty = DependencyProperty.Register(nameof(Filter), typeof(Filter), typeof(AdjustmentMainPage), new PropertyMetadata(null, (sender, e) =>
         {
-            AdjustmentMenu con = (AdjustmentMenu)sender;
-
-            con._Expander.IsSecondPage = false;
-            con._Expander.CurrentTitle = con._Expander.Title;
+            AdjustmentMainPage con = (AdjustmentMainPage)sender;
 
             if (e.NewValue is Filter value)
             {
@@ -103,114 +179,38 @@ namespace Retouch_Photo2.Menus.Models
 
 
         /// <summary> Gets or sets the current adjustment. </summary>
-        public IAdjustment Adjustment
-        {
-            get => this.adjustment;
-            set
-            {
-                if (this.adjustment == value) return;
-
-                if (value == null)
-                {
-                    if (this.adjustment != null)
-                    {
-                        this.adjustment.Close();
-                    }
-                    this.AdjustmentPageBorder.Child = null;
-                }
-                else
-                {
-                    if (this.AdjustmentPageBorder.Child != value.Page)
-                    {
-                        this.AdjustmentPageBorder.Child = value.Page;
-                    }
-
-                    value.Follow();
-                }
-
-                this.adjustment = value;
-            }
-        }
-        private IAdjustment adjustment;
-
-        /// <summary> Sets the state of the menu page. </summary>
-        public bool AdjustmentPageOrFilters
-        {
-            set
-            {
-                this.AdjustmentPageBorder.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
-                this.FiltersListView.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
-
-
+        public IAdjustment Adjustment;
+        
         //@Construct
         /// <summary>
-        /// Initializes a AdjustmentMenu. 
+        /// Initializes a AdjustmentMainPage. 
         /// </summary>
-        public AdjustmentMenu()
+        public AdjustmentMainPage()
         {
             this.InitializeComponent();
             this.ConstructDataContext
             (
-                 dataContext: this.SelectionViewModel,
-                 path: nameof(this.SelectionViewModel.Filter),
-                 dp: AdjustmentMenu.FilterProperty
+                dataContext: this.SelectionViewModel,
+                path: nameof(this.SelectionViewModel.Filter),
+                dp: AdjustmentMainPage.FilterProperty
             );
             this.ConstructStrings();
-            this.ConstructMenu();
-
 
             this.Loaded += async (s, e) =>
             {
                 if (this.AdjustmentPageListView.ItemsSource == null)
                 {
-                    this.AdjustmentPageListView.ItemsSource = this.GetAdjustmentPages().ToList();
+                    this.ConstructAdjustment();
                 }
 
-                if (this.FiltersListView.ItemsSource == null)
+                if (this.FilterListView == null)
                 {
                     IEnumerable<FilterCategory> filterCategorys = await Retouch_Photo2.XML.ConstructFiltersFile();
-                    if (filterCategorys != null)
-                    {
-                        FilterCategory filterCategory = filterCategorys.FirstOrDefault();
-                        if (filterCategory != null)
-                        {
-                            IEnumerable<Filter> filters = filterCategory.Filters;
-                            this.FiltersListView.ItemsSource = filters.ToList();
-                        }
-                    }
+                    this.ConstructFilter(filterCategorys);
                 }
 
                 this.VisualState = this.VisualState;//State
-            };
-
-
-            this.AdjustmentPageListView.ItemClick += (s, e) =>
-            {
-                this.AdjustmentPageFlyout.Hide();
-
-                if (e.ClickedItem is IAdjustmentPage item)
-                {
-                    this.FilterAdd(item);
-                }
-            };
-            this.FiltersListView.ItemClick += (s, e) =>
-            {
-                if (e.ClickedItem is Filter filter)
-                {
-                    this.FilterChanged(filter);
-                }
-            };
-
-
-            this.AddButton.Click += (s, e) => this.AdjustmentPageFlyout.ShowAt(this.AddButton);
-            this.FiltersButton.Click += (s, e) =>
-            {
-                this.AdjustmentPageOrFilters = false;
-                this._Expander.IsSecondPage = true;
-                this._Expander.CurrentTitle = (string)this.FiltersButton.Content;
-            };
+            }; 
         }
 
 
@@ -222,12 +222,12 @@ namespace Retouch_Photo2.Menus.Models
             if (adjustment == null) return;
             if (adjustment.PageVisibility == Visibility.Collapsed) return;
 
-            this.AdjustmentPageOrFilters = true;
-            this._Expander.IsSecondPage = true;
-            this._Expander.ResetButtonVisibility = Visibility.Visible;
-            this._Expander.CurrentTitle = adjustment.Text;
-
             this.Adjustment = adjustment;
+            adjustment.Follow();
+
+            object title = adjustment.Text;
+            UIElement secondPage = adjustment.Page;
+            this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
         }
         /// <summary> DataTemplate's RemoveButton Tapped. </summary>
         private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)
@@ -241,9 +241,9 @@ namespace Retouch_Photo2.Menus.Models
     }
 
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Adjustments.IAdjustment"/>.
+    /// MainPage of <see cref = "AdjustmentMenu"/>.
     /// </summary>
-    public sealed partial class AdjustmentMenu : UserControl, IMenu
+    public sealed partial class AdjustmentMainPage : UserControl
     {
 
         //DataContext
@@ -267,49 +267,86 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content =
-            this._Expander.Title =
-            this._Expander.CurrentTitle = resource.GetString("/Menus/Adjustment");
-
             this.ZeroTextBlock.Text = resource.GetString("/Menus/Adjustment_ZeroTip");
             this.DisableTextBlock.Text = resource.GetString("/Menus/Adjustment_DisableTip");
 
             this.AddButton.Content = resource.GetString("/Menus/Adjustment_Add");
-            this.FiltersButton.Content = resource.GetString("/Menus/Adjustment_Filters");
+            this.FilterButton.Content = resource.GetString("/Menus/Adjustment_Filters");
         }
-
-        //Menu      
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Adjustment;
-        /// <summary> Gets the expander. </summary>
-        public IExpander Expander => this._Expander;
-        MenuButton _button = new MenuButton
+        
+        public void Reset()
         {
-            CenterContent = new Retouch_Photo2.Adjustments.Icon()
-        };
-
-        private void ConstructMenu()
-        {
-            this._Expander.Layout = this;
-            this._Expander.Button = this._button;
-            this._Expander.Reset = this.Reset;
-            this._Expander.Initialize();
-        }
-
-        private void Reset()
-        {
-            if (this.Adjustment == null) return;
-
-            this.Adjustment.Reset();
-            this.ViewModel.Invalidate();//Invalidate
+            if (this.Adjustment  is  IAdjustment adjustment)
+            {
+                adjustment.Reset();
+                this.ViewModel.Invalidate();//Invalidate
+            }
         }
     }
 
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Adjustments.IAdjustment"/>.
+    /// MainPage of <see cref = "AdjustmentMenu"/>.
     /// </summary>
-    public sealed partial class AdjustmentMenu : UserControl, IMenu
+    public sealed partial class AdjustmentMainPage : UserControl
     {
+
+        //Filter
+        private void ConstructFilter(IEnumerable<FilterCategory> filterCategorys)
+        {
+            if (filterCategorys != null)
+            {
+                FilterCategory filterCategory = filterCategorys.FirstOrDefault();
+                if (filterCategory != null)
+                {
+                    IEnumerable<Filter> filters = filterCategory.Filters;
+
+                    this.FilterListView = new ListView
+                    {
+                        IsItemClickEnabled = true,
+                        SelectionMode = ListViewSelectionMode.Single,
+
+                        ItemTemplate = this.FilterDataTemplate,
+                        ItemContainerStyle = this.FilterItemStyle,
+
+                        ItemsSource = filters.ToList(),
+                    };
+                }
+            }
+
+            this.FilterButton.Click += (s, e) =>
+            {
+                object title = this.FilterButton.Content;
+                UIElement secondPage = this.FilterListView;
+                this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
+            };
+
+            this.FilterListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is Filter filter)
+                {
+                    this.FilterChanged(filter);
+                }
+            };
+        }
+
+        //Adjustment
+        private void ConstructAdjustment()
+        {
+            this.AddButton.Click += (s, e) => this.AdjustmentPageFlyout.ShowAt(this.AddButton);
+
+            IEnumerable<IAdjustmentPage> adjustmentPages = this.GetAdjustmentPages();
+            this.AdjustmentPageListView.ItemsSource = adjustmentPages.ToList();
+                       
+            this.AdjustmentPageListView.ItemClick += (s, e) =>
+            {
+                this.AdjustmentPageFlyout.Hide();
+
+                if (e.ClickedItem is IAdjustmentPage item)
+                {
+                    this.FilterAdd(item);
+                }
+            };
+        }
 
         //@Generic
         private IEnumerable<IAdjustmentPage> GetAdjustmentPages()
@@ -359,6 +396,13 @@ namespace Retouch_Photo2.Menus.Models
             yield return vignettePage;
         }
 
+    }
+
+    /// <summary>
+    /// MainPage of <see cref = "AdjustmentMenu"/>.
+    /// </summary>
+    public sealed partial class AdjustmentMainPage : UserControl
+    {
 
         /// <summary>
         /// Get the data context of the Grid.

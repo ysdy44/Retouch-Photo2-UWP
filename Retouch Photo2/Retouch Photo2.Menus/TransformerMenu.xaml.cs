@@ -11,10 +11,101 @@ using Windows.UI.Xaml.Data;
 
 namespace Retouch_Photo2.Menus.Models
 {
-    /// <summary> 
-    /// State of <see cref="TransformerMenu"/>. 
+    /// <summary>
+    /// Menu of <see cref = "FanKit.Transformers.Transformer"/>.
     /// </summary>
-    public enum TransformerMenuState
+    public sealed partial class TransformerMenu : Expander, IMenu 
+    {
+
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
+
+
+        //@Content
+        TransformerMainPage TransformerMainPage = new TransformerMainPage();
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a TransformerMenu. 
+        /// </summary>
+        public TransformerMenu()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.MainPage = this.TransformerMainPage;
+            this.TransformerMainPage.SecondPageChanged += (title, secondPage) =>
+            {
+                if (this.SecondPage != secondPage) this.SecondPage = secondPage;
+                this.IsSecondPage = true;
+                this.Title = (string)title;
+            };
+        }
+
+    }
+
+    /// <summary>
+    /// Menu of <see cref = "FanKit.Transformers.Transformer"/>.
+    /// </summary>
+    public sealed partial class TransformerMenu : Expander, IMenu 
+    {
+
+        //DataContext
+        private void ConstructDataContext(string path, DependencyProperty dp)
+        {
+            // Create the binding description.
+            Binding binding = new Binding
+            {
+                Mode = BindingMode.OneWay,
+                Path = new PropertyPath(path)
+            };
+
+            // Attach the binding to the target.
+            this.SetBinding(dp, binding);
+        }
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Button.ToolTip.Content =
+            this.Button.Title =
+            this.Title = resource.GetString("/Menus/Transformer");
+
+            this.Button.ToolTip.Closed += (s, e) => this.TransformerMainPage.IsOpen = false;
+            this.Button.ToolTip.Opened += (s, e) =>
+            {
+                if (this.IsSecondPage) return;
+                if (this.State != ExpanderState.Overlay) return;
+
+                this.TransformerMainPage.IsOpen = true;
+            };
+        }
+
+        //Menu
+        /// <summary> Gets the type. </summary>
+        public MenuType Type => MenuType.Transformer;
+        /// <summary> Gets or sets the button. </summary>
+        public override IExpanderButton Button { get; } = new MenuButton
+        {
+            CenterContent = new FanKit.Transformers.Icon()
+        };
+        /// <summary> Reset Expander. </summary>
+        public override void Reset() { }
+
+    }
+
+
+
+    /// <summary> 
+    /// State of <see cref="TransformerMainPage"/>. 
+    /// </summary>
+    public enum TransformerMainPageState
     {
         /// <summary> Enabled. </summary>
         Enabled,
@@ -27,19 +118,29 @@ namespace Retouch_Photo2.Menus.Models
     }
 
     /// <summary>
-    /// Menu of <see cref = "FanKit.Transformers.Transformer"/>.
+    /// MainPage of <see cref = "FanKit.Transformers.Transformer"/>.
     /// </summary>
-    public sealed partial class TransformerMenu : UserControl, IMenu
+    public sealed partial class TransformerMainPage : UserControl
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
         bool IsRatio => this.SettingViewModel.IsRatio;
         Transformer SelectionTransformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
+
+
+        //@Delegate
+        /// <summary> Occurs when second-page change. </summary>
+        public event EventHandler<UIElement> SecondPageChanged;
+
+
+        //@Content
+        /// <summary> Position RemoteControl. </summary>
+        public RemoteControl PositionRemoteControl { get; private set; } 
 
 
         //@VisualState
@@ -50,26 +151,26 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> 
         /// Represents the visual appearance of UI elements in a specific state.
         /// </summary>
-        public TransformerMenuState VisualState
+        public TransformerMainPageState VisualState
         {
             get
             {
-                if (this._vsDisabledTool) return TransformerMenuState.Disabled;
+                if (this._vsDisabledTool) return TransformerMainPageState.Disabled;
 
                 switch (this._vsMode)
                 {
-                    case ListViewSelectionMode.None: return TransformerMenuState.Disabled;
+                    case ListViewSelectionMode.None: return TransformerMainPageState.Disabled;
                     case ListViewSelectionMode.Single:
                     case ListViewSelectionMode.Multiple:
                         {
-                            if (this._vsDisabledRadian) return TransformerMenuState.EnabledWithoutRadian;
-                            else return TransformerMenuState.Enabled;
+                            if (this._vsDisabledRadian) return TransformerMainPageState.EnabledWithoutRadian;
+                            else return TransformerMainPageState.Enabled;
                         }
                 }
 
-                return TransformerMenuState.Enabled;
+                return TransformerMainPageState.Enabled;
             }
-            set => this.SetTransformerMenuState(value);
+            set => this.SetTransformerMainPageState(value);
         }
 
         private IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
@@ -78,16 +179,16 @@ namespace Retouch_Photo2.Menus.Models
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets <see cref = "TransformerMenu" />'s tool type. </summary>
+        /// <summary> Gets or sets <see cref = "TransformerMainPage" />'s tool type. </summary>
         public ToolType ToolType
         {
             get { return (ToolType)GetValue(ToolTypeProperty); }
             set { SetValue(ToolTypeProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "TransformerMenu.ToolType" /> dependency property. </summary>
-        public static readonly DependencyProperty ToolTypeProperty = DependencyProperty.Register(nameof(ToolType), typeof(ToolType), typeof(TransformerMenu), new PropertyMetadata(ToolType.Cursor, (sender, e) =>
+        /// <summary> Identifies the <see cref = "TransformerMainPage.ToolType" /> dependency property. </summary>
+        public static readonly DependencyProperty ToolTypeProperty = DependencyProperty.Register(nameof(ToolType), typeof(ToolType), typeof(TransformerMainPage), new PropertyMetadata(ToolType.Cursor, (sender, e) =>
         {
-            TransformerMenu con = (TransformerMenu)sender;
+            TransformerMainPage con = (TransformerMainPage)sender;
 
             if (e.NewValue is ToolType value)
             {
@@ -138,16 +239,16 @@ namespace Retouch_Photo2.Menus.Models
         }));
 
 
-        /// <summary> Gets or sets <see cref = "TransformerMenu" />'s selection mode. </summary>
+        /// <summary> Gets or sets <see cref = "TransformerMainPage" />'s selection mode. </summary>
         public ListViewSelectionMode Mode
         {
             get { return (ListViewSelectionMode)GetValue(ModeProperty); }
             set { SetValue(ModeProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "TransformerMenu.Mode" /> dependency property. </summary>
-        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(ListViewSelectionMode), typeof(TransformerMenu), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
+        /// <summary> Identifies the <see cref = "TransformerMainPage.Mode" /> dependency property. </summary>
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(ListViewSelectionMode), typeof(TransformerMainPage), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
         {
-            TransformerMenu con = (TransformerMenu)sender;
+            TransformerMainPage con = (TransformerMainPage)sender;
 
             if (e.NewValue is ListViewSelectionMode value)
             {
@@ -157,16 +258,16 @@ namespace Retouch_Photo2.Menus.Models
         }));
 
 
-        /// <summary> Gets or sets <see cref = "TransformerMenu" />'s transformer. </summary>
+        /// <summary> Gets or sets <see cref = "TransformerMainPage" />'s transformer. </summary>
         public Transformer Transformer
         {
             get { return (Transformer)GetValue(TransformerProperty); }
             set { SetValue(TransformerProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "TransformerMenu.Transformer" /> dependency property. </summary>
-        public static readonly DependencyProperty TransformerProperty = DependencyProperty.Register(nameof(Transformer), typeof(Transformer), typeof(TransformerMenu), new PropertyMetadata(new Transformer(), (sender, e) =>
+        /// <summary> Identifies the <see cref = "TransformerMainPage.Transformer" /> dependency property. </summary>
+        public static readonly DependencyProperty TransformerProperty = DependencyProperty.Register(nameof(Transformer), typeof(Transformer), typeof(TransformerMainPage), new PropertyMetadata(new Transformer(), (sender, e) =>
         {
-            TransformerMenu con = (TransformerMenu)sender;
+            TransformerMainPage con = (TransformerMainPage)sender;
 
             if (e.NewValue is Transformer value)
             {
@@ -176,16 +277,16 @@ namespace Retouch_Photo2.Menus.Models
         }));
 
 
-        /// <summary> Gets or sets <see cref = "TransformerMenu" /> is disable rotate radian? Defult **false**. </summary>
+        /// <summary> Gets or sets <see cref = "TransformerMainPage" /> is disable rotate radian? Defult **false**. </summary>
         public bool DisabledRadian
         {
             get { return (bool)GetValue(DisabledRadianProperty); }
             set { SetValue(DisabledRadianProperty, value); }
         }
-        /// <summary> Identifies the <see cref = "TransformerMenu.DisabledRadian" /> dependency property. </summary>
-        public static readonly DependencyProperty DisabledRadianProperty = DependencyProperty.Register(nameof(DisabledRadian), typeof(bool), typeof(TransformerMenu), new PropertyMetadata(false, (sender, e) =>
+        /// <summary> Identifies the <see cref = "TransformerMainPage.DisabledRadian" /> dependency property. </summary>
+        public static readonly DependencyProperty DisabledRadianProperty = DependencyProperty.Register(nameof(DisabledRadian), typeof(bool), typeof(TransformerMainPage), new PropertyMetadata(false, (sender, e) =>
         {
-            TransformerMenu con = (TransformerMenu)sender;
+            TransformerMainPage con = (TransformerMainPage)sender;
 
             if (e.NewValue is bool value)
             {
@@ -195,55 +296,55 @@ namespace Retouch_Photo2.Menus.Models
         }));
 
 
+        /// <summary> Gets or sets <see cref = "TransformerMainPage" />'s IsOpen. </summary>
+        public bool IsOpen
+        {
+            get { return (bool)GetValue(IsOpenProperty); }
+            set { SetValue(IsOpenProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "TransformerMainPage.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(TextMainPage), new PropertyMetadata(false));
+
+
         #endregion
 
 
         //@Construct
         /// <summary>
-        /// Initializes a TransformerMenu. 
+        /// Initializes a TransformerMainPage. 
         /// </summary>
-        public TransformerMenu()
+        public TransformerMainPage()
         {
             this.InitializeComponent();
             this.DataContext = this.ViewModel;
             this.ConstructDataContext
             (
                  path: nameof(this.SelectionViewModel.SelectionMode),
-                 dp: TransformerMenu.ModeProperty
+                 dp: TransformerMainPage.ModeProperty
             );
             this.ConstructDataContext
             (
                  path: nameof(this.SelectionViewModel.DisabledRadian),
-                 dp: TransformerMenu.DisabledRadianProperty
+                 dp: TransformerMainPage.DisabledRadianProperty
             );
             this.ConstructDataContext
             (
                  path: nameof(this.SelectionViewModel.Transformer),
-                 dp: TransformerMenu.TransformerProperty
+                 dp: TransformerMainPage.TransformerProperty
             );
             this.ConstructDataContext
             (
                  path: nameof(this.SelectionViewModel.ToolType),
-                 dp: TransformerMenu.ToolTypeProperty
+                 dp: TransformerMainPage.ToolTypeProperty
             );
             this.ConstructStrings();
-            this.ConstructToolTip();
-            this.ConstructMenu();
 
             this.ConstructWidthHeight();
             this.ConstructRadianSkew();
             this.ConstructXY();
 
-
-            this.ConstructIndicatorControl();
-
-
             this.ConstructPositionRemoteControl();
-            this.PositionRemoteButton.Click += (s, e) =>
-            {
-                this._Expander.IsSecondPage = true;
-                this._Expander.CurrentTitle = (string)this.PositionRemoteToolTip.Content;
-            };
+            this.ConstructIndicatorControl();
         }
 
     }
@@ -251,7 +352,7 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "FanKit.Transformers.Transformer"/>.
     /// </summary>
-    public sealed partial class TransformerMenu : UserControl, IMenu
+    public sealed partial class TransformerMainPage : UserControl
     {
 
         //DataContext
@@ -273,10 +374,6 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content =
-            this._Expander.Title =
-            this._Expander.CurrentTitle = resource.GetString("/Menus/Transformer");
-
             this.WidthTextBlock.Text = resource.GetString("/Menus/Transformer_Width");
             this.HeightTextBlock.Text = resource.GetString("/Menus/Transformer_Height");
             this.RatioScalingToolTip.Content = resource.GetString("/Menus/Transformer_RatioScaling");
@@ -291,62 +388,21 @@ namespace Retouch_Photo2.Menus.Models
 
             this.IndicatorToolTip.Content = resource.GetString("/Menus/Transformer_Anchor");
         }
-
-        //ToolTip
-        private void ConstructToolTip()
-        {
-            this._button.ToolTip.Opened += (s, e) =>
-            {
-                if (this._Expander.IsSecondPage) return;
-
-                if (this.Expander.State == ExpanderState.Overlay)
-                {
-                    this.RatioScalingToolTip.IsOpen = true;
-                    this.StepFrequencyToolTip.IsOpen = true;
-                    this.PositionRemoteToolTip.IsOpen = true;
-                    this.IndicatorToolTip.IsOpen = true;
-                }
-            };
-            this._button.ToolTip.Closed += (s, e) =>
-            {
-                this.RatioScalingToolTip.IsOpen = false;
-                this.StepFrequencyToolTip.IsOpen = false;
-                this.PositionRemoteToolTip.IsOpen = false;
-                this.IndicatorToolTip.IsOpen = false;
-            };
-        }
-
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Transformer;
-        /// <summary> Gets the expander. </summary>
-        public IExpander Expander => this._Expander;
-        MenuButton _button = new MenuButton
-        {
-            CenterContent = new FanKit.Transformers.Icon()
-        };
-
-        private void ConstructMenu()
-        {
-            this._Expander.Layout = this;
-            this._Expander.Button = this._button;
-            this._Expander.Initialize();
-        }
+        
     }
 
     /// <summary>
-    /// Menu of <see cref = "FanKit.Transformers.Transformer"/>.
+    /// MainPage of <see cref = "FanKit.Transformers.Transformer"/>.
     /// </summary>
-    public sealed partial class TransformerMenu : UserControl, IMenu
+    public sealed partial class TransformerMainPage : UserControl
     {
 
-        //TransformerMenu
-        private void SetTransformerMenuState(TransformerMenuState value)
+        //TransformerMainPage
+        private void SetTransformerMainPageState(TransformerMainPageState value)
         {
-
             switch (value)
             {
-                case TransformerMenuState.Enabled:
+                case TransformerMainPageState.Enabled:
                     {
                         //Value
                         {
@@ -396,7 +452,7 @@ namespace Retouch_Photo2.Menus.Models
                     }
                     break;
 
-                case TransformerMenuState.EnabledWithoutRadian:
+                case TransformerMainPageState.EnabledWithoutRadian:
                     {
                         //Value
                         {
@@ -434,7 +490,7 @@ namespace Retouch_Photo2.Menus.Models
 
                             this.XPicker.IsEnabled = true;
                             this.YPicker.IsEnabled = true;
-                            
+
                             this.IndicatorControl.Mode = this.IndicatorMode;
                             this.PositionRemoteButton.IsEnabled = true;
                             this.RatioToggleControl.IsEnabled = true;
@@ -443,7 +499,7 @@ namespace Retouch_Photo2.Menus.Models
                     }
                     break;
 
-                case TransformerMenuState.Disabled:
+                case TransformerMainPageState.Disabled:
                     {
                         //Value
                         {
@@ -485,10 +541,27 @@ namespace Retouch_Photo2.Menus.Models
 
         }
 
-
+        
         //RemoteControl
         private void ConstructPositionRemoteControl()
         {
+            this.PositionRemoteControl = new RemoteControl
+            {
+                Margin = new Thickness(2),
+                Width = double.NaN,
+                Height = double.NaN,
+                Background = this.RemoteBackground,
+                BorderBrush = this.RemoteBorderBrush,
+                Foreground = this.RemoteForeground,
+            };
+
+            this.PositionRemoteButton.Click += (s, e) =>
+            {
+                object title = this.PositionRemoteToolTip.Content;
+                UIElement secondPage = this.PositionRemoteControl;
+                this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
+            };
+
             Vector2 remote(Vector2 value) =>
                 (Math.Abs(value.X) > Math.Abs(value.Y)) ?
                 new Vector2(value.X, 0) :
@@ -504,7 +577,6 @@ namespace Retouch_Photo2.Menus.Models
         //IndicatorControl
         private void ConstructIndicatorControl()
         {
-
             this.IndicatorControl.ModeChanged += (s, mode) =>
             {
                 this.IndicatorMode = mode;//IndicatorMode
@@ -517,14 +589,12 @@ namespace Retouch_Photo2.Menus.Models
                 this.XPicker.Value = (int)vector.X;
                 this.YPicker.Value = (int)vector.Y;
             };
-
         }
 
 
         //Width Height
         private void ConstructWidthHeight()
         {
-
             this.WPicker.Minimum = 1;
             this.WPicker.Maximum = int.MaxValue;
             this.WPicker.ValueChange += (sender, value) =>
@@ -535,8 +605,7 @@ namespace Retouch_Photo2.Menus.Models
                 //Method
                 this.MethodViewModel.MethodTransformMultiplies(matrix);
             };
-
-
+            
             this.HPicker.Minimum = 1;
             this.HPicker.Maximum = int.MaxValue;
             this.HPicker.ValueChange += (s, value) =>
@@ -547,14 +616,12 @@ namespace Retouch_Photo2.Menus.Models
                 //Method
                 this.MethodViewModel.MethodTransformMultiplies(matrix);
             };
-
         }
 
 
         //Radian Skew
         private void ConstructRadianSkew()
         {
-
             this.RPicker.Minimum = -180;
             this.RPicker.Maximum = 180;
             this.RPicker.ValueChange += (s, value) =>
@@ -576,14 +643,12 @@ namespace Retouch_Photo2.Menus.Models
                 //Method
                 this.MethodViewModel.MethodTransformMultiplies(matrix);
             };
-
         }
 
 
         //X Y
         private void ConstructXY()
         {
-
             this.XPicker.Minimum = int.MinValue;
             this.XPicker.Maximum = int.MaxValue;
             this.XPicker.ValueChange += (s, value) =>
@@ -605,7 +670,6 @@ namespace Retouch_Photo2.Menus.Models
                 //Method
                 this.MethodViewModel.MethodTransformAdd(vector);
             };
-
         }
 
     }

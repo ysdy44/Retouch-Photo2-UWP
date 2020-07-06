@@ -14,25 +14,12 @@
 
 
     <UserControl.Resources>
-
-        <!--Pointer -->
-        <SolidColorBrush x:Name="PointerOverColor" Color="{ThemeResource SystemBaseLowColor}"/>
-        <SolidColorBrush x:Name="PressedColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
-
-        <!--Background-->
-        <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
-
-        <!--Foreground-->
-        <SolidColorBrush x:Name="CheckColor" Color="White"/>
-        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource SystemBaseMediumLowColor}"/>
-
         <!--Style-->
         <Style x:Key="SencondBoderStyle" TargetType="Border">
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Background" Value="Transparent"/>
         </Style>
-
     </UserControl.Resources>
 
 
@@ -51,7 +38,7 @@
                 <VisualState x:Name="PointerOver">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PointerOverColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemBaseLowColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
@@ -61,7 +48,7 @@
                     <Storyboard>
                         <PointerDownThemeAnimation TargetName="RootGrid" />
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PressedColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemBaseMediumLowColor}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -70,10 +57,10 @@
                 <VisualState x:Name="Selected">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AccentColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
@@ -114,7 +101,7 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SencondBoderStyle}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PointerOverColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemBaseLowColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                     </Storyboard>
@@ -135,7 +122,7 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SencondBoderStyle}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PressedColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemBaseMediumLowColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <PointerDownThemeAnimation TargetName="RootGrid" />
                     </Storyboard>
@@ -154,13 +141,13 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Foreground">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AccentColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Style">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SencondBoderStyle}" />
@@ -181,8 +168,8 @@
             <Border x:Name="TextBlockBorder" Padding="4,0" Visibility="Collapsed">
                 <TextBlock x:Name="TextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             </Border>
-            
-            <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{StaticResource UnCheckColor}"/>
+
+            <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{ThemeResource SystemBaseMediumLowColor}"/>
         </Grid>
         
     </Border>

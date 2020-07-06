@@ -13,11 +13,11 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     public partial class TransparencyTool : Page, ITool
     { 
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
 
 
         //@Construct
@@ -44,22 +44,18 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content =
-                this.Title = resource.GetString("/Tools/Transparency");
+            this.Button.Title = resource.GetString("/Tools/Transparency");
         }
 
 
         //@Content
         public ToolType Type => ToolType.Transparency;
-        public string Title { get; set; }
-        public FrameworkElement Icon => this._icon;
-        public bool IsSelected { get => this._button.IsSelected; set => this._button.IsSelected = value; }
-
-        public FrameworkElement Button => this._button;
+        public FrameworkElement Icon { get; } = new TransparencyIcon();
+        public IToolButton Button { get; } = new ToolButton
+        {
+            CenterContent = new TransparencyIcon()
+        };
         public FrameworkElement Page => this;
-
-        readonly FrameworkElement _icon = new TransparencyIcon();
-        readonly ToolButton _button = new ToolButton(new TransparencyIcon());
 
 
         public void Started(Vector2 startingPoint, Vector2 point) { }

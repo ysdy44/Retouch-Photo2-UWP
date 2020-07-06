@@ -13,21 +13,12 @@ namespace Retouch_Photo2.Tools.Models
         //HorizontalStep
         private void ConstructHorizontalStep1()
         {
-            //Button
-            this.HorizontalStepTouchbarButton.Toggle += (s, value) =>
-            {
-                if (value)
-                    this.TouchBarMode = PatternGridMode.HorizontalStep;
-                else
-                    this.TouchBarMode = PatternGridMode.None;
-            };
-
             this.HorizontalStepTouchbarPicker.Unit = "";
             this.HorizontalStepTouchbarPicker.Minimum = 5;
             this.HorizontalStepTouchbarPicker.Maximum = 100;
             this.HorizontalStepTouchbarPicker.ValueChange += (sender, value) =>
             {
-                float horizontalStep = (float)value;
+                float horizontalStep = value;
 
                 this.MethodViewModel.TLayerChanged<float, PatternGridLayer>
                 (
@@ -44,8 +35,8 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructHorizontalStep2()
         {
-            this.HorizontalStepTouchbarSlider.Minimum = 5;
-            this.HorizontalStepTouchbarSlider.Maximum = 100;
+            this.HorizontalStepTouchbarSlider.Minimum = 5.0d;
+            this.HorizontalStepTouchbarSlider.Maximum = 100.0d;
             this.HorizontalStepTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<PatternGridLayer>
             (
                 LayerType.PatternGrid,

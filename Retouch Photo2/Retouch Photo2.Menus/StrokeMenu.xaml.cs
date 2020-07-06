@@ -1,5 +1,4 @@
 ﻿using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
@@ -14,21 +13,17 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Strokes"/>.
     /// </summary>
-    public sealed partial class StrokeMenu : UserControl, IMenu
+    public sealed partial class StrokeMenu : Expander, IMenu 
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        
-        CanvasStrokeStyle StrokeStyle { get => this.SelectionViewModel.StrokeStyle; set => this.SelectionViewModel.StrokeStyle = value; }
 
 
-        //@Converter
-        private CanvasDashStyle DashConverter(CanvasStrokeStyle strokeStyle) => strokeStyle == null ? CanvasDashStyle.Solid : strokeStyle.DashStyle;
-        private CanvasCapStyle CapConverter(CanvasStrokeStyle strokeStyle) => strokeStyle == null ? CanvasCapStyle.Flat : strokeStyle.DashCap;
-        private CanvasLineJoin JoinConverter(CanvasStrokeStyle strokeStyle) => strokeStyle == null ? CanvasLineJoin.Miter : strokeStyle.LineJoin;
-        private float OffsetConverter(CanvasStrokeStyle strokeStyle) => strokeStyle == null ? 0 : strokeStyle.DashOffset;
+        //@Content
+        StrokeMainPage StrokeMainPage = new StrokeMainPage();
 
 
         //@Construct
@@ -39,8 +34,97 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructToolTip();
-            this.ConstructMenu();
+
+            this.MainPage = this.StrokeMainPage;
+        }
+
+    }
+
+    /// <summary>
+    /// Menu of <see cref = "Retouch_Photo2.Strokes"/>.
+    /// </summary>
+    public sealed partial class StrokeMenu : Expander, IMenu 
+    {
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Button.ToolTip.Content =
+            this.Button.Title =
+            this.Title = resource.GetString("/Menus/Stroke");
+
+            this.Button.ToolTip.Closed += (s, e) => this.StrokeMainPage.IsOpen = false;
+            this.Button.ToolTip.Opened += (s, e) =>
+            {
+                if (this.IsSecondPage) return;
+                if (this.State != ExpanderState.Overlay) return;
+
+                this.StrokeMainPage.IsOpen = true;
+            };
+        }
+
+        //Menu
+        /// <summary> Gets the type. </summary>
+        public MenuType Type => MenuType.Stroke;
+        /// <summary> Gets or sets the button. </summary>
+        public override IExpanderButton Button { get; } = new MenuButton
+        {
+            CenterContent = new Retouch_Photo2.Strokes.Icon()
+        };
+        /// <summary> Reset Expander. </summary>
+        public override void Reset() { }
+
+    }
+
+
+
+    /// <summary>
+    /// MainPage of <see cref = "StrokeMenu"/>.
+    /// </summary>
+    public sealed partial class StrokeMainPage : UserControl
+    {
+
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+        
+        CanvasStrokeStyle StrokeStyle { get => this.SelectionViewModel.StrokeStyle; set => this.SelectionViewModel.StrokeStyle = value; }
+        
+
+        //@Converter
+        private CanvasDashStyle DashConverter(CanvasStrokeStyle strokeStyle) => strokeStyle == null ? CanvasDashStyle.Solid : strokeStyle.DashStyle;
+        private CanvasCapStyle CapConverter(CanvasStrokeStyle strokeStyle) => strokeStyle == null ? CanvasCapStyle.Flat : strokeStyle.DashCap;
+        private CanvasLineJoin JoinConverter(CanvasStrokeStyle strokeStyle) => strokeStyle == null ? CanvasLineJoin.Miter : strokeStyle.LineJoin;
+        private float OffsetConverter(CanvasStrokeStyle strokeStyle) => strokeStyle == null ? 0 : strokeStyle.DashOffset;
+
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "StrokeMainPage" />'s IsOpen. </summary>
+        public bool IsOpen
+        {
+            get { return (bool)GetValue(IsOpenProperty); }
+            set { SetValue(IsOpenProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "StrokeMainPage.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(StrokeMainPage), new PropertyMetadata(false));
+
+
+        #endregion
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a StrokeMainPage. 
+        /// </summary>
+        public StrokeMainPage()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
          
             this.ConstructDash();
             this.ConstructWidth();
@@ -51,9 +135,9 @@ namespace Retouch_Photo2.Menus.Models
     }
 
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Strokes"/>.
+    /// MainPage of <see cref = "StrokeMenu"/>.
     /// </summary>
-    public sealed partial class StrokeMenu : UserControl, IMenu
+    public sealed partial class StrokeMainPage : UserControl
     {
 
         //Strings
@@ -61,61 +145,19 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._button.ToolTip.Content = 
-            this._Expander.Title =
-            this._Expander.CurrentTitle = resource.GetString("/Menus/Stroke");
-
             this.DashTextBlock.Text = resource.GetString("/Strokes/Dash");
             this.WidthTextBlock.Text = resource.GetString("/Strokes/Width");
             this.CapTextBlock.Text = resource.GetString("/Strokes/Cap");
             this.JoinTextBlock.Text = resource.GetString("/Strokes/Join");
             this.OffsetTextBlock.Text = resource.GetString("/Strokes/Offset");
         }
-
-        //ToolTip
-        private void ConstructToolTip()
-        {
-            this._button.ToolTip.Opened += (s, e) =>
-            {
-                if (this._Expander.IsSecondPage) return;
-
-                if (this.Expander.State == ExpanderState.Overlay)
-                {
-                    this.DashSegmented.IsOpen = true;
-                    this.CapSegmented.IsOpen = true;
-                    this.JoinSegmented.IsOpen = true;
-                }
-            };
-            this._button.ToolTip.Closed += (s, e) =>
-            {
-                this.DashSegmented.IsOpen = false;
-                this.CapSegmented.IsOpen = false;
-                this.JoinSegmented.IsOpen = false;
-            };
-        }
         
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Stroke;
-        /// <summary> Gets the expander. </summary>
-        public IExpander Expander => this._Expander;
-        MenuButton _button = new MenuButton
-        {
-            CenterContent = new Retouch_Photo2.Strokes.Icon()
-        };
-
-        private void ConstructMenu()
-        {
-            this._Expander.Layout = this;
-            this._Expander.Button = this._button;
-            this._Expander.Initialize();
-        }
     }
 
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Strokes"/>.
+    /// MainPage of <see cref = "StrokeMenu"/>.
     /// </summary>
-    public sealed partial class StrokeMenu : UserControl, IMenu
+    public sealed partial class StrokeMainPage : UserControl
     {
 
         //Dash
@@ -165,8 +207,8 @@ namespace Retouch_Photo2.Menus.Models
         //Width
         private void ConstructWidth()
         {
-            this.WidthPicker.Minimum = 0;
-            this.WidthPicker.Maximum = 128;
+            this.WidthPicker.Minimum = 0.0d;
+            this.WidthPicker.Maximum = 128.0d;
             this.WidthPicker.ValueChangeStarted += (s, value) =>
             {             
                 //Selection
@@ -241,8 +283,8 @@ namespace Retouch_Photo2.Menus.Models
         //Offset
         private void ConstructOffset()
         {
-            this.OffsetPicker.Minimum = 0;
-            this.OffsetPicker.Maximum = 10;
+            this.OffsetPicker.Minimum = 0.0d;
+            this.OffsetPicker.Maximum = 10.0d;
             this.OffsetPicker.ValueChangeStarted += (s, value) =>
             {             
                 //Selection

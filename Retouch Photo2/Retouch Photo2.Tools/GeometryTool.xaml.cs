@@ -11,6 +11,7 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public partial class GeometryTool : Page
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;

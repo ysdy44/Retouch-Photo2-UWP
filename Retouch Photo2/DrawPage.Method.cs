@@ -100,7 +100,7 @@ namespace Retouch_Photo2
         {
             foreach (IMenu menu in this.TipViewModel.Menus)
             {
-                menu.Expander.State = ExpanderState.Hide;
+                menu.State = ExpanderState.Hide;
             }
 
             //Clear photos
