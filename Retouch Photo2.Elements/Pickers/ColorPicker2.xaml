@@ -76,8 +76,8 @@
 
             <local:WheelPicker x:Name="WheelPicker"/>
 
-            <hsvColorPickers:RGBPicker x:Name="RGBPicker" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" ButtonStyle="{StaticResource AppNumberButtonStyle}"/>
-            <hsvColorPickers:HSVPicker x:Name="HSVPicker" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" ButtonStyle="{StaticResource AppNumberButtonStyle}"/>
+            <hsvColorPickers:RGBPicker x:Name="RGBPicker" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" ButtonStyle="{StaticResource AppNumberButtonStyle}" TextStyle="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:HSVPicker x:Name="HSVPicker" Placement="Left" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}" ButtonStyle="{StaticResource AppNumberButtonStyle}" TextStyle="{StaticResource AppTextBlockStyle}"/>
 
             <hsvColorPickers:PaletteHuePicker x:Name="PaletteHuePicker"/>
             <hsvColorPickers:PaletteSaturationPicker x:Name="PaletteSaturationPicker"/>

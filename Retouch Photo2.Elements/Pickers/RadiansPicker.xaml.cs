@@ -120,6 +120,7 @@ namespace Retouch_Photo2.Elements
         //@VisualState
         bool _vsIsEnabled = true;
         ClickMode _vsClickMode;
+        bool _vsIsManipulationStarted = true;
         /// <summary> 
         /// Represents the visual appearance of UI elements in a specific state.
         /// </summary>
@@ -128,6 +129,8 @@ namespace Retouch_Photo2.Elements
             get
             {
                 if (this._vsIsEnabled == false) return this.Disabled;
+
+                if (this._vsIsManipulationStarted) return this.Pressed;
 
                 switch (this._vsClickMode)
                 {
@@ -152,6 +155,9 @@ namespace Retouch_Photo2.Elements
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a RadiansPicker. 
+        /// </summary>
         public RadiansPicker()
         {
             this.InitializeComponent();
@@ -177,7 +183,7 @@ namespace Retouch_Photo2.Elements
 
             this.SizeChanged += (s, e) =>
             {
-                this.Radius = (float)Math.Min(e.NewSize.Width, e.NewSize.Height) / 2;
+                this.Radius = (float)Math.Min(e.NewSize.Width, e.NewSize.Height) / 2 - 6;
                 this.Center = new Vector2((float)(e.NewSize.Width / 2), (float)(e.NewSize.Height / 2));
                 this.Arrow = RadiansPicker.RadiansToVector(this.Radians, this.Radius, this.Center);
             };
@@ -194,6 +200,9 @@ namespace Retouch_Photo2.Elements
                 this._Radians = RadiansPicker.VectorToRadians(this.Vector);
 
                 this.ValueChangeStarted?.Invoke(this, this.Radians);//Delegate
+
+                this._vsIsManipulationStarted = true;
+                this.VisualState = this.VisualState;//VisualState
             };
             this.RootGrid.ManipulationDelta += (sender, e) =>
             {
@@ -207,6 +216,9 @@ namespace Retouch_Photo2.Elements
             this.RootGrid.ManipulationCompleted += (sender, e) =>
             {
                 this.ValueChangeCompleted?.Invoke(this, this.Radians);//Delegate
+
+                this._vsIsManipulationStarted = false;
+                this.VisualState = this.VisualState;//VisualState
             };
         }
     }

@@ -29,7 +29,6 @@ namespace Retouch_Photo2.Tools
         bool IsRatio => this.SettingViewModel.IsRatio;
         bool IsCenter => this.SettingViewModel.IsCenter;
         bool IsStepFrequency => this.SettingViewModel.IsStepFrequency;
-        bool DisabledRadian => this.SelectionViewModel.DisabledRadian;
 
 
         TransformerMode TransformerMode = TransformerMode.None;
@@ -40,7 +39,7 @@ namespace Retouch_Photo2.Tools
             if (this.Mode == ListViewSelectionMode.None) return false;
 
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            this.TransformerMode = Transformer.ContainsNodeMode(startingPoint, this.Transformer, matrix, this.DisabledRadian);
+            this.TransformerMode = Transformer.ContainsNodeMode(startingPoint, this.Transformer, matrix);
             if (this.TransformerMode == TransformerMode.None) return false;
 
             //Snap
@@ -101,7 +100,7 @@ namespace Retouch_Photo2.Tools
 
             //Transformer
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            drawingSession.DrawBoundNodes(this.Transformer, matrix, this.ViewModel.AccentColor, this.SelectionViewModel.DisabledRadian);
+            drawingSession.DrawBoundNodes(this.Transformer, matrix, this.ViewModel.AccentColor);
 
             //Snapping
             if (this.IsSnap)

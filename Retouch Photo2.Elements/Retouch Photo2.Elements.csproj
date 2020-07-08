@@ -122,7 +122,6 @@
     <Compile Include="DPIComboBox.xaml.cs">
       <DependentUpon>DPIComboBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Expanders\Expander.Static.cs" />
     <Compile Include="Expanders\ExpanderWidth.cs" />
     <Compile Include="Expanders\IExpanderButton.cs" />
     <Compile Include="Pickers\CirclePicker.xaml.cs">

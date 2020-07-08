@@ -206,13 +206,16 @@ namespace Retouch_Photo2.Adjustments.Pages
         //WhiteLight
         private void ConstructWhiteLight1()
         {
-            this.WhiteLightPicker.Unit = null;
+            this.WhiteLightPicker.Unit = "%";
             this.WhiteLightPicker.Minimum = 50;
             this.WhiteLightPicker.Maximum = 100;
             this.WhiteLightPicker.ValueChanged += (s, value) =>
             {
                 float whiteLight = (float)value / 100.0f;
                 this.WhiteLight = whiteLight;
+                
+                if (whiteLight < 0.0f) whiteLight = 0.0f;
+                if (whiteLight > 1.0f) whiteLight = 1.0f;
 
                 this.MethodViewModel.TAdjustmentChanged<float, BrightnessAdjustment>
                 (
@@ -236,12 +239,18 @@ namespace Retouch_Photo2.Adjustments.Pages
                 float whiteLight = (float)value;
                 this.WhiteLight = whiteLight;
 
+                if (whiteLight < 0.0f) whiteLight = 0.0f;
+                if (whiteLight > 1.0f) whiteLight = 1.0f;
+
                 this.MethodViewModel.TAdjustmentChangeDelta<BrightnessAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.WhiteLight = whiteLight);
             };
             this.WhiteLightSlider.ValueChangeCompleted += (s, value) =>
             {
                 float whiteLight = (float)value;
                 this.WhiteLight = whiteLight;
+
+                if (whiteLight < 0.0f) whiteLight = 0.0f;
+                if (whiteLight > 1.0f) whiteLight = 1.0f;
 
                 this.MethodViewModel.TAdjustmentChangeCompleted<float, BrightnessAdjustment>
                 (
@@ -259,13 +268,16 @@ namespace Retouch_Photo2.Adjustments.Pages
         //WhiteDark
         private void ConstructWhiteDark1()
         {
-            this.WhiteDarkPicker.Unit = null;
+            this.WhiteDarkPicker.Unit = "%";
             this.WhiteDarkPicker.Minimum = 50;
             this.WhiteDarkPicker.Maximum = 100;
             this.WhiteDarkPicker.ValueChanged += (s, value) =>
             {
                 float whiteDark = (float)value / 100.0f;
                 this.WhiteDark = whiteDark;
+
+                if (whiteDark < 0.0f) whiteDark = 0.0f;
+                if (whiteDark > 1.0f) whiteDark = 1.0f;
 
                 this.MethodViewModel.TAdjustmentChanged<float, BrightnessAdjustment>
                 (
@@ -289,12 +301,18 @@ namespace Retouch_Photo2.Adjustments.Pages
                 float whiteDark = (float)value;
                 this.WhiteDark = whiteDark;
 
+                if (whiteDark < 0.0f) whiteDark = 0.0f;
+                if (whiteDark > 1.0f) whiteDark = 1.0f;
+
                 this.MethodViewModel.TAdjustmentChangeDelta<BrightnessAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.WhiteDark = whiteDark);
             };
             this.WhiteDarkSlider.ValueChangeCompleted += (s, value) =>
             {
                 float whiteDark = (float)value;
                 this.WhiteDark = whiteDark;
+
+                if (whiteDark < 0.0f) whiteDark = 0.0f;
+                if (whiteDark > 1.0f) whiteDark = 1.0f;
 
                 this.MethodViewModel.TAdjustmentChangeCompleted<float, BrightnessAdjustment>
                 (
@@ -312,13 +330,16 @@ namespace Retouch_Photo2.Adjustments.Pages
         //BlackLight
         private void ConstructBlackLight1()
         {
-            this.BlackLightPicker.Unit = null;
+            this.BlackLightPicker.Unit = "%";
             this.BlackLightPicker.Minimum = 0;
             this.BlackLightPicker.Maximum = 50;
             this.BlackLightPicker.ValueChanged += (s, value) =>
             {
                 float blackLight = (float)value / 100.0f;
                 this.BlackLight = blackLight;
+
+                if (blackLight < 0.0f) blackLight = 0.0f;
+                if (blackLight > 1.0f) blackLight = 1.0f;
 
                 this.MethodViewModel.TAdjustmentChanged<float, BrightnessAdjustment>
                 (
@@ -335,12 +356,15 @@ namespace Retouch_Photo2.Adjustments.Pages
         private void ConstructBlackLight2()
         {
             this.BlackLightSlider.Minimum = 0.0d;
-            this.BlackLightSlider.Maximum = 50.0d;
+            this.BlackLightSlider.Maximum = 0.5d;
             this.BlackLightSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<BrightnessAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheBlackLight());
             this.BlackLightSlider.ValueChangeDelta += (s, value) =>
             {
                 float blackLight = (float)value;
                 this.BlackLight = blackLight;
+
+                if (blackLight < 0.0f) blackLight = 0.0f;
+                if (blackLight > 1.0f) blackLight = 1.0f;
 
                 this.MethodViewModel.TAdjustmentChangeDelta<BrightnessAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.BlackLight = blackLight);
             };
@@ -348,6 +372,9 @@ namespace Retouch_Photo2.Adjustments.Pages
             {
                 float blackLight = (float)value;
                 this.BlackLight = blackLight;
+
+                if (blackLight < 0.0f) blackLight = 0.0f;
+                if (blackLight > 1.0f) blackLight = 1.0f;
 
                 this.MethodViewModel.TAdjustmentChangeCompleted<float, BrightnessAdjustment>
                 (
@@ -365,13 +392,16 @@ namespace Retouch_Photo2.Adjustments.Pages
         //BlackDark
         private void ConstructBlackDark1()
         {
-            this.BlackDarkPicker.Unit = null;
+            this.BlackDarkPicker.Unit = "%";
             this.BlackDarkPicker.Minimum = 0;
             this.BlackDarkPicker.Maximum = 50;
             this.BlackDarkPicker.ValueChanged += (s, value) =>
             {
                 float blackDark = (float)value / 100.0f;
                 this.BlackDark = blackDark;
+
+                if (blackDark < 0.0f) blackDark = 0.0f;
+                if (blackDark > 1.0f) blackDark = 1.0f;
 
                 this.MethodViewModel.TAdjustmentChanged<float, BrightnessAdjustment>
                 (
@@ -388,12 +418,15 @@ namespace Retouch_Photo2.Adjustments.Pages
         private void ConstructBlackDark2()
         {
             this.BlackDarkSlider.Minimum = 0.0d;
-            this.BlackDarkSlider.Maximum = 50.0d;
+            this.BlackDarkSlider.Maximum = 0.5d;
             this.BlackDarkSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<BrightnessAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheBlackDark());
             this.BlackDarkSlider.ValueChangeDelta += (s, value) =>
             {
                 float blackDark = (float)value;
                 this.BlackDark = blackDark;
+
+                if (blackDark < 0.0f) blackDark = 0.0f;
+                if (blackDark > 1.0f) blackDark = 1.0f;
 
                 this.MethodViewModel.TAdjustmentChangeDelta<BrightnessAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.BlackDark = blackDark);
             };
@@ -401,6 +434,9 @@ namespace Retouch_Photo2.Adjustments.Pages
             {
                 float blackDark = (float)value;
                 this.BlackDark = blackDark;
+
+                if (blackDark < 0.0f) blackDark = 0.0f;
+                if (blackDark > 1.0f) blackDark = 1.0f;
 
                 this.MethodViewModel.TAdjustmentChangeCompleted<float, BrightnessAdjustment>
                 (

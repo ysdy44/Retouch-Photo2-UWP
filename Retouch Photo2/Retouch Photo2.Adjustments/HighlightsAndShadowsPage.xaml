@@ -35,13 +35,13 @@
     </Page.Resources>
 
 
-    <StackPanel >
+    <StackPanel Padding="2,0">
 
         <!--Shadows-->
         <RelativePanel>
             <TextBlock x:Name="ShadowsTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="ShadowsPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+                           RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
         <hsvColorPickers:TouchSlider x:Name="ShadowsSlider" Minimum="-100" Maximum="100"/>
 
@@ -49,25 +49,25 @@
         <RelativePanel>
             <TextBlock x:Name="HighlightsTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="HighlightsPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+                           RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="HighlightsSlider" Margin="2,0"/>
+        <hsvColorPickers:TouchSlider x:Name="HighlightsSlider"/>
 
         <!--Clarity-->
         <RelativePanel>
             <TextBlock x:Name="ClarityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="ClarityPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+                           RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="ClaritySlider" Margin="2,0"/>
+        <hsvColorPickers:TouchSlider x:Name="ClaritySlider"/>
 
         <!--MaskBlurAmount-->
         <RelativePanel>
             <TextBlock x:Name="MaskBlurAmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="MaskBlurAmountPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+                           RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="MaskBlurAmountSlider" Margin="2,0"/>
+        <hsvColorPickers:TouchSlider x:Name="MaskBlurAmountSlider"/>
 
         <ContentControl Height="4"/>
     </StackPanel>

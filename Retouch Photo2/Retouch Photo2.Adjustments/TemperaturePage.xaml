@@ -31,23 +31,23 @@
     </Page.Resources>
 
 
-    <StackPanel>
+    <StackPanel Padding="2,0">
 
         <!--Temperature-->
         <RelativePanel>
             <TextBlock x:Name="TemperatureTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="TemperaturePicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+                           RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="TemperatureSlider" Margin="2,0"/>
+        <hsvColorPickers:TouchSlider x:Name="TemperatureSlider"/>
 
         <!--Tint-->
         <RelativePanel>
             <TextBlock x:Name="TintTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="TintPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+                           RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="TintSlider" Margin="2,0"/>
+        <hsvColorPickers:TouchSlider x:Name="TintSlider"/>
 
     </StackPanel>
 </Page>

@@ -1,6 +1,8 @@
-﻿using Windows.UI.Xaml;
+﻿using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Elements
 {
@@ -9,39 +11,26 @@ namespace Retouch_Photo2.Elements
     /// </summary>
     public abstract partial class Expander : UserControl
     {
-        
-        //@Content
-        public string Title { get => this.TitleTextBlock.Text; protected set => this.TitleTextBlock.Text = value; }
-        public FrameworkElement Self => this;
 
-        public UIElement MainPage { get => this.MainPageBorder.Child; set => this.MainPageBorder.Child = value; }
-        public UIElement SecondPage { get => this.SecondPageBorder.Child; set => this.SecondPageBorder.Child = value; }
-        public bool IsSecondPage
+        //@Static
+        /// <summary>
+        /// A canvas, covered by a lot of <see cref="Expander"/>.
+        /// </summary>
+        public static readonly Canvas OverlayCanvas = new Canvas();
+        /// <summary>
+        /// True if lightweight elimination is enabled for <see cref="Expander.OverlayCanvas"/>.
+        /// </summary>
+        public static bool IsOverlayDismiss
         {
-            get => this._vsIsSecondPage;
             set
             {
-                if (this._vsIsSecondPage != value)
-                {
-                    if (value) this.TitleShowStoryboard.Begin();//Storyboard
-                    else this.TitleFadeStoryboard.Begin();//Storyboard
-
-                    this.HeightRectangle.VerticalAlignment = VerticalAlignment.Top;
-                    if (value) this.HeightStoryboardMainToSecond.Begin();//Storyboard
-                    else this.HeightStoryboardSecondToMain.Begin();//Storyboard
-                }
-
-                this._vsIsSecondPage = value;
-                this.VisualState = this.VisualState; //State
+                if (value)
+                    Expander.OverlayCanvas.Background = new SolidColorBrush(Colors.Transparent);
+                else
+                    Expander.OverlayCanvas.Background = null;
             }
         }
-        public Visibility ResetButtonVisibility { get => this.ResetButton.Visibility; set => this.ResetButton.Visibility = value; }
-        public abstract void Reset();
-        public void Back()
-        {
-            this.Title = this.Button.Title;
-            this.IsSecondPage = false;
-        }
+               
 
         //@VisualState
         bool _vsIsSecondPage = false;
@@ -74,13 +63,7 @@ namespace Retouch_Photo2.Elements
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
 
-
-        double _postionX;
-        double _postionY;
-        private double PostionX { get => Canvas.GetLeft(this); set => Canvas.SetLeft(this, value); }
-        private double PostionY { get => Canvas.GetTop(this); set => Canvas.SetTop(this, value); }
-
-
+               
         //@Construct     
         /// <summary>
         /// Initializes a Expander. 
@@ -88,35 +71,33 @@ namespace Retouch_Photo2.Elements
         public Expander()
         {
             this.InitializeComponent();
-            this.InitializeExpander();
+
             this.ConstructWidthStoryboard();
             this.ConstructHeightStoryboard();
+
             this.Tapped += (s, e) => e.Handled = true;
-        }
-
-
-        private void InitializeExpander()
-        {
             this.VisualState = this.VisualState;//State 
 
             /////////////////////////////////
-
+            
+            //Button
             this.Button.Self.Tapped += (s, e) =>
             {
-                if (this.State== ExpanderState.Hide) this.CalculatePostion(this.Button.Self, this.PlacementMode);
-                        
-                this.State = this.GetButtonState(this.State);
+                if (this.State == ExpanderState.Hide) this.CalculatePostion(this.Button.Self, this.PlacementMode);
+
+                this.State = this._getButtonState(this.State);
             };
 
             this.CloseButton.Click += (s, e) => this.State = ExpanderState.Hide;
-            this.StateButton.Click += (s, e) => this.State = this.GetState(this.State);
+            this.StateButton.Click += (s, e) => this.State = this._getState(this.State);
 
             this.BackButton.Click += (s, e) => this.Back();
             this.ResetButton.Click += (s, e) => this.Reset();
 
             /////////////////////////////////
-
-            this.TitleGrid.DoubleTapped += (s, e) => this.State = this.GetState(this.State);
+            
+            //TitleGrid
+            this.TitleGrid.DoubleTapped += (s, e) => this.State = this._getState(this.State);
 
             this.TitleGrid.ManipulationMode = ManipulationModes.All;
             this.TitleGrid.ManipulationStarted += (s, e) =>
@@ -145,5 +126,29 @@ namespace Retouch_Photo2.Elements
             };
         }
         
+
+        private ExpanderState _getState(ExpanderState state)
+        {
+            switch (state)
+            {
+                case ExpanderState.Overlay: return ExpanderState.OverlayNotExpanded;
+                case ExpanderState.OverlayNotExpanded: return ExpanderState.Overlay;
+            }
+            return ExpanderState.Overlay;
+        }
+        private ExpanderState _getButtonState(ExpanderState state)
+        {
+            switch (state)
+            {
+                case ExpanderState.Hide: return ExpanderState.FlyoutShow;
+                case ExpanderState.FlyoutShow: return ExpanderState.Hide;
+
+                case ExpanderState.Overlay: return ExpanderState.OverlayNotExpanded;
+                case ExpanderState.OverlayNotExpanded: return ExpanderState.Overlay;
+            }
+            return ExpanderState.FlyoutShow;
+        }
+
+
     }
 }

@@ -169,7 +169,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //Temperature
         private void ConstructTemperature1()
         {
-            this.TemperaturePicker.Unit = null;
+            this.TemperaturePicker.Unit = "%";
             this.TemperaturePicker.Minimum = -100;
             this.TemperaturePicker.Maximum = 100;
             this.TemperaturePicker.ValueChanged += (s, value) =>
@@ -191,9 +191,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructTemperature2()
         {
+            this.TemperatureSlider.SliderBrush = this.TemperatureBrush;
             this.TemperatureSlider.Minimum = -1.0d;
             this.TemperatureSlider.Maximum = 1.0d;
-            this.TemperatureSlider.SliderBrush = this.TemperatureBrush;
             this.TemperatureSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<TemperatureAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheTemperature());
             this.TemperatureSlider.ValueChangeDelta += (s, value) =>
             {
@@ -223,7 +223,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //Tint
         private void ConstructTint1()
         {
-            this.TintPicker.Unit = null;
+            this.TintPicker.Unit = "%";
             this.TintPicker.Minimum = -100;
             this.TintPicker.Maximum = 100;
             this.TintPicker.ValueChanged += (s, value) =>
@@ -245,9 +245,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructTint2()
         {
+            this.TintSlider.SliderBrush = this.TintBrush;
             this.TintSlider.Minimum = -1.0d;
             this.TintSlider.Maximum = 1.0d;
-            this.TintSlider.SliderBrush = this.TintBrush;
             this.TintSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<TemperatureAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheTint());
             this.TintSlider.ValueChangeDelta += (s, value) =>
             {

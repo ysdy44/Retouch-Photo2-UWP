@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //GreenOffset
         private void ConstructGreenOffset1()
         {
-            this.GreenOffsetPicker.Unit = null;
+            this.GreenOffsetPicker.Unit = "%";
             this.GreenOffsetPicker.Minimum = 0;
             this.GreenOffsetPicker.Maximum = 100;
             this.GreenOffsetPicker.ValueChanged += (s, value) =>
@@ -134,9 +134,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructGreenOffset2()
         {
+            this.GreenOffsetSlider.SliderBrush = this.GreenLeftBrush;
             this.GreenOffsetSlider.Minimum = 0.0d;
             this.GreenOffsetSlider.Maximum = 1.0d;
-            this.GreenOffsetSlider.SliderBrush = this.GreenLeftBrush;
             this.GreenOffsetSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheGreenOffset());
             this.GreenOffsetSlider.ValueChangeDelta += (s, value) =>
             {
@@ -166,7 +166,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //GreenExponent
         private void ConstructGreenExponent1()
         {
-            this.GreenExponentPicker.Unit = null;
+            this.GreenExponentPicker.Unit = "%";
             this.GreenExponentPicker.Minimum = 0;
             this.GreenExponentPicker.Maximum = 100;
             this.GreenExponentPicker.ValueChanged += (s, value) =>
@@ -188,9 +188,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructGreenExponent2()
         {
+            this.GreenExponentSlider.SliderBrush = this.GreenLeftBrush;
             this.GreenExponentSlider.Minimum = 0.0d;
             this.GreenExponentSlider.Maximum = 1.0d;
-            this.GreenExponentSlider.SliderBrush = this.GreenLeftBrush;
             this.GreenExponentSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheGreenExponent());
             this.GreenExponentSlider.ValueChangeDelta += (s, value) =>
             {
@@ -220,7 +220,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //GreenAmplitude
         private void ConstructGreenAmplitude1()
         {
-            this.GreenAmplitudePicker.Unit = null;
+            this.GreenAmplitudePicker.Unit = "%";
             this.GreenAmplitudePicker.Minimum = 0;
             this.GreenAmplitudePicker.Maximum = 100;
             this.GreenAmplitudePicker.ValueChanged += (s, value) =>
@@ -242,9 +242,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructGreenAmplitude2()
         {
+            this.GreenAmplitudeSlider.SliderBrush = this.GreenLeftBrush;
             this.GreenAmplitudeSlider.Minimum = 0.0d;
             this.GreenAmplitudeSlider.Maximum = 1.0d;
-            this.GreenAmplitudeSlider.SliderBrush = this.GreenLeftBrush;
             this.GreenAmplitudeSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheGreenAmplitude());
             this.GreenAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {

@@ -201,7 +201,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //Shadows
         private void ConstructShadows1()
         {
-            this.ShadowsPicker.Unit = null;
+            this.ShadowsPicker.Unit = "%";
             this.ShadowsPicker.Minimum = -100;
             this.ShadowsPicker.Maximum = 100;
             this.ShadowsPicker.ValueChanged += (s, value) =>
@@ -223,9 +223,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructShadows2()
         {
+            this.ShadowsSlider.SliderBrush = this.ShadowsBrush;
             this.ShadowsSlider.Minimum = -1.0d;
             this.ShadowsSlider.Maximum = 1.0d;
-            this.ShadowsSlider.SliderBrush = this.ShadowsBrush;
             this.ShadowsSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<HighlightsAndShadowsAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheShadows());
             this.ShadowsSlider.ValueChangeDelta += (s, value) =>
             {
@@ -255,7 +255,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //Highlights
         private void ConstructHighlights1()
         {
-            this.HighlightsPicker.Unit = null;
+            this.HighlightsPicker.Unit = "%";
             this.HighlightsPicker.Minimum = -100;
             this.HighlightsPicker.Maximum = 100;
             this.HighlightsPicker.ValueChanged += (s, value) =>
@@ -277,9 +277,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructHighlights2()
         {
+            this.HighlightsSlider.SliderBrush = this.HighlightsBrush;
             this.HighlightsSlider.Minimum = -1.0d;
             this.HighlightsSlider.Maximum = 1.0d;
-            this.HighlightsSlider.SliderBrush = this.HighlightsBrush;
             this.HighlightsSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<HighlightsAndShadowsAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheHighlights());
             this.HighlightsSlider.ValueChangeDelta += (s, value) =>
             {
@@ -309,7 +309,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //Clarity
         private void ConstructClarity1()
         {
-            this.ClarityPicker.Unit = null;
+            this.ClarityPicker.Unit = "%";
             this.ClarityPicker.Minimum = -100;
             this.ClarityPicker.Maximum = 100;
             this.ClarityPicker.ValueChanged += (s, value) =>
@@ -331,9 +331,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructClarity2()
         {
+            this.ClaritySlider.SliderBrush = this.ClarityBrush;
             this.ClaritySlider.Minimum = -1.0d;
             this.ClaritySlider.Maximum = 1.0d;
-            this.ClaritySlider.SliderBrush = this.ClarityBrush;
             this.ClaritySlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<HighlightsAndShadowsAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheClarity());
             this.ClaritySlider.ValueChangeDelta += (s, value) =>
             {
@@ -363,7 +363,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //MaskBlurAmount
         private void ConstructMaskBlurAmount1()
         {
-            this.MaskBlurAmountPicker.Unit = null;
+            this.MaskBlurAmountPicker.Unit = "%";
             this.MaskBlurAmountPicker.Minimum = 0;
             this.MaskBlurAmountPicker.Maximum = 1000;
             this.MaskBlurAmountPicker.ValueChanged += (s, value) =>
@@ -385,9 +385,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructMaskBlurAmount2()
         {
+            this.MaskBlurAmountSlider.SliderBrush = this.MaskBlurAmountBrush;
             this.MaskBlurAmountSlider.Minimum = 0.0d;
             this.MaskBlurAmountSlider.Maximum = 10.0d;
-            this.MaskBlurAmountSlider.SliderBrush = this.MaskBlurAmountBrush;
             this.MaskBlurAmountSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<HighlightsAndShadowsAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheMaskBlurAmount());
             this.MaskBlurAmountSlider.ValueChangeDelta += (s, value) =>
             {

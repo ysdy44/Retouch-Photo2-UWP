@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //BlueOffset
         private void ConstructBlueOffset1()
         {
-            this.BlueOffsetPicker.Unit = null;
+            this.BlueOffsetPicker.Unit = "%";
             this.BlueOffsetPicker.Minimum = 0;
             this.BlueOffsetPicker.Maximum = 100;
             this.BlueOffsetPicker.ValueChanged += (s, value) =>
@@ -134,9 +134,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructBlueOffset2()
         {
+            this.BlueOffsetSlider.SliderBrush = this.BlueLeftBrush;
             this.BlueOffsetSlider.Minimum = 0.0d;
             this.BlueOffsetSlider.Maximum = 1.0d;
-            this.BlueOffsetSlider.SliderBrush = this.BlueLeftBrush;
             this.BlueOffsetSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheBlueOffset());
             this.BlueOffsetSlider.ValueChangeDelta += (s, value) =>
             {
@@ -166,7 +166,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //BlueExponent
         private void ConstructBlueExponent1()
         {
-            this.BlueExponentPicker.Unit = null;
+            this.BlueExponentPicker.Unit = "%";
             this.BlueExponentPicker.Minimum = 0;
             this.BlueExponentPicker.Maximum = 100;
             this.BlueExponentPicker.ValueChanged += (s, value) =>
@@ -188,9 +188,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructBlueExponent2()
         {
+            this.BlueExponentSlider.SliderBrush = this.BlueLeftBrush;
             this.BlueExponentSlider.Minimum = 0.0d;
             this.BlueExponentSlider.Maximum = 1.0d;
-            this.BlueExponentSlider.SliderBrush = this.BlueLeftBrush;
             this.BlueExponentSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheBlueExponent());
             this.BlueExponentSlider.ValueChangeDelta += (s, value) =>
             {
@@ -220,7 +220,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //BlueAmplitude
         private void ConstructBlueAmplitude1()
         {
-            this.BlueAmplitudePicker.Unit = null;
+            this.BlueAmplitudePicker.Unit = "%";
             this.BlueAmplitudePicker.Minimum = 0;
             this.BlueAmplitudePicker.Maximum = 100;
             this.BlueAmplitudePicker.ValueChanged += (s, value) =>
@@ -242,9 +242,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructBlueAmplitude2()
         {
+            this.BlueAmplitudeSlider.SliderBrush = this.BlueLeftBrush;
             this.BlueAmplitudeSlider.Minimum = 0.0d;
             this.BlueAmplitudeSlider.Maximum = 1.0d;
-            this.BlueAmplitudeSlider.SliderBrush = this.BlueLeftBrush;
             this.BlueAmplitudeSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheBlueAmplitude());
             this.BlueAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {

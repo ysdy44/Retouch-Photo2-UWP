@@ -118,7 +118,7 @@ namespace Retouch_Photo2.Tools
 
             //Transformer
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            drawingSession.DrawBoundNodes(this.Transformer, matrix, this.ViewModel.AccentColor, this.SelectionViewModel.DisabledRadian);
+            drawingSession.DrawBoundNodes(this.Transformer, matrix, this.ViewModel.AccentColor);
 
             //Snapping
             if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);

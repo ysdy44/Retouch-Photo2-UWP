@@ -123,7 +123,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //Saturation
         private void ConstructSaturation1()
         {
-            this.SaturationPicker.Unit = null;
+            this.SaturationPicker.Unit = "%";
             this.SaturationPicker.Minimum = 0;
             this.SaturationPicker.Maximum = 200;
             this.SaturationPicker.ValueChanged += (s, value) =>
@@ -145,9 +145,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructSaturation2()
         {
+            this.SaturationSlider.SliderBrush = this.SaturationBrush;
             this.SaturationSlider.Minimum = 0.0d;
             this.SaturationSlider.Maximum = 2.0d;
-            this.SaturationSlider.SliderBrush = this.SaturationBrush;
             this.SaturationSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<SaturationAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheSaturation());
             this.SaturationSlider.ValueChangeDelta += (s, value) =>
             {

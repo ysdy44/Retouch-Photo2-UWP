@@ -19,15 +19,15 @@
             <GradientStop Offset="1" Color="White"/>
         </LinearGradientBrush>        
     </Page.Resources>
-    
 
-    <StackPanel>
+
+    <StackPanel Padding="2,0">
 
         <!--Exposure-->
         <RelativePanel>
             <TextBlock x:Name="ExposureTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="ExposurePicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+                           RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
         <hsvColorPickers:TouchSlider x:Name="ExposureSlider"/>
 

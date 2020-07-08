@@ -1,5 +1,4 @@
-﻿using System;
-using Windows.Foundation;
+﻿using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -11,63 +10,37 @@ namespace Retouch_Photo2.Elements
     /// </summary>
     public abstract partial class Expander : UserControl
     {
-          
-        //@Delegate
-        /// <summary> 
-        /// Occurs when the position changes, Move the menu to top.
-        /// </summary>
-        public void Move()
+
+        //@Content
+        public string Title { get => this.TitleTextBlock.Text; protected set => this.TitleTextBlock.Text = value; }
+        public UIElement MainPage { get => this.MainPageBorder.Child; set => this.MainPageBorder.Child = value; }
+        public UIElement SecondPage { get => this.SecondPageBorder.Child; set => this.SecondPageBorder.Child = value; }
+        public bool IsSecondPage
         {
-            if (Expander.OverlayCanvas.Children.Contains(this))
+            get => this._vsIsSecondPage;
+            set
             {
-                int index = Expander.OverlayCanvas.Children.IndexOf(this);
-                int count = Expander.OverlayCanvas.Children.Count;
-                Expander.OverlayCanvas.Children.Move((uint)index, (uint)count - 1); ;
+                if (this._vsIsSecondPage != value)
+                {
+                    if (value) this.TitleShowStoryboard.Begin();//Storyboard
+                    else this.TitleFadeStoryboard.Begin();//Storyboard
+
+                    this.HeightRectangle.VerticalAlignment = VerticalAlignment.Top;
+                    if (value) this.HeightStoryboardMainToSecond.Begin();//Storyboard
+                    else this.HeightStoryboardSecondToMain.Begin();//Storyboard
+                }
+
+                this._vsIsSecondPage = value;
+                this.VisualState = this.VisualState; //State
             }
         }
-        /// <summary>
-        /// Occurs when the flyout opened, Disable all menus, except the current menu.
-        /// </summary>
-        public void Opened()
+        public Visibility ResetButtonVisibility { get => this.ResetButton.Visibility; set => this.ResetButton.Visibility = value; }
+        public abstract void Reset();
+        public void Back()
         {
-            foreach (UIElement menu in Expander.OverlayCanvas.Children)
-            {
-                menu.IsHitTestVisible = false;
-            }
-            this.IsHitTestVisible = true;
-
-            this.Move();
-            this.Visibility = Visibility.Visible;
-            Expander.IsOverlayDismiss = true;
+            this.Title = this.Button.Title;
+            this.IsSecondPage = false;
         }
-
-        /// <summary> 
-        /// Occurs when the flyout closed, Enable all menus.     
-        /// </summary>
-        public void Closed()
-        {
-            foreach (UIElement menu in Expander.OverlayCanvas.Children)
-            {
-                menu.IsHitTestVisible = true;
-            }
-
-            this.Visibility = Visibility.Collapsed;
-            Expander.IsOverlayDismiss = false;
-        }
-
-        /// <summary>
-        /// Occurs when the flyout overlaid, Enable all menus.  
-        /// </summary>
-        public void Overlaid()
-        {
-            foreach (UIElement menu in Expander.OverlayCanvas.Children)
-            {
-                menu.IsHitTestVisible = true;
-            }
-
-            Expander.IsOverlayDismiss = false;
-        }
-
 
 
         //@Content
@@ -115,10 +88,17 @@ namespace Retouch_Photo2.Elements
             }
         }
         public FlyoutPlacementMode PlacementMode { get; set; } = FlyoutPlacementMode.Bottom;
+        public FrameworkElement Self => this;
         public abstract IExpanderButton Button { get; }
 
 
+        //@Content
         bool _lockLoad = false;
+        double _postionX;
+        double _postionY;
+        public double PostionX { get => Canvas.GetLeft(this); set => Canvas.SetLeft(this, value); }
+        public double PostionY { get => Canvas.GetTop(this); set => Canvas.SetTop(this, value); }
+
         public void CalculatePostion(FrameworkElement placementTarget, FlyoutPlacementMode placementMode)
         {
             //@Debug: 

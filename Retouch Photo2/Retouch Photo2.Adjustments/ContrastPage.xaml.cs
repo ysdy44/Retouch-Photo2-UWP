@@ -122,7 +122,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //Contrast
         private void ConstructContrast1()
         {
-            this.ContrastPicker.Unit = null;
+            this.ContrastPicker.Unit = "%";
             this.ContrastPicker.Minimum = -100;
             this.ContrastPicker.Maximum = 100;
             this.ContrastPicker.ValueChanged += (s, value) =>

@@ -23,15 +23,15 @@
     </Page.Resources>
 
 
-    <StackPanel>
+    <StackPanel Padding="2,0">
 
         <!--Saturation-->
         <RelativePanel>
             <TextBlock x:Name="SaturationTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="SaturationPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+                           RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="SaturationSlider" Margin="2,0"/>
+        <hsvColorPickers:TouchSlider x:Name="SaturationSlider"/>
 
     </StackPanel>
 </Page>

@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //AlphaOffset
         private void ConstructAlphaOffset1()
         {
-            this.AlphaOffsetPicker.Unit = null;
+            this.AlphaOffsetPicker.Unit = "%";
             this.AlphaOffsetPicker.Minimum = 0;
             this.AlphaOffsetPicker.Maximum = 100;
             this.AlphaOffsetPicker.ValueChanged += (s, value) =>
@@ -134,9 +134,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructAlphaOffset2()
         {
+            this.AlphaOffsetSlider.SliderBrush = this.AlphaLeftBrush;
             this.AlphaOffsetSlider.Minimum = 0.0d;
             this.AlphaOffsetSlider.Maximum = 1.0d;
-            this.AlphaOffsetSlider.SliderBrush = this.AlphaLeftBrush;
             this.AlphaOffsetSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheAlphaOffset());
             this.AlphaOffsetSlider.ValueChangeDelta += (s, value) =>
             {
@@ -166,7 +166,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //AlphaExponent
         private void ConstructAlphaExponent1()
         {
-            this.AlphaExponentPicker.Unit = null;
+            this.AlphaExponentPicker.Unit = "%";
             this.AlphaExponentPicker.Minimum = 0;
             this.AlphaExponentPicker.Maximum = 100;
             this.AlphaExponentPicker.ValueChanged += (s, value) =>
@@ -188,9 +188,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructAlphaExponent2()
         {
+            this.AlphaExponentSlider.SliderBrush = this.AlphaLeftBrush;
             this.AlphaExponentSlider.Minimum = 0.0d;
             this.AlphaExponentSlider.Maximum = 1.0d;
-            this.AlphaExponentSlider.SliderBrush = this.AlphaLeftBrush;
             this.AlphaExponentSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheAlphaExponent());
             this.AlphaExponentSlider.ValueChangeDelta += (s, value) =>
             {
@@ -220,7 +220,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //AlphaAmplitude
         private void ConstructAlphaAmplitude1()
         {
-            this.AlphaAmplitudePicker.Unit = null;
+            this.AlphaAmplitudePicker.Unit = "%";
             this.AlphaAmplitudePicker.Minimum = 0;
             this.AlphaAmplitudePicker.Maximum = 100;
             this.AlphaAmplitudePicker.ValueChanged += (s, value) =>
@@ -242,9 +242,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructAlphaAmplitude2()
         {
+            this.AlphaAmplitudeSlider.SliderBrush = this.AlphaLeftBrush;
             this.AlphaAmplitudeSlider.Minimum = 0.0d;
             this.AlphaAmplitudeSlider.Maximum = 1.0d;
-            this.AlphaAmplitudeSlider.SliderBrush = this.AlphaLeftBrush;
             this.AlphaAmplitudeSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheAlphaAmplitude());
             this.AlphaAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {

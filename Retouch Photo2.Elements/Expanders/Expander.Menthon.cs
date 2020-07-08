@@ -1,5 +1,4 @@
-﻿using Windows.Foundation;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
@@ -10,6 +9,64 @@ namespace Retouch_Photo2.Elements
     /// </summary>
     public abstract partial class Expander : UserControl
     {
+        
+        /// <summary> 
+        /// Occurs when the position changes, Move the menu to top.
+        /// </summary>
+        private void Move()
+        {
+            if (Expander.OverlayCanvas.Children.Contains(this))
+            {
+                int index = Expander.OverlayCanvas.Children.IndexOf(this);
+                int count = Expander.OverlayCanvas.Children.Count;
+                Expander.OverlayCanvas.Children.Move((uint)index, (uint)count - 1); ;
+            }
+        }
+
+        /// <summary>
+        /// Occurs when the flyout opened, Disable all menus, except the current menu.
+        /// </summary>
+        private void Opened()
+        {
+            foreach (UIElement menu in Expander.OverlayCanvas.Children)
+            {
+                menu.IsHitTestVisible = false;
+            }
+            this.IsHitTestVisible = true;
+
+            this.Move();
+            this.Visibility = Visibility.Visible;
+            Expander.IsOverlayDismiss = true;
+        }
+
+        /// <summary> 
+        /// Occurs when the flyout closed, Enable all menus.     
+        /// </summary>
+        private void Closed()
+        {
+            foreach (UIElement menu in Expander.OverlayCanvas.Children)
+            {
+                menu.IsHitTestVisible = true;
+            }
+
+            this.Visibility = Visibility.Collapsed;
+            Expander.IsOverlayDismiss = false;
+        }
+
+        /// <summary>
+        /// Occurs when the flyout overlaid, Enable all menus.  
+        /// </summary>
+        private void Overlaid()
+        {
+            foreach (UIElement menu in Expander.OverlayCanvas.Children)
+            {
+                menu.IsHitTestVisible = true;
+            }
+
+            Expander.IsOverlayDismiss = false;
+        }
+               
+
 
         /// <summary>
         /// Gets flyout-postion X on canvas.
@@ -86,29 +143,6 @@ namespace Retouch_Photo2.Elements
 
             return postionY;
         }
-
-
-        private ExpanderState GetState(ExpanderState state)
-        {
-            switch (state)
-            {
-                case ExpanderState.Overlay: return ExpanderState.OverlayNotExpanded;
-                case ExpanderState.OverlayNotExpanded: return ExpanderState.Overlay;
-            }
-            return ExpanderState.Overlay;
-        }
-        private ExpanderState GetButtonState(ExpanderState state)
-        {
-            switch (state)
-            {
-                case ExpanderState.Hide: return ExpanderState.FlyoutShow;
-                case ExpanderState.FlyoutShow: return ExpanderState.Hide;
-
-                case ExpanderState.Overlay: return ExpanderState.OverlayNotExpanded;
-                case ExpanderState.OverlayNotExpanded: return ExpanderState.Overlay;
-            }
-            return ExpanderState.FlyoutShow;
-        }
-
+        
     }
 }

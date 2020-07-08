@@ -34,28 +34,28 @@
 
     </Page.Resources>
 
-    
-    <StackPanel>
+
+    <StackPanel Padding="2,0">
 
         <!--Amount-->
         <RelativePanel>
             <TextBlock x:Name="AmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="AmountPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+                           RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="AmountSlider" Margin="2,0"/>
+        <hsvColorPickers:TouchSlider x:Name="AmountSlider"/>
 
         <!--Curve-->
         <RelativePanel>
             <TextBlock x:Name="CurveTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="CurvePicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+                           RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="CurveSlider" Margin="2,0"/>
+        <hsvColorPickers:TouchSlider x:Name="CurveSlider"/>
 
         <!--Color-->
         <TextBlock x:Name="ColorTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <Border x:Name="ColorBorder" Margin="2,0" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{StaticResource AppText}" Style="{StaticResource AppCircleBorderStyle}">
+        <Border x:Name="ColorBorder" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{StaticResource AppText}" Style="{StaticResource AppCircleBorderStyle}">
             <Border.Background>
                 <SolidColorBrush x:Name="SolidColorBrush" Color="Black"/>
             </Border.Background>

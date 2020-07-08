@@ -110,9 +110,6 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Enabled. </summary>
         Enabled,
 
-        /// <summary> Disabled radian. </summary>
-        EnabledWithoutRadian,
-
         /// <summary> Disabled. </summary>
         Disabled
     }
@@ -145,7 +142,6 @@ namespace Retouch_Photo2.Menus.Models
 
         //@VisualState
         bool _vsDisabledTool;
-        bool _vsDisabledRadian;
         Transformer _vsTransformer;
         ListViewSelectionMode _vsMode;
         /// <summary> 
@@ -162,10 +158,7 @@ namespace Retouch_Photo2.Menus.Models
                     case ListViewSelectionMode.None: return TransformerMainPageState.Disabled;
                     case ListViewSelectionMode.Single:
                     case ListViewSelectionMode.Multiple:
-                        {
-                            if (this._vsDisabledRadian) return TransformerMainPageState.EnabledWithoutRadian;
-                            else return TransformerMainPageState.Enabled;
-                        }
+                         return TransformerMainPageState.Enabled;
                 }
 
                 return TransformerMainPageState.Enabled;
@@ -277,25 +270,6 @@ namespace Retouch_Photo2.Menus.Models
         }));
 
 
-        /// <summary> Gets or sets <see cref = "TransformerMainPage" /> is disable rotate radian? Defult **false**. </summary>
-        public bool DisabledRadian
-        {
-            get { return (bool)GetValue(DisabledRadianProperty); }
-            set { SetValue(DisabledRadianProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "TransformerMainPage.DisabledRadian" /> dependency property. </summary>
-        public static readonly DependencyProperty DisabledRadianProperty = DependencyProperty.Register(nameof(DisabledRadian), typeof(bool), typeof(TransformerMainPage), new PropertyMetadata(false, (sender, e) =>
-        {
-            TransformerMainPage con = (TransformerMainPage)sender;
-
-            if (e.NewValue is bool value)
-            {
-                con._vsDisabledRadian = value;
-                con.VisualState = con.VisualState;//State
-            }
-        }));
-
-
         /// <summary> Gets or sets <see cref = "TransformerMainPage" />'s IsOpen. </summary>
         public bool IsOpen
         {
@@ -321,11 +295,6 @@ namespace Retouch_Photo2.Menus.Models
             (
                  path: nameof(this.SelectionViewModel.SelectionMode),
                  dp: TransformerMainPage.ModeProperty
-            );
-            this.ConstructDataContext
-            (
-                 path: nameof(this.SelectionViewModel.DisabledRadian),
-                 dp: TransformerMainPage.DisabledRadianProperty
             );
             this.ConstructDataContext
             (
@@ -448,53 +417,6 @@ namespace Retouch_Photo2.Menus.Models
 
                             this.IndicatorControl.Mode = this.IndicatorMode;
                             this.PositionRemoteButton.IsEnabled = true;
-                        }
-                    }
-                    break;
-
-                case TransformerMainPageState.EnabledWithoutRadian:
-                    {
-                        //Value
-                        {
-                            Vector2 horizontal = this._vsTransformer.Horizontal;
-                            Vector2 vertical = this._vsTransformer.Vertical;
-
-                            //Radians Skew
-                            this.RPicker.Value = 0;
-                            this.SPicker.Value = 0;
-
-                            //Width Height
-                            //float width = horizontal.Length();
-                            //float height = vertical.Length();
-                            //@Release
-                            double width = Math.Sqrt(horizontal.X * horizontal.X + horizontal.Y * horizontal.Y);
-                            double height = Math.Sqrt(vertical.X * vertical.X + vertical.Y * vertical.Y);
-                            this.WPicker.Value = (int)width;
-                            this.HPicker.Value = (int)height;
-
-                            //X Y
-                            Vector2 vector = this._vsTransformer.GetIndicatorVector(this.IndicatorMode);
-                            this.XPicker.Value = (int)vector.X;
-                            this.YPicker.Value = (int)vector.Y;
-
-                            //Indicator
-                            this.IndicatorControl.Radians = 0;
-                        }
-                        //IsEnabled
-                        {
-                            this.RPicker.IsEnabled = false;
-                            this.SPicker.IsEnabled = false;
-
-                            this.WPicker.IsEnabled = true;
-                            this.HPicker.IsEnabled = true;
-
-                            this.XPicker.IsEnabled = true;
-                            this.YPicker.IsEnabled = true;
-
-                            this.IndicatorControl.Mode = this.IndicatorMode;
-                            this.PositionRemoteButton.IsEnabled = true;
-                            this.RatioToggleControl.IsEnabled = true;
-                            this.StepFrequencyButton.IsEnabled = true;
                         }
                     }
                     break;

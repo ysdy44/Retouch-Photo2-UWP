@@ -157,6 +157,7 @@ namespace Retouch_Photo2.Effects.Models
         //Radius
         private void ConstructRadius1()
         {
+            this.RadiusPicker.Unit = null;
             this.RadiusPicker.Minimum = 0;
             this.RadiusPicker.Maximum = 100;
             this.RadiusPicker.ValueChanged += (s, value) =>

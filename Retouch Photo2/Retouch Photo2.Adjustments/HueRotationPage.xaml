@@ -30,15 +30,15 @@
     </Page.Resources>
 
 
-    <StackPanel>
+    <StackPanel Padding="2,0">
 
         <!--Angle-->
         <RelativePanel>
             <TextBlock x:Name="AngleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="AnglePicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+                           RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="AngleSlider" Margin="2,0"/>
+        <hsvColorPickers:TouchSlider x:Name="AngleSlider"/>
 
     </StackPanel>
 </Page>

@@ -124,7 +124,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //Exposure
         private void ConstructExposure1()
         {
-            this.ExposurePicker.Unit = null;
+            this.ExposurePicker.Unit = "%";
             this.ExposurePicker.Minimum = -200;
             this.ExposurePicker.Maximum = 200;
             this.ExposurePicker.ValueChanged += (s, value) =>
@@ -145,9 +145,9 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
         private void ConstructExposure2()
         {
+            this.ExposureSlider.SliderBrush = this.ExposureBrush;
             this.ExposureSlider.Minimum = -2.0d;
             this.ExposureSlider.Maximum = 2.0d;
-            this.ExposureSlider.SliderBrush = this.ExposureBrush;
             this.ExposureSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<ExposureAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheExposure());
             this.ExposureSlider.ValueChangeDelta += (s, value) =>
             {

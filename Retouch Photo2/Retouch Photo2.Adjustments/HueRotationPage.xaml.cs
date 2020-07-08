@@ -146,9 +146,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructHueRotation2()
         {
+            this.AngleSlider.SliderBrush = this.AngleBrush;
             this.AngleSlider.Minimum = 0.0d;
             this.AngleSlider.Maximum = FanKit.Math.PiTwice;
-            this.AngleSlider.SliderBrush = this.AngleBrush;
             this.AngleSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<HueRotationAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheAngle());
             this.AngleSlider.ValueChangeDelta += (s, value) =>
             {

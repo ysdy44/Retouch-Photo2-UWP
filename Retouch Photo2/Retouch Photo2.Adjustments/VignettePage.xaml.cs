@@ -193,7 +193,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //Amount
         private void ConstructAmount1()
         {
-            this.AmountPicker.Unit = null;
+            this.AmountPicker.Unit = "%";
             this.AmountPicker.Minimum = 0;
             this.AmountPicker.Maximum = 100;
             this.AmountPicker.ValueChanged += (s, value) =>
@@ -215,9 +215,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructAmount2()
         {
+            this.AmountSlider.SliderBrush = this.AmountBrush;
             this.AmountSlider.Minimum = 0.0d;
             this.AmountSlider.Maximum = 1.0d;
-            this.AmountSlider.SliderBrush = this.AmountBrush;
             this.AmountSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<VignetteAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheAmount());
             this.AmountSlider.ValueChangeDelta += (s, value) =>
             {
@@ -247,7 +247,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //Curve
         private void ConstructCurve1()
         {
-            this.CurvePicker.Unit = null;
+            this.CurvePicker.Unit = "%";
             this.CurvePicker.Minimum = 0;
             this.CurvePicker.Maximum = 100;
             this.CurvePicker.ValueChanged += (s, value) =>
@@ -269,9 +269,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructCurve2()
         {
+            this.CurveSlider.SliderBrush = this.CurveBrush;
             this.CurveSlider.Minimum = 0.0d;
             this.CurveSlider.Maximum = 1.0d;
-            this.CurveSlider.SliderBrush = this.CurveBrush;
             this.CurveSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<VignetteAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheCurve());
             this.CurveSlider.ValueChangeDelta += (s, value) =>
             {

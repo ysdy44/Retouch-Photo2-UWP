@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Elements
         //@VisualState
         bool _vsIsEnabled = true;
         ClickMode _vsClickMode;
-        bool _vsIsTouch;
+        bool _vsIsManipulationStarted;
         /// <summary> 
         /// Represents the visual appearance of UI elements in a specific state.
         /// </summary>
@@ -34,16 +34,14 @@ namespace Retouch_Photo2.Elements
             {
                 if (this._vsIsEnabled == false) return this.Disabled;
 
-                if (this._vsIsTouch == false)
+                if (this._vsIsManipulationStarted) return this.Pressed;
+
+                switch (this._vsClickMode)
                 {
-                    switch (this._vsClickMode)
-                    {
-                        case ClickMode.Release: return this.Normal;
-                        case ClickMode.Hover: return this.PointerOver;
-                        case ClickMode.Press: return this.Pressed;
-                    }
+                    case ClickMode.Release: return this.Normal;
+                    case ClickMode.Hover: return this.PointerOver;
+                    case ClickMode.Press: return this.Pressed;
                 }
-                else return this.Pressed;
 
                 return this.Normal;
             }
@@ -98,6 +96,23 @@ namespace Retouch_Photo2.Elements
 
                 Canvas.SetTop(this.Thumb2, heightHalf - 10);
                 Canvas.SetTop(this.Thumb1, heightHalf - 9);
+            };
+
+
+            //Manipulation
+            //htis.RootGrid.ManipulationMode = ManipulationModes.All;
+            this.RootGrid.ManipulationStarted += (sender, e) =>
+            {
+                this._vsIsManipulationStarted = true;
+                this.VisualState = this.VisualState;//VisualState
+            };
+            this.RootGrid.ManipulationDelta += (sender, e) =>
+            {
+            };
+            this.RootGrid.ManipulationCompleted += (sender, e) =>
+            {
+                this._vsIsManipulationStarted = false;
+                this.VisualState = this.VisualState;//VisualState
             };
         }
 

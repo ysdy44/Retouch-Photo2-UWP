@@ -58,7 +58,6 @@ namespace Retouch_Photo2.ViewModels
             this.SelectionMode = ListViewSelectionMode.None;
             
             this.Transformer = new Transformer();
-            this.DisabledRadian = false;
 
             this.SelectionLayerage = null;
             this.SelectionLayerages = null;
@@ -110,7 +109,6 @@ namespace Retouch_Photo2.ViewModels
             this.SelectionMode = ListViewSelectionMode.Single;
 
             this.Transformer = layerage.GetActualTransformer();
-            this.DisabledRadian = false;
 
             this.SelectionLayerage = layerage;
             this.SelectionLayerages = null;
@@ -168,7 +166,6 @@ namespace Retouch_Photo2.ViewModels
             //TransformerBorder
             TransformerBorder border = new TransformerBorder(layerages);
             this.Transformer = border.ToTransformer();
-            this.DisabledRadian = false;
 
             //////////////////////////
 

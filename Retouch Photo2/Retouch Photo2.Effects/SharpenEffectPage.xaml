@@ -13,16 +13,16 @@
     mc:Ignorable="d"              
     >
 
-    <StackPanel>
+    <StackPanel Padding="2,0">
 
         <!--Amount-->
         <RelativePanel>
             <TextBlock x:Name="AmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="AmountPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+                           RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
         <Border Height="{StaticResource AppCircleHeight}">
-            <elements:SliderPicker x:Name="AmountSlider" Margin="2,0"/>
+            <elements:SliderPicker x:Name="AmountSlider"/>
         </Border>
 
     </StackPanel>    

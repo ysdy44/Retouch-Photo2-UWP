@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //RedOffset
         private void ConstructRedOffset1()
         {
-            this.RedOffsetPicker.Unit = null;
+            this.RedOffsetPicker.Unit = "%";
             this.RedOffsetPicker.Minimum = 0;
             this.RedOffsetPicker.Maximum = 100;
             this.RedOffsetPicker.ValueChanged += (s, value) =>
@@ -134,9 +134,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructRedOffset2()
         {
+            this.RedOffsetSlider.SliderBrush = this.RedLeftBrush;
             this.RedOffsetSlider.Minimum = 0.0d;
             this.RedOffsetSlider.Maximum = 1.0d;
-            this.RedOffsetSlider.SliderBrush = this.RedLeftBrush;
             this.RedOffsetSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheRedOffset());
             this.RedOffsetSlider.ValueChangeDelta += (s, value) =>
             {
@@ -166,7 +166,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //RedExponent
         private void ConstructRedExponent1()
         {
-            this.RedExponentPicker.Unit = null;
+            this.RedExponentPicker.Unit = "%";
             this.RedExponentPicker.Minimum = 0;
             this.RedExponentPicker.Maximum = 100;
             this.RedExponentPicker.ValueChanged += (s, value) =>
@@ -188,9 +188,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructRedExponent2()
         {
+            this.RedExponentSlider.SliderBrush = this.RedLeftBrush;
             this.RedExponentSlider.Minimum = 0.0d;
             this.RedExponentSlider.Maximum = 1.0d;
-            this.RedExponentSlider.SliderBrush = this.RedLeftBrush;
             this.RedExponentSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheRedExponent());
             this.RedExponentSlider.ValueChangeDelta += (s, value) =>
             {
@@ -220,7 +220,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //RedAmplitude
         private void ConstructRedAmplitude1()
         {
-            this.RedAmplitudePicker.Unit = null;
+            this.RedAmplitudePicker.Unit = "%";
             this.RedAmplitudePicker.Minimum = 0;
             this.RedAmplitudePicker.Maximum = 100;
             this.RedAmplitudePicker.ValueChanged += (s, value) =>
@@ -242,9 +242,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructRedAmplitude2()
         {
+            this.RedAmplitudeSlider.SliderBrush = this.RedLeftBrush;
             this.RedAmplitudeSlider.Minimum = 0.0d;
             this.RedAmplitudeSlider.Maximum = 1.0d;
-            this.RedAmplitudeSlider.SliderBrush = this.RedLeftBrush;
             this.RedAmplitudeSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheRedAmplitude());
             this.RedAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {

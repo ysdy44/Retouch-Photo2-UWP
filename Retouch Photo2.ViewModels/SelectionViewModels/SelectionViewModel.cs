@@ -92,20 +92,10 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private Transformer transformer;
-        public Transformer StartingTransformer { get; private set; } 
+        /// <summary> The cache of <see cref="ViewModel.Transformer"/>. </summary>
+        public Transformer StartingTransformer { get; private set; }
+        /// <summary> Cache <see cref="ViewModel.Transformer"/>. </summary>
         public void CacheTransformer() => this.StartingTransformer = this.Transformer;
-
-        /// <summary> Is disable rotate radian? Defult **false**. </summary>
-        public bool DisabledRadian
-        {
-            get => this.disabledRadian;
-            set
-            {
-                this.disabledRadian = value;
-                this.OnPropertyChanged(nameof(this.DisabledRadian));//Notify 
-            }
-        }
-        private bool disabledRadian;
-        
+                
     }
 }

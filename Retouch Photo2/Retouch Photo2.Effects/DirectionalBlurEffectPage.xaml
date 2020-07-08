@@ -14,16 +14,16 @@
     >
 
 
-    <StackPanel>
+    <StackPanel Padding="2,0">
 
         <!--Radius-->
         <RelativePanel>
             <TextBlock x:Name="RadiusTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="RadiusPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+                           RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
         <Border Height="{StaticResource AppCircleHeight}">
-            <elements:SliderPicker x:Name="RadiusSlider" Margin="2,0"/>
+            <elements:SliderPicker x:Name="RadiusSlider"/>
         </Border>        
 
         
@@ -31,7 +31,7 @@
         <RelativePanel>
             <TextBlock x:Name="AngleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="AnglePicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+                           RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
         <elements:RadiansPicker x:Name="AnglePicker2"/>
 

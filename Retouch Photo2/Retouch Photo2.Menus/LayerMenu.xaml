@@ -12,7 +12,7 @@
     d:DesignHeight="400"
     >
 
-    <StackPanel MinHeight="165" Padding="1,2">
+    <StackPanel MinHeight="165" Padding="2,2">
 
         <!--Name-->
         <TextBlock x:Name="NameTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
@@ -26,7 +26,7 @@
         <RelativePanel>
             <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="OpacityPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"
+                           RelativePanel.AlignRightWithPanel="True"
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                            Value="{x:Bind OpacityToNumberConverter(SelectionViewModel.Opacity), Mode=OneWay}"/>
         </RelativePanel>

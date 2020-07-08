@@ -12,7 +12,7 @@
     d:DesignHeight="400"
     >
 
-    <StackPanel MinHeight="165" Padding="1,2">
+    <StackPanel MinHeight="165" Padding="2,2">
 
         <!--Dash-->
         <TextBlock x:Name="DashTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
@@ -24,7 +24,7 @@
         <RelativePanel>
             <TextBlock x:Name="WidthTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="WidthPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"
+                           RelativePanel.AlignRightWithPanel="True"
                            Value="{x:Bind StrokeWidthToNumberConverter(SelectionViewModel.StrokeWidth), Mode=OneWay}"/>
         </RelativePanel>
         <Border Height="{StaticResource AppCircleHeight}">
@@ -49,7 +49,7 @@
         <RelativePanel>
             <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="OffsetPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"
+                           RelativePanel.AlignRightWithPanel="True"
                            Value="{x:Bind StyleOffsetToNumberConverter(SelectionViewModel.StrokeStyleOffset), Mode=OneWay}"/>
         </RelativePanel>
         <Border Height="{StaticResource AppCircleHeight}">
