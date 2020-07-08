@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using HSVColorPickers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
@@ -235,7 +236,7 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.None: break;
 
                 case BrushType.Color:
-                    DrawPage.StrokeColorShowAt(this);
+                    DrawPage.StrokeColorShowAt(this.ShowControl);
                     break;
 
                 case BrushType.LinearGradient:
@@ -257,7 +258,7 @@ namespace Retouch_Photo2.Tools.Models
             LayersPropertyHistory history = new LayersPropertyHistory("Set stroke");
 
             //Selection
-            this.Stroke.Stops = (CanvasGradientStop[])array.Clone();
+            this.Stroke.Stops = array.CloneArray();
             this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -277,7 +278,7 @@ namespace Retouch_Photo2.Tools.Models
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
                 layerage.RefactoringParentsIconRender();
-                layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
+                layer.Style.Stroke.Stops = array.CloneArray();
 
                 this.SelectionViewModel.StandStyleLayerage = layerage;
             });
@@ -303,7 +304,7 @@ namespace Retouch_Photo2.Tools.Models
         private void StrokeStopsChangeDelta(CanvasGradientStop[] array)
         {
             //Selection
-            this.Stroke.Stops = (CanvasGradientStop[])array.Clone();
+            this.Stroke.Stops = array.CloneArray();
             this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -311,20 +312,20 @@ namespace Retouch_Photo2.Tools.Models
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 layerage.RefactoringParentsRender();
-                layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
+                layer.Style.Stroke.Stops = array.CloneArray();
             });
 
             this.ViewModel.Invalidate();//Invalidate
         }
         private void StrokeStopsChangeCompleted(CanvasGradientStop[] array)
         {
-            this.Stroke.Stops = (CanvasGradientStop[])array.Clone();
+            this.Stroke.Stops = array.CloneArray();
 
             //History
             LayersPropertyHistory history = new LayersPropertyHistory("Set stroke");
 
             //Selection
-            this.Stroke.Stops = (CanvasGradientStop[])array.Clone();
+            this.Stroke.Stops = array.CloneArray();
             this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -344,7 +345,7 @@ namespace Retouch_Photo2.Tools.Models
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
                 layerage.RefactoringParentsIconRender();
-                layer.Style.Stroke.Stops = (CanvasGradientStop[])array.Clone();
+                layer.Style.Stroke.Stops = array.CloneArray();
 
                 this.SelectionViewModel.StandStyleLayerage = layerage;
             });

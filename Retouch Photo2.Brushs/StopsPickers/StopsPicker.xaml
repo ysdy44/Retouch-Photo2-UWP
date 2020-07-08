@@ -27,8 +27,8 @@
         <!--CanvasOperator-->
         <transformers:CanvasOperator x:Name="CanvasOperator" DestinationControl="{x:Bind CanvasControl}"/>
         <!--Flyout-->
-        <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:ColorPicker2 x:Name="ColorPicker"/>
+        <Flyout x:Name="_ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:ColorPicker2 x:Name="_ColorPicker"/>
         </Flyout>
     </UserControl.Resources>
 

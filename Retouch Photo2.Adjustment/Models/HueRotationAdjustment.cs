@@ -12,13 +12,14 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
+        public static string GenericText = "HueRotation";
         public static IAdjustmentPage GenericPage;// = new HueRotationPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.HueRotation;
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = HueRotationAdjustment.GenericPage;
-        public string Text => HueRotationAdjustment.GenericPage.Text;
+        public string Text => HueRotationAdjustment.GenericText;
 
 
         /// <summary> Angle to rotate the hue, in radians. Default value 0, range 0 to 2*pi. </summary>

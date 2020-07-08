@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Tools.Models
             this.VerticalStepPicker.Unit = null;
             this.VerticalStepPicker.Minimum = 5;
             this.VerticalStepPicker.Maximum = 100;
-            this.VerticalStepPicker.ValueChange += (sender, value) =>
+            this.VerticalStepPicker.ValueChanged += (sender, value) =>
             {
                 float verticalStep = (float)value;
                 this.SelectionViewModel.PatternGridVerticalStep = verticalStep;

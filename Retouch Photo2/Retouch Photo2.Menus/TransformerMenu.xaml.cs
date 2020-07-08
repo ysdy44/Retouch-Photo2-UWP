@@ -597,7 +597,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.WPicker.Minimum = 1;
             this.WPicker.Maximum = int.MaxValue;
-            this.WPicker.ValueChange += (sender, value) =>
+            this.WPicker.ValueChanged += (sender, value) =>
             {
                 Transformer transformer = this.SelectionTransformer;
                 Matrix3x2 matrix = transformer.TransformWidth(value, this.IndicatorMode, this.IsRatio);
@@ -608,7 +608,7 @@ namespace Retouch_Photo2.Menus.Models
             
             this.HPicker.Minimum = 1;
             this.HPicker.Maximum = int.MaxValue;
-            this.HPicker.ValueChange += (s, value) =>
+            this.HPicker.ValueChanged += (s, value) =>
             {
                 Transformer transformer = this.SelectionTransformer;
                 Matrix3x2 matrix = transformer.TransformHeight(value, this.IndicatorMode, this.IsRatio);
@@ -624,7 +624,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.RPicker.Minimum = -180;
             this.RPicker.Maximum = 180;
-            this.RPicker.ValueChange += (s, value) =>
+            this.RPicker.ValueChanged += (s, value) =>
             {
                 Transformer transformer = this.SelectionTransformer;
                 Matrix3x2 matrix = transformer.TransformRotate(value, this.IndicatorMode);
@@ -635,7 +635,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this.SPicker.Minimum = -90;
             this.SPicker.Maximum = 90;
-            this.SPicker.ValueChange += (s, value) =>
+            this.SPicker.ValueChanged += (s, value) =>
             {
                 Transformer transformer = this.SelectionTransformer;
                 Matrix3x2 matrix = transformer.TransformSkew(value, this.IndicatorMode);
@@ -651,7 +651,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.XPicker.Minimum = int.MinValue;
             this.XPicker.Maximum = int.MaxValue;
-            this.XPicker.ValueChange += (s, value) =>
+            this.XPicker.ValueChanged += (s, value) =>
             {
                 Transformer transformer = this.SelectionTransformer;
                 Vector2 vector = transformer.TransformX(value, this.IndicatorMode);
@@ -662,7 +662,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this.YPicker.Minimum = int.MinValue;
             this.YPicker.Maximum = int.MaxValue;
-            this.YPicker.ValueChange += (s, value) =>
+            this.YPicker.ValueChanged += (s, value) =>
             {
                 Transformer transformer = this.SelectionTransformer;
                 Vector2 vector = transformer.TransformY(value, this.IndicatorMode);

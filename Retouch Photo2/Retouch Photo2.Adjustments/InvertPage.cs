@@ -17,6 +17,8 @@ namespace Retouch_Photo2.Adjustments.Pages
         public InvertPage()
         {
             this.ConstructStrings();
+            InvertAdjustment.GenericText = this.Text;
+            InvertAdjustment.GenericPage = this;
         }
     }
 

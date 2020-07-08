@@ -110,7 +110,7 @@ namespace Retouch_Photo2.Tools.Models
             this.MidPicker.Unit = "%";
             this.MidPicker.Minimum = 0;
             this.MidPicker.Maximum = 100;
-            this.MidPicker.ValueChange += (sender, value) =>
+            this.MidPicker.ValueChanged += (sender, value) =>
             {
                 float mid = (float)value / 100.0f;
                 this.SelectionViewModel.GeometryDiamondMid = mid;

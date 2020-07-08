@@ -160,12 +160,12 @@ namespace Retouch_Photo2.Effects.Models
             this.AmountPicker.Unit = null;
             this.AmountPicker.Minimum = 0;
             this.AmountPicker.Maximum = 100;
-            this.AmountPicker.ValueChange += (s, value) =>
+            this.AmountPicker.ValueChanged += (s, value) =>
             {
                 float amount = (float)value / 100.0f;
                 this.Amount = amount;
 
-                this.MethodViewModel.EffectChangeCompleted<float>
+                this.MethodViewModel.EffectChanged<float>
                (
                    set: (effect) => effect.Edge_Amount = amount,
 
@@ -210,12 +210,12 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.RadiusSlider.Minimum = 0;
             this.RadiusPicker.Maximum = 100;
-            this.RadiusPicker.ValueChange += (s, value) =>
+            this.RadiusPicker.ValueChanged += (s, value) =>
             {
                 float radius = (float)value / 10.0f;
                 this.Radius = radius;
 
-                this.MethodViewModel.EffectChangeCompleted<float>
+                this.MethodViewModel.EffectChanged<float>
                (
                    set: (effect) => effect.Edge_Radius = radius,
 

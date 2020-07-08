@@ -122,12 +122,12 @@ namespace Retouch_Photo2.Effects.Models
             this.SizePicker.Unit = null;
             this.SizePicker.Minimum = -100;
             this.SizePicker.Maximum = 100;
-            this.SizePicker.ValueChange += (s, value) =>
+            this.SizePicker.ValueChanged += (s, value) =>
             {
                 int size = value;
                 this.Size = size;
 
-                this.MethodViewModel.EffectChangeCompleted<int>
+                this.MethodViewModel.EffectChanged<int>
                 (
                     set: (effect) => effect.Morphology_Size = size,
 

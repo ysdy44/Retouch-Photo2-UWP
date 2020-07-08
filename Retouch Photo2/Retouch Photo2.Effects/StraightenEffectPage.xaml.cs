@@ -122,12 +122,12 @@ namespace Retouch_Photo2.Effects.Models
             this.AnglePicker.Unit = "º";
             this.AnglePicker.Minimum = 0;
             this.AnglePicker.Maximum = 360;
-            this.AnglePicker.ValueChange += (s, value) =>
+            this.AnglePicker.ValueChanged += (s, value) =>
             {
                 float radians = (float)value * 180 / FanKit.Math.Pi;
                 this.Angle = radians;
 
-                this.MethodViewModel.EffectChangeCompleted<float>
+                this.MethodViewModel.EffectChanged<float>
                 (
                     set: (effect) => effect.Straighten_Angle = radians,
 

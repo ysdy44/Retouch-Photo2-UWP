@@ -39,6 +39,8 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            HueRotationAdjustment.GenericText = this.Text;
+            HueRotationAdjustment.GenericPage = this;
 
             this.ConstructHueRotation1();
             this.ConstructHueRotation2();
@@ -125,7 +127,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.AnglePicker.Unit = "º";
             this.AnglePicker.Minimum = 0;
             this.AnglePicker.Maximum = 360;
-            this.AnglePicker.ValueChange += (s, value) =>
+            this.AnglePicker.ValueChanged += (s, value) =>
             {
                 float radians = (float)value * FanKit.Math.Pi / 180.0f;
                 this.Angle = radians;

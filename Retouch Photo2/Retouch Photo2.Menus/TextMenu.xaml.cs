@@ -321,7 +321,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
             };
 
-            this.FontSizePicker.ValueChange += (s, value) => this.SetFontSize(value);
+            this.FontSizePicker.ValueChanged += (s, value) => this.SetFontSize(value);
             this.FontSizeListView.ItemClick += (s, e) =>
             {
                 if (e.ClickedItem is int value)

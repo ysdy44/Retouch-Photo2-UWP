@@ -12,13 +12,14 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
+        public static string GenericText = "Contrast";
         public static IAdjustmentPage GenericPage;// = new ContrastPage();
         
         //@Content
         public AdjustmentType Type => AdjustmentType.Contrast;
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = ContrastAdjustment.GenericPage;
-        public string Text => ContrastAdjustment.GenericPage.Text;
+        public string Text => ContrastAdjustment.GenericText;
 
 
         /// <summary> Amount by which to adjust the contrast of the image. Default value 0,  -1 -> 1. </summary>

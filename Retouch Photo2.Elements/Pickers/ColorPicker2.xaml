@@ -48,13 +48,16 @@
         <!--Head-->
         <Grid x:Name="HeadGrid" Height="40">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="18"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="4"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <hsvColorPickers:HexPicker x:Name="HexPicker" Grid.Column="1" Height="28" Background="Transparent"/>
-            <hsvColorPickers:StrawPicker x:Name="StrawPicker" Grid.Column="3" Width="74" Background="{ThemeResource AppForeground}"/>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">
+                #
+            </TextBlock>
+            <hsvColorPickers:HexPicker x:Name="_HexPicker" Grid.Column="1" Height="24" BorderThickness="0" />
+            <hsvColorPickers:StrawPicker x:Name="_StrawPicker" Grid.Column="3" Width="74" Background="{ThemeResource AppForeground}"/>
         </Grid>
 
         <!--Group-->

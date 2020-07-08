@@ -111,7 +111,7 @@ namespace Retouch_Photo2.Tools.Models
             this.CenterPicker.Unit = "%";
             this.CenterPicker.Minimum = 0;
             this.CenterPicker.Maximum = 100;
-            this.CenterPicker.ValueChange += (sender, value) =>
+            this.CenterPicker.ValueChanged += (sender, value) =>
             {
                 float center = (float)value / 100.0f;
                 this.SelectionViewModel.GeometryTriangleCenter = center;

@@ -39,6 +39,8 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            SaturationAdjustment.GenericText = this.Text;
+            SaturationAdjustment.GenericPage = this;
 
             this.ConstructSaturation1();
             this.ConstructSaturation2();
@@ -124,7 +126,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.SaturationPicker.Unit = null;
             this.SaturationPicker.Minimum = 0;
             this.SaturationPicker.Maximum = 200;
-            this.SaturationPicker.ValueChange += (s, value) =>
+            this.SaturationPicker.ValueChanged += (s, value) =>
             {
                 float saturation = (float)value / 100.0f;
                 this.Saturation = saturation;

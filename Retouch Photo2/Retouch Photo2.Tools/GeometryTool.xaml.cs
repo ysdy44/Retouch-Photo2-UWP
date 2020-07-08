@@ -30,29 +30,12 @@ namespace Retouch_Photo2.Tools
 
             this.FillColorEllipse.Tapped += (s, e) =>
             {
-                if (this.Parent is FrameworkElement placementTarget)
-                {
-                    DrawPage.FillColorShowAt(placementTarget);
-                }
-                else
-                {
-                    DrawPage.FillColorShowAt(this);
-                }
+                DrawPage.FillColorShowAt(this.FillColorEllipse);
             };
-
-
             this.StrokeColorEllipse.Tapped += (s, e) =>
             {
-                if (this.Parent is FrameworkElement placementTarget)
-                {
-                    DrawPage.StrokeColorShowAt(placementTarget);
-                }
-                else
-                {
-                    DrawPage.StrokeColorShowAt(this);
-                }
+                DrawPage.StrokeColorShowAt(this.StrokeColorEllipse);
             };
-
 
             this.StrokeShowControl.Tapped += (s, e) =>
             {

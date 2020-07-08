@@ -143,9 +143,17 @@ namespace Retouch_Photo2
         //Rename
         private void ConstructRenameDialog()
         {
-            //Key
-            this.RenameTextBox.GettingFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
-            this.RenameTextBox.LosingFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
+            //@Focus
+            // Before Flyout Showed, Don't let TextBox Got Focus.
+            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
+            if (this.RenameTextBox is TextBox textBox)
+            {
+                //textBox.IsEnabled = false;
+                //this.ColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
+                //this.ColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
+                textBox.GotFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
+                textBox.LostFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
+            }
 
             this.RenameDialog.CloseButton.Click += (sender, args) => this.RenameDialog.Hide();
             this.RenameDialog.PrimaryButton.Click += (_, __) =>
@@ -204,13 +212,13 @@ namespace Retouch_Photo2
 
         private void ConstructColorFlyout()
         {
-            this.ConstructFillColorFlyout();
-            this.ConstructStrokeColorFlyout();
+            this.ConstructFillColor();
+            this.ConstructStrokeColor();
         }
 
 
         //FillColor
-        private void ConstructFillColorFlyout()
+        private void ConstructFillColor()
         {
             DrawPage.FillColorShowAt += (FrameworkElement placementTarget) =>
             {
@@ -223,6 +231,18 @@ namespace Retouch_Photo2
                 this.FillColorFlyout.ShowAt(placementTarget);
             };
 
+            //@Focus
+            // Before Flyout Showed, Don't let TextBox Got Focus.
+            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
+            if (this.FillColorPicker.HexPicker is TextBox textBox)
+            {
+                textBox.IsEnabled = false;
+                this.FillColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
+                this.FillColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
+                textBox.GotFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
+                textBox.LostFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
+            }
+
             this.FillColorPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodFillColorChanged(value);
 
             this.FillColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.MethodFillColorChangeStarted(value);
@@ -232,7 +252,7 @@ namespace Retouch_Photo2
 
 
         //StrokeColor
-        private void ConstructStrokeColorFlyout()
+        private void ConstructStrokeColor()
         {
             DrawPage.StrokeColorShowAt += (FrameworkElement placementTarget) =>
             {
@@ -244,6 +264,18 @@ namespace Retouch_Photo2
                 }
                 this.StrokeColorFlyout.ShowAt(placementTarget);
             };
+
+            //@Focus
+            // Before Flyout Showed, Don't let TextBox Got Focus.
+            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
+            if (this.StrokeColorPicker.HexPicker is TextBox textBox)
+            {
+                textBox.IsEnabled = false;
+                this.StrokeColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
+                this.StrokeColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
+                textBox.GotFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
+                textBox.LostFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
+            }
 
             this.StrokeColorPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodStrokeColorChanged(value);
 

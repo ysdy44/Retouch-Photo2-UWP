@@ -108,7 +108,7 @@ namespace Retouch_Photo2.Tools.Models
             this.CornerPicker.Unit = "%";
             this.CornerPicker.Minimum = 0;
             this.CornerPicker.Maximum = 50;
-            this.CornerPicker.ValueChange += (sender, value) =>
+            this.CornerPicker.ValueChanged += (sender, value) =>
             {
                 float corner = (float)value / 100.0f;
                 this.SelectionViewModel.GeometryRoundRectCorner = corner;

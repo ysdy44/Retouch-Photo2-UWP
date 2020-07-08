@@ -13,13 +13,14 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
+        public static string GenericText = "Brightness";
         public static IAdjustmentPage GenericPage;// = new BrightnessPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Brightness;
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = BrightnessAdjustment.GenericPage;
-        public string Text => BrightnessAdjustment.GenericPage.Text;
+        public string Text => BrightnessAdjustment.GenericText;
 
 
         /// <summary> Interval 1.0->0.5 . </summary>

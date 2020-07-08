@@ -47,6 +47,8 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            TemperatureAdjustment.GenericText = this.Text;
+            TemperatureAdjustment.GenericPage = this;
 
             this.ConstructTemperature1();
             this.ConstructTemperature2();
@@ -170,7 +172,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.TemperaturePicker.Unit = null;
             this.TemperaturePicker.Minimum = -100;
             this.TemperaturePicker.Maximum = 100;
-            this.TemperaturePicker.ValueChange += (s, value) =>
+            this.TemperaturePicker.ValueChanged += (s, value) =>
             {
                 float temperature = (float)value / 100.0f;
                 this.Temperature = temperature;
@@ -224,7 +226,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.TintPicker.Unit = null;
             this.TintPicker.Minimum = -100;
             this.TintPicker.Maximum = 100;
-            this.TintPicker.ValueChange += (s, value) =>
+            this.TintPicker.ValueChanged += (s, value) =>
             {
                 float tint = (float)value / 100.0f;
                 this.Tint = tint;

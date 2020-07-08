@@ -33,12 +33,14 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         //@Construct
         /// <summary>
-        /// Initializes a BrightnessPage. 
+        /// Initializes a ExposurePage. 
         /// </summary>
         public ExposurePage()
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            ExposureAdjustment.GenericText = this.Text;
+            ExposureAdjustment.GenericPage = this;
 
             this.ConstructExposure1();
             this.ConstructExposure2();
@@ -125,7 +127,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ExposurePicker.Unit = null;
             this.ExposurePicker.Minimum = -200;
             this.ExposurePicker.Maximum = 200;
-            this.ExposurePicker.ValueChange += (s, value) =>
+            this.ExposurePicker.ValueChanged += (s, value) =>
             {
                 float exposure = (float)value / 100.0f;
                 this.Exposure = exposure;

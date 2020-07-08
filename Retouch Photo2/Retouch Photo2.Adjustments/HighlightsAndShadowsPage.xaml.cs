@@ -57,12 +57,14 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         //@Construct
         /// <summary>
-        /// Initializes a BrightnessPage. 
+        /// Initializes a HighlightsAndShadowsPage. 
         /// </summary>
         public HighlightsAndShadowsPage()
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            HighlightsAndShadowsAdjustment.GenericText = this.Text;
+            HighlightsAndShadowsAdjustment.GenericPage = this;
 
             this.ConstructShadows1();
             this.ConstructShadows2();
@@ -202,7 +204,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ShadowsPicker.Unit = null;
             this.ShadowsPicker.Minimum = -100;
             this.ShadowsPicker.Maximum = 100;
-            this.ShadowsPicker.ValueChange += (s, value) =>
+            this.ShadowsPicker.ValueChanged += (s, value) =>
             {
                 float shadows = (float)value / 100.0f;
                 this.Shadows = shadows;
@@ -256,7 +258,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.HighlightsPicker.Unit = null;
             this.HighlightsPicker.Minimum = -100;
             this.HighlightsPicker.Maximum = 100;
-            this.HighlightsPicker.ValueChange += (s, value) =>
+            this.HighlightsPicker.ValueChanged += (s, value) =>
             {
                 float highlights = (float)value / 100.0f;
                 this.Highlights = highlights;
@@ -310,7 +312,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ClarityPicker.Unit = null;
             this.ClarityPicker.Minimum = -100;
             this.ClarityPicker.Maximum = 100;
-            this.ClarityPicker.ValueChange += (s, value) =>
+            this.ClarityPicker.ValueChanged += (s, value) =>
             {
                 float clarity = (float)value / 100.0f;
                 this.Clarity = clarity;
@@ -364,7 +366,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.MaskBlurAmountPicker.Unit = null;
             this.MaskBlurAmountPicker.Minimum = 0;
             this.MaskBlurAmountPicker.Maximum = 1000;
-            this.MaskBlurAmountPicker.ValueChange += (s, value) =>
+            this.MaskBlurAmountPicker.ValueChanged += (s, value) =>
             {
                 float maskBlurAmount = (float)value / 100.0f;
                 this.MaskBlurAmount = maskBlurAmount;

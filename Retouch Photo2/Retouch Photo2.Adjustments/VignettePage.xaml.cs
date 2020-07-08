@@ -6,6 +6,7 @@ using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
@@ -19,6 +20,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Content
@@ -60,6 +62,8 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            VignetteAdjustment.GenericText = this.Text;
+            VignetteAdjustment.GenericPage = this;
 
             this.ConstructAmount1();
             this.ConstructAmount2();
@@ -192,7 +196,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.AmountPicker.Unit = null;
             this.AmountPicker.Minimum = 0;
             this.AmountPicker.Maximum = 100;
-            this.AmountPicker.ValueChange += (s, value) =>
+            this.AmountPicker.ValueChanged += (s, value) =>
             {
                 float amount = (float)value / 100.0f;
                 this.Amount = amount;
@@ -246,7 +250,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.CurvePicker.Unit = null;
             this.CurvePicker.Minimum = 0;
             this.CurvePicker.Maximum = 100;
-            this.CurvePicker.ValueChange += (s, value) =>
+            this.CurvePicker.ValueChanged += (s, value) =>
             {
                 float curve = (float)value / 100.0f;
                 this.Curve = curve;
@@ -310,7 +314,19 @@ namespace Retouch_Photo2.Adjustments.Pages
                     }
                 }
             };
-            
+
+            //@Focus
+            // Before Flyout Showed, Don't let TextBox Got Focus.
+            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
+            if (this.ColorPicker.HexPicker is TextBox textBox)
+            {
+                textBox.IsEnabled = false;
+                this.ColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
+                this.ColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
+                textBox.GotFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
+                textBox.LostFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
+            }
+
             this.ColorPicker.ColorChanged += (s, value) =>
             {
                 Color color = value;

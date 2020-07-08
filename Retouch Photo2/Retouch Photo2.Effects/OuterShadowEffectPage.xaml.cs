@@ -19,7 +19,8 @@ namespace Retouch_Photo2.Effects.Models
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        
+        SettingViewModel SettingViewModel => App.SettingViewModel;
+
 
         //@Content
         private float Radius
@@ -215,12 +216,12 @@ namespace Retouch_Photo2.Effects.Models
             this.RadiusPicker.Unit = null;
             this.RadiusPicker.Minimum = 0;
             this.RadiusPicker.Maximum = 100;
-            this.RadiusPicker.ValueChange += (s, value) =>
+            this.RadiusPicker.ValueChanged += (s, value) =>
             {
                 float radius = (float)value;
                 this.Radius = radius;
 
-                this.MethodViewModel.EffectChangeCompleted<float>
+                this.MethodViewModel.EffectChanged<float>
                 (
                     set: (effect) => effect.OuterShadow_Radius = radius,
 
@@ -266,12 +267,12 @@ namespace Retouch_Photo2.Effects.Models
             this.OpacityPicker.Unit = null;
             this.OpacityPicker.Minimum = 0;
             this.OpacityPicker.Maximum = 100;
-            this.OpacityPicker.ValueChange += (s, value) =>
+            this.OpacityPicker.ValueChanged += (s, value) =>
             {
                 float opacity = (float)value / 100.0f;
                 this.Opacity2 = opacity;
 
-                this.MethodViewModel.EffectChangeCompleted<float>
+                this.MethodViewModel.EffectChanged<float>
                 (
                     set: (effect) => effect.OuterShadow_Opacity = (float)value,
 
@@ -317,12 +318,12 @@ namespace Retouch_Photo2.Effects.Models
             this.OffsetPicker.Unit = null;
             this.OffsetPicker.Minimum = 0;
             this.OffsetPicker.Maximum = 100;
-            this.OffsetPicker.ValueChange += (s, value) =>
+            this.OffsetPicker.ValueChanged += (s, value) =>
             {
                 float offset = (float)value;
                 this.Offset = offset;
 
-                this.MethodViewModel.EffectChangeCompleted<float>
+                this.MethodViewModel.EffectChanged<float>
                 (
                     set: (effect) => effect.OuterShadow_Offset = (float)value,
 
@@ -368,12 +369,12 @@ namespace Retouch_Photo2.Effects.Models
             this.AnglePicker.Unit = null;
             this.AnglePicker.Minimum = 0;
             this.AnglePicker.Maximum = 100;
-            this.AnglePicker.ValueChange += (s, value) =>
+            this.AnglePicker.ValueChanged += (s, value) =>
             {
                 float radians = (float)value * 180 / FanKit.Math.Pi;
                 this.Angle = radians;
 
-                this.MethodViewModel.EffectChangeCompleted<float>
+                this.MethodViewModel.EffectChanged<float>
                 (
                     set: (effect) => effect.OuterShadow_Angle = radians,
 
@@ -416,12 +417,24 @@ namespace Retouch_Photo2.Effects.Models
                 this.ColorPicker.Color = this.Color;
             };
             
+            //@Focus
+            // Before Flyout Showed, Don't let TextBox Got Focus.
+            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
+            if (this.ColorPicker.HexPicker is TextBox textBox)
+            {
+                textBox.IsEnabled = false;
+                this.ColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
+                this.ColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
+                textBox.GotFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
+                textBox.LostFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
+            }
+
             this.ColorPicker.ColorChanged += (s, value) =>
             {
                 Color color = (Color)value;
                 this.Color = color;
 
-                this.MethodViewModel.EffectChangeCompleted<Color>
+                this.MethodViewModel.EffectChanged<Color>
                 (
                     set: (effect) => effect.OuterShadow_Color = color,
 

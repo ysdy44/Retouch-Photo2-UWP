@@ -120,12 +120,12 @@ namespace Retouch_Photo2.Effects.Models
             this.AmountPicker.Unit = null;
             this.AmountPicker.Minimum = 0;
             this.AmountPicker.Maximum = 100;
-            this.AmountPicker.ValueChange += (s, value) =>
+            this.AmountPicker.ValueChanged += (s, value) =>
             {
                 float amount = (float)value / 10.0f;
                 this.Amount = amount;
 
-                this.MethodViewModel.EffectChangeCompleted<float>
+                this.MethodViewModel.EffectChanged<float>
                 (
                     set: (effect) => effect.Sharpen_Amount = amount,
 

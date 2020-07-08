@@ -12,15 +12,16 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static      
         //@Generic
+        public static string GenericText = "Saturation";
         public static IAdjustmentPage GenericPage;// = new SaturationPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Saturation;
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = SaturationAdjustment.GenericPage;
-        public string Text => SaturationAdjustment.GenericPage.Text;
-        
-        
+        public string Text => SaturationAdjustment.GenericText;
+
+
         /// <summary> Gets or sets the saturation intensity for effect. </summary>
         public float Saturation = 1.0f;
         public float StartingSaturation { get; private set; }

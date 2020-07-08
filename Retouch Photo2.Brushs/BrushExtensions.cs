@@ -1,9 +1,7 @@
-﻿using Microsoft.Graphics.Canvas.Brushes;
-using Microsoft.Graphics.Canvas.Geometry;
+﻿using HSVColorPickers;
 using Microsoft.Toolkit.Uwp.UI.Media;
 using Windows.Foundation;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Shapes;
 
 namespace Retouch_Photo2.Brushs
 {
@@ -108,28 +106,6 @@ namespace Retouch_Photo2.Brushs
             }
         }
 
-
-        /// <summary>
-        /// Turn into GradientStopCollection.
-        /// </summary>
-        /// <param name="stops"> The source stops. </param>
-        /// <returns> The product GradientStopCollection. </returns>
-        public static GradientStopCollection ToStops(this CanvasGradientStop[] stops)
-        {
-            GradientStopCollection gradientStops = new GradientStopCollection();
-
-            foreach (CanvasGradientStop stop in stops)
-            {
-                GradientStop gradientStop = new GradientStop
-                {
-                    Color = stop.Color,
-                    Offset = stop.Position,
-                };
-                gradientStops.Add(gradientStop);
-            }
-
-            return gradientStops;
-        }
 
     }
 }

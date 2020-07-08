@@ -129,7 +129,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ValuePicker.Unit = "%";
             this.ValuePicker.Minimum = 0;
             this.ValuePicker.Maximum = 100;
-            this.ValuePicker.ValueChange += (sender, value) =>
+            this.ValuePicker.ValueChanged += (sender, value) =>
             {
                 float value2 = (float)value / 100.0f;
                 this.SelectionViewModel.GeometryArrowValue = value2;

@@ -159,12 +159,12 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.RadiusPicker.Minimum = 0;
             this.RadiusPicker.Maximum = 100;
-            this.RadiusPicker.ValueChange += (s, value) =>
+            this.RadiusPicker.ValueChanged += (s, value) =>
             {
                 float radius = (float)value;
                 this.Radius = radius;
 
-                this.MethodViewModel.EffectChangeCompleted<float>
+                this.MethodViewModel.EffectChanged<float>
                 (
                     set: (effect) => effect.DirectionalBlur_Radius = radius,
 
@@ -210,12 +210,12 @@ namespace Retouch_Photo2.Effects.Models
             this.AnglePicker.Unit = "º";
             this.AnglePicker.Minimum = 0;
             this.AnglePicker.Maximum = 360;
-            this.AnglePicker.ValueChange += (s, value) =>
+            this.AnglePicker.ValueChanged += (s, value) =>
             {
                 float angle = (float)value * 180 / FanKit.Math.Pi;
                 this.Angle = angle;
 
-                this.MethodViewModel.EffectChangeCompleted<float>
+                this.MethodViewModel.EffectChanged<float>
                (
                    set: (effect) => effect.DirectionalBlur_Angle = (float)value,
 

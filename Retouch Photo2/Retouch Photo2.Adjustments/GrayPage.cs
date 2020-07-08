@@ -17,6 +17,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         public GrayPage()
         {
             this.ConstructStrings();
+            GrayAdjustment.GenericText = this.Text;
         }
     }
 

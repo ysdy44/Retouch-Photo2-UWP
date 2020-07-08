@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Tools.Models
             this.HorizontalStepPicker.Unit = null;
             this.HorizontalStepPicker.Minimum = 5;
             this.HorizontalStepPicker.Maximum = 100;
-            this.HorizontalStepPicker.ValueChange += (sender, value) =>
+            this.HorizontalStepPicker.ValueChanged += (sender, value) =>
             {
                 float horizontalStep = value;
                 this.SelectionViewModel.PatternGridHorizontalStep = horizontalStep;

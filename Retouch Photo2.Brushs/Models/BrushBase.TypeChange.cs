@@ -95,11 +95,7 @@ namespace Retouch_Photo2.Brushs
             switch (this.Type)
             {
                 case BrushType.Color:
-                    this.Stops = new CanvasGradientStop[]
-                    {
-                        new CanvasGradientStop{ Color= Colors.White, Position=0.0f },
-                        new CanvasGradientStop{ Color= this.Color, Position=1.0f }
-                    };
+                    this.Stops = GreyWhiteMeshHelpher.GetGradientStopArray(this.Color);
                     break;
 
                 case BrushType.LinearGradient:

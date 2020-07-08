@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.BlueOffsetPicker.Unit = null;
             this.BlueOffsetPicker.Minimum = 0;
             this.BlueOffsetPicker.Maximum = 100;
-            this.BlueOffsetPicker.ValueChange += (s, value) =>
+            this.BlueOffsetPicker.ValueChanged += (s, value) =>
             {
                 float blueOffset = (float)value / 100.0f;
                 this.BlueOffset = blueOffset;
@@ -169,7 +169,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.BlueExponentPicker.Unit = null;
             this.BlueExponentPicker.Minimum = 0;
             this.BlueExponentPicker.Maximum = 100;
-            this.BlueExponentPicker.ValueChange += (s, value) =>
+            this.BlueExponentPicker.ValueChanged += (s, value) =>
             {
                 float blueExponent = (float)value / 100.0f;
                 this.BlueExponent = blueExponent;
@@ -223,7 +223,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.BlueAmplitudePicker.Unit = null;
             this.BlueAmplitudePicker.Minimum = 0;
             this.BlueAmplitudePicker.Maximum = 100;
-            this.BlueAmplitudePicker.ValueChange += (s, value) =>
+            this.BlueAmplitudePicker.ValueChanged += (s, value) =>
             {
                 float blueAmplitude = (float)value / 100.0f;
                 this.BlueAmplitude = blueAmplitude;

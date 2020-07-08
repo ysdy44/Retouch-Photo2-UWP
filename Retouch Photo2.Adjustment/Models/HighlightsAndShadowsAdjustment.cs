@@ -12,13 +12,14 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
+        public static string GenericText = "HighlightsAndShadows";
         public static IAdjustmentPage GenericPage;// = new HighlightsAndShadowsPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.HighlightsAndShadows;
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = HighlightsAndShadowsAdjustment.GenericPage;
-        public string Text => HighlightsAndShadowsAdjustment.GenericPage.Text;
+        public string Text => HighlightsAndShadowsAdjustment.GenericText;
 
 
         /// <summary> How much to increase or decrease the darker parts of the image.Default value 0, range -1 to 1. </summary>

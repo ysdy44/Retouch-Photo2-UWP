@@ -185,7 +185,7 @@ namespace Retouch_Photo2.Menus.Models
             this.WidthPicker.Unit = null;
             this.WidthPicker.Minimum = 0;
             this.WidthPicker.Maximum = 1280;
-            this.WidthPicker.ValueChange += (s, value) =>
+            this.WidthPicker.ValueChanged += (s, value) =>
             {
                 float strokeWidth = (float)value / 10.0f;
                 this.SelectionViewModel.StrokeWidth = strokeWidth;
@@ -295,7 +295,7 @@ namespace Retouch_Photo2.Menus.Models
             this.OffsetPicker.Unit = null;
             this.OffsetPicker.Minimum = 0;
             this.OffsetPicker.Maximum = 100;
-            this.OffsetPicker.ValueChange += (s, value) =>
+            this.OffsetPicker.ValueChanged += (s, value) =>
             {
                 float strokeOffset = (float)value / 10.0f;
                 this.SelectionViewModel.StrokeStyleOffset = strokeOffset;

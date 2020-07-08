@@ -38,6 +38,8 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            ContrastAdjustment.GenericText = this.Text;
+            ContrastAdjustment.GenericPage = this;
 
             this.ConstructContrast1();
             this.ConstructContrast2();
@@ -123,7 +125,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ContrastPicker.Unit = null;
             this.ContrastPicker.Minimum = -100;
             this.ContrastPicker.Maximum = 100;
-            this.ContrastPicker.ValueChange += (s, value) =>
+            this.ContrastPicker.ValueChanged += (s, value) =>
             {
                 float contrast = (float)value / 100.0f;
                 this.Contrast = contrast;

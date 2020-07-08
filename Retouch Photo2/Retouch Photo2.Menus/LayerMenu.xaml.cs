@@ -201,7 +201,7 @@ namespace Retouch_Photo2.Menus.Models
             this.OpacityPicker.Unit = "%";
             this.OpacityPicker.Minimum = 0;
             this.OpacityPicker.Maximum = 100;
-            this.OpacityPicker.ValueChange += (s, value) =>
+            this.OpacityPicker.ValueChanged += (s, value) =>
             {
                 float opacity = (float)value / 100.0f;
                 this.SelectionViewModel.Opacity = opacity;

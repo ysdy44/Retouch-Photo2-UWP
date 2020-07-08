@@ -74,6 +74,18 @@ namespace Retouch_Photo2.Tools.Models
             };
 
 
+            //@Focus
+            // Before Flyout Showed, Don't let TextBox Got Focus.
+            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
+            if (this.StopsPicker.ColorPicker.HexPicker is TextBox textBox)
+            {
+                textBox.IsEnabled = false;
+                this.StopsPicker.ColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
+                this.StopsPicker.ColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
+                textBox.GotFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
+                textBox.LostFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
+            }
+
             this.StopsPicker.StopsChanged += (s, array) =>
             {
                 switch (this.FillOrStroke)
@@ -86,6 +98,7 @@ namespace Retouch_Photo2.Tools.Models
                         break;
                 }
             };
+
             this.StopsPicker.StopsChangeStarted += (s, array) =>
             {
                 switch (this.FillOrStroke)

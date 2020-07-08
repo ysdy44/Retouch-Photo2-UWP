@@ -126,7 +126,7 @@ namespace Retouch_Photo2.Tools.Models
             this.InnerRadiusPicker.Unit = "%";
             this.InnerRadiusPicker.Minimum = 0;
             this.InnerRadiusPicker.Maximum = 100;
-            this.InnerRadiusPicker.ValueChange += (sender, value) =>
+            this.InnerRadiusPicker.ValueChanged += (sender, value) =>
             {
                 float innerRadius = (float)value / 100.0f;
                 this.SelectionViewModel.GeometryCookieSweepAngle = innerRadius;
@@ -179,7 +179,7 @@ namespace Retouch_Photo2.Tools.Models
             this.SweepAnglePicker.Unit = "º";
             this.SweepAnglePicker.Minimum = 0;
             this.SweepAnglePicker.Maximum = 360;
-            this.SweepAnglePicker.ValueChange += (sender, value) =>
+            this.SweepAnglePicker.ValueChanged += (sender, value) =>
             {
                 float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
                 this.SelectionViewModel.GeometryCookieInnerRadius = sweepAngle;

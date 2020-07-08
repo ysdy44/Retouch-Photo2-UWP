@@ -159,12 +159,12 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.RadiusPicker.Minimum = 0;
             this.RadiusPicker.Maximum = 100;
-            this.RadiusPicker.ValueChange += (s, value) =>
+            this.RadiusPicker.ValueChanged += (s, value) =>
             {
                 float radius = (float)value / 10.0f;
                 this.Radius = radius;
 
-                this.MethodViewModel.EffectChangeCompleted<float>
+                this.MethodViewModel.EffectChanged<float>
                 (
                     set: (effect) => effect.Emboss_Radius = (float)value,
 
@@ -210,12 +210,12 @@ namespace Retouch_Photo2.Effects.Models
             this.AnglePicker.Unit = null;
             this.AnglePicker.Minimum = 0;
             this.AnglePicker.Maximum = 360;
-            this.AnglePicker.ValueChange += (s, value) =>
+            this.AnglePicker.ValueChanged += (s, value) =>
             {
                 float radians = (float)value * 180.0f / FanKit.Math.Pi;
                 this.Angle = radians;
 
-                this.MethodViewModel.EffectChangeCompleted<float>
+                this.MethodViewModel.EffectChanged<float>
                 (
                     set: (effect) => effect.Emboss_Angle = (float)value,
 

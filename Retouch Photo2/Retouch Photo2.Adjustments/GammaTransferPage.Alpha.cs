@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.AlphaOffsetPicker.Unit = null;
             this.AlphaOffsetPicker.Minimum = 0;
             this.AlphaOffsetPicker.Maximum = 100;
-            this.AlphaOffsetPicker.ValueChange += (s, value) =>
+            this.AlphaOffsetPicker.ValueChanged += (s, value) =>
             {
                 float alphaOffset = (float)value / 100.0f;
                 this.AlphaOffset = alphaOffset;
@@ -169,7 +169,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.AlphaExponentPicker.Unit = null;
             this.AlphaExponentPicker.Minimum = 0;
             this.AlphaExponentPicker.Maximum = 100;
-            this.AlphaExponentPicker.ValueChange += (s, value) =>
+            this.AlphaExponentPicker.ValueChanged += (s, value) =>
             {
                 float alphaExponent = (float)value / 100.0f;
                 this.AlphaExponent = alphaExponent;
@@ -223,7 +223,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.AlphaAmplitudePicker.Unit = null;
             this.AlphaAmplitudePicker.Minimum = 0;
             this.AlphaAmplitudePicker.Maximum = 100;
-            this.AlphaAmplitudePicker.ValueChange += (s, value) =>
+            this.AlphaAmplitudePicker.ValueChanged += (s, value) =>
             {
                 float alphaAmplitude = (float)value / 100.0f;
                 this.AlphaAmplitude = alphaAmplitude;

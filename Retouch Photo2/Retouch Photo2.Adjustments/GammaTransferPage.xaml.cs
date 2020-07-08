@@ -32,6 +32,8 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            GammaTransferAdjustment.GenericText = this.Text;
+            GammaTransferAdjustment.GenericPage = this;
 
 
             //Alpha

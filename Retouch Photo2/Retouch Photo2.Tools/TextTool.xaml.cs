@@ -44,9 +44,17 @@ namespace Retouch_Photo2.Tools
             this.InitializeComponent();
             this.ConstructStrings();
 
-            //Key
-            this.TextBox.GettingFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
-            this.TextBox.LosingFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
+            //@Focus
+            // Before Flyout Showed, Don't let TextBox Got Focus.
+            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
+            if (this.TextBox is TextBox textBox)
+            {
+                //textBox.IsEnabled = false;
+                //this.ColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
+                //this.ColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
+                textBox.GotFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
+                textBox.LostFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
+            }
 
             this.TextBox.TextChanged += (s, e) =>
             {

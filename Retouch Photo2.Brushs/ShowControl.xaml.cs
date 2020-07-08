@@ -1,4 +1,5 @@
-﻿using Microsoft.Graphics.Canvas.Brushes;
+﻿using HSVColorPickers;
+using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Elements;
 using System;
 using Windows.UI.Xaml.Controls;

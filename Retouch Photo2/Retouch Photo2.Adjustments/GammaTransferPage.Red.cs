@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.RedOffsetPicker.Unit = null;
             this.RedOffsetPicker.Minimum = 0;
             this.RedOffsetPicker.Maximum = 100;
-            this.RedOffsetPicker.ValueChange += (s, value) =>
+            this.RedOffsetPicker.ValueChanged += (s, value) =>
             {
                 float redOffset = (float)value / 100.0f;
                 this.RedOffset = redOffset;
@@ -169,7 +169,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.RedExponentPicker.Unit = null;
             this.RedExponentPicker.Minimum = 0;
             this.RedExponentPicker.Maximum = 100;
-            this.RedExponentPicker.ValueChange += (s, value) =>
+            this.RedExponentPicker.ValueChanged += (s, value) =>
             {
                 float redExponent = (float)value / 100.0f;
                 this.RedExponent = redExponent;
@@ -223,7 +223,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.RedAmplitudePicker.Unit = null;
             this.RedAmplitudePicker.Minimum = 0;
             this.RedAmplitudePicker.Maximum = 100;
-            this.RedAmplitudePicker.ValueChange += (s, value) =>
+            this.RedAmplitudePicker.ValueChanged += (s, value) =>
             {
                 float redAmplitude = (float)value / 100.0f;
                 this.RedAmplitude = redAmplitude;

@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using HSVColorPickers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Elements;
@@ -102,7 +103,7 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.LinearGradient:
                 case BrushType.RadialGradient:
                 case BrushType.EllipticalGradient:
-                    if (this.Stops!=null) brush.Stops = (CanvasGradientStop[])this.Stops.Clone();
+                    if (this.Stops!=null) brush.Stops = this.Stops.CloneArray();
                     break;
 
                 case BrushType.Image:

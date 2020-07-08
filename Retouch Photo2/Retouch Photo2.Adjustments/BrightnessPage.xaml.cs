@@ -63,6 +63,8 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            BrightnessAdjustment.GenericText = this.Text;
+            BrightnessAdjustment.GenericPage = this;
 
             this.ConstructWhiteLight1();
             this.ConstructWhiteLight2();
@@ -207,7 +209,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.WhiteLightPicker.Unit = null;
             this.WhiteLightPicker.Minimum = 50;
             this.WhiteLightPicker.Maximum = 100;
-            this.WhiteLightPicker.ValueChange += (s, value) =>
+            this.WhiteLightPicker.ValueChanged += (s, value) =>
             {
                 float whiteLight = (float)value / 100.0f;
                 this.WhiteLight = whiteLight;
@@ -260,7 +262,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.WhiteDarkPicker.Unit = null;
             this.WhiteDarkPicker.Minimum = 50;
             this.WhiteDarkPicker.Maximum = 100;
-            this.WhiteDarkPicker.ValueChange += (s, value) =>
+            this.WhiteDarkPicker.ValueChanged += (s, value) =>
             {
                 float whiteDark = (float)value / 100.0f;
                 this.WhiteDark = whiteDark;
@@ -313,7 +315,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.BlackLightPicker.Unit = null;
             this.BlackLightPicker.Minimum = 0;
             this.BlackLightPicker.Maximum = 50;
-            this.BlackLightPicker.ValueChange += (s, value) =>
+            this.BlackLightPicker.ValueChanged += (s, value) =>
             {
                 float blackLight = (float)value / 100.0f;
                 this.BlackLight = blackLight;
@@ -366,7 +368,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.BlackDarkPicker.Unit = null;
             this.BlackDarkPicker.Minimum = 0;
             this.BlackDarkPicker.Maximum = 50;
-            this.BlackDarkPicker.ValueChange += (s, value) =>
+            this.BlackDarkPicker.ValueChanged += (s, value) =>
             {
                 float blackDark = (float)value / 100.0f;
                 this.BlackDark = blackDark;

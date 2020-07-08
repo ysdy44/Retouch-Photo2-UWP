@@ -12,13 +12,14 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
+        public static string GenericText = "Exposure";
         public static IAdjustmentPage GenericPage;// = new ExposurePage();
         
         //@Content
         public AdjustmentType Type => AdjustmentType.Exposure;
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = ExposureAdjustment.GenericPage;
-        public string Text => ExposureAdjustment.GenericPage.Text;
+        public string Text => ExposureAdjustment.GenericText;
 
 
         /// <summary> How much to increase or decrease the exposure of the image.Default value 0, range -2 -> 2. </summary>

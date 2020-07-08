@@ -104,7 +104,7 @@ namespace Retouch_Photo2.Tools.Models
             this.PointsPicker.Unit = null;
             this.PointsPicker.Minimum = 3;
             this.PointsPicker.Maximum = 36;
-            this.PointsPicker.ValueChange += (sender, value) =>
+            this.PointsPicker.ValueChanged += (sender, value) =>
             {
                 int points = (int)value;
                 this.SelectionViewModel.GeometryPentagonPoints = points;

@@ -110,7 +110,7 @@ namespace Retouch_Photo2.Tools.Models
             this.SpreadPicker.Unit = "%";
             this.SpreadPicker.Minimum = 0;
             this.SpreadPicker.Maximum = 100;
-            this.SpreadPicker.ValueChange += (sender, value) =>
+            this.SpreadPicker.ValueChanged += (sender, value) =>
             {
                 float spread = (float)value / 100.0f;
                 this.SelectionViewModel.GeometryHeartSpread = spread;

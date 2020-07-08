@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.GreenOffsetPicker.Unit = null;
             this.GreenOffsetPicker.Minimum = 0;
             this.GreenOffsetPicker.Maximum = 100;
-            this.GreenOffsetPicker.ValueChange += (s, value) =>
+            this.GreenOffsetPicker.ValueChanged += (s, value) =>
             {
                 float greenOffset = (float)value / 100.0f;
                 this.GreenOffset = greenOffset;
@@ -169,7 +169,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.GreenExponentPicker.Unit = null;
             this.GreenExponentPicker.Minimum = 0;
             this.GreenExponentPicker.Maximum = 100;
-            this.GreenExponentPicker.ValueChange += (s, value) =>
+            this.GreenExponentPicker.ValueChanged += (s, value) =>
             {
                 float greenExponent = (float)value / 100.0f;
                 this.GreenExponent = greenExponent;
@@ -223,7 +223,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.GreenAmplitudePicker.Unit = null;
             this.GreenAmplitudePicker.Minimum = 0;
             this.GreenAmplitudePicker.Maximum = 100;
-            this.GreenAmplitudePicker.ValueChange += (s, value) =>
+            this.GreenAmplitudePicker.ValueChanged += (s, value) =>
             {
                 float greenAmplitude = (float)value / 100.0f;
                 this.GreenAmplitude = greenAmplitude;

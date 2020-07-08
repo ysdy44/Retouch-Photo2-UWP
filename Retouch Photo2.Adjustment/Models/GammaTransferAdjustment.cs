@@ -12,13 +12,14 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
+        public static string GenericText = "GammaTransfer";
         public static IAdjustmentPage GenericPage;// = new GammaTransferPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.GammaTransfer;
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = GammaTransferAdjustment.GenericPage;
-        public string Text => GammaTransferAdjustment.GenericPage.Text;
+        public string Text => GammaTransferAdjustment.GenericText;
 
         public bool ClampOutput = false;
 

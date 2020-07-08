@@ -122,17 +122,17 @@ namespace Retouch_Photo2.Effects.Models
             this.RadiusPicker.Unit = null;
             this.RadiusPicker.Minimum = 0;
             this.RadiusPicker.Maximum = 100;
-            this.RadiusPicker.ValueChange  += (s, value) =>
+            this.RadiusPicker.ValueChanged += (s, value) =>
             {
                 float radius = (float)value;
                 this.Radius = radius;
 
-                this.MethodViewModel.EffectChangeCompleted<float>
+                this.MethodViewModel.EffectChanged<float>
                 (
                     set: (effect) => effect.GaussianBlur_Radius = radius,
 
                     historyTitle: "Set effect gaussian blur amount",
-                    getHistory: (effect) => effect.StartingGaussianBlur_Radius,
+                    getHistory: (effect) => effect.GaussianBlur_Radius,
                     setHistory: (effect, previous) => effect.GaussianBlur_Radius = previous
                 );
             };

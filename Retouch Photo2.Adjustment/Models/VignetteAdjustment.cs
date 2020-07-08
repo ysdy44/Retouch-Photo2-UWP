@@ -13,13 +13,14 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
+        public static string GenericText = "Vignette";
         public static IAdjustmentPage GenericPage;// = new VignettePage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Vignette;
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = VignetteAdjustment.GenericPage;
-        public string Text => VignetteAdjustment.GenericPage.Text;
+        public string Text => VignetteAdjustment.GenericText;
 
 
         /// <summary> Specifies the size of the vignette region as a percentage of the full image. </summary>

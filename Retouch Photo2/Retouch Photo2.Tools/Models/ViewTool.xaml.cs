@@ -203,7 +203,7 @@ namespace Retouch_Photo2.Tools.Models
             this.RadianPicker.Unit = "º";
             this.RadianPicker.Minimum = ViewRadianConverter.MinNumber;
             this.RadianPicker.Maximum = ViewRadianConverter.MaxNumber;
-            this.RadianPicker.ValueChange += (sender, value) =>
+            this.RadianPicker.ValueChanged += (sender, value) =>
             {
                 float radian = ViewRadianConverter.NumberToRadian((int)value);
                 this.ViewModel.SetCanvasTransformerRadian(radian);//CanvasTransformer
@@ -246,7 +246,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ScalePicker.Unit = "%";
             this.ScalePicker.Minimum = ViewScaleConverter.MinNumber;
             this.ScalePicker.Maximum = ViewScaleConverter.MaxNumber;
-            this.ScalePicker.ValueChange += (sender, value) =>
+            this.ScalePicker.ValueChanged += (sender, value) =>
             {
                 float scale = ViewScaleConverter.NumberToScale((int)value);
                 this.ViewModel.SetCanvasTransformerScale(scale);//CanvasTransformer

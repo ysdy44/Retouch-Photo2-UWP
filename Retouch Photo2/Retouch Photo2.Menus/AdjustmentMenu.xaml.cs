@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Menus.Models
 
         //@Content
         AdjustmentMainPage AdjustmentMainPage = new AdjustmentMainPage();
-
+        
 
         //@Construct
         /// <summary>
@@ -106,6 +106,21 @@ namespace Retouch_Photo2.Menus.Models
         //@Content
         /// <summary> Filter ListView. </summary>
         public ListView FilterListView { get; private set; }
+
+        private IEnumerable<IAdjustmentPage> AdjustmentPages = new List<IAdjustmentPage>()
+        {
+            new GrayPage(),
+            new InvertPage(),
+            new ExposurePage(),
+            new BrightnessPage(),
+            new SaturationPage(),
+            new HueRotationPage(),
+            new ContrastPage(),
+            new TemperaturePage(),
+            new HighlightsAndShadowsPage(),
+            new GammaTransferPage(),
+            new VignettePage(),
+        };
 
 
         //@VisualState
@@ -346,8 +361,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.AddButton.Click += (s, e) => this.AdjustmentPageFlyout.ShowAt(this.AddButton);
 
-            IEnumerable<IAdjustmentPage> adjustmentPages = this.GetAdjustmentPages();
-            this.AdjustmentPageListView.ItemsSource = adjustmentPages.ToList();
+            this.AdjustmentPageListView.ItemsSource = this.AdjustmentPages;
 
             this.AdjustmentPageListView.ItemClick += (s, e) =>
             {
@@ -358,54 +372,6 @@ namespace Retouch_Photo2.Menus.Models
                     this.FilterAdd(item);
                 }
             };
-        }
-
-        //@Generic
-        private IEnumerable<IAdjustmentPage> GetAdjustmentPages()
-        {
-            var grayPage = new GrayPage();
-            GrayAdjustment.GenericPage = grayPage;
-            yield return grayPage;
-
-            var invertPage = new InvertPage();
-            InvertAdjustment.GenericPage = invertPage;
-            yield return invertPage;
-
-            var exposurePage = new ExposurePage();
-            ExposureAdjustment.GenericPage = exposurePage;
-            yield return exposurePage;
-
-            var brightnessPage = new BrightnessPage();
-            BrightnessAdjustment.GenericPage = brightnessPage;
-            yield return brightnessPage;
-
-            var saturationPage = new SaturationPage();
-            SaturationAdjustment.GenericPage = saturationPage;
-            yield return saturationPage;
-
-            var hueRotationPage = new HueRotationPage();
-            HueRotationAdjustment.GenericPage = hueRotationPage;
-            yield return hueRotationPage;
-
-            var contrastPage = new ContrastPage();
-            ContrastAdjustment.GenericPage = contrastPage;
-            yield return contrastPage;
-
-            var temperaturePage = new TemperaturePage();
-            TemperatureAdjustment.GenericPage = temperaturePage;
-            yield return temperaturePage;
-
-            var highlightsAndShadowsPage = new HighlightsAndShadowsPage();
-            HighlightsAndShadowsAdjustment.GenericPage = highlightsAndShadowsPage;
-            yield return highlightsAndShadowsPage;
-
-            var gammaTransferPage = new GammaTransferPage();
-            GammaTransferAdjustment.GenericPage = gammaTransferPage;
-            yield return gammaTransferPage;
-
-            var vignettePage = new VignettePage();
-            VignetteAdjustment.GenericPage = vignettePage;
-            yield return vignettePage;
         }
 
     }

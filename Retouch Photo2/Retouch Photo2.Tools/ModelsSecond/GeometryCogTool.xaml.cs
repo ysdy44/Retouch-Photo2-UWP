@@ -143,7 +143,7 @@ namespace Retouch_Photo2.Tools.Models
             this.CountPicker.Unit = null;
             this.CountPicker.Minimum = 4;
             this.CountPicker.Maximum = 36;
-            this.CountPicker.ValueChange += (sender, value) =>
+            this.CountPicker.ValueChanged += (sender, value) =>
             {
                 int count = (int)value;
                 this.SelectionViewModel.GeometryCogCount = count;
@@ -196,7 +196,7 @@ namespace Retouch_Photo2.Tools.Models
             this.InnerRadiusPicker.Unit = "%";
             this.InnerRadiusPicker.Minimum = 0;
             this.InnerRadiusPicker.Maximum = 100;
-            this.InnerRadiusPicker.ValueChange += (sender, value) =>
+            this.InnerRadiusPicker.ValueChanged += (sender, value) =>
             {
                 float innerRadius = (float)value / 100.0f;
                 this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
@@ -249,7 +249,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ToothPicker.Unit = "%";
             this.ToothPicker.Minimum = 0;
             this.ToothPicker.Maximum = 50;
-            this.ToothPicker.ValueChange += (sender, value) =>
+            this.ToothPicker.ValueChanged += (sender, value) =>
             {
                 float tooth = (float)value / 100.0f;
                 this.SelectionViewModel.GeometryCogTooth = tooth;
@@ -302,7 +302,7 @@ namespace Retouch_Photo2.Tools.Models
             this.NotchPicker.Unit = "%";
             this.NotchPicker.Minimum = 0;
             this.NotchPicker.Maximum = 60;
-            this.NotchPicker.ValueChange += (sender, value) =>
+            this.NotchPicker.ValueChanged += (sender, value) =>
             {
                 float notch = (float)value / 100.0f;
                 this.SelectionViewModel.GeometryCogNotch = notch;

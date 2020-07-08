@@ -12,13 +12,14 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
+        public static string GenericText = "Temperature";
         public static IAdjustmentPage GenericPage;// = new TemperaturePage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Temperature;
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = TemperatureAdjustment.GenericPage;
-        public string Text => TemperatureAdjustment.GenericPage.Text;
+        public string Text => TemperatureAdjustment.GenericText;
 
 
         /// <summary> Specifies how much to increase or decrease the temperature of the image. Default value 0, range -1 to 1. </summary>
