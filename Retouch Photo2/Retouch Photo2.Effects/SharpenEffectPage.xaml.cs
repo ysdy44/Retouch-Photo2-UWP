@@ -2,9 +2,7 @@
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
-using Retouch_Photo2.Historys;
 using Windows.UI.Xaml.Controls;
-using Retouch_Photo2.Layers;
 
 namespace Retouch_Photo2.Effects.Models
 {
@@ -18,7 +16,18 @@ namespace Retouch_Photo2.Effects.Models
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        
+
+
+        //@Content
+        private float Amount
+        {
+            set
+            {
+                this.AmountPicker.Value = (int)(value * 10.0f);
+                this.AmountSlider.Value = value;
+            }
+        }
+
 
         //@Construct
         /// <summary>
@@ -28,8 +37,11 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.InitializeComponent();
             this.ConstructString();
-            this.ConstructButton();
-            this.ConstructSharpen_Amount();
+
+            this.ConstructIsOn();
+
+            this.ConstructAmount1();
+            this.ConstructAmount2();
         }
     }
 
@@ -61,11 +73,11 @@ namespace Retouch_Photo2.Effects.Models
         
         public void Reset()
         {
-            this.AmountSlider.Value = 0;
+            this.Amount = 0.0f;
 
             this.MethodViewModel.EffectChanged<float>
             (
-                set: (effect) => effect.Sharpen_Amount = 0,
+                set: (effect) => effect.Sharpen_Amount = 0.0f,
 
                 historyTitle: "Set effect sharpen",
                 getHistory: (effect) => effect.Sharpen_Amount,
@@ -78,7 +90,7 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowPage(Effect effect)
         {
-            this.AmountSlider.Value = effect.Sharpen_Amount;
+            this.Amount = effect.Sharpen_Amount;
         }
     }
 
@@ -89,7 +101,7 @@ namespace Retouch_Photo2.Effects.Models
     {
 
         //IsOn
-        private void ConstructButton()
+        private void ConstructIsOn()
         {
             this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
             (
@@ -102,21 +114,54 @@ namespace Retouch_Photo2.Effects.Models
         }
 
 
-        //Sharpen_Amount
-        private void ConstructSharpen_Amount()
+        //Amount
+        private void ConstructAmount1()
+        {
+            this.AmountPicker.Unit = null;
+            this.AmountPicker.Minimum = 0;
+            this.AmountPicker.Maximum = 100;
+            this.AmountPicker.ValueChange += (s, value) =>
+            {
+                float amount = (float)value / 10.0f;
+                this.Amount = amount;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.Sharpen_Amount = amount,
+
+                    historyTitle: "Set effect sharpen amount",
+                    getHistory: (effect) => effect.Sharpen_Amount,
+                    setHistory: (effect, previous) => effect.Sharpen_Amount = previous
+                );
+            };
+        }
+
+        private void ConstructAmount2()
         {
             this.AmountSlider.Minimum = 0.0d;
             this.AmountSlider.Maximum = 10.0d;
             this.AmountSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheSharpen());
-            this.AmountSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Sharpen_Amount = (float)value);
-            this.AmountSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
-            (
-                set: (effect) => effect.Sharpen_Amount = (float)value,
+            this.AmountSlider.ValueChangeDelta += (s, value) =>
+            {
+                float amount = (float)value;
+                this.Amount = amount;
 
-                historyTitle: "Set effect sharpen amount",
-                getHistory: (effect) => effect.StartingSharpen_Amount,
-                setHistory: (effect, previous) => effect.Sharpen_Amount = previous
-            );
+                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Sharpen_Amount = amount);
+            };
+            this.AmountSlider.ValueChangeCompleted += (s, value) =>
+            {
+                float amount = (float)value;
+                this.Amount = amount;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.Sharpen_Amount = amount,
+
+                    historyTitle: "Set effect sharpen amount",
+                    getHistory: (effect) => effect.StartingSharpen_Amount,
+                    setHistory: (effect, previous) => effect.Sharpen_Amount = previous
+                );
+            };
         }
 
     }

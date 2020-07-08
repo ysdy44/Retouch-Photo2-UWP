@@ -13,12 +13,12 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
-        public static IAdjustmentGenericPage<VignetteAdjustment> GenericPage;// = new VignettePage();
+        public static IAdjustmentPage GenericPage;// = new VignettePage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Vignette;
         public Visibility PageVisibility => Visibility.Visible;
-        public UIElement Page => VignetteAdjustment.GenericPage.Self;
+        public IAdjustmentPage Page { get; } = VignetteAdjustment.GenericPage;
         public string Text => VignetteAdjustment.GenericPage.Text;
 
 
@@ -36,28 +36,6 @@ namespace Retouch_Photo2.Adjustments.Models
         public Color Color = Colors.Black;
         public Color StartingColor { get; private set; }
         public void CacheColor() => this.StartingColor = this.Color;
-
-
-        public void Reset()
-        {
-            this.Amount = 0.0f;
-            this.Curve = 0.0f;
-            this.Color = Colors.Black;
-
-            if (VignetteAdjustment.GenericPage.Adjustment == this)
-            {
-                VignetteAdjustment.GenericPage.Reset();
-            }
-        }
-        public void Follow()
-        {
-            VignetteAdjustment.GenericPage.Adjustment = this;
-            VignetteAdjustment.GenericPage.Follow(this);
-        }
-        public void Close()
-        {
-            VignetteAdjustment.GenericPage.Adjustment = null;
-        }
 
 
         public IAdjustment Clone()

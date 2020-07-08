@@ -11,17 +11,48 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// <summary>
     /// Page of <see cref = "HighlightsAndShadowsAdjustment"/>.
     /// </summary>
-    public sealed partial class HighlightsAndShadowsPage : IAdjustmentGenericPage<HighlightsAndShadowsAdjustment>
+    public sealed partial class HighlightsAndShadowsPage : IAdjustmentPage
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
 
 
-        //@Generic
-        /// <summary> Gets IAdjustment's adjustment. </summary>
-        public HighlightsAndShadowsAdjustment Adjustment { get; set; }
+        //@Content
+        private float Shadows
+        {
+            set
+            {
+                this.ShadowsPicker.Value = (int)(value * 100.0f);
+                this.ShadowsSlider.Value = value;
+            }
+        }
+        private float Highlights
+        {
+            set
+            {
+                this.HighlightsPicker.Value = (int)(value * 100.0f);
+                this.HighlightsSlider.Value = value;
+            }
+        }
+        private float Clarity
+        {
+            set
+            {
+                this.ClarityPicker.Value = (int)(value * 100.0f);
+                this.ClaritySlider.Value = value;
+            }
+        }
+        private float MaskBlurAmount
+        {
+            set
+            {
+                this.MaskBlurAmountPicker.Value = (int)(value * 100.0f);
+                this.MaskBlurAmountSlider.Value = value;
+            }
+        }
 
 
         //@Construct
@@ -33,17 +64,24 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructShadows();
-            this.ConstructHighlights();
-            this.ConstructClarity();
-            this.ConstructMaskBlurAmount();
+            this.ConstructShadows1();
+            this.ConstructShadows2();
+
+            this.ConstructHighlights1();
+            this.ConstructHighlights2();
+
+            this.ConstructClarity1();
+            this.ConstructClarity2();
+
+            this.ConstructMaskBlurAmount1();
+            this.ConstructMaskBlurAmount2();
         }
     }
 
     /// <summary>
     /// Page of <see cref = "HighlightsAndShadowsAdjustment"/>.
     /// </summary>
-    public sealed partial class HighlightsAndShadowsPage : IAdjustmentGenericPage<HighlightsAndShadowsAdjustment>
+    public sealed partial class HighlightsAndShadowsPage : IAdjustmentPage
     {
 
         //Strings
@@ -71,23 +109,26 @@ namespace Retouch_Photo2.Adjustments.Pages
         
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new HighlightsAndShadowsAdjustment();
+       
+        
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
 
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.
         /// </summary>
         public void Reset()
         {
-            this.ShadowsSlider.Value = 0;
-            this.HighlightsSlider.Value = 0;
-            this.ClaritySlider.Value = 0;
-            this.MaskBlurAmountSlider.Value = 12.5;
-
+            this.Shadows = 0.0f;
+            this.Highlights = 0.0f; 
+            this.Clarity = 0.0f;
+            this.MaskBlurAmount = 1.25f;
 
             if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
                 ILayer layer = layerage.Self;
 
-                if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
+                if (layer.Filter.Adjustments[this.Index] is HighlightsAndShadowsAdjustment adjustment)
                 {
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment");
@@ -132,352 +173,241 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary>
         /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
         /// </summary>
-        /// <param name="adjustment"> The adjustment. </param>
-        public void Follow(HighlightsAndShadowsAdjustment adjustment)
+        public void Follow()
         {
-            this.ShadowsSlider.Value = adjustment.Shadows * 100;
-            this.HighlightsSlider.Value = adjustment.Highlights * 100;
-            this.ClaritySlider.Value = adjustment.Clarity * 100;
-            this.MaskBlurAmountSlider.Value = adjustment.MaskBlurAmount * 10;
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
+            {
+                ILayer layer = layerage.Self;
+
+                if (layer.Filter.Adjustments[this.Index] is HighlightsAndShadowsAdjustment adjustment)
+                {
+                    this.Shadows = adjustment.Shadows;
+                    this.Highlights = adjustment.Highlights;
+                    this.Clarity = adjustment.Clarity;
+                    this.MaskBlurAmount = adjustment.MaskBlurAmount;
+                }
+            }
         }
     }
 
     /// <summary>
     /// Page of <see cref = "HighlightsAndShadowsAdjustment"/>.
     /// </summary>
-    public sealed partial class HighlightsAndShadowsPage : IAdjustmentGenericPage<HighlightsAndShadowsAdjustment>
+    public sealed partial class HighlightsAndShadowsPage : IAdjustmentPage
     {
 
-        private void ConstructShadows()
+        //Shadows
+        private void ConstructShadows1()
         {
-            this.ShadowsSlider.Value = 0;
-            this.ShadowsSlider.Minimum = -100;
-            this.ShadowsSlider.Maximum = 100;
-
-            this.ShadowsSlider.SliderBrush = this.ShadowsBrush;
-
-            this.ShadowsSlider.ValueChangeStarted += (s, value) =>
+            this.ShadowsPicker.Unit = null;
+            this.ShadowsPicker.Minimum = -100;
+            this.ShadowsPicker.Maximum = 100;
+            this.ShadowsPicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float shadows = (float)value / 100.0f;
+                this.Shadows = shadows;
 
-                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
-                    {
-                        adjustment.CacheShadows();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, HighlightsAndShadowsAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Shadows = shadows,
+
+                    historyTitle: "Set highlights and shadows adjustment shadows",
+                    getHistory: (tAdjustment) => tAdjustment.Shadows,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Shadows = previous
+                );
             };
+        }
+
+        private void ConstructShadows2()
+        {
+            this.ShadowsSlider.Minimum = -1.0d;
+            this.ShadowsSlider.Maximum = 1.0d;
+            this.ShadowsSlider.SliderBrush = this.ShadowsBrush;
+            this.ShadowsSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<HighlightsAndShadowsAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheShadows());
             this.ShadowsSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float shadows = (float)value;
+                this.Shadows = shadows;
 
-                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
-                    {
-                        float shadows = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.Shadows = shadows;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<HighlightsAndShadowsAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.Shadows = shadows);
             };
             this.ShadowsSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float shadows = (float)value;
+                this.Shadows = shadows;
 
-                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
-                    {
-                        float shadows = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, HighlightsAndShadowsAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Shadows = shadows,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment shadows");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingShadows;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is HighlightsAndShadowsAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.Shadows = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.Shadows = shadows;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set highlights and shadows adjustment shadows",
+                    getHistory: (tAdjustment) => tAdjustment.StartingShadows,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Shadows = previous
+                );
             };
         }
 
-        private void ConstructHighlights()
+
+        //Highlights
+        private void ConstructHighlights1()
         {
-            this.HighlightsSlider.Value = 0;
-            this.HighlightsSlider.Minimum = -100;
-            this.HighlightsSlider.Maximum = 100;
-
-            this.HighlightsSlider.SliderBrush = this.HighlightsBrush;
-
-            this.HighlightsSlider.ValueChangeStarted += (s, value) =>
+            this.HighlightsPicker.Unit = null;
+            this.HighlightsPicker.Minimum = -100;
+            this.HighlightsPicker.Maximum = 100;
+            this.HighlightsPicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float highlights = (float)value / 100.0f;
+                this.Highlights = highlights;
 
-                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
-                    {
-                        adjustment.CacheHighlights();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, HighlightsAndShadowsAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Highlights = highlights,
+
+                    historyTitle: "Set highlights and shadows adjustment highlights",
+                    getHistory: (tAdjustment) => tAdjustment.Highlights,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Highlights = previous
+                );
             };
+        }
+
+        private void ConstructHighlights2()
+        {
+            this.HighlightsSlider.Minimum = -1.0d;
+            this.HighlightsSlider.Maximum = 1.0d;
+            this.HighlightsSlider.SliderBrush = this.HighlightsBrush;
+            this.HighlightsSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<HighlightsAndShadowsAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheHighlights());
             this.HighlightsSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float highlights = (float)value;
+                this.Highlights = highlights;
 
-                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
-                    {
-                        float highlights = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.Highlights = highlights;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<HighlightsAndShadowsAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.Highlights = highlights);
             };
             this.HighlightsSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float highlights = (float)value;
+                this.Highlights = highlights;
 
-                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
-                    {
-                        float highlights = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, HighlightsAndShadowsAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Highlights = highlights,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment highlights");
+                    historyTitle: "Set highlights and shadows adjustment highlights",
+                    getHistory: (tAdjustment) => tAdjustment.StartingHighlights,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Highlights = previous
+                );
+            };
+        }
+        
 
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingHighlights;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is HighlightsAndShadowsAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.Highlights = previous1;
-                            }
-                        };
+        //Clarity
+        private void ConstructClarity1()
+        {
+            this.ClarityPicker.Unit = null;
+            this.ClarityPicker.Minimum = -100;
+            this.ClarityPicker.Maximum = 100;
+            this.ClarityPicker.ValueChange += (s, value) =>
+            {
+                float clarity = (float)value / 100.0f;
+                this.Clarity = clarity;
 
-                        this.ViewModel.HistoryPush(history);
+                this.MethodViewModel.TAdjustmentChanged<float, HighlightsAndShadowsAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Clarity = clarity,
 
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.Highlights = highlights;
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set highlights and shadows adjustmentclarity",
+                    getHistory: (tAdjustment) => tAdjustment.Clarity,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Clarity = previous
+                );
             };
         }
 
-        private void ConstructClarity()
+        private void ConstructClarity2()
         {
-            this.ClaritySlider.Value = 0;
-            this.ClaritySlider.Minimum = -100;
-            this.ClaritySlider.Maximum = 100;
-
+            this.ClaritySlider.Minimum = -1.0d;
+            this.ClaritySlider.Maximum = 1.0d;
             this.ClaritySlider.SliderBrush = this.ClarityBrush;
-
-            this.ClaritySlider.ValueChangeStarted += (s, value) =>
-            {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
-                    {
-                        adjustment.CacheClarity();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
-            };
+            this.ClaritySlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<HighlightsAndShadowsAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheClarity());
             this.ClaritySlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float clarity = (float)value;
+                this.Clarity = clarity;
 
-                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
-                    {
-                        float clarity = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.Clarity = clarity;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<HighlightsAndShadowsAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.Clarity = clarity);
             };
             this.ClaritySlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float clarity = (float)value;
+                this.Clarity = clarity;
 
-                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
-                    {
-                        float clarity = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, HighlightsAndShadowsAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Clarity = clarity,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment clarity");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingClarity;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is HighlightsAndShadowsAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.Clarity = previous1;
-                            }
-                        };
-
-                        this.ViewModel.HistoryPush(history);
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.Clarity = clarity;
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set highlights and shadows adjustmentclarity",
+                    getHistory: (tAdjustment) => tAdjustment.StartingClarity,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Clarity = previous
+                );
             };
         }
 
-        private void ConstructMaskBlurAmount()
+
+        //MaskBlurAmount
+        private void ConstructMaskBlurAmount1()
         {
-            this.MaskBlurAmountSlider.Value = 12.5f;
-            this.MaskBlurAmountSlider.Minimum = 0;
-            this.MaskBlurAmountSlider.Maximum = 100;
-
-            this.MaskBlurAmountSlider.SliderBrush = this.MaskBlurAmountBrush;
-
-            this.MaskBlurAmountSlider.ValueChangeStarted += (s, value) =>
+            this.MaskBlurAmountPicker.Unit = null;
+            this.MaskBlurAmountPicker.Minimum = 0;
+            this.MaskBlurAmountPicker.Maximum = 1000;
+            this.MaskBlurAmountPicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float maskBlurAmount = (float)value / 100.0f;
+                this.MaskBlurAmount = maskBlurAmount;
 
-                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
-                    {
-                        adjustment.CacheMaskBlurAmount();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, HighlightsAndShadowsAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.MaskBlurAmount = maskBlurAmount,
+
+                    historyTitle: "Set highlights and shadows adjustment mask blur amount",
+                    getHistory: (tAdjustment) => tAdjustment.MaskBlurAmount,
+                    setHistory: (tAdjustment, previous) => tAdjustment.MaskBlurAmount = previous
+                );
             };
+        }
+
+        private void ConstructMaskBlurAmount2()
+        {
+            this.MaskBlurAmountSlider.Minimum = 0.0d;
+            this.MaskBlurAmountSlider.Maximum = 10.0d;
+            this.MaskBlurAmountSlider.SliderBrush = this.MaskBlurAmountBrush;
+            this.MaskBlurAmountSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<HighlightsAndShadowsAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheMaskBlurAmount());
             this.MaskBlurAmountSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float maskBlurAmount = (float)value;
+                this.MaskBlurAmount = maskBlurAmount;
 
-                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
-                    {
-                        float maskBlurAmount = (float)value / 10.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.MaskBlurAmount = maskBlurAmount;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<HighlightsAndShadowsAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.MaskBlurAmount = maskBlurAmount);
             };
             this.MaskBlurAmountSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float maskBlurAmount = (float)value;
+                this.MaskBlurAmount = maskBlurAmount;
 
-                    if (this.Adjustment is HighlightsAndShadowsAdjustment adjustment)
-                    {
-                        float maskBlurAmount = (float)value / 10.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, HighlightsAndShadowsAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.MaskBlurAmount = maskBlurAmount,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment mask blur amount");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingMaskBlurAmount;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is HighlightsAndShadowsAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.MaskBlurAmount = previous1;
-                            }
-                        };
-
-                        this.ViewModel.HistoryPush(history);
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.MaskBlurAmount = maskBlurAmount;
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set highlights and shadows adjustment mask blur amount",
+                    getHistory: (tAdjustment) => tAdjustment.StartingMaskBlurAmount,
+                    setHistory: (tAdjustment, previous) => tAdjustment.MaskBlurAmount = previous
+                );
             };
         }
 

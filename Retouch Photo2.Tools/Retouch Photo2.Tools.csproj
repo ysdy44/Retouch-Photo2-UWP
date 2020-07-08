@@ -236,6 +236,12 @@
       <DependentUpon>ToolSecondButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="ToolType.cs" />
+    <Compile Include="Touchbars\TouchbarButton.xaml.cs">
+      <DependentUpon>TouchbarButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Touchbars\TouchbarSlider.xaml.cs">
+      <DependentUpon>TouchbarSlider.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Retouch_Photo2.Tools.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -404,6 +410,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ToolButtons\ToolSecondButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Touchbars\TouchbarButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Touchbars\TouchbarSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -20,6 +20,25 @@ namespace Retouch_Photo2.Effects.Models
         ViewModel MethodViewModel => App.MethodViewModel;
         
 
+        //@Content
+        private float Radius
+        {
+            set
+            {
+                this.RadiusPicker.Value = (int)(value * 10.0f);
+                this.RadiusSlider.Value = value;
+            }
+        }
+        private float Angle
+        {
+            set
+            {
+                this.AnglePicker.Value = (int)(value * 180.0f / FanKit.Math.Pi);
+                this.AnglePicker2.Radians = value;
+            }
+        }
+
+
         //@Construct
         /// <summary>
         /// Initializes a EmbossEffectPage. 
@@ -28,9 +47,14 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.InitializeComponent();
             this.ConstructString();
-            this.ConstructButton();
-            this.ConstructEmboss_Radius();
-            this.ConstructEmboss_Angle();
+
+            this.ConstructIsOn();
+
+            this.ConstructRadius1();
+            this.ConstructRadius2();
+
+            this.ConstructAngle1();
+            this.ConstructAngle2();
         }
     }
 
@@ -63,9 +87,9 @@ namespace Retouch_Photo2.Effects.Models
         
         public void Reset()
         {
-            this.RadiusSlider.Value = 1;
-            this.AnglePicker.Radians = 0;
-            
+            this.Radius = 1.0f;
+            this.Angle = 0.0f;
+
             //History
             LayersPropertyHistory history = new LayersPropertyHistory("Set effect emboss");
 
@@ -90,8 +114,8 @@ namespace Retouch_Photo2.Effects.Models
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
                 layerage.RefactoringParentsIconRender();
-                layer.Effect.Emboss_Radius = 1;
-                layer.Effect.Emboss_Angle = 0;
+                layer.Effect.Emboss_Radius = 1.0f;
+                layer.Effect.Emboss_Angle = 0.0f;
             });
 
             //History
@@ -105,8 +129,8 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowPage(Effect effect)
         {
-            this.RadiusSlider.Value = effect.Emboss_Radius;
-            this.AnglePicker.Radians = effect.Emboss_Angle;
+            this.Radius = effect.Emboss_Radius;
+            this.Angle = effect.Emboss_Angle;
         }
     }
 
@@ -117,55 +141,111 @@ namespace Retouch_Photo2.Effects.Models
     {
 
         //IsOn
-        private void ConstructButton()
+        private void ConstructIsOn()
         {
-            this.Button.Toggled += (isOn) =>
-            {
-                this.MethodViewModel.EffectChanged<bool>
-                (
-                    set: (effect) => effect.Emboss_IsOn = isOn,
+            this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
+            (
+                set: (effect) => effect.Emboss_IsOn = isOn,
 
-                    historyTitle: "Set effect emboss is on",
-                    getHistory: (effect) => effect.Emboss_IsOn,
-                    setHistory: (effect, previous) => effect.Emboss_IsOn = previous
+                historyTitle: "Set effect emboss is on",
+                getHistory: (effect) => effect.Emboss_IsOn,
+                setHistory: (effect, previous) => effect.Emboss_IsOn = previous
+            );
+        }
+
+
+        //Radius
+        private void ConstructRadius1()
+        {
+            this.RadiusPicker.Minimum = 0;
+            this.RadiusPicker.Maximum = 100;
+            this.RadiusPicker.ValueChange += (s, value) =>
+            {
+                float radius = (float)value / 10.0f;
+                this.Radius = radius;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.Emboss_Radius = (float)value,
+
+                    historyTitle: "Set effect emboss radius",
+                    getHistory: (effect) => effect.Emboss_Radius,
+                    setHistory: (effect, previous) => effect.Emboss_Radius = previous
+                );
+            };
+        }
+
+        private void ConstructRadius2()
+        {
+            this.RadiusSlider.Minimum = 0.0d;
+            this.RadiusSlider.Maximum = 10.0d;
+            this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEmboss());
+            this.RadiusSlider.ValueChangeDelta += (s, value) =>
+            {
+                float radius = (float)value;
+                this.Radius = radius;
+
+                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Emboss_Radius = radius);
+            };
+            this.RadiusSlider.ValueChangeCompleted += (s, value) =>
+            {
+                float radius = (float)value;
+                this.Radius = radius;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.Emboss_Radius = (float)value,
+
+                    historyTitle: "Set effect emboss radius",
+                    getHistory: (effect) => effect.StartingEmboss_Radius,
+                    setHistory: (effect, previous) => effect.Emboss_Radius = previous
                 );
             };
         }
 
 
-        //Emboss_Radius
-        private void ConstructEmboss_Radius()
+        //Angle
+        private void ConstructAngle1()
         {
-            this.RadiusSlider.Minimum = 0.0d;
-            this.RadiusSlider.Maximum = 10.0d;
-            this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEmboss());
-            this.RadiusSlider.ValueChangeDelta += (s, value) =>  this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Emboss_Radius = (float)value);
-            this.RadiusSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
-            (
-                set: (effect) => effect.Emboss_Radius = (float)value,
+            this.AnglePicker.Unit = null;
+            this.AnglePicker.Minimum = 0;
+            this.AnglePicker.Maximum = 360;
+            this.AnglePicker.ValueChange += (s, value) =>
+            {
+                float radians = (float)value * 180.0f / FanKit.Math.Pi;
+                this.Angle = radians;
 
-                historyTitle: "Set effect emboss radius",
-                getHistory: (effect) => effect.StartingEmboss_Radius,
-                setHistory: (effect, previous) => effect.Emboss_Radius = previous
-            );
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.Emboss_Angle = (float)value,
+
+                    historyTitle: "Set effect emboss angle",
+                    getHistory: (effect) => effect.Emboss_Angle,
+                    setHistory: (effect, previous) => effect.Emboss_Angle = previous
+                );
+            };
         }
 
-
-        //Emboss_Angle
-        private void ConstructEmboss_Angle()
+        private void ConstructAngle2()
         {
-            //this.AnglePicker.Minimum = 0;
-            //this.AnglePicker.Maximum = FanKit.Math.PiTwice;
-            this.AnglePicker.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEmboss());
-            this.AnglePicker.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Emboss_Angle = (float)value);
-            this.AnglePicker.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
-            (
-                set: (effect) => effect.Emboss_Angle = (float)value,
+            //this.AnglePicker2.Minimum = 0;
+            //this.AnglePicker2.Maximum = FanKit.Math.PiTwice;
+            this.AnglePicker2.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEmboss());
+            this.AnglePicker2.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Emboss_Angle = (float)value);
+            this.AnglePicker2.ValueChangeCompleted += (s, value) =>
+            {
+                float radians = (float)value;
+                this.Angle = radians;
 
-                historyTitle: "Set effect emboss angle",
-                getHistory: (effect) => effect.StartingEmboss_Angle,
-                setHistory: (effect, previous) => effect.Emboss_Angle = previous
-            );
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.Emboss_Angle = (float)value,
+
+                    historyTitle: "Set effect emboss angle",
+                    getHistory: (effect) => effect.StartingEmboss_Angle,
+                    setHistory: (effect, previous) => effect.Emboss_Angle = previous
+                );
+            };
         }
 
     }

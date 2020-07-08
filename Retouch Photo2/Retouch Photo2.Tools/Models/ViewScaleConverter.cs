@@ -22,8 +22,8 @@
         public const int MinNumber = 10;
         public const int MaxNumber =1000;
 
-        public static int ScaleToNumber(float scale) => (int)(scale * 100f);
-        public static float NumberToScale(int number) => number / 100f;
+        public static int ScaleToNumber(float scale) => (int)(scale * 100.0f);
+        public static float NumberToScale(int number) => number / 100.0f;
 
 
         //Value

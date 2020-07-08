@@ -4,8 +4,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:hsvcolorpickers="using:HSVColorPickers"
-    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:hSVColorPickers="using:HSVColorPickers"
+    xmlns:tools="using:Retouch_Photo2.Tools"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
@@ -17,58 +17,58 @@
         <StackPanel Orientation="Horizontal">
 
             <!--Count-->
-            <elements:TouchbarButton x:Name="CountTouchbarButton">
-                <elements:TouchbarButton.TouchbarPicker>
-                    <hsvcolorpickers:NumberPicker x:Name="CountTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+            <tools:TouchbarButton x:Name="CountButton">
+                <tools:TouchbarButton.Picker>
+                    <hSVColorPickers:NumberPicker x:Name="CountPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind SelectionViewModel.GeometryCogCount, Mode=OneWay}"/>
-                </elements:TouchbarButton.TouchbarPicker>
-                <elements:TouchbarButton.TouchbarSlider>
-                    <elements:TouchbarSlider x:Name="CountTouchbarSlider" 
+                </tools:TouchbarButton.Picker>
+                <tools:TouchbarButton.Slider>
+                    <tools:TouchbarSlider x:Name="CountSlider" 
                              Value="{x:Bind SelectionViewModel.GeometryCogCount, Mode=OneWay}"/>
-                </elements:TouchbarButton.TouchbarSlider>
-            </elements:TouchbarButton>
+                </tools:TouchbarButton.Slider>
+            </tools:TouchbarButton>
 
             <ContentControl Width="4"/>
 
             <!--InnerRadius-->
-            <elements:TouchbarButton x:Name="InnerRadiusTouchbarButton">
-                <elements:TouchbarButton.TouchbarPicker>
-                    <hsvcolorpickers:NumberPicker x:Name="InnerRadiusTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                          Value="{x:Bind InnerRadiusNumberConverter(SelectionViewModel.GeometryCogInnerRadius), Mode=OneWay}"/>
-                </elements:TouchbarButton.TouchbarPicker>
-                <elements:TouchbarButton.TouchbarSlider>
-                    <elements:TouchbarSlider x:Name="InnerRadiusTouchbarSlider"
+            <tools:TouchbarButton x:Name="InnerRadiusButton">
+                <tools:TouchbarButton.Picker>
+                    <hSVColorPickers:NumberPicker x:Name="InnerRadiusPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                          Value="{x:Bind InnerRadiusToNumberConverter(SelectionViewModel.GeometryCogInnerRadius), Mode=OneWay}"/>
+                </tools:TouchbarButton.Picker>
+                <tools:TouchbarButton.Slider>
+                    <tools:TouchbarSlider x:Name="InnerRadiusSlider"
                           Value="{x:Bind SelectionViewModel.GeometryCogInnerRadius, Mode=OneWay}" />
-                </elements:TouchbarButton.TouchbarSlider>
-            </elements:TouchbarButton>
+                </tools:TouchbarButton.Slider>
+            </tools:TouchbarButton>
 
             <ContentControl Width="4"/>
 
             <!--Tooth-->
-            <elements:TouchbarButton x:Name="ToothTouchbarButton">
-                <elements:TouchbarButton.TouchbarPicker>
-                    <hsvcolorpickers:NumberPicker x:Name="ToothTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                          Value="{x:Bind ToothNumberConverter(SelectionViewModel.GeometryCogTooth), Mode=OneWay}"/>
-                </elements:TouchbarButton.TouchbarPicker>
-                <elements:TouchbarButton.TouchbarSlider>
-                    <elements:TouchbarSlider x:Name="ToothTouchbarSlider"
+            <tools:TouchbarButton x:Name="ToothButton">
+                <tools:TouchbarButton.Picker>
+                    <hSVColorPickers:NumberPicker x:Name="ToothPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                          Value="{x:Bind ToothToNumberConverter(SelectionViewModel.GeometryCogTooth), Mode=OneWay}"/>
+                </tools:TouchbarButton.Picker>
+                <tools:TouchbarButton.Slider>
+                    <tools:TouchbarSlider x:Name="ToothSlider"
                           Value="{x:Bind SelectionViewModel.GeometryCogTooth, Mode=OneWay}" />
-                </elements:TouchbarButton.TouchbarSlider>
-            </elements:TouchbarButton>
+                </tools:TouchbarButton.Slider>
+            </tools:TouchbarButton>
 
             <ContentControl Width="4"/>
 
             <!--Notch-->
-            <elements:TouchbarButton x:Name="NotchTouchbarButton">
-                <elements:TouchbarButton.TouchbarPicker>
-                    <hsvcolorpickers:NumberPicker x:Name="NotchTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                          Value="{x:Bind NotchNumberConverter(SelectionViewModel.GeometryCogNotch), Mode=OneWay}"/>
-                </elements:TouchbarButton.TouchbarPicker>
-                <elements:TouchbarButton.TouchbarSlider>
-                    <elements:TouchbarSlider x:Name="NotchTouchbarSlider"
+            <tools:TouchbarButton x:Name="NotchButton">
+                <tools:TouchbarButton.Picker>
+                    <hSVColorPickers:NumberPicker x:Name="NotchPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                          Value="{x:Bind NotchToNumberConverter(SelectionViewModel.GeometryCogNotch), Mode=OneWay}"/>
+                </tools:TouchbarButton.Picker>
+                <tools:TouchbarButton.Slider>
+                    <tools:TouchbarSlider x:Name="NotchSlider"
                           Value="{x:Bind SelectionViewModel.GeometryCogNotch, Mode=OneWay}" />
-                </elements:TouchbarButton.TouchbarSlider>
-            </elements:TouchbarButton>
+                </tools:TouchbarButton.Slider>
+            </tools:TouchbarButton>
 
             <ContentControl Width="4"/>
 

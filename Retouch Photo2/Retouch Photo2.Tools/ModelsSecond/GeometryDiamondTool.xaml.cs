@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -25,7 +24,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Converter
-        private int MidNumberConverter(float mid) => (int)(mid * 100.0f);
+        private int MidToNumberConverter(float mid) => (int)(mid * 100.0f);
 
 
         //@Construct
@@ -63,7 +62,7 @@ namespace Retouch_Photo2.Tools.Models
             this.Button.Title = resource.GetString("/ToolsSecond/GeometryDiamond");
 
             this.MirrorTextBlock.Text = resource.GetString("/ToolsSecond/GeometryDiamond_Mirror");
-            this.MidTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryDiamond_Mid");
+            this.MidButton.CenterContent = resource.GetString("/ToolsSecond/GeometryDiamond_Mid");
 
             this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
         }
@@ -108,17 +107,17 @@ namespace Retouch_Photo2.Tools.Models
         //Mid
         private void ConstructMid1()
         {
-            this.MidTouchbarPicker.Unit = "%";
-            this.MidTouchbarPicker.Minimum = 0;
-            this.MidTouchbarPicker.Maximum = 100;
-            this.MidTouchbarPicker.ValueChange += (sender, value) =>
+            this.MidPicker.Unit = "%";
+            this.MidPicker.Minimum = 0;
+            this.MidPicker.Maximum = 100;
+            this.MidPicker.ValueChange += (sender, value) =>
             {
                 float mid = (float)value / 100.0f;
+                this.SelectionViewModel.GeometryDiamondMid = mid;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryDiamondLayer>
                 (
                     layerType: LayerType.GeometryDiamond,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryDiamondMid = mid,
                     set: (tLayer) => tLayer.Mid = mid,
 
                     historyTitle: "Set diamond layer mid",
@@ -130,26 +129,24 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructMid2()
         {
-            this.MidTouchbarSlider.Minimum = 0.0d;
-            this.MidTouchbarSlider.Maximum = 1.0d;
-            this.MidTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryDiamondLayer>
-            (
-                layerType: LayerType.GeometryDiamond,
-                cache: (tLayer) => tLayer.CacheMid()
-            );
-            this.MidTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryDiamondLayer>
-            (
-                layerType: LayerType.GeometryDiamond,
-                set: (tLayer) => tLayer.Mid = (float)value
-            );
-            this.MidTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.MidSlider.Minimum = 0.0d;
+            this.MidSlider.Maximum = 1.0d;
+            this.MidSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryDiamondLayer>(layerType: LayerType.GeometryDiamond, cache: (tLayer) => tLayer.CacheMid());
+            this.MidSlider.ValueChangeDelta += (sender, value) =>
             {
                 float mid = (float)value;
+                this.SelectionViewModel.GeometryDiamondMid = mid;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryDiamondLayer>(layerType: LayerType.GeometryDiamond, set: (tLayer) => tLayer.Mid = mid);
+            };
+            this.MidSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float mid = (float)value;
+                this.SelectionViewModel.GeometryDiamondMid = mid;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryDiamondLayer>
                 (
                     layerType: LayerType.GeometryDiamond,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryDiamondMid = mid,
                     set: (tLayer) => tLayer.Mid = mid,
 
                     historyTitle: "Set diamond layer mid",
@@ -164,11 +161,11 @@ namespace Retouch_Photo2.Tools.Models
             this.MirrorButton.Click += (s, e) =>
             {
                 float mid= 1.0f - this.SelectionViewModel.GeometryDiamondMid;
+                this.SelectionViewModel.GeometryDiamondMid = mid;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryDiamondLayer>
                 (
                     layerType: LayerType.GeometryDiamond,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryDiamondMid = mid,
                     set: (tLayer) => tLayer.Mid = 1.0f - tLayer.Mid,
 
                     historyTitle: "Set diamond layer mid",

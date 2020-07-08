@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Texts"/>.
     /// </summary>
-    public sealed partial class TextMenu : Expander, IMenu 
+    public sealed partial class TextMenu : Expander, IMenu
     {
 
         //@ViewModel
@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Texts"/>.
     /// </summary>
-    public sealed partial class TextMenu : Expander, IMenu 
+    public sealed partial class TextMenu : Expander, IMenu
     {
 
         //Strings
@@ -109,12 +109,24 @@ namespace Retouch_Photo2.Menus.Models
 
         //@Content
         /// <summary> FontWeight ComboBox. </summary>
-        public FontWeightComboBox FontWeightComboBox { get; } = new FontWeightComboBox();
+        public FontWeightComboBox FontWeightComboBox { get; } = new FontWeightComboBox
+        {
+            MinHeight = 165,
+            MaxHeight = 300
+        };
         /// <summary> FontFamily ListView. </summary>
-        public ListView FontFamilyListView { get; private set; }
+        public ListView FontFamilyListView { get; } = new ListView
+        {
+            MinHeight = 165,
+            MaxHeight = 300
+        };
         /// <summary> FontSize ListView. </summary>
-        public ListView FontSizeListView { get; private set; }
-        
+        public ListView FontSizeListView { get; } = new ListView
+        {
+            MinHeight = 165,
+            MaxHeight = 300
+        };
+
         //@Converter
         private int FontSizeConverter(float fontSize) => (int)fontSize;
 
@@ -156,7 +168,6 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructFontFamily();
             this.ConstructFontSize();
         }
-        
     }
 
     /// <summary>
@@ -264,16 +275,13 @@ namespace Retouch_Photo2.Menus.Models
         //FontFamily
         private void ConstructFontFamily()
         {
-            this.FontFamilyListView = new ListView
-            {
-                IsItemClickEnabled = true,
-                SelectionMode = ListViewSelectionMode.Single,
+            this.FontFamilyListView.IsItemClickEnabled = true;
+            this.FontFamilyListView.SelectionMode = ListViewSelectionMode.Single;
 
-                ItemTemplate = this.FontFamilyDataTemplate,
-             
-                // Get all FontFamilys in your device.
-                ItemsSource = CanvasTextFormat.GetSystemFontFamilies(ApplicationLanguages.Languages).OrderBy(k => k)
-            };
+            this.FontFamilyListView.ItemTemplate = this.FontFamilyDataTemplate;
+
+            // Get all FontFamilys in your device.
+            this.FontFamilyListView.ItemsSource = CanvasTextFormat.GetSystemFontFamilies(ApplicationLanguages.Languages).OrderBy(k => k);
 
             this.FontFamilyButton.Click += (s, e) =>
             {
@@ -294,20 +302,17 @@ namespace Retouch_Photo2.Menus.Models
 
         //FontSize
         private void ConstructFontSize()
-        {          
-            this.FontSizeListView = new ListView
-            {
-                IsItemClickEnabled = true,
-                SelectionMode = ListViewSelectionMode.Single,
+        {
+            this.FontSizeListView.IsItemClickEnabled = true;
+            this.FontSizeListView.SelectionMode = ListViewSelectionMode.Single;
 
-                ItemTemplate = this.FontSizeDataTemplate,
+            this.FontSizeListView.ItemTemplate = this.FontSizeDataTemplate;
 
-                // Get all fontSizes in your device.
-                ItemsSource = new List<int>
+            // Get all fontSizes in your device.
+            this.FontSizeListView.ItemsSource = new List<int>
                 {
                      5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 24, 30, 36, 48, 64, 72, 96, 144, 288,
-                }
-            };
+                };
 
             this.FontSizeButton.Click += (s, e) =>
             {

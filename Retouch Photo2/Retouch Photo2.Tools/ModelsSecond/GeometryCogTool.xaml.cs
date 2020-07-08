@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -43,9 +42,9 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Converter    
-        private int InnerRadiusNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
-        private int ToothNumberConverter(float tooth) => (int)(tooth * 100.0f);
-        private int NotchNumberConverter(float notch) => (int)(notch * 100.0f);
+        private int InnerRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
+        private int ToothToNumberConverter(float tooth) => (int)(tooth * 100.0f);
+        private int NotchToNumberConverter(float notch) => (int)(notch * 100.0f);
 
 
         //@Construct
@@ -90,10 +89,10 @@ namespace Retouch_Photo2.Tools.Models
 
             this.Button.Title = resource.GetString("/ToolsSecond/GeometryCog");
 
-            this.CountTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_Count");
-            this.InnerRadiusTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_InnerRadius");
-            this.ToothTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_Tooth");
-            this.NotchTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_Notch");
+            this.CountButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_Count");
+            this.InnerRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_InnerRadius");
+            this.ToothButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_Tooth");
+            this.NotchButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_Notch");
 
             this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
         }
@@ -141,21 +140,21 @@ namespace Retouch_Photo2.Tools.Models
         //Count
         private void ConstructCount1()
         {
-            this.CountTouchbarPicker.Unit = null;
-            this.CountTouchbarPicker.Minimum = 4;
-            this.CountTouchbarPicker.Maximum = 36;
-            this.CountTouchbarPicker.ValueChange += (sender, value) =>
+            this.CountPicker.Unit = null;
+            this.CountPicker.Minimum = 4;
+            this.CountPicker.Maximum = 36;
+            this.CountPicker.ValueChange += (sender, value) =>
             {
                 int count = (int)value;
+                this.SelectionViewModel.GeometryCogCount = count;
 
                 this.MethodViewModel.TLayerChanged<int, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogCount = count,
                     set: (tLayer) => tLayer.Count = count,
 
                     historyTitle: "Set cog layer count",
-                    getHistory: (tLayer) => tLayer.Count = count,
+                    getHistory: (tLayer) => tLayer.Count,
                     setHistory: (tLayer, previous) => tLayer.Count = previous
                 );
             };
@@ -163,26 +162,24 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructCount2()
         {
-            this.CountTouchbarSlider.Minimum = 4;
-            this.CountTouchbarSlider.Maximum = 36;
-            this.CountTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
-            (
-                 layerType: LayerType.GeometryCog,
-                 cache: (tLayer) => tLayer.CacheCount()
-            );
-            this.CountTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
-            (
-                 layerType: LayerType.GeometryCog,
-                 set: (tLayer) => tLayer.Count = (int)value
-            );
-            this.CountTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.CountSlider.Minimum = 4;
+            this.CountSlider.Maximum = 36;
+            this.CountSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>(layerType: LayerType.GeometryCog, cache: (tLayer) => tLayer.CacheCount());
+            this.CountSlider.ValueChangeDelta += (sender, value) =>
             {
                 int count = (int)value;
+                this.SelectionViewModel.GeometryCogCount = count;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>(layerType: LayerType.GeometryCog, set: (tLayer) => tLayer.Count = count);
+            };
+            this.CountSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                int count = (int)value;
+                this.SelectionViewModel.GeometryCogCount = count;
 
                 this.MethodViewModel.TLayerChangeCompleted<int, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogCount = count,
                     set: (tLayer) => tLayer.Count = count,
 
                     historyTitle: "Set cog layer count",
@@ -196,17 +193,17 @@ namespace Retouch_Photo2.Tools.Models
         //InnerRadius
         private void ConstructInnerRadius1()
         {
-            this.InnerRadiusTouchbarPicker.Unit = "%";
-            this.InnerRadiusTouchbarPicker.Minimum = 0;
-            this.InnerRadiusTouchbarPicker.Maximum = 100;
-            this.InnerRadiusTouchbarPicker.ValueChange += (sender, value) =>
+            this.InnerRadiusPicker.Unit = "%";
+            this.InnerRadiusPicker.Minimum = 0;
+            this.InnerRadiusPicker.Maximum = 100;
+            this.InnerRadiusPicker.ValueChange += (sender, value) =>
             {
-                float innerRadius = (float)value / 100f;
+                float innerRadius = (float)value / 100.0f;
+                this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogInnerRadius = innerRadius,
                     set: (tLayer) => tLayer.InnerRadius = innerRadius,
 
                     historyTitle: "Set cog layer inner radius",
@@ -218,26 +215,24 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructInnerRadius2()
         {
-            this.InnerRadiusTouchbarSlider.Minimum = 0.0d;
-            this.InnerRadiusTouchbarSlider.Maximum = 1.0d;
-            this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
-            (
-                layerType: LayerType.GeometryCog,
-                cache: (tLayer) => tLayer.CacheInnerRadius()
-            );
-            this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
-            (
-                layerType: LayerType.GeometryCog,
-                set: (tLayer) => tLayer.InnerRadius = (float)value
-            );
-            this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.InnerRadiusSlider.Minimum = 0.0d;
+            this.InnerRadiusSlider.Maximum = 1.0d;
+            this.InnerRadiusSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>(layerType: LayerType.GeometryCog, cache: (tLayer) => tLayer.CacheInnerRadius());
+            this.InnerRadiusSlider.ValueChangeDelta += (sender, value) =>
             {
                 float innerRadius = (float)value;
+                this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>(layerType: LayerType.GeometryCog, set: (tLayer) => tLayer.InnerRadius = innerRadius);
+            };
+            this.InnerRadiusSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float innerRadius = (float)value;
+                this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogInnerRadius = innerRadius,
                     set: (tLayer) => tLayer.InnerRadius = innerRadius,
 
                     historyTitle: "Set cog layer inner radius",
@@ -251,17 +246,17 @@ namespace Retouch_Photo2.Tools.Models
         //Tooth
         private void ConstructTooth1()
         {
-            this.ToothTouchbarPicker.Unit = "%";
-            this.ToothTouchbarPicker.Minimum = 0;
-            this.ToothTouchbarPicker.Maximum = 50;
-            this.ToothTouchbarPicker.ValueChange += (sender, value) =>
+            this.ToothPicker.Unit = "%";
+            this.ToothPicker.Minimum = 0;
+            this.ToothPicker.Maximum = 50;
+            this.ToothPicker.ValueChange += (sender, value) =>
             {
-                float tooth = (float)value / 100f;
+                float tooth = (float)value / 100.0f;
+                this.SelectionViewModel.GeometryCogTooth = tooth;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogTooth = tooth,
                     set: (tLayer) => tLayer.Tooth = tooth,
 
                     historyTitle: "Set cog layer tooth",
@@ -273,26 +268,24 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructTooth2()
         {
-            this.ToothTouchbarSlider.Minimum = 0.0d;
-            this.ToothTouchbarSlider.Maximum = 0.5d;
-            this.ToothTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
-            (
-                layerType: LayerType.GeometryCog,
-                cache: (tLayer) => tLayer.CacheTooth()
-            );
-            this.ToothTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
-            (
-                layerType: LayerType.GeometryCog,
-                set: (tLayer) => tLayer.Tooth = (float)value
-            );
-            this.ToothTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.ToothSlider.Minimum = 0.0d;
+            this.ToothSlider.Maximum = 0.5d;
+            this.ToothSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>(layerType: LayerType.GeometryCog, cache: (tLayer) => tLayer.CacheTooth());
+            this.ToothSlider.ValueChangeDelta += (sender, value) =>
             {
                 float tooth = (float)value;
+                this.SelectionViewModel.GeometryCogTooth = tooth;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>(layerType: LayerType.GeometryCog, set: (tLayer) => tLayer.Tooth = tooth);
+            };
+            this.ToothSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float tooth = (float)value;
+                this.SelectionViewModel.GeometryCogTooth = tooth;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogTooth = tooth,
                     set: (tLayer) => tLayer.Tooth = tooth,
 
                     historyTitle: "Set cog layer tooth",
@@ -306,17 +299,17 @@ namespace Retouch_Photo2.Tools.Models
         //Notch
         private void ConstructNotch1()
         {
-            this.NotchTouchbarPicker.Unit = "%";
-            this.NotchTouchbarPicker.Minimum = 0;
-            this.NotchTouchbarPicker.Maximum = 60;
-            this.NotchTouchbarPicker.ValueChange += (sender, value) =>
+            this.NotchPicker.Unit = "%";
+            this.NotchPicker.Minimum = 0;
+            this.NotchPicker.Maximum = 60;
+            this.NotchPicker.ValueChange += (sender, value) =>
             {
-                float notch = (float)value / 100f;
+                float notch = (float)value / 100.0f;
+                this.SelectionViewModel.GeometryCogNotch = notch;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogNotch = notch,
                     set: (tLayer) => tLayer.Notch = notch,
 
                     historyTitle: "Set cog layer notch",
@@ -328,26 +321,24 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructNotch2()
         {
-            this.NotchTouchbarSlider.Minimum = 0.0d;
-            this.NotchTouchbarSlider.Maximum = 0.6d;
-            this.NotchTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>
-            (
-                layerType: LayerType.GeometryCog,
-                cache: (tLayer) => tLayer.CacheNotch()
-            );
-            this.NotchTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>
-            (
-                layerType: LayerType.GeometryCog,
-                set: (tLayer) => tLayer.Notch = (float)value
-            );
-            this.NotchTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.NotchSlider.Minimum = 0.0d;
+            this.NotchSlider.Maximum = 0.6d;
+            this.NotchSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCogLayer>(layerType: LayerType.GeometryCog, cache: (tLayer) => tLayer.CacheNotch());
+            this.NotchSlider.ValueChangeDelta += (sender, value) =>
             {
                 float notch = (float)value;
+                this.SelectionViewModel.GeometryCogNotch = notch;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>(layerType: LayerType.GeometryCog, set: (tLayer) => tLayer.Notch = notch);
+            };
+            this.NotchSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float notch = (float)value;
+                this.SelectionViewModel.GeometryCogNotch = notch;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCogNotch = notch,
                     set: (tLayer) => tLayer.Notch = notch,
 
                     historyTitle: "Set cog layer notch",

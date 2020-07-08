@@ -4,16 +4,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:historys="using:Retouch_Photo2.Historys"
-    mc:Ignorable="d"
+    mc:Ignorable="d"                      
+    MinHeight="165" 
+    MaxHeight="300"
     d:DesignWidth="200"
     d:DesignHeight="400"
     >
 
     <ListView x:Name="ListView" SelectionMode="None"
-                      IsItemClickEnabled="True"
-                      MinHeight="165" MaxHeight="300">
+                      IsItemClickEnabled="True">
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="historys:IHistory">

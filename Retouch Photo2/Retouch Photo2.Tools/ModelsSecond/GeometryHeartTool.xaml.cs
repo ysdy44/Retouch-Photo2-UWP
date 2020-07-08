@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Tools.Models
         
 
         //@Converter
-        private int SpreadNumberConverter(float spread) => (int)(spread * 100.0f);
+        private int SpreadToNumberConverter(float spread) => (int)(spread * 100.0f);
 
 
         //@Construct
@@ -62,7 +62,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.Button.Title = resource.GetString("/ToolsSecond/GeometryHeart");
 
-            this.SpreadTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryHeart_Spread");
+            this.SpreadButton.CenterContent = resource.GetString("/ToolsSecond/GeometryHeart_Spread");
 
             this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
         }
@@ -107,17 +107,17 @@ namespace Retouch_Photo2.Tools.Models
         //Spead
         private void ConstructSpread1()
         {
-            this.SpreadTouchbarPicker.Unit = "%";
-            this.SpreadTouchbarPicker.Minimum = 0;
-            this.SpreadTouchbarPicker.Maximum = 100;
-            this.SpreadTouchbarPicker.ValueChange += (sender, value) =>
+            this.SpreadPicker.Unit = "%";
+            this.SpreadPicker.Minimum = 0;
+            this.SpreadPicker.Maximum = 100;
+            this.SpreadPicker.ValueChange += (sender, value) =>
             {
                 float spread = (float)value / 100.0f;
+                this.SelectionViewModel.GeometryHeartSpread = spread;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryHeartLayer>
                 (
                     layerType: LayerType.GeometryHeart,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryHeartSpread = spread,
                     set: (tLayer) => tLayer.Spread = spread,
 
                     historyTitle: "Set heart layer spread",
@@ -129,26 +129,24 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructSpread2()
         {
-            this.SpreadTouchbarSlider.Minimum = 0.0d;
-            this.SpreadTouchbarSlider.Maximum = 1.0d;
-            this.SpreadTouchbarSlider.ValueChangeStarted += (sender, value) =>    this.MethodViewModel.TLayerChangeStarted<GeometryHeartLayer>
-            (
-                layerType: LayerType.GeometryHeart,
-                cache: (tLayer) => tLayer.CacheSpread()
-            );
-            this.SpreadTouchbarSlider.ValueChangeDelta += (sender, value) =>this.MethodViewModel.TLayerChangeDelta<GeometryHeartLayer>
-            (
-                layerType: LayerType.GeometryHeart,
-                set: (tLayer) => tLayer.Spread = (float)value
-            );
-            this.SpreadTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.SpreadSlider.Minimum = 0.0d;
+            this.SpreadSlider.Maximum = 1.0d;
+            this.SpreadSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryHeartLayer>(layerType: LayerType.GeometryHeart, cache: (tLayer) => tLayer.CacheSpread());
+            this.SpreadSlider.ValueChangeDelta += (sender, value) =>
             {
                 float spread = (float)value;
+                this.SelectionViewModel.GeometryHeartSpread = spread;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryHeartLayer>(layerType: LayerType.GeometryHeart, set: (tLayer) => tLayer.Spread = spread);
+            };
+            this.SpreadSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float spread = (float)value;
+                this.SelectionViewModel.GeometryHeartSpread = spread;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryHeartLayer>
                 (
                     layerType: LayerType.GeometryHeart,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryHeartSpread = spread,
                     set: (tLayer) => tLayer.Spread = spread,
 
                     historyTitle: "Set heart layer spread",

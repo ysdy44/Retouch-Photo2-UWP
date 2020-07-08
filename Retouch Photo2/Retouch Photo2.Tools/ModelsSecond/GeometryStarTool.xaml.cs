@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -37,7 +36,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Converter
-        private int InnerRadiusNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
+        private int InnerRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
 
 
         //@Construct
@@ -76,8 +75,8 @@ namespace Retouch_Photo2.Tools.Models
 
             this.Button.Title = resource.GetString("/ToolsSecond/GeometryStar");
 
-            this.PointsTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryStar_Points");
-            this.InnerRadiusTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryStar_InnerRadius");
+            this.PointsButton.CenterContent = resource.GetString("/ToolsSecond/GeometryStar_Points");
+            this.InnerRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryStar_InnerRadius");
 
             this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
         }
@@ -123,47 +122,46 @@ namespace Retouch_Photo2.Tools.Models
         //Points
         private void ConstructPoints1()
         {
-            this.PointsTouchbarPicker.Minimum = 3;
-            this.PointsTouchbarPicker.Maximum = 36;
-            this.PointsTouchbarPicker.ValueChange += (sender, value) =>
+            this.PointsPicker.Unit = null;
+            this.PointsPicker.Minimum = 3;
+            this.PointsPicker.Maximum = 36;
+            this.PointsPicker.ValueChange += (sender, value) =>
             {
                 int points = (int)value;
+                this.SelectionViewModel.GeometryStarPoints = points;
 
                 this.MethodViewModel.TLayerChanged<int, GeometryStarLayer>
                 (
                     layerType: LayerType.GeometryStar,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryStarPoints = points,
                     set: (tLayer) => tLayer.Points = points,
 
                     historyTitle: "Set star layer points",
-                    getHistory: (tLayer) => tLayer.Points = points,
+                    getHistory: (tLayer) => tLayer.Points,
                     setHistory: (tLayer, previous) => tLayer.Points = previous
                 );
             };
         }
 
         private void ConstructPoints2()
-        { 
-            this.PointsTouchbarSlider.Minimum = 3.0d;
-            this.PointsTouchbarSlider.Maximum = 36.0d;
-            this.PointsTouchbarSlider.ValueChangeStarted += (sender, value) =>  this.MethodViewModel.TLayerChangeStarted<GeometryStarLayer>
-            (
-                layerType: LayerType.GeometryStar,
-                cache: (tLayer) => tLayer.CachePoints()
-            );
-            this.PointsTouchbarSlider.ValueChangeDelta += (sender, value) =>this.MethodViewModel.TLayerChangeDelta<GeometryStarLayer>
-            (
-                layerType: LayerType.GeometryStar,
-                set: (tLayer) => tLayer.Points = (int)value
-            );
-            this.PointsTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+        {
+            this.PointsSlider.Minimum = 3.0d;
+            this.PointsSlider.Maximum = 36.0d;
+            this.PointsSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryStarLayer>(layerType: LayerType.GeometryStar, cache: (tLayer) => tLayer.CachePoints());
+            this.PointsSlider.ValueChangeDelta += (sender, value) =>
             {
                 int points = (int)value;
+                this.SelectionViewModel.GeometryStarPoints = points;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryStarLayer>(layerType: LayerType.GeometryStar, set: (tLayer) => tLayer.Points = points);
+            };
+            this.PointsSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                int points = (int)value;
+                this.SelectionViewModel.GeometryStarPoints = points;
 
                 this.MethodViewModel.TLayerChangeCompleted<int, GeometryStarLayer>
                 (
                     layerType: LayerType.GeometryStar,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryStarPoints = points,
                     set: (tLayer) => tLayer.Points = points,
 
                     historyTitle: "Set star layer points",
@@ -177,17 +175,17 @@ namespace Retouch_Photo2.Tools.Models
         //InnerRadius
         private void ConstructInnerRadius1()
         {
-            this.InnerRadiusTouchbarPicker.Unit = "%";
-            this.InnerRadiusTouchbarPicker.Minimum = 0;
-            this.InnerRadiusTouchbarPicker.Maximum = 100;
-            this.InnerRadiusTouchbarPicker.ValueChange += (sender, value) =>
+            this.InnerRadiusPicker.Unit = "%";
+            this.InnerRadiusPicker.Minimum = 0;
+            this.InnerRadiusPicker.Maximum = 100;
+            this.InnerRadiusPicker.ValueChange += (sender, value) =>
             {
                 float innerRadius = (float)value / 100.0f;
+                this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryStarLayer>
                 (
                     layerType: LayerType.GeometryStar,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryStarInnerRadius = innerRadius,
                     set: (tLayer) => tLayer.InnerRadius = innerRadius,
 
                     historyTitle: "Set star layer inner radius",
@@ -199,26 +197,24 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructInnerRadius2()
         {
-            this.InnerRadiusTouchbarSlider.Minimum = 0.0d;
-            this.InnerRadiusTouchbarSlider.Maximum = 1.0d;
-            this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) =>  this.MethodViewModel.TLayerChangeStarted<GeometryStarLayer>
-            (
-                layerType: LayerType.GeometryStar,
-                cache: (tLayer) => tLayer.CacheInnerRadius()
-            );
-            this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) =>this.MethodViewModel.TLayerChangeDelta<GeometryStarLayer>
-            (
-                layerType: LayerType.GeometryStar,
-                set: (tLayer) => tLayer.InnerRadius = (float)value
-            );
-            this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.InnerRadiusSlider.Minimum = 0.0d;
+            this.InnerRadiusSlider.Maximum = 1.0d;
+            this.InnerRadiusSlider.ValueChangeStarted += (sender, value) =>  this.MethodViewModel.TLayerChangeStarted<GeometryStarLayer>(layerType: LayerType.GeometryStar,cache: (tLayer) => tLayer.CacheInnerRadius());
+            this.InnerRadiusSlider.ValueChangeDelta += (sender, value) =>
             {
                 float innerRadius = (float)value;
+                this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryStarLayer>(layerType: LayerType.GeometryStar, set: (tLayer) => tLayer.InnerRadius = innerRadius);
+            };
+            this.InnerRadiusSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float innerRadius = (float)value;
+                this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryStarLayer>
                 (
                     layerType: LayerType.GeometryStar,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryStarInnerRadius = innerRadius,
                     set: (tLayer) => tLayer.InnerRadius = innerRadius,
 
                     historyTitle: "Set star layer inner radius",

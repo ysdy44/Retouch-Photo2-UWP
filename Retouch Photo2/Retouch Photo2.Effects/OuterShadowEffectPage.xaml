@@ -4,10 +4,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hsvColorPickers="using:HSVColorPickers"
     xmlns:elements="using:Retouch_Photo2.Elements"
-    mc:Ignorable="d"
+    MinHeight="165" 
     d:DesignWidth="200"
     d:DesignHeight="400"
+    mc:Ignorable="d"              
     >
 
     <Page.Resources>
@@ -19,16 +21,34 @@
     <StackPanel>
 
         <!--Radius-->
-        <TextBlock x:Name="RadiusTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <elements:SliderPicker x:Name="RadiusSlider" Margin="2,0"/>
+        <RelativePanel>
+            <TextBlock x:Name="RadiusTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="RadiusPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+        </RelativePanel>
+        <Border Height="{StaticResource AppCircleHeight}">
+            <elements:SliderPicker x:Name="RadiusSlider" Margin="2,0"/>
+        </Border>
 
         <!--Opacity-->
-        <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <elements:SliderPicker x:Name="OpacitySlider" Margin="2,0"/>
+        <RelativePanel>
+            <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="OpacityPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+        </RelativePanel>
+        <Border Height="{StaticResource AppCircleHeight}">
+            <elements:SliderPicker x:Name="OpacitySlider" Margin="2,0"/>
+        </Border>
 
         <!--Offset-->
-        <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <elements:SliderPicker x:Name="OffsetSlider" Margin="2,0"/>
+        <RelativePanel>
+            <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="OffsetPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+        </RelativePanel>
+        <Border Height="{StaticResource AppCircleHeight}">
+            <elements:SliderPicker x:Name="OffsetSlider" Margin="2,0"/>
+        </Border>
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -42,12 +62,16 @@
             </Grid.RowDefinitions>
 
             <!--Angle-->
-            <TextBlock x:Name="AngleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <elements:RadiansPicker x:Name="AnglePicker" Grid.Row="1" />
+            <RelativePanel>
+                <TextBlock x:Name="AngleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <hsvColorPickers:NumberPicker x:Name="AnglePicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+            </RelativePanel>
+            <elements:RadiansPicker x:Name="AnglePicker2" Grid.Row="1" />
 
             <!--Color-->
             <TextBlock x:Name="ColorTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>
-            <Border x:Name="ColorBorder" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource AppCircleBorderStyle}">
+            <Border x:Name="ColorBorder" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{StaticResource AppText}" Style="{StaticResource AppCircleBorderStyle}">
                 <Border.Background>
                     <SolidColorBrush x:Name="SolidColorBrush" Color="Black"/>
                 </Border.Background>
@@ -56,5 +80,4 @@
         </Grid>
 
     </StackPanel>
-    
 </Page>

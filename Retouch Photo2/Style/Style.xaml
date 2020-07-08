@@ -734,7 +734,7 @@
         </Setter>
     </Style>
     <Style x:Key="AppNumberButtonStyle" BasedOn="{StaticResource NumberButtonStyle}" TargetType="Button">
-        <Setter Property="Width" Value="50"/>
+        <Setter Property="MinWidth" Value="50"/>
         <Setter Property="Height" Value="24"/>
         <Setter Property="Margin" Value="0,4"/>
     </Style>

@@ -1,7 +1,4 @@
 ﻿using Retouch_Photo2.Adjustments.Models;
-using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments.Pages
@@ -9,8 +6,45 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// <summary>
     /// Page of <see cref = "GammaTransferAdjustment"/>.
     /// </summary>
-    public sealed partial class GammaTransferPage : IAdjustmentGenericPage<GammaTransferAdjustment>
+    public sealed partial class GammaTransferPage : IAdjustmentPage
     {
+
+        //@Content
+        bool _alphaLock;
+        private bool AlphaDisable
+        {
+            set
+            {
+                this._alphaLock = true;
+                this.AlphaToggleSwitch.IsOn = !value;
+                this._alphaLock = false;
+            }
+        }
+        private float AlphaOffset
+        {
+            set
+            {
+                this.AlphaOffsetPicker.Value = (int)(value * 100.0f);
+                this.AlphaOffsetSlider.Value = value;
+            }
+        }
+        private float AlphaExponent
+        {
+            set
+            {
+                this.AlphaExponentPicker.Value = (int)(value * 100.0f);
+                this.AlphaExponentSlider.Value = value;
+            }
+        }
+        private float AlphaAmplitude
+        {
+            set
+            {
+                this.AlphaAmplitudePicker.Value = (int)(value * 100.0f);
+                this.AlphaAmplitudeSlider.Value = value;
+            }
+        }
+
 
         #region DependencyProperty
 
@@ -30,17 +64,17 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ResetAlpha()
         {
-            this.AlphaToggleSwitch.IsOn = false;
-            this.AlphaOffsetSlider.Value = 0;
-            this.AlphaExponentSlider.Value = 100;
-            this.AlphaAmplitudeSlider.Value = 100;
+            this.AlphaDisable = false;
+            this.AlphaOffset = 0.0f;
+            this.AlphaExponent = 1.0f;
+            this.AlphaAmplitude = 1.0f;
         }
         private void FollowAlpha(GammaTransferAdjustment adjustment)
         {
-            this.AlphaToggleSwitch.IsOn = !adjustment.AlphaDisable;
-            this.AlphaOffsetSlider.Value = adjustment.AlphaOffset * 100.0f;
-            this.AlphaExponentSlider.Value = adjustment.AlphaExponent * 100.0f;
-            this.AlphaAmplitudeSlider.Value = adjustment.AlphaAmplitude * 100.0f;
+            this.AlphaDisable = adjustment.AlphaDisable;
+            this.AlphaOffset = adjustment.AlphaOffset;
+            this.AlphaExponent = adjustment.AlphaExponent;
+            this.AlphaAmplitude = adjustment.AlphaAmplitude;
         }
 
         private void ConstructStringsAlpha(string title, string offset, string exponent, string amplitude)
@@ -52,318 +86,187 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
+        //AlphaDisable
         private void ConstructAlphaDisable()
         {
-            this.AlphaTitleGrid.Tapped += (s, e) =>
-            {
-                switch (this.AlphaIsExpaned)
-                {
-                    case Visibility.Visible:
-                        this.AlphaIsExpaned = Visibility.Collapsed;
-                        break;
-                    case Visibility.Collapsed:
-                        this.AlphaIsExpaned = Visibility.Visible;
-                        break;
-                }
-            };
-
+            this.AlphaTitleGrid.Tapped += (s, e) => this.AlphaIsExpaned = this.AlphaIsExpaned == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
             this.AlphaToggleSwitch.Toggled += (s, e) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                if (this._alphaLock) return;
+                bool alphaDisable = !this.AlphaToggleSwitch.IsOn;
+                //this.AlphaDisable = alphaDisable;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        bool disable = !this.AlphaToggleSwitch.IsOn;
-                        if (adjustment.AlphaDisable == disable) return;
+                this.MethodViewModel.TAdjustmentChanged<bool, GammaTransferAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.AlphaDisable = alphaDisable,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment alpha disable");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.AlphaDisable;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.AlphaDisable = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.AlphaDisable = disable;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                    historyTitle: "Set gamma transfer adjustment alpha disable",
+                    getHistory: (tAdjustment) => tAdjustment.AlphaDisable,
+                    setHistory: (tAdjustment, previous) => tAdjustment.AlphaDisable = previous
+                );
             };
         }
 
 
-        private void ConstructAlphaOffset()
+        //AlphaOffset
+        private void ConstructAlphaOffset1()
         {
-            this.AlphaOffsetSlider.Value = 0;
-            this.AlphaOffsetSlider.Minimum = 0;
-            this.AlphaOffsetSlider.Maximum = 100;
-
-            this.AlphaOffsetSlider.SliderBrush = this.AlphaLeftBrush;
-
-            this.AlphaOffsetSlider.ValueChangeStarted += (s, value) =>
+            this.AlphaOffsetPicker.Unit = null;
+            this.AlphaOffsetPicker.Minimum = 0;
+            this.AlphaOffsetPicker.Maximum = 100;
+            this.AlphaOffsetPicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float alphaOffset = (float)value / 100.0f;
+                this.AlphaOffset = alphaOffset;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        adjustment.CacheAlphaOffset();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, GammaTransferAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.AlphaOffset = alphaOffset,
+
+                    historyTitle: "Set gamma transfer adjustment alpha offset",
+                    getHistory: (tAdjustment) => tAdjustment.AlphaOffset,
+                    setHistory: (tAdjustment, previous) => tAdjustment.AlphaOffset = previous
+                );
             };
+        }
+
+        private void ConstructAlphaOffset2()
+        {
+            this.AlphaOffsetSlider.Minimum = 0.0d;
+            this.AlphaOffsetSlider.Maximum = 1.0d;
+            this.AlphaOffsetSlider.SliderBrush = this.AlphaLeftBrush;
+            this.AlphaOffsetSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheAlphaOffset());
             this.AlphaOffsetSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float alphaOffset = (float)value;
+                this.AlphaOffset = alphaOffset;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        float offset = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.AlphaOffset = offset;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<GammaTransferAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.AlphaOffset = alphaOffset);
             };
             this.AlphaOffsetSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float alphaOffset = (float)value;
+                this.AlphaOffset = alphaOffset;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        float offset = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, GammaTransferAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.AlphaOffset = alphaOffset,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment alpha offset");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingAlphaOffset;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.AlphaOffset = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.AlphaOffset = offset;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set gamma transfer adjustment alpha offset",
+                    getHistory: (tAdjustment) => tAdjustment.StartingAlphaOffset,
+                    setHistory: (tAdjustment, previous) => tAdjustment.AlphaOffset = previous
+                );
             };
         }
 
 
-        private void ConstructAlphaExponent()
+        //AlphaExponent
+        private void ConstructAlphaExponent1()
         {
-            this.AlphaExponentSlider.Value = 100;
-            this.AlphaExponentSlider.Minimum = 0;
-            this.AlphaExponentSlider.Maximum = 100;
-
-            this.AlphaExponentSlider.SliderBrush = this.AlphaLeftBrush;
-
-            this.AlphaExponentSlider.ValueChangeStarted += (s, value) =>
+            this.AlphaExponentPicker.Unit = null;
+            this.AlphaExponentPicker.Minimum = 0;
+            this.AlphaExponentPicker.Maximum = 100;
+            this.AlphaExponentPicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float alphaExponent = (float)value / 100.0f;
+                this.AlphaExponent = alphaExponent;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        adjustment.CacheAlphaExponent();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, GammaTransferAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.AlphaExponent = alphaExponent,
+
+                    historyTitle: "Set gamma transfer adjustment alpha exponent",
+                    getHistory: (tAdjustment) => tAdjustment.AlphaExponent,
+                    setHistory: (tAdjustment, previous) => tAdjustment.AlphaExponent = previous
+                );
             };
+        }
+
+        private void ConstructAlphaExponent2()
+        {
+            this.AlphaExponentSlider.Minimum = 0.0d;
+            this.AlphaExponentSlider.Maximum = 1.0d;
+            this.AlphaExponentSlider.SliderBrush = this.AlphaLeftBrush;
+            this.AlphaExponentSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheAlphaExponent());
             this.AlphaExponentSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float alphaExponent = (float)value;
+                this.AlphaExponent = alphaExponent;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        float exponent = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.AlphaExponent = exponent;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<GammaTransferAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.AlphaExponent = alphaExponent);
             };
             this.AlphaExponentSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float alphaExponent = (float)value;
+                this.AlphaExponent = alphaExponent;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        float exponent = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, GammaTransferAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.AlphaExponent = alphaExponent,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment alpha exponent");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingAlphaExponent;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.AlphaExponent = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.AlphaExponent = exponent;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set gamma transfer adjustment alpha exponent",
+                    getHistory: (tAdjustment) => tAdjustment.StartingAlphaExponent,
+                    setHistory: (tAdjustment, previous) => tAdjustment.AlphaExponent = previous
+                );
             };
         }
 
 
-        private void ConstructAlphaAmplitude()
+        //AlphaAmplitude
+        private void ConstructAlphaAmplitude1()
         {
-            this.AlphaAmplitudeSlider.Value = 100;
-            this.AlphaAmplitudeSlider.Minimum = 0;
-            this.AlphaAmplitudeSlider.Maximum = 100;
-
-            this.AlphaAmplitudeSlider.SliderBrush = this.AlphaLeftBrush;
-
-            this.AlphaAmplitudeSlider.ValueChangeStarted += (s, value) =>
+            this.AlphaAmplitudePicker.Unit = null;
+            this.AlphaAmplitudePicker.Minimum = 0;
+            this.AlphaAmplitudePicker.Maximum = 100;
+            this.AlphaAmplitudePicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float alphaAmplitude = (float)value / 100.0f;
+                this.AlphaAmplitude = alphaAmplitude;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        adjustment.CacheAlphaAmplitude();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, GammaTransferAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.AlphaAmplitude = alphaAmplitude,
+
+                    historyTitle: "Set gamma transfer adjustment alpha amplitude",
+                    getHistory: (tAdjustment) => tAdjustment.AlphaAmplitude,
+                    setHistory: (tAdjustment, previous) => tAdjustment.AlphaAmplitude = previous
+                );
             };
+        }
+
+        private void ConstructAlphaAmplitude2()
+        {
+            this.AlphaAmplitudeSlider.Minimum = 0.0d;
+            this.AlphaAmplitudeSlider.Maximum = 1.0d;
+            this.AlphaAmplitudeSlider.SliderBrush = this.AlphaLeftBrush;
+            this.AlphaAmplitudeSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheAlphaAmplitude());
             this.AlphaAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float alphaAmplitude = (float)value;
+                this.AlphaAmplitude = alphaAmplitude;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        float amplitude = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.AlphaAmplitude = amplitude;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<GammaTransferAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.AlphaAmplitude = alphaAmplitude);
             };
             this.AlphaAmplitudeSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float alphaAmplitude = (float)value;
+                this.AlphaAmplitude = alphaAmplitude;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        float amplitude = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, GammaTransferAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.AlphaAmplitude = alphaAmplitude,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment alpha amplitude");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingAlphaAmplitude;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.AlphaAmplitude = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.AlphaAmplitude = amplitude;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set gamma transfer adjustment alpha amplitude",
+                    getHistory: (tAdjustment) => tAdjustment.StartingAlphaAmplitude,
+                    setHistory: (tAdjustment, previous) => tAdjustment.AlphaAmplitude = previous
+                );
             };
         }
 

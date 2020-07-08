@@ -4,22 +4,37 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hsvColorPickers="using:HSVColorPickers"
     xmlns:elements="using:Retouch_Photo2.Elements"
-    mc:Ignorable="d"
+    mc:Ignorable="d"              
+    MinHeight="165" 
+    MaxHeight="300"
     d:DesignWidth="200"
     d:DesignHeight="400"
     >
 
     <StackPanel>
 
-        <!--Amoun-->
-        <TextBlock x:Name="AmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <elements:SliderPicker x:Name="AmountSlider" Margin="2,0"/>
+        <!--Amount-->
+        <RelativePanel>
+            <TextBlock x:Name="AmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="AmountPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+        </RelativePanel>
+        <Border Height="{StaticResource AppCircleHeight}">
+            <elements:SliderPicker x:Name="AmountSlider" Margin="2,0"/>
+        </Border>
+        
 
-        <!--BlurAmoun-->
-        <TextBlock x:Name="RadiusTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <elements:SliderPicker x:Name="RadiusSlider" Margin="2,0"/>
+        <!--Radius-->
+        <RelativePanel>
+            <TextBlock x:Name="RadiusTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="RadiusPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+        </RelativePanel>
+        <Border Height="{StaticResource AppCircleHeight}">
+            <elements:SliderPicker x:Name="RadiusSlider" Margin="2,0"/>
+        </Border>
 
-    </StackPanel>
-    
+    </StackPanel>    
 </Page>

@@ -19,7 +19,18 @@ namespace Retouch_Photo2.Effects.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         
-        
+
+        //@Content
+        private int Size
+        {
+            set
+            {
+                this.SizePicker.Value = value;
+                this.SizeSlider.Value = value;
+            }
+        }
+
+
         //@Construct
         /// <summary>
         /// Initializes a MorphologyEffectPage. 
@@ -28,8 +39,11 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.InitializeComponent();
             this.ConstructString();
-            this.ConstructButton();
-            this.ConstructMorphology_Size();
+
+            this.ConstructIsOn();
+
+            this.ConstructSize1();
+            this.ConstructSize2();
         }
     }
 
@@ -61,37 +75,16 @@ namespace Retouch_Photo2.Effects.Models
         
         public void Reset()
         {
-            this.SizeSlider.Value = 1;
+            this.Size = 1;
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set effect morphology");
+            this.MethodViewModel.EffectChanged<int>
+            (
+                set: (effect) => effect.Morphology_Size = 1,
 
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                var previous = layer.Effect.Morphology_Size;
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Effect.Morphology_Size = previous;
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                layer.Effect.Morphology_Size = 1;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+                historyTitle: "Set effect morphology effect",
+                getHistory: (effect) => effect.Morphology_Size,
+                setHistory: (effect, previous) => effect.Morphology_Size = previous
+            );
         }
         public void FollowButton(Effect effect)
         {
@@ -110,37 +103,67 @@ namespace Retouch_Photo2.Effects.Models
     {
 
         //IsOn
-        private void ConstructButton()
+        private void ConstructIsOn()
         {
-            this.Button.Toggled += (isOn) =>
-            {
-                this.MethodViewModel.EffectChanged<bool>
-                (
-                    set: (effect) => effect.Morphology_IsOn = isOn,
+            this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
+            (
+                set: (effect) => effect.Morphology_IsOn = isOn,
 
-                    historyTitle: "Set effect morphology is on",
-                    getHistory: (effect) => effect.Morphology_IsOn,
-                    setHistory: (effect, previous) => effect.Morphology_IsOn = previous
+                historyTitle: "Set effect morphology is on",
+                getHistory: (effect) => effect.Morphology_IsOn,
+                setHistory: (effect, previous) => effect.Morphology_IsOn = previous
+            );            
+        }
+
+
+        //Size
+        private void ConstructSize1()
+        {
+            this.SizePicker.Unit = null;
+            this.SizePicker.Minimum = -100;
+            this.SizePicker.Maximum = 100;
+            this.SizePicker.ValueChange += (s, value) =>
+            {
+                int size = value;
+                this.Size = size;
+
+                this.MethodViewModel.EffectChangeCompleted<int>
+                (
+                    set: (effect) => effect.Morphology_Size = size,
+
+                    historyTitle: "Set effect morphology size",
+                    getHistory: (effect) => effect.Morphology_Size,
+                    setHistory: (effect, previous) => effect.Morphology_Size = previous
                 );
             };
         }
 
-
-        //Morphology_Size
-        private void ConstructMorphology_Size()
+        private void ConstructSize2()
         {
             this.SizeSlider.Minimum = -100.0d;
             this.SizeSlider.Maximum = 100.0d;
             this.SizeSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheMorphology());
-            this.SizeSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Morphology_Size = (int)value);
-            this.SizeSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<int>
-            (
-                set: (effect) => effect.Morphology_Size = (int)value,
+            this.SizeSlider.ValueChangeDelta += (s, value) =>
+            {
+                int size = (int)value;
+                this.Size = size;
 
-                historyTitle: "Set effect morphology size",
-                getHistory: (effect) => effect.StartingMorphology_Size,
-                setHistory: (effect, previous) => effect.Morphology_Size = previous
-            );
+                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Morphology_Size = size);
+            };
+            this.SizeSlider.ValueChangeCompleted += (s, value) =>
+            {
+                int size = (int)value;
+                this.Size = size;
+
+                this.MethodViewModel.EffectChangeCompleted<int>
+                (
+                    set: (effect) => effect.Morphology_Size = size,
+
+                    historyTitle: "Set effect morphology size",
+                    getHistory: (effect) => effect.StartingMorphology_Size,
+                    setHistory: (effect, previous) => effect.Morphology_Size = previous
+                );
+            };
         }
 
     }

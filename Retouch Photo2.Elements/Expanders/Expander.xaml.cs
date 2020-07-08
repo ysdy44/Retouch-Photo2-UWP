@@ -37,7 +37,11 @@ namespace Retouch_Photo2.Elements
         }
         public Visibility ResetButtonVisibility { get => this.ResetButton.Visibility; set => this.ResetButton.Visibility = value; }
         public abstract void Reset();
-
+        public void Back()
+        {
+            this.Title = this.Button.Title;
+            this.IsSecondPage = false;
+        }
 
         //@VisualState
         bool _vsIsSecondPage = false;
@@ -107,11 +111,7 @@ namespace Retouch_Photo2.Elements
             this.CloseButton.Click += (s, e) => this.State = ExpanderState.Hide;
             this.StateButton.Click += (s, e) => this.State = this.GetState(this.State);
 
-            this.BackButton.Click += (s, e) =>
-            {
-                this.Title = this.Button.Title;
-                this.IsSecondPage = false;
-            };
+            this.BackButton.Click += (s, e) => this.Back();
             this.ResetButton.Click += (s, e) => this.Reset();
 
             /////////////////////////////////

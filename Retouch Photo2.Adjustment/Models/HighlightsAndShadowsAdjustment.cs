@@ -12,12 +12,12 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
-        public static IAdjustmentGenericPage<HighlightsAndShadowsAdjustment> GenericPage;// = new HighlightsAndShadowsPage();
+        public static IAdjustmentPage GenericPage;// = new HighlightsAndShadowsPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.HighlightsAndShadows;
         public Visibility PageVisibility => Visibility.Visible;
-        public UIElement Page => HighlightsAndShadowsAdjustment.GenericPage.Self;
+        public IAdjustmentPage Page { get; } = HighlightsAndShadowsAdjustment.GenericPage;
         public string Text => HighlightsAndShadowsAdjustment.GenericPage.Text;
 
 
@@ -43,30 +43,6 @@ namespace Retouch_Photo2.Adjustments.Models
         
         /// <summary> Specifies whether the source image uses linear gamma as opposed to the default sRGB. </summary>
         public bool SourceIsLinearGamma = false;
-        
-
-        public void Reset()
-        {
-            this.Shadows = 0.0f;
-            this.Highlights = 0.0f;
-            this.Clarity = 0.0f;
-            this.MaskBlurAmount = 1.25f;
-            this.SourceIsLinearGamma = false;
-
-            if (HighlightsAndShadowsAdjustment.GenericPage.Adjustment == this)
-            {
-                HighlightsAndShadowsAdjustment.GenericPage.Follow(this);
-            }
-        }
-        public void Follow()
-        {
-            HighlightsAndShadowsAdjustment.GenericPage.Adjustment = this;
-            HighlightsAndShadowsAdjustment.GenericPage.Follow(this);
-        }
-        public void Close()
-        {
-            HighlightsAndShadowsAdjustment.GenericPage.Adjustment = null;
-        }
 
 
         public IAdjustment Clone()

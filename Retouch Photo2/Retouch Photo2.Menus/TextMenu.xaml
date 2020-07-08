@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:hSVColorPickers="using:HSVColorPickers"
+    xmlns:hsvColorpickers="using:HSVColorPickers"
     xmlns:texts="using:Retouch_Photo2.Texts"
     mc:Ignorable="d"
     d:DesignWidth="200"
@@ -98,7 +98,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <hSVColorPickers:NumberPicker x:Name="FontSizePicker" Minimum="4" Maximum="1000" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+            <hsvColorpickers:NumberPicker x:Name="FontSizePicker" Minimum="4" Maximum="1000" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind FontSizeConverter(SelectionViewModel.FontSize), Mode=OneWay}" />
 
             <Button x:Name="FontSizeButton" Grid.Column="1" Style="{StaticResource AppRoundedButtonStyle}">

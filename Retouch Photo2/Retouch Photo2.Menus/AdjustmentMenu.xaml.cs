@@ -42,6 +42,7 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructStrings();
 
             this.MainPage = this.AdjustmentMainPage;
+            this.AdjustmentMainPage.IsSecondPageChanged += (s, isSecondPage) => this.Back();
             this.AdjustmentMainPage.SecondPageChanged += (title, secondPage) =>
             {
                 if (this.SecondPage != secondPage) this.SecondPage = secondPage;
@@ -78,7 +79,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Reset Expander. </summary>
         public override void Reset()
         {
-             this.AdjustmentMainPage.Reset();
+            this.AdjustmentMainPage.Reset();
         }
 
     }
@@ -97,6 +98,8 @@ namespace Retouch_Photo2.Menus.Models
 
 
         //@Delegate
+        /// <summary> Occurs when is-second-page change. </summary>
+        public event EventHandler<bool> IsSecondPageChanged;
         /// <summary> Occurs when second-page change. </summary>
         public event EventHandler<UIElement> SecondPageChanged;
 
@@ -172,15 +175,17 @@ namespace Retouch_Photo2.Menus.Models
                 con._vsAdjustments = null;
                 con.VisualState = con.VisualState;//State
             }
+
+            con.IsSecondPageChanged?.Invoke(con, false);//Delegate
         }));
 
 
         #endregion
 
 
-        /// <summary> Gets or sets the current adjustment. </summary>
-        public IAdjustment Adjustment;
-        
+        /// <summary> Gets or sets the current adjustment page. </summary>
+        public IAdjustmentPage AdjustmentPage;
+
         //@Construct
         /// <summary>
         /// Initializes a AdjustmentMainPage. 
@@ -196,13 +201,13 @@ namespace Retouch_Photo2.Menus.Models
             );
             this.ConstructStrings();
 
+            if (this.AdjustmentPageListView.ItemsSource == null)
+            {
+                this.ConstructAdjustment();
+            }
+
             this.Loaded += async (s, e) =>
             {
-                if (this.AdjustmentPageListView.ItemsSource == null)
-                {
-                    this.ConstructAdjustment();
-                }
-
                 if (this.FilterListView == null)
                 {
                     IEnumerable<FilterCategory> filterCategorys = await Retouch_Photo2.XML.ConstructFiltersFile();
@@ -221,13 +226,20 @@ namespace Retouch_Photo2.Menus.Models
             IAdjustment adjustment = this.GetGridDataContext(sender);
             if (adjustment == null) return;
             if (adjustment.PageVisibility == Visibility.Collapsed) return;
+            
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
+            {
+                ILayer layer = layerage.Self;
+                
+                this.AdjustmentPage = adjustment.Page;
+                int index = layer.Filter.Adjustments.IndexOf(adjustment);
+                adjustment.Page.Index = index;
+                adjustment.Page.Follow();
 
-            this.Adjustment = adjustment;
-            adjustment.Follow();
-
-            object title = adjustment.Text;
-            UIElement secondPage = adjustment.Page;
-            this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
+                object title = adjustment.Text;
+                UIElement secondPage = adjustment.Page.Self;
+                this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
+            }
         }
         /// <summary> DataTemplate's RemoveButton Tapped. </summary>
         private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)
@@ -273,12 +285,12 @@ namespace Retouch_Photo2.Menus.Models
             this.AddButton.Content = resource.GetString("/Menus/Adjustment_Add");
             this.FilterButton.Content = resource.GetString("/Menus/Adjustment_Filters");
         }
-        
+
         public void Reset()
         {
-            if (this.Adjustment  is  IAdjustment adjustment)
+            if (this.AdjustmentPage is IAdjustmentPage adjustmentPage)
             {
-                adjustment.Reset();
+                adjustmentPage.Reset();
                 this.ViewModel.Invalidate();//Invalidate
             }
         }
@@ -336,7 +348,7 @@ namespace Retouch_Photo2.Menus.Models
 
             IEnumerable<IAdjustmentPage> adjustmentPages = this.GetAdjustmentPages();
             this.AdjustmentPageListView.ItemsSource = adjustmentPages.ToList();
-                       
+
             this.AdjustmentPageListView.ItemClick += (s, e) =>
             {
                 this.AdjustmentPageFlyout.Hide();

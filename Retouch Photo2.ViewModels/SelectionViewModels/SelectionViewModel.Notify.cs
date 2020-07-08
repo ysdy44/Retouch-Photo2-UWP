@@ -61,14 +61,17 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> Gets or sets the layer opacity. </summary>
-        public float Opacity { get; set; } = 1.0f;
-        /// <summary> Sets the <see cref = "ViewModel.Opacity" />. </summary>
-        public void SetOpacity(float value)
+        public float Opacity
         {
-            if (this.Opacity == value) return;
-            this.Opacity = value;
-            this.OnPropertyChanged(nameof(this.Opacity));//Notify 
+            get => this.opacity;
+            set
+            {
+                if (this.Opacity == value) return;
+                this.opacity = value;
+                this.OnPropertyChanged(nameof(this.Opacity));//Notify 
+            }
         }
+        private float opacity = 1.0f;
 
 
         /// <summary> Gets or sets the layer blend-mode. </summary>

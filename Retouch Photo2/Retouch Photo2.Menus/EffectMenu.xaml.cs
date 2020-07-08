@@ -38,6 +38,7 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructStrings();
 
             this.MainPage = this.EffectMainPage;
+            this.EffectMainPage.IsSecondPageChanged += (s, isSecondPage) => this.Back();
             this.EffectMainPage.SecondPageChanged += (title, secondPage) =>
             {
                 if (this.SecondPage != secondPage) this.SecondPage = secondPage;
@@ -93,6 +94,8 @@ namespace Retouch_Photo2.Menus.Models
 
 
         //@Delegate
+        /// <summary> Occurs when is-second-page change. </summary>
+        public event EventHandler<bool> IsSecondPageChanged;
         /// <summary> Occurs when second-page change. </summary>
         public event EventHandler<UIElement> SecondPageChanged;
 
@@ -147,6 +150,8 @@ namespace Retouch_Photo2.Menus.Models
                     effect.Button.IsEnabled = false;
                 }
             }
+
+            con.IsSecondPageChanged?.Invoke(con, false);//Delegate
         }));
 
         #endregion

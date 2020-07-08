@@ -11,17 +11,24 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// <summary>
     /// Page of <see cref = "SaturationAdjustment"/>.
     /// </summary>
-    public sealed partial class SaturationPage : IAdjustmentGenericPage<SaturationAdjustment>
+    public sealed partial class SaturationPage : IAdjustmentPage
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
 
 
-        //@Generic
-        /// <summary> Gets IAdjustment's adjustment. </summary>
-        public SaturationAdjustment Adjustment { get; set; }
+        //@Content
+        private float Saturation
+        {
+            set
+            {
+                this.SaturationPicker.Value = (int)(value * 100.0f);
+                this.SaturationSlider.Value = value;
+            }
+        }
 
 
         //@Construct
@@ -33,14 +40,15 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructSaturation();
+            this.ConstructSaturation1();
+            this.ConstructSaturation2();
         }
     }
 
     /// <summary>
     /// Page of <see cref = "SaturationAdjustment"/>.
     /// </summary>
-    public sealed partial class SaturationPage : IAdjustmentGenericPage<SaturationAdjustment>
+    public sealed partial class SaturationPage : IAdjustmentPage
     {
         //Strings
         private void ConstructStrings()
@@ -64,149 +72,102 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new SaturationAdjustment();
-                     
+
+
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
+
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.
         /// </summary>
         public void Reset()
         {
-            this.SaturationSlider.Value = 100;
+            this.Saturation = 1.0f;
 
-            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-            {
-                ILayer layer = layerage.Self;
+            this.MethodViewModel.TAdjustmentChanged<float, SaturationAdjustment>
+            (
+                index: this.Index,
+                set: (tAdjustment) => tAdjustment.Saturation = 0,
 
-                if (this.Adjustment is SaturationAdjustment adjustment)
-                {
-                    //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set saturation adjustment");
-
-                    var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                    var previous1 = adjustment.Saturation;
-                    history.UndoAction += () =>
-                    {
-                        if (previous < 0) return;
-                        if (previous > layer.Filter.Adjustments.Count - 1) return;
-                        if (layer.Filter.Adjustments[previous] is SaturationAdjustment adjustment2)
-                        {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment2.Saturation = previous1;
-                        }
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    adjustment.Saturation = 1.0f;
-
-                    //History
-                    this.ViewModel.HistoryPush(history);
-
-                    this.ViewModel.Invalidate();//Invalidate
-                }
-            }
+                historyTitle: "Set saturation adjustment",
+                getHistory: (tAdjustment) => tAdjustment.Saturation,
+                setHistory: (tAdjustment, previous) => tAdjustment.Saturation = previous
+            );
         }
         /// <summary>
         /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
         /// </summary>
-        /// <param name="adjustment"> The adjustment. </param>
-        public void Follow(SaturationAdjustment adjustment)
+        public void Follow()
         {
-            this.SaturationSlider.Value = adjustment.Saturation * 100.0f;
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
+            {
+                ILayer layer = layerage.Self;
+
+                if (layer.Filter.Adjustments[this.Index] is SaturationAdjustment adjustment)
+                {
+                    this.Saturation = adjustment.Saturation;
+                }
+            }
         }
+
     }
 
     /// <summary>
     /// Page of <see cref = "SaturationAdjustment"/>.
     /// </summary>
-    public sealed partial class SaturationPage : IAdjustmentGenericPage<SaturationAdjustment>
+    public sealed partial class SaturationPage : IAdjustmentPage
     {
 
-        private void ConstructSaturation()
+        //Saturation
+        private void ConstructSaturation1()
         {
-            this.SaturationSlider.Value = 100;
-            this.SaturationSlider.Minimum = 0;
-            this.SaturationSlider.Maximum = 200;
-
-            this.SaturationSlider.SliderBrush = this.SaturationBrush;
-
-            this.SaturationSlider.ValueChangeStarted += (s, value) =>
+            this.SaturationPicker.Unit = null;
+            this.SaturationPicker.Minimum = 0;
+            this.SaturationPicker.Maximum = 200;
+            this.SaturationPicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float saturation = (float)value / 100.0f;
+                this.Saturation = saturation;
 
-                    if (this.Adjustment is SaturationAdjustment adjustment)
-                    {
-                        adjustment.CacheSaturation();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, SaturationAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Saturation = saturation,
+
+                    historyTitle: "Set saturation adjustment saturation",
+                    getHistory: (tAdjustment) => tAdjustment.Saturation,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Saturation = previous
+                );
             };
+        }
+
+        private void ConstructSaturation2()
+        {
+            this.SaturationSlider.Minimum = 0.0d;
+            this.SaturationSlider.Maximum = 2.0d;
+            this.SaturationSlider.SliderBrush = this.SaturationBrush;
+            this.SaturationSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<SaturationAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheSaturation());
             this.SaturationSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float saturation = (float)value;
+                this.Saturation = saturation;
 
-                    if (this.Adjustment is SaturationAdjustment adjustment)
-                    {
-                        float saturation = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.Saturation = saturation;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<SaturationAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.Saturation = saturation);
             };
             this.SaturationSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float saturation = (float)value;
+                this.Saturation = saturation;
 
-                    if (this.Adjustment is SaturationAdjustment adjustment)
-                    {
-                        float saturation = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, SaturationAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Saturation = saturation,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set saturation adjustment saturation");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingSaturation;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is SaturationAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.Saturation = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.Saturation = saturation;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set saturation adjustment saturation",
+                    getHistory: (tAdjustment) => tAdjustment.StartingSaturation,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Saturation = previous
+                );
             };
         }
 

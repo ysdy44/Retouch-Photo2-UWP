@@ -3,7 +3,6 @@ using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
-using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 
@@ -12,33 +11,44 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// <summary>
     /// Page of <see cref = "HueRotationAdjustment"/>.
     /// </summary>
-    public sealed partial class HueRotationPage : IAdjustmentGenericPage<HueRotationAdjustment>
+    public sealed partial class HueRotationPage : IAdjustmentPage
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
 
 
-        //@Generic
-        /// <summary> Gets IAdjustment's adjustment. </summary>
-        public HueRotationAdjustment Adjustment { get; set; }
-        
+        //@Content
+        private float Angle
+        {
+            set
+            {
+                this.AnglePicker.Value = (int)(value * 180.0f / FanKit.Math.Pi);
+                this.AngleSlider.Value = value;
+            }
+        }
+
 
         //@Construct
+        /// <summary>
+        /// Initializes a HueRotationPage. 
+        /// </summary>
         public HueRotationPage()
         {
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructHueRotation();
+            this.ConstructHueRotation1();
+            this.ConstructHueRotation2();
         }
     }
 
     /// <summary>
     /// Page of <see cref = "HueRotationAdjustment"/>.
     /// </summary>
-    public sealed partial class HueRotationPage : IAdjustmentGenericPage<HueRotationAdjustment>
+    public sealed partial class HueRotationPage : IAdjustmentPage
     {
 
         //Strings
@@ -52,149 +62,113 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
         //@Content
+        /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.HueRotation;
+        /// <summary> Gets the icon. </summary>
         public FrameworkElement Icon { get; } = new HueRotationIcon();
+        /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
+        /// <summary> Gets the text. </summary>
         public string Text { get; private set; }
 
-
+        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new HueRotationAdjustment();
+    
+        
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
 
+        /// <summary>
+        /// Reset the <see cref="IAdjustmentPage"/>'s data.
+        /// </summary>
         public void Reset()
         {
-            this.HueRotationSlider.Value = 0;
+            this.Angle = 0.0f;
 
+            this.MethodViewModel.TAdjustmentChanged<float, HueRotationAdjustment>
+            (
+                index: this.Index,
+                set: (tAdjustment) => tAdjustment.Angle = 0,
+
+                historyTitle: "Set hue rotation adjustment",
+                getHistory: (tAdjustment) => tAdjustment.Angle,
+                setHistory: (tAdjustment, previous) => tAdjustment.Angle = previous
+            );
+        }
+        /// <summary>
+        /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
+        /// </summary>
+        public void Follow()
+        {
             if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
                 ILayer layer = layerage.Self;
 
-                if (this.Adjustment is HueRotationAdjustment adjustment)
+                if (layer.Filter.Adjustments[this.Index] is HueRotationAdjustment adjustment)
                 {
-                    //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set hue rotation adjustment");
-
-                    var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                    var previous1 = adjustment.Angle;
-                    history.UndoAction += () =>
-                    {
-                        if (previous < 0) return;
-                        if (previous > layer.Filter.Adjustments.Count - 1) return;
-                        if (layer.Filter.Adjustments[previous] is HueRotationAdjustment adjustment2)
-                        {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment2.Angle = previous1;
-                        }
-                    };
-                    
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    adjustment.Angle = 0.0f;
-
-                    //History
-                    this.ViewModel.HistoryPush(history);
-
-                    this.ViewModel.Invalidate();//Invalidate
+                    this.Angle = adjustment.Angle;
                 }
             }
         }
-        public void Follow(HueRotationAdjustment adjustment)
-        {
-            this.HueRotationSlider.Value = adjustment.Angle * 180.0f / FanKit.Math.Pi;
-        }
+
     }
 
     /// <summary>
     /// Page of <see cref = "HueRotationAdjustment"/>.
     /// </summary>
-    public sealed partial class HueRotationPage : IAdjustmentGenericPage<HueRotationAdjustment>
+    public sealed partial class HueRotationPage : IAdjustmentPage
     {
 
-        private void ConstructHueRotation()
+        //HueRotation
+        private void ConstructHueRotation1()
         {
-            this.HueRotationSlider.Value = 0;
-            this.HueRotationSlider.Minimum = 0;
-            this.HueRotationSlider.Maximum = 360;
-
-            this.HueRotationSlider.SliderBrush = this.AngleBrush;
-
-            this.HueRotationSlider.ValueChangeStarted += (s, value) =>
+            this.AnglePicker.Unit = "º";
+            this.AnglePicker.Minimum = 0;
+            this.AnglePicker.Maximum = 360;
+            this.AnglePicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float radians = (float)value * FanKit.Math.Pi / 180.0f;
+                this.Angle = radians;
 
-                    if (this.Adjustment is HueRotationAdjustment adjustment)
-                    {
-                        adjustment.CacheAngle();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, HueRotationAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Angle = radians,
+
+                    historyTitle: "Set hue rotation adjustment angle",
+                    getHistory: (tAdjustment) => tAdjustment.Angle,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Angle = previous
+                );
             };
-            this.HueRotationSlider.ValueChangeDelta += (s, value) =>
+        }
+
+        private void ConstructHueRotation2()
+        {
+            this.AngleSlider.Minimum = 0.0d;
+            this.AngleSlider.Maximum = FanKit.Math.PiTwice;
+            this.AngleSlider.SliderBrush = this.AngleBrush;
+            this.AngleSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<HueRotationAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheAngle());
+            this.AngleSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float radians = (float)value;
+                this.Angle = radians;
 
-                    if (this.Adjustment is HueRotationAdjustment adjustment)
-                    {
-                        float angle = (float)value * FanKit.Math.Pi / 180.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.Angle = angle;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<HueRotationAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.Angle = radians);
             };
-            this.HueRotationSlider.ValueChangeCompleted += (s, value) =>
+            this.AngleSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float radians = (float)value;
+                this.Angle = radians;
 
-                    if (this.Adjustment is HueRotationAdjustment adjustment)
-                    {
-                        float angle = (float)value * FanKit.Math.Pi / 180.0f;
-                        
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set hue rotation adjustment angle");
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, HueRotationAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Angle = radians,
 
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingAngle;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is HueRotationAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringTransformer = true;
-                                layer.IsRefactoringRender = true;
-                                adjustment2.Angle = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringTransformer = true;
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.Angle = angle;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set hue rotation adjustment angle",
+                    getHistory: (tAdjustment) => tAdjustment.StartingAngle,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Angle = previous
+                );
             };
         }
 

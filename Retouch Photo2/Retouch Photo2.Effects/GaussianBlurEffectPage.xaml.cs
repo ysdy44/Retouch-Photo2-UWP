@@ -18,6 +18,17 @@ namespace Retouch_Photo2.Effects.Models
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Content
+        private float Radius
+        {
+            set
+            {
+                this.RadiusPicker.Value = (int)value;
+                this.RadiusSlider.Value = value;
+            }
+        }
         
 
         //@Construct
@@ -28,8 +39,11 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.InitializeComponent();
             this.ConstructString();
-            this.ConstructButton();
-            this.ConstructGaussianBlur_Radius();
+
+            this.ConstructIsOn();
+
+            this.ConstructRadius1();
+            this.ConstructRadius2();
         }
     }
 
@@ -61,37 +75,16 @@ namespace Retouch_Photo2.Effects.Models
         
         public void Reset()
         {
-            this.RadiusSlider.Value = 0;
+            this.Radius = 0.0f;
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set effect gaussian blur");
+            this.MethodViewModel.EffectChanged<float>
+            (
+                set: (effect) => effect.GaussianBlur_Radius = 0.0f,
 
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                var previous = layer.Effect.GaussianBlur_Radius;
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Effect.GaussianBlur_Radius = previous;
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                layer.Effect.GaussianBlur_Radius = 0;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+                historyTitle: "Set effect gaussian blur",
+                getHistory: (effect) => effect.GaussianBlur_Radius,
+                setHistory: (effect, previous) => effect.GaussianBlur_Radius = previous
+            );
         }
         public void FollowButton(Effect effect)
         {
@@ -110,37 +103,67 @@ namespace Retouch_Photo2.Effects.Models
     {
 
         //IsOn
-        private void ConstructButton()
+        private void ConstructIsOn()
         {
-            this.Button.Toggled += (isOn) =>
-            {
-                this.MethodViewModel.EffectChanged<bool>
-                (
-                    set: (effect) => effect.GaussianBlur_IsOn = isOn,
+            this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
+            (
+                set: (effect) => effect.GaussianBlur_IsOn = isOn,
 
-                    historyTitle: "Set effect gaussian blur is on",
-                    getHistory: (effect) => effect.GaussianBlur_IsOn,
-                    setHistory: (effect, previous) => effect.GaussianBlur_IsOn = previous
+                historyTitle: "Set effect gaussian blur is on",
+                getHistory: (effect) => effect.GaussianBlur_IsOn,
+                setHistory: (effect, previous) => effect.GaussianBlur_IsOn = previous
+            );
+        }
+
+
+        //Radius
+        private void ConstructRadius1()
+        {
+            this.RadiusPicker.Unit = null;
+            this.RadiusPicker.Minimum = 0;
+            this.RadiusPicker.Maximum = 100;
+            this.RadiusPicker.ValueChange  += (s, value) =>
+            {
+                float radius = (float)value;
+                this.Radius = radius;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.GaussianBlur_Radius = radius,
+
+                    historyTitle: "Set effect gaussian blur amount",
+                    getHistory: (effect) => effect.StartingGaussianBlur_Radius,
+                    setHistory: (effect, previous) => effect.GaussianBlur_Radius = previous
                 );
             };
         }
 
-
-        //GaussianBlur_Radius
-        private void ConstructGaussianBlur_Radius()
+        private void ConstructRadius2()
         {
             this.RadiusSlider.Minimum = 0.0d;
             this.RadiusSlider.Maximum = 100.0d;
             this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheGaussianBlur());
-            this.RadiusSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.GaussianBlur_Radius = (float)value);
-            this.RadiusSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
-            (
-                set: (effect) => effect.GaussianBlur_Radius = (float)value,
+            this.RadiusSlider.ValueChangeDelta += (s, value) =>
+            {
+                float radius = (float)value;
+                this.Radius = radius;
 
-                historyTitle: "Set effect gaussian blur amount",
-                getHistory: (effect) => effect.StartingGaussianBlur_Radius,
-                setHistory: (effect, previous) => effect.GaussianBlur_Radius = previous
-            );
+                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.GaussianBlur_Radius = radius);
+            };
+            this.RadiusSlider.ValueChangeCompleted += (s, value) =>
+            {
+                float radius = (float)value;
+                this.Radius = radius;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.GaussianBlur_Radius = radius,
+
+                    historyTitle: "Set effect gaussian blur amount",
+                    getHistory: (effect) => effect.StartingGaussianBlur_Radius,
+                    setHistory: (effect, previous) => effect.GaussianBlur_Radius = previous
+                );
+            };
         }
 
     }

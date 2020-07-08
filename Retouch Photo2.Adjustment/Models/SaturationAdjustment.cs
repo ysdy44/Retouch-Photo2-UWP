@@ -12,12 +12,12 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static      
         //@Generic
-        public static IAdjustmentGenericPage<SaturationAdjustment> GenericPage;// = new SaturationPage();
+        public static IAdjustmentPage GenericPage;// = new SaturationPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Saturation;
         public Visibility PageVisibility => Visibility.Visible;
-        public UIElement Page => SaturationAdjustment.GenericPage.Self;
+        public IAdjustmentPage Page { get; } = SaturationAdjustment.GenericPage;
         public string Text => SaturationAdjustment.GenericPage.Text;
         
         
@@ -25,27 +25,7 @@ namespace Retouch_Photo2.Adjustments.Models
         public float Saturation = 1.0f;
         public float StartingSaturation { get; private set; }
         public void CacheSaturation() => this.StartingSaturation = this.Saturation;
-
-               
-        public void Reset()
-        {
-            this.Saturation = 1.0f;
-
-            if (SaturationAdjustment.GenericPage.Adjustment == this)
-            {
-                SaturationAdjustment.GenericPage.Reset();
-            }
-        }
-        public void Follow()
-        {
-            SaturationAdjustment.GenericPage.Adjustment = this;
-            SaturationAdjustment.GenericPage.Follow(this);
-        }
-        public void Close()
-        {
-            SaturationAdjustment.GenericPage.Adjustment = null;
-        }
-
+        
 
         public IAdjustment Clone()
         {

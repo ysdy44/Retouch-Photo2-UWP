@@ -26,6 +26,22 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 ILayer layer = value.Self;
+                this.StandStyleLayer = layer;
+            }
+        }
+
+        /// <summary>
+        /// Sets the stand style
+        /// switch by <see cref="Retouch_Photo2.Layers.LayerType"/> to
+        /// <see cref="ViewModel.StandGeometryStyle"/>
+        /// <see cref="ViewModel.StandCurveStyle"/>
+        /// <see cref="ViewModel.StandTextStyle"/>
+        /// </summary>
+        public ILayer StandStyleLayer
+        {
+            set
+            {
+                ILayer layer = value;
 
                 //Switch
                 switch (layer.Type)
@@ -33,30 +49,30 @@ namespace Retouch_Photo2.ViewModels
                     //Curve & Pattern
                     case LayerType.Curve:
                     case LayerType.PatternGrid:
-                        if (value != standStyleCurveLayerage)
-                            this.standStyleCurveLayerage = value;
+                        if (value != standStyleCurveLayer)
+                            this.standStyleCurveLayer = layer;
                         break;
 
                     //Text
                     case LayerType.TextFrame:
                     case LayerType.TextArtistic:
-                        if (value != standStyleTextLayerage)
-                            this.standStyleTextLayerage = value;
+                        if (value != standStyleTextLayer)
+                            this.standStyleTextLayer = layer;
                         break;
 
                     //Geometry
                     default:
-                        if (value != StandStyleGeometryLayerage)
-                            this.StandStyleGeometryLayerage = value;
+                        if (value != StandStyleGeometryLayer)
+                            this.StandStyleGeometryLayer = layer;
                         break;
                 }
             }
         }
 
 
-        private Layerage StandStyleGeometryLayerage;
-        private Layerage standStyleCurveLayerage;
-        private Layerage standStyleTextLayerage;
+        private ILayer StandStyleGeometryLayer;
+        private ILayer standStyleCurveLayer;
+        private ILayer standStyleTextLayer;
                     
 
         /// <summary>
@@ -66,10 +82,8 @@ namespace Retouch_Photo2.ViewModels
         {
             get
             {
-                if (this.StandStyleGeometryLayerage != null)
+                if (this.StandStyleGeometryLayer is ILayer layer)
                 {
-                    ILayer layer = this.StandStyleGeometryLayerage.Self;
-
                     //CacheBrush
                     Transformer transformer = layer.Transform.Transformer;
                     Style style = layer.Style.Clone();
@@ -94,10 +108,8 @@ namespace Retouch_Photo2.ViewModels
         {
             get
             {
-                if (this.standStyleCurveLayerage != null)
+                if (this.standStyleCurveLayer is ILayer layer)
                 {
-                    ILayer layer = this.standStyleCurveLayerage.Self;
-
                     //CacheBrush
                     Transformer transformer = layer.Transform.Transformer;
                     Style style = layer.Style.Clone();
@@ -122,10 +134,8 @@ namespace Retouch_Photo2.ViewModels
         {
             get
             {
-                if (this.standStyleTextLayerage != null)
+                if (this.standStyleTextLayer is ILayer layer)
                 {
-                    ILayer layer = this.standStyleTextLayerage.Self;
-
                     //CacheBrush
                     Transformer transformer = layer.Transform.Transformer;
                     Style style = layer.Style.Clone();

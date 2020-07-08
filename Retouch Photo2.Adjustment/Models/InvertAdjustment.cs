@@ -12,12 +12,12 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
-        public static IAdjustmentGenericPage<InvertAdjustment> GenericPage;// = new InvertPage();
+        public static IAdjustmentPage GenericPage;// = new InvertPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Invert;
         public Visibility PageVisibility => Visibility.Collapsed;
-        public UIElement Page => InvertAdjustment.GenericPage.Self;
+        public IAdjustmentPage Page { get; } = InvertAdjustment.GenericPage;
         public string Text => InvertAdjustment.GenericPage.Text;
         
 

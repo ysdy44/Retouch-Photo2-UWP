@@ -35,18 +35,18 @@ namespace Retouch_Photo2.Controls
 
             if (LayerageCollection.VisibilityChanged == null)
             {
-                LayerageCollection.VisibilityChanged += (layer) =>
+                LayerageCollection.VisibilityChanged += (layer2) =>
                 {
-                    Visibility value = (layer.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+                    Visibility visibility = (layer2.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+                    this.SelectionViewModel.Visibility = visibility;
 
                     this.MethodViewModel.ILayerChanged<Visibility>
                     (
-                        setSelectionViewModel: () => this.SelectionViewModel.Visibility = value,
-                        set: (iLayer) => iLayer.Visibility = value,
+                        set: (layer) => layer.Visibility = visibility,
 
                         historyTitle: "Set visibility",
-                        getHistory: (iLayer) => iLayer.Visibility,
-                        setHistory: (iLayer, previous) => iLayer.Visibility = previous
+                        getHistory: (layer) => layer.Visibility,
+                        setHistory: (layer, previous) => layer.Visibility = previous
                     );
                 };
             }

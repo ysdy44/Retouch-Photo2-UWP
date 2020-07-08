@@ -12,12 +12,12 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
-        public static IAdjustmentGenericPage<HueRotationAdjustment> GenericPage;// = new HueRotationPage();
+        public static IAdjustmentPage GenericPage;// = new HueRotationPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.HueRotation;
         public Visibility PageVisibility => Visibility.Visible;
-        public UIElement Page => HueRotationAdjustment.GenericPage.Self;
+        public IAdjustmentPage Page { get; } = HueRotationAdjustment.GenericPage;
         public string Text => HueRotationAdjustment.GenericPage.Text;
 
 
@@ -26,27 +26,7 @@ namespace Retouch_Photo2.Adjustments.Models
         public float StartingAngle { get; private set; }
         public void CacheAngle() => this.StartingAngle = this.Angle;
 
-
-        public void Reset()
-        {
-            this.Angle = 0.0f;
-
-            if (HueRotationAdjustment.GenericPage.Adjustment == this)
-            {
-                HueRotationAdjustment.GenericPage.Reset();
-            }
-        }
-        public void Follow()
-        {
-            HueRotationAdjustment.GenericPage.Adjustment = this;
-            HueRotationAdjustment.GenericPage.Follow(this);
-        }
-        public void Close()
-        {
-            HueRotationAdjustment.GenericPage.Adjustment = null;
-        }
-
-
+               
         public IAdjustment Clone()
         {
             return new HueRotationAdjustment

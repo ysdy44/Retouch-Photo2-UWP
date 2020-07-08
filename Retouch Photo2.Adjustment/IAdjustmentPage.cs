@@ -18,5 +18,18 @@ namespace Retouch_Photo2.Adjustments
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         IAdjustment GetNewAdjustment();
+
+
+        /// <summary> Gets the adjustment index. </summary>
+        int Index { get; set; }
+
+        /// <summary>
+        /// Reset the <see cref="IAdjustmentPage"/>'s data.
+        /// </summary>
+        void Reset();
+        /// <summary>
+        /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
+        /// </summary>
+        void Follow();
     }
 }

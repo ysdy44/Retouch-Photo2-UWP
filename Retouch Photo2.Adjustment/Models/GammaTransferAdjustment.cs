@@ -12,15 +12,15 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
-        public static IAdjustmentGenericPage<GammaTransferAdjustment> GenericPage;// = new GammaTransferPage();
+        public static IAdjustmentPage GenericPage;// = new GammaTransferPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.GammaTransfer;
         public Visibility PageVisibility => Visibility.Visible;
-        public UIElement Page => GammaTransferAdjustment.GenericPage.Self;
+        public IAdjustmentPage Page { get; } = GammaTransferAdjustment.GenericPage;
         public string Text => GammaTransferAdjustment.GenericPage.Text;
 
-        public bool ClampOutput= false;
+        public bool ClampOutput = false;
 
 
         #region Alpha
@@ -105,46 +105,6 @@ namespace Retouch_Photo2.Adjustments.Models
 
 
         #endregion
-        
-
-        public void Reset()
-        {
-            this.ClampOutput = false;
-
-            this.AlphaDisable = true;
-            this.AlphaOffset = 0;
-            this.AlphaExponent = 1;
-            this.AlphaAmplitude = 1;
-
-            this.RedDisable = true;
-            this.RedOffset = 0;
-            this.RedExponent = 1;
-            this.RedAmplitude = 1;
-
-            this.GreenDisable = true;
-            this.GreenOffset = 0;
-            this.GreenExponent = 1;
-            this.GreenAmplitude = 1;
-
-            this.BlueDisable = true;
-            this.BlueOffset = 0;
-            this.BlueExponent = 1;
-            this.BlueAmplitude = 1;
-
-            if (GammaTransferAdjustment.GenericPage.Adjustment == this)
-            {
-                GammaTransferAdjustment.GenericPage.Reset();
-            }
-        }
-        public void Follow()
-        {
-            GammaTransferAdjustment.GenericPage.Adjustment = this;
-            GammaTransferAdjustment.GenericPage.Follow(this);
-        }
-        public void Close()
-        {
-            GammaTransferAdjustment.GenericPage.Adjustment = null;
-        }
         
 
         public IAdjustment Clone()

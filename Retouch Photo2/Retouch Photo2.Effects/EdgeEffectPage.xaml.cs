@@ -18,7 +18,26 @@ namespace Retouch_Photo2.Effects.Models
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+
         
+        //@Content
+        private float Amount
+        {
+            set
+            {
+                this.AmountPicker.Value = (int)value;
+                this.AmountSlider.Value = value;
+            }
+        }
+        private float Radius
+        {
+            set
+            {
+                this.RadiusPicker.Value = (int)(value * 10.0f);
+                this.RadiusSlider.Value = value;
+            }
+        }
+
 
         //@Construct
         /// <summary>
@@ -29,9 +48,13 @@ namespace Retouch_Photo2.Effects.Models
             this.InitializeComponent();
             this.ConstructString();
 
-            this.ConstructButton();
-            this.ConstructEdge_Amount();
-            this.ConstructEdge_Radius();
+            this.ConstructIsOn();
+
+            this.ConstructAmount1();
+            this.ConstructAmount2();
+
+            this.ConstructRadius1();
+            this.ConstructRadius2();
         }
     }
 
@@ -64,8 +87,8 @@ namespace Retouch_Photo2.Effects.Models
         
         public void Reset()
         {
-            this.AmountSlider.Value = 50;
-            this.RadiusSlider.Value = 0;
+            this.Amount = 0.5f;
+            this.Radius = 0.0f;
 
             //History
             LayersPropertyHistory history = new LayersPropertyHistory("Set effect outline");
@@ -106,8 +129,8 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowPage(Effect effect)
         {
-            this.AmountSlider.Value = effect.Edge_Amount * 100.0f;
-            this.RadiusSlider.Value = effect.Edge_Radius;
+            this.Amount = effect.Edge_Amount;
+            this.Radius = effect.Edge_Radius;
         }
     }
 
@@ -118,55 +141,117 @@ namespace Retouch_Photo2.Effects.Models
     {
 
         //IsOn
-        private void ConstructButton()
+        private void ConstructIsOn()
         {
-            this.Button.Toggled += (isOn) =>
-            {
-                this.MethodViewModel.EffectChanged<bool>
-                (
-                    set: (effect) => effect.Edge_IsOn = isOn,
+            this.Button.Toggled += (isOn) =>  this.MethodViewModel.EffectChanged<bool>
+            (
+                set: (effect) => effect.Edge_IsOn = isOn,
 
-                    historyTitle: "Set effect edge is on",
-                    getHistory: (effect) => effect.Edge_IsOn,
-                    setHistory: (effect, previous) => effect.Edge_IsOn = previous
-                );
+                historyTitle: "Set effect edge is on",
+                getHistory: (effect) => effect.Edge_IsOn,
+                setHistory: (effect, previous) => effect.Edge_IsOn = previous
+            );
+        }
+
+
+        //Amount
+        private void ConstructAmount1()
+        {
+            this.AmountPicker.Unit = null;
+            this.AmountPicker.Minimum = 0;
+            this.AmountPicker.Maximum = 100;
+            this.AmountPicker.ValueChange += (s, value) =>
+            {
+                float amount = (float)value / 100.0f;
+                this.Amount = amount;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+               (
+                   set: (effect) => effect.Edge_Amount = amount,
+
+                   historyTitle: "Set effect edge amount",
+                   getHistory: (effect) => effect.Edge_Amount,
+                   setHistory: (effect, previous) => effect.Edge_Amount = previous
+               );
+            };
+        }
+
+        private void ConstructAmount2()
+        {
+            this.AmountSlider.Minimum = 0.0d;
+            this.AmountSlider.Maximum = 1.0d;
+            this.AmountSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEdge());
+            this.AmountSlider.ValueChangeDelta += (s, value) =>
+            {
+                float amount = (float)value;
+                this.Amount = amount;
+
+                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Edge_Amount = amount);
+            };
+            this.AmountSlider.ValueChangeCompleted += (s, value) =>
+            {
+                float amount = (float)value;
+                this.Amount = amount;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+               (
+                   set: (effect) => effect.Edge_Amount = amount,
+
+                   historyTitle: "Set effect edge amount",
+                   getHistory: (effect) => effect.StartingEdge_Amount,
+                   setHistory: (effect, previous) => effect.Edge_Amount = previous
+               );
             };
         }
 
 
-        //Edge_Amount
-        private void ConstructEdge_Amount()
+        //Radius
+        private void ConstructRadius1()
         {
-            this.AmountSlider.Minimum = 0.0d;
-            this.AmountSlider.Maximum = 100.0d;
-            this.AmountSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEdge());
-            this.AmountSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Edge_Amount = (float)value / 100.0f);
-            this.AmountSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
-            (
-                set: (effect) => effect.Edge_Amount = (float)value / 100.0f,
+            this.RadiusSlider.Minimum = 0;
+            this.RadiusPicker.Maximum = 100;
+            this.RadiusPicker.ValueChange += (s, value) =>
+            {
+                float radius = (float)value / 10.0f;
+                this.Radius = radius;
 
-                historyTitle: "Set effect edge amount",
-                getHistory: (effect) => effect.StartingEdge_Amount,
-                setHistory: (effect, previous) => effect.Edge_Amount = previous
-            );
+                this.MethodViewModel.EffectChangeCompleted<float>
+               (
+                   set: (effect) => effect.Edge_Radius = radius,
+
+                   historyTitle: "Set effect edge radius",
+                   getHistory: (effect) => effect.Edge_Radius,
+                   setHistory: (effect, previous) => effect.Edge_Radius = previous
+               );
+            };
         }
 
-
-        //Edge_Radius
-        private void ConstructEdge_Radius()
+        private void ConstructRadius2()
         {
             this.RadiusSlider.Minimum = 0.0d;
-            this.RadiusSlider.Maximum = 1.0d;
+            this.RadiusSlider.Maximum = 10.0d;
             this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEdge());
-            this.RadiusSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Edge_Radius = (float)value);
-            this.RadiusSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
-            (
-                set: (effect) => effect.Edge_Radius = (float)value,
+            this.RadiusSlider.ValueChangeDelta += (s, value) =>
+            {
+                float radius = (float)value;
+                this.Radius = radius;
 
-                historyTitle: "Set effect edge radius",
-                getHistory: (effect) => effect.StartingEdge_Radius,
-                setHistory: (effect, previous) => effect.Edge_Radius = previous
-            );
+                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Edge_Radius = radius);
+            };
+            this.RadiusSlider.ValueChangeCompleted += (s, value) =>
+            {
+                float radius = (float)value;
+                this.Radius = radius;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+               (
+                   set: (effect) => effect.Edge_Radius = radius,
+
+                   historyTitle: "Set effect edge radius",
+                   getHistory: (effect) => effect.StartingEdge_Radius,
+                   setHistory: (effect, previous) => effect.Edge_Radius = previous
+               );
+            };
         }
 
     }

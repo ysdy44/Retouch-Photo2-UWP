@@ -11,15 +11,33 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// <summary>
     /// Page of <see cref = "TemperatureAdjustment"/>.
     /// </summary>
-    public sealed partial class TemperaturePage : IAdjustmentGenericPage<TemperatureAdjustment>
+    public sealed partial class TemperaturePage : IAdjustmentPage
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
 
-        //@Generic
-        /// <summary> Gets IAdjustment's adjustment. </summary>
-        public TemperatureAdjustment Adjustment { get; set; }
+
+        //@Content
+        private float Temperature
+        {
+            set
+            {
+                this.TemperaturePicker.Value = (int)(value * 100.0f);
+                this.TemperatureSlider.Value = value;
+            }
+        }
+        private float Tint
+        {
+            set
+            {
+                this.TintPicker.Value = (int)(value * 100.0f);
+                this.TintSlider.Value = value;
+            }
+        }
+
 
         //@Construct
         /// <summary>
@@ -30,15 +48,18 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructTemperature();
-            this.ConstructTint();
+            this.ConstructTemperature1();
+            this.ConstructTemperature2();
+
+            this.ConstructTint1();
+            this.ConstructTint2();
         }
     }
 
     /// <summary>
     /// Page of <see cref = "TemperatureAdjustment"/>.
     /// </summary>
-    public sealed partial class TemperaturePage : IAdjustmentGenericPage<TemperatureAdjustment>
+    public sealed partial class TemperaturePage : IAdjustmentPage
     {
 
         //Strings
@@ -65,19 +86,23 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new TemperatureAdjustment();
 
+
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
+
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.
         /// </summary>
         public void Reset()
         {
-            this.TemperatureSlider.Value = 0;
-            this.TintSlider.Value = 0;
+            this.Temperature = 0.0f;
+            this.Tint = 0.0f;
 
             if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
                 ILayer layer = layerage.Self;
 
-                if (this.Adjustment is TemperatureAdjustment adjustment)
+                if (layer.Filter.Adjustments[this.Index] is TemperatureAdjustment adjustment)
                 {
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory("Set temperature adjustment");
@@ -117,185 +142,132 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary>
         /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
         /// </summary>
-        /// <param name="adjustment"> The adjustment. </param>
-        public void Follow(TemperatureAdjustment adjustment)
+        public void Follow()
         {
-            this.TemperatureSlider.Value = adjustment.Temperature * 100;
-            this.TintSlider.Value = adjustment.Tint * 100;
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
+            {
+                ILayer layer = layerage.Self;
+
+                if (layer.Filter.Adjustments[this.Index] is TemperatureAdjustment adjustment)
+                {
+                    this.Temperature = adjustment.Temperature;
+                    this.Tint = adjustment.Tint;
+                }
+            }
         }
+
     }
 
     /// <summary>
     /// Page of <see cref = "TemperatureAdjustment"/>.
     /// </summary>
-    public sealed partial class TemperaturePage : IAdjustmentGenericPage<TemperatureAdjustment>
+    public sealed partial class TemperaturePage : IAdjustmentPage
     {
 
-        private void ConstructTemperature()
+        //Temperature
+        private void ConstructTemperature1()
         {
-            this.TemperatureSlider.Value = 0;
-            this.TemperatureSlider.Minimum = -100;
-            this.TemperatureSlider.Maximum = 100;
-
-            this.TemperatureSlider.SliderBrush = this.TemperatureBrush;
-
-            this.TemperatureSlider.ValueChangeStarted += (s, value) =>
+            this.TemperaturePicker.Unit = null;
+            this.TemperaturePicker.Minimum = -100;
+            this.TemperaturePicker.Maximum = 100;
+            this.TemperaturePicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float temperature = (float)value / 100.0f;
+                this.Temperature = temperature;
 
-                    if (this.Adjustment is TemperatureAdjustment adjustment)
-                    {
-                        adjustment.CacheTemperature();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
-            };
-            this.TemperatureSlider.ValueChangeDelta += (s, value) =>
-            {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                this.MethodViewModel.TAdjustmentChanged<float, TemperatureAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Temperature = temperature,
 
-                    if (this.Adjustment is TemperatureAdjustment adjustment)
-                    {
-                        float temperature = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.Temperature = temperature;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
-            };
-            this.TemperatureSlider.ValueChangeCompleted += (s, value) =>
-            {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (this.Adjustment is TemperatureAdjustment adjustment)
-                    {
-                        float temperature = (float)value / 100.0f;
-
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set temperature adjustment temperature");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingTemperature;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is TemperatureAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.Temperature = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.Temperature = temperature;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set temperature adjustment temperature",
+                    getHistory: (tAdjustment) => tAdjustment.Temperature,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Temperature = previous
+                );
             };
         }
 
-        private void ConstructTint()
+        private void ConstructTemperature2()
         {
-            this.TintSlider.Value = 0;
-            this.TintSlider.Minimum = -100;
-            this.TintSlider.Maximum = 100;
-
-            this.TintSlider.SliderBrush = this.TintBrush;
-
-            this.TintSlider.ValueChangeStarted += (s, value) =>
+            this.TemperatureSlider.Minimum = -1.0d;
+            this.TemperatureSlider.Maximum = 1.0d;
+            this.TemperatureSlider.SliderBrush = this.TemperatureBrush;
+            this.TemperatureSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<TemperatureAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheTemperature());
+            this.TemperatureSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float temperature = (float)value;
+                this.Temperature = temperature;
 
-                    if (this.Adjustment is TemperatureAdjustment adjustment)
-                    {
-                        adjustment.CacheTint();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<TemperatureAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.Temperature = temperature);
             };
+            this.TemperatureSlider.ValueChangeCompleted += (s, value) =>
+            {
+                float temperature = (float)value;
+                this.Temperature = temperature;
+
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, TemperatureAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Temperature = temperature,
+
+                    historyTitle: "Set temperature adjustment temperature",
+                    getHistory: (tAdjustment) => tAdjustment.StartingTemperature,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Temperature = previous
+                );
+            };
+        }
+
+
+        //Tint
+        private void ConstructTint1()
+        {
+            this.TintPicker.Unit = null;
+            this.TintPicker.Minimum = -100;
+            this.TintPicker.Maximum = 100;
+            this.TintPicker.ValueChange += (s, value) =>
+            {
+                float tint = (float)value / 100.0f;
+                this.Tint = tint;
+
+                this.MethodViewModel.TAdjustmentChanged<float, TemperatureAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Temperature = tint,
+
+                    historyTitle: "Set tint adjustment tint",
+                    getHistory: (tAdjustment) => tAdjustment.Tint,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Tint = previous
+                );
+            };
+        }
+
+        private void ConstructTint2()
+        {
+            this.TintSlider.Minimum = -1.0d;
+            this.TintSlider.Maximum = 1.0d;
+            this.TintSlider.SliderBrush = this.TintBrush;
+            this.TintSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<TemperatureAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheTint());
             this.TintSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float tint = (float)value;
+                this.Tint = tint;
 
-                    if (this.Adjustment is TemperatureAdjustment adjustment)
-                    {
-                        float tint = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.Tint = tint;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<TemperatureAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.Tint = tint);
             };
             this.TintSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float tint = (float)value;
+                this.Tint = tint;
 
-                    if (this.Adjustment is TemperatureAdjustment adjustment)
-                    {
-                        float tint = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, TemperatureAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Tint = tint,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set temperature adjustment tint");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingTint;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is TemperatureAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.Tint = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.Tint = tint;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set tint adjustment tint",
+                    getHistory: (tAdjustment) => tAdjustment.StartingTint,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Tint = previous
+                );
             };
         }
 

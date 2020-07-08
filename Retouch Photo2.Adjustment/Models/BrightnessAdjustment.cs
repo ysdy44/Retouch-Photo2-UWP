@@ -13,12 +13,12 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
-        public static IAdjustmentGenericPage<BrightnessAdjustment> GenericPage;// = new BrightnessPage();
+        public static IAdjustmentPage GenericPage;// = new BrightnessPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Brightness;
         public Visibility PageVisibility => Visibility.Visible;
-        public UIElement Page => BrightnessAdjustment.GenericPage.Self;
+        public IAdjustmentPage Page { get; } = BrightnessAdjustment.GenericPage;
         public string Text => BrightnessAdjustment.GenericPage.Text;
 
 
@@ -41,25 +41,7 @@ namespace Retouch_Photo2.Adjustments.Models
         public float BlackDark = 0.0f;
         public float StartingBlackDark { get; private set; }
         public void CacheBlackDark() => this.StartingBlackDark = this.BlackDark;
-
-
-        public void Reset()
-        {
-            if (BrightnessAdjustment.GenericPage.Adjustment==this)
-            {
-                BrightnessAdjustment.GenericPage.Reset();
-            }
-        }
-        public void Follow()
-        {
-            BrightnessAdjustment.GenericPage.Adjustment = this;
-            BrightnessAdjustment.GenericPage.Follow(this);
-        }
-        public void Close()
-        {
-            BrightnessAdjustment.GenericPage.Adjustment = null;
-        }
-
+        
 
         public IAdjustment Clone()
         {

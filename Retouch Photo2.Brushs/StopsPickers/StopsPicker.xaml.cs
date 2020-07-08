@@ -62,12 +62,13 @@ namespace Retouch_Photo2.Brushs
             this.ConstructStop();
 
 
-            //Color      
+            //Color    
             this.ColorPicker.ColorChanged += (s, color) =>
             {
                 bool isSucces = this.SetColor(color);
                 if (isSucces) this.StopsChanged?.Invoke(this, this.array);//Delegate
             };
+
             this.ColorPicker.ColorChangeStarted += (s, color) =>
             {
                 bool isSucces = this.SetColor(color);

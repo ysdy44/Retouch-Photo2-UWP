@@ -12,14 +12,32 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// <summary>
     /// Page of <see cref = "VignetteAdjustment"/>.
     /// </summary>
-    public sealed partial class VignettePage : IAdjustmentGenericPage<VignetteAdjustment>
+    public sealed partial class VignettePage : IAdjustmentPage
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
 
 
+        //@Content
+        private float Amount
+        {
+            set
+            {
+                this.AmountPicker.Value = (int)(value * 100.0f);
+                this.AmountSlider.Value = value;
+            }
+        }
+        private float Curve
+        {
+            set
+            {
+                this.CurvePicker.Value = (int)(value * 100.0f);
+                this.CurveSlider.Value = value;
+            }
+        }
         /// <summary> Color </summary>
         public Color Color
         {
@@ -29,12 +47,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                 this.SolidColorBrush.Color = value;
                 this.AmountRight.Color = value;
                 this.CurveRight.Color = value;
+                this.ColorPicker.Color = value;
             }
         }
 
-        //@Generic
-        /// <summary> Gets IAdjustment's adjustment. </summary>
-        public VignetteAdjustment Adjustment { get; set; }
 
         //@Construct
         /// <summary>
@@ -45,29 +61,22 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructAmount();
-            this.ConstructCurve();
+            this.ConstructAmount1();
+            this.ConstructAmount2();
+
+            this.ConstructCurve1();
+            this.ConstructCurve2();
 
             this.ConstructColor1();
             this.ConstructColor2();
-
-            //TODO
-            this.ColorPicker.ColorChanged += (s, value) =>
-            {
-                this.Color = value;
-
-                if (this.Adjustment == null) return;
-
-                this.Adjustment.Color = value;
-                this.ViewModel.Invalidate();//Invalidate
-            };
         }
+
     }
 
     /// <summary>
     /// Page of <see cref = "VignetteAdjustment"/>.
     /// </summary>
-    public sealed partial class VignettePage : IAdjustmentGenericPage<VignetteAdjustment>
+    public sealed partial class VignettePage : IAdjustmentPage
     {
         //Strings
         private void ConstructStrings()
@@ -93,21 +102,25 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new VignetteAdjustment();
-        
+
+
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
+
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.
         /// </summary>
         public void Reset()
         {
-            this.AmountSlider.Value = 0;
-            this.CurveSlider.Value = 0;
+            this.Amount = 0.0f;
+            this.Curve = 0.0f;
             this.Color = Colors.Black;
 
             if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
                 ILayer layer = layerage.Self;
 
-                if (this.Adjustment is VignetteAdjustment adjustment)
+                if (layer.Filter.Adjustments[this.Index] is VignetteAdjustment adjustment)
                 {
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory("Set vignette adjustment");
@@ -150,322 +163,189 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary>
         /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
         /// </summary>
-        /// <param name="adjustment"> The adjustment. </param>
-        public void Follow(VignetteAdjustment adjustment)
+        public void Follow()
         {
-            this.AmountSlider.Value = adjustment.Amount * 100;
-            this.CurveSlider.Value = adjustment.Curve * 100;
-            this.Color = adjustment.Color;
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
+            {
+                ILayer layer = layerage.Self;
+
+                if (layer.Filter.Adjustments[this.Index] is VignetteAdjustment adjustment)
+                {
+                    this.Amount = adjustment.Amount;
+                    this.Curve = adjustment.Curve;
+                    this.Color = adjustment.Color;
+                }
+            }
         }
+
     }
 
     /// <summary>
     /// Page of <see cref = "VignetteAdjustment"/>.
     /// </summary>
-    public sealed partial class VignettePage : IAdjustmentGenericPage<VignetteAdjustment>
+    public sealed partial class VignettePage : IAdjustmentPage
     {
 
-        private void ConstructAmount()
+        //Amount
+        private void ConstructAmount1()
         {
-            this.AmountSlider.Value = 0;
-            this.AmountSlider.Minimum = 0;
-            this.AmountSlider.Maximum = 100;
-
-            this.AmountSlider.SliderBrush = this.AmountBrush;
-
-            this.AmountSlider.ValueChangeStarted += (s, value) =>
+            this.AmountPicker.Unit = null;
+            this.AmountPicker.Minimum = 0;
+            this.AmountPicker.Maximum = 100;
+            this.AmountPicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float amount = (float)value / 100.0f;
+                this.Amount = amount;
 
-                    if (this.Adjustment is VignetteAdjustment adjustment)
-                    {
-                        adjustment.CacheAmount();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, VignetteAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Amount = amount,
+
+                    historyTitle: "Set vignette adjustment amount",
+                    getHistory: (tAdjustment) => tAdjustment.Amount,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Amount = previous
+                );
             };
+        }
+
+        private void ConstructAmount2()
+        {
+            this.AmountSlider.Minimum = 0.0d;
+            this.AmountSlider.Maximum = 1.0d;
+            this.AmountSlider.SliderBrush = this.AmountBrush;
+            this.AmountSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<VignetteAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheAmount());
             this.AmountSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float amount = (float)value;
+                this.Amount = amount;
 
-                    if (this.Adjustment is VignetteAdjustment adjustment)
-                    {
-                        float amount = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.Amount = amount;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<VignetteAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.Amount = amount);
             };
             this.AmountSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float amount = (float)value;
+                this.Amount = amount;
 
-                    //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set vignette adjustment amount");
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, VignetteAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Amount = amount,
 
-                    if (this.Adjustment is VignetteAdjustment adjustment)
-                    {
-                        float amount = (float)value / 100.0f;
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingAmount;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is VignetteAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.Amount = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.Amount = amount;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set vignette adjustment amount",
+                    getHistory: (tAdjustment) => tAdjustment.StartingAmount,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Amount = previous
+                );
             };
         }
 
-        private void ConstructCurve()
+
+        //Curve
+        private void ConstructCurve1()
         {
-            this.CurveSlider.Value = 0;
-            this.CurveSlider.Minimum = 0;
-            this.CurveSlider.Maximum = 100;
-
-            this.CurveSlider.SliderBrush = this.CurveBrush;
-
-            this.CurveSlider.ValueChangeStarted += (s, value) =>
+            this.CurvePicker.Unit = null;
+            this.CurvePicker.Minimum = 0;
+            this.CurvePicker.Maximum = 100;
+            this.CurvePicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float curve = (float)value / 100.0f;
+                this.Curve = curve;
 
-                    if (this.Adjustment is VignetteAdjustment adjustment)
-                    {
-                        adjustment.CacheCurve();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, VignetteAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Curve = curve,
+
+                    historyTitle: "Set vignette adjustment curve",
+                    getHistory: (tAdjustment) => tAdjustment.Curve,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Curve = previous
+                );
             };
+        }
+
+        private void ConstructCurve2()
+        {
+            this.CurveSlider.Minimum = 0.0d;
+            this.CurveSlider.Maximum = 1.0d;
+            this.CurveSlider.SliderBrush = this.CurveBrush;
+            this.CurveSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<VignetteAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheCurve());
             this.CurveSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float curve = (float)value;
+                this.Curve = curve;
 
-                    if (this.Adjustment is VignetteAdjustment adjustment)
-                    {
-                        float curve = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.Curve = curve;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<VignetteAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.Curve = curve);
             };
             this.CurveSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float curve = (float)value;
+                this.Curve = curve;
 
-                    if (this.Adjustment is VignetteAdjustment adjustment)
-                    {
-                        float curve = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, VignetteAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Curve = curve,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set vignette adjustment curve");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingCurve;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is VignetteAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.Curve = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.Curve = curve;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set vignette adjustment curve",
+                    getHistory: (tAdjustment) => tAdjustment.StartingCurve,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Curve = previous
+                );
             };
         }
 
 
+        //Color
         private void ConstructColor1()
         {
             this.ColorBorder.Tapped += (s, e) =>
             {
-                if (this.Adjustment is VignetteAdjustment adjustment)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    this.ColorPicker.Color = adjustment.Color;
-                    this.ColorFlyout.ShowAt(this.ColorBorder);
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Filter.Adjustments[this.Index] is VignetteAdjustment adjustment)
+                    {
+                        this.ColorFlyout.ShowAt(this.ColorBorder);
+                        this.ColorPicker.Color = adjustment.Color;
+                    }
                 }
             };
-
+            
             this.ColorPicker.ColorChanged += (s, value) =>
             {
                 Color color = value;
                 this.Color = color;
 
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                this.MethodViewModel.TAdjustmentChanged<Color, VignetteAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Color = color,
 
-                    if (this.Adjustment is VignetteAdjustment adjustment)
-                    {
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set vignette adjustment color");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.Color;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is VignetteAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.Color = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.Color = color;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                    historyTitle: "Set vignette adjustment color",
+                    getHistory: (tAdjustment) => tAdjustment.Color,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Color = previous
+                );
             };
         }
 
         private void ConstructColor2()
         {
-            this.ColorPicker.ColorChangeStarted += (s, value) =>
-            {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (this.Adjustment is VignetteAdjustment adjustment)
-                    {
-                        adjustment.CacheColor();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
-            };
-            this.ColorPicker.ColorChangeDelta += (s, value) =>
-            {
-                Color color = value;
-
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (this.Adjustment is VignetteAdjustment adjustment)
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.Color = color;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
-            };
+            this.ColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<VignetteAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheColor());
+            this.ColorPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.TAdjustmentChangeDelta<VignetteAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.Color = (Color)value);
             this.ColorPicker.ColorChangeCompleted += (s, value) =>
             {
                 Color color = value;
                 this.Color = color;
 
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                this.MethodViewModel.TAdjustmentChangeCompleted<Color, VignetteAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Color = color,
 
-                    if (this.Adjustment is VignetteAdjustment adjustment)
-                    {
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set vignette adjustment color");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingColor;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is VignetteAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.Color = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.Color = color;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set vignette adjustment color",
+                    getHistory: (tAdjustment) => tAdjustment.StartingColor,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Color = previous
+                );
             };
         }
 

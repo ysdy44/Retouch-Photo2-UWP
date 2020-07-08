@@ -10,18 +10,14 @@ namespace Retouch_Photo2.Adjustments.Pages
 {
     /// <summary>
     /// Page of <see cref = "GammaTransferAdjustment"/>.
-    /// </summary>
-    public sealed partial class GammaTransferPage : IAdjustmentGenericPage<GammaTransferAdjustment>
+    /// </summary>       
+    public sealed partial class GammaTransferPage : IAdjustmentPage
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-
-
-        //@Generic
-        /// <summary> Gets IAdjustment's adjustment. </summary>
-        public GammaTransferAdjustment Adjustment { get; set; }
+        ViewModel MethodViewModel => App.MethodViewModel;
 
 
         //@Converter
@@ -38,32 +34,63 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ConstructStrings();
 
 
+            //Alpha
             this.ConstructAlphaDisable();
-            this.ConstructAlphaOffset();
-            this.ConstructAlphaExponent();
-            this.ConstructAlphaAmplitude();
 
+            this.ConstructAlphaOffset1();
+            this.ConstructAlphaOffset2();
+
+            this.ConstructAlphaExponent1();
+            this.ConstructAlphaExponent2();
+
+            this.ConstructAlphaAmplitude1();
+            this.ConstructAlphaAmplitude2();
+
+
+            //Red
             this.ConstructRedDisable();
-            this.ConstructRedOffset();
-            this.ConstructRedExponent();
-            this.ConstructRedAmplitude();
 
+            this.ConstructRedOffset1();
+            this.ConstructRedOffset2();
+
+            this.ConstructRedExponent1();
+            this.ConstructRedExponent2();
+
+            this.ConstructRedAmplitude1();
+            this.ConstructRedAmplitude2();
+
+            
+            //Green
             this.ConstructGreenDisable();
-            this.ConstructGreenOffset();
-            this.ConstructGreenExponent();
-            this.ConstructGreenAmplitude();
 
+            this.ConstructGreenOffset1();
+            this.ConstructGreenOffset2();
+
+            this.ConstructGreenExponent1();
+            this.ConstructGreenExponent2();
+
+            this.ConstructGreenAmplitude1();
+            this.ConstructGreenAmplitude2();
+
+
+            //Blue
             this.ConstructBlueDisable();
-            this.ConstructBlueOffset();
-            this.ConstructBlueExponent();
-            this.ConstructBlueAmplitude();
+
+            this.ConstructBlueOffset1();
+            this.ConstructBlueOffset2();
+
+            this.ConstructBlueExponent1();
+            this.ConstructBlueExponent2();
+
+            this.ConstructBlueAmplitude1();
+            this.ConstructBlueAmplitude2();
         }
     }
 
     /// <summary>
     /// Page of <see cref = "GammaTransferAdjustment"/>.
     /// </summary>
-    public sealed partial class GammaTransferPage : IAdjustmentGenericPage<GammaTransferAdjustment>
+    public sealed partial class GammaTransferPage : IAdjustmentPage
     {
 
         //Strings
@@ -99,7 +126,12 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new GammaTransferAdjustment();
-        
+
+
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
+
+
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.
         /// </summary>
@@ -114,7 +146,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             {
                 ILayer layer = layerage.Self;
 
-                if (this.Adjustment is GammaTransferAdjustment adjustment)
+                if (layer.Filter.Adjustments[this.Index] is GammaTransferAdjustment adjustment)
                 {
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment");
@@ -207,13 +239,20 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary>
         /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
         /// </summary>
-        /// <param name="adjustment"> The adjustment. </param>
-        public void Follow(GammaTransferAdjustment adjustment)
+        public void Follow()
         {
-            this.FollowAlpha(adjustment);
-            this.FollowRed(adjustment);
-            this.FollowGreen(adjustment);
-            this.FollowBlue(adjustment);
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
+            {
+                ILayer layer = layerage.Self;
+
+                if (layer.Filter.Adjustments[this.Index] is GammaTransferAdjustment adjustment)
+                {
+                    this.FollowAlpha(adjustment);
+                    this.FollowRed(adjustment);
+                    this.FollowGreen(adjustment);
+                    this.FollowBlue(adjustment);
+                }
+            }
         }
 
     }

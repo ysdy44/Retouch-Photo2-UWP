@@ -14,16 +14,9 @@ namespace Retouch_Photo2.Adjustments
         /// <summary> Gets whether page is visible. </summary>
         Visibility PageVisibility { get; }
         /// <summary> Gets the page. </summary>
-        UIElement Page { get; }
+        IAdjustmentPage Page { get; }
         /// <summary> Gets the text. </summary>
         string Text { get; }
-
-        /// <summary> Reset the adjustment. </summary>
-        void Reset();
-        /// <summary> Follow the adjustment for page. </summary>
-        void Follow();
-        /// <summary> Close the adjustment's page. </summary>
-        void Close();
 
         /// <summary>
         /// Get own copy.

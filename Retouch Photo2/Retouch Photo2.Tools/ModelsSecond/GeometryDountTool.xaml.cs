@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -25,7 +24,7 @@ namespace Retouch_Photo2.Tools.Models
 
         
         //@Converter
-        private int HoleRadiusNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
+        private int HoleRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
 
 
         //@Construct
@@ -62,7 +61,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.Button.Title = resource.GetString("/ToolsSecond/GeometryDount");
 
-            this.HoleRadiusTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryDount_HoleRadius");
+            this.HoleRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryDount_HoleRadius");
 
             this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
         }
@@ -107,17 +106,17 @@ namespace Retouch_Photo2.Tools.Models
         //HoleRadius
         private void ConstructHoleRadius1()
         {
-            this.HoleRadiusTouchbarPicker.Unit = "%";
-            this.HoleRadiusTouchbarPicker.Minimum = 0;
-            this.HoleRadiusTouchbarPicker.Maximum = 100;
-            this.HoleRadiusTouchbarPicker.ValueChange += (sender, value) =>
+            this.HoleRadiusPicker.Unit = "%";
+            this.HoleRadiusPicker.Minimum = 0;
+            this.HoleRadiusPicker.Maximum = 100;
+            this.HoleRadiusPicker.ValueChange += (sender, value) =>
             {
                 float holeRadius = (float)value / 100.0f;
+                this.SelectionViewModel.GeometryDountHoleRadius = holeRadius;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryDountLayer>
                 (
                     layerType: LayerType.GeometryDount,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryDountHoleRadius = holeRadius,
                     set: (tLayer) => tLayer.HoleRadius = holeRadius,
 
                     historyTitle: "Set dount layer hole radius",
@@ -129,26 +128,24 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructHoleRadius2()
         {
-            this.HoleRadiusTouchbarSlider.Minimum = 0.0d;
-            this.HoleRadiusTouchbarSlider.Maximum = 1.0d;
-            this.HoleRadiusTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryDountLayer>
-            (
-                layerType: LayerType.GeometryDount,
-                cache: (tLayer) => tLayer.CacheHoleRadius()
-            );
-            this.HoleRadiusTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryDountLayer>
-            (
-                layerType: LayerType.GeometryDount,
-                set: (tLayer) => tLayer.HoleRadius = (float)value
-            );
-            this.HoleRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.HoleRadiusSlider.Minimum = 0.0d;
+            this.HoleRadiusSlider.Maximum = 1.0d;
+            this.HoleRadiusSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryDountLayer>(layerType: LayerType.GeometryDount, cache: (tLayer) => tLayer.CacheHoleRadius());
+            this.HoleRadiusSlider.ValueChangeDelta += (sender, value) =>
             {
                 float holeRadius = (float)value;
+                this.SelectionViewModel.GeometryDountHoleRadius = holeRadius;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryDountLayer>(layerType: LayerType.GeometryDount, set: (tLayer) => tLayer.HoleRadius = holeRadius);
+            };
+            this.HoleRadiusSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float holeRadius = (float)value;
+                this.SelectionViewModel.GeometryDountHoleRadius = holeRadius;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryDountLayer>
                 (
                     layerType: LayerType.GeometryDount,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryDountHoleRadius = holeRadius,
                     set: (tLayer) => tLayer.HoleRadius = holeRadius,
 
                     historyTitle: "Set dount layer hole radius",

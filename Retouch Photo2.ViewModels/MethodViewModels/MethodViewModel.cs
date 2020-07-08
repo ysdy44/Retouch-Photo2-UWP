@@ -22,14 +22,12 @@ namespace Retouch_Photo2.ViewModels
         /// Change T type for ILayer, save history, invalidate canvas.
         /// </summary>
         /// <typeparam name="T"> The T type property. </typeparam>
-        /// <param name="setSelectionViewModel"> The sets of Selection<see cref="ViewModel"/>. </param>
         /// <param name="set"> The sets of T. </param>
         /// <param name="historyTitle"> The history title. </param>
         /// <param name="getHistory"> The gets of history T. </param>
         /// <param name="setHistory"> The sets of history T. </param>
         public void ILayerChanged<T>
         (
-            Action setSelectionViewModel,
             Action<ILayer> set,
 
             string historyTitle,
@@ -41,7 +39,6 @@ namespace Retouch_Photo2.ViewModels
             LayersPropertyHistory history = new LayersPropertyHistory(historyTitle);
 
             //Selection
-            setSelectionViewModel();
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -100,7 +97,6 @@ namespace Retouch_Photo2.ViewModels
 
         public void ILayerChangeCompleted<T>
         (
-            Action setSelectionViewModel,
             Action<ILayer> set,
 
             string historyTitle,
@@ -112,7 +108,6 @@ namespace Retouch_Photo2.ViewModels
             LayersPropertyHistory history = new LayersPropertyHistory(historyTitle);
 
             //Selection
-            setSelectionViewModel();
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -154,7 +149,6 @@ namespace Retouch_Photo2.ViewModels
         /// <typeparam name="T"> The T type property. </typeparam>
         /// <typeparam name="TLayer"> The T type layer. </typeparam>
         /// <param name="layerType"> The layer-type. </param>
-        /// <param name="setSelectionViewModel"> The sets of Selection<see cref="ViewModel"/>. </param>
         /// <param name="set"> The sets of T. </param>
         /// <param name="historyTitle"> The history title. </param>
         /// <param name="getHistory"> The gets of history T. </param>
@@ -162,7 +156,6 @@ namespace Retouch_Photo2.ViewModels
         public void TLayerChanged<T, TLayer>
         (
             LayerType layerType,
-            Action setSelectionViewModel,
             Action<TLayer> set,
 
             string historyTitle,
@@ -175,7 +168,6 @@ namespace Retouch_Photo2.ViewModels
             LayersPropertyHistory history = new LayersPropertyHistory(historyTitle);
 
             //Selection
-            setSelectionViewModel();
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -252,7 +244,6 @@ namespace Retouch_Photo2.ViewModels
         public void TLayerChangeCompleted<T, TLayer>
         (
             LayerType layerType,
-            Action setSelectionViewModel,
             Action<TLayer> set,
 
             string historyTitle,
@@ -265,7 +256,6 @@ namespace Retouch_Photo2.ViewModels
             LayersPropertyHistory history = new LayersPropertyHistory(historyTitle);
 
             //Selection
-            setSelectionViewModel();
             this.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
@@ -306,56 +296,6 @@ namespace Retouch_Photo2.ViewModels
         #region Effect<T>
 
 
-        /// <summary>
-        /// Change T type for Effect, save history, invalidate canvas.
-        /// </summary>
-        /// <typeparam name="T"> The T type property. </typeparam>
-        /// <param name="setSelectionViewModel"> The sets of Selection<see cref="ViewModel"/>. </param>
-        /// <param name="set"> The sets of T. </param>
-        /// <param name="historyTitle"> The history title. </param>
-        /// <param name="getHistory"> The gets of history T. </param>
-        /// <param name="setHistory"> The sets of history T. </param>
-        public void EffectChanged<T>
-        (
-            Action setSelectionViewModel,
-            Action<Effect> set,
-
-            string historyTitle,
-            Func<Effect, T> getHistory,
-            Action<Effect, T> setHistory
-        )
-        {
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory(historyTitle);
-
-            //Selection
-            setSelectionViewModel();
-            this.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                var previous = getHistory(layer.Effect);
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    setHistory(layer.Effect, previous);
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                set(layer.Effect);
-            });
-
-            //History
-            this.HistoryPush(history);
-
-            this.Invalidate();//Invalidate
-        }
         /// <summary>
         /// Change T type for Effect, save history, invalidate canvas.
         /// </summary>
@@ -436,48 +376,6 @@ namespace Retouch_Photo2.ViewModels
 
         public void EffectChangeCompleted<T>
         (
-            Action setSelectionViewModel,
-            Action<Effect> set,
-
-            string historyTitle,
-            Func<Effect, T> getHistory,
-            Action<Effect, T> setHistory
-        )
-        {
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory(historyTitle);
-
-            //Selection
-            setSelectionViewModel();
-            this.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                var previous = getHistory(layer.Effect);
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    setHistory(layer.Effect, previous);
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                set(layer.Effect);
-            });
-
-            //History
-            this.HistoryPush(history);
-
-            this.Invalidate();//Invalidate
-        }
-
-        public void EffectChangeCompleted<T>
-        (
             Action<Effect> set,
 
             string historyTitle,
@@ -519,7 +417,7 @@ namespace Retouch_Photo2.ViewModels
 
 
         #endregion
-        
+
 
 
         #region TAdjustment<T>
@@ -530,14 +428,14 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         /// <typeparam name="T"> The T type property. </typeparam>
         /// <typeparam name="TAdjustment"> The T type layer. </typeparam>
-        /// <param name="tAdjustment"> The TAdjustment. </param>
+        /// <param name="index"> The adjustment index. </param>
         /// <param name="set"> The sets of T. </param>
         /// <param name="historyTitle"> The history title. </param>
         /// <param name="getHistory"> The gets of history T. </param>
         /// <param name="setHistory"> The sets of history T. </param>
         public void TAdjustmentChanged<T,TAdjustment>
         (
-            TAdjustment tAdjustment,
+            int index,
             Action<TAdjustment> set,
 
             string historyTitle,
@@ -550,13 +448,15 @@ namespace Retouch_Photo2.ViewModels
             {
                 ILayer layer = layerage.Self;
 
-                if (tAdjustment is TAdjustment adjustment)
+                if (index < 0) return;
+                if (index > layer.Filter.Adjustments.Count - 1) return;
+                if (layer.Filter.Adjustments[index] is TAdjustment adjustment)
                 {
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory(historyTitle);
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                    var previous1 = getHistory(tAdjustment);
+                    var previous1 = getHistory(adjustment);
                     history.UndoAction += () =>
                     {
                         if (previous < 0) return;
@@ -575,7 +475,7 @@ namespace Retouch_Photo2.ViewModels
                     layer.IsRefactoringRender = true;
                     layerage.RefactoringParentsRender();
                     layerage.RefactoringParentsIconRender();
-                    set(tAdjustment);
+                    set(adjustment);
 
                     //History
                     this.HistoryPush(history);
@@ -586,14 +486,14 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        public void TAdjustmentChangeStarted<TAdjustment>(TAdjustment tAdjustment, Action<TAdjustment> cache)
+        public void TAdjustmentChangeStarted<TAdjustment>(int index, Action<TAdjustment> cache)
             where TAdjustment : IAdjustment
         {
             if (this.SelectionLayerage is Layerage layerage)
             {
                 ILayer layer = layerage.Self;
 
-                if (tAdjustment is TAdjustment adjustment)
+                if (layer.Filter.Adjustments[index] is TAdjustment adjustment)
                 {
                     cache(adjustment);
                     this.Invalidate(InvalidateMode.Thumbnail);//Invalidate
@@ -601,18 +501,20 @@ namespace Retouch_Photo2.ViewModels
             }
         }
 
-        public void TAdjustmentChangeDelta<TAdjustment>(TAdjustment tAdjustment, Action<TAdjustment> set)
+        public void TAdjustmentChangeDelta<TAdjustment>(int index, Action<TAdjustment> set)
         {
             if (this.SelectionLayerage is Layerage layerage)
             {
                 ILayer layer = layerage.Self;
 
-                if (tAdjustment is TAdjustment adjustment)
+                if (index < 0) return;
+                if (index > layer.Filter.Adjustments.Count - 1) return;
+                if (layer.Filter.Adjustments[index] is TAdjustment adjustment)
                 {
                     //Refactoring
                     layer.IsRefactoringRender = true;
                     layerage.RefactoringParentsRender();
-                    set(tAdjustment);
+                    set(adjustment);
 
                     this.Invalidate();//Invalidate
                 }
@@ -621,8 +523,7 @@ namespace Retouch_Photo2.ViewModels
 
         public void TAdjustmentChangeCompleted<T, TAdjustment>
         (
-            TAdjustment tAdjustment,
-            Action setSelectionViewModel,
+            int index,
             Action<TAdjustment> set,
 
             string historyTitle,
@@ -635,10 +536,12 @@ namespace Retouch_Photo2.ViewModels
             {
                 ILayer layer = layerage.Self;
 
-                if (tAdjustment is TAdjustment adjustment)
+                if (index < 0) return;
+                if (index > layer.Filter.Adjustments.Count - 1) return;
+                if (layer.Filter.Adjustments[index] is TAdjustment adjustment)
                 {
                     //History
-                    LayersPropertyHistory history = new LayersPropertyHistory(historyTitle);
+                    LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment white light");
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                     var previous1 = getHistory(adjustment);
@@ -646,12 +549,12 @@ namespace Retouch_Photo2.ViewModels
                     {
                         if (previous < 0) return;
                         if (previous > layer.Filter.Adjustments.Count - 1) return;
-                        if (layer.Filter.Adjustments[previous] is TAdjustment adjustment2)
+                        if (layer.Filter.Adjustments[previous] is TAdjustment previousAdjustment)
                         {
                             //Refactoring
                             layer.IsRefactoringRender = true;
                             layer.IsRefactoringIconRender = true;
-                            setHistory(adjustment2, previous1);
+                            setHistory(previousAdjustment, previous1);
                         }
                     };
 
@@ -669,7 +572,7 @@ namespace Retouch_Photo2.ViewModels
                 }
             }
         }
-
+        
 
         #endregion
 

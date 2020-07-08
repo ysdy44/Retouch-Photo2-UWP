@@ -12,19 +12,14 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
-        public static IAdjustmentGenericPage<GrayAdjustment> GenericPage;// = new GrayPage();
+        public static IAdjustmentPage GenericPage;// = new GrayPage();
         
         //@Content
         public AdjustmentType Type => AdjustmentType.Gray;
         public Visibility PageVisibility => Visibility.Collapsed;
-        public UIElement Page => GrayAdjustment.GenericPage.Self;
+        public IAdjustmentPage Page { get; } = GrayAdjustment.GenericPage;
         public string Text => GrayAdjustment.GenericPage.Text;
         
-
-        public void Reset() { }
-        public void Follow() { }
-        public void Close() { }
-
 
         public IAdjustment Clone()
         {

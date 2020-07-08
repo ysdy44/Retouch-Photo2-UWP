@@ -111,50 +111,31 @@ namespace Retouch_Photo2.Menus.Models
             {
                 if (e.ClickedItem is Retouch_Photo2.Styles.Style item)
                 {
-                    //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set style");
-
-                    //Selection
                     Transformer transformer = this.SelectionViewModel.Transformer;
-                    this.SelectionViewModel.SetValue((layerage) =>
-                    {
-                        ILayer layer = layerage.Self;
 
-                        //History
-                        var previous = layer.Style.Clone();
-                        history.UndoAction += () =>
+                    this.MethodViewModel.ILayerChanged<Style>
+                    (
+                        set: (layer) =>
                         {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            layer.Style = previous.Clone();
-                        };
+                            Transformer transformer2 = layer.Transform.Transformer;
+                            Style style2 = item.Clone();
+                            style2.CacheTransform();
+                            style2.DeliverBrushPoints(transformer2);
+                            layer.Style = style2;
 
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        Transformer transformer2 = layer.Transform.Transformer;
-                        Style style2 = item.Clone();
-                        style2.CacheTransform();
-                        style2.DeliverBrushPoints(transformer2);
-                        layer.Style = style2;
+                            transformer = transformer2;
+                            this.SelectionViewModel.StandStyleLayer = layer;
+                        },
 
-                        transformer = transformer2;
-                        this.SelectionViewModel.StandStyleLayerage = layerage;
-                    });
-                    {
-                        Style style = item.Clone();
-                        style.CacheTransform();
-                        style.DeliverBrushPoints(transformer);
-                        this.SelectionViewModel.SetStyle(style);
-                    }
+                        historyTitle: "Set style",
+                        getHistory: (layer) => layer.Style,
+                        setHistory: (layer, previous) => layer.Style = previous.Clone()
+                    );
 
-                    //History
-                    this.ViewModel.HistoryPush(history);
-
-                    this.ViewModel.Invalidate();//Invalidate
+                    Style style = item.Clone();
+                    style.CacheTransform();
+                    style.DeliverBrushPoints(transformer);
+                    this.SelectionViewModel.SetStyle(style);
                 }
             };
 

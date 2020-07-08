@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -37,7 +36,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Converter
-        private int ValueNumberConverter(float value) => (int)(value * 100.0f);
+        private int ValueToNumberConverter(float value) => (int)(value * 100.0f);
 
 
         //@Construct
@@ -58,7 +57,7 @@ namespace Retouch_Photo2.Tools.Models
 
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
-        {            
+        {
             TouchbarButton.Instance = null;
         }
 
@@ -77,7 +76,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.Button.Title = resource.GetString("/ToolsSecond/GeometryArrow");
 
-            this.ValueTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryArrow_Value");
+            this.ValueButton.CenterContent = resource.GetString("/ToolsSecond/GeometryArrow_Value");
 
             this.LeftTailTextBlock.Text = resource.GetString("/ToolsSecond/GeometryArrow_LeftTail");
 
@@ -127,17 +126,17 @@ namespace Retouch_Photo2.Tools.Models
         //Value
         private void ConstructValue1()
         {
-            this.ValueTouchbarPicker.Unit = "%";
-            this.ValueTouchbarPicker.Minimum = 0;
-            this.ValueTouchbarPicker.Maximum = 100;
-            this.ValueTouchbarPicker.ValueChange += (sender, value) =>
+            this.ValuePicker.Unit = "%";
+            this.ValuePicker.Minimum = 0;
+            this.ValuePicker.Maximum = 100;
+            this.ValuePicker.ValueChange += (sender, value) =>
             {
                 float value2 = (float)value / 100.0f;
+                this.SelectionViewModel.GeometryArrowValue = value2;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryArrowLayer>
                 (
                     layerType: LayerType.GeometryArrow,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowValue = value2,
                     set: (tLayer) => tLayer.Value = value2,
 
                     historyTitle: "Set arrow layer value",
@@ -148,27 +147,25 @@ namespace Retouch_Photo2.Tools.Models
         }
 
         private void ConstructValue2()
-        { 
-            this.ValueTouchbarSlider.Minimum = 0.0d;
-            this.ValueTouchbarSlider.Maximum = 1.0d;
-            this.ValueTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryArrowLayer>
-            (
-                layerType: LayerType.GeometryArrow,
-                cache: (tLayer) => tLayer.CacheValue()
-            );
-            this.ValueTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryArrowLayer>
-            (
-                layerType: LayerType.GeometryArrow,
-                set: (tLayer) => tLayer.Value = (float)value
-            );
-            this.ValueTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+        {
+            this.ValueSlider.Minimum = 0.0d;
+            this.ValueSlider.Maximum = 1.0d;
+            this.ValueSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryArrowLayer>(layerType: LayerType.GeometryArrow, cache: (tLayer) => tLayer.CacheValue());
+            this.ValueSlider.ValueChangeDelta += (sender, value) =>
             {
                 float value2 = (float)value;
-                
+                this.SelectionViewModel.GeometryArrowValue = value2;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryArrowLayer>(layerType: LayerType.GeometryArrow, set: (tLayer) => tLayer.Value = value2);
+            };
+            this.ValueSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float value2 = (float)value;
+                this.SelectionViewModel.GeometryArrowValue = value2;
+
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryArrowLayer>
                 (
                     layerType: LayerType.GeometryArrow,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowValue = value2,
                     set: (tLayer) => tLayer.Value = value2,
 
                     historyTitle: "Set arrow layer value",
@@ -182,31 +179,41 @@ namespace Retouch_Photo2.Tools.Models
         //LeftTail
         private void ConstructLeftTail()
         {
-            this.LeftArrowTailTypeComboBox.TypeChanged += (s, tailType) => this.MethodViewModel.TLayerChanged<GeometryArrowTailType, GeometryArrowLayer>
-            (
-                layerType: LayerType.GeometryArrow,
-                setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowLeftTail = tailType,
-                set: (tLayer) => tLayer.LeftTail = tailType,
+            this.LeftArrowTailTypeComboBox.TypeChanged += (s, type) =>
+            {
+                GeometryArrowTailType tailType = (GeometryArrowTailType)type;
+                this.SelectionViewModel.GeometryArrowLeftTail = tailType;
 
-                historyTitle: "Set arrow layer tail type",
-                getHistory: (tLayer) => tLayer.LeftTail,
-                setHistory: (tLayer, previous) => tLayer.LeftTail = previous
-            );
+                this.MethodViewModel.TLayerChanged<GeometryArrowTailType, GeometryArrowLayer>
+                (
+                    layerType: LayerType.GeometryArrow,
+                    set: (tLayer) => tLayer.LeftTail = tailType,
+
+                    historyTitle: "Set arrow layer left tail type",
+                    getHistory: (tLayer) => tLayer.LeftTail,
+                    setHistory: (tLayer, previous) => tLayer.LeftTail = previous
+                );
+            };
         }
 
         //RightTail
         private void ConstructRightTail()
         {
-            this.RightArrowTailTypeComboBox.TypeChanged += (s, tailType) => this.MethodViewModel.TLayerChanged<GeometryArrowTailType, GeometryArrowLayer>
-            (
-                layerType: LayerType.GeometryArrow,
-                setSelectionViewModel: () => this.SelectionViewModel.GeometryArrowRightTail = tailType,
-                set: (tLayer) => tLayer.RightTail = tailType,
+            this.RightArrowTailTypeComboBox.TypeChanged += (s, type) =>
+            {
+                GeometryArrowTailType tailType = (GeometryArrowTailType)type;
+                this.SelectionViewModel.GeometryArrowRightTail = tailType;
 
-                historyTitle: "Set arrow layer tail type",
-                getHistory: (tLayer) => tLayer.RightTail,
-                setHistory: (tLayer, previous) => tLayer.RightTail = previous
-            );
+                this.MethodViewModel.TLayerChanged<GeometryArrowTailType, GeometryArrowLayer>
+                (
+                    layerType: LayerType.GeometryArrow,
+                    set: (tLayer) => tLayer.RightTail = tailType,
+
+                    historyTitle: "Set arrow layer right tail type",
+                    getHistory: (tLayer) => tLayer.RightTail,
+                    setHistory: (tLayer, previous) => tLayer.RightTail = previous
+                );
+            };
         }
 
     }

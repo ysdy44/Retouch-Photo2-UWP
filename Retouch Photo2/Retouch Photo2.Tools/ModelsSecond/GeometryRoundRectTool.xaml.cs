@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -25,7 +24,7 @@ namespace Retouch_Photo2.Tools.Models
        
         
         //@Converter
-        private int CornerNumberConverter(float corner) => (int)(corner * 100.0f);
+        private int CornerToNumberConverter(float corner) => (int)(corner * 100.0f);
 
 
         //@Construct
@@ -62,7 +61,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.Button.Title = resource.GetString("/ToolsSecond/GeometryRoundRect");
 
-            this.CornerTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryRoundRect_Corner");
+            this.CornerButton.CenterContent = resource.GetString("/ToolsSecond/GeometryRoundRect_Corner");
             this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
         }
 
@@ -106,17 +105,17 @@ namespace Retouch_Photo2.Tools.Models
         //Corner
         private void ConstructCorner1()
         {
-            this.CornerTouchbarPicker.Unit = "%";
-            this.CornerTouchbarPicker.Minimum = 0;
-            this.CornerTouchbarPicker.Maximum = 50;
-            this.CornerTouchbarPicker.ValueChange += (sender, value) =>
+            this.CornerPicker.Unit = "%";
+            this.CornerPicker.Minimum = 0;
+            this.CornerPicker.Maximum = 50;
+            this.CornerPicker.ValueChange += (sender, value) =>
             {
                 float corner = (float)value / 100.0f;
+                this.SelectionViewModel.GeometryRoundRectCorner = corner;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryRoundRectLayer>
                 (
                     layerType: LayerType.GeometryRoundRect,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryRoundRectCorner = corner,
                     set: (tLayer) => tLayer.Corner = corner,
 
                     historyTitle: "Set round rect layer corner",
@@ -128,26 +127,24 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructCorner2()
         {
-            this.CornerTouchbarSlider.Minimum = 0.0d;
-            this.CornerTouchbarSlider.Maximum = 0.5d;
-            this.CornerTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryRoundRectLayer>
-            (
-                layerType: LayerType.GeometryRoundRect,
-                cache: (tLayer) => tLayer.CacheCorner()
-            );
-            this.CornerTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryRoundRectLayer>
-            (
-                layerType: LayerType.GeometryRoundRect,
-                set: (tLayer) => tLayer.Corner = (float)value
-            );
-            this.CornerTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.CornerSlider.Minimum = 0.0d;
+            this.CornerSlider.Maximum = 0.5d;
+            this.CornerSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryRoundRectLayer>(layerType: LayerType.GeometryRoundRect, cache: (tLayer) => tLayer.CacheCorner());
+            this.CornerSlider.ValueChangeDelta += (sender, value) =>
             {
                 float corner = (float)value;
+                this.SelectionViewModel.GeometryRoundRectCorner = corner;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryRoundRectLayer>(layerType: LayerType.GeometryRoundRect, set: (tLayer) => tLayer.Corner = corner);
+            };
+            this.CornerSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float corner = (float)value;
+                this.SelectionViewModel.GeometryRoundRectCorner = corner;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryRoundRectLayer>
                 (
                     layerType: LayerType.GeometryRoundRect,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryRoundRectCorner = corner,
                     set: (tLayer) => tLayer.Corner = corner,
 
                     historyTitle: "Set round rect layer corner",

@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Elements
+namespace Retouch_Photo2.Tools
 {
     /// <summary>
     /// Represents the TouchBar that is used to adjust value.
@@ -12,10 +12,10 @@ namespace Retouch_Photo2.Elements
     {
 
         //@Static  
-        /// <summary> A border, contains a <see cref="TouchbarButton.TouchbarPicker"/>. </summary>
-        public static Border TouchbarPickerBorder = new Border();
-        /// <summary> A border, contains a <see cref="TouchbarButton.TouchbarSlider"/>. </summary>
-        public static Border TouchbarSliderBorder = new Border();
+        /// <summary> A border, contains a <see cref="TouchbarButton.Picker"/>. </summary>
+        public static Border PickerBorder = new Border();
+        /// <summary> A border, contains a <see cref="TouchbarButton.Slider"/>. </summary>
+        public static Border SliderBorder = new Border();
         /// <summary> Instance </summary>
         public static TouchbarButton Instance
         {
@@ -24,8 +24,8 @@ namespace Retouch_Photo2.Elements
             {
                 if (TouchbarButton.instance == value)
                 {
-                    TouchbarButton.TouchbarPickerBorder.Child = value;
-                    TouchbarButton.TouchbarSliderBorder.Child = value;
+                    TouchbarButton.PickerBorder.Child = value;
+                    TouchbarButton.SliderBorder.Child = value;
 
                     TouchbarButton.instance = value;
                     return;
@@ -41,13 +41,13 @@ namespace Retouch_Photo2.Elements
                 {
                     newButton.IsSelected = true;
 
-                    TouchbarButton.TouchbarPickerBorder.Child = value.TouchbarPicker;
-                    TouchbarButton.TouchbarSliderBorder.Child = value.TouchbarSlider;
+                    TouchbarButton.PickerBorder.Child = value.Picker;
+                    TouchbarButton.SliderBorder.Child = value.Slider;
                 }
                 else
                 {
-                    TouchbarButton.TouchbarPickerBorder.Child = value;
-                    TouchbarButton.TouchbarSliderBorder.Child = value;
+                    TouchbarButton.PickerBorder.Child = value;
+                    TouchbarButton.SliderBorder.Child = value;
                 }
 
                 TouchbarButton.instance = value;
@@ -56,14 +56,27 @@ namespace Retouch_Photo2.Elements
         private static TouchbarButton instance;
 
 
-        //@Content
-        /// <summary> Gets or sets the picker of <see cref = "TouchbarButton" />. </summary>
-        public NumberPicker TouchbarPicker { get; set; }
-        /// <summary> Gets or sets the slider of <see cref = "TouchbarButton" />. </summary>
-        public TouchSliderBase TouchbarSlider { get; set; }
-
-
         #region DependencyProperty
+
+
+        /// <summary> Gets or sets the picker of <see cref = "TouchbarButton" />. </summary>
+        public NumberPicker Picker
+        {
+            get { return (NumberPicker)GetValue(PickerProperty); }
+            set { SetValue(PickerProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "TouchbarButton.Picker" /> dependency property. </summary>
+        public static readonly DependencyProperty PickerProperty = DependencyProperty.Register(nameof(Picker), typeof(NumberPicker), typeof(TouchbarSlider), new PropertyMetadata(null));
+
+
+        /// <summary> Gets or sets the slider of <see cref = "TouchbarButton" />. </summary>
+        public TouchSliderBase Slider
+        {
+            get { return (TouchSliderBase)GetValue(SliderProperty); }
+            set { SetValue(SliderProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "TouchbarButton.Slider" /> dependency property. </summary>
+        public static readonly DependencyProperty SliderProperty = DependencyProperty.Register(nameof(Slider), typeof(TouchSliderBase), typeof(TouchbarSlider), new PropertyMetadata(null));
 
 
         /// <summary> Get or set the content. </summary>

@@ -6,24 +6,29 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:strokes="using:Retouch_Photo2.Strokes"
+    xmlns:hsvColorPickers="using:HSVColorPickers"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
     >
 
-    <StackPanel MinHeight="165" Padding="1,4">
-
+    <StackPanel MinHeight="165" Padding="1,2">
 
         <!--Dash-->
         <TextBlock x:Name="DashTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <strokes:DashSegmented x:Name="DashSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}"
-                         Dash="{x:Bind DashConverter(SelectionViewModel.StrokeStyle), Mode=OneWay}"/>
+                         Dash="{x:Bind SelectionViewModel.StrokeStyleDash, Mode=OneWay}"/>
 
 
         <!--Width-->
-        <TextBlock x:Name="WidthTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <RelativePanel>
+            <TextBlock x:Name="WidthTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="WidthPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"
+                           Value="{x:Bind StrokeWidthToNumberConverter(SelectionViewModel.StrokeWidth), Mode=OneWay}"/>
+        </RelativePanel>
         <Border Height="{StaticResource AppCircleHeight}">
-            <elements:SliderPicker x:Name="WidthPicker"
+            <elements:SliderPicker x:Name="WidthSlider"
                              Value="{x:Bind SelectionViewModel.StrokeWidth, Mode=OneWay}"/>
         </Border>
 
@@ -31,22 +36,26 @@
         <!--Cap-->
         <TextBlock x:Name="CapTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <strokes:CapSegmented x:Name="CapSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}"
-                         Cap="{x:Bind CapConverter(SelectionViewModel.StrokeStyle), Mode=OneWay}"/>
+                         Cap="{x:Bind SelectionViewModel.StrokeStyleCap, Mode=OneWay}"/>
 
 
         <!--Join-->
         <TextBlock x:Name="JoinTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <strokes:JoinSegmented x:Name="JoinSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}"
-                         Join="{x:Bind JoinConverter(SelectionViewModel.StrokeStyle), Mode=OneWay}"/>
+                         Join="{x:Bind SelectionViewModel.StrokeStyleJoin, Mode=OneWay}"/>
 
 
         <!--Offset-->
-        <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <RelativePanel>
+            <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="OffsetPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"
+                           Value="{x:Bind StyleOffsetToNumberConverter(SelectionViewModel.StrokeStyleOffset), Mode=OneWay}"/>
+        </RelativePanel>
         <Border Height="{StaticResource AppCircleHeight}">
-            <elements:SliderPicker x:Name="OffsetPicker"
-                             Value="{x:Bind OffsetConverter(SelectionViewModel.StrokeStyle), Mode=OneWay}"/>
+            <elements:SliderPicker x:Name="OffsetSlider"
+                             Value="{x:Bind SelectionViewModel.StrokeStyleOffset, Mode=OneWay}"/>
         </Border>
 
     </StackPanel>
-
 </UserControl>

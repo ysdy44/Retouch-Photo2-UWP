@@ -12,12 +12,12 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
-        public static IAdjustmentGenericPage<ContrastAdjustment> GenericPage;// = new ContrastPage();
+        public static IAdjustmentPage GenericPage;// = new ContrastPage();
         
         //@Content
         public AdjustmentType Type => AdjustmentType.Contrast;
         public Visibility PageVisibility => Visibility.Visible;
-        public UIElement Page => ContrastAdjustment.GenericPage.Self;
+        public IAdjustmentPage Page { get; } = ContrastAdjustment.GenericPage;
         public string Text => ContrastAdjustment.GenericPage.Text;
 
 
@@ -27,24 +27,6 @@ namespace Retouch_Photo2.Adjustments.Models
         public void CacheContrast() => this.StartingContrast = this.Contrast;
 
 
-        public void Reset()
-        {
-            if (ContrastAdjustment.GenericPage.Adjustment == this)
-            {
-                ContrastAdjustment.GenericPage.Reset();
-            }
-        }
-        public void Follow()
-        {
-            ContrastAdjustment.GenericPage.Adjustment = this;
-            ContrastAdjustment.GenericPage.Follow(this);
-        }
-        public void Close()
-        {
-            ContrastAdjustment.GenericPage.Adjustment = null;
-        }
-
-        
         public IAdjustment Clone()
         {
             return new ContrastAdjustment

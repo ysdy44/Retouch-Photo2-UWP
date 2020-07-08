@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -25,7 +24,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Converter
-        private int CenterNumberConverter(float center) => (int)(center * 100.0f);
+        private int CenterToNumberConverter(float center) => (int)(center * 100.0f);
         
 
         //@Construct
@@ -63,7 +62,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.Button.Title = resource.GetString("/ToolsSecond/GeometryTriangle");
 
-            this.CenterTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryTriangle_Center");
+            this.CenterButton.CenterContent = resource.GetString("/ToolsSecond/GeometryTriangle_Center");
             this.MirrorTextBlock.Text = resource.GetString("/ToolsSecond/GeometryTriangle_Mirror");
 
             this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
@@ -109,21 +108,21 @@ namespace Retouch_Photo2.Tools.Models
         //Center
         private void ConstructCenter1()
         {
-            this.CenterTouchbarPicker.Unit = "%";
-            this.CenterTouchbarPicker.Minimum = 0;
-            this.CenterTouchbarPicker.Maximum = 100;
-            this.CenterTouchbarPicker.ValueChange += (sender, value) =>
+            this.CenterPicker.Unit = "%";
+            this.CenterPicker.Minimum = 0;
+            this.CenterPicker.Maximum = 100;
+            this.CenterPicker.ValueChange += (sender, value) =>
             {
                 float center = (float)value / 100.0f;
+                this.SelectionViewModel.GeometryTriangleCenter = center;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryTriangleLayer>
                 (
                     layerType: LayerType.GeometryTriangle,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryTriangleCenter = center,
                     set: (tLayer) => tLayer.Center = center,
 
                     historyTitle: "Set triangle layer center",
-                    getHistory: (tLayer) => tLayer.Center = center,
+                    getHistory: (tLayer) => tLayer.Center,
                     setHistory: (tLayer, previous) => tLayer.Center = previous
                 );
             };
@@ -131,26 +130,24 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructCenter2()
         {
-            this.CenterTouchbarSlider.Minimum = 0.0d;
-            this.CenterTouchbarSlider.Maximum = 1.0d;
-            this.CenterTouchbarSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TLayerChangeStarted<GeometryTriangleLayer>
-            (
-                layerType: LayerType.GeometryTriangle,
-                cache: (tLayer) => tLayer.CacheCenter()
-            );
-            this.CenterTouchbarSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.TLayerChangeDelta<GeometryTriangleLayer>
-            (
-                layerType: LayerType.GeometryTriangle,
-                set: (tLayer) => tLayer.Center = (float)value
-            );
-            this.CenterTouchbarSlider.ValueChangeCompleted += (s, value) =>
+            this.CenterSlider.Minimum = 0.0d;
+            this.CenterSlider.Maximum = 1.0d;
+            this.CenterSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TLayerChangeStarted<GeometryTriangleLayer>(layerType: LayerType.GeometryTriangle, cache: (tLayer) => tLayer.CacheCenter());
+            this.CenterSlider.ValueChangeDelta += (s, value) =>
             {
                 float center = (float)value;
+                this.SelectionViewModel.GeometryTriangleCenter = center;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryTriangleLayer>(layerType: LayerType.GeometryTriangle, set: (tLayer) => tLayer.Center = center);
+            };
+            this.CenterSlider.ValueChangeCompleted += (s, value) =>
+            {
+                float center = (float)value;
+                this.SelectionViewModel.GeometryTriangleCenter = center;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryTriangleLayer>
                 (
                     LayerType.GeometryTriangle,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryTriangleCenter = center,
                     set: (tLayer) => tLayer.Center = center,
 
                     historyTitle: "Set triangle layer center",
@@ -165,11 +162,11 @@ namespace Retouch_Photo2.Tools.Models
             this.MirrorButton.Click += (s, e) =>
             {
                 float center = 1.0f - this.SelectionViewModel.GeometryTriangleCenter;
+                this.SelectionViewModel.GeometryTriangleCenter = center;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryTriangleLayer>
                 (
                     LayerType.GeometryTriangle,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryTriangleCenter = center,
                     set: (tLayer) => tLayer.Center = 1.0f - tLayer.Center,
 
                     historyTitle: "Set triangle layer center",

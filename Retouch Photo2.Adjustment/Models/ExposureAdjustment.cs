@@ -12,12 +12,12 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
-        public static IAdjustmentGenericPage<ExposureAdjustment> GenericPage;// = new ExposurePage();
+        public static IAdjustmentPage GenericPage;// = new ExposurePage();
         
         //@Content
         public AdjustmentType Type => AdjustmentType.Exposure;
         public Visibility PageVisibility => Visibility.Visible;
-        public UIElement Page => ExposureAdjustment.GenericPage.Self;
+        public IAdjustmentPage Page { get; } = ExposureAdjustment.GenericPage;
         public string Text => ExposureAdjustment.GenericPage.Text;
 
 
@@ -26,26 +26,6 @@ namespace Retouch_Photo2.Adjustments.Models
         public float StartingExposure { get; private set; }
         public void CacheExposure() => this.StartingExposure = this.Exposure;
         
-
-        public void Reset()
-        {
-            this.Exposure = 0.0f;
-
-            if (ExposureAdjustment.GenericPage.Adjustment == this)
-            {
-                ExposureAdjustment.GenericPage.Reset();
-            }
-        }
-        public void Follow()
-        {
-            ExposureAdjustment.GenericPage.Adjustment = this;
-            ExposureAdjustment.GenericPage.Follow(this);
-        }
-        public void Close()
-        {
-            ExposureAdjustment.GenericPage.Adjustment = null;
-        }
-
 
         public IAdjustment Clone()
         {

@@ -5,26 +5,31 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPickers="using:HSVColorPickers"
-    mc:Ignorable="d"
+    mc:Ignorable="d"              
+    MinHeight="165" 
+    MaxHeight="300"
     d:DesignHeight="400"
     d:DesignWidth="200"
     >
 
-    <Page.Resources>
-        
+    <Page.Resources>        
         <!--Exposure-->
         <LinearGradientBrush x:Name="ExposureBrush" StartPoint="0,0.5" EndPoint="1,0.5">
             <GradientStop Offset="0" Color="Black"/>
             <GradientStop Offset="1" Color="White"/>
-        </LinearGradientBrush>
-        
+        </LinearGradientBrush>        
     </Page.Resources>
     
+
     <StackPanel>
-        
+
         <!--Exposure-->
-        <TextBlock x:Name="ExposureTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <hsvColorPickers:TouchSlider x:Name="ExposureSlider" Margin="2,0"/>
+        <RelativePanel>
+            <TextBlock x:Name="ExposureTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="ExposurePicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+        </RelativePanel>
+        <hsvColorPickers:TouchSlider x:Name="ExposureSlider"/>
 
     </StackPanel>
 </Page>

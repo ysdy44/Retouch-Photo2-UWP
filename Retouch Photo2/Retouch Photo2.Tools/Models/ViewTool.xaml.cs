@@ -32,11 +32,11 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Converter
-        private int ScaleNumberConverter(float scale) => ViewScaleConverter.ScaleToNumber(scale);
-        private double ScaleValueConverter(float scale) => ViewScaleConverter.ScaleToValue(scale);
+        private int ScaleToNumberConverter(float scale) => ViewScaleConverter.ScaleToNumber(scale);
+        private double ScaleToValueConverter(float scale) => ViewScaleConverter.ScaleToValue(scale);
 
-        private int RadianNumberConverter(float radian) => ViewRadianConverter.RadianToNumber(radian);
-        private double RadianValueConverter(float radian) => ViewRadianConverter.RadianToValue(radian);
+        private int RadianToNumberConverter(float radian) => ViewRadianConverter.RadianToNumber(radian);
+        private double RadianToValueConverter(float radian) => ViewRadianConverter.RadianToValue(radian);
 
 
         #region DependencyProperty
@@ -129,10 +129,10 @@ namespace Retouch_Photo2.Tools.Models
                 this.RadianClearToolTip.IsOpen = this.ScaleClearToolTip.IsOpen = true;
             };
 
-            this.RadianTouchbarButton.CenterContent = resource.GetString("/Tools/View_Radian");
+            this.RadianButton.CenterContent = resource.GetString("/Tools/View_Radian");
             this.RadianClearToolTip.Content = resource.GetString("/Tools/View_RadianClear");
 
-            this.ScaleTouchbarButton.CenterContent = resource.GetString("/Tools/View_Scale");
+            this.ScaleButton.CenterContent = resource.GetString("/Tools/View_Scale");
             this.ScaleClearToolTip.Content = resource.GetString("/Tools/View_ScaleClear");
         }
 
@@ -200,10 +200,10 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructRadian1()
         {
-            this.RadianTouchbarPicker.Unit = "º";
-            this.RadianTouchbarPicker.Minimum = ViewRadianConverter.MinNumber;
-            this.RadianTouchbarPicker.Maximum = ViewRadianConverter.MaxNumber;
-            this.RadianTouchbarPicker.ValueChange += (sender, value) =>
+            this.RadianPicker.Unit = "º";
+            this.RadianPicker.Minimum = ViewRadianConverter.MinNumber;
+            this.RadianPicker.Maximum = ViewRadianConverter.MaxNumber;
+            this.RadianPicker.ValueChange += (sender, value) =>
             {
                 float radian = ViewRadianConverter.NumberToRadian((int)value);
                 this.ViewModel.SetCanvasTransformerRadian(radian);//CanvasTransformer
@@ -213,16 +213,16 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructRadian2()
         {
-            this.RadianTouchbarSlider.Minimum = ViewRadianConverter.MinValue;
-            this.RadianTouchbarSlider.Maximum = ViewRadianConverter.MaxValue;
-            this.RadianTouchbarSlider.ValueChangeStarted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            this.RadianTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            this.RadianSlider.Minimum = ViewRadianConverter.MinValue;
+            this.RadianSlider.Maximum = ViewRadianConverter.MaxValue;
+            this.RadianSlider.ValueChangeStarted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.RadianSlider.ValueChangeDelta += (sender, value) =>
             {
                 float radian = ViewRadianConverter.ValueToRadian(value);
                 this.ViewModel.SetCanvasTransformerRadian(radian);//CanvasTransformer
                 this.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
             };
-            this.RadianTouchbarSlider.ValueChangeCompleted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.RadianSlider.ValueChangeCompleted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
 
 
@@ -243,10 +243,10 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructScale1()
         {
-            this.ScaleTouchbarPicker.Unit = "%";
-            this.ScaleTouchbarPicker.Minimum = ViewScaleConverter.MinNumber;
-            this.ScaleTouchbarPicker.Maximum = ViewScaleConverter.MaxNumber;
-            this.ScaleTouchbarPicker.ValueChange += (sender, value) =>
+            this.ScalePicker.Unit = "%";
+            this.ScalePicker.Minimum = ViewScaleConverter.MinNumber;
+            this.ScalePicker.Maximum = ViewScaleConverter.MaxNumber;
+            this.ScalePicker.ValueChange += (sender, value) =>
             {
                 float scale = ViewScaleConverter.NumberToScale((int)value);
                 this.ViewModel.SetCanvasTransformerScale(scale);//CanvasTransformer
@@ -256,16 +256,16 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructScale2()
         {
-            this.ScaleTouchbarSlider.Minimum = ViewScaleConverter.MinValue;
-            this.ScaleTouchbarSlider.Maximum = ViewScaleConverter.MaxValue;
-            this.ScaleTouchbarSlider.ValueChangeStarted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            this.ScaleTouchbarSlider.ValueChangeDelta += (sender, value) =>
+            this.ScaleSlider.Minimum = ViewScaleConverter.MinValue;
+            this.ScaleSlider.Maximum = ViewScaleConverter.MaxValue;
+            this.ScaleSlider.ValueChangeStarted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.ScaleSlider.ValueChangeDelta += (sender, value) =>
             {
                 float scale = ViewScaleConverter.ValueToScale(value);
                 this.ViewModel.SetCanvasTransformerScale(scale);//CanvasTransformer
                 this.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
             };
-            this.ScaleTouchbarSlider.ValueChangeCompleted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.ScaleSlider.ValueChangeCompleted += (sender, value) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
 
     }

@@ -1,12 +1,8 @@
 ﻿using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Blends;
-using Retouch_Photo2.ViewModels;
-using System;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
-using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
+using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -113,12 +109,16 @@ namespace Retouch_Photo2.Menus.Models
 
 
         //@Content
-        BlendModeComboBox BlendModeComboBox = new BlendModeComboBox();
+        BlendModeComboBox BlendModeComboBox = new BlendModeComboBox
+        {
+            MinHeight = 165,
+            MaxHeight = 300
+        };
 
 
         //@Converter
         private bool VisibilityToBoolConverter(Visibility visibility) => visibility == Visibility.Visible;
-        private float OpacityToValueConverter(float opacity) => opacity * 100.0f;
+        private int OpacityToNumberConverter(float opacity) => (int)(opacity * 100.0f);
 
 
         //@Construct
@@ -137,7 +137,8 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructStrings();
 
             this.NameButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowRename?.Invoke();
-            this.ConstructOpacity();
+            this.ConstructOpacity1();
+            this.ConstructOpacity2();
             this.ConstructBlendMode();
             this.ConstructVisibility();
             this.ConstructFollowTransform();
@@ -195,24 +196,51 @@ namespace Retouch_Photo2.Menus.Models
     {
 
         //Opacity
-        private void ConstructOpacity()
+        private void ConstructOpacity1()
+        {
+            this.OpacityPicker.Unit = "%";
+            this.OpacityPicker.Minimum = 0;
+            this.OpacityPicker.Maximum = 100;
+            this.OpacityPicker.ValueChange += (s, value) =>
+            {
+                float opacity = (float)value / 100.0f;
+                this.SelectionViewModel.Opacity = opacity;
+
+                this.MethodViewModel.ILayerChanged<float>
+                (
+                    set: (layer) => layer.Opacity = opacity,
+
+                    historyTitle: "Set opacity",
+                    getHistory: (layer) => layer.Opacity,
+                    setHistory: (layer, previous) => layer.Opacity = previous
+                );
+            };
+        }
+
+        private void ConstructOpacity2()
         {
             this.OpacitySlider.Minimum = 0.0d;
             this.OpacitySlider.Maximum = 1.0d;
-            this.OpacitySlider.ValueChangeStarted += (s, value) => this.MethodViewModel.ILayerChangeStarted(cache: (iLayer) => iLayer.CacheOpacity());
-            this.OpacitySlider.ValueChangeDelta += (s, value) => this.MethodViewModel.ILayerChangeDelta((iLayer) => iLayer.Opacity = (float)value);
+            this.OpacitySlider.ValueChangeStarted += (s, value) => this.MethodViewModel.ILayerChangeStarted(cache: (layer) => layer.CacheOpacity());
+            this.OpacitySlider.ValueChangeDelta += (s, value) =>
+            {
+                float opacity = (float)value;
+                this.SelectionViewModel.Opacity = opacity;
+
+                this.MethodViewModel.ILayerChangeDelta(set: (layer) => layer.Opacity = opacity);
+            };
             this.OpacitySlider.ValueChangeCompleted += (s, value) =>
             {
                 float opacity = (float)value;
+                this.SelectionViewModel.Opacity = opacity;
 
                 this.MethodViewModel.ILayerChangeCompleted<float>
                 (
-                    setSelectionViewModel: () => this.SelectionViewModel.Opacity = opacity,
-                    set: (iLayer) => iLayer.Opacity = opacity,
+                    set: (layer) => layer.Opacity = opacity,
 
                     historyTitle: "Set opacity",
-                    getHistory: (iLayer) => iLayer.StartingOpacity,
-                    setHistory: (iLayer, previous) => iLayer.Opacity = previous
+                    getHistory: (layer) => layer.StartingOpacity,
+                    setHistory: (layer, previous) => layer.Opacity = previous
                 );
             };
         }
@@ -228,15 +256,20 @@ namespace Retouch_Photo2.Menus.Models
                 this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
             };
 
-            this.BlendModeComboBox.ModeChanged += (s, mode) => this.MethodViewModel.ILayerChanged<BlendEffectMode?>
-            (
-                setSelectionViewModel: () => this.SelectionViewModel.BlendMode = mode,
-                set: (iLayer) => iLayer.BlendMode = mode,
+            this.BlendModeComboBox.ModeChanged += (s, mode) =>
+            {
+                BlendEffectMode? blendMode = mode;
+                this.SelectionViewModel.BlendMode = blendMode;
 
-                historyTitle: "Set blend mode",
-                getHistory: (iLayer) => iLayer.BlendMode,
-                setHistory: (iLayer, previous) => iLayer.BlendMode = previous
-            );
+                this.MethodViewModel.ILayerChanged<BlendEffectMode?>
+                (
+                    set: (layer) => layer.BlendMode = blendMode,
+
+                    historyTitle: "Set blend mode",
+                    getHistory: (layer) => layer.BlendMode,
+                    setHistory: (layer, previous) => layer.BlendMode = previous
+                );
+            };
         }
 
 
@@ -246,15 +279,15 @@ namespace Retouch_Photo2.Menus.Models
             this.VisibilityButton.Click += (s, e) =>
             {
                 Visibility value = (this.SelectionViewModel.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+                this.SelectionViewModel.Visibility = value;
 
                 this.MethodViewModel.ILayerChanged<Visibility>
                 (
-                    setSelectionViewModel: () => this.SelectionViewModel.Visibility = value,
-                    set: (iLayer) => iLayer.Visibility = value,
+                    set: (layer) => layer.Visibility = value,
 
                     historyTitle: "Set visibility",
-                    getHistory: (iLayer) => iLayer.Visibility,
-                    setHistory: (iLayer, previous) => iLayer.Visibility = previous
+                    getHistory: (layer) => layer.Visibility,
+                    setHistory: (layer, previous) => layer.Visibility = previous
                 );
             };
         }
@@ -265,16 +298,16 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.FollowTransformToggleButton.Click += (s, e) =>
             {
-                bool value = !this.SelectionViewModel.IsFollowTransform;
-
+                bool isFollowTransform = !this.SelectionViewModel.IsFollowTransform;
+                this.SelectionViewModel.IsFollowTransform = isFollowTransform;
+                
                 this.MethodViewModel.ILayerChanged<bool>
                 (
-                    setSelectionViewModel: () => this.SelectionViewModel.IsFollowTransform = value,
-                    set: (iLayer) => iLayer.Style.IsFollowTransform = value,
+                    set: (layer) => layer.Style.IsFollowTransform = isFollowTransform,
 
                     historyTitle: "Set style follow transform",
-                    getHistory: (iLayer) => iLayer.Style.IsFollowTransform,
-                    setHistory: (iLayer, previous) => iLayer.Style.IsFollowTransform = previous
+                    getHistory: (layer) => layer.Style.IsFollowTransform,
+                    setHistory: (layer, previous) => layer.Style.IsFollowTransform = previous
                 );
             };
         }
@@ -283,15 +316,20 @@ namespace Retouch_Photo2.Menus.Models
         //Tag Type
         private void ConstructTagType()
         {
-            this.TagTypeSegmented.TypeChanged += (s, type) => this.MethodViewModel.ILayerChanged<Retouch_Photo2.Blends.TagType>
-            (
-                setSelectionViewModel: () => this.SelectionViewModel.TagType = type,
-                set: (iLayer) => iLayer.TagType = type,
+            this.TagTypeSegmented.TypeChanged += (s, type) =>
+            {
+                TagType tagType = (TagType)type;
+                this.SelectionViewModel.TagType = tagType;
 
-                historyTitle: "Set tag type",
-                getHistory: (iLayer) => iLayer.TagType,
-                setHistory: (iLayer, previous) => iLayer.TagType = previous
-            );
+                this.MethodViewModel.ILayerChanged<Retouch_Photo2.Blends.TagType>
+                (
+                    set: (layer) => layer.TagType = tagType,
+
+                    historyTitle: "Set tag type",
+                    getHistory: (layer) => layer.TagType,
+                    setHistory: (layer, previous) => layer.TagType = previous
+                );
+            };          
         }
 
     }

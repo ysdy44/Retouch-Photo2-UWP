@@ -1,7 +1,4 @@
 ﻿using Retouch_Photo2.Adjustments.Models;
-using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments.Pages
@@ -9,8 +6,45 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// <summary>
     /// Page of <see cref = "GammaTransferAdjustment"/>.
     /// </summary>
-    public sealed partial class GammaTransferPage : IAdjustmentGenericPage<GammaTransferAdjustment>
+    public sealed partial class GammaTransferPage : IAdjustmentPage
     {
+
+        //@Content
+        bool _greenLock;
+        private bool GreenDisable
+        {
+            set
+            {
+                this._greenLock = true;
+                this.GreenToggleSwitch.IsOn = !value;
+                this._greenLock = false;
+            }
+        }
+        private float GreenOffset
+        {
+            set
+            {
+                this.GreenOffsetPicker.Value = (int)(value * 100.0f);
+                this.GreenOffsetSlider.Value = value;
+            }
+        }
+        private float GreenExponent
+        {
+            set
+            {
+                this.GreenExponentPicker.Value = (int)(value * 100.0f);
+                this.GreenExponentSlider.Value = value;
+            }
+        }
+        private float GreenAmplitude
+        {
+            set
+            {
+                this.GreenAmplitudePicker.Value = (int)(value * 100.0f);
+                this.GreenAmplitudeSlider.Value = value;
+            }
+        }
+
 
         #region DependencyProperty
 
@@ -30,17 +64,17 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ResetGreen()
         {
-            this.GreenToggleSwitch.IsOn = false;
-            this.GreenOffsetSlider.Value = 0;
-            this.GreenExponentSlider.Value = 100;
-            this.GreenAmplitudeSlider.Value = 100;
+            this.GreenDisable = false;
+            this.GreenOffset = 0.0f;
+            this.GreenExponent = 1.0f;
+            this.GreenAmplitude = 1.0f;
         }
         private void FollowGreen(GammaTransferAdjustment adjustment)
         {
-            this.GreenToggleSwitch.IsOn = !adjustment.GreenDisable;
-            this.GreenOffsetSlider.Value = adjustment.GreenOffset * 100.0f;
-            this.GreenExponentSlider.Value = adjustment.GreenExponent * 100.0f;
-            this.GreenAmplitudeSlider.Value = adjustment.GreenAmplitude * 100.0f;
+            this.GreenDisable = adjustment.GreenDisable;
+            this.GreenOffset = adjustment.GreenOffset;
+            this.GreenExponent = adjustment.GreenExponent;
+            this.GreenAmplitude = adjustment.GreenAmplitude;
         }
 
         private void ConstructStringsGreen(string title, string offset, string exponent, string amplitude)
@@ -52,318 +86,187 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
 
 
+        //GreenDisable
         private void ConstructGreenDisable()
         {
-            this.GreenTitleGrid.Tapped += (s, e) =>
-            {
-                switch (this.GreenIsExpaned)
-                {
-                    case Visibility.Visible:
-                        this.GreenIsExpaned = Visibility.Collapsed;
-                        break;
-                    case Visibility.Collapsed:
-                        this.GreenIsExpaned = Visibility.Visible;
-                        break;
-                }
-            };
-
+            this.GreenTitleGrid.Tapped += (s, e) => this.GreenIsExpaned = this.GreenIsExpaned == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
             this.GreenToggleSwitch.Toggled += (s, e) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                if (this._greenLock) return;
+                bool greenDisable = !this.GreenToggleSwitch.IsOn;
+                //this.GreenDisable = greenDisable;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        bool disable = !this.GreenToggleSwitch.IsOn;
-                        if (adjustment.GreenDisable == disable) return;
+                this.MethodViewModel.TAdjustmentChanged<bool, GammaTransferAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.GreenDisable = greenDisable,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment green disable");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.GreenDisable;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.GreenDisable = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.GreenDisable = disable;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                    historyTitle: "Set gamma transfer adjustment green disable",
+                    getHistory: (tAdjustment) => tAdjustment.GreenDisable,
+                    setHistory: (tAdjustment, previous) => tAdjustment.GreenDisable = previous
+                );
             };
         }
 
 
-        private void ConstructGreenOffset()
+        //GreenOffset
+        private void ConstructGreenOffset1()
         {
-            this.GreenOffsetSlider.Value = 0;
-            this.GreenOffsetSlider.Minimum = 0;
-            this.GreenOffsetSlider.Maximum = 100;
-
-            this.GreenOffsetSlider.SliderBrush = this.GreenLeftBrush;
-
-            this.GreenOffsetSlider.ValueChangeStarted += (s, value) =>
+            this.GreenOffsetPicker.Unit = null;
+            this.GreenOffsetPicker.Minimum = 0;
+            this.GreenOffsetPicker.Maximum = 100;
+            this.GreenOffsetPicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float greenOffset = (float)value / 100.0f;
+                this.GreenOffset = greenOffset;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        adjustment.CacheGreenOffset();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, GammaTransferAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.GreenOffset = greenOffset,
+
+                    historyTitle: "Set gamma transfer adjustment green offset",
+                    getHistory: (tAdjustment) => tAdjustment.GreenOffset,
+                    setHistory: (tAdjustment, previous) => tAdjustment.GreenOffset = previous
+                );
             };
+        }
+
+        private void ConstructGreenOffset2()
+        {
+            this.GreenOffsetSlider.Minimum = 0.0d;
+            this.GreenOffsetSlider.Maximum = 1.0d;
+            this.GreenOffsetSlider.SliderBrush = this.GreenLeftBrush;
+            this.GreenOffsetSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheGreenOffset());
             this.GreenOffsetSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float greenOffset = (float)value;
+                this.GreenOffset = greenOffset;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        float offset = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.GreenOffset = offset;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<GammaTransferAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.GreenOffset = greenOffset);
             };
             this.GreenOffsetSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float greenOffset = (float)value;
+                this.GreenOffset = greenOffset;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        float offset = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, GammaTransferAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.GreenOffset = greenOffset,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment green offset");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingGreenOffset;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.GreenOffset = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.GreenOffset = offset;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set gamma transfer adjustment green offset",
+                    getHistory: (tAdjustment) => tAdjustment.StartingGreenOffset,
+                    setHistory: (tAdjustment, previous) => tAdjustment.GreenOffset = previous
+                );
             };
         }
 
 
-        private void ConstructGreenExponent()
+        //GreenExponent
+        private void ConstructGreenExponent1()
         {
-            this.GreenExponentSlider.Value = 100;
-            this.GreenExponentSlider.Minimum = 0;
-            this.GreenExponentSlider.Maximum = 100;
-
-            this.GreenExponentSlider.SliderBrush = this.GreenLeftBrush;
-
-            this.GreenExponentSlider.ValueChangeStarted += (s, value) =>
+            this.GreenExponentPicker.Unit = null;
+            this.GreenExponentPicker.Minimum = 0;
+            this.GreenExponentPicker.Maximum = 100;
+            this.GreenExponentPicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float greenExponent = (float)value / 100.0f;
+                this.GreenExponent = greenExponent;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        adjustment.CacheGreenExponent();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, GammaTransferAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.GreenExponent = greenExponent,
+
+                    historyTitle: "Set gamma transfer adjustment green exponent",
+                    getHistory: (tAdjustment) => tAdjustment.GreenExponent,
+                    setHistory: (tAdjustment, previous) => tAdjustment.GreenExponent = previous
+                );
             };
+        }
+
+        private void ConstructGreenExponent2()
+        {
+            this.GreenExponentSlider.Minimum = 0.0d;
+            this.GreenExponentSlider.Maximum = 1.0d;
+            this.GreenExponentSlider.SliderBrush = this.GreenLeftBrush;
+            this.GreenExponentSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheGreenExponent());
             this.GreenExponentSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float greenExponent = (float)value;
+                this.GreenExponent = greenExponent;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        float exponent = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.GreenExponent = exponent;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<GammaTransferAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.GreenExponent = greenExponent);
             };
             this.GreenExponentSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float greenExponent = (float)value;
+                this.GreenExponent = greenExponent;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        float exponent = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, GammaTransferAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.GreenExponent = greenExponent,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment green exponent");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingGreenExponent;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.GreenExponent = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.GreenExponent = exponent;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set gamma transfer adjustment green exponent",
+                    getHistory: (tAdjustment) => tAdjustment.StartingGreenExponent,
+                    setHistory: (tAdjustment, previous) => tAdjustment.GreenExponent = previous
+                );
             };
         }
 
 
-        private void ConstructGreenAmplitude()
+        //GreenAmplitude
+        private void ConstructGreenAmplitude1()
         {
-            this.GreenAmplitudeSlider.Value = 100;
-            this.GreenAmplitudeSlider.Minimum = 0;
-            this.GreenAmplitudeSlider.Maximum = 100;
-
-            this.GreenAmplitudeSlider.SliderBrush = this.GreenLeftBrush;
-
-            this.GreenAmplitudeSlider.ValueChangeStarted += (s, value) =>
+            this.GreenAmplitudePicker.Unit = null;
+            this.GreenAmplitudePicker.Minimum = 0;
+            this.GreenAmplitudePicker.Maximum = 100;
+            this.GreenAmplitudePicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float greenAmplitude = (float)value / 100.0f;
+                this.GreenAmplitude = greenAmplitude;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        adjustment.CacheGreenAmplitude();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, GammaTransferAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.GreenAmplitude = greenAmplitude,
+
+                    historyTitle: "Set gamma transfer adjustment green amplitude",
+                    getHistory: (tAdjustment) => tAdjustment.GreenAmplitude,
+                    setHistory: (tAdjustment, previous) => tAdjustment.GreenAmplitude = previous
+                );
             };
+        }
+
+        private void ConstructGreenAmplitude2()
+        {
+            this.GreenAmplitudeSlider.Minimum = 0.0d;
+            this.GreenAmplitudeSlider.Maximum = 1.0d;
+            this.GreenAmplitudeSlider.SliderBrush = this.GreenLeftBrush;
+            this.GreenAmplitudeSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<GammaTransferAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheGreenAmplitude());
             this.GreenAmplitudeSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float greenAmplitude = (float)value;
+                this.GreenAmplitude = greenAmplitude;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        float amplitude = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.GreenAmplitude = amplitude;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<GammaTransferAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.GreenAmplitude = greenAmplitude);
             };
             this.GreenAmplitudeSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float greenAmplitude = (float)value;
+                this.GreenAmplitude = greenAmplitude;
 
-                    if (this.Adjustment is GammaTransferAdjustment adjustment)
-                    {
-                        float amplitude = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, GammaTransferAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.GreenAmplitude = greenAmplitude,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment green amplitude");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingGreenAmplitude;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is GammaTransferAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.GreenAmplitude = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.GreenAmplitude = amplitude;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set gamma transfer adjustment green amplitude",
+                    getHistory: (tAdjustment) => tAdjustment.StartingGreenAmplitude,
+                    setHistory: (tAdjustment, previous) => tAdjustment.GreenAmplitude = previous
+                );
             };
         }
 

@@ -237,12 +237,6 @@
     <Compile Include="%24PhotosPages\Photo.xaml.cs">
       <DependentUpon>Photo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Touchbars\TouchbarButton.xaml.cs">
-      <DependentUpon>TouchbarButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Touchbars\TouchbarSlider.xaml.cs">
-      <DependentUpon>TouchbarSlider.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TouchSliderBase.cs" />
     <Compile Include="XMLs\XML.Photo.cs" />
     <Compile Include="XMLs\XML.Photos.cs" />
@@ -413,14 +407,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="%24PhotosPages\Photo.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Touchbars\TouchbarButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Touchbars\TouchbarSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

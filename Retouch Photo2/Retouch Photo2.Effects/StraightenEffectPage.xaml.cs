@@ -18,7 +18,18 @@ namespace Retouch_Photo2.Effects.Models
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+
         
+        //@Content
+        private float Angle
+        {
+            set
+            {
+                this.AnglePicker.Value = (int)(value * 180.0f / FanKit.Math.Pi);
+                this.AnglePicker2.Radians = value;
+            }
+        }
+
 
         //@Construct
         /// <summary>
@@ -28,8 +39,11 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.InitializeComponent();
             this.ConstructString();
-            this.ConstructButton();
-            this.ConstructStraighten_Angle();
+
+            this.ConstructIsOn();
+
+            this.ConstructStraighten_Angle1();
+            this.ConstructStraighten_Angle2();
         }
     }
 
@@ -61,11 +75,11 @@ namespace Retouch_Photo2.Effects.Models
         
         public void Reset()
         {
-            this.AnglePicker.Radians = 0;
+            this.Angle = 0.0f;
 
-            this.MethodViewModel.EffectChanged
+            this.MethodViewModel.EffectChanged<float>
             (
-                set: (effect) => effect.Straighten_Angle = 0,
+                set: (effect) => effect.Straighten_Angle = 0.0f,
 
                 historyTitle: "Set effect straighten",
                 getHistory: (effect) => effect.Straighten_Angle,
@@ -78,7 +92,7 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowPage(Effect effect)
         {
-            this.AnglePicker.Radians = effect.Straighten_Angle;
+            this.Angle = effect.Straighten_Angle;
         }
     }
 
@@ -89,37 +103,61 @@ namespace Retouch_Photo2.Effects.Models
     {
 
         //IsOn
-        private void ConstructButton()
+        private void ConstructIsOn()
         {
-            this.Button.Toggled += (isOn) =>
-            {
-                this.MethodViewModel.EffectChanged<bool>
-                (
-                    set: (effect) => effect.Straighten_IsOn = isOn,
+            this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
+            (
+                set: (effect) => effect.Straighten_IsOn = isOn,
 
-                    historyTitle: "Set effect straighten is on",
-                    getHistory: (effect) => effect.Straighten_IsOn,
-                    setHistory: (effect, previous) => effect.Straighten_IsOn = previous
-                );
-            };
+                historyTitle: "Set effect straighten is on",
+                getHistory: (effect) => effect.Straighten_IsOn,
+                setHistory: (effect, previous) => effect.Straighten_IsOn = previous
+            );            
         }
 
 
         //Straighten_Angle
-        private void ConstructStraighten_Angle()
+        private void ConstructStraighten_Angle1()
+        {
+            this.AnglePicker.Unit = "º";
+            this.AnglePicker.Minimum = 0;
+            this.AnglePicker.Maximum = 360;
+            this.AnglePicker.ValueChange += (s, value) =>
+            {
+                float radians = (float)value * 180 / FanKit.Math.Pi;
+                this.Angle = radians;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.Straighten_Angle = radians,
+
+                    historyTitle: "Set effect straighten angle",
+                    getHistory: (effect) => effect.Straighten_Angle,
+                    setHistory: (effect, previous) => effect.Straighten_Angle = previous
+               );
+            };
+        }
+
+        private void ConstructStraighten_Angle2()
         {
             //this.AnglePicker.Minimum = 0;
             //this.AnglePicker.Maximum = FanKit.Math.PiTwice;
-            this.AnglePicker.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheStraighten());
-            this.AnglePicker.ValueChangeDelta += (s, value) =>                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Straighten_Angle = (float)value);
-            this.AnglePicker.ValueChangeCompleted += (s, value) =>    this.MethodViewModel.EffectChangeCompleted<float>
-            (
-                set: (effect) => effect.Straighten_Angle = (float)value,
+            this.AnglePicker2.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheStraighten());
+            this.AnglePicker2.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Straighten_Angle = (float)value);
+            this.AnglePicker2.ValueChangeCompleted += (s, value) =>
+            {
+                float radians = (float)value;
+                this.Angle = radians;
 
-                historyTitle: "Set effect straighten angle",
-                getHistory: (effect) => effect.Straighten_Angle,
-                setHistory: (effect, previous) => effect.Straighten_Angle = previous
-            );        
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.Straighten_Angle = radians,
+
+                    historyTitle: "Set effect straighten angle",
+                    getHistory: (effect) => effect.StartingStraighten_Angle,
+                    setHistory: (effect, previous) => effect.Straighten_Angle = previous
+               );
+            };
         }
 
     }

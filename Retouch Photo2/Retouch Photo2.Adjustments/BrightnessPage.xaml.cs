@@ -11,17 +11,48 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// <summary>
     /// Page of <see cref = "BrightnessAdjustment"/>.
     /// </summary>
-    public sealed partial class BrightnessPage : IAdjustmentGenericPage<BrightnessAdjustment>
+    public sealed partial class BrightnessPage : IAdjustmentPage
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
 
 
-        //@Generic      
-        /// <summary> Gets IAdjustment's adjustment. </summary>
-        public BrightnessAdjustment Adjustment { get; set; }
+        //@Content
+        private float WhiteLight
+        {
+            set
+            {
+                this.WhiteLightPicker.Value = (int)(value * 100.0f);
+                this.WhiteLightSlider.Value = value;
+            }
+        }
+        private float WhiteDark
+        {
+            set
+            {
+                this.WhiteDarkPicker.Value = (int)(value * 100.0f);
+                this.WhiteDarkSlider.Value = value;
+            }
+        }
+        private float BlackLight
+        {
+            set
+            {
+                this.BlackLightPicker.Value = (int)(value * 100.0f);
+                this.BlackLightSlider.Value = value;
+            }
+        }
+        private float BlackDark
+        {
+            set
+            {
+                this.BlackDarkPicker.Value = (int)(value * 100.0f);
+                this.BlackDarkSlider.Value = value;
+            }
+        }
 
 
         //@Construct
@@ -33,18 +64,24 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructWhiteLight();
-            this.ConstructWhiteDark();
+            this.ConstructWhiteLight1();
+            this.ConstructWhiteLight2();
 
-            this.ConstructBlackLight();
-            this.ConstructBlackDark();
+            this.ConstructWhiteDark1();
+            this.ConstructWhiteDark2();
+
+            this.ConstructBlackLight1();
+            this.ConstructBlackLight2();
+
+            this.ConstructBlackDark1();
+            this.ConstructBlackDark2();
         }
     }
 
     /// <summary>
     /// Page of <see cref = "BrightnessAdjustment"/>.
     /// </summary>
-    public sealed partial class BrightnessPage : IAdjustmentGenericPage<BrightnessAdjustment>
+    public sealed partial class BrightnessPage : IAdjustmentPage
     {
 
         //Strings
@@ -54,11 +91,11 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.Text = resource.GetString("/Adjustments/Brightness");
 
-            this.WhiteToLightTextBlock.Text = resource.GetString("/Adjustments/Brightness_WhiteToLight");
-            this.WhiteToDarkTextBlock.Text = resource.GetString("/Adjustments/Brightness_WhiteToDark");
+            this.WhiteLightTextBlock.Text = resource.GetString("/Adjustments/Brightness_WhiteToLight");
+            this.WhiteDarkTextBlock.Text = resource.GetString("/Adjustments/Brightness_WhiteToDark");
 
-            this.BlackToLightTextBlock.Text = resource.GetString("/Adjustments/Brightness_BlackToLight");
-            this.BlackToDarkTextBlock.Text = resource.GetString("/Adjustments/Brightness_BlackToDark");
+            this.BlackLightTextBlock.Text = resource.GetString("/Adjustments/Brightness_BlackToLight");
+            this.BlackDarkTextBlock.Text = resource.GetString("/Adjustments/Brightness_BlackToDark");
         }
 
 
@@ -76,21 +113,24 @@ namespace Retouch_Photo2.Adjustments.Pages
         public IAdjustment GetNewAdjustment() => new BrightnessAdjustment();
 
 
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
+
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.
         /// </summary>
         public void Reset()
         {
-            this.WhiteLightSlider.Value = 100;
-            this.WhiteDarkSlider.Value = 100;
-            this.BlackLightSlider.Value = 0;
-            this.BlackDarkSlider.Value = 0;
+            this.WhiteLight = 1.0f;
+            this.WhiteDark = 1.0f;
+            this.BlackLight = 0.0f;
+            this.BlackDark = 0.0f;
 
             if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
                 ILayer layer = layerage.Self;
 
-                if (this.Adjustment is BrightnessAdjustment adjustment)
+                if (layer.Filter.Adjustments[this.Index] is BrightnessAdjustment adjustment)
                 {
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment");
@@ -136,14 +176,21 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary>
         /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
         /// </summary>
-        /// <param name="adjustment"> The adjustment. </param>
-        public void Follow(BrightnessAdjustment adjustment)
+        public void Follow()
         {
-            this.WhiteLightSlider.Value = adjustment.WhiteLight * 100;
-            this.WhiteDarkSlider.Value = adjustment.WhiteDark * 100;
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
+            {
+                ILayer layer = layerage.Self;
 
-            this.BlackLightSlider.Value = adjustment.BlackLight * 100;
-            this.BlackDarkSlider.Value = adjustment.BlackDark * 100;
+                if (layer.Filter.Adjustments[this.Index] is BrightnessAdjustment adjustment)
+                {
+                    this.WhiteLight = adjustment.WhiteLight;
+                    this.WhiteDark = adjustment.WhiteDark;
+
+                    this.BlackLight = adjustment.BlackLight;
+                    this.BlackDark = adjustment.BlackDark;
+                }
+            }
         }
 
     }
@@ -151,343 +198,217 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// <summary>
     /// Page of <see cref = "BrightnessAdjustment"/>.
     /// </summary>
-    public sealed partial class BrightnessPage : IAdjustmentGenericPage<BrightnessAdjustment>
-    { 
+    public sealed partial class BrightnessPage : IAdjustmentPage
+    {
 
-        private void ConstructWhiteLight()
+        //WhiteLight
+        private void ConstructWhiteLight1()
         {
-            this.WhiteLightSlider.Value = 100;
-            this.WhiteLightSlider.Minimum = 50;
-            this.WhiteLightSlider.Maximum = 100;
-
-            this.WhiteLightSlider.SliderBrush = this.WhiteLightBrush;
-
-            this.WhiteLightSlider.ValueChangeStarted += (s, value) =>
+            this.WhiteLightPicker.Unit = null;
+            this.WhiteLightPicker.Minimum = 50;
+            this.WhiteLightPicker.Maximum = 100;
+            this.WhiteLightPicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float whiteLight = (float)value / 100.0f;
+                this.WhiteLight = whiteLight;
 
-                    if (this.Adjustment is BrightnessAdjustment adjustment)
-                    {
-                        adjustment.CacheWhiteLight();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, BrightnessAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.WhiteLight = whiteLight,
+
+                    historyTitle: "Set brightness adjustment white light",
+                    getHistory: (tAdjustment) => tAdjustment.WhiteLight,
+                    setHistory: (tAdjustment, previous) => tAdjustment.WhiteLight = previous
+                );
             };
+        }
+
+        private void ConstructWhiteLight2()
+        {
+            this.WhiteLightSlider.Minimum = 0.5d;
+            this.WhiteLightSlider.Maximum = 1.0d;
+            this.WhiteLightSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<BrightnessAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheWhiteLight());
             this.WhiteLightSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float whiteLight = (float)value;
+                this.WhiteLight = whiteLight;
 
-                    if (this.Adjustment is BrightnessAdjustment adjustment)
-                    {
-                        float light = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.WhiteLight = light;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<BrightnessAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.WhiteLight = whiteLight);
             };
             this.WhiteLightSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float whiteLight = (float)value;
+                this.WhiteLight = whiteLight;
 
-                    if (this.Adjustment is BrightnessAdjustment adjustment)
-                    {
-                        float light = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, BrightnessAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.WhiteLight = whiteLight,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment white light");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingWhiteLight;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is BrightnessAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.WhiteLight = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.WhiteLight = light;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set brightness adjustment white light",
+                    getHistory: (tAdjustment) => tAdjustment.StartingWhiteLight,
+                    setHistory: (tAdjustment, previous) => tAdjustment.WhiteLight = previous
+                );
             };
         }
 
-        private void ConstructWhiteDark()
+
+        //WhiteDark
+        private void ConstructWhiteDark1()
         {
-            this.WhiteDarkSlider.Value = 100;
-            this.WhiteDarkSlider.Minimum = 50;
-            this.WhiteDarkSlider.Maximum = 100;
-
-            this.WhiteDarkSlider.SliderBrush = this.WhiteDarkBrush;
-            
-            this.WhiteDarkSlider.ValueChangeStarted += (s, value) =>
+            this.WhiteDarkPicker.Unit = null;
+            this.WhiteDarkPicker.Minimum = 50;
+            this.WhiteDarkPicker.Maximum = 100;
+            this.WhiteDarkPicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float whiteDark = (float)value / 100.0f;
+                this.WhiteDark = whiteDark;
 
-                    if (this.Adjustment is BrightnessAdjustment adjustment)
-                    {
-                        adjustment.CacheWhiteDark();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, BrightnessAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.WhiteDark = whiteDark,
+
+                    historyTitle: "Set brightness adjustment white dark",
+                    getHistory: (tAdjustment) => tAdjustment.WhiteDark,
+                    setHistory: (tAdjustment, previous) => tAdjustment.WhiteDark = previous
+                );
             };
+        }
+
+        private void ConstructWhiteDark2()
+        {
+            this.WhiteDarkSlider.Minimum = 0.5d;
+            this.WhiteDarkSlider.Maximum = 1.0d;
+            this.WhiteDarkSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<BrightnessAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheWhiteDark());
             this.WhiteDarkSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float whiteDark = (float)value;
+                this.WhiteDark = whiteDark;
 
-                    if (this.Adjustment is BrightnessAdjustment adjustment)
-                    {
-                        float dark = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.WhiteDark = dark;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<BrightnessAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.WhiteDark = whiteDark);
             };
             this.WhiteDarkSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float whiteDark = (float)value;
+                this.WhiteDark = whiteDark;
 
-                    if (this.Adjustment is BrightnessAdjustment adjustment)
-                    {
-                        float dark = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, BrightnessAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.WhiteDark = whiteDark,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment white dark");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingWhiteDark;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is BrightnessAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.WhiteDark = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.WhiteDark = dark;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set brightness adjustment white dark",
+                    getHistory: (tAdjustment) => tAdjustment.StartingWhiteDark,
+                    setHistory: (tAdjustment, previous) => tAdjustment.WhiteDark = previous
+                );
             };
         }
 
 
-        private void ConstructBlackLight()
+        //BlackLight
+        private void ConstructBlackLight1()
         {
-            this.BlackLightSlider.Value = 0;
-            this.BlackLightSlider.Minimum = 0;
-            this.BlackLightSlider.Maximum = 50;
-
-            this.BlackLightSlider.SliderBrush = this.BlackLightBrush;
-
-            this.BlackLightSlider.ValueChangeStarted += (s, value) =>
+            this.BlackLightPicker.Unit = null;
+            this.BlackLightPicker.Minimum = 0;
+            this.BlackLightPicker.Maximum = 50;
+            this.BlackLightPicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float blackLight = (float)value / 100.0f;
+                this.BlackLight = blackLight;
 
-                    if (this.Adjustment is BrightnessAdjustment adjustment)
-                    {
-                        adjustment.CacheBlackLight();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, BrightnessAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.BlackLight = blackLight,
+
+                    historyTitle: "Set brightness adjustment black light",
+                    getHistory: (tAdjustment) => tAdjustment.BlackLight,
+                    setHistory: (tAdjustment, previous) => tAdjustment.BlackLight = previous
+                );
             };
+        }
+
+        private void ConstructBlackLight2()
+        {
+            this.BlackLightSlider.Minimum = 0.0d;
+            this.BlackLightSlider.Maximum = 50.0d;
+            this.BlackLightSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<BrightnessAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheBlackLight());
             this.BlackLightSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float blackLight = (float)value;
+                this.BlackLight = blackLight;
 
-                    if (this.Adjustment is BrightnessAdjustment adjustment)
-                    {
-                        float light = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.BlackLight = light;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<BrightnessAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.BlackLight = blackLight);
             };
             this.BlackLightSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float blackLight = (float)value;
+                this.BlackLight = blackLight;
 
-                    if (this.Adjustment is BrightnessAdjustment adjustment)
-                    {
-                        float light = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, BrightnessAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.BlackLight = blackLight,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment black light");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingBlackLight;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is BrightnessAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.BlackLight = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.BlackLight = light;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set brightness adjustment black light",
+                    getHistory: (tAdjustment) => tAdjustment.StartingBlackLight,
+                    setHistory: (tAdjustment, previous) => tAdjustment.BlackLight = previous
+                );
             };
         }
 
-        private void ConstructBlackDark()
+
+        //BlackDark
+        private void ConstructBlackDark1()
         {
-            this.BlackDarkSlider.Value = 0;
-            this.BlackDarkSlider.Minimum = 0;
-            this.BlackDarkSlider.Maximum = 50;
-
-            this.BlackDarkSlider.SliderBrush = this.BlackDarkBrush;
-
-            this.BlackDarkSlider.ValueChangeStarted += (s, value) =>
+            this.BlackDarkPicker.Unit = null;
+            this.BlackDarkPicker.Minimum = 0;
+            this.BlackDarkPicker.Maximum = 50;
+            this.BlackDarkPicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float blackDark = (float)value / 100.0f;
+                this.BlackDark = blackDark;
 
-                    if (this.Adjustment is BrightnessAdjustment adjustment)
-                    {
-                        adjustment.CacheBlackDark();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, BrightnessAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.BlackDark = blackDark,
+
+                    historyTitle: "Set brightness adjustment black dark",
+                    getHistory: (tAdjustment) => tAdjustment.BlackDark,
+                    setHistory: (tAdjustment, previous) => tAdjustment.BlackDark = previous
+                );
             };
+        }
+
+        private void ConstructBlackDark2()
+        {
+            this.BlackDarkSlider.Minimum = 0.0d;
+            this.BlackDarkSlider.Maximum = 50.0d;
+            this.BlackDarkSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<BrightnessAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheBlackDark());
             this.BlackDarkSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
-                    
-                    if (this.Adjustment is BrightnessAdjustment adjustment)
-                    {
-                        float dark = (float)value / 100.0f;
+                float blackDark = (float)value;
+                this.BlackDark = blackDark;
 
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.BlackDark = dark;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<BrightnessAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.BlackDark = blackDark);
             };
             this.BlackDarkSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
-                    
-                    if (this.Adjustment is BrightnessAdjustment adjustment)
-                    {
-                        float dark = (float)value / 100.0f;
+                float blackDark = (float)value;
+                this.BlackDark = blackDark;
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment black dark");
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, BrightnessAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.BlackDark = blackDark,
 
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingBlackDark;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is BrightnessAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.BlackDark = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.BlackDark = dark;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-                        
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set brightness adjustment black dark",
+                    getHistory: (tAdjustment) => tAdjustment.StartingBlackDark,
+                    setHistory: (tAdjustment, previous) => tAdjustment.BlackDark = previous
+                );
             };
         }
 

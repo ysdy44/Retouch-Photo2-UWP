@@ -5,7 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPickers="using:HSVColorPickers"
-    mc:Ignorable="d"
+    mc:Ignorable="d"              
+    MinHeight="165" 
+    MaxHeight="300"
     d:DesignHeight="400"
     d:DesignWidth="200"
     >
@@ -39,22 +41,38 @@
     </Page.Resources>
     
 
-    <StackPanel >
+    <StackPanel>
 
-        <!--White to Light-->
-        <TextBlock x:Name="WhiteToLightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <!--WhiteLight-->
+        <RelativePanel>
+            <TextBlock x:Name="WhiteLightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="WhiteLightPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+        </RelativePanel>
         <hsvColorPickers:TouchSlider x:Name="WhiteLightSlider" Margin="2,0"/>
 
-        <!--White to Dark-->
-        <TextBlock x:Name="WhiteToDarkTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <!--WhiteDark-->
+        <RelativePanel>
+            <TextBlock x:Name="WhiteDarkTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="WhiteDarkPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+        </RelativePanel>
         <hsvColorPickers:TouchSlider x:Name="WhiteDarkSlider" Margin="2,0"/>
 
-        <!--Black to Light-->
-        <TextBlock x:Name="BlackToLightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <!--BlackLight-->
+        <RelativePanel>
+            <TextBlock x:Name="BlackLightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="BlackLightPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+        </RelativePanel>
         <hsvColorPickers:TouchSlider x:Name="BlackLightSlider" Margin="2,0"/>
 
-        <!--Black to Dark-->
-        <TextBlock x:Name="BlackToDarkTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <!--BlackDark-->
+        <RelativePanel>
+            <TextBlock x:Name="BlackDarkTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="BlackDarkPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+        </RelativePanel>
         <hsvColorPickers:TouchSlider x:Name="BlackDarkSlider" Margin="2,0"/>
 
         <ContentControl Height="4"/>

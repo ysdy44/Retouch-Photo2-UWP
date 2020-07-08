@@ -4,8 +4,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:hsvcolorpickers="using:HSVColorPickers"
-    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:hSVColorPickers="using:HSVColorPickers"
+    xmlns:tools="using:Retouch_Photo2.Tools"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
@@ -26,33 +26,33 @@
                             Visibility="{x:Bind HorizontalStepVisibilityConverter(SelectionViewModel.PatternGridType), Mode=OneWay}"/>
 
             <!--Horizontal-->
-            <elements:TouchbarButton x:Name="HorizontalStepTouchbarButton"
+            <tools:TouchbarButton x:Name="HorizontalStepButton"
                             Visibility="{x:Bind HorizontalStepVisibilityConverter(SelectionViewModel.PatternGridType), Mode=OneWay}">
-                <elements:TouchbarButton.TouchbarPicker>
-                    <hsvcolorpickers:NumberPicker x:Name="HorizontalStepTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                <tools:TouchbarButton.Picker>
+                    <hSVColorPickers:NumberPicker x:Name="HorizontalStepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind Converter(SelectionViewModel.PatternGridHorizontalStep), Mode=OneWay}"/>
-                </elements:TouchbarButton.TouchbarPicker>
-                <elements:TouchbarButton.TouchbarSlider>
-                    <elements:TouchbarSlider x:Name="HorizontalStepTouchbarSlider" 
+                </tools:TouchbarButton.Picker>
+                <tools:TouchbarButton.Slider>
+                    <tools:TouchbarSlider x:Name="HorizontalStepSlider" 
                              Value="{x:Bind SelectionViewModel.PatternGridHorizontalStep, Mode=OneWay}"/>
-                </elements:TouchbarButton.TouchbarSlider>
-            </elements:TouchbarButton>
+                </tools:TouchbarButton.Slider>
+            </tools:TouchbarButton>
 
             <ContentControl Width="4"
                             Visibility="{x:Bind VerticalStepVisibilityConverter(SelectionViewModel.PatternGridType), Mode=OneWay}"/>
 
             <!--Vertical-->
-            <elements:TouchbarButton x:Name="VerticalStepTouchbarButton"
+            <tools:TouchbarButton x:Name="VerticalStepButton"
                             Visibility="{x:Bind VerticalStepVisibilityConverter(SelectionViewModel.PatternGridType), Mode=OneWay}">
-                <elements:TouchbarButton.TouchbarPicker>
-                    <hsvcolorpickers:NumberPicker x:Name="VerticalStepTouchbarPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                <tools:TouchbarButton.Picker>
+                    <hSVColorPickers:NumberPicker x:Name="VerticalStepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind Converter(SelectionViewModel.PatternGridVerticalStep), Mode=OneWay}"/>
-                </elements:TouchbarButton.TouchbarPicker>
-                <elements:TouchbarButton.TouchbarSlider>
-                    <elements:TouchbarSlider x:Name="VerticalStepTouchbarSlider" 
+                </tools:TouchbarButton.Picker>
+                <tools:TouchbarButton.Slider>
+                    <tools:TouchbarSlider x:Name="VerticalStepSlider" 
                              Value="{x:Bind SelectionViewModel.PatternGridVerticalStep, Mode=OneWay}"/>
-                </elements:TouchbarButton.TouchbarSlider>
-            </elements:TouchbarButton>
+                </tools:TouchbarButton.Slider>
+            </tools:TouchbarButton>
 
         </StackPanel>
     </ScrollViewer>

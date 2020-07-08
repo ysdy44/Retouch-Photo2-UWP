@@ -20,6 +20,25 @@ namespace Retouch_Photo2.Effects.Models
         ViewModel MethodViewModel => App.MethodViewModel;
 
 
+        //@Content
+        private float Radius
+        {
+            set
+            {
+                this.RadiusPicker.Value = (int)value;
+                this.RadiusSlider.Value = value;
+            }
+        }
+        private float Angle
+        {
+            set
+            {
+                this.AnglePicker.Value = (int)(value * 180.0f / FanKit.Math.Pi);
+                this.AnglePicker2.Radians = value;
+            }
+        }
+
+
         //@Construct
         /// <summary>
         /// Initializes a DirectionalBlurEffectPage. 
@@ -28,9 +47,14 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.InitializeComponent();
             this.ConstructString();
-            this.ConstructButton();
-            this.ConstructDirectionalBlur_Radius();
-            this.ConstructDirectionalBlur_Angle();
+
+            this.ConstructIsOn();
+
+            this.ConstructRadius1();
+            this.ConstructRadius2();
+
+            this.ConstructAngle1();
+            this.ConstructAngle2();
         }
     }
 
@@ -63,8 +87,8 @@ namespace Retouch_Photo2.Effects.Models
         
         public void Reset()
         {
-            this.RadiusSlider.Value = 0;
-            this.AnglePicker.Radians = 0;
+            this.Radius = 0.0f;
+            this.Angle = 0.0f;
 
             //History
             LayersPropertyHistory history = new LayersPropertyHistory("Set effect directional blur");
@@ -105,8 +129,8 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowPage(Effect effect)
         {
-            this.RadiusSlider.Value = effect.DirectionalBlur_Radius;
-            this.AnglePicker.Radians = effect.DirectionalBlur_Angle;
+            this.Radius = effect.DirectionalBlur_Radius;
+            this.Angle = effect.DirectionalBlur_Angle;
         }
     }
     
@@ -117,7 +141,7 @@ namespace Retouch_Photo2.Effects.Models
     {
 
         //IsOn
-        private void ConstructButton()
+        private void ConstructIsOn()
         {
             this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
             (
@@ -130,40 +154,99 @@ namespace Retouch_Photo2.Effects.Models
         }
 
 
-        //DirectionalBlur_Radius
-        private void ConstructDirectionalBlur_Radius()
+        //Radius
+        private void ConstructRadius1()
+        {
+            this.RadiusPicker.Minimum = 0;
+            this.RadiusPicker.Maximum = 100;
+            this.RadiusPicker.ValueChange += (s, value) =>
+            {
+                float radius = (float)value;
+                this.Radius = radius;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.DirectionalBlur_Radius = radius,
+
+                    historyTitle: "Set effect directional blur radius",
+                    getHistory: (effect) => effect.DirectionalBlur_Radius,
+                    setHistory: (effect, previous) => effect.DirectionalBlur_Radius = previous
+                );
+            };
+        }
+        
+        private void ConstructRadius2()
         {
             this.RadiusSlider.Minimum = 0.0d;
             this.RadiusSlider.Maximum = 100.0d;
             this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheDirectionalBlur());
-            this.RadiusSlider.ValueChangeDelta += (s, value) =>  this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.DirectionalBlur_Radius = (float)value);
-            this.RadiusSlider.ValueChangeCompleted += (s, value) =>   this.MethodViewModel.EffectChangeCompleted<float>
-            (
-                set: (effect) => effect.DirectionalBlur_Radius = (float)value,
+            this.RadiusSlider.ValueChangeDelta += (s, value) =>
+            {
+                float radius = (float)value;
+                this.Radius = radius;
 
-                historyTitle: "Set effect directional blur radius",
-                getHistory: (effect) => effect.StartingDirectionalBlur_Radius,
-                setHistory: (effect, previous) => effect.DirectionalBlur_Radius = previous
-            );
+                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.DirectionalBlur_Radius = radius);
+            };
+            this.RadiusSlider.ValueChangeCompleted += (s, value) =>
+            {
+                float radius = (float)value;
+                this.Radius = radius;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.DirectionalBlur_Radius = radius,
+
+                    historyTitle: "Set effect directional blur radius",
+                    getHistory: (effect) => effect.StartingDirectionalBlur_Radius,
+                    setHistory: (effect, previous) => effect.DirectionalBlur_Radius = previous
+                );
+            };
         }
 
-
-        //DirectionalBlur_Angle
-        private void ConstructDirectionalBlur_Angle()
+        
+        //Angle
+        private void ConstructAngle1()
         {
-            //this.AnglePicker.Minimum = 0;
-            //this.AnglePicker.Maximum = FanKit.Math.PiTwice;
-            this.AnglePicker.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheDirectionalBlur());
-            this.AnglePicker.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.DirectionalBlur_Angle = (float)value);
-            this.AnglePicker.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
-            (
-                set: (effect) => effect.DirectionalBlur_Angle = (float)value,
+            this.AnglePicker.Unit = "º";
+            this.AnglePicker.Minimum = 0;
+            this.AnglePicker.Maximum = 360;
+            this.AnglePicker.ValueChange += (s, value) =>
+            {
+                float angle = (float)value * 180 / FanKit.Math.Pi;
+                this.Angle = angle;
 
-                historyTitle: "Set effect directional blur angle",
-                getHistory: (effect) => effect.StartingDirectionalBlur_Angle,
-                setHistory: (effect, previous) => effect.DirectionalBlur_Angle = previous
-            );
-        }          
+                this.MethodViewModel.EffectChangeCompleted<float>
+               (
+                   set: (effect) => effect.DirectionalBlur_Angle = (float)value,
+
+                   historyTitle: "Set effect directional blur angle",
+                   getHistory: (effect) => effect.StartingDirectionalBlur_Angle,
+                   setHistory: (effect, previous) => effect.DirectionalBlur_Angle = previous
+               );
+            };
+        }
+
+        private void ConstructAngle2()
+        {
+            //this.AnglePicker2.Minimum = 0;
+            //this.AnglePicker2.Maximum = FanKit.Math.PiTwice;
+            this.AnglePicker2.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheDirectionalBlur());
+            this.AnglePicker2.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.DirectionalBlur_Angle = (float)value);
+            this.AnglePicker2.ValueChangeCompleted += (s, value) =>
+            {
+                float radians = (float)value;
+                this.Angle = radians;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+               (
+                   set: (effect) => effect.DirectionalBlur_Angle = (float)value,
+
+                   historyTitle: "Set effect directional blur angle",
+                   getHistory: (effect) => effect.StartingDirectionalBlur_Angle,
+                   setHistory: (effect, previous) => effect.DirectionalBlur_Angle = previous
+               );
+            };
+        }
 
     }
 }

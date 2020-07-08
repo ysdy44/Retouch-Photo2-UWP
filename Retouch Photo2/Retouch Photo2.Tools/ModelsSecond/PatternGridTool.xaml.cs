@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -82,8 +81,8 @@ namespace Retouch_Photo2.Tools.Models
             this.Button.Title = resource.GetString("/ToolsSecond/PatternGrid");
 
             this.TypeTextBlock.Text = resource.GetString("/ToolsSecond/PatternGrid_Type");
-            this.HorizontalStepTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/PatternGrid_Horizontal");
-            this.VerticalStepTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/PatternGrid_Vertical");
+            this.HorizontalStepButton.CenterContent = resource.GetString("/ToolsSecond/PatternGrid_Horizontal");
+            this.VerticalStepButton.CenterContent = resource.GetString("/ToolsSecond/PatternGrid_Vertical");
         }
 
 
@@ -127,16 +126,21 @@ namespace Retouch_Photo2.Tools.Models
         //GridType
         private void ConstructGridType()
         {
-            this.PatternGridTypeComboBox.TypeChanged += (s, gridType) => this.MethodViewModel.TLayerChanged<PatternGridType, PatternGridLayer>
-            (
-                layerType: LayerType.PatternGrid,
-                setSelectionViewModel: () => this.SelectionViewModel.PatternGridType = gridType,
-                set: (tLayer) => tLayer.GridType = gridType,
+            this.PatternGridTypeComboBox.TypeChanged += (s, type) =>
+            {
+                PatternGridType gridType = (PatternGridType)type;
+                this.SelectionViewModel.PatternGridType = gridType;
 
-                historyTitle: "Set grid layer type",
-                getHistory: (tLayer) => tLayer.GridType,
-                setHistory: (tLayer, previous) => tLayer.GridType = previous
-            );
+                this.MethodViewModel.TLayerChanged<PatternGridType, PatternGridLayer>
+                (
+                    layerType: LayerType.PatternGrid,
+                    set: (tLayer) => tLayer.GridType = gridType,
+
+                    historyTitle: "Set grid layer type",
+                    getHistory: (tLayer) => tLayer.GridType,
+                    setHistory: (tLayer, previous) => tLayer.GridType = previous
+                );
+            };
         }
 
 

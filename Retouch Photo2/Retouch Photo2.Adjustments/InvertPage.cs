@@ -8,12 +8,8 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// <summary>
     /// Page of <see cref = "InvertAdjustment"/>.
     /// </summary>
-    public sealed partial class InvertPage : IAdjustmentGenericPage<InvertAdjustment>
+    public sealed partial class InvertPage : IAdjustmentPage
     {
-        //@Generic
-        /// <summary> Gets IAdjustment's adjustment. </summary>
-        public InvertAdjustment Adjustment { get; set; }
-
         //@Construct
         /// <summary>
         /// Initializes a InvertPage. 
@@ -27,7 +23,7 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// <summary>
     /// Page of <see cref = "InvertAdjustment"/>.
     /// </summary>
-    public sealed partial class InvertPage : IAdjustmentGenericPage<InvertAdjustment>
+    public sealed partial class InvertPage : IAdjustmentPage
     {
         //Strings
         private void ConstructStrings()
@@ -50,6 +46,10 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new InvertAdjustment();
 
+
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
+
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.
         /// </summary>
@@ -57,7 +57,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary>
         /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
         /// </summary>
-        /// <param name="adjustment"> The adjustment. </param>
-        public void Follow(InvertAdjustment adjustment) { }
+        public void Follow() { }
+
     }
 }

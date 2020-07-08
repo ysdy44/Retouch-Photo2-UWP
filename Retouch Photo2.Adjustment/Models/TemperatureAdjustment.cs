@@ -12,12 +12,12 @@ namespace Retouch_Photo2.Adjustments.Models
     {
         //@Static
         //@Generic
-        public static IAdjustmentGenericPage<TemperatureAdjustment> GenericPage;// = new TemperaturePage();
+        public static IAdjustmentPage GenericPage;// = new TemperaturePage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Temperature;
         public Visibility PageVisibility => Visibility.Visible;
-        public UIElement Page => TemperatureAdjustment.GenericPage.Self;
+        public IAdjustmentPage Page { get; } = TemperatureAdjustment.GenericPage;
         public string Text => TemperatureAdjustment.GenericPage.Text;
 
 
@@ -31,28 +31,7 @@ namespace Retouch_Photo2.Adjustments.Models
         public float StartingTint { get; private set; }
         public void CacheTint() => this.StartingTint = this.Tint;
                
-
-        public void Reset()
-        {
-            this.Temperature = 0.0f;
-            this.Tint = 0.0f;
-
-            if (TemperatureAdjustment.GenericPage.Adjustment == this)
-            {
-                TemperatureAdjustment.GenericPage.Reset();
-            }
-        }
-        public void Follow()
-        {
-            TemperatureAdjustment.GenericPage.Adjustment = this;
-            TemperatureAdjustment.GenericPage.Follow(this);
-        }
-        public void Close()
-        {
-            TemperatureAdjustment.GenericPage.Adjustment = null;
-        }
-
-
+        
         public IAdjustment Clone()
         {
             return new TemperatureAdjustment

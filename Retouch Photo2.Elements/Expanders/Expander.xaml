@@ -252,7 +252,7 @@
                 <Border x:Name="MainPageBorder" Visibility="Collapsed" Height="Auto" Grid.Row="1" VerticalAlignment="Top">
                     <!--Content-->
                 </Border>
-                <Border x:Name="SecondPageBorder" Visibility="Collapsed" Height="Auto" MinHeight = "165" MaxHeight = "300" Grid.Row="1" VerticalAlignment="Top">
+                <Border x:Name="SecondPageBorder" Visibility="Collapsed" Height="Auto" Grid.Row="1" VerticalAlignment="Top">
                     <!--Content-->
                 </Border>
 

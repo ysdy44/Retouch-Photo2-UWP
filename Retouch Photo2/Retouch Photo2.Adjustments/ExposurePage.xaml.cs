@@ -11,17 +11,25 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// <summary>
     /// Page of <see cref = "ExposureAdjustment"/>.
     /// </summary>
-    public sealed partial class ExposurePage : IAdjustmentGenericPage<ExposureAdjustment>
+    public sealed partial class ExposurePage : IAdjustmentPage
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
 
+        
+        //@Content
+        private float Exposure
+        {
+            set
+            {
+                this.ExposurePicker.Value = (int)(value * 100.0f);
+                this.ExposureSlider.Value = value;
+            }
+        }
 
-        //@Generic
-        /// <summary> Gets IAdjustment's adjustment. </summary>
-        public ExposureAdjustment Adjustment { get; set; }
 
         //@Construct
         /// <summary>
@@ -32,14 +40,15 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructExposure();
+            this.ConstructExposure1();
+            this.ConstructExposure2();
         }
     }
 
     /// <summary>
     /// Page of <see cref = "ExposureAdjustment"/>.
     /// </summary>
-    public sealed partial class ExposurePage : IAdjustmentGenericPage<ExposureAdjustment>
+    public sealed partial class ExposurePage : IAdjustmentPage
     {
 
         //Strings
@@ -65,148 +74,100 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new ExposureAdjustment();
 
+
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
+
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.
         /// </summary>
         public void Reset()
         {
-            this.ExposureSlider.Value = 0;
+            this.Exposure = 0.0f;
 
-            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-            {
-                ILayer layer = layerage.Self;
+            this.MethodViewModel.TAdjustmentChanged<float, ExposureAdjustment>
+            (
+                index: this.Index,
+                set: (tAdjustment) => tAdjustment.Exposure = 0,
 
-                if (this.Adjustment is ExposureAdjustment adjustment)
-                {
-                    //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set contrast adjustment");
-
-                    var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                    var previous1 = adjustment.Exposure;
-                    history.UndoAction += () =>
-                    {
-                        if (previous < 0) return;
-                        if (previous > layer.Filter.Adjustments.Count - 1) return;
-                        if (layer.Filter.Adjustments[previous] is ExposureAdjustment adjustment2)
-                        {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment2.Exposure = previous1;
-                        }
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    adjustment.Exposure = 0.0f;
-
-                    //History
-                    this.ViewModel.HistoryPush(history);
-
-                    this.ViewModel.Invalidate();//Invalidate
-                }
-            }
+                historyTitle: "Set exposure adjustment",
+                getHistory: (tAdjustment) => tAdjustment.Exposure,
+                setHistory: (tAdjustment, previous) => tAdjustment.Exposure = previous
+            );
         }
         /// <summary>
         /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
         /// </summary>
-        /// <param name="adjustment"> The adjustment. </param>
-        public void Follow(ExposureAdjustment adjustment)
+        public void Follow()
         {
-            this.ExposureSlider.Value = adjustment.Exposure * 100;
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
+            {
+                ILayer layer = layerage.Self;
+
+                if (layer.Filter.Adjustments[this.Index] is ExposureAdjustment adjustment)
+                {
+                    this.Exposure = adjustment.Exposure;
+                }
+            }
         }
+
     }
 
     /// <summary>
     /// Page of <see cref = "ExposureAdjustment"/>.
     /// </summary>
-    public sealed partial class ExposurePage : IAdjustmentGenericPage<ExposureAdjustment>
+    public sealed partial class ExposurePage : IAdjustmentPage
     {
 
-        private void ConstructExposure()
+        //Exposure
+        private void ConstructExposure1()
         {
-            this.ExposureSlider.Value = 0;
-            this.ExposureSlider.Minimum = -200;
-            this.ExposureSlider.Maximum = 200;
-
-            this.ExposureSlider.SliderBrush = this.ExposureBrush;
-
-            this.ExposureSlider.ValueChangeStarted += (s, value) =>
+            this.ExposurePicker.Unit = null;
+            this.ExposurePicker.Minimum = -200;
+            this.ExposurePicker.Maximum = 200;
+            this.ExposurePicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float exposure = (float)value / 100.0f;
+                this.Exposure = exposure;
 
-                    if (this.Adjustment is ExposureAdjustment adjustment)
-                    {
-                        adjustment.CacheExposure();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, ExposureAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Exposure = exposure,
+
+                    historyTitle: "Set exposure adjustment exposure",
+                    getHistory: (tAdjustment) => tAdjustment.Exposure,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Exposure = previous
+                );
             };
+        }
+        private void ConstructExposure2()
+        {
+            this.ExposureSlider.Minimum = -2.0d;
+            this.ExposureSlider.Maximum = 2.0d;
+            this.ExposureSlider.SliderBrush = this.ExposureBrush;
+            this.ExposureSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<ExposureAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheExposure());
             this.ExposureSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float exposure = (float)value;
+                this.Exposure = exposure;
 
-                    if (this.Adjustment is ExposureAdjustment adjustment)
-                    {
-                        float exposure = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.Exposure = exposure;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<ExposureAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.Exposure = exposure);
             };
             this.ExposureSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float exposure = (float)value;
+                this.Exposure = exposure;
 
-                    if (this.Adjustment is ExposureAdjustment adjustment)
-                    {
-                        float exposure = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, ExposureAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Exposure = exposure,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set exposure adjustment exposure");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingExposure;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is ExposureAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.Exposure = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.Exposure = exposure;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set exposure adjustment exposure",
+                    getHistory: (tAdjustment) => tAdjustment.StartingExposure,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Exposure = previous
+                );
             };
         }
 

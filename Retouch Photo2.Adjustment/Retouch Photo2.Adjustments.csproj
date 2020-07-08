@@ -109,7 +109,6 @@
   <ItemGroup>
     <Compile Include="IAdjustment.cs" />
     <Compile Include="AdjustmentType.cs" />
-    <Compile Include="IAdjustmentGenericPage.cs" />
     <Compile Include="IAdjustmentPage.cs" />
     <Compile Include="Icons\BrightnessIcon.xaml.cs">
       <DependentUpon>BrightnessIcon.xaml</DependentUpon>

@@ -5,7 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPickers="using:HSVColorPickers"
-    mc:Ignorable="d"
+    mc:Ignorable="d"              
+    MinHeight="165" 
+    MaxHeight="300"
     d:DesignHeight="400"
     d:DesignWidth="200"
     >
@@ -29,10 +31,14 @@
     </Page.Resources>
     
 
-    <StackPanel >
+    <StackPanel>
 
         <!--Contrast-->
-        <TextBlock x:Name="ContrastTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <RelativePanel>
+            <TextBlock x:Name="ContrastTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="ContrastPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+        </RelativePanel>
         <hsvColorPickers:TouchSlider x:Name="ContrastSlider" Margin="2,0"/>
 
     </StackPanel>

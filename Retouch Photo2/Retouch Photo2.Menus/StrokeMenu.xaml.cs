@@ -1,8 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.Stroke;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -90,15 +87,11 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        
-        CanvasStrokeStyle StrokeStyle { get => this.SelectionViewModel.StrokeStyle; set => this.SelectionViewModel.StrokeStyle = value; }
-        
+
 
         //@Converter
-        private CanvasDashStyle DashConverter(CanvasStrokeStyle strokeStyle) => strokeStyle == null ? CanvasDashStyle.Solid : strokeStyle.DashStyle;
-        private CanvasCapStyle CapConverter(CanvasStrokeStyle strokeStyle) => strokeStyle == null ? CanvasCapStyle.Flat : strokeStyle.DashCap;
-        private CanvasLineJoin JoinConverter(CanvasStrokeStyle strokeStyle) => strokeStyle == null ? CanvasLineJoin.Miter : strokeStyle.LineJoin;
-        private float OffsetConverter(CanvasStrokeStyle strokeStyle) => strokeStyle == null ? 0 : strokeStyle.DashOffset;
+        private int StrokeWidthToNumberConverter(float strokeWidth) => (int)(strokeWidth * 10.0f);
+        private int StyleOffsetToNumberConverter(float styleOffset) => (int)(styleOffset * 10.0f);
 
 
         #region DependencyProperty
@@ -127,10 +120,12 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructStrings();
          
             this.ConstructDash();
-            this.ConstructWidth();
+            this.ConstructWidth1();
+            this.ConstructWidth2();
             this.ConstructCap();
             this.ConstructJoin();
-            this.ConstructOffset();
+            this.ConstructOffset1();
+            this.ConstructOffset2();
         }
     }
 
@@ -164,199 +159,84 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructDash()
         {
             this.DashSegmented.DashChanged += (s, dash) =>
-            {                        
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set stroke style");
+            {
+                CanvasDashStyle strokeStyleDash = dash;
+                this.SelectionViewModel.StrokeStyleDash = strokeStyleDash;
 
-                //Selection
-                CanvasStrokeStyle strokeStyle = this.StrokeStyle.Clone();
-                strokeStyle.DashStyle = dash;
-                this.StrokeStyle = strokeStyle;
-                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Style.StrokeStyle.Clone();
-                    history.UndoAction += () =>
+                this.MethodViewModel.ILayerChanged<CanvasDashStyle>
+                (
+                    set: (layer) =>
                     {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Style.StrokeStyle = previous.Clone();
-                    };
+                        layer.Style.StrokeStyle.DashStyle = strokeStyleDash;
+                        this.SelectionViewModel.StandStyleLayer = layer;
+                    },
 
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Style.StrokeStyle.DashStyle = dash;
-
-                    this.SelectionViewModel.StandStyleLayerage = layerage;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set stroke style dash",
+                    getHistory: (layer) => layer.Style.StrokeStyle.DashStyle,
+                    setHistory: (layer, previous) => layer.Style.StrokeStyle.DashStyle = previous
+                );
             };
         }
 
 
         //Width
-        private void ConstructWidth()
+        private void ConstructWidth1()
         {
-            this.WidthPicker.Minimum = 0.0d;
-            this.WidthPicker.Maximum = 128.0d;
-            this.WidthPicker.ValueChangeStarted += (s, value) =>
-            {             
-                //Selection
-                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    layer.Style.CacheStrokeWidth();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.WidthPicker.ValueChangeDelta += (s, value) =>
+            this.WidthPicker.Unit = null;
+            this.WidthPicker.Minimum = 0;
+            this.WidthPicker.Maximum = 1280;
+            this.WidthPicker.ValueChange += (s, value) =>
             {
-                float width = (float)value;
+                float strokeWidth = (float)value / 10.0f;
+                this.SelectionViewModel.StrokeWidth = strokeWidth;
 
-                //Selection
-                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Style.StrokeWidth = width;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.WidthPicker.ValueChangeCompleted += (s, value) =>
-            {
-                float width = (float)value;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set stroke width");
-
-                //Selection
-                this.SelectionViewModel.StrokeWidth = width;
-                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Style.StartingStrokeWidth;
-                    history.UndoAction += () =>
+                this.MethodViewModel.ILayerChanged<float>
+                (
+                    set: (layer) =>
                     {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Style.StrokeWidth = previous;
-                    };                    
+                        layer.Style.StrokeWidth = strokeWidth;
+                        this.SelectionViewModel.StandStyleLayer = layer;
+                    },
 
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Style.StrokeWidth = width;
+                    historyTitle: "Set opacity",
+                    getHistory: (layer) => layer.Style.StrokeWidth,
+                    setHistory: (layer, previous) => layer.Style.StrokeWidth = previous
+                );
+            };
+        }
 
-                    this.SelectionViewModel.StandStyleLayerage = layerage;
-                });
+        private void ConstructWidth2()
+        {
+            this.WidthSlider.Minimum = 0.0d;
+            this.WidthSlider.Maximum = 128.0d;
+            this.WidthSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.ILayerChangeStarted(cache: (layer) => layer.Style.CacheStrokeWidth());
+            this.WidthSlider.ValueChangeDelta += (s, value) =>
+            {
+                float strokeWidth = (float)value;
+                this.SelectionViewModel.StrokeWidth = strokeWidth;
 
-                //History
-                this.ViewModel.HistoryPush(history);
+                this.MethodViewModel.ILayerChangeDelta(set: (layer) => layer.Style.StrokeWidth = strokeWidth);
+            };
+            this.WidthSlider.ValueChangeCompleted += (s, value) =>
+            {
+                float strokeWidth = (float)value;
+                this.SelectionViewModel.StrokeWidth = strokeWidth;
 
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+                this.MethodViewModel.ILayerChangeCompleted<float>
+                (
+                    set: (layer) =>
+                    {
+                        layer.Style.StrokeWidth = strokeWidth;
+                        this.SelectionViewModel.StandStyleLayer = layer;
+                    },
+
+                    historyTitle: "Set stroke width",
+                    getHistory: (layer) => layer.Style.StartingStrokeWidth,
+                    setHistory: (layer, previous) => layer.Style.StrokeWidth = previous
+                );
             };
         }
         
-
-        //Offset
-        private void ConstructOffset()
-        {
-            this.OffsetPicker.Minimum = 0.0d;
-            this.OffsetPicker.Maximum = 10.0d;
-            this.OffsetPicker.ValueChangeStarted += (s, value) =>
-            {             
-                //Selection
-                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    layer.Style.CacheStrokeStyle();
-                });
-
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            };
-            this.OffsetPicker.ValueChangeDelta += (s, value) =>
-            {
-                float offset = (float)value;
-
-                //Selection
-                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Style.StrokeStyle.DashOffset = offset;
-                });
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.OffsetPicker.ValueChangeCompleted += (s, value) =>
-            {
-                float offset = (float)value;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set stroke style");
-                
-                //Selection
-                CanvasStrokeStyle strokeStyle = this.StrokeStyle.Clone();
-                strokeStyle.DashOffset = offset;
-                this.StrokeStyle = strokeStyle;
-                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Style.StartingStrokeStyle.Clone();
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Style.StrokeStyle = previous.Clone();
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Style.StrokeStyle.DashOffset = offset;
-
-                    this.SelectionViewModel.StandStyleLayerage = layerage;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-            };
-        }
         
 
         //Cap
@@ -364,45 +244,23 @@ namespace Retouch_Photo2.Menus.Models
         {       
             this.CapSegmented.CapChanged += (s, cap) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set stroke style");
+                CanvasCapStyle strokeStyleCap = cap;
+                this.SelectionViewModel.StrokeStyleCap = strokeStyleCap;
 
-                //Selection
-                CanvasStrokeStyle strokeStyle = this.StrokeStyle.Clone();
-                strokeStyle.DashCap = cap;
-                strokeStyle.StartCap = cap;
-                strokeStyle.EndCap = cap;
-                this.StrokeStyle = strokeStyle;
-                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Style.StrokeStyle.Clone();
-                    history.UndoAction += () =>
+                this.MethodViewModel.ILayerChanged<CanvasCapStyle>
+                (
+                    set: (layer) =>
                     {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Style.StrokeStyle = previous.Clone();
-                    };
+                        layer.Style.StrokeStyle.DashCap = strokeStyleCap;
+                        layer.Style.StrokeStyle.StartCap = strokeStyleCap;
+                        layer.Style.StrokeStyle.EndCap = strokeStyleCap;
+                        this.SelectionViewModel.StandStyleLayer = layer;
+                    },
 
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Style.StrokeStyle.DashCap = cap;
-                    layer.Style.StrokeStyle.StartCap = cap;
-                    layer.Style.StrokeStyle.EndCap = cap;
-
-                    this.SelectionViewModel.StandStyleLayerage = layerage;
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
+                    historyTitle: "Set stroke style cap",
+                    getHistory: (layer) => layer.Style.StrokeStyle.DashCap,
+                    setHistory: (layer, previous) => layer.Style.StrokeStyle.DashCap = previous
+                );
             };
         }
 
@@ -412,38 +270,80 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.JoinSegmented.JoinChanged += (s, join) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set stroke style");
+                CanvasLineJoin strokeStyleJoin = join;
+                this.SelectionViewModel.StrokeStyleJoin = strokeStyleJoin;
 
-                //Selection
-                CanvasStrokeStyle strokeStyle = this.StrokeStyle.Clone();
-                strokeStyle.LineJoin = join;
-                this.StrokeStyle = strokeStyle;
-                this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    //History
-                    var previous = layer.Style.StrokeStyle.Clone();
-                    history.UndoAction += () =>
+                this.MethodViewModel.ILayerChanged<CanvasLineJoin>
+                (
+                    set: (layer) =>
                     {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Style.StrokeStyle = previous.Clone();
-                    };
+                        layer.Style.StrokeStyle.LineJoin = strokeStyleJoin;
+                        this.SelectionViewModel.StandStyleLayer = layer;
+                    },
 
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    layer.Style.StrokeStyle.LineJoin = join;
+                    historyTitle: "Set stroke style join",
+                    getHistory: (layer) => layer.Style.StrokeStyle.LineJoin,
+                    setHistory: (layer, previous) => layer.Style.StrokeStyle.LineJoin = previous
+                );
+            };
+        }
 
-                    this.SelectionViewModel.StandStyleLayerage = layerage;
-                });
 
-                this.ViewModel.Invalidate();//Invalidate
+        //Offset
+        private void ConstructOffset1()
+        {
+            this.OffsetPicker.Unit = null;
+            this.OffsetPicker.Minimum = 0;
+            this.OffsetPicker.Maximum = 100;
+            this.OffsetPicker.ValueChange += (s, value) =>
+            {
+                float strokeOffset = (float)value / 10.0f;
+                this.SelectionViewModel.StrokeStyleOffset = strokeOffset;
+
+                this.MethodViewModel.ILayerChanged<float>
+                (
+                    set: (layer) =>
+                    {
+                        layer.Style.StrokeStyle.DashOffset = strokeOffset;
+                        this.SelectionViewModel.StandStyleLayer = layer;
+                    },
+
+                    historyTitle: "Set stroke style offset",
+                    getHistory: (layer) => layer.Style.StrokeStyle.DashOffset,
+                    setHistory: (layer, previous) => layer.Style.StrokeStyle.DashOffset = previous
+                );
+            };
+        }
+
+        private void ConstructOffset2()
+        {
+            this.OffsetSlider.Minimum = 0.0d;
+            this.OffsetSlider.Maximum = 10.0d;
+            this.OffsetSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.ILayerChangeStarted(cache: (layer) => layer.Style.CacheStrokeStyle());
+            this.OffsetSlider.ValueChangeDelta += (s, value) =>
+            {
+                float strokeOffset = (float)value;
+                this.SelectionViewModel.StrokeStyleOffset = strokeOffset;
+
+                this.MethodViewModel.ILayerChangeDelta(set: (layer) => layer.Style.StrokeStyle.DashOffset = strokeOffset);
+            };
+            this.OffsetSlider.ValueChangeCompleted += (s, value) =>
+            {
+                float strokeOffset = (float)value;
+                this.SelectionViewModel.StrokeStyleOffset = strokeOffset;
+
+                this.MethodViewModel.ILayerChangeCompleted<CanvasStrokeStyle>
+                (
+                    set: (layer) =>
+                    {
+                        layer.Style.StrokeStyle.DashOffset = strokeOffset;
+                        this.SelectionViewModel.StandStyleLayer = layer;
+                    },
+
+                    historyTitle: "Set stroke width",
+                    getHistory: (layer) => layer.Style.StartingStrokeStyle,
+                    setHistory: (layer, previous) => layer.Style.StrokeStyle = previous
+                );
             };
         }
 

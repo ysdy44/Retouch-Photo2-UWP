@@ -1,6 +1,5 @@
 ﻿using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
-using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
@@ -11,17 +10,24 @@ namespace Retouch_Photo2.Adjustments.Pages
     /// <summary>
     /// Page of <see cref = "ContrastAdjustment"/>.
     /// </summary>
-    public sealed partial class ContrastPage : IAdjustmentGenericPage<ContrastAdjustment>
+    public sealed partial class ContrastPage : IAdjustmentPage
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
 
 
-        //@Generic
-        /// <summary> Gets IAdjustment's adjustment. </summary>
-        public ContrastAdjustment Adjustment { get; set; }
+        //@Content
+        private float Contrast
+        {
+            set
+            {
+                this.ContrastPicker.Value = (int)(value * 100.0f);
+                this.ContrastSlider.Value = value;
+            }
+        }
 
 
         //@Construct
@@ -33,14 +39,15 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructContrast();
+            this.ConstructContrast1();
+            this.ConstructContrast2();
         }
     }
 
     /// <summary>
     /// Page of <see cref = "ContrastAdjustment"/>.
     /// </summary>
-    public sealed partial class ContrastPage : IAdjustmentGenericPage<ContrastAdjustment>
+    public sealed partial class ContrastPage : IAdjustmentPage
     {
         //Strings
         private void ConstructStrings()
@@ -66,148 +73,99 @@ namespace Retouch_Photo2.Adjustments.Pages
         public IAdjustment GetNewAdjustment() => new ContrastAdjustment();
 
 
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
+
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.
         /// </summary>
         public void Reset()
         {
-            this.ContrastSlider.Value = 0;
+            this.Contrast = 0.0f;
 
-            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-            {
-                ILayer layer = layerage.Self;
+            this.MethodViewModel.TAdjustmentChanged<float, ContrastAdjustment>
+            (
+                index: this.Index,
+                set: (tAdjustment) => tAdjustment.Contrast = 0,
 
-                if (this.Adjustment is ContrastAdjustment adjustment)
-                {
-                    //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set contrast adjustment");
-
-                    var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                    var previous1 = adjustment.Contrast;
-                    history.UndoAction += () =>
-                    {
-                        if (previous < 0) return;
-                        if (previous > layer.Filter.Adjustments.Count - 1) return;
-                        if (layer.Filter.Adjustments[previous] is ContrastAdjustment adjustment2)
-                        {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            adjustment2.Contrast = previous1;
-                        }
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    adjustment.Contrast = 0.0f;
-
-                    //History
-                    this.ViewModel.HistoryPush(history);
-
-                    this.ViewModel.Invalidate();//Invalidate
-                }
-            }
+                historyTitle: "Set contrast adjustment",
+                getHistory: (tAdjustment) => tAdjustment.Contrast,
+                setHistory: (tAdjustment, previous) => tAdjustment.Contrast = previous
+            );
         }
         /// <summary>
         /// <see cref="IAdjustmentPage"/>'s value follows the <see cref="IAdjustment"/>.
         /// </summary>
-        /// <param name="adjustment"> The adjustment. </param>
-        public void Follow(ContrastAdjustment adjustment)
+        public void Follow()
         {
-            this.ContrastSlider.Value = adjustment.Contrast * 100;
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
+            {
+                ILayer layer = layerage.Self;
+
+                if (layer.Filter.Adjustments[this.Index] is ContrastAdjustment adjustment)
+                {
+                    this.Contrast = adjustment.Contrast;
+                }
+            }
         }
+
     }
 
     /// <summary>
     /// Page of <see cref = "ContrastAdjustment"/>.
     /// </summary>
-    public sealed partial class ContrastPage : IAdjustmentGenericPage<ContrastAdjustment>
+    public sealed partial class ContrastPage : IAdjustmentPage
     {
 
-        private void ConstructContrast()
+        //Contrast
+        private void ConstructContrast1()
         {
-            this.ContrastSlider.Value = 0;
-            this.ContrastSlider.Minimum = -100;
-            this.ContrastSlider.Maximum = 100;
-
-            this.ContrastSlider.SliderBrush = this.ContrastBrush;
-
-            this.ContrastSlider.ValueChangeStarted += (s, value) =>
+            this.ContrastPicker.Unit = null;
+            this.ContrastPicker.Minimum = -100;
+            this.ContrastPicker.Maximum = 100;
+            this.ContrastPicker.ValueChange += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float contrast = (float)value / 100.0f;
+                this.Contrast = contrast;
 
-                    if (this.Adjustment is ContrastAdjustment adjustment)
-                    {
-                        adjustment.CacheContrast();
-                        this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChanged<float, ContrastAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Contrast = contrast,
+
+                    historyTitle: "Set contrast adjustment contrast",
+                    getHistory: (tAdjustment) => tAdjustment.Contrast,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Contrast = previous
+                );
             };
+        }
+
+        private void ConstructContrast2()
+        {
+            this.ContrastSlider.Minimum = -1.0d;
+            this.ContrastSlider.Maximum = 1.0d;
+            this.ContrastSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<ContrastAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheContrast());
             this.ContrastSlider.ValueChangeDelta += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float contrast = (float)value;
+                this.Contrast = contrast;
 
-                    if (this.Adjustment is ContrastAdjustment adjustment)
-                    {
-                        float contrast = (float)value / 100.0f;
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layerage.RefactoringParentsRender();
-                        adjustment.Contrast = contrast;
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
-                }
+                this.MethodViewModel.TAdjustmentChangeDelta<ContrastAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.Contrast = contrast);
             };
             this.ContrastSlider.ValueChangeCompleted += (s, value) =>
             {
-                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                {
-                    ILayer layer = layerage.Self;
+                float contrast = (float)value;
+                this.Contrast = contrast;
 
-                    if (this.Adjustment is ContrastAdjustment adjustment)
-                    {
-                        float contrast = (float)value / 100.0f;
+                this.MethodViewModel.TAdjustmentChangeCompleted<float, ContrastAdjustment>
+                (
+                    index: this.Index,
+                    set: (tAdjustment) => tAdjustment.Contrast = contrast,
 
-                        //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set contrast adjustment contrast");
-
-                        var previous = layer.Filter.Adjustments.IndexOf(adjustment);
-                        var previous1 = adjustment.StartingContrast;
-                        history.UndoAction += () =>
-                        {
-                            if (previous < 0) return;
-                            if (previous > layer.Filter.Adjustments.Count - 1) return;
-                            if (layer.Filter.Adjustments[previous] is ContrastAdjustment adjustment2)
-                            {
-                                //Refactoring
-                                layer.IsRefactoringRender = true;
-                                layer.IsRefactoringIconRender = true;
-                                adjustment2.Contrast = previous1;
-                            }
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        adjustment.Contrast = contrast;
-
-                        //History
-                        this.ViewModel.HistoryPush(history);
-
-                        this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-                    }
-                }
+                    historyTitle: "Set contrast adjustment contrast",
+                    getHistory: (tAdjustment) => tAdjustment.StartingContrast,
+                    setHistory: (tAdjustment, previous) => tAdjustment.Contrast = previous
+                );
             };
         }
 

@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -25,7 +24,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Converter
-        private int SweepAngleNumberConverter(float sweepAngle) => (int)(sweepAngle / FanKit.Math.Pi * 180f);
+        private int SweepAngleToNumberConverter(float sweepAngle) => (int)(sweepAngle / FanKit.Math.Pi * 180f);
 
 
         //@Construct
@@ -62,7 +61,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.Button.Title = resource.GetString("/ToolsSecond/GeometryPie");
 
-            this.SweepAngleTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryPie_SweepAngle");
+            this.SweepAngleButton.CenterContent = resource.GetString("/ToolsSecond/GeometryPie_SweepAngle");
 
             this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
         }
@@ -106,17 +105,17 @@ namespace Retouch_Photo2.Tools.Models
         //SweepAngle
         private void ConstructSweepAngle1()
         {
-            this.SweepAngleTouchbarPicker.Unit = "º";
-            this.SweepAngleTouchbarPicker.Minimum = 0;
-            this.SweepAngleTouchbarPicker.Maximum = 360;
-            this.SweepAngleTouchbarPicker.ValueChange += (sender, value) =>
+            this.SweepAnglePicker.Unit = "º";
+            this.SweepAnglePicker.Minimum = 0;
+            this.SweepAnglePicker.Maximum = 360;
+            this.SweepAnglePicker.ValueChange += (sender, value) =>
             {
                 float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
+                this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle;
                 
                 this.MethodViewModel.TLayerChanged<float, GeometryPieLayer>
                 (
                     layerType: LayerType.GeometryPie,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle,
                     set: (tLayer) => tLayer.SweepAngle = sweepAngle,
 
                     historyTitle: "Set pie layer sweep angle",
@@ -128,26 +127,24 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructSweepAngle2()
         {
-            this.SweepAngleTouchbarSlider.Minimum = 0.0d;
-            this.SweepAngleTouchbarSlider.Maximum = FanKit.Math.PiTwice;
-            this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryPieLayer>
-            (
-                layerType: LayerType.GeometryPie,
-                cache: (tLayer) => tLayer.CacheSweepAngle()
-            );
-            this.SweepAngleTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryPieLayer>
-            (
-                layerType: LayerType.GeometryPie,
-                set: (tLayer) => tLayer.SweepAngle = (float)value
-            );
-            this.SweepAngleTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.SweepAngleSlider.Minimum = 0.0d;
+            this.SweepAngleSlider.Maximum = FanKit.Math.PiTwice;
+            this.SweepAngleSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryPieLayer>(layerType: LayerType.GeometryPie, cache: (tLayer) => tLayer.CacheSweepAngle());
+            this.SweepAngleSlider.ValueChangeDelta += (sender, value) =>
             {
                 float sweepAngle = (float)value;
+                this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryPieLayer>(layerType: LayerType.GeometryPie, set: (tLayer) => tLayer.SweepAngle = sweepAngle);
+            };
+            this.SweepAngleSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float sweepAngle = (float)value;
+                this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryPieLayer>
                 (
                     layerType: LayerType.GeometryPie,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle,
                     set: (tLayer) => tLayer.SweepAngle = sweepAngle,
 
                     historyTitle: "Set pie layer sweep angle",

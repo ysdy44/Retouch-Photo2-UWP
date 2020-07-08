@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -22,10 +21,6 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-
-
-        //@Converter
-        private double PointsValueConverter(float points) => points;
 
 
         //@Construct
@@ -62,7 +57,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.Button.Title = resource.GetString("/ToolsSecond/GeometryPentagon");
 
-            this.PointsTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryPentagon_Points");
+            this.PointsButton.CenterContent = resource.GetString("/ToolsSecond/GeometryPentagon_Points");
 
             this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
         }
@@ -106,20 +101,21 @@ namespace Retouch_Photo2.Tools.Models
         //Points
         private void ConstructPoints1()
         {
-            this.PointsTouchbarPicker.Minimum = 3;
-            this.PointsTouchbarPicker.Maximum = 36;
-            this.PointsTouchbarPicker.ValueChange += (sender, value) =>
+            this.PointsPicker.Unit = null;
+            this.PointsPicker.Minimum = 3;
+            this.PointsPicker.Maximum = 36;
+            this.PointsPicker.ValueChange += (sender, value) =>
             {
                 int points = (int)value;
+                this.SelectionViewModel.GeometryPentagonPoints = points;
 
                 this.MethodViewModel.TLayerChanged<int, GeometryPentagonLayer>
                 (
                     layerType: LayerType.GeometryPentagon,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryPentagonPoints = points,
                     set: (tLayer) => tLayer.Points = points,
 
                     historyTitle: "Set pentagon layer points",
-                    getHistory: (tLayer) => tLayer.Points = points,
+                    getHistory: (tLayer) => tLayer.Points,
                     setHistory: (tLayer, previous) => tLayer.Points = previous
                 );
             };
@@ -127,26 +123,24 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructPoints2()
         {
-            this.PointsTouchbarSlider.Minimum = 3;
-            this.PointsTouchbarSlider.Maximum = 36;
-            this.PointsTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryPentagonLayer>
-            (
-                layerType: LayerType.GeometryPentagon,
-                cache: (tLayer) => tLayer.CachePoints()
-            );
-            this.PointsTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryPentagonLayer>
-            (
-                layerType: LayerType.GeometryPentagon,
-                set: (tLayer) => tLayer.Points = (int)value
-            );
-            this.PointsTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.PointsSlider.Minimum = 3;
+            this.PointsSlider.Maximum = 36;
+            this.PointsSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryPentagonLayer>(layerType: LayerType.GeometryPentagon, cache: (tLayer) => tLayer.CachePoints());
+            this.PointsSlider.ValueChangeDelta += (sender, value) =>
             {
                 int points = (int)value;
+                this.SelectionViewModel.GeometryPentagonPoints = points;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryPentagonLayer>(layerType: LayerType.GeometryPentagon, set: (tLayer) => tLayer.Points = points);
+            };
+            this.PointsSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                int points = (int)value;
+                this.SelectionViewModel.GeometryPentagonPoints = points;
 
                 this.MethodViewModel.TLayerChangeCompleted<int, GeometryPentagonLayer>
                 (
                     layerType: LayerType.GeometryPentagon,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryPentagonPoints = points,
                     set: (tLayer) => tLayer.Points = points,
 
                     historyTitle: "Set pentagon layer points",

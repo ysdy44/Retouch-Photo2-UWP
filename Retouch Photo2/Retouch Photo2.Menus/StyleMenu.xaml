@@ -5,40 +5,40 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:styles="using:Retouch_Photo2.Styles"
-    mc:Ignorable="d"
+    mc:Ignorable="d"                
+    MinHeight="165" 
+    MaxHeight="300"
     d:DesignWidth="200"
     d:DesignHeight="400"
     >
 
-    <Border Margin="1,2" MinHeight="165" MaxHeight="300">
-        <GridView x:Name="StylesGridView" SelectionMode="None" IsItemClickEnabled="True" >
+    <GridView x:Name="StylesGridView" SelectionMode="None" IsItemClickEnabled="True" >
 
-            <GridView.ItemContainerStyle>
-                <Style TargetType="GridViewItem">
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="Width" Value="70"/>
-                    <Setter Property="Height" Value="70"/>
-                    <Setter Property="Margin" Value="1"/>
-                    <Setter Property="Padding" Value="4,0"/>
-                    <Setter Property="HorizontalAlignment" Value="Center"/>
-                    <Setter Property="VerticalContentAlignment" Value="Center"/>
-                </Style>
-            </GridView.ItemContainerStyle>
+        <GridView.ItemContainerStyle>
+            <Style TargetType="GridViewItem">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Width" Value="70"/>
+                <Setter Property="Height" Value="70"/>
+                <Setter Property="Margin" Value="1"/>
+                <Setter Property="Padding" Value="4,0"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+        </GridView.ItemContainerStyle>
 
-            <GridView.ItemTemplate>
-                <DataTemplate x:DataType="styles:Style">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="36"/>
-                        </Grid.RowDefinitions>
-                        <styles:ShowControl Style2="{x:Bind}" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{x:Bind Name}" Grid.Row="1" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center"/>
-                    </Grid>
-                </DataTemplate>
-            </GridView.ItemTemplate>
+        <GridView.ItemTemplate>
+            <DataTemplate x:DataType="styles:Style">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="36"/>
+                    </Grid.RowDefinitions>
+                    <styles:ShowControl Style2="{x:Bind}" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{x:Bind Name}" Grid.Row="1" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center"/>
+                </Grid>
+            </DataTemplate>
+        </GridView.ItemTemplate>
 
-        </GridView>
-    </Border>
+    </GridView>
 
 </UserControl>

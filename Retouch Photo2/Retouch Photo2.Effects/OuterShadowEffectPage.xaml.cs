@@ -21,6 +21,51 @@ namespace Retouch_Photo2.Effects.Models
         ViewModel MethodViewModel => App.MethodViewModel;
         
 
+        //@Content
+        private float Radius
+        {
+            set
+            {
+                this.RadiusPicker.Value = (int)value;
+                this.RadiusSlider.Value = value;
+            }
+        }
+        private float Opacity2
+        {
+            set
+            {
+                this.OpacityPicker.Value = (int)(value * 100.0f);
+                this.OpacitySlider.Value = value;
+            }
+        }
+        private float Offset
+        {
+            set
+            {
+                this.OffsetPicker.Value = (int)value;
+                this.OffsetSlider.Value = value;
+            }
+        }
+        private float Angle
+        {
+            set
+            {
+                this.AnglePicker.Value = (int)(value * 180.0f / FanKit.Math.Pi);
+                this.AnglePicker2.Radians = value;
+            }
+        }
+        /// <summary> Color </summary>
+        public Color Color
+        {
+            get => this.SolidColorBrush.Color;
+            set
+            {
+                this.SolidColorBrush.Color = value;
+                this.ColorPicker.Color = value;
+            }
+        }
+
+
         //@Construct
         /// <summary>
         /// Initializes a OuterShadowEffectPage. 
@@ -29,12 +74,21 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.InitializeComponent();
             this.ConstructString();
-            this.ConstructButton();
 
-            this.ConstructOuterShadow_Radius();
-            this.ConstructOuterShadow_Opacity();
-            this.ConstructOuterShadow_Offset();
-            this.ConstructOuterShadow_Angle();
+            this.ConstructIsOn();
+
+            this.ConstructRadius1();
+            this.ConstructRadius2();
+
+            this.ConstructOpacity1();
+            this.ConstructOpacity2();
+
+            this.ConstructOffset1();
+            this.ConstructOffset2();
+
+            this.ConstructAngle1();
+            this.ConstructAngle2();
+
             this.ConstructColor1();
             this.ConstructColor2();
         }
@@ -73,12 +127,11 @@ namespace Retouch_Photo2.Effects.Models
         
         public void Reset()
         {
-            this.RadiusSlider.Value = 12;
-            this.OpacitySlider.Value = 50;
-            this.SolidColorBrush.Color = Windows.UI.Colors.Black;
-
-            this.OffsetSlider.Value = 0;
-            this.AnglePicker.Radians = FanKit.Math.PiOver4;
+            this.Radius  = 12.0f;
+            this.Opacity = 0.5f;
+            this.Offset = 0.0f;
+            this.Angle = FanKit.Math.PiOver4;
+            this.Color = Windows.UI.Colors.Black;
 
             //History
             LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
@@ -90,9 +143,9 @@ namespace Retouch_Photo2.Effects.Models
 
                 var previous1 = layer.Effect.OuterShadow_Radius;
                 var previous2 = layer.Effect.OuterShadow_Opacity;
-                var previous3 = layer.Effect.OuterShadow_Color;
                 var previous4 = layer.Effect.OuterShadow_Offset;
                 var previous5 = layer.Effect.OuterShadow_Angle;
+                var previous3 = layer.Effect.OuterShadow_Color;
                 history.UndoAction += () =>
                 {
                     //Refactoring
@@ -100,9 +153,9 @@ namespace Retouch_Photo2.Effects.Models
                     layer.IsRefactoringIconRender = true;
                     layer.Effect.OuterShadow_Radius = previous1;
                     layer.Effect.OuterShadow_Opacity = previous2;
-                    layer.Effect.OuterShadow_Color = previous3;
                     layer.Effect.OuterShadow_Offset = previous4;
                     layer.Effect.OuterShadow_Angle = previous5;
+                    layer.Effect.OuterShadow_Color = previous3;
                 };
                 
                 //Refactoring
@@ -112,9 +165,9 @@ namespace Retouch_Photo2.Effects.Models
                 layerage.RefactoringParentsIconRender();
                 layer.Effect.OuterShadow_Radius = 12.0f;
                 layer.Effect.OuterShadow_Opacity = 0.5f;
-                layer.Effect.OuterShadow_Color = Windows.UI.Colors.Black;
-                layer.Effect.OuterShadow_Offset = 0;
+                layer.Effect.OuterShadow_Offset = 0.0f;
                 layer.Effect.OuterShadow_Angle = FanKit.Math.PiOver4;
+                layer.Effect.OuterShadow_Color = Windows.UI.Colors.Black;
             });
 
             //History
@@ -128,12 +181,11 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowPage(Effect effect)
         {
-            this.RadiusSlider.Value = effect.OuterShadow_Radius;
-            this.OpacitySlider.Value = effect.OuterShadow_Opacity * 100.0f;
-            this.SolidColorBrush.Color = effect.OuterShadow_Color;
-
-            this.OffsetSlider.Value = effect.OuterShadow_Offset;
-            this.AnglePicker.Radians = effect.OuterShadow_Angle;
+            this.Radius = effect.OuterShadow_Radius;
+            this.Opacity2 = effect.OuterShadow_Opacity;
+            this.Offset = effect.OuterShadow_Offset;
+            this.Angle = effect.OuterShadow_Angle;
+            this.Color = effect.OuterShadow_Color;
         }
     }
 
@@ -144,7 +196,7 @@ namespace Retouch_Photo2.Effects.Models
     {
 
         //IsOn
-        private void ConstructButton()
+        private void ConstructIsOn()
         {
             this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
             (
@@ -157,75 +209,201 @@ namespace Retouch_Photo2.Effects.Models
         }
 
 
-        //OuterShadow_Radius
-        private void ConstructOuterShadow_Radius()
+        //Radius
+        private void ConstructRadius1()
+        {
+            this.RadiusPicker.Unit = null;
+            this.RadiusPicker.Minimum = 0;
+            this.RadiusPicker.Maximum = 100;
+            this.RadiusPicker.ValueChange += (s, value) =>
+            {
+                float radius = (float)value;
+                this.Radius = radius;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.OuterShadow_Radius = radius,
+
+                    historyTitle: "Set effect outer shadow radius",
+                    getHistory: (effect) => effect.OuterShadow_Radius,
+                    setHistory: (effect, previous) => effect.OuterShadow_Radius = previous
+                );
+            };
+        }
+
+        private void ConstructRadius2()
         {
             this.RadiusSlider.Minimum = 0.0d;
             this.RadiusSlider.Maximum = 100.0d;
             this.RadiusSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
-            this.RadiusSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Radius = (float)value);
-            this.RadiusSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
-            (
-                set: (effect) => effect.OuterShadow_Radius = (float)value,
+            this.RadiusSlider.ValueChangeDelta += (s, value) =>
+            {
+                float radius = (float)value;
+                this.Radius = radius;
 
-                historyTitle: "Set effect outer shadow radius",
-                getHistory: (effect) => effect.StartingOuterShadow_Radius,
-                setHistory: (effect, previous) => effect.OuterShadow_Radius = previous
-            );
+                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Radius = radius);
+            };
+            this.RadiusSlider.ValueChangeCompleted += (s, value) =>
+            {
+                float radius = (float)value;
+                this.Radius = radius;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.OuterShadow_Radius = radius,
+
+                    historyTitle: "Set effect outer shadow radius",
+                    getHistory: (effect) => effect.StartingOuterShadow_Radius,
+                    setHistory: (effect, previous) => effect.OuterShadow_Radius = previous
+                );
+            };
         }
 
 
-        //OuterShadow_Opacity
-        private void ConstructOuterShadow_Opacity()
+        //Opacity
+        private void ConstructOpacity1()
+        {
+            this.OpacityPicker.Unit = null;
+            this.OpacityPicker.Minimum = 0;
+            this.OpacityPicker.Maximum = 100;
+            this.OpacityPicker.ValueChange += (s, value) =>
+            {
+                float opacity = (float)value / 100.0f;
+                this.Opacity2 = opacity;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.OuterShadow_Opacity = (float)value,
+
+                    historyTitle: "Set effect outer shadow opacity",
+                    getHistory: (effect) => effect.OuterShadow_Opacity,
+                    setHistory: (effect, previous) => effect.OuterShadow_Opacity = previous
+                );
+            };
+        }
+
+        private void ConstructOpacity2()
         {
             this.OpacitySlider.Minimum = 0.0d;
             this.OpacitySlider.Maximum = 1.0d;
             this.OpacitySlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
-            this.OpacitySlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Opacity = (float)value / 100.0f);
-            this.OpacitySlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
-            (
-                set: (effect) => effect.OuterShadow_Opacity = (float)value,
+            this.OpacitySlider.ValueChangeDelta += (s, value) =>
+            {
+                float opacity = (float)value;
+                this.Opacity2 = opacity;
 
-                historyTitle: "Set effect outer shadow opacity",
-                getHistory: (effect) => effect.StartingOuterShadow_Opacity,
-                setHistory: (effect, previous) => effect.OuterShadow_Opacity = previous
-            );
+                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Opacity = opacity);
+            };            
+            this.OpacitySlider.ValueChangeCompleted += (s, value) =>
+            {
+                float opacity = (float)value;
+                this.Opacity2 = opacity;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.OuterShadow_Opacity = (float)value,
+
+                    historyTitle: "Set effect outer shadow opacity",
+                    getHistory: (effect) => effect.StartingOuterShadow_Opacity,
+                    setHistory: (effect, previous) => effect.OuterShadow_Opacity = previous
+                );
+            };
         }
 
 
-        //OuterShadow_Offset
-        private void ConstructOuterShadow_Offset()
+        //Offset
+        private void ConstructOffset1()
+        {
+            this.OffsetPicker.Unit = null;
+            this.OffsetPicker.Minimum = 0;
+            this.OffsetPicker.Maximum = 100;
+            this.OffsetPicker.ValueChange += (s, value) =>
+            {
+                float offset = (float)value;
+                this.Offset = offset;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.OuterShadow_Offset = (float)value,
+
+                    historyTitle: "Set effect outer shadow offset",
+                    getHistory: (effect) => effect.OuterShadow_Offset,
+                    setHistory: (effect, previous) => effect.OuterShadow_Offset = previous
+                );
+            };
+        }
+
+        private void ConstructOffset2()
         {
             this.OffsetSlider.Minimum = 0.0d;
             this.OffsetSlider.Maximum = 100.0d;
             this.OffsetSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
-            this.OffsetSlider.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Offset = (float)value);
-            this.OffsetSlider.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
-            (
-                set: (effect) => effect.OuterShadow_Offset = (float)value,
+            this.OffsetSlider.ValueChangeDelta += (s, value) =>
+            {
+                float offset = (float)value;
+                this.Offset = offset;
 
-                historyTitle: "Set effect outer shadow offset",
-                getHistory: (effect) => effect.StartingOuterShadow_Offset,
-                setHistory: (effect, previous) => effect.OuterShadow_Offset = previous
-            );
+                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Offset = offset);
+            };
+            this.OffsetSlider.ValueChangeCompleted += (s, value) =>
+            {
+                float offset = (float)value;
+                this.Offset = offset;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.OuterShadow_Offset = offset,
+
+                    historyTitle: "Set effect outer shadow offset",
+                    getHistory: (effect) => effect.StartingOuterShadow_Offset,
+                    setHistory: (effect, previous) => effect.OuterShadow_Offset = previous
+                );
+            };
         }
 
 
         //Angle
-        private void ConstructOuterShadow_Angle()
+        private void ConstructAngle1()
         {
-            //this.AnglePicker.Minimum = 0;
-            //this.AnglePicker.Maximum = FanKit.Math.PiTwice;
-            this.AnglePicker.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
-            this.AnglePicker.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Angle = (float)value);
-            this.AnglePicker.ValueChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<float>
-            (
-                set: (effect) => effect.OuterShadow_Angle = (float)value,
+            this.AnglePicker.Unit = null;
+            this.AnglePicker.Minimum = 0;
+            this.AnglePicker.Maximum = 100;
+            this.AnglePicker.ValueChange += (s, value) =>
+            {
+                float radians = (float)value * 180 / FanKit.Math.Pi;
+                this.Angle = radians;
 
-                historyTitle: "Set effect outer shadow angle",
-                getHistory: (effect) => effect.StartingOuterShadow_Angle,
-                setHistory: (effect, previous) => effect.OuterShadow_Angle = previous
-            );
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.OuterShadow_Angle = radians,
+
+                    historyTitle: "Set effect outer shadow angle",
+                    getHistory: (effect) => effect.OuterShadow_Angle,
+                    setHistory: (effect, previous) => effect.OuterShadow_Angle = previous
+                );
+            };
+        }
+
+        private void ConstructAngle2()
+        {
+            //this.AnglePicker2.Minimum = 0;
+            //this.AnglePicker2.Maximum = FanKit.Math.PiTwice;
+            this.AnglePicker2.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
+            this.AnglePicker2.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Angle = (float)value);
+            this.AnglePicker2.ValueChangeCompleted += (s, value) =>
+            {
+                float radians = (float)value;
+                this.Angle = radians;
+
+                this.MethodViewModel.EffectChangeCompleted<float>
+                (
+                    set: (effect) => effect.OuterShadow_Angle = radians,
+
+                    historyTitle: "Set effect outer shadow angle",
+                    getHistory: (effect) => effect.StartingOuterShadow_Angle,
+                    setHistory: (effect, previous) => effect.OuterShadow_Angle = previous
+                );
+            };
         }
 
 
@@ -235,30 +413,43 @@ namespace Retouch_Photo2.Effects.Models
             this.ColorBorder.Tapped += (s, e) =>
             {
                 this.ColorFlyout.ShowAt(this.ColorBorder);
-                this.ColorPicker.Color = this.SolidColorBrush.Color;
+                this.ColorPicker.Color = this.Color;
             };
-            this.ColorPicker.ColorChanged += (s, value) => this.MethodViewModel.EffectChangeCompleted<Color>
-            (
-                set: (effect) => effect.OuterShadow_Color = (Color)value,
+            
+            this.ColorPicker.ColorChanged += (s, value) =>
+            {
+                Color color = (Color)value;
+                this.Color = color;
 
-                historyTitle: "Set effect outer shadow color",
-                getHistory: (effect) => effect.OuterShadow_Color,
-                setHistory: (effect, previous) => effect.OuterShadow_Color = previous
-            );
+                this.MethodViewModel.EffectChangeCompleted<Color>
+                (
+                    set: (effect) => effect.OuterShadow_Color = color,
+
+                    historyTitle: "Set effect outer shadow color",
+                    getHistory: (effect) => effect.OuterShadow_Color,
+                    setHistory: (effect, previous) => effect.OuterShadow_Color = previous
+               );
+            };
         }
 
         private void ConstructColor2()
         {
             this.ColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow()); 
             this.ColorPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Color = (Color)value);
-            this.ColorPicker.ColorChangeCompleted += (s, value) => this.MethodViewModel.EffectChangeCompleted<Color>
-            (
-                set: (effect) => effect.OuterShadow_Color = (Color)value,
+            this.ColorPicker.ColorChangeCompleted += (s, value) =>
+            {
+                Color color = (Color)value;
+                this.Color = color;
 
-                historyTitle: "Set effect outer shadow color",
-                getHistory: (effect) => effect.StartingOuterShadow_Color,
-                setHistory: (effect, previous) => effect.OuterShadow_Color = previous
-            );
+                this.MethodViewModel.EffectChangeCompleted<Color>
+                (
+                    set: (effect) => effect.OuterShadow_Color = color,
+
+                    historyTitle: "Set effect outer shadow color",
+                    getHistory: (effect) => effect.StartingOuterShadow_Color,
+                    setHistory: (effect, previous) => effect.OuterShadow_Color = previous
+               );
+            };
         }
 
     }

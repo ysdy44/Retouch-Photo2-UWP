@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -37,8 +36,8 @@ namespace Retouch_Photo2.Tools.Models
         
 
         //@Converter
-        private int InnerRadiusNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
-        private int SweepAngleNumberConverter(float sweepAngle) => (int)(sweepAngle / FanKit.Math.Pi * 180f);
+        private int InnerRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
+        private int SweepAngleToNumberConverter(float sweepAngle) => (int)(sweepAngle / FanKit.Math.Pi * 180f);
 
 
         //@Construct
@@ -77,8 +76,8 @@ namespace Retouch_Photo2.Tools.Models
 
             this.Button.Title = resource.GetString("/ToolsSecond/GeometryCookie");
 
-            this.InnerRadiusTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCookie_InnerRadius");
-            this.SweepAngleTouchbarButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCookie_SweepAngle");
+            this.InnerRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCookie_InnerRadius");
+            this.SweepAngleButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCookie_SweepAngle");
 
             this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
         }
@@ -124,17 +123,17 @@ namespace Retouch_Photo2.Tools.Models
         //InnerRadius
         private void ConstructInnerRadius1()
         {
-            this.InnerRadiusTouchbarPicker.Unit = "%";
-            this.InnerRadiusTouchbarPicker.Minimum = 0;
-            this.InnerRadiusTouchbarPicker.Maximum = 100;
-            this.InnerRadiusTouchbarPicker.ValueChange += (sender, value) =>
+            this.InnerRadiusPicker.Unit = "%";
+            this.InnerRadiusPicker.Minimum = 0;
+            this.InnerRadiusPicker.Maximum = 100;
+            this.InnerRadiusPicker.ValueChange += (sender, value) =>
             {
-                float innerRadius = (float)value / 100f;
+                float innerRadius = (float)value / 100.0f;
+                this.SelectionViewModel.GeometryCookieSweepAngle = innerRadius;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryCookieLayer>
                 (
                     layerType: LayerType.GeometryCookie,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCookieSweepAngle = innerRadius,
                     set: (tLayer) => tLayer.SweepAngle = innerRadius,
 
                     historyTitle: "Set cookie layer inner radius",
@@ -146,26 +145,24 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructInnerRadius2()
         {
-            this.InnerRadiusTouchbarSlider.Minimum = 0.0d;
-            this.InnerRadiusTouchbarSlider.Maximum = 1.0d;
-            this.InnerRadiusTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCookieLayer>
-            (
-                layerType: LayerType.GeometryCookie,
-                cache: (tLayer) => tLayer.CacheInnerRadius()
-            );
-            this.InnerRadiusTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryCookieLayer>
-            (
-                layerType: LayerType.GeometryCookie,
-                set: (tLayer) => tLayer.InnerRadius = (float)value
-            );
-            this.InnerRadiusTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.InnerRadiusSlider.Minimum = 0.0d;
+            this.InnerRadiusSlider.Maximum = 1.0d;
+            this.InnerRadiusSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCookieLayer>(layerType: LayerType.GeometryCookie, cache: (tLayer) => tLayer.CacheInnerRadius());
+            this.InnerRadiusSlider.ValueChangeDelta += (sender, value) =>
             {
                 float innerRadius = (float)value;
+                this.SelectionViewModel.GeometryCookieInnerRadius = innerRadius;
+
+                this.MethodViewModel.TLayerChangeDelta<GeometryCookieLayer>(layerType: LayerType.GeometryCookie, set: (tLayer) => tLayer.InnerRadius = innerRadius);
+            };
+            this.InnerRadiusSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float innerRadius = (float)value;
+                this.SelectionViewModel.GeometryCookieInnerRadius = innerRadius;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryCookieLayer>
                 (
                     layerType: LayerType.GeometryCookie,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCookieInnerRadius = innerRadius,
                     set: (tLayer) => tLayer.InnerRadius = innerRadius,
 
                     historyTitle: "Set cookie layer inner radius",
@@ -179,17 +176,17 @@ namespace Retouch_Photo2.Tools.Models
         //SweepAngle
         private void ConstructSweepAngle1()
         {
-            this.SweepAngleTouchbarPicker.Unit = "º";
-            this.SweepAngleTouchbarPicker.Minimum = 0;
-            this.SweepAngleTouchbarPicker.Maximum = 360;
-            this.SweepAngleTouchbarPicker.ValueChange += (sender, value) =>
+            this.SweepAnglePicker.Unit = "º";
+            this.SweepAnglePicker.Minimum = 0;
+            this.SweepAnglePicker.Maximum = 360;
+            this.SweepAnglePicker.ValueChange += (sender, value) =>
             {
                 float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
+                this.SelectionViewModel.GeometryCookieInnerRadius = sweepAngle;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryCookieLayer>
                 (
                     layerType: LayerType.GeometryCookie,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCookieInnerRadius = sweepAngle,
                     set: (tLayer) => tLayer.InnerRadius = sweepAngle,
 
                     historyTitle: "Set cookie layer sweep angle",
@@ -201,26 +198,24 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructSweepAngle2()
         {
-            this.SweepAngleTouchbarSlider.Minimum = 0.0d;
-            this.SweepAngleTouchbarSlider.Maximum = FanKit.Math.PiTwice;
-            this.SweepAngleTouchbarSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCookieLayer>
-            (
-                layerType: LayerType.GeometryCookie,
-                cache: (tLayer) => tLayer.CacheSweepAngle()
-            );
-            this.SweepAngleTouchbarSlider.ValueChangeDelta += (sender, value) => this.MethodViewModel.TLayerChangeDelta<GeometryCookieLayer>
-            (
-                layerType: LayerType.GeometryCookie,
-                set: (tLayer) => tLayer.SweepAngle = (float)value
-            );
-            this.SweepAngleTouchbarSlider.ValueChangeCompleted += (sender, value) =>
+            this.SweepAngleSlider.Minimum = 0.0d;
+            this.SweepAngleSlider.Maximum = FanKit.Math.PiTwice;
+            this.SweepAngleSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryCookieLayer>(layerType: LayerType.GeometryCookie, cache: (tLayer) => tLayer.CacheSweepAngle());
+            this.SweepAngleSlider.ValueChangeDelta += (sender, value) =>
             {
                 float sweepAngle = (float)value;
+                this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle;
+                
+                this.MethodViewModel.TLayerChangeDelta<GeometryCookieLayer>(layerType: LayerType.GeometryCookie, set: (tLayer) => tLayer.SweepAngle = sweepAngle);
+            };
+            this.SweepAngleSlider.ValueChangeCompleted += (sender, value) =>
+            {
+                float sweepAngle = (float)value;
+                this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryCookieLayer>
                 (
                     layerType: LayerType.GeometryCookie,
-                    setSelectionViewModel: () => this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle,
                     set: (tLayer) => tLayer.SweepAngle = sweepAngle,
 
                     historyTitle: "Set cookie layer sweep angle",

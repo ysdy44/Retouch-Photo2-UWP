@@ -6,7 +6,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPickers="using:HSVColorPickers"
     xmlns:elements="using:Retouch_Photo2.Elements"
-    mc:Ignorable="d"
+    mc:Ignorable="d"              
+    MinHeight="165" 
+    MaxHeight="300"
     d:DesignHeight="400"
     d:DesignWidth="200"
     >
@@ -27,7 +29,7 @@
 
         <!--Flyout-->
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:ColorPicker2 x:Name="ColorPicker" Width="200"/>
+            <elements:ColorPicker2 x:Name="ColorPicker" Width="Auto"/>
         </Flyout>
 
     </Page.Resources>
@@ -36,16 +38,24 @@
     <StackPanel>
 
         <!--Amount-->
-        <TextBlock x:Name="AmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <RelativePanel>
+            <TextBlock x:Name="AmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="AmountPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+        </RelativePanel>
         <hsvColorPickers:TouchSlider x:Name="AmountSlider" Margin="2,0"/>
 
         <!--Curve-->
-        <TextBlock x:Name="CurveTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <RelativePanel>
+            <TextBlock x:Name="CurveTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <hsvColorPickers:NumberPicker x:Name="CurvePicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True" Margin="2,0"/>
+        </RelativePanel>
         <hsvColorPickers:TouchSlider x:Name="CurveSlider" Margin="2,0"/>
 
         <!--Color-->
         <TextBlock x:Name="ColorTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <Border x:Name="ColorBorder" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource AppCircleBorderStyle}">
+        <Border x:Name="ColorBorder" Margin="2,0" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{StaticResource AppText}" Style="{StaticResource AppCircleBorderStyle}">
             <Border.Background>
                 <SolidColorBrush x:Name="SolidColorBrush" Color="Black"/>
             </Border.Background>
