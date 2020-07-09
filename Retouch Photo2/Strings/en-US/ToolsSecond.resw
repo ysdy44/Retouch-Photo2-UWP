@@ -213,6 +213,15 @@
   <data name="GeometryTriangle_Mirror" xml:space="preserve">
     <value>Mirror</value>
   </data>
+  <data name="PatternDiagonal" xml:space="preserve">
+    <value>Diagonal</value>
+  </data>
+  <data name="PatternDiagonal_HorizontalStep" xml:space="preserve">
+    <value>Horizontal Step</value>
+  </data>
+  <data name="PatternDiagonal_Offset" xml:space="preserve">
+    <value>Offset</value>
+  </data>
   <data name="PatternGrid" xml:space="preserve">
     <value>Grid</value>
   </data>

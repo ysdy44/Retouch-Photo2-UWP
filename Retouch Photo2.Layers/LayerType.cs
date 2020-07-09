@@ -27,14 +27,16 @@
         /// <summary> Group. </summary>
         Group,
 
-        /// <summary> Combine-add. </summary>
-        CombineAdd,
 
+        //Pattern
         /// <summary> Grid pattern. </summary>
         PatternGrid,
+        /// <summary> Diagonal pattern. </summary>
+        PatternDiagonal,
         /// <summary> Spotted pattern. </summary>
         PatternSpotted,
-        
+         
+
         //Geometry1
         /// <summary> Round-rect geometry. </summary>
         GeometryRoundRect,

@@ -122,7 +122,7 @@ namespace Retouch_Photo2.Tools.Models
                     layerType: LayerType.PatternSpotted,
                     set: (tLayer) => tLayer.Radius = horizontalStep,
 
-                    historyTitle: "Set grid layer radius",
+                    historyTitle: "Set spotted layer radius",
                     getHistory: (tLayer) => tLayer.Radius,
                     setHistory: (tLayer, previous) => tLayer.Radius = previous
                 );
@@ -151,7 +151,7 @@ namespace Retouch_Photo2.Tools.Models
                     layerType: LayerType.PatternSpotted,
                     set: (tLayer) => tLayer.Radius = horizontalStep,
 
-                    historyTitle: "Set grid layer radius",
+                    historyTitle: "Set spotted layer radius",
                     getHistory: (tLayer) => tLayer.StartingRadius,
                     setHistory: (tLayer, previous) => tLayer.Radius = previous
                 );
@@ -175,7 +175,7 @@ namespace Retouch_Photo2.Tools.Models
                     layerType: LayerType.PatternSpotted,
                     set: (tLayer) => tLayer.Step = step,
 
-                    historyTitle: "Set grid layer step",
+                    historyTitle: "Set spotted layer step",
                     getHistory: (tLayer) => tLayer.Step,
                     setHistory: (tLayer, previous) => tLayer.Step = previous
                 );
@@ -204,7 +204,7 @@ namespace Retouch_Photo2.Tools.Models
                     layerType: LayerType.PatternSpotted,
                     set: (tLayer) => tLayer.Step = step,
 
-                    historyTitle: "Set grid layer step",
+                    historyTitle: "Set spotted layer step",
                     getHistory: (tLayer) => tLayer.StartingStep,
                     setHistory: (tLayer, previous) => tLayer.Step = previous
                 );

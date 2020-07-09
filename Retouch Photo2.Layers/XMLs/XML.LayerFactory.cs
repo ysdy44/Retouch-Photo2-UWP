@@ -32,8 +32,12 @@ namespace Retouch_Photo2.Layers
                 case "Image": return new ImageLayer(customDevice);
                 case "Group": return new GroupLayer(customDevice);
 
+
+                //Pattern
                 case "PatternGrid": return new PatternGridLayer(customDevice);
+                case "PatternDiagonal": return new PatternDiagonalLayer(customDevice);
                 case "PatternSpotted": return new PatternSpottedLayer(customDevice);
+
 
                 //Geometry1
                 case "GeometryRoundRect": return new GeometryRoundRectLayer(customDevice);

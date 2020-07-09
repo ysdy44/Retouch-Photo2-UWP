@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="Retouch_Photo2.Tools.Models.PatternDiagonalTool"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hSVColorPickers="using:HSVColorPickers"
+    xmlns:tools="using:Retouch_Photo2.Tools"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="400"
+    >
+
+
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
+        <StackPanel Orientation="Horizontal">
+
+            <!--Offset-->
+            <tools:TouchbarButton x:Name="OffsetButton">
+                <tools:TouchbarButton.Picker>
+                    <hSVColorPickers:NumberPicker x:Name="OffsetPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                             Value="{x:Bind Converter(SelectionViewModel.PatternDiagonalOffset), Mode=OneWay}"/>
+                </tools:TouchbarButton.Picker>
+                <tools:TouchbarButton.Slider>
+                    <tools:TouchbarSlider x:Name="OffsetSlider" 
+                             Value="{x:Bind SelectionViewModel.PatternDiagonalOffset, Mode=OneWay}"/>
+                </tools:TouchbarButton.Slider>
+            </tools:TouchbarButton>
+            
+            <ContentControl Width="4"/>
+            
+            <!--Horizontal-->
+            <tools:TouchbarButton x:Name="HorizontalStepButton">
+                <tools:TouchbarButton.Picker>
+                    <hSVColorPickers:NumberPicker x:Name="HorizontalStepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                             Value="{x:Bind Converter(SelectionViewModel.PatternDiagonalHorizontalStep), Mode=OneWay}"/>
+                </tools:TouchbarButton.Picker>
+                <tools:TouchbarButton.Slider>
+                    <tools:TouchbarSlider x:Name="HorizontalStepSlider" 
+                             Value="{x:Bind SelectionViewModel.PatternDiagonalHorizontalStep, Mode=OneWay}"/>
+                </tools:TouchbarButton.Slider>
+            </tools:TouchbarButton>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</Page>

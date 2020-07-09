@@ -171,6 +171,9 @@
   <data name="Image" xml:space="preserve">
     <value>Image</value>
   </data>
+  <data name="PatternDiagonal" xml:space="preserve">
+    <value>Diagonal</value>
+  </data>
   <data name="PatternGrid" xml:space="preserve">
     <value>Grid</value>
   </data>

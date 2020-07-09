@@ -153,6 +153,7 @@
     <Compile Include="Layers\LayerBase.Render.cs" />
     <Compile Include="Layers\LayerBase.Property.cs" />
     <Compile Include="Layers\TextLayer.cs" />
+    <Compile Include="ModelsSecond\PatternDiagonalLayer.cs" />
     <Compile Include="ModelsSecond\PatternSpottedLayer.cs" />
     <Compile Include="ModelsSecond\PatternGridLayer.cs" />
     <Compile Include="Models\TextArtisticLayer.cs" />

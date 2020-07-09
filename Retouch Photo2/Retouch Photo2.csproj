@@ -205,6 +205,9 @@
     <Compile Include="Retouch Photo2.Menus\TransformerMenu.xaml.cs">
       <DependentUpon>TransformerMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Tools\ModelsSecond\PatternDiagonalTool.xaml.cs">
+      <DependentUpon>PatternDiagonalTool.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Tools\ModelsSecond\PatternSpottedTool.xaml.cs">
       <DependentUpon>PatternSpottedTool.xaml</DependentUpon>
     </Compile>
@@ -630,6 +633,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Tools\GeometryTool.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\ModelsSecond\PatternDiagonalTool.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

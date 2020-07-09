@@ -213,6 +213,15 @@
   <data name="GeometryTriangle_Mirror" xml:space="preserve">
     <value>镜像</value>
   </data>
+  <data name="PatternDiagonal" xml:space="preserve">
+    <value>斜线工具</value>
+  </data>
+  <data name="PatternDiagonal_HorizontalStep" xml:space="preserve">
+    <value>水平步</value>
+  </data>
+  <data name="PatternDiagonal_Offset" xml:space="preserve">
+    <value>偏移</value>
+  </data>
   <data name="PatternGrid" xml:space="preserve">
     <value>网格工具</value>
   </data>

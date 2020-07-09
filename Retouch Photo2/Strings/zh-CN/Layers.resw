@@ -171,6 +171,9 @@
   <data name="Image" xml:space="preserve">
     <value>图像</value>
   </data>
+  <data name="PatternDiagonal" xml:space="preserve">
+    <value>斜线</value>
+  </data>
   <data name="PatternGrid" xml:space="preserve">
     <value>网格</value>
   </data>

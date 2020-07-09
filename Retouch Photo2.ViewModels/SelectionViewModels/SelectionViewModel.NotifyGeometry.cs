@@ -12,8 +12,8 @@ namespace Retouch_Photo2.ViewModels
     {
 
 
-        /// <summary> Sets the IPatternLayer. </summary>     
-        private void SetIPatternLayer(ILayer layer)
+        /// <summary> Sets the PatternLayer. </summary>     
+        private void SetPatternLayer(ILayer layer)
         {
             if (layer == null) return;
 
@@ -24,6 +24,18 @@ namespace Retouch_Photo2.ViewModels
                     this.PatternGridType = gridLayer.GridType;
                     this.PatternGridHorizontalStep = gridLayer.HorizontalStep;
                     this.PatternGridVerticalStep = gridLayer.VerticalStep;
+                    break;
+
+                case LayerType.PatternDiagonal:
+                    PatternDiagonalLayer diagonalLayer = (PatternDiagonalLayer)layer;
+                    this.PatternDiagonalOffset = diagonalLayer.Offset;
+                    this.PatternDiagonalHorizontalStep = diagonalLayer.HorizontalStep;
+                    break;
+
+                case LayerType.PatternSpotted:
+                    PatternSpottedLayer spottedLayer = (PatternSpottedLayer)layer;
+                    this.PatternSpottedRadius = spottedLayer.Radius;
+                    this.PatternSpottedStep = spottedLayer.Step;
                     break;
             }
         }
@@ -72,6 +84,35 @@ namespace Retouch_Photo2.ViewModels
         private float patternGridVerticalStep = 30.0f;
 
 
+
+        /// <summary> PatternSpottedLayer's offset. </summary>     
+        public float PatternDiagonalOffset
+        {
+            get => this.patternDiagonalOffset;
+            set
+            {
+                if (this.patternDiagonalOffset == value) return;
+                this.patternDiagonalOffset = value;
+                this.OnPropertyChanged(nameof(this.PatternDiagonalOffset));//Notify 
+            }
+        }
+        private float patternDiagonalOffset = 30.0f;
+
+        /// <summary> PatternDiagonalLayer's HorizontalStep. </summary>     
+        public float PatternDiagonalHorizontalStep
+        {
+            get => this.patternDiagonalHorizontalStep;
+            set
+            {
+                if (this.patternDiagonalHorizontalStep == value) return;
+                this.patternDiagonalHorizontalStep = value;
+                this.OnPropertyChanged(nameof(this.PatternDiagonalHorizontalStep));//Notify 
+            }
+        }
+        private float patternDiagonalHorizontalStep = 30.0f;
+
+
+
         /// <summary> PatternSpottedLayer's radius. </summary>     
         public float PatternSpottedRadius
         {
@@ -97,14 +138,14 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float patternSpottedStep = 30.0f;
-        
+
 
         #endregion
 
 
 
-        /// <summary> Sets the IGeometryLayer. </summary>     
-        private void SetIGeometryLayer(ILayer layer)
+        /// <summary> Sets the GeometryLayer. </summary>     
+        private void SetGeometryLayer(ILayer layer)
         {
             if (layer == null) return;
 

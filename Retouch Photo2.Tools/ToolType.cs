@@ -43,11 +43,14 @@
         More,
 
 
-        /// <summary> Pattern grid. </summary>
+        //Pattern
+        /// <summary> Grid pattern. </summary>
         PatternGrid,
-        /// <summary> Pattern spotted. </summary>
+        /// <summary> Diagonal pattern. </summary>
+        PatternDiagonal,
+        /// <summary> Spotted pattern. </summary>
         PatternSpotted,
-        
+
 
         //Geometry1
         /// <summary> Create round-rect geometry. </summary>
