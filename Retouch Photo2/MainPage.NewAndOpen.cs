@@ -171,7 +171,12 @@ namespace Retouch_Photo2
             this.LoadingControl.IsActive = true;
 
             //Photo
-            if (copyFile == null) return;
+            if (copyFile == null)
+            {
+                this.LoadingControl.State = LoadingState.None;
+                this.LoadingControl.IsActive = false;
+                return;
+            }
             Photo photo = await Photo.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
             Photo.DuplicateChecking(photo);
 
