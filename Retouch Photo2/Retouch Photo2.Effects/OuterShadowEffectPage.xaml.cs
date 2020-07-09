@@ -128,53 +128,40 @@ namespace Retouch_Photo2.Effects.Models
         
         public void Reset()
         {
-            this.Radius  = 12.0f;
-            this.Opacity = 0.5f;
+            this.Radius = 12.0f;
+            this.Opacity2 = 0.5f;
             this.Offset = 0.0f;
             this.Angle = FanKit.Math.PiOver4;
             this.Color = Windows.UI.Colors.Black;
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set effect outer shadow");
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                var previous1 = layer.Effect.OuterShadow_Radius;
-                var previous2 = layer.Effect.OuterShadow_Opacity;
-                var previous4 = layer.Effect.OuterShadow_Offset;
-                var previous5 = layer.Effect.OuterShadow_Angle;
-                var previous3 = layer.Effect.OuterShadow_Color;
-                history.UndoAction += () =>
+            this.MethodViewModel.EffectChangeCompleted<(float, float, float, float, Color)>
+            (
+                set: (effect) =>
                 {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Effect.OuterShadow_Radius = previous1;
-                    layer.Effect.OuterShadow_Opacity = previous2;
-                    layer.Effect.OuterShadow_Offset = previous4;
-                    layer.Effect.OuterShadow_Angle = previous5;
-                    layer.Effect.OuterShadow_Color = previous3;
-                };
-                
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                layer.Effect.OuterShadow_Radius = 12.0f;
-                layer.Effect.OuterShadow_Opacity = 0.5f;
-                layer.Effect.OuterShadow_Offset = 0.0f;
-                layer.Effect.OuterShadow_Angle = FanKit.Math.PiOver4;
-                layer.Effect.OuterShadow_Color = Windows.UI.Colors.Black;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+                    effect.OuterShadow_Radius = 12.0f;
+                    effect.OuterShadow_Opacity = 0.5f;
+                    effect.OuterShadow_Offset = 0.0f;
+                    effect.OuterShadow_Angle = FanKit.Math.PiOver4;
+                    effect.OuterShadow_Color = Windows.UI.Colors.Black;
+                },
+                historyTitle: "Set effect outer shadow",
+                getHistory: (effect) =>
+                (
+                    effect.OuterShadow_Radius,
+                    effect.OuterShadow_Opacity,
+                    effect.OuterShadow_Offset,
+                    effect.OuterShadow_Angle,
+                    effect.OuterShadow_Color
+                ),
+                setHistory: (effect, previous) =>
+                {
+                    effect.OuterShadow_Radius = previous.Item1;
+                    effect.OuterShadow_Opacity = previous.Item2;
+                    effect.OuterShadow_Offset = previous.Item3;
+                    effect.OuterShadow_Angle = previous.Item4;
+                    effect.OuterShadow_Color = previous.Item5;
+                }
+            );
         }
         public void FollowButton(Effect effect)
         {
@@ -264,7 +251,7 @@ namespace Retouch_Photo2.Effects.Models
         //Opacity
         private void ConstructOpacity1()
         {
-            this.OpacityPicker.Unit = null;
+            this.OpacityPicker.Unit = "%";
             this.OpacityPicker.Minimum = 0;
             this.OpacityPicker.Maximum = 100;
             this.OpacityPicker.ValueChanged += (s, value) =>
@@ -366,12 +353,12 @@ namespace Retouch_Photo2.Effects.Models
         //Angle
         private void ConstructAngle1()
         {
-            this.AnglePicker.Unit = null;
-            this.AnglePicker.Minimum = 0;
-            this.AnglePicker.Maximum = 100;
+            this.AnglePicker.Unit = "º";
+            this.AnglePicker.Minimum = -360;
+            this.AnglePicker.Maximum = 360;
             this.AnglePicker.ValueChanged += (s, value) =>
             {
-                float radians = (float)value * 180 / FanKit.Math.Pi;
+                float radians = (float)value * 180.0f / FanKit.Math.Pi;
                 this.Angle = radians;
 
                 this.MethodViewModel.EffectChanged<float>
@@ -390,7 +377,13 @@ namespace Retouch_Photo2.Effects.Models
             //this.AnglePicker2.Minimum = 0;
             //this.AnglePicker2.Maximum = FanKit.Math.PiTwice;
             this.AnglePicker2.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
-            this.AnglePicker2.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Angle = (float)value);
+            this.AnglePicker2.ValueChangeDelta += (s, value) =>
+            {
+                float radians = (float)value;
+                this.Angle = radians;
+
+                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Angle = radians);
+            };
             this.AnglePicker2.ValueChangeCompleted += (s, value) =>
             {
                 float radians = (float)value;
@@ -447,8 +440,14 @@ namespace Retouch_Photo2.Effects.Models
 
         private void ConstructColor2()
         {
-            this.ColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow()); 
-            this.ColorPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Color = (Color)value);
+            this.ColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
+            this.ColorPicker.ColorChangeDelta += (s, value) =>
+            {
+                Color color = (Color)value;
+                this.Color = color;
+
+                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Color = color);
+            };
             this.ColorPicker.ColorChangeCompleted += (s, value) =>
             {
                 Color color = (Color)value;

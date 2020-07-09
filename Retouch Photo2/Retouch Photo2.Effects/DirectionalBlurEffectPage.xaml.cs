@@ -90,38 +90,25 @@ namespace Retouch_Photo2.Effects.Models
             this.Radius = 0.0f;
             this.Angle = 0.0f;
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set effect directional blur");
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                var previous1 = layer.Effect.DirectionalBlur_Radius;
-                var previous2 = layer.Effect.DirectionalBlur_Angle;
-                history.UndoAction += () =>
-                {   
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Effect.DirectionalBlur_Radius = previous1;
-                    layer.Effect.DirectionalBlur_Angle = previous2;
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                layer.Effect.DirectionalBlur_Radius = 0;
-                layer.Effect.DirectionalBlur_Angle = 0;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+            this.MethodViewModel.EffectChangeCompleted<(float, float)>
+            (
+                set: (effect) =>
+                {
+                    effect.DirectionalBlur_Radius = 0.0f;
+                    effect.DirectionalBlur_Angle = 0.5f;
+                },
+                historyTitle: "Set effect directional blur",
+                getHistory: (effect) =>
+                (
+                    effect.DirectionalBlur_Radius,
+                    effect.DirectionalBlur_Angle
+                ),
+                setHistory: (effect, previous) =>
+                {
+                    effect.DirectionalBlur_Radius = previous.Item1;
+                    effect.DirectionalBlur_Angle = previous.Item2;
+                }
+            );
         }
         public void FollowButton(Effect effect)
         {
@@ -208,7 +195,7 @@ namespace Retouch_Photo2.Effects.Models
         private void ConstructAngle1()
         {
             this.AnglePicker.Unit = "º";
-            this.AnglePicker.Minimum = 0;
+            this.AnglePicker.Minimum = -360;
             this.AnglePicker.Maximum = 360;
             this.AnglePicker.ValueChanged += (s, value) =>
             {
@@ -231,7 +218,13 @@ namespace Retouch_Photo2.Effects.Models
             //this.AnglePicker2.Minimum = 0;
             //this.AnglePicker2.Maximum = FanKit.Math.PiTwice;
             this.AnglePicker2.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheDirectionalBlur());
-            this.AnglePicker2.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.DirectionalBlur_Angle = (float)value);
+            this.AnglePicker2.ValueChangeDelta += (s, value) =>
+            {
+                float radians = (float)value;
+                this.Angle = radians;
+
+                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.DirectionalBlur_Angle = radians);
+            };
             this.AnglePicker2.ValueChangeCompleted += (s, value) =>
             {
                 float radians = (float)value;

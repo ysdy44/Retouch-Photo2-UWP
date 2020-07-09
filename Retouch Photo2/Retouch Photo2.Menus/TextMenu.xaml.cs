@@ -27,7 +27,8 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
 
-        //@Content
+        //@Content     
+        public override UIElement MainPage => this.TextMainPage;
         TextMainPage TextMainPage = new TextMainPage();
 
 
@@ -39,11 +40,10 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-
-            this.MainPage = this.TextMainPage;
+            
             this.TextMainPage.SecondPageChanged += (title, secondPage) =>
             {
-                if (this.SecondPage != secondPage) this.SecondPage = secondPage;
+                if (this.Page != secondPage) this.Page = secondPage;
                 this.IsSecondPage = true;
                 this.Title = (string)title;
             };
@@ -100,7 +100,8 @@ namespace Retouch_Photo2.Menus.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-
+        ViewModel MethodViewModel => App.MethodViewModel;
+        
 
         //@Delegate
         /// <summary> Occurs when second-page change. </summary>
@@ -343,203 +344,71 @@ namespace Retouch_Photo2.Menus.Models
 
         private void SetFontAlignment(CanvasHorizontalAlignment fontAlignment)
         {
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set font alignment");
-
-            //Selection
             this.SelectionViewModel.FontAlignment = fontAlignment;
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
+            this.MethodViewModel.ITextLayerChanged<CanvasHorizontalAlignment>
+            (
+                set: (textLayer) => textLayer.FontAlignment = fontAlignment,
 
-                if (layer.Type.IsText())
-                {
-                    ITextLayer textLayer = (ITextLayer)layer;
-
-                    var previous = textLayer.FontAlignment;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        textLayer.FontAlignment = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    textLayer.FontAlignment = fontAlignment;
-                }
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+                historyTitle: "Set font alignment",
+                getHistory: (textLayer) => textLayer.FontAlignment,
+                setHistory: (textLayer, previous) => textLayer.FontAlignment = previous
+           );
         }
 
 
         private void SetFontWeight(FontWeight fontWeight)
         {
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set font weight");
-
-            //Selection
             this.SelectionViewModel.FontWeight = fontWeight;
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
+            this.MethodViewModel.ITextLayerChanged<FontWeight>
+            (
+                set: (textLayer) => textLayer.FontWeight = fontWeight,
 
-                if (layer.Type.IsText())
-                {
-                    ITextLayer textLayer = (ITextLayer)layer;
-
-                    var previous = textLayer.FontWeight;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        textLayer.FontWeight = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    textLayer.FontWeight = fontWeight;
-                }
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+                historyTitle: "Set font weight",
+                getHistory: (textLayer) => textLayer.FontWeight,
+                setHistory: (textLayer, previous) => textLayer.FontWeight = previous
+           );
         }
 
 
         private void SetFontStyle(FontStyle fontStyle)
         {
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set font style");
-
-            //Selection
             this.SelectionViewModel.FontStyle = fontStyle;
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
+            this.MethodViewModel.ITextLayerChanged<FontStyle>
+            (
+                set: (textLayer) => textLayer.FontStyle = fontStyle,
 
-                if (layer.Type.IsText())
-                {
-                    ITextLayer textLayer = (ITextLayer)layer;
-
-                    var previous = textLayer.FontStyle;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        textLayer.FontStyle = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    textLayer.FontStyle = fontStyle;
-                }
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+                historyTitle: "Set font style",
+                getHistory: (textLayer) => textLayer.FontStyle,
+                setHistory: (textLayer, previous) => textLayer.FontStyle = previous
+           );
         }
 
 
         private void SetFontFamily(string fontFamily)
         {
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set font family");
-
-            //Selection
             this.SelectionViewModel.FontFamily = fontFamily;
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
+            this.MethodViewModel.ITextLayerChanged<string>
+            (
+                set: (textLayer) => textLayer.FontFamily = fontFamily,
 
-                if (layer.Type.IsText())
-                {
-                    ITextLayer textLayer = (ITextLayer)layer;
-
-                    var previous = textLayer.FontFamily;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        textLayer.FontFamily = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    textLayer.FontFamily = fontFamily;
-                }
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+                historyTitle: "Set font family",
+                getHistory: (textLayer) => textLayer.FontFamily,
+                setHistory: (textLayer, previous) => textLayer.FontFamily = previous
+           );
         }
 
 
-        private void SetFontSize(float value)
+        private void SetFontSize(float fontSize)
         {
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set font size");
+            this.SelectionViewModel.FontSize = fontSize;
+            this.MethodViewModel.ITextLayerChanged<float>
+            (
+                set: (textLayer) => textLayer.FontSize = fontSize,
 
-            //Selection
-            this.SelectionViewModel.FontSize = value;
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type.IsText())
-                {
-                    ITextLayer textLayer = (ITextLayer)layer;
-
-                    var previous = textLayer.FontSize;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        textLayer.FontSize = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    textLayer.FontSize = value;
-                }
-            });
-            //Refactoring
-            this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+                historyTitle: "Set font size",
+                getHistory: (textLayer) => textLayer.FontSize,
+                setHistory: (textLayer, previous) => textLayer.FontSize = previous
+           );
         }
 
     }

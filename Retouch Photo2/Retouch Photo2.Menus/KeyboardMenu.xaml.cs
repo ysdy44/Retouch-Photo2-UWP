@@ -1,5 +1,4 @@
-﻿using Windows.UI.Xaml.Controls;
-using Retouch_Photo2.Elements;
+﻿using Retouch_Photo2.Elements;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -8,10 +7,13 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of Keyboard.
     /// </summary>
-    public sealed partial class KeyboardMenu : Expander, IMenu 
-    {
-        //@Content
+    public sealed partial class KeyboardMenu : Expander, IMenu
+    {  
+
+        //@Content     
+        public override UIElement MainPage => this.TextMainPage;
         TextMainPage TextMainPage = new TextMainPage();
+
 
         //@Construct
         /// <summary>
@@ -21,9 +23,8 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-
-            this.MainPage = this.TextMainPage;
         }
+
     }
 
     /// <summary>

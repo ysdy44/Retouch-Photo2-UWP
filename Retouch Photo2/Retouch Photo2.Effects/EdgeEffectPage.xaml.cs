@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Effects.Models
         {
             set
             {
-                this.AmountPicker.Value = (int)value;
+                this.AmountPicker.Value = (int)(value * 100.0f);
                 this.AmountSlider.Value = value;
             }
         }
@@ -90,38 +90,25 @@ namespace Retouch_Photo2.Effects.Models
             this.Amount = 0.5f;
             this.Radius = 0.0f;
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set effect outline");
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                var previous1 = layer.Effect.Edge_Amount;
-                var previous2 = layer.Effect.Edge_Radius;
-                history.UndoAction += () =>
+            this.MethodViewModel.EffectChangeCompleted<(float, float)>
+            (
+                set: (effect) =>
                 {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Effect.Edge_Amount = previous1;
-                    layer.Effect.Edge_Radius = previous2;
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                layer.Effect.Edge_Amount = 0.5f;
-                layer.Effect.Edge_Radius = 0.0f;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+                    effect.Edge_Amount = 0.5f;
+                    effect.Edge_Radius = 0.0f;
+                },
+                historyTitle: "Set effect outline",
+                getHistory: (effect) =>
+                (
+                    effect.Edge_Amount,
+                    effect.Edge_Radius
+                ),
+                setHistory: (effect, previous) =>
+                {
+                    effect.Edge_Amount = previous.Item1;
+                    effect.Edge_Radius = previous.Item2;
+                }
+            );
         }
         public void FollowButton(Effect effect)
         {
@@ -157,7 +144,7 @@ namespace Retouch_Photo2.Effects.Models
         //Amount
         private void ConstructAmount1()
         {
-            this.AmountPicker.Unit = null;
+            this.AmountPicker.Unit = "%";
             this.AmountPicker.Minimum = 0;
             this.AmountPicker.Maximum = 100;
             this.AmountPicker.ValueChanged += (s, value) =>
@@ -166,12 +153,12 @@ namespace Retouch_Photo2.Effects.Models
                 this.Amount = amount;
 
                 this.MethodViewModel.EffectChanged<float>
-               (
-                   set: (effect) => effect.Edge_Amount = amount,
+                (
+                    set: (effect) => effect.Edge_Amount = amount,
 
-                   historyTitle: "Set effect edge amount",
-                   getHistory: (effect) => effect.Edge_Amount,
-                   setHistory: (effect, previous) => effect.Edge_Amount = previous
+                    historyTitle: "Set effect edge amount",
+                    getHistory: (effect) => effect.Edge_Amount,
+                    setHistory: (effect, previous) => effect.Edge_Amount = previous
                );
             };
         }
@@ -194,13 +181,13 @@ namespace Retouch_Photo2.Effects.Models
                 this.Amount = amount;
 
                 this.MethodViewModel.EffectChangeCompleted<float>
-               (
-                   set: (effect) => effect.Edge_Amount = amount,
+                (
+                    set: (effect) => effect.Edge_Amount = amount,
 
-                   historyTitle: "Set effect edge amount",
-                   getHistory: (effect) => effect.StartingEdge_Amount,
-                   setHistory: (effect, previous) => effect.Edge_Amount = previous
-               );
+                    historyTitle: "Set effect edge amount",
+                    getHistory: (effect) => effect.StartingEdge_Amount,
+                    setHistory: (effect, previous) => effect.Edge_Amount = previous
+                );
             };
         }
 

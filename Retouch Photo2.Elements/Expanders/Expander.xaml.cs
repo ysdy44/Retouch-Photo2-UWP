@@ -44,20 +44,11 @@ namespace Retouch_Photo2.Elements
             {
                 switch (this._vsState)
                 {
-                    case ExpanderState.Hide:
-                        return this.Hide;
-
-                    case ExpanderState.FlyoutShow:
-                        return this._vsIsSecondPage ? this.FlyoutShowSecondPage : this.FlyoutShow;
-
-                    case ExpanderState.OverlayNotExpanded:
-                        return this.OverlayNotExpanded;
-
-                    case ExpanderState.Overlay:
-                        return this._vsIsSecondPage ? this.OverlaySecondPage : this.Overlay;
-
-                    default:
-                        return this.Normal;
+                    case ExpanderState.Hide: return this.Hide;
+                    case ExpanderState.FlyoutShow: return this._vsIsSecondPage ? this.FlyoutShowSecondPage : this.FlyoutShow;
+                    case ExpanderState.OverlayNotExpanded: return this.OverlayNotExpanded;
+                    case ExpanderState.Overlay: return this._vsIsSecondPage ? this.OverlaySecondPage : this.Overlay;
+                    default: return this.Normal;
                 }
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
@@ -76,6 +67,7 @@ namespace Retouch_Photo2.Elements
             this.ConstructHeightStoryboard();
 
             this.Tapped += (s, e) => e.Handled = true;
+            this.Page = this.MainPage;
             this.VisualState = this.VisualState;//State 
 
             /////////////////////////////////

@@ -260,12 +260,10 @@ namespace Retouch_Photo2.Tools.Models
             switch (this.FillOrStroke)
             {
                 case FillOrStroke.Fill:
-                    this.FillDelta(canvasStartingPoint, canvasPoint);
-                    this.FillComplete();
+                    this.FillComplete(canvasStartingPoint, canvasPoint);
                     break;
                 case FillOrStroke.Stroke:
-                    this.StrokeDelta(canvasStartingPoint, canvasPoint);
-                    this.StrokeComplete();
+                    this.StrokeComplete(canvasStartingPoint, canvasPoint);
                     break;
             }
 

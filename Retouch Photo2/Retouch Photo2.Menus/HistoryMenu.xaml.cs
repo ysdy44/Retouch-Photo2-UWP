@@ -1,6 +1,7 @@
 ﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
@@ -15,7 +16,8 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel ViewModel => App.ViewModel;
 
 
-        //@Content
+        //@Content     
+        public override UIElement MainPage => this.HistoryMainPage;
         HistoryMainPage HistoryMainPage = new HistoryMainPage();
 
 
@@ -27,9 +29,8 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-
-            this.MainPage = this.HistoryMainPage;
         }
+
     }
 
     /// <summary>

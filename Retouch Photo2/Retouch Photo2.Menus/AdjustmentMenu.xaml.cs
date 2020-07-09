@@ -28,7 +28,8 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
 
-        //@Content
+        //@Content     
+        public override UIElement MainPage => this.AdjustmentMainPage;
         AdjustmentMainPage AdjustmentMainPage = new AdjustmentMainPage();
         
 
@@ -41,13 +42,13 @@ namespace Retouch_Photo2.Menus.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.MainPage = this.AdjustmentMainPage;
             this.AdjustmentMainPage.IsSecondPageChanged += (s, isSecondPage) => this.Back();
             this.AdjustmentMainPage.SecondPageChanged += (title, secondPage) =>
             {
-                if (this.SecondPage != secondPage) this.SecondPage = secondPage;
+                if (this.Page != secondPage) this.Page = secondPage;
                 this.IsSecondPage = true;
                 this.Title = (string)title;
+                this.ResetButtonVisibility = Visibility.Visible;
             };
         }
 
@@ -105,7 +106,11 @@ namespace Retouch_Photo2.Menus.Models
 
         //@Content
         /// <summary> Filter ListView. </summary>
-        public ListView FilterListView { get; private set; }
+        public ListView FilterListView = new ListView
+        {
+            MinHeight = 165,
+            MaxHeight = 300
+        };
 
         private IEnumerable<IAdjustmentPage> AdjustmentPages = new List<IAdjustmentPage>()
         {
@@ -223,7 +228,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this.Loaded += async (s, e) =>
             {
-                if (this.FilterListView == null)
+                if (this.FilterListView.ItemsSource == null)
                 {
                     IEnumerable<FilterCategory> filterCategorys = await Retouch_Photo2.XML.ConstructFiltersFile();
                     this.ConstructFilter(filterCategorys);
@@ -320,23 +325,27 @@ namespace Retouch_Photo2.Menus.Models
         //Filter
         private void ConstructFilter(IEnumerable<FilterCategory> filterCategorys)
         {
+            this.FilterListView.IsItemClickEnabled = true;
+            this.FilterListView.SelectionMode = ListViewSelectionMode.Single;
+
+            this.FilterListView.ItemTemplate = this.FilterDataTemplate;
+            this.FilterListView.ItemContainerStyle = this.FilterItemStyle;
+
+            this.FilterListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is Filter filter)
+                {
+                    this.FilterChanged(filter);
+                }
+            };
+
             if (filterCategorys != null)
             {
                 FilterCategory filterCategory = filterCategorys.FirstOrDefault();
                 if (filterCategory != null)
                 {
                     IEnumerable<Filter> filters = filterCategory.Filters;
-
-                    this.FilterListView = new ListView
-                    {
-                        IsItemClickEnabled = true,
-                        SelectionMode = ListViewSelectionMode.Single,
-
-                        ItemTemplate = this.FilterDataTemplate,
-                        ItemContainerStyle = this.FilterItemStyle,
-
-                        ItemsSource = filters.ToList(),
-                    };
+                    this.FilterListView.ItemsSource = filters.ToList();
                 }
             }
 
@@ -345,14 +354,6 @@ namespace Retouch_Photo2.Menus.Models
                 object title = this.FilterButton.Content;
                 UIElement secondPage = this.FilterListView;
                 this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
-            };
-
-            this.FilterListView.ItemClick += (s, e) =>
-            {
-                if (e.ClickedItem is Filter filter)
-                {
-                    this.FilterChanged(filter);
-                }
             };
         }
 

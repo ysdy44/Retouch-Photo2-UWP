@@ -98,43 +98,8 @@
             </DoubleAnimation>
         </Storyboard>
 
-        <Storyboard x:Name="HeightStoryboardZeroToMain" >
-            <DoubleAnimation x:Name="HeightKeyFramesZeroToMain" Duration="0:0:0.2" EnableDependentAnimation ="True">
-                <DoubleAnimation.EasingFunction>
-                    <CircleEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-        <Storyboard x:Name="HeightStoryboardZeroToSecond" >
-            <DoubleAnimation x:Name="HeightKeyFramesZeroToSecond" Duration="0:0:0.2" EnableDependentAnimation ="True">
-                <DoubleAnimation.EasingFunction>
-                    <CircleEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-        <Storyboard x:Name="HeightStoryboardMainToZero" >
-            <DoubleAnimation x:Name="HeightKeyFramesMainToZero" Duration="0:0:0.2" EnableDependentAnimation ="True">
-                <DoubleAnimation.EasingFunction>
-                    <CircleEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-        <Storyboard x:Name="HeightStoryboardSecondToZero" >
-            <DoubleAnimation x:Name="HeightKeyFramesSecondToZero" Duration="0:0:0.2" EnableDependentAnimation ="True">
-                <DoubleAnimation.EasingFunction>
-                    <CircleEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-        <Storyboard x:Name="HeightStoryboardMainToSecond" >
-            <DoubleAnimation x:Name="HeightKeyFramesMainToSecond" Duration="0:0:0.2" EnableDependentAnimation ="True">
-                <DoubleAnimation.EasingFunction>
-                    <CircleEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-        <Storyboard x:Name="HeightStoryboardSecondToMain" >
-            <DoubleAnimation x:Name="HeightKeyFramesSecondToMain" Duration="0:0:0.2" EnableDependentAnimation ="True">
+        <Storyboard x:Name="HeightStoryboard" >
+            <DoubleAnimation x:Name="HeightKeyFrames" Duration="0:0:0.2" EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
@@ -178,21 +143,11 @@
                         <Setter Target = "StateButton.Visibility" Value="Visible"/>
                         <Setter Target = "ResetButton.Visibility" Value="Collapsed"/>
 
-                        <!--Body-->
-                        <Setter Target = "MainPageBorder.Visibility" Value="Visible"/>
-
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--FlyoutShowSecondPage-->
-                <VisualState x:Name="FlyoutShowSecondPage">
-                    <VisualState.Setters >
-
-                        <!--Body-->
-                        <Setter Target = "SecondPageBorder.Visibility" Value="Visible"/>
-
-                    </VisualState.Setters>
-                </VisualState>
+                <VisualState x:Name="FlyoutShowSecondPage"/>
 
                 <!--OverlayNotExpanded-->
                 <VisualState x:Name="OverlayNotExpanded">
@@ -203,6 +158,9 @@
                         <Setter Target = "StateButton.Visibility" Value="Visible"/>
                         <Setter Target = "StateIcon.Glyph" Value="&#xE196;"/>
                         <Setter Target = "ResetButton.Visibility" Value="Collapsed"/>
+
+                        <!--Body-->
+                        <Setter Target = "PageBorder.Height" Value="0"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -216,21 +174,11 @@
                         <Setter Target = "StateButton.Visibility" Value="Visible"/>
                         <Setter Target = "ResetButton.Visibility" Value="Collapsed"/>
 
-                        <!--Body-->
-                        <Setter Target = "MainPageBorder.Visibility" Value="Visible"/>
-
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--OverlaySecondPage-->
-                <VisualState x:Name="OverlaySecondPage">
-                    <VisualState.Setters >
-
-                        <!--Body-->
-                        <Setter Target = "SecondPageBorder.Visibility" Value="Visible"/>
-
-                    </VisualState.Setters>
-                </VisualState>
+                <VisualState x:Name="OverlaySecondPage"/>
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
@@ -246,13 +194,10 @@
 
                 <!--@Acrylic-->
                 <!--Body-->
-                <Rectangle x:Name="HeightRectangle" Grid.RowSpan="2" Height="Auto" VerticalAlignment="Stretch" 
+                <Rectangle x:Name="HeightRectangle" Grid.RowSpan="2" Height="222" VerticalAlignment="top" 
                           apiContractNotPresent5:Fill="{ThemeResource AppBackground}"
                           apiContractPresent5:Fill="{ThemeResource AppAcrylicElementBrush}" />
-                <Border x:Name="MainPageBorder" Visibility="Collapsed" Height="Auto" Grid.Row="1" VerticalAlignment="Top">
-                    <!--Content-->
-                </Border>
-                <Border x:Name="SecondPageBorder" Visibility="Collapsed" Height="Auto" Grid.Row="1" VerticalAlignment="Top">
+                <Border x:Name="PageBorder" Grid.Row="1" Height="Auto" VerticalAlignment="Top">
                     <!--Content-->
                 </Border>
 

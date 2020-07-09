@@ -4,9 +4,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
 
@@ -55,7 +52,7 @@ namespace Retouch_Photo2.Tools.Models
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             this.HandleMode = this.Stroke.ContainsHandleMode(startingPoint, matrix);
 
-            //InitializeController
+
             if (this.HandleMode == BrushHandleMode.None)
             {
                 switch (this.Stroke.Type)
@@ -63,27 +60,27 @@ namespace Retouch_Photo2.Tools.Models
                     case BrushType.None:
                     case BrushType.Color:
                         {
+                            this.HandleMode = BrushHandleMode.ToInitializeController;
+
                             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
                             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
                             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-                            //Selection          
                             this.Stroke = BrushBase.LinearGradientBrush(canvasStartingPoint, canvasPoint);
+                            this.MethodViewModel.StyleChangeStarted(cache: (style) => style.CacheStroke());
                         }
                         break;
                 }
             }
 
-            //Selection
+
             this.Stroke.CacheTransform();
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.MethodViewModel.StyleChangeStarted(cache: (style) =>
             {
-                ILayer layer = layerage.Self;
+                style.CacheStroke();
 
-                layer.Style.CacheStroke();
-
-                layer.Style.Stroke = this.Stroke.Clone();
-                layer.Style.Stroke.CacheTransform();
+                style.Stroke = this.Stroke.Clone();
+                style.Stroke.CacheTransform();
             });
         }
 
@@ -94,80 +91,31 @@ namespace Retouch_Photo2.Tools.Models
 
             switch (this.HandleMode)
             {
-                //InitializeController
-                case BrushHandleMode.None:
-                    {
-                        //Selection
-                        this.Stroke.InitializeController(canvasStartingPoint, canvasPoint);
-                        this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-                        {
-                            ILayer layer = layerage.Self;
-
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layerage.RefactoringParentsRender();
-                            layer.Style.Stroke.InitializeController(canvasStartingPoint, canvasPoint);
-                        });
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
+                case BrushHandleMode.ToInitializeController:
+                    this.Stroke.InitializeController(canvasStartingPoint, canvasPoint);
+                    this.MethodViewModel.StyleChangeDelta(set: (style) => style.Stroke.InitializeController(canvasStartingPoint, canvasPoint));
                     break;
 
-                //Controller
                 default:
-                    {
-                        //Selection
-                        this.Stroke.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
-                        this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-                        {
-                            ILayer layer = layerage.Self;
-
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layerage.RefactoringParentsRender();
-                            layer.Style.Stroke.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
-                        });
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
+                    this.Stroke.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
+                    this.MethodViewModel.StyleChangeDelta(set: (style) => style.Stroke.Controller(this.HandleMode, canvasStartingPoint, canvasPoint));
                     break;
             }
         }
 
-        private void StrokeComplete()
+        private void StrokeComplete(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             //Selection
             if (this.Stroke == null) return;
+            this.Stroke.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set stroke");
-
-            //Selection
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                //History
-                var previous = layer.Style.StartingStroke.Clone();
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Style.Stroke = previous.Clone();
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-
-                this.SelectionViewModel.StandStyleLayerage = layerage;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
+            this.MethodViewModel.StyleChangeCompleted
+            (
+                set: (style) => style.Stroke.Controller(this.HandleMode, canvasStartingPoint, canvasPoint),
+                historyTitle: "Set stroke",
+                getHistory: (style) => style.StartingStroke,
+                setHistory: (style, previous) => style.Stroke = previous.Clone()
+            );
         }
 
 
@@ -178,53 +126,29 @@ namespace Retouch_Photo2.Tools.Models
         {
             if (this.Stroke.Type == brushType) return;
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set stroke type");
 
-            bool _lock = false;
+            IBrush brush = null;
 
-            //Selection
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.MethodViewModel.StyleChanged
+            (
+                set: (style, transformer) =>
+                {
+                    style.Stroke.TypeChange(brushType, transformer, photo);
+
+                    brush = style.Stroke;
+                },
+
+                historyTitle: "Set stroke type",
+                getHistory: (style) => style.Stroke.Clone(),
+                setHistory: (style, previous) => style.Stroke = previous.Clone()
+            );
+
+            if (brush != null)
             {
-                ILayer layer = layerage.Self;
+                this.Stroke = brush.Clone();
 
-                //History
-                var previous = layer.Style.Stroke.Clone(); ;
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Style.Stroke = previous.Clone();
-                };
-
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                Transformer transformer = layer.Transform.Transformer;
-                layer.Style.Stroke.TypeChange(brushType, transformer, photo);
-
-                this.SelectionViewModel.StandStyleLayerage = layerage;
-
-
-                // Set stroke Onces: lock
-                if (_lock == false)
-                {
-                    _lock = true;
-                    this.Stroke = layer.Style.Stroke.Clone();
-
-                    if (this.Stroke.Type == BrushType.Color) this.SelectionViewModel.Color = this.Stroke.Color;
-                }
-            });
-
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+                if (brush.Type == BrushType.Color) this.SelectionViewModel.Color = this.Stroke.Color;
+            }
         }
 
         private void StrokeShow()
@@ -254,145 +178,52 @@ namespace Retouch_Photo2.Tools.Models
 
         private void StrokeStopsChanged(CanvasGradientStop[] array)
         {
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set stroke");
-
-            //Selection
             this.Stroke.Stops = array.CloneArray();
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-            {
-                ILayer layer = layerage.Self;
 
-                //History
-                var previous = layer.Style.Stroke.Clone();
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Style.Stroke = previous.Clone();
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                layer.Style.Stroke.Stops = array.CloneArray();
-
-                this.SelectionViewModel.StandStyleLayerage = layerage;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
-            this.ShowControl.Invalidate();//Invalidate
+            this.MethodViewModel.StyleChanged
+            (
+                set: (style, transformer) => style.Stroke.Stops = array.CloneArray(),
+                historyTitle: "Set stroke",
+                getHistory: (style) => style.Stroke.Clone(),
+                setHistory: (style, previous) => style.Stroke = previous.Clone()
+            );
         }
 
         private void StrokeStopsChangeStarted(CanvasGradientStop[] array)
         {
-            //Selection
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-                layer.Style.CacheStroke();
-            });
-
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.MethodViewModel.StyleChangeStarted(cache: (style) => style.CacheStroke());
         }
         private void StrokeStopsChangeDelta(CanvasGradientStop[] array)
         {
-            //Selection
             this.Stroke.Stops = array.CloneArray();
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-            {
-                ILayer layer = layerage.Self;
 
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layerage.RefactoringParentsRender();
-                layer.Style.Stroke.Stops = array.CloneArray();
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
+            this.MethodViewModel.StyleChangeDelta(set: (style) => style.Stroke.Stops = array.CloneArray());
         }
         private void StrokeStopsChangeCompleted(CanvasGradientStop[] array)
         {
             this.Stroke.Stops = array.CloneArray();
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set stroke");
-
-            //Selection
-            this.Stroke.Stops = array.CloneArray();
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                //History
-                var previous = layer.Style.Stroke.Clone();
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Style.Stroke = previous.Clone();
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                layer.Style.Stroke.Stops = array.CloneArray();
-
-                this.SelectionViewModel.StandStyleLayerage = layerage;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-            this.ShowControl.Invalidate();//Invalidate
+            this.MethodViewModel.StyleChangeCompleted<IBrush>
+            (
+                set: (style) => style.Stroke.Stops = array.CloneArray(),
+                historyTitle: "Set stroke",
+                getHistory: (style) => style.Stroke.Clone(),
+                setHistory: (style, previous) => style.Stroke = previous.Clone()
+            );
         }
 
         private void StrokeExtendChanged(CanvasEdgeBehavior extend)
         {
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set stroke extend");
-
-            //Selection
             this.Stroke.Extend = extend;
             this.ExtendComboBox.Extend = extend;
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-            {
-                ILayer layer = layerage.Self;
 
-                //History
-                var previous = layer.Style.Stroke.Extend;
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Style.Stroke.Extend = previous;
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                layer.Style.Stroke.Extend = extend;
-
-                this.SelectionViewModel.StandStyleLayerage = layerage;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+            this.MethodViewModel.StyleChanged<CanvasEdgeBehavior>
+            (
+                set: (style, transformer) => style.Stroke.Extend = extend,
+                historyTitle: "Set stroke extend",
+                getHistory: (style) => style.Stroke.Extend,
+                setHistory: (style, previous) => style.Stroke.Extend = previous
+            );
         }
 
     }

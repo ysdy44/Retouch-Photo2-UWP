@@ -24,7 +24,8 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel MethodViewModel => App.MethodViewModel;
 
 
-        //@Content
+        //@Content     
+        public override UIElement MainPage => this.EffectMainPage;
         EffectMainPage EffectMainPage = new EffectMainPage();
 
 
@@ -37,13 +38,13 @@ namespace Retouch_Photo2.Menus.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.MainPage = this.EffectMainPage;
             this.EffectMainPage.IsSecondPageChanged += (s, isSecondPage) => this.Back();
             this.EffectMainPage.SecondPageChanged += (title, secondPage) =>
             {
-                if (this.SecondPage != secondPage) this.SecondPage = secondPage;
+                if (this.Page != secondPage) this.Page = secondPage;
                 this.IsSecondPage = true;
                 this.Title = (string)title;
+                this.ResetButtonVisibility = Visibility.Visible;
             };
         }
     }

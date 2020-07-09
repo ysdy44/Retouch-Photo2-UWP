@@ -15,6 +15,9 @@ namespace Retouch_Photo2.Elements
         public object CenterContent { get => this.ContentPresenter.Content; set => this.ContentPresenter.Content = value; }
 
         //@Construct
+        /// <summary>
+        /// Initializes a RadiusAnimaPanel. 
+        /// </summary>
         public RadiusAnimaPanel()
         {
             this.InitializeComponent();

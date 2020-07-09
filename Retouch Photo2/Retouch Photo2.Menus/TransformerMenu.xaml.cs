@@ -24,7 +24,8 @@ namespace Retouch_Photo2.Menus.Models
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
-        //@Content
+        //@Content     
+        public override UIElement MainPage => this.TransformerMainPage;
         TransformerMainPage TransformerMainPage = new TransformerMainPage();
 
 
@@ -37,10 +38,9 @@ namespace Retouch_Photo2.Menus.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.MainPage = this.TransformerMainPage;
             this.TransformerMainPage.SecondPageChanged += (title, secondPage) =>
             {
-                if (this.SecondPage != secondPage) this.SecondPage = secondPage;
+                if (this.Page != secondPage) this.Page = secondPage;
                 this.IsSecondPage = true;
                 this.Title = (string)title;
             };

@@ -19,7 +19,8 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel MethodViewModel => App.MethodViewModel;
 
 
-        //@Content
+        //@Content     
+        public override UIElement MainPage => this.StrokeMainPage;
         StrokeMainPage StrokeMainPage = new StrokeMainPage();
 
 
@@ -30,9 +31,7 @@ namespace Retouch_Photo2.Menus.Models
         public StrokeMenu()
         {
             this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.MainPage = this.StrokeMainPage;
+            this.ConstructStrings();            
         }
 
     }

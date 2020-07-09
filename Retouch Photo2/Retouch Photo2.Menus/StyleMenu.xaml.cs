@@ -7,6 +7,7 @@ using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
@@ -23,7 +24,8 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel MethodViewModel => App.MethodViewModel;
 
 
-        //@Content
+        //@Content     
+        public override UIElement MainPage => this.StyleMainPage;
         StyleMainPage StyleMainPage = new StyleMainPage();
 
 
@@ -35,9 +37,8 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-
-            this.MainPage = this.StyleMainPage;
         }
+            
     }
 
     /// <summary>
@@ -113,12 +114,12 @@ namespace Retouch_Photo2.Menus.Models
                 {
                     Transformer transformer = this.SelectionViewModel.Transformer;
 
-                    this.MethodViewModel.ILayerChanged<Style>
+                    this.MethodViewModel.ILayerChanged<Retouch_Photo2.Styles.Style>
                     (
                         set: (layer) =>
                         {
                             Transformer transformer2 = layer.Transform.Transformer;
-                            Style style2 = item.Clone();
+                            Retouch_Photo2.Styles.Style style2 = item.Clone();
                             style2.CacheTransform();
                             style2.DeliverBrushPoints(transformer2);
                             layer.Style = style2;
@@ -132,7 +133,7 @@ namespace Retouch_Photo2.Menus.Models
                         setHistory: (layer, previous) => layer.Style = previous.Clone()
                     );
 
-                    Style style = item.Clone();
+                    Retouch_Photo2.Styles.Style style = item.Clone();
                     style.CacheTransform();
                     style.DeliverBrushPoints(transformer);
                     this.SelectionViewModel.SetStyle(style);

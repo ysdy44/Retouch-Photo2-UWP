@@ -13,8 +13,8 @@ namespace Retouch_Photo2.Elements
 
         //@Content
         public string Title { get => this.TitleTextBlock.Text; protected set => this.TitleTextBlock.Text = value; }
-        public UIElement MainPage { get => this.MainPageBorder.Child; set => this.MainPageBorder.Child = value; }
-        public UIElement SecondPage { get => this.SecondPageBorder.Child; set => this.SecondPageBorder.Child = value; }
+        public UIElement Page { get => this.PageBorder.Child; set => this.PageBorder.Child = value; }
+        public abstract UIElement MainPage { get; }
         public bool IsSecondPage
         {
             get => this._vsIsSecondPage;
@@ -24,10 +24,6 @@ namespace Retouch_Photo2.Elements
                 {
                     if (value) this.TitleShowStoryboard.Begin();//Storyboard
                     else this.TitleFadeStoryboard.Begin();//Storyboard
-
-                    this.HeightRectangle.VerticalAlignment = VerticalAlignment.Top;
-                    if (value) this.HeightStoryboardMainToSecond.Begin();//Storyboard
-                    else this.HeightStoryboardSecondToMain.Begin();//Storyboard
                 }
 
                 this._vsIsSecondPage = value;
@@ -39,6 +35,7 @@ namespace Retouch_Photo2.Elements
         public void Back()
         {
             this.Title = this.Button.Title;
+            this.Page = this.MainPage;
             this.IsSecondPage = false;
         }
 
@@ -52,27 +49,21 @@ namespace Retouch_Photo2.Elements
                 switch (value)
                 {
                     case ExpanderState.Hide:
-                        this.HeightStretch();
                         this.Closed(); //Delegate
                         break;
 
                     case ExpanderState.FlyoutShow:
-                        this.HeightStretch();
                         if (this._vsState == ExpanderState.Hide) this.Opened(); //Delegate 
                         break;
 
                     case ExpanderState.OverlayNotExpanded:
-                        this.HeightRectangle.VerticalAlignment = VerticalAlignment.Top;
-                        if (this.IsSecondPage) this.HeightStoryboardSecondToZero.Begin();//Storyboard
-                        else this.HeightStoryboardMainToZero.Begin();//Storyboard
+                        this.HeightStoryboard.Begin();//Storyboard
                         break;
 
                     case ExpanderState.Overlay:
                         if (this._vsState == ExpanderState.OverlayNotExpanded)
                         {
-                            this.HeightRectangle.VerticalAlignment = VerticalAlignment.Top;
-                            if (this.IsSecondPage) this.HeightStoryboardZeroToSecond.Begin();//Storyboard
-                            else this.HeightStoryboardZeroToMain.Begin();//Storyboard
+                            this.HeightStoryboard.Begin();//Storyboard
                         }
 
                         this.Overlaid(); //Delegate 

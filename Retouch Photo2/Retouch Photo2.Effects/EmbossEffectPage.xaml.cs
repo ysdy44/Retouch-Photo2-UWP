@@ -90,38 +90,25 @@ namespace Retouch_Photo2.Effects.Models
             this.Radius = 1.0f;
             this.Angle = 0.0f;
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set effect emboss");
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                var previous1 = layer.Effect.Emboss_Radius;
-                var previous2 = layer.Effect.Emboss_Angle;
-                history.UndoAction += () =>
+            this.MethodViewModel.EffectChangeCompleted<(float, float)>
+            (
+                set: (effect) =>
                 {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Effect.Emboss_Radius = previous1;
-                    layer.Effect.Emboss_Angle = previous2;
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                layer.Effect.Emboss_Radius = 1.0f;
-                layer.Effect.Emboss_Angle = 0.0f;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+                    effect.Emboss_Radius = 1.0f;
+                    effect.Emboss_Angle = 0.0f;
+                },
+                historyTitle: "Set effect emboss",
+                getHistory: (effect) =>
+                (
+                    effect.Emboss_Radius,
+                    effect.Emboss_Angle
+                ),
+                setHistory: (effect, previous) =>
+                {
+                    effect.Emboss_Radius = previous.Item1;
+                    effect.Emboss_Angle = previous.Item2;
+                }
+            );
         }
         public void FollowButton(Effect effect)
         {
@@ -208,8 +195,8 @@ namespace Retouch_Photo2.Effects.Models
         //Angle
         private void ConstructAngle1()
         {
-            this.AnglePicker.Unit = null;
-            this.AnglePicker.Minimum = 0;
+            this.AnglePicker.Unit = "º";
+            this.AnglePicker.Minimum = -360;
             this.AnglePicker.Maximum = 360;
             this.AnglePicker.ValueChanged += (s, value) =>
             {
@@ -232,7 +219,13 @@ namespace Retouch_Photo2.Effects.Models
             //this.AnglePicker2.Minimum = 0;
             //this.AnglePicker2.Maximum = FanKit.Math.PiTwice;
             this.AnglePicker2.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheEmboss());
-            this.AnglePicker2.ValueChangeDelta += (s, value) => this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Emboss_Angle = (float)value);
+            this.AnglePicker2.ValueChangeDelta += (s, value) =>
+            {
+                float radians = (float)value;
+                this.Angle = radians;
+
+                this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Emboss_Angle = radians);
+            };
             this.AnglePicker2.ValueChangeCompleted += (s, value) =>
             {
                 float radians = (float)value;

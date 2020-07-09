@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
@@ -23,13 +24,17 @@ namespace Retouch_Photo2.Menus.Models
     /// </summary>
     public sealed partial class EditMenu : Expander, IMenu 
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
 
-        //@Content
+
+        //@Content       
+        public override UIElement MainPage => this.EditMainPage;
         EditMainPage EditMainPage = new EditMainPage();
+
 
         //@Construct
         /// <summary>
@@ -39,8 +44,6 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-
-            this.MainPage = this.EditMainPage;
         }
 
     }

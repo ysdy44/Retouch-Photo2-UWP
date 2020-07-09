@@ -15,10 +15,10 @@ namespace Retouch_Photo2.Menus
 
         /// <summary> Gets the title. </summary>
         string Title { get; }
+        /// <summary> Gets the page. </summary>
+        UIElement Page { get; }
         /// <summary> Get  the main page. </summary>
         UIElement MainPage { get; }
-        /// <summary> Gets the aecond page. </summary>
-        UIElement SecondPage { get; }
         /// <summary> Gets or sets the is aecond page. </summary>
         bool IsSecondPage { get; set;  }
         /// <summary> Reset. </summary>

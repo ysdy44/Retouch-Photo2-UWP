@@ -4,9 +4,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
 
@@ -55,7 +52,7 @@ namespace Retouch_Photo2.Tools.Models
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             this.HandleMode = this.Fill.ContainsHandleMode(startingPoint, matrix);
 
-            //InitializeController
+
             if (this.HandleMode == BrushHandleMode.None)
             {
                 switch (this.Fill.Type)
@@ -63,27 +60,27 @@ namespace Retouch_Photo2.Tools.Models
                     case BrushType.None:
                     case BrushType.Color:
                         {
+                            this.HandleMode = BrushHandleMode.ToInitializeController;
+
                             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
                             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
                             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-                            //Selection          
                             this.Fill = BrushBase.LinearGradientBrush(canvasStartingPoint, canvasPoint);
+                            this.MethodViewModel.StyleChangeStarted(cache: (style) => style.CacheFill());
                         }
                         break;
                 }
             }
 
-            //Selection
+
             this.Fill.CacheTransform();
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.MethodViewModel.StyleChangeStarted(cache: (style) =>
             {
-                ILayer layer = layerage.Self;
+                style.CacheFill();
 
-                layer.Style.CacheFill();
-
-                layer.Style.Fill = this.Fill.Clone();
-                layer.Style.Fill.CacheTransform();
+                style.Fill = this.Fill.Clone();
+                style.Fill.CacheTransform();
             });
         }
 
@@ -94,80 +91,31 @@ namespace Retouch_Photo2.Tools.Models
 
             switch (this.HandleMode)
             {
-                //InitializeController
-                case BrushHandleMode.None:
-                    {
-                        //Selection
-                        this.Fill.InitializeController(canvasStartingPoint, canvasPoint);
-                        this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-                        {
-                            ILayer layer = layerage.Self;
-
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layerage.RefactoringParentsRender();
-                            layer.Style.Fill.InitializeController(canvasStartingPoint, canvasPoint);
-                        });
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
+                case BrushHandleMode.ToInitializeController:
+                    this.Fill.InitializeController(canvasStartingPoint, canvasPoint);
+                    this.MethodViewModel.StyleChangeDelta(set: (style) => style.Fill.InitializeController(canvasStartingPoint, canvasPoint));
                     break;
 
-                //Controller
                 default:
-                    {
-                        //Selection
-                        this.Fill.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
-                        this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-                        {
-                            ILayer layer = layerage.Self;
-
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layerage.RefactoringParentsRender();
-                            layer.Style.Fill.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
-                        });
-
-                        this.ViewModel.Invalidate();//Invalidate
-                    }
+                    this.Fill.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
+                    this.MethodViewModel.StyleChangeDelta(set: (style) => style.Fill.Controller(this.HandleMode, canvasStartingPoint, canvasPoint));
                     break;
             }
         }
 
-        private void FillComplete()
+        private void FillComplete(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             //Selection
             if (this.Fill == null) return;
+            this.Fill.Controller(this.HandleMode, canvasStartingPoint, canvasPoint);
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
-
-            //Selection
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                //History
-                var previous = layer.Style.StartingFill.Clone();
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Style.Fill = previous.Clone();
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-
-                this.SelectionViewModel.StandStyleLayerage = layerage;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
+            this.MethodViewModel.StyleChangeCompleted
+            (
+                set: (style) => style.Fill.Controller(this.HandleMode, canvasStartingPoint, canvasPoint),
+                historyTitle: "Set fill",
+                getHistory: (style) => style.StartingFill,
+                setHistory: (style, previous) => style.Fill = previous.Clone()
+            );
         }
 
 
@@ -178,53 +126,29 @@ namespace Retouch_Photo2.Tools.Models
         {
             if (this.Fill.Type == brushType) return;
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set fill type");
 
-            bool _lock = false;
+            IBrush brush = null;
 
-            //Selection
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
+            this.MethodViewModel.StyleChanged
+            (
+                set: (style, transformer) =>
+                {
+                    style.Fill.TypeChange(brushType, transformer, photo);
+
+                    brush = style.Fill;
+                },
+
+                historyTitle: "Set fill type",
+                getHistory: (style) => style.Fill.Clone(),
+                setHistory: (style, previous) => style.Fill = previous.Clone()
+            );
+
+            if (brush != null)
             {
-                ILayer layer = layerage.Self;
+                this.Fill = brush.Clone();
 
-                //History
-                var previous = layer.Style.Fill.Clone(); ;
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Style.Fill = previous.Clone();
-                };
-
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                Transformer transformer = layer.Transform.Transformer;
-                layer.Style.Fill.TypeChange(brushType, transformer, photo);
-
-                this.SelectionViewModel.StandStyleLayerage = layerage;
-
-
-                // Set fill Onces: lock
-                if (_lock == false)
-                {
-                    _lock = true;
-                    this.Fill = layer.Style.Fill.Clone();
-
-                    if (this.Fill.Type == BrushType.Color) this.SelectionViewModel.Color = this.Fill.Color;
-                }
-            });
-
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+                if (brush.Type == BrushType.Color) this.SelectionViewModel.Color = this.Fill.Color;
+            }
         }
 
         private void FillShow()
@@ -254,145 +178,52 @@ namespace Retouch_Photo2.Tools.Models
 
         private void FillStopsChanged(CanvasGradientStop[] array)
         {
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
-
-            //Selection
             this.Fill.Stops = array.CloneArray();
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-            {
-                ILayer layer = layerage.Self;
 
-                //History
-                var previous = layer.Style.Fill.Clone();
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Style.Fill = previous.Clone();
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                layer.Style.Fill.Stops = array.CloneArray();
-
-                this.SelectionViewModel.StandStyleLayerage = layerage;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
-            this.ShowControl.Invalidate();//Invalidate
+            this.MethodViewModel.StyleChanged
+            (
+                set: (style, transformer) => style.Fill.Stops = array.CloneArray(),
+                historyTitle: "Set fill",
+                getHistory: (style) => style.Fill.Clone(),
+                setHistory: (style, previous) => style.Fill = previous.Clone()
+            );
         }
 
         private void FillStopsChangeStarted(CanvasGradientStop[] array)
         {
-            //Selection
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-                layer.Style.CacheFill();
-            });
-
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.MethodViewModel.StyleChangeStarted(cache: (style) => style.CacheFill());
         }
         private void FillStopsChangeDelta(CanvasGradientStop[] array)
         {
-            //Selection
             this.Fill.Stops = array.CloneArray();
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-            {
-                ILayer layer = layerage.Self;
 
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layerage.RefactoringParentsRender();
-                layer.Style.Fill.Stops = array.CloneArray();
-            });
-
-            this.ViewModel.Invalidate();//Invalidate
+            this.MethodViewModel.StyleChangeDelta(set: (style) => style.Fill.Stops = array.CloneArray());
         }
         private void FillStopsChangeCompleted(CanvasGradientStop[] array)
         {
             this.Fill.Stops = array.CloneArray();
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
-
-            //Selection
-            this.Fill.Stops = array.CloneArray();
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                //History
-                var previous = layer.Style.Fill.Clone();
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Style.Fill = previous.Clone();
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                layer.Style.Fill.Stops = array.CloneArray();
-
-                this.SelectionViewModel.StandStyleLayerage = layerage;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-            this.ShowControl.Invalidate();//Invalidate
+            this.MethodViewModel.StyleChangeCompleted<IBrush>
+            (
+                set: (style) => style.Fill.Stops = array.CloneArray(),
+                historyTitle: "Set fill",
+                getHistory: (style) => style.Fill.Clone(),
+                setHistory: (style, previous) => style.Fill = previous.Clone()
+            );
         }
 
         private void FillExtendChanged(CanvasEdgeBehavior extend)
         {
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set fill extend");
-
-            //Selection
             this.Fill.Extend = extend;
             this.ExtendComboBox.Extend = extend;
-            this.SelectionViewModel.SetValueWithChildrenOnlyGroup((layerage) =>
-            {
-                ILayer layer = layerage.Self;
 
-                //History
-                var previous = layer.Style.Fill.Extend;
-                history.UndoAction += () =>
-                {
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layer.Style.Fill.Extend = previous;
-                };
-
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layerage.RefactoringParentsRender();
-                layerage.RefactoringParentsIconRender();
-                layer.Style.Fill.Extend = extend;
-
-                this.SelectionViewModel.StandStyleLayerage = layerage;
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
+            this.MethodViewModel.StyleChanged<CanvasEdgeBehavior>
+            (
+                set: (style, transformer) => style.Fill.Extend = extend,
+                historyTitle: "Set fill extend",
+                getHistory: (style) => style.Fill.Extend,
+                setHistory: (style, previous) => style.Fill.Extend = previous
+            );
         }
 
     }

@@ -2,6 +2,7 @@
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
@@ -18,7 +19,8 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel MethodViewModel => App.MethodViewModel;
 
 
-        //@Content
+        //@Content     
+        public override UIElement MainPage => this.ColorMainPage;
         ColorMainPage ColorMainPage = new ColorMainPage();
 
 
@@ -36,8 +38,6 @@ namespace Retouch_Photo2.Menus.Models
                  dp: ColorEllipse.ColorProperty
             );
             this.ConstructStrings();
-
-            this.MainPage = this.ColorMainPage;
         }
 
     }

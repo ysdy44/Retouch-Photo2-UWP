@@ -125,7 +125,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         private void ConstructHueRotation1()
         {
             this.AnglePicker.Unit = "º";
-            this.AnglePicker.Minimum = 0;
+            this.AnglePicker.Minimum = -360;
             this.AnglePicker.Maximum = 360;
             this.AnglePicker.ValueChanged += (s, value) =>
             {

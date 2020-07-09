@@ -20,9 +20,10 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of Debug.
     /// </summary>
-    public sealed partial class DebugMenu : Expander, IMenu 
-    {
-        //@Content
+    public sealed partial class DebugMenu : Expander, IMenu
+    {       
+        //@Content     
+        public override UIElement MainPage => this.TextMainPage;
         TextMainPage TextMainPage = new TextMainPage();
 
         //@Construct
@@ -33,8 +34,6 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-
-            this.MainPage = this.TextMainPage;
         }
     }
 

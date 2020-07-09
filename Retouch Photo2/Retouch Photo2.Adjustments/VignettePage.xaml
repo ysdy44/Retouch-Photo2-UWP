@@ -55,7 +55,7 @@
 
         <!--Color-->
         <TextBlock x:Name="ColorTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <Border x:Name="ColorBorder" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{StaticResource AppText}" Style="{StaticResource AppCircleBorderStyle}">
+        <Border x:Name="ColorBorder" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="White" Style="{StaticResource AppCircleBorderStyle}">
             <Border.Background>
                 <SolidColorBrush x:Name="SolidColorBrush" Color="Black"/>
             </Border.Background>

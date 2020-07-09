@@ -14,5 +14,8 @@
         XPoint,
         /// <summary> <see cref="IBrush.YPoint"/>. </summary>
         YPoint,
+
+        /// <summary> Turn to "Initialize". </summary>
+        ToInitializeController,
     }
 }

@@ -22,7 +22,8 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel MethodViewModel => App.MethodViewModel;
 
 
-        //@Content
+        //@Content     
+        public override UIElement MainPage => this.LayerMainPage;
         LayerMainPage LayerMainPage = new LayerMainPage();
 
 
@@ -35,10 +36,9 @@ namespace Retouch_Photo2.Menus.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.MainPage = this.LayerMainPage;
             this.LayerMainPage.SecondPageChanged += (title, secondPage) =>
             {
-                if (this.SecondPage != secondPage) this.SecondPage = secondPage;
+                if (this.Page != secondPage) this.Page = secondPage;
                 this.IsSecondPage = true;
                 this.Title = (string)title;
             };

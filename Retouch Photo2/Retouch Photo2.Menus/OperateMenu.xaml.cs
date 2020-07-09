@@ -29,8 +29,10 @@ namespace Retouch_Photo2.Menus.Models
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
 
 
-        //@Content
+        //@Content     
+        public override UIElement MainPage => this.OperateMainPage;
         OperateMainPage OperateMainPage = new OperateMainPage();
+
 
         //@Construct
         /// <summary>
@@ -40,9 +42,8 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
-
-            this.MainPage = this.OperateMainPage;
         }
+
     }
 
     /// <summary>

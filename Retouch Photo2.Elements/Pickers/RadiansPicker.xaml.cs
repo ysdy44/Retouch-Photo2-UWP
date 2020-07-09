@@ -183,7 +183,7 @@ namespace Retouch_Photo2.Elements
 
             this.SizeChanged += (s, e) =>
             {
-                this.Radius = (float)Math.Min(e.NewSize.Width, e.NewSize.Height) / 2 - 6;
+                this.Radius = (float)Math.Min(e.NewSize.Width, e.NewSize.Height) / 2 - 10;
                 this.Center = new Vector2((float)(e.NewSize.Width / 2), (float)(e.NewSize.Height / 2));
                 this.Arrow = RadiansPicker.RadiansToVector(this.Radians, this.Radius, this.Center);
             };
@@ -194,7 +194,7 @@ namespace Retouch_Photo2.Elements
             {
                 this.Vector = e.Position.ToVector2() - this.Center;
 
-                this.InRadians = this.Vector.Length() < this.Radius;
+                this.InRadians = this.Vector.Length() < this.Radius + 10;
 
                 if (!this.InRadians) return;
                 this._Radians = RadiansPicker.VectorToRadians(this.Vector);

@@ -1,11 +1,11 @@
-﻿using Retouch_Photo2.Adjustments;
-using Retouch_Photo2.Brushs;
+﻿using FanKit.Transformers;
+using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Styles;
 using System;
 using System.ComponentModel;
-using Windows.UI;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -29,10 +29,7 @@ namespace Retouch_Photo2.ViewModels
         public void ILayerChanged<T>
         (
             Action<ILayer> set,
-
-            string historyTitle,
-            Func<ILayer, T> getHistory,
-            Action<ILayer, T> setHistory
+            string historyTitle, Func<ILayer, T> getHistory, Action<ILayer, T> setHistory
         )
         {
             //History
@@ -157,10 +154,7 @@ namespace Retouch_Photo2.ViewModels
         (
             LayerType layerType,
             Action<TLayer> set,
-
-            string historyTitle,
-            Func<TLayer, T> getHistory,
-            Action<TLayer, T> setHistory
+            string historyTitle, Func<TLayer, T> getHistory, Action<TLayer, T> setHistory
         )
         where TLayer : ILayer
         {
@@ -307,10 +301,7 @@ namespace Retouch_Photo2.ViewModels
         public void EffectChanged<T>
         (
             Action<Effect> set,
-
-            string historyTitle,
-            Func<Effect, T> getHistory,
-            Action<Effect, T> setHistory
+            string historyTitle, Func<Effect, T> getHistory, Action<Effect, T> setHistory
         )
         {
             //History
@@ -437,10 +428,7 @@ namespace Retouch_Photo2.ViewModels
         (
             int index,
             Action<TAdjustment> set,
-
-            string historyTitle,
-            Func<TAdjustment, T> getHistory,
-            Action<TAdjustment, T> setHistory
+            string historyTitle, Func<TAdjustment, T> getHistory, Action<TAdjustment, T> setHistory
         )
         where TAdjustment : IAdjustment
         {
@@ -541,7 +529,7 @@ namespace Retouch_Photo2.ViewModels
                 if (layer.Filter.Adjustments[index] is TAdjustment adjustment)
                 {
                     //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment white light");
+                    LayersPropertyHistory history = new LayersPropertyHistory(historyTitle);
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                     var previous1 = getHistory(adjustment);
@@ -572,9 +560,193 @@ namespace Retouch_Photo2.ViewModels
                 }
             }
         }
+
+
+        #endregion
+        
+
+
+        #region Style<T>
+
+
+        /// <summary>
+        /// Change T type for Style, save history, invalidate canvas.
+        /// </summary>
+        /// <typeparam name="T"> The T type property. </typeparam>
+        /// <param name="set"> The sets of T. </param>
+        /// <param name="historyTitle"> The history title. </param>
+        /// <param name="getHistory"> The gets of history T. </param>
+        /// <param name="setHistory"> The sets of history T. </param>
+        public void StyleChanged<T>
+        (
+            Action<Style, Transformer> set,
+            string historyTitle, Func<Style, T> getHistory, Action<Style, T> setHistory
+        )
+        {
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory(historyTitle);
+
+            //Selection
+            this.SetValueWithChildrenOnlyGroup((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                var previous = getHistory(layer.Style);
+                history.UndoAction += () =>
+                {
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    setHistory(layer.Style, previous);
+                };
+
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
+                set(layer.Style, layer.Transform.Transformer);
+                this.StandStyleLayer = layer;
+            });
+
+            //History
+            this.HistoryPush(history);
+
+            this.Invalidate();//Invalidate
+        }
+
+
+        public void StyleChangeStarted(Action<Style> cache)
+        {
+            //Selection
+            this.SetValueWithChildrenOnlyGroup((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+                cache(layer.Style);
+            });
+
+            this.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+        }
+
+        public void StyleChangeDelta(Action<Style> set)
+        {
+            //Selection
+            this.SetValueWithChildrenOnlyGroup((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layerage.RefactoringParentsRender();
+                set(layer.Style);
+            });
+
+            this.Invalidate();//Invalidate
+        }
+
+        public void StyleChangeCompleted<T>
+        (
+            Action<Style> set,
+
+            string historyTitle,
+            Func<Style, T> getHistory,
+            Action<Style, T> setHistory
+        )
+        {
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory(historyTitle);
+
+            //Selection
+            this.SetValueWithChildrenOnlyGroup((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                var previous = getHistory(layer.Style);
+                history.UndoAction += () =>
+                {
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    setHistory(layer.Style, previous);
+                };
+
+                //Refactoring
+                layer.IsRefactoringRender = true;
+                layer.IsRefactoringIconRender = true;
+                layerage.RefactoringParentsRender();
+                layerage.RefactoringParentsIconRender();
+                set(layer.Style);
+                this.StandStyleLayer = layer;
+            });
+
+            //History
+            this.HistoryPush(history);
+
+            this.Invalidate();//Invalidate
+        }
+
+
+        #endregion
+
+
+
+        #region ITextLayer<T>
+
+
+        /// <summary>
+        /// Change T type for ITextLayer, save history, invalidate canvas.
+        /// </summary>
+        /// <typeparam name="T"> The T type property. </typeparam>
+        /// <param name="set"> The sets of T. </param>
+        /// <param name="historyTitle"> The history title. </param>
+        /// <param name="getHistory"> The gets of history T. </param>
+        /// <param name="setHistory"> The sets of history T. </param>
+        public void ITextLayerChanged<T>
+        (
+            Action<ITextLayer> set,
+            string historyTitle, Func<ITextLayer, T> getHistory, Action<ITextLayer, T> setHistory
+        )
+        {
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory(historyTitle);
+
+            //Selection
+            this.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                if (layer.Type.IsText())
+                {
+                    ITextLayer textLayer = (ITextLayer)layer;
+
+                    var previous = getHistory(textLayer);
+                    history.UndoAction += () =>
+                    {
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        setHistory(textLayer, previous);
+                    };
+
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
+                    set(textLayer);
+                }
+            });
+
+            //History
+            this.HistoryPush(history);
+
+            this.Invalidate();//Invalidate
+        }
         
 
         #endregion
+
+
 
     }
 }

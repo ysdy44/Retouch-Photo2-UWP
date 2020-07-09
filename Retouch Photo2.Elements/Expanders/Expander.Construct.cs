@@ -69,55 +69,28 @@ namespace Retouch_Photo2.Elements
         private void ConstructHeightStoryboard()
         {
             // Binding own DependencyProperty to the Storyboard
-            Storyboard.SetTarget(this.HeightKeyFramesZeroToMain, this.HeightRectangle);
-            Storyboard.SetTargetProperty(this.HeightKeyFramesZeroToMain, "(UIElement.Height)");
-            Storyboard.SetTarget(this.HeightKeyFramesZeroToSecond, this.HeightRectangle);
-            Storyboard.SetTargetProperty(this.HeightKeyFramesZeroToSecond, "(UIElement.Height)");
-            Storyboard.SetTarget(this.HeightKeyFramesMainToZero, this.HeightRectangle);
-            Storyboard.SetTargetProperty(this.HeightKeyFramesMainToZero, "(UIElement.Height)");
-            Storyboard.SetTarget(this.HeightKeyFramesSecondToZero, this.HeightRectangle);
-            Storyboard.SetTargetProperty(this.HeightKeyFramesSecondToZero, "(UIElement.Height)");
-            Storyboard.SetTarget(this.HeightKeyFramesMainToSecond, this.HeightRectangle);
-            Storyboard.SetTargetProperty(this.HeightKeyFramesMainToSecond, "(UIElement.Height)");
-            Storyboard.SetTarget(this.HeightKeyFramesSecondToMain, this.HeightRectangle);
-            Storyboard.SetTargetProperty(this.HeightKeyFramesSecondToMain, "(UIElement.Height)");
+            Storyboard.SetTarget(this.HeightKeyFrames, this.HeightRectangle);
+            Storyboard.SetTargetProperty(this.HeightKeyFrames, "(UIElement.Height)");
+
+            this.HeightKeyFrames.Completed += (s, e) =>
+            {
+                this.HeightKeyFrames.From = this.HeightKeyFrames.To;
+            };
             
-            this.HeightKeyFramesZeroToMain.Completed += (s, e) => this.HeightStretch();
-            this.HeightKeyFramesZeroToMain.Completed += (s, e) => this.HeightStretch();
-            this.HeightKeyFramesMainToSecond.Completed += (s, e) => this.HeightStretch();
-            this.HeightKeyFramesSecondToMain.Completed += (s, e) => this.HeightStretch();
-            
-            this.HeightKeyFramesZeroToMain.From = 40;
-            this.HeightKeyFramesZeroToSecond.From = 40;
-            this.HeightKeyFramesMainToZero.To = 40;
-            this.HeightKeyFramesSecondToZero.To = 40;
-            
-            this.MainPageBorder.SizeChanged += (s, e) =>
+            this.PageBorder.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
 
                 double height = e.NewSize.Height;
-                this.HeightKeyFramesZeroToMain.To = height + 40;
-                this.HeightKeyFramesMainToZero.From = height + 40;
-                this.HeightKeyFramesMainToSecond.From = height + 40;
-                this.HeightKeyFramesSecondToMain.To = height + 40;
+                this.HeightKeyFrames.To = height + 40;
+               this.HeightStoryboard.Begin();//Storyboard
             };
-            this.SecondPageBorder.SizeChanged += (s, e) =>
+
             {
-                if (e.NewSize == e.PreviousSize) return;
-
-                double height = e.NewSize.Height;
-                this.HeightKeyFramesZeroToSecond.From = height + 40;
-                this.HeightKeyFramesSecondToZero.To = height + 40;
-                this.HeightKeyFramesMainToSecond.To = height + 40;
-                this.HeightKeyFramesSecondToMain.From = height + 40;
-            };
-        }
-
-        private void HeightStretch()
-        {
-            this.HeightRectangle.VerticalAlignment = VerticalAlignment.Stretch;
-            this.HeightRectangle.Height = double.NaN;
+                double height = this.PageBorder.Width;
+                this.HeightRectangle.Height = height + 40;
+                this.HeightKeyFrames.From = 200;
+            }
         }
 
     }
