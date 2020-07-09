@@ -225,4 +225,13 @@
   <data name="PatternGrid_Vertical" xml:space="preserve">
     <value>垂直步</value>
   </data>
+  <data name="PatternSpotted" xml:space="preserve">
+    <value>斑点工具</value>
+  </data>
+  <data name="PatternSpotted_Radius" xml:space="preserve">
+    <value>半径</value>
+  </data>
+  <data name="PatternSpotted_Step" xml:space="preserve">
+    <value>步</value>
+  </data>
 </root>

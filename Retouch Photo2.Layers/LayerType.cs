@@ -32,7 +32,9 @@
 
         /// <summary> Grid pattern. </summary>
         PatternGrid,
-
+        /// <summary> Spotted pattern. </summary>
+        PatternSpotted,
+        
         //Geometry1
         /// <summary> Round-rect geometry. </summary>
         GeometryRoundRect,

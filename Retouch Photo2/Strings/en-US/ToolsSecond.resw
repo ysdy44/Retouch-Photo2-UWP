@@ -225,4 +225,13 @@
   <data name="PatternGrid_Vertical" xml:space="preserve">
     <value>Vertical Step</value>
   </data>
+  <data name="PatternSpotted" xml:space="preserve">
+    <value>Spotted</value>
+  </data>
+  <data name="PatternSpotted_Radius" xml:space="preserve">
+    <value>Radius</value>
+  </data>
+  <data name="PatternSpotted_Step" xml:space="preserve">
+    <value>Step</value>
+  </data>
 </root>

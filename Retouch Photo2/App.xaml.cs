@@ -72,6 +72,7 @@ namespace Retouch_Photo2
 
 
                  new PatternGridTool(),
+                 new PatternSpottedTool(),
                  null,
 
                  //Geometry1

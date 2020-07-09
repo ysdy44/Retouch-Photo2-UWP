@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="Retouch_Photo2.Tools.Models.PatternSpottedTool"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hSVColorPickers="using:HSVColorPickers"
+    xmlns:tools="using:Retouch_Photo2.Tools"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="400"
+    >
+
+
+    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
+        <StackPanel Orientation="Horizontal">
+
+            <!--Radius-->
+            <tools:TouchbarButton x:Name="RadiusButton">
+                <tools:TouchbarButton.Picker>
+                    <hSVColorPickers:NumberPicker x:Name="RadiusPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                             Value="{x:Bind Converter(SelectionViewModel.PatternSpottedRadius), Mode=OneWay}"/>
+                </tools:TouchbarButton.Picker>
+                <tools:TouchbarButton.Slider>
+                    <tools:TouchbarSlider x:Name="RadiusSlider" 
+                             Value="{x:Bind SelectionViewModel.PatternSpottedRadius, Mode=OneWay}"/>
+                </tools:TouchbarButton.Slider>
+            </tools:TouchbarButton>
+
+            <ContentControl Width="4"/>
+
+            <!---->
+            <tools:TouchbarButton x:Name="StepButton">
+                <tools:TouchbarButton.Picker>
+                    <hSVColorPickers:NumberPicker x:Name="StepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                             Value="{x:Bind Converter(SelectionViewModel.PatternSpottedStep), Mode=OneWay}"/>
+                </tools:TouchbarButton.Picker>
+                <tools:TouchbarButton.Slider>
+                    <tools:TouchbarSlider x:Name="StepSlider" 
+                             Value="{x:Bind SelectionViewModel.PatternSpottedStep, Mode=OneWay}"/>
+                </tools:TouchbarButton.Slider>
+            </tools:TouchbarButton>
+            
+        </StackPanel>
+    </ScrollViewer>
+
+</Page>

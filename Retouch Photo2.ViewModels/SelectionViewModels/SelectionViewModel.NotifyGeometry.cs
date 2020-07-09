@@ -29,7 +29,7 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        #region asdasdasdsa
+        #region Pattern
 
 
         /// <summary> PatternGridLayer's Type. </summary>     
@@ -71,6 +71,33 @@ namespace Retouch_Photo2.ViewModels
         }
         private float patternGridVerticalStep = 30.0f;
 
+
+        /// <summary> PatternSpottedLayer's radius. </summary>     
+        public float PatternSpottedRadius
+        {
+            get => this.patternSpottedRadius;
+            set
+            {
+                if (this.patternSpottedRadius == value) return;
+                this.patternSpottedRadius = value;
+                this.OnPropertyChanged(nameof(this.PatternSpottedRadius));//Notify 
+            }
+        }
+        private float patternSpottedRadius = 8.0f;
+
+        /// <summary> PatternSpottedLayer's step. </summary>     
+        public float PatternSpottedStep
+        {
+            get => this.patternSpottedStep;
+            set
+            {
+                if (this.patternSpottedStep == value) return;
+                this.patternSpottedStep = value;
+                this.OnPropertyChanged(nameof(this.PatternSpottedStep));//Notify 
+            }
+        }
+        private float patternSpottedStep = 30.0f;
+        
 
         #endregion
 

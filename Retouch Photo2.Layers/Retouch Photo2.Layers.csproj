@@ -120,6 +120,7 @@
     <Compile Include="Layers\ITextLayer.cs" />
     <Compile Include="Layers\LayerBase.Instance.cs" />
     <Compile Include="Layers\LayerBase.Node.cs" />
+    <Compile Include="Layers\PatternLayer.cs" />
     <Compile Include="LayerType.cs" />
     <Compile Include="ModelsSecond\GeometryArrowLayer.cs" />
     <Compile Include="ModelsSecond\GeometryCapsuleLayer.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Layers\LayerBase.Render.cs" />
     <Compile Include="Layers\LayerBase.Property.cs" />
     <Compile Include="Layers\TextLayer.cs" />
+    <Compile Include="ModelsSecond\PatternSpottedLayer.cs" />
     <Compile Include="ModelsSecond\PatternGridLayer.cs" />
     <Compile Include="Models\TextArtisticLayer.cs" />
     <Compile Include="Models\TextFrameLayer.cs" />

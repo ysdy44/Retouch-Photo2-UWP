@@ -49,6 +49,7 @@ namespace Retouch_Photo2.ViewModels
                     //Curve & Pattern
                     case LayerType.Curve:
                     case LayerType.PatternGrid:
+                    case LayerType.PatternSpotted:
                         if (value != standStyleCurveLayer)
                             this.standStyleCurveLayer = layer;
                         break;

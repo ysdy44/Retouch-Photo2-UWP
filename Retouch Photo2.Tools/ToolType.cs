@@ -45,7 +45,9 @@
 
         /// <summary> Pattern grid. </summary>
         PatternGrid,
-
+        /// <summary> Pattern spotted. </summary>
+        PatternSpotted,
+        
 
         //Geometry1
         /// <summary> Create round-rect geometry. </summary>

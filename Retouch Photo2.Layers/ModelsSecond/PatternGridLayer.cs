@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Layers.Models
     /// <summary>
     /// <see cref="LayerBase"/>'s PatternGridLayer .
     /// </summary>
-    public class PatternGridLayer : LayerBase, ILayer
+    public class PatternGridLayer : PatternLayer, ILayer
     {
 
         //@Override     
@@ -87,107 +87,31 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
+        public override void GetPatternRender(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry)
         {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
+            ICanvasBrush canvasBrush = this.Style.Stroke.GetICanvasBrush(resourceCreator);
+            float strokeWidth = this.Style.StrokeWidth;
+            CanvasStrokeStyle strokeStyle = this.Style.StrokeStyle;
 
-            CanvasCommandList command = new CanvasCommandList(resourceCreator);
-            using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
+            Transformer transformer = base.Transform.GetActualTransformer();
+            TransformerBorder border = new TransformerBorder(transformer);
+
+            if (this.GridType != PatternGridType.Vertical)
             {
-                if (this.Transform.IsCrop)
+                for (float i = border.Left; i < border.Right; i += this.HorizontalStep)
                 {
-                    CanvasGeometry geometryCrop = this.Transform.CropTransformer.ToRectangle(resourceCreator);
-
-                    CanvasGeometryRelation relation = geometry.CompareWith(geometryCrop);
-                    switch (relation)
-                    {
-                        case CanvasGeometryRelation.Disjoint:
-                            return null;
-                        case CanvasGeometryRelation.Contained:
-                            this._render(resourceCreator, drawingSession, geometry);
-                            break;
-                        case CanvasGeometryRelation.Contains:
-                            this._render(resourceCreator, drawingSession, geometryCrop);
-                            break;
-                        case CanvasGeometryRelation.Overlap:
-                            Matrix3x2 zero = Matrix3x2.CreateTranslation(0.0f, 0.0f);
-                            CanvasGeometry combine = geometry.CombineWith(geometryCrop, zero, CanvasGeometryCombine.Intersect);
-                            this._render(resourceCreator, drawingSession, combine);
-                            break;
-                        default:
-                            return null;
-                    }
-                }
-                else
-                {
-                    this._render(resourceCreator, drawingSession, geometry);
+                    drawingSession.DrawLine(i, border.Top, i, border.Bottom, canvasBrush, strokeWidth, strokeStyle);
                 }
             }
-            return command;
-        }
-        private void _render(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry)
-        {
 
-            //Fill
-            // Fill a geometry with style.
-            if (this.Style.Fill.Type != BrushType.None)
+            if (this.GridType != PatternGridType.Horizontal)
             {
-                ICanvasBrush canvasBrush = this.Style.Fill.GetICanvasBrush(resourceCreator);
-                drawingSession.FillGeometry(geometry, canvasBrush);
-            }
-
-            //CanvasActiveLayer
-            using (drawingSession.CreateLayer(1, geometry))
-            {
-
-                //Stroke
-                // Draw a geometry with style
-                if (this.Style.Stroke.Type != BrushType.None)
+                for (float i = border.Top; i < border.Bottom; i += this.VerticalStep)
                 {
-                    if (this.Style.StrokeWidth != 0)
-                    {
-                        ICanvasBrush canvasBrush = this.Style.Stroke.GetICanvasBrush(resourceCreator);
-                        float strokeWidth = this.Style.StrokeWidth;
-                        CanvasStrokeStyle strokeStyle = this.Style.StrokeStyle;
-
-                        Transformer transformer = base.Transform.GetActualTransformer();
-                        TransformerBorder border = new TransformerBorder(transformer);
-
-                        if (this.GridType != PatternGridType.Vertical)
-                        {
-                            for (float i = border.Left; i < border.Right; i += this.HorizontalStep)
-                            {
-                                drawingSession.DrawLine(i, border.Top, i, border.Bottom, canvasBrush, strokeWidth, strokeStyle);
-                            }
-                        }
-
-                        if (this.GridType != PatternGridType.Horizontal)
-                        {
-                            for (float i = border.Top; i < border.Bottom; i += this.VerticalStep)
-                            {
-                                drawingSession.DrawLine(border.Left, i, border.Right, i, canvasBrush, strokeWidth, strokeStyle);
-                            }
-                        }
-                    }
+                    drawingSession.DrawLine(border.Left, i, border.Right, i, canvasBrush, strokeWidth, strokeStyle);
                 }
             }
         }
-
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator)
-        {
-            Transformer transformer = base.Transform.Transformer;
-
-            return transformer.ToRectangle(resourceCreator);
-        }
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
-        {
-            Transformer transformer = base.Transform.Transformer;
-
-            return transformer.ToRectangle(resourceCreator, matrix);
-        }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator) => null;
         
 
         //Strings
