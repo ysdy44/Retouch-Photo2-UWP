@@ -9,9 +9,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s CurveLayer .
+    /// <see cref="GeometryLayer"/>'s CurveLayer .
     /// </summary>
-    public partial class CurveLayer : LayerBase, ILayer
+    public partial class CurveLayer : GeometryLayer, ILayer
     {
 
         //@Override     

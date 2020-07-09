@@ -8,9 +8,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s GeometryRectangleLayer .
+    /// <see cref="GeometryLayer"/>'s GeometryRectangleLayer .
     /// </summary>
-    public class GeometryRectangleLayer : LayerBase, ILayer
+    public class GeometryRectangleLayer : GeometryLayer, ILayer
     {
 
         //@Override     
@@ -50,14 +50,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return transformer.ToRectangle(resourceCreator, matrix);
-        }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
-
-            return new NodeCollection(geometry);
         }
 
 

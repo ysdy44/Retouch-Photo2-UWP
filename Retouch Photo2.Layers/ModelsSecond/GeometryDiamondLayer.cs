@@ -9,9 +9,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s GeometryDiamondLayer .
+    /// <see cref="GeometryLayer"/>'s GeometryDiamondLayer .
     /// </summary>
-    public class GeometryDiamondLayer : LayerBase, ILayer
+    public class GeometryDiamondLayer : GeometryLayer, ILayer
     {
 
         //@Override     
@@ -68,14 +68,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateDiamond(resourceCreator, transformer, matrix, this.Mid);
-        }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
-
-            return new NodeCollection(geometry);
         }
 
 

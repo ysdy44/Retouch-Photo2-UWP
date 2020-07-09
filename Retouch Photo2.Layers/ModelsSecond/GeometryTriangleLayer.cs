@@ -9,9 +9,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s GeometryTriangleLayer .
+    /// <see cref="GeometryLayer"/>'s GeometryTriangleLayer .
     /// </summary>
-    public class GeometryTriangleLayer : LayerBase, ILayer
+    public class GeometryTriangleLayer : GeometryLayer, ILayer
     {
 
         //@Override     
@@ -69,15 +69,7 @@ namespace Retouch_Photo2.Layers.Models
 
             return TransformerGeometry.CreateTriangle(resourceCreator, transformer, matrix, this.Center);
         }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
-
-            return new NodeCollection(geometry);
-        }
-
+        
 
         //Strings
         private string ConstructStrings()

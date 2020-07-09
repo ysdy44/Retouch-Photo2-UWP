@@ -9,9 +9,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s GeometryHeartLayer .
+    /// <see cref="GeometryLayer"/>'s GeometryHeartLayer .
     /// </summary>
-    public class GeometryHeartLayer : LayerBase, ILayer
+    public class GeometryHeartLayer : GeometryLayer, ILayer
     {
 
         //@Override     
@@ -67,14 +67,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateHeart(resourceCreator, transformer, matrix, this.Spread);
-        }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
-
-            return new NodeCollection(geometry);
         }
 
 

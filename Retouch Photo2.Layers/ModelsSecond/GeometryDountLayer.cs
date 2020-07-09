@@ -9,9 +9,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s GeometryDountLayer .
+    /// <see cref="GeometryLayer"/>'s GeometryDountLayer .
     /// </summary>
-    public partial class GeometryDountLayer : LayerBase, ILayer
+    public partial class GeometryDountLayer : GeometryLayer, ILayer
     {
 
         //@Override     
@@ -68,14 +68,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateDount(resourceCreator, transformer, matrix, this.HoleRadius);
-        }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
-
-            return new NodeCollection(geometry);
         }
 
 

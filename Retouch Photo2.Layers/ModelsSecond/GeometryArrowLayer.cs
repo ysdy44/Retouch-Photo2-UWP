@@ -9,9 +9,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s ArrowLayer .
+    /// <see cref="GeometryLayer"/>'s ArrowLayer .
     /// </summary>
-    public class GeometryArrowLayer : LayerBase, ILayer
+    public class GeometryArrowLayer : GeometryLayer, ILayer
     {
 
         //@Override
@@ -92,14 +92,6 @@ namespace Retouch_Photo2.Layers.Models
             return TransformerGeometry.CreateArrow(resourceCreator, transformer, matrix,
                 this.IsAbsolute, this.Width, this.Value,
                 this.LeftTail, this.RightTail);
-        }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
-
-            return new NodeCollection(geometry);
         }
 
 

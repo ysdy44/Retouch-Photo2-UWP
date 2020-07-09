@@ -16,7 +16,10 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
         {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
+            Transformer transformer = base.Transform.Transformer;
+
+            CanvasGeometry geometry = transformer.ToRectangle(resourceCreator);
+
 
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
@@ -80,22 +83,8 @@ namespace Retouch_Photo2.Layers.Models
         }
         public abstract void GetPatternRender(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry);
 
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator)
-        {
-            Transformer transformer = base.Transform.Transformer;
-
-            return transformer.ToRectangle(resourceCreator);
-        }
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix)
-        {
-            Transformer transformer = base.Transform.Transformer;
-
-            return transformer.ToRectangle(resourceCreator, matrix);
-        }
-
 
         public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator) => null;
-
-
+        
     }
 }

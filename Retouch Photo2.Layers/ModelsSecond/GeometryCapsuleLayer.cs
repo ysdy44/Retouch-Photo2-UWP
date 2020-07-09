@@ -8,9 +8,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s GeometryCapsuleLayer .
+    /// <see cref="GeometryLayer"/>'s GeometryCapsuleLayer .
     /// </summary>
-    public class GeometryCapsuleLayer : LayerBase, ILayer
+    public class GeometryCapsuleLayer : GeometryLayer, ILayer
     {
 
         //@Override     
@@ -49,14 +49,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateCapsule(resourceCreator, transformer, matrix);
-        }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
-
-            return new NodeCollection(geometry);
         }
 
 

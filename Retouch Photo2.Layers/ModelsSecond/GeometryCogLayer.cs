@@ -9,9 +9,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s GeometryCogLayer .
+    /// <see cref="GeometryLayer"/>'s GeometryCogLayer .
     /// </summary>
-    public class GeometryCogLayer : LayerBase, ILayer
+    public class GeometryCogLayer : GeometryLayer, ILayer
     {
 
         //@Override     
@@ -96,15 +96,7 @@ namespace Retouch_Photo2.Layers.Models
                 this.Count, this.InnerRadius,
                 this.Tooth, this.Notch);
         }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
-
-            return new NodeCollection(geometry);
-        }
-
+        
 
         //Strings
         private string ConstructStrings()

@@ -9,9 +9,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s GeometryRoundRectLayer .
+    /// <see cref="GeometryLayer"/>'s GeometryRoundRectLayer .
     /// </summary>
-    public class GeometryRoundRectLayer : LayerBase, ILayer
+    public class GeometryRoundRectLayer : GeometryLayer, ILayer
     {
 
         //@Override     
@@ -68,14 +68,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateRoundRect(resourceCreator, transformer, matrix, this.Corner);
-        }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
-
-            return new NodeCollection(geometry);
         }
 
 

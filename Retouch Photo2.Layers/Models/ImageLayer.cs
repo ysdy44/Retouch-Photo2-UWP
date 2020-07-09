@@ -9,6 +9,7 @@ using System.Numerics;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.UI;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -140,6 +141,7 @@ namespace Retouch_Photo2.Layers.Models
             }
         }
 
+
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator)
         {
             Transformer transformer = base.Transform.Transformer;
@@ -152,11 +154,13 @@ namespace Retouch_Photo2.Layers.Models
 
             return transformer.ToRectangle(resourceCreator, matrix);
         }
-
+        
 
         public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
         {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
+            Transformer transformer = base.Transform.Transformer;
+
+            CanvasGeometry geometry = transformer.ToRectangle(resourceCreator);
 
             return new NodeCollection(geometry);
         }

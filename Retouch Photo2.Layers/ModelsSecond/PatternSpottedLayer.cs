@@ -54,10 +54,12 @@ namespace Retouch_Photo2.Layers.Models
         public override void SaveWith(XElement element)
         {
             element.Add(new XElement("Radius", this.Radius));
+            element.Add(new XElement("Step", this.Step));
         }
         public override void Load(XElement element)
         {
             if (element.Element("Radius") is XElement radius) this.Radius = (float)radius;
+            if (element.Element("Step") is XElement step) this.Step = (float)step;
         }
 
 

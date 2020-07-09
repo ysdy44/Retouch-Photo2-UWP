@@ -8,9 +8,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s GeometryEllipseLayer .
+    /// <see cref="GeometryLayer"/>'s GeometryEllipseLayer .
     /// </summary>
-    public class GeometryEllipseLayer : LayerBase, ILayer
+    public class GeometryEllipseLayer : GeometryLayer, ILayer
     {
 
         //@Override     
@@ -50,14 +50,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return transformer.ToEllipse(resourceCreator, matrix);
-        }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
-
-            return new NodeCollection(geometry);
         }
 
 

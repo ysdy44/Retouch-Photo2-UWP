@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Brushs;
 using System.Collections.Generic;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
@@ -97,8 +98,23 @@ namespace Retouch_Photo2.Layers.Models
             }
         }
 
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator) => null;
-        public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix) => null;
+
+        public bool FillContainsPoint(Layerage layerage, Vector2 point)
+        {
+            if (this.Visibility == Visibility.Collapsed) return false;
+
+            foreach (Layerage layerage2 in layerage.Children)
+            {
+                ILayer layer = layerage2.Self;
+
+                if (layer.FillContainsPoint(layerage2, point))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
 
         public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator) => null;

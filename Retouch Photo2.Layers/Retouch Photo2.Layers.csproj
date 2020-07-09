@@ -113,13 +113,13 @@
     <Compile Include="LayerageCollections\LayerageCollection.Clipboard.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.Photocopier_Layerage.cs" />
     <Compile Include="LayerControls\LayerControl.Construct.cs" />
+    <Compile Include="Layers\GeometryLayer.cs" />
     <Compile Include="Layers\ILayer.cs" />
     <Compile Include="Layerage.cs" />
     <Compile Include="LayerageCollections\LayerageCollection.FindOutermost.cs" />
     <Compile Include="LayerControls\BackgroundMode.cs" />
     <Compile Include="Layers\ITextLayer.cs" />
     <Compile Include="Layers\LayerBase.Instance.cs" />
-    <Compile Include="Layers\LayerBase.Node.cs" />
     <Compile Include="Layers\PatternLayer.cs" />
     <Compile Include="LayerType.cs" />
     <Compile Include="ModelsSecond\GeometryArrowLayer.cs" />

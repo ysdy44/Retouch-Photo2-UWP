@@ -9,9 +9,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s GeometryStarLayer .
+    /// <see cref="GeometryLayer"/>'s GeometryStarLayer .
     /// </summary>
-    public class GeometryStarLayer : LayerBase, ILayer
+    public class GeometryStarLayer : GeometryLayer, ILayer
     {
 
         //@Override     
@@ -75,14 +75,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateStar(resourceCreator, transformer, matrix, this.Points, this.InnerRadius);
-        }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
-
-            return new NodeCollection(geometry);
         }
 
 

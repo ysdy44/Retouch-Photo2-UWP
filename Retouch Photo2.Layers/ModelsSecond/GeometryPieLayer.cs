@@ -9,9 +9,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s GeometryPieLayer .
+    /// <see cref="GeometryLayer"/>'s GeometryPieLayer .
     /// </summary>
-    public partial class GeometryPieLayer : LayerBase, ILayer
+    public partial class GeometryPieLayer : GeometryLayer, ILayer
     {
 
         //@Override     
@@ -68,14 +68,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreatePie(resourceCreator, transformer, matrix, this.SweepAngle);
-        }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
-
-            return new NodeCollection(geometry);
         }
 
 

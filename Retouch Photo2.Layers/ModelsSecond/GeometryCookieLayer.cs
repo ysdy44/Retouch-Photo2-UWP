@@ -9,9 +9,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s GeometryCookieLayer .
+    /// <see cref="GeometryLayer"/>'s GeometryCookieLayer .
     /// </summary>
-    public partial class GeometryCookieLayer : LayerBase, ILayer
+    public partial class GeometryCookieLayer : GeometryLayer, ILayer
     {
 
         //@Override     
@@ -74,14 +74,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateCookie(resourceCreator, transformer, matrix, this.InnerRadius, this.SweepAngle);
-        }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
-
-            return new NodeCollection(geometry);
         }
 
 

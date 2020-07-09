@@ -9,9 +9,9 @@ using Windows.ApplicationModel.Resources;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s GeometryPentagonLayer .
+    /// <see cref="GeometryLayer"/>'s GeometryPentagonLayer .
     /// </summary>
-    public class GeometryPentagonLayer : LayerBase, ILayer
+    public class GeometryPentagonLayer : GeometryLayer, ILayer
     {
 
         //@Override     
@@ -68,14 +68,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreatePentagon(resourceCreator, transformer, matrix, this.Points);
-        }
-
-
-        public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
-
-            return new NodeCollection(geometry);
         }
 
 

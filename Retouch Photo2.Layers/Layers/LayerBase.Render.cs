@@ -25,7 +25,6 @@ namespace Retouch_Photo2.Layers
         public bool IsRefactoringIconRender { get; set; } = true;
 
 
-
         /// <summary>
         /// Gets a specific actual rended-layer (with icon render).
         /// </summary>
@@ -83,66 +82,8 @@ namespace Retouch_Photo2.Layers
         /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="children"> The children layerage. </param>
         /// <returns> The rendered layer. </returns>
-        public virtual ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
-        {
-            CanvasCommandList command = new CanvasCommandList(resourceCreator);
-            using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
-            {
-                if (this.Transform.IsCrop)
-                {
-                    CanvasGeometry geometryCrop = this.Transform.CropTransformer.ToRectangle(resourceCreator);
-                    
-                    using (drawingSession.CreateLayer(1, geometryCrop))
-                    {
-                        this._render(resourceCreator, drawingSession, children);
-                    }
-                }
-                else
-                {
-                    this._render(resourceCreator, drawingSession, children);
-                }
-            }
-            return command;
-        }
-        private void _render(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, IList<Layerage> children)
-        {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
+        public abstract ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children);
 
-            //Fill
-            // Fill a geometry with style.
-            if (this.Style.Fill.Type != BrushType.None)
-            {
-                ICanvasBrush canvasBrush = this.Style.Fill.GetICanvasBrush(resourceCreator);
-                drawingSession.FillGeometry(geometry, canvasBrush);
-            }
-
-            //CanvasActiveLayer
-            if (children.Count != 0)
-            {
-                using (drawingSession.CreateLayer(1, geometry))
-                {
-                    ICanvasImage childImage = LayerBase.Render(resourceCreator, children);
-
-                    if (childImage != null)
-                    {
-                        drawingSession.DrawImage(childImage);
-                    }
-                }
-            }
-
-            //Stroke
-            // Draw a geometry with style.
-            if (this.Style.Stroke.Type != BrushType.None)
-            {
-                if (this.Style.StrokeWidth != 0)
-                {
-                    ICanvasBrush canvasBrush = this.Style.Stroke.GetICanvasBrush(resourceCreator);
-                    float strokeWidth = this.Style.StrokeWidth;
-                    CanvasStrokeStyle strokeStyle = this.Style.StrokeStyle;
-                    drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth, strokeStyle);
-                }
-            }
-        }
 
 
 
@@ -156,8 +97,6 @@ namespace Retouch_Photo2.Layers
         /// <param name="children"> The children layerage. </param>
         public virtual void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, IList<Layerage> children, Windows.UI.Color accentColor)
         {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator, matrix);
-            drawingSession.DrawGeometry(geometry, accentColor);
         }
 
 
@@ -166,15 +105,15 @@ namespace Retouch_Photo2.Layers
         /// Create a specific geometry.
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <returns> The product geometry. </returns>   
-        public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator);
+        /// <returns> The product geometry. </returns>  
+        public virtual CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator) => null;
         /// <summary>
         /// Create a specific geometry.
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="matrix"> The matrix. </param>
         /// <returns> The product geometry. </returns>   
-        public abstract CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix);
+        public virtual CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix) => null;
 
 
 
@@ -189,6 +128,18 @@ namespace Retouch_Photo2.Layers
 
             return transformer.FillContainsPoint(point);
         }
+
+        /// <summary>
+        /// Gets the nodes.
+        /// </summary>
+        public NodeCollection Nodes { get; protected set; } = null;
+        /// <summary>
+        /// Convert to curves layer.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <returns> The product nodes. </returns>
+        public virtual NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator) => null;
+
 
 
         //@Static

@@ -10,9 +10,9 @@ using Windows.UI.Text;
 namespace Retouch_Photo2.Layers.Models
 {
     /// <summary>
-    /// <see cref="LayerBase"/>'s TextLayer.
+    /// <see cref="GeometryLayer"/>'s TextLayer.
     /// </summary>
-    public abstract class TextLayer : LayerBase
+    public abstract class TextLayer : GeometryLayer
     {
 
         //@Content       
