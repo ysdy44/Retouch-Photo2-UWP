@@ -38,16 +38,49 @@ namespace Retouch_Photo2.Controls
                 LayerageCollection.VisibilityChanged += (layer2) =>
                 {
                     Visibility visibility = (layer2.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
-                    this.SelectionViewModel.Visibility = visibility;
 
-                    this.MethodViewModel.ILayerChanged<Visibility>
-                    (
-                        set: (layer) => layer.Visibility = visibility,
+                    if (layer2.IsSelected)
+                    {
+                        this.SelectionViewModel.Visibility = visibility;
 
-                        historyTitle: "Set visibility",
-                        getHistory: (layer) => layer.Visibility,
-                        setHistory: (layer, previous) => layer.Visibility = previous
-                    );
+                        this.MethodViewModel.ILayerChanged<Visibility>
+                        (
+                            set: (layer) => layer.Visibility = visibility,
+
+                            historyTitle: "Set visibility",
+                            getHistory: (layer) => layer.Visibility,
+                            setHistory: (layer, previous) => layer.Visibility = previous
+                        );
+                    }
+                    else
+                    {
+                        //History
+                        LayersPropertyHistory history = new LayersPropertyHistory("Set visibility");
+
+                        //Selection
+                        ILayer layer = layer2;
+
+                        var previous = layer.Visibility;
+                        history.UndoAction += () =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            layer.Visibility = previous;
+                        };
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        //layerage.RefactoringParentsRender();
+                        //layerage.RefactoringParentsIconRender();
+                        layer.Visibility = visibility;
+
+                        //History
+                        this.ViewModel.HistoryPush(history);
+
+                        this.ViewModel.Invalidate();//Invalidate
+                    }
                 };
             }
             if (LayerageCollection.IsExpandChanged == null)
