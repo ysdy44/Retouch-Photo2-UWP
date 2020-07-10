@@ -10,9 +10,26 @@ namespace Retouch_Photo2.Elements
     /// </summary>
     public sealed partial class RadiusAnimaPanel : UserControl
     {
+
         //@Content
         /// <summary> ContentBorder's Content. </summary>
         public UIElement CenterContent { get => this.ContentBorder.Child; set => this.ContentBorder.Child = value; }
+
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "RadiusAnimaPanel" />'s corner radius. </summary>
+        public CornerRadius CornerRadius
+        {
+            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
+            set { SetValue(CornerRadiusProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "RadiusAnimaPanel.CornerRadius" /> dependency property. </summary>
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(CornerRadius), new PropertyMetadata(new CornerRadius(40)));
+
+
+        #endregion
 
         //@Construct
         /// <summary>
@@ -28,5 +45,6 @@ namespace Retouch_Photo2.Elements
                 this.Storyboard.Begin();
             };
         }
+
     }
 }

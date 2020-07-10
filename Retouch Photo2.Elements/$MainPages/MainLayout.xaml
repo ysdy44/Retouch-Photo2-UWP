@@ -203,7 +203,7 @@
 
 
         <!--Foot-->        
-        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2" Background="{ThemeResource AppForeground}">
+        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2" CornerRadius="0" Background="{ThemeResource AppForeground}">
 
             <elements:RadiusAnimaPanel.CenterContent>
                 <Grid>

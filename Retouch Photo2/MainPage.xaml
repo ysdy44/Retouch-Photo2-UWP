@@ -184,7 +184,7 @@
 
             <!--MainChild-->
             <elementMainPages:MainLayout.MainChild>
-                <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="12,0" HorizontalAlignment="Center">
 
                     <Button x:Name="AddButton" Style="{StaticResource AppTabButtonStyle}">
                         <Button.Tag>

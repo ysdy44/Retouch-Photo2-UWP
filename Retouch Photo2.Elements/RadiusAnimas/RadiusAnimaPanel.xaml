@@ -45,7 +45,8 @@
         </controls:DropShadowPanel>
 
         <!--Content-->
-        <Border x:Name="ContentBorder" CornerRadius="40" Margin="4,0" HorizontalAlignment="Center" MinHeight="50" MinWidth="100"/>
+        <Border x:Name="ContentBorder" Margin="4,0" HorizontalAlignment="Center" MinHeight="50" MinWidth="100"
+                CornerRadius="{x:Bind CornerRadius, Mode=OneWay}" />
 
     </Grid>
 </UserControl>
