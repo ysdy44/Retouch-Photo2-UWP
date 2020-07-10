@@ -409,6 +409,9 @@ namespace Retouch_Photo2.Menus.Models
                 getHistory: (textLayer) => textLayer.FontSize,
                 setHistory: (textLayer, previous) => textLayer.FontSize = previous
            );
+
+            //Refactoring
+            this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
         }
 
     }

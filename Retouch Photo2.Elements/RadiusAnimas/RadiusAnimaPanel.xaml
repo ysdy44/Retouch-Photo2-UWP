@@ -41,11 +41,11 @@
 
         <!--Shadow-->
         <controls:DropShadowPanel Style="{StaticResource AppDropShadowPanelStyle}">
-            <Rectangle x:Name="Rectangle" RadiusX="25" RadiusY="25" StrokeThickness="1" Stroke="{x:Bind UserControl.BorderBrush, Mode=OneWay}" Fill="{x:Bind UserControl.Background, Mode=OneWay}"/>
+            <Rectangle x:Name="Rectangle" RadiusX="25" RadiusY="25" HorizontalAlignment="Center" StrokeThickness="1" Stroke="{x:Bind UserControl.BorderBrush, Mode=OneWay}" Fill="{x:Bind UserControl.Background, Mode=OneWay}"/>
         </controls:DropShadowPanel>
 
         <!--Content-->
-        <ContentPresenter x:Name="ContentPresenter" HorizontalAlignment="Center" Padding="10,0" MinHeight="50" MinWidth="100"/>
+        <Border x:Name="ContentBorder" CornerRadius="40" Margin="4,0" HorizontalAlignment="Center" MinHeight="50" MinWidth="100"/>
 
     </Grid>
 </UserControl>

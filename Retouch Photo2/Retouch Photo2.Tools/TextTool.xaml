@@ -33,7 +33,7 @@
                         <Setter Target = "TextBox.MinHeight" Value="100"/>
                         <Setter Target = "TextBox.MinWidth" Value="284"/>
 
-                        <Setter Target = "CharacterButton.(Grid.Row)" Value="0"/>
+                        <Setter Target = "TextButton.(Grid.Row)" Value="0"/>
                         <Setter Target = "FullScreenButton.(Grid.Row)" Value="0"/>
                         <Setter Target = "FullScreenFontIcon.Glyph" Value="&#xE1D8;"/>
 

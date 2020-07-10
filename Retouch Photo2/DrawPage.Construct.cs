@@ -57,11 +57,23 @@ namespace Retouch_Photo2
             this.DPIComboBox.DPI = DPI.DPI144;
             this.FileFormatComboBox.FileFormat = CanvasBitmapFileFormat.Jpeg;
 
-            this.ExportQualityPicker.Value = 1.0d;
-            this.ExportQualityPicker.Minimum = 0.0d;
-            this.ExportQualityPicker.Maximum = 1.0d;
+
+            this.ExportQualityPicker.Value = 100;
+            this.ExportQualityPicker.Minimum = 0;
+            this.ExportQualityPicker.Maximum = 100;
+            this.ExportQualityPicker.ValueChanged += (s, value) => this.ExportQualitySlider.Value = (int)(value / 100.0f);
+
+
+            this.ExportQualitySlider.Value = 1.0d;
+            this.ExportQualitySlider.Minimum = 0.0d;
+            this.ExportQualitySlider.Maximum = 1.0d;
+            this.ExportQualitySlider.ValueChangeStarted += (s, value) => this.ExportQualityPicker.Value = (int)(value * 100.0f);
+            this.ExportQualitySlider.ValueChangeDelta += (s, value) => this.ExportQualityPicker.Value = (int)(value * 100.0f);
+            this.ExportQualitySlider.ValueChangeCompleted += (s, value) => this.ExportQualityPicker.Value = (int)(value * 100.0f);
+
 
             this.ExportDialog.CloseButton.Click += (sender, args) => this.ExportDialog.Hide();
+
 
             this.ExportDialog.PrimaryButton.Click += async (_, __) =>
             {

@@ -55,6 +55,7 @@
                      Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
                      Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
 
+            <ContentControl Width="12"/>
         </StackPanel>
     </ScrollViewer>
 

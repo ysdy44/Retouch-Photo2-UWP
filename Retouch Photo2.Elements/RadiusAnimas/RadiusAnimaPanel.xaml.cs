@@ -11,8 +11,8 @@ namespace Retouch_Photo2.Elements
     public sealed partial class RadiusAnimaPanel : UserControl
     {
         //@Content
-        /// <summary> ContentPresenter's Content. </summary>
-        public object CenterContent { get => this.ContentPresenter.Content; set => this.ContentPresenter.Content = value; }
+        /// <summary> ContentBorder's Content. </summary>
+        public UIElement CenterContent { get => this.ContentBorder.Child; set => this.ContentBorder.Child = value; }
 
         //@Construct
         /// <summary>
@@ -21,10 +21,10 @@ namespace Retouch_Photo2.Elements
         public RadiusAnimaPanel()
         {
             this.InitializeComponent();
-            this.ContentPresenter.SizeChanged += (s, e) =>
+            this.ContentBorder.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
-                this.Frame.Value = e.NewSize.Width;
+                this.Frame.Value = e.NewSize.Width + 8;
                 this.Storyboard.Begin();
             };
         }

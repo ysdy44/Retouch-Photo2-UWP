@@ -23,7 +23,7 @@
             <TextBlock x:Name="StrokeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <brushs:ColorEllipse x:Name="StrokeColorEllipse" Brush="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}"/>
 
-            <ContentControl Width="4"/>
+            <ContentControl Width="8"/>
 
             <strokes:ShowControl x:Name="StrokeShowControl" StrokeStyle="{x:Bind SelectionViewModel.StrokeStyle, Mode=OneWay}"/>
 

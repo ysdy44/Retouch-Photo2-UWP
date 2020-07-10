@@ -18,10 +18,10 @@
         <SolidColorBrush x:Name="RemoteForeground" Color="{ThemeResource AppTextColor}"/>
     </UserControl.Resources>
 
-    <Grid MinHeight="165" Padding="1,2">
+    <Grid MinHeight="165" Margin="2,0" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="44"/>
+            <ColumnDefinition Width="46"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>

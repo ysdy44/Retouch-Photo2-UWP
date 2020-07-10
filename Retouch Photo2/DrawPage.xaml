@@ -5,14 +5,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:transformers="using:FanKit.Transformers"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Retouch_Photo2.Controls"
     xmlns:elements="using:Retouch_Photo2.Elements"
-    xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"   
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
     xmlns:elementDrawPages="using:Retouch_Photo2.Elements.DrawPages"
-    xmlns:layers="using:Retouch_Photo2.Layers"
     xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
-    xmlns:transformers="using:FanKit.Transformers"
+    xmlns:hsvColorPickers="using:HSVColorPickers"
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
     >
@@ -164,12 +164,16 @@
                     <TextBlock Text="DPI" Style="{StaticResource AppTextBlockStyle}"/>
                     <elements:DPIComboBox x:Name="DPIComboBox"/>
                     <ContentControl Height="6"/>
-                    <TextBlock x:Name="ExportFileFormatTextBlock" Text="File Format" Style="{StaticResource AppTextBlockStyle}"/>
+                    <TextBlock x:Name="ExportFileFormatTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                     <elements:FileFormatComboBox x:Name="FileFormatComboBox"/>
                     <ContentControl Height="6"/>
-                    <TextBlock x:Name="ExportQualityTextBlock" Text="Quality" Style="{StaticResource AppTextBlockStyle}"/>
+                    <RelativePanel>
+                        <TextBlock x:Name="ExportQualityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                        <hsvColorPickers:NumberPicker x:Name="ExportQualityPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           RelativePanel.AlignRightWithPanel="True"/>
+                    </RelativePanel>
                     <Border Height="{StaticResource AppCircleHeight}">
-                        <elements:SliderPicker x:Name="ExportQualityPicker" />
+                        <elements:SliderPicker x:Name="ExportQualitySlider" />
                     </Border>
                 </StackPanel>
             </elementDialog:DialogBase.CenterContent>

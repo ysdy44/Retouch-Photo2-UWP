@@ -137,7 +137,12 @@ namespace Retouch_Photo2.Menus.Models
 
         //@Content
         /// <summary> Position RemoteControl. </summary>
-        public RemoteControl PositionRemoteControl { get; private set; } 
+        public RemoteControl PositionRemoteControl { get; } = new RemoteControl
+        {
+            Margin = new Thickness(4),
+            Width = double.NaN,
+            Height = double.NaN,
+        };
 
 
         //@VisualState
@@ -198,6 +203,13 @@ namespace Retouch_Photo2.Menus.Models
 
                     case ToolType.Image:
                     case ToolType.Crop:
+
+
+                    //Pattern
+                    case ToolType.PatternGrid:
+                    case ToolType.PatternDiagonal:
+                    case ToolType.PatternSpotted:
+
 
                     //Geometry1
                     case ToolType.GeometryRoundRect:
@@ -467,16 +479,9 @@ namespace Retouch_Photo2.Menus.Models
         //RemoteControl
         private void ConstructPositionRemoteControl()
         {
-            this.PositionRemoteControl = new RemoteControl
-            {
-                Margin = new Thickness(2),
-                Width = double.NaN,
-                Height = double.NaN,
-                Background = this.RemoteBackground,
-                BorderBrush = this.RemoteBorderBrush,
-                Foreground = this.RemoteForeground,
-            };
-
+            this.PositionRemoteControl.Background = this.RemoteBackground;
+            this.PositionRemoteControl.BorderBrush = this.RemoteBorderBrush;
+            this.PositionRemoteControl.Foreground = this.RemoteForeground;
             this.PositionRemoteButton.Click += (s, e) =>
             {
                 object title = this.PositionRemoteToolTip.Content;
