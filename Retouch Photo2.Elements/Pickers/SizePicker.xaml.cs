@@ -19,29 +19,54 @@ namespace Retouch_Photo2.Elements
         {
             get => new BitmapSize()
             {
-                Width = (uint)this.WidthNumberPicker.Value,
-                Height = (uint)this.HeighNumberPicker.Value
+                Width = (uint)this.WidthPicker.Value,
+                Height = (uint)this.HeighPicker.Value
             };
             set
             {
-                this.WidthNumberPicker.Value = (int)value.Width;
-                this.HeighNumberPicker.Value = (int)value.Height;
+                this.WidthPicker.Value = (int)value.Width;
+                this.HeighPicker.Value = (int)value.Height;
             }
         }
 
+        int cacheWidth = 1024;
+        int cacheHeight = 1024;
+
         //@Construct
+        /// <summary>
+        /// Initializes a SizePicker. 
+        /// </summary>
         public SizePicker()
         {
             this.InitializeComponent();
 
-            this.WidthNumberPicker.Unit = "px";
-            this.HeighNumberPicker.Unit = "px";
-            this.WidthNumberPicker.Minimum = 16;
-            this.HeighNumberPicker.Minimum = 16;
-            this.WidthNumberPicker.Maximum = 16384;
-            this.HeighNumberPicker.Maximum = 16384;
-            this.WidthNumberPicker.Value = 1024;
-            this.HeighNumberPicker.Value = 1024;
+            this.WidthPicker.Unit = "px";
+            this.HeighPicker.Unit = "px";
+            this.WidthPicker.Minimum = 16;
+            this.HeighPicker.Minimum = 16;
+            this.WidthPicker.Maximum = 16384;
+            this.HeighPicker.Maximum = 16384;
+
+            this.WidthPicker.Value = 1024;
+            this.HeighPicker.Value = 1024;
+            this.WidthPicker.ValueChanged += (s, value) =>
+            {
+                double width = value;
+                double height = value / (double)this.cacheWidth * this.HeighPicker.Value;
+
+                this.cacheWidth = (int)width;
+                this.HeighPicker.Value = this.cacheHeight = (int)height;
+            };
+
+            this.HeighPicker.ValueChanged += (s, value) =>
+            {
+                double width = value / (double)this.cacheHeight * this.WidthPicker.Value;
+                double height = value;
+
+                this.WidthPicker.Value = this.cacheWidth = (int)width;
+                this.cacheHeight = (int)height;
+            };
+
         }
     }
 }

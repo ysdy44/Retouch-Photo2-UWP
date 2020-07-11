@@ -5,37 +5,43 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hSVColorPickers="using:HSVColorPickers"
+    Height="90"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
     >
 
-    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  >
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="46"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="6"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="WidthTextBlock" Grid.Row="1" Style="{StaticResource AppTextBlockStyle}">
+        <TextBlock x:Name="WidthTextBlock" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}">
             Width
         </TextBlock>
-        <TextBlock x:Name="HeightTextBlock" Grid.Row="3" Style="{StaticResource AppTextBlockStyle}">
+        <TextBlock x:Name="HeightTextBlock" Grid.Row="2" Style="{StaticResource AppTextBlockStyle}">
             Height
         </TextBlock>
 
-        <hSVColorPickers:NumberPicker x:Name="WidthNumberPicker" Grid.Column="1" Grid.Row="1" 
+        <hSVColorPickers:NumberPicker x:Name="WidthPicker" Grid.Column="1" Grid.Row="0" 
                         ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-        <hSVColorPickers:NumberPicker x:Name="HeighNumberPicker" Grid.Column="1" Grid.Row="3"
+        <hSVColorPickers:NumberPicker x:Name="HeighPicker" Grid.Column="1" Grid.Row="2"
                         ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-       
+
+
+        <!--Ratio-->
+        <ToggleButton x:Name="RatioToggleControl" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource AppCircleToggleButtonStyle}">
+            <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+        </ToggleButton>
+        
+
     </Grid>
 
 </UserControl>

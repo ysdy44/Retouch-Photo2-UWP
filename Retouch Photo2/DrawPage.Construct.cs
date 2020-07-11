@@ -52,19 +52,30 @@ namespace Retouch_Photo2
 
 
         //Export
+        public float ExportQuality
+        {
+            get => this.exportQuality;
+            set
+            {
+                this.ExportQualityPicker.Value = (int)(value * 100.0f);
+                this.ExportQualitySlider.Value = value;
+                this.exportQuality = value;
+            }
+        }
+        public float exportQuality = 1.0f;
+
         private void ConstructExportDialog()
         {
             this.DPIComboBox.DPI = DPI.DPI144;
             this.FileFormatComboBox.FileFormat = CanvasBitmapFileFormat.Jpeg;
 
 
-            this.ExportQualityPicker.Value = 100;
+            this.ExportQualityPicker.Unit = "%";
             this.ExportQualityPicker.Minimum = 0;
             this.ExportQualityPicker.Maximum = 100;
-            this.ExportQualityPicker.ValueChanged += (s, value) => this.ExportQualitySlider.Value = (int)(value / 100.0f);
+            this.ExportQualityPicker.ValueChanged += (s, value) => this.ExportQualitySlider.Value = value / 100.0f;
 
 
-            this.ExportQualitySlider.Value = 1.0d;
             this.ExportQualitySlider.Minimum = 0.0d;
             this.ExportQualitySlider.Maximum = 1.0d;
             this.ExportQualitySlider.ValueChangeStarted += (s, value) => this.ExportQualityPicker.Value = (int)(value * 100.0f);
@@ -85,7 +96,7 @@ namespace Retouch_Photo2
                 bool isSuccesful = await this.Export();
 
                 this.LoadingControl.State = isSuccesful ? LoadingState.SaveSuccess : LoadingState.SaveFailed;
-                await Task.Delay(1000);
+                await Task.Delay(400);
 
                 this.LoadingControl.State = LoadingState.None;
                 this.LoadingControl.IsActive = false;
@@ -99,6 +110,7 @@ namespace Retouch_Photo2
                 Height = (uint)this.ViewModel.CanvasTransformer.Height,
             };
             this.ExportSizePicker.Size = size;
+            this.ExportQuality = ExportQuality;
             this.ExportDialog.Show();
         }
 
