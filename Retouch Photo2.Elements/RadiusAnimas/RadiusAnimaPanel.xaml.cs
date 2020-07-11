@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Elements
             set { SetValue(CornerRadiusProperty, value); }
         }
         /// <summary> Identifies the <see cref = "RadiusAnimaPanel.CornerRadius" /> dependency property. </summary>
-        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(CornerRadius), new PropertyMetadata(new CornerRadius(40)));
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(CornerRadius), new PropertyMetadata(new CornerRadius(25)));
 
 
         #endregion
@@ -41,7 +41,7 @@ namespace Retouch_Photo2.Elements
             this.ContentBorder.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
-                this.Frame.Value = e.NewSize.Width + 8;
+                this.Frame.Value = e.NewSize.Width;
                 this.Storyboard.Begin();
             };
         }

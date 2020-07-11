@@ -13,7 +13,7 @@
     >
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Padding="4,0">
 
             <TextBlock x:Name="FillTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <brushs:ColorEllipse x:Name="FillColorEllipse" Brush="{x:Bind SelectionViewModel.Fill, Mode=OneWay}"/>

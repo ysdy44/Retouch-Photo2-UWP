@@ -14,7 +14,7 @@
 
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Padding="4,0">
 
             <!--Center-->
             <tools:TouchbarButton x:Name="CenterButton">

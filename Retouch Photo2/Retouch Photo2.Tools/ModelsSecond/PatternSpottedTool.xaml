@@ -13,7 +13,7 @@
 
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Padding="4,0">
 
             <!--Radius-->
             <tools:TouchbarButton x:Name="RadiusButton">

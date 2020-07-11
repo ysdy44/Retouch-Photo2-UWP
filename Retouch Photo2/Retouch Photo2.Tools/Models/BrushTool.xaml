@@ -21,6 +21,7 @@
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
+            <ContentControl Width="4"/>
 
             <!--FillOrStroke-->
             <TextBlock x:Name="FillOrStrokeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

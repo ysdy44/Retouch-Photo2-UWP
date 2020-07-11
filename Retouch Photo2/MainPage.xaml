@@ -184,7 +184,7 @@
 
             <!--MainChild-->
             <elementMainPages:MainLayout.MainChild>
-                <StackPanel Orientation="Horizontal" Margin="12,0" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Padding="18,0" HorizontalAlignment="Center">
 
                     <Button x:Name="AddButton" Style="{StaticResource AppTabButtonStyle}">
                         <Button.Tag>
@@ -225,7 +225,7 @@
 
             <!--PicturesChild-->
             <elementMainPages:MainLayout.PicturesChild>
-                <StackPanel Orientation="Horizontal" Margin="8,0">
+                <StackPanel Orientation="Horizontal" Padding="18,0">
 
                     <Button x:Name="PicturesPhotoButton" Style="{StaticResource AppTabButtonStyle}">
                         <Button.Tag>
@@ -252,34 +252,36 @@
 
             <!--RenameChild-->
             <elementMainPages:MainLayout.RenameChild>
-                <StackPanel Orientation="Horizontal" Margin="8,0">
+                <StackPanel Orientation="Horizontal" Padding="18,0">
 
-                    <TextBlock Margin="8,2">         
+                    <TextBlock Margin="0,6">
                         <Run x:Name="RenameRunTitle" FontWeight="Bold"/>   
                         <LineBreak/>           
                         <Run x:Name="RenameRunContent" FontSize="12" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
 
-                    <Button x:Name="RenameCloseButton" Style="{StaticResource AppTabButtonStyle}">
-                        <Button.Tag>
-                            <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </Button.Tag>
-                    </Button>
+                    <Border HorizontalAlignment="Right">
+                        <Button x:Name="RenameCloseButton" Style="{StaticResource AppTabButtonStyle}">
+                            <Button.Tag>
+                                <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </Button.Tag>
+                        </Button>
+                    </Border>
 
                 </StackPanel>
             </elementMainPages:MainLayout.RenameChild>
 
             <!--DeleteChild-->
             <elementMainPages:MainLayout.DeleteChild>
-                <StackPanel x:Name="DeleteStackPanel" MinWidth="260">
+                <StackPanel x:Name="DeleteStackPanel" Padding="12,0" MinWidth="260">
 
-                    <TextBlock Margin="14,2">
+                    <TextBlock Margin="0,6">
                         <Run x:Name="DeleteRunTitle" FontWeight="Bold"/>
                         <LineBreak/>
                         <Run x:Name="DeleteRunContent" FontSize="12" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
 
-                    <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button x:Name="DeletePrimaryButton" Style="{StaticResource AppTabButtonStyle}"
                                 IsEnabled="{x:Bind MainLayout.SelectedIsEnabled, Mode=OneWay}">
                             <Button.Tag>
@@ -298,15 +300,15 @@
 
             <!--DuplicateChild-->
             <elementMainPages:MainLayout.DuplicateChild>
-                <StackPanel x:Name="DuplicateStackPanel" MinWidth="260">
+                <StackPanel x:Name="DuplicateStackPanel" Padding="12,0" MinWidth="260">
 
-                    <TextBlock Margin="14,2">
+                    <TextBlock Margin="0,6">
                         <Run x:Name="DuplicateRunTitle" FontWeight="Bold"/>
                         <LineBreak/>
                         <Run x:Name="DuplicateRunContent" FontSize="12" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
 
-                    <StackPanel Orientation="Horizontal" Margin="8,0" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button x:Name="DuplicatePrimaryButton" Style="{StaticResource AppTabButtonStyle}"
                                 IsEnabled="{x:Bind MainLayout.SelectedIsEnabled, Mode=OneWay}">
                             <Button.Tag>

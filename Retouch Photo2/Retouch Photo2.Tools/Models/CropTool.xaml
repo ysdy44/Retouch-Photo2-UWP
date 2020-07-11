@@ -9,8 +9,7 @@
     d:DesignWidth="400"
     >
 
-
-    <StackPanel Orientation="Horizontal">
+    <StackPanel Orientation="Horizontal" Padding="4,0">
 
         <!--Reset-->
         <TextBlock x:Name="ResetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

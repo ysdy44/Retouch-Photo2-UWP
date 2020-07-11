@@ -14,7 +14,7 @@
 
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Padding="4,0">
 
             <!--Type-->
             <TextBlock x:Name="TypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

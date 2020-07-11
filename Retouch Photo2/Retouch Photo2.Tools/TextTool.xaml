@@ -9,7 +9,7 @@
     d:DesignWidth="400"
     >
 
-    <Grid x:Name="RootGrid" VerticalAlignment="Center">
+    <Grid x:Name="RootGrid" VerticalAlignment="Center" Padding="4,0">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -28,7 +28,7 @@
                         <Setter Target = "TextBox.(Grid.Row)" Value="1"/>
 
                         <Setter Target = "TextBox.VerticalAlignment" Value="Stretch"/>
-                        <Setter Target = "TextBox.Margin" Value="0, 4, 0, 4"/>
+                        <Setter Target = "TextBox.Margin" Value="0,4,0,4"/>
                         <Setter Target = "TextBox.MaxHeight" Value="1200"/>
                         <Setter Target = "TextBox.MinHeight" Value="100"/>
                         <Setter Target = "TextBox.MinWidth" Value="284"/>
@@ -38,6 +38,7 @@
                         <Setter Target = "FullScreenFontIcon.Glyph" Value="&#xE1D8;"/>
 
                         <Setter Target = "RootGrid.VerticalAlignment" Value="Stretch"/>
+                        <Setter Target = "RootGrid.Margin" Value="4"/>
 
                     </VisualState.Setters>
                 </VisualState>

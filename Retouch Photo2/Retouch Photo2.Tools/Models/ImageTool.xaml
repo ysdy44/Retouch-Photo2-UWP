@@ -24,7 +24,7 @@
 
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Padding="4,0">
 
             <TextBlock Text="{x:Bind SelectionViewModel.Photocopier, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
 

@@ -14,7 +14,7 @@
 
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Padding="4,0">
 
             <!--Points-->
             <tools:TouchbarButton x:Name="PointsButton">

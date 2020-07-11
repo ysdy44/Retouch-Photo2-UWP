@@ -11,23 +11,21 @@
     d:DesignWidth="400"
     >
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
+    <StackPanel Orientation="Horizontal" Padding="4,0">
 
-            <Button x:Name="CountButton" Style="{StaticResource AppCircleButtonStyle}">
-                <FontIcon Glyph="&#xEB05;" FontFamily="Segoe MDL2 Assets"/>
-            </Button>
+        <Button x:Name="CountButton" Style="{StaticResource AppCircleButtonStyle}">
+            <FontIcon Glyph="&#xEB05;" FontFamily="Segoe MDL2 Assets"/>
+        </Button>
 
-            <ContentControl Width="4"/>
+        <ContentControl Width="4"/>
 
-            <!--Multi-Mode-->
-            <elements:CompositeModeSegmented x:Name="ModeControl" Mode="{x:Bind SettingViewModel.CompositeMode, Mode=TwoWay}"/>
+        <!--Multi-Mode-->
+        <elements:CompositeModeSegmented x:Name="ModeControl" Mode="{x:Bind SettingViewModel.CompositeMode, Mode=TwoWay}"/>
 
-            <ContentControl Width="4"/>
+        <ContentControl Width="4"/>
 
-            <toolsElements:MoreTransformButton/>
+        <toolsElements:MoreTransformButton/>
 
-        </StackPanel>
-    </ScrollViewer>
+    </StackPanel>
 
 </Page>

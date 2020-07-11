@@ -17,7 +17,7 @@
 
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Padding="4,0">
 
             <TextBlock x:Name="RemoveTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <Button x:Name="RemoveButton" Style="{StaticResource AppCircleButtonStyle}">

@@ -11,17 +11,15 @@
     >
 
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
+    <StackPanel Orientation="Horizontal" Padding="4,0">
 
-            <TextBlock x:Name="ConvertTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:ConvertToCurvesButton/>
+        <TextBlock x:Name="ConvertTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <toolsElements:ConvertToCurvesButton/>
 
-            <ContentControl Width="4"/>
+        <ContentControl Width="4"/>
 
-            <toolsElements:MoreCreateButton/>
+        <toolsElements:MoreCreateButton/>
 
-        </StackPanel>
-    </ScrollViewer>
+    </StackPanel>
 
 </Page>
