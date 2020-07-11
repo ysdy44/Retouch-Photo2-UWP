@@ -1,15 +1,20 @@
 # Retouch-Photo-UWP-2
 
-![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/Retouch_Designer/ScreenShot/logo.png)
+![](ScreenShot/logo.png)
 
- In development, please look forward to......
+ 
+ Windows 10 app store address: 
+[Buy Retouch Photo2 - Microsoft Store](https://www.microsoft.com/store/productId/9P76ZF661496)   
 
+
+<br/>
 
 ## Function description
-![](https://github.com/ysdy44/Retouch-Photo-UWP-2/blob/Retouch_Designer/ScreenShot/2019-7-12-Retouch_Photo2.jpg)
 
 Vector Graphics Editing Tool, you can transform, fill graphics, support adjustment, effect, blend. brush,geometry, layers. If you think that the AI is too complex might as well try.
 
+
+<br/>
 
 ## Development environment
 
@@ -21,10 +26,15 @@ Vector Graphics Editing Tool, you can transform, fill graphics, support adjustme
 |Display language|Chinese and English|
 |Comment language|Chinese|
 
+
+<br/>
+
 ## Deployment instructions
 
-> Download the whole project, run `Retouch Photo.sln`, start the project `Retouch Photo`, and try to see if it works.
+> Download the whole project, run `Retouch Photo.sln`, start the project `Retouch Photo2`, and try to see if it works.
 
+
+<br/>
 
 ## Old version
 [Retouch-Photo-UWP](https://github.com/ysdy44/Retouch-Photo-UWP)
