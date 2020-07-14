@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -42,8 +43,8 @@ namespace Retouch_Photo2.Tools.Models
             Retouch_Photo2.PhotosPage.SelectCallBack += (photo) =>
             {
                 if (photo == null) return;
-
-                this.SelectionViewModel.Photocopier = photo.ToPhotocopier();//Photo
+                Photocopier photocopier = photo.ToPhotocopier();
+                this.SelectionViewModel.Photocopier = photocopier;
             };
 
             //Replace
@@ -52,21 +53,17 @@ namespace Retouch_Photo2.Tools.Models
             {
                 if (photo == null) return;
                 Photocopier photocopier = photo.ToPhotocopier();
+                this.SelectionViewModel.Photocopier = photocopier;
 
-                //Transformer
-                Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
+                this.MethodViewModel.TLayerChanged<Photocopier, ImageLayer>
+                (
+                    layerType: LayerType.Image,
+                    set: (imageLayer) => imageLayer.Photocopier = photocopier,
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Type == LayerType.Image)
-                    {
-                        ImageLayer imageLayer = (ImageLayer)layer;
-                        imageLayer.Photocopier = photocopier;
-                    }
-                });
+                    historyTitle: "Set photocopier",
+                    getHistory: (imageLayer) => imageLayer.Photocopier,
+                    setHistory: (imageLayer, previous) => imageLayer.Photocopier = previous
+                );
             };
         }
 
@@ -128,6 +125,10 @@ namespace Retouch_Photo2.Tools.Models
                 this.TipSelect();
                 return;
             }
+
+            //History
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer", this.ViewModel.LayerageCollection);
+            this.ViewModel.HistoryPush(history);
 
             //Transformer
             this._sizeWidth = photo.Width;
@@ -209,7 +210,7 @@ namespace Retouch_Photo2.Tools.Models
             }
             else LayerageCollection.RemoveMezzanine(this.ViewModel.LayerageCollection, this.MezzanineLayerage);//Mezzanine
 
-            this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
+   //         this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
 
             LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
             LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
