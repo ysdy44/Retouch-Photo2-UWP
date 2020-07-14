@@ -142,13 +142,6 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, IList<Layerage> children, Windows.UI.Color accentColor)
-        {
-            Transformer transformer = base.Transform.GetActualTransformer();
-            drawingSession.DrawBound(transformer, matrix);
-        }
-
-
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator)
         {
             Transformer transformer = base.Transform.Transformer;

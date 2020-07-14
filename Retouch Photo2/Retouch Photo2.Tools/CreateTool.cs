@@ -160,29 +160,39 @@ namespace Retouch_Photo2.Tools
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
+            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+
+            //@DrawBound
             switch (this.Mode)
             {
                 case ListViewSelectionMode.None:
                     break;
                 case ListViewSelectionMode.Single:
+                    ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
+                    layer2.DrawBound(drawingSession, matrix, this.ViewModel.AccentColor);
+
+                    ToolBase.TransformerTool.Draw(drawingSession); //TransformerTool
+                    break;
                 case ListViewSelectionMode.Multiple:
+                    foreach (Layerage layerage in this.ViewModel.SelectionLayerages)
+                    {
+                        ILayer layer = layerage.Self;
+                        layer.DrawBound(drawingSession, matrix, this.ViewModel.AccentColor);
+                    }
+
                     ToolBase.TransformerTool.Draw(drawingSession); //TransformerTool
                     break;
                 case ListViewSelectionMode.Extended:
-                    {
-                        //Transformer
-                        Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                        drawingSession.DrawBound(this.Transformer, matrix, this.ViewModel.AccentColor);
+                    drawingSession.DrawBound(this.Transformer, matrix, this.ViewModel.AccentColor);
 
-                        //Snapping
-                        if (this.IsSnap)
-                        {
-                            this.Snap.Draw(drawingSession, matrix);
-                            this.Snap.DrawNode2(drawingSession, matrix);
-                        }
+                    //Snapping
+                    if (this.IsSnap)
+                    {
+                        this.Snap.Draw(drawingSession, matrix);
+                        this.Snap.DrawNode2(drawingSession, matrix);
                     }
                     break;
-            }           
+            }
         }
 
     }

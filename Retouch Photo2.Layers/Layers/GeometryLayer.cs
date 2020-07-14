@@ -14,7 +14,13 @@ namespace Retouch_Photo2.Layers.Models
     /// </summary>
     public abstract class GeometryLayer : LayerBase
     {
-        
+
+        /// <summary>
+        /// Gets a specific rended-layer.
+        /// </summary>
+        /// <param name="resourceCreator"> The resource-creator. </param>
+        /// <param name="children"> The children layerage. </param>
+        /// <returns> The rendered layer. </returns>
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
         {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
@@ -79,20 +85,25 @@ namespace Retouch_Photo2.Layers.Models
         CanvasGeometry Geometry2 = null;
 
 
-        public override void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, IList<Layerage> children, Windows.UI.Color accentColor)
+        /// <summary>
+        /// Draw lines on bound.
+        /// </summary>
+        /// <param name="matrix"> The matrix. </param>
+        /// <param name="accentColor"> The accent color. </param>
+        public void DrawBound(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
-            CanvasGeometry geometry = this.CreateGeometry(resourceCreator, matrix);
-            drawingSession.DrawGeometry(geometry, accentColor);
-
-            foreach (Layerage child in children)
-            {
-                Transformer transformer = child.GetActualTransformer();
-                drawingSession.DrawBound(transformer, matrix);
-            }
+            if (this.Geometry2 == null) return;
+            drawingSession.DrawGeometry(this.Geometry2.Transform(matrix), accentColor);
         }
-        
 
-        public bool FillContainsPoint(Layerage layerage, Vector2 point)
+
+        /// <summary>
+        /// Returns whether the area filled by the layer contains the specified point.
+        /// </summary>
+        /// <param name="layerage"> The layerage. </param>
+        /// <param name="point"> The point. </param>
+        /// <returns> If the fill contains points, return **True**. </returns>
+        public override bool FillContainsPoint(Layerage layerage, Vector2 point)
         {
             if (this.Visibility == Visibility.Collapsed) return false;
             if (this.Geometry2 == null) return false;
@@ -114,6 +125,10 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
+        /// <summary>
+        ///  Convert to curves.
+        /// </summary>
+        /// <returns> The product curves. </returns>
         public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator)
         {
             CanvasGeometry geometry = this.CreateGeometry(resourceCreator);

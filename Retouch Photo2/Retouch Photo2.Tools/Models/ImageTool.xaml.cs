@@ -220,7 +220,28 @@ namespace Retouch_Photo2.Tools.Models
         public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
 
 
-        public void Draw(CanvasDrawingSession drawingSession) { }
+        public void Draw(CanvasDrawingSession drawingSession)
+        {
+            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+
+            //@DrawBound
+            switch (this.SelectionViewModel.SelectionMode)
+            {
+                case ListViewSelectionMode.None:
+                    break;
+                case ListViewSelectionMode.Single:
+                    ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
+                    layer2.DrawBound(drawingSession, matrix, this.ViewModel.AccentColor);
+                    break;
+                case ListViewSelectionMode.Multiple:
+                    foreach (Layerage layerage in this.ViewModel.SelectionLayerages)
+                    {
+                        ILayer layer = layerage.Self;
+                        layer.DrawBound(drawingSession, matrix, this.ViewModel.AccentColor);
+                    }
+                    break;
+            }
+        }
 
     }
 }

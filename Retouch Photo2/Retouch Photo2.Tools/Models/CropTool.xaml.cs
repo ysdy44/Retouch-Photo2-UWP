@@ -238,26 +238,24 @@ namespace Retouch_Photo2.Tools.Models
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
+            //@DrawBound
             switch (this.SelectionViewModel.SelectionMode)
             {
                 case ListViewSelectionMode.None:
-                    return;
-
-                case ListViewSelectionMode.Single:
-                    {
-                        ILayer layer = this.SelectionViewModel.SelectionLayerage.Self;
-                        layer.Transform.DrawCrop(drawingSession, matrix, this.ViewModel.AccentColor);
-                    }
                     break;
-
+                case ListViewSelectionMode.Single:
+                    ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
+                    layer2.Transform.DrawCrop(drawingSession, matrix, this.ViewModel.AccentColor);
+                    break;
                 case ListViewSelectionMode.Multiple:
-                    foreach (Layerage layerage in this.SelectionViewModel.SelectionLayerages)
+                    foreach (Layerage layerage in this.ViewModel.SelectionLayerages)
                     {
                         ILayer layer = layerage.Self;
                         layer.Transform.DrawCrop(drawingSession, matrix, this.ViewModel.AccentColor);
                     }
                     break;
             }
+
 
             //Snapping
             if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);

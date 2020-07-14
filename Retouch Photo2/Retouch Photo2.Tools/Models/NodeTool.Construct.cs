@@ -195,18 +195,18 @@ namespace Retouch_Photo2.Tools.Models
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
+            //@DrawBound
             switch (this.SelectionViewModel.SelectionMode)
             {
                 case ListViewSelectionMode.None: break;
                 case ListViewSelectionMode.Single:
-                    {
-                        ILayer layer = this.SelectionViewModel.SelectionLayerage.Self;
+                        ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
 
-                        if (layer.Type == LayerType.Curve)
+                        if (layer2.Type == LayerType.Curve)
                         {
-                            drawingSession.DrawNodeCollection(layer.Nodes, matrix, this.ViewModel.AccentColor);
+                            drawingSession.DrawNodeCollection(layer2.Nodes, matrix, this.ViewModel.AccentColor);
+                            layer2.DrawBound(drawingSession, matrix, this.ViewModel.AccentColor);
                         }
-                    }
                     break;
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage layerage in this.SelectionViewModel.SelectionLayerages)
@@ -216,6 +216,7 @@ namespace Retouch_Photo2.Tools.Models
                         if (layer.Type == LayerType.Curve)
                         {
                             drawingSession.DrawNodeCollection(layer.Nodes, matrix, this.ViewModel.AccentColor);
+                            layer.DrawBound(drawingSession, matrix, this.ViewModel.AccentColor);
                         }
                     }
                     break;

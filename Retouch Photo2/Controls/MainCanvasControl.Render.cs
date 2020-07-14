@@ -86,26 +86,6 @@ namespace Retouch_Photo2.Controls
             });
         }
 
-        private void _drawToolAndBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession)
-        {
-            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            
-            //Bound
-            foreach (Layerage layerage in this.ViewModel.LayerageCollection.RootLayerages)
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.IsSelected == true)
-                {
-                    layer.DrawBound(resourceCreator, drawingSession, matrix, layerage.Children, this.ViewModel.AccentColor);
-                }
-            }
-
-
-            //Tool
-            ToolBase.Instance.Draw(drawingSession);
-        }
-
 
         /// <summary>
         /// Render image.

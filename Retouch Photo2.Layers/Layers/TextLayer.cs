@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Texts;
+using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.UI.Text;
@@ -62,7 +63,6 @@ namespace Retouch_Photo2.Layers.Models
             if (element.Element("FontStyle") is XElement fontStyle) this.FontStyle = Retouch_Photo2.Texts.XML.CreateFontStyle(fontStyle.Value);
             if (element.Element("FontWeight") is XElement fontWeight) this.FontWeight= Retouch_Photo2.Texts.XML.CreateFontWeight(fontWeight.Value);
         }
-
 
 
         /// <summary>

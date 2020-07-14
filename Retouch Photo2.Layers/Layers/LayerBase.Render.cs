@@ -83,22 +83,21 @@ namespace Retouch_Photo2.Layers
         /// <param name="children"> The children layerage. </param>
         /// <returns> The rendered layer. </returns>
         public abstract ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children);
-
-
-
+                
 
         /// <summary>
         /// Draw lines on bound.
         /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="drawingSession"> The drawing-session. </param>
         /// <param name="matrix"> The matrix. </param>
         /// <param name="accentColor"> The accent color. </param>
-        /// <param name="children"> The children layerage. </param>
-        public virtual void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, IList<Layerage> children, Windows.UI.Color accentColor)
+        public void DrawBound(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
-        }
+            if (this.Visibility == Visibility.Collapsed) return;
 
+            Transformer transformer = this.Transform.GetActualTransformer();
+            drawingSession.DrawBound(transformer, matrix);
+        }
 
 
         /// <summary>

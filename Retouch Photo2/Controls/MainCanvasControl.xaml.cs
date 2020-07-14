@@ -96,8 +96,8 @@ namespace Retouch_Photo2.Controls
                     case InputDevice.None:
                     case InputDevice.Single:
                         {
-                            //Tool & Bound
-                            this._drawToolAndBound(sender, args.DrawingSession);
+                            //Tool
+                            ToolBase.Instance.Draw(args.DrawingSession);
                         }
                         break;
                 }

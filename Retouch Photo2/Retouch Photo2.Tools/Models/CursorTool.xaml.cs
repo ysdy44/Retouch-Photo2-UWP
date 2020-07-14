@@ -179,6 +179,31 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
+            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+
+            //@DrawBound
+            switch (this.SelectionViewModel.SelectionMode)
+            {
+                case ListViewSelectionMode.None:
+                    break;
+                case ListViewSelectionMode.Single:
+                    ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
+                    layer2.DrawBound(drawingSession, matrix, this.ViewModel.AccentColor);
+
+                    ToolBase.TransformerTool.Draw(drawingSession); //TransformerTool
+                    break;
+                case ListViewSelectionMode.Multiple:
+                    foreach (Layerage layerage in this.ViewModel.SelectionLayerages)
+                    {
+                        ILayer layer = layerage.Self;
+                        layer.DrawBound(drawingSession, matrix, this.ViewModel.AccentColor);
+                    }
+
+                    ToolBase.TransformerTool.Draw(drawingSession); //TransformerTool
+                    break;
+            }
+
+
             switch (this.CursorMode)
             {
                 case CursorMode.None:
@@ -189,11 +214,8 @@ namespace Retouch_Photo2.Tools.Models
                     ToolBase.MoveTool.Draw(drawingSession);//MoveTool
                     break;
                 case CursorMode.BoxChoose:
-                    {
-                        Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-                        CanvasGeometry geometry = this.BoxRect.ToRectangle(this.ViewModel.CanvasDevice, matrix);
-                        drawingSession.DrawGeometryDodgerBlue(geometry);
-                    }
+                    CanvasGeometry geometry = this.BoxRect.ToRectangle(this.ViewModel.CanvasDevice, matrix);
+                    drawingSession.DrawGeometryDodgerBlue(geometry);
                     break;
             }
         }

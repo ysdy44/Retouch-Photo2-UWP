@@ -275,23 +275,47 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
-            //Selection
-            if (this.Mode == ListViewSelectionMode.None) return;
-
-            //Draw
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
-            Color accentColor = this.ViewModel.AccentColor;
 
-            //Snapping
-            if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
-
-            switch (this.FillOrStroke)
+            //@DrawBound
+            switch (this.SelectionViewModel.SelectionMode)
             {
-                case FillOrStroke.Fill:
-                    this.Fill.Draw(drawingSession, matrix, accentColor);
+                case ListViewSelectionMode.None:
                     break;
-                case FillOrStroke.Stroke:
-                    this.Stroke.Draw(drawingSession, matrix, accentColor);
+                case ListViewSelectionMode.Single:
+                    ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
+                    layer2.DrawBound(drawingSession, matrix, this.ViewModel.AccentColor);
+                    break;
+                case ListViewSelectionMode.Multiple:
+                    foreach (Layerage layerage in this.ViewModel.SelectionLayerages)
+                    {
+                        ILayer layer = layerage.Self;
+                        layer.DrawBound(drawingSession, matrix, this.ViewModel.AccentColor);
+                    }
+                    break;
+            }
+            
+
+            switch (this.SelectionViewModel.SelectionMode)
+            {
+                case ListViewSelectionMode.None:
+                    break;
+                case ListViewSelectionMode.Single:
+                case ListViewSelectionMode.Multiple:
+                    {
+                        //Snapping
+                        if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
+
+                        switch (this.FillOrStroke)
+                        {
+                            case FillOrStroke.Fill:
+                                this.Fill.Draw(drawingSession, matrix, this.ViewModel.AccentColor);
+                                break;
+                            case FillOrStroke.Stroke:
+                                this.Stroke.Draw(drawingSession, matrix, this.ViewModel.AccentColor);
+                                break;
+                        }
+                    }
                     break;
             }
         }

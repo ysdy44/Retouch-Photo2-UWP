@@ -30,16 +30,25 @@ namespace Retouch_Photo2.Layers
 
         private static void _removeAllSelected(LayerageCollection layerageCollection, IList<Layerage> layerages)
         {        
-            foreach (Layerage child in layerages)
+            foreach (Layerage layerage in layerages)
             {
-                ILayer layer = child.Self;
+                ILayer layer = layerage.Self;
 
                 //Recursive
                 if (layer.IsSelected == true)
-                    LayerageCollection._removeAll(layerageCollection, child.Children);
+                {
+                    //Refactoring
+                    layer.IsRefactoringTransformer = true;
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsTransformer();
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
+                    LayerageCollection._removeAll(layerageCollection, layerage.Children);
+                }
                 //Recursive
                 else
-                    LayerageCollection._removeAllSelected(layerageCollection, child.Children);
+                    LayerageCollection._removeAllSelected(layerageCollection, layerage.Children);
             }
 
             //Remove

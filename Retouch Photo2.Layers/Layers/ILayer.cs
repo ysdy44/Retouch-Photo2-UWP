@@ -149,12 +149,10 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Draw lines on bound.
         /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="drawingSession"> The drawing-session. </param>
         /// <param name="matrix"> The matrix. </param>
         /// <param name="accentColor"> The accent color. </param>
-        /// <param name="children"> The children layerage. </param>
-        void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, IList<Layerage> children, Windows.UI.Color accentColor);
+        void DrawBound(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor);
 
 
         /// <summary>
@@ -170,11 +168,14 @@ namespace Retouch_Photo2.Layers
         /// <param name="matrix"> The matrix. </param>
         /// <returns> The product geometry. </returns>   
         CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator, Matrix3x2 matrix);
-        
+
 
         /// <summary>
         /// Returns whether the area filled by the layer contains the specified point.
         /// </summary>
+        /// <param name="layerage"> The layerage. </param>
+        /// <param name="point"> The point. </param>
+        /// <returns> If the fill contains points, return **True**. </returns>
         bool FillContainsPoint(Layerage layerage, Vector2 point);
 
 

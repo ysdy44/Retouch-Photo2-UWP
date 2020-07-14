@@ -89,13 +89,10 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, IList<Layerage> children, Windows.UI.Color accentColor)
+        public void DrawBound(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
-            foreach (Layerage child in children)
-            {
-                Transformer transformer = child.GetActualTransformer();
-                drawingSession.DrawBound(transformer, matrix);
-            }
+            Transformer transformer = base.Transform.GetActualTransformer();
+            drawingSession.DrawBound(transformer, matrix);
         }
 
 
