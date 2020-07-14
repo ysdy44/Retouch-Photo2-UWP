@@ -83,6 +83,12 @@ namespace Retouch_Photo2.Layers.Models
         {
             CanvasGeometry geometry = this.CreateGeometry(resourceCreator, matrix);
             drawingSession.DrawGeometry(geometry, accentColor);
+
+            foreach (Layerage child in children)
+            {
+                Transformer transformer = child.GetActualTransformer();
+                drawingSession.DrawBound(transformer, matrix);
+            }
         }
         
 
