@@ -88,9 +88,10 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Draw lines on bound.
         /// </summary>
+        /// <param name="drawingSession"> The drawing-session. </param>
         /// <param name="matrix"> The matrix. </param>
         /// <param name="accentColor"> The accent color. </param>
-        public void DrawBound(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        public override void DrawBound(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
             if (this.Geometry2 == null) return;
             drawingSession.DrawGeometry(this.Geometry2.Transform(matrix), accentColor);

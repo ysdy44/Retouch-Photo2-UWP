@@ -72,7 +72,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Vector2 lineRight = Vector2.Transform(this._previewRight, matrix);
 
-                drawingSession.DrawLineDodgerBlue(lineLeft, lineRight);
+                drawingSession.DrawLine(lineLeft, lineRight, this.ViewModel.AccentColor);
                 drawingSession.DrawNode3(lineLeft);
                 drawingSession.DrawNode3(lineRight);
             }
@@ -182,7 +182,7 @@ namespace Retouch_Photo2.Tools.Models
             drawingSession.DrawLine(lastPoint, endPoint, canvasBrush, strokeWidth, strokeStyle);
             
             //Draw
-            drawingSession.DrawLineDodgerBlue(lastPoint, endPoint);
+            drawingSession.DrawLine(lastPoint, endPoint, this.ViewModel.AccentColor);
             drawingSession.DrawNode3(endPoint);
             drawingSession.DrawNodeCollection(layer.Nodes, matrix, this.ViewModel.AccentColor);
             

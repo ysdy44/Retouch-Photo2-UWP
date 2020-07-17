@@ -91,10 +91,8 @@ namespace Retouch_Photo2.Layers
         /// <param name="drawingSession"> The drawing-session. </param>
         /// <param name="matrix"> The matrix. </param>
         /// <param name="accentColor"> The accent color. </param>
-        public void DrawBound(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        public virtual void DrawBound(CanvasDrawingSession drawingSession, Matrix3x2 matrix, Windows.UI.Color accentColor)
         {
-            if (this.Visibility == Visibility.Collapsed) return;
-
             Transformer transformer = this.Transform.GetActualTransformer();
             drawingSession.DrawBound(transformer, matrix);
         }

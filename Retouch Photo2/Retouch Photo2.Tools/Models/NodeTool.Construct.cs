@@ -204,8 +204,8 @@ namespace Retouch_Photo2.Tools.Models
 
                         if (layer2.Type == LayerType.Curve)
                         {
-                            drawingSession.DrawNodeCollection(layer2.Nodes, matrix, this.ViewModel.AccentColor);
                             layer2.DrawBound(drawingSession, matrix, this.ViewModel.AccentColor);
+                            drawingSession.DrawNodeCollection(layer2.Nodes, matrix, this.ViewModel.AccentColor);
                         }
                     break;
                 case ListViewSelectionMode.Multiple:
@@ -215,8 +215,8 @@ namespace Retouch_Photo2.Tools.Models
 
                         if (layer.Type == LayerType.Curve)
                         {
-                            drawingSession.DrawNodeCollection(layer.Nodes, matrix, this.ViewModel.AccentColor);
                             layer.DrawBound(drawingSession, matrix, this.ViewModel.AccentColor);
+                            drawingSession.DrawNodeCollection(layer.Nodes, matrix, this.ViewModel.AccentColor);
                         }
                     }
                     break;
