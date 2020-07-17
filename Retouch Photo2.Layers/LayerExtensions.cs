@@ -13,6 +13,19 @@ namespace Retouch_Photo2.Layers
     {
 
         /// <summary>
+        /// Draw a layer's lines on bound.
+        /// </summary>
+        /// <param name="drawingSession"> The drawing-session. </param>
+        /// <param name="layer"> The layer. </param>
+        /// <param name="matrix"> The matrix. </param>
+        /// <param name="accentColor"> The accent color. </param>
+        public static void DrawLayerBound(this CanvasDrawingSession drawingSession,ILayer layer, Matrix3x2 matrix, Windows.UI.Color accentColor)
+        {
+            layer.DrawBound(drawingSession, matrix, accentColor);
+        }
+
+
+        /// <summary>
         /// Turn into icon render image.
         /// </summary>
         /// <param name="canvasImage"> The canvas image. </param>
@@ -53,6 +66,7 @@ namespace Retouch_Photo2.Layers
                 Matrix3x2.CreateTranslation(new Vector2(halfHeight));
         }
 
+
         /// <summary>
         /// Is text type?
         /// </summary>
@@ -90,7 +104,6 @@ namespace Retouch_Photo2.Layers
                     return false;
             }
         }
-
 
     }
 }
