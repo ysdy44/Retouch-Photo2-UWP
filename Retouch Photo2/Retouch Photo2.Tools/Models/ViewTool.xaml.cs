@@ -22,119 +22,13 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s ViewTool.
     /// </summary>
-    public partial class ViewTool : Page, ITool
+    public partial class ViewTool : ITool
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
 
-
-        //@Converter
-        private int ScaleToNumberConverter(float scale) => ViewScaleConverter.ScaleToNumber(scale);
-        private double ScaleToValueConverter(float scale) => ViewScaleConverter.ScaleToValue(scale);
-
-        private int RadianToNumberConverter(float radian) => ViewRadianConverter.RadianToNumber(radian);
-        private double RadianToValueConverter(float radian) => ViewRadianConverter.RadianToValue(radian);
-
-
-        #region DependencyProperty
-
-
-        /// <summary> Gets or sets the radian. </summary>
-        public double Radian
-        {
-            get { return (double)GetValue(RadianProperty); }
-            set { SetValue(RadianProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "ViewTool.Radian" /> dependency property. </summary>
-        public static readonly DependencyProperty RadianProperty = DependencyProperty.Register(nameof(Radian), typeof(double), typeof(ViewTool), new PropertyMetadata(0.0f, (sender, e) =>
-        {
-            ViewTool con = (ViewTool)sender;
-
-            if (e.NewValue is double value)
-            {
-                con.ViewModel.SetCanvasTransformerRadian((float)value);//CanvasTransformer
-                con.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
-            }
-        }));
-
-
-        /// <summary> Gets or sets the scale. </summary>
-        public double Scale
-        {
-            get { return (double)GetValue(ScaleProperty); }
-            set { SetValue(ScaleProperty, value); }
-        }
-        /// <summary> Identifies the <see cref = "ViewTool.Scale" /> dependency property. </summary>
-        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register(nameof(Scale), typeof(double), typeof(ViewTool), new PropertyMetadata(0.0f, (sender, e) =>
-        {
-            ViewTool con = (ViewTool)sender;
-
-            if (e.NewValue is double value)
-            {
-                con.ViewModel.SetCanvasTransformerScale((float)value);//CanvasTransformer
-                con.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
-            }
-        }));
-
-
-        #endregion
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a ViewTool. 
-        /// </summary>
-        public ViewTool()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.ConstructRadianStoryboard();
-            this.ConstructRadian1();
-            this.ConstructRadian2();
-
-            this.ConstructScaleStoryboard();
-            this.ConstructScale1();
-            this.ConstructScale2();
-        }
-
-        public void OnNavigatedTo() { }
-        public void OnNavigatedFrom()
-        {
-            TouchbarButton.Instance = null;
-        }
-
-    }
-    
-    /// <summary>
-    /// <see cref="ITool"/>'s ViewTool.
-    /// </summary>
-    public partial class ViewTool : Page, ITool
-    {
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("/Tools/View");
-
-            this.Button.ToolTip.Closed += (s, e) => this.RadianClearToolTip.IsOpen = this.ScaleClearToolTip.IsOpen = false;
-            this.Button.ToolTip.Opened += (s, e) =>
-            {
-                if (this.Button.IsSelected == false) return;
-
-                this.RadianClearToolTip.IsOpen = this.ScaleClearToolTip.IsOpen = true;
-            };
-
-            this.RadianButton.CenterContent = resource.GetString("/Tools/View_Radian");
-            this.RadianClearToolTip.Content = resource.GetString("/Tools/View_RadianClear");
-
-            this.ScaleButton.CenterContent = resource.GetString("/Tools/View_Scale");
-            this.ScaleClearToolTip.Content = resource.GetString("/Tools/View_ScaleClear");
-        }
 
         //@Content
         public ToolType Type => ToolType.View;
@@ -143,8 +37,19 @@ namespace Retouch_Photo2.Tools.Models
         {
             CenterContent = new ViewIcon()
         };
-        public FrameworkElement Page => this;
+        public FrameworkElement Page => this.ViewPage;
+        ViewPage ViewPage = new ViewPage();
 
+
+        //@Construct
+        /// <summary>
+        /// Initializes a ViewTool. 
+        /// </summary>
+        public ViewTool()
+        {
+            this.ConstructStrings();
+        }
+        
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
@@ -175,13 +80,145 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Draw(CanvasDrawingSession drawingSession) { }
 
+
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom()
+        {
+            TouchbarButton.Instance = null;
+        }
+
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Button.Title = resource.GetString("/Tools/View");
+
+            this.Button.ToolTip.Closed += (s, e) => this.ViewPage.IsOpen = false;
+            this.Button.ToolTip.Opened += (s, e) =>
+            {
+                if (this.Button.IsSelected == false) return;
+
+                this.ViewPage.IsOpen = true;
+            };
+        }
+
+    }
+
+
+    /// <summary>
+    /// Page of <see cref="ViewTool"/>.
+    /// </summary>
+    internal partial class ViewPage : Page
+    {
+        
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Converter
+        private int ScaleToNumberConverter(float scale) => ViewScaleConverter.ScaleToNumber(scale);
+        private double ScaleToValueConverter(float scale) => ViewScaleConverter.ScaleToValue(scale);
+
+        private int RadianToNumberConverter(float radian) => ViewRadianConverter.RadianToNumber(radian);
+        private double RadianToValueConverter(float radian) => ViewRadianConverter.RadianToValue(radian);
+
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets the radian. </summary>
+        public double Radian
+        {
+            get { return (double)GetValue(RadianProperty); }
+            set { SetValue(RadianProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "ViewPage.Radian" /> dependency property. </summary>
+        public static readonly DependencyProperty RadianProperty = DependencyProperty.Register(nameof(Radian), typeof(double), typeof(ViewPage), new PropertyMetadata(0.0f, (sender, e) =>
+        {
+            ViewPage con = (ViewPage)sender;
+
+            if (e.NewValue is double value)
+            {
+                con.ViewModel.SetCanvasTransformerRadian((float)value);//CanvasTransformer
+                con.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
+            }
+        }));
+
+
+        /// <summary> Gets or sets the scale. </summary>
+        public double Scale
+        {
+            get { return (double)GetValue(ScaleProperty); }
+            set { SetValue(ScaleProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "ViewPage.Scale" /> dependency property. </summary>
+        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register(nameof(Scale), typeof(double), typeof(ViewPage), new PropertyMetadata(0.0f, (sender, e) =>
+        {
+            ViewPage con = (ViewPage)sender;
+
+            if (e.NewValue is double value)
+            {
+                con.ViewModel.SetCanvasTransformerScale((float)value);//CanvasTransformer
+                con.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
+            }
+        }));
+
+
+        /// <summary> Gets or sets <see cref = "ViewPage" />'s IsOpen. </summary>
+        public bool IsOpen
+        {
+            get { return (bool)GetValue(IsOpenProperty); }
+            set { SetValue(IsOpenProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "ViewPage.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(ViewPage), new PropertyMetadata(false));
+
+
+        #endregion
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a ViewPage. 
+        /// </summary>
+        public ViewPage()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.ConstructRadianStoryboard();
+            this.ConstructRadian1();
+            this.ConstructRadian2();
+
+            this.ConstructScaleStoryboard();
+            this.ConstructScale1();
+            this.ConstructScale2();
+        }
+
     }
 
     /// <summary>
-    /// <see cref="ITool"/>'s ViewTool.
+    /// Page of <see cref="ViewTool"/>.
     /// </summary>
-    public partial class ViewTool : Page, ITool
+    internal partial class ViewPage : Page
     {
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.RadianButton.CenterContent = resource.GetString("/Tools/View_Radian");
+            this.RadianClearToolTip.Content = resource.GetString("/Tools/View_RadianClear");
+
+            this.ScaleButton.CenterContent = resource.GetString("/Tools/View_Scale");
+            this.ScaleClearToolTip.Content = resource.GetString("/Tools/View_ScaleClear");
+        }
+
 
         private void ConstructRadianStoryboard()
         {

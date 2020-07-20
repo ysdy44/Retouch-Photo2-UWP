@@ -1,5 +1,4 @@
-﻿using FanKit.Transformers;
-using HSVColorPickers;
+﻿using HSVColorPickers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
@@ -12,36 +11,10 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s BrushTool.
     /// </summary>
-    public sealed partial class BrushTool : Page, ITool
+    public partial class BrushTool : ITool
     {
-
         //@ViewModel
         IBrush Fill { get => this.SelectionViewModel.Fill; set => this.SelectionViewModel.Fill = value; }
-
-
-        private void ConstructFillImage()
-        {
-            Retouch_Photo2.PhotosPage.FillImageCallBack += (photo) =>
-            {
-                this.FillTypeChanged(BrushType.Image, photo);
-                this.ShowControl.Invalidate();
-            };
-            this.BrushTypeComboBox.FillTypeChanged += (s, brushType) =>
-            {
-                if (brushType == BrushType.Image)
-                {
-                    Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.FillImage);//Delegate
-                }
-                else
-                {
-                    this.FillTypeChanged(brushType);
-                    this.ShowControl.Invalidate();
-                }
-            };
-        }
-
-
-        //////////////////////////
 
 
         private void FillStarted(Vector2 startingPoint, Vector2 point)
@@ -116,6 +89,40 @@ namespace Retouch_Photo2.Tools.Models
                 getHistory: (style) => style.StartingFill,
                 setHistory: (style, previous) => style.Fill = previous.Clone()
             );
+        }
+
+    }
+
+
+    /// <summary>
+    /// Page of <see cref="BrushTool"/>.
+    /// </summary>
+    internal partial class BrushPage : Page
+    {
+
+        //@ViewModel
+        IBrush Fill { get => this.SelectionViewModel.Fill; set => this.SelectionViewModel.Fill = value; }
+
+
+        private void ConstructFillImage()
+        {
+            Retouch_Photo2.PhotosPage.FillImageCallBack += (photo) =>
+            {
+                this.FillTypeChanged(BrushType.Image, photo);
+                this.ShowControl.Invalidate();
+            };
+            this.BrushTypeComboBox.FillTypeChanged += (s, brushType) =>
+            {
+                if (brushType == BrushType.Image)
+                {
+                    Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.FillImage);//Delegate
+                }
+                else
+                {
+                    this.FillTypeChanged(brushType);
+                    this.ShowControl.Invalidate();
+                }
+            };
         }
 
 

@@ -61,8 +61,7 @@ namespace Retouch_Photo2.Menus.Models
 
     }
 
-
-
+    
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Historys.IHistory"/>.
     /// </summary>

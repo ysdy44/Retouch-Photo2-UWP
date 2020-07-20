@@ -1,4 +1,13 @@
-﻿using FanKit.Transformers;
+﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
+using Retouch_Photo2.Tools.Icons;
+using Retouch_Photo2.ViewModels;
+using System.Numerics;
+using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
+using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers;
@@ -26,7 +35,7 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s CursorTool.
     /// </summary>
-    public partial class CursorTool : Page, ITool
+    public partial class CursorTool : ITool
     {
 
         //@ViewModel
@@ -34,9 +43,20 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel ;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
         MarqueeCompositeMode MarqueeCompositeMode => this.SettingViewModel.CompositeMode;
+
+
+        //@Content
+        public ToolType Type => ToolType.Cursor;
+        public FrameworkElement Icon { get; } = new CursorIcon();
+        public IToolButton Button { get; } = new ToolButton
+        {
+            CenterContent = new CursorIcon()
+        };
+        public FrameworkElement Page => this.CursorPage;
+        CursorPage CursorPage = new CursorPage();
 
 
         //@Construct
@@ -45,51 +65,9 @@ namespace Retouch_Photo2.Tools.Models
         /// </summary>
         public CursorTool()
         {
-            this.InitializeComponent();
             this.ConstructStrings();
-
-            this.CountButton.Click += (s, e) =>
-            {
-                this.TipViewModel.ShowMenuLayoutAt(MenuType.Operate, this.CountButton);
-            };
         }
 
-
-        public void OnNavigatedTo() => this.CursorMode = CursorMode.None;
-        public void OnNavigatedFrom() => this.CursorMode = CursorMode.None;
-    }
-
-    /// <summary>
-    /// <see cref="ITool"/>'s CursorTool.
-    /// </summary>
-    public partial class CursorTool : Page, ITool
-    {
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("/Tools/Cursor");
-
-            this.Button.ToolTip.Closed += (s, e) =>    this.ModeControl.IsOpen = false;
-            this.Button.ToolTip.Opened += (s, e) =>
-            {
-                if (this.Button.IsSelected == false) return;
-
-                this.ModeControl.IsOpen = true;                
-            };            
-        }
-
-
-        //@Content
-        public ToolType Type => ToolType.Cursor;  
-        public FrameworkElement Icon { get; } = new CursorIcon();
-        public IToolButton Button { get; } = new ToolButton
-        {
-            CenterContent = new CursorIcon()
-        };
-        public FrameworkElement Page => this;
-        
 
         CursorMode CursorMode;
         TransformerRect BoxRect;
@@ -114,8 +92,8 @@ namespace Retouch_Photo2.Tools.Models
             this.CursorMode = CursorMode.BoxChoose;
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
-            Vector2 canavsStartingPoint = Vector2.Transform(startingPoint, inverseMatrix); 
-             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix); 
+            Vector2 canavsStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
+            Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
             this.BoxRect = new TransformerRect(canavsStartingPoint, canvasPoint);
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
@@ -167,7 +145,7 @@ namespace Retouch_Photo2.Tools.Models
                             this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
 
                             LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
-                            
+
                             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                         }
                     }
@@ -247,6 +225,64 @@ namespace Retouch_Photo2.Tools.Models
                         //break;
                 }
             }
+        }
+
+
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom()
+        {
+            this.CursorMode = CursorMode.None;
+        }
+
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Button.Title = resource.GetString("/Tools/Cursor");
+
+            this.Button.ToolTip.Closed += (s, e) => this.CursorPage.ModeControl.IsOpen = false;
+            this.Button.ToolTip.Opened += (s, e) =>
+            {
+                if (this.Button.IsSelected == false) return;
+
+                this.CursorPage.ModeControl.IsOpen = true;
+            };
+        }
+
+    }
+
+
+    /// <summary>
+    /// Page of <see cref="CursorTool"/>.
+    /// </summary>
+    internal partial class CursorPage : Page
+    {
+
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
+        
+        public CompositeModeSegmented ModeControl => this._ModeControl;
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a CursorPage. 
+        /// </summary>
+        public CursorPage()
+        {
+            this.InitializeComponent();
+            //this.ConstructStrings();
+
+            this.CountButton.Click += (s, e) =>
+            {
+                this.TipViewModel.ShowMenuLayoutAt(MenuType.Operate, this.CountButton);
+            };
         }
 
     }

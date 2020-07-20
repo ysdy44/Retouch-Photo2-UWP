@@ -23,8 +23,8 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class DebugMenu : Expander, IMenu
     {       
         //@Content     
-        public override UIElement MainPage => this.TextMainPage;
-        TextMainPage TextMainPage = new TextMainPage();
+        public override UIElement MainPage => this.DebugMainPage;
+        DebugMainPage DebugMainPage = new DebugMainPage();
 
         //@Construct
         /// <summary>
@@ -69,8 +69,9 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// MainPage of <see cref = "DebugMenu"/>.
     /// </summary>
-    public sealed partial class DebugMainPage : Page
+    internal sealed partial class DebugMainPage : Page
     {
+
         //@Construct
         /// <summary>
         /// Initializes a DebugMainPage. 
@@ -79,5 +80,6 @@ namespace Retouch_Photo2.Menus.Models
         {
             this.InitializeComponent();
         }
+
     }
 }

@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Retouch_Photo2.Tools.GeometryTool"
+    x:Class="Retouch_Photo2.Tools.GeometryPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -13,7 +13,8 @@
     >
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal" Padding="4,0">
+        <StackPanel Orientation="Horizontal">
+            <ContentControl Width="8"/>
 
             <TextBlock x:Name="FillTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <brushs:ColorEllipse x:Name="FillColorEllipse" Brush="{x:Bind SelectionViewModel.Fill, Mode=OneWay}"/>
@@ -36,6 +37,7 @@
 
             <toolsElements:MoreCreateButton/>
 
+            <ContentControl Width="4"/>
         </StackPanel>
     </ScrollViewer>
 

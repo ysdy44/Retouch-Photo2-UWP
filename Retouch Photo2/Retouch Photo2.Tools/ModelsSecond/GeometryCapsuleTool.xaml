@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Retouch_Photo2.Tools.Models.GeometryCapsuleTool"
+    x:Class="Retouch_Photo2.Tools.Models.GeometryCapsulePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -10,8 +10,8 @@
     d:DesignWidth="400"
     >
 
-
-    <StackPanel Orientation="Horizontal" Padding="4,0">
+    <StackPanel Orientation="Horizontal">
+        <ContentControl Width="8"/>
 
         <TextBlock x:Name="ConvertTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <toolsElements:ConvertToCurvesButton/>
@@ -20,6 +20,7 @@
 
         <toolsElements:MoreCreateButton/>
 
+        <ContentControl Width="4"/>
     </StackPanel>
-
+    
 </Page>

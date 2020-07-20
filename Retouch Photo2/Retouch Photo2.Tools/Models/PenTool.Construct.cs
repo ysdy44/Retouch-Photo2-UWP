@@ -12,7 +12,7 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s PenTool.
     /// </summary>
-    public partial class PenTool : Page, ITool
+    public partial class PenTool : ITool
     {
         //Strings
         private void ConstructStrings()
@@ -30,8 +30,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             CenterContent = new PenIcon()
         };
-        public FrameworkElement Page => this;
-        
+        public FrameworkElement Page { get; } = new GeometryPage();
+
 
         //Pen
         NodeCollectionMode Mode = NodeCollectionMode.None;

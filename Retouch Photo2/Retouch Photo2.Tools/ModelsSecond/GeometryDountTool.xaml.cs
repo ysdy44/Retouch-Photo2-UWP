@@ -4,7 +4,6 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
-using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,59 +11,14 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools.Models
 {
     /// <summary>
-    /// <see cref="ITool"/>'s GeometryDountTool.
+    /// <see cref="GeometryTool"/>'s GeometryDountTool.
     /// </summary>
-    public sealed partial class GeometryDountTool : Page, ITool
+    public partial class GeometryDountTool : GeometryTool, ITool
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-
-        
-        //@Converter
-        private int HoleRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryDountTool. 
-        /// </summary>
-        public GeometryDountTool()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.ConstructHoleRadius1();
-            this.ConstructHoleRadius2();
-        }
-
-        public void OnNavigatedTo() { }
-        public void OnNavigatedFrom()
-        {
-            TouchbarButton.Instance = null;
-        }
-
-    }
-
-    /// <summary>
-    /// <see cref="ITool"/>'s GeometryDountTool.
-    /// </summary>
-    public partial class GeometryDountTool : Page, ITool
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryDount");
-
-            this.HoleRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryDount_HoleRadius");
-
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
-        }
 
 
         //@Content
@@ -74,10 +28,20 @@ namespace Retouch_Photo2.Tools.Models
         {
             CenterContent = new GeometryDountIcon()
         };
-        public FrameworkElement Page => this;
+        public FrameworkElement Page { get; } = new GeometryDountPage();
 
 
-        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
+        //@Construct
+        /// <summary>
+        /// Initializes a GeometryDountTool. 
+        /// </summary>
+        public GeometryDountTool()
+        {
+            this.ConstructStrings();
+        }
+
+
+        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
             return new GeometryDountLayer(customDevice)
             {
@@ -88,19 +52,60 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void Started(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => ToolBase.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-        public void Draw(CanvasDrawingSession drawingSession) => ToolBase.CreateTool.Draw(drawingSession);
+            this.Button.Title = resource.GetString("/ToolsSecond/GeometryDount");
+        }
 
     }
 
+
     /// <summary>
-    /// <see cref="ITool"/>'s GeometryDountTool.
+    /// Page of <see cref="GeometryDountTool"/>.
     /// </summary>
-    public partial class GeometryDountTool : Page, ITool
+    internal partial class GeometryDountPage : Page
+    {
+
+        //@ViewModel
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Converter
+        private int HoleRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a GeometryDountPage. 
+        /// </summary>
+        public GeometryDountPage()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.ConstructHoleRadius1();
+            this.ConstructHoleRadius2();
+        }
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.HoleRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryDount_HoleRadius");
+
+            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+        }
+    }
+
+    /// <summary>
+    /// Page of <see cref="GeometryDountTool"/>.
+    /// </summary>
+    internal partial class GeometryDountPage : Page
     {
 
         //HoleRadius

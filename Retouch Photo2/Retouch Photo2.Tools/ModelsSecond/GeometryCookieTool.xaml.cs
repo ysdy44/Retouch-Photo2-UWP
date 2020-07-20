@@ -4,7 +4,6 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
-using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -24,63 +23,14 @@ namespace Retouch_Photo2.Tools.Models
     }
 
     /// <summary>
-    /// <see cref="ITool"/>'s GeometryCookieTool.
+    /// <see cref="GeometryTool"/>'s GeometryCookieTool.
     /// </summary>
-    public partial class GeometryCookieTool : Page, ITool
+    public partial class GeometryCookieTool : GeometryTool, ITool
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-        
-
-        //@Converter
-        private int InnerRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
-        private int SweepAngleToNumberConverter(float sweepAngle) => (int)(sweepAngle / FanKit.Math.Pi * 180f);
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryCookieTool. 
-        /// </summary>
-        public GeometryCookieTool()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.ConstructInnerRadius1();
-            this.ConstructInnerRadius2();
-
-            this.ConstructSweepAngle1();
-            this.ConstructSweepAngle2();
-        }
-        
-        public void OnNavigatedTo() { }
-        public void OnNavigatedFrom()
-        {
-            TouchbarButton.Instance = null;
-        }
-
-    }
-
-    /// <summary>
-    /// <see cref="ITool"/>'s GeometryCookieTool.
-    /// </summary>
-    public sealed partial class GeometryCookieTool : Page, ITool
-    {
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryCookie");
-
-            this.InnerRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCookie_InnerRadius");
-            this.SweepAngleButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCookie_SweepAngle");
-
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
-        }
 
 
         //@Content
@@ -90,10 +40,20 @@ namespace Retouch_Photo2.Tools.Models
         {
             CenterContent = new GeometryCookieIcon()
         };
-        public FrameworkElement Page => this;
+        public FrameworkElement Page { get; } = new GeometryCookiePage();
 
 
-        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
+        //@Construct
+        /// <summary>
+        /// Initializes a GeometryCookieTool. 
+        /// </summary>
+        public GeometryCookieTool()
+        {
+            this.ConstructStrings();
+        }
+
+
+        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
             return new GeometryCookieLayer(customDevice)
             {
@@ -105,19 +65,65 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void Started(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => ToolBase.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-        public void Draw(CanvasDrawingSession drawingSession) => ToolBase.CreateTool.Draw(drawingSession);
+            this.Button.Title = resource.GetString("/ToolsSecond/GeometryCookie");
+        }
 
     }
 
+
     /// <summary>
-    /// <see cref="ITool"/>'s GeometryCookieTool.
+    /// Page of <see cref="GeometryCookieTool"/>.
     /// </summary>
-    public sealed partial class GeometryCookieTool : Page, ITool
+    internal partial class GeometryCookiePage : Page
+    {
+
+        //@ViewModel
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Converter
+        private int InnerRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
+        private int SweepAngleToNumberConverter(float sweepAngle) => (int)(sweepAngle / FanKit.Math.Pi * 180f);
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a GeometryCookiePage. 
+        /// </summary>
+        public GeometryCookiePage()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.ConstructInnerRadius1();
+            this.ConstructInnerRadius2();
+
+            this.ConstructSweepAngle1();
+            this.ConstructSweepAngle2();
+        }
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.InnerRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCookie_InnerRadius");
+            this.SweepAngleButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCookie_SweepAngle");
+
+            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+        }
+    }
+
+    /// <summary>
+    /// Page of <see cref="GeometryCookieTool"/>.
+    /// </summary>
+    internal partial class GeometryCookiePage : Page
     {
 
         //InnerRadius
@@ -205,7 +211,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 float sweepAngle = (float)value;
                 this.SelectionViewModel.GeometryCookieSweepAngle = sweepAngle;
-                
+
                 this.MethodViewModel.TLayerChangeDelta<GeometryCookieLayer>(layerType: LayerType.GeometryCookie, set: (tLayer) => tLayer.SweepAngle = sweepAngle);
             };
             this.SweepAngleSlider.ValueChangeCompleted += (sender, value) =>

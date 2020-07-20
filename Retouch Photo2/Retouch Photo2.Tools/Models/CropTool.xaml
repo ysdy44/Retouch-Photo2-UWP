@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Retouch_Photo2.Tools.Models.CropTool"
+    x:Class="Retouch_Photo2.Tools.Models.CropPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,7 +9,8 @@
     d:DesignWidth="400"
     >
 
-    <StackPanel Orientation="Horizontal" Padding="4,0">
+    <StackPanel Orientation="Horizontal">
+        <ContentControl Width="8"/>
 
         <!--Reset-->
         <TextBlock x:Name="ResetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
@@ -25,5 +26,7 @@
             <FontIcon Glyph="&#xE9A6;" FontSize="22" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
         </Button>
 
+        <ContentControl Width="4"/>
     </StackPanel>
+    
 </Page>

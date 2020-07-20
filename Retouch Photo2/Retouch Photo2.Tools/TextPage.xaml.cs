@@ -1,5 +1,4 @@
-﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
+﻿using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
@@ -10,9 +9,9 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools
 {
     /// <summary>
-    /// <see cref="ITool"/>'s TextTool .
+    /// Page of <see cref="TextTool"/>.
     /// </summary>
-    public sealed partial class TextTool : UserControl
+    internal sealed partial class TextPage : Page
     {
 
         //@ViewModel
@@ -37,9 +36,9 @@ namespace Retouch_Photo2.Tools
 
         //@Construct
         /// <summary>
-        /// Initializes a TextTool. 
+        /// Initializes a TextPage. 
         /// </summary>
-        public TextTool()
+        public TextPage()
         {
             this.InitializeComponent();
             this.ConstructStrings();
@@ -86,11 +85,11 @@ namespace Retouch_Photo2.Tools
     }
 
     /// <summary>
-    /// <see cref="ITool"/>'s TextTool .
+    /// Page of <see cref="TextTool"/>.
     /// </summary>
-    public sealed partial class TextTool : UserControl
+    internal sealed partial class TextPage : Page
     {
-
+        
         private void SetFontText(string fontText)
         {
             //History

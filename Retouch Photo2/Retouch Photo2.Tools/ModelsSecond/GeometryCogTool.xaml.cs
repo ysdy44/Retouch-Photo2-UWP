@@ -4,7 +4,6 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
-using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -29,14 +28,70 @@ namespace Retouch_Photo2.Tools.Models
         Notch
     }
 
+
     /// <summary>
-    /// <see cref="ITool"/>'s GeometryCogTool.
+    /// <see cref="GeometryTool"/>'s GeometryCogTool.
     /// </summary>
-    public sealed partial class GeometryCogTool : Page, ITool
+    public partial class GeometryCogTool : GeometryTool, ITool
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+
+
+        //@Content
+        public ToolType Type => ToolType.GeometryCog;
+        public FrameworkElement Icon { get; } = new GeometryCogIcon();
+        public IToolButton Button { get; } = new ToolSecondButton
+        {
+            CenterContent = new GeometryCogIcon()
+        };
+        public FrameworkElement Page { get; } = new GeometryCogPage();
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a GeometryCogTool. 
+        /// </summary>
+        public GeometryCogTool()
+        {
+            this.ConstructStrings();
+        }
+
+
+        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
+        {
+            return new GeometryCogLayer(customDevice)
+            {
+                Count = this.SelectionViewModel.GeometryCogCount,
+                InnerRadius = this.SelectionViewModel.GeometryCogInnerRadius,
+                Tooth = this.SelectionViewModel.GeometryCogTooth,
+                Notch = this.SelectionViewModel.GeometryCogNotch,
+                Transform = new Transform(transformer),
+                Style = this.SelectionViewModel.StandGeometryStyle
+            };
+        }
+
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Button.Title = resource.GetString("/ToolsSecond/GeometryCog");
+        }
+
+    }
+
+
+    /// <summary>
+    /// Page of <see cref="GeometryCogTool"/>.
+    /// </summary>
+    public partial class GeometryCogPage : Page
+    {
+
+        //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
 
@@ -49,9 +104,9 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Construct
         /// <summary>
-        /// Initializes a GeometryCogTool. 
+        /// Initializes a GeometryCogPage. 
         /// </summary>
-        public GeometryCogTool()
+        public GeometryCogPage()
         {
             this.InitializeComponent();
             this.ConstructStrings();
@@ -69,25 +124,10 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructNotch2();
         }
 
-        public void OnNavigatedTo() { }
-        public void OnNavigatedFrom()
-        {
-            TouchbarButton.Instance = null;
-        }
-
-    }
-
-    /// <summary>
-    /// <see cref="ITool"/>'s GeometryCogTool.
-    /// </summary>
-    public partial class GeometryCogTool : Page, ITool
-    {
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryCog");
 
             this.CountButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_Count");
             this.InnerRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_InnerRadius");
@@ -96,45 +136,12 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
         }
-
-
-        //@Content
-        public ToolType Type => ToolType.GeometryCog;
-        public FrameworkElement Icon { get; } = new GeometryCogIcon();
-        public IToolButton Button { get; } = new ToolSecondButton
-        {
-            CenterContent = new GeometryCogIcon()
-        };
-        public FrameworkElement Page => this;
-
-
-        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryCogLayer(customDevice)
-            {
-                Count = this.SelectionViewModel.GeometryCogCount,
-                InnerRadius = this.SelectionViewModel.GeometryCogInnerRadius,
-                Tooth = this.SelectionViewModel.GeometryCogTooth,
-                Notch = this.SelectionViewModel.GeometryCogNotch,
-                Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandGeometryStyle
-            };
-        }
-
-
-        public void Started(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => ToolBase.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
-
-        public void Draw(CanvasDrawingSession drawingSession) => ToolBase.CreateTool.Draw(drawingSession);
-
     }
 
     /// <summary>
-    /// <see cref="ITool"/>'s GeometryCogTool.
+    /// Page of <see cref="GeometryCogTool"/>.
     /// </summary>
-    public partial class GeometryCogTool : Page, ITool
+    public partial class GeometryCogPage : Page
     {
 
         //Count

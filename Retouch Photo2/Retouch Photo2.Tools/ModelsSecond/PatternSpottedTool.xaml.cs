@@ -14,59 +14,13 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s PatternSpottedTool.
     /// </summary>
-    public sealed partial class PatternSpottedTool : Page, ITool
+    public class PatternSpottedTool : ITool
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-
-
-        //@Converter
-        private int Converter(float value) => (int)value;
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a PatternSpottedTool. 
-        /// </summary>
-        public PatternSpottedTool()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.ConstructRadius1();
-            this.ConstructRadius2();
-
-            this.ConstructStep1();
-            this.ConstructStep2();
-        }
-
-        public void OnNavigatedTo() { }
-        public void OnNavigatedFrom()
-        {
-            TouchbarButton.Instance = null;
-        }
-
-    }
-
-    /// <summary>
-    /// <see cref="ITool"/>'s PatternSpottedTool.
-    /// </summary>
-    public partial class PatternSpottedTool : Page, ITool
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("/ToolsSecond/PatternSpotted");
-
-            this.RadiusButton.CenterContent = resource.GetString("/ToolsSecond/PatternSpotted_Radius");
-            this.StepButton.CenterContent = resource.GetString("/ToolsSecond/PatternSpotted_Step");
-        }
 
 
         //@Content
@@ -76,7 +30,16 @@ namespace Retouch_Photo2.Tools.Models
         {
             CenterContent = new PatternSpottedIcon()
         };
-        public FrameworkElement Page => this;
+        public FrameworkElement Page { get; } = new PatternSpottedPage();
+
+        //@Construct
+        /// <summary>
+        /// Initializes a PatternSpottedTool. 
+        /// </summary>
+        public PatternSpottedTool()
+        {
+            this.ConstructStrings();
+        }
 
 
         private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
@@ -98,12 +61,70 @@ namespace Retouch_Photo2.Tools.Models
 
         public void Draw(CanvasDrawingSession drawingSession) => ToolBase.CreateTool.Draw(drawingSession);
 
+        
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom()
+        {
+            TouchbarButton.Instance = null;
+        }
+
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Button.Title = resource.GetString("/ToolsSecond/PatternSpotted");
+        }
+
     }
 
     /// <summary>
-    /// <see cref="ITool"/>'s PatternSpottedTool.
+    /// Page of <see cref="PatternSpottedTool"/>.
     /// </summary>
-    public partial class PatternSpottedTool : Page, ITool
+    internal sealed partial class PatternSpottedPage : Page
+    {
+
+        //@ViewModel
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Converter
+        private int Converter(float value) => (int)value;
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a PatternSpottedPage. 
+        /// </summary>
+        public PatternSpottedPage()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.ConstructRadius1();
+            this.ConstructRadius2();
+
+            this.ConstructStep1();
+            this.ConstructStep2();
+        }
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.RadiusButton.CenterContent = resource.GetString("/ToolsSecond/PatternSpotted_Radius");
+            this.StepButton.CenterContent = resource.GetString("/ToolsSecond/PatternSpotted_Step");
+        }
+
+    }
+
+    /// <summary>
+    /// Page of <see cref="PatternSpottedTool"/>.
+    /// </summary>
+    internal sealed partial class PatternSpottedPage : Page
     {
 
         //Radius

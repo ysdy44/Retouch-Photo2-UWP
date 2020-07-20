@@ -4,7 +4,6 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
-using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -24,62 +23,14 @@ namespace Retouch_Photo2.Tools.Models
     }
 
     /// <summary>
-    /// <see cref="ITool"/>'s GeometryStarTool.
+    /// <see cref="GeometryTool"/>'s GeometryStarTool.
     /// </summary>
-    public partial class GeometryStarTool : Page, ITool
+    public partial class GeometryStarTool : GeometryTool, ITool
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-
-
-        //@Converter
-        private int InnerRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryStarTool. 
-        /// </summary>
-        public GeometryStarTool()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.ConstructPoints1();
-            this.ConstructPoints2();
-            this.ConstructInnerRadius1();
-            this.ConstructInnerRadius2();
-        }
-
-        public void OnNavigatedTo() { }
-        public void OnNavigatedFrom()
-        {
-            TouchbarButton.Instance = null;
-        }
-
-    }
-
-    /// <summary>
-    /// <see cref="ITool"/>'s GeometryStarTool.
-    /// </summary>
-    public sealed partial class GeometryStarTool : Page, ITool
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryStar");
-
-            this.PointsButton.CenterContent = resource.GetString("/ToolsSecond/GeometryStar_Points");
-            this.InnerRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryStar_InnerRadius");
-
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
-        }
 
 
         //@Content
@@ -89,10 +40,20 @@ namespace Retouch_Photo2.Tools.Models
         {
             CenterContent = new GeometryStarIcon()
         };
-        public FrameworkElement Page => this;
+        public FrameworkElement Page { get; } = new GeometryStarPage();
 
 
-        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
+        //@Construct
+        /// <summary>
+        /// Initializes a GeometryStarTool. 
+        /// </summary>
+        public GeometryStarTool()
+        {
+            this.ConstructStrings();
+        }
+
+
+        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
             return new GeometryStarLayer(customDevice)
             {
@@ -104,19 +65,63 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void Started(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => ToolBase.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-        public void Draw(CanvasDrawingSession drawingSession) => ToolBase.CreateTool.Draw(drawingSession);
+            this.Button.Title = resource.GetString("/ToolsSecond/GeometryStar");
+        }
 
     }
 
+
     /// <summary>
-    /// <see cref="ITool"/>'s GeometryStarTool.
+    /// Page of <see cref="GeometryStarTool"/>.
     /// </summary>
-    public sealed partial class GeometryStarTool : Page, ITool
+    public partial class GeometryStarPage : Page
+    {
+
+        //@ViewModel
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Converter
+        private int InnerRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a GeometryStarPage. 
+        /// </summary>
+        public GeometryStarPage()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.ConstructPoints1();
+            this.ConstructPoints2();
+            this.ConstructInnerRadius1();
+            this.ConstructInnerRadius2();
+        }
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.PointsButton.CenterContent = resource.GetString("/ToolsSecond/GeometryStar_Points");
+            this.InnerRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryStar_InnerRadius");
+
+            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+        }
+    }
+
+    /// <summary>
+    /// Page of <see cref="GeometryStarTool"/>.
+    /// </summary>
+    public partial class GeometryStarPage : Page
     {
 
         //Points
@@ -199,7 +204,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InnerRadiusSlider.Minimum = 0.0d;
             this.InnerRadiusSlider.Maximum = 1.0d;
-            this.InnerRadiusSlider.ValueChangeStarted += (sender, value) =>  this.MethodViewModel.TLayerChangeStarted<GeometryStarLayer>(layerType: LayerType.GeometryStar,cache: (tLayer) => tLayer.CacheInnerRadius());
+            this.InnerRadiusSlider.ValueChangeStarted += (sender, value) => this.MethodViewModel.TLayerChangeStarted<GeometryStarLayer>(layerType: LayerType.GeometryStar, cache: (tLayer) => tLayer.CacheInnerRadius());
             this.InnerRadiusSlider.ValueChangeDelta += (sender, value) =>
             {
                 float innerRadius = (float)value;

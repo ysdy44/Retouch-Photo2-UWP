@@ -88,8 +88,7 @@ namespace Retouch_Photo2.Menus.Models
         public override void Reset() { }
 
     }
-
-
+    
 
     /// <summary>
     /// MainPage of <see cref = "LayerMenu"/>.

@@ -4,10 +4,8 @@ using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
-using System.Collections.Generic;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -16,7 +14,7 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s CropTool.
     /// </summary>
-    public sealed partial class CropTool : Page, ITool
+    public partial class CropTool : ITool
     {
 
         //@ViewModel
@@ -36,115 +34,6 @@ namespace Retouch_Photo2.Tools.Models
         bool IsSnap => this.SettingViewModel.IsSnap;
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a CropTool. 
-        /// </summary>
-        public CropTool()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.ResetButton.Click += (s, e) =>
-            {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set transform crop");
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Transform.IsCrop)
-                    {
-                        //History
-                        var previous = layer.Transform.IsCrop;
-                        history.UndoAction += () =>
-                        {               
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            layer.Transform.IsCrop = previous;
-                        };
-
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        layer.Transform.IsCrop = false;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            this.FitButton.Click += (s, e) =>
-            {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set transform crop");
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Transform.IsCrop)
-                    {
-                        //History
-                        var previous1 = layer.Transform.Transformer;
-                        var previous2 = layer.Transform.IsCrop;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            layer.Transform.Transformer = previous1;
-                            layer.Transform.IsCrop = previous2;
-                        };
-
-                        Transformer cropTransformer = layer.Transform.CropTransformer;
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Transform.Transformer = cropTransformer;
-                        layer.Transform.IsCrop = false;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-
-                this.ViewModel.Invalidate();//Invalidate
-            };
-        }
-
-        public void OnNavigatedTo() { }
-        public void OnNavigatedFrom()
-        {
-            this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
-        }
-    }
-
-    /// <summary>
-    /// <see cref="ITool"/>'s CropTool.
-    /// </summary>
-    public sealed partial class CropTool : Page, ITool
-    {
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("/Tools/Crop");
-
-            this.ResetTextBlock.Text = resource.GetString("/Tools/Crop_Reset");//Reset Crop
-            this.FitTextBlock.Text = resource.GetString("/Tools/Crop_Fit");//Fit Crop
-        }
-
-
         //@Content
         public ToolType Type => ToolType.Crop;
         public FrameworkElement Icon { get; } = new CropIcon();
@@ -152,7 +41,18 @@ namespace Retouch_Photo2.Tools.Models
         {
             CenterContent = new CropIcon()
         };
-        public FrameworkElement Page => this;
+        public FrameworkElement Page => this.CropPage;
+        CropPage CropPage = new CropPage();
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a CropTool. 
+        /// </summary>
+        public CropTool()
+        {
+            this.ConstructStrings();
+        }
 
 
         Layerage Layerage;
@@ -214,7 +114,7 @@ namespace Retouch_Photo2.Tools.Models
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
-       
+
             //Snap
             if (this.IsSnap)
             {
@@ -260,122 +160,146 @@ namespace Retouch_Photo2.Tools.Models
             //Snapping
             if (this.IsSnap) this.Snap.Draw(drawingSession, matrix);
         }
+
+
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom()
+        {
+            TouchbarButton.Instance = null;
+        }
+
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Button.Title = resource.GetString("/Tools/Crop");
+        }
+
     }
 
 
     /// <summary>
-    /// <see cref="ITool"/>'s CropTool.
+    /// Page of <see cref="CropTool"/>.
     /// </summary>
-    public sealed partial class CropTool : Page, ITool
+    internal partial class CropPage : Page
     {
 
-        private Layerage GetTransformerLayer(Vector2 startingPoint, Matrix3x2 matrix)
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a CropPage. 
+        /// </summary>
+        public CropPage()
         {
-            switch (this.SelectionMode)
+            this.InitializeComponent();
+            this.ConstructStrings();
+        }
+
+    }
+
+    /// <summary>
+    /// Page of <see cref="CropTool"/>.
+    /// </summary>
+    internal partial class CropPage : Page
+    {
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.ResetTextBlock.Text = resource.GetString("/Tools/Crop_Reset");//Reset Crop
+            this.FitTextBlock.Text = resource.GetString("/Tools/Crop_Fit");//Fit Crop
+        }
+
+        private void ConstructReset()
+        {
+            this.ResetButton.Click += (s, e) =>
             {
-                case ListViewSelectionMode.None: return null;
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set transform crop");
 
-                case ListViewSelectionMode.Single:
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Transform.IsCrop)
                     {
-                        Layerage layerage = this.SelectionViewModel.SelectionLayerage;
-                        if (layerage == null) return null;
-
-                        //Transformer
-                        Transformer transformer = layerage.GetActualTransformer();
-                        this.TransformerMode = Transformer.ContainsNodeMode(startingPoint, transformer, matrix, false);
-
-                        return layerage;
-                    }
-
-                case ListViewSelectionMode.Multiple:
-                    foreach (Layerage layerage in this.SelectionViewModel.SelectionLayerages)
-                    {
-                        //Transformer
-                        Transformer transformer = layerage.GetActualTransformer();
-                        TransformerMode mode = Transformer.ContainsNodeMode(startingPoint, transformer, matrix, false);
-                        if (mode != TransformerMode.None)
+                        //History
+                        var previous = layer.Transform.IsCrop;
+                        history.UndoAction += () =>
                         {
-                            this.TransformerMode = mode;
-                            return layerage;
-                        }
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            layer.Transform.IsCrop = previous;
+                        };
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layerage.RefactoringParentsRender();
+                        layerage.RefactoringParentsIconRender();
+                        layer.Transform.IsCrop = false;
                     }
-                    break;
-            }
-            return null;
-        }
+                });
 
-        private void CropStarted(ILayer firstLayer)
-        {
-            firstLayer.Transform.CropTransformer = firstLayer.Transform.Transformer;
+                //History
+                this.ViewModel.HistoryPush(history);
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set transform is crop");
-
-            //History
-            var previous = firstLayer.Transform.IsCrop;
-            history.UndoAction += () =>
-            {
-                ILayer firstLayer2 = firstLayer;
-
-                firstLayer2.Transform.IsCrop = previous;
+                this.ViewModel.Invalidate();//Invalidate
             };
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            firstLayer.Transform.IsCrop = true;
         }
 
-        private void CropDelta(Vector2 canvasStartingPoint, Vector2 canvasPoint)
+        private void ConstructFit()
         {
-            ILayer layer = this.Layerage.Self;
-            if (this.IsMove == false)//Transformer
+            this.FitButton.Click += (s, e) =>
             {
-                //Transformer
-                Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, layer.Transform.StartingCropTransformer, this.IsRatio, this.IsCenter, this.IsStepFrequency);
-          
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                this.Layerage.RefactoringParentsRender();
-                layer.Transform.CropTransformer = transformer;
-            }
-            else//Move
-            {
-                Vector2 canvasMove = canvasPoint - canvasStartingPoint;
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory("Set transform crop");
 
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                this.Layerage.RefactoringParentsRender();
-                layer.Transform.CropTransformAdd(canvasMove);
-            }
-        }
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
 
-        private void CropComplete()
-        {
-            ILayer layer = this.Layerage.Self;
+                    if (layer.Transform.IsCrop)
+                    {
+                        //History
+                        var previous1 = layer.Transform.Transformer;
+                        var previous2 = layer.Transform.IsCrop;
+                        history.UndoAction += () =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            layer.Transform.Transformer = previous1;
+                            layer.Transform.IsCrop = previous2;
+                        };
 
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set transform crop");
+                        Transformer cropTransformer = layer.Transform.CropTransformer;
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
+                        layer.Transform.Transformer = cropTransformer;
+                        layer.Transform.IsCrop = false;
+                    }
+                });
 
-            //History
-            var previous = layer.Transform.StartingCropTransformer;
-            history.UndoAction += () =>
-            {                
-                //Refactoring
-                layer.IsRefactoringRender = true;
-                layer.IsRefactoringIconRender = true;
-                layer.Transform.CropTransformer = previous;
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
             };
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            //Refactoring
-            layer.IsRefactoringRender = true;
-            layer.IsRefactoringIconRender = true;
-            this.Layerage.RefactoringParentsRender();
-            this.Layerage.RefactoringParentsIconRender();
         }
-        
+
     }
 }

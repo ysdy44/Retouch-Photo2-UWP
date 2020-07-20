@@ -4,7 +4,6 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
-using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,59 +11,14 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools.Models
 {
     /// <summary>
-    /// <see cref="ITool"/>'s GeometryPieTool.
+    /// <see cref="GeometryTool"/>'s GeometryPieTool.
     /// </summary>
-    public partial class GeometryPieTool : Page, ITool
+    public partial class GeometryPieTool : GeometryTool, ITool
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-
-
-        //@Converter
-        private int SweepAngleToNumberConverter(float sweepAngle) => (int)(sweepAngle / FanKit.Math.Pi * 180f);
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryPieTool. 
-        /// </summary>
-        public GeometryPieTool()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.ConstructSweepAngle1();
-            this.ConstructSweepAngle2();
-        }
-        
-        public void OnNavigatedTo() { }
-        public void OnNavigatedFrom()
-        {
-            TouchbarButton.Instance = null;
-        }
-
-    }
-    
-    /// <summary>
-    /// <see cref="ITool"/>'s GeometryPieTool.
-    /// </summary>
-    public sealed partial class GeometryPieTool : Page, ITool
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryPie");
-
-            this.SweepAngleButton.CenterContent = resource.GetString("/ToolsSecond/GeometryPie_SweepAngle");
-
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
-        }
 
 
         //@Content
@@ -74,10 +28,20 @@ namespace Retouch_Photo2.Tools.Models
         {
             CenterContent = new GeometryPieIcon()
         };
-        public FrameworkElement Page => this;
+        public FrameworkElement Page { get; } = new GeometryPiePage();
 
 
-        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
+        //@Construct
+        /// <summary>
+        /// Initializes a GeometryPieTool. 
+        /// </summary>
+        public GeometryPieTool()
+        {
+            this.ConstructStrings();
+        }
+
+
+        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
             return new GeometryPieLayer(customDevice)
             {
@@ -88,19 +52,60 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void Started(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => ToolBase.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-        public void Draw(CanvasDrawingSession drawingSession) => ToolBase.CreateTool.Draw(drawingSession);
+            this.Button.Title = resource.GetString("/ToolsSecond/GeometryPie");
+        }
 
     }
 
+
     /// <summary>
-    /// <see cref="ITool"/>'s GeometryPieTool.
+    /// Page of <see cref="GeometryPieTool"/>.
     /// </summary>
-    public partial class GeometryPieTool : Page, ITool
+    internal partial class GeometryPiePage : Page
+    {
+
+        //@ViewModel
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Converter
+        private int SweepAngleToNumberConverter(float sweepAngle) => (int)(sweepAngle / FanKit.Math.Pi * 180f);
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a GeometryPiePage. 
+        /// </summary>
+        public GeometryPiePage()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.ConstructSweepAngle1();
+            this.ConstructSweepAngle2();
+        }
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.SweepAngleButton.CenterContent = resource.GetString("/ToolsSecond/GeometryPie_SweepAngle");
+
+            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+        }
+    }
+
+    /// <summary>
+    /// Page of <see cref="GeometryPieTool"/>.
+    /// </summary>
+    internal partial class GeometryPiePage : Page
     {
         //SweepAngle
         private void ConstructSweepAngle1()
@@ -112,7 +117,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 float sweepAngle = (float)value / 180f * FanKit.Math.Pi;
                 this.SelectionViewModel.GeometryPieSweepAngle = sweepAngle;
-                
+
                 this.MethodViewModel.TLayerChanged<float, GeometryPieLayer>
                 (
                     layerType: LayerType.GeometryPie,

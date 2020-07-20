@@ -11,8 +11,8 @@ namespace Retouch_Photo2.Menus.Models
     {  
 
         //@Content     
-        public override UIElement MainPage => this.TextMainPage;
-        TextMainPage TextMainPage = new TextMainPage();
+        public override UIElement MainPage => this.KeyboardMainPage;
+        KeyboardMainPage KeyboardMainPage = new KeyboardMainPage();
 
 
         //@Construct
@@ -54,8 +54,7 @@ namespace Retouch_Photo2.Menus.Models
 
     }
 
-
-
+    
     /// <summary>
     /// MainPage of <see cref="KeyboardMenu"/>.
     /// </summary>

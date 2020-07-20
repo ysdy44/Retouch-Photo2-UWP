@@ -1,5 +1,4 @@
-﻿using FanKit.Transformers;
-using HSVColorPickers;
+﻿using HSVColorPickers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
@@ -12,36 +11,10 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s BrushTool.
     /// </summary>
-    public sealed partial class BrushTool : Page, ITool
+    public partial class BrushTool : ITool
     {
-
         //@ViewModel
         IBrush Stroke { get => this.SelectionViewModel.Stroke; set => this.SelectionViewModel.Stroke = value; }
-
-
-        private void ConstructStrokeImage()
-        {
-            Retouch_Photo2.PhotosPage.StrokeImageCallBack += (photo) =>
-            {
-                this.StrokeTypeChanged(BrushType.Image, photo);
-                this.ShowControl.Invalidate();
-            };
-            this.BrushTypeComboBox.StrokeTypeChanged += (s, brushType) =>
-            {
-                if (brushType == BrushType.Image)
-                {
-                    Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.StrokeImage);//Delegate
-                }
-                else
-                {
-                    this.StrokeTypeChanged(brushType);
-                    this.ShowControl.Invalidate();
-                }
-            };
-        }
-
-
-        //////////////////////////
 
 
         private void StrokeStarted(Vector2 startingPoint, Vector2 point)
@@ -116,6 +89,40 @@ namespace Retouch_Photo2.Tools.Models
                 getHistory: (style) => style.StartingStroke,
                 setHistory: (style, previous) => style.Stroke = previous.Clone()
             );
+        }
+
+    }
+
+
+    /// <summary>
+    /// Page of <see cref="BrushTool"/>.
+    /// </summary>
+    internal partial class BrushPage : Page
+    {
+
+        //@ViewModel
+        IBrush Stroke { get => this.SelectionViewModel.Stroke; set => this.SelectionViewModel.Stroke = value; }
+
+
+        private void ConstructStrokeImage()
+        {
+            Retouch_Photo2.PhotosPage.StrokeImageCallBack += (photo) =>
+            {
+                this.StrokeTypeChanged(BrushType.Image, photo);
+                this.ShowControl.Invalidate();
+            };
+            this.BrushTypeComboBox.StrokeTypeChanged += (s, brushType) =>
+            {
+                if (brushType == BrushType.Image)
+                {
+                    Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.StrokeImage);//Delegate
+                }
+                else
+                {
+                    this.StrokeTypeChanged(brushType);
+                    this.ShowControl.Invalidate();
+                }
+            };
         }
 
 

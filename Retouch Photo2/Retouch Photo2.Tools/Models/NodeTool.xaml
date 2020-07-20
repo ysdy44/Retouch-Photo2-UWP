@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Retouch_Photo2.Tools.Models.NodeTool"
+    x:Class="Retouch_Photo2.Tools.Models.NodePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -17,8 +17,10 @@
 
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal" Padding="4,0">
+        <StackPanel Orientation="Horizontal">
+            <ContentControl Width="8"/>
 
+            <!--Remove-->
             <TextBlock x:Name="RemoveTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <Button x:Name="RemoveButton" Style="{StaticResource AppCircleButtonStyle}">
                 <PathIcon>
@@ -30,6 +32,7 @@
 
             <ContentControl Width="4"/>
 
+            <!--Insert-->
             <TextBlock x:Name="InsertTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <Button x:Name="InsertButton" Style="{StaticResource AppCircleButtonStyle}">
                 <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
@@ -37,6 +40,7 @@
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
+            <!--Sharp-->
             <TextBlock x:Name="SharpTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <Button x:Name="SharpButton" Style="{StaticResource AppCircleButtonStyle}">
                 <PathIcon>
@@ -48,6 +52,7 @@
 
             <ContentControl Width="4"/>
 
+            <!--Smooth-->
             <TextBlock x:Name="SmoothTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <Button x:Name="SmoothButton" Style="{StaticResource AppCircleButtonStyle}">
                 <PathIcon>
@@ -63,6 +68,7 @@
                 <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
             </Button>
 
+            <ContentControl Width="4"/>
         </StackPanel>
     </ScrollViewer>
 

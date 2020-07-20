@@ -229,6 +229,8 @@
     <Compile Include="ITool.cs" />
     <Compile Include="Models\MoreTool.cs" />
     <Compile Include="Models\NoneTool.cs" />
+    <Compile Include="Models\ViewRadianConverter.cs" />
+    <Compile Include="Models\ViewScaleConverter.cs" />
     <Compile Include="ToolButtons\IToolButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITransformerTool.cs" />

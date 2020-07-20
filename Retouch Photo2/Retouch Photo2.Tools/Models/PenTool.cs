@@ -11,7 +11,7 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s PenTool.
     /// </summary>
-    public partial class PenTool : Page, ITool
+    public partial class PenTool : ITool
     {
 
         //@ViewModel
@@ -22,7 +22,6 @@ namespace Retouch_Photo2.Tools.Models
         Layerage CurveLayerage => this.SelectionViewModel.CurveLayerage;
         CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
 
-        GeometryTool GeometryTool = new GeometryTool();
         VectorVectorSnap Snap => this.ViewModel.VectorVectorSnap;
         bool IsSnap => this.SettingViewModel.IsSnap;
 
@@ -33,15 +32,12 @@ namespace Retouch_Photo2.Tools.Models
         /// </summary>
         public PenTool()
         {
-            this.Content = this.GeometryTool;
             this.ConstructStrings();
         }
 
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
-            this.GeometryTool.OnNavigatedFrom();
-
             //Refactoring
             this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
         }

@@ -79,8 +79,7 @@ namespace Retouch_Photo2.Menus.Models
         }
 
     }
-
-
+    
 
     /// <summary>
     /// MainPage of <see cref = "EffectMenu"/>.

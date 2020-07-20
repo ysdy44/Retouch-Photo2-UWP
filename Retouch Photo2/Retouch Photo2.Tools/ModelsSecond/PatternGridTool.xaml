@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Retouch_Photo2.Tools.Models.PatternGridTool"
+    x:Class="Retouch_Photo2.Tools.Models.PatternGridPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,9 +12,9 @@
     d:DesignWidth="400"
     >
 
-
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal" Padding="4,0">
+        <StackPanel Orientation="Horizontal">
+            <ContentControl Width="8"/>
 
             <!--Type-->
             <TextBlock x:Name="TypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
@@ -25,12 +25,12 @@
             <ContentControl Width="4"
                             Visibility="{x:Bind HorizontalStepVisibilityConverter(SelectionViewModel.PatternGridType), Mode=OneWay}"/>
 
-            <!--Horizontal-->
+            <!--Step-->
             <tools:TouchbarButton x:Name="HorizontalStepButton"
                             Visibility="{x:Bind HorizontalStepVisibilityConverter(SelectionViewModel.PatternGridType), Mode=OneWay}">
                 <tools:TouchbarButton.Picker>
                     <hSVColorPickers:NumberPicker x:Name="HorizontalStepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                             Value="{x:Bind Converter(SelectionViewModel.PatternGridHorizontalStep), Mode=OneWay}"/>
+                             Value="{x:Bind StepToNumberConverter(SelectionViewModel.PatternGridHorizontalStep), Mode=OneWay}"/>
                 </tools:TouchbarButton.Picker>
                 <tools:TouchbarButton.Slider>
                     <tools:TouchbarSlider x:Name="HorizontalStepSlider" 
@@ -41,12 +41,12 @@
             <ContentControl Width="4"
                             Visibility="{x:Bind VerticalStepVisibilityConverter(SelectionViewModel.PatternGridType), Mode=OneWay}"/>
 
-            <!--Vertical-->
+            <!--Step-->
             <tools:TouchbarButton x:Name="VerticalStepButton"
                             Visibility="{x:Bind VerticalStepVisibilityConverter(SelectionViewModel.PatternGridType), Mode=OneWay}">
                 <tools:TouchbarButton.Picker>
                     <hSVColorPickers:NumberPicker x:Name="VerticalStepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                             Value="{x:Bind Converter(SelectionViewModel.PatternGridVerticalStep), Mode=OneWay}"/>
+                             Value="{x:Bind StepToNumberConverter(SelectionViewModel.PatternGridVerticalStep), Mode=OneWay}"/>
                 </tools:TouchbarButton.Picker>
                 <tools:TouchbarButton.Slider>
                     <tools:TouchbarSlider x:Name="VerticalStepSlider" 
@@ -54,6 +54,7 @@
                 </tools:TouchbarButton.Slider>
             </tools:TouchbarButton>
 
+            <ContentControl Width="4"/>
         </StackPanel>
     </ScrollViewer>
 

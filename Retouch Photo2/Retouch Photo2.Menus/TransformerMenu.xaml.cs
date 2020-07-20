@@ -99,8 +99,7 @@ namespace Retouch_Photo2.Menus.Models
         public override void Reset() { }
 
     }
-
-
+    
 
     /// <summary> 
     /// State of <see cref="TransformerMainPage"/>. 
@@ -289,7 +288,7 @@ namespace Retouch_Photo2.Menus.Models
             set { SetValue(IsOpenProperty, value); }
         }
         /// <summary> Identifies the <see cref = "TransformerMainPage.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(TextMainPage), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(TransformerMainPage), new PropertyMetadata(false));
 
 
         #endregion

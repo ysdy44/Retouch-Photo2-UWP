@@ -4,7 +4,6 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
-using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -22,21 +21,27 @@ namespace Retouch_Photo2.Tools.Models
         /// <summary> Value (IsAbsolute = false). </summary>
         Value
     }
+       
 
     /// <summary>
-    /// <see cref="ITool"/>'s GeometryArrowTool.
+    /// <see cref="GeometryTool"/>'s GeometryArrowTool.
     /// </summary>
-    public sealed partial class GeometryArrowTool : Page, ITool
+    public partial class GeometryArrowTool : GeometryTool, ITool
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
 
 
-        //@Converter
-        private int ValueToNumberConverter(float value) => (int)(value * 100.0f);
+        //@Content
+        public ToolType Type => ToolType.GeometryArrow;
+        public FrameworkElement Icon { get; } = new GeometryArrowIcon();
+        public IToolButton Button { get; } = new ToolSecondButton
+        {
+            CenterContent = new GeometryArrowIcon()
+        };
+        public FrameworkElement Page { get; } = new GeometryArrowPage();
 
 
         //@Construct
@@ -45,58 +50,11 @@ namespace Retouch_Photo2.Tools.Models
         /// </summary>
         public GeometryArrowTool()
         {
-            this.InitializeComponent();
             this.ConstructStrings();
-
-            this.ConstructValue1();
-            this.ConstructValue2();
-
-            this.ConstructLeftTail();
-            this.ConstructRightTail();
-        }
-
-        public void OnNavigatedTo() { }
-        public void OnNavigatedFrom()
-        {
-            TouchbarButton.Instance = null;
-        }
-
-    }
-    
-    /// <summary>
-    /// <see cref="ITool"/>'s GeometryArrowTool.
-    /// </summary>
-    public partial class GeometryArrowTool : Page, ITool
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryArrow");
-
-            this.ValueButton.CenterContent = resource.GetString("/ToolsSecond/GeometryArrow_Value");
-
-            this.LeftTailTextBlock.Text = resource.GetString("/ToolsSecond/GeometryArrow_LeftTail");
-
-            this.RightTailTextBlock.Text = resource.GetString("/ToolsSecond/GeometryArrow_RightTail");
-
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
         }
 
 
-        //@Content
-        public ToolType Type => ToolType.GeometryArrow; 
-        public FrameworkElement Icon { get; } = new GeometryArrowIcon();
-        public IToolButton Button { get; } = new ToolSecondButton
-        {
-            CenterContent = new GeometryArrowIcon()
-        };
-        public FrameworkElement Page => this;
-
-
-        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
+        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
             return new GeometryArrowLayer(customDevice)
             {
@@ -108,19 +66,67 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void Started(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => ToolBase.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-        public void Draw(CanvasDrawingSession drawingSession) => ToolBase.CreateTool.Draw(drawingSession);
+            this.Button.Title = resource.GetString("/ToolsSecond/GeometryArrow");
+        }
+            
+    }
 
+
+    /// <summary>
+    /// Page of <see cref="GeometryArrowTool"/>.
+    /// </summary>
+    internal partial class GeometryArrowPage : Page
+    {
+
+        //@ViewModel
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Converter
+        private int ValueToNumberConverter(float value) => (int)(value * 100.0f);
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a GeometryArrowPage. 
+        /// </summary>
+        public GeometryArrowPage()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.ConstructValue1();
+            this.ConstructValue2();
+
+            this.ConstructLeftTail();
+            this.ConstructRightTail();
+        }
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.ValueButton.CenterContent = resource.GetString("/ToolsSecond/GeometryArrow_Value");
+
+            this.LeftTailTextBlock.Text = resource.GetString("/ToolsSecond/GeometryArrow_LeftTail");
+
+            this.RightTailTextBlock.Text = resource.GetString("/ToolsSecond/GeometryArrow_RightTail");
+
+            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+        }
     }
 
     /// <summary>
-    /// <see cref="ITool"/>'s GeometryArrowTool.
+    /// Page of <see cref="GeometryArrowTool"/>.
     /// </summary>
-    public partial class GeometryArrowTool : Page, ITool
+    internal partial class GeometryArrowPage : Page
     {
 
         //Value
@@ -175,7 +181,7 @@ namespace Retouch_Photo2.Tools.Models
             };
         }
 
-               
+
         //LeftTail
         private void ConstructLeftTail()
         {

@@ -83,8 +83,7 @@ namespace Retouch_Photo2.Menus.Models
         public override void Reset() { }
 
     }
-
-
+    
 
     /// <summary>
     /// MainPag of <see cref = "OperateMenu"/>.

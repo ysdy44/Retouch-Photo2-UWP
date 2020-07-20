@@ -211,12 +211,10 @@
     <Compile Include="Retouch Photo2.Tools\ModelsSecond\PatternSpottedTool.xaml.cs">
       <DependentUpon>PatternSpottedTool.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\ModelsSecond\PatternGridTool.Horizontal.cs" />
-    <Compile Include="Retouch Photo2.Tools\ModelsSecond\PatternGridTool.Vertical.cs" />
     <Compile Include="Retouch Photo2.Tools\ModelsSecond\PatternGridTool.xaml.cs">
       <DependentUpon>PatternGridTool.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Models\NodeTool.Construct.cs" />
+    <Compile Include="Retouch Photo2.Tools\Models\CropTool.Method.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.Construct.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.Method.cs" />
     <Compile Include="Retouch Photo2.Tools\MoveTool.cs" />
@@ -268,11 +266,9 @@
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\TextFrameTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\TextArtisticTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\TextTool.xaml.cs">
-      <DependentUpon>TextTool.xaml</DependentUpon>
+    <Compile Include="Retouch Photo2.Tools\TextPage.xaml.cs">
+      <DependentUpon>TextPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Tools\Models\ViewRadianConverter.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\ViewScaleConverter.cs" />
     <Compile Include="SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
@@ -656,7 +652,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Retouch Photo2.Tools\TextTool.xaml">
+    <Page Include="Retouch Photo2.Tools\TextPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

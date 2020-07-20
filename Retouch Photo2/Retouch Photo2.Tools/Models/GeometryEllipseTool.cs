@@ -4,15 +4,13 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
-using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
     /// <summary>
-    /// <see cref="ITool"/>'s GeometryEllipseTool.
+    /// <see cref="GeometryTool"/>'s GeometryEllipseTool.
     /// </summary>
     public partial class GeometryEllipseTool : GeometryTool, ITool
     {
@@ -21,6 +19,16 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Content
+        public ToolType Type => ToolType.GeometryEllipse;
+        public FrameworkElement Icon { get; } = new GeometryEllipseIcon();
+        public IToolButton Button { get; } = new ToolButton
+        {
+            CenterContent = new GeometryEllipseIcon()
+        };
+        public FrameworkElement Page { get; } = new GeometryPage();
 
 
         //@Construct
@@ -32,38 +40,8 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructStrings();
         }
 
-        public void OnNavigatedTo() { }
-        public void OnNavigatedFrom()
-        {
-            base.OnNavigatedFrom();
-        }
-    }
 
-    /// <summary>
-    /// <see cref="ITool"/>'s GeometryEllipseTool.
-    /// </summary>
-    public partial class GeometryEllipseTool : GeometryTool, ITool
-    {
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("/Tools/Ellipse");
-        }
-
-
-        //@Content
-        public ToolType Type => ToolType.GeometryEllipse;
-        public FrameworkElement Icon { get; } = new GeometryEllipseIcon();
-        public IToolButton Button { get; } = new ToolButton
-        {
-            CenterContent = new GeometryEllipseIcon()
-        };
-        public FrameworkElement Page => this;
-
-
-        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
+        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
         {
             return new GeometryEllipseLayer(customDevice)
             {
@@ -74,12 +52,13 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void Started(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => ToolBase.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => ToolBase.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-        public void Draw(CanvasDrawingSession drawingSession) => ToolBase.CreateTool.Draw(drawingSession);
+            this.Button.Title = resource.GetString("/Tools/Ellipse");
+        }
 
     }
 }

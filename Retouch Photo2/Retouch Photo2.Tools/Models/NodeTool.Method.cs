@@ -10,8 +10,51 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s NodeTool.
     /// </summary>
-    public partial class NodeTool : Page, ITool
+    public partial class NodeTool : ITool
     {
+
+        private Layerage GetNodeCollectionLayer(Vector2 startingPoint, Matrix3x2 matrix)
+        {
+            switch (this.SelectionMode)
+            {
+                case ListViewSelectionMode.None: return null;
+
+                case ListViewSelectionMode.Single:
+                    {
+                        Layerage layerage = this.SelectionViewModel.SelectionLayerage;
+                        if (layerage == null) return null;
+                        ILayer layer = layerage.Self;
+
+                        if (layer.Type == LayerType.Curve)
+                        {
+                            layer.Nodes.CacheTransform();
+                            this.NodeCollectionMode = NodeCollection.ContainsNodeCollectionMode(startingPoint, layer.Nodes, matrix);
+                            return layerage;
+                        }
+                    }
+                    break;
+
+                case ListViewSelectionMode.Multiple:
+                    foreach (Layerage layerage in this.SelectionViewModel.SelectionLayerages)
+                    {
+                        ILayer layer = layerage.Self;
+
+                        if (layer.Type == LayerType.Curve)
+                        {
+                            layer.Nodes.CacheTransform();
+                            NodeCollectionMode mode = NodeCollection.ContainsNodeCollectionMode(startingPoint, layer.Nodes, matrix);
+                            if (mode != NodeCollectionMode.None)
+                            {
+                                this.NodeCollectionMode = mode;
+                                return layerage;
+                            }
+                        }
+                    }
+                    break;
+            }
+            return null;
+        }
+
 
         private void MoveStarted()
         {
@@ -199,7 +242,7 @@ namespace Retouch_Photo2.Tools.Models
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 this.Layerage.RefactoringParentsRender();
-                Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint);
+                Node.Controller(this.NodePage.PenFlyout.SelfMode, this.NodePage.PenFlyout.EachLengthMode, this.NodePage.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint);
             }
         }
         private void MoveSingleNodeControlPointComplete(Vector2 canvasPoint, bool isLeftControlPoint)
@@ -235,7 +278,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.Layerage.RefactoringParentsTransformer();
                 this.Layerage.RefactoringParentsRender();
                 this.Layerage.RefactoringParentsIconRender();
-                Node.Controller(this.PenFlyout.SelfMode, this.PenFlyout.EachLengthMode, this.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint);
+                Node.Controller(this.NodePage.PenFlyout.SelfMode, this.NodePage.PenFlyout.EachLengthMode, this.NodePage.PenFlyout.EachAngleMode, canvasPoint, node, isLeftControlPoint);
 
                 //History
                 this.ViewModel.HistoryPush(history);
