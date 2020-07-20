@@ -233,9 +233,9 @@ namespace Retouch_Photo2.Tools.Models
                 this.ViewModel.Invalidate(); //Invalidate
             };
 
-            //BrushType
-            this.ConstructFillImage();
-            this.ConstructStrokeImage();
+            //Type
+            this.ConstructFillType();
+            this.ConstructStrokeType();
         }
 
     }
@@ -252,8 +252,8 @@ namespace Retouch_Photo2.Tools.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.FillOrStrokeTextBlock.Text = resource.GetString("/Tools/Brush_FillOrStroke");
-            this.BrushTypeTextBlock.Text = resource.GetString("/Tools/Brush_Type");
-            this.BrushTextBlock.Text = resource.GetString("/Tools/Brush_Brush");
+            this.TypeTextBlock.Text = resource.GetString("/Tools/Brush_Type");
+            this.ShowTextBlock.Text = resource.GetString("/Tools/Brush_Brush");
 
             this.ExtendTextBlock.Text = resource.GetString("/Tools/Brush_Extend");
         }

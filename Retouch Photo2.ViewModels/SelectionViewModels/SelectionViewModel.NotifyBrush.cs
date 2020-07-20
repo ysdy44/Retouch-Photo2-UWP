@@ -155,7 +155,23 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float strokeStyleOffset = 0.0f;
-      
+
+
+        //////////////////////////
+
+
+        /// <summary> Gets or sets the current transparency. </summary>
+        public IBrush Transparency
+        {
+            get => this.transparency;
+            set
+            {
+                this.transparency = value;
+                this.OnPropertyChanged(nameof(this.Transparency));//Notify 
+            }
+        }
+        private IBrush transparency = new BrushBase();
+
 
         //////////////////////////
 
@@ -176,6 +192,8 @@ namespace Retouch_Photo2.ViewModels
             this.StrokeStyleCap = style.StrokeStyle.DashCap;
             this.strokeStyleJoin = style.StrokeStyle.LineJoin;
             this.StrokeStyleOffset = style.StrokeStyle.DashOffset;
+
+            this.Transparency = style.Transparency;
 
             switch (this.FillOrStroke)
             {

@@ -23,10 +23,12 @@ namespace Retouch_Photo2.Styles
             if (style.Name != string.Empty) element.Add(new XAttribute("Name", style.Name));
 
             element.Add(new XElement("IsFollowTransform", style.IsFollowTransform));
+
             if (style.Fill != null) element.Add(Retouch_Photo2.Brushs.XML.SaveBrush("Fill", style.Fill));
             if (style.Stroke != null) element.Add(Retouch_Photo2.Brushs.XML.SaveBrush("Stroke", style.Stroke));
             element.Add(new XElement("StrokeWidth", style.StrokeWidth));
             if (style.StrokeStyle != null) element.Add(Retouch_Photo2.Strokes.XML.SaveStrokeStyle("StrokeStyle", style.StrokeStyle));
+            if (style.Transparency != null) element.Add(Retouch_Photo2.Brushs.XML.SaveBrush("Transparency", style.Transparency));
 
             return element;
         }
@@ -43,10 +45,12 @@ namespace Retouch_Photo2.Styles
             if (element.Attribute("Name") is XAttribute name) style.Name = name.Value;
 
             if (element.Element("IsFollowTransform") is XElement isFollowTransform) style.IsFollowTransform = (bool)isFollowTransform;
+
             if (element.Element("Fill") is XElement fill) style.Fill = Retouch_Photo2.Brushs.XML.LoadBrush(fill);
             if (element.Element("Stroke") is XElement stroke) style.Stroke = Retouch_Photo2.Brushs.XML.LoadBrush(stroke);
             if (element.Element("StrokeWidth") is XElement strokeWidth) style.StrokeWidth = (float)strokeWidth;
             if (element.Element("StrokeStyle") is XElement strokeStyle) style.StrokeStyle = Retouch_Photo2.Strokes.XML.LoadStrokeStyle(strokeStyle);
+            if (element.Element("Transparency") is XElement transparency) style.Transparency = Retouch_Photo2.Brushs.XML.LoadBrush(transparency);
 
             return style;
         }

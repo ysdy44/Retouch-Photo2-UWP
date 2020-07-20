@@ -31,9 +31,9 @@
            
             <ContentControl Width="4"/>
 
-            <!--BrushType-->
-            <TextBlock x:Name="BrushTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <brushs:BrushTypeComboBox x:Name="BrushTypeComboBox" 
+            <!--Type-->
+            <TextBlock x:Name="TypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <brushs:BrushTypeComboBox x:Name="TypeComboBox" 
                  FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
                  Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
                  Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
@@ -41,8 +41,8 @@
             <ContentControl Width="4"/>
 
             <!--ShowControl-->
-            <TextBlock x:Name="BrushTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <brushs:ShowControl x:Name="ShowControl" 
+            <TextBlock x:Name="ShowTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <brushs:BrushShowControl x:Name="ShowControl" 
                      FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
                      Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
                      Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />

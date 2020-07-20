@@ -46,12 +46,12 @@ namespace Retouch_Photo2.Styles
         /// <summary> Cache the <see cref="Style.StrokeStyle"/>. </summary>
         public void CacheStrokeStyle() => this.StartingStrokeStyle = this.StrokeStyle.Clone();
                
-        // <summary> Gets or sets Style's transparency. </summary>
-        //public IBrush Transparency = new BrushBase();
-        // <summary> The cache of <see cref="Style.Transparency"/>. </summary>
-        //public IBrush StartingTransparency { get; private set; }
-        // <summary> Cache the <see cref="Style.Transparency"/>. </summary>
-        //public void CacheTransparency() => this.StartingTransparency = this.Transparency.Clone();
+        /// <summary> Gets or sets Style's transparency. </summary>
+        public IBrush Transparency = new BrushBase();
+        /// <summary> The cache of <see cref="Style.Transparency"/>. </summary>
+        public IBrush StartingTransparency { get; private set; }
+        /// <summary> Cache the <see cref="Style.Transparency"/>. </summary>
+        public void CacheTransparency() => this.StartingTransparency = this.Transparency.Clone();
         
         //@Interface
         /// <summary>
@@ -63,6 +63,7 @@ namespace Retouch_Photo2.Styles
             {
                 this.Fill.CacheTransform();
                 this.Stroke.CacheTransform();
+                this.Transparency.CacheTransform();
             }
         }
         /// <summary>
@@ -75,6 +76,7 @@ namespace Retouch_Photo2.Styles
             {
                 this.Fill.TransformMultiplies(matrix);
                 this.Stroke.TransformMultiplies(matrix);
+                this.Transparency.TransformMultiplies(matrix);
             }
         }
         /// <summary>
@@ -87,6 +89,7 @@ namespace Retouch_Photo2.Styles
             {
                 this.Fill.TransformAdd(vector);
                 this.Stroke.TransformAdd(vector);
+                this.Transparency.TransformAdd(vector);
             }
         }
 
@@ -102,7 +105,8 @@ namespace Retouch_Photo2.Styles
                 Fill = this.Fill.Clone(),
                 Stroke = this.Stroke.Clone(),
                 StrokeWidth = this.StrokeWidth,
-                StrokeStyle = this.StrokeStyle.Clone()
+                StrokeStyle = this.StrokeStyle.Clone(),
+                Transparency = this.Transparency.Clone(),
             };
         }
 
@@ -117,13 +121,16 @@ namespace Retouch_Photo2.Styles
         {
             this.Fill.CacheTransform();
             this.Stroke.CacheTransform();
+            this.Transparency.CacheTransform();
 
             Matrix3x2 oneMatrix = Transformer.FindHomography(startingTransformer, Transformer.One);
             this.Fill.TransformMultiplies(oneMatrix);
             this.Stroke.TransformMultiplies(oneMatrix);
+            this.Transparency.TransformMultiplies(oneMatrix);
 
             this.Stroke.CacheTransform();
             this.Fill.CacheTransform();
+            this.Transparency.CacheTransform();
         }
         /// <summary>
         /// Convert all brush points
@@ -137,6 +144,7 @@ namespace Retouch_Photo2.Styles
 
             this.Fill.TransformMultiplies(matrix);
             this.Stroke.TransformMultiplies(matrix);
+            this.Transparency.TransformMultiplies(matrix);
         }
 
     }

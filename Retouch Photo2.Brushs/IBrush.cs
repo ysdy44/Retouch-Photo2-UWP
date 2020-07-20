@@ -105,7 +105,15 @@ namespace Retouch_Photo2.Brushs
         /// <param name="transformer"> The transformer. </param>
         /// <param name="photo"> The photo. </param>
         void TypeChange(BrushType type, Transformer transformer, Photo photo);
-
+        /// <summary>
+        /// Change the brush's type.
+        /// </summary>
+        /// <param name="type"> The new type. </param>
+        /// <param name="transformer"> The transformer. </param>
+        /// <param name="color"> The color. </param>
+        /// <param name="photo"> The photo. </param>
+        void TypeChange(BrushType type, Transformer transformer, Color color, Photo photo);
         
+
     }
 }

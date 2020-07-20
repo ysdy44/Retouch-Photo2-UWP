@@ -104,14 +104,14 @@ namespace Retouch_Photo2.Tools.Models
         IBrush Stroke { get => this.SelectionViewModel.Stroke; set => this.SelectionViewModel.Stroke = value; }
 
 
-        private void ConstructStrokeImage()
+        private void ConstructStrokeType()
         {
             Retouch_Photo2.PhotosPage.StrokeImageCallBack += (photo) =>
             {
                 this.StrokeTypeChanged(BrushType.Image, photo);
                 this.ShowControl.Invalidate();
             };
-            this.BrushTypeComboBox.StrokeTypeChanged += (s, brushType) =>
+            this.TypeComboBox.StrokeTypeChanged += (s, brushType) =>
             {
                 if (brushType == BrushType.Image)
                 {

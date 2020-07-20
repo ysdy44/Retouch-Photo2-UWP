@@ -1,5 +1,4 @@
 ﻿using HSVColorPickers;
-using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Elements;
 using System;
 using Windows.UI.Xaml.Controls;
@@ -10,7 +9,7 @@ namespace Retouch_Photo2.Brushs
     /// <summary>
     /// A control used to show a brush.
     /// </summary>
-    public sealed partial class ShowControl : UserControl
+    public sealed partial class BrushShowControl : UserControl
     {
 
         #region DependencyProperty
@@ -72,9 +71,9 @@ namespace Retouch_Photo2.Brushs
 
         //@Construct
         /// <summary>
-        /// Initializes a ShowControl. 
+        /// Initializes a BrushShowControl. 
         /// </summary>
-        public ShowControl()
+        public BrushShowControl()
         {
             this.InitializeComponent();
         }

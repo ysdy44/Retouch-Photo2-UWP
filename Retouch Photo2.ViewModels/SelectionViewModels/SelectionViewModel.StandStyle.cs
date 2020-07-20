@@ -98,6 +98,10 @@ namespace Retouch_Photo2.ViewModels
                     Stroke = BrushBase.ColorBrush(Colors.Black),
                     StrokeWidth = 0,
                     StrokeStyle = new CanvasStrokeStyle(),
+                    Transparency = new BrushBase
+                    {
+                        Color = Colors.Transparent
+                    }
                 };
             }
         }
@@ -124,6 +128,10 @@ namespace Retouch_Photo2.ViewModels
                     Stroke = BrushBase.ColorBrush(Colors.Black),
                     StrokeWidth = 3,
                     StrokeStyle = new CanvasStrokeStyle(),
+                    Transparency = new BrushBase
+                    {
+                        Color = Colors.Transparent
+                    }
                 };
             }
         }
@@ -150,6 +158,10 @@ namespace Retouch_Photo2.ViewModels
                     Stroke = new BrushBase(),
                     StrokeWidth = 0,
                     StrokeStyle = new CanvasStrokeStyle(),
+                    Transparency = new BrushBase
+                    {
+                        Color = Colors.Transparent
+                    }
                 };
             }
         }

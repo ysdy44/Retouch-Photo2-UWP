@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
@@ -103,12 +104,11 @@ namespace Retouch_Photo2.Layers.Models
             if (this.bitmap == null)
             {
                 CanvasCommandList command = new CanvasCommandList(resourceCreator);
-
-                Transformer transformer = base.Transform.GetActualTransformer();
-                CanvasGeometry geometry = transformer.ToRectangle(resourceCreator);
-
                 using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
                 {
+                    Transformer transformer = base.Transform.GetActualTransformer();
+                    CanvasGeometry geometry = transformer.ToRectangle(resourceCreator);
+
                     drawingSession.FillGeometry(geometry, Colors.White);
                 }
                 return command;
@@ -122,7 +122,33 @@ namespace Retouch_Photo2.Layers.Models
                 TransformMatrix = matrix,
                 Source = this.bitmap,
             };
-            if (this.Transform.IsCrop == false) return effect;
+
+            if (this.Transform.IsCrop == false)
+            {
+                switch (base.Style.Transparency.Type)
+                {
+                    case BrushType.LinearGradient:
+                    case BrushType.RadialGradient:
+                    case BrushType.EllipticalGradient:
+                        {
+                            CanvasCommandList command = new CanvasCommandList(resourceCreator);
+                            using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
+                            {
+                                Transformer transformer = base.Transform.Transformer;
+                                CanvasGeometry geometryCrop = transformer.ToRectangle(resourceCreator);
+                                ICanvasBrush canvasBrush = this.Style.Transparency.GetICanvasBrush(resourceCreator);
+                                
+                                using (drawingSession.CreateLayer(canvasBrush, geometryCrop))
+                                {
+                                    drawingSession.DrawImage(effect);
+                                }
+                            }
+                            return command;
+                        }
+                    default:
+                        return effect;
+                }
+            }
 
 
             //Crop
@@ -130,11 +156,28 @@ namespace Retouch_Photo2.Layers.Models
                 CanvasCommandList command = new CanvasCommandList(resourceCreator);
                 using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
                 {
-                    CanvasGeometry geometryCrop = this.Transform.CropTransformer.ToRectangle(resourceCreator);
+                    Transformer transformer = base.Transform.CropTransformer;
+                    CanvasGeometry geometryCrop = transformer.ToRectangle(resourceCreator);
 
-                    using (drawingSession.CreateLayer(1, geometryCrop))
+                    switch (base.Style.Transparency.Type)
                     {
-                        drawingSession.DrawImage(effect);
+                        case BrushType.LinearGradient:
+                        case BrushType.RadialGradient:
+                        case BrushType.EllipticalGradient:
+                            {
+                                ICanvasBrush canvasBrush = this.Style.Transparency.GetICanvasBrush(resourceCreator);
+                                using (drawingSession.CreateLayer(canvasBrush, geometryCrop))
+                                {
+                                    drawingSession.DrawImage(effect);
+                                }
+                            }
+                            break;
+                        default:
+                            using (drawingSession.CreateLayer(1, geometryCrop))
+                            {
+                                drawingSession.DrawImage(effect);
+                            }
+                            break;
                     }
                 }
                 return command;

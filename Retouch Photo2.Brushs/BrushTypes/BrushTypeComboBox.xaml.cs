@@ -147,7 +147,7 @@ namespace Retouch_Photo2.Brushs
     }
 
     /// <summary>
-    /// Represents the combo box that is used to select brush type.
+    /// ComboBox of <see cref="BrushType"/>
     /// </summary>
     public sealed partial class BrushTypeComboBox : UserControl
     {

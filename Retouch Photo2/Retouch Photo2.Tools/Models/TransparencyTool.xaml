@@ -4,14 +4,37 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:brushs="using:Retouch_Photo2.Brushs"
     mc:Ignorable="d"
-    d:DesignWidth="400"
     d:DesignHeight="50"
+    d:DesignWidth="400"
     >
+
+    <Page.Resources>
+        <!--Flyout-->
+        <Flyout x:Name="StopsFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <brushs:StopsPicker x:Name="StopsPicker" Width="320"/>
+        </Flyout>
+    </Page.Resources>
+
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
+            <ContentControl Width="8"/>
 
+            <!--Type-->
+            <TextBlock x:Name="TypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <brushs:TransparencyTypeComboBox x:Name="TypeComboBox" 
+                 Transparency="{x:Bind SelectionViewModel.Transparency, Mode=OneWay}" />
+
+            <ContentControl Width="4"/>
+
+            <!--ShowControl-->
+            <TextBlock x:Name="ShowTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <brushs:TransparencyShowControl x:Name="ShowControl" 
+                     Transparency="{x:Bind SelectionViewModel.Transparency, Mode=OneWay}" />
+
+            <ContentControl Width="12"/>
         </StackPanel>
     </ScrollViewer>
 

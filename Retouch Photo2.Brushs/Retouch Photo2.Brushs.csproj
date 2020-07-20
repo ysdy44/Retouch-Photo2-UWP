@@ -162,12 +162,26 @@
     </Compile>
     <Compile Include="IBrush.cs" />
     <Compile Include="Models\BrushBase.cs" />
-    <Compile Include="ShowControl.xaml.cs">
-      <DependentUpon>ShowControl.xaml</DependentUpon>
+    <Compile Include="BrushShowControl.xaml.cs">
+      <DependentUpon>BrushShowControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="StopsPickers\StopsPicker.Construct.cs" />
     <Compile Include="StopsPickers\StopsPicker.Method.cs" />
-    <Compile Include="BrushTypes\GradientBrushType.cs" />
+    <Compile Include="BrushTypes\TransparencyTypeComboBox.xaml.cs">
+      <DependentUpon>TransparencyTypeComboBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BrushTypes\TransparencyTypeIcons\EllipticalGradientIcon.xaml.cs">
+      <DependentUpon>EllipticalGradientIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BrushTypes\TransparencyTypeIcons\LinearGradientIcon.xaml.cs">
+      <DependentUpon>LinearGradientIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BrushTypes\TransparencyTypeIcons\NoneIcon.xaml.cs">
+      <DependentUpon>NoneIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BrushTypes\TransparencyTypeIcons\RadialGradientIcon.xaml.cs">
+      <DependentUpon>RadialGradientIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BrushTypes\BrushType.cs" />
     <Compile Include="StopsPickers\StopsPicker.xaml.cs">
       <DependentUpon>StopsPicker.xaml</DependentUpon>
@@ -176,6 +190,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StopsPickers\StopsManager.cs" />
     <Compile Include="StopsPickers\StopsSize.cs" />
+    <Compile Include="TransparencyShowControl.xaml.cs">
+      <DependentUpon>TransparencyShowControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XMLs\XML.GradientStop.cs" />
     <Compile Include="XMLs\XML.IBrush.cs" />
     <Compile Include="XMLs\XML.BrushTypeFactory.cs" />
@@ -254,11 +271,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ShowControl.xaml">
+    <Page Include="BrushShowControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StopsPickers\StopsPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BrushTypes\TransparencyTypeComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BrushTypes\TransparencyTypeIcons\EllipticalGradientIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BrushTypes\TransparencyTypeIcons\LinearGradientIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BrushTypes\TransparencyTypeIcons\NoneIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BrushTypes\TransparencyTypeIcons\RadialGradientIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransparencyShowControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

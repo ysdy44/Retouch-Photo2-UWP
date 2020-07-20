@@ -104,14 +104,14 @@ namespace Retouch_Photo2.Tools.Models
         IBrush Fill { get => this.SelectionViewModel.Fill; set => this.SelectionViewModel.Fill = value; }
 
 
-        private void ConstructFillImage()
+        private void ConstructFillType()
         {
             Retouch_Photo2.PhotosPage.FillImageCallBack += (photo) =>
             {
                 this.FillTypeChanged(BrushType.Image, photo);
                 this.ShowControl.Invalidate();
             };
-            this.BrushTypeComboBox.FillTypeChanged += (s, brushType) =>
+            this.TypeComboBox.FillTypeChanged += (s, brushType) =>
             {
                 if (brushType == BrushType.Image)
                 {

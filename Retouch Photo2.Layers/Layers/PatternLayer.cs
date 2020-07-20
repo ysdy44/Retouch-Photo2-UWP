@@ -34,15 +34,15 @@ namespace Retouch_Photo2.Layers.Models
                         case CanvasGeometryRelation.Disjoint:
                             return null;
                         case CanvasGeometryRelation.Contained:
-                            this._render(resourceCreator, drawingSession, geometry);
+                            this._patternRender(resourceCreator, drawingSession, geometry);
                             break;
                         case CanvasGeometryRelation.Contains:
-                            this._render(resourceCreator, drawingSession, geometryCrop);
+                            this._patternRender(resourceCreator, drawingSession, geometryCrop);
                             break;
                         case CanvasGeometryRelation.Overlap:
                             Matrix3x2 zero = Matrix3x2.CreateTranslation(0.0f, 0.0f);
                             CanvasGeometry combine = geometry.CombineWith(geometryCrop, zero, CanvasGeometryCombine.Intersect);
-                            this._render(resourceCreator, drawingSession, combine);
+                            this._patternRender(resourceCreator, drawingSession, combine);
                             break;
                         default:
                             return null;
@@ -50,14 +50,38 @@ namespace Retouch_Photo2.Layers.Models
                 }
                 else
                 {
-                    this._render(resourceCreator, drawingSession, geometry);
+                    this._patternRender(resourceCreator, drawingSession, geometry);
                 }
             }
             return command;
         }
-        private void _render(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry)
+        private void _patternRender(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry)
         {
 
+            switch (base.Style.Transparency.Type)
+            {
+                case BrushType.LinearGradient:
+                case BrushType.RadialGradient:
+                case BrushType.EllipticalGradient:
+                    {
+                        ICanvasBrush canvasBrush = this.Style.Transparency.GetICanvasBrush(resourceCreator);
+
+                        using (drawingSession.CreateLayer(canvasBrush, geometry))
+                        {
+                            this._render(resourceCreator, drawingSession, geometry);
+                        }
+                    }
+                    break;
+                default:
+                    using (drawingSession.CreateLayer(1, geometry))
+                    {
+                        this._render(resourceCreator, drawingSession, geometry);
+                    }
+                    break;
+            }
+        }
+        private void _render(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry)
+        {
             //Fill
             // Fill a geometry with style.
             if (this.Style.Fill.Type != BrushType.None)

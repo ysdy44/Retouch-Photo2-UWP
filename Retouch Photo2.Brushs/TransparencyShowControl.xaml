@@ -1,0 +1,49 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Brushs.TransparencyShowControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    mc:Ignorable="d"
+    Width="70"
+    Height="34" 
+    d:DesignWidth="100"
+    d:DesignHeight="50"
+    >
+
+    <UserControl.Resources>
+
+        <!--Brush-->
+        <ImageBrush x:Name="NoneBrush" ImageSource="ms-appx:///Icons\GrayAndWhite3.jpg"/>
+
+        <LinearGradientBrush x:Name="LinearGradientBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Color="White" Offset="0"/>
+            <GradientStop Color="Gray" Offset="1"/>
+        </LinearGradientBrush>
+
+        <media:RadialGradientBrush x:Name="RadialGradientBrush" Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.2" RadiusY="0.6">
+            <GradientStop Color="White" Offset="0" />
+            <GradientStop Color="Gray" Offset="1" />
+        </media:RadialGradientBrush>
+
+        <media:RadialGradientBrush x:Name="EllipticalGradientBrush" Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+            <GradientStop Color="White" Offset="0" />
+            <GradientStop Color="Gray" Offset="1" />
+        </media:RadialGradientBrush>
+
+    </UserControl.Resources>
+
+
+    <Grid x:Name="RootGrid" Background="Transparent">
+        <Rectangle RadiusX="4" RadiusY="4" IsHitTestVisible="False" StrokeThickness="1" Stroke="{ThemeResource AppText}">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="ms-appx:///Icons\GrayAndWhite2.jpg"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Rectangle x:Name="Rectangle" RadiusX="4" RadiusY="4" IsHitTestVisible="False" Margin="1">
+        </Rectangle>
+    </Grid>
+
+</UserControl>

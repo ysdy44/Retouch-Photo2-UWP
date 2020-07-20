@@ -55,6 +55,29 @@ namespace Retouch_Photo2.Brushs
         }
         /// <summary>
         /// Initializes a LinearGradientBrush.
+        /// </summary>
+        /// <param name="startPoint"> The start point. </param>
+        /// <param name="endPoint"> The end point. </param>
+        /// <param name="color"> The color. </param>
+        /// <returns> The product <see cref="IBrush"/>. </returns>
+        public static IBrush LinearGradientBrush(Vector2 startPoint, Vector2 endPoint, Color color)
+        {
+            Vector2 center = startPoint;
+            Vector2 yPoint = endPoint;
+
+            return new BrushBase
+            {
+                Type = BrushType.LinearGradient,
+
+                Stops = GreyWhiteMeshHelpher.GetGradientStopArray(color),
+                Extend = CanvasEdgeBehavior.Clamp,
+
+                Center = center,
+                YPoint = yPoint,
+            };
+        }
+        /// <summary>
+        /// Initializes a LinearGradientBrush.
         /// </summary>       
         /// <param name="transformer"> The transformer. </param>
         /// <returns> The product <see cref="IBrush"/>. </returns>
@@ -68,6 +91,28 @@ namespace Retouch_Photo2.Brushs
                 Type = BrushType.LinearGradient,
 
                 Stops = GreyWhiteMeshHelpher.GetGradientStopArray(),
+                Extend = CanvasEdgeBehavior.Clamp,
+
+                Center = center,
+                YPoint = yPoint,
+            };
+        }
+        /// <summary>
+        /// Initializes a LinearGradientBrush.
+        /// </summary>       
+        /// <param name="transformer"> The transformer. </param>
+        /// <param name="color"> The color. </param>
+        /// <returns> The product <see cref="IBrush"/>. </returns>
+        public static IBrush LinearGradientBrush(Transformer transformer, Color color)
+        {
+            Vector2 center = transformer.Center;
+            Vector2 yPoint = transformer.CenterBottom;
+
+            return new BrushBase
+            {
+                Type = BrushType.LinearGradient,
+
+                Stops = GreyWhiteMeshHelpher.GetGradientStopArray(color),
                 Extend = CanvasEdgeBehavior.Clamp,
 
                 Center = center,

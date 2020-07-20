@@ -26,18 +26,59 @@ namespace Retouch_Photo2.Layers.Models
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
             {
-                if (this.Transform.IsCrop)
+                if (this.Transform.IsCrop==false)
                 {
-                    CanvasGeometry geometryCrop = this.Transform.CropTransformer.ToRectangle(resourceCreator);
 
-                    using (drawingSession.CreateLayer(1, geometryCrop))
+                    switch (base.Style.Transparency.Type)
                     {
-                        this.GetGeometryRender(resourceCreator, drawingSession, children);
+                        case BrushType.LinearGradient:
+                        case BrushType.RadialGradient:
+                        case BrushType.EllipticalGradient:
+                            {
+                                Transformer transformer = base.Transform.Transformer;
+                                CanvasGeometry geometryCrop = transformer.ToRectangle(resourceCreator);
+                                ICanvasBrush canvasBrush = this.Style.Transparency.GetICanvasBrush(resourceCreator);
+
+                                using (drawingSession.CreateLayer(canvasBrush, geometryCrop))
+                                {
+                                    this.GetGeometryRender(resourceCreator, drawingSession, children);
+                                }
+                            }
+                            break;
+                        default:
+                            this.GetGeometryRender(resourceCreator, drawingSession, children);
+                            break;
                     }
+
                 }
                 else
                 {
-                    this.GetGeometryRender(resourceCreator, drawingSession, children);
+
+                    Transformer transformer = base.Transform.Transformer;
+                    CanvasGeometry geometryCrop = transformer.ToRectangle(resourceCreator);
+
+                    switch (base.Style.Transparency.Type)
+                    {
+                        case BrushType.LinearGradient:
+                        case BrushType.RadialGradient:
+                        case BrushType.EllipticalGradient:
+                            {
+                                ICanvasBrush canvasBrush = this.Style.Transparency.GetICanvasBrush(resourceCreator);
+
+                                using (drawingSession.CreateLayer(canvasBrush, geometryCrop))
+                                {
+                                    this.GetGeometryRender(resourceCreator, drawingSession, children);
+                                }
+                            }
+                            break;
+                        default:
+                            using (drawingSession.CreateLayer(1, geometryCrop))
+                            {
+                                this.GetGeometryRender(resourceCreator, drawingSession, children);
+                            }
+                            break;
+                    }
+
                 }
             }
             return command;
