@@ -215,7 +215,6 @@
       <DependentUpon>PatternGridTool.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Models\CropTool.Method.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\PenTool.Construct.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.Method.cs" />
     <Compile Include="Retouch Photo2.Tools\MoveTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\NodeTool.Method.cs" />

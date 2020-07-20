@@ -175,17 +175,22 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 lastPoint = Vector2.Transform(this._addLastNode.Point, matrix);
             Vector2 endPoint = Vector2.Transform(this._addEndNode.Point, matrix);
             
+
             //Geometry
             ICanvasBrush canvasBrush = layer.Style.Stroke.GetICanvasBrush(this.ViewModel.CanvasDevice);
             float strokeWidth = layer.Style.StrokeWidth;
             CanvasStrokeStyle strokeStyle = layer.Style.StrokeStyle;
             drawingSession.DrawLine(lastPoint, endPoint, canvasBrush, strokeWidth, strokeStyle);
             
+
             //Draw
             drawingSession.DrawLine(lastPoint, endPoint, this.ViewModel.AccentColor);
+            drawingSession.DrawLayerBound(layer, matrix, this.ViewModel.AccentColor);
+
             drawingSession.DrawNode3(endPoint);
             drawingSession.DrawNodeCollection(layer.Nodes, matrix, this.ViewModel.AccentColor);
             
+
             //Snapping
             if (this.IsSnap)
             {
