@@ -11,7 +11,7 @@
     <Page.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <toolElements:PenModeControl x:Name="_PenFlyout"/>
+            <toolElements:PenModeControl x:Name="_PenFlyout" ControlPointMode="{x:Bind SettingViewModel.ControlPointMode, Mode=OneWay}"/>
         </Flyout>
     </Page.Resources>
 

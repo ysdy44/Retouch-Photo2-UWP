@@ -94,7 +94,19 @@ namespace Retouch_Photo2.ViewModels
         }
         private MarqueeCompositeMode compositeMode;
 
-
+        /// <summary> Gets or sets the self control-point's mode </summary>
+        public SelfControlPointMode ControlPointMode
+        {
+            get => this.controlPointMode; 
+            set
+            {
+                if (this.controlPointMode == value) return;
+                this.controlPointMode = value;
+                this.OnPropertyChanged(nameof(this.ControlPointMode));//Notify 
+            }
+        }
+        private SelfControlPointMode controlPointMode;
+        
         /// <summary> Sets or Gets the page layout is full screen. </summary>
         public bool IsFullScreen
         {

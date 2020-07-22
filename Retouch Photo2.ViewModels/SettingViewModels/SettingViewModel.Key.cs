@@ -145,17 +145,31 @@ namespace Retouch_Photo2.ViewModels
         private void KeyUpAndDown(VirtualKey key)
         {
             if (this.KeyCtrl == false && this.KeyShift == false)
+            {
                 this.CompositeMode = MarqueeCompositeMode.New;//CompositeMode
+                this.ControlPointMode = SelfControlPointMode.None;//ControlPointMode 
+            }
             else if (this.KeyCtrl == false && this.KeyShift)
+            {
                 this.CompositeMode = MarqueeCompositeMode.Add;//CompositeMode
+                this.ControlPointMode = SelfControlPointMode.Angle;//ControlPointMode 
+            }
             else if (this.KeyCtrl && this.KeyShift == false)
+            {
                 this.CompositeMode = MarqueeCompositeMode.Subtract;//CompositeMode
+                this.ControlPointMode = SelfControlPointMode.Length;//ControlPointMode 
+            }
             else //if (this.KeyCtrl && this.KeyShift)       
+            {
                 this.CompositeMode = MarqueeCompositeMode.New;//CompositeMode
+                this.ControlPointMode = SelfControlPointMode.None;//ControlPointMode 
+            }
             //else //if (this.KeyCtrl && this.KeyShift)       
+            {
                 //this.CompositeMode = MarqueeCompositeMode.Intersect;//CompositeMode
+            }
         }
-        
+
 
         /// <summary> keyboard's the **SHIFT** key. </summary>
         public bool KeyShift;

@@ -6,6 +6,9 @@ using Windows.UI.Xaml.Shapes;
 
 namespace Retouch_Photo2.Elements
 {
+    /// <summary>
+    /// Separator of <see cref="ExpandAppbar"/>.
+    /// </summary>
     public class ExpandAppBarSeparator : UserControl, IExpandAppbarElement
     {
         //@Content
@@ -45,6 +48,9 @@ namespace Retouch_Photo2.Elements
         };
 
         //@Construct
+        /// <summary>
+        /// Initializes a ExpandAppBarSeparator.
+        /// </summary>
         public ExpandAppBarSeparator() : base()
         {
             base.Width = this.ExpandWidth;

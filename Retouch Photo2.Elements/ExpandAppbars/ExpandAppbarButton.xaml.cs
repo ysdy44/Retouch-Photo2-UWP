@@ -3,6 +3,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Elements
 {
+    /// <summary>
+    /// Button of <see cref="ExpandAppbar"/>.
+    /// </summary>
     public sealed partial class ExpandAppbarButton : UserControl, IExpandAppbarElement
     {
         //@Content
@@ -81,6 +84,9 @@ namespace Retouch_Photo2.Elements
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a ExpandAppbarButton.
+        /// </summary>
         public ExpandAppbarButton()
         {
             this.InitializeComponent();

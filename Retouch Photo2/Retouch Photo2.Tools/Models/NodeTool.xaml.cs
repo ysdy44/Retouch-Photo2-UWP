@@ -1,35 +1,16 @@
 ﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Elements;
+using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
-using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.Tools.Icons;
-using Retouch_Photo2.ViewModels;
-using System.Linq;
-using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.Tools.Icons;
-using Retouch_Photo2.ViewModels;
-using System.Linq;
-using System.Numerics;
-using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
@@ -303,6 +284,7 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
         /// <summary> PenPage's Flyout. </summary>
         public PenModeControl PenFlyout => this._PenFlyout;

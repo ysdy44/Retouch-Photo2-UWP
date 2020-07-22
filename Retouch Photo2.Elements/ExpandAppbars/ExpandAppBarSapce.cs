@@ -2,6 +2,9 @@
 
 namespace Retouch_Photo2.Elements
 {
+    /// <summary>
+    /// Sapce of <see cref="ExpandAppbar"/>.
+    /// </summary>
     public class ExpandAppBarSapce : FrameworkElement, IExpandAppbarElement
     {
         //@Content
@@ -10,6 +13,9 @@ namespace Retouch_Photo2.Elements
         public bool IsSecondPage { set => this.Visibility = value ? Visibility.Collapsed : Visibility.Visible; }
 
         //@Construct
+        /// <summary>
+        /// Initializes a ExpandAppBarSapce.
+        /// </summary>
         public ExpandAppBarSapce() : base()
         {
             base.Width = this.ExpandWidth;

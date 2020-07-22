@@ -45,8 +45,6 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
-        MarqueeCompositeMode MarqueeCompositeMode => this.SettingViewModel.CompositeMode;
-
 
         //@Content
         public ToolType Type => ToolType.Cursor;
@@ -209,7 +207,7 @@ namespace Retouch_Photo2.Tools.Models
                 Transformer transformer = layerage.GetActualTransformer();
                 bool contained = transformer.Contained(this.BoxRect);
 
-                switch (this.MarqueeCompositeMode)
+                switch (this.CursorPage.ModeSegmented.Mode)
                 {
                     case MarqueeCompositeMode.New:
                         layer.IsSelected = contained;
@@ -242,12 +240,12 @@ namespace Retouch_Photo2.Tools.Models
 
             this.Button.Title = resource.GetString("/Tools/Cursor");
 
-            this.Button.ToolTip.Closed += (s, e) => this.CursorPage.ModeControl.IsOpen = false;
+            this.Button.ToolTip.Closed += (s, e) => this.CursorPage.ModeSegmented.IsOpen = false;
             this.Button.ToolTip.Opened += (s, e) =>
             {
                 if (this.Button.IsSelected == false) return;
 
-                this.CursorPage.ModeControl.IsOpen = true;
+                this.CursorPage.ModeSegmented.IsOpen = true;
             };
         }
 
@@ -267,7 +265,7 @@ namespace Retouch_Photo2.Tools.Models
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
         
-        public CompositeModeSegmented ModeControl => this._ModeControl;
+        public CompositeModeSegmented ModeSegmented => this._ModeSegmented;
 
 
         //@Construct

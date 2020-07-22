@@ -2,6 +2,9 @@
 
 namespace Retouch_Photo2.Elements
 {
+    /// <summary>
+    /// Interface of <see cref="ExpandAppbar"/>'s elements.
+    /// </summary>
     public interface IExpandAppbarElement
     {
         /// <summary> Gets element width. </summary>

@@ -85,6 +85,9 @@ namespace Retouch_Photo2.Elements
         #endregion
 
         //@Construct
+        /// <summary>
+        /// Initializes a ExpandAppbar.
+        /// </summary>
         public ExpandAppbar()
         {
             this.InitializeComponent();

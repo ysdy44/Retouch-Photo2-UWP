@@ -3,6 +3,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Elements
 {
+    /// <summary>
+    /// ToggleButton of <see cref="ExpandAppbar"/>.
+    /// </summary>
     public sealed partial class ExpandAppbarToggleButton : UserControl, IExpandAppbarElement
     {
         //@Content
@@ -94,9 +97,12 @@ namespace Retouch_Photo2.Elements
         }));
 
         #endregion
-        
+
 
         //@Construct
+        /// <summary>
+        /// Initializes a ExpandAppbarToggleButton.
+        /// </summary>
         public ExpandAppbarToggleButton()
         {
             this.InitializeComponent();

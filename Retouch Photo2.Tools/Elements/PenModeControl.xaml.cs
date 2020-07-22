@@ -1,6 +1,7 @@
 ﻿using FanKit.Transformers;
 using Retouch_Photo2.Tools.Elements.PenModeControlIcons;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Elements
@@ -12,49 +13,58 @@ namespace Retouch_Photo2.Tools.Elements
     {
 
         //@Content    
+        /// <summary> Gets or sets the each control-point's length-mode </summary>
+        public EachControlPointLengthMode ControlLengthMode = EachControlPointLengthMode.Equal;
+        /// <summary> Gets or sets the each control-point's angle-mode </summary>
+        public EachControlPointAngleMode ControlAngleMode = EachControlPointAngleMode.Asymmetric;
+
+
+        #region DependencyProperty
+
         /// <summary> Gets or sets the self control-point's mode </summary>
-        public SelfControlPointMode SelfMode
+        public SelfControlPointMode ControlPointMode
         {
-            get => this.selfMode;
-            set
+            get { return (SelfControlPointMode)GetValue(ControlPointModeProperty); }
+            set { SetValue(ControlPointModeProperty, value); }
+        }
+        /// <summary> Identifies the <see cref = "PenModeControl.ControlPointMode" /> dependency property. </summary>
+        public static readonly DependencyProperty ControlPointModeProperty = DependencyProperty.Register(nameof(ControlPointMode), typeof(SelfControlPointMode), typeof(PenModeControl), new PropertyMetadata(SelfControlPointMode.None, (sender, e) =>
+        {
+            PenModeControl con = (PenModeControl)sender;
+
+            if (e.NewValue is SelfControlPointMode value)
             {
                 switch (value)
                 {
                     case SelfControlPointMode.None:
                         {
-                            this.AngleCheckBox.IsChecked = false;
-                            this.LengthCheckBox.IsChecked = false;
+                            con.AngleCheckBox.IsChecked = false;
+                            con.LengthCheckBox.IsChecked = false;
                         }
                         break;
                     case SelfControlPointMode.Length:
                         {
-                            this.AngleCheckBox.IsChecked = false;
-                            this.LengthCheckBox.IsChecked = true;
+                            con.AngleCheckBox.IsChecked = false;
+                            con.LengthCheckBox.IsChecked = true;
                         }
                         break;
                     case SelfControlPointMode.Angle:
                         {
-                            this.AngleCheckBox.IsChecked = true;
-                            this.LengthCheckBox.IsChecked = false;
+                            con.AngleCheckBox.IsChecked = true;
+                            con.LengthCheckBox.IsChecked = false;
                         }
                         break;
                     case SelfControlPointMode.Disable:
                         {
-                            this.AngleCheckBox.IsChecked = true;
-                            this.LengthCheckBox.IsChecked = true;
+                            con.AngleCheckBox.IsChecked = true;
+                            con.LengthCheckBox.IsChecked = true;
                         }
                         break;
                 }
-                this.selfMode = value;
             }
-        }
-        private SelfControlPointMode selfMode = SelfControlPointMode.None;
+        }));
 
-        /// <summary> Gets or sets the each control-point's length-mode </summary>
-        public EachControlPointLengthMode EachLengthMode = EachControlPointLengthMode.Equal;
-        /// <summary> Gets or sets the each control-point's angle-mode </summary>
-        public EachControlPointAngleMode EachAngleMode = EachControlPointAngleMode.Asymmetric;
-
+        #endregion
 
 
         //@Construct
@@ -65,53 +75,53 @@ namespace Retouch_Photo2.Tools.Elements
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructSelfMode();
-            this.ConstructEachMode();
+            this.ConstructControlPointMode();
+            this.ConstructControlLengthAngleMode();
         }
 
 
-        //SelfMode
-        private void ConstructSelfMode()
+        //ControlPointMode
+        private void ConstructControlPointMode()
         {
             this.AngleCheckBox.Click += (s, e) =>
             {
-                switch (this.SelfMode)
+                switch (this.ControlPointMode)
                 {
-                    case SelfControlPointMode.None: this.SelfMode = SelfControlPointMode.Angle; break;
-                    case SelfControlPointMode.Length: this.SelfMode = SelfControlPointMode.Angle; break;
-                    case SelfControlPointMode.Angle: this.SelfMode = SelfControlPointMode.None; break;
-                    case SelfControlPointMode.Disable: this.SelfMode = SelfControlPointMode.None; break;
+                    case SelfControlPointMode.None: this.ControlPointMode = SelfControlPointMode.Angle; break;
+                    case SelfControlPointMode.Length: this.ControlPointMode = SelfControlPointMode.Angle; break;
+                    case SelfControlPointMode.Angle: this.ControlPointMode = SelfControlPointMode.None; break;
+                    case SelfControlPointMode.Disable: this.ControlPointMode = SelfControlPointMode.None; break;
                 }
             };
             this.LengthCheckBox.Click += (s, e) =>
             {
-                switch (this.SelfMode)
+                switch (this.ControlPointMode)
                 {
-                    case SelfControlPointMode.None: this.SelfMode = SelfControlPointMode.Length; break;
-                    case SelfControlPointMode.Length: this.SelfMode = SelfControlPointMode.None; break;
-                    case SelfControlPointMode.Angle: this.SelfMode = SelfControlPointMode.Length; break;
-                    case SelfControlPointMode.Disable: this.SelfMode = SelfControlPointMode.None; break;
+                    case SelfControlPointMode.None: this.ControlPointMode = SelfControlPointMode.Length; break;
+                    case SelfControlPointMode.Length: this.ControlPointMode = SelfControlPointMode.None; break;
+                    case SelfControlPointMode.Angle: this.ControlPointMode = SelfControlPointMode.Length; break;
+                    case SelfControlPointMode.Disable: this.ControlPointMode = SelfControlPointMode.None; break;
                 }
             };
         }
 
-        //EachMode
-        private void ConstructEachMode()
+        //ControlLengthAngleMode
+        private void ConstructControlLengthAngleMode()
         {
             this.MirroredRadioButton.Checked += (s, e) =>
             {
-                this.EachLengthMode = EachControlPointLengthMode.Equal;
-                this.EachAngleMode = EachControlPointAngleMode.Asymmetric;
+                this.ControlLengthMode = EachControlPointLengthMode.Equal;
+                this.ControlAngleMode = EachControlPointAngleMode.Asymmetric;
             };
             this.DisconnectedRadioButton.Checked += (s, e) =>
             {
-                this.EachLengthMode = EachControlPointLengthMode.None;
-                this.EachAngleMode = EachControlPointAngleMode.None;
+                this.ControlLengthMode = EachControlPointLengthMode.None;
+                this.ControlAngleMode = EachControlPointAngleMode.None;
             };
             this.AsymmetricRadioButton.Checked += (s, e) =>
             {
-                this.EachLengthMode = EachControlPointLengthMode.None;
-                this.EachAngleMode = EachControlPointAngleMode.Asymmetric;
+                this.ControlLengthMode = EachControlPointLengthMode.None;
+                this.ControlAngleMode = EachControlPointAngleMode.Asymmetric;
             };
         }
 
