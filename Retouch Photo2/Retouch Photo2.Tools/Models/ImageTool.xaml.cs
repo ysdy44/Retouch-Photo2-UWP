@@ -260,7 +260,7 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructSelect()
         {
             this.SelectButton.Click += (s, e) => Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.SelectImage);//Delegate
-            Retouch_Photo2.PhotosPage.SelectCallBack += (photo) =>
+            Retouch_Photo2.PhotosPage.SelectImageCallBack += (photo) =>
             {
                 if (photo == null) return;
                 Photocopier photocopier = photo.ToPhotocopier();
@@ -271,7 +271,7 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructReplace()
         {
             this.ReplaceButton.Click += (s, e) => Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.ReplaceImage);//Delegate
-            Retouch_Photo2.PhotosPage.ReplaceCallBack += (photo) =>
+            Retouch_Photo2.PhotosPage.ReplaceImageCallBack += (photo) =>
             {
                 if (photo == null) return;
                 Photocopier photocopier = photo.ToPhotocopier();

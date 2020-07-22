@@ -19,7 +19,7 @@ namespace Retouch_Photo2
         None,
 
         /// <summary> Add a <see cref="ImageLayer"/>. </summary>
-        AddImager,
+        AddImage,
 
         /// <summary> Make <see cref="Retouch_Photo2.Styles.Style.Fill"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
         FillImage,
@@ -46,7 +46,7 @@ namespace Retouch_Photo2
 
         //@Static       
         /// <summary> Add a <see cref="ImageLayer"/>. </summary>
-        public static Action<Photo> AddCallBack;
+        public static Action<Photo> AddImageCallBack;
 
         /// <summary> Make <see cref="Retouch_Photo2.Styles.Style.Fill"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
         public static Action<Photo> FillImageCallBack;
@@ -54,9 +54,9 @@ namespace Retouch_Photo2
         public static Action<Photo> StrokeImageCallBack;
 
         /// <summary> Select a image in <see cref= "ImageTool" />. </summary>
-        public static Action<Photo> SelectCallBack;
+        public static Action<Photo> SelectImageCallBack;
         /// <summary> Replace a image in <see cref= "ImageTool" />. </summary>
-        public static Action<Photo> ReplaceCallBack;
+        public static Action<Photo> ReplaceImageCallBack;
 
 
         //@VisualState

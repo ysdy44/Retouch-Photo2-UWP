@@ -81,8 +81,8 @@ namespace Retouch_Photo2
             {
                 case PhotosPageMode.None:
                     return;
-                case PhotosPageMode.AddImager:
-                    Retouch_Photo2.PhotosPage.AddCallBack?.Invoke(photo);//Delegate
+                case PhotosPageMode.AddImage:
+                    Retouch_Photo2.PhotosPage.AddImageCallBack?.Invoke(photo);//Delegate
                     break;
 
                 case PhotosPageMode.FillImage:
@@ -93,10 +93,10 @@ namespace Retouch_Photo2
                     break;
 
                 case PhotosPageMode.SelectImage:
-                    Retouch_Photo2.PhotosPage.SelectCallBack?.Invoke(photo);//Delegate
+                    Retouch_Photo2.PhotosPage.SelectImageCallBack?.Invoke(photo);//Delegate
                     break;
                 case PhotosPageMode.ReplaceImage:
-                    Retouch_Photo2.PhotosPage.ReplaceCallBack?.Invoke(photo);//Delegate
+                    Retouch_Photo2.PhotosPage.ReplaceImageCallBack?.Invoke(photo);//Delegate
                     break;
                 default:
                     return;

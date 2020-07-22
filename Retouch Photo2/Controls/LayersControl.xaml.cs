@@ -49,7 +49,7 @@ namespace Retouch_Photo2.Controls
             this.Holding += (s, e) => this.ShowLayerMenu();
 
 
-            Retouch_Photo2.PhotosPage.AddCallBack += (photo) =>
+            Retouch_Photo2.PhotosPage.AddImageCallBack += (photo) =>
             {
                 if (photo == null) return;
                 

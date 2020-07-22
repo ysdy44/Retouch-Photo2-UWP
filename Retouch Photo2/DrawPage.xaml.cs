@@ -57,7 +57,7 @@ namespace Retouch_Photo2
             this.DrawLayout.FootPage = ToolBase.PageBorder;
             this.DrawLayout.TouchbarPicker = TouchbarButton.PickerBorder;
             this.DrawLayout.TouchbarSlider = TouchbarButton.SliderBorder;
-            this.DrawLayout.RightPhotosButton.Click += (s, e) => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImager);//Navigate   
+            this.DrawLayout.RightPhotosButton.Click += (s, e) => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImage);//Navigate   
             this.DrawLayout.IsFullScreenChanged += (isFullScreen) =>
             {
                 Vector2 offset = this.SettingViewModel.FullScreenOffset;
