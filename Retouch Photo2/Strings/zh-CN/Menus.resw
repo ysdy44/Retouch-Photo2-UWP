@@ -210,9 +210,6 @@
   <data name="Transformer_Y" xml:space="preserve">
     <value>Y-轴</value>
   </data>
-  <data name="Layer_FollowTransform" xml:space="preserve">
-    <value>样式跟随变换</value>
-  </data>
   <data name="Layer_Visibility" xml:space="preserve">
     <value>可视</value>
   </data>

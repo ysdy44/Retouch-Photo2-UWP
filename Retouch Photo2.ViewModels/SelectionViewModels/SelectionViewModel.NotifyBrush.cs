@@ -11,20 +11,7 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
-
-        /// <summary> Gets or sets the style.IsFollowTransform. </summary>
-        public bool IsFollowTransform
-        {
-            get => this.isFollowTransform;
-            set
-            {
-                if (this.isFollowTransform == value) return;
-                this.isFollowTransform = value;
-                this.OnPropertyChanged(nameof(this.IsFollowTransform));//Notify 
-            }
-        }
-        private bool isFollowTransform = true;
-
+        
         /// <summary> Brush's Fill or Stroke. </summary>     
         public FillOrStroke FillOrStroke
         {
@@ -37,8 +24,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private FillOrStroke fillOrStroke = FillOrStroke.Fill;
-
-                
+                        
 
         /// <summary> Gets or sets the current color. </summary>
         public Color Color
@@ -55,6 +41,32 @@ namespace Retouch_Photo2.ViewModels
 
         //////////////////////////
 
+
+        /// <summary> Gets or sets the style.IsFollowTransform. </summary>
+        public bool IsFollowTransform
+        {
+            get => this.isFollowTransform;
+            set
+            {
+                if (this.isFollowTransform == value) return;
+                this.isFollowTransform = value;
+                this.OnPropertyChanged(nameof(this.IsFollowTransform));//Notify 
+            }
+        }
+        private bool isFollowTransform = true;
+
+        /// <summary> Gets or sets whether the stroke is behind the fill.. </summary>
+        public bool IsStrokeBehindFill
+        {
+            get => this.isStrokeBehindFill;
+            set
+            {
+                if (this.isStrokeBehindFill == value) return;
+                this.isStrokeBehindFill = value;
+                this.OnPropertyChanged(nameof(this.IsStrokeBehindFill));//Notify 
+            }
+        }
+        private bool isStrokeBehindFill = false;
 
         /// <summary> Gets or sets the current fill. </summary>
         public IBrush Fill
@@ -79,7 +91,20 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private IBrush stroke = new BrushBase();
-
+        
+        /// <summary> Gets or sets the style.IsStrokeWidthFollowScale. </summary>
+        public bool IsStrokeWidthFollowScale
+        {
+            get => this.isStrokeWidthFollowScale;
+            set
+            {
+                if (this.isStrokeWidthFollowScale == value) return;
+                this.isStrokeWidthFollowScale = value;
+                this.OnPropertyChanged(nameof(this.IsStrokeWidthFollowScale));//Notify 
+            }
+        }
+        private bool isStrokeWidthFollowScale = false;
+                
         /// <summary> Gets or sets the current stroke-width. </summary>
         public float StrokeWidth
         {
@@ -181,9 +206,16 @@ namespace Retouch_Photo2.ViewModels
         {
             if (style == null) return;
 
+
             this.IsFollowTransform = style.IsFollowTransform;
+
+            this.IsStrokeBehindFill = style.IsStrokeBehindFill;
+            
             this.Fill = style.Fill;
             this.Stroke = style.Stroke;
+
+            this.IsStrokeWidthFollowScale = style.IsStrokeWidthFollowScale;
+
             this.StrokeWidth = style.StrokeWidth;
 
             this.StrokeStyle = style.StrokeStyle;
@@ -194,6 +226,7 @@ namespace Retouch_Photo2.ViewModels
             this.StrokeStyleOffset = style.StrokeStyle.DashOffset;
 
             this.Transparency = style.Transparency;
+
 
             switch (this.FillOrStroke)
             {

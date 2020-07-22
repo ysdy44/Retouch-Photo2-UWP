@@ -88,39 +88,87 @@ namespace Retouch_Photo2.Layers.Models
             CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
             this.Geometry2 = geometry;
 
-            //Fill
-            // Fill a geometry with style.
-            if (this.Style.Fill.Type != BrushType.None)
+            if (this.Style.IsStrokeBehindFill == false)
             {
-                ICanvasBrush canvasBrush = this.Style.Fill.GetICanvasBrush(resourceCreator);
-                drawingSession.FillGeometry(geometry, canvasBrush);
-            }
 
-            //CanvasActiveLayer
-            if (children.Count != 0)
-            {
-                using (drawingSession.CreateLayer(1, geometry))
+
+                //Fill
+                // Fill a geometry with style.
+                if (this.Style.Fill.Type != BrushType.None)
                 {
-                    ICanvasImage childImage = LayerBase.Render(resourceCreator, children);
+                    ICanvasBrush canvasBrush = this.Style.Fill.GetICanvasBrush(resourceCreator);
+                    drawingSession.FillGeometry(geometry, canvasBrush);
+                }
 
-                    if (childImage != null)
+                //CanvasActiveLayer
+                if (children.Count != 0)
+                {
+                    using (drawingSession.CreateLayer(1, geometry))
                     {
-                        drawingSession.DrawImage(childImage);
+                        ICanvasImage childImage = LayerBase.Render(resourceCreator, children);
+
+                        if (childImage != null)
+                        {
+                            drawingSession.DrawImage(childImage);
+                        }
                     }
                 }
-            }
 
-            //Stroke
-            // Draw a geometry with style.
-            if (this.Style.Stroke.Type != BrushType.None)
-            {
-                if (this.Style.StrokeWidth != 0)
+                //Stroke
+                // Draw a geometry with style.
+                if (this.Style.Stroke.Type != BrushType.None)
                 {
-                    ICanvasBrush canvasBrush = this.Style.Stroke.GetICanvasBrush(resourceCreator);
-                    float strokeWidth = this.Style.StrokeWidth;
-                    CanvasStrokeStyle strokeStyle = this.Style.StrokeStyle;
-                    drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth, strokeStyle);
+                    if (this.Style.StrokeWidth != 0)
+                    {
+                        ICanvasBrush canvasBrush = this.Style.Stroke.GetICanvasBrush(resourceCreator);
+                        float strokeWidth = this.Style.StrokeWidth;
+                        CanvasStrokeStyle strokeStyle = this.Style.StrokeStyle;
+                        drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth, strokeStyle);
+                    }
                 }
+
+
+            }
+            else
+            {
+
+
+                //Stroke
+                // Draw a geometry with style.
+                if (this.Style.Stroke.Type != BrushType.None)
+                {
+                    if (this.Style.StrokeWidth != 0)
+                    {
+                        ICanvasBrush canvasBrush = this.Style.Stroke.GetICanvasBrush(resourceCreator);
+                        float strokeWidth = this.Style.StrokeWidth;
+                        CanvasStrokeStyle strokeStyle = this.Style.StrokeStyle;
+                        drawingSession.DrawGeometry(geometry, canvasBrush, strokeWidth, strokeStyle);
+                    }
+                }
+
+                //CanvasActiveLayer
+                if (children.Count != 0)
+                {
+                    using (drawingSession.CreateLayer(1, geometry))
+                    {
+                        ICanvasImage childImage = LayerBase.Render(resourceCreator, children);
+
+                        if (childImage != null)
+                        {
+                            drawingSession.DrawImage(childImage);
+                        }
+                    }
+                }
+
+                //Fill
+                // Fill a geometry with style.
+                if (this.Style.Fill.Type != BrushType.None)
+                {
+                    ICanvasBrush canvasBrush = this.Style.Fill.GetICanvasBrush(resourceCreator);
+                    drawingSession.FillGeometry(geometry, canvasBrush);
+                }
+
+
             }
         }
         CanvasGeometry Geometry2 = null;

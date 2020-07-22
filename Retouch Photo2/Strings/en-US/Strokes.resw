@@ -147,6 +147,15 @@
   <data name="Dash_Solid" xml:space="preserve">
     <value>Solid</value>
   </data>
+  <data name="IsFollowTransform" xml:space="preserve">
+    <value>Style transform with Layer</value>
+  </data>
+  <data name="IsStrokeBehindFill" xml:space="preserve">
+    <value>Stroke behind Fill</value>
+  </data>
+  <data name="IsStrokeWidthFollowScale" xml:space="preserve">
+    <value>Stroke Width scale with Layer</value>
+  </data>
   <data name="Join" xml:space="preserve">
     <value>Join</value>
   </data>

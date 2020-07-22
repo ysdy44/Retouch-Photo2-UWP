@@ -55,6 +55,7 @@
         <Setter Property="Foreground" Value="{ThemeResource AppText}"/>
         <Setter Property="Margin" Value="4,4"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
     </Style>
 
 

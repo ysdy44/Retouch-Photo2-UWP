@@ -147,6 +147,15 @@
   <data name="Dash_Solid" xml:space="preserve">
     <value>固体</value>
   </data>
+  <data name="IsFollowTransform" xml:space="preserve">
+    <value>样式跟随变换</value>
+  </data>
+  <data name="IsStrokeBehindFill" xml:space="preserve">
+    <value>描边在填充之后</value>
+  </data>
+  <data name="IsStrokeWidthFollowScale" xml:space="preserve">
+    <value>描边宽度跟随缩放</value>
+  </data>
   <data name="Join" xml:space="preserve">
     <value>拐角</value>
   </data>

@@ -213,7 +213,4 @@
   <data name="Transformer_Anchor" xml:space="preserve">
     <value>Anchor</value>
   </data>
-  <data name="Layer_FollowTransform" xml:space="preserve">
-    <value>Style Follow Transform</value>
-  </data>
 </root>

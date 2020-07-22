@@ -21,7 +21,7 @@
                         IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                         Content="{x:Bind SelectionViewModel.LayerName, Mode=OneWay}"/>
 
-
+               
         <!--Opacity-->
         <RelativePanel>
             <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
@@ -35,8 +35,32 @@
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                            Value="{x:Bind SelectionViewModel.Opacity, Mode=OneWay}"/>
         </Border>
-
-
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Opacity0Button" Grid.Column="0" Padding="0" Style="{StaticResource AppRoundedButtonLeftStyle}">
+                0%
+            </Button>
+            <Button x:Name="Opacity25Button" Grid.Column="1" Padding="0" Style="{StaticResource AppRoundedButtonCenterStyle}">
+                25%
+            </Button>
+            <Button x:Name="Opacity50Button" Grid.Column="2" Padding="0" Style="{StaticResource AppRoundedButtonCenterStyle}">
+                50%
+            </Button>
+            <Button x:Name="Opacity75Button" Grid.Column="3" Padding="0" Style="{StaticResource AppRoundedButtonCenterStyle}">
+                75%
+            </Button>
+            <Button x:Name="Opacity100Button" Grid.Column="4" Padding="0" Style="{StaticResource AppRoundedButtonRightStyle}">
+                100%
+            </Button>
+        </Grid>
+        
+        
         <!--Blend Mode-->
         <TextBlock x:Name="BlendModeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <Button x:Name="BlendModeButton" Style="{StaticResource AppIconRoundedButtonStyle}"
@@ -61,28 +85,12 @@
                 <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
             </ToggleButton>
         </RelativePanel>
-
-
-        <ContentControl Height="6"/>
-
-
-        <!--FollowTransform-->
-        <RelativePanel>
-            <TextBlock x:Name="FollowTransformTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
-            <ToggleButton x:Name="FollowTransformToggleButton" RelativePanel.AlignRightWithPanel="True"
-                                  Style="{StaticResource AppCircleToggleButtonStyle}"
-                                  IsChecked="{x:Bind SelectionViewModel.IsFollowTransform, Mode=OneWay}" >
-                <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-            </ToggleButton>
-        </RelativePanel>
-
-
-        <ContentControl Height="6"/>
-
+        
 
         <!--Tag Type-->
         <TextBlock x:Name="TagTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <blends:TagTypeSegmented x:Name="TagTypeSegmented" Type="{x:Bind SelectionViewModel.TagType, Mode=OneWay}" />
 
+        
     </StackPanel>
 </UserControl>

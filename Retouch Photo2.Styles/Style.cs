@@ -18,6 +18,9 @@ namespace Retouch_Photo2.Styles
         /// <summary> Gets or sets whether the style follows the transform. </summary>
         public bool IsFollowTransform = true;
 
+        /// <summary> Gets or sets whether the stroke is behind the fill.. </summary>
+        public bool IsStrokeBehindFill = false;
+
         /// <summary> Gets or sets Style's fill. </summary>
         public IBrush Fill = new BrushBase();
         /// <summary> The cache of <see cref="Style.Fill"/>. </summary>
@@ -31,7 +34,10 @@ namespace Retouch_Photo2.Styles
         public IBrush StartingStroke { get; private set; }
         /// <summary> Cache the <see cref="Style.Stroke"/>. </summary>
         public void CacheStroke() => this.StartingStroke = this.Stroke.Clone();
-        
+
+        /// <summary> Gets or sets whether the StrokeWidth follows the scale. </summary>
+        public bool IsStrokeWidthFollowScale = false;
+
         /// <summary> Gets or sets Style's stroke-width. </summary>
         public float StrokeWidth = 1;
         /// <summary> The cache of <see cref="Style.StrokeWidth"/>. </summary>
@@ -65,6 +71,11 @@ namespace Retouch_Photo2.Styles
                 this.Stroke.CacheTransform();
                 this.Transparency.CacheTransform();
             }
+
+            if (this.IsStrokeWidthFollowScale)
+            {
+                this.CacheStrokeWidth();
+            }
         }
         /// <summary>
         ///  Transforms the style by the given matrix.
@@ -77,6 +88,12 @@ namespace Retouch_Photo2.Styles
                 this.Fill.TransformMultiplies(matrix);
                 this.Stroke.TransformMultiplies(matrix);
                 this.Transparency.TransformMultiplies(matrix);
+            }
+
+            if (this.IsStrokeWidthFollowScale)
+            {
+                float scale = matrix.M11 + matrix.M22;
+                this.StrokeWidth = this.StartingStrokeWidth * scale / 2.0f;
             }
         }
         /// <summary>
@@ -91,6 +108,10 @@ namespace Retouch_Photo2.Styles
                 this.Stroke.TransformAdd(vector);
                 this.Transparency.TransformAdd(vector);
             }
+
+            //if (this.IsStrokeWidthFollowScale)
+            //{
+            //}
         }
 
 
@@ -102,8 +123,15 @@ namespace Retouch_Photo2.Styles
         {
             return new Style
             {
+                IsFollowTransform = this.IsFollowTransform,
+
+                IsStrokeBehindFill = this.IsStrokeBehindFill,
+
                 Fill = this.Fill.Clone(),
                 Stroke = this.Stroke.Clone(),
+
+                IsStrokeWidthFollowScale = this.IsStrokeWidthFollowScale,
+
                 StrokeWidth = this.StrokeWidth,
                 StrokeStyle = this.StrokeStyle.Clone(),
                 Transparency = this.Transparency.Clone(),

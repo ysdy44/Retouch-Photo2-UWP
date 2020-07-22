@@ -57,5 +57,29 @@
                              Value="{x:Bind SelectionViewModel.StrokeStyleOffset, Mode=OneWay}"/>
         </Border>
 
+
+        <!--IsFollowTransform-->
+        <CheckBox x:Name="IsFollowTransformCheckBox" Margin="4,0" IsChecked="{x:Bind SelectionViewModel.IsFollowTransform, Mode=OneWay}" >
+            <TextBlock x:Name="IsFollowTransformTextBlock" Foreground="{ThemeResource AppText}" />
+        </CheckBox>
+
+
+        <!--IsStrokeBehindFill-->
+        <CheckBox x:Name="IsStrokeBehindFillCheckBox" Margin="4,0" IsChecked="{x:Bind SelectionViewModel.IsStrokeBehindFill, Mode=OneWay}" >
+            <TextBlock x:Name="IsStrokeBehindFillTextBlock" Foreground="{ThemeResource AppText}" />
+        </CheckBox>
+        
+
+        <ContentControl Height="2"/>
+        
+
+        <!--IsStrokeWidthFollowScale-->
+        <CheckBox x:Name="IsStrokeWidthFollowScaleCheckBox" Margin="4,0" IsChecked="{x:Bind SelectionViewModel.IsStrokeWidthFollowScale, Mode=OneWay}" >
+            <TextBlock x:Name="IsStrokeWidthFollowScaleTextBlock" Foreground="{ThemeResource AppText}" />
+        </CheckBox>
+
+
+        <ContentControl Height="2"/>
+
     </StackPanel>
 </UserControl>

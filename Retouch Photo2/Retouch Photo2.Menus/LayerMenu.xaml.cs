@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Layers.ILayer"/>.
     /// </summary>
-    public sealed partial class LayerMenu : Expander, IMenu 
+    public sealed partial class LayerMenu : Expander, IMenu
     {
 
         //@ViewModel
@@ -49,7 +49,7 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Layers.ILayer"/>.
     /// </summary>
-    public sealed partial class LayerMenu : Expander, IMenu 
+    public sealed partial class LayerMenu : Expander, IMenu
     {
 
         //DataContext
@@ -88,7 +88,7 @@ namespace Retouch_Photo2.Menus.Models
         public override void Reset() { }
 
     }
-    
+
 
     /// <summary>
     /// MainPage of <see cref = "LayerMenu"/>.
@@ -100,7 +100,7 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        
+
 
         //@Delegate
         /// <summary> Occurs when second-page change. </summary>
@@ -138,9 +138,9 @@ namespace Retouch_Photo2.Menus.Models
             this.NameButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowRename?.Invoke();
             this.ConstructOpacity1();
             this.ConstructOpacity2();
+            this.ConstructOpacity3();
             this.ConstructBlendMode();
             this.ConstructVisibility();
-            this.ConstructFollowTransform();
             this.ConstructTagType();
         }
 
@@ -174,15 +174,9 @@ namespace Retouch_Photo2.Menus.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.NameTextBlock.Text = resource.GetString("/Menus/Layer_Name");
-
             this.OpacityTextBlock.Text = resource.GetString("/Menus/Layer_Opacity");
-
             this.BlendModeTextBlock.Text = resource.GetString("/Menus/Layer_BlendMode");
-
             this.VisibilityTextBlock.Text = resource.GetString("/Menus/Layer_Visibility");
-
-            this.FollowTransformTextBlock.Text = resource.GetString("/Menus/Layer_FollowTransform");
-
             this.TagTypeTextBlock.Text = resource.GetString("/Menus/Layer_TagType");
         }
 
@@ -243,7 +237,85 @@ namespace Retouch_Photo2.Menus.Models
                 );
             };
         }
-        
+
+        private void ConstructOpacity3()
+        {
+            this.Opacity0Button.Click += (s, e) =>
+            {
+                float opacity = 0.0f;
+                this.SelectionViewModel.Opacity = opacity;
+
+                this.MethodViewModel.ILayerChanged<float>
+                (
+                    set: (layer) => layer.Opacity = opacity,
+
+                    historyTitle: "Set opacity 0%",
+                    getHistory: (layer) => layer.Opacity,
+                    setHistory: (layer, previous) => layer.Opacity = previous
+                );
+            };
+
+            this.Opacity25Button.Click += (s, e) =>
+            {
+                float opacity = 0.25f;
+                this.SelectionViewModel.Opacity = opacity;
+
+                this.MethodViewModel.ILayerChanged<float>
+                (
+                    set: (layer) => layer.Opacity = opacity,
+
+                    historyTitle: "Set opacity 25%",
+                    getHistory: (layer) => layer.Opacity,
+                    setHistory: (layer, previous) => layer.Opacity = previous
+                );
+            };
+
+            this.Opacity50Button.Click += (s, e) =>
+            {
+                float opacity = 0.5f;
+                this.SelectionViewModel.Opacity = opacity;
+
+                this.MethodViewModel.ILayerChanged<float>
+                (
+                    set: (layer) => layer.Opacity = opacity,
+
+                    historyTitle: "Set opacity 50%",
+                    getHistory: (layer) => layer.Opacity,
+                    setHistory: (layer, previous) => layer.Opacity = previous
+                );
+            };
+
+            this.Opacity75Button.Click += (s, e) =>
+            {
+                float opacity = 0.75f;
+                this.SelectionViewModel.Opacity = opacity;
+
+                this.MethodViewModel.ILayerChanged<float>
+                (
+                    set: (layer) => layer.Opacity = opacity,
+
+                    historyTitle: "Set opacity 75%",
+                    getHistory: (layer) => layer.Opacity,
+                    setHistory: (layer, previous) => layer.Opacity = previous
+                );
+            };
+
+            this.Opacity100Button.Click += (s, e) =>
+            {
+                float opacity = 1.0f;
+                this.SelectionViewModel.Opacity = opacity;
+
+                this.MethodViewModel.ILayerChanged<float>
+                (
+                    set: (layer) => layer.Opacity = opacity,
+
+                    historyTitle: "Set opacity 100%",
+                    getHistory: (layer) => layer.Opacity,
+                    setHistory: (layer, previous) => layer.Opacity = previous
+                );
+            };
+        }
+
 
         //Blend Mode
         private void ConstructBlendMode()
@@ -292,26 +364,6 @@ namespace Retouch_Photo2.Menus.Models
         }
 
 
-        //FollowTransform
-        private void ConstructFollowTransform()
-        {
-            this.FollowTransformToggleButton.Click += (s, e) =>
-            {
-                bool isFollowTransform = !this.SelectionViewModel.IsFollowTransform;
-                this.SelectionViewModel.IsFollowTransform = isFollowTransform;
-                
-                this.MethodViewModel.ILayerChanged<bool>
-                (
-                    set: (layer) => layer.Style.IsFollowTransform = isFollowTransform,
-
-                    historyTitle: "Set style follow transform",
-                    getHistory: (layer) => layer.Style.IsFollowTransform,
-                    setHistory: (layer, previous) => layer.Style.IsFollowTransform = previous
-                );
-            };
-        }
-
-
         //Tag Type
         private void ConstructTagType()
         {
@@ -328,7 +380,7 @@ namespace Retouch_Photo2.Menus.Models
                     getHistory: (layer) => layer.TagType,
                     setHistory: (layer, previous) => layer.TagType = previous
                 );
-            };          
+            };
         }
 
     }

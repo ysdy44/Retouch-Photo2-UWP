@@ -124,6 +124,10 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructJoin();
             this.ConstructOffset1();
             this.ConstructOffset2();
+
+            this.ConstructIsFollowTransform();
+            this.ConstructIsStrokeBehindFill();
+            this.ConstructIsStrokeWidthFollowScale();
         }
     }
 
@@ -143,8 +147,12 @@ namespace Retouch_Photo2.Menus.Models
             this.CapTextBlock.Text = resource.GetString("/Strokes/Cap");
             this.JoinTextBlock.Text = resource.GetString("/Strokes/Join");
             this.OffsetTextBlock.Text = resource.GetString("/Strokes/Offset");
+
+            this.IsFollowTransformTextBlock.Text = resource.GetString("/Strokes/IsFollowTransform");
+            this.IsStrokeBehindFillTextBlock.Text = resource.GetString("/Strokes/IsStrokeBehindFill");
+            this.IsStrokeWidthFollowScaleTextBlock.Text = resource.GetString("/Strokes/IsStrokeWidthFollowScale");
         }
-        
+
     }
 
     /// <summary>
@@ -234,8 +242,7 @@ namespace Retouch_Photo2.Menus.Models
                 );
             };
         }
-        
-        
+                
 
         //Cap
         private void ConstructCap()
@@ -341,6 +348,66 @@ namespace Retouch_Photo2.Menus.Models
                     historyTitle: "Set stroke width",
                     getHistory: (layer) => layer.Style.StartingStrokeStyle,
                     setHistory: (layer, previous) => layer.Style.StrokeStyle = previous
+                );
+            };
+        }
+
+
+        //IsFollowTransform
+        private void ConstructIsFollowTransform()
+        {
+            this.IsFollowTransformCheckBox.Click += (s, e) =>
+            {
+                bool isFollowTransform = !this.SelectionViewModel.IsFollowTransform;
+                this.SelectionViewModel.IsFollowTransform = isFollowTransform;
+
+                this.MethodViewModel.ILayerChanged<bool>
+                (
+                    set: (layer) => layer.Style.IsFollowTransform = isFollowTransform,
+
+                    historyTitle: "Set style is follow transform",
+                    getHistory: (layer) => layer.Style.IsFollowTransform,
+                    setHistory: (layer, previous) => layer.Style.IsFollowTransform = previous
+                );
+            };
+        }
+
+
+        //IsStrokeBehindFill
+        private void ConstructIsStrokeBehindFill()
+        {
+            this.IsStrokeBehindFillCheckBox.Click += (s, e) =>
+            {
+                bool IsStrokeBehindFill = !this.SelectionViewModel.IsStrokeBehindFill;
+                this.SelectionViewModel.IsStrokeBehindFill = IsStrokeBehindFill;
+
+                this.MethodViewModel.ILayerChanged<bool>
+                (
+                    set: (layer) => layer.Style.IsStrokeBehindFill = IsStrokeBehindFill,
+
+                    historyTitle: "Set style is stroke behind fill",
+                    getHistory: (layer) => layer.Style.IsStrokeBehindFill,
+                    setHistory: (layer, previous) => layer.Style.IsStrokeBehindFill = previous
+                );
+            };
+        }
+
+
+        //IsStrokeWidthFollowScale
+        private void ConstructIsStrokeWidthFollowScale()
+        {
+            this.IsStrokeWidthFollowScaleCheckBox.Click += (s, e) =>
+            {
+                bool IsStrokeWidthFollowScale = !this.SelectionViewModel.IsStrokeWidthFollowScale;
+                this.SelectionViewModel.IsStrokeWidthFollowScale = IsStrokeWidthFollowScale;
+
+                this.MethodViewModel.ILayerChanged<bool>
+                (
+                    set: (layer) => layer.Style.IsStrokeWidthFollowScale = IsStrokeWidthFollowScale,
+
+                    historyTitle: "Set style is follow transform",
+                    getHistory: (layer) => layer.Style.IsStrokeWidthFollowScale,
+                    setHistory: (layer, previous) => layer.Style.IsStrokeWidthFollowScale = previous
                 );
             };
         }

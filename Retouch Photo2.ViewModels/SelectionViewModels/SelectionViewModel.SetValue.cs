@@ -1,13 +1,8 @@
 ﻿using FanKit.Transformers;
-using Retouch_Photo2.Blends;
 using Retouch_Photo2.Layers;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Numerics;
-using Windows.UI;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.ViewModels
