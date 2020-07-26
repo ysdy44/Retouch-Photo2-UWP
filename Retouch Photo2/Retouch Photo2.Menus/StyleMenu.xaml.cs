@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Menus.Models
 {
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Styles.Style"/>.
+    /// Menu of <see cref = "Retouch_Photo2.Styles.IStyle"/>.
     /// </summary>
     public sealed partial class StyleMenu : Expander, IMenu 
     {
@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Menus.Models
     }
 
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Styles.Style"/>.
+    /// Menu of <see cref = "Retouch_Photo2.Styles.IStyle"/>.
     /// </summary>
     public sealed partial class StyleMenu : Expander, IMenu 
     {
@@ -100,7 +100,7 @@ namespace Retouch_Photo2.Menus.Models
                         StyleCategory styleCategory = StyleCategorys.FirstOrDefault();
                         if (styleCategory != null)
                         {
-                            IEnumerable<Retouch_Photo2.Styles.Style> Styles = styleCategory.Styles;
+                            IEnumerable<Retouch_Photo2.Styles.IStyle> Styles = styleCategory.Styles;
                             this.StylesGridView.ItemsSource = Styles.ToList();
                         }
                     }
@@ -109,16 +109,16 @@ namespace Retouch_Photo2.Menus.Models
 
             this.StylesGridView.ItemClick += (s, e) =>
             {
-                if (e.ClickedItem is Retouch_Photo2.Styles.Style item)
+                if (e.ClickedItem is Retouch_Photo2.Styles.IStyle item)
                 {
                     Transformer transformer = this.SelectionViewModel.Transformer;
 
-                    this.MethodViewModel.ILayerChanged<Retouch_Photo2.Styles.Style>
+                    this.MethodViewModel.ILayerChanged<Retouch_Photo2.Styles.IStyle>
                     (
                         set: (layer) =>
                         {
                             Transformer transformer2 = layer.Transform.Transformer;
-                            Retouch_Photo2.Styles.Style style2 = item.Clone();
+                            Retouch_Photo2.Styles.IStyle style2 = item.Clone();
                             style2.CacheTransform();
                             style2.DeliverBrushPoints(transformer2);
                             layer.Style = style2;
@@ -132,7 +132,7 @@ namespace Retouch_Photo2.Menus.Models
                         setHistory: (layer, previous) => layer.Style = previous.Clone()
                     );
 
-                    Retouch_Photo2.Styles.Style style = item.Clone();
+                    Retouch_Photo2.Styles.IStyle style = item.Clone();
                     style.CacheTransform();
                     style.DeliverBrushPoints(transformer);
                     this.SelectionViewModel.SetStyle(style);

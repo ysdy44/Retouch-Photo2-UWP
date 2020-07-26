@@ -202,7 +202,7 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> Sets the style. </summary>  
-        public void SetStyle(Style style)
+        public void SetStyle(IStyle style)
         {
             if (style == null) return;
 

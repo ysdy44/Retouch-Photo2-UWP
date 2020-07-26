@@ -114,6 +114,7 @@
     <Compile Include="ShowControl.xaml.cs">
       <DependentUpon>ShowControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IStyle.cs" />
     <Compile Include="Style.cs" />
     <Compile Include="StyleCategory.cs" />
     <Compile Include="XMLs\XML.Style.cs" />

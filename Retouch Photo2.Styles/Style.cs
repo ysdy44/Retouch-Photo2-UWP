@@ -9,54 +9,54 @@ namespace Retouch_Photo2.Styles
     /// <summary>
     /// Define the object used to draw geometry.
     /// </summary>
-    public partial class Style : ICacheTransform
+    public partial class Style : IStyle
     {
 
         /// <summary> Name </summary>
         public string Name { get; set; } = string.Empty;
 
         /// <summary> Gets or sets whether the style follows the transform. </summary>
-        public bool IsFollowTransform = true;
+        public bool IsFollowTransform { get; set; } = true;
 
         /// <summary> Gets or sets whether the stroke is behind the fill.. </summary>
-        public bool IsStrokeBehindFill = false;
+        public bool IsStrokeBehindFill { get; set; } = false;
 
         /// <summary> Gets or sets Style's fill. </summary>
-        public IBrush Fill = new BrushBase();
-        /// <summary> The cache of <see cref="Style.Fill"/>. </summary>
+        public IBrush Fill { get; set; } = new BrushBase();
+        /// <summary> The cache of <see cref="IStyle.Fill"/>. </summary>
         public IBrush StartingFill { get; private set; }
-        /// <summary> Cache the <see cref="Style.Fill"/>. </summary>
+        /// <summary> Cache the <see cref="IStyle.Fill"/>. </summary>
         public void CacheFill() => this.StartingFill = this.Fill.Clone();
         
         /// <summary> Gets or sets Style's stroke. </summary>
-        public IBrush Stroke = new BrushBase();
-        /// <summary> The cache of <see cref="Style.Stroke"/>. </summary>
+        public IBrush Stroke { get; set; } = new BrushBase();
+        /// <summary> The cache of <see cref="IStyle.Stroke"/>. </summary>
         public IBrush StartingStroke { get; private set; }
-        /// <summary> Cache the <see cref="Style.Stroke"/>. </summary>
+        /// <summary> Cache the <see cref="IStyle.Stroke"/>. </summary>
         public void CacheStroke() => this.StartingStroke = this.Stroke.Clone();
 
         /// <summary> Gets or sets whether the StrokeWidth follows the scale. </summary>
-        public bool IsStrokeWidthFollowScale = false;
+        public bool IsStrokeWidthFollowScale { get; set; } = false;
 
         /// <summary> Gets or sets Style's stroke-width. </summary>
-        public float StrokeWidth = 1;
-        /// <summary> The cache of <see cref="Style.StrokeWidth"/>. </summary>
+        public float StrokeWidth { get; set; } = 1;
+        /// <summary> The cache of <see cref="IStyle.StrokeWidth"/>. </summary>
         public float StartingStrokeWidth { get; private set; }
-        /// <summary> Cache the <see cref="Style.StrokeWidth"/>. </summary>
+        /// <summary> Cache the <see cref="IStyle.StrokeWidth"/>. </summary>
         public void CacheStrokeWidth() => this.StartingStrokeWidth = this.StrokeWidth;
         
         /// <summary> Gets or sets Style's stroke-style. </summary>
-        public CanvasStrokeStyle StrokeStyle = new CanvasStrokeStyle();
-        /// <summary> The cache of <see cref="Style.StrokeStyle"/>. </summary>
+        public CanvasStrokeStyle StrokeStyle { get; set; } = new CanvasStrokeStyle();
+        /// <summary> The cache of <see cref="IStyle.StrokeStyle"/>. </summary>
         public CanvasStrokeStyle StartingStrokeStyle { get; private set; }
-        /// <summary> Cache the <see cref="Style.StrokeStyle"/>. </summary>
+        /// <summary> Cache the <see cref="IStyle.StrokeStyle"/>. </summary>
         public void CacheStrokeStyle() => this.StartingStrokeStyle = this.StrokeStyle.Clone();
                
         /// <summary> Gets or sets Style's transparency. </summary>
-        public IBrush Transparency = new BrushBase();
-        /// <summary> The cache of <see cref="Style.Transparency"/>. </summary>
+        public IBrush Transparency { get; set; } = new BrushBase();
+        /// <summary> The cache of <see cref="IStyle.Transparency"/>. </summary>
         public IBrush StartingTransparency { get; private set; }
-        /// <summary> Cache the <see cref="Style.Transparency"/>. </summary>
+        /// <summary> Cache the <see cref="IStyle.Transparency"/>. </summary>
         public void CacheTransparency() => this.StartingTransparency = this.Transparency.Clone();
         
         //@Interface
@@ -119,7 +119,7 @@ namespace Retouch_Photo2.Styles
         /// Get own copy.
         /// </summary>
         /// <returns> The cloned style. </returns>
-        public Style Clone()
+        public IStyle Clone()
         {
             return new Style
             {

@@ -103,7 +103,7 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary> Gets or sets the style. </summary>
-        public Retouch_Photo2.Styles.Style Style { get; set; } = new Retouch_Photo2.Styles.Style();
+        public Retouch_Photo2.Styles.IStyle Style { get; set; } = new Retouch_Photo2.Styles.Style();
         /// <summary> Gets or sets the transform. </summary>
         public Transform Transform { get; set; } = new Transform();
         /// <summary> Gets or sets the effect. </summary>

@@ -79,7 +79,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Gets the stand geometry style.
         /// </summary>
-        public Style StandGeometryStyle
+        public IStyle StandGeometryStyle
         {
             get
             {
@@ -87,7 +87,7 @@ namespace Retouch_Photo2.ViewModels
                 {
                     //CacheBrush
                     Transformer transformer = layer.Transform.Transformer;
-                    Style style = layer.Style.Clone();
+                    IStyle style = layer.Style.Clone();
                     style.OneBrushPoints(transformer);
                     return style;
                 }
@@ -109,7 +109,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Gets the stand curve style.
         /// </summary>
-        public Style StandCurveStyle
+        public IStyle StandCurveStyle
         {
             get
             {
@@ -117,7 +117,7 @@ namespace Retouch_Photo2.ViewModels
                 {
                     //CacheBrush
                     Transformer transformer = layer.Transform.Transformer;
-                    Style style = layer.Style.Clone();
+                    IStyle style = layer.Style.Clone();
                     style.OneBrushPoints(transformer);
                     return style;
                 }
@@ -139,7 +139,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Gets the stand text style.
         /// </summary>
-        public Style StandTextStyle
+        public IStyle StandTextStyle
         {
             get
             {
@@ -147,7 +147,7 @@ namespace Retouch_Photo2.ViewModels
                 {
                     //CacheBrush
                     Transformer transformer = layer.Transform.Transformer;
-                    Style style = layer.Style.Clone();
+                    IStyle style = layer.Style.Clone();
                     style.OneBrushPoints(transformer);
                     return style;
                 }

@@ -3,7 +3,7 @@
 namespace Retouch_Photo2.Styles
 {
     /// <summary>
-    /// Category of <see cref = "Style" />.
+    /// Category of <see cref = "IStyle" />.
     /// </summary>
     public class StyleCategory
     {
@@ -13,6 +13,6 @@ namespace Retouch_Photo2.Styles
         /// <summary>
         /// The source data.
         /// </summary>
-        public IList<Style> Styles { get; set; } = new List<Style>();
+        public IList<IStyle> Styles { get; set; } = new List<IStyle>();
     }
 }

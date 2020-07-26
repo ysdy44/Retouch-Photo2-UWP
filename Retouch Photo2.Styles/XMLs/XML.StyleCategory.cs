@@ -34,7 +34,7 @@ namespace Retouch_Photo2.Styles
         ///  Loads a <see cref="StyleCategory"/> from an XElement.
         /// </summary>
         /// <param name="element"> The source XElement. </param>
-        /// <returns> The loaded <see cref="Style"/>s. </returns>
+        /// <returns> The loaded <see cref="IStyle"/>s. </returns>
         public static StyleCategory LoadStyleCategory(XElement element)
         {
             StyleCategory StyleCategory = new StyleCategory();

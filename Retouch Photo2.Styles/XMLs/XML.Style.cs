@@ -11,12 +11,12 @@ namespace Retouch_Photo2.Styles
     {
 
         /// <summary>
-        /// Saves the entire <see cref="Style"/> to a XElement.
+        /// Saves the entire <see cref="IStyle"/> to a XElement.
         /// </summary>
         /// <param name="elementName"> The element name. </param>
         /// <param name="style"> The source data. </param>
         /// <returns> The saved XElement. </returns>
-        public static XElement SaveStyle(string elementName, Style style)
+        public static XElement SaveStyle(string elementName, IStyle style)
         {
             XElement element = new XElement(elementName);
 
@@ -39,13 +39,13 @@ namespace Retouch_Photo2.Styles
         }
 
         /// <summary>
-        ///  Loads a <see cref="Style"/> from an XElement.
+        ///  Loads a <see cref="IStyle"/> from an XElement.
         /// </summary>
         /// <param name="element"> The source XElement. </param>
-        /// <returns> The loaded <see cref="Style"/>. </returns>
-        public static Style LoadStyle(XElement element)
+        /// <returns> The loaded <see cref="IStyle"/>. </returns>
+        public static IStyle LoadStyle(XElement element)
         {
-            Style style = new Style();
+            IStyle style = new Style();
 
             if (element.Attribute("Name") is XAttribute name) style.Name = name.Value;
 

@@ -21,9 +21,9 @@ namespace Retouch_Photo2
         /// <summary> Add a <see cref="ImageLayer"/>. </summary>
         AddImage,
 
-        /// <summary> Make <see cref="Retouch_Photo2.Styles.Style.Fill"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
+        /// <summary> Make <see cref="Retouch_Photo2.Styles.IStyle.Fill"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
         FillImage,
-        /// <summary> Make <see cref="Retouch_Photo2.Styles.Style.Stroke"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
+        /// <summary> Make <see cref="Retouch_Photo2.Styles.IStyle.Stroke"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
         StrokeImage,
 
         /// <summary> Select a image in <see cref= "ImageTool" />. </summary>
@@ -48,9 +48,9 @@ namespace Retouch_Photo2
         /// <summary> Add a <see cref="ImageLayer"/>. </summary>
         public static Action<Photo> AddImageCallBack;
 
-        /// <summary> Make <see cref="Retouch_Photo2.Styles.Style.Fill"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
+        /// <summary> Make <see cref="Retouch_Photo2.Styles.IStyle.Fill"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
         public static Action<Photo> FillImageCallBack;
-        /// <summary> Make <see cref="Retouch_Photo2.Styles.Style.Stroke"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
+        /// <summary> Make <see cref="Retouch_Photo2.Styles.IStyle.Stroke"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
         public static Action<Photo> StrokeImageCallBack;
 
         /// <summary> Select a image in <see cref= "ImageTool" />. </summary>

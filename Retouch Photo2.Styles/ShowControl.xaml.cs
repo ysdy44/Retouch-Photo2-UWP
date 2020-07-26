@@ -14,17 +14,17 @@ namespace Retouch_Photo2.Styles
         #region DependencyProperty
 
         /// <summary> Gets or sets <see cref = "ShowControl" />'s style. </summary>
-        public Retouch_Photo2.Styles.Style Style2
+        public Retouch_Photo2.Styles.IStyle Style2
         {
-            get { return (Retouch_Photo2.Styles.Style)GetValue(Style2Property); }
+            get { return (Retouch_Photo2.Styles.IStyle)GetValue(Style2Property); }
             set { SetValue(Style2Property, value); }
         }
         /// <summary> Identifies the <see cref = "ShowControl.Style2" /> dependency property. </summary>
-        public static readonly DependencyProperty Style2Property = DependencyProperty.Register(nameof(Style2), typeof(Retouch_Photo2.Styles.Style), typeof(ShowControl), new PropertyMetadata(null, (sender, e) =>
+        public static readonly DependencyProperty Style2Property = DependencyProperty.Register(nameof(Style2), typeof(Retouch_Photo2.Styles.IStyle), typeof(ShowControl), new PropertyMetadata(null, (sender, e) =>
         {
             ShowControl con = (ShowControl)sender;
 
-            if (e.NewValue is Retouch_Photo2.Styles.Style value)
+            if (e.NewValue is Retouch_Photo2.Styles.IStyle value)
             {
                 con.Shape.Fill = value.Fill.ToBrush();
 

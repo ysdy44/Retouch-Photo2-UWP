@@ -10,7 +10,7 @@ namespace Retouch_Photo2.Styles
     public static partial class XML
     {
         /// <summary>
-        /// Saves the entire <see cref="Style"/>Categorys to a XDocument.
+        /// Saves the entire <see cref="IStyle"/>Categorys to a XDocument.
         /// </summary>
         /// <param name="styleCategorys"> The source data. </param>
         /// <returns> The saved XDocument. </returns>
@@ -31,10 +31,10 @@ namespace Retouch_Photo2.Styles
         }
 
         /// <summary>
-        ///  Loads a <see cref="Style"/>Categorys from an XElement.
+        ///  Loads a <see cref="IStyle"/>Categorys from an XElement.
         /// </summary>
         /// <param name="document"> The source XDocument. </param>
-        /// <returns> The loaded <see cref="Style"/>s. </returns>
+        /// <returns> The loaded <see cref="IStyle"/>s. </returns>
         public static IEnumerable<StyleCategory> LoadStyleCategorys(XDocument document)
         {
             if (document.Element("Root") is XElement root)

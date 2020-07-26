@@ -9,6 +9,7 @@ using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Styles;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -201,7 +202,7 @@ namespace Retouch_Photo2.Menus.Models
                 if (layer.CreateGeometry(this.ViewModel.CanvasDevice) is CanvasGeometry geometry2)
                 {
                     CanvasGeometry strokeGeometry = geometry2.Stroke(strokeWidth, strokeStyle);
-                    Styles.Style strokeStyleClone = new Styles.Style
+                    IStyle strokeStyleClone = new Retouch_Photo2.Styles.Style
                     {
                         Fill = stroke.Clone()
                     };
@@ -270,7 +271,7 @@ namespace Retouch_Photo2.Menus.Models
         private void Combine(CanvasGeometryCombine combine)
         {
             CanvasGeometry geometry = null;
-            Styles.Style style = null;
+            Styles.IStyle style = null;
 
             CanvasGeometry other = null;
 
@@ -328,7 +329,7 @@ namespace Retouch_Photo2.Menus.Models
 
 
         //Create curve layer
-        private ILayer CreateCurveLayer(CanvasGeometry geometry, Styles.Style style)
+        private ILayer CreateCurveLayer(CanvasGeometry geometry, IStyle style)
         {
             NodeCollection nodes = new NodeCollection(geometry);
             if (nodes == null) return null;

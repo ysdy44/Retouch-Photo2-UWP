@@ -579,8 +579,8 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="setHistory"> The sets of history T. </param>
         public void StyleChanged<T>
         (
-            Action<Style, Transformer> set,
-            string historyTitle, Func<Style, T> getHistory, Action<Style, T> setHistory
+            Action<IStyle, Transformer> set,
+            string historyTitle, Func<IStyle, T> getHistory, Action<IStyle, T> setHistory
         )
         {
             //History
@@ -616,7 +616,7 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        public void StyleChangeStarted(Action<Style> cache)
+        public void StyleChangeStarted(Action<IStyle> cache)
         {
             //Selection
             this.SetValueWithChildrenOnlyGroup((layerage) =>
@@ -628,7 +628,7 @@ namespace Retouch_Photo2.ViewModels
             this.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
 
-        public void StyleChangeDelta(Action<Style> set)
+        public void StyleChangeDelta(Action<IStyle> set)
         {
             //Selection
             this.SetValueWithChildrenOnlyGroup((layerage) =>
@@ -646,11 +646,11 @@ namespace Retouch_Photo2.ViewModels
 
         public void StyleChangeCompleted<T>
         (
-            Action<Style> set,
+            Action<IStyle> set,
 
             string historyTitle,
-            Func<Style, T> getHistory,
-            Action<Style, T> setHistory
+            Func<IStyle, T> getHistory,
+            Action<IStyle, T> setHistory
         )
         {
             //History
