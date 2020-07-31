@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Tools.Elements;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
 
@@ -167,7 +168,7 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.None: break;
 
                 case BrushType.Color:
-                    DrawPage.StrokeColorShowAt(this.ShowControl);
+                    StrokeColorEllipse.ShowAt(this.ShowControl);
                     break;
 
                 case BrushType.LinearGradient:

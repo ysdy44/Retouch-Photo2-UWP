@@ -40,10 +40,7 @@
         
         <Grid.Resources>
 
-            <!--Flyout-->           
-            <Flyout x:Name="FillColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <elements:ColorPicker2 x:Name="FillColorPicker"/>
-            </Flyout>
+            <!--Flyout-->         
             <Flyout x:Name="StrokeColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
             </Flyout>

@@ -72,7 +72,6 @@ namespace Retouch_Photo2
 
 
             //FlyoutTool
-            this.ConstructColorFlyout(); 
             Retouch_Photo2.Tools.Elements.MoreTransformButton.Flyout = this.MoreTransformFlyout;
             Retouch_Photo2.Tools.Elements.MoreCreateButton.Flyout = this.MoreCreateFlyout;
             

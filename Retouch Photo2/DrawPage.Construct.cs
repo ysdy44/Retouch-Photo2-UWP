@@ -1,14 +1,11 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Imaging;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2
@@ -216,101 +213,7 @@ namespace Retouch_Photo2
             this.RenameTextBox.Text = this.SelectionViewModel.LayerName;
 
             this.RenameDialog.Show();
-        }
-
-
-        #region ColorPicker
-
-
-        //@Static
-        /// <summary>
-        /// Displays the fill-color flyout relative to the specified element.
-        /// </summary>
-        public static Action<FrameworkElement> FillColorShowAt;
-        /// <summary>
-        /// Displays the stroke-color flyout relative to the specified element.
-        /// </summary>
-        public static Action<FrameworkElement> StrokeColorShowAt;
-
-
-
-        private void ConstructColorFlyout()
-        {
-            this.ConstructFillColor();
-            this.ConstructStrokeColor();
-        }
-
-
-        //FillColor
-        private void ConstructFillColor()
-        {
-            DrawPage.FillColorShowAt += (FrameworkElement placementTarget) =>
-            {
-                switch (this.SelectionViewModel.Fill.Type)
-                {
-                    case BrushType.Color:
-                        this.FillColorPicker.Color = this.SelectionViewModel.Fill.Color;
-                        break;
-                }
-                this.FillColorFlyout.ShowAt(placementTarget);
-            };
-
-            //@Focus
-            // Before Flyout Showed, Don't let TextBox Got Focus.
-            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
-            if (this.FillColorPicker.HexPicker is TextBox textBox)
-            {
-                textBox.IsEnabled = false;
-                this.FillColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
-                this.FillColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
-                textBox.GotFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
-                textBox.LostFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
-            }
-
-            this.FillColorPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodFillColorChanged(value);
-
-            this.FillColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.MethodFillColorChangeStarted(value);
-            this.FillColorPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.MethodFillColorChangeDelta(value);
-            this.FillColorPicker.ColorChangeCompleted += (s, value) => this.MethodViewModel.MethodFillColorChangeCompleted(value);
-        }
-
-
-        //StrokeColor
-        private void ConstructStrokeColor()
-        {
-            DrawPage.StrokeColorShowAt += (FrameworkElement placementTarget) =>
-            {
-                switch (this.SelectionViewModel.Stroke.Type)
-                {
-                    case BrushType.Color:
-                        this.StrokeColorPicker.Color = this.SelectionViewModel.Stroke.Color;
-                        break;
-                }
-                this.StrokeColorFlyout.ShowAt(placementTarget);
-            };
-
-            //@Focus
-            // Before Flyout Showed, Don't let TextBox Got Focus.
-            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
-            if (this.StrokeColorPicker.HexPicker is TextBox textBox)
-            {
-                textBox.IsEnabled = false;
-                this.StrokeColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
-                this.StrokeColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
-                textBox.GotFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
-                textBox.LostFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
-            }
-
-            this.StrokeColorPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodStrokeColorChanged(value);
-
-            this.StrokeColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeStarted(value);
-            this.StrokeColorPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.MethodStrokeColorChangeDelta(value);
-            this.StrokeColorPicker.ColorChangeCompleted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeCompleted(value);
-        }
-
-
-        #endregion
-
+        }        
 
     }
 }

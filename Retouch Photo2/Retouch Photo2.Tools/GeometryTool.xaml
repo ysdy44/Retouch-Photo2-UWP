@@ -17,12 +17,12 @@
             <ContentControl Width="8"/>
 
             <TextBlock x:Name="FillTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <brushs:ColorEllipse x:Name="FillColorEllipse" Brush="{x:Bind SelectionViewModel.Fill, Mode=OneWay}"/>
-
+            <toolsElements:FillColorEllipse/>
+            
             <ContentControl Width="4"/>
 
             <TextBlock x:Name="StrokeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <brushs:ColorEllipse x:Name="StrokeColorEllipse" Brush="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}"/>
+            <toolsElements:StrokeColorEllipse/>
 
             <ContentControl Width="8"/>
 

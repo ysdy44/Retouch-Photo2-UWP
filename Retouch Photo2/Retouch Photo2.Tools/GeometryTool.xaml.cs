@@ -70,15 +70,6 @@ namespace Retouch_Photo2.Tools
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.FillColorEllipse.Tapped += (s, e) =>
-            {
-                DrawPage.FillColorShowAt(this.FillColorEllipse);
-            };
-            this.StrokeColorEllipse.Tapped += (s, e) =>
-            {
-                DrawPage.StrokeColorShowAt(this.StrokeColorEllipse);
-            };
-
             this.StrokeShowControl.Tapped += (s, e) =>
             {
                 this.TipViewModel.ShowMenuLayoutAt(MenuType.Stroke, this.StrokeShowControl);
