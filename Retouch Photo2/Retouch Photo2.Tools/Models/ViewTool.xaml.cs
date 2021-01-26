@@ -27,7 +27,6 @@ namespace Retouch_Photo2.Tools.Models
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
 
 
         //@Content
@@ -115,8 +114,6 @@ namespace Retouch_Photo2.Tools.Models
         
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
 
 
         //@Converter

@@ -11,7 +11,6 @@ namespace Retouch_Photo2.Tools.Elements
     {
 
         //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
 

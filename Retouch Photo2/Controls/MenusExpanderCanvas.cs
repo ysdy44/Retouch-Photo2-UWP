@@ -13,8 +13,6 @@ namespace Retouch_Photo2.Controls
     {
 
         //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
                
 

@@ -123,7 +123,7 @@
                         <Setter Target = "RightBorder.CornerRadius" Value="8,0,0,8"/>
                         <Setter Target = "RightBorder.Margin" Value="0,20"/>
                         <Setter Target = "RightBorder.BorderThickness" Value="1,1,0,1"/>
-
+                        
                         <Setter Target = "_RightWidthButton.Visibility" Value="Visible"/>
 
                     </VisualState.Setters>
@@ -223,8 +223,11 @@
 
         <!--DismissOverlay-->
         <Border x:Name="DismissOverlay" Visibility="Collapsed" Grid.Column="1" Grid.RowSpan="2" Background="{ThemeResource AppStroke}"/>
+        <!--@Acrylic-->
         <!--Left-->
-        <Border x:Name="LeftBorder" Width="70" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" BorderThickness="0,0,1,0" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
+        <Border x:Name="LeftBorder" Width="70" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" BorderThickness="0,0,1,0" BorderBrush="{ThemeResource AppStroke}" 
+                             apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                             apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>
@@ -239,8 +242,11 @@
             </animations:Implicit.HideAnimations>
 
         </Border>
+        <!--@Acrylic-->
         <!--Right-->
-        <Border x:Name="RightBorder" Width="220" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Right" BorderThickness="1,0,0,0" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
+        <Border x:Name="RightBorder" Width="220" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Right" BorderThickness="1,0,0,0" BorderBrush="{ThemeResource AppStroke}" 
+                         apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                         apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
 
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>

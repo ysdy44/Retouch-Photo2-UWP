@@ -680,7 +680,7 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="Foreground" Value="{ThemeResource TextControlForeground}"/>
-        <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
+        <Setter Property="Background" Value="{ThemeResource AppFill}"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>

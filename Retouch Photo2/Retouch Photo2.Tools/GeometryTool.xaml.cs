@@ -17,12 +17,6 @@ namespace Retouch_Photo2.Tools
     public abstract partial class GeometryTool
     {
 
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-
-
         /// <summary>
         /// Create a <see cref="GeometryLayer"/>.
         /// </summary>
@@ -55,9 +49,7 @@ namespace Retouch_Photo2.Tools
     {
 
         //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
 

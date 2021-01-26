@@ -17,13 +17,6 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class TransformerMenu : Expander, IMenu 
     {
 
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
-
-
         //@Content     
         public override UIElement MainPage => this.TransformerMainPage;
         TransformerMainPage TransformerMainPage = new TransformerMainPage();

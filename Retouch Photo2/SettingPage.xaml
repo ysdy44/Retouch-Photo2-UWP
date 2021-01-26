@@ -82,11 +82,11 @@
                             </Setter>
                         </Style>
                         <Style x:Name="KeyContentControlBackgroundStyle" TargetType="ContentControl" BasedOn="{StaticResource KeyContentControlStyle}">
-                            <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
+                            <Setter Property="Background" Value="{ThemeResource AppFill}"/>
                         </Style>
 
                         <Style x:Key="LayerHeightRadioButton" TargetType="RadioButton">
-                            <Setter Property="Background" Value="{StaticResource AppBackground}" />
+                            <Setter Property="Background" Value="{StaticResource AppFill}" />
                             <Setter Property="Foreground" Value="{ThemeResource RadioButtonForeground}" />
                             <Setter Property="BorderBrush" Value="{ThemeResource RadioButtonBorderBrush}" />
                             <Setter Property="Padding" Value="8,6,0,0" />
@@ -285,7 +285,7 @@
                             <Setter Property="HorizontalAlignment" Value="Stretch"/>
                             <Setter Property="Height" Value="44"/>
                             <Setter Property="Padding" Value="12,0"/>
-                            <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
+                            <Setter Property="Background" Value="{ThemeResource AppFill}"/>
                         </Style>
 
                     </StackPanel.Resources>

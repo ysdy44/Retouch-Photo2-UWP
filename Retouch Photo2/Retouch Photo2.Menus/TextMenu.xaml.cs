@@ -22,11 +22,6 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class TextMenu : Expander, IMenu
     {
 
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-
-
         //@Content     
         public override UIElement MainPage => this.TextMainPage;
         TextMainPage TextMainPage = new TextMainPage();
@@ -97,7 +92,6 @@ namespace Retouch_Photo2.Menus.Models
     {
 
         //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         

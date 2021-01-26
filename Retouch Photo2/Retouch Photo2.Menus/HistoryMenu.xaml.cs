@@ -12,10 +12,6 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class HistoryMenu : Expander, IMenu 
     {
 
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-
-
         //@Content     
         public override UIElement MainPage => this.HistoryMainPage;
         HistoryMainPage HistoryMainPage = new HistoryMainPage();

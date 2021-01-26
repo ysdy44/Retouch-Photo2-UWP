@@ -26,11 +26,6 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class EditMenu : Expander, IMenu 
     {
 
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-
 
         //@Content       
         public override UIElement MainPage => this.EditMainPage;
@@ -83,10 +78,12 @@ namespace Retouch_Photo2.Menus.Models
     /// </summary>
     public sealed partial class EditMainPage : UserControl
     {
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+
 
         //@Construct
         /// <summary>

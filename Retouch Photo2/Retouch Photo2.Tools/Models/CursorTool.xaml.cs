@@ -1,15 +1,7 @@
-﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Tools.Icons;
-using Retouch_Photo2.ViewModels;
-using System.Numerics;
-using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
-using FanKit.Transformers;
+﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools.Icons;
@@ -41,9 +33,6 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Content
@@ -259,9 +248,6 @@ namespace Retouch_Photo2.Tools.Models
     {
 
         //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
         

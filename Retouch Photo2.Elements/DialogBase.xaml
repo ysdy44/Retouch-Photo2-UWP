@@ -4,6 +4,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:apiContractNotPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
+    xmlns:apiContractPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
     mc:Ignorable="d"
     d:DesignHeight="800"
     d:DesignWidth="800"
@@ -59,6 +61,7 @@
             Visibility="Collapsed"
             Background="{ThemeResource AppStroke}">
 
+        <!--@Acrylic-->
         <Border x:Name="RootGrid" 
               HorizontalAlignment="Center"
               VerticalAlignment="Center"
@@ -66,7 +69,8 @@
               MinHeight="120"
               BorderThickness="1"
               BorderBrush="{ThemeResource AppStroke}" 
-              Background="{ThemeResource AppFill}"                               
+              apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+              apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}"                     
               CornerRadius="{StaticResource AppCornerRadius}" 
               RenderTransformOrigin="0.5,0.5"
               >

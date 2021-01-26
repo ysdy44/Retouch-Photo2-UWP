@@ -18,12 +18,6 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class EffectMenu : Expander, IMenu 
     {
 
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-
-
         //@Content     
         public override UIElement MainPage => this.EffectMainPage;
         EffectMainPage EffectMainPage = new EffectMainPage();
@@ -90,7 +84,6 @@ namespace Retouch_Photo2.Menus.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
 
 
         //@Delegate

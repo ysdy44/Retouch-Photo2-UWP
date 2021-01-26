@@ -1,35 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="43956ysdy44.RetouchPhoto2" Publisher="CN=9DF2B1A6-C2CE-481C-9997-A3B93DA91100" Version="1.1.9.0" />
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" 
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" 
+  IgnorableNamespaces="uap mp">
+  
+  <Identity 
+    Name="43956ysdy44.RetouchPhoto2" 
+    Publisher="CN=9DF2B1A6-C2CE-481C-9997-A3B93DA91100" 
+    Version="1.1.9.0" />
+  
   <mp:PhoneIdentity PhoneProductId="00ffa597-9780-4f67-9377-75dbc27f2d62" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  
   <Properties>
     <DisplayName>Retouch Photo2</DisplayName>
     <PublisherDisplayName>淹死的鱼ysdy44</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
+  
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
   </Dependencies>
+  
   <Resources>
     <Resource Language="x-generate" />
   </Resources>
+  
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="App">
-      <uap:VisualElements DisplayName="ms-resource:///resources/Title" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Retouch Photo2" BackgroundColor="#191919">
+    <Application Id="App" 
+                 Executable="$targetnametoken$.exe" 
+                 EntryPoint="Retouch_Photo2.App">
+      <uap:VisualElements 
+        DisplayName="ms-resource:///resources/Title" 
+        Square150x150Logo="Assets\Square150x150Logo.png" 
+        Square44x44Logo="Assets\Square44x44Logo.png" 
+        Description="Retouch Photo2" 
+        BackgroundColor="#191919">
+       
         <uap:LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\BadgeLogo.png" />
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="ms-resource:///resources/Title" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
+       
+        <uap:DefaultTile 
+          Wide310x150Logo="Assets\Wide310x150Logo.png"
+          ShortName="ms-resource:///resources/Title"           
+        Square310x310Logo="Assets\LargeTile.png" 
+          Square71x71Logo="Assets\SmallTile.png">
         </uap:DefaultTile>
+     
         <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#191919" />
+    
         <uap:InitialRotationPreference>
           <uap:Rotation Preference="portrait" />
           <uap:Rotation Preference="landscape" />
           <uap:Rotation Preference="portraitFlipped" />
           <uap:Rotation Preference="landscapeFlipped" />
         </uap:InitialRotationPreference>
+        
       </uap:VisualElements>
     </Application>
   </Applications>
+  
   <Capabilities>
     <Capability Name="internetClient" />
-  </Capabilities>
+  </Capabilities>  
 </Package>

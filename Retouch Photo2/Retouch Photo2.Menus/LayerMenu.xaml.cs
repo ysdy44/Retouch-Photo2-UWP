@@ -16,12 +16,6 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class LayerMenu : Expander, IMenu
     {
 
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-
-
         //@Content     
         public override UIElement MainPage => this.LayerMainPage;
         LayerMainPage LayerMainPage = new LayerMainPage();

@@ -13,12 +13,6 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class StrokeMenu : Expander, IMenu 
     {
 
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-
-
         //@Content     
         public override UIElement MainPage => this.StrokeMainPage;
         StrokeMainPage StrokeMainPage = new StrokeMainPage();
@@ -82,7 +76,6 @@ namespace Retouch_Photo2.Menus.Models
     {
 
         //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
 
