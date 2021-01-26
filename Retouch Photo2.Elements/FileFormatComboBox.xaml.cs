@@ -39,18 +39,18 @@ namespace Retouch_Photo2.Elements
         /// <summary> Gets or sets the format type. </summary>
         public CanvasBitmapFileFormat FileFormat
         {
-            get { return (CanvasBitmapFileFormat)GetValue(FileFormatProperty); }
-            set { SetValue(FileFormatProperty, value); }
+            get => (CanvasBitmapFileFormat)base.GetValue(FileFormatProperty);
+            set => base.SetValue(FileFormatProperty, value);
         }
         /// <summary> Identifies the <see cref = "FileFormatComboBox.FileFormat" /> dependency property. </summary>
         public static readonly DependencyProperty FileFormatProperty = DependencyProperty.Register(nameof(FileFormat), typeof(CanvasBitmapFileFormat), typeof(FileFormatComboBox), new PropertyMetadata(CanvasBitmapFileFormat.Jpeg, (sender, e) =>
         {
-            FileFormatComboBox con = (FileFormatComboBox)sender;
+            FileFormatComboBox control = (FileFormatComboBox)sender;
 
             if (e.NewValue is CanvasBitmapFileFormat value)
             {
-                con._vsFileFormat = value;
-                con.VisualState = con.VisualState;//State
+                control._vsFileFormat = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 

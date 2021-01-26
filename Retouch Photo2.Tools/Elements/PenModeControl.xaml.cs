@@ -24,13 +24,13 @@ namespace Retouch_Photo2.Tools.Elements
         /// <summary> Gets or sets the self control-point's mode </summary>
         public SelfControlPointMode ControlPointMode
         {
-            get { return (SelfControlPointMode)GetValue(ControlPointModeProperty); }
-            set { SetValue(ControlPointModeProperty, value); }
+            get => (SelfControlPointMode)base.GetValue(ControlPointModeProperty);
+            set => base.SetValue(ControlPointModeProperty, value);
         }
         /// <summary> Identifies the <see cref = "PenModeControl.ControlPointMode" /> dependency property. </summary>
         public static readonly DependencyProperty ControlPointModeProperty = DependencyProperty.Register(nameof(ControlPointMode), typeof(SelfControlPointMode), typeof(PenModeControl), new PropertyMetadata(SelfControlPointMode.None, (sender, e) =>
         {
-            PenModeControl con = (PenModeControl)sender;
+            PenModeControl control = (PenModeControl)sender;
 
             if (e.NewValue is SelfControlPointMode value)
             {
@@ -38,26 +38,26 @@ namespace Retouch_Photo2.Tools.Elements
                 {
                     case SelfControlPointMode.None:
                         {
-                            con.AngleCheckBox.IsChecked = false;
-                            con.LengthCheckBox.IsChecked = false;
+                            control.AngleCheckBox.IsChecked = false;
+                            control.LengthCheckBox.IsChecked = false;
                         }
                         break;
                     case SelfControlPointMode.Length:
                         {
-                            con.AngleCheckBox.IsChecked = false;
-                            con.LengthCheckBox.IsChecked = true;
+                            control.AngleCheckBox.IsChecked = false;
+                            control.LengthCheckBox.IsChecked = true;
                         }
                         break;
                     case SelfControlPointMode.Angle:
                         {
-                            con.AngleCheckBox.IsChecked = true;
-                            con.LengthCheckBox.IsChecked = false;
+                            control.AngleCheckBox.IsChecked = true;
+                            control.LengthCheckBox.IsChecked = false;
                         }
                         break;
                     case SelfControlPointMode.Disable:
                         {
-                            con.AngleCheckBox.IsChecked = true;
-                            con.LengthCheckBox.IsChecked = true;
+                            control.AngleCheckBox.IsChecked = true;
+                            control.LengthCheckBox.IsChecked = true;
                         }
                         break;
                 }

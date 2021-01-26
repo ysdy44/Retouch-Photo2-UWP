@@ -119,15 +119,15 @@
         </Grid.RowDefinitions>
 
         <!--Top-->
-        <Border Grid.Column="0" Style="{StaticResource AppRoundedBorderStyle}">
+        <Border Grid.Column="0" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
             <Grid>
                 <Rectangle x:Name="PhoneRectangle" StrokeDashArray="1 2" Stroke="{ThemeResource SystemAccentColor}" Style="{StaticResource RectangleStyle}"/>
                 <Border Padding="4,0" HorizontalAlignment="Center" Background="{ThemeResource AppForeground}">
                     <FontIcon x:Name="PhoneIcon" Glyph="&#xE8EA;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                 </Border>
             </Grid>
-        </Border>      
-        <Border Grid.Column="2" Style="{StaticResource AppRoundedBorderStyle}">
+        </Border>
+        <Border Grid.Column="2" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
             <Grid>
                 <Rectangle x:Name="PadRectangle" StrokeDashArray="1 2" Stroke="{ThemeResource SystemAccentColor}" Style="{StaticResource RectangleStyle}"/>
                 <Border Padding="4,0" HorizontalAlignment="Center" Background="{ThemeResource AppForeground}">
@@ -135,7 +135,7 @@
                 </Border>
             </Grid>
         </Border>
-        <Border Grid.Column="4" Style="{StaticResource AppRoundedBorderStyle}">
+        <Border Grid.Column="4" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
             <Grid>
                 <Rectangle x:Name="PCRectangle" StrokeDashArray="1 2" Stroke="{ThemeResource SystemAccentColor}" Style="{StaticResource RectangleStyle}"/>
                 <Border Padding="4,0" HorizontalAlignment="Center" Background="{ThemeResource AppForeground}">

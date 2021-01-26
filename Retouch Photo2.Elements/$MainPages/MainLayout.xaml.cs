@@ -103,8 +103,8 @@ namespace Retouch_Photo2.Elements.MainPages
         /// <summary> Gets or sets <see cref = "MainLayout" />'s selected count. </summary>
         public int SelectedCount
         {
-            get { return (int)GetValue(SelectedCountProperty); }
-            set { SetValue(SelectedCountProperty, value); }
+            get => (int)base.GetValue(SelectedCountProperty);
+            set => base.SetValue(SelectedCountProperty, value); 
         }
         /// <summary> Identifies the <see cref = "MainLayout.SelectedCount" /> dependency property. </summary>
         public static readonly DependencyProperty SelectedCountProperty = DependencyProperty.Register(nameof(SelectedCount), typeof(int), typeof(MainLayout), new PropertyMetadata(0));
@@ -113,8 +113,8 @@ namespace Retouch_Photo2.Elements.MainPages
         /// <summary> Gets or sets <see cref = "MainLayout" />'s selected is enable. </summary>
         public bool SelectedIsEnabled
         {
-            get { return (bool)GetValue(SelectedIsEnabledProperty); }
-            set { SetValue(SelectedIsEnabledProperty, value); }
+            get => (bool)base.GetValue(SelectedIsEnabledProperty);
+            set => base.SetValue(SelectedIsEnabledProperty, value);
         }
         /// <summary> Identifies the <see cref = "MainLayout.SelectedCount" /> dependency property. </summary>
         public static readonly DependencyProperty SelectedIsEnabledProperty = DependencyProperty.Register(nameof(SelectedIsEnabled), typeof(bool), typeof(MainLayout), new PropertyMetadata(false));

@@ -34,7 +34,7 @@
         </StackPanel>
 
         <!--More-->
-        <Button x:Name="MoreButton" Grid.Column="1" Style="{StaticResource AppCircleButtonStyle}">
+        <Button x:Name="MoreButton" Grid.Column="1" Background="{ThemeResource AppFill}" Style="{StaticResource AppCircleButtonStyle}">
             <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
 

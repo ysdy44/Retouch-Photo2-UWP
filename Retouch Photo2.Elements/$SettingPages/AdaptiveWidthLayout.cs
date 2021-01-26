@@ -21,21 +21,21 @@ namespace Retouch_Photo2.Elements.SettingPages
         /// <summary> Type of <see cref = "AdaptiveWidthLayout" />. </summary>
         public DeviceLayoutType Type
         {
-            get { return (DeviceLayoutType)GetValue(TypeProperty); }
-            set { SetValue(TypeProperty, value); }
+            get  => (DeviceLayoutType)base.GetValue(TypeProperty);
+            set => base.SetValue(TypeProperty, value);
         }
         /// <summary> Identifies the <see cref = "AdaptiveWidthLayout.Type" /> dependency property. </summary>
         public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(DeviceLayoutType), typeof(AdaptiveWidthLayout), new PropertyMetadata(DeviceLayoutType.PC, (sender, e) =>
         {
-            AdaptiveWidthLayout con = (AdaptiveWidthLayout)sender;
+            AdaptiveWidthLayout control = (AdaptiveWidthLayout)sender;
 
             if (e.NewValue is DeviceLayoutType value)
             {
                 switch (value)
                 {
-                    case DeviceLayoutType.Phone: con.Content = con.PhoneLayout; break;
-                    case DeviceLayoutType.Pad: con.Content = con.PadLayout; break;
-                    case DeviceLayoutType.PC: con.Content = con.PCLayout; break;
+                    case DeviceLayoutType.Phone: control.Content = control.PhoneLayout; break;
+                    case DeviceLayoutType.Pad: control.Content = control.PadLayout; break;
+                    case DeviceLayoutType.PC: control.Content = control.PCLayout; break;
                 }
             }
         }));

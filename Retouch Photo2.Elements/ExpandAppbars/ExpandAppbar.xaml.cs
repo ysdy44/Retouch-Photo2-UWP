@@ -128,6 +128,7 @@ namespace Retouch_Photo2.Elements
                 }
             };
             this.MoreButton.Click += (s, e) => this.Flyout.ShowAt(this.MoreButton);
+            this.SecondStackPanel.Tapped += (s, e) => this.Flyout.Hide();
         }
 
 

@@ -38,18 +38,18 @@ namespace Retouch_Photo2.Elements
         /// <summary> Mode of <see cref = "CompositeModeSegmented" />. </summary>
         public MarqueeCompositeMode Mode
         {
-            get { return (MarqueeCompositeMode)GetValue(ModeProperty); }
-            set { SetValue(ModeProperty, value); }
+            get  => (MarqueeCompositeMode)base.GetValue(ModeProperty);
+            set => base.SetValue(ModeProperty, value);
         }
         /// <summary> Identifies the <see cref = "CompositeModeSegmented.Mode" /> dependency property. </summary>
         public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(MarqueeCompositeMode), typeof(CompositeModeSegmented), new PropertyMetadata(MarqueeCompositeMode.New,(sender,e)=>
         {
-            CompositeModeSegmented con = (CompositeModeSegmented)sender;
+            CompositeModeSegmented control = (CompositeModeSegmented)sender;
 
             if (e.NewValue is MarqueeCompositeMode value)
             {
-                con._vsMode = value;
-                con.VisualState = con.VisualState;//State
+                control._vsMode = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
                
@@ -57,8 +57,8 @@ namespace Retouch_Photo2.Elements
         /// <summary> IsOpen of <see cref = "CompositeModeSegmented" />. </summary>
         public bool IsOpen
         {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
         }
         /// <summary> Identifies the <see cref = "CompositeModeSegmented.IsOpen" /> dependency property. </summary>
         public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(CompositeModeSegmented), new PropertyMetadata(false));

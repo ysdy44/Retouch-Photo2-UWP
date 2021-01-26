@@ -36,6 +36,12 @@ Vector Graphics Editing Tool, you can transform, fill graphics, support adjustme
 
 <br/>
 
+## Documentation for Retouch-Photo2-UWP.
+https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation
+
+
+<br/>
+
 ## Old version
 [Retouch-Photo-UWP](https://github.com/ysdy44/Retouch-Photo-UWP)
 ......

@@ -43,18 +43,18 @@ namespace Retouch_Photo2.Texts
         /// <summary> Alignment of <see cref = "FontAlignmentSegmented" />. </summary>
         public CanvasHorizontalAlignment Alignment
         {
-            get { return (CanvasHorizontalAlignment)GetValue(AlignmentProperty); }
-            set { SetValue(AlignmentProperty, value); }
+            get => (CanvasHorizontalAlignment)base.GetValue(AlignmentProperty);
+            set => base.SetValue(AlignmentProperty, value);
         }
         /// <summary> Identifies the <see cref = "FontAlignmentSegmented.Alignment" /> dependency property. </summary>
         public static readonly DependencyProperty AlignmentProperty = DependencyProperty.Register(nameof(Alignment), typeof(CanvasHorizontalAlignment), typeof(FontAlignmentSegmented), new PropertyMetadata(CanvasHorizontalAlignment.Left, (sender, e) =>
         {
-            FontAlignmentSegmented con = (FontAlignmentSegmented)sender;
+            FontAlignmentSegmented control = (FontAlignmentSegmented)sender;
 
             if (e.NewValue is CanvasHorizontalAlignment value)
             {
-                con._vsAlignment = value;
-                con.VisualState = con.VisualState;//State
+                control._vsAlignment = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 
@@ -62,8 +62,8 @@ namespace Retouch_Photo2.Texts
         /// <summary> IsOpen of <see cref = "FontAlignmentSegmented" />. </summary>
         public bool IsOpen
         {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
         }
         /// <summary> Identifies the <see cref = "FontAlignmentSegmented.IsOpen" /> dependency property. </summary>
         public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(FontAlignmentSegmented), new PropertyMetadata(false));

@@ -24,7 +24,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.isUndoEnabled = value;
-                this.OnPropertyChanged(nameof(this.IsUndoEnabled));//Notify 
+                this.OnPropertyChanged(nameof(IsUndoEnabled));//Notify 
             }
         }
         private bool isUndoEnabled;

@@ -27,21 +27,21 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets or sets the transparency. </summary>
         public IBrush Transparency
         {
-            get { return (IBrush)GetValue(TransparencyProperty); }
-            set { SetValue(TransparencyProperty, value); }
+            get  => (IBrush)base.GetValue(TransparencyProperty);
+            set => base.SetValue(TransparencyProperty, value);
         }
         /// <summary> Identifies the <see cref = "BrushTypeComboBox.Fill" /> dependency property. </summary>
         public static readonly DependencyProperty TransparencyProperty = DependencyProperty.Register(nameof(Transparency), typeof(IBrush), typeof(TransparencyTypeComboBox), new PropertyMetadata(null, (sender, e) =>
         {
-            TransparencyTypeComboBox con = (TransparencyTypeComboBox)sender;
+            TransparencyTypeComboBox control = (TransparencyTypeComboBox)sender;
 
             if (e.NewValue is IBrush value)
             {
-                con.Type = value.Type;
+                control.Type = value.Type;
             }
             else
             {
-                con.Type = BrushType.None;
+                control.Type = BrushType.None;
             }
         }));
 

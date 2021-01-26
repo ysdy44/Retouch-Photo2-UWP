@@ -47,7 +47,8 @@
 
     <Button x:Name="Button" Style="{StaticResource AppIconRoundedButtonStyle}">
         <Button.BorderBrush>
-            <SolidColorBrush x:Name="ButtonBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+            <!--Storyboard-->
+            <SolidColorBrush x:Name="ButtonBorderBrush" Color="{ThemeResource AppStrokeColor}"/>
         </Button.BorderBrush>
         
         <Button.Tag>

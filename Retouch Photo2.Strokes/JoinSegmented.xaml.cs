@@ -43,18 +43,18 @@ namespace Retouch_Photo2.Strokes
         /// <summary> Join of <see cref = "JoinSegmented" />. </summary>
         public CanvasLineJoin Join
         {
-            get { return (CanvasLineJoin)GetValue(JoinProperty); }
-            set { SetValue(JoinProperty, value); }
+            get => (CanvasLineJoin)base.GetValue(JoinProperty);
+            set => base.SetValue(JoinProperty, value);
         }
         /// <summary> Identifies the <see cref = "JoinSegmented.Join" /> dependency property. </summary>
         public static readonly DependencyProperty JoinProperty = DependencyProperty.Register(nameof(Join), typeof(CanvasLineJoin), typeof(JoinSegmented), new PropertyMetadata(CanvasLineJoin.Miter, (sender, e) =>
         {
-            JoinSegmented con = (JoinSegmented)sender;
+            JoinSegmented control = (JoinSegmented)sender;
 
             if (e.NewValue is CanvasLineJoin value)
             {
-                con._vsJoin = value;
-                con.VisualState = con.VisualState;//State
+                control._vsJoin = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 
@@ -62,8 +62,8 @@ namespace Retouch_Photo2.Strokes
         /// <summary> IsOpen of <see cref = "JoinSegmented" />. </summary>
         public bool IsOpen
         {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
         }
         /// <summary> Identifies the <see cref = "JoinSegmented.IsOpen" /> dependency property. </summary>
         public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(JoinSegmented), new PropertyMetadata(false));

@@ -24,18 +24,18 @@ namespace Retouch_Photo2.Tools.Elements
         /// <summary> Gets or sets the grid, horizontal or vertical. </summary>
         public PatternGridType GridType
         {
-            get { return (PatternGridType)GetValue(GridTypeProperty); }
-            set { SetValue(GridTypeProperty, value); }
+            get => (PatternGridType)base.GetValue(GridTypeProperty);
+            set => base.SetValue(GridTypeProperty, value);
         }
         /// <summary> Identifies the <see cref = "PatternGridTypeComboBox.GridType" /> dependency property. </summary>
         public static readonly DependencyProperty GridTypeProperty = DependencyProperty.Register(nameof(GridType), typeof(PatternGridType), typeof(PatternGridTypeComboBox), new PropertyMetadata(PatternGridType.Grid, (sender, e) =>
         {
-            PatternGridTypeComboBox con = (PatternGridTypeComboBox)sender;
+            PatternGridTypeComboBox control = (PatternGridTypeComboBox)sender;
 
             if (e.NewValue is PatternGridType value)
             {
-                con._vsType = value;
-                con.VisualState = con.VisualState;//State
+                control._vsType = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 

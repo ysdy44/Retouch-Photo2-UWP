@@ -11,7 +11,7 @@
     mc:Ignorable="d"
 
     NavigationCacheMode="Required"    
-    Background="{ThemeResource AppBackground}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     >
 
 
@@ -21,7 +21,7 @@
     </Page.Resources>
 
 
-    <Grid x:Name="RootGrid">
+    <Grid x:Name="RootGrid" Background="{ThemeResource AppBackground}">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>

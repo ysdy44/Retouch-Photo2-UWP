@@ -65,8 +65,8 @@
               Width="320"
               MinHeight="120"
               BorderThickness="1"
-              BorderBrush="{ThemeResource AppBorderBrush}" 
-              Background="{ThemeResource AppBackground}"                               
+              BorderBrush="{ThemeResource AppStroke}" 
+              Background="{ThemeResource AppFill}"                               
               CornerRadius="{StaticResource AppCornerRadius}" 
               RenderTransformOrigin="0.5,0.5"
               >

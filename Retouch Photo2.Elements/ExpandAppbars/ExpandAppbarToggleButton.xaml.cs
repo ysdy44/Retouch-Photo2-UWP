@@ -81,18 +81,18 @@ namespace Retouch_Photo2.Elements
         /// <summary> Gets or sets whether ToggleButton is selected.. </summary>
         public bool IsChecked
         {
-            get { return (bool)GetValue(IsCheckedProperty); }
-            set { SetValue(IsCheckedProperty, value); }
+            get => (bool)base.GetValue(IsCheckedProperty);
+            set => base.SetValue(IsCheckedProperty, value);
         }
         /// <summary> Identifies the <see cref = "ExpandAppbarToggleButton.IsChecked" /> dependency property. </summary>
         public static readonly DependencyProperty IsCheckedProperty = DependencyProperty.Register(nameof(IsChecked), typeof(bool), typeof(ExpandAppbarToggleButton), new PropertyMetadata(false, (sender, e) =>
         {
-            ExpandAppbarToggleButton con = (ExpandAppbarToggleButton)sender;
+            ExpandAppbarToggleButton control = (ExpandAppbarToggleButton)sender;
 
             if (e.NewValue is bool value)
             {
-                con._vsIsChecked = value;
-                con.VisualState = con.VisualState;//State
+                control._vsIsChecked = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 

@@ -59,8 +59,8 @@ namespace Retouch_Photo2.Elements
         /// <summary> Gets or sets whether the <see cref = "LoadingControl" /> Visibility. </summary>
         public bool IsActive
         {
-            get { return (bool)GetValue(IsActiveProperty); }
-            set { SetValue(IsActiveProperty, value); }
+            get => (bool)base.GetValue(IsActiveProperty);
+            set => base.SetValue(IsActiveProperty, value);
         }       
         /// <summary> Identifies the <see cref = "LoadingControl.IsActive" /> dependency property. </summary>
         public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(nameof(IsActive), typeof(bool), typeof(LoadingControl), new PropertyMetadata(false));

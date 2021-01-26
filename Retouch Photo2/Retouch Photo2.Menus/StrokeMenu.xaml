@@ -27,10 +27,8 @@
                            RelativePanel.AlignRightWithPanel="True"
                            Value="{x:Bind StrokeWidthToNumberConverter(SelectionViewModel.StrokeWidth), Mode=OneWay}"/>
         </RelativePanel>
-        <Border Height="{StaticResource AppCircleHeight}">
-            <elements:SliderPicker x:Name="WidthSlider"
-                             Value="{x:Bind SelectionViewModel.StrokeWidth, Mode=OneWay}"/>
-        </Border>
+        <elements:SliderPicker x:Name="WidthSlider"
+                         Value="{x:Bind SelectionViewModel.StrokeWidth, Mode=OneWay}"/>
 
 
         <!--Cap-->
@@ -52,21 +50,19 @@
                            RelativePanel.AlignRightWithPanel="True"
                            Value="{x:Bind StyleOffsetToNumberConverter(SelectionViewModel.StrokeStyleOffset), Mode=OneWay}"/>
         </RelativePanel>
-        <Border Height="{StaticResource AppCircleHeight}">
-            <elements:SliderPicker x:Name="OffsetSlider"
-                             Value="{x:Bind SelectionViewModel.StrokeStyleOffset, Mode=OneWay}"/>
-        </Border>
+        <elements:SliderPicker x:Name="OffsetSlider"
+                        Value="{x:Bind SelectionViewModel.StrokeStyleOffset, Mode=OneWay}"/>
 
 
         <!--IsFollowTransform-->
         <CheckBox x:Name="IsFollowTransformCheckBox" Margin="4,0" IsChecked="{x:Bind SelectionViewModel.IsFollowTransform, Mode=OneWay}" >
-            <TextBlock x:Name="IsFollowTransformTextBlock" Foreground="{ThemeResource AppText}" />
+            <TextBlock x:Name="IsFollowTransformTextBlock" FontWeight="Medium" Foreground="{ThemeResource AppText}" />
         </CheckBox>
 
 
         <!--IsStrokeBehindFill-->
         <CheckBox x:Name="IsStrokeBehindFillCheckBox" Margin="4,0" IsChecked="{x:Bind SelectionViewModel.IsStrokeBehindFill, Mode=OneWay}" >
-            <TextBlock x:Name="IsStrokeBehindFillTextBlock" Foreground="{ThemeResource AppText}" />
+            <TextBlock x:Name="IsStrokeBehindFillTextBlock" FontWeight="Medium" Foreground="{ThemeResource AppText}" />
         </CheckBox>
         
 
@@ -75,7 +71,7 @@
 
         <!--IsStrokeWidthFollowScale-->
         <CheckBox x:Name="IsStrokeWidthFollowScaleCheckBox" Margin="4,0" IsChecked="{x:Bind SelectionViewModel.IsStrokeWidthFollowScale, Mode=OneWay}" >
-            <TextBlock x:Name="IsStrokeWidthFollowScaleTextBlock" Foreground="{ThemeResource AppText}" />
+            <TextBlock x:Name="IsStrokeWidthFollowScaleTextBlock" FontWeight="Medium" Foreground="{ThemeResource AppText}" />
         </CheckBox>
 
 

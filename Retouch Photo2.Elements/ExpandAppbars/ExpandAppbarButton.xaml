@@ -22,8 +22,8 @@
         </Style>        
     </UserControl.Resources>
 
-    
-    <Border x:Name="RootGrid" Width="Auto" Height="Auto" Style="{StaticResource AppCircleBorderStyle}">
+
+    <Border x:Name="RootGrid" Width="Auto" Height="Auto" Background="{ThemeResource AppFill}"  Style="{StaticResource AppCircleBorderStyle}">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>

@@ -176,26 +176,26 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets <see cref = "AdjustmentMainPage" />'s filter. </summary>
         public Filter Filter
         {
-            get { return (Filter)GetValue(FilterProperty); }
-            set { SetValue(FilterProperty, value); }
+            get => (Filter)base.GetValue(FilterProperty);
+            set => base.SetValue(FilterProperty, value);
         }
         /// <summary> Identifies the <see cref = "AdjustmentMainPage.Filter" /> dependency property. </summary>
         public static readonly DependencyProperty FilterProperty = DependencyProperty.Register(nameof(Filter), typeof(Filter), typeof(AdjustmentMainPage), new PropertyMetadata(null, (sender, e) =>
         {
-            AdjustmentMainPage con = (AdjustmentMainPage)sender;
+            AdjustmentMainPage control = (AdjustmentMainPage)sender;
 
             if (e.NewValue is Filter value)
             {
-                con._vsAdjustments = value.Adjustments;
-                con.VisualState = con.VisualState;//State
+                control._vsAdjustments = value.Adjustments;
+                control.VisualState = control.VisualState;//State
             }
             else
             {
-                con._vsAdjustments = null;
-                con.VisualState = con.VisualState;//State
+                control._vsAdjustments = null;
+                control.VisualState = control.VisualState;//State
             }
 
-            con.IsSecondPageChanged?.Invoke(con, false);//Delegate
+            control.IsSecondPageChanged?.Invoke(control, false);//Delegate
         }));
 
 

@@ -133,18 +133,18 @@ namespace Retouch_Photo2.Tools.Models
         /// <summary> Gets or sets the radian. </summary>
         public double Radian
         {
-            get { return (double)GetValue(RadianProperty); }
-            set { SetValue(RadianProperty, value); }
+            get => (double)base.GetValue(RadianProperty);
+            set => base.SetValue(RadianProperty, value);
         }
         /// <summary> Identifies the <see cref = "ViewPage.Radian" /> dependency property. </summary>
         public static readonly DependencyProperty RadianProperty = DependencyProperty.Register(nameof(Radian), typeof(double), typeof(ViewPage), new PropertyMetadata(0.0f, (sender, e) =>
         {
-            ViewPage con = (ViewPage)sender;
+            ViewPage control = (ViewPage)sender;
 
             if (e.NewValue is double value)
             {
-                con.ViewModel.SetCanvasTransformerRadian((float)value);//CanvasTransformer
-                con.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
+                control.ViewModel.SetCanvasTransformerRadian((float)value);//CanvasTransformer
+                control.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
             }
         }));
 
@@ -152,18 +152,18 @@ namespace Retouch_Photo2.Tools.Models
         /// <summary> Gets or sets the scale. </summary>
         public double Scale
         {
-            get { return (double)GetValue(ScaleProperty); }
-            set { SetValue(ScaleProperty, value); }
+            get => (double)base.GetValue(ScaleProperty);
+            set => base.SetValue(ScaleProperty, value);
         }
         /// <summary> Identifies the <see cref = "ViewPage.Scale" /> dependency property. </summary>
         public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register(nameof(Scale), typeof(double), typeof(ViewPage), new PropertyMetadata(0.0f, (sender, e) =>
         {
-            ViewPage con = (ViewPage)sender;
+            ViewPage control = (ViewPage)sender;
 
             if (e.NewValue is double value)
             {
-                con.ViewModel.SetCanvasTransformerScale((float)value);//CanvasTransformer
-                con.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
+                control.ViewModel.SetCanvasTransformerScale((float)value);//CanvasTransformer
+                control.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
             }
         }));
 
@@ -171,8 +171,8 @@ namespace Retouch_Photo2.Tools.Models
         /// <summary> Gets or sets <see cref = "ViewPage" />'s IsOpen. </summary>
         public bool IsOpen
         {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
         }
         /// <summary> Identifies the <see cref = "ViewPage.IsOpen" /> dependency property. </summary>
         public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(ViewPage), new PropertyMetadata(false));

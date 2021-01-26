@@ -20,7 +20,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.fontText == value) return;
                 this.fontText = value;
-                this.OnPropertyChanged(nameof(this.FontText));//Notify 
+                this.OnPropertyChanged(nameof(FontText));//Notify 
             }
         }
         private string fontText = null;
@@ -32,7 +32,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.fontFamily = value;
-                this.OnPropertyChanged(nameof(this.FontFamily));//Notify 
+                this.OnPropertyChanged(nameof(FontFamily));//Notify 
             }
         }
         private string fontFamily = "Arial";
@@ -44,7 +44,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.fontSize = value;
-                this.OnPropertyChanged(nameof(this.FontSize));//Notify 
+                this.OnPropertyChanged(nameof(FontSize));//Notify 
             }
         }
         private float fontSize = 22;
@@ -56,7 +56,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.fontAlignment = value;
-                this.OnPropertyChanged(nameof(this.FontAlignment));//Notify 
+                this.OnPropertyChanged(nameof(FontAlignment));//Notify 
             }
         }
         private CanvasHorizontalAlignment fontAlignment = CanvasHorizontalAlignment.Left;
@@ -68,7 +68,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.fontStyle = value;
-                this.OnPropertyChanged(nameof(this.FontStyle));//Notify 
+                this.OnPropertyChanged(nameof(FontStyle));//Notify 
             }
         }
         private FontStyle fontStyle = FontStyle.Normal;
@@ -80,7 +80,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.fontWeight = value;
-                this.OnPropertyChanged(nameof(this.FontWeight));//Notify 
+                this.OnPropertyChanged(nameof(FontWeight));//Notify 
             }
         }
         private FontWeight fontWeight = FontWeights.Normal;

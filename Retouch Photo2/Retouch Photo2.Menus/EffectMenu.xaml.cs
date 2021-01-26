@@ -122,22 +122,22 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets <see cref = "EffectMainPage" />'s Effect. </summary>
         public Effect Effect
         {
-            get { return (Effect)GetValue(EffectProperty); }
-            set { SetValue(EffectProperty, value); }
+            get  => (Effect)base.GetValue(EffectProperty);
+            set => base.SetValue(EffectProperty, value);
         }
         /// <summary> Identifies the <see cref = "EffectMainPage.Effect" /> dependency property. </summary>
         public static readonly DependencyProperty EffectProperty = DependencyProperty.Register(nameof(Effect), typeof(Effect), typeof(EffectMainPage), new PropertyMetadata(null, (sender, e) =>
         {
-            EffectMainPage con = (EffectMainPage)sender;
+            EffectMainPage control = (EffectMainPage)sender;
 
             if (e.NewValue is Effect value)
             {
-                foreach (IEffectPage effectPage in con.EffectPages)
+                foreach (IEffectPage effectPage in control.EffectPages)
                 {
                     effectPage.Button.IsEnabled = true;
                     effectPage.FollowButton(value);
 
-                    if (effectPage == con.EffectPage)
+                    if (effectPage == control.EffectPage)
                     {
                         effectPage.FollowPage(value);
                     }
@@ -145,13 +145,13 @@ namespace Retouch_Photo2.Menus.Models
             }
             else
             {
-                foreach (IEffectPage effect in con.EffectPages)
+                foreach (IEffectPage effect in control.EffectPages)
                 {
                     effect.Button.IsEnabled = false;
                 }
             }
 
-            con.IsSecondPageChanged?.Invoke(con, false);//Delegate
+            control.IsSecondPageChanged?.Invoke(control, false);//Delegate
         }));
 
         #endregion

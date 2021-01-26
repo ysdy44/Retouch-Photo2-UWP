@@ -11,11 +11,12 @@
     <SolidColorBrush x:Key="AppBackground" Color="{ThemeResource AppBackgroundColor}"/>
     <SolidColorBrush x:Key="AppBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
 
+    <SolidColorBrush x:Key="AppFill" Color="{ThemeResource AppFillColor}"/>
     <SolidColorBrush x:Key="AppStroke" Color="{ThemeResource AppStrokeColor}"/>
     <SolidColorBrush x:Key="AppText" Color="{ThemeResource AppTextColor}"/>
 
     <apiContractPresent5:AcrylicBrush x:Key="AppAcrylicElementBrush" BackgroundSource="Backdrop" 
-         TintColor="{ThemeResource AppBackgroundColor}" TintOpacity="0.8" FallbackColor="{ThemeResource AppBackgroundColor}" />
+         TintColor="{ThemeResource AppBackgroundColor}" TintOpacity="0.8" FallbackColor="{ThemeResource AppForegroundColor}" />
     <apiContractPresent5:AcrylicBrush x:Key="AppAcrylicWindowBrush" BackgroundSource="HostBackdrop" 
          TintColor="{ThemeResource AppBackgroundColor}" TintOpacity="0.7" FallbackColor="{ThemeResource AppForegroundColor}" />
 
@@ -29,7 +30,6 @@
         <Setter Property="VerticalScrollMode" Value="Disabled"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
     </Style>
-    
 
     <!--ToolTip-->
     <Style x:Key="AppToolTipStyle" TargetType="ToolTip">
@@ -37,10 +37,18 @@
         <Setter Property="MinWidth" Value="42"/>
         <Setter Property="MinHeight" Value="24"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="#3D9CF7"/>
-        <Setter Property="Background" Value="#B5D4F2"/>
-        <Setter Property="Foreground" Value="#0055A4"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                    <GradientStop Color="{ThemeResource SystemAccentColorLight1}" Offset="0"/>
+                    <GradientStop Color="{ThemeResource SystemAccentColorDark1}" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -56,6 +64,7 @@
         <Setter Property="Margin" Value="4,4"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="FontWeight" Value="Medium"/>
     </Style>
 
 
@@ -65,15 +74,15 @@
         <Setter Property="OffsetX" Value="4"/>
         <Setter Property="OffsetY" Value="6"/>
         <Setter Property="BlurRadius" Value="12"/>
-        <Setter Property="ShadowOpacity" Value="1"/>
+        <Setter Property="ShadowOpacity" Value="0"/>
     </Style>
 
     
     <!--Flyout-->
     <Style x:Key="AppFlyoutPresenterStyle" TargetType="FlyoutPresenter">
-        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Padding" Value="4"/>
         <Setter Property="Margin" Value="0"/>
-        <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="FlyoutPresenter">
@@ -119,6 +128,7 @@
         <Setter Property="Height" Value="Auto" />
         <Setter Property="MinWidth" Value="70" />
         <Setter Property="MinHeight" Value="70" />
+        <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
@@ -670,8 +680,8 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="Foreground" Value="{ThemeResource TextControlForeground}"/>
-        <Setter Property="Background" Value="{ThemeResource AppForeground}"/>
-        <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
+        <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -735,6 +745,7 @@
         </Setter>
     </Style>
     <Style x:Key="AppNumberButtonStyle" BasedOn="{StaticResource NumberButtonStyle}" TargetType="Button">
+        <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="MinWidth" Value="50"/>
         <Setter Property="Height" Value="24"/>
         <Setter Property="Margin" Value="0,4"/>

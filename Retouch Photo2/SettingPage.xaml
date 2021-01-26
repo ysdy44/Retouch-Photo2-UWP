@@ -9,7 +9,7 @@
     xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
     xmlns:elementsSettingPages="using:Retouch_Photo2.Elements.SettingPages"
     mc:Ignorable="d"
-    Background="{ThemeResource AppBackground}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     NavigationCacheMode="Required"    
     >
 
@@ -31,7 +31,7 @@
     </Page.Resources>
 
 
-    <Grid>
+    <Grid Background="{ThemeResource AppBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
@@ -52,7 +52,6 @@
                         <Style x:Name="KeyContentControlStyle" TargetType="ContentControl">
                             <Setter Property="Padding" Value="12,0"/>
                             <Setter Property="Height" Value="44"/>
-                            <Setter Property="MaxWidth" Value="Auto"/>
                             <Setter Property="VerticalContentAlignment" Value="Center"/>
                             <Setter Property="Template">
                                 <Setter.Value>
@@ -317,7 +316,7 @@
 
                         <!--Theme-->
                         <TextBlock x:Name="ThemeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" HorizontalAlignment="Left" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
                                 <RadioButton x:Name="LightRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
@@ -345,7 +344,7 @@
 
                         <!--Layout-->
                         <TextBlock x:Name="DeviceLayoutTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" HorizontalAlignment="Left" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
                                 <RadioButton x:Name="PhoneButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
@@ -394,7 +393,7 @@
 
                         <!--LayersHeight-->
                         <TextBlock x:Name="LayersHeightTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" HorizontalAlignment="Stretch" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" HorizontalAlignment="Stretch" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Vertical">
                                 <RadioButton x:Name="Height30Button" GroupName="Height" Style="{StaticResource LayerHeightRadioButton}"/>
                                 <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
@@ -417,7 +416,7 @@
 
                         <!--Menu-->
                         <TextBlock x:Name="MenuTypeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel x:Name="MenusStackPanel" >
 
                             </StackPanel>
@@ -430,7 +429,7 @@
 
                         <!--Key-->
                         <TextBlock x:Name="KeyTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel>
                                 <ContentControl x:Name="IsCenterControl" Style="{StaticResource KeyContentControlStyle}"/>
                                 <ContentControl x:Name="IsRatioControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
@@ -442,7 +441,7 @@
                         
                         <ContentControl Height="12"/>
                         
-                        <Border Height="Auto" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel>
                                 <ContentControl x:Name="LeftControl" Style="{StaticResource KeyContentControlStyle}"/>
                                 <ContentControl x:Name="UpControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
@@ -453,7 +452,7 @@
                         
                         <ContentControl Height="12"/>
                         
-                        <Border Height="Auto" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel>
                                 <ContentControl x:Name="CutControl" Style="{StaticResource KeyContentControlStyle}"/>
                                 <ContentControl x:Name="DuplicateControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
@@ -553,7 +552,7 @@
 
                         <Image Width="180" Height="180" Source="ms-appx:///Icons\AppRender.png"/>
 
-                        <Border Padding="12,0" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Padding="12,0" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <TextBlock>                    
                                 1.1.9
                             </TextBlock>

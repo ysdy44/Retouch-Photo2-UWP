@@ -33,14 +33,14 @@
                 <Style TargetType="MenuFlyoutPresenter">
                     <Setter Property="Padding" Value="0"/>
                     <Setter Property="Margin" Value="0"/>
-                    <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
-                    <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
+                    <Setter Property="Background" Value="{ThemeResource AppForeground}"/>
+                    <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
                 </Style>
             </MenuFlyout.MenuFlyoutPresenterStyle>
-            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem222" Text="200" MinWidth="140"/>
-            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem272" Text="250" MinWidth="140"/>
-            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem322" Text="300" MinWidth="140"/>
-            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem372" Text="350" MinWidth="140"/>
+            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem222" Text="200" MinWidth="140" FontWeight="Medium"/>
+            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem272" Text="250" MinWidth="140" FontWeight="Medium"/>
+            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem322" Text="300" MinWidth="140" FontWeight="Medium"/>
+            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem372" Text="350" MinWidth="140" FontWeight="Medium"/>
         </MenuFlyout>
 
         <!--Storyboard-->
@@ -184,7 +184,7 @@
         </VisualStateManager.VisualStateGroups>
 
 
-        <Border x:Name="RootGrid" CornerRadius="{StaticResource AppCornerRadius}" Width="222" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="Transparent">
+        <Border x:Name="RootGrid" CornerRadius="{StaticResource AppCornerRadius}" Width="222" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="Transparent">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" MinHeight="40" MaxHeight="40"/>
@@ -195,35 +195,46 @@
                 <!--@Acrylic-->
                 <!--Body-->
                 <Rectangle x:Name="HeightRectangle" Grid.RowSpan="2" Height="222" VerticalAlignment="top" 
-                          apiContractNotPresent5:Fill="{ThemeResource AppBackground}"
+                          apiContractNotPresent5:Fill="{ThemeResource AppForeground}"
                           apiContractPresent5:Fill="{ThemeResource AppAcrylicElementBrush}" />
-                <Border x:Name="PageBorder" Grid.Row="1" Height="Auto" VerticalAlignment="Top">
+                <Border x:Name="PageBorder" Grid.Row="1" Height="Auto" VerticalAlignment="Top" Padding="4,0">
                     <!--Content-->
                 </Border>
 
 
                 <!--Head-->
-                <Grid x:Name="TitleGrid" Grid.Row="0" Background="Transparent">
+                <Grid x:Name="TitleGrid" Grid.Row="0" Background="Transparent" Padding="4,4,4,0">
 
                     <StackPanel x:Name="TitleStackPanel" Orientation="Horizontal" HorizontalAlignment="Left">
                         <StackPanel.RenderTransform>
                             <TranslateTransform x:Name="TitleTransform" X="-40"/>
                         </StackPanel.RenderTransform>
                         <Button x:Name="BackButton" Opacity="0" Width="40" Style="{StaticResource ButtonStyle}">
-                            <FontIcon Glyph="&#xE830;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            <FontIcon Glyph="&#xE830;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </Button>
-                        <TextBlock x:Name="TitleTextBlock" Margin="12,0,12,0" TextTrimming="CharacterEllipsis" FontSize="24" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                        <TextBlock x:Name="TitleTextBlock" Margin="8,0" FontWeight="Medium" TextTrimming="CharacterEllipsis" FontSize="20" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button x:Name="CloseButton" Width="40" Visibility="Collapsed" Style="{StaticResource ButtonStyle}">
-                            <FontIcon Glyph="&#xF78A;" FontSize="18" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+
+                            <!--Visibility:Show-->
+                            <animations:Implicit.ShowAnimations>
+                                <animations:OpacityAnimation Duration="0:0:0.2" From="0.0" To="1.0"/>
+                            </animations:Implicit.ShowAnimations>
+
+                            <!--Visibility:Hide-->
+                            <animations:Implicit.HideAnimations>
+                                <animations:OpacityAnimation Duration="0:0:0.4" From="1.0" To="0.0"/>
+                            </animations:Implicit.HideAnimations>
+                            
+                            <FontIcon Glyph="&#xF78A;" FontSize="14" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                         </Button>
                         <Button x:Name="StateButton" Width="40" Visibility="Collapsed" Style="{StaticResource ButtonStyle}">
-                            <FontIcon x:Name="StateIcon" Glyph="&#xE840;" FontWeight="Bold" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                            <FontIcon x:Name="StateIcon" Glyph="&#xE840;" FontWeight="Bold" FontSize="14" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                         </Button>
                         <Button x:Name="ResetButton" Width="40" Visibility="Collapsed" Style="{StaticResource ButtonStyle}">
-                            <FontIcon Glyph="&#xE149;" FontSize="18" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                            <FontIcon Glyph="&#xE149;" FontSize="14" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                         </Button>
                     </StackPanel>
                     

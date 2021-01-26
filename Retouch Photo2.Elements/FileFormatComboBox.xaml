@@ -70,7 +70,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.2*"/>
         </Grid.ColumnDefinitions>
 
 
@@ -100,7 +100,7 @@
         </Button>
 
         <!--JpegXR-->
-        <Button x:Name="JpegXRButton" Grid.Column="5" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+        <Button x:Name="JpegXRButton" Grid.Column="5" Padding="2,0" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
             JPEG XR
         </Button>
         

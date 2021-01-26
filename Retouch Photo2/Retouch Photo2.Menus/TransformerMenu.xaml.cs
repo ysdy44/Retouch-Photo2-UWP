@@ -179,13 +179,13 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets <see cref = "TransformerMainPage" />'s tool type. </summary>
         public ToolType ToolType
         {
-            get { return (ToolType)GetValue(ToolTypeProperty); }
-            set { SetValue(ToolTypeProperty, value); }
+            get  => (ToolType)base.GetValue(ToolTypeProperty);
+            set => base.SetValue(ToolTypeProperty, value);
         }
         /// <summary> Identifies the <see cref = "TransformerMainPage.ToolType" /> dependency property. </summary>
         public static readonly DependencyProperty ToolTypeProperty = DependencyProperty.Register(nameof(ToolType), typeof(ToolType), typeof(TransformerMainPage), new PropertyMetadata(ToolType.Cursor, (sender, e) =>
         {
-            TransformerMainPage con = (TransformerMainPage)sender;
+            TransformerMainPage control = (TransformerMainPage)sender;
 
             if (e.NewValue is ToolType value)
             {
@@ -230,15 +230,15 @@ namespace Retouch_Photo2.Menus.Models
                     case ToolType.GeometryCapsule:
                     case ToolType.GeometryHeart:
                         {
-                            con._vsDisabledTool = false;
-                            con.VisualState = con.VisualState;//State
+                            control._vsDisabledTool = false;
+                            control.VisualState = control.VisualState;//State
                             return;
                         }
                 }
             }
 
-            con._vsDisabledTool = true;
-            con.VisualState = con.VisualState;//State
+            control._vsDisabledTool = true;
+            control.VisualState = control.VisualState;//State
             return;
         }));
 
@@ -246,18 +246,18 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets <see cref = "TransformerMainPage" />'s selection mode. </summary>
         public ListViewSelectionMode Mode
         {
-            get { return (ListViewSelectionMode)GetValue(ModeProperty); }
-            set { SetValue(ModeProperty, value); }
+            get  => (ListViewSelectionMode)base.GetValue(ModeProperty);
+            set => base.SetValue(ModeProperty, value);
         }
         /// <summary> Identifies the <see cref = "TransformerMainPage.Mode" /> dependency property. </summary>
         public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(ListViewSelectionMode), typeof(TransformerMainPage), new PropertyMetadata(ListViewSelectionMode.None, (sender, e) =>
         {
-            TransformerMainPage con = (TransformerMainPage)sender;
+            TransformerMainPage control = (TransformerMainPage)sender;
 
             if (e.NewValue is ListViewSelectionMode value)
             {
-                con._vsMode = value;
-                con.VisualState = con.VisualState;//State
+                control._vsMode = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 
@@ -265,18 +265,18 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets <see cref = "TransformerMainPage" />'s transformer. </summary>
         public Transformer Transformer
         {
-            get { return (Transformer)GetValue(TransformerProperty); }
-            set { SetValue(TransformerProperty, value); }
+            get  => (Transformer)base.GetValue(TransformerProperty);
+            set => base.SetValue(TransformerProperty, value);
         }
         /// <summary> Identifies the <see cref = "TransformerMainPage.Transformer" /> dependency property. </summary>
         public static readonly DependencyProperty TransformerProperty = DependencyProperty.Register(nameof(Transformer), typeof(Transformer), typeof(TransformerMainPage), new PropertyMetadata(new Transformer(), (sender, e) =>
         {
-            TransformerMainPage con = (TransformerMainPage)sender;
+            TransformerMainPage control = (TransformerMainPage)sender;
 
             if (e.NewValue is Transformer value)
             {
-                con._vsTransformer = value;
-                con.VisualState = con.VisualState;//State
+                control._vsTransformer = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 
@@ -284,8 +284,8 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets <see cref = "TransformerMainPage" />'s IsOpen. </summary>
         public bool IsOpen
         {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
         }
         /// <summary> Identifies the <see cref = "TransformerMainPage.IsOpen" /> dependency property. </summary>
         public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(TransformerMainPage), new PropertyMetadata(false));

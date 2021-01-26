@@ -4,6 +4,7 @@ using Retouch_Photo2.Menus;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -223,6 +224,7 @@ namespace Retouch_Photo2
                 {
                     Content = menu.Button.Title,
                     IsChecked = isVisible,
+                    FontWeight = FontWeights.Medium
                 };
                 checkBox.Checked += async (s, e) => await this.AddMenu(menu.Type);
                 checkBox.Unchecked += async (s, e) => await this.RemoveMenu(menu.Type);

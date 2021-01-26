@@ -98,8 +98,8 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets <see cref = "StrokeMainPage" />'s IsOpen. </summary>
         public bool IsOpen
         {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
         }
         /// <summary> Identifies the <see cref = "StrokeMainPage.IsOpen" /> dependency property. </summary>
         public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(StrokeMainPage), new PropertyMetadata(false));

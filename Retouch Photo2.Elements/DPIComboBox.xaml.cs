@@ -58,18 +58,18 @@ namespace Retouch_Photo2.Elements
         /// <summary> Gets or sets the dots-per-inch (DPI). </summary>
         public DPI DPI
         {
-            get { return (DPI)GetValue(DPIProperty); }
-            set { SetValue(DPIProperty, value); }
+            get  => (DPI)base.GetValue(DPIProperty);
+            set => base.SetValue(DPIProperty, value);
         }
         /// <summary> Identifies the <see cref = "DPIComboBox.DPI" /> dependency property. </summary>
         public static readonly DependencyProperty DPIProperty = DependencyProperty.Register(nameof(DPI), typeof(DPI), typeof(DPIComboBox), new PropertyMetadata(DPI.DPI144, (sender, e) =>
         {
-            DPIComboBox con = (DPIComboBox)sender;
+            DPIComboBox control = (DPIComboBox)sender;
 
             if (e.NewValue is DPI value)
             {
-                con._vsDPI = value;
-                con.VisualState = con.VisualState;//State
+                control._vsDPI = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 

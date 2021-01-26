@@ -43,18 +43,18 @@ namespace Retouch_Photo2.Strokes
         /// <summary> Dash style of <see cref = "DashSegmented" />. </summary>
         public CanvasDashStyle Dash
         {
-            get { return (CanvasDashStyle)GetValue(DashProperty); }
-            set { SetValue(DashProperty, value); }
+            get  => (CanvasDashStyle)base.GetValue(DashProperty);
+            set => base.SetValue(DashProperty, value);
         }
         /// <summary> Identifies the <see cref = "DashSegmented.Dash" /> dependency property. </summary>
         public static readonly DependencyProperty DashProperty = DependencyProperty.Register(nameof(Dash), typeof(CanvasDashStyle), typeof(DashSegmented), new PropertyMetadata(CanvasDashStyle.Solid, (sender, e) =>
         {
-            DashSegmented con = (DashSegmented)sender;
+            DashSegmented control = (DashSegmented)sender;
 
             if (e.NewValue is CanvasDashStyle value)
             {
-                con._vsDash = value;
-                con.VisualState = con.VisualState;//State
+                control._vsDash = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 
@@ -62,8 +62,8 @@ namespace Retouch_Photo2.Strokes
         /// <summary> IsOpen of <see cref = "DashSegmented" />. </summary>
         public bool IsOpen
         {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
         }
         /// <summary> Identifies the <see cref = "DashSegmented.IsOpen" /> dependency property. </summary>
         public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(DashSegmented), new PropertyMetadata(false));

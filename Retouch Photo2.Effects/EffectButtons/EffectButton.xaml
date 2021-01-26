@@ -68,7 +68,7 @@
         <!--Icon-->
         <Viewbox x:Name="Viewbox" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <TextBlock x:Name="TextBlock" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" FontWeight="Medium" Foreground="{ThemeResource SystemBaseHighColor}"/>
+        <TextBlock x:Name="TextBlock" Grid.Column="1" FontWeight="Medium" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Foreground="{ThemeResource SystemBaseHighColor}"/>
         
         <!--ToggleSwitch-->
         <ToggleSwitch x:Name="ToggleSwitch" Grid.Column="2" IsOn="False">

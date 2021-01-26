@@ -23,7 +23,7 @@
     </UserControl.Resources>
 
 
-    <Grid x:Name="RootGrid" Background="{ThemeResource AppBackground}">
+    <Grid x:Name="RootGrid">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>

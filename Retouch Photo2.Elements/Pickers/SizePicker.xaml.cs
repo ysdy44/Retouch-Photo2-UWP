@@ -51,6 +51,8 @@ namespace Retouch_Photo2.Elements
             this.HeighPicker.Value = 1024;
             this.WidthPicker.ValueChanged += (s, value) =>
             {
+                if (this.RatioToggleControl.IsChecked == false) return;
+
                 double width = value;
                 double height = value / (double)this.cacheWidth * this.HeighPicker.Value;
 
@@ -60,6 +62,8 @@ namespace Retouch_Photo2.Elements
 
             this.HeighPicker.ValueChanged += (s, value) =>
             {
+                if (this.RatioToggleControl.IsChecked == false) return;
+
                 double width = value / (double)this.cacheHeight * this.WidthPicker.Value;
                 double height = value;
 

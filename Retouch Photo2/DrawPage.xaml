@@ -15,6 +15,7 @@
     xmlns:hsvColorPickers="using:HSVColorPickers"
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     >
 
 
@@ -35,7 +36,7 @@
     </Page.Resources>
 
 
-    <Grid x:Name="RootGrid">
+    <Grid x:Name="RootGrid" Background="{ThemeResource AppBackground}">
         
         
         <Grid.Resources>
@@ -169,9 +170,7 @@
                         <hsvColorPickers:NumberPicker x:Name="ExportQualityPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                            RelativePanel.AlignRightWithPanel="True"/>
                     </RelativePanel>
-                    <Border Height="{StaticResource AppCircleHeight}">
-                        <elements:SliderPicker x:Name="ExportQualitySlider" />
-                    </Border>
+                    <elements:SliderPicker x:Name="ExportQualitySlider" />
                 </StackPanel>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>

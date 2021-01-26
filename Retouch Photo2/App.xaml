@@ -13,7 +13,9 @@
                 AppBackground: Background Color,
                 AppBorderBrush: Border Color,
             
+                AppFill: Panel Color,
                 AppStroke: Shadow Color,
+                AppText: Text Color,
                 AppLinearBrush: Linear Brush,
             -->
             <ResourceDictionary.ThemeDictionaries>
@@ -24,6 +26,7 @@
                     <Color x:Key="AppBackgroundColor" >#F0F0F2</Color>
                     <Color x:Key="AppBorderBrushColor" >#BEBCC7</Color>
 
+                    <Color x:Key="AppFillColor" >#FFFFFF</Color>
                     <Color x:Key="AppStrokeColor" >#66817F91</Color>
                     <Color x:Key="AppTextColor" >#99000000</Color>
 
@@ -43,6 +46,7 @@
                     <Color x:Key="AppBackgroundColor" >#0E0E0E</Color>
                     <Color x:Key="AppBorderBrushColor" >#303030</Color>
 
+                    <Color x:Key="AppFillColor" >#161616</Color>
                     <Color x:Key="AppStrokeColor" >#AA050005</Color>
                     <Color x:Key="AppTextColor" >#BBFFFFFF</Color>
 

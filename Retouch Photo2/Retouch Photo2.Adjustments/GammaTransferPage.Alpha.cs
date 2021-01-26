@@ -52,8 +52,8 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary> Gets or sets <see cref = "GammaTransferPage" />'s alpha visibility. </summary>
         public Visibility AlphaIsExpaned
         {
-            get { return (Visibility)GetValue(AlphaIsExpanedProperty); }
-            set { SetValue(AlphaIsExpanedProperty, value); }
+            get => (Visibility)base.GetValue(AlphaIsExpanedProperty);
+            set => base.SetValue(AlphaIsExpanedProperty, value);
         }
         /// <summary> Identifies the <see cref = "GammaTransferPage.AlphaIsExpaned" /> dependency property. </summary>
         public static readonly DependencyProperty AlphaIsExpanedProperty = DependencyProperty.Register(nameof(AlphaIsExpaned), typeof(Visibility), typeof(GammaTransferPage), new PropertyMetadata(Visibility.Collapsed));

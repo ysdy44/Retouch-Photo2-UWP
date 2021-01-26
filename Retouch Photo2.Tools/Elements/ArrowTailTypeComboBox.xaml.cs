@@ -24,18 +24,18 @@ namespace Retouch_Photo2.Tools.Elements
         /// <summary> Gets or sets the none or arrow. </summary>
         public GeometryArrowTailType ArrowTailType
         {
-            get { return (GeometryArrowTailType)GetValue(ArrowTailTypeProperty); }
-            set { SetValue(ArrowTailTypeProperty, value); }
+            get => (GeometryArrowTailType)base.GetValue(ArrowTailTypeProperty);
+            set => base.SetValue(ArrowTailTypeProperty, value);
         }
         /// <summary> Identifies the <see cref = "ArrowTailTypeComboBox.ArrowTailType" /> dependency property. </summary>
         public static readonly DependencyProperty ArrowTailTypeProperty = DependencyProperty.Register(nameof(ArrowTailType), typeof(GeometryArrowTailType), typeof(ArrowTailTypeComboBox), new PropertyMetadata(GeometryArrowTailType.None, (sender, e) =>
         {
-            ArrowTailTypeComboBox con = (ArrowTailTypeComboBox)sender;
+            ArrowTailTypeComboBox control = (ArrowTailTypeComboBox)sender;
 
             if (e.NewValue is GeometryArrowTailType value)
             {
-                con._vsType = value;
-                con.VisualState = con.VisualState;//State
+                control._vsType = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 

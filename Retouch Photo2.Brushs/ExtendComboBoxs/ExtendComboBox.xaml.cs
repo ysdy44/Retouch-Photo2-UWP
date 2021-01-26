@@ -58,17 +58,17 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets or sets the edge behavior. </summary>
         public CanvasEdgeBehavior Extend
         {
-            get { return (CanvasEdgeBehavior)GetValue(ExtendProperty); }
-            set { SetValue(ExtendProperty, value); }
+            get  => (CanvasEdgeBehavior)base.GetValue(ExtendProperty);
+            set => base.SetValue(ExtendProperty, value);
         }
         /// <summary> Identifies the <see cref = "ExtendComboBox.Extend" /> dependency property. </summary>
         public static readonly DependencyProperty ExtendProperty = DependencyProperty.Register(nameof(Extend), typeof(CanvasEdgeBehavior), typeof(ExtendComboBox), new PropertyMetadata(CanvasEdgeBehavior.Clamp, (sender, e) =>
         {
-            ExtendComboBox con = (ExtendComboBox)sender;
+            ExtendComboBox control = (ExtendComboBox)sender;
 
             if (e.NewValue is CanvasEdgeBehavior value)
             {
-                con.Group?.Invoke(con, value);
+                control.Group?.Invoke(control, value);
             }
         }));
 

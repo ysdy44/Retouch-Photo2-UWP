@@ -11,7 +11,7 @@
     d:DesignHeight="50"
     >
 
-    <Border x:Name="RootGrid" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource AppText}" Background="{ThemeResource AppForeground}">
+    <Border x:Name="RootGrid" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource AppText}" Background="{ThemeResource AppBackground}">
         <Line x:Name="Line" X1="6" Y1="17" X2="61" Y2="17" StrokeThickness="4" Stroke="{ThemeResource SystemBaseHighColor}" />
     </Border>
 

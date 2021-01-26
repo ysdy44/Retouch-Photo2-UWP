@@ -26,17 +26,17 @@ namespace Retouch_Photo2.Texts
         /// <summary> Gets or sets the fontvweight. </summary>
         public FontWeight Weight
         {
-            get { return (FontWeight)GetValue(FontWeight2Property); }
-            set { SetValue(FontWeight2Property, value); }
+            get => (FontWeight)base.GetValue(FontWeight2Property);
+            set => base.SetValue(FontWeight2Property, value);
         }
         /// <summary> Identifies the <see cref = "FontWeightComboBox.Weight" /> dependency property. </summary>
         public static readonly DependencyProperty FontWeight2Property = DependencyProperty.Register(nameof(Weight), typeof(FontWeight), typeof(FontWeightComboBox), new PropertyMetadata(FontWeights.Normal, (sender, e) =>
         {
-            FontWeightComboBox con = (FontWeightComboBox)sender;
+            FontWeightComboBox control = (FontWeightComboBox)sender;
 
             if (e.NewValue is FontWeight value)
             {
-                con.Group?.Invoke(con, value);//Delegate
+                control.Group?.Invoke(control, value);//Delegate
             }
         }));
 
@@ -44,8 +44,8 @@ namespace Retouch_Photo2.Texts
         /// <summary> Gets or sets the title. </summary>
         public object Title
         {
-            get { return (object)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            get  => (object)base.GetValue(TitleProperty);
+            set => base.SetValue(TitleProperty, value);
         }
         /// <summary> Identifies the <see cref = "FontWeightComboBox.Title" /> dependency property. </summary>
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(object), typeof(FontWeightComboBox), new PropertyMetadata(null));

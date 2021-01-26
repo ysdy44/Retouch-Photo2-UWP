@@ -39,17 +39,17 @@ namespace Retouch_Photo2.Elements
         /// <summary> Gets or sets <see cref = "ColorPicker2" />'s Mode. </summary>
         public ColorPicker2Mode Mode
         {
-            get { return (ColorPicker2Mode)GetValue(ModeProperty); }
-            set { SetValue(ModeProperty, value); }
+            get  => (ColorPicker2Mode)base.GetValue(ModeProperty);
+            set => base.SetValue(ModeProperty, value);
         }
         /// <summary> Identifies the <see cref = "ColorPicker2.Mode" /> dependency property. </summary>
         public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(ColorPicker2Mode), typeof(ColorPicker2), new PropertyMetadata(ColorPicker2Mode.Circle, (sender, e) =>
         {
-            ColorPicker2 con = (ColorPicker2)sender;
+            ColorPicker2 control = (ColorPicker2)sender;
 
             if (e.NewValue is ColorPicker2Mode value)
             {
-                con.Group?.Invoke(con, value);
+                control.Group?.Invoke(control, value);
             }
         }));
 

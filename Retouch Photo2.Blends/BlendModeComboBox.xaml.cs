@@ -27,21 +27,21 @@ namespace Retouch_Photo2.Blends
         /// <summary> Gets or sets the blend-type. </summary>
         public BlendEffectMode? Mode
         {
-            get { return (BlendEffectMode?)GetValue(ModeProperty); }
-            set { SetValue(ModeProperty, value); }
+            get  => (BlendEffectMode?)base.GetValue(ModeProperty);
+            set => base.SetValue(ModeProperty, value);
         }
         /// <summary> Identifies the <see cref = "BlendModeComboBox.Mode" /> dependency property. </summary>
         public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(BlendEffectMode?), typeof(BlendModeComboBox), new PropertyMetadata(null, (sender, e) =>
         {
-            BlendModeComboBox con = (BlendModeComboBox)sender;
+            BlendModeComboBox control = (BlendModeComboBox)sender;
 
             if (e.NewValue is BlendEffectMode value)
             {
-                con.Group?.Invoke(con, value);//Delegate
+                control.Group?.Invoke(control, value);//Delegate
             }
             else
             {
-                con.Group?.Invoke(con, null);//Delegate
+                control.Group?.Invoke(control, null);//Delegate
             }
         }));
 
@@ -49,8 +49,8 @@ namespace Retouch_Photo2.Blends
         /// <summary> Gets or sets the title. </summary>
         public object Title
         {
-            get { return (object)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            get  => (object)base.GetValue(TitleProperty);
+            set => base.SetValue(TitleProperty, value);
         }
         /// <summary> Identifies the <see cref = "BlendModeComboBox.Title" /> dependency property. </summary>
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(object), typeof(BlendModeComboBox), new PropertyMetadata(null));

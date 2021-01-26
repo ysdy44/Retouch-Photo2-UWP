@@ -43,18 +43,18 @@ namespace Retouch_Photo2.Strokes
         /// <summary> Cap of <see cref = "CapSegmented" />. </summary>
         public CanvasCapStyle Cap
         {
-            get { return (CanvasCapStyle)GetValue(CapProperty); }
-            set { SetValue(CapProperty, value); }
+            get  => (CanvasCapStyle)base.GetValue(CapProperty);
+            set => base.SetValue(CapProperty, value);
         }
         /// <summary> Identifies the <see cref = "CapSegmented.Cap" /> dependency property. </summary>
         public static readonly DependencyProperty CapProperty = DependencyProperty.Register(nameof(Cap), typeof(CanvasCapStyle), typeof(CapSegmented), new PropertyMetadata(CanvasCapStyle.Flat, (sender, e) =>
         {
-            CapSegmented con = (CapSegmented)sender;
+            CapSegmented control = (CapSegmented)sender;
 
             if (e.NewValue is CanvasCapStyle value)
             {
-                con._vsCap = value;
-                con.VisualState = con.VisualState;//State
+                control._vsCap = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 
@@ -62,8 +62,8 @@ namespace Retouch_Photo2.Strokes
         /// <summary> IsOpen of <see cref = "CapSegmented" />. </summary>
         public bool IsOpen
         {
-            get { return (bool)GetValue(IsOpenProperty); }
-            set { SetValue(IsOpenProperty, value); }
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
         }
         /// <summary> Identifies the <see cref = "CapSegmented.IsOpen" /> dependency property. </summary>
         public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(CapSegmented), new PropertyMetadata(false));

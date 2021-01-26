@@ -16,17 +16,17 @@ namespace Retouch_Photo2.Strokes
         /// <summary> Gets or sets <see cref = "ShowControl" />'s stroke-style. </summary>
         public CanvasStrokeStyle StrokeStyle
         {
-            get { return (CanvasStrokeStyle)GetValue(StrokeStyleProperty); }
-            set { SetValue(StrokeStyleProperty, value); }
+            get  => (CanvasStrokeStyle)base.GetValue(StrokeStyleProperty);
+            set => base.SetValue(StrokeStyleProperty, value);
         }
         /// <summary> Identifies the <see cref = "ShowControl.StrokeStyle" /> dependency property. </summary>
         public static readonly DependencyProperty StrokeStyleProperty = DependencyProperty.Register(nameof(StrokeStyle), typeof(CanvasStrokeStyle), typeof(ShowControl), new PropertyMetadata(null, (sender, e) =>
         {
-            ShowControl con = (ShowControl)sender;
+            ShowControl control = (ShowControl)sender;
 
             if (e.NewValue is CanvasStrokeStyle value)
             {
-                con.Line.SetStrokeStyle(value);
+                control.Line.SetStrokeStyle(value);
             }
         }));
 

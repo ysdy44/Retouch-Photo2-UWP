@@ -20,7 +20,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.fillOrStroke == value) return;
                 this.fillOrStroke = value;
-                this.OnPropertyChanged(nameof(this.FillOrStroke));//Notify 
+                this.OnPropertyChanged(nameof(FillOrStroke));//Notify 
             }
         }
         private FillOrStroke fillOrStroke = FillOrStroke.Fill;
@@ -33,7 +33,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.color = value;
-                this.OnPropertyChanged(nameof(this.Color));//Notify 
+                this.OnPropertyChanged(nameof(Color));//Notify 
             }
         }
         private Color color = Colors.LightGray;
@@ -50,7 +50,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.isFollowTransform == value) return;
                 this.isFollowTransform = value;
-                this.OnPropertyChanged(nameof(this.IsFollowTransform));//Notify 
+                this.OnPropertyChanged(nameof(IsFollowTransform));//Notify 
             }
         }
         private bool isFollowTransform = true;
@@ -63,7 +63,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.isStrokeBehindFill == value) return;
                 this.isStrokeBehindFill = value;
-                this.OnPropertyChanged(nameof(this.IsStrokeBehindFill));//Notify 
+                this.OnPropertyChanged(nameof(IsStrokeBehindFill));//Notify 
             }
         }
         private bool isStrokeBehindFill = false;
@@ -75,7 +75,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.fill = value;
-                this.OnPropertyChanged(nameof(this.Fill));//Notify 
+                this.OnPropertyChanged(nameof(Fill));//Notify 
             }
         }
         private IBrush fill = BrushBase.ColorBrush(Colors.LightGray);
@@ -87,7 +87,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.stroke = value;
-                this.OnPropertyChanged(nameof(this.Stroke));//Notify 
+                this.OnPropertyChanged(nameof(Stroke));//Notify 
             }
         }
         private IBrush stroke = new BrushBase();
@@ -100,7 +100,7 @@ namespace Retouch_Photo2.ViewModels
             {
                 if (this.isStrokeWidthFollowScale == value) return;
                 this.isStrokeWidthFollowScale = value;
-                this.OnPropertyChanged(nameof(this.IsStrokeWidthFollowScale));//Notify 
+                this.OnPropertyChanged(nameof(IsStrokeWidthFollowScale));//Notify 
             }
         }
         private bool isStrokeWidthFollowScale = false;
@@ -112,7 +112,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.strokeWidth = value;
-                this.OnPropertyChanged(nameof(this.StrokeWidth));//Notify 
+                this.OnPropertyChanged(nameof(StrokeWidth));//Notify 
             }
         }
         private float strokeWidth = 1;
@@ -132,9 +132,9 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.strokeStyleDash = value;
-                this.OnPropertyChanged(nameof(this.StrokeStyleDash));//Notify 
+                this.OnPropertyChanged(nameof(StrokeStyleDash));//Notify 
                 this.StrokeStyle.DashStyle = value;
-                this.OnPropertyChanged(nameof(this.StrokeStyle));//Notify 
+                this.OnPropertyChanged(nameof(StrokeStyle));//Notify 
             }
         }
         private CanvasDashStyle strokeStyleDash = CanvasDashStyle.Solid;
@@ -146,9 +146,9 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.strokeStyleCap = value;
-                this.OnPropertyChanged(nameof(this.StrokeStyleCap));//Notify 
+                this.OnPropertyChanged(nameof(StrokeStyleCap));//Notify 
                 this.StrokeStyle.DashCap = value;
-                this.OnPropertyChanged(nameof(this.StrokeStyle));//Notify 
+                this.OnPropertyChanged(nameof(StrokeStyle));//Notify 
             }
         }
         private CanvasCapStyle strokeStyleCap = CanvasCapStyle.Flat;
@@ -160,9 +160,9 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.strokeStyleJoin = value;
-                this.OnPropertyChanged(nameof(this.StrokeStyleJoin));//Notify 
+                this.OnPropertyChanged(nameof(StrokeStyleJoin));//Notify 
                 this.StrokeStyle.LineJoin = value;
-                this.OnPropertyChanged(nameof(this.StrokeStyle));//Notify 
+                this.OnPropertyChanged(nameof(StrokeStyle));//Notify 
             }
         }
         private CanvasLineJoin strokeStyleJoin = CanvasLineJoin.Miter;
@@ -174,9 +174,9 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.strokeStyleOffset = value;
-                this.OnPropertyChanged(nameof(this.StrokeStyleOffset));//Notify 
+                this.OnPropertyChanged(nameof(StrokeStyleOffset));//Notify 
                 this.StrokeStyle.DashOffset = value;
-                this.OnPropertyChanged(nameof(this.StrokeStyle));//Notify 
+                this.OnPropertyChanged(nameof(StrokeStyle));//Notify 
             }
         }
         private float strokeStyleOffset = 0.0f;
@@ -192,7 +192,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.transparency = value;
-                this.OnPropertyChanged(nameof(this.Transparency));//Notify 
+                this.OnPropertyChanged(nameof(Transparency));//Notify 
             }
         }
         private IBrush transparency = new BrushBase();

@@ -91,18 +91,18 @@ namespace Retouch_Photo2
         /// <summary> Gets or sets the canvas transition value. </summary>
         public float TransitionValue
         {
-            get { return (float)GetValue(TransitionValueProperty); }
-            set { SetValue(TransitionValueProperty, value); }
+            get => (float)base.GetValue(TransitionValueProperty);
+            set => base.SetValue(TransitionValueProperty, value);
         }
         /// <summary> Identifies the <see cref = "DrawPage.TransitionValue" /> dependency property. </summary>
         public static readonly DependencyProperty TransitionValueProperty = DependencyProperty.Register(nameof(TransitionValue), typeof(float), typeof(DrawPage), new PropertyMetadata(0.0f, (sender, e) =>
         {
-            DrawPage con = (DrawPage)sender;
+            DrawPage control = (DrawPage)sender;
 
             if (e.NewValue is float value)
             {
-                con.ViewModel.CanvasTransformer.Transition(value);
-                con.ViewModel.Invalidate();//Invalidate
+                control.ViewModel.CanvasTransformer.Transition(value);
+                control.ViewModel.Invalidate();//Invalidate
             }
         }));
 

@@ -46,18 +46,18 @@ namespace Retouch_Photo2.Blends
         /// <summary> Gets or sets the tag type. </summary>
         public TagType Type
         {
-            get { return (TagType)GetValue(TypeProperty); }
-            set { SetValue(TypeProperty, value); }
+            get  => (TagType)base.GetValue(TypeProperty);
+            set => base.SetValue(TypeProperty, value);
         }
         /// <summary> Identifies the <see cref = "TagTypeSegmented.Type" /> dependency property. </summary>
         public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(TagType), typeof(TagTypeSegmented), new PropertyMetadata(TagType.None, (sender, e) =>
         {
-            TagTypeSegmented con = (TagTypeSegmented)sender;
+            TagTypeSegmented control = (TagTypeSegmented)sender;
 
             if (e.NewValue is TagType value)
             {
-                con._vsTagType = value;
-                con.VisualState = con.VisualState;//State
+                control._vsTagType = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 

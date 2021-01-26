@@ -39,7 +39,7 @@
             <Flyout x:Name="_DocumentFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                 <Button x:Name="_DocumentUnSaveButton" Width="180" Style="{StaticResource AppIconButton}">
                     <Button.Tag>
-                        <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        <FontIcon Glyph="&#xF78A;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                     </Button.Tag>
                 </Button>
             </Flyout>
@@ -88,7 +88,7 @@
 
 
         <!--Document-->
-        <Button x:Name="_DocumentButton" Padding="10, 0" FontWeight="Bold" Style="{StaticResource AppButtonStyle}"/>
+        <Button x:Name="_DocumentButton" Padding="10, 0" FontWeight="Medium" Style="{StaticResource AppButtonStyle}"/>
 
 
         <!--ExpandAppbar-->

@@ -20,7 +20,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.clipboardEnable = value;
-                this.OnPropertyChanged(nameof(this.ClipboardEnable));//Notify 
+                this.OnPropertyChanged(nameof(ClipboardEnable));//Notify 
             }
         }
         private bool clipboardEnable;

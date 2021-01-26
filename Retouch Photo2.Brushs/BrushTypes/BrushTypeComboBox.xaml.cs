@@ -29,23 +29,23 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets or sets the fill or stroke. </summary>
         public FillOrStroke FillOrStroke
         {
-            get { return (FillOrStroke)GetValue(FillOrStrokeProperty); }
-            set { SetValue(FillOrStrokeProperty, value); }
+            get  => (FillOrStroke)base.GetValue(FillOrStrokeProperty);
+            set => base.SetValue(FillOrStrokeProperty, value);
         }
         /// <summary> Identifies the <see cref = "BrushTypeComboBox.FillOrStroke" /> dependency property. </summary>
         public static readonly DependencyProperty FillOrStrokeProperty = DependencyProperty.Register(nameof(FillOrStroke), typeof(FillOrStroke), typeof(BrushTypeComboBox), new PropertyMetadata(FillOrStroke.Fill, (sender, e) =>
         {
-            BrushTypeComboBox con = (BrushTypeComboBox)sender;
+            BrushTypeComboBox control = (BrushTypeComboBox)sender;
 
             if (e.NewValue is FillOrStroke value)
             {
                 switch (value)
                 {
                     case FillOrStroke.Fill:
-                        con.Group?.Invoke(con, con.FillType);//Delegate
+                        control.Group?.Invoke(control, control.FillType);//Delegate
                         break;
                     case FillOrStroke.Stroke:
-                        con.Group?.Invoke(con, con.StrokeType);//Delegate
+                        control.Group?.Invoke(control, control.StrokeType);//Delegate
                         break;
                 }
             }
@@ -55,21 +55,21 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets or sets the fill. </summary>
         public IBrush Fill
         {
-            get { return (IBrush)GetValue(FillProperty); }
-            set { SetValue(FillProperty, value); }
+            get  => (IBrush)base.GetValue(FillProperty);
+            set => base.SetValue(FillProperty, value);
         }
         /// <summary> Identifies the <see cref = "BrushTypeComboBox.Fill" /> dependency property. </summary>
         public static readonly DependencyProperty FillProperty = DependencyProperty.Register(nameof(Fill), typeof(IBrush), typeof(BrushTypeComboBox), new PropertyMetadata(null, (sender, e) =>
         {
-            BrushTypeComboBox con = (BrushTypeComboBox)sender;
+            BrushTypeComboBox control = (BrushTypeComboBox)sender;
 
             if (e.NewValue is IBrush value)
             {
-                con.FillType = value.Type;
+                control.FillType = value.Type;
             }
             else
             {
-                con.FillType = BrushType.None;
+                control.FillType = BrushType.None;
             }
         }));
 
@@ -94,21 +94,21 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets or sets the stroke. </summary>
         public IBrush Stroke
         {
-            get { return (IBrush)GetValue(StrokeProperty); }
-            set { SetValue(StrokeProperty, value); }
+            get  => (IBrush)base.GetValue(StrokeProperty);
+            set => base.SetValue(StrokeProperty, value);
         }
         /// <summary> Identifies the <see cref = "BrushTypeComboBox.Stroke" /> dependency property. </summary>
         public static readonly DependencyProperty StrokeProperty = DependencyProperty.Register(nameof(Stroke), typeof(IBrush), typeof(BrushTypeComboBox), new PropertyMetadata(null, (sender, e) =>
         {
-            BrushTypeComboBox con = (BrushTypeComboBox)sender;
+            BrushTypeComboBox control = (BrushTypeComboBox)sender;
 
             if (e.NewValue is IBrush value)
             {
-                con.StrokeType = value.Type;
+                control.StrokeType = value.Type;
             }
             else
             {
-                con.StrokeType = BrushType.None;
+                control.StrokeType = BrushType.None;
             }
         }));
 

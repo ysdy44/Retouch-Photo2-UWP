@@ -15,7 +15,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> <see cref = "ViewModel.CanvasTransformer" />'s radian. </summary>
         public float CanvasTransformerRadian => this.CanvasTransformer.Radian;
         /// <summary> Notify <see cref="CanvasTransformerRadian"/>. </summary>
-        public void NotifyCanvasTransformerRadian() => this.OnPropertyChanged(nameof(this.CanvasTransformerRadian));//Notify 
+        public void NotifyCanvasTransformerRadian() => this.OnPropertyChanged(nameof(CanvasTransformerRadian));//Notify 
         /// <summary> Set <see cref="CanvasTransformerRadian"/>. </summary>
         public void SetCanvasTransformerRadian(float radian)
         {
@@ -29,7 +29,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> <see cref = "ViewModel.CanvasTransformer" />'s scale. </summary>
         public float CanvasTransformerScale => this.CanvasTransformer.Scale;
         /// <summary> Notify <see cref="CanvasTransformerScale"/>. </summary>
-        public void NotifyCanvasTransformerScale() => this.OnPropertyChanged(nameof(this.CanvasTransformerScale));//Notify 
+        public void NotifyCanvasTransformerScale() => this.OnPropertyChanged(nameof(CanvasTransformerScale));//Notify 
         /// <summary> Set <see cref="CanvasTransformerScale"/>. </summary>
         public void SetCanvasTransformerScale(float scale)
         {

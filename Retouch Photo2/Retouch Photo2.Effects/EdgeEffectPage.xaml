@@ -21,9 +21,7 @@
             <hsvColorPickers:NumberPicker x:Name="AmountPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                            RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
-        <Border Height="{StaticResource AppCircleHeight}">
-            <elements:SliderPicker x:Name="AmountSlider"/>
-        </Border>
+        <elements:SliderPicker x:Name="AmountSlider"/>
         
 
         <!--Radius-->
@@ -32,9 +30,7 @@
             <hsvColorPickers:NumberPicker x:Name="RadiusPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                            RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
-        <Border Height="{StaticResource AppCircleHeight}">
-            <elements:SliderPicker x:Name="RadiusSlider"/>
-        </Border>
+        <elements:SliderPicker x:Name="RadiusSlider"/>
 
     </StackPanel>    
 </Page>

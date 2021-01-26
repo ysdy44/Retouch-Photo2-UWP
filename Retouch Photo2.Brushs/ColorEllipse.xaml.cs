@@ -17,19 +17,19 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets or sets the brush. </summary>
         public IBrush Brush
         {
-            get { return (IBrush)GetValue(BrushProperty); }
-            set { SetValue(BrushProperty, value); }
+            get  => (IBrush)base.GetValue(BrushProperty);
+            set => base.SetValue(BrushProperty, value);
         }
         /// <summary> Identifies the <see cref = "ColorEllipse.Brush" /> dependency property. </summary>
         public static readonly DependencyProperty BrushProperty = DependencyProperty.Register(nameof(Brush), typeof(IBrush), typeof(ColorEllipse), new PropertyMetadata(null, (sender, e) =>
         {
-            ColorEllipse con = (ColorEllipse)sender;
+            ColorEllipse control = (ColorEllipse)sender;
 
             if (e.NewValue is IBrush value)
             {
                 if (value.Type == BrushType.Color)
                 {
-                    con.Color = value.Color;
+                    control.Color = value.Color;
                 }
             }
         }));
@@ -37,8 +37,8 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets or sets the color. </summary>
         public Color Color
         {
-            get { return (Color)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            get => (Color)base.GetValue(ColorProperty);
+            set => base.SetValue(ColorProperty, value);
         }
         /// <summary> Identifies the <see cref = "ColorEllipse.Color" /> dependency property. </summary>
         public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(nameof(Color), typeof(Color), typeof(ColorEllipse), new PropertyMetadata(Colors.LightGray));

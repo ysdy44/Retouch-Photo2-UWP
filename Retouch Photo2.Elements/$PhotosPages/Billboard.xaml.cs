@@ -18,8 +18,8 @@ namespace Retouch_Photo2.Elements
         /// <summary> Gets or sets the photo. </summary>
         public Photo Photo
         {
-            get { return (Photo)GetValue(PhotoProperty); }
-            set { SetValue(PhotoProperty, value); }
+            get  => (Photo)base.GetValue(PhotoProperty);
+            set => base.SetValue(PhotoProperty, value);
         }
         /// <summary> Identifies the <see cref = "Billboard.Photo" /> dependency property. </summary>
         public static readonly DependencyProperty PhotoProperty = DependencyProperty.Register(nameof(Photo), typeof(Photo), typeof(Billboard), new PropertyMetadata(new Photo()));

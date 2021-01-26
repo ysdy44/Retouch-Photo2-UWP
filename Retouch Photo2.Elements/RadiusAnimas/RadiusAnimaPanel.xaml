@@ -7,8 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    BorderBrush="{ThemeResource AppBorderBrush}"
-    Background="{ThemeResource AppBackground}"
+    xmlns:apiContractNotPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
+    xmlns:apiContractPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
+    BorderBrush="{ThemeResource AppStroke}"
+    apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+    apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}"
     HorizontalAlignment="Center"
     VerticalAlignment="Center"
     mc:Ignorable="d"
@@ -45,7 +48,7 @@
         </controls:DropShadowPanel>
 
         <!--Content-->
-        <Border x:Name="ContentBorder" Margin="0,0" HorizontalAlignment="Center" MinHeight="50" MinWidth="100" 
+        <Border x:Name="ContentBorder" HorizontalAlignment="Center" MinHeight="50" MinWidth="100" 
                 CornerRadius="{x:Bind CornerRadius, Mode=OneWay}" />
 
     </Grid>

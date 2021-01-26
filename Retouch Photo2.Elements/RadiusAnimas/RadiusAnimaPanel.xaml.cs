@@ -22,8 +22,8 @@ namespace Retouch_Photo2.Elements
         /// <summary> Gets or sets <see cref = "RadiusAnimaPanel" />'s corner radius. </summary>
         public CornerRadius CornerRadius
         {
-            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
-            set { SetValue(CornerRadiusProperty, value); }
+            get  => (CornerRadius)base.GetValue(CornerRadiusProperty);
+            set => base.SetValue(CornerRadiusProperty, value);
         }
         /// <summary> Identifies the <see cref = "RadiusAnimaPanel.CornerRadius" /> dependency property. </summary>
         public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(CornerRadius), new PropertyMetadata(new CornerRadius(25)));

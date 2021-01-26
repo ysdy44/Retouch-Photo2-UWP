@@ -62,8 +62,8 @@ namespace Retouch_Photo2.Tools
         /// <summary> Gets or sets the picker of <see cref = "TouchbarButton" />. </summary>
         public NumberPicker Picker
         {
-            get { return (NumberPicker)GetValue(PickerProperty); }
-            set { SetValue(PickerProperty, value); }
+            get => (NumberPicker)base.GetValue(PickerProperty);
+            set => base.SetValue(PickerProperty, value);
         }
         /// <summary> Identifies the <see cref = "TouchbarButton.Picker" /> dependency property. </summary>
         public static readonly DependencyProperty PickerProperty = DependencyProperty.Register(nameof(Picker), typeof(NumberPicker), typeof(TouchbarSlider), new PropertyMetadata(null));
@@ -72,8 +72,8 @@ namespace Retouch_Photo2.Tools
         /// <summary> Gets or sets the slider of <see cref = "TouchbarButton" />. </summary>
         public TouchSliderBase Slider
         {
-            get { return (TouchSliderBase)GetValue(SliderProperty); }
-            set { SetValue(SliderProperty, value); }
+            get => (TouchSliderBase)base.GetValue(SliderProperty);
+            set => base.SetValue(SliderProperty, value);
         }
         /// <summary> Identifies the <see cref = "TouchbarButton.Slider" /> dependency property. </summary>
         public static readonly DependencyProperty SliderProperty = DependencyProperty.Register(nameof(Slider), typeof(TouchSliderBase), typeof(TouchbarSlider), new PropertyMetadata(null));
@@ -82,8 +82,8 @@ namespace Retouch_Photo2.Tools
         /// <summary> Get or set the content. </summary>
         public object CenterContent
         {
-            get { return (object)GetValue(CenterContentProperty); }
-            set { SetValue(CenterContentProperty, value); }
+            get  => (object)base.GetValue(CenterContentProperty);
+            set => base.SetValue(CenterContentProperty, value);
         }
         /// <summary> Identifies the <see cref = "TouchbarButton.CenterContent" /> dependency property. </summary>
         public static readonly DependencyProperty CenterContentProperty = DependencyProperty.Register(nameof(CenterContent), typeof(object), typeof(TouchbarSlider), new PropertyMetadata(null));

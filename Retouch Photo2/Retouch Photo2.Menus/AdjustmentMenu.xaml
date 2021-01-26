@@ -32,7 +32,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <ContentPresenter Content="{x:Bind Icon}"/>
-                            <TextBlock Text="{x:Bind Text}" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                            <TextBlock Text="{x:Bind Text}" Grid.Column="1" FontWeight="Medium" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -42,7 +42,7 @@
 
         <!--DataTemplate-->
         <DataTemplate x:Key="DataTemplate" x:DataType="adjustments:IAdjustment">
-            <Grid Height="32" Background="{ThemeResource AppForeground}">
+            <Grid Height="32" Background="{ThemeResource AppBackground}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="40"/>
@@ -50,7 +50,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!--Text-->
-                <TextBlock Text="{x:Bind Text}" Margin="12,0" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                <TextBlock Text="{x:Bind Text}" Margin="12,0" FontWeight="Medium" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
 
                 <!--Edit-->
                 <Button x:Name="EditButton" Grid.Column="1" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
@@ -72,6 +72,7 @@
         <Style x:Name="FilterItemStyle" TargetType="ListViewItem">
             <Setter Property="Margin" Value="2" />
             <Setter Property="Padding" Value="8,0" />
+            <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -86,7 +87,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <FontIcon Glyph="&#xE9E9;" FontFamily="Segoe MDL2 Assets"/>
-                <TextBlock Text="{x:Bind Name}" Grid.Column="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                <TextBlock Text="{x:Bind Name}" Grid.Column="1" FontWeight="Medium" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
             </Grid>
         </DataTemplate>
 
@@ -97,7 +98,7 @@
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
-        <VisualStateGroup x:Name="VisualStateGroup">
+            <VisualStateGroup x:Name="VisualStateGroup">
 
             <!--Normal-->
             <VisualState x:Name="Normal"/>
@@ -148,7 +149,7 @@
             </VisualState>
 
         </VisualStateGroup>
-    </VisualStateManager.VisualStateGroups>
+       </VisualStateManager.VisualStateGroups>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*" MinHeight="165"/>
@@ -173,8 +174,8 @@
                 <ColumnDefinition Width="4"/>
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="TextBlock" Margin="12,0" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="AddButton" Grid.Column="1" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-            <Button x:Name="FilterButton" Grid.Column="3" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            <Button x:Name="AddButton" Grid.Column="1" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            <Button x:Name="FilterButton" Grid.Column="3" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
         </Grid>
 
 

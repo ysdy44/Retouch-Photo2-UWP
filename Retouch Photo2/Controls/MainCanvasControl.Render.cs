@@ -25,18 +25,18 @@ namespace Retouch_Photo2.Controls
         /// <summary> Gets or sets <see cref = "MainCanvasControl" />'s accent color. </summary>
         public Color AccentColor
         {
-            get { return (Color)GetValue(AccentColorProperty); }
-            set { SetValue(AccentColorProperty, value); }
+            get => (Color)base.GetValue(AccentColorProperty);
+            set => base.SetValue(AccentColorProperty, value);
         }
         /// <summary> Identifies the <see cref = "MainCanvasControl.AccentColor" /> dependency property. </summary>
         public static readonly DependencyProperty AccentColorProperty = DependencyProperty.Register(nameof(AccentColor), typeof(Color), typeof(MainCanvasControl), new PropertyMetadata(Colors.DodgerBlue, (sender, e) =>
         {
-            MainCanvasControl con = (MainCanvasControl)sender;
+            MainCanvasControl control = (MainCanvasControl)sender;
 
             if (e.NewValue is Color value)
             {
-                con.ViewModel.AccentColor = value;
-                con.ViewModel.Invalidate();//Invalidate
+                control.ViewModel.AccentColor = value;
+                control.ViewModel.Invalidate();//Invalidate
             }
         }));
 
@@ -44,17 +44,17 @@ namespace Retouch_Photo2.Controls
         /// <summary> Gets or sets <see cref = "MainCanvasControl" />'s shadow color. </summary>
         public Color ShadowColor
         {
-            get { return (Color)GetValue(ShadowColorProperty); }
-            set { SetValue(ShadowColorProperty, value); }
+            get => (Color)base.GetValue(ShadowColorProperty);
+            set => base.SetValue(ShadowColorProperty, value);
         }
         /// <summary> Identifies the <see cref = "MainCanvasControl.ShadowColor" /> dependency property. </summary>
         public static readonly DependencyProperty ShadowColorProperty = DependencyProperty.Register(nameof(ShadowColor), typeof(Color), typeof(MainCanvasControl), new PropertyMetadata(Colors.Black, (sender, e) =>
         {
-            MainCanvasControl con = (MainCanvasControl)sender;
+            MainCanvasControl control = (MainCanvasControl)sender;
 
             if (e.NewValue is Color value)
             {
-                con.ViewModel.Invalidate();//Invalidate
+                control.ViewModel.Invalidate();//Invalidate
             }
         }));
 

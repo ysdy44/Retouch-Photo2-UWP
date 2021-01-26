@@ -52,8 +52,8 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary> Gets or sets <see cref = "GammaTransferPage" />'s red visibility. </summary>
         public Visibility RedIsExpaned
         {
-            get { return (Visibility)GetValue(RedIsExpanedProperty); }
-            set { SetValue(RedIsExpanedProperty, value); }
+            get => (Visibility)base.GetValue(RedIsExpanedProperty);
+            set => base.SetValue(RedIsExpanedProperty, value);
         }
         /// <summary> Identifies the <see cref = "GammaTransferPage.RedIsExpaned" /> dependency property. </summary>
         public static readonly DependencyProperty RedIsExpanedProperty = DependencyProperty.Register(nameof(RedIsExpaned), typeof(Visibility), typeof(GammaTransferPage), new PropertyMetadata(Visibility.Collapsed));

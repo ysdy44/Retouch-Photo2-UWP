@@ -17,13 +17,13 @@ namespace Retouch_Photo2.Elements
         /// <summary> Color of <see cref="ApplicationViewTitleBar"/>. </summary>
         public Color TitleBarColor
         {
-            get => (Color)GetValue(TitleBarColorProperty);
+            get => (Color)base.GetValue(TitleBarColorProperty);
             set => SetValue(TitleBarColorProperty, value);
         }
         /// <summary> Identifies the <see cref = "ApplicationViewTitleBarBackgroundExtension.TitleBarColor" /> dependency property. </summary>
         public static readonly DependencyProperty TitleBarColorProperty = DependencyProperty.Register(nameof(TitleBarColor), typeof(Color), typeof(ApplicationViewTitleBarBackgroundExtension), new PropertyMetadata(Colors.Gray, (sender, e) =>
         {
-            ApplicationViewTitleBarBackgroundExtension con = (ApplicationViewTitleBarBackgroundExtension)sender;
+            ApplicationViewTitleBarBackgroundExtension control = (ApplicationViewTitleBarBackgroundExtension)sender;
 
             if (e.NewValue is Color value)
             {

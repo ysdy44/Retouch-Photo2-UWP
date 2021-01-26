@@ -30,7 +30,7 @@
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                            Value="{x:Bind OpacityToNumberConverter(SelectionViewModel.Opacity), Mode=OneWay}"/>
         </RelativePanel>
-        <Border Height="{StaticResource AppCircleHeight}">
+        <Border>
             <elements:SliderPicker x:Name="OpacitySlider"
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                            Value="{x:Bind SelectionViewModel.Opacity, Mode=OneWay}"/>

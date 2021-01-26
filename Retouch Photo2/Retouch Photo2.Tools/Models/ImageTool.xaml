@@ -34,7 +34,8 @@
             <TextBlock x:Name="SelectTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <Button x:Name="SelectButton" Style="{StaticResource AppCircleButtonStyle}">
                 <Button.BorderBrush>
-                    <SolidColorBrush x:Name="SelectBorderBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
+                    <!--Storyboard-->
+                    <SolidColorBrush x:Name="SelectBorderBorderBrush" Color="{ThemeResource AppStrokeColor}"/>
                 </Button.BorderBrush>
                 <FontIcon Glyph="&#xE109;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>

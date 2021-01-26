@@ -24,7 +24,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.canvasHitTestVisible = value; 
-                this.OnPropertyChanged(nameof(this.CanvasHitTestVisible));//Notify 
+                this.OnPropertyChanged(nameof(CanvasHitTestVisible));//Notify 
             }
         }
         private bool canvasHitTestVisible = true;
@@ -37,7 +37,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.tipText = value;
-                this.OnPropertyChanged(nameof(this.TipText));//Notify 
+                this.OnPropertyChanged(nameof(TipText));//Notify 
             }
         }
         private string tipText = string.Empty;
@@ -48,7 +48,7 @@ namespace Retouch_Photo2.ViewModels
             set
             {
                 this.tipTextVisibility = value;
-                this.OnPropertyChanged(nameof(this.TipTextVisibility));//Notify 
+                this.OnPropertyChanged(nameof(TipTextVisibility));//Notify 
             }
         }
         private Visibility tipTextVisibility = Visibility.Collapsed;
