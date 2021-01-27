@@ -273,7 +273,7 @@
 
             <!--DeleteChild-->
             <elementMainPages:MainLayout.DeleteChild>
-                <StackPanel x:Name="DeleteStackPanel" Padding="12,0" MinWidth="260">
+                <StackPanel x:Name="DeleteStackPanel" Padding="18,0" MinWidth="260">
 
                     <TextBlock Margin="0,6">
                         <Run x:Name="DeleteRunTitle" FontWeight="Bold"/>
@@ -300,7 +300,7 @@
 
             <!--DuplicateChild-->
             <elementMainPages:MainLayout.DuplicateChild>
-                <StackPanel x:Name="DuplicateStackPanel" Padding="12,0" MinWidth="260">
+                <StackPanel x:Name="DuplicateStackPanel" Padding="18,0" MinWidth="260">
 
                     <TextBlock Margin="0,6">
                         <Run x:Name="DuplicateRunTitle" FontWeight="Bold"/>

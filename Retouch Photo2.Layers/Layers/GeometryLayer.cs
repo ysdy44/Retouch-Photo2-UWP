@@ -53,9 +53,9 @@ namespace Retouch_Photo2.Layers.Models
                 }
                 else
                 {
-
-                    Transformer transformer = base.Transform.Transformer;
-                    CanvasGeometry geometryCrop = transformer.ToRectangle(resourceCreator);
+                    
+                    Transformer cropTransformer = base.Transform.CropTransformer;
+                    CanvasGeometry geometryCrop = cropTransformer.ToRectangle(resourceCreator);
 
                     switch (base.Style.Transparency.Type)
                     {

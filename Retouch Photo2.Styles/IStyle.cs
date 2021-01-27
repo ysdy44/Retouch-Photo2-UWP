@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Styles
         /// <summary> Gets or sets whether the style follows the transform. </summary>
         bool IsFollowTransform { get; set; }
 
-        /// <summary> Gets or sets whether the stroke is behind the fill.. </summary>
+        /// <summary> Gets or sets whether the stroke is behind the fill. </summary>
         bool IsStrokeBehindFill { get; set; }
 
         /// <summary> Gets or sets Style's fill. </summary>
