@@ -1,4 +1,9 @@
-﻿using Windows.UI;
+﻿// Core:              
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      
+using Windows.UI;
 
 namespace Retouch_Photo2.Blends
 {

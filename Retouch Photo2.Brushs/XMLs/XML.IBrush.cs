@@ -1,4 +1,9 @@
-﻿using System.Linq;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using System.Linq;
 using System.Xml.Linq;
 
 namespace Retouch_Photo2.Brushs

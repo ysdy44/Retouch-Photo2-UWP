@@ -1,5 +1,9 @@
-﻿using Microsoft.Graphics.Canvas.Effects;
-using System.Xml.Linq;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using Microsoft.Graphics.Canvas.Effects;
 
 namespace Retouch_Photo2.Blends
 {
@@ -8,7 +12,7 @@ namespace Retouch_Photo2.Blends
     /// </summary>
     public static partial class XML
     {
-        
+
         /// <summary>
         /// Create a blend mode from the string.
         /// </summary>
@@ -48,6 +52,6 @@ namespace Retouch_Photo2.Blends
                 default: return null;
             }
         }
-        
+
     }
 }

@@ -1,4 +1,9 @@
-﻿using Windows.ApplicationModel.Resources;
+﻿// Core:              
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

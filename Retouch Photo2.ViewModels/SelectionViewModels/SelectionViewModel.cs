@@ -1,6 +1,10 @@
-﻿using FanKit.Transformers;
+﻿// Core:              ★★★★★
+// Referenced:   ★★★★★
+// Difficult:         ★★★★★
+// Only:              ★★★★★
+// Complete:      ★★★★★
+using FanKit.Transformers;
 using Retouch_Photo2.Layers;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Windows.UI.Xaml.Controls;

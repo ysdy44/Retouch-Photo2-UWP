@@ -1,4 +1,9 @@
-﻿using Microsoft.Graphics.Canvas.Brushes;
+﻿// Core:              ★
+// Referenced:   
+// Difficult:         ★★★
+// Only:              ★★★
+// Complete:      ★★★★
+using Microsoft.Graphics.Canvas.Brushes;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI;

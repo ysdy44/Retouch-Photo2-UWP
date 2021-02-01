@@ -1,4 +1,9 @@
-﻿using System;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using System;
 
 namespace Retouch_Photo2.Historys
 {

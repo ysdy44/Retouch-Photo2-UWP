@@ -1,5 +1,10 @@
-﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements.MainPages;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         ★★
+// Only:              ★★★★★
+// Complete:      ★★★
+using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

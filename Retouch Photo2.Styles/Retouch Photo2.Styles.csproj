@@ -111,8 +111,8 @@
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShowControl.xaml.cs">
-      <DependentUpon>ShowControl.xaml</DependentUpon>
+    <Compile Include="StyleShowControl.xaml.cs">
+      <DependentUpon>StyleShowControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="IStyle.cs" />
     <Compile Include="Style.cs" />
@@ -135,7 +135,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ShowControl.xaml">
+    <Page Include="StyleShowControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

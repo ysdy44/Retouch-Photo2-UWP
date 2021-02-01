@@ -1,8 +1,4 @@
-﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Brushes;
-using Retouch_Photo2.Elements;
-using System.Linq;
-using System.Numerics;
+﻿using System.Linq;
 using System.Xml.Linq;
 
 namespace Retouch_Photo2.Brushs
@@ -42,7 +38,7 @@ namespace Retouch_Photo2.Brushs
                     break;
 
                 case BrushType.Image:
-                    element.Add(Retouch_Photo2.Elements.XML.SavePhotocopier("Photocopier", this.Photocopier));
+                    element.Add(Retouch_Photo2.Photos.XML.SavePhotocopier("Photocopier", this.Photocopier));
                     break;
             }
 
@@ -100,7 +96,7 @@ namespace Retouch_Photo2.Brushs
                     break;
 
                 case BrushType.Image:
-                    if (element.Element("Photocopier") is XElement photocopier) this.Photocopier = Retouch_Photo2.Elements.XML.LoadPhotocopier(photocopier);
+                    if (element.Element("Photocopier") is XElement photocopier) this.Photocopier = Retouch_Photo2.Photos.XML.LoadPhotocopier(photocopier);
                     break;
             }
 

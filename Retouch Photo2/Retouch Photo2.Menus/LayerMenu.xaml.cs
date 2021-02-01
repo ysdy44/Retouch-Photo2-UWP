@@ -1,4 +1,9 @@
-﻿using Microsoft.Graphics.Canvas.Effects;
+﻿// Core:              ★★★★
+// Referenced:   
+// Difficult:         ★★★★★
+// Only:              
+// Complete:      ★★★★★
+using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;

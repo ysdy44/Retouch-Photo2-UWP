@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.Elements.MainPages;
+﻿// Core:              ★★★★★
+// Referenced:   ★
+// Difficult:         ★★★★★
+// Only:              ★★★★★
+// Complete:      ★★★★★
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Linq;

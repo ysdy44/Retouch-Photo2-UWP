@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.Filters;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using Retouch_Photo2.Filters;
 using System;
 using System.Collections.Generic;
 using System.IO;

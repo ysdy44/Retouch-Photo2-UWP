@@ -1,4 +1,9 @@
-﻿using Microsoft.Graphics.Canvas.Geometry;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using Microsoft.Graphics.Canvas.Geometry;
 
 namespace Retouch_Photo2.Strokes
 {

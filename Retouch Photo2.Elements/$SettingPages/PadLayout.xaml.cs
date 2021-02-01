@@ -1,6 +1,11 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿// Core:              
+// Referenced:   
+// Difficult:         
+// Only:              
+// Complete:      
+using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Elements.SettingPages
+namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// Pad layout.

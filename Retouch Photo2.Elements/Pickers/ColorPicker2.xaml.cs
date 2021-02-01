@@ -1,4 +1,9 @@
-﻿using HSVColorPickers;
+﻿// Core:              ★★
+// Referenced:   ★★★★
+// Difficult:         ★★★
+// Only:              ★★★
+// Complete:      ★★
+using HSVColorPickers;
 using Retouch_Photo2.Elements.ColorPicker2Icons;
 using System;
 using Windows.ApplicationModel.Resources;

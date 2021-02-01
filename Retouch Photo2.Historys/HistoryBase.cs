@@ -1,4 +1,9 @@
-﻿namespace Retouch_Photo2.Historys
+﻿// Core:              ★★★★
+// Referenced:   ★★★★
+// Difficult:         
+// Only:              
+// Complete:      
+namespace Retouch_Photo2.Historys
 {
     /// <summary>
     /// Represents a history that contains a ( undo $ redo) method.

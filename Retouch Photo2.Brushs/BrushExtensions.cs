@@ -1,4 +1,9 @@
-﻿using HSVColorPickers;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using HSVColorPickers;
 using Microsoft.Toolkit.Uwp.UI.Media;
 using Windows.Foundation;
 using Windows.UI.Xaml.Media;

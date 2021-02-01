@@ -1,9 +1,14 @@
-﻿namespace Retouch_Photo2.Effects
+﻿// Core:              
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      
+namespace Retouch_Photo2.Effects
 {
     /// <summary> 
     /// Type of <see cref="Effect"/>.
     /// </summary>
-    public enum EffectType
+public enum EffectType
     {
         /// <summary> Nornal </summary>
         None,

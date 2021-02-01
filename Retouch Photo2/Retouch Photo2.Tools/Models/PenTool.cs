@@ -1,4 +1,9 @@
-﻿using FanKit.Transformers;
+﻿// Core:              ★★★★
+// Referenced:   
+// Difficult:         ★★★★
+// Only:              
+// Complete:      ★★★★
+using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
@@ -47,7 +52,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.ConstructStrings();
         }
-        
+
 
         NodeCollectionMode Mode = NodeCollectionMode.None;
 
@@ -131,7 +136,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
         }
-        
+
         public void Draw(CanvasDrawingSession drawingSession)
         {
             switch (this.Mode)

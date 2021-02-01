@@ -1,4 +1,9 @@
-﻿using System.Xml.Linq;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using System.Xml.Linq;
 
 namespace Retouch_Photo2.Layers
 {

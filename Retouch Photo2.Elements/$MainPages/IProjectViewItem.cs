@@ -1,4 +1,9 @@
-﻿using Windows.Foundation;
+﻿// Core:              ★★★
+// Referenced:   ★★
+// Difficult:         ★
+// Only:              ★
+// Complete:      ★
+using Windows.Foundation;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Elements

@@ -1,11 +1,9 @@
-﻿using HSVColorPickers;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Brushes;
-using Retouch_Photo2.Elements;
+﻿using FanKit.Transformers;
+using HSVColorPickers;
+using Retouch_Photo2.Photos;
 using System.Linq;
 using System.Numerics;
 using Windows.UI;
-using FanKit.Transformers;
 
 namespace Retouch_Photo2.Brushs
 {

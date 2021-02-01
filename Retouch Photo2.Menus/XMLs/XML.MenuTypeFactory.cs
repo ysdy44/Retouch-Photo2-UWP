@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.Menus;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using Retouch_Photo2.Menus;
 
 namespace Retouch_Photo2.Menus
 {

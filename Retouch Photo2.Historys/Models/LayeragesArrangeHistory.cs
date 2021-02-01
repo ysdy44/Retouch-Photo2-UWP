@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.Layers;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using Retouch_Photo2.Layers;
 using System;
 using System.Collections.Generic;
 

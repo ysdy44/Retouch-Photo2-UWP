@@ -1,4 +1,9 @@
-﻿namespace Retouch_Photo2.Adjustments
+﻿// Core:              ★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      
+namespace Retouch_Photo2.Adjustments
 {
     /// <summary> 
     /// Type of <see cref = "IAdjustment"/>.

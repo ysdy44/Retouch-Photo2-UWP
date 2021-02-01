@@ -1,4 +1,9 @@
-﻿using Windows.Storage;
+﻿// Core:              ★★★★
+// Referenced:   ★★★★★
+// Difficult:         ★★
+// Only:              ★★★★
+// Complete:      ★★★
+using Windows.Storage;
 
 namespace Retouch_Photo2.Photos
 {

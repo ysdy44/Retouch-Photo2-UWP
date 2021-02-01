@@ -1,4 +1,9 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿// Core:              ★★★★
+// Referenced:   
+// Difficult:         ★★★★
+// Only:              
+// Complete:      ★★★★
+using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;

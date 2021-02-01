@@ -1,4 +1,9 @@
-﻿using FanKit.Transformers;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using FanKit.Transformers;
 using System;
 
 namespace Retouch_Photo2.Historys

@@ -1,4 +1,9 @@
-﻿using HSVColorPickers;
+﻿// Core:              
+// Referenced:   ★★★
+// Difficult:         ★
+// Only:              ★
+// Complete:      ★★
+using HSVColorPickers;
 using System;
 using System.Numerics;
 using Windows.Foundation;

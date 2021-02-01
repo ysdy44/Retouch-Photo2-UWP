@@ -1,5 +1,9 @@
-﻿using Retouch_Photo2.Adjustments;
-using Retouch_Photo2.Adjustments.Models;
+﻿// Core:              ★★★★
+// Referenced:   
+// Difficult:         ★★★★★
+// Only:              
+// Complete:      ★★★★★
+using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Adjustments.Pages;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Filters;

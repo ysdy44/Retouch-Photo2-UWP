@@ -1,9 +1,14 @@
-﻿namespace Retouch_Photo2.Elements
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// Provide constant and static methods for XElement.
     /// </summary>
-    public static partial class XML
+public static partial class XML
     {
         
         /// <summary>

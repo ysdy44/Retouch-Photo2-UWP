@@ -1,5 +1,10 @@
-﻿using HSVColorPickers;
-using Retouch_Photo2.Elements;
+﻿// Core:              ★★
+// Referenced:   ★★
+// Difficult:         ★★★★
+// Only:              ★★★
+// Complete:      ★★★★
+using HSVColorPickers;
+using Retouch_Photo2.Photos;
 using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;

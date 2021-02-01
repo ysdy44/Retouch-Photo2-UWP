@@ -1,4 +1,8 @@
-﻿using HSVColorPickers;
+﻿// Core:              ★
+// Referenced:   
+// Difficult:         ★★★
+// Only:              ★★★
+// Complete:      ★★★★
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Elements;

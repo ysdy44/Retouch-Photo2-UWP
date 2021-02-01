@@ -1,4 +1,9 @@
-﻿using Microsoft.Graphics.Canvas.Geometry;
+﻿// Core:              ★
+// Referenced:   
+// Difficult:         ★★
+// Only:              ★★
+// Complete:      ★★
+using Microsoft.Graphics.Canvas.Geometry;
 using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;

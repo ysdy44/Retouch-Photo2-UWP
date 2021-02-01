@@ -1,4 +1,9 @@
-﻿using FanKit;
+﻿// Core:              ★★
+// Referenced:   
+// Difficult:         ★★★★
+// Only:              
+// Complete:      ★★★★★
+using FanKit;
 
 namespace Retouch_Photo2.Tools.Models
 {

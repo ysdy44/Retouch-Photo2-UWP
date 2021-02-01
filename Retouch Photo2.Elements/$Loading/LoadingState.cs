@@ -1,4 +1,9 @@
-﻿namespace Retouch_Photo2.Elements
+﻿// Core:              
+// Referenced:   
+// Difficult:         
+// Only:              
+// Complete:      
+namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// State of <see cref="Loading"/>

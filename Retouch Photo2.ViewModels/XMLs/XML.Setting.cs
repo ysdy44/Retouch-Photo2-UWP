@@ -1,4 +1,8 @@
-﻿using Retouch_Photo2.Menus;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;

@@ -1,4 +1,25 @@
-﻿using Retouch_Photo2.Menus;
+﻿// Core:              ★★★★★
+// Referenced:   ★★★★★
+// Difficult:         
+// Only:              ★★★★★
+// Complete:      ★★★★★
+
+// Core:              ★★★★★   // This is a very core Class.
+// Core:                               // This is a useless Class.
+
+// Referenced:   ★★★★★   // This Class is referenced by many others.
+// Referenced:                    // This Class is rarely referenced.
+
+// Difficult:         ★★★★★   // This class is very complex, please don't change it.
+// Difficult:                          // This class is very simple, feel free to change it.
+
+// Only:              ★★★★★   // This class has many of the same types.
+// Only:                               // There is only one class.
+
+// Complete:      ★★★★★   // This class is complete.
+// Complete:                       // This class is not completed.
+
+using Retouch_Photo2.Menus;
 using Retouch_Photo2.Menus.Models;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.Tools.Models;

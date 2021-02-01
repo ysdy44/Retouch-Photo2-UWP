@@ -33,7 +33,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="36"/>
                     </Grid.RowDefinitions>
-                    <styles:ShowControl Style2="{x:Bind}" HorizontalAlignment="Center"/>
+                    <styles:StyleShowControl Style2="{x:Bind}" HorizontalAlignment="Center"/>
                     <TextBlock Text="{x:Bind Name}" Grid.Row="1" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center"/>
                 </Grid>
             </DataTemplate>

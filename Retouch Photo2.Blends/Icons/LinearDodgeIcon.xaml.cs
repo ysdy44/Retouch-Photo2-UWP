@@ -1,4 +1,9 @@
-﻿using Microsoft.Graphics.Canvas.Effects;
+﻿// Core:              
+// Referenced:   
+// Difficult:         
+// Only:              
+// Complete:      
+using Microsoft.Graphics.Canvas.Effects;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Blends.Icons

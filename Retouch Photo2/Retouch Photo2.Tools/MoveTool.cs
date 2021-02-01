@@ -1,6 +1,10 @@
-﻿using FanKit.Transformers;
+﻿// Core:              ★★★★★
+// Referenced:   ★★★★
+// Difficult:         ★★★★
+// Only:              ★★★
+// Complete:      ★★★★★
+using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;

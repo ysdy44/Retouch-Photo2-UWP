@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.Blends;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using Retouch_Photo2.Blends;
 using Retouch_Photo2.Layers.Models;
 using System.Linq;
 using System.Xml.Linq;

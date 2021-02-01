@@ -1,4 +1,9 @@
-﻿namespace Retouch_Photo2.Tools.Models
+﻿// Core:              ★★
+// Referenced:   
+// Difficult:         ★★★★
+// Only:              
+// Complete:      ★★★★★
+namespace Retouch_Photo2.Tools.Models
 {
     /// <summary>
     /// Converter of <see cref = "ViewTool"/>.

@@ -1,6 +1,9 @@
-﻿using System;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
 using System.Xml.Linq;
-using Retouch_Photo2.Brushs;
 
 namespace Retouch_Photo2.Styles
 {

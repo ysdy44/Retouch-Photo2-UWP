@@ -1,4 +1,9 @@
-﻿using FanKit.Transformers;
+﻿// Core:              ★★★★★
+// Referenced:   ★★★★★
+// Difficult:         ★★★★★
+// Only:              ★★★★★
+// Complete:      ★★★★★
+using FanKit.Transformers;
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Historys;

@@ -1,4 +1,9 @@
-﻿using Windows.UI;
+﻿// Core:              ★★★★★
+// Referenced:   ★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 

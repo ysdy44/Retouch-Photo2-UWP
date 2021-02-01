@@ -1,4 +1,8 @@
-﻿using System.Xml.Linq;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
 using Windows.UI.Text;
 
 namespace Retouch_Photo2.Texts

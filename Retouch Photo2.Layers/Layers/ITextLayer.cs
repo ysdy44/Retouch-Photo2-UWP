@@ -1,4 +1,9 @@
-﻿using Microsoft.Graphics.Canvas.Text;
+﻿// Core:              ★★★★
+// Referenced:   ★★★★★
+// Difficult:         ★★★★★
+// Only:              ★★★★
+// Complete:      ★★★★★
+using Microsoft.Graphics.Canvas.Text;
 using Windows.UI.Text;
 
 namespace Retouch_Photo2.Layers

@@ -1,4 +1,9 @@
-﻿using Windows.Graphics.Imaging;
+﻿// Core:              
+// Referenced:   ★★★
+// Difficult:         ★
+// Only:              ★
+// Complete:      ★★
+using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Elements

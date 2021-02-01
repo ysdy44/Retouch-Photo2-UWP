@@ -1,5 +1,10 @@
-﻿namespace Retouch_Photo2.Elements
-{  
+﻿// Core:              
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      
+namespace Retouch_Photo2.Elements
+{
     /// <summary>
     /// Device layout type.
     /// </summary>

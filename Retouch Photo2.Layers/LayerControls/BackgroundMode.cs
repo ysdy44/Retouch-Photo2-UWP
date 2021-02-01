@@ -1,4 +1,9 @@
-﻿namespace Retouch_Photo2.Layers
+﻿// Core:              
+// Referenced:   
+// Difficult:         
+// Only:              
+// Complete:      
+namespace Retouch_Photo2.Layers
 {
     /// <summary> 
     /// Background mode of <see cref="LayerControl"/>.

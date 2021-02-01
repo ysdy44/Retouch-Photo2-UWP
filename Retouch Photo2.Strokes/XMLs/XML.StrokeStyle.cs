@@ -1,4 +1,9 @@
-﻿using System.Xml.Linq;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using System.Xml.Linq;
 using Microsoft.Graphics.Canvas.Geometry;
 
 namespace Retouch_Photo2.Strokes

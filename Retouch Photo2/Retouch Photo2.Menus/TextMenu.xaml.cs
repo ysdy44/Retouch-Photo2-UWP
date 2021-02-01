@@ -1,4 +1,9 @@
-﻿using Microsoft.Graphics.Canvas.Text;
+﻿// Core:              ★★★★
+// Referenced:   
+// Difficult:         ★★★★★
+// Only:              
+// Complete:      ★★★★★
+using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;

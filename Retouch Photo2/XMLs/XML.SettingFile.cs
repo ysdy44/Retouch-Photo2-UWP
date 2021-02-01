@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.ViewModels;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using Retouch_Photo2.ViewModels;
 using System;
 using System.IO;
 using System.Threading.Tasks;

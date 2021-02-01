@@ -1,4 +1,8 @@
-﻿using Windows.UI;
+﻿// Core:              ★★
+// Referenced:   
+// Difficult:         ★
+// Only:              ★★
+// Complete:      ★★
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

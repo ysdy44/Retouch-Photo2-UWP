@@ -1,4 +1,9 @@
-﻿using System;
+﻿// Core:              ★★
+// Referenced:   ★
+// Difficult:         
+// Only:              ★★★
+// Complete:      
+using System;
 using Windows.Foundation;
 using Windows.Storage;
 using Windows.UI.Xaml;

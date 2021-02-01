@@ -1,4 +1,9 @@
-﻿using FanKit.Transformers;
+﻿// Core:              ★
+// Referenced:   
+// Difficult:         ★★
+// Only:              ★★
+// Complete:      ★★
+using FanKit.Transformers;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

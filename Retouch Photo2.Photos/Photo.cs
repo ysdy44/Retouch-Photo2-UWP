@@ -1,4 +1,9 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿// Core:              ★★★★
+// Referenced:   ★★★★★
+// Difficult:         ★★
+// Only:              ★★★★
+// Complete:      ★★★
+using Microsoft.Graphics.Canvas;
 using Windows.Storage;
 using Windows.UI.Xaml.Controls;
 

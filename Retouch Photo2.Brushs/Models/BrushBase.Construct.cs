@@ -5,6 +5,7 @@ using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Elements;
 using System.Numerics;
 using Windows.UI;
+using Retouch_Photo2.Photos;
 
 namespace Retouch_Photo2.Brushs
 {

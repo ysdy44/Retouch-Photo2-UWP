@@ -1,10 +1,13 @@
-﻿using Retouch_Photo2.Effects.Icons;
+﻿// Core:              ★★
+// Referenced:   
+// Difficult:         ★★★
+// Only:              
+// Complete:      ★★★
+using Retouch_Photo2.Effects.Icons;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
-using Retouch_Photo2.Historys;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Retouch_Photo2.Layers;
 
 namespace Retouch_Photo2.Effects.Models
 {

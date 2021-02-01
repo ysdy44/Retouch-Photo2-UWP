@@ -1,4 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿// Core:              
+// Referenced:   ★
+// Difficult:         
+// Only:              
+// Complete:      
 using Windows.Devices.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

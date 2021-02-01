@@ -1,4 +1,9 @@
-﻿namespace Retouch_Photo2.Menus
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      
+namespace Retouch_Photo2.Menus
 {
     /// <summary> 
     /// Type of <see cref="IMenu"/>.
@@ -29,7 +34,7 @@
         Stroke,
         /// <summary> Style. </summary>
         Style,
-        
+
         /// <summary> History. </summary>
         History,
         /// <summary> Transformer. </summary>

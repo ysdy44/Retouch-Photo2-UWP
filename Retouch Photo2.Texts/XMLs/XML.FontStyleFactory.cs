@@ -1,4 +1,9 @@
-﻿using Windows.UI.Text;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using Windows.UI.Text;
 
 namespace Retouch_Photo2.Texts
 {

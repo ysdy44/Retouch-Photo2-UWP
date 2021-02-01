@@ -151,7 +151,7 @@
     <Compile Include="LayerExtensions.cs" />
     <Compile Include="LayerControls\OverlayMode.cs" />
     <Compile Include="Layers\LayerBase.Render.cs" />
-    <Compile Include="Layers\LayerBase.Property.cs" />
+    <Compile Include="Layers\LayerBase.cs" />
     <Compile Include="Layers\TextLayer.cs" />
     <Compile Include="ModelsSecond\PatternDiagonalLayer.cs" />
     <Compile Include="ModelsSecond\PatternSpottedLayer.cs" />

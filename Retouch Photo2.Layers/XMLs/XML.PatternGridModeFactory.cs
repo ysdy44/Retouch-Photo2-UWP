@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.Layers.Models;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using Retouch_Photo2.Layers.Models;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers

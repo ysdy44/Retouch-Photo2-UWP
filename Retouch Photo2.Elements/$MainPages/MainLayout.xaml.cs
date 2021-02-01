@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿// Core:              ★★★
+// Referenced:   ★
+// Difficult:         ★★
+// Only:              ★★★★
+// Complete:      ★★★★
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.UI.Xaml;

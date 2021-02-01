@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.Elements;
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+using Retouch_Photo2.Elements;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

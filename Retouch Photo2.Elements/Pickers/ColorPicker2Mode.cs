@@ -1,9 +1,14 @@
-﻿namespace Retouch_Photo2.Elements
+﻿// Core:              
+// Referenced:   ★
+// Difficult:         
+// Only:              
+// Complete:      
+namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// Enum of <see cref="ColorPicker2"/>.
     /// </summary>
-    public enum ColorPicker2Mode
+public enum ColorPicker2Mode
     {
         /// <summary> Normal </summary>
         None,

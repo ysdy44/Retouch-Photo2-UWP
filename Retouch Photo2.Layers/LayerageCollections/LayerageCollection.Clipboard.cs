@@ -1,12 +1,6 @@
-﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
-using System;
+﻿using Microsoft.Graphics.Canvas;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Numerics;
 using System.Linq;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Layers
 {

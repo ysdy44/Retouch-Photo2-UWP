@@ -1,4 +1,9 @@
-﻿namespace Retouch_Photo2.Elements.MainPages
+﻿// Core:              
+// Referenced:   
+// Difficult:         
+// Only:              
+// Complete:      
+namespace Retouch_Photo2.Elements
 {
     /// <summary> 
     /// Select mode of <see cref="ILayer"/>.

@@ -1,4 +1,9 @@
-﻿namespace Retouch_Photo2.Layers
+﻿// Core:              ★★★★★
+// Referenced:   ★★★★★
+// Difficult:         
+// Only:              ★★★★
+// Complete:      
+namespace Retouch_Photo2.Layers
 {
     /// <summary> 
     /// Type of <see cref="ILayer"/>.
@@ -35,7 +40,7 @@
         PatternDiagonal,
         /// <summary> Spotted pattern. </summary>
         PatternSpotted,
-         
+
 
         //Geometry1
         /// <summary> Round-rect geometry. </summary>

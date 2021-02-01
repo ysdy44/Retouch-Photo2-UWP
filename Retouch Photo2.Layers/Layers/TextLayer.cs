@@ -1,9 +1,13 @@
-﻿using FanKit.Transformers;
+﻿// Core:              ★★★★
+// Referenced:   ★★★★★
+// Difficult:         ★★★★★
+// Only:              ★★★★
+// Complete:      ★★★★★
+using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Texts;
-using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.UI.Text;

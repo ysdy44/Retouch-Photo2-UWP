@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.Effects;
+﻿// Core:              ★★★★
+// Referenced:   
+// Difficult:         ★★★★★
+// Only:              
+// Complete:      ★★★★★
+using Retouch_Photo2.Effects;
 using Retouch_Photo2.Effects.Models;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;

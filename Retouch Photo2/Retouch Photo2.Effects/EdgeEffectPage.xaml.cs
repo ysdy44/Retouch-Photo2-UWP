@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.Effects.Icons;
+﻿// Core:              ★★
+// Referenced:   
+// Difficult:         ★★★
+// Only:              
+// Complete:      ★★★
+using Retouch_Photo2.Effects.Icons;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Retouch_Photo2.Historys;

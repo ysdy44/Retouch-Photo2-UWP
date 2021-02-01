@@ -1,9 +1,11 @@
-﻿using FanKit.Transformers;
+﻿// Core:              ★★★★★
+// Referenced:   ★★★★★
+// Difficult:         ★★★★★
+// Only:              ★★★★★
+// Complete:      ★★★★★
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Numerics;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Layers

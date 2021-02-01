@@ -1,4 +1,9 @@
-﻿using Windows.UI.Xaml;
+﻿// Core:              ★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              ★★★
+// Complete:      ★★★
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Effects
 {

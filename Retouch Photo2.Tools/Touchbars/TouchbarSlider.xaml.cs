@@ -1,4 +1,9 @@
-﻿using HSVColorPickers;
+﻿// Core:              ★
+// Referenced:   ★★★
+// Difficult:         ★★★
+// Only:              ★
+// Complete:      ★★★★
+using HSVColorPickers;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools

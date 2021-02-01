@@ -1,4 +1,9 @@
-﻿namespace Retouch_Photo2.Blends
+﻿// Core:              ★★★
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      ★
+namespace Retouch_Photo2.Blends
 {
     /// <summary>
     /// Provide constant and static methods for XElement.

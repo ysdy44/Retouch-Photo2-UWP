@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.Historys;
+﻿// Core:              ★★★
+// Referenced:   ★
+// Difficult:         ★★
+// Only:              ★★
+// Complete:      ★★
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;

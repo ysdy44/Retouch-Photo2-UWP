@@ -1,9 +1,12 @@
-﻿using Windows.UI;
+﻿// Core:              
+// Referenced:   
+// Difficult:         ★
+// Only:              
+// Complete:      ★
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 
-namespace Retouch_Photo2.Elements.SettingPages
+namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// Grid control that display layouts for adaptive width.

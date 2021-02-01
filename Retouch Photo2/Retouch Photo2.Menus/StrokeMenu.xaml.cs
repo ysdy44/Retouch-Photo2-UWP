@@ -1,4 +1,9 @@
-﻿using Microsoft.Graphics.Canvas.Geometry;
+﻿// Core:              ★★★★
+// Referenced:   
+// Difficult:         ★★★★★
+// Only:              
+// Complete:      ★★★★★
+using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;

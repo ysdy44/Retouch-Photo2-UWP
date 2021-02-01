@@ -1,4 +1,9 @@
-﻿using FanKit.Transformers;
+﻿// Core:              ★★★★★
+// Referenced:   ★★
+// Difficult:         ★★★★
+// Only:              ★★★★
+// Complete:      ★★★★
+using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Effects;

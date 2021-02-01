@@ -1,4 +1,9 @@
-﻿namespace Retouch_Photo2.Brushs
+﻿// Core:              
+// Referenced:   ★★★
+// Difficult:         
+// Only:              
+// Complete:      
+namespace Retouch_Photo2.Brushs
 {
     /// <summary>
     /// Fill or Stroke.

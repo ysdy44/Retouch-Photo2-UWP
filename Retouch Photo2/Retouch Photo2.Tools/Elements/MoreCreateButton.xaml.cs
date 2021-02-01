@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.ViewModels;
+﻿// Core:              
+// Referenced:   ★★
+// Difficult:         ★
+// Only:              
+// Complete:      ★
+using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

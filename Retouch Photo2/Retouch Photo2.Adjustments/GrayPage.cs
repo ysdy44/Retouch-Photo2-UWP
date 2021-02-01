@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.Adjustments.Icons;
+﻿// Core:              
+// Referenced:   
+// Difficult:         ★★
+// Only:              
+// Complete:      ★★★
+using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;

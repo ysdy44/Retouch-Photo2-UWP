@@ -1,4 +1,9 @@
-﻿using Retouch_Photo2.Brushs.TransparencyTypeIcons;
+﻿// Core:              ★
+// Referenced:   
+// Difficult:         ★★
+// Only:              ★★
+// Complete:      ★★
+using Retouch_Photo2.Brushs.TransparencyTypeIcons;
 using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;

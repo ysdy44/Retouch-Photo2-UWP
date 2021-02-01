@@ -1,4 +1,9 @@
-﻿namespace Retouch_Photo2.ViewModels
+﻿// Core:              ★★★★
+// Referenced:   ★★★★
+// Difficult:         
+// Only:              ★★★
+// Complete:      
+namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
     /// Mode of the <see cref = "ViewModel.Invalidate" />. 

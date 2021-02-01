@@ -1,5 +1,9 @@
-﻿using System;
-using System.Numerics;
+﻿// Core:              ★★★
+// Referenced:   ★
+// Difficult:         ★★
+// Only:              ★★★★
+// Complete:      ★★★★
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
