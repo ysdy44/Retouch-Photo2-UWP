@@ -1,5 +1,4 @@
 ﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Elements.SettingPages;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;

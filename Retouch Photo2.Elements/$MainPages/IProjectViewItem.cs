@@ -1,7 +1,7 @@
 ﻿using Windows.Foundation;
 using Windows.UI.Xaml;
 
-namespace Retouch_Photo2.Elements.MainPages
+namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// Interface of <see cref="IProjectViewItem"/>.

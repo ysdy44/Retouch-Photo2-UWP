@@ -447,6 +447,10 @@
       <Project>{15cbf0a7-0953-49f5-b541-f8bcaab40053}</Project>
       <Name>Retouch Photo2.Layers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Photos\Retouch Photo2.Photos.csproj">
+      <Project>{d5159f6f-9108-4b01-a761-ff98a74d9da3}</Project>
+      <Name>Retouch Photo2.Photos</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

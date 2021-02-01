@@ -4,13 +4,12 @@ using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements;
+using Retouch_Photo2.Photos;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.UI;
-using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -91,11 +90,11 @@ namespace Retouch_Photo2.Layers.Models
 
         public override void SaveWith(XElement element)
         {
-            element.Add(Retouch_Photo2.Elements.XML.SavePhotocopier("Photocopier", this.Photocopier));
+            element.Add(Retouch_Photo2.Photos.XML.SavePhotocopier("Photocopier", this.Photocopier));
         }
         public override void Load(XElement element)
         {
-            if (element.Element("Photocopier") is XElement photocopier) this.Photocopier = Retouch_Photo2.Elements.XML.LoadPhotocopier(photocopier);
+            if (element.Element("Photocopier") is XElement photocopier) this.Photocopier = Retouch_Photo2.Photos.XML.LoadPhotocopier(photocopier);
         }
 
 

@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Elements;
+﻿using Retouch_Photo2.Photos;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,7 +28,7 @@ namespace Retouch_Photo2
             {
                 XDocument document = XDocument.Load(path);
 
-                IEnumerable<Photo> photos = Retouch_Photo2.Elements.XML.LoadPhotos(document);
+                IEnumerable<Photo> photos = Retouch_Photo2.Photos.XML.LoadPhotos(document);
                 if (photos == null) return null;
 
                 return photos;
@@ -47,7 +47,7 @@ namespace Retouch_Photo2
         /// <param name="photos"> The photos. </param>
         public static async Task SavePhotosFile(StorageFolder zipFolder, IEnumerable<Photo> photos)
         {
-            XDocument document = Retouch_Photo2.Elements.XML.SavePhotos(photos);
+            XDocument document = Retouch_Photo2.Photos.XML.SavePhotos(photos);
 
             //Save the project xml file.      
             StorageFile file = await zipFolder.CreateFileAsync("Photos.xml", CreationCollisionOption.ReplaceExisting);

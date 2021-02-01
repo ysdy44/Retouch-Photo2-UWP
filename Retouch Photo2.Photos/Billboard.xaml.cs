@@ -3,7 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace Retouch_Photo2.Elements
+namespace Retouch_Photo2.Photos
 {
     /// <summary>
     /// A Billboard to show the a image and propertys.

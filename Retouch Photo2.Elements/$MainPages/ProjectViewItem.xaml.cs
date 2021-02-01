@@ -3,16 +3,15 @@ using Windows.Foundation;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 
-namespace Retouch_Photo2.Elements.MainPages
+namespace Retouch_Photo2.Elements
 {
     /// <summary> 
-    /// Item of <see cref="MainPage"/>. 
+    /// Item of <see cref="Project"/>. 
     /// </summary>
     public sealed partial class ProjectViewItem : UserControl, IProjectViewItem
     {
-
+        
         //@Static
         /// <summary> Occurs when tapped the project-control. </summary>
         public static Action<ProjectViewItem> ItemClick;

@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace Retouch_Photo2.Elements
+namespace Retouch_Photo2.Photos
 {
     /// <summary>
     /// Provide constant and static methods for XElement.

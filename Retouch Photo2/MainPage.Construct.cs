@@ -1,5 +1,4 @@
 ﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Elements.MainPages;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;

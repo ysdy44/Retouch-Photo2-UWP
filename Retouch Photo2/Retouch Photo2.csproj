@@ -849,6 +849,10 @@
       <Project>{c5a52472-53d8-4885-8488-0cf77a985794}</Project>
       <Name>Retouch Photo2.Operates</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Photos\Retouch Photo2.Photos.csproj">
+      <Project>{d5159f6f-9108-4b01-a761-ff98a74d9da3}</Project>
+      <Name>Retouch Photo2.Photos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Strokes\Retouch Photo2.Strokes.csproj">
       <Project>{9ecf765e-1976-4100-8d69-71dde162adab}</Project>
       <Name>Retouch Photo2.Strokes</Name>

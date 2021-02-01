@@ -2,6 +2,7 @@
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
+using Retouch_Photo2.Photos;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;

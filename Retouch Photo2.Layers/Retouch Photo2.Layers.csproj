@@ -217,6 +217,10 @@
       <Project>{71870425-D0E7-453D-B221-EB740ACAAE74}</Project>
       <Name>Retouch Photo2.Filters</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Photos\Retouch Photo2.Photos.csproj">
+      <Project>{d5159f6f-9108-4b01-a761-ff98a74d9da3}</Project>
+      <Name>Retouch Photo2.Photos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Styles\Retouch Photo2.Styles.csproj">
       <Project>{08675e81-29a5-440b-8dab-0554dc7a9914}</Project>
       <Name>Retouch Photo2.Styles</Name>

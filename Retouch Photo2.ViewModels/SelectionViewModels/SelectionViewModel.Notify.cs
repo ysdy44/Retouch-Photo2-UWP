@@ -1,17 +1,15 @@
 ﻿using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
-using Retouch_Photo2.Filters;
-using Retouch_Photo2.Styles;
 using Retouch_Photo2.Effects;
-using Retouch_Photo2.Elements;
+using Retouch_Photo2.Filters;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Photos;
+using Retouch_Photo2.Tools;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Windows.UI.Xaml;
-using Retouch_Photo2.Tools;
 
 namespace Retouch_Photo2.ViewModels
 {

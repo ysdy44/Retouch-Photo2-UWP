@@ -7,7 +7,7 @@ using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Elements
+namespace Retouch_Photo2.Photos
 {
     /// <summary>
     /// Represents a photo that contains dpi, width, height information.

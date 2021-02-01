@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D4571A00-4303-4DDB-B63B-6D741C82F73F}</ProjectGuid>
+    <ProjectGuid>{D5159F6F-9108-4B01-A761-FF98A74D9DA3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Retouch_Photo2.ViewModels</RootNamespace>
-    <AssemblyName>Retouch Photo2.ViewModels</AssemblyName>
+    <RootNamespace>Retouch_Photo2.Photos</RootNamespace>
+    <AssemblyName>Retouch Photo2.Photos</AssemblyName>
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
@@ -43,7 +43,6 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
@@ -54,7 +53,6 @@
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
@@ -65,7 +63,6 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
-    <PlatformTarget>ARM</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
@@ -76,7 +73,26 @@
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
@@ -87,10 +103,8 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
-    <DocumentationFile>bin\x64\Debug\Retouch Photo2.ViewModels.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <PlatformTarget>x64</PlatformTarget>
@@ -99,7 +113,6 @@
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
@@ -107,103 +120,44 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Enums\EditMode.cs" />
-    <Compile Include="Enums\InvalidateMode.cs" />
-    <Compile Include="Enums\MoveMode.cs" />
-    <Compile Include="MethodViewModels\MethodViewModel.cs" />
-    <Compile Include="MethodViewModels\MethodViewModel.Color.cs" />
-    <Compile Include="MethodViewModels\MethodViewModel.Edit.cs" />
-    <Compile Include="MethodViewModels\MethodViewModel.Selected.cs" />
-    <Compile Include="MethodViewModels\MethodViewModel.Setup.cs" />
-    <Compile Include="MethodViewModels\MethodViewModel.Transform.cs" />
-    <Compile Include="SelectionViewModels\SelectionViewModel.StandStyle.cs" />
-    <Compile Include="SettingViewModels\SettingViewModel.Key.cs" />
-    <Compile Include="SettingViewModels\SettingViewModel.cs" />
-    <Compile Include="Project.cs" />
+    <Compile Include="Billboard.xaml.cs">
+      <DependentUpon>Billboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Photo.cs" />
+    <Compile Include="Photo.Instance.cs" />
+    <Compile Include="Photo.xaml.cs">
+      <DependentUpon>Photo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Photocopier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SelectionViewModels\SelectionViewModel.cs" />
-    <Compile Include="SelectionViewModels\SelectionViewModel.NotifyBrush.cs" />
-    <Compile Include="SelectionViewModels\SelectionViewModel.Notify.cs" />
-    <Compile Include="SelectionViewModels\SelectionViewModel.NotifyText.cs" />
-    <Compile Include="SelectionViewModels\SelectionViewModel.SetMode.cs" />
-    <Compile Include="SelectionViewModels\SelectionViewModel.SetValue.cs" />
-    <Compile Include="Setting.cs" />
-    <Compile Include="SettingViewModels\SettingViewModel.Setting.cs" />
-    <Compile Include="TipViewModels\TipViewModel.cs" />
-    <Compile Include="ViewModels\ViewModel.cs" />
-    <Compile Include="ViewModels\ViewModel.Notify.cs" />
-    <Compile Include="SettingViewModels\SettingViewModel.Layout.cs" />
-    <Compile Include="ViewModels\ViewModel.Snap.cs" />
-    <Compile Include="ViewModels\ViewModel.Transformer.cs" />
-    <Compile Include="ViewModels\ViewModel.History.cs" />
-    <Compile Include="XMLs\XML.Project.cs" />
-    <Compile Include="XMLs\XML.Setting.cs" />
-    <EmbeddedResource Include="Properties\Retouch_Photo2.ViewModels.rd.xml" />
+    <Compile Include="XMLs\XML.Photo.cs" />
+    <Compile Include="XMLs\XML.Photocopier.cs" />
+    <Compile Include="XMLs\XML.Photos.cs" />
+    <EmbeddedResource Include="Properties\Retouch_Photo2.Photos.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="HSVColorPickers">
+      <Version>1.4.3</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.1.7</Version>
+      <Version>6.2.10</Version>
     </PackageReference>
-    <PackageReference Include="Win2D.uwp">
-      <Version>1.23.0</Version>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Animations">
+      <Version>3.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>3.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Retouch Photo2.Adjustment\Retouch Photo2.Adjustments.csproj">
-      <Project>{7256c005-0e5d-4c38-9115-e4eef9978233}</Project>
-      <Name>Retouch Photo2.Adjustments</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Blends\Retouch Photo2.Blends.csproj">
-      <Project>{8b2218b3-59a4-445f-8765-752c5e700efa}</Project>
-      <Name>Retouch Photo2.Blends</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Brushs\Retouch Photo2.Brushs.csproj">
-      <Project>{00e87876-1aa4-4b48-af1c-f1db75fbf587}</Project>
-      <Name>Retouch Photo2.Brushs</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Effects\Retouch Photo2.Effects.csproj">
-      <Project>{c14d4618-e234-4d91-8ced-49cbd9f6f3c7}</Project>
-      <Name>Retouch Photo2.Effects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Elements\Retouch Photo2.Elements.csproj">
-      <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
-      <Name>Retouch Photo2.Elements</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Filters\Retouch Photo2.Filters.csproj">
-      <Project>{71870425-D0E7-453D-B221-EB740ACAAE74}</Project>
-      <Name>Retouch Photo2.Filters</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Historys\Retouch Photo2.Historys.csproj">
-      <Project>{64e6052b-fbb1-489b-9ae3-fb05dc8fbe63}</Project>
-      <Name>Retouch Photo2.Historys</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Layers\Retouch Photo2.Layers.csproj">
-      <Project>{15cbf0a7-0953-49f5-b541-f8bcaab40053}</Project>
-      <Name>Retouch Photo2.Layers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Menus\Retouch Photo2.Menus.csproj">
-      <Project>{f8c6dda8-afba-4cae-8f28-e795547eeced}</Project>
-      <Name>Retouch Photo2.Menus</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Photos\Retouch Photo2.Photos.csproj">
-      <Project>{d5159f6f-9108-4b01-a761-ff98a74d9da3}</Project>
-      <Name>Retouch Photo2.Photos</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Strokes\Retouch Photo2.Strokes.csproj">
-      <Project>{9ecf765e-1976-4100-8d69-71dde162adab}</Project>
-      <Name>Retouch Photo2.Strokes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Styles\Retouch Photo2.Styles.csproj">
-      <Project>{08675e81-29a5-440b-8dab-0554dc7a9914}</Project>
-      <Name>Retouch Photo2.Styles</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Tools\Retouch Photo2.Tools.csproj">
-      <Project>{3f4ae427-651f-4791-a176-678a00a93b1e}</Project>
-      <Name>Retouch Photo2.Tools</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="SelectionViewModels\SelectionViewModel.NotifyGeometry.cs" />
+    <Page Include="Billboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Photo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

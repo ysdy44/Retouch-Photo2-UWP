@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Elements.MainPages;
+﻿using Retouch_Photo2.Elements;
 using System;
 using System.Collections.Generic;
 using System.Linq;

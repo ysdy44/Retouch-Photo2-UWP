@@ -1,4 +1,4 @@
-﻿using Retouch_Photo2.Elements;
+﻿using Retouch_Photo2.Photos;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -6,7 +6,6 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2

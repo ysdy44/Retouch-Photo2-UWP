@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:photos="using:Retouch_Photo2.Photos"
     mc:Ignorable="d"
     Background="{ThemeResource AppBackground}"
     NavigationCacheMode="Required"    
@@ -133,7 +134,7 @@
 
         <!--Billboard-->
         <Canvas x:Name="BillboardCanvas" Grid.RowSpan="2" Background="Transparent">
-            <elements:Billboard x:Name="Billboard" IsHitTestVisible="False"/>
+            <photos:Billboard x:Name="Billboard" IsHitTestVisible="False"/>
         </Canvas>
 
     </Grid>

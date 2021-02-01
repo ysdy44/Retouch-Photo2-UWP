@@ -199,9 +199,6 @@
     <Compile Include="ExpandAppbars\ExpandAppBarSapce.cs" />
     <Compile Include="ExpandAppbars\ExpandAppBarSeparator.cs" />
     <Compile Include="ExpandAppbars\IExpandAppbarElement.cs" />
-    <Compile Include="%24PhotosPages\Photo.cs" />
-    <Compile Include="%24PhotosPages\Photo.Instance.cs" />
-    <Compile Include="%24PhotosPages\Photocopier.cs" />
     <Compile Include="%24MainPages\MainLayout.xaml.cs">
       <DependentUpon>MainLayout.xaml</DependentUpon>
     </Compile>
@@ -230,17 +227,8 @@
     <Compile Include="%24SettingPages\PhoneLayout.xaml.cs">
       <DependentUpon>PhoneLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="%24PhotosPages\Billboard.xaml.cs">
-      <DependentUpon>Billboard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="%24PhotosPages\Photo.xaml.cs">
-      <DependentUpon>Photo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="XMLs\XML.Photo.cs" />
-    <Compile Include="XMLs\XML.Photos.cs" />
     <Compile Include="XMLs\XML.ThemeFactory.cs" />
     <Compile Include="XMLs\XML.DeviceLayout.cs" />
-    <Compile Include="XMLs\XML.Photocopier.cs" />
     <Compile Include="XMLs\XML.DeviceLayoutTypeFactory.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo.Elements.rd.xml" />
   </ItemGroup>
@@ -397,14 +385,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="%24SettingPages\PhoneLayout.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="%24PhotosPages\Billboard.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="%24PhotosPages\Photo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

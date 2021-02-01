@@ -1,6 +1,6 @@
 ﻿using Windows.Storage;
 
-namespace Retouch_Photo2.Elements
+namespace Retouch_Photo2.Photos
 {
     /// <summary>
     /// ID of <see cref="Photo"/>.

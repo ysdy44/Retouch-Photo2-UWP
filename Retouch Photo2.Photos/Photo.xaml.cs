@@ -1,10 +1,10 @@
 ﻿using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Elements
+namespace Retouch_Photo2.Photos
 {
     /// <summary>
-    /// Represents a photo that contains dpi, width, height information.
+    /// Item of <see cref="Photo"/>.
     /// </summary>
     public partial class Photo : UserControl
     {
@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Elements
         public static event TypedEventHandler<object, Photo> ItemClick;
         /// <summary> Occurs when the flyout button receives the interaction. </summary>
         public static event TypedEventHandler<object, Photo> FlyoutShow;
-        
+
         //@Construct
         /// <summary>
         /// Initializes a Photo. 
