@@ -309,6 +309,14 @@
       <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
       <Name>Retouch Photo2.Elements</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Operates\Retouch Photo2.Operates.csproj">
+      <Project>{c5a52472-53d8-4885-8488-0cf77a985794}</Project>
+      <Name>Retouch Photo2.Operates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Photos\Retouch Photo2.Photos.csproj">
+      <Project>{d5159f6f-9108-4b01-a761-ff98a74d9da3}</Project>
+      <Name>Retouch Photo2.Photos</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

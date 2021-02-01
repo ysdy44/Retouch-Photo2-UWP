@@ -7,7 +7,6 @@
        
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
-    xmlns:elementMainPages="using:Retouch_Photo2.Elements.MainPages"
     mc:Ignorable="d"
 
     NavigationCacheMode="Required"    
@@ -64,10 +63,10 @@
         </VisualStateManager.VisualStateGroups>
 
 
-        <elementMainPages:MainLayout x:Name="MainLayout">
+        <elements:MainLayout x:Name="MainLayout">
 
             <!--InitialChild-->
-            <elementMainPages:MainLayout.InitialChild>
+            <elements:MainLayout.InitialChild>
                 <StackPanel>
                     <StackPanel.ChildrenTransitions>
                         <TransitionCollection>
@@ -119,11 +118,11 @@
                     </StackPanel.Children>
 
                 </StackPanel>
-            </elementMainPages:MainLayout.InitialChild>
+            </elements:MainLayout.InitialChild>
 
 
             <!--HeadChild-->
-            <elementMainPages:MainLayout.HeadChild>
+            <elements:MainLayout.HeadChild>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
@@ -164,10 +163,10 @@
                     </Button>
 
                 </Grid>
-            </elementMainPages:MainLayout.HeadChild>
+            </elements:MainLayout.HeadChild>
 
             <!--SelectChild-->
-            <elementMainPages:MainLayout.SelectChild>
+            <elements:MainLayout.SelectChild>
                 <Grid x:Name="SelectGrid">
 
                     <TextBlock Margin="12, 0" IsHitTestVisible="False" HorizontalAlignment="Left" VerticalAlignment="Center">                        
@@ -179,11 +178,11 @@
                     <Button x:Name="SelectAllButton" Padding="8,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent"/>
 
                 </Grid>
-            </elementMainPages:MainLayout.SelectChild>
+            </elements:MainLayout.SelectChild>
 
 
             <!--MainChild-->
-            <elementMainPages:MainLayout.MainChild>
+            <elements:MainLayout.MainChild>
                 <StackPanel Orientation="Horizontal" Padding="18,0" HorizontalAlignment="Center">
 
                     <Button x:Name="AddButton" Style="{StaticResource AppTabButtonStyle}">
@@ -221,10 +220,10 @@
                     </Button>
 
                 </StackPanel>
-            </elementMainPages:MainLayout.MainChild>
+            </elements:MainLayout.MainChild>
 
             <!--PicturesChild-->
-            <elementMainPages:MainLayout.PicturesChild>
+            <elements:MainLayout.PicturesChild>
                 <StackPanel Orientation="Horizontal" Padding="18,0">
 
                     <Button x:Name="PicturesPhotoButton" Style="{StaticResource AppTabButtonStyle}">
@@ -248,10 +247,10 @@
                     </Button>
 
                 </StackPanel>
-            </elementMainPages:MainLayout.PicturesChild>
+            </elements:MainLayout.PicturesChild>
 
             <!--RenameChild-->
-            <elementMainPages:MainLayout.RenameChild>
+            <elements:MainLayout.RenameChild>
                 <StackPanel Orientation="Horizontal" Padding="18,0">
 
                     <TextBlock Margin="0,6">
@@ -269,10 +268,10 @@
                     </Border>
 
                 </StackPanel>
-            </elementMainPages:MainLayout.RenameChild>
+            </elements:MainLayout.RenameChild>
 
             <!--DeleteChild-->
-            <elementMainPages:MainLayout.DeleteChild>
+            <elements:MainLayout.DeleteChild>
                 <StackPanel x:Name="DeleteStackPanel" Padding="18,0" MinWidth="260">
 
                     <TextBlock Margin="0,6">
@@ -296,10 +295,10 @@
                     </StackPanel>
 
                 </StackPanel>
-            </elementMainPages:MainLayout.DeleteChild>
+            </elements:MainLayout.DeleteChild>
 
             <!--DuplicateChild-->
-            <elementMainPages:MainLayout.DuplicateChild>
+            <elements:MainLayout.DuplicateChild>
                 <StackPanel x:Name="DuplicateStackPanel" Padding="18,0" MinWidth="260">
 
                     <TextBlock Margin="0,6">
@@ -323,9 +322,9 @@
                     </StackPanel>
 
                 </StackPanel>
-            </elementMainPages:MainLayout.DuplicateChild>
+            </elements:MainLayout.DuplicateChild>
 
-        </elementMainPages:MainLayout>
+        </elements:MainLayout>
 
 
         <!--Loading-->
