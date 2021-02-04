@@ -3,60 +3,54 @@
 // Difficult:         
 // Only:              ★★★
 // Complete:      
-namespace Retouch_Photo2.ViewModels
+namespace Retouch_Photo2.Edits
 {
     /// <summary> 
-    /// Mode of the <see cref = "SettingViewModel.Edit" />. 
+    /// Type of Edit.
     /// </summary>
-    public enum EditMode
+    public enum EditType
     {
         /// <summary> Normal </summary>
         None,
 
         //Edit
-        /// <summary> Normal </summary>
-        Cut,
-        /// <summary> Normal </summary>
-        Duplicate,
-        /// <summary> Normal </summary>
-        Copy,
-        /// <summary> Normal </summary>
-        Paste,
-        /// <summary> Normal </summary>
-        Clear,
+        /// <summary> Cut </summary>
+        Edit_Cut,
+        /// <summary> Duplicate </summary>
+        Edit_Duplicate,
+        /// <summary> Copy </summary>
+        Edit_Copy,
+        /// <summary> Paste </summary>
+        Edit_Paste,
+        /// <summary> Clear </summary>
+        Edit_Clear,
 
         //Select
         /// <summary> All </summary>
-        All,
+        Select_All,
         /// <summary> Deselect </summary>
-        Deselect,
+        Select_Deselect,
         /// <summary> Invert </summary>
-        Invert,
+        Select_Invert,
 
         //Group
         /// <summary> Group </summary>
-        Group,
+        Group_Group,
         /// <summary> UnGroup </summary>
-        UnGroup,
+        Group_UnGroup,
         /// <summary> Release </summary>
-        Release,
+        Group_Release,
 
-        //Combine
+        //Combine_
         /// <summary> Union </summary>
-        Union,
+        Combine_Union,
         /// <summary> Exclude </summary>
-        Exclude,
+        Combine_Exclude,
         /// <summary> Xor </summary>
-        Xor,
+        Combine_Xor,
         /// <summary> Intersect </summary>
-        Intersect,
+        Combine_Intersect,
         /// <summary> Expand Stroke </summary>
-        ExpandStroke,
-
-        //Undo
-        /// <summary> Undo </summary>
-        Undo,
-        /// <summary> Redo </summary>
-        Redo,
+        Combine_ExpandStroke,
     }
 }

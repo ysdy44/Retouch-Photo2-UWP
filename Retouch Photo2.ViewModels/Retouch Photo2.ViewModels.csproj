@@ -107,9 +107,8 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Enums\EditMode.cs" />
     <Compile Include="Enums\InvalidateMode.cs" />
-    <Compile Include="Enums\MoveMode.cs" />
+    <Compile Include="Enums\UndoType.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Color.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Edit.cs" />
@@ -160,6 +159,10 @@
     <ProjectReference Include="..\Retouch Photo2.Brushs\Retouch Photo2.Brushs.csproj">
       <Project>{00e87876-1aa4-4b48-af1c-f1db75fbf587}</Project>
       <Name>Retouch Photo2.Brushs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Edits\Retouch Photo2.Edits.csproj">
+      <Project>{ee851357-156d-438d-ace1-f8841ec966af}</Project>
+      <Name>Retouch Photo2.Edits</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Effects\Retouch Photo2.Effects.csproj">
       <Project>{c14d4618-e234-4d91-8ced-49cbd9f6f3c7}</Project>

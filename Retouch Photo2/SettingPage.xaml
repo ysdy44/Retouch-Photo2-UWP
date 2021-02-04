@@ -7,7 +7,6 @@
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
-    xmlns:elementsSettingPages="using:Retouch_Photo2.Elements.SettingPages"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     NavigationCacheMode="Required"    
@@ -307,7 +306,7 @@
 
                         <!--Layout-->
                         <Border x:Name="LayoutBorder" Width="330" Height="210" Background="White" HorizontalAlignment="Left">
-                            <elementsSettingPages:AdaptiveWidthLayout Type="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"/>
+                            <elements:AdaptiveWidthLayout Type="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"/>
                         </Border>
 
 
@@ -383,7 +382,7 @@
                                 0
                             </TextBlock>
                         </StackPanel>
-                        <elementsSettingPages:AdaptiveWidthGrid x:Name="AdaptiveGrid"/>
+                        <elements:AdaptiveWidthGrid x:Name="AdaptiveGrid"/>
                         <HyperlinkButton x:Name="AdaptiveResetButton"/>
                      
 
@@ -431,10 +430,13 @@
                         <TextBlock x:Name="KeyTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                         <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel>
-                                <ContentControl x:Name="IsCenterControl" Style="{StaticResource KeyContentControlStyle}"/>
                                 <ContentControl x:Name="IsRatioControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
                                 <ContentControl x:Name="IsSquareControl" Style="{StaticResource KeyContentControlStyle}"/>
+
+                                <ContentControl x:Name="IsCenterControl" Style="{StaticResource KeyContentControlStyle}"/>
+                             
                                 <ContentControl x:Name="IsStepFrequencyControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                            
                                 <ContentControl x:Name="IsFullScreenControl" Style="{StaticResource KeyContentControlStyle}"/>
                             </StackPanel>
                         </Border>
