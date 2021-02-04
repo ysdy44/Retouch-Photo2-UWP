@@ -4,7 +4,6 @@
 // Only:              
 // Complete:      ★★★★★
 using FanKit.Transformers;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -16,89 +15,6 @@ using Windows.UI.Xaml.Data;
 
 namespace Retouch_Photo2.Menus.Models
 {
-    /// <summary>
-    /// Menu of <see cref = "FanKit.Transformers.Transformer"/>.
-    /// </summary>
-    public sealed partial class TransformerMenu : Expander, IMenu 
-    {
-
-        //@Content     
-        public override UIElement MainPage => this.TransformerMainPage;
-        TransformerMainPage TransformerMainPage = new TransformerMainPage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a TransformerMenu. 
-        /// </summary>
-        public TransformerMenu()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.TransformerMainPage.SecondPageChanged += (title, secondPage) =>
-            {
-                if (this.Page != secondPage) this.Page = secondPage;
-                this.IsSecondPage = true;
-                this.Title = (string)title;
-            };
-        }
-
-    }
-
-    /// <summary>
-    /// Menu of <see cref = "FanKit.Transformers.Transformer"/>.
-    /// </summary>
-    public sealed partial class TransformerMenu : Expander, IMenu 
-    {
-
-        //DataContext
-        private void ConstructDataContext(string path, DependencyProperty dp)
-        {
-            // Create the binding description.
-            Binding binding = new Binding
-            {
-                Mode = BindingMode.OneWay,
-                Path = new PropertyPath(path)
-            };
-
-            // Attach the binding to the target.
-            this.SetBinding(dp, binding);
-        }
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.ToolTip.Content =
-            this.Button.Title =
-            this.Title = resource.GetString("/Menus/Transformer");
-
-            this.Button.ToolTip.Closed += (s, e) => this.TransformerMainPage.IsOpen = false;
-            this.Button.ToolTip.Opened += (s, e) =>
-            {
-                if (this.IsSecondPage) return;
-                if (this.State != ExpanderState.Overlay) return;
-
-                this.TransformerMainPage.IsOpen = true;
-            };
-        }
-
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Transformer;
-        /// <summary> Gets or sets the button. </summary>
-        public override IExpanderButton Button { get; } = new MenuButton
-        {
-            CenterContent = new FanKit.Transformers.Icon()
-        };
-        /// <summary> Reset Expander. </summary>
-        public override void Reset() { }
-
-    }
-    
-
     /// <summary> 
     /// State of <see cref="TransformerMainPage"/>. 
     /// </summary>
@@ -160,7 +76,7 @@ namespace Retouch_Photo2.Menus.Models
                     case ListViewSelectionMode.None: return TransformerMainPageState.Disabled;
                     case ListViewSelectionMode.Single:
                     case ListViewSelectionMode.Multiple:
-                         return TransformerMainPageState.Enabled;
+                        return TransformerMainPageState.Enabled;
                 }
 
                 return TransformerMainPageState.Enabled;
@@ -177,7 +93,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets <see cref = "TransformerMainPage" />'s tool type. </summary>
         public ToolType ToolType
         {
-            get  => (ToolType)base.GetValue(ToolTypeProperty);
+            get => (ToolType)base.GetValue(ToolTypeProperty);
             set => base.SetValue(ToolTypeProperty, value);
         }
         /// <summary> Identifies the <see cref = "TransformerMainPage.ToolType" /> dependency property. </summary>
@@ -244,7 +160,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets <see cref = "TransformerMainPage" />'s selection mode. </summary>
         public ListViewSelectionMode Mode
         {
-            get  => (ListViewSelectionMode)base.GetValue(ModeProperty);
+            get => (ListViewSelectionMode)base.GetValue(ModeProperty);
             set => base.SetValue(ModeProperty, value);
         }
         /// <summary> Identifies the <see cref = "TransformerMainPage.Mode" /> dependency property. </summary>
@@ -263,7 +179,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets <see cref = "TransformerMainPage" />'s transformer. </summary>
         public Transformer Transformer
         {
-            get  => (Transformer)base.GetValue(TransformerProperty);
+            get => (Transformer)base.GetValue(TransformerProperty);
             set => base.SetValue(TransformerProperty, value);
         }
         /// <summary> Identifies the <see cref = "TransformerMainPage.Transformer" /> dependency property. </summary>
@@ -366,7 +282,7 @@ namespace Retouch_Photo2.Menus.Models
 
             this.IndicatorToolTip.Content = resource.GetString("/Menus/Transformer_Anchor");
         }
-        
+
     }
 
     /// <summary>
@@ -472,7 +388,7 @@ namespace Retouch_Photo2.Menus.Models
 
         }
 
-        
+
         //RemoteControl
         private void ConstructPositionRemoteControl()
         {
@@ -529,7 +445,7 @@ namespace Retouch_Photo2.Menus.Models
                 //Method
                 this.MethodViewModel.MethodTransformMultiplies(matrix);
             };
-            
+
             this.HPicker.Minimum = 1;
             this.HPicker.Maximum = int.MaxValue;
             this.HPicker.ValueChanged += (s, value) =>

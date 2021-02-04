@@ -1,13 +1,11 @@
-﻿// Core:              ★★★★
+﻿// Core:              ★★
 // Referenced:   
-// Difficult:         ★★★★★
+// Difficult:         
 // Only:              
-// Complete:      ★★★★★
+// Complete:      
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -19,7 +17,8 @@ namespace Retouch_Photo2.Menus.Models
 
         //@Content     
         public override UIElement MainPage => this.HistoryMainPage;
-        HistoryMainPage HistoryMainPage = new HistoryMainPage();
+
+        readonly HistoryMainPage HistoryMainPage = new HistoryMainPage();
 
 
         //@Construct
@@ -60,28 +59,5 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Reset Expander. </summary>
         public override void Reset() { }
 
-    }
-
-    
-    /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Historys.IHistory"/>.
-    /// </summary>
-    public sealed partial class HistoryMainPage : UserControl
-    {
-
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a HistoryMainPage. 
-        /// </summary>
-        public HistoryMainPage()
-        {
-            this.InitializeComponent();
-
-            this.ListView.ItemsSource = this.ViewModel.Historys;
-        }
     }
 }

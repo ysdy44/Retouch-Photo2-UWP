@@ -4,9 +4,6 @@
 // Only:              
 // Complete:      ★★★★★
 using Microsoft.Graphics.Canvas.Text;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
 using Retouch_Photo2.Texts;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -22,75 +19,6 @@ using Windows.UI.Xaml.Data;
 namespace Retouch_Photo2.Menus.Models
 {
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Texts"/>.
-    /// </summary>
-    public sealed partial class TextMenu : Expander, IMenu
-    {
-
-        //@Content     
-        public override UIElement MainPage => this.TextMainPage;
-        TextMainPage TextMainPage = new TextMainPage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a TextMenu. 
-        /// </summary>
-        public TextMenu()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-            
-            this.TextMainPage.SecondPageChanged += (title, secondPage) =>
-            {
-                if (this.Page != secondPage) this.Page = secondPage;
-                this.IsSecondPage = true;
-                this.Title = (string)title;
-            };
-        }
-
-    }
-
-    /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Texts"/>.
-    /// </summary>
-    public sealed partial class TextMenu : Expander, IMenu
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.ToolTip.Content =
-            this.Button.Title =
-            this.Title = resource.GetString("/Menus/Text");
-
-            this.Button.ToolTip.Closed += (s, e) => this.TextMainPage.IsOpen = false;
-            this.Button.ToolTip.Opened += (s, e) =>
-            {
-                if (this.IsSecondPage) return;
-                if (this.State != ExpanderState.Overlay) return;
-
-                this.TextMainPage.IsOpen = true;
-            };
-        }
-
-        //Menu  
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Text;
-        /// <summary> Gets or sets the button. </summary>
-        public override IExpanderButton Button { get; } = new MenuButton
-        {
-            CenterContent = new Retouch_Photo2.Texts.Icon()
-        };
-        /// <summary> Reset Expander. </summary>
-        public override void Reset() { }
-
-    }
-    
-
-    /// <summary>
     /// MainPage of <see cref = "TextMenu"/>.
     /// </summary>
     public sealed partial class TextMainPage : UserControl
@@ -99,7 +27,7 @@ namespace Retouch_Photo2.Menus.Models
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        
+
 
         //@Delegate
         /// <summary> Occurs when second-page change. </summary>

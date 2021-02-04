@@ -1,11 +1,10 @@
-﻿// Core:              ★★★★
+﻿// Core:              ★★
 // Referenced:   
-// Difficult:         ★★★★★
+// Difficult:         
 // Only:              
-// Complete:      ★★★★★
+// Complete:      
 using Retouch_Photo2.Elements;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -17,7 +16,8 @@ namespace Retouch_Photo2.Menus.Models
 
         //@Content     
         public override UIElement MainPage => this.KeyboardMainPage;
-        KeyboardMainPage KeyboardMainPage = new KeyboardMainPage();
+
+        readonly KeyboardMainPage KeyboardMainPage = new KeyboardMainPage();
 
 
         //@Construct
@@ -57,21 +57,5 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Reset Expander. </summary>
         public override void Reset() { }
 
-    }
-
-    
-    /// <summary>
-    /// MainPage of <see cref="KeyboardMenu"/>.
-    /// </summary>
-    public sealed partial class KeyboardMainPage : UserControl
-    {
-        //@Construct
-        /// <summary>
-        /// Initializes a KeyboardMainPage. 
-        /// </summary>
-        public KeyboardMainPage()
-        {
-            this.InitializeComponent();
-        }
-    }
+    }    
 }

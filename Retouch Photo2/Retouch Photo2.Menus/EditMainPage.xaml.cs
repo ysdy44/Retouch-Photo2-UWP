@@ -10,7 +10,6 @@ using Retouch_Photo2.Edits.CombineIcons;
 using Retouch_Photo2.Edits.EditIcons;
 using Retouch_Photo2.Edits.GroupIcons;
 using Retouch_Photo2.Edits.SelectIcons;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -20,64 +19,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus.Models
 {
-    /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Edits"/>.
-    /// </summary>
-    public sealed partial class EditMenu : Expander, IMenu 
-    {
-
-
-        //@Content       
-        public override UIElement MainPage => this.EditMainPage;
-        EditMainPage EditMainPage = new EditMainPage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a EditMenu. 
-        /// </summary>
-        public EditMenu()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-        }
-
-    }
-
-    /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Edits"/>.
-    /// </summary>
-    public sealed partial class EditMenu : Expander, IMenu 
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title =
-            this.Title = resource.GetString("/Menus/Edit");
-        }
-
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Edit;
-        /// <summary> Gets or sets the button. </summary>
-        public override IExpanderButton Button { get; } = new MenuButton
-        {
-            CenterContent = new Retouch_Photo2.Edits.Icon()
-        };
-        /// <summary> Reset Expander. </summary>
-        public override void Reset() { }
-
-    }
-    
-
     /// <summary>
     /// MainPage of <see cref = "EditMenu"/>.
     /// </summary>
@@ -131,8 +76,6 @@ namespace Retouch_Photo2.Menus.Models
     /// </summary>
     public sealed partial class EditMainPage : UserControl
     {
-
-
 
         //Strings
         private void ConstructStrings()

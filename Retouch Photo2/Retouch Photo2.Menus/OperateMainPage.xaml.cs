@@ -4,7 +4,6 @@
 // Only:              
 // Complete:      ★★★★★
 using FanKit.Transformers;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Operates;
@@ -19,72 +18,6 @@ using Windows.UI.Xaml.Data;
 
 namespace Retouch_Photo2.Menus.Models
 {
-    /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
-    /// </summary>
-    public sealed partial class OperateMenu : Expander, IMenu 
-    {
-
-        //@ViewModel
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-
-
-        //@Content     
-        public override UIElement MainPage => this.OperateMainPage;
-        OperateMainPage OperateMainPage = new OperateMainPage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a OperateMenu. 
-        /// </summary>
-        public OperateMenu()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-        }
-
-    }
-
-    /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
-    /// </summary>
-    public sealed partial class OperateMenu : Expander, IMenu 
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.ToolTip.Content =
-            this.Button.Title =
-            this.Title = resource.GetString("/Menus/Operate");
-
-            this.Button.ToolTip.Closed += (s, e) => this.OperateMainPage.IsOpen = false;
-            this.Button.ToolTip.Opened += (s, e) =>
-            {
-                if (this.IsSecondPage) return;
-                if (this.State != ExpanderState.Overlay) return;
-
-                this.OperateMainPage.IsOpen = true;
-            };
-        }
-
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Operate;
-        /// <summary> Gets or sets the button. </summary>
-        public override IExpanderButton Button { get; } = new MenuButton
-        {
-            CenterContent = new Retouch_Photo2.Operates.Icon()
-        };
-        /// <summary> Reset Expander. </summary>
-        public override void Reset() { }
-
-    }
-    
-
     /// <summary>
     /// MainPag of <see cref = "OperateMenu"/>.
     /// </summary>
@@ -361,7 +294,7 @@ namespace Retouch_Photo2.Menus.Models
     /// </summary>
     public sealed partial class OperateMainPage : UserControl
     {
-        
+
         private void TransformAlign(BorderMode borderMode, Orientation orientation)
         {
             switch (this.Mode)
@@ -381,7 +314,7 @@ namespace Retouch_Photo2.Menus.Models
                     break;
             }
         }
-                
+
         private void TransformAlign(float positionValue, BorderMode borderMode, Orientation orientation)
         {
             //History
@@ -398,7 +331,7 @@ namespace Retouch_Photo2.Menus.Models
                 Vector2 vector = orientation == Orientation.Horizontal ?
                     new Vector2(distance, 0) :
                     new Vector2(0, distance);
-                
+
                 this.SelectionViewModel.SetLayerageValueWithChildren(layerage, (layerage2) =>
                 {
                     ILayer layer = layerage2.Self;
@@ -428,7 +361,7 @@ namespace Retouch_Photo2.Menus.Models
         }
 
 
-       ///////////////////////////////
+        ///////////////////////////////
 
 
         private void TransformSapce(Orientation orientation)
@@ -467,7 +400,7 @@ namespace Retouch_Photo2.Menus.Models
 
             //History
             LayersTransformAddHistory history = new LayersTransformAddHistory("Transform");
-            
+
 
             float postionMin = min;//[ previous.Min ] + [ previous.Length ] + space.
             var orderedBorders = borders.OrderBy(border => border.Min);

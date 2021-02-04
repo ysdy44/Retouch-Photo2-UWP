@@ -1,24 +1,11 @@
-﻿// Core:              ★★★★
+﻿// Core:              ★★
 // Referenced:   
-// Difficult:         ★★★★★
+// Difficult:         
 // Only:              
-// Complete:      ★★★★★
-using System;
-using System.Collections.Generic;
-using System.IO;
+// Complete:      
 using Retouch_Photo2.Elements;
 using Windows.ApplicationModel.Resources;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -29,7 +16,8 @@ namespace Retouch_Photo2.Menus.Models
     {       
         //@Content     
         public override UIElement MainPage => this.DebugMainPage;
-        DebugMainPage DebugMainPage = new DebugMainPage();
+
+        readonly DebugMainPage DebugMainPage = new DebugMainPage();
 
         //@Construct
         /// <summary>
@@ -67,24 +55,6 @@ namespace Retouch_Photo2.Menus.Models
         };
         /// <summary> Reset Expander. </summary>
         public override void Reset() { }
-
-    }
-
-
-    /// <summary>
-    /// MainPage of <see cref = "DebugMenu"/>.
-    /// </summary>
-    internal sealed partial class DebugMainPage : Page
-    {
-
-        //@Construct
-        /// <summary>
-        /// Initializes a DebugMainPage. 
-        /// </summary>
-        public DebugMainPage()
-        {
-            this.InitializeComponent();
-        }
 
     }
 }
