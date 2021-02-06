@@ -3,6 +3,7 @@
 // Difficult:         
 // Only:              
 // Complete:      
+using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -22,42 +23,14 @@ namespace Retouch_Photo2.Elements
             set
             {
                 this.Visibility = value == LoadingState.None ? Visibility.Collapsed : Visibility.Visible;
-                this.TextBlock.Text = this.GetText(value);
+                this.TextBlock.Text = this.Dictionary[value] ?? string.Empty;
                 this.state = value;
             }
         }
         private LoadingState state;
 
+        public IDictionary<LoadingState, string> Dictionary = new Dictionary<LoadingState, string>();
 
-        string _Loading;
-        string _LoadFailed;
-
-        string _FileCorrupt;
-        string _FileNull;
-
-        string _Saving;
-        string _SaveSuccess;
-        string _SaveFailed;
-
-        private string GetText(LoadingState value)
-        {
-            switch (value)
-            {
-                case LoadingState.None: return string.Empty;
-
-                case LoadingState.Loading: return this._Loading;
-                case LoadingState.LoadFailed: return this._LoadFailed;
-
-                case LoadingState.FileCorrupt: return this._FileCorrupt;
-                case LoadingState.FileNull: return this._FileNull;
-
-                case LoadingState.Saving: return this._Saving;
-                case LoadingState.SaveSuccess: return this._SaveSuccess;
-                case LoadingState.SaveFailed: return this._SaveFailed;
-
-                default: return string.Empty;
-            }
-        }
 
         #region DependencyProperty
 
@@ -85,15 +58,17 @@ namespace Retouch_Photo2.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._Loading = resource.GetString("/$Loading/Loading");
-            this._LoadFailed = resource.GetString("/$Loading/LoadFailed");
+            this.Dictionary.Add(LoadingState.None, null);
 
-            this._FileCorrupt = resource.GetString("/$Loading/FileCorrupt");
-            this._FileNull = resource.GetString("/$Loading/FileNull");
+            this.Dictionary.Add(LoadingState.Loading, resource.GetString("$Loading_Loading"));
+            this.Dictionary.Add(LoadingState.LoadFailed, resource.GetString("$Loading_LoadFailed"));
 
-            this._Saving = resource.GetString("/$Loading/Saving");
-            this._SaveSuccess = resource.GetString("/$Loading/SaveSuccess");
-            this._SaveFailed = resource.GetString("/$Loading/SaveFailed");
+            this.Dictionary.Add(LoadingState.FileCorrupt, resource.GetString("$Loading_FileCorrupt"));
+            this.Dictionary.Add(LoadingState.FileNull, resource.GetString("$Loading_FileNull"));
+
+            this.Dictionary.Add(LoadingState.Saving, resource.GetString("$Loading_Saving"));
+            this.Dictionary.Add(LoadingState.SaveSuccess, resource.GetString("$Loading_SaveSuccess"));
+            this.Dictionary.Add(LoadingState.SaveFailed, resource.GetString("$Loading_SaveFailed"));
         }
     }
 }

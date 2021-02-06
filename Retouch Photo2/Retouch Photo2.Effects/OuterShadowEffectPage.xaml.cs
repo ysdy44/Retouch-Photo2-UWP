@@ -108,14 +108,14 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("/Effects/OuterShadow");
+            this.Button.Text = resource.GetString("Effects_OuterShadow");
 
-            this.RadiusTextBlock.Text = resource.GetString("/Effects/OuterShadow_Radius");
-            this.OpacityTextBlock.Text = resource.GetString("/Effects/OuterShadow_Opacity");
-            this.OffsetTextBlock.Text = resource.GetString("/Effects/OuterShadow_Offset");
+            this.RadiusTextBlock.Text = resource.GetString("Effects_OuterShadow_Radius");
+            this.OpacityTextBlock.Text = resource.GetString("Effects_OuterShadow_Opacity");
+            this.OffsetTextBlock.Text = resource.GetString("Effects_OuterShadow_Offset");
 
-            this.AngleTextBlock.Text = resource.GetString("/Effects/OuterShadow_Angle");
-            this.ColorTextBlock.Text = resource.GetString("/Effects/OuterShadow_Color");
+            this.AngleTextBlock.Text = resource.GetString("Effects_OuterShadow_Angle");
+            this.ColorTextBlock.Text = resource.GetString("Effects_OuterShadow_Color");
         }
 
         //@Content

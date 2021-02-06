@@ -71,10 +71,10 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("/Effects/Edge");
+            this.Button.Text = resource.GetString("Effects_Edge");
 
-            this.AmountTextBlock.Text = resource.GetString("/Effects/Edge_Amount");
-            this.RadiusTextBlock.Text = resource.GetString("/Effects/Edge_Radius");
+            this.AmountTextBlock.Text = resource.GetString("Effects_Edge_Amount");
+            this.RadiusTextBlock.Text = resource.GetString("Effects_Edge_Radius");
         }
 
         //@Content

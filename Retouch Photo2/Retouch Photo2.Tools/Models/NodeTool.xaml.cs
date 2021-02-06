@@ -272,7 +272,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/Tools/Node");
+            this.Button.Title = resource.GetString("Tools_Node");
         }
 
     }
@@ -320,10 +320,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.RemoveTextBlock.Text = resource.GetString("/Tools/Node_Remove");
-            this.InsertTextBlock.Text = resource.GetString("/Tools/Node_Insert");
-            this.SharpTextBlock.Text = resource.GetString("/Tools/Node_Sharp");
-            this.SmoothTextBlock.Text = resource.GetString("/Tools/Node_Smooth");
+            this.RemoveTextBlock.Text = resource.GetString("Tools_Node_Remove");
+            this.InsertTextBlock.Text = resource.GetString("Tools_Node_Insert");
+            this.SharpTextBlock.Text = resource.GetString("Tools_Node_Sharp");
+            this.SmoothTextBlock.Text = resource.GetString("Tools_Node_Smooth");
         }
 
         private void ConstructNodes()

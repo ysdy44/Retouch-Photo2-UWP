@@ -58,9 +58,9 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("/Effects/Sharpen");
+            this.Button.Text = resource.GetString("Effects_Sharpen");
 
-            this.AmountTextBlock.Text = resource.GetString("/Effects/Sharpen_Amount");
+            this.AmountTextBlock.Text = resource.GetString("Effects_Sharpen_Amount");
         }
 
         //@Content

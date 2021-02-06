@@ -60,9 +60,9 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("/Effects/GaussianBlur");
+            this.Button.Text = resource.GetString("Effects_GaussianBlur");
 
-            this.RadiusTextBlock.Text = resource.GetString("/Effects/GaussianBlur_Radius");
+            this.RadiusTextBlock.Text = resource.GetString("Effects_GaussianBlur_Radius");
         }
 
         //@Content

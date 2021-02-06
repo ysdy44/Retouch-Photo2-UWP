@@ -225,25 +225,25 @@ namespace Retouch_Photo2.Elements
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             //Swatches
-           this.ConstructGroup(this.SwatchesButton, this.SwatchesPicker, resource.GetString("/ToolElements/Color_Swatches"), new SwatchesIcon(), ColorPicker2Mode.Swatches);
+           this.ConstructGroup(this.SwatchesButton, this.SwatchesPicker, resource.GetString("Menus_Color_Swatches"), new SwatchesIcon(), ColorPicker2Mode.Swatches);
 
             //Wheel
-            this.ConstructGroup(this.WheelButton, this.WheelPicker, resource.GetString("/ToolElements/Color_Wheel"), new WheelIcon(), ColorPicker2Mode.Wheel);
+            this.ConstructGroup(this.WheelButton, this.WheelPicker, resource.GetString("Menus_Color_Wheel"), new WheelIcon(), ColorPicker2Mode.Wheel);
 
             //RGB          
-           this.ConstructGroup(this.RGBButton, this.RGBPicker, resource.GetString("/ToolElements/Color_RGB"), new RGBIcon(), ColorPicker2Mode.RGB);
+           this.ConstructGroup(this.RGBButton, this.RGBPicker, resource.GetString("Menus_Color_RGB"), new RGBIcon(), ColorPicker2Mode.RGB);
             //HSV
-            this.ConstructGroup(this.HSVButton, this.HSVPicker, resource.GetString("/ToolElements/Color_HSV"), new HSVIcon(), ColorPicker2Mode.HSV);
+            this.ConstructGroup(this.HSVButton, this.HSVPicker, resource.GetString("Menus_Color_HSV"), new HSVIcon(), ColorPicker2Mode.HSV);
 
             //PaletteHue
-            this.ConstructGroup(this.PaletteHueButton, this.PaletteHuePicker, resource.GetString("/ToolElements/Color_PaletteHue"), new PaletteHueIcon(), ColorPicker2Mode.PaletteHue);
+            this.ConstructGroup(this.PaletteHueButton, this.PaletteHuePicker, resource.GetString("Menus_Color_PaletteHue"), new PaletteHueIcon(), ColorPicker2Mode.PaletteHue);
             //PaletteSaturation
-            this.ConstructGroup(this.PaletteSaturationButton, this.PaletteSaturationPicker, resource.GetString("/ToolElements/Color_PaletteSaturation"), new PaletteSaturationIcon(), ColorPicker2Mode.PaletteSaturation);
+            this.ConstructGroup(this.PaletteSaturationButton, this.PaletteSaturationPicker, resource.GetString("Menus_Color_PaletteSaturation"), new PaletteSaturationIcon(), ColorPicker2Mode.PaletteSaturation);
             //PaletteValue
-            this.ConstructGroup(this.PaletteValueButton, this.PaletteValuePicker, resource.GetString("/ToolElements/Color_PaletteValue"), new PaletteValueIcon(), ColorPicker2Mode.PaletteValue);
+            this.ConstructGroup(this.PaletteValueButton, this.PaletteValuePicker, resource.GetString("Menus_Color_PaletteValue"), new PaletteValueIcon(), ColorPicker2Mode.PaletteValue);
 
             //Circle
-            this.ConstructGroup(this.CircleButton, this.CirclePicker, resource.GetString("/ToolElements/Color_Circle"), new CircleIcon(), ColorPicker2Mode.Circle);
+            this.ConstructGroup(this.CircleButton, this.CirclePicker, resource.GetString("Menus_Color_Circle"), new CircleIcon(), ColorPicker2Mode.Circle);
         }
 
         //Group

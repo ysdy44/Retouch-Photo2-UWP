@@ -15,7 +15,11 @@
     <UserControl.Resources>
 
         <!--Brush-->
-        <ImageBrush x:Name="NoneBrush" ImageSource="ms-appx:///Icons\GrayAndWhite3.jpg"/>
+        <ImageBrush x:Name="NoneBrush">
+            <ImageBrush.ImageSource>
+                ms-appx:///Icons\GrayAndWhite3.jpg
+            </ImageBrush.ImageSource>
+        </ImageBrush>
 
         <SolidColorBrush x:Name="ColorBrush" Color="White"/>
 
@@ -38,7 +42,7 @@
             <ImageBrush.ImageSource>
                 <BitmapImage x:Name="BitmapImage">
                     <BitmapImage.UriSource>
-                        ImageSource="ms-appx:///Icons\GrayAndWhite2.jpg"
+                        ms-appx:///Icons\GrayAndWhite2.jpg
                     </BitmapImage.UriSource>
                 </BitmapImage>
             </ImageBrush.ImageSource>
@@ -50,7 +54,11 @@
     <Grid x:Name="RootGrid" Background="Transparent">
         <Rectangle RadiusX="4" RadiusY="4" IsHitTestVisible="False" StrokeThickness="1" Stroke="{ThemeResource AppText}">
             <Rectangle.Fill>
-                <ImageBrush ImageSource="ms-appx:///Icons\GrayAndWhite2.jpg"/>
+                <ImageBrush>
+                    <ImageBrush.ImageSource>
+                        ms-appx:///Icons\GrayAndWhite2.jpg
+                    </ImageBrush.ImageSource>
+                </ImageBrush>
             </Rectangle.Fill>
         </Rectangle>
 

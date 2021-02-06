@@ -69,10 +69,10 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("/Effects/DirectionalBlur");
+            this.Button.Text = resource.GetString("Effects_DirectionalBlur");
 
-            this.RadiusTextBlock.Text = resource.GetString("/Effects/DirectionalBlur_Radius");
-            this.AngleTextBlock.Text = resource.GetString("/Effects/DirectionalBlur_Angle");
+            this.RadiusTextBlock.Text = resource.GetString("Effects_DirectionalBlur_Radius");
+            this.AngleTextBlock.Text = resource.GetString("Effects_DirectionalBlur_Angle");
         }
 
         //@Content

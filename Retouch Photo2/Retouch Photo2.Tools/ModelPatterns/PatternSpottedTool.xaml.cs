@@ -77,7 +77,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/ToolsSecond/PatternSpotted");
+            this.Button.Title = resource.GetString("Tools_PatternSpotted");
         }
 
     }
@@ -118,8 +118,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.RadiusButton.CenterContent = resource.GetString("/ToolsSecond/PatternSpotted_Radius");
-            this.StepButton.CenterContent = resource.GetString("/ToolsSecond/PatternSpotted_Step");
+            this.RadiusButton.CenterContent = resource.GetString("Tools_PatternSpotted_Radius");
+            this.StepButton.CenterContent = resource.GetString("Tools_PatternSpotted_Step");
         }
 
     }

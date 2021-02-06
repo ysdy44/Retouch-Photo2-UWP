@@ -105,19 +105,19 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("/Adjustments/GammaTransfer");
+            this.Text = resource.GetString("Adjustments_GammaTransfer");
 
-            string offset = resource.GetString("/Adjustments/GammaTransfer_Offset");
-            string exponent = resource.GetString("/Adjustments/GammaTransfer_Exponent");
-            string amplitude = resource.GetString("/Adjustments/GammaTransfer_Amplitude");
+            string offset = resource.GetString("Adjustments_GammaTransfer_Offset");
+            string exponent = resource.GetString("Adjustments_GammaTransfer_Exponent");
+            string amplitude = resource.GetString("Adjustments_GammaTransfer_Amplitude");
 
-            string alpha = resource.GetString("/Adjustments/GammaTransfer_Alpha");
+            string alpha = resource.GetString("Adjustments_GammaTransfer_Alpha");
             this.ConstructStringsAlpha(alpha, offset, exponent, amplitude);
-            string red = resource.GetString("/Adjustments/GammaTransfer_Red");
+            string red = resource.GetString("Adjustments_GammaTransfer_Red");
             this.ConstructStringsRed(red, offset, exponent, amplitude);
-            string green = resource.GetString("/Adjustments/GammaTransfer_Green");
+            string green = resource.GetString("Adjustments_GammaTransfer_Green");
             this.ConstructStringsGreen(green, offset, exponent, amplitude);
-            string blue = resource.GetString("/Adjustments/GammaTransfer_Blue");
+            string blue = resource.GetString("Adjustments_GammaTransfer_Blue");
             this.ConstructStringsBlue(blue, offset, exponent, amplitude);
         }
 

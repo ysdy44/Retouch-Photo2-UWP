@@ -125,9 +125,9 @@ namespace Retouch_Photo2.Brushs
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ConstructGroup(this.ClampButton, resource.GetString("/ToolElements/Extend_Clamp"), new ClampIcon(), CanvasEdgeBehavior.Clamp);
-            this.ConstructGroup(this.WrapButton, resource.GetString("/ToolElements/Extend_Wrap"), new WrapIcon(), CanvasEdgeBehavior.Wrap);
-            this.ConstructGroup(this.MirrorButton, resource.GetString("/ToolElements/Extend_Mirror"), new MirrorIcon(), CanvasEdgeBehavior.Mirror);
+            this.ConstructGroup(this.ClampButton, resource.GetString("Tools_Brush_Extend_Clamp"), new ClampIcon(), CanvasEdgeBehavior.Clamp);
+            this.ConstructGroup(this.WrapButton, resource.GetString("Tools_Brush_Extend_Wrap"), new WrapIcon(), CanvasEdgeBehavior.Wrap);
+            this.ConstructGroup(this.MirrorButton, resource.GetString("Tools_Brush_Extend_Mirror"), new MirrorIcon(), CanvasEdgeBehavior.Mirror);
         }
         
         //Group

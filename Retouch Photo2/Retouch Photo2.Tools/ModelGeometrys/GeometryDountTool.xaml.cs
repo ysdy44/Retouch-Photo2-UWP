@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryDount");
+            this.Button.Title = resource.GetString("Tools_GeometryDount");
         }
 
     }
@@ -100,9 +100,9 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.HoleRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryDount_HoleRadius");
+            this.HoleRadiusButton.CenterContent = resource.GetString("Tools_GeometryDount_HoleRadius");
 
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

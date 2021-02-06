@@ -21,81 +21,87 @@ namespace Retouch_Photo2
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.TitleTextBlock.Text = resource.GetString("/$SettingPage/Title");
-            this.BackToolTip.Content = resource.GetString("/$SettingPage/Page_Back");
-            this.AboutToolTip.Content = resource.GetString("/$SettingPage/Page_About");
+            this.TitleTextBlock.Text = resource.GetString("$SettingPage_Title");
+            {
+                this.BackToolTip.Content = resource.GetString("$SettingPage_Back");
+                this.AboutToolTip.Content = resource.GetString("$SettingPage_About");
+            }
 
-            this.ThemeTextBlock.Text = resource.GetString("/$SettingPage/Theme");
-            this.LightRadioButton.Content = resource.GetString("/$SettingPage/Theme_Light");
-            this.DarkRadioButton.Content = resource.GetString("/$SettingPage/Theme_Dark");
-            this.DefaultRadioButton.Content = resource.GetString("/$SettingPage/Theme_UseSystem");
+            this.ThemeTextBlock.Text = resource.GetString("$SettingPage_Theme");
+            {
+                this.LightRadioButton.Content = resource.GetString("$SettingPage_Theme_Light");
+                this.DarkRadioButton.Content = resource.GetString("$SettingPage_Theme_Dark");
+                this.UseSystemRadioButton.Content = resource.GetString("$SettingPage_Theme_UseSystem");
+            }
 
-            this.DeviceLayoutTextBlock.Text = resource.GetString("/$SettingPage/DeviceLayout");
-            this.PhoneButton.Content = resource.GetString("/$SettingPage/DeviceLayout_Phone");
-            this.PadButton.Content = resource.GetString("/$SettingPage/DeviceLayout_Pad");
-            this.PCButton.Content = resource.GetString("/$SettingPage/DeviceLayout_PC");
-            this.AdaptiveButton.Content = resource.GetString("/$SettingPage/DeviceLayout_Adaptive");
+            this.DeviceLayoutTextBlock.Text = resource.GetString("$SettingPage_DeviceLayout");
+            {
+                this.PhoneButton.Content = resource.GetString("$SettingPage_DeviceLayout_Phone");
+                this.PadButton.Content = resource.GetString("$SettingPage_DeviceLayout_Pad");
+                this.PCButton.Content = resource.GetString("$SettingPage_DeviceLayout_PC");
+                this.AdaptiveButton.Content = resource.GetString("$SettingPage_DeviceLayout_Adaptive");
+            }
 
-            this.AdaptiveTextBlock.Text = resource.GetString("/$SettingPage/DeviceLayout_AdaptiveWidth");
-            this.AdaptiveResetButton.Content = resource.GetString("/$SettingPage/DeviceLayout_ResetAdaptiveWidth");
+            this.AdaptiveWidthTextBlock.Text = resource.GetString("$SettingPage_DeviceLayout_AdaptiveWidth");
+            this.ResetAdaptiveWidthButton.Content = resource.GetString("$SettingPage_DeviceLayout_ResetAdaptiveWidth");
 
-            this.LayersHeightTextBlock.Text = resource.GetString("/$SettingPage/LayersHeight");
-            this.LayersHeightTipTextBlock.Text = resource.GetString("/$SettingPage/LayersHeightTip");
+            this.LayersHeightTextBlock.Text = resource.GetString("$SettingPage_LayersHeight");
+            this.LayersHeightTipTextBlock.Text = resource.GetString("$SettingPage_LayersHeightTip");
 
+            this.KeyTextBlock.Text = resource.GetString("$SettingPage_Key");
+            {
+                this.CenterControl.Tag = "Ctrl";
+                this.CenterControl.Content = resource.GetString("Tools_MoreCreate_Center");
+                this.RatioControl.Tag = "Shift";
+                this.RatioControl.Content = resource.GetString("Tools_MoreTransform_Ratio");
+                this.SquareControl.Tag = "Shift";
+                this.SquareControl.Content = resource.GetString("Tools_MoreCreate_Square");
+                this.StepFrequencyControl.Tag = "Space";
+                this.StepFrequencyControl.Content = resource.GetString("Menus_Transformer_StepFrequency");
+                this.FullScreenControl.Tag = "Esc";
+                this.FullScreenControl.Content = resource.GetString("$DrawPage_FullScreen");
 
-            this.KeyTextBlock.Text = resource.GetString("/$SettingPage/Key");
+                this.LeftControl.Tag = "←";
+                this.LeftControl.Content = resource.GetString("$SettingPage_Key_Move_Left");
+                this.TopControl.Tag = "↑";
+                this.TopControl.Content = resource.GetString("$SettingPage_Key_Move_Top");
+                this.RightControl.Tag = "→";
+                this.RightControl.Content = resource.GetString("$SettingPage_Key_Move_Right");
+                this.BottomControl.Tag = "↓";
+                this.BottomControl.Content = resource.GetString("$SettingPage_Key_Move_Bottom");
 
-            this.IsCenterControl.Tag = "Ctrl";
-            this.IsCenterControl.Content = resource.GetString("/$SettingPage/Key_IsCenter");
-            this.IsRatioControl.Tag = "Shift";
-            this.IsRatioControl.Content = resource.GetString("/$SettingPage/Key_IsRatio");
-            this.IsSquareControl.Tag = "Shift";
-            this.IsSquareControl.Content = resource.GetString("/$SettingPage/Key_IsSquare");
-            this.IsStepFrequencyControl.Tag = "Space";
-            this.IsStepFrequencyControl.Content = resource.GetString("/$SettingPage/Key_IsStepFrequency");
-            this.IsFullScreenControl.Tag = "Esc";
-            this.IsFullScreenControl.Content = resource.GetString("/$SettingPage/Key_IsFullScreen");
+                this.CutControl.Tag = "Ctrl + X";
+                this.CutControl.Content = resource.GetString("Edits_Edit_Cut");
+                this.DuplicateControl.Tag = "Ctrl + J";
+                this.DuplicateControl.Content = resource.GetString("Edits_Edit_Duplicate");
+                this.CopyControl.Tag = "Ctrl + C";
+                this.CopyControl.Content = resource.GetString("Edits_Edit_Copy");
+                this.PasteControl.Tag = "Ctrl + V";
+                this.PasteControl.Content = resource.GetString("Edits_Edit_Paste");
+                this.ClearControl.Tag = "Delete";
+                this.ClearControl.Content = resource.GetString("Edits_Edit_Clear");
+                this.AllControl.Tag = "Ctrl + A";
+                this.AllControl.Content = resource.GetString("Edits_Select_All");
+                this.DeselectControl.Tag = "Ctrl + D";
+                this.DeselectControl.Content = resource.GetString("Edits_Select_Deselect");
+                this.InvertControl.Tag = "Ctrl + I";
+                this.InvertControl.Content = resource.GetString("Edits_Select_Invert");
+                this.GroupControl.Tag = "Ctrl + G";
+                this.GroupControl.Content = resource.GetString("Edits_Group_Group");
+                this.UnGroupControl.Tag = "Ctrl + U";
+                this.UnGroupControl.Content = resource.GetString("Edits_Group_UnGroup");
+                this.ReleaseControl.Tag = "Ctrl + R";
+                this.ReleaseControl.Content = resource.GetString("Edits_Group_Release");
 
-            this.LeftControl.Tag = "←";
-            this.LeftControl.Content = resource.GetString("/$SettingPage/Key_MoveLeft ");
-            this.UpControl.Tag = "↑";
-            this.UpControl.Content = resource.GetString("/$SettingPage/Key_MoveUp ");
-            this.RightControl.Tag = "→";
-            this.RightControl.Content = resource.GetString("/$SettingPage/Key_MoveRight ");
-            this.DownControl.Tag = "↓";
-            this.DownControl.Content = resource.GetString("/$SettingPage/Key_MoveDown ");
+                this.UndoControl.Tag = "Ctrl + Z";
+                this.UndoControl.Content = resource.GetString("$DrawPage_Undo");
+            }
 
-            this.CutControl.Tag = "Ctrl + X";
-            this.CutControl.Content = resource.GetString("/$SettingPage/Key_EditCut");
-            this.DuplicateControl.Tag = "Ctrl + J";
-            this.DuplicateControl.Content = resource.GetString("/$SettingPage/Key_EditDuplicate");
-            this.CopyControl.Tag = "Ctrl + C";
-            this.CopyControl.Content = resource.GetString("/$SettingPage/Key_EditCopy");
-            this.PasteControl.Tag = "Ctrl + V";
-            this.PasteControl.Content = resource.GetString("/$SettingPage/Key_EditPaste");
-            this.ClearControl.Tag = "Delete";
-            this.ClearControl.Content = resource.GetString("/$SettingPage/Key_EditClear");
-            this.AllControl.Tag = "Ctrl + A";
-            this.AllControl.Content = resource.GetString("/$SettingPage/Key_EditAll");
-            this.DeselectControl.Tag = "Ctrl + D";
-            this.DeselectControl.Content = resource.GetString("/$SettingPage/Key_EditDeselect");
-            this.InvertControl.Tag = "Ctrl + I";
-            this.InvertControl.Content = resource.GetString("/$SettingPage/Key_EditInvert");
-            this.GroupControl.Tag = "Ctrl + G";
-            this.GroupControl.Content = resource.GetString("/$SettingPage/Key_EditGroup");
-            this.UnGroupControl.Tag = "Ctrl + U";
-            this.UnGroupControl.Content = resource.GetString("/$SettingPage/Key_EditUnGroup");
-            this.ReleaseControl.Tag = "Ctrl + R";
-            this.ReleaseControl.Content = resource.GetString("/$SettingPage/Key_EditRelease");
-            this.UndoControl.Tag = "Ctrl + Z";
-            this.UndoControl.Content = resource.GetString("/$SettingPage/Key_EditUndo");
-            
+            this.MenuTypeTextBlock.Text = resource.GetString("$SettingPage_MenuType");
+            this.MenuTypeTipTextBlock.Text = resource.GetString("$SettingPage_MenuTypeTip");
 
-            this.MenuTypeTextBlock.Text = resource.GetString("/$SettingPage/MenuType");
-            this.MenuTypeTipTextBlock.Text = resource.GetString("/$SettingPage/MenuTypeTip");
-
-            this.LocalTextBlock.Text = resource.GetString("/$SettingPage/Local");
-            this.LocalOpenTextBlock.Text = resource.GetString("/$SettingPage/Local_Open");
+            this.LocalFolderTextBlock.Text = resource.GetString("$SettingPage_LocalFolder");
+            this.OpenTextBlock.Text = resource.GetString("$SettingPage_LocalFolder_Open");
         }
 
 
@@ -106,11 +112,11 @@ namespace Retouch_Photo2
             ElementTheme theme = this.SettingViewModel.Setting.Theme;
             this.LightRadioButton.IsChecked = (theme == ElementTheme.Light);
             this.DarkRadioButton.IsChecked = (theme == ElementTheme.Dark);
-            this.DefaultRadioButton.IsChecked = (theme == ElementTheme.Default);
+            this.UseSystemRadioButton.IsChecked = (theme == ElementTheme.Default);
             
             this.LightRadioButton.Click += async (s, e) => await this.SetTheme(ElementTheme.Light);
             this.DarkRadioButton.Click += async (s, e) => await this.SetTheme(ElementTheme.Dark);
-            this.DefaultRadioButton.Click += async (s, e) => await this.SetTheme(ElementTheme.Default);
+            this.UseSystemRadioButton.Click += async (s, e) => await this.SetTheme(ElementTheme.Default);
         }
 
 
@@ -141,24 +147,24 @@ namespace Retouch_Photo2
 
         private void ConstructDeviceLayoutAdaptive(int phone, int pad)
         {
-            this.AdaptiveGrid.PhoneWidth = phone;
-            this.AdaptiveGrid.PadWidth = pad;
-            this.AdaptiveGrid.SetWidth();
+            this.AdaptiveWidthGrid.PhoneWidth = phone;
+            this.AdaptiveWidthGrid.PadWidth = pad;
+            this.AdaptiveWidthGrid.SetWidth();
 
 
-            this.AdaptiveGrid.ScrollModeChanged += (s, mode) =>
+            this.AdaptiveWidthGrid.ScrollModeChanged += (s, mode) =>
             {
                 this.ScrollViewer.HorizontalScrollMode = mode;
                 this.ScrollViewer.VerticalScrollMode = mode;
             };
-            this.AdaptiveGrid.PhoneWidthChanged += async (s, value) =>
+            this.AdaptiveWidthGrid.PhoneWidthChanged += async (s, value) =>
             {
                 //Setting
                 this.SettingViewModel.Setting.DeviceLayout.PhoneMaxWidth = value;
                 this.SettingViewModel.NotifyDeviceLayoutType();
                 await this.Write();
             };
-            this.AdaptiveGrid.PadWidthChanged += async (s, value) =>
+            this.AdaptiveWidthGrid.PadWidthChanged += async (s, value) =>
             {
                 //Setting
                 this.SettingViewModel.Setting.DeviceLayout.PadMaxWidth = value;
@@ -167,15 +173,15 @@ namespace Retouch_Photo2
             };
 
 
-            this.AdaptiveResetButton.Click += async (s, e) =>
+            this.ResetAdaptiveWidthButton.Click += async (s, e) =>
             {
                 DeviceLayout default2 = DeviceLayout.Default;
                 int phone2 = default2.PhoneMaxWidth;
                 int pad2 = default2.PadMaxWidth;
 
-                this.AdaptiveGrid.PhoneWidth = phone2;
-                this.AdaptiveGrid.PadWidth = pad2;
-                this.AdaptiveGrid.SetWidth();
+                this.AdaptiveWidthGrid.PhoneWidth = phone2;
+                this.AdaptiveWidthGrid.PadWidth = pad2;
+                this.AdaptiveWidthGrid.SetWidth();
 
                 //Setting
                 this.SettingViewModel.Setting.DeviceLayout.PhoneMaxWidth = phone2;
@@ -216,7 +222,6 @@ namespace Retouch_Photo2
         //MenuType
         private void ConstructMenuType()
         {
-            bool isParity = false;
             IList<MenuType> menuTypes = this.SettingViewModel.Setting.MenuTypes;
 
             foreach (IMenu menu in this.TipViewModel.Menus)
@@ -227,12 +232,10 @@ namespace Retouch_Photo2
                 {
                     Content = menu.Button.Title,
                     IsChecked = isVisible,
-                    FontWeight = FontWeights.Medium
                 };
                 checkBox.Checked += async (s, e) => await this.AddMenu(menu.Type);
                 checkBox.Unchecked += async (s, e) => await this.RemoveMenu(menu.Type);
 
-                isParity = !isParity;
                 this.MenusStackPanel.Children.Add(new Border
                 {
                     Child = checkBox,

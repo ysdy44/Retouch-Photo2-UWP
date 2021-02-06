@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryDiamond");
+            this.Button.Title = resource.GetString("Tools_GeometryDiamond");
         }
 
     }
@@ -101,10 +101,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.MirrorTextBlock.Text = resource.GetString("/ToolsSecond/GeometryDiamond_Mirror");
-            this.MidButton.CenterContent = resource.GetString("/ToolsSecond/GeometryDiamond_Mid");
+            this.MirrorTextBlock.Text = resource.GetString("Tools_GeometryDiamond_Mirror");
+            this.MidButton.CenterContent = resource.GetString("Tools_GeometryDiamond_Mid");
 
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

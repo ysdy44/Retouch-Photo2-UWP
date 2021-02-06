@@ -165,7 +165,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/Tools/Transparency");
+            this.Button.Title = resource.GetString("Tools_Transparency");
         }
 
     }
@@ -211,8 +211,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.TypeTextBlock.Text = resource.GetString("/Tools/Brush_Type");
-            this.ShowTextBlock.Text = resource.GetString("/Tools/Brush_Brush");
+            this.TypeTextBlock.Text = resource.GetString("Tools_Brush_Type");
+            this.ShowTextBlock.Text = resource.GetString("Tools_Brush_Brush");
         }
 
         private void ConstructShowControl()

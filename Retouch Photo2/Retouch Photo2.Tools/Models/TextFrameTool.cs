@@ -60,7 +60,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/Tools/TextFrame");
+            this.Button.Title = resource.GetString("Tools_TextFrame");
         }
 
     }

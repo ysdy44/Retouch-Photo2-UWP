@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("/Adjustments/Gray");
+            this.Text = resource.GetString("Adjustments_Gray");
         }
 
         //@Content

@@ -82,7 +82,7 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.GridButton.Content = resource.GetString("/ToolElements/PatternGrid_Grid");
+            this.GridButton.Content = resource.GetString("Tools_PatternGrid_Grid");
             this.GridButton.Tag = new GridIcon();
             this.GridButton.Click += (s, e) =>
             {
@@ -90,7 +90,7 @@ namespace Retouch_Photo2.Tools.Elements
                 this.Flyout.Hide();
             };
 
-            this.HorizontalButton.Content = resource.GetString("/ToolElements/PatternHorizontal_Horizontal");
+            this.HorizontalButton.Content = resource.GetString("Tools_PatternGrid_HorizontalStep");
             this.HorizontalButton.Tag = new HorizontalIcon();
             this.HorizontalButton.Click += (s, e) =>
             {
@@ -98,7 +98,7 @@ namespace Retouch_Photo2.Tools.Elements
                 this.Flyout.Hide();
             };
 
-            this.VerticalButton.Content = resource.GetString("/ToolElements/PatternVertical_Vertical");
+            this.VerticalButton.Content = resource.GetString("Tools_PatternGrid_VerticalStep");
             this.VerticalButton.Tag = new VerticalIcon();
             this.VerticalButton.Click += (s, e) =>
             {

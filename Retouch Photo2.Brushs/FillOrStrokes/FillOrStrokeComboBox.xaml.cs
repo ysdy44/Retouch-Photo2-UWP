@@ -73,8 +73,8 @@ namespace Retouch_Photo2.Brushs
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ConstructGroup(this.FillButton, resource.GetString("/ToolElements/Fill"), new FillIcon(), FillOrStroke.Fill);
-            this.ConstructGroup(this.StrokeButton, resource.GetString("/ToolElements/Stroke"), new StrokeIcon(), FillOrStroke.Stroke);
+            this.ConstructGroup(this.FillButton, resource.GetString("Tools_Fill"), new FillIcon(), FillOrStroke.Fill);
+            this.ConstructGroup(this.StrokeButton, resource.GetString("Tools_Stroke"), new StrokeIcon(), FillOrStroke.Stroke);
         }
 
         //Group

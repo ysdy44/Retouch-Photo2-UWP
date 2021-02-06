@@ -99,7 +99,7 @@
 
             <Button x:Name="BackButton" Style="{StaticResource AppButtonStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip x:Name="BackToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                    <ToolTip x:Name="BackTipToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
                 <Button.Transitions>
                     <TransitionCollection>
@@ -119,7 +119,7 @@
 
             <Button x:Name="AddButton" Grid.Column="2" Style="{StaticResource AppButtonStyle}">
                 <ToolTipService.ToolTip>
-                    <ToolTip x:Name="AddToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                    <ToolTip x:Name="AddTipToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
                 <Button.Transitions>
                     <TransitionCollection>

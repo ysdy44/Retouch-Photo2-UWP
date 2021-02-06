@@ -82,21 +82,21 @@ namespace Retouch_Photo2.Texts
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ConstructGroup(this.BlackButton, resource.GetString("/Texts/FontWeight_Black"), FontWeights.Black);
-            this.ConstructGroup(this.BoldButton, resource.GetString("/Texts/FontWeight_Bold"), FontWeights.Bold);
+            this.ConstructGroup(this.BlackButton, resource.GetString("Texts_FontWeight_Black"), FontWeights.Black);
+            this.ConstructGroup(this.BoldButton, resource.GetString("Texts_FontWeight_Bold"), FontWeights.Bold);
 
-            this.ConstructGroup(this.ExtraBlackButton, resource.GetString("/Texts/FontWeight_ExtraBlack"), FontWeights.ExtraBlack);
-            this.ConstructGroup(this.ExtraBoldButton, resource.GetString("/Texts/FontWeight_ExtraBold"), FontWeights.ExtraBold);
-            this.ConstructGroup(this.ExtraLightButton, resource.GetString("/Texts/FontWeight_ExtraLight"), FontWeights.ExtraLight);
+            this.ConstructGroup(this.ExtraBlackButton, resource.GetString("Texts_FontWeight_ExtraBlack"), FontWeights.ExtraBlack);
+            this.ConstructGroup(this.ExtraBoldButton, resource.GetString("Texts_FontWeight_ExtraBold"), FontWeights.ExtraBold);
+            this.ConstructGroup(this.ExtraLightButton, resource.GetString("Texts_FontWeight_ExtraLight"), FontWeights.ExtraLight);
 
-            this.ConstructGroup(this.LightButton, resource.GetString("/Texts/FontWeight_Light"), FontWeights.Light);
-            this.ConstructGroup(this.MediumButton, resource.GetString("/Texts/FontWeight_Medium"), FontWeights.Medium);
-            this.ConstructGroup(this.NormalButton, resource.GetString("/Texts/FontWeight_Normal"), FontWeights.Normal);
+            this.ConstructGroup(this.LightButton, resource.GetString("Texts_FontWeight_Light"), FontWeights.Light);
+            this.ConstructGroup(this.MediumButton, resource.GetString("Texts_FontWeight_Medium"), FontWeights.Medium);
+            this.ConstructGroup(this.NormalButton, resource.GetString("Texts_FontWeight_Normal"), FontWeights.Normal);
 
-            this.ConstructGroup(this.SemiBoldButton, resource.GetString("/Texts/FontWeight_SemiBold"), FontWeights.SemiBold);
-            this.ConstructGroup(this.SemiLightButton, resource.GetString("/Texts/FontWeight_SemiLight"), FontWeights.SemiLight);
+            this.ConstructGroup(this.SemiBoldButton, resource.GetString("Texts_FontWeight_SemiBold"), FontWeights.SemiBold);
+            this.ConstructGroup(this.SemiLightButton, resource.GetString("Texts_FontWeight_SemiLight"), FontWeights.SemiLight);
 
-            this.ConstructGroup(this.ThinButton, resource.GetString("/Texts/FontWeight_Thin"), FontWeights.Thin);
+            this.ConstructGroup(this.ThinButton, resource.GetString("Texts_FontWeight_Thin"), FontWeights.Thin);
         }
 
         //Group

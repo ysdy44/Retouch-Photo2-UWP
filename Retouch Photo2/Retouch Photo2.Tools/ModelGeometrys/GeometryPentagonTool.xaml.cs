@@ -60,7 +60,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryPentagon");
+            this.Button.Title = resource.GetString("Tools_GeometryPentagon");
         }
 
     }
@@ -95,9 +95,9 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.PointsButton.CenterContent = resource.GetString("/ToolsSecond/GeometryPentagon_Points");
+            this.PointsButton.CenterContent = resource.GetString("Tools_GeometryPentagon_Points");
 
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

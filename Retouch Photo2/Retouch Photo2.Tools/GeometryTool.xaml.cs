@@ -79,9 +79,9 @@ namespace Retouch_Photo2.Tools
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.FillTextBlock.Text = resource.GetString("/ToolElements/Fill");
-            this.StrokeTextBlock.Text = resource.GetString("/ToolElements/Stroke");
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+            this.FillTextBlock.Text = resource.GetString("Tools_Fill");
+            this.StrokeTextBlock.Text = resource.GetString("Tools_Stroke");
+            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
 
     }

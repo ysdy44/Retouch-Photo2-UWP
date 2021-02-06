@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryTriangle");
+            this.Button.Title = resource.GetString("Tools_GeometryTriangle");
         }
 
     }
@@ -101,10 +101,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.CenterButton.CenterContent = resource.GetString("/ToolsSecond/GeometryTriangle_Center");
-            this.MirrorTextBlock.Text = resource.GetString("/ToolsSecond/GeometryTriangle_Mirror");
+            this.CenterButton.CenterContent = resource.GetString("Tools_GeometryTriangle_Center");
+            this.MirrorTextBlock.Text = resource.GetString("Tools_GeometryTriangle_Mirror");
 
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryStar");
+            this.Button.Title = resource.GetString("Tools_GeometryStar");
         }
 
     }
@@ -115,10 +115,11 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.PointsButton.CenterContent = resource.GetString("/ToolsSecond/GeometryStar_Points");
-            this.InnerRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryStar_InnerRadius");
+            this.PointsButton.CenterContent = resource.GetString("Tools_GeometryStar_Points");
+            this.InnerRadiusButton.CenterContent = resource.GetString("Tools_GeometryStar_InnerRadius");
 
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
+
         }
     }
 

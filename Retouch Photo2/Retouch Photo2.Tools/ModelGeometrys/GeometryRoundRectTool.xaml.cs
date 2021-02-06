@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryRoundRect");
+            this.Button.Title = resource.GetString("Tools_GeometryRoundRect");
         }
 
     }
@@ -100,8 +100,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.CornerButton.CenterContent = resource.GetString("/ToolsSecond/GeometryRoundRect_Corner");
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+            this.CornerButton.CenterContent = resource.GetString("Tools_GeometryRoundRect_Corner");
+            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

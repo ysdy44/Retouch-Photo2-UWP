@@ -61,9 +61,9 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("/Adjustments/Saturation");
+            this.Text = resource.GetString("Adjustments_Saturation");
 
-            this.SaturationTextBlock.Text = resource.GetString("/Adjustments/Saturation_Saturation");
+            this.SaturationTextBlock.Text = resource.GetString("Adjustments_Saturation_Saturation");
         }
 
         //@Content

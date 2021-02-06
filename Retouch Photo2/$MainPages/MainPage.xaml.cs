@@ -39,7 +39,7 @@ namespace Retouch_Photo2
             this.ConstructDragAndDrop();
 
             //Select
-            this.SelectAllButton.Click += (s, e) => this.MainLayout.SelectAllAndDeselectIcon();
+            this.AllButton.Click += (s, e) => this.MainLayout.SelectAllAndDeselectIcon();
             //Head
             this.DocumentationButton.Click += async (s, e) => await Launcher.LaunchUriAsync(new Uri(this.DocumentationLink));
             this.SettingButton.Click += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
@@ -59,7 +59,7 @@ namespace Retouch_Photo2
 
 
             this.ConstructAddDialog();
-            this.AddButton.Click += (s, e) => this.ShowAddDialog();
+            this.NewButton.Click += (s, e) => this.ShowAddDialog();
 
             this.ConstructPicturesControl();
             this.PicturesButton.Click += (s, e) => this.MainLayout.State = MainPageState.Pictures;

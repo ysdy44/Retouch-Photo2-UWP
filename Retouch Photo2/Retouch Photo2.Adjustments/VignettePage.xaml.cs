@@ -92,11 +92,11 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("/Adjustments/Vignette");
+            this.Text = resource.GetString("Adjustments_Vignette");
 
-            this.AmountTextBlock.Text = resource.GetString("/Adjustments/Vignette_Amount");
-            this.CurveTextBlock.Text = resource.GetString("/Adjustments/Vignette_Curve");
-            this.ColorTextBlock.Text = resource.GetString("/Adjustments/Vignette_Color");
+            this.AmountTextBlock.Text = resource.GetString("Adjustments_Vignette_Amount");
+            this.CurveTextBlock.Text = resource.GetString("Adjustments_Vignette_Curve");
+            this.ColorTextBlock.Text = resource.GetString("Adjustments_Vignette_Color");
         }
 
         //@Content

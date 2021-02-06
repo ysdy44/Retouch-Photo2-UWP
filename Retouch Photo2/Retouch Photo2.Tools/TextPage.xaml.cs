@@ -83,7 +83,7 @@ namespace Retouch_Photo2.Tools
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.TextBox.PlaceholderText = resource.GetString("/Tools/Text_PlaceholderText");
+            this.TextBox.PlaceholderText = resource.GetString("Tools_Text_PlaceholderText");
         }
 
     }

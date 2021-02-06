@@ -61,9 +61,9 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("/Adjustments/Exposure");
+            this.Text = resource.GetString("Adjustments_Exposure");
 
-            this.ExposureTextBlock.Text = resource.GetString("/Adjustments/Exposure_Exposure");
+            this.ExposureTextBlock.Text = resource.GetString("Adjustments_Exposure_Exposure");
         }
 
         //@Content

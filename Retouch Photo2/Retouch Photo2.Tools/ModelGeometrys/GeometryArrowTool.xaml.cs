@@ -75,8 +75,8 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryArrow");
+            
+            this.Button.Title = resource.GetString("Tools_GeometryArrow");
         }
             
     }
@@ -118,13 +118,13 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ValueButton.CenterContent = resource.GetString("/ToolsSecond/GeometryArrow_Value");
+            this.ValueButton.CenterContent = resource.GetString("Tools_GeometryArrow_Value");
 
-            this.LeftTailTextBlock.Text = resource.GetString("/ToolsSecond/GeometryArrow_LeftTail");
+            this.LeftTailTextBlock.Text = resource.GetString("Tools_GeometryArrow_LeftTail");
 
-            this.RightTailTextBlock.Text = resource.GetString("/ToolsSecond/GeometryArrow_RightTail");
+            this.RightTailTextBlock.Text = resource.GetString("Tools_GeometryArrow_RightTail");
 
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

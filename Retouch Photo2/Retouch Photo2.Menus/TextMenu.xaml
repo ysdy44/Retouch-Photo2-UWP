@@ -1,0 +1,116 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Menus.Models.TextMainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hsvColorpickers="using:HSVColorPickers"
+    xmlns:texts="using:Retouch_Photo2.Texts"
+    mc:Ignorable="d"
+    d:DesignWidth="200"
+    d:DesignHeight="400"
+    >
+
+
+    <UserControl.Resources>
+
+        <DataTemplate x:Name="FontFamilyDataTemplate" x:DataType="x:String">
+            <TextBlock FontFamily="{x:Bind}" Text="{x:Bind}" Foreground="{StaticResource SystemBaseHighColor}" Style="{StaticResource AppTextBlockStyle}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Name="FontSizeDataTemplate" x:DataType="x:Int32">
+            <TextBlock Foreground="{StaticResource SystemBaseHighColor}" Style="{StaticResource AppTextBlockStyle}">
+                <Run Text="{x:Bind}"/>                            
+                <Run> px</Run>
+            </TextBlock>
+        </DataTemplate>
+        
+    </UserControl.Resources>
+
+    
+    <StackPanel MinHeight="165" Padding="1,4">
+
+
+        <!--Align-->
+        <TextBlock x:Name="FontAlignmentTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <texts:FontAlignmentSegmented x:Name="FontAlignmentSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Alignment="{x:Bind SelectionViewModel.FontAlignment, Mode=OneWay}"/>
+
+
+        <!--FontStyle-->
+        <TextBlock x:Name="FontStyleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="BoldButton" Grid.Column="0" Style="{StaticResource AppRoundedButtonLeftStyle}">
+                <ToolTipService.ToolTip>
+                    <ToolTip x:Name="BoldToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8DD;" FontSize="18" FontWeight="Bold" />
+            </Button>
+
+            <Button x:Name="ItalicButton" Grid.Column="1" Style="{StaticResource AppRoundedButtonCenterStyle}">
+                <ToolTipService.ToolTip>
+                    <ToolTip x:Name="ItalicToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE199;" FontSize="18" FontWeight="Bold" />
+            </Button>
+
+            <Button x:Name="UnderLineButton" IsEnabled="False" Grid.Column="2" Style="{StaticResource AppRoundedButtonRightStyle}">
+                <ToolTipService.ToolTip>
+                    <ToolTip x:Name="UnderLineToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE19A;" FontSize="18" FontWeight="Bold" />
+            </Button>
+
+        </Grid>
+
+
+        <!--FontWeight-->
+        <TextBlock x:Name="FontWeightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <Button x:Name="FontWeightButton" Style="{StaticResource AppIconRoundedButtonStyle}"
+                        Content="{x:Bind FontWeightComboBox.Title, Mode=OneWay}">
+            <Button.Tag>
+                <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+            </Button.Tag>
+        </Button>
+
+
+        <!--FontFamily-->
+        <TextBlock x:Name="FontFamilyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <Button x:Name="FontFamilyButton" Style="{StaticResource AppIconRoundedButtonStyle}"
+                        Content="{x:Bind SelectionViewModel.FontFamily, Mode=OneWay}">
+            <Button.Tag>
+                <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            </Button.Tag>
+        </Button>
+
+
+        <!--FontSize-->
+        <TextBlock x:Name="FontSizeTextBlock" Grid.ColumnSpan="4" Grid.Row="6" Style="{StaticResource AppTextBlockStyle}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <hsvColorpickers:NumberPicker x:Name="FontSizePicker" Minimum="4" Maximum="1000" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                             Value="{x:Bind FontSizeConverter(SelectionViewModel.FontSize), Mode=OneWay}" />
+
+            <Button x:Name="FontSizeButton" Grid.Column="1" Style="{StaticResource AppRoundedButtonStyle}">
+                <FontIcon Margin="4,0" Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+            </Button>
+
+        </Grid>
+
+
+    </StackPanel>
+
+    
+    
+    
+</UserControl>

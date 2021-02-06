@@ -34,9 +34,9 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.RatioTextBlock.Text = resource.GetString("/ToolElements/MoreTransform_Ratio ");
+            this.RatioTextBlock.Text = resource.GetString("Tools_MoreTransform_Ratio ");
 
-            this.CenterTextBlock.Text = resource.GetString("/ToolElements/MoreTransform_Center");
+            this.CenterTextBlock.Text = resource.GetString("Tools_MoreTransform_Center");
         }
 
     }

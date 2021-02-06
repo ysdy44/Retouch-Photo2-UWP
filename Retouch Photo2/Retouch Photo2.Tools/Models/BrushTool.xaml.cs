@@ -198,7 +198,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/Tools/Brush");
+            this.Button.Title = resource.GetString("Tools_Brush");
         }
 
     }
@@ -256,11 +256,11 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.FillOrStrokeTextBlock.Text = resource.GetString("/Tools/Brush_FillOrStroke");
-            this.TypeTextBlock.Text = resource.GetString("/Tools/Brush_Type");
-            this.ShowTextBlock.Text = resource.GetString("/Tools/Brush_Brush");
+            this.FillOrStrokeTextBlock.Text = resource.GetString("Tools_Brush_FillOrStroke");
+            this.TypeTextBlock.Text = resource.GetString("Tools_Brush_Type");
+            this.ShowTextBlock.Text = resource.GetString("Tools_Brush_Brush");
 
-            this.ExtendTextBlock.Text = resource.GetString("/Tools/Brush_Extend");
+            this.ExtendTextBlock.Text = resource.GetString("Tools_Brush_Extend");
         }
 
         private void ConstructShowControl()

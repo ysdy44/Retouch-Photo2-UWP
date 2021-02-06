@@ -21,9 +21,9 @@ namespace Retouch_Photo2
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.TitleTextBlock.Text = resource.GetString("/$PhotosPage/Title");
-            this.BackToolTip.Content = resource.GetString("/$PhotosPage/Page_Back");
-            this.AddToolTip.Content = resource.GetString("/$PhotosPage/Page_Add");
+            this.TitleTextBlock.Text = resource.GetString("$PhotosPage_Title");
+            this.BackTipToolTip.Content = resource.GetString("$PhotosPage_BackTip");
+            this.AddTipToolTip.Content = resource.GetString("$PhotosPage_AddTip");
         }
         
 

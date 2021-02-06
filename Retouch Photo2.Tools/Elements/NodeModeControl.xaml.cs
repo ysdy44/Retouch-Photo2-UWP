@@ -131,16 +131,16 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.RestrictionTextBlock.Text = resource.GetString("/ToolElements/PenMode_Restriction");
-            this.AngleCheckBox.Content = resource.GetString("/ToolElements/PenMode_Restriction_Angle");
-            this.LengthCheckBox.Content = resource.GetString("/ToolElements/PenMode_Restriction_Length");
+            this.RestrictionTextBlock.Text = resource.GetString("Tools_Node_NodeMode_Restriction");
+            this.AngleCheckBox.Content = resource.GetString("Tools_Node_NodeMode_Restriction_Angle");
+            this.LengthCheckBox.Content = resource.GetString("Tools_Node_NodeMode_Restriction_Length");
 
-            this.ModeTextBlock.Text = resource.GetString("/ToolElements/PenMode_Mode");
-            this.MirroredRadioButton.Content = resource.GetString("/ToolElements/PenMode_Mode_Mirrored");
+            this.ModeTextBlock.Text = resource.GetString("Tools_Node_NodeMode_Mode");
+            this.MirroredRadioButton.Content = resource.GetString("Tools_Node_NodeMode_Mode_Mirrored");
             this.MirroredRadioButton.Tag = new MirroredIcon();
-            this.DisconnectedRadioButton.Content = resource.GetString("/ToolElements/PenMode_Mode_Disconnected");
+            this.DisconnectedRadioButton.Content = resource.GetString("Tools_Node_NodeMode_Mode_Disconnected");
             this.DisconnectedRadioButton.Tag = new DisconnectedIcon();
-            this.AsymmetricRadioButton.Content = resource.GetString("/ToolElements/PenMode_Mode_Asymmetric");
+            this.AsymmetricRadioButton.Content = resource.GetString("Tools_Node_NodeMode_Mode_Asymmetric");
             this.AsymmetricRadioButton.Tag = new AsymmetricIcon();
         }
 

@@ -81,7 +81,7 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.NoneButton.Content = resource.GetString("/ToolElements/ArrowTail_None");
+            this.NoneButton.Content = resource.GetString("Tools_GeometryArrow_ArrowTail_None");
             this.NoneButton.Tag = new NoneIcon();
             this.NoneButton.Click += (s, e) =>
             {
@@ -89,7 +89,7 @@ namespace Retouch_Photo2.Tools.Elements
                 this.Flyout.Hide();
             };
 
-            this.ArrowButton.Content = resource.GetString("/ToolElements/ArrowTail_Arrow");
+            this.ArrowButton.Content = resource.GetString("Tools_GeometryArrow_ArrowTail_Arrow");
             this.ArrowButton.Tag = new ArrowIcon();
             this.ArrowButton.Click += (s, e) =>
             {

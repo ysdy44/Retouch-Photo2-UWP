@@ -178,7 +178,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/Tools/Crop");
+            this.Button.Title = resource.GetString("Tools_Crop");
         }
 
     }
@@ -203,6 +203,9 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.InitializeComponent();
             this.ConstructStrings();
+
+            this.ConstructReset();
+            this.ConstructFit();
         }
 
     }
@@ -218,8 +221,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ResetTextBlock.Text = resource.GetString("/Tools/Crop_Reset");//Reset Crop
-            this.FitTextBlock.Text = resource.GetString("/Tools/Crop_Fit");//Fit Crop
+            this.ResetTextBlock.Text = resource.GetString("Tools_Crop_Reset");//Reset Crop
+            this.FitTextBlock.Text = resource.GetString("Tools_Crop_Fit");//Fit Crop
         }
 
         private void ConstructReset()

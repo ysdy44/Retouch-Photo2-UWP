@@ -108,6 +108,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="%24DrawPages\DrawLayout.Layout.cs" />
+    <Compile Include="%24Loading\LoadingControl.xaml.cs">
+      <DependentUpon>LoadingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="%24Loading\LoadingState.cs" />
     <Compile Include="%24MainPages\IProjectViewItem.cs" />
     <Compile Include="%24MainPages\ProjectViewItem.xaml.cs">
@@ -129,9 +132,6 @@
     </Compile>
     <Compile Include="Pickers\ColorPicker2.xaml.cs">
       <DependentUpon>ColorPicker2.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CompositeModeSegmented.xaml.cs">
-      <DependentUpon>CompositeModeSegmented.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationViewTitleBarBackgroundExtension.cs" />
     <Compile Include="Expanders\Expander.xaml.cs">
@@ -183,9 +183,6 @@
     </Compile>
     <Compile Include="ExpandAppbars\ExpandAppbar.xaml.cs">
       <DependentUpon>ExpandAppbar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="%24Loading\LoadingControl.xaml.cs">
-      <DependentUpon>LoadingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExpandAppbars\ExpandAppbarRepeatButton.xaml.cs">
       <DependentUpon>ExpandAppbarRepeatButton.xaml</DependentUpon>
@@ -256,6 +253,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="%24Loading\LoadingControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="%24MainPages\ProjectViewItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -269,10 +270,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pickers\ColorPicker2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CompositeModeSegmented.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -337,10 +334,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ExpandAppbars\ExpandAppbar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="%24Loading\LoadingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

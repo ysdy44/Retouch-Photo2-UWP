@@ -76,14 +76,14 @@
 
                     <StackPanel.Children>
 
-                        <TextBlock x:Name="InitialTextBlock" HorizontalAlignment="Center" Foreground="{ThemeResource AppText}"/>
+                        <TextBlock x:Name="InitialTipTextBlock" HorizontalAlignment="Center" Foreground="{ThemeResource AppText}"/>
                         <ContentControl Height="6"/>
 
                         <Button x:Name="InitialSampleButton" Style="{StaticResource AppIconAccentLineCircleButton}">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE790;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>
-                                <TextBlock x:Name="InitialSampleTextBlock" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="SampleTextBlock" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 
@@ -93,7 +93,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>
-                                <TextBlock x:Name="InitialAddTextBlock" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="NewTextBlock" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 
@@ -103,7 +103,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>
-                                <TextBlock x:Name="InitialPhotoTextBlock" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="PhotoTextBlock" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 
@@ -111,7 +111,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>
-                                <TextBlock x:Name="InitialDestopTextBlock" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="DestopTextBlock" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
                                                 
@@ -132,7 +132,7 @@
 
                     <Button x:Name="DocumentationButton" Grid.Column="0" Style="{StaticResource AppButtonStyle}">
                         <ToolTipService.ToolTip>
-                            <ToolTip x:Name="DocumentationToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                            <ToolTip x:Name="DocumentationTipToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                         </ToolTipService.ToolTip>
                         <Button.Transitions>
                             <TransitionCollection>
@@ -152,7 +152,7 @@
 
                     <Button x:Name="SettingButton" Grid.Column="2" Style="{StaticResource AppButtonStyle}">
                         <ToolTipService.ToolTip>
-                            <ToolTip x:Name="SettingToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                            <ToolTip x:Name="SettingTipToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                         </ToolTipService.ToolTip>
                         <Button.Transitions>
                             <TransitionCollection>
@@ -169,13 +169,13 @@
             <elements:MainLayout.SelectChild>
                 <Grid x:Name="SelectGrid">
 
-                    <TextBlock Margin="12, 0" IsHitTestVisible="False" HorizontalAlignment="Left" VerticalAlignment="Center">                        
-                        <Run x:Name="SelectItemsTextBlock"/>
-                        <Run x:Name="SelectCountRun" 
+                    <TextBlock Style="{StaticResource AppTextBlockStyle}">                        
+                        <Run x:Name="ClickTipTextBlock"/>
+                        <Run x:Name="SelectCountRun" Foreground="{ThemeResource SystemBaseHighColor}"
                              Text="{x:Bind MainLayout.SelectedCount, Mode=OneWay}"/>
                     </TextBlock>
 
-                    <Button x:Name="SelectAllButton" Padding="8,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Transparent" Background="Transparent"/>
+                    <Button x:Name="AllButton" HorizontalAlignment="Right" Style="{StaticResource AppButtonStyle}"/>
 
                 </Grid>
             </elements:MainLayout.SelectChild>
@@ -185,7 +185,7 @@
             <elements:MainLayout.MainChild>
                 <StackPanel Orientation="Horizontal" Padding="18,0" HorizontalAlignment="Center">
 
-                    <Button x:Name="AddButton" Style="{StaticResource AppTabButtonStyle}">
+                    <Button x:Name="NewButton" Style="{StaticResource AppTabButtonStyle}">
                         <Button.Tag>
                             <FontIcon Glyph="&#xE109;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </Button.Tag>
@@ -254,9 +254,9 @@
                 <StackPanel Orientation="Horizontal" Padding="18,0">
 
                     <TextBlock Margin="0,6">
-                        <Run x:Name="RenameRunTitle" FontWeight="Bold"/>   
+                        <Run x:Name="RenameTitleTextBlock" FontWeight="Bold"/>   
                         <LineBreak/>           
-                        <Run x:Name="RenameRunContent" FontSize="12" Foreground="{ThemeResource AppText}"/>
+                        <Run x:Name="RenameSubtitleTextBlock" FontSize="12" FontWeight="Medium" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
 
                     <Border HorizontalAlignment="Right">
@@ -275,9 +275,9 @@
                 <StackPanel x:Name="DeleteStackPanel" Padding="18,0" MinWidth="260">
 
                     <TextBlock Margin="0,6">
-                        <Run x:Name="DeleteRunTitle" FontWeight="Bold"/>
+                        <Run x:Name="DeleteTitleTextBlock" FontWeight="Bold"/>
                         <LineBreak/>
-                        <Run x:Name="DeleteRunContent" FontSize="12" Foreground="{ThemeResource AppText}"/>
+                        <Run x:Name="DeleteSubtitleTextBlock" FontSize="12" FontWeight="Medium" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -302,9 +302,9 @@
                 <StackPanel x:Name="DuplicateStackPanel" Padding="18,0" MinWidth="260">
 
                     <TextBlock Margin="0,6">
-                        <Run x:Name="DuplicateRunTitle" FontWeight="Bold"/>
+                        <Run x:Name="DuplicateTitleTextBlock" FontWeight="Bold"/>
                         <LineBreak/>
-                        <Run x:Name="DuplicateRunContent" FontSize="12" Foreground="{ThemeResource AppText}"/>
+                        <Run x:Name="DuplicateSubtitleTextBlock" FontSize="12" FontWeight="Medium" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -335,14 +335,14 @@
             <elementDialog:DialogBase.CenterContent>
                 <StackPanel>
                     <ContentControl Height="2"/>
-                    <TextBox x:Name="RenameTextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0"/>
-                    <TextBlock x:Name="RenameTipTextBlock" Visibility="Collapsed" FontSize="14" Foreground="{ThemeResource AppText}"/>
+                    <TextBox x:Name="TextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0"/>
+                    <TextBlock x:Name="TextBoxTipTextBlock" Visibility="Collapsed" FontSize="14" Foreground="{ThemeResource AppText}"/>
                 </StackPanel>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
-        <elementDialog:DialogBase x:Name="AddDialog" Grid.Row="1" Grid.RowSpan="2">
+        <elementDialog:DialogBase x:Name="NewDialog" Grid.Row="1" Grid.RowSpan="2">
             <elementDialog:DialogBase.CenterContent>
-                <elements:SizePicker x:Name="AddSizePicker"/>
+                <elements:SizePicker x:Name="SizePicker"/>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
 

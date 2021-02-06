@@ -96,12 +96,12 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("/Adjustments/HighlightsAndShadows");
+            this.Text = resource.GetString("Adjustments_HighlightsAndShadows");
 
-            this.ShadowsTextBlock.Text = resource.GetString("/Adjustments/HighlightsAndShadows_Shadows");
-            this.HighlightsTextBlock.Text = resource.GetString("/Adjustments/HighlightsAndShadows_Highlights");
-            this.ClarityTextBlock.Text = resource.GetString("/Adjustments/HighlightsAndShadows_Clarity");
-            this.MaskBlurAmountTextBlock.Text = resource.GetString("/Adjustments/HighlightsAndShadows_MaskBlurAmount");
+            this.ShadowsTextBlock.Text = resource.GetString("Adjustments_HighlightsAndShadows_Shadows");
+            this.HighlightsTextBlock.Text = resource.GetString("Adjustments_HighlightsAndShadows_Highlights");
+            this.ClarityTextBlock.Text = resource.GetString("Adjustments_HighlightsAndShadows_Clarity");
+            this.MaskBlurAmountTextBlock.Text = resource.GetString("Adjustments_HighlightsAndShadows_MaskBlurAmount");
         }
 
         //@Content

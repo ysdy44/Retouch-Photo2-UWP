@@ -34,9 +34,9 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.SquareTextBlock.Text = resource.GetString("/ToolElements/MoreCreate_Square");
+            this.SquareTextBlock.Text = resource.GetString("Tools_MoreCreate_Square");
 
-            this.CenterTextBlock.Text = resource.GetString("/ToolElements/MoreCreate_Center");
+            this.CenterTextBlock.Text = resource.GetString("Tools_MoreCreate_Center");
         }
 
     }

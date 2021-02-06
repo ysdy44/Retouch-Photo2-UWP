@@ -83,7 +83,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryCog");
+            this.Button.Title = resource.GetString("Tools_GeometryCog");
         }
 
     }
@@ -133,12 +133,12 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.CountButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_Count");
-            this.InnerRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_InnerRadius");
-            this.ToothButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_Tooth");
-            this.NotchButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCog_Notch");
+            this.CountButton.CenterContent = resource.GetString("Tools_GeometryCog_Count");
+            this.InnerRadiusButton.CenterContent = resource.GetString("Tools_GeometryCog_InnerRadius");
+            this.ToothButton.CenterContent = resource.GetString("Tools_GeometryCog_Tooth");
+            this.NotchButton.CenterContent = resource.GetString("Tools_GeometryCog_Notch");
 
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

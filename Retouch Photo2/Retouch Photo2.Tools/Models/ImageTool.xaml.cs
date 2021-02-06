@@ -208,7 +208,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/Tools/Image");
+            this.Button.Title = resource.GetString("Tools_Image");
         }
         
     }
@@ -255,10 +255,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.SelectTextBlock.Text = resource.GetString("/Tools/Image_Select");
-            this.ReplaceTextBlock.Text = resource.GetString("/Tools/Image_Replace");
-            this.ClearTextBlock.Text = resource.GetString("/Tools/Image_Clear");
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+            this.SelectTextBlock.Text = resource.GetString("Tools_Image_Select");
+            this.ReplaceTextBlock.Text = resource.GetString("Tools_Image_Replace");
+            this.ClearTextBlock.Text = resource.GetString("Tools_Image_Clear");
+            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
 
         private void ConstructSelect()

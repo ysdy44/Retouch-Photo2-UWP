@@ -115,24 +115,24 @@ namespace Retouch_Photo2.Controls
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this._DocumentButton.Content = resource.GetString("/$DrawPage/Document");
-            this._DocumentUnSaveButton.Content = resource.GetString("/$DrawPage/DocumentUnSave");
+            this._DocumentButton.Content = resource.GetString("$DrawPage_Document");
+            this._DocumentUnSaveButton.Content = resource.GetString("$DrawPage_DocumentUnSave");
 
             this._ExportToolTip.Content =
-            this._ExportButton.Text = resource.GetString("/$DrawPage/Export");
+            this._ExportButton.Text = resource.GetString("$DrawPage_Export");
             this._UndoToolTip.Content =
-            this._UndoButton.Text = resource.GetString("/$DrawPage/Undo");
-            //this.RedoToolTip.Content = resourceLoader.GetString("/$DrawPage/Redo");
+            this._UndoButton.Text = resource.GetString("$DrawPage_Undo");
+            //this.RedoToolTip.Content = resourceLoader.GetString("$DrawPage_Redo");
             //this._RedoButton.Text =
             this._SetupToolTip.Content =
-            this._SetupButton.Text = resource.GetString("/$DrawPage/Setup");
+            this._SetupButton.Text = resource.GetString("$DrawPage_Setup");
             this._SnapToolTip.Content =
-            this._SnapButton.Text = resource.GetString("/$DrawPage/Snap");
+            this._SnapButton.Text = resource.GetString("$DrawPage_Snap");
             this._RulerToolTip.Content =
-            this._RulerButton.Text = resource.GetString("/$DrawPage/Ruler");
+            this._RulerButton.Text = resource.GetString("$DrawPage_Ruler");
             this._FullScreenToolTip.Content =
-            this._FullScreenButton.Text = resource.GetString("/$DrawPage/FullScreen");
-            this._TipButton.Text = resource.GetString("/$DrawPage/Tip");
+            this._FullScreenButton.Text = resource.GetString("$DrawPage_FullScreen");
+            this._TipButton.Text = resource.GetString("$DrawPage_Tip");
         }
 
         private void HeadGridSizeChange(double width)

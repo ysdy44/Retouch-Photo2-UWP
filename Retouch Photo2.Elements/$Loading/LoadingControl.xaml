@@ -20,7 +20,7 @@
                 <ProgressRing x:Name="ProgressRing" Width="40" Height="40" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"
                               IsActive="{x:Bind IsActive, Mode=OneWay}"/>
                 <ContentControl Height="6"/>
-                <TextBlock x:Name="TextBlock" HorizontalAlignment="Center" Foreground="{ThemeResource AppText}"/>
+                <TextBlock x:Name="TextBlock" HorizontalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
             </StackPanel>
         </Border>
 

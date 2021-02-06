@@ -93,10 +93,10 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.NewToolTip.Content = resource.GetString("/ToolElements/CompositeMode_New");
-            this.AddToolTip.Content = resource.GetString("/ToolElements/CompositeMode_Add");
-            this.SubtractToolTip.Content = resource.GetString("/ToolElements/CompositeMode_Subtract");
-            //this.IntersectToolTip.Content = resource.GetString("/ToolElements/CompositeMode_Intersect");
+            this.NewToolTip.Content = resource.GetString("Tools_Cursor_CompositeMode_New");
+            this.AddToolTip.Content = resource.GetString("Tools_Cursor_CompositeMode_Add");
+            this.SubtractToolTip.Content = resource.GetString("Tools_Cursor_CompositeMode_Subtract");
+            //this.IntersectToolTip.Content = resource.GetString("Tools_Cursor_CompositeMode_Intersect");
         }
 
     }

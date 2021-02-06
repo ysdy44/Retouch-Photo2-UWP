@@ -328,7 +328,7 @@
                                         <FontIcon Glyph="&#xE706;" FontSize="26" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                     </RadioButton.Tag>
                                 </RadioButton>
-                                <RadioButton x:Name="DefaultRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
+                                <RadioButton x:Name="UseSystemRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
                                     <RadioButton.Tag>
                                         <FontIcon Glyph="&#xE7E8;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                     </RadioButton.Tag>
@@ -377,13 +377,13 @@
 
                         <!--Adaptive-->
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="AdaptiveTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                            <TextBlock x:Name="AdaptiveWidthTextBlock" Style="{StaticResource AppTextBlockStyle}">
+                            <TextBlock x:Name="AdaptiveWidthTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                            <TextBlock x:Name="AdaptiveWidthCountTextBlock" Style="{StaticResource AppTextBlockStyle}">
                                 0
                             </TextBlock>
                         </StackPanel>
-                        <elements:AdaptiveWidthGrid x:Name="AdaptiveGrid"/>
-                        <HyperlinkButton x:Name="AdaptiveResetButton"/>
+                        <elements:AdaptiveWidthGrid x:Name="AdaptiveWidthGrid"/>
+                        <HyperlinkButton x:Name="ResetAdaptiveWidthButton"/>
                      
 
                         
@@ -420,7 +420,7 @@
 
                             </StackPanel>
                         </Border>
-                        <TextBlock x:Name="MenuTypeTipTextBlock" Margin="0,8" Style="{StaticResource AppTextBlockStyle}"/>
+                        <TextBlock x:Name="MenuTypeTipTextBlock" Margin="0,8" FontWeight="Normal" Style="{StaticResource AppTextBlockStyle}"/>
 
 
                         <ContentControl Height="12"/>
@@ -430,14 +430,14 @@
                         <TextBlock x:Name="KeyTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                         <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel>
-                                <ContentControl x:Name="IsRatioControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
-                                <ContentControl x:Name="IsSquareControl" Style="{StaticResource KeyContentControlStyle}"/>
+                                <ContentControl x:Name="RatioControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                                <ContentControl x:Name="SquareControl" Style="{StaticResource KeyContentControlStyle}"/>
 
-                                <ContentControl x:Name="IsCenterControl" Style="{StaticResource KeyContentControlStyle}"/>
+                                <ContentControl x:Name="CenterControl" Style="{StaticResource KeyContentControlStyle}"/>
                              
-                                <ContentControl x:Name="IsStepFrequencyControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                                <ContentControl x:Name="StepFrequencyControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
                             
-                                <ContentControl x:Name="IsFullScreenControl" Style="{StaticResource KeyContentControlStyle}"/>
+                                <ContentControl x:Name="FullScreenControl" Style="{StaticResource KeyContentControlStyle}"/>
                             </StackPanel>
                         </Border>
                         
@@ -446,9 +446,9 @@
                         <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel>
                                 <ContentControl x:Name="LeftControl" Style="{StaticResource KeyContentControlStyle}"/>
-                                <ContentControl x:Name="UpControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                                <ContentControl x:Name="TopControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
                                 <ContentControl x:Name="RightControl" Style="{StaticResource KeyContentControlStyle}"/>
-                                <ContentControl x:Name="DownControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
+                                <ContentControl x:Name="BottomControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
                             </StackPanel>
                         </Border>
                         
@@ -474,13 +474,13 @@
                         <ContentControl Height="12"/>
 
 
-                        <!--Local-->
-                        <TextBlock x:Name="LocalTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Button x:Name="LocalButton" HorizontalAlignment="Left" Style="{ThemeResource AppIconLineCircleButton}">
+                        <!--LocalFolder-->
+                        <TextBlock x:Name="LocalFolderTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Button x:Name="LocalFolderButton" HorizontalAlignment="Left" Style="{ThemeResource AppIconLineCircleButton}">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE17C;" FontSize="24" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>
-                                <TextBlock x:Name="LocalOpenTextBlock" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="OpenTextBlock" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 

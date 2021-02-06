@@ -60,9 +60,9 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("/Effects/Morphology");
+            this.Button.Text = resource.GetString("Effects_Morphology");
 
-            this.SizeTextBlock.Text = resource.GetString("/Effects/Morphology_Size");
+            this.SizeTextBlock.Text = resource.GetString("Effects_Morphology_Size");
         }
 
         //@Content

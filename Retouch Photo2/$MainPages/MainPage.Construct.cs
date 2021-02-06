@@ -16,13 +16,13 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2
-{
+{ 
     /// <summary>
     /// Represents a page used to manipulate some items in local folder.
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private string Title = "Retouch Photo2";
+        private string DisplayName = "Retouch Photo2";
         private string Untitled = "Untitled";
         private string DocumentationLink = "https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README.md";
 
@@ -31,61 +31,70 @@ namespace Retouch_Photo2
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Title = resource.GetString("/resources/Title");
-            this.Untitled = resource.GetString("/resources/Untitled");
-            this.DocumentationLink = resource.GetString("/resources/DocumentationLink");
+            this.DisplayName = resource.GetString("$DisplayName");
+            this.Untitled = resource.GetString("$Untitled");
+            this.DocumentationLink = resource.GetString("$DocumentationLink");
 
+            this.TitleTextBlock.Text = resource.GetString("$MainPage_Title");
+            this.DocumentationTipToolTip.Content = resource.GetString("$MainPage_DocumentationTip");
+            this.SettingTipToolTip.Content = resource.GetString("$MainPage_SettingTip");
 
-            this.TitleTextBlock.Text = this.Title;
-            this.DocumentationToolTip.Content = resource.GetString("/$MainPage/Page_Documentation");
-            this.SettingToolTip.Content = resource.GetString("/$MainPage/Page_Setting");
+            this.ClickTipTextBlock.Text = resource.GetString("$MainPage_Select_ClickTip");
+            this.AllButton.Content = resource.GetString("$MainPage_Select_All");
 
+            this.InitialTipTextBlock.Text = resource.GetString("$MainPage_InitialTip");
+            {
+                this.SampleTextBlock.Text = resource.GetString("$MainPage_Initial_Sample");
+                this.NewTextBlock.Text = resource.GetString("$MainPage_Initial_New");
+                this.PhotoTextBlock.Text = resource.GetString("$MainPage_Initial_Photo");
+                this.DestopTextBlock.Text = resource.GetString("$MainPage_Initial_Destop");
+            }
 
-            this.SelectItemsTextBlock.Text = resource.GetString("/$MainPage/Select_Items");
-            this.SelectAllButton.Content = resource.GetString("/$MainPage/Select_All");
+            this.NewButton.Content = resource.GetString("$MainPage_New");
+            {
+                this.NewDialog.Title = resource.GetString("$MainPage_NewDialog_Title");
+                this.NewDialog.CloseButton.Content = resource.GetString("$MainPage_NewDialog_Close");
+                this.NewDialog.PrimaryButton.Content = resource.GetString("$MainPage_NewDialog_Primary");
+                this.SizePicker.WidthText = resource.GetString("$MainPage_SizePicker_Width");
+                this.SizePicker.HeightText = resource.GetString("$MainPage_SizePicker_Height");
+            }
 
-            this.InitialTextBlock.Text = resource.GetString("/$MainPage/Initial_Tip");
-            this.InitialSampleTextBlock.Text = resource.GetString("/$MainPage/Initial_Sample");
-            this.InitialAddTextBlock.Text = resource.GetString("/$MainPage/Initial_Add");
-            this.InitialPhotoTextBlock.Text = resource.GetString("/$MainPage/Initial_Photo");
-            this.InitialDestopTextBlock.Text = resource.GetString("/$MainPage/Initial_Destop");
+            this.PicturesButton.Content = resource.GetString("$MainPage_Pictures");
+            {
+                this.PicturesPhotoButton.Content = resource.GetString("$MainPage_Pictures_Photo");
+                this.PicturesDestopButton.Content = resource.GetString("$MainPage_Pictures_Destop");
+                this.PicturesCloseButton.Content = resource.GetString("$MainPage_Pictures_Close");
+            }
+
+            this.RenameButton.Content = resource.GetString("$MainPage_Rename");
+            {
+                this.RenameTitleTextBlock.Text = resource.GetString("$MainPage_Rename_Title");
+                this.RenameSubtitleTextBlock.Text = resource.GetString("$MainPage_Rename_Subtitle");
+                this.RenameCloseButton.Content = resource.GetString("$MainPage_Rename_Close");
+                this.RenameDialog.Title = resource.GetString("$MainPage_RenameDialog_Title");
+                this.RenameDialog.CloseButton.Content = resource.GetString("$MainPage_RenameDialog_Close");
+                this.RenameDialog.PrimaryButton.Content = resource.GetString("$MainPage_RenameDialog_Primary");
+                this.TextBox.PlaceholderText = resource.GetString("$MainPage_RenameDialog_TextBox_PlaceholderText");
+                this.TextBoxTipTextBlock.Text = resource.GetString("$MainPage_RenameDialog_TextBoxTip");
+            }
+
+            this.DeleteButton.Content = resource.GetString("$MainPage_Delete");
+            {
+                this.DeleteTitleTextBlock.Text = resource.GetString("$MainPage_Delete_Title");
+                this.DeleteSubtitleTextBlock.Text = resource.GetString("$MainPage_Delete_Subtitle");
+                this.DeleteCloseButton.Content = resource.GetString("$MainPage_Delete_Close");
+                this.DeletePrimaryButton.Content = resource.GetString("$MainPage_Delete_Primary");
+            }
             
-            this.AddButton.Content = resource.GetString("/$MainPage/Add");
-            this.AddDialog.Title = resource.GetString("/$MainPage/AddDialog_Title");
-            this.AddDialog.CloseButton.Content = resource.GetString("/$MainPage/AddDialog_Close");
-            this.AddDialog.PrimaryButton.Content = resource.GetString("/$MainPage/AddDialog_Primary");
-            this.AddSizePicker.WidthText = resource.GetString("/$MainPage/AddSizePicker_Width");
-            this.AddSizePicker.HeightText = resource.GetString("/$MainPage/AddSizePicker_Height");
-
-            this.PicturesButton.Content = resource.GetString("/$MainPage/Pictures");
-            this.PicturesPhotoButton.Content = resource.GetString("/$MainPage/Pictures_Photo");
-            this.PicturesDestopButton.Content = resource.GetString("/$MainPage/Pictures_Destop");
-            this.PicturesCloseButton.Content = resource.GetString("/$MainPage/Pictures_Close");
-
-            this.RenameButton.Content = resource.GetString("/$MainPage/Rename");
-            this.RenameRunTitle.Text = resource.GetString("/$MainPage/RenameRun_Title");
-            this.RenameRunContent.Text = resource.GetString("/$MainPage/RenameRun_Content");
-            this.RenameCloseButton.Content = resource.GetString("/$MainPage/Rename_Close");
-
-            this.RenameDialog.Title = resource.GetString("/$MainPage/RenameDialog_Title");
-            this.RenameDialog.CloseButton.Content = resource.GetString("/$MainPage/RenameDialog_Close");
-            this.RenameDialog.PrimaryButton.Content = resource.GetString("/$MainPage/RenameDialog_Primary");
-            this.RenameTextBox.PlaceholderText = resource.GetString("/$MainPage/RenameDialog_PlaceholderText");
-            this.RenameTipTextBlock.Text = resource.GetString("/$MainPage/RenameDialog_TipText");
-
-            this.DeleteButton.Content = resource.GetString("/$MainPage/Delete");
-            this.DeleteRunTitle.Text = resource.GetString("/$MainPage/DeleteRun_Title");
-            this.DeleteRunContent.Text = resource.GetString("/$MainPage/DeleteRun_Content");
-            this.DeleteCloseButton.Content = resource.GetString("/$MainPage/Delete_Close");
-            this.DeletePrimaryButton.Content = resource.GetString("/$MainPage/Delete_Primary");
-
-            this.DuplicateButton.Content = resource.GetString("/$MainPage/Duplicate");
-            this.DuplicateRunTitle.Text = resource.GetString("/$MainPage/DuplicateRun_Title");
-            this.DuplicateRunContent.Text = resource.GetString("/$MainPage/DuplicateRun_Content");
-            this.DuplicateCloseButton.Content = resource.GetString("/$MainPage/Duplicate_Close");
-            this.DuplicatePrimaryButton.Content = resource.GetString("/$MainPage/Duplicate_Primary");
+            this.DuplicateButton.Content = resource.GetString("$MainPage_Duplicate");
+            {
+                this.DuplicateTitleTextBlock.Text = resource.GetString("$MainPage_Duplicate_Title");
+                this.DuplicateSubtitleTextBlock.Text = resource.GetString("$MainPage_Duplicate_Subtitle");
+                this.DuplicateCloseButton.Content = resource.GetString("$MainPage_Duplicate_Close");
+                this.DuplicatePrimaryButton.Content = resource.GetString("$MainPage_Duplicate_Primary");
+            }
         }
-
+        
 
         //Setting
         private async Task ConstructSetting()
@@ -200,19 +209,19 @@ namespace Retouch_Photo2
         //AddDialog
         private void ConstructAddDialog()
         {
-            this.AddDialog.CloseButton.Click += (sender, args) => this.HideAddDialog();
-            this.AddDialog.PrimaryButton.Click += (sender, args) =>
+            this.NewDialog.CloseButton.Click += (sender, args) => this.HideAddDialog();
+            this.NewDialog.PrimaryButton.Click += (sender, args) =>
             {
                 this.HideAddDialog();
 
-                BitmapSize size = this.AddSizePicker.Size;
+                BitmapSize size = this.SizePicker.Size;
                 this.NewFromSize(size);
             };
         }
         private void ShowAddDialog()
         {
             this.MainLayout.State = MainPageState.Dialog;
-            this.AddDialog.Show();
+            this.NewDialog.Show();
         }
         private void HideAddDialog()
         {
@@ -221,7 +230,7 @@ namespace Retouch_Photo2
             else
                 this.MainLayout.State = MainPageState.Main;
 
-            this.AddDialog.Hide();
+            this.NewDialog.Hide();
         }
 
 
@@ -244,7 +253,7 @@ namespace Retouch_Photo2
                 this.LoadingControl.State = LoadingState.Loading;
                 this.LoadingControl.IsActive = true;
 
-                await this.RenameProjectViewItem(this._rename, this.RenameTextBox.Text);
+                await this.RenameProjectViewItem(this._rename, this.TextBox.Text);
 
                 this.LoadingControl.State = LoadingState.None;
                 this.LoadingControl.IsActive = false;
@@ -257,13 +266,13 @@ namespace Retouch_Photo2
             this.RenameDialog.Show();
 
             this._rename = item.Name;
-            this.RenameTextBox.Text = item.Name;
-            this.RenameTextBox.Focus(FocusState.Keyboard);
-            this.RenameTextBox.SelectAll();
+            this.TextBox.Text = item.Name;
+            this.TextBox.Focus(FocusState.Keyboard);
+            this.TextBox.SelectAll();
         }
         private void HideRenameDialog()
         {
-            this.RenameTipTextBlock.Visibility = Visibility.Collapsed;
+            this.TextBoxTipTextBlock.Visibility = Visibility.Collapsed;
 
             this.MainLayout.State = MainPageState.Rename;
 

@@ -58,9 +58,9 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("/Effects/Straighten");
+            this.Button.Text = resource.GetString("Effects_Straighten");
 
-            this.AngleTextBlock.Text = resource.GetString("/Effects/Straighten_Angle");
+            this.AngleTextBlock.Text = resource.GetString("Effects_Straighten_Angle");
         }
 
         //@Content

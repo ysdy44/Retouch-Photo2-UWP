@@ -14,7 +14,11 @@
     <Grid x:Name="RootGrid" Background="Transparent">
         <Ellipse IsHitTestVisible="False" StrokeThickness="1" Stroke="{ThemeResource AppText}">
             <Ellipse.Fill>
-                <ImageBrush ImageSource="ms-appx:///Icons\GrayAndWhite.jpg"/>
+                <ImageBrush>
+                    <ImageBrush.ImageSource>
+                        ms-appx:///Icons\GrayAndWhite.jpg
+                    </ImageBrush.ImageSource>
+                </ImageBrush>
             </Ellipse.Fill>
         </Ellipse>
 

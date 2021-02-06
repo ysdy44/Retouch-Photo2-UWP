@@ -60,9 +60,9 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("/Adjustments/Contrast");
+            this.Text = resource.GetString("Adjustments_Contrast");
 
-            this.ContrastTextBlock.Text = resource.GetString("/Adjustments/Contrast_Contrast");
+            this.ContrastTextBlock.Text = resource.GetString("Adjustments_Contrast_Contrast");
         }
 
         //@Content

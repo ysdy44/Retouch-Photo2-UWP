@@ -21,30 +21,41 @@ namespace Retouch_Photo2
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.DrawLayout.RightPhotosToolTip.Content = resource.GetString("/$DrawPage/Page_Photos");
-            this.DrawLayout.RightWidthToolTip.Content = resource.GetString("/$DrawPage/Page_Width");
+            this.DrawLayout.RightPhotosToolTip.Content = resource.GetString("$DrawPage_Gallery");
+            this.DrawLayout.RightWidthToolTip.Content = resource.GetString("$DrawPage_Width");
 
-            this.SetupDialog.Title = resource.GetString("/$DrawPage/SetupDialog_Title");
-            this.SetupDialog.CloseButton.Content = resource.GetString("/$DrawPage/SetupDialog_Close");
-            this.SetupDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/SetupDialog_Primary");
-            this.SetupSizePicker.WidthText = resource.GetString("/$DrawPage/SetupSizePicker_Width");
-            this.SetupSizePicker.HeightText = resource.GetString("/$DrawPage/SetupSizePicker_Height");
-            this.SetupLayersTextBlock.Text = resource.GetString("/$DrawPage/SetupDialog_Layers");
-            this.SetupResizeButton.Content = resource.GetString("/$DrawPage/SetupDialog_Resize");
-            this.SetupAnchorButton.Content = resource.GetString("/$DrawPage/SetupDialog_Anchor");
+            this.SetupDialog.Title = resource.GetString("$DrawPage_SetupDialog_Title");
+            {
+                this.SetupDialog.CloseButton.Content = resource.GetString("$DrawPage_SetupDialog_Close");
+                this.SetupDialog.PrimaryButton.Content = resource.GetString("$DrawPage_SetupDialog_Primary");
+
+                this.SetupSizePicker.WidthText = resource.GetString("$DrawPage_SetupDialog_SizePicker_Width");
+                this.SetupSizePicker.HeightText = resource.GetString("$DrawPage_SetupDialog_SizePicker_Height");
+
+                this.SetupLayersTextBlock.Text = resource.GetString("$DrawPage_SetupDialog_Layers");
+                this.SetupResizeButton.Content = resource.GetString("$DrawPage_SetupDialog_Resize");
+                this.SetupAnchorButton.Content = resource.GetString("$DrawPage_SetupDialog_Anchor");
+            }
             
-            this.ExportDialog.Title = resource.GetString("/$DrawPage/ExportDialog_Title");
-            this.ExportDialog.CloseButton.Content = resource.GetString("/$DrawPage/ExportDialog_Close");
-            this.ExportDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/ExportDialog_Primary");
-            this.ExportSizePicker.WidthText = resource.GetString("/$DrawPage/ExportSizePicker_Width");
-            this.ExportSizePicker.HeightText = resource.GetString("/$DrawPage/ExportSizePicker_Height");
-            this.ExportQualityTextBlock.Text = resource.GetString("/$DrawPage/ExportDialog_Quality");
-            this.ExportFileFormatTextBlock.Text = resource.GetString("/$DrawPage/ExportDialog_FileFormat"); 
+            this.ExportDialog.Title = resource.GetString("$DrawPage_ExportDialog_Title");
+            {
+                this.ExportDialog.CloseButton.Content = resource.GetString("$DrawPage_ExportDialog_Close");
+                this.ExportDialog.PrimaryButton.Content = resource.GetString("$DrawPage_ExportDialog_Primary");
 
-            this.RenameDialog.Title = resource.GetString("/$DrawPage/RenameDialog_Title");
-            this.RenameTextBox.PlaceholderText = resource.GetString("/$DrawPage/RenameDialog_PlaceholderText");
-            this.RenameDialog.CloseButton.Content = resource.GetString("/$DrawPage/RenameDialog_Close");
-            this.RenameDialog.PrimaryButton.Content = resource.GetString("/$DrawPage/RenameDialog_Primary");
+                this.ExportSizePicker.WidthText = resource.GetString("$DrawPage_ExportDialog_SizePicker_Width");
+                this.ExportSizePicker.HeightText = resource.GetString("$DrawPage_ExportDialog_SizePicker_Height");
+
+                this.ExportQualityTextBlock.Text = resource.GetString("$DrawPage_ExportDialog_Quality");
+                this.ExportFileFormatTextBlock.Text = resource.GetString("$DrawPage_ExportDialog_FileFormat");
+            }
+
+            this.RenameDialog.Title = resource.GetString("$DrawPage_RenameDialog_Title");
+            {
+                this.RenameDialog.CloseButton.Content = resource.GetString("$DrawPage_RenameDialog_Close");
+                this.RenameDialog.PrimaryButton.Content = resource.GetString("$DrawPage_RenameDialog_Primary");
+
+                this.RenameTextBox.PlaceholderText = resource.GetString("$DrawPage_RenameDialog_PlaceholderText");
+            }
         }
 
 

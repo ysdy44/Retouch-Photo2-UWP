@@ -43,9 +43,9 @@ namespace Retouch_Photo2
         {
             set
             {
-                this.AdaptiveTextBlock.Opacity = value ? 1.0 : 0.6;
-                this.AdaptiveGrid.IsEnabled = value;
-                this.AdaptiveResetButton.IsEnabled = value;
+                this.AdaptiveWidthCountTextBlock.Opacity = value ? 1.0 : 0.6;
+                this.AdaptiveWidthGrid.IsEnabled = value;
+                this.ResetAdaptiveWidthButton.IsEnabled = value;
             }
         }
 
@@ -70,14 +70,14 @@ namespace Retouch_Photo2
             {
                 if (e.NewSize == e.PreviousSize) return;
                 int width = (int)e.NewSize.Width;
-                this.AdaptiveWidthTextBlock.Text = width.ToString();
+                this.AdaptiveWidthCountTextBlock.Text = width.ToString();
             };
 
             this.ConstructLayersHeight();
 
             this.ConstructMenuType();
 
-            this.LocalButton.Click += async (s, e) =>
+            this.LocalFolderButton.Click += async (s, e) =>
             {
                 IStorageFolder folder = ApplicationData.Current.LocalFolder;
                 await Launcher.LaunchFolderAsync(folder);

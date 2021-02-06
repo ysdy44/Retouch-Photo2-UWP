@@ -96,13 +96,13 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("/Adjustments/Brightness");
+            this.Text = resource.GetString("Adjustments_Brightness");
 
-            this.WhiteLightTextBlock.Text = resource.GetString("/Adjustments/Brightness_WhiteToLight");
-            this.WhiteDarkTextBlock.Text = resource.GetString("/Adjustments/Brightness_WhiteToDark");
+            this.WhiteLightTextBlock.Text = resource.GetString("Adjustments_Brightness_WhiteToLight");
+            this.WhiteDarkTextBlock.Text = resource.GetString("Adjustments_Brightness_WhiteToDark");
 
-            this.BlackLightTextBlock.Text = resource.GetString("/Adjustments/Brightness_BlackToLight");
-            this.BlackDarkTextBlock.Text = resource.GetString("/Adjustments/Brightness_BlackToDark");
+            this.BlackLightTextBlock.Text = resource.GetString("Adjustments_Brightness_BlackToLight");
+            this.BlackDarkTextBlock.Text = resource.GetString("Adjustments_Brightness_BlackToDark");
         }
 
 

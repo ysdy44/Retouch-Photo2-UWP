@@ -86,7 +86,7 @@ namespace Retouch_Photo2
             //Same name. 
             if (oldName == newName)
             {
-                this.RenameTipTextBlock.Visibility = Visibility.Visible;
+                this.TextBoxTipTextBlock.Visibility = Visibility.Visible;
                 return;
             }
 
@@ -94,7 +94,7 @@ namespace Retouch_Photo2
             bool hasRenamed = this.MainLayout.Items.Any(p => p.Name == newName);
             if (hasRenamed)
             {
-                this.RenameTipTextBlock.Visibility = Visibility.Visible;
+                this.TextBoxTipTextBlock.Visibility = Visibility.Visible;
                 return;
             }
 

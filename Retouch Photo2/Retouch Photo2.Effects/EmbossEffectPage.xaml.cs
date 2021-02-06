@@ -71,10 +71,10 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("/Effects/Emboss");
+            this.Button.Text = resource.GetString("Effects_Emboss");
 
-            this.RadiusTextBlock.Text = resource.GetString("/Effects/Emboss_Radius");
-            this.AngleTextBlock.Text = resource.GetString("/Effects/Emboss_Angle");
+            this.RadiusTextBlock.Text = resource.GetString("Effects_Emboss_Radius");
+            this.AngleTextBlock.Text = resource.GetString("Effects_Emboss_Angle");
         }
 
         //@Content

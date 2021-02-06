@@ -31,7 +31,7 @@
                  Executable="$targetnametoken$.exe" 
                  EntryPoint="Retouch_Photo2.App">
       <uap:VisualElements 
-        DisplayName="ms-resource:///resources/Title" 
+        DisplayName="ms-resource:///resources/$DisplayName" 
         Square150x150Logo="Assets\Square150x150Logo.png" 
         Square44x44Logo="Assets\Square44x44Logo.png" 
         Description="Retouch Photo2" 
@@ -41,7 +41,7 @@
        
         <uap:DefaultTile 
           Wide310x150Logo="Assets\Wide310x150Logo.png"
-          ShortName="ms-resource:///resources/Title"           
+          ShortName="ms-resource:///Resources/$DisplayName"           
         Square310x310Logo="Assets\LargeTile.png" 
           Square71x71Logo="Assets\SmallTile.png">
         </uap:DefaultTile>

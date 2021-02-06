@@ -24,38 +24,34 @@ namespace Retouch_Photo2.Tools
         /// <summary> Instance </summary>
         public static TouchbarButton Instance
         {
-            get => TouchbarButton.instance;
+            get => instance;
             set
             {
-                if (TouchbarButton.instance == value)
-                {
-                    TouchbarButton.PickerBorder.Child = value;
-                    TouchbarButton.SliderBorder.Child = value;
-
-                    TouchbarButton.instance = value;
-                    return;
-                }
+                if (instance == value) return;
 
                 //The current tool becomes the active button.
-                TouchbarButton oldButton = TouchbarButton.instance;
-                if (oldButton != null) oldButton.IsSelected = false;
+                if (instance != null)
+                {
+                    instance.IsSelected = false;
+                    PickerBorder.Child = null;
+                    SliderBorder.Child = null;
+                }
+
+                instance = value;
 
                 //The current tool does not become an active button.
-                TouchbarButton newButton = value;
-                if (newButton != null)
+                if (instance != null)
                 {
-                    newButton.IsSelected = true;
-
-                    TouchbarButton.PickerBorder.Child = value.Picker;
-                    TouchbarButton.SliderBorder.Child = value.Slider;
+                    instance.IsSelected = true;
+                    PickerBorder.Child = value.Picker;
+                    SliderBorder.Child = value.Slider;
                 }
                 else
                 {
-                    TouchbarButton.PickerBorder.Child = value;
-                    TouchbarButton.SliderBorder.Child = value;
+                    //instance.IsSelected = true;
+                    PickerBorder.Child = null;
+                    SliderBorder.Child = null;
                 }
-
-                TouchbarButton.instance = value;
             }
         }
         private static TouchbarButton instance;

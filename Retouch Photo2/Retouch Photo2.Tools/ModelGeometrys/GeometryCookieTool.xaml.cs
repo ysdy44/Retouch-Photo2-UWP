@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/ToolsSecond/GeometryCookie");
+            this.Button.Title = resource.GetString("Tools_GeometryCookie");
         }
 
     }
@@ -117,10 +117,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.InnerRadiusButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCookie_InnerRadius");
-            this.SweepAngleButton.CenterContent = resource.GetString("/ToolsSecond/GeometryCookie_SweepAngle");
+            this.InnerRadiusButton.CenterContent = resource.GetString("Tools_GeometryCookie_InnerRadius");
+            this.SweepAngleButton.CenterContent = resource.GetString("Tools_GeometryCookie_SweepAngle");
 
-            this.ConvertTextBlock.Text = resource.GetString("/ToolElements/Convert");
+            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

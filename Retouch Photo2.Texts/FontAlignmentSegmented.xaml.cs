@@ -93,25 +93,25 @@ namespace Retouch_Photo2.Texts
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.LeftToolTip.Content = resource.GetString("/Texts/FontAlignment_Left");
+            this.LeftToolTip.Content = resource.GetString("Texts_FontAlignment_Left");
             this.LeftButton.Click += (s, e) =>
             {
                 this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Left);//Delegate
             };
 
-            this.CenterToolTip.Content = resource.GetString("/Texts/FontAlignment_Center");
+            this.CenterToolTip.Content = resource.GetString("Texts_FontAlignment_Center");
             this.CenterButton.Click += (s, e) =>
             {
                 this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Center);//Delegate
             };
 
-            this.RightToolTip.Content = resource.GetString("/Texts/FontAlignment_Right");
+            this.RightToolTip.Content = resource.GetString("Texts_FontAlignment_Right");
             this.RightButton.Click += (s, e) =>
             {
                 this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Right);//Delegate
             };
 
-            this.JustifiedToolTip.Content = resource.GetString("/Texts/FontAlignment_Justified");
+            this.JustifiedToolTip.Content = resource.GetString("Texts_FontAlignment_Justified");
             this.JustifiedButton.Click += (s, e) =>
             {
                 this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Justified);//Delegate

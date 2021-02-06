@@ -62,9 +62,9 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("/Adjustments/HueRotation");
+            this.Text = resource.GetString("Adjustments_HueRotation");
 
-            this.AngleTextBlock.Text = resource.GetString("/Adjustments/HueRotation_Angle");
+            this.AngleTextBlock.Text = resource.GetString("Adjustments_HueRotation_Angle");
         }
 
         //@Content

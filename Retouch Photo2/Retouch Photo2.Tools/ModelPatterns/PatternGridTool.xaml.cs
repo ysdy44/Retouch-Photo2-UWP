@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/ToolsSecond/PatternGrid");
+            this.Button.Title = resource.GetString("Tools_PatternGrid");
         }
 
     }
@@ -120,9 +120,9 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.TypeTextBlock.Text = resource.GetString("/ToolsSecond/PatternGrid_Type");
-            this.HorizontalStepButton.CenterContent = resource.GetString("/ToolsSecond/PatternGrid_Horizontal");
-            this.VerticalStepButton.CenterContent = resource.GetString("/ToolsSecond/PatternGrid_Vertical");
+            this.TypeTextBlock.Text = resource.GetString("Tools_PatternGrid_Type");
+            this.HorizontalStepButton.CenterContent = resource.GetString("Tools_PatternGrid_HorizontalStep");
+            this.VerticalStepButton.CenterContent = resource.GetString("Tools_PatternGrid_VerticalStep");
         }
     }
 

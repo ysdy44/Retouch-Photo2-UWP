@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Title = resource.GetString("/Tools/View");
+            this.Button.Title = resource.GetString("Tools_View");
 
             this.Button.ToolTip.Closed += (s, e) => this.ViewPage.IsOpen = false;
             this.Button.ToolTip.Opened += (s, e) =>
@@ -214,11 +214,11 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.RadianButton.CenterContent = resource.GetString("/Tools/View_Radian");
-            this.RadianClearToolTip.Content = resource.GetString("/Tools/View_RadianClear");
+            this.RadianButton.CenterContent = resource.GetString("Tools_View_Radian");
+            this.RadianClearToolTip.Content = resource.GetString("Tools_View_RadianClear");
 
-            this.ScaleButton.CenterContent = resource.GetString("/Tools/View_Scale");
-            this.ScaleClearToolTip.Content = resource.GetString("/Tools/View_ScaleClear");
+            this.ScaleButton.CenterContent = resource.GetString("Tools_View_Scale");
+            this.ScaleClearToolTip.Content = resource.GetString("Tools_View_ScaleClear");
         }
 
 
