@@ -70,10 +70,10 @@ namespace Retouch_Photo2.Adjustments.Models
         }
         public void Load(XElement element)
         {
-            this.WhiteLight = (float)element.Attribute("WhiteLight");
-            this.WhiteDark = (float)element.Attribute("WhiteDark");
-            this.BlackLight = (float)element.Attribute("BlackLight");
-            this.BlackDark = (float)element.Attribute("BlackDark");
+            if (element.Attribute("WhiteLight") is XAttribute whiteLight) this.WhiteLight = (float)whiteLight;
+            if (element.Attribute("WhiteDark") is XAttribute whiteDark) this.WhiteDark = (float)whiteDark;
+            if (element.Attribute("BlackLight") is XAttribute blackLight) this.BlackLight = (float)blackLight;
+            if (element.Attribute("BlackDark") is XAttribute blackDark) this.BlackDark = (float)blackDark;
         }
 
 

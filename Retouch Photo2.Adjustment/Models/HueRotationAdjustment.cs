@@ -48,7 +48,7 @@ namespace Retouch_Photo2.Adjustments.Models
         }
         public void Load(XElement element)
         {
-            this.Angle = (float)element.Attribute("Angle");
+            if (element.Attribute("Angle") is XAttribute angle) this.Angle = (float)angle;
         }
 
 

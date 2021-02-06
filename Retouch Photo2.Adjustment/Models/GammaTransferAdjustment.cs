@@ -185,46 +185,38 @@ namespace Retouch_Photo2.Adjustments.Models
         }
         public void Load(XElement element)
         {
-            this.ClampOutput = (bool)element.Attribute("ClampOutput");
+            if (element.Attribute("ClampOutput") is XAttribute clampOutput) this.ClampOutput = (bool)clampOutput;
 
-            bool alphaDisable = (bool)element.Attribute("AlphaDisable");
-            if (alphaDisable) this.AlphaDisable = true;
-            else
+            if (element.Attribute("AlphaDisable") is XAttribute alphaDisable) this.AlphaDisable = (bool)alphaDisable;
+            if (this.AlphaDisable == false)
             {
-                this.AlphaDisable = false;
-                this.AlphaOffset = (float)element.Attribute("AlphaOffset");
-                this.AlphaExponent = (float)element.Attribute("AlphaExponent");
-                this.AlphaAmplitude = (float)element.Attribute("AlphaAmplitude");
+                if (element.Attribute("AlphaOffset") is XAttribute alphaOffset) this.AlphaOffset = (float)alphaOffset;
+                if (element.Attribute("AlphaExponent") is XAttribute alphaExponent) this.AlphaExponent = (float)alphaExponent;
+                if (element.Attribute("AlphaAmplitude") is XAttribute alphaAmplitude) this.AlphaAmplitude = (float)alphaAmplitude;
             }
 
-            bool redDisable = (bool)element.Attribute("RedDisable");
-            if (redDisable) this.RedDisable = true;
-            else
+            if (element.Attribute("RedDisable") is XAttribute redDisable) this.RedDisable = (bool)redDisable;
+            if (this.RedDisable == false)
             {
-                this.RedDisable = false;
-                this.RedOffset = (float)element.Attribute("RedOffset");
-                this.RedExponent = (float)element.Attribute("RedExponent");
-                this.RedAmplitude = (float)element.Attribute("RedAmplitude");
+                if (element.Attribute("RedOffset") is XAttribute redOffset) this.RedOffset = (float)redOffset;
+                if (element.Attribute("RedExponent") is XAttribute redExponent) this.RedExponent = (float)redExponent;
+                if (element.Attribute("RedAmplitude") is XAttribute redAmplitude) this.RedAmplitude = (float)redAmplitude;
             }
 
-            bool greenDisable = (bool)element.Attribute("GreenDisable");
-            if (greenDisable) this.GreenDisable = true;
-            else
+            if (element.Attribute("GreenDisable") is XAttribute greenDisable) this.GreenDisable = (bool)greenDisable;
+            if (this.GreenDisable == false)
             {
-                this.GreenDisable = false;
-                this.GreenOffset = (float)element.Attribute("GreenOffset");
-                this.GreenExponent = (float)element.Attribute("GreenExponent");
-                this.GreenAmplitude = (float)element.Attribute("GreenAmplitude");
+                if (element.Attribute("GreenOffset") is XAttribute greenOffset) this.GreenOffset = (float)greenOffset;
+                if (element.Attribute("GreenExponent") is XAttribute greenExponent) this.GreenExponent = (float)greenExponent;
+                if (element.Attribute("GreenAmplitude") is XAttribute greenAmplitude) this.GreenAmplitude = (float)greenAmplitude;
             }
 
-            bool blueDisable = (bool)element.Attribute("BlueDisable");
-            if (blueDisable) this.BlueDisable = true;
-            else
+            if (element.Attribute("BlueDisable") is XAttribute blueDisable) this.BlueDisable = (bool)blueDisable;
+            if (this.BlueDisable == false)
             {
-                this.BlueDisable = false;
-                this.BlueOffset = (float)element.Attribute("BlueOffset");
-                this.BlueExponent = (float)element.Attribute("BlueExponent");
-                this.BlueAmplitude = (float)element.Attribute("BlueAmplitude");
+                if (element.Attribute("BlueOffset") is XAttribute blueOffset) this.BlueOffset = (float)blueOffset;
+                if (element.Attribute("BlueExponent") is XAttribute blueExponent) this.BlueExponent = (float)blueExponent;
+                if (element.Attribute("BlueAmplitude") is XAttribute blueAmplitude) this.BlueAmplitude = (float)blueAmplitude;
             }
         }
 

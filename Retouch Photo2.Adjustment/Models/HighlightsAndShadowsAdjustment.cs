@@ -74,11 +74,11 @@ namespace Retouch_Photo2.Adjustments.Models
         }
         public void Load(XElement element)
         {
-            this.Shadows = (float)element.Attribute("Shadows");
-            this.Highlights = (float)element.Attribute("Highlights");
-            this.Clarity = (float)element.Attribute("Clarity");
-            this.MaskBlurAmount = (float)element.Attribute("MaskBlurAmount");
-            this.SourceIsLinearGamma = (bool)element.Attribute("SourceIsLinearGamma");
+            if (element.Attribute("Shadows") is XAttribute shadows) this.Shadows = (float)shadows;
+            if (element.Attribute("Highlights") is XAttribute highlights) this.Highlights = (float)highlights;
+            if (element.Attribute("Clarity") is XAttribute clarity) this.Clarity = (float)clarity;
+            if (element.Attribute("MaskBlurAmount") is XAttribute maskBlurAmount) this.MaskBlurAmount = (float)maskBlurAmount;
+            if (element.Attribute("SourceIsLinearGamma") is XAttribute sourceIsLinearGamma) this.SourceIsLinearGamma = (bool)sourceIsLinearGamma;
         }
 
 

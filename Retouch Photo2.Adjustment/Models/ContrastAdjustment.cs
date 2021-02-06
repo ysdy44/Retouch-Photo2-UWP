@@ -48,7 +48,7 @@ namespace Retouch_Photo2.Adjustments.Models
         }
         public void Load(XElement element)
         {
-            this.Contrast = (float)element.Attribute("Contrast");
+            if (element.Attribute("Contrast") is XAttribute contrast) this.Contrast = (float)contrast;
         }
 
 

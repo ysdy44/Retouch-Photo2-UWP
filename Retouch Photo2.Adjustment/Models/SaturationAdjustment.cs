@@ -48,7 +48,7 @@ namespace Retouch_Photo2.Adjustments.Models
         }
         public void Load(XElement element)
         {
-            this.Saturation = (float)element.Attribute("Saturation");
+            if (element.Attribute("Saturation") is XAttribute saturation) this.Saturation = (float)saturation;
         }
 
 

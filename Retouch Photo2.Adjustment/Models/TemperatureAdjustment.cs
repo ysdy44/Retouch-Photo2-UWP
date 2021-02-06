@@ -54,8 +54,8 @@ namespace Retouch_Photo2.Adjustments.Models
         }
         public void Load(XElement element)
         {
-            this.Temperature = (float)element.Attribute("Temperature");
-            this.Tint = (float)element.Attribute("Tint");
+            if (element.Attribute("Temperature") is XAttribute temperature) this.Temperature = (float)temperature;
+            if (element.Attribute("Tint") is XAttribute tint) this.Tint = (float)tint;
         }
 
 

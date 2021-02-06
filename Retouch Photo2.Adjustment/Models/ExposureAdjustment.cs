@@ -48,7 +48,7 @@ namespace Retouch_Photo2.Adjustments.Models
         }
         public void Load(XElement element)
         {
-            this.Exposure = (float)element.Attribute("Exposure");
+            if (element.Attribute("Exposure") is XAttribute exposure) this.Exposure = (float)exposure;
         }
 
 
