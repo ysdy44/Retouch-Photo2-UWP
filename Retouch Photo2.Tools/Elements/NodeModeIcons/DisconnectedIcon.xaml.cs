@@ -1,18 +1,18 @@
 ﻿using FanKit.Transformers;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Tools.Elements.PenModeControlIcons
+namespace Retouch_Photo2.Tools.Elements.NodeModeIcons
 {
     /// <summary>
     /// Icon of <see cref = "EachControlPointLengthMode"/> and <see cref = "EachControlPointAngleMode"/>.
     /// </summary>
-    public sealed partial class MirroredIcon : UserControl
+    public sealed partial class DisconnectedIcon : UserControl
     {
         //@Construct
         /// <summary>
-        /// Initializes a MirroredIcon. 
+        /// Initializes a DisconnectedIcon. 
         /// </summary>
-        public MirroredIcon()
+        public DisconnectedIcon()
         {
             this.InitializeComponent();
         }

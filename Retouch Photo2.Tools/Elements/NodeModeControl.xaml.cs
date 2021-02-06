@@ -1,5 +1,5 @@
 ﻿using FanKit.Transformers;
-using Retouch_Photo2.Tools.Elements.PenModeControlIcons;
+using Retouch_Photo2.Tools.Elements.NodeModeIcons;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -7,11 +7,11 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools.Elements
 {
     /// <summary>
-    /// Mode contorl of <see cref="PenTool"/>.
+    /// Mode contorl of <see cref="NodeTool"/>.
     /// </summary>
-    public sealed partial class PenModeControl : UserControl
+    public sealed partial class NodeModeControl : UserControl
     {
-
+        
         //@Content    
         /// <summary> Gets or sets the each control-point's length-mode </summary>
         public EachControlPointLengthMode ControlLengthMode = EachControlPointLengthMode.Equal;
@@ -27,10 +27,10 @@ namespace Retouch_Photo2.Tools.Elements
             get => (SelfControlPointMode)base.GetValue(ControlPointModeProperty);
             set => base.SetValue(ControlPointModeProperty, value);
         }
-        /// <summary> Identifies the <see cref = "PenModeControl.ControlPointMode" /> dependency property. </summary>
-        public static readonly DependencyProperty ControlPointModeProperty = DependencyProperty.Register(nameof(ControlPointMode), typeof(SelfControlPointMode), typeof(PenModeControl), new PropertyMetadata(SelfControlPointMode.None, (sender, e) =>
+        /// <summary> Identifies the <see cref = "NodeModeControl.ControlPointMode" /> dependency property. </summary>
+        public static readonly DependencyProperty ControlPointModeProperty = DependencyProperty.Register(nameof(ControlPointMode), typeof(SelfControlPointMode), typeof(NodeModeControl), new PropertyMetadata(SelfControlPointMode.None, (sender, e) =>
         {
-            PenModeControl control = (PenModeControl)sender;
+            NodeModeControl control = (NodeModeControl)sender;
 
             if (e.NewValue is SelfControlPointMode value)
             {
@@ -71,7 +71,7 @@ namespace Retouch_Photo2.Tools.Elements
         /// <summary>
         /// Initializes a PenModeControl. 
         /// </summary>
-        public PenModeControl()
+        public NodeModeControl()
         {
             this.InitializeComponent();
             this.ConstructStrings();

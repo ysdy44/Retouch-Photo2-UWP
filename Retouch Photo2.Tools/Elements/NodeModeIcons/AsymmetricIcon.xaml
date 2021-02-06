@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Retouch_Photo2.Tools.Elements.PenModeControlIcons.DisconnectedIcon"
+    x:Class="Retouch_Photo2.Tools.Elements.NodeModeIcons.AsymmetricIcon"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -17,16 +17,15 @@
 
             <Path StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}" Fill="DodgerBlue">
                 <Path.Data>
-                    M131.966,558.011c0,0 7.333,-52.381 16.056,-77.162c16.801,-47.725 117.931,-265.823 242.638,-187.777c128.73,80.563 262.263,261.371 262.263,261.371
+                    M131.966,558.011c0,0 8.048,-86.536 15.499,-111.729c13.455,-45.495 34.756,-160.62 181.867,-159.343c160.508,1.394 262.709,81.66 305.304,187.666c10.18,25.333 18.287,79.838 18.287,79.838
                 </Path.Data>
             </Path>
 
-            <Line X1="360" Y1="260" X2="190" Y2="282" StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}"/>
-            <Line X1="360" Y1="260" X2="555" Y2="440" StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}"/>
-            <Ellipse Canvas.Left="500" Canvas.Top="380" Width="70" Height="70" Fill="{ThemeResource SystemControlBackgroundBaseHighBrush}"/>
+            <Line X1="186.502" Y1="282" X2="630" Y2="282" StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}"/>
+            <Ellipse Canvas.Left="576" Canvas.Top="246" Width="70" Height="70" Fill="{ThemeResource SystemControlBackgroundBaseHighBrush}"/>
             <Ellipse Canvas.Left="138" Canvas.Top="249" Width="70" Height="70" Fill="{ThemeResource SystemControlBackgroundBaseHighBrush}"/>
 
-            <Ellipse Canvas.Left="280" Canvas.Top="209" Width="130" Height="130" StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}" Fill="{ThemeResource SystemControlBackgroundAltHighBrush}"/>
+            <Ellipse Canvas.Left="270" Canvas.Top="209" Width="130" Height="130" StrokeThickness="30" Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}" Fill="{ThemeResource SystemControlBackgroundAltHighBrush}"/>
 
         </Canvas>
     </Viewbox>

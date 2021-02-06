@@ -290,7 +290,7 @@ namespace Retouch_Photo2.Tools.Models
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
         /// <summary> PenPage's Flyout. </summary>
-        public PenModeControl PenFlyout => this._PenFlyout;
+        public NodeModeControl PenFlyout => this._PenFlyout;
 
 
         //@Construct
