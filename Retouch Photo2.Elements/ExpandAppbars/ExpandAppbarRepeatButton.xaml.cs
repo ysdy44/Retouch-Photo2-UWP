@@ -14,6 +14,7 @@ namespace Retouch_Photo2.Elements
     /// </summary>
     public sealed partial class ExpandAppbarRepeatButton : UserControl, IExpandAppbarElement
     {
+
         //@Content
         /// <summary> TextBlock's Text </summary>
         public string Text { get => this.TextBlock.Text; set => this.TextBlock.Text = value; }
@@ -23,21 +24,6 @@ namespace Retouch_Photo2.Elements
         public double ExpandWidth => 50.0d;
         /// <summary> Gets it yourself. </summary>
         public FrameworkElement Self => this;
-
-
-        bool _isShowStoryboard = true;
-        private void Storyboard(bool isSelected)
-        {
-            if (this._isShowStoryboard != isSelected)
-            {
-                this._isShowStoryboard = isSelected;
-
-                if (isSelected)
-                    this.ShowStoryboard.Begin();//Storyboard
-                else
-                    this.HideStoryboard.Begin();//Storyboard
-            }
-        }
 
 
         //@VisualState
@@ -52,8 +38,6 @@ namespace Retouch_Photo2.Elements
             {
                 if (this._vsIsSelected)
                 {
-                    this.Storyboard(true);
-
                     if (this._vsIsSecondPage == false)
                         return this.Selected;
                     else
@@ -61,8 +45,6 @@ namespace Retouch_Photo2.Elements
                 }
                 else
                 {
-                    this.Storyboard(false);
-
                     if (this._vsIsSecondPage == false)
                         return this.UnSelected;
                     else
@@ -73,7 +55,7 @@ namespace Retouch_Photo2.Elements
             {
                 if (value == null) return;
                 
-                VisualStateManager.GoToState(this, value.Name, false);
+                VisualStateManager.GoToState(this, value.Name, true);
             }
         }
 

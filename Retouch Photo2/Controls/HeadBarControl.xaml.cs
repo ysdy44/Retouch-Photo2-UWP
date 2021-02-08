@@ -91,17 +91,13 @@ namespace Retouch_Photo2.Controls
             //Menu
             foreach (IMenu menu in this.TipViewModel.Menus)
             {
-                this.ConstructMenuButton(menu);
+                if (menu == null || menu.Button == null) continue;
+
+                FrameworkElement element = menu.Button.Self;
+                this.HeadRightStackPanel.Children.Add(element);
             }
         }
 
-        private void ConstructMenuButton(IMenu menu)
-        {
-            if (menu == null) return;
-            UIElement button = menu.Button.Self;
-
-            this.HeadRightStackPanel.Children.Add(button);
-        }
     }
 
     /// <summary>

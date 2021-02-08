@@ -13,35 +13,6 @@
     >
 
 
-    <UserControl.Resources>
-
-        <!--Foreground-->
-        <SolidColorBrush x:Name="CheckColor" Color="White"/>
-        <SolidColorBrush x:Name="UnCheckColor" Color="{ThemeResource AppTextColor}"/>
-
-        <!--Background-->
-        <SolidColorBrush x:Name="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
-
-        <!--Style-->
-        <Style x:Key="SencondBoderStyle" TargetType="Border">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Background" Value="Transparent"/>
-        </Style>
-        
-        <!--Storyboard-->
-        <Storyboard x:Name="ShowStoryboard">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="AccentBorder" 
-                                         Duration="0:0:0.2" From="0.0" To="1.0" d:IsOptimized="True"/>
-        </Storyboard>
-        <Storyboard x:Name="HideStoryboard">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="AccentBorder" 
-                                         Duration="0:0:0.2" From="1.0" To="0.0" d:IsOptimized="True"/>
-        </Storyboard>
-
-    </UserControl.Resources>
-
-
     <Border x:Name="RootGrid" Width="Auto" Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppCircleBorderStyle}">
 
         <!--VisualState-->
@@ -54,11 +25,10 @@
                     </Storyboard>
                 </VisualState>
 
-
                 <VisualState x:Name="Selected">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -66,11 +36,10 @@
                 <VisualState x:Name="UnSelected">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppTextColor}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
-
 
 
                 <VisualState x:Name="SecondSelected">
@@ -85,16 +54,34 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Foreground">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Style">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SencondBoderStyle}" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderThickness">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AccentBorder" Storyboard.TargetProperty="Style">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SencondBoderStyle}" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="CornerRadius">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AppCornerRadius}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AccentBorder" Storyboard.TargetProperty="BorderThickness">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AccentBorder" Storyboard.TargetProperty="BorderBrush">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AccentBorder" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AccentBorder" Storyboard.TargetProperty="Opacity">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="1.0" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -111,26 +98,44 @@
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Foreground">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppTextColor}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource UnCheckColor}" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppTextColor}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Style">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SencondBoderStyle}" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderThickness">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AccentBorder" Storyboard.TargetProperty="Style">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SencondBoderStyle}" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="CornerRadius">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AppCornerRadius}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AccentBorder" Storyboard.TargetProperty="BorderThickness">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AccentBorder" Storyboard.TargetProperty="BorderBrush">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AccentBorder" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AccentBorder" Storyboard.TargetProperty="Opacity">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0.0" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
 
-            </VisualStateGroup>
+            </VisualStateGroup>           
         </VisualStateManager.VisualStateGroups>
 
-        <Grid>           
-            
-            <Border x:Name="AccentBorder" Grid.ColumnSpan="2" Opacity="0.0" BorderThickness="0" BorderBrush="Transparent" Background="{ThemeResource AccentColor}" Style="{StaticResource AppCircleBorderStyle}"/>
+        <Grid>
+
+            <Border x:Name="AccentBorder" Grid.ColumnSpan="2" Opacity="0.0" BorderThickness="0" BorderBrush="Transparent" Background="{ThemeResource SystemAccentColor}" Style="{StaticResource AppCircleBorderStyle}"/>
 
             <Grid x:Name="StackPanel" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
@@ -141,8 +146,8 @@
                 <Border x:Name="TextBlockBorder" Padding="4,0" Visibility="Collapsed">
                     <TextBlock x:Name="TextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 </Border>
-                
-                <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{StaticResource UnCheckColor}"/>
+
+                <ContentPresenter x:Name="ContentPresenter" Grid.Column="1" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{ThemeResource AppTextColor}"/>
             </Grid>
             
         </Grid>

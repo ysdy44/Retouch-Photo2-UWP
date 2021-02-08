@@ -52,6 +52,7 @@ namespace Retouch_Photo2.ViewModels
                     if (menu.Button == null) continue;
                     if (menu.Button.ToolTip == null) continue;
 
+                    if (menu.Button.Self.Visibility== Visibility.Collapsed) continue;
                     menu.Button.ToolTip.IsOpen = value;
                 }
             }

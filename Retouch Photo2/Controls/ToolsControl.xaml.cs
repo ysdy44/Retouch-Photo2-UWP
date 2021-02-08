@@ -1,9 +1,4 @@
-﻿// Core:              ★★★★
-// Referenced:   ★★★
-// Difficult:         ★★★★
-// Only:              ★★★★★
-// Complete:      ★★★★
-using Retouch_Photo2.Tools;
+﻿using Retouch_Photo2.Tools;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System.Linq;
@@ -69,36 +64,27 @@ namespace Retouch_Photo2.Controls
             {
                 return;
             }
-            else if (tool.Type == ToolType.More)
+            else if (tool.Type == ToolType.More && tool.Button.Self is ToolMoreButton moreButton)
             {
-                if (tool.Button is ToolMoreButton moreButton)
-                {
-                    this.ToolLeft.Add(moreButton);
-                    this.ToolLeftMore = moreButton.Children;
-                }
-                return;
+                this.ToolLeft.Add(moreButton);
+                this.ToolLeftMore = moreButton.Children;
             }
-            else
+            else if (tool.Button.Self is FrameworkElement element)
             {
-                if (tool.Button is FrameworkElement element)
+                if (this.ToolLeftMore == null)
+                    this.ToolLeft.Add(element);
+                else
+                    this.ToolLeftMore.Add(element);
+
+                element.Tapped += (s, e) =>
                 {
-                    if (this.ToolLeftMore == null)
-                        this.ToolLeft.Add(element);
-                    else
-                        this.ToolLeftMore.Add(element);
+                    //Change tools group value.
+                    ToolBase.Instance = tool;
+                    this.SelectionViewModel.ToolType = tool.Type;
 
-                    element.Tapped += (s, e) =>
-                    {
-                        //Change tools group value.
-                        {
-                            ToolBase.Instance = tool;
-                            this.SelectionViewModel.ToolType = tool.Type;
-
-                            this.ViewModel.TipTextBegin(tool.Button.Title);
-                            this.ViewModel.Invalidate();//Invalidate
-                        }
-                    };
-                }
+                    this.ViewModel.TipTextBegin(tool.Button.Title);
+                    this.ViewModel.Invalidate();//Invalidate
+                };
             }
         }
 
@@ -122,3 +108,4 @@ namespace Retouch_Photo2.Controls
 
     }
 }
+
