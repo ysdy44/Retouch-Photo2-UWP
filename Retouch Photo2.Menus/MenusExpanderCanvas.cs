@@ -4,12 +4,11 @@
 // Only:              ★★★★
 // Complete:      ★
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Menus;
-using Retouch_Photo2.ViewModels;
+using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Controls
+namespace Retouch_Photo2.Menus
 {
     /// <summary>
     /// Represents a canvas control, that containing some <see cref="Expander"/>。
@@ -17,9 +16,26 @@ namespace Retouch_Photo2.Controls
     public class MenusExpanderCanvas : UserControl
     {
 
-        //@ViewModel
-        TipViewModel TipViewModel => App.TipViewModel;
-               
+        /// <summary>
+        /// Gets or sets the menus/
+        /// </summary>
+        public IList<IMenu> Menus
+        {
+            private get => this.menus;
+            set
+            {
+                foreach (IMenu menu in value)
+                {
+                    if (menu == null) continue;
+
+                    FrameworkElement layout = menu.Self;
+                    Expander.OverlayCanvas.Children.Add(layout);
+                }
+                this.menus = value;
+            }
+        }
+        private IList<IMenu> menus = null;
+
 
         //@Construct
         /// <summary>
@@ -28,26 +44,13 @@ namespace Retouch_Photo2.Controls
         public MenusExpanderCanvas()
         {
             this.Content = Expander.OverlayCanvas;
-            this.ConstructMenus();
-        }
-
-
-        //Menu
-        private void ConstructMenus()
-        {
-            foreach (IMenu menu in this.TipViewModel.Menus)
-            {
-                if (menu != null)
-                {
-                    FrameworkElement layout = menu.Self;
-                    Expander.OverlayCanvas.Children.Add(layout);
-                }
-            }
 
             Expander.OverlayCanvas.Tapped += (s, e) =>
             {
-                foreach (IMenu menu in this.TipViewModel.Menus)
+                foreach (IMenu menu in this.Menus)
                 {
+                    if (menu == null) continue;
+
                     menu.HideLayout();
                 }
                 Expander.IsOverlayDismiss = false;
@@ -55,13 +58,15 @@ namespace Retouch_Photo2.Controls
 
             Expander.OverlayCanvas.SizeChanged += (s, e) =>
             {
-                foreach (IMenu menu in this.TipViewModel.Menus)
+                foreach (IMenu menu in this.Menus)
                 {
+                    if (menu == null) continue;
+
                     menu.CropLayout();
                 }
                 Expander.IsOverlayDismiss = false;
             };
-        }         
+        }
 
     }
 }

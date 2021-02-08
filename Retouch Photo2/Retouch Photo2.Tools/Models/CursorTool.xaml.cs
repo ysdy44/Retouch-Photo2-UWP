@@ -6,6 +6,7 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools.Elements;
@@ -48,7 +49,8 @@ namespace Retouch_Photo2.Tools.Models
             CenterContent = new CursorIcon()
         };
         public FrameworkElement Page => this.CursorPage;
-        CursorPage CursorPage = new CursorPage();
+
+        readonly CursorPage CursorPage = new CursorPage();
 
 
         //@Construct

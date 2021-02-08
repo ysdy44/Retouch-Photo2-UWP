@@ -1,34 +1,20 @@
-﻿// Core:              ★★★★
-// Referenced:   ★★★
-// Difficult:         ★★★
-// Only:              ★★★★★
-// Complete:      ★★★
-using FanKit.Transformers;
+﻿using FanKit.Transformers;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.Photos;
-using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
-namespace Retouch_Photo2.Controls
+namespace Retouch_Photo2
 {
     /// <summary> 
-    /// Represents a control that arranges <see cref="LayerControl"/> vertically.
+    /// Represents a page used to draw vector graphics.
     /// </summary>
-    public partial class LayersControl : UserControl
+    public sealed partial class DrawPage : Page
     {
-
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
-
 
         //LayerageCollection
         Layerage DragSourceLayerage;
@@ -37,31 +23,22 @@ namespace Retouch_Photo2.Controls
         OverlayMode DragLayerOverlayMode;
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a LayersControl. 
-        /// </summary>
-        public LayersControl()
+        //LayersControl
+        private void ConstructLayersControl()
         {
-            this.InitializeComponent();
-            //LayerageCollection
-            this.ConstructLayerageCollection();
-            this.ItemsControl.ItemsSource = this.ViewModel.LayerageCollection.RootControls;
-
-
-            this.Tapped += (s, e) => this.MethodViewModel.MethodSelectedNone();//Method
-            this.RightTapped += (s, e) => this.ShowLayerMenu();
-            this.Holding += (s, e) => this.ShowLayerMenu();
+            this.LayersScrollViewer.Tapped += (s, e) => this.MethodViewModel.MethodSelectedNone();//Method
+            this.LayersScrollViewer.RightTapped += (s, e) => this.ShowLayerMenu();
+            this.LayersScrollViewer.Holding += (s, e) => this.ShowLayerMenu();
 
 
             Retouch_Photo2.PhotosPage.AddImageCallBack += (photo) =>
             {
                 if (photo == null) return;
-                
+
                 //History
                 LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer", this.ViewModel.LayerageCollection);
                 this.ViewModel.HistoryPush(history);
-                
+
                 //Transformer
                 Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
 

@@ -3,7 +3,6 @@
 // Difficult:         ★★★★
 // Only:              ★★★★★
 // Complete:      ★★★★★
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
@@ -37,8 +36,6 @@ namespace Retouch_Photo2
 
 
         //@Converter
-        private FrameworkElement IconConverter(ITool tool) => tool.Icon;
-        private FrameworkElement PageConverter(ITool tool) => tool.Page;
         private Visibility BoolToVisibilityConverter(bool boolean) => boolean ? Visibility.Visible : Visibility.Collapsed;
 
 
@@ -51,6 +48,13 @@ namespace Retouch_Photo2
             this.InitializeComponent();
             this.ConstructStrings();
             this.ConstructTransition();
+
+            this.ConstructMainCanvasControl();
+            this.ConstructHeadBarControl();
+
+            this.ConstructLayersControl();
+            this.ConstructLayerageCollection();
+
 
             this.Loaded += (s, e) => this._lockLoaded();
             Retouch_Photo2.DrawPage.FrameNavigatePhotosPage += (mode) => this.Frame.Navigate(typeof(PhotosPage), mode);//Navigate   
@@ -84,86 +88,6 @@ namespace Retouch_Photo2
             //Rename
             Retouch_Photo2.DrawPage.ShowRename += () => this.ShowRenameDialog();
             this.ConstructRenameDialog();
-
-
-            #region Document
-
-
-            this.HeadBarControl.DocumentButton.Click += async (s, e) =>
-            {
-                this.LoadingControl.State = LoadingState.Saving;
-                this.LoadingControl.IsActive = true;
-
-                int countHistorys = this.ViewModel.Historys.Count;
-                int countLayerages = this.ViewModel.LayerageCollection.RootLayerages.Count;
-
-                if (countHistorys == 0 && countLayerages > 1)
-                {
-                    this.ViewModel.IsUpdateThumbnailByName = false;
-
-                    await this.Exit();
-                    this.SettingViewModel.IsFullScreen = true;
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-
-                    this.LoadingControl.State = LoadingState.None;
-                    this.LoadingControl.IsActive = false;
-                    this.Frame.GoBack();
-                }
-                else
-                {
-                    await this.Save();
-                    this.ViewModel.IsUpdateThumbnailByName = true;
-
-                    await this.Exit();
-                    this.SettingViewModel.IsFullScreen = true;
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
-
-                    this.LoadingControl.State = LoadingState.None;
-                    this.LoadingControl.IsActive = false;
-                    this.Frame.GoBack();
-                }
-            };
-            this.HeadBarControl.DocumentUnSaveButton.Click += async (s, e) =>
-            {
-                this.LoadingControl.State = LoadingState.Saving;
-                this.LoadingControl.IsActive = true;
-
-                this.HeadBarControl.DocumentFlyout.Hide();
-                this.ViewModel.IsUpdateThumbnailByName = false;
-
-                await this.Exit();
-                this.SettingViewModel.IsFullScreen = true;
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-
-                this.LoadingControl.State = LoadingState.None;
-                this.LoadingControl.IsActive = false;
-                this.Frame.GoBack();
-            };
-
-
-            #endregion
-
-
-            #region ExpandAppbar
-
-
-            this.ConstructExportDialog();
-            this.HeadBarControl.ExportButton.Tapped += (s, e) => this.ShowExportDialog();
-
-            this.HeadBarControl.UndoButton.Tapped += (s, e) => this.MethodViewModel.MethodEditUndo();
-            //this.RedoButton.Click += (s, e) => { };
-
-            this.ConstructSetupDialog();
-            this.HeadBarControl.SetupButton.Tapped += (s, e) => this.ShowSetupDialog();
-            
-            this.HeadBarControl.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
-
-            this.UnFullScreenButton.Click += (s, e) => this.SettingViewModel.IsFullScreen = false;
-            this.HeadBarControl.FullScreenButton.Tapped += (s, e) => this.SettingViewModel.IsFullScreen = true;
-
-
-            #endregion
-
         }
 
         /// <summary> The current page becomes the active page. </summary>

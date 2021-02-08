@@ -1,38 +1,37 @@
-﻿// Core:              ★★★★★
-// Referenced:   ★★★
-// Difficult:         ★★★★★
-// Only:              ★★★★★
-// Complete:      ★★★★★
-using FanKit.Transformers;
+﻿using FanKit.Transformers;
+using Microsoft.Graphics.Canvas.UI.Xaml;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
+using Windows.UI;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Controls
+namespace Retouch_Photo2
 {
     /// <summary> 
-    /// Represents a control that displays the canvas and elements on the screen.
+    /// Represents a page used to draw vector graphics.
     /// </summary>
-    public sealed partial class MainCanvasControl : UserControl
+    public sealed partial class DrawPage : Page
     {
 
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
+        //@Content
+        private Color AccentColor => this.AccentColorBrush.Color;
+        private Color ShadowColor => this.ShadowColorBrush.Color;
+        private CanvasControl CanvasControl => this.DrawLayout.CanvasControl;
+        private CanvasControl ToolCanvasControl => this.DrawLayout.ToolCanvasControl;
+
 
         bool _isSingleStarted;
         Vector2 _singleStartingPoint;
         InputDevice _inputDevice = InputDevice.None;
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a MainCanvasControl. 
-        /// </summary>
-        public MainCanvasControl()
+        //MainCanvasControl
+        private void ConstructMainCanvasControl()
         {
-            this.InitializeComponent();
+            this.ViewModel.AccentColor = this.AccentColor;
+
+
             this.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
@@ -45,7 +44,7 @@ namespace Retouch_Photo2.Controls
             {
                 float dpiScale = 96.0f / this.CanvasControl.Dpi;
                 if (dpiScale < 0.4f) dpiScale = 0.4f;
-                if (dpiScale>1.0f) dpiScale = 1.0f;
+                if (dpiScale > 1.0f) dpiScale = 1.0f;
 
                 this.ViewModel.InvalidateAction += (InvalidateMode mode) =>
                 {
@@ -93,7 +92,7 @@ namespace Retouch_Photo2.Controls
             this.ToolCanvasControl.CustomDevice = this.ViewModel.CanvasDevice;
 
             this.ToolCanvasControl.Draw += (sender, args) =>
-            { 
+            {
                 switch (this._inputDevice)
                 {
                     case InputDevice.None:

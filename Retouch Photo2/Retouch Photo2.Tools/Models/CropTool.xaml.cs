@@ -46,7 +46,8 @@ namespace Retouch_Photo2.Tools.Models
             CenterContent = new CropIcon()
         };
         public FrameworkElement Page => this.CropPage;
-        CropPage CropPage = new CropPage();
+
+        readonly CropPage CropPage = new CropPage();
 
 
         //@Construct

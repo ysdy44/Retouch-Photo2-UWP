@@ -25,6 +25,7 @@ namespace Retouch_Photo2.ViewModels
             get => this.toolType;
             set
             {
+                if (this.toolType == value) return;
                 this.toolType = value;
                 this.OnPropertyChanged(nameof(ToolType));//Notify 
             }
@@ -38,6 +39,7 @@ namespace Retouch_Photo2.ViewModels
             get => this.layerType;
             set
             {
+                if (this.layerType == value) return;
                 this.layerType = value;
                 this.OnPropertyChanged(nameof(LayerType));//Notify 
             }
@@ -51,6 +53,7 @@ namespace Retouch_Photo2.ViewModels
             get => this.layerName;
             set
             {
+                if (this.layerName == value) return;
                 this.layerName = value;
                 this.OnPropertyChanged(nameof(LayerName));//Notify 
             }
@@ -64,7 +67,7 @@ namespace Retouch_Photo2.ViewModels
             get => this.opacity;
             set
             {
-                if (this.Opacity == value) return;
+                if (this.opacity == value) return;
                 this.opacity = value;
                 this.OnPropertyChanged(nameof(Opacity));//Notify 
             }
@@ -78,6 +81,7 @@ namespace Retouch_Photo2.ViewModels
             get => this.blendMode;
             set
             {
+                if (this.blendMode == value) return;
                 this.blendMode = value;
                 this.OnPropertyChanged(nameof(BlendMode));//Notify 
             }
@@ -86,25 +90,31 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> Gets or sets the layer visibility. </summary>
-        public Visibility Visibility { get; set; } = Visibility.Visible;
-        /// <summary> Sets the <see cref = "ViewModel.Visibility" />. </summary>
-        public void SetVisibility(Visibility value)
+        public Visibility Visibility
         {
-            if (this.Visibility == value) return;
-            this.Visibility = value;
-            this.OnPropertyChanged(nameof(Visibility));//Notify 
+            get => this.visibility;
+            set
+            {
+                if (this.visibility == value) return;
+                this.visibility = value;
+                this.OnPropertyChanged(nameof(Visibility));//Notify 
+            }
         }
+        private Visibility visibility = Visibility.Visible;
 
 
         /// <summary> Gets or sets the layer tag-type. </summary>
-        public TagType TagType { get; set; } = TagType.None;
-        /// <summary> Sets the <see cref = "ViewModel.TagType" />. </summary>
-        public void SetTagType(TagType value)
+        public TagType TagType
         {
-            if (this.TagType == value) return;
-            this.TagType = value;
-            this.OnPropertyChanged(nameof(TagType));//Notify 
+            get => this.tagType;
+            set
+            {
+                if (this.tagType == value) return;
+                this.tagType = value;
+                this.OnPropertyChanged(nameof(TagType));//Notify 
+            }
         }
+        private TagType tagType = TagType.None;
 
 
         //////////////////////////

@@ -6,6 +6,7 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
@@ -42,7 +43,8 @@ namespace Retouch_Photo2.Tools.Models
             CenterContent = new TransparencyIcon()
         };
         public FrameworkElement Page => this.TransparencyPage;
-        TransparencyPage TransparencyPage = new TransparencyPage();
+
+        readonly TransparencyPage TransparencyPage = new TransparencyPage();
 
 
         //@Construct

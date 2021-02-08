@@ -42,7 +42,8 @@ namespace Retouch_Photo2.Tools.Models
             CenterContent = new ViewIcon()
         };
         public FrameworkElement Page => this.ViewPage;
-        ViewPage ViewPage = new ViewPage();
+
+        readonly ViewPage ViewPage = new ViewPage();
 
 
         //@Construct

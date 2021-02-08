@@ -14,7 +14,7 @@ namespace Retouch_Photo2.ViewModels
     {
 
         /// <summary> Gets or sets the accent color. </summary>
-        public Color AccentColor { get; set; }
+        public Color AccentColor { get; set; } = Colors.DodgerBlue;
 
 
         /// <summary> Gets or sets the on state of the IsHitTestVisible on the canvas. </summary>

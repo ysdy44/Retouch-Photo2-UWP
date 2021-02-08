@@ -3,6 +3,7 @@
 // Difficult:         ★★
 // Only:              ★★★★
 // Complete:      ★★★★
+using Microsoft.Graphics.Canvas.UI.Xaml;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -22,17 +23,12 @@ namespace Retouch_Photo2.Elements.DrawPages
         //@Content
         //Body
         /// <summary> CenterBorder's Child. </summary>
-        public UIElement CenterChild { get => this.CenterBorder.Child; set => this.CenterBorder.Child = value; }
+        public CanvasControl CanvasControl => this._CanvasControl;
+        public CanvasControl ToolCanvasControl => this._ToolCanvasControl;
 
         //Touchbar
         /// <summary> TouchbarPickerBorder's Child. </summary>
-        public FrameworkElement TouchbarPicker
-        {
-            set
-            {
-                this.TouchbarBorder.Children.Add(value);
-            }
-        }
+        public FrameworkElement TouchbarPicker { set => this.TouchbarBorder.Children.Add(value); }
         /// <summary> TouchbarSliderBorder's Child. </summary>
         public FrameworkElement TouchbarSlider
         {

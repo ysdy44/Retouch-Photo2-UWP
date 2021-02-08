@@ -108,9 +108,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="IMenu.cs" />
+    <Compile Include="MenuButtonsControl.cs" />
     <Compile Include="MenuButtons\MenuButton.xaml.cs">
       <DependentUpon>MenuButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenusExpanderCanvas.cs" />
     <Compile Include="MenuType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMLs\XML.MenuTypeFactory.cs" />

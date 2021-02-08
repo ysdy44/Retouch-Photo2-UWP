@@ -68,8 +68,8 @@ namespace Retouch_Photo2.ViewModels
             this.LayerName = string.Empty;
             this.Opacity = 1.0f;
             this.BlendMode = null;
-            this.SetVisibility(Visibility.Collapsed);
-            this.SetTagType(TagType.None);
+            this.visibility = Visibility.Collapsed;
+            this.TagType = TagType.None;
 
             //////////////////////////
 
@@ -119,8 +119,8 @@ namespace Retouch_Photo2.ViewModels
             this.LayerName = layer.Name;
             this.Opacity = layer.Opacity;
             this.BlendMode = layer.BlendMode;
-            this.SetVisibility(layer.Visibility);
-            this.SetTagType(layer.TagType);
+            this.visibility = layer.Visibility;
+            this.TagType = layer.TagType;
 
             //////////////////////////
 
@@ -172,8 +172,8 @@ namespace Retouch_Photo2.ViewModels
             this.LayerType = outermostLayer == null ? LayerType.None : outermostLayer.Type;
             this.Opacity = outermostLayer == null ? 1.0f : outermostLayer.Opacity;
             this.BlendMode = outermostLayer?.BlendMode;
-            this.SetVisibility(outermostLayer == null ? Visibility.Visible : outermostLayer.Visibility);
-            this.SetTagType(outermostLayer == null ? TagType.None : outermostLayer.TagType);
+            this.visibility = outermostLayer == null ? Visibility.Visible : outermostLayer.Visibility;
+            this.TagType = outermostLayer == null ? TagType.None : outermostLayer.TagType;
 
             //////////////////////////
 

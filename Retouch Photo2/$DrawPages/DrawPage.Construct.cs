@@ -21,6 +21,27 @@ namespace Retouch_Photo2
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
+            this.DocumentButton.Content = resource.GetString("$DrawPage_Document");
+            this.DocumentUnSaveButton.Content = resource.GetString("$DrawPage_DocumentUnSave");
+            {
+                this.ExportToolTip.Content =
+                this.ExportButton.Text = resource.GetString("$DrawPage_Export");
+                this.UndoToolTip.Content =
+                this.UndoButton.Text = resource.GetString("$DrawPage_Undo");
+                //this.RedoToolTip.Content = resourceLoader.GetString("$DrawPage_Redo");
+                //this.RedoButton.Text =
+                this.SetupToolTip.Content =
+                this.SetupButton.Text = resource.GetString("$DrawPage_Setup");
+                this.SnapToolTip.Content =
+                this.SnapButton.Text = resource.GetString("$DrawPage_Snap");
+                this.RulerToolTip.Content =
+                this.RulerButton.Text = resource.GetString("$DrawPage_Ruler");
+                this.FullScreenToolTip.Content =
+                this.FullScreenButton.Text = resource.GetString("$DrawPage_FullScreen");
+                this.TipButton.Text = resource.GetString("$DrawPage_Tip");
+            }
+
+
             this.DrawLayout.RightPhotosToolTip.Content = resource.GetString("$DrawPage_Gallery");
             this.DrawLayout.RightWidthToolTip.Content = resource.GetString("$DrawPage_Width");
 

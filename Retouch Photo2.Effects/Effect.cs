@@ -286,8 +286,8 @@ namespace Retouch_Photo2.Effects
                           TransformMatrix = Matrix3x2.CreateTranslation(effect.OuterShadow_Position),
                           Source = new Microsoft.Graphics.Canvas.Effects.OpacityEffect
                           {
-                              Opacity =effect.OuterShadow_Opacity,
-                              Source=new Microsoft.Graphics.Canvas.Effects.ShadowEffect
+                              Opacity = effect.OuterShadow_Opacity,
+                              Source = new Microsoft.Graphics.Canvas.Effects.ShadowEffect
                               {
                                    Source = image,
                                    BlurAmount = effect.OuterShadow_Radius,

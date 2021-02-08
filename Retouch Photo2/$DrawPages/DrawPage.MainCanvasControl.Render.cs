@@ -2,65 +2,19 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Tools.Models;
 using System;
 using System.Numerics;
 using Windows.Graphics.Imaging;
 using Windows.UI;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Controls
+namespace Retouch_Photo2
 {
     /// <summary> 
-    /// Represents a control that displays the canvas and elements on the screen.
+    /// Represents a page used to draw vector graphics.
     /// </summary>
-    public partial class MainCanvasControl : UserControl
+    public sealed partial class DrawPage : Page
     {
-        
-
-        #region DependencyProperty
-
-
-        /// <summary> Gets or sets <see cref = "MainCanvasControl" />'s accent color. </summary>
-        public Color AccentColor
-        {
-            get => (Color)base.GetValue(AccentColorProperty);
-            set => base.SetValue(AccentColorProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "MainCanvasControl.AccentColor" /> dependency property. </summary>
-        public static readonly DependencyProperty AccentColorProperty = DependencyProperty.Register(nameof(AccentColor), typeof(Color), typeof(MainCanvasControl), new PropertyMetadata(Colors.DodgerBlue, (sender, e) =>
-        {
-            MainCanvasControl control = (MainCanvasControl)sender;
-
-            if (e.NewValue is Color value)
-            {
-                control.ViewModel.AccentColor = value;
-                control.ViewModel.Invalidate();//Invalidate
-            }
-        }));
-
-
-        /// <summary> Gets or sets <see cref = "MainCanvasControl" />'s shadow color. </summary>
-        public Color ShadowColor
-        {
-            get => (Color)base.GetValue(ShadowColorProperty);
-            set => base.SetValue(ShadowColorProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "MainCanvasControl.ShadowColor" /> dependency property. </summary>
-        public static readonly DependencyProperty ShadowColorProperty = DependencyProperty.Register(nameof(ShadowColor), typeof(Color), typeof(MainCanvasControl), new PropertyMetadata(Colors.Black, (sender, e) =>
-        {
-            MainCanvasControl control = (MainCanvasControl)sender;
-
-            if (e.NewValue is Color value)
-            {
-                control.ViewModel.Invalidate();//Invalidate
-            }
-        }));
-
-
-        #endregion
-
 
         /// <summary>
         /// Render.
@@ -74,7 +28,12 @@ namespace Retouch_Photo2.Controls
 
         private void _drawRenderAndCrad(CanvasDrawingSession drawingSession)
         {
-            drawingSession.DrawCard(new ColorSourceEffect { Color = Colors.White }, this.ViewModel.CanvasTransformer, this.ShadowColor);
+            drawingSession.DrawCard(new ColorSourceEffect
+            {
+                Color = Colors.White 
+            }, 
+            this.ViewModel.CanvasTransformer, 
+            this.ShadowColor);
 
             ICanvasImage canvasImage = this.Render();
             if (canvasImage == null) return;
@@ -152,7 +111,7 @@ namespace Retouch_Photo2.Controls
                 using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
                 {
                     if (isClearWhite) drawingSession.Clear(Colors.White);
-                  
+
                     drawingSession.DrawImage(canvasImage);
                 }
                 return renderTarget;

@@ -29,7 +29,7 @@ namespace Retouch_Photo2
             BitmapSize size = this.ExportSizePicker.Size;
             int dpi = (int)this.DPIComboBox.DPI;
             bool isClearWhite = this.FileFormatComboBox.IsClearWhite;
-            CanvasRenderTarget renderTarget = this.MainCanvasControl.Render(size, dpi, isClearWhite);
+            CanvasRenderTarget renderTarget = this.Render(size, dpi, isClearWhite);
 
             //Export
             return await FileUtil.SaveCanvasBitmapFile
@@ -67,7 +67,7 @@ namespace Retouch_Photo2
             await Retouch_Photo2.XML.SaveProjectFile(zipFolder, project);
 
             //Save thumbnail file.
-            CanvasRenderTarget thumbnail = this.MainCanvasControl.Render(width, height);
+            CanvasRenderTarget thumbnail = this.Render(width, height);
             await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
             
             //Save layers file.

@@ -8,7 +8,7 @@
     xmlns:apiContractPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"        
-    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:elements="using:Retouch_Photo2.Elements" xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
     >
 
@@ -38,8 +38,10 @@
                     <VisualState.Setters>
 
                         <!--Body-->
-                        <Setter Target = "CenterBorder.(Grid.Row)" Value="0"/>
-                        <Setter Target = "CenterBorder.(Grid.RowSpan)" Value="2"/>
+                        <Setter Target = "_CanvasControl.(Grid.Row)" Value="0"/>
+                        <Setter Target = "_CanvasControl.(Grid.RowSpan)" Value="2"/>
+                        <Setter Target = "_ToolCanvasControl.(Grid.Row)" Value="0"/>
+                        <Setter Target = "_ToolCanvasControl.(Grid.RowSpan)" Value="2"/>
 
                         <!--Foot-->
                         <Setter Target = "RadiusAnimaPanel.Visibility" Value="Collapsed"/>
@@ -183,7 +185,8 @@
 
 
         <!--Body-->
-        <Border x:Name="CenterBorder" Grid.Column="1" Grid.Row="1"/>
+        <canvas:CanvasControl x:Name="_CanvasControl" Grid.Column="1" Grid.Row="1"/>
+        <canvas:CanvasControl x:Name="_ToolCanvasControl" Grid.Column="1" Grid.Row="1"/>
 
 
         <!--Touchbar-->

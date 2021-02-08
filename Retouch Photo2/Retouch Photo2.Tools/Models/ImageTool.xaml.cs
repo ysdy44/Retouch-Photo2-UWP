@@ -5,6 +5,7 @@
 // Complete:      ★★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -39,7 +40,8 @@ namespace Retouch_Photo2.Tools.Models
             CenterContent = new ImageIcon()
         };
         public FrameworkElement Page => this.ImagePage;
-        ImagePage ImagePage = new ImagePage();
+
+        readonly ImagePage ImagePage = new ImagePage();
 
 
         //@Construct

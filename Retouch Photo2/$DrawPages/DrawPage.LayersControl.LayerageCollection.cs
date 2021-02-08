@@ -4,14 +4,15 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-namespace Retouch_Photo2.Controls
+namespace Retouch_Photo2
 {
     /// <summary> 
-    /// Represents a control that arranges <see cref="LayerControl"/> vertically.
+    /// Represents a page used to draw vector graphics.
     /// </summary>
-    public partial class LayersControl : UserControl
+    public sealed partial class DrawPage : Page
     {
-        
+
+        //LayerageCollection
         private void ConstructLayerageCollection()
         {
             if (LayerageCollection.ItemClick == null)
@@ -19,7 +20,7 @@ namespace Retouch_Photo2.Controls
                 LayerageCollection.ItemClick += (layer) =>
                 {
                     Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
-                    
+
                     this.ItemClick(layerage);
                 };
             }
@@ -99,7 +100,7 @@ namespace Retouch_Photo2.Controls
                 {
                     Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
                     this.MethodViewModel.MethodSelectedNot(layerage);//Method
-                 };
+                };
             }
 
             if (LayerageCollection.DragItemsStarted == null)
@@ -156,7 +157,7 @@ namespace Retouch_Photo2.Controls
 
         private void ItemClick(Layerage selectedLayerage)
         {
-            ILayer selectedLayer = selectedLayerage.Self;
+            //ILayer selectedLayer = selectedLayerage.Self;
 
             //Is it independent of other layers?
             bool isfreedom = this.SettingViewModel.KeyCtrl | this.SettingViewModel.KeyShift;
@@ -164,15 +165,16 @@ namespace Retouch_Photo2.Controls
             //Is select successively?
             //bool isLinear = this.SettingViewModel.KeyShift;
 
-            if (isfreedom)                           
+            if (isfreedom)
                 this.MethodViewModel.MethodSelectedNot(selectedLayerage);//Method
-            
-           // else if (isLinear)       
-                //LayerageCollection.ShiftSelectCurrentLayer(this.ViewModel.LayerageCollection, selectedLayerage);
+
+            // else if (isLinear)       
+            //LayerageCollection.ShiftSelectCurrentLayer(this.ViewModel.LayerageCollection, selectedLayerage);
 
             else
                 this.MethodViewModel.MethodSelectedNew(selectedLayerage);//Method
         }
+
 
     }
 }

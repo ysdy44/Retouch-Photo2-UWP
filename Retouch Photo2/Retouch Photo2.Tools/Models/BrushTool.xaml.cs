@@ -43,7 +43,8 @@ namespace Retouch_Photo2.Tools.Models
             CenterContent = new BrushIcon()
         };
         public FrameworkElement Page => this.BrushPage;
-        BrushPage BrushPage = new BrushPage();
+
+        readonly BrushPage BrushPage = new BrushPage();
 
 
         //@Construct
@@ -219,7 +220,7 @@ namespace Retouch_Photo2.Tools.Models
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
         FillOrStroke FillOrStroke { get => this.SelectionViewModel.FillOrStroke; set => this.SelectionViewModel.FillOrStroke = value; }
 
-        
+
         //@Construct
         /// <summary>
         /// Initializes a BrushPage. 

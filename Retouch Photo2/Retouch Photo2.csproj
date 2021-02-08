@@ -101,23 +101,13 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="%24DrawPages\DrawPage.HeadBarControl.cs" />
+    <Compile Include="%24DrawPages\DrawPage.LayersControl.LayerageCollection.cs" />
+    <Compile Include="%24DrawPages\DrawPage.LayersControl.cs" />
+    <Compile Include="%24DrawPages\DrawPage.MainCanvasControl.Render.cs" />
+    <Compile Include="%24DrawPages\DrawPage.MainCanvasControl.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\HeadBarControl.xaml.cs">
-      <DependentUpon>HeadBarControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\LayersControl.Construct.cs" />
-    <Compile Include="Controls\LayersControl.xaml.cs">
-      <DependentUpon>LayersControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MainCanvasControl.Render.cs" />
-    <Compile Include="Controls\MainCanvasControl.xaml.cs">
-      <DependentUpon>MainCanvasControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MenusExpanderCanvas.cs" />
-    <Compile Include="Controls\ToolsControl.xaml.cs">
-      <DependentUpon>ToolsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="%24DrawPages\DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
@@ -241,6 +231,9 @@
     <Compile Include="Retouch Photo2.Tools\MoveTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\NodeTool.Method.cs" />
     <Compile Include="Retouch Photo2.Tools\ToolBase.cs" />
+    <Compile Include="Retouch Photo2.Tools\ToolsControl.xaml.cs">
+      <DependentUpon>ToolsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
     <Compile Include="%24SettingPages\SettingPage.Construct.cs" />
     <Compile Include="XMLs\XML.Bitmap.cs" />
@@ -452,22 +445,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\HeadBarControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\LayersControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\MainCanvasControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ToolsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="%24DrawPages\DrawPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -725,6 +702,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Tools\Models\ViewTool.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Tools\ToolsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
