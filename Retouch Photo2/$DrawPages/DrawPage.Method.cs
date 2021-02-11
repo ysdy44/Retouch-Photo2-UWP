@@ -62,7 +62,7 @@ namespace Retouch_Photo2
                 Name = name,
                 Width = width,
                 Height = height,
-                Layerages = this.ViewModel.LayerageCollection.RootLayerages
+                Layerages = LayerageCollection.Layerage.Children
             };
             await Retouch_Photo2.XML.SaveProjectFile(zipFolder, project);
 
@@ -71,7 +71,7 @@ namespace Retouch_Photo2
             await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
             
             //Save layers file.
-            IEnumerable<Layerage> savedLayerages = LayerageCollection.GetUnUestingLayerages(this.ViewModel.LayerageCollection.RootLayerages);
+            IEnumerable<Layerage> savedLayerages = LayerageCollection.GetUnUestingLayerages(LayerageCollection.Layerage);
             IEnumerable<ILayer> savedLayers = from layer in LayerBase.Instances where savedLayerages.Any(p => layer.Equals(p)) select layer;
             await XML.SaveLayersFile(zipFolder, savedLayers);
 
@@ -83,8 +83,9 @@ namespace Retouch_Photo2
             //Move photo file.
             foreach (Photo photo in savedPhotos)
             {
+                //@Release: case Debug
                 //await photo.MoveFile(zipFolder);
-                //@Release
+                //@Release: case Release
                 {
                     //Move photo file.
                     StorageFile item = await StorageFile.GetFileFromPathAsync(photo.ImageFilePath);
@@ -117,8 +118,8 @@ namespace Retouch_Photo2
             //Clear
             this.ViewModel.Historys.Clear();
             this.SelectionViewModel.SetModeNone();
-            this.ViewModel.LayerageCollection.RootLayerages.Clear();
-            this.ViewModel.LayerageCollection.RootControls.Clear();
+            LayerageCollection.Layerage.Children.Clear();
+            LayerageCollection.StackPanel.Children.Clear();
         }
     }
 }

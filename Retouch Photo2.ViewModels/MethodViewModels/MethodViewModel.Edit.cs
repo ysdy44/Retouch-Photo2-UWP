@@ -44,9 +44,9 @@ namespace Retouch_Photo2.ViewModels
 
             if (isUndo)
             {
-                this.SetMode(this.LayerageCollection);//Selection          
-                LayerageCollection.ArrangeLayers(this.LayerageCollection);
-                LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
+                this.SetMode();//Selection          
+                LayerageCollection.ArrangeLayers();
+                LayerageCollection.ArrangeLayersBackground();
 
                 this.Invalidate();//Invalidate
             }
@@ -54,24 +54,24 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodEditCut()
         {
-            this.Clipboard.SetMode(this.CanvasDevice, this.LayerageCollection);//Clipboard
+            this.Clipboard.SetMode(this.CanvasDevice);//Clipboard
             this.ClipboardEnable = this.Clipboard.CanPaste;//PasteButton
 
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Cut layers", this.LayerageCollection);
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Cut layers");
             this.HistoryPush(history);
 
-            LayerageCollection.RemoveAllSelected(this.LayerageCollection);//Remove
+            LayerageCollection.RemoveAllSelected();//Remove
 
-            this.SetMode(this.LayerageCollection);//Selection
-            LayerageCollection.ArrangeLayers(this.LayerageCollection);
-            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
+            this.SetMode();//Selection
+            LayerageCollection.ArrangeLayers();
+            LayerageCollection.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
 
         public void MethodEditDuplicate()
         {
-            this.Clipboard.SetMode(this.CanvasDevice, this.LayerageCollection);//Clipboard
+            this.Clipboard.SetMode(this.CanvasDevice);//Clipboard
             this.ClipboardEnable = this.Clipboard.CanPaste;//PasteButton
 
             //Clipboard
@@ -81,36 +81,36 @@ namespace Retouch_Photo2.ViewModels
                 case ListViewSelectionMode.Single:
                     {
                         //History
-                        LayeragesArrangeHistory history = new LayeragesArrangeHistory("Duplicate layer", this.LayerageCollection);
+                        LayeragesArrangeHistory history = new LayeragesArrangeHistory("Duplicate layer");
                         this.HistoryPush(history);
 
                         Layerage layerage = this.Clipboard.Layerage;
                         Layerage layerageClone = LayerageCollection.PasteLayerage(this.CanvasDevice, layerage);
-                        LayerageCollection.Mezzanine(this.LayerageCollection, layerageClone);
+                        LayerageCollection.Mezzanine(layerageClone);
                     }
                     break;
                 case ListViewSelectionMode.Multiple:
                     {
                         //History
-                        LayeragesArrangeHistory history = new LayeragesArrangeHistory("Duplicate layers", this.LayerageCollection);
+                        LayeragesArrangeHistory history = new LayeragesArrangeHistory("Duplicate layers");
                         this.HistoryPush(history);
 
                         IEnumerable<Layerage> layerages = this.Clipboard.Layerages;
                         IEnumerable<Layerage> layerageClones = LayerageCollection.PasteLayerages(this.CanvasDevice, layerages);
-                        LayerageCollection.MezzanineRange(this.LayerageCollection, layerageClones);
+                        LayerageCollection.MezzanineRange(layerageClones);
                     }
                     break;
             }
 
-            LayerageCollection.ArrangeLayers(this.LayerageCollection);
-            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
-            this.SetMode(this.LayerageCollection);
+            LayerageCollection.ArrangeLayers();
+            LayerageCollection.ArrangeLayersBackground();
+            this.SetMode();
             this.Invalidate();//Invalidate                          
         }
 
         public void MethodEditCopy()
         {
-            this.Clipboard.SetMode(this.CanvasDevice, this.LayerageCollection);//Clipboard
+            this.Clipboard.SetMode(this.CanvasDevice);//Clipboard
             this.ClipboardEnable = this.Clipboard.CanPaste;//PasteButton
         }
         
@@ -123,31 +123,31 @@ namespace Retouch_Photo2.ViewModels
                 case ListViewSelectionMode.Single:
                     {
                         //History
-                        LayeragesArrangeHistory history = new LayeragesArrangeHistory("Paste layers", this.LayerageCollection);
+                        LayeragesArrangeHistory history = new LayeragesArrangeHistory("Paste layers");
                         this.HistoryPush(history);
 
                         Layerage layerage = this.Clipboard.Layerage;
                         Layerage layerageClone = LayerageCollection.PasteLayerage(this.CanvasDevice, layerage);
-                        LayerageCollection.Mezzanine(this.LayerageCollection, layerageClone);
+                        LayerageCollection.Mezzanine(layerageClone);
                     }
                     break;
                 case ListViewSelectionMode.Multiple:
                     {
                         //History
-                        LayeragesArrangeHistory history = new LayeragesArrangeHistory("Paste layers", this.LayerageCollection);
+                        LayeragesArrangeHistory history = new LayeragesArrangeHistory("Paste layers");
                         this.HistoryPush(history);
 
                         IEnumerable<Layerage> layerages = this.Clipboard.Layerages;
                         IEnumerable<Layerage> layerageClones = LayerageCollection.PasteLayerages(this.CanvasDevice, layerages);
-                        LayerageCollection.MezzanineRange(this.LayerageCollection, layerageClones);
+                        LayerageCollection.MezzanineRange(layerageClones);
                     }
                     break;
             }
 
-            this.SetMode(this.LayerageCollection);//Selection
+            this.SetMode();//Selection
 
-            LayerageCollection.ArrangeLayers(this.LayerageCollection);
-            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
+            LayerageCollection.ArrangeLayers();
+            LayerageCollection.ArrangeLayersBackground();
 
             this.Invalidate();//Invalidate        
         }
@@ -155,14 +155,14 @@ namespace Retouch_Photo2.ViewModels
         public void MethodEditClear()
         {
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Clear layers", this.LayerageCollection);
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Clear layers");
             this.HistoryPush(history);
 
-            LayerageCollection.RemoveAllSelected(this.LayerageCollection);//Remove
+            LayerageCollection.RemoveAllSelected();//Remove
 
-            this.SetMode(this.LayerageCollection);//Selection
-            LayerageCollection.ArrangeLayers(this.LayerageCollection);
-            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
+            this.SetMode();//Selection
+            LayerageCollection.ArrangeLayers();
+            LayerageCollection.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
 
@@ -175,9 +175,9 @@ namespace Retouch_Photo2.ViewModels
             LayersPropertyHistory history = new LayersPropertyHistory("Set is selected");
 
             //Selection
-            foreach (Layerage layerage in this.LayerageCollection.RootLayerages)
+            foreach (Layerage child in LayerageCollection.Layerage.Children)
             {
-                ILayer layer = layerage.Self;
+                ILayer layer = child.Self;
 
                 //History
                 var previous = layer.IsSelected;
@@ -195,9 +195,9 @@ namespace Retouch_Photo2.ViewModels
             //History
             this.HistoryPush(history);
 
-            this.SetMode(this.LayerageCollection);//Selection
-            LayerageCollection.ArrangeLayers(this.LayerageCollection);
-            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
+            this.SetMode();//Selection
+            LayerageCollection.ArrangeLayers();
+            LayerageCollection.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
         
@@ -211,9 +211,9 @@ namespace Retouch_Photo2.ViewModels
             LayersPropertyHistory history = new LayersPropertyHistory("Set is selected");
 
             //Selection
-            foreach (Layerage layerage in this.LayerageCollection.RootLayerages)
+            foreach (Layerage child in LayerageCollection.Layerage.Children)
             {
-                ILayer layer = layerage.Self;
+                ILayer layer = child.Self;
 
                 //History
                 var previous = layer.IsSelected;
@@ -228,9 +228,9 @@ namespace Retouch_Photo2.ViewModels
             //History
             this.HistoryPush(history);
 
-            this.SetMode(this.LayerageCollection);//Selection
-            LayerageCollection.ArrangeLayers(this.LayerageCollection);
-            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
+            this.SetMode();//Selection
+            LayerageCollection.ArrangeLayers();
+            LayerageCollection.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
         
@@ -240,46 +240,46 @@ namespace Retouch_Photo2.ViewModels
         public void MethodGroupGroup()
         {
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Group layers", this.LayerageCollection);
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Group layers");
             this.HistoryPush(history);
 
-            LayerageCollection.GroupAllSelectedLayers(this.CanvasDevice, this.LayerageCollection);
+            LayerageCollection.GroupAllSelectedLayers(this.CanvasDevice);
 
-            this.SetMode(this.LayerageCollection);
-            LayerageCollection.ArrangeLayers(this.LayerageCollection);
-            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
+            this.SetMode();
+            LayerageCollection.ArrangeLayers();
+            LayerageCollection.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
 
         public void MethodGroupUnGroup()
         {
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("UnGroup layers", this.LayerageCollection);
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory("UnGroup layers");
             this.HistoryPush(history);
 
-            LayerageCollection.UnGroupAllSelectedLayer(this.LayerageCollection);
+            LayerageCollection.UnGroupAllSelectedLayer();
 
-            this.SetMode(this.LayerageCollection);
-            LayerageCollection.ArrangeLayers(this.LayerageCollection);
-            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
+            this.SetMode();
+            LayerageCollection.ArrangeLayers();
+            LayerageCollection.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
 
         public void MethodGroupRelease()
         {
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Release layers", this.LayerageCollection);
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Release layers");
             this.HistoryPush(history);
 
             //Selection
             this.SetValue((layerage) =>
             {
-                LayerageCollection.ReleaseGroupLayer(this.LayerageCollection, layerage);
+                LayerageCollection.ReleaseGroupLayer(layerage);
             });
 
-            this.SetMode(this.LayerageCollection);
-            LayerageCollection.ArrangeLayers(this.LayerageCollection);
-            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
+            this.SetMode();
+            LayerageCollection.ArrangeLayers();
+            LayerageCollection.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
 

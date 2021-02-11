@@ -14,10 +14,6 @@ namespace Retouch_Photo2.Layers
     public partial class LayerControl : UserControl
     {
 
-        //@Content
-        /// <summary> Self </summary>
-        public LayerControl Self => this;
-
 
         //@Construct
         /// <summary>

@@ -102,7 +102,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="%24DrawPages\DrawPage.HeadBarControl.cs" />
-    <Compile Include="%24DrawPages\DrawPage.LayersControl.LayerageCollection.cs" />
+    <Compile Include="%24DrawPages\DrawPage.LayersControl.LayerManager.cs" />
     <Compile Include="%24DrawPages\DrawPage.LayersControl.cs" />
     <Compile Include="%24DrawPages\DrawPage.MainCanvasControl.Render.cs" />
     <Compile Include="%24DrawPages\DrawPage.MainCanvasControl.cs" />
@@ -230,7 +230,7 @@
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.Method.cs" />
     <Compile Include="Retouch Photo2.Tools\MoveTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\NodeTool.Method.cs" />
-    <Compile Include="Retouch Photo2.Tools\ToolBase.cs" />
+    <Compile Include="Retouch Photo2.Tools\ToolManager.cs" />
     <Compile Include="Retouch Photo2.Tools\ToolsControl.xaml.cs">
       <DependentUpon>ToolsControl.xaml</DependentUpon>
     </Compile>

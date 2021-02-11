@@ -1,26 +1,27 @@
 ﻿namespace Retouch_Photo2.Layers
 {
     /// <summary>
+    /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public partial class LayerageCollection
+    public static partial class LayerageCollection
     {
 
         /// <summary>
         /// Arrange all layers's background.
         /// </summary>
-        public static void ArrangeLayersBackground(LayerageCollection layerageCollection)
+        public static void ArrangeLayersBackground()
         {
-            foreach (Layerage layerage in layerageCollection.RootLayerages)
+            foreach (Layerage child in LayerageCollection.Layerage.Children)
             {
-                LayerageCollection._arrangeLayersBackgroundNullParents(layerage);
+                LayerageCollection._arrangeLayersBackgroundNullParents(child);
             }
         }
         //public static void ArrangeLayersBackgroundItemClick(Layerage layerage)
         //{
-        //    bool hasParentsSelected = LayerageCollection._getLayersParentsIsSelected(layerage);
+        //    bool hasParentsSelected = LayerManager._getLayersParentsIsSelected(layerage);
         //    if (hasParentsSelected) return;
-        //    else LayerageCollection._arrangeLayersBackgroundNullParents(layerage);
+        //    else LayerManager._arrangeLayersBackgroundNullParents(layerage);
         //}
 
         //Judge Recursive
@@ -95,7 +96,7 @@
         }
         private static bool _getLayersParentsIsSelected(Layerage layerage)
         {
-            if (layerage.Parents == null) return false;
+            if (layerage.Parents == LayerageCollection.Layerage) return false;
             if (layerage.Parents.Self.IsSelected == true) return true;
 
             return LayerageCollection._getLayersParentsIsSelected(layerage.Parents);

@@ -30,7 +30,6 @@ namespace Retouch_Photo2.Layers
                 LayerageCollection.ItemClick?.Invoke(layer);//Delegate
                 e.Handled = true;
             };
-
             this.RightTapped += (s, e) =>
             {
                 LayerageCollection.RightTapped?.Invoke(layer);//Delegate
@@ -55,16 +54,41 @@ namespace Retouch_Photo2.Layers
                 LayerageCollection.VisibilityChanged?.Invoke(layer);//Delegate
                 e.Handled = true;
             };
+            this.VisualButton.RightTapped += (s, e) =>
+            {
+                LayerageCollection.VisibilityChanged?.Invoke(layer);//Delegate
+                e.Handled = true;
+            };
+            this.VisualButton.Holding += (s, e) => e.Handled = true;
+            this.VisualButton.DoubleTapped += (s, e) => e.Handled = true;
+
+
             this.ExpanedButton.Tapped += (s, e) =>
             {
                 LayerageCollection.IsExpandChanged?.Invoke(layer);//Delegate   
                 e.Handled = true;
             };
+            this.ExpanedButton.RightTapped += (s, e) =>
+            {
+                LayerageCollection.IsExpandChanged?.Invoke(layer);//Delegate   
+                e.Handled = true;
+            };
+            this.ExpanedButton.Holding += (s, e) => e.Handled = true;
+            this.ExpanedButton.DoubleTapped += (s, e) => e.Handled = true;
+
+
             this.SelectedButton.Tapped += (s, e) =>
             {
                 LayerageCollection.IsSelectedChanged?.Invoke(layer);//Delegate   
                 e.Handled = true;
             };
+            this.SelectedButton.RightTapped += (s, e) =>
+            {
+                LayerageCollection.IsSelectedChanged?.Invoke(layer);//Delegate   
+                e.Handled = true;
+            };
+            this.SelectedButton.Holding += (s, e) => e.Handled = true;
+            this.SelectedButton.DoubleTapped += (s, e) => e.Handled = true;
         }
 
         private void ConstructManipulation(ILayer layer)

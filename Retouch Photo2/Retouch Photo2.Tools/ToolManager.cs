@@ -3,32 +3,33 @@
 // Difficult:         
 // Only:              
 // Complete:      ★★
+using Retouch_Photo2.Tools.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Tools.Models
+namespace Retouch_Photo2.Tools
 {
     /// <summary>
-    /// Base of <see cref="ITool"/>.
+    /// Manager of <see cref="ITool"/>.
     /// </summary>
-    public class ToolBase 
+    public static class ToolManager
     {
 
         //@Static  
         /// <summary> A border, contains a <see cref="ITool.Icon"/>. </summary>
-        public static Border IconBorder = new Border();
+        public static Border IconBorder { get; } = new Border();
         /// <summary> A border, contains a <see cref="ITool.Page"/>. </summary>
-        public static Border PageBorder = new Border();
+        public static Border PageBorder { get; } = new Border();
         /// <summary> A instance of <see cref="ITool"/>. </summary>
         public static ITool Instance
         {
-            get => ToolBase.instance;
+            get => ToolManager.instance;
             set
             {
                 if (value == null) return;
-                if (ToolBase.instance == value) return;
+                if (ToolManager.instance == value) return;
 
                 //The current tool becomes the active tool.
-                ITool oldTool = ToolBase.instance;
+                ITool oldTool = ToolManager.instance;
                 oldTool.OnNavigatedFrom();
                 if (oldTool.Button != null) oldTool.Button.IsSelected = false;
 
@@ -37,9 +38,9 @@ namespace Retouch_Photo2.Tools.Models
                 newTool.OnNavigatedTo();
                 if (newTool.Button != null) newTool.Button.IsSelected = true;
 
-                ToolBase.IconBorder.Child = value.Icon;
-                ToolBase.PageBorder.Child = value.Page;
-                ToolBase.instance = value;
+                ToolManager.IconBorder.Child = value.Icon;
+                ToolManager.PageBorder.Child = value.Page;
+                ToolManager.instance = value;
             }
         }
         private static ITool instance = new NoneTool();

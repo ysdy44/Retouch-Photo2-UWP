@@ -227,17 +227,17 @@ namespace Retouch_Photo2.Menus.Models
                 Layerage curveLayerage = layerages.Single();
 
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add expand stroke curve layer", this.ViewModel.LayerageCollection);
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add expand stroke curve layer");
                 this.ViewModel.HistoryPush(history);
 
                 //Mezzanine
-                LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, curveLayerage);
+                LayerageCollection.Mezzanine(curveLayerage);
 
                 //History
                 this.ViewModel.MethodSelectedNone();
 
-                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
-                LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayers();
+                LayerageCollection.ArrangeLayersBackground();
                 this.SelectionViewModel.SetModeSingle(curveLayerage);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             }
@@ -246,17 +246,17 @@ namespace Retouch_Photo2.Menus.Models
             if (layerages.Count > 1)
             {
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add expand stroke curve layers", this.ViewModel.LayerageCollection);
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add expand stroke curve layers");
                 this.ViewModel.HistoryPush(history);
 
                 //Mezzanine
-                LayerageCollection.MezzanineRange(this.ViewModel.LayerageCollection, layerages);
+                LayerageCollection.MezzanineRange(layerages);
 
                 //History
                 this.ViewModel.MethodSelectedNone();
 
-                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
-                LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayers();
+                LayerageCollection.ArrangeLayersBackground();
                 this.SelectionViewModel.SetModeMultiple(layerages);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             }
@@ -309,17 +309,17 @@ namespace Retouch_Photo2.Menus.Models
                     LayerBase.Instances.Add(curveLayer);
 
                     //History
-                    LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add combine curve layer", this.ViewModel.LayerageCollection);
+                    LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add combine curve layer");
                     this.ViewModel.HistoryPush(history);
 
                     //Mezzanine
-                    LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, curveLayerage);
+                    LayerageCollection.Mezzanine(curveLayerage);
 
                     //History
                     this.ViewModel.MethodSelectedNone();
 
-                    LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
-                    LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
+                    LayerageCollection.ArrangeLayers();
+                    LayerageCollection.ArrangeLayersBackground();
                     this.SelectionViewModel.SetModeSingle(curveLayerage);//Selection
                     this.ViewModel.Invalidate();//Invalidate
                 }

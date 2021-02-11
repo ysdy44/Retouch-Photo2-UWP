@@ -67,7 +67,7 @@ namespace Retouch_Photo2.Tools
                         element.Tapped += (s, e) =>
                         {
                             //Change tools group value.
-                            ToolBase.Instance = tool;
+                            ToolManager.Instance = tool;
                             this.SelectionViewModel.ToolType = tool.Type;
 
                             this.ViewModel.TipTextBegin(tool.Button.Title);
@@ -81,7 +81,7 @@ namespace Retouch_Photo2.Tools
                     ITool tool = value.FirstOrDefault();
                     if (tool != null)
                     {
-                        ToolBase.Instance = tool;
+                        ToolManager.Instance = tool;
                     }
                 }
 

@@ -24,9 +24,9 @@ namespace Retouch_Photo2.Layers.Models
         /// Gets a specific rended-layer.
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="children"> The children layerage. </param>
+        /// <param name="layerage"> The layerage. </param>
         /// <returns> The rendered layer. </returns>
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Layerage layerage)
         {
             CanvasCommandList command = new CanvasCommandList(resourceCreator);
             using (CanvasDrawingSession drawingSession = command.CreateDrawingSession())
@@ -46,12 +46,12 @@ namespace Retouch_Photo2.Layers.Models
 
                                 using (drawingSession.CreateLayer(canvasBrush, geometryCrop))
                                 {
-                                    this.GetGeometryRender(resourceCreator, drawingSession, children);
+                                    this.GetGeometryRender(resourceCreator, drawingSession, layerage);
                                 }
                             }
                             break;
                         default:
-                            this.GetGeometryRender(resourceCreator, drawingSession, children);
+                            this.GetGeometryRender(resourceCreator, drawingSession, layerage);
                             break;
                     }
 
@@ -72,14 +72,14 @@ namespace Retouch_Photo2.Layers.Models
 
                                 using (drawingSession.CreateLayer(canvasBrush, geometryCrop))
                                 {
-                                    this.GetGeometryRender(resourceCreator, drawingSession, children);
+                                    this.GetGeometryRender(resourceCreator, drawingSession, layerage);
                                 }
                             }
                             break;
                         default:
                             using (drawingSession.CreateLayer(1, geometryCrop))
                             {
-                                this.GetGeometryRender(resourceCreator, drawingSession, children);
+                                this.GetGeometryRender(resourceCreator, drawingSession, layerage);
                             }
                             break;
                     }
@@ -88,7 +88,7 @@ namespace Retouch_Photo2.Layers.Models
             }
             return command;
         }
-        private void GetGeometryRender(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, IList<Layerage> children)
+        private void GetGeometryRender(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, Layerage layerage)
         {
             CanvasGeometry geometry = this.CreateGeometry(resourceCreator);
             this.Geometry2 = geometry;
@@ -106,11 +106,11 @@ namespace Retouch_Photo2.Layers.Models
                 }
 
                 //CanvasActiveLayer
-                if (children.Count != 0)
+                if (layerage.Children.Count != 0)
                 {
                     using (drawingSession.CreateLayer(1, geometry))
                     {
-                        ICanvasImage childImage = LayerBase.Render(resourceCreator, children);
+                        ICanvasImage childImage = LayerBase.Render(resourceCreator, layerage);
 
                         if (childImage != null)
                         {
@@ -152,11 +152,11 @@ namespace Retouch_Photo2.Layers.Models
                 }
 
                 //CanvasActiveLayer
-                if (children.Count != 0)
+                if (layerage.Children.Count != 0)
                 {
                     using (drawingSession.CreateLayer(1, geometry))
                     {
-                        ICanvasImage childImage = LayerBase.Render(resourceCreator, children);
+                        ICanvasImage childImage = LayerBase.Render(resourceCreator, layerage);
 
                         if (childImage != null)
                         {
@@ -176,7 +176,12 @@ namespace Retouch_Photo2.Layers.Models
 
             }
         }
-        CanvasGeometry Geometry2 = null;
+        private CanvasGeometry Geometry2
+        {
+            get => this.geometry2;
+            set => this.geometry2 = value;
+        }
+        private CanvasGeometry geometry2 = null;
 
 
         /// <summary>

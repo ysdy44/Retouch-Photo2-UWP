@@ -65,11 +65,11 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Layerage layerage)
         {
-            if (children.Count == 0) return null;
+            if (layerage.Children.Count == 0) return null;
 
-            ICanvasImage childImage = LayerBase.Render(resourceCreator, children);
+            ICanvasImage childImage = LayerBase.Render(resourceCreator, layerage);
             if (childImage == null) return null;
 
             CanvasCommandList command = new CanvasCommandList(resourceCreator);

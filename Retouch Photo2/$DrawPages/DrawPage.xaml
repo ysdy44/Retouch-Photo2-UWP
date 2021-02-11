@@ -115,10 +115,7 @@
             <!--RightPane-->
             <elementDrawPages:DrawLayout.RightCenterPanel>
                 <ScrollViewer x:Name="LayersScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-                    <ItemsControl x:Name="LayersItemsControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                  ItemsSource="{x:Bind ViewModel.LayerageCollection.RootControls, Mode=OneTime}">
-                        <!--Layers-->
-                    </ItemsControl>
+                    <!--Layers-->
                 </ScrollViewer>
             </elementDrawPages:DrawLayout.RightCenterPanel>
             

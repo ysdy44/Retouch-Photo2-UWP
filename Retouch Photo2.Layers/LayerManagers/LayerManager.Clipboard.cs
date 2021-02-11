@@ -5,9 +5,10 @@ using System.Linq;
 namespace Retouch_Photo2.Layers
 {
     /// <summary>
+    /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public partial class LayerageCollection
+    public static partial class LayerageCollection
     {
         
         /// <summary>

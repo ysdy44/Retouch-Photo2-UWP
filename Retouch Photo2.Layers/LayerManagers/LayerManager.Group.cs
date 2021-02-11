@@ -7,33 +7,32 @@ using System.Linq;
 namespace Retouch_Photo2.Layers
 {
     /// <summary>
+    /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public partial class LayerageCollection
+    public static partial class LayerageCollection
     {
 
         /// <summary>
         /// Remove a layerage from a parents's children,
         /// and insert to parents's parents's children
         /// </summary>
-        /// <param name="layerageCollection"> The layerage-collection. </param>
         /// <param name="layerage"> The layerage. </param>
-        public static bool ReleaseGroupLayer(LayerageCollection layerageCollection, Layerage layerage)
+        public static bool ReleaseGroupLayer(Layerage layerage)
         {
             Layerage parents = layerage.Parents;
 
-            if (parents != null)
+            if (parents != LayerageCollection.Layerage)
             {
                 ILayer parentsLayer = parents.Self;
 
-                IList<Layerage> parentsParentsChildren = layerageCollection.GetParentsChildren(parents);
-                IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(layerage);
-                int parentsIndex = parentsChildren.IndexOf(parents);
+                Layerage parentsParents = LayerageCollection.GetParentsChildren(parents);
+                int parentsIndex = parents.Children.IndexOf(parents);
                 if (parentsIndex < 0) parentsIndex = 0;
-                if (parentsIndex > parentsParentsChildren.Count - 1) parentsIndex = parentsParentsChildren.Count - 1;
+                if (parentsIndex > parentsParents.Children.Count - 1) parentsIndex = parentsParents.Children.Count - 1;
 
-                parentsChildren.Remove(layerage);
-                parentsParentsChildren.Insert(parentsIndex, layerage);
+                parents.Children.Remove(layerage);
+                parentsParents.Children.Insert(parentsIndex, layerage);
 
                 return true;
             }
@@ -43,14 +42,14 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Un group all group layerage
         /// </summary>
-        public static void UnGroupAllSelectedLayer(LayerageCollection layerageCollection)
+        public static void UnGroupAllSelectedLayer()
         {
             //Layerages
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected(layerageCollection);
+            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected();
             Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayerages);
             if (outermost == null) return;
-            IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(outermost);
-            int index = parentsChildren.IndexOf(outermost);
+            Layerage parents = LayerageCollection.GetParentsChildren(outermost);
+            int index = parents.Children.IndexOf(outermost);
             if (index < 0) index = 0;
 
 
@@ -66,14 +65,14 @@ namespace Retouch_Photo2.Layers
                     ILayer layer = layerage.Self;
 
                     layer.IsSelected = true;
-                    parentsChildren.Insert(index, layerage);
+                    parents.Children.Insert(index, layerage);
                 }
                 groupLayerage.Children.Clear();
 
                 //Remove
                 {
-                    IList<Layerage> groupLayerageParentsChildren = layerageCollection.GetParentsChildren(groupLayerage);
-                    groupLayerageParentsChildren.Remove(groupLayerage);
+                    Layerage groupLayerageParents = LayerageCollection.GetParentsChildren(groupLayerage);
+                    groupLayerageParents.Children.Remove(groupLayerage);
                 }
 
             } while (selectedLayerages.Any(l => l.Self.Type == LayerType.Group) == false);
@@ -84,15 +83,14 @@ namespace Retouch_Photo2.Layers
         /// Group all selected layerages.
         /// </summary>     
         /// <param name="customDevice"> The custom-device. </param>
-        /// <param name="layerageCollection"> The layerage-collection. </param>
-        public static void GroupAllSelectedLayers(CanvasDevice customDevice, LayerageCollection layerageCollection)
+        public static void GroupAllSelectedLayers(CanvasDevice customDevice)
         {
             //Layerages
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected(layerageCollection);
+            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected();
             Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayerages);
             if (outermost == null) return;
-            IList<Layerage> parentsChildren = layerageCollection.GetParentsChildren(outermost);
-            int index = parentsChildren.IndexOf(outermost);
+            Layerage parents = LayerageCollection.GetParentsChildren(outermost);
+            int index = parents.Children.IndexOf(outermost);
             if (index < 0) index = 0;
 
 
@@ -113,15 +111,15 @@ namespace Retouch_Photo2.Layers
             {
                 ILayer layer = layerage.Self;
 
-                IList<Layerage> childParentsChildren = layerageCollection.GetParentsChildren(layerage);
-                childParentsChildren.Remove(layerage);
+                Layerage childParents = LayerageCollection.GetParentsChildren(layerage);
+                childParents.Children.Remove(layerage);
                 layer.IsSelected = false;
 
                 groupLayerage.Children.Add(layerage);
             }
 
             //Insert
-            parentsChildren.Insert(index, groupLayerage);
+            parents.Children.Insert(index, groupLayerage);
         }
 
 

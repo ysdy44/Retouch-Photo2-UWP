@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -65,7 +66,7 @@ namespace Retouch_Photo2
                 this.LoadingControl.IsActive = true;
 
                 int countHistorys = this.ViewModel.Historys.Count;
-                int countLayerages = this.ViewModel.LayerageCollection.RootLayerages.Count;
+                int countLayerages = LayerageCollection.Layerage.Children.Count;
 
                 if (countHistorys == 0 && countLayerages > 1)
                 {

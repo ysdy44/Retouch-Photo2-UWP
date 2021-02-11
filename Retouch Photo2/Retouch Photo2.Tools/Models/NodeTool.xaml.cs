@@ -398,17 +398,17 @@ namespace Retouch_Photo2.Tools.Models
                 if (removeLayerage.Count != 0)
                 {
                     //History
-                    LayeragesArrangeHistory history = new LayeragesArrangeHistory("Remove layers", this.ViewModel.LayerageCollection);
+                    LayeragesArrangeHistory history = new LayeragesArrangeHistory("Remove layers");
                     this.ViewModel.HistoryPush(history);
 
                     foreach (Layerage remove in removeLayerage)
                     {
-                        LayerageCollection.Remove(this.ViewModel.LayerageCollection, remove);
+                        LayerageCollection.Remove(remove);
                     }
 
                     //Selection
-                    this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
-                    LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
+                    this.SelectionViewModel.SetMode();//Selection
+                    LayerageCollection.ArrangeLayers();
                 }
 
                 this.ViewModel.Invalidate();//Invalidate

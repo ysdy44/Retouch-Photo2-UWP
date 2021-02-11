@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas.UI.Xaml;
+using Retouch_Photo2.Tools;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -99,7 +100,7 @@ namespace Retouch_Photo2
                     case InputDevice.Single:
                         {
                             //Tool
-                            ToolBase.Instance.Draw(args.DrawingSession);
+                            ToolManager.Instance.Draw(args.DrawingSession);
                         }
                         break;
                 }
@@ -138,7 +139,7 @@ namespace Retouch_Photo2
                 if (this._isSingleStarted)
                 {
                     //Tool
-                    ToolBase.Instance.Delta(this._singleStartingPoint, point);//Delta
+                    ToolManager.Instance.Delta(this._singleStartingPoint, point);//Delta
 
                     return;
                 }
@@ -150,7 +151,7 @@ namespace Retouch_Photo2
                     this._isSingleStarted = true;
 
                     //Tool
-                    ToolBase.Instance.Started(this._singleStartingPoint, point);//Started
+                    ToolManager.Instance.Started(this._singleStartingPoint, point);//Started
                 }
             };
             canvasOperator.Single_Complete += (point) =>
@@ -160,13 +161,13 @@ namespace Retouch_Photo2
                 if (this._isSingleStarted == false)
                 {
                     //Tool
-                    ToolBase.Instance.Clicke(this._singleStartingPoint);//Complete
+                    ToolManager.Instance.Clicke(this._singleStartingPoint);//Complete
                 }
                 else
                 {
                     //Tool
                     bool isOutNodeDistance = FanKit.Math.OutNodeDistance(this._singleStartingPoint, point);
-                    ToolBase.Instance.Complete(this._singleStartingPoint, point, isOutNodeDistance);//Complete
+                    ToolManager.Instance.Complete(this._singleStartingPoint, point, isOutNodeDistance);//Complete
                 }
 
                 this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible

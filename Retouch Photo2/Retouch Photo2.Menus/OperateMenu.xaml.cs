@@ -247,17 +247,17 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange", this.ViewModel.LayerageCollection);
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange");
                 this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
-                if (parentsChildren.Count < 2) return;
+                Layerage parents = LayerageCollection.GetParentsChildren(destination);
+                if (parents.Children.Count < 2) return;
 
-                parentsChildren.Remove(destination);
-                parentsChildren.Add(destination);
+                parents.Children.Remove(destination);
+                parents.Children.Add(destination);
 
-                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayers();
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -266,23 +266,23 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange", this.ViewModel.LayerageCollection);
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange");
                 this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
-                if (parentsChildren.Count < 2) return;
+                Layerage parents = LayerageCollection.GetParentsChildren(destination);
+                if (parents.Children.Count < 2) return;
 
-                int index = parentsChildren.IndexOf(destination);
+                int index = parents.Children.IndexOf(destination);
                 index++;
 
                 if (index < 0) index = 0;
-                if (index > parentsChildren.Count - 1) index = parentsChildren.Count - 1;
+                if (index > parents.Children.Count - 1) index = parents.Children.Count - 1;
 
-                parentsChildren.Remove(destination);
-                parentsChildren.Insert(index, destination);
+                parents.Children.Remove(destination);
+                parents.Children.Insert(index, destination);
 
-                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayers();
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -291,23 +291,23 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange", this.ViewModel.LayerageCollection);
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange");
                 this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
-                if (parentsChildren.Count < 2) return;
+                Layerage parents = LayerageCollection.GetParentsChildren(destination);
+                if (parents.Children.Count < 2) return;
 
-                int index = parentsChildren.IndexOf(destination);
+                int index = parents.Children.IndexOf(destination);
                 index--;
 
                 if (index < 0) index = 0;
-                if (index > parentsChildren.Count - 1) index = parentsChildren.Count - 1;
+                if (index > parents.Children.Count - 1) index = parents.Children.Count - 1;
 
-                parentsChildren.Remove(destination);
-                parentsChildren.Insert(index, destination);
+                parents.Children.Remove(destination);
+                parents.Children.Insert(index, destination);
 
-                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayers();
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -316,17 +316,17 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange", this.ViewModel.LayerageCollection);
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange");
                 this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(destination);
-                if (parentsChildren.Count < 2) return;
+                Layerage parents = LayerageCollection.GetParentsChildren(destination);
+                if (parents.Children.Count < 2) return;
 
-                parentsChildren.Remove(destination);
-                parentsChildren.Insert(0, destination);
+                parents.Children.Remove(destination);
+                parents.Children.Insert(0, destination);
 
-                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
+                LayerageCollection.ArrangeLayers();
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -395,7 +395,7 @@ namespace Retouch_Photo2.Menus.Models
                     new Vector2(distance, 0) :
                     new Vector2(0, distance);
 
-                this.SelectionViewModel.SetLayerageValueWithChildren(layerage, (layerage2) =>
+                layerage.SetValueWithChildren((layerage2) =>
                 {
                     ILayer layer = layerage2.Self;
 
@@ -481,7 +481,7 @@ namespace Retouch_Photo2.Menus.Models
                     new Vector2(0, distance);
 
                 //Selection
-                this.SelectionViewModel.SetLayerageValueWithChildren(layerage, (layerage2) =>
+                layerage.SetValueWithChildren((layerage2) =>
                 {
                     ILayer layer = layerage2.Self;
 

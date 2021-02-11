@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Layers.Models
     public abstract class PatternLayer : LayerBase
     {
 
-        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
+        public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Layerage layerage)
         {
             Transformer transformer = base.Transform.Transformer;
 

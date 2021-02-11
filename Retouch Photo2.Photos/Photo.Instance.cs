@@ -1,5 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,8 +18,9 @@ namespace Retouch_Photo2.Photos
 
         //@Static
         /// <summary> Collection <see cref="Photo"/>s instances. </summary>
-        public static ObservableCollection<Photo> Instances = new ObservableCollection<Photo>();
-        
+        public readonly static ObservableCollection<Photo> Instances = new ObservableCollection<Photo>();
+
+
         /// <summary>
         /// Check duplicate <see cref="Photo"/>.
         /// If it exists, replace it, or insert it into the <see cref="Photo"/>s.
@@ -60,7 +62,7 @@ namespace Retouch_Photo2.Photos
             StorageFile item = await StorageFile.GetFileFromPathAsync(this.ImageFilePath);
             await item.CopyAsync(zipFolder);
         }
-        
+
 
         /// <summary>
         /// Construct the <see cref="Photo.Source"/> by self.

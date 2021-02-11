@@ -23,22 +23,21 @@ namespace Retouch_Photo2.Historys
         /// Initializes a LayeragesArrangeHistory.
         /// </summary>
         /// <param name="title"> The title. </param>  
-        /// <param name="layerageCollection"> The layerage-collection. </param>  
-        public LayeragesArrangeHistory(string title, LayerageCollection layerageCollection)
+        public LayeragesArrangeHistory(string title)
         {
             base.Title = title;
 
-            foreach (Layerage  layerage in layerageCollection.RootLayerages)
+            foreach (Layerage  layerage in LayerageCollection.Layerage.Children)
             {
                 this.Layerages.Add(layerage.Clone());
             }
 
             this.UndoAction = () =>
             {
-                layerageCollection.RootLayerages.Clear();
+                LayerageCollection.Layerage.Children.Clear();
                 foreach (Layerage layerage in this.Layerages)
                 {
-                    layerageCollection.RootLayerages.Add(layerage.Clone());
+                    LayerageCollection.Layerage.Children.Add(layerage.Clone());
                 }
             };
         }

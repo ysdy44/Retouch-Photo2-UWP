@@ -29,9 +29,9 @@ namespace Retouch_Photo2.Layers
         /// Gets a specific actual rended-layer (with icon render).
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="children"> The children layerage. </param>
+        /// <param name="layerage"> The layerage. </param>
         /// <returns> The rendered layer. </returns>
-        public ICanvasImage GetActualRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children)
+        public ICanvasImage GetActualRender(ICanvasResourceCreator resourceCreator, Layerage layerage)
         {
             if (this.Render2 == null || this.IsRefactoringRender)
             {
@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Layers
 
                 {
                     //Layer
-                    ICanvasImage currentImage = this.GetRender(resourceCreator, children);
+                    ICanvasImage currentImage = this.GetRender(resourceCreator, layerage);
 
                     //Effect
                     currentImage = Effect.Render(this.Effect, currentImage);
@@ -80,9 +80,9 @@ namespace Retouch_Photo2.Layers
         /// Gets a specific rended-layer.
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="children"> The children layerage. </param>
+        /// <param name="layerage"> The layerage. </param>
         /// <returns> The rendered layer. </returns>
-        public abstract ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children);
+        public abstract ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Layerage layerage);
                 
 
         /// <summary>
@@ -144,15 +144,15 @@ namespace Retouch_Photo2.Layers
         /// Render layers.
         /// </summary>  
         /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="layerages"> The layerage. </param>
+        /// <param name="layerage"> The layerage. </param>
         /// <returns> The render image. </returns>
-        public static ICanvasImage Render(ICanvasResourceCreator resourceCreator, IList<Layerage> layerages)
+        public static ICanvasImage Render(ICanvasResourceCreator resourceCreator, Layerage layerage)
         {
             ICanvasImage previousImage = null;
 
-            for (int i = layerages.Count - 1; i >= 0; i--)
+            for (int i = layerage.Children.Count - 1; i >= 0; i--)
             {
-                Layerage currentLayerage = layerages[i];
+                Layerage currentLayerage = layerage.Children[i];
                 ILayer currentLayer = currentLayerage.Self;
 
                 if (currentLayer.Visibility == Visibility.Collapsed) continue;
@@ -160,7 +160,7 @@ namespace Retouch_Photo2.Layers
 
 
                 //Layer
-                ICanvasImage currentImage = currentLayer.GetActualRender(resourceCreator, currentLayerage.Children);
+                ICanvasImage currentImage = currentLayer.GetActualRender(resourceCreator, currentLayerage);
                 if (currentImage == null) continue;
                 if (previousImage == null)
                 {

@@ -7,6 +7,7 @@ using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Retouch_Photo2.ViewModels
@@ -33,21 +34,21 @@ namespace Retouch_Photo2.ViewModels
             this.CanvasTransformer.Height = project.Height;
             
             //Layers
-            this.LayerageCollection.RootLayerages.Clear();
+            LayerageCollection.Layerage.Children.Clear();
             if (project.Layerages != null)
             {
                 foreach (Layerage layerage in project.Layerages)
                 {
                     if (layerage != null)
                     {
-                        this.LayerageCollection.RootLayerages.Add(layerage);
+                        LayerageCollection.Layerage.Children.Add(layerage);
                     }
                 }
             }
 
             //Arrange
-            LayerageCollection.ArrangeLayers(this.LayerageCollection);
-            LayerageCollection.ArrangeLayersBackground(this.LayerageCollection);
+            LayerageCollection.ArrangeLayers();
+            LayerageCollection.ArrangeLayersBackground();
         }
 
 
@@ -55,10 +56,6 @@ namespace Retouch_Photo2.ViewModels
         public string Name = null;
         /// <summary> Update the <see cref="IProjectViewItem.RefreshImageSource"/> by <see cref="ViewModel.Name"/>.  </summary>
         public bool IsUpdateThumbnailByName = false;
-
-
-        /// <summary> Gets or sets the layerage-collection. </summary>
-        public LayerageCollection LayerageCollection { get; } = new LayerageCollection();
 
 
         /// <summary> Gets or sets the canvas-device . </summary>

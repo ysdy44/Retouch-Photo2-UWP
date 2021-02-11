@@ -70,13 +70,13 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.CursorMode = CursorMode.None;
 
-            if (ToolBase.TransformerTool.Started(startingPoint, point))//TransformerTool
+            if (ToolManager.TransformerTool.Started(startingPoint, point))//TransformerTool
             {
                 this.CursorMode = CursorMode.Transformer;
                 return;
             }
 
-            if (ToolBase.MoveTool.Started(startingPoint, point))//MoveTool
+            if (ToolManager.MoveTool.Started(startingPoint, point))//MoveTool
             {
                 this.CursorMode = CursorMode.Move;
                 return;
@@ -97,10 +97,10 @@ namespace Retouch_Photo2.Tools.Models
             switch (this.CursorMode)
             {
                 case CursorMode.Transformer:
-                    ToolBase.TransformerTool.Delta(startingPoint, point);//TransformerTool
+                    ToolManager.TransformerTool.Delta(startingPoint, point);//TransformerTool
                     break;
                 case CursorMode.Move:
-                    ToolBase.MoveTool.Delta(startingPoint, point);//MoveTool
+                    ToolManager.MoveTool.Delta(startingPoint, point);//MoveTool
                     break;
                 case CursorMode.BoxChoose:
                     {
@@ -122,10 +122,10 @@ namespace Retouch_Photo2.Tools.Models
             switch (cursorMode)
             {
                 case CursorMode.Transformer:
-                    ToolBase.TransformerTool.Complete(startingPoint, point); //TransformerTool
+                    ToolManager.TransformerTool.Complete(startingPoint, point); //TransformerTool
                     break;
                 case CursorMode.Move:
-                    ToolBase.MoveTool.Complete(startingPoint, point);//MoveTool
+                    ToolManager.MoveTool.Complete(startingPoint, point);//MoveTool
                     break;
                 case CursorMode.BoxChoose:
                     {
@@ -133,12 +133,12 @@ namespace Retouch_Photo2.Tools.Models
                         {
                             //BoxChoose 
                             Layerage layerage = this.SelectionViewModel.GetFirstSelectedLayerage();
-                            IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(layerage);
-                            this.BoxChoose(parentsChildren);
+                            Layerage parents = LayerageCollection.GetParentsChildren(layerage);
+                            this.BoxChoose(parents.Children);
 
-                            this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
+                            this.SelectionViewModel.SetMode();//Selection
 
-                            LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
+                            LayerageCollection.ArrangeLayersBackground();
 
                             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                         }
@@ -146,7 +146,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
         }
-        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
+        public void Clicke(Vector2 point) => ToolManager.MoveTool.Clicke(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)
@@ -162,7 +162,7 @@ namespace Retouch_Photo2.Tools.Models
                     ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
                     drawingSession.DrawLayerBound(layer2, matrix, this.ViewModel.AccentColor);
 
-                    ToolBase.TransformerTool.Draw(drawingSession); //TransformerTool
+                    ToolManager.TransformerTool.Draw(drawingSession); //TransformerTool
                     break;
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage layerage in this.ViewModel.SelectionLayerages)
@@ -171,7 +171,7 @@ namespace Retouch_Photo2.Tools.Models
                         drawingSession.DrawLayerBound(layer, matrix, this.ViewModel.AccentColor);
                     }
 
-                    ToolBase.TransformerTool.Draw(drawingSession); //TransformerTool
+                    ToolManager.TransformerTool.Draw(drawingSession); //TransformerTool
                     break;
             }
 
@@ -180,10 +180,10 @@ namespace Retouch_Photo2.Tools.Models
             {
                 case CursorMode.None:
                 case CursorMode.Transformer:
-                    ToolBase.TransformerTool.Draw(drawingSession);//TransformerTool
+                    ToolManager.TransformerTool.Draw(drawingSession);//TransformerTool
                     break;
                 case CursorMode.Move:
-                    ToolBase.MoveTool.Draw(drawingSession);//MoveTool
+                    ToolManager.MoveTool.Draw(drawingSession);//MoveTool
                     break;
                 case CursorMode.BoxChoose:
                     CanvasGeometry geometry = this.BoxRect.ToRectangle(this.ViewModel.CanvasDevice, matrix);

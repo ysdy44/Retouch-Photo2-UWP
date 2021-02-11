@@ -3,9 +3,10 @@
 namespace Retouch_Photo2.Layers
 {
     /// <summary>
+    /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public partial class LayerageCollection
+    public static partial class LayerageCollection
     {
 
         /// <summary>
@@ -13,17 +14,17 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <param name="layer"> The layer. </param>
         /// <returns> The found layerage. </returns>
-        public Layerage FindFirstLayerage(ILayer layer) => this._findFirstLayerage(this.RootLayerages, layer);
-        private Layerage _findFirstLayerage(IEnumerable<Layerage> layerages, ILayer layer)
+        public static Layerage FindFirstLayerage(ILayer layer) => LayerageCollection._findFirstLayerage(LayerageCollection.Layerage, layer);
+        private static Layerage _findFirstLayerage(Layerage layerage, ILayer layer)
         {
-            foreach (Layerage child in layerages)
+            foreach (Layerage child in layerage.Children)
             {
                 if (child.Id == layer.Id) return child;
 
 
                 if (child.Children.Count != 0)
                 {
-                    Layerage find = this._findFirstLayerage(child.Children, layer);
+                    Layerage find = LayerageCollection._findFirstLayerage(child, layer);
                     if (find != null) return find;
                 }
             }

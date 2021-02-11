@@ -160,7 +160,7 @@ namespace Retouch_Photo2.Layers
 
                
 
-        //LayerageCollection
+        //LayerManager
         /// <summary> Gets or sets the depth. </summary>
         public int Depth
         {

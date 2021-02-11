@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Tools
 
         public void Started(Func<CanvasDevice, Transformer, ILayer> createLayer, Vector2 startingPoint, Vector2 point)
         {
-            if (ToolBase.TransformerTool.Started(startingPoint, point)) return;//TransformerTool
+            if (ToolManager.TransformerTool.Started(startingPoint, point)) return;//TransformerTool
 
             //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
@@ -51,7 +51,7 @@ namespace Retouch_Photo2.Tools
             if (this.IsSnap) this.ViewModel.VectorBorderSnapInitiate(this.SelectionViewModel.GetFirstSelectedLayerage());
 
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer", this.ViewModel.LayerageCollection);
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer");
             this.ViewModel.HistoryPush(history);
 
             //Selection
@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Tools
 
             //Mezzanine
             this.MezzanineLayerage = layerage;
-            LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, this.MezzanineLayerage);
+            LayerageCollection.Mezzanine(this.MezzanineLayerage);
 
             //History
             this.ViewModel.MethodSelectedNone();
@@ -105,7 +105,7 @@ namespace Retouch_Photo2.Tools
                 this.ViewModel.Invalidate();//Invalidate
             }
 
-            if (ToolBase.TransformerTool.Delta(startingPoint, point)) return;//TransformerTool
+            if (ToolManager.TransformerTool.Delta(startingPoint, point)) return;//TransformerTool
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
@@ -138,17 +138,17 @@ namespace Retouch_Photo2.Tools
 
                     //Selection
                     this.SelectionViewModel.SetModeSingle(this.MezzanineLayerage);
-                    LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
-                    LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
+                    LayerageCollection.ArrangeLayers();
+                    LayerageCollection.ArrangeLayersBackground();
                 }
                 else
                 {
-                    LayerageCollection.RemoveMezzanine(this.ViewModel.LayerageCollection, this.MezzanineLayerage);//Mezzanine
+                    LayerageCollection.RemoveMezzanine(this.MezzanineLayerage);//Mezzanine
 
                     //Selection
                     this.SelectionViewModel.SetModeNone();
-                    LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
-                    LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
+                    LayerageCollection.ArrangeLayers();
+                    LayerageCollection.ArrangeLayersBackground();
                 }
 
                 this.MezzanineLayerage = null;
@@ -156,7 +156,7 @@ namespace Retouch_Photo2.Tools
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             }
 
-            if (ToolBase.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool
+            if (ToolManager.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool
         }
 
 
@@ -173,7 +173,7 @@ namespace Retouch_Photo2.Tools
                     ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
                     drawingSession.DrawLayerBound(layer2, matrix, this.ViewModel.AccentColor);
 
-                    ToolBase.TransformerTool.Draw(drawingSession); //TransformerTool
+                    ToolManager.TransformerTool.Draw(drawingSession); //TransformerTool
                     break;
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage layerage in this.ViewModel.SelectionLayerages)
@@ -182,7 +182,7 @@ namespace Retouch_Photo2.Tools
                         drawingSession.DrawLayerBound(layer, matrix, this.ViewModel.AccentColor);
                     }
 
-                    ToolBase.TransformerTool.Draw(drawingSession); //TransformerTool
+                    ToolManager.TransformerTool.Draw(drawingSession); //TransformerTool
                     break;
                 case ListViewSelectionMode.Extended:
                     drawingSession.DrawBound(this.Transformer, matrix, this.ViewModel.AccentColor);

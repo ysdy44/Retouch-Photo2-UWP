@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Tools.Elements
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Convert to curves", this.ViewModel.LayerageCollection);
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Convert to curves");
                 this.ViewModel.HistoryPush(history);
 
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -65,15 +65,15 @@ namespace Retouch_Photo2.Tools.Elements
                     }
                 });
 
-                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
-                LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
+                LayerageCollection.ArrangeLayers();
+                LayerageCollection.ArrangeLayersBackground();
+                this.SelectionViewModel.SetMode();//Selection
 
                 //Change tools group value.
                 {
                     ITool tool = this.TipViewModel.Tools.First(t => t != null && t.Type == ToolType.Node);
 
-                    ToolBase.Instance = tool;
+                    ToolManager.Instance = tool;
                     this.SelectionViewModel.ToolType = ToolType.Node;
 
                     this.ViewModel.TipTextBegin(tool.Button.Title);
@@ -114,9 +114,9 @@ namespace Retouch_Photo2.Tools.Elements
         //Replace curveLayerage to layerage
         private void ReplaceLayerage(Layerage curveLayerage, Layerage layerage)
         {
-            IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(layerage);
-            int index = parentsChildren.IndexOf(layerage);
-            parentsChildren[index] = curveLayerage;
+            Layerage parents = LayerageCollection.GetParentsChildren(layerage);
+            int index = parents.Children.IndexOf(layerage);
+            parents.Children[index] = curveLayerage;
         }
 
 

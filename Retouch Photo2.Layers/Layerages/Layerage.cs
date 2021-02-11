@@ -3,9 +3,11 @@
 // Difficult:         ★★★
 // Only:              ★★★★
 // Complete:      ★★★
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FanKit.Transformers;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers
 {
@@ -24,10 +26,10 @@ namespace Retouch_Photo2.Layers
         /// <summary> Gets or sets the Id. </summary>
         public string Id { get; set; }
         /// <summary> Gets or sets the Parents. </summary>
-        public Layerage Parents { get; set; }
+        public Layerage Parents { get; internal set; } = LayerageCollection.Layerage;
         /// <summary> Gets or sets the Children. </summary>
-        public IList<Layerage> Children { get; set; } = new List<Layerage>();
-
+        public IList<Layerage> Children { get; internal set; } = new List<Layerage>();
+           
 
         /// <summary>
         /// Get own copy.
@@ -38,8 +40,6 @@ namespace Retouch_Photo2.Layers
             return new Layerage
             {
                 Id = this.Id,
-                //Bug! infinite loop! 
-                //Parents = this.Parents?.Clone(),
                 Children = (from child in this.Children select child.Clone()).ToList()
             };
         }
@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public void RefactoringParentsTransformer()
         {
-            if (this.Parents != null)
+            if (this.Parents != LayerageCollection.Layerage)
             {
                 ILayer layer = this.Parents.Self;
 
@@ -77,7 +77,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public void RefactoringParentsRender()
         {
-            if (this.Parents != null)
+            if (this.Parents != LayerageCollection.Layerage)
             {
                 ILayer layer = this.Parents.Self;
 
@@ -91,7 +91,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public void RefactoringParentsIconRender()
         {
-            if (this.Parents != null)
+            if (this.Parents != LayerageCollection.Layerage)
             {
                 ILayer layer = this.Parents.Self;
 

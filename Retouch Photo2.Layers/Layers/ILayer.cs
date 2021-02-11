@@ -138,17 +138,17 @@ namespace Retouch_Photo2.Layers
         /// Gets a specific actual rended-layer (with icon render).
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="children"> The children layerage. </param>
+        /// <param name="layerage"> The layerage. </param>
         /// <returns> The rendered layer. </returns>
-        ICanvasImage GetActualRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children);
+        ICanvasImage GetActualRender(ICanvasResourceCreator resourceCreator, Layerage layerage);
 
         /// <summary>
         /// Gets a specific rended-layer.
         /// </summary>
         /// <param name="resourceCreator"> The resource-creator. </param>
-        /// <param name="children"> The children layerage. </param>
+        /// <param name="layerage"> The layerage. </param>
         /// <returns> The rendered layer. </returns>
-        ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, IList<Layerage> children);
+        ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Layerage layerage);
 
 
         /// <summary>

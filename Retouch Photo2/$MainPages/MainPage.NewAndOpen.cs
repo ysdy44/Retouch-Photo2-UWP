@@ -128,7 +128,7 @@ namespace Retouch_Photo2
             }
 
             this.ViewModel.LoadFromProject(project);
-            this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
+            this.SelectionViewModel.SetMode();//Selection
 
 
             //Transition

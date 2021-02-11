@@ -81,7 +81,7 @@ namespace Retouch_Photo2.ViewModels
 
 
             //Parents
-            if (firstLayer.Parents != null)
+            if (firstLayer.Parents != LayerageCollection.Layerage)
             {
                 Transformer transformer = firstLayer.Parents.Self.Transform.Transformer;
                 yield return new TransformerBorder(transformer);
@@ -89,13 +89,13 @@ namespace Retouch_Photo2.ViewModels
 
 
             //Layers
-            IList<Layerage> layerages = this.LayerageCollection.GetParentsChildren(firstLayer);
+            Layerage layerage = LayerageCollection.GetParentsChildren(firstLayer);
 
-            foreach (Layerage layerage in layerages)
+            foreach (Layerage child in layerage.Children)
             {
-                if (layerage.Self.IsSelected == false)
+                if (child.Self.IsSelected == false)
                 {
-                    Transformer transformer = layerage.Self.Transform.Transformer;
+                    Transformer transformer = child.Self.Transform.Transformer;
                     yield return new TransformerBorder(transformer);
                 }
             }

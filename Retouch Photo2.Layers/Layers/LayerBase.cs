@@ -13,6 +13,7 @@ using Retouch_Photo2.Filters;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
+using Retouch_Photo2.Styles;
 
 namespace Retouch_Photo2.Layers
 {
@@ -83,7 +84,7 @@ namespace Retouch_Photo2.Layers
                 this.isExpand = value;
             }
         }
-        private bool isExpand;
+        private bool isExpand = true;
         /// <summary> Gets or sets the selected. </summary>
         public bool IsSelected
         {
@@ -108,7 +109,7 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary> Gets or sets the style. </summary>
-        public Retouch_Photo2.Styles.IStyle Style { get; set; } = new Retouch_Photo2.Styles.Style();
+        public IStyle Style { get; set; } = new Styles.Style();
         /// <summary> Gets or sets the transform. </summary>
         public Transform Transform { get; set; } = new Transform();
         /// <summary> Gets or sets the effect. </summary>

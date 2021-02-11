@@ -136,7 +136,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
+        public void Clicke(Vector2 point) => ToolManager.MoveTool.Clicke(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)

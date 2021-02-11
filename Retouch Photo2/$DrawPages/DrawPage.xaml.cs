@@ -53,7 +53,7 @@ namespace Retouch_Photo2
             this.ConstructHeadBarControl();
 
             this.ConstructLayersControl();
-            this.ConstructLayerageCollection();
+            this.ConstructLayerManager();
 
 
             this.Loaded += (s, e) => this._lockLoaded();
@@ -61,9 +61,9 @@ namespace Retouch_Photo2
 
 
             //DrawLayout
-            this.DrawLayout.LeftIcon = ToolBase.IconBorder;
+            this.DrawLayout.LeftIcon = ToolManager.IconBorder;
             this.DrawLayout.RightIcon = new Retouch_Photo2.Layers.Icon();
-            this.DrawLayout.FootPage = ToolBase.PageBorder;
+            this.DrawLayout.FootPage = ToolManager.PageBorder;
             this.DrawLayout.TouchbarPicker = TouchbarButton.PickerBorder;
             this.DrawLayout.TouchbarSlider = TouchbarButton.SliderBorder;
             this.DrawLayout.RightPhotosButton.Click += (s, e) => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImage);//Navigate   

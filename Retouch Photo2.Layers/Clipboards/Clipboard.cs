@@ -37,11 +37,10 @@ namespace Retouch_Photo2.Layers
         ///  and copy all selected layerage.
         /// </summary>     
         /// <param name="customDevice"> The custom-device. </param>
-        /// <param name="layerageCollection"> The layerage-collection. </param>
-        public void SetMode(CanvasDevice customDevice, LayerageCollection layerageCollection)
+        public void SetMode(CanvasDevice customDevice)
         {
             //Layerages
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected(layerageCollection);
+            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected();
             int count = selectedLayerages.Count();
 
             if (count == 0)

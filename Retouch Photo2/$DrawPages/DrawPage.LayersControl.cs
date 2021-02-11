@@ -16,7 +16,7 @@ namespace Retouch_Photo2
     public sealed partial class DrawPage : Page
     {
 
-        //LayerageCollection
+        //LayerManager
         Layerage DragSourceLayerage;
         Layerage DragDestinationLayerage;
         bool DragLayerIsSelected;
@@ -26,6 +26,8 @@ namespace Retouch_Photo2
         //LayersControl
         private void ConstructLayersControl()
         {
+            this.LayersScrollViewer.Content = LayerageCollection.StackPanel;
+
             this.LayersScrollViewer.Tapped += (s, e) => this.MethodViewModel.MethodSelectedNone();//Method
             this.LayersScrollViewer.RightTapped += (s, e) => this.ShowLayerMenu();
             this.LayersScrollViewer.Holding += (s, e) => this.ShowLayerMenu();
@@ -36,7 +38,7 @@ namespace Retouch_Photo2
                 if (photo == null) return;
 
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer", this.ViewModel.LayerageCollection);
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer");
                 this.ViewModel.HistoryPush(history);
 
                 //Transformer
@@ -62,11 +64,11 @@ namespace Retouch_Photo2
                 });
 
                 //Mezzanine
-                LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, imageLayerage);
+                LayerageCollection.Mezzanine(imageLayerage);
 
-                this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
-                LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
-                LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
+                this.SelectionViewModel.SetMode();//Selection
+                LayerageCollection.ArrangeLayers();
+                LayerageCollection.ArrangeLayersBackground();
                 this.ViewModel.Invalidate();//Invalidate
             };
         }
@@ -79,7 +81,7 @@ namespace Retouch_Photo2
         {
             ILayer layer = layerage.Self;
 
-            this.TipViewModel.ShowMenuLayoutAt(MenuType.Layer, layer.Control.Self, FlyoutPlacementMode.Left);
+            this.TipViewModel.ShowMenuLayoutAt(MenuType.Layer, layer.Control, FlyoutPlacementMode.Left);
         }
 
     }

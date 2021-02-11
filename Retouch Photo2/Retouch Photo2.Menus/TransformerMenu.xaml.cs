@@ -379,10 +379,11 @@ namespace Retouch_Photo2.Menus.Models
                             this.RPicker.Value = (int)radians;
                             this.SPicker.Value = (int)skew;
 
+                            //@Release: case Debug
                             //Width Height
                             //float width = horizontal.Length();
                             //float height = vertical.Length();
-                            //@Release
+                            //@Release: case Release
                             double width = Math.Sqrt(horizontal.X * horizontal.X + horizontal.Y * horizontal.Y);
                             double height = Math.Sqrt(vertical.X * vertical.X + vertical.Y * vertical.Y);
                             this.WPicker.Value = (int)width;

@@ -109,14 +109,15 @@
   <ItemGroup>
     <Compile Include="Clipboards\Clipboard.cs" />
     <Compile Include="Clipboards\Clipboard.Instance.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.ArrangeLayersBackground.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.Clipboard.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.Photocopier_Layerage.cs" />
+    <Compile Include="LayerManagers\LayerManager.ArrangeLayersBackground.cs" />
+    <Compile Include="LayerManagers\LayerManager.Clipboard.cs" />
+    <Compile Include="LayerManagers\LayerManager.Photocopier_Layerage.cs" />
+    <Compile Include="Layerages\Layerage.cs" />
+    <Compile Include="Layerages\Layerage.SetValue.cs" />
     <Compile Include="LayerControls\LayerControl.Construct.cs" />
     <Compile Include="Layers\GeometryLayer.cs" />
     <Compile Include="Layers\ILayer.cs" />
-    <Compile Include="Layerage.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.FindOutermost.cs" />
+    <Compile Include="LayerManagers\LayerManager.FindOutermost.cs" />
     <Compile Include="LayerControls\BackgroundMode.cs" />
     <Compile Include="Layers\ITextLayer.cs" />
     <Compile Include="Layers\LayerBase.Instance.cs" />
@@ -137,14 +138,14 @@
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LayerageCollections\LayerageCollection.Mezzanine.cs" />
+    <Compile Include="LayerManagers\LayerManager.Mezzanine.cs" />
     <Compile Include="LayerControls\LayerControl.VisualState.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.ArrangeLayers.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.Drag_Move_Insert_Add.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.Group.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.Remove.cs" />
-    <Compile Include="LayerageCollections\LayerageCollection.Selected.cs" />
+    <Compile Include="LayerManagers\LayerManager.ArrangeLayers.cs" />
+    <Compile Include="LayerManagers\LayerManager.cs" />
+    <Compile Include="LayerManagers\LayerManager.Drag_Move_Insert_Add.cs" />
+    <Compile Include="LayerManagers\LayerManager.Group.cs" />
+    <Compile Include="LayerManagers\LayerManager.Remove.cs" />
+    <Compile Include="LayerManagers\LayerManager.Selected.cs" />
     <Compile Include="LayerControls\LayerControl.xaml.cs">
       <DependentUpon>LayerControl.xaml</DependentUpon>
     </Compile>

@@ -20,11 +20,10 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         ///  Sets the mode and notify all properties.
         /// </summary>
-        /// <param name="layerageCollection"> The layerage-collection. </param>
-        public void SetMode(LayerageCollection layerageCollection)
+        public void SetMode()
         {
             //Layerages
-            IEnumerable<Layerage> selectedLayeragesRecursive = LayerageCollection.GetAllSelectedRecursive(layerageCollection);
+            IEnumerable<Layerage> selectedLayeragesRecursive = LayerageCollection.GetAllSelectedRecursive();
             int count = selectedLayeragesRecursive.Count();
 
             if (count == 0)
@@ -50,10 +49,6 @@ namespace Retouch_Photo2.ViewModels
         ///  Sets the mode to None.
         /// </summary>
         public void SetModeNone()
-        {
-            this._setModeNone();//None
-        }
-        private void _setModeNone()
         {
             this.SelectionMode = ListViewSelectionMode.None;
             
@@ -99,10 +94,6 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         /// <param name="layerage"> The single layer. </param>
         public void SetModeSingle(Layerage layerage)
-        {
-            this._setModeSingle(layerage);//None
-        }
-        private void _setModeSingle(Layerage layerage)
         {
             ILayer layer = layerage.Self;
 
@@ -150,10 +141,6 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         /// <param name="layerages"> The multiple layerages. </param>
         public void SetModeMultiple(IEnumerable<Layerage> layerages)
-        {
-            this._setModeMultiple(layerages);//Multiple
-        }
-        private void _setModeMultiple(IEnumerable<Layerage> layerages)
         {
             Layerage outermost = LayerageCollection.FindOutermostLayerage(layerages);
             ILayer outermostLayer = outermost.Self;

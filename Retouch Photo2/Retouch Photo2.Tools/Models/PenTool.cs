@@ -172,7 +172,7 @@ namespace Retouch_Photo2.Tools.Models
         private void CreateLayer(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer", this.ViewModel.LayerageCollection);
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer");
             this.ViewModel.HistoryPush(history);
 
 
@@ -190,12 +190,12 @@ namespace Retouch_Photo2.Tools.Models
             LayerBase.Instances.Add(curveLayer);
 
             //Mezzanine
-            LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, curveLayerage);
+            LayerageCollection.Mezzanine(curveLayerage);
 
 
             this.SelectionViewModel.SetModeSingle(curveLayerage);//Selection
-            LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
-            LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
+            LayerageCollection.ArrangeLayers();
+            LayerageCollection.ArrangeLayersBackground();
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
 

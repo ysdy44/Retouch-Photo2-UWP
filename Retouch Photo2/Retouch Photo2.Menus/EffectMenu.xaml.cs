@@ -230,7 +230,7 @@ namespace Retouch_Photo2.Menus.Models
             if (effectPage == null) return;
 
             //Layers
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected(this.ViewModel.LayerageCollection);
+            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected();
             Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayerages);
             ILayer layer = outermost.Self;
 

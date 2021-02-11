@@ -12,14 +12,14 @@ namespace Retouch_Photo2
     public sealed partial class DrawPage : Page
     {
 
-        //LayerageCollection
-        private void ConstructLayerageCollection()
+        //LayerManager
+        private void ConstructLayerManager()
         {
             if (LayerageCollection.ItemClick == null)
             {
                 LayerageCollection.ItemClick += (layer) =>
                 {
-                    Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
+                    Layerage layerage = LayerageCollection.FindFirstLayerage(layer);
 
                     this.ItemClick(layerage);
                 };
@@ -28,7 +28,7 @@ namespace Retouch_Photo2
             {
                 LayerageCollection.RightTapped += (layer) =>
                 {
-                    Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
+                    Layerage layerage = LayerageCollection.FindFirstLayerage(layer);
 
                     this.ShowLayerMenu(layerage);
                 };
@@ -90,15 +90,15 @@ namespace Retouch_Photo2
                 {
                     layer.IsExpand = !layer.IsExpand;
 
-                    Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
-                    LayerageCollection.ArrangeLayersVisibility(layerage);
+                    Layerage layerage = LayerageCollection.FindFirstLayerage(layer);
+                    LayerageCollection.ArrangeLayersIsExpand(layerage);
                 };
             }
             if (LayerageCollection.IsSelectedChanged == null)
             {
                 LayerageCollection.IsSelectedChanged += (layer) =>
                 {
-                    Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
+                    Layerage layerage = LayerageCollection.FindFirstLayerage(layer);
                     this.MethodViewModel.MethodSelectedNot(layerage);//Method
                 };
             }
@@ -107,7 +107,7 @@ namespace Retouch_Photo2
             {
                 LayerageCollection.DragItemsStarted += (layer, manipulationMode) =>
                 {
-                    Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
+                    Layerage layerage = LayerageCollection.FindFirstLayerage(layer);
 
                     this.DragSourceLayerage = layerage;
 
@@ -125,7 +125,7 @@ namespace Retouch_Photo2
             {
                 LayerageCollection.DragItemsDelta += (layer, overlayMode) =>
                 {
-                    Layerage layerage = this.ViewModel.LayerageCollection.FindFirstLayerage(layer);
+                    Layerage layerage = LayerageCollection.FindFirstLayerage(layer);
 
                     this.DragDestinationLayerage = layerage;
                     this.DragLayerOverlayMode = overlayMode;
@@ -136,14 +136,14 @@ namespace Retouch_Photo2
                 LayerageCollection.DragItemsCompleted += () =>
                 {
                     //History
-                    LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange", this.ViewModel.LayerageCollection);
+                    LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange");
                     this.ViewModel.HistoryPush(history);
 
-                    LayerageCollection.DragComplete(this.ViewModel.LayerageCollection, this.DragDestinationLayerage, this.DragSourceLayerage, this.DragLayerOverlayMode, this.DragLayerIsSelected);
+                    LayerageCollection.DragComplete(this.DragDestinationLayerage, this.DragSourceLayerage, this.DragLayerOverlayMode, this.DragLayerIsSelected);
 
-                    this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
-                    LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
-                    LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
+                    this.SelectionViewModel.SetMode();//Selection
+                    LayerageCollection.ArrangeLayers();
+                    LayerageCollection.ArrangeLayersBackground();
                     this.ViewModel.Invalidate();//Invalidate
 
                     this.DragSourceLayerage = null;
@@ -169,7 +169,7 @@ namespace Retouch_Photo2
                 this.MethodViewModel.MethodSelectedNot(selectedLayerage);//Method
 
             // else if (isLinear)       
-            //LayerageCollection.ShiftSelectCurrentLayer(this.ViewModel.LayerageCollection, selectedLayerage);
+            //LayerManager.ShiftSelectCurrentLayer(selectedLayerage);
 
             else
                 this.MethodViewModel.MethodSelectedNew(selectedLayerage);//Method

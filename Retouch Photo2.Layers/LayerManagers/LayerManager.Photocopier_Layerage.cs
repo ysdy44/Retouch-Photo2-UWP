@@ -6,9 +6,10 @@ using System.Collections.Generic;
 namespace Retouch_Photo2.Layers
 {
     /// <summary>
+    /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public partial class LayerageCollection
+    public static partial class LayerageCollection
     {
 
         /// <summary>
@@ -51,17 +52,17 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Gets un-uesting layerages
         /// </summary>
-        /// <param name="layerages"> The layerages. </param>
+        /// <param name="layerage"> The layerage. </param>
         /// <returns> The yield layerages. </returns>
-        public static IEnumerable<Layerage> GetUnUestingLayerages(IEnumerable<Layerage> layerages)
+        public static IEnumerable<Layerage> GetUnUestingLayerages(Layerage layerage)
         {
-            foreach (Layerage child in layerages)
+            foreach (Layerage child in layerage.Children)
             {
                 yield return child;
 
-                foreach (Layerage photocopier in LayerageCollection.GetUnUestingLayerages(child.Children))
+                foreach (Layerage unUesting in LayerageCollection.GetUnUestingLayerages(child))
                 {
-                    yield return photocopier;
+                    yield return unUesting;
                 }
             }
         }

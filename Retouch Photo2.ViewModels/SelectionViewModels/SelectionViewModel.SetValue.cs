@@ -25,13 +25,13 @@ namespace Retouch_Photo2.ViewModels
                     break;
 
                 case ListViewSelectionMode.Single:
-                    action(this.SelectionLayerage);
+                    this.SelectionLayerage.SetValue(action);
                     break;
 
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage child in this.SelectionLayerages)
                     {
-                        action(child);
+                        child.SetValue(action);
                     }
                     break;
             }
@@ -48,32 +48,15 @@ namespace Retouch_Photo2.ViewModels
                     break;
 
                 case ListViewSelectionMode.Single:
-                    this.SetLayerageValueWithChildren(this.SelectionLayerage, action);
+                    this.SelectionLayerage.SetValueWithChildren(action);
                     break;
 
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage child in this.SelectionLayerages)
                     {
-                        this.SetLayerageValueWithChildren(child, action);
+                        child.SetValueWithChildren(action);
                     }
                     break;
-            }
-        }
-        /// <summary>
-        /// Set layerage;s value with children.
-        /// </summary>
-        /// <param name="layerage"> The layerage. </param>
-        /// <param name="action"> action </param>
-        public void SetLayerageValueWithChildren(Layerage layerage, Action<Layerage> action)
-        {
-            action(layerage);
-
-            if (layerage.Children.Count != 0)
-            {
-                foreach (Layerage child in layerage.Children)
-                {
-                    this.SetLayerageValueWithChildren(child, action);
-                }
             }
         }
         /// <summary>
@@ -88,33 +71,15 @@ namespace Retouch_Photo2.ViewModels
                     break;
 
                 case ListViewSelectionMode.Single:
-                    this.SetLayerageValueWithChildrenOnlyGroup(this.SelectionLayerage, action);
+                    this.SelectionLayerage.SetValueWithChildrenOnlyGroup(action);
                     break;
 
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage child in this.SelectionLayerages)
                     {
-                        this.SetLayerageValueWithChildrenOnlyGroup(child, action);
+                        child.SetValueWithChildrenOnlyGroup(action);
                     }
                     break;
-            }
-        }
-        /// <summary>
-        /// Set layerage;s value with group layerage's children.
-        /// </summary>
-        /// <param name="layerage"> The layerage. </param>
-        /// <param name="action"> action </param>
-        public void SetLayerageValueWithChildrenOnlyGroup(Layerage layerage, Action<Layerage> action)
-        {
-            action(layerage);
-
-            ILayer layer = layerage.Self;
-            if (layer.Type == LayerType.Group)
-            {
-                foreach (Layerage child in layerage.Children)
-                {
-                    this.SetLayerageValueWithChildrenOnlyGroup(child, action);
-                }
             }
         }
 

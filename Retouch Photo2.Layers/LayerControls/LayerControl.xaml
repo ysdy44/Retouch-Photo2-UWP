@@ -148,8 +148,8 @@
             </Button>
             
             <!--Expaned-->
-            <Button x:Name="ExpanedButton" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                <FontIcon x:Name="ExpanedFontIcon" Glyph="&#xEDD9;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            <Button x:Name="ExpanedButton" Visibility="Collapsed" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                <FontIcon x:Name="ExpanedFontIcon" Glyph="&#xEDDC;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
             
         </StackPanel>

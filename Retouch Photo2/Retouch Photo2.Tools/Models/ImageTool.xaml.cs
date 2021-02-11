@@ -81,7 +81,7 @@ namespace Retouch_Photo2.Tools.Models
             }
 
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer", this.ViewModel.LayerageCollection);
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer");
             this.ViewModel.HistoryPush(history);
 
             //Transformer
@@ -103,7 +103,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
             this.MezzanineLayerage = imageLayerage;
-            LayerageCollection.Mezzanine(this.ViewModel.LayerageCollection, this.MezzanineLayerage);
+            LayerageCollection.Mezzanine(this.MezzanineLayerage);
 
             this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
@@ -152,7 +152,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.MezzanineLayerage.RefactoringParentsIconRender();
 
 
-                foreach (Layerage layerage in this.ViewModel.LayerageCollection.RootLayerages)
+                foreach (Layerage layerage in LayerageCollection.Layerage.Children)
                 {
                     ILayer layer = layerage.Self;
 
@@ -162,16 +162,16 @@ namespace Retouch_Photo2.Tools.Models
                 mezzanineLayer.IsSelected = true;
                 this.MezzanineLayerage = null;
             }
-            else LayerageCollection.RemoveMezzanine(this.ViewModel.LayerageCollection, this.MezzanineLayerage);//Mezzanine
+            else LayerageCollection.RemoveMezzanine(this.MezzanineLayerage);//Mezzanine
 
-            //         this.SelectionViewModel.SetMode(this.ViewModel.LayerageCollection);//Selection
+            //         this.SelectionViewModel.SetMode();//Selection
 
-            LayerageCollection.ArrangeLayers(this.ViewModel.LayerageCollection);
-            LayerageCollection.ArrangeLayersBackground(this.ViewModel.LayerageCollection);
+            LayerageCollection.ArrangeLayers();
+            LayerageCollection.ArrangeLayersBackground();
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point) => ToolBase.MoveTool.Clicke(point);
+        public void Clicke(Vector2 point) => ToolManager.MoveTool.Clicke(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)

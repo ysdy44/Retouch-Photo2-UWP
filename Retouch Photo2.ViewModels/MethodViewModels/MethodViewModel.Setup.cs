@@ -26,11 +26,11 @@ namespace Retouch_Photo2.ViewModels
             this.CanvasTransformer.BitmapSize = bitmapSize;
             this.CanvasTransformer.ReloadMatrix();
 
-            //LayerageCollection
-            foreach (Layerage layerage in this.LayerageCollection.RootLayerages)
+            //LayerManager
+            foreach (Layerage child in LayerageCollection.Layerage.Children)
             {
                 //Selection
-                this.SetLayerageValueWithChildren(layerage, (layerage2) =>
+                child.SetValueWithChildren((layerage2) =>
                 {
                     ILayer layer = layerage2.Self;
 
@@ -53,7 +53,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             //Selection
-            this.SetMode(this.LayerageCollection);
+            this.SetMode();
             this.Invalidate();//Invalidate
         }
 
@@ -73,11 +73,11 @@ namespace Retouch_Photo2.ViewModels
             Vector2 vector = this.CanvasTransformer.GetIndicatorVector(indicatorMode);
             Vector2 distance = vector - previousVector;
 
-            //LayerageCollection
-            foreach (Layerage layerage in this.LayerageCollection.RootLayerages)
+            //LayerManager
+            foreach (Layerage child in LayerageCollection.Layerage.Children)
             {
                 //Selection
-                this.SetLayerageValueWithChildren(layerage, (layerage2) =>
+                child.SetValueWithChildren((layerage2) =>
                 {
                     ILayer layer = layerage2.Self;
 
@@ -100,7 +100,7 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             //Selection
-            this.SetMode(this.LayerageCollection);
+            this.SetMode();
             this.Invalidate();//Invalidate
         }
 

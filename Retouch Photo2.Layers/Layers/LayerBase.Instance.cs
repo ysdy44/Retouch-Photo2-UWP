@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Retouch_Photo2.Layers
@@ -11,11 +12,11 @@ namespace Retouch_Photo2.Layers
 
         //@Static
         /// <summary> Collection <see cref="Layerage"/>s instances. </summary>
-        public static ObservableCollection<ILayer> Instances = new ObservableCollection<ILayer>();
-
+        public static readonly ObservableCollection<ILayer> Instances = new ObservableCollection<ILayer>();
+        
 
         /// <summary>
-        /// Find the first <see cref="LayerBase"/> by <see cref="LayerBase"/>.
+        /// Find the first <see cref="LayerBase"/> by <see cref="Layerage"/>.
         /// </summary>
         /// <param name="layerage"> The source layerage</param>
         /// <returns> The product layer. </returns>

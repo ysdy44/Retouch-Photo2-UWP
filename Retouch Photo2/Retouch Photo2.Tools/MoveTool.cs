@@ -133,8 +133,8 @@ namespace Retouch_Photo2.Tools
         private Layerage GetClickSelectedLayerage(Vector2 canvasPoint)
         {
             //Select a layer of the same depth
-            Layerage delectedLayerage = this.SelectionViewModel.GetFirstSelectedLayerage();
-            IList<Layerage> parentsChildren = this.ViewModel.LayerageCollection.GetParentsChildren(delectedLayerage);
+            Layerage selectedLayerage = this.SelectionViewModel.GetFirstSelectedLayerage();
+            Layerage parents = LayerageCollection.GetParentsChildren(selectedLayerage);
 
             bool FillContainsPoint(Layerage layerage)
             {
@@ -143,7 +143,7 @@ namespace Retouch_Photo2.Tools
                 return layer.FillContainsPoint(layerage, canvasPoint);
             };
 
-            return parentsChildren.FirstOrDefault(layerage=> FillContainsPoint(layerage));
+            return parents.Children.FirstOrDefault(layerage=> FillContainsPoint(layerage));
         }
 
         private bool GetIsSelectedLayer(Vector2 canvasStartingPoint)
