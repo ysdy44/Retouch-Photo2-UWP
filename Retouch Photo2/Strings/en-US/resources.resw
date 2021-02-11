@@ -58,8 +58,6 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
-<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
 <data name='$Loading_Loading' xml:space='preserve'><value>Loading</value></data>
 <data name='$Loading_LoadFailed' xml:space='preserve'><value>Failed to load</value></data>
 <data name='$Loading_FileCorrupt' xml:space='preserve'><value>File is corrupted</value></data>
@@ -157,8 +155,7 @@
 <data name='Tools_Brush_Extend_Wrap' xml:space='preserve'><value>Wrap</value></data>
 <data name='Tools_Brush_Stop_Offset' xml:space='preserve'><value>Offset</value></data>
 <data name='Tools_Brush_Stop_Alpha' xml:space='preserve'><value>Alpha</value></data>
-<data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value>
-</value></data>
+<data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value>Copy</value></data>
 <data name='Tools_Brush_Stop_Reverse' xml:space='preserve'><value>Reserve</value></data>
 <data name='Tools_Transparency' xml:space='preserve'><value>Transparency</value></data>
 <data name='Tools_Pen' xml:space='preserve'><value>Pen</value></data>

@@ -58,892 +58,449 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
-<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
-<data name='$Loading_Loading' xml:space='preserve'><value>加载中
-</value></data>
-<data name='$Loading_LoadFailed' xml:space='preserve'><value>加载失败
-</value></data>
-<data name='$Loading_FileCorrupt' xml:space='preserve'><value>文件已损坏
-</value></data>
-<data name='$Loading_FileNull' xml:space='preserve'><value>文件为空
-</value></data>
-<data name='$Loading_Saving' xml:space='preserve'><value>保存中
-</value></data>
-<data name='$Loading_SaveSuccess' xml:space='preserve'><value>保存成功
-</value></data>
-<data name='$Loading_SaveFailed' xml:space='preserve'><value>保存失败
-</value></data>
-<data name='$PhotosPage_Title' xml:space='preserve'><value>图库
-</value></data>
-<data name='$PhotosPage_AddTip' xml:space='preserve'><value>添加本地图片
-</value></data>
-<data name='$Untitled' xml:space='preserve'><value>未命名
-</value></data>
-<data name='$DocumentationLink' xml:space='preserve'><value>https://gitee.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-ZH.md
-</value></data>
-<data name='$SettingPage_Title' xml:space='preserve'><value>设置
-</value></data>
-<data name='$SettingPage_About' xml:space='preserve'><value>关于...
-</value></data>
-<data name='$SettingPage_Theme' xml:space='preserve'><value>主题
-</value></data>
-<data name='$SettingPage_Theme_Light' xml:space='preserve'><value>浅色
-</value></data>
-<data name='$SettingPage_Theme_Dark' xml:space='preserve'><value>深色
-</value></data>
-<data name='$SettingPage_Theme_UseSystem' xml:space='preserve'><value>跟随系统
-</value></data>
-<data name='$SettingPage_DeviceLayout' xml:space='preserve'><value>设备布局
-</value></data>
-<data name='$SettingPage_DeviceLayout_Phone' xml:space='preserve'><value>手机
-</value></data>
-<data name='$SettingPage_DeviceLayout_Pad' xml:space='preserve'><value>平板
-</value></data>
-<data name='$SettingPage_DeviceLayout_PC' xml:space='preserve'><value>桌面
-</value></data>
-<data name='$SettingPage_DeviceLayout_Adaptive' xml:space='preserve'><value>自适应
-</value></data>
-<data name='$SettingPage_DeviceLayout_AdaptiveWidth' xml:space='preserve'><value>自适应宽度
-</value></data>
-<data name='$SettingPage_DeviceLayout_ResetAdaptiveWidth' xml:space='preserve'><value>重置自适应宽度
-</value></data>
-<data name='$SettingPage_LayersHeight' xml:space='preserve'><value>图层高度
-</value></data>
-<data name='$SettingPage_LayersHeightTip' xml:space='preserve'><value>单击以更改图层控件高度
-</value></data>
-<data name='$SettingPage_MenuType' xml:space='preserve'><value>菜单类型
-</value></data>
-<data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>取消勾选来隐藏菜单按钮
-</value></data>
-<data name='$SettingPage_Key' xml:space='preserve'><value>快捷键
-</value></data>
-<data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>画布向左移动
-</value></data>
-<data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>画布向上移动
-</value></data>
-<data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>画布向右移动
-</value></data>
-<data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>画布向下移动
-</value></data>
-<data name='$SettingPage_LocalFolder' xml:space='preserve'><value>本地文件夹
-</value></data>
-<data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>打开
-</value></data>
-<data name='$MainPage_DocumentationTip' xml:space='preserve'><value>打开文档网页
-</value></data>
-<data name='$MainPage_SettingTip' xml:space='preserve'><value>打开设置页面
-</value></data>
-<data name='$MainPage_Select_ClickTip' xml:space='preserve'><value>单击以选择项目：
-</value></data>
-<data name='$MainPage_Select_All' xml:space='preserve'><value>全选
-</value></data>
-<data name='$MainPage_InitialTip' xml:space='preserve'><value>没有项目？你可以...
-</value></data>
-<data name='$MainPage_Initial_Sample' xml:space='preserve'><value>打开样本项目
-</value></data>
-<data name='$MainPage_Initial_New' xml:space='preserve'><value>创建新项目
-</value></data>
-<data name='$MainPage_Initial_Photo' xml:space='preserve'><value>从图库创建新项目
-</value></data>
-<data name='$MainPage_Initial_Destop' xml:space='preserve'><value>从桌面创建新项目
-</value></data>
-<data name='$MainPage_New' xml:space='preserve'><value>新建
-</value></data>
-<data name='$MainPage_NewDialog_Title' xml:space='preserve'><value>添加新项目
-</value></data>
-<data name='$MainPage_Pictures' xml:space='preserve'><value>图片
-</value></data>
-<data name='$MainPage_Pictures_Photo' xml:space='preserve'><value>图库
-</value></data>
-<data name='$MainPage_Pictures_Destop' xml:space='preserve'><value>桌面
-</value></data>
-<data name='$MainPage_Rename_Subtitle' xml:space='preserve'><value>选择要重命名的项目。
-</value></data>
-<data name='$MainPage_RenameDialog_TextBoxTip' xml:space='preserve'><value>名称已占用！
-</value></data>
-<data name='$MainPage_Delete_Title' xml:space='preserve'><value>删除项目
-</value></data>
-<data name='$MainPage_Delete_Subtitle' xml:space='preserve'><value>选择要删除的项目。
-</value></data>
-<data name='$MainPage_Duplicate_Title' xml:space='preserve'><value>复制项目
-</value></data>
-<data name='$MainPage_Duplicate_Subtitle' xml:space='preserve'><value>选择要复制的项目。
-</value></data>
-<data name='$DrawPage_Document' xml:space='preserve'><value>文档
-</value></data>
-<data name='$DrawPage_DocumentUnSave' xml:space='preserve'><value>不保存并返回
-</value></data>
-<data name='$DrawPage_Undo' xml:space='preserve'><value>撤销
-</value></data>
-<data name='$DrawPage_Redo' xml:space='preserve'><value>重做
-</value></data>
-<data name='$DrawPage_Setup' xml:space='preserve'><value>设定
-</value></data>
-<data name='$DrawPage_Snap' xml:space='preserve'><value>吸附
-</value></data>
-<data name='$DrawPage_Ruler' xml:space='preserve'><value>标尺
-</value></data>
-<data name='$DrawPage_FullScreen' xml:space='preserve'><value>全屏
-</value></data>
-<data name='$DrawPage_Tip' xml:space='preserve'><value>提示
-</value></data>
-<data name='$DrawPage_Gallery' xml:space='preserve'><value>打开图库页面
-</value></data>
-<data name='$DrawPage_Width' xml:space='preserve'><value>切换布局宽度
-</value></data>
-<data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>文档 设定
-</value></data>
-<data name='$DrawPage_SetupDialog_Layers' xml:space='preserve'><value>所有图层
-</value></data>
-<data name='$DrawPage_SetupDialog_Resize' xml:space='preserve'><value>新尺寸
-</value></data>
-<data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>锚定到画布
-</value></data>
-<data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>导出到...
-</value></data>
-<data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>质量
-</value></data>
-<data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>文件格式
-</value></data>
-<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>重命名图层
-</value></data>
-<data name='Tools_ConvertToCurves' xml:space='preserve'><value>转换为曲线
-</value></data>
-<data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>等比例缩放
-</value></data>
-<data name='Tools_MoreTransform_Center' xml:space='preserve'><value>中心缩放
-</value></data>
-<data name='Tools_MoreCreate_Square' xml:space='preserve'><value>宽高相等
-</value></data>
-<data name='Tools_MoreCreate_Center' xml:space='preserve'><value>中心缩放
-</value></data>
-<data name='Tools_Cursor' xml:space='preserve'><value>光标
-</value></data>
-<data name='Tools_Cursor_CompositeMode_New' xml:space='preserve'><value>新建
-</value></data>
-<data name='Tools_Cursor_CompositeMode_Add' xml:space='preserve'><value>增加
-</value></data>
-<data name='Tools_Cursor_CompositeMode_Subtract' xml:space='preserve'><value>减去
-</value></data>
-<data name='Tools_View' xml:space='preserve'><value>视图
-</value></data>
-<data name='Tools_View_Radian' xml:space='preserve'><value>弧度
-</value></data>
-<data name='Tools_View_RadianClear' xml:space='preserve'><value>重置旋转弧度
-</value></data>
-<data name='Tools_View_Scale' xml:space='preserve'><value>比例
-</value></data>
-<data name='Tools_View_ScaleClear' xml:space='preserve'><value>重置比例
-</value></data>
-<data name='Tools_Brush_FillOrStroke' xml:space='preserve'><value>填充或描边
-</value></data>
-<data name='Tools_Brush_Type_LinearGradient' xml:space='preserve'><value>线性
-</value></data>
-<data name='Tools_Brush_Type_RadialGradient' xml:space='preserve'><value>径向
-</value></data>
-<data name='Tools_Brush_Type_EllipticalGradient' xml:space='preserve'><value>椭圆形
-</value></data>
-<data name='Tools_Brush_Extend' xml:space='preserve'><value>扩展
-</value></data>
-<data name='Tools_Brush_Extend_Clamp' xml:space='preserve'><value>重复
-</value></data>
-<data name='Tools_Brush_Extend_Wrap' xml:space='preserve'><value>换行
-</value></data>
-<data name='Tools_Brush_Stop_Offset' xml:space='preserve'><value>位移
-</value></data>
-<data name='Tools_Brush_Stop_Alpha' xml:space='preserve'><value>Alpha
-</value></data>
-<data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value></value></data>
-<data name='Tools_Brush_Stop_Reverse' xml:space='preserve'><value>反转
-</value></data>
-<data name='Tools_Transparency' xml:space='preserve'><value>透明度
-</value></data>
-<data name='Tools_Pen' xml:space='preserve'><value>钢笔
-</value></data>
-<data name='Tools_Node' xml:space='preserve'><value>节点
-</value></data>
-<data name='Tools_Node_Insert' xml:space='preserve'><value>插入
-</value></data>
-<data name='Tools_Node_Sharp' xml:space='preserve'><value>尖锐
-</value></data>
-<data name='Tools_Node_Smooth' xml:space='preserve'><value>平滑
-</value></data>
-<data name='Tools_Node_NodeMode_Restriction' xml:space='preserve'><value>控制点限制
-</value></data>
-<data name='Tools_Node_NodeMode_Restriction_Length' xml:space='preserve'><value>长度
-</value></data>
-<data name='Tools_Node_NodeMode_Mode' xml:space='preserve'><value>控制点模式
-</value></data>
-<data name='Tools_Node_NodeMode_Mode_Mirrored' xml:space='preserve'><value>对称
-</value></data>
-<data name='Tools_Node_NodeMode_Mode_Disconnected' xml:space='preserve'><value>断开
-</value></data>
-<data name='Tools_Node_NodeMode_Mode_Asymmetric' xml:space='preserve'><value>非对称
-</value></data>
-<data name='Tools_Text_PlaceholderText' xml:space='preserve'><value>输入文本...
-</value></data>
-<data name='Tools_Image_Select' xml:space='preserve'><value>选择
-</value></data>
-<data name='Tools_Image_Replace' xml:space='preserve'><value>替换
-</value></data>
-<data name='Tools_Image_Clear' xml:space='preserve'><value>清除
-</value></data>
-<data name='Tools_Crop' xml:space='preserve'><value>矢量裁剪
-</value></data>
-<data name='Tools_Crop_Reset' xml:space='preserve'><value>重置裁剪
-</value></data>
-<data name='Tools_Crop_Fit' xml:space='preserve'><value>适合裁剪
-</value></data>
-<data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>步
-</value></data>
-<data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>拐角
-</value></data>
-<data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>中心点
-</value></data>
-<data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>中间点
-</value></data>
-<data name='Tools_GeometryCog_Count' xml:space='preserve'><value>数量
-</value></data>
-<data name='Tools_GeometryCog_Tooth' xml:space='preserve'><value>外齿
-</value></data>
-<data name='Tools_GeometryCog_Notch' xml:space='preserve'><value>缺口
-</value></data>
-<data name='Tools_GeometryDount_HoleRadius' xml:space='preserve'><value>孔半径
-</value></data>
-<data name='Tools_GeometryArrow_LeftTail' xml:space='preserve'><value>左端
-</value></data>
-<data name='Tools_GeometryArrow_RightTail' xml:space='preserve'><value>右端
-</value></data>
-<data name='Tools_GeometryArrow_Value' xml:space='preserve'><value>宽度
-</value></data>
-<data name='Tools_GeometryHeart_Spread' xml:space='preserve'><value>扩展
-</value></data>
-<data name='Layers_Curve' xml:space='preserve'><value>曲线
-</value></data>
-<data name='Layers_CurveMulti' xml:space='preserve'><value>多曲线
-</value></data>
-<data name='Menus_Keyboard' xml:space='preserve'><value>键盘
-</value></data>
-<data name='Menus_Operate' xml:space='preserve'><value>操作
-</value></data>
-<data name='Menus_Adjustment' xml:space='preserve'><value>调整
-</value></data>
-<data name='Menus_Adjustment_Add' xml:space='preserve'><value>添加
-</value></data>
-<data name='Menus_Adjustment_Filters' xml:space='preserve'><value>滤镜
-</value></data>
-<data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>无调整
-</value></data>
-<data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>请选择一个图层
-</value></data>
-<data name='Menus_Effect' xml:space='preserve'><value>图层FX
-</value></data>
-<data name='Menus_Text' xml:space='preserve'><value>文本
-</value></data>
-<data name='Menus_Style' xml:space='preserve'><value>样式
-</value></data>
-<data name='Menus_History' xml:space='preserve'><value>历史
-</value></data>
-<data name='Menus_Transformer_Rotate' xml:space='preserve'><value>旋转
-</value></data>
-<data name='Menus_Transformer_Skew' xml:space='preserve'><value>倾斜
-</value></data>
-<data name='Menus_Transformer_X' xml:space='preserve'><value>X-轴
-</value></data>
-<data name='Menus_Transformer_Y' xml:space='preserve'><value>Y-轴
-</value></data>
-<data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>等比例缩放
-</value></data>
-<data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>步频
-</value></data>
-<data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>位置遥控
-</value></data>
-<data name='Menus_Transformer_Anchor' xml:space='preserve'><value>锚点
-</value></data>
-<data name='Menus_Color_Swatches' xml:space='preserve'><value>预设
-</value></data>
-<data name='Menus_Color_Wheel' xml:space='preserve'><value>色轮
-</value></data>
-<data name='Menus_Color_RGB' xml:space='preserve'><value>RGB
-</value></data>
-<data name='Menus_Color_HSV' xml:space='preserve'><value>HSV
-</value></data>
-<data name='Menus_Color_PaletteHue' xml:space='preserve'><value>调色板-色相
-</value></data>
-<data name='Menus_Color_PaletteSaturation' xml:space='preserve'><value>调色板-饱和度
-</value></data>
-<data name='Menus_Color_PaletteValue' xml:space='preserve'><value>调色板-值
-</value></data>
-<data name='Menus_Color_Circle' xml:space='preserve'><value>色环
-</value></data>
-<data name='Menus_Layer' xml:space='preserve'><value>图层
-</value></data>
-<data name='Menus_Layer_Name' xml:space='preserve'><value>名称
-</value></data>
-<data name='Menus_Layer_BlendMode' xml:space='preserve'><value>混合模式
-</value></data>
-<data name='Menus_Layer_Visibility' xml:space='preserve'><value>可视
-</value></data>
-<data name='Menus_Layer_TagType' xml:space='preserve'><value>标签类型
-</value></data>
-<data name='Edits_Edit_Cut' xml:space='preserve'><value>剪切
-</value></data>
-<data name='Edits_Edit_Paste' xml:space='preserve'><value>粘贴
-</value></data>
-<data name='Edits_Edit_Clear' xml:space='preserve'><value>清除
-</value></data>
-<data name='Edits_Select' xml:space='preserve'><value>选择
-</value></data>
-<data name='Edits_Select_All' xml:space='preserve'><value>全选
-</value></data>
-<data name='Edits_Select_Deselect' xml:space='preserve'><value>取消
-</value></data>
-<data name='Edits_Select_Invert' xml:space='preserve'><value>反选
-</value></data>
-<data name='Edits_Group_UnGroup' xml:space='preserve'><value>取消分组
-</value></data>
-<data name='Edits_Group_Release' xml:space='preserve'><value>释放
-</value></data>
-<data name='Edits_Combine_Xor' xml:space='preserve'><value>差异
-</value></data>
-<data name='Edits_Combine' xml:space='preserve'><value>结合
-</value></data>
-<data name='Edits_Combine_Union' xml:space='preserve'><value>联合
-</value></data>
-<data name='Edits_Combine_Exclude' xml:space='preserve'><value>减少
-</value></data>
-<data name='Edits_Combine_Intersect' xml:space='preserve'><value>相交
-</value></data>
-<data name='Edits_Combine_ExpandStroke' xml:space='preserve'><value>展开描边
-</value></data>
-<data name='Operates_Transform_FlipHorizontal' xml:space='preserve'><value>水平翻转
-</value></data>
-<data name='Operates_Transform_FlipVertical' xml:space='preserve'><value>垂直翻转
-</value></data>
-<data name='Operates_Transform_RotateLeft' xml:space='preserve'><value>左旋转
-</value></data>
-<data name='Operates_Transform_RotateRight' xml:space='preserve'><value>右旋转
-</value></data>
-<data name='Operates_Arrange' xml:space='preserve'><value>排列
-</value></data>
-<data name='Operates_Arrange_MoveFront' xml:space='preserve'><value>移到前面
-</value></data>
-<data name='Operates_Arrange_BackOne' xml:space='preserve'><value>向后移动一个
-</value></data>
-<data name='Operates_Arrange_ForwardOne' xml:space='preserve'><value>向前移动一个
-</value></data>
-<data name='Operates_Arrange_MoveBack' xml:space='preserve'><value>移到后面
-</value></data>
-<data name='Operates_Horizontally' xml:space='preserve'><value>水平对齐
-</value></data>
-<data name='Operates_Horizontally_Space' xml:space='preserve'><value>水平间隔
-</value></data>
-<data name='Operates_Vertically' xml:space='preserve'><value>垂直对齐
-</value></data>
-<data name='Operates_Vertically_Top' xml:space='preserve'><value>顶部对齐
-</value></data>
-<data name='Operates_Vertically_Middle' xml:space='preserve'><value>中间对齐
-</value></data>
-<data name='Operates_Vertically_Bottom' xml:space='preserve'><value>底部对齐
-</value></data>
-<data name='Operates_Vertically_Space' xml:space='preserve'><value>垂直间隔
-</value></data>
-<data name='Adjustments_Gray' xml:space='preserve'><value>黑白
-</value></data>
-<data name='Adjustments_Invert' xml:space='preserve'><value>反色
-</value></data>
-<data name='Adjustments_Brightness' xml:space='preserve'><value>亮度
-</value></data>
-<data name='Adjustments_Brightness_WhiteToLight' xml:space='preserve'><value>白转亮
-</value></data>
-<data name='Adjustments_Brightness_WhiteToDark' xml:space='preserve'><value>白转暗
-</value></data>
-<data name='Adjustments_Brightness_BlackToLight' xml:space='preserve'><value>黑转亮
-</value></data>
-<data name='Adjustments_Brightness_BlackToDark' xml:space='preserve'><value>黑转暗
-</value></data>
-<data name='Adjustments_HueRotation' xml:space='preserve'><value>色相旋转
-</value></data>
-<data name='Adjustments_Temperature_Tint' xml:space='preserve'><value>色彩增强
-</value></data>
-<data name='Adjustments_HighlightsAndShadows' xml:space='preserve'><value>高光阴影
-</value></data>
-<data name='Adjustments_HighlightsAndShadows_Shadows' xml:space='preserve'><value>阴影
-</value></data>
-<data name='Adjustments_HighlightsAndShadows_Highlights' xml:space='preserve'><value>高光
-</value></data>
-<data name='Adjustments_HighlightsAndShadows_Clarity' xml:space='preserve'><value>清晰
-</value></data>
-<data name='Adjustments_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>模糊
-</value></data>
-<data name='Adjustments_GammaTransfer' xml:space='preserve'><value>伽马传递
-</value></data>
-<data name='Adjustments_GammaTransfer_Offset' xml:space='preserve'><value>位移
-</value></data>
-<data name='Adjustments_GammaTransfer_Exponent' xml:space='preserve'><value>指数
-</value></data>
-<data name='Adjustments_GammaTransfer_Amplitude' xml:space='preserve'><value>振幅
-</value></data>
-<data name='Adjustments_GammaTransfer_Alpha' xml:space='preserve'><value>Alpha
-</value></data>
-<data name='Adjustments_GammaTransfer_Red' xml:space='preserve'><value>红
-</value></data>
-<data name='Adjustments_GammaTransfer_Green' xml:space='preserve'><value>绿
-</value></data>
-<data name='Adjustments_GammaTransfer_Blue' xml:space='preserve'><value>蓝
-</value></data>
-<data name='Adjustments_Vignette' xml:space='preserve'><value>装饰图案
-</value></data>
-<data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>曲线
-</value></data>
-<data name='Effects_GaussianBlur' xml:space='preserve'><value>高斯模糊
-</value></data>
-<data name='Effects_DirectionalBlur' xml:space='preserve'><value>定向模糊
-</value></data>
-<data name='Effects_Sharpen' xml:space='preserve'><value>锐化
-</value></data>
-<data name='Effects_OuterShadow' xml:space='preserve'><value>外部投影
-</value></data>
-<data name='Effects_Edge' xml:space='preserve'><value>边缘
-</value></data>
-<data name='Effects_Morphology' xml:space='preserve'><value>形态学
-</value></data>
-<data name='Effects_Morphology_Size' xml:space='preserve'><value>尺寸
-</value></data>
-<data name='Effects_Emboss' xml:space='preserve'><value>浮雕
-</value></data>
-<data name='Effects_Straighten' xml:space='preserve'><value>拉直
-</value></data>
-<data name='Texts_FontAlignment' xml:space='preserve'><value>对齐
-</value></data>
-<data name='Texts_FontAlignment_Justified' xml:space='preserve'><value>对齐
-</value></data>
-<data name='Texts_FontStyle' xml:space='preserve'><value>字体样式
-</value></data>
-<data name='Texts_FontStyle_Bold' xml:space='preserve'><value>加粗
-</value></data>
-<data name='Texts_FontStyle_Italic' xml:space='preserve'><value>斜体
-</value></data>
-<data name='Texts_FontStyle_UnderLine' xml:space='preserve'><value>下划线
-</value></data>
-<data name='Texts_FontWeight' xml:space='preserve'><value>字体粗细
-</value></data>
-<data name='Texts_FontWeight_Black' xml:space='preserve'><value>黑体
-</value></data>
-<data name='Texts_FontWeight_Bold' xml:space='preserve'><value>粗体
-</value></data>
-<data name='Texts_FontWeight_ExtraBlack' xml:space='preserve'><value>特黑体
-</value></data>
-<data name='Texts_FontWeight_ExtraBold' xml:space='preserve'><value>特粗体
-</value></data>
-<data name='Texts_FontWeight_ExtraLight' xml:space='preserve'><value>特细体
-</value></data>
-<data name='Texts_FontWeight_Light' xml:space='preserve'><value>细体
-</value></data>
-<data name='Texts_FontWeight_Medium' xml:space='preserve'><value>中等
-</value></data>
-<data name='Texts_FontWeight_Normal' xml:space='preserve'><value>常规
-</value></data>
-<data name='Texts_FontWeight_SemiBold' xml:space='preserve'><value>半粗体
-</value></data>
-<data name='Texts_FontWeight_SemiLight' xml:space='preserve'><value>半细体
-</value></data>
-<data name='Texts_FontWeight_Thin' xml:space='preserve'><value>瘦体
-</value></data>
-<data name='Texts_FontFamily' xml:space='preserve'><value>字体
-</value></data>
-<data name='Texts_FontSize' xml:space='preserve'><value>字体大小
-</value></data>
-<data name='Strokes_Dash_Solid' xml:space='preserve'><value>固体
-</value></data>
-<data name='Strokes_Dash_Dot' xml:space='preserve'><value>端点
-</value></data>
-<data name='Strokes_Dash_DashDot' xml:space='preserve'><value>破折 端点
-</value></data>
-<data name='Strokes_Cap' xml:space='preserve'><value>端点
-</value></data>
-<data name='Strokes_Cap_Flat' xml:space='preserve'><value>平面
-</value></data>
-<data name='Strokes_Cap_Square' xml:space='preserve'><value>正方形
-</value></data>
-<data name='Strokes_Cap_Round' xml:space='preserve'><value>圆形
-</value></data>
-<data name='Strokes_Join' xml:space='preserve'><value>拐角
-</value></data>
-<data name='Strokes_Join_Miter' xml:space='preserve'><value>尖角
-</value></data>
-<data name='Strokes_Join_Bevel' xml:space='preserve'><value>斜角
-</value></data>
-<data name='Strokes_Join_Round' xml:space='preserve'><value>圆角
-</value></data>
-<data name='Strokes_Join_MiterOrBevel' xml:space='preserve'><value>尖角和斜角
-</value></data>
-<data name='Strokes_IsFollowTransform' xml:space='preserve'><value>样式跟随变换
-</value></data>
-<data name='Strokes_IsStrokeBehindFill' xml:space='preserve'><value>描边在填充之后
-</value></data>
-<data name='Strokes_IsStrokeWidthFollowScale' xml:space='preserve'><value>描边宽度跟随缩放
-</value></data>
-<data name='Blends_None' xml:space='preserve'><value>正常
-</value></data>
-<data name='Blends_Multiply' xml:space='preserve'><value>正片叠底
-</value></data>
-<data name='Blends_Screen' xml:space='preserve'><value>屏幕
-</value></data>
-<data name='Blends_Darken' xml:space='preserve'><value>暗
-</value></data>
-<data name='Blends_Lighten' xml:space='preserve'><value>亮
-</value></data>
-<data name='Blends_Dissolve' xml:space='preserve'><value>溶解
-</value></data>
-<data name='Blends_ColorBurn' xml:space='preserve'><value>颜色加深
-</value></data>
-<data name='Blends_LinearBurn' xml:space='preserve'><value>线性加深
-</value></data>
-<data name='Blends_DarkerColor' xml:space='preserve'><value>更暗的颜色
-</value></data>
-<data name='Blends_LighterColor' xml:space='preserve'><value>更亮的颜色
-</value></data>
-<data name='Blends_ColorDodge' xml:space='preserve'><value>颜色减淡
-</value></data>
-<data name='Blends_LinearDodge' xml:space='preserve'><value>线性减淡
-</value></data>
-<data name='Blends_Overlay' xml:space='preserve'><value>覆盖
-</value></data>
-<data name='Blends_SoftLight' xml:space='preserve'><value>柔光
-</value></data>
-<data name='Blends_HardLight' xml:space='preserve'><value>硬光
-</value></data>
-<data name='Blends_VividLight' xml:space='preserve'><value>艳光
-</value></data>
-<data name='Blends_LinearLight' xml:space='preserve'><value>线性光
-</value></data>
-<data name='Blends_PinLight' xml:space='preserve'><value>射灯
-</value></data>
-<data name='Blends_HardMix' xml:space='preserve'><value>硬混
-</value></data>
-<data name='Blends_Difference' xml:space='preserve'><value>差异
-</value></data>
-<data name='Blends_Exclusion' xml:space='preserve'><value>排除
-</value></data>
-<data name='Blends_Hue' xml:space='preserve'><value>色相
-</value></data>
-<data name='Blends_Luminosity' xml:space='preserve'><value>光度
-</value></data>
-<data name='Blends_Subtract' xml:space='preserve'><value>减去
-</value></data>
-<data name='Blends_Division' xml:space='preserve'><value>反色
-</value></data>
-<data name='$PhotosPage_BackTip' xml:space='preserve'><value>返回
-</value></data>
-<data name='$DisplayName' xml:space='preserve'><value>修图2
-</value></data>
-<data name='$SettingPage_Back' xml:space='preserve'><value>返回
-</value></data>
-<data name='$MainPage_Title' xml:space='preserve'><value>修图2
-</value></data>
-<data name='$MainPage_NewDialog_Close' xml:space='preserve'><value>取消
-</value></data>
-<data name='$MainPage_NewDialog_Primary' xml:space='preserve'><value>确定
-</value></data>
-<data name='$MainPage_SizePicker_Width' xml:space='preserve'><value>宽度
-</value></data>
-<data name='$MainPage_SizePicker_Height' xml:space='preserve'><value>高度
-</value></data>
-<data name='$MainPage_Pictures_Close' xml:space='preserve'><value>取消
-</value></data>
-<data name='$MainPage_Rename' xml:space='preserve'><value>重命名
-</value></data>
-<data name='$MainPage_Rename_Title' xml:space='preserve'><value>重命名项目
-</value></data>
-<data name='$MainPage_Rename_Close' xml:space='preserve'><value>取消
-</value></data>
-<data name='$MainPage_RenameDialog_Title' xml:space='preserve'><value>重命名项目
-</value></data>
-<data name='$MainPage_RenameDialog_Close' xml:space='preserve'><value>取消
-</value></data>
-<data name='$MainPage_RenameDialog_Primary' xml:space='preserve'><value>重命名
-</value></data>
-<data name='$MainPage_RenameDialog_TextBox_PlaceholderText' xml:space='preserve'><value>在此输入名字
-</value></data>
-<data name='$MainPage_Delete' xml:space='preserve'><value>删除
-</value></data>
-<data name='$MainPage_Delete_Close' xml:space='preserve'><value>取消
-</value></data>
-<data name='$MainPage_Delete_Primary' xml:space='preserve'><value>删除
-</value></data>
-<data name='$MainPage_Duplicate' xml:space='preserve'><value>副本
-</value></data>
-<data name='$MainPage_Duplicate_Close' xml:space='preserve'><value>取消
-</value></data>
-<data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>副本
-</value></data>
-<data name='$DrawPage_Export' xml:space='preserve'><value>导出
-</value></data>
-<data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>取消
-</value></data>
-<data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>确定
-</value></data>
-<data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>宽度
-</value></data>
-<data name='$DrawPage_SetupDialog_SizePicker_Height' xml:space='preserve'><value>高度
-</value></data>
-<data name='$DrawPage_ExportDialog_Close' xml:space='preserve'><value>取消
-</value></data>
-<data name='$DrawPage_ExportDialog_Primary' xml:space='preserve'><value>导出
-</value></data>
-<data name='$DrawPage_ExportDialog_SizePicker_Width' xml:space='preserve'><value>宽度
-</value></data>
-<data name='$DrawPage_ExportDialog_SizePicker_Height' xml:space='preserve'><value>高度
-</value></data>
-<data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>在此输入名字
-</value></data>
-<data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>取消
-</value></data>
-<data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>重命名
-</value></data>
-<data name='Tools_Fill' xml:space='preserve'><value>填充
-</value></data>
-<data name='Tools_Stroke' xml:space='preserve'><value>描边
-</value></data>
-<data name='Tools_Brush' xml:space='preserve'><value>笔刷
-</value></data>
-<data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>填充
-</value></data>
-<data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>描边
-</value></data>
-<data name='Tools_Brush_Type' xml:space='preserve'><value>类型
-</value></data>
-<data name='Tools_Brush_Type_None' xml:space='preserve'><value>无
-</value></data>
-<data name='Tools_Brush_Type_Color' xml:space='preserve'><value>颜色
-</value></data>
-<data name='Tools_Brush_Type_Image' xml:space='preserve'><value>图像
-</value></data>
-<data name='Tools_Brush_Brush' xml:space='preserve'><value>笔刷
-</value></data>
-<data name='Tools_Brush_Extend_Mirror' xml:space='preserve'><value>镜像
-</value></data>
-<data name='Tools_Brush_Stop_Remove' xml:space='preserve'><value>移除
-</value></data>
-<data name='Tools_GeometryRectangle' xml:space='preserve'><value>矩形
-</value></data>
-<data name='Tools_GeometryEllipse' xml:space='preserve'><value>椭圆
-</value></data>
-<data name='Tools_Node_Remove' xml:space='preserve'><value>移除
-</value></data>
-<data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>角度
-</value></data>
-<data name='Tools_TextArtistic' xml:space='preserve'><value>艺术文本
-</value></data>
-<data name='Tools_TextFrame' xml:space='preserve'><value>边框文本
-</value></data>
-<data name='Tools_Image' xml:space='preserve'><value>图像
-</value></data>
-<data name='Tools_PatternGrid' xml:space='preserve'><value>网格
-</value></data>
-<data name='Tools_PatternGrid_Type' xml:space='preserve'><value>类型
-</value></data>
-<data name='Tools_PatternGrid_Grid' xml:space='preserve'><value>网格
-</value></data>
-<data name='Tools_PatternGrid_HorizontalStep' xml:space='preserve'><value>水平步
-</value></data>
-<data name='Tools_PatternGrid_VerticalStep' xml:space='preserve'><value>垂直步
-</value></data>
-<data name='Tools_PatternDiagonal' xml:space='preserve'><value>斜线
-</value></data>
-<data name='Tools_PatternDiagonal_Offset' xml:space='preserve'><value>偏移
-</value></data>
-<data name='Tools_PatternDiagonal_HorizontalStep' xml:space='preserve'><value>水平步
-</value></data>
-<data name='Tools_PatternSpotted' xml:space='preserve'><value>斑点
-</value></data>
-<data name='Tools_PatternSpotted_Radius' xml:space='preserve'><value>半径
-</value></data>
-<data name='Tools_GeometryRoundRect' xml:space='preserve'><value>圆角矩形
-</value></data>
-<data name='Tools_GeometryTriangle' xml:space='preserve'><value>三角形
-</value></data>
-<data name='Tools_GeometryTriangle_Mirror' xml:space='preserve'><value>镜像
-</value></data>
-<data name='Tools_GeometryDiamond' xml:space='preserve'><value>钻石
-</value></data>
-<data name='Tools_GeometryDiamond_Mirror' xml:space='preserve'><value>镜像
-</value></data>
-<data name='Tools_GeometryPentagon' xml:space='preserve'><value>五边形
-</value></data>
-<data name='Tools_GeometryPentagon_Points' xml:space='preserve'><value>点数
-</value></data>
-<data name='Tools_GeometryStar' xml:space='preserve'><value>星
-</value></data>
-<data name='Tools_GeometryStar_Points' xml:space='preserve'><value>点数
-</value></data>
-<data name='Tools_GeometryStar_InnerRadius' xml:space='preserve'><value>内半径
-</value></data>
-<data name='Tools_GeometryCog' xml:space='preserve'><value>齿轮
-</value></data>
-<data name='Tools_GeometryCog_InnerRadius' xml:space='preserve'><value>内半径
-</value></data>
-<data name='Tools_GeometryDount' xml:space='preserve'><value>甜甜圈
-</value></data>
-<data name='Tools_GeometryPie' xml:space='preserve'><value>饼
-</value></data>
-<data name='Tools_GeometryPie_SweepAngle' xml:space='preserve'><value>扫描角度
-</value></data>
-<data name='Tools_GeometryCookie' xml:space='preserve'><value>曲奇
-</value></data>
-<data name='Tools_GeometryCookie_InnerRadius' xml:space='preserve'><value>内半径
-</value></data>
-<data name='Tools_GeometryCookie_SweepAngle' xml:space='preserve'><value>扫描角度
-</value></data>
-<data name='Tools_GeometryArrow' xml:space='preserve'><value>箭头
-</value></data>
-<data name='Tools_GeometryArrow_ArrowTail_None' xml:space='preserve'><value>无
-</value></data>
-<data name='Tools_GeometryCapsule' xml:space='preserve'><value>胶囊
-</value></data>
-<data name='Tools_GeometryHeart' xml:space='preserve'><value>心
-</value></data>
-<data name='Layers_Group' xml:space='preserve'><value>分组
-</value></data>
-<data name='Layers_GeometryRectangle' xml:space='preserve'><value>矩形
-</value></data>
-<data name='Layers_GeometryEllipse' xml:space='preserve'><value>椭圆
-</value></data>
-<data name='Layers_TextArtistic' xml:space='preserve'><value>艺术文本
-</value></data>
-<data name='Layers_TextFrame' xml:space='preserve'><value>边框文本
-</value></data>
-<data name='Layers_Image' xml:space='preserve'><value>图像
-</value></data>
-<data name='Layers_PatternGrid' xml:space='preserve'><value>网格
-</value></data>
-<data name='Layers_PatternDiagonal' xml:space='preserve'><value>斜线
-</value></data>
-<data name='Layers_PatternSpotted' xml:space='preserve'><value>斑点
-</value></data>
-<data name='Layers_GeometryRoundRect' xml:space='preserve'><value>圆角矩形
-</value></data>
-<data name='Layers_GeometryTriangle' xml:space='preserve'><value>三角形
-</value></data>
-<data name='Layers_GeometryDiamond' xml:space='preserve'><value>钻石
-</value></data>
-<data name='Layers_GeometryPentagon' xml:space='preserve'><value>五边形
-</value></data>
-<data name='Layers_GeometryStar' xml:space='preserve'><value>星
-</value></data>
-<data name='Layers_GeometryCog' xml:space='preserve'><value>齿轮
-</value></data>
-<data name='Layers_GeometryDount' xml:space='preserve'><value>甜甜圈
-</value></data>
-<data name='Layers_GeometryPie' xml:space='preserve'><value>饼
-</value></data>
-<data name='Layers_GeometryCookie' xml:space='preserve'><value>曲奇
-</value></data>
-<data name='Layers_GeometryArrow' xml:space='preserve'><value>箭头
-</value></data>
-<data name='Layers_GeometryCapsule' xml:space='preserve'><value>胶囊
-</value></data>
-<data name='Layers_GeometryHeart' xml:space='preserve'><value>心
-</value></data>
-<data name='Menus_Edit' xml:space='preserve'><value>编辑
-</value></data>
-<data name='Menus_Stroke' xml:space='preserve'><value>描边
-</value></data>
-<data name='Menus_Transformer' xml:space='preserve'><value>变换
-</value></data>
-<data name='Menus_Transformer_Width' xml:space='preserve'><value>宽度
-</value></data>
-<data name='Menus_Transformer_Height' xml:space='preserve'><value>高度
-</value></data>
-<data name='Menus_Color' xml:space='preserve'><value>颜色
-</value></data>
-<data name='Menus_Layer_Opacity' xml:space='preserve'><value>不透明度
-</value></data>
-<data name='Edits_Edit' xml:space='preserve'><value>编辑
-</value></data>
-<data name='Edits_Edit_Duplicate' xml:space='preserve'><value>副本
-</value></data>
-<data name='Edits_Edit_Copy' xml:space='preserve'><value>复制
-</value></data>
-<data name='Edits_Group' xml:space='preserve'><value>分组
-</value></data>
-<data name='Edits_Group_Group' xml:space='preserve'><value>分组
-</value></data>
-<data name='Operates_Horizontally_Left' xml:space='preserve'><value>左对齐
-</value></data>
-<data name='Operates_Horizontally_Center' xml:space='preserve'><value>居中对齐
-</value></data>
-<data name='Operates_Horizontally_Right' xml:space='preserve'><value>右对齐
-</value></data>
-<data name='Adjustments_Exposure' xml:space='preserve'><value>曝光
-</value></data>
-<data name='Adjustments_Exposure_Exposure' xml:space='preserve'><value>曝光
-</value></data>
-<data name='Adjustments_Saturation' xml:space='preserve'><value>饱和度
-</value></data>
-<data name='Adjustments_Saturation_Saturation' xml:space='preserve'><value>饱和度
-</value></data>
-<data name='Adjustments_HueRotation_Angle' xml:space='preserve'><value>角度
-</value></data>
-<data name='Adjustments_Contrast' xml:space='preserve'><value>对比度
-</value></data>
-<data name='Adjustments_Contrast_Contrast' xml:space='preserve'><value>对比度
-</value></data>
-<data name='Adjustments_Temperature' xml:space='preserve'><value>冷暖
-</value></data>
-<data name='Adjustments_Temperature_Temperature' xml:space='preserve'><value>冷暖
-</value></data>
-<data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>量
-</value></data>
-<data name='Adjustments_Vignette_Color' xml:space='preserve'><value>颜色
-</value></data>
-<data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>半径
-</value></data>
-<data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>半径
-</value></data>
-<data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>角度
-</value></data>
-<data name='Effects_Sharpen_Amount' xml:space='preserve'><value>量
-</value></data>
-<data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>半径
-</value></data>
-<data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>不透明度
-</value></data>
-<data name='Effects_OuterShadow_Offset' xml:space='preserve'><value>偏移
-</value></data>
-<data name='Effects_OuterShadow_Angle' xml:space='preserve'><value>角度
-</value></data>
-<data name='Effects_OuterShadow_Color' xml:space='preserve'><value>颜色
-</value></data>
-<data name='Effects_Edge_Amount' xml:space='preserve'><value>量
-</value></data>
-<data name='Effects_Edge_Radius' xml:space='preserve'><value>半径
-</value></data>
-<data name='Effects_Emboss_Radius' xml:space='preserve'><value>半径
-</value></data>
-<data name='Effects_Emboss_Angle' xml:space='preserve'><value>角度
-</value></data>
-<data name='Effects_Straighten_Angle' xml:space='preserve'><value>角度
-</value></data>
-<data name='Texts_FontAlignment_Left' xml:space='preserve'><value>左对齐
-</value></data>
-<data name='Texts_FontAlignment_Center' xml:space='preserve'><value>居中对齐
-</value></data>
-<data name='Texts_FontAlignment_Right' xml:space='preserve'><value>右对齐
-</value></data>
-<data name='Strokes_Dash' xml:space='preserve'><value>破折
-</value></data>
-<data name='Strokes_Dash_Dash' xml:space='preserve'><value>破折
-</value></data>
-<data name='Strokes_Width' xml:space='preserve'><value>宽度
-</value></data>
-<data name='Strokes_Offset' xml:space='preserve'><value>偏移
-</value></data>
-<data name='Blends_Saturation' xml:space='preserve'><value>饱和度
-</value></data>
-<data name='Blends_Color' xml:space='preserve'><value>颜色
-</value></data>
+  <data name='$Loading_Loading' xml:space='preserve'><value>加载中</value></data>
+  <data name='$Loading_LoadFailed' xml:space='preserve'><value>加载失败</value></data>
+  <data name='$Loading_FileCorrupt' xml:space='preserve'><value>文件已损坏</value></data>
+  <data name='$Loading_FileNull' xml:space='preserve'><value>文件为空</value></data>
+  <data name='$Loading_Saving' xml:space='preserve'><value>保存中</value></data>
+  <data name='$Loading_SaveSuccess' xml:space='preserve'><value>保存成功</value></data>
+  <data name='$Loading_SaveFailed' xml:space='preserve'><value>保存失败</value></data>
+  <data name='$PhotosPage_Title' xml:space='preserve'><value>图库</value></data>
+  <data name='$PhotosPage_AddTip' xml:space='preserve'><value>添加本地图片</value></data>
+  <data name='$Untitled' xml:space='preserve'><value>未命名</value></data>
+  <data name='$DocumentationLink' xml:space='preserve'><value>https://gitee.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-ZH.md</value></data>
+  <data name='$SettingPage_Title' xml:space='preserve'><value>设置</value></data>
+  <data name='$SettingPage_About' xml:space='preserve'><value>关于...</value></data>
+  <data name='$SettingPage_Theme' xml:space='preserve'><value>主题</value></data>
+  <data name='$SettingPage_Theme_Light' xml:space='preserve'><value>浅色</value></data>
+  <data name='$SettingPage_Theme_Dark' xml:space='preserve'><value>深色</value></data>
+  <data name='$SettingPage_Theme_UseSystem' xml:space='preserve'><value>跟随系统</value></data>
+  <data name='$SettingPage_DeviceLayout' xml:space='preserve'><value>设备布局</value></data>
+  <data name='$SettingPage_DeviceLayout_Phone' xml:space='preserve'><value>手机</value></data>
+  <data name='$SettingPage_DeviceLayout_Pad' xml:space='preserve'><value>平板</value></data>
+  <data name='$SettingPage_DeviceLayout_PC' xml:space='preserve'><value>桌面</value></data>
+  <data name='$SettingPage_DeviceLayout_Adaptive' xml:space='preserve'><value>自适应</value></data>
+  <data name='$SettingPage_DeviceLayout_AdaptiveWidth' xml:space='preserve'><value>自适应宽度</value></data>
+  <data name='$SettingPage_DeviceLayout_ResetAdaptiveWidth' xml:space='preserve'><value>重置自适应宽度</value></data>
+  <data name='$SettingPage_LayersHeight' xml:space='preserve'><value>图层高度</value></data>
+  <data name='$SettingPage_LayersHeightTip' xml:space='preserve'><value>单击以更改图层控件高度</value></data>
+  <data name='$SettingPage_MenuType' xml:space='preserve'><value>菜单类型</value></data>
+  <data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>取消勾选来隐藏菜单按钮</value></data>
+  <data name='$SettingPage_Key' xml:space='preserve'><value>快捷键</value></data>
+  <data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>画布向左移动</value></data>
+  <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>画布向上移动</value></data>
+  <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>画布向右移动</value></data>
+  <data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>画布向下移动</value></data>
+  <data name='$SettingPage_LocalFolder' xml:space='preserve'><value>本地文件夹</value></data>
+  <data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>打开</value></data>
+  <data name='$MainPage_DocumentationTip' xml:space='preserve'><value>打开文档网页</value></data>
+  <data name='$MainPage_SettingTip' xml:space='preserve'><value>打开设置页面</value></data>
+  <data name='$MainPage_Select_ClickTip' xml:space='preserve'><value>单击以选择项目：</value></data>
+  <data name='$MainPage_Select_All' xml:space='preserve'><value>全选</value></data>
+  <data name='$MainPage_InitialTip' xml:space='preserve'><value>没有项目？你可以...</value></data>
+  <data name='$MainPage_Initial_Sample' xml:space='preserve'><value>打开样本项目</value></data>
+  <data name='$MainPage_Initial_New' xml:space='preserve'><value>创建新项目</value></data>
+  <data name='$MainPage_Initial_Photo' xml:space='preserve'><value>从图库创建新项目</value></data>
+  <data name='$MainPage_Initial_Destop' xml:space='preserve'><value>从桌面创建新项目</value></data>
+  <data name='$MainPage_New' xml:space='preserve'><value>新建</value></data>
+  <data name='$MainPage_NewDialog_Title' xml:space='preserve'><value>添加新项目</value></data>
+  <data name='$MainPage_Pictures' xml:space='preserve'><value>图片</value></data>
+  <data name='$MainPage_Pictures_Photo' xml:space='preserve'><value>图库</value></data>
+  <data name='$MainPage_Pictures_Destop' xml:space='preserve'><value>桌面</value></data>
+  <data name='$MainPage_Rename_Subtitle' xml:space='preserve'><value>选择要重命名的项目。</value></data>
+  <data name='$MainPage_RenameDialog_TextBoxTip' xml:space='preserve'><value>名称已占用！</value></data>
+  <data name='$MainPage_Delete_Title' xml:space='preserve'><value>删除项目</value></data>
+  <data name='$MainPage_Delete_Subtitle' xml:space='preserve'><value>选择要删除的项目。</value></data>
+  <data name='$MainPage_Duplicate_Title' xml:space='preserve'><value>复制项目</value></data>
+  <data name='$MainPage_Duplicate_Subtitle' xml:space='preserve'><value>选择要复制的项目。</value></data>
+  <data name='$DrawPage_Document' xml:space='preserve'><value>文档</value></data>
+  <data name='$DrawPage_DocumentUnSave' xml:space='preserve'><value>不保存并返回</value></data>
+  <data name='$DrawPage_Undo' xml:space='preserve'><value>撤销</value></data>
+  <data name='$DrawPage_Redo' xml:space='preserve'><value>重做</value></data>
+  <data name='$DrawPage_Setup' xml:space='preserve'><value>设定</value></data>
+  <data name='$DrawPage_Snap' xml:space='preserve'><value>吸附</value></data>
+  <data name='$DrawPage_Ruler' xml:space='preserve'><value>标尺</value></data>
+  <data name='$DrawPage_FullScreen' xml:space='preserve'><value>全屏</value></data>
+  <data name='$DrawPage_Tip' xml:space='preserve'><value>提示</value></data>
+  <data name='$DrawPage_Gallery' xml:space='preserve'><value>打开图库页面</value></data>
+  <data name='$DrawPage_Width' xml:space='preserve'><value>切换布局宽度</value></data>
+  <data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>文档 设定</value></data>
+  <data name='$DrawPage_SetupDialog_Layers' xml:space='preserve'><value>所有图层</value></data>
+  <data name='$DrawPage_SetupDialog_Resize' xml:space='preserve'><value>新尺寸</value></data>
+  <data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>锚定到画布</value></data>
+  <data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>导出到...</value></data>
+  <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>质量</value></data>
+  <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>文件格式</value></data>
+  <data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>重命名图层</value></data>
+  <data name='Tools_ConvertToCurves' xml:space='preserve'><value>转换为曲线</value></data>
+  <data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>等比例缩放</value></data>
+  <data name='Tools_MoreTransform_Center' xml:space='preserve'><value>中心缩放</value></data>
+  <data name='Tools_MoreCreate_Square' xml:space='preserve'><value>宽高相等</value></data>
+  <data name='Tools_MoreCreate_Center' xml:space='preserve'><value>中心缩放</value></data>
+  <data name='Tools_Cursor' xml:space='preserve'><value>光标</value></data>
+  <data name='Tools_Cursor_CompositeMode_New' xml:space='preserve'><value>新建</value></data>
+  <data name='Tools_Cursor_CompositeMode_Add' xml:space='preserve'><value>增加</value></data>
+  <data name='Tools_Cursor_CompositeMode_Subtract' xml:space='preserve'><value>减去</value></data>
+  <data name='Tools_View' xml:space='preserve'><value>视图</value></data>
+  <data name='Tools_View_Radian' xml:space='preserve'><value>弧度</value></data>
+  <data name='Tools_View_RadianClear' xml:space='preserve'><value>重置旋转弧度</value></data>
+  <data name='Tools_View_Scale' xml:space='preserve'><value>比例</value></data>
+  <data name='Tools_View_ScaleClear' xml:space='preserve'><value>重置比例</value></data>
+  <data name='Tools_Brush_FillOrStroke' xml:space='preserve'><value>填充或描边</value></data>
+  <data name='Tools_Brush_Type_LinearGradient' xml:space='preserve'><value>线性</value></data>
+  <data name='Tools_Brush_Type_RadialGradient' xml:space='preserve'><value>径向</value></data>
+  <data name='Tools_Brush_Type_EllipticalGradient' xml:space='preserve'><value>椭圆形</value></data>
+  <data name='Tools_Brush_Extend' xml:space='preserve'><value>扩展</value></data>
+  <data name='Tools_Brush_Extend_Clamp' xml:space='preserve'><value>重复</value></data>
+  <data name='Tools_Brush_Extend_Wrap' xml:space='preserve'><value>换行</value></data>
+  <data name='Tools_Brush_Stop_Offset' xml:space='preserve'><value>位移</value></data>
+  <data name='Tools_Brush_Stop_Alpha' xml:space='preserve'><value>Alpha</value></data>
+  <data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value>复制</value></data>
+  <data name='Tools_Brush_Stop_Reverse' xml:space='preserve'><value>反转</value></data>
+  <data name='Tools_Transparency' xml:space='preserve'><value>透明度</value></data>
+  <data name='Tools_Pen' xml:space='preserve'><value>钢笔</value></data>
+  <data name='Tools_Node' xml:space='preserve'><value>节点</value></data>
+  <data name='Tools_Node_Insert' xml:space='preserve'><value>插入</value></data>
+  <data name='Tools_Node_Sharp' xml:space='preserve'><value>尖锐</value></data>
+  <data name='Tools_Node_Smooth' xml:space='preserve'><value>平滑</value></data>
+  <data name='Tools_Node_NodeMode_Restriction' xml:space='preserve'><value>控制点限制</value></data>
+  <data name='Tools_Node_NodeMode_Restriction_Length' xml:space='preserve'><value>长度</value></data>
+  <data name='Tools_Node_NodeMode_Mode' xml:space='preserve'><value>控制点模式</value></data>
+  <data name='Tools_Node_NodeMode_Mode_Mirrored' xml:space='preserve'><value>对称</value></data>
+  <data name='Tools_Node_NodeMode_Mode_Disconnected' xml:space='preserve'><value>断开</value></data>
+  <data name='Tools_Node_NodeMode_Mode_Asymmetric' xml:space='preserve'><value>非对称</value></data>
+  <data name='Tools_Text_PlaceholderText' xml:space='preserve'><value>输入文本...</value></data>
+  <data name='Tools_Image_Select' xml:space='preserve'><value>选择</value></data>
+  <data name='Tools_Image_Replace' xml:space='preserve'><value>替换</value></data>
+  <data name='Tools_Image_Clear' xml:space='preserve'><value>清除</value></data>
+  <data name='Tools_Crop' xml:space='preserve'><value>矢量裁剪</value></data>
+  <data name='Tools_Crop_Reset' xml:space='preserve'><value>重置裁剪</value></data>
+  <data name='Tools_Crop_Fit' xml:space='preserve'><value>适合裁剪</value></data>
+  <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>步</value></data>
+  <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>拐角</value></data>
+  <data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>中心点</value></data>
+  <data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>中间点</value></data>
+  <data name='Tools_GeometryCog_Count' xml:space='preserve'><value>数量</value></data>
+  <data name='Tools_GeometryCog_Tooth' xml:space='preserve'><value>外齿</value></data>
+  <data name='Tools_GeometryCog_Notch' xml:space='preserve'><value>缺口</value></data>
+  <data name='Tools_GeometryDount_HoleRadius' xml:space='preserve'><value>孔半径</value></data>
+  <data name='Tools_GeometryArrow_LeftTail' xml:space='preserve'><value>左端</value></data>
+  <data name='Tools_GeometryArrow_RightTail' xml:space='preserve'><value>右端</value></data>
+  <data name='Tools_GeometryArrow_Value' xml:space='preserve'><value>宽度</value></data>
+  <data name='Tools_GeometryHeart_Spread' xml:space='preserve'><value>扩展</value></data>
+  <data name='Layers_Curve' xml:space='preserve'><value>曲线</value></data>
+  <data name='Layers_CurveMulti' xml:space='preserve'><value>多曲线</value></data>
+  <data name='Menus_Keyboard' xml:space='preserve'><value>键盘</value></data>
+  <data name='Menus_Operate' xml:space='preserve'><value>操作</value></data>
+  <data name='Menus_Adjustment' xml:space='preserve'><value>调整</value></data>
+  <data name='Menus_Adjustment_Add' xml:space='preserve'><value>添加</value></data>
+  <data name='Menus_Adjustment_Filters' xml:space='preserve'><value>滤镜</value></data>
+  <data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>无调整</value></data>
+  <data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>请选择一个图层</value></data>
+  <data name='Menus_Effect' xml:space='preserve'><value>图层FX</value></data>
+  <data name='Menus_Text' xml:space='preserve'><value>文本</value></data>
+  <data name='Menus_Style' xml:space='preserve'><value>样式</value></data>
+  <data name='Menus_History' xml:space='preserve'><value>历史</value></data>
+  <data name='Menus_Transformer_Rotate' xml:space='preserve'><value>旋转</value></data>
+  <data name='Menus_Transformer_Skew' xml:space='preserve'><value>倾斜</value></data>
+  <data name='Menus_Transformer_X' xml:space='preserve'><value>X-轴</value></data>
+  <data name='Menus_Transformer_Y' xml:space='preserve'><value>Y-轴</value></data>
+  <data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>等比例缩放</value></data>
+  <data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>步频</value></data>
+  <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>位置遥控</value></data>
+  <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>锚点</value></data>
+  <data name='Menus_Color_Swatches' xml:space='preserve'><value>预设</value></data>
+  <data name='Menus_Color_Wheel' xml:space='preserve'><value>色轮</value></data>
+  <data name='Menus_Color_RGB' xml:space='preserve'><value>RGB</value></data>
+  <data name='Menus_Color_HSV' xml:space='preserve'><value>HSV</value></data>
+  <data name='Menus_Color_PaletteHue' xml:space='preserve'><value>调色板-色相</value></data>
+  <data name='Menus_Color_PaletteSaturation' xml:space='preserve'><value>调色板-饱和度</value></data>
+  <data name='Menus_Color_PaletteValue' xml:space='preserve'><value>调色板-值</value></data>
+  <data name='Menus_Color_Circle' xml:space='preserve'><value>色环</value></data>
+  <data name='Menus_Layer' xml:space='preserve'><value>图层</value></data>
+  <data name='Menus_Layer_Name' xml:space='preserve'><value>名称</value></data>
+  <data name='Menus_Layer_BlendMode' xml:space='preserve'><value>混合模式</value></data>
+  <data name='Menus_Layer_Visibility' xml:space='preserve'><value>可视</value></data>
+  <data name='Menus_Layer_TagType' xml:space='preserve'><value>标签类型</value></data>
+  <data name='Edits_Edit_Cut' xml:space='preserve'><value>剪切</value></data>
+  <data name='Edits_Edit_Paste' xml:space='preserve'><value>粘贴</value></data>
+  <data name='Edits_Edit_Clear' xml:space='preserve'><value>清除</value></data>
+  <data name='Edits_Select' xml:space='preserve'><value>选择</value></data>
+  <data name='Edits_Select_All' xml:space='preserve'><value>全选</value></data>
+  <data name='Edits_Select_Deselect' xml:space='preserve'><value>取消</value></data>
+  <data name='Edits_Select_Invert' xml:space='preserve'><value>反选</value></data>
+  <data name='Edits_Group_UnGroup' xml:space='preserve'><value>取消分组</value></data>
+  <data name='Edits_Group_Release' xml:space='preserve'><value>释放</value></data>
+  <data name='Edits_Combine_Xor' xml:space='preserve'><value>差异</value></data>
+  <data name='Edits_Combine' xml:space='preserve'><value>结合</value></data>
+  <data name='Edits_Combine_Union' xml:space='preserve'><value>联合</value></data>
+  <data name='Edits_Combine_Exclude' xml:space='preserve'><value>减少</value></data>
+  <data name='Edits_Combine_Intersect' xml:space='preserve'><value>相交</value></data>
+  <data name='Edits_Combine_ExpandStroke' xml:space='preserve'><value>展开描边</value></data>
+  <data name='Operates_Transform_FlipHorizontal' xml:space='preserve'><value>水平翻转</value></data>
+  <data name='Operates_Transform_FlipVertical' xml:space='preserve'><value>垂直翻转</value></data>
+  <data name='Operates_Transform_RotateLeft' xml:space='preserve'><value>左旋转</value></data>
+  <data name='Operates_Transform_RotateRight' xml:space='preserve'><value>右旋转</value></data>
+  <data name='Operates_Arrange' xml:space='preserve'><value>排列</value></data>
+  <data name='Operates_Arrange_MoveFront' xml:space='preserve'><value>移到前面</value></data>
+  <data name='Operates_Arrange_BackOne' xml:space='preserve'><value>向后移动一个</value></data>
+  <data name='Operates_Arrange_ForwardOne' xml:space='preserve'><value>向前移动一个</value></data>
+  <data name='Operates_Arrange_MoveBack' xml:space='preserve'><value>移到后面</value></data>
+  <data name='Operates_Horizontally' xml:space='preserve'><value>水平对齐</value></data>
+  <data name='Operates_Horizontally_Space' xml:space='preserve'><value>水平间隔</value></data>
+  <data name='Operates_Vertically' xml:space='preserve'><value>垂直对齐</value></data>
+  <data name='Operates_Vertically_Top' xml:space='preserve'><value>顶部对齐</value></data>
+  <data name='Operates_Vertically_Middle' xml:space='preserve'><value>中间对齐</value></data>
+  <data name='Operates_Vertically_Bottom' xml:space='preserve'><value>底部对齐</value></data>
+  <data name='Operates_Vertically_Space' xml:space='preserve'><value>垂直间隔</value></data>
+  <data name='Adjustments_Gray' xml:space='preserve'><value>黑白</value></data>
+  <data name='Adjustments_Invert' xml:space='preserve'><value>反色</value></data>
+  <data name='Adjustments_Brightness' xml:space='preserve'><value>亮度</value></data>
+  <data name='Adjustments_Brightness_WhiteToLight' xml:space='preserve'><value>白转亮</value></data>
+  <data name='Adjustments_Brightness_WhiteToDark' xml:space='preserve'><value>白转暗</value></data>
+  <data name='Adjustments_Brightness_BlackToLight' xml:space='preserve'><value>黑转亮</value></data>
+  <data name='Adjustments_Brightness_BlackToDark' xml:space='preserve'><value>黑转暗</value></data>
+  <data name='Adjustments_HueRotation' xml:space='preserve'><value>色相旋转</value></data>
+  <data name='Adjustments_Temperature_Tint' xml:space='preserve'><value>色彩增强</value></data>
+  <data name='Adjustments_HighlightsAndShadows' xml:space='preserve'><value>高光阴影</value></data>
+  <data name='Adjustments_HighlightsAndShadows_Shadows' xml:space='preserve'><value>阴影</value></data>
+  <data name='Adjustments_HighlightsAndShadows_Highlights' xml:space='preserve'><value>高光</value></data>
+  <data name='Adjustments_HighlightsAndShadows_Clarity' xml:space='preserve'><value>清晰</value></data>
+  <data name='Adjustments_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>模糊</value></data>
+  <data name='Adjustments_GammaTransfer' xml:space='preserve'><value>伽马传递</value></data>
+  <data name='Adjustments_GammaTransfer_Offset' xml:space='preserve'><value>位移</value></data>
+  <data name='Adjustments_GammaTransfer_Exponent' xml:space='preserve'><value>指数</value></data>
+  <data name='Adjustments_GammaTransfer_Amplitude' xml:space='preserve'><value>振幅</value></data>
+  <data name='Adjustments_GammaTransfer_Alpha' xml:space='preserve'><value>Alpha</value></data>
+  <data name='Adjustments_GammaTransfer_Red' xml:space='preserve'><value>红</value></data>
+  <data name='Adjustments_GammaTransfer_Green' xml:space='preserve'><value>绿</value></data>
+  <data name='Adjustments_GammaTransfer_Blue' xml:space='preserve'><value>蓝</value></data>
+  <data name='Adjustments_Vignette' xml:space='preserve'><value>装饰图案</value></data>
+  <data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>曲线</value></data>
+  <data name='Effects_GaussianBlur' xml:space='preserve'><value>高斯模糊</value></data>
+  <data name='Effects_DirectionalBlur' xml:space='preserve'><value>定向模糊</value></data>
+  <data name='Effects_Sharpen' xml:space='preserve'><value>锐化</value></data>
+  <data name='Effects_OuterShadow' xml:space='preserve'><value>外部投影</value></data>
+  <data name='Effects_Edge' xml:space='preserve'><value>边缘</value></data>
+  <data name='Effects_Morphology' xml:space='preserve'><value>形态学</value></data>
+  <data name='Effects_Morphology_Size' xml:space='preserve'><value>尺寸</value></data>
+  <data name='Effects_Emboss' xml:space='preserve'><value>浮雕</value></data>
+  <data name='Effects_Straighten' xml:space='preserve'><value>拉直</value></data>
+  <data name='Texts_FontAlignment' xml:space='preserve'><value>对齐</value></data>
+  <data name='Texts_FontAlignment_Justified' xml:space='preserve'><value>对齐</value></data>
+  <data name='Texts_FontStyle' xml:space='preserve'><value>字体样式</value></data>
+  <data name='Texts_FontStyle_Bold' xml:space='preserve'><value>加粗</value></data>
+  <data name='Texts_FontStyle_Italic' xml:space='preserve'><value>斜体</value></data>
+  <data name='Texts_FontStyle_UnderLine' xml:space='preserve'><value>下划线</value></data>
+  <data name='Texts_FontWeight' xml:space='preserve'><value>字体粗细</value></data>
+  <data name='Texts_FontWeight_Black' xml:space='preserve'><value>黑体</value></data>
+  <data name='Texts_FontWeight_Bold' xml:space='preserve'><value>粗体</value></data>
+  <data name='Texts_FontWeight_ExtraBlack' xml:space='preserve'><value>特黑体</value></data>
+  <data name='Texts_FontWeight_ExtraBold' xml:space='preserve'><value>特粗体</value></data>
+  <data name='Texts_FontWeight_ExtraLight' xml:space='preserve'><value>特细体</value></data>
+  <data name='Texts_FontWeight_Light' xml:space='preserve'><value>细体</value></data>
+  <data name='Texts_FontWeight_Medium' xml:space='preserve'><value>中等</value></data>
+  <data name='Texts_FontWeight_Normal' xml:space='preserve'><value>常规</value></data>
+  <data name='Texts_FontWeight_SemiBold' xml:space='preserve'><value>半粗体</value></data>
+  <data name='Texts_FontWeight_SemiLight' xml:space='preserve'><value>半细体</value></data>
+  <data name='Texts_FontWeight_Thin' xml:space='preserve'><value>瘦体</value></data>
+  <data name='Texts_FontFamily' xml:space='preserve'><value>字体</value></data>
+  <data name='Texts_FontSize' xml:space='preserve'><value>字体大小</value></data>
+  <data name='Strokes_Dash_Solid' xml:space='preserve'><value>固体</value></data>
+  <data name='Strokes_Dash_Dot' xml:space='preserve'><value>端点</value></data>
+  <data name='Strokes_Dash_DashDot' xml:space='preserve'><value>破折 端点</value></data>
+  <data name='Strokes_Cap' xml:space='preserve'><value>端点</value></data>
+  <data name='Strokes_Cap_Flat' xml:space='preserve'><value>平面</value></data>
+  <data name='Strokes_Cap_Square' xml:space='preserve'><value>正方形</value></data>
+  <data name='Strokes_Cap_Round' xml:space='preserve'><value>圆形</value></data>
+  <data name='Strokes_Join' xml:space='preserve'><value>拐角</value></data>
+  <data name='Strokes_Join_Miter' xml:space='preserve'><value>尖角</value></data>
+  <data name='Strokes_Join_Bevel' xml:space='preserve'><value>斜角</value></data>
+  <data name='Strokes_Join_Round' xml:space='preserve'><value>圆角</value></data>
+  <data name='Strokes_Join_MiterOrBevel' xml:space='preserve'><value>尖角和斜角</value></data>
+  <data name='Strokes_IsFollowTransform' xml:space='preserve'><value>样式跟随变换</value></data>
+  <data name='Strokes_IsStrokeBehindFill' xml:space='preserve'><value>描边在填充之后</value></data>
+  <data name='Strokes_IsStrokeWidthFollowScale' xml:space='preserve'><value>描边宽度跟随缩放</value></data>
+  <data name='Blends_None' xml:space='preserve'><value>正常</value></data>
+  <data name='Blends_Multiply' xml:space='preserve'><value>正片叠底</value></data>
+  <data name='Blends_Screen' xml:space='preserve'><value>屏幕</value></data>
+  <data name='Blends_Darken' xml:space='preserve'><value>暗</value></data>
+  <data name='Blends_Lighten' xml:space='preserve'><value>亮</value></data>
+  <data name='Blends_Dissolve' xml:space='preserve'><value>溶解</value></data>
+  <data name='Blends_ColorBurn' xml:space='preserve'><value>颜色加深</value></data>
+  <data name='Blends_LinearBurn' xml:space='preserve'><value>线性加深</value></data>
+  <data name='Blends_DarkerColor' xml:space='preserve'><value>更暗的颜色</value></data>
+  <data name='Blends_LighterColor' xml:space='preserve'><value>更亮的颜色</value></data>
+  <data name='Blends_ColorDodge' xml:space='preserve'><value>颜色减淡</value></data>
+  <data name='Blends_LinearDodge' xml:space='preserve'><value>线性减淡</value></data>
+  <data name='Blends_Overlay' xml:space='preserve'><value>覆盖</value></data>
+  <data name='Blends_SoftLight' xml:space='preserve'><value>柔光</value></data>
+  <data name='Blends_HardLight' xml:space='preserve'><value>硬光</value></data>
+  <data name='Blends_VividLight' xml:space='preserve'><value>艳光</value></data>
+  <data name='Blends_LinearLight' xml:space='preserve'><value>线性光</value></data>
+  <data name='Blends_PinLight' xml:space='preserve'><value>射灯</value></data>
+  <data name='Blends_HardMix' xml:space='preserve'><value>硬混</value></data>
+  <data name='Blends_Difference' xml:space='preserve'><value>差异</value></data>
+  <data name='Blends_Exclusion' xml:space='preserve'><value>排除</value></data>
+  <data name='Blends_Hue' xml:space='preserve'><value>色相</value></data>
+  <data name='Blends_Luminosity' xml:space='preserve'><value>光度</value></data>
+  <data name='Blends_Subtract' xml:space='preserve'><value>减去</value></data>
+  <data name='Blends_Division' xml:space='preserve'><value>反色</value></data>
+  <data name='$PhotosPage_BackTip' xml:space='preserve'><value>返回</value></data>
+  <data name='$DisplayName' xml:space='preserve'><value>修图2</value></data>
+  <data name='$SettingPage_Back' xml:space='preserve'><value>返回</value></data>
+  <data name='$MainPage_Title' xml:space='preserve'><value>修图2</value></data>
+  <data name='$MainPage_NewDialog_Close' xml:space='preserve'><value>取消</value></data>
+  <data name='$MainPage_NewDialog_Primary' xml:space='preserve'><value>确定</value></data>
+  <data name='$MainPage_SizePicker_Width' xml:space='preserve'><value>宽度</value></data>
+  <data name='$MainPage_SizePicker_Height' xml:space='preserve'><value>高度</value></data>
+  <data name='$MainPage_Pictures_Close' xml:space='preserve'><value>取消</value></data>
+  <data name='$MainPage_Rename' xml:space='preserve'><value>重命名</value></data>
+  <data name='$MainPage_Rename_Title' xml:space='preserve'><value>重命名项目</value></data>
+  <data name='$MainPage_Rename_Close' xml:space='preserve'><value>取消</value></data>
+  <data name='$MainPage_RenameDialog_Title' xml:space='preserve'><value>重命名项目</value></data>
+  <data name='$MainPage_RenameDialog_Close' xml:space='preserve'><value>取消</value></data>
+  <data name='$MainPage_RenameDialog_Primary' xml:space='preserve'><value>重命名</value></data>
+  <data name='$MainPage_RenameDialog_TextBox_PlaceholderText' xml:space='preserve'><value>在此输入名字</value></data>
+  <data name='$MainPage_Delete' xml:space='preserve'><value>删除</value></data>
+  <data name='$MainPage_Delete_Close' xml:space='preserve'><value>取消</value></data>
+  <data name='$MainPage_Delete_Primary' xml:space='preserve'><value>删除</value></data>
+  <data name='$MainPage_Duplicate' xml:space='preserve'><value>副本</value></data>
+  <data name='$MainPage_Duplicate_Close' xml:space='preserve'><value>取消</value></data>
+  <data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>副本</value></data>
+  <data name='$DrawPage_Export' xml:space='preserve'><value>导出</value></data>
+  <data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>取消</value></data>
+  <data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>确定</value></data>
+  <data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>宽度</value></data>
+  <data name='$DrawPage_SetupDialog_SizePicker_Height' xml:space='preserve'><value>高度</value></data>
+  <data name='$DrawPage_ExportDialog_Close' xml:space='preserve'><value>取消</value></data>
+  <data name='$DrawPage_ExportDialog_Primary' xml:space='preserve'><value>导出</value></data>
+  <data name='$DrawPage_ExportDialog_SizePicker_Width' xml:space='preserve'><value>宽度</value></data>
+  <data name='$DrawPage_ExportDialog_SizePicker_Height' xml:space='preserve'><value>高度</value></data>
+  <data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>在此输入名字</value></data>
+  <data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>取消</value></data>
+  <data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>重命名</value></data>
+  <data name='Tools_Fill' xml:space='preserve'><value>填充</value></data>
+  <data name='Tools_Stroke' xml:space='preserve'><value>描边</value></data>
+  <data name='Tools_Brush' xml:space='preserve'><value>笔刷</value></data>
+  <data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>填充</value></data>
+  <data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>描边</value></data>
+  <data name='Tools_Brush_Type' xml:space='preserve'><value>类型</value></data>
+  <data name='Tools_Brush_Type_None' xml:space='preserve'><value>无</value></data>
+  <data name='Tools_Brush_Type_Color' xml:space='preserve'><value>颜色</value></data>
+  <data name='Tools_Brush_Type_Image' xml:space='preserve'><value>图像</value></data>
+  <data name='Tools_Brush_Brush' xml:space='preserve'><value>笔刷</value></data>
+  <data name='Tools_Brush_Extend_Mirror' xml:space='preserve'><value>镜像</value></data>
+  <data name='Tools_Brush_Stop_Remove' xml:space='preserve'><value>移除</value></data>
+  <data name='Tools_GeometryRectangle' xml:space='preserve'><value>矩形</value></data>
+  <data name='Tools_GeometryEllipse' xml:space='preserve'><value>椭圆</value></data>
+  <data name='Tools_Node_Remove' xml:space='preserve'><value>移除</value></data>
+  <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>角度</value></data>
+  <data name='Tools_TextArtistic' xml:space='preserve'><value>艺术文本</value></data>
+  <data name='Tools_TextFrame' xml:space='preserve'><value>边框文本</value></data>
+  <data name='Tools_Image' xml:space='preserve'><value>图像</value></data>
+  <data name='Tools_PatternGrid' xml:space='preserve'><value>网格</value></data>
+  <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>类型</value></data>
+  <data name='Tools_PatternGrid_Grid' xml:space='preserve'><value>网格</value></data>
+  <data name='Tools_PatternGrid_HorizontalStep' xml:space='preserve'><value>水平步</value></data>
+  <data name='Tools_PatternGrid_VerticalStep' xml:space='preserve'><value>垂直步</value></data>
+  <data name='Tools_PatternDiagonal' xml:space='preserve'><value>斜线</value></data>
+  <data name='Tools_PatternDiagonal_Offset' xml:space='preserve'><value>偏移</value></data>
+  <data name='Tools_PatternDiagonal_HorizontalStep' xml:space='preserve'><value>水平步</value></data>
+  <data name='Tools_PatternSpotted' xml:space='preserve'><value>斑点</value></data>
+  <data name='Tools_PatternSpotted_Radius' xml:space='preserve'><value>半径</value></data>
+  <data name='Tools_GeometryRoundRect' xml:space='preserve'><value>圆角矩形</value></data>
+  <data name='Tools_GeometryTriangle' xml:space='preserve'><value>三角形</value></data>
+  <data name='Tools_GeometryTriangle_Mirror' xml:space='preserve'><value>镜像</value></data>
+  <data name='Tools_GeometryDiamond' xml:space='preserve'><value>钻石</value></data>
+  <data name='Tools_GeometryDiamond_Mirror' xml:space='preserve'><value>镜像</value></data>
+  <data name='Tools_GeometryPentagon' xml:space='preserve'><value>五边形</value></data>
+  <data name='Tools_GeometryPentagon_Points' xml:space='preserve'><value>点数</value></data>
+  <data name='Tools_GeometryStar' xml:space='preserve'><value>星</value></data>
+  <data name='Tools_GeometryStar_Points' xml:space='preserve'><value>点数</value></data>
+  <data name='Tools_GeometryStar_InnerRadius' xml:space='preserve'><value>内半径</value></data>
+  <data name='Tools_GeometryCog' xml:space='preserve'><value>齿轮</value></data>
+  <data name='Tools_GeometryCog_InnerRadius' xml:space='preserve'><value>内半径</value></data>
+  <data name='Tools_GeometryDount' xml:space='preserve'><value>甜甜圈</value></data>
+  <data name='Tools_GeometryPie' xml:space='preserve'><value>饼</value></data>
+  <data name='Tools_GeometryPie_SweepAngle' xml:space='preserve'><value>扫描角度</value></data>
+  <data name='Tools_GeometryCookie' xml:space='preserve'><value>曲奇</value></data>
+  <data name='Tools_GeometryCookie_InnerRadius' xml:space='preserve'><value>内半径</value></data>
+  <data name='Tools_GeometryCookie_SweepAngle' xml:space='preserve'><value>扫描角度</value></data>
+  <data name='Tools_GeometryArrow' xml:space='preserve'><value>箭头</value></data>
+  <data name='Tools_GeometryArrow_ArrowTail_None' xml:space='preserve'><value>无</value></data>
+  <data name='Tools_GeometryCapsule' xml:space='preserve'><value>胶囊</value></data>
+  <data name='Tools_GeometryHeart' xml:space='preserve'><value>心</value></data>
+  <data name='Layers_Group' xml:space='preserve'><value>分组</value></data>
+  <data name='Layers_GeometryRectangle' xml:space='preserve'><value>矩形</value></data>
+  <data name='Layers_GeometryEllipse' xml:space='preserve'><value>椭圆</value></data>
+  <data name='Layers_TextArtistic' xml:space='preserve'><value>艺术文本</value></data>
+  <data name='Layers_TextFrame' xml:space='preserve'><value>边框文本</value></data>
+  <data name='Layers_Image' xml:space='preserve'><value>图像</value></data>
+  <data name='Layers_PatternGrid' xml:space='preserve'><value>网格</value></data>
+  <data name='Layers_PatternDiagonal' xml:space='preserve'><value>斜线</value></data>
+  <data name='Layers_PatternSpotted' xml:space='preserve'><value>斑点</value></data>
+  <data name='Layers_GeometryRoundRect' xml:space='preserve'><value>圆角矩形</value></data>
+  <data name='Layers_GeometryTriangle' xml:space='preserve'><value>三角形</value></data>
+  <data name='Layers_GeometryDiamond' xml:space='preserve'><value>钻石</value></data>
+  <data name='Layers_GeometryPentagon' xml:space='preserve'><value>五边形</value></data>
+  <data name='Layers_GeometryStar' xml:space='preserve'><value>星</value></data>
+  <data name='Layers_GeometryCog' xml:space='preserve'><value>齿轮</value></data>
+  <data name='Layers_GeometryDount' xml:space='preserve'><value>甜甜圈</value></data>
+  <data name='Layers_GeometryPie' xml:space='preserve'><value>饼</value></data>
+  <data name='Layers_GeometryCookie' xml:space='preserve'><value>曲奇</value></data>
+  <data name='Layers_GeometryArrow' xml:space='preserve'><value>箭头</value></data>
+  <data name='Layers_GeometryCapsule' xml:space='preserve'><value>胶囊</value></data>
+  <data name='Layers_GeometryHeart' xml:space='preserve'><value>心</value></data>
+  <data name='Menus_Edit' xml:space='preserve'><value>编辑</value></data>
+  <data name='Menus_Stroke' xml:space='preserve'><value>描边</value></data>
+  <data name='Menus_Transformer' xml:space='preserve'><value>变换</value></data>
+  <data name='Menus_Transformer_Width' xml:space='preserve'><value>宽度</value></data>
+  <data name='Menus_Transformer_Height' xml:space='preserve'><value>高度</value></data>
+  <data name='Menus_Color' xml:space='preserve'><value>颜色</value></data>
+  <data name='Menus_Layer_Opacity' xml:space='preserve'><value>不透明度</value></data>
+  <data name='Edits_Edit' xml:space='preserve'><value>编辑</value></data>
+  <data name='Edits_Edit_Duplicate' xml:space='preserve'><value>副本</value></data>
+  <data name='Edits_Edit_Copy' xml:space='preserve'><value>复制</value></data>
+  <data name='Edits_Group' xml:space='preserve'><value>分组</value></data>
+  <data name='Edits_Group_Group' xml:space='preserve'><value>分组</value></data>
+  <data name='Operates_Horizontally_Left' xml:space='preserve'><value>左对齐</value></data>
+  <data name='Operates_Horizontally_Center' xml:space='preserve'><value>居中对齐</value></data>
+  <data name='Operates_Horizontally_Right' xml:space='preserve'><value>右对齐</value></data>
+  <data name='Adjustments_Exposure' xml:space='preserve'><value>曝光</value></data>
+  <data name='Adjustments_Exposure_Exposure' xml:space='preserve'><value>曝光</value></data>
+  <data name='Adjustments_Saturation' xml:space='preserve'><value>饱和度</value></data>
+  <data name='Adjustments_Saturation_Saturation' xml:space='preserve'><value>饱和度</value></data>
+  <data name='Adjustments_HueRotation_Angle' xml:space='preserve'><value>角度</value></data>
+  <data name='Adjustments_Contrast' xml:space='preserve'><value>对比度</value></data>
+  <data name='Adjustments_Contrast_Contrast' xml:space='preserve'><value>对比度</value></data>
+  <data name='Adjustments_Temperature' xml:space='preserve'><value>冷暖</value></data>
+  <data name='Adjustments_Temperature_Temperature' xml:space='preserve'><value>冷暖</value></data>
+  <data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>量</value></data>
+  <data name='Adjustments_Vignette_Color' xml:space='preserve'><value>颜色</value></data>
+  <data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>半径</value></data>
+  <data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>半径</value></data>
+  <data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>角度</value></data>
+  <data name='Effects_Sharpen_Amount' xml:space='preserve'><value>量</value></data>
+  <data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>半径</value></data>
+  <data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>不透明度</value></data>
+  <data name='Effects_OuterShadow_Offset' xml:space='preserve'><value>偏移</value></data>
+  <data name='Effects_OuterShadow_Angle' xml:space='preserve'><value>角度</value></data>
+  <data name='Effects_OuterShadow_Color' xml:space='preserve'><value>颜色</value></data>
+  <data name='Effects_Edge_Amount' xml:space='preserve'><value>量</value></data>
+  <data name='Effects_Edge_Radius' xml:space='preserve'><value>半径</value></data>
+  <data name='Effects_Emboss_Radius' xml:space='preserve'><value>半径</value></data>
+  <data name='Effects_Emboss_Angle' xml:space='preserve'><value>角度</value></data>
+  <data name='Effects_Straighten_Angle' xml:space='preserve'><value>角度</value></data>
+  <data name='Texts_FontAlignment_Left' xml:space='preserve'><value>左对齐</value></data>
+  <data name='Texts_FontAlignment_Center' xml:space='preserve'><value>居中对齐</value></data>
+  <data name='Texts_FontAlignment_Right' xml:space='preserve'><value>右对齐</value></data>
+  <data name='Strokes_Dash' xml:space='preserve'><value>破折</value></data>
+  <data name='Strokes_Dash_Dash' xml:space='preserve'><value>破折</value></data>
+  <data name='Strokes_Width' xml:space='preserve'><value>宽度</value></data>
+  <data name='Strokes_Offset' xml:space='preserve'><value>偏移</value></data>
+  <data name='Blends_Saturation' xml:space='preserve'><value>饱和度</value></data>
+  <data name='Blends_Color' xml:space='preserve'><value>颜色</value></data>
 
- </root>
+
+</root>
