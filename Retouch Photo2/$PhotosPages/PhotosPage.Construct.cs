@@ -10,9 +10,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2
 {
-    /// <summary> 
-    /// Represents a page to select a photo.
-    /// </summary>
     public sealed partial class PhotosPage : Page
     {
 

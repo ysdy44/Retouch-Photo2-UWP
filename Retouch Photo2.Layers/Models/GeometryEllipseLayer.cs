@@ -62,7 +62,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            return resource.GetString("/Layers/GeometryEllipse");
+            return resource.GetString("Layers_GeometryEllipse");
         }
 
     }

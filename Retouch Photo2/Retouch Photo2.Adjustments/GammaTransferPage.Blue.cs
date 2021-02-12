@@ -3,9 +3,6 @@ using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
-    /// <summary>
-    /// Page of <see cref = "GammaTransferAdjustment"/>.
-    /// </summary>
     public sealed partial class GammaTransferPage : IAdjustmentPage
     {
 

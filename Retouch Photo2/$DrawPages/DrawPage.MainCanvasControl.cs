@@ -9,9 +9,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2
 {
-    /// <summary> 
-    /// Represents a page used to draw vector graphics.
-    /// </summary>
     public sealed partial class DrawPage : Page
     {
 

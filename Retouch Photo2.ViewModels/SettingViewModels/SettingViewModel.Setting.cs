@@ -8,9 +8,6 @@ using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.ViewModels
 {
-    /// <summary> 
-    /// Represents an ViewModel that contains shortcut, layout and <see cref="ViewModels.Setting"/>.
-    /// </summary>
     public partial class SettingViewModel : INotifyPropertyChanged
     {
 

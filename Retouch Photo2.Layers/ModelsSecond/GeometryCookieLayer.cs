@@ -87,7 +87,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            return resource.GetString("/Layers/GeometryCookie");
+            return resource.GetString("Layers_GeometryCookie");
         }
 
     }

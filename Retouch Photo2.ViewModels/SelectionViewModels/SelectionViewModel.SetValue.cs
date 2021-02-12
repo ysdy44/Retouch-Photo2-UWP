@@ -7,9 +7,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.ViewModels
 {
-    /// <summary> 
-    /// Represents a ViewModel that contains some selection propertys of the application.
-    /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
 

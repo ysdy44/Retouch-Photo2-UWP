@@ -33,9 +33,6 @@ namespace Retouch_Photo2
         public Size PageSize;
     }
 
-    /// <summary> 
-    /// Represents a page used to draw vector graphics.
-    /// </summary>
     public sealed partial class DrawPage : Page
     {
 

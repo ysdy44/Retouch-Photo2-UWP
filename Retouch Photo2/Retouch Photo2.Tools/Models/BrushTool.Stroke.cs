@@ -9,9 +9,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    /// <summary>
-    /// <see cref="ITool"/>'s BrushTool.
-    /// </summary>
     public partial class BrushTool : ITool
     {
         //@ViewModel

@@ -6,9 +6,6 @@ using Windows.UI;
 
 namespace Retouch_Photo2.ViewModels
 {
-    /// <summary> 
-    /// Represents a ViewModel that contains some methods of the application
-    /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
 

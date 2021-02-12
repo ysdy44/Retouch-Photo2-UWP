@@ -88,7 +88,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            return resource.GetString("/Layers/GeometryStar");
+            return resource.GetString("Layers_GeometryStar");
         }
 
     }

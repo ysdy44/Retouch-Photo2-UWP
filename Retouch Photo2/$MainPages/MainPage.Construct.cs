@@ -17,9 +17,6 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2
 { 
-    /// <summary>
-    /// Represents a page used to manipulate some items in local folder.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
         private string DisplayName = "Retouch Photo2";
