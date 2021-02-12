@@ -35,7 +35,7 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         public void ConstructLayersHeight()
         {
-            LayerageCollection.ControlsHeight = this.Setting.LayersHeight;
+            LayerManager.ControlsHeight = this.Setting.LayersHeight;
         }
 
         //@Construct

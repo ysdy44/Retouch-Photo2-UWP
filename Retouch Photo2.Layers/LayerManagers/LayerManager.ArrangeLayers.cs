@@ -6,7 +6,7 @@ namespace Retouch_Photo2.Layers
     /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public static partial class LayerageCollection
+    public static partial class LayerManager
     {
 
         /// <summary>
@@ -14,12 +14,12 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public static void ArrangeLayers()
         {
-            LayerageCollection.StackPanel.Children.Clear();
+            LayerManager.StackPanel.Children.Clear();
 
             int depth = -1;
             bool isExpand = true;
 
-            LayerageCollection._arrangeLayers(LayerageCollection.Layerage, depth, isExpand);
+            LayerManager._arrangeLayers(LayerManager.Layerage, depth, isExpand);
         }
         private static void _arrangeLayers(Layerage layerage, int depth, bool isExpand)
         {
@@ -34,10 +34,10 @@ namespace Retouch_Photo2.Layers
 
                 layer.Control.Depth = childDepth;
                 layer.Control.Visibility = childIsExpand ? Visibility.Visible : Visibility.Collapsed;
-                layer.Control.ChildrenCount = layerage.Children.Count;
-                LayerageCollection.StackPanel.Children.Add(layer.Control);
+                layer.Control.ChildrenCount = child.Children.Count;
+                LayerManager.StackPanel.Children.Add(layer.Control);
 
-                LayerageCollection._arrangeLayers(child, childDepth, childIsExpand);
+                LayerManager._arrangeLayers(child, childDepth, childIsExpand);
             }
         }
          
@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Layers
             ILayer layer = layerage.Self;
 
             bool isExpand = layer.IsExpand;
-            LayerageCollection._arrangeLayersIsExpand(layerage, isExpand);
+            LayerManager._arrangeLayersIsExpand(layerage, isExpand);
         }
         private static void _arrangeLayersIsExpand(Layerage layerage, bool isExpand)
         {
@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Layers
                 bool childIsExpand = layer.IsExpand && isExpand;
                 layer.Control.Visibility = childIsExpand ? Visibility.Visible : Visibility.Collapsed;
 
-                LayerageCollection._arrangeLayersIsExpand(child, childIsExpand);
+                LayerManager._arrangeLayersIsExpand(child, childIsExpand);
             }
         } 
 

@@ -190,12 +190,12 @@ namespace Retouch_Photo2.Tools.Models
             LayerBase.Instances.Add(curveLayer);
 
             //Mezzanine
-            LayerageCollection.Mezzanine(curveLayerage);
+            LayerManager.Mezzanine(curveLayerage);
 
 
             this.SelectionViewModel.SetModeSingle(curveLayerage);//Selection
-            LayerageCollection.ArrangeLayers();
-            LayerageCollection.ArrangeLayersBackground();
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
 

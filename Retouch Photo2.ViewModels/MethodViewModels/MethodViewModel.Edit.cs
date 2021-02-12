@@ -42,8 +42,8 @@ namespace Retouch_Photo2.ViewModels
             if (isUndo)
             {
                 this.SetMode();//Selection          
-                LayerageCollection.ArrangeLayers();
-                LayerageCollection.ArrangeLayersBackground();
+                LayerManager.ArrangeLayers();
+                LayerManager.ArrangeLayersBackground();
 
                 this.Invalidate();//Invalidate
             }
@@ -58,11 +58,11 @@ namespace Retouch_Photo2.ViewModels
             LayeragesArrangeHistory history = new LayeragesArrangeHistory("Cut layers");
             this.HistoryPush(history);
 
-            LayerageCollection.RemoveAllSelected();//Remove
+            LayerManager.RemoveAllSelected();//Remove
 
             this.SetMode();//Selection
-            LayerageCollection.ArrangeLayers();
-            LayerageCollection.ArrangeLayersBackground();
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
 
@@ -82,8 +82,8 @@ namespace Retouch_Photo2.ViewModels
                         this.HistoryPush(history);
 
                         Layerage layerage = this.Clipboard.Layerage;
-                        Layerage layerageClone = LayerageCollection.PasteLayerage(this.CanvasDevice, layerage);
-                        LayerageCollection.Mezzanine(layerageClone);
+                        Layerage layerageClone = LayerManager.PasteLayerage(this.CanvasDevice, layerage);
+                        LayerManager.Mezzanine(layerageClone);
                     }
                     break;
                 case ListViewSelectionMode.Multiple:
@@ -93,14 +93,14 @@ namespace Retouch_Photo2.ViewModels
                         this.HistoryPush(history);
 
                         IEnumerable<Layerage> layerages = this.Clipboard.Layerages;
-                        IEnumerable<Layerage> layerageClones = LayerageCollection.PasteLayerages(this.CanvasDevice, layerages);
-                        LayerageCollection.MezzanineRange(layerageClones);
+                        IEnumerable<Layerage> layerageClones = LayerManager.PasteLayerages(this.CanvasDevice, layerages);
+                        LayerManager.MezzanineRange(layerageClones);
                     }
                     break;
             }
 
-            LayerageCollection.ArrangeLayers();
-            LayerageCollection.ArrangeLayersBackground();
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
             this.SetMode();
             this.Invalidate();//Invalidate                          
         }
@@ -124,8 +124,8 @@ namespace Retouch_Photo2.ViewModels
                         this.HistoryPush(history);
 
                         Layerage layerage = this.Clipboard.Layerage;
-                        Layerage layerageClone = LayerageCollection.PasteLayerage(this.CanvasDevice, layerage);
-                        LayerageCollection.Mezzanine(layerageClone);
+                        Layerage layerageClone = LayerManager.PasteLayerage(this.CanvasDevice, layerage);
+                        LayerManager.Mezzanine(layerageClone);
                     }
                     break;
                 case ListViewSelectionMode.Multiple:
@@ -135,16 +135,16 @@ namespace Retouch_Photo2.ViewModels
                         this.HistoryPush(history);
 
                         IEnumerable<Layerage> layerages = this.Clipboard.Layerages;
-                        IEnumerable<Layerage> layerageClones = LayerageCollection.PasteLayerages(this.CanvasDevice, layerages);
-                        LayerageCollection.MezzanineRange(layerageClones);
+                        IEnumerable<Layerage> layerageClones = LayerManager.PasteLayerages(this.CanvasDevice, layerages);
+                        LayerManager.MezzanineRange(layerageClones);
                     }
                     break;
             }
 
             this.SetMode();//Selection
 
-            LayerageCollection.ArrangeLayers();
-            LayerageCollection.ArrangeLayersBackground();
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
 
             this.Invalidate();//Invalidate        
         }
@@ -155,11 +155,11 @@ namespace Retouch_Photo2.ViewModels
             LayeragesArrangeHistory history = new LayeragesArrangeHistory("Clear layers");
             this.HistoryPush(history);
 
-            LayerageCollection.RemoveAllSelected();//Remove
+            LayerManager.RemoveAllSelected();//Remove
 
             this.SetMode();//Selection
-            LayerageCollection.ArrangeLayers();
-            LayerageCollection.ArrangeLayersBackground();
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
 
@@ -172,7 +172,7 @@ namespace Retouch_Photo2.ViewModels
             LayersPropertyHistory history = new LayersPropertyHistory("Set is selected");
 
             //Selection
-            foreach (Layerage child in LayerageCollection.Layerage.Children)
+            foreach (Layerage child in LayerManager.Layerage.Children)
             {
                 ILayer layer = child.Self;
 
@@ -193,8 +193,8 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetMode();//Selection
-            LayerageCollection.ArrangeLayers();
-            LayerageCollection.ArrangeLayersBackground();
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
         
@@ -208,7 +208,7 @@ namespace Retouch_Photo2.ViewModels
             LayersPropertyHistory history = new LayersPropertyHistory("Set is selected");
 
             //Selection
-            foreach (Layerage child in LayerageCollection.Layerage.Children)
+            foreach (Layerage child in LayerManager.Layerage.Children)
             {
                 ILayer layer = child.Self;
 
@@ -226,8 +226,8 @@ namespace Retouch_Photo2.ViewModels
             this.HistoryPush(history);
 
             this.SetMode();//Selection
-            LayerageCollection.ArrangeLayers();
-            LayerageCollection.ArrangeLayersBackground();
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
         
@@ -240,11 +240,11 @@ namespace Retouch_Photo2.ViewModels
             LayeragesArrangeHistory history = new LayeragesArrangeHistory("Group layers");
             this.HistoryPush(history);
 
-            LayerageCollection.GroupAllSelectedLayers(this.CanvasDevice);
+            LayerManager.GroupAllSelectedLayers(this.CanvasDevice);
 
             this.SetMode();
-            LayerageCollection.ArrangeLayers();
-            LayerageCollection.ArrangeLayersBackground();
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
 
@@ -254,11 +254,11 @@ namespace Retouch_Photo2.ViewModels
             LayeragesArrangeHistory history = new LayeragesArrangeHistory("UnGroup layers");
             this.HistoryPush(history);
 
-            LayerageCollection.UnGroupAllSelectedLayer();
+            LayerManager.UnGroupAllSelectedLayer();
 
             this.SetMode();
-            LayerageCollection.ArrangeLayers();
-            LayerageCollection.ArrangeLayersBackground();
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
 
@@ -271,12 +271,12 @@ namespace Retouch_Photo2.ViewModels
             //Selection
             this.SetValue((layerage) =>
             {
-                LayerageCollection.ReleaseGroupLayer(layerage);
+                LayerManager.ReleaseGroupLayer(layerage);
             });
 
             this.SetMode();
-            LayerageCollection.ArrangeLayers();
-            LayerageCollection.ArrangeLayersBackground();
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
 

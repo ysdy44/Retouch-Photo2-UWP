@@ -6,7 +6,7 @@ namespace Retouch_Photo2.Layers
     /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public static partial class LayerageCollection
+    public static partial class LayerManager
     {
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Layers
             }
 
             //Recursive
-            addLayer(LayerageCollection.Layerage);
+            addLayer(LayerManager.Layerage);
 
             return selectedLayerages;
         }
@@ -66,7 +66,7 @@ namespace Retouch_Photo2.Layers
             }
 
             //Recursive
-            addLayer(LayerageCollection.Layerage);
+            addLayer(LayerManager.Layerage);
 
             return selectedLayerages;
         }

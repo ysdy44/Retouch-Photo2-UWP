@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Layers
         public LayerControl(CanvasDevice customDevice, ILayer layer)
         {
             this.InitializeComponent();
-            this.ControlHeight = LayerageCollection.ControlsHeight;
+            this.ControlHeight = LayerManager.ControlsHeight;
             this.ConstructIcon(customDevice);
             this.ConstructTapped(layer);
             this.ConstructButton(layer);

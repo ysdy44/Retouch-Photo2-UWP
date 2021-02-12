@@ -10,7 +10,7 @@ namespace Retouch_Photo2.Layers
     /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public static partial class LayerageCollection
+    public static partial class LayerManager
     {
 
         /// <summary>
@@ -22,11 +22,11 @@ namespace Retouch_Photo2.Layers
         {
             Layerage parents = layerage.Parents;
 
-            if (parents != LayerageCollection.Layerage)
+            if (parents != LayerManager.Layerage)
             {
                 ILayer parentsLayer = parents.Self;
 
-                Layerage parentsParents = LayerageCollection.GetParentsChildren(parents);
+                Layerage parentsParents = LayerManager.GetParentsChildren(parents);
                 int parentsIndex = parents.Children.IndexOf(parents);
                 if (parentsIndex < 0) parentsIndex = 0;
                 if (parentsIndex > parentsParents.Children.Count - 1) parentsIndex = parentsParents.Children.Count - 1;
@@ -45,10 +45,10 @@ namespace Retouch_Photo2.Layers
         public static void UnGroupAllSelectedLayer()
         {
             //Layerages
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected();
-            Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayerages);
+            IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
+            Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayerages);
             if (outermost == null) return;
-            Layerage parents = LayerageCollection.GetParentsChildren(outermost);
+            Layerage parents = LayerManager.GetParentsChildren(outermost);
             int index = parents.Children.IndexOf(outermost);
             if (index < 0) index = 0;
 
@@ -71,7 +71,7 @@ namespace Retouch_Photo2.Layers
 
                 //Remove
                 {
-                    Layerage groupLayerageParents = LayerageCollection.GetParentsChildren(groupLayerage);
+                    Layerage groupLayerageParents = LayerManager.GetParentsChildren(groupLayerage);
                     groupLayerageParents.Children.Remove(groupLayerage);
                 }
 
@@ -86,10 +86,10 @@ namespace Retouch_Photo2.Layers
         public static void GroupAllSelectedLayers(CanvasDevice customDevice)
         {
             //Layerages
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected();
-            Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayerages);
+            IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
+            Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayerages);
             if (outermost == null) return;
-            Layerage parents = LayerageCollection.GetParentsChildren(outermost);
+            Layerage parents = LayerManager.GetParentsChildren(outermost);
             int index = parents.Children.IndexOf(outermost);
             if (index < 0) index = 0;
 
@@ -111,7 +111,7 @@ namespace Retouch_Photo2.Layers
             {
                 ILayer layer = layerage.Self;
 
-                Layerage childParents = LayerageCollection.GetParentsChildren(layerage);
+                Layerage childParents = LayerManager.GetParentsChildren(layerage);
                 childParents.Children.Remove(layerage);
                 layer.IsSelected = false;
 

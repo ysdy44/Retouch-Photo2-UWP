@@ -167,7 +167,7 @@ namespace Retouch_Photo2.Layers
             get => this.depth;
             set
             {
-                double pixels = value * 20.0d;
+                double pixels = value * 12.0d;
                 GridLength gridLength = new GridLength(pixels, GridUnitType.Pixel);
                 this.DepthColumn.Width = gridLength;
 

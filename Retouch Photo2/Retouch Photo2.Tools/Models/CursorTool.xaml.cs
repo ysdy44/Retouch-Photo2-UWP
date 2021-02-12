@@ -133,12 +133,12 @@ namespace Retouch_Photo2.Tools.Models
                         {
                             //BoxChoose 
                             Layerage layerage = this.SelectionViewModel.GetFirstSelectedLayerage();
-                            Layerage parents = LayerageCollection.GetParentsChildren(layerage);
+                            Layerage parents = LayerManager.GetParentsChildren(layerage);
                             this.BoxChoose(parents.Children);
 
                             this.SelectionViewModel.SetMode();//Selection
 
-                            LayerageCollection.ArrangeLayersBackground();
+                            LayerManager.ArrangeLayersBackground();
 
                             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
                         }

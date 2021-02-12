@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Layers
         /// <summary> Gets or sets the Id. </summary>
         public string Id { get; set; }
         /// <summary> Gets or sets the Parents. </summary>
-        public Layerage Parents { get; internal set; } = LayerageCollection.Layerage;
+        public Layerage Parents { get; internal set; } = LayerManager.Layerage;
         /// <summary> Gets or sets the Children. </summary>
         public IList<Layerage> Children { get; internal set; } = new List<Layerage>();
            
@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public void RefactoringParentsTransformer()
         {
-            if (this.Parents != LayerageCollection.Layerage)
+            if (this.Parents != LayerManager.Layerage)
             {
                 ILayer layer = this.Parents.Self;
 
@@ -77,7 +77,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public void RefactoringParentsRender()
         {
-            if (this.Parents != LayerageCollection.Layerage)
+            if (this.Parents != LayerManager.Layerage)
             {
                 ILayer layer = this.Parents.Self;
 
@@ -91,7 +91,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         public void RefactoringParentsIconRender()
         {
-            if (this.Parents != LayerageCollection.Layerage)
+            if (this.Parents != LayerManager.Layerage)
             {
                 ILayer layer = this.Parents.Self;
 

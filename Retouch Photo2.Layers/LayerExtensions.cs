@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Layers
 
             return new Transform2DEffect
             {
-                TransformMatrix = bound.ToIconRenderMatrix(LayerageCollection.ControlsHeight),
+                TransformMatrix = bound.ToIconRenderMatrix(LayerManager.ControlsHeight),
                 Source = canvasImage,
             };
         }

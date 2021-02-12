@@ -403,12 +403,12 @@ namespace Retouch_Photo2.Tools.Models
 
                     foreach (Layerage remove in removeLayerage)
                     {
-                        LayerageCollection.Remove(remove);
+                        LayerManager.Remove(remove);
                     }
 
                     //Selection
                     this.SelectionViewModel.SetMode();//Selection
-                    LayerageCollection.ArrangeLayers();
+                    LayerManager.ArrangeLayers();
                 }
 
                 this.ViewModel.Invalidate();//Invalidate

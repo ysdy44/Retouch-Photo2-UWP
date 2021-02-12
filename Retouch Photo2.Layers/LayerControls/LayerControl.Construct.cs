@@ -27,22 +27,22 @@ namespace Retouch_Photo2.Layers
         {
             this.Tapped += (s, e) =>
             {
-                LayerageCollection.ItemClick?.Invoke(layer);//Delegate
+                LayerManager.ItemClick?.Invoke(layer);//Delegate
                 e.Handled = true;
             };
             this.RightTapped += (s, e) =>
             {
-                LayerageCollection.RightTapped?.Invoke(layer);//Delegate
+                LayerManager.RightTapped?.Invoke(layer);//Delegate
                 e.Handled = true;
             };
             this.Holding += (s, e) =>
             {
-                LayerageCollection.RightTapped?.Invoke(layer);//Delegate
+                LayerManager.RightTapped?.Invoke(layer);//Delegate
                 e.Handled = true;
             };
             this.DoubleTapped += (s, e) =>
             {
-                LayerageCollection.RightTapped?.Invoke(layer);//Delegate
+                LayerManager.RightTapped?.Invoke(layer);//Delegate
                 e.Handled = true;
             };
         }
@@ -51,12 +51,12 @@ namespace Retouch_Photo2.Layers
         {
             this.VisualButton.Tapped += (s, e) =>
             {
-                LayerageCollection.VisibilityChanged?.Invoke(layer);//Delegate
+                LayerManager.VisibilityChanged?.Invoke(layer);//Delegate
                 e.Handled = true;
             };
             this.VisualButton.RightTapped += (s, e) =>
             {
-                LayerageCollection.VisibilityChanged?.Invoke(layer);//Delegate
+                LayerManager.VisibilityChanged?.Invoke(layer);//Delegate
                 e.Handled = true;
             };
             this.VisualButton.Holding += (s, e) => e.Handled = true;
@@ -65,12 +65,12 @@ namespace Retouch_Photo2.Layers
 
             this.ExpanedButton.Tapped += (s, e) =>
             {
-                LayerageCollection.IsExpandChanged?.Invoke(layer);//Delegate   
+                LayerManager.IsExpandChanged?.Invoke(layer);//Delegate   
                 e.Handled = true;
             };
             this.ExpanedButton.RightTapped += (s, e) =>
             {
-                LayerageCollection.IsExpandChanged?.Invoke(layer);//Delegate   
+                LayerManager.IsExpandChanged?.Invoke(layer);//Delegate   
                 e.Handled = true;
             };
             this.ExpanedButton.Holding += (s, e) => e.Handled = true;
@@ -79,12 +79,12 @@ namespace Retouch_Photo2.Layers
 
             this.SelectedButton.Tapped += (s, e) =>
             {
-                LayerageCollection.IsSelectedChanged?.Invoke(layer);//Delegate   
+                LayerManager.IsSelectedChanged?.Invoke(layer);//Delegate   
                 e.Handled = true;
             };
             this.SelectedButton.RightTapped += (s, e) =>
             {
-                LayerageCollection.IsSelectedChanged?.Invoke(layer);//Delegate   
+                LayerManager.IsSelectedChanged?.Invoke(layer);//Delegate   
                 e.Handled = true;
             };
             this.SelectedButton.Holding += (s, e) => e.Handled = true;
@@ -95,16 +95,16 @@ namespace Retouch_Photo2.Layers
         {
             this.ManipulationStarted += (s, e) =>
             {
-                LayerageCollection.IsOverlay = true;
-                LayerageCollection.DragItemsStarted?.Invoke(layer, this.ManipulationMode);//Delegate     
+                LayerManager.IsOverlay = true;
+                LayerManager.DragItemsStarted?.Invoke(layer, this.ManipulationMode);//Delegate     
             };
             this.ManipulationCompleted += (s, e) =>
             {
-                if (LayerageCollection.IsOverlay)
+                if (LayerManager.IsOverlay)
                 {
-                    LayerageCollection.DragItemsCompleted?.Invoke();//Delegate
+                    LayerManager.DragItemsCompleted?.Invoke();//Delegate
 
-                    LayerageCollection.IsOverlay = false;
+                    LayerManager.IsOverlay = false;
                     this.OverlayMode = OverlayMode.None;
                 }
             };
@@ -118,13 +118,13 @@ namespace Retouch_Photo2.Layers
 
             this.PointerMoved += (s, e) =>
             {
-                if (LayerageCollection.IsOverlay)
+                if (LayerManager.IsOverlay)
                 {
                     Point position = e.GetCurrentPoint(this).Position;
                     OverlayMode overlayMode = this.GetOverlay(position.Y);
 
                     this.OverlayMode = overlayMode;
-                    LayerageCollection.DragItemsDelta?.Invoke(layer, overlayMode);//Delegate
+                    LayerManager.DragItemsDelta?.Invoke(layer, overlayMode);//Delegate
                 }
             };
             this.PointerExited += (s, e) => this.OverlayMode = OverlayMode.None;

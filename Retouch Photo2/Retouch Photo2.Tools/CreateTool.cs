@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Tools
 
             //Mezzanine
             this.MezzanineLayerage = layerage;
-            LayerageCollection.Mezzanine(this.MezzanineLayerage);
+            LayerManager.Mezzanine(this.MezzanineLayerage);
 
             //History
             this.ViewModel.MethodSelectedNone();
@@ -138,17 +138,17 @@ namespace Retouch_Photo2.Tools
 
                     //Selection
                     this.SelectionViewModel.SetModeSingle(this.MezzanineLayerage);
-                    LayerageCollection.ArrangeLayers();
-                    LayerageCollection.ArrangeLayersBackground();
+                    LayerManager.ArrangeLayers();
+                    LayerManager.ArrangeLayersBackground();
                 }
                 else
                 {
-                    LayerageCollection.RemoveMezzanine(this.MezzanineLayerage);//Mezzanine
+                    LayerManager.RemoveMezzanine(this.MezzanineLayerage);//Mezzanine
 
                     //Selection
                     this.SelectionViewModel.SetModeNone();
-                    LayerageCollection.ArrangeLayers();
-                    LayerageCollection.ArrangeLayersBackground();
+                    LayerManager.ArrangeLayers();
+                    LayerManager.ArrangeLayersBackground();
                 }
 
                 this.MezzanineLayerage = null;

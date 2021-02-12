@@ -251,13 +251,13 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                Layerage parents = LayerageCollection.GetParentsChildren(destination);
+                Layerage parents = LayerManager.GetParentsChildren(destination);
                 if (parents.Children.Count < 2) return;
 
                 parents.Children.Remove(destination);
                 parents.Children.Add(destination);
 
-                LayerageCollection.ArrangeLayers();
+                LayerManager.ArrangeLayers();
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -270,7 +270,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                Layerage parents = LayerageCollection.GetParentsChildren(destination);
+                Layerage parents = LayerManager.GetParentsChildren(destination);
                 if (parents.Children.Count < 2) return;
 
                 int index = parents.Children.IndexOf(destination);
@@ -282,7 +282,7 @@ namespace Retouch_Photo2.Menus.Models
                 parents.Children.Remove(destination);
                 parents.Children.Insert(index, destination);
 
-                LayerageCollection.ArrangeLayers();
+                LayerManager.ArrangeLayers();
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -295,7 +295,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                Layerage parents = LayerageCollection.GetParentsChildren(destination);
+                Layerage parents = LayerManager.GetParentsChildren(destination);
                 if (parents.Children.Count < 2) return;
 
                 int index = parents.Children.IndexOf(destination);
@@ -307,7 +307,7 @@ namespace Retouch_Photo2.Menus.Models
                 parents.Children.Remove(destination);
                 parents.Children.Insert(index, destination);
 
-                LayerageCollection.ArrangeLayers();
+                LayerManager.ArrangeLayers();
                 this.ViewModel.Invalidate();//Invalidate
             };
 
@@ -320,13 +320,13 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                Layerage parents = LayerageCollection.GetParentsChildren(destination);
+                Layerage parents = LayerManager.GetParentsChildren(destination);
                 if (parents.Children.Count < 2) return;
 
                 parents.Children.Remove(destination);
                 parents.Children.Insert(0, destination);
 
-                LayerageCollection.ArrangeLayers();
+                LayerManager.ArrangeLayers();
                 this.ViewModel.Invalidate();//Invalidate
             };
 

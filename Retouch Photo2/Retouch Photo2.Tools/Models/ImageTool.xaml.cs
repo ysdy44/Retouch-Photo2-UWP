@@ -103,7 +103,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
             this.MezzanineLayerage = imageLayerage;
-            LayerageCollection.Mezzanine(this.MezzanineLayerage);
+            LayerManager.Mezzanine(this.MezzanineLayerage);
 
             this.SelectionViewModel.Transformer = transformerDestination;//Selection
 
@@ -152,7 +152,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.MezzanineLayerage.RefactoringParentsIconRender();
 
 
-                foreach (Layerage layerage in LayerageCollection.Layerage.Children)
+                foreach (Layerage layerage in LayerManager.Layerage.Children)
                 {
                     ILayer layer = layerage.Self;
 
@@ -162,12 +162,12 @@ namespace Retouch_Photo2.Tools.Models
                 mezzanineLayer.IsSelected = true;
                 this.MezzanineLayerage = null;
             }
-            else LayerageCollection.RemoveMezzanine(this.MezzanineLayerage);//Mezzanine
+            else LayerManager.RemoveMezzanine(this.MezzanineLayerage);//Mezzanine
 
             //         this.SelectionViewModel.SetMode();//Selection
 
-            LayerageCollection.ArrangeLayers();
-            LayerageCollection.ArrangeLayersBackground();
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }

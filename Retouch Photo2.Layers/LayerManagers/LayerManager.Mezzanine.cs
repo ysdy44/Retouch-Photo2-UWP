@@ -6,28 +6,28 @@ namespace Retouch_Photo2.Layers
     /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public static partial class LayerageCollection
+    public static partial class LayerManager
     {
 
         /// <summary>
         /// Mezzanine a layerage.
         /// </summary>
         /// <param name="mezzanineLayerage"> The mezzanine layerage. </param>
-        public static void Mezzanine( Layerage mezzanineLayerage) => LayerageCollection._mezzanine( mezzanineLayerage, null);
+        public static void Mezzanine( Layerage mezzanineLayerage) => LayerManager._mezzanine( mezzanineLayerage, null);
 
         /// <summary>
         /// Mezzanine layers.
         /// </summary>
         /// <param name="mezzanineLayerages"> The mezzanine layers. </param>
-        public static void MezzanineRange( IEnumerable<Layerage> mezzanineLayerages) => LayerageCollection._mezzanine( null, mezzanineLayerages);
+        public static void MezzanineRange( IEnumerable<Layerage> mezzanineLayerages) => LayerManager._mezzanine( null, mezzanineLayerages);
 
         private static void _mezzanine( Layerage mezzanineLayer, IEnumerable<Layerage> mezzanineLayers)
         {
             //Layerages
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected();
-            Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayerages);
+            IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
+            Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayerages);
             //if (outermost == null) return; // If count = 0, it will be useless.
-            Layerage parents  = LayerageCollection.GetParentsChildren(outermost);
+            Layerage parents  = LayerManager.GetParentsChildren(outermost);
             int index = parents.Children.IndexOf(outermost);
             if (index < 0) index = 0;
 
@@ -55,7 +55,7 @@ namespace Retouch_Photo2.Layers
         {
             if (mezzanineLayerage == null) return;
 
-            Layerage parents = LayerageCollection.GetParentsChildren(mezzanineLayerage);
+            Layerage parents = LayerManager.GetParentsChildren(mezzanineLayerage);
             parents.Children.Remove(mezzanineLayerage);
         }
 

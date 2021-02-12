@@ -20,7 +20,7 @@ namespace Retouch_Photo2.ViewModels
         public void SetMode()
         {
             //Layerages
-            IEnumerable<Layerage> selectedLayeragesRecursive = LayerageCollection.GetAllSelectedRecursive();
+            IEnumerable<Layerage> selectedLayeragesRecursive = LayerManager.GetAllSelectedRecursive();
             int count = selectedLayeragesRecursive.Count();
 
             if (count == 0)
@@ -29,7 +29,7 @@ namespace Retouch_Photo2.ViewModels
             }
             else if (count == 1)
             {
-                Layerage outermost = LayerageCollection.FindOutermostLayerage(selectedLayeragesRecursive);
+                Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayeragesRecursive);
                 this.SetModeSingle(outermost);//Single
             }
             else if (count >= 2)
@@ -139,7 +139,7 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="layerages"> The multiple layerages. </param>
         public void SetModeMultiple(IEnumerable<Layerage> layerages)
         {
-            Layerage outermost = LayerageCollection.FindOutermostLayerage(layerages);
+            Layerage outermost = LayerManager.FindOutermostLayerage(layerages);
             ILayer outermostLayer = outermost.Self;
 
             this.SelectionMode = ListViewSelectionMode.Multiple;//Transformer

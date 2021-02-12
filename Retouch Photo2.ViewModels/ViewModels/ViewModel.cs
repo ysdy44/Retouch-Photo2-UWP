@@ -34,21 +34,21 @@ namespace Retouch_Photo2.ViewModels
             this.CanvasTransformer.Height = project.Height;
             
             //Layers
-            LayerageCollection.Layerage.Children.Clear();
+            LayerManager.Layerage.Children.Clear();
             if (project.Layerages != null)
             {
                 foreach (Layerage layerage in project.Layerages)
                 {
                     if (layerage != null)
                     {
-                        LayerageCollection.Layerage.Children.Add(layerage);
+                        LayerManager.Layerage.Children.Add(layerage);
                     }
                 }
             }
 
             //Arrange
-            LayerageCollection.ArrangeLayers();
-            LayerageCollection.ArrangeLayersBackground();
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
         }
 
 

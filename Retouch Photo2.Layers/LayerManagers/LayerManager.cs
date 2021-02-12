@@ -13,7 +13,7 @@ namespace Retouch_Photo2.Layers
     /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public static partial class LayerageCollection
+    public static partial class LayerManager
     {
 
         //Action
@@ -70,8 +70,8 @@ namespace Retouch_Photo2.Layers
         /// <returns></returns>
         public static Layerage GetParentsChildren(Layerage layerage)
         {
-            if (layerage == null) return LayerageCollection.Layerage;
-            if (layerage.Parents == null) return LayerageCollection.Layerage;
+            if (layerage == null) return LayerManager.Layerage;
+            if (layerage.Parents == null) return LayerManager.Layerage;
             return layerage.Parents;
         }
 

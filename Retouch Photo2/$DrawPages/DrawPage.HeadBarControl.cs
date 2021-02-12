@@ -63,7 +63,7 @@ namespace Retouch_Photo2
                 this.LoadingControl.IsActive = true;
 
                 int countHistorys = this.ViewModel.Historys.Count;
-                int countLayerages = LayerageCollection.Layerage.Children.Count;
+                int countLayerages = LayerManager.Layerage.Children.Count;
 
                 if (countHistorys == 0 && countLayerages > 1)
                 {

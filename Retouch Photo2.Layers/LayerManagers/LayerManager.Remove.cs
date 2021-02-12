@@ -7,7 +7,7 @@ namespace Retouch_Photo2.Layers
     /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public static partial class LayerageCollection
+    public static partial class LayerManager
     {
 
         /// <summary>
@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Layers
         /// <param name="removeLayerage"> The remove Layerage. </param>
         public static void Remove( Layerage removeLayerage)
         {
-            Layerage parents = LayerageCollection.GetParentsChildren(removeLayerage);
+            Layerage parents = LayerManager.GetParentsChildren(removeLayerage);
 
             parents.Children.Remove(removeLayerage);
         }
@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Remove all selected layerages.
         /// </summary>
-        public static void RemoveAllSelected( ) => LayerageCollection._removeAllSelected(LayerageCollection.Layerage);
+        public static void RemoveAllSelected( ) => LayerManager._removeAllSelected(LayerManager.Layerage);
 
 
         private static void _removeAllSelected(Layerage layerage)
@@ -43,11 +43,11 @@ namespace Retouch_Photo2.Layers
                     child.RefactoringParentsTransformer();
                     child.RefactoringParentsRender();
                     child.RefactoringParentsIconRender();
-                    LayerageCollection._removeAll(child);
+                    LayerManager._removeAll(child);
                 }
                 //Recursive
                 else
-                    LayerageCollection._removeAllSelected(child);
+                    LayerManager._removeAllSelected(child);
             }
 
             //Remove
@@ -68,9 +68,9 @@ namespace Retouch_Photo2.Layers
                 ILayer layer = child.Self;
 
                 //Recursive
-                LayerageCollection._removeAll(child);
+                LayerManager._removeAll(child);
 
-                LayerageCollection.StackPanel.Children.Remove(layer.Control);
+                LayerManager.StackPanel.Children.Remove(layer.Control);
             }
             layerage.Children.Clear();
         }

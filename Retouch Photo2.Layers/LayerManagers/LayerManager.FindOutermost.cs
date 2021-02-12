@@ -6,7 +6,7 @@ namespace Retouch_Photo2.Layers
     /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public static partial class LayerageCollection
+    public static partial class LayerManager
     {
 
         /// <summary>
@@ -14,7 +14,7 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <param name="layer"> The layer. </param>
         /// <returns> The found layerage. </returns>
-        public static Layerage FindFirstLayerage(ILayer layer) => LayerageCollection._findFirstLayerage(LayerageCollection.Layerage, layer);
+        public static Layerage FindFirstLayerage(ILayer layer) => LayerManager._findFirstLayerage(LayerManager.Layerage, layer);
         private static Layerage _findFirstLayerage(Layerage layerage, ILayer layer)
         {
             foreach (Layerage child in layerage.Children)
@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Layers
 
                 if (child.Children.Count != 0)
                 {
-                    Layerage find = LayerageCollection._findFirstLayerage(child, layer);
+                    Layerage find = LayerManager._findFirstLayerage(child, layer);
                     if (find != null) return find;
                 }
             }

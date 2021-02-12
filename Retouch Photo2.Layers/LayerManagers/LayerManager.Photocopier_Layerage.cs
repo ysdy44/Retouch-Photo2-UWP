@@ -9,7 +9,7 @@ namespace Retouch_Photo2.Layers
     /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public static partial class LayerageCollection
+    public static partial class LayerManager
     {
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers
             {
                 ILayer layer = layerage.Self;
 
-                foreach (Photocopier photocopier in LayerageCollection.GetPhotocopiers(layerage.Children))
+                foreach (Photocopier photocopier in LayerManager.GetPhotocopiers(layerage.Children))
                 {
                     yield return photocopier;
                 }
@@ -60,7 +60,7 @@ namespace Retouch_Photo2.Layers
             {
                 yield return child;
 
-                foreach (Layerage unUesting in LayerageCollection.GetUnUestingLayerages(child))
+                foreach (Layerage unUesting in LayerManager.GetUnUestingLayerages(child))
                 {
                     yield return unUesting;
                 }

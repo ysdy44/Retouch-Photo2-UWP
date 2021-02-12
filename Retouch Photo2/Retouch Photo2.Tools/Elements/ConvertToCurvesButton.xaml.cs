@@ -65,8 +65,8 @@ namespace Retouch_Photo2.Tools.Elements
                     }
                 });
 
-                LayerageCollection.ArrangeLayers();
-                LayerageCollection.ArrangeLayersBackground();
+                LayerManager.ArrangeLayers();
+                LayerManager.ArrangeLayersBackground();
                 this.SelectionViewModel.SetMode();//Selection
 
                 //Change tools group value.
@@ -114,7 +114,7 @@ namespace Retouch_Photo2.Tools.Elements
         //Replace curveLayerage to layerage
         private void ReplaceLayerage(Layerage curveLayerage, Layerage layerage)
         {
-            Layerage parents = LayerageCollection.GetParentsChildren(layerage);
+            Layerage parents = LayerManager.GetParentsChildren(layerage);
             int index = parents.Children.IndexOf(layerage);
             parents.Children[index] = curveLayerage;
         }

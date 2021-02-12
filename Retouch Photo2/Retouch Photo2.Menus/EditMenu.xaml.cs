@@ -231,13 +231,13 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.HistoryPush(history);
 
                 //Mezzanine
-                LayerageCollection.Mezzanine(curveLayerage);
+                LayerManager.Mezzanine(curveLayerage);
 
                 //History
                 this.ViewModel.MethodSelectedNone();
 
-                LayerageCollection.ArrangeLayers();
-                LayerageCollection.ArrangeLayersBackground();
+                LayerManager.ArrangeLayers();
+                LayerManager.ArrangeLayersBackground();
                 this.SelectionViewModel.SetModeSingle(curveLayerage);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             }
@@ -250,13 +250,13 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.HistoryPush(history);
 
                 //Mezzanine
-                LayerageCollection.MezzanineRange(layerages);
+                LayerManager.MezzanineRange(layerages);
 
                 //History
                 this.ViewModel.MethodSelectedNone();
 
-                LayerageCollection.ArrangeLayers();
-                LayerageCollection.ArrangeLayersBackground();
+                LayerManager.ArrangeLayers();
+                LayerManager.ArrangeLayersBackground();
                 this.SelectionViewModel.SetModeMultiple(layerages);//Selection
                 this.ViewModel.Invalidate();//Invalidate
             }
@@ -313,13 +313,13 @@ namespace Retouch_Photo2.Menus.Models
                     this.ViewModel.HistoryPush(history);
 
                     //Mezzanine
-                    LayerageCollection.Mezzanine(curveLayerage);
+                    LayerManager.Mezzanine(curveLayerage);
 
                     //History
                     this.ViewModel.MethodSelectedNone();
 
-                    LayerageCollection.ArrangeLayers();
-                    LayerageCollection.ArrangeLayersBackground();
+                    LayerManager.ArrangeLayers();
+                    LayerManager.ArrangeLayersBackground();
                     this.SelectionViewModel.SetModeSingle(curveLayerage);//Selection
                     this.ViewModel.Invalidate();//Invalidate
                 }

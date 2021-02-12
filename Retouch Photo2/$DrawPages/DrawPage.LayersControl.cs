@@ -23,7 +23,7 @@ namespace Retouch_Photo2
         //LayersControl
         private void ConstructLayersControl()
         {
-            this.LayersScrollViewer.Content = LayerageCollection.StackPanel;
+            this.LayersScrollViewer.Content = LayerManager.StackPanel;
 
             this.LayersScrollViewer.Tapped += (s, e) => this.MethodViewModel.MethodSelectedNone();//Method
             this.LayersScrollViewer.RightTapped += (s, e) => this.ShowLayerMenu();
@@ -61,11 +61,11 @@ namespace Retouch_Photo2
                 });
 
                 //Mezzanine
-                LayerageCollection.Mezzanine(imageLayerage);
+                LayerManager.Mezzanine(imageLayerage);
 
                 this.SelectionViewModel.SetMode();//Selection
-                LayerageCollection.ArrangeLayers();
-                LayerageCollection.ArrangeLayersBackground();
+                LayerManager.ArrangeLayers();
+                LayerManager.ArrangeLayersBackground();
                 this.ViewModel.Invalidate();//Invalidate
             };
         }

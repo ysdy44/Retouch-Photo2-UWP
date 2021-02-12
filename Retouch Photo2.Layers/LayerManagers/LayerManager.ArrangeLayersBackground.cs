@@ -4,7 +4,7 @@
     /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public static partial class LayerageCollection
+    public static partial class LayerManager
     {
 
         /// <summary>
@@ -12,9 +12,9 @@
         /// </summary>
         public static void ArrangeLayersBackground()
         {
-            foreach (Layerage child in LayerageCollection.Layerage.Children)
+            foreach (Layerage child in LayerManager.Layerage.Children)
             {
-                LayerageCollection._arrangeLayersBackgroundNullParents(child);
+                LayerManager._arrangeLayersBackgroundNullParents(child);
             }
         }
         //public static void ArrangeLayersBackgroundItemClick(Layerage layerage)
@@ -34,16 +34,16 @@
                 layer.Control.BackgroundMode = BackgroundMode.Selected;
                 foreach (Layerage child in layerage.Children)
                 {
-                    LayerageCollection._arrangeLayersBackgroundHasParentsSelected(child);
+                    LayerManager._arrangeLayersBackgroundHasParentsSelected(child);
                 }
             }
             else
             {
-                bool childrenIsSelected = LayerageCollection._getLayersChildrenIsSelected(layerage);
+                bool childrenIsSelected = LayerManager._getLayersChildrenIsSelected(layerage);
                 if (childrenIsSelected)
-                    LayerageCollection._arrangeLayersBackgroundWithoutParentsSelected(layerage);
+                    LayerManager._arrangeLayersBackgroundWithoutParentsSelected(layerage);
                 else
-                    LayerageCollection._arrangeLayersBackgroundIsNotSelected(layerage);
+                    LayerManager._arrangeLayersBackgroundIsNotSelected(layerage);
             }
         }
         private static void _arrangeLayersBackgroundWithoutParentsSelected(Layerage layerage)
@@ -54,7 +54,7 @@
 
             foreach (Layerage child in layerage.Children)
             {
-                LayerageCollection._arrangeLayersBackgroundNullParents(child);
+                LayerManager._arrangeLayersBackgroundNullParents(child);
             }
         }
 
@@ -67,7 +67,7 @@
 
             foreach (Layerage child in layerage.Children)
             {
-                LayerageCollection._arrangeLayersBackgroundHasParentsSelected(child);
+                LayerManager._arrangeLayersBackgroundHasParentsSelected(child);
             }
         }
         private static void _arrangeLayersBackgroundIsNotSelected(Layerage layerage)
@@ -78,7 +78,7 @@
 
             foreach (Layerage child in layerage.Children)
             {
-                LayerageCollection._arrangeLayersBackgroundIsNotSelected(child);
+                LayerManager._arrangeLayersBackgroundIsNotSelected(child);
             }
         }
 
@@ -89,17 +89,17 @@
             {
                 if (child.Self.IsSelected) return true;
 
-                bool childrenIsSelected = LayerageCollection._getLayersChildrenIsSelected(child);
+                bool childrenIsSelected = LayerManager._getLayersChildrenIsSelected(child);
                 if (childrenIsSelected == true) return true;
             }
             return false;
         }
         private static bool _getLayersParentsIsSelected(Layerage layerage)
         {
-            if (layerage.Parents == LayerageCollection.Layerage) return false;
+            if (layerage.Parents == LayerManager.Layerage) return false;
             if (layerage.Parents.Self.IsSelected == true) return true;
 
-            return LayerageCollection._getLayersParentsIsSelected(layerage.Parents);
+            return LayerManager._getLayersParentsIsSelected(layerage.Parents);
         }
 
 

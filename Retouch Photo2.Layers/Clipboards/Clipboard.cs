@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Layers
         public void SetMode(CanvasDevice customDevice)
         {
             //Layerages
-            IEnumerable<Layerage> selectedLayerages = LayerageCollection.GetAllSelected();
+            IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
             int count = selectedLayerages.Count();
 
             if (count == 0)
@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Layers
                 this.Layerages = null;
 
                 Clipboard.Instances.Clear();
-                LayerageCollection.CopyLayerage(customDevice, this.Layerage);
+                LayerManager.CopyLayerage(customDevice, this.Layerage);
             }
             else if (count >= 2)
             {
@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Layers
                 this.Layerages = from layerage in selectedLayerages select layerage.Clone();
 
                 Clipboard.Instances.Clear();
-                LayerageCollection.CopyLayerages(customDevice, this.Layerages);
+                LayerManager.CopyLayerages(customDevice, this.Layerages);
             }
         }
                

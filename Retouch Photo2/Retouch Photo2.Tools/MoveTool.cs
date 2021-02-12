@@ -134,7 +134,7 @@ namespace Retouch_Photo2.Tools
         {
             //Select a layer of the same depth
             Layerage selectedLayerage = this.SelectionViewModel.GetFirstSelectedLayerage();
-            Layerage parents = LayerageCollection.GetParentsChildren(selectedLayerage);
+            Layerage parents = LayerManager.GetParentsChildren(selectedLayerage);
 
             bool FillContainsPoint(Layerage layerage)
             {

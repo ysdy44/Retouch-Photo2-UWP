@@ -12,28 +12,28 @@ namespace Retouch_Photo2
         //LayerManager
         private void ConstructLayerManager()
         {
-            if (LayerageCollection.ItemClick == null)
+            if (LayerManager.ItemClick == null)
             {
-                LayerageCollection.ItemClick += (layer) =>
+                LayerManager.ItemClick += (layer) =>
                 {
-                    Layerage layerage = LayerageCollection.FindFirstLayerage(layer);
+                    Layerage layerage = LayerManager.FindFirstLayerage(layer);
 
                     this.ItemClick(layerage);
                 };
             }
-            if (LayerageCollection.RightTapped == null)
+            if (LayerManager.RightTapped == null)
             {
-                LayerageCollection.RightTapped += (layer) =>
+                LayerManager.RightTapped += (layer) =>
                 {
-                    Layerage layerage = LayerageCollection.FindFirstLayerage(layer);
+                    Layerage layerage = LayerManager.FindFirstLayerage(layer);
 
                     this.ShowLayerMenu(layerage);
                 };
             }
 
-            if (LayerageCollection.VisibilityChanged == null)
+            if (LayerManager.VisibilityChanged == null)
             {
-                LayerageCollection.VisibilityChanged += (layer2) =>
+                LayerManager.VisibilityChanged += (layer2) =>
                 {
                     Visibility visibility = (layer2.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
 
@@ -81,30 +81,30 @@ namespace Retouch_Photo2
                     }
                 };
             }
-            if (LayerageCollection.IsExpandChanged == null)
+            if (LayerManager.IsExpandChanged == null)
             {
-                LayerageCollection.IsExpandChanged += (layer) =>
+                LayerManager.IsExpandChanged += (layer) =>
                 {
                     layer.IsExpand = !layer.IsExpand;
 
-                    Layerage layerage = LayerageCollection.FindFirstLayerage(layer);
-                    LayerageCollection.ArrangeLayersIsExpand(layerage);
+                    Layerage layerage = LayerManager.FindFirstLayerage(layer);
+                    LayerManager.ArrangeLayersIsExpand(layerage);
                 };
             }
-            if (LayerageCollection.IsSelectedChanged == null)
+            if (LayerManager.IsSelectedChanged == null)
             {
-                LayerageCollection.IsSelectedChanged += (layer) =>
+                LayerManager.IsSelectedChanged += (layer) =>
                 {
-                    Layerage layerage = LayerageCollection.FindFirstLayerage(layer);
+                    Layerage layerage = LayerManager.FindFirstLayerage(layer);
                     this.MethodViewModel.MethodSelectedNot(layerage);//Method
                 };
             }
 
-            if (LayerageCollection.DragItemsStarted == null)
+            if (LayerManager.DragItemsStarted == null)
             {
-                LayerageCollection.DragItemsStarted += (layer, manipulationMode) =>
+                LayerManager.DragItemsStarted += (layer, manipulationMode) =>
                 {
-                    Layerage layerage = LayerageCollection.FindFirstLayerage(layer);
+                    Layerage layerage = LayerManager.FindFirstLayerage(layer);
 
                     this.DragSourceLayerage = layerage;
 
@@ -118,29 +118,29 @@ namespace Retouch_Photo2
                     }
                 };
             }
-            if (LayerageCollection.DragItemsDelta == null)
+            if (LayerManager.DragItemsDelta == null)
             {
-                LayerageCollection.DragItemsDelta += (layer, overlayMode) =>
+                LayerManager.DragItemsDelta += (layer, overlayMode) =>
                 {
-                    Layerage layerage = LayerageCollection.FindFirstLayerage(layer);
+                    Layerage layerage = LayerManager.FindFirstLayerage(layer);
 
                     this.DragDestinationLayerage = layerage;
                     this.DragLayerOverlayMode = overlayMode;
                 };
             }
-            if (LayerageCollection.DragItemsCompleted == null)
+            if (LayerManager.DragItemsCompleted == null)
             {
-                LayerageCollection.DragItemsCompleted += () =>
+                LayerManager.DragItemsCompleted += () =>
                 {
                     //History
                     LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange");
                     this.ViewModel.HistoryPush(history);
 
-                    LayerageCollection.DragComplete(this.DragDestinationLayerage, this.DragSourceLayerage, this.DragLayerOverlayMode, this.DragLayerIsSelected);
+                    LayerManager.DragComplete(this.DragDestinationLayerage, this.DragSourceLayerage, this.DragLayerOverlayMode, this.DragLayerIsSelected);
 
                     this.SelectionViewModel.SetMode();//Selection
-                    LayerageCollection.ArrangeLayers();
-                    LayerageCollection.ArrangeLayersBackground();
+                    LayerManager.ArrangeLayers();
+                    LayerManager.ArrangeLayersBackground();
                     this.ViewModel.Invalidate();//Invalidate
 
                     this.DragSourceLayerage = null;

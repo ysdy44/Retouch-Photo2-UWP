@@ -8,7 +8,7 @@ namespace Retouch_Photo2.Layers
     /// Manager of <see cref="ILayer"/>.
     /// Represents a collection of layers, including a sorting algorithm for layers
     /// </summary>
-    public static partial class LayerageCollection
+    public static partial class LayerManager
     {
         
         /// <summary>
@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Layers
             Clipboard.Instances.Add(clone2);
             //
 
-            LayerageCollection._copyLayerage(customDevice, layerage.Children);
+            LayerManager._copyLayerage(customDevice, layerage.Children);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Layers
         {
             foreach (Layerage layerage in layerages)
             {
-                LayerageCollection.CopyLayerage(customDevice, layerage);
+                LayerManager.CopyLayerage(customDevice, layerage);
             }
         }
 
@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Layers
         {
             foreach (Layerage layerage in children)
             {
-                LayerageCollection._copyLayerage(customDevice, layerage.Children);
+                LayerManager._copyLayerage(customDevice, layerage.Children);
 
                 //
                 ILayer layer = layerage.Self;
@@ -75,7 +75,7 @@ namespace Retouch_Photo2.Layers
 
             clone.Children = child.Children;
             child.Children = null;
-            LayerageCollection._pasteLayerage(customDevice, clone.Children);
+            LayerManager._pasteLayerage(customDevice, clone.Children);
             return clone;
         }
 
@@ -86,7 +86,7 @@ namespace Retouch_Photo2.Layers
         /// <param name="layerages"> The layerages. </param>
         public static IEnumerable<Layerage> PasteLayerages(CanvasDevice customDevice, IEnumerable<Layerage> layerages)
         {
-            return from l in layerages select LayerageCollection.PasteLayerage(customDevice, l);
+            return from l in layerages select LayerManager.PasteLayerage(customDevice, l);
         }
 
 
@@ -95,7 +95,7 @@ namespace Retouch_Photo2.Layers
             for (int i = 0; i < children.Count; i++)
             {
                 Layerage child = children[i];
-                LayerageCollection._pasteLayerage(customDevice, child.Children);
+                LayerManager._pasteLayerage(customDevice, child.Children);
 
                 //
                 ILayer child2 = child.ClipboardSelf;
