@@ -41,9 +41,19 @@
        
         <uap:DefaultTile 
           Wide310x150Logo="Assets\Wide310x150Logo.png"
-          ShortName="ms-resource:///Resources/$DisplayName"           
+          ShortName="ms-resource:///resources/$DisplayName"           
         Square310x310Logo="Assets\LargeTile.png" 
           Square71x71Logo="Assets\SmallTile.png">
+       
+           <uap:ShowNameOnTiles>
+       
+              <uap:ShowOn Tile="square150x150Logo"/>
+       
+              <uap:ShowOn Tile="wide310x150Logo"/>
+       
+              <uap:ShowOn Tile="square310x310Logo"/>
+
+           </uap:ShowNameOnTiles>
         </uap:DefaultTile>
      
         <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#191919" />
