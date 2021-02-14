@@ -45,8 +45,18 @@ namespace Retouch_Photo2
             this.LayersHeightTextBlock.Text = resource.GetString("$SettingPage_LayersHeight");
             this.LayersHeightTipTextBlock.Text = resource.GetString("$SettingPage_LayersHeightTip");
 
+
+
+            int index = 0;
+            Style getStyle()
+            {
+                index++;
+                return (index % 2 == 0) ? this.KeyContentControlBackgroundStyle : this.KeyContentControlStyle;
+            }
+
+
             this.KeyTextBlock.Text = resource.GetString("$SettingPage_Key");
-            this.Key01Border.Child = new StackPanel
+            this.Key00Border.Child = new StackPanel
             {
                 Children =
                 {
@@ -54,157 +64,53 @@ namespace Retouch_Photo2
                     {
                         Tag = "Shift",
                         Content = resource.GetString("Tools_MoreTransform_Ratio"),
-                        Style = this.KeyContentControlBackgroundStyle
+                        Style = getStyle()
                     },
                     new ContentControl
                     {
                         Tag = "Shift",
                         Content = resource.GetString("Tools_MoreCreate_Square"),
-                        Style = this.KeyContentControlStyle
+                        Style = getStyle()
                     },
                     new ContentControl
                     {
                         Tag = "Ctrl",
                         Content = resource.GetString("Tools_MoreCreate_Center"),
-                        Style = this.KeyContentControlBackgroundStyle
+                        Style = getStyle()
                     },
                     new ContentControl
                     {
                         Tag = "Space",
                         Content = resource.GetString("Menus_Transformer_StepFrequency"),
-                        Style = this.KeyContentControlStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "Esc",
-                        Content = resource.GetString("$DrawPage_FullScreen"),
-                        Style = this.KeyContentControlBackgroundStyle
-                    },
+                        Style = getStyle()
+                    }
                 }
             };
 
-            this.Key02Border.Child = new StackPanel
+            foreach (var item in from key
+                in this.SettingViewModel.KeyboardAccelerators
+                where key.Group == 1
+                select new ContentControl { Tag = key.ToString(), Content = key.Title, Style = getStyle() })
             {
-                Children =
-                {
-                    new ContentControl
-                    {
-                        Tag = "←",
-                        Content = resource.GetString("$SettingPage_Key_Move_Left"),
-                        Style = this.KeyContentControlBackgroundStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "↑",
-                        Content = resource.GetString("$SettingPage_Key_Move_Top"),
-                        Style = this.KeyContentControlStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "→",
-                        Content = resource.GetString("$SettingPage_Key_Move_Right"),
-                        Style = this.KeyContentControlBackgroundStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "↓",
-                        Content = resource.GetString("$SettingPage_Key_Move_Bottom"),
-                        Style = this.KeyContentControlStyle
-                    },
-                }
-            };
+                this.Key01StackPanel.Children.Add(item);
+            }
 
-            this.Key03Border.Child = new StackPanel
+            foreach (var item in from key
+                in this.SettingViewModel.KeyboardAccelerators
+                where key.Group == 2
+                select new ContentControl { Tag = key.ToString(), Content = key.Title, Style = getStyle() })
             {
-                Children =
-                {
-                    new ContentControl
-                    {
-                        Tag = "Ctrl + X",
-                        Content = resource.GetString("Edits_Edit_Cut"),
-                        Style = this.KeyContentControlBackgroundStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "Ctrl + J",
-                        Content = resource.GetString("Edits_Edit_Duplicate"),
-                        Style = this.KeyContentControlStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "Ctrl + C",
-                        Content = resource.GetString("Edits_Edit_Copy"),
-                        Style = this.KeyContentControlBackgroundStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "Ctrl + V",
-                        Content = resource.GetString("Edits_Edit_Paste"),
-                        Style = this.KeyContentControlStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "Delete",
-                        Content = resource.GetString("Edits_Edit_Clear"),
-                        Style = this.KeyContentControlBackgroundStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "Ctrl + A",
-                        Content = resource.GetString("Edits_Select_All"),
-                        Style = this.KeyContentControlStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "Ctrl + D",
-                        Content = resource.GetString("Edits_Select_Deselect"),
-                        Style = this.KeyContentControlBackgroundStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "Ctrl + I",
-                        Content = resource.GetString("Edits_Select_Invert"),
-                        Style = this.KeyContentControlStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "Ctrl + G",
-                        Content = resource.GetString("Edits_Group_Group"),
-                        Style = this.KeyContentControlBackgroundStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "Ctrl + U",
-                        Content = resource.GetString("Edits_Group_UnGroup"),
-                        Style = this.KeyContentControlStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "Ctrl + R",
-                        Content = resource.GetString("Edits_Group_Release"),
-                        Style = this.KeyContentControlBackgroundStyle
-                    },
-                }
-            };
+                this.Key02StackPanel.Children.Add(item);
+            }
 
-            this.Key04Border.Child = new StackPanel
+            foreach (var item in from key
+                in this.SettingViewModel.KeyboardAccelerators
+                where key.Group == 3
+                select new ContentControl { Tag = key.ToString(), Content = key.Title, Style = getStyle() })
             {
-                Children =
-                {
-                    new ContentControl
-                    {
-                        Tag = "Ctrl + E",
-                        Content = resource.GetString("$DrawPage_Export"),
-                        Style = this.KeyContentControlBackgroundStyle
-                    },
-                    new ContentControl
-                    {
-                        Tag = "Ctrl + Z",
-                        Content = resource.GetString("$DrawPage_Undo"),
-                        Style = this.KeyContentControlStyle
-                    },
-                }
-            };
+                this.Key03StackPanel.Children.Add(item);
+            }
+
 
             this.MenuTypeTextBlock.Text = resource.GetString("$SettingPage_MenuType");
             this.MenuTypeTipTextBlock.Text = resource.GetString("$SettingPage_MenuTypeTip");
@@ -269,16 +175,24 @@ namespace Retouch_Photo2
             this.AdaptiveWidthGrid.PhoneWidthChanged += async (s, value) =>
             {
                 //Setting
-                this.SettingViewModel.Setting.DeviceLayout.PhoneMaxWidth = value;
-                this.SettingViewModel.NotifyDeviceLayoutType();
-                await this.Write();
+                DeviceLayout layout = this.SettingViewModel.Setting.DeviceLayout;
+                {
+                    layout.PhoneMaxWidth = value;
+                    DeviceLayoutType type = layout.GetActualType(this.ActualWidth);
+                    this.SettingViewModel.DeviceLayoutType = type;
+                }
+                await this.Save();
             };
             this.AdaptiveWidthGrid.PadWidthChanged += async (s, value) =>
             {
                 //Setting
-                this.SettingViewModel.Setting.DeviceLayout.PadMaxWidth = value;
-                this.SettingViewModel.NotifyDeviceLayoutType();
-                await this.Write();
+                DeviceLayout layout = this.SettingViewModel.Setting.DeviceLayout;
+                {
+                    layout.PadMaxWidth = value;
+                    DeviceLayoutType type = layout.GetActualType(this.ActualWidth);
+                    this.SettingViewModel.DeviceLayoutType = type;
+                }
+                await this.Save();
             };
 
 
@@ -293,10 +207,14 @@ namespace Retouch_Photo2
                 this.AdaptiveWidthGrid.SetWidth();
 
                 //Setting
-                this.SettingViewModel.Setting.DeviceLayout.PhoneMaxWidth = phone2;
-                this.SettingViewModel.Setting.DeviceLayout.PadMaxWidth = pad2;
-                this.SettingViewModel.NotifyDeviceLayoutType();
-                await this.Write();//Write
+                DeviceLayout layout = this.SettingViewModel.Setting.DeviceLayout;
+                {
+                    layout.PhoneMaxWidth = phone2;
+                    layout.PadMaxWidth = pad2;
+                    DeviceLayoutType type = layout.GetActualType(this.ActualWidth);
+                    this.SettingViewModel.DeviceLayoutType = type;
+                }
+                await this.Save();
             };
         }
 
@@ -331,11 +249,11 @@ namespace Retouch_Photo2
         //MenuType
         private void ConstructMenuType()
         {
-            bool _isParity = false;
+            int index = 0;
             Style getStyle()
             {
-                _isParity = !_isParity;
-                return _isParity ? this.MenuBorderStyle1 : this.MenuBorderStyle2;
+                index++;
+                return (index % 2 == 0) ? this.MenuBorderStyle1 : this.MenuBorderStyle2;
             }
 
 

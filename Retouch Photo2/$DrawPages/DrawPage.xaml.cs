@@ -3,11 +3,12 @@
 // Difficult:         ★★★★
 // Only:              ★★★★★
 // Complete:      ★★★★★
+using Retouch_Photo2.Elements.DrawPages;
 using Retouch_Photo2.Tools;
-using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Numerics;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -31,12 +32,14 @@ namespace Retouch_Photo2
         //@Static
         /// <summary> Navigate to <see cref="PhotosPage"/> </summary>
         public static Action<PhotosPageMode> FrameNavigatePhotosPage;
+        /// <summary> Show <see cref="SetupDialog"/> </summary>
+        public static Action ShowSetup;
+        /// <summary> Show <see cref="ExportDialog"/> </summary>
+        public static Action ShowExport;
         /// <summary> Show <see cref="RenameDialog"/> </summary>
         public static Action ShowRename;
-
-
-        //@Converter
-        private Visibility BoolToVisibilityConverter(bool boolean) => boolean ? Visibility.Visible : Visibility.Collapsed;
+        /// <summary> Show <see cref="DrawLayout.IsFullScreen"/> </summary>
+        public static Action FullScreen;
 
 
         //@Construct
@@ -47,10 +50,9 @@ namespace Retouch_Photo2
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructSetting();
-            this.ConstructTransition();
+            this.RegisteTransition();
 
-            this.ConstructMainCanvasControl();
+            this.ConstructCanvasControl();
             this.ConstructAppBar();
 
             this.ConstructLayersControl();
@@ -58,7 +60,7 @@ namespace Retouch_Photo2
 
 
             this.Loaded += (s, e) => this._lockLoaded();
-            Retouch_Photo2.DrawPage.FrameNavigatePhotosPage += (mode) => this.Frame.Navigate(typeof(PhotosPage), mode);//Navigate   
+            if (DrawPage.FrameNavigatePhotosPage == null) DrawPage.FrameNavigatePhotosPage += (mode) => this.Frame.Navigate(typeof(PhotosPage), mode);//Navigate   
 
 
             //DrawLayout
@@ -68,27 +70,21 @@ namespace Retouch_Photo2
             this.DrawLayout.TouchbarPicker = TouchbarButton.PickerBorder;
             this.DrawLayout.TouchbarSlider = TouchbarButton.SliderBorder;
             this.DrawLayout.GalleryButton.Click += (s, e) => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImage);//Navigate   
-            this.DrawLayout.IsFullScreenChanged += (isFullScreen) =>
-            {
-                Vector2 offset = this.SettingViewModel.FullScreenOffset;
-
-                if (isFullScreen)
-                    this.ViewModel.CanvasTransformer.Position += offset;
-                else
-                    this.ViewModel.CanvasTransformer.Position -= offset;
-
-                this.ViewModel.CanvasTransformer.ReloadMatrix();
-            };
-
+      
 
             //FlyoutTool
             Retouch_Photo2.Tools.Elements.MoreTransformButton.Flyout = this.MoreTransformFlyout;
             Retouch_Photo2.Tools.Elements.MoreCreateButton.Flyout = this.MoreCreateFlyout;
-            
 
-            //Rename
-            Retouch_Photo2.DrawPage.ShowRename += () => this.ShowRenameDialog();
+
+            //Dialog
+            if (DrawPage.ShowExport == null) DrawPage.ShowExport += () => this.ShowExportDialog();
+            this.ConstructExportDialog();
+            if (DrawPage.ShowSetup == null) DrawPage.ShowSetup += () => this.ShowSetupDialog();
+            this.ConstructSetupDialog();
+            if (DrawPage.ShowRename == null) DrawPage.ShowRename += () => this.ShowRenameDialog();
             this.ConstructRenameDialog();
+            if (DrawPage.FullScreen == null) DrawPage.FullScreen += () => this.FullScreenLayout();
         }
 
         /// <summary> The current page becomes the active page. </summary>
@@ -100,11 +96,15 @@ namespace Retouch_Photo2
             //Key
             this.SettingViewModel.RegisteKey();
 
-            if (this.SettingViewModel.IsFullScreen == false) return;
+            if (this.DrawLayout.IsFullScreen == false) return;
 
-            if (e.Parameter is TransitionData data)
+            if (e.Parameter is Rect sourceRect)
             {
-                this._lockOnNavigatedTo(data);
+                this._lockOnNavigatedTo(sourceRect);
+            }
+            else
+            {
+                this._lockOnNavigatedTo(null);
             }
         }
         /// <summary> The current page no longer becomes an active page. </summary>

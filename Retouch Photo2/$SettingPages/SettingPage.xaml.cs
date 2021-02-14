@@ -86,7 +86,7 @@ namespace Retouch_Photo2
     public sealed partial class SettingPage : Page
     {
 
-        private async Task Write()
+        private async Task Save()
         {
             await XML.SaveSettingFile(this.SettingViewModel.Setting);
         }
@@ -97,7 +97,7 @@ namespace Retouch_Photo2
             //Setting
             this.SettingViewModel.Setting.Theme = theme2;
             this.SettingViewModel.ConstructTheme();//Construct
-            await this.Write();//Write
+            await this.Save();//Write
         }
                        
         private async Task SetType(DeviceLayoutType type2, bool isAdaptive2)
@@ -105,10 +105,14 @@ namespace Retouch_Photo2
             this.IsAdaptive = isAdaptive2;
 
             //Setting
-            this.SettingViewModel.Setting.DeviceLayout.IsAdaptive = isAdaptive2;
-            this.SettingViewModel.Setting.DeviceLayout.FallBackType = type2;
-            this.SettingViewModel.NotifyDeviceLayoutType();
-            await this.Write();
+            DeviceLayout layout = this.SettingViewModel.Setting.DeviceLayout;
+            {
+                layout.IsAdaptive = isAdaptive2;
+                layout.FallBackType = type2;
+                DeviceLayoutType type = layout.GetActualType(this.ActualWidth);
+                this.SettingViewModel.DeviceLayoutType = type;
+            }
+            await this.Save();
         }
 
         private async Task SetHeight(int height)
@@ -117,7 +121,7 @@ namespace Retouch_Photo2
             this.SettingViewModel.Setting.LayersHeight = height;
             LayerManager.ControlsHeight = height;
 
-            await this.Write();
+            await this.Save();
         }
 
         private async Task AddMenu(MenuType type)
@@ -125,7 +129,7 @@ namespace Retouch_Photo2
             //Setting
             this.SettingViewModel.Setting.MenuTypes.Add(type);
             this.SettingViewModel.ConstructMenuType(this.TipViewModel.Menus);
-            await this.Write();
+            await this.Save();
         }
 
         private async Task RemoveMenu(MenuType type)
@@ -137,7 +141,7 @@ namespace Retouch_Photo2
             }
             while (this.SettingViewModel.Setting.MenuTypes.Contains(type));
             this.SettingViewModel.ConstructMenuType(this.TipViewModel.Menus);
-            await this.Write();
+            await this.Save();
         }
 
     }

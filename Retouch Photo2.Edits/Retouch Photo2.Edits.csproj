@@ -143,7 +143,6 @@
     <Compile Include="EditIcons\PasteIcon.xaml.cs">
       <DependentUpon>PasteIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditType.cs" />
     <Compile Include="GroupIcons\GroupIcon.xaml.cs">
       <DependentUpon>GroupIcon.xaml</DependentUpon>
     </Compile>

@@ -427,22 +427,28 @@
 
                         <!--Key-->
                         <TextBlock x:Name="KeyTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border x:Name="Key01Border" Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border x:Name="Key00Border" Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                         </Border>
 
                         <ContentControl Height="12"/>
 
-                        <Border x:Name="Key02Border" Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel x:Name="Key01StackPanel">                                
+                            </StackPanel>  
                         </Border>
 
                         <ContentControl Height="12"/>
 
-                        <Border x:Name="Key03Border" Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel x:Name="Key02StackPanel">
+                            </StackPanel>
                         </Border>
 
                         <ContentControl Height="12"/>
 
-                        <Border x:Name="Key04Border" Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel x:Name="Key03StackPanel">
+                            </StackPanel>
                         </Border>
 
                         <ContentControl Height="12"/>

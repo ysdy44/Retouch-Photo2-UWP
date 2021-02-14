@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Numerics;
 using Windows.UI.Xaml;
+using Windows.UI.Core;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -14,13 +15,37 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         public void ConstructDeviceLayout()
         {
-            Window.Current.SizeChanged += (s, e) =>
+            //Width
+            DeviceLayout layout = this.Setting.DeviceLayout;
             {
-                //Width
+                double width = Window.Current.Bounds.Width;
+                DeviceLayoutType type = layout.GetActualType(width);
+                this.DeviceLayoutType = type;
+            }
+        }
+        /// <summary>
+        /// Registe the device-layout.
+        /// </summary>
+        public void RegisteDeviceLayout()
+        {
+            Window.Current.SizeChanged += this.Current_SizeChanged;
+        }
+        /// <summary>
+        /// UnRegiste the device-layout.
+        /// </summary>
+        public void UnRegisteDeviceLayout()
+        {
+            Window.Current.SizeChanged -= this.Current_SizeChanged;
+        }
+        private void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
+        {
+            //Width
+            DeviceLayout layout = this.Setting.DeviceLayout;
+            {
                 double width = e.Size.Width;
-                this.DeviceLayoutType = this.Setting.DeviceLayout.GetActualType(width);
-            };
-            this.NotifyDeviceLayoutType();
+                DeviceLayoutType type = layout.GetActualType(width);
+                this.DeviceLayoutType = type;
+            }
         }
 
 
@@ -35,16 +60,6 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private DeviceLayoutType deviceLayoutType = DeviceLayoutType.PC;
-
-        /// <summary>
-        /// Notify <see cref="SettingViewModel.DeviceLayoutType"/>.
-        /// </summary>
-        public void NotifyDeviceLayoutType()
-        {
-            //Width
-            double width = Window.Current.Bounds.Width;
-            this.DeviceLayoutType = this.Setting.DeviceLayout.GetActualType(width);
-        }
 
 
         /// <summary>

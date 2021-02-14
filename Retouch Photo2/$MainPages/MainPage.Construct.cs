@@ -3,12 +3,14 @@ using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -105,7 +107,8 @@ namespace Retouch_Photo2
 
             //DeviceLayout
             this.SettingViewModel.ConstructDeviceLayout();
-
+            this.SettingViewModel.RegisteDeviceLayout();
+            
             //DeviceLayout
             this.SettingViewModel.ConstructLayersHeight();
 

@@ -19,6 +19,7 @@
 // Complete:      ★★★★★   // This class is complete.
 // Complete:                       // This class is not completed.
 
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.Menus.Models;
 using Retouch_Photo2.Tools;
@@ -26,8 +27,11 @@ using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Resources;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -37,10 +41,22 @@ namespace Retouch_Photo2
     public sealed partial class App : Application
     {
 
-        static ViewModel viewModel = new ViewModel();
+        static ViewModel viewModel = null;
+        static SettingViewModel settingViewModel = null;
+        static TipViewModel tipViewModel = null;
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.ViewModel" />. </summary>
-        public static ViewModel ViewModel => App.viewModel;
+        public static ViewModel ViewModel
+        {
+            get
+            {
+                if (App.viewModel==null)
+                {
+                    App.viewModel = new ViewModel();
+                }
+                return App.viewModel;
+            }
+        }
 
         /// <summary> Retouch_Photo2's the only Selection<see cref = "ViewModels.ViewModel" />. </summary>
         public static ViewModel SelectionViewModel => App.viewModel;
@@ -49,104 +65,292 @@ namespace Retouch_Photo2
         public static ViewModel MethodViewModel => App.viewModel;
 
         /// <summary> Retouch_Photo2's the only Setting<see cref = "ViewModels.ViewModel" />. </summary>
-        public static SettingViewModel SettingViewModel = new SettingViewModel();
+        public static SettingViewModel SettingViewModel
+        {
+            get
+            {
+                if (App.settingViewModel == null)
+                {
+                    ResourceLoader resource = ResourceLoader.GetForCurrentView();
+                    App.settingViewModel = new SettingViewModel
+                    {
+                        KeyboardAccelerators = new List<KeyboardAccelerator2>
+                        {
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("$SettingPage_Key_Move_Left"),
+                                Group = 1,
+                                Key = VirtualKey.Left,
+                                Invoked = () =>
+                                {
+                                    App.ViewModel.CanvasTransformer.Position += new Vector2(50, 0);
+                                    App.ViewModel.CanvasTransformer.ReloadMatrix();
+                                    App.ViewModel.Invalidate();//Invalidate
+                            }
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("$SettingPage_Key_Move_Top"),
+                                Group = 1,
+                                Key = VirtualKey.Up,
+                                Invoked = () =>
+                                {
+                                    App.ViewModel.CanvasTransformer.Position += new Vector2(0, 50);
+                                    App.ViewModel.CanvasTransformer.ReloadMatrix();
+                                    App.ViewModel.Invalidate();//Invalidate
+                            }
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("$SettingPage_Key_Move_Right"),
+                                Group = 1,
+                                Key = VirtualKey.Right,
+                                Invoked = () =>
+                                {
+                                    App.ViewModel.CanvasTransformer.Position -= new Vector2(50, 0);
+                                    App.ViewModel.CanvasTransformer.ReloadMatrix();
+                                    App.ViewModel.Invalidate();//Invalidate
+                            }
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("$SettingPage_Key_Move_Bottom"),
+                                Group = 1,
+                                Key = VirtualKey.Down,
+                                Invoked = () =>
+                                {
+                                    App.ViewModel.CanvasTransformer.Position -= new Vector2(50, 0);
+                                    App.ViewModel.CanvasTransformer.ReloadMatrix();
+                                    App.ViewModel.Invalidate();//Invalidate
+                            }
+                            },
+
+
+                            new KeyboardAccelerator2
+                            {                  
+                                Title = resource.GetString("Edits_Edit_Cut"),
+                                Group = 2,
+                                Modifiers = VirtualKeyModifiers2.Control,
+                                Key = VirtualKey.X,
+                                Invoked = App.MethodViewModel.MethodEditCut,
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("Edits_Edit_Duplicate"),
+                                Group = 2,
+                                Modifiers = VirtualKeyModifiers2.Control,
+                                Key = VirtualKey.J,
+                                Invoked = App.MethodViewModel.MethodEditDuplicate,
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("Edits_Edit_Copy"),
+                                Group = 2,
+                                Modifiers = VirtualKeyModifiers2.Control,
+                                Key = VirtualKey.C,
+                                Invoked = App.MethodViewModel.MethodEditCopy,
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("Edits_Edit_Paste"),
+                                Group = 2,
+                                Modifiers = VirtualKeyModifiers2.Control,
+                                Key = VirtualKey.V,
+                                Invoked = App.MethodViewModel.MethodEditPaste,
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("Edits_Edit_Clear"),
+                                Group = 2,
+                                Key = VirtualKey.Delete,
+                                Invoked = App.MethodViewModel.MethodEditClear,
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("Edits_Select_All"),
+                                Group = 2,
+                                Modifiers = VirtualKeyModifiers2.Control,
+                                Key = VirtualKey.A,
+                                Invoked = App.MethodViewModel.MethodSelectAll,
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("Edits_Select_Deselect"),
+                                Group = 2,
+                                Modifiers = VirtualKeyModifiers2.Control,
+                                Key = VirtualKey.D,
+                                Invoked = App.MethodViewModel.MethodSelectDeselect,
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("Edits_Select_Invert"),
+                                Group = 2,
+                                Modifiers = VirtualKeyModifiers2.Control,
+                                Key = VirtualKey.I,
+                                Invoked = App.MethodViewModel.MethodSelectInvert,
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("Edits_Group_Group"),
+                                Group = 2,
+                                Modifiers = VirtualKeyModifiers2.Control,
+                                Key = VirtualKey.G,
+                                Invoked = App.MethodViewModel.MethodGroupGroup,
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("Edits_Group_UnGroup"),
+                                Group = 2,
+                                Modifiers = VirtualKeyModifiers2.Control,
+                                Key = VirtualKey.U,
+                                Invoked = App.MethodViewModel.MethodGroupUnGroup,
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("Edits_Group_Release"),
+                                Group = 2,
+                                Modifiers = VirtualKeyModifiers2.Control,
+                                Key = VirtualKey.R,
+                                Invoked = App.MethodViewModel.MethodGroupRelease,
+                            },
+
+
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("$DrawPage_Export"),
+                                Group = 3,
+                                Modifiers = VirtualKeyModifiers2.Control,
+                                Key = VirtualKey.E,
+                                Invoked = () => Retouch_Photo2.DrawPage.ShowExport?.Invoke()
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("$DrawPage_Undo"),
+                                Group = 3,
+                                Modifiers = VirtualKeyModifiers2.Control,
+                                Key = VirtualKey.Z,
+                                Invoked = App.MethodViewModel.MethodEditUndo,
+                            },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("$DrawPage_FullScreen"),
+                                Group = 3,
+                                Key = VirtualKey.Escape,
+                                Invoked = () => Retouch_Photo2.DrawPage.FullScreen?.Invoke()
+                            },
+                        }
+                    };
+                }
+
+                return App.settingViewModel;
+            }
+        }
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.TipViewModel" />. </summary>
-        public static TipViewModel TipViewModel = new TipViewModel
+        public static TipViewModel TipViewModel
         {
-            //Tool
-            Tools = new List<ITool>
-            {               
-                
-                /*                
-                 new CursorTool(),                 
-                 new ViewTool(),
-                 new GeometryRectangleTool(),
-                 */
-
-                /*
-                 */
-                 new CursorTool(),
-                 null,
-
-                 new ViewTool(),
-                 new BrushTool(),
-                 new TransparencyTool(),
-                 null,
-
-                 //Geometry0
-                 new GeometryRectangleTool(),
-                 new GeometryEllipseTool(),
-                 new PenTool(),
-                 new NodeTool(),
-                 null,
-
-                 new TextArtisticTool(),
-                 new TextFrameTool(),
-                 null,
-
-                 new ImageTool(),
-                 new CropTool(),
-                 
-
-                 new MoreTool(),
-
-
-                 new PatternGridTool(),
-                 new PatternDiagonalTool(),
-                 new PatternSpottedTool(),
-                 null,
-
-                 //Geometry1
-                 new GeometryRoundRectTool(),
-                 new GeometryTriangleTool(),
-                 new GeometryDiamondTool(),
-                 null,
-
-                 //Geometry2
-                 new GeometryPentagonTool(),
-                 new GeometryStarTool(),
-                 new GeometryCogTool(),
-                 null,
-
-                 //Geometry3
-                 new GeometryDountTool(),
-                 new GeometryPieTool(),
-                 new GeometryCookieTool(),
-                 null,
-
-                 //Geometry4
-                 new GeometryArrowTool(),
-                 new GeometryCapsuleTool(),
-                 new GeometryHeartTool(),
-                 
-            },
-
-            //Menu
-            Menus = new List<IMenu>
+            get
             {
-                //new DebugMenu(),
+                if (App.tipViewModel == null)
+                {
+                    App.tipViewModel = new TipViewModel
+                    {
+                        //Tool
+                        Tools = new List<ITool>
+                        {               
+                
+                            /*                
+                            new CursorTool(),                 
+                            new ViewTool(),
+                            new GeometryRectangleTool(),
+                            */
 
-                new EditMenu(),
-                new OperateMenu(),
+                            /*
+                            */
+                            new CursorTool(),
+                            null,
 
-                new AdjustmentMenu(),
-                new EffectMenu(),
+                            new ViewTool(),
+                            new BrushTool(),
+                            new TransparencyTool(),
+                            null,
 
-                new TextMenu(),
-                //new ParagraphMenu(),
+                            //Geometry0
+                            new GeometryRectangleTool(),
+                            new GeometryEllipseTool(),
+                            new PenTool(),
+                            new NodeTool(),
+                            null,
 
-                new StrokeMenu(),
-                new StyleMenu(),
+                            new TextArtisticTool(),
+                            new TextFrameTool(),
+                            null,
 
-                new HistoryMenu(),
-                new TransformerMenu(),
+                            new ImageTool(),
+                            new CropTool(),
 
-                new LayerMenu(),
-                new ColorMenu(),
-                //new KeyboardMenu(),
-            },
-        };
+
+                            new MoreTool(),
+
+
+                            new PatternGridTool(),
+                            new PatternDiagonalTool(),
+                            new PatternSpottedTool(),
+                            null,
+
+                            //Geometry1
+                            new GeometryRoundRectTool(),
+                            new GeometryTriangleTool(),
+                            new GeometryDiamondTool(),
+                            null,
+
+                            //Geometry2
+                            new GeometryPentagonTool(),
+                            new GeometryStarTool(),
+                            new GeometryCogTool(),
+                            null,
+
+                            //Geometry3
+                            new GeometryDountTool(),
+                            new GeometryPieTool(),
+                            new GeometryCookieTool(),
+                            null,
+
+                            //Geometry4
+                            new GeometryArrowTool(),
+                            new GeometryCapsuleTool(),
+                            new GeometryHeartTool(),
+                        },
+
+                        //Menu
+                        Menus = new List<IMenu>
+                        {
+                            //new DebugMenu(),
+
+                            new EditMenu(),
+                            new OperateMenu(),
+
+                            new AdjustmentMenu(),
+                            new EffectMenu(),
+
+                            new TextMenu(),
+                            //new ParagraphMenu(),
+
+                            new StrokeMenu(),
+                            new StyleMenu(),
+
+                            new HistoryMenu(),
+                            new TransformerMenu(),
+
+                            new LayerMenu(),
+                            new ColorMenu(),
+                            //new KeyboardMenu(),
+                        },
+                    };
+                }
+                return App.tipViewModel;
+            }
+        }
 
 
         public App()

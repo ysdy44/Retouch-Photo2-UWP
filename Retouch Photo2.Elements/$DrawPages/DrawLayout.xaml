@@ -17,7 +17,7 @@
     <UserControl.Resources>
         <!--Storyboard-->
         <Storyboard x:Name="WidthStoryboard" >
-            <DoubleAnimationUsingKeyFrames x:Name="WidthKeyFrames" EnableDependentAnimation ="True">
+            <DoubleAnimationUsingKeyFrames x:Name="WidthKeyFrames" Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(UIElement.Width)" EnableDependentAnimation ="True">
                 <SplineDoubleKeyFrame x:Name="WidthFrame" KeyTime="0:0:0.1" KeySpline="0.5,1,1,1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
@@ -48,6 +48,9 @@
                         <Setter Target = "RadiusAnimaPanel.Visibility" Value="Collapsed"/>
                         <Setter Target = "LeftRadiusAnimaIcon.Visibility" Value="Collapsed"/>
                         <Setter Target = "RightRadiusAnimaIcon.Visibility" Value="Collapsed"/>
+
+                        <!--Touchbar-->
+                        <Setter Target = "TouchbarBorder.Visibility" Value="Collapsed"/>
 
                         <!--Head-->
                         <Setter Target = "HeadBorder.Visibility" Value="Collapsed"/>
@@ -112,7 +115,7 @@
 
                         <!--Touchbar-->
                         <Setter Target="TouchbarBorder.Margin" Value="82,0,82,70"/>
-
+                        
                         <!--Left-->
                         <Setter Target = "LeftBorder.(Grid.Row)" Value="1"/>
                         <Setter Target = "LeftBorder.(Grid.RowSpan)" Value="1"/>

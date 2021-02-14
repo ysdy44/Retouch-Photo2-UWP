@@ -1,25 +1,18 @@
 ﻿using FanKit.Transformers;
-using Retouch_Photo2.Edits;
 using Retouch_Photo2.Elements;
-using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Windows.System;
-using Windows.UI.Xaml;
 using Windows.UI.Core;
-using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.ViewModels
 {
     public partial class SettingViewModel : INotifyPropertyChanged
     {
 
-        //@Delegate  
-        /// <summary> Occurs when the canvas position moved. </summary>
-        public Action<FlyoutPlacementMode> Move { get; set; }
-        /// <summary> Occurs when the conext edited. </summary>
-        public Action<EditType> Edit { get; set; }
-        /// <summary> Occurs when the conext AppBar. </summary>
-        public Action<AppBarType> AppBar { get; set; }
+        /// <summary> Gets or sets the all KeyboardAccelerator. </summary>   
+        public IList<KeyboardAccelerator2> KeyboardAccelerators { get; set; }
 
 
         //@Construct
@@ -45,41 +38,30 @@ namespace Retouch_Photo2.ViewModels
             switch (args.VirtualKey)
             {
                 case VirtualKey.Shift: if (this.KeyShift == false) this.KeyShift = this.IsRatio = this.IsSquare = true; break;
+                case VirtualKey.Space: if (this.KeySpace == false) this.KeySpace = this.IsStepFrequency = true; break;
                 case VirtualKey.Control: if (this.KeyCtrl == false) this.KeyCtrl = this.IsCenter = true; break;
-                case VirtualKey.Space: if (this.KeyAlt == false) this.KeyAlt = this.IsStepFrequency = true; break;
-
-                case VirtualKey.Escape: break;
-
-                case VirtualKey.Left: this.MoveType = FlyoutPlacementMode.Left; break;
-                case VirtualKey.Up: this.MoveType = FlyoutPlacementMode.Top; break;
-                case VirtualKey.Right: this.MoveType = FlyoutPlacementMode.Right; break;
-                case VirtualKey.Down: this.MoveType = FlyoutPlacementMode.Bottom; break;
-
-                case VirtualKey.X: if (this.KeyCtrl) this.EditType = EditType.Edit_Cut; break;
-                case VirtualKey.J: if (this.KeyCtrl) this.EditType = EditType.Edit_Duplicate; break;
-                case VirtualKey.C: if (this.KeyCtrl) this.EditType = EditType.Edit_Copy; break;
-                case VirtualKey.V: if (this.KeyCtrl) this.EditType = EditType.Edit_Paste; break;
-                case VirtualKey.Delete: this.EditType = EditType.Edit_Clear; break;
-                case VirtualKey.A: if (this.KeyCtrl) this.EditType = EditType.Select_All; break;
-                case VirtualKey.D: if (this.KeyCtrl) this.EditType = EditType.Select_Deselect; break;
-                case VirtualKey.I: if (this.KeyCtrl) this.EditType = EditType.Select_Invert; break;
-                case VirtualKey.G: if (this.KeyCtrl) this.EditType = EditType.Group_Group; break;
-                case VirtualKey.U: if (this.KeyCtrl) this.EditType = EditType.Group_UnGroup; break;
-                case VirtualKey.R: if (this.KeyCtrl) this.EditType = EditType.Group_Release; break;
-                //case VirtualKey.O: if (this.KeyCtrl) this.EditType = EditType.Combine_Union; break;
-                //case VirtualKey.E: if (this.KeyCtrl) this.EditType = EditType.Combine_Exclude; break;
-                //case VirtualKey.X: if (this.KeyCtrl) this.EditType = EditType.Combine_Xor; break;
-                //case VirtualKey.I: if (this.KeyCtrl) this.EditType = EditType.Combine_Intersect; break;
-                //case VirtualKey.S: if (this.KeyCtrl) this.EditType = EditType.Combine_ExpandStroke; break;
-
-                case VirtualKey.E: if (this.KeyCtrl) this.AppBarType = AppBarType.Export; break;
-                case VirtualKey.Z: if (this.KeyCtrl) this.AppBarType = AppBarType.Undo; break;
-                case VirtualKey.Y: if (this.KeyCtrl) this.AppBarType = AppBarType.Redo; break;
-
                 default: break;
             }
-
             this.KeyUpAndDown();
+
+
+            if (this.KeyboardAccelerators != null) foreach (KeyboardAccelerator2 key in this.KeyboardAccelerators)
+            {
+                if (key.IsEnabled)
+                {
+                    if (args.VirtualKey == key.Key)
+                    {
+                        switch (key.Modifiers)
+                        {
+                            case VirtualKeyModifiers2.None: key.IsEnabled = false; key.Invoked?.Invoke(); break;
+                            case VirtualKeyModifiers2.Shift: if (this.KeyShift) { key.IsEnabled = false; key.Invoked?.Invoke(); } break;
+                            case VirtualKeyModifiers2.Space: if (this.KeySpace) { key.IsEnabled = false; key.Invoked?.Invoke(); } break;
+                            case VirtualKeyModifiers2.Control: if (this.KeyCtrl) { key.IsEnabled = false; key.Invoked?.Invoke(); } break;
+                            default: break;
+                        }
+                    }
+                }
+            }
         }
 
 
@@ -87,42 +69,24 @@ namespace Retouch_Photo2.ViewModels
         {
             switch (args.VirtualKey)
             {
-                case VirtualKey.Shift: this.KeyShift = this.IsRatio = this.IsSquare = false; break;
-                case VirtualKey.Control: this.KeyCtrl = this.IsCenter = false; break;
-                case VirtualKey.Space: this.KeyAlt = this.IsStepFrequency = false; break;
-
-                case VirtualKey.Escape: this.IsFullScreen = !this.IsFullScreen; break;
-
-                case VirtualKey.Left:
-                case VirtualKey.Up:
-                case VirtualKey.Right:
-                case VirtualKey.Down: this.MoveType = FlyoutPlacementMode.Full; break;
-
-                case VirtualKey.X:
-                case VirtualKey.J:
-                case VirtualKey.C:
-                case VirtualKey.V:
-                case VirtualKey.Delete:
-                case VirtualKey.A:
-                case VirtualKey.D:
-                case VirtualKey.I:
-                case VirtualKey.G:
-                case VirtualKey.U:
-                case VirtualKey.R: this.EditType = EditType.None; break;
-                //case VirtualKey.O: 
-                //case VirtualKey.E: 
-                //case VirtualKey.X:
-                //case VirtualKey.I: 
-                //case VirtualKey.S: 
-
-                case VirtualKey.E: 
-                case VirtualKey.Z:
-                case VirtualKey.Y: this.AppBarType = AppBarType.None; break;
-
+                case VirtualKey.Shift: if (this.KeyShift) this.KeyShift = this.IsRatio = this.IsSquare = false; break;
+                case VirtualKey.Space: if (this.KeySpace) this.KeySpace = this.IsStepFrequency = false; break;
+                case VirtualKey.Control: if (this.KeyCtrl) this.KeyCtrl = this.IsCenter = false; break;
                 default: break;
             }
-
             this.KeyUpAndDown();
+
+
+            if (this.KeyboardAccelerators != null) foreach (KeyboardAccelerator2 key in this.KeyboardAccelerators)
+            {
+                if (key.IsEnabled == false)
+                {
+                    if (args.VirtualKey == key.Key)
+                    {
+                        key.IsEnabled = true;
+                    }
+                }
+            }
         }
 
 
@@ -154,7 +118,7 @@ namespace Retouch_Photo2.ViewModels
                 //this.CompositeMode = MarqueeCompositeMode.Intersect;//CompositeMode
             }
         }
-
+                
 
         /// <summary> keyboard's the **SHIFT** key. </summary>
         public bool KeyShift
@@ -180,54 +144,17 @@ namespace Retouch_Photo2.ViewModels
         }
         private bool keyCtrl = false;
 
-        /// <summary> keyboard's the **ALT** key. </summary>
-        public bool KeyAlt
+        /// <summary> keyboard's the **Space** key. </summary>
+        public bool KeySpace
         {
-            get => this.keyAlt;
+            get => this.keySpace;
             set
             {
-                this.keyAlt = value;
-                this.OnPropertyChanged(nameof(this.KeyAlt));//Notify 
+                this.keySpace = value;
+                this.OnPropertyChanged(nameof(this.KeySpace));//Notify 
             }
         }
-        private bool keyAlt = false;
+        private bool keySpace = false;
 
-
-        private FlyoutPlacementMode MoveType
-        {
-            set
-            {
-                if (this.moveType == value) return;
-
-                this.moveType = value;
-                this.Move?.Invoke(value);//Delegate
-            }
-        }
-        private FlyoutPlacementMode moveType = FlyoutPlacementMode.Full;
-
-        private EditType EditType
-        {
-            set
-            {
-                if (this.editType == value) return;
-
-                this.editType = value;
-                this.Edit?.Invoke(value);//Delegate
-            }
-        }
-        private EditType editType = EditType.None;
-
-        private AppBarType AppBarType
-        {
-            set
-            {
-                if (this.appBarType == value) return;
-
-                this.appBarType = value;
-                this.AppBar?.Invoke(value);//Delegate
-            }
-        }
-        private AppBarType appBarType = AppBarType.None;
-        
     }
 }

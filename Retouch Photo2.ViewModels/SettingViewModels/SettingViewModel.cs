@@ -112,19 +112,6 @@ namespace Retouch_Photo2.ViewModels
         }
         private SelfControlPointMode controlPointMode;
         
-        /// <summary> Sets or Gets the page layout is full screen. </summary>
-        public bool IsFullScreen
-        {
-            get => this.isFullScreen;
-            set
-            {
-                this.isFullScreen = value;
-                this.OnPropertyChanged(nameof(this.IsFullScreen));//Notify 
-            }
-        }
-        private bool isFullScreen = true;
-
-
 
         //Notify 
         /// <summary> Multicast event for property change notifications. </summary>

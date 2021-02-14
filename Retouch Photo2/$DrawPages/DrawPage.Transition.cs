@@ -1,54 +1,12 @@
 ﻿using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.Foundation;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
 
 namespace Retouch_Photo2
 {
-    /// <summary>
-    /// Type of Transition.
-    /// </summary>
-    public enum TransitionType
-    {
-        /// <summary> Normal. </summary>
-        None,
-        /// <summary> Page navigate page with Size. </summary>
-        Size,
-        /// <summary> Page navigate with Transition. </summary>
-        Transition,
-    }
-
-    /// <summary>
-    /// Data of Transition.
-    /// </summary>
-    public struct TransitionData
-    {
-        /// <summary> Type of Transition.. </summary>
-        public TransitionType Type;
-        /// <summary> Transition source rect. </summary>
-        public Rect SourceRect;
-        /// <summary> Page actually size. </summary>
-        public Size PageSize;
-    }
-
     public sealed partial class DrawPage : Page
     {
-
-        // The first time the page is loaded, 
-        // ""OnNavigatedTo"" is executed before ""Loaded""
-        // ""Loaded"" Responsible for ""NavigatedTo""
-
-        //@Static
-        /// <summary> Is this Loaded? </summary>
-        static bool _lockIsLoaded = false;
-        /// <summary> Disposable data. </summary>
-        TransitionData _lockData;
-
-        #region Lock
-
-                  
         /// <summary>
         /// Loaded.
         /// </summary>
@@ -58,128 +16,98 @@ namespace Retouch_Photo2
             {
                 DrawPage._lockIsLoaded = true;
 
-                this.Transition(this._lockData);
+                this.Transition();
             }
         }
-
         /// <summary>
         /// OnNavigatedTo.
         /// </summary>
         /// <param name="data"> The data. </param>
-        private void _lockOnNavigatedTo(TransitionData data)
-        {
+        private void _lockOnNavigatedTo(Rect? data)
+        {           
+            this._lockSourceRect = data;
+
             if (DrawPage._lockIsLoaded == true)
             {
-                this.Transition(data);
-            }
-            else
-            {
-                this._lockData = data;
+                this.Transition();
             }
         }
 
-
-        #endregion
-
-
-        #region DependencyProperty
-
-
-        /// <summary> Gets or sets the canvas transition value. </summary>
-        public float TransitionValue
-        {
-            get => (float)base.GetValue(TransitionValueProperty);
-            set => base.SetValue(TransitionValueProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "DrawPage.TransitionValue" /> dependency property. </summary>
-        public static readonly DependencyProperty TransitionValueProperty = DependencyProperty.Register(nameof(TransitionValue), typeof(float), typeof(DrawPage), new PropertyMetadata(0.0f, (sender, e) =>
-        {
-            DrawPage control = (DrawPage)sender;
-
-            if (e.NewValue is float value)
-            {
-                control.ViewModel.CanvasTransformer.Transition(value);
-                control.ViewModel.Invalidate();//Invalidate
-            }
-        }));
-
-
-        #endregion
+        //@Static
+        /// <summary>     
+        /// Is this Loaded? 
+        /// 
+        /// The first time the page is loaded, 
+        /// <see cref="Page.OnNavigatedTo"/> is executed before <see cref="Page.Loaded"/>
+        /// <see cref="Page.Loaded"/> Responsible for <see cref="Page.NavigatedTo"/>
+        /// </summary>
+        static bool _lockIsLoaded = false;
+        /// <summary> The transition data. </summary>
+        Rect? _lockSourceRect;
         
-        //Transition
-        private void ConstructTransition()
-        {
-            //Binding own DependencyProperty to the Storyboard
-            Storyboard.SetTarget(this.TransitionKeyFrames, this);
-            Storyboard.SetTargetProperty(this.TransitionKeyFrames, nameof(this.TransitionValue));
-            this.TransitionKeyFrames.Completed += (s, e) => this._transitionComplete();
-        }
+
 
         //Transition
-        private void Transition(TransitionData data)
+        private void RegisteTransition()
         {
-            this._transitionStaring();
-            this._transitionStaringDestination();
-
-            switch (data.Type)
+            this.TransitionKeyFrames.Completed += (s, e) => this.TransitionComplete();
+            
+            this.TransitionSlider.ValueChanged += (s, e) =>
             {
-                case TransitionType.None:
-                    break;
-                case TransitionType.Size:
-                    this._transitionComplete();
-                    break;
-                case TransitionType.Transition:
-                    {
-                        //return;
-                        this._transitionStaringSource(data.SourceRect, data.PageSize);
-
-                        this.TransitionValue = 0;
-                        this.TransitionStoryboard.Begin();//Storyboard}
-                        break;
-                    }
-                default:
-                    break;
-            }
+                float value = (float)e.NewValue;
+                this.TransitionDelta(value);
+            };
         }
-        
-        #region Transition
 
-
-        //Staring
-        private void _transitionStaring()
+        private void Transition()
         {
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-        }
-        private void _transitionStaringDestination()
-        {
-            //Transition
+            //Destination
             Vector2 destinationPostion = this.SettingViewModel.FullScreenOffset;
             float destinationWidth = this.SettingViewModel.CenterChildWidth;
             float destinationHeight = this.SettingViewModel.CenterChildHeight;
             this.ViewModel.CanvasTransformer.TransitionDestination(destinationPostion, destinationWidth, destinationHeight);
-        }
-        private void _transitionStaringSource(Rect sourceRect,Size pageSize)
-        {
-            //Transition
-            this.ViewModel.SetCanvasTransformerRadian(0.0f);
-            this.ViewModel.CanvasTransformer.Transition(0.0f);
-            this.ViewModel.CanvasTransformer.TransitionSource(sourceRect);
-            this.ViewModel.CanvasTransformer.Size = pageSize;
+
+            if (this._lockSourceRect is Rect data)
+            {
+                //Source
+                this.ViewModel.CanvasTransformer.TransitionSource(data);
+                this.TransitionStaring();
+
+                this.TransitionSlider.Value = 0.0d;
+                this.TransitionStoryboard.Begin();//Storyboard}
+            }
+            else this.TransitionComplete();
         }
 
+
+
+        //Staring
+        private void TransitionStaring()
+        {
+          //  this.ViewModel.CanvasTransformer.Radian(0.0f);
+          //  this.ViewModel.CanvasTransformer.Transition(0.0f);
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+            this.TransitionBorder.Visibility = Windows.UI.Xaml.Visibility.Visible;
+        }
+
+        //Delta
+        private void TransitionDelta(float value)
+        {
+            this.ViewModel.CanvasTransformer.Transition(value);
+            this.ViewModel.Invalidate(InvalidateMode.None);//Invalidate
+        }
 
         //Complete
-        private void _transitionComplete()
+        private void TransitionComplete()
         {
             //Transition
             this.ViewModel.CanvasTransformer.Transition(1.0f);
 
-            this.SettingViewModel.IsFullScreen = false;
+            Retouch_Photo2.DrawPage.FullScreen?.Invoke();
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+            this.TransitionBorder.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
 
-
-        #endregion
 
     }
 }

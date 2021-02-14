@@ -12,20 +12,20 @@ namespace Retouch_Photo2
         /// <summary>
         /// Gets or sets the state of AppBar.
         /// </summary>
-        public bool IsAppBarLeft 
+        public bool? IsAppBarLeft
         {
             get => this.isAppBarLeft;
             set
             {
                 if (this.isAppBarLeft == value) return;
 
-                if (value)
+                if (value == true)
                 {
                     this.HeadLeftLength.Width = new GridLength(1, GridUnitType.Star);
-                    this.HeadRightLength.Width = new GridLength(0, GridUnitType.Auto);
+                    this.HeadRightLength.Width = GridLength.Auto;
                     this.ShadowRectangle.Visibility = Visibility.Collapsed;
                 }
-                else
+                else if (value == false)
                 {
                     this.HeadLeftLength.Width = new GridLength(40, GridUnitType.Pixel);
                     this.HeadRightLength.Width = new GridLength(1, GridUnitType.Star);
@@ -35,20 +35,19 @@ namespace Retouch_Photo2
                 this.isAppBarLeft = value;
             }
         }
-        private bool isAppBarLeft;
+        private bool? isAppBarLeft = null;
 
 
         // AppBar. 
         private void ConstructAppBar()
         {
             //AppBarGrid
-            this.AppBarGrid.Loaded += (s, e) => this.AppBarGridSizeChanged(this.ActualWidth);
+            this.AppBarGrid.Loaded += (s, e) => this.AppBarGridSizeChanged(this.AppBarGrid.ActualWidth);
             this.AppBarGrid.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
-                {
-                    this.AppBarGridSizeChanged(e.NewSize.Width);
-                }
+
+                this.AppBarGridSizeChanged(e.NewSize.Width);
             };
 
 
@@ -70,7 +69,7 @@ namespace Retouch_Photo2
                     this.ViewModel.IsUpdateThumbnailByName = false;
 
                     await this.Exit();
-                    this.SettingViewModel.IsFullScreen = true;
+                    this.DrawLayout.IsFullScreen = true;
                     this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
                     this.LoadingControl.State = LoadingState.None;
@@ -83,7 +82,7 @@ namespace Retouch_Photo2
                     this.ViewModel.IsUpdateThumbnailByName = true;
 
                     await this.Exit();
-                    this.SettingViewModel.IsFullScreen = true;
+                    this.DrawLayout.IsFullScreen = true;
                     this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
 
                     this.LoadingControl.State = LoadingState.None;
@@ -100,7 +99,7 @@ namespace Retouch_Photo2
                 this.ViewModel.IsUpdateThumbnailByName = false;
 
                 await this.Exit();
-                this.SettingViewModel.IsFullScreen = true;
+                this.DrawLayout.IsFullScreen = true;
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
                 this.LoadingControl.State = LoadingState.None;
@@ -110,27 +109,21 @@ namespace Retouch_Photo2
 
 
             // ExpandAppbar
-            this.ConstructExportDialog();
-            this.ExportButton.Tapped += (s, e) => this.ShowExportDialog();
-
+            this.ExportButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowExport?.Invoke();
             this.UndoButton.Tapped += (s, e) => this.MethodViewModel.MethodEditUndo();
             //this.RedoButton.Click += (s, e) => { };
-
-            this.ConstructSetupDialog();
-            this.SetupButton.Tapped += (s, e) => this.ShowSetupDialog();
-
+            this.SetupButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowSetup?.Invoke();
             this.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
-
-            this.UnFullScreenButton.Click += (s, e) => this.SettingViewModel.IsFullScreen = false;
-            this.FullScreenButton.Tapped += (s, e) => this.SettingViewModel.IsFullScreen = true;
+            this.UnFullScreenButton.Click += (s, e) => Retouch_Photo2.DrawPage.FullScreen?.Invoke();
+            this.FullScreenButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.FullScreen?.Invoke();
         }
 
         private void AppBarGridSizeChanged(double width)
         {
-            double arrangeWidth = width - 70 - 40;
+            double arrangeWidth = width - this.DocumentButton.ActualWidth - 40;
             double measureWidth = this.MenuButtonsControl.ActualWidth;
 
-            this.IsAppBarLeft = arrangeWidth > measureWidth; ;
+            this.IsAppBarLeft = arrangeWidth > measureWidth;
         }
 
     }

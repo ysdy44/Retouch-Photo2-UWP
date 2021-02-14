@@ -42,28 +42,6 @@
         <Grid.Resources>
             <ResourceDictionary>
 
-                <!--Linear-->
-                <ResourceDictionary.ThemeDictionaries>
-
-                    <ResourceDictionary x:Key="Light">
-                        <LinearGradientBrush x:Key="LinearBrush" StartPoint="0,0.5" EndPoint="1,0.5">
-                            <GradientStop Color="#22000000" Offset="0"/>
-                            <GradientStop Color="#11000000" Offset="0.2"/>
-                            <GradientStop Color="#00000000" Offset="1"/>
-                        </LinearGradientBrush>
-                    </ResourceDictionary>
-
-                    <ResourceDictionary x:Key="Dark">
-                        <LinearGradientBrush x:Key="LinearBrush" StartPoint="0,0.5" EndPoint="1,0.5">
-                            <GradientStop Color="#66000000" Offset="0"/>
-                            <GradientStop Color="#44000000" Offset="0.2"/>
-                            <GradientStop Color="#00000000" Offset="1"/>
-                        </LinearGradientBrush>
-                    </ResourceDictionary>
-
-                </ResourceDictionary.ThemeDictionaries>
-
-
                 <!--Color-->
                 <SolidColorBrush x:Name="AccentColorBrush" Color="{ThemeResource SystemAccentColor}" />
                 <SolidColorBrush x:Name="ShadowColorBrush" Color="{ThemeResource AppStrokeColor}" />
@@ -79,38 +57,25 @@
                 </Flyout>
 
                 <Flyout x:Name="StrokeColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
-            </Flyout>
-            
-            <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <toolElements:MoreTransformControl/>
-            </Flyout>
-            <Flyout x:Name="MoreCreateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <toolElements:MoreCreateControl/>
-            </Flyout>
-            
+                    <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
+                </Flyout>
 
-            <!--Transition-->
-            <Storyboard x:Name="TransitionStoryboard">
-                <DoubleAnimationUsingKeyFrames x:Name="TransitionKeyFrames" EnableDependentAnimation ="True">
-                    <EasingDoubleKeyFrame KeyTime="00:00:0.8" Value="1.0">
-                        <EasingDoubleKeyFrame.EasingFunction>
-                            <QuinticEase EasingMode="EaseInOut"/>
-                        </EasingDoubleKeyFrame.EasingFunction>
-                    </EasingDoubleKeyFrame>
-                </DoubleAnimationUsingKeyFrames>
-            </Storyboard>
+                <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                    <toolElements:MoreTransformControl/>
+                </Flyout>
+                <Flyout x:Name="MoreCreateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                    <toolElements:MoreCreateControl/>
+                </Flyout>
 
 
             </ResourceDictionary>
         </Grid.Resources>
-        
-        
+
+
         <elementDrawPages:DrawLayout x:Name="DrawLayout" 
-               CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"
-             
+               CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"             
                DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
-               IsFullScreen="{x:Bind SettingViewModel.IsFullScreen, Mode=OneWay}">
+               >
 
             <!--RightPane-->
             <elementDrawPages:DrawLayout.RightPanel>
@@ -118,7 +83,7 @@
                     <!--Layers-->
                 </ScrollViewer>
             </elementDrawPages:DrawLayout.RightPanel>
-            
+
             <!--LeftPanel-->
             <elementDrawPages:DrawLayout.LeftPanel>
                 <tools:ToolsControl x:Name="ToolsControl"
@@ -130,8 +95,8 @@
                 <Grid x:Name="AppBarGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" MinWidth="70"/>
-                        <ColumnDefinition x:Name="HeadLeftLength" Width="40" MinWidth="44"/>
-                        <ColumnDefinition x:Name="HeadRightLength"  Width="*"/>
+                        <ColumnDefinition x:Name="HeadLeftLength" Width="40" MinWidth="40"/>
+                        <ColumnDefinition x:Name="HeadRightLength" Width="*"/>
                     </Grid.ColumnDefinitions>
 
 
@@ -190,19 +155,7 @@
                             </elements:ExpandAppbarButton>
 
                             <elements:ExpandAppBarSapce/>
-                            <!--
-                      <Path StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}">
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                    <GradientStop Color="White" Offset="0"/>
-                                    <GradientStop Color="White" Offset="0.3"/>
-                                    <GradientStop Color="Red" Offset="0.7"/>
-                                    <GradientStop Color="Red" Offset="1"/>
-                                </LinearGradientBrush>
-                            <Path.Data>
-                                M4.294,14.039l2.773,-2.773l3.747,3.747c1.159,1.159 3.04,1.159 4.199,0c1.159,-1.159 1.159,-3.04 0,-4.199l-3.747,-3.747l2.773,-2.773l4.144,4.143c2.689,2.69 2.689,7.057 0,9.746c-2.689,2.689 -7.056,2.689 -9.746,0l-4.143,-4.144Zm8.09,-11.401l-2.773,2.773l-2.639,-2.638l2.773,-2.773l2.639,2.638Zm-6.973,6.973l-2.773,2.773l-2.638,-2.639l2.773,-2.773l2.638,2.639Z
-                            </Path.Data>
-                        </Path>
-                -->
+
                             <elements:ExpandAppbarToggleButton x:Name="SnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}">
                                 <ToolTipService.ToolTip>
                                     <ToolTip x:Name="SnapToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
@@ -258,7 +211,33 @@
 
 
                     <!--Shadow-->
-                    <Rectangle x:Name="ShadowRectangle" IsHitTestVisible="False" Width="32" Grid.Column="2" HorizontalAlignment="Left" Fill="{ThemeResource LinearBrush}"/>
+                    <Border x:Name="ShadowRectangle" IsHitTestVisible="False" Width="32" Grid.Column="2" HorizontalAlignment="Left" >
+                        <Border.Resources>
+                            <ResourceDictionary>
+                                <!--Linear-->
+                                <ResourceDictionary.ThemeDictionaries>
+
+                                    <ResourceDictionary x:Key="Light">
+                                        <LinearGradientBrush x:Key="LinearBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+                                            <GradientStop Color="#22000000" Offset="0"/>
+                                            <GradientStop Color="#11000000" Offset="0.2"/>
+                                            <GradientStop Color="#00000000" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </ResourceDictionary>
+
+                                    <ResourceDictionary x:Key="Dark">
+                                        <LinearGradientBrush x:Key="LinearBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+                                            <GradientStop Color="#66000000" Offset="0"/>
+                                            <GradientStop Color="#44000000" Offset="0.2"/>
+                                            <GradientStop Color="#00000000" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </ResourceDictionary>
+
+                                </ResourceDictionary.ThemeDictionaries>
+                            </ResourceDictionary>
+                        </Border.Resources>
+                        <Rectangle Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{ThemeResource LinearBrush}"/>
+                    </Border>
 
 
                 </Grid>
@@ -271,11 +250,11 @@
         <menus:MenusExpanderCanvas
             Menus="{x:Bind TipViewModel.Menus, Mode=OneTime}"
             IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"/>
-        
+
 
         <!--FullScreen-->
         <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}"
-                Visibility="{x:Bind BoolToVisibilityConverter(SettingViewModel.IsFullScreen), Mode=OneWay}">
+                Visibility="Collapsed">
             <FontIcon Glyph="&#xE92C;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
 
@@ -283,7 +262,7 @@
         <!--Tip-->
         <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" 
                         Visibility="{x:Bind ViewModel.TipTextVisibility, Mode=OneWay}">
-       
+
             <!--Visibility:Show-->
             <animations:Implicit.ShowAnimations>
                 <animations:OpacityAnimation Duration="0:0:0.2" From="0.0" To="1.0"/>
@@ -293,13 +272,13 @@
             <animations:Implicit.HideAnimations>
                 <animations:OpacityAnimation Duration="0:0:0.4" From="1.0" To="0.0"/>
             </animations:Implicit.HideAnimations>
-  
+
             <ToolTip Style="{StaticResource AppToolTipStyle}">
                 <TextBlock Text="{x:Bind ViewModel.TipText, Mode=OneWay}" TextWrapping="Wrap"/>
             </ToolTip>
         </ContentControl>
 
-        
+
         <!--Load-->
         <elements:LoadingControl x:Name="LoadingControl"/>
 
@@ -324,7 +303,7 @@
                 </StackPanel>
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
-        
+
         <elementDialog:DialogBase x:Name="ExportDialog">
             <elementDialog:DialogBase.CenterContent>
                 <StackPanel>
@@ -352,6 +331,31 @@
             </elementDialog:DialogBase.CenterContent>
         </elementDialog:DialogBase>
 
+
+        <!--Transition-->
+        <Border x:Name="TransitionBorder" IsHitTestVisible="False" Visibility="Collapsed" Padding="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{ThemeResource AppFill}">
+
+            <Border.Resources>
+                <!--Transition-->
+                <Storyboard x:Name="TransitionStoryboard">
+                    <DoubleAnimationUsingKeyFrames x:Name="TransitionKeyFrames" Storyboard.TargetName="TransitionSlider" Storyboard.TargetProperty="Value" EnableDependentAnimation ="True">
+                        <EasingDoubleKeyFrame KeyTime="00:00:0.8" Value="1.0">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <QuinticEase EasingMode="EaseInOut"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            </Border.Resources>
+
+            <Slider x:Name="TransitionSlider" Margin="0,-6,0,-12" Width="200" Minimum="0" Maximum="1" StepFrequency="0.00001">
+                <Slider.Clip>
+                    <RectangleGeometry Rect="0,6,200,26"/>
+                </Slider.Clip>
+            </Slider>
+
+        </Border>
+        
 
     </Grid>
 </Page>

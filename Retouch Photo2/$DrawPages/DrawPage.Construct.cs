@@ -1,6 +1,5 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Edits;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
@@ -8,8 +7,8 @@ using System.Numerics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Imaging;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2
 {
@@ -77,59 +76,6 @@ namespace Retouch_Photo2
 
                 this.RenameTextBox.PlaceholderText = resource.GetString("$DrawPage_RenameDialog_PlaceholderText");
             }
-        }
-
-
-        //Setting
-        private void ConstructSetting()
-        {
-            if (this.SettingViewModel.Move == null) this.SettingViewModel.Move += (moveType) =>
-            {
-                switch (moveType)
-                {
-                    case FlyoutPlacementMode.Full: break;
-                    case FlyoutPlacementMode.Left: this.ViewModel.CanvasTransformer.Position += new Vector2(50, 0); break;
-                    case FlyoutPlacementMode.Top: this.ViewModel.CanvasTransformer.Position += new Vector2(0, 50); break;
-                    case FlyoutPlacementMode.Right: this.ViewModel.CanvasTransformer.Position -= new Vector2(50, 0); break;
-                    case FlyoutPlacementMode.Bottom: this.ViewModel.CanvasTransformer.Position -= new Vector2(0, 50); break;
-                    default: break;
-                }
-                this.ViewModel.CanvasTransformer.ReloadMatrix();
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            if (this.SettingViewModel.Edit == null) this.SettingViewModel.Edit += (editType) =>
-            {
-                switch (editType)
-                {
-                    case EditType.None: break;
-
-                    case EditType.Edit_Cut: this.MethodViewModel.MethodEditCut(); break;
-                    case EditType.Edit_Duplicate: this.MethodViewModel.MethodEditDuplicate(); break;
-                    case EditType.Edit_Copy: this.MethodViewModel.MethodEditCopy(); break;
-                    case EditType.Edit_Paste: this.MethodViewModel.MethodEditPaste(); break;
-                    case EditType.Edit_Clear: this.MethodViewModel.MethodEditClear(); break;
-
-                    case EditType.Select_All: this.MethodViewModel.MethodSelectAll(); break;
-                    case EditType.Select_Deselect: this.MethodViewModel.MethodSelectDeselect(); break;
-                    case EditType.Select_Invert: this.MethodViewModel.MethodSelectInvert(); break;
-
-                    case EditType.Group_Group: this.MethodViewModel.MethodGroupGroup(); break;
-                    case EditType.Group_UnGroup: this.MethodViewModel.MethodGroupUnGroup(); break;
-                    case EditType.Group_Release: this.MethodViewModel.MethodGroupRelease(); break;
-                    default: break;
-                };
-                if (this.SettingViewModel.AppBar == null) this.SettingViewModel.AppBar += (appBarType) =>
-                {
-                    switch (appBarType)
-                    {
-                        case AppBarType.None: break;
-                        case AppBarType.Export: this.ShowExportDialog(); break;
-                        case AppBarType.Undo: this.MethodViewModel.MethodEditUndo(); break;
-                        case AppBarType.Redo:break;
-                        default: break;
-                    }
-                };
-            };
         }
 
 
@@ -298,7 +244,32 @@ namespace Retouch_Photo2
             this.RenameTextBox.Text = this.SelectionViewModel.LayerName;
 
             this.RenameDialog.Show();
-        }        
+        }
+
+
+        //FullScreen
+        private void FullScreenLayout()
+        {
+            Vector2 offset = this.SettingViewModel.FullScreenOffset;
+            bool isFullScreen = this.DrawLayout.IsFullScreen;
+
+            if (isFullScreen)
+            {
+                this.DrawLayout.IsFullScreen = false;
+                this.UnFullScreenButton.Visibility = Visibility.Collapsed;
+
+                this.ViewModel.CanvasTransformer.Position -= offset;
+                this.ViewModel.CanvasTransformer.ReloadMatrix();
+            }
+            else
+            {
+                this.DrawLayout.IsFullScreen = true;
+                this.UnFullScreenButton.Visibility = Visibility.Visible;
+
+                this.ViewModel.CanvasTransformer.Position += offset;
+                this.ViewModel.CanvasTransformer.ReloadMatrix();
+            }
+        }
 
     }
 }

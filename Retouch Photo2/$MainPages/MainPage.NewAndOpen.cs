@@ -45,15 +45,13 @@ namespace Retouch_Photo2
                 this.ViewModel.LoadFromProject(project);
             }
 
+
             //Transition
-            TransitionData data = new TransitionData
-            {
-                Type = TransitionType.Size
-            };
+            Rect? sourceRect = null;
 
             this.LoadingControl.IsActive = false;
             this.LoadingControl.State = LoadingState.None;
-            this.Frame.Navigate(typeof(DrawPage), data);//Navigate
+            this.Frame.Navigate(typeof(DrawPage), sourceRect);//Navigate
         }
 
 
@@ -129,16 +127,11 @@ namespace Retouch_Photo2
 
 
             //Transition
-            TransitionData data = new TransitionData
-            {
-                Type = TransitionType.Transition,
-                SourceRect = projectViewItem.GetVisualRect(Window.Current.Content),
-                PageSize = new Size(this.ActualWidth, this.ActualHeight - 50)
-            };
+            Rect? sourceRect = projectViewItem.GetVisualRect(Window.Current.Content);
 
             this.LoadingControl.State = LoadingState.None;
             this.LoadingControl.IsActive = false;
-            this.Frame.Navigate(typeof(DrawPage), data);//Navigate   
+            this.Frame.Navigate(typeof(DrawPage), sourceRect);//Navigate   
         }
 
 
@@ -208,15 +201,13 @@ namespace Retouch_Photo2
                 this.ViewModel.LoadFromProject(project);
             }
 
+
             //Transition
-            TransitionData data = new TransitionData
-            {
-                Type = TransitionType.Size
-            };
+            Rect? sourceRect = null;
 
             this.LoadingControl.State = LoadingState.None;
             this.LoadingControl.IsActive = false;
-            this.Frame.Navigate(typeof(DrawPage), data);//Navigate
+            this.Frame.Navigate(typeof(DrawPage), sourceRect);//Navigate
         }
 
     }

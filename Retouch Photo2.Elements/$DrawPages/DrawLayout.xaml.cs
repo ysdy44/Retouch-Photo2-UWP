@@ -16,9 +16,6 @@ namespace Retouch_Photo2.Elements.DrawPages
     /// </summary>
     public sealed partial class DrawLayout : UserControl
     {
-        //@Delegate  
-        /// <summary> Occurs when the IsFullScreen changed. </summary>
-        public Action<bool> IsFullScreenChanged { get; set; }
 
         //@Content
         //Body
@@ -89,10 +86,6 @@ namespace Retouch_Photo2.Elements.DrawPages
 
         private void ConstructWidthStoryboard()
         {
-            // Binding own DependencyProperty to the Storyboard
-            Storyboard.SetTarget(this.WidthKeyFrames, this.RightBorder);
-            Storyboard.SetTargetProperty(this.WidthKeyFrames, "(UIElement.Width)");
-
             this._WidthButton.Click += (s, e) =>
             {
                 if (this.RightBorder.ActualWidth < 100)

@@ -10,7 +10,7 @@ namespace Retouch_Photo2.Elements.DrawPages
     {
         
         //@VisualState
-        bool _vsIsFullScreen;
+        bool _vsIsFullScreen = true;
         DeviceLayoutType _vsDeviceLayoutType = DeviceLayoutType.PC;
         PhoneLayoutType _vsPhoneType = PhoneLayoutType.Hided;
         /// <summary> 
@@ -51,8 +51,6 @@ namespace Retouch_Photo2.Elements.DrawPages
             get => this._vsIsFullScreen;
             set
             {
-                this.IsFullScreenChanged?.Invoke(value);//Delegate
-
                 this._vsIsFullScreen = value;
                 this.VisualState = this.VisualState;//State
             }

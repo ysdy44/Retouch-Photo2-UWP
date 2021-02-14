@@ -107,7 +107,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="%24DrawPages\AppBarType.cs" />
     <Compile Include="%24DrawPages\DrawLayout.Layout.cs" />
     <Compile Include="%24Loading\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
@@ -225,6 +224,7 @@
     <Compile Include="%24SettingPages\PhoneLayout.xaml.cs">
       <DependentUpon>PhoneLayout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="KeyboardAccelerator2.cs" />
     <Compile Include="XMLs\XML.ThemeFactory.cs" />
     <Compile Include="XMLs\XML.DeviceLayout.cs" />
     <Compile Include="XMLs\XML.DeviceLayoutTypeFactory.cs" />

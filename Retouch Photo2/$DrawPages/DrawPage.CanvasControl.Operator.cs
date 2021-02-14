@@ -24,7 +24,7 @@ namespace Retouch_Photo2
 
 
         //MainCanvasControl
-        private void ConstructMainCanvasControl()
+        private void ConstructCanvasControl()
         {
             this.ViewModel.AccentColor = this.AccentColor;
 
