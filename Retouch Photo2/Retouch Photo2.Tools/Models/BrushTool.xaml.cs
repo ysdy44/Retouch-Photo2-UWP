@@ -288,8 +288,8 @@ namespace Retouch_Photo2.Tools.Models
                 textBox.IsEnabled = false;
                 this.StopsPicker.ColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
                 this.StopsPicker.ColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
-                textBox.GotFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
-                textBox.LostFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
+                textBox.GotFocus += (s, e) => this.SettingViewModel.UnRegisteKey();
+                textBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             }
 
             this.StopsPicker.StopsChanged += (s, array) =>

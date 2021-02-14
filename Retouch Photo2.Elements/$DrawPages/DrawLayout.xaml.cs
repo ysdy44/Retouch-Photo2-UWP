@@ -22,9 +22,10 @@ namespace Retouch_Photo2.Elements.DrawPages
 
         //@Content
         //Body
-        /// <summary> CenterBorder's Child. </summary>
-        public CanvasControl CanvasControl => this._CanvasControl;
-        public CanvasControl ToolCanvasControl => this._ToolCanvasControl;
+        /// <summary> CanvasControl of <see cref="ILayer.Render"/>. </summary>
+        public CanvasControl LayerRenderCanvasControl => this._LayerRenderCanvasControl; 
+        /// <summary> CanvasControl of <see cref="ITool.Draw"/>. </summary>
+        public CanvasControl ToolDrawCanvasControl => this._ToolDrawCanvasControl; 
 
         //Touchbar
         /// <summary> TouchbarPickerBorder's Child. </summary>
@@ -56,16 +57,16 @@ namespace Retouch_Photo2.Elements.DrawPages
         /// <summary> LeftBorder's Child. </summary>
         public UIElement LeftPanel { get => this.LeftBorder.Child; set => this.LeftBorder.Child = value; }
         //Right
-        /// <summary> RightCenterBorder's Child. </summary>
-        public UIElement RightCenterPanel { get => this.RightCenterBorder.Child; set => this.RightCenterBorder.Child = value; }
-        /// <summary> RightPhotosButton. </summary>   
-        public Button RightPhotosButton => this._RightPhotosButton;
-        /// <summary> RightPhotosToolTip. </summary>   
-        public ToolTip RightPhotosToolTip => this._RightPhotosToolTip;
-        /// <summary> RightWidthButton. </summary>   
-        public Button RightWidthButton => this._RightWidthButton;
-        /// <summary> RightWidthToolTip. </summary>   
-        public ToolTip RightWidthToolTip => this._RightWidthToolTip;
+        /// <summary> RightBorder's Child. </summary>
+        public UIElement RightPanel { get => this.RightBorder.Child; set => this.RightBorder.Child = value; }
+        /// <summary> GalleryButton. </summary>   
+        public Button GalleryButton => this._GalleryButton; 
+        /// <summary> GalleryToolTip. </summary>   
+        public ToolTip GalleryToolTip => this._RightPhotosToolTip;
+        /// <summary> WidthButton. </summary>   
+        public Button WidthButton => this._WidthButton; 
+        /// <summary> WidthToolTip. </summary>   
+        public ToolTip WidthToolTip => this._WidthToolTip; 
 
 
         //@Construct
@@ -92,7 +93,7 @@ namespace Retouch_Photo2.Elements.DrawPages
             Storyboard.SetTarget(this.WidthKeyFrames, this.RightBorder);
             Storyboard.SetTargetProperty(this.WidthKeyFrames, "(UIElement.Width)");
 
-            this._RightWidthButton.Click += (s, e) =>
+            this._WidthButton.Click += (s, e) =>
             {
                 if (this.RightBorder.ActualWidth < 100)
                 {

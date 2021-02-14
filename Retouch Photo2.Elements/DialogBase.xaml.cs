@@ -25,15 +25,19 @@ namespace Retouch_Photo2.Elements.Dialogs
             set => this.ContentControl.Content = value;
         }
 
-        /// <summary> <see cref = "RenameDialog" /> 's CloseButton.</summary>
+        /// <summary> <see cref = "DialogBase" /> 's CloseButton.</summary>
         public Button CloseButton => this._CloseButton;
-        /// <summary> <see cref = "RenameDialog" /> 's PrimaryButton.</summary>
+        /// <summary> <see cref = "DialogBase" /> 's PrimaryButton.</summary>
         public Button PrimaryButton => this._PrimaryButton;
 
         //@Construct
+        /// <summary>
+        /// Initializes a DialogBase. 
+        /// </summary>
         public DialogBase()
         {
             this.InitializeComponent();
+            this.LayoutRoot.Tapped += (s, e) => this.Hide();
             this.HideStoryboard.Completed += (s, e) =>
             {
                 this.LayoutRoot.Visibility = Visibility.Collapsed;

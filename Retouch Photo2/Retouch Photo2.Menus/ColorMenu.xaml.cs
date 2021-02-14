@@ -107,8 +107,8 @@ namespace Retouch_Photo2.Menus.Models
                 //textBox.IsEnabled = false;
                 //this.ColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
                 //this.ColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
-                textBox.GotFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
-                textBox.LostFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
+                textBox.GotFocus += (s, e) => this.SettingViewModel.UnRegisteKey();
+                textBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             }
 
             this.ColorPicker.ColorChanged += (s, value) =>

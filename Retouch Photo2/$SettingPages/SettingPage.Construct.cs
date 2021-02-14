@@ -46,53 +46,165 @@ namespace Retouch_Photo2
             this.LayersHeightTipTextBlock.Text = resource.GetString("$SettingPage_LayersHeightTip");
 
             this.KeyTextBlock.Text = resource.GetString("$SettingPage_Key");
+            this.Key01Border.Child = new StackPanel
             {
-                this.CenterControl.Tag = "Ctrl";
-                this.CenterControl.Content = resource.GetString("Tools_MoreCreate_Center");
-                this.RatioControl.Tag = "Shift";
-                this.RatioControl.Content = resource.GetString("Tools_MoreTransform_Ratio");
-                this.SquareControl.Tag = "Shift";
-                this.SquareControl.Content = resource.GetString("Tools_MoreCreate_Square");
-                this.StepFrequencyControl.Tag = "Space";
-                this.StepFrequencyControl.Content = resource.GetString("Menus_Transformer_StepFrequency");
-                this.FullScreenControl.Tag = "Esc";
-                this.FullScreenControl.Content = resource.GetString("$DrawPage_FullScreen");
+                Children =
+                {
+                    new ContentControl
+                    {
+                        Tag = "Shift",
+                        Content = resource.GetString("Tools_MoreTransform_Ratio"),
+                        Style = this.KeyContentControlBackgroundStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Shift",
+                        Content = resource.GetString("Tools_MoreCreate_Square"),
+                        Style = this.KeyContentControlStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Ctrl",
+                        Content = resource.GetString("Tools_MoreCreate_Center"),
+                        Style = this.KeyContentControlBackgroundStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Space",
+                        Content = resource.GetString("Menus_Transformer_StepFrequency"),
+                        Style = this.KeyContentControlStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Esc",
+                        Content = resource.GetString("$DrawPage_FullScreen"),
+                        Style = this.KeyContentControlBackgroundStyle
+                    },
+                }
+            };
 
-                this.LeftControl.Tag = "←";
-                this.LeftControl.Content = resource.GetString("$SettingPage_Key_Move_Left");
-                this.TopControl.Tag = "↑";
-                this.TopControl.Content = resource.GetString("$SettingPage_Key_Move_Top");
-                this.RightControl.Tag = "→";
-                this.RightControl.Content = resource.GetString("$SettingPage_Key_Move_Right");
-                this.BottomControl.Tag = "↓";
-                this.BottomControl.Content = resource.GetString("$SettingPage_Key_Move_Bottom");
+            this.Key02Border.Child = new StackPanel
+            {
+                Children =
+                {
+                    new ContentControl
+                    {
+                        Tag = "←",
+                        Content = resource.GetString("$SettingPage_Key_Move_Left"),
+                        Style = this.KeyContentControlBackgroundStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "↑",
+                        Content = resource.GetString("$SettingPage_Key_Move_Top"),
+                        Style = this.KeyContentControlStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "→",
+                        Content = resource.GetString("$SettingPage_Key_Move_Right"),
+                        Style = this.KeyContentControlBackgroundStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "↓",
+                        Content = resource.GetString("$SettingPage_Key_Move_Bottom"),
+                        Style = this.KeyContentControlStyle
+                    },
+                }
+            };
 
-                this.CutControl.Tag = "Ctrl + X";
-                this.CutControl.Content = resource.GetString("Edits_Edit_Cut");
-                this.DuplicateControl.Tag = "Ctrl + J";
-                this.DuplicateControl.Content = resource.GetString("Edits_Edit_Duplicate");
-                this.CopyControl.Tag = "Ctrl + C";
-                this.CopyControl.Content = resource.GetString("Edits_Edit_Copy");
-                this.PasteControl.Tag = "Ctrl + V";
-                this.PasteControl.Content = resource.GetString("Edits_Edit_Paste");
-                this.ClearControl.Tag = "Delete";
-                this.ClearControl.Content = resource.GetString("Edits_Edit_Clear");
-                this.AllControl.Tag = "Ctrl + A";
-                this.AllControl.Content = resource.GetString("Edits_Select_All");
-                this.DeselectControl.Tag = "Ctrl + D";
-                this.DeselectControl.Content = resource.GetString("Edits_Select_Deselect");
-                this.InvertControl.Tag = "Ctrl + I";
-                this.InvertControl.Content = resource.GetString("Edits_Select_Invert");
-                this.GroupControl.Tag = "Ctrl + G";
-                this.GroupControl.Content = resource.GetString("Edits_Group_Group");
-                this.UnGroupControl.Tag = "Ctrl + U";
-                this.UnGroupControl.Content = resource.GetString("Edits_Group_UnGroup");
-                this.ReleaseControl.Tag = "Ctrl + R";
-                this.ReleaseControl.Content = resource.GetString("Edits_Group_Release");
+            this.Key03Border.Child = new StackPanel
+            {
+                Children =
+                {
+                    new ContentControl
+                    {
+                        Tag = "Ctrl + X",
+                        Content = resource.GetString("Edits_Edit_Cut"),
+                        Style = this.KeyContentControlBackgroundStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Ctrl + J",
+                        Content = resource.GetString("Edits_Edit_Duplicate"),
+                        Style = this.KeyContentControlStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Ctrl + C",
+                        Content = resource.GetString("Edits_Edit_Copy"),
+                        Style = this.KeyContentControlBackgroundStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Ctrl + V",
+                        Content = resource.GetString("Edits_Edit_Paste"),
+                        Style = this.KeyContentControlStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Delete",
+                        Content = resource.GetString("Edits_Edit_Clear"),
+                        Style = this.KeyContentControlBackgroundStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Ctrl + A",
+                        Content = resource.GetString("Edits_Select_All"),
+                        Style = this.KeyContentControlStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Ctrl + D",
+                        Content = resource.GetString("Edits_Select_Deselect"),
+                        Style = this.KeyContentControlBackgroundStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Ctrl + I",
+                        Content = resource.GetString("Edits_Select_Invert"),
+                        Style = this.KeyContentControlStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Ctrl + G",
+                        Content = resource.GetString("Edits_Group_Group"),
+                        Style = this.KeyContentControlBackgroundStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Ctrl + U",
+                        Content = resource.GetString("Edits_Group_UnGroup"),
+                        Style = this.KeyContentControlStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Ctrl + R",
+                        Content = resource.GetString("Edits_Group_Release"),
+                        Style = this.KeyContentControlBackgroundStyle
+                    },
+                }
+            };
 
-                this.UndoControl.Tag = "Ctrl + Z";
-                this.UndoControl.Content = resource.GetString("$DrawPage_Undo");
-            }
+            this.Key04Border.Child = new StackPanel
+            {
+                Children =
+                {
+                    new ContentControl
+                    {
+                        Tag = "Ctrl + E",
+                        Content = resource.GetString("$DrawPage_Export"),
+                        Style = this.KeyContentControlBackgroundStyle
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Ctrl + Z",
+                        Content = resource.GetString("$DrawPage_Undo"),
+                        Style = this.KeyContentControlStyle
+                    },
+                }
+            };
 
             this.MenuTypeTextBlock.Text = resource.GetString("$SettingPage_MenuType");
             this.MenuTypeTipTextBlock.Text = resource.GetString("$SettingPage_MenuTypeTip");
@@ -219,24 +331,37 @@ namespace Retouch_Photo2
         //MenuType
         private void ConstructMenuType()
         {
-            IList<MenuType> menuTypes = this.SettingViewModel.Setting.MenuTypes;
-
-            foreach (IMenu menu in this.TipViewModel.Menus)
+            bool _isParity = false;
+            Style getStyle()
             {
-                bool isVisible = menuTypes.Any(m => m == menu.Type);
+                _isParity = !_isParity;
+                return _isParity ? this.MenuBorderStyle1 : this.MenuBorderStyle2;
+            }
+
+
+            IList<MenuType> menuTypes = this.SettingViewModel.Setting.MenuTypes;
+            CheckBox createMenuCheckBox(IMenu menu)
+            {
+                bool isContains = menuTypes.Contains(menu.Type);
 
                 CheckBox checkBox = new CheckBox
                 {
                     Content = menu.Button.Title,
-                    IsChecked = isVisible,
+                    IsChecked = isContains,
                 };
                 checkBox.Checked += async (s, e) => await this.AddMenu(menu.Type);
                 checkBox.Unchecked += async (s, e) => await this.RemoveMenu(menu.Type);
 
+                return checkBox;
+            }
+
+
+            foreach (IMenu menu in this.TipViewModel.Menus)
+            {
                 this.MenusStackPanel.Children.Add(new Border
                 {
-                    Child = checkBox,
-                    Style = this.MenuBorderStyle,
+                    Child = createMenuCheckBox(menu),
+                    Style = getStyle(),
                 });
             }
         }

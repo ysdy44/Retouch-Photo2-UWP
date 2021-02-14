@@ -101,11 +101,11 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="%24DrawPages\DrawPage.HeadBarControl.cs" />
-    <Compile Include="%24DrawPages\DrawPage.LayersControl.LayerManager.cs" />
+    <Compile Include="%24DrawPages\DrawPage.AppBar.cs" />
+    <Compile Include="%24DrawPages\DrawPage.LayerManager.cs" />
     <Compile Include="%24DrawPages\DrawPage.LayersControl.cs" />
-    <Compile Include="%24DrawPages\DrawPage.MainCanvasControl.Render.cs" />
-    <Compile Include="%24DrawPages\DrawPage.MainCanvasControl.cs" />
+    <Compile Include="%24DrawPages\DrawPage.CanvasControl.Render.cs" />
+    <Compile Include="%24DrawPages\DrawPage.CanvasControl.Operator.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>

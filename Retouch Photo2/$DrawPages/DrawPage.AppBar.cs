@@ -10,14 +10,14 @@ namespace Retouch_Photo2
     {
 
         /// <summary>
-        /// Gets or sets the state of head.
+        /// Gets or sets the state of AppBar.
         /// </summary>
-        public bool IsHeadLeft
+        public bool IsAppBarLeft 
         {
-            get => this.isHeadLeft;
+            get => this.isAppBarLeft;
             set
             {
-                if (this.isHeadLeft == value) return;
+                if (this.isAppBarLeft == value) return;
 
                 if (value)
                 {
@@ -32,22 +32,22 @@ namespace Retouch_Photo2
                     this.ShadowRectangle.Visibility = Visibility.Visible;
                 }
 
-                this.isHeadLeft = value;
+                this.isAppBarLeft = value;
             }
         }
-        private bool isHeadLeft;
+        private bool isAppBarLeft;
 
 
-        // HeadBarControl. 
-        private void ConstructHeadBarControl()
+        // AppBar. 
+        private void ConstructAppBar()
         {
-            //HeadGrid
-            this.HeadBarGrid.Loaded += (s, e) => this.HeadGridSizeChange(this.ActualWidth);
-            this.HeadBarGrid.SizeChanged += (s, e) =>
+            //AppBarGrid
+            this.AppBarGrid.Loaded += (s, e) => this.AppBarGridSizeChanged(this.ActualWidth);
+            this.AppBarGrid.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
                 {
-                    this.HeadGridSizeChange(e.NewSize.Width);
+                    this.AppBarGridSizeChanged(e.NewSize.Width);
                 }
             };
 
@@ -125,12 +125,12 @@ namespace Retouch_Photo2
             this.FullScreenButton.Tapped += (s, e) => this.SettingViewModel.IsFullScreen = true;
         }
 
-        private void HeadGridSizeChange(double width)
+        private void AppBarGridSizeChanged(double width)
         {
             double arrangeWidth = width - 70 - 40;
             double measureWidth = this.MenuButtonsControl.ActualWidth;
 
-            this.IsHeadLeft = arrangeWidth > measureWidth; ;
+            this.IsAppBarLeft = arrangeWidth > measureWidth; ;
         }
 
     }

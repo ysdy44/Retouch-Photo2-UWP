@@ -47,10 +47,11 @@ namespace Retouch_Photo2
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            this.ConstructSetting();
             this.ConstructTransition();
 
             this.ConstructMainCanvasControl();
-            this.ConstructHeadBarControl();
+            this.ConstructAppBar();
 
             this.ConstructLayersControl();
             this.ConstructLayerManager();
@@ -66,7 +67,7 @@ namespace Retouch_Photo2
             this.DrawLayout.FootPage = ToolManager.PageBorder;
             this.DrawLayout.TouchbarPicker = TouchbarButton.PickerBorder;
             this.DrawLayout.TouchbarSlider = TouchbarButton.SliderBorder;
-            this.DrawLayout.RightPhotosButton.Click += (s, e) => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImage);//Navigate   
+            this.DrawLayout.GalleryButton.Click += (s, e) => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImage);//Navigate   
             this.DrawLayout.IsFullScreenChanged += (isFullScreen) =>
             {
                 Vector2 offset = this.SettingViewModel.FullScreenOffset;
@@ -97,7 +98,7 @@ namespace Retouch_Photo2
             this.AVTBBE.Invalidate();
 
             //Key
-            this.SettingViewModel.KeyIsEnabled = true;
+            this.SettingViewModel.RegisteKey();
 
             if (this.SettingViewModel.IsFullScreen == false) return;
 
@@ -110,7 +111,7 @@ namespace Retouch_Photo2
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             //Key
-            this.SettingViewModel.KeyIsEnabled = false;
+            this.SettingViewModel.UnRegisteKey();
         }
 
     }

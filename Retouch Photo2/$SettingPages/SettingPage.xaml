@@ -417,7 +417,6 @@
                         <TextBlock x:Name="MenuTypeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                         <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel x:Name="MenusStackPanel" >
-
                             </StackPanel>
                         </Border>
                         <TextBlock x:Name="MenuTypeTipTextBlock" Margin="0,8" FontWeight="Normal" Style="{StaticResource AppTextBlockStyle}"/>
@@ -428,49 +427,24 @@
 
                         <!--Key-->
                         <TextBlock x:Name="KeyTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
-                            <StackPanel>
-                                <ContentControl x:Name="RatioControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
-                                <ContentControl x:Name="SquareControl" Style="{StaticResource KeyContentControlStyle}"/>
+                        <Border x:Name="Key01Border" Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
+                        </Border>
 
-                                <ContentControl x:Name="CenterControl" Style="{StaticResource KeyContentControlStyle}"/>
-                             
-                                <ContentControl x:Name="StepFrequencyControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
-                            
-                                <ContentControl x:Name="FullScreenControl" Style="{StaticResource KeyContentControlStyle}"/>
-                            </StackPanel>
-                        </Border>
-                        
                         <ContentControl Height="12"/>
-                        
-                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
-                            <StackPanel>
-                                <ContentControl x:Name="LeftControl" Style="{StaticResource KeyContentControlStyle}"/>
-                                <ContentControl x:Name="TopControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
-                                <ContentControl x:Name="RightControl" Style="{StaticResource KeyContentControlStyle}"/>
-                                <ContentControl x:Name="BottomControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
-                            </StackPanel>
+
+                        <Border x:Name="Key02Border" Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                         </Border>
-                        
+
                         <ContentControl Height="12"/>
-                        
-                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
-                            <StackPanel>
-                                <ContentControl x:Name="CutControl" Style="{StaticResource KeyContentControlStyle}"/>
-                                <ContentControl x:Name="DuplicateControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
-                                <ContentControl x:Name="CopyControl" Style="{StaticResource KeyContentControlStyle}"/>
-                                <ContentControl x:Name="PasteControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
-                                <ContentControl x:Name="ClearControl" Style="{StaticResource KeyContentControlStyle}"/>
-                                <ContentControl x:Name="AllControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
-                                <ContentControl x:Name="DeselectControl" Style="{StaticResource KeyContentControlStyle}"/>
-                                <ContentControl x:Name="InvertControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
-                                <ContentControl x:Name="GroupControl" Style="{StaticResource KeyContentControlStyle}"/>
-                                <ContentControl x:Name="UnGroupControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
-                                <ContentControl x:Name="ReleaseControl" Style="{StaticResource KeyContentControlStyle}"/>
-                                <ContentControl x:Name="UndoControl" Style="{StaticResource KeyContentControlBackgroundStyle}"/>
-                            </StackPanel>
+
+                        <Border x:Name="Key03Border" Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                         </Border>
-                        
+
+                        <ContentControl Height="12"/>
+
+                        <Border x:Name="Key04Border" Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
+                        </Border>
+
                         <ContentControl Height="12"/>
 
 

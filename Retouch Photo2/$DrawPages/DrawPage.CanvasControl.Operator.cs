@@ -1,7 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Retouch_Photo2.Tools;
-using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.UI;
@@ -15,8 +14,8 @@ namespace Retouch_Photo2
         //@Content
         private Color AccentColor => this.AccentColorBrush.Color;
         private Color ShadowColor => this.ShadowColorBrush.Color;
-        private CanvasControl CanvasControl => this.DrawLayout.CanvasControl;
-        private CanvasControl ToolCanvasControl => this.DrawLayout.ToolCanvasControl;
+        private CanvasControl LayerRenderCanvasControl => this.DrawLayout.LayerRenderCanvasControl;
+        private CanvasControl ToolDrawCanvasControl => this.DrawLayout.ToolDrawCanvasControl;
 
 
         bool _isSingleStarted;
@@ -38,9 +37,9 @@ namespace Retouch_Photo2
 
 
             //High-Display screen
-            if (this.CanvasControl.Dpi > 96.0f)
+            if (this.LayerRenderCanvasControl.Dpi > 96.0f)
             {
-                float dpiScale = 96.0f / this.CanvasControl.Dpi;
+                float dpiScale = 96.0f / this.LayerRenderCanvasControl.Dpi;
                 if (dpiScale < 0.4f) dpiScale = 0.4f;
                 if (dpiScale > 1.0f) dpiScale = 1.0f;
 
@@ -49,15 +48,15 @@ namespace Retouch_Photo2
                     switch (mode)
                     {
                         case InvalidateMode.Thumbnail:
-                            this.CanvasControl.DpiScale = dpiScale;
+                            this.LayerRenderCanvasControl.DpiScale = dpiScale;
                             break;
                         case InvalidateMode.HD:
-                            this.CanvasControl.DpiScale = 1.0f;
+                            this.LayerRenderCanvasControl.DpiScale = 1.0f;
                             break;
                     }
 
-                    this.CanvasControl.Invalidate();
-                    this.ToolCanvasControl.Invalidate();
+                    this.LayerRenderCanvasControl.Invalidate();
+                    this.ToolDrawCanvasControl.Invalidate();
                 };
             }
             //Low-Display screen
@@ -65,31 +64,31 @@ namespace Retouch_Photo2
             {
                 this.ViewModel.InvalidateAction += (_) =>
                 {
-                    this.CanvasControl.Invalidate();
-                    this.ToolCanvasControl.Invalidate();
+                    this.LayerRenderCanvasControl.Invalidate();
+                    this.ToolDrawCanvasControl.Invalidate();
                 };
             }
 
 
-            #region Draw
+            #region LayerRender & ToolDraw
 
 
-            //Draw
-            this.CanvasControl.UseSharedDevice = true;
-            this.CanvasControl.CustomDevice = this.ViewModel.CanvasDevice;
+            //LayerRender
+            this.LayerRenderCanvasControl.UseSharedDevice = true;
+            this.LayerRenderCanvasControl.CustomDevice = this.ViewModel.CanvasDevice;
 
-            this.CanvasControl.Draw += (sender, args) =>
+            this.LayerRenderCanvasControl.Draw += (sender, args) =>
             {
                 //Render & Crad
                 this._drawRenderAndCrad(args.DrawingSession);
             };
 
 
-            //Draw
-            this.ToolCanvasControl.UseSharedDevice = true;
-            this.ToolCanvasControl.CustomDevice = this.ViewModel.CanvasDevice;
+            //ToolDraw
+            this.ToolDrawCanvasControl.UseSharedDevice = true;
+            this.ToolDrawCanvasControl.CustomDevice = this.ViewModel.CanvasDevice;
 
-            this.ToolCanvasControl.Draw += (sender, args) =>
+            this.ToolDrawCanvasControl.Draw += (sender, args) =>
             {
                 switch (this._inputDevice)
                 {
@@ -118,7 +117,7 @@ namespace Retouch_Photo2
 
             CanvasOperator canvasOperator = new CanvasOperator
             {
-                DestinationControl = this.ToolCanvasControl
+                DestinationControl = this.ToolDrawCanvasControl
             };
 
             //Single

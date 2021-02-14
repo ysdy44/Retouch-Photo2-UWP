@@ -107,8 +107,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Enums\InvalidateMode.cs" />
-    <Compile Include="Enums\UndoType.cs" />
+    <Compile Include="InvalidateMode.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Color.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Edit.cs" />

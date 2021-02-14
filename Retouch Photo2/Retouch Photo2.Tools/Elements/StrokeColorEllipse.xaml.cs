@@ -98,8 +98,8 @@ namespace Retouch_Photo2.Tools.Elements
                 textBox.IsEnabled = false;
                 StrokeColorEllipse.Flyout.Opened += (s, e) => textBox.IsEnabled = true;
                 StrokeColorEllipse.Flyout.Closed += (s, e) => textBox.IsEnabled = false;
-                textBox.GotFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
-                textBox.LostFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
+                textBox.GotFocus += (s, e) => this.SettingViewModel.UnRegisteKey();
+                textBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             }
 
             StrokeColorEllipse.ColorPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodStrokeColorChanged(value);

@@ -113,11 +113,11 @@
                IsFullScreen="{x:Bind SettingViewModel.IsFullScreen, Mode=OneWay}">
 
             <!--RightPane-->
-            <elementDrawPages:DrawLayout.RightCenterPanel>
+            <elementDrawPages:DrawLayout.RightPanel>
                 <ScrollViewer x:Name="LayersScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                     <!--Layers-->
                 </ScrollViewer>
-            </elementDrawPages:DrawLayout.RightCenterPanel>
+            </elementDrawPages:DrawLayout.RightPanel>
             
             <!--LeftPanel-->
             <elementDrawPages:DrawLayout.LeftPanel>
@@ -127,7 +127,7 @@
 
             <!--Head-->
             <elementDrawPages:DrawLayout.HeadChild>
-                <Grid x:Name="HeadBarGrid">
+                <Grid x:Name="AppBarGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" MinWidth="70"/>
                         <ColumnDefinition x:Name="HeadLeftLength" Width="40" MinWidth="44"/>

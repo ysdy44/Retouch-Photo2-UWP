@@ -1,12 +1,15 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Edits;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
+using System.Numerics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2
 {
@@ -39,8 +42,8 @@ namespace Retouch_Photo2
             }
 
 
-            this.DrawLayout.RightPhotosToolTip.Content = resource.GetString("$DrawPage_Gallery");
-            this.DrawLayout.RightWidthToolTip.Content = resource.GetString("$DrawPage_Width");
+            this.DrawLayout.GalleryToolTip.Content = resource.GetString("$DrawPage_GalleryTip");
+            this.DrawLayout.WidthToolTip.Content = resource.GetString("$DrawPage_WidthTip");
 
             this.SetupDialog.Title = resource.GetString("$DrawPage_SetupDialog_Title");
             {
@@ -77,8 +80,61 @@ namespace Retouch_Photo2
         }
 
 
+        //Setting
+        private void ConstructSetting()
+        {
+            if (this.SettingViewModel.Move == null) this.SettingViewModel.Move += (moveType) =>
+            {
+                switch (moveType)
+                {
+                    case FlyoutPlacementMode.Full: break;
+                    case FlyoutPlacementMode.Left: this.ViewModel.CanvasTransformer.Position += new Vector2(50, 0); break;
+                    case FlyoutPlacementMode.Top: this.ViewModel.CanvasTransformer.Position += new Vector2(0, 50); break;
+                    case FlyoutPlacementMode.Right: this.ViewModel.CanvasTransformer.Position -= new Vector2(50, 0); break;
+                    case FlyoutPlacementMode.Bottom: this.ViewModel.CanvasTransformer.Position -= new Vector2(0, 50); break;
+                    default: break;
+                }
+                this.ViewModel.CanvasTransformer.ReloadMatrix();
+                this.ViewModel.Invalidate();//Invalidate
+            };
+            if (this.SettingViewModel.Edit == null) this.SettingViewModel.Edit += (editType) =>
+            {
+                switch (editType)
+                {
+                    case EditType.None: break;
+
+                    case EditType.Edit_Cut: this.MethodViewModel.MethodEditCut(); break;
+                    case EditType.Edit_Duplicate: this.MethodViewModel.MethodEditDuplicate(); break;
+                    case EditType.Edit_Copy: this.MethodViewModel.MethodEditCopy(); break;
+                    case EditType.Edit_Paste: this.MethodViewModel.MethodEditPaste(); break;
+                    case EditType.Edit_Clear: this.MethodViewModel.MethodEditClear(); break;
+
+                    case EditType.Select_All: this.MethodViewModel.MethodSelectAll(); break;
+                    case EditType.Select_Deselect: this.MethodViewModel.MethodSelectDeselect(); break;
+                    case EditType.Select_Invert: this.MethodViewModel.MethodSelectInvert(); break;
+
+                    case EditType.Group_Group: this.MethodViewModel.MethodGroupGroup(); break;
+                    case EditType.Group_UnGroup: this.MethodViewModel.MethodGroupUnGroup(); break;
+                    case EditType.Group_Release: this.MethodViewModel.MethodGroupRelease(); break;
+                    default: break;
+                };
+                if (this.SettingViewModel.AppBar == null) this.SettingViewModel.AppBar += (appBarType) =>
+                {
+                    switch (appBarType)
+                    {
+                        case AppBarType.None: break;
+                        case AppBarType.Export: this.ShowExportDialog(); break;
+                        case AppBarType.Undo: this.MethodViewModel.MethodEditUndo(); break;
+                        case AppBarType.Redo:break;
+                        default: break;
+                    }
+                };
+            };
+        }
+
+
         //Export
-        public float ExportQuality
+        private float ExportQuality
         {
             get => this.exportQuality;
             set
@@ -88,7 +144,7 @@ namespace Retouch_Photo2
                 this.exportQuality = value;
             }
         }
-        public float exportQuality = 1.0f;
+        private float exportQuality = 1.0f;
 
         private void ConstructExportDialog()
         {
@@ -136,7 +192,7 @@ namespace Retouch_Photo2
                 Height = (uint)this.ViewModel.CanvasTransformer.Height,
             };
             this.ExportSizePicker.Size = size;
-            this.ExportQuality = ExportQuality;
+            this.ExportQuality = this.ExportQuality;
             this.ExportDialog.Show();
         }
 
@@ -201,8 +257,8 @@ namespace Retouch_Photo2
                 //textBox.IsEnabled = false;
                 //this.ColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
                 //this.ColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
-                textBox.GotFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = false;
-                textBox.LostFocus += (s, e) => this.SettingViewModel.KeyIsEnabled = true;
+                textBox.GotFocus += (s, e) => this.SettingViewModel.UnRegisteKey();
+                textBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             }
 
             this.RenameDialog.CloseButton.Click += (sender, args) => this.RenameDialog.Hide();

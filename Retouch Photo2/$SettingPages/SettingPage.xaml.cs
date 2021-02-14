@@ -26,17 +26,6 @@ namespace Retouch_Photo2
         //@ViewModel
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
-        
-
-        bool _isParity = false;
-        private Style MenuBorderStyle
-        {
-            get
-            {
-                this._isParity = !this._isParity;
-                return this._isParity ? this.MenuBorderStyle1 : this.MenuBorderStyle2;
-            }
-        }
 
         
         bool IsAdaptive

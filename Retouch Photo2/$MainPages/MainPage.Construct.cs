@@ -1,10 +1,8 @@
-﻿using Retouch_Photo2.Edits;
-using Retouch_Photo2.Elements;
+﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Resources;
@@ -13,10 +11,9 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2
-{ 
+{
     public sealed partial class MainPage : Page
     {
         private string DisplayName = "Retouch Photo2";
@@ -114,51 +111,6 @@ namespace Retouch_Photo2
 
             //MenuType
             this.SettingViewModel.ConstructMenuType(this.TipViewModel.Menus);
-
-            //Key
-            this.SettingViewModel.ConstructKey();
-            if (this.SettingViewModel.Move == null) this.SettingViewModel.Move += (moveType) =>
-            {
-                switch (moveType)
-                {
-                    case FlyoutPlacementMode.Full: return;
-                    case FlyoutPlacementMode.Left: this.ViewModel.CanvasTransformer.Position += new Vector2(50, 0); break;
-                    case FlyoutPlacementMode.Top: this.ViewModel.CanvasTransformer.Position += new Vector2(0, 50); break;
-                    case FlyoutPlacementMode.Right: this.ViewModel.CanvasTransformer.Position -= new Vector2(50, 0); break;
-                    case FlyoutPlacementMode.Bottom: this.ViewModel.CanvasTransformer.Position -= new Vector2(0, 50); break;
-                }
-                this.ViewModel.CanvasTransformer.ReloadMatrix();
-                this.ViewModel.Invalidate();//Invalidate
-            };
-            if (this.SettingViewModel.Edit == null) this.SettingViewModel.Edit += (editType) =>
-            {
-                switch (editType)
-                {
-                    case EditType.None: return;
-
-                    case EditType.Edit_Cut: this.MethodViewModel.MethodEditCut(); break;
-                    case EditType.Edit_Duplicate: this.MethodViewModel.MethodEditDuplicate(); break;
-                    case EditType.Edit_Copy: this.MethodViewModel.MethodEditCopy(); break;
-                    case EditType.Edit_Paste: this.MethodViewModel.MethodEditPaste(); break;
-                    case EditType.Edit_Clear: this.MethodViewModel.MethodEditClear(); break;
-
-                    case EditType.Select_All: this.MethodViewModel.MethodSelectAll(); break;
-                    case EditType.Select_Deselect: this.MethodViewModel.MethodSelectDeselect(); break;
-                    case EditType.Select_Invert: this.MethodViewModel.MethodSelectInvert(); break;
-
-                    case EditType.Group_Group: this.MethodViewModel.MethodGroupGroup(); break;
-                    case EditType.Group_UnGroup: this.MethodViewModel.MethodGroupUnGroup(); break;
-                    case EditType.Group_Release: this.MethodViewModel.MethodGroupRelease(); break;
-                };
-                if (this.SettingViewModel.Undo == null) this.SettingViewModel.Undo += (undoType) =>
-                {
-                    switch (undoType)
-                    {
-                        case UndoType.Undo: this.MethodViewModel.MethodEditUndo(); break;
-                        default: break;
-                    }
-                };
-            };
         }
 
 

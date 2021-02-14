@@ -107,6 +107,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="%24DrawPages\AppBarType.cs" />
     <Compile Include="%24DrawPages\DrawLayout.Layout.cs" />
     <Compile Include="%24Loading\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
