@@ -72,9 +72,9 @@
         <controls:ImageEx x:Name="Image"
                IsHitTestVisible="False" Grid.Row="1" Margin="12,8" Stretch="Uniform"
                Background="White"
-               RenderTransformOrigin="0.5,0.5"
                Source="{x:Bind ImageFilePath}"
               >
+            <controls:ImageEx.RenderTransformOrigin>0.5,0.5</controls:ImageEx.RenderTransformOrigin>
             <controls:ImageEx.RenderTransform>
                 <ScaleTransform x:Name="ScaleTransform" ScaleX="1" ScaleY="1"/>
             </controls:ImageEx.RenderTransform>

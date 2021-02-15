@@ -173,7 +173,13 @@
         </VisualStateManager.VisualStateGroups>
 
 
-        <Border x:Name="RootGrid" CornerRadius="{StaticResource AppCornerRadius}" Width="222" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="Transparent">
+        <Border x:Name="RootGrid" 
+                Width="222" 
+                BorderThickness="1"    
+                BorderBrush="{ThemeResource AppStroke}"               
+                Background="Transparent"
+                CornerRadius="{StaticResource AppCornerRadius}" 
+                >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" MinHeight="40" MaxHeight="40"/>

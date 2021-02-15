@@ -4,11 +4,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-       
     xmlns:elements="using:Retouch_Photo2.Elements"
-    xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
     mc:Ignorable="d"
-
     NavigationCacheMode="Required"    
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     >
@@ -331,20 +328,20 @@
         <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3" IsActive="False"/>
 
         <!--Dialog-->
-        <elementDialog:DialogBase x:Name="RenameDialog" Grid.Row="1" Grid.RowSpan="2">
-            <elementDialog:DialogBase.CenterContent>
+        <elements:Dialog x:Name="RenameDialog" Grid.Row="1" Grid.RowSpan="2">
+            <elements:Dialog.CenterContent>
                 <StackPanel>
                     <ContentControl Height="2"/>
                     <TextBox x:Name="TextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0"/>
                     <TextBlock x:Name="TextBoxTipTextBlock" Visibility="Collapsed" FontSize="14" Foreground="{ThemeResource AppText}"/>
                 </StackPanel>
-            </elementDialog:DialogBase.CenterContent>
-        </elementDialog:DialogBase>
-        <elementDialog:DialogBase x:Name="NewDialog" Grid.Row="1" Grid.RowSpan="2">
-            <elementDialog:DialogBase.CenterContent>
+            </elements:Dialog.CenterContent>
+        </elements:Dialog>
+        <elements:Dialog x:Name="NewDialog" Grid.Row="1" Grid.RowSpan="2">
+            <elements:Dialog.CenterContent>
                 <elements:SizePicker x:Name="SizePicker"/>
-            </elementDialog:DialogBase.CenterContent>
-        </elementDialog:DialogBase>
+            </elements:Dialog.CenterContent>
+        </elements:Dialog>
 
 
     </Grid>

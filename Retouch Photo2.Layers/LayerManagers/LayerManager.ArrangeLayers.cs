@@ -16,9 +16,8 @@ namespace Retouch_Photo2.Layers
         {
             LayerManager.RootStackPanel.Children.Clear();
 
-            int depth = -1;
+            int depth = 0;
             bool isExpand = true;
-
             LayerManager._arrangeLayers(LayerManager.RootLayerage, depth, isExpand);
         }
         private static void _arrangeLayers(Layerage layerage, int depth, bool isExpand)
@@ -29,14 +28,13 @@ namespace Retouch_Photo2.Layers
 
                 ILayer layer = child.Self;
 
-                int childDepth = depth + 1;
-                bool childIsExpand = layer.IsExpand && isExpand;
-
-                layer.Control.Depth = childDepth;
+                layer.Control.Depth = depth;
                 layer.Control.Visibility = isExpand ? Visibility.Visible : Visibility.Collapsed;
                 layer.Control.ChildrenCount = child.Children.Count;
                 LayerManager.RootStackPanel.Children.Add(layer.Control);
 
+                int childDepth = depth + 1;
+                bool childIsExpand = layer.IsExpand && isExpand;
                 LayerManager._arrangeLayers(child, childDepth, childIsExpand);
             }
         }

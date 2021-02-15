@@ -178,8 +178,8 @@
     <Compile Include="Pickers\SizePicker.xaml.cs">
       <DependentUpon>SizePicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DialogBase.xaml.cs">
-      <DependentUpon>DialogBase.xaml</DependentUpon>
+    <Compile Include="Dialog.xaml.cs">
+      <DependentUpon>Dialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExpandAppbars\ExpandAppbar.xaml.cs">
       <DependentUpon>ExpandAppbar.xaml</DependentUpon>
@@ -327,7 +327,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DialogBase.xaml">
+    <Page Include="Dialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
