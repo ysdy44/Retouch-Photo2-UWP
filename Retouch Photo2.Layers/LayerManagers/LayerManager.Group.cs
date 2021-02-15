@@ -22,10 +22,8 @@ namespace Retouch_Photo2.Layers
         {
             Layerage parents = layerage.Parents;
 
-            if (parents != LayerManager.Layerage)
+            if (parents != LayerManager.RootLayerage)
             {
-                ILayer parentsLayer = parents.Self;
-
                 Layerage parentsParents = LayerManager.GetParentsChildren(parents);
                 int parentsIndex = parents.Children.IndexOf(parents);
                 if (parentsIndex < 0) parentsIndex = 0;

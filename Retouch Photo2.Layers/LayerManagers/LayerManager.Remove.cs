@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Remove all selected layerages.
         /// </summary>
-        public static void RemoveAllSelected( ) => LayerManager._removeAllSelected(LayerManager.Layerage);
+        public static void RemoveAllSelected( ) => LayerManager._removeAllSelected(LayerManager.RootLayerage);
 
 
         private static void _removeAllSelected(Layerage layerage)
@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Layers
                 //Recursive
                 LayerManager._removeAll(child);
 
-                LayerManager.StackPanel.Children.Remove(layer.Control);
+                LayerManager.RootStackPanel.Children.Remove(layer.Control);
             }
             layerage.Children.Clear();
         }

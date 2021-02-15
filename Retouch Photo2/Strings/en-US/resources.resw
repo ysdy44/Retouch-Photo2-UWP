@@ -313,6 +313,7 @@
 <data name='Strokes_Cap_Flat' xml:space='preserve'><value>Flat</value></data>
 <data name='Strokes_Cap_Square' xml:space='preserve'><value>Square</value></data>
 <data name='Strokes_Cap_Round' xml:space='preserve'><value>Round</value></data>
+<data name='Strokes_Cap_Triangle' xml:space='preserve'><value>Triangle</value></data>
 <data name='Strokes_Join' xml:space='preserve'><value>Join</value></data>
 <data name='Strokes_Join_Miter' xml:space='preserve'><value>Miter</value></data>
 <data name='Strokes_Join_Bevel' xml:space='preserve'><value>Bevel</value></data>

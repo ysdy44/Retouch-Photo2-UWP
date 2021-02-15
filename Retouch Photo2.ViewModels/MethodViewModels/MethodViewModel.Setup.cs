@@ -24,7 +24,7 @@ namespace Retouch_Photo2.ViewModels
             this.CanvasTransformer.ReloadMatrix();
 
             //LayerManager
-            foreach (Layerage child in LayerManager.Layerage.Children)
+            foreach (Layerage child in LayerManager.RootLayerage.Children)
             {
                 //Selection
                 child.SetValueWithChildren((layerage2) =>
@@ -71,7 +71,7 @@ namespace Retouch_Photo2.ViewModels
             Vector2 distance = vector - previousVector;
 
             //LayerManager
-            foreach (Layerage child in LayerManager.Layerage.Children)
+            foreach (Layerage child in LayerManager.RootLayerage.Children)
             {
                 //Selection
                 child.SetValueWithChildren((layerage2) =>

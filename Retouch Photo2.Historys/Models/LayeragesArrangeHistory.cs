@@ -27,17 +27,17 @@ namespace Retouch_Photo2.Historys
         {
             base.Title = title;
 
-            foreach (Layerage  layerage in LayerManager.Layerage.Children)
+            foreach (Layerage  layerage in LayerManager.RootLayerage.Children)
             {
                 this.Layerages.Add(layerage.Clone());
             }
 
             this.UndoAction = () =>
             {
-                LayerManager.Layerage.Children.Clear();
+                LayerManager.RootLayerage.Children.Clear();
                 foreach (Layerage layerage in this.Layerages)
                 {
-                    LayerManager.Layerage.Children.Add(layerage.Clone());
+                    LayerManager.RootLayerage.Children.Add(layerage.Clone());
                 }
             };
         }

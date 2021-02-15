@@ -59,7 +59,7 @@ namespace Retouch_Photo2
                 Name = name,
                 Width = width,
                 Height = height,
-                Layerages = LayerManager.Layerage.Children
+                Layerages = LayerManager.RootLayerage.Children
             };
             await Retouch_Photo2.XML.SaveProjectFile(zipFolder, project);
 
@@ -68,7 +68,7 @@ namespace Retouch_Photo2
             await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
             
             //Save layers file.
-            IEnumerable<Layerage> savedLayerages = LayerManager.GetUnUestingLayerages(LayerManager.Layerage);
+            IEnumerable<Layerage> savedLayerages = LayerManager.GetUnUestingLayerages(LayerManager.RootLayerage);
             IEnumerable<ILayer> savedLayers = from layer in LayerBase.Instances where savedLayerages.Any(p => layer.Equals(p)) select layer;
             await XML.SaveLayersFile(zipFolder, savedLayers);
 
@@ -115,8 +115,8 @@ namespace Retouch_Photo2
             //Clear
             this.ViewModel.Historys.Clear();
             this.SelectionViewModel.SetModeNone();
-            LayerManager.Layerage.Children.Clear();
-            LayerManager.StackPanel.Children.Clear();
+            LayerManager.RootLayerage.Children.Clear();
+            LayerManager.RootStackPanel.Children.Clear();
         }
     }
 }

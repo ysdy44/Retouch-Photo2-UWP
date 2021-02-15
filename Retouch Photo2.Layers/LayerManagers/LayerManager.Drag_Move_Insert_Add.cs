@@ -84,7 +84,7 @@ namespace Retouch_Photo2.Layers
             if (index > parents.Children.Count - 1) index = parents.Children.Count - 1;
 
 
-            if (source.Parents != LayerManager.Layerage)
+            if (source.Parents != LayerManager.RootLayerage)
             {
                 //Refactoring
                 //ILayer sourceParents = source.Parents.Self;
@@ -100,7 +100,7 @@ namespace Retouch_Photo2.Layers
             parents.Children.Insert(index, source);
 
             
-            if (destination.Parents != LayerManager.Layerage)
+            if (destination.Parents != LayerManager.RootLayerage)
             {
                 //Refactoring
                 ILayer destinationParents = destination.Parents.Self;
@@ -147,7 +147,7 @@ namespace Retouch_Photo2.Layers
 
             if (source != null)
             {
-                if (source.Parents != LayerManager.Layerage)
+                if (source.Parents != LayerManager.RootLayerage)
                 {
                     //Refactoring
                     ILayer sourceParents = source.Parents.Self;
@@ -166,7 +166,7 @@ namespace Retouch_Photo2.Layers
                 }
 
 
-                if (destination.Parents != LayerManager.Layerage)
+                if (destination.Parents != LayerManager.RootLayerage)
                 {
                     //Refactoring
                     ILayer destinationParents = destination.Parents.Self;
@@ -182,7 +182,7 @@ namespace Retouch_Photo2.Layers
             {
                 foreach (Layerage child in sources)
                 {
-                    if (child.Parents != LayerManager.Layerage)
+                    if (child.Parents != LayerManager.RootLayerage)
                     {
                         //Refactoring
                         ILayer childParents = child.Parents.Self;
@@ -202,7 +202,7 @@ namespace Retouch_Photo2.Layers
             }
             
 
-            if (destination.Parents != LayerManager.Layerage)
+            if (destination.Parents != LayerManager.RootLayerage)
             {
                 //Refactoring
                 ILayer destinationParents = destination.Parents.Self;
@@ -240,7 +240,7 @@ namespace Retouch_Photo2.Layers
         {
             if (layerage != null)
             {
-                if (layerage.Parents != LayerManager.Layerage)
+                if (layerage.Parents != LayerManager.RootLayerage)
                 {
                     //Refactoring
                     ILayer layerageParents = layerage.Parents.Self;
@@ -270,7 +270,7 @@ namespace Retouch_Photo2.Layers
             {
                 foreach (Layerage child in layerages)
                 {
-                    if (child.Parents != LayerManager.Layerage)
+                    if (child.Parents != LayerManager.RootLayerage)
                     {
                         //Refactoring
                         ILayer childParents = child.Parents.Self;

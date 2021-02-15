@@ -12,7 +12,7 @@
         /// </summary>
         public static void ArrangeLayersBackground()
         {
-            foreach (Layerage child in LayerManager.Layerage.Children)
+            foreach (Layerage child in LayerManager.RootLayerage.Children)
             {
                 LayerManager._arrangeLayersBackgroundNullParents(child);
             }
@@ -96,7 +96,7 @@
         }
         private static bool _getLayersParentsIsSelected(Layerage layerage)
         {
-            if (layerage.Parents == LayerManager.Layerage) return false;
+            if (layerage.Parents == LayerManager.RootLayerage) return false;
             if (layerage.Parents.Self.IsSelected == true) return true;
 
             return LayerManager._getLayersParentsIsSelected(layerage.Parents);

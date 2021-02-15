@@ -152,7 +152,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.MezzanineLayerage.RefactoringParentsIconRender();
 
 
-                foreach (Layerage layerage in LayerManager.Layerage.Children)
+                foreach (Layerage layerage in LayerManager.RootLayerage.Children)
                 {
                     ILayer layer = layerage.Self;
 

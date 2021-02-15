@@ -19,7 +19,7 @@ namespace Retouch_Photo2
         /// <returns> The render image. </returns>
         public ICanvasImage Render()
         {
-            return LayerBase.Render(this.ViewModel.CanvasDevice, LayerManager.Layerage);
+            return LayerBase.Render(this.ViewModel.CanvasDevice, LayerManager.RootLayerage);
         }
 
 

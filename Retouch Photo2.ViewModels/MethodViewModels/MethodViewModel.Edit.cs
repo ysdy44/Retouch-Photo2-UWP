@@ -172,7 +172,7 @@ namespace Retouch_Photo2.ViewModels
             LayersPropertyHistory history = new LayersPropertyHistory("Set is selected");
 
             //Selection
-            foreach (Layerage child in LayerManager.Layerage.Children)
+            foreach (Layerage child in LayerManager.RootLayerage.Children)
             {
                 ILayer layer = child.Self;
 
@@ -208,7 +208,7 @@ namespace Retouch_Photo2.ViewModels
             LayersPropertyHistory history = new LayersPropertyHistory("Set is selected");
 
             //Selection
-            foreach (Layerage child in LayerManager.Layerage.Children)
+            foreach (Layerage child in LayerManager.RootLayerage.Children)
             {
                 ILayer layer = child.Self;
 

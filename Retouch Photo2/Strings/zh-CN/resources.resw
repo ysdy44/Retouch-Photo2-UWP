@@ -313,6 +313,7 @@
   <data name='Strokes_Cap_Flat' xml:space='preserve'><value>平面</value></data>
   <data name='Strokes_Cap_Square' xml:space='preserve'><value>正方形</value></data>
   <data name='Strokes_Cap_Round' xml:space='preserve'><value>圆形</value></data>
+  <data name='Strokes_Cap_Triangle' xml:space='preserve'><value>三角形</value></data>
   <data name='Strokes_Join' xml:space='preserve'><value>拐角</value></data>
   <data name='Strokes_Join_Miter' xml:space='preserve'><value>尖角</value></data>
   <data name='Strokes_Join_Bevel' xml:space='preserve'><value>斜角</value></data>

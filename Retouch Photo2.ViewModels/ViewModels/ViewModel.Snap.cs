@@ -78,7 +78,7 @@ namespace Retouch_Photo2.ViewModels
 
 
             //Parents
-            if (firstLayer.Parents != LayerManager.Layerage)
+            if (firstLayer.Parents != LayerManager.RootLayerage)
             {
                 Transformer transformer = firstLayer.Parents.Self.Transform.Transformer;
                 yield return new TransformerBorder(transformer);

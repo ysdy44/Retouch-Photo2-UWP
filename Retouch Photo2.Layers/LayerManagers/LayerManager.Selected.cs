@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Layers
             }
 
             //Recursive
-            addLayer(LayerManager.Layerage);
+            addLayer(LayerManager.RootLayerage);
 
             return selectedLayerages;
         }
@@ -66,7 +66,7 @@ namespace Retouch_Photo2.Layers
             }
 
             //Recursive
-            addLayer(LayerManager.Layerage);
+            addLayer(LayerManager.RootLayerage);
 
             return selectedLayerages;
         }

@@ -23,7 +23,7 @@ namespace Retouch_Photo2
         //LayersControl
         private void ConstructLayersControl()
         {
-            this.LayersScrollViewer.Content = LayerManager.StackPanel;
+            this.LayersScrollViewer.Content = LayerManager.RootStackPanel;
 
             this.LayersScrollViewer.Tapped += (s, e) => this.MethodViewModel.MethodSelectedNone();//Method
             this.LayersScrollViewer.RightTapped += (s, e) => this.ShowLayerMenu();

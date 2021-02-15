@@ -52,11 +52,11 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// The root layerage.
         /// </summary>
-        public static Layerage Layerage { get; } = new Layerage();
+        public static Layerage RootLayerage { get; } = new Layerage();
         /// <summary>
         /// A stack panel, contains all <see cref="ILayer.Control"/>s. 
         /// </summary>
-        public static StackPanel StackPanel { get; } = new StackPanel();
+        public static StackPanel RootStackPanel { get; } = new StackPanel();
         /// <summary> 
         /// Gets or sets layer controls height. 
         /// </summary>
@@ -70,8 +70,8 @@ namespace Retouch_Photo2.Layers
         /// <returns></returns>
         public static Layerage GetParentsChildren(Layerage layerage)
         {
-            if (layerage == null) return LayerManager.Layerage;
-            if (layerage.Parents == null) return LayerManager.Layerage;
+            if (layerage == null) return LayerManager.RootLayerage;
+            if (layerage.Parents == null) return LayerManager.RootLayerage;
             return layerage.Parents;
         }
 
