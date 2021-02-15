@@ -34,7 +34,9 @@ namespace Retouch_Photo2.Menus
 
         private readonly StackPanel StackPanel = new StackPanel
         {
-            Orientation = Orientation.Horizontal
+            Orientation = Orientation.Horizontal,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center,
         };
 
         //@Construct
@@ -44,6 +46,8 @@ namespace Retouch_Photo2.Menus
         public MenuButtonsControl()
         {
             this.Content = this.StackPanel;
+            this.HorizontalAlignment = HorizontalAlignment.Center;
+            this.VerticalAlignment = VerticalAlignment.Center;
         }
 
     }

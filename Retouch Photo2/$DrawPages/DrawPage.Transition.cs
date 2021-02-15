@@ -62,10 +62,9 @@ namespace Retouch_Photo2
         private void Transition()
         {
             //Destination
-            Vector2 destinationPostion = this.SettingViewModel.FullScreenOffset;
             float destinationWidth = this.SettingViewModel.CenterChildWidth;
             float destinationHeight = this.SettingViewModel.CenterChildHeight;
-            this.ViewModel.CanvasTransformer.TransitionDestination(destinationPostion, destinationWidth, destinationHeight);
+            this.ViewModel.CanvasTransformer.TransitionDestination(Vector2.Zero, destinationWidth, destinationHeight);
 
             if (this._lockSourceRect is Rect data)
             {
@@ -84,8 +83,8 @@ namespace Retouch_Photo2
         //Staring
         private void TransitionStaring()
         {
-          //  this.ViewModel.CanvasTransformer.Radian(0.0f);
-          //  this.ViewModel.CanvasTransformer.Transition(0.0f);
+            //  this.ViewModel.CanvasTransformer.Radian(0.0f);
+            //  this.ViewModel.CanvasTransformer.Transition(0.0f);
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
             this.TransitionBorder.Visibility = Windows.UI.Xaml.Visibility.Visible;
         }
@@ -103,7 +102,7 @@ namespace Retouch_Photo2
             //Transition
             this.ViewModel.CanvasTransformer.Transition(1.0f);
 
-            Retouch_Photo2.DrawPage.FullScreen?.Invoke();
+            this.DrawLayout.IsFullScreen = false;
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             this.TransitionBorder.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
         }

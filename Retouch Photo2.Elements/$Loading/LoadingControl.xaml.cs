@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Elements
         }
         private LoadingState state;
 
-        public IDictionary<LoadingState, string> Dictionary = new Dictionary<LoadingState, string>();
+        private IDictionary<LoadingState, string> Dictionary = new Dictionary<LoadingState, string>();
 
 
         #region DependencyProperty
@@ -46,6 +46,9 @@ namespace Retouch_Photo2.Elements
         #endregion
 
         //@Construct
+        /// <summary>
+        /// Initializes a LoadingControl.
+        /// </summary>
         public LoadingControl()
         {
             this.InitializeComponent();

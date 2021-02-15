@@ -8,7 +8,22 @@ namespace Retouch_Photo2.Elements.DrawPages
     /// </summary>
     public sealed partial class DrawLayout : UserControl
     {
-        
+
+
+        #region DependencyProperty
+
+        /// <summary> Gets or sets whether the <see cref = "DrawLayout" /> visibility for UnFullScreenButton. </summary>
+        public Visibility UnFullScreenButtonVisibility
+        {
+            get => (Visibility)base.GetValue(UnFullScreenButtonVisibilityProperty);
+            set => base.SetValue(UnFullScreenButtonVisibilityProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "DrawLayout.UnFullScreenButtonVisibility" /> dependency property. </summary>
+        public static readonly DependencyProperty UnFullScreenButtonVisibilityProperty = DependencyProperty.Register(nameof(UnFullScreenButtonVisibility), typeof(Visibility), typeof(DrawLayout), new PropertyMetadata(Visibility.Visible));
+
+        #endregion
+
+
         //@VisualState
         bool _vsIsFullScreen = true;
         DeviceLayoutType _vsDeviceLayoutType = DeviceLayoutType.PC;
@@ -41,7 +56,7 @@ namespace Retouch_Photo2.Elements.DrawPages
                     default: return this.Normal;
                 }
             }
-            set => VisualStateManager.GoToState(this, value.Name, false);
+            set => VisualStateManager.GoToState(this, value.Name, true);
         }
 
 
@@ -51,6 +66,7 @@ namespace Retouch_Photo2.Elements.DrawPages
             get => this._vsIsFullScreen;
             set
             {
+                this.UnFullScreenButtonVisibility = value ? Visibility.Visible : Visibility.Collapsed;
                 this._vsIsFullScreen = value;
                 this.VisualState = this.VisualState;//State
             }
@@ -87,20 +103,11 @@ namespace Retouch_Photo2.Elements.DrawPages
 
                 this.TouchbarBorder.IsHitTestVisible = value;
 
-                this.RadiusAnimaPanel.IsHitTestVisible = value;
-                this.LeftRadiusAnimaIcon.IsHitTestVisible = value;
-                this.RightRadiusAnimaIcon.IsHitTestVisible = value;
+                this.FootPanel.IsHitTestVisible = value;
+                this._LeftIcon.IsHitTestVisible = value;
+                this._RightIcon.IsHitTestVisible = value;
             }
         }
 
-
-        /*
-        private void FullScreenButton.Click(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.FullScreen.Name, false);
-        private void PhoneButton.Click(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.Phone.Name, false);
-        private void PhoneShowLeftButton.Click(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.PhoneShowLeft.Name, false);
-        private void PhoneShowRightButton.Click(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.PhoneShowRight.Name, false);
-        private void PadButton.Click(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.Pad.Name, false);
-        private void PCButton.Click(object sender, TappedRoutedEventArgs e) => VisualStateManager.GoToState(this, this.PC.Name, false);
-         */
     }
 }

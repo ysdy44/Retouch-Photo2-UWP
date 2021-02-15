@@ -64,7 +64,7 @@ namespace Retouch_Photo2.Elements
                     default: return this.Normal;
                 }
             }
-            set => VisualStateManager.GoToState(this, value.Name, false);
+            set => VisualStateManager.GoToState(this, value.Name, true);
         }
 
         /// <summary>

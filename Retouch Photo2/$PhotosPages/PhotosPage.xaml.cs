@@ -76,7 +76,7 @@ namespace Retouch_Photo2
                              
                 return this.Normal;
             }
-            set => VisualStateManager.GoToState(this, value.Name, false);
+            set => VisualStateManager.GoToState(this, value.Name, true);
         }
 
         
@@ -116,11 +116,12 @@ namespace Retouch_Photo2
                 this.Billboard.CalculatePostion(element);
                 this.Billboard.Photo = photo;
 
-                this.BillboardCanvas.Visibility = Visibility.Visible;
+                this.Billboard.IsShow = this.BillboardCanvas.IsHitTestVisible = true;
             };
-
-            this.BillboardCanvas.Tapped += (s, e) => this.BillboardCanvas.Visibility = Visibility.Collapsed;
-            this.BillboardCanvas.Visibility = Visibility.Collapsed;
+            this.BillboardCanvas.Tapped += (s, e) =>
+            {
+                this.Billboard.IsShow = this.BillboardCanvas.IsHitTestVisible = false;
+            };
 
             #endregion
         }

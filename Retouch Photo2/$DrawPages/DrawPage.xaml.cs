@@ -78,13 +78,13 @@ namespace Retouch_Photo2
 
 
             //Dialog
-            if (DrawPage.ShowExport == null) DrawPage.ShowExport += () => this.ShowExportDialog();
+            if (DrawPage.ShowExport == null) DrawPage.ShowExport = this.ShowExportDialog;
             this.ConstructExportDialog();
-            if (DrawPage.ShowSetup == null) DrawPage.ShowSetup += () => this.ShowSetupDialog();
+            if (DrawPage.ShowSetup == null) DrawPage.ShowSetup = this.ShowSetupDialog;
             this.ConstructSetupDialog();
-            if (DrawPage.ShowRename == null) DrawPage.ShowRename += () => this.ShowRenameDialog();
+            if (DrawPage.ShowRename == null) DrawPage.ShowRename = this.ShowRenameDialog;
             this.ConstructRenameDialog();
-            if (DrawPage.FullScreen == null) DrawPage.FullScreen += () => this.FullScreenLayout();
+            if (DrawPage.FullScreen == null) DrawPage.FullScreen += () => this.DrawLayout.IsFullScreen = !this.DrawLayout.IsFullScreen;
         }
 
         /// <summary> The current page becomes the active page. </summary>

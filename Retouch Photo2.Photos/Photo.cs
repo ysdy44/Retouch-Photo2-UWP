@@ -16,11 +16,13 @@ namespace Retouch_Photo2.Photos
     {
 
         /// <summary> Gets bitmap dpi. </summary>  
-        public float Dpi => this.Source.Dpi;
+        public float Dpi => this.Source?.Dpi ?? 96f;
+
         /// <summary> Gets bitmap size width pixel. </summary>  
-        public uint Width => this.Source.SizeInPixels.Width;
+        public uint Width => this.Source?.SizeInPixels.Width ?? 100;
         /// <summary> Gets bitmap size height pixel. </summary>  
-        public uint Height => this.Source.SizeInPixels.Height;
+        public uint Height => this.Source?.SizeInPixels.Height ?? 100;
+
 
         /// <summary> The source bitmap. </summary>
         public CanvasBitmap Source;

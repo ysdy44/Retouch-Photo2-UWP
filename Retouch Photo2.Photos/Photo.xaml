@@ -17,34 +17,34 @@
     <UserControl.Resources>
         <!--Storyboard-->
         <Storyboard x:Name="ShowStoryboard">
-            <DoubleAnimation Duration="0:0:0.6" To="1.0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="BackgroundDropShadowPanel" d:IsOptimized="True">
+            <DoubleAnimation Storyboard.TargetName="BackgroundDropShadowPanel" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.6">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Duration="0:0:0.6" To="1.04" Storyboard.TargetProperty="ScaleX" Storyboard.TargetName="ScaleTransform" d:IsOptimized="True">
+            <DoubleAnimation Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX" From="1.0" To="1.04" Duration="0:0:0.6">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Duration="0:0:0.6" To="1.04" Storyboard.TargetProperty="ScaleY" Storyboard.TargetName="ScaleTransform" d:IsOptimized="True">
+            <DoubleAnimation Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY" From="1.0" To="1.04" Duration="0:0:0.6">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
-        <Storyboard x:Name="FadeStoryboard">
-            <DoubleAnimation Duration="0:0:0.4" To="0.0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="BackgroundDropShadowPanel" d:IsOptimized="True">
+        <Storyboard x:Name="HideStoryboard">
+            <DoubleAnimation Storyboard.TargetName="BackgroundDropShadowPanel" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.6">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Duration="0:0:0.4" To="1.0" Storyboard.TargetProperty="ScaleX" Storyboard.TargetName="ScaleTransform" d:IsOptimized="True">
+            <DoubleAnimation Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX" From="1.04"  To="1.0" Duration="0:0:0.6">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Duration="0:0:0.4" To="1.0" Storyboard.TargetProperty="ScaleY" Storyboard.TargetName="ScaleTransform" d:IsOptimized="True">
+            <DoubleAnimation Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY" From="1.04"  To="1.0" Duration="0:0:0.6">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
@@ -59,7 +59,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-             
+
         <!--Shadow-->
         <controls:DropShadowPanel x:Name="BackgroundDropShadowPanel" 
                  IsHitTestVisible="False" Grid.Row="1" Opacity="0.0" Margin="12,8"
@@ -98,7 +98,7 @@
             <Button x:Name="FlyoutButton" Grid.Column="1" Width="36" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{ThemeResource EllipsisButton}">
                 <FontIcon Glyph="&#xE946;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
             </Button>
-            
+
         </Grid>
 
     </Grid>

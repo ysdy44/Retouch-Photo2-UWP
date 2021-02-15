@@ -42,7 +42,7 @@ namespace Retouch_Photo2
         private void ConstructAppBar()
         {
             //AppBarGrid
-            this.AppBarGrid.Loaded += (s, e) => this.AppBarGridSizeChanged(this.AppBarGrid.ActualWidth);
+            this.AppBarGridSizeChanged(this.AppBarGrid.ActualWidth);
             this.AppBarGrid.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
@@ -109,13 +109,13 @@ namespace Retouch_Photo2
 
 
             // ExpandAppbar
-            this.ExportButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowExport?.Invoke();
+            this.ExportButton.Tapped += (s, e) => this.ShowExportDialog();
             this.UndoButton.Tapped += (s, e) => this.MethodViewModel.MethodEditUndo();
             //this.RedoButton.Click += (s, e) => { };
-            this.SetupButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowSetup?.Invoke();
+            this.SetupButton.Tapped += (s, e) => this.ShowSetupDialog();
             this.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
-            this.UnFullScreenButton.Click += (s, e) => Retouch_Photo2.DrawPage.FullScreen?.Invoke();
-            this.FullScreenButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.FullScreen?.Invoke();
+            this.UnFullScreenButton.Click += (s, e) => this.DrawLayout.IsFullScreen = false;
+            this.FullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = true;
         }
 
         private void AppBarGridSizeChanged(double width)

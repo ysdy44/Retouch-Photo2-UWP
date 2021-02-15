@@ -4,10 +4,8 @@
 // Only:              ★★★★
 // Complete:      ★★★★
 using Microsoft.Graphics.Canvas.UI.Xaml;
-using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
 
 namespace Retouch_Photo2.Elements.DrawPages
 {
@@ -40,11 +38,11 @@ namespace Retouch_Photo2.Elements.DrawPages
 
         //Foot
         /// <summary> Gets or sets RadiusAnimaPanel's content. </summary>
-        public FrameworkElement FootPage { set => this.RadiusAnimaPanel.CenterContent = value; }
-        /// <summary> LeftRadiusAnimaIcon's CenterContent. </summary>
-        public object LeftIcon { get => this.LeftRadiusAnimaIcon.CenterContent; set => this.LeftRadiusAnimaIcon.CenterContent = value; }
-        /// <summary> RightRadiusAnimaIcon's CenterContent. </summary>
-        public object RightIcon { get => this.RightRadiusAnimaIcon.CenterContent; set => this.RightRadiusAnimaIcon.CenterContent = value; }
+        public FrameworkElement FootPage { set => this.FootPanel.CenterContent = value; }
+        /// <summary> _LeftIcon's CenterContent. </summary>
+        public object LeftIcon { get => this._LeftIcon.CenterContent; set => this._LeftIcon.CenterContent = value; }
+        /// <summary> _RightIcon's CenterContent. </summary>
+        public object RightIcon { get => this._RightIcon.CenterContent; set => this._RightIcon.CenterContent = value; }
 
         //Head
         /// <summary> HeadBorder's Child. </summary>
@@ -73,33 +71,24 @@ namespace Retouch_Photo2.Elements.DrawPages
         public DrawLayout()
         {
             this.InitializeComponent();
-            this.ConstructWidthStoryboard();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
-            
+
             //Foot
-            this.LeftRadiusAnimaIcon.Toggled += (s, e) => this.PhoneType = PhoneLayoutType.ShowLeft;
-            this.RightRadiusAnimaIcon.Toggled += (s, e) => this.PhoneType = PhoneLayoutType.ShowRight;
+            this._LeftIcon.Toggled += (s, e) => this.PhoneType = PhoneLayoutType.ShowLeft;
+            this._RightIcon.Toggled += (s, e) => this.PhoneType = PhoneLayoutType.ShowRight;
 
             //DismissOverlay
             this.DismissOverlay.PointerPressed += (s, e) => this.PhoneType = PhoneLayoutType.Hided;
-        }
 
-        private void ConstructWidthStoryboard()
-        {
+            //Width
             this._WidthButton.Click += (s, e) =>
             {
-                if (this.RightBorder.ActualWidth < 100)
-                {
-                    this.RightWidthIcon.Glyph = "\uE126";
-                    this.WidthFrame.Value = 220;
-                }
+                if (this.RightGrid.ActualWidth < 100)
+                    this.WidthToWideStoryboard.Begin();//Storyboard
                 else
-                {
-                    this.RightWidthIcon.Glyph = "\uE127";
-                    this.WidthFrame.Value = 70;
-                }
-                this.WidthStoryboard.Begin();//Storyboard
+                    this.WideToWidthStoryboard.Begin();//Storyboard
             };
         }
+
     }
 }

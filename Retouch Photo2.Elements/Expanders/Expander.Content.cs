@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Elements
                 if (this._vsIsSecondPage != value)
                 {
                     if (value) this.TitleShowStoryboard.Begin();//Storyboard
-                    else this.TitleFadeStoryboard.Begin();//Storyboard
+                    else this.TitleHideStoryboard.Begin();//Storyboard
                 }
 
                 this._vsIsSecondPage = value;

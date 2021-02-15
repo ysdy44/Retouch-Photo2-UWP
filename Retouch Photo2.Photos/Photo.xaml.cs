@@ -55,7 +55,7 @@ namespace Retouch_Photo2.Photos
         }
         private void Exited()
         {
-            this.FadeStoryboard.Begin();
+            this.HideStoryboard.Begin();
         }
     }
 }

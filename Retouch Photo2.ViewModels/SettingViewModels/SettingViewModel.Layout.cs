@@ -61,26 +61,6 @@ namespace Retouch_Photo2.ViewModels
         }
         private DeviceLayoutType deviceLayoutType = DeviceLayoutType.PC;
 
-
-        /// <summary>
-        /// Gets the offset of full-screen statue layout.
-        /// </summary>
-        /// <returns></returns>
-        public Vector2 FullScreenOffset
-        {
-            get
-            {
-                DeviceLayoutType type = this.DeviceLayoutType;
-                
-                switch (type)
-                {
-                    case DeviceLayoutType.PC:
-                        return new Vector2(70, 50);
-                    default:
-                        return new Vector2(0, 50);
-                }
-            }
-        }
         /// <summary> Gets the center child canvas width. </summary>
         public float CenterChildWidth
         {

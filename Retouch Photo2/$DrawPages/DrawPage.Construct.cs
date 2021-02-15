@@ -246,30 +246,5 @@ namespace Retouch_Photo2
             this.RenameDialog.Show();
         }
 
-
-        //FullScreen
-        private void FullScreenLayout()
-        {
-            Vector2 offset = this.SettingViewModel.FullScreenOffset;
-            bool isFullScreen = this.DrawLayout.IsFullScreen;
-
-            if (isFullScreen)
-            {
-                this.DrawLayout.IsFullScreen = false;
-                this.UnFullScreenButton.Visibility = Visibility.Collapsed;
-
-                this.ViewModel.CanvasTransformer.Position -= offset;
-                this.ViewModel.CanvasTransformer.ReloadMatrix();
-            }
-            else
-            {
-                this.DrawLayout.IsFullScreen = true;
-                this.UnFullScreenButton.Visibility = Visibility.Visible;
-
-                this.ViewModel.CanvasTransformer.Position += offset;
-                this.ViewModel.CanvasTransformer.ReloadMatrix();
-            }
-        }
-
     }
 }

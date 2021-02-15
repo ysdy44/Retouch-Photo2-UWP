@@ -5,17 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     mc:Ignorable="d"
     d:DesignHeight="40"
     d:DesignWidth="200"
     Height="40"
     >
-    
-    <!--Visibility:Show-->
-    <animations:Implicit.ShowAnimations>
-        <animations:OpacityAnimation Duration="0:0:0.2" From="0.0" To="1.0"/>
-    </animations:Implicit.ShowAnimations>
 
 
     <UserControl.Resources>      

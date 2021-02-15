@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:transformers="using:FanKit.Transformers"
     xmlns:hsvColorPickers="using:HSVColorPickers"
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:elementDialog="using:Retouch_Photo2.Elements.Dialogs"
     xmlns:elementDrawPages="using:Retouch_Photo2.Elements.DrawPages"
@@ -75,6 +74,7 @@
         <elementDrawPages:DrawLayout x:Name="DrawLayout" 
                CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"             
                DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
+               IsFullScreen="True"
                >
 
             <!--RightPane-->
@@ -246,33 +246,22 @@
         </elementDrawPages:DrawLayout>
 
 
+        <!--FullScreen-->
+        <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}"
+              Visibility="{x:Bind DrawLayout.UnFullScreenButtonVisibility, Mode=OneWay}">
+            <FontIcon Glyph="&#xE92C;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+        </Button>
+
+
         <!--Menu-->
         <menus:MenusExpanderCanvas
             Menus="{x:Bind TipViewModel.Menus, Mode=OneTime}"
             IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"/>
 
 
-        <!--FullScreen-->
-        <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}"
-                Visibility="Collapsed">
-            <FontIcon Glyph="&#xE92C;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
-
-
         <!--Tip-->
         <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" 
                         Visibility="{x:Bind ViewModel.TipTextVisibility, Mode=OneWay}">
-
-            <!--Visibility:Show-->
-            <animations:Implicit.ShowAnimations>
-                <animations:OpacityAnimation Duration="0:0:0.2" From="0.0" To="1.0"/>
-            </animations:Implicit.ShowAnimations>
-
-            <!--Visibility:Hide-->
-            <animations:Implicit.HideAnimations>
-                <animations:OpacityAnimation Duration="0:0:0.4" From="1.0" To="0.0"/>
-            </animations:Implicit.HideAnimations>
-
             <ToolTip Style="{StaticResource AppToolTipStyle}">
                 <TextBlock Text="{x:Bind ViewModel.TipText, Mode=OneWay}" TextWrapping="Wrap"/>
             </ToolTip>
@@ -333,7 +322,7 @@
 
 
         <!--Transition-->
-        <Border x:Name="TransitionBorder" IsHitTestVisible="False" Visibility="Collapsed" Padding="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{ThemeResource AppFill}">
+        <Border x:Name="TransitionBorder" IsHitTestVisible="False" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <Border.Resources>
                 <!--Transition-->
@@ -348,11 +337,7 @@
                 </Storyboard>
             </Border.Resources>
 
-            <Slider x:Name="TransitionSlider" Margin="0,-6,0,-12" Width="200" Minimum="0" Maximum="1" StepFrequency="0.00001">
-                <Slider.Clip>
-                    <RectangleGeometry Rect="0,6,200,26"/>
-                </Slider.Clip>
-            </Slider>
+            <ProgressBar x:Name="TransitionSlider" Width="200" Minimum="0" Maximum="1"/>
 
         </Border>
         

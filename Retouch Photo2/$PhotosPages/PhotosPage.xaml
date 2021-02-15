@@ -133,8 +133,8 @@
 
 
         <!--Billboard-->
-        <Canvas x:Name="BillboardCanvas" Grid.RowSpan="2" Background="Transparent">
-            <photos:Billboard x:Name="Billboard" IsHitTestVisible="False"/>
+        <Canvas x:Name="BillboardCanvas" Grid.RowSpan="2"  IsHitTestVisible="False" Background="Transparent">
+            <photos:Billboard x:Name="Billboard"/>
         </Canvas>
 
     </Grid>

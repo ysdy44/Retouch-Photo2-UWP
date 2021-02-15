@@ -5,9 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     mc:Ignorable="d"
     HorizontalAlignment="Left"
     VerticalAlignment="Top"
@@ -16,24 +14,55 @@
     BorderThickness="1" 
     BorderBrush="{ThemeResource AppBorderBrush}" 
     Background="{ThemeResource AppBackground}" 
-    extensions:VisualExtensions.CenterPoint="100,100,0"
     d:DesignHeight="300"
     d:DesignWidth="400"
+    Opacity="0"
     >
 
+    <UserControl.Resources>
+        <!--Storyboard-->
+        <Storyboard x:Name="ShowStoryboard" >
+            <DoubleAnimation Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX" From="0.6" To="1" Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY" From="0.6" To="1" Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="UserControl" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="HideStoryboard" >
+            <DoubleAnimation Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX" From="1" To="0.6" Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY" From="1" To="0.6" Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="UserControl" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </UserControl.Resources>
     
-    <!--Visibility:Show-->
-    <animations:Implicit.ShowAnimations>
-        <animations:Vector3Animation Target="Scale" Duration="0:0:0.3" To="1.0"/>
-        <animations:OpacityAnimation Duration="0:0:0.3" From="0.0" To="1.0"/>
-    </animations:Implicit.ShowAnimations>
-
-    <!--Visibility:Hide-->
-    <animations:Implicit.HideAnimations>
-        <animations:Vector3Animation Target="Scale" Duration="0:0:0.5" To="0.6"/>
-        <animations:OpacityAnimation Duration="0:0:0.5" From="1.0" To="0.0"/>
-    </animations:Implicit.HideAnimations>
-
+    
+    <UserControl.RenderTransformOrigin>0.5,0.5</UserControl.RenderTransformOrigin>
+    <UserControl.RenderTransform>
+        <ScaleTransform x:Name="ScaleTransform" ScaleX="0.6" ScaleY="0.6"/>
+    </UserControl.RenderTransform>
+    
     
     <controls:DropShadowPanel x:Name="BackgroundDropShadowPanel"
                  BlurRadius="32" ShadowOpacity="0.4" OffsetX="2" OffsetY="4"

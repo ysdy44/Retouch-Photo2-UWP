@@ -19,8 +19,8 @@ namespace Retouch_Photo2.Photos
         double actualHeight = 300;
 
         #region DependencyProperty
-        
-        /// <summary> Gets or sets the photo. </summary>
+
+        /// <summary> Gets or sets the <see cref="Billboard"/>'s photo. </summary>
         public Photo Photo
         {
             get  => (Photo)base.GetValue(PhotoProperty);
@@ -28,9 +28,19 @@ namespace Retouch_Photo2.Photos
         }
         /// <summary> Identifies the <see cref = "Billboard.Photo" /> dependency property. </summary>
         public static readonly DependencyProperty PhotoProperty = DependencyProperty.Register(nameof(Photo), typeof(Photo), typeof(Billboard), new PropertyMetadata(new Photo()));
-        
+
+        /// <summary> Gets or sets whether <see cref="Billboard"/> is showed.. </summary>
+        public bool IsShow
+        {
+            set
+            {
+                if (value) this.ShowStoryboard.Begin();//Storyboard
+                else this.HideStoryboard.Begin();//Storyboard
+            }
+        }
+
         #endregion
-        
+
 
         //@Construct
         /// <summary>
@@ -56,7 +66,7 @@ namespace Retouch_Photo2.Photos
             double centerCoordsY =screenCoords.Y + placementTarget.ActualHeight / 2;
 
             double x = centerCoordsX - this.actualWidth / 2;
-            double y = centerCoordsY - this.actualHeight / 2;
+            double y = centerCoordsY - (this.actualHeight - 70) / 2;
 
             if (x < 0) x = 0;
             if (y < 0) y = 0;
