@@ -17,7 +17,7 @@ namespace Retouch_Photo2.ViewModels
             Matrix3x2 matrix = Matrix3x2.CreateScale(scale);
 
             //History
-            LayersSetupTransformMultipliesHistory history = new LayersSetupTransformMultipliesHistory("Set canvas size", this.CanvasTransformer);
+            LayersSetupTransformMultipliesHistory history = new LayersSetupTransformMultipliesHistory(HistoryType.LayersSetupTransformMultiplies_Transform, this.CanvasTransformer);
 
             //CanvasTransformer
             this.CanvasTransformer.BitmapSize = bitmapSize;
@@ -61,7 +61,7 @@ namespace Retouch_Photo2.ViewModels
             Vector2 previousVector = this.CanvasTransformer.GetIndicatorVector(indicatorMode);
 
             //History
-            LayersSetupTransformAddHistory history = new LayersSetupTransformAddHistory("Set canvas size", this.CanvasTransformer);
+            LayersSetupTransformAddHistory history = new LayersSetupTransformAddHistory(HistoryType.LayersSetupTransformAdd_Move, this.CanvasTransformer);
 
             //CanvasTransformer
             this.CanvasTransformer.BitmapSize = bitmapSize;

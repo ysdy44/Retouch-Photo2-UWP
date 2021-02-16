@@ -16,16 +16,16 @@ namespace Retouch_Photo2.Historys
     {
 
         private readonly Action UndoAction;
-        private IList<Layerage> Layerages = new List<Layerage>();
+        private readonly IList<Layerage> Layerages = new List<Layerage>();
 
         //@Construct
         /// <summary>
         /// Initializes a LayeragesArrangeHistory.
         /// </summary>
-        /// <param name="title"> The title. </param>  
-        public LayeragesArrangeHistory(string title)
+        /// <param name="type"> The type. </param>  
+        public LayeragesArrangeHistory(HistoryType type)
         {
-            base.Title = title;
+            base.Type = type;
 
             foreach (Layerage  layerage in LayerManager.RootLayerage.Children)
             {

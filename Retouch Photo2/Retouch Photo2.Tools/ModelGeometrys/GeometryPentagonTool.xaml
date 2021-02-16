@@ -20,11 +20,11 @@
             <tools:TouchbarButton x:Name="PointsButton">
                 <tools:TouchbarButton.Picker>
                     <hSVColorPickers:NumberPicker x:Name="PointsPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                             Value="{x:Bind SelectionViewModel.GeometryPentagonPoints, Mode=OneWay}"/>
+                             Value="{x:Bind SelectionViewModel.GeometryPentagon_Points, Mode=OneWay}"/>
                 </tools:TouchbarButton.Picker>
                 <tools:TouchbarButton.Slider>
                     <tools:TouchbarSlider x:Name="PointsSlider" 
-                             Value="{x:Bind SelectionViewModel.GeometryPentagonPoints, Mode=OneWay}"/>
+                             Value="{x:Bind SelectionViewModel.GeometryPentagon_Points, Mode=OneWay}"/>
                 </tools:TouchbarButton.Slider>
             </tools:TouchbarButton>
 

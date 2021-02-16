@@ -247,7 +247,7 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange");
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
                 this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
@@ -266,7 +266,7 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange");
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
                 this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
@@ -291,7 +291,7 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange");
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
                 this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
@@ -316,7 +316,7 @@ namespace Retouch_Photo2.Menus.Models
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange");
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
                 this.ViewModel.HistoryPush(history);
 
                 Layerage destination = this.SelectionViewModel.SelectionLayerage;
@@ -381,7 +381,7 @@ namespace Retouch_Photo2.Menus.Models
         private void TransformAlign(float positionValue, BorderMode borderMode, Orientation orientation)
         {
             //History
-            LayersTransformAddHistory history = new LayersTransformAddHistory("Transform");
+            LayersTransformAddHistory history = new LayersTransformAddHistory(HistoryType.LayersTransformAdd_Move);
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
@@ -462,7 +462,7 @@ namespace Retouch_Photo2.Menus.Models
 
 
             //History
-            LayersTransformAddHistory history = new LayersTransformAddHistory("Transform");
+            LayersTransformAddHistory history = new LayersTransformAddHistory(HistoryType.LayersTransformAdd_Move);
 
 
             float postionMin = min;//[ previous.Min ] + [ previous.Length ] + space.

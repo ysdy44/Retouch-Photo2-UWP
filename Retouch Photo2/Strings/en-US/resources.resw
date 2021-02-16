@@ -132,7 +132,6 @@
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>Quality</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>File Format</value></data>
 <data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>Rename Layers</value></data>
-<data name='Tools_ConvertToCurves' xml:space='preserve'><value>Convert to curves</value></data>
 <data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>Ratio Scaling</value></data>
 <data name='Tools_MoreTransform_Center' xml:space='preserve'><value>Center Scaling</value></data>
 <data name='Tools_MoreCreate_Square' xml:space='preserve'><value>Equal width and height</value></data>
@@ -155,7 +154,6 @@
 <data name='Tools_Brush_Extend_Wrap' xml:space='preserve'><value>Wrap</value></data>
 <data name='Tools_Brush_Stop_Offset' xml:space='preserve'><value>Offset</value></data>
 <data name='Tools_Brush_Stop_Alpha' xml:space='preserve'><value>Alpha</value></data>
-<data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value>Copy</value></data>
 <data name='Tools_Brush_Stop_Reverse' xml:space='preserve'><value>Reserve</value></data>
 <data name='Tools_Transparency' xml:space='preserve'><value>Transparency</value></data>
 <data name='Tools_Pen' xml:space='preserve'><value>Pen</value></data>
@@ -313,7 +311,6 @@
 <data name='Strokes_Cap_Flat' xml:space='preserve'><value>Flat</value></data>
 <data name='Strokes_Cap_Square' xml:space='preserve'><value>Square</value></data>
 <data name='Strokes_Cap_Round' xml:space='preserve'><value>Round</value></data>
-<data name='Strokes_Cap_Triangle' xml:space='preserve'><value>Triangle</value></data>
 <data name='Strokes_Join' xml:space='preserve'><value>Join</value></data>
 <data name='Strokes_Join_Miter' xml:space='preserve'><value>Miter</value></data>
 <data name='Strokes_Join_Bevel' xml:space='preserve'><value>Bevel</value></data>
@@ -347,6 +344,169 @@
 <data name='Blends_Luminosity' xml:space='preserve'><value>Luminosity</value></data>
 <data name='Blends_Subtract' xml:space='preserve'><value>Subtract</value></data>
 <data name='Blends_Division' xml:space='preserve'><value>Division</value></data>
+<data name='Historys_LayersSetupTransformAdd_Move' xml:space='preserve'><value>Set canvas size</value></data>
+<data name='Historys_LayersSetupTransformMultiplies_Transform' xml:space='preserve'><value>Set canvas size</value></data>
+<data name='Historys_LayeragesArrange_LayersArrange' xml:space='preserve'><value>Layers arrange</value></data>
+<data name='Historys_LayeragesArrange_RemoveLayers' xml:space='preserve'><value>Remove layers</value></data>
+<data name='Historys_LayeragesArrange_AddLayer' xml:space='preserve'><value>Add layer</value></data>
+<data name='Historys_LayersTransformAdd_Move' xml:space='preserve'><value>Move</value></data>
+<data name='Historys_LayersTransformMultiplies_Transform' xml:space='preserve'><value>Transform</value></data>
+<data name='Historys_LayersProperty_SetTransform_IsCrop' xml:space='preserve'><value>Set transform is crop</value></data>
+<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>Set transform crop transformer</value></data>
+<data name='Historys_LayersProperty_SetStyle' xml:space='preserve'><value>Set style</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill' xml:space='preserve'><value>Set fill</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill_Extend' xml:space='preserve'><value>Set fill extend</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill_Type' xml:space='preserve'><value>Set fill type</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke' xml:space='preserve'><value>Set stroke</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke_Extend' xml:space='preserve'><value>Set stroke extend</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke_Type' xml:space='preserve'><value>Set stroke type</value></data>
+<data name='Historys_LayersProperty_SetStyle_Transparency' xml:space='preserve'><value>Set transparency</value></data>
+<data name='Historys_LayersProperty_SetStyle_Transparency_Type' xml:space='preserve'><value>Set transparency type</value></data>
+<data name='Historys_LayersProperty_Set_MoveNodes' xml:space='preserve'><value>Move nodes</value></data>
+<data name='Historys_LayersProperty_Set_MoveNode_ControlPoint' xml:space='preserve'><value>Move node control point</value></data>
+<data name='Historys_LayersProperty_Set_MoveNode_IsChecked' xml:space='preserve'><value>Set nodes is checked</value></data>
+<data name='Historys_LayersProperty_Set_AddNode' xml:space='preserve'><value>Add node</value></data>
+<data name='Historys_LayersProperty_Set_RemoveNodes' xml:space='preserve'><value>Remove nodes</value></data>
+<data name='Historys_LayersProperty_Set_InsertNodes' xml:space='preserve'><value>Insert nodes</value></data>
+<data name='Historys_LayersProperty_Set_SharpNodes' xml:space='preserve'><value>Sharp nodes</value></data>
+<data name='Historys_LayersProperty_Set_SmoothNodes' xml:space='preserve'><value>Smooth nodes</value></data>
+<data name='Historys_LayersProperty_SetPhotocopier' xml:space='preserve'><value>Set photo</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_GridType' xml:space='preserve'><value>Set grid layer type</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_HorizontalStep' xml:space='preserve'><value>Set grid layer horizontal step</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_VerticalStep' xml:space='preserve'><value>Set grid layer vertical step</value></data>
+<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_Offset' xml:space='preserve'><value>Set diagonal layer offset</value></data>
+<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_HorizontalStep' xml:space='preserve'><value>Set diagonal layer horizontal step</value></data>
+<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Radius' xml:space='preserve'><value>Set spotted layer radius</value></data>
+<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Step' xml:space='preserve'><value>Set spotted layer step</value></data>
+<data name='Historys_LayersProperty_Set_GeometryRoundRectLayer_Corner' xml:space='preserve'><value>Set round rect layer corner</value></data>
+<data name='Historys_LayersProperty_Set_GeometryTriangleLayer_Center' xml:space='preserve'><value>Set triangle layer center</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_Mid' xml:space='preserve'><value>Set diamond layer mid</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_HoleRadius' xml:space='preserve'><value>Set dount layer hole radius</value></data>
+<data name='Historys_LayersProperty_Set_GeometryPentagonLayer_Points' xml:space='preserve'><value>Set pentagon layer points</value></data>
+<data name='Historys_LayersProperty_Set_GeometryStarLayer_Points' xml:space='preserve'><value>Set star layer points</value></data>
+<data name='Historys_LayersProperty_Set_GeometryStarLayer_InnerRadius' xml:space='preserve'><value>Set star layer inner radius</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Count' xml:space='preserve'><value>Set cog layer count</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_InnerRadius' xml:space='preserve'><value>Set cog layer inner radius</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Tooth' xml:space='preserve'><value>Set cog layer tooth</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Notch' xml:space='preserve'><value>Set cog layer notch</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDountLayer_HoleRadius' xml:space='preserve'><value>Set dount layer hole radius</value></data>
+<data name='Historys_LayersProperty_Set_GeometryPieLayer_SweepAngle' xml:space='preserve'><value>Set pie layer sweep angle</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCookieLayer_InnerRadius' xml:space='preserve'><value>Set cookie layer inner radius</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCookieLayer_SweepAngle' xml:space='preserve'><value>Set cookie layer sweep angle</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_LeftTail' xml:space='preserve'><value>Set arrow layer left tail</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_RightTail' xml:space='preserve'><value>Set arrow layer right tail</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_Value' xml:space='preserve'><value>Set arrow layer value</value></data>
+<data name='Historys_LayersProperty_Set_GeometryHeartLayer_Spread' xml:space='preserve'><value>Set heart layer spread</value></data>
+<data name='Historys_LayersProperty_SetName' xml:space='preserve'><value>Set name</value></data>
+<data name='Historys_LayersProperty_SetBlendMode' xml:space='preserve'><value>Set blend mode</value></data>
+<data name='Historys_LayersProperty_SetOpacity' xml:space='preserve'><value>Set opacity</value></data>
+<data name='Historys_LayersProperty_SetOpacity_000' xml:space='preserve'><value>Set opacity 0%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_025' xml:space='preserve'><value>Set opacity 25%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_050' xml:space='preserve'><value>Set opacity 50%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_075' xml:space='preserve'><value>Set opacity 75%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_100' xml:space='preserve'><value>Set opacity 100%</value></data>
+<data name='Historys_LayersProperty_SetVisibility' xml:space='preserve'><value>Set visibility</value></data>
+<data name='Historys_LayersProperty_SetIsSelected' xml:space='preserve'><value>Set is selected</value></data>
+<data name='Historys_LayersProperty_SetTagType' xml:space='preserve'><value>Set tag type</value></data>
+<data name='Historys_LayeragesArrange_CutLayers' xml:space='preserve'><value>Cut layers</value></data>
+<data name='Historys_LayeragesArrange_DuplicateLayer' xml:space='preserve'><value>Duplicate layer</value></data>
+<data name='Historys_LayeragesArrange_DuplicateLayers' xml:space='preserve'><value>Duplicate layers</value></data>
+<data name='Historys_LayeragesArrange_PasteLayers' xml:space='preserve'><value>Paste layers</value></data>
+<data name='Historys_LayeragesArrange_ClearLayers' xml:space='preserve'><value>Clear layers</value></data>
+<data name='Historys_LayeragesArrange_GroupLayers' xml:space='preserve'><value>Group layers</value></data>
+<data name='Historys_LayeragesArrange_UnGroupLayers' xml:space='preserve'><value>UnGroup layers</value></data>
+<data name='Historys_LayeragesArrange_ReleaseLayers' xml:space='preserve'><value>Release layers</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_Combine' xml:space='preserve'><value>Add combine curve layer</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_ExpandStroke' xml:space='preserve'><value>Add expand stroke curve layer</value></data>
+<data name='Historys_LayeragesArrange_AddLayers_ExpandStroke' xml:space='preserve'><value>Add expand stroke curve layers</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Exposure' xml:space='preserve'><value>Reset exposure adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Exposure_Exposure' xml:space='preserve'><value>Set exposure adjustment exposure</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Brightness' xml:space='preserve'><value>Reset brightness adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteLight' xml:space='preserve'><value>Set brightness adjustment white light</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteDark' xml:space='preserve'><value>Set brightness adjustment white dark</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackLight' xml:space='preserve'><value>Set brightness adjustment black light</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackDark' xml:space='preserve'><value>Set brightness adjustment black dark</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Saturation' xml:space='preserve'><value>Reset saturation adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Saturation_Saturation' xml:space='preserve'><value>Set saturation adjustment saturation</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_HueRotation' xml:space='preserve'><value>Reset hue rotation adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HueRotation_Angle' xml:space='preserve'><value>Set hue rotation adjustment angle</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Contrast' xml:space='preserve'><value>Reset contrast adjustment</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Contrast_Contrast' xml:space='preserve'><value>Set contrast adjustment contrast</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Temperature' xml:space='preserve'><value>Reset temperature adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Temperature_Temperature' xml:space='preserve'><value>Set temperature adjustment temperature</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Temperature_Tint' xml:space='preserve'><value>Set temperature adjustment tint</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_HighlightsAndShadows' xml:space='preserve'><value>Reset highlights and shadows adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Shadows' xml:space='preserve'><value>Set highlights and shadows adjustment shadows</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Highlights' xml:space='preserve'><value>Set highlights and shadows adjustment highlights</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Clarity' xml:space='preserve'><value>Set highlights and shadows adjustment clarity</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>Set highlights and shadows adjustment mask blur amount</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_GammaTransfer' xml:space='preserve'><value>Reset gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaDisable' xml:space='preserve'><value>Switch gamma transfer adjustment alpha</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaOffset' xml:space='preserve'><value>Set gamma transfer adjustment alpha offset</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaExponent' xml:space='preserve'><value>Set gamma transfer adjustment alpha exponent</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaAmplitude' xml:space='preserve'><value>Set gamma transfer adjustment alpha amplitude</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedDisable' xml:space='preserve'><value>Switch gamma transfer adjustment red</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedOffset' xml:space='preserve'><value>Set gamma transfer adjustment red offset</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedExponent' xml:space='preserve'><value>Set gamma transfer adjustment red exponent</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedAmplitude' xml:space='preserve'><value>Set gamma transfer adjustment red amplitude</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenDisable' xml:space='preserve'><value>Switch gamma transfer adjustment green</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenOffset' xml:space='preserve'><value>Set gamma transfer adjustment green offset</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenExponent' xml:space='preserve'><value>Set gamma transfer adjustment green exponent</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenAmplitude' xml:space='preserve'><value>Set gamma transfer adjustment green amplitude</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueDisable' xml:space='preserve'><value>Switch gamma transfer adjustment blue</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueOffset' xml:space='preserve'><value>Set gamma transfer adjustment blue offset</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueExponent' xml:space='preserve'><value>Set gamma transfer adjustment blue exponent</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueAmplitude' xml:space='preserve'><value>Set gamma transfer adjustment blue amplitude</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Vignette' xml:space='preserve'><value>Reset vignette adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Amount' xml:space='preserve'><value>Set vignette adjustment amount</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Curve' xml:space='preserve'><value>Set vignette adjustment curve</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Set vignette adjustment color</value></data>
+<data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Reset gaussian blur effect</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Switch gaussian blur effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Set gaussian blur effect amount</value></data>
+<data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Reset effect directional blur</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Switch effect directional blur</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Set effect directional blur radius</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Set effect directional blur angle</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Reset effect sharpen</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Switch effect sharpen</value></data>
+<data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Set effect sharpen amount</value></data>
+<data name='Historys_LayersProperty_ResetEffect_OuterShadow' xml:space='preserve'><value>Reset effect outer shadow</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_OuterShadow' xml:space='preserve'><value>Switch effect outer shadow</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Radius' xml:space='preserve'><value>Set effect outer shadow radius</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Opacity' xml:space='preserve'><value>Set effect outer shadow opacity</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Offset' xml:space='preserve'><value>Set effect outer shadow offset</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Angle' xml:space='preserve'><value>Set effect outer shadow angle</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Color' xml:space='preserve'><value>Set effect outer shadow color</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Edge' xml:space='preserve'><value>Reset effect edge</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Edge' xml:space='preserve'><value>Switch effect edge</value></data>
+<data name='Historys_LayersProperty_SetEffect_Edge_Amount' xml:space='preserve'><value>Set effect edge amount</value></data>
+<data name='Historys_LayersProperty_SetEffect_Edge_Radius' xml:space='preserve'><value>Set effect edge radius</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Mmorphology' xml:space='preserve'><value>Reset effect morphology</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Mmorphology' xml:space='preserve'><value>Switch effect morphology</value></data>
+<data name='Historys_LayersProperty_SetEffect_Mmorphology_Size' xml:space='preserve'><value>Set effect morphology size</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Emboss' xml:space='preserve'><value>Reset effect emboss</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Emboss' xml:space='preserve'><value>Switch effect emboss</value></data>
+<data name='Historys_LayersProperty_SetEffect_Emboss_Radius' xml:space='preserve'><value>Set effect emboss radius</value></data>
+<data name='Historys_LayersProperty_SetEffect_Emboss_Angle' xml:space='preserve'><value>Set effect emboss angle</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Straighten' xml:space='preserve'><value>Reset effect straighten</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Straighten' xml:space='preserve'><value>Switch effect straighten</value></data>
+<data name='Historys_LayersProperty_SetEffect_Straighten_Angle' xml:space='preserve'><value>Set effect straighten angle</value></data>
+<data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>Set font text</value></data>
+<data name='Historys_LayersProperty_SetFontAlignment' xml:space='preserve'><value>Set font alignment</value></data>
+<data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>Set font style</value></data>
+<data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>Set font weight</value></data>
+<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Set font family</value></data>
+<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Set font size</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>Set stroke style dash</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeWidth' xml:space='preserve'><value>Set stroke width</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Cap' xml:space='preserve'><value>Set stroke style cap</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Join' xml:space='preserve'><value>Set stroke style join</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Offset' xml:space='preserve'><value>Set stroke style offset</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsFollowTransform' xml:space='preserve'><value>Set style is follow transform</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsStrokeBehindFill' xml:space='preserve'><value>Set style is stroke behind fill</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>Set style is Stroke Width scale with Layer</value></data>
+<data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>Set filter</value></data>
 <data name='$PhotosPage_BackTip' xml:space='preserve'><value>Back</value></data>
 <data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
 <data name='$SettingPage_Back' xml:space='preserve'><value>Back</value></data>
@@ -383,6 +543,7 @@
 <data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>Rename</value></data>
 <data name='Tools_Fill' xml:space='preserve'><value>Fill</value></data>
 <data name='Tools_Stroke' xml:space='preserve'><value>Stroke</value></data>
+<data name='Tools_ConvertToCurves' xml:space='preserve'><value>Convert to curves</value></data>
 <data name='Tools_Brush' xml:space='preserve'><value>Brush</value></data>
 <data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>Fill</value></data>
 <data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>Stroke</value></data>
@@ -393,6 +554,7 @@
 <data name='Tools_Brush_Brush' xml:space='preserve'><value>Brush</value></data>
 <data name='Tools_Brush_Extend_Mirror' xml:space='preserve'><value>Mirror</value></data>
 <data name='Tools_Brush_Stop_Remove' xml:space='preserve'><value>Remove</value></data>
+<data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value>Copy</value></data>
 <data name='Tools_GeometryRectangle' xml:space='preserve'><value>Rectangle</value></data>
 <data name='Tools_GeometryEllipse' xml:space='preserve'><value>Ellipse</value></data>
 <data name='Tools_Node_Remove' xml:space='preserve'><value>Remove</value></data>
@@ -499,8 +661,10 @@
 <data name='Strokes_Dash' xml:space='preserve'><value>Dash</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>Dash</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>Width</value></data>
+<data name='Strokes_Cap_Triangle' xml:space='preserve'><value>Triangle</value></data>
 <data name='Strokes_Offset' xml:space='preserve'><value>Offset</value></data>
 <data name='Blends_Saturation' xml:space='preserve'><value>Saturation</value></data>
 <data name='Blends_Color' xml:space='preserve'><value>Color</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_ConvertToCurves' xml:space='preserve'><value>Convert to curves</value></data>
 
  </root>

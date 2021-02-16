@@ -6,6 +6,7 @@
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using System;
 using Windows.ApplicationModel.Resources;
@@ -202,9 +203,9 @@ namespace Retouch_Photo2.Menus.Models
                 (
                     set: (layer) => layer.Opacity = opacity,
 
-                    historyTitle: "Set opacity",
-                    getHistory: (layer) => layer.Opacity,
-                    setHistory: (layer, previous) => layer.Opacity = previous
+                    type: HistoryType.LayersProperty_SetOpacity,
+                    getUndo: (layer) => layer.Opacity,
+                    setUndo: (layer, previous) => layer.Opacity = previous
                 );
             };
         }
@@ -230,9 +231,9 @@ namespace Retouch_Photo2.Menus.Models
                 (
                     set: (layer) => layer.Opacity = opacity,
 
-                    historyTitle: "Set opacity",
-                    getHistory: (layer) => layer.StartingOpacity,
-                    setHistory: (layer, previous) => layer.Opacity = previous
+                    type: HistoryType.LayersProperty_SetOpacity,
+                    getUndo: (layer) => layer.StartingOpacity,
+                    setUndo: (layer, previous) => layer.Opacity = previous
                 );
             };
         }
@@ -248,9 +249,9 @@ namespace Retouch_Photo2.Menus.Models
                 (
                     set: (layer) => layer.Opacity = opacity,
 
-                    historyTitle: "Set opacity 0%",
-                    getHistory: (layer) => layer.Opacity,
-                    setHistory: (layer, previous) => layer.Opacity = previous
+                    type: HistoryType.LayersProperty_SetOpacity_000,
+                    getUndo: (layer) => layer.Opacity,
+                    setUndo: (layer, previous) => layer.Opacity = previous
                 );
             };
 
@@ -263,9 +264,9 @@ namespace Retouch_Photo2.Menus.Models
                 (
                     set: (layer) => layer.Opacity = opacity,
 
-                    historyTitle: "Set opacity 25%",
-                    getHistory: (layer) => layer.Opacity,
-                    setHistory: (layer, previous) => layer.Opacity = previous
+                    type: HistoryType.LayersProperty_SetOpacity_025,
+                    getUndo: (layer) => layer.Opacity,
+                    setUndo: (layer, previous) => layer.Opacity = previous
                 );
             };
 
@@ -278,9 +279,9 @@ namespace Retouch_Photo2.Menus.Models
                 (
                     set: (layer) => layer.Opacity = opacity,
 
-                    historyTitle: "Set opacity 50%",
-                    getHistory: (layer) => layer.Opacity,
-                    setHistory: (layer, previous) => layer.Opacity = previous
+                    type: HistoryType.LayersProperty_SetOpacity_050,
+                    getUndo: (layer) => layer.Opacity,
+                    setUndo: (layer, previous) => layer.Opacity = previous
                 );
             };
 
@@ -293,9 +294,9 @@ namespace Retouch_Photo2.Menus.Models
                 (
                     set: (layer) => layer.Opacity = opacity,
 
-                    historyTitle: "Set opacity 75%",
-                    getHistory: (layer) => layer.Opacity,
-                    setHistory: (layer, previous) => layer.Opacity = previous
+                    type: HistoryType.LayersProperty_SetOpacity_075,
+                    getUndo: (layer) => layer.Opacity,
+                    setUndo: (layer, previous) => layer.Opacity = previous
                 );
             };
 
@@ -308,9 +309,9 @@ namespace Retouch_Photo2.Menus.Models
                 (
                     set: (layer) => layer.Opacity = opacity,
 
-                    historyTitle: "Set opacity 100%",
-                    getHistory: (layer) => layer.Opacity,
-                    setHistory: (layer, previous) => layer.Opacity = previous
+                    type: HistoryType.LayersProperty_SetOpacity_100,
+                    getUndo: (layer) => layer.Opacity,
+                    setUndo: (layer, previous) => layer.Opacity = previous
                 );
             };
         }
@@ -334,10 +335,10 @@ namespace Retouch_Photo2.Menus.Models
                 this.MethodViewModel.ILayerChanged<BlendEffectMode?>
                 (
                     set: (layer) => layer.BlendMode = blendMode,
-
-                    historyTitle: "Set blend mode",
-                    getHistory: (layer) => layer.BlendMode,
-                    setHistory: (layer, previous) => layer.BlendMode = previous
+                                     
+                    type: HistoryType.LayersProperty_SetBlendMode,
+                    getUndo: (layer) => layer.BlendMode,
+                    setUndo: (layer, previous) => layer.BlendMode = previous
                 );
             };
         }
@@ -355,9 +356,9 @@ namespace Retouch_Photo2.Menus.Models
                 (
                     set: (layer) => layer.Visibility = value,
 
-                    historyTitle: "Set visibility",
-                    getHistory: (layer) => layer.Visibility,
-                    setHistory: (layer, previous) => layer.Visibility = previous
+                    type: HistoryType.LayersProperty_SetVisibility,
+                    getUndo: (layer) => layer.Visibility,
+                    setUndo: (layer, previous) => layer.Visibility = previous
                 );
             };
         }
@@ -375,9 +376,9 @@ namespace Retouch_Photo2.Menus.Models
                 (
                     set: (layer) => layer.TagType = tagType,
 
-                    historyTitle: "Set tag type",
-                    getHistory: (layer) => layer.TagType,
-                    setHistory: (layer, previous) => layer.TagType = previous
+                    type: HistoryType.LayersProperty_SetTagType,
+                    getUndo: (layer) => layer.TagType,
+                    setUndo: (layer, previous) => layer.TagType = previous
                 );
             };
         }

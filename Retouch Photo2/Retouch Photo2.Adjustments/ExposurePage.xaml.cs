@@ -5,6 +5,7 @@
 // Complete:      ★★★
 using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
@@ -95,9 +96,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                 index: this.Index,
                 set: (tAdjustment) => tAdjustment.Exposure = 0,
 
-                historyTitle: "Set exposure adjustment",
-                getHistory: (tAdjustment) => tAdjustment.Exposure,
-                setHistory: (tAdjustment, previous) => tAdjustment.Exposure = previous
+                type: HistoryType.LayersProperty_ResetAdjustment_Exposure,
+                getUndo: (tAdjustment) => tAdjustment.Exposure,
+                setUndo: (tAdjustment, previous) => tAdjustment.Exposure = previous
             );
         }
         /// <summary>
@@ -140,9 +141,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Exposure = exposure,
 
-                    historyTitle: "Set exposure adjustment exposure",
-                    getHistory: (tAdjustment) => tAdjustment.Exposure,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Exposure = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Exposure_Exposure,
+                    getUndo: (tAdjustment) => tAdjustment.Exposure,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Exposure = previous
                 );
             };
         }
@@ -169,9 +170,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Exposure = exposure,
 
-                    historyTitle: "Set exposure adjustment exposure",
-                    getHistory: (tAdjustment) => tAdjustment.StartingExposure,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Exposure = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Exposure_Exposure,
+                    getUndo: (tAdjustment) => tAdjustment.StartingExposure,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Exposure = previous
                 );
             };
         }

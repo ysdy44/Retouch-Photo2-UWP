@@ -132,7 +132,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                 if (layer.Filter.Adjustments[this.Index] is VignetteAdjustment adjustment)
                 {
                     //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set vignette adjustment");
+                    LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_ResetAdjustment_Vignette);
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                     var previous1 = adjustment.Amount;
@@ -211,9 +211,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Amount = amount,
 
-                    historyTitle: "Set vignette adjustment amount",
-                    getHistory: (tAdjustment) => tAdjustment.Amount,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Amount = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Vignette_Amount,
+                    getUndo: (tAdjustment) => tAdjustment.Amount,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Amount = previous
                 );
             };
         }
@@ -241,9 +241,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Amount = amount,
 
-                    historyTitle: "Set vignette adjustment amount",
-                    getHistory: (tAdjustment) => tAdjustment.StartingAmount,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Amount = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Vignette_Amount,
+                    getUndo: (tAdjustment) => tAdjustment.StartingAmount,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Amount = previous
                 );
             };
         }
@@ -265,9 +265,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Curve = curve,
 
-                    historyTitle: "Set vignette adjustment curve",
-                    getHistory: (tAdjustment) => tAdjustment.Curve,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Curve = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Vignette_Curve,
+                    getUndo: (tAdjustment) => tAdjustment.Curve,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Curve = previous
                 );
             };
         }
@@ -295,9 +295,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Curve = curve,
 
-                    historyTitle: "Set vignette adjustment curve",
-                    getHistory: (tAdjustment) => tAdjustment.StartingCurve,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Curve = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Vignette_Curve,
+                    getUndo: (tAdjustment) => tAdjustment.StartingCurve,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Curve = previous
                 );
             };
         }
@@ -342,9 +342,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Color = color,
 
-                    historyTitle: "Set vignette adjustment color",
-                    getHistory: (tAdjustment) => tAdjustment.Color,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Color = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Vignette_Color,
+                    getUndo: (tAdjustment) => tAdjustment.Color,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Color = previous
                 );
             };
         }
@@ -363,9 +363,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Color = color,
 
-                    historyTitle: "Set vignette adjustment color",
-                    getHistory: (tAdjustment) => tAdjustment.StartingColor,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Color = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Vignette_Color,
+                    getUndo: (tAdjustment) => tAdjustment.StartingColor,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Color = previous
                 );
             };
         }

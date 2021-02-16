@@ -5,6 +5,7 @@
 // Complete:      ★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -49,7 +50,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryHeartLayer(customDevice)
             {
-                Spread = this.SelectionViewModel.GeometryHeartSpread,
+                Spread = this.SelectionViewModel.GeometryHeart_Spread,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
@@ -121,16 +122,16 @@ namespace Retouch_Photo2.Tools.Models
             this.SpreadPicker.ValueChanged += (sender, value) =>
             {
                 float spread = (float)value / 100.0f;
-                this.SelectionViewModel.GeometryHeartSpread = spread;
+                this.SelectionViewModel.GeometryHeart_Spread = spread;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryHeartLayer>
                 (
                     layerType: LayerType.GeometryHeart,
                     set: (tLayer) => tLayer.Spread = spread,
 
-                    historyTitle: "Set heart layer spread",
-                    getHistory: (tLayer) => tLayer.Spread,
-                    setHistory: (tLayer, previous) => tLayer.Spread = previous
+                    type: HistoryType.LayersProperty_Set_GeometryHeartLayer_Spread,
+                    getUndo: (tLayer) => tLayer.Spread,
+                    setUndo: (tLayer, previous) => tLayer.Spread = previous
                 );
             };
         }
@@ -143,23 +144,23 @@ namespace Retouch_Photo2.Tools.Models
             this.SpreadSlider.ValueChangeDelta += (sender, value) =>
             {
                 float spread = (float)value;
-                this.SelectionViewModel.GeometryHeartSpread = spread;
+                this.SelectionViewModel.GeometryHeart_Spread = spread;
 
                 this.MethodViewModel.TLayerChangeDelta<GeometryHeartLayer>(layerType: LayerType.GeometryHeart, set: (tLayer) => tLayer.Spread = spread);
             };
             this.SpreadSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float spread = (float)value;
-                this.SelectionViewModel.GeometryHeartSpread = spread;
+                this.SelectionViewModel.GeometryHeart_Spread = spread;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryHeartLayer>
                 (
                     layerType: LayerType.GeometryHeart,
                     set: (tLayer) => tLayer.Spread = spread,
 
-                    historyTitle: "Set heart layer spread",
-                    getHistory: (tLayer) => tLayer.StartingSpread,
-                    setHistory: (tLayer, previous) => tLayer.Spread = previous
+                    type: HistoryType.LayersProperty_Set_GeometryHeartLayer_Spread,
+                    getUndo: (tLayer) => tLayer.StartingSpread,
+                    setUndo: (tLayer, previous) => tLayer.Spread = previous
                 );
             };
         }

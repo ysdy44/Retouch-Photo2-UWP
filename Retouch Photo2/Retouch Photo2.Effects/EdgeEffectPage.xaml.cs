@@ -100,13 +100,13 @@ namespace Retouch_Photo2.Effects.Models
                     effect.Edge_Amount = 0.5f;
                     effect.Edge_Radius = 0.0f;
                 },
-                historyTitle: "Set effect outline",
-                getHistory: (effect) =>
+                type: HistoryType.LayersProperty_ResetEffect_Edge,
+                getUndo: (effect) =>
                 (
                     effect.Edge_Amount,
                     effect.Edge_Radius
                 ),
-                setHistory: (effect, previous) =>
+                setUndo: (effect, previous) =>
                 {
                     effect.Edge_Amount = previous.Item1;
                     effect.Edge_Radius = previous.Item2;
@@ -137,9 +137,9 @@ namespace Retouch_Photo2.Effects.Models
             (
                 set: (effect) => effect.Edge_IsOn = isOn,
 
-                historyTitle: "Set effect edge is on",
-                getHistory: (effect) => effect.Edge_IsOn,
-                setHistory: (effect, previous) => effect.Edge_IsOn = previous
+                type: HistoryType.LayersProperty_SwitchEffect_Edge,
+                getUndo: (effect) => effect.Edge_IsOn,
+                setUndo: (effect, previous) => effect.Edge_IsOn = previous
             );
         }
 
@@ -159,9 +159,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.Edge_Amount = amount,
 
-                    historyTitle: "Set effect edge amount",
-                    getHistory: (effect) => effect.Edge_Amount,
-                    setHistory: (effect, previous) => effect.Edge_Amount = previous
+                    type: HistoryType.LayersProperty_SetEffect_Edge_Amount,
+                    getUndo: (effect) => effect.Edge_Amount,
+                    setUndo: (effect, previous) => effect.Edge_Amount = previous
                );
             };
         }
@@ -187,9 +187,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.Edge_Amount = amount,
 
-                    historyTitle: "Set effect edge amount",
-                    getHistory: (effect) => effect.StartingEdge_Amount,
-                    setHistory: (effect, previous) => effect.Edge_Amount = previous
+                    type: HistoryType.LayersProperty_SetEffect_Edge_Amount,
+                    getUndo: (effect) => effect.StartingEdge_Amount,
+                    setUndo: (effect, previous) => effect.Edge_Amount = previous
                 );
             };
         }
@@ -210,9 +210,9 @@ namespace Retouch_Photo2.Effects.Models
                (
                    set: (effect) => effect.Edge_Radius = radius,
 
-                   historyTitle: "Set effect edge radius",
-                   getHistory: (effect) => effect.Edge_Radius,
-                   setHistory: (effect, previous) => effect.Edge_Radius = previous
+                   type: HistoryType.LayersProperty_SetEffect_Edge_Radius,
+                   getUndo: (effect) => effect.Edge_Radius,
+                   setUndo: (effect, previous) => effect.Edge_Radius = previous
                );
             };
         }
@@ -238,9 +238,9 @@ namespace Retouch_Photo2.Effects.Models
                (
                    set: (effect) => effect.Edge_Radius = radius,
 
-                   historyTitle: "Set effect edge radius",
-                   getHistory: (effect) => effect.StartingEdge_Radius,
-                   setHistory: (effect, previous) => effect.Edge_Radius = previous
+                   type: HistoryType.LayersProperty_SetEffect_Edge_Radius,
+                   getUndo: (effect) => effect.StartingEdge_Radius,
+                   setUndo: (effect, previous) => effect.Edge_Radius = previous
                );
             };
         }

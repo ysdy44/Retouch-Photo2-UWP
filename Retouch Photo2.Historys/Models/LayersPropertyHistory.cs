@@ -21,10 +21,10 @@ namespace Retouch_Photo2.Historys
         /// <summary>
         /// Initializes a LayersPropertyHistory.
         /// </summary>
-        /// <param name="title"> The title. </param>  
-        public LayersPropertyHistory(string title)
+        /// <param name="type"> The type. </param>  
+        public LayersPropertyHistory(HistoryType type)
         {
-            base.Title = title;
+            base.Type = type;
         }
 
         /// <summary> Undo method. </summary>

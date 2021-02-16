@@ -9,138 +9,6 @@ namespace Retouch_Photo2.ViewModels
     {
 
 
-        /// <summary> Sets the PatternLayer. </summary>     
-        private void SetPatternLayer(ILayer layer)
-        {
-            if (layer == null) return;
-
-            switch (layer.Type)
-            {
-                case LayerType.PatternGrid:
-                    PatternGridLayer gridLayer = (PatternGridLayer)layer;
-                    this.PatternGridType = gridLayer.GridType;
-                    this.PatternGridHorizontalStep = gridLayer.HorizontalStep;
-                    this.PatternGridVerticalStep = gridLayer.VerticalStep;
-                    break;
-
-                case LayerType.PatternDiagonal:
-                    PatternDiagonalLayer diagonalLayer = (PatternDiagonalLayer)layer;
-                    this.PatternDiagonalOffset = diagonalLayer.Offset;
-                    this.PatternDiagonalHorizontalStep = diagonalLayer.HorizontalStep;
-                    break;
-
-                case LayerType.PatternSpotted:
-                    PatternSpottedLayer spottedLayer = (PatternSpottedLayer)layer;
-                    this.PatternSpottedRadius = spottedLayer.Radius;
-                    this.PatternSpottedStep = spottedLayer.Step;
-                    break;
-            }
-        }
-
-
-        #region Pattern
-
-
-        /// <summary> PatternGridLayer's Type. </summary>     
-        public PatternGridType PatternGridType
-        {
-            get => this.patternGridType;
-            set
-            {
-                if (this.patternGridType == value) return;
-                this.patternGridType = value;
-                this.OnPropertyChanged(nameof(PatternGridType));//Notify 
-            }
-        }
-        private PatternGridType patternGridType = PatternGridType.Grid;
-                
-        /// <summary> PatternGridLayer's HorizontalStep. </summary>     
-        public float PatternGridHorizontalStep
-        {
-            get => this.patternGridHorizontalStep;
-            set
-            {
-                if (this.patternGridHorizontalStep == value) return;
-                this.patternGridHorizontalStep = value;
-                this.OnPropertyChanged(nameof(PatternGridHorizontalStep));//Notify 
-            }
-        }
-        private float patternGridHorizontalStep = 30.0f;
-
-        /// <summary> PatternGridLayer's VerticalStep. </summary>     
-        public float PatternGridVerticalStep
-        {
-            get => this.patternGridVerticalStep;
-            set
-            {
-                if (this.patternGridVerticalStep == value) return;
-                this.patternGridVerticalStep = value;
-                this.OnPropertyChanged(nameof(PatternGridVerticalStep));//Notify 
-            }
-        }
-        private float patternGridVerticalStep = 30.0f;
-
-
-
-        /// <summary> PatternSpottedLayer's offset. </summary>     
-        public float PatternDiagonalOffset
-        {
-            get => this.patternDiagonalOffset;
-            set
-            {
-                if (this.patternDiagonalOffset == value) return;
-                this.patternDiagonalOffset = value;
-                this.OnPropertyChanged(nameof(PatternDiagonalOffset));//Notify 
-            }
-        }
-        private float patternDiagonalOffset = 30.0f;
-
-        /// <summary> PatternDiagonalLayer's HorizontalStep. </summary>     
-        public float PatternDiagonalHorizontalStep
-        {
-            get => this.patternDiagonalHorizontalStep;
-            set
-            {
-                if (this.patternDiagonalHorizontalStep == value) return;
-                this.patternDiagonalHorizontalStep = value;
-                this.OnPropertyChanged(nameof(PatternDiagonalHorizontalStep));//Notify 
-            }
-        }
-        private float patternDiagonalHorizontalStep = 30.0f;
-
-
-
-        /// <summary> PatternSpottedLayer's radius. </summary>     
-        public float PatternSpottedRadius
-        {
-            get => this.patternSpottedRadius;
-            set
-            {
-                if (this.patternSpottedRadius == value) return;
-                this.patternSpottedRadius = value;
-                this.OnPropertyChanged(nameof(PatternSpottedRadius));//Notify 
-            }
-        }
-        private float patternSpottedRadius = 8.0f;
-
-        /// <summary> PatternSpottedLayer's step. </summary>     
-        public float PatternSpottedStep
-        {
-            get => this.patternSpottedStep;
-            set
-            {
-                if (this.patternSpottedStep == value) return;
-                this.patternSpottedStep = value;
-                this.OnPropertyChanged(nameof(PatternSpottedStep));//Notify 
-            }
-        }
-        private float patternSpottedStep = 30.0f;
-
-
-        #endregion
-
-
-
         /// <summary> Sets the GeometryLayer. </summary>     
         private void SetGeometryLayer(ILayer layer)
         {
@@ -153,43 +21,43 @@ namespace Retouch_Photo2.ViewModels
                 case LayerType.GeometryEllipse: break;
 
                 //Geometry1
-                case LayerType.GeometryRoundRect: this.GeometryRoundRectCorner = ((GeometryRoundRectLayer)layer).Corner; break;
-                case LayerType.GeometryTriangle: this.GeometryTriangleCenter = ((GeometryTriangleLayer)layer).Center; break;
-                case LayerType.GeometryDiamond: this.GeometryDiamondMid = ((GeometryDiamondLayer)layer).Mid; break;
+                case LayerType.GeometryRoundRect: this.GeometryRoundRect_Corner = ((GeometryRoundRectLayer)layer).Corner; break;
+                case LayerType.GeometryTriangle: this.GeometryTriangle_Center = ((GeometryTriangleLayer)layer).Center; break;
+                case LayerType.GeometryDiamond: this.GeometryDiamond_Mid = ((GeometryDiamondLayer)layer).Mid; break;
 
                 //Geometry12
-                case LayerType.GeometryPentagon: this.GeometryPentagonPoints = ((GeometryPentagonLayer)layer).Points; break;
+                case LayerType.GeometryPentagon: this.GeometryPentagon_Points = ((GeometryPentagonLayer)layer).Points; break;
                 case LayerType.GeometryStar:
                     GeometryStarLayer starLayer = (GeometryStarLayer)layer;
-                    this.GeometryStarPoints = starLayer.Points;
-                    this.GeometryStarInnerRadius = starLayer.InnerRadius;
+                    this.GeometryStar_Points = starLayer.Points;
+                    this.GeometryStar_InnerRadius = starLayer.InnerRadius;
                     break;
                 case LayerType.GeometryCog:
                     GeometryCogLayer cogLayer = (GeometryCogLayer)layer;
-                    this.GeometryCogCount = cogLayer.Count;
-                    this.GeometryCogInnerRadius = cogLayer.InnerRadius;
-                    this.GeometryCogTooth = cogLayer.Tooth;
-                    this.GeometryCogNotch = cogLayer.Notch;
+                    this.GeometryCog_Count = cogLayer.Count;
+                    this.GeometryCog_InnerRadius = cogLayer.InnerRadius;
+                    this.GeometryCog_Tooth = cogLayer.Tooth;
+                    this.GeometryCog_Notch = cogLayer.Notch;
                     break;
 
                 //Geometry3
-                case LayerType.GeometryDount: this.GeometryDountHoleRadius = ((GeometryDountLayer)layer).HoleRadius; break;
-                case LayerType.GeometryPie: this.GeometryPieSweepAngle = ((GeometryPieLayer)layer).SweepAngle; break;
+                case LayerType.GeometryDount: this.GeometryDount_HoleRadius = ((GeometryDountLayer)layer).HoleRadius; break;
+                case LayerType.GeometryPie: this.GeometryPie_SweepAngle = ((GeometryPieLayer)layer).SweepAngle; break;
                 case LayerType.GeometryCookie:
                     GeometryCookieLayer cookieLayer = (GeometryCookieLayer)layer;
-                    this.GeometryCookieInnerRadius = cookieLayer.InnerRadius;
-                    this.GeometryCookieSweepAngle = cookieLayer.SweepAngle;
+                    this.GeometryCookie_InnerRadius = cookieLayer.InnerRadius;
+                    this.GeometryCookie_SweepAngle = cookieLayer.SweepAngle;
                     break;
 
                 //Geometry4
                 case LayerType.GeometryArrow:
                     GeometryArrowLayer arrowLayer = (GeometryArrowLayer)layer;
-                    this.GeometryArrowValue = arrowLayer.Value;
-                    this.GeometryArrowLeftTail = arrowLayer.LeftTail;
-                    this.GeometryArrowRightTail = arrowLayer.RightTail;
+                    this.GeometryArrow_Value = arrowLayer.Value;
+                    this.GeometryArrow_LeftTail = arrowLayer.LeftTail;
+                    this.GeometryArrow_RightTail = arrowLayer.RightTail;
                     break;
                 case LayerType.GeometryCapsule: break;
-                case LayerType.GeometryHeart: this.GeometryHeartSpread = ((GeometryHeartLayer)layer).Spread; break;
+                case LayerType.GeometryHeart: this.GeometryHeart_Spread = ((GeometryHeartLayer)layer).Spread; break;
             }
         }
 
@@ -198,45 +66,45 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> GeometryRoundRectLayer's corner. </summary>     
-        public float GeometryRoundRectCorner
+        public float GeometryRoundRect_Corner
         {
-            get => this.geometryRoundRectCorner;
+            get => this.geometryRoundRect_Corner;
             set
             {
-                if (this.geometryRoundRectCorner == value) return;
-                this.geometryRoundRectCorner = value;
-                this.OnPropertyChanged(nameof(GeometryRoundRectCorner));//Notify 
+                if (this.geometryRoundRect_Corner == value) return;
+                this.geometryRoundRect_Corner = value;
+                this.OnPropertyChanged(nameof(GeometryRoundRect_Corner));//Notify 
             }
         }
-        private float geometryRoundRectCorner = 0.12f;
+        private float geometryRoundRect_Corner = 0.12f;
 
 
         /// <summary> GeometryTriangle's center-point. </summary>     
-        public float GeometryTriangleCenter
+        public float GeometryTriangle_Center
         {
-            get => this.geometryTriangleCenter;
+            get => this.geometryTriangle_Center;
             set
             {
-                if (this.geometryTriangleCenter == value) return;
-                this.geometryTriangleCenter = value;
-                this.OnPropertyChanged(nameof(GeometryTriangleCenter));//Notify 
+                if (this.geometryTriangle_Center == value) return;
+                this.geometryTriangle_Center = value;
+                this.OnPropertyChanged(nameof(GeometryTriangle_Center));//Notify 
             }
         }
-        private float geometryTriangleCenter = 0.5f;
+        private float geometryTriangle_Center = 0.5f;
 
 
         /// <summary> GeometryDiamond's mid-point. </summary>     
-        public float GeometryDiamondMid
+        public float GeometryDiamond_Mid
         {
-            get => this.geometryDiamondMid;
+            get => this.geometryDiamond_Mid;
             set
             {
-                if (this.geometryDiamondMid == value) return;
-                this.geometryDiamondMid = value;
-                this.OnPropertyChanged(nameof(GeometryDiamondMid));//Notify 
+                if (this.geometryDiamond_Mid == value) return;
+                this.geometryDiamond_Mid = value;
+                this.OnPropertyChanged(nameof(GeometryDiamond_Mid));//Notify 
             }
         }
-        private float geometryDiamondMid = 0.5f;
+        private float geometryDiamond_Mid = 0.5f;
 
 
         #endregion
@@ -246,93 +114,93 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> GeometryPentagon's points. </summary>     
-        public int GeometryPentagonPoints
+        public int GeometryPentagon_Points
         {
-            get => this.geometryPentagonPoints;
+            get => this.geometryPentagon_Points;
             set
             {
-                if (this.geometryPentagonPoints == value) return;
-                this.geometryPentagonPoints = value;
-                this.OnPropertyChanged(nameof(GeometryPentagonPoints));//Notify 
+                if (this.geometryPentagon_Points == value) return;
+                this.geometryPentagon_Points = value;
+                this.OnPropertyChanged(nameof(GeometryPentagon_Points));//Notify 
             }
         }
-        private int geometryPentagonPoints = 5;
+        private int geometryPentagon_Points = 5;
 
 
         /// <summary> GeometryStar's points. </summary>     
-        public int GeometryStarPoints
+        public int GeometryStar_Points
         {
-            get => this.geometryStarPoints;
+            get => this.geometryStar_Points;
             set
             {
-                if (this.geometryStarPoints == value) return;
-                this.geometryStarPoints = value;
-                this.OnPropertyChanged(nameof(GeometryStarPoints));//Notify 
+                if (this.geometryStar_Points == value) return;
+                this.geometryStar_Points = value;
+                this.OnPropertyChanged(nameof(GeometryStar_Points));//Notify 
             }
         }
-        private int geometryStarPoints = 5;
+        private int geometryStar_Points = 5;
         /// <summary> GeometryStar's inner-radius. </summary>     
-        public float GeometryStarInnerRadius
+        public float GeometryStar_InnerRadius
         {
-            get => this.geometryStarInnerRadius;
+            get => this.geometryStar_InnerRadius;
             set
             {
-                if (this.geometryStarInnerRadius == value) return;
-                this.geometryStarInnerRadius = value;
-                this.OnPropertyChanged(nameof(GeometryStarInnerRadius));//Notify 
+                if (this.geometryStar_InnerRadius == value) return;
+                this.geometryStar_InnerRadius = value;
+                this.OnPropertyChanged(nameof(GeometryStar_InnerRadius));//Notify 
             }
         }
-        private float geometryStarInnerRadius = 0.4f;
+        private float geometryStar_InnerRadius = 0.4f;
 
 
         /// <summary> GeometryCog's count. </summary>     
-        public int GeometryCogCount
+        public int GeometryCog_Count
         {
-            get => this.geometryCogCount;
+            get => this.geometryCog_Count;
             set
             {
-                if (this.geometryCogCount == value) return;
-                this.geometryCogCount = value;
-                this.OnPropertyChanged(nameof(GeometryCogCount));//Notify 
+                if (this.geometryCog_Count == value) return;
+                this.geometryCog_Count = value;
+                this.OnPropertyChanged(nameof(GeometryCog_Count));//Notify 
             }
         }
-        private int geometryCogCount = 8;
+        private int geometryCog_Count = 8;
         /// <summary> GeometryCog's inner-radius. </summary>     
-        public float GeometryCogInnerRadius
+        public float GeometryCog_InnerRadius
         {
-            get => this.geometryCogInnerRadius;
+            get => this.geometryCog_InnerRadius;
             set
             {
-                if (this.geometryCogInnerRadius == value) return;
-                this.geometryCogInnerRadius = value;
-                this.OnPropertyChanged(nameof(GeometryCogInnerRadius));//Notify 
+                if (this.geometryCog_InnerRadius == value) return;
+                this.geometryCog_InnerRadius = value;
+                this.OnPropertyChanged(nameof(GeometryCog_InnerRadius));//Notify 
             }
         }
-        private float geometryCogInnerRadius = 0.7f;
+        private float geometryCog_InnerRadius = 0.7f;
         /// <summary> GeometryCog's tooth. </summary>     
-        public float GeometryCogTooth
+        public float GeometryCog_Tooth
         {
-            get => this.geometryCogTooth;
+            get => this.geometryCog_Tooth;
             set
             {
-                if (this.geometryCogTooth == value) return;
-                this.geometryCogTooth = value;
-                this.OnPropertyChanged(nameof(GeometryCogTooth));//Notify 
+                if (this.geometryCog_Tooth == value) return;
+                this.geometryCog_Tooth = value;
+                this.OnPropertyChanged(nameof(GeometryCog_Tooth));//Notify 
             }
         }
-        private float geometryCogTooth = 0.3f;
+        private float geometryCog_Tooth = 0.3f;
         /// <summary> GeometryCog's notch. </summary>     
-        public float GeometryCogNotch
+        public float GeometryCog_Notch
         {
-            get => this.geometryCogNotch;
+            get => this.geometryCog_Notch;
             set
             {
-                if (this.geometryCogNotch == value) return;
-                this.geometryCogNotch = value;
-                this.OnPropertyChanged(nameof(GeometryCogNotch));//Notify 
+                if (this.geometryCog_Notch == value) return;
+                this.geometryCog_Notch = value;
+                this.OnPropertyChanged(nameof(GeometryCog_Notch));//Notify 
             }
         }
-        private float geometryCogNotch = 0.6f;
+        private float geometryCog_Notch = 0.6f;
 
 
         #endregion
@@ -342,57 +210,57 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> GeometryPie's sweep-angle. </summary>     
-        public float GeometryPieSweepAngle
+        public float GeometryPie_SweepAngle
         {
-            get => this.geometryPieSweepAngle;
+            get => this.geometryPie_SweepAngle;
             set
             {
-                if (this.geometryPieSweepAngle == value) return;
-                this.geometryPieSweepAngle = value;
-                this.OnPropertyChanged(nameof(GeometryPieSweepAngle));//Notify 
+                if (this.geometryPie_SweepAngle == value) return;
+                this.geometryPie_SweepAngle = value;
+                this.OnPropertyChanged(nameof(GeometryPie_SweepAngle));//Notify 
             }
         }
-        private float geometryPieSweepAngle = FanKit.Math.Pi / 2f;
+        private float geometryPie_SweepAngle = FanKit.Math.Pi / 2f;
         
 
         /// <summary> GeometryDount's hole-radius. </summary>     
-        public float GeometryDountHoleRadius
+        public float GeometryDount_HoleRadius
         {
-            get => this.geometryDountHoleRadius;
+            get => this.geometryDount_HoleRadius;
             set
             {
-                if (this.geometryDountHoleRadius == value) return;
-                this.geometryDountHoleRadius = value;
-                this.OnPropertyChanged(nameof(GeometryDountHoleRadius));//Notify 
+                if (this.geometryDount_HoleRadius == value) return;
+                this.geometryDount_HoleRadius = value;
+                this.OnPropertyChanged(nameof(GeometryDount_HoleRadius));//Notify 
             }
         }
-        private float geometryDountHoleRadius = 0.5f;
+        private float geometryDount_HoleRadius = 0.5f;
 
 
         /// <summary> GeometryCookie's inner-radius. </summary>     
-        public float GeometryCookieInnerRadius
+        public float GeometryCookie_InnerRadius
         {
-            get => this.geometryCookieInnerRadius;
+            get => this.geometryCookie_InnerRadius;
             set
             {
-                if (this.geometryCookieInnerRadius == value) return;
-                this.geometryCookieInnerRadius = value;
-                this.OnPropertyChanged(nameof(GeometryCookieInnerRadius));//Notify 
+                if (this.geometryCookie_InnerRadius == value) return;
+                this.geometryCookie_InnerRadius = value;
+                this.OnPropertyChanged(nameof(GeometryCookie_InnerRadius));//Notify 
             }
         }
-        private float geometryCookieInnerRadius = 0.5f;
+        private float geometryCookie_InnerRadius = 0.5f;
         /// <summary> GeometryCookie's sweep-angle. </summary>     
-        public float GeometryCookieSweepAngle
+        public float GeometryCookie_SweepAngle
         {
-            get => this.geometryCookieSweepAngle;
+            get => this.geometryCookie_SweepAngle;
             set
             {
-                if (this.geometryCookieSweepAngle == value) return;
-                this.geometryCookieSweepAngle = value;
-                this.OnPropertyChanged(nameof(GeometryCookieSweepAngle));//Notify 
+                if (this.geometryCookie_SweepAngle == value) return;
+                this.geometryCookie_SweepAngle = value;
+                this.OnPropertyChanged(nameof(GeometryCookie_SweepAngle));//Notify 
             }
         }
-        private float geometryCookieSweepAngle = FanKit.Math.PiOver2;
+        private float geometryCookie_SweepAngle = FanKit.Math.PiOver2;
 
 
         #endregion
@@ -402,55 +270,55 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> GeometryArrow's value. </summary>     
-        public float GeometryArrowValue
+        public float GeometryArrow_Value
         {
-            get => this.geometryArrowValue;
+            get => this.geometryArrow_Value;
             set
             {
-                if (this.geometryArrowValue == value) return;
-                this.geometryArrowValue = value;
-                this.OnPropertyChanged(nameof(GeometryArrowValue));//Notify 
+                if (this.geometryArrow_Value == value) return;
+                this.geometryArrow_Value = value;
+                this.OnPropertyChanged(nameof(GeometryArrow_Value));//Notify 
             }
         }
-        private float geometryArrowValue = 0.5f;
+        private float geometryArrow_Value = 0.5f;
         /// <summary> GeometryArrow's left-tail. </summary>     
-        public GeometryArrowTailType GeometryArrowLeftTail
+        public GeometryArrowTailType GeometryArrow_LeftTail
         {
-            get => this.geometryArrowLeftTail;
+            get => this.geometryArrow_LeftTail;
             set
             {
-                if (this.geometryArrowLeftTail == value) return;
-                this.geometryArrowLeftTail = value;
-                this.OnPropertyChanged(nameof(GeometryArrowLeftTail));//Notify 
+                if (this.geometryArrow_LeftTail == value) return;
+                this.geometryArrow_LeftTail = value;
+                this.OnPropertyChanged(nameof(GeometryArrow_LeftTail));//Notify 
             }
         }
-        private GeometryArrowTailType geometryArrowLeftTail = GeometryArrowTailType.None;
+        private GeometryArrowTailType geometryArrow_LeftTail = GeometryArrowTailType.None;
         /// <summary> GeometryArrow's right-tail. </summary>     
-        public GeometryArrowTailType GeometryArrowRightTail
+        public GeometryArrowTailType GeometryArrow_RightTail
         {
-            get => this.geometryArrowRightTail;
+            get => this.geometryArrow_RightTail;
             set
             {
-                if (this.geometryArrowRightTail == value) return;
-                this.geometryArrowRightTail = value;
-                this.OnPropertyChanged(nameof(GeometryArrowRightTail));//Notify 
+                if (this.geometryArrow_RightTail == value) return;
+                this.geometryArrow_RightTail = value;
+                this.OnPropertyChanged(nameof(GeometryArrow_RightTail));//Notify 
             }
         }
-        private GeometryArrowTailType geometryArrowRightTail = GeometryArrowTailType.Arrow;
+        private GeometryArrowTailType geometryArrow_RightTail = GeometryArrowTailType.Arrow;
 
 
         /// <summary> GeometryArrow's spread. </summary>     
-        public float GeometryHeartSpread
+        public float GeometryHeart_Spread
         {
-            get => this.geometryHeartSpread;
+            get => this.geometryHeart_Spread;
             set
             {
-                if (this.geometryHeartSpread == value) return;
-                this.geometryHeartSpread = value;
-                this.OnPropertyChanged(nameof(GeometryHeartSpread));//Notify 
+                if (this.geometryHeart_Spread == value) return;
+                this.geometryHeart_Spread = value;
+                this.OnPropertyChanged(nameof(GeometryHeart_Spread));//Notify 
             }
         }
-        private float geometryHeartSpread = 0.8f;
+        private float geometryHeart_Spread = 0.8f;
 
 
         #endregion

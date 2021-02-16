@@ -227,7 +227,7 @@ namespace Retouch_Photo2.Menus.Models
                 Layerage curveLayerage = layerages.Single();
 
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add expand stroke curve layer");
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer_ExpandStroke);
                 this.ViewModel.HistoryPush(history);
 
                 //Mezzanine
@@ -246,7 +246,7 @@ namespace Retouch_Photo2.Menus.Models
             if (layerages.Count > 1)
             {
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add expand stroke curve layers");
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayers_ExpandStroke);
                 this.ViewModel.HistoryPush(history);
 
                 //Mezzanine
@@ -309,7 +309,7 @@ namespace Retouch_Photo2.Menus.Models
                     LayerBase.Instances.Add(curveLayer);
 
                     //History
-                    LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add combine curve layer");
+                    LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer_Combine);
                     this.ViewModel.HistoryPush(history);
 
                     //Mezzanine

@@ -83,9 +83,9 @@ namespace Retouch_Photo2.Tools.Models
             this.MethodViewModel.StyleChangeCompleted
             (
                 set: (style) => style.Stroke.Controller(this.HandleMode, canvasStartingPoint, canvasPoint),
-                historyTitle: "Set stroke",
-                getHistory: (style) => style.StartingStroke,
-                setHistory: (style, previous) => style.Stroke = previous.Clone()
+                type: Historys.HistoryType.LayersProperty_SetStyle_Stroke,
+                getUndo: (style) => style.StartingStroke,
+                setUndo: (style, previous) => style.Stroke = previous.Clone()
             );
         }
 
@@ -143,9 +143,9 @@ namespace Retouch_Photo2.Tools.Models
                     brush = style.Stroke;
                 },
 
-                historyTitle: "Set stroke type",
-                getHistory: (style) => style.Stroke.Clone(),
-                setHistory: (style, previous) => style.Stroke = previous.Clone()
+                type: Historys.HistoryType.LayersProperty_SetStyle_Stroke_Type,
+                getUndo: (style) => style.Stroke.Clone(),
+                setUndo: (style, previous) => style.Stroke = previous.Clone()
             );
 
             if (brush != null)
@@ -188,9 +188,9 @@ namespace Retouch_Photo2.Tools.Models
             this.MethodViewModel.StyleChanged
             (
                 set: (style, transformer) => style.Stroke.Stops = array.CloneArray(),
-                historyTitle: "Set stroke",
-                getHistory: (style) => style.Stroke.Clone(),
-                setHistory: (style, previous) => style.Stroke = previous.Clone()
+                type: Historys.HistoryType.LayersProperty_SetStyle_Stroke,
+                getUndo: (style) => style.Stroke.Clone(),
+                setUndo: (style, previous) => style.Stroke = previous.Clone()
             );
         }
 
@@ -211,9 +211,9 @@ namespace Retouch_Photo2.Tools.Models
             this.MethodViewModel.StyleChangeCompleted<IBrush>
             (
                 set: (style) => style.Stroke.Stops = array.CloneArray(),
-                historyTitle: "Set stroke",
-                getHistory: (style) => style.Stroke.Clone(),
-                setHistory: (style, previous) => style.Stroke = previous.Clone()
+                type: Historys.HistoryType.LayersProperty_SetStyle_Stroke,
+                getUndo: (style) => style.Stroke.Clone(),
+                setUndo: (style, previous) => style.Stroke = previous.Clone()
             );
         }
 
@@ -225,9 +225,9 @@ namespace Retouch_Photo2.Tools.Models
             this.MethodViewModel.StyleChanged<CanvasEdgeBehavior>
             (
                 set: (style, transformer) => style.Stroke.Extend = extend,
-                historyTitle: "Set stroke extend",
-                getHistory: (style) => style.Stroke.Extend,
-                setHistory: (style, previous) => style.Stroke.Extend = previous
+                type: Historys.HistoryType.LayersProperty_SetStyle_Stroke_Extend,
+                getUndo: (style) => style.Stroke.Extend,
+                setUndo: (style, previous) => style.Stroke.Extend = previous
             );
         }
 

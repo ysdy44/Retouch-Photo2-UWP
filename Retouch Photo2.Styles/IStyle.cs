@@ -52,8 +52,11 @@ namespace Retouch_Photo2.Styles
         CanvasStrokeStyle StrokeStyle { get; set; }
         /// <summary> The cache of <see cref="IStyle.StrokeStyle"/>. </summary>
         CanvasStrokeStyle StartingStrokeStyle { get; }
+        /// <summary> The cache of <see cref="CanvasStrokeStyle.DashOffset"/>. </summary>
+        float StartingOffset { get; set; }
         /// <summary> Cache the <see cref="IStyle.StrokeStyle"/>. </summary>
         void CacheStrokeStyle();
+        
 
         /// <summary> Gets or sets Style's transparency. </summary>
         IBrush Transparency { get; set; }

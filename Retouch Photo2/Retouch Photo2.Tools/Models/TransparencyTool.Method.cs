@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Photos;
 using System.Numerics;
 using Windows.UI;
@@ -87,9 +88,9 @@ namespace Retouch_Photo2.Tools.Models
             this.MethodViewModel.StyleChangeCompleted
             (
                 set: (style) => style.Transparency.Controller(this.HandleMode, canvasStartingPoint, canvasPoint),
-                historyTitle: "Set transparency",
-                getHistory: (style) => style.StartingTransparency,
-                setHistory: (style, previous) => style.Transparency = previous.Clone()
+                type: HistoryType.LayersProperty_SetStyle_Transparency,
+                getUndo: (style) => style.StartingTransparency,
+                setUndo: (style, previous) => style.Transparency = previous.Clone()
             );
         }
 
@@ -147,9 +148,9 @@ namespace Retouch_Photo2.Tools.Models
                     brush = style.Transparency;
                 },
 
-                historyTitle: "Set transparency type",
-                getHistory: (style) => style.Transparency.Clone(),
-                setHistory: (style, previous) => style.Transparency = previous.Clone()
+                type: HistoryType.LayersProperty_SetStyle_Transparency_Type,
+                getUndo: (style) => style.Transparency.Clone(),
+                setUndo: (style, previous) => style.Transparency = previous.Clone()
             );
 
             if (brush != null)
@@ -192,9 +193,9 @@ namespace Retouch_Photo2.Tools.Models
             this.MethodViewModel.StyleChanged
             (
                 set: (style, transformer) => style.Transparency.Stops = array.CloneArray(),
-                historyTitle: "Set transparency",
-                getHistory: (style) => style.Transparency.Clone(),
-                setHistory: (style, previous) => style.Transparency = previous.Clone()
+                type: HistoryType.LayersProperty_SetStyle_Transparency,
+                getUndo: (style) => style.Transparency.Clone(),
+                setUndo: (style, previous) => style.Transparency = previous.Clone()
             );
         }
 
@@ -215,9 +216,9 @@ namespace Retouch_Photo2.Tools.Models
             this.MethodViewModel.StyleChangeCompleted<IBrush>
             (
                 set: (style) => style.Transparency.Stops = array.CloneArray(),
-                historyTitle: "Set transparency",
-                getHistory: (style) => style.Transparency.Clone(),
-                setHistory: (style, previous) => style.Transparency = previous.Clone()
+                type: HistoryType.LayersProperty_SetStyle_Transparency,
+                getUndo: (style) => style.Transparency.Clone(),
+                setUndo: (style, previous) => style.Transparency = previous.Clone()
             );
         }
 
@@ -229,9 +230,9 @@ namespace Retouch_Photo2.Tools.Models
         //    this.MethodViewModel.StyleChanged<CanvasEdgeBehavior>
         //    (
         //       set: (style, transformer) => style.Transparency.Extend = extend,
-        //       historyTitle: "Set transparency extend",
-        //       getHistory: (style) => style.Transparency.Extend,
-        //       setHistory: (style, previous) => style.Transparency.Extend = previous
+        //       type: "Set transparency extend",
+        //       getUndo: (style) => style.Transparency.Extend,
+        //       setUndo: (style, previous) => style.Transparency.Extend = previous
         //   );
     }
 

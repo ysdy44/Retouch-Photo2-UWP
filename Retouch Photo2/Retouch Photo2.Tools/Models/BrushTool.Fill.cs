@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Photos;
 using Retouch_Photo2.Tools.Elements;
 using System.Numerics;
@@ -84,9 +85,9 @@ namespace Retouch_Photo2.Tools.Models
             this.MethodViewModel.StyleChangeCompleted
             (
                 set: (style) => style.Fill.Controller(this.HandleMode, canvasStartingPoint, canvasPoint),
-                historyTitle: "Set fill",
-                getHistory: (style) => style.StartingFill,
-                setHistory: (style, previous) => style.Fill = previous.Clone()
+                type: HistoryType.LayersProperty_SetStyle_Fill,
+                getUndo: (style) => style.StartingFill,
+                setUndo: (style, previous) => style.Fill = previous.Clone()
             );
         }
 
@@ -144,9 +145,9 @@ namespace Retouch_Photo2.Tools.Models
                     brush = style.Fill;
                 },
 
-                historyTitle: "Set fill type",
-                getHistory: (style) => style.Fill.Clone(),
-                setHistory: (style, previous) => style.Fill = previous.Clone()
+                type: HistoryType.LayersProperty_SetStyle_Fill_Type,
+                getUndo: (style) => style.Fill.Clone(),
+                setUndo: (style, previous) => style.Fill = previous.Clone()
             );
 
             if (brush != null)
@@ -189,9 +190,9 @@ namespace Retouch_Photo2.Tools.Models
             this.MethodViewModel.StyleChanged
             (
                 set: (style, transformer) => style.Fill.Stops = array.CloneArray(),
-                historyTitle: "Set fill",
-                getHistory: (style) => style.Fill.Clone(),
-                setHistory: (style, previous) => style.Fill = previous.Clone()
+                type: HistoryType.LayersProperty_SetStyle_Fill,
+                getUndo: (style) => style.Fill.Clone(),
+                setUndo: (style, previous) => style.Fill = previous.Clone()
             );
         }
 
@@ -212,9 +213,9 @@ namespace Retouch_Photo2.Tools.Models
             this.MethodViewModel.StyleChangeCompleted<IBrush>
             (
                 set: (style) => style.Fill.Stops = array.CloneArray(),
-                historyTitle: "Set fill",
-                getHistory: (style) => style.Fill.Clone(),
-                setHistory: (style, previous) => style.Fill = previous.Clone()
+                type: HistoryType.LayersProperty_SetStyle_Fill,
+                getUndo: (style) => style.Fill.Clone(),
+                setUndo: (style, previous) => style.Fill = previous.Clone()
             );
         }
 
@@ -226,9 +227,9 @@ namespace Retouch_Photo2.Tools.Models
             this.MethodViewModel.StyleChanged<CanvasEdgeBehavior>
             (
                 set: (style, transformer) => style.Fill.Extend = extend,
-                historyTitle: "Set fill extend",
-                getHistory: (style) => style.Fill.Extend,
-                setHistory: (style, previous) => style.Fill.Extend = previous
+                type: HistoryType.LayersProperty_SetStyle_Fill_Extend,
+                getUndo: (style) => style.Fill.Extend,
+                setUndo: (style, previous) => style.Fill.Extend = previous
             );
         }
 

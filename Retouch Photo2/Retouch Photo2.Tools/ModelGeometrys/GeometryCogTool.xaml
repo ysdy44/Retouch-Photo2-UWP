@@ -20,11 +20,11 @@
             <tools:TouchbarButton x:Name="CountButton">
                 <tools:TouchbarButton.Picker>
                     <hSVColorPickers:NumberPicker x:Name="CountPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                             Value="{x:Bind SelectionViewModel.GeometryCogCount, Mode=OneWay}"/>
+                             Value="{x:Bind SelectionViewModel.GeometryCog_Count, Mode=OneWay}"/>
                 </tools:TouchbarButton.Picker>
                 <tools:TouchbarButton.Slider>
                     <tools:TouchbarSlider x:Name="CountSlider" 
-                             Value="{x:Bind SelectionViewModel.GeometryCogCount, Mode=OneWay}"/>
+                             Value="{x:Bind SelectionViewModel.GeometryCog_Count, Mode=OneWay}"/>
                 </tools:TouchbarButton.Slider>
             </tools:TouchbarButton>
 
@@ -34,11 +34,11 @@
             <tools:TouchbarButton x:Name="InnerRadiusButton">
                 <tools:TouchbarButton.Picker>
                     <hSVColorPickers:NumberPicker x:Name="InnerRadiusPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                          Value="{x:Bind InnerRadiusToNumberConverter(SelectionViewModel.GeometryCogInnerRadius), Mode=OneWay}"/>
+                          Value="{x:Bind InnerRadiusToNumberConverter(SelectionViewModel.GeometryCog_InnerRadius), Mode=OneWay}"/>
                 </tools:TouchbarButton.Picker>
                 <tools:TouchbarButton.Slider>
                     <tools:TouchbarSlider x:Name="InnerRadiusSlider"
-                          Value="{x:Bind SelectionViewModel.GeometryCogInnerRadius, Mode=OneWay}" />
+                          Value="{x:Bind SelectionViewModel.GeometryCog_InnerRadius, Mode=OneWay}" />
                 </tools:TouchbarButton.Slider>
             </tools:TouchbarButton>
 
@@ -48,11 +48,11 @@
             <tools:TouchbarButton x:Name="ToothButton">
                 <tools:TouchbarButton.Picker>
                     <hSVColorPickers:NumberPicker x:Name="ToothPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                          Value="{x:Bind ToothToNumberConverter(SelectionViewModel.GeometryCogTooth), Mode=OneWay}"/>
+                          Value="{x:Bind ToothToNumberConverter(SelectionViewModel.GeometryCog_Tooth), Mode=OneWay}"/>
                 </tools:TouchbarButton.Picker>
                 <tools:TouchbarButton.Slider>
                     <tools:TouchbarSlider x:Name="ToothSlider"
-                          Value="{x:Bind SelectionViewModel.GeometryCogTooth, Mode=OneWay}" />
+                          Value="{x:Bind SelectionViewModel.GeometryCog_Tooth, Mode=OneWay}" />
                 </tools:TouchbarButton.Slider>
             </tools:TouchbarButton>
 
@@ -62,11 +62,11 @@
             <tools:TouchbarButton x:Name="NotchButton">
                 <tools:TouchbarButton.Picker>
                     <hSVColorPickers:NumberPicker x:Name="NotchPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                          Value="{x:Bind NotchToNumberConverter(SelectionViewModel.GeometryCogNotch), Mode=OneWay}"/>
+                          Value="{x:Bind NotchToNumberConverter(SelectionViewModel.GeometryCog_Notch), Mode=OneWay}"/>
                 </tools:TouchbarButton.Picker>
                 <tools:TouchbarButton.Slider>
                     <tools:TouchbarSlider x:Name="NotchSlider"
-                          Value="{x:Bind SelectionViewModel.GeometryCogNotch, Mode=OneWay}" />
+                          Value="{x:Bind SelectionViewModel.GeometryCog_Notch, Mode=OneWay}" />
                 </tools:TouchbarButton.Slider>
             </tools:TouchbarButton>
 

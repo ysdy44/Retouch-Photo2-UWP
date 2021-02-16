@@ -5,6 +5,7 @@
 // Complete:      ★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -61,8 +62,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryStarLayer(customDevice)
             {
-                Points = this.SelectionViewModel.GeometryStarPoints,
-                InnerRadius = this.SelectionViewModel.GeometryStarInnerRadius,
+                Points = this.SelectionViewModel.GeometryStar_Points,
+                InnerRadius = this.SelectionViewModel.GeometryStar_InnerRadius,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
@@ -138,16 +139,16 @@ namespace Retouch_Photo2.Tools.Models
             this.PointsPicker.ValueChanged += (sender, value) =>
             {
                 int points = (int)value;
-                this.SelectionViewModel.GeometryStarPoints = points;
+                this.SelectionViewModel.GeometryStar_Points = points;
 
                 this.MethodViewModel.TLayerChanged<int, GeometryStarLayer>
                 (
                     layerType: LayerType.GeometryStar,
                     set: (tLayer) => tLayer.Points = points,
 
-                    historyTitle: "Set star layer points",
-                    getHistory: (tLayer) => tLayer.Points,
-                    setHistory: (tLayer, previous) => tLayer.Points = previous
+                    type: HistoryType.LayersProperty_Set_GeometryStarLayer_Points,
+                    getUndo: (tLayer) => tLayer.Points,
+                    setUndo: (tLayer, previous) => tLayer.Points = previous
                 );
             };
         }
@@ -160,23 +161,23 @@ namespace Retouch_Photo2.Tools.Models
             this.PointsSlider.ValueChangeDelta += (sender, value) =>
             {
                 int points = (int)value;
-                this.SelectionViewModel.GeometryStarPoints = points;
+                this.SelectionViewModel.GeometryStar_Points = points;
 
                 this.MethodViewModel.TLayerChangeDelta<GeometryStarLayer>(layerType: LayerType.GeometryStar, set: (tLayer) => tLayer.Points = points);
             };
             this.PointsSlider.ValueChangeCompleted += (sender, value) =>
             {
                 int points = (int)value;
-                this.SelectionViewModel.GeometryStarPoints = points;
+                this.SelectionViewModel.GeometryStar_Points = points;
 
                 this.MethodViewModel.TLayerChangeCompleted<int, GeometryStarLayer>
                 (
                     layerType: LayerType.GeometryStar,
                     set: (tLayer) => tLayer.Points = points,
 
-                    historyTitle: "Set star layer points",
-                    getHistory: (tLayer) => tLayer.StartingPoints,
-                    setHistory: (tLayer, previous) => tLayer.Points = previous
+                    type: HistoryType.LayersProperty_Set_GeometryStarLayer_Points,
+                    getUndo: (tLayer) => tLayer.StartingPoints,
+                    setUndo: (tLayer, previous) => tLayer.Points = previous
                 );
             };
         }
@@ -191,16 +192,16 @@ namespace Retouch_Photo2.Tools.Models
             this.InnerRadiusPicker.ValueChanged += (sender, value) =>
             {
                 float innerRadius = (float)value / 100.0f;
-                this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
+                this.SelectionViewModel.GeometryStar_InnerRadius = innerRadius;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryStarLayer>
                 (
                     layerType: LayerType.GeometryStar,
                     set: (tLayer) => tLayer.InnerRadius = innerRadius,
 
-                    historyTitle: "Set star layer inner radius",
-                    getHistory: (tLayer) => tLayer.InnerRadius,
-                    setHistory: (tLayer, previous) => tLayer.InnerRadius = previous
+                    type: HistoryType.LayersProperty_Set_GeometryStarLayer_InnerRadius,
+                    getUndo: (tLayer) => tLayer.InnerRadius,
+                    setUndo: (tLayer, previous) => tLayer.InnerRadius = previous
                 );
             };
         }
@@ -213,23 +214,23 @@ namespace Retouch_Photo2.Tools.Models
             this.InnerRadiusSlider.ValueChangeDelta += (sender, value) =>
             {
                 float innerRadius = (float)value;
-                this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
+                this.SelectionViewModel.GeometryStar_InnerRadius = innerRadius;
 
                 this.MethodViewModel.TLayerChangeDelta<GeometryStarLayer>(layerType: LayerType.GeometryStar, set: (tLayer) => tLayer.InnerRadius = innerRadius);
             };
             this.InnerRadiusSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float innerRadius = (float)value;
-                this.SelectionViewModel.GeometryStarInnerRadius = innerRadius;
+                this.SelectionViewModel.GeometryStar_InnerRadius = innerRadius;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryStarLayer>
                 (
                     layerType: LayerType.GeometryStar,
                     set: (tLayer) => tLayer.InnerRadius = innerRadius,
 
-                    historyTitle: "Set star layer inner radius",
-                    getHistory: (tLayer) => tLayer.StartingInnerRadius,
-                    setHistory: (tLayer, previous) => tLayer.InnerRadius = previous
+                    type: HistoryType.LayersProperty_Set_GeometryStarLayer_InnerRadius,
+                    getUndo: (tLayer) => tLayer.StartingInnerRadius,
+                    setUndo: (tLayer, previous) => tLayer.InnerRadius = previous
                 );
             };
         }

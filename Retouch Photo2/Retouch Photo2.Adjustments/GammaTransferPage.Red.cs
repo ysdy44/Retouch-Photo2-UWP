@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Adjustments.Models;
+using Retouch_Photo2.Historys;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments.Pages
@@ -98,9 +99,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.RedDisable = redDisable,
 
-                    historyTitle: "Set gamma transfer adjustment red disable",
-                    getHistory: (tAdjustment) => tAdjustment.RedDisable,
-                    setHistory: (tAdjustment, previous) => tAdjustment.RedDisable = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_RedDisable,
+                    getUndo: (tAdjustment) => tAdjustment.RedDisable,
+                    setUndo: (tAdjustment, previous) => tAdjustment.RedDisable = previous
                 );
             };
         }
@@ -122,9 +123,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.RedOffset = redOffset,
 
-                    historyTitle: "Set gamma transfer adjustment red offset",
-                    getHistory: (tAdjustment) => tAdjustment.RedOffset,
-                    setHistory: (tAdjustment, previous) => tAdjustment.RedOffset = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_RedOffset,
+                    getUndo: (tAdjustment) => tAdjustment.RedOffset,
+                    setUndo: (tAdjustment, previous) => tAdjustment.RedOffset = previous
                 );
             };
         }
@@ -152,9 +153,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.RedOffset = redOffset,
 
-                    historyTitle: "Set gamma transfer adjustment red offset",
-                    getHistory: (tAdjustment) => tAdjustment.StartingRedOffset,
-                    setHistory: (tAdjustment, previous) => tAdjustment.RedOffset = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_RedOffset,
+                    getUndo: (tAdjustment) => tAdjustment.StartingRedOffset,
+                    setUndo: (tAdjustment, previous) => tAdjustment.RedOffset = previous
                 );
             };
         }
@@ -176,9 +177,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.RedExponent = redExponent,
 
-                    historyTitle: "Set gamma transfer adjustment red exponent",
-                    getHistory: (tAdjustment) => tAdjustment.RedExponent,
-                    setHistory: (tAdjustment, previous) => tAdjustment.RedExponent = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_RedExponent,
+                    getUndo: (tAdjustment) => tAdjustment.RedExponent,
+                    setUndo: (tAdjustment, previous) => tAdjustment.RedExponent = previous
                 );
             };
         }
@@ -206,9 +207,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.RedExponent = redExponent,
 
-                    historyTitle: "Set gamma transfer adjustment red exponent",
-                    getHistory: (tAdjustment) => tAdjustment.StartingRedExponent,
-                    setHistory: (tAdjustment, previous) => tAdjustment.RedExponent = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_RedExponent,
+                    getUndo: (tAdjustment) => tAdjustment.StartingRedExponent,
+                    setUndo: (tAdjustment, previous) => tAdjustment.RedExponent = previous
                 );
             };
         }
@@ -230,9 +231,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.RedAmplitude = redAmplitude,
 
-                    historyTitle: "Set gamma transfer adjustment red amplitude",
-                    getHistory: (tAdjustment) => tAdjustment.RedAmplitude,
-                    setHistory: (tAdjustment, previous) => tAdjustment.RedAmplitude = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_RedAmplitude,
+                    getUndo: (tAdjustment) => tAdjustment.RedAmplitude,
+                    setUndo: (tAdjustment, previous) => tAdjustment.RedAmplitude = previous
                 );
             };
         }
@@ -260,9 +261,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.RedAmplitude = redAmplitude,
 
-                    historyTitle: "Set gamma transfer adjustment red amplitude",
-                    getHistory: (tAdjustment) => tAdjustment.StartingRedAmplitude,
-                    setHistory: (tAdjustment, previous) => tAdjustment.RedAmplitude = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_RedAmplitude,
+                    getUndo: (tAdjustment) => tAdjustment.StartingRedAmplitude,
+                    setUndo: (tAdjustment, previous) => tAdjustment.RedAmplitude = previous
                 );
             };
         }

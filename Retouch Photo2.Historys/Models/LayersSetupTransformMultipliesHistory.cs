@@ -25,7 +25,7 @@ namespace Retouch_Photo2.Historys
         /// </summary>
         /// <param name="title"> The title. </param>  
         /// <param name="canvasTransformer"> The canvas-transformer. </param>  
-        public LayersSetupTransformMultipliesHistory(string title, CanvasTransformer canvasTransformer) : base(title)
+        public LayersSetupTransformMultipliesHistory(HistoryType type, CanvasTransformer canvasTransformer) : base(type)
         {
             this.Width = canvasTransformer.Width;
             this.Height = canvasTransformer.Height;

@@ -214,8 +214,8 @@ namespace Retouch_Photo2
                 string name = this.RenameTextBox.Text;
 
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set name");
-                
+                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetName);
+
                 //Selection
                 this.SelectionViewModel.LayerName = name;
                 this.SelectionViewModel.SetValue((layerage) =>

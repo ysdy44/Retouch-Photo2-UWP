@@ -4,6 +4,7 @@
 // Only:              
 // Complete:      ★★★
 using Retouch_Photo2.Effects.Icons;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -82,9 +83,9 @@ namespace Retouch_Photo2.Effects.Models
             (
                 set: (effect) => effect.Straighten_Angle = 0.0f,
 
-                historyTitle: "Set effect straighten",
-                getHistory: (effect) => effect.Straighten_Angle,
-                setHistory: (effect, previous) => effect.Straighten_Angle = previous
+                type: HistoryType.LayersProperty_ResetEffect_Straighten,
+                getUndo: (effect) => effect.Straighten_Angle,
+                setUndo: (effect, previous) => effect.Straighten_Angle = previous
             );
         }
         public void FollowButton(Effect effect)
@@ -110,9 +111,9 @@ namespace Retouch_Photo2.Effects.Models
             (
                 set: (effect) => effect.Straighten_IsOn = isOn,
 
-                historyTitle: "Set effect straighten is on",
-                getHistory: (effect) => effect.Straighten_IsOn,
-                setHistory: (effect, previous) => effect.Straighten_IsOn = previous
+                type: HistoryType.LayersProperty_SwitchEffect_Straighten,
+                getUndo: (effect) => effect.Straighten_IsOn,
+                setUndo: (effect, previous) => effect.Straighten_IsOn = previous
             );            
         }
 
@@ -132,9 +133,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.Straighten_Angle = radians,
 
-                    historyTitle: "Set effect straighten angle",
-                    getHistory: (effect) => effect.Straighten_Angle,
-                    setHistory: (effect, previous) => effect.Straighten_Angle = previous
+                    type: HistoryType.LayersProperty_SetEffect_Straighten_Angle,
+                    getUndo: (effect) => effect.Straighten_Angle,
+                    setUndo: (effect, previous) => effect.Straighten_Angle = previous
                );
             };
         }
@@ -160,9 +161,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.Straighten_Angle = radians,
 
-                    historyTitle: "Set effect straighten angle",
-                    getHistory: (effect) => effect.StartingStraighten_Angle,
-                    setHistory: (effect, previous) => effect.Straighten_Angle = previous
+                    type: HistoryType.LayersProperty_SetEffect_Straighten_Angle,
+                    getUndo: (effect) => effect.StartingStraighten_Angle,
+                    setUndo: (effect, previous) => effect.Straighten_Angle = previous
                );
             };
         }

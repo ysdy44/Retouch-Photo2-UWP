@@ -51,7 +51,7 @@ namespace Retouch_Photo2.Tools
             if (this.IsSnap) this.ViewModel.VectorBorderSnapInitiate(this.SelectionViewModel.GetFirstSelectedLayerage());
 
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer");
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
             this.ViewModel.HistoryPush(history);
 
             //Selection

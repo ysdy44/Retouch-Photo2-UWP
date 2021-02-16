@@ -84,9 +84,9 @@ namespace Retouch_Photo2.Effects.Models
             (
                 set: (effect) => effect.Morphology_Size = 1,
 
-                historyTitle: "Set effect morphology effect",
-                getHistory: (effect) => effect.Morphology_Size,
-                setHistory: (effect, previous) => effect.Morphology_Size = previous
+                type: HistoryType.LayersProperty_ResetEffect_Mmorphology,
+                getUndo: (effect) => effect.Morphology_Size,
+                setUndo: (effect, previous) => effect.Morphology_Size = previous
             );
         }
         public void FollowButton(Effect effect)
@@ -112,9 +112,9 @@ namespace Retouch_Photo2.Effects.Models
             (
                 set: (effect) => effect.Morphology_IsOn = isOn,
 
-                historyTitle: "Set effect morphology is on",
-                getHistory: (effect) => effect.Morphology_IsOn,
-                setHistory: (effect, previous) => effect.Morphology_IsOn = previous
+                type: HistoryType.LayersProperty_SwitchEffect_Mmorphology,
+                getUndo: (effect) => effect.Morphology_IsOn,
+                setUndo: (effect, previous) => effect.Morphology_IsOn = previous
             );            
         }
 
@@ -134,9 +134,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.Morphology_Size = size,
 
-                    historyTitle: "Set effect morphology size",
-                    getHistory: (effect) => effect.Morphology_Size,
-                    setHistory: (effect, previous) => effect.Morphology_Size = previous
+                    type: HistoryType.LayersProperty_SetEffect_Mmorphology_Size,
+                    getUndo: (effect) => effect.Morphology_Size,
+                    setUndo: (effect, previous) => effect.Morphology_Size = previous
                 );
             };
         }
@@ -162,9 +162,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.Morphology_Size = size,
 
-                    historyTitle: "Set effect morphology size",
-                    getHistory: (effect) => effect.StartingMorphology_Size,
-                    setHistory: (effect, previous) => effect.Morphology_Size = previous
+                    type: HistoryType.LayersProperty_SetEffect_Mmorphology_Size,
+                    getUndo: (effect) => effect.StartingMorphology_Size,
+                    setUndo: (effect, previous) => effect.Morphology_Size = previous
                 );
             };
         }

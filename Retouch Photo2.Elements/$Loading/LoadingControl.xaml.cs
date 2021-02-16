@@ -23,13 +23,21 @@ namespace Retouch_Photo2.Elements
             set
             {
                 this.Visibility = value == LoadingState.None ? Visibility.Collapsed : Visibility.Visible;
-                this.TextBlock.Text = this.Dictionary[value] ?? string.Empty;
+                this.TextBlock.Text = this.StringConverter(value);
                 this.state = value;
             }
         }
         private LoadingState state;
 
-        private IDictionary<LoadingState, string> Dictionary = new Dictionary<LoadingState, string>();
+
+        //@String
+        private string StringConverter(LoadingState value)
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            return resource.GetString($"$Loading_{value}");
+            //return resource.GetString($"$Loading_Loading");
+        }
 
 
         #region DependencyProperty
@@ -52,26 +60,6 @@ namespace Retouch_Photo2.Elements
         public LoadingControl()
         {
             this.InitializeComponent();
-            this.ConstructStrings();
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Dictionary.Add(LoadingState.None, null);
-
-            this.Dictionary.Add(LoadingState.Loading, resource.GetString("$Loading_Loading"));
-            this.Dictionary.Add(LoadingState.LoadFailed, resource.GetString("$Loading_LoadFailed"));
-
-            this.Dictionary.Add(LoadingState.FileCorrupt, resource.GetString("$Loading_FileCorrupt"));
-            this.Dictionary.Add(LoadingState.FileNull, resource.GetString("$Loading_FileNull"));
-
-            this.Dictionary.Add(LoadingState.Saving, resource.GetString("$Loading_Saving"));
-            this.Dictionary.Add(LoadingState.SaveSuccess, resource.GetString("$Loading_SaveSuccess"));
-            this.Dictionary.Add(LoadingState.SaveFailed, resource.GetString("$Loading_SaveFailed"));
         }
     }
 }

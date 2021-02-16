@@ -5,6 +5,7 @@
 // Complete:      ★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -49,8 +50,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new PatternDiagonalLayer(customDevice)
             {
-                HorizontalStep = this.SelectionViewModel.PatternDiagonalHorizontalStep,
-                Offset = this.SelectionViewModel.PatternDiagonalOffset,
+                HorizontalStep = this.SelectionViewModel.PatternDiagonal_HorizontalStep,
+                Offset = this.SelectionViewModel.PatternDiagonal_Offset,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandCurveStyle
             };
@@ -125,16 +126,16 @@ namespace Retouch_Photo2.Tools.Models
             this.OffsetPicker.ValueChanged += (sender, value) =>
             {
                 float offset = value;
-                this.SelectionViewModel.PatternDiagonalOffset = offset;
+                this.SelectionViewModel.PatternDiagonal_Offset = offset;
 
                 this.MethodViewModel.TLayerChanged<float, PatternDiagonalLayer>
                 (
                     layerType: LayerType.PatternDiagonal,
                     set: (tLayer) => tLayer.Offset = offset,
 
-                    historyTitle: "Set diagonal layer offset",
-                    getHistory: (tLayer) => tLayer.Offset,
-                    setHistory: (tLayer, previous) => tLayer.Offset = previous
+                    type: HistoryType.LayersProperty_Set_PatternDiagonalLayer_Offset,
+                    getUndo: (tLayer) => tLayer.Offset,
+                    setUndo: (tLayer, previous) => tLayer.Offset = previous
                 );
             };
         }
@@ -147,23 +148,23 @@ namespace Retouch_Photo2.Tools.Models
             this.OffsetSlider.ValueChangeDelta += (sender, value) =>
             {
                 float offset = (float)value;
-                this.SelectionViewModel.PatternDiagonalOffset = offset;
+                this.SelectionViewModel.PatternDiagonal_Offset = offset;
 
                 this.MethodViewModel.TLayerChangeDelta<PatternDiagonalLayer>(layerType: LayerType.PatternDiagonal, set: (tLayer) => tLayer.Offset = offset);
             };
             this.OffsetSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float offset = (float)value;
-                this.SelectionViewModel.PatternDiagonalOffset = offset;
+                this.SelectionViewModel.PatternDiagonal_Offset = offset;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, PatternDiagonalLayer>
                 (
                     layerType: LayerType.PatternDiagonal,
                     set: (tLayer) => tLayer.Offset = offset,
 
-                    historyTitle: "Set diagonal layer offset",
-                    getHistory: (tLayer) => tLayer.StartingOffset,
-                    setHistory: (tLayer, previous) => tLayer.Offset = previous
+                    type: HistoryType.LayersProperty_Set_PatternDiagonalLayer_Offset,
+                    getUndo: (tLayer) => tLayer.StartingOffset,
+                    setUndo: (tLayer, previous) => tLayer.Offset = previous
                 );
             };
         }
@@ -178,16 +179,16 @@ namespace Retouch_Photo2.Tools.Models
             this.HorizontalStepPicker.ValueChanged += (sender, value) =>
             {
                 float horizontalStep = (float)value;
-                this.SelectionViewModel.PatternDiagonalHorizontalStep = horizontalStep;
+                this.SelectionViewModel.PatternDiagonal_HorizontalStep = horizontalStep;
 
                 this.MethodViewModel.TLayerChanged<float, PatternDiagonalLayer>
                 (
                     layerType: LayerType.PatternDiagonal,
                     set: (tLayer) => tLayer.HorizontalStep = horizontalStep,
 
-                    historyTitle: "Set diagonal layer horizontal step",
-                    getHistory: (tLayer) => tLayer.HorizontalStep,
-                    setHistory: (tLayer, previous) => tLayer.HorizontalStep = previous
+                    type: HistoryType.LayersProperty_Set_PatternDiagonalLayer_HorizontalStep,
+                    getUndo: (tLayer) => tLayer.HorizontalStep,
+                    setUndo: (tLayer, previous) => tLayer.HorizontalStep = previous
                 );
             };
         }
@@ -200,23 +201,23 @@ namespace Retouch_Photo2.Tools.Models
             this.HorizontalStepSlider.ValueChangeDelta += (sender, value) =>
             {
                 float horizontalStep = (float)value;
-                this.SelectionViewModel.PatternDiagonalHorizontalStep = horizontalStep;
+                this.SelectionViewModel.PatternDiagonal_HorizontalStep = horizontalStep;
 
                 this.MethodViewModel.TLayerChangeDelta<PatternDiagonalLayer>(layerType: LayerType.PatternDiagonal, set: (tLayer) => tLayer.HorizontalStep = horizontalStep);
             };
             this.HorizontalStepSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float horizontalStep = (float)value;
-                this.SelectionViewModel.PatternDiagonalHorizontalStep = horizontalStep;
+                this.SelectionViewModel.PatternDiagonal_HorizontalStep = horizontalStep;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, PatternDiagonalLayer>
                 (
                     layerType: LayerType.PatternDiagonal,
                     set: (tLayer) => tLayer.HorizontalStep = horizontalStep,
 
-                    historyTitle: "Set diagonal layer horizontal step",
-                    getHistory: (tLayer) => tLayer.StartingHorizontalStep,
-                    setHistory: (tLayer, previous) => tLayer.HorizontalStep = previous
+                    type: HistoryType.LayersProperty_Set_PatternDiagonalLayer_HorizontalStep,
+                    getUndo: (tLayer) => tLayer.StartingHorizontalStep,
+                    setUndo: (tLayer, previous) => tLayer.HorizontalStep = previous
                 );
             };
         }

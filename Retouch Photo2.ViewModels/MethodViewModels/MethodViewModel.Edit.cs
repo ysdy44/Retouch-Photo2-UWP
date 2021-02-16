@@ -55,7 +55,7 @@ namespace Retouch_Photo2.ViewModels
             this.ClipboardEnable = this.Clipboard.CanPaste;//PasteButton
 
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Cut layers");
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_CutLayers);
             this.HistoryPush(history);
 
             LayerManager.RemoveAllSelected();//Remove
@@ -78,7 +78,7 @@ namespace Retouch_Photo2.ViewModels
                 case ListViewSelectionMode.Single:
                     {
                         //History
-                        LayeragesArrangeHistory history = new LayeragesArrangeHistory("Duplicate layer");
+                        LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_DuplicateLayer);
                         this.HistoryPush(history);
 
                         Layerage layerage = this.Clipboard.Layerage;
@@ -89,7 +89,7 @@ namespace Retouch_Photo2.ViewModels
                 case ListViewSelectionMode.Multiple:
                     {
                         //History
-                        LayeragesArrangeHistory history = new LayeragesArrangeHistory("Duplicate layers");
+                        LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_DuplicateLayers);
                         this.HistoryPush(history);
 
                         IEnumerable<Layerage> layerages = this.Clipboard.Layerages;
@@ -120,7 +120,7 @@ namespace Retouch_Photo2.ViewModels
                 case ListViewSelectionMode.Single:
                     {
                         //History
-                        LayeragesArrangeHistory history = new LayeragesArrangeHistory("Paste layers");
+                        LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_PasteLayers);
                         this.HistoryPush(history);
 
                         Layerage layerage = this.Clipboard.Layerage;
@@ -131,7 +131,7 @@ namespace Retouch_Photo2.ViewModels
                 case ListViewSelectionMode.Multiple:
                     {
                         //History
-                        LayeragesArrangeHistory history = new LayeragesArrangeHistory("Paste layers");
+                        LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_PasteLayers);
                         this.HistoryPush(history);
 
                         IEnumerable<Layerage> layerages = this.Clipboard.Layerages;
@@ -152,7 +152,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodEditClear()
         {
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Clear layers");
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_ClearLayers);
             this.HistoryPush(history);
 
             LayerManager.RemoveAllSelected();//Remove
@@ -169,7 +169,7 @@ namespace Retouch_Photo2.ViewModels
         private void _setAllIsSelected(bool isSelected)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set is selected");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
             //Selection
             foreach (Layerage child in LayerManager.RootLayerage.Children)
@@ -205,7 +205,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodSelectInvert()
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set is selected");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
             //Selection
             foreach (Layerage child in LayerManager.RootLayerage.Children)
@@ -237,7 +237,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodGroupGroup()
         {
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Group layers");
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_GroupLayers);
             this.HistoryPush(history);
 
             LayerManager.GroupAllSelectedLayers(this.CanvasDevice);
@@ -251,7 +251,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodGroupUnGroup()
         {
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("UnGroup layers");
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_UnGroupLayers);
             this.HistoryPush(history);
 
             LayerManager.UnGroupAllSelectedLayer();
@@ -265,7 +265,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodGroupRelease()
         {
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Release layers");
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_ReleaseLayers);
             this.HistoryPush(history);
 
             //Selection

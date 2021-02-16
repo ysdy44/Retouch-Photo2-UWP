@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:historys="using:Retouch_Photo2.Historys"
+    xmlns:models="using:Retouch_Photo2.Menus.Models"
     mc:Ignorable="d"                      
     MinHeight="165" 
     MaxHeight="300"
@@ -15,23 +16,23 @@
     <ListView x:Name="ListView" SelectionMode="None"
                       IsItemClickEnabled="True">
 
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="historys:IHistory">
-                        <TextBlock Text="{x:Bind Title, Mode=OneTime}"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="historys:IHistory">
+                <models:HistoryTextBlock Type="{x:Bind Type, Mode=OneTime}"/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
 
-                <ListView.ItemContainerTransitions>
-                    <TransitionCollection>
-                        <!--
+        <ListView.ItemContainerTransitions>
+            <TransitionCollection>
+                <!--
                         <AddDeleteThemeTransition />
                         <ContentThemeTransition />
                         <ReorderThemeTransition />
                         <EntranceThemeTransition IsStaggeringEnabled="False" />
                         -->
-                    </TransitionCollection>
-                </ListView.ItemContainerTransitions>
+            </TransitionCollection>
+        </ListView.ItemContainerTransitions>
 
-            </ListView>
+    </ListView>
 
 </UserControl>

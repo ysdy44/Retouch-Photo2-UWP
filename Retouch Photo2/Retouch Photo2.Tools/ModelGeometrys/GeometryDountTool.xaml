@@ -20,11 +20,11 @@
             <tools:TouchbarButton x:Name="HoleRadiusButton">
                 <tools:TouchbarButton.Picker>
                     <hSVColorPickers:NumberPicker x:Name="HoleRadiusPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                          Value="{x:Bind HoleRadiusToNumberConverter(SelectionViewModel.GeometryDountHoleRadius), Mode=OneWay}"/>
+                          Value="{x:Bind HoleRadiusToNumberConverter(SelectionViewModel.GeometryDount_HoleRadius), Mode=OneWay}"/>
                 </tools:TouchbarButton.Picker>
                 <tools:TouchbarButton.Slider>
                     <tools:TouchbarSlider x:Name="HoleRadiusSlider"
-                          Value="{x:Bind SelectionViewModel.GeometryDountHoleRadius, Mode=OneWay}" />
+                          Value="{x:Bind SelectionViewModel.GeometryDount_HoleRadius, Mode=OneWay}" />
                 </tools:TouchbarButton.Slider>
             </tools:TouchbarButton>
 

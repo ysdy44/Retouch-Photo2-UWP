@@ -84,9 +84,9 @@ namespace Retouch_Photo2.Effects.Models
             (
                 set: (effect) => effect.GaussianBlur_Radius = 0.0f,
 
-                historyTitle: "Set effect gaussian blur",
-                getHistory: (effect) => effect.GaussianBlur_Radius,
-                setHistory: (effect, previous) => effect.GaussianBlur_Radius = previous
+                type: HistoryType.LayersProperty_ResetEffect_GaussianBlur,
+                getUndo: (effect) => effect.GaussianBlur_Radius,
+                setUndo: (effect, previous) => effect.GaussianBlur_Radius = previous
             );
         }
         public void FollowButton(Effect effect)
@@ -112,9 +112,9 @@ namespace Retouch_Photo2.Effects.Models
             (
                 set: (effect) => effect.GaussianBlur_IsOn = isOn,
 
-                historyTitle: "Set effect gaussian blur is on",
-                getHistory: (effect) => effect.GaussianBlur_IsOn,
-                setHistory: (effect, previous) => effect.GaussianBlur_IsOn = previous
+                type: HistoryType.LayersProperty_SwitchEffect_GaussianBlur,
+                getUndo: (effect) => effect.GaussianBlur_IsOn,
+                setUndo: (effect, previous) => effect.GaussianBlur_IsOn = previous
             );
         }
 
@@ -133,10 +133,10 @@ namespace Retouch_Photo2.Effects.Models
                 this.MethodViewModel.EffectChanged<float>
                 (
                     set: (effect) => effect.GaussianBlur_Radius = radius,
-
-                    historyTitle: "Set effect gaussian blur amount",
-                    getHistory: (effect) => effect.GaussianBlur_Radius,
-                    setHistory: (effect, previous) => effect.GaussianBlur_Radius = previous
+          
+                    type: HistoryType.LayersProperty_SetEffect_GaussianBlur_Amount,
+                    getUndo: (effect) => effect.GaussianBlur_Radius,
+                    setUndo: (effect, previous) => effect.GaussianBlur_Radius = previous
                 );
             };
         }
@@ -162,9 +162,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.GaussianBlur_Radius = radius,
 
-                    historyTitle: "Set effect gaussian blur amount",
-                    getHistory: (effect) => effect.StartingGaussianBlur_Radius,
-                    setHistory: (effect, previous) => effect.GaussianBlur_Radius = previous
+                    type: HistoryType.LayersProperty_SetEffect_GaussianBlur_Amount,
+                    getUndo: (effect) => effect.StartingGaussianBlur_Radius,
+                    setUndo: (effect, previous) => effect.GaussianBlur_Radius = previous
                 );
             };
         }

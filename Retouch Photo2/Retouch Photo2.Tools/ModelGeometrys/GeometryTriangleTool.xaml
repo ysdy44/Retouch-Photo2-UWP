@@ -20,11 +20,11 @@
             <tools:TouchbarButton x:Name="CenterButton">
                 <tools:TouchbarButton.Picker>
                     <hSVColorPickers:NumberPicker x:Name="CenterPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                            Value="{x:Bind CenterToNumberConverter(SelectionViewModel.GeometryTriangleCenter), Mode=OneWay}"/>
+                            Value="{x:Bind CenterToNumberConverter(SelectionViewModel.GeometryTriangle_Center), Mode=OneWay}"/>
                 </tools:TouchbarButton.Picker>
                 <tools:TouchbarButton.Slider>
                     <tools:TouchbarSlider x:Name="CenterSlider" 
-                            Value="{x:Bind SelectionViewModel.GeometryTriangleCenter, Mode=OneWay}"/>
+                            Value="{x:Bind SelectionViewModel.GeometryTriangle_Center, Mode=OneWay}"/>
                 </tools:TouchbarButton.Slider>
             </tools:TouchbarButton>
 

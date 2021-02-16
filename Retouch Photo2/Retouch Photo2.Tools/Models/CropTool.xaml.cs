@@ -231,7 +231,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ResetButton.Click += (s, e) =>
             {
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set transform crop");
+                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_CropTransformer);
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -271,7 +271,7 @@ namespace Retouch_Photo2.Tools.Models
             this.FitButton.Click += (s, e) =>
             {
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Set transform crop");
+                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_CropTransformer);
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>

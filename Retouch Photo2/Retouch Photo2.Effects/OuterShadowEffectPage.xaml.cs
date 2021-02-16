@@ -147,8 +147,8 @@ namespace Retouch_Photo2.Effects.Models
                     effect.OuterShadow_Angle = FanKit.Math.PiOver4;
                     effect.OuterShadow_Color = Windows.UI.Colors.Black;
                 },
-                historyTitle: "Set effect outer shadow",
-                getHistory: (effect) =>
+                type: HistoryType.LayersProperty_ResetEffect_OuterShadow,
+                getUndo: (effect) =>
                 (
                     effect.OuterShadow_Radius,
                     effect.OuterShadow_Opacity,
@@ -156,7 +156,7 @@ namespace Retouch_Photo2.Effects.Models
                     effect.OuterShadow_Angle,
                     effect.OuterShadow_Color
                 ),
-                setHistory: (effect, previous) =>
+                setUndo: (effect, previous) =>
                 {
                     effect.OuterShadow_Radius = previous.Item1;
                     effect.OuterShadow_Opacity = previous.Item2;
@@ -193,9 +193,9 @@ namespace Retouch_Photo2.Effects.Models
             (
                 set: (effect) => effect.OuterShadow_IsOn = isOn,
 
-                historyTitle: "Set effect outer shadow is on",
-                getHistory: (effect) => effect.OuterShadow_IsOn,
-                setHistory: (effect, previous) => effect.OuterShadow_IsOn = previous
+                type: HistoryType.LayersProperty_SwitchEffect_OuterShadow,
+                getUndo: (effect) => effect.OuterShadow_IsOn,
+                setUndo: (effect, previous) => effect.OuterShadow_IsOn = previous
             );
         }
 
@@ -215,9 +215,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.OuterShadow_Radius = radius,
 
-                    historyTitle: "Set effect outer shadow radius",
-                    getHistory: (effect) => effect.OuterShadow_Radius,
-                    setHistory: (effect, previous) => effect.OuterShadow_Radius = previous
+                    type: HistoryType.LayersProperty_SetEffect_OuterShadow_Radius,
+                    getUndo: (effect) => effect.OuterShadow_Radius,
+                    setUndo: (effect, previous) => effect.OuterShadow_Radius = previous
                 );
             };
         }
@@ -243,9 +243,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.OuterShadow_Radius = radius,
 
-                    historyTitle: "Set effect outer shadow radius",
-                    getHistory: (effect) => effect.StartingOuterShadow_Radius,
-                    setHistory: (effect, previous) => effect.OuterShadow_Radius = previous
+                    type: HistoryType.LayersProperty_SetEffect_OuterShadow_Radius,
+                    getUndo: (effect) => effect.StartingOuterShadow_Radius,
+                    setUndo: (effect, previous) => effect.OuterShadow_Radius = previous
                 );
             };
         }
@@ -266,9 +266,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.OuterShadow_Opacity = (float)value,
 
-                    historyTitle: "Set effect outer shadow opacity",
-                    getHistory: (effect) => effect.OuterShadow_Opacity,
-                    setHistory: (effect, previous) => effect.OuterShadow_Opacity = previous
+                    type: HistoryType.LayersProperty_SetEffect_OuterShadow_Opacity,
+                    getUndo: (effect) => effect.OuterShadow_Opacity,
+                    setUndo: (effect, previous) => effect.OuterShadow_Opacity = previous
                 );
             };
         }
@@ -294,9 +294,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.OuterShadow_Opacity = (float)value,
 
-                    historyTitle: "Set effect outer shadow opacity",
-                    getHistory: (effect) => effect.StartingOuterShadow_Opacity,
-                    setHistory: (effect, previous) => effect.OuterShadow_Opacity = previous
+                    type: HistoryType.LayersProperty_SetEffect_OuterShadow_Opacity,
+                    getUndo: (effect) => effect.StartingOuterShadow_Opacity,
+                    setUndo: (effect, previous) => effect.OuterShadow_Opacity = previous
                 );
             };
         }
@@ -317,9 +317,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.OuterShadow_Offset = (float)value,
 
-                    historyTitle: "Set effect outer shadow offset",
-                    getHistory: (effect) => effect.OuterShadow_Offset,
-                    setHistory: (effect, previous) => effect.OuterShadow_Offset = previous
+                    type: HistoryType.LayersProperty_SetEffect_OuterShadow_Offset,
+                    getUndo: (effect) => effect.OuterShadow_Offset,
+                    setUndo: (effect, previous) => effect.OuterShadow_Offset = previous
                 );
             };
         }
@@ -345,9 +345,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.OuterShadow_Offset = offset,
 
-                    historyTitle: "Set effect outer shadow offset",
-                    getHistory: (effect) => effect.StartingOuterShadow_Offset,
-                    setHistory: (effect, previous) => effect.OuterShadow_Offset = previous
+                    type: HistoryType.LayersProperty_SetEffect_OuterShadow_Offset,
+                    getUndo: (effect) => effect.StartingOuterShadow_Offset,
+                    setUndo: (effect, previous) => effect.OuterShadow_Offset = previous
                 );
             };
         }
@@ -368,9 +368,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.OuterShadow_Angle = radians,
 
-                    historyTitle: "Set effect outer shadow angle",
-                    getHistory: (effect) => effect.OuterShadow_Angle,
-                    setHistory: (effect, previous) => effect.OuterShadow_Angle = previous
+                    type: HistoryType.LayersProperty_SetEffect_OuterShadow_Angle,
+                    getUndo: (effect) => effect.OuterShadow_Angle,
+                    setUndo: (effect, previous) => effect.OuterShadow_Angle = previous
                 );
             };
         }
@@ -396,9 +396,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.OuterShadow_Angle = radians,
 
-                    historyTitle: "Set effect outer shadow angle",
-                    getHistory: (effect) => effect.StartingOuterShadow_Angle,
-                    setHistory: (effect, previous) => effect.OuterShadow_Angle = previous
+                    type: HistoryType.LayersProperty_SetEffect_OuterShadow_Angle,
+                    getUndo: (effect) => effect.StartingOuterShadow_Angle,
+                    setUndo: (effect, previous) => effect.OuterShadow_Angle = previous
                 );
             };
         }
@@ -434,9 +434,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.OuterShadow_Color = color,
 
-                    historyTitle: "Set effect outer shadow color",
-                    getHistory: (effect) => effect.OuterShadow_Color,
-                    setHistory: (effect, previous) => effect.OuterShadow_Color = previous
+                    type: HistoryType.LayersProperty_SetEffect_OuterShadow_Color,
+                    getUndo: (effect) => effect.OuterShadow_Color,
+                    setUndo: (effect, previous) => effect.OuterShadow_Color = previous
                );
             };
         }
@@ -460,9 +460,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.OuterShadow_Color = color,
 
-                    historyTitle: "Set effect outer shadow color",
-                    getHistory: (effect) => effect.StartingOuterShadow_Color,
-                    setHistory: (effect, previous) => effect.OuterShadow_Color = previous
+                    type: HistoryType.LayersProperty_SetEffect_OuterShadow_Color,
+                    getUndo: (effect) => effect.StartingOuterShadow_Color,
+                    setUndo: (effect, previous) => effect.OuterShadow_Color = previous
                );
             };
         }

@@ -5,6 +5,7 @@
 // Complete:      ★★★★★
 using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Texts;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -345,9 +346,9 @@ namespace Retouch_Photo2.Menus.Models
             (
                 set: (textLayer) => textLayer.FontAlignment = fontAlignment,
 
-                historyTitle: "Set font alignment",
-                getHistory: (textLayer) => textLayer.FontAlignment,
-                setHistory: (textLayer, previous) => textLayer.FontAlignment = previous
+                type: HistoryType.LayersProperty_SetFontAlignment,
+                getUndo: (textLayer) => textLayer.FontAlignment,
+                setUndo: (textLayer, previous) => textLayer.FontAlignment = previous
            );
         }
 
@@ -359,9 +360,9 @@ namespace Retouch_Photo2.Menus.Models
             (
                 set: (textLayer) => textLayer.FontWeight = fontWeight,
 
-                historyTitle: "Set font weight",
-                getHistory: (textLayer) => textLayer.FontWeight,
-                setHistory: (textLayer, previous) => textLayer.FontWeight = previous
+                type: HistoryType.LayersProperty_SetFontWeight,
+                getUndo: (textLayer) => textLayer.FontWeight,
+                setUndo: (textLayer, previous) => textLayer.FontWeight = previous
            );
         }
 
@@ -373,9 +374,9 @@ namespace Retouch_Photo2.Menus.Models
             (
                 set: (textLayer) => textLayer.FontStyle = fontStyle,
 
-                historyTitle: "Set font style",
-                getHistory: (textLayer) => textLayer.FontStyle,
-                setHistory: (textLayer, previous) => textLayer.FontStyle = previous
+                type: HistoryType.LayersProperty_SetFontStyle,
+                getUndo: (textLayer) => textLayer.FontStyle,
+                setUndo: (textLayer, previous) => textLayer.FontStyle = previous
            );
         }
 
@@ -387,9 +388,9 @@ namespace Retouch_Photo2.Menus.Models
             (
                 set: (textLayer) => textLayer.FontFamily = fontFamily,
 
-                historyTitle: "Set font family",
-                getHistory: (textLayer) => textLayer.FontFamily,
-                setHistory: (textLayer, previous) => textLayer.FontFamily = previous
+                type: HistoryType.LayersProperty_SetFontFamily,
+                getUndo: (textLayer) => textLayer.FontFamily,
+                setUndo: (textLayer, previous) => textLayer.FontFamily = previous
            );
         }
 
@@ -401,9 +402,9 @@ namespace Retouch_Photo2.Menus.Models
             (
                 set: (textLayer) => textLayer.FontSize = fontSize,
 
-                historyTitle: "Set font size",
-                getHistory: (textLayer) => textLayer.FontSize,
-                setHistory: (textLayer, previous) => textLayer.FontSize = previous
+                type: HistoryType.LayersProperty_SetFontSize,
+                getUndo: (textLayer) => textLayer.FontSize,
+                setUndo: (textLayer, previous) => textLayer.FontSize = previous
            );
 
             //Refactoring

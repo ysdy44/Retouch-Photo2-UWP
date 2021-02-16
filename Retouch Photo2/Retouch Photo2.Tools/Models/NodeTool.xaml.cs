@@ -178,7 +178,7 @@ namespace Retouch_Photo2.Tools.Models
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set nodes is checked");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_MoveNode_IsChecked);
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
@@ -336,7 +336,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 {
                     //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Remove nodes");
+                    LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_RemoveNodes);
 
                     //Selection
                     this.SelectionViewModel.SetValue((layerage) =>
@@ -398,7 +398,7 @@ namespace Retouch_Photo2.Tools.Models
                 if (removeLayerage.Count != 0)
                 {
                     //History
-                    LayeragesArrangeHistory history = new LayeragesArrangeHistory("Remove layers");
+                    LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_RemoveLayers);
                     this.ViewModel.HistoryPush(history);
 
                     foreach (Layerage remove in removeLayerage)
@@ -418,7 +418,7 @@ namespace Retouch_Photo2.Tools.Models
             this.InsertButton.Click += (s, e) =>
             {
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Insert nodes");
+                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_InsertNodes);
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -463,8 +463,8 @@ namespace Retouch_Photo2.Tools.Models
             this.SharpButton.Click += (s, e) =>
             {
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Sharp nodes");
-
+                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_SharpNodes);
+     
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -508,8 +508,8 @@ namespace Retouch_Photo2.Tools.Models
             this.SmoothButton.Click += (s, e) =>
             {
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Smooth nodes");
-
+                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_SmoothNodes);
+           
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {

@@ -172,7 +172,7 @@ namespace Retouch_Photo2.Tools.Models
         private void CreateLayer(Vector2 canvasStartingPoint, Vector2 canvasPoint)
         {
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer");
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
             this.ViewModel.HistoryPush(history);
 
 

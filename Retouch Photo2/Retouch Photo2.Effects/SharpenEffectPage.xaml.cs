@@ -4,6 +4,7 @@
 // Only:              
 // Complete:      ★★★
 using Retouch_Photo2.Effects.Icons;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -82,9 +83,9 @@ namespace Retouch_Photo2.Effects.Models
             (
                 set: (effect) => effect.Sharpen_Amount = 0.0f,
 
-                historyTitle: "Set effect sharpen",
-                getHistory: (effect) => effect.Sharpen_Amount,
-                setHistory: (effect, previous) => effect.Sharpen_Amount = previous
+                type: HistoryType.LayersProperty_ResetEffect_Sharpen,
+                getUndo: (effect) => effect.Sharpen_Amount,
+                setUndo: (effect, previous) => effect.Sharpen_Amount = previous
             );
         }
         public void FollowButton(Effect effect)
@@ -110,9 +111,9 @@ namespace Retouch_Photo2.Effects.Models
             (
                 set: (effect) => effect.Straighten_IsOn = isOn,
 
-                historyTitle: "Set effect sharpen is on",
-                getHistory: (effect) => effect.Sharpen_IsOn,
-                setHistory: (effect, previous) => effect.Sharpen_IsOn = previous
+                type: HistoryType.LayersProperty_SwitchEffect_Sharpen,
+                getUndo: (effect) => effect.Sharpen_IsOn,
+                setUndo: (effect, previous) => effect.Sharpen_IsOn = previous
             );
         }
 
@@ -132,9 +133,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.Sharpen_Amount = amount,
 
-                    historyTitle: "Set effect sharpen amount",
-                    getHistory: (effect) => effect.Sharpen_Amount,
-                    setHistory: (effect, previous) => effect.Sharpen_Amount = previous
+                    type: HistoryType.LayersProperty_SetEffect_Sharpen_Amount,
+                    getUndo: (effect) => effect.Sharpen_Amount,
+                    setUndo: (effect, previous) => effect.Sharpen_Amount = previous
                 );
             };
         }
@@ -160,9 +161,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.Sharpen_Amount = amount,
 
-                    historyTitle: "Set effect sharpen amount",
-                    getHistory: (effect) => effect.StartingSharpen_Amount,
-                    setHistory: (effect, previous) => effect.Sharpen_Amount = previous
+                    type: HistoryType.LayersProperty_SetEffect_Sharpen_Amount,
+                    getUndo: (effect) => effect.StartingSharpen_Amount,
+                    setUndo: (effect, previous) => effect.Sharpen_Amount = previous
                 );
             };
         }

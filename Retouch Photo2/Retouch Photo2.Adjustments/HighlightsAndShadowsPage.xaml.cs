@@ -138,7 +138,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                 if (layer.Filter.Adjustments[this.Index] is HighlightsAndShadowsAdjustment adjustment)
                 {
                     //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set highlights and shadows adjustment");
+                    LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_ResetAdjustment_HighlightsAndShadows);
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                     var previous1 = adjustment.Shadows;
@@ -219,9 +219,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Shadows = shadows,
 
-                    historyTitle: "Set highlights and shadows adjustment shadows",
-                    getHistory: (tAdjustment) => tAdjustment.Shadows,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Shadows = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_HighlightsAndShadows_Shadows,
+                    getUndo: (tAdjustment) => tAdjustment.Shadows,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Shadows = previous
                 );
             };
         }
@@ -249,9 +249,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Shadows = shadows,
 
-                    historyTitle: "Set highlights and shadows adjustment shadows",
-                    getHistory: (tAdjustment) => tAdjustment.StartingShadows,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Shadows = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_HighlightsAndShadows_Shadows,
+                    getUndo: (tAdjustment) => tAdjustment.StartingShadows,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Shadows = previous
                 );
             };
         }
@@ -273,9 +273,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Highlights = highlights,
 
-                    historyTitle: "Set highlights and shadows adjustment highlights",
-                    getHistory: (tAdjustment) => tAdjustment.Highlights,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Highlights = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_HighlightsAndShadows_Highlights,
+                    getUndo: (tAdjustment) => tAdjustment.Highlights,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Highlights = previous
                 );
             };
         }
@@ -303,9 +303,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Highlights = highlights,
 
-                    historyTitle: "Set highlights and shadows adjustment highlights",
-                    getHistory: (tAdjustment) => tAdjustment.StartingHighlights,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Highlights = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_HighlightsAndShadows_Highlights,
+                    getUndo: (tAdjustment) => tAdjustment.StartingHighlights,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Highlights = previous
                 );
             };
         }
@@ -327,9 +327,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Clarity = clarity,
 
-                    historyTitle: "Set highlights and shadows adjustmentclarity",
-                    getHistory: (tAdjustment) => tAdjustment.Clarity,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Clarity = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_HighlightsAndShadows_Clarity,
+                    getUndo: (tAdjustment) => tAdjustment.Clarity,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Clarity = previous
                 );
             };
         }
@@ -357,9 +357,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Clarity = clarity,
 
-                    historyTitle: "Set highlights and shadows adjustmentclarity",
-                    getHistory: (tAdjustment) => tAdjustment.StartingClarity,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Clarity = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_HighlightsAndShadows_Clarity,
+                    getUndo: (tAdjustment) => tAdjustment.StartingClarity,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Clarity = previous
                 );
             };
         }
@@ -381,9 +381,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.MaskBlurAmount = maskBlurAmount,
 
-                    historyTitle: "Set highlights and shadows adjustment mask blur amount",
-                    getHistory: (tAdjustment) => tAdjustment.MaskBlurAmount,
-                    setHistory: (tAdjustment, previous) => tAdjustment.MaskBlurAmount = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_HighlightsAndShadows_MaskBlurAmount,
+                    getUndo: (tAdjustment) => tAdjustment.MaskBlurAmount,
+                    setUndo: (tAdjustment, previous) => tAdjustment.MaskBlurAmount = previous
                 );
             };
         }
@@ -411,9 +411,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.MaskBlurAmount = maskBlurAmount,
 
-                    historyTitle: "Set highlights and shadows adjustment mask blur amount",
-                    getHistory: (tAdjustment) => tAdjustment.StartingMaskBlurAmount,
-                    setHistory: (tAdjustment, previous) => tAdjustment.MaskBlurAmount = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_HighlightsAndShadows_MaskBlurAmount,
+                    getUndo: (tAdjustment) => tAdjustment.StartingMaskBlurAmount,
+                    setUndo: (tAdjustment, previous) => tAdjustment.MaskBlurAmount = previous
                 );
             };
         }

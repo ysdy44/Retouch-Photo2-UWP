@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Tools.Models
             firstLayer.Transform.CropTransformer = firstLayer.Transform.Transformer;
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set transform is crop");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_IsCrop);
 
             //History
             var previous = firstLayer.Transform.IsCrop;
@@ -98,7 +98,7 @@ namespace Retouch_Photo2.Tools.Models
             ILayer layer = this.Layerage.Self;
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set transform crop");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_CropTransformer);
 
             //History
             var previous = layer.Transform.StartingCropTransformer;

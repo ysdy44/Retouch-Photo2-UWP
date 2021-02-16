@@ -10,7 +10,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodSelectedNone()
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set select mode");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
             //Selection
             this.SetValue((layerage) =>
@@ -43,7 +43,7 @@ namespace Retouch_Photo2.ViewModels
             ILayer selectedLayer = selectedLayerage.Self;
 
             //History 
-            LayersPropertyHistory history = new LayersPropertyHistory("Set is selected");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
             var previous = selectedLayer.IsSelected;
             history.UndoAction += () =>
@@ -69,7 +69,7 @@ namespace Retouch_Photo2.ViewModels
             ILayer selectedLayer = selectedLayerage.Self;
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set select mode");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
             if (selectedLayer.IsSelected == false)
             {
@@ -116,7 +116,7 @@ namespace Retouch_Photo2.ViewModels
             ILayer selectedLayer = selectedLayerage.Self;
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set select mode");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
             if (selectedLayer.IsSelected == false)
             {
@@ -143,7 +143,7 @@ namespace Retouch_Photo2.ViewModels
             ILayer selectedLayer = selectedLayerage.Self;
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set select mode");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
             if (selectedLayerage.Self.IsSelected == true)
             {
@@ -171,7 +171,7 @@ namespace Retouch_Photo2.ViewModels
         ILayer selectedLayer = selectedLayerage.Self;
 
         //History
-        LayersPropertyHistory history = new LayersPropertyHistory("Set select mode");
+        LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
 
         //Selection
         this.SetValue((layerage) =>

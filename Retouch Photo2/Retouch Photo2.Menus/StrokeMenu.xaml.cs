@@ -5,6 +5,7 @@
 // Complete:      ★★★★★
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -165,7 +166,7 @@ namespace Retouch_Photo2.Menus.Models
             this.DashSegmented.DashChanged += (s, dash) =>
             {
                 CanvasDashStyle strokeStyleDash = dash;
-                this.SelectionViewModel.StrokeStyleDash = strokeStyleDash;
+                this.SelectionViewModel.StrokeStyle_Dash = strokeStyleDash;
 
                 this.MethodViewModel.ILayerChanged<CanvasDashStyle>
                 (
@@ -175,9 +176,9 @@ namespace Retouch_Photo2.Menus.Models
                         this.SelectionViewModel.StandStyleLayer = layer;
                     },
 
-                    historyTitle: "Set stroke style dash",
-                    getHistory: (layer) => layer.Style.StrokeStyle.DashStyle,
-                    setHistory: (layer, previous) => layer.Style.StrokeStyle.DashStyle = previous
+                    type: HistoryType.LayersProperty_SetStyle_StrokeStyle_Dash,
+                    getUndo: (layer) => layer.Style.StrokeStyle.DashStyle,
+                    setUndo: (layer, previous) => layer.Style.StrokeStyle.DashStyle = previous
                 );
             };
         }
@@ -202,9 +203,9 @@ namespace Retouch_Photo2.Menus.Models
                         this.SelectionViewModel.StandStyleLayer = layer;
                     },
 
-                    historyTitle: "Set opacity",
-                    getHistory: (layer) => layer.Style.StrokeWidth,
-                    setHistory: (layer, previous) => layer.Style.StrokeWidth = previous
+                    type: HistoryType.LayersProperty_SetStyle_StrokeWidth,
+                    getUndo: (layer) => layer.Style.StrokeWidth,
+                    setUndo: (layer, previous) => layer.Style.StrokeWidth = previous
                 );
             };
         }
@@ -234,9 +235,9 @@ namespace Retouch_Photo2.Menus.Models
                         this.SelectionViewModel.StandStyleLayer = layer;
                     },
 
-                    historyTitle: "Set stroke width",
-                    getHistory: (layer) => layer.Style.StartingStrokeWidth,
-                    setHistory: (layer, previous) => layer.Style.StrokeWidth = previous
+                    type: HistoryType.LayersProperty_SetStyle_StrokeWidth,
+                    getUndo: (layer) => layer.Style.StartingStrokeWidth,
+                    setUndo: (layer, previous) => layer.Style.StrokeWidth = previous
                 );
             };
         }
@@ -248,7 +249,7 @@ namespace Retouch_Photo2.Menus.Models
             this.CapSegmented.CapChanged += (s, cap) =>
             {
                 CanvasCapStyle strokeStyleCap = cap;
-                this.SelectionViewModel.StrokeStyleCap = strokeStyleCap;
+                this.SelectionViewModel.StrokeStyle_Cap = strokeStyleCap;
 
                 this.MethodViewModel.ILayerChanged<CanvasCapStyle>
                 (
@@ -260,9 +261,9 @@ namespace Retouch_Photo2.Menus.Models
                         this.SelectionViewModel.StandStyleLayer = layer;
                     },
 
-                    historyTitle: "Set stroke style cap",
-                    getHistory: (layer) => layer.Style.StrokeStyle.DashCap,
-                    setHistory: (layer, previous) => layer.Style.StrokeStyle.DashCap = previous
+                    type: HistoryType.LayersProperty_SetStyle_StrokeStyle_Cap,
+                    getUndo: (layer) => layer.Style.StrokeStyle.DashCap,
+                    setUndo: (layer, previous) => layer.Style.StrokeStyle.DashCap = previous
                 );
             };
         }
@@ -274,7 +275,7 @@ namespace Retouch_Photo2.Menus.Models
             this.JoinSegmented.JoinChanged += (s, join) =>
             {
                 CanvasLineJoin strokeStyleJoin = join;
-                this.SelectionViewModel.StrokeStyleJoin = strokeStyleJoin;
+                this.SelectionViewModel.StrokeStyle_Join = strokeStyleJoin;
 
                 this.MethodViewModel.ILayerChanged<CanvasLineJoin>
                 (
@@ -284,9 +285,9 @@ namespace Retouch_Photo2.Menus.Models
                         this.SelectionViewModel.StandStyleLayer = layer;
                     },
 
-                    historyTitle: "Set stroke style join",
-                    getHistory: (layer) => layer.Style.StrokeStyle.LineJoin,
-                    setHistory: (layer, previous) => layer.Style.StrokeStyle.LineJoin = previous
+                    type: HistoryType.LayersProperty_SetStyle_StrokeStyle_Join,
+                    getUndo: (layer) => layer.Style.StrokeStyle.LineJoin,
+                    setUndo: (layer, previous) => layer.Style.StrokeStyle.LineJoin = previous
                 );
             };
         }
@@ -301,7 +302,7 @@ namespace Retouch_Photo2.Menus.Models
             this.OffsetPicker.ValueChanged += (s, value) =>
             {
                 float strokeOffset = (float)value / 10.0f;
-                this.SelectionViewModel.StrokeStyleOffset = strokeOffset;
+                this.SelectionViewModel.StrokeStyle_Offset = strokeOffset;
 
                 this.MethodViewModel.ILayerChanged<float>
                 (
@@ -311,9 +312,9 @@ namespace Retouch_Photo2.Menus.Models
                         this.SelectionViewModel.StandStyleLayer = layer;
                     },
 
-                    historyTitle: "Set stroke style offset",
-                    getHistory: (layer) => layer.Style.StrokeStyle.DashOffset,
-                    setHistory: (layer, previous) => layer.Style.StrokeStyle.DashOffset = previous
+                    type: HistoryType.LayersProperty_SetStyle_StrokeStyle_Offset,
+                    getUndo: (layer) => layer.Style.StrokeStyle.DashOffset,
+                    setUndo: (layer, previous) => layer.Style.StrokeStyle.DashOffset = previous
                 );
             };
         }
@@ -326,16 +327,16 @@ namespace Retouch_Photo2.Menus.Models
             this.OffsetSlider.ValueChangeDelta += (s, value) =>
             {
                 float strokeOffset = (float)value;
-                this.SelectionViewModel.StrokeStyleOffset = strokeOffset;
+                this.SelectionViewModel.StrokeStyle_Offset = strokeOffset;
 
                 this.MethodViewModel.ILayerChangeDelta(set: (layer) => layer.Style.StrokeStyle.DashOffset = strokeOffset);
             };
             this.OffsetSlider.ValueChangeCompleted += (s, value) =>
             {
                 float strokeOffset = (float)value;
-                this.SelectionViewModel.StrokeStyleOffset = strokeOffset;
+                this.SelectionViewModel.StrokeStyle_Offset = strokeOffset;
 
-                this.MethodViewModel.ILayerChangeCompleted<CanvasStrokeStyle>
+                this.MethodViewModel.ILayerChangeCompleted<float>
                 (
                     set: (layer) =>
                     {
@@ -343,9 +344,9 @@ namespace Retouch_Photo2.Menus.Models
                         this.SelectionViewModel.StandStyleLayer = layer;
                     },
 
-                    historyTitle: "Set stroke width",
-                    getHistory: (layer) => layer.Style.StartingStrokeStyle,
-                    setHistory: (layer, previous) => layer.Style.StrokeStyle = previous
+                    type: HistoryType.LayersProperty_SetStyle_StrokeStyle_Offset,
+                    getUndo: (layer) => layer.Style.StartingOffset,
+                    setUndo: (layer, previous) => layer.Style.StrokeStyle.DashOffset = previous
                 );
             };
         }
@@ -363,9 +364,9 @@ namespace Retouch_Photo2.Menus.Models
                 (
                     set: (layer) => layer.Style.IsFollowTransform = isFollowTransform,
 
-                    historyTitle: "Set style is follow transform",
-                    getHistory: (layer) => layer.Style.IsFollowTransform,
-                    setHistory: (layer, previous) => layer.Style.IsFollowTransform = previous
+                    type:  HistoryType.LayersProperty_SetStyle_IsFollowTransform,
+                    getUndo: (layer) => layer.Style.IsFollowTransform,
+                    setUndo: (layer, previous) => layer.Style.IsFollowTransform = previous
                 );
             };
         }
@@ -383,9 +384,9 @@ namespace Retouch_Photo2.Menus.Models
                 (
                     set: (layer) => layer.Style.IsStrokeBehindFill = IsStrokeBehindFill,
 
-                    historyTitle: "Set style is stroke behind fill",
-                    getHistory: (layer) => layer.Style.IsStrokeBehindFill,
-                    setHistory: (layer, previous) => layer.Style.IsStrokeBehindFill = previous
+                    type: HistoryType.LayersProperty_SetStyle_IsStrokeBehindFill,
+                    getUndo: (layer) => layer.Style.IsStrokeBehindFill,
+                    setUndo: (layer, previous) => layer.Style.IsStrokeBehindFill = previous
                 );
             };
         }
@@ -403,9 +404,9 @@ namespace Retouch_Photo2.Menus.Models
                 (
                     set: (layer) => layer.Style.IsStrokeWidthFollowScale = IsStrokeWidthFollowScale,
 
-                    historyTitle: "Set style is follow transform",
-                    getHistory: (layer) => layer.Style.IsStrokeWidthFollowScale,
-                    setHistory: (layer, previous) => layer.Style.IsStrokeWidthFollowScale = previous
+                    type: HistoryType.LayersProperty_SetStyle_IsStrokeWidthFollowScale,
+                    getUndo: (layer) => layer.Style.IsStrokeWidthFollowScale,
+                    setUndo: (layer, previous) => layer.Style.IsStrokeWidthFollowScale = previous
                 );
             };
         }

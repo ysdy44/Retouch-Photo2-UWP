@@ -156,7 +156,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                 if (layer.Filter.Adjustments[this.Index] is GammaTransferAdjustment adjustment)
                 {
                     //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set gamma transfer adjustment");
+                    LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_ResetAdjustment_GammaTransfer);
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                     var previousAlpha1 = adjustment.AlphaDisable;

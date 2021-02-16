@@ -54,6 +54,8 @@ namespace Retouch_Photo2.Styles
         public CanvasStrokeStyle StrokeStyle { get; set; } = new CanvasStrokeStyle();
         /// <summary> The cache of <see cref="IStyle.StrokeStyle"/>. </summary>
         public CanvasStrokeStyle StartingStrokeStyle { get; private set; }
+        /// <summary> The cache of <see cref="CanvasStrokeStyle.DashOffset"/>. </summary>
+        public float StartingOffset { get; set; }
         /// <summary> Cache the <see cref="IStyle.StrokeStyle"/>. </summary>
         public void CacheStrokeStyle() => this.StartingStrokeStyle = this.StrokeStyle.Clone();
                

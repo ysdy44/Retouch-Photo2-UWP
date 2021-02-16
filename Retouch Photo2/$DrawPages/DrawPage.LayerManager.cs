@@ -45,15 +45,15 @@ namespace Retouch_Photo2
                         (
                             set: (layer) => layer.Visibility = visibility,
 
-                            historyTitle: "Set visibility",
-                            getHistory: (layer) => layer.Visibility,
-                            setHistory: (layer, previous) => layer.Visibility = previous
+                            type: HistoryType.LayersProperty_SetVisibility,
+                            getUndo: (layer) => layer.Visibility,
+                            setUndo: (layer, previous) => layer.Visibility = previous
                         );
                     }
                     else
                     {
                         //History
-                        LayersPropertyHistory history = new LayersPropertyHistory("Set visibility");
+                        LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetVisibility);
 
                         //Selection
                         ILayer layer = layer2;
@@ -133,7 +133,7 @@ namespace Retouch_Photo2
                 LayerManager.DragItemsCompleted += () =>
                 {
                     //History
-                    LayeragesArrangeHistory history = new LayeragesArrangeHistory("Layers arrange");
+                    LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
                     this.ViewModel.HistoryPush(history);
 
                     LayerManager.DragComplete(this.DragDestinationLayerage, this.DragSourceLayerage, this.DragLayerOverlayMode, this.DragLayerIsSelected);

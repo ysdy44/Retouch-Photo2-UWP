@@ -100,13 +100,13 @@ namespace Retouch_Photo2.Effects.Models
                     effect.Emboss_Radius = 1.0f;
                     effect.Emboss_Angle = 0.0f;
                 },
-                historyTitle: "Set effect emboss",
-                getHistory: (effect) =>
+                type: HistoryType.LayersProperty_ResetEffect_Emboss,
+                getUndo: (effect) =>
                 (
                     effect.Emboss_Radius,
                     effect.Emboss_Angle
                 ),
-                setHistory: (effect, previous) =>
+                setUndo: (effect, previous) =>
                 {
                     effect.Emboss_Radius = previous.Item1;
                     effect.Emboss_Angle = previous.Item2;
@@ -137,9 +137,9 @@ namespace Retouch_Photo2.Effects.Models
             (
                 set: (effect) => effect.Emboss_IsOn = isOn,
 
-                historyTitle: "Set effect emboss is on",
-                getHistory: (effect) => effect.Emboss_IsOn,
-                setHistory: (effect, previous) => effect.Emboss_IsOn = previous
+                type: HistoryType.LayersProperty_SwitchEffect_Emboss,
+                getUndo: (effect) => effect.Emboss_IsOn,
+                setUndo: (effect, previous) => effect.Emboss_IsOn = previous
             );
         }
 
@@ -159,9 +159,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.Emboss_Radius = (float)value,
 
-                    historyTitle: "Set effect emboss radius",
-                    getHistory: (effect) => effect.Emboss_Radius,
-                    setHistory: (effect, previous) => effect.Emboss_Radius = previous
+                    type: HistoryType.LayersProperty_SetEffect_Emboss_Radius,
+                    getUndo: (effect) => effect.Emboss_Radius,
+                    setUndo: (effect, previous) => effect.Emboss_Radius = previous
                 );
             };
         }
@@ -187,9 +187,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.Emboss_Radius = (float)value,
 
-                    historyTitle: "Set effect emboss radius",
-                    getHistory: (effect) => effect.StartingEmboss_Radius,
-                    setHistory: (effect, previous) => effect.Emboss_Radius = previous
+                    type: HistoryType.LayersProperty_SetEffect_Emboss_Radius,
+                    getUndo: (effect) => effect.StartingEmboss_Radius,
+                    setUndo: (effect, previous) => effect.Emboss_Radius = previous
                 );
             };
         }
@@ -210,9 +210,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.Emboss_Angle = (float)value,
 
-                    historyTitle: "Set effect emboss angle",
-                    getHistory: (effect) => effect.Emboss_Angle,
-                    setHistory: (effect, previous) => effect.Emboss_Angle = previous
+                    type: HistoryType.LayersProperty_SetEffect_Emboss_Angle,
+                    getUndo: (effect) => effect.Emboss_Angle,
+                    setUndo: (effect, previous) => effect.Emboss_Angle = previous
                 );
             };
         }
@@ -238,9 +238,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.Emboss_Angle = (float)value,
 
-                    historyTitle: "Set effect emboss angle",
-                    getHistory: (effect) => effect.StartingEmboss_Angle,
-                    setHistory: (effect, previous) => effect.Emboss_Angle = previous
+                    type: HistoryType.LayersProperty_SetEffect_Emboss_Angle,
+                    getUndo: (effect) => effect.StartingEmboss_Angle,
+                    setUndo: (effect, previous) => effect.Emboss_Angle = previous
                 );
             };
         }

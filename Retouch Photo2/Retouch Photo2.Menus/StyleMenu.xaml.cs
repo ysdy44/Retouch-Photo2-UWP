@@ -5,6 +5,7 @@
 // Complete:      ★★★★★
 using FanKit.Transformers;
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Styles;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
@@ -123,9 +124,9 @@ namespace Retouch_Photo2.Menus.Models
                             this.SelectionViewModel.StandStyleLayer = layer;
                         },
 
-                        historyTitle: "Set style",
-                        getHistory: (layer) => layer.Style,
-                        setHistory: (layer, previous) => layer.Style = previous.Clone()
+                        type: HistoryType.LayersProperty_SetStyle,
+                        getUndo: (layer) => layer.Style,
+                        setUndo: (layer, previous) => layer.Style = previous.Clone()
                     );
 
                     Retouch_Photo2.Styles.IStyle style = item.Clone();

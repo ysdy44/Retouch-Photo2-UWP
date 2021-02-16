@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Adjustments.Models;
+using Retouch_Photo2.Historys;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Adjustments.Pages
@@ -98,9 +99,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.AlphaDisable = alphaDisable,
 
-                    historyTitle: "Set gamma transfer adjustment alpha disable",
-                    getHistory: (tAdjustment) => tAdjustment.AlphaDisable,
-                    setHistory: (tAdjustment, previous) => tAdjustment.AlphaDisable = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_AlphaDisable,
+                    getUndo: (tAdjustment) => tAdjustment.AlphaDisable,
+                    setUndo: (tAdjustment, previous) => tAdjustment.AlphaDisable = previous
                 );
             };
         }
@@ -122,9 +123,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.AlphaOffset = alphaOffset,
 
-                    historyTitle: "Set gamma transfer adjustment alpha offset",
-                    getHistory: (tAdjustment) => tAdjustment.AlphaOffset,
-                    setHistory: (tAdjustment, previous) => tAdjustment.AlphaOffset = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_AlphaOffset,
+                    getUndo: (tAdjustment) => tAdjustment.AlphaOffset,
+                    setUndo: (tAdjustment, previous) => tAdjustment.AlphaOffset = previous
                 );
             };
         }
@@ -152,9 +153,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.AlphaOffset = alphaOffset,
 
-                    historyTitle: "Set gamma transfer adjustment alpha offset",
-                    getHistory: (tAdjustment) => tAdjustment.StartingAlphaOffset,
-                    setHistory: (tAdjustment, previous) => tAdjustment.AlphaOffset = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_AlphaOffset,
+                    getUndo: (tAdjustment) => tAdjustment.StartingAlphaOffset,
+                    setUndo: (tAdjustment, previous) => tAdjustment.AlphaOffset = previous
                 );
             };
         }
@@ -175,10 +176,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                 (
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.AlphaExponent = alphaExponent,
-
-                    historyTitle: "Set gamma transfer adjustment alpha exponent",
-                    getHistory: (tAdjustment) => tAdjustment.AlphaExponent,
-                    setHistory: (tAdjustment, previous) => tAdjustment.AlphaExponent = previous
+                                    
+                    type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_AlphaExponent,
+                    getUndo: (tAdjustment) => tAdjustment.AlphaExponent,
+                    setUndo: (tAdjustment, previous) => tAdjustment.AlphaExponent = previous
                 );
             };
         }
@@ -206,9 +207,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.AlphaExponent = alphaExponent,
 
-                    historyTitle: "Set gamma transfer adjustment alpha exponent",
-                    getHistory: (tAdjustment) => tAdjustment.StartingAlphaExponent,
-                    setHistory: (tAdjustment, previous) => tAdjustment.AlphaExponent = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_AlphaExponent,
+                    getUndo: (tAdjustment) => tAdjustment.StartingAlphaExponent,
+                    setUndo: (tAdjustment, previous) => tAdjustment.AlphaExponent = previous
                 );
             };
         }
@@ -230,9 +231,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.AlphaAmplitude = alphaAmplitude,
 
-                    historyTitle: "Set gamma transfer adjustment alpha amplitude",
-                    getHistory: (tAdjustment) => tAdjustment.AlphaAmplitude,
-                    setHistory: (tAdjustment, previous) => tAdjustment.AlphaAmplitude = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_AlphaAmplitude,
+                    getUndo: (tAdjustment) => tAdjustment.AlphaAmplitude,
+                    setUndo: (tAdjustment, previous) => tAdjustment.AlphaAmplitude = previous
                 );
             };
         }
@@ -260,9 +261,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.AlphaAmplitude = alphaAmplitude,
 
-                    historyTitle: "Set gamma transfer adjustment alpha amplitude",
-                    getHistory: (tAdjustment) => tAdjustment.StartingAlphaAmplitude,
-                    setHistory: (tAdjustment, previous) => tAdjustment.AlphaAmplitude = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_AlphaAmplitude,
+                    getUndo: (tAdjustment) => tAdjustment.StartingAlphaAmplitude,
+                    setUndo: (tAdjustment, previous) => tAdjustment.AlphaAmplitude = previous
                 );
             };
         }

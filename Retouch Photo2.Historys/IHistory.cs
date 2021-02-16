@@ -10,8 +10,8 @@ namespace Retouch_Photo2.Historys
     /// </summary>
     public interface IHistory
     {
-        /// <summary> Gets or sets the title. </summary>
-        string Title { get; set; }
+        /// <summary> Gets or sets the type. </summary>
+        HistoryType Type { get; set; }
 
         /// <summary> Undo method. </summary>
         void Undo();

@@ -5,6 +5,7 @@
 // Complete:      ★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -49,8 +50,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new PatternSpottedLayer(customDevice)
             {
-                Step = this.SelectionViewModel.PatternSpottedStep,
-                Radius = this.SelectionViewModel.PatternSpottedRadius,
+                Step = this.SelectionViewModel.PatternSpotted_Step,
+                Radius = this.SelectionViewModel.PatternSpotted_Radius,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandCurveStyle
             };
@@ -138,17 +139,17 @@ namespace Retouch_Photo2.Tools.Models
             this.RadiusPicker.Maximum = 100;
             this.RadiusPicker.ValueChanged += (sender, value) =>
             {
-                float horizontalStep = value;
-                this.SelectionViewModel.PatternSpottedRadius = horizontalStep;
+                float radius = value;
+                this.SelectionViewModel.PatternSpotted_Radius = radius;
 
                 this.MethodViewModel.TLayerChanged<float, PatternSpottedLayer>
                 (
                     layerType: LayerType.PatternSpotted,
-                    set: (tLayer) => tLayer.Radius = horizontalStep,
+                    set: (tLayer) => tLayer.Radius = radius,
 
-                    historyTitle: "Set spotted layer radius",
-                    getHistory: (tLayer) => tLayer.Radius,
-                    setHistory: (tLayer, previous) => tLayer.Radius = previous
+                    type: HistoryType.LayersProperty_Set_PatternSpottedLayer_Radius,
+                    getUndo: (tLayer) => tLayer.Radius,
+                    setUndo: (tLayer, previous) => tLayer.Radius = previous
                 );
             };
         }
@@ -161,23 +162,23 @@ namespace Retouch_Photo2.Tools.Models
             this.RadiusSlider.ValueChangeDelta += (sender, value) =>
             {
                 float horizontalStep = (float)value;
-                this.SelectionViewModel.PatternSpottedRadius = horizontalStep;
+                this.SelectionViewModel.PatternSpotted_Radius = horizontalStep;
 
                 this.MethodViewModel.TLayerChangeDelta<PatternSpottedLayer>(layerType: LayerType.PatternSpotted, set: (tLayer) => tLayer.Radius = horizontalStep);
             };
             this.RadiusSlider.ValueChangeCompleted += (sender, value) =>
             {
-                float horizontalStep = (float)value;
-                this.SelectionViewModel.PatternSpottedRadius = horizontalStep;
+                float radius = (float)value;
+                this.SelectionViewModel.PatternSpotted_Radius = radius;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, PatternSpottedLayer>
                 (
                     layerType: LayerType.PatternSpotted,
-                    set: (tLayer) => tLayer.Radius = horizontalStep,
+                    set: (tLayer) => tLayer.Radius = radius,
 
-                    historyTitle: "Set spotted layer radius",
-                    getHistory: (tLayer) => tLayer.StartingRadius,
-                    setHistory: (tLayer, previous) => tLayer.Radius = previous
+                    type: HistoryType.LayersProperty_Set_PatternSpottedLayer_Radius, 
+                    getUndo: (tLayer) => tLayer.StartingRadius,
+                    setUndo: (tLayer, previous) => tLayer.Radius = previous
                 );
             };
         }
@@ -192,16 +193,16 @@ namespace Retouch_Photo2.Tools.Models
             this.StepPicker.ValueChanged += (sender, value) =>
             {
                 float step = (float)value;
-                this.SelectionViewModel.PatternSpottedStep = step;
+                this.SelectionViewModel.PatternSpotted_Step = step;
 
                 this.MethodViewModel.TLayerChanged<float, PatternSpottedLayer>
                 (
                     layerType: LayerType.PatternSpotted,
                     set: (tLayer) => tLayer.Step = step,
 
-                    historyTitle: "Set spotted layer step",
-                    getHistory: (tLayer) => tLayer.Step,
-                    setHistory: (tLayer, previous) => tLayer.Step = previous
+                    type: HistoryType.LayersProperty_Set_PatternSpottedLayer_Step,
+                    getUndo: (tLayer) => tLayer.Step,
+                    setUndo: (tLayer, previous) => tLayer.Step = previous
                 );
             };
         }
@@ -214,23 +215,23 @@ namespace Retouch_Photo2.Tools.Models
             this.StepSlider.ValueChangeDelta += (sender, value) =>
             {
                 float step = (float)value;
-                this.SelectionViewModel.PatternSpottedStep = step;
+                this.SelectionViewModel.PatternSpotted_Step = step;
 
                 this.MethodViewModel.TLayerChangeDelta<PatternSpottedLayer>(layerType: LayerType.PatternSpotted, set: (tLayer) => tLayer.Step = step);
             };
             this.StepSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float step = (float)value;
-                this.SelectionViewModel.PatternSpottedStep = step;
+                this.SelectionViewModel.PatternSpotted_Step = step;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, PatternSpottedLayer>
                 (
                     layerType: LayerType.PatternSpotted,
                     set: (tLayer) => tLayer.Step = step,
 
-                    historyTitle: "Set spotted layer step",
-                    getHistory: (tLayer) => tLayer.StartingStep,
-                    setHistory: (tLayer, previous) => tLayer.Step = previous
+                    type: HistoryType.LayersProperty_Set_PatternSpottedLayer_Step,
+                    getUndo: (tLayer) => tLayer.StartingStep,
+                    setUndo: (tLayer, previous) => tLayer.Step = previous
                 );
             };
         }

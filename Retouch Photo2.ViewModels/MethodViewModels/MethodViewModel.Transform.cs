@@ -12,7 +12,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodTransformMultiplies(Matrix3x2 matrix)
         {
             //History
-            LayersTransformMultipliesHistory history = new LayersTransformMultipliesHistory("Transform");
+            LayersTransformMultipliesHistory history = new LayersTransformMultipliesHistory(HistoryType.LayersTransformMultiplies_Transform);
 
             //Selection 
             this.CacheTransformer();
@@ -75,7 +75,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodTransformMultipliesComplete(Transformer transformer)
         {
             //History
-            LayersTransformMultipliesHistory history = new LayersTransformMultipliesHistory("Transform");
+            LayersTransformMultipliesHistory history = new LayersTransformMultipliesHistory(HistoryType.LayersTransformMultiplies_Transform);
 
             //Selection
             this.Transformer = transformer;
@@ -108,7 +108,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodTransformAdd(Vector2 vector)
         {
             //History
-            LayersTransformAddHistory history = new LayersTransformAddHistory("Move");
+            LayersTransformAddHistory history = new LayersTransformAddHistory(HistoryType.LayersTransformAdd_Move);
 
             //Selection
             this.CacheTransformer();
@@ -172,7 +172,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodTransformAddComplete(Vector2 vector)
         {
             //History
-            LayersTransformAddHistory history = new LayersTransformAddHistory("Move");
+            LayersTransformAddHistory history = new LayersTransformAddHistory(HistoryType.LayersTransformAdd_Move);
 
             //Selection
             Transformer transformer = Transformer.Add(this.StartingTransformer, vector);

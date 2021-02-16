@@ -5,6 +5,7 @@
 // Complete:      ★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -49,7 +50,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryDountLayer(customDevice)
             {
-                HoleRadius = this.SelectionViewModel.GeometryDountHoleRadius,
+                HoleRadius = this.SelectionViewModel.GeometryDount_HoleRadius,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
@@ -121,16 +122,16 @@ namespace Retouch_Photo2.Tools.Models
             this.HoleRadiusPicker.ValueChanged += (sender, value) =>
             {
                 float holeRadius = (float)value / 100.0f;
-                this.SelectionViewModel.GeometryDountHoleRadius = holeRadius;
+                this.SelectionViewModel.GeometryDount_HoleRadius = holeRadius;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryDountLayer>
                 (
                     layerType: LayerType.GeometryDount,
                     set: (tLayer) => tLayer.HoleRadius = holeRadius,
 
-                    historyTitle: "Set dount layer hole radius",
-                    getHistory: (tLayer) => tLayer.HoleRadius,
-                    setHistory: (tLayer, previous) => tLayer.HoleRadius = previous
+                    type: HistoryType.LayersProperty_Set_GeometryDountLayer_HoleRadius,
+                    getUndo: (tLayer) => tLayer.HoleRadius,
+                    setUndo: (tLayer, previous) => tLayer.HoleRadius = previous
                 );
             };
         }
@@ -143,23 +144,23 @@ namespace Retouch_Photo2.Tools.Models
             this.HoleRadiusSlider.ValueChangeDelta += (sender, value) =>
             {
                 float holeRadius = (float)value;
-                this.SelectionViewModel.GeometryDountHoleRadius = holeRadius;
+                this.SelectionViewModel.GeometryDount_HoleRadius = holeRadius;
 
                 this.MethodViewModel.TLayerChangeDelta<GeometryDountLayer>(layerType: LayerType.GeometryDount, set: (tLayer) => tLayer.HoleRadius = holeRadius);
             };
             this.HoleRadiusSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float holeRadius = (float)value;
-                this.SelectionViewModel.GeometryDountHoleRadius = holeRadius;
+                this.SelectionViewModel.GeometryDount_HoleRadius = holeRadius;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryDountLayer>
                 (
                     layerType: LayerType.GeometryDount,
                     set: (tLayer) => tLayer.HoleRadius = holeRadius,
 
-                    historyTitle: "Set dount layer hole radius",
-                    getHistory: (tLayer) => tLayer.StartingHoleRadius,
-                    setHistory: (tLayer, previous) => tLayer.HoleRadius = previous
+                    type: HistoryType.LayersProperty_Set_GeometryDountLayer_HoleRadius,
+                    getUndo: (tLayer) => tLayer.StartingHoleRadius,
+                    setUndo: (tLayer, previous) => tLayer.HoleRadius = previous
                 );
             };
         }

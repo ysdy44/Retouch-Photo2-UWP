@@ -127,8 +127,8 @@ namespace Retouch_Photo2.Tools.Models
 
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Add node");
-                       
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_AddNode);
+
             //History
             var previous = layer.Nodes.NodesClone().ToList();
             history.UndoAction += () =>

@@ -81,7 +81,7 @@ namespace Retouch_Photo2.Tools.Models
             }
 
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer");
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
             this.ViewModel.HistoryPush(history);
 
             //Transformer
@@ -288,9 +288,9 @@ namespace Retouch_Photo2.Tools.Models
                     layerType: LayerType.Image,
                     set: (imageLayer) => imageLayer.Photocopier = photocopier,
 
-                    historyTitle: "Set photocopier",
-                    getHistory: (imageLayer) => imageLayer.Photocopier,
-                    setHistory: (imageLayer, previous) => imageLayer.Photocopier = previous
+                    type: HistoryType.LayersProperty_SetPhotocopier,
+                    getUndo: (imageLayer) => imageLayer.Photocopier,
+                    setUndo: (imageLayer, previous) => imageLayer.Photocopier = previous
                 );
             };
         }

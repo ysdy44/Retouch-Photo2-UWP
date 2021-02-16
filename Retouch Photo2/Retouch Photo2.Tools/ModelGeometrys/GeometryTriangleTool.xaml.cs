@@ -5,6 +5,7 @@
 // Complete:      ★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -49,7 +50,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryTriangleLayer(customDevice)
             {
-                Center = this.SelectionViewModel.GeometryTriangleCenter,
+                Center = this.SelectionViewModel.GeometryTriangle_Center,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
@@ -123,16 +124,16 @@ namespace Retouch_Photo2.Tools.Models
             this.CenterPicker.ValueChanged += (sender, value) =>
             {
                 float center = (float)value / 100.0f;
-                this.SelectionViewModel.GeometryTriangleCenter = center;
+                this.SelectionViewModel.GeometryTriangle_Center = center;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryTriangleLayer>
                 (
                     layerType: LayerType.GeometryTriangle,
                     set: (tLayer) => tLayer.Center = center,
 
-                    historyTitle: "Set triangle layer center",
-                    getHistory: (tLayer) => tLayer.Center,
-                    setHistory: (tLayer, previous) => tLayer.Center = previous
+                    type: HistoryType.LayersProperty_Set_GeometryTriangleLayer_Center,
+                    getUndo: (tLayer) => tLayer.Center,
+                    setUndo: (tLayer, previous) => tLayer.Center = previous
                 );
             };
         }
@@ -145,23 +146,23 @@ namespace Retouch_Photo2.Tools.Models
             this.CenterSlider.ValueChangeDelta += (s, value) =>
             {
                 float center = (float)value;
-                this.SelectionViewModel.GeometryTriangleCenter = center;
+                this.SelectionViewModel.GeometryTriangle_Center = center;
 
                 this.MethodViewModel.TLayerChangeDelta<GeometryTriangleLayer>(layerType: LayerType.GeometryTriangle, set: (tLayer) => tLayer.Center = center);
             };
             this.CenterSlider.ValueChangeCompleted += (s, value) =>
             {
                 float center = (float)value;
-                this.SelectionViewModel.GeometryTriangleCenter = center;
+                this.SelectionViewModel.GeometryTriangle_Center = center;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryTriangleLayer>
                 (
                     LayerType.GeometryTriangle,
                     set: (tLayer) => tLayer.Center = center,
 
-                    historyTitle: "Set triangle layer center",
-                    getHistory: (tLayer) => tLayer.StartingCenter,
-                    setHistory: (tLayer, previous) => tLayer.Center = previous
+                    type: HistoryType.LayersProperty_Set_GeometryTriangleLayer_Center,
+                    getUndo: (tLayer) => tLayer.StartingCenter,
+                    setUndo: (tLayer, previous) => tLayer.Center = previous
                 );
             };
         }
@@ -170,17 +171,17 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.MirrorButton.Click += (s, e) =>
             {
-                float center = 1.0f - this.SelectionViewModel.GeometryTriangleCenter;
-                this.SelectionViewModel.GeometryTriangleCenter = center;
+                float center = 1.0f - this.SelectionViewModel.GeometryTriangle_Center;
+                this.SelectionViewModel.GeometryTriangle_Center = center;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryTriangleLayer>
                 (
                     LayerType.GeometryTriangle,
                     set: (tLayer) => tLayer.Center = 1.0f - tLayer.Center,
 
-                    historyTitle: "Set triangle layer center",
-                    getHistory: (tLayer) => tLayer.Center,
-                    setHistory: (tLayer, previous) => tLayer.Center = previous
+                    type: HistoryType.LayersProperty_Set_GeometryTriangleLayer_Center,
+                    getUndo: (tLayer) => tLayer.Center,
+                    setUndo: (tLayer, previous) => tLayer.Center = previous
                 );
             };
         }

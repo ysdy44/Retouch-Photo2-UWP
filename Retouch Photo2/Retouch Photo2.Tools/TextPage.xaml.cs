@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Tools
         private void SetFontText(string fontText)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set font text");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetFontText);
 
             //Selection
             this.SelectionViewModel.FontText = fontText;

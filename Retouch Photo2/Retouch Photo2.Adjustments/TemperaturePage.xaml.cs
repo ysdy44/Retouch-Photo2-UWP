@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                 if (layer.Filter.Adjustments[this.Index] is TemperatureAdjustment adjustment)
                 {
                     //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set temperature adjustment");
+                    LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_ResetAdjustment_Temperature);
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                     var previous1 = adjustment.Temperature;
@@ -187,9 +187,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Temperature = temperature,
 
-                    historyTitle: "Set temperature adjustment temperature",
-                    getHistory: (tAdjustment) => tAdjustment.Temperature,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Temperature = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Temperature_Temperature,
+                    getUndo: (tAdjustment) => tAdjustment.Temperature,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Temperature = previous
                 );
             };
         }
@@ -217,9 +217,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Temperature = temperature,
 
-                    historyTitle: "Set temperature adjustment temperature",
-                    getHistory: (tAdjustment) => tAdjustment.StartingTemperature,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Temperature = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Temperature_Temperature,
+                    getUndo: (tAdjustment) => tAdjustment.StartingTemperature,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Temperature = previous
                 );
             };
         }
@@ -241,9 +241,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Temperature = tint,
 
-                    historyTitle: "Set tint adjustment tint",
-                    getHistory: (tAdjustment) => tAdjustment.Tint,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Tint = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Temperature_Tint,
+                    getUndo: (tAdjustment) => tAdjustment.Tint,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Tint = previous
                 );
             };
         }
@@ -271,9 +271,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Tint = tint,
 
-                    historyTitle: "Set tint adjustment tint",
-                    getHistory: (tAdjustment) => tAdjustment.StartingTint,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Tint = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Temperature_Tint,
+                    getUndo: (tAdjustment) => tAdjustment.StartingTint,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Tint = previous
                 );
             };
         }

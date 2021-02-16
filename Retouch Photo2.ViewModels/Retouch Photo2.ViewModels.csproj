@@ -114,6 +114,7 @@
     <Compile Include="MethodViewModels\MethodViewModel.Selected.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Setup.cs" />
     <Compile Include="MethodViewModels\MethodViewModel.Transform.cs" />
+    <Compile Include="SelectionViewModels\SelectionViewModel.NotifyPattern.cs" />
     <Compile Include="SelectionViewModels\SelectionViewModel.StandStyle.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.Key.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.cs" />

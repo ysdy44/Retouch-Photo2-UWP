@@ -123,60 +123,60 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> Gets or sets the current stroke-style's <see cref="CanvasStrokeStyle.DashStyle"/>. </summary>
-        public CanvasDashStyle StrokeStyleDash
+        public CanvasDashStyle StrokeStyle_Dash
         {
-            get => this.strokeStyleDash;
+            get => this.strokeStyle_Dash;
             set
             {
-                this.strokeStyleDash = value;
-                this.OnPropertyChanged(nameof(StrokeStyleDash));//Notify 
+                this.strokeStyle_Dash = value;
+                this.OnPropertyChanged(nameof(StrokeStyle_Dash));//Notify 
                 this.StrokeStyle.DashStyle = value;
                 this.OnPropertyChanged(nameof(StrokeStyle));//Notify 
             }
         }
-        private CanvasDashStyle strokeStyleDash = CanvasDashStyle.Solid;
+        private CanvasDashStyle strokeStyle_Dash = CanvasDashStyle.Solid;
         
         /// <summary> Gets or sets the current stroke-style's <see cref="CanvasStrokeStyle.DashCap"/>. </summary>
-        public CanvasCapStyle StrokeStyleCap
+        public CanvasCapStyle StrokeStyle_Cap
         {
-            get => this.strokeStyleCap;
+            get => this.strokeStyle_Cap;
             set
             {
-                this.strokeStyleCap = value;
-                this.OnPropertyChanged(nameof(StrokeStyleCap));//Notify 
+                this.strokeStyle_Cap = value;
+                this.OnPropertyChanged(nameof(StrokeStyle_Cap));//Notify 
                 this.StrokeStyle.DashCap = value;
                 this.OnPropertyChanged(nameof(StrokeStyle));//Notify 
             }
         }
-        private CanvasCapStyle strokeStyleCap = CanvasCapStyle.Flat;
+        private CanvasCapStyle strokeStyle_Cap = CanvasCapStyle.Flat;
         
         /// <summary> Gets or sets the current stroke-style's <see cref="CanvasStrokeStyle.LineJoin"/>. </summary>
-        public CanvasLineJoin StrokeStyleJoin
+        public CanvasLineJoin StrokeStyle_Join
         {
-            get => this.strokeStyleJoin;
+            get => this.strokeStyle_Join;
             set
             {
-                this.strokeStyleJoin = value;
-                this.OnPropertyChanged(nameof(StrokeStyleJoin));//Notify 
+                this.strokeStyle_Join = value;
+                this.OnPropertyChanged(nameof(StrokeStyle_Join));//Notify 
                 this.StrokeStyle.LineJoin = value;
                 this.OnPropertyChanged(nameof(StrokeStyle));//Notify 
             }
         }
-        private CanvasLineJoin strokeStyleJoin = CanvasLineJoin.Miter;
+        private CanvasLineJoin strokeStyle_Join = CanvasLineJoin.Miter;
         
         /// <summary> Gets or sets the current stroke-style's <see cref="CanvasStrokeStyle.DashOffset"/>. </summary>
-        public float StrokeStyleOffset
+        public float StrokeStyle_Offset
         {
-            get => this.strokeStyleOffset;
+            get => this.strokeStyle_Offset;
             set
             {
-                this.strokeStyleOffset = value;
-                this.OnPropertyChanged(nameof(StrokeStyleOffset));//Notify 
+                this.strokeStyle_Offset = value;
+                this.OnPropertyChanged(nameof(StrokeStyle_Offset));//Notify 
                 this.StrokeStyle.DashOffset = value;
                 this.OnPropertyChanged(nameof(StrokeStyle));//Notify 
             }
         }
-        private float strokeStyleOffset = 0.0f;
+        private float strokeStyle_Offset = 0.0f;
 
 
         //////////////////////////
@@ -217,10 +217,10 @@ namespace Retouch_Photo2.ViewModels
 
             this.StrokeStyle = style.StrokeStyle;
 
-            this.StrokeStyleDash = style.StrokeStyle.DashStyle;
-            this.StrokeStyleCap = style.StrokeStyle.DashCap;
-            this.strokeStyleJoin = style.StrokeStyle.LineJoin;
-            this.StrokeStyleOffset = style.StrokeStyle.DashOffset;
+            this.StrokeStyle_Dash = style.StrokeStyle.DashStyle;
+            this.StrokeStyle_Cap = style.StrokeStyle.DashCap;
+            this.strokeStyle_Join = style.StrokeStyle.LineJoin;
+            this.StrokeStyle_Offset = style.StrokeStyle.DashOffset;
 
             this.Transparency = style.Transparency;
 

@@ -10,12 +10,10 @@ namespace Retouch_Photo2.Historys
     /// </summary>
     public abstract class HistoryBase
     {          
-
-        /// <summary> Gets or sets the title. </summary>
-        public string Title { get; set; }
+        /// <summary> Gets or sets the type. </summary>
+        public HistoryType Type { get; set; }
 
         /// <summary> Undo method. </summary>
         public abstract void Undo(); 
-
     }
 }

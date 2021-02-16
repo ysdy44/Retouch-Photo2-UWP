@@ -406,7 +406,7 @@ namespace Retouch_Photo2.Menus.Models
         private void FilterAdd(IAdjustmentPage adjustmentPage)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set layer filter");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetFilter);
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
@@ -447,7 +447,7 @@ namespace Retouch_Photo2.Menus.Models
         private void FilterRemove(IAdjustment removeAdjustment)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set layer filter");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetFilter);
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
@@ -488,7 +488,7 @@ namespace Retouch_Photo2.Menus.Models
         private void FilterChanged(Filter filter)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set layer filter");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetFilter);
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>

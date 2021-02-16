@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Tools.Elements
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Convert to curves");
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer_ConvertToCurves);
                 this.ViewModel.HistoryPush(history);
 
                 this.SelectionViewModel.SetValue((layerage) =>

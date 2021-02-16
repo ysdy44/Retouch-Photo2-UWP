@@ -12,7 +12,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodFillColorChanged(Color value)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetStyle_Fill);
 
             //Selection
             switch (this.FillOrStroke)
@@ -84,7 +84,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodFillColorChangeCompleted(Color value)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetStyle_Fill);
 
             //Selection
             switch (this.FillOrStroke)
@@ -131,7 +131,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodStrokeColorChanged(Color value)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetStyle_Fill);
 
             //Selection
             switch (this.FillOrStroke)
@@ -203,7 +203,7 @@ namespace Retouch_Photo2.ViewModels
         public void MethodStrokeColorChangeCompleted(Color value)
         {
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set fill");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetStyle_Fill);
 
             //Selection
             switch (this.FillOrStroke)

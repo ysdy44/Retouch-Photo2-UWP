@@ -96,9 +96,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                 index: this.Index,
                 set: (tAdjustment) => tAdjustment.Angle = 0,
 
-                historyTitle: "Set hue rotation adjustment",
-                getHistory: (tAdjustment) => tAdjustment.Angle,
-                setHistory: (tAdjustment, previous) => tAdjustment.Angle = previous
+                type: HistoryType.LayersProperty_ResetAdjustment_HueRotation,
+                getUndo: (tAdjustment) => tAdjustment.Angle,
+                setUndo: (tAdjustment, previous) => tAdjustment.Angle = previous
             );
         }
         /// <summary>
@@ -141,9 +141,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Angle = radians,
 
-                    historyTitle: "Set hue rotation adjustment angle",
-                    getHistory: (tAdjustment) => tAdjustment.Angle,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Angle = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_HueRotation_Angle,
+                    getUndo: (tAdjustment) => tAdjustment.Angle,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Angle = previous
                 );
             };
         }
@@ -171,9 +171,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Angle = radians,
 
-                    historyTitle: "Set hue rotation adjustment angle",
-                    getHistory: (tAdjustment) => tAdjustment.StartingAngle,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Angle = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_HueRotation_Angle,
+                    getUndo: (tAdjustment) => tAdjustment.StartingAngle,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Angle = previous
                 );
             };
         }

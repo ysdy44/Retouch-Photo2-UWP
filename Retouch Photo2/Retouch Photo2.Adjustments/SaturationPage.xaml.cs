@@ -95,9 +95,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                 index: this.Index,
                 set: (tAdjustment) => tAdjustment.Saturation = 0,
 
-                historyTitle: "Set saturation adjustment",
-                getHistory: (tAdjustment) => tAdjustment.Saturation,
-                setHistory: (tAdjustment, previous) => tAdjustment.Saturation = previous
+                type: HistoryType.LayersProperty_ResetAdjustment_Saturation,
+                getUndo: (tAdjustment) => tAdjustment.Saturation,
+                setUndo: (tAdjustment, previous) => tAdjustment.Saturation = previous
             );
         }
         /// <summary>
@@ -140,9 +140,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Saturation = saturation,
 
-                    historyTitle: "Set saturation adjustment saturation",
-                    getHistory: (tAdjustment) => tAdjustment.Saturation,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Saturation = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Saturation_Saturation,
+                    getUndo: (tAdjustment) => tAdjustment.Saturation,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Saturation = previous
                 );
             };
         }
@@ -170,9 +170,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Saturation = saturation,
 
-                    historyTitle: "Set saturation adjustment saturation",
-                    getHistory: (tAdjustment) => tAdjustment.StartingSaturation,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Saturation = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Saturation_Saturation,
+                    getUndo: (tAdjustment) => tAdjustment.StartingSaturation,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Saturation = previous
                 );
             };
         }

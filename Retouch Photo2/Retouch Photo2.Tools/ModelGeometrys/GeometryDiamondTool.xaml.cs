@@ -5,6 +5,7 @@
 // Complete:      ★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -49,7 +50,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryDiamondLayer(customDevice)
             {
-                Mid = this.SelectionViewModel.GeometryDiamondMid,
+                Mid = this.SelectionViewModel.GeometryDiamond_Mid,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
@@ -123,16 +124,16 @@ namespace Retouch_Photo2.Tools.Models
             this.MidPicker.ValueChanged += (sender, value) =>
             {
                 float mid = (float)value / 100.0f;
-                this.SelectionViewModel.GeometryDiamondMid = mid;
+                this.SelectionViewModel.GeometryDiamond_Mid = mid;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryDiamondLayer>
                 (
                     layerType: LayerType.GeometryDiamond,
                     set: (tLayer) => tLayer.Mid = mid,
 
-                    historyTitle: "Set diamond layer mid",
-                    getHistory: (tLayer) => tLayer.Mid,
-                    setHistory: (tLayer, previous) => tLayer.Mid = previous
+                    type: HistoryType.LayersProperty_Set_GeometryDiamondLayer_Mid,
+                    getUndo: (tLayer) => tLayer.Mid,
+                    setUndo: (tLayer, previous) => tLayer.Mid = previous
                 );
             };
         }
@@ -145,23 +146,23 @@ namespace Retouch_Photo2.Tools.Models
             this.MidSlider.ValueChangeDelta += (sender, value) =>
             {
                 float mid = (float)value;
-                this.SelectionViewModel.GeometryDiamondMid = mid;
+                this.SelectionViewModel.GeometryDiamond_Mid = mid;
 
                 this.MethodViewModel.TLayerChangeDelta<GeometryDiamondLayer>(layerType: LayerType.GeometryDiamond, set: (tLayer) => tLayer.Mid = mid);
             };
             this.MidSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float mid = (float)value;
-                this.SelectionViewModel.GeometryDiamondMid = mid;
+                this.SelectionViewModel.GeometryDiamond_Mid = mid;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryDiamondLayer>
                 (
                     layerType: LayerType.GeometryDiamond,
                     set: (tLayer) => tLayer.Mid = mid,
 
-                    historyTitle: "Set diamond layer mid",
-                    getHistory: (tLayer) => tLayer.StartingMid,
-                    setHistory: (tLayer, previous) => tLayer.Mid = previous
+                    type: HistoryType.LayersProperty_Set_GeometryDiamondLayer_Mid,
+                    getUndo: (tLayer) => tLayer.StartingMid,
+                    setUndo: (tLayer, previous) => tLayer.Mid = previous
                 );
             };
         }
@@ -170,17 +171,17 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.MirrorButton.Click += (s, e) =>
             {
-                float mid = 1.0f - this.SelectionViewModel.GeometryDiamondMid;
-                this.SelectionViewModel.GeometryDiamondMid = mid;
+                float mid = 1.0f - this.SelectionViewModel.GeometryDiamond_Mid;
+                this.SelectionViewModel.GeometryDiamond_Mid = mid;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryDiamondLayer>
                 (
                     layerType: LayerType.GeometryDiamond,
                     set: (tLayer) => tLayer.Mid = 1.0f - tLayer.Mid,
 
-                    historyTitle: "Set diamond layer mid",
-                    getHistory: (tLayer) => tLayer.Mid,
-                    setHistory: (tLayer, previous) => tLayer.Mid = previous
+                    type: HistoryType.LayersProperty_Set_GeometryDiamondLayer_Mid,
+                    getUndo: (tLayer) => tLayer.Mid,
+                    setUndo: (tLayer, previous) => tLayer.Mid = previous
                 );
             };
         }

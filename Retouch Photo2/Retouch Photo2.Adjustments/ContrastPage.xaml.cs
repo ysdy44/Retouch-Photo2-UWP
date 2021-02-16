@@ -5,6 +5,7 @@
 // Complete:      ★★★
 using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
@@ -94,9 +95,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                 index: this.Index,
                 set: (tAdjustment) => tAdjustment.Contrast = 0,
 
-                historyTitle: "Set contrast adjustment",
-                getHistory: (tAdjustment) => tAdjustment.Contrast,
-                setHistory: (tAdjustment, previous) => tAdjustment.Contrast = previous
+                type: HistoryType.LayersProperty_ResetAdjustment_Contrast,
+                getUndo: (tAdjustment) => tAdjustment.Contrast,
+                setUndo: (tAdjustment, previous) => tAdjustment.Contrast = previous
             );
         }
         /// <summary>
@@ -139,9 +140,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Contrast = contrast,
 
-                    historyTitle: "Set contrast adjustment contrast",
-                    getHistory: (tAdjustment) => tAdjustment.Contrast,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Contrast = previous
+                    type: HistoryType.LayersProperty_ResetAdjustment_Contrast_Contrast,
+                    getUndo: (tAdjustment) => tAdjustment.Contrast,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Contrast = previous
                 );
             };
         }
@@ -168,9 +169,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.Contrast = contrast,
 
-                    historyTitle: "Set contrast adjustment contrast",
-                    getHistory: (tAdjustment) => tAdjustment.StartingContrast,
-                    setHistory: (tAdjustment, previous) => tAdjustment.Contrast = previous
+                    type: HistoryType.LayersProperty_ResetAdjustment_Contrast_Contrast,
+                    getUndo: (tAdjustment) => tAdjustment.StartingContrast,
+                    setUndo: (tAdjustment, previous) => tAdjustment.Contrast = previous
                 );
             };
         }

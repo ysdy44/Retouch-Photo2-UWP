@@ -111,7 +111,7 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasMove = canvasPoint - canvasStartingPoint;
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Move nodes");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_MoveNodes);
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>
@@ -193,7 +193,7 @@ namespace Retouch_Photo2.Tools.Models
                 }
 
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Move node");
+                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_MoveNodes);
 
                 var previous = layer.Nodes.Index;
                 var previous1 = node.Clone();
@@ -254,7 +254,7 @@ namespace Retouch_Photo2.Tools.Models
                 Node node = layer.Nodes.SelectedItem;
 
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory("Move node control point");
+                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_MoveNode_ControlPoint);
 
                 var previous = layer.Nodes.Index;
                 var previous1 = node.StartingLeftControlPoint;
@@ -325,7 +325,7 @@ namespace Retouch_Photo2.Tools.Models
             this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
 
             //History
-            LayersPropertyHistory history = new LayersPropertyHistory("Set nodes is checked");
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_MoveNode_IsChecked);
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>

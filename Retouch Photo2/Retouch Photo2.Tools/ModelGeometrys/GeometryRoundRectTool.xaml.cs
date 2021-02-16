@@ -5,6 +5,7 @@
 // Complete:      ★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -49,7 +50,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryRoundRectLayer(customDevice)
             {
-                Corner = this.SelectionViewModel.GeometryRoundRectCorner,
+                Corner = this.SelectionViewModel.GeometryRoundRect_Corner,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
@@ -120,16 +121,16 @@ namespace Retouch_Photo2.Tools.Models
             this.CornerPicker.ValueChanged += (sender, value) =>
             {
                 float corner = (float)value / 100.0f;
-                this.SelectionViewModel.GeometryRoundRectCorner = corner;
+                this.SelectionViewModel.GeometryRoundRect_Corner = corner;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryRoundRectLayer>
                 (
                     layerType: LayerType.GeometryRoundRect,
                     set: (tLayer) => tLayer.Corner = corner,
 
-                    historyTitle: "Set round rect layer corner",
-                    getHistory: (tLayer) => tLayer.Corner,
-                    setHistory: (tLayer, previous) => tLayer.Corner = previous
+                    type: HistoryType.LayersProperty_Set_GeometryRoundRectLayer_Corner,
+                    getUndo: (tLayer) => tLayer.Corner,
+                    setUndo: (tLayer, previous) => tLayer.Corner = previous
                 );
             };
         }
@@ -142,23 +143,23 @@ namespace Retouch_Photo2.Tools.Models
             this.CornerSlider.ValueChangeDelta += (sender, value) =>
             {
                 float corner = (float)value;
-                this.SelectionViewModel.GeometryRoundRectCorner = corner;
+                this.SelectionViewModel.GeometryRoundRect_Corner = corner;
 
                 this.MethodViewModel.TLayerChangeDelta<GeometryRoundRectLayer>(layerType: LayerType.GeometryRoundRect, set: (tLayer) => tLayer.Corner = corner);
             };
             this.CornerSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float corner = (float)value;
-                this.SelectionViewModel.GeometryRoundRectCorner = corner;
+                this.SelectionViewModel.GeometryRoundRect_Corner = corner;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryRoundRectLayer>
                 (
                     layerType: LayerType.GeometryRoundRect,
                     set: (tLayer) => tLayer.Corner = corner,
 
-                    historyTitle: "Set round rect layer corner",
-                    getHistory: (tLayer) => tLayer.StartingCorner,
-                    setHistory: (tLayer, previous) => tLayer.Corner = previous
+                    type: HistoryType.LayersProperty_Set_GeometryRoundRectLayer_Corner,
+                    getUndo: (tLayer) => tLayer.StartingCorner,
+                    setUndo: (tLayer, previous) => tLayer.Corner = previous
                 );
             };
         }

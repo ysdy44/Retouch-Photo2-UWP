@@ -5,6 +5,7 @@
 // Complete:      ★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -68,10 +69,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new GeometryCogLayer(customDevice)
             {
-                Count = this.SelectionViewModel.GeometryCogCount,
-                InnerRadius = this.SelectionViewModel.GeometryCogInnerRadius,
-                Tooth = this.SelectionViewModel.GeometryCogTooth,
-                Notch = this.SelectionViewModel.GeometryCogNotch,
+                Count = this.SelectionViewModel.GeometryCog_Count,
+                InnerRadius = this.SelectionViewModel.GeometryCog_InnerRadius,
+                Tooth = this.SelectionViewModel.GeometryCog_Tooth,
+                Notch = this.SelectionViewModel.GeometryCog_Notch,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
@@ -157,16 +158,16 @@ namespace Retouch_Photo2.Tools.Models
             this.CountPicker.ValueChanged += (sender, value) =>
             {
                 int count = (int)value;
-                this.SelectionViewModel.GeometryCogCount = count;
+                this.SelectionViewModel.GeometryCog_Count = count;
 
                 this.MethodViewModel.TLayerChanged<int, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
                     set: (tLayer) => tLayer.Count = count,
 
-                    historyTitle: "Set cog layer count",
-                    getHistory: (tLayer) => tLayer.Count,
-                    setHistory: (tLayer, previous) => tLayer.Count = previous
+                    type: HistoryType.LayersProperty_Set_GeometryCogLayer_Count,
+                    getUndo: (tLayer) => tLayer.Count,
+                    setUndo: (tLayer, previous) => tLayer.Count = previous
                 );
             };
         }
@@ -179,23 +180,23 @@ namespace Retouch_Photo2.Tools.Models
             this.CountSlider.ValueChangeDelta += (sender, value) =>
             {
                 int count = (int)value;
-                this.SelectionViewModel.GeometryCogCount = count;
+                this.SelectionViewModel.GeometryCog_Count = count;
 
                 this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>(layerType: LayerType.GeometryCog, set: (tLayer) => tLayer.Count = count);
             };
             this.CountSlider.ValueChangeCompleted += (sender, value) =>
             {
                 int count = (int)value;
-                this.SelectionViewModel.GeometryCogCount = count;
+                this.SelectionViewModel.GeometryCog_Count = count;
 
                 this.MethodViewModel.TLayerChangeCompleted<int, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
                     set: (tLayer) => tLayer.Count = count,
 
-                    historyTitle: "Set cog layer count",
-                    getHistory: (tLayer) => tLayer.StartingCount,
-                    setHistory: (tLayer, previous) => tLayer.Count = previous
+                    type: HistoryType.LayersProperty_Set_GeometryCogLayer_Count,
+                    getUndo: (tLayer) => tLayer.StartingCount,
+                    setUndo: (tLayer, previous) => tLayer.Count = previous
                 );
             };
         }
@@ -210,16 +211,16 @@ namespace Retouch_Photo2.Tools.Models
             this.InnerRadiusPicker.ValueChanged += (sender, value) =>
             {
                 float innerRadius = (float)value / 100.0f;
-                this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
+                this.SelectionViewModel.GeometryCog_InnerRadius = innerRadius;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
                     set: (tLayer) => tLayer.InnerRadius = innerRadius,
 
-                    historyTitle: "Set cog layer inner radius",
-                    getHistory: (tLayer) => tLayer.InnerRadius,
-                    setHistory: (tLayer, previous) => tLayer.InnerRadius = previous
+                    type: HistoryType.LayersProperty_Set_GeometryCogLayer_InnerRadius,
+                    getUndo: (tLayer) => tLayer.InnerRadius,
+                    setUndo: (tLayer, previous) => tLayer.InnerRadius = previous
                 );
             };
         }
@@ -232,23 +233,23 @@ namespace Retouch_Photo2.Tools.Models
             this.InnerRadiusSlider.ValueChangeDelta += (sender, value) =>
             {
                 float innerRadius = (float)value;
-                this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
+                this.SelectionViewModel.GeometryCog_InnerRadius = innerRadius;
 
                 this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>(layerType: LayerType.GeometryCog, set: (tLayer) => tLayer.InnerRadius = innerRadius);
             };
             this.InnerRadiusSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float innerRadius = (float)value;
-                this.SelectionViewModel.GeometryCogInnerRadius = innerRadius;
+                this.SelectionViewModel.GeometryCog_InnerRadius = innerRadius;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
                     set: (tLayer) => tLayer.InnerRadius = innerRadius,
 
-                    historyTitle: "Set cog layer inner radius",
-                    getHistory: (tLayer) => tLayer.StartingInnerRadius,
-                    setHistory: (tLayer, previous) => tLayer.InnerRadius = previous
+                    type: HistoryType.LayersProperty_Set_GeometryCogLayer_InnerRadius,
+                    getUndo: (tLayer) => tLayer.StartingInnerRadius,
+                    setUndo: (tLayer, previous) => tLayer.InnerRadius = previous
                 );
             };
         }
@@ -263,16 +264,16 @@ namespace Retouch_Photo2.Tools.Models
             this.ToothPicker.ValueChanged += (sender, value) =>
             {
                 float tooth = (float)value / 100.0f;
-                this.SelectionViewModel.GeometryCogTooth = tooth;
+                this.SelectionViewModel.GeometryCog_Tooth = tooth;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
                     set: (tLayer) => tLayer.Tooth = tooth,
 
-                    historyTitle: "Set cog layer tooth",
-                    getHistory: (tLayer) => tLayer.Tooth,
-                    setHistory: (tLayer, previous) => tLayer.Tooth = previous
+                    type: HistoryType.LayersProperty_Set_GeometryCogLayer_Tooth,
+                    getUndo: (tLayer) => tLayer.Tooth,
+                    setUndo: (tLayer, previous) => tLayer.Tooth = previous
                 );
             };
         }
@@ -285,23 +286,23 @@ namespace Retouch_Photo2.Tools.Models
             this.ToothSlider.ValueChangeDelta += (sender, value) =>
             {
                 float tooth = (float)value;
-                this.SelectionViewModel.GeometryCogTooth = tooth;
+                this.SelectionViewModel.GeometryCog_Tooth = tooth;
 
                 this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>(layerType: LayerType.GeometryCog, set: (tLayer) => tLayer.Tooth = tooth);
             };
             this.ToothSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float tooth = (float)value;
-                this.SelectionViewModel.GeometryCogTooth = tooth;
+                this.SelectionViewModel.GeometryCog_Tooth = tooth;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
                     set: (tLayer) => tLayer.Tooth = tooth,
 
-                    historyTitle: "Set cog layer tooth",
-                    getHistory: (tLayer) => tLayer.StartingTooth,
-                    setHistory: (tLayer, previous) => tLayer.Tooth = previous
+                    type: HistoryType.LayersProperty_Set_GeometryCogLayer_Tooth,
+                    getUndo: (tLayer) => tLayer.StartingTooth,
+                    setUndo: (tLayer, previous) => tLayer.Tooth = previous
                 );
             };
         }
@@ -316,16 +317,16 @@ namespace Retouch_Photo2.Tools.Models
             this.NotchPicker.ValueChanged += (sender, value) =>
             {
                 float notch = (float)value / 100.0f;
-                this.SelectionViewModel.GeometryCogNotch = notch;
+                this.SelectionViewModel.GeometryCog_Notch = notch;
 
                 this.MethodViewModel.TLayerChanged<float, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
                     set: (tLayer) => tLayer.Notch = notch,
 
-                    historyTitle: "Set cog layer notch",
-                    getHistory: (tLayer) => tLayer.Notch,
-                    setHistory: (tLayer, previous) => tLayer.Notch = previous
+                    type: HistoryType.LayersProperty_Set_GeometryCogLayer_Notch,
+                    getUndo: (tLayer) => tLayer.Notch,
+                    setUndo: (tLayer, previous) => tLayer.Notch = previous
                 );
             };
         }
@@ -338,23 +339,23 @@ namespace Retouch_Photo2.Tools.Models
             this.NotchSlider.ValueChangeDelta += (sender, value) =>
             {
                 float notch = (float)value;
-                this.SelectionViewModel.GeometryCogNotch = notch;
+                this.SelectionViewModel.GeometryCog_Notch = notch;
 
                 this.MethodViewModel.TLayerChangeDelta<GeometryCogLayer>(layerType: LayerType.GeometryCog, set: (tLayer) => tLayer.Notch = notch);
             };
             this.NotchSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float notch = (float)value;
-                this.SelectionViewModel.GeometryCogNotch = notch;
+                this.SelectionViewModel.GeometryCog_Notch = notch;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, GeometryCogLayer>
                 (
                     layerType: LayerType.GeometryCog,
                     set: (tLayer) => tLayer.Notch = notch,
 
-                    historyTitle: "Set cog layer notch",
-                    getHistory: (tLayer) => tLayer.StartingNotch,
-                    setHistory: (tLayer, previous) => tLayer.Notch = previous
+                    type: HistoryType.LayersProperty_Set_GeometryCogLayer_Notch,
+                    getUndo: (tLayer) => tLayer.StartingNotch,
+                    setUndo: (tLayer, previous) => tLayer.Notch = previous
                 );
             };
         }

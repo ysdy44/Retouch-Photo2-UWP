@@ -3,13 +3,10 @@
 // Difficult:         ★★★★
 // Only:              ★★★★★
 // Complete:      ★★★★★
-using Retouch_Photo2.Elements.DrawPages;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
-using System.Numerics;
 using Windows.Foundation;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 

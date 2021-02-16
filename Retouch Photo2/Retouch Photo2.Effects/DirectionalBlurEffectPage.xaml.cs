@@ -4,6 +4,7 @@
 // Only:              
 // Complete:      ★★★
 using Retouch_Photo2.Effects.Icons;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -91,20 +92,20 @@ namespace Retouch_Photo2.Effects.Models
             this.Radius = 0.0f;
             this.Angle = 0.0f;
 
-            this.MethodViewModel.EffectChangeCompleted<(float, float)>
+            this.MethodViewModel.EffectChanged<(float, float)>
             (
                 set: (effect) =>
                 {
                     effect.DirectionalBlur_Radius = 0.0f;
                     effect.DirectionalBlur_Angle = 0.5f;
                 },
-                historyTitle: "Set effect directional blur",
-                getHistory: (effect) =>
+                type: HistoryType.LayersProperty_ResetEffect_DirectionalBlur,
+                getUndo: (effect) =>
                 (
                     effect.DirectionalBlur_Radius,
                     effect.DirectionalBlur_Angle
                 ),
-                setHistory: (effect, previous) =>
+                setUndo: (effect, previous) =>
                 {
                     effect.DirectionalBlur_Radius = previous.Item1;
                     effect.DirectionalBlur_Angle = previous.Item2;
@@ -135,9 +136,9 @@ namespace Retouch_Photo2.Effects.Models
             (
                 set: (effect) => effect.DirectionalBlur_IsOn = isOn,
 
-                historyTitle: "Set effect directional blur is on",
-                getHistory: (effect) => effect.DirectionalBlur_IsOn,
-                setHistory: (effect, previous) => effect.DirectionalBlur_IsOn = previous
+                type: HistoryType.LayersProperty_SwitchEffect_DirectionalBlur,
+                getUndo: (effect) => effect.DirectionalBlur_IsOn,
+                setUndo: (effect, previous) => effect.DirectionalBlur_IsOn = previous
             );            
         }
 
@@ -155,10 +156,10 @@ namespace Retouch_Photo2.Effects.Models
                 this.MethodViewModel.EffectChanged<float>
                 (
                     set: (effect) => effect.DirectionalBlur_Radius = radius,
-
-                    historyTitle: "Set effect directional blur radius",
-                    getHistory: (effect) => effect.DirectionalBlur_Radius,
-                    setHistory: (effect, previous) => effect.DirectionalBlur_Radius = previous
+                               
+                    type: HistoryType.LayersProperty_SetEffect_DirectionalBlur_Radius,
+                    getUndo: (effect) => effect.DirectionalBlur_Radius,
+                    setUndo: (effect, previous) => effect.DirectionalBlur_Radius = previous
                 );
             };
         }
@@ -184,9 +185,9 @@ namespace Retouch_Photo2.Effects.Models
                 (
                     set: (effect) => effect.DirectionalBlur_Radius = radius,
 
-                    historyTitle: "Set effect directional blur radius",
-                    getHistory: (effect) => effect.StartingDirectionalBlur_Radius,
-                    setHistory: (effect, previous) => effect.DirectionalBlur_Radius = previous
+                    type: HistoryType.LayersProperty_SetEffect_DirectionalBlur_Radius,
+                    getUndo: (effect) => effect.StartingDirectionalBlur_Radius,
+                    setUndo: (effect, previous) => effect.DirectionalBlur_Radius = previous
                 );
             };
         }
@@ -207,9 +208,9 @@ namespace Retouch_Photo2.Effects.Models
                (
                    set: (effect) => effect.DirectionalBlur_Angle = (float)value,
 
-                   historyTitle: "Set effect directional blur angle",
-                   getHistory: (effect) => effect.StartingDirectionalBlur_Angle,
-                   setHistory: (effect, previous) => effect.DirectionalBlur_Angle = previous
+                   type: HistoryType.LayersProperty_SetEffect_DirectionalBlur_Angle,
+                   getUndo: (effect) => effect.StartingDirectionalBlur_Angle,
+                   setUndo: (effect, previous) => effect.DirectionalBlur_Angle = previous
                );
             };
         }
@@ -235,9 +236,9 @@ namespace Retouch_Photo2.Effects.Models
                (
                    set: (effect) => effect.DirectionalBlur_Angle = (float)value,
 
-                   historyTitle: "Set effect directional blur angle",
-                   getHistory: (effect) => effect.StartingDirectionalBlur_Angle,
-                   setHistory: (effect, previous) => effect.DirectionalBlur_Angle = previous
+                   type: HistoryType.LayersProperty_SetEffect_DirectionalBlur_Angle,
+                   getUndo: (effect) => effect.StartingDirectionalBlur_Angle,
+                   setUndo: (effect, previous) => effect.DirectionalBlur_Angle = previous
                );
             };
         }

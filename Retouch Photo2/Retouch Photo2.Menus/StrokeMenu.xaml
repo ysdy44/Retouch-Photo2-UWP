@@ -17,7 +17,7 @@
         <!--Dash-->
         <TextBlock x:Name="DashTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <strokes:DashSegmented x:Name="DashSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}"
-                         Dash="{x:Bind SelectionViewModel.StrokeStyleDash, Mode=OneWay}"/>
+                         Dash="{x:Bind SelectionViewModel.StrokeStyle_Dash, Mode=OneWay}"/>
 
 
         <!--Width-->
@@ -34,13 +34,13 @@
         <!--Cap-->
         <TextBlock x:Name="CapTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <strokes:CapSegmented x:Name="CapSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}"
-                         Cap="{x:Bind SelectionViewModel.StrokeStyleCap, Mode=OneWay}"/>
+                         Cap="{x:Bind SelectionViewModel.StrokeStyle_Cap, Mode=OneWay}"/>
 
 
         <!--Join-->
         <TextBlock x:Name="JoinTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <strokes:JoinSegmented x:Name="JoinSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}"
-                         Join="{x:Bind SelectionViewModel.StrokeStyleJoin, Mode=OneWay}"/>
+                         Join="{x:Bind SelectionViewModel.StrokeStyle_Join, Mode=OneWay}"/>
 
 
         <!--Offset-->
@@ -48,10 +48,10 @@
             <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <hsvColorPickers:NumberPicker x:Name="OffsetPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                            RelativePanel.AlignRightWithPanel="True"
-                           Value="{x:Bind StyleOffsetToNumberConverter(SelectionViewModel.StrokeStyleOffset), Mode=OneWay}"/>
+                           Value="{x:Bind StyleOffsetToNumberConverter(SelectionViewModel.StrokeStyle_Offset), Mode=OneWay}"/>
         </RelativePanel>
         <elements:SliderPicker x:Name="OffsetSlider"
-                        Value="{x:Bind SelectionViewModel.StrokeStyleOffset, Mode=OneWay}"/>
+                        Value="{x:Bind SelectionViewModel.StrokeStyle_Offset, Mode=OneWay}"/>
 
 
         <!--IsFollowTransform-->

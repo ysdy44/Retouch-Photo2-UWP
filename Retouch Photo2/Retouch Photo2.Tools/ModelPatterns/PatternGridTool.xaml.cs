@@ -5,6 +5,7 @@
 // Complete:      ★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
@@ -61,8 +62,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             return new PatternGridLayer(customDevice)
             {
-                HorizontalStep = this.SelectionViewModel.PatternGridHorizontalStep,
-                VerticalStep = this.SelectionViewModel.PatternGridVerticalStep,
+                HorizontalStep = this.SelectionViewModel.PatternGrid_HorizontalStep,
+                VerticalStep = this.SelectionViewModel.PatternGrid_VerticalStep,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandCurveStyle
             };
@@ -135,19 +136,19 @@ namespace Retouch_Photo2.Tools.Models
         //GridType
         private void ConstructGridType()
         {
-            this.PatternGridTypeComboBox.TypeChanged += (s, type) =>
+            this.TypeComboBox.TypeChanged += (s, type) =>
             {
                 PatternGridType gridType = (PatternGridType)type;
-                this.SelectionViewModel.PatternGridType = gridType;
+                this.SelectionViewModel.PatternGrid_Type = gridType;
 
                 this.MethodViewModel.TLayerChanged<PatternGridType, PatternGridLayer>
                 (
                     layerType: LayerType.PatternGrid,
                     set: (tLayer) => tLayer.GridType = gridType,
 
-                    historyTitle: "Set grid layer type",
-                    getHistory: (tLayer) => tLayer.GridType,
-                    setHistory: (tLayer, previous) => tLayer.GridType = previous
+                    type: HistoryType.LayersProperty_Set_PatternGridLayer_GridType,
+                    getUndo: (tLayer) => tLayer.GridType,
+                    setUndo: (tLayer, previous) => tLayer.GridType = previous
                 );
             };
         }
@@ -162,16 +163,16 @@ namespace Retouch_Photo2.Tools.Models
             this.HorizontalStepPicker.ValueChanged += (sender, value) =>
             {
                 float horizontalStep = value;
-                this.SelectionViewModel.PatternGridHorizontalStep = horizontalStep;
+                this.SelectionViewModel.PatternGrid_HorizontalStep = horizontalStep;
 
                 this.MethodViewModel.TLayerChanged<float, PatternGridLayer>
                 (
                     layerType: LayerType.PatternGrid,
                     set: (tLayer) => tLayer.HorizontalStep = horizontalStep,
 
-                    historyTitle: "Set grid layer horizontal step",
-                    getHistory: (tLayer) => tLayer.HorizontalStep,
-                    setHistory: (tLayer, previous) => tLayer.HorizontalStep = previous
+                    type: HistoryType.LayersProperty_Set_PatternGridLayer_HorizontalStep,
+                    getUndo: (tLayer) => tLayer.HorizontalStep,
+                    setUndo: (tLayer, previous) => tLayer.HorizontalStep = previous
                 );
             };
         }
@@ -184,23 +185,23 @@ namespace Retouch_Photo2.Tools.Models
             this.HorizontalStepSlider.ValueChangeDelta += (sender, value) =>
             {
                 float horizontalStep = (float)value;
-                this.SelectionViewModel.PatternGridHorizontalStep = horizontalStep;
+                this.SelectionViewModel.PatternGrid_HorizontalStep = horizontalStep;
 
                 this.MethodViewModel.TLayerChangeDelta<PatternGridLayer>(layerType: LayerType.PatternGrid, set: (tLayer) => tLayer.HorizontalStep = horizontalStep);
             };
             this.HorizontalStepSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float horizontalStep = (float)value;
-                this.SelectionViewModel.PatternGridHorizontalStep = horizontalStep;
+                this.SelectionViewModel.PatternGrid_HorizontalStep = horizontalStep;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, PatternGridLayer>
                 (
                     layerType: LayerType.PatternGrid,
                     set: (tLayer) => tLayer.HorizontalStep = horizontalStep,
 
-                    historyTitle: "Set grid layer horizontal step",
-                    getHistory: (tLayer) => tLayer.StartingHorizontalStep,
-                    setHistory: (tLayer, previous) => tLayer.HorizontalStep = previous
+                    type: HistoryType.LayersProperty_Set_PatternGridLayer_HorizontalStep,
+                    getUndo: (tLayer) => tLayer.StartingHorizontalStep,
+                    setUndo: (tLayer, previous) => tLayer.HorizontalStep = previous
                 );
             };
         }
@@ -215,16 +216,16 @@ namespace Retouch_Photo2.Tools.Models
             this.VerticalStepPicker.ValueChanged += (sender, value) =>
             {
                 float verticalStep = (float)value;
-                this.SelectionViewModel.PatternGridVerticalStep = verticalStep;
+                this.SelectionViewModel.PatternGrid_VerticalStep = verticalStep;
 
                 this.MethodViewModel.TLayerChanged<float, PatternGridLayer>
                 (
                     layerType: LayerType.PatternGrid,
                     set: (tLayer) => tLayer.VerticalStep = verticalStep,
 
-                    historyTitle: "Set grid layer vertical step",
-                    getHistory: (tLayer) => tLayer.VerticalStep,
-                    setHistory: (tLayer, previous) => tLayer.VerticalStep = previous
+                    type: HistoryType.LayersProperty_Set_PatternGridLayer_VerticalStep,
+                    getUndo: (tLayer) => tLayer.VerticalStep,
+                    setUndo: (tLayer, previous) => tLayer.VerticalStep = previous
                 );
             };
         }
@@ -237,23 +238,23 @@ namespace Retouch_Photo2.Tools.Models
             this.VerticalStepSlider.ValueChangeDelta += (sender, value) =>
             {
                 float verticalStep = (float)value;
-                this.SelectionViewModel.PatternGridVerticalStep = verticalStep;
+                this.SelectionViewModel.PatternGrid_VerticalStep = verticalStep;
 
                 this.MethodViewModel.TLayerChangeDelta<PatternGridLayer>(layerType: LayerType.PatternGrid, set: (tLayer) => tLayer.VerticalStep = verticalStep);
             };
             this.VerticalStepSlider.ValueChangeCompleted += (sender, value) =>
             {
                 float verticalStep = (float)value;
-                this.SelectionViewModel.PatternGridVerticalStep = verticalStep;
+                this.SelectionViewModel.PatternGrid_VerticalStep = verticalStep;
 
                 this.MethodViewModel.TLayerChangeCompleted<float, PatternGridLayer>
                 (
                     layerType: LayerType.PatternGrid,
                     set: (tLayer) => tLayer.VerticalStep = verticalStep,
 
-                    historyTitle: "Set grid layer vertical step",
-                    getHistory: (tLayer) => tLayer.StartingVerticalStep,
-                    setHistory: (tLayer, previous) => tLayer.VerticalStep = previous
+                    type: HistoryType.LayersProperty_Set_PatternGridLayer_VerticalStep,
+                    getUndo: (tLayer) => tLayer.StartingVerticalStep,
+                    setUndo: (tLayer, previous) => tLayer.VerticalStep = previous
                 );
             };
         }

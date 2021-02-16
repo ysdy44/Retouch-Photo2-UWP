@@ -35,7 +35,7 @@ namespace Retouch_Photo2
                 if (photo == null) return;
 
                 //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory("Add layer");
+                LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
                 this.ViewModel.HistoryPush(history);
 
                 //Transformer

@@ -140,7 +140,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                 if (layer.Filter.Adjustments[this.Index] is BrightnessAdjustment adjustment)
                 {
                     //History
-                    LayersPropertyHistory history = new LayersPropertyHistory("Set brightness adjustment");
+                    LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_ResetAdjustment_Brightness);
 
                     var previous = layer.Filter.Adjustments.IndexOf(adjustment); 
                     var previous1 = adjustment.WhiteLight;
@@ -227,9 +227,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.WhiteLight = whiteLight,
 
-                    historyTitle: "Set brightness adjustment white light",
-                    getHistory: (tAdjustment) => tAdjustment.WhiteLight,
-                    setHistory: (tAdjustment, previous) => tAdjustment.WhiteLight = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Brightness_WhiteLight,
+                    getUndo: (tAdjustment) => tAdjustment.WhiteLight,
+                    setUndo: (tAdjustment, previous) => tAdjustment.WhiteLight = previous
                 );
             };
         }
@@ -262,9 +262,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.WhiteLight = whiteLight,
 
-                    historyTitle: "Set brightness adjustment white light",
-                    getHistory: (tAdjustment) => tAdjustment.StartingWhiteLight,
-                    setHistory: (tAdjustment, previous) => tAdjustment.WhiteLight = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Brightness_WhiteLight,
+                    getUndo: (tAdjustment) => tAdjustment.StartingWhiteLight,
+                    setUndo: (tAdjustment, previous) => tAdjustment.WhiteLight = previous
                 );
             };
         }
@@ -289,9 +289,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.WhiteDark = whiteDark,
 
-                    historyTitle: "Set brightness adjustment white dark",
-                    getHistory: (tAdjustment) => tAdjustment.WhiteDark,
-                    setHistory: (tAdjustment, previous) => tAdjustment.WhiteDark = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Brightness_WhiteDark,
+                    getUndo: (tAdjustment) => tAdjustment.WhiteDark,
+                    setUndo: (tAdjustment, previous) => tAdjustment.WhiteDark = previous
                 );
             };
         }
@@ -324,9 +324,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.WhiteDark = whiteDark,
 
-                    historyTitle: "Set brightness adjustment white dark",
-                    getHistory: (tAdjustment) => tAdjustment.StartingWhiteDark,
-                    setHistory: (tAdjustment, previous) => tAdjustment.WhiteDark = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Brightness_WhiteDark,
+                    getUndo: (tAdjustment) => tAdjustment.StartingWhiteDark,
+                    setUndo: (tAdjustment, previous) => tAdjustment.WhiteDark = previous
                 );
             };
         }
@@ -350,10 +350,10 @@ namespace Retouch_Photo2.Adjustments.Pages
                 (
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.BlackLight = blackLight,
-
-                    historyTitle: "Set brightness adjustment black light",
-                    getHistory: (tAdjustment) => tAdjustment.BlackLight,
-                    setHistory: (tAdjustment, previous) => tAdjustment.BlackLight = previous
+                                    
+                    type: HistoryType.LayersProperty_SetAdjustment_Brightness_BlackLight,
+                    getUndo: (tAdjustment) => tAdjustment.BlackLight,
+                    setUndo: (tAdjustment, previous) => tAdjustment.BlackLight = previous
                 );
             };
         }
@@ -386,9 +386,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.BlackLight = blackLight,
 
-                    historyTitle: "Set brightness adjustment black light",
-                    getHistory: (tAdjustment) => tAdjustment.StartingBlackLight,
-                    setHistory: (tAdjustment, previous) => tAdjustment.BlackLight = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Brightness_BlackLight,
+                    getUndo: (tAdjustment) => tAdjustment.StartingBlackLight,
+                    setUndo: (tAdjustment, previous) => tAdjustment.BlackLight = previous
                 );
             };
         }
@@ -413,9 +413,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.BlackDark = blackDark,
 
-                    historyTitle: "Set brightness adjustment black dark",
-                    getHistory: (tAdjustment) => tAdjustment.BlackDark,
-                    setHistory: (tAdjustment, previous) => tAdjustment.BlackDark = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Brightness_BlackDark,
+                    getUndo: (tAdjustment) => tAdjustment.BlackDark,
+                    setUndo: (tAdjustment, previous) => tAdjustment.BlackDark = previous
                 );
             };
         }
@@ -448,9 +448,9 @@ namespace Retouch_Photo2.Adjustments.Pages
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.BlackDark = blackDark,
 
-                    historyTitle: "Set brightness adjustment black dark",
-                    getHistory: (tAdjustment) => tAdjustment.StartingBlackDark,
-                    setHistory: (tAdjustment, previous) => tAdjustment.BlackDark = previous
+                    type: HistoryType.LayersProperty_SetAdjustment_Brightness_BlackDark,
+                    getUndo: (tAdjustment) => tAdjustment.StartingBlackDark,
+                    setUndo: (tAdjustment, previous) => tAdjustment.BlackDark = previous
                 );
             };
         }

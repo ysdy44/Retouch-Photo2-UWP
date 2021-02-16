@@ -108,6 +108,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="HistoryBase.cs" />
+    <Compile Include="HistoryType.cs" />
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
