@@ -34,8 +34,6 @@ namespace Retouch_Photo2
                 XDocument document = XDocument.Load(path);
 
                 IEnumerable<Photo> photos = Retouch_Photo2.Photos.XML.LoadPhotos(document);
-                if (photos == null) return null;
-
                 return photos;
             }
             catch (Exception)

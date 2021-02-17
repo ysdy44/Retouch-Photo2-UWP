@@ -31,8 +31,6 @@ namespace Retouch_Photo2
             XDocument document = XDocument.Load(path);
 
             Project project = Retouch_Photo2.ViewModels.XML.LoadProject(name, document);
-            if (project == null) return null;
-
             return project;
         }
 

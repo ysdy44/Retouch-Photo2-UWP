@@ -12,7 +12,7 @@ namespace Retouch_Photo2.ViewModels
     {
 
         /// <summary> Gets or sets the setting. </summary>
-        public Setting Setting = new Setting();
+        public Setting Setting { get; set; } = new Setting();
 
         //@Construct
         /// <summary>

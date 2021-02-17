@@ -41,8 +41,6 @@ namespace Retouch_Photo2
                     XDocument document = XDocument.Load(stream);
 
                     Setting setting = Retouch_Photo2.ViewModels.XML.LoadSetting(document);
-                    if (setting != null) return null;
-
                     return setting;
                 }
             }
