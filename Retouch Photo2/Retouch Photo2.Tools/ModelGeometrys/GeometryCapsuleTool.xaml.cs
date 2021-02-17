@@ -26,41 +26,22 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryCapsule;
         public FrameworkElement Icon { get; } = new GeometryCapsuleIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.GeometryCapsule,
             CenterContent = new GeometryCapsuleIcon()
         };
         public FrameworkElement Page { get; } = new GeometryCapsulePage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryCapsuleTool. 
-        /// </summary>
-        public GeometryCapsuleTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryCapsuleLayer(customDevice)
+            return new GeometryCapsuleLayer
             {
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_GeometryCapsule");
         }
 
     }

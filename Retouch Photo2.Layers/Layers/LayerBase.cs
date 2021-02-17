@@ -24,7 +24,21 @@ namespace Retouch_Photo2.Layers
     {
 
         /// <summary> Gets or sets <see cref = "LayerBase" />'s control. </summary>
-        public LayerControl Control { get; protected set; }
+        public LayerControl Control
+        {
+            get
+            {
+                if (this.control == null)
+                {
+                    if (this is ILayer layer)
+                    {
+                        this.control = new LayerControl(layer);
+                    }
+                }
+                return this.control;
+            }
+        }
+        private LayerControl control = null;
 
 
         //@Abstract
@@ -121,9 +135,8 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Get own copy.
         /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
         /// <returns> The cloned <see cref="ILayer"/>. </returns>
-        public abstract ILayer Clone(CanvasDevice customDevice);
+        public abstract ILayer Clone();
 
         /// <summary>
         /// Saves the entire <see cref="ILayer"/> to a XElement.
@@ -169,10 +182,9 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Copy with self.
         /// </summary>
-        /// <param name="resourceCreator"> The resource-creator. </param>
         /// <param name="source"> The source <see cref="ILayer"/>. </param>
         /// <param name="destination"> The destination <see cref="ILayer"/>. </param>
-        public static void CopyWith(ICanvasResourceCreator resourceCreator, ILayer destination, ILayer source)
+        public static void CopyWith(ILayer destination, ILayer source)
         {
             destination.Id = source.Id;
 

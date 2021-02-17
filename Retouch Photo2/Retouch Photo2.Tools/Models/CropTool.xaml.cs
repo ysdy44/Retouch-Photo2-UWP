@@ -39,25 +39,15 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.Crop;
         public FrameworkElement Icon { get; } = new CropIcon();
         public IToolButton Button { get; } = new ToolButton
         {
+            Type = ToolType.Crop,
             CenterContent = new CropIcon()
         };
         public FrameworkElement Page => this.CropPage;
 
         readonly CropPage CropPage = new CropPage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a CropTool. 
-        /// </summary>
-        public CropTool()
-        {
-            this.ConstructStrings();
-        }
 
 
         Layerage Layerage;
@@ -171,15 +161,6 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedFrom()
         {
             TouchbarButton.Instance = null;
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_Crop");
         }
 
     }

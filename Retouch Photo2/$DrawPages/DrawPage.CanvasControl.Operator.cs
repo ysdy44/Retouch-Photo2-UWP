@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas.UI.Xaml;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -75,7 +76,7 @@ namespace Retouch_Photo2
 
             //LayerRender
             this.LayerRenderCanvasControl.UseSharedDevice = true;
-            this.LayerRenderCanvasControl.CustomDevice = this.ViewModel.CanvasDevice;
+            this.LayerRenderCanvasControl.CustomDevice = LayerManager.CanvasDevice;
 
             this.LayerRenderCanvasControl.Draw += (sender, args) =>
             {
@@ -86,7 +87,7 @@ namespace Retouch_Photo2
 
             //ToolDraw
             this.ToolDrawCanvasControl.UseSharedDevice = true;
-            this.ToolDrawCanvasControl.CustomDevice = this.ViewModel.CanvasDevice;
+            this.ToolDrawCanvasControl.CustomDevice = LayerManager.CanvasDevice;
 
             this.ToolDrawCanvasControl.Draw += (sender, args) =>
             {

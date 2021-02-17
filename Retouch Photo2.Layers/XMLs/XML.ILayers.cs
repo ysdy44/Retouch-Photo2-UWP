@@ -43,10 +43,9 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         ///  Loads a <see cref="ILayer"/>s from an XDocument.
         /// </summary>    
-        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="document"> The source XDocument. </param>
         /// <returns> The loaded <see cref="ILayer"/>s. </returns>
-        public static IEnumerable<ILayer> LoadLayers(CanvasDevice customDevice, XDocument document)
+        public static IEnumerable<ILayer> LoadLayers(XDocument document)
         {
             if (document.Element("Root") is XElement root)
             {
@@ -55,7 +54,7 @@ namespace Retouch_Photo2.Layers
                     return
                         from layer
                         in layers
-                        select XML.LoadILayer(customDevice, layer);
+                        select XML.LoadILayer(layer);
                 }
             }
 

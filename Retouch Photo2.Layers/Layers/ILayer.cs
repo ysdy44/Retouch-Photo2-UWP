@@ -106,9 +106,8 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Get own copy.
         /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
         /// <returns> The cloned <see cref="ILayer"/>. </returns>
-        ILayer Clone(CanvasDevice customDevice);
+        ILayer Clone();
 
         /// <summary>
         /// Saves the entire <see cref="ILayer"/> to a XElement.

@@ -14,8 +14,6 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public interface ITool
     {
-        /// <summary> Gets the type. </summary>
-        ToolType Type { get; }
         /// <summary> Gets the icon. </summary>
         FrameworkElement Icon { get; }
         /// <summary> Gets the button. </summary>

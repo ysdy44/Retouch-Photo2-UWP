@@ -88,41 +88,47 @@ namespace Retouch_Photo2.Blends
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.ConstructGroup(this.NoneButton, resource.GetString("Blends_None"), new NoneIcon(), null);
+            
 
-            this.ConstructGroup(this.MultiplyButton, resource.GetString("Blends_Multiply"), new MultiplyIcon(), BlendEffectMode.Multiply);
-            this.ConstructGroup(this.ScreenButton, resource.GetString("Blends_Screen"), new ScreenIcon(), BlendEffectMode.Screen);
+            void constructGroup(Button button, UserControl icon, BlendEffectMode mode)
+            {
+                this.ConstructGroup(button, resource.GetString($"Blends_{mode}"), icon, mode);
+            }
 
-            this.ConstructGroup(this.DarkenButton, resource.GetString("Blends_Darken"), new DarkenIcon(), BlendEffectMode.Darken);
-            this.ConstructGroup(this.LightenButton, resource.GetString("Blends_Lighten"), new LightenIcon(), BlendEffectMode.Lighten);
+            constructGroup(this.MultiplyButton, new MultiplyIcon(), BlendEffectMode.Multiply);
+            constructGroup(this.ScreenButton, new ScreenIcon(), BlendEffectMode.Screen);
 
-            this.ConstructGroup(this.DissolveButton, resource.GetString("Blends_Dissolve"), new DissolveIcon(), BlendEffectMode.Dissolve);
-            this.ConstructGroup(this.ColorBurnButton, resource.GetString("Blends_ColorBurn"), new ColorBurnIcon(), BlendEffectMode.ColorBurn);
-            this.ConstructGroup(this.LinearBurnButton, resource.GetString("Blends_LinearBurn"), new LinearBurnIcon(), BlendEffectMode.LinearBurn);
+            constructGroup(this.DarkenButton, new DarkenIcon(), BlendEffectMode.Darken);
+            constructGroup(this.LightenButton, new LightenIcon(), BlendEffectMode.Lighten);
 
-            this.ConstructGroup(this.DarkerColorButton, resource.GetString("Blends_DarkerColor"), new DarkerColorIcon(), BlendEffectMode.DarkerColor);
-            this.ConstructGroup(this.LighterColorButton, resource.GetString("Blends_LighterColor"), new LighterColorIcon(), BlendEffectMode.LighterColor);
+            constructGroup(this.DissolveButton, new DissolveIcon(), BlendEffectMode.Dissolve);
+            constructGroup(this.ColorBurnButton, new ColorBurnIcon(), BlendEffectMode.ColorBurn);
+            constructGroup(this.LinearBurnButton, new LinearBurnIcon(), BlendEffectMode.LinearBurn);
 
-            this.ConstructGroup(this.ColorDodgeButton, resource.GetString("Blends_ColorDodge"), new ColorDodgeIcon(), BlendEffectMode.ColorDodge);
-            this.ConstructGroup(this.LinearDodgeButton, resource.GetString("Blends_LinearDodge"), new LinearDodgeIcon(), BlendEffectMode.LinearDodge);
+            constructGroup(this.DarkerColorButton, new DarkerColorIcon(), BlendEffectMode.DarkerColor);
+            constructGroup(this.LighterColorButton, new LighterColorIcon(), BlendEffectMode.LighterColor);
 
-            this.ConstructGroup(this.OverlayButton, resource.GetString("Blends_Overlay"), new OverlayIcon(), BlendEffectMode.Overlay);
-            this.ConstructGroup(this.SoftLightButton, resource.GetString("Blends_SoftLight"), new SoftLightIcon(), BlendEffectMode.SoftLight);
-            this.ConstructGroup(this.HardLightButton, resource.GetString("Blends_HardLight"), new HardLightIcon(), BlendEffectMode.HardLight);
-            this.ConstructGroup(this.VividLightButton, resource.GetString("Blends_VividLight"), new VividLightIcon(), BlendEffectMode.VividLight);
-            this.ConstructGroup(this.LinearLightButton, resource.GetString("Blends_LinearLight"), new LinearLightIcon(), BlendEffectMode.LinearLight);
-            this.ConstructGroup(this.PinLightButton, resource.GetString("Blends_PinLight"), new PinLightIcon(), BlendEffectMode.PinLight);
+            constructGroup(this.ColorDodgeButton, new ColorDodgeIcon(), BlendEffectMode.ColorDodge);
+            constructGroup(this.LinearDodgeButton, new LinearDodgeIcon(), BlendEffectMode.LinearDodge);
 
-            this.ConstructGroup(this.HardMixButton, resource.GetString("Blends_HardMix"), new HardMixIcon(), BlendEffectMode.HardMix);
-            this.ConstructGroup(this.DifferenceButton, resource.GetString("Blends_Difference"), new DifferenceIcon(), BlendEffectMode.Difference);
-            this.ConstructGroup(this.ExclusionButton, resource.GetString("Blends_Exclusion"), new ExclusionIcon(), BlendEffectMode.Exclusion);
+            constructGroup(this.OverlayButton, new OverlayIcon(), BlendEffectMode.Overlay);
+            constructGroup(this.SoftLightButton, new SoftLightIcon(), BlendEffectMode.SoftLight);
+            constructGroup(this.HardLightButton, new HardLightIcon(), BlendEffectMode.HardLight);
+            constructGroup(this.VividLightButton, new VividLightIcon(), BlendEffectMode.VividLight);
+            constructGroup(this.LinearLightButton, new LinearLightIcon(), BlendEffectMode.LinearLight);
+            constructGroup(this.PinLightButton, new PinLightIcon(), BlendEffectMode.PinLight);
 
-            this.ConstructGroup(this.HueButton, resource.GetString("Blends_Hue"), new HueIcon(), BlendEffectMode.Hue);
-            this.ConstructGroup(this.SaturationButton, resource.GetString("Blends_Saturation"), new SaturationIcon(), BlendEffectMode.Saturation);
-            this.ConstructGroup(this.ColorButton, resource.GetString("Blends_Color"), new ColorIcon(), BlendEffectMode.Color);
+            constructGroup(this.HardMixButton, new HardMixIcon(), BlendEffectMode.HardMix);
+            constructGroup(this.DifferenceButton, new DifferenceIcon(), BlendEffectMode.Difference);
+            constructGroup(this.ExclusionButton, new ExclusionIcon(), BlendEffectMode.Exclusion);
 
-            this.ConstructGroup(this.LuminosityButton, resource.GetString("Blends_Luminosity"), new LuminosityIcon(), BlendEffectMode.Luminosity);
-            this.ConstructGroup(this.SubtractButton, resource.GetString("Blends_Subtract"), new SubtractIcon(), BlendEffectMode.Subtract);
-            this.ConstructGroup(this.DivisionButton, resource.GetString("Blends_Division"), new DivisionIcon(), BlendEffectMode.Division);
+            constructGroup(this.HueButton, new HueIcon(), BlendEffectMode.Hue);
+            constructGroup(this.SaturationButton,  new SaturationIcon(), BlendEffectMode.Saturation);
+            constructGroup(this.ColorButton, new ColorIcon(), BlendEffectMode.Color);
+
+            constructGroup(this.LuminosityButton, new LuminosityIcon(), BlendEffectMode.Luminosity);
+            constructGroup(this.SubtractButton, new SubtractIcon(), BlendEffectMode.Subtract);
+            constructGroup(this.DivisionButton, new DivisionIcon(), BlendEffectMode.Division);
 
         }
 

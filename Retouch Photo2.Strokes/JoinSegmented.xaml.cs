@@ -93,29 +93,19 @@ namespace Retouch_Photo2.Strokes
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.MiterToolTip.Content = resource.GetString("Strokes_Join_Miter");
-            this.MiterButton.Click += (s, e) =>
+            void constructGroup(Button button, ToolTip toolTip, CanvasLineJoin lineJoin)
             {
-                this.JoinChanged?.Invoke(this, CanvasLineJoin.Miter);//Delegate
-            };
+                toolTip.Content = resource.GetString($"Strokes_Join_{lineJoin}");
+                button.Click += (s, e) =>
+                {
+                    this.JoinChanged?.Invoke(this, lineJoin);//Delegate
+                };
+            }
 
-            this.BevelToolTip.Content = resource.GetString("Strokes_Join_Bevel");
-            this.BevelButton.Click += (s, e) =>
-            {
-                this.JoinChanged?.Invoke(this, CanvasLineJoin.Bevel);//Delegate
-            };
-
-            this.RoundToolTip.Content = resource.GetString("Strokes_Join_Round");
-            this.RoundButton.Click += (s, e) =>
-            {
-                this.JoinChanged?.Invoke(this, CanvasLineJoin.Round);//Delegate
-            };
-
-            this.MiterOrBevelToolTip.Content = resource.GetString("Strokes_Join_MiterOrBevel");
-            this.MiterOrBevelButton.Click += (s, e) =>
-            {
-                this.JoinChanged?.Invoke(this, CanvasLineJoin.MiterOrBevel);//Delegate
-            };
+            constructGroup(this.MiterButton, this.MiterToolTip, CanvasLineJoin.Miter);
+            constructGroup(this.BevelButton, this.BevelToolTip, CanvasLineJoin.Bevel);
+            constructGroup(this.RoundButton, this.RoundToolTip, CanvasLineJoin.Round);
+            constructGroup(this.MiterOrBevelButton, this.MiterOrBevelToolTip, CanvasLineJoin.MiterOrBevel);
         }
 
     }

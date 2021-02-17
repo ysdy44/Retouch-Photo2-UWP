@@ -95,14 +95,14 @@ namespace Retouch_Photo2
             {
                 foreach (Photo photo in photos)
                 {
-                    await photo.ConstructPhotoSource(this.ViewModel.CanvasDevice);
+                    await photo.ConstructPhotoSource(LayerManager.CanvasDevice);
                     Photo.Instances.Add(photo);
                 }
             }
 
             //Load all layers file. 
             LayerBase.Instances.Clear();
-            IEnumerable<ILayer> layers = XML.LoadLayersFile(this.ViewModel.CanvasDevice);
+            IEnumerable<ILayer> layers = XML.LoadLayersFile();
             if (layers != null)
             {
                 foreach (ILayer layer in layers)
@@ -167,7 +167,7 @@ namespace Retouch_Photo2
                 this.LoadingControl.IsActive = false;
                 return;
             }
-            Photo photo = await Photo.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
+            Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
             Photo.DuplicateChecking(photo);
 
             //Transformer
@@ -178,7 +178,7 @@ namespace Retouch_Photo2
 
             //ImageLayer 
             Photocopier photocopier = photo.ToPhotocopier();
-            ImageLayer imageLayer = new ImageLayer(this.ViewModel.CanvasDevice)
+            ImageLayer imageLayer = new ImageLayer
             {
                 Transform = new Transform(transformerSource),
                 Photocopier = photocopier,

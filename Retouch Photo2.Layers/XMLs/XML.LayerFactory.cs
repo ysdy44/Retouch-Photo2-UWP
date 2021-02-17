@@ -18,53 +18,52 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Create a Layer from an string and XElement.
         /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="type"> The source string. </param>
         /// <returns> The created <see cref="Layerage"/>. </returns>
-        public static ILayer CreateLayer(CanvasDevice customDevice, string type)
+        public static ILayer CreateLayer(string type)
         {
             switch (type)
             {
                 //Geometry0
-                case "GeometryRectangle": return new GeometryRectangleLayer(customDevice);
-                case "GeometryEllipse": return new GeometryEllipseLayer(customDevice);
+                case "GeometryRectangle": return new GeometryRectangleLayer();
+                case "GeometryEllipse": return new GeometryEllipseLayer();
 
-                case "Curve": return new CurveLayer(customDevice);
+                case "Curve": return new CurveLayer();
 
-                case "TextArtistic": return new TextArtisticLayer(customDevice);
-                case "TextFrame": return new TextFrameLayer(customDevice);
+                case "TextArtistic": return new TextArtisticLayer();
+                case "TextFrame": return new TextFrameLayer();
 
-                case "Image": return new ImageLayer(customDevice);
-                case "Group": return new GroupLayer(customDevice);
+                case "Image": return new ImageLayer();
+                case "Group": return new GroupLayer();
 
 
                 //Pattern
-                case "PatternGrid": return new PatternGridLayer(customDevice);
-                case "PatternDiagonal": return new PatternDiagonalLayer(customDevice);
-                case "PatternSpotted": return new PatternSpottedLayer(customDevice);
+                case "PatternGrid": return new PatternGridLayer();
+                case "PatternDiagonal": return new PatternDiagonalLayer();
+                case "PatternSpotted": return new PatternSpottedLayer();
 
 
                 //Geometry1
-                case "GeometryRoundRect": return new GeometryRoundRectLayer(customDevice);
-                case "GeometryTriangle": return new GeometryTriangleLayer(customDevice);
-                case "GeometryDiamond": return new GeometryDiamondLayer(customDevice);
+                case "GeometryRoundRect": return new GeometryRoundRectLayer();
+                case "GeometryTriangle": return new GeometryTriangleLayer();
+                case "GeometryDiamond": return new GeometryDiamondLayer();
 
                 //Geometry2
-                case "GeometryPentagon": return new GeometryPentagonLayer(customDevice);
-                case "GeometryStar": return new GeometryStarLayer(customDevice);
-                case "GeometryCog": return new GeometryCogLayer(customDevice);
+                case "GeometryPentagon": return new GeometryPentagonLayer();
+                case "GeometryStar": return new GeometryStarLayer();
+                case "GeometryCog": return new GeometryCogLayer();
 
                 //Geometry3
-                case "GeometryDount": return new GeometryDountLayer(customDevice);
-                case "GeometryPie": return new GeometryPieLayer(customDevice);
-                case "GeometryCookie": return new GeometryCookieLayer(customDevice);
+                case "GeometryDount": return new GeometryDountLayer();
+                case "GeometryPie": return new GeometryPieLayer();
+                case "GeometryCookie": return new GeometryCookieLayer();
 
                 //Geometry4
-                case "GeometryArrow": return new GeometryArrowLayer(customDevice);
-                case "GeometryCapsule": return new GeometryCapsuleLayer(customDevice);
-                case "GeometryHeart": return new GeometryHeartLayer(customDevice);
+                case "GeometryArrow": return new GeometryArrowLayer();
+                case "GeometryCapsule": return new GeometryCapsuleLayer();
+                case "GeometryHeart": return new GeometryHeartLayer();
 
-                default: return new GroupLayer(customDevice);
+                default: return new GroupLayer();
             }
         }
 

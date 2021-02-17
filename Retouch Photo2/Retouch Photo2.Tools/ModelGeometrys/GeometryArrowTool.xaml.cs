@@ -36,33 +36,22 @@ namespace Retouch_Photo2.Tools.Models
     {
 
         //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryArrow;
         public FrameworkElement Icon { get; } = new GeometryArrowIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.GeometryArrow,
             CenterContent = new GeometryArrowIcon()
         };
         public FrameworkElement Page { get; } = new GeometryArrowPage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryArrowTool. 
-        /// </summary>
-        public GeometryArrowTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryArrowLayer(customDevice)
+            return new GeometryArrowLayer
             {
                 LeftTail = this.SelectionViewModel.GeometryArrow_LeftTail,
                 RightTail = this.SelectionViewModel.GeometryArrow_RightTail,
@@ -71,15 +60,6 @@ namespace Retouch_Photo2.Tools.Models
             };
         }
 
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-            
-            this.Button.Title = resource.GetString("Tools_GeometryArrow");
-        }
-            
     }
 
 

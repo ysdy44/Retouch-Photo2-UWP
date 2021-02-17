@@ -20,26 +20,13 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Override     
         public override LayerType Type => LayerType.GeometryRectangle;
+                
 
-        //@Construct
-        /// <summary>
-        /// Initializes a rectangle-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
-        public GeometryRectangleLayer(CanvasDevice customDevice)
+        public override  ILayer Clone()
         {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
-        
+            GeometryRectangleLayer rectangleLayer = new GeometryRectangleLayer();
 
-        public override  ILayer Clone(CanvasDevice customDevice)
-        {
-            GeometryRectangleLayer rectangleLayer = new GeometryRectangleLayer(customDevice);
-
-            LayerBase.CopyWith(customDevice, rectangleLayer, this);
+            LayerBase.CopyWith(rectangleLayer, this);
             return rectangleLayer;
         }
 

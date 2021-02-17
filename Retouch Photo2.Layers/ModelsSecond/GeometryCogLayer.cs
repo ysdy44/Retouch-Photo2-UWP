@@ -41,23 +41,9 @@ namespace Retouch_Photo2.Layers.Models
         public void CacheNotch() => this.StartingNotch = this.Notch;
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a cog-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
-        public GeometryCogLayer(CanvasDevice customDevice)
+        public override ILayer Clone()
         {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
-              
-
-        public override ILayer Clone(CanvasDevice customDevice)
-        {
-            GeometryCogLayer cogLayer = new GeometryCogLayer(customDevice)
+            GeometryCogLayer cogLayer = new GeometryCogLayer
             {
                 Count = this.Count,
                 InnerRadius = this.InnerRadius,
@@ -65,7 +51,7 @@ namespace Retouch_Photo2.Layers.Models
                 Notch = this.Notch,
             };
 
-            LayerBase.CopyWith(customDevice, cogLayer, this);
+            LayerBase.CopyWith(cogLayer, this);
             return cogLayer;
         }
         

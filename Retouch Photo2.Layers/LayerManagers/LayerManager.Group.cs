@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Un group all group layerage
         /// </summary>
-        public static void UnGroupAllSelectedLayer()
+        public static void UngroupAllSelectedLayer()
         {
             //Layerages
             IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
@@ -80,8 +80,7 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Group all selected layerages.
         /// </summary>     
-        /// <param name="customDevice"> The custom-device. </param>
-        public static void GroupAllSelectedLayers(CanvasDevice customDevice)
+        public static void GroupAllSelectedLayers()
         {
             //Layerages
             IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
@@ -93,7 +92,7 @@ namespace Retouch_Photo2.Layers
 
 
             //GroupLayer
-            GroupLayer groupLayer = new GroupLayer(customDevice)
+            GroupLayer groupLayer = new GroupLayer
             {
                 IsSelected = true,
                 IsExpand = false,

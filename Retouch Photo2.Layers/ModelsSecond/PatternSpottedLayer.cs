@@ -30,28 +30,15 @@ namespace Retouch_Photo2.Layers.Models
         public float StartingStep { get; private set; }
         public void CacheStep() => this.StartingStep = this.Step;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a spotted-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
-        public PatternSpottedLayer(CanvasDevice customDevice)
+        
+        public override ILayer Clone()
         {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
-
-
-        public override ILayer Clone(CanvasDevice customDevice)
-        {
-            PatternSpottedLayer spottedLayer = new PatternSpottedLayer(customDevice)
+            PatternSpottedLayer spottedLayer = new PatternSpottedLayer
             {
                 Radius = this.Radius,
             };
 
-            LayerBase.CopyWith(customDevice, spottedLayer, this);
+            LayerBase.CopyWith(spottedLayer, this);
             return spottedLayer;
         }
 

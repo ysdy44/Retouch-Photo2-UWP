@@ -93,29 +93,19 @@ namespace Retouch_Photo2.Strokes
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.SolidToolTip.Content = resource.GetString("Strokes_Dash_Solid");
-            this.SolidButton.Click += (s, e) =>
+            void constructGroup(Button button, ToolTip toolTip, CanvasDashStyle dashStyle)
             {
-                this.DashChanged?.Invoke(this, CanvasDashStyle.Solid);//Delegate
-            };
+                toolTip.Content = resource.GetString($"Strokes_Dash_{dashStyle}");
+                button.Click += (s, e) =>
+                {
+                    this.DashChanged?.Invoke(this, dashStyle);//Delegate
+                };
+            }
 
-            this.DashToolTip.Content = resource.GetString("Strokes_Dash_Dash");
-            this.DashButton.Click += (s, e) =>
-            {
-                this.DashChanged?.Invoke(this, CanvasDashStyle.Dash);//Delegate
-            };
-
-            this.DotToolTip.Content = resource.GetString("Strokes_Dash_Dot");
-            this.DotButton.Click += (s, e) =>
-            {
-                this.DashChanged?.Invoke(this, CanvasDashStyle.Dot);//Delegate
-            };
-
-            this.DashDotToolTip.Content = resource.GetString("Strokes_Dash_DashDot");
-            this.DashDotButton.Click += (s, e) =>
-            {
-                this.DashChanged?.Invoke(this, CanvasDashStyle.DashDot);//Delegate
-            };
+            constructGroup(this.SolidButton, this.SolidToolTip, CanvasDashStyle.Solid);
+            constructGroup(this.DashButton, this.DashToolTip, CanvasDashStyle.Dash);
+            constructGroup(this.DotButton, this.DotToolTip, CanvasDashStyle.Dot);
+            constructGroup(this.DashDotButton, this.DashDotToolTip, CanvasDashStyle.DashDot);
         }
 
     }

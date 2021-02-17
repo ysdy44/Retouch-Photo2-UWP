@@ -36,25 +36,15 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.Brush;
         public FrameworkElement Icon { get; } = new BrushIcon();
         public IToolButton Button { get; } = new ToolButton
         {
+            Type = ToolType.Brush,
             CenterContent = new BrushIcon()
         };
         public FrameworkElement Page => this.BrushPage;
 
         readonly BrushPage BrushPage = new BrushPage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a BrushTool. 
-        /// </summary>
-        public BrushTool()
-        {
-            this.ConstructStrings();
-        }
 
 
         BrushHandleMode HandleMode = BrushHandleMode.None;
@@ -192,15 +182,6 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
         public void OnNavigatedFrom() { }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_Brush");
-        }
 
     }
 

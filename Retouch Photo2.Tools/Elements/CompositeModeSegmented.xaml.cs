@@ -81,11 +81,6 @@ namespace Retouch_Photo2.Tools.Elements
             this.InitializeComponent();
             this.ConstructStrings();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
-
-            this.NewButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.New;
-            this.AddButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.Add;
-            this.SubtractButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.Subtract;
-            //this.IntersectButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.Intersect;
         }
         
         //Strings
@@ -94,9 +89,13 @@ namespace Retouch_Photo2.Tools.Elements
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.NewToolTip.Content = resource.GetString("Tools_Cursor_CompositeMode_New");
+            this.NewButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.New;
             this.AddToolTip.Content = resource.GetString("Tools_Cursor_CompositeMode_Add");
+            this.AddButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.Add;
             this.SubtractToolTip.Content = resource.GetString("Tools_Cursor_CompositeMode_Subtract");
+            this.SubtractButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.Subtract;
             //this.IntersectToolTip.Content = resource.GetString("Tools_Cursor_CompositeMode_Intersect");
+            //this.IntersectButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.Intersect;
         }
 
     }

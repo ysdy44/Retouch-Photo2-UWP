@@ -129,7 +129,7 @@ namespace Retouch_Photo2.Layers
 
         //Property
         /// <summary> Gets or sets the type. </summary>
-        public string Type { set => this.TypeRun.Text = value; }
+        private string Type { set => this.TypeRun.Text = value; }
         /// <summary> Gets or sets the name. </summary>
         public string Name2 { set => this.NameRun.Text = value; }
 

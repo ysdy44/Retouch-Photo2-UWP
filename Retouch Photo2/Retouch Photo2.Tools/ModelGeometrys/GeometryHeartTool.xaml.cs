@@ -27,42 +27,23 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryHeart;
         public FrameworkElement Icon { get; } = new GeometryHeartIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.GeometryHeart,
             CenterContent = new GeometryHeartIcon()
         };
         public FrameworkElement Page { get; } = new GeometryHeartPage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryHeartTool. 
-        /// </summary>
-        public GeometryHeartTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryHeartLayer(customDevice)
+            return new GeometryHeartLayer
             {
                 Spread = this.SelectionViewModel.GeometryHeart_Spread,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_GeometryHeart");
         }
 
     }

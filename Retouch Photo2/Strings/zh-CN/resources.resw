@@ -227,7 +227,7 @@
 <data name='Edits_Select_All' xml:space='preserve'><value>全选</value></data>
 <data name='Edits_Select_Deselect' xml:space='preserve'><value>取消</value></data>
 <data name='Edits_Select_Invert' xml:space='preserve'><value>反选</value></data>
-<data name='Edits_Group_UnGroup' xml:space='preserve'><value>取消分组</value></data>
+<data name='Edits_Group_Ungroup' xml:space='preserve'><value>取消分组</value></data>
 <data name='Edits_Group_Release' xml:space='preserve'><value>释放</value></data>
 <data name='Edits_Combine_Xor' xml:space='preserve'><value>差异</value></data>
 <data name='Edits_Combine' xml:space='preserve'><value>结合</value></data>
@@ -414,7 +414,7 @@
 <data name='Historys_LayeragesArrange_PasteLayers' xml:space='preserve'><value>粘贴图层</value></data>
 <data name='Historys_LayeragesArrange_ClearLayers' xml:space='preserve'><value>清除图层</value></data>
 <data name='Historys_LayeragesArrange_GroupLayers' xml:space='preserve'><value>分组图层</value></data>
-<data name='Historys_LayeragesArrange_UnGroupLayers' xml:space='preserve'><value>取消分组图层</value></data>
+<data name='Historys_LayeragesArrange_UngroupLayers' xml:space='preserve'><value>取消分组图层</value></data>
 <data name='Historys_LayeragesArrange_ReleaseLayers' xml:space='preserve'><value>释放图层</value></data>
 <data name='Historys_LayeragesArrange_AddLayer_Combine' xml:space='preserve'><value>添加组合的曲线图层</value></data>
 <data name='Historys_LayeragesArrange_AddLayer_ExpandStroke' xml:space='preserve'><value>添加展开描边的曲线图层</value></data>

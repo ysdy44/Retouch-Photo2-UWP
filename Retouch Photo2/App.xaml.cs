@@ -199,11 +199,11 @@ namespace Retouch_Photo2
                             },
                             new KeyboardAccelerator2
                             {
-                                Title = resource.GetString("Edits_Group_UnGroup"),
+                                Title = resource.GetString("Edits_Group_Ungroup"),
                                 Group = 2,
                                 Modifiers = VirtualKeyModifiers2.Control,
                                 Key = VirtualKey.U,
-                                Invoked = App.MethodViewModel.MethodGroupUnGroup,
+                                Invoked = App.MethodViewModel.MethodGroupUngroup,
                             },
                             new KeyboardAccelerator2
                             {

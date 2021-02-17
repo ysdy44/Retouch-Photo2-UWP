@@ -18,6 +18,8 @@ namespace Retouch_Photo2.Tools
         public UIElementCollection Children => this.StackPanel.Children;
 
         //@Content
+        /// <summary> Gets the type. </summary>
+        public ToolType Type { get; set; } = ToolType.More;
         /// <summary> Gets or sets the title. </summary>
         public string Title { get; set; }
         /// <summary> Gets or sets the IsSelected. </summary>

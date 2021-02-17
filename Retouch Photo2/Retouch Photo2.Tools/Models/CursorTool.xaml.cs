@@ -6,7 +6,6 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools.Elements;
@@ -14,7 +13,6 @@ using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Numerics;
-using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -42,10 +40,10 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.Cursor;
         public FrameworkElement Icon { get; } = new CursorIcon();
         public IToolButton Button { get; } = new ToolButton
         {
+            Type = ToolType.Cursor,
             CenterContent = new CursorIcon()
         };
         public FrameworkElement Page => this.CursorPage;
@@ -59,7 +57,13 @@ namespace Retouch_Photo2.Tools.Models
         /// </summary>
         public CursorTool()
         {
-            this.ConstructStrings();
+            this.Button.ToolTip.Closed += (s, e) => this.CursorPage.ModeSegmented.IsOpen = false;
+            this.Button.ToolTip.Opened += (s, e) =>
+            {
+                if (this.Button.IsSelected == false) return;
+
+                this.CursorPage.ModeSegmented.IsOpen = true;
+            };
         }
 
 
@@ -186,7 +190,7 @@ namespace Retouch_Photo2.Tools.Models
                     ToolManager.MoveTool.Draw(drawingSession);//MoveTool
                     break;
                 case CursorMode.BoxChoose:
-                    CanvasGeometry geometry = this.BoxRect.ToRectangle(this.ViewModel.CanvasDevice, matrix);
+                    CanvasGeometry geometry = this.BoxRect.ToRectangle(LayerManager.CanvasDevice, matrix);
                     drawingSession.DrawGeometryDodgerBlue(geometry);
                     break;
             }
@@ -226,23 +230,6 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedFrom()
         {
             this.CursorMode = CursorMode.None;
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_Cursor");
-
-            this.Button.ToolTip.Closed += (s, e) => this.CursorPage.ModeSegmented.IsOpen = false;
-            this.Button.ToolTip.Opened += (s, e) =>
-            {
-                if (this.Button.IsSelected == false) return;
-
-                this.CursorPage.ModeSegmented.IsOpen = true;
-            };
         }
 
     }

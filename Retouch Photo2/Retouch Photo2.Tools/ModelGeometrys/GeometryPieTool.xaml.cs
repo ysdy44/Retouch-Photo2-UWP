@@ -4,7 +4,6 @@
 // Only:              
 // Complete:      ★★★
 using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -27,42 +26,23 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryPie;
         public FrameworkElement Icon { get; } = new GeometryPieIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.GeometryPie,
             CenterContent = new GeometryPieIcon()
         };
         public FrameworkElement Page { get; } = new GeometryPiePage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryPieTool. 
-        /// </summary>
-        public GeometryPieTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryPieLayer(customDevice)
+            return new GeometryPieLayer
             {
                 SweepAngle = this.SelectionViewModel.GeometryPie_SweepAngle,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_GeometryPie");
         }
 
     }

@@ -28,27 +28,18 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.PatternSpotted;
         public FrameworkElement Icon { get; } = new PatternSpottedIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.PatternSpotted,
             CenterContent = new PatternSpottedIcon()
         };
         public FrameworkElement Page { get; } = new PatternSpottedPage();
 
-        //@Construct
-        /// <summary>
-        /// Initializes a PatternSpottedTool. 
-        /// </summary>
-        public PatternSpottedTool()
-        {
-            this.ConstructStrings();
-        }
 
-
-        private ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
+        private ILayer CreateLayer(Transformer transformer)
         {
-            return new PatternSpottedLayer(customDevice)
+            return new PatternSpottedLayer
             {
                 Step = this.SelectionViewModel.PatternSpotted_Step,
                 Radius = this.SelectionViewModel.PatternSpotted_Radius,
@@ -70,15 +61,6 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedFrom()
         {
             TouchbarButton.Instance = null;
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_PatternSpotted");
         }
 
     }

@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Tools
         Layerage MezzanineLayerage;
 
 
-        public void Started(Func<CanvasDevice, Transformer, ILayer> createLayer, Vector2 startingPoint, Vector2 point)
+        public void Started(Func<Transformer, ILayer> createLayer, Vector2 startingPoint, Vector2 point)
         {
             if (ToolManager.TransformerTool.Started(startingPoint, point)) return;//TransformerTool
 
@@ -58,7 +58,7 @@ namespace Retouch_Photo2.Tools
             Transformer transformer = new Transformer(canvasStartingPoint, canvasPoint, this.IsCenter, this.IsSquare);
 
             //Mezzanine
-            ILayer layer = createLayer(this.ViewModel.CanvasDevice, transformer);
+            ILayer layer = createLayer(transformer);
             Layerage layerage = layer.ToLayerage();
             LayerBase.Instances.Add(layer);
 
@@ -69,7 +69,7 @@ namespace Retouch_Photo2.Tools
             //History
             this.ViewModel.MethodSelectedNone();
 
-            //Text
+            //Tip
             this.ViewModel.SetTipTextWidthHeight(transformer);
             this.ViewModel.TipTextVisibility = Visibility.Visible;
      
@@ -101,7 +101,7 @@ namespace Retouch_Photo2.Tools
                 mezzanineLayer.IsRefactoringRender = true;
                 this.MezzanineLayerage.RefactoringParentsRender();
 
-                this.ViewModel.SetTipTextWidthHeight(transformer);//Text
+                this.ViewModel.SetTipTextWidthHeight(transformer);//Tip
                 this.ViewModel.Invalidate();//Invalidate
             }
 
@@ -152,7 +152,7 @@ namespace Retouch_Photo2.Tools
                 }
 
                 this.MezzanineLayerage = null;
-                this.ViewModel.TipTextVisibility = Visibility.Collapsed;//Text
+                this.ViewModel.TipTextVisibility = Visibility.Collapsed;//Tip
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             }
 

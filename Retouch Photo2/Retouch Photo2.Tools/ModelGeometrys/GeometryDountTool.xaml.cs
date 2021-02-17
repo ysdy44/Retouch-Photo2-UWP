@@ -27,42 +27,23 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryDount;
         public FrameworkElement Icon { get; } = new GeometryDountIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.GeometryDount,
             CenterContent = new GeometryDountIcon()
         };
         public FrameworkElement Page { get; } = new GeometryDountPage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryDountTool. 
-        /// </summary>
-        public GeometryDountTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryDountLayer(customDevice)
+            return new GeometryDountLayer
             {
                 HoleRadius = this.SelectionViewModel.GeometryDount_HoleRadius,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_GeometryDount");
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.Photos;
+﻿using Retouch_Photo2.Layers;
+using Retouch_Photo2.Photos;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -57,7 +58,7 @@ namespace Retouch_Photo2
             //Photo
             StorageFile copyFile = await FileUtil.PickAndCopySingleImageFileAsync(PickerLocationId.Desktop);
             if (copyFile == null) return;
-            Photo photo = await Photo.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
+            Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
             if (photo == null) return;
             Photo.DuplicateChecking(photo);
         }
@@ -66,7 +67,7 @@ namespace Retouch_Photo2
             //Photo
             StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(item);
             if (copyFile == null) return;
-            Photo photo = await Photo.CreatePhotoFromCopyFileAsync(this.ViewModel.CanvasDevice, copyFile);
+            Photo photo = await Photo.CreatePhotoFromCopyFileAsync(LayerManager.CanvasDevice, copyFile);
             Photo.DuplicateChecking(photo);
         }
 

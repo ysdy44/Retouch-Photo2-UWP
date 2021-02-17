@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Menus.Models
 
             //Group
             this.GroupButton.Click += (s, e) => this.MethodViewModel.MethodGroupGroup();
-            this.UnGroupButton.Click += (s, e) => this.MethodViewModel.MethodGroupUnGroup();
+            this.UngroupButton.Click += (s, e) => this.MethodViewModel.MethodGroupUngroup();
             this.ReleaseButton.Click += (s, e) => this.MethodViewModel.MethodGroupRelease();
 
             //Combine
@@ -151,8 +151,8 @@ namespace Retouch_Photo2.Menus.Models
             this.GroupTextBlock.Text = resource.GetString("Edits_Group");
             this.GroupButton.Content = resource.GetString("Edits_Group_Group");
             this.GroupButton.Tag = new GroupIcon();
-            this.UnGroupButton.Content = resource.GetString("Edits_Group_UnGroup");
-            this.UnGroupButton.Tag = new UnGroupIcon();
+            this.UngroupButton.Content = resource.GetString("Edits_Group_Ungroup");
+            this.UngroupButton.Tag = new UngroupIcon();
             this.ReleaseButton.Content = resource.GetString("Edits_Group_Release");
             this.ReleaseButton.Tag = new ReleaseIcon();
 
@@ -198,7 +198,7 @@ namespace Retouch_Photo2.Menus.Models
                 if (stroke.Type == BrushType.None) return;
                 if (strokeWidth == 0) return;
 
-                if (layer.CreateGeometry(this.ViewModel.CanvasDevice) is CanvasGeometry geometry2)
+                if (layer.CreateGeometry(LayerManager.CanvasDevice) is CanvasGeometry geometry2)
                 {
                     CanvasGeometry strokeGeometry = geometry2.Stroke(strokeWidth, strokeStyle);
                     IStyle strokeStyleClone = new Retouch_Photo2.Styles.Style
@@ -279,7 +279,7 @@ namespace Retouch_Photo2.Menus.Models
             {
                 ILayer layer = layerage.Self;
 
-                if (layer.CreateGeometry(this.ViewModel.CanvasDevice) is CanvasGeometry geometry2)
+                if (layer.CreateGeometry(LayerManager.CanvasDevice) is CanvasGeometry geometry2)
                 {
                     if (geometry == null)
                     {
@@ -335,7 +335,7 @@ namespace Retouch_Photo2.Menus.Models
 
             if (nodes.Count > 3)
             {
-                CurveLayer curveLayer = new CurveLayer(this.ViewModel.CanvasDevice, nodes)
+                CurveLayer curveLayer = new CurveLayer(nodes)
                 {
                     Style = style,
                     IsSelected = true,

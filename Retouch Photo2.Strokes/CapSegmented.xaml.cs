@@ -48,7 +48,7 @@ namespace Retouch_Photo2.Strokes
         /// <summary> Cap of <see cref = "CapSegmented" />. </summary>
         public CanvasCapStyle Cap
         {
-            get  => (CanvasCapStyle)base.GetValue(CapProperty);
+            get => (CanvasCapStyle)base.GetValue(CapProperty);
             set => base.SetValue(CapProperty, value);
         }
         /// <summary> Identifies the <see cref = "CapSegmented.Cap" /> dependency property. </summary>
@@ -93,29 +93,19 @@ namespace Retouch_Photo2.Strokes
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.FlatToolTip.Content = resource.GetString("Strokes_Cap_Flat");
-            this.FlatButton.Click += (s, e) =>
+            void constructGroup(Button button, ToolTip toolTip, CanvasCapStyle capStyle)
             {
-                this.CapChanged?.Invoke(this, CanvasCapStyle.Flat);//Delegate
-            };
+                toolTip.Content = resource.GetString($"Strokes_Cap_{capStyle}");
+                button.Click += (s, e) =>
+                {
+                    this.CapChanged?.Invoke(this, capStyle);//Delegate
+                };
+            }
 
-            this.SquareToolTip.Content = resource.GetString("Strokes_Cap_Square");
-            this.SquareButton.Click += (s, e) =>
-            {
-                this.CapChanged?.Invoke(this, CanvasCapStyle.Square);//Delegate
-            };
-
-            this.RoundToolTip.Content = resource.GetString("Strokes_Cap_Round");
-            this.RoundButton.Click += (s, e) =>
-            {
-                this.CapChanged?.Invoke(this, CanvasCapStyle.Round);//Delegate
-            };
-
-            this.TriangleToolTip.Content = resource.GetString("Strokes_Cap_Triangle");
-            this.TriangleButton.Click += (s, e) =>
-            {
-                this.CapChanged?.Invoke(this, CanvasCapStyle.Triangle);//Delegate
-            };
+            constructGroup(this.FlatButton, this.FlatToolTip, CanvasCapStyle.Flat);
+            constructGroup(this.SquareButton, this.SquareToolTip, CanvasCapStyle.Square);
+            constructGroup(this.RoundButton, this.RoundToolTip, CanvasCapStyle.Round);
+            constructGroup(this.TriangleButton, this.TriangleToolTip, CanvasCapStyle.Triangle);
         }
 
     }

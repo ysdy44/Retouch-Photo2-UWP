@@ -32,22 +32,10 @@ namespace Retouch_Photo2.Layers.Models
         public GeometryArrowTailType LeftTail = GeometryArrowTailType.None;
         public GeometryArrowTailType RightTail = GeometryArrowTailType.Arrow;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a arrow-layer.
-        /// </summary>
-        public GeometryArrowLayer(CanvasDevice customDevice)
-        {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
 
-
-        public override ILayer Clone(CanvasDevice customDevice)
+        public override ILayer Clone()
         {
-            GeometryArrowLayer arrowLayer = new GeometryArrowLayer(customDevice)
+            GeometryArrowLayer arrowLayer = new GeometryArrowLayer
             {
                 IsAbsolute = this.IsAbsolute,
                 Width = this.Width,
@@ -57,7 +45,7 @@ namespace Retouch_Photo2.Layers.Models
                 RightTail = this.RightTail,
             };
 
-            LayerBase.CopyWith(customDevice, arrowLayer, this);
+            LayerBase.CopyWith(arrowLayer, this);
             return arrowLayer;
         }
         

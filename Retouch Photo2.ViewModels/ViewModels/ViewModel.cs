@@ -58,10 +58,6 @@ namespace Retouch_Photo2.ViewModels
         public bool IsUpdateThumbnailByName = false;
 
 
-        /// <summary> Gets or sets the canvas-device . </summary>
-        public CanvasDevice CanvasDevice { get; } = new CanvasDevice();
-
-
         /// <summary>
         /// Indicates that the contents of the CanvasControl need to be redrawn.
         /// </summary>

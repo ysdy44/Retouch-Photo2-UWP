@@ -35,10 +35,10 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.View;
         public FrameworkElement Icon { get; } = new ViewIcon();
         public IToolButton Button { get; } = new ToolButton
         {
+            Type = ToolType.View,
             CenterContent = new ViewIcon()
         };
         public FrameworkElement Page => this.ViewPage;
@@ -52,13 +52,19 @@ namespace Retouch_Photo2.Tools.Models
         /// </summary>
         public ViewTool()
         {
-            this.ConstructStrings();
+            this.Button.ToolTip.Closed += (s, e) => this.ViewPage.IsOpen = false;
+            this.Button.ToolTip.Opened += (s, e) =>
+            {
+                if (this.Button.IsSelected == false) return;
+
+                this.ViewPage.IsOpen = true;
+            };
         }
         
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
-            //Text
+            //Tip
             this.ViewModel.SetTipTextPosition();
             this.ViewModel.TipTextVisibility = Visibility.Visible;
 
@@ -67,7 +73,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
-            //Text
+            //Tip
             this.ViewModel.SetTipTextPosition();
 
             this.ViewModel.CanvasTransformer.Move(point);
@@ -75,7 +81,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
-            //Text
+            //Tip
             this.ViewModel.TipTextVisibility = Visibility.Collapsed;
 
             if (isOutNodeDistance) this.ViewModel.CanvasTransformer.Move(point);
@@ -90,23 +96,6 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedFrom()
         {
             TouchbarButton.Instance = null;
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_View");
-
-            this.Button.ToolTip.Closed += (s, e) => this.ViewPage.IsOpen = false;
-            this.Button.ToolTip.Opened += (s, e) =>
-            {
-                if (this.Button.IsSelected == false) return;
-
-                this.ViewPage.IsOpen = true;
-            };
         }
 
     }

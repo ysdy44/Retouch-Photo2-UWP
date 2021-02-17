@@ -7,9 +7,7 @@ using FanKit.Transformers;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
-using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
 
@@ -71,7 +69,7 @@ namespace Retouch_Photo2.Tools.Elements
 
                 //Change tools group value.
                 {
-                    ITool tool = this.TipViewModel.Tools.First(t => t != null && t.Type == ToolType.Node);
+                    ITool tool = this.TipViewModel.Tools.First(t => t != null && t.Button.Type == ToolType.Node);
 
                     ToolManager.Instance = tool;
                     this.SelectionViewModel.ToolType = ToolType.Node;
@@ -94,16 +92,16 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ILayer layer = layerage.Self;
 
-            NodeCollection nodes = layer.ConvertToCurves(this.ViewModel.CanvasDevice);
+            NodeCollection nodes = layer.ConvertToCurves(LayerManager.CanvasDevice);
             if (nodes == null) return null;
             
             if (nodes.Count >3)
             {
-                CurveLayer curveLayer = new CurveLayer(this.ViewModel.CanvasDevice, nodes)
+                CurveLayer curveLayer = new CurveLayer(nodes)
                 {
                     IsSelected = true,
                 };
-                LayerBase.CopyWith(this.ViewModel.CanvasDevice, curveLayer, layer);
+                LayerBase.CopyWith(curveLayer, layer);
                 return curveLayer;
             }
 

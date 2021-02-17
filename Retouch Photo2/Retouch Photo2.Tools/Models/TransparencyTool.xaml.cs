@@ -6,7 +6,6 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
@@ -36,25 +35,15 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.Transparency;
         public FrameworkElement Icon { get; } = new TransparencyIcon();
         public IToolButton Button { get; } = new ToolButton
         {
+            Type = ToolType.Transparency,
             CenterContent = new TransparencyIcon()
         };
         public FrameworkElement Page => this.TransparencyPage;
 
         readonly TransparencyPage TransparencyPage = new TransparencyPage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a TransparencyTool. 
-        /// </summary>
-        public TransparencyTool()
-        {
-            this.ConstructStrings();
-        }
 
 
         BrushHandleMode HandleMode = BrushHandleMode.None;
@@ -160,15 +149,6 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
         public void OnNavigatedFrom() { }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_Transparency");
-        }
 
     }
 

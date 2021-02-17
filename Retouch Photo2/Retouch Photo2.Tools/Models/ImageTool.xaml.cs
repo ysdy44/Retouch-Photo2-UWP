@@ -5,7 +5,6 @@
 // Complete:      ★★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -33,25 +32,15 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.Image;
         public FrameworkElement Icon { get; } = new ImageIcon();
         public IToolButton Button { get; } = new ToolButton
         {
+            Type = ToolType.Image,
             CenterContent = new ImageIcon()
         };
         public FrameworkElement Page => this.ImagePage;
 
         readonly ImagePage ImagePage = new ImagePage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a ImageTool. 
-        /// </summary>
-        public ImageTool()
-        {
-            this.ConstructStrings();
-        }
 
 
         private float _sizeWidth;
@@ -91,7 +80,7 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformerDestination = this.CreateTransformer(startingPoint, point, photo.Width, photo.Height);
 
             //Mezzanine         
-            ImageLayer imageLayer = new ImageLayer(this.ViewModel.CanvasDevice)
+            ImageLayer imageLayer = new ImageLayer
             {
                 Photocopier = photocopier,
                 IsSelected = true,
@@ -202,15 +191,6 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedFrom()
         {
             TouchbarButton.Instance = null;
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_Image");
         }
         
     }

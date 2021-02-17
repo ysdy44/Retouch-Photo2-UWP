@@ -46,26 +46,13 @@ namespace Retouch_Photo2.Layers.Models
             return this.fontSize;
         }
 
-
-        //@Construct
-        /// <summary>
-        /// Initializes a TextArtistic-layer.
-        /// </summary>
-        public TextArtisticLayer(CanvasDevice customDevice)
+                
+        public override  ILayer Clone()
         {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
-
-        
-        public override  ILayer Clone(CanvasDevice customDevice)
-        {
-            TextArtisticLayer artisticLayer = new TextArtisticLayer(customDevice);
+            TextArtisticLayer artisticLayer = new TextArtisticLayer();
          
             TextLayer.FontCopyWith(artisticLayer, this);
-            LayerBase.CopyWith(customDevice, artisticLayer, this);
+            LayerBase.CopyWith(artisticLayer, this);
             return artisticLayer;
         }
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 
@@ -10,11 +11,19 @@ namespace Retouch_Photo2.Layers
     public partial class LayerControl : UserControl
     {
 
-        private void ConstructIcon(CanvasDevice customDevice)
+        //Strings
+        private void ConstructStrings(ILayer layer)
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Type = resource.GetString($"Layers_{layer.Type}");
+        }
+
+        private void ConstructIcon(CanvasDevice customDevice2)
         {
             //IconCanvasControl
             this.IconCanvasControl.UseSharedDevice = true;
-            this.IconCanvasControl.CustomDevice = customDevice;
+            this.IconCanvasControl.CustomDevice = customDevice2;
             this.IconCanvasControl.Draw += (s, arge) =>
             {
                 if (this.IconRender == null) return;

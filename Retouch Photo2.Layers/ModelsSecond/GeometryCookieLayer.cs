@@ -31,28 +31,16 @@ namespace Retouch_Photo2.Layers.Models
         public float StartingSweepAngle { get; private set; }
         public void CacheSweepAngle() => this.StartingSweepAngle = this.SweepAngle;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a pie-layer.
-        /// </summary>
-        public GeometryCookieLayer(CanvasDevice customDevice)
-        {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
 
-
-        public override ILayer Clone(CanvasDevice customDevice)
+        public override ILayer Clone()
         {
-            GeometryCookieLayer cookieLayer = new GeometryCookieLayer(customDevice)
+            GeometryCookieLayer cookieLayer = new GeometryCookieLayer
             {
                 InnerRadius = this.InnerRadius,
                 SweepAngle = this.SweepAngle,
             };
 
-            LayerBase.CopyWith(customDevice, cookieLayer, this);
+            LayerBase.CopyWith(cookieLayer, this);
             return cookieLayer;
         }
 

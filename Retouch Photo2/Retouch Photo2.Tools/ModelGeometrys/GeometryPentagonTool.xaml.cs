@@ -27,41 +27,22 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryPentagon;
         public FrameworkElement Icon { get; } = new GeometryPentagonIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.GeometryPentagon,
             CenterContent = new GeometryPentagonIcon()
         };
         public FrameworkElement Page { get; } = new GeometryPentagonPage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryPentagonTool. 
-        /// </summary>
-        public GeometryPentagonTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryPentagonLayer(customDevice)
+            return new GeometryPentagonLayer
             {
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_GeometryPentagon");
         }
 
     }

@@ -25,42 +25,23 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryRectangle;
         public FrameworkElement Icon { get; } = new GeometryRectangleIcon();
         public IToolButton Button { get; } = new ToolButton
         {
+            Type = ToolType.GeometryRectangle,
             CenterContent = new GeometryRectangleIcon()
         };
         public FrameworkElement Page { get; } = new GeometryPage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryRectangleTool. 
-        /// </summary>
-        public GeometryRectangleTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryRectangleLayer(customDevice)
+            return new GeometryRectangleLayer
             {
                 IsSelected = true,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_GeometryRectangle");
         }
 
     }

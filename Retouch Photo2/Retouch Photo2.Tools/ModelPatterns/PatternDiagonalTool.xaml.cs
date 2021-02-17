@@ -27,43 +27,24 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.PatternDiagonal;
         public FrameworkElement Icon { get; } = new PatternDiagonalIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.PatternDiagonal,
             CenterContent = new PatternDiagonalIcon()
         };
         public FrameworkElement Page { get; } = new PatternDiagonalPage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a PatternDiagonalTool. 
-        /// </summary>
-        public PatternDiagonalTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new PatternDiagonalLayer(customDevice)
+            return new PatternDiagonalLayer
             {
                 HorizontalStep = this.SelectionViewModel.PatternDiagonal_HorizontalStep,
                 Offset = this.SelectionViewModel.PatternDiagonal_Offset,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandCurveStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_PatternDiagonal");
         }
 
     }

@@ -105,7 +105,7 @@ namespace Retouch_Photo2.Historys
         LayeragesArrange_ClearLayers,
 
         LayeragesArrange_GroupLayers,
-        LayeragesArrange_UnGroupLayers,
+        LayeragesArrange_UngroupLayers,
         LayeragesArrange_ReleaseLayers,
 
         LayeragesArrange_AddLayer_Combine,

@@ -24,9 +24,8 @@ namespace Retouch_Photo2
         /// <summary>
         /// Load <see cref="ILayer"/>s file from temporary folder.
         /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
         /// <returns> The product <see cref="ILayer"/>s. </returns>
-        public static IEnumerable<ILayer> LoadLayersFile(CanvasDevice customDevice)
+        public static IEnumerable<ILayer> LoadLayersFile()
         {
             //Create an XDocument object.
             string path = $"{ApplicationData.Current.TemporaryFolder.Path}/Layers.xml";
@@ -35,7 +34,7 @@ namespace Retouch_Photo2
             {
                 XDocument document = XDocument.Load(path);
 
-                IEnumerable<ILayer> layers = Retouch_Photo2.Layers.XML.LoadLayers(customDevice, document);
+                IEnumerable<ILayer> layers = Retouch_Photo2.Layers.XML.LoadLayers(document);
                 return layers;
             }
             catch (Exception)

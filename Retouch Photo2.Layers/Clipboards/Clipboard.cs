@@ -36,8 +36,7 @@ namespace Retouch_Photo2.Layers
         ///  Sets the mode and notify all properties.
         ///  and copy all selected layerage.
         /// </summary>     
-        /// <param name="customDevice"> The custom-device. </param>
-        public void SetMode(CanvasDevice customDevice)
+        public void SetMode()
         {
             //Layerages
             IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
@@ -61,7 +60,7 @@ namespace Retouch_Photo2.Layers
                 this.Layerages = null;
 
                 Clipboard.Instances.Clear();
-                LayerManager.CopyLayerage(customDevice, this.Layerage);
+                LayerManager.CopyLayerage(this.Layerage);
             }
             else if (count >= 2)
             {
@@ -70,7 +69,7 @@ namespace Retouch_Photo2.Layers
                 this.Layerages = from layerage in selectedLayerages select layerage.Clone();
 
                 Clipboard.Instances.Clear();
-                LayerManager.CopyLayerages(customDevice, this.Layerages);
+                LayerManager.CopyLayerages(this.Layerages);
             }
         }
                

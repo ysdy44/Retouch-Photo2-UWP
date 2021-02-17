@@ -31,29 +31,16 @@ namespace Retouch_Photo2.Layers.Models
         public float StartingInnerRadius { get; private set; }
         public void CacheInnerRadius() => this.StartingInnerRadius = this.InnerRadius;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a star-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
-        public GeometryStarLayer(CanvasDevice customDevice)
+        
+        public override ILayer Clone()
         {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
-
-
-        public override ILayer Clone(CanvasDevice customDevice)
-        {
-            GeometryStarLayer starLayer = new GeometryStarLayer(customDevice)
+            GeometryStarLayer starLayer = new GeometryStarLayer
             {
                 Points=this.Points,
                 InnerRadius= this.InnerRadius,
             };
 
-            LayerBase.CopyWith(customDevice, starLayer, this);
+            LayerBase.CopyWith(starLayer, this);
             return starLayer;
         }
         

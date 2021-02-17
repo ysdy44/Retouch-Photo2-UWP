@@ -46,28 +46,18 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryCog;
         public FrameworkElement Icon { get; } = new GeometryCogIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.GeometryCog,
             CenterContent = new GeometryCogIcon()
         };
         public FrameworkElement Page { get; } = new GeometryCogPage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryCogTool. 
-        /// </summary>
-        public GeometryCogTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryCogLayer(customDevice)
+            return new GeometryCogLayer
             {
                 Count = this.SelectionViewModel.GeometryCog_Count,
                 InnerRadius = this.SelectionViewModel.GeometryCog_InnerRadius,
@@ -76,15 +66,6 @@ namespace Retouch_Photo2.Tools.Models
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_GeometryCog");
         }
 
     }

@@ -177,7 +177,7 @@ namespace Retouch_Photo2.Tools.Models
             
 
             //Geometry
-            ICanvasBrush canvasBrush = layer.Style.Stroke.GetICanvasBrush(this.ViewModel.CanvasDevice);
+            ICanvasBrush canvasBrush = layer.Style.Stroke.GetICanvasBrush(LayerManager.CanvasDevice);
             float strokeWidth = layer.Style.StrokeWidth;
             CanvasStrokeStyle strokeStyle = layer.Style.StrokeStyle;
             drawingSession.DrawLine(lastPoint, endPoint, canvasBrush, strokeWidth, strokeStyle);

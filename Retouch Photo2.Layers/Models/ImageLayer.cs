@@ -58,38 +58,28 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Initializes a image-layer.
         /// </summary>       
-        /// <param name="customDevice"> The custom-device. </param>
-        public ImageLayer(CanvasDevice customDevice)
+        public ImageLayer()
         {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
         }
         /// <summary>
         /// Initializes a image-layer.
         /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="transformer"> The transformer. </param>
         /// <param name="photocopier"> The fill photocopier. </param>
-        public ImageLayer(CanvasDevice customDevice, Transformer transformer, Photocopier photocopier)
+        public ImageLayer(Transformer transformer, Photocopier photocopier)
         {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
             this.Photocopier = photocopier;
         }
 
 
-        public override  ILayer Clone(CanvasDevice customDevice)
+        public override  ILayer Clone()
         {
-            ImageLayer imageLayer = new ImageLayer(customDevice)
+            ImageLayer imageLayer = new ImageLayer()
             {
                 Photocopier = this.Photocopier,
             };
 
-            LayerBase.CopyWith(customDevice, imageLayer, this);
+            LayerBase.CopyWith(imageLayer, this);
             return imageLayer;
         }
 

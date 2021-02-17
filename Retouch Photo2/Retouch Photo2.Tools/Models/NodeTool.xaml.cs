@@ -6,7 +6,6 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Elements;
@@ -39,25 +38,15 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.Node;
         public FrameworkElement Icon { get; } = new NodeIcon();
         public IToolButton Button { get; } = new ToolButton
         {
+            Type = ToolType.Node,
             CenterContent = new NodeIcon()
         };
         public FrameworkElement Page => this.NodePage;
         NodePage NodePage = new NodePage();
-        
 
-        //@Construct
-        /// <summary>
-        /// Initializes a NodeTool. 
-        /// </summary>
-        public NodeTool()
-        {
-            this.ConstructStrings();
-        }
-        
 
         Layerage Layerage;
         NodeCollectionMode NodeCollectionMode;
@@ -205,7 +194,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate();//Invalidate
         }
-        
+
         public void Draw(CanvasDrawingSession drawingSession)
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
@@ -252,7 +241,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
                 case NodeCollectionMode.RectChoose:
                     {
-                        CanvasGeometry canvasGeometry = this.TransformerRect.ToRectangle(this.ViewModel.CanvasDevice);
+                        CanvasGeometry canvasGeometry = this.TransformerRect.ToRectangle(LayerManager.CanvasDevice);
                         CanvasGeometry canvasGeometryTransform = canvasGeometry.Transform(matrix);
                         drawingSession.DrawGeometryDodgerBlue(canvasGeometryTransform);
                     }
@@ -260,20 +249,11 @@ namespace Retouch_Photo2.Tools.Models
             }
         }
 
-        
+
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
             this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_Node");
         }
 
     }
@@ -464,7 +444,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 //History
                 LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_SharpNodes);
-     
+
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {
@@ -509,7 +489,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 //History
                 LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_Set_SmoothNodes);
-           
+
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
                 {

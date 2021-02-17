@@ -22,19 +22,6 @@ namespace Retouch_Photo2.Layers.Models
         //@Override     
         public override LayerType Type => LayerType.Group;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a group-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
-        public GroupLayer(CanvasDevice customDevice)
-        {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
-
 
         public override Transformer GetActualTransformer(Layerage layerage)
         {
@@ -56,11 +43,11 @@ namespace Retouch_Photo2.Layers.Models
             return this.Transform.GetActualTransformer();
         }
 
-        public override ILayer Clone(CanvasDevice customDevice)
+        public override ILayer Clone()
         {
-            GroupLayer groupLayer = new GroupLayer(customDevice);
+            GroupLayer groupLayer = new GroupLayer();
 
-            LayerBase.CopyWith(customDevice, groupLayer, this);
+            LayerBase.CopyWith(groupLayer, this);
             return groupLayer;
         }
 

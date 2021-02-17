@@ -19,26 +19,13 @@ namespace Retouch_Photo2.Layers.Models
 
         public override float FontSize { get; set; } = 22.0f;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a TextFrame-layer.
-        /// </summary>      
-        /// <param name="customDevice"> The custom-device. </param>
-        public TextFrameLayer(CanvasDevice customDevice)
-        {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
 
-
-        public override ILayer Clone(CanvasDevice customDevice)
+        public override ILayer Clone()
         {   
-            TextFrameLayer textFrameLayer = new TextFrameLayer(customDevice);
+            TextFrameLayer textFrameLayer = new TextFrameLayer();
 
             TextLayer.FontCopyWith(textFrameLayer, this);
-            LayerBase.CopyWith(customDevice, textFrameLayer, this);
+            LayerBase.CopyWith(textFrameLayer, this);
             return textFrameLayer;
         }
 

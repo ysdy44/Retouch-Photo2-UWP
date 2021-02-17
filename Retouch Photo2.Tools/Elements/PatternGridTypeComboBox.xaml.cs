@@ -82,29 +82,20 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.GridButton.Content = resource.GetString("Tools_PatternGrid_Grid");
-            this.GridButton.Tag = new GridIcon();
-            this.GridButton.Click += (s, e) =>
+            void constructGroup(Button button, UserControl icon, PatternGridType type)
             {
-                this.TypeChanged?.Invoke(this, PatternGridType.Grid); //Delegate
-                this.Flyout.Hide();
-            };
+                button.Content = resource.GetString($"Tools_PatternGrid_{type}");
+                button.Tag = icon;
+                button.Click += (s, e) =>
+                {
+                    this.TypeChanged?.Invoke(this, type); //Delegate
+                    this.Flyout.Hide();
+                };
+            }
 
-            this.HorizontalButton.Content = resource.GetString("Tools_PatternGrid_HorizontalStep");
-            this.HorizontalButton.Tag = new HorizontalIcon();
-            this.HorizontalButton.Click += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, PatternGridType.Horizontal); //Delegate
-                this.Flyout.Hide();
-            };
-
-            this.VerticalButton.Content = resource.GetString("Tools_PatternGrid_VerticalStep");
-            this.VerticalButton.Tag = new VerticalIcon();
-            this.VerticalButton.Click += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, PatternGridType.Vertical); //Delegate
-                this.Flyout.Hide();
-            };
+            constructGroup(this.GridButton, new GridIcon(), PatternGridType.Grid);
+            constructGroup(this.HorizontalButton, new HorizontalIcon(), PatternGridType.Horizontal);
+            constructGroup(this.VerticalButton, new VerticalIcon(), PatternGridType.Vertical);
         }
 
     }

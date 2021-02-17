@@ -27,28 +27,15 @@ namespace Retouch_Photo2.Layers.Models
         public float StartingCenter { get; private set; }
         public void CacheCenter() => this.StartingCenter = this.Center;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a triangle-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
-        public GeometryTriangleLayer(CanvasDevice customDevice)
-        {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
-        
 
-        public override ILayer Clone(CanvasDevice customDevice)
+        public override ILayer Clone()
         {
-            GeometryTriangleLayer triangleLayer = new GeometryTriangleLayer(customDevice)
+            GeometryTriangleLayer triangleLayer = new GeometryTriangleLayer
             {
                 Center = this.Center,
             };
 
-            LayerBase.CopyWith(customDevice, triangleLayer, this);
+            LayerBase.CopyWith(triangleLayer, this);
             return triangleLayer;
         }
         

@@ -25,10 +25,9 @@ namespace Retouch_Photo2.Tools
         /// <summary>
         /// Create a <see cref="GeometryLayer"/>.
         /// </summary>
-        /// <param name="customDevice"> The customDevice. </param>
         /// <param name="transformer"> The transformer. </param>
         /// <returns> The producted layer. </returns>
-        public abstract ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer);
+        public abstract ILayer CreateLayer(Transformer transformer);
 
 
         public void Started(Vector2 startingPoint, Vector2 point) => ToolManager.CreateTool.Started(this.CreateLayer, startingPoint, point);

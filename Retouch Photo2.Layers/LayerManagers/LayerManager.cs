@@ -3,6 +3,7 @@
 // Difficult:         ★★★★★
 // Only:              ★★★★★
 // Complete:      ★★★★★
+using Microsoft.Graphics.Canvas;
 using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -57,6 +58,11 @@ namespace Retouch_Photo2.Layers
         /// A stack panel, contains all <see cref="ILayer.Control"/>s. 
         /// </summary>
         public static StackPanel RootStackPanel { get; } = new StackPanel();
+
+        /// <summary> 
+        /// Gets or sets the canvas-device.
+        /// </summary>
+        public static CanvasDevice CanvasDevice { get; } = new CanvasDevice();
         /// <summary> 
         /// Gets or sets layer controls height. 
         /// </summary>

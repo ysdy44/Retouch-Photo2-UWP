@@ -27,42 +27,23 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryTriangle;
         public FrameworkElement Icon { get; } = new GeometryTriangleIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.GeometryTriangle,
             CenterContent = new GeometryTriangleIcon()
         };
         public FrameworkElement Page { get; } = new GeometryTrianglePage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryTriangleTool. 
-        /// </summary>
-        public GeometryTriangleTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryTriangleLayer(customDevice)
+            return new GeometryTriangleLayer
             {
                 Center = this.SelectionViewModel.GeometryTriangle_Center,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_GeometryTriangle");
         }
 
     }

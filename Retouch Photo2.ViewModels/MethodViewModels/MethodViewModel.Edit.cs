@@ -26,7 +26,7 @@ namespace Retouch_Photo2.ViewModels
         //Edit
         private Layerage _cloneLayerage(ILayer source)
         {
-            ILayer clone = source.Clone(this.CanvasDevice);
+            ILayer clone = source.Clone();
             Layerage layerageClone = clone.ToLayerage();
             LayerBase.Instances.Add(clone);
 
@@ -51,7 +51,7 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodEditCut()
         {
-            this.Clipboard.SetMode(this.CanvasDevice);//Clipboard
+            this.Clipboard.SetMode();//Clipboard
             this.ClipboardEnable = this.Clipboard.CanPaste;//PasteButton
 
             //History
@@ -68,7 +68,7 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodEditDuplicate()
         {
-            this.Clipboard.SetMode(this.CanvasDevice);//Clipboard
+            this.Clipboard.SetMode();//Clipboard
             this.ClipboardEnable = this.Clipboard.CanPaste;//PasteButton
 
             //Clipboard
@@ -82,7 +82,7 @@ namespace Retouch_Photo2.ViewModels
                         this.HistoryPush(history);
 
                         Layerage layerage = this.Clipboard.Layerage;
-                        Layerage layerageClone = LayerManager.PasteLayerage(this.CanvasDevice, layerage);
+                        Layerage layerageClone = LayerManager.PasteLayerage(layerage);
                         LayerManager.Mezzanine(layerageClone);
                     }
                     break;
@@ -93,7 +93,7 @@ namespace Retouch_Photo2.ViewModels
                         this.HistoryPush(history);
 
                         IEnumerable<Layerage> layerages = this.Clipboard.Layerages;
-                        IEnumerable<Layerage> layerageClones = LayerManager.PasteLayerages(this.CanvasDevice, layerages);
+                        IEnumerable<Layerage> layerageClones = LayerManager.PasteLayerages(layerages);
                         LayerManager.MezzanineRange(layerageClones);
                     }
                     break;
@@ -107,7 +107,7 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodEditCopy()
         {
-            this.Clipboard.SetMode(this.CanvasDevice);//Clipboard
+            this.Clipboard.SetMode();//Clipboard
             this.ClipboardEnable = this.Clipboard.CanPaste;//PasteButton
         }
         
@@ -124,7 +124,7 @@ namespace Retouch_Photo2.ViewModels
                         this.HistoryPush(history);
 
                         Layerage layerage = this.Clipboard.Layerage;
-                        Layerage layerageClone = LayerManager.PasteLayerage(this.CanvasDevice, layerage);
+                        Layerage layerageClone = LayerManager.PasteLayerage(layerage);
                         LayerManager.Mezzanine(layerageClone);
                     }
                     break;
@@ -135,7 +135,7 @@ namespace Retouch_Photo2.ViewModels
                         this.HistoryPush(history);
 
                         IEnumerable<Layerage> layerages = this.Clipboard.Layerages;
-                        IEnumerable<Layerage> layerageClones = LayerManager.PasteLayerages(this.CanvasDevice, layerages);
+                        IEnumerable<Layerage> layerageClones = LayerManager.PasteLayerages(layerages);
                         LayerManager.MezzanineRange(layerageClones);
                     }
                     break;
@@ -240,7 +240,7 @@ namespace Retouch_Photo2.ViewModels
             LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_GroupLayers);
             this.HistoryPush(history);
 
-            LayerManager.GroupAllSelectedLayers(this.CanvasDevice);
+            LayerManager.GroupAllSelectedLayers();
 
             this.SetMode();
             LayerManager.ArrangeLayers();
@@ -248,13 +248,13 @@ namespace Retouch_Photo2.ViewModels
             this.Invalidate();//Invalidate
         }
 
-        public void MethodGroupUnGroup()
+        public void MethodGroupUngroup()
         {
             //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_UnGroupLayers);
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_UngroupLayers);
             this.HistoryPush(history);
 
-            LayerManager.UnGroupAllSelectedLayer();
+            LayerManager.UngroupAllSelectedLayer();
 
             this.SetMode();
             LayerManager.ArrangeLayers();

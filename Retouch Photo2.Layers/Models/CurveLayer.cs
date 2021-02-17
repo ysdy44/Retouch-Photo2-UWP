@@ -9,7 +9,6 @@ using Microsoft.Graphics.Canvas.Geometry;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -23,36 +22,23 @@ namespace Retouch_Photo2.Layers.Models
         public override LayerType Type => LayerType.Curve;
 
         //@Construct
-        /// <summary>
-        /// Initializes a curve-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>  
-        internal CurveLayer(CanvasDevice customDevice)
-        {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
+        internal CurveLayer() { }
         /// <summary>
         /// Initializes a curve-layer.
         /// </summary>     
-        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="nodes"> The source nodes. </param>
-        public CurveLayer(CanvasDevice customDevice, IEnumerable<Node> nodes) : this(customDevice) => base.Nodes = new NodeCollection(nodes);
+        public CurveLayer(IEnumerable<Node> nodes) => base.Nodes = new NodeCollection(nodes);
         /// <summary>
         /// Initializes a curve-layer.
         /// </summary>     
-        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="nodes"> The source nodes. </param>
-        public CurveLayer(CanvasDevice customDevice, NodeCollection nodes) : this(customDevice) => base.Nodes = nodes;
+        public CurveLayer(NodeCollection nodes) => base.Nodes = nodes;
         /// <summary>
         /// Initializes a curve-layer from a line.
         /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="left"> The first source vector. </param>
         /// <param name="right"> The second source vector. </param>
-        public CurveLayer(CanvasDevice customDevice, Vector2 left, Vector2 right) : this(customDevice) => base.Nodes = new NodeCollection(left, right);
+        public CurveLayer(Vector2 left, Vector2 right) => base.Nodes = new NodeCollection(left, right);
 
 
         public override Transformer GetActualTransformer(Layerage layerage)
@@ -119,14 +105,14 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override ILayer Clone(CanvasDevice customDevice)
+        public override ILayer Clone()
         {
-            CurveLayer curveLayer = new CurveLayer(customDevice)
+            CurveLayer curveLayer = new CurveLayer
             {
                 Nodes = base.Nodes.Clone()
             };
 
-            LayerBase.CopyWith(customDevice, curveLayer, this);
+            LayerBase.CopyWith(curveLayer, this);
             return curveLayer;
         }
 
@@ -152,12 +138,5 @@ namespace Retouch_Photo2.Layers.Models
 
         public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator) => null;
         
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_Curve");
-        }
     }
 }

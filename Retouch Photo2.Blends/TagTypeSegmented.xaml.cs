@@ -78,19 +78,19 @@ namespace Retouch_Photo2.Blends
         {
             this.InitializeComponent();
 
-            this.ConstructRadioButton(this.NoneButton, TagType.None);
-            this.ConstructRadioButton(this.RedButton, TagType.Red);
-            this.ConstructRadioButton(this.OrangeButton, TagType.Orange);
-            this.ConstructRadioButton(this.YellowButton, TagType.Yellow);
-            this.ConstructRadioButton(this.GreenButton, TagType.Green);
-            this.ConstructRadioButton(this.BlueButton, TagType.Blue);
-            this.ConstructRadioButton(this.PurpleButton, TagType.Purple);
+            this.ConstructGroup(this.NoneButton, TagType.None);
+            this.ConstructGroup(this.RedButton, TagType.Red);
+            this.ConstructGroup(this.OrangeButton, TagType.Orange);
+            this.ConstructGroup(this.YellowButton, TagType.Yellow);
+            this.ConstructGroup(this.GreenButton, TagType.Green);
+            this.ConstructGroup(this.BlueButton, TagType.Blue);
+            this.ConstructGroup(this.PurpleButton, TagType.Purple);
 
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
 
 
-        private void ConstructRadioButton(RadioButton radioButton, TagType tagType)
+        private void ConstructGroup(RadioButton radioButton, TagType tagType)
         {
             Color color = tagType.ToColor();
 

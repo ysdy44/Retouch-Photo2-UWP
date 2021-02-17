@@ -43,7 +43,7 @@ namespace Retouch_Photo2
 
                 //Layer
                 Photocopier photocopier = photo.ToPhotocopier();
-                ImageLayer imageLayer = new ImageLayer(this.ViewModel.CanvasDevice)
+                ImageLayer imageLayer = new ImageLayer
                 {
                     Photocopier = photocopier,
                     IsSelected = true,

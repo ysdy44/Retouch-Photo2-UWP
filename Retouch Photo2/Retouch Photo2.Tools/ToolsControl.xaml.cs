@@ -49,10 +49,10 @@ namespace Retouch_Photo2.Tools
                         else
                             this.ToolLeftMore.Add(rectangle);
                     }
-                    else if (tool.Type == ToolType.None)
+                    else if (tool.Button.Type == ToolType.None)
                     {
                     }
-                    else if (tool.Type == ToolType.More && tool.Button.Self is ToolMoreButton moreButton)
+                    else if (tool.Button.Type == ToolType.More && tool.Button.Self is ToolMoreButton moreButton)
                     {
                         this.ToolLeft.Add(moreButton);
                         this.ToolLeftMore = moreButton.Children;
@@ -68,7 +68,7 @@ namespace Retouch_Photo2.Tools
                         {
                             //Change tools group value.
                             ToolManager.Instance = tool;
-                            this.SelectionViewModel.ToolType = tool.Type;
+                            this.SelectionViewModel.ToolType = tool.Button.Type;
 
                             this.ViewModel.TipTextBegin(tool.Button.Title);
                             this.ViewModel.Invalidate();//Invalidate

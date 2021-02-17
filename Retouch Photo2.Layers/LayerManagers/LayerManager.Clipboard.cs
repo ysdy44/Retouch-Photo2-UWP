@@ -14,42 +14,40 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Copy a layerage ( form Layerbase to Clipboard).
         /// </summary>
-        /// <param name="customDevice"> The custom-device. </param> 
         /// <param name="layerage"> The layerage. </param>
-        public static void CopyLayerage(CanvasDevice customDevice, Layerage layerage)
+        public static void CopyLayerage(Layerage layerage)
         {
             //
             ILayer layer = layerage.Self;
-            ILayer clone2 = layer.Clone(customDevice);
+            ILayer clone2 = layer.Clone();
             Clipboard.Instances.Add(clone2);
             //
 
-            LayerManager._copyLayerage(customDevice, layerage.Children);
+            LayerManager._copyLayerage(layerage.Children);
         }
 
         /// <summary>
         /// Copy layerages ( form Layerbase to Clipboard).
         /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="layerages"> The layerages. </param>
-        public static void CopyLayerages(CanvasDevice customDevice, IEnumerable<Layerage> layerages)
+        public static void CopyLayerages(IEnumerable<Layerage> layerages)
         {
             foreach (Layerage layerage in layerages)
             {
-                LayerManager.CopyLayerage(customDevice, layerage);
+                LayerManager.CopyLayerage(layerage);
             }
         }
 
 
-        private static void _copyLayerage(CanvasDevice customDevice, IList<Layerage> children)
+        private static void _copyLayerage(IList<Layerage> children)
         {
             foreach (Layerage layerage in children)
             {
-                LayerManager._copyLayerage(customDevice, layerage.Children);
+                LayerManager._copyLayerage(layerage.Children);
 
                 //
                 ILayer layer = layerage.Self;
-                ILayer clone = layer.Clone(customDevice);
+                ILayer clone = layer.Clone();
                 Clipboard.Instances.Add(clone);
                 //
             }
@@ -60,46 +58,44 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Paste a layerage ( form Clipboard to Layerbase).
         /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="layerage"> The layerage. </param>
-        public static Layerage PasteLayerage(CanvasDevice customDevice, Layerage layerage)
+        public static Layerage PasteLayerage(Layerage layerage)
         {
             Layerage child = layerage.Clone();
 
             //
             ILayer child2 = child.ClipboardSelf;
-            ILayer clone2 = child2.Clone(customDevice);
+            ILayer clone2 = child2.Clone();
             Layerage clone = clone2.ToLayerage();
             LayerBase.Instances.Add(clone2);
             //
 
             clone.Children = child.Children;
             child.Children = null;
-            LayerManager._pasteLayerage(customDevice, clone.Children);
+            LayerManager._pasteLayerage(clone.Children);
             return clone;
         }
 
         /// <summary>
         /// Paste layerages ( form Clipboard to Layerbase).
         /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="layerages"> The layerages. </param>
-        public static IEnumerable<Layerage> PasteLayerages(CanvasDevice customDevice, IEnumerable<Layerage> layerages)
+        public static IEnumerable<Layerage> PasteLayerages(IEnumerable<Layerage> layerages)
         {
-            return from l in layerages select LayerManager.PasteLayerage(customDevice, l);
+            return from l in layerages select LayerManager.PasteLayerage(l);
         }
 
 
-        private static void _pasteLayerage(CanvasDevice customDevice, IList<Layerage> children)
+        private static void _pasteLayerage(IList<Layerage> children)
         {
             for (int i = 0; i < children.Count; i++)
             {
                 Layerage child = children[i];
-                LayerManager._pasteLayerage(customDevice, child.Children);
+                LayerManager._pasteLayerage(child.Children);
 
                 //
                 ILayer child2 = child.ClipboardSelf;
-                ILayer clone2 = child2.Clone(customDevice);
+                ILayer clone2 = child2.Clone();
                 Layerage clone = clone2.ToLayerage();
                 LayerBase.Instances.Add(clone2);
                 //

@@ -27,42 +27,23 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryDiamond;
         public FrameworkElement Icon { get; } = new GeometryDiamondIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.GeometryDiamond,
             CenterContent = new GeometryDiamondIcon()
         };
         public FrameworkElement Page { get; } = new GeometryDiamondPage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryDiamondTool. 
-        /// </summary>
-        public GeometryDiamondTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryDiamondLayer(customDevice)
+            return new GeometryDiamondLayer
             {
                 Mid = this.SelectionViewModel.GeometryDiamond_Mid,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_GeometryDiamond");
         }
 
     }

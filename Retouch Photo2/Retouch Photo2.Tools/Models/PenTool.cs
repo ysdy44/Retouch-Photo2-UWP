@@ -11,7 +11,6 @@ using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
-using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Tools.Models
@@ -35,23 +34,13 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.Pen;
         public FrameworkElement Icon { get; } = new PenIcon();
         public IToolButton Button { get; } = new ToolButton
         {
+            Type = ToolType.Pen,
             CenterContent = new PenIcon()
         };
         public FrameworkElement Page { get; } = new GeometryPage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a PenTool. 
-        /// </summary>
-        public PenTool()
-        {
-            this.ConstructStrings();
-        }
 
 
         NodeCollectionMode Mode = NodeCollectionMode.None;
@@ -180,7 +169,7 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformer = new Transformer(canvasPoint, canvasStartingPoint);
 
             //Layer
-            CurveLayer curveLayer = new CurveLayer(this.ViewModel.CanvasDevice, canvasStartingPoint, canvasPoint)
+            CurveLayer curveLayer = new CurveLayer(canvasStartingPoint, canvasPoint)
             {
                 IsSelected = true,
                 Transform = new Transform(transformer),
@@ -205,15 +194,6 @@ namespace Retouch_Photo2.Tools.Models
         {
             //Refactoring
             this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_Pen");
         }
 
     }

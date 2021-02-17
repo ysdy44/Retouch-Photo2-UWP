@@ -27,28 +27,15 @@ namespace Retouch_Photo2.Layers.Models
         public float StartingSweepAngle { get; private set; }
         public void CacheSweepAngle() => this.StartingSweepAngle = this.SweepAngle;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a pie-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
-        public GeometryPieLayer(CanvasDevice customDevice)
-        {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
-        
 
-        public override ILayer Clone(CanvasDevice customDevice)
+        public override ILayer Clone()
         {
-            GeometryPieLayer pieLayer = new GeometryPieLayer(customDevice)
+            GeometryPieLayer pieLayer = new GeometryPieLayer
             {
                 SweepAngle = this.SweepAngle,
             };
 
-            LayerBase.CopyWith(customDevice, pieLayer, this);
+            LayerBase.CopyWith(pieLayer, this);
             return pieLayer;
         }
 

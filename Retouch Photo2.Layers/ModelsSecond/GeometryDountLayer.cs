@@ -26,29 +26,16 @@ namespace Retouch_Photo2.Layers.Models
         public float HoleRadius = 0.5f;
         public float StartingHoleRadius { get; private set; }
         public void CacheHoleRadius() => this.StartingHoleRadius = this.HoleRadius;
+                
 
-        //@Construct
-        /// <summary>
-        /// Initializes a pie-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
-        public GeometryDountLayer(CanvasDevice customDevice)
+        public override ILayer Clone()
         {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
-        
-
-        public override ILayer Clone(CanvasDevice customDevice)
-        {
-            GeometryDountLayer dountLayer = new GeometryDountLayer(customDevice)
+            GeometryDountLayer dountLayer = new GeometryDountLayer
             {
                 HoleRadius = this.HoleRadius,
             };
 
-            LayerBase.CopyWith(customDevice, dountLayer, this);
+            LayerBase.CopyWith(dountLayer, this);
             return dountLayer;
         }
         

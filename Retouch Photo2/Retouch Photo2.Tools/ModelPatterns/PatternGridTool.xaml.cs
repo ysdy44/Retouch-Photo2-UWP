@@ -39,43 +39,24 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.PatternGrid;
         public FrameworkElement Icon { get; } = new PatternGridIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.PatternGrid,
             CenterContent = new PatternGridIcon()
         };
         public FrameworkElement Page { get; } = new PatternGridPage();
 
-
-        //@Construct
-        /// <summary>
-        /// Initializes a PatternGridTool. 
-        /// </summary>
-        public PatternGridTool()
+                
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new PatternGridLayer(customDevice)
+            return new PatternGridLayer
             {
                 HorizontalStep = this.SelectionViewModel.PatternGrid_HorizontalStep,
                 VerticalStep = this.SelectionViewModel.PatternGrid_VerticalStep,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandCurveStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_PatternGrid");
         }
 
     }

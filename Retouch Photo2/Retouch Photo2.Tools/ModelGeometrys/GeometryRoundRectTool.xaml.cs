@@ -4,7 +4,6 @@
 // Only:              
 // Complete:      ★★★
 using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -27,42 +26,23 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryRoundRect;
         public FrameworkElement Icon { get; } = new GeometryRoundRectIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.GeometryRoundRect,
             CenterContent = new GeometryRoundRectIcon()
         };
         public FrameworkElement Page { get; } = new GeometryRoundRectPage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryRoundRectTool. 
-        /// </summary>
-        public GeometryRoundRectTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryRoundRectLayer(customDevice)
+            return new GeometryRoundRectLayer
             {
                 Corner = this.SelectionViewModel.GeometryRoundRect_Corner,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_GeometryRoundRect");
         }
 
     }

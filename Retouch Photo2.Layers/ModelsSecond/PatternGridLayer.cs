@@ -50,30 +50,17 @@ namespace Retouch_Photo2.Layers.Models
         public float StartingVerticalStep { get; private set; }
         public void CacheVerticalStep() => this.StartingVerticalStep = this.VerticalStep;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a grid-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
-        public PatternGridLayer(CanvasDevice customDevice)
+        
+        public override ILayer Clone()
         {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
-
-
-        public override ILayer Clone(CanvasDevice customDevice)
-        {
-            PatternGridLayer gridLayer = new PatternGridLayer(customDevice)
+            PatternGridLayer gridLayer = new PatternGridLayer
             {
                 GridType = this.GridType,
                 HorizontalStep = this.HorizontalStep,
                 VerticalStep = this.VerticalStep,
             };
 
-            LayerBase.CopyWith(customDevice, gridLayer, this);
+            LayerBase.CopyWith(gridLayer, this);
             return gridLayer;
         }
 

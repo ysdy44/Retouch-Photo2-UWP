@@ -25,42 +25,23 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryEllipse;
         public FrameworkElement Icon { get; } = new GeometryEllipseIcon();
         public IToolButton Button { get; } = new ToolButton
         {
+            Type = ToolType.GeometryEllipse,
             CenterContent = new GeometryEllipseIcon()
         };
         public FrameworkElement Page { get; } = new GeometryPage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryEllipseTool. 
-        /// </summary>
-        public GeometryEllipseTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryEllipseLayer(customDevice)
+            return new GeometryEllipseLayer
             {
                 IsSelected = true,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_GeometryEllipse");
         }
 
     }

@@ -30,29 +30,16 @@ namespace Retouch_Photo2.Layers.Models
         public float StartingHorizontalStep { get; private set; }
         public void CacheHorizontalStep() => this.StartingHorizontalStep = this.HorizontalStep;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a grid-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
-        public PatternDiagonalLayer(CanvasDevice customDevice)
+        
+        public override ILayer Clone()
         {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
-
-
-        public override ILayer Clone(CanvasDevice customDevice)
-        {
-            PatternDiagonalLayer diagonalLayer = new PatternDiagonalLayer(customDevice)
+            PatternDiagonalLayer diagonalLayer = new PatternDiagonalLayer
             {
                 Offset = this.Offset,
                 HorizontalStep = this.HorizontalStep,
             };
 
-            LayerBase.CopyWith(customDevice, diagonalLayer, this);
+            LayerBase.CopyWith(diagonalLayer, this);
             return diagonalLayer;
         }
 

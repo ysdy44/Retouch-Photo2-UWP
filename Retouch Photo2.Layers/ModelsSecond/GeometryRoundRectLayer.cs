@@ -26,29 +26,16 @@ namespace Retouch_Photo2.Layers.Models
         public float Corner = 0.25f;
         public float StartingCorner { get; private set; }
         public void CacheCorner() => this.StartingCorner = this.Corner;
+ 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a roundRect-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
-        public GeometryRoundRectLayer(CanvasDevice customDevice)
+        public override ILayer Clone()
         {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
-        
-
-        public override ILayer Clone(CanvasDevice customDevice)
-        {
-            GeometryRoundRectLayer roundRectLayer = new GeometryRoundRectLayer(customDevice)
+            GeometryRoundRectLayer roundRectLayer = new GeometryRoundRectLayer
             {
                 Corner=this.Corner
             };
 
-            LayerBase.CopyWith(customDevice, roundRectLayer, this);
+            LayerBase.CopyWith(roundRectLayer, this);
             return roundRectLayer;
         }
         

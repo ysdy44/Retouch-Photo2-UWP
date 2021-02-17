@@ -93,29 +93,19 @@ namespace Retouch_Photo2.Texts
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.LeftToolTip.Content = resource.GetString("Texts_FontAlignment_Left");
-            this.LeftButton.Click += (s, e) =>
+            void constructGroup(Button button, ToolTip toolTip, CanvasHorizontalAlignment alignment)
             {
-                this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Left);//Delegate
-            };
+                toolTip.Content = resource.GetString($"Texts_FontAlignment_{alignment}");
+                button.Click += (s, e) =>
+                {
+                    this.AlignmentChanged?.Invoke(this, alignment);//Delegate
+                };
+            }
 
-            this.CenterToolTip.Content = resource.GetString("Texts_FontAlignment_Center");
-            this.CenterButton.Click += (s, e) =>
-            {
-                this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Center);//Delegate
-            };
-
-            this.RightToolTip.Content = resource.GetString("Texts_FontAlignment_Right");
-            this.RightButton.Click += (s, e) =>
-            {
-                this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Right);//Delegate
-            };
-
-            this.JustifiedToolTip.Content = resource.GetString("Texts_FontAlignment_Justified");
-            this.JustifiedButton.Click += (s, e) =>
-            {
-                this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Justified);//Delegate
-            };
+            constructGroup(this.LeftButton, this.LeftToolTip, CanvasHorizontalAlignment.Left);
+            constructGroup(this.CenterButton, this.CenterToolTip, CanvasHorizontalAlignment.Center);
+            constructGroup(this.RightButton, this.RightToolTip, CanvasHorizontalAlignment.Right);
+            constructGroup(this.JustifiedButton, this.JustifiedToolTip, CanvasHorizontalAlignment.Justified);
         }
 
     }

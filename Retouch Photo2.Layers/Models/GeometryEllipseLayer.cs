@@ -20,25 +20,12 @@ namespace Retouch_Photo2.Layers.Models
         //@Override     
         public override LayerType Type => LayerType.GeometryEllipse;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a ellipse-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
-        public GeometryEllipseLayer(CanvasDevice customDevice)
+
+        public override ILayer Clone()
         {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }               
+            GeometryEllipseLayer ellipseLayer = new GeometryEllipseLayer();
 
-
-        public override  ILayer Clone(CanvasDevice customDevice)
-        {
-            GeometryEllipseLayer ellipseLayer = new GeometryEllipseLayer(customDevice);
-
-            LayerBase.CopyWith(customDevice, ellipseLayer, this);
+            LayerBase.CopyWith(ellipseLayer, this);
             return ellipseLayer;
         }
 
@@ -54,15 +41,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return transformer.ToEllipse(resourceCreator, matrix);
-        }
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_GeometryEllipse");
         }
 
     }

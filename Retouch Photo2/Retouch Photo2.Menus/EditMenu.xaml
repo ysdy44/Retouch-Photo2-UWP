@@ -32,7 +32,7 @@
             <!--Group-->
             <TextBlock x:Name="GroupTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <Button x:Name="GroupButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
-            <Button x:Name="UnGroupButton" IsEnabled="{x:Bind SelectionViewModel.IsGroupLayer, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+            <Button x:Name="UngroupButton" IsEnabled="{x:Bind SelectionViewModel.IsGroupLayer, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
             <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
             <Button x:Name="ReleaseButton" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
 

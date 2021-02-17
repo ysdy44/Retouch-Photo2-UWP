@@ -27,27 +27,15 @@ namespace Retouch_Photo2.Layers.Models
         public float StartingSpread { get; private set; }
         public void CacheSpread() => this.StartingSpread = this.Spread;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a heart-layer.
-        /// </summary>
-        public GeometryHeartLayer(CanvasDevice customDevice)
-        {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
 
-
-        public override ILayer Clone(CanvasDevice customDevice)
+        public override ILayer Clone()
         {
-            GeometryHeartLayer heartLayer = new GeometryHeartLayer(customDevice)
+            GeometryHeartLayer heartLayer = new GeometryHeartLayer
             {
                 Spread = this.Spread
             };
 
-            LayerBase.CopyWith(customDevice, heartLayer, this);
+            LayerBase.CopyWith(heartLayer, this);
             return heartLayer;
         }
         

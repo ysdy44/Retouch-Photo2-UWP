@@ -6,7 +6,6 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using System.Collections.Generic;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
 
@@ -21,24 +20,12 @@ namespace Retouch_Photo2.Layers.Models
         //@Override     
         public override LayerType Type => LayerType.GeometryCapsule;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a capsule-layer.
-        /// </summary>
-        public GeometryCapsuleLayer(CanvasDevice customDevice)
+
+        public override ILayer Clone()
         {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
+            GeometryCapsuleLayer capsuleLayer = new GeometryCapsuleLayer();
 
-
-        public override ILayer Clone(CanvasDevice customDevice)
-        {
-            GeometryCapsuleLayer capsuleLayer = new GeometryCapsuleLayer(customDevice);
-
-            LayerBase.CopyWith(customDevice, capsuleLayer, this);
+            LayerBase.CopyWith(capsuleLayer, this);
             return capsuleLayer;
         }
 

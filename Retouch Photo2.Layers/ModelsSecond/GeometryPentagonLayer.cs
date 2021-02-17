@@ -27,28 +27,15 @@ namespace Retouch_Photo2.Layers.Models
         public int StartingPoints { get; private set; }
         public void CachePoints() => this.StartingPoints = this.Points;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a pentagon-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
-        public GeometryPentagonLayer(CanvasDevice customDevice)
-        {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
 
-
-        public override ILayer Clone(CanvasDevice customDevice)
+        public override ILayer Clone()
         {
-            GeometryPentagonLayer pentagonLayer = new GeometryPentagonLayer(customDevice)
+            GeometryPentagonLayer pentagonLayer = new GeometryPentagonLayer
             {
                 Points = this.Points,
             };
 
-            LayerBase.CopyWith(customDevice, pentagonLayer, this);
+            LayerBase.CopyWith(pentagonLayer, this);
             return pentagonLayer;
         }
 

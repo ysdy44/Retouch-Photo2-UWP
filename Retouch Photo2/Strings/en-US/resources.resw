@@ -227,7 +227,7 @@
 <data name='Edits_Select_All' xml:space='preserve'><value>All</value></data>
 <data name='Edits_Select_Deselect' xml:space='preserve'><value>Deselect</value></data>
 <data name='Edits_Select_Invert' xml:space='preserve'><value>Invert</value></data>
-<data name='Edits_Group_UnGroup' xml:space='preserve'><value>UnGroup</value></data>
+<data name='Edits_Group_Ungroup' xml:space='preserve'><value>Ungroup</value></data>
 <data name='Edits_Group_Release' xml:space='preserve'><value>Release</value></data>
 <data name='Edits_Combine_Xor' xml:space='preserve'><value>Xor</value></data>
 <data name='Edits_Combine' xml:space='preserve'><value>Combine</value></data>
@@ -414,7 +414,7 @@
 <data name='Historys_LayeragesArrange_PasteLayers' xml:space='preserve'><value>Paste layers</value></data>
 <data name='Historys_LayeragesArrange_ClearLayers' xml:space='preserve'><value>Clear layers</value></data>
 <data name='Historys_LayeragesArrange_GroupLayers' xml:space='preserve'><value>Group layers</value></data>
-<data name='Historys_LayeragesArrange_UnGroupLayers' xml:space='preserve'><value>UnGroup layers</value></data>
+<data name='Historys_LayeragesArrange_UngroupLayers' xml:space='preserve'><value>Ungroup layers</value></data>
 <data name='Historys_LayeragesArrange_ReleaseLayers' xml:space='preserve'><value>Release layers</value></data>
 <data name='Historys_LayeragesArrange_AddLayer_Combine' xml:space='preserve'><value>Add combine curve layer</value></data>
 <data name='Historys_LayeragesArrange_AddLayer_ExpandStroke' xml:space='preserve'><value>Add expand stroke curve layer</value></data>

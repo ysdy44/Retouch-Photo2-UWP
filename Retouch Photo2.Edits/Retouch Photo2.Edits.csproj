@@ -149,8 +149,8 @@
     <Compile Include="GroupIcons\ReleaseIcon.xaml.cs">
       <DependentUpon>ReleaseIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GroupIcons\UnGroupIcon.xaml.cs">
-      <DependentUpon>UnGroupIcon.xaml</DependentUpon>
+    <Compile Include="GroupIcons\UngroupIcon.xaml.cs">
+      <DependentUpon>UngroupIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
@@ -229,7 +229,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="GroupIcons\UnGroupIcon.xaml">
+    <Page Include="GroupIcons\UngroupIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

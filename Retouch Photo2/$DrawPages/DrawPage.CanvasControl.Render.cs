@@ -19,7 +19,7 @@ namespace Retouch_Photo2
         /// <returns> The render image. </returns>
         public ICanvasImage Render()
         {
-            return LayerBase.Render(this.ViewModel.CanvasDevice, LayerManager.RootLayerage);
+            return LayerBase.Render(LayerManager.CanvasDevice, LayerManager.RootLayerage);
         }
 
 
@@ -57,7 +57,7 @@ namespace Retouch_Photo2
             int canvasWidth = this.ViewModel.CanvasTransformer.Width;
             int canvasHeight = this.ViewModel.CanvasTransformer.Height;
 
-            CanvasRenderTarget renderTarget = new CanvasRenderTarget(this.ViewModel.CanvasDevice, fileWidth, fileHeight, 96);
+            CanvasRenderTarget renderTarget = new CanvasRenderTarget(LayerManager.CanvasDevice, fileWidth, fileHeight, 96);
             if (canvasImage == null) return renderTarget;
 
 
@@ -99,7 +99,7 @@ namespace Retouch_Photo2
             int fileWidth = (int)size.Width;
             int fileHeight = (int)size.Height;
 
-            CanvasRenderTarget renderTarget = new CanvasRenderTarget(this.ViewModel.CanvasDevice, fileWidth, fileHeight, dpi);
+            CanvasRenderTarget renderTarget = new CanvasRenderTarget(LayerManager.CanvasDevice, fileWidth, fileHeight, dpi);
             if (canvasImage == null) return renderTarget;
 
 

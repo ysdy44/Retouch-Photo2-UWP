@@ -39,43 +39,24 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryStar;
         public FrameworkElement Icon { get; } = new GeometryStarIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.GeometryStar,
             CenterContent = new GeometryStarIcon()
         };
         public FrameworkElement Page { get; } = new GeometryStarPage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryStarTool. 
-        /// </summary>
-        public GeometryStarTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryStarLayer(customDevice)
+            return new GeometryStarLayer
             {
                 Points = this.SelectionViewModel.GeometryStar_Points,
                 InnerRadius = this.SelectionViewModel.GeometryStar_InnerRadius,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_GeometryStar");
         }
 
     }

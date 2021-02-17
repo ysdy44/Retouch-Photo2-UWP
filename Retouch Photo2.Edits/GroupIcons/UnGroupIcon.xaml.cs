@@ -9,9 +9,9 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Edits.GroupIcons
 {
     /// <summary>
-    /// Icon of UnGroup.
+    /// Icon of Ungroup.
     /// </summary>
-    public sealed partial class UnGroupIcon : UserControl
+    public sealed partial class UngroupIcon : UserControl
     {
 
         //@VisualState
@@ -31,9 +31,9 @@ namespace Retouch_Photo2.Edits.GroupIcons
 
         //@Construct
         /// <summary>
-        /// Initializes a UnGroupIcon. 
+        /// Initializes a UngroupIcon. 
         /// </summary>
-        public UnGroupIcon()
+        public UngroupIcon()
         {
             this.InitializeComponent();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State

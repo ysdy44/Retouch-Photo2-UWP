@@ -27,28 +27,15 @@ namespace Retouch_Photo2.Layers.Models
         public float StartingMid { get; private set; }
         public void CacheMid() => this.StartingMid = this.Mid;
 
-        //@Construct
-        /// <summary>
-        /// Initializes a diamond-layer.
-        /// </summary>
-        /// <param name="customDevice"> The custom-device. </param>
-        public GeometryDiamondLayer(CanvasDevice customDevice)
+               
+        public override ILayer Clone()
         {
-            base.Control = new LayerControl(customDevice, this)
-            {
-                Type = this.ConstructStrings(),
-            };
-        }
-
-       
-        public override ILayer Clone(CanvasDevice customDevice)
-        {
-            GeometryDiamondLayer diamondLayer = new GeometryDiamondLayer(customDevice)
+            GeometryDiamondLayer diamondLayer = new GeometryDiamondLayer
             {
                 Mid = this.Mid
             };
 
-            LayerBase.CopyWith(customDevice, diamondLayer, this);
+            LayerBase.CopyWith(diamondLayer, this);
             return diamondLayer;
         }
         

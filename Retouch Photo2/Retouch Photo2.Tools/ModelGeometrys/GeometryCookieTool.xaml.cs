@@ -39,43 +39,24 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public ToolType Type => ToolType.GeometryCookie;
         public FrameworkElement Icon { get; } = new GeometryCookieIcon();
         public IToolButton Button { get; } = new ToolSecondButton
         {
+            Type = ToolType.GeometryCookie,
             CenterContent = new GeometryCookieIcon()
         };
         public FrameworkElement Page { get; } = new GeometryCookiePage();
 
 
-        //@Construct
-        /// <summary>
-        /// Initializes a GeometryCookieTool. 
-        /// </summary>
-        public GeometryCookieTool()
+        public override ILayer CreateLayer(Transformer transformer)
         {
-            this.ConstructStrings();
-        }
-
-
-        public override ILayer CreateLayer(CanvasDevice customDevice, Transformer transformer)
-        {
-            return new GeometryCookieLayer(customDevice)
+            return new GeometryCookieLayer
             {
                 InnerRadius = this.SelectionViewModel.GeometryCookie_InnerRadius,
                 SweepAngle = this.SelectionViewModel.GeometryCookie_SweepAngle,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
-        }
-
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title = resource.GetString("Tools_GeometryCookie");
         }
 
     }

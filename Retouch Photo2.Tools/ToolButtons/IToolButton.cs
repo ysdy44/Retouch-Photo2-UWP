@@ -13,8 +13,10 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public interface IToolButton
     {
-        /// <summary> Gets or sets the title. </summary>
-        string Title { get; set; }
+        /// <summary> Gets the type. </summary>
+        ToolType Type { get; set; }
+        /// <summary> Gets the title. </summary>
+        string Title { get; }
         /// <summary> Gets or sets the IsSelected. </summary>
         bool IsSelected { get; set; }
         /// <summary> Get the self. </summary>

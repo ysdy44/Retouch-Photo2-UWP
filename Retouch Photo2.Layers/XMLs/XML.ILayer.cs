@@ -54,17 +54,16 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         ///  Loads a <see cref="ILayer"/> from an XElement.
         /// </summary>   
-        /// <param name="customDevice"> The custom-device. </param>
         /// <param name="element"> The source XElement. </param>
         /// <returns> The loaded <see cref="ILayer"/>. </returns>
-        public static ILayer LoadILayer(CanvasDevice customDevice, XElement element)
+        public static ILayer LoadILayer(XElement element)
         {
             if (element.Attribute("Type") is XAttribute type2)
             {
                 string type = type2.Value;
 
                 //Load
-                ILayer layer = XML.CreateLayer(customDevice, type);
+                ILayer layer = XML.CreateLayer(type);
                 {
                     if (element.Attribute("Id") is XAttribute id) layer.Id = id.Value;
                     //if (element.Attribute("Type") is XAttribute type) layer.Type = type.Value;
@@ -87,7 +86,7 @@ namespace Retouch_Photo2.Layers
                 }
                 return layer;
             }
-            else return new GroupLayer(customDevice);
+            else return new GroupLayer();
         }
 
     }
