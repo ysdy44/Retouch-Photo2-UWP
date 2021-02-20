@@ -8,7 +8,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
 using System.Xml.Linq;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -30,19 +29,12 @@ namespace Retouch_Photo2.Layers.Models
         public float StartingHorizontalStep { get; private set; }
         public void CacheHorizontalStep() => this.StartingHorizontalStep = this.HorizontalStep;
 
-        
-        public override ILayer Clone()
+
+        public override ILayer Clone() => LayerBase.CopyWith(this, new PatternDiagonalLayer
         {
-            PatternDiagonalLayer diagonalLayer = new PatternDiagonalLayer
-            {
-                Offset = this.Offset,
-                HorizontalStep = this.HorizontalStep,
-            };
-
-            LayerBase.CopyWith(diagonalLayer, this);
-            return diagonalLayer;
-        }
-
+            Offset = this.Offset,
+            HorizontalStep = this.HorizontalStep,
+        });
 
         public override void SaveWith(XElement element)
         {
@@ -69,15 +61,6 @@ namespace Retouch_Photo2.Layers.Models
             {
                 drawingSession.DrawLine(i, border.Top, i + this.Offset, border.Bottom, canvasBrush, strokeWidth, strokeStyle);
             }
-        }
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_PatternDiagonal");
         }
 
     }

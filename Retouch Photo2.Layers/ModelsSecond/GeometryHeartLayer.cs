@@ -28,17 +28,11 @@ namespace Retouch_Photo2.Layers.Models
         public void CacheSpread() => this.StartingSpread = this.Spread;
 
 
-        public override ILayer Clone()
+        public override ILayer Clone() => LayerBase.CopyWith(this, new GeometryHeartLayer
         {
-            GeometryHeartLayer heartLayer = new GeometryHeartLayer
-            {
-                Spread = this.Spread
-            };
+            Spread = this.Spread
+        });
 
-            LayerBase.CopyWith(heartLayer, this);
-            return heartLayer;
-        }
-        
         public override void SaveWith(XElement element)
         {
             element.Add(new XElement("Spread", this.Spread));
@@ -60,15 +54,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateHeart(resourceCreator, transformer, matrix, this.Spread);
-        }
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_GeometryHeart");
         }
 
     }

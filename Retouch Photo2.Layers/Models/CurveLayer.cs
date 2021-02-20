@@ -105,16 +105,10 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override ILayer Clone()
+        public override ILayer Clone() => LayerBase.CopyWith(this, new CurveLayer
         {
-            CurveLayer curveLayer = new CurveLayer
-            {
-                Nodes = base.Nodes.Clone()
-            };
-
-            LayerBase.CopyWith(curveLayer, this);
-            return curveLayer;
-        }
+            Nodes = base.Nodes.Clone()
+        });
 
         public override void SaveWith(XElement element)
         {

@@ -8,7 +8,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
 using System.Xml.Linq;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -31,17 +30,10 @@ namespace Retouch_Photo2.Layers.Models
         public void CacheStep() => this.StartingStep = this.Step;
 
         
-        public override ILayer Clone()
+        public override ILayer Clone() => LayerBase.CopyWith(this, new PatternSpottedLayer
         {
-            PatternSpottedLayer spottedLayer = new PatternSpottedLayer
-            {
-                Radius = this.Radius,
-            };
-
-            LayerBase.CopyWith(spottedLayer, this);
-            return spottedLayer;
-        }
-
+            Radius = this.Radius,
+        });
 
         public override void SaveWith(XElement element)
         {
@@ -71,15 +63,6 @@ namespace Retouch_Photo2.Layers.Models
                     drawingSession.FillCircle(x, y, this.Radius, canvasBrush);
                 }
             }
-        }
-        
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_PatternSpotted");
         }
 
     }

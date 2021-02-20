@@ -6,10 +6,8 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -28,16 +26,10 @@ namespace Retouch_Photo2.Layers.Models
         public void CachePoints() => this.StartingPoints = this.Points;
 
 
-        public override ILayer Clone()
+        public override ILayer Clone() => LayerBase.CopyWith(this, new GeometryPentagonLayer
         {
-            GeometryPentagonLayer pentagonLayer = new GeometryPentagonLayer
-            {
-                Points = this.Points,
-            };
-
-            LayerBase.CopyWith(pentagonLayer, this);
-            return pentagonLayer;
-        }
+            Points = this.Points,
+        });
 
         public override void SaveWith(XElement element)
         {
@@ -60,15 +52,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreatePentagon(resourceCreator, transformer, matrix, this.Points);
-        }
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_GeometryPentagon");
         }
 
     }

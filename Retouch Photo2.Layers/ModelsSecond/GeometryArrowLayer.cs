@@ -8,7 +8,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using System.Numerics;
 using System.Xml.Linq;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -33,22 +32,16 @@ namespace Retouch_Photo2.Layers.Models
         public GeometryArrowTailType RightTail = GeometryArrowTailType.Arrow;
 
 
-        public override ILayer Clone()
+        public override ILayer Clone() => LayerBase.CopyWith(this, new GeometryArrowLayer
         {
-            GeometryArrowLayer arrowLayer = new GeometryArrowLayer
-            {
-                IsAbsolute = this.IsAbsolute,
-                Width = this.Width,
-                Value = this.Value,
+            IsAbsolute = this.IsAbsolute,
+            Width = this.Width,
+            Value = this.Value,
 
-                LeftTail = this.LeftTail,
-                RightTail = this.RightTail,
-            };
+            LeftTail = this.LeftTail,
+            RightTail = this.RightTail,
+        });
 
-            LayerBase.CopyWith(arrowLayer, this);
-            return arrowLayer;
-        }
-        
         public override void SaveWith(XElement element)
         {            
             element.Add(new XElement("IsAbsolute", this.IsAbsolute));
@@ -84,15 +77,6 @@ namespace Retouch_Photo2.Layers.Models
             return TransformerGeometry.CreateArrow(resourceCreator, transformer, matrix,
                 this.IsAbsolute, this.Width, this.Value,
                 this.LeftTail, this.RightTail);
-        }
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_GeometryArrow");
         }
 
     }

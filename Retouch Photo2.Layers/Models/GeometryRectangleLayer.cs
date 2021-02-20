@@ -6,9 +6,7 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using System.Collections.Generic;
 using System.Numerics;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -20,15 +18,9 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Override     
         public override LayerType Type => LayerType.GeometryRectangle;
-                
 
-        public override  ILayer Clone()
-        {
-            GeometryRectangleLayer rectangleLayer = new GeometryRectangleLayer();
 
-            LayerBase.CopyWith(rectangleLayer, this);
-            return rectangleLayer;
-        }
+        public override ILayer Clone() => LayerBase.CopyWith(this, new GeometryRectangleLayer());
 
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator)
@@ -42,15 +34,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return transformer.ToRectangle(resourceCreator, matrix);
-        }
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_GeometryRectangle");
         }
 
     }

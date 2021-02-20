@@ -6,10 +6,8 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -32,17 +30,11 @@ namespace Retouch_Photo2.Layers.Models
         public void CacheSweepAngle() => this.StartingSweepAngle = this.SweepAngle;
 
 
-        public override ILayer Clone()
+        public override ILayer Clone() => LayerBase.CopyWith(this, new GeometryCookieLayer
         {
-            GeometryCookieLayer cookieLayer = new GeometryCookieLayer
-            {
-                InnerRadius = this.InnerRadius,
-                SweepAngle = this.SweepAngle,
-            };
-
-            LayerBase.CopyWith(cookieLayer, this);
-            return cookieLayer;
-        }
+            InnerRadius = this.InnerRadius,
+            SweepAngle = this.SweepAngle,
+        });
 
         public override void SaveWith(XElement element)
         {            
@@ -67,15 +59,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateCookie(resourceCreator, transformer, matrix, this.InnerRadius, this.SweepAngle);
-        }
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_GeometryCookie");
         }
 
     }

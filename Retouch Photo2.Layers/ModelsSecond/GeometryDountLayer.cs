@@ -6,10 +6,8 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -26,19 +24,13 @@ namespace Retouch_Photo2.Layers.Models
         public float HoleRadius = 0.5f;
         public float StartingHoleRadius { get; private set; }
         public void CacheHoleRadius() => this.StartingHoleRadius = this.HoleRadius;
-                
+         
 
-        public override ILayer Clone()
+        public override ILayer Clone() => LayerBase.CopyWith(this, new GeometryDountLayer
         {
-            GeometryDountLayer dountLayer = new GeometryDountLayer
-            {
-                HoleRadius = this.HoleRadius,
-            };
+            HoleRadius = this.HoleRadius,
+        });
 
-            LayerBase.CopyWith(dountLayer, this);
-            return dountLayer;
-        }
-        
         public override void SaveWith(XElement element)
         {            
             element.Add(new XElement("HoleRadius", this.HoleRadius));
@@ -60,15 +52,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateDount(resourceCreator, transformer, matrix, this.HoleRadius);
-        }
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_GeometryDount");
         }
 
     }

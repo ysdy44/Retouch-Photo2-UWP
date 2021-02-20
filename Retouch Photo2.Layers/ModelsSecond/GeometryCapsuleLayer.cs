@@ -7,7 +7,6 @@ using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using System.Numerics;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -21,13 +20,7 @@ namespace Retouch_Photo2.Layers.Models
         public override LayerType Type => LayerType.GeometryCapsule;
 
 
-        public override ILayer Clone()
-        {
-            GeometryCapsuleLayer capsuleLayer = new GeometryCapsuleLayer();
-
-            LayerBase.CopyWith(capsuleLayer, this);
-            return capsuleLayer;
-        }
+        public override ILayer Clone() => LayerBase.CopyWith(this, new GeometryCapsuleLayer());
 
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator)
@@ -41,15 +34,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateCapsule(resourceCreator, transformer, matrix);
-        }
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_GeometryCapsule");
         }
 
     }

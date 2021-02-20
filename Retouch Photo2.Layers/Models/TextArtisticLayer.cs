@@ -3,9 +3,7 @@
 // Difficult:         ★★
 // Only:              ★★★★
 // Complete:      ★★
-using Microsoft.Graphics.Canvas;
 using System.Numerics;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -46,14 +44,13 @@ namespace Retouch_Photo2.Layers.Models
             return this.fontSize;
         }
 
-                
-        public override  ILayer Clone()
+
+        public override ILayer Clone()
         {
-            TextArtisticLayer artisticLayer = new TextArtisticLayer();
-         
-            TextLayer.FontCopyWith(artisticLayer, this);
-            LayerBase.CopyWith(artisticLayer, this);
-            return artisticLayer;
+            TextArtisticLayer layer = new TextArtisticLayer();
+            TextLayer.FontCopyWith(this, layer);
+            LayerBase.CopyWith(this, layer);
+            return layer;
         }
 
 
@@ -68,15 +65,6 @@ namespace Retouch_Photo2.Layers.Models
         public override void TransformAdd(Vector2 vector)
         {
             base.TransformAdd(vector);
-        }
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_TextArtistic");
         }
 
     }

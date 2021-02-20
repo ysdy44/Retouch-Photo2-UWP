@@ -6,10 +6,8 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -41,20 +39,14 @@ namespace Retouch_Photo2.Layers.Models
         public void CacheNotch() => this.StartingNotch = this.Notch;
 
 
-        public override ILayer Clone()
+        public override ILayer Clone() => LayerBase.CopyWith(this, new GeometryCogLayer
         {
-            GeometryCogLayer cogLayer = new GeometryCogLayer
-            {
-                Count = this.Count,
-                InnerRadius = this.InnerRadius,
-                Tooth = this.Tooth,
-                Notch = this.Notch,
-            };
+            Count = this.Count,
+            InnerRadius = this.InnerRadius,
+            Tooth = this.Tooth,
+            Notch = this.Notch,
+        });
 
-            LayerBase.CopyWith(cogLayer, this);
-            return cogLayer;
-        }
-        
         public override void SaveWith(XElement element)
         {            
             element.Add(new XElement("Count", this.Count));
@@ -86,15 +78,6 @@ namespace Retouch_Photo2.Layers.Models
             return TransformerGeometry.CreateCog(resourceCreator, transformer, matrix,
                 this.Count, this.InnerRadius,
                 this.Tooth, this.Notch);
-        }
-        
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_GeometryCog");
         }
 
     }

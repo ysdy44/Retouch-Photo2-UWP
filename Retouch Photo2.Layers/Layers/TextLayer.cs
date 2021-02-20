@@ -131,9 +131,9 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary>
         /// Copy a font-layer with self.
         /// </summary>
-        /// <param name="source"> The source ITextLayer. </param>
-        /// <param name="destination"> The destination ITextLayer. </param>
-        public static void FontCopyWith(ITextLayer destination, ITextLayer source)
+        /// <param name="source"> The source <see cref="ITextLayer"/>. </param>
+        /// <param name="destination"> The destination <see cref="ITextLayer"/>. </param>
+        public static ITextLayer FontCopyWith(ITextLayer source, ITextLayer destination)
         {
             destination.FontText = source.FontText;
             destination.FontSize = source.FontSize;
@@ -142,6 +142,7 @@ namespace Retouch_Photo2.Layers.Models
             destination.FontAlignment = source.FontAlignment;
             destination.FontStyle = source.FontStyle;
             destination.FontWeight = source.FontWeight;
+            return destination;
         }
 
     }

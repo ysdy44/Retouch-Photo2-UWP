@@ -21,13 +21,7 @@ namespace Retouch_Photo2.Layers.Models
         public override LayerType Type => LayerType.GeometryEllipse;
 
 
-        public override ILayer Clone()
-        {
-            GeometryEllipseLayer ellipseLayer = new GeometryEllipseLayer();
-
-            LayerBase.CopyWith(ellipseLayer, this);
-            return ellipseLayer;
-        }
+        public override ILayer Clone() => LayerBase.CopyWith(this, new GeometryEllipseLayer());
 
 
         public override CanvasGeometry CreateGeometry(ICanvasResourceCreator resourceCreator)

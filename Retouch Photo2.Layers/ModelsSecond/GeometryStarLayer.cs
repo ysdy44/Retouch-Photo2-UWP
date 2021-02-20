@@ -6,10 +6,8 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -31,19 +29,13 @@ namespace Retouch_Photo2.Layers.Models
         public float StartingInnerRadius { get; private set; }
         public void CacheInnerRadius() => this.StartingInnerRadius = this.InnerRadius;
 
-        
-        public override ILayer Clone()
-        {
-            GeometryStarLayer starLayer = new GeometryStarLayer
-            {
-                Points=this.Points,
-                InnerRadius= this.InnerRadius,
-            };
 
-            LayerBase.CopyWith(starLayer, this);
-            return starLayer;
-        }
-        
+        public override ILayer Clone() => LayerBase.CopyWith(this, new GeometryStarLayer
+        {
+            Points = this.Points,
+            InnerRadius = this.InnerRadius,
+        });
+
         public override void SaveWith(XElement element)
         {            
             element.Add(new XElement("Points", this.Points));
@@ -67,15 +59,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateStar(resourceCreator, transformer, matrix, this.Points, this.InnerRadius);
-        }
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_GeometryStar");
         }
 
     }

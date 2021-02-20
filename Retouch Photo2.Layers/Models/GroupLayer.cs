@@ -6,9 +6,7 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using System.Collections.Generic;
 using System.Numerics;
-using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.Layers.Models
@@ -43,14 +41,8 @@ namespace Retouch_Photo2.Layers.Models
             return this.Transform.GetActualTransformer();
         }
 
-        public override ILayer Clone()
-        {
-            GroupLayer groupLayer = new GroupLayer();
-
-            LayerBase.CopyWith(groupLayer, this);
-            return groupLayer;
-        }
-
+        public override ILayer Clone() => LayerBase.CopyWith(this, new GroupLayer());
+        
 
         public override ICanvasImage GetRender(ICanvasResourceCreator resourceCreator, Layerage layerage)
         {
@@ -106,15 +98,6 @@ namespace Retouch_Photo2.Layers.Models
 
 
         public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator) => null;
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_Group");
-        }
 
     }
 }

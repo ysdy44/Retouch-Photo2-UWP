@@ -182,9 +182,9 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Copy with self.
         /// </summary>
-        /// <param name="source"> The source <see cref="ILayer"/>. </param>
         /// <param name="destination"> The destination <see cref="ILayer"/>. </param>
-        public static void CopyWith(ILayer destination, ILayer source)
+        /// <param name="source"> The source <see cref="ILayer"/>. </param>
+        public static ILayer CopyWith(ILayer source, ILayer destination)
         {
             destination.Id = source.Id;
 
@@ -201,6 +201,7 @@ namespace Retouch_Photo2.Layers
                 IAdjustment clone = adjustment.Clone();
                 destination.Filter.Adjustments.Add(clone);
             }
+            return destination;
         }
 
     }

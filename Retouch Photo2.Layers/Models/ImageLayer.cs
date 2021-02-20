@@ -10,10 +10,8 @@ using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Photos;
-using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
-using Windows.ApplicationModel.Resources;
 using Windows.UI;
 
 namespace Retouch_Photo2.Layers.Models
@@ -72,16 +70,11 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public override  ILayer Clone()
+        public override ILayer Clone() => LayerBase.CopyWith(this, new ImageLayer
         {
-            ImageLayer imageLayer = new ImageLayer()
-            {
-                Photocopier = this.Photocopier,
-            };
+            Photocopier = this.Photocopier,
+        });
 
-            LayerBase.CopyWith(imageLayer, this);
-            return imageLayer;
-        }
 
         public override void SaveWith(XElement element)
         {
@@ -200,15 +193,6 @@ namespace Retouch_Photo2.Layers.Models
             CanvasGeometry geometry = transformer.ToRectangle(resourceCreator);
 
             return new NodeCollection(geometry);
-        }
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_Image");
         }
 
         /// <summary>

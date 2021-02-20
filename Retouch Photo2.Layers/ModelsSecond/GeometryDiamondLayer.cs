@@ -6,10 +6,8 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -28,17 +26,11 @@ namespace Retouch_Photo2.Layers.Models
         public void CacheMid() => this.StartingMid = this.Mid;
 
                
-        public override ILayer Clone()
+        public override ILayer Clone() => LayerBase.CopyWith(this, new GeometryDiamondLayer
         {
-            GeometryDiamondLayer diamondLayer = new GeometryDiamondLayer
-            {
-                Mid = this.Mid
-            };
+            Mid = this.Mid
+        });
 
-            LayerBase.CopyWith(diamondLayer, this);
-            return diamondLayer;
-        }
-        
         public override void SaveWith(XElement element)
         {            
             element.Add(new XElement("Mid", this.Mid));
@@ -60,15 +52,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateDiamond(resourceCreator, transformer, matrix, this.Mid);
-        }
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_GeometryDiamond");
         }
 
     }

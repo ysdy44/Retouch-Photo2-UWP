@@ -6,10 +6,8 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
-using System.Collections.Generic;
 using System.Numerics;
 using System.Xml.Linq;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -26,19 +24,13 @@ namespace Retouch_Photo2.Layers.Models
         public float Corner = 0.25f;
         public float StartingCorner { get; private set; }
         public void CacheCorner() => this.StartingCorner = this.Corner;
- 
 
-        public override ILayer Clone()
+
+        public override ILayer Clone() => LayerBase.CopyWith(this, new GeometryRoundRectLayer
         {
-            GeometryRoundRectLayer roundRectLayer = new GeometryRoundRectLayer
-            {
-                Corner=this.Corner
-            };
+            Corner = this.Corner
+        });
 
-            LayerBase.CopyWith(roundRectLayer, this);
-            return roundRectLayer;
-        }
-        
         public override void SaveWith(XElement element)
         {            
             element.Add(new XElement("Corner", this.Corner));
@@ -60,15 +52,6 @@ namespace Retouch_Photo2.Layers.Models
             Transformer transformer = base.Transform.Transformer;
 
             return TransformerGeometry.CreateRoundRect(resourceCreator, transformer, matrix, this.Corner);
-        }
-
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_GeometryRoundRect");
         }
 
     }

@@ -7,11 +7,7 @@ using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Brushs;
-using System.Collections.Generic;
-using System.Numerics;
 using System.Xml.Linq;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -50,20 +46,13 @@ namespace Retouch_Photo2.Layers.Models
         public float StartingVerticalStep { get; private set; }
         public void CacheVerticalStep() => this.StartingVerticalStep = this.VerticalStep;
 
-        
-        public override ILayer Clone()
+
+        public override ILayer Clone() => LayerBase.CopyWith(this, new PatternGridLayer
         {
-            PatternGridLayer gridLayer = new PatternGridLayer
-            {
-                GridType = this.GridType,
-                HorizontalStep = this.HorizontalStep,
-                VerticalStep = this.VerticalStep,
-            };
-
-            LayerBase.CopyWith(gridLayer, this);
-            return gridLayer;
-        }
-
+            GridType = this.GridType,
+            HorizontalStep = this.HorizontalStep,
+            VerticalStep = this.VerticalStep,
+        });
 
         public override void SaveWith(XElement element)
         {
@@ -103,15 +92,6 @@ namespace Retouch_Photo2.Layers.Models
                     drawingSession.DrawLine(border.Left, i, border.Right, i, canvasBrush, strokeWidth, strokeStyle);
                 }
             }
-        }
-        
-
-        //Strings
-        private string ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_PatternGrid");
         }
 
     }

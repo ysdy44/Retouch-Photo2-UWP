@@ -3,8 +3,6 @@
 // Difficult:         ★★
 // Only:              ★★★★
 // Complete:      ★★
-using Microsoft.Graphics.Canvas;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Layers.Models
 {
@@ -21,21 +19,11 @@ namespace Retouch_Photo2.Layers.Models
 
 
         public override ILayer Clone()
-        {   
-            TextFrameLayer textFrameLayer = new TextFrameLayer();
-
-            TextLayer.FontCopyWith(textFrameLayer, this);
-            LayerBase.CopyWith(textFrameLayer, this);
-            return textFrameLayer;
-        }
-
-
-        //Strings
-        private string ConstructStrings()
         {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString("Layers_TextFrame");
+            TextArtisticLayer layer = new TextArtisticLayer();
+            TextLayer.FontCopyWith(this, layer);
+            LayerBase.CopyWith(this, layer);
+            return layer;
         }
 
     }
