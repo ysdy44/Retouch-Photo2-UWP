@@ -8,8 +8,8 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     d:DesignHeight="200"
     d:DesignWidth="200"
-    Width="140"
-    Height="140"
+    Width="Auto"
+    Height="Auto"
     mc:Ignorable="d"
     >
 

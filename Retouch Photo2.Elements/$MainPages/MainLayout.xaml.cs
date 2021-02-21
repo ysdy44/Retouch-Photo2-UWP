@@ -17,6 +17,19 @@ namespace Retouch_Photo2.Elements
     public sealed partial class MainLayout : UserControl
     {
 
+        #region DependencyProperty
+
+        /// <summary> Gets or sets whether the <see cref = "MainLayout" /> orientation for DeviceLayoutType. </summary>
+        public Orientation DeviceLayoutTypeOrientation
+        {            
+            get => (Orientation)base.GetValue(DeviceLayoutTypeOrientationProperty);
+            set => base.SetValue(DeviceLayoutTypeOrientationProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "MainLayout.DeviceLayoutTypeOrientation" /> dependency property. </summary>
+        public static readonly DependencyProperty DeviceLayoutTypeOrientationProperty = DependencyProperty.Register(nameof(DeviceLayoutTypeOrientation), typeof(Orientation), typeof(MainLayout), new PropertyMetadata(Orientation.Horizontal));
+
+        #endregion
+
         //@Content     
         /// <summary> InitialBorder's Child. </summary>
         public UIElement InitialChild { get => this.InitialBorder.Child; set => this.InitialBorder.Child = value; }
@@ -40,7 +53,31 @@ namespace Retouch_Photo2.Elements
         public UIElement DeleteChild { get => this.DeleteBorder.Child; set => this.DeleteBorder.Child = value; }
         /// <summary> DuplicateBorder's Child. </summary>
         public UIElement DuplicateChild { get => this.DuplicateBorder.Child; set => this.DuplicateBorder.Child = value; }
-
+    
+        /// <summary> Gets or sets the device layout type. </summary>
+        public DeviceLayoutType DeviceLayoutType
+        {
+            set
+            {
+                switch (value)
+                {
+                    case DeviceLayoutType.Phone:
+                        this.GridView.ItemContainerStyle = this.ItemContainerStyle00;
+                        this.DeviceLayoutTypeOrientation = Orientation.Vertical;
+                        break;
+                    case DeviceLayoutType.Pad:
+                        this.GridView.ItemContainerStyle = this.ItemContainerStyle01;
+                        this.DeviceLayoutTypeOrientation = Orientation.Horizontal;
+                        break;
+                    case DeviceLayoutType.PC:
+                        this.GridView.ItemContainerStyle = this.ItemContainerStyle02;
+                        this.DeviceLayoutTypeOrientation = Orientation.Horizontal;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
         //@VisualState
         MainPageState _vsState = MainPageState.Main;

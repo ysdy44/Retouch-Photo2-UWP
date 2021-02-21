@@ -19,48 +19,10 @@
 
     <Grid x:Name="RootGrid" Background="{ThemeResource AppBackground}">
 
-        <!--VisualState-->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
 
-                <!--Phone-->
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="DeleteStackPanel.Orientation" Value="Vertical"/>
-                        <Setter Target="DuplicateStackPanel.Orientation" Value="Vertical"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Pad-->
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="600"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="DeleteStackPanel.Orientation" Value="Horizontal"/>
-                        <Setter Target="DuplicateStackPanel.Orientation" Value="Horizontal"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--PC-->
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="900"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="DeleteStackPanel.Orientation" Value="Horizontal"/>
-                        <Setter Target="DuplicateStackPanel.Orientation" Value="Horizontal"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
-
-        <elements:MainLayout x:Name="MainLayout">
+        <elements:MainLayout x:Name="MainLayout"
+                             DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
+                             >
 
             <!--InitialChild-->
             <elements:MainLayout.InitialChild>
@@ -269,7 +231,8 @@
 
             <!--DeleteChild-->
             <elements:MainLayout.DeleteChild>
-                <StackPanel x:Name="DeleteStackPanel" Padding="18,0" MinWidth="260">
+                <StackPanel x:Name="DeleteStackPanel" Padding="18,0" MinWidth="260"
+                            Orientation="{x:Bind MainLayout.DeviceLayoutTypeOrientation, Mode=OneWay}">
 
                     <TextBlock Margin="0,6">
                         <Run x:Name="DeleteTitleTextBlock" FontWeight="Bold"/>
@@ -296,7 +259,8 @@
 
             <!--DuplicateChild-->
             <elements:MainLayout.DuplicateChild>
-                <StackPanel x:Name="DuplicateStackPanel" Padding="18,0" MinWidth="260">
+                <StackPanel x:Name="DuplicateStackPanel" Padding="18,0" MinWidth="260" 
+                            Orientation="{x:Bind MainLayout.DeviceLayoutTypeOrientation, Mode=OneWay}">
 
                     <TextBlock Margin="0,6">
                         <Run x:Name="DuplicateTitleTextBlock" FontWeight="Bold"/>

@@ -112,8 +112,10 @@
 
                         <!--Left-->
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
+                        <Setter Target = "LeftBorder.(Grid.Column)" Value="1"/>
                         <!--Right-->
                         <Setter Target = "RightGrid.Visibility" Value="Collapsed"/>
+                        <Setter Target = "RightGrid.(Grid.Column)" Value="1"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -126,8 +128,11 @@
 
                         <!--DismissOverlay-->
                         <Setter Target = "DismissOverlay.Visibility" Value="Visible"/>
+                        <!--Left-->
+                        <Setter Target = "LeftBorder.(Grid.Column)" Value="1"/>
                         <!--Right-->
                         <Setter Target = "RightGrid.Visibility" Value="Collapsed"/>
+                        <Setter Target = "RightGrid.(Grid.Column)" Value="1"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -142,6 +147,9 @@
                         <Setter Target = "DismissOverlay.Visibility" Value="Visible"/>
                         <!--Left-->
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
+                        <Setter Target = "LeftBorder.(Grid.Column)" Value="1"/>
+                        <!--Right-->
+                        <Setter Target = "RightGrid.(Grid.Column)" Value="1"/>
 
                     </VisualState.Setters>
                 </VisualState>

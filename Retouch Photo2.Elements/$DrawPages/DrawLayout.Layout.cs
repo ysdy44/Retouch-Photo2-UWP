@@ -58,6 +58,11 @@ namespace Retouch_Photo2.Elements
             }
             set => VisualStateManager.GoToState(this, value.Name, true);
         }
+        private VisualState VisualStateCore
+        {
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
+
 
 
         /// <summary> Gets or sets the page layout is full-screen. </summary>

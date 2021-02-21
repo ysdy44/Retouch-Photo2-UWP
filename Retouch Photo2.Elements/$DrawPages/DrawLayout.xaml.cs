@@ -71,7 +71,7 @@ namespace Retouch_Photo2.Elements
         public DrawLayout()
         {
             this.InitializeComponent();
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.Loaded += (s, e) => this.VisualStateCore = this.VisualState;//State
 
             //Foot
             this._LeftIcon.Toggled += (s, e) => this.PhoneType = PhoneLayoutType.ShowLeft;
