@@ -85,6 +85,7 @@
 <data name='$SettingPage_MenuType' xml:space='preserve'><value>Menu Type</value></data>
 <data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>Uncheck to hide menu buttons</value></data>
 <data name='$SettingPage_Key' xml:space='preserve'><value>Shortcuts</value></data>
+<data name='$SettingPage_Key_Rotate' xml:space='preserve'><value>Slider wheel to rotate canvas</value></data>
 <data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>Canvas moves to the left</value></data>
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>Canvas Up</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>Canvas moves to the right</value></data>

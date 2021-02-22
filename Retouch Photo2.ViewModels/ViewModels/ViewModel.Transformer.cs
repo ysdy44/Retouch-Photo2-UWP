@@ -1,4 +1,5 @@
 ﻿using FanKit.Transformers;
+using Retouch_Photo2.Tools.Models;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -21,6 +22,23 @@ namespace Retouch_Photo2.ViewModels
 
             this.NotifyCanvasTransformerRadian();//Notify
         }
+        /// <summary> Left rotate. </summary>
+        public void CanvasTransformerLeftRotate(float sweep = 0.1f)
+        {
+            float radian = this.CanvasTransformer.Radian;
+            radian -= sweep;
+            if (radian < ViewRadianConverter.MinNumber) radian = ViewRadianConverter.MinNumber;
+            this.SetCanvasTransformerRadian(radian);
+        }
+        /// <summary> Right rotate. </summary>
+        public void CanvasTransformerRightRotate(float sweep = 0.1f)
+        {
+            float radian = this.CanvasTransformer.Radian;
+            radian += sweep;
+            if (radian > ViewRadianConverter.MaxNumber) radian = ViewRadianConverter.MaxNumber;
+            this.SetCanvasTransformerRadian(radian);
+        }
+
 
 
         /// <summary> <see cref = "ViewModel.CanvasTransformer" />'s scale. </summary>

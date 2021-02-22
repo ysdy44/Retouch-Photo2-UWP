@@ -83,6 +83,12 @@ namespace Retouch_Photo2
                         Tag = "Space",
                         Content = resource.GetString("Menus_Transformer_StepFrequency"),
                         Style = getStyle()
+                    },
+                    new ContentControl
+                    {
+                        Tag = "Space",
+                        Content = resource.GetString("$SettingPage_Key_Rotate"),
+                        Style = getStyle()
                     }
                 }
             };

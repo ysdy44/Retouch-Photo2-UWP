@@ -85,6 +85,7 @@
 <data name='$SettingPage_MenuType' xml:space='preserve'><value>菜单类型</value></data>
 <data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>取消勾选来隐藏菜单按钮</value></data>
 <data name='$SettingPage_Key' xml:space='preserve'><value>快捷键</value></data>
+<data name='$SettingPage_Key_Rotate' xml:space='preserve'><value>滑动滚轮以旋转画布</value></data>
 <data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>画布向左移动</value></data>
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>画布向上移动</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>画布向右移动</value></data>

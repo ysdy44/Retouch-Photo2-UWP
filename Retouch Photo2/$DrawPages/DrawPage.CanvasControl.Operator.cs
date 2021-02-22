@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools;
+using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.UI;
@@ -25,18 +26,8 @@ namespace Retouch_Photo2
 
 
         //MainCanvasControl
-        private void ConstructCanvasControl()
+        private void ConstructInvalidateAction()
         {
-            this.ViewModel.AccentColor = this.AccentColor;
-
-
-            this.SizeChanged += (s, e) =>
-            {
-                if (e.NewSize == e.PreviousSize) return;
-                this.ViewModel.CanvasTransformer.Size = e.NewSize;
-            };
-
-
             //High-Display screen
             if (this.LayerRenderCanvasControl.Dpi > 96.0f)
             {
@@ -69,10 +60,18 @@ namespace Retouch_Photo2
                     this.ToolDrawCanvasControl.Invalidate();
                 };
             }
+        }
 
+        // LayerRender & ToolDraw
+        private void ConstructCanvasControl()
+        {
+            this.ViewModel.AccentColor = this.AccentColor;
 
-            #region LayerRender & ToolDraw
-
+            this.SizeChanged += (s, e) =>
+            {
+                if (e.NewSize == e.PreviousSize) return;
+                this.ViewModel.CanvasTransformer.Size = e.NewSize;
+            };
 
             //LayerRender
             this.LayerRenderCanvasControl.UseSharedDevice = true;
@@ -108,14 +107,10 @@ namespace Retouch_Photo2
                     args.DrawingSession.DrawRuler(this.ViewModel.CanvasTransformer);
                 }
             };
+        }
 
-
-            #endregion
-
-
-            #region CanvasOperator
-
-
+        private void ConstructCanvasOperator()
+        {
             CanvasOperator canvasOperator = new CanvasOperator
             {
                 DestinationControl = this.ToolDrawCanvasControl
@@ -229,18 +224,28 @@ namespace Retouch_Photo2
             //Wheel
             canvasOperator.Wheel_Changed += (point, space) =>
             {
-                if (space > 0)
-                    this.ViewModel.CanvasTransformer.ZoomIn(point);
-                else
-                    this.ViewModel.CanvasTransformer.ZoomOut(point);
+                if (this.SettingViewModel.IsStepFrequency)
+                {
+                    if (space > 0)
+                        this.ViewModel.CanvasTransformerLeftRotate();
+                    else
+                        this.ViewModel.CanvasTransformerRightRotate();
 
-                this.ViewModel.NotifyCanvasTransformerScale();//Notify
-                this.ViewModel.Invalidate();//Invalidate
+                    this.ViewModel.Invalidate();//Invalidate
+                }
+                else
+                {
+                    if (space > 0)
+                        this.ViewModel.CanvasTransformer.ZoomIn(point);
+                    else
+                        this.ViewModel.CanvasTransformer.ZoomOut(point);
+
+                    this.ViewModel.NotifyCanvasTransformerScale();//Notify
+                    this.ViewModel.Invalidate();//Invalidate
+                }
             };
 
-
-            #endregion
-
         }
+    
     }
 }

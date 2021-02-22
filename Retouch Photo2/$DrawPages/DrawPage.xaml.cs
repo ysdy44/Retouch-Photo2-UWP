@@ -51,8 +51,11 @@ namespace Retouch_Photo2
             this.InitializeComponent();
             this.ConstructStrings();
             this.RegisteTransition();
-
+                        
+            this.ConstructInvalidateAction();
             this.ConstructCanvasControl();
+            this.ConstructCanvasOperator();
+
             this.ConstructAppBar();
 
             this.ConstructLayersControl();
