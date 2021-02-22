@@ -65,8 +65,6 @@
 <data name='$Loading_Saving' xml:space='preserve'><value>保存中</value></data>
 <data name='$Loading_SaveSuccess' xml:space='preserve'><value>保存成功</value></data>
 <data name='$Loading_SaveFailed' xml:space='preserve'><value>保存失败</value></data>
-<data name='$PhotosPage_Title' xml:space='preserve'><value>图库</value></data>
-<data name='$PhotosPage_AddTip' xml:space='preserve'><value>添加本地图片</value></data>
 <data name='$Untitled' xml:space='preserve'><value>未命名</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://gitee.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-ZH.md</value></data>
 <data name='$SettingPage_Title' xml:space='preserve'><value>设置</value></data>
@@ -122,7 +120,7 @@
 <data name='$DrawPage_Ruler' xml:space='preserve'><value>标尺</value></data>
 <data name='$DrawPage_FullScreen' xml:space='preserve'><value>全屏</value></data>
 <data name='$DrawPage_Tip' xml:space='preserve'><value>提示</value></data>
-<data name='$DrawPage_GalleryTip' xml:space='preserve'><value>打开图库页面</value></data>
+<data name='$DrawPage_Gallery' xml:space='preserve'><value>图库</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>切换布局宽度</value></data>
 <data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>文档 设定</value></data>
 <data name='$DrawPage_SetupDialog_Layers' xml:space='preserve'><value>所有图层</value></data>
@@ -132,6 +130,7 @@
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>质量</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>文件格式</value></data>
 <data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>重命名图层</value></data>
+<data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>添加图片</value></data>
 <data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>等比例缩放</value></data>
 <data name='Tools_MoreTransform_Center' xml:space='preserve'><value>中心缩放</value></data>
 <data name='Tools_MoreCreate_Square' xml:space='preserve'><value>宽高相等</value></data>
@@ -507,7 +506,6 @@
 <data name='Historys_LayersProperty_SetStyle_IsStrokeBehindFill' xml:space='preserve'><value>设置是否描边在填充之后</value></data>
 <data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>设置描边宽度是否跟随缩放</value></data>
 <data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>设置滤镜</value></data>
-<data name='$PhotosPage_BackTip' xml:space='preserve'><value>返回</value></data>
 <data name='$DisplayName' xml:space='preserve'><value>修图2</value></data>
 <data name='$SettingPage_Back' xml:space='preserve'><value>返回</value></data>
 <data name='$MainPage_Title' xml:space='preserve'><value>修图2</value></data>

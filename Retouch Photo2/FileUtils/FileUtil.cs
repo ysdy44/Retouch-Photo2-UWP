@@ -6,6 +6,7 @@
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -33,9 +34,7 @@ namespace Retouch_Photo2
                     await item.DeleteAsync();
                 }
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
 
 
@@ -134,15 +133,29 @@ namespace Retouch_Photo2
 
 
         #endregion
-               
+
+
+        #region Pick and Copy
+
 
         /// <summary>
+        /// Copy file to the temporary folder, and return the copy.
+        /// </summary>
+        /// <param name="file"> The destination file. </param>
+        /// <returns> The copied  file. </returns>
+        public async static Task<StorageFile> CopySingleImageFileAsync(StorageFile file)
+        { 
+            if (file == null) return null;
+
+            StorageFile copyFile = await file.CopyAsync(ApplicationData.Current.TemporaryFolder, file.Name, NameCollisionOption.ReplaceExisting);
+            return copyFile;
+        }
+        /// <summary>
         /// The file picker is displayed so that the user can select a file.
-        /// Then copy to the temporary folder, and return the copy.
         /// </summary>
         /// <param name="location"> The destination locationId. </param>
         /// <returns> The product file. </returns>
-        public async static Task<StorageFile> PickAndCopySingleImageFileAsync(PickerLocationId location)
+        public async static Task<StorageFile> PickSingleImageFileAsync(PickerLocationId location)
         {
             //Picker
             FileOpenPicker openPicker = new FileOpenPicker
@@ -160,10 +173,32 @@ namespace Retouch_Photo2
 
             //File
             StorageFile file = await openPicker.PickSingleFileAsync();
-            if (file == null) return null;
+            return file;
+        }
+        /// <summary>
+        /// The files picker is displayed so that the user can select a files.
+        /// </summary>
+        /// <param name="location"> The destination locationId. </param>
+        /// <returns> The product files. </returns>
+        public async static Task<IReadOnlyList<StorageFile>> PickMultipleImageFilesAsync(PickerLocationId location)
+        {
+            //Picker
+            FileOpenPicker openPicker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = location,
+                FileTypeFilter =
+                {
+                    ".jpg",
+                    ".jpeg",
+                    ".png",
+                    ".bmp"
+                }
+            };
 
-            StorageFile copyFile = await file.CopyAsync(ApplicationData.Current.TemporaryFolder, file.Name, NameCollisionOption.ReplaceExisting);
-            return copyFile;
+            //File
+            IReadOnlyList<StorageFile> files = await openPicker.PickMultipleFilesAsync();
+            return files;
         }
 
         /// <summary>
@@ -192,6 +227,9 @@ namespace Retouch_Photo2
             }
             return null;
         }
+      
+        
+        #endregion
 
 
         #region Exists
@@ -225,5 +263,6 @@ namespace Retouch_Photo2
 
 
         #endregion
+
     }
 }

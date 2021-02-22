@@ -141,9 +141,10 @@ namespace Retouch_Photo2
         /// <param name="location"> The picker locationId. </param>
         public async Task NewFromPicture(PickerLocationId location)
         {
-            StorageFile copyFile = await FileUtil.PickAndCopySingleImageFileAsync(location);
+            StorageFile file = await FileUtil.PickSingleImageFileAsync(location);
+            StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(file);
 
-            await this._newFromPicture(copyFile);
+            await this.NewFromPictureCore(copyFile);
         }
         /// <summary>
         /// New from Picture.
@@ -153,9 +154,9 @@ namespace Retouch_Photo2
         {
             StorageFile copyFile = await FileUtil.CopySingleImageFileAsync(item);
 
-            await this._newFromPicture(copyFile);
+            await this.NewFromPictureCore(copyFile);
         }
-        private async Task _newFromPicture(StorageFile copyFile)
+        private async Task NewFromPictureCore(StorageFile copyFile)
         {
             this.LoadingControl.State = LoadingState.Loading;
             this.LoadingControl.IsActive = true;

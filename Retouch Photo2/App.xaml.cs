@@ -238,6 +238,14 @@ namespace Retouch_Photo2
                                 Key = VirtualKey.Escape,
                                 Invoked = () => Retouch_Photo2.DrawPage.FullScreen?.Invoke()
                             },
+                            new KeyboardAccelerator2
+                            {
+                                Title = resource.GetString("$DrawPage_Gallery"),
+                                Group = 3,
+                                Modifiers = VirtualKeyModifiers2.Control,
+                                Key = VirtualKey.P,
+                                Invoked = () => Retouch_Photo2.DrawPage.ShowGallery?.Invoke(GalleryMode.AddImage)
+                            },
                         }
                     };
                 }

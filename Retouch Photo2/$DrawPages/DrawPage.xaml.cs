@@ -3,12 +3,15 @@
 // Difficult:         ★★★★
 // Only:              ★★★★★
 // Complete:      ★★★★★
+using Retouch_Photo2.Photos;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
 using Windows.Foundation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Retouch_Photo2.Elements;
 
 namespace Retouch_Photo2
 {
@@ -27,8 +30,6 @@ namespace Retouch_Photo2
 
 
         //@Static
-        /// <summary> Navigate to <see cref="PhotosPage"/> </summary>
-        public static Action<PhotosPageMode> FrameNavigatePhotosPage;
         /// <summary> Show <see cref="SetupDialog"/> </summary>
         public static Action ShowSetup;
         /// <summary> Show <see cref="ExportDialog"/> </summary>
@@ -37,6 +38,8 @@ namespace Retouch_Photo2
         public static Action ShowRename;
         /// <summary> Show <see cref="DrawLayout.IsFullScreen"/> </summary>
         public static Action FullScreen;
+        /// <summary> Show <see cref="GalleryDialog"/> </summary>
+        public static Action<GalleryMode> ShowGallery;
 
 
         //@Construct
@@ -56,24 +59,6 @@ namespace Retouch_Photo2
             this.ConstructLayerManager();
 
 
-            this.Loaded += (s, e) => this._lockLoaded();
-            if (DrawPage.FrameNavigatePhotosPage == null) DrawPage.FrameNavigatePhotosPage += (mode) => this.Frame.Navigate(typeof(PhotosPage), mode);//Navigate   
-
-
-            //DrawLayout
-            this.DrawLayout.LeftIcon = ToolManager.IconBorder;
-            this.DrawLayout.RightIcon = new Retouch_Photo2.Layers.Icon();
-            this.DrawLayout.FootPage = ToolManager.PageBorder;
-            this.DrawLayout.TouchbarPicker = TouchbarButton.PickerBorder;
-            this.DrawLayout.TouchbarSlider = TouchbarButton.SliderBorder;
-            this.DrawLayout.GalleryButton.Click += (s, e) => this.Frame.Navigate(typeof(PhotosPage), PhotosPageMode.AddImage);//Navigate   
-      
-
-            //FlyoutTool
-            Retouch_Photo2.Tools.Elements.MoreTransformButton.Flyout = this.MoreTransformFlyout;
-            Retouch_Photo2.Tools.Elements.MoreCreateButton.Flyout = this.MoreCreateFlyout;
-
-
             //Dialog
             if (DrawPage.ShowExport == null) DrawPage.ShowExport = this.ShowExportDialog;
             this.ConstructExportDialog();
@@ -82,6 +67,27 @@ namespace Retouch_Photo2
             if (DrawPage.ShowRename == null) DrawPage.ShowRename = this.ShowRenameDialog;
             this.ConstructRenameDialog();
             if (DrawPage.FullScreen == null) DrawPage.FullScreen += () => this.DrawLayout.IsFullScreen = !this.DrawLayout.IsFullScreen;
+            //Gallery
+            if (DrawPage.ShowGallery == null) DrawPage.ShowGallery = this.ShowGalleryDialog;
+            this.ConstructGallery();
+            this.ConstructDragAndDrop();
+
+
+            this.Loaded += (s, e) => this._lockLoaded();
+
+
+            //DrawLayout
+            this.DrawLayout.LeftIcon = ToolManager.IconBorder;
+            this.DrawLayout.RightIcon = new Retouch_Photo2.Layers.Icon();
+            this.DrawLayout.FootPage = ToolManager.PageBorder;
+            this.DrawLayout.TouchbarPicker = TouchbarButton.PickerBorder;
+            this.DrawLayout.TouchbarSlider = TouchbarButton.SliderBorder;
+            this.DrawLayout.GalleryButton.Click += (s, e) => this.ShowGalleryDialog(GalleryMode.AddImage);
+
+
+            //FlyoutTool
+            Retouch_Photo2.Tools.Elements.MoreTransformButton.Flyout = this.MoreTransformFlyout;
+            Retouch_Photo2.Tools.Elements.MoreCreateButton.Flyout = this.MoreCreateFlyout;
         }
 
         /// <summary> The current page becomes the active page. </summary>

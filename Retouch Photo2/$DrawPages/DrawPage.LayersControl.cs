@@ -30,7 +30,7 @@ namespace Retouch_Photo2
             this.LayersScrollViewer.Holding += (s, e) => this.ShowLayerMenu();
 
 
-            Retouch_Photo2.PhotosPage.AddImageCallBack += (photo) =>
+            Retouch_Photo2.DrawPage.AddImageCallBack += (photo) =>
             {
                 if (photo == null) return;
 

@@ -6,10 +6,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:transformers="using:FanKit.Transformers"
     xmlns:hsvColorPickers="using:HSVColorPickers"
+    xmlns:local="using:Retouch_Photo2"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:menus="using:Retouch_Photo2.Menus"
     xmlns:tools="using:Retouch_Photo2.Tools"
-    xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:toolElements="using:Retouch_Photo2.Tools.Elements" xmlns:photos="using:Retouch_Photo2.Photos"
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -255,7 +256,10 @@
         <menus:MenusExpanderCanvas
             Menus="{x:Bind TipViewModel.Menus, Mode=OneTime}"
             IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"/>
-
+        <!--Flyout-->
+        <elements:DialogWide x:Name="GalleryDialog" Title="Gallery"/>
+        <photos:PhotoBillboardCanvas x:Name="BillboardCanvas"/>
+        
 
         <!--Tip-->
         <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" 
@@ -338,7 +342,7 @@
             <ProgressBar x:Name="TransitionSlider" Width="200" Minimum="0" Maximum="1"/>
 
         </Border>
-        
+
 
     </Grid>
 </Page>

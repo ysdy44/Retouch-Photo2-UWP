@@ -106,7 +106,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructFillType()
         {
-            Retouch_Photo2.PhotosPage.FillImageCallBack += (photo) =>
+            Retouch_Photo2.DrawPage.FillImageCallBack += (photo) =>
             {
                 this.FillTypeChanged(BrushType.Image, photo);
                 this.ShowControl.Invalidate();
@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 if (brushType == BrushType.Image)
                 {
-                    Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.FillImage);//Delegate
+                    Retouch_Photo2.DrawPage.ShowGallery?.Invoke(GalleryMode.FillImage);//Delegate
                 }
                 else
                 {

@@ -104,7 +104,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructStrokeType()
         {
-            Retouch_Photo2.PhotosPage.StrokeImageCallBack += (photo) =>
+            Retouch_Photo2.DrawPage.StrokeImageCallBack += (photo) =>
             {
                 this.StrokeTypeChanged(BrushType.Image, photo);
                 this.ShowControl.Invalidate();
@@ -113,7 +113,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 if (brushType == BrushType.Image)
                 {
-                    Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.StrokeImage);//Delegate
+                    Retouch_Photo2.DrawPage.ShowGallery?.Invoke(GalleryMode.StrokeImage);//Delegate
                 }
                 else
                 {

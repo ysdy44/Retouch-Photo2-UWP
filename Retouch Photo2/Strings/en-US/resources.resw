@@ -65,8 +65,6 @@
 <data name='$Loading_Saving' xml:space='preserve'><value>Saving</value></data>
 <data name='$Loading_SaveSuccess' xml:space='preserve'><value>Saved successfully</value></data>
 <data name='$Loading_SaveFailed' xml:space='preserve'><value>Saved failed</value></data>
-<data name='$PhotosPage_Title' xml:space='preserve'><value>Gallery</value></data>
-<data name='$PhotosPage_AddTip' xml:space='preserve'><value>Add Local Photo</value></data>
 <data name='$Untitled' xml:space='preserve'><value>Untitled</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
 <data name='$SettingPage_Title' xml:space='preserve'><value>Setting</value></data>
@@ -122,7 +120,7 @@
 <data name='$DrawPage_Ruler' xml:space='preserve'><value>Ruler</value></data>
 <data name='$DrawPage_FullScreen' xml:space='preserve'><value>Full Screen</value></data>
 <data name='$DrawPage_Tip' xml:space='preserve'><value>Tip</value></data>
-<data name='$DrawPage_GalleryTip' xml:space='preserve'><value>Open Gallery Page</value></data>
+<data name='$DrawPage_Gallery' xml:space='preserve'><value>Gallery</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>Switch Layout Widths</value></data>
 <data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>Document Setup</value></data>
 <data name='$DrawPage_SetupDialog_Layers' xml:space='preserve'><value>All layers</value></data>
@@ -132,6 +130,7 @@
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>Quality</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>File Format</value></data>
 <data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>Rename Layers</value></data>
+<data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>Add Photo(s)</value></data>
 <data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>Ratio Scaling</value></data>
 <data name='Tools_MoreTransform_Center' xml:space='preserve'><value>Center Scaling</value></data>
 <data name='Tools_MoreCreate_Square' xml:space='preserve'><value>Equal width and height</value></data>
@@ -507,7 +506,6 @@
 <data name='Historys_LayersProperty_SetStyle_IsStrokeBehindFill' xml:space='preserve'><value>Set style is stroke behind fill</value></data>
 <data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>Set style is Stroke Width scale with Layer</value></data>
 <data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>Set filter</value></data>
-<data name='$PhotosPage_BackTip' xml:space='preserve'><value>Back</value></data>
 <data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
 <data name='$SettingPage_Back' xml:space='preserve'><value>Back</value></data>
 <data name='$MainPage_Title' xml:space='preserve'><value>Retouch Photo2</value></data>

@@ -40,10 +40,6 @@ namespace Retouch_Photo2
                 this.TipButton.Text = resource.GetString("$DrawPage_Tip");
             }
 
-
-            this.DrawLayout.GalleryToolTip.Content = resource.GetString("$DrawPage_GalleryTip");
-            this.DrawLayout.WidthToolTip.Content = resource.GetString("$DrawPage_WidthTip");
-
             this.SetupDialog.Title = resource.GetString("$DrawPage_SetupDialog_Title");
             {
                 this.SetupDialog.CloseButton.Content = resource.GetString("$DrawPage_SetupDialog_Close");
@@ -76,6 +72,14 @@ namespace Retouch_Photo2
 
                 this.RenameTextBox.PlaceholderText = resource.GetString("$DrawPage_RenameDialog_PlaceholderText");
             }
+
+            this.GalleryDialog.Title = resource.GetString("$DrawPage_Gallery");
+            {
+                this.GalleryDialog.PrimaryButton.Content = resource.GetString("$DrawPage_GalleryDialog_Primary");
+            }
+
+            this.DrawLayout.GalleryToolTip.Content = resource.GetString("$DrawPage_Gallery");
+            this.DrawLayout.WidthToolTip.Content = resource.GetString("$DrawPage_WidthTip");
         }
 
 

@@ -102,6 +102,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="%24DrawPages\DrawPage.AppBar.cs" />
+    <Compile Include="%24DrawPages\DrawPage.Gallery.cs" />
     <Compile Include="%24DrawPages\DrawPage.LayerManager.cs" />
     <Compile Include="%24DrawPages\DrawPage.LayersControl.cs" />
     <Compile Include="%24DrawPages\DrawPage.CanvasControl.Render.cs" />
@@ -113,7 +114,6 @@
       <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileUtils\FileUtil.Sample.cs" />
-    <Compile Include="%24PhotosPages\PhotosPage.Construct.cs" />
     <Compile Include="Retouch Photo2.Adjustments\BrightnessPage.xaml.cs">
       <DependentUpon>BrightnessPage.xaml</DependentUpon>
     </Compile>
@@ -245,9 +245,6 @@
     <Compile Include="XMLs\XML.SettingFile.cs" />
     <Compile Include="%24MainPages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="%24PhotosPages\PhotosPage.xaml.cs">
-      <DependentUpon>PhotosPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\GeometryTool.xaml.cs">
       <DependentUpon>GeometryTool.xaml</DependentUpon>
@@ -445,10 +442,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="%24MainPages\MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="%24PhotosPages\PhotosPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
