@@ -72,8 +72,8 @@
 
             <ContentControl Width="4"/>
 
-            <TextBlock x:Name="ConvertTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:ConvertToCurvesButton/>
+            <TextBlock Text="{x:Bind ConvertButton.Title}" Style="{StaticResource AppTextBlockStyle}"/>
+            <toolsElements:ConvertToCurvesButton x:Name="ConvertButton"/>
 
             <ContentControl Width="4"/>
 

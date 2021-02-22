@@ -99,9 +99,6 @@ namespace Retouch_Photo2.Tools.Models
 
             this.PointsButton.CenterContent = resource.GetString("Tools_GeometryStar_Points");
             this.InnerRadiusButton.CenterContent = resource.GetString("Tools_GeometryStar_InnerRadius");
-
-            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
-
         }
     }
 

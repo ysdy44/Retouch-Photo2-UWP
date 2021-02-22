@@ -65,15 +65,7 @@ namespace Retouch_Photo2.Tools.Models
         public GeometryCapsulePage()
         {
             this.InitializeComponent();
-            this.ConstructStrings();
         }
 
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
-        }
     }
 }

@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Strokes
         #region DependencyProperty
 
 
-        /// <summary> Join of <see cref = "JoinSegmented" />. </summary>
+        /// <summary> Gets or set join of <see cref = "JoinSegmented" />. </summary>
         public CanvasLineJoin Join
         {
             get => (CanvasLineJoin)base.GetValue(JoinProperty);

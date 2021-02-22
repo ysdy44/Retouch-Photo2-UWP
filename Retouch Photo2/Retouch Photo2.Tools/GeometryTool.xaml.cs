@@ -80,7 +80,6 @@ namespace Retouch_Photo2.Tools
 
             this.FillTextBlock.Text = resource.GetString("Tools_Fill");
             this.StrokeTextBlock.Text = resource.GetString("Tools_Stroke");
-            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
 
     }

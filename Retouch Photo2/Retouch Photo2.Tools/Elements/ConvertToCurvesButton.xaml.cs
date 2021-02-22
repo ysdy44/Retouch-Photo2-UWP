@@ -9,6 +9,8 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using System.Linq;
+using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Elements
@@ -25,6 +27,24 @@ namespace Retouch_Photo2.Tools.Elements
         TipViewModel TipViewModel => App.TipViewModel;
 
 
+        private static string title = null;
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets the title of <see cref = "ConvertToCurvesButton" />. </summary>
+        public string Title
+        {
+            get => (string)base.GetValue(TitleProperty);
+            set => base.SetValue(TitleProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "ConvertToCurvesButton.Title" /> dependency property. </summary>
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(string), typeof(ConvertToCurvesButton), new PropertyMetadata(null));
+
+
+        #endregion
+
+
         //@Construct
         /// <summary>
         /// Initializes a ConvertToCurvesButton. 
@@ -32,6 +52,7 @@ namespace Retouch_Photo2.Tools.Elements
         public ConvertToCurvesButton()
         {
             this.InitializeComponent();
+            this.ConstructStrings();
             this.Button.Click += (s, e) =>
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
@@ -86,6 +107,18 @@ namespace Retouch_Photo2.Tools.Elements
     /// </summary>
     public sealed partial class ConvertToCurvesButton : UserControl
     {
+
+        //Strings
+        private void ConstructStrings()
+        {
+            if (ConvertToCurvesButton.title == null)
+            {
+                ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+                ConvertToCurvesButton.title = resource.GetString("Tools_ConvertToCurves");
+            }
+            this.Title = ConvertToCurvesButton.title;
+        }
 
         //Create curve layer
         private ILayer CreateCurveLayer(Layerage layerage)

@@ -119,8 +119,6 @@ namespace Retouch_Photo2.Tools.Models
             this.InnerRadiusButton.CenterContent = resource.GetString("Tools_GeometryCog_InnerRadius");
             this.ToothButton.CenterContent = resource.GetString("Tools_GeometryCog_Tooth");
             this.NotchButton.CenterContent = resource.GetString("Tools_GeometryCog_Notch");
-
-            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

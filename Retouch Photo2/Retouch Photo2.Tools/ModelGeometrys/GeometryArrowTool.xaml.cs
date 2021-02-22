@@ -102,10 +102,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ValueButton.CenterContent = resource.GetString("Tools_GeometryArrow_Value");
 
             this.LeftTailTextBlock.Text = resource.GetString("Tools_GeometryArrow_LeftTail");
-
             this.RightTailTextBlock.Text = resource.GetString("Tools_GeometryArrow_RightTail");
-
-            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

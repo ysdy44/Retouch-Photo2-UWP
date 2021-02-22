@@ -240,7 +240,6 @@ namespace Retouch_Photo2.Tools.Models
             this.SelectTextBlock.Text = resource.GetString("Tools_Image_Select");
             this.ReplaceTextBlock.Text = resource.GetString("Tools_Image_Replace");
             this.ClearTextBlock.Text = resource.GetString("Tools_Image_Clear");
-            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
 
         private void ConstructSelect()

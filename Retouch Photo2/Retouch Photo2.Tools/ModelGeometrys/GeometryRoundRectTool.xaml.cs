@@ -82,7 +82,6 @@ namespace Retouch_Photo2.Tools.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.CornerButton.CenterContent = resource.GetString("Tools_GeometryRoundRect_Corner");
-            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

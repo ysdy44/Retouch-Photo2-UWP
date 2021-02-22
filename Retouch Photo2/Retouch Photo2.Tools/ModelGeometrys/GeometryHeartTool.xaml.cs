@@ -83,8 +83,6 @@ namespace Retouch_Photo2.Tools.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.SpreadButton.CenterContent = resource.GetString("Tools_GeometryHeart_Spread");
-
-            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

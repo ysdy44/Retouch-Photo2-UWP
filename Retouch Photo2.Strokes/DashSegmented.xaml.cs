@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Strokes
         #region DependencyProperty
 
 
-        /// <summary> Dash style of <see cref = "DashSegmented" />. </summary>
+        /// <summary> Gets or set ash style of <see cref = "DashSegmented" />. </summary>
         public CanvasDashStyle Dash
         {
             get  => (CanvasDashStyle)base.GetValue(DashProperty);

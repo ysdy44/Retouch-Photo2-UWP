@@ -101,8 +101,6 @@ namespace Retouch_Photo2.Tools.Models
 
             this.InnerRadiusButton.CenterContent = resource.GetString("Tools_GeometryCookie_InnerRadius");
             this.SweepAngleButton.CenterContent = resource.GetString("Tools_GeometryCookie_SweepAngle");
-
-            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

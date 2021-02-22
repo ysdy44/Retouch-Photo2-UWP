@@ -83,8 +83,6 @@ namespace Retouch_Photo2.Tools.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.HoleRadiusButton.CenterContent = resource.GetString("Tools_GeometryDount_HoleRadius");
-
-            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

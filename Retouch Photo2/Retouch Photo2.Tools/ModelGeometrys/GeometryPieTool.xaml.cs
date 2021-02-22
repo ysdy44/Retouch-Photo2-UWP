@@ -82,8 +82,6 @@ namespace Retouch_Photo2.Tools.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.SweepAngleButton.CenterContent = resource.GetString("Tools_GeometryPie_SweepAngle");
-
-            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

@@ -85,8 +85,6 @@ namespace Retouch_Photo2.Tools.Models
 
             this.MirrorTextBlock.Text = resource.GetString("Tools_GeometryDiamond_Mirror");
             this.MidButton.CenterContent = resource.GetString("Tools_GeometryDiamond_Mid");
-
-            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 

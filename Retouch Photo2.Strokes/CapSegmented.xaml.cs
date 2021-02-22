@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Strokes
         #region DependencyProperty
 
 
-        /// <summary> Cap of <see cref = "CapSegmented" />. </summary>
+        /// <summary> Gets or set cap of <see cref = "CapSegmented" />. </summary>
         public CanvasCapStyle Cap
         {
             get => (CanvasCapStyle)base.GetValue(CapProperty);

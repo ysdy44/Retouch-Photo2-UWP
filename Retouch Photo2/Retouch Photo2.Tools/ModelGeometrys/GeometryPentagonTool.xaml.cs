@@ -78,8 +78,6 @@ namespace Retouch_Photo2.Tools.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.PointsButton.CenterContent = resource.GetString("Tools_GeometryPentagon_Points");
-
-            this.ConvertTextBlock.Text = resource.GetString("Tools_ConvertToCurves");
         }
     }
 
