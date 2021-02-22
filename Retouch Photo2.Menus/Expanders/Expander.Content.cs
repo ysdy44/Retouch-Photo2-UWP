@@ -3,7 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
-namespace Retouch_Photo2.Elements
+namespace Retouch_Photo2.Menus
 {
     /// <summary> 
     /// Represents the control that a drawer can be folded.
@@ -79,7 +79,7 @@ namespace Retouch_Photo2.Elements
             }
         }
         public FlyoutPlacementMode PlacementMode { get; set; } = FlyoutPlacementMode.Bottom;
-        public FrameworkElement Self => this;
+        public Expander Self => this;
         public abstract IExpanderButton Button { get; }
 
 

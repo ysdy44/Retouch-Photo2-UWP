@@ -1,4 +1,5 @@
 ﻿using Windows.Foundation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Photos
@@ -10,9 +11,9 @@ namespace Retouch_Photo2.Photos
     {
         //@Delegate
         /// <summary> Occurs when an item in a list view receives an interaction. </summary>
-        public static event TypedEventHandler<object, Photo> ItemClick;
+        public static event TypedEventHandler<FrameworkElement, Photo> ItemClick;
         /// <summary> Occurs when the flyout button receives the interaction. </summary>
-        public static event TypedEventHandler<object, Photo> FlyoutShow;
+        public static event TypedEventHandler<FrameworkElement, Photo> FlyoutShow;
 
         //@Construct
         /// <summary>
@@ -22,18 +23,9 @@ namespace Retouch_Photo2.Photos
         {            
             this.InitializeComponent();
 
-            this.Image.SizeChanged += (s, e) =>
-            {
-                if (e.PreviousSize == e.NewSize) return;
-
-                this.BackgroundRectangle.Width = e.NewSize.Width;
-                this.BackgroundRectangle.Height = e.NewSize.Height;
-            };
-
             this.FlyoutButton.Tapped += (s, e) =>
             {
-                UserControl userControl = this;
-                Photo.FlyoutShow?.Invoke(userControl, this);//Delegate
+                Photo.FlyoutShow?.Invoke(this.Image, this);//Delegate
                 e.Handled = true;
             };
 
@@ -45,7 +37,7 @@ namespace Retouch_Photo2.Photos
 
             this.RootGrid.Tapped += (s, e) =>
             {
-                Photo.ItemClick?.Invoke(this, this);//Delegate
+                Photo.ItemClick?.Invoke(this.Image, this);//Delegate
             };
         }
         

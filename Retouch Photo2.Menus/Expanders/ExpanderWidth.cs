@@ -1,4 +1,4 @@
-﻿namespace Retouch_Photo2.Elements
+﻿namespace Retouch_Photo2.Menus
 {
     /// <summary> 
     /// Width of <see cref="Expander"/>.

@@ -1,4 +1,4 @@
-﻿namespace Retouch_Photo2.Elements
+﻿namespace Retouch_Photo2.Menus
 {
     /// <summary> 
     /// State of <see cref="Expander"/>.

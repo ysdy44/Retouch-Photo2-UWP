@@ -2,7 +2,7 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
-namespace Retouch_Photo2.Elements
+namespace Retouch_Photo2.Menus
 {
     /// <summary> 
     /// Represents the control that a drawer can be folded.
@@ -15,11 +15,13 @@ namespace Retouch_Photo2.Elements
         /// </summary>
         private void Move()
         {
-            if (Expander.OverlayCanvas.Children.Contains(this))
+            if (this.OverlayCanvas == null) return;
+
+            if (this.OverlayCanvas.Children.Contains(this))
             {
-                int index = Expander.OverlayCanvas.Children.IndexOf(this);
-                int count = Expander.OverlayCanvas.Children.Count;
-                Expander.OverlayCanvas.Children.Move((uint)index, (uint)count - 1); ;
+                int index = this.OverlayCanvas.Children.IndexOf(this);
+                int count = this.OverlayCanvas.Children.Count;
+                this.OverlayCanvas.Children.Move((uint)index, (uint)count - 1); ;
             }
         }
 
@@ -28,7 +30,9 @@ namespace Retouch_Photo2.Elements
         /// </summary>
         private void Opened()
         {
-            foreach (UIElement menu in Expander.OverlayCanvas.Children)
+            if (this.OverlayCanvas == null) return;
+
+            foreach (UIElement menu in this.OverlayCanvas.Children)
             {
                 menu.IsHitTestVisible = false;
             }
@@ -36,7 +40,7 @@ namespace Retouch_Photo2.Elements
 
             this.Move();
             this.Visibility = Visibility.Visible;
-            Expander.IsOverlayDismiss = true;
+            this.OverlayCanvas.IsOverlayDismiss = true;
         }
 
         /// <summary> 
@@ -44,13 +48,15 @@ namespace Retouch_Photo2.Elements
         /// </summary>
         private void Closed()
         {
-            foreach (UIElement menu in Expander.OverlayCanvas.Children)
+            if (this.OverlayCanvas == null) return;
+
+            foreach (UIElement menu in this.OverlayCanvas.Children)
             {
                 menu.IsHitTestVisible = true;
             }
 
             this.Visibility = Visibility.Collapsed;
-            Expander.IsOverlayDismiss = false;
+            this.OverlayCanvas.IsOverlayDismiss = false;
         }
 
         /// <summary>
@@ -58,12 +64,14 @@ namespace Retouch_Photo2.Elements
         /// </summary>
         private void Overlaid()
         {
-            foreach (UIElement menu in Expander.OverlayCanvas.Children)
+            if (this.OverlayCanvas == null) return;
+
+            foreach (UIElement menu in this.OverlayCanvas.Children)
             {
                 menu.IsHitTestVisible = true;
             }
 
-            Expander.IsOverlayDismiss = false;
+            this.OverlayCanvas.IsOverlayDismiss = false;
         }
                
 

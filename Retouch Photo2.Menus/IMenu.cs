@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Menus
         /// <summary> Gets IMenu's placement mode. </summary>
         FlyoutPlacementMode PlacementMode { get; set; }
         /// <summary> Gets the Self. </summary>
-        FrameworkElement Self { get; }
+        Expander Self { get; }
         /// <summary> Gets the button. </summary>
         IExpanderButton Button { get; }
 

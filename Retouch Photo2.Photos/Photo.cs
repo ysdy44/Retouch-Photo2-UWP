@@ -88,7 +88,7 @@ namespace Retouch_Photo2.Photos
         /// Returns a String representing this <see cref="Photo"/> instance.
         /// </summary>
         /// <returns> The string representation. </returns>
-        public override string ToString() => string.Format("{0} {1}x{2}pixels {3}Dpi", this.FolderRelativeId, this.Width, this.Height, this.Dpi);
+        public override string ToString() => $"{this.FolderRelativeId}\n{this.Width}x{this.Height}\n{this.Dpi}Dpi";
 
     }
 }

@@ -13,26 +13,22 @@ namespace Retouch_Photo2.Elements
     /// <summary>
     /// Represents a dialog box that contains check boxes, hyperlinks, buttons, and other XAML content that you can customize.
     /// </summary>
-    public sealed partial class Dialog : UserControl
+    public sealed partial class DialogWide : UserControl
     {
 
         //@Content
-        /// <summary> <see cref = "Dialog" /> 's Content.</summary>
-        public object CenterContent
-        {
-            get => this.ContentPresenter.Content;
-            set => this.ContentPresenter.Content = value;
-        }
-        /// <summary> <see cref = "Dialog" /> 's Title.</summary>
+        /// <summary> <see cref = "DialogWide" /> 's GridView.</summary>
+        public GridView GridView => this._GridView;
+        /// <summary> <see cref = "DialogWide" /> 's Title.</summary>
         public object Title
         {
             get => this.ContentControl.Content;
             set => this.ContentControl.Content = value;
         }
 
-        /// <summary> <see cref = "Dialog" /> 's CloseButton.</summary>
+        /// <summary> <see cref = "DialogWide" /> 's CloseButton.</summary>
         public Button CloseButton => this._CloseButton;
-        /// <summary> <see cref = "Dialog" /> 's PrimaryButton.</summary>
+        /// <summary> <see cref = "DialogWide" /> 's PrimaryButton.</summary>
         public Button PrimaryButton => this._PrimaryButton;
 
 
@@ -52,9 +48,9 @@ namespace Retouch_Photo2.Elements
 
         //@Construct
         /// <summary>
-        /// Initializes a Dialog. 
+        /// Initializes a DialogWide. 
         /// </summary>
-        public Dialog()
+        public DialogWide()
         {
             this.InitializeComponent();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State

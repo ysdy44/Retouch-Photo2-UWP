@@ -123,6 +123,7 @@
     <Compile Include="Billboard.xaml.cs">
       <DependentUpon>Billboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BillboardCanvas.cs" />
     <Compile Include="Photo.cs" />
     <Compile Include="Photo.Instance.cs" />
     <Compile Include="Photo.xaml.cs">

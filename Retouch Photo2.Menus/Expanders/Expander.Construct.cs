@@ -2,7 +2,7 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 
-namespace Retouch_Photo2.Elements
+namespace Retouch_Photo2.Menus
 {
     /// <summary> 
     /// Represents the control that a drawer can be folded.
