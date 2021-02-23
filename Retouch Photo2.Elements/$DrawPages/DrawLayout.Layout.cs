@@ -3,12 +3,8 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Elements
 {
-    /// <summary> 
-    /// <see cref = "DrawPage" />'s layout. 
-    /// </summary>
     public sealed partial class DrawLayout : UserControl
     {
-
 
         #region DependencyProperty
 
@@ -28,6 +24,7 @@ namespace Retouch_Photo2.Elements
         bool _vsIsFullScreen = true;
         DeviceLayoutType _vsDeviceLayoutType = DeviceLayoutType.PC;
         PhoneLayoutType _vsPhoneType = PhoneLayoutType.Hided;
+        bool _vsIsShow = false;
         /// <summary> 
         /// Represents the visual appearance of UI elements in a specific state.
         /// </summary>
@@ -37,31 +34,30 @@ namespace Retouch_Photo2.Elements
             {
                 if (this._vsIsFullScreen) return this.FullScreen;
 
-                DeviceLayoutType type = this._vsDeviceLayoutType;
-
-                switch (type)
+                switch (this._vsDeviceLayoutType)
                 {
+                    case DeviceLayoutType.PC: return this.PC;
+                    case DeviceLayoutType.Pad: return this.Pad;
                     case DeviceLayoutType.Phone:
                         {
-                            switch (this._vsPhoneType)
+                            if (this._vsIsShow)
                             {
-                                case PhoneLayoutType.Hided: return this.Phone;
-                                case PhoneLayoutType.ShowLeft: return this.PhoneShowLeft;
-                                case PhoneLayoutType.ShowRight: return this.PhoneShowRight;
-                                default: return this.Normal;
+                                switch (this._vsPhoneType)
+                                {
+                                    case PhoneLayoutType.ShowLeft: return this.PhoneShowLeft;
+                                    case PhoneLayoutType.ShowRight: return this.PhoneShowRight;
+                                }
                             }
+                            else return this.Phone;
+                            break;
                         }
-                    case DeviceLayoutType.Pad: return this.Pad;
-                    case DeviceLayoutType.PC: return this.PC;
-                    default: return this.Normal;
                 }
+
+                return this.Normal;
             }
             set => VisualStateManager.GoToState(this, value.Name, true);
         }
-        private VisualState VisualStateCore
-        {
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
+        private VisualState VisualStateCore { set => VisualStateManager.GoToState(this, value.Name, false); }
 
 
 
@@ -71,17 +67,10 @@ namespace Retouch_Photo2.Elements
             get => this._vsIsFullScreen;
             set
             {
+                if (this._vsIsFullScreen == value) return;
+
                 this.UnFullScreenButtonVisibility = value ? Visibility.Visible : Visibility.Collapsed;
                 this._vsIsFullScreen = value;
-                this.VisualState = this.VisualState;//State
-            }
-        }
-        /// <summary> Gets or sets the phone layout type. </summary>
-        public PhoneLayoutType PhoneType
-        {
-            set
-            {
-                this._vsPhoneType = value;
                 this.VisualState = this.VisualState;//State
             }
         }

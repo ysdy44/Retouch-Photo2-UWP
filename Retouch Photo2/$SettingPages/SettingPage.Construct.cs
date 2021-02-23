@@ -4,7 +4,6 @@ using Retouch_Photo2.Menus;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.Resources;
-using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

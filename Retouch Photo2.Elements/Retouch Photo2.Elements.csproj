@@ -108,16 +108,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="%24DrawPages\DrawLayout.Layout.cs" />
+    <Compile Include="%24DrawPages\DrawLayout.BackRequested.cs" />
     <Compile Include="%24Loading\LoadingControl.xaml.cs">
       <DependentUpon>LoadingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="%24Loading\LoadingState.cs" />
+    <Compile Include="%24MainPages\MainLayout.BackRequested.cs" />
+    <Compile Include="%24MainPages\MainLayout.Item.cs" />
     <Compile Include="%24MainPages\IProjectViewItem.cs" />
+    <Compile Include="%24MainPages\MainPageState.cs" />
     <Compile Include="%24MainPages\ProjectViewItem.xaml.cs">
       <DependentUpon>ProjectViewItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="%24MainPages\SelectMode.cs" />
     <Compile Include="%24SettingPages\AdaptiveWidthLayout.cs" />
+    <Compile Include="ApplicationViewTitleBarBackgroundExtension.cs" />
+    <Compile Include="Dialog.BackRequested.cs" />
+    <Compile Include="DialogWide.BackRequested.cs" />
     <Compile Include="DialogWide.xaml.cs">
       <DependentUpon>DialogWide.xaml</DependentUpon>
     </Compile>
@@ -131,7 +138,6 @@
     <Compile Include="Pickers\ColorPicker2.xaml.cs">
       <DependentUpon>ColorPicker2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ApplicationViewTitleBarBackgroundExtension.cs" />
     <Compile Include="FileFormatComboBox.xaml.cs">
       <DependentUpon>FileFormatComboBox.xaml</DependentUpon>
     </Compile>
@@ -205,7 +211,6 @@
       <DependentUpon>DrawLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="%24DrawPages\DrawLayoutState.cs" />
-    <Compile Include="%24MainPages\MainPageState.cs" />
     <Compile Include="%24SettingPages\AdaptiveWidthGrid.xaml.cs">
       <DependentUpon>AdaptiveWidthGrid.xaml</DependentUpon>
     </Compile>
@@ -219,6 +224,7 @@
       <DependentUpon>PhoneLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="KeyboardAccelerator2.cs" />
+    <Compile Include="BackRequestedExtension.cs" />
     <Compile Include="XMLs\XML.ThemeFactory.cs" />
     <Compile Include="XMLs\XML.DeviceLayout.cs" />
     <Compile Include="XMLs\XML.DeviceLayoutTypeFactory.cs" />

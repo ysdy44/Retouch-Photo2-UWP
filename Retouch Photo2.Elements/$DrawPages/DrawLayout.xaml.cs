@@ -4,6 +4,8 @@
 // Only:              ★★★★
 // Complete:      ★★★★
 using Microsoft.Graphics.Canvas.UI.Xaml;
+using Windows.System;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -18,9 +20,9 @@ namespace Retouch_Photo2.Elements
         //@Content
         //Body
         /// <summary> CanvasControl of <see cref="ILayer.Render"/>. </summary>
-        public CanvasControl LayerRenderCanvasControl => this._LayerRenderCanvasControl; 
+        public CanvasControl LayerRenderCanvasControl => this._LayerRenderCanvasControl;
         /// <summary> CanvasControl of <see cref="ITool.Draw"/>. </summary>
-        public CanvasControl ToolDrawCanvasControl => this._ToolDrawCanvasControl; 
+        public CanvasControl ToolDrawCanvasControl => this._ToolDrawCanvasControl;
 
         //Touchbar
         /// <summary> TouchbarPickerBorder's Child. </summary>
@@ -55,13 +57,13 @@ namespace Retouch_Photo2.Elements
         /// <summary> RightBorder's Child. </summary>
         public UIElement RightPanel { get => this.RightBorder.Child; set => this.RightBorder.Child = value; }
         /// <summary> GalleryButton. </summary>   
-        public Button GalleryButton => this._GalleryButton; 
+        public Button GalleryButton => this._GalleryButton;
         /// <summary> GalleryToolTip. </summary>   
         public ToolTip GalleryToolTip => this._RightPhotosToolTip;
         /// <summary> WidthButton. </summary>   
-        public Button WidthButton => this._WidthButton; 
+        public Button WidthButton => this._WidthButton;
         /// <summary> WidthToolTip. </summary>   
-        public ToolTip WidthToolTip => this._WidthToolTip; 
+        public ToolTip WidthToolTip => this._WidthToolTip;
 
 
         //@Construct

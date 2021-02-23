@@ -54,57 +54,22 @@ namespace Retouch_Photo2
             // Document
             this.DocumentButton.Holding += (s, e) => this.DocumentFlyout.ShowAt(this.DocumentButton);
             this.DocumentButton.RightTapped += (s, e) => this.DocumentFlyout.ShowAt(this.DocumentButton);
-
-
+      
+            
+            this.DocumentUnSaveButton.Click += (s, e) => this.DocumentUnSave();
             this.DocumentButton.Click += async (s, e) =>
             {
-                this.LoadingControl.State = LoadingState.Saving;
-                this.LoadingControl.IsActive = true;
-
                 int countHistorys = this.ViewModel.Historys.Count;
                 int countLayerages = LayerManager.RootLayerage.Children.Count;
 
                 if (countHistorys == 0 && countLayerages > 1)
                 {
-                    this.ViewModel.IsUpdateThumbnailByName = false;
-
-                    await this.Exit();
-                    this.DrawLayout.IsFullScreen = true;
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-
-                    this.LoadingControl.State = LoadingState.None;
-                    this.LoadingControl.IsActive = false;
-                    this.Frame.GoBack();
+                    this.DocumentUnSave();
                 }
                 else
                 {
-                    await this.Save();
-                    this.ViewModel.IsUpdateThumbnailByName = true;
-
-                    await this.Exit();
-                    this.DrawLayout.IsFullScreen = true;
-                    this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
-
-                    this.LoadingControl.State = LoadingState.None;
-                    this.LoadingControl.IsActive = false;
-                    this.Frame.GoBack();
+                    this.Document();
                 }
-            };
-            this.DocumentUnSaveButton.Click += async (s, e) =>
-            {
-                this.LoadingControl.State = LoadingState.Saving;
-                this.LoadingControl.IsActive = true;
-
-                this.DocumentFlyout.Hide();
-                this.ViewModel.IsUpdateThumbnailByName = false;
-
-                await this.Exit();
-                this.DrawLayout.IsFullScreen = true;
-                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-
-                this.LoadingControl.State = LoadingState.None;
-                this.LoadingControl.IsActive = false;
-                this.Frame.GoBack();
             };
 
 
@@ -124,6 +89,46 @@ namespace Retouch_Photo2
             double measureWidth = this.MenuButtonsControl.ActualWidth;
 
             this.IsAppBarLeft = arrangeWidth > measureWidth;
+        }
+
+
+        /// <summary>
+        /// Save, exit and back.
+        /// </summary>
+        private async void Document()
+        {
+            this.LoadingControl.State = LoadingState.Saving;
+            this.LoadingControl.IsActive = true;
+
+            await this.Save();
+            this.ViewModel.IsUpdateThumbnailByName = true;
+
+            await this.Exit();
+            this.DrawLayout.IsFullScreen = true;
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
+
+            this.LoadingControl.State = LoadingState.None;
+            this.LoadingControl.IsActive = false;
+            this.Frame.GoBack();
+        }
+
+        /// <summary>
+        /// Un save, exit and back.
+        /// </summary>
+        private async void DocumentUnSave()
+        {
+            this.LoadingControl.State = LoadingState.Saving;
+            this.LoadingControl.IsActive = true;
+
+            this.ViewModel.IsUpdateThumbnailByName = false;
+
+            await this.Exit();
+            this.DrawLayout.IsFullScreen = true;
+            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+
+            this.LoadingControl.State = LoadingState.None;
+            this.LoadingControl.IsActive = false;
+            this.Frame.GoBack();
         }
 
     }

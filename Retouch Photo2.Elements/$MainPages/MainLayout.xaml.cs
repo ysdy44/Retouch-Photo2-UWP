@@ -17,19 +17,6 @@ namespace Retouch_Photo2.Elements
     public sealed partial class MainLayout : UserControl
     {
 
-        #region DependencyProperty
-
-        /// <summary> Gets or sets whether the <see cref = "MainLayout" /> orientation for DeviceLayoutType. </summary>
-        public Orientation DeviceLayoutTypeOrientation
-        {            
-            get => (Orientation)base.GetValue(DeviceLayoutTypeOrientationProperty);
-            set => base.SetValue(DeviceLayoutTypeOrientationProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "MainLayout.DeviceLayoutTypeOrientation" /> dependency property. </summary>
-        public static readonly DependencyProperty DeviceLayoutTypeOrientationProperty = DependencyProperty.Register(nameof(DeviceLayoutTypeOrientation), typeof(Orientation), typeof(MainLayout), new PropertyMetadata(Orientation.Horizontal));
-
-        #endregion
-
         //@Content     
         /// <summary> InitialBorder's Child. </summary>
         public UIElement InitialChild { get => this.InitialBorder.Child; set => this.InitialBorder.Child = value; }
@@ -53,78 +40,13 @@ namespace Retouch_Photo2.Elements
         public UIElement DeleteChild { get => this.DeleteBorder.Child; set => this.DeleteBorder.Child = value; }
         /// <summary> DuplicateBorder's Child. </summary>
         public UIElement DuplicateChild { get => this.DuplicateBorder.Child; set => this.DuplicateBorder.Child = value; }
-    
-        /// <summary> Gets or sets the device layout type. </summary>
-        public DeviceLayoutType DeviceLayoutType
-        {
-            set
-            {
-                switch (value)
-                {
-                    case DeviceLayoutType.Phone:
-                        this.GridView.ItemContainerStyle = this.ItemContainerStyle00;
-                        this.DeviceLayoutTypeOrientation = Orientation.Vertical;
-                        break;
-                    case DeviceLayoutType.Pad:
-                        this.GridView.ItemContainerStyle = this.ItemContainerStyle01;
-                        this.DeviceLayoutTypeOrientation = Orientation.Horizontal;
-                        break;
-                    case DeviceLayoutType.PC:
-                        this.GridView.ItemContainerStyle = this.ItemContainerStyle02;
-                        this.DeviceLayoutTypeOrientation = Orientation.Horizontal;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        //@VisualState
-        MainPageState _vsState = MainPageState.Main;
-        /// <summary> 
-        /// Represents the visual appearance of UI elements in a specific state.
-        /// </summary>
-        public VisualState VisualState
-        {
-            get
-            {
-                switch (this._vsState)
-                {
-                    case MainPageState.None: return this.Normal;
-                    case MainPageState.Initial: return this.Initial;
-                    case MainPageState.Main: return this.Main;
-                    case MainPageState.Dialog: return this.Dialog;
-                    case MainPageState.Pictures: return this.Pictures;
-                    case MainPageState.Rename: return this.Rename;
-                    case MainPageState.Delete: return this.Delete;
-                    case MainPageState.Duplicate: return this.Duplicate;
-                    default: return this.Normal;
-                }
-            }
-            set => VisualStateManager.GoToState(this, value.Name, true);
-        }
-
-        /// <summary>
-        /// Gets or sets the mainpage-state.
-        /// </summary>
-        public MainPageState State
-        {
-            get => this._vsState;
-            set
-            {
-                this._vsState = value;
-                this.VisualState = this.VisualState;//State
-            }
-        }
 
 
-        /// <summary>
-        /// All ProjectViewItems.
-        /// </summary>
+        /// <summary> Gets all items. </summary>
         public ObservableCollection<IProjectViewItem> Items { get; private set; } = new ObservableCollection<IProjectViewItem>();
-
+        /// <summary> Gets all selected items. </summary>
         public IEnumerable<IProjectViewItem> SelectedItems => from i in this.Items where i.SelectMode == SelectMode.Selected select i;
-
+        /// <summary> Gets the count of items. </summary>
         public int Count => this.Items.Count;
 
 
@@ -135,7 +57,7 @@ namespace Retouch_Photo2.Elements
         public int SelectedCount
         {
             get => (int)base.GetValue(SelectedCountProperty);
-            set => base.SetValue(SelectedCountProperty, value); 
+            set => base.SetValue(SelectedCountProperty, value);
         }
         /// <summary> Identifies the <see cref = "MainLayout.SelectedCount" /> dependency property. </summary>
         public static readonly DependencyProperty SelectedCountProperty = DependencyProperty.Register(nameof(SelectedCount), typeof(int), typeof(MainLayout), new PropertyMetadata(0));
@@ -168,15 +90,14 @@ namespace Retouch_Photo2.Elements
 
 
         //@Construct
+        /// <summary>
+        /// Initializes a MainLayout.
+        /// </summary>
         public MainLayout()
         {
             this.InitializeComponent();
             this.GridView.ItemsSource = this.Items;
-
-            this.Loaded += (s, e) =>
-            {
-                 this.VisualState = this.VisualState;//State
-            };
+            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
 
             this.SelectCheckBox.Unchecked += (s, e) => this.SelectAll(SelectMode.None);
             this.SelectCheckBox.Checked += (s, e) =>
@@ -185,56 +106,6 @@ namespace Retouch_Photo2.Elements
 
                 this.RefreshSelectCount();
             };
-        }
-
-        /// <summary>
-        /// Refresh all items select-mode.
-        /// </summary>
-        public void SelectAllAndDeselectIcon()
-        {
-            bool isAnyUnSelected = this.Items.Any(p => p.SelectMode == SelectMode.UnSelected);
-            SelectMode mode = isAnyUnSelected ? SelectMode.Selected : SelectMode.UnSelected;
-            this.SelectAll(mode);
-
-            this.RefreshSelectCount();
-        }
-
-        /// <summary>
-        /// Refresh all items select-mode.
-        /// </summary>
-        public void SelectAll(SelectMode selectMode)
-        {
-            foreach (IProjectViewItem item in this.Items)
-            {
-                item.SelectMode = selectMode;
-            }
-        }
-               
-        /// <summary>
-        /// Get a name that doesn't have a rename.
-        /// If there are, add the number.
-        /// [Untitled] --> [Untitled1]   
-        /// </summary>
-        /// <param name="name"> The previous name. </param>
-        /// <returns> The new name. </returns>
-        public string UntitledRenameByRecursive(string name)
-        {
-            // Is there a re-named item?
-            if (this.Items.All(i => i.Name != name))
-                return name;
-
-            int num = 0;
-            string newName;
-
-            do
-            {
-                num++;
-                newName = $"{name}{num}";
-            }
-            // Is there a re-named item?
-            while (this.Items.Any(i => i.Name == newName));
-
-            return newName;
         }
 
     }

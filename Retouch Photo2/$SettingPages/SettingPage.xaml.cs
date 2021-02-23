@@ -4,13 +4,13 @@
 // Only:              ★★★★★
 // Complete:      ★★★
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.System;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -27,7 +27,7 @@ namespace Retouch_Photo2
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
-        
+
         bool IsAdaptive
         {
             set
@@ -73,75 +73,30 @@ namespace Retouch_Photo2
             };
         }
 
-
-        /// <summary> The current page becomes the active page. </summary>
-        protected override void OnNavigatedTo(NavigationEventArgs e) { }
-        /// <summary> The current page no longer becomes an active page. </summary>
-        protected override void OnNavigatedFrom(NavigationEventArgs e) { }
     }
 
-    /// <summary> 
-    /// Represents a page used to set options.
-    /// </summary>
+
     public sealed partial class SettingPage : Page
     {
 
-        private async Task Save()
+        //@BackRequested
+        /// <summary> The current page becomes the active page. </summary>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            await XML.SaveSettingFile(this.SettingViewModel.Setting);
+            SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
         }
-        
-
-        private async Task SetTheme(ElementTheme theme2)
+        /// <summary> The current page no longer becomes an active page. </summary>
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            //Setting
-            this.SettingViewModel.Setting.Theme = theme2;
-            this.SettingViewModel.ConstructTheme();//Construct
-            await this.Save();//Write
+            SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
         }
-                       
-        private async Task SetType(DeviceLayoutType type2, bool isAdaptive2)
+        private void BackRequested(object sender, BackRequestedEventArgs e)
         {
-            this.IsAdaptive = isAdaptive2;
+            if (BackRequestedExtension.DialogIsShow) return;
+            if (BackRequestedExtension.LayoutIsShow) return;
 
-            //Setting
-            DeviceLayout layout = this.SettingViewModel.Setting.DeviceLayout;
-            {
-                layout.IsAdaptive = isAdaptive2;
-                layout.FallBackType = type2;
-                DeviceLayoutType type = layout.GetActualType(this.ActualWidth);
-                this.SettingViewModel.DeviceLayoutType = type;
-            }
-            await this.Save();
-        }
-
-        private async Task SetHeight(int height)
-        {
-            //Setting
-            this.SettingViewModel.Setting.LayersHeight = height;
-            this.SettingViewModel.ConstructLayersHeight();
-
-            await this.Save();
-        }
-
-        private async Task AddMenu(MenuType type)
-        {
-            //Setting
-            this.SettingViewModel.Setting.MenuTypes.Add(type);
-            this.SettingViewModel.ConstructMenuType(this.TipViewModel.Menus);
-            await this.Save();
-        }
-
-        private async Task RemoveMenu(MenuType type)
-        {
-            //Setting
-            do
-            {
-                this.SettingViewModel.Setting.MenuTypes.Remove(type);
-            }
-            while (this.SettingViewModel.Setting.MenuTypes.Contains(type));
-            this.SettingViewModel.ConstructMenuType(this.TipViewModel.Menus);
-            await this.Save();
+            e.Handled = true;
+            this.Frame.GoBack();
         }
 
     }

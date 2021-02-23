@@ -107,6 +107,7 @@
     <Compile Include="%24DrawPages\DrawPage.LayersControl.cs" />
     <Compile Include="%24DrawPages\DrawPage.CanvasControl.Render.cs" />
     <Compile Include="%24DrawPages\DrawPage.CanvasControl.Operator.cs" />
+    <Compile Include="%24SettingPages\SettingPage.Save.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>

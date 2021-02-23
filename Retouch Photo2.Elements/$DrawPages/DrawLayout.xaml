@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
-    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:local="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     >
 
@@ -23,7 +23,7 @@
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_WidthButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0.2">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="True"/>
-            </ObjectAnimationUsingKeyFrames>            
+            </ObjectAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WidthIcon" Storyboard.TargetProperty="Glyph" Duration="0">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="&#xE126;"/>
             </ObjectAnimationUsingKeyFrames>
@@ -47,7 +47,7 @@
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_WidthButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0.2">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="True"/>
-            </ObjectAnimationUsingKeyFrames>            
+            </ObjectAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WidthIcon" Storyboard.TargetProperty="Glyph" Duration="0">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="&#xE127;"/>
             </ObjectAnimationUsingKeyFrames>
@@ -154,7 +154,7 @@
                     </VisualState.Setters>
                 </VisualState>
 
-                
+
                 <!--Pad-->
                 <VisualState x:Name="Pad">
                     <VisualState.Setters>
@@ -220,7 +220,7 @@
                     </VisualState.Setters>
                 </VisualState>
 
-                
+
 
                 <VisualStateGroup.Transitions>
 
@@ -271,7 +271,7 @@
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="220"/>
                             </ObjectAnimationUsingKeyFrames>
-                            
+
                             <!--DismissOverlay-->
                             <DoubleAnimation Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
@@ -728,7 +728,7 @@
                             </DoubleAnimation>
 
 
-                            
+
                             <!--Left-->
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.Row)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
@@ -930,7 +930,7 @@
                 </VisualStateGroup.Transitions>
 
 
-                
+
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
@@ -970,24 +970,24 @@
                 <ColumnDefinition Width="70"/>
             </Grid.ColumnDefinitions>
 
-            <elements:RadiusAnimaPanel x:Name="FootPanel" Grid.Column="1">
-                <elements:RadiusAnimaPanel.RenderTransformOrigin>0.5, 0.5</elements:RadiusAnimaPanel.RenderTransformOrigin>
-                <elements:RadiusAnimaPanel.RenderTransform>
+            <local:RadiusAnimaPanel x:Name="FootPanel" Grid.Column="1">
+                <local:RadiusAnimaPanel.RenderTransformOrigin>0.5, 0.5</local:RadiusAnimaPanel.RenderTransformOrigin>
+                <local:RadiusAnimaPanel.RenderTransform>
                     <TranslateTransform x:Name="FootPanelTransform" Y="0"/>
-                </elements:RadiusAnimaPanel.RenderTransform>
-            </elements:RadiusAnimaPanel>
-            <elements:RadiusAnimaIcon x:Name="_LeftIcon" Grid.Column="0">
-                <elements:RadiusAnimaIcon.RenderTransformOrigin>0.5, 0.5</elements:RadiusAnimaIcon.RenderTransformOrigin>
-                <elements:RadiusAnimaIcon.RenderTransform>
+                </local:RadiusAnimaPanel.RenderTransform>
+            </local:RadiusAnimaPanel>
+            <local:RadiusAnimaIcon x:Name="_LeftIcon" Grid.Column="0">
+                <local:RadiusAnimaIcon.RenderTransformOrigin>0.5, 0.5</local:RadiusAnimaIcon.RenderTransformOrigin>
+                <local:RadiusAnimaIcon.RenderTransform>
                     <ScaleTransform x:Name="LeftIconTransform" ScaleX="1" ScaleY="1"/>
-                </elements:RadiusAnimaIcon.RenderTransform>
-            </elements:RadiusAnimaIcon>
-            <elements:RadiusAnimaIcon x:Name="_RightIcon" Grid.Column="2">
-                <elements:RadiusAnimaIcon.RenderTransformOrigin>0.5, 0.5</elements:RadiusAnimaIcon.RenderTransformOrigin>
-                <elements:RadiusAnimaIcon.RenderTransform>
+                </local:RadiusAnimaIcon.RenderTransform>
+            </local:RadiusAnimaIcon>
+            <local:RadiusAnimaIcon x:Name="_RightIcon" Grid.Column="2">
+                <local:RadiusAnimaIcon.RenderTransformOrigin>0.5, 0.5</local:RadiusAnimaIcon.RenderTransformOrigin>
+                <local:RadiusAnimaIcon.RenderTransform>
                     <ScaleTransform x:Name="RightIconTransform" ScaleX="1" ScaleY="1"/>
-                </elements:RadiusAnimaIcon.RenderTransform>
-            </elements:RadiusAnimaIcon>
+                </local:RadiusAnimaIcon.RenderTransform>
+            </local:RadiusAnimaIcon>
 
             <!--
             <Border Grid.Column="0" BorderThickness="1" BorderBrush="Yellow"/>
@@ -1064,5 +1064,4 @@
             -->
 
     </Grid>
-
 </UserControl>

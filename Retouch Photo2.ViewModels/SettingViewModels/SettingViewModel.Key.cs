@@ -33,9 +33,12 @@ namespace Retouch_Photo2.ViewModels
             Window.Current.CoreWindow.KeyUp -= this.CoreWindow_KeyUp;
         }
 
-        private void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs args)
+        private void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs e)
         {
-            switch (args.VirtualKey)
+            if (BackRequestedExtension.DialogIsShow) return;
+            if (BackRequestedExtension.LayoutIsShow) return;
+
+            switch (e.VirtualKey)
             {
                 case VirtualKey.Shift: if (this.KeyShift == false) this.KeyShift = this.IsRatio = this.IsSquare = true; break;
                 case VirtualKey.Space: if (this.KeySpace == false) this.KeySpace = this.IsStepFrequency = true; break;
@@ -45,11 +48,11 @@ namespace Retouch_Photo2.ViewModels
             this.KeyUpAndDown();
 
 
-            if (this.KeyboardAccelerators != null) foreach (KeyboardAccelerator2 key in this.KeyboardAccelerators)
+            if (this.KeyboardAccelerators != null) 
             {
-                if (key.IsEnabled)
+                foreach (KeyboardAccelerator2 key in this.KeyboardAccelerators)
                 {
-                    if (args.VirtualKey == key.Key)
+                    if (key.IsEnabled && e.VirtualKey == key.Key)
                     {
                         switch (key.Modifiers)
                         {
@@ -65,9 +68,12 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        private void CoreWindow_KeyUp(CoreWindow sender, KeyEventArgs args)
+        private void CoreWindow_KeyUp(CoreWindow sender, KeyEventArgs e)
         {
-            switch (args.VirtualKey)
+            if (BackRequestedExtension.DialogIsShow) return;
+            if (BackRequestedExtension.LayoutIsShow) return;
+
+            switch (e.VirtualKey)
             {
                 case VirtualKey.Shift: if (this.KeyShift) this.KeyShift = this.IsRatio = this.IsSquare = false; break;
                 case VirtualKey.Space: if (this.KeySpace) this.KeySpace = this.IsStepFrequency = false; break;
@@ -77,11 +83,11 @@ namespace Retouch_Photo2.ViewModels
             this.KeyUpAndDown();
 
 
-            if (this.KeyboardAccelerators != null) foreach (KeyboardAccelerator2 key in this.KeyboardAccelerators)
+            if (this.KeyboardAccelerators != null) 
             {
-                if (key.IsEnabled == false)
+                foreach(KeyboardAccelerator2 key in this.KeyboardAccelerators)
                 {
-                    if (args.VirtualKey == key.Key)
+                    if (key.IsEnabled == false && e.VirtualKey == key.Key)
                     {
                         key.IsEnabled = true;
                     }

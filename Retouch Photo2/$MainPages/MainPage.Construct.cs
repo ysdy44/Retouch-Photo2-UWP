@@ -81,7 +81,7 @@ namespace Retouch_Photo2
                 this.DeleteCloseButton.Content = resource.GetString("$MainPage_Delete_Close");
                 this.DeletePrimaryButton.Content = resource.GetString("$MainPage_Delete_Primary");
             }
-            
+
             this.DuplicateButton.Content = resource.GetString("$MainPage_Duplicate");
             {
                 this.DuplicateTitleTextBlock.Text = resource.GetString("$MainPage_Duplicate_Title");
@@ -90,7 +90,7 @@ namespace Retouch_Photo2
                 this.DuplicatePrimaryButton.Content = resource.GetString("$MainPage_Duplicate_Primary");
             }
         }
-        
+
 
         //Setting
         private async Task ConstructSetting()
@@ -108,7 +108,7 @@ namespace Retouch_Photo2
             //DeviceLayout
             this.SettingViewModel.ConstructDeviceLayout();
             this.SettingViewModel.RegisteDeviceLayout();
-            
+
             //DeviceLayout
             this.SettingViewModel.ConstructLayersHeight();
 
@@ -161,8 +161,8 @@ namespace Retouch_Photo2
         //AddDialog
         private void ConstructAddDialog()
         {
-            this.NewDialog.CloseButton.Click += (sender, args) => this.HideAddDialog();
-            this.NewDialog.PrimaryButton.Click += (sender, args) =>
+            this.NewDialog.CloseButton.Click += (s, e) => this.HideAddDialog();
+            this.NewDialog.PrimaryButton.Click += (s, e) =>
             {
                 this.HideAddDialog();
 
@@ -172,7 +172,6 @@ namespace Retouch_Photo2
         }
         private void ShowAddDialog()
         {
-            this.MainLayout.State = MainPageState.Dialog;
             this.NewDialog.Show();
         }
         private void HideAddDialog()
@@ -199,8 +198,8 @@ namespace Retouch_Photo2
         string _rename;
         private void ConstructRenameDialog()
         {
-            this.RenameDialog.CloseButton.Click += (sender, args) => this.HideRenameDialog();
-            this.RenameDialog.PrimaryButton.Click += async (sender, args) =>
+            this.RenameDialog.CloseButton.Click += (s, e) => this.HideRenameDialog();
+            this.RenameDialog.PrimaryButton.Click += async (s, e) =>
             {
                 this.LoadingControl.State = LoadingState.Loading;
                 this.LoadingControl.IsActive = true;
@@ -213,8 +212,6 @@ namespace Retouch_Photo2
         }
         private void ShowRenameDialog(IProjectViewItem item)
         {
-            this.MainLayout.State = MainPageState.Dialog;
-
             this.RenameDialog.Show();
 
             this._rename = item.Name;

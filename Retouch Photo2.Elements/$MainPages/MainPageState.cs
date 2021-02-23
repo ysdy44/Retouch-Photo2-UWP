@@ -19,8 +19,6 @@ namespace Retouch_Photo2.Elements
         /// <summary> Main page. </summary>
         Main,
 
-        /// <summary> Show dialog. </summary>
-        Dialog,
 
         /// <summary> Add a pictures project. </summary>
         Pictures,

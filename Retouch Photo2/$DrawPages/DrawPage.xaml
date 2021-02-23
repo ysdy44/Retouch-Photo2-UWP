@@ -256,10 +256,7 @@
         <menus:MenusExpanderCanvas
             Menus="{x:Bind TipViewModel.Menus, Mode=OneTime}"
             IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"/>
-        <!--Flyout-->
-        <elements:DialogWide x:Name="GalleryDialog" Title="Gallery"/>
-        <photos:PhotoBillboardCanvas x:Name="BillboardCanvas"/>
-        
+             
 
         <!--Tip-->
         <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" 
@@ -323,6 +320,11 @@
         </elements:Dialog>
 
 
+        <!--Gallery-->
+        <elements:DialogWide x:Name="GalleryDialog" Title="Gallery"/>
+        <photos:PhotoBillboardCanvas x:Name="BillboardCanvas"/>
+
+        
         <!--Transition-->
         <Border x:Name="TransitionBorder" IsHitTestVisible="False" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
 

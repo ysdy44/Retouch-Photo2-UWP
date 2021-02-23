@@ -84,20 +84,16 @@ namespace Retouch_Photo2
                 switch (this.MainLayout.State)
                 {
                     case MainPageState.Main:
+                    case MainPageState.Pictures:
                         this.OpenFromProjectViewItem(item);
                         break;
-
                     case MainPageState.Rename:
                         this.ShowRenameDialog(item);
                         break;
-
                     case MainPageState.Delete:
                     case MainPageState.Duplicate:
                         item.SwitchState();
                         this.MainLayout.RefreshSelectCount();
-                        break;
-
-                    default:
                         break;
                 }
             };

@@ -10,12 +10,12 @@ namespace Retouch_Photo2.Elements
     /// </summary>
     public enum DeviceLayoutType
     {
-        /// <summary> Phone. </summary>
-        Phone,
-        /// <summary> Pad. </summary>
-        Pad,
         /// <summary> Person computer. </summary>
         PC,
+        /// <summary> Pad. </summary>
+        Pad,
+        /// <summary> Phone. </summary>
+        Phone,
     }
 
     /// <summary>

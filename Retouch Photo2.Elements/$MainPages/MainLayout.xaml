@@ -4,11 +4,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-
-    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:local="using:Retouch_Photo2.Elements"
     d:DesignHeight="800"
     d:DesignWidth="800"
     mc:Ignorable="d"
@@ -70,22 +68,6 @@
 
                         <!--Foot-->
                         <Setter Target = "MainBorder.Visibility" Value="Visible"/>
-
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Dialog-->
-                <VisualState x:Name="Dialog">
-                    <VisualState.Setters>
-
-                        <!--Select-->
-                        <Setter Target = "SelectCheckBox.Content" Value="Dialog"/>
-
-                        <!--Head-->
-                        <Setter Target = "HeadBorder.Visibility" Value="Collapsed"/>
-                        
-                        <!--Foot-->
-                        <Setter Target = "RadiusAnimaPanel.Visibility" Value="Collapsed"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -256,10 +238,10 @@
         </Border>
 
 
-        <!--Foot-->        
-        <elements:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2" CornerRadius="0" Background="{ThemeResource AppForeground}">
+        <!--Foot-->
+        <local:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2" CornerRadius="0" Background="{ThemeResource AppForeground}">
 
-            <elements:RadiusAnimaPanel.CenterContent>
+            <local:RadiusAnimaPanel.CenterContent>
                 <Grid>
                     <Border x:Name="MainBorder" Visibility="Collapsed"/>
                     <Border x:Name="PicturesBorder" Visibility="Collapsed"/>
@@ -269,9 +251,9 @@
                     <Border x:Name="DeleteBorder" Visibility="Collapsed"/>
                     <Border x:Name="DuplicateBorder" Visibility="Collapsed"/>
                 </Grid>
-            </elements:RadiusAnimaPanel.CenterContent>
+            </local:RadiusAnimaPanel.CenterContent>
 
-        </elements:RadiusAnimaPanel>
+        </local:RadiusAnimaPanel>
 
 
         <!--Head-->
