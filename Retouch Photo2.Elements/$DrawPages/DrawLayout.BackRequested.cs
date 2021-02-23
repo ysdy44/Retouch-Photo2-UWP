@@ -11,7 +11,6 @@ namespace Retouch_Photo2.Elements
 
         private PhoneLayoutType PhoneType
         {
-            get => this._vsPhoneType;
             set
             {
                 PhoneLayoutType oldValue = this._vsPhoneType;

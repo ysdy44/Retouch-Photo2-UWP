@@ -24,7 +24,6 @@ namespace Retouch_Photo2.Elements
         bool _vsIsFullScreen = true;
         DeviceLayoutType _vsDeviceLayoutType = DeviceLayoutType.PC;
         PhoneLayoutType _vsPhoneType = PhoneLayoutType.Hided;
-        bool _vsIsShow = false;
         /// <summary> 
         /// Represents the visual appearance of UI elements in a specific state.
         /// </summary>
@@ -40,15 +39,13 @@ namespace Retouch_Photo2.Elements
                     case DeviceLayoutType.Pad: return this.Pad;
                     case DeviceLayoutType.Phone:
                         {
-                            if (this._vsIsShow)
+                            switch (this._vsPhoneType)
                             {
-                                switch (this._vsPhoneType)
-                                {
-                                    case PhoneLayoutType.ShowLeft: return this.PhoneShowLeft;
-                                    case PhoneLayoutType.ShowRight: return this.PhoneShowRight;
-                                }
+                                case PhoneLayoutType.Hided: return this.Phone;
+                                case PhoneLayoutType.ShowLeft: return this.PhoneShowLeft;
+                                case PhoneLayoutType.ShowRight: return this.PhoneShowRight;
                             }
-                            else return this.Phone;
+                            return this.Normal;
                             break;
                         }
                 }

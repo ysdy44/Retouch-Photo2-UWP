@@ -29,45 +29,43 @@
 
 
     <Page.Resources>
-        <!--Extension-->
-        <elements:ApplicationViewTitleBarBackgroundExtension x:Name="AVTBBE" TitleBarColor="{ThemeResource AppBackgroundColor}"/>
+        <ResourceDictionary>
+
+            <!--Color-->
+            <SolidColorBrush x:Name="AccentColorBrush" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Name="ShadowColorBrush" Color="{ThemeResource AppStrokeColor}" />
+
+
+            <!--Flyout-->
+            <Flyout x:Name="DocumentFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <Button x:Name="DocumentUnSaveButton" Width="180" Style="{StaticResource AppIconButton}">
+                    <Button.Tag>
+                        <FontIcon Glyph="&#xF78A;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    </Button.Tag>
+                </Button>
+            </Flyout>
+
+            <Flyout x:Name="StrokeColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
+            </Flyout>
+
+            <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <toolElements:MoreTransformControl/>
+            </Flyout>
+            <Flyout x:Name="MoreCreateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <toolElements:MoreCreateControl/>
+            </Flyout>
+
+
+        </ResourceDictionary>
     </Page.Resources>
 
 
     <Grid x:Name="RootGrid" Background="{ThemeResource AppBackground}">
 
 
-        <Grid.Resources>
-            <ResourceDictionary>
-
-                <!--Color-->
-                <SolidColorBrush x:Name="AccentColorBrush" Color="{ThemeResource SystemAccentColor}" />
-                <SolidColorBrush x:Name="ShadowColorBrush" Color="{ThemeResource AppStrokeColor}" />
-
-
-                <!--Flyout-->
-                <Flyout x:Name="DocumentFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                    <Button x:Name="DocumentUnSaveButton" Width="180" Style="{StaticResource AppIconButton}">
-                        <Button.Tag>
-                            <FontIcon Glyph="&#xF78A;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </Button.Tag>
-                    </Button>
-                </Flyout>
-
-                <Flyout x:Name="StrokeColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                    <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
-                </Flyout>
-
-                <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                    <toolElements:MoreTransformControl/>
-                </Flyout>
-                <Flyout x:Name="MoreCreateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                    <toolElements:MoreCreateControl/>
-                </Flyout>
-
-
-            </ResourceDictionary>
-        </Grid.Resources>
+        <!--Extension-->
+        <elements:ApplicationTitleBarExtension x:Name="ApplicationView" TitleBarColor="{ThemeResource AppBackgroundColor}"/>
 
 
         <elements:DrawLayout x:Name="DrawLayout" 

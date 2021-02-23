@@ -22,9 +22,12 @@ namespace Retouch_Photo2.Elements
         //@Content
         /// <summary> ContentPresenter's Content. </summary>
         public object CenterContent { get => this.ContentPresenter.Content; set => this.ContentPresenter.Content = value; }
-                 
+
 
         //@Construct
+        /// <summary>
+        /// Initializes a RadiusAnimaIcon.
+        /// </summary>
         public RadiusAnimaIcon()
         {
             this.InitializeComponent();

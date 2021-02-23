@@ -96,7 +96,7 @@ namespace Retouch_Photo2
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //Extension
-            this.AVTBBE.Invalidate();
+            this.ApplicationView.Color = this.ApplicationView.Color;
 
             //Key
             this.SettingViewModel.RegisteKey();

@@ -48,9 +48,9 @@ namespace Retouch_Photo2
 
             this.NewButton.Content = resource.GetString("$MainPage_New");
             {
-                this.NewDialog.Title = resource.GetString("$MainPage_NewDialog_Title");
-                this.NewDialog.CloseButton.Content = resource.GetString("$MainPage_NewDialog_Close");
-                this.NewDialog.PrimaryButton.Content = resource.GetString("$MainPage_NewDialog_Primary");
+                this.AddDialog.Title = resource.GetString("$MainPage_NewDialog_Title");
+                this.AddDialog.CloseButton.Content = resource.GetString("$MainPage_NewDialog_Close");
+                this.AddDialog.PrimaryButton.Content = resource.GetString("$MainPage_NewDialog_Primary");
                 this.SizePicker.WidthText = resource.GetString("$MainPage_SizePicker_Width");
                 this.SizePicker.HeightText = resource.GetString("$MainPage_SizePicker_Height");
             }
@@ -161,8 +161,8 @@ namespace Retouch_Photo2
         //AddDialog
         private void ConstructAddDialog()
         {
-            this.NewDialog.CloseButton.Click += (s, e) => this.HideAddDialog();
-            this.NewDialog.PrimaryButton.Click += (s, e) =>
+            this.AddDialog.CloseButton.Click += (s, e) => this.HideAddDialog();
+            this.AddDialog.PrimaryButton.Click += (s, e) =>
             {
                 this.HideAddDialog();
 
@@ -172,7 +172,7 @@ namespace Retouch_Photo2
         }
         private void ShowAddDialog()
         {
-            this.NewDialog.Show();
+            this.AddDialog.Show();
         }
         private void HideAddDialog()
         {
@@ -181,7 +181,7 @@ namespace Retouch_Photo2
             else
                 this.MainLayout.State = MainPageState.Main;
 
-            this.NewDialog.Hide();
+            this.AddDialog.Hide();
         }
 
 

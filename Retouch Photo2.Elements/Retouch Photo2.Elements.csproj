@@ -122,7 +122,7 @@
     </Compile>
     <Compile Include="%24MainPages\SelectMode.cs" />
     <Compile Include="%24SettingPages\AdaptiveWidthLayout.cs" />
-    <Compile Include="ApplicationViewTitleBarBackgroundExtension.cs" />
+    <Compile Include="ApplicationTitleBarExtension.cs" />
     <Compile Include="Dialog.BackRequested.cs" />
     <Compile Include="DialogWide.BackRequested.cs" />
     <Compile Include="DialogWide.xaml.cs">
