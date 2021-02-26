@@ -12,7 +12,7 @@ namespace Retouch_Photo2.Menus
     /// <summary>
     /// Represents a stack panel control that containing some <see cref="MenuButton"/>。
     /// </summary>
-    public sealed partial class MenuButtonsControl : UserControl
+    public sealed partial class MenuButtonsControl : StackPanel
     {
 
         /// <summary>
@@ -27,17 +27,10 @@ namespace Retouch_Photo2.Menus
                     if (menu == null || menu.Button == null) continue;
 
                     FrameworkElement element = menu.Button.Self;
-                    this.StackPanel.Children.Add(element);
+                    this.Children.Add(element);
                 }
             }
         }
-
-        private readonly StackPanel StackPanel = new StackPanel
-        {
-            Orientation = Orientation.Horizontal,
-            HorizontalAlignment = HorizontalAlignment.Center,
-            VerticalAlignment = VerticalAlignment.Center,
-        };
 
         //@Construct
         /// <summary>
@@ -45,7 +38,7 @@ namespace Retouch_Photo2.Menus
         /// </summary>
         public MenuButtonsControl()
         {
-            this.Content = this.StackPanel;
+            this.Orientation = Orientation.Horizontal;
             this.HorizontalAlignment = HorizontalAlignment.Center;
             this.VerticalAlignment = VerticalAlignment.Center;
         }

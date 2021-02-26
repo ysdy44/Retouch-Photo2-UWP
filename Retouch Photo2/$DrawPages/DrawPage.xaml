@@ -91,9 +91,10 @@
             <elements:DrawLayout.HeadChild>
                 <Grid x:Name="AppBarGrid">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" MinWidth="70"/>
-                        <ColumnDefinition x:Name="HeadLeftLength" Width="40" MinWidth="40"/>
-                        <ColumnDefinition x:Name="HeadRightLength" Width="*"/>
+                        <ColumnDefinition x:Name="DocumentColumnDefinition" MinWidth="50" MaxWidth="80"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
 
@@ -101,114 +102,125 @@
                     <Button x:Name="DocumentButton" Style="{StaticResource AppButtonStyle}"/>
 
 
-                    <!--ExpandAppbar-->
-                    <elements:ExpandAppbar x:Name="ExpandAppbar" Grid.Column="1">
-                        <elements:ExpandAppbar.Children>
-
-
-                            <elements:ExpandAppbarButton x:Name="ExportButton">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip x:Name="ExportToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <elements:ExpandAppbarButton.CenterContent>
-                                    <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                </elements:ExpandAppbarButton.CenterContent>
-                            </elements:ExpandAppbarButton>
-
-                            <elements:ExpandAppBarSapce/>
-
-                            <elements:ExpandAppbarButton x:Name="UndoButton"
-                                                     IsEnabledChange="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip x:Name="UndoToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <elements:ExpandAppbarButton.CenterContent>
-                                    <FontIcon Glyph="&#xE10E;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                </elements:ExpandAppbarButton.CenterContent>
-                            </elements:ExpandAppbarButton>
-
-                            <elements:ExpandAppBarSapce/>
-
-                            <!--
-                        <elements:ExpandAppbarButton x:Name="RedoButton">
+                    <!--Left-->
+                    <StackPanel x:Name="LeftStackPanel" Grid.Column="1" Orientation="Horizontal">
+                        <Button x:Name="ExportButton" Style="{StaticResource AppCircleButtonStyle}">
                             <ToolTipService.ToolTip>
-                                <ToolTip x:Name="RedoToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                <ToolTip x:Name="ExportToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
-                            <elements:ExpandAppbarButton.CenterContent>
-                                <FontIcon Glyph="&#xE10D;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </elements:ExpandAppbarButton.CenterContent>
-                        </elements:ExpandAppbarButton>
-
-                        <elements:ExpandAppBarSeparator/>
-                        -->
-
-                            <elements:ExpandAppbarButton x:Name="SetupButton">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip x:Name="SetupToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <elements:ExpandAppbarButton.CenterContent>
-                                    <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                </elements:ExpandAppbarButton.CenterContent>
-                            </elements:ExpandAppbarButton>
-
-                            <elements:ExpandAppBarSapce/>
-
-                            <elements:ExpandAppbarToggleButton x:Name="SnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip x:Name="SnapToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <elements:ExpandAppbarToggleButton.CenterContent>
-                                    <PathIcon>
-                                        <PathIcon.Data>
-                                            M4.294,14.039l2.773,-2.773l3.747,3.747c1.159,1.159 3.04,1.159 4.199,0c1.159,-1.159 1.159,-3.04 0,-4.199l-3.747,-3.747l2.773,-2.773l4.144,4.143c2.689,2.69 2.689,7.057 0,9.746c-2.689,2.689 -7.056,2.689 -9.746,0l-4.143,-4.144Zm8.09,-11.401l-2.773,2.773l-2.639,-2.638l2.773,-2.773l2.639,2.638Zm-6.973,6.973l-2.773,2.773l-2.638,-2.639l2.773,-2.773l2.638,2.639Z
-                                        </PathIcon.Data>
-                                    </PathIcon>
-                                </elements:ExpandAppbarToggleButton.CenterContent>
-                            </elements:ExpandAppbarToggleButton>
-
-                            <elements:ExpandAppBarSapce/>
-
-                            <elements:ExpandAppbarToggleButton x:Name="RulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip x:Name="RulerToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <elements:ExpandAppbarToggleButton.CenterContent>
-                                    <FontIcon Glyph="&#xECC6;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                </elements:ExpandAppbarToggleButton.CenterContent>
-                            </elements:ExpandAppbarToggleButton>
-
-                            <elements:ExpandAppBarSapce/>
-
-                            <elements:ExpandAppbarButton x:Name="FullScreenButton">
-                                <ToolTipService.ToolTip>
-                                    <ToolTip x:Name="FullScreenToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                                </ToolTipService.ToolTip>
-                                <elements:ExpandAppbarButton.CenterContent>
-                                    <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                </elements:ExpandAppbarButton.CenterContent>
-                            </elements:ExpandAppbarButton>
-
-                            <elements:ExpandAppBarSapce/>
-
-                            <elements:ExpandAppbarRepeatButton x:Name="TipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=TwoWay}">
-                                <elements:ExpandAppbarRepeatButton.CenterContent>
-                                    <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                </elements:ExpandAppbarRepeatButton.CenterContent>
-                            </elements:ExpandAppbarRepeatButton>
-
-                        </elements:ExpandAppbar.Children>
-                    </elements:ExpandAppbar>
+                            <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button>
+                        <Button x:Name="UndoButton" IsEnabled="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}" Style="{StaticResource AppCircleButtonStyle}">
+                            <ToolTipService.ToolTip>
+                                <ToolTip x:Name="UndoToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                            </ToolTipService.ToolTip>
+                            <FontIcon Glyph="&#xE10E;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button>
+                        <!--<Button x:Name="RedoButton" Style="{StaticResource AppCircleButtonStyle}">
+                               <ToolTipService.ToolTip>
+                                <ToolTip x:Name="RedoToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                            </ToolTipService.ToolTip> 
+                        <FontIcon Glyph="&#xE10D;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button>-->
+                        <Button x:Name="SetupButton" Style="{StaticResource AppCircleButtonStyle}">
+                            <ToolTipService.ToolTip>
+                                <ToolTip x:Name="SetupToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                            </ToolTipService.ToolTip>
+                            <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button>
+                        <ToggleButton x:Name="SnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
+                            <ToolTipService.ToolTip>
+                                <ToolTip x:Name="SnapToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                            </ToolTipService.ToolTip>
+                            <PathIcon>
+                                <PathIcon.Data>
+                                    M4.294,14.039l2.773,-2.773l3.747,3.747c1.159,1.159 3.04,1.159 4.199,0c1.159,-1.159 1.159,-3.04 0,-4.199l-3.747,-3.747l2.773,-2.773l4.144,4.143c2.689,2.69 2.689,7.057 0,9.746c-2.689,2.689 -7.056,2.689 -9.746,0l-4.143,-4.144Zm8.09,-11.401l-2.773,2.773l-2.639,-2.638l2.773,-2.773l2.639,2.638Zm-6.973,6.973l-2.773,2.773l-2.638,-2.639l2.773,-2.773l2.638,2.639Z
+                                </PathIcon.Data>
+                            </PathIcon>
+                        </ToggleButton>
+                        <ToggleButton x:Name="RulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
+                            <ToolTipService.ToolTip>
+                                <ToolTip x:Name="RulerToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                            </ToolTipService.ToolTip>
+                            <FontIcon Glyph="&#xECC6;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </ToggleButton>
+                        <Button x:Name="FullScreenButton" Style="{StaticResource AppCircleButtonStyle}">
+                            <ToolTipService.ToolTip>
+                                <ToolTip x:Name="FullScreenToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                            </ToolTipService.ToolTip>
+                            <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </Button>
+                        <ToggleButton x:Name="TipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=TwoWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
+                            <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </ToggleButton>
+                    </StackPanel>
 
 
-                    <!--HeadRight-->
-                    <ScrollViewer Grid.Column="2" Style="{StaticResource AppHorizontalScrollViewerStyle}">
+                    <!--Overflow-->
+                    <Button x:Name="OverflowButton" Grid.Column="2" Style="{StaticResource AppCircleButtonStyle}">
+                        <Button.Flyout>
+                            <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                                <StackPanel x:Name="OverflowStackPanel">
+                                    <Button x:Name="OverflowExportButton" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                        <Button.Tag>
+                                            <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                        </Button.Tag>
+                                    </Button>
+                                    <Button x:Name="OverflowUndoButton" IsEnabled="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                        <Button.Tag>
+                                            <FontIcon Glyph="&#xE10E;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                        </Button.Tag>
+                                    </Button>
+                                    <!--<Button x:Name="OverflowRedoButton" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                       <Button.Tag>                                            
+                                    <FontIcon Glyph="&#xE10D;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                        </Button.Tag>   
+                                    </Button>-->
+                                    <Button x:Name="OverflowSetupButton" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                        <Button.Tag>
+                                            <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                        </Button.Tag>
+                                    </Button>
+                                    <ToggleButton x:Name="OverflowSnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                        <ToggleButton.Tag>
+                                            <PathIcon>
+                                                <PathIcon.Data>
+                                                    M4.294,14.039l2.773,-2.773l3.747,3.747c1.159,1.159 3.04,1.159 4.199,0c1.159,-1.159 1.159,-3.04 0,-4.199l-3.747,-3.747l2.773,-2.773l4.144,4.143c2.689,2.69 2.689,7.057 0,9.746c-2.689,2.689 -7.056,2.689 -9.746,0l-4.143,-4.144Zm8.09,-11.401l-2.773,2.773l-2.639,-2.638l2.773,-2.773l2.639,2.638Zm-6.973,6.973l-2.773,2.773l-2.638,-2.639l2.773,-2.773l2.638,2.639Z
+                                                </PathIcon.Data>
+                                            </PathIcon>
+                                        </ToggleButton.Tag>
+                                    </ToggleButton>
+                                    <ToggleButton x:Name="OverflowRulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                        <ToggleButton.Tag>
+                                            <FontIcon Glyph="&#xECC6;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                        </ToggleButton.Tag>
+                                    </ToggleButton>
+                                    <Button x:Name="OverflowFullScreenButton" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                        <Button.Tag>
+                                            <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                        </Button.Tag>
+                                    </Button>
+                                    <ToggleButton x:Name="OverflowTipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=TwoWay}" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                        <ToggleButton.Tag>
+                                            <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                        </ToggleButton.Tag>
+                                    </ToggleButton>
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                        <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    </Button>
+
+
+                    <!--Right-->
+                    <ScrollViewer x:Name="RightScrollViewer" Grid.Column="3" Style="{StaticResource AppHorizontalScrollViewerStyle}">
                         <menus:MenuButtonsControl x:Name="MenuButtonsControl" 
                               Menus="{x:Bind TipViewModel.Menus, Mode=OneTime}"/>
                     </ScrollViewer>
 
 
                     <!--Shadow-->
-                    <Border x:Name="ShadowRectangle" IsHitTestVisible="False" Width="32" Grid.Column="2" HorizontalAlignment="Left" >
+                    <Border x:Name="ShadowRectangle" IsHitTestVisible="False" Width="32" Grid.Column="3" HorizontalAlignment="Left" >
                         <Border.Resources>
                             <ResourceDictionary>
                                 <!--Linear-->
@@ -254,7 +266,7 @@
         <menus:MenusExpanderCanvas
             Menus="{x:Bind TipViewModel.Menus, Mode=OneTime}"
             IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"/>
-             
+
 
         <!--Tip-->
         <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" 
@@ -322,7 +334,7 @@
         <elements:DialogWide x:Name="GalleryDialog" Title="Gallery"/>
         <photos:PhotoBillboardCanvas x:Name="BillboardCanvas"/>
 
-        
+
         <!--Transition-->
         <Border x:Name="TransitionBorder" IsHitTestVisible="False" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
 

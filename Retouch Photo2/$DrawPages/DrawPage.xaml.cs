@@ -7,8 +7,10 @@ using Retouch_Photo2.Elements;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -97,26 +99,29 @@ namespace Retouch_Photo2
         {
             //Extension
             this.ApplicationView.Color = this.ApplicationView.Color;
+            this.ApplicationView.Title = this.ViewModel.Name;
 
             //Key
             this.SettingViewModel.RegisteKey();
 
             if (this.DrawLayout.IsFullScreen == false) return;
 
-            if (e.Parameter is Rect sourceRect)            
-                this._lockOnNavigatedTo(sourceRect);            
-            else            
-                this._lockOnNavigatedTo(null);        
-    
+            if (e.Parameter is Rect sourceRect)
+                this._lockOnNavigatedTo(sourceRect);
+            else
+                this._lockOnNavigatedTo(null);
+
             SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
         }
         /// <summary> The current page no longer becomes an active page. </summary>
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
+            this.ApplicationView.Title = string.Empty;
 
             //Key
             this.SettingViewModel.UnRegisteKey();
+
+            SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
         }
         private void BackRequested(object sender, BackRequestedEventArgs e)
         {

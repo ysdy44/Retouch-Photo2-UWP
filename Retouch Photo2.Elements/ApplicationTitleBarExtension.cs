@@ -11,11 +11,11 @@ namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// Provides constant and static methods 
-    /// for gets and sets to <see cref="ApplicationViewTitleBar"/> background.
+    /// for gets and sets to <see cref="ApplicationViewTitleBar"/>'s background and title.
     /// </summary>
     public class ApplicationTitleBarExtension : FrameworkElement
     {
-        
+
         private static readonly ApplicationView View = ApplicationView.GetForCurrentView();
 
         #region DependencyProperty
@@ -55,6 +55,13 @@ namespace Retouch_Photo2.Elements
             }
         }
         private Color color = Colors.Gray;
+
+        /// <summary> Gets or sets <see cref="ApplicationTitleBarExtension"/>'s title. </summary>
+        public string Title
+        {
+            get => View.Title;
+            set => View.Title = value;
+        }
 
     }
 }

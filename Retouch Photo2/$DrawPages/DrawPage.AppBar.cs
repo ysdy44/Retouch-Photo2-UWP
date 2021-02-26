@@ -9,35 +9,6 @@ namespace Retouch_Photo2
     public sealed partial class DrawPage : Page
     {
 
-        /// <summary>
-        /// Gets or sets the state of AppBar.
-        /// </summary>
-        public bool? IsAppBarLeft
-        {
-            get => this.isAppBarLeft;
-            set
-            {
-                if (this.isAppBarLeft == value) return;
-
-                if (value == true)
-                {
-                    this.HeadLeftLength.Width = new GridLength(1, GridUnitType.Star);
-                    this.HeadRightLength.Width = GridLength.Auto;
-                    this.ShadowRectangle.Visibility = Visibility.Collapsed;
-                }
-                else if (value == false)
-                {
-                    this.HeadLeftLength.Width = new GridLength(40, GridUnitType.Pixel);
-                    this.HeadRightLength.Width = new GridLength(1, GridUnitType.Star);
-                    this.ShadowRectangle.Visibility = Visibility.Visible;
-                }
-
-                this.isAppBarLeft = value;
-            }
-        }
-        private bool? isAppBarLeft = null;
-
-
         // AppBar. 
         private void ConstructAppBar()
         {
@@ -45,19 +16,22 @@ namespace Retouch_Photo2
             this.AppBarGridSizeChanged(this.AppBarGrid.ActualWidth);
             this.AppBarGrid.SizeChanged += (s, e) =>
             {
+                if (e.NewSize.IsEmpty) return;
                 if (e.NewSize == e.PreviousSize) return;
-
                 this.AppBarGridSizeChanged(e.NewSize.Width);
             };
 
+            //Right
+            this.RightScrollViewer.ViewChanged += (s, e) => this.ShadowRectangle.Visibility = (40 < this.RightScrollViewer.HorizontalOffset) ? Visibility.Visible : Visibility.Collapsed;
 
-            // Document
+
+            //Document
             this.DocumentButton.Holding += (s, e) => this.DocumentFlyout.ShowAt(this.DocumentButton);
             this.DocumentButton.RightTapped += (s, e) => this.DocumentFlyout.ShowAt(this.DocumentButton);
-      
-            
+
+
             this.DocumentUnSaveButton.Click += (s, e) => this.DocumentUnSave();
-            this.DocumentButton.Click += async (s, e) =>
+            this.DocumentButton.Click += (s, e) =>
             {
                 int countHistorys = this.ViewModel.Historys.Count;
                 int countLayerages = LayerManager.RootLayerage.Children.Count;
@@ -73,22 +47,59 @@ namespace Retouch_Photo2
             };
 
 
-            // ExpandAppbar
+            //Appbar
             this.ExportButton.Tapped += (s, e) => this.ShowExportDialog();
+            this.OverflowExportButton.Tapped += (s, e) => this.ShowExportDialog();
+
             this.UndoButton.Tapped += (s, e) => this.MethodViewModel.MethodEditUndo();
+            this.OverflowUndoButton.Tapped += (s, e) => this.MethodViewModel.MethodEditUndo();
+
             //this.RedoButton.Click += (s, e) => { };
+            //this.OverflowButton.Click += (s, e) => { };
+
             this.SetupButton.Tapped += (s, e) => this.ShowSetupDialog();
+            this.OverflowSetupButton.Tapped += (s, e) => this.ShowSetupDialog();
+
             this.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
-            this.UnFullScreenButton.Click += (s, e) => this.DrawLayout.IsFullScreen = false;
+            this.OverflowRulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
+
             this.FullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = true;
+            this.OverflowFullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = true;
+
+            this.UnFullScreenButton.Click += (s, e) => this.DrawLayout.IsFullScreen = false;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
         private void AppBarGridSizeChanged(double width)
         {
-            double arrangeWidth = width - this.DocumentButton.ActualWidth - 40;
-            double measureWidth = this.MenuButtonsControl.ActualWidth;
+            //Document
+            this.DocumentColumnDefinition.Width = new GridLength(width / 8);
 
-            this.IsAppBarLeft = arrangeWidth > measureWidth;
+            double overflowWidth = this.OverflowButton.ActualWidth;
+            double rightWidth = this.MenuButtonsControl.ActualWidth;
+            double leftWidth = width - overflowWidth - rightWidth;
+            int count = (int)(leftWidth / 40.0d);
+
+            //Overflow
+            this.OverflowButton.Visibility = (count < this.LeftStackPanel.Children.Count) ? Visibility.Visible : Visibility.Collapsed;
+
+            //Left
+            for (int i = 0; i < this.LeftStackPanel.Children.Count; i++)
+            {
+                UIElement leftButton = this.LeftStackPanel.Children[i];
+                leftButton.Visibility = (i < count) ? Visibility.Visible : Visibility.Collapsed;
+            }
+
+            //Overflow
+            for (int i = 0; i < this.OverflowStackPanel.Children.Count; i++)
+            {
+                UIElement overflowButton = this.OverflowStackPanel.Children[i];
+                overflowButton.Visibility = (i < count) ? Visibility.Collapsed : Visibility.Visible;
+            }
         }
 
 

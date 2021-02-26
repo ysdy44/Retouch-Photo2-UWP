@@ -23,21 +23,14 @@ namespace Retouch_Photo2
             this.DocumentButton.Content = resource.GetString("$DrawPage_Document");
             this.DocumentUnSaveButton.Content = resource.GetString("$DrawPage_DocumentUnSave");
             {
-                this.ExportToolTip.Content =
-                this.ExportButton.Text = resource.GetString("$DrawPage_Export");
-                this.UndoToolTip.Content =
-                this.UndoButton.Text = resource.GetString("$DrawPage_Undo");
-                //this.RedoToolTip.Content = resourceLoader.GetString("$DrawPage_Redo");
-                //this.RedoButton.Text =
-                this.SetupToolTip.Content =
-                this.SetupButton.Text = resource.GetString("$DrawPage_Setup");
-                this.SnapToolTip.Content =
-                this.SnapButton.Text = resource.GetString("$DrawPage_Snap");
-                this.RulerToolTip.Content =
-                this.RulerButton.Text = resource.GetString("$DrawPage_Ruler");
-                this.FullScreenToolTip.Content =
-                this.FullScreenButton.Text = resource.GetString("$DrawPage_FullScreen");
-                this.TipButton.Text = resource.GetString("$DrawPage_Tip");
+                this.ExportToolTip.Content = this.OverflowExportButton.Content = resource.GetString("$DrawPage_Export");
+                this.UndoToolTip.Content = this.OverflowUndoButton.Content = resource.GetString("$DrawPage_Undo");
+                //this.RedoToolTip.Content = this.OverflowRedoButton.Content = resource.GetString("$DrawPage_Redo");
+                this.SetupToolTip.Content = this.OverflowSetupButton.Content = resource.GetString("$DrawPage_Setup");
+                this.SnapToolTip.Content = this.OverflowSnapButton.Content = resource.GetString("$DrawPage_Snap");
+                this.RulerToolTip.Content = this.OverflowRulerButton.Content = resource.GetString("$DrawPage_Ruler");
+                this.FullScreenToolTip.Content = this.OverflowFullScreenButton.Content = resource.GetString("$DrawPage_FullScreen");
+                this.OverflowTipButton.Content = resource.GetString("$DrawPage_Tip");
             }
 
             this.SetupDialog.Title = resource.GetString("$DrawPage_SetupDialog_Title");
@@ -52,7 +45,7 @@ namespace Retouch_Photo2
                 this.SetupResizeButton.Content = resource.GetString("$DrawPage_SetupDialog_Resize");
                 this.SetupAnchorButton.Content = resource.GetString("$DrawPage_SetupDialog_Anchor");
             }
-            
+
             this.ExportDialog.Title = resource.GetString("$DrawPage_ExportDialog_Title");
             {
                 this.ExportDialog.CloseButton.Content = resource.GetString("$DrawPage_ExportDialog_Close");
@@ -177,7 +170,7 @@ namespace Retouch_Photo2
                 BitmapSize size = this.SetupSizePicker.Size;
                 IndicatorMode mode = this.SetupIndicatorControl.Mode;
 
-                if (mode== IndicatorMode.None)
+                if (mode == IndicatorMode.None)
                     this.MethodViewModel.MethodSetup(size);
                 else
                     this.MethodViewModel.MethodSetup(size, mode);
