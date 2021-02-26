@@ -235,8 +235,9 @@
 <data name='Edits_Combine_Exclude' xml:space='preserve'><value>Exclude</value></data>
 <data name='Edits_Combine_Intersect' xml:space='preserve'><value>Intersect</value></data>
 <data name='Edits_Combine_ExpandStroke' xml:space='preserve'><value>Expand Stroke</value></data>
-<data name='Operates_Transform_FlipHorizontal' xml:space='preserve'><value>Flip Horizontal</value></data>
-<data name='Operates_Transform_FlipVertical' xml:space='preserve'><value>Flip Vertical</value></data>
+ <data name='Operates_Transform' xml:space='preserve'><value>Transform</value></data>
+ <data name='Operates_Transform_FlipHorizontal' xml:space='preserve'><value>Flip Horizontal</value></data>
+ <data name='Operates_Transform_FlipVertical' xml:space='preserve'><value>Flip Vertical</value></data>
 <data name='Operates_Transform_RotateLeft' xml:space='preserve'><value>Rotate Left</value></data>
 <data name='Operates_Transform_RotateRight' xml:space='preserve'><value>Rotate Right</value></data>
 <data name='Operates_Arrange' xml:space='preserve'><value>Arrange</value></data>
