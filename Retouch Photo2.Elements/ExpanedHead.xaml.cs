@@ -108,7 +108,7 @@ namespace Retouch_Photo2.Elements
                 if (this._vsIsExpaned) return this.Normal;
                 else return this.UnExpaned;
             }
-            set => VisualStateManager.GoToState(this, value?.Name ?? "Normal", false);
+            set => VisualStateManager.GoToState(this, value?.Name ?? "Normal", true);
         }
 
 

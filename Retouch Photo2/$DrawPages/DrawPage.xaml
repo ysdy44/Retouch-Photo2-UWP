@@ -213,7 +213,7 @@
 
 
                     <!--Right-->
-                    <ScrollViewer x:Name="RightScrollViewer" Grid.Column="3" Style="{StaticResource AppHorizontalScrollViewerStyle}">
+                    <ScrollViewer x:Name="RightScrollViewer" Grid.Column="3" HorizontalAlignment="Right" Style="{StaticResource AppHorizontalScrollViewerStyle}">
                         <menus:MenuButtonsControl x:Name="MenuButtonsControl" 
                               Menus="{x:Bind TipViewModel.Menus, Mode=OneTime}"/>
                     </ScrollViewer>
