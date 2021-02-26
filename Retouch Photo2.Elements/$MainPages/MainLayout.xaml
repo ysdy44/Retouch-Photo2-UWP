@@ -33,7 +33,7 @@
         </Style>
     </UserControl.Resources>
 
-    
+
     <Grid x:Name="RootGrid">
 
         <!--VisualState-->
@@ -46,10 +46,10 @@
                 <!--Initial-->
                 <VisualState x:Name="Initial">
                     <VisualState.Setters>
-                        
+
                         <!--Select-->
                         <Setter Target = "SelectCheckBox.Content" Value="Initial"/>
-                        
+
                         <!--Body-->
                         <Setter Target = "InitialBorder.Visibility" Value="Visible"/>
 
@@ -102,7 +102,7 @@
 
                     </VisualState.Setters>
                 </VisualState>
-                
+
                 <!--Save-->
                 <VisualState x:Name="Save">
                     <VisualState.Setters>
@@ -176,7 +176,7 @@
         <!--Developer-->
         <developerTools:AlignmentGrid Grid.RowSpan="3" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
 
-        
+
         <!--Body-->
         <Border Grid.RowSpan="3">
             <GridView x:Name="_GridView" 
@@ -189,7 +189,7 @@
                 <GridView.Header>
                     <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseHeader}"/>
                 </GridView.Header>
-                
+
                 <GridView.ItemContainerTransitions>
                     <TransitionCollection>
                         <AddDeleteThemeTransition />
@@ -198,10 +198,10 @@
                         <EntranceThemeTransition IsStaggeringEnabled="False" />
                     </TransitionCollection>
                 </GridView.ItemContainerTransitions>
-                
+
                 <GridView.Template>
                     <ControlTemplate TargetType="GridView">
-                            <ScrollViewer x:Name="ScrollViewer"
+                        <ScrollViewer x:Name="ScrollViewer"
                             TabNavigation="{TemplateBinding TabNavigation}"
                             HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
                             HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -215,7 +215,7 @@
                             IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
                             BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
                             AutomationProperties.AccessibilityView="Raw">
-                                <ItemsPresenter HorizontalAlignment="Center"
+                            <ItemsPresenter HorizontalAlignment="Center"
                                 Header="{TemplateBinding Header}"
                                 HeaderTemplate="{TemplateBinding HeaderTemplate}"
                                 HeaderTransitions="{TemplateBinding HeaderTransitions}"
@@ -223,17 +223,17 @@
                                 FooterTemplate="{TemplateBinding FooterTemplate}"
                                 FooterTransitions="{TemplateBinding FooterTransitions}"
                                 Padding="{TemplateBinding Padding}" />
-                            </ScrollViewer>
+                        </ScrollViewer>
                     </ControlTemplate>
                 </GridView.Template>
 
                 <GridView.Footer>
                     <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseFooter}"/>
                 </GridView.Footer>
-                
+
             </GridView>
         </Border>
-        
+
         <Border x:Name="InitialBorder" Grid.Row="1" Grid.RowSpan="2" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
         </Border>
 
@@ -241,7 +241,7 @@
         <!--Foot-->
         <local:RadiusAnimaPanel x:Name="RadiusAnimaPanel" Grid.Row="2" CornerRadius="0" Background="{ThemeResource AppForeground}">
 
-            <local:RadiusAnimaPanel.CenterContent>
+            <local:RadiusAnimaPanel.Content>
                 <Grid>
                     <Border x:Name="MainBorder" Visibility="Collapsed"/>
                     <Border x:Name="PicturesBorder" Visibility="Collapsed"/>
@@ -251,15 +251,15 @@
                     <Border x:Name="DeleteBorder" Visibility="Collapsed"/>
                     <Border x:Name="DuplicateBorder" Visibility="Collapsed"/>
                 </Grid>
-            </local:RadiusAnimaPanel.CenterContent>
+            </local:RadiusAnimaPanel.Content>
 
         </local:RadiusAnimaPanel>
 
 
         <!--Head-->
-        <CheckBox x:Name="SelectCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        
-        <Border x:Name="HeadBorder" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
+        <CheckBox x:Name="SelectCheckBox" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <Border x:Name="HeadBorder" >
         </Border>
 
         <Border x:Name="SelectBorder" Visibility="Collapsed" HorizontalAlignment="Stretch" Background="{ThemeResource AppBorderBrush}">

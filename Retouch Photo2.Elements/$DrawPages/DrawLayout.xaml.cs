@@ -40,11 +40,11 @@ namespace Retouch_Photo2.Elements
 
         //Foot
         /// <summary> Gets or sets RadiusAnimaPanel's content. </summary>
-        public FrameworkElement FootPage { set => this.FootPanel.CenterContent = value; }
+        public FrameworkElement FootPage { set => this.FootPanel.Content = value; }
         /// <summary> _LeftIcon's CenterContent. </summary>
-        public object LeftIcon { get => this._LeftIcon.CenterContent; set => this._LeftIcon.CenterContent = value; }
+        public object LeftIcon { get => this._LeftIcon.Content; set => this._LeftIcon.Content = value; }
         /// <summary> _RightIcon's CenterContent. </summary>
-        public object RightIcon { get => this._RightIcon.CenterContent; set => this._RightIcon.CenterContent = value; }
+        public object RightIcon { get => this._RightIcon.Content; set => this._RightIcon.Content = value; }
 
         //Head
         /// <summary> HeadBorder's Child. </summary>

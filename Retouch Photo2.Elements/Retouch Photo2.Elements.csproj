@@ -121,7 +121,12 @@
       <DependentUpon>ProjectViewItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="%24MainPages\SelectMode.cs" />
-    <Compile Include="%24SettingPages\AdaptiveWidthLayout.cs" />
+    <Compile Include="%24SettingPages\AdaptiveWidthGrid.xaml.cs">
+      <DependentUpon>AdaptiveWidthGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="%24SettingPages\AdaptiveWidthLayout.xaml.cs">
+      <DependentUpon>AdaptiveWidthLayout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ApplicationTitleBarExtension.cs" />
     <Compile Include="Dialog.BackRequested.cs" />
     <Compile Include="DialogWide.BackRequested.cs" />
@@ -173,9 +178,6 @@
     <Compile Include="Pickers\WheelPicker.xaml.cs">
       <DependentUpon>WheelPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RadiusAnimas\RadiusAnimaIcon.xaml.cs">
-      <DependentUpon>RadiusAnimaIcon.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pickers\SizePicker.xaml.cs">
       <DependentUpon>SizePicker.xaml</DependentUpon>
     </Compile>
@@ -189,28 +191,19 @@
     <Compile Include="Pickers\RadiansPicker.xaml.cs">
       <DependentUpon>RadiansPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RadiusAnimas\RadiusAnimaPanel.xaml.cs">
-      <DependentUpon>RadiusAnimaPanel.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DeviceLayoutType.cs" />
     <Compile Include="%24DrawPages\DrawLayout.xaml.cs">
       <DependentUpon>DrawLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="%24DrawPages\DrawLayoutState.cs" />
-    <Compile Include="%24SettingPages\AdaptiveWidthGrid.xaml.cs">
-      <DependentUpon>AdaptiveWidthGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="%24SettingPages\PadLayout.xaml.cs">
-      <DependentUpon>PadLayout.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="%24SettingPages\PCLayout.xaml.cs">
-      <DependentUpon>PCLayout.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="%24SettingPages\PhoneLayout.xaml.cs">
-      <DependentUpon>PhoneLayout.xaml</DependentUpon>
-    </Compile>
     <Compile Include="KeyboardAccelerator2.cs" />
     <Compile Include="BackRequestedExtension.cs" />
+    <Compile Include="RadiusAnimas\RadiusAnimaIcon.xaml.cs">
+      <DependentUpon>RadiusAnimaIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RadiusAnimas\RadiusAnimaPanel.xaml.cs">
+      <DependentUpon>RadiusAnimaPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XMLs\XML.ThemeFactory.cs" />
     <Compile Include="XMLs\XML.DeviceLayout.cs" />
     <Compile Include="XMLs\XML.DeviceLayoutTypeFactory.cs" />
@@ -242,6 +235,26 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="%24MainPages\ProjectViewItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="%24SettingPages\AdaptiveWidthGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="%24SettingPages\AdaptiveWidthLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="%24SettingPages\PadLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="%24SettingPages\PCLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="%24SettingPages\PhoneLayout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -309,10 +322,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RadiusAnimas\RadiusAnimaIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pickers\SizePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -329,27 +338,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="RadiusAnimas\RadiusAnimaPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="%24DrawPages\DrawLayout.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="%24SettingPages\AdaptiveWidthGrid.xaml">
+    <Page Include="RadiusAnimas\RadiusAnimaIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="%24SettingPages\PadLayout.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="%24SettingPages\PCLayout.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="%24SettingPages\PhoneLayout.xaml">
+    <Page Include="RadiusAnimas\RadiusAnimaPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

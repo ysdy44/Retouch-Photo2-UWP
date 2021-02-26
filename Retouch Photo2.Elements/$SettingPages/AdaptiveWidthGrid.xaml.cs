@@ -6,13 +6,19 @@
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// Grid control that display and adjust parameters for adaptive width.
     /// </summary>
-    public sealed partial class AdaptiveWidthGrid : UserControl
+    [TemplateVisualState(Name = nameof(Normal), GroupName = nameof(CommonStates))]
+    [TemplateVisualState(Name = nameof(Disable), GroupName = nameof(CommonStates))]
+    [TemplatePart(Name = nameof(PhoneText), Type = typeof(string))]
+    [TemplatePart(Name = nameof(PadText), Type = typeof(string))]
+    [TemplatePart(Name = nameof(PCText), Type = typeof(string))]
+    public sealed partial class AdaptiveWidthGrid : ContentControl
     {
         //@Delegate  
         /// <summary> Occurs when the scroll-mode changes. </summary>
@@ -21,6 +27,54 @@ namespace Retouch_Photo2.Elements
         public EventHandler<int> PhoneWidthChanged;
         /// <summary> Occurs when the pad-width value changes. </summary>
         public EventHandler<int> PadWidthChanged;
+
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "AdaptiveWidthGrid" />'s phone width. </summary>
+        public string PhoneText
+        {
+            get => (string)base.GetValue(PhoneTextProperty);
+            set => base.SetValue(PhoneTextProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "AdaptiveWidthGrid.PhoneText" /> dependency property. </summary>
+        public static readonly DependencyProperty PhoneTextProperty = DependencyProperty.Register(nameof(PhoneText), typeof(string), typeof(AdaptiveWidthGrid), new PropertyMetadata("Phone"));
+
+
+        /// <summary> Gets or sets <see cref = "AdaptiveWidthGrid" />'s Pad width. </summary>
+        public string PadText
+        {
+            get => (string)base.GetValue(PadTextProperty);
+            set => base.SetValue(PadTextProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "AdaptiveWidthGrid.PadText" /> dependency property. </summary>
+        public static readonly DependencyProperty PadTextProperty = DependencyProperty.Register(nameof(PadText), typeof(string), typeof(AdaptiveWidthGrid), new PropertyMetadata("Pad"));
+
+
+        /// <summary> Gets or sets <see cref = "AdaptiveWidthGrid" />'s PC width. </summary>
+        public string PCText
+        {
+            get => (string)base.GetValue(PCTextProperty);
+            set => base.SetValue(PCTextProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "AdaptiveWidthGrid.PCText" /> dependency property. </summary>
+        public static readonly DependencyProperty PCTextProperty = DependencyProperty.Register(nameof(PCText), typeof(string), typeof(AdaptiveWidthGrid), new PropertyMetadata("PC"));
+                
+
+        #endregion
+
+
+        VisualStateGroup CommonStates;
+        VisualState Normal;
+        VisualState Disable;
+        TextBlock PhoneTextBlock;
+        TextBlock PadTextBlock;
+        ColumnDefinition PhoneGridLength;
+        ColumnDefinition PadGridLength;
+        ColumnDefinition PCGridLength;
+        Thumb PhoneThumb;
+        Thumb PadThumb;
 
 
         //@VisualState
@@ -36,27 +90,27 @@ namespace Retouch_Photo2.Elements
 
         /// <summary> Layout phone width. </summary>
         public int PhoneWidth = 600;
-     
+
         /// <summary> Layout pad width. </summary>
         public int PadWidth = 900;
-     
+
         /// <summary>
         /// Change the layout based on width.
         /// </summary>
-        public void SetWidth() => this._SetWidth(this.PhoneWidth, this.PadWidth);
+        public void SetWidth() => this.SetWidthCore(this.PhoneWidth, this.PadWidth);
 
-        private void _SetWidth(int phoneWidth, int padWidth, int pcWidth = 2000)
+        private void SetWidthCore(int phoneWidth, int padWidth, int pcWidth = 2000)
         {
-            this.PhoneTextBlock.Text = $"{phoneWidth}";
-            this.PadTextBlock.Text = $"{padWidth}";
+            if (this.PhoneTextBlock != null) this.PhoneTextBlock.Text = phoneWidth.ToString();
+            if (this.PadTextBlock != null) this.PadTextBlock.Text = padWidth.ToString();
 
             double phoneLength = phoneWidth;
             double padLength = padWidth - phoneWidth;
             double pcLength = pcWidth - padWidth;
 
-            this.PhoneGridLength.Width = new GridLength(phoneLength < 1 ? 1 : phoneLength, GridUnitType.Star);
-            this.PadGridLength.Width = new GridLength(padLength < 1 ? 1 : padLength, GridUnitType.Star);
-            this.PCGridLength.Width = new GridLength(pcLength < 1 ? 1 : pcLength, GridUnitType.Star);
+            if (this.PhoneGridLength != null) this.PhoneGridLength.Width = new GridLength(phoneLength < 1 ? 1 : phoneLength, GridUnitType.Star);
+            if (this.PadGridLength != null) this.PadGridLength.Width = new GridLength(padLength < 1 ? 1 : padLength, GridUnitType.Star);
+            if (this.PCGridLength != null) this.PCGridLength.Width = new GridLength(pcLength < 1 ? 1 : pcLength, GridUnitType.Star);
         }
 
 
@@ -100,17 +154,36 @@ namespace Retouch_Photo2.Elements
 
         #endregion
 
+
         //@Construct
         /// <summary>
         /// Initializes a AdaptiveWidthGrid. 
         /// </summary>
         public AdaptiveWidthGrid()
         {
-            this.InitializeComponent();
-            base.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.DefaultStyleKey = typeof(AdaptiveWidthGrid);
             base.IsEnabledChanged += (s, e) => this.VisualState = this.VisualState;//State
+        }
+
+        /// <inheritdoc/>
+        protected override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            this.CommonStates = base.GetTemplateChild(nameof(CommonStates)) as VisualStateGroup;
+            this.Normal = base.GetTemplateChild(nameof(Normal)) as VisualState;
+            this.Disable = base.GetTemplateChild(nameof(Disable)) as VisualState;
+            this.VisualState = this.VisualState;//State
+
+            this.PhoneTextBlock = base.GetTemplateChild(nameof(PhoneTextBlock)) as TextBlock;
+            this.PadTextBlock = base.GetTemplateChild(nameof(PadTextBlock)) as TextBlock;
+            this.PhoneGridLength = base.GetTemplateChild(nameof(PhoneGridLength)) as ColumnDefinition;
+            this.PadGridLength = base.GetTemplateChild(nameof(PadGridLength)) as ColumnDefinition;
+            this.PCGridLength = base.GetTemplateChild(nameof(PCGridLength)) as ColumnDefinition;
+            this.SetWidth();
 
             //Phone
+            this.PhoneThumb = base.GetTemplateChild(nameof(PhoneThumb)) as Thumb;
             this.PhoneThumb.DragStarted += (s, e) =>
             {
                 this.DragStarted();
@@ -134,6 +207,7 @@ namespace Retouch_Photo2.Elements
             };
 
             //Pad
+            this.PadThumb = base.GetTemplateChild(nameof(PadThumb)) as Thumb;
             this.PadThumb.DragStarted += (s, e) =>
             {
                 this.DragStarted();
@@ -156,5 +230,6 @@ namespace Retouch_Photo2.Elements
                 this.PadWidthChanged?.Invoke(this, this.PadWidth);//Delegate
             };
         }
+
     }
 }

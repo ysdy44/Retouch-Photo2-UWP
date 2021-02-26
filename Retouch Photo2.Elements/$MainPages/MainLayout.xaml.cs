@@ -99,7 +99,7 @@ namespace Retouch_Photo2.Elements
         public MainLayout()
         {
             this.InitializeComponent();
-            this.GridView.ItemsSource = this.Items;
+            this._GridView.ItemsSource = this.Items;
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
 
             this.SelectCheckBox.Unchecked += (s, e) => this.SelectAll(SelectMode.None);

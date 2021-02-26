@@ -1,0 +1,67 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Retouch_Photo2.Elements">
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/$SettingPages/PCLayout.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/$SettingPages/PadLayout.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/$SettingPages/PhoneLayout.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <Style TargetType="local:AdaptiveWidthLayout">
+        <Setter Property = "Width" Value="330"/>
+        <Setter Property = "Height" Value="210"/>
+        <Setter Property = "HorizontalAlignment" Value="Left"/>
+        <Setter Property = "Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:AdaptiveWidthLayout">
+                    <Border x:Name="RootGrid"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <!--VisualState-->
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="VisualStateGroup">
+
+                                <!--Normal-->
+                                <VisualState x:Name="Normal"/>
+
+                                <!--PC-->
+                                <VisualState x:Name="PC">
+                                    <VisualState.Setters>
+                                        <Setter Target = "ContentControl.Style" Value="{StaticResource PCLayout}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <!--Pad-->
+                                <VisualState x:Name="Pad">
+                                    <VisualState.Setters>
+                                        <Setter Target = "ContentControl.Style" Value="{StaticResource PadLayout}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <!--Phone-->
+                                <VisualState x:Name="Phone">
+                                    <VisualState.Setters>
+                                        <Setter Target = "ContentControl.Style" Value="{StaticResource PhoneLayout}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <ContentControl x:Name="ContentControl"/>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

@@ -6,22 +6,25 @@
 using Windows.Devices.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Markup;
+using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// The shadow icon of the control will also follow the animation, 
     /// if you change the width of the contents of the control.
-    /// </summary>
-    public sealed partial class RadiusAnimaIcon : UserControl
+    /// </summary>  
+    [TemplatePart(Name = nameof(RootGrid), Type = typeof(Grid))]
+    [ContentProperty(Name = nameof(Content))]
+    public sealed partial class RadiusAnimaIcon : ContentControl
     {
         //@Delegate
         /// <summary> Occurs when a pointer enters the hit test area of this element. </summary>
         public event RoutedEventHandler Toggled;
 
-        //@Content
-        /// <summary> ContentPresenter's Content. </summary>
-        public object CenterContent { get => this.ContentPresenter.Content; set => this.ContentPresenter.Content = value; }
+
+        Grid RootGrid;
 
 
         //@Construct
@@ -30,15 +33,32 @@ namespace Retouch_Photo2.Elements
         /// </summary>
         public RadiusAnimaIcon()
         {
-            this.InitializeComponent();
-            this.RootGrid.Tapped += (s, e) => this.Toggled?.Invoke(s, e);//Delegate
-            this.RootGrid.PointerEntered += (s, e) =>
-            {
-                if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
-                {
-                    this.Toggled?.Invoke(s, e);//Delegate
-                }
-            };
+            this.DefaultStyleKey = typeof(RadiusAnimaIcon);
         }
+
+        /// <inheritdoc/>
+        protected override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            this.RootGrid = base.GetTemplateChild(nameof(RootGrid)) as Grid;
+            this.RootGrid.Tapped -= RootGrid_Tapped;
+            this.RootGrid.PointerEntered -= RootGrid_PointerEntered;
+            this.RootGrid.Tapped += RootGrid_Tapped;
+            this.RootGrid.PointerEntered += RootGrid_PointerEntered;
+        }
+
+        private void RootGrid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Toggled?.Invoke(this, e);//Delegate 
+        }
+        private void RootGrid_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
+            {
+                this.Toggled?.Invoke(this, e);//Delegate
+            }
+        }
+
     }
 }
