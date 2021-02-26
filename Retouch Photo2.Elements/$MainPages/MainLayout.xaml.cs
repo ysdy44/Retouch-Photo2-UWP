@@ -18,6 +18,9 @@ namespace Retouch_Photo2.Elements
     {
 
         //@Content     
+        /// <summary> GridView. </summary>
+        public GridView GridView => this._GridView;
+
         /// <summary> InitialBorder's Child. </summary>
         public UIElement InitialChild { get => this.InitialBorder.Child; set => this.InitialBorder.Child = value; }
 

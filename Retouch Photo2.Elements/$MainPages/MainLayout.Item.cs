@@ -31,15 +31,15 @@ namespace Retouch_Photo2.Elements
                 switch (value)
                 {
                     case DeviceLayoutType.Phone:
-                        this.GridView.ItemContainerStyle = this.ItemContainerStyle00;
+                        this._GridView.ItemContainerStyle = this.ItemContainerStyle00;
                         this.DeviceLayoutTypeOrientation = Orientation.Vertical;
                         break;
                     case DeviceLayoutType.Pad:
-                        this.GridView.ItemContainerStyle = this.ItemContainerStyle01;
+                        this._GridView.ItemContainerStyle = this.ItemContainerStyle01;
                         this.DeviceLayoutTypeOrientation = Orientation.Horizontal;
                         break;
                     case DeviceLayoutType.PC:
-                        this.GridView.ItemContainerStyle = this.ItemContainerStyle02;
+                        this._GridView.ItemContainerStyle = this.ItemContainerStyle02;
                         this.DeviceLayoutTypeOrientation = Orientation.Horizontal;
                         break;
                     default:

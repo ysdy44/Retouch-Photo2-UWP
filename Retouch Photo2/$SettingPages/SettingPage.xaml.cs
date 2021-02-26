@@ -27,8 +27,7 @@ namespace Retouch_Photo2
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
-
-        bool IsAdaptive
+        private bool IsAdaptive
         {
             set
             {
@@ -47,8 +46,10 @@ namespace Retouch_Photo2
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.BackButton.Click += (s, e) => this.Frame.GoBack();
-            this.AboutButton.Click += (s, e) => this.AboutDialog.Show();
+            this.Head.LeftButtonClick += (s, e) => this.Frame.GoBack();
+            this.Head.RightButtonClick += (s, e) => this.AboutDialog.Show();
+            this.ScrollViewer.ViewChanged += (s, e) => this.Head.Move(this.ScrollViewer.VerticalOffset);
+
             this.AboutDialog.CloseButton.Click += (s, e) => this.AboutDialog.Hide();
             this.AboutDialog.PrimaryButton.Click += (s, e) => this.AboutDialog.Hide();
 

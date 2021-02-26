@@ -179,7 +179,7 @@
         
         <!--Body-->
         <Border Grid.RowSpan="3">
-            <GridView x:Name="GridView" 
+            <GridView x:Name="_GridView" 
                       ReorderMode="Disabled" 
                       SelectionMode="None"
                       animations:ReorderGridAnimation.Duration="300"

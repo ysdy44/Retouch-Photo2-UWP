@@ -8,7 +8,9 @@ using Retouch_Photo2.ViewModels;
 using System;
 using System.Linq;
 using Windows.System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo2
@@ -25,7 +27,7 @@ namespace Retouch_Photo2
         ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
-        
+
 
         //@Construct
         /// <summary>
@@ -41,15 +43,15 @@ namespace Retouch_Photo2
             //Select
             this.AllButton.Click += (s, e) => this.MainLayout.SelectAllAndDeselectIcon();
             //Head
-            this.DocumentationButton.Click += async (s, e) => await Launcher.LaunchUriAsync(new Uri(this.DocumentationLink));
-            this.SettingButton.Click += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
-            
+            this.Head.LeftButtonClick += async (s, e) => await Launcher.LaunchUriAsync(new Uri(this.DocumentationLink));
+            this.Head.RightButtonClick += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
+            this.ModifyXamlStyle(this.MainLayout.GridView);
 
             this.Loaded += async (s, e) =>
             {
                 await this.ConstructSetting();
                 await this._lockLoaded();
-                
+
                 //FileUtil
                 await FileUtil.DeleteInTemporaryFolder();
             };
@@ -122,6 +124,23 @@ namespace Retouch_Photo2
         }
         /// <summary> The current page no longer becomes an active page. </summary>
         protected override void OnNavigatedFrom(NavigationEventArgs e) { }
+
+        private void ModifyXamlStyle(GridView gridView)
+        {
+            gridView.Loaded += (s, e) =>
+            {
+                if (VisualTreeHelper.GetChild(gridView, 0) is FrameworkElement element)
+                {
+                    if (element.FindName("ScrollViewer") is ScrollViewer scrollViewer)
+                    {
+                        scrollViewer.ViewChanged += (s2, e2) =>
+                        {
+                            this.Head.Move(scrollViewer.VerticalOffset);
+                        };
+                    }
+                }
+            };
+        }
 
     }
 }

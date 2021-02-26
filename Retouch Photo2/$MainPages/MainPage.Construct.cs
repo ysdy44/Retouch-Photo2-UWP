@@ -31,9 +31,11 @@ namespace Retouch_Photo2
             this.Untitled = resource.GetString("$Untitled");
             this.DocumentationLink = resource.GetString("$DocumentationLink");
 
-            this.TitleTextBlock.Text = resource.GetString("$MainPage_Title");
-            this.DocumentationTipToolTip.Content = resource.GetString("$MainPage_DocumentationTip");
-            this.SettingTipToolTip.Content = resource.GetString("$MainPage_SettingTip");
+            this.Head.Title = resource.GetString("$MainPage_Title");
+            {
+                this.Head.LeftButtonToolTip = resource.GetString("$MainPage_DocumentationTip");
+                this.Head.RightButtonToolTip = resource.GetString("$MainPage_SettingTip");
+            }
 
             this.ClickTipTextBlock.Text = resource.GetString("$MainPage_Select_ClickTip");
             this.AllButton.Content = resource.GetString("$MainPage_Select_All");

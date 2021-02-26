@@ -13,9 +13,9 @@
     mc:Ignorable="d"
     >
 
-    
+
     <Grid x:Name="_RootGrid" Background="Transparent">
-    
+
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
@@ -38,7 +38,7 @@
                         <Setter Target = "ImageEx.BorderBrush" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
                         <Setter Target = "SelectedBorder.Visibility" Value="Visible"/>
                         <Setter Target = "SelectedBorder.Background" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
-                        <Setter Target = "SelectedIcon.Visibility" Value="Visible"/>                   
+                        <Setter Target = "SelectedIcon.Visibility" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -70,11 +70,12 @@
 
 
         <TextBlock Grid.Row="2" Text="{x:Bind UserControl.Name, Mode=OneWay}"
+                   FontWeight="Medium"
                    TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" 
                    Foreground="{ThemeResource AppText}" 
                    HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-        
+
     </Grid>
 
 </UserControl>

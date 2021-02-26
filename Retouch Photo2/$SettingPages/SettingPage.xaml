@@ -469,46 +469,14 @@
 
 
         <!--Head-->
-        <Grid HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppForeground}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
-                <ColumnDefinition Width="6*"/>
-                <ColumnDefinition Width="1*" MinWidth="50" MaxWidth="80"/>
-            </Grid.ColumnDefinitions>
-
-            <Button x:Name="BackButton" Style="{StaticResource AppButtonStyle}">
-                <ToolTipService.ToolTip>
-                    <ToolTip x:Name="BackToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                </ToolTipService.ToolTip>
-                <Button.Transitions>
-                    <TransitionCollection>
-                        <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
-                    </TransitionCollection>
-                </Button.Transitions>
+        <elements:ExpanedHead x:Name="Head">
+            <elements:ExpanedHead.LeftButtonContent>
                 <FontIcon Glyph="&#xE830;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
-            </Button>
-
-            <TextBlock x:Name="TitleTextBlock" Grid.Column="1" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
-                <TextBlock.Transitions>
-                    <TransitionCollection>
-                        <EntranceThemeTransition FromHorizontalOffset="50" FromVerticalOffset="0"/>
-                    </TransitionCollection>
-                </TextBlock.Transitions>
-            </TextBlock>
-
-            <Button x:Name="AboutButton" Grid.Column="2" Style="{StaticResource AppButtonStyle}">
-                <ToolTipService.ToolTip>
-                    <ToolTip x:Name="AboutToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
-                </ToolTipService.ToolTip>
-                <Button.Transitions>
-                    <TransitionCollection>
-                        <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
-                    </TransitionCollection>
-                </Button.Transitions>
+            </elements:ExpanedHead.LeftButtonContent>
+            <elements:ExpanedHead.RightButtonContent>
                 <FontIcon Glyph="&#xE946;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
-            </Button>
-
-        </Grid>
+            </elements:ExpanedHead.RightButtonContent>
+        </elements:ExpanedHead>
 
 
         <!--Dialog-->

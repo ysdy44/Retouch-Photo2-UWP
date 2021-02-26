@@ -132,6 +132,7 @@
     <Compile Include="DPIComboBox.xaml.cs">
       <DependentUpon>DPIComboBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExpanedHead.xaml.cs" />
     <Compile Include="Pickers\CirclePicker.xaml.cs">
       <DependentUpon>CirclePicker.xaml</DependentUpon>
     </Compile>
@@ -252,6 +253,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ExpanedHead.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pickers\CirclePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -345,6 +350,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="%24SettingPages\PhoneLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

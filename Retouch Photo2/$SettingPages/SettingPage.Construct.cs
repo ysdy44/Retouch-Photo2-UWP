@@ -17,10 +17,10 @@ namespace Retouch_Photo2
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.TitleTextBlock.Text = resource.GetString("$SettingPage_Title");
+            this.Head.Title = resource.GetString("$SettingPage_Title");
             {
-                this.BackToolTip.Content = resource.GetString("$SettingPage_Back");
-                this.AboutToolTip.Content = resource.GetString("$SettingPage_About");
+                this.Head.LeftButtonToolTip = resource.GetString("$SettingPage_Back");
+                this.Head.RightButtonToolTip = resource.GetString("$SettingPage_About");
             }
 
             this.ThemeTextBlock.Text = resource.GetString("$SettingPage_Theme");
@@ -94,24 +94,24 @@ namespace Retouch_Photo2
 
             foreach (var item in from key
                 in this.SettingViewModel.KeyboardAccelerators
-                where key.Group == 1
-                select new ContentControl { Tag = key.ToString(), Content = key.Title, Style = getStyle() })
+                                 where key.Group == 1
+                                 select new ContentControl { Tag = key.ToString(), Content = key.Title, Style = getStyle() })
             {
                 this.Key01StackPanel.Children.Add(item);
             }
 
             foreach (var item in from key
                 in this.SettingViewModel.KeyboardAccelerators
-                where key.Group == 2
-                select new ContentControl { Tag = key.ToString(), Content = key.Title, Style = getStyle() })
+                                 where key.Group == 2
+                                 select new ContentControl { Tag = key.ToString(), Content = key.Title, Style = getStyle() })
             {
                 this.Key02StackPanel.Children.Add(item);
             }
 
             foreach (var item in from key
                 in this.SettingViewModel.KeyboardAccelerators
-                where key.Group == 3
-                select new ContentControl { Tag = key.ToString(), Content = key.Title, Style = getStyle() })
+                                 where key.Group == 3
+                                 select new ContentControl { Tag = key.ToString(), Content = key.Title, Style = getStyle() })
             {
                 this.Key03StackPanel.Children.Add(item);
             }
@@ -133,7 +133,7 @@ namespace Retouch_Photo2
             this.LightRadioButton.IsChecked = (theme == ElementTheme.Light);
             this.DarkRadioButton.IsChecked = (theme == ElementTheme.Dark);
             this.UseSystemRadioButton.IsChecked = (theme == ElementTheme.Default);
-            
+
             this.LightRadioButton.Click += async (s, e) => await this.SetTheme(ElementTheme.Light);
             this.DarkRadioButton.Click += async (s, e) => await this.SetTheme(ElementTheme.Dark);
             this.UseSystemRadioButton.Click += async (s, e) => await this.SetTheme(ElementTheme.Default);
@@ -157,7 +157,7 @@ namespace Retouch_Photo2
             this.PadButton.IsChecked = (isAdaptive == false && type == DeviceLayoutType.Pad);
             this.PCButton.IsChecked = (isAdaptive == false && type == DeviceLayoutType.PC);
             this.AdaptiveButton.IsChecked = (isAdaptive);
-                       
+
             this.PhoneButton.Click += async (s, e) => await this.SetType(DeviceLayoutType.Phone, false);
             this.PadButton.Click += async (s, e) => await this.SetType(DeviceLayoutType.Pad, false);
             this.PCButton.Click += async (s, e) => await this.SetType(DeviceLayoutType.PC, false);
@@ -245,7 +245,7 @@ namespace Retouch_Photo2
             radioButton.Content = new LayerControl(value, $"{type} {value}")
             {
                 IsEnabled = false
-            };  
+            };
             radioButton.Click += async (s, e) => await this.SetHeight(value);
         }
 
