@@ -65,42 +65,42 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1.2*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
 
 
         <!--Jpeg-->
-        <Button x:Name="JpegButton" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+        <Button x:Name="JpegButton" Grid.Column="0" Padding="4,0" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
             JPEG
         </Button>
 
         <!--Png-->
-        <Button x:Name="PngButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <Button x:Name="PngButton" Grid.Column="1" Padding="4,0" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
             PNG
         </Button>
 
         <!--Bmp-->
-        <Button x:Name="BmpButton" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <Button x:Name="BmpButton" Grid.Column="2" Padding="4,0" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
             BMP
         </Button>
 
         <!--Gif-->
-        <Button x:Name="GifButton" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <Button x:Name="GifButton" Grid.Column="3" Padding="4,0" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
             GIF
         </Button>
 
         <!--Tiff-->
-        <Button x:Name="TiffButton" Grid.Column="4" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <Button x:Name="TiffButton" Grid.Column="4" Padding="4,0" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
             TIFF
         </Button>
 
         <!--JpegXR-->
-        <Button x:Name="JpegXRButton" Grid.Column="5" Padding="2,0" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+        <Button x:Name="JpegXRButton" Grid.Column="5" Padding="4,0" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
             JPEG XR
         </Button>
         

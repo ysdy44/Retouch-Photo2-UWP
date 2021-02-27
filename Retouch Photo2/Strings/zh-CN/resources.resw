@@ -124,8 +124,6 @@
   <data name='$DrawPage_Gallery' xml:space='preserve'><value>图库</value></data>
   <data name='$DrawPage_WidthTip' xml:space='preserve'><value>切换布局宽度</value></data>
   <data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>文档 设定</value></data>
-  <data name='$DrawPage_SetupDialog_Layers' xml:space='preserve'><value>所有图层</value></data>
-  <data name='$DrawPage_SetupDialog_Resize' xml:space='preserve'><value>新尺寸</value></data>
   <data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>锚定到画布</value></data>
   <data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>导出到...</value></data>
   <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>质量</value></data>

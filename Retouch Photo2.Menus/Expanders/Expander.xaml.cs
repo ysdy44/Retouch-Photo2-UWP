@@ -64,11 +64,11 @@ namespace Retouch_Photo2.Menus
             {
                 if (this.State == ExpanderState.Hide) this.CalculatePostion(this.Button.Self, this.PlacementMode);
 
-                this.State = this._getButtonState(this.State);
+                this.State = this.GetButtonState(this.State);
             };
 
             this.CloseButton.Click += (s, e) => this.State = ExpanderState.Hide;
-            this.StateButton.Click += (s, e) => this.State = this._getState(this.State);
+            this.StateButton.Click += (s, e) => this.State = this.GetState(this.State);
 
             this.BackButton.Click += (s, e) => this.Back();
             this.ResetButton.Click += (s, e) => this.Reset();
@@ -76,7 +76,7 @@ namespace Retouch_Photo2.Menus
             /////////////////////////////////
             
             //TitleGrid
-            this.TitleGrid.DoubleTapped += (s, e) => this.State = this._getState(this.State);
+            this.TitleGrid.DoubleTapped += (s, e) => this.State = this.GetState(this.State);
 
             this.TitleGrid.ManipulationMode = ManipulationModes.All;
             this.TitleGrid.ManipulationStarted += (s, e) =>
@@ -106,7 +106,7 @@ namespace Retouch_Photo2.Menus
         }
         
 
-        private ExpanderState _getState(ExpanderState state)
+        private ExpanderState GetState(ExpanderState state)
         {
             switch (state)
             {
@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Menus
             }
             return ExpanderState.Overlay;
         }
-        private ExpanderState _getButtonState(ExpanderState state)
+        private ExpanderState GetButtonState(ExpanderState state)
         {
             switch (state)
             {

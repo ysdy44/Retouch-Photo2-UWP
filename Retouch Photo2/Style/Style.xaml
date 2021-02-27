@@ -64,7 +64,7 @@
         <Setter Property="Margin" Value="4,4"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontWeight" Value="Normal"/>
     </Style>
 
 
@@ -130,7 +130,7 @@
         <Setter Property="Height" Value="Auto" />
         <Setter Property="MinWidth" Value="70" />
         <Setter Property="MinHeight" Value="70" />
-        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
@@ -357,7 +357,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontWeight" Value="Normal" />
     </Style>
     <Style x:Key="AppIconLineCircleButton" TargetType="Button" BasedOn="{StaticResource AppIconLineCircleButtonBase}">
         <Setter Property="BorderBrush" Value="{ThemeResource AppText}" />
@@ -528,7 +528,7 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="6,0"/>
-        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -607,7 +607,6 @@
         <Setter Property="Height" Value="48"/>
         <Setter Property="Padding" Value="0,4,0,0"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

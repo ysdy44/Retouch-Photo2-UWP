@@ -41,9 +41,7 @@ namespace Retouch_Photo2
                 this.SetupSizePicker.WidthText = resource.GetString("$DrawPage_SetupDialog_SizePicker_Width");
                 this.SetupSizePicker.HeightText = resource.GetString("$DrawPage_SetupDialog_SizePicker_Height");
 
-                this.SetupLayersTextBlock.Text = resource.GetString("$DrawPage_SetupDialog_Layers");
-                this.SetupResizeButton.Content = resource.GetString("$DrawPage_SetupDialog_Resize");
-                this.SetupAnchorButton.Content = resource.GetString("$DrawPage_SetupDialog_Anchor");
+                this.SetupAnchorCheckBox.Content = resource.GetString("$DrawPage_SetupDialog_Anchor");
             }
 
             this.ExportDialog.Title = resource.GetString("$DrawPage_ExportDialog_Title");
@@ -141,36 +139,25 @@ namespace Retouch_Photo2
         //Setup
         private void ConstructSetupDialog()
         {
-            this.SetupResizeButton.IsEnabled = false;
-            this.SetupAnchorButton.IsEnabled = true;
-            this.SetupIndicatorControl.Mode = IndicatorMode.None;
+            this.SetupIndicatorControl.Mode = IndicatorMode.LeftTop;
 
-            this.SetupResizeButton.Click += (sender, args) =>
-            {
-                this.SetupResizeButton.IsEnabled = false;
-                this.SetupAnchorButton.IsEnabled = true;
-                this.SetupIndicatorControl.Mode = IndicatorMode.None;
-            };
-            this.SetupAnchorButton.Click += (sender, args) =>
-            {
-                this.SetupResizeButton.IsEnabled = true;
-                this.SetupAnchorButton.IsEnabled = false;
-                this.SetupIndicatorControl.Mode = IndicatorMode.LeftTop;
-            };
-
-
+            this.SetupAnchorCheckBox.Checked += (sender, args) => this.SetupIndicatorControl.Visibility = Visibility.Visible;
+            this.SetupAnchorCheckBox.Unchecked += (sender, args) => this.SetupIndicatorControl.Visibility = Visibility.Collapsed;
+      
             this.SetupDialog.SecondaryButtonClick += (sender, args) => this.SetupDialog.Hide();
             this.SetupDialog.PrimaryButtonClick += (_, __) =>
             {
                 this.SetupDialog.Hide();
 
                 BitmapSize size = this.SetupSizePicker.Size;
-                IndicatorMode mode = this.SetupIndicatorControl.Mode;
 
-                if (mode == IndicatorMode.None)
+                if (this.SetupAnchorCheckBox.IsChecked == true)
                     this.MethodViewModel.MethodSetup(size);
-                else
+                else if (this.SetupAnchorCheckBox.IsChecked == false)
+                {
+                    IndicatorMode mode = this.SetupIndicatorControl.Mode;
                     this.MethodViewModel.MethodSetup(size, mode);
+                }
             };
         }
         private void ShowSetupDialog()

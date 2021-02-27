@@ -124,8 +124,6 @@
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>Gallery</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>Switch Layout Widths</value></data>
 <data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>Document Setup</value></data>
-<data name='$DrawPage_SetupDialog_Layers' xml:space='preserve'><value>All layers</value></data>
-<data name='$DrawPage_SetupDialog_Resize' xml:space='preserve'><value>Resize</value></data>
 <data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>Anchor to Canvas</value></data>
 <data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>Export To...</value></data>
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>Quality</value></data>

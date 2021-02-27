@@ -76,7 +76,7 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
     </Style>
 

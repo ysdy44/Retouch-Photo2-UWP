@@ -72,7 +72,7 @@
         <Style x:Name="FilterItemStyle" TargetType="ListViewItem">
             <Setter Property="Margin" Value="2" />
             <Setter Property="Padding" Value="8,0" />
-            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="FontWeight" Value="Normal" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -87,7 +87,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <FontIcon Glyph="&#xE9E9;" FontFamily="Segoe MDL2 Assets"/>
-                <TextBlock Text="{x:Bind Name}" Grid.Column="1" FontWeight="Medium" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                <TextBlock Text="{x:Bind Name}" Grid.Column="1" FontWeight="Normal" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
             </Grid>
         </DataTemplate>
 

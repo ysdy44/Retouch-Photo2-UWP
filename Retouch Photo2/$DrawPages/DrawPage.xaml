@@ -286,17 +286,8 @@
             <StackPanel>
                 <elements:SizePicker x:Name="SetupSizePicker"/>
                 <ContentControl Height="6"/>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto" MinWidth="80"/>
-                        <ColumnDefinition Width="Auto" MinWidth="80"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="SetupLayersTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <Button x:Name="SetupResizeButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}"/>
-                    <Button x:Name="SetupAnchorButton" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonRightStyle}"/>
-                </Grid>
-                <transformers:IndicatorControl x:Name="SetupIndicatorControl" Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}"/>
+                <CheckBox x:Name="SetupAnchorCheckBox" />
+                <transformers:IndicatorControl x:Name="SetupIndicatorControl" Visibility="Collapsed" Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}"/>
             </StackPanel>
         </elements:Dialog>
 

@@ -199,29 +199,32 @@
 
                 <!--Head-->
                 <Grid x:Name="TitleGrid" Grid.Row="0" Background="Transparent" Padding="4,4,4,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                    <StackPanel x:Name="TitleStackPanel" Orientation="Horizontal" HorizontalAlignment="Left">
-                        <StackPanel.RenderTransform>
+                    <Button x:Name="BackButton" Opacity="0" Width="40" Style="{StaticResource ButtonStyle}">
+                        <FontIcon Glyph="&#xE830;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    </Button>
+                    <TextBlock x:Name="TitleTextBlock" Grid.Column="1" Margin="8,0" FontWeight="Medium" TextTrimming="CharacterEllipsis" FontSize="20" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
+                        <TextBlock.RenderTransform>
                             <TranslateTransform x:Name="TitleTransform" X="-40"/>
-                        </StackPanel.RenderTransform>
-                        <Button x:Name="BackButton" Opacity="0" Width="40" Style="{StaticResource ButtonStyle}">
-                            <FontIcon Glyph="&#xE830;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </Button>
-                        <TextBlock x:Name="TitleTextBlock" Margin="8,0" FontWeight="Medium" TextTrimming="CharacterEllipsis" FontSize="20" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                    </StackPanel>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="CloseButton" Width="40" Visibility="Collapsed" Style="{StaticResource ButtonStyle}">
-                            <FontIcon Glyph="&#xF78A;" FontSize="14" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                        </Button>
-                        <Button x:Name="StateButton" Width="40" Visibility="Collapsed" Style="{StaticResource ButtonStyle}">
-                            <FontIcon x:Name="StateIcon" Glyph="&#xE840;" FontWeight="Bold" FontSize="14" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                        </Button>
-                        <Button x:Name="ResetButton" Width="40" Visibility="Collapsed" Style="{StaticResource ButtonStyle}">
-                            <FontIcon Glyph="&#xE149;" FontSize="14" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                        </Button>
-                    </StackPanel>
-                    
+                    <Button x:Name="CloseButton" Grid.Column="2" Width="40" Visibility="Collapsed" Style="{StaticResource ButtonStyle}">
+                        <FontIcon Glyph="&#xF78A;" FontSize="14" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                    </Button>
+                    <Button x:Name="StateButton" Grid.Column="3" Width="40" Visibility="Collapsed" Style="{StaticResource ButtonStyle}">
+                        <FontIcon x:Name="StateIcon" Glyph="&#xE840;" FontWeight="Bold" FontSize="14" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                    </Button>
+                    <Button x:Name="ResetButton" Grid.Column="3" Width="40" Visibility="Collapsed" Style="{StaticResource ButtonStyle}">
+                        <FontIcon Glyph="&#xE149;" FontSize="14" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                    </Button>
+
                 </Grid>
 
 

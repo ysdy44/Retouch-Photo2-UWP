@@ -26,33 +26,36 @@
 
                 <VisualState x:Name="PointerOver">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle2" Storyboard.TargetProperty="Height">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="6" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle2" Storyboard.TargetProperty="Fill">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackFillPointerOver}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle1" Storyboard.TargetProperty="Height">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="6" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle1" Storyboard.TargetProperty="Fill">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackValueFillPointerOver}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
 
                 <VisualState x:Name="Pressed">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle2" Storyboard.TargetProperty="Height">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="6" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle2" Storyboard.TargetProperty="Fill">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackFillPressed}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle1" Storyboard.TargetProperty="Height">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="6" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle1" Storyboard.TargetProperty="Fill">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackValueFillPressed}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
 
                 <VisualState x:Name="Disabled">
                     <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle2" Storyboard.TargetProperty="Fill">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderHeaderForegroundDisabled}" />
+                        </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle1" Storyboard.TargetProperty="Fill">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Gray" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackValueFillDisabled}" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Thumb1" Storyboard.TargetProperty="Fill">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Gray" />
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderThumbBackgroundDisabled}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -60,8 +63,8 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Rectangle x:Name="Rectangle2" Grid.ColumnSpan="3" Width="Auto" Height="4" Fill="Gray"/>
-        <Rectangle x:Name="Rectangle1" Grid.Column="0" Width="Auto" Height="4" Fill="{ThemeResource SystemAccentColor}"/>
+        <Rectangle x:Name="Rectangle2" Grid.ColumnSpan="3" Width="Auto" Height="4" Fill="{ThemeResource SliderTrackFill}"/>
+        <Rectangle x:Name="Rectangle1" Grid.Column="0" Width="Auto" Height="4" Fill="{ThemeResource SliderTrackValueFill}"/>
 
         <Ellipse x:Name="Thumb2" Grid.Column="1" Width="20" Height="20" Fill="Black" Opacity="0.9"/>
         <Ellipse x:Name="Thumb1" Grid.Column="1" Width="18" Height="18" Fill="White"/>

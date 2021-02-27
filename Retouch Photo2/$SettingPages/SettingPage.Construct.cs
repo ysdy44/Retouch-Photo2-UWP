@@ -244,7 +244,7 @@ namespace Retouch_Photo2
             radioButton.IsChecked = groupValue == value;
             radioButton.Content = new LayerControl(value, $"{type} {value}")
             {
-                IsEnabled = false
+                IsHitTestVisible = false
             };
             radioButton.Click += async (s, e) => await this.SetHeight(value);
         }
@@ -258,7 +258,7 @@ namespace Retouch_Photo2
             Style getStyle()
             {
                 index++;
-                return (index % 2 == 0) ? this.MenuBorderStyle1 : this.MenuBorderStyle2;
+                return (index % 2 == 0) ? this.MenuBorderStyle2 : this.MenuBorderStyle1;
             }
 
 

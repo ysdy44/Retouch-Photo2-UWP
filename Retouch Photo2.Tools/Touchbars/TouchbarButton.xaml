@@ -8,8 +8,8 @@
     d:DesignHeight="50"
     d:DesignWidth="100"
     >
-    
-    <Border x:Name="RootBorder" Width="Auto" MinWidth="80" Background="{ThemeResource AppBackground}" Style="{StaticResource AppCircleBorderStyle}">
+
+    <Border x:Name="RootBorder" Width="Auto" MinWidth="80" Background="{ThemeResource AppFill}" Style="{StaticResource AppCircleBorderStyle}">
         
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
