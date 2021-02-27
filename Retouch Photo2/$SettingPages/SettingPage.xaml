@@ -274,6 +274,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+
+        <!--Extensions-->
+        <elements:ApplicationTitleBarExtension x:Name="ApplicationView" TitleBarColor="{ThemeResource AppForegroundColor}"/>
+
+
         <!--Developer-->
         <developerTools:AlignmentGrid Grid.Row="1" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
 
@@ -370,6 +375,10 @@
 
                         <!--Adaptive-->
                         <StackPanel Orientation="Horizontal">
+                            <StackPanel.ChildrenTransitions>
+                                <TransitionCollection>
+                                </TransitionCollection>
+                            </StackPanel.ChildrenTransitions>
                             <TextBlock x:Name="AdaptiveWidthTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                             <TextBlock x:Name="AdaptiveWidthCountTextBlock" Style="{StaticResource AppTextBlockStyle}">
                                 0

@@ -18,7 +18,7 @@ namespace Retouch_Photo2
 {
     public sealed partial class MainPage : Page
     {
-        private string DisplayName = "Retouch Photo2";
+        //private string DisplayName = "Retouch Photo2";
         private string Untitled = "Untitled";
         private string DocumentationLink = "https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README.md";
 
@@ -27,7 +27,7 @@ namespace Retouch_Photo2
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.DisplayName = resource.GetString("$DisplayName");
+            //this.DisplayName = resource.GetString("$DisplayName");
             this.Untitled = resource.GetString("$Untitled");
             this.DocumentationLink = resource.GetString("$DocumentationLink");
 

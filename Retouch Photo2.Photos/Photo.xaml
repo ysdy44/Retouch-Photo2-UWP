@@ -76,7 +76,10 @@
                Source="{x:Bind ImageFilePath}"/>
 
                     <!--Name-->
-                <Border Height="20" Padding="4,0" VerticalAlignment="Bottom" Background="{ThemeResource AppStroke}">
+                <Border Height="20" Padding="4,0" VerticalAlignment="Bottom" >
+                    <Border.Background>
+                        <SolidColorBrush Opacity="0.7" Color="{ThemeResource AppBackgroundColor}"/>
+                    </Border.Background>
                     <TextBlock x:Name="NameTextBlock" FontWeight="Bold" TextTrimming="CharacterEllipsis"
                                HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}"
                                Text="{x:Bind Name}"/>
@@ -84,6 +87,7 @@
 
                 <!--Button-->
                 <Button x:Name="FlyoutButton" Width="28" Height="28" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top"
+                        RequestedTheme="Dark"
                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{ThemeResource EllipsisButton}">
                     <FontIcon Glyph="&#xE946;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
                 </Button>

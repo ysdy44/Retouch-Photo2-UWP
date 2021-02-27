@@ -36,7 +36,7 @@
         <Setter Property="IsHitTestVisible" Value="False"/>
         <Setter Property="MinWidth" Value="42"/>
         <Setter Property="MinHeight" Value="24"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="White"/>
         <Setter Property="Background">
             <Setter.Value>
@@ -48,7 +48,7 @@
         </Setter>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontSize" Value="16"/>
-        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -80,8 +80,7 @@
     
     <!--Flyout-->
     <Style x:Key="AppFlyoutPresenterStyle" TargetType="FlyoutPresenter">
-        <Setter Property="Width" Value="200"/>
-        <Setter Property="MinHeight" Value="200"/>
+        <Setter Property="MinHeight" Value="100"/>
         <Setter Property="Padding" Value="4"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
@@ -105,6 +104,7 @@
                             VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                             AutomationProperties.AccessibilityView="Raw">
                                 <ContentPresenter Content="{TemplateBinding Content}"
+                                MinWidth="200"
                                 ContentTemplate="{TemplateBinding ContentTemplate}"
                                 ContentTransitions="{TemplateBinding ContentTransitions}"
                                 Margin="{TemplateBinding Padding}"

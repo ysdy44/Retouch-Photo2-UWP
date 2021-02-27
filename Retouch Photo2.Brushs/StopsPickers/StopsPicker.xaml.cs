@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Brushs
         //Background
         CanvasRenderTarget GrayAndWhiteBackground;
 
-        StopsSize Size = new StopsSize();
+        readonly StopsSize Size = new StopsSize();
         StopsManager Manager = new StopsManager();
 
 

@@ -9,7 +9,7 @@ namespace Retouch_Photo2.ViewModels
     public partial class ViewModel : INotifyPropertyChanged
     {
 
-        Clipboard Clipboard = new Clipboard();
+        readonly Clipboard Clipboard = new Clipboard();
 
         public bool ClipboardEnable
         {
@@ -24,14 +24,14 @@ namespace Retouch_Photo2.ViewModels
 
 
         //Edit
-        private Layerage _cloneLayerage(ILayer source)
-        {
-            ILayer clone = source.Clone();
-            Layerage layerageClone = clone.ToLayerage();
-            LayerBase.Instances.Add(clone);
-
-            return layerageClone;
-        }
+        //private Layerage CloneLayerageCore(ILayer source)
+        //{
+        //   ILayer clone = source.Clone();
+        //   Layerage layerageClone = clone.ToLayerage();
+        //   LayerBase.Instances.Add(clone);
+        //
+        //    return layerageClone;
+        // }
 
 
 
@@ -166,7 +166,7 @@ namespace Retouch_Photo2.ViewModels
         
 
         //Select
-        private void _setAllIsSelected(bool isSelected)
+        private void SelectAllCore(bool isSelected)
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
@@ -198,9 +198,9 @@ namespace Retouch_Photo2.ViewModels
             this.Invalidate();//Invalidate
         }
         
-        public void MethodSelectAll() => this._setAllIsSelected(true);
+        public void MethodSelectAll() => this.SelectAllCore(true);
 
-        public void MethodSelectDeselect() => this._setAllIsSelected(false);
+        public void MethodSelectDeselect() => this.SelectAllCore(false);
 
         public void MethodSelectInvert()
         {

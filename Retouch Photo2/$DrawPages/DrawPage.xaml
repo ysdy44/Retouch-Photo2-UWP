@@ -161,27 +161,27 @@
                         <Button.Flyout>
                             <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                 <StackPanel x:Name="OverflowStackPanel">
-                                    <Button x:Name="OverflowExportButton" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                    <Button x:Name="OverflowExportButton" Style="{StaticResource AppIconSelectedButton}">
                                         <Button.Tag>
                                             <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </Button.Tag>
                                     </Button>
-                                    <Button x:Name="OverflowUndoButton" IsEnabled="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                    <Button x:Name="OverflowUndoButton" IsEnabled="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}" Style="{StaticResource AppIconSelectedButton}">
                                         <Button.Tag>
                                             <FontIcon Glyph="&#xE10E;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </Button.Tag>
                                     </Button>
-                                    <!--<Button x:Name="OverflowRedoButton" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                    <!--<Button x:Name="OverflowRedoButton" Style="{StaticResource AppIconSelectedButton}">
                                        <Button.Tag>                                            
                                     <FontIcon Glyph="&#xE10D;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </Button.Tag>   
                                     </Button>-->
-                                    <Button x:Name="OverflowSetupButton" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                    <Button x:Name="OverflowSetupButton" Style="{StaticResource AppIconSelectedButton}">
                                         <Button.Tag>
                                             <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </Button.Tag>
                                     </Button>
-                                    <ToggleButton x:Name="OverflowSnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppIconRoundedToggleButtonStyle}">
+                                    <ToggleButton x:Name="OverflowSnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
                                         <ToggleButton.Tag>
                                             <PathIcon>
                                                 <PathIcon.Data>
@@ -190,17 +190,17 @@
                                             </PathIcon>
                                         </ToggleButton.Tag>
                                     </ToggleButton>
-                                    <ToggleButton x:Name="OverflowRulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Style="{StaticResource AppIconRoundedToggleButtonStyle}">
+                                    <ToggleButton x:Name="OverflowRulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
                                         <ToggleButton.Tag>
                                             <FontIcon Glyph="&#xECC6;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </ToggleButton.Tag>
                                     </ToggleButton>
-                                    <Button x:Name="OverflowFullScreenButton" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                    <Button x:Name="OverflowFullScreenButton" Style="{StaticResource AppIconSelectedButton}">
                                         <Button.Tag>
                                             <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </Button.Tag>
                                     </Button>
-                                    <ToggleButton x:Name="OverflowTipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=TwoWay}" Style="{StaticResource AppIconRoundedToggleButtonStyle}">
+                                    <ToggleButton x:Name="OverflowTipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
                                         <ToggleButton.Tag>
                                             <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </ToggleButton.Tag>
@@ -220,7 +220,7 @@
 
 
                     <!--Shadow-->
-                    <Border x:Name="ShadowRectangle" IsHitTestVisible="False" Width="32" Grid.Column="3" HorizontalAlignment="Left" >
+                    <Border x:Name="ShadowRectangle" IsHitTestVisible="False" Visibility="Collapsed" Width="32" Grid.Column="3" HorizontalAlignment="Left" >
                         <Border.Resources>
                             <ResourceDictionary>
                                 <!--Linear-->
