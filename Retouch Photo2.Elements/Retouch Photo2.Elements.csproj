@@ -137,7 +137,9 @@
     <Compile Include="DPIComboBox.xaml.cs">
       <DependentUpon>DPIComboBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ExpanedHead.xaml.cs" />
+    <Compile Include="ExpanedHead.xaml.cs">
+      <DependentUpon>ExpanedHead.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pickers\CirclePicker.xaml.cs">
       <DependentUpon>CirclePicker.xaml</DependentUpon>
     </Compile>

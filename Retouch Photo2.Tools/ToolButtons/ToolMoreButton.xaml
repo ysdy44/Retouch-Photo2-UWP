@@ -17,7 +17,7 @@
     <Button Height="42" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
         <Button.Flyout>
             <Flyout Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <StackPanel x:Name="StackPanel" Width="200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <StackPanel x:Name="StackPanel">
                     <!--Tools-->
                 </StackPanel>
             </Flyout>

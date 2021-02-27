@@ -481,66 +481,64 @@
 
         <!--Dialog-->
         <elements:Dialog x:Name="AboutDialog" Grid.RowSpan="2">
-            <elements:Dialog.CenterContent>
-                <StackPanel>
+            <StackPanel>
 
-                    <StackPanel.ChildrenTransitions>
-                        <TransitionCollection>
-                            <EntranceThemeTransition IsStaggeringEnabled="True"/>
-                        </TransitionCollection>
-                    </StackPanel.ChildrenTransitions>
+                <StackPanel.ChildrenTransitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition IsStaggeringEnabled="True"/>
+                    </TransitionCollection>
+                </StackPanel.ChildrenTransitions>
 
 
-                    <StackPanel.Children>
+                <StackPanel.Children>
 
-                        <Image Width="180" Height="180" Source="ms-appx:///Icons\AppRender.png"/>
+                    <Image Width="180" Height="180" Source="ms-appx:///Icons\AppRender.png"/>
 
-                        <Border Padding="12,0" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
-                            <TextBlock>                    
-                                1.1.9
-                            </TextBlock>
-                        </Border>
-
-                        <ContentControl Height="12"/>
-
-                        <TextBlock HorizontalAlignment="Center">                   
-                                Documentation
+                    <Border Padding="12,0" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
+                        <TextBlock>                    
+                            1.1.9
                         </TextBlock>
-                        <HyperlinkButton HorizontalAlignment="Center">
-                            <HyperlinkButton.NavigateUri>
-                                https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation
-                            </HyperlinkButton.NavigateUri>
+                    </Border>
+
+                    <ContentControl Height="12"/>
+
+                    <TextBlock HorizontalAlignment="Center">                   
+                        Documentation
+                    </TextBlock>
+                    <HyperlinkButton HorizontalAlignment="Center">
+                        <HyperlinkButton.NavigateUri>
                             https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation
-                        </HyperlinkButton>
+                        </HyperlinkButton.NavigateUri>
+                        https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation
+                    </HyperlinkButton>
 
-                        <ContentControl Height="12"/>
+                    <ContentControl Height="12"/>
 
-                        <TextBlock HorizontalAlignment="Center">
-                                Github
-                        </TextBlock>
-                        <HyperlinkButton HorizontalAlignment="Center">
-                            <HyperlinkButton.NavigateUri>
-                                https://github.com/ysdy44
-                            </HyperlinkButton.NavigateUri>
+                    <TextBlock HorizontalAlignment="Center">
+                        Github
+                    </TextBlock>
+                    <HyperlinkButton HorizontalAlignment="Center">
+                        <HyperlinkButton.NavigateUri>
                             https://github.com/ysdy44
-                        </HyperlinkButton>
+                        </HyperlinkButton.NavigateUri>
+                        https://github.com/ysdy44
+                    </HyperlinkButton>
 
-                        <ContentControl Height="12"/>
+                    <ContentControl Height="12"/>
 
-                        <TextBlock HorizontalAlignment="Center">               
-                                Feedback
-                        </TextBlock>
-                        <HyperlinkButton HorizontalAlignment="Center">
-                            <HyperlinkButton.NavigateUri>
-                                mailto:ysdy44@outlook.com
-                            </HyperlinkButton.NavigateUri>
-                            ysdy44@outlook.com
-                        </HyperlinkButton>
+                    <TextBlock HorizontalAlignment="Center">               
+                        Feedback
+                    </TextBlock>
+                    <HyperlinkButton HorizontalAlignment="Center">
+                        <HyperlinkButton.NavigateUri>
+                            mailto:ysdy44@outlook.com
+                        </HyperlinkButton.NavigateUri>
+                        ysdy44@outlook.com
+                    </HyperlinkButton>
 
-                    </StackPanel.Children>
+                </StackPanel.Children>
 
-                </StackPanel>
-            </elements:Dialog.CenterContent>
+            </StackPanel>
         </elements:Dialog>
 
     </Grid>

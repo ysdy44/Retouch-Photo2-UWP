@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Elements
 {
     //@BackRequested
-    public sealed partial class DialogWide : UserControl
+    public sealed partial class DialogWide : ContentControl
     {
 
         /// <summary> Show the dialog. </summary>
@@ -14,7 +14,6 @@ namespace Retouch_Photo2.Elements
         {
             this._vsIsShow = true;
             this.VisualState = this.VisualState;//State
-            this._PrimaryButton.Focus(FocusState.Pointer);
 
             BackRequestedExtension.DialogIsShow = true;
             BackRequestedExtension.Current.BackRequested += this.BackRequested;

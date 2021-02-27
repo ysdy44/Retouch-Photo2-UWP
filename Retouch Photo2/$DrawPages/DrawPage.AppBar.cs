@@ -13,12 +13,15 @@ namespace Retouch_Photo2
         private void ConstructAppBar()
         {
             //AppBarGrid
-            this.AppBarGridSizeChanged(this.AppBarGrid.ActualWidth);
             this.AppBarGrid.SizeChanged += (s, e) =>
             {
                 if (e.NewSize.IsEmpty) return;
                 if (e.NewSize == e.PreviousSize) return;
-                this.AppBarGridSizeChanged(e.NewSize.Width);
+
+                //Document
+                this.DocumentColumnDefinition.Width = new GridLength(e.NewSize.Width / 8);
+                //Overflow
+                this.AppBarOverflow(e.NewSize.Width);
             };
 
             //Right
@@ -71,14 +74,10 @@ namespace Retouch_Photo2
 
 
         /// <summary>
-        /// 
+        /// Overflow buttons by width.
         /// </summary>
-        /// <param name="width"></param>
-        private void AppBarGridSizeChanged(double width)
+        private void AppBarOverflow(double width)
         {
-            //Document
-            this.DocumentColumnDefinition.Width = new GridLength(width / 8);
-
             double overflowWidth = this.OverflowButton.ActualWidth;
             double rightWidth = this.MenuButtonsControl.ActualWidth;
             double leftWidth = width - overflowWidth - rightWidth;

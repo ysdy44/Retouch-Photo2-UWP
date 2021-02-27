@@ -50,8 +50,8 @@ namespace Retouch_Photo2
             this.Head.RightButtonClick += (s, e) => this.AboutDialog.Show();
             this.ScrollViewer.ViewChanged += (s, e) => this.Head.Move(this.ScrollViewer.VerticalOffset);
 
-            this.AboutDialog.CloseButton.Click += (s, e) => this.AboutDialog.Hide();
-            this.AboutDialog.PrimaryButton.Click += (s, e) => this.AboutDialog.Hide();
+            this.AboutDialog.SecondaryButtonClick += (s, e) => this.AboutDialog.Hide();
+            this.AboutDialog.PrimaryButtonClick += (s, e) => this.AboutDialog.Hide();
 
             this.ConstructTheme();
 

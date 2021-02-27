@@ -58,10 +58,10 @@ namespace Retouch_Photo2
 
         private void ConstructGallery()
         {
-            this.GalleryDialog.GridView.ItemsSource = Photo.Instances;
+            this.GalleryGridView.ItemsSource = Photo.Instances;
 
-            this.GalleryDialog.CloseButton.Click += (s, e) => this.GalleryDialog.Hide();
-            this.GalleryDialog.PrimaryButton.Click += async (s, e) =>
+            this.GalleryDialog.CloseButtonClick += (s, e) => this.GalleryDialog.Hide();
+            this.GalleryDialog.PrimaryButtonClick += async (s, e) =>
             {
                 //Files
                 IReadOnlyList<StorageFile> files = await FileUtil.PickMultipleImageFilesAsync(PickerLocationId.Desktop);

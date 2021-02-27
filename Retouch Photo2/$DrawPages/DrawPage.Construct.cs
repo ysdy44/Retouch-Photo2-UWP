@@ -35,8 +35,8 @@ namespace Retouch_Photo2
 
             this.SetupDialog.Title = resource.GetString("$DrawPage_SetupDialog_Title");
             {
-                this.SetupDialog.CloseButton.Content = resource.GetString("$DrawPage_SetupDialog_Close");
-                this.SetupDialog.PrimaryButton.Content = resource.GetString("$DrawPage_SetupDialog_Primary");
+                this.SetupDialog.SecondaryButtonText = resource.GetString("$DrawPage_SetupDialog_Close");
+                this.SetupDialog.PrimaryButtonText = resource.GetString("$DrawPage_SetupDialog_Primary");
 
                 this.SetupSizePicker.WidthText = resource.GetString("$DrawPage_SetupDialog_SizePicker_Width");
                 this.SetupSizePicker.HeightText = resource.GetString("$DrawPage_SetupDialog_SizePicker_Height");
@@ -48,8 +48,8 @@ namespace Retouch_Photo2
 
             this.ExportDialog.Title = resource.GetString("$DrawPage_ExportDialog_Title");
             {
-                this.ExportDialog.CloseButton.Content = resource.GetString("$DrawPage_ExportDialog_Close");
-                this.ExportDialog.PrimaryButton.Content = resource.GetString("$DrawPage_ExportDialog_Primary");
+                this.ExportDialog.SecondaryButtonText = resource.GetString("$DrawPage_ExportDialog_Close");
+                this.ExportDialog.PrimaryButtonText = resource.GetString("$DrawPage_ExportDialog_Primary");
 
                 this.ExportSizePicker.WidthText = resource.GetString("$DrawPage_ExportDialog_SizePicker_Width");
                 this.ExportSizePicker.HeightText = resource.GetString("$DrawPage_ExportDialog_SizePicker_Height");
@@ -60,15 +60,15 @@ namespace Retouch_Photo2
 
             this.RenameDialog.Title = resource.GetString("$DrawPage_RenameDialog_Title");
             {
-                this.RenameDialog.CloseButton.Content = resource.GetString("$DrawPage_RenameDialog_Close");
-                this.RenameDialog.PrimaryButton.Content = resource.GetString("$DrawPage_RenameDialog_Primary");
+                this.RenameDialog.SecondaryButtonText = resource.GetString("$DrawPage_RenameDialog_Close");
+                this.RenameDialog.PrimaryButtonText = resource.GetString("$DrawPage_RenameDialog_Primary");
 
                 this.RenameTextBox.PlaceholderText = resource.GetString("$DrawPage_RenameDialog_PlaceholderText");
             }
 
             this.GalleryDialog.Title = resource.GetString("$DrawPage_Gallery");
             {
-                this.GalleryDialog.PrimaryButton.Content = resource.GetString("$DrawPage_GalleryDialog_Primary");
+                this.GalleryDialog.PrimaryButtonText = resource.GetString("$DrawPage_GalleryDialog_Primary");
             }
 
             this.DrawLayout.GalleryToolTip.Content = resource.GetString("$DrawPage_Gallery");
@@ -108,10 +108,8 @@ namespace Retouch_Photo2
             this.ExportQualitySlider.ValueChangeCompleted += (s, value) => this.ExportQualityPicker.Value = (int)(value * 100.0f);
 
 
-            this.ExportDialog.CloseButton.Click += (sender, args) => this.ExportDialog.Hide();
-
-
-            this.ExportDialog.PrimaryButton.Click += async (_, __) =>
+            this.ExportDialog.SecondaryButtonClick += (sender, args) => this.ExportDialog.Hide();
+            this.ExportDialog.PrimaryButtonClick += async (_, __) =>
             {
                 this.ExportDialog.Hide();
 
@@ -161,9 +159,8 @@ namespace Retouch_Photo2
             };
 
 
-            this.SetupDialog.CloseButton.Click += (sender, args) => this.SetupDialog.Hide();
-
-            this.SetupDialog.PrimaryButton.Click += (_, __) =>
+            this.SetupDialog.SecondaryButtonClick += (sender, args) => this.SetupDialog.Hide();
+            this.SetupDialog.PrimaryButtonClick += (_, __) =>
             {
                 this.SetupDialog.Hide();
 
@@ -204,8 +201,8 @@ namespace Retouch_Photo2
                 textBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             }
 
-            this.RenameDialog.CloseButton.Click += (sender, args) => this.RenameDialog.Hide();
-            this.RenameDialog.PrimaryButton.Click += (_, __) =>
+            this.RenameDialog.SecondaryButtonClick += (sender, args) => this.RenameDialog.Hide();
+            this.RenameDialog.PrimaryButtonClick += (_, __) =>
             {
                 this.RenameDialog.Hide();
                 string name = this.RenameTextBox.Text;

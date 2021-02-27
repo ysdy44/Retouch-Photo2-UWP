@@ -3,27 +3,76 @@
 // Difficult:         
 // Only:              ★★★
 // Complete:      
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Markup;
 
 namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// Represents a dialog box that contains check boxes, hyperlinks, buttons, and other XAML content that you can customize.
     /// </summary>
-    public sealed partial class Dialog : UserControl
+    [TemplateVisualState(Name = nameof(DialogShowed), GroupName = nameof(DialogShowingStates))]
+    [TemplateVisualState(Name = nameof(DialogHidden), GroupName = nameof(DialogShowingStates))]
+    [TemplatePart(Name = nameof(LayoutRoot), Type = typeof(Border))]
+    [TemplatePart(Name = nameof(RootGrid), Type = typeof(Grid))]
+    [TemplatePart(Name = nameof(SecondaryButton), Type = typeof(Button))]
+    [TemplatePart(Name = nameof(PrimaryButton), Type = typeof(Button))]
+    [ContentProperty(Name = nameof(Content))]
+    public sealed partial class Dialog : ContentControl
     {
 
-        //@Content
-        /// <summary> <see cref = "Dialog" /> 's Content.</summary>
-        public object CenterContent { get => this.ContentPresenter.Content; set => this.ContentPresenter.Content = value; }
-        /// <summary> <see cref = "Dialog" /> 's Title.</summary>
-        public object Title { get => this.ContentControl.Content; set => this.ContentControl.Content = value; }
+        //@Delegate
+        /// <summary> Occurs when the clicking the s secondary button. </summary>
+        public event TypedEventHandler<object, RoutedEventArgs> SecondaryButtonClick;
+        /// <summary> Occurs when the clicking the s primary button. </summary>
+        public event TypedEventHandler<object, RoutedEventArgs> PrimaryButtonClick;
 
-        /// <summary> <see cref = "Dialog" /> 's CloseButton.</summary>
-        public Button CloseButton => this._CloseButton;
-        /// <summary> <see cref = "Dialog" /> 's PrimaryButton.</summary>
-        public Button PrimaryButton => this._PrimaryButton;
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "Dialog" />'s title. </summary>
+        public object Title
+        {
+            get => (object)base.GetValue(TitleProperty);
+            set => base.SetValue(TitleProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "Dialog.Title" /> dependency property. </summary>
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(object), typeof(Dialog), new PropertyMetadata(null));
+
+
+        /// <summary> Gets or sets <see cref = "Dialog.SecondaryButton" />'s text. </summary>
+        public string SecondaryButtonText
+        {
+            get => (string)base.GetValue(SecondaryButtonTextProperty);
+            set => base.SetValue(SecondaryButtonTextProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "Dialog.PrimaryButtonContent" /> dependency property. </summary>
+        public static readonly DependencyProperty SecondaryButtonTextProperty = DependencyProperty.Register(nameof(SecondaryButtonText), typeof(string), typeof(Dialog), new PropertyMetadata("Cancel"));
+
+
+        /// <summary> Gets or sets <see cref = "Dialog.PrimaryButton" />'s title. </summary>
+        public string PrimaryButtonText
+        {
+            get => (string)base.GetValue(PrimaryButtonTextProperty);
+            set => base.SetValue(PrimaryButtonTextProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "Dialog.PrimaryButtonText" /> dependency property. </summary>
+        public static readonly DependencyProperty PrimaryButtonTextProperty = DependencyProperty.Register(nameof(PrimaryButtonText), typeof(string), typeof(Dialog), new PropertyMetadata("OK"));
+
+
+        #endregion
+
+
+        VisualStateGroup DialogShowingStates;
+        VisualState DialogShowed;
+        VisualState DialogHidden;
+        Border LayoutRoot;
+        Border RootGrid;
+        Button SecondaryButton;
+        Button PrimaryButton;
 
 
         //@VisualState
@@ -33,7 +82,7 @@ namespace Retouch_Photo2.Elements
         /// </summary>
         public VisualState VisualState
         {
-            get => this._vsIsShow ? this.Show2 : this.Hide2;
+            get => this._vsIsShow ? this.DialogShowed : this.DialogHidden;
             set => VisualStateManager.GoToState(this, value.Name, true);
         }
 
@@ -44,10 +93,41 @@ namespace Retouch_Photo2.Elements
         /// </summary>
         public Dialog()
         {
-            this.InitializeComponent();
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.DefaultStyleKey = typeof(Dialog);
+        }
+
+        /// <inheritdoc/>
+        protected override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            this.DialogShowingStates = base.GetTemplateChild(nameof(DialogShowingStates)) as VisualStateGroup;
+            this.DialogShowed = base.GetTemplateChild(nameof(DialogShowed)) as VisualState;
+            this.DialogHidden = base.GetTemplateChild(nameof(DialogHidden)) as VisualState;
+            this.VisualState = this.VisualState;//State
+
+            this.LayoutRoot = base.GetTemplateChild(nameof(LayoutRoot)) as Border;
             this.LayoutRoot.Tapped += (s, e) => this.Hide();
+
+            this.RootGrid = base.GetTemplateChild(nameof(RootGrid)) as Border;
             this.RootGrid.Tapped += (s, e) => e.Handled = true;
+
+            this.SecondaryButton = base.GetTemplateChild(nameof(SecondaryButton)) as Button;
+            this.SecondaryButton.Click -= this.SecondaryButton_Click;
+            this.SecondaryButton.Click += this.SecondaryButton_Click;
+
+            this.PrimaryButton = base.GetTemplateChild(nameof(PrimaryButton)) as Button;
+            this.PrimaryButton.Click -= this.PrimaryButton_Click;
+            this.PrimaryButton.Click += this.PrimaryButton_Click;
+        }
+
+        private void SecondaryButton_Click(object sender, RoutedEventArgs e)
+        {            
+            this.SecondaryButtonClick?.Invoke(this, e);//Delegate
+        }
+        private void PrimaryButton_Click(object sender, RoutedEventArgs e)
+        {            
+            this.PrimaryButtonClick?.Invoke(this, e);//Delegate
         }
 
     }

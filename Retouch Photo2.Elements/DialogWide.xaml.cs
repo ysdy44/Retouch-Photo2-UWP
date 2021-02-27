@@ -3,27 +3,66 @@
 // Difficult:         
 // Only:              ★★★
 // Complete:      
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Markup;
 
 namespace Retouch_Photo2.Elements
 {
     /// <summary>
     /// Represents a dialog box that contains grid view that you can customize.
     /// </summary>
-    public sealed partial class DialogWide : UserControl
+    [TemplateVisualState(Name = nameof(DialogShowed), GroupName = nameof(DialogShowingStates))]
+    [TemplateVisualState(Name = nameof(DialogHidden), GroupName = nameof(DialogShowingStates))]
+    [TemplatePart(Name = nameof(LayoutRoot), Type = typeof(Border))]
+    [TemplatePart(Name = nameof(RootGrid), Type = typeof(Grid))]
+    [TemplatePart(Name = nameof(CloseButton), Type = typeof(Button))]
+    [TemplatePart(Name = nameof(PrimaryButton), Type = typeof(Button))]
+    [ContentProperty(Name = nameof(Content))]
+    public sealed partial class DialogWide : ContentControl
     {
 
-        //@Content
-        /// <summary> <see cref = "DialogWide" /> 's GridView.</summary>
-        public GridView GridView => this._GridView;
-        /// <summary> <see cref = "Dialog" /> 's Title.</summary>
-        public object Title { get => this.ContentControl.Content; set => this.ContentControl.Content = value; }
+        //@Delegate
+        /// <summary> Occurs when the clicking the s close button. </summary>
+        public event TypedEventHandler<object, RoutedEventArgs> CloseButtonClick;
+        /// <summary> Occurs when the clicking the s primary button. </summary>
+        public event TypedEventHandler<object, RoutedEventArgs> PrimaryButtonClick;
 
-        /// <summary> <see cref = "Dialog" /> 's CloseButton.</summary>
-        public Button CloseButton => this._CloseButton;
-        /// <summary> <see cref = "Dialog" /> 's PrimaryButton.</summary>
-        public Button PrimaryButton => this._PrimaryButton;
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "DialogWide" />'s title. </summary>
+        public object Title
+        {
+            get => (object)base.GetValue(TitleProperty);
+            set => base.SetValue(TitleProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "DialogWide.Title" /> dependency property. </summary>
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(object), typeof(DialogWide), new PropertyMetadata(null));
+
+
+        /// <summary> Gets or sets <see cref = "DialogWide.PrimaryButton" />'s title. </summary>
+        public string PrimaryButtonText
+        {
+            get => (string)base.GetValue(PrimaryButtonTextProperty);
+            set => base.SetValue(PrimaryButtonTextProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "DialogWide.PrimaryButtonText" /> dependency property. </summary>
+        public static readonly DependencyProperty PrimaryButtonTextProperty = DependencyProperty.Register(nameof(PrimaryButtonText), typeof(string), typeof(DialogWide), new PropertyMetadata("OK"));
+
+
+        #endregion
+
+
+        VisualStateGroup DialogShowingStates;
+        VisualState DialogShowed;
+        VisualState DialogHidden;
+        Border LayoutRoot;
+        Border RootGrid;
+        Button CloseButton;
+        Button PrimaryButton;
 
 
         //@VisualState
@@ -33,7 +72,7 @@ namespace Retouch_Photo2.Elements
         /// </summary>
         public VisualState VisualState
         {
-            get => this._vsIsShow ? this.Show2 : this.Hide2;
+            get => this._vsIsShow ? this.DialogShowed : this.DialogHidden;
             set => VisualStateManager.GoToState(this, value.Name, true);
         }
 
@@ -44,10 +83,41 @@ namespace Retouch_Photo2.Elements
         /// </summary>
         public DialogWide()
         {
-            this.InitializeComponent();
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.DefaultStyleKey = typeof(DialogWide);
+        }
+
+        /// <inheritdoc/>
+        protected override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            this.DialogShowingStates = base.GetTemplateChild(nameof(DialogShowingStates)) as VisualStateGroup;
+            this.DialogShowed = base.GetTemplateChild(nameof(DialogShowed)) as VisualState;
+            this.DialogHidden = base.GetTemplateChild(nameof(DialogHidden)) as VisualState;
+            this.VisualState = this.VisualState;//State
+
+            this.LayoutRoot = base.GetTemplateChild(nameof(LayoutRoot)) as Border;
             this.LayoutRoot.Tapped += (s, e) => this.Hide();
+
+            this.RootGrid = base.GetTemplateChild(nameof(RootGrid)) as Border;
             this.RootGrid.Tapped += (s, e) => e.Handled = true;
+
+            this.CloseButton = base.GetTemplateChild(nameof(CloseButton)) as Button;
+            this.CloseButton.Click -= this.CloseButton_Click;
+            this.CloseButton.Click += this.CloseButton_Click;
+
+            this.PrimaryButton = base.GetTemplateChild(nameof(PrimaryButton)) as Button;
+            this.PrimaryButton.Click -= this.PrimaryButton_Click;
+            this.PrimaryButton.Click += this.PrimaryButton_Click;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.CloseButtonClick?.Invoke(this, e);//Delegate
+        }
+        private void PrimaryButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.PrimaryButtonClick?.Invoke(this, e);//Delegate
         }
 
     }

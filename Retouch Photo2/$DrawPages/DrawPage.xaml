@@ -181,7 +181,7 @@
                                             <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </Button.Tag>
                                     </Button>
-                                    <ToggleButton x:Name="OverflowSnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                    <ToggleButton x:Name="OverflowSnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppIconRoundedToggleButtonStyle}">
                                         <ToggleButton.Tag>
                                             <PathIcon>
                                                 <PathIcon.Data>
@@ -190,7 +190,7 @@
                                             </PathIcon>
                                         </ToggleButton.Tag>
                                     </ToggleButton>
-                                    <ToggleButton x:Name="OverflowRulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                    <ToggleButton x:Name="OverflowRulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Style="{StaticResource AppIconRoundedToggleButtonStyle}">
                                         <ToggleButton.Tag>
                                             <FontIcon Glyph="&#xECC6;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </ToggleButton.Tag>
@@ -200,7 +200,7 @@
                                             <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </Button.Tag>
                                     </Button>
-                                    <ToggleButton x:Name="OverflowTipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=TwoWay}" Style="{StaticResource AppIconRoundedButtonStyle}">
+                                    <ToggleButton x:Name="OverflowTipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=TwoWay}" Style="{StaticResource AppIconRoundedToggleButtonStyle}">
                                         <ToggleButton.Tag>
                                             <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </ToggleButton.Tag>
@@ -208,7 +208,7 @@
                                 </StackPanel>
                             </Flyout>
                         </Button.Flyout>
-                        <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                     </Button>
 
 
@@ -283,55 +283,52 @@
 
         <!--Dialog-->
         <elements:Dialog x:Name="SetupDialog">
-            <elements:Dialog.CenterContent>
-                <StackPanel>
-                    <elements:SizePicker x:Name="SetupSizePicker"/>
-                    <ContentControl Height="6"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto" MinWidth="80"/>
-                            <ColumnDefinition Width="Auto" MinWidth="80"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="SetupLayersTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                        <Button x:Name="SetupResizeButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}"/>
-                        <Button x:Name="SetupAnchorButton" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonRightStyle}"/>
-                    </Grid>
-                    <transformers:IndicatorControl x:Name="SetupIndicatorControl" Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}"/>
-                </StackPanel>
-            </elements:Dialog.CenterContent>
+            <StackPanel>
+                <elements:SizePicker x:Name="SetupSizePicker"/>
+                <ContentControl Height="6"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto" MinWidth="80"/>
+                        <ColumnDefinition Width="Auto" MinWidth="80"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="SetupLayersTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Button x:Name="SetupResizeButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}"/>
+                    <Button x:Name="SetupAnchorButton" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonRightStyle}"/>
+                </Grid>
+                <transformers:IndicatorControl x:Name="SetupIndicatorControl" Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}"/>
+            </StackPanel>
         </elements:Dialog>
 
         <elements:Dialog x:Name="ExportDialog">
-            <elements:Dialog.CenterContent>
-                <StackPanel>
-                    <elements:SizePicker x:Name="ExportSizePicker"/>
-                    <ContentControl Height="6"/>
-                    <TextBlock Text="DPI" Style="{StaticResource AppTextBlockStyle}"/>
-                    <elements:DPIComboBox x:Name="DPIComboBox"/>
-                    <ContentControl Height="6"/>
-                    <TextBlock x:Name="ExportFileFormatTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <elements:FileFormatComboBox x:Name="FileFormatComboBox"/>
-                    <ContentControl Height="6"/>
-                    <RelativePanel>
-                        <TextBlock x:Name="ExportQualityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                        <hsvColorPickers:NumberPicker x:Name="ExportQualityPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+            <StackPanel>
+                <elements:SizePicker x:Name="ExportSizePicker"/>
+                <ContentControl Height="6"/>
+                <TextBlock Text="DPI" Style="{StaticResource AppTextBlockStyle}"/>
+                <elements:DPIComboBox x:Name="DPIComboBox"/>
+                <ContentControl Height="6"/>
+                <TextBlock x:Name="ExportFileFormatTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <elements:FileFormatComboBox x:Name="FileFormatComboBox"/>
+                <ContentControl Height="6"/>
+                <RelativePanel>
+                    <TextBlock x:Name="ExportQualityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <hsvColorPickers:NumberPicker x:Name="ExportQualityPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                            RelativePanel.AlignRightWithPanel="True"/>
-                    </RelativePanel>
-                    <elements:SliderPicker x:Name="ExportQualitySlider" />
-                </StackPanel>
-            </elements:Dialog.CenterContent>
+                </RelativePanel>
+                <elements:SliderPicker x:Name="ExportQualitySlider" />
+            </StackPanel>
         </elements:Dialog>
 
         <elements:Dialog x:Name="RenameDialog">
-            <elements:Dialog.CenterContent>
-                <TextBox x:Name="RenameTextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0" Background="{ThemeResource AppBackground}"/>
-            </elements:Dialog.CenterContent>
+            <TextBox x:Name="RenameTextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0" Background="{ThemeResource AppBackground}"/>
         </elements:Dialog>
 
 
         <!--Gallery-->
-        <elements:DialogWide x:Name="GalleryDialog" Title="Gallery"/>
+        <elements:DialogWide x:Name="GalleryDialog">
+            <GridView x:Name="GalleryGridView" Grid.Row="2" Padding="14,0"
+                           IsItemClickEnabled="False" ReorderMode="Disabled" SelectionMode="None"/>
+        </elements:DialogWide>
         <photos:PhotoBillboardCanvas x:Name="BillboardCanvas"/>
 
 

@@ -235,18 +235,14 @@
 
         <!--Dialog-->
         <elements:Dialog x:Name="RenameDialog" Grid.Row="1" Grid.RowSpan="2">
-            <elements:Dialog.CenterContent>
-                <StackPanel>
-                    <ContentControl Height="2"/>
-                    <TextBox x:Name="TextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0"/>
-                    <TextBlock x:Name="TextBoxTipTextBlock" Visibility="Collapsed" FontSize="14" Foreground="{ThemeResource AppText}"/>
-                </StackPanel>
-            </elements:Dialog.CenterContent>
+            <StackPanel>
+                <ContentControl Height="2"/>
+                <TextBox x:Name="TextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0"/>
+                <TextBlock x:Name="TextBoxTipTextBlock" Visibility="Collapsed" FontSize="14" Foreground="{ThemeResource AppText}"/>
+            </StackPanel>
         </elements:Dialog>
         <elements:Dialog x:Name="AddDialog" Grid.Row="1" Grid.RowSpan="2">
-            <elements:Dialog.CenterContent>
-                <elements:SizePicker x:Name="SizePicker"/>
-            </elements:Dialog.CenterContent>
+            <elements:SizePicker x:Name="SizePicker"/>
         </elements:Dialog>
 
 
