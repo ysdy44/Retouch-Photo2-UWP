@@ -22,15 +22,14 @@ namespace Retouch_Photo2
         /// <summary>
         /// Load <see cref="Project"/> file from temporary folder.
         /// </summary>
-        /// <param name="name"> The project name. </param>
         /// <returns> The product <see cref="Project"/>. </returns>
-        public static Project LoadProjectFile(string name)
+        public static Project LoadProjectFile()
         {
             //Create an XDocument object.
             string path = $"{ApplicationData.Current.TemporaryFolder.Path}\\Project.xml";
             XDocument document = XDocument.Load(path);
 
-            Project project = Retouch_Photo2.ViewModels.XML.LoadProject(name, document);
+            Project project = Retouch_Photo2.ViewModels.XML.LoadProject(document);
             return project;
         }
 

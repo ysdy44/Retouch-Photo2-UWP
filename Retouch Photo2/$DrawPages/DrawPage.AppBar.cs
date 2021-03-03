@@ -111,7 +111,6 @@ namespace Retouch_Photo2
             this.LoadingControl.IsActive = true;
 
             await this.Save();
-            this.ViewModel.IsUpdateThumbnailByName = true;
 
             await this.Exit();
             this.DrawLayout.IsFullScreen = true;
@@ -129,8 +128,6 @@ namespace Retouch_Photo2
         {
             this.LoadingControl.State = LoadingState.Saving;
             this.LoadingControl.IsActive = true;
-
-            this.ViewModel.IsUpdateThumbnailByName = false;
 
             await this.Exit();
             this.DrawLayout.IsFullScreen = true;

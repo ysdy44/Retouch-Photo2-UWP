@@ -24,7 +24,6 @@ namespace Retouch_Photo2
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
@@ -110,18 +109,6 @@ namespace Retouch_Photo2
             this.ApplicationView.Color = this.ApplicationView.Color;
 
             await this._lockOnNavigatedTo();
-
-            // Occurs occuse after <see  cref="DrawPage.Frame.GoBack()"/>;
-            if (this.ViewModel.IsUpdateThumbnailByName)
-            {
-                this.ViewModel.IsUpdateThumbnailByName = false;
-
-                IProjectViewItem item = this.MainLayout.Items.FirstOrDefault(i => i.Name == this.ViewModel.Name);
-                if (item != null)
-                {
-                    item.RefreshImageSource();
-                }
-            }
         }
         /// <summary> The current page no longer becomes an active page. </summary>
         protected override void OnNavigatedFrom(NavigationEventArgs e) { }

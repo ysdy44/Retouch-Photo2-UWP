@@ -26,9 +26,6 @@ namespace Retouch_Photo2.ViewModels
         {
             if (project == null) return;
 
-            //Name
-            this.Name = project.Name;
-
             //Width Height
             this.CanvasTransformer.Width = project.Width;
             this.CanvasTransformer.Height = project.Height;

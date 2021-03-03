@@ -103,7 +103,7 @@ namespace Retouch_Photo2
             foreach (var item in from key
                 in this.SettingViewModel.KeyboardAccelerators
                                  where key.Group == 1
-                                 select new ContentControl { Tag = key.ToString(), Content = key.Title, Style = getStyle() })
+                                 select new ContentControl { Tag = key.ToString(), Content = resource.GetString(key.TitleResource), Style = getStyle() })
             {
                 this.Key01StackPanel.Children.Add(item);
             }
@@ -111,7 +111,7 @@ namespace Retouch_Photo2
             foreach (var item in from key
                 in this.SettingViewModel.KeyboardAccelerators
                                  where key.Group == 2
-                                 select new ContentControl { Tag = key.ToString(), Content = key.Title, Style = getStyle() })
+                                 select new ContentControl { Tag = key.ToString(), Content = resource.GetString(key.TitleResource), Style = getStyle() })
             {
                 this.Key02StackPanel.Children.Add(item);
             }
@@ -119,7 +119,7 @@ namespace Retouch_Photo2
             foreach (var item in from key
                 in this.SettingViewModel.KeyboardAccelerators
                                  where key.Group == 3
-                                 select new ContentControl { Tag = key.ToString(), Content = key.Title, Style = getStyle() })
+                                 select new ContentControl { Tag = key.ToString(), Content = resource.GetString(key.TitleResource), Style = getStyle() })
             {
                 this.Key03StackPanel.Children.Add(item);
             }

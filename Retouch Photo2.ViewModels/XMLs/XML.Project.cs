@@ -47,16 +47,12 @@ namespace Retouch_Photo2.ViewModels
         ///  Loads a <see cref="Project"/> from an XDocument.
         /// </summary>
         /// <param name="document"> The source XDocument. </param>
-        /// <param name="name"> The name. </param>
         /// <returns> The loaded <see cref="Project"/>. </returns>
-        public static Project LoadProject(string name, XDocument document)
+        public static Project LoadProject(XDocument document)
         {
             if (document.Element("Root") is XElement root)
             {
-                Project project = new Project
-                {
-                    Name = name,
-                };
+                Project project = new Project();
 
                 if (root.Element("Layerages") is XElement layerages)
                 {

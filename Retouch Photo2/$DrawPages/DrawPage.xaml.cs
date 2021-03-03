@@ -100,7 +100,6 @@ namespace Retouch_Photo2
         {
             //Extension
             this.ApplicationView.Color = this.ApplicationView.Color;
-            this.ApplicationView.Title = this.ViewModel.Name;
 
             //Key
             this.SettingViewModel.RegisteKey();

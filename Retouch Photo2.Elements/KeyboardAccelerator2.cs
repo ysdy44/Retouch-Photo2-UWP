@@ -31,10 +31,10 @@ namespace Retouch_Photo2.Elements
     {
 
         /// <summary>
-        /// Gets or sets the title.
+        /// Gets or sets the title resource.
         /// </summary>
-        public string Title { get; set; }
-
+        public string TitleResource { get; set; }
+        
         /// <summary>
         /// Gets or sets the group value.
         /// </summary>

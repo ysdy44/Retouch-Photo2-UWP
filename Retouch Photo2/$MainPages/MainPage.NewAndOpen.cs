@@ -30,20 +30,17 @@ namespace Retouch_Photo2
             this.LoadingControl.IsActive = true;
 
             //Project
-            {
-                string untitled = this.Untitled;
-                string name = this.MainLayout.UntitledRenameByRecursive(untitled);
-                int width = (int)pixels.Width;
-                int height = (int)pixels.Height;
+            string untitled = this.Untitled;
+            string name = this.MainLayout.UntitledRenameByRecursive(untitled);
+            int width = (int)pixels.Width;
+            int height = (int)pixels.Height;
 
-                Project project = new Project
-                {
-                    Name = name,
-                    Width = width,
-                    Height = height,
-                };
-                this.ViewModel.LoadFromProject(project);
-            }
+            Project project = new Project
+            {
+                Width = width,
+                Height = height,
+            };
+            this.ViewModel.LoadFromProject(project);
 
 
             //Transition
@@ -51,6 +48,7 @@ namespace Retouch_Photo2
 
             this.LoadingControl.IsActive = false;
             this.LoadingControl.State = LoadingState.None;
+            this.ApplicationView.Title = name;
             this.Frame.Navigate(typeof(DrawPage), sourceRect);//Navigate
         }
 
@@ -112,7 +110,7 @@ namespace Retouch_Photo2
             }
 
             //Load project file. 
-            Project project = XML.LoadProjectFile(name);
+            Project project = XML.LoadProjectFile();
             if (project == null)
             {
                 this.LoadingControl.IsActive = false;
@@ -131,6 +129,7 @@ namespace Retouch_Photo2
 
             this.LoadingControl.State = LoadingState.None;
             this.LoadingControl.IsActive = false;
+            this.ApplicationView.Title = name;
             this.Frame.Navigate(typeof(DrawPage), sourceRect);//Navigate   
         }
 
@@ -191,7 +190,6 @@ namespace Retouch_Photo2
             {
                 Project project = new Project
                 {
-                    Name = name,
                     Width = width,
                     Height = height,
                     Layerages = new List<Layerage>
@@ -208,6 +206,7 @@ namespace Retouch_Photo2
 
             this.LoadingControl.State = LoadingState.None;
             this.LoadingControl.IsActive = false;
+            this.ApplicationView.Title = name;
             this.Frame.Navigate(typeof(DrawPage), sourceRect);//Navigate
         }
 

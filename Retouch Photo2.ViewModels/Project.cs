@@ -13,9 +13,6 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public class Project
     {
-        /// <summary> Gets or sets the name. </summary>
-        public string Name { set; get; }
-
         /// <summary> Gets or sets the width. </summary>
         public int Width { set; get; }
 

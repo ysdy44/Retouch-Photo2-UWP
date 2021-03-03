@@ -41,324 +41,288 @@ namespace Retouch_Photo2
     public sealed partial class App : Application
     {
 
-        static ViewModel viewModel = null;
-        static SettingViewModel settingViewModel = null;
-        static TipViewModel tipViewModel = null;
-
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.ViewModel" />. </summary>
-        public static ViewModel ViewModel
-        {
-            get
-            {
-                if (App.viewModel==null)
-                {
-                    App.viewModel = new ViewModel();
-                }
-                return App.viewModel;
-            }
-        }
+        public static ViewModel ViewModel { get; } = new ViewModel();
 
         /// <summary> Retouch_Photo2's the only Selection<see cref = "ViewModels.ViewModel" />. </summary>
-        public static ViewModel SelectionViewModel => App.viewModel;
+        public static ViewModel SelectionViewModel => App.ViewModel;
 
         /// <summary> Retouch_Photo2's the only Method<see cref = "ViewModels.ViewModel" />. </summary>
-        public static ViewModel MethodViewModel => App.viewModel;
+        public static ViewModel MethodViewModel => App.ViewModel;
 
         /// <summary> Retouch_Photo2's the only Setting<see cref = "ViewModels.ViewModel" />. </summary>
-        public static SettingViewModel SettingViewModel
+        public static SettingViewModel SettingViewModel = new SettingViewModel
         {
-            get
-            {
-                if (App.settingViewModel == null)
+            KeyboardAccelerators = new List<KeyboardAccelerator2>
+            {                         
+                new KeyboardAccelerator2
+                {                           
+                    TitleResource = ("$SettingPage_Key_Move_Left"),                              
+                    Group = 1,                               
+                    Key = VirtualKey.Left,                              
+                    Invoked = () =>                              
+                    {                             
+                        App.ViewModel.CanvasTransformer.Position += new Vector2(50, 0);                                
+                        App.ViewModel.CanvasTransformer.ReloadMatrix();                                
+                        App.ViewModel.Invalidate();//Invalidate                          
+                    }
+                },
+                new KeyboardAccelerator2
                 {
-                    ResourceLoader resource = ResourceLoader.GetForCurrentView();
-                    App.settingViewModel = new SettingViewModel
+                    TitleResource = ("$SettingPage_Key_Move_Top"),
+                    Group = 1,
+                    Key = VirtualKey.Up,
+                    Invoked = () =>
                     {
-                        KeyboardAccelerators = new List<KeyboardAccelerator2>
-                        {
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("$SettingPage_Key_Move_Left"),
-                                Group = 1,
-                                Key = VirtualKey.Left,
-                                Invoked = () =>
-                                {
-                                    App.ViewModel.CanvasTransformer.Position += new Vector2(50, 0);
-                                    App.ViewModel.CanvasTransformer.ReloadMatrix();
-                                    App.ViewModel.Invalidate();//Invalidate
-                            }
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("$SettingPage_Key_Move_Top"),
-                                Group = 1,
-                                Key = VirtualKey.Up,
-                                Invoked = () =>
-                                {
-                                    App.ViewModel.CanvasTransformer.Position += new Vector2(0, 50);
-                                    App.ViewModel.CanvasTransformer.ReloadMatrix();
-                                    App.ViewModel.Invalidate();//Invalidate
-                            }
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("$SettingPage_Key_Move_Right"),
-                                Group = 1,
-                                Key = VirtualKey.Right,
-                                Invoked = () =>
-                                {
-                                    App.ViewModel.CanvasTransformer.Position -= new Vector2(50, 0);
-                                    App.ViewModel.CanvasTransformer.ReloadMatrix();
-                                    App.ViewModel.Invalidate();//Invalidate
-                            }
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("$SettingPage_Key_Move_Bottom"),
-                                Group = 1,
-                                Key = VirtualKey.Down,
-                                Invoked = () =>
-                                {
-                                    App.ViewModel.CanvasTransformer.Position -= new Vector2(50, 0);
-                                    App.ViewModel.CanvasTransformer.ReloadMatrix();
-                                    App.ViewModel.Invalidate();//Invalidate
-                            }
-                            },
+                        App.ViewModel.CanvasTransformer.Position += new Vector2(0, 50);
+                        App.ViewModel.CanvasTransformer.ReloadMatrix();
+                        App.ViewModel.Invalidate();//Invalidate
+                    }                
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("$SettingPage_Key_Move_Right"),
+                    Group = 1,
+                    Key = VirtualKey.Right,
+                    Invoked = () =>
+                    {
+                        App.ViewModel.CanvasTransformer.Position -= new Vector2(50, 0);
+                        App.ViewModel.CanvasTransformer.ReloadMatrix();
+                        App.ViewModel.Invalidate();//Invalidate
+                    }
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("$SettingPage_Key_Move_Bottom"),
+                    Group = 1,
+                    Key = VirtualKey.Down,
+                    Invoked = () =>
+                    {                               
+                        App.ViewModel.CanvasTransformer.Position -= new Vector2(50, 0);
+                        App.ViewModel.CanvasTransformer.ReloadMatrix();
+                        App.ViewModel.Invalidate();//Invalidate
+                    }
+                },
 
 
-                            new KeyboardAccelerator2
-                            {                  
-                                Title = resource.GetString("Edits_Edit_Cut"),
-                                Group = 2,
-                                Modifiers = VirtualKeyModifiers2.Control,
-                                Key = VirtualKey.X,
-                                Invoked = App.MethodViewModel.MethodEditCut,
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("Edits_Edit_Duplicate"),
-                                Group = 2,
-                                Modifiers = VirtualKeyModifiers2.Control,
-                                Key = VirtualKey.J,
-                                Invoked = App.MethodViewModel.MethodEditDuplicate,
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("Edits_Edit_Copy"),
-                                Group = 2,
-                                Modifiers = VirtualKeyModifiers2.Control,
-                                Key = VirtualKey.C,
-                                Invoked = App.MethodViewModel.MethodEditCopy,
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("Edits_Edit_Paste"),
-                                Group = 2,
-                                Modifiers = VirtualKeyModifiers2.Control,
-                                Key = VirtualKey.V,
-                                Invoked = App.MethodViewModel.MethodEditPaste,
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("Edits_Edit_Clear"),
-                                Group = 2,
-                                Key = VirtualKey.Delete,
-                                Invoked = App.MethodViewModel.MethodEditClear,
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("Edits_Select_All"),
-                                Group = 2,
-                                Modifiers = VirtualKeyModifiers2.Control,
-                                Key = VirtualKey.A,
-                                Invoked = App.MethodViewModel.MethodSelectAll,
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("Edits_Select_Deselect"),
-                                Group = 2,
-                                Modifiers = VirtualKeyModifiers2.Control,
-                                Key = VirtualKey.D,
-                                Invoked = App.MethodViewModel.MethodSelectDeselect,
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("Edits_Select_Invert"),
-                                Group = 2,
-                                Modifiers = VirtualKeyModifiers2.Control,
-                                Key = VirtualKey.I,
-                                Invoked = App.MethodViewModel.MethodSelectInvert,
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("Edits_Group_Group"),
-                                Group = 2,
-                                Modifiers = VirtualKeyModifiers2.Control,
-                                Key = VirtualKey.G,
-                                Invoked = App.MethodViewModel.MethodGroupGroup,
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("Edits_Group_Ungroup"),
-                                Group = 2,
-                                Modifiers = VirtualKeyModifiers2.Control,
-                                Key = VirtualKey.U,
-                                Invoked = App.MethodViewModel.MethodGroupUngroup,
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("Edits_Group_Release"),
-                                Group = 2,
-                                Modifiers = VirtualKeyModifiers2.Control,
-                                Key = VirtualKey.R,
-                                Invoked = App.MethodViewModel.MethodGroupRelease,
-                            },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("Edits_Edit_Cut"),
+                    Group = 2,
+                    Modifiers = VirtualKeyModifiers2.Control,
+                    Key = VirtualKey.X,
+                    Invoked = App.MethodViewModel.MethodEditCut,
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("Edits_Edit_Duplicate"),
+                    Group = 2,
+                    Modifiers = VirtualKeyModifiers2.Control,
+                    Key = VirtualKey.J,
+                    Invoked = App.MethodViewModel.MethodEditDuplicate,
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("Edits_Edit_Copy"),
+                    Group = 2,
+                    Modifiers = VirtualKeyModifiers2.Control,
+                    Key = VirtualKey.C,
+                    Invoked = App.MethodViewModel.MethodEditCopy,
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("Edits_Edit_Paste"),
+                    Group = 2,
+                    Modifiers = VirtualKeyModifiers2.Control,
+                    Key = VirtualKey.V,
+                    Invoked = App.MethodViewModel.MethodEditPaste,
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("Edits_Edit_Clear"),
+                    Group = 2,
+                    Key = VirtualKey.Delete,
+                    Invoked = App.MethodViewModel.MethodEditClear,
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("Edits_Select_All"),
+                    Group = 2,
+                    Modifiers = VirtualKeyModifiers2.Control,
+                    Key = VirtualKey.A,
+                    Invoked = App.MethodViewModel.MethodSelectAll,
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("Edits_Select_Deselect"),
+                    Group = 2,
+                    Modifiers = VirtualKeyModifiers2.Control,
+                    Key = VirtualKey.D,
+                    Invoked = App.MethodViewModel.MethodSelectDeselect,
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("Edits_Select_Invert"),
+                    Group = 2,
+                    Modifiers = VirtualKeyModifiers2.Control,
+                    Key = VirtualKey.I,
+                    Invoked = App.MethodViewModel.MethodSelectInvert,
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("Edits_Group_Group"),
+                    Group = 2,
+                    Modifiers = VirtualKeyModifiers2.Control,
+                    Key = VirtualKey.G,
+                    Invoked = App.MethodViewModel.MethodGroupGroup,
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("Edits_Group_Ungroup"),
+                    Group = 2,
+                    Modifiers = VirtualKeyModifiers2.Control,
+                    Key = VirtualKey.U,
+                    Invoked = App.MethodViewModel.MethodGroupUngroup,
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("Edits_Group_Release"),
+                    Group = 2,
+                    Modifiers = VirtualKeyModifiers2.Control,
+                    Key = VirtualKey.R,
+                    Invoked = App.MethodViewModel.MethodGroupRelease,
+                },
 
 
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("$DrawPage_Export"),
-                                Group = 3,
-                                Modifiers = VirtualKeyModifiers2.Control,
-                                Key = VirtualKey.E,
-                                Invoked = () => Retouch_Photo2.DrawPage.ShowExport?.Invoke()
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("$DrawPage_Undo"),
-                                Group = 3,
-                                Modifiers = VirtualKeyModifiers2.Control,
-                                Key = VirtualKey.Z,
-                                Invoked = App.MethodViewModel.MethodEditUndo,
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("$DrawPage_FullScreen"),
-                                Group = 3,
-                                Key = VirtualKey.Escape,
-                                Invoked = () => Retouch_Photo2.DrawPage.FullScreen?.Invoke()
-                            },
-                            new KeyboardAccelerator2
-                            {
-                                Title = resource.GetString("$DrawPage_Gallery"),
-                                Group = 3,
-                                Modifiers = VirtualKeyModifiers2.Control,
-                                Key = VirtualKey.P,
-                                Invoked = () => Retouch_Photo2.DrawPage.ShowGallery?.Invoke(GalleryMode.AddImage)
-                            },
-                        }
-                    };
-                }
-
-                return App.settingViewModel;
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("$DrawPage_Export"),
+                    Group = 3,
+                    Modifiers = VirtualKeyModifiers2.Control,
+                    Key = VirtualKey.E,
+                    Invoked = () => Retouch_Photo2.DrawPage.ShowExport?.Invoke()
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("$DrawPage_Undo"),
+                    Group = 3,
+                    Modifiers = VirtualKeyModifiers2.Control,
+                    Key = VirtualKey.Z,
+                    Invoked = App.MethodViewModel.MethodEditUndo,
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("$DrawPage_FullScreen"),
+                    Group = 3,
+                    Key = VirtualKey.Escape,
+                    Invoked = () => Retouch_Photo2.DrawPage.FullScreen?.Invoke()
+                },
+                new KeyboardAccelerator2
+                {
+                    TitleResource = ("$DrawPage_Gallery"),
+                    Group = 3,
+                    Modifiers = VirtualKeyModifiers2.Control,
+                    Key = VirtualKey.P,
+                    Invoked = () => Retouch_Photo2.DrawPage.ShowGallery?.Invoke(GalleryMode.AddImage)
+                },
             }
-        }
-
+        };
+                  
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.TipViewModel" />. </summary>
-        public static TipViewModel TipViewModel
+        public static TipViewModel TipViewModel = new TipViewModel
         {
-            get
+            //Tool
+            Tools = new List<ITool>
+            {                   
+                        
+                /*                        
+                new CursorTool(),                         
+                new ViewTool(),
+                new GeometryRectangleTool(),
+                */
+
+                /*
+                */
+                new CursorTool(),
+                null,
+
+                new ViewTool(),
+                new BrushTool(),
+                new TransparencyTool(),
+                null,
+
+                //Geometry0
+                new GeometryRectangleTool(),
+                new GeometryEllipseTool(),
+                new PenTool(),
+                new NodeTool(),
+                null,
+
+                new TextArtisticTool(),
+                new TextFrameTool(),
+                null,
+
+                new ImageTool(),
+                new CropTool(),
+
+
+                new MoreTool(),
+
+
+                new PatternGridTool(),
+                new PatternDiagonalTool(),
+                new PatternSpottedTool(),
+                null,
+
+                //Geometry1
+                new GeometryRoundRectTool(),
+                new GeometryTriangleTool(),
+                new GeometryDiamondTool(),
+                null,
+
+                //Geometry2
+                new GeometryPentagonTool(),
+                new GeometryStarTool(),
+                new GeometryCogTool(),
+                null,
+
+                //Geometry3
+                new GeometryDountTool(),
+                new GeometryPieTool(),
+                new GeometryCookieTool(),
+                null,
+
+                //Geometry4
+                new GeometryArrowTool(),
+                new GeometryCapsuleTool(),
+                new GeometryHeartTool(),
+            },
+
+            //Menu
+            Menus = new List<IMenu>
             {
-                if (App.tipViewModel == null)
-                {
-                    App.tipViewModel = new TipViewModel
-                    {
-                        //Tool
-                        Tools = new List<ITool>
-                        {               
-                
-                            /*                
-                            new CursorTool(),                 
-                            new ViewTool(),
-                            new GeometryRectangleTool(),
-                            */
+                //new DebugMenu(),
 
-                            /*
-                            */
-                            new CursorTool(),
-                            null,
+                new EditMenu(),
+                new OperateMenu(),
 
-                            new ViewTool(),
-                            new BrushTool(),
-                            new TransparencyTool(),
-                            null,
+                new AdjustmentMenu(),
+                new EffectMenu(),
 
-                            //Geometry0
-                            new GeometryRectangleTool(),
-                            new GeometryEllipseTool(),
-                            new PenTool(),
-                            new NodeTool(),
-                            null,
+                new TextMenu(),
+                //new ParagraphMenu(),
 
-                            new TextArtisticTool(),
-                            new TextFrameTool(),
-                            null,
+                new StrokeMenu(),
+                new StyleMenu(),
 
-                            new ImageTool(),
-                            new CropTool(),
+                new HistoryMenu(),
+                new TransformerMenu(),
 
-
-                            new MoreTool(),
-
-
-                            new PatternGridTool(),
-                            new PatternDiagonalTool(),
-                            new PatternSpottedTool(),
-                            null,
-
-                            //Geometry1
-                            new GeometryRoundRectTool(),
-                            new GeometryTriangleTool(),
-                            new GeometryDiamondTool(),
-                            null,
-
-                            //Geometry2
-                            new GeometryPentagonTool(),
-                            new GeometryStarTool(),
-                            new GeometryCogTool(),
-                            null,
-
-                            //Geometry3
-                            new GeometryDountTool(),
-                            new GeometryPieTool(),
-                            new GeometryCookieTool(),
-                            null,
-
-                            //Geometry4
-                            new GeometryArrowTool(),
-                            new GeometryCapsuleTool(),
-                            new GeometryHeartTool(),
-                        },
-
-                        //Menu
-                        Menus = new List<IMenu>
-                        {
-                            //new DebugMenu(),
-
-                            new EditMenu(),
-                            new OperateMenu(),
-
-                            new AdjustmentMenu(),
-                            new EffectMenu(),
-
-                            new TextMenu(),
-                            //new ParagraphMenu(),
-
-                            new StrokeMenu(),
-                            new StyleMenu(),
-
-                            new HistoryMenu(),
-                            new TransformerMenu(),
-
-                            new LayerMenu(),
-                            new ColorMenu(),
-                            //new KeyboardMenu(),
-                        },
-                    };
-                }
-                return App.tipViewModel;
-            }
-        }
+                new LayerMenu(),
+                new ColorMenu(),
+                //new KeyboardMenu(),
+            },
+        };
 
 
         public App()

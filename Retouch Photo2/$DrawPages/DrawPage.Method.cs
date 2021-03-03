@@ -34,7 +34,7 @@ namespace Retouch_Photo2
                 renderTarget: renderTarget,
 
                 fileChoices: this.FileFormatComboBox.FileChoices,
-                suggestedFileName: this.ViewModel.Name,
+                suggestedFileName: this.ApplicationView.Title,
 
                 fileFormat: this.FileFormatComboBox.FileFormat,
                 quality: this.ExportQuality
@@ -47,7 +47,7 @@ namespace Retouch_Photo2
         /// </summary>
         private async Task Save()
         {
-            string name = this.ViewModel.Name;
+            string name = this.ApplicationView.Title;
             int width = this.ViewModel.CanvasTransformer.Width;
             int height = this.ViewModel.CanvasTransformer.Height;
             StorageFolder zipFolder = await FileUtil.DeleteAllAndReturn(name);
@@ -56,7 +56,6 @@ namespace Retouch_Photo2
             //Save project file.
             Project project = new Project
             {
-                Name = name,
                 Width = width,
                 Height = height,
                 Layerages = LayerManager.RootLayerage.Children
