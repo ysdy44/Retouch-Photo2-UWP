@@ -16,7 +16,7 @@ namespace Retouch_Photo2
         private void ConstructFlowDirection()
         {
             bool isRightToLeft = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
-            isRightToLeft = true;
+            
             base.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
         }
 

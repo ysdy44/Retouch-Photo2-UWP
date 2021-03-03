@@ -97,7 +97,8 @@
 
 
         <!--IndicatorControl-->
-        <transformers:IndicatorControl x:Name="IndicatorControl" Grid.ColumnSpan="3" Grid.Row="6" Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}">
+        <transformers:IndicatorControl x:Name="IndicatorControl" Grid.ColumnSpan="3" Grid.Row="6" Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}"
+                                       FlowDirection="LeftToRight">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="IndicatorToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
