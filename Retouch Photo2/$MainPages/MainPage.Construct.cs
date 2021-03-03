@@ -187,7 +187,7 @@ namespace Retouch_Photo2
         }
         private void HideAddDialog()
         {
-            if (this.MainLayout.Count == 0)
+            if (this.Items.Count == 0)
                 this.MainLayout.State = MainPageState.Initial;
             else
                 this.MainLayout.State = MainPageState.Main;
@@ -250,12 +250,12 @@ namespace Retouch_Photo2
                 this.LoadingControl.State = LoadingState.Loading;
                 this.LoadingControl.IsActive = true;
 
-                await this.DeleteProjectViewItems(this.MainLayout.SelectedItems);
+                await this.DeleteProjectViewItems(this.SelectedItems);
 
                 this.LoadingControl.State = LoadingState.None;
                 this.LoadingControl.IsActive = false;
 
-                if (this.MainLayout.Count == 0)
+                if (this.Items.Count == 0)
                     this.MainLayout.State = MainPageState.Initial;
                 else
                     this.MainLayout.State = MainPageState.Main;
@@ -273,7 +273,7 @@ namespace Retouch_Photo2
                 this.LoadingControl.State = LoadingState.Loading;
                 this.LoadingControl.IsActive = true;
 
-                await this.DuplicateProjectViewItems(this.MainLayout.SelectedItems);
+                await this.DuplicateProjectViewItems(this.SelectedItems);
 
                 this.LoadingControl.State = LoadingState.None;
                 this.LoadingControl.IsActive = false;

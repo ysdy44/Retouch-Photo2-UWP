@@ -7,10 +7,8 @@ using Retouch_Photo2.Elements;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
-using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.UI.Core;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -106,10 +104,25 @@ namespace Retouch_Photo2
 
             if (this.DrawLayout.IsFullScreen == false) return;
 
-            if (e.Parameter is Rect sourceRect)
-                this._lockOnNavigatedTo(sourceRect);
-            else
-                this._lockOnNavigatedTo(null);
+            if (e.Parameter is IProjectViewItem item)
+            {
+                //Name
+                this.ApplicationView.Title = item.Name;
+
+                //Project
+                this.ViewModel.LoadFromProject(item.Project);
+
+                //ImageVisualRect
+                if (item.ImageVisualRect != Rect.Empty)
+                {
+                    this._lockOnNavigatedTo(item.ImageVisualRect);
+                    this.SelectionViewModel.SetMode();
+                }
+                else
+                {
+                    this._lockOnNavigatedTo(null);
+                }
+            }
 
             SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
         }

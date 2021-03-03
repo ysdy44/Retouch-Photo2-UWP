@@ -3,9 +3,6 @@
 // Difficult:         ★★
 // Only:              ★★★★
 // Complete:      ★★★★
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -20,6 +17,9 @@ namespace Retouch_Photo2.Elements
         //@Content     
         /// <summary> GridView. </summary>
         public GridView GridView => this._GridView;
+        /// <summary> SelectCheckBox. </summary>
+        public CheckBox SelectCheckBox => this._SelectCheckBox;
+
 
         /// <summary> InitialBorder's Child. </summary>
         public UIElement InitialChild { get => this.InitialBorder.Child; set => this.InitialBorder.Child = value; }
@@ -45,52 +45,6 @@ namespace Retouch_Photo2.Elements
         public UIElement DuplicateChild { get => this.DuplicateBorder.Child; set => this.DuplicateBorder.Child = value; }
 
 
-        /// <summary> Gets all items. </summary>
-        public ObservableCollection<IProjectViewItem> Items { get; private set; } = new ObservableCollection<IProjectViewItem>();
-        /// <summary> Gets all selected items. </summary>
-        public IEnumerable<IProjectViewItem> SelectedItems => from i in this.Items where i.SelectMode == SelectMode.Selected select i;
-        /// <summary> Gets the count of items. </summary>
-        public int Count => this.Items.Count;
-
-
-        #region DependencyProperty
-
-
-        /// <summary> Gets or sets <see cref = "MainLayout" />'s selected count. </summary>
-        public int SelectedCount
-        {
-            get => (int)base.GetValue(SelectedCountProperty);
-            set => base.SetValue(SelectedCountProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "MainLayout.SelectedCount" /> dependency property. </summary>
-        public static readonly DependencyProperty SelectedCountProperty = DependencyProperty.Register(nameof(SelectedCount), typeof(int), typeof(MainLayout), new PropertyMetadata(0));
-
-
-        /// <summary> Gets or sets <see cref = "MainLayout" />'s selected is enable. </summary>
-        public bool SelectedIsEnabled
-        {
-            get => (bool)base.GetValue(SelectedIsEnabledProperty);
-            set => base.SetValue(SelectedIsEnabledProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "MainLayout.SelectedCount" /> dependency property. </summary>
-        public static readonly DependencyProperty SelectedIsEnabledProperty = DependencyProperty.Register(nameof(SelectedIsEnabled), typeof(bool), typeof(MainLayout), new PropertyMetadata(false));
-
-
-        /// <summary>
-        /// Refresh the selected count.
-        /// </summary>
-        public void RefreshSelectCount()
-        {
-            int count = this.Items.Count(p => p.SelectMode == SelectMode.Selected);
-            this.SelectedCount = count;
-
-            bool isEnable = (count != 0);
-            this.SelectedIsEnabled = isEnable;
-        }
-
-
-        #endregion
-
 
         //@Construct
         /// <summary>
@@ -99,16 +53,7 @@ namespace Retouch_Photo2.Elements
         public MainLayout()
         {
             this.InitializeComponent();
-            this._GridView.ItemsSource = this.Items;
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
-
-            this.SelectCheckBox.Unchecked += (s, e) => this.SelectAll(SelectMode.None);
-            this.SelectCheckBox.Checked += (s, e) =>
-            {
-                this.SelectAll(SelectMode.UnSelected);
-
-                this.RefreshSelectCount();
-            };
         }
 
     }

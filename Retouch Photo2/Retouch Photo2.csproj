@@ -107,6 +107,11 @@
     <Compile Include="%24DrawPages\DrawPage.LayersControl.cs" />
     <Compile Include="%24DrawPages\DrawPage.CanvasControl.Render.cs" />
     <Compile Include="%24DrawPages\DrawPage.CanvasControl.Operator.cs" />
+    <Compile Include="%24MainPages\IProjectViewItem.cs" />
+    <Compile Include="%24MainPages\MainPage.Items.cs" />
+    <Compile Include="%24MainPages\ProjectViewItem.xaml.cs">
+      <DependentUpon>ProjectViewItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="%24SettingPages\SettingPage.Save.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -445,6 +450,10 @@
     <Page Include="%24MainPages\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="%24MainPages\ProjectViewItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Adjustments\BrightnessPage.xaml">
       <Generator>MSBuild:Compile</Generator>

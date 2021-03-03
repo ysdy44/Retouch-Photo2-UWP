@@ -96,7 +96,7 @@
                     <TextBlock Style="{StaticResource AppTextBlockStyle}">                        
                         <Run x:Name="ClickTipTextBlock"/>
                         <Run x:Name="SelectCountRun" Foreground="{ThemeResource SystemBaseHighColor}"
-                             Text="{x:Bind MainLayout.SelectedCount, Mode=OneWay}"/>
+                             Text="{x:Bind SelectedCount, Mode=OneWay}"/>
                     </TextBlock>
                     <Button x:Name="AllButton" HorizontalAlignment="Right" Style="{StaticResource AppButtonStyle}"/>
                 </Grid>
@@ -188,7 +188,7 @@
                     </TextBlock>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button x:Name="DeletePrimaryButton" Style="{StaticResource AppTabButtonStyle}"
-                                IsEnabled="{x:Bind MainLayout.SelectedIsEnabled, Mode=OneWay}">
+                                IsEnabled="{x:Bind SelectedIsEnabled, Mode=OneWay}">
                             <Button.Tag>
                                 <FontIcon Glyph="&#xF78C;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </Button.Tag>
@@ -213,7 +213,7 @@
                     </TextBlock>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button x:Name="DuplicatePrimaryButton" Style="{StaticResource AppTabButtonStyle}"
-                                IsEnabled="{x:Bind MainLayout.SelectedIsEnabled, Mode=OneWay}">
+                                IsEnabled="{x:Bind SelectedIsEnabled, Mode=OneWay}">
                             <Button.Tag>
                                 <FontIcon Glyph="&#xF78C;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </Button.Tag>

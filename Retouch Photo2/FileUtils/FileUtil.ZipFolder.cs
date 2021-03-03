@@ -49,8 +49,8 @@ namespace Retouch_Photo2
             await zipFolder.RenameAsync($"{newName}.photo2pk");
 
             //Rename thumbnail.       
-            string thumbnail = $"{zipFolder.Path}\\Thumbnail.png";
-            item.Rename(newName, thumbnail);
+            item.Name = newName;
+            item.ImageSource = new Uri($"{zipFolder.Path}\\Thumbnail.png", UriKind.Relative);
         }
 
 

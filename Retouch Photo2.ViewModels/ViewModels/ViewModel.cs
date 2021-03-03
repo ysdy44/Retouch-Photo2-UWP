@@ -49,12 +49,6 @@ namespace Retouch_Photo2.ViewModels
         }
 
 
-        /// <summary> Gets or sets the current project name. </summary>
-        public string Name = null;
-        /// <summary> Update the <see cref="IProjectViewItem.RefreshImageSource"/> by <see cref="ViewModel.Name"/>.  </summary>
-        public bool IsUpdateThumbnailByName = false;
-
-
         /// <summary>
         /// Indicates that the contents of the CanvasControl need to be redrawn.
         /// </summary>

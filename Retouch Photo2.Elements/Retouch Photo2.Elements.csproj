@@ -114,13 +114,8 @@
     </Compile>
     <Compile Include="%24Loading\LoadingState.cs" />
     <Compile Include="%24MainPages\MainLayout.BackRequested.cs" />
-    <Compile Include="%24MainPages\MainLayout.Item.cs" />
-    <Compile Include="%24MainPages\IProjectViewItem.cs" />
+    <Compile Include="%24MainPages\MainLayout.Layout.cs" />
     <Compile Include="%24MainPages\MainPageState.cs" />
-    <Compile Include="%24MainPages\ProjectViewItem.xaml.cs">
-      <DependentUpon>ProjectViewItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="%24MainPages\SelectMode.cs" />
     <Compile Include="%24SettingPages\AdaptiveWidthGrid.xaml.cs">
       <DependentUpon>AdaptiveWidthGrid.xaml</DependentUpon>
     </Compile>
@@ -233,10 +228,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="%24Loading\LoadingControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="%24MainPages\ProjectViewItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

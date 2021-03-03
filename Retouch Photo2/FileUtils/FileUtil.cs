@@ -44,25 +44,27 @@ namespace Retouch_Photo2
         /// <summary>
         /// Initializes ProjectViewItem by zip folder.
         /// </summary>
-        /// <param name="folder"> The zip folder. </param>
+        /// <param name="zipFolder"> The zip folder. </param>
         /// <returns> The product ProjectViewItem. </returns>
-        public static IProjectViewItem ConstructProjectViewItem(StorageFolder folder)
+        public static IProjectViewItem ConstructProjectViewItem(StorageFolder zipFolder)
         {
-            string name = folder.DisplayName.Replace(".photo2pk", "");
+            string name = zipFolder.DisplayName.Replace(".photo2pk", "");
 
-            return FileUtil.ConstructProjectViewItem(name, folder);
+            return FileUtil.ConstructProjectViewItem(name, zipFolder);
         }
         /// <summary>
         /// Initializes a ProjectViewItem by zip folder.
         /// </summary>
         /// <param name="name"> The name. </param>
-        /// <param name="folder"> The zip folder. </param>
+        /// <param name="zipFolder"> The zip folder. </param>
         /// <returns> The product ProjectViewItem. </returns>
-        public static IProjectViewItem ConstructProjectViewItem(string name, StorageFolder folder)
+        public static IProjectViewItem ConstructProjectViewItem(string name, StorageFolder zipFolder)
         {
-            string thumbnail = $"{folder.Path}\\Thumbnail.png";
-
-            return new ProjectViewItem(name, thumbnail);
+            return new ProjectViewItem
+            {
+                Name = name,
+                ImageSource = new Uri($"{zipFolder.Path}\\Thumbnail.png", UriKind.Relative)
+            };
         }
 
 
@@ -78,7 +80,8 @@ namespace Retouch_Photo2
         /// </summary>
         /// <param name="zipFolder"> The zip folder.</param>
         /// <param name="renderTarget"> The render target.</param>
-        public static async Task SaveThumbnailFile(StorageFolder zipFolder, CanvasRenderTarget renderTarget)
+        /// <returns> Return Image Path. </returns>
+        public static async Task<Uri> SaveThumbnailFile(StorageFolder zipFolder, CanvasRenderTarget renderTarget)
         {
             StorageFile thumbnailFile = await zipFolder.CreateFileAsync("Thumbnail.png");
 
@@ -86,6 +89,8 @@ namespace Retouch_Photo2
             {
                 await renderTarget.SaveAsync(fileStream, CanvasBitmapFileFormat.Png);
             }
+
+            return new Uri(thumbnailFile.Path, UriKind.Relative);
         }
 
 

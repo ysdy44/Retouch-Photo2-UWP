@@ -79,57 +79,5 @@ namespace Retouch_Photo2.Elements
             set => VisualStateManager.GoToState(this, value.Name, true);
         }
 
-
-        /// <summary>
-        /// Refresh all items select-mode.
-        /// </summary>
-        public void SelectAllAndDeselectIcon()
-        {
-            bool isAnyUnSelected = this.Items.Any(p => p.SelectMode == SelectMode.UnSelected);
-            SelectMode mode = isAnyUnSelected ? SelectMode.Selected : SelectMode.UnSelected;
-            this.SelectAll(mode);
-
-            this.RefreshSelectCount();
-        }
-
-        /// <summary>
-        /// Refresh all items select-mode.
-        /// </summary>
-        public void SelectAll(SelectMode selectMode)
-        {
-            foreach (IProjectViewItem item in this.Items)
-            {
-                item.SelectMode = selectMode;
-            }
-        }
-
-
-        /// <summary>
-        /// Get a name that doesn't have a rename.
-        /// If there are, add the number.
-        /// [Untitled] --> [Untitled1]   
-        /// </summary>
-        /// <param name="name"> The previous name. </param>
-        /// <returns> The new name. </returns>
-        public string UntitledRenameByRecursive(string name)
-        {
-            // Is there a re-named item?
-            if (this.Items.All(i => i.Name != name))
-                return name;
-
-            int num = 0;
-            string newName;
-
-            do
-            {
-                num++;
-                newName = $"{name}{num}";
-            }
-            // Is there a re-named item?
-            while (this.Items.Any(i => i.Name == newName));
-
-            return newName;
-        }
-
     }
 }

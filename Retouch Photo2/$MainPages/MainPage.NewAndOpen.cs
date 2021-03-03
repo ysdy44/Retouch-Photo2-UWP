@@ -29,41 +29,44 @@ namespace Retouch_Photo2
             this.LoadingControl.State = LoadingState.Loading;
             this.LoadingControl.IsActive = true;
 
-            //Project
             string untitled = this.Untitled;
-            string name = this.MainLayout.UntitledRenameByRecursive(untitled);
+            string name = this.UntitledRenameByRecursive(untitled);
             int width = (int)pixels.Width;
             int height = (int)pixels.Height;
 
+            //Project
             Project project = new Project
             {
                 Width = width,
                 Height = height,
             };
-            this.ViewModel.LoadFromProject(project);
 
-
-            //Transition
-            Rect? sourceRect = null;
+            //Item
+            IProjectViewItem item = new ProjectViewItem
+            {
+                Name = name,
+                ImageSource = null,
+                Project = project,
+            };
+            this.Items.Insert(0, item);
 
             this.LoadingControl.IsActive = false;
             this.LoadingControl.State = LoadingState.None;
-            this.ApplicationView.Title = name;
-            this.Frame.Navigate(typeof(DrawPage), sourceRect);//Navigate
+            this.Frame.Navigate(typeof(DrawPage), item);//Navigate
         }
 
 
         /// <summary>
         /// Open from ProjectViewItem.
         /// </summary>
-        /// <param name="projectViewItem"> The ProjectViewItem. </param>
-        public async void OpenFromProjectViewItem(IProjectViewItem projectViewItem)
+        /// <param name="item"> The ProjectViewItem. </param>
+        public async void OpenFromProjectViewItem(IProjectViewItem item)
         {
             this.LoadingControl.State = LoadingState.Loading;
             this.LoadingControl.IsActive = true;
 
             //FileUtil
-            string name = projectViewItem.Name;
+            string name = item.Name;
             if (name == null || name == string.Empty)
             {
                 this.LoadingControl.IsActive = false;
@@ -73,7 +76,7 @@ namespace Retouch_Photo2
                 return;
             }
 
-
+            //FileUtil
             await FileUtil.DeleteInTemporaryFolder();
             bool isExists = await FileUtil.MoveAllAndReturn(name);
             if (isExists == false)
@@ -120,17 +123,13 @@ namespace Retouch_Photo2
                 return;
             }
 
-            this.ViewModel.LoadFromProject(project);
-            this.SelectionViewModel.SetMode();//Selection
-
-
-            //Transition
-            Rect? sourceRect = projectViewItem.GetVisualRect(Window.Current.Content);
+            //Item
+            item.Project = project;
+            item.RenderImageVisualRect(Window.Current.Content);
 
             this.LoadingControl.State = LoadingState.None;
             this.LoadingControl.IsActive = false;
-            this.ApplicationView.Title = name;
-            this.Frame.Navigate(typeof(DrawPage), sourceRect);//Navigate   
+            this.Frame.Navigate(typeof(DrawPage), item);//Navigate   
         }
 
 
@@ -171,7 +170,7 @@ namespace Retouch_Photo2
             Photo.DuplicateChecking(photo);
 
             //Transformer
-            string name = this.MainLayout.UntitledRenameByRecursive($"{photo.Name}");
+            string name = this.UntitledRenameByRecursive($"{photo.Name}");
             int width = (int)photo.Width;
             int height = (int)photo.Height;
             Transformer transformerSource = new Transformer(width, height, Vector2.Zero);
@@ -187,27 +186,28 @@ namespace Retouch_Photo2
             LayerBase.Instances.Add(imageLayer);
 
             //Project
+            Project project = new Project
             {
-                Project project = new Project
+                Width = width,
+                Height = height,
+                Layerages = new List<Layerage>
                 {
-                    Width = width,
-                    Height = height,
-                    Layerages = new List<Layerage>
-                    {
-                         imageLayerage
-                    }
-                };
-                this.ViewModel.LoadFromProject(project);
-            }
+                     imageLayerage
+                }
+            };
 
-
-            //Transition
-            Rect? sourceRect = null;
+            //Item
+            IProjectViewItem item = new ProjectViewItem
+            {
+                Name = name,
+                ImageSource = null,
+                Project = project,
+            };
+            this.Items.Insert(0, item);
 
             this.LoadingControl.State = LoadingState.None;
             this.LoadingControl.IsActive = false;
-            this.ApplicationView.Title = name;
-            this.Frame.Navigate(typeof(DrawPage), sourceRect);//Navigate
+            this.Frame.Navigate(typeof(DrawPage), item);//Navigate
         }
 
     }

@@ -40,8 +40,34 @@ namespace Retouch_Photo2
             this.ConstructInitialControl();
             this.ConstructDragAndDrop();
 
+            //ProjectViewItem
+            ProjectViewItem.ItemClick = this.ItemClick;
+
+            //MainLayout
+            this.MainLayout.GridView.ItemsSource = this.Items;
+            this.MainLayout.SelectCheckBox.Unchecked += (s, e) =>
+            {
+                foreach (IProjectViewItem item in this.Items)
+                {
+                    item.IsMultiple = false;
+                    item.IsSelected = false;
+                }
+            };
+            this.MainLayout.SelectCheckBox.Checked += (s, e) =>
+            {
+                foreach (IProjectViewItem item in this.Items)
+                {
+                    item.IsMultiple = true;
+                    item.IsSelected = false;
+                }
+
+                this.RefreshSelectCount();
+            };
+
+
             //Select
-            this.AllButton.Click += (s, e) => this.MainLayout.SelectAllAndDeselectIcon();
+            this.AllButton.Click += (s, e) => this.SelectAllAndDeselectIcon();
+ 
             //Head
             this.Head.LeftButtonClick += async (s, e) => await Launcher.LaunchUriAsync(new Uri(this.DocumentationLink));
             this.Head.RightButtonClick += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
@@ -78,28 +104,6 @@ namespace Retouch_Photo2
 
 
             #endregion
-
-
-            //ProjectViewItem
-            ProjectViewItem.ItemClick += (item) =>
-            {
-                switch (this.MainLayout.State)
-                {
-                    case MainPageState.Main:
-                    case MainPageState.Pictures:
-                        this.OpenFromProjectViewItem(item);
-                        break;
-                    case MainPageState.Rename:
-                        this.ShowRenameDialog(item);
-                        break;
-                    case MainPageState.Delete:
-                    case MainPageState.Duplicate:
-                        item.SwitchState();
-                        this.MainLayout.RefreshSelectCount();
-                        break;
-                }
-            };
-
         }
 
         /// <summary> The current page becomes the active page. </summary>

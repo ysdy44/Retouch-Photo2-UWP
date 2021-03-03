@@ -1,5 +1,4 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.Photos;
@@ -64,8 +63,8 @@ namespace Retouch_Photo2
 
             //Save thumbnail file.
             CanvasRenderTarget thumbnail = this.Render(width, height);
-            await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
-            
+            Uri imageSource = await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
+
             //Save layers file.
             IEnumerable<Layerage> savedLayerages = LayerManager.GetUnUestingLayerages(LayerManager.RootLayerage);
             IEnumerable<ILayer> savedLayers = from layer in LayerBase.Instances where savedLayerages.Any(p => layer.Equals(p)) select layer;

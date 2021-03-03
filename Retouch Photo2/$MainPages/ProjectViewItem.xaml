@@ -1,6 +1,6 @@
 ﻿<UserControl
     x:Name="UserControl"
-    x:Class="Retouch_Photo2.Elements.ProjectViewItem"
+    x:Class="Retouch_Photo2.ProjectViewItem"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -26,7 +26,7 @@
                 <!--UnSelected-->
                 <VisualState x:Name="UnSelected">
                     <VisualState.Setters >
-                        <Setter Target = "ImageEx.BorderBrush" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+                        <Setter Target = "ImageBorder.BorderBrush" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
                         <Setter Target = "SelectedBorder.Visibility" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -35,7 +35,7 @@
                 <VisualState x:Name="Selected">
                     <VisualState.Setters >
                         <Setter Target = "_RootGrid.Background" Value="{ThemeResource AppForeground}"/>
-                        <Setter Target = "ImageEx.BorderBrush" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+                        <Setter Target = "ImageBorder.BorderBrush" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
                         <Setter Target = "SelectedBorder.Visibility" Value="Visible"/>
                         <Setter Target = "SelectedBorder.Background" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
                         <Setter Target = "SelectedIcon.Visibility" Value="Visible"/>
@@ -56,10 +56,17 @@
 
         <controls:DropShadowPanel HorizontalAlignment="Center" BlurRadius="20" OffsetX="8" OffsetY="8" ShadowOpacity="0.8" Color="{ThemeResource AppStrokeColor}">
             <!--Image-->
-            <controls:ImageEx x:Name="ImageEx"       
-                                      CornerRadius="4" MinWidth="60" MinHeight="60" MaxWidth="200" Margin="6"                               
-                                      BorderThickness="2" BorderBrush="Transparent" Background="White"                             
-                                      PlaceholderStretch="Uniform" PlaceholderSource="ms-appx:///Icons\LoadFaill.jpg" />
+            <Border x:Name="ImageBorder" CornerRadius="4" MinWidth="60" MinHeight="60" MaxWidth="200" Margin="6"                               
+                    BorderThickness="2" BorderBrush="Transparent">
+                <Border.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Icons\LoadFaill.jpg" />
+                </Border.Background>
+                <Image x:Name="ImageEx" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Image.Source>
+                        <BitmapImage x:Name="BitmapImage" />
+                    </Image.Source>
+                </Image>
+            </Border>
         </controls:DropShadowPanel>
 
 
