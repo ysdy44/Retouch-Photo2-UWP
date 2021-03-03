@@ -12,27 +12,6 @@
     mc:Ignorable="d"
     >
 
-    <UserControl.Resources>
-        <Style x:Name="ItemContainerStyle00" x:Key="00" TargetType="GridViewItem">
-            <Setter Property="Width" Value="140"/>
-            <Setter Property="Height" Value="140"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        </Style>
-        <Style x:Name="ItemContainerStyle01" x:Key="01" TargetType="GridViewItem">
-            <Setter Property="Width" Value="166"/>
-            <Setter Property="Height" Value="156"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        </Style>
-        <Style x:Name="ItemContainerStyle02" x:Key="02" TargetType="GridViewItem">
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="Height" Value="186"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        </Style>
-    </UserControl.Resources>
-
 
     <Grid x:Name="RootGrid">
 
@@ -183,12 +162,24 @@
                       ReorderMode="Disabled" 
                       SelectionMode="None"
                       animations:ReorderGridAnimation.Duration="300"
-                      ItemContainerStyle="{StaticResource 00}"
                       >
 
                 <GridView.Header>
                     <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseHeader}"/>
                 </GridView.Header>
+
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+                
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid Orientation="Horizontal" ItemWidth="140" ItemHeight="140"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
 
                 <GridView.ItemContainerTransitions>
                     <TransitionCollection>

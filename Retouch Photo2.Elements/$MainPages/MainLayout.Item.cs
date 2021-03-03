@@ -28,22 +28,29 @@ namespace Retouch_Photo2.Elements
         {
             set
             {
-                switch (value)
+                if (this._GridView.ItemsPanelRoot is ItemsWrapGrid itemsWrapGrid)
                 {
-                    case DeviceLayoutType.Phone:
-                        this._GridView.ItemContainerStyle = this.ItemContainerStyle00;
-                        this.DeviceLayoutTypeOrientation = Orientation.Vertical;
-                        break;
-                    case DeviceLayoutType.Pad:
-                        this._GridView.ItemContainerStyle = this.ItemContainerStyle01;
-                        this.DeviceLayoutTypeOrientation = Orientation.Horizontal;
-                        break;
-                    case DeviceLayoutType.PC:
-                        this._GridView.ItemContainerStyle = this.ItemContainerStyle02;
-                        this.DeviceLayoutTypeOrientation = Orientation.Horizontal;
-                        break;
-                    default:
-                        break;
+                    switch (value)
+                    {
+                        case DeviceLayoutType.Phone:
+                            itemsWrapGrid.ItemWidth = 140;
+                            itemsWrapGrid.ItemHeight = 140;
+                            this.DeviceLayoutTypeOrientation = Orientation.Vertical;
+                            break;
+                        case DeviceLayoutType.Pad:
+                            itemsWrapGrid.ItemWidth = 166;
+                            itemsWrapGrid.ItemHeight = 156;
+                            this.DeviceLayoutTypeOrientation = Orientation.Horizontal;
+                            break;
+                        case DeviceLayoutType.PC:
+                            itemsWrapGrid.ItemWidth = 200;
+                            itemsWrapGrid.ItemHeight = 186;
+
+                            this.DeviceLayoutTypeOrientation = Orientation.Horizontal;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
