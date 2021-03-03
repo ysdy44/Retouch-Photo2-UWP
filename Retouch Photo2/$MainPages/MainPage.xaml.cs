@@ -36,6 +36,7 @@ namespace Retouch_Photo2
         public MainPage()
         {
             this.InitializeComponent();
+            this.ConstructFlowDirection();
             this.ConstructStrings();
             this.ConstructInitialControl();
             this.ConstructDragAndDrop();

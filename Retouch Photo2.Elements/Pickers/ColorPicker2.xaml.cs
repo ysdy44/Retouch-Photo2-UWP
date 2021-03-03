@@ -4,6 +4,7 @@
 // Only:              ★★★
 // Complete:      ★★
 using HSVColorPickers;
+using Microsoft.Graphics.Canvas.UI.Xaml;
 using Retouch_Photo2.Elements.ColorPicker2Icons;
 using System;
 using Windows.ApplicationModel.Resources;
@@ -185,6 +186,7 @@ namespace Retouch_Photo2.Elements
         public ColorPicker2()
         {
             this.InitializeComponent();
+            this.ConstructFlowDirection();
             this.ConstructStrings();
             this.Button.Click += (s, e) => this.Flyout.ShowAt(this.HeadGrid);
             this.Button.SizeChanged += (s, e) => this.FlyoutStackPanel.Width = e.NewSize.Width;
@@ -219,6 +221,54 @@ namespace Retouch_Photo2.Elements
     /// </summary>
     public sealed partial class ColorPicker2 : UserControl
     {
+
+        //FlowDirection
+        private void ConstructFlowDirection()
+        {
+            bool isRightToLeft = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
+            isRightToLeft = true;
+            base.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+
+
+            this.ConstructFlowDirectionCore(this.SwatchesPicker);
+
+            this.WheelPicker.FlowDirection = FlowDirection.LeftToRight;
+
+            this.ConstructFlowDirectionCore(this.RGBPicker);
+            this.ConstructFlowDirectionCore(this.HSVPicker);
+
+            this.PaletteHuePicker.FlowDirection = FlowDirection.LeftToRight;
+            this.PaletteSaturationPicker.FlowDirection = FlowDirection.LeftToRight;
+            this.PaletteValuePicker.FlowDirection = FlowDirection.LeftToRight;
+
+            this.CirclePicker.FlowDirection = FlowDirection.LeftToRight;
+
+            this.ConstructFlowDirectionCore(this.AlphaPicker);
+        }
+        private void ConstructFlowDirectionCore(UserControl iColorPicker)
+        {
+            if (iColorPicker.Content is Grid grid)
+            {
+                foreach (UIElement element in grid.Children)
+                {
+                    this.ConstructFlowDirectionCoreCore(element);
+                }
+            }
+        }
+        private void ConstructFlowDirectionCoreCore(UIElement element)
+        {
+            if (element is CanvasControl canvasControl)
+            {
+                //CanvasControl
+                canvasControl.FlowDirection = FlowDirection.LeftToRight;
+            }
+            else if (element is TouchSlider touchSlider)
+            {
+                //TouchSlider
+                touchSlider.FlowDirection = FlowDirection.LeftToRight;
+            }
+        }
+
         //Strings
         private void ConstructStrings()
         {

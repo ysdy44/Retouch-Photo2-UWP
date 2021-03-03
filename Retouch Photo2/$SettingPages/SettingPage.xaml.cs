@@ -45,6 +45,7 @@ namespace Retouch_Photo2
         public SettingPage()
         {
             this.InitializeComponent();
+            this.ConstructFlowDirection();
             this.ConstructStrings();
             this.Head.LeftButtonClick += (s, e) => this.Frame.GoBack();
             this.Head.RightButtonClick += (s, e) => this.AboutDialog.Show();

@@ -96,20 +96,32 @@ namespace Retouch_Photo2.Menus
             // if unloaded, the height will < 70
             // so it must re-Load and re-CalculatePostion
             if (this._lockLoad == false && this.ActualHeight < 70)
-            {
+            {                  
                 this.Loaded += (s, e) =>
                 {
                     this._lockLoad = true;
                     this.CalculatePostion(placementTarget, placementMode);
                 };
+
                 return;
             }
 
             //Gets visual-postion in windows.
             Point buttonPostion = placementTarget.TransformToVisual(Window.Current.Content).TransformPoint(new Point());//@VisualPostion
+
+            switch (base.FlowDirection)
+            {
+                case FlowDirection.LeftToRight:
+                    break;
+                case FlowDirection.RightToLeft:
+                    buttonPostion.X = Window.Current.Bounds.Width - buttonPostion.X;
+                    break;
+                default:
+                    break;
+            }
             double flyoutPostionX = this.GetFlyoutPostionX(buttonPostion.X, placementTarget.ActualWidth, placementMode);
             double flyoutPostionY = this.GetFlyoutPostionY(buttonPostion.Y, placementTarget.ActualHeight, placementMode);
-
+            
             this.PostionX = this.GetBoundPostionX(flyoutPostionX);
             this.PostionY = this.GetBoundPostionY(flyoutPostionY);
         }

@@ -79,7 +79,7 @@
                 <controls:ImageEx x:Name="Image" Stretch="Uniform" Background="White"
                           Source="{x:Bind Photo.ImageFilePath, Mode=OneWay}"/>
                 <ContentControl Height="12"/>
-                <TextBlock x:Name="NameTextbolck" VerticalAlignment="Center" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"
+                <TextBlock x:Name="NameTextbolck" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"
                           Text="{x:Bind Photo.Name, Mode=OneWay}"/>
                 <ContentControl Height="6"/>
                 <TextBlock x:Name="SummaryTextBlock" TextWrapping="Wrap"

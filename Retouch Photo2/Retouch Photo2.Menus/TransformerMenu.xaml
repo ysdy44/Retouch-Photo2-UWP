@@ -90,7 +90,8 @@
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="PositionRemoteToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <FontIcon FontSize="14" Glyph="&#xE970;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+            <FontIcon FontSize="14" Glyph="&#xE970;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                      MirroredWhenRightToLeft="True"/>
         </Button>
 
 

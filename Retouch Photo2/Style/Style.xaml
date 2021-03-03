@@ -80,7 +80,7 @@
     
     <!--Flyout-->
     <Style x:Key="AppFlyoutPresenterStyle" TargetType="FlyoutPresenter">
-        <Setter Property="MinHeight" Value="100"/>
+        <Setter Property="MinHeight" Value="40"/>
         <Setter Property="Padding" Value="4"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>

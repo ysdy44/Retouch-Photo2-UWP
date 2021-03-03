@@ -949,8 +949,8 @@
 
 
         <!--Body-->
-        <canvas:CanvasControl x:Name="_LayerRenderCanvasControl" Grid.Column="1" Grid.Row="1"/>
-        <canvas:CanvasControl x:Name="_ToolDrawCanvasControl" Grid.Column="1" Grid.Row="1"/>
+        <canvas:CanvasControl x:Name="_LayerRenderCanvasControl" Grid.Column="1" Grid.Row="1" FlowDirection="LeftToRight"/>
+        <canvas:CanvasControl x:Name="_ToolDrawCanvasControl" Grid.Column="1" Grid.Row="1" FlowDirection="LeftToRight"/>
 
 
         <!--Touchbar-->

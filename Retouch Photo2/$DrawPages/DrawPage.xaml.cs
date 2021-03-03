@@ -51,6 +51,7 @@ namespace Retouch_Photo2
         {
             this.InitializeComponent();
             this.Loaded += (s, e) => this._lockLoaded();
+            this.ConstructFlowDirection();
             this.ConstructStrings();
             this.RegisteTransition();
             this.ConstructAppBar();

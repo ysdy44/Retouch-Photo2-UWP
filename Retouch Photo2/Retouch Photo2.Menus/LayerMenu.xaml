@@ -67,7 +67,8 @@
                         IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                         Content="{x:Bind BlendModeComboBox.Title, Mode=OneWay}">
             <Button.Tag>
-                <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"
+                          MirroredWhenRightToLeft="True"/>
             </Button.Tag>
         </Button>
 
@@ -82,7 +83,8 @@
                                Style="{StaticResource AppCircleToggleButtonStyle}"
                                IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                                IsChecked="{x:Bind VisibilityToBoolConverter(ViewModel.Visibility), Mode=OneWay}" >
-                <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}" />
+                <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"
+                          MirroredWhenRightToLeft="True" />
             </ToggleButton>
         </RelativePanel>
         

@@ -59,11 +59,21 @@ namespace Retouch_Photo2.Photos
 
         public void CalculatePostion(FrameworkElement placementTarget)
         {
-            GeneralTransform transform = placementTarget.TransformToVisual(Window.Current.Content);
+            Point buttonPostion = placementTarget.TransformToVisual(Window.Current.Content).TransformPoint(new Point(0, 0));
 
-            Point screenCoords = transform.TransformPoint(new Point(0, 0));
-            double centerCoordsX = screenCoords.X + placementTarget.ActualWidth / 2;
-            double centerCoordsY =screenCoords.Y + placementTarget.ActualHeight / 2;
+            switch (base.FlowDirection)
+            {
+                case FlowDirection.LeftToRight:
+                    break;
+                case FlowDirection.RightToLeft:
+                    buttonPostion.X = Window.Current.Bounds.Width - buttonPostion.X;
+                    break;
+                default:
+                    break;
+            }
+
+            double centerCoordsX = buttonPostion.X + placementTarget.ActualWidth / 2;
+            double centerCoordsY =buttonPostion.Y + placementTarget.ActualHeight / 2;
 
             double x = centerCoordsX - this.actualWidth / 2;
             double y = centerCoordsY - (this.actualHeight - 70) / 2;

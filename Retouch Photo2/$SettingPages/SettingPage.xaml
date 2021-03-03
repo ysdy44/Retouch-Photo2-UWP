@@ -480,7 +480,8 @@
         <!--Head-->
         <elements:ExpanedHead x:Name="Head">
             <elements:ExpanedHead.LeftButtonContent>
-                <FontIcon Glyph="&#xE830;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                <FontIcon Glyph="&#xE830;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                          MirroredWhenRightToLeft="True"/>
             </elements:ExpanedHead.LeftButtonContent>
             <elements:ExpanedHead.RightButtonContent>
                 <FontIcon Glyph="&#xE946;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />

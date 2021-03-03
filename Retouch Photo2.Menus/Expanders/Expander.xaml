@@ -207,7 +207,8 @@
                     </Grid.ColumnDefinitions>
 
                     <Button x:Name="BackButton" Opacity="0" Width="40" Style="{StaticResource ButtonStyle}">
-                        <FontIcon Glyph="&#xE830;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        <FontIcon Glyph="&#xE830;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                  MirroredWhenRightToLeft="True"/>
                     </Button>
                     <TextBlock x:Name="TitleTextBlock" Grid.Column="1" Margin="8,0" FontWeight="Medium" TextTrimming="CharacterEllipsis" FontSize="20" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
                         <TextBlock.RenderTransform>

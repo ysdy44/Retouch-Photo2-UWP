@@ -92,7 +92,17 @@ namespace Retouch_Photo2.Menus
             {
                 if (this.State == ExpanderState.FlyoutShow) return;
 
-                this._postionX += e.Delta.Translation.X;
+                switch (base.FlowDirection)
+                {
+                    case FlowDirection.LeftToRight:
+                        this._postionX += e.Delta.Translation.X;
+                        break;
+                    case FlowDirection.RightToLeft:
+                        this._postionX -= e.Delta.Translation.X;
+                        break;
+                    default:
+                        break;
+                }
                 this._postionY += e.Delta.Translation.Y;
 
                 this.PostionX = this.GetBoundPostionX(this._postionX);

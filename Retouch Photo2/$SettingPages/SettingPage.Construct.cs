@@ -12,6 +12,14 @@ namespace Retouch_Photo2
     public sealed partial class SettingPage : Page
     {
 
+        //FlowDirection
+        private void ConstructFlowDirection()
+        {
+            bool isRightToLeft = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
+            isRightToLeft = true;
+            base.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+        }
+
         //Strings
         private void ConstructStrings()
         {

@@ -125,6 +125,7 @@ namespace Retouch_Photo2.Menus.Models
             Margin = new Thickness(4),
             Width = double.NaN,
             Height = double.NaN,
+            FlowDirection = FlowDirection.LeftToRight
         };
 
 
