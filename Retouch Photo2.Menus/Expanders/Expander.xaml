@@ -57,8 +57,11 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
-        
+
         <Storyboard x:Name="WidthStoryboard222" >
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PageBorder" Storyboard.TargetProperty="Margin">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+            </ObjectAnimationUsingKeyFrames>
             <DoubleAnimation x:Name="WidthKeyFrames222" To="222" Duration="0:0:0.1" EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseOut"/>
@@ -66,6 +69,9 @@
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Name="WidthStoryboard272" >
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PageBorder" Storyboard.TargetProperty="Margin">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="12,0"/>
+            </ObjectAnimationUsingKeyFrames>
             <DoubleAnimation x:Name="WidthKeyFrames272" To="272" Duration="0:0:0.1" EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseOut"/>
@@ -73,6 +79,9 @@
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Name="WidthStoryboard322" >
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PageBorder" Storyboard.TargetProperty="Margin">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="24,0"/>
+            </ObjectAnimationUsingKeyFrames>
             <DoubleAnimation x:Name="WidthKeyFrames322" To="322" Duration="0:0:0.1" EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseOut"/>
@@ -80,6 +89,9 @@
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Name="WidthStoryboard372" >
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PageBorder" Storyboard.TargetProperty="Margin">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="36,0"/>
+            </ObjectAnimationUsingKeyFrames>
             <DoubleAnimation x:Name="WidthKeyFrames372" To="372" Duration="0:0:0.1" EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseOut"/>
@@ -101,6 +113,7 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{ThemeResource AppText}"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Stretch"/>
         </Style>
@@ -174,7 +187,7 @@
 
 
         <Border x:Name="RootGrid" 
-                Width="222" 
+                Width="272" 
                 BorderThickness="1"    
                 BorderBrush="{ThemeResource AppStroke}"               
                 Background="Transparent"
@@ -192,13 +205,13 @@
                 <Rectangle x:Name="HeightRectangle" Grid.RowSpan="2" Height="222" VerticalAlignment="top" 
                           apiContractNotPresent5:Fill="{ThemeResource AppForeground}"
                           apiContractPresent5:Fill="{ThemeResource AppAcrylicElementBrush}" />
-                <Border x:Name="PageBorder" Grid.Row="1" Height="Auto" VerticalAlignment="Top" Padding="4,0">
+                <Border x:Name="PageBorder" Grid.Row="1" Margin="12,0" Padding="{StaticResource AppPanelPadding}" Height="Auto" VerticalAlignment="Top">
                     <!--Content-->
                 </Border>
 
 
                 <!--Head-->
-                <Grid x:Name="TitleGrid" Grid.Row="0" Background="Transparent" Padding="4,4,4,0">
+                <Grid x:Name="TitleGrid" Grid.Row="0" Background="Transparent">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>

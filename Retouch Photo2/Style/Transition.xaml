@@ -1,0 +1,29 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   >
+  
+
+    <TransitionCollection x:Key="AppTransitionCollection"/>
+
+    <AddDeleteThemeTransition x:Key="AppAddDeleteThemeTransition"/>
+    <ContentThemeTransition x:Key="AppContentThemeTransition"/>
+    <EdgeUIThemeTransition x:Key="AppEdgeUIThemeTransition" Edge="Bottom"/>
+    <EntranceThemeTransition x:Key="AppEntranceThemeTransition" FromVerticalOffset="1000" FromHorizontalOffset="0" />
+    <PaneThemeTransition x:Key="AppPaneThemeTransition" Edge="Bottom"/>
+    <PopupThemeTransition x:Key="AppPopupThemeTransition" FromHorizontalOffset="1000" FromVerticalOffset="0"/>
+    <ReorderThemeTransition x:Key="AppReorderThemeTransition"/>
+    <RepositionThemeTransition x:Key="AppRepositionThemeTransition" IsStaggeringEnabled="True"/>
+
+  
+
+    <NavigationThemeTransition x:Key="AppNavigationThemeTransition"/>
+
+    <CommonNavigationTransitionInfo x:Key="AppCommonTransition"/>
+    <ContinuumNavigationTransitionInfo x:Key="AppContinuumTransition"/>
+    <DrillInNavigationTransitionInfo x:Key="AppDrillInTransition"/>
+    <EntranceNavigationTransitionInfo x:Key="AppEntranceTransition"/>
+    <SlideNavigationTransitionInfo x:Key="AppSlideTransition"/>
+    <SuppressNavigationTransitionInfo x:Key="AppSuppressTransition"/>
+ 
+</ResourceDictionary>

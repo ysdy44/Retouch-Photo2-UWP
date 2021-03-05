@@ -58,46 +58,46 @@ namespace Retouch_Photo2.Layers
 
         private void ConstructButton(ILayer layer)
         {
-            this.VisualButton.Tapped += (s, e) =>
+            this.VisualToggleButton.Tapped += (s, e) =>
             {
                 LayerManager.VisibilityChanged?.Invoke(layer);//Delegate
                 e.Handled = true;
             };
-            this.VisualButton.RightTapped += (s, e) =>
+            this.VisualToggleButton.RightTapped += (s, e) =>
             {
                 LayerManager.VisibilityChanged?.Invoke(layer);//Delegate
                 e.Handled = true;
             };
-            this.VisualButton.Holding += (s, e) => e.Handled = true;
-            this.VisualButton.DoubleTapped += (s, e) => e.Handled = true;
+            this.VisualToggleButton.Holding += (s, e) => e.Handled = true;
+            this.VisualToggleButton.DoubleTapped += (s, e) => e.Handled = true;
 
 
-            this.ExpanedButton.Tapped += (s, e) =>
+            this.ExpanedToggleButton.Tapped += (s, e) =>
             {
                 LayerManager.IsExpandChanged?.Invoke(layer);//Delegate   
                 e.Handled = true;
             };
-            this.ExpanedButton.RightTapped += (s, e) =>
+            this.ExpanedToggleButton.RightTapped += (s, e) =>
             {
                 LayerManager.IsExpandChanged?.Invoke(layer);//Delegate   
                 e.Handled = true;
             };
-            this.ExpanedButton.Holding += (s, e) => e.Handled = true;
-            this.ExpanedButton.DoubleTapped += (s, e) => e.Handled = true;
+            this.ExpanedToggleButton.Holding += (s, e) => e.Handled = true;
+            this.ExpanedToggleButton.DoubleTapped += (s, e) => e.Handled = true;
 
 
-            this.SelectedButton.Tapped += (s, e) =>
+            this.SelectedToggleButton.Tapped += (s, e) =>
             {
                 LayerManager.IsSelectedChanged?.Invoke(layer);//Delegate   
                 e.Handled = true;
             };
-            this.SelectedButton.RightTapped += (s, e) =>
+            this.SelectedToggleButton.RightTapped += (s, e) =>
             {
                 LayerManager.IsSelectedChanged?.Invoke(layer);//Delegate   
                 e.Handled = true;
             };
-            this.SelectedButton.Holding += (s, e) => e.Handled = true;
-            this.SelectedButton.DoubleTapped += (s, e) => e.Handled = true;
+            this.SelectedToggleButton.Holding += (s, e) => e.Handled = true;
+            this.SelectedToggleButton.DoubleTapped += (s, e) => e.Handled = true;
         }
 
         private void ConstructManipulation(ILayer layer)

@@ -134,12 +134,12 @@ namespace Retouch_Photo2.Layers
         public string Name2 { set => this.NameRun.Text = value; }
 
         /// <summary> Gets or sets the visibility. </summary>
-        public Visibility Visibility2 { set => this.VisualFontIcon.Opacity = value == Visibility.Visible ? 1.0 : 0.5; }
+        public Visibility Visibility2 { set => this.VisualToggleButton.IsChecked = value == Visibility.Visible; }
         /// <summary> Gets or sets the tag type. </summary>
         public TagType TagType { set => this.TagColor.Color = value.ToColor(); }
 
         /// <summary> Gets or sets the IsExpand. </summary>
-        public bool IsExpand { set => this.ExpanedFontIcon.Glyph = value ? "\xEDDC" : "\xEDD9"; }
+        public bool IsExpand { set => this.ExpanedToggleButton.IsChecked = value; }
         /// <summary> Gets or sets the IsSelected. </summary>
         public bool IsSelected
         {
@@ -148,12 +148,10 @@ namespace Retouch_Photo2.Layers
                 if (value == true)
                 {
                     this.ManipulationMode = ManipulationModes.TranslateY;
-                    this.SelectedFontIcon.Glyph = "\xEC61";
                 }
                 else
                 {
                     this.ManipulationMode = ManipulationModes.System;
-                    this.SelectedFontIcon.Glyph = "\xECCA";
                 }
             }
         }
@@ -176,7 +174,7 @@ namespace Retouch_Photo2.Layers
         }
         private int depth = 0;
         /// <summary> Gets or sets the children count. </summary>
-        public int ChildrenCount { set => this.ExpanedButton.Visibility = value == 0 ? Visibility.Collapsed : Visibility.Visible; }
+        public int ChildrenCount { set => this.ExpanedToggleButton.Visibility = value == 0? Visibility.Collapsed: Visibility.Visible; }
         /// <summary> Gets or sets the background mode. </summary>
         public BackgroundMode BackgroundMode
         {

@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Menus
             Storyboard.SetTarget(this.WidthKeyFrames372, this.RootGrid);
             Storyboard.SetTargetProperty(this.WidthKeyFrames372, "(UIElement.Width)");
 
-            this.WidthFlyoutItem222.IsChecked = true;
+            this.WidthFlyoutItem272.IsChecked = true;
             this.WidthFlyoutItem222.Click += (s, e) => this.WidthMode = ExpanderWidth.Width222;
             this.WidthFlyoutItem272.Click += (s, e) => this.WidthMode = ExpanderWidth.Width272;
             this.WidthFlyoutItem322.Click += (s, e) => this.WidthMode = ExpanderWidth.Width322;

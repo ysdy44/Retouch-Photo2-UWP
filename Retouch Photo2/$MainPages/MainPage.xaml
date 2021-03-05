@@ -11,6 +11,13 @@
     >
 
 
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition DefaultNavigationTransitionInfo="{StaticResource AppSuppressTransition}"/>
+        </TransitionCollection>
+    </Page.Transitions>
+
+
     <Grid x:Name="RootGrid" Background="{ThemeResource AppBackground}">
 
 

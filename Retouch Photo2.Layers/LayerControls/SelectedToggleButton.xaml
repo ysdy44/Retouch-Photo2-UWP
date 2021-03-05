@@ -1,0 +1,78 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Layers.SelectedToggleButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+    
+    <Border x:Name="RootGrid">
+
+        <!--VisualStateManager-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal">
+                    <Storyboard>
+                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="PointerOver">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="BorderBrush">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="#CC888888"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Pressed">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="BorderBrush">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="#CC888888"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="#99777777"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                
+                <VisualState x:Name="Checked">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="IconEllipse" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="CheckedPointerOver">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="IconEllipse" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="BorderBrush">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="#CC888888"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="CheckedPressed">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="IconEllipse" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="BorderBrush">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="#CC888888"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutBorder" Storyboard.TargetProperty="Background">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="#99777777"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Border x:Name="LayoutBorder" Width="24" Height="24" CornerRadius="12" BorderBrush="#66888888" BorderThickness="2" Background="#33888888" >
+            <Ellipse x:Name="IconEllipse" Visibility="Collapsed"  Fill="White" Width="14" Height="14"/>
+        </Border>
+
+    </Border>
+
+</UserControl>

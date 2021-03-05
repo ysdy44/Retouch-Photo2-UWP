@@ -6,11 +6,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:transformers="using:FanKit.Transformers"
     xmlns:hsvColorPickers="using:HSVColorPickers"
-    xmlns:local="using:Retouch_Photo2"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:menus="using:Retouch_Photo2.Menus"
+    xmlns:photos="using:Retouch_Photo2.Photos"
     xmlns:tools="using:Retouch_Photo2.Tools"
-    xmlns:toolElements="using:Retouch_Photo2.Tools.Elements" xmlns:photos="using:Retouch_Photo2.Photos"
+    xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -19,11 +19,7 @@
 
     <Page.Transitions>
         <TransitionCollection>
-            <NavigationThemeTransition>
-                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                    <SuppressNavigationTransitionInfo/>
-                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-            </NavigationThemeTransition>
+            <NavigationThemeTransition DefaultNavigationTransitionInfo="{StaticResource AppSuppressTransition}"/>
         </TransitionCollection>
     </Page.Transitions>
 
@@ -220,33 +216,7 @@
 
 
                     <!--Shadow-->
-                    <Border x:Name="ShadowRectangle" IsHitTestVisible="False" Visibility="Collapsed" Width="32" Grid.Column="3" HorizontalAlignment="Left" >
-                        <Border.Resources>
-                            <ResourceDictionary>
-                                <!--Linear-->
-                                <ResourceDictionary.ThemeDictionaries>
-
-                                    <ResourceDictionary x:Key="Light">
-                                        <LinearGradientBrush x:Key="LinearBrush" StartPoint="0,0.5" EndPoint="1,0.5">
-                                            <GradientStop Color="#22000000" Offset="0"/>
-                                            <GradientStop Color="#11000000" Offset="0.2"/>
-                                            <GradientStop Color="#00000000" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </ResourceDictionary>
-
-                                    <ResourceDictionary x:Key="Dark">
-                                        <LinearGradientBrush x:Key="LinearBrush" StartPoint="0,0.5" EndPoint="1,0.5">
-                                            <GradientStop Color="#66000000" Offset="0"/>
-                                            <GradientStop Color="#44000000" Offset="0.2"/>
-                                            <GradientStop Color="#00000000" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </ResourceDictionary>
-
-                                </ResourceDictionary.ThemeDictionaries>
-                            </ResourceDictionary>
-                        </Border.Resources>
-                        <Rectangle Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{ThemeResource LinearBrush}"/>
-                    </Border>
+                    <Border x:Name="ShadowRectangle" IsHitTestVisible="False" Visibility="Collapsed" Width="32" Grid.Column="3" HorizontalAlignment="Left" Background="{ThemeResource AppHorizontalShadowBrush}"/>
 
 
                 </Grid>

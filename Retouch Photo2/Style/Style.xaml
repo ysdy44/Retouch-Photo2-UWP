@@ -6,21 +6,6 @@
     xmlns:apiContractPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
     >
 
-    <!--Brush-->
-    <SolidColorBrush x:Key="AppForeground" Color="{ThemeResource AppForegroundColor}"/>
-    <SolidColorBrush x:Key="AppBackground" Color="{ThemeResource AppBackgroundColor}"/>
-    <SolidColorBrush x:Key="AppBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
-
-    <SolidColorBrush x:Key="AppFill" Color="{ThemeResource AppFillColor}"/>
-    <SolidColorBrush x:Key="AppStroke" Color="{ThemeResource AppStrokeColor}"/>
-    <SolidColorBrush x:Key="AppText" Color="{ThemeResource AppTextColor}"/>
-
-    <apiContractPresent5:AcrylicBrush x:Key="AppAcrylicElementBrush" BackgroundSource="Backdrop" 
-         TintColor="{ThemeResource AppBackgroundColor}" TintOpacity="0.8" FallbackColor="{ThemeResource AppForegroundColor}" />
-    <apiContractPresent5:AcrylicBrush x:Key="AppAcrylicWindowBrush" BackgroundSource="HostBackdrop" 
-         TintColor="{ThemeResource AppBackgroundColor}" TintOpacity="0.7" FallbackColor="{ThemeResource AppForegroundColor}" />
-
-    
     <!--ScrollViewer-->
     <Style x:Key="AppHorizontalScrollViewerStyle" TargetType="ScrollViewer">
         <Setter Property="IsHorizontalRailEnabled" Value="True"/>
@@ -81,7 +66,7 @@
     <!--Flyout-->
     <Style x:Key="AppFlyoutPresenterStyle" TargetType="FlyoutPresenter">
         <Setter Property="MinHeight" Value="40"/>
-        <Setter Property="Padding" Value="4"/>
+        <Setter Property="Padding" Value="{StaticResource AppPanelPadding}"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
         <Setter Property="Template">
@@ -542,7 +527,6 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="RootGrid" 
-                            CornerRadius="{StaticResource AppCornerRadius}"
                             Padding="{TemplateBinding Padding}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"   

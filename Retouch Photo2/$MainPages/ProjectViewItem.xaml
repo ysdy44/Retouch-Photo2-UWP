@@ -26,6 +26,8 @@
                 <!--UnSelected-->
                 <VisualState x:Name="UnSelected">
                     <VisualState.Setters >
+                        <Setter Target = "ImageBorder.CornerRadius" Value="4"/>
+                        <Setter Target = "ImageBorder.BorderThickness" Value="2"/>
                         <Setter Target = "ImageBorder.BorderBrush" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
                         <Setter Target = "SelectedBorder.Visibility" Value="Visible"/>
                     </VisualState.Setters>
@@ -35,6 +37,8 @@
                 <VisualState x:Name="Selected">
                     <VisualState.Setters >
                         <Setter Target = "_RootGrid.Background" Value="{ThemeResource AppForeground}"/>
+                        <Setter Target = "ImageBorder.CornerRadius" Value="4"/>
+                        <Setter Target = "ImageBorder.BorderThickness" Value="2"/>
                         <Setter Target = "ImageBorder.BorderBrush" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
                         <Setter Target = "SelectedBorder.Visibility" Value="Visible"/>
                         <Setter Target = "SelectedBorder.Background" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
@@ -56,8 +60,8 @@
 
         <controls:DropShadowPanel HorizontalAlignment="Center" BlurRadius="20" OffsetX="8" OffsetY="8" ShadowOpacity="0.8" Color="{ThemeResource AppStrokeColor}">
             <!--Image-->
-            <Border x:Name="ImageBorder" CornerRadius="4" MinWidth="60" MinHeight="60" MaxWidth="200" Margin="6"                               
-                    BorderThickness="2" BorderBrush="Transparent">
+            <Border x:Name="ImageBorder" CornerRadius="0" MinWidth="60" MinHeight="60" MaxWidth="200" Margin="6"                               
+                    BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}">
                 <Border.Background>
                     <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Icons\LoadFaill.jpg" />
                 </Border.Background>

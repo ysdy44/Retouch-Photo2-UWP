@@ -23,7 +23,7 @@
                 <ResourceDictionary x:Key="Light">
 
                     <Color x:Key="AppForegroundColor" >#F8F8F8</Color>
-                    <Color x:Key="AppBackgroundColor" >#F0F0F2</Color>
+                    <Color x:Key="AppBackgroundColor" >#f2f3f5</Color>
                     <Color x:Key="AppBorderBrushColor" >#BEBCC7</Color>
 
                     <Color x:Key="AppFillColor" >#FFFFFF</Color>
@@ -37,7 +37,17 @@
                         <GradientStop Color="#EEEEEE" Offset="0.75"/>
                         <GradientStop Color="#E0E0E0" Offset="1"/>
                     </LinearGradientBrush>
-                    
+                    <LinearGradientBrush x:Key="AppHorizontalShadowBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Color="#22000000" Offset="0"/>
+                        <GradientStop Color="#09000000" Offset="0.2"/>
+                        <GradientStop Color="#00000000" Offset="1"/>
+                    </LinearGradientBrush>
+                    <LinearGradientBrush x:Key="AppVerticalShadowBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="#22000000" Offset="0"/>
+                        <GradientStop Color="#09000000" Offset="0.2"/>
+                        <GradientStop Color="#00000000" Offset="1"/>
+                    </LinearGradientBrush>
+
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="Dark">
@@ -57,7 +67,17 @@
                         <GradientStop Color="#0E0E0E" Offset="0.75"/>
                         <GradientStop Color="#030303" Offset="1"/>
                     </LinearGradientBrush>
-                    
+                    <LinearGradientBrush x:Key="AppHorizontalShadowBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Color="#66000000" Offset="0"/>
+                        <GradientStop Color="#44000000" Offset="0.2"/>
+                        <GradientStop Color="#00000000" Offset="1"/>
+                    </LinearGradientBrush>
+                    <LinearGradientBrush x:Key="AppVerticalShadowBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="#66000000" Offset="0"/>
+                        <GradientStop Color="#44000000" Offset="0.2"/>
+                        <GradientStop Color="#00000000" Offset="1"/>
+                    </LinearGradientBrush>
+
                 </ResourceDictionary>
 
             </ResourceDictionary.ThemeDictionaries>
@@ -65,9 +85,13 @@
             
             <!--Merged-->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ms-appx:///Style/Style.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Style/Brush.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Style/Converter.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Style/Resource.xaml"/>
                 <ResourceDictionary Source="ms-appx:///Style/Style.Button.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Style/Style.xaml"/>
                 <ResourceDictionary Source="ms-appx:///Style/Template.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Style/Transition.xaml"/>
 
                 <!--Version-->
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>

@@ -4,11 +4,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml" xmlns:layers="using:Retouch_Photo2.Layers"
     mc:Ignorable="d"
     d:DesignHeight="40"
     d:DesignWidth="200"
     Height="40"
+    Background="{ThemeResource AppBarItemDisabledForegroundThemeBrush}"
     >
 
 
@@ -36,13 +37,7 @@
 
                 <VisualState x:Name="Normal"/>
 
-                <VisualState x:Name="PointerOver">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemBaseLowColor}" />
-                        </ObjectAnimationUsingKeyFrames>
-                    </Storyboard>
-                </VisualState>
+                <VisualState x:Name="PointerOver"/>
 
                 <VisualState x:Name="Pressed">
                     <Storyboard>
@@ -58,13 +53,13 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TextBlock" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanedFontIcon" Storyboard.TargetProperty="Foreground">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualToggleButton" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SelectedFontIcon" Storyboard.TargetProperty="Foreground">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SelectedToggleButton" Storyboard.TargetProperty="IsChecked">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VisualFontIcon" Storyboard.TargetProperty="Foreground">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanedToggleButton" Storyboard.TargetProperty="Foreground">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
@@ -114,11 +109,9 @@
         </Grid.ColumnDefinitions>
 
         <!--Selected-->
-        <Button x:Name="SelectedButton" Grid.Column="1" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-            <FontIcon x:Name="SelectedFontIcon" Glyph="&#xECCA;" FontSize="18" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
+        <layers:SelectedToggleButton x:Name="SelectedToggleButton" Grid.Column="1"/>
 
-        
+
         <!--Icon-->
         <Border x:Name="IconBorder" Grid.Column="2" MinHeight="20" MinWidth="20" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{StaticResource AppStroke}" Background="White">
             <canvas:CanvasControl x:Name="IconCanvasControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
@@ -137,15 +130,11 @@
         <StackPanel Grid.Column="4" Orientation="Horizontal">
 
             <!--Visual-->
-            <Button x:Name="VisualButton" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                <FontIcon x:Name="VisualFontIcon" Glyph="&#xE7B3;" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}" />
-            </Button>
-            
+            <layers:VisualToggleButton x:Name="VisualToggleButton"/>
+
             <!--Expaned-->
-            <Button x:Name="ExpanedButton" Visibility="Collapsed" Width="30" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
-                <FontIcon x:Name="ExpanedFontIcon" Glyph="&#xEDDC;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </Button>
-            
+            <layers:ExpanedToggleButton x:Name="ExpanedToggleButton" Visibility="Collapsed"/>
+
         </StackPanel>
 
 
@@ -170,13 +159,13 @@
         
         <!--Overlay-->
         <Border x:Name="OverlayShowTopBorder" Grid.Column="0" Grid.ColumnSpan="5" Height="14.3" VerticalAlignment="Top" Style="{StaticResource OverlayStyle}">
-            <FontIcon Glyph="&#x25B2;" FontSize="18" FontFamily="Segoe UI Symbol"/>
+            <FontIcon Foreground="White" Glyph="&#x25B2;" FontSize="18" FontFamily="Segoe UI Symbol"/>
         </Border>
         <Border x:Name="OverlayShowCenterBorder" Grid.Column="0" Grid.ColumnSpan="5" Height="21.4" VerticalAlignment="Center" Style="{StaticResource OverlayStyle}">
-            <FontIcon Glyph="&#x25B6;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+            <FontIcon Foreground="White" Glyph="&#x25B6;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
         </Border>
         <Border x:Name="OverlayShowBottomBorder" Grid.Column="0" Grid.ColumnSpan="5" Height="14.3" VerticalAlignment="Bottom" Style="{StaticResource OverlayStyle}">
-            <FontIcon Glyph="&#x25BC;" FontSize="18" FontFamily="Segoe UI Symbol"/>
+            <FontIcon Foreground="White" Glyph="&#x25BC;" FontSize="18" FontFamily="Segoe UI Symbol"/>
         </Border>
 
     </Grid>

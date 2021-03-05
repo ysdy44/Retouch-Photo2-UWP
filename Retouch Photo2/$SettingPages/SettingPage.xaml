@@ -14,11 +14,7 @@
 
     <Page.Transitions>
         <TransitionCollection>
-            <NavigationThemeTransition>
-                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                    <SuppressNavigationTransitionInfo/>
-                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-            </NavigationThemeTransition>
+            <NavigationThemeTransition DefaultNavigationTransitionInfo="{StaticResource AppSuppressTransition}"/>
         </TransitionCollection>
     </Page.Transitions>
 
@@ -286,7 +282,7 @@
         <!--Body-->
         <ScrollViewer x:Name="ScrollViewer" Grid.RowSpan="2">
             <Border>
-                <StackPanel Padding="20,0" MaxWidth="600">
+                <StackPanel Padding="20,0" MaxWidth="800">
                     <StackPanel.ChildrenTransitions>
                         <TransitionCollection>
                             <EntranceThemeTransition IsStaggeringEnabled="True"/>
@@ -374,16 +370,12 @@
 
 
                         <!--Adaptive-->
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel.ChildrenTransitions>
-                                <TransitionCollection>
-                                </TransitionCollection>
-                            </StackPanel.ChildrenTransitions>
+                        <Grid>
                             <TextBlock x:Name="AdaptiveWidthTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                            <TextBlock x:Name="AdaptiveWidthCountTextBlock" Style="{StaticResource AppTextBlockStyle}">
+                            <TextBlock x:Name="AdaptiveWidthCountTextBlock" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}">
                                 0
                             </TextBlock>
-                        </StackPanel>
+                        </Grid>
                         <elements:AdaptiveWidthGrid x:Name="AdaptiveWidthGrid"/>
                         <HyperlinkButton x:Name="ResetAdaptiveWidthButton"/>
 

@@ -16,7 +16,7 @@
 
 
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
-        <StackPanel x:Name="StackPanel" HorizontalAlignment="Stretch">
+        <StackPanel x:Name="StackPanel" Padding="{StaticResource AppPanelPadding}" HorizontalAlignment="Stretch">
             <!--Children-->
         </StackPanel>
     </ScrollViewer >
