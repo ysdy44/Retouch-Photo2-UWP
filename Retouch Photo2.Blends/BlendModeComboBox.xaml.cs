@@ -4,7 +4,6 @@
 // Only:              ★★
 // Complete:      ★★
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Blends.Icons;
 using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -32,7 +31,7 @@ namespace Retouch_Photo2.Blends
         /// <summary> Gets or sets the blend-type. </summary>
         public BlendEffectMode? Mode
         {
-            get  => (BlendEffectMode?)base.GetValue(ModeProperty);
+            get => (BlendEffectMode?)base.GetValue(ModeProperty);
             set => base.SetValue(ModeProperty, value);
         }
         /// <summary> Identifies the <see cref = "BlendModeComboBox.Mode" /> dependency property. </summary>
@@ -87,75 +86,65 @@ namespace Retouch_Photo2.Blends
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ConstructGroup(this.NoneButton, resource.GetString("Blends_None"), new NoneIcon(), null);
-            
 
-            void constructGroup(Button button, UserControl icon, BlendEffectMode mode)
+            foreach (UIElement child in this.StackPanel.Children)
             {
-                this.ConstructGroup(button, resource.GetString($"Blends_{mode}"), icon, mode);
-            }
-
-            constructGroup(this.MultiplyButton, new MultiplyIcon(), BlendEffectMode.Multiply);
-            constructGroup(this.ScreenButton, new ScreenIcon(), BlendEffectMode.Screen);
-
-            constructGroup(this.DarkenButton, new DarkenIcon(), BlendEffectMode.Darken);
-            constructGroup(this.LightenButton, new LightenIcon(), BlendEffectMode.Lighten);
-
-            constructGroup(this.DissolveButton, new DissolveIcon(), BlendEffectMode.Dissolve);
-            constructGroup(this.ColorBurnButton, new ColorBurnIcon(), BlendEffectMode.ColorBurn);
-            constructGroup(this.LinearBurnButton, new LinearBurnIcon(), BlendEffectMode.LinearBurn);
-
-            constructGroup(this.DarkerColorButton, new DarkerColorIcon(), BlendEffectMode.DarkerColor);
-            constructGroup(this.LighterColorButton, new LighterColorIcon(), BlendEffectMode.LighterColor);
-
-            constructGroup(this.ColorDodgeButton, new ColorDodgeIcon(), BlendEffectMode.ColorDodge);
-            constructGroup(this.LinearDodgeButton, new LinearDodgeIcon(), BlendEffectMode.LinearDodge);
-
-            constructGroup(this.OverlayButton, new OverlayIcon(), BlendEffectMode.Overlay);
-            constructGroup(this.SoftLightButton, new SoftLightIcon(), BlendEffectMode.SoftLight);
-            constructGroup(this.HardLightButton, new HardLightIcon(), BlendEffectMode.HardLight);
-            constructGroup(this.VividLightButton, new VividLightIcon(), BlendEffectMode.VividLight);
-            constructGroup(this.LinearLightButton, new LinearLightIcon(), BlendEffectMode.LinearLight);
-            constructGroup(this.PinLightButton, new PinLightIcon(), BlendEffectMode.PinLight);
-
-            constructGroup(this.HardMixButton, new HardMixIcon(), BlendEffectMode.HardMix);
-            constructGroup(this.DifferenceButton, new DifferenceIcon(), BlendEffectMode.Difference);
-            constructGroup(this.ExclusionButton, new ExclusionIcon(), BlendEffectMode.Exclusion);
-
-            constructGroup(this.HueButton, new HueIcon(), BlendEffectMode.Hue);
-            constructGroup(this.SaturationButton,  new SaturationIcon(), BlendEffectMode.Saturation);
-            constructGroup(this.ColorButton, new ColorIcon(), BlendEffectMode.Color);
-
-            constructGroup(this.LuminosityButton, new LuminosityIcon(), BlendEffectMode.Luminosity);
-            constructGroup(this.SubtractButton, new SubtractIcon(), BlendEffectMode.Subtract);
-            constructGroup(this.DivisionButton, new DivisionIcon(), BlendEffectMode.Division);
-
-        }
-
-        //Group
-        private void ConstructGroup(Button button, string text, UserControl icon, BlendEffectMode? mode)
-        {
-            void group(BlendEffectMode? groupMode)
-            {
-                if (groupMode == mode)
+                if (child is Button button)
                 {
-                    button.IsEnabled = false;
+                    /*                
+                     <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}">
+                         <Button.Resources>
+                             <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends\Icons\NoneIcon.xaml"/>
+                         </Button.Resources>
+                         <Button.Tag>
+                             <ContentControl Template="{StaticResource NoneIcon}"/>
+                         </Button.Tag>
+                     </Button> 
+                   */
+                       
+                    //Group
+                    //void constructGroup(Button button)
+                    {
+                        string key = button.Name;
+                        string text = resource.GetString($"Blends_{key}");
+                        BlendEffectMode? mode = XML.CreateBlendMode(key);
 
-                    this.Title = text;
+
+                        //Button
+                        {
+                            button.Content = text;
+                            button.Resources = new ResourceDictionary
+                            {
+                                Source = new Uri($@"ms-appx:///Retouch Photo2.Blends\Icons\{key}Icon.xaml")
+                            };
+                            button.Tag = new ContentControl
+                            {
+                                Template = button.Resources[$"{key}Icon"] as ControlTemplate
+                            };
+                            button.Click += (s, e) => this.ModeChanged?.Invoke(this, mode);//Delegate
+                        }
+
+
+                        //Group
+                        group(this.Mode);
+                        this.Group += (s, e) => group(e);
+
+                        void group(BlendEffectMode? groupMode)
+                        {
+                            if (groupMode == mode)
+                            {
+                                button.IsEnabled = false;
+
+                                this.Title = text;
+                            }
+                            else button.IsEnabled = true;
+                        }
+                    }
                 }
-                else button.IsEnabled = true;
             }
 
-            //NoneButton
-            group(this.Mode);
 
-            //Buttons
-            button.Content = text;
-            button.Tag = icon;
-            button.Click += (s, e) => this.ModeChanged?.Invoke(this, mode);//Delegate
-
-            //Group
-            this.Group += (s, e) => group(e);
+            
         }
 
     }

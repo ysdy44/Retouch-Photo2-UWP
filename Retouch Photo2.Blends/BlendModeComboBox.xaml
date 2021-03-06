@@ -11,62 +11,62 @@
     >
 
     <ScrollViewer>
-        <StackPanel>
+        <StackPanel x:Name="StackPanel">
 
-            <Button x:Name="NoneButton" Style="{StaticResource AppIconSelectedButton}"/>
-
-            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-
-            <Button x:Name = "MultiplyButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "ScreenButton" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}"/>
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-            <Button x:Name = "DarkenButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "LightenButton" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "Multiply" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "Screen" Style="{StaticResource AppIconSelectedButton}"/>
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-            <Button x:Name = "DissolveButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "ColorBurnButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "LinearBurnButton" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "Darken" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "Lighten" Style="{StaticResource AppIconSelectedButton}"/>
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-            <Button x:Name = "DarkerColorButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "LighterColorButton" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "Dissolve" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "ColorBurn" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "LinearBurn" Style="{StaticResource AppIconSelectedButton}"/>
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-            <Button x:Name = "ColorDodgeButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "LinearDodgeButton" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "DarkerColor" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "LighterColor" Style="{StaticResource AppIconSelectedButton}"/>
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-            <Button x:Name = "OverlayButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "SoftLightButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "HardLightButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "VividLightButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "LinearLightButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "PinLightButton" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "ColorDodge" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "LinearDodge" Style="{StaticResource AppIconSelectedButton}"/>
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-            <Button x:Name = "HardMixButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "DifferenceButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "ExclusionButton" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "Overlay" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "SoftLight" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "HardLight" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "VividLight" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "LinearLight" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "PinLight" Style="{StaticResource AppIconSelectedButton}"/>
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-            <Button x:Name = "HueButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "SaturationButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "ColorButton" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "HardMix" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "Difference" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "Exclusion" Style="{StaticResource AppIconSelectedButton}"/>
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-            <Button x:Name = "LuminosityButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "SubtractButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name = "DivisionButton" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "Hue" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "Saturation" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "Color" Style="{StaticResource AppIconSelectedButton}"/>
+
+            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+            <Button x:Name = "Luminosity" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "Subtract" Style="{StaticResource AppIconSelectedButton}"/>
+            <Button x:Name = "Division" Style="{StaticResource AppIconSelectedButton}"/>
 
         </StackPanel>
     </ScrollViewer>

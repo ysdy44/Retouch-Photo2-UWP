@@ -110,87 +110,6 @@
     <Compile Include="BlendModeComboBox.xaml.cs">
       <DependentUpon>BlendModeComboBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Icons\ColorBurnIcon.xaml.cs">
-      <DependentUpon>ColorBurnIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\ColorIcon.xaml.cs">
-      <DependentUpon>ColorIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\ColorDodgeControl.xaml.cs">
-      <DependentUpon>ColorDodgeControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\DarkenIcon.xaml.cs">
-      <DependentUpon>DarkenIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\DarkerColorIcon.xaml.cs">
-      <DependentUpon>DarkerColorIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\DifferenceIcon.xaml.cs">
-      <DependentUpon>DifferenceIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\DissolveIcon.xaml.cs">
-      <DependentUpon>DissolveIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\DivisionIcon.xaml.cs">
-      <DependentUpon>DivisionIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\ExclusionIcon.xaml.cs">
-      <DependentUpon>ExclusionIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\HardLightIcon.xaml.cs">
-      <DependentUpon>HardLightIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\HardMixIcon.xaml.cs">
-      <DependentUpon>HardMixIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\HueIcon.xaml.cs">
-      <DependentUpon>HueIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\LightenIcon.xaml.cs">
-      <DependentUpon>LightenIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\LighterColorIcon.xaml.cs">
-      <DependentUpon>LighterColorIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\LinearBurnIcon.xaml.cs">
-      <DependentUpon>LinearBurnIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\LinearDodgeIcon.xaml.cs">
-      <DependentUpon>LinearDodgeIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\LinearLightIcon.xaml.cs">
-      <DependentUpon>LinearLightIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\LuminosityIcon.xaml.cs">
-      <DependentUpon>LuminosityIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\MultiplyIcon.xaml.cs">
-      <DependentUpon>MultiplyIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\NoneIcon.xaml.cs">
-      <DependentUpon>NoneIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\OverlayIcon.xaml.cs">
-      <DependentUpon>OverlayIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\PinLightIcon.xaml.cs">
-      <DependentUpon>PinLightIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\SaturationIcon.xaml.cs">
-      <DependentUpon>SaturationIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\ScreenIcon.xaml.cs">
-      <DependentUpon>ScreenIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\SoftLightIcon.xaml.cs">
-      <DependentUpon>SoftLightIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\SubtractIcon.xaml.cs">
-      <DependentUpon>SubtractIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\VividLightIcon.xaml.cs">
-      <DependentUpon>VividLightIcon.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TagTypeExtensions.cs" />
     <Compile Include="TagType.cs" />
@@ -222,7 +141,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Icons\ColorDodgeControl.xaml">
+    <Page Include="Icons\ColorDodgeIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
