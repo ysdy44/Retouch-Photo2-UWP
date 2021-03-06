@@ -13,6 +13,15 @@
     d:DesignHeight="400"
     >
 
+
+    <UserControl.Resources>
+        <!--Style-->
+        <Style x:Name="IconButton" TargetType="Button" BasedOn="{StaticResource AppIconButton}">
+            <Setter Property="Height" Value="50"/>
+        </Style>
+    </UserControl.Resources>
+
+
     <StackPanel Padding="2,0">
 
         <!--Amount-->

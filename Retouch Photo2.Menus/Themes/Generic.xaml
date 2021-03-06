@@ -119,7 +119,6 @@
                         <ContentPresenter x:Name="ContentPresenter" 
                                           Foreground="{TemplateBinding Foreground}" 
                                           Margin="{TemplateBinding Padding}"
-                                          Content="{TemplateBinding Content}"   
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"   
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"   
                                           />

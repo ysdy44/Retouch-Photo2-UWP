@@ -42,7 +42,6 @@
                                                             VerticalAlignment="Center"/>
 
                             <ContentPresenter x:Name="ContentPresenter"                    
-                                                                  Content="{TemplateBinding Content}"                        
                                                                   ContentTransitions="{TemplateBinding ContentTransitions}"                         
                                                                   ContentTemplate="{TemplateBinding ContentTemplate}"                      
                                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"                         

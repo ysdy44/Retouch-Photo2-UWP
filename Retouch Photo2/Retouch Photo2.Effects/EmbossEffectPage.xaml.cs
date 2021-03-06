@@ -71,7 +71,8 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("Effects_Emboss");
+            this.Button.Content = resource.GetString("Effects_Emboss");
+            this.Button.Style = this.IconButton;
 
             this.RadiusTextBlock.Text = resource.GetString("Effects_Emboss_Radius");
             this.AngleTextBlock.Text = resource.GetString("Effects_Emboss_Angle");
@@ -83,11 +84,13 @@ namespace Retouch_Photo2.Effects.Models
         /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
         /// <summary> Gets the button. </summary>
-        public EffectButton Button { get; } = new EffectButton
+        public Button Button { get; } = new Button
         {
-            Icon = new EmbossIcon()
+            Tag = new EmbossIcon()
         };
-        
+        /// <summary> Gets the ToggleButton. </summary>
+        public SelectedToggleButton ToggleButton { get; } = new SelectedToggleButton();
+
         public void Reset()
         {
             this.Radius = 1.0f;
@@ -115,7 +118,7 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowButton(Effect effect)
         {
-            this.Button.IsOn = effect.Emboss_IsOn;
+            this.ToggleButton.IsChecked = effect.Emboss_IsOn;
         }
         public void FollowPage(Effect effect)
         {
@@ -133,14 +136,21 @@ namespace Retouch_Photo2.Effects.Models
         //IsOn
         private void ConstructIsOn()
         {
-            this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
-            (
-                set: (effect) => effect.Emboss_IsOn = isOn,
+            this.ToggleButton.Tapped += (s, e) =>
+            {
+                bool isOn = !this.ToggleButton.IsChecked;
 
-                type: HistoryType.LayersProperty_SwitchEffect_Emboss,
-                getUndo: (effect) => effect.Emboss_IsOn,
-                setUndo: (effect, previous) => effect.Emboss_IsOn = previous
-            );
+                this.Button.IsEnabled = isOn;
+                this.ToggleButton.IsChecked = isOn;
+                this.MethodViewModel.EffectChanged<bool>
+                (
+                    set: (effect) => effect.Emboss_IsOn = isOn,
+
+                    type: HistoryType.LayersProperty_SwitchEffect_Emboss,
+                    getUndo: (effect) => effect.Emboss_IsOn,
+                    setUndo: (effect, previous) => effect.Emboss_IsOn = previous
+                );
+            };
         }
 
 

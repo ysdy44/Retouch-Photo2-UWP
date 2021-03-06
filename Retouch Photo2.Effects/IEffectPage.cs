@@ -4,6 +4,7 @@
 // Only:              ★★★
 // Complete:      ★★★
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Effects
 {
@@ -17,14 +18,16 @@ namespace Retouch_Photo2.Effects
         /// <summary> Gets the page. </summary>
         FrameworkElement Page { get; }
         /// <summary> Gets the button. </summary>
-        EffectButton Button { get; }
-        
+        Button Button { get; }
+        /// <summary> Gets the ToggleButton. </summary>
+        SelectedToggleButton ToggleButton { get; }
+
         /// <summary>
         /// Reset the <see cref="Effect"/> and <see cref="IEffectPage"/>'s data.
         /// </summary>
         void Reset();
         /// <summary>
-        /// <see cref="EffectButton"/>'s value follows the <see cref="Effect"/>.
+        /// <see cref="Button"/>'s value follows the <see cref="Effect"/>.
         /// </summary>
         /// <param name="effect"> The effect. </param>
         void FollowButton(Effect effect);

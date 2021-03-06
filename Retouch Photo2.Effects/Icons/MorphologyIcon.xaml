@@ -9,9 +9,12 @@
    d:DesignWidth="50"
     >
 
-    <PathIcon Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}">
-        <PathIcon.Data>
-            M105.649,68.109L105.649,93.569L64,93.569L64,68.109L105.649,68.109ZM64,34.431L64,59.891L22.351,59.891L22.351,34.431L64,34.431Z</PathIcon.Data>
-    </PathIcon>
+    <Viewbox Width="24">
+        <PathIcon Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}">
+            <PathIcon.Data>
+                M83.298,33.678L41.649,33.678L41.649,59.139L83.298,59.139L83.298,33.678ZM41.649,0L0,0L0,25.461L41.649,25.461L41.649,0Z
+            </PathIcon.Data>
+        </PathIcon>
+    </Viewbox>
     
 </UserControl>

@@ -118,8 +118,8 @@
     <Compile Include="Expanders\IExpanderButton.cs" />
     <Compile Include="IMenu.cs" />
     <Compile Include="MenuButtonsControl.cs" />
-    <Compile Include="MenuButtons\MenuButtons.xaml.cs">
-      <DependentUpon>MenuButtons.xaml</DependentUpon>
+    <Compile Include="MenuButtons\MenuButton.xaml.cs">
+      <DependentUpon>MenuButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="MenusExpanderCanvas.cs" />
     <Compile Include="MenuType.cs" />
@@ -143,7 +143,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MenuButtons\MenuButtons.xaml">
+    <Page Include="MenuButtons\MenuButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

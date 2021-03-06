@@ -70,7 +70,8 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("Effects_DirectionalBlur");
+            this.Button.Content = resource.GetString("Effects_DirectionalBlur");
+            this.Button.Style = this.IconButton;
 
             this.RadiusTextBlock.Text = resource.GetString("Effects_DirectionalBlur_Radius");
             this.AngleTextBlock.Text = resource.GetString("Effects_DirectionalBlur_Angle");
@@ -82,11 +83,13 @@ namespace Retouch_Photo2.Effects.Models
         /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
         /// <summary> Gets the button. </summary>
-        public EffectButton Button { get; } = new EffectButton
+        public Button Button { get; } = new Button
         {
-            Icon = new DirectionalBlurIcon()
+            Tag = new DirectionalBlurIcon(),
         };
-        
+        /// <summary> Gets the ToggleButton. </summary>
+        public SelectedToggleButton ToggleButton { get; } = new SelectedToggleButton();
+
         public void Reset()
         {
             this.Radius = 0.0f;
@@ -114,7 +117,7 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowButton(Effect effect)
         {
-            this.Button.IsOn = effect.DirectionalBlur_IsOn;
+            this.ToggleButton.IsChecked = effect.DirectionalBlur_IsOn;
         }
         public void FollowPage(Effect effect)
         {
@@ -132,14 +135,21 @@ namespace Retouch_Photo2.Effects.Models
         //IsOn
         private void ConstructIsOn()
         {
-            this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
-            (
-                set: (effect) => effect.DirectionalBlur_IsOn = isOn,
+            this.ToggleButton.Tapped += (s, e) =>
+            {
+                bool isOn = !this.ToggleButton.IsChecked;
 
-                type: HistoryType.LayersProperty_SwitchEffect_DirectionalBlur,
-                getUndo: (effect) => effect.DirectionalBlur_IsOn,
-                setUndo: (effect, previous) => effect.DirectionalBlur_IsOn = previous
-            );            
+                this.Button.IsEnabled = isOn;
+                this.ToggleButton.IsChecked = isOn;
+                this.MethodViewModel.EffectChanged<bool>
+                (
+                   set: (effect) => effect.DirectionalBlur_IsOn = isOn,
+
+                   type: HistoryType.LayersProperty_SwitchEffect_DirectionalBlur,
+                   getUndo: (effect) => effect.DirectionalBlur_IsOn,
+                   setUndo: (effect, previous) => effect.DirectionalBlur_IsOn = previous
+                );
+            };
         }
 
 

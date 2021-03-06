@@ -59,7 +59,8 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("Effects_Sharpen");
+            this.Button.Content = resource.GetString("Effects_Sharpen");
+            this.Button.Style = this.IconButton;
 
             this.AmountTextBlock.Text = resource.GetString("Effects_Sharpen_Amount");
         }
@@ -70,11 +71,14 @@ namespace Retouch_Photo2.Effects.Models
         /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
         /// <summary> Gets the button. </summary>
-        public EffectButton Button { get; } = new EffectButton
+        public Button Button { get; } = new Button
         {
-            Icon = new SharpenIcon()
+            Tag = new SharpenIcon()
         };
-        
+        /// <summary> Gets the ToggleButton. </summary>
+        public SelectedToggleButton ToggleButton { get; } = new SelectedToggleButton();
+
+
         public void Reset()
         {
             this.Amount = 0.0f;
@@ -90,7 +94,7 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowButton(Effect effect)
         {
-            this.Button.IsOn = effect.Sharpen_IsOn;
+            this.ToggleButton.IsChecked = effect.Sharpen_IsOn;
         }
         public void FollowPage(Effect effect)
         {
@@ -107,14 +111,21 @@ namespace Retouch_Photo2.Effects.Models
         //IsOn
         private void ConstructIsOn()
         {
-            this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
-            (
-                set: (effect) => effect.Straighten_IsOn = isOn,
+            this.ToggleButton.Tapped += (s, e) =>
+            {
+                bool isOn = !this.ToggleButton.IsChecked;
 
-                type: HistoryType.LayersProperty_SwitchEffect_Sharpen,
-                getUndo: (effect) => effect.Sharpen_IsOn,
-                setUndo: (effect, previous) => effect.Sharpen_IsOn = previous
-            );
+                this.Button.IsEnabled = isOn;
+                this.ToggleButton.IsChecked = isOn;
+                this.MethodViewModel.EffectChanged<bool>
+                (
+                   set: (effect) => effect.Straighten_IsOn = isOn,
+
+                   type: HistoryType.LayersProperty_SwitchEffect_Sharpen,
+                   getUndo: (effect) => effect.Straighten_IsOn,
+                   setUndo: (effect, previous) => effect.Straighten_IsOn = previous
+                );
+            };
         }
 
 

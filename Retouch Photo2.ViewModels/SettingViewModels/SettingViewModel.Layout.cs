@@ -83,7 +83,7 @@ namespace Retouch_Photo2.ViewModels
         }
 
         /// <summary> Gets the center child canvas width. </summary>
-        public float CenterChildWidth
+        public float CanvasWidth
         {
             get
             {
@@ -101,7 +101,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         /// <summary> Gets the center child canvas height. </summary>
-        public float CenterChildHeight
+        public float CanvasHeight
         {
             get
             {

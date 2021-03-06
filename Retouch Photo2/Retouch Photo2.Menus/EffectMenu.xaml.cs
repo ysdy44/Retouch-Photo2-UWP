@@ -14,6 +14,7 @@ using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Shapes;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -105,14 +106,21 @@ namespace Retouch_Photo2.Menus.Models
         public IList<IEffectPage> EffectPages { get; } = new List<IEffectPage>
         {
             new GaussianBlurEffectPage(),
+            null,
             new DirectionalBlurEffectPage(),
+            null,
             new SharpenEffectPage(),
+            null,
             new OuterShadowEffectPage(),
+            null,
 
             new EdgeEffectPage(),
+            null,
             new MorphologyEffectPage(),
+            null,
 
             new EmbossEffectPage(),
+            null,
             new StraightenEffectPage(),
         };
 
@@ -133,7 +141,10 @@ namespace Retouch_Photo2.Menus.Models
             {
                 foreach (IEffectPage effectPage in control.EffectPages)
                 {
-                    effectPage.Button.IsEnabled = true;
+                    if (effectPage == null) continue;
+
+                    effectPage.ToggleButton.IsEnabled = true;
+                    effectPage.Button.IsEnabled = effectPage.ToggleButton.IsChecked;
                     effectPage.FollowButton(value);
 
                     if (effectPage == control.EffectPage)
@@ -144,9 +155,12 @@ namespace Retouch_Photo2.Menus.Models
             }
             else
             {
-                foreach (IEffectPage effect in control.EffectPages)
+                foreach (IEffectPage effectPage in control.EffectPages)
                 {
-                    effect.Button.IsEnabled = false;
+                    if (effectPage == null) continue;
+
+                    effectPage.Button.IsEnabled = false;
+                    effectPage.ToggleButton.IsEnabled = false;
                 }
             }
 
@@ -209,9 +223,24 @@ namespace Retouch_Photo2.Menus.Models
         {
             foreach (IEffectPage effectPage in this.EffectPages)
             {
-                this.EffectsStackPanel.Children.Add(effectPage.Button);
+                if (effectPage == null)
+                {
+                    this.ButtonsStackPanel.Children.Add(new Rectangle
+                    {
+                        Style = this.SeparatorRectangle
+                    });
+                    this.ToggleButtonsStackPanel.Children.Add(new Rectangle
+                    {
+                        Style = this.SeparatorRectangle2
+                    });
+                }
+                else
+                {
+                    this.ButtonsStackPanel.Children.Add(effectPage.Button);
+                    this.ToggleButtonsStackPanel.Children.Add(effectPage.ToggleButton);
 
-                effectPage.Button.Tapped += (s, e) => this.Navigate(effectPage);
+                    effectPage.Button.Tapped += (s, e) => this.Navigate(effectPage);
+                }
             }
         }
 
@@ -239,7 +268,7 @@ namespace Retouch_Photo2.Menus.Models
             effectPage.FollowPage(effect);
             this.EffectPage = effectPage;
 
-            string title = effectPage.Button.Text;
+            string title = (string)effectPage.Button.Content;
             UIElement secondPage = effectPage.Page;
             this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
         }

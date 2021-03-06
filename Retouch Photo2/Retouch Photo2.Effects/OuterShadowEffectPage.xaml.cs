@@ -108,7 +108,8 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("Effects_OuterShadow");
+            this.Button.Content = resource.GetString("Effects_OuterShadow");
+            this.Button.Style = this.IconButton;
 
             this.RadiusTextBlock.Text = resource.GetString("Effects_OuterShadow_Radius");
             this.OpacityTextBlock.Text = resource.GetString("Effects_OuterShadow_Opacity");
@@ -124,11 +125,14 @@ namespace Retouch_Photo2.Effects.Models
         /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
         /// <summary> Gets the button. </summary>
-        public EffectButton Button { get; } = new EffectButton
+        public Button Button { get; } = new Button
         {
-            Icon = new OuterShadowIcon()
+            Tag = new OuterShadowIcon()
         };
-        
+        /// <summary> Gets the ToggleButton. </summary>
+        public SelectedToggleButton ToggleButton { get; } = new SelectedToggleButton();
+
+
         public void Reset()
         {
             this.Radius = 12.0f;
@@ -168,7 +172,7 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowButton(Effect effect)
         {
-            this.Button.IsOn = effect.OuterShadow_IsOn;
+            this.ToggleButton.IsChecked = effect.OuterShadow_IsOn;
         }
         public void FollowPage(Effect effect)
         {
@@ -189,14 +193,21 @@ namespace Retouch_Photo2.Effects.Models
         //IsOn
         private void ConstructIsOn()
         {
-            this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
-            (
-                set: (effect) => effect.OuterShadow_IsOn = isOn,
+            this.ToggleButton.Tapped += (s, e) =>
+            {
+                bool isOn = !this.ToggleButton.IsChecked;
 
-                type: HistoryType.LayersProperty_SwitchEffect_OuterShadow,
-                getUndo: (effect) => effect.OuterShadow_IsOn,
-                setUndo: (effect, previous) => effect.OuterShadow_IsOn = previous
-            );
+                this.Button.IsEnabled = isOn;
+                this.ToggleButton.IsChecked = isOn;
+                this.MethodViewModel.EffectChanged<bool>
+                (
+                   set: (effect) => effect.OuterShadow_IsOn = isOn,
+
+                   type: HistoryType.LayersProperty_SwitchEffect_OuterShadow,
+                   getUndo: (effect) => effect.OuterShadow_IsOn,
+                   setUndo: (effect, previous) => effect.OuterShadow_IsOn = previous
+                );
+            };
         }
 
 

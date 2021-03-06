@@ -60,7 +60,8 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("Effects_GaussianBlur");
+            this.Button.Content = resource.GetString("Effects_GaussianBlur");
+            this.Button.Style = this.IconButton;
 
             this.RadiusTextBlock.Text = resource.GetString("Effects_GaussianBlur_Radius");
         }
@@ -71,11 +72,14 @@ namespace Retouch_Photo2.Effects.Models
         /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
         /// <summary> Gets the button. </summary>
-        public EffectButton Button { get; } = new EffectButton
+        public Button Button { get; } = new Button
         {
-            Icon = new GaussianBlurIcon()
+            Tag = new GaussianBlurIcon()
         };
-        
+        /// <summary> Gets the ToggleButton. </summary>
+        public SelectedToggleButton ToggleButton { get; } = new SelectedToggleButton();
+
+
         public void Reset()
         {
             this.Radius = 0.0f;
@@ -91,7 +95,7 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowButton(Effect effect)
         {
-            this.Button.IsOn = effect.GaussianBlur_IsOn;
+            this.ToggleButton.IsChecked = effect.GaussianBlur_IsOn;
         }
         public void FollowPage(Effect effect)
         {
@@ -108,14 +112,21 @@ namespace Retouch_Photo2.Effects.Models
         //IsOn
         private void ConstructIsOn()
         {
-            this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
-            (
-                set: (effect) => effect.GaussianBlur_IsOn = isOn,
+            this.ToggleButton.Tapped += (s, e) =>
+            {
+                bool isOn = !this.ToggleButton.IsChecked;
 
-                type: HistoryType.LayersProperty_SwitchEffect_GaussianBlur,
-                getUndo: (effect) => effect.GaussianBlur_IsOn,
-                setUndo: (effect, previous) => effect.GaussianBlur_IsOn = previous
-            );
+                this.Button.IsEnabled = isOn;
+                this.ToggleButton.IsChecked = isOn;
+                this.MethodViewModel.EffectChanged<bool>
+                (
+                    set: (effect) => effect.GaussianBlur_IsOn = isOn,
+
+                    type: HistoryType.LayersProperty_SwitchEffect_GaussianBlur,
+                    getUndo: (effect) => effect.GaussianBlur_IsOn,
+                    setUndo: (effect, previous) => effect.GaussianBlur_IsOn = previous
+                );
+            };
         }
 
 

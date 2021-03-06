@@ -63,8 +63,8 @@ namespace Retouch_Photo2
         {
             //Destination
             Vector2 destinationPostion = this.SettingViewModel.FullScreenOffset;
-            float destinationWidth = this.SettingViewModel.CenterChildWidth;
-            float destinationHeight = this.SettingViewModel.CenterChildHeight;
+            float destinationWidth = this.SettingViewModel.CanvasWidth; 
+            float destinationHeight = this.SettingViewModel.CanvasHeight;
             this.ViewModel.CanvasTransformer.TransitionDestination(destinationPostion, destinationWidth, destinationHeight);
 
             if (this._lockSourceRect is Rect data)

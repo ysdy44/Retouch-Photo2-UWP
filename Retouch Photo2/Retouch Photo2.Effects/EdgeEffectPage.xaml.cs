@@ -4,12 +4,11 @@
 // Only:              
 // Complete:      ★★★
 using Retouch_Photo2.Effects.Icons;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
-using Retouch_Photo2.Historys;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Retouch_Photo2.Layers;
 
 namespace Retouch_Photo2.Effects.Models
 {
@@ -71,7 +70,8 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("Effects_Edge");
+            this.Button.Content = resource.GetString("Effects_Edge");
+            this.Button.Style = this.IconButton;
 
             this.AmountTextBlock.Text = resource.GetString("Effects_Edge_Amount");
             this.RadiusTextBlock.Text = resource.GetString("Effects_Edge_Radius");
@@ -83,11 +83,14 @@ namespace Retouch_Photo2.Effects.Models
         /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
         /// <summary> Gets the button. </summary>
-        public EffectButton Button { get; } = new EffectButton
+        public Button Button { get; } = new Button
         {
-            Icon = new EdgeIcon()
+            Tag = new EdgeIcon()
         };
-        
+        /// <summary> Gets the ToggleButton. </summary>
+        public SelectedToggleButton ToggleButton { get; } = new SelectedToggleButton();
+
+
         public void Reset()
         {
             this.Amount = 0.5f;
@@ -115,7 +118,7 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowButton(Effect effect)
         {
-            this.Button.IsOn = effect.Edge_IsOn;
+            this.ToggleButton.IsChecked = effect.Edge_IsOn;
         }
         public void FollowPage(Effect effect)
         {
@@ -133,14 +136,21 @@ namespace Retouch_Photo2.Effects.Models
         //IsOn
         private void ConstructIsOn()
         {
-            this.Button.Toggled += (isOn) =>  this.MethodViewModel.EffectChanged<bool>
-            (
-                set: (effect) => effect.Edge_IsOn = isOn,
+            this.ToggleButton.Tapped += (s, e) =>
+            {
+                bool isOn = !this.ToggleButton.IsChecked;
 
-                type: HistoryType.LayersProperty_SwitchEffect_Edge,
-                getUndo: (effect) => effect.Edge_IsOn,
-                setUndo: (effect, previous) => effect.Edge_IsOn = previous
-            );
+                this.Button.IsEnabled = isOn;
+                this.ToggleButton.IsChecked = isOn;
+                this.MethodViewModel.EffectChanged<bool>
+                (
+                   set: (effect) => effect.Edge_IsOn = isOn,
+
+                   type: HistoryType.LayersProperty_SwitchEffect_Edge,
+                   getUndo: (effect) => effect.Edge_IsOn,
+                   setUndo: (effect, previous) => effect.Edge_IsOn = previous
+                );
+            };
         }
 
 

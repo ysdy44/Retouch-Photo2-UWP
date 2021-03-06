@@ -4,12 +4,11 @@
 // Only:              
 // Complete:      ★★★
 using Retouch_Photo2.Effects.Icons;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
-using Retouch_Photo2.Historys;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Retouch_Photo2.Layers;
 
 namespace Retouch_Photo2.Effects.Models
 {
@@ -60,7 +59,8 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Text = resource.GetString("Effects_Morphology");
+            this.Button.Content = resource.GetString("Effects_Morphology");
+            this.Button.Style = this.IconButton;
 
             this.SizeTextBlock.Text = resource.GetString("Effects_Morphology_Size");
         }
@@ -71,11 +71,14 @@ namespace Retouch_Photo2.Effects.Models
         /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
         /// <summary> Gets the button. </summary>
-        public EffectButton Button { get; } = new EffectButton
+        public Button Button { get; } = new Button
         {
-            Icon = new MorphologyIcon()
+            Tag = new MorphologyIcon()
         };
-        
+        /// <summary> Gets the ToggleButton. </summary>
+        public SelectedToggleButton ToggleButton { get; } = new SelectedToggleButton();
+
+
         public void Reset()
         {
             this.Size = 1;
@@ -91,7 +94,7 @@ namespace Retouch_Photo2.Effects.Models
         }
         public void FollowButton(Effect effect)
         {
-            this.Button.IsOn = effect.Morphology_IsOn;
+            this.ToggleButton.IsChecked = effect.Morphology_IsOn;
         }
         public void FollowPage(Effect effect)
         {
@@ -108,14 +111,21 @@ namespace Retouch_Photo2.Effects.Models
         //IsOn
         private void ConstructIsOn()
         {
-            this.Button.Toggled += (isOn) => this.MethodViewModel.EffectChanged<bool>
-            (
-                set: (effect) => effect.Morphology_IsOn = isOn,
+            this.ToggleButton.Tapped += (s, e) =>
+            {
+                bool isOn = !this.ToggleButton.IsChecked;
 
-                type: HistoryType.LayersProperty_SwitchEffect_Mmorphology,
-                getUndo: (effect) => effect.Morphology_IsOn,
-                setUndo: (effect, previous) => effect.Morphology_IsOn = previous
-            );            
+                this.Button.IsEnabled = isOn;
+                this.ToggleButton.IsChecked = isOn;
+                this.MethodViewModel.EffectChanged<bool>
+                (
+                    set: (effect) => effect.Morphology_IsOn = isOn,
+
+                    type: HistoryType.LayersProperty_SwitchEffect_Mmorphology,
+                    getUndo: (effect) => effect.Morphology_IsOn,
+                    setUndo: (effect, previous) => effect.Morphology_IsOn = previous
+                );
+            };
         }
 
 
