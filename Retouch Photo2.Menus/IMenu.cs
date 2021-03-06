@@ -19,6 +19,9 @@ namespace Retouch_Photo2.Menus
 
         /// <summary> Gets the title. </summary>
         string Title { get; }
+        /// <summary> Gets the IsOpen. </summary>
+        bool IsOpen { set; }
+        
         /// <summary> Gets the page. </summary>
         UIElement Page { get; }
         /// <summary> Get  the main page. </summary>

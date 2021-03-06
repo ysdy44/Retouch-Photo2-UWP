@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.GeometryHeart,
-            CenterContent = new GeometryHeartIcon()
+            Icon = new GeometryHeartIcon()
         };
         public FrameworkElement Page { get; } = new GeometryHeartPage();
 
@@ -82,7 +82,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.SpreadButton.CenterContent = resource.GetString("Tools_GeometryHeart_Spread");
+            this.SpreadButton.Content = resource.GetString("Tools_GeometryHeart_Spread");
         }
     }
 

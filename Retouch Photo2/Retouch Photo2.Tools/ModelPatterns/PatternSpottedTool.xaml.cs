@@ -32,7 +32,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.PatternSpotted,
-            CenterContent = new PatternSpottedIcon()
+            Icon = new PatternSpottedIcon()
         };
         public FrameworkElement Page { get; } = new PatternSpottedPage();
 
@@ -101,8 +101,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.RadiusButton.CenterContent = resource.GetString("Tools_PatternSpotted_Radius");
-            this.StepButton.CenterContent = resource.GetString("Tools_PatternSpotted_Step");
+            this.RadiusButton.Content = resource.GetString("Tools_PatternSpotted_Radius");
+            this.StepButton.Content = resource.GetString("Tools_PatternSpotted_Step");
         }
 
     }

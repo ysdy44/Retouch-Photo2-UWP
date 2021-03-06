@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolButton
         {
             Type = ToolType.Pen,
-            CenterContent = new PenIcon()
+            Icon = new PenIcon()
         };
         public FrameworkElement Page { get; } = new GeometryPage();
 

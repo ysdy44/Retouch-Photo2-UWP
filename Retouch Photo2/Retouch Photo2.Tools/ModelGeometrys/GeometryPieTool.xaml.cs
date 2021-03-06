@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.GeometryPie,
-            CenterContent = new GeometryPieIcon()
+            Icon = new GeometryPieIcon()
         };
         public FrameworkElement Page { get; } = new GeometryPiePage();
 
@@ -81,7 +81,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.SweepAngleButton.CenterContent = resource.GetString("Tools_GeometryPie_SweepAngle");
+            this.SweepAngleButton.Content = resource.GetString("Tools_GeometryPie_SweepAngle");
         }
     }
 

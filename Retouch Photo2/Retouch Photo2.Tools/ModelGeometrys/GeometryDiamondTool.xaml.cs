@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.GeometryDiamond,
-            CenterContent = new GeometryDiamondIcon()
+            Icon = new GeometryDiamondIcon()
         };
         public FrameworkElement Page { get; } = new GeometryDiamondPage();
 
@@ -84,7 +84,7 @@ namespace Retouch_Photo2.Tools.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.MirrorTextBlock.Text = resource.GetString("Tools_GeometryDiamond_Mirror");
-            this.MidButton.CenterContent = resource.GetString("Tools_GeometryDiamond_Mid");
+            this.MidButton.Content = resource.GetString("Tools_GeometryDiamond_Mid");
         }
     }
 

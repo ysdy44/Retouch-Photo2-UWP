@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.GeometryCookie,
-            CenterContent = new GeometryCookieIcon()
+            Icon = new GeometryCookieIcon()
         };
         public FrameworkElement Page { get; } = new GeometryCookiePage();
 
@@ -99,8 +99,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.InnerRadiusButton.CenterContent = resource.GetString("Tools_GeometryCookie_InnerRadius");
-            this.SweepAngleButton.CenterContent = resource.GetString("Tools_GeometryCookie_SweepAngle");
+            this.InnerRadiusButton.Content = resource.GetString("Tools_GeometryCookie_InnerRadius");
+            this.SweepAngleButton.Content = resource.GetString("Tools_GeometryCookie_SweepAngle");
         }
     }
 

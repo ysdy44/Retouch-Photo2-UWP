@@ -22,7 +22,8 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class LayerMenu : Expander, IMenu
     {
 
-        //@Content     
+        //@Content
+        public bool IsOpen { set { } }
         public override UIElement MainPage => this.LayerMainPage;
 
         readonly LayerMainPage LayerMainPage = new LayerMainPage();
@@ -72,7 +73,6 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.ToolTip.Content =
             this.Button.Title =
             this.Title = resource.GetString("Menus_Layer");
         }
@@ -83,7 +83,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets the button. </summary>
         public override IExpanderButton Button { get; } = new MenuButton
         {
-            CenterContent = new Retouch_Photo2.Layers.Icon()
+            Content = new Retouch_Photo2.Layers.Icon()
         };
         /// <summary> Reset Expander. </summary>
         public override void Reset() { }

@@ -25,9 +25,9 @@ namespace Retouch_Photo2.Elements
         public CanvasControl ToolDrawCanvasControl => this._ToolDrawCanvasControl;
 
         //Touchbar
-        /// <summary> TouchbarPickerBorder's Child. </summary>
+        /// <summary> TouchbarPickerBorder's child. </summary>
         public FrameworkElement TouchbarPicker { set => this.TouchbarBorder.Children.Add(value); }
-        /// <summary> TouchbarSliderBorder's Child. </summary>
+        /// <summary> TouchbarSliderBorder's child. </summary>
         public FrameworkElement TouchbarSlider
         {
             set
@@ -41,28 +41,28 @@ namespace Retouch_Photo2.Elements
         //Foot
         /// <summary> Gets or sets RadiusAnimaPanel's content. </summary>
         public FrameworkElement FootPage { set => this.FootPanel.Content = value; }
-        /// <summary> _LeftIcon's CenterContent. </summary>
+        /// <summary> _LeftIcon's content. </summary>
         public object LeftIcon { get => this._LeftIcon.Content; set => this._LeftIcon.Content = value; }
-        /// <summary> _RightIcon's CenterContent. </summary>
+        /// <summary> _RightIcon's content. </summary>
         public object RightIcon { get => this._RightIcon.Content; set => this._RightIcon.Content = value; }
 
         //Head
-        /// <summary> HeadBorder's Child. </summary>
+        /// <summary> HeadBorder's child. </summary>
         public UIElement HeadChild { get => this.HeadBorder.Child; set => this.HeadBorder.Child = value; }
 
         //Left
-        /// <summary> LeftBorder's Child. </summary>
+        /// <summary> LeftBorder's child. </summary>
         public UIElement LeftPanel { get => this.LeftBorder.Child; set => this.LeftBorder.Child = value; }
         //Right
-        /// <summary> RightBorder's Child. </summary>
+        /// <summary> RightBorder's child. </summary>
         public UIElement RightPanel { get => this.RightBorder.Child; set => this.RightBorder.Child = value; }
-        /// <summary> GalleryButton. </summary>   
+        /// <summary> Gallery button. </summary>   
         public Button GalleryButton => this._GalleryButton;
-        /// <summary> GalleryToolTip. </summary>   
+        /// <summary> Gallery ToolTip. </summary>   
         public ToolTip GalleryToolTip => this._RightPhotosToolTip;
-        /// <summary> WidthButton. </summary>   
+        /// <summary> Width button. </summary>   
         public Button WidthButton => this._WidthButton;
-        /// <summary> WidthToolTip. </summary>   
+        /// <summary> Width ToolTip. </summary>   
         public ToolTip WidthToolTip => this._WidthToolTip;
 
 

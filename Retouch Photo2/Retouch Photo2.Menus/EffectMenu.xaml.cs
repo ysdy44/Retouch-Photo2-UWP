@@ -24,6 +24,7 @@ namespace Retouch_Photo2.Menus.Models
     {
 
         //@Content     
+        public bool IsOpen { set { } }
         public override UIElement MainPage => this.EffectMainPage;
 
         readonly EffectMainPage EffectMainPage = new EffectMainPage();
@@ -70,7 +71,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets the button. </summary>
         public override IExpanderButton Button { get; } = new MenuButton
         {
-            CenterContent = new Retouch_Photo2.Effects.Icon()
+            Content = new Retouch_Photo2.Effects.Icon()
         };
         /// <summary> Reset Expander. </summary>
         public override void Reset()

@@ -22,8 +22,8 @@ namespace Retouch_Photo2.Tools
         /// <summary> Get the self. </summary>
         FrameworkElement Self { get; }
 
-        /// <summary> Sets the center content. </summary>
-        object CenterContent { set; }
+        /// <summary> Sets the icon. </summary>
+        object Icon { set; }
         /// <summary> Gets the ToolTip. </summary>
         ToolTip ToolTip { get; }
     }

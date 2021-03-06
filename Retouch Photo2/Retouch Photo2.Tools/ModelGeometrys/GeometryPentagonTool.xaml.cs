@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.GeometryPentagon,
-            CenterContent = new GeometryPentagonIcon()
+            Icon = new GeometryPentagonIcon()
         };
         public FrameworkElement Page { get; } = new GeometryPentagonPage();
 
@@ -77,7 +77,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.PointsButton.CenterContent = resource.GetString("Tools_GeometryPentagon_Points");
+            this.PointsButton.Content = resource.GetString("Tools_GeometryPentagon_Points");
         }
     }
 

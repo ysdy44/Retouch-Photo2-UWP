@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.GeometryDount,
-            CenterContent = new GeometryDountIcon()
+            Icon = new GeometryDountIcon()
         };
         public FrameworkElement Page { get; } = new GeometryDountPage();
 
@@ -82,7 +82,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.HoleRadiusButton.CenterContent = resource.GetString("Tools_GeometryDount_HoleRadius");
+            this.HoleRadiusButton.Content = resource.GetString("Tools_GeometryDount_HoleRadius");
         }
     }
 

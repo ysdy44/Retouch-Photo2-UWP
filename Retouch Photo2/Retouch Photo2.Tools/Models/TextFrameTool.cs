@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolButton
         {
             Type = ToolType.TextFrame,
-            CenterContent = new TextFrameIcon()
+            Icon = new TextFrameIcon()
         };
         public FrameworkElement Page { get; } = new TextPage();
 

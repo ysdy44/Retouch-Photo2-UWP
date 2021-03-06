@@ -26,8 +26,8 @@ namespace Retouch_Photo2.Tools
         public bool IsSelected { get; set; }
         /// <summary> Get the self. </summary>
         public FrameworkElement Self => this;
-        /// <summary> Sets the center content. </summary>
-        public object CenterContent { set; get; }
+        /// <summary> Sets the icon. </summary>
+        public object Icon { set; get; }
         /// <summary> Gets the ToolTip. </summary>
         public ToolTip ToolTip => null;
 

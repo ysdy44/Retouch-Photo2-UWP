@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.GeometryTriangle,
-            CenterContent = new GeometryTriangleIcon()
+            Icon = new GeometryTriangleIcon()
         };
         public FrameworkElement Page { get; } = new GeometryTrianglePage();
 
@@ -83,7 +83,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.CenterButton.CenterContent = resource.GetString("Tools_GeometryTriangle_Center");
+            this.CenterButton.Content = resource.GetString("Tools_GeometryTriangle_Center");
             this.MirrorTextBlock.Text = resource.GetString("Tools_GeometryTriangle_Mirror");
         }
     }

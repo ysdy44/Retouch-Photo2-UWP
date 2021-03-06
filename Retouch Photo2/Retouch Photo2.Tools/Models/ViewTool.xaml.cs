@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolButton
         {
             Type = ToolType.View,
-            CenterContent = new ViewIcon()
+            Icon = new ViewIcon()
         };
         public FrameworkElement Page => this.ViewPage;
 
@@ -204,10 +204,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.RadianButton.CenterContent = resource.GetString("Tools_View_Radian");
+            this.RadianButton.Content = resource.GetString("Tools_View_Radian");
             this.RadianClearToolTip.Content = resource.GetString("Tools_View_RadianClear");
 
-            this.ScaleButton.CenterContent = resource.GetString("Tools_View_Scale");
+            this.ScaleButton.Content = resource.GetString("Tools_View_Scale");
             this.ScaleClearToolTip.Content = resource.GetString("Tools_View_ScaleClear");
         }
 

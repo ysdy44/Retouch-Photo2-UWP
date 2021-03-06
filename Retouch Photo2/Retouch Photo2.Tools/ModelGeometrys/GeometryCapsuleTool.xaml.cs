@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.GeometryCapsule,
-            CenterContent = new GeometryCapsuleIcon()
+            Icon = new GeometryCapsuleIcon()
         };
         public FrameworkElement Page { get; } = new GeometryCapsulePage();
 

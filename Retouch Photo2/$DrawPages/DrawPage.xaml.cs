@@ -102,9 +102,6 @@ namespace Retouch_Photo2
             //Key
             this.SettingViewModel.RegisteKey();
 
-            //Tip
-            this.TipViewModel.IsOpen = false;
-
             if (this.DrawLayout.IsFullScreen == false) return;
 
             if (e.Parameter is IProjectViewItem item)
@@ -136,9 +133,6 @@ namespace Retouch_Photo2
 
             //Key
             this.SettingViewModel.UnRegisteKey();
-
-            //Tip
-            this.TipViewModel.IsOpen = false;
 
             SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
         }

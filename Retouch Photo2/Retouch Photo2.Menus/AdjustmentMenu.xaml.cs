@@ -27,7 +27,8 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class AdjustmentMenu : Expander, IMenu
     {
 
-        //@Content     
+        //@Content
+        public bool IsOpen { set { } }
         public override UIElement MainPage => this.AdjustmentMainPage;
 
         readonly AdjustmentMainPage AdjustmentMainPage = new AdjustmentMainPage();
@@ -75,7 +76,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets the button. </summary>
         public override IExpanderButton Button { get; } = new MenuButton
         {
-            CenterContent = new Retouch_Photo2.Adjustments.Icon()
+            Content = new Retouch_Photo2.Adjustments.Icon()
         };
         /// <summary> Reset Expander. </summary>
         public override void Reset()

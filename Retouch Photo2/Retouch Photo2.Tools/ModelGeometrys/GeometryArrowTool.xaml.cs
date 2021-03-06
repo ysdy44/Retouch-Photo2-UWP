@@ -44,7 +44,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.GeometryArrow,
-            CenterContent = new GeometryArrowIcon()
+            Icon = new GeometryArrowIcon()
         };
         public FrameworkElement Page { get; } = new GeometryArrowPage();
 
@@ -99,7 +99,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ValueButton.CenterContent = resource.GetString("Tools_GeometryArrow_Value");
+            this.ValueButton.Content = resource.GetString("Tools_GeometryArrow_Value");
 
             this.LeftTailTextBlock.Text = resource.GetString("Tools_GeometryArrow_LeftTail");
             this.RightTailTextBlock.Text = resource.GetString("Tools_GeometryArrow_RightTail");

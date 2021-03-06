@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolButton
         {
             Type = ToolType.GeometryRectangle,
-            CenterContent = new GeometryRectangleIcon()
+            Icon = new GeometryRectangleIcon()
         };
         public FrameworkElement Page { get; } = new GeometryPage();
 

@@ -16,6 +16,7 @@ namespace Retouch_Photo2.Menus.Models
     {
 
         //@Content     
+        public bool IsOpen { set { } }
         public override UIElement MainPage => this.KeyboardMainPage;
 
         readonly KeyboardMainPage KeyboardMainPage = new KeyboardMainPage();
@@ -42,7 +43,6 @@ namespace Retouch_Photo2.Menus.Models
         //Strings
         private void ConstructStrings()
         {
-            this.Button.ToolTip.Content =
             this.Button.Title =
             this.Title = "Keyboard";
         }
@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets the button. </summary>
         public override IExpanderButton Button { get; } = new MenuButton
         {
-            CenterContent = "Key"
+            Content = "Key"
         };
         /// <summary> Reset Expander. </summary>
         public override void Reset() { }

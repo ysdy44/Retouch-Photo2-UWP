@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.GeometryStar,
-            CenterContent = new GeometryStarIcon()
+            Icon = new GeometryStarIcon()
         };
         public FrameworkElement Page { get; } = new GeometryStarPage();
 
@@ -97,8 +97,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.PointsButton.CenterContent = resource.GetString("Tools_GeometryStar_Points");
-            this.InnerRadiusButton.CenterContent = resource.GetString("Tools_GeometryStar_InnerRadius");
+            this.PointsButton.Content = resource.GetString("Tools_GeometryStar_Points");
+            this.InnerRadiusButton.Content = resource.GetString("Tools_GeometryStar_InnerRadius");
         }
     }
 

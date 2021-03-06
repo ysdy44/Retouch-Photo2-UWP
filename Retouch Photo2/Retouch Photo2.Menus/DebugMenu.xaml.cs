@@ -16,7 +16,8 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class DebugMenu : Expander, IMenu
     {
 
-        //@Content     
+        //@Content
+        public bool IsOpen { set { } }
         public override UIElement MainPage => this.DebugMainPage;
 
         readonly DebugMainPage DebugMainPage = new DebugMainPage();
@@ -53,7 +54,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets the button. </summary>
         public override IExpanderButton Button { get; } = new MenuButton
         {
-            CenterContent = "?"
+            Content = "?"
         };
         /// <summary> Reset Expander. </summary>
         public override void Reset() { }

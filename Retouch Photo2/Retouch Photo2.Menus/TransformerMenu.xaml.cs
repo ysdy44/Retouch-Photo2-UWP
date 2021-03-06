@@ -22,7 +22,8 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class TransformerMenu : Expander, IMenu
     {
 
-        //@Content     
+        //@Content
+        public bool IsOpen { set => this.TransformerMainPage.IsOpen = value; }
         public override UIElement MainPage => this.TransformerMainPage;
 
         readonly TransformerMainPage TransformerMainPage = new TransformerMainPage();
@@ -58,18 +59,8 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.ToolTip.Content =
             this.Button.Title =
             this.Title = resource.GetString("Menus_Transformer");
-
-            this.Button.ToolTip.Closed += (s, e) => this.TransformerMainPage.IsOpen = false;
-            this.Button.ToolTip.Opened += (s, e) =>
-            {
-                if (this.IsSecondPage) return;
-                if (this.State != ExpanderState.Overlay) return;
-
-                this.TransformerMainPage.IsOpen = true;
-            };
         }
 
         //Menu
@@ -78,7 +69,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets the button. </summary>
         public override IExpanderButton Button { get; } = new MenuButton
         {
-            CenterContent = new FanKit.Transformers.Icon()
+            Content = new FanKit.Transformers.Icon()
         };
         /// <summary> Reset Expander. </summary>
         public override void Reset() { }

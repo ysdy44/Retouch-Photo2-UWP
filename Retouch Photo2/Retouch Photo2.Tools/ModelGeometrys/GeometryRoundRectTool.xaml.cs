@@ -30,7 +30,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.GeometryRoundRect,
-            CenterContent = new GeometryRoundRectIcon()
+            Icon = new GeometryRoundRectIcon()
         };
         public FrameworkElement Page { get; } = new GeometryRoundRectPage();
 
@@ -81,7 +81,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.CornerButton.CenterContent = resource.GetString("Tools_GeometryRoundRect_Corner");
+            this.CornerButton.Content = resource.GetString("Tools_GeometryRoundRect_Corner");
         }
     }
 

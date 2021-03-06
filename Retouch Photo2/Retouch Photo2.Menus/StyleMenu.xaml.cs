@@ -23,6 +23,7 @@ namespace Retouch_Photo2.Menus.Models
     {
 
         //@Content     
+        public bool IsOpen { set { } }
         public override UIElement MainPage => this.StyleMainPage;
 
         readonly StyleMainPage StyleMainPage = new StyleMainPage();
@@ -61,7 +62,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets the button. </summary>
         public override IExpanderButton Button { get; } = new MenuButton
         {
-            CenterContent = new Retouch_Photo2.Styles.Icon()
+            Content = new Retouch_Photo2.Styles.Icon()
         };
         /// <summary> Reset Expander. </summary>
         public override void Reset() { }

@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.PatternDiagonal,
-            CenterContent = new PatternDiagonalIcon()
+            Icon = new PatternDiagonalIcon()
         };
         public FrameworkElement Page { get; } = new PatternDiagonalPage();
 
@@ -87,8 +87,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.OffsetButton.CenterContent = resource.GetString("Tools_PatternDiagonal_Offset");
-            this.HorizontalStepButton.CenterContent = resource.GetString("Tools_PatternDiagonal_HorizontalStep");
+            this.OffsetButton.Content = resource.GetString("Tools_PatternDiagonal_Offset");
+            this.HorizontalStepButton.Content = resource.GetString("Tools_PatternDiagonal_HorizontalStep");
         }
     }
 

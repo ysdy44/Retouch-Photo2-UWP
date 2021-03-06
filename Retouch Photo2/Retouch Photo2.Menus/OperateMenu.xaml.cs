@@ -25,7 +25,8 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class OperateMenu : Expander, IMenu
     {
 
-        //@Content     
+        //@Content
+        public bool IsOpen { set => this.OperateMainPage.IsOpen = value; }
         public override UIElement MainPage => this.OperateMainPage;
 
         readonly OperateMainPage OperateMainPage = new OperateMainPage();
@@ -54,18 +55,8 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.ToolTip.Content =
             this.Button.Title =
             this.Title = resource.GetString("Menus_Operate");
-
-            this.Button.ToolTip.Closed += (s, e) => this.OperateMainPage.IsOpen = false;
-            this.Button.ToolTip.Opened += (s, e) =>
-            {
-                if (this.IsSecondPage) return;
-                if (this.State != ExpanderState.Overlay) return;
-
-                this.OperateMainPage.IsOpen = true;
-            };
         }
 
         //Menu
@@ -74,7 +65,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets the button. </summary>
         public override IExpanderButton Button { get; } = new MenuButton
         {
-            CenterContent = new Retouch_Photo2.Operates.Icon()
+            Content = new Retouch_Photo2.Operates.Icon()
         };
         /// <summary> Reset Expander. </summary>
         public override void Reset() { }

@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolButton
         {
             Type = ToolType.Brush,
-            CenterContent = new BrushIcon()
+            Icon = new BrushIcon()
         };
         public FrameworkElement Page => this.BrushPage;
 

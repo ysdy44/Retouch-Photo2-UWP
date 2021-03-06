@@ -19,7 +19,8 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class StrokeMenu : Expander, IMenu
     {
 
-        //@Content     
+        //@Content
+        public bool IsOpen { set => this.StrokeMainPage.IsOpen = value; }
         public override UIElement MainPage => this.StrokeMainPage;
 
         readonly StrokeMainPage StrokeMainPage = new StrokeMainPage();
@@ -48,18 +49,8 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.ToolTip.Content =
             this.Button.Title =
             this.Title = resource.GetString("Menus_Stroke");
-
-            this.Button.ToolTip.Closed += (s, e) => this.StrokeMainPage.IsOpen = false;
-            this.Button.ToolTip.Opened += (s, e) =>
-            {
-                if (this.IsSecondPage) return;
-                if (this.State != ExpanderState.Overlay) return;
-
-                this.StrokeMainPage.IsOpen = true;
-            };
         }
 
         //Menu
@@ -68,7 +59,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Gets or sets the button. </summary>
         public override IExpanderButton Button { get; } = new MenuButton
         {
-            CenterContent = new Retouch_Photo2.Strokes.Icon()
+            Content = new Retouch_Photo2.Strokes.Icon()
         };
         /// <summary> Reset Expander. </summary>
         public override void Reset() { }

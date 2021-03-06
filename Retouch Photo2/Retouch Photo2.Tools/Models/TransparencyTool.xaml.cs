@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolButton
         {
             Type = ToolType.Transparency,
-            CenterContent = new TransparencyIcon()
+            Icon = new TransparencyIcon()
         };
         public FrameworkElement Page => this.TransparencyPage;
 

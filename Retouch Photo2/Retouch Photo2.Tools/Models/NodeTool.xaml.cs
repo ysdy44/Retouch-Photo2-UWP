@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolButton
         {
             Type = ToolType.Node,
-            CenterContent = new NodeIcon()
+            Icon = new NodeIcon()
         };
         public FrameworkElement Page => this.NodePage;
         NodePage NodePage = new NodePage();

@@ -50,7 +50,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.GeometryCog,
-            CenterContent = new GeometryCogIcon()
+            Icon = new GeometryCogIcon()
         };
         public FrameworkElement Page { get; } = new GeometryCogPage();
 
@@ -115,10 +115,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.CountButton.CenterContent = resource.GetString("Tools_GeometryCog_Count");
-            this.InnerRadiusButton.CenterContent = resource.GetString("Tools_GeometryCog_InnerRadius");
-            this.ToothButton.CenterContent = resource.GetString("Tools_GeometryCog_Tooth");
-            this.NotchButton.CenterContent = resource.GetString("Tools_GeometryCog_Notch");
+            this.CountButton.Content = resource.GetString("Tools_GeometryCog_Count");
+            this.InnerRadiusButton.Content = resource.GetString("Tools_GeometryCog_InnerRadius");
+            this.ToothButton.Content = resource.GetString("Tools_GeometryCog_Tooth");
+            this.NotchButton.Content = resource.GetString("Tools_GeometryCog_Notch");
         }
     }
 

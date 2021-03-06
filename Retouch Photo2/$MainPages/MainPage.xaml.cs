@@ -22,8 +22,6 @@ namespace Retouch_Photo2
     {
 
         //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
@@ -39,6 +37,7 @@ namespace Retouch_Photo2
             this.ConstructStrings();
             this.ConstructInitialControl();
             this.ConstructDragAndDrop();
+
 
             //ProjectViewItem
             ProjectViewItem.ItemClick = this.ItemClick;

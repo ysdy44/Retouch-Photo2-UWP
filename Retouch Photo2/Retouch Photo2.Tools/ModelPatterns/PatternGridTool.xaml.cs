@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolSecondButton
         {
             Type = ToolType.PatternGrid,
-            CenterContent = new PatternGridIcon()
+            Icon = new PatternGridIcon()
         };
         public FrameworkElement Page { get; } = new PatternGridPage();
 
@@ -103,8 +103,8 @@ namespace Retouch_Photo2.Tools.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.TypeTextBlock.Text = resource.GetString("Tools_PatternGrid_Type");
-            this.HorizontalStepButton.CenterContent = resource.GetString("Tools_PatternGrid_HorizontalStep");
-            this.VerticalStepButton.CenterContent = resource.GetString("Tools_PatternGrid_VerticalStep");
+            this.HorizontalStepButton.Content = resource.GetString("Tools_PatternGrid_HorizontalStep");
+            this.VerticalStepButton.Content = resource.GetString("Tools_PatternGrid_VerticalStep");
         }
     }
 

@@ -1,5 +1,4 @@
 ﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus
 {
@@ -10,14 +9,14 @@ namespace Retouch_Photo2.Menus
     {
         /// <summary> Gets or sets the title. </summary>
         string Title { get; set; }
+        /// <summary> Sets the content. </summary>
+        object Content { set; }
+        /// <summary> Sets the IsOpen. </summary>
+        bool IsOpen { set; }
+        
         /// <summary> Sets the state. </summary>
         ExpanderState ExpanderState { set; }
         /// <summary> Get the self. </summary>
         FrameworkElement Self { get; }
-
-        /// <summary> Sets the center content. </summary>
-        object CenterContent { set; }
-        /// <summary> Gets the ToolTip. </summary>
-        ToolTip ToolTip { get; }
     }
 }

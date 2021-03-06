@@ -256,7 +256,7 @@
             <StackPanel>
                 <elements:SizePicker x:Name="SetupSizePicker"/>
                 <ContentControl Height="6"/>
-                <CheckBox x:Name="SetupAnchorCheckBox" />
+                <CheckBox x:Name="SetupAnchorCheckBox" Margin="4,0" Foreground="{ThemeResource AppText}"/>
                 <transformers:IndicatorControl x:Name="SetupIndicatorControl" Visibility="Collapsed" Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}"
                                                FlowDirection="LeftToRight"/>
             </StackPanel>

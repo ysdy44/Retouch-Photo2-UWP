@@ -33,8 +33,8 @@ namespace Retouch_Photo2.Tools
         public bool IsSelected { get => !this.Button.IsEnabled; set => this.Button.IsEnabled = !value; }
         /// <summary> Get the self. </summary>
         public FrameworkElement Self => this;
-        /// <summary> Sets the center content. </summary>
-        public object CenterContent { set => this.Button.Content = value; get => this.Button.Content; }
+        /// <summary> Sets the icon. </summary>
+        public object Icon { set => this.Button.Content = value; get => this.Button.Content; }
         /// <summary> Gets the ToolTip. </summary>
         public ToolTip ToolTip => this._ToolTip;
 

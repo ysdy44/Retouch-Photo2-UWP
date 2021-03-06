@@ -22,7 +22,8 @@ namespace Retouch_Photo2.Menus.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
 
-        //@Content     
+        //@Content
+        public bool IsOpen { set { } }
         public override UIElement MainPage => this.ColorMainPage;
 
         readonly ColorMainPage ColorMainPage = new ColorMainPage();
@@ -35,7 +36,7 @@ namespace Retouch_Photo2.Menus.Models
         public ColorMenu()
         {
             this.InitializeComponent();
-            this.Button.CenterContent = new ColorEllipse
+            this.Button.Content = new ColorEllipse
             (
                  dataContext: this.SelectionViewModel,
                  path: nameof(this.SelectionViewModel.Color),
@@ -57,7 +58,6 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.ToolTip.Content =
             this.Button.Title =
             base.Title = resource.GetString("Menus_Color");
         }
@@ -70,11 +70,11 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Reset Expander. </summary>
         public override void Reset() { }
 
-    }    
-    
+    }
+
     /// <summary>
-         /// MainPage of <see cref="ColorMenu"/>.
-         /// </summary>
+    /// MainPage of <see cref="ColorMenu"/>.
+    /// </summary>
     public sealed partial class ColorMainPage : UserControl
     {
 

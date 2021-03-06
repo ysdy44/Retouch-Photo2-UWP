@@ -9,8 +9,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools
 {
     /// <summary>
-    /// Represents the TouchBar that is used to adjust value.
-    /// Touch slider, It has three events : Started, Delta and Completed.
+    /// Represents a slider that is used to adjust value on touch-bar.
     /// </summary>
     public sealed partial class TouchbarSlider : TouchSliderBase
     {

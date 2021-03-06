@@ -43,7 +43,7 @@ namespace Retouch_Photo2.Tools.Models
         public IToolButton Button { get; } = new ToolButton
         {
             Type = ToolType.Crop,
-            CenterContent = new CropIcon()
+            Icon = new CropIcon()
         };
         public FrameworkElement Page => this.CropPage;
 
