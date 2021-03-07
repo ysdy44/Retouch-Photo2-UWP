@@ -266,9 +266,6 @@ namespace Retouch_Photo2
                 new CropTool(),
 
 
-                new MoreTool(),
-
-
                 new PatternGridTool(),
                 new PatternDiagonalTool(),
                 new PatternSpottedTool(),

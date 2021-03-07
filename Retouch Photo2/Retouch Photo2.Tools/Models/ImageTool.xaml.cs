@@ -9,7 +9,6 @@ using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Photos;
-using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
@@ -31,16 +30,16 @@ namespace Retouch_Photo2.Tools.Models
         Layerage MezzanineLayerage = null;
 
 
-        //@Content
-        public FrameworkElement Icon { get; } = new ImageIcon();
-        public IToolButton Button { get; } = new ToolButton
-        {
-            Type = ToolType.Image,
-            Icon = new ImageIcon()
-        };
+        //@Content 
+        public ToolType Type => ToolType.Image;
+        public ToolGroupType GroupType => ToolGroupType.Tool;
+        public string Title { get; set; }
+        public ControlTemplate Icon { get; set; }
         public FrameworkElement Page => this.ImagePage;
 
         readonly ImagePage ImagePage = new ImagePage();
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get; set; }
 
 
         private float _sizeWidth;

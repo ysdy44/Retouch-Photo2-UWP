@@ -101,8 +101,8 @@ namespace Retouch_Photo2.Blends
                          </Button.Tag>
                      </Button> 
                    */
-                       
-                    //Group
+
+                    //@Group
                     //void constructGroup(Button button)
                     {
                         string key = button.Name;
@@ -115,10 +115,12 @@ namespace Retouch_Photo2.Blends
                             button.Content = text;
                             button.Resources = new ResourceDictionary
                             {
+                                //@Template
                                 Source = new Uri($@"ms-appx:///Retouch Photo2.Blends\Icons\{key}Icon.xaml")
                             };
                             button.Tag = new ContentControl
                             {
+                                //@Template
                                 Template = button.Resources[$"{key}Icon"] as ControlTemplate
                             };
                             button.Click += (s, e) => this.ModeChanged?.Invoke(this, mode);//Delegate

@@ -8,10 +8,11 @@ using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools.Icons;
+using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
@@ -33,14 +34,14 @@ namespace Retouch_Photo2.Tools.Models
         bool IsSnap => this.SettingViewModel.IsSnap;
 
 
-        //@Content
-        public FrameworkElement Icon { get; } = new PenIcon();
-        public IToolButton Button { get; } = new ToolButton
-        {
-            Type = ToolType.Pen,
-            Icon = new PenIcon()
-        };
+        //@Content 
+        public ToolType Type => ToolType.Pen;
+        public ToolGroupType GroupType => ToolGroupType.Tool;
+        public string Title { get; set; }
+        public ControlTemplate Icon { get; set; }
         public FrameworkElement Page { get; } = new GeometryPage();
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get; set; }
 
 
         NodeCollectionMode Mode = NodeCollectionMode.None;

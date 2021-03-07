@@ -7,7 +7,6 @@ using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
@@ -39,15 +38,15 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public FrameworkElement Icon { get; } = new CropIcon();
-        public IToolButton Button { get; } = new ToolButton
-        {
-            Type = ToolType.Crop,
-            Icon = new CropIcon()
-        };
+        public ToolType Type => ToolType.Crop;
+        public ToolGroupType GroupType => ToolGroupType.Tool;
+        public string Title { get; set; }
+        public ControlTemplate Icon { get; set; }
         public FrameworkElement Page => this.CropPage;
 
         readonly CropPage CropPage = new CropPage();
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get; set; }
 
 
         Layerage Layerage;

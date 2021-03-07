@@ -133,10 +133,8 @@ namespace Retouch_Photo2.ViewModels
                 foreach (ITool tool in this.Tools)
                 {
                     if (tool == null) continue;
-                    if (tool.Button == null) continue;
-                    if (tool.Button.ToolTip == null) continue;
 
-                    tool.Button.ToolTip.IsOpen = value;
+                    tool.IsOpen = value;
                 }
             }
         }

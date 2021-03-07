@@ -4,11 +4,9 @@
 // Only:              
 // Complete:      ★★★
 using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -40,13 +38,13 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public FrameworkElement Icon { get; } = new GeometryArrowIcon();
-        public IToolButton Button { get; } = new ToolSecondButton
-        {
-            Type = ToolType.GeometryArrow,
-            Icon = new GeometryArrowIcon()
-        };
+        public ToolType Type => ToolType.GeometryArrow;
+        public ToolGroupType GroupType => ToolGroupType.Geometry;
+        public string Title { get; set; }
+        public ControlTemplate Icon { get; set; }
         public FrameworkElement Page { get; } = new GeometryArrowPage();
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get; set; }
 
 
         public override ILayer CreateLayer(Transformer transformer)

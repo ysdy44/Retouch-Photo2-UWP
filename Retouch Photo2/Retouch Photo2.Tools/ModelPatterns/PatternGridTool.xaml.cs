@@ -8,7 +8,7 @@ using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools.Icons;
+using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -39,15 +39,15 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public FrameworkElement Icon { get; } = new PatternGridIcon();
-        public IToolButton Button { get; } = new ToolSecondButton
-        {
-            Type = ToolType.PatternGrid,
-            Icon = new PatternGridIcon()
-        };
+        public ToolType Type => ToolType.PatternGrid;
+        public ToolGroupType GroupType => ToolGroupType.Pattern;
+        public string Title { get; set; }
+        public ControlTemplate Icon { get; set; }
         public FrameworkElement Page { get; } = new PatternGridPage();
-
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get; set; }
                 
+
         public override ILayer CreateLayer(Transformer transformer)
         {
             return new PatternGridLayer

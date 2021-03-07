@@ -7,7 +7,7 @@ using FanKit.Transformers;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools.Icons;
+using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -26,13 +26,13 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public FrameworkElement Icon { get; } = new GeometryPieIcon();
-        public IToolButton Button { get; } = new ToolSecondButton
-        {
-            Type = ToolType.GeometryPie,
-            Icon = new GeometryPieIcon()
-        };
+        public ToolType Type => ToolType.GeometryPie;
+        public ToolGroupType GroupType => ToolGroupType.Geometry;
+        public string Title { get; set; }
+        public ControlTemplate Icon { get; set; }
         public FrameworkElement Page { get; } = new GeometryPiePage();
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get; set; }
 
 
         public override ILayer CreateLayer(Transformer transformer)
@@ -85,9 +85,7 @@ namespace Retouch_Photo2.Tools.Models
         }
     }
 
-    /// <summary>
-    /// Page of <see cref="GeometryPieTool"/>.
-    /// </summary>
+
     internal partial class GeometryPiePage : Page
     {
         //SweepAngle

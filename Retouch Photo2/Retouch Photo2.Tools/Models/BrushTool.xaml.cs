@@ -7,7 +7,6 @@ using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
@@ -36,15 +35,15 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public FrameworkElement Icon { get; } = new BrushIcon();
-        public IToolButton Button { get; } = new ToolButton
-        {
-            Type = ToolType.Brush,
-            Icon = new BrushIcon()
-        };
+        public ToolType Type => ToolType.Brush;
+        public ToolGroupType GroupType => ToolGroupType.Tool;
+        public string Title { get; set; }
+        public ControlTemplate Icon { get; set; }
         public FrameworkElement Page => this.BrushPage;
 
         readonly BrushPage BrushPage = new BrushPage();
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get; set; }
 
 
         BrushHandleMode HandleMode = BrushHandleMode.None;

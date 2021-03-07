@@ -4,11 +4,9 @@
 // Only:              
 // Complete:      ★★★
 using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -27,13 +25,13 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public FrameworkElement Icon { get; } = new PatternDiagonalIcon();
-        public IToolButton Button { get; } = new ToolSecondButton
-        {
-            Type = ToolType.PatternDiagonal,
-            Icon = new PatternDiagonalIcon()
-        };
+        public ToolType Type => ToolType.PatternDiagonal;
+        public ToolGroupType GroupType => ToolGroupType.Pattern;
+        public string Title { get; set; }
+        public ControlTemplate Icon { get; set; }
         public FrameworkElement Page { get; } = new PatternDiagonalPage();
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get; set; }
 
 
         public override ILayer CreateLayer(Transformer transformer)
@@ -92,9 +90,7 @@ namespace Retouch_Photo2.Tools.Models
         }
     }
 
-    /// <summary>
-    /// Page of <see cref="PatternDiagonalTool"/>.
-    /// </summary>
+
     internal partial class PatternDiagonalPage : Page
     {
 

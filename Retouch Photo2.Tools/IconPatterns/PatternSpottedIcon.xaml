@@ -1,28 +1,23 @@
-﻿<UserControl
-    x:Class="Retouch_Photo2.Tools.Icons.PatternSpottedIcon"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="50"
-    d:DesignWidth="50"
-    >
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Border BorderThickness="1" BorderBrush="{ThemeResource SystemAltHighColor}" Background="{ThemeResource SystemAltHighColor}" >
-        <Canvas Width="19" Height="19">
-            <Ellipse Canvas.Left="0" Canvas.Top="0" Width="4" Height="4" Fill="DeepSkyBlue" />
-            <Ellipse Canvas.Left="7.5" Canvas.Top="0" Width="4" Height="4" Fill="DeepSkyBlue" />
-            <Ellipse Canvas.Left="15" Canvas.Top="0" Width="4" Height="4" Fill="DeepSkyBlue" />
+    <ControlTemplate x:Key="PatternSpottedIcon" TargetType="ContentControl">
+        <Border BorderThickness="1" BorderBrush="{ThemeResource SystemAltHighColor}" Background="{ThemeResource SystemAltHighColor}" >
+            <Canvas Width="19" Height="19">
+                <Ellipse Canvas.Left="0" Canvas.Top="0" Width="4" Height="4" Fill="DeepSkyBlue" />
+                <Ellipse Canvas.Left="7.5" Canvas.Top="0" Width="4" Height="4" Fill="DeepSkyBlue" />
+                <Ellipse Canvas.Left="15" Canvas.Top="0" Width="4" Height="4" Fill="DeepSkyBlue" />
 
-            <Ellipse Canvas.Left="0" Canvas.Top="7.5" Width="4" Height="4" Fill="DeepSkyBlue" />
-            <Ellipse Canvas.Left="7.5" Canvas.Top="7.5" Width="4" Height="4" Fill="DeepSkyBlue" />
-            <Ellipse Canvas.Left="15" Canvas.Top="7.5" Width="4" Height="4" Fill="DeepSkyBlue" />
+                <Ellipse Canvas.Left="0" Canvas.Top="7.5" Width="4" Height="4" Fill="DeepSkyBlue" />
+                <Ellipse Canvas.Left="7.5" Canvas.Top="7.5" Width="4" Height="4" Fill="DeepSkyBlue" />
+                <Ellipse Canvas.Left="15" Canvas.Top="7.5" Width="4" Height="4" Fill="DeepSkyBlue" />
 
-            <Ellipse Canvas.Left="0" Canvas.Top="15" Width="4" Height="4" Fill="DeepSkyBlue" />
-            <Ellipse Canvas.Left="7.5" Canvas.Top="15" Width="4" Height="4" Fill="DeepSkyBlue" />
-            <Ellipse Canvas.Left="15" Canvas.Top="15" Width="4" Height="4" Fill="DeepSkyBlue" />
-        </Canvas>
-    </Border>
+                <Ellipse Canvas.Left="0" Canvas.Top="15" Width="4" Height="4" Fill="DeepSkyBlue" />
+                <Ellipse Canvas.Left="7.5" Canvas.Top="15" Width="4" Height="4" Fill="DeepSkyBlue" />
+                <Ellipse Canvas.Left="15" Canvas.Top="15" Width="4" Height="4" Fill="DeepSkyBlue" />
+            </Canvas>
+        </Border>
+    </ControlTemplate>
 
-</UserControl>
+</ResourceDictionary>

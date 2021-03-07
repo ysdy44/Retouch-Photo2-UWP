@@ -231,13 +231,14 @@
     <Compile Include="Retouch Photo2.Tools\ModelPatterns\PatternGridTool.xaml.cs">
       <DependentUpon>PatternGridTool.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Tools\Models\TextFrameTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\TransparencyTool.Method.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\CropTool.Method.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.Method.cs" />
     <Compile Include="Retouch Photo2.Tools\MoveTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\NodeTool.Method.cs" />
     <Compile Include="Retouch Photo2.Tools\ToolManager.cs" />
-    <Compile Include="Retouch Photo2.Tools\ToolsControl.xaml.cs">
+    <Compile Include="%24DrawPages\ToolsControl.xaml.cs">
       <DependentUpon>ToolsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
@@ -266,7 +267,6 @@
       <DependentUpon>NodeTool.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.cs" />
-    <Compile Include="Retouch Photo2.Tools\Models\TextFrameTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\TextArtisticTool.cs" />
     <Compile Include="Retouch Photo2.Tools\TextPage.xaml.cs">
       <DependentUpon>TextPage.xaml</DependentUpon>
@@ -703,7 +703,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Tools\ToolsControl.xaml">
+    <Page Include="%24DrawPages\ToolsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

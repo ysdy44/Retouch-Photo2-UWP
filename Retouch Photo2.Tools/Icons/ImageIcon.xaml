@@ -1,20 +1,15 @@
-﻿<UserControl
-    x:Class="Retouch_Photo2.Tools.Icons.ImageIcon"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="50"
-    d:DesignWidth="50"
-    >
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <ContentPresenter Padding="1" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
-        <Path Fill="{ThemeResource SystemControlBackgroundBaseHighBrush}">
-            <Path.Data>
-                M22.634,16.915l-22.634,0l0,-16.915l22.634,0l0,16.915Zm-21.152,-8.458l0,2.126l4.921,-4.54l9.556,9.223l1.901,0l-3.328,-3.352l1.831,-1.831l4.825,5.183l0,-2.449l-5.016,-4.944l-2.567,2.9l-7.202,-6.941l-4.921,4.625l0,0Zm16.174,-4.354c0.437,0 0.793,0.356 0.793,0.793c0,0.437 -0.356,0.793 -0.793,0.793c-0.437,0 -0.794,-0.356 -0.794,-0.793c0,-0.437 0.357,-0.793 0.794,-0.793Z
-            </Path.Data>
-        </Path>
-    </ContentPresenter>
+    <ControlTemplate x:Key="ImageIcon" TargetType="ContentControl">
+        <Border Padding="1" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
+            <Path Fill="{ThemeResource SystemControlBackgroundBaseHighBrush}">
+                <Path.Data>
+                    M22.634,16.915l-22.634,0l0,-16.915l22.634,0l0,16.915Zm-21.152,-8.458l0,2.126l4.921,-4.54l9.556,9.223l1.901,0l-3.328,-3.352l1.831,-1.831l4.825,5.183l0,-2.449l-5.016,-4.944l-2.567,2.9l-7.202,-6.941l-4.921,4.625l0,0Zm16.174,-4.354c0.437,0 0.793,0.356 0.793,0.793c0,0.437 -0.356,0.793 -0.793,0.793c-0.437,0 -0.794,-0.356 -0.794,-0.793c0,-0.437 0.357,-0.793 0.794,-0.793Z
+                </Path.Data>
+            </Path>
+        </Border>
+    </ControlTemplate>
 
-</UserControl>
+</ResourceDictionary>

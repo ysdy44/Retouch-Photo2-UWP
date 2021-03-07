@@ -10,9 +10,6 @@ using System.Numerics;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    /// <summary>
-    /// <see cref="ITool"/>'s PenTool.
-    /// </summary>
     public partial class PenTool : ITool
     {
 

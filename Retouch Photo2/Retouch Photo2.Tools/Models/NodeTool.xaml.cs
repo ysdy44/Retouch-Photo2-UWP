@@ -9,7 +9,6 @@ using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Elements;
-using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,14 +37,15 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public FrameworkElement Icon { get; } = new NodeIcon();
-        public IToolButton Button { get; } = new ToolButton
-        {
-            Type = ToolType.Node,
-            Icon = new NodeIcon()
-        };
+        public ToolType Type => ToolType.Node;
+        public ToolGroupType GroupType => ToolGroupType.Tool;
+        public string Title { get; set; }
+        public ControlTemplate Icon { get; set; }
         public FrameworkElement Page => this.NodePage;
-        NodePage NodePage = new NodePage();
+
+        readonly NodePage NodePage = new NodePage();
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get; set; }
 
 
         Layerage Layerage;

@@ -7,7 +7,6 @@ using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
@@ -34,16 +33,16 @@ namespace Retouch_Photo2.Tools.Models
         bool IsSnap => this.SettingViewModel.IsSnap;
 
 
-        //@Content
-        public FrameworkElement Icon { get; } = new TransparencyIcon();
-        public IToolButton Button { get; } = new ToolButton
-        {
-            Type = ToolType.Transparency,
-            Icon = new TransparencyIcon()
-        };
+        //@Content 
+        public ToolType Type => ToolType.Transparency;
+        public ToolGroupType GroupType => ToolGroupType.Tool;
+        public string Title { get; set; }
+        public ControlTemplate Icon { get; set; }
         public FrameworkElement Page => this.TransparencyPage;
 
         readonly TransparencyPage TransparencyPage = new TransparencyPage();
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get; set; }
 
 
         BrushHandleMode HandleMode = BrushHandleMode.None;
@@ -182,9 +181,6 @@ namespace Retouch_Photo2.Tools.Models
 
     }
 
-    /// <summary>
-    /// Page of <see cref="TransparencyTool"/>.
-    /// </summary>
     internal partial class TransparencyPage : Page
     {
 

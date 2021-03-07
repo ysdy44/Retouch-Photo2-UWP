@@ -89,17 +89,20 @@ namespace Retouch_Photo2.Tools.Elements
                 this.SelectionViewModel.SetMode();//Selection
 
                 //Change tools group value.
-                {
-                    ITool tool = this.TipViewModel.Tools.First(t => t != null && t.Button.Type == ToolType.Node);
-
-                    ToolManager.Instance = tool;
-                    this.SelectionViewModel.ToolType = ToolType.Node;
-
-                    this.ViewModel.TipTextBegin(tool.Button.Title);
-                    this.ViewModel.Invalidate();//Invalidate
-                }
+                this.ItemClick(this.TipViewModel.Tools.First(t => t != null && t.Type == ToolType.Node));
             };
         }
+
+        private void ItemClick(ITool tool)
+        {
+            //Change tools group value.
+            ToolManager.Instance = tool;
+            this.SelectionViewModel.ToolType = tool.Type;
+
+            this.ViewModel.TipTextBegin(tool.Title);
+            this.ViewModel.Invalidate();//Invalidate
+        }
+
     }
 
     /// <summary>

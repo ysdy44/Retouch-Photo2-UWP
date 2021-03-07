@@ -9,7 +9,7 @@ using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools.Elements;
-using Retouch_Photo2.Tools.Icons;
+using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Numerics;
@@ -39,32 +39,16 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
 
-        //@Content
-        public FrameworkElement Icon { get; } = new CursorIcon();
-        public IToolButton Button { get; } = new ToolButton
-        {
-            Type = ToolType.Cursor,
-            Icon = new CursorIcon()
-        };
+        //@Content      
+        public ToolType Type => ToolType.Cursor;
+        public ToolGroupType GroupType => ToolGroupType.Tool;
+        public string Title { get; set; }
+        public ControlTemplate Icon { get; set; }
         public FrameworkElement Page => this.CursorPage;
 
         readonly CursorPage CursorPage = new CursorPage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a CursorTool. 
-        /// </summary>
-        public CursorTool()
-        {
-            this.Button.ToolTip.Closed += (s, e) => this.CursorPage.ModeSegmented.IsOpen = false;
-            this.Button.ToolTip.Opened += (s, e) =>
-            {
-                if (this.Button.IsSelected == false) return;
-
-                this.CursorPage.ModeSegmented.IsOpen = true;
-            };
-        }
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get => this.CursorPage.ModeSegmented.IsOpen; set => this.CursorPage.ModeSegmented.IsOpen = value; }
 
 
         CursorMode CursorMode;

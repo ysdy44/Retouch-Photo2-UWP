@@ -1,16 +1,12 @@
-﻿<UserControl
-    x:Class="Retouch_Photo2.Tools.Icons.PatternGridIcon"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="50"
-    d:DesignWidth="50"
-    >
+﻿
+    <ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Border BorderThickness="1" BorderBrush="{ThemeResource SystemAltHighColor}" Background="{ThemeResource SystemAltHighColor}" >
-        <FontIcon Glyph="&#xE80A;" FontSize="19" FontFamily="Segoe MDL2 Assets" Foreground="DeepSkyBlue" />
-    </Border>
+    <ControlTemplate x:Key="PatternGridIcon" TargetType="ContentControl">
+        <Border BorderThickness="1" BorderBrush="{ThemeResource SystemAltHighColor}" Background="{ThemeResource SystemAltHighColor}" >
+            <FontIcon Glyph="&#xE80A;" FontSize="19" FontFamily="Segoe MDL2 Assets" Foreground="DeepSkyBlue" />
+        </Border>
+    </ControlTemplate>
 
-</UserControl>
+</ResourceDictionary>

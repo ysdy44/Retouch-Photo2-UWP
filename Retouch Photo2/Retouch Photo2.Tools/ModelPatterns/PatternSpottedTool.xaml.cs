@@ -8,7 +8,6 @@ using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
@@ -28,13 +27,13 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public FrameworkElement Icon { get; } = new PatternSpottedIcon();
-        public IToolButton Button { get; } = new ToolSecondButton
-        {
-            Type = ToolType.PatternSpotted,
-            Icon = new PatternSpottedIcon()
-        };
+        public ToolType Type => ToolType.PatternSpotted;
+        public ToolGroupType GroupType => ToolGroupType.Pattern;
+        public string Title { get; set; }
+        public ControlTemplate Icon { get; set; }
         public FrameworkElement Page { get; } = new PatternSpottedPage();
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get; set; }
 
 
         private ILayer CreateLayer(Transformer transformer)

@@ -6,6 +6,7 @@
 using Microsoft.Graphics.Canvas;
 using System.Numerics;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools
 {
@@ -14,14 +15,24 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     public interface ITool
     {
+        /// <summary> Gets the type. </summary>
+        ToolType Type { get; }
+        /// <summary> Gets the group type. </summary>
+        ToolGroupType GroupType { get; }        
+
+        /// <summary> Gets the title. </summary>
+        string Title { get; set; }
         /// <summary> Gets the icon. </summary>
-        FrameworkElement Icon { get; }
-        /// <summary> Gets the button. </summary>
-        IToolButton Button { get; }
+        ControlTemplate Icon { get; set; }
         /// <summary> Gets the page. </summary>
         FrameworkElement Page { get; }
 
-        
+        /// <summary> Gets or sets the IsSelected. </summary>
+        bool IsSelected { get; set; }
+        /// <summary> Gets or sets the IsOpen. </summary>
+        bool IsOpen { set; }
+
+
         /// <summary>
         /// Occurs when the operation begins. 
         /// </summary>

@@ -1,8 +1,6 @@
 ﻿using HSVColorPickers;
-using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Photos;
 using System.Numerics;
@@ -11,9 +9,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    /// <summary>
-    /// <see cref="ITool"/>'s TransparencyTool.
-    /// </summary>
     public partial class TransparencyTool : ITool
     {
         //@ViewModel

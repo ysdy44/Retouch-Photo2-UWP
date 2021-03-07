@@ -39,10 +39,6 @@
         Crop,
 
 
-        /// <summary> More second geometry. </summary>
-        More,
-
-
         //Pattern
         /// <summary> Grid pattern. </summary>
         PatternGrid,

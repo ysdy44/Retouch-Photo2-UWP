@@ -50,7 +50,6 @@ namespace Retouch_Photo2.Elements
                                 case PhoneLayoutType.ShowRight: return this.PhoneShowRight;
                             }
                             return this.Normal;
-                            break;
                         }
                 }
 

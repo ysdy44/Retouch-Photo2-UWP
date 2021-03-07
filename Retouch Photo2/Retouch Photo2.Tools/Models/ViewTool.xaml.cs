@@ -4,8 +4,6 @@
 // Only:              
 // Complete:      ★★★★
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
@@ -34,33 +32,17 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
 
 
-        //@Content
-        public FrameworkElement Icon { get; } = new ViewIcon();
-        public IToolButton Button { get; } = new ToolButton
-        {
-            Type = ToolType.View,
-            Icon = new ViewIcon()
-        };
+        //@Content 
+        public ToolType Type => ToolType.View;
+        public ToolGroupType GroupType => ToolGroupType.Tool;
+        public string Title { get; set; }
+        public ControlTemplate Icon { get; set; }
         public FrameworkElement Page => this.ViewPage;
 
         readonly ViewPage ViewPage = new ViewPage();
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get => this.ViewPage.IsOpen; set => this.ViewPage.IsOpen = value; }
 
-
-        //@Construct
-        /// <summary>
-        /// Initializes a ViewTool. 
-        /// </summary>
-        public ViewTool()
-        {
-            this.Button.ToolTip.Closed += (s, e) => this.ViewPage.IsOpen = false;
-            this.Button.ToolTip.Opened += (s, e) =>
-            {
-                if (this.Button.IsSelected == false) return;
-
-                this.ViewPage.IsOpen = true;
-            };
-        }
-        
 
         public void Started(Vector2 startingPoint, Vector2 point)
         {
@@ -193,9 +175,7 @@ namespace Retouch_Photo2.Tools.Models
 
     }
 
-    /// <summary>
-    /// Page of <see cref="ViewTool"/>.
-    /// </summary>
+
     internal partial class ViewPage : Page
     {
 

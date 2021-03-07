@@ -6,9 +6,9 @@
 using FanKit.Transformers;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Tools.Icons;
 using Retouch_Photo2.ViewModels;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
@@ -23,13 +23,13 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content
-        public FrameworkElement Icon { get; } = new TextArtisticIcon();
-        public IToolButton Button { get; } = new ToolButton
-        {
-            Type = ToolType.TextArtistic,
-            Icon = new TextArtisticIcon()
-        };
+        public ToolType Type => ToolType.TextArtistic;
+        public ToolGroupType GroupType => ToolGroupType.Tool;
+        public string Title { get; set; }
+        public ControlTemplate Icon { get; set; }
         public FrameworkElement Page { get; } = new TextPage();
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get; set; }
 
 
         public override ILayer CreateLayer(Transformer transformer)

@@ -15,8 +15,8 @@ namespace Retouch_Photo2.Tools
     {
 
         //@Static  
-        /// <summary> A border, contains a <see cref="ITool.Icon"/>. </summary>
-        public static Border IconBorder { get; } = new Border();
+        /// <summary> A control, contains a <see cref="ITool.Icon"/>. </summary>
+        public static ContentControl IconControl { get; } = new ContentControl();
         /// <summary> A border, contains a <see cref="ITool.Page"/>. </summary>
         public static Border PageBorder { get; } = new Border();
         /// <summary> A instance of <see cref="ITool"/>. </summary>
@@ -31,14 +31,14 @@ namespace Retouch_Photo2.Tools
                 //The current tool becomes the active tool.
                 ITool oldTool = ToolManager.instance;
                 oldTool.OnNavigatedFrom();
-                if (oldTool.Button != null) oldTool.Button.IsSelected = false;
+                oldTool.IsSelected = false;
 
                 //The current tool does not become an active tool.
                 ITool newTool = value;
                 newTool.OnNavigatedTo();
-                if (newTool.Button != null) newTool.Button.IsSelected = true;
+                newTool.IsSelected = true;
 
-                ToolManager.IconBorder.Child = value.Icon;
+                ToolManager.IconControl.Template = value.Icon;
                 ToolManager.PageBorder.Child = value.Page;
                 ToolManager.instance = value;
             }
