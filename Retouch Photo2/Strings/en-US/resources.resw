@@ -73,7 +73,7 @@
 <data name='$SettingPage_Theme_Light' xml:space='preserve'><value>Light</value></data>
 <data name='$SettingPage_Theme_Dark' xml:space='preserve'><value>Dark</value></data>
 <data name='$SettingPage_Theme_UseSystem' xml:space='preserve'><value>Use System</value></data>
-<data name='$SettingPage_DeviceLayout' xml:space='preserve'><value>DeviceLayout</value></data>
+<data name='$SettingPage_DeviceLayout' xml:space='preserve'><value>Device Layout</value></data>
 <data name='$SettingPage_DeviceLayout_Phone' xml:space='preserve'><value>Phone</value></data>
 <data name='$SettingPage_DeviceLayout_Pad' xml:space='preserve'><value>Pad</value></data>
 <data name='$SettingPage_DeviceLayout_PC' xml:space='preserve'><value>PC</value></data>
@@ -81,68 +81,68 @@
 <data name='$SettingPage_DeviceLayout_AdaptiveWidth' xml:space='preserve'><value>Adaptive Width</value></data>
 <data name='$SettingPage_DeviceLayout_ResetAdaptiveWidth' xml:space='preserve'><value>Reset adaptive width</value></data>
 <data name='$SettingPage_LayersHeight' xml:space='preserve'><value>Layers Height</value></data>
-<data name='$SettingPage_LayersHeightTip' xml:space='preserve'><value>Click to change the layer control height</value></data>
+<data name='$SettingPage_LayersHeightTip' xml:space='preserve'><value>Click to change the height of the layer control</value></data>
 <data name='$SettingPage_MenuType' xml:space='preserve'><value>Menu Type</value></data>
-<data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>Uncheck to hide menu buttons</value></data>
+<data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>Uncheck to hide the menu button</value></data>
 <data name='$SettingPage_Key' xml:space='preserve'><value>Shortcuts</value></data>
-<data name='$SettingPage_Key_Rotate' xml:space='preserve'><value>Slider wheel to rotate canvas</value></data>
-<data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>Canvas moves to the left</value></data>
-<data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>Canvas Up</value></data>
-<data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>Canvas moves to the right</value></data>
-<data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>Canvas Down</value></data>
-<data name='$SettingPage_LocalFolder' xml:space='preserve'><value>Local Folder</value></data>
+<data name='$SettingPage_Key_Rotate' xml:space='preserve'><value>Slide the scroll wheel to rotate the canvas</value></data>
+<data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>Move the canvas to the left</value></data>
+<data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>Canvas move up</value></data>
+<data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>Move the canvas to the right</value></data>
+<data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>Canvas move down</value></data>
+<data name='$SettingPage_LocalFolder' xml:space='preserve'><value>Local folder</value></data>
 <data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>Open</value></data>
-<data name='$MainPage_DocumentationTip' xml:space='preserve'><value>Open Documentation Web Page</value></data>
-<data name='$MainPage_SettingTip' xml:space='preserve'><value>Open Setting Page</value></data>
+<data name='$MainPage_DocumentationTip' xml:space='preserve'><value>Open document webpage</value></data>
+<data name='$MainPage_SettingTip' xml:space='preserve'><value>Open the settings page</value></data>
 <data name='$MainPage_Select_ClickTip' xml:space='preserve'><value>Click to select items:</value></data>
-<data name='$MainPage_Select_All' xml:space='preserve'><value>Select All</value></data>
-<data name='$MainPage_InitialTip' xml:space='preserve'><value>No projects? You could...</value></data>
-<data name='$MainPage_Initial_Sample' xml:space='preserve'><value>Open the Sample Projects</value></data>
-<data name='$MainPage_Initial_New' xml:space='preserve'><value>Add a New Project</value></data>
-<data name='$MainPage_Initial_Photo' xml:space='preserve'><value>New Project From Pictures</value></data>
-<data name='$MainPage_Initial_Destop' xml:space='preserve'><value>New Project From Destop</value></data>
+<data name='$MainPage_Select_All' xml:space='preserve'><value>Select all</value></data>
+<data name='$MainPage_InitialTip' xml:space='preserve'><value>No project? You can...</value></data>
+<data name='$MainPage_Initial_Sample' xml:space='preserve'><value>Open the sample projects</value></data>
+<data name='$MainPage_Initial_New' xml:space='preserve'><value>Create a new project</value></data>
+<data name='$MainPage_Initial_Photo' xml:space='preserve'><value>Create a new project from the gallery</value></data>
+<data name='$MainPage_Initial_Destop' xml:space='preserve'><value>Create a new project from the desktop</value></data>
 <data name='$MainPage_New' xml:space='preserve'><value>New</value></data>
-<data name='$MainPage_NewDialog_Title' xml:space='preserve'><value>Add New Project</value></data>
+<data name='$MainPage_NewDialog_Title' xml:space='preserve'><value>Add new project</value></data>
 <data name='$MainPage_Pictures' xml:space='preserve'><value>Pictures</value></data>
-<data name='$MainPage_Pictures_Photo' xml:space='preserve'><value>Library</value></data>
+<data name='$MainPage_Pictures_Photo' xml:space='preserve'><value>Picture</value></data>
 <data name='$MainPage_Pictures_Destop' xml:space='preserve'><value>Destop</value></data>
-<data name='$MainPage_Rename_Subtitle' xml:space='preserve'><value>Select project to be renamed.</value></data>
-<data name='$MainPage_RenameDialog_TextBoxTip' xml:space='preserve'><value>The name is already occupied !</value></data>
-<data name='$MainPage_Delete_Title' xml:space='preserve'><value>Delete Projects</value></data>
-<data name='$MainPage_Delete_Subtitle' xml:space='preserve'><value>Select project(s) to be deleted.</value></data>
-<data name='$MainPage_Duplicate_Title' xml:space='preserve'><value>Dupliate Projects</value></data>
-<data name='$MainPage_Duplicate_Subtitle' xml:space='preserve'><value>Select project(s) to be duplicated.</value></data>
-<data name='$DrawPage_Document' xml:space='preserve'><value>Document</value></data>
-<data name='$DrawPage_DocumentUnSave' xml:space='preserve'><value>UnSave and Back</value></data>
+<data name='$MainPage_Rename_Subtitle' xml:space='preserve'><value>Select the project you want to rename.</value></data>
+<data name='$MainPage_RenameDialog_TextBoxTip' xml:space='preserve'><value>The name is already occupied!</value></data>
+<data name='$MainPage_Delete_Title' xml:space='preserve'><value>Delete projects</value></data>
+<data name='$MainPage_Delete_Subtitle' xml:space='preserve'><value>Select the project(s) you want to delete.</value></data>
+<data name='$MainPage_Duplicate_Title' xml:space='preserve'><value>Dupliate project(s)</value></data>
+<data name='$MainPage_Duplicate_Subtitle' xml:space='preserve'><value>Select the project(s) you want to duplicate.</value></data>
+<data name='$DrawPage_Document' xml:space='preserve'><value>Documentation</value></data>
+<data name='$DrawPage_DocumentUnSave' xml:space='preserve'><value>Do not save and return</value></data>
 <data name='$DrawPage_Undo' xml:space='preserve'><value>Undo</value></data>
 <data name='$DrawPage_Redo' xml:space='preserve'><value>Redo</value></data>
 <data name='$DrawPage_Setup' xml:space='preserve'><value>Setup</value></data>
 <data name='$DrawPage_Snap' xml:space='preserve'><value>Snapping</value></data>
 <data name='$DrawPage_Ruler' xml:space='preserve'><value>Ruler</value></data>
-<data name='$DrawPage_FullScreen' xml:space='preserve'><value>Full Screen</value></data>
+<data name='$DrawPage_FullScreen' xml:space='preserve'><value>Full screen</value></data>
 <data name='$DrawPage_Tip' xml:space='preserve'><value>Tip</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>Gallery</value></data>
-<data name='$DrawPage_WidthTip' xml:space='preserve'><value>Switch Layout Widths</value></data>
-<data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>Document Setup</value></data>
-<data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>Anchor to Canvas</value></data>
-<data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>Export To...</value></data>
+<data name='$DrawPage_WidthTip' xml:space='preserve'><value>Switch layout width</value></data>
+<data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>Document settings</value></data>
+<data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>Anchored to canvas</value></data>
+<data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>Export to...</value></data>
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>Quality</value></data>
-<data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>File Format</value></data>
-<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>Rename Layers</value></data>
-<data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>Add Photo(s)</value></data>
-<data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>Ratio Scaling</value></data>
-<data name='Tools_MoreTransform_Center' xml:space='preserve'><value>Center Scaling</value></data>
+<data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>File format</value></data>
+<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>Rename layer(s)</value></data>
+<data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>Add photo(s)</value></data>
+<data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>Proportional zoom</value></data>
+<data name='Tools_MoreTransform_Center' xml:space='preserve'><value>Center zoom</value></data>
 <data name='Tools_MoreCreate_Square' xml:space='preserve'><value>Equal width and height</value></data>
-<data name='Tools_MoreCreate_Center' xml:space='preserve'><value>Center Scaling</value></data>
+<data name='Tools_MoreCreate_Center' xml:space='preserve'><value>Center zoom</value></data>
 <data name='Tools_Cursor' xml:space='preserve'><value>Cursor</value></data>
 <data name='Tools_Cursor_CompositeMode_New' xml:space='preserve'><value>New</value></data>
 <data name='Tools_Cursor_CompositeMode_Add' xml:space='preserve'><value>Add</value></data>
 <data name='Tools_Cursor_CompositeMode_Subtract' xml:space='preserve'><value>Subtract</value></data>
 <data name='Tools_View' xml:space='preserve'><value>View</value></data>
 <data name='Tools_View_Radian' xml:space='preserve'><value>Radian</value></data>
-<data name='Tools_View_RadianClear' xml:space='preserve'><value>Reset the rotation radian</value></data>
+<data name='Tools_View_RadianClear' xml:space='preserve'><value>Reset the radian of rotation</value></data>
 <data name='Tools_View_Scale' xml:space='preserve'><value>Scale</value></data>
-<data name='Tools_View_ScaleClear' xml:space='preserve'><value>Reset the scale</value></data>
+<data name='Tools_View_ScaleClear' xml:space='preserve'><value>Reset scale</value></data>
 <data name='Tools_Brush_FillOrStroke' xml:space='preserve'><value>Fill or Stroke</value></data>
 <data name='Tools_Brush_Type_LinearGradient' xml:space='preserve'><value>Linear</value></data>
 <data name='Tools_Brush_Type_RadialGradient' xml:space='preserve'><value>Radial</value></data>
@@ -152,16 +152,16 @@
 <data name='Tools_Brush_Extend_Wrap' xml:space='preserve'><value>Wrap</value></data>
 <data name='Tools_Brush_Stop_Offset' xml:space='preserve'><value>Offset</value></data>
 <data name='Tools_Brush_Stop_Alpha' xml:space='preserve'><value>Alpha</value></data>
-<data name='Tools_Brush_Stop_Reverse' xml:space='preserve'><value>Reserve</value></data>
+<data name='Tools_Brush_Stop_Reverse' xml:space='preserve'><value>Reverse</value></data>
 <data name='Tools_Transparency' xml:space='preserve'><value>Transparency</value></data>
 <data name='Tools_Pen' xml:space='preserve'><value>Pen</value></data>
 <data name='Tools_Node' xml:space='preserve'><value>Node</value></data>
 <data name='Tools_Node_Insert' xml:space='preserve'><value>Insert</value></data>
 <data name='Tools_Node_Sharp' xml:space='preserve'><value>Sharp</value></data>
 <data name='Tools_Node_Smooth' xml:space='preserve'><value>Smooth</value></data>
-<data name='Tools_Node_NodeMode_Restriction' xml:space='preserve'><value>Control Point Restriction</value></data>
+<data name='Tools_Node_NodeMode_Restriction' xml:space='preserve'><value>Control point restrictions</value></data>
 <data name='Tools_Node_NodeMode_Restriction_Length' xml:space='preserve'><value>Length</value></data>
-<data name='Tools_Node_NodeMode_Mode' xml:space='preserve'><value>Control Point Mode</value></data>
+<data name='Tools_Node_NodeMode_Mode' xml:space='preserve'><value>Control point mode</value></data>
 <data name='Tools_Node_NodeMode_Mode_Mirrored' xml:space='preserve'><value>Mirrored</value></data>
 <data name='Tools_Node_NodeMode_Mode_Disconnected' xml:space='preserve'><value>Disconnected</value></data>
 <data name='Tools_Node_NodeMode_Mode_Asymmetric' xml:space='preserve'><value>Asymmetric</value></data>
@@ -170,48 +170,48 @@
 <data name='Tools_Image_Replace' xml:space='preserve'><value>Replace</value></data>
 <data name='Tools_Image_Clear' xml:space='preserve'><value>Clear</value></data>
 <data name='Tools_Crop' xml:space='preserve'><value>Vector crop</value></data>
-<data name='Tools_Crop_Reset' xml:space='preserve'><value>Reset Crop</value></data>
-<data name='Tools_Crop_Fit' xml:space='preserve'><value>Fit Crop</value></data>
+<data name='Tools_Crop_Reset' xml:space='preserve'><value>Reset crop</value></data>
+<data name='Tools_Crop_Fit' xml:space='preserve'><value>Fit crop</value></data>
 <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>Step</value></data>
 <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>Corner</value></data>
-<data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>Center Point</value></data>
+<data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>Center point</value></data>
 <data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>Mid Point</value></data>
 <data name='Tools_GeometryCog_Count' xml:space='preserve'><value>Count</value></data>
 <data name='Tools_GeometryCog_Tooth' xml:space='preserve'><value>Tooth</value></data>
 <data name='Tools_GeometryCog_Notch' xml:space='preserve'><value>Notch</value></data>
-<data name='Tools_GeometryDount_HoleRadius' xml:space='preserve'><value>Hole Radius</value></data>
+<data name='Tools_GeometryDount_HoleRadius' xml:space='preserve'><value>Hole radius</value></data>
 <data name='Tools_GeometryArrow_LeftTail' xml:space='preserve'><value>Left Tail</value></data>
 <data name='Tools_GeometryArrow_RightTail' xml:space='preserve'><value>Right Tail</value></data>
 <data name='Tools_GeometryArrow_Value' xml:space='preserve'><value>Width</value></data>
 <data name='Tools_GeometryHeart_Spread' xml:space='preserve'><value>Spread</value></data>
 <data name='Layers_Curve' xml:space='preserve'><value>Curve</value></data>
-<data name='Layers_CurveMulti' xml:space='preserve'><value>Multi Curve</value></data>
+<data name='Layers_CurveMulti' xml:space='preserve'><value>Multi-curve</value></data>
 <data name='Menus_Keyboard' xml:space='preserve'><value>Keyboard</value></data>
 <data name='Menus_Operate' xml:space='preserve'><value>Operate</value></data>
 <data name='Menus_Adjustment' xml:space='preserve'><value>Adjustments</value></data>
-<data name='Menus_Adjustment_Add' xml:space='preserve'><value>Add</value></data>
-<data name='Menus_Adjustment_Filters' xml:space='preserve'><value>Filters</value></data>
-<data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>No Adjustment</value></data>
+<data name='Menus_Adjustment_Add' xml:space='preserve'><value>Add to</value></data>
+<data name='Menus_Adjustment_Filters' xml:space='preserve'><value>Filter</value></data>
+<data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>No adjustment</value></data>
 <data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>Please select a layer</value></data>
 <data name='Menus_Effect' xml:space='preserve'><value>Layer FX</value></data>
 <data name='Menus_Text' xml:space='preserve'><value>Text</value></data>
 <data name='Menus_Style' xml:space='preserve'><value>Styles</value></data>
-<data name='Menus_History' xml:space='preserve'><value>Historys</value></data>
+<data name='Menus_History' xml:space='preserve'><value>History</value></data>
 <data name='Menus_Transformer_Rotate' xml:space='preserve'><value>Rotate</value></data>
 <data name='Menus_Transformer_Skew' xml:space='preserve'><value>Skew</value></data>
 <data name='Menus_Transformer_X' xml:space='preserve'><value>X-axis</value></data>
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Y-axis</value></data>
-<data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>Ratio Scaling</value></data>
+<data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>Proportional zoom</value></data>
 <data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>Step Frequency</value></data>
-<data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Position Remote</value></data>
+<data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Position remote control</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Anchor</value></data>
 <data name='Menus_Color_Swatches' xml:space='preserve'><value>Swatches</value></data>
 <data name='Menus_Color_Wheel' xml:space='preserve'><value>Wheel</value></data>
 <data name='Menus_Color_RGB' xml:space='preserve'><value>RGB</value></data>
 <data name='Menus_Color_HSV' xml:space='preserve'><value>HSV</value></data>
 <data name='Menus_Color_PaletteHue' xml:space='preserve'><value>Palette-Hue</value></data>
-<data name='Menus_Color_PaletteSaturation' xml:space='preserve'><value>Palette-Saturation</value></data>
-<data name='Menus_Color_PaletteValue' xml:space='preserve'><value>Palette-Value</value></data>
+<data name='Menus_Color_PaletteSaturation' xml:space='preserve'><value>Palette-saturation</value></data>
+<data name='Menus_Color_PaletteValue' xml:space='preserve'><value>Palette-value</value></data>
 <data name='Menus_Color_Circle' xml:space='preserve'><value>Circle</value></data>
 <data name='Menus_Layer' xml:space='preserve'><value>Layer</value></data>
 <data name='Menus_Layer_Name' xml:space='preserve'><value>Name</value></data>
@@ -222,7 +222,7 @@
 <data name='Edits_Edit_Paste' xml:space='preserve'><value>Paste</value></data>
 <data name='Edits_Edit_Clear' xml:space='preserve'><value>Clear</value></data>
 <data name='Edits_Select' xml:space='preserve'><value>Select</value></data>
-<data name='Edits_Select_All' xml:space='preserve'><value>All</value></data>
+<data name='Edits_Select_All' xml:space='preserve'><value>Select all</value></data>
 <data name='Edits_Select_Deselect' xml:space='preserve'><value>Deselect</value></data>
 <data name='Edits_Select_Invert' xml:space='preserve'><value>Invert</value></data>
 <data name='Edits_Group_Ungroup' xml:space='preserve'><value>Ungroup</value></data>
@@ -232,12 +232,11 @@
 <data name='Edits_Combine_Union' xml:space='preserve'><value>Union</value></data>
 <data name='Edits_Combine_Exclude' xml:space='preserve'><value>Exclude</value></data>
 <data name='Edits_Combine_Intersect' xml:space='preserve'><value>Intersect</value></data>
-<data name='Edits_Combine_ExpandStroke' xml:space='preserve'><value>Expand Stroke</value></data>
- <data name='Operates_Transform' xml:space='preserve'><value>Transform</value></data>
- <data name='Operates_Transform_FlipHorizontal' xml:space='preserve'><value>Flip Horizontal</value></data>
- <data name='Operates_Transform_FlipVertical' xml:space='preserve'><value>Flip Vertical</value></data>
-<data name='Operates_Transform_RotateLeft' xml:space='preserve'><value>Rotate Left</value></data>
-<data name='Operates_Transform_RotateRight' xml:space='preserve'><value>Rotate Right</value></data>
+<data name='Edits_Combine_ExpandStroke' xml:space='preserve'><value>Expand stroke</value></data>
+<data name='Operates_Transform_FlipHorizontal' xml:space='preserve'><value>Flip Horizontal</value></data>
+<data name='Operates_Transform_FlipVertical' xml:space='preserve'><value>Flip vertically</value></data>
+<data name='Operates_Transform_RotateLeft' xml:space='preserve'><value>Rotate left</value></data>
+<data name='Operates_Transform_RotateRight' xml:space='preserve'><value>Rotate right</value></data>
 <data name='Operates_Arrange' xml:space='preserve'><value>Arrange</value></data>
 <data name='Operates_Arrange_MoveFront' xml:space='preserve'><value>Move To Front</value></data>
 <data name='Operates_Arrange_BackOne' xml:space='preserve'><value>Back One</value></data>
@@ -257,14 +256,14 @@
 <data name='Adjustments_Brightness_WhiteToDark' xml:space='preserve'><value>White to Dark</value></data>
 <data name='Adjustments_Brightness_BlackToLight' xml:space='preserve'><value>Black to Light</value></data>
 <data name='Adjustments_Brightness_BlackToDark' xml:space='preserve'><value>Black to Dark</value></data>
-<data name='Adjustments_HueRotation' xml:space='preserve'><value>HueRotation</value></data>
+<data name='Adjustments_HueRotation' xml:space='preserve'><value>Hue rotation</value></data>
 <data name='Adjustments_Temperature_Tint' xml:space='preserve'><value>Tint</value></data>
-<data name='Adjustments_HighlightsAndShadows' xml:space='preserve'><value>HighlightsAndShadows</value></data>
+<data name='Adjustments_HighlightsAndShadows' xml:space='preserve'><value>Highlight and Shadow</value></data>
 <data name='Adjustments_HighlightsAndShadows_Shadows' xml:space='preserve'><value>Shadows</value></data>
 <data name='Adjustments_HighlightsAndShadows_Highlights' xml:space='preserve'><value>Highlights</value></data>
 <data name='Adjustments_HighlightsAndShadows_Clarity' xml:space='preserve'><value>Clarity</value></data>
-<data name='Adjustments_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>MaskBlurAmount</value></data>
-<data name='Adjustments_GammaTransfer' xml:space='preserve'><value>GammaTransfer</value></data>
+<data name='Adjustments_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>Mask blur amount</value></data>
+<data name='Adjustments_GammaTransfer' xml:space='preserve'><value>Gamma transfer</value></data>
 <data name='Adjustments_GammaTransfer_Offset' xml:space='preserve'><value>Offset</value></data>
 <data name='Adjustments_GammaTransfer_Exponent' xml:space='preserve'><value>Exponent</value></data>
 <data name='Adjustments_GammaTransfer_Amplitude' xml:space='preserve'><value>Amplitude</value></data>
@@ -350,8 +349,8 @@
 <data name='Historys_LayeragesArrange_AddLayer' xml:space='preserve'><value>Add layer</value></data>
 <data name='Historys_LayersTransformAdd_Move' xml:space='preserve'><value>Move</value></data>
 <data name='Historys_LayersTransformMultiplies_Transform' xml:space='preserve'><value>Transform</value></data>
-<data name='Historys_LayersProperty_SetTransform_IsCrop' xml:space='preserve'><value>Set transform is crop</value></data>
-<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>Set transform crop transformer</value></data>
+<data name='Historys_LayersProperty_SetTransform_IsCrop' xml:space='preserve'><value>Set whether the transform is cropped</value></data>
+<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>Set transform crop</value></data>
 <data name='Historys_LayersProperty_SetStyle' xml:space='preserve'><value>Set style</value></data>
 <data name='Historys_LayersProperty_SetStyle_Fill' xml:space='preserve'><value>Set fill</value></data>
 <data name='Historys_LayersProperty_SetStyle_Fill_Extend' xml:space='preserve'><value>Set fill extend</value></data>
@@ -363,134 +362,134 @@
 <data name='Historys_LayersProperty_SetStyle_Transparency_Type' xml:space='preserve'><value>Set transparency type</value></data>
 <data name='Historys_LayersProperty_Set_MoveNodes' xml:space='preserve'><value>Move nodes</value></data>
 <data name='Historys_LayersProperty_Set_MoveNode_ControlPoint' xml:space='preserve'><value>Move node control point</value></data>
-<data name='Historys_LayersProperty_Set_MoveNode_IsChecked' xml:space='preserve'><value>Set nodes is checked</value></data>
+<data name='Historys_LayersProperty_Set_MoveNode_IsChecked' xml:space='preserve'><value>Set whether the node is selected</value></data>
 <data name='Historys_LayersProperty_Set_AddNode' xml:space='preserve'><value>Add node</value></data>
 <data name='Historys_LayersProperty_Set_RemoveNodes' xml:space='preserve'><value>Remove nodes</value></data>
 <data name='Historys_LayersProperty_Set_InsertNodes' xml:space='preserve'><value>Insert nodes</value></data>
 <data name='Historys_LayersProperty_Set_SharpNodes' xml:space='preserve'><value>Sharp nodes</value></data>
 <data name='Historys_LayersProperty_Set_SmoothNodes' xml:space='preserve'><value>Smooth nodes</value></data>
 <data name='Historys_LayersProperty_SetPhotocopier' xml:space='preserve'><value>Set photo</value></data>
-<data name='Historys_LayersProperty_Set_PatternGridLayer_GridType' xml:space='preserve'><value>Set grid layer type</value></data>
-<data name='Historys_LayersProperty_Set_PatternGridLayer_HorizontalStep' xml:space='preserve'><value>Set grid layer horizontal step</value></data>
-<data name='Historys_LayersProperty_Set_PatternGridLayer_VerticalStep' xml:space='preserve'><value>Set grid layer vertical step</value></data>
-<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_Offset' xml:space='preserve'><value>Set diagonal layer offset</value></data>
-<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_HorizontalStep' xml:space='preserve'><value>Set diagonal layer horizontal step</value></data>
-<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Radius' xml:space='preserve'><value>Set spotted layer radius</value></data>
-<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Step' xml:space='preserve'><value>Set spotted layer step</value></data>
-<data name='Historys_LayersProperty_Set_GeometryRoundRectLayer_Corner' xml:space='preserve'><value>Set round rect layer corner</value></data>
-<data name='Historys_LayersProperty_Set_GeometryTriangleLayer_Center' xml:space='preserve'><value>Set triangle layer center</value></data>
-<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_Mid' xml:space='preserve'><value>Set diamond layer mid</value></data>
-<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_HoleRadius' xml:space='preserve'><value>Set dount layer hole radius</value></data>
-<data name='Historys_LayersProperty_Set_GeometryPentagonLayer_Points' xml:space='preserve'><value>Set pentagon layer points</value></data>
-<data name='Historys_LayersProperty_Set_GeometryStarLayer_Points' xml:space='preserve'><value>Set star layer points</value></data>
-<data name='Historys_LayersProperty_Set_GeometryStarLayer_InnerRadius' xml:space='preserve'><value>Set star layer inner radius</value></data>
-<data name='Historys_LayersProperty_Set_GeometryCogLayer_Count' xml:space='preserve'><value>Set cog layer count</value></data>
-<data name='Historys_LayersProperty_Set_GeometryCogLayer_InnerRadius' xml:space='preserve'><value>Set cog layer inner radius</value></data>
-<data name='Historys_LayersProperty_Set_GeometryCogLayer_Tooth' xml:space='preserve'><value>Set cog layer tooth</value></data>
-<data name='Historys_LayersProperty_Set_GeometryCogLayer_Notch' xml:space='preserve'><value>Set cog layer notch</value></data>
-<data name='Historys_LayersProperty_Set_GeometryDountLayer_HoleRadius' xml:space='preserve'><value>Set dount layer hole radius</value></data>
-<data name='Historys_LayersProperty_Set_GeometryPieLayer_SweepAngle' xml:space='preserve'><value>Set pie layer sweep angle</value></data>
-<data name='Historys_LayersProperty_Set_GeometryCookieLayer_InnerRadius' xml:space='preserve'><value>Set cookie layer inner radius</value></data>
-<data name='Historys_LayersProperty_Set_GeometryCookieLayer_SweepAngle' xml:space='preserve'><value>Set cookie layer sweep angle</value></data>
-<data name='Historys_LayersProperty_Set_GeometryArrowLayer_LeftTail' xml:space='preserve'><value>Set arrow layer left tail</value></data>
-<data name='Historys_LayersProperty_Set_GeometryArrowLayer_RightTail' xml:space='preserve'><value>Set arrow layer right tail</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_GridType' xml:space='preserve'><value>Set the grid layer type</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_HorizontalStep' xml:space='preserve'><value>Set the horizontal step of the grid layer</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_VerticalStep' xml:space='preserve'><value>Set vertical step of grid layer</value></data>
+<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_Offset' xml:space='preserve'><value>Set the diagonal layer displacement</value></data>
+<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_HorizontalStep' xml:space='preserve'><value>Set the horizontal step of the diagonal layer</value></data>
+<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Radius' xml:space='preserve'><value>Set the radius of the spotted layer</value></data>
+<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Step' xml:space='preserve'><value>Steps to set the spotted layer</value></data>
+<data name='Historys_LayersProperty_Set_GeometryRoundRectLayer_Corner' xml:space='preserve'><value>Set rounded rectangle corners</value></data>
+<data name='Historys_LayersProperty_Set_GeometryTriangleLayer_Center' xml:space='preserve'><value>Set the triangle layer center</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_Mid' xml:space='preserve'><value>Set the middle point of the diamond layer</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_HoleRadius' xml:space='preserve'><value>Set the diamond layer hole radius</value></data>
+<data name='Historys_LayersProperty_Set_GeometryPentagonLayer_Points' xml:space='preserve'><value>Set the points of pentagonal layer points</value></data>
+<data name='Historys_LayersProperty_Set_GeometryStarLayer_Points' xml:space='preserve'><value>Set the points of star layer points</value></data>
+<data name='Historys_LayersProperty_Set_GeometryStarLayer_InnerRadius' xml:space='preserve'><value>Set the inner radius of the star layer</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Count' xml:space='preserve'><value>Set the points of cog layers</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_InnerRadius' xml:space='preserve'><value>Set the inner radius of the cog layer</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Tooth' xml:space='preserve'><value>Set the tooth of the cog layer</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Notch' xml:space='preserve'><value>Set the notch in the gear layer</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDountLayer_HoleRadius' xml:space='preserve'><value>Set the radius of the donut layer hole</value></data>
+<data name='Historys_LayersProperty_Set_GeometryPieLayer_SweepAngle' xml:space='preserve'><value>Set the scanning angle of the pie layer</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCookieLayer_InnerRadius' xml:space='preserve'><value>Set the radius of the cookie layer</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCookieLayer_SweepAngle' xml:space='preserve'><value>Set the sweep angle of the cookie layer</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_LeftTail' xml:space='preserve'><value>Set the left tail of the arrow layer</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_RightTail' xml:space='preserve'><value>Set the right tail of the arrow layer</value></data>
 <data name='Historys_LayersProperty_Set_GeometryArrowLayer_Value' xml:space='preserve'><value>Set arrow layer value</value></data>
 <data name='Historys_LayersProperty_Set_GeometryHeartLayer_Spread' xml:space='preserve'><value>Set heart layer spread</value></data>
 <data name='Historys_LayersProperty_SetName' xml:space='preserve'><value>Set name</value></data>
 <data name='Historys_LayersProperty_SetBlendMode' xml:space='preserve'><value>Set blend mode</value></data>
 <data name='Historys_LayersProperty_SetOpacity' xml:space='preserve'><value>Set opacity</value></data>
-<data name='Historys_LayersProperty_SetOpacity_000' xml:space='preserve'><value>Set opacity 0%</value></data>
-<data name='Historys_LayersProperty_SetOpacity_025' xml:space='preserve'><value>Set opacity 25%</value></data>
-<data name='Historys_LayersProperty_SetOpacity_050' xml:space='preserve'><value>Set opacity 50%</value></data>
-<data name='Historys_LayersProperty_SetOpacity_075' xml:space='preserve'><value>Set opacity 75%</value></data>
-<data name='Historys_LayersProperty_SetOpacity_100' xml:space='preserve'><value>Set opacity 100%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_000' xml:space='preserve'><value>Set opacity to 0%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_025' xml:space='preserve'><value>Set opacity to 0%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_050' xml:space='preserve'><value>Set opacity to 50%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_075' xml:space='preserve'><value>Set opacity to 75%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_100' xml:space='preserve'><value>Set opacity to 100%</value></data>
 <data name='Historys_LayersProperty_SetVisibility' xml:space='preserve'><value>Set visibility</value></data>
-<data name='Historys_LayersProperty_SetIsSelected' xml:space='preserve'><value>Set is selected</value></data>
+<data name='Historys_LayersProperty_SetIsSelected' xml:space='preserve'><value>Set whether to selecte</value></data>
 <data name='Historys_LayersProperty_SetTagType' xml:space='preserve'><value>Set tag type</value></data>
 <data name='Historys_LayeragesArrange_CutLayers' xml:space='preserve'><value>Cut layers</value></data>
 <data name='Historys_LayeragesArrange_DuplicateLayer' xml:space='preserve'><value>Duplicate layer</value></data>
 <data name='Historys_LayeragesArrange_DuplicateLayers' xml:space='preserve'><value>Duplicate layers</value></data>
 <data name='Historys_LayeragesArrange_PasteLayers' xml:space='preserve'><value>Paste layers</value></data>
 <data name='Historys_LayeragesArrange_ClearLayers' xml:space='preserve'><value>Clear layers</value></data>
-<data name='Historys_LayeragesArrange_GroupLayers' xml:space='preserve'><value>Group layers</value></data>
+<data name='Historys_LayeragesArrange_GroupLayers' xml:space='preserve'><value>Grouping layers</value></data>
 <data name='Historys_LayeragesArrange_UngroupLayers' xml:space='preserve'><value>Ungroup layers</value></data>
-<data name='Historys_LayeragesArrange_ReleaseLayers' xml:space='preserve'><value>Release layers</value></data>
-<data name='Historys_LayeragesArrange_AddLayer_Combine' xml:space='preserve'><value>Add combine curve layer</value></data>
-<data name='Historys_LayeragesArrange_AddLayer_ExpandStroke' xml:space='preserve'><value>Add expand stroke curve layer</value></data>
-<data name='Historys_LayeragesArrange_AddLayers_ExpandStroke' xml:space='preserve'><value>Add expand stroke curve layers</value></data>
+<data name='Historys_LayeragesArrange_ReleaseLayers' xml:space='preserve'><value>Release layer</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_Combine' xml:space='preserve'><value>Add a combined curve layer</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_ExpandStroke' xml:space='preserve'><value>Add a curve layer that expanded stroke</value></data>
+<data name='Historys_LayeragesArrange_AddLayers_ExpandStroke' xml:space='preserve'><value>Add a curve layer that expanded stroke</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_Exposure' xml:space='preserve'><value>Reset exposure adjustment</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_Exposure_Exposure' xml:space='preserve'><value>Set exposure adjustment exposure</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Exposure_Exposure' xml:space='preserve'><value>Set exposure of exposure adjustment</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_Brightness' xml:space='preserve'><value>Reset brightness adjustment</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteLight' xml:space='preserve'><value>Set brightness adjustment white light</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteDark' xml:space='preserve'><value>Set brightness adjustment white dark</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackLight' xml:space='preserve'><value>Set brightness adjustment black light</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackDark' xml:space='preserve'><value>Set brightness adjustment black dark</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteLight' xml:space='preserve'><value>Set of white light brightness adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteDark' xml:space='preserve'><value>Set of white dark brightness adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackLight' xml:space='preserve'><value>Set black light of brightness adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackDark' xml:space='preserve'><value>Set black dark of brightness adjustment</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_Saturation' xml:space='preserve'><value>Reset saturation adjustment</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_Saturation_Saturation' xml:space='preserve'><value>Set saturation adjustment saturation</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Saturation_Saturation' xml:space='preserve'><value>Set saturation of saturation adjustment</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_HueRotation' xml:space='preserve'><value>Reset hue rotation adjustment</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_HueRotation_Angle' xml:space='preserve'><value>Set hue rotation adjustment angle</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HueRotation_Angle' xml:space='preserve'><value>Set angle of hue rotation adjustment</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_Contrast' xml:space='preserve'><value>Reset contrast adjustment</value></data>
-<data name='Historys_LayersProperty_ResetAdjustment_Contrast_Contrast' xml:space='preserve'><value>Set contrast adjustment contrast</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Contrast_Contrast' xml:space='preserve'><value>Set contrast of contrast adjustment</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_Temperature' xml:space='preserve'><value>Reset temperature adjustment</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_Temperature_Temperature' xml:space='preserve'><value>Set temperature adjustment temperature</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_Temperature_Tint' xml:space='preserve'><value>Set temperature adjustment tint</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Temperature_Temperature' xml:space='preserve'><value>Set temperature of temperature adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Temperature_Tint' xml:space='preserve'><value>Set tint of temperature adjustment</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_HighlightsAndShadows' xml:space='preserve'><value>Reset highlights and shadows adjustment</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Shadows' xml:space='preserve'><value>Set highlights and shadows adjustment shadows</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Highlights' xml:space='preserve'><value>Set highlights and shadows adjustment highlights</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Clarity' xml:space='preserve'><value>Set highlights and shadows adjustment clarity</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>Set highlights and shadows adjustment mask blur amount</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Shadows' xml:space='preserve'><value>Set shadows of highlights and shadows adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Highlights' xml:space='preserve'><value>Set highlights of highlights and shadows adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Clarity' xml:space='preserve'><value>Set clarity of highlights and shadows adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>Set mask blur amount of highlights and shadows adjustment</value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_GammaTransfer' xml:space='preserve'><value>Reset gamma transfer adjustment</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaDisable' xml:space='preserve'><value>Switch gamma transfer adjustment alpha</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaOffset' xml:space='preserve'><value>Set gamma transfer adjustment alpha offset</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaExponent' xml:space='preserve'><value>Set gamma transfer adjustment alpha exponent</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaAmplitude' xml:space='preserve'><value>Set gamma transfer adjustment alpha amplitude</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedDisable' xml:space='preserve'><value>Switch gamma transfer adjustment red</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedOffset' xml:space='preserve'><value>Set gamma transfer adjustment red offset</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedExponent' xml:space='preserve'><value>Set gamma transfer adjustment red exponent</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedAmplitude' xml:space='preserve'><value>Set gamma transfer adjustment red amplitude</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenDisable' xml:space='preserve'><value>Switch gamma transfer adjustment green</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenOffset' xml:space='preserve'><value>Set gamma transfer adjustment green offset</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenExponent' xml:space='preserve'><value>Set gamma transfer adjustment green exponent</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenAmplitude' xml:space='preserve'><value>Set gamma transfer adjustment green amplitude</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueDisable' xml:space='preserve'><value>Switch gamma transfer adjustment blue</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueOffset' xml:space='preserve'><value>Set gamma transfer adjustment blue offset</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueExponent' xml:space='preserve'><value>Set gamma transfer adjustment blue exponent</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueAmplitude' xml:space='preserve'><value>Set gamma transfer adjustment blue amplitude</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaDisable' xml:space='preserve'><value>Switch alpha of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaOffset' xml:space='preserve'><value>Set alpha offset of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaExponent' xml:space='preserve'><value>Set alpha exponent of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaAmplitude' xml:space='preserve'><value>Set alpha amplitude of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedDisable' xml:space='preserve'><value>Switch red of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedOffset' xml:space='preserve'><value>Set red offset of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedExponent' xml:space='preserve'><value>Set red exponent of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedAmplitude' xml:space='preserve'><value>Set red amplitude of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenDisable' xml:space='preserve'><value>Switch green of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenOffset' xml:space='preserve'><value>Set green offset of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenExponent' xml:space='preserve'><value>Set green exponent of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenAmplitude' xml:space='preserve'><value>Set green amplitude of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueDisable' xml:space='preserve'><value>Switch blue of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueOffset' xml:space='preserve'><value>Set blue offset of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueExponent' xml:space='preserve'><value>Set blue exponent of gamma transfer adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueAmplitude' xml:space='preserve'><value>Set blue amplitude of gamma transfer adjustment </value></data>
 <data name='Historys_LayersProperty_ResetAdjustment_Vignette' xml:space='preserve'><value>Reset vignette adjustment</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_Vignette_Amount' xml:space='preserve'><value>Set vignette adjustment amount</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_Vignette_Curve' xml:space='preserve'><value>Set vignette adjustment curve</value></data>
-<data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Set vignette adjustment color</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Amount' xml:space='preserve'><value>Set amount of vignette adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Curve' xml:space='preserve'><value>Set curve of vignette adjustment</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Set color of vignette adjustment</value></data>
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Reset gaussian blur effect</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Switch gaussian blur effect</value></data>
-<data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Set gaussian blur effect amount</value></data>
-<data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Reset effect directional blur</value></data>
-<data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Switch effect directional blur</value></data>
-<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Set effect directional blur radius</value></data>
-<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Set effect directional blur angle</value></data>
-<data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Reset effect sharpen</value></data>
-<data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Switch effect sharpen</value></data>
-<data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Set effect sharpen amount</value></data>
-<data name='Historys_LayersProperty_ResetEffect_OuterShadow' xml:space='preserve'><value>Reset effect outer shadow</value></data>
-<data name='Historys_LayersProperty_SwitchEffect_OuterShadow' xml:space='preserve'><value>Switch effect outer shadow</value></data>
-<data name='Historys_LayersProperty_SetEffect_OuterShadow_Radius' xml:space='preserve'><value>Set effect outer shadow radius</value></data>
-<data name='Historys_LayersProperty_SetEffect_OuterShadow_Opacity' xml:space='preserve'><value>Set effect outer shadow opacity</value></data>
-<data name='Historys_LayersProperty_SetEffect_OuterShadow_Offset' xml:space='preserve'><value>Set effect outer shadow offset</value></data>
-<data name='Historys_LayersProperty_SetEffect_OuterShadow_Angle' xml:space='preserve'><value>Set effect outer shadow angle</value></data>
-<data name='Historys_LayersProperty_SetEffect_OuterShadow_Color' xml:space='preserve'><value>Set effect outer shadow color</value></data>
-<data name='Historys_LayersProperty_ResetEffect_Edge' xml:space='preserve'><value>Reset effect edge</value></data>
-<data name='Historys_LayersProperty_SwitchEffect_Edge' xml:space='preserve'><value>Switch effect edge</value></data>
-<data name='Historys_LayersProperty_SetEffect_Edge_Amount' xml:space='preserve'><value>Set effect edge amount</value></data>
-<data name='Historys_LayersProperty_SetEffect_Edge_Radius' xml:space='preserve'><value>Set effect edge radius</value></data>
-<data name='Historys_LayersProperty_ResetEffect_Mmorphology' xml:space='preserve'><value>Reset effect morphology</value></data>
-<data name='Historys_LayersProperty_SwitchEffect_Mmorphology' xml:space='preserve'><value>Switch effect morphology</value></data>
-<data name='Historys_LayersProperty_SetEffect_Mmorphology_Size' xml:space='preserve'><value>Set effect morphology size</value></data>
-<data name='Historys_LayersProperty_ResetEffect_Emboss' xml:space='preserve'><value>Reset effect emboss</value></data>
-<data name='Historys_LayersProperty_SwitchEffect_Emboss' xml:space='preserve'><value>Switch effect emboss</value></data>
-<data name='Historys_LayersProperty_SetEffect_Emboss_Radius' xml:space='preserve'><value>Set effect emboss radius</value></data>
-<data name='Historys_LayersProperty_SetEffect_Emboss_Angle' xml:space='preserve'><value>Set effect emboss angle</value></data>
-<data name='Historys_LayersProperty_ResetEffect_Straighten' xml:space='preserve'><value>Reset effect straighten</value></data>
-<data name='Historys_LayersProperty_SwitchEffect_Straighten' xml:space='preserve'><value>Switch effect straighten</value></data>
-<data name='Historys_LayersProperty_SetEffect_Straighten_Angle' xml:space='preserve'><value>Set effect straighten angle</value></data>
+<data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Set amount of gaussian blur effect</value></data>
+<data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Reset directional blur effect</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Switch directional blur effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Set radius of directional blur effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Set angle of directional blur effect</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Reset sharpen effect</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Switch sharpen effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Set amount of  sharpen effect</value></data>
+<data name='Historys_LayersProperty_ResetEffect_OuterShadow' xml:space='preserve'><value>Reset outer shadow effect</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_OuterShadow' xml:space='preserve'><value>Switch outer shadow effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Radius' xml:space='preserve'><value>Set radius of outer shadow effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Opacity' xml:space='preserve'><value>Set opacity of outer shadow effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Offset' xml:space='preserve'><value>Set offset of outer shadow effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Angle' xml:space='preserve'><value>Set angle of outer shadow effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Color' xml:space='preserve'><value>Set color of outer shadow effect</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Edge' xml:space='preserve'><value>Reset edge effect</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Edge' xml:space='preserve'><value>Switch edge effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_Edge_Amount' xml:space='preserve'><value>Set amount of edge effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_Edge_Radius' xml:space='preserve'><value>Set radius of edge effect</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Mmorphology' xml:space='preserve'><value>Reset morphology effect</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Mmorphology' xml:space='preserve'><value>Switch morphology effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_Mmorphology_Size' xml:space='preserve'><value>Set size of morphology effect</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Emboss' xml:space='preserve'><value>Reset emboss effect</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Emboss' xml:space='preserve'><value>Switch emboss effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_Emboss_Radius' xml:space='preserve'><value>Set radius of effect emboss </value></data>
+<data name='Historys_LayersProperty_SetEffect_Emboss_Angle' xml:space='preserve'><value>Set radiangleus of effect emboss </value></data>
+<data name='Historys_LayersProperty_ResetEffect_Straighten' xml:space='preserve'><value>Reset straighten effect</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Straighten' xml:space='preserve'><value>Switch straighten effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_Straighten_Angle' xml:space='preserve'><value>Set angle of straighten effect</value></data>
 <data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>Set font text</value></data>
 <data name='Historys_LayersProperty_SetFontAlignment' xml:space='preserve'><value>Set font alignment</value></data>
 <data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>Set font style</value></data>
@@ -499,9 +498,9 @@
 <data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Set font size</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>Set stroke style dash</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeWidth' xml:space='preserve'><value>Set stroke width</value></data>
-<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Cap' xml:space='preserve'><value>Set stroke style cap</value></data>
-<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Join' xml:space='preserve'><value>Set stroke style join</value></data>
-<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Offset' xml:space='preserve'><value>Set stroke style offset</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Cap' xml:space='preserve'><value>Set cap of stroke style</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Join' xml:space='preserve'><value>Set join of stroke style</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Offset' xml:space='preserve'><value>Set offset of stroke style</value></data>
 <data name='Historys_LayersProperty_SetStyle_IsFollowTransform' xml:space='preserve'><value>Set style is follow transform</value></data>
 <data name='Historys_LayersProperty_SetStyle_IsStrokeBehindFill' xml:space='preserve'><value>Set style is stroke behind fill</value></data>
 <data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>Set style is Stroke Width scale with Layer</value></data>
@@ -625,6 +624,7 @@
 <data name='Edits_Edit_Copy' xml:space='preserve'><value>Copy</value></data>
 <data name='Edits_Group' xml:space='preserve'><value>Group</value></data>
 <data name='Edits_Group_Group' xml:space='preserve'><value>Group</value></data>
+<data name='Operates_Transform' xml:space='preserve'><value>Transform</value></data>
 <data name='Operates_Horizontally_Left' xml:space='preserve'><value>Align Left</value></data>
 <data name='Operates_Horizontally_Center' xml:space='preserve'><value>Align Center</value></data>
 <data name='Operates_Horizontally_Right' xml:space='preserve'><value>Align Right</value></data>

@@ -1,0 +1,668 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <xsd:schema id='root' xmlns='' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'>
+    <xsd:import namespace='http://www.w3.org/XML/1998/namespace' />
+    <xsd:element name='root' msdata:IsDataSet='true'>
+      <xsd:complexType>
+        <xsd:choice maxOccurs='unbounded'>
+          <xsd:element name='metadata'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' />
+              </xsd:sequence>
+              <xsd:attribute name='name' use='required' type='xsd:string' />
+              <xsd:attribute name='type' type='xsd:string' />
+              <xsd:attribute name='mimetype' type='xsd:string' />
+              <xsd:attribute ref='xml:space' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='assembly'>
+            <xsd:complexType>
+              <xsd:attribute name='alias' type='xsd:string' />
+              <xsd:attribute name='name' type='xsd:string' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='data'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' msdata:Ordinal='1' />
+                <xsd:element name='comment' type='xsd:string' minOccurs='0' msdata:Ordinal='2' />
+              </xsd:sequence>
+              <xsd:attribute name='name' type='xsd:string' use='required' msdata:Ordinal='1' />
+              <xsd:attribute name='type' type='xsd:string' msdata:Ordinal='3' />
+              <xsd:attribute name='mimetype' type='xsd:string' msdata:Ordinal='4' />
+              <xsd:attribute ref='xml:space' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='resheader'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' msdata:Ordinal='1' />
+              </xsd:sequence>
+              <xsd:attribute name='name' type='xsd:string' use='required' />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name='resmimetype'>
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name='version'>
+    <value>2.0</value>
+  </resheader>
+  <resheader name='reader'>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name='writer'>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+<data name='$Loading_Loading' xml:space='preserve'><value>Bezig met laden</value></data>
+<data name='$Loading_LoadFailed' xml:space='preserve'><value>Laden mislukt</value></data>
+<data name='$Loading_FileCorrupt' xml:space='preserve'><value>Bestand is beschadigd</value></data>
+<data name='$Loading_FileNull' xml:space='preserve'><value>Bestand is leeg</value></data>
+<data name='$Loading_Saving' xml:space='preserve'><value>Besparing</value></data>
+<data name='$Loading_SaveSuccess' xml:space='preserve'><value>Met succes opgeslagen</value></data>
+<data name='$Loading_SaveFailed' xml:space='preserve'><value>Opgeslagen mislukt</value></data>
+<data name='$Untitled' xml:space='preserve'><value>Ongetiteld</value></data>
+<data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
+<data name='$SettingPage_Title' xml:space='preserve'><value>Instelling</value></data>
+<data name='$SettingPage_About' xml:space='preserve'><value>Over...</value></data>
+<data name='$SettingPage_Theme' xml:space='preserve'><value>Thema</value></data>
+<data name='$SettingPage_Theme_Light' xml:space='preserve'><value>Licht</value></data>
+<data name='$SettingPage_Theme_Dark' xml:space='preserve'><value>Donker</value></data>
+<data name='$SettingPage_Theme_UseSystem' xml:space='preserve'><value>Gebruik System</value></data>
+<data name='$SettingPage_DeviceLayout' xml:space='preserve'><value>Apparaatlay-out</value></data>
+<data name='$SettingPage_DeviceLayout_Phone' xml:space='preserve'><value>Telefoon</value></data>
+<data name='$SettingPage_DeviceLayout_Pad' xml:space='preserve'><value>Pad</value></data>
+<data name='$SettingPage_DeviceLayout_PC' xml:space='preserve'><value>Pc</value></data>
+<data name='$SettingPage_DeviceLayout_Adaptive' xml:space='preserve'><value>Aangepaste</value></data>
+<data name='$SettingPage_DeviceLayout_AdaptiveWidth' xml:space='preserve'><value>Adaptieve breedte</value></data>
+<data name='$SettingPage_DeviceLayout_ResetAdaptiveWidth' xml:space='preserve'><value>Adaptieve breedte opnieuw instellen</value></data>
+<data name='$SettingPage_LayersHeight' xml:space='preserve'><value>Lagen Hoogte</value></data>
+<data name='$SettingPage_LayersHeightTip' xml:space='preserve'><value>Klik om de hoogte van de laagcontrole te wijzigen</value></data>
+<data name='$SettingPage_MenuType' xml:space='preserve'><value>Menutype</value></data>
+<data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>Haal het vinkje weg om de menuknop te verbergen</value></data>
+<data name='$SettingPage_Key' xml:space='preserve'><value>Snelkoppelingen</value></data>
+<data name='$SettingPage_Key_Rotate' xml:space='preserve'><value>Verschuif het scrollwiel om het canvas te draaien</value></data>
+<data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>Verplaats het canvas naar links</value></data>
+<data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>Canvas gaat omhoog</value></data>
+<data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>Verplaats het canvas naar rechts</value></data>
+<data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>Canvas gaat naar beneden</value></data>
+<data name='$SettingPage_LocalFolder' xml:space='preserve'><value>Lokale map</value></data>
+<data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>Open</value></data>
+<data name='$MainPage_DocumentationTip' xml:space='preserve'><value>Open de webpagina van het document</value></data>
+<data name='$MainPage_SettingTip' xml:space='preserve'><value>Open de instellingenpagina</value></data>
+<data name='$MainPage_Select_ClickTip' xml:space='preserve'><value>Klik om items te selecteren:</value></data>
+<data name='$MainPage_Select_All' xml:space='preserve'><value>Selecteer alles</value></data>
+<data name='$MainPage_InitialTip' xml:space='preserve'><value>Geen project? Jij kan...</value></data>
+<data name='$MainPage_Initial_Sample' xml:space='preserve'><value>Open de voorbeeldprojecten</value></data>
+<data name='$MainPage_Initial_New' xml:space='preserve'><value>Maak een nieuw project</value></data>
+<data name='$MainPage_Initial_Photo' xml:space='preserve'><value>Maak een nieuw project vanuit de galerij</value></data>
+<data name='$MainPage_Initial_Destop' xml:space='preserve'><value>Maak een nieuw project vanaf de desktop</value></data>
+<data name='$MainPage_New' xml:space='preserve'><value>Nieuw</value></data>
+<data name='$MainPage_NewDialog_Title' xml:space='preserve'><value>Voeg een nieuw project toe</value></data>
+<data name='$MainPage_Pictures' xml:space='preserve'><value>Afbeeldingen</value></data>
+<data name='$MainPage_Pictures_Photo' xml:space='preserve'><value>Afbeelding</value></data>
+<data name='$MainPage_Pictures_Destop' xml:space='preserve'><value>Destop</value></data>
+<data name='$MainPage_Rename_Subtitle' xml:space='preserve'><value>Selecteer het project waarvan u de naam wilt wijzigen.</value></data>
+<data name='$MainPage_RenameDialog_TextBoxTip' xml:space='preserve'><value>De naam is al bezet!</value></data>
+<data name='$MainPage_Delete_Title' xml:space='preserve'><value>Verwijder projecten</value></data>
+<data name='$MainPage_Delete_Subtitle' xml:space='preserve'><value>Selecteer het (de) project (en) die u wilt verwijderen.</value></data>
+<data name='$MainPage_Duplicate_Title' xml:space='preserve'><value>Dubbel project (en)</value></data>
+<data name='$MainPage_Duplicate_Subtitle' xml:space='preserve'><value>Selecteer het (de) project (en) die u wilt dupliceren.</value></data>
+<data name='$DrawPage_Document' xml:space='preserve'><value>Documentatie</value></data>
+<data name='$DrawPage_DocumentUnSave' xml:space='preserve'><value>Bewaar niet en keer terug</value></data>
+<data name='$DrawPage_Undo' xml:space='preserve'><value>Ongedaan maken</value></data>
+<data name='$DrawPage_Redo' xml:space='preserve'><value>Opnieuw doen</value></data>
+<data name='$DrawPage_Setup' xml:space='preserve'><value>Opstelling</value></data>
+<data name='$DrawPage_Snap' xml:space='preserve'><value>Snappen</value></data>
+<data name='$DrawPage_Ruler' xml:space='preserve'><value>Heerser</value></data>
+<data name='$DrawPage_FullScreen' xml:space='preserve'><value>Volledig scherm</value></data>
+<data name='$DrawPage_Tip' xml:space='preserve'><value>Tip</value></data>
+<data name='$DrawPage_Gallery' xml:space='preserve'><value>Galerij</value></data>
+<data name='$DrawPage_WidthTip' xml:space='preserve'><value>Schakel de layoutbreedte in</value></data>
+<data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>Document instellingen</value></data>
+<data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>Verankerd aan canvas</value></data>
+<data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>Exporteren naar...</value></data>
+<data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>Kwaliteit</value></data>
+<data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>Bestandsformaat</value></data>
+<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>Naam van laag / lagen wijzigen</value></data>
+<data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>Voeg foto's toe)</value></data>
+<data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>Proportionele zoom</value></data>
+<data name='Tools_MoreTransform_Center' xml:space='preserve'><value>Centrale zoom</value></data>
+<data name='Tools_MoreCreate_Square' xml:space='preserve'><value>Gelijke breedte en hoogte</value></data>
+<data name='Tools_MoreCreate_Center' xml:space='preserve'><value>Centrale zoom</value></data>
+<data name='Tools_Cursor' xml:space='preserve'><value>Cursor</value></data>
+<data name='Tools_Cursor_CompositeMode_New' xml:space='preserve'><value>Nieuw</value></data>
+<data name='Tools_Cursor_CompositeMode_Add' xml:space='preserve'><value>Toevoegen</value></data>
+<data name='Tools_Cursor_CompositeMode_Subtract' xml:space='preserve'><value>Aftrekken</value></data>
+<data name='Tools_View' xml:space='preserve'><value>Visie</value></data>
+<data name='Tools_View_Radian' xml:space='preserve'><value>Radian</value></data>
+<data name='Tools_View_RadianClear' xml:space='preserve'><value>Reset de radiaal van rotatie</value></data>
+<data name='Tools_View_Scale' xml:space='preserve'><value>Schaal</value></data>
+<data name='Tools_View_ScaleClear' xml:space='preserve'><value>Schaal resetten</value></data>
+<data name='Tools_Brush_FillOrStroke' xml:space='preserve'><value>Vullen of strijken</value></data>
+<data name='Tools_Brush_Type_LinearGradient' xml:space='preserve'><value>Lineair</value></data>
+<data name='Tools_Brush_Type_RadialGradient' xml:space='preserve'><value>Radiaal</value></data>
+<data name='Tools_Brush_Type_EllipticalGradient' xml:space='preserve'><value>Elliptisch</value></data>
+<data name='Tools_Brush_Extend' xml:space='preserve'><value>Uitbreiden</value></data>
+<data name='Tools_Brush_Extend_Clamp' xml:space='preserve'><value>Klem</value></data>
+<data name='Tools_Brush_Extend_Wrap' xml:space='preserve'><value>Wikkelen</value></data>
+<data name='Tools_Brush_Stop_Offset' xml:space='preserve'><value>Compensatie</value></data>
+<data name='Tools_Brush_Stop_Alpha' xml:space='preserve'><value>Alpha</value></data>
+<data name='Tools_Brush_Stop_Reverse' xml:space='preserve'><value>Omgekeerde</value></data>
+<data name='Tools_Transparency' xml:space='preserve'><value>Transparantie</value></data>
+<data name='Tools_Pen' xml:space='preserve'><value>Pen</value></data>
+<data name='Tools_Node' xml:space='preserve'><value>Knooppunt</value></data>
+<data name='Tools_Node_Insert' xml:space='preserve'><value>Invoegen</value></data>
+<data name='Tools_Node_Sharp' xml:space='preserve'><value>Scherp</value></data>
+<data name='Tools_Node_Smooth' xml:space='preserve'><value>Glad</value></data>
+<data name='Tools_Node_NodeMode_Restriction' xml:space='preserve'><value>Beperkingen op controlepunten</value></data>
+<data name='Tools_Node_NodeMode_Restriction_Length' xml:space='preserve'><value>Lengte</value></data>
+<data name='Tools_Node_NodeMode_Mode' xml:space='preserve'><value>Controlepunt-modus</value></data>
+<data name='Tools_Node_NodeMode_Mode_Mirrored' xml:space='preserve'><value>Gespiegeld</value></data>
+<data name='Tools_Node_NodeMode_Mode_Disconnected' xml:space='preserve'><value>Verbinding verbroken</value></data>
+<data name='Tools_Node_NodeMode_Mode_Asymmetric' xml:space='preserve'><value>Asymmetrisch</value></data>
+<data name='Tools_Text_PlaceholderText' xml:space='preserve'><value>Invoertekst ...</value></data>
+<data name='Tools_Image_Select' xml:space='preserve'><value>Selecteer</value></data>
+<data name='Tools_Image_Replace' xml:space='preserve'><value>Vervangen</value></data>
+<data name='Tools_Image_Clear' xml:space='preserve'><value>Doorzichtig</value></data>
+<data name='Tools_Crop' xml:space='preserve'><value>Vector bijsnijden</value></data>
+<data name='Tools_Crop_Reset' xml:space='preserve'><value>Uitsnede resetten</value></data>
+<data name='Tools_Crop_Fit' xml:space='preserve'><value>Pasvorm gewas</value></data>
+<data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>Stap</value></data>
+<data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>Hoek</value></data>
+<data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>Middelpunt</value></data>
+<data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>Middelpunt</value></data>
+<data name='Tools_GeometryCog_Count' xml:space='preserve'><value>Tellen</value></data>
+<data name='Tools_GeometryCog_Tooth' xml:space='preserve'><value>Tand</value></data>
+<data name='Tools_GeometryCog_Notch' xml:space='preserve'><value>Inkeping</value></data>
+<data name='Tools_GeometryDount_HoleRadius' xml:space='preserve'><value>Hole straal</value></data>
+<data name='Tools_GeometryArrow_LeftTail' xml:space='preserve'><value>Linker staart</value></data>
+<data name='Tools_GeometryArrow_RightTail' xml:space='preserve'><value>Rechter staart</value></data>
+<data name='Tools_GeometryArrow_Value' xml:space='preserve'><value>Breedte</value></data>
+<data name='Tools_GeometryHeart_Spread' xml:space='preserve'><value>Verspreiding</value></data>
+<data name='Layers_Curve' xml:space='preserve'><value>Kromme</value></data>
+<data name='Layers_CurveMulti' xml:space='preserve'><value>Meerdere bochten</value></data>
+<data name='Menus_Keyboard' xml:space='preserve'><value>Toetsenbord</value></data>
+<data name='Menus_Operate' xml:space='preserve'><value>Bedienen</value></data>
+<data name='Menus_Adjustment' xml:space='preserve'><value>Aanpassingen</value></data>
+<data name='Menus_Adjustment_Add' xml:space='preserve'><value>Toevoegen aan</value></data>
+<data name='Menus_Adjustment_Filters' xml:space='preserve'><value>Filter</value></data>
+<data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>Geen aanpassing</value></data>
+<data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>Selecteer een laag</value></data>
+<data name='Menus_Effect' xml:space='preserve'><value>Laag FX</value></data>
+<data name='Menus_Text' xml:space='preserve'><value>Tekst</value></data>
+<data name='Menus_Style' xml:space='preserve'><value>Stijlen</value></data>
+<data name='Menus_History' xml:space='preserve'><value>Geschiedenis</value></data>
+<data name='Menus_Transformer_Rotate' xml:space='preserve'><value>Draaien</value></data>
+<data name='Menus_Transformer_Skew' xml:space='preserve'><value>Scheef</value></data>
+<data name='Menus_Transformer_X' xml:space='preserve'><value>X-as</value></data>
+<data name='Menus_Transformer_Y' xml:space='preserve'><value>Y-as</value></data>
+<data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>Proportionele zoom</value></data>
+<data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>Stapfrequentie</value></data>
+<data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Plaats de afstandsbediening</value></data>
+<data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Anker</value></data>
+<data name='Menus_Color_Swatches' xml:space='preserve'><value>Stalen</value></data>
+<data name='Menus_Color_Wheel' xml:space='preserve'><value>Wiel</value></data>
+<data name='Menus_Color_RGB' xml:space='preserve'><value>RGB</value></data>
+<data name='Menus_Color_HSV' xml:space='preserve'><value>HSV</value></data>
+<data name='Menus_Color_PaletteHue' xml:space='preserve'><value>Palet-tint</value></data>
+<data name='Menus_Color_PaletteSaturation' xml:space='preserve'><value>Paletverzadiging</value></data>
+<data name='Menus_Color_PaletteValue' xml:space='preserve'><value>Paletwaarde</value></data>
+<data name='Menus_Color_Circle' xml:space='preserve'><value>Cirkel</value></data>
+<data name='Menus_Layer' xml:space='preserve'><value>Laag</value></data>
+<data name='Menus_Layer_Name' xml:space='preserve'><value>Naam</value></data>
+<data name='Menus_Layer_BlendMode' xml:space='preserve'><value>Mengmodus</value></data>
+<data name='Menus_Layer_Visibility' xml:space='preserve'><value>Zichtbaarheid</value></data>
+<data name='Menus_Layer_TagType' xml:space='preserve'><value>Tagtype</value></data>
+<data name='Edits_Edit_Cut' xml:space='preserve'><value>Besnoeiing</value></data>
+<data name='Edits_Edit_Paste' xml:space='preserve'><value>Plakken</value></data>
+<data name='Edits_Edit_Clear' xml:space='preserve'><value>Doorzichtig</value></data>
+<data name='Edits_Select' xml:space='preserve'><value>Selecteer</value></data>
+<data name='Edits_Select_All' xml:space='preserve'><value>Selecteer alles</value></data>
+<data name='Edits_Select_Deselect' xml:space='preserve'><value>Selectie ongedaan maken</value></data>
+<data name='Edits_Select_Invert' xml:space='preserve'><value>Omkeren</value></data>
+<data name='Edits_Group_Ungroup' xml:space='preserve'><value>Degroeperen</value></data>
+<data name='Edits_Group_Release' xml:space='preserve'><value>Vrijlating</value></data>
+<data name='Edits_Combine_Xor' xml:space='preserve'><value>Xor</value></data>
+<data name='Edits_Combine' xml:space='preserve'><value>Combineren</value></data>
+<data name='Edits_Combine_Union' xml:space='preserve'><value>Unie</value></data>
+<data name='Edits_Combine_Exclude' xml:space='preserve'><value>Uitsluiten</value></data>
+<data name='Edits_Combine_Intersect' xml:space='preserve'><value>Snijden</value></data>
+<data name='Edits_Combine_ExpandStroke' xml:space='preserve'><value>Breid slag uit</value></data>
+<data name='Operates_Transform_FlipHorizontal' xml:space='preserve'><value>Draai horizontaal</value></data>
+<data name='Operates_Transform_FlipVertical' xml:space='preserve'><value>Draai verticaal</value></data>
+<data name='Operates_Transform_RotateLeft' xml:space='preserve'><value>Draai naar links</value></data>
+<data name='Operates_Transform_RotateRight' xml:space='preserve'><value>Draai naar rechts</value></data>
+<data name='Operates_Arrange' xml:space='preserve'><value>Regelen</value></data>
+<data name='Operates_Arrange_MoveFront' xml:space='preserve'><value>Ga naar voren</value></data>
+<data name='Operates_Arrange_BackOne' xml:space='preserve'><value>Een terug</value></data>
+<data name='Operates_Arrange_ForwardOne' xml:space='preserve'><value>Een doorsturen</value></data>
+<data name='Operates_Arrange_MoveBack' xml:space='preserve'><value>Ga naar achteren</value></data>
+<data name='Operates_Horizontally' xml:space='preserve'><value>Horizontaal uitlijnen</value></data>
+<data name='Operates_Horizontally_Space' xml:space='preserve'><value>Ruimte horizontaal</value></data>
+<data name='Operates_Vertically' xml:space='preserve'><value>Lijn verticaal uit</value></data>
+<data name='Operates_Vertically_Top' xml:space='preserve'><value>Lijn boven uit</value></data>
+<data name='Operates_Vertically_Middle' xml:space='preserve'><value>Midden uitlijnen</value></data>
+<data name='Operates_Vertically_Bottom' xml:space='preserve'><value>Lijn de onderkant uit</value></data>
+<data name='Operates_Vertically_Space' xml:space='preserve'><value>Ruimte verticaal</value></data>
+<data name='Adjustments_Gray' xml:space='preserve'><value>Grijs</value></data>
+<data name='Adjustments_Invert' xml:space='preserve'><value>Omkeren</value></data>
+<data name='Adjustments_Brightness' xml:space='preserve'><value>Helderheid</value></data>
+<data name='Adjustments_Brightness_WhiteToLight' xml:space='preserve'><value>Wit naar licht</value></data>
+<data name='Adjustments_Brightness_WhiteToDark' xml:space='preserve'><value>Wit naar donker</value></data>
+<data name='Adjustments_Brightness_BlackToLight' xml:space='preserve'><value>Zwart naar licht</value></data>
+<data name='Adjustments_Brightness_BlackToDark' xml:space='preserve'><value>Zwart naar donker</value></data>
+<data name='Adjustments_HueRotation' xml:space='preserve'><value>Hue-rotatie</value></data>
+<data name='Adjustments_Temperature_Tint' xml:space='preserve'><value>Tint</value></data>
+<data name='Adjustments_HighlightsAndShadows' xml:space='preserve'><value>Markeer en schaduw</value></data>
+<data name='Adjustments_HighlightsAndShadows_Shadows' xml:space='preserve'><value>Schaduwen</value></data>
+<data name='Adjustments_HighlightsAndShadows_Highlights' xml:space='preserve'><value>Hoogtepunten</value></data>
+<data name='Adjustments_HighlightsAndShadows_Clarity' xml:space='preserve'><value>Duidelijkheid</value></data>
+<data name='Adjustments_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>Hoeveelheid maskeren vervaging</value></data>
+<data name='Adjustments_GammaTransfer' xml:space='preserve'><value>Gamma-overdracht</value></data>
+<data name='Adjustments_GammaTransfer_Offset' xml:space='preserve'><value>Compensatie</value></data>
+<data name='Adjustments_GammaTransfer_Exponent' xml:space='preserve'><value>Exponent</value></data>
+<data name='Adjustments_GammaTransfer_Amplitude' xml:space='preserve'><value>Amplitude</value></data>
+<data name='Adjustments_GammaTransfer_Alpha' xml:space='preserve'><value>Alpha</value></data>
+<data name='Adjustments_GammaTransfer_Red' xml:space='preserve'><value>Rood</value></data>
+<data name='Adjustments_GammaTransfer_Green' xml:space='preserve'><value>Groen</value></data>
+<data name='Adjustments_GammaTransfer_Blue' xml:space='preserve'><value>Blauw</value></data>
+<data name='Adjustments_Vignette' xml:space='preserve'><value>Vignet</value></data>
+<data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>Kromme</value></data>
+<data name='Effects_GaussianBlur' xml:space='preserve'><value>Gaussiaanse vervaging</value></data>
+<data name='Effects_DirectionalBlur' xml:space='preserve'><value>Directionele vervaging</value></data>
+<data name='Effects_Sharpen' xml:space='preserve'><value>Verscherpen</value></data>
+<data name='Effects_OuterShadow' xml:space='preserve'><value>Buitenste schaduw</value></data>
+<data name='Effects_Edge' xml:space='preserve'><value>Rand</value></data>
+<data name='Effects_Morphology' xml:space='preserve'><value>Morfologie</value></data>
+<data name='Effects_Morphology_Size' xml:space='preserve'><value>Grootte</value></data>
+<data name='Effects_Emboss' xml:space='preserve'><value>Reliëf</value></data>
+<data name='Effects_Straighten' xml:space='preserve'><value>Rechtzetten</value></data>
+<data name='Texts_FontAlignment' xml:space='preserve'><value>Uitlijnen</value></data>
+<data name='Texts_FontAlignment_Justified' xml:space='preserve'><value>Gerechtvaardigd</value></data>
+<data name='Texts_FontStyle' xml:space='preserve'><value>Lettertype</value></data>
+<data name='Texts_FontStyle_Bold' xml:space='preserve'><value>Stoutmoedig</value></data>
+<data name='Texts_FontStyle_Italic' xml:space='preserve'><value>Cursief</value></data>
+<data name='Texts_FontStyle_UnderLine' xml:space='preserve'><value>Onderstrepen</value></data>
+<data name='Texts_FontWeight' xml:space='preserve'><value>Lettertype dikte</value></data>
+<data name='Texts_FontWeight_Black' xml:space='preserve'><value>Zwart</value></data>
+<data name='Texts_FontWeight_Bold' xml:space='preserve'><value>Stoutmoedig</value></data>
+<data name='Texts_FontWeight_ExtraBlack' xml:space='preserve'><value>ExtraZwart</value></data>
+<data name='Texts_FontWeight_ExtraBold' xml:space='preserve'><value>Extra vet</value></data>
+<data name='Texts_FontWeight_ExtraLight' xml:space='preserve'><value>Extra licht</value></data>
+<data name='Texts_FontWeight_Light' xml:space='preserve'><value>Licht</value></data>
+<data name='Texts_FontWeight_Medium' xml:space='preserve'><value>Medium</value></data>
+<data name='Texts_FontWeight_Normal' xml:space='preserve'><value>Normaal</value></data>
+<data name='Texts_FontWeight_SemiBold' xml:space='preserve'><value>Halfvet</value></data>
+<data name='Texts_FontWeight_SemiLight' xml:space='preserve'><value>SemiLight</value></data>
+<data name='Texts_FontWeight_Thin' xml:space='preserve'><value>Dun</value></data>
+<data name='Texts_FontFamily' xml:space='preserve'><value>Lettertypefamilie</value></data>
+<data name='Texts_FontSize' xml:space='preserve'><value>Lettertypegrootte</value></data>
+<data name='Strokes_Dash_Solid' xml:space='preserve'><value>Solide</value></data>
+<data name='Strokes_Dash_Dot' xml:space='preserve'><value>Punt</value></data>
+<data name='Strokes_Dash_DashDot' xml:space='preserve'><value>Dash Dot</value></data>
+<data name='Strokes_Cap' xml:space='preserve'><value>Cap</value></data>
+<data name='Strokes_Cap_Flat' xml:space='preserve'><value>Vlak</value></data>
+<data name='Strokes_Cap_Square' xml:space='preserve'><value>Vierkant</value></data>
+<data name='Strokes_Cap_Round' xml:space='preserve'><value>Ronde</value></data>
+<data name='Strokes_Join' xml:space='preserve'><value>Doe mee</value></data>
+<data name='Strokes_Join_Miter' xml:space='preserve'><value>Mijter</value></data>
+<data name='Strokes_Join_Bevel' xml:space='preserve'><value>Afschuining</value></data>
+<data name='Strokes_Join_Round' xml:space='preserve'><value>Ronde</value></data>
+<data name='Strokes_Join_MiterOrBevel' xml:space='preserve'><value>Verstek of schuine kant</value></data>
+<data name='Strokes_IsFollowTransform' xml:space='preserve'><value>Stijltransformatie met Laag</value></data>
+<data name='Strokes_IsStrokeBehindFill' xml:space='preserve'><value>Slag achter Fill</value></data>
+<data name='Strokes_IsStrokeWidthFollowScale' xml:space='preserve'><value>Lijnbreedteschaal met laag</value></data>
+<data name='Blends_None' xml:space='preserve'><value>Normaal</value></data>
+<data name='Blends_Multiply' xml:space='preserve'><value>Vermenigvuldigen</value></data>
+<data name='Blends_Screen' xml:space='preserve'><value>Scherm</value></data>
+<data name='Blends_Darken' xml:space='preserve'><value>Verduisteren</value></data>
+<data name='Blends_Lighten' xml:space='preserve'><value>Verlichten</value></data>
+<data name='Blends_Dissolve' xml:space='preserve'><value>Oplossen</value></data>
+<data name='Blends_ColorBurn' xml:space='preserve'><value>ColorBurn</value></data>
+<data name='Blends_LinearBurn' xml:space='preserve'><value>LinearBurn</value></data>
+<data name='Blends_DarkerColor' xml:space='preserve'><value>DarkerColor</value></data>
+<data name='Blends_LighterColor' xml:space='preserve'><value>Lichtere kleur</value></data>
+<data name='Blends_ColorDodge' xml:space='preserve'><value>ColorDodge</value></data>
+<data name='Blends_LinearDodge' xml:space='preserve'><value>Lineair ontwijken</value></data>
+<data name='Blends_Overlay' xml:space='preserve'><value>Overlay</value></data>
+<data name='Blends_SoftLight' xml:space='preserve'><value>SoftLight</value></data>
+<data name='Blends_HardLight' xml:space='preserve'><value>Hard licht</value></data>
+<data name='Blends_VividLight' xml:space='preserve'><value>VividLight</value></data>
+<data name='Blends_LinearLight' xml:space='preserve'><value>Lineair licht</value></data>
+<data name='Blends_PinLight' xml:space='preserve'><value>PinLight</value></data>
+<data name='Blends_HardMix' xml:space='preserve'><value>Harde mix</value></data>
+<data name='Blends_Difference' xml:space='preserve'><value>Verschil</value></data>
+<data name='Blends_Exclusion' xml:space='preserve'><value>Uitsluiting</value></data>
+<data name='Blends_Hue' xml:space='preserve'><value>Tint</value></data>
+<data name='Blends_Luminosity' xml:space='preserve'><value>Helderheid</value></data>
+<data name='Blends_Subtract' xml:space='preserve'><value>Aftrekken</value></data>
+<data name='Blends_Division' xml:space='preserve'><value>Divisie</value></data>
+<data name='Historys_LayersSetupTransformAdd_Move' xml:space='preserve'><value>Stel de canvasgrootte in</value></data>
+<data name='Historys_LayersSetupTransformMultiplies_Transform' xml:space='preserve'><value>Stel de canvasgrootte in</value></data>
+<data name='Historys_LayeragesArrange_LayersArrange' xml:space='preserve'><value>Lagen rangschikken</value></data>
+<data name='Historys_LayeragesArrange_RemoveLayers' xml:space='preserve'><value>Verwijder lagen</value></data>
+<data name='Historys_LayeragesArrange_AddLayer' xml:space='preserve'><value>Laag toevoegen</value></data>
+<data name='Historys_LayersTransformAdd_Move' xml:space='preserve'><value>Actie</value></data>
+<data name='Historys_LayersTransformMultiplies_Transform' xml:space='preserve'><value>Transformeren</value></data>
+<data name='Historys_LayersProperty_SetTransform_IsCrop' xml:space='preserve'><value>Stel in of de transformatie wordt bijgesneden</value></data>
+<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>Zet transformatie bijsnijden</value></data>
+<data name='Historys_LayersProperty_SetStyle' xml:space='preserve'><value>Stel stijl in</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill' xml:space='preserve'><value>Vulling instellen</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill_Extend' xml:space='preserve'><value>Opvulverlenging instellen</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill_Type' xml:space='preserve'><value>Stel het vultype in</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke' xml:space='preserve'><value>Stel een beroerte in</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke_Extend' xml:space='preserve'><value>Stel slagverlenging in</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke_Type' xml:space='preserve'><value>Stel slagtype in</value></data>
+<data name='Historys_LayersProperty_SetStyle_Transparency' xml:space='preserve'><value>Transparantie instellen</value></data>
+<data name='Historys_LayersProperty_SetStyle_Transparency_Type' xml:space='preserve'><value>Stel het transparantietype in</value></data>
+<data name='Historys_LayersProperty_Set_MoveNodes' xml:space='preserve'><value>Verplaats knooppunten</value></data>
+<data name='Historys_LayersProperty_Set_MoveNode_ControlPoint' xml:space='preserve'><value>Verplaats knooppunt controlepunt</value></data>
+<data name='Historys_LayersProperty_Set_MoveNode_IsChecked' xml:space='preserve'><value>Stel in of het knooppunt is geselecteerd</value></data>
+<data name='Historys_LayersProperty_Set_AddNode' xml:space='preserve'><value>Voeg knooppunt toe</value></data>
+<data name='Historys_LayersProperty_Set_RemoveNodes' xml:space='preserve'><value>Verwijder knooppunten</value></data>
+<data name='Historys_LayersProperty_Set_InsertNodes' xml:space='preserve'><value>Voeg knooppunten in</value></data>
+<data name='Historys_LayersProperty_Set_SharpNodes' xml:space='preserve'><value>Scherpe knooppunten</value></data>
+<data name='Historys_LayersProperty_Set_SmoothNodes' xml:space='preserve'><value>Gladde knooppunten</value></data>
+<data name='Historys_LayersProperty_SetPhotocopier' xml:space='preserve'><value>Stel foto in</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_GridType' xml:space='preserve'><value>Stel het type rasterlaag in</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_HorizontalStep' xml:space='preserve'><value>Stel de horizontale stap van de rasterlaag in</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_VerticalStep' xml:space='preserve'><value>Stel de verticale stap van de rasterlaag in</value></data>
+<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_Offset' xml:space='preserve'><value>Stel de verplaatsing van de diagonale laag in</value></data>
+<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_HorizontalStep' xml:space='preserve'><value>Stel de horizontale stap van de diagonale laag in</value></data>
+<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Radius' xml:space='preserve'><value>Stel de straal van de gevlekte laag in</value></data>
+<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Step' xml:space='preserve'><value>Stappen om de gevlekte laag in te stellen</value></data>
+<data name='Historys_LayersProperty_Set_GeometryRoundRectLayer_Corner' xml:space='preserve'><value>Stel afgeronde rechthoekige hoeken in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryTriangleLayer_Center' xml:space='preserve'><value>Stel het midden van de driehoeklaag in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_Mid' xml:space='preserve'><value>Stel het middelpunt van de diamantlaag in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_HoleRadius' xml:space='preserve'><value>Stel de straal van het gat in de diamantlaag in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryPentagonLayer_Points' xml:space='preserve'><value>Stel de punten van vijfhoekige laagpunten in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryStarLayer_Points' xml:space='preserve'><value>Stel de punten van de punten van de sterlaag in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryStarLayer_InnerRadius' xml:space='preserve'><value>Stel de binnenradius van de sterlaag in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Count' xml:space='preserve'><value>Stel de punten van tandlagen in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_InnerRadius' xml:space='preserve'><value>Stel de binnenste straal van de tandlaag in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Tooth' xml:space='preserve'><value>Zet de tand van de tandlaag</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Notch' xml:space='preserve'><value>Stel de inkeping in de versnellingslaag in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDountLayer_HoleRadius' xml:space='preserve'><value>Stel de straal van het gat in de donutlaag in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryPieLayer_SweepAngle' xml:space='preserve'><value>Stel de scanhoek van de cirkellaag in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCookieLayer_InnerRadius' xml:space='preserve'><value>Stel de straal van de koekjeslaag in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCookieLayer_SweepAngle' xml:space='preserve'><value>Stel de sweep-hoek van de koekjeslaag in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_LeftTail' xml:space='preserve'><value>Stel de linkerzijde van de pijllaag in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_RightTail' xml:space='preserve'><value>Zet de rechterstaart van de pijllaag</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_Value' xml:space='preserve'><value>Stel de waarde van de pijllaag in</value></data>
+<data name='Historys_LayersProperty_Set_GeometryHeartLayer_Spread' xml:space='preserve'><value>Zet de hartlaag uitgespreid</value></data>
+<data name='Historys_LayersProperty_SetName' xml:space='preserve'><value>Naam instellen</value></data>
+<data name='Historys_LayersProperty_SetBlendMode' xml:space='preserve'><value>Stel de mengmodus in</value></data>
+<data name='Historys_LayersProperty_SetOpacity' xml:space='preserve'><value>Stel de dekking in</value></data>
+<data name='Historys_LayersProperty_SetOpacity_000' xml:space='preserve'><value>Zet de dekking op 0%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_025' xml:space='preserve'><value>Zet de dekking op 0%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_050' xml:space='preserve'><value>Zet de dekking op 50%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_075' xml:space='preserve'><value>Zet dekking op 75%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_100' xml:space='preserve'><value>Zet dekking op 100%</value></data>
+<data name='Historys_LayersProperty_SetVisibility' xml:space='preserve'><value>Zichtbaarheid instellen</value></data>
+<data name='Historys_LayersProperty_SetIsSelected' xml:space='preserve'><value>Stel in of u wilt selecteren</value></data>
+<data name='Historys_LayersProperty_SetTagType' xml:space='preserve'><value>Stel het tagtype in</value></data>
+<data name='Historys_LayeragesArrange_CutLayers' xml:space='preserve'><value>Knip lagen</value></data>
+<data name='Historys_LayeragesArrange_DuplicateLayer' xml:space='preserve'><value>Dubbele laag</value></data>
+<data name='Historys_LayeragesArrange_DuplicateLayers' xml:space='preserve'><value>Dubbele lagen</value></data>
+<data name='Historys_LayeragesArrange_PasteLayers' xml:space='preserve'><value>Plak lagen</value></data>
+<data name='Historys_LayeragesArrange_ClearLayers' xml:space='preserve'><value>Duidelijke lagen</value></data>
+<data name='Historys_LayeragesArrange_GroupLayers' xml:space='preserve'><value>Lagen groeperen</value></data>
+<data name='Historys_LayeragesArrange_UngroupLayers' xml:space='preserve'><value>Degroepeer lagen</value></data>
+<data name='Historys_LayeragesArrange_ReleaseLayers' xml:space='preserve'><value>Laat laag los</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_Combine' xml:space='preserve'><value>Voeg een gecombineerde curvelaag toe</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_ExpandStroke' xml:space='preserve'><value>Voeg een curvelaag toe met een uitgebreide lijn</value></data>
+<data name='Historys_LayeragesArrange_AddLayers_ExpandStroke' xml:space='preserve'><value>Voeg een curvelaag toe met een uitgebreide lijn</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Exposure' xml:space='preserve'><value>Stel de belichtingsaanpassing opnieuw in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Exposure_Exposure' xml:space='preserve'><value>Stel de belichting van de belichtingsaanpassing in</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Brightness' xml:space='preserve'><value>Reset de helderheidsaanpassing</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteLight' xml:space='preserve'><value>Set van aanpassing van de helderheid van het wit licht</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteDark' xml:space='preserve'><value>Set van witte donkere helderheidsaanpassing</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackLight' xml:space='preserve'><value>Stel zwart licht van helderheidsaanpassing in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackDark' xml:space='preserve'><value>Stel zwart donker in van helderheidsaanpassing</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Saturation' xml:space='preserve'><value>Stel de verzadigingsaanpassing opnieuw in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Saturation_Saturation' xml:space='preserve'><value>Stel de verzadiging van de verzadigingsaanpassing in</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_HueRotation' xml:space='preserve'><value>Stel de aanpassing van de tintrotatie opnieuw in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HueRotation_Angle' xml:space='preserve'><value>Stel de hoek van de tintrotatieaanpassing in</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Contrast' xml:space='preserve'><value>Reset contrastaanpassing</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Contrast_Contrast' xml:space='preserve'><value>Stel het contrast van de contrastaanpassing in</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Temperature' xml:space='preserve'><value>Reset temperatuuraanpassing</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Temperature_Temperature' xml:space='preserve'><value>Stel de temperatuur van de temperatuuraanpassing in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Temperature_Tint' xml:space='preserve'><value>Stel de tint van de temperatuuraanpassing in</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_HighlightsAndShadows' xml:space='preserve'><value>Stel de aanpassing van hoge lichten en schaduwen opnieuw in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Shadows' xml:space='preserve'><value>Stel schaduwen van hoge lichten en schaduwen in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Highlights' xml:space='preserve'><value>Stel hoogtepunten van hoge lichten en schaduwen in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Clarity' xml:space='preserve'><value>Stel de helderheid van de aanpassing van hoge lichten en schaduwen in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>Stel het aantal hooglichten en schaduwen in voor maskervervaging</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_GammaTransfer' xml:space='preserve'><value>Reset de aanpassing van de gamma-overdracht</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaDisable' xml:space='preserve'><value>Wissel alfa van aanpassing van gamma-overdracht</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaOffset' xml:space='preserve'><value>Stel de alpha-offset van de aanpassing van de gamma-overdracht in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaExponent' xml:space='preserve'><value>Stel de alpha-exponent van de aanpassing van de gamma-overdracht in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaAmplitude' xml:space='preserve'><value>Stel de alpha-amplitude van de aanpassing van de gamma-overdracht in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedDisable' xml:space='preserve'><value>Schakel rood voor aanpassing van de gamma-overdracht</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedOffset' xml:space='preserve'><value>Stel de rode offset van de aanpassing van de gamma-overdracht in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedExponent' xml:space='preserve'><value>Stel de rode exponent van de aanpassing van de gamma-overdracht in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedAmplitude' xml:space='preserve'><value>Stel de rode amplitude van de aanpassing van de gamma-overdracht in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenDisable' xml:space='preserve'><value>Schakel groen van de aanpassing van de gamma-overdracht</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenOffset' xml:space='preserve'><value>Stel de groene offset van de aanpassing van de gamma-overdracht in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenExponent' xml:space='preserve'><value>Stel de groene exponent van de aanpassing van de gamma-overdracht in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenAmplitude' xml:space='preserve'><value>Stel de groene amplitude van de aanpassing van de gamma-overdracht in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueDisable' xml:space='preserve'><value>Schakel blauw van aanpassing van gamma-overdracht</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueOffset' xml:space='preserve'><value>Stel de blauwe offset van de aanpassing van de gamma-overdracht in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueExponent' xml:space='preserve'><value>Stel de blauwe exponent van de aanpassing van de gamma-overdracht in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueAmplitude' xml:space='preserve'><value>Stel de blauwe amplitude van de aanpassing van de gamma-overdracht in</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Vignette' xml:space='preserve'><value>Reset vignetaanpassing</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Amount' xml:space='preserve'><value>Stel de hoeveelheid vignetaanpassing in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Curve' xml:space='preserve'><value>Stel de curve van de vignetaanpassing in</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Kleur van vignetaanpassing instellen</value></data>
+<data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Gaussiaans vervagingseffect resetten</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Gaussiaans vervagingseffect wisselen</value></data>
+<data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Stel de hoeveelheid Gaussiaans vervagingseffect in</value></data>
+<data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Stel het directionele vervagingseffect opnieuw in</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Wissel van directioneel vervagingseffect</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Stel de straal van het directionele vervagingseffect in</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Stel de hoek van het directionele vervagingseffect in</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Stel het verscherpingseffect opnieuw in</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Schakel het verscherpingseffect in</value></data>
+<data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Stel de hoeveelheid verscherpingseffect in</value></data>
+<data name='Historys_LayersProperty_ResetEffect_OuterShadow' xml:space='preserve'><value>Reset het buitenschaduweffect</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_OuterShadow' xml:space='preserve'><value>Schakel het buitenste schaduweffect om</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Radius' xml:space='preserve'><value>Stel de straal van het buitenste schaduweffect in</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Opacity' xml:space='preserve'><value>Stel de dekking van het buitenste schaduweffect in</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Offset' xml:space='preserve'><value>Stel de offset van het buitenschaduweffect in</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Angle' xml:space='preserve'><value>Hoek van buitenste schaduweffect instellen</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Color' xml:space='preserve'><value>Kleur van buitenste schaduweffect instellen</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Edge' xml:space='preserve'><value>Randeffect resetten</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Edge' xml:space='preserve'><value>Switch edge-effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_Edge_Amount' xml:space='preserve'><value>Stel de hoeveelheid randeffect in</value></data>
+<data name='Historys_LayersProperty_SetEffect_Edge_Radius' xml:space='preserve'><value>Stel de straal van het randeffect in</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Mmorphology' xml:space='preserve'><value>Morfologie-effect resetten</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Mmorphology' xml:space='preserve'><value>Schakel morfologie-effect</value></data>
+<data name='Historys_LayersProperty_SetEffect_Mmorphology_Size' xml:space='preserve'><value>Stel de grootte van het morfologie-effect in</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Emboss' xml:space='preserve'><value>Reliëfeffect opnieuw instellen</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Emboss' xml:space='preserve'><value>Schakel het reliëfeffect</value></data>
+<data name='Historys_LayersProperty_SetEffect_Emboss_Radius' xml:space='preserve'><value>Stel de straal van het effect in reliëf in</value></data>
+<data name='Historys_LayersProperty_SetEffect_Emboss_Angle' xml:space='preserve'><value>Stel radiangleus van effect reliëf in</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Straighten' xml:space='preserve'><value>Herstel het rechttrekken-effect</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Straighten' xml:space='preserve'><value>Schakel het rechttrekken-effect om</value></data>
+<data name='Historys_LayersProperty_SetEffect_Straighten_Angle' xml:space='preserve'><value>Hoek voor rechttrekken instellen</value></data>
+<data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>Lettertypetekst instellen</value></data>
+<data name='Historys_LayersProperty_SetFontAlignment' xml:space='preserve'><value>Lettertype-uitlijning instellen</value></data>
+<data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>Lettertypestijl instellen</value></data>
+<data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>Lettertypegewicht instellen</value></data>
+<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Stel lettertypefamilie in</value></data>
+<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Stel de lettergrootte in</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>Streepstijl instellen</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeWidth' xml:space='preserve'><value>Stel de lijndikte in</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Cap' xml:space='preserve'><value>Stel de dop van de lijnstijl in</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Join' xml:space='preserve'><value>Stel de lijnstijl samen in</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Offset' xml:space='preserve'><value>Stel de offset van de streekstijl in</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsFollowTransform' xml:space='preserve'><value>Set stijl is volg transformatie</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsStrokeBehindFill' xml:space='preserve'><value>Ingestelde stijl is lijn achter vulling</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>De stijl van de set is de schaal van de lijnbreedte met laag</value></data>
+<data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>Filter instellen</value></data>
+<data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$SettingPage_Back' xml:space='preserve'><value>Terug</value></data>
+<data name='$MainPage_Title' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$MainPage_NewDialog_Close' xml:space='preserve'><value>annuleren</value></data>
+<data name='$MainPage_NewDialog_Primary' xml:space='preserve'><value>OK</value></data>
+<data name='$MainPage_SizePicker_Width' xml:space='preserve'><value>Breedte</value></data>
+<data name='$MainPage_SizePicker_Height' xml:space='preserve'><value>Hoogte</value></data>
+<data name='$MainPage_Pictures_Close' xml:space='preserve'><value>annuleren</value></data>
+<data name='$MainPage_Rename' xml:space='preserve'><value>Hernoemen</value></data>
+<data name='$MainPage_Rename_Title' xml:space='preserve'><value>Hernoem Project</value></data>
+<data name='$MainPage_Rename_Close' xml:space='preserve'><value>annuleren</value></data>
+<data name='$MainPage_RenameDialog_Title' xml:space='preserve'><value>Hernoem Project</value></data>
+<data name='$MainPage_RenameDialog_Close' xml:space='preserve'><value>annuleren</value></data>
+<data name='$MainPage_RenameDialog_Primary' xml:space='preserve'><value>Hernoemen</value></data>
+<data name='$MainPage_RenameDialog_TextBox_PlaceholderText' xml:space='preserve'><value>Voer hier een naam in.</value></data>
+<data name='$MainPage_Delete' xml:space='preserve'><value>Verwijderen</value></data>
+<data name='$MainPage_Delete_Close' xml:space='preserve'><value>annuleren</value></data>
+<data name='$MainPage_Delete_Primary' xml:space='preserve'><value>Verwijderen</value></data>
+<data name='$MainPage_Duplicate' xml:space='preserve'><value>Duplicaat</value></data>
+<data name='$MainPage_Duplicate_Close' xml:space='preserve'><value>annuleren</value></data>
+<data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>Duplicaat</value></data>
+<data name='$DrawPage_Export' xml:space='preserve'><value>Exporteren</value></data>
+<data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>annuleren</value></data>
+<data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>OK</value></data>
+<data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>Breedte</value></data>
+<data name='$DrawPage_SetupDialog_SizePicker_Height' xml:space='preserve'><value>Hoogte</value></data>
+<data name='$DrawPage_ExportDialog_Close' xml:space='preserve'><value>annuleren</value></data>
+<data name='$DrawPage_ExportDialog_Primary' xml:space='preserve'><value>Exporteren</value></data>
+<data name='$DrawPage_ExportDialog_SizePicker_Width' xml:space='preserve'><value>Breedte</value></data>
+<data name='$DrawPage_ExportDialog_SizePicker_Height' xml:space='preserve'><value>Hoogte</value></data>
+<data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>Voer hier een naam in.</value></data>
+<data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>annuleren</value></data>
+<data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>Hernoemen</value></data>
+<data name='Tools_Fill' xml:space='preserve'><value>Vullen</value></data>
+<data name='Tools_Stroke' xml:space='preserve'><value>Beroerte</value></data>
+<data name='Tools_ConvertToCurves' xml:space='preserve'><value>Converteren naar curven</value></data>
+<data name='Tools_Brush' xml:space='preserve'><value>Borstel</value></data>
+<data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>Vullen</value></data>
+<data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>Beroerte</value></data>
+<data name='Tools_Brush_Type' xml:space='preserve'><value>Type</value></data>
+<data name='Tools_Brush_Type_None' xml:space='preserve'><value>Geen</value></data>
+<data name='Tools_Brush_Type_Color' xml:space='preserve'><value>Kleur</value></data>
+<data name='Tools_Brush_Type_Image' xml:space='preserve'><value>Beeld</value></data>
+<data name='Tools_Brush_Brush' xml:space='preserve'><value>Borstel</value></data>
+<data name='Tools_Brush_Extend_Mirror' xml:space='preserve'><value>Spiegel</value></data>
+<data name='Tools_Brush_Stop_Remove' xml:space='preserve'><value>Verwijderen</value></data>
+<data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value>Kopiëren</value></data>
+<data name='Tools_GeometryRectangle' xml:space='preserve'><value>Rechthoek</value></data>
+<data name='Tools_GeometryEllipse' xml:space='preserve'><value>Ovaal</value></data>
+<data name='Tools_Node_Remove' xml:space='preserve'><value>Verwijderen</value></data>
+<data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>Hoek</value></data>
+<data name='Tools_TextArtistic' xml:space='preserve'><value>Artistieke tekst</value></data>
+<data name='Tools_TextFrame' xml:space='preserve'><value>Frame Tekst</value></data>
+<data name='Tools_Image' xml:space='preserve'><value>Beeld</value></data>
+<data name='Tools_PatternGrid' xml:space='preserve'><value>Raster</value></data>
+<data name='Tools_PatternGrid_Type' xml:space='preserve'><value>Type</value></data>
+<data name='Tools_PatternGrid_Grid' xml:space='preserve'><value>Raster</value></data>
+<data name='Tools_PatternGrid_HorizontalStep' xml:space='preserve'><value>Horizontale trede</value></data>
+<data name='Tools_PatternGrid_VerticalStep' xml:space='preserve'><value>Verticale stap</value></data>
+<data name='Tools_PatternDiagonal' xml:space='preserve'><value>Diagonaal</value></data>
+<data name='Tools_PatternDiagonal_Offset' xml:space='preserve'><value>Compensatie</value></data>
+<data name='Tools_PatternDiagonal_HorizontalStep' xml:space='preserve'><value>Horizontale trede</value></data>
+<data name='Tools_PatternSpotted' xml:space='preserve'><value>Gespot</value></data>
+<data name='Tools_PatternSpotted_Radius' xml:space='preserve'><value>Straal</value></data>
+<data name='Tools_GeometryRoundRect' xml:space='preserve'><value>RoundRect</value></data>
+<data name='Tools_GeometryTriangle' xml:space='preserve'><value>Driehoek</value></data>
+<data name='Tools_GeometryTriangle_Mirror' xml:space='preserve'><value>Spiegel</value></data>
+<data name='Tools_GeometryDiamond' xml:space='preserve'><value>Diamant</value></data>
+<data name='Tools_GeometryDiamond_Mirror' xml:space='preserve'><value>Spiegel</value></data>
+<data name='Tools_GeometryPentagon' xml:space='preserve'><value>Pentagon</value></data>
+<data name='Tools_GeometryPentagon_Points' xml:space='preserve'><value>Punten</value></data>
+<data name='Tools_GeometryStar' xml:space='preserve'><value>Ster</value></data>
+<data name='Tools_GeometryStar_Points' xml:space='preserve'><value>Punten</value></data>
+<data name='Tools_GeometryStar_InnerRadius' xml:space='preserve'><value>Binnenstraal</value></data>
+<data name='Tools_GeometryCog' xml:space='preserve'><value>Cog</value></data>
+<data name='Tools_GeometryCog_InnerRadius' xml:space='preserve'><value>Binnenstraal</value></data>
+<data name='Tools_GeometryDount' xml:space='preserve'><value>Dount</value></data>
+<data name='Tools_GeometryPie' xml:space='preserve'><value>Taart</value></data>
+<data name='Tools_GeometryPie_SweepAngle' xml:space='preserve'><value>Sweep Hoek</value></data>
+<data name='Tools_GeometryCookie' xml:space='preserve'><value>Koekje</value></data>
+<data name='Tools_GeometryCookie_InnerRadius' xml:space='preserve'><value>Binnenstraal</value></data>
+<data name='Tools_GeometryCookie_SweepAngle' xml:space='preserve'><value>Sweep Hoek</value></data>
+<data name='Tools_GeometryArrow' xml:space='preserve'><value>Pijl</value></data>
+<data name='Tools_GeometryArrow_ArrowTail_None' xml:space='preserve'><value>Geen</value></data>
+<data name='Tools_GeometryCapsule' xml:space='preserve'><value>Capsule</value></data>
+<data name='Tools_GeometryHeart' xml:space='preserve'><value>Hart</value></data>
+<data name='Layers_Group' xml:space='preserve'><value>Groep</value></data>
+<data name='Layers_GeometryRectangle' xml:space='preserve'><value>Rechthoek</value></data>
+<data name='Layers_GeometryEllipse' xml:space='preserve'><value>Ovaal</value></data>
+<data name='Layers_TextArtistic' xml:space='preserve'><value>Artistieke tekst</value></data>
+<data name='Layers_TextFrame' xml:space='preserve'><value>Frame Tekst</value></data>
+<data name='Layers_Image' xml:space='preserve'><value>Beeld</value></data>
+<data name='Layers_PatternGrid' xml:space='preserve'><value>Raster</value></data>
+<data name='Layers_PatternDiagonal' xml:space='preserve'><value>Diagonaal</value></data>
+<data name='Layers_PatternSpotted' xml:space='preserve'><value>Gespot</value></data>
+<data name='Layers_GeometryRoundRect' xml:space='preserve'><value>RoundRect</value></data>
+<data name='Layers_GeometryTriangle' xml:space='preserve'><value>Driehoek</value></data>
+<data name='Layers_GeometryDiamond' xml:space='preserve'><value>Diamant</value></data>
+<data name='Layers_GeometryPentagon' xml:space='preserve'><value>Pentagon</value></data>
+<data name='Layers_GeometryStar' xml:space='preserve'><value>Ster</value></data>
+<data name='Layers_GeometryCog' xml:space='preserve'><value>Cog</value></data>
+<data name='Layers_GeometryDount' xml:space='preserve'><value>Dount</value></data>
+<data name='Layers_GeometryPie' xml:space='preserve'><value>Taart</value></data>
+<data name='Layers_GeometryCookie' xml:space='preserve'><value>Koekje</value></data>
+<data name='Layers_GeometryArrow' xml:space='preserve'><value>Pijl</value></data>
+<data name='Layers_GeometryCapsule' xml:space='preserve'><value>Capsule</value></data>
+<data name='Layers_GeometryHeart' xml:space='preserve'><value>Hart</value></data>
+<data name='Menus_Edit' xml:space='preserve'><value>Bewerk</value></data>
+<data name='Menus_Stroke' xml:space='preserve'><value>Beroerte</value></data>
+<data name='Menus_Transformer' xml:space='preserve'><value>Transformator</value></data>
+<data name='Menus_Transformer_Width' xml:space='preserve'><value>Breedte</value></data>
+<data name='Menus_Transformer_Height' xml:space='preserve'><value>Hoogte</value></data>
+<data name='Menus_Color' xml:space='preserve'><value>Kleur</value></data>
+<data name='Menus_Layer_Opacity' xml:space='preserve'><value>Ondoorzichtigheid</value></data>
+<data name='Edits_Edit' xml:space='preserve'><value>Bewerk</value></data>
+<data name='Edits_Edit_Duplicate' xml:space='preserve'><value>Duplicaat</value></data>
+<data name='Edits_Edit_Copy' xml:space='preserve'><value>Kopiëren</value></data>
+<data name='Edits_Group' xml:space='preserve'><value>Groep</value></data>
+<data name='Edits_Group_Group' xml:space='preserve'><value>Groep</value></data>
+<data name='Operates_Transform' xml:space='preserve'><value>Transformeren</value></data>
+<data name='Operates_Horizontally_Left' xml:space='preserve'><value>Links uitlijnen</value></data>
+<data name='Operates_Horizontally_Center' xml:space='preserve'><value>Tekst in het midden uitlijnen</value></data>
+<data name='Operates_Horizontally_Right' xml:space='preserve'><value>Rechts uitlijnen</value></data>
+<data name='Adjustments_Exposure' xml:space='preserve'><value>Blootstelling</value></data>
+<data name='Adjustments_Exposure_Exposure' xml:space='preserve'><value>Blootstelling</value></data>
+<data name='Adjustments_Saturation' xml:space='preserve'><value>Verzadiging</value></data>
+<data name='Adjustments_Saturation_Saturation' xml:space='preserve'><value>Verzadiging</value></data>
+<data name='Adjustments_HueRotation_Angle' xml:space='preserve'><value>Hoek</value></data>
+<data name='Adjustments_Contrast' xml:space='preserve'><value>Contrast</value></data>
+<data name='Adjustments_Contrast_Contrast' xml:space='preserve'><value>Contrast</value></data>
+<data name='Adjustments_Temperature' xml:space='preserve'><value>Temperatuur</value></data>
+<data name='Adjustments_Temperature_Temperature' xml:space='preserve'><value>Temperatuur</value></data>
+<data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>Bedrag</value></data>
+<data name='Adjustments_Vignette_Color' xml:space='preserve'><value>Kleur</value></data>
+<data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>Straal</value></data>
+<data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>Straal</value></data>
+<data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>Hoek</value></data>
+<data name='Effects_Sharpen_Amount' xml:space='preserve'><value>Bedrag</value></data>
+<data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>Straal</value></data>
+<data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>Ondoorzichtigheid</value></data>
+<data name='Effects_OuterShadow_Offset' xml:space='preserve'><value>Compensatie</value></data>
+<data name='Effects_OuterShadow_Angle' xml:space='preserve'><value>Hoek</value></data>
+<data name='Effects_OuterShadow_Color' xml:space='preserve'><value>Kleur</value></data>
+<data name='Effects_Edge_Amount' xml:space='preserve'><value>Bedrag</value></data>
+<data name='Effects_Edge_Radius' xml:space='preserve'><value>Straal</value></data>
+<data name='Effects_Emboss_Radius' xml:space='preserve'><value>Straal</value></data>
+<data name='Effects_Emboss_Angle' xml:space='preserve'><value>Hoek</value></data>
+<data name='Effects_Straighten_Angle' xml:space='preserve'><value>Hoek</value></data>
+<data name='Texts_FontAlignment_Left' xml:space='preserve'><value>Links uitlijnen</value></data>
+<data name='Texts_FontAlignment_Center' xml:space='preserve'><value>Tekst in het midden uitlijnen</value></data>
+<data name='Texts_FontAlignment_Right' xml:space='preserve'><value>Rechts uitlijnen</value></data>
+<data name='Strokes_Dash' xml:space='preserve'><value>Dash</value></data>
+<data name='Strokes_Dash_Dash' xml:space='preserve'><value>Dash</value></data>
+<data name='Strokes_Width' xml:space='preserve'><value>Breedte</value></data>
+<data name='Strokes_Cap_Triangle' xml:space='preserve'><value>Driehoek</value></data>
+<data name='Strokes_Offset' xml:space='preserve'><value>Compensatie</value></data>
+<data name='Blends_Saturation' xml:space='preserve'><value>Verzadiging</value></data>
+<data name='Blends_Color' xml:space='preserve'><value>Kleur</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_ConvertToCurves' xml:space='preserve'><value>Converteren naar curven</value></data>
+
+ </root>

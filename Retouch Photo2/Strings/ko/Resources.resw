@@ -1,0 +1,668 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <xsd:schema id='root' xmlns='' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'>
+    <xsd:import namespace='http://www.w3.org/XML/1998/namespace' />
+    <xsd:element name='root' msdata:IsDataSet='true'>
+      <xsd:complexType>
+        <xsd:choice maxOccurs='unbounded'>
+          <xsd:element name='metadata'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' />
+              </xsd:sequence>
+              <xsd:attribute name='name' use='required' type='xsd:string' />
+              <xsd:attribute name='type' type='xsd:string' />
+              <xsd:attribute name='mimetype' type='xsd:string' />
+              <xsd:attribute ref='xml:space' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='assembly'>
+            <xsd:complexType>
+              <xsd:attribute name='alias' type='xsd:string' />
+              <xsd:attribute name='name' type='xsd:string' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='data'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' msdata:Ordinal='1' />
+                <xsd:element name='comment' type='xsd:string' minOccurs='0' msdata:Ordinal='2' />
+              </xsd:sequence>
+              <xsd:attribute name='name' type='xsd:string' use='required' msdata:Ordinal='1' />
+              <xsd:attribute name='type' type='xsd:string' msdata:Ordinal='3' />
+              <xsd:attribute name='mimetype' type='xsd:string' msdata:Ordinal='4' />
+              <xsd:attribute ref='xml:space' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='resheader'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' msdata:Ordinal='1' />
+              </xsd:sequence>
+              <xsd:attribute name='name' type='xsd:string' use='required' />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name='resmimetype'>
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name='version'>
+    <value>2.0</value>
+  </resheader>
+  <resheader name='reader'>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name='writer'>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+<data name='$Loading_Loading' xml:space='preserve'><value>로딩 중</value></data>
+<data name='$Loading_LoadFailed' xml:space='preserve'><value>불러 오지 못했습니다</value></data>
+<data name='$Loading_FileCorrupt' xml:space='preserve'><value>파일이 손상되었습니다</value></data>
+<data name='$Loading_FileNull' xml:space='preserve'><value>파일이 비어 있습니다</value></data>
+<data name='$Loading_Saving' xml:space='preserve'><value>절약</value></data>
+<data name='$Loading_SaveSuccess' xml:space='preserve'><value>성공적으로 저장되었다</value></data>
+<data name='$Loading_SaveFailed' xml:space='preserve'><value>저장 실패</value></data>
+<data name='$Untitled' xml:space='preserve'><value>제목 없음</value></data>
+<data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
+<data name='$SettingPage_Title' xml:space='preserve'><value>환경</value></data>
+<data name='$SettingPage_About' xml:space='preserve'><value>약...</value></data>
+<data name='$SettingPage_Theme' xml:space='preserve'><value>테마</value></data>
+<data name='$SettingPage_Theme_Light' xml:space='preserve'><value>빛</value></data>
+<data name='$SettingPage_Theme_Dark' xml:space='preserve'><value>어두운</value></data>
+<data name='$SettingPage_Theme_UseSystem' xml:space='preserve'><value>사용 시스템</value></data>
+<data name='$SettingPage_DeviceLayout' xml:space='preserve'><value>장치 레이아웃</value></data>
+<data name='$SettingPage_DeviceLayout_Phone' xml:space='preserve'><value>전화</value></data>
+<data name='$SettingPage_DeviceLayout_Pad' xml:space='preserve'><value>인주</value></data>
+<data name='$SettingPage_DeviceLayout_PC' xml:space='preserve'><value>PC</value></data>
+<data name='$SettingPage_DeviceLayout_Adaptive' xml:space='preserve'><value>적응</value></data>
+<data name='$SettingPage_DeviceLayout_AdaptiveWidth' xml:space='preserve'><value>적응 폭</value></data>
+<data name='$SettingPage_DeviceLayout_ResetAdaptiveWidth' xml:space='preserve'><value>적응 폭 재설정</value></data>
+<data name='$SettingPage_LayersHeight' xml:space='preserve'><value>레이어 높이</value></data>
+<data name='$SettingPage_LayersHeightTip' xml:space='preserve'><value>레이어 컨트롤의 높이를 변경하려면 클릭하십시오.</value></data>
+<data name='$SettingPage_MenuType' xml:space='preserve'><value>메뉴 유형</value></data>
+<data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>메뉴 버튼을 숨기려면 선택 취소</value></data>
+<data name='$SettingPage_Key' xml:space='preserve'><value>바로 가기</value></data>
+<data name='$SettingPage_Key_Rotate' xml:space='preserve'><value>스크롤 휠을 밀어 캔버스 회전</value></data>
+<data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>캔버스를 왼쪽으로 이동</value></data>
+<data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>캔버스 위로 이동</value></data>
+<data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>캔버스를 오른쪽으로 이동</value></data>
+<data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>캔버스 아래로 이동</value></data>
+<data name='$SettingPage_LocalFolder' xml:space='preserve'><value>로컬 폴더</value></data>
+<data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>열다</value></data>
+<data name='$MainPage_DocumentationTip' xml:space='preserve'><value>문서 웹 페이지 열기</value></data>
+<data name='$MainPage_SettingTip' xml:space='preserve'><value>설정 페이지 열기</value></data>
+<data name='$MainPage_Select_ClickTip' xml:space='preserve'><value>항목을 선택하려면 클릭하십시오.</value></data>
+<data name='$MainPage_Select_All' xml:space='preserve'><value>모두 선택</value></data>
+<data name='$MainPage_InitialTip' xml:space='preserve'><value>프로젝트가 없습니까? 당신은 할 수 있습니다 ...</value></data>
+<data name='$MainPage_Initial_Sample' xml:space='preserve'><value>샘플 프로젝트 열기</value></data>
+<data name='$MainPage_Initial_New' xml:space='preserve'><value>새 프로젝트 만들기</value></data>
+<data name='$MainPage_Initial_Photo' xml:space='preserve'><value>갤러리에서 새 프로젝트 만들기</value></data>
+<data name='$MainPage_Initial_Destop' xml:space='preserve'><value>데스크탑에서 새 프로젝트 만들기</value></data>
+<data name='$MainPage_New' xml:space='preserve'><value>새로운</value></data>
+<data name='$MainPage_NewDialog_Title' xml:space='preserve'><value>새 프로젝트 추가</value></data>
+<data name='$MainPage_Pictures' xml:space='preserve'><value>영화</value></data>
+<data name='$MainPage_Pictures_Photo' xml:space='preserve'><value>그림</value></data>
+<data name='$MainPage_Pictures_Destop' xml:space='preserve'><value>Destop</value></data>
+<data name='$MainPage_Rename_Subtitle' xml:space='preserve'><value>이름을 바꿀 프로젝트를 선택하십시오.</value></data>
+<data name='$MainPage_RenameDialog_TextBoxTip' xml:space='preserve'><value>이름은 이미 사용 중입니다!</value></data>
+<data name='$MainPage_Delete_Title' xml:space='preserve'><value>프로젝트 삭제</value></data>
+<data name='$MainPage_Delete_Subtitle' xml:space='preserve'><value>삭제할 프로젝트를 선택하십시오.</value></data>
+<data name='$MainPage_Duplicate_Title' xml:space='preserve'><value>중복 프로젝트</value></data>
+<data name='$MainPage_Duplicate_Subtitle' xml:space='preserve'><value>복제 할 프로젝트를 선택하십시오.</value></data>
+<data name='$DrawPage_Document' xml:space='preserve'><value>선적 서류 비치</value></data>
+<data name='$DrawPage_DocumentUnSave' xml:space='preserve'><value>저장하고 반환하지 마십시오</value></data>
+<data name='$DrawPage_Undo' xml:space='preserve'><value>실행 취소</value></data>
+<data name='$DrawPage_Redo' xml:space='preserve'><value>다시 하다</value></data>
+<data name='$DrawPage_Setup' xml:space='preserve'><value>설정</value></data>
+<data name='$DrawPage_Snap' xml:space='preserve'><value>스냅</value></data>
+<data name='$DrawPage_Ruler' xml:space='preserve'><value>지배자</value></data>
+<data name='$DrawPage_FullScreen' xml:space='preserve'><value>전체 화면</value></data>
+<data name='$DrawPage_Tip' xml:space='preserve'><value>팁</value></data>
+<data name='$DrawPage_Gallery' xml:space='preserve'><value>갤러리</value></data>
+<data name='$DrawPage_WidthTip' xml:space='preserve'><value>레이아웃 너비 전환</value></data>
+<data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>문서 설정</value></data>
+<data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>캔버스에 고정</value></data>
+<data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>내보내기 ...</value></data>
+<data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>품질</value></data>
+<data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>파일 형식</value></data>
+<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>레이어 이름 변경</value></data>
+<data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>사진 추가</value></data>
+<data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>비례 줌</value></data>
+<data name='Tools_MoreTransform_Center' xml:space='preserve'><value>센터 줌</value></data>
+<data name='Tools_MoreCreate_Square' xml:space='preserve'><value>동일한 너비와 높이</value></data>
+<data name='Tools_MoreCreate_Center' xml:space='preserve'><value>센터 줌</value></data>
+<data name='Tools_Cursor' xml:space='preserve'><value>커서</value></data>
+<data name='Tools_Cursor_CompositeMode_New' xml:space='preserve'><value>새로운</value></data>
+<data name='Tools_Cursor_CompositeMode_Add' xml:space='preserve'><value>더하다</value></data>
+<data name='Tools_Cursor_CompositeMode_Subtract' xml:space='preserve'><value>덜다</value></data>
+<data name='Tools_View' xml:space='preserve'><value>전망</value></data>
+<data name='Tools_View_Radian' xml:space='preserve'><value>라디안</value></data>
+<data name='Tools_View_RadianClear' xml:space='preserve'><value>회전 라디안 재설정</value></data>
+<data name='Tools_View_Scale' xml:space='preserve'><value>규모</value></data>
+<data name='Tools_View_ScaleClear' xml:space='preserve'><value>스케일 재설정</value></data>
+<data name='Tools_Brush_FillOrStroke' xml:space='preserve'><value>채우기 또는 획</value></data>
+<data name='Tools_Brush_Type_LinearGradient' xml:space='preserve'><value>선의</value></data>
+<data name='Tools_Brush_Type_RadialGradient' xml:space='preserve'><value>방사형</value></data>
+<data name='Tools_Brush_Type_EllipticalGradient' xml:space='preserve'><value>타원형</value></data>
+<data name='Tools_Brush_Extend' xml:space='preserve'><value>넓히다</value></data>
+<data name='Tools_Brush_Extend_Clamp' xml:space='preserve'><value>집게</value></data>
+<data name='Tools_Brush_Extend_Wrap' xml:space='preserve'><value>싸다</value></data>
+<data name='Tools_Brush_Stop_Offset' xml:space='preserve'><value>오프셋</value></data>
+<data name='Tools_Brush_Stop_Alpha' xml:space='preserve'><value>알파</value></data>
+<data name='Tools_Brush_Stop_Reverse' xml:space='preserve'><value>역전</value></data>
+<data name='Tools_Transparency' xml:space='preserve'><value>투명도</value></data>
+<data name='Tools_Pen' xml:space='preserve'><value>펜</value></data>
+<data name='Tools_Node' xml:space='preserve'><value>마디</value></data>
+<data name='Tools_Node_Insert' xml:space='preserve'><value>끼워 넣다</value></data>
+<data name='Tools_Node_Sharp' xml:space='preserve'><value>날카로운</value></data>
+<data name='Tools_Node_Smooth' xml:space='preserve'><value>부드러운</value></data>
+<data name='Tools_Node_NodeMode_Restriction' xml:space='preserve'><value>점령 지점 제한</value></data>
+<data name='Tools_Node_NodeMode_Restriction_Length' xml:space='preserve'><value>길이</value></data>
+<data name='Tools_Node_NodeMode_Mode' xml:space='preserve'><value>점령 지점 모드</value></data>
+<data name='Tools_Node_NodeMode_Mode_Mirrored' xml:space='preserve'><value>미러링 됨</value></data>
+<data name='Tools_Node_NodeMode_Mode_Disconnected' xml:space='preserve'><value>연결 끊김</value></data>
+<data name='Tools_Node_NodeMode_Mode_Asymmetric' xml:space='preserve'><value>비대칭</value></data>
+<data name='Tools_Text_PlaceholderText' xml:space='preserve'><value>텍스트 입력 ...</value></data>
+<data name='Tools_Image_Select' xml:space='preserve'><value>고르다</value></data>
+<data name='Tools_Image_Replace' xml:space='preserve'><value>바꾸다</value></data>
+<data name='Tools_Image_Clear' xml:space='preserve'><value>맑은</value></data>
+<data name='Tools_Crop' xml:space='preserve'><value>벡터 자르기</value></data>
+<data name='Tools_Crop_Reset' xml:space='preserve'><value>자르기 재설정</value></data>
+<data name='Tools_Crop_Fit' xml:space='preserve'><value>작물 맞추기</value></data>
+<data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>단계</value></data>
+<data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>모서리</value></data>
+<data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>중심점</value></data>
+<data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>중간 점</value></data>
+<data name='Tools_GeometryCog_Count' xml:space='preserve'><value>카운트</value></data>
+<data name='Tools_GeometryCog_Tooth' xml:space='preserve'><value>이</value></data>
+<data name='Tools_GeometryCog_Notch' xml:space='preserve'><value>골짜기</value></data>
+<data name='Tools_GeometryDount_HoleRadius' xml:space='preserve'><value>구멍 반경</value></data>
+<data name='Tools_GeometryArrow_LeftTail' xml:space='preserve'><value>왼쪽 꼬리</value></data>
+<data name='Tools_GeometryArrow_RightTail' xml:space='preserve'><value>오른쪽 꼬리</value></data>
+<data name='Tools_GeometryArrow_Value' xml:space='preserve'><value>폭</value></data>
+<data name='Tools_GeometryHeart_Spread' xml:space='preserve'><value>확산</value></data>
+<data name='Layers_Curve' xml:space='preserve'><value>곡선</value></data>
+<data name='Layers_CurveMulti' xml:space='preserve'><value>다중 곡선</value></data>
+<data name='Menus_Keyboard' xml:space='preserve'><value>건반</value></data>
+<data name='Menus_Operate' xml:space='preserve'><value>작동</value></data>
+<data name='Menus_Adjustment' xml:space='preserve'><value>조정</value></data>
+<data name='Menus_Adjustment_Add' xml:space='preserve'><value>추가</value></data>
+<data name='Menus_Adjustment_Filters' xml:space='preserve'><value>필터</value></data>
+<data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>조정 없음</value></data>
+<data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>레이어를 선택하세요</value></data>
+<data name='Menus_Effect' xml:space='preserve'><value>레이어 FX</value></data>
+<data name='Menus_Text' xml:space='preserve'><value>본문</value></data>
+<data name='Menus_Style' xml:space='preserve'><value>스타일</value></data>
+<data name='Menus_History' xml:space='preserve'><value>역사</value></data>
+<data name='Menus_Transformer_Rotate' xml:space='preserve'><value>회전</value></data>
+<data name='Menus_Transformer_Skew' xml:space='preserve'><value>비스듬한</value></data>
+<data name='Menus_Transformer_X' xml:space='preserve'><value>X 축</value></data>
+<data name='Menus_Transformer_Y' xml:space='preserve'><value>Y 축</value></data>
+<data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>비례 줌</value></data>
+<data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>단계 주파수</value></data>
+<data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>위치 원격 제어</value></data>
+<data name='Menus_Transformer_Anchor' xml:space='preserve'><value>닻</value></data>
+<data name='Menus_Color_Swatches' xml:space='preserve'><value>견본</value></data>
+<data name='Menus_Color_Wheel' xml:space='preserve'><value>바퀴</value></data>
+<data name='Menus_Color_RGB' xml:space='preserve'><value>RGB</value></data>
+<data name='Menus_Color_HSV' xml:space='preserve'><value>HSV</value></data>
+<data name='Menus_Color_PaletteHue' xml:space='preserve'><value>팔레트-색조</value></data>
+<data name='Menus_Color_PaletteSaturation' xml:space='preserve'><value>팔레트 채도</value></data>
+<data name='Menus_Color_PaletteValue' xml:space='preserve'><value>팔레트 값</value></data>
+<data name='Menus_Color_Circle' xml:space='preserve'><value>원</value></data>
+<data name='Menus_Layer' xml:space='preserve'><value>층</value></data>
+<data name='Menus_Layer_Name' xml:space='preserve'><value>이름</value></data>
+<data name='Menus_Layer_BlendMode' xml:space='preserve'><value>혼합 모드</value></data>
+<data name='Menus_Layer_Visibility' xml:space='preserve'><value>시계</value></data>
+<data name='Menus_Layer_TagType' xml:space='preserve'><value>태그 유형</value></data>
+<data name='Edits_Edit_Cut' xml:space='preserve'><value>절단</value></data>
+<data name='Edits_Edit_Paste' xml:space='preserve'><value>풀</value></data>
+<data name='Edits_Edit_Clear' xml:space='preserve'><value>맑은</value></data>
+<data name='Edits_Select' xml:space='preserve'><value>고르다</value></data>
+<data name='Edits_Select_All' xml:space='preserve'><value>모두 선택</value></data>
+<data name='Edits_Select_Deselect' xml:space='preserve'><value>선택 취소</value></data>
+<data name='Edits_Select_Invert' xml:space='preserve'><value>거꾸로 하다</value></data>
+<data name='Edits_Group_Ungroup' xml:space='preserve'><value>그룹 해제</value></data>
+<data name='Edits_Group_Release' xml:space='preserve'><value>해제</value></data>
+<data name='Edits_Combine_Xor' xml:space='preserve'><value>Xor</value></data>
+<data name='Edits_Combine' xml:space='preserve'><value>결합시키다</value></data>
+<data name='Edits_Combine_Union' xml:space='preserve'><value>노동 조합</value></data>
+<data name='Edits_Combine_Exclude' xml:space='preserve'><value>들어오지 못하게 하다</value></data>
+<data name='Edits_Combine_Intersect' xml:space='preserve'><value>교차</value></data>
+<data name='Edits_Combine_ExpandStroke' xml:space='preserve'><value>스트로크 확장</value></data>
+<data name='Operates_Transform_FlipHorizontal' xml:space='preserve'><value>수평으로 뒤집기</value></data>
+<data name='Operates_Transform_FlipVertical' xml:space='preserve'><value>수직으로 뒤집기</value></data>
+<data name='Operates_Transform_RotateLeft' xml:space='preserve'><value>왼쪽으로 회전</value></data>
+<data name='Operates_Transform_RotateRight' xml:space='preserve'><value>오른쪽으로 회전</value></data>
+<data name='Operates_Arrange' xml:space='preserve'><value>가지런 히하다</value></data>
+<data name='Operates_Arrange_MoveFront' xml:space='preserve'><value>앞으로 이동</value></data>
+<data name='Operates_Arrange_BackOne' xml:space='preserve'><value>다시 하나</value></data>
+<data name='Operates_Arrange_ForwardOne' xml:space='preserve'><value>앞으로 하나</value></data>
+<data name='Operates_Arrange_MoveBack' xml:space='preserve'><value>뒤로 이동</value></data>
+<data name='Operates_Horizontally' xml:space='preserve'><value>수평으로 정렬</value></data>
+<data name='Operates_Horizontally_Space' xml:space='preserve'><value>수평 간격</value></data>
+<data name='Operates_Vertically' xml:space='preserve'><value>수직 정렬</value></data>
+<data name='Operates_Vertically_Top' xml:space='preserve'><value>상단 정렬</value></data>
+<data name='Operates_Vertically_Middle' xml:space='preserve'><value>중간 정렬</value></data>
+<data name='Operates_Vertically_Bottom' xml:space='preserve'><value>하단 정렬</value></data>
+<data name='Operates_Vertically_Space' xml:space='preserve'><value>수직 간격</value></data>
+<data name='Adjustments_Gray' xml:space='preserve'><value>회색</value></data>
+<data name='Adjustments_Invert' xml:space='preserve'><value>거꾸로 하다</value></data>
+<data name='Adjustments_Brightness' xml:space='preserve'><value>명도</value></data>
+<data name='Adjustments_Brightness_WhiteToLight' xml:space='preserve'><value>화이트 투 라이트</value></data>
+<data name='Adjustments_Brightness_WhiteToDark' xml:space='preserve'><value>흰색에서 어두운</value></data>
+<data name='Adjustments_Brightness_BlackToLight' xml:space='preserve'><value>블랙 투 라이트</value></data>
+<data name='Adjustments_Brightness_BlackToDark' xml:space='preserve'><value>블랙에서 다크</value></data>
+<data name='Adjustments_HueRotation' xml:space='preserve'><value>색조 회전</value></data>
+<data name='Adjustments_Temperature_Tint' xml:space='preserve'><value>색조</value></data>
+<data name='Adjustments_HighlightsAndShadows' xml:space='preserve'><value>하이라이트 및 섀도우</value></data>
+<data name='Adjustments_HighlightsAndShadows_Shadows' xml:space='preserve'><value>그림자</value></data>
+<data name='Adjustments_HighlightsAndShadows_Highlights' xml:space='preserve'><value>하이라이트</value></data>
+<data name='Adjustments_HighlightsAndShadows_Clarity' xml:space='preserve'><value>명쾌함</value></data>
+<data name='Adjustments_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>마스크 블러 양</value></data>
+<data name='Adjustments_GammaTransfer' xml:space='preserve'><value>감마 전달</value></data>
+<data name='Adjustments_GammaTransfer_Offset' xml:space='preserve'><value>오프셋</value></data>
+<data name='Adjustments_GammaTransfer_Exponent' xml:space='preserve'><value>멱지수</value></data>
+<data name='Adjustments_GammaTransfer_Amplitude' xml:space='preserve'><value>진폭</value></data>
+<data name='Adjustments_GammaTransfer_Alpha' xml:space='preserve'><value>알파</value></data>
+<data name='Adjustments_GammaTransfer_Red' xml:space='preserve'><value>빨간</value></data>
+<data name='Adjustments_GammaTransfer_Green' xml:space='preserve'><value>초록</value></data>
+<data name='Adjustments_GammaTransfer_Blue' xml:space='preserve'><value>푸른</value></data>
+<data name='Adjustments_Vignette' xml:space='preserve'><value>삽화</value></data>
+<data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>곡선</value></data>
+<data name='Effects_GaussianBlur' xml:space='preserve'><value>가우스 흐림</value></data>
+<data name='Effects_DirectionalBlur' xml:space='preserve'><value>방향성 흐림</value></data>
+<data name='Effects_Sharpen' xml:space='preserve'><value>갈다</value></data>
+<data name='Effects_OuterShadow' xml:space='preserve'><value>외부 그림자</value></data>
+<data name='Effects_Edge' xml:space='preserve'><value>가장자리</value></data>
+<data name='Effects_Morphology' xml:space='preserve'><value>형태</value></data>
+<data name='Effects_Morphology_Size' xml:space='preserve'><value>크기</value></data>
+<data name='Effects_Emboss' xml:space='preserve'><value>엠 보스</value></data>
+<data name='Effects_Straighten' xml:space='preserve'><value>바르게 되다</value></data>
+<data name='Texts_FontAlignment' xml:space='preserve'><value>정렬</value></data>
+<data name='Texts_FontAlignment_Justified' xml:space='preserve'><value>양쪽 맞춤</value></data>
+<data name='Texts_FontStyle' xml:space='preserve'><value>글꼴 스타일</value></data>
+<data name='Texts_FontStyle_Bold' xml:space='preserve'><value>굵게</value></data>
+<data name='Texts_FontStyle_Italic' xml:space='preserve'><value>이탤릭체</value></data>
+<data name='Texts_FontStyle_UnderLine' xml:space='preserve'><value>밑줄</value></data>
+<data name='Texts_FontWeight' xml:space='preserve'><value>글꼴 두께</value></data>
+<data name='Texts_FontWeight_Black' xml:space='preserve'><value>검정</value></data>
+<data name='Texts_FontWeight_Bold' xml:space='preserve'><value>굵게</value></data>
+<data name='Texts_FontWeight_ExtraBlack' xml:space='preserve'><value>ExtraBlack</value></data>
+<data name='Texts_FontWeight_ExtraBold' xml:space='preserve'><value>ExtraBold</value></data>
+<data name='Texts_FontWeight_ExtraLight' xml:space='preserve'><value>ExtraLight</value></data>
+<data name='Texts_FontWeight_Light' xml:space='preserve'><value>빛</value></data>
+<data name='Texts_FontWeight_Medium' xml:space='preserve'><value>매질</value></data>
+<data name='Texts_FontWeight_Normal' xml:space='preserve'><value>표준</value></data>
+<data name='Texts_FontWeight_SemiBold' xml:space='preserve'><value>SemiBold</value></data>
+<data name='Texts_FontWeight_SemiLight' xml:space='preserve'><value>세미 라이트</value></data>
+<data name='Texts_FontWeight_Thin' xml:space='preserve'><value>얇은</value></data>
+<data name='Texts_FontFamily' xml:space='preserve'><value>글꼴 군</value></data>
+<data name='Texts_FontSize' xml:space='preserve'><value>글꼴 크기</value></data>
+<data name='Strokes_Dash_Solid' xml:space='preserve'><value>고체</value></data>
+<data name='Strokes_Dash_Dot' xml:space='preserve'><value>점</value></data>
+<data name='Strokes_Dash_DashDot' xml:space='preserve'><value>대시 도트</value></data>
+<data name='Strokes_Cap' xml:space='preserve'><value>캡</value></data>
+<data name='Strokes_Cap_Flat' xml:space='preserve'><value>플랫</value></data>
+<data name='Strokes_Cap_Square' xml:space='preserve'><value>광장</value></data>
+<data name='Strokes_Cap_Round' xml:space='preserve'><value>일주</value></data>
+<data name='Strokes_Join' xml:space='preserve'><value>어울리다</value></data>
+<data name='Strokes_Join_Miter' xml:space='preserve'><value>연귀</value></data>
+<data name='Strokes_Join_Bevel' xml:space='preserve'><value>사각</value></data>
+<data name='Strokes_Join_Round' xml:space='preserve'><value>일주</value></data>
+<data name='Strokes_Join_MiterOrBevel' xml:space='preserve'><value>마이 터 또는 베벨</value></data>
+<data name='Strokes_IsFollowTransform' xml:space='preserve'><value>레이어로 스타일 변형</value></data>
+<data name='Strokes_IsStrokeBehindFill' xml:space='preserve'><value>채우기 뒤의 스트로크</value></data>
+<data name='Strokes_IsStrokeWidthFollowScale' xml:space='preserve'><value>레이어가있는 획 너비 스케일</value></data>
+<data name='Blends_None' xml:space='preserve'><value>표준</value></data>
+<data name='Blends_Multiply' xml:space='preserve'><value>곱하다</value></data>
+<data name='Blends_Screen' xml:space='preserve'><value>화면</value></data>
+<data name='Blends_Darken' xml:space='preserve'><value>어둡게 하다</value></data>
+<data name='Blends_Lighten' xml:space='preserve'><value>가볍게 하다</value></data>
+<data name='Blends_Dissolve' xml:space='preserve'><value>디졸브</value></data>
+<data name='Blends_ColorBurn' xml:space='preserve'><value>컬러 화상</value></data>
+<data name='Blends_LinearBurn' xml:space='preserve'><value>선형 번</value></data>
+<data name='Blends_DarkerColor' xml:space='preserve'><value>DarkerColor</value></data>
+<data name='Blends_LighterColor' xml:space='preserve'><value>LighterColor</value></data>
+<data name='Blends_ColorDodge' xml:space='preserve'><value>ColorDodge</value></data>
+<data name='Blends_LinearDodge' xml:space='preserve'><value>선형 닷지</value></data>
+<data name='Blends_Overlay' xml:space='preserve'><value>위에 까는 것</value></data>
+<data name='Blends_SoftLight' xml:space='preserve'><value>부드러운 빛</value></data>
+<data name='Blends_HardLight' xml:space='preserve'><value>하드 라이트</value></data>
+<data name='Blends_VividLight' xml:space='preserve'><value>VividLight</value></data>
+<data name='Blends_LinearLight' xml:space='preserve'><value>선형 빛</value></data>
+<data name='Blends_PinLight' xml:space='preserve'><value>PinLight</value></data>
+<data name='Blends_HardMix' xml:space='preserve'><value>HardMix</value></data>
+<data name='Blends_Difference' xml:space='preserve'><value>차</value></data>
+<data name='Blends_Exclusion' xml:space='preserve'><value>제외</value></data>
+<data name='Blends_Hue' xml:space='preserve'><value>색조</value></data>
+<data name='Blends_Luminosity' xml:space='preserve'><value>밝기</value></data>
+<data name='Blends_Subtract' xml:space='preserve'><value>덜다</value></data>
+<data name='Blends_Division' xml:space='preserve'><value>분할</value></data>
+<data name='Historys_LayersSetupTransformAdd_Move' xml:space='preserve'><value>캔버스 크기 설정</value></data>
+<data name='Historys_LayersSetupTransformMultiplies_Transform' xml:space='preserve'><value>캔버스 크기 설정</value></data>
+<data name='Historys_LayeragesArrange_LayersArrange' xml:space='preserve'><value>레이어 정렬</value></data>
+<data name='Historys_LayeragesArrange_RemoveLayers' xml:space='preserve'><value>레이어 제거</value></data>
+<data name='Historys_LayeragesArrange_AddLayer' xml:space='preserve'><value>레이어 추가</value></data>
+<data name='Historys_LayersTransformAdd_Move' xml:space='preserve'><value>움직임</value></data>
+<data name='Historys_LayersTransformMultiplies_Transform' xml:space='preserve'><value>변환</value></data>
+<data name='Historys_LayersProperty_SetTransform_IsCrop' xml:space='preserve'><value>변형이 잘리는 지 여부 설정</value></data>
+<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>변형 자르기 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle' xml:space='preserve'><value>스타일 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill' xml:space='preserve'><value>채우기 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill_Extend' xml:space='preserve'><value>채우기 확장 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill_Type' xml:space='preserve'><value>채우기 유형 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke' xml:space='preserve'><value>스트로크 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke_Extend' xml:space='preserve'><value>스트로크 확장 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke_Type' xml:space='preserve'><value>스트로크 유형 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle_Transparency' xml:space='preserve'><value>투명도 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle_Transparency_Type' xml:space='preserve'><value>투명도 유형 설정</value></data>
+<data name='Historys_LayersProperty_Set_MoveNodes' xml:space='preserve'><value>노드 이동</value></data>
+<data name='Historys_LayersProperty_Set_MoveNode_ControlPoint' xml:space='preserve'><value>노드 제어점 이동</value></data>
+<data name='Historys_LayersProperty_Set_MoveNode_IsChecked' xml:space='preserve'><value>노드 선택 여부 설정</value></data>
+<data name='Historys_LayersProperty_Set_AddNode' xml:space='preserve'><value>노드 추가</value></data>
+<data name='Historys_LayersProperty_Set_RemoveNodes' xml:space='preserve'><value>노드 제거</value></data>
+<data name='Historys_LayersProperty_Set_InsertNodes' xml:space='preserve'><value>노드 삽입</value></data>
+<data name='Historys_LayersProperty_Set_SharpNodes' xml:space='preserve'><value>날카로운 노드</value></data>
+<data name='Historys_LayersProperty_Set_SmoothNodes' xml:space='preserve'><value>부드러운 노드</value></data>
+<data name='Historys_LayersProperty_SetPhotocopier' xml:space='preserve'><value>사진 설정</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_GridType' xml:space='preserve'><value>그리드 레이어 유형 설정</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_HorizontalStep' xml:space='preserve'><value>그리드 레이어의 수평 단계 설정</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_VerticalStep' xml:space='preserve'><value>그리드 레이어의 수직 단계 설정</value></data>
+<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_Offset' xml:space='preserve'><value>대각선 레이어 변위 설정</value></data>
+<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_HorizontalStep' xml:space='preserve'><value>대각선 레이어의 수평 단계 설정</value></data>
+<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Radius' xml:space='preserve'><value>발견 된 레이어의 반경 설정</value></data>
+<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Step' xml:space='preserve'><value>발견 된 레이어를 설정하는 단계</value></data>
+<data name='Historys_LayersProperty_Set_GeometryRoundRectLayer_Corner' xml:space='preserve'><value>둥근 사각형 모서리 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryTriangleLayer_Center' xml:space='preserve'><value>삼각형 레이어 중심 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_Mid' xml:space='preserve'><value>다이아몬드 레이어의 중간 지점 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_HoleRadius' xml:space='preserve'><value>다이아몬드 레이어 구멍 반경 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryPentagonLayer_Points' xml:space='preserve'><value>오각형 레이어 포인트의 포인트 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryStarLayer_Points' xml:space='preserve'><value>스타 레이어 포인트의 포인트 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryStarLayer_InnerRadius' xml:space='preserve'><value>별 레이어의 내부 반경 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Count' xml:space='preserve'><value>코그 레이어의 포인트 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_InnerRadius' xml:space='preserve'><value>톱니 바퀴 레이어의 내부 반경 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Tooth' xml:space='preserve'><value>톱니 레이어의 치아 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Notch' xml:space='preserve'><value>기어 레이어에 노치를 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDountLayer_HoleRadius' xml:space='preserve'><value>도넛 레이어 구멍의 반경을 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryPieLayer_SweepAngle' xml:space='preserve'><value>파이 레이어의 스캔 각도 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCookieLayer_InnerRadius' xml:space='preserve'><value>쿠키 레이어의 반경 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCookieLayer_SweepAngle' xml:space='preserve'><value>쿠키 레이어의 스윕 각도 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_LeftTail' xml:space='preserve'><value>화살표 레이어의 왼쪽 꼬리 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_RightTail' xml:space='preserve'><value>화살표 레이어의 오른쪽 꼬리 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_Value' xml:space='preserve'><value>화살표 레이어 값 설정</value></data>
+<data name='Historys_LayersProperty_Set_GeometryHeartLayer_Spread' xml:space='preserve'><value>하트 레이어 확산 설정</value></data>
+<data name='Historys_LayersProperty_SetName' xml:space='preserve'><value>세트 이름</value></data>
+<data name='Historys_LayersProperty_SetBlendMode' xml:space='preserve'><value>혼합 모드 설정</value></data>
+<data name='Historys_LayersProperty_SetOpacity' xml:space='preserve'><value>불투명도 설정</value></data>
+<data name='Historys_LayersProperty_SetOpacity_000' xml:space='preserve'><value>불투명도를 0 %로 설정</value></data>
+<data name='Historys_LayersProperty_SetOpacity_025' xml:space='preserve'><value>불투명도를 0 %로 설정</value></data>
+<data name='Historys_LayersProperty_SetOpacity_050' xml:space='preserve'><value>불투명도를 50 %로 설정</value></data>
+<data name='Historys_LayersProperty_SetOpacity_075' xml:space='preserve'><value>불투명도를 75 %로 설정</value></data>
+<data name='Historys_LayersProperty_SetOpacity_100' xml:space='preserve'><value>불투명도를 100 %로 설정</value></data>
+<data name='Historys_LayersProperty_SetVisibility' xml:space='preserve'><value>가시성 설정</value></data>
+<data name='Historys_LayersProperty_SetIsSelected' xml:space='preserve'><value>선택 여부 설정</value></data>
+<data name='Historys_LayersProperty_SetTagType' xml:space='preserve'><value>태그 유형 설정</value></data>
+<data name='Historys_LayeragesArrange_CutLayers' xml:space='preserve'><value>컷 레이어</value></data>
+<data name='Historys_LayeragesArrange_DuplicateLayer' xml:space='preserve'><value>중복 레이어</value></data>
+<data name='Historys_LayeragesArrange_DuplicateLayers' xml:space='preserve'><value>중복 레이어</value></data>
+<data name='Historys_LayeragesArrange_PasteLayers' xml:space='preserve'><value>레이어 붙여 넣기</value></data>
+<data name='Historys_LayeragesArrange_ClearLayers' xml:space='preserve'><value>클리어 레이어</value></data>
+<data name='Historys_LayeragesArrange_GroupLayers' xml:space='preserve'><value>레이어 그룹화</value></data>
+<data name='Historys_LayeragesArrange_UngroupLayers' xml:space='preserve'><value>레이어 그룹 해제</value></data>
+<data name='Historys_LayeragesArrange_ReleaseLayers' xml:space='preserve'><value>릴리스 레이어</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_Combine' xml:space='preserve'><value>결합 된 곡선 레이어 추가</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_ExpandStroke' xml:space='preserve'><value>획을 확장 한 곡선 레이어 추가</value></data>
+<data name='Historys_LayeragesArrange_AddLayers_ExpandStroke' xml:space='preserve'><value>획을 확장 한 곡선 레이어 추가</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Exposure' xml:space='preserve'><value>노출 조정 재설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Exposure_Exposure' xml:space='preserve'><value>노출 조정 노출 설정</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Brightness' xml:space='preserve'><value>밝기 조정 재설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteLight' xml:space='preserve'><value>백색광 밝기 조정 세트</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteDark' xml:space='preserve'><value>흰색 어두운 밝기 조정 세트</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackLight' xml:space='preserve'><value>밝기 조정의 블랙 라이트 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackDark' xml:space='preserve'><value>밝기 조정의 검은 색 어둡게 설정</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Saturation' xml:space='preserve'><value>채도 조정 재설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Saturation_Saturation' xml:space='preserve'><value>채도 조정의 채도 설정</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_HueRotation' xml:space='preserve'><value>색조 회전 조정 재설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HueRotation_Angle' xml:space='preserve'><value>색조 회전 조정 각도 설정</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Contrast' xml:space='preserve'><value>대비 조정 재설정</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Contrast_Contrast' xml:space='preserve'><value>대비 조정의 대비 설정</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Temperature' xml:space='preserve'><value>온도 조정 재설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Temperature_Temperature' xml:space='preserve'><value>온도 조정 온도 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Temperature_Tint' xml:space='preserve'><value>온도 조절 색조 설정</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_HighlightsAndShadows' xml:space='preserve'><value>하이라이트 및 그림자 조정 재설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Shadows' xml:space='preserve'><value>하이라이트 및 그림자 조정의 그림자 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Highlights' xml:space='preserve'><value>하이라이트 및 그림자 조정의 하이라이트 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Clarity' xml:space='preserve'><value>하이라이트 및 그림자 조정의 선명도 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>하이라이트 및 그림자 조정의 마스크 블러 양 설정</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_GammaTransfer' xml:space='preserve'><value>감마 전송 조정 재설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaDisable' xml:space='preserve'><value>감마 전달 조정의 알파 전환</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaOffset' xml:space='preserve'><value>감마 전송 조정의 알파 오프셋 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaExponent' xml:space='preserve'><value>감마 전달 조정의 알파 지수 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaAmplitude' xml:space='preserve'><value>감마 전송 조정의 알파 진폭 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedDisable' xml:space='preserve'><value>감마 전송 조정의 빨간색 전환</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedOffset' xml:space='preserve'><value>감마 전송 조정의 빨간색 오프셋 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedExponent' xml:space='preserve'><value>감마 전달 조정의 빨간색 지수 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedAmplitude' xml:space='preserve'><value>감마 전송 조정의 빨간색 진폭 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenDisable' xml:space='preserve'><value>감마 전송 조정의 녹색 전환</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenOffset' xml:space='preserve'><value>감마 전송 조정의 녹색 오프셋 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenExponent' xml:space='preserve'><value>감마 전달 조정의 녹색 지수 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenAmplitude' xml:space='preserve'><value>감마 전송 조정의 녹색 진폭 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueDisable' xml:space='preserve'><value>감마 전송 조정의 파란색 전환</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueOffset' xml:space='preserve'><value>감마 전송 조정의 파란색 오프셋 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueExponent' xml:space='preserve'><value>감마 전달 조정의 파란색 지수 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueAmplitude' xml:space='preserve'><value>감마 전송 조정의 파란색 진폭 설정</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Vignette' xml:space='preserve'><value>비 네트 조정 재설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Amount' xml:space='preserve'><value>비 네트 조정 량 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Curve' xml:space='preserve'><value>비 네트 조정 곡선 설정</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>비 네트 조정 색상 설정</value></data>
+<data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>가우시안 흐림 효과 재설정</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>가우스 흐림 효과 전환</value></data>
+<data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>가우시안 블러 효과의 양 설정</value></data>
+<data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>방향 흐림 효과 재설정</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>방향 흐림 효과 전환</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>방향 흐림 효과의 반경 설정</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>방향 흐림 효과 각도 설정</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>선명 효과 재설정</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>선명 효과 전환</value></data>
+<data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>선명 효과의 양 설정</value></data>
+<data name='Historys_LayersProperty_ResetEffect_OuterShadow' xml:space='preserve'><value>외부 그림자 효과 재설정</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_OuterShadow' xml:space='preserve'><value>외부 그림자 효과 전환</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Radius' xml:space='preserve'><value>외부 그림자 효과의 반경 설정</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Opacity' xml:space='preserve'><value>외부 그림자 효과의 불투명도 설정</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Offset' xml:space='preserve'><value>외부 그림자 효과의 오프셋 설정</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Angle' xml:space='preserve'><value>외부 그림자 효과의 각도 설정</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Color' xml:space='preserve'><value>외부 그림자 효과의 색상 설정</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Edge' xml:space='preserve'><value>가장자리 효과 재설정</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Edge' xml:space='preserve'><value>가장자리 효과 전환</value></data>
+<data name='Historys_LayersProperty_SetEffect_Edge_Amount' xml:space='preserve'><value>가장자리 효과의 양 설정</value></data>
+<data name='Historys_LayersProperty_SetEffect_Edge_Radius' xml:space='preserve'><value>가장자리 효과의 반경 설정</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Mmorphology' xml:space='preserve'><value>형태학 효과 재설정</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Mmorphology' xml:space='preserve'><value>형태 전환 효과</value></data>
+<data name='Historys_LayersProperty_SetEffect_Mmorphology_Size' xml:space='preserve'><value>형태 효과 크기 설정</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Emboss' xml:space='preserve'><value>엠 보스 효과 재설정</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Emboss' xml:space='preserve'><value>엠 보스 효과 전환</value></data>
+<data name='Historys_LayersProperty_SetEffect_Emboss_Radius' xml:space='preserve'><value>효과 엠 보스 반경 설정</value></data>
+<data name='Historys_LayersProperty_SetEffect_Emboss_Angle' xml:space='preserve'><value>효과 엠 보스의 반경 설정</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Straighten' xml:space='preserve'><value>직선화 효과 재설정</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Straighten' xml:space='preserve'><value>직선화 효과 전환</value></data>
+<data name='Historys_LayersProperty_SetEffect_Straighten_Angle' xml:space='preserve'><value>직선 효과 각도 설정</value></data>
+<data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>글꼴 텍스트 설정</value></data>
+<data name='Historys_LayersProperty_SetFontAlignment' xml:space='preserve'><value>글꼴 정렬 설정</value></data>
+<data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>글꼴 스타일 설정</value></data>
+<data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>글꼴 두께 설정</value></data>
+<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>글꼴 모음 설정</value></data>
+<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>글꼴 크기 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>획 스타일 대시 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeWidth' xml:space='preserve'><value>획 너비 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Cap' xml:space='preserve'><value>획 스타일의 한도 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Join' xml:space='preserve'><value>획 스타일의 결합 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Offset' xml:space='preserve'><value>획 스타일의 오프셋 설정</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsFollowTransform' xml:space='preserve'><value>세트 스타일은 변환 따르기입니다.</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsStrokeBehindFill' xml:space='preserve'><value>설정된 스타일은 채우기 뒤의 획입니다.</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>설정된 스타일은 레이어가있는 스트로크 너비 배율입니다.</value></data>
+<data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>필터 설정</value></data>
+<data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$SettingPage_Back' xml:space='preserve'><value>뒤</value></data>
+<data name='$MainPage_Title' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$MainPage_NewDialog_Close' xml:space='preserve'><value>취소</value></data>
+<data name='$MainPage_NewDialog_Primary' xml:space='preserve'><value>확인</value></data>
+<data name='$MainPage_SizePicker_Width' xml:space='preserve'><value>폭</value></data>
+<data name='$MainPage_SizePicker_Height' xml:space='preserve'><value>신장</value></data>
+<data name='$MainPage_Pictures_Close' xml:space='preserve'><value>취소</value></data>
+<data name='$MainPage_Rename' xml:space='preserve'><value>이름 바꾸기</value></data>
+<data name='$MainPage_Rename_Title' xml:space='preserve'><value>프로젝트 이름 변경</value></data>
+<data name='$MainPage_Rename_Close' xml:space='preserve'><value>취소</value></data>
+<data name='$MainPage_RenameDialog_Title' xml:space='preserve'><value>프로젝트 이름 변경</value></data>
+<data name='$MainPage_RenameDialog_Close' xml:space='preserve'><value>취소</value></data>
+<data name='$MainPage_RenameDialog_Primary' xml:space='preserve'><value>이름 바꾸기</value></data>
+<data name='$MainPage_RenameDialog_TextBox_PlaceholderText' xml:space='preserve'><value>여기에 이름을 입력하십시오.</value></data>
+<data name='$MainPage_Delete' xml:space='preserve'><value>지우다</value></data>
+<data name='$MainPage_Delete_Close' xml:space='preserve'><value>취소</value></data>
+<data name='$MainPage_Delete_Primary' xml:space='preserve'><value>지우다</value></data>
+<data name='$MainPage_Duplicate' xml:space='preserve'><value>복제</value></data>
+<data name='$MainPage_Duplicate_Close' xml:space='preserve'><value>취소</value></data>
+<data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>복제</value></data>
+<data name='$DrawPage_Export' xml:space='preserve'><value>수출</value></data>
+<data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>취소</value></data>
+<data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>확인</value></data>
+<data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>폭</value></data>
+<data name='$DrawPage_SetupDialog_SizePicker_Height' xml:space='preserve'><value>신장</value></data>
+<data name='$DrawPage_ExportDialog_Close' xml:space='preserve'><value>취소</value></data>
+<data name='$DrawPage_ExportDialog_Primary' xml:space='preserve'><value>수출</value></data>
+<data name='$DrawPage_ExportDialog_SizePicker_Width' xml:space='preserve'><value>폭</value></data>
+<data name='$DrawPage_ExportDialog_SizePicker_Height' xml:space='preserve'><value>신장</value></data>
+<data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>여기에 이름을 입력하십시오.</value></data>
+<data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>취소</value></data>
+<data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>이름 바꾸기</value></data>
+<data name='Tools_Fill' xml:space='preserve'><value>가득 따르다</value></data>
+<data name='Tools_Stroke' xml:space='preserve'><value>뇌졸중</value></data>
+<data name='Tools_ConvertToCurves' xml:space='preserve'><value>곡선으로 변환</value></data>
+<data name='Tools_Brush' xml:space='preserve'><value>브러시</value></data>
+<data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>가득 따르다</value></data>
+<data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>뇌졸중</value></data>
+<data name='Tools_Brush_Type' xml:space='preserve'><value>유형</value></data>
+<data name='Tools_Brush_Type_None' xml:space='preserve'><value>없음</value></data>
+<data name='Tools_Brush_Type_Color' xml:space='preserve'><value>색깔</value></data>
+<data name='Tools_Brush_Type_Image' xml:space='preserve'><value>영상</value></data>
+<data name='Tools_Brush_Brush' xml:space='preserve'><value>브러시</value></data>
+<data name='Tools_Brush_Extend_Mirror' xml:space='preserve'><value>거울</value></data>
+<data name='Tools_Brush_Stop_Remove' xml:space='preserve'><value>없애다</value></data>
+<data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value>부</value></data>
+<data name='Tools_GeometryRectangle' xml:space='preserve'><value>직사각형</value></data>
+<data name='Tools_GeometryEllipse' xml:space='preserve'><value>타원</value></data>
+<data name='Tools_Node_Remove' xml:space='preserve'><value>없애다</value></data>
+<data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>각도</value></data>
+<data name='Tools_TextArtistic' xml:space='preserve'><value>예술적 텍스트</value></data>
+<data name='Tools_TextFrame' xml:space='preserve'><value>프레임 텍스트</value></data>
+<data name='Tools_Image' xml:space='preserve'><value>영상</value></data>
+<data name='Tools_PatternGrid' xml:space='preserve'><value>그리드</value></data>
+<data name='Tools_PatternGrid_Type' xml:space='preserve'><value>유형</value></data>
+<data name='Tools_PatternGrid_Grid' xml:space='preserve'><value>그리드</value></data>
+<data name='Tools_PatternGrid_HorizontalStep' xml:space='preserve'><value>수평 단계</value></data>
+<data name='Tools_PatternGrid_VerticalStep' xml:space='preserve'><value>수직 단계</value></data>
+<data name='Tools_PatternDiagonal' xml:space='preserve'><value>대각선</value></data>
+<data name='Tools_PatternDiagonal_Offset' xml:space='preserve'><value>오프셋</value></data>
+<data name='Tools_PatternDiagonal_HorizontalStep' xml:space='preserve'><value>수평 단계</value></data>
+<data name='Tools_PatternSpotted' xml:space='preserve'><value>더럽혀진</value></data>
+<data name='Tools_PatternSpotted_Radius' xml:space='preserve'><value>반지름</value></data>
+<data name='Tools_GeometryRoundRect' xml:space='preserve'><value>RoundRect</value></data>
+<data name='Tools_GeometryTriangle' xml:space='preserve'><value>삼각형</value></data>
+<data name='Tools_GeometryTriangle_Mirror' xml:space='preserve'><value>거울</value></data>
+<data name='Tools_GeometryDiamond' xml:space='preserve'><value>다이아몬드</value></data>
+<data name='Tools_GeometryDiamond_Mirror' xml:space='preserve'><value>거울</value></data>
+<data name='Tools_GeometryPentagon' xml:space='preserve'><value>오각형</value></data>
+<data name='Tools_GeometryPentagon_Points' xml:space='preserve'><value>포인트들</value></data>
+<data name='Tools_GeometryStar' xml:space='preserve'><value>별</value></data>
+<data name='Tools_GeometryStar_Points' xml:space='preserve'><value>포인트들</value></data>
+<data name='Tools_GeometryStar_InnerRadius' xml:space='preserve'><value>내부 반경</value></data>
+<data name='Tools_GeometryCog' xml:space='preserve'><value>장부</value></data>
+<data name='Tools_GeometryCog_InnerRadius' xml:space='preserve'><value>내부 반경</value></data>
+<data name='Tools_GeometryDount' xml:space='preserve'><value>Dount</value></data>
+<data name='Tools_GeometryPie' xml:space='preserve'><value>파이</value></data>
+<data name='Tools_GeometryPie_SweepAngle' xml:space='preserve'><value>스윕 각도</value></data>
+<data name='Tools_GeometryCookie' xml:space='preserve'><value>쿠키</value></data>
+<data name='Tools_GeometryCookie_InnerRadius' xml:space='preserve'><value>내부 반경</value></data>
+<data name='Tools_GeometryCookie_SweepAngle' xml:space='preserve'><value>스윕 각도</value></data>
+<data name='Tools_GeometryArrow' xml:space='preserve'><value>화살</value></data>
+<data name='Tools_GeometryArrow_ArrowTail_None' xml:space='preserve'><value>없음</value></data>
+<data name='Tools_GeometryCapsule' xml:space='preserve'><value>캡슐</value></data>
+<data name='Tools_GeometryHeart' xml:space='preserve'><value>심장</value></data>
+<data name='Layers_Group' xml:space='preserve'><value>그룹</value></data>
+<data name='Layers_GeometryRectangle' xml:space='preserve'><value>직사각형</value></data>
+<data name='Layers_GeometryEllipse' xml:space='preserve'><value>타원</value></data>
+<data name='Layers_TextArtistic' xml:space='preserve'><value>예술적 텍스트</value></data>
+<data name='Layers_TextFrame' xml:space='preserve'><value>프레임 텍스트</value></data>
+<data name='Layers_Image' xml:space='preserve'><value>영상</value></data>
+<data name='Layers_PatternGrid' xml:space='preserve'><value>그리드</value></data>
+<data name='Layers_PatternDiagonal' xml:space='preserve'><value>대각선</value></data>
+<data name='Layers_PatternSpotted' xml:space='preserve'><value>더럽혀진</value></data>
+<data name='Layers_GeometryRoundRect' xml:space='preserve'><value>RoundRect</value></data>
+<data name='Layers_GeometryTriangle' xml:space='preserve'><value>삼각형</value></data>
+<data name='Layers_GeometryDiamond' xml:space='preserve'><value>다이아몬드</value></data>
+<data name='Layers_GeometryPentagon' xml:space='preserve'><value>오각형</value></data>
+<data name='Layers_GeometryStar' xml:space='preserve'><value>별</value></data>
+<data name='Layers_GeometryCog' xml:space='preserve'><value>장부</value></data>
+<data name='Layers_GeometryDount' xml:space='preserve'><value>Dount</value></data>
+<data name='Layers_GeometryPie' xml:space='preserve'><value>파이</value></data>
+<data name='Layers_GeometryCookie' xml:space='preserve'><value>쿠키</value></data>
+<data name='Layers_GeometryArrow' xml:space='preserve'><value>화살</value></data>
+<data name='Layers_GeometryCapsule' xml:space='preserve'><value>캡슐</value></data>
+<data name='Layers_GeometryHeart' xml:space='preserve'><value>심장</value></data>
+<data name='Menus_Edit' xml:space='preserve'><value>편집하다</value></data>
+<data name='Menus_Stroke' xml:space='preserve'><value>뇌졸중</value></data>
+<data name='Menus_Transformer' xml:space='preserve'><value>변신 로봇</value></data>
+<data name='Menus_Transformer_Width' xml:space='preserve'><value>폭</value></data>
+<data name='Menus_Transformer_Height' xml:space='preserve'><value>신장</value></data>
+<data name='Menus_Color' xml:space='preserve'><value>색깔</value></data>
+<data name='Menus_Layer_Opacity' xml:space='preserve'><value>불투명</value></data>
+<data name='Edits_Edit' xml:space='preserve'><value>편집하다</value></data>
+<data name='Edits_Edit_Duplicate' xml:space='preserve'><value>복제</value></data>
+<data name='Edits_Edit_Copy' xml:space='preserve'><value>부</value></data>
+<data name='Edits_Group' xml:space='preserve'><value>그룹</value></data>
+<data name='Edits_Group_Group' xml:space='preserve'><value>그룹</value></data>
+<data name='Operates_Transform' xml:space='preserve'><value>변환</value></data>
+<data name='Operates_Horizontally_Left' xml:space='preserve'><value>왼쪽 정렬</value></data>
+<data name='Operates_Horizontally_Center' xml:space='preserve'><value>중앙 정렬</value></data>
+<data name='Operates_Horizontally_Right' xml:space='preserve'><value>오른쪽 정렬</value></data>
+<data name='Adjustments_Exposure' xml:space='preserve'><value>노출</value></data>
+<data name='Adjustments_Exposure_Exposure' xml:space='preserve'><value>노출</value></data>
+<data name='Adjustments_Saturation' xml:space='preserve'><value>포화</value></data>
+<data name='Adjustments_Saturation_Saturation' xml:space='preserve'><value>포화</value></data>
+<data name='Adjustments_HueRotation_Angle' xml:space='preserve'><value>각도</value></data>
+<data name='Adjustments_Contrast' xml:space='preserve'><value>대조</value></data>
+<data name='Adjustments_Contrast_Contrast' xml:space='preserve'><value>대조</value></data>
+<data name='Adjustments_Temperature' xml:space='preserve'><value>온도</value></data>
+<data name='Adjustments_Temperature_Temperature' xml:space='preserve'><value>온도</value></data>
+<data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>양</value></data>
+<data name='Adjustments_Vignette_Color' xml:space='preserve'><value>색깔</value></data>
+<data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>반지름</value></data>
+<data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>반지름</value></data>
+<data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>각도</value></data>
+<data name='Effects_Sharpen_Amount' xml:space='preserve'><value>양</value></data>
+<data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>반지름</value></data>
+<data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>불투명</value></data>
+<data name='Effects_OuterShadow_Offset' xml:space='preserve'><value>오프셋</value></data>
+<data name='Effects_OuterShadow_Angle' xml:space='preserve'><value>각도</value></data>
+<data name='Effects_OuterShadow_Color' xml:space='preserve'><value>색깔</value></data>
+<data name='Effects_Edge_Amount' xml:space='preserve'><value>양</value></data>
+<data name='Effects_Edge_Radius' xml:space='preserve'><value>반지름</value></data>
+<data name='Effects_Emboss_Radius' xml:space='preserve'><value>반지름</value></data>
+<data name='Effects_Emboss_Angle' xml:space='preserve'><value>각도</value></data>
+<data name='Effects_Straighten_Angle' xml:space='preserve'><value>각도</value></data>
+<data name='Texts_FontAlignment_Left' xml:space='preserve'><value>왼쪽 정렬</value></data>
+<data name='Texts_FontAlignment_Center' xml:space='preserve'><value>중앙 정렬</value></data>
+<data name='Texts_FontAlignment_Right' xml:space='preserve'><value>오른쪽 정렬</value></data>
+<data name='Strokes_Dash' xml:space='preserve'><value>대시</value></data>
+<data name='Strokes_Dash_Dash' xml:space='preserve'><value>대시</value></data>
+<data name='Strokes_Width' xml:space='preserve'><value>폭</value></data>
+<data name='Strokes_Cap_Triangle' xml:space='preserve'><value>삼각형</value></data>
+<data name='Strokes_Offset' xml:space='preserve'><value>오프셋</value></data>
+<data name='Blends_Saturation' xml:space='preserve'><value>포화</value></data>
+<data name='Blends_Color' xml:space='preserve'><value>색깔</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_ConvertToCurves' xml:space='preserve'><value>곡선으로 변환</value></data>
+
+ </root>

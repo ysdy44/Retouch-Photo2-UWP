@@ -1,0 +1,668 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <xsd:schema id='root' xmlns='' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'>
+    <xsd:import namespace='http://www.w3.org/XML/1998/namespace' />
+    <xsd:element name='root' msdata:IsDataSet='true'>
+      <xsd:complexType>
+        <xsd:choice maxOccurs='unbounded'>
+          <xsd:element name='metadata'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' />
+              </xsd:sequence>
+              <xsd:attribute name='name' use='required' type='xsd:string' />
+              <xsd:attribute name='type' type='xsd:string' />
+              <xsd:attribute name='mimetype' type='xsd:string' />
+              <xsd:attribute ref='xml:space' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='assembly'>
+            <xsd:complexType>
+              <xsd:attribute name='alias' type='xsd:string' />
+              <xsd:attribute name='name' type='xsd:string' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='data'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' msdata:Ordinal='1' />
+                <xsd:element name='comment' type='xsd:string' minOccurs='0' msdata:Ordinal='2' />
+              </xsd:sequence>
+              <xsd:attribute name='name' type='xsd:string' use='required' msdata:Ordinal='1' />
+              <xsd:attribute name='type' type='xsd:string' msdata:Ordinal='3' />
+              <xsd:attribute name='mimetype' type='xsd:string' msdata:Ordinal='4' />
+              <xsd:attribute ref='xml:space' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='resheader'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' msdata:Ordinal='1' />
+              </xsd:sequence>
+              <xsd:attribute name='name' type='xsd:string' use='required' />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name='resmimetype'>
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name='version'>
+    <value>2.0</value>
+  </resheader>
+  <resheader name='reader'>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name='writer'>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+<data name='$Loading_Loading' xml:space='preserve'><value>Cargando</value></data>
+<data name='$Loading_LoadFailed' xml:space='preserve'><value>Falló al cargar</value></data>
+<data name='$Loading_FileCorrupt' xml:space='preserve'><value>El archivo está dañado</value></data>
+<data name='$Loading_FileNull' xml:space='preserve'><value>El archivo está vacío</value></data>
+<data name='$Loading_Saving' xml:space='preserve'><value>Ahorro</value></data>
+<data name='$Loading_SaveSuccess' xml:space='preserve'><value>Guardado exitosamente</value></data>
+<data name='$Loading_SaveFailed' xml:space='preserve'><value>Guardado falló</value></data>
+<data name='$Untitled' xml:space='preserve'><value>Intitulado</value></data>
+<data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
+<data name='$SettingPage_Title' xml:space='preserve'><value>Configuración</value></data>
+<data name='$SettingPage_About' xml:space='preserve'><value>Sobre...</value></data>
+<data name='$SettingPage_Theme' xml:space='preserve'><value>Tema</value></data>
+<data name='$SettingPage_Theme_Light' xml:space='preserve'><value>Ligero</value></data>
+<data name='$SettingPage_Theme_Dark' xml:space='preserve'><value>Oscuro</value></data>
+<data name='$SettingPage_Theme_UseSystem' xml:space='preserve'><value>Usar sistema</value></data>
+<data name='$SettingPage_DeviceLayout' xml:space='preserve'><value>Disposición del dispositivo</value></data>
+<data name='$SettingPage_DeviceLayout_Phone' xml:space='preserve'><value>Teléfono</value></data>
+<data name='$SettingPage_DeviceLayout_Pad' xml:space='preserve'><value>Almohadilla</value></data>
+<data name='$SettingPage_DeviceLayout_PC' xml:space='preserve'><value>ordenador personal</value></data>
+<data name='$SettingPage_DeviceLayout_Adaptive' xml:space='preserve'><value>Adaptado</value></data>
+<data name='$SettingPage_DeviceLayout_AdaptiveWidth' xml:space='preserve'><value>Ancho adaptable</value></data>
+<data name='$SettingPage_DeviceLayout_ResetAdaptiveWidth' xml:space='preserve'><value>Restablecer ancho adaptativo</value></data>
+<data name='$SettingPage_LayersHeight' xml:space='preserve'><value>Altura de las capas</value></data>
+<data name='$SettingPage_LayersHeightTip' xml:space='preserve'><value>Haga clic para cambiar la altura del control de capa</value></data>
+<data name='$SettingPage_MenuType' xml:space='preserve'><value>Tipo de menú</value></data>
+<data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>Desmarque para ocultar el botón de menú</value></data>
+<data name='$SettingPage_Key' xml:space='preserve'><value>Atajos</value></data>
+<data name='$SettingPage_Key_Rotate' xml:space='preserve'><value>Desliza la rueda de desplazamiento para rotar el lienzo.</value></data>
+<data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>Mueve el lienzo a la izquierda</value></data>
+<data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>El lienzo se mueve hacia arriba</value></data>
+<data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>Mueve el lienzo a la derecha</value></data>
+<data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>El lienzo se mueve hacia abajo</value></data>
+<data name='$SettingPage_LocalFolder' xml:space='preserve'><value>Carpeta local</value></data>
+<data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>Abierto</value></data>
+<data name='$MainPage_DocumentationTip' xml:space='preserve'><value>Abrir página web del documento</value></data>
+<data name='$MainPage_SettingTip' xml:space='preserve'><value>Abre la página de configuración</value></data>
+<data name='$MainPage_Select_ClickTip' xml:space='preserve'><value>Haga clic para seleccionar elementos:</value></data>
+<data name='$MainPage_Select_All' xml:space='preserve'><value>Seleccionar todo</value></data>
+<data name='$MainPage_InitialTip' xml:space='preserve'><value>¿No tienes proyecto? Usted puede...</value></data>
+<data name='$MainPage_Initial_Sample' xml:space='preserve'><value>Abra los proyectos de muestra</value></data>
+<data name='$MainPage_Initial_New' xml:space='preserve'><value>Crea un nuevo proyecto</value></data>
+<data name='$MainPage_Initial_Photo' xml:space='preserve'><value>Crea un nuevo proyecto desde la galería.</value></data>
+<data name='$MainPage_Initial_Destop' xml:space='preserve'><value>Crea un nuevo proyecto desde el escritorio</value></data>
+<data name='$MainPage_New' xml:space='preserve'><value>Nuevo</value></data>
+<data name='$MainPage_NewDialog_Title' xml:space='preserve'><value>Agregar nuevo proyecto</value></data>
+<data name='$MainPage_Pictures' xml:space='preserve'><value>Fotos</value></data>
+<data name='$MainPage_Pictures_Photo' xml:space='preserve'><value>Fotografía</value></data>
+<data name='$MainPage_Pictures_Destop' xml:space='preserve'><value>Destop</value></data>
+<data name='$MainPage_Rename_Subtitle' xml:space='preserve'><value>Seleccione el proyecto al que desea cambiarle el nombre.</value></data>
+<data name='$MainPage_RenameDialog_TextBoxTip' xml:space='preserve'><value>¡El nombre ya está ocupado!</value></data>
+<data name='$MainPage_Delete_Title' xml:space='preserve'><value>Eliminar proyectos</value></data>
+<data name='$MainPage_Delete_Subtitle' xml:space='preserve'><value>Seleccione los proyectos que desea eliminar.</value></data>
+<data name='$MainPage_Duplicate_Title' xml:space='preserve'><value>Proyecto (s) duplicado</value></data>
+<data name='$MainPage_Duplicate_Subtitle' xml:space='preserve'><value>Seleccione los proyectos que desea duplicar.</value></data>
+<data name='$DrawPage_Document' xml:space='preserve'><value>Documentación</value></data>
+<data name='$DrawPage_DocumentUnSave' xml:space='preserve'><value>No guardar y volver</value></data>
+<data name='$DrawPage_Undo' xml:space='preserve'><value>Deshacer</value></data>
+<data name='$DrawPage_Redo' xml:space='preserve'><value>Rehacer</value></data>
+<data name='$DrawPage_Setup' xml:space='preserve'><value>Configuración</value></data>
+<data name='$DrawPage_Snap' xml:space='preserve'><value>Chasquido</value></data>
+<data name='$DrawPage_Ruler' xml:space='preserve'><value>Gobernante</value></data>
+<data name='$DrawPage_FullScreen' xml:space='preserve'><value>Pantalla completa</value></data>
+<data name='$DrawPage_Tip' xml:space='preserve'><value>Consejo</value></data>
+<data name='$DrawPage_Gallery' xml:space='preserve'><value>Galería</value></data>
+<data name='$DrawPage_WidthTip' xml:space='preserve'><value>Ancho de diseño del interruptor</value></data>
+<data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>Configuración de documentos</value></data>
+<data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>Anclado al lienzo</value></data>
+<data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>Exportar a...</value></data>
+<data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>Calidad</value></data>
+<data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>Formato de archivo</value></data>
+<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>Cambiar el nombre de la (s) capa (s)</value></data>
+<data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>Agregar fotos)</value></data>
+<data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>Zoom proporcional</value></data>
+<data name='Tools_MoreTransform_Center' xml:space='preserve'><value>Zoom central</value></data>
+<data name='Tools_MoreCreate_Square' xml:space='preserve'><value>Igual ancho y alto</value></data>
+<data name='Tools_MoreCreate_Center' xml:space='preserve'><value>Zoom central</value></data>
+<data name='Tools_Cursor' xml:space='preserve'><value>Cursor</value></data>
+<data name='Tools_Cursor_CompositeMode_New' xml:space='preserve'><value>Nuevo</value></data>
+<data name='Tools_Cursor_CompositeMode_Add' xml:space='preserve'><value>Agregar</value></data>
+<data name='Tools_Cursor_CompositeMode_Subtract' xml:space='preserve'><value>Sustraer</value></data>
+<data name='Tools_View' xml:space='preserve'><value>Vista</value></data>
+<data name='Tools_View_Radian' xml:space='preserve'><value>Radián</value></data>
+<data name='Tools_View_RadianClear' xml:space='preserve'><value>Restablecer el radianes de rotación</value></data>
+<data name='Tools_View_Scale' xml:space='preserve'><value>Escala</value></data>
+<data name='Tools_View_ScaleClear' xml:space='preserve'><value>Restablecer escala</value></data>
+<data name='Tools_Brush_FillOrStroke' xml:space='preserve'><value>Relleno o trazo</value></data>
+<data name='Tools_Brush_Type_LinearGradient' xml:space='preserve'><value>Lineal</value></data>
+<data name='Tools_Brush_Type_RadialGradient' xml:space='preserve'><value>Radial</value></data>
+<data name='Tools_Brush_Type_EllipticalGradient' xml:space='preserve'><value>Elíptico</value></data>
+<data name='Tools_Brush_Extend' xml:space='preserve'><value>Ampliar</value></data>
+<data name='Tools_Brush_Extend_Clamp' xml:space='preserve'><value>Abrazadera</value></data>
+<data name='Tools_Brush_Extend_Wrap' xml:space='preserve'><value>Envoltura</value></data>
+<data name='Tools_Brush_Stop_Offset' xml:space='preserve'><value>Compensar</value></data>
+<data name='Tools_Brush_Stop_Alpha' xml:space='preserve'><value>Alfa</value></data>
+<data name='Tools_Brush_Stop_Reverse' xml:space='preserve'><value>Marcha atrás</value></data>
+<data name='Tools_Transparency' xml:space='preserve'><value>Transparencia</value></data>
+<data name='Tools_Pen' xml:space='preserve'><value>Lápiz</value></data>
+<data name='Tools_Node' xml:space='preserve'><value>Nodo</value></data>
+<data name='Tools_Node_Insert' xml:space='preserve'><value>Insertar</value></data>
+<data name='Tools_Node_Sharp' xml:space='preserve'><value>Afilado</value></data>
+<data name='Tools_Node_Smooth' xml:space='preserve'><value>Suave</value></data>
+<data name='Tools_Node_NodeMode_Restriction' xml:space='preserve'><value>Restricciones de los puntos de control</value></data>
+<data name='Tools_Node_NodeMode_Restriction_Length' xml:space='preserve'><value>Largo</value></data>
+<data name='Tools_Node_NodeMode_Mode' xml:space='preserve'><value>Modo de punto de control</value></data>
+<data name='Tools_Node_NodeMode_Mode_Mirrored' xml:space='preserve'><value>Reflejado</value></data>
+<data name='Tools_Node_NodeMode_Mode_Disconnected' xml:space='preserve'><value>Desconectado</value></data>
+<data name='Tools_Node_NodeMode_Mode_Asymmetric' xml:space='preserve'><value>Asimétrico</value></data>
+<data name='Tools_Text_PlaceholderText' xml:space='preserve'><value>Texto de entrada...</value></data>
+<data name='Tools_Image_Select' xml:space='preserve'><value>Seleccione</value></data>
+<data name='Tools_Image_Replace' xml:space='preserve'><value>Reemplazar</value></data>
+<data name='Tools_Image_Clear' xml:space='preserve'><value>Claro</value></data>
+<data name='Tools_Crop' xml:space='preserve'><value>Cultivo de vectores</value></data>
+<data name='Tools_Crop_Reset' xml:space='preserve'><value>Restablecer cultivo</value></data>
+<data name='Tools_Crop_Fit' xml:space='preserve'><value>Ajustar cultivo</value></data>
+<data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>Paso</value></data>
+<data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>Esquina</value></data>
+<data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>Punto central</value></data>
+<data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>Punto medio</value></data>
+<data name='Tools_GeometryCog_Count' xml:space='preserve'><value>Contar</value></data>
+<data name='Tools_GeometryCog_Tooth' xml:space='preserve'><value>Diente</value></data>
+<data name='Tools_GeometryCog_Notch' xml:space='preserve'><value>Muesca</value></data>
+<data name='Tools_GeometryDount_HoleRadius' xml:space='preserve'><value>Radio del agujero</value></data>
+<data name='Tools_GeometryArrow_LeftTail' xml:space='preserve'><value>Cola izquierda</value></data>
+<data name='Tools_GeometryArrow_RightTail' xml:space='preserve'><value>Cola derecha</value></data>
+<data name='Tools_GeometryArrow_Value' xml:space='preserve'><value>Ancho</value></data>
+<data name='Tools_GeometryHeart_Spread' xml:space='preserve'><value>Propagar</value></data>
+<data name='Layers_Curve' xml:space='preserve'><value>Curva</value></data>
+<data name='Layers_CurveMulti' xml:space='preserve'><value>Multicurva</value></data>
+<data name='Menus_Keyboard' xml:space='preserve'><value>Teclado</value></data>
+<data name='Menus_Operate' xml:space='preserve'><value>Funcionar</value></data>
+<data name='Menus_Adjustment' xml:space='preserve'><value>Ajustes</value></data>
+<data name='Menus_Adjustment_Add' xml:space='preserve'><value>añadir</value></data>
+<data name='Menus_Adjustment_Filters' xml:space='preserve'><value>Filtrar</value></data>
+<data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>Sin ajuste</value></data>
+<data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>Por favor seleccione una capa</value></data>
+<data name='Menus_Effect' xml:space='preserve'><value>Layer FX</value></data>
+<data name='Menus_Text' xml:space='preserve'><value>Texto</value></data>
+<data name='Menus_Style' xml:space='preserve'><value>Estilos</value></data>
+<data name='Menus_History' xml:space='preserve'><value>Historia</value></data>
+<data name='Menus_Transformer_Rotate' xml:space='preserve'><value>Girar</value></data>
+<data name='Menus_Transformer_Skew' xml:space='preserve'><value>Sesgar</value></data>
+<data name='Menus_Transformer_X' xml:space='preserve'><value>Eje X</value></data>
+<data name='Menus_Transformer_Y' xml:space='preserve'><value>Eje Y</value></data>
+<data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>Zoom proporcional</value></data>
+<data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>Frecuencia de paso</value></data>
+<data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Posición del mando a distancia</value></data>
+<data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Ancla</value></data>
+<data name='Menus_Color_Swatches' xml:space='preserve'><value>Muestras</value></data>
+<data name='Menus_Color_Wheel' xml:space='preserve'><value>Rueda</value></data>
+<data name='Menus_Color_RGB' xml:space='preserve'><value>RGB</value></data>
+<data name='Menus_Color_HSV' xml:space='preserve'><value>HSV</value></data>
+<data name='Menus_Color_PaletteHue' xml:space='preserve'><value>Tono de paleta</value></data>
+<data name='Menus_Color_PaletteSaturation' xml:space='preserve'><value>Saturación de paleta</value></data>
+<data name='Menus_Color_PaletteValue' xml:space='preserve'><value>Valor de paleta</value></data>
+<data name='Menus_Color_Circle' xml:space='preserve'><value>Circulo</value></data>
+<data name='Menus_Layer' xml:space='preserve'><value>Capa</value></data>
+<data name='Menus_Layer_Name' xml:space='preserve'><value>Nombre</value></data>
+<data name='Menus_Layer_BlendMode' xml:space='preserve'><value>Modo de mezcla</value></data>
+<data name='Menus_Layer_Visibility' xml:space='preserve'><value>Visibilidad</value></data>
+<data name='Menus_Layer_TagType' xml:space='preserve'><value>Tipo de etiqueta</value></data>
+<data name='Edits_Edit_Cut' xml:space='preserve'><value>Corte</value></data>
+<data name='Edits_Edit_Paste' xml:space='preserve'><value>Pegar</value></data>
+<data name='Edits_Edit_Clear' xml:space='preserve'><value>Claro</value></data>
+<data name='Edits_Select' xml:space='preserve'><value>Seleccione</value></data>
+<data name='Edits_Select_All' xml:space='preserve'><value>Seleccionar todo</value></data>
+<data name='Edits_Select_Deselect' xml:space='preserve'><value>Deseleccionar</value></data>
+<data name='Edits_Select_Invert' xml:space='preserve'><value>Invertir</value></data>
+<data name='Edits_Group_Ungroup' xml:space='preserve'><value>Desagrupar</value></data>
+<data name='Edits_Group_Release' xml:space='preserve'><value>Liberación</value></data>
+<data name='Edits_Combine_Xor' xml:space='preserve'><value>Xor</value></data>
+<data name='Edits_Combine' xml:space='preserve'><value>Combinar</value></data>
+<data name='Edits_Combine_Union' xml:space='preserve'><value>Unión</value></data>
+<data name='Edits_Combine_Exclude' xml:space='preserve'><value>Excluir</value></data>
+<data name='Edits_Combine_Intersect' xml:space='preserve'><value>Intersecarse</value></data>
+<data name='Edits_Combine_ExpandStroke' xml:space='preserve'><value>Expandir trazo</value></data>
+<data name='Operates_Transform_FlipHorizontal' xml:space='preserve'><value>Flip horizontal</value></data>
+<data name='Operates_Transform_FlipVertical' xml:space='preserve'><value>Voltear verticalmente</value></data>
+<data name='Operates_Transform_RotateLeft' xml:space='preserve'><value>Girar a la izquierda</value></data>
+<data name='Operates_Transform_RotateRight' xml:space='preserve'><value>Gira a la derecha</value></data>
+<data name='Operates_Arrange' xml:space='preserve'><value>Arreglar</value></data>
+<data name='Operates_Arrange_MoveFront' xml:space='preserve'><value>Mover al frente</value></data>
+<data name='Operates_Arrange_BackOne' xml:space='preserve'><value>Atrás uno</value></data>
+<data name='Operates_Arrange_ForwardOne' xml:space='preserve'><value>Adelante uno</value></data>
+<data name='Operates_Arrange_MoveBack' xml:space='preserve'><value>Mover hacia atrás</value></data>
+<data name='Operates_Horizontally' xml:space='preserve'><value>Alinear horizontalmente</value></data>
+<data name='Operates_Horizontally_Space' xml:space='preserve'><value>Espacio horizontalmente</value></data>
+<data name='Operates_Vertically' xml:space='preserve'><value>Alinear verticalmente</value></data>
+<data name='Operates_Vertically_Top' xml:space='preserve'><value>Alinear arriba</value></data>
+<data name='Operates_Vertically_Middle' xml:space='preserve'><value>Alinear en el medio</value></data>
+<data name='Operates_Vertically_Bottom' xml:space='preserve'><value>Alinear la parte inferior</value></data>
+<data name='Operates_Vertically_Space' xml:space='preserve'><value>Espacio verticalmente</value></data>
+<data name='Adjustments_Gray' xml:space='preserve'><value>gris</value></data>
+<data name='Adjustments_Invert' xml:space='preserve'><value>Invertir</value></data>
+<data name='Adjustments_Brightness' xml:space='preserve'><value>Brillo</value></data>
+<data name='Adjustments_Brightness_WhiteToLight' xml:space='preserve'><value>Blanco a la luz</value></data>
+<data name='Adjustments_Brightness_WhiteToDark' xml:space='preserve'><value>Blanco a oscuro</value></data>
+<data name='Adjustments_Brightness_BlackToLight' xml:space='preserve'><value>Negro a la luz</value></data>
+<data name='Adjustments_Brightness_BlackToDark' xml:space='preserve'><value>Negro a oscuro</value></data>
+<data name='Adjustments_HueRotation' xml:space='preserve'><value>Rotación de tono</value></data>
+<data name='Adjustments_Temperature_Tint' xml:space='preserve'><value>Tinte</value></data>
+<data name='Adjustments_HighlightsAndShadows' xml:space='preserve'><value>Resaltar y Sombra</value></data>
+<data name='Adjustments_HighlightsAndShadows_Shadows' xml:space='preserve'><value>Oscuridad</value></data>
+<data name='Adjustments_HighlightsAndShadows_Highlights' xml:space='preserve'><value>Reflejos</value></data>
+<data name='Adjustments_HighlightsAndShadows_Clarity' xml:space='preserve'><value>Claridad</value></data>
+<data name='Adjustments_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>Cantidad de desenfoque de la máscara</value></data>
+<data name='Adjustments_GammaTransfer' xml:space='preserve'><value>Transferencia gamma</value></data>
+<data name='Adjustments_GammaTransfer_Offset' xml:space='preserve'><value>Compensar</value></data>
+<data name='Adjustments_GammaTransfer_Exponent' xml:space='preserve'><value>Exponente</value></data>
+<data name='Adjustments_GammaTransfer_Amplitude' xml:space='preserve'><value>Amplitud</value></data>
+<data name='Adjustments_GammaTransfer_Alpha' xml:space='preserve'><value>Alfa</value></data>
+<data name='Adjustments_GammaTransfer_Red' xml:space='preserve'><value>rojo</value></data>
+<data name='Adjustments_GammaTransfer_Green' xml:space='preserve'><value>Verde</value></data>
+<data name='Adjustments_GammaTransfer_Blue' xml:space='preserve'><value>Azul</value></data>
+<data name='Adjustments_Vignette' xml:space='preserve'><value>Viñeta</value></data>
+<data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>Curva</value></data>
+<data name='Effects_GaussianBlur' xml:space='preserve'><value>Desenfoque gaussiano</value></data>
+<data name='Effects_DirectionalBlur' xml:space='preserve'><value>Desenfoque direccional</value></data>
+<data name='Effects_Sharpen' xml:space='preserve'><value>Afilar</value></data>
+<data name='Effects_OuterShadow' xml:space='preserve'><value>Sombra exterior</value></data>
+<data name='Effects_Edge' xml:space='preserve'><value>Borde</value></data>
+<data name='Effects_Morphology' xml:space='preserve'><value>Morfología</value></data>
+<data name='Effects_Morphology_Size' xml:space='preserve'><value>Tamaño</value></data>
+<data name='Effects_Emboss' xml:space='preserve'><value>Realzar</value></data>
+<data name='Effects_Straighten' xml:space='preserve'><value>Enderezar</value></data>
+<data name='Texts_FontAlignment' xml:space='preserve'><value>Alinear</value></data>
+<data name='Texts_FontAlignment_Justified' xml:space='preserve'><value>Justificado</value></data>
+<data name='Texts_FontStyle' xml:space='preserve'><value>Estilo de fuente</value></data>
+<data name='Texts_FontStyle_Bold' xml:space='preserve'><value>Negrita</value></data>
+<data name='Texts_FontStyle_Italic' xml:space='preserve'><value>Itálico</value></data>
+<data name='Texts_FontStyle_UnderLine' xml:space='preserve'><value>Subrayar</value></data>
+<data name='Texts_FontWeight' xml:space='preserve'><value>Peso de fuente</value></data>
+<data name='Texts_FontWeight_Black' xml:space='preserve'><value>Negro</value></data>
+<data name='Texts_FontWeight_Bold' xml:space='preserve'><value>Negrita</value></data>
+<data name='Texts_FontWeight_ExtraBlack' xml:space='preserve'><value>ExtraNegro</value></data>
+<data name='Texts_FontWeight_ExtraBold' xml:space='preserve'><value>ExtraBold</value></data>
+<data name='Texts_FontWeight_ExtraLight' xml:space='preserve'><value>Extra ligero</value></data>
+<data name='Texts_FontWeight_Light' xml:space='preserve'><value>Ligero</value></data>
+<data name='Texts_FontWeight_Medium' xml:space='preserve'><value>Medio</value></data>
+<data name='Texts_FontWeight_Normal' xml:space='preserve'><value>Normal</value></data>
+<data name='Texts_FontWeight_SemiBold' xml:space='preserve'><value>SemiNegrita</value></data>
+<data name='Texts_FontWeight_SemiLight' xml:space='preserve'><value>Semiligero</value></data>
+<data name='Texts_FontWeight_Thin' xml:space='preserve'><value>Delgado</value></data>
+<data name='Texts_FontFamily' xml:space='preserve'><value>Familia tipográfica</value></data>
+<data name='Texts_FontSize' xml:space='preserve'><value>Tamaño de fuente</value></data>
+<data name='Strokes_Dash_Solid' xml:space='preserve'><value>Sólido</value></data>
+<data name='Strokes_Dash_Dot' xml:space='preserve'><value>Punto</value></data>
+<data name='Strokes_Dash_DashDot' xml:space='preserve'><value>Guion punto</value></data>
+<data name='Strokes_Cap' xml:space='preserve'><value>Gorra</value></data>
+<data name='Strokes_Cap_Flat' xml:space='preserve'><value>Departamento</value></data>
+<data name='Strokes_Cap_Square' xml:space='preserve'><value>Cuadrado</value></data>
+<data name='Strokes_Cap_Round' xml:space='preserve'><value>Redondo</value></data>
+<data name='Strokes_Join' xml:space='preserve'><value>Unirse</value></data>
+<data name='Strokes_Join_Miter' xml:space='preserve'><value>Inglete</value></data>
+<data name='Strokes_Join_Bevel' xml:space='preserve'><value>Bisel</value></data>
+<data name='Strokes_Join_Round' xml:space='preserve'><value>Redondo</value></data>
+<data name='Strokes_Join_MiterOrBevel' xml:space='preserve'><value>Mitre o bisel</value></data>
+<data name='Strokes_IsFollowTransform' xml:space='preserve'><value>Transformación de estilo con capa</value></data>
+<data name='Strokes_IsStrokeBehindFill' xml:space='preserve'><value>Trazo detrás de relleno</value></data>
+<data name='Strokes_IsStrokeWidthFollowScale' xml:space='preserve'><value>Escala de ancho de trazo con capa</value></data>
+<data name='Blends_None' xml:space='preserve'><value>Normal</value></data>
+<data name='Blends_Multiply' xml:space='preserve'><value>Multiplicar</value></data>
+<data name='Blends_Screen' xml:space='preserve'><value>Pantalla</value></data>
+<data name='Blends_Darken' xml:space='preserve'><value>Oscurecer</value></data>
+<data name='Blends_Lighten' xml:space='preserve'><value>Aligerar</value></data>
+<data name='Blends_Dissolve' xml:space='preserve'><value>Disolver</value></data>
+<data name='Blends_ColorBurn' xml:space='preserve'><value>Color quemado</value></data>
+<data name='Blends_LinearBurn' xml:space='preserve'><value>De combustión lineal</value></data>
+<data name='Blends_DarkerColor' xml:space='preserve'><value>Color más oscuro</value></data>
+<data name='Blends_LighterColor' xml:space='preserve'><value>Color más claro</value></data>
+<data name='Blends_ColorDodge' xml:space='preserve'><value>ColorDodge</value></data>
+<data name='Blends_LinearDodge' xml:space='preserve'><value>LinearDodge</value></data>
+<data name='Blends_Overlay' xml:space='preserve'><value>Cubrir</value></data>
+<data name='Blends_SoftLight' xml:space='preserve'><value>Luz tenue</value></data>
+<data name='Blends_HardLight' xml:space='preserve'><value>Luz dura</value></data>
+<data name='Blends_VividLight' xml:space='preserve'><value>Viva luz</value></data>
+<data name='Blends_LinearLight' xml:space='preserve'><value>Luz lineal</value></data>
+<data name='Blends_PinLight' xml:space='preserve'><value>Luz pin</value></data>
+<data name='Blends_HardMix' xml:space='preserve'><value>Mezcla dura</value></data>
+<data name='Blends_Difference' xml:space='preserve'><value>Diferencia</value></data>
+<data name='Blends_Exclusion' xml:space='preserve'><value>Exclusión</value></data>
+<data name='Blends_Hue' xml:space='preserve'><value>Matiz</value></data>
+<data name='Blends_Luminosity' xml:space='preserve'><value>Luminosidad</value></data>
+<data name='Blends_Subtract' xml:space='preserve'><value>Sustraer</value></data>
+<data name='Blends_Division' xml:space='preserve'><value>División</value></data>
+<data name='Historys_LayersSetupTransformAdd_Move' xml:space='preserve'><value>Establecer tamaño de lienzo</value></data>
+<data name='Historys_LayersSetupTransformMultiplies_Transform' xml:space='preserve'><value>Establecer tamaño de lienzo</value></data>
+<data name='Historys_LayeragesArrange_LayersArrange' xml:space='preserve'><value>Las capas se organizan</value></data>
+<data name='Historys_LayeragesArrange_RemoveLayers' xml:space='preserve'><value>Quitar capas</value></data>
+<data name='Historys_LayeragesArrange_AddLayer' xml:space='preserve'><value>Agregar capa</value></data>
+<data name='Historys_LayersTransformAdd_Move' xml:space='preserve'><value>Moverse</value></data>
+<data name='Historys_LayersTransformMultiplies_Transform' xml:space='preserve'><value>Transformar</value></data>
+<data name='Historys_LayersProperty_SetTransform_IsCrop' xml:space='preserve'><value>Establecer si la transformación se recorta</value></data>
+<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>Establecer cultivo de transformación</value></data>
+<data name='Historys_LayersProperty_SetStyle' xml:space='preserve'><value>Establecer estilo</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill' xml:space='preserve'><value>Establecer relleno</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill_Extend' xml:space='preserve'><value>Establecer extensión de relleno</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill_Type' xml:space='preserve'><value>Establecer tipo de relleno</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke' xml:space='preserve'><value>Establecer trazo</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke_Extend' xml:space='preserve'><value>Establecer extensión de carrera</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke_Type' xml:space='preserve'><value>Establecer tipo de trazo</value></data>
+<data name='Historys_LayersProperty_SetStyle_Transparency' xml:space='preserve'><value>Establecer transparencia</value></data>
+<data name='Historys_LayersProperty_SetStyle_Transparency_Type' xml:space='preserve'><value>Establecer tipo de transparencia</value></data>
+<data name='Historys_LayersProperty_Set_MoveNodes' xml:space='preserve'><value>Mover nodos</value></data>
+<data name='Historys_LayersProperty_Set_MoveNode_ControlPoint' xml:space='preserve'><value>Mover el punto de control del nodo</value></data>
+<data name='Historys_LayersProperty_Set_MoveNode_IsChecked' xml:space='preserve'><value>Establecer si el nodo está seleccionado</value></data>
+<data name='Historys_LayersProperty_Set_AddNode' xml:space='preserve'><value>Agregar nodo</value></data>
+<data name='Historys_LayersProperty_Set_RemoveNodes' xml:space='preserve'><value>Quitar nodos</value></data>
+<data name='Historys_LayersProperty_Set_InsertNodes' xml:space='preserve'><value>Insertar nodos</value></data>
+<data name='Historys_LayersProperty_Set_SharpNodes' xml:space='preserve'><value>Nodos afilados</value></data>
+<data name='Historys_LayersProperty_Set_SmoothNodes' xml:space='preserve'><value>Nodos lisos</value></data>
+<data name='Historys_LayersProperty_SetPhotocopier' xml:space='preserve'><value>Establecer foto</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_GridType' xml:space='preserve'><value>Establecer el tipo de capa de cuadrícula</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_HorizontalStep' xml:space='preserve'><value>Establecer el paso horizontal de la capa de la cuadrícula</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_VerticalStep' xml:space='preserve'><value>Establecer el paso vertical de la capa de la cuadrícula</value></data>
+<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_Offset' xml:space='preserve'><value>Establecer el desplazamiento de la capa diagonal</value></data>
+<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_HorizontalStep' xml:space='preserve'><value>Establecer el paso horizontal de la capa diagonal</value></data>
+<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Radius' xml:space='preserve'><value>Establecer el radio de la capa manchada</value></data>
+<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Step' xml:space='preserve'><value>Pasos para configurar la capa manchada</value></data>
+<data name='Historys_LayersProperty_Set_GeometryRoundRectLayer_Corner' xml:space='preserve'><value>Establecer esquinas rectangulares redondeadas</value></data>
+<data name='Historys_LayersProperty_Set_GeometryTriangleLayer_Center' xml:space='preserve'><value>Establecer el centro de la capa del triángulo</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_Mid' xml:space='preserve'><value>Establecer el punto medio de la capa de diamante</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_HoleRadius' xml:space='preserve'><value>Establecer el radio del agujero de la capa de diamante</value></data>
+<data name='Historys_LayersProperty_Set_GeometryPentagonLayer_Points' xml:space='preserve'><value>Establecer los puntos de los puntos de la capa pentagonal</value></data>
+<data name='Historys_LayersProperty_Set_GeometryStarLayer_Points' xml:space='preserve'><value>Establecer los puntos de los puntos de la capa de estrella</value></data>
+<data name='Historys_LayersProperty_Set_GeometryStarLayer_InnerRadius' xml:space='preserve'><value>Establecer el radio interior de la capa de estrella</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Count' xml:space='preserve'><value>Establecer los puntos de las capas de engranajes</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_InnerRadius' xml:space='preserve'><value>Establecer el radio interior de la capa de engranajes</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Tooth' xml:space='preserve'><value>Establecer el diente de la capa de engranajes</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Notch' xml:space='preserve'><value>Establecer la muesca en la capa de engranajes</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDountLayer_HoleRadius' xml:space='preserve'><value>Establecer el radio del agujero de la capa de rosquilla</value></data>
+<data name='Historys_LayersProperty_Set_GeometryPieLayer_SweepAngle' xml:space='preserve'><value>Establecer el ángulo de escaneo de la capa circular</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCookieLayer_InnerRadius' xml:space='preserve'><value>Establecer el radio de la capa de galletas</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCookieLayer_SweepAngle' xml:space='preserve'><value>Establecer el ángulo de barrido de la capa de galletas</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_LeftTail' xml:space='preserve'><value>Establecer la cola izquierda de la capa de flecha</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_RightTail' xml:space='preserve'><value>Establecer la cola derecha de la capa de flecha</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_Value' xml:space='preserve'><value>Establecer valor de capa de flecha</value></data>
+<data name='Historys_LayersProperty_Set_GeometryHeartLayer_Spread' xml:space='preserve'><value>Establecer la extensión de la capa del corazón</value></data>
+<data name='Historys_LayersProperty_SetName' xml:space='preserve'><value>Escoger un nombre</value></data>
+<data name='Historys_LayersProperty_SetBlendMode' xml:space='preserve'><value>Establecer el modo de mezcla</value></data>
+<data name='Historys_LayersProperty_SetOpacity' xml:space='preserve'><value>Establecer opacidad</value></data>
+<data name='Historys_LayersProperty_SetOpacity_000' xml:space='preserve'><value>Establecer opacidad al 0%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_025' xml:space='preserve'><value>Establecer opacidad al 0%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_050' xml:space='preserve'><value>Establecer opacidad al 50%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_075' xml:space='preserve'><value>Establecer opacidad al 75%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_100' xml:space='preserve'><value>Establecer la opacidad al 100%</value></data>
+<data name='Historys_LayersProperty_SetVisibility' xml:space='preserve'><value>Establecer visibilidad</value></data>
+<data name='Historys_LayersProperty_SetIsSelected' xml:space='preserve'><value>Establecer si seleccionar</value></data>
+<data name='Historys_LayersProperty_SetTagType' xml:space='preserve'><value>Establecer tipo de etiqueta</value></data>
+<data name='Historys_LayeragesArrange_CutLayers' xml:space='preserve'><value>Cortar capas</value></data>
+<data name='Historys_LayeragesArrange_DuplicateLayer' xml:space='preserve'><value>Duplicar capa</value></data>
+<data name='Historys_LayeragesArrange_DuplicateLayers' xml:space='preserve'><value>Capas duplicadas</value></data>
+<data name='Historys_LayeragesArrange_PasteLayers' xml:space='preserve'><value>Pegar capas</value></data>
+<data name='Historys_LayeragesArrange_ClearLayers' xml:space='preserve'><value>Capas claras</value></data>
+<data name='Historys_LayeragesArrange_GroupLayers' xml:space='preserve'><value>Agrupación de capas</value></data>
+<data name='Historys_LayeragesArrange_UngroupLayers' xml:space='preserve'><value>Desagrupar capas</value></data>
+<data name='Historys_LayeragesArrange_ReleaseLayers' xml:space='preserve'><value>Capa de liberación</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_Combine' xml:space='preserve'><value>Agregar una capa de curva combinada</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_ExpandStroke' xml:space='preserve'><value>Agregue una capa de curva que expandió el trazo</value></data>
+<data name='Historys_LayeragesArrange_AddLayers_ExpandStroke' xml:space='preserve'><value>Agregue una capa de curva que expandió el trazo</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Exposure' xml:space='preserve'><value>Restablecer el ajuste de exposición</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Exposure_Exposure' xml:space='preserve'><value>Establecer la exposición del ajuste de exposición</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Brightness' xml:space='preserve'><value>Restablecer el ajuste de brillo</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteLight' xml:space='preserve'><value>Conjunto de ajuste de brillo de luz blanca</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteDark' xml:space='preserve'><value>Conjunto de ajuste de brillo blanco oscuro</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackLight' xml:space='preserve'><value>Establecer la luz negra del ajuste de brillo</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackDark' xml:space='preserve'><value>Establecer negro oscuro del ajuste de brillo</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Saturation' xml:space='preserve'><value>Restablecer el ajuste de saturación</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Saturation_Saturation' xml:space='preserve'><value>Establecer la saturación del ajuste de saturación</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_HueRotation' xml:space='preserve'><value>Restablecer el ajuste de rotación de tono</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HueRotation_Angle' xml:space='preserve'><value>Establecer el ángulo de ajuste de rotación de tono</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Contrast' xml:space='preserve'><value>Restablecer el ajuste de contraste</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Contrast_Contrast' xml:space='preserve'><value>Establecer contraste de ajuste de contraste</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Temperature' xml:space='preserve'><value>Restablecer el ajuste de temperatura</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Temperature_Temperature' xml:space='preserve'><value>Establecer temperatura de ajuste de temperatura</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Temperature_Tint' xml:space='preserve'><value>Establecer tinte de ajuste de temperatura</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_HighlightsAndShadows' xml:space='preserve'><value>Restablecer el ajuste de luces y sombras</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Shadows' xml:space='preserve'><value>Establecer sombras de luces y ajuste de sombras</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Highlights' xml:space='preserve'><value>Establecer resaltados de luces y ajustes de sombras</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Clarity' xml:space='preserve'><value>Establecer la claridad de los ajustes de luces y sombras</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>Establecer la cantidad de desenfoque de la máscara de ajustes de luces y sombras</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_GammaTransfer' xml:space='preserve'><value>Restablecer el ajuste de transferencia de gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaDisable' xml:space='preserve'><value>Cambiar alfa de ajuste de transferencia gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaOffset' xml:space='preserve'><value>Establecer el desplazamiento alfa del ajuste de transferencia de gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaExponent' xml:space='preserve'><value>Establecer exponente alfa del ajuste de transferencia gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaAmplitude' xml:space='preserve'><value>Establecer la amplitud alfa del ajuste de transferencia gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedDisable' xml:space='preserve'><value>Cambiar el rojo del ajuste de transferencia de gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedOffset' xml:space='preserve'><value>Establecer la compensación de rojo del ajuste de transferencia de gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedExponent' xml:space='preserve'><value>Establecer exponente rojo del ajuste de transferencia gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedAmplitude' xml:space='preserve'><value>Establecer la amplitud roja del ajuste de transferencia gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenDisable' xml:space='preserve'><value>Cambiar a verde del ajuste de transferencia de gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenOffset' xml:space='preserve'><value>Establecer la compensación verde del ajuste de transferencia de gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenExponent' xml:space='preserve'><value>Establecer exponente verde del ajuste de transferencia gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenAmplitude' xml:space='preserve'><value>Establecer la amplitud verde del ajuste de transferencia gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueDisable' xml:space='preserve'><value>Cambiar el azul del ajuste de transferencia de gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueOffset' xml:space='preserve'><value>Establecer la compensación azul del ajuste de transferencia de gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueExponent' xml:space='preserve'><value>Establecer exponente azul del ajuste de transferencia gamma</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueAmplitude' xml:space='preserve'><value>Establecer la amplitud azul del ajuste de transferencia gamma</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Vignette' xml:space='preserve'><value>Restablecer el ajuste de viñeta</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Amount' xml:space='preserve'><value>Establecer la cantidad de ajuste de viñeta</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Curve' xml:space='preserve'><value>Establecer curva de ajuste de viñeta</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Establecer el color del ajuste de viñeta</value></data>
+<data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Restablecer el efecto de desenfoque gaussiano</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Cambiar el efecto de desenfoque gaussiano</value></data>
+<data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Establecer la cantidad de efecto de desenfoque gaussiano</value></data>
+<data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Restablecer efecto de desenfoque direccional</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Cambiar efecto de desenfoque direccional</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Establecer el radio del efecto de desenfoque direccional</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Establecer ángulo de efecto de desenfoque direccional</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Restablecer el efecto de nitidez</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Cambiar efecto de nitidez</value></data>
+<data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Establecer la cantidad de efecto de nitidez</value></data>
+<data name='Historys_LayersProperty_ResetEffect_OuterShadow' xml:space='preserve'><value>Restablecer el efecto de sombra exterior</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_OuterShadow' xml:space='preserve'><value>Cambiar el efecto de sombra exterior</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Radius' xml:space='preserve'><value>Establecer el radio del efecto de sombra exterior</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Opacity' xml:space='preserve'><value>Establecer opacidad del efecto de sombra exterior</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Offset' xml:space='preserve'><value>Establecer la compensación del efecto de sombra exterior</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Angle' xml:space='preserve'><value>Establecer ángulo del efecto de sombra exterior</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Color' xml:space='preserve'><value>Establecer el color del efecto de sombra exterior</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Edge' xml:space='preserve'><value>Restablecer efecto de borde</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Edge' xml:space='preserve'><value>Efecto de borde de cambio</value></data>
+<data name='Historys_LayersProperty_SetEffect_Edge_Amount' xml:space='preserve'><value>Establecer la cantidad de efecto de borde</value></data>
+<data name='Historys_LayersProperty_SetEffect_Edge_Radius' xml:space='preserve'><value>Establecer radio de efecto de borde</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Mmorphology' xml:space='preserve'><value>Restablecer el efecto de morfología</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Mmorphology' xml:space='preserve'><value>Cambiar el efecto de morfología</value></data>
+<data name='Historys_LayersProperty_SetEffect_Mmorphology_Size' xml:space='preserve'><value>Establecer tamaño del efecto de morfología</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Emboss' xml:space='preserve'><value>Restablecer efecto de relieve</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Emboss' xml:space='preserve'><value>Cambiar efecto de relieve</value></data>
+<data name='Historys_LayersProperty_SetEffect_Emboss_Radius' xml:space='preserve'><value>Establecer radio de efecto relieve</value></data>
+<data name='Historys_LayersProperty_SetEffect_Emboss_Angle' xml:space='preserve'><value>Establecer radiángulos de efecto relieve</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Straighten' xml:space='preserve'><value>Restablecer el efecto de enderezamiento</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Straighten' xml:space='preserve'><value>Cambiar efecto de enderezamiento</value></data>
+<data name='Historys_LayersProperty_SetEffect_Straighten_Angle' xml:space='preserve'><value>Establecer ángulo de efecto de enderezamiento</value></data>
+<data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>Establecer texto de fuente</value></data>
+<data name='Historys_LayersProperty_SetFontAlignment' xml:space='preserve'><value>Establecer la alineación de la fuente</value></data>
+<data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>Establecer estilo de fuente</value></data>
+<data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>Establecer el peso de la fuente</value></data>
+<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Establecer familia de fuentes</value></data>
+<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Establecer tamaño de fuente</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>Establecer guión de estilo de trazo</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeWidth' xml:space='preserve'><value>Establecer ancho de trazo</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Cap' xml:space='preserve'><value>Establecer tapa de estilo de trazo</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Join' xml:space='preserve'><value>Establecer combinación de estilo de trazo</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Offset' xml:space='preserve'><value>Establecer el desplazamiento del estilo de trazo</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsFollowTransform' xml:space='preserve'><value>Establecer estilo es seguir transformación</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsStrokeBehindFill' xml:space='preserve'><value>El estilo de conjunto es el trazo detrás del relleno</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>Establecer el estilo es la escala de ancho de trazo con capa</value></data>
+<data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>Establecer filtro</value></data>
+<data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$SettingPage_Back' xml:space='preserve'><value>atrás</value></data>
+<data name='$MainPage_Title' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$MainPage_NewDialog_Close' xml:space='preserve'><value>Cancelar</value></data>
+<data name='$MainPage_NewDialog_Primary' xml:space='preserve'><value>OK</value></data>
+<data name='$MainPage_SizePicker_Width' xml:space='preserve'><value>Ancho</value></data>
+<data name='$MainPage_SizePicker_Height' xml:space='preserve'><value>Altura</value></data>
+<data name='$MainPage_Pictures_Close' xml:space='preserve'><value>Cancelar</value></data>
+<data name='$MainPage_Rename' xml:space='preserve'><value>Rebautizar</value></data>
+<data name='$MainPage_Rename_Title' xml:space='preserve'><value>Cambiar el nombre del proyecto</value></data>
+<data name='$MainPage_Rename_Close' xml:space='preserve'><value>Cancelar</value></data>
+<data name='$MainPage_RenameDialog_Title' xml:space='preserve'><value>Cambiar el nombre del proyecto</value></data>
+<data name='$MainPage_RenameDialog_Close' xml:space='preserve'><value>Cancelar</value></data>
+<data name='$MainPage_RenameDialog_Primary' xml:space='preserve'><value>Rebautizar</value></data>
+<data name='$MainPage_RenameDialog_TextBox_PlaceholderText' xml:space='preserve'><value>Ingrese un nombre aquí.</value></data>
+<data name='$MainPage_Delete' xml:space='preserve'><value>Borrar</value></data>
+<data name='$MainPage_Delete_Close' xml:space='preserve'><value>Cancelar</value></data>
+<data name='$MainPage_Delete_Primary' xml:space='preserve'><value>Borrar</value></data>
+<data name='$MainPage_Duplicate' xml:space='preserve'><value>Duplicar</value></data>
+<data name='$MainPage_Duplicate_Close' xml:space='preserve'><value>Cancelar</value></data>
+<data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>Duplicar</value></data>
+<data name='$DrawPage_Export' xml:space='preserve'><value>Exportar</value></data>
+<data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>Cancelar</value></data>
+<data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>OK</value></data>
+<data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>Ancho</value></data>
+<data name='$DrawPage_SetupDialog_SizePicker_Height' xml:space='preserve'><value>Altura</value></data>
+<data name='$DrawPage_ExportDialog_Close' xml:space='preserve'><value>Cancelar</value></data>
+<data name='$DrawPage_ExportDialog_Primary' xml:space='preserve'><value>Exportar</value></data>
+<data name='$DrawPage_ExportDialog_SizePicker_Width' xml:space='preserve'><value>Ancho</value></data>
+<data name='$DrawPage_ExportDialog_SizePicker_Height' xml:space='preserve'><value>Altura</value></data>
+<data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>Ingrese un nombre aquí.</value></data>
+<data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>Cancelar</value></data>
+<data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>Rebautizar</value></data>
+<data name='Tools_Fill' xml:space='preserve'><value>Llenar</value></data>
+<data name='Tools_Stroke' xml:space='preserve'><value>Golpe</value></data>
+<data name='Tools_ConvertToCurves' xml:space='preserve'><value>Convertir a curvas</value></data>
+<data name='Tools_Brush' xml:space='preserve'><value>Cepillo</value></data>
+<data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>Llenar</value></data>
+<data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>Golpe</value></data>
+<data name='Tools_Brush_Type' xml:space='preserve'><value>Escribe</value></data>
+<data name='Tools_Brush_Type_None' xml:space='preserve'><value>Ninguno</value></data>
+<data name='Tools_Brush_Type_Color' xml:space='preserve'><value>Color</value></data>
+<data name='Tools_Brush_Type_Image' xml:space='preserve'><value>Imagen</value></data>
+<data name='Tools_Brush_Brush' xml:space='preserve'><value>Cepillo</value></data>
+<data name='Tools_Brush_Extend_Mirror' xml:space='preserve'><value>Espejo</value></data>
+<data name='Tools_Brush_Stop_Remove' xml:space='preserve'><value>Eliminar</value></data>
+<data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value>Dupdo</value></data>
+<data name='Tools_GeometryRectangle' xml:space='preserve'><value>Rectángulo</value></data>
+<data name='Tools_GeometryEllipse' xml:space='preserve'><value>Elipse</value></data>
+<data name='Tools_Node_Remove' xml:space='preserve'><value>Eliminar</value></data>
+<data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>Ángulo</value></data>
+<data name='Tools_TextArtistic' xml:space='preserve'><value>Texto Artístico</value></data>
+<data name='Tools_TextFrame' xml:space='preserve'><value>Marco de texto</value></data>
+<data name='Tools_Image' xml:space='preserve'><value>Imagen</value></data>
+<data name='Tools_PatternGrid' xml:space='preserve'><value>Cuadrícula</value></data>
+<data name='Tools_PatternGrid_Type' xml:space='preserve'><value>Escribe</value></data>
+<data name='Tools_PatternGrid_Grid' xml:space='preserve'><value>Cuadrícula</value></data>
+<data name='Tools_PatternGrid_HorizontalStep' xml:space='preserve'><value>Paso horizontal</value></data>
+<data name='Tools_PatternGrid_VerticalStep' xml:space='preserve'><value>Paso vertical</value></data>
+<data name='Tools_PatternDiagonal' xml:space='preserve'><value>Diagonal</value></data>
+<data name='Tools_PatternDiagonal_Offset' xml:space='preserve'><value>Compensar</value></data>
+<data name='Tools_PatternDiagonal_HorizontalStep' xml:space='preserve'><value>Paso horizontal</value></data>
+<data name='Tools_PatternSpotted' xml:space='preserve'><value>Manchado</value></data>
+<data name='Tools_PatternSpotted_Radius' xml:space='preserve'><value>Radio</value></data>
+<data name='Tools_GeometryRoundRect' xml:space='preserve'><value>RoundRect</value></data>
+<data name='Tools_GeometryTriangle' xml:space='preserve'><value>Triángulo</value></data>
+<data name='Tools_GeometryTriangle_Mirror' xml:space='preserve'><value>Espejo</value></data>
+<data name='Tools_GeometryDiamond' xml:space='preserve'><value>Diamante</value></data>
+<data name='Tools_GeometryDiamond_Mirror' xml:space='preserve'><value>Espejo</value></data>
+<data name='Tools_GeometryPentagon' xml:space='preserve'><value>Pentágono</value></data>
+<data name='Tools_GeometryPentagon_Points' xml:space='preserve'><value>Puntos</value></data>
+<data name='Tools_GeometryStar' xml:space='preserve'><value>Estrella</value></data>
+<data name='Tools_GeometryStar_Points' xml:space='preserve'><value>Puntos</value></data>
+<data name='Tools_GeometryStar_InnerRadius' xml:space='preserve'><value>Radio interno</value></data>
+<data name='Tools_GeometryCog' xml:space='preserve'><value>Diente</value></data>
+<data name='Tools_GeometryCog_InnerRadius' xml:space='preserve'><value>Radio interno</value></data>
+<data name='Tools_GeometryDount' xml:space='preserve'><value>Dount</value></data>
+<data name='Tools_GeometryPie' xml:space='preserve'><value>Tarta</value></data>
+<data name='Tools_GeometryPie_SweepAngle' xml:space='preserve'><value>Ángulo de barrido</value></data>
+<data name='Tools_GeometryCookie' xml:space='preserve'><value>Galleta</value></data>
+<data name='Tools_GeometryCookie_InnerRadius' xml:space='preserve'><value>Radio interno</value></data>
+<data name='Tools_GeometryCookie_SweepAngle' xml:space='preserve'><value>Ángulo de barrido</value></data>
+<data name='Tools_GeometryArrow' xml:space='preserve'><value>Flecha</value></data>
+<data name='Tools_GeometryArrow_ArrowTail_None' xml:space='preserve'><value>Ninguno</value></data>
+<data name='Tools_GeometryCapsule' xml:space='preserve'><value>Cápsula</value></data>
+<data name='Tools_GeometryHeart' xml:space='preserve'><value>Corazón</value></data>
+<data name='Layers_Group' xml:space='preserve'><value>Grupo</value></data>
+<data name='Layers_GeometryRectangle' xml:space='preserve'><value>Rectángulo</value></data>
+<data name='Layers_GeometryEllipse' xml:space='preserve'><value>Elipse</value></data>
+<data name='Layers_TextArtistic' xml:space='preserve'><value>Texto Artístico</value></data>
+<data name='Layers_TextFrame' xml:space='preserve'><value>Marco de texto</value></data>
+<data name='Layers_Image' xml:space='preserve'><value>Imagen</value></data>
+<data name='Layers_PatternGrid' xml:space='preserve'><value>Cuadrícula</value></data>
+<data name='Layers_PatternDiagonal' xml:space='preserve'><value>Diagonal</value></data>
+<data name='Layers_PatternSpotted' xml:space='preserve'><value>Manchado</value></data>
+<data name='Layers_GeometryRoundRect' xml:space='preserve'><value>RoundRect</value></data>
+<data name='Layers_GeometryTriangle' xml:space='preserve'><value>Triángulo</value></data>
+<data name='Layers_GeometryDiamond' xml:space='preserve'><value>Diamante</value></data>
+<data name='Layers_GeometryPentagon' xml:space='preserve'><value>Pentágono</value></data>
+<data name='Layers_GeometryStar' xml:space='preserve'><value>Estrella</value></data>
+<data name='Layers_GeometryCog' xml:space='preserve'><value>Diente</value></data>
+<data name='Layers_GeometryDount' xml:space='preserve'><value>Dount</value></data>
+<data name='Layers_GeometryPie' xml:space='preserve'><value>Tarta</value></data>
+<data name='Layers_GeometryCookie' xml:space='preserve'><value>Galleta</value></data>
+<data name='Layers_GeometryArrow' xml:space='preserve'><value>Flecha</value></data>
+<data name='Layers_GeometryCapsule' xml:space='preserve'><value>Cápsula</value></data>
+<data name='Layers_GeometryHeart' xml:space='preserve'><value>Corazón</value></data>
+<data name='Menus_Edit' xml:space='preserve'><value>Editar</value></data>
+<data name='Menus_Stroke' xml:space='preserve'><value>Golpe</value></data>
+<data name='Menus_Transformer' xml:space='preserve'><value>Transformador</value></data>
+<data name='Menus_Transformer_Width' xml:space='preserve'><value>Ancho</value></data>
+<data name='Menus_Transformer_Height' xml:space='preserve'><value>Altura</value></data>
+<data name='Menus_Color' xml:space='preserve'><value>Color</value></data>
+<data name='Menus_Layer_Opacity' xml:space='preserve'><value>Opacidad</value></data>
+<data name='Edits_Edit' xml:space='preserve'><value>Editar</value></data>
+<data name='Edits_Edit_Duplicate' xml:space='preserve'><value>Duplicar</value></data>
+<data name='Edits_Edit_Copy' xml:space='preserve'><value>Dupdo</value></data>
+<data name='Edits_Group' xml:space='preserve'><value>Grupo</value></data>
+<data name='Edits_Group_Group' xml:space='preserve'><value>Grupo</value></data>
+<data name='Operates_Transform' xml:space='preserve'><value>Transformar</value></data>
+<data name='Operates_Horizontally_Left' xml:space='preserve'><value>Alinear a la izquierda</value></data>
+<data name='Operates_Horizontally_Center' xml:space='preserve'><value>Alinear al centro</value></data>
+<data name='Operates_Horizontally_Right' xml:space='preserve'><value>Alinear a la derecha</value></data>
+<data name='Adjustments_Exposure' xml:space='preserve'><value>Exposición</value></data>
+<data name='Adjustments_Exposure_Exposure' xml:space='preserve'><value>Exposición</value></data>
+<data name='Adjustments_Saturation' xml:space='preserve'><value>Saturación</value></data>
+<data name='Adjustments_Saturation_Saturation' xml:space='preserve'><value>Saturación</value></data>
+<data name='Adjustments_HueRotation_Angle' xml:space='preserve'><value>Ángulo</value></data>
+<data name='Adjustments_Contrast' xml:space='preserve'><value>Contraste</value></data>
+<data name='Adjustments_Contrast_Contrast' xml:space='preserve'><value>Contraste</value></data>
+<data name='Adjustments_Temperature' xml:space='preserve'><value>La temperatura</value></data>
+<data name='Adjustments_Temperature_Temperature' xml:space='preserve'><value>La temperatura</value></data>
+<data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>Cantidad</value></data>
+<data name='Adjustments_Vignette_Color' xml:space='preserve'><value>Color</value></data>
+<data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>Radio</value></data>
+<data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>Radio</value></data>
+<data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>Ángulo</value></data>
+<data name='Effects_Sharpen_Amount' xml:space='preserve'><value>Cantidad</value></data>
+<data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>Radio</value></data>
+<data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>Opacidad</value></data>
+<data name='Effects_OuterShadow_Offset' xml:space='preserve'><value>Compensar</value></data>
+<data name='Effects_OuterShadow_Angle' xml:space='preserve'><value>Ángulo</value></data>
+<data name='Effects_OuterShadow_Color' xml:space='preserve'><value>Color</value></data>
+<data name='Effects_Edge_Amount' xml:space='preserve'><value>Cantidad</value></data>
+<data name='Effects_Edge_Radius' xml:space='preserve'><value>Radio</value></data>
+<data name='Effects_Emboss_Radius' xml:space='preserve'><value>Radio</value></data>
+<data name='Effects_Emboss_Angle' xml:space='preserve'><value>Ángulo</value></data>
+<data name='Effects_Straighten_Angle' xml:space='preserve'><value>Ángulo</value></data>
+<data name='Texts_FontAlignment_Left' xml:space='preserve'><value>Alinear a la izquierda</value></data>
+<data name='Texts_FontAlignment_Center' xml:space='preserve'><value>Alinear al centro</value></data>
+<data name='Texts_FontAlignment_Right' xml:space='preserve'><value>Alinear a la derecha</value></data>
+<data name='Strokes_Dash' xml:space='preserve'><value>Pizca</value></data>
+<data name='Strokes_Dash_Dash' xml:space='preserve'><value>Pizca</value></data>
+<data name='Strokes_Width' xml:space='preserve'><value>Ancho</value></data>
+<data name='Strokes_Cap_Triangle' xml:space='preserve'><value>Triángulo</value></data>
+<data name='Strokes_Offset' xml:space='preserve'><value>Compensar</value></data>
+<data name='Blends_Saturation' xml:space='preserve'><value>Saturación</value></data>
+<data name='Blends_Color' xml:space='preserve'><value>Color</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_ConvertToCurves' xml:space='preserve'><value>Convertir a curvas</value></data>
+
+ </root>

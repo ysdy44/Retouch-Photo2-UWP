@@ -1,0 +1,668 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <xsd:schema id='root' xmlns='' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'>
+    <xsd:import namespace='http://www.w3.org/XML/1998/namespace' />
+    <xsd:element name='root' msdata:IsDataSet='true'>
+      <xsd:complexType>
+        <xsd:choice maxOccurs='unbounded'>
+          <xsd:element name='metadata'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' />
+              </xsd:sequence>
+              <xsd:attribute name='name' use='required' type='xsd:string' />
+              <xsd:attribute name='type' type='xsd:string' />
+              <xsd:attribute name='mimetype' type='xsd:string' />
+              <xsd:attribute ref='xml:space' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='assembly'>
+            <xsd:complexType>
+              <xsd:attribute name='alias' type='xsd:string' />
+              <xsd:attribute name='name' type='xsd:string' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='data'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' msdata:Ordinal='1' />
+                <xsd:element name='comment' type='xsd:string' minOccurs='0' msdata:Ordinal='2' />
+              </xsd:sequence>
+              <xsd:attribute name='name' type='xsd:string' use='required' msdata:Ordinal='1' />
+              <xsd:attribute name='type' type='xsd:string' msdata:Ordinal='3' />
+              <xsd:attribute name='mimetype' type='xsd:string' msdata:Ordinal='4' />
+              <xsd:attribute ref='xml:space' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='resheader'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' msdata:Ordinal='1' />
+              </xsd:sequence>
+              <xsd:attribute name='name' type='xsd:string' use='required' />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name='resmimetype'>
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name='version'>
+    <value>2.0</value>
+  </resheader>
+  <resheader name='reader'>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name='writer'>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+<data name='$Loading_Loading' xml:space='preserve'><value>Загрузка</value></data>
+<data name='$Loading_LoadFailed' xml:space='preserve'><value>Ошибка загрузки</value></data>
+<data name='$Loading_FileCorrupt' xml:space='preserve'><value>Файл поврежден</value></data>
+<data name='$Loading_FileNull' xml:space='preserve'><value>Файл пуст</value></data>
+<data name='$Loading_Saving' xml:space='preserve'><value>Экономия</value></data>
+<data name='$Loading_SaveSuccess' xml:space='preserve'><value>Успешно сохранено</value></data>
+<data name='$Loading_SaveFailed' xml:space='preserve'><value>Сохранено не удалось</value></data>
+<data name='$Untitled' xml:space='preserve'><value>Без названия</value></data>
+<data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
+<data name='$SettingPage_Title' xml:space='preserve'><value>Параметр</value></data>
+<data name='$SettingPage_About' xml:space='preserve'><value>О...</value></data>
+<data name='$SettingPage_Theme' xml:space='preserve'><value>Тема</value></data>
+<data name='$SettingPage_Theme_Light' xml:space='preserve'><value>Свет</value></data>
+<data name='$SettingPage_Theme_Dark' xml:space='preserve'><value>Тьма</value></data>
+<data name='$SettingPage_Theme_UseSystem' xml:space='preserve'><value>Использовать систему</value></data>
+<data name='$SettingPage_DeviceLayout' xml:space='preserve'><value>Схема устройства</value></data>
+<data name='$SettingPage_DeviceLayout_Phone' xml:space='preserve'><value>Телефон</value></data>
+<data name='$SettingPage_DeviceLayout_Pad' xml:space='preserve'><value>Pad</value></data>
+<data name='$SettingPage_DeviceLayout_PC' xml:space='preserve'><value>ПК</value></data>
+<data name='$SettingPage_DeviceLayout_Adaptive' xml:space='preserve'><value>Адаптивная</value></data>
+<data name='$SettingPage_DeviceLayout_AdaptiveWidth' xml:space='preserve'><value>Адаптивная ширина</value></data>
+<data name='$SettingPage_DeviceLayout_ResetAdaptiveWidth' xml:space='preserve'><value>Сбросить адаптивную ширину</value></data>
+<data name='$SettingPage_LayersHeight' xml:space='preserve'><value>Высота слоев</value></data>
+<data name='$SettingPage_LayersHeightTip' xml:space='preserve'><value>Щелкните, чтобы изменить высоту элемента управления слоем</value></data>
+<data name='$SettingPage_MenuType' xml:space='preserve'><value>Тип меню</value></data>
+<data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>Снимите флажок, чтобы скрыть кнопку меню</value></data>
+<data name='$SettingPage_Key' xml:space='preserve'><value>Ярлыки</value></data>
+<data name='$SettingPage_Key_Rotate' xml:space='preserve'><value>Сдвиньте колесо прокрутки, чтобы повернуть холст</value></data>
+<data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>Переместите холст влево</value></data>
+<data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>Холст двигаться вверх</value></data>
+<data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>Переместите холст вправо</value></data>
+<data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>Холст сдвигается вниз</value></data>
+<data name='$SettingPage_LocalFolder' xml:space='preserve'><value>Локальная папка</value></data>
+<data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>Открыть</value></data>
+<data name='$MainPage_DocumentationTip' xml:space='preserve'><value>Открыть веб-страницу документа</value></data>
+<data name='$MainPage_SettingTip' xml:space='preserve'><value>Откройте страницу настроек</value></data>
+<data name='$MainPage_Select_ClickTip' xml:space='preserve'><value>Щелкните, чтобы выбрать элементы:</value></data>
+<data name='$MainPage_Select_All' xml:space='preserve'><value>Выбрать все</value></data>
+<data name='$MainPage_InitialTip' xml:space='preserve'><value>Нет проекта? Вы можете...</value></data>
+<data name='$MainPage_Initial_Sample' xml:space='preserve'><value>Откройте образцы проектов</value></data>
+<data name='$MainPage_Initial_New' xml:space='preserve'><value>Создать новый проект</value></data>
+<data name='$MainPage_Initial_Photo' xml:space='preserve'><value>Создать новый проект из галереи</value></data>
+<data name='$MainPage_Initial_Destop' xml:space='preserve'><value>Создайте новый проект с рабочего стола</value></data>
+<data name='$MainPage_New' xml:space='preserve'><value>Новый</value></data>
+<data name='$MainPage_NewDialog_Title' xml:space='preserve'><value>Добавить новый проект</value></data>
+<data name='$MainPage_Pictures' xml:space='preserve'><value>Картинки</value></data>
+<data name='$MainPage_Pictures_Photo' xml:space='preserve'><value>Рисунок</value></data>
+<data name='$MainPage_Pictures_Destop' xml:space='preserve'><value>Destop</value></data>
+<data name='$MainPage_Rename_Subtitle' xml:space='preserve'><value>Выберите проект, который хотите переименовать.</value></data>
+<data name='$MainPage_RenameDialog_TextBoxTip' xml:space='preserve'><value>Имя уже занято!</value></data>
+<data name='$MainPage_Delete_Title' xml:space='preserve'><value>Удалить проекты</value></data>
+<data name='$MainPage_Delete_Subtitle' xml:space='preserve'><value>Выберите проекты, которые хотите удалить.</value></data>
+<data name='$MainPage_Duplicate_Title' xml:space='preserve'><value>Двойной проект (ы)</value></data>
+<data name='$MainPage_Duplicate_Subtitle' xml:space='preserve'><value>Выберите проекты, которые хотите продублировать.</value></data>
+<data name='$DrawPage_Document' xml:space='preserve'><value>Документация</value></data>
+<data name='$DrawPage_DocumentUnSave' xml:space='preserve'><value>Не экономить и не возвращать</value></data>
+<data name='$DrawPage_Undo' xml:space='preserve'><value>Отменить</value></data>
+<data name='$DrawPage_Redo' xml:space='preserve'><value>Повторить</value></data>
+<data name='$DrawPage_Setup' xml:space='preserve'><value>Настраивать</value></data>
+<data name='$DrawPage_Snap' xml:space='preserve'><value>Привязка</value></data>
+<data name='$DrawPage_Ruler' xml:space='preserve'><value>Линейка</value></data>
+<data name='$DrawPage_FullScreen' xml:space='preserve'><value>Полноэкранный</value></data>
+<data name='$DrawPage_Tip' xml:space='preserve'><value>Кончик</value></data>
+<data name='$DrawPage_Gallery' xml:space='preserve'><value>Галерея</value></data>
+<data name='$DrawPage_WidthTip' xml:space='preserve'><value>Переключить ширину макета</value></data>
+<data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>Параметры документа</value></data>
+<data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>Прикреплен к холсту</value></data>
+<data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>Экспортировать в...</value></data>
+<data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>Качественный</value></data>
+<data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>Формат файла</value></data>
+<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>Переименовать слой (и)</value></data>
+<data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>Добавить фотографии)</value></data>
+<data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>Пропорциональный зум</value></data>
+<data name='Tools_MoreTransform_Center' xml:space='preserve'><value>Центр зума</value></data>
+<data name='Tools_MoreCreate_Square' xml:space='preserve'><value>Одинаковая ширина и высота</value></data>
+<data name='Tools_MoreCreate_Center' xml:space='preserve'><value>Центр зума</value></data>
+<data name='Tools_Cursor' xml:space='preserve'><value>Курсор</value></data>
+<data name='Tools_Cursor_CompositeMode_New' xml:space='preserve'><value>Новый</value></data>
+<data name='Tools_Cursor_CompositeMode_Add' xml:space='preserve'><value>Добавлять</value></data>
+<data name='Tools_Cursor_CompositeMode_Subtract' xml:space='preserve'><value>Вычесть</value></data>
+<data name='Tools_View' xml:space='preserve'><value>Вид</value></data>
+<data name='Tools_View_Radian' xml:space='preserve'><value>Радиан</value></data>
+<data name='Tools_View_RadianClear' xml:space='preserve'><value>Сбросить радиан вращения</value></data>
+<data name='Tools_View_Scale' xml:space='preserve'><value>Шкала</value></data>
+<data name='Tools_View_ScaleClear' xml:space='preserve'><value>Сбросить масштаб</value></data>
+<data name='Tools_Brush_FillOrStroke' xml:space='preserve'><value>Заливка или обводка</value></data>
+<data name='Tools_Brush_Type_LinearGradient' xml:space='preserve'><value>Линейный</value></data>
+<data name='Tools_Brush_Type_RadialGradient' xml:space='preserve'><value>Радиальный</value></data>
+<data name='Tools_Brush_Type_EllipticalGradient' xml:space='preserve'><value>Эллиптический</value></data>
+<data name='Tools_Brush_Extend' xml:space='preserve'><value>Продлевать</value></data>
+<data name='Tools_Brush_Extend_Clamp' xml:space='preserve'><value>Зажим</value></data>
+<data name='Tools_Brush_Extend_Wrap' xml:space='preserve'><value>Сворачивать</value></data>
+<data name='Tools_Brush_Stop_Offset' xml:space='preserve'><value>Компенсировать</value></data>
+<data name='Tools_Brush_Stop_Alpha' xml:space='preserve'><value>Альфа</value></data>
+<data name='Tools_Brush_Stop_Reverse' xml:space='preserve'><value>Обеспечить регресс</value></data>
+<data name='Tools_Transparency' xml:space='preserve'><value>Прозрачность</value></data>
+<data name='Tools_Pen' xml:space='preserve'><value>Ручка</value></data>
+<data name='Tools_Node' xml:space='preserve'><value>Узел</value></data>
+<data name='Tools_Node_Insert' xml:space='preserve'><value>Вставлять</value></data>
+<data name='Tools_Node_Sharp' xml:space='preserve'><value>Острый</value></data>
+<data name='Tools_Node_Smooth' xml:space='preserve'><value>Гладкий</value></data>
+<data name='Tools_Node_NodeMode_Restriction' xml:space='preserve'><value>Ограничения контрольной точки</value></data>
+<data name='Tools_Node_NodeMode_Restriction_Length' xml:space='preserve'><value>Длина</value></data>
+<data name='Tools_Node_NodeMode_Mode' xml:space='preserve'><value>Режим контрольной точки</value></data>
+<data name='Tools_Node_NodeMode_Mode_Mirrored' xml:space='preserve'><value>Зеркальный</value></data>
+<data name='Tools_Node_NodeMode_Mode_Disconnected' xml:space='preserve'><value>Отключен</value></data>
+<data name='Tools_Node_NodeMode_Mode_Asymmetric' xml:space='preserve'><value>Асимметричный</value></data>
+<data name='Tools_Text_PlaceholderText' xml:space='preserve'><value>Введите текст ...</value></data>
+<data name='Tools_Image_Select' xml:space='preserve'><value>Выбирать</value></data>
+<data name='Tools_Image_Replace' xml:space='preserve'><value>Заменять</value></data>
+<data name='Tools_Image_Clear' xml:space='preserve'><value>Прозрачный</value></data>
+<data name='Tools_Crop' xml:space='preserve'><value>Векторный урожай</value></data>
+<data name='Tools_Crop_Reset' xml:space='preserve'><value>Сбросить урожай</value></data>
+<data name='Tools_Crop_Fit' xml:space='preserve'><value>Подходящий урожай</value></data>
+<data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>Шаг</value></data>
+<data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>Угол</value></data>
+<data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>Центральная точка</value></data>
+<data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>Средняя точка</value></data>
+<data name='Tools_GeometryCog_Count' xml:space='preserve'><value>Считать</value></data>
+<data name='Tools_GeometryCog_Tooth' xml:space='preserve'><value>Зуб</value></data>
+<data name='Tools_GeometryCog_Notch' xml:space='preserve'><value>Notch</value></data>
+<data name='Tools_GeometryDount_HoleRadius' xml:space='preserve'><value>Радиус отверстия</value></data>
+<data name='Tools_GeometryArrow_LeftTail' xml:space='preserve'><value>Левый хвост</value></data>
+<data name='Tools_GeometryArrow_RightTail' xml:space='preserve'><value>Правый хвост</value></data>
+<data name='Tools_GeometryArrow_Value' xml:space='preserve'><value>Ширина</value></data>
+<data name='Tools_GeometryHeart_Spread' xml:space='preserve'><value>Распространять</value></data>
+<data name='Layers_Curve' xml:space='preserve'><value>Изгиб</value></data>
+<data name='Layers_CurveMulti' xml:space='preserve'><value>Мульти-кривая</value></data>
+<data name='Menus_Keyboard' xml:space='preserve'><value>Клавиатура</value></data>
+<data name='Menus_Operate' xml:space='preserve'><value>Работать</value></data>
+<data name='Menus_Adjustment' xml:space='preserve'><value>Корректировки</value></data>
+<data name='Menus_Adjustment_Add' xml:space='preserve'><value>Добавить к</value></data>
+<data name='Menus_Adjustment_Filters' xml:space='preserve'><value>Фильтр</value></data>
+<data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>Без регулировки</value></data>
+<data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>Пожалуйста, выберите слой</value></data>
+<data name='Menus_Effect' xml:space='preserve'><value>Слой FX</value></data>
+<data name='Menus_Text' xml:space='preserve'><value>Текст</value></data>
+<data name='Menus_Style' xml:space='preserve'><value>Стили</value></data>
+<data name='Menus_History' xml:space='preserve'><value>История</value></data>
+<data name='Menus_Transformer_Rotate' xml:space='preserve'><value>Повернуть</value></data>
+<data name='Menus_Transformer_Skew' xml:space='preserve'><value>Перекос</value></data>
+<data name='Menus_Transformer_X' xml:space='preserve'><value>Ось X</value></data>
+<data name='Menus_Transformer_Y' xml:space='preserve'><value>Ось Y</value></data>
+<data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>Пропорциональный зум</value></data>
+<data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>Частота шага</value></data>
+<data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Позиционное дистанционное управление</value></data>
+<data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Якорь</value></data>
+<data name='Menus_Color_Swatches' xml:space='preserve'><value>Образцы</value></data>
+<data name='Menus_Color_Wheel' xml:space='preserve'><value>Колесо</value></data>
+<data name='Menus_Color_RGB' xml:space='preserve'><value>RGB</value></data>
+<data name='Menus_Color_HSV' xml:space='preserve'><value>HSV</value></data>
+<data name='Menus_Color_PaletteHue' xml:space='preserve'><value>Палитра-оттенок</value></data>
+<data name='Menus_Color_PaletteSaturation' xml:space='preserve'><value>Палитра-насыщенность</value></data>
+<data name='Menus_Color_PaletteValue' xml:space='preserve'><value>Палитра-значение</value></data>
+<data name='Menus_Color_Circle' xml:space='preserve'><value>Круг</value></data>
+<data name='Menus_Layer' xml:space='preserve'><value>Слой</value></data>
+<data name='Menus_Layer_Name' xml:space='preserve'><value>Имя</value></data>
+<data name='Menus_Layer_BlendMode' xml:space='preserve'><value>Режим смешивания</value></data>
+<data name='Menus_Layer_Visibility' xml:space='preserve'><value>Видимость</value></data>
+<data name='Menus_Layer_TagType' xml:space='preserve'><value>Тип тега</value></data>
+<data name='Edits_Edit_Cut' xml:space='preserve'><value>Резать</value></data>
+<data name='Edits_Edit_Paste' xml:space='preserve'><value>Вставить</value></data>
+<data name='Edits_Edit_Clear' xml:space='preserve'><value>Прозрачный</value></data>
+<data name='Edits_Select' xml:space='preserve'><value>Выбирать</value></data>
+<data name='Edits_Select_All' xml:space='preserve'><value>Выбрать все</value></data>
+<data name='Edits_Select_Deselect' xml:space='preserve'><value>Отменить выбор</value></data>
+<data name='Edits_Select_Invert' xml:space='preserve'><value>Инвертировать</value></data>
+<data name='Edits_Group_Ungroup' xml:space='preserve'><value>Разгруппировать</value></data>
+<data name='Edits_Group_Release' xml:space='preserve'><value>Релиз</value></data>
+<data name='Edits_Combine_Xor' xml:space='preserve'><value>Xor</value></data>
+<data name='Edits_Combine' xml:space='preserve'><value>Комбинировать</value></data>
+<data name='Edits_Combine_Union' xml:space='preserve'><value>Союз</value></data>
+<data name='Edits_Combine_Exclude' xml:space='preserve'><value>Исключать</value></data>
+<data name='Edits_Combine_Intersect' xml:space='preserve'><value>Пересечение</value></data>
+<data name='Edits_Combine_ExpandStroke' xml:space='preserve'><value>Развернуть инсульт</value></data>
+<data name='Operates_Transform_FlipHorizontal' xml:space='preserve'><value>Отразить по горизонтали</value></data>
+<data name='Operates_Transform_FlipVertical' xml:space='preserve'><value>Отразить по вертикали</value></data>
+<data name='Operates_Transform_RotateLeft' xml:space='preserve'><value>Повернуть налево</value></data>
+<data name='Operates_Transform_RotateRight' xml:space='preserve'><value>Повернуть вправо</value></data>
+<data name='Operates_Arrange' xml:space='preserve'><value>Договариваться</value></data>
+<data name='Operates_Arrange_MoveFront' xml:space='preserve'><value>На передний план</value></data>
+<data name='Operates_Arrange_BackOne' xml:space='preserve'><value>Назад Один</value></data>
+<data name='Operates_Arrange_ForwardOne' xml:space='preserve'><value>Нападающий</value></data>
+<data name='Operates_Arrange_MoveBack' xml:space='preserve'><value>Перейти назад</value></data>
+<data name='Operates_Horizontally' xml:space='preserve'><value>Выровнять по горизонтали</value></data>
+<data name='Operates_Horizontally_Space' xml:space='preserve'><value>Пространство по горизонтали</value></data>
+<data name='Operates_Vertically' xml:space='preserve'><value>Выровнять по вертикали</value></data>
+<data name='Operates_Vertically_Top' xml:space='preserve'><value>Выровнять по верху</value></data>
+<data name='Operates_Vertically_Middle' xml:space='preserve'><value>Выровнять по центру</value></data>
+<data name='Operates_Vertically_Bottom' xml:space='preserve'><value>Выровнять по низу</value></data>
+<data name='Operates_Vertically_Space' xml:space='preserve'><value>Пространство по вертикали</value></data>
+<data name='Adjustments_Gray' xml:space='preserve'><value>серый</value></data>
+<data name='Adjustments_Invert' xml:space='preserve'><value>Инвертировать</value></data>
+<data name='Adjustments_Brightness' xml:space='preserve'><value>Яркость</value></data>
+<data name='Adjustments_Brightness_WhiteToLight' xml:space='preserve'><value>От белого к свету</value></data>
+<data name='Adjustments_Brightness_WhiteToDark' xml:space='preserve'><value>От белого к темному</value></data>
+<data name='Adjustments_Brightness_BlackToLight' xml:space='preserve'><value>От черного к свету</value></data>
+<data name='Adjustments_Brightness_BlackToDark' xml:space='preserve'><value>От черного к темному</value></data>
+<data name='Adjustments_HueRotation' xml:space='preserve'><value>Вращение оттенка</value></data>
+<data name='Adjustments_Temperature_Tint' xml:space='preserve'><value>Оттенок</value></data>
+<data name='Adjustments_HighlightsAndShadows' xml:space='preserve'><value>Выделение и тень</value></data>
+<data name='Adjustments_HighlightsAndShadows_Shadows' xml:space='preserve'><value>Тени</value></data>
+<data name='Adjustments_HighlightsAndShadows_Highlights' xml:space='preserve'><value>Особенности</value></data>
+<data name='Adjustments_HighlightsAndShadows_Clarity' xml:space='preserve'><value>Ясность</value></data>
+<data name='Adjustments_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>Величина размытия маски</value></data>
+<data name='Adjustments_GammaTransfer' xml:space='preserve'><value>Гамма-передача</value></data>
+<data name='Adjustments_GammaTransfer_Offset' xml:space='preserve'><value>Компенсировать</value></data>
+<data name='Adjustments_GammaTransfer_Exponent' xml:space='preserve'><value>Экспонента</value></data>
+<data name='Adjustments_GammaTransfer_Amplitude' xml:space='preserve'><value>Амплитуда</value></data>
+<data name='Adjustments_GammaTransfer_Alpha' xml:space='preserve'><value>Альфа</value></data>
+<data name='Adjustments_GammaTransfer_Red' xml:space='preserve'><value>красный</value></data>
+<data name='Adjustments_GammaTransfer_Green' xml:space='preserve'><value>Зеленый</value></data>
+<data name='Adjustments_GammaTransfer_Blue' xml:space='preserve'><value>Синий</value></data>
+<data name='Adjustments_Vignette' xml:space='preserve'><value>Виньетка</value></data>
+<data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>Изгиб</value></data>
+<data name='Effects_GaussianBlur' xml:space='preserve'><value>Размытие по Гауссу</value></data>
+<data name='Effects_DirectionalBlur' xml:space='preserve'><value>Направленное размытие</value></data>
+<data name='Effects_Sharpen' xml:space='preserve'><value>Резкость</value></data>
+<data name='Effects_OuterShadow' xml:space='preserve'><value>Внешняя тень</value></data>
+<data name='Effects_Edge' xml:space='preserve'><value>Край</value></data>
+<data name='Effects_Morphology' xml:space='preserve'><value>Морфология</value></data>
+<data name='Effects_Morphology_Size' xml:space='preserve'><value>Размер</value></data>
+<data name='Effects_Emboss' xml:space='preserve'><value>Тиснение</value></data>
+<data name='Effects_Straighten' xml:space='preserve'><value>Выпрямить</value></data>
+<data name='Texts_FontAlignment' xml:space='preserve'><value>Выровнять</value></data>
+<data name='Texts_FontAlignment_Justified' xml:space='preserve'><value>Оправдано</value></data>
+<data name='Texts_FontStyle' xml:space='preserve'><value>Стиль шрифта</value></data>
+<data name='Texts_FontStyle_Bold' xml:space='preserve'><value>Смелый</value></data>
+<data name='Texts_FontStyle_Italic' xml:space='preserve'><value>Курсив</value></data>
+<data name='Texts_FontStyle_UnderLine' xml:space='preserve'><value>UnderLine</value></data>
+<data name='Texts_FontWeight' xml:space='preserve'><value>Толщина шрифта</value></data>
+<data name='Texts_FontWeight_Black' xml:space='preserve'><value>Чернить</value></data>
+<data name='Texts_FontWeight_Bold' xml:space='preserve'><value>Смелый</value></data>
+<data name='Texts_FontWeight_ExtraBlack' xml:space='preserve'><value>ExtraBlack</value></data>
+<data name='Texts_FontWeight_ExtraBold' xml:space='preserve'><value>ExtraBold</value></data>
+<data name='Texts_FontWeight_ExtraLight' xml:space='preserve'><value>ExtraLight</value></data>
+<data name='Texts_FontWeight_Light' xml:space='preserve'><value>Свет</value></data>
+<data name='Texts_FontWeight_Medium' xml:space='preserve'><value>Середина</value></data>
+<data name='Texts_FontWeight_Normal' xml:space='preserve'><value>Нормальный</value></data>
+<data name='Texts_FontWeight_SemiBold' xml:space='preserve'><value>Полужирный</value></data>
+<data name='Texts_FontWeight_SemiLight' xml:space='preserve'><value>Полулегкий</value></data>
+<data name='Texts_FontWeight_Thin' xml:space='preserve'><value>Тонкий</value></data>
+<data name='Texts_FontFamily' xml:space='preserve'><value>Семейство шрифтов</value></data>
+<data name='Texts_FontSize' xml:space='preserve'><value>Размер шрифта</value></data>
+<data name='Strokes_Dash_Solid' xml:space='preserve'><value>Твердый</value></data>
+<data name='Strokes_Dash_Dot' xml:space='preserve'><value>Точка</value></data>
+<data name='Strokes_Dash_DashDot' xml:space='preserve'><value>Тире точка</value></data>
+<data name='Strokes_Cap' xml:space='preserve'><value>Колпачок</value></data>
+<data name='Strokes_Cap_Flat' xml:space='preserve'><value>Плоский</value></data>
+<data name='Strokes_Cap_Square' xml:space='preserve'><value>Квадрат</value></data>
+<data name='Strokes_Cap_Round' xml:space='preserve'><value>Круглый</value></data>
+<data name='Strokes_Join' xml:space='preserve'><value>Присоединиться</value></data>
+<data name='Strokes_Join_Miter' xml:space='preserve'><value>Митра</value></data>
+<data name='Strokes_Join_Bevel' xml:space='preserve'><value>Скос</value></data>
+<data name='Strokes_Join_Round' xml:space='preserve'><value>Круглый</value></data>
+<data name='Strokes_Join_MiterOrBevel' xml:space='preserve'><value>Митра или скос</value></data>
+<data name='Strokes_IsFollowTransform' xml:space='preserve'><value>Преобразование стиля с помощью слоя</value></data>
+<data name='Strokes_IsStrokeBehindFill' xml:space='preserve'><value>Обводка за заливкой</value></data>
+<data name='Strokes_IsStrokeWidthFollowScale' xml:space='preserve'><value>Шкала ширины обводки со слоем</value></data>
+<data name='Blends_None' xml:space='preserve'><value>Нормальный</value></data>
+<data name='Blends_Multiply' xml:space='preserve'><value>Умножить</value></data>
+<data name='Blends_Screen' xml:space='preserve'><value>Экран</value></data>
+<data name='Blends_Darken' xml:space='preserve'><value>Затемнить</value></data>
+<data name='Blends_Lighten' xml:space='preserve'><value>Осветлить</value></data>
+<data name='Blends_Dissolve' xml:space='preserve'><value>Раствориться</value></data>
+<data name='Blends_ColorBurn' xml:space='preserve'><value>Цветной огонь</value></data>
+<data name='Blends_LinearBurn' xml:space='preserve'><value>LinearBurn</value></data>
+<data name='Blends_DarkerColor' xml:space='preserve'><value>ТемнееЦвет</value></data>
+<data name='Blends_LighterColor' xml:space='preserve'><value>Более светлый цвет</value></data>
+<data name='Blends_ColorDodge' xml:space='preserve'><value>ColorDodge</value></data>
+<data name='Blends_LinearDodge' xml:space='preserve'><value>ЛинейныйDodge</value></data>
+<data name='Blends_Overlay' xml:space='preserve'><value>Оверлей</value></data>
+<data name='Blends_SoftLight' xml:space='preserve'><value>Мягкий свет</value></data>
+<data name='Blends_HardLight' xml:space='preserve'><value>Жесткий свет</value></data>
+<data name='Blends_VividLight' xml:space='preserve'><value>Яркий свет</value></data>
+<data name='Blends_LinearLight' xml:space='preserve'><value>Линейный свет</value></data>
+<data name='Blends_PinLight' xml:space='preserve'><value>PinLight</value></data>
+<data name='Blends_HardMix' xml:space='preserve'><value>HardMix</value></data>
+<data name='Blends_Difference' xml:space='preserve'><value>Разница</value></data>
+<data name='Blends_Exclusion' xml:space='preserve'><value>Исключение</value></data>
+<data name='Blends_Hue' xml:space='preserve'><value>Оттенок</value></data>
+<data name='Blends_Luminosity' xml:space='preserve'><value>Яркость</value></data>
+<data name='Blends_Subtract' xml:space='preserve'><value>Вычесть</value></data>
+<data name='Blends_Division' xml:space='preserve'><value>Разделение</value></data>
+<data name='Historys_LayersSetupTransformAdd_Move' xml:space='preserve'><value>Установить размер холста</value></data>
+<data name='Historys_LayersSetupTransformMultiplies_Transform' xml:space='preserve'><value>Установить размер холста</value></data>
+<data name='Historys_LayeragesArrange_LayersArrange' xml:space='preserve'><value>Слои расставляют</value></data>
+<data name='Historys_LayeragesArrange_RemoveLayers' xml:space='preserve'><value>Удалить слои</value></data>
+<data name='Historys_LayeragesArrange_AddLayer' xml:space='preserve'><value>Добавить слой</value></data>
+<data name='Historys_LayersTransformAdd_Move' xml:space='preserve'><value>Двигаться</value></data>
+<data name='Historys_LayersTransformMultiplies_Transform' xml:space='preserve'><value>Преобразовать</value></data>
+<data name='Historys_LayersProperty_SetTransform_IsCrop' xml:space='preserve'><value>Установите, будет ли преобразование обрезано</value></data>
+<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>Установить преобразование кадрирования</value></data>
+<data name='Historys_LayersProperty_SetStyle' xml:space='preserve'><value>Установить стиль</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill' xml:space='preserve'><value>Установить заливку</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill_Extend' xml:space='preserve'><value>Установить расширение заполнения</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill_Type' xml:space='preserve'><value>Установить тип заливки</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke' xml:space='preserve'><value>Установить ход</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke_Extend' xml:space='preserve'><value>Установить удлинение хода</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke_Type' xml:space='preserve'><value>Установить тип хода</value></data>
+<data name='Historys_LayersProperty_SetStyle_Transparency' xml:space='preserve'><value>Установить прозрачность</value></data>
+<data name='Historys_LayersProperty_SetStyle_Transparency_Type' xml:space='preserve'><value>Установить тип прозрачности</value></data>
+<data name='Historys_LayersProperty_Set_MoveNodes' xml:space='preserve'><value>Переместить узлы</value></data>
+<data name='Historys_LayersProperty_Set_MoveNode_ControlPoint' xml:space='preserve'><value>Переместить контрольную точку узла</value></data>
+<data name='Historys_LayersProperty_Set_MoveNode_IsChecked' xml:space='preserve'><value>Установите, выбран ли узел</value></data>
+<data name='Historys_LayersProperty_Set_AddNode' xml:space='preserve'><value>Добавить узел</value></data>
+<data name='Historys_LayersProperty_Set_RemoveNodes' xml:space='preserve'><value>Удалить узлы</value></data>
+<data name='Historys_LayersProperty_Set_InsertNodes' xml:space='preserve'><value>Вставить узлы</value></data>
+<data name='Historys_LayersProperty_Set_SharpNodes' xml:space='preserve'><value>Острые узлы</value></data>
+<data name='Historys_LayersProperty_Set_SmoothNodes' xml:space='preserve'><value>Гладкие узлы</value></data>
+<data name='Historys_LayersProperty_SetPhotocopier' xml:space='preserve'><value>Установить фото</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_GridType' xml:space='preserve'><value>Установите тип слоя сетки</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_HorizontalStep' xml:space='preserve'><value>Установите шаг по горизонтали слоя сетки</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_VerticalStep' xml:space='preserve'><value>Установить вертикальный шаг слоя сетки</value></data>
+<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_Offset' xml:space='preserve'><value>Задайте смещение диагонального слоя</value></data>
+<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_HorizontalStep' xml:space='preserve'><value>Установите шаг по горизонтали диагонального слоя</value></data>
+<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Radius' xml:space='preserve'><value>Установите радиус пятнистого слоя</value></data>
+<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Step' xml:space='preserve'><value>Шаги по установке пятнистого слоя</value></data>
+<data name='Historys_LayersProperty_Set_GeometryRoundRectLayer_Corner' xml:space='preserve'><value>Установить углы прямоугольника со скругленными углами</value></data>
+<data name='Historys_LayersProperty_Set_GeometryTriangleLayer_Center' xml:space='preserve'><value>Установите центр слоя с треугольником</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_Mid' xml:space='preserve'><value>Установите среднюю точку алмазного слоя</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_HoleRadius' xml:space='preserve'><value>Установите радиус отверстия алмазного слоя</value></data>
+<data name='Historys_LayersProperty_Set_GeometryPentagonLayer_Points' xml:space='preserve'><value>Задайте точки точек пятиугольного слоя</value></data>
+<data name='Historys_LayersProperty_Set_GeometryStarLayer_Points' xml:space='preserve'><value>Установите точки звездного слоя</value></data>
+<data name='Historys_LayersProperty_Set_GeometryStarLayer_InnerRadius' xml:space='preserve'><value>Установите внутренний радиус звездного слоя</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Count' xml:space='preserve'><value>Установите точки зубчатых слоев</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_InnerRadius' xml:space='preserve'><value>Установите внутренний радиус зубчатого слоя</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Tooth' xml:space='preserve'><value>Установите зуб зубчатого слоя</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Notch' xml:space='preserve'><value>Установите выемку в слое передач</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDountLayer_HoleRadius' xml:space='preserve'><value>Установите радиус отверстия слоя пончика</value></data>
+<data name='Historys_LayersProperty_Set_GeometryPieLayer_SweepAngle' xml:space='preserve'><value>Установите угол сканирования слоя пирога</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCookieLayer_InnerRadius' xml:space='preserve'><value>Установите радиус слоя печенья</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCookieLayer_SweepAngle' xml:space='preserve'><value>Установите угол развертки слоя печенья</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_LeftTail' xml:space='preserve'><value>Установите левый хвост слоя со стрелкой</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_RightTail' xml:space='preserve'><value>Установите правый хвост слоя со стрелкой</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_Value' xml:space='preserve'><value>Установить значение слоя стрелки</value></data>
+<data name='Historys_LayersProperty_Set_GeometryHeartLayer_Spread' xml:space='preserve'><value>Установить распространение слоя сердца</value></data>
+<data name='Historys_LayersProperty_SetName' xml:space='preserve'><value>Имя набора</value></data>
+<data name='Historys_LayersProperty_SetBlendMode' xml:space='preserve'><value>Установить режим наложения</value></data>
+<data name='Historys_LayersProperty_SetOpacity' xml:space='preserve'><value>Установить непрозрачность</value></data>
+<data name='Historys_LayersProperty_SetOpacity_000' xml:space='preserve'><value>Установите непрозрачность на 0%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_025' xml:space='preserve'><value>Установите непрозрачность на 0%</value></data>
+<data name='Historys_LayersProperty_SetOpacity_050' xml:space='preserve'><value>Установите непрозрачность на 50%.</value></data>
+<data name='Historys_LayersProperty_SetOpacity_075' xml:space='preserve'><value>Установите непрозрачность на 75%.</value></data>
+<data name='Historys_LayersProperty_SetOpacity_100' xml:space='preserve'><value>Установите непрозрачность на 100%</value></data>
+<data name='Historys_LayersProperty_SetVisibility' xml:space='preserve'><value>Установить видимость</value></data>
+<data name='Historys_LayersProperty_SetIsSelected' xml:space='preserve'><value>Установите, следует ли выбирать</value></data>
+<data name='Historys_LayersProperty_SetTagType' xml:space='preserve'><value>Установить тип тега</value></data>
+<data name='Historys_LayeragesArrange_CutLayers' xml:space='preserve'><value>Вырезать слои</value></data>
+<data name='Historys_LayeragesArrange_DuplicateLayer' xml:space='preserve'><value>Дублировать слой</value></data>
+<data name='Historys_LayeragesArrange_DuplicateLayers' xml:space='preserve'><value>Повторяющиеся слои</value></data>
+<data name='Historys_LayeragesArrange_PasteLayers' xml:space='preserve'><value>Вставить слои</value></data>
+<data name='Historys_LayeragesArrange_ClearLayers' xml:space='preserve'><value>Очистить слои</value></data>
+<data name='Historys_LayeragesArrange_GroupLayers' xml:space='preserve'><value>Группировка слоев</value></data>
+<data name='Historys_LayeragesArrange_UngroupLayers' xml:space='preserve'><value>Разгруппировать слои</value></data>
+<data name='Historys_LayeragesArrange_ReleaseLayers' xml:space='preserve'><value>Слой освобождения</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_Combine' xml:space='preserve'><value>Добавить комбинированный слой кривой</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_ExpandStroke' xml:space='preserve'><value>Добавьте слой кривой с расширенной обводкой</value></data>
+<data name='Historys_LayeragesArrange_AddLayers_ExpandStroke' xml:space='preserve'><value>Добавьте слой кривой с расширенной обводкой</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Exposure' xml:space='preserve'><value>Сбросить настройку экспозиции</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Exposure_Exposure' xml:space='preserve'><value>Установить экспозицию регулировки экспозиции</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Brightness' xml:space='preserve'><value>Сбросить настройку яркости</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteLight' xml:space='preserve'><value>Комплект регулировки яркости белого света</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteDark' xml:space='preserve'><value>Набор регулировки яркости белого темного цвета</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackLight' xml:space='preserve'><value>Установите черный свет регулировки яркости</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackDark' xml:space='preserve'><value>Установите черный темный из регулировки яркости</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Saturation' xml:space='preserve'><value>Сбросить настройку насыщенности</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Saturation_Saturation' xml:space='preserve'><value>Установите насыщенность настройки насыщенности</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_HueRotation' xml:space='preserve'><value>Сбросить настройку поворота оттенка</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HueRotation_Angle' xml:space='preserve'><value>Установить угол поворота оттенка</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Contrast' xml:space='preserve'><value>Сбросить настройку контрастности</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Contrast_Contrast' xml:space='preserve'><value>Установить контрастность регулировки контрастности</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Temperature' xml:space='preserve'><value>Сброс регулировки температуры</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Temperature_Temperature' xml:space='preserve'><value>Установить температуру регулировки температуры</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Temperature_Tint' xml:space='preserve'><value>Установить оттенок регулировки температуры</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_HighlightsAndShadows' xml:space='preserve'><value>Сбросить настройки светов и теней</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Shadows' xml:space='preserve'><value>Установить тени от бликов и регулировку теней</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Highlights' xml:space='preserve'><value>Установить световые блики и регулировку теней</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Clarity' xml:space='preserve'><value>Настройка четкости светов и теней.</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>Установите маску размытия, количество светов и теней.</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_GammaTransfer' xml:space='preserve'><value>Сбросить настройку передачи гаммы</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaDisable' xml:space='preserve'><value>Переключатель альфа регулировки передачи гаммы</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaOffset' xml:space='preserve'><value>Установить альфа-смещение регулировки передачи гаммы</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaExponent' xml:space='preserve'><value>Установить показатель степени альфа регулировки передачи гаммы</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaAmplitude' xml:space='preserve'><value>Установите альфа-амплитуду регулировки передачи гаммы</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedDisable' xml:space='preserve'><value>Красный переключатель регулировки передачи гаммы</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedOffset' xml:space='preserve'><value>Установить красное смещение регулировки передачи гаммы</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedExponent' xml:space='preserve'><value>Установить красную экспоненту регулировки гамма-переноса.</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedAmplitude' xml:space='preserve'><value>Установите красную амплитуду регулировки гамма-передачи</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenDisable' xml:space='preserve'><value>Зеленый переключатель регулировки передачи гаммы</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenOffset' xml:space='preserve'><value>Установить смещение зеленого цвета регулировки передачи гаммы</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenExponent' xml:space='preserve'><value>Установить зеленую экспоненту регулировки гамма-переноса.</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenAmplitude' xml:space='preserve'><value>Установите зеленую амплитуду регулировки гамма-передачи</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueDisable' xml:space='preserve'><value>Переключатель синего цвета регулировки передачи гаммы</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueOffset' xml:space='preserve'><value>Установить синее смещение регулировки передачи гаммы</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueExponent' xml:space='preserve'><value>Установить синий показатель регулировки гамма-переноса.</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueAmplitude' xml:space='preserve'><value>Установите синюю амплитуду регулировки гамма-передачи</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Vignette' xml:space='preserve'><value>Сбросить настройку виньетки</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Amount' xml:space='preserve'><value>Установите величину регулировки виньетки</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Curve' xml:space='preserve'><value>Установить кривую настройки виньетки</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>Установить цвет настройки виньетки</value></data>
+<data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Сбросить эффект размытия по Гауссу</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Включить эффект размытия по Гауссу</value></data>
+<data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Установите количество эффекта размытия по Гауссу</value></data>
+<data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Сбросить эффект направленного размытия</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Включить эффект направленного размытия</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Установить радиус эффекта направленного размытия</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Установить угол эффекта направленного размытия</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Сбросить эффект резкости</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Эффект переключения резкости</value></data>
+<data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Установите количество эффекта резкости</value></data>
+<data name='Historys_LayersProperty_ResetEffect_OuterShadow' xml:space='preserve'><value>Сбросить эффект внешней тени</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_OuterShadow' xml:space='preserve'><value>Переключить эффект внешней тени</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Radius' xml:space='preserve'><value>Установить радиус эффекта внешней тени</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Opacity' xml:space='preserve'><value>Установить непрозрачность эффекта внешней тени</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Offset' xml:space='preserve'><value>Установить смещение эффекта внешней тени</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Angle' xml:space='preserve'><value>Установить угол внешнего теневого эффекта</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Color' xml:space='preserve'><value>Установить цвет эффекта внешней тени</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Edge' xml:space='preserve'><value>Сбросить краевой эффект</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Edge' xml:space='preserve'><value>Эффект переключения краев</value></data>
+<data name='Historys_LayersProperty_SetEffect_Edge_Amount' xml:space='preserve'><value>Установите количество краевого эффекта</value></data>
+<data name='Historys_LayersProperty_SetEffect_Edge_Radius' xml:space='preserve'><value>Установить радиус краевого эффекта</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Mmorphology' xml:space='preserve'><value>Сбросить эффект морфологии</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Mmorphology' xml:space='preserve'><value>Эффект морфологии переключателя</value></data>
+<data name='Historys_LayersProperty_SetEffect_Mmorphology_Size' xml:space='preserve'><value>Установить размер морфологического эффекта</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Emboss' xml:space='preserve'><value>Сбросить эффект тиснения</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Emboss' xml:space='preserve'><value>Эффект тиснения переключателя</value></data>
+<data name='Historys_LayersProperty_SetEffect_Emboss_Radius' xml:space='preserve'><value>Установить радиус эффекта тиснения</value></data>
+<data name='Historys_LayersProperty_SetEffect_Emboss_Angle' xml:space='preserve'><value>Установить радианглеус эффекта тиснения</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Straighten' xml:space='preserve'><value>Сбросить эффект выпрямления</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Straighten' xml:space='preserve'><value>Эффект выпрямления переключателя</value></data>
+<data name='Historys_LayersProperty_SetEffect_Straighten_Angle' xml:space='preserve'><value>Установить эффект выпрямления под углом</value></data>
+<data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>Установить шрифт текста</value></data>
+<data name='Historys_LayersProperty_SetFontAlignment' xml:space='preserve'><value>Установить выравнивание шрифта</value></data>
+<data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>Установить стиль шрифта</value></data>
+<data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>Установить толщину шрифта</value></data>
+<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Установить семейство шрифтов</value></data>
+<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Установить размер шрифта</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>Установить черту стиля штриха</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeWidth' xml:space='preserve'><value>Установить ширину штриха</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Cap' xml:space='preserve'><value>Установить ограничение стиля штриха</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Join' xml:space='preserve'><value>Установить соединение стиля обводки</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Offset' xml:space='preserve'><value>Установить смещение стиля обводки</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsFollowTransform' xml:space='preserve'><value>Установить стиль после преобразования</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsStrokeBehindFill' xml:space='preserve'><value>Установить стиль обводки за заливкой</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>Установить стиль - Масштаб ширины обводки со слоем</value></data>
+<data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>Установить фильтр</value></data>
+<data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$SettingPage_Back' xml:space='preserve'><value>Назад</value></data>
+<data name='$MainPage_Title' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$MainPage_NewDialog_Close' xml:space='preserve'><value>Отмена</value></data>
+<data name='$MainPage_NewDialog_Primary' xml:space='preserve'><value>Ok</value></data>
+<data name='$MainPage_SizePicker_Width' xml:space='preserve'><value>Ширина</value></data>
+<data name='$MainPage_SizePicker_Height' xml:space='preserve'><value>Высота</value></data>
+<data name='$MainPage_Pictures_Close' xml:space='preserve'><value>Отмена</value></data>
+<data name='$MainPage_Rename' xml:space='preserve'><value>Переименовать</value></data>
+<data name='$MainPage_Rename_Title' xml:space='preserve'><value>Переименовать проект</value></data>
+<data name='$MainPage_Rename_Close' xml:space='preserve'><value>Отмена</value></data>
+<data name='$MainPage_RenameDialog_Title' xml:space='preserve'><value>Переименовать проект</value></data>
+<data name='$MainPage_RenameDialog_Close' xml:space='preserve'><value>Отмена</value></data>
+<data name='$MainPage_RenameDialog_Primary' xml:space='preserve'><value>Переименовать</value></data>
+<data name='$MainPage_RenameDialog_TextBox_PlaceholderText' xml:space='preserve'><value>Введите здесь имя.</value></data>
+<data name='$MainPage_Delete' xml:space='preserve'><value>Удалить</value></data>
+<data name='$MainPage_Delete_Close' xml:space='preserve'><value>Отмена</value></data>
+<data name='$MainPage_Delete_Primary' xml:space='preserve'><value>Удалить</value></data>
+<data name='$MainPage_Duplicate' xml:space='preserve'><value>Дубликат</value></data>
+<data name='$MainPage_Duplicate_Close' xml:space='preserve'><value>Отмена</value></data>
+<data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>Дубликат</value></data>
+<data name='$DrawPage_Export' xml:space='preserve'><value>Экспорт</value></data>
+<data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>Отмена</value></data>
+<data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>Ok</value></data>
+<data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>Ширина</value></data>
+<data name='$DrawPage_SetupDialog_SizePicker_Height' xml:space='preserve'><value>Высота</value></data>
+<data name='$DrawPage_ExportDialog_Close' xml:space='preserve'><value>Отмена</value></data>
+<data name='$DrawPage_ExportDialog_Primary' xml:space='preserve'><value>Экспорт</value></data>
+<data name='$DrawPage_ExportDialog_SizePicker_Width' xml:space='preserve'><value>Ширина</value></data>
+<data name='$DrawPage_ExportDialog_SizePicker_Height' xml:space='preserve'><value>Высота</value></data>
+<data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>Введите здесь имя.</value></data>
+<data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>Отмена</value></data>
+<data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>Переименовать</value></data>
+<data name='Tools_Fill' xml:space='preserve'><value>Наполнять</value></data>
+<data name='Tools_Stroke' xml:space='preserve'><value>Гладить</value></data>
+<data name='Tools_ConvertToCurves' xml:space='preserve'><value>Преобразовать в кривые</value></data>
+<data name='Tools_Brush' xml:space='preserve'><value>Щетка</value></data>
+<data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>Наполнять</value></data>
+<data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>Гладить</value></data>
+<data name='Tools_Brush_Type' xml:space='preserve'><value>Тип</value></data>
+<data name='Tools_Brush_Type_None' xml:space='preserve'><value>Никто</value></data>
+<data name='Tools_Brush_Type_Color' xml:space='preserve'><value>Цвет</value></data>
+<data name='Tools_Brush_Type_Image' xml:space='preserve'><value>Изображение</value></data>
+<data name='Tools_Brush_Brush' xml:space='preserve'><value>Щетка</value></data>
+<data name='Tools_Brush_Extend_Mirror' xml:space='preserve'><value>Зеркало</value></data>
+<data name='Tools_Brush_Stop_Remove' xml:space='preserve'><value>Удалять</value></data>
+<data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value>Копировать</value></data>
+<data name='Tools_GeometryRectangle' xml:space='preserve'><value>Прямоугольник</value></data>
+<data name='Tools_GeometryEllipse' xml:space='preserve'><value>Эллипс</value></data>
+<data name='Tools_Node_Remove' xml:space='preserve'><value>Удалять</value></data>
+<data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>Угол</value></data>
+<data name='Tools_TextArtistic' xml:space='preserve'><value>Художественный текст</value></data>
+<data name='Tools_TextFrame' xml:space='preserve'><value>Текст рамки</value></data>
+<data name='Tools_Image' xml:space='preserve'><value>Изображение</value></data>
+<data name='Tools_PatternGrid' xml:space='preserve'><value>Сетка</value></data>
+<data name='Tools_PatternGrid_Type' xml:space='preserve'><value>Тип</value></data>
+<data name='Tools_PatternGrid_Grid' xml:space='preserve'><value>Сетка</value></data>
+<data name='Tools_PatternGrid_HorizontalStep' xml:space='preserve'><value>Горизонтальный шаг</value></data>
+<data name='Tools_PatternGrid_VerticalStep' xml:space='preserve'><value>Вертикальный шаг</value></data>
+<data name='Tools_PatternDiagonal' xml:space='preserve'><value>Диагональ</value></data>
+<data name='Tools_PatternDiagonal_Offset' xml:space='preserve'><value>Компенсировать</value></data>
+<data name='Tools_PatternDiagonal_HorizontalStep' xml:space='preserve'><value>Горизонтальный шаг</value></data>
+<data name='Tools_PatternSpotted' xml:space='preserve'><value>Пятнистый</value></data>
+<data name='Tools_PatternSpotted_Radius' xml:space='preserve'><value>Радиус</value></data>
+<data name='Tools_GeometryRoundRect' xml:space='preserve'><value>RoundRect</value></data>
+<data name='Tools_GeometryTriangle' xml:space='preserve'><value>Треугольник</value></data>
+<data name='Tools_GeometryTriangle_Mirror' xml:space='preserve'><value>Зеркало</value></data>
+<data name='Tools_GeometryDiamond' xml:space='preserve'><value>Алмазный</value></data>
+<data name='Tools_GeometryDiamond_Mirror' xml:space='preserve'><value>Зеркало</value></data>
+<data name='Tools_GeometryPentagon' xml:space='preserve'><value>Пентагон</value></data>
+<data name='Tools_GeometryPentagon_Points' xml:space='preserve'><value>Точки</value></data>
+<data name='Tools_GeometryStar' xml:space='preserve'><value>Звезда</value></data>
+<data name='Tools_GeometryStar_Points' xml:space='preserve'><value>Точки</value></data>
+<data name='Tools_GeometryStar_InnerRadius' xml:space='preserve'><value>Внутренний радиус</value></data>
+<data name='Tools_GeometryCog' xml:space='preserve'><value>Cog</value></data>
+<data name='Tools_GeometryCog_InnerRadius' xml:space='preserve'><value>Внутренний радиус</value></data>
+<data name='Tools_GeometryDount' xml:space='preserve'><value>Dount</value></data>
+<data name='Tools_GeometryPie' xml:space='preserve'><value>Пирог</value></data>
+<data name='Tools_GeometryPie_SweepAngle' xml:space='preserve'><value>Угол развертки</value></data>
+<data name='Tools_GeometryCookie' xml:space='preserve'><value>Cookie-файлы</value></data>
+<data name='Tools_GeometryCookie_InnerRadius' xml:space='preserve'><value>Внутренний радиус</value></data>
+<data name='Tools_GeometryCookie_SweepAngle' xml:space='preserve'><value>Угол развертки</value></data>
+<data name='Tools_GeometryArrow' xml:space='preserve'><value>Стрелка</value></data>
+<data name='Tools_GeometryArrow_ArrowTail_None' xml:space='preserve'><value>Никто</value></data>
+<data name='Tools_GeometryCapsule' xml:space='preserve'><value>Капсула</value></data>
+<data name='Tools_GeometryHeart' xml:space='preserve'><value>Сердце</value></data>
+<data name='Layers_Group' xml:space='preserve'><value>Группа</value></data>
+<data name='Layers_GeometryRectangle' xml:space='preserve'><value>Прямоугольник</value></data>
+<data name='Layers_GeometryEllipse' xml:space='preserve'><value>Эллипс</value></data>
+<data name='Layers_TextArtistic' xml:space='preserve'><value>Художественный текст</value></data>
+<data name='Layers_TextFrame' xml:space='preserve'><value>Текст рамки</value></data>
+<data name='Layers_Image' xml:space='preserve'><value>Изображение</value></data>
+<data name='Layers_PatternGrid' xml:space='preserve'><value>Сетка</value></data>
+<data name='Layers_PatternDiagonal' xml:space='preserve'><value>Диагональ</value></data>
+<data name='Layers_PatternSpotted' xml:space='preserve'><value>Пятнистый</value></data>
+<data name='Layers_GeometryRoundRect' xml:space='preserve'><value>RoundRect</value></data>
+<data name='Layers_GeometryTriangle' xml:space='preserve'><value>Треугольник</value></data>
+<data name='Layers_GeometryDiamond' xml:space='preserve'><value>Алмазный</value></data>
+<data name='Layers_GeometryPentagon' xml:space='preserve'><value>Пентагон</value></data>
+<data name='Layers_GeometryStar' xml:space='preserve'><value>Звезда</value></data>
+<data name='Layers_GeometryCog' xml:space='preserve'><value>Cog</value></data>
+<data name='Layers_GeometryDount' xml:space='preserve'><value>Dount</value></data>
+<data name='Layers_GeometryPie' xml:space='preserve'><value>Пирог</value></data>
+<data name='Layers_GeometryCookie' xml:space='preserve'><value>Cookie-файлы</value></data>
+<data name='Layers_GeometryArrow' xml:space='preserve'><value>Стрелка</value></data>
+<data name='Layers_GeometryCapsule' xml:space='preserve'><value>Капсула</value></data>
+<data name='Layers_GeometryHeart' xml:space='preserve'><value>Сердце</value></data>
+<data name='Menus_Edit' xml:space='preserve'><value>Редактировать</value></data>
+<data name='Menus_Stroke' xml:space='preserve'><value>Гладить</value></data>
+<data name='Menus_Transformer' xml:space='preserve'><value>Трансформатор</value></data>
+<data name='Menus_Transformer_Width' xml:space='preserve'><value>Ширина</value></data>
+<data name='Menus_Transformer_Height' xml:space='preserve'><value>Высота</value></data>
+<data name='Menus_Color' xml:space='preserve'><value>Цвет</value></data>
+<data name='Menus_Layer_Opacity' xml:space='preserve'><value>Непрозрачность</value></data>
+<data name='Edits_Edit' xml:space='preserve'><value>Редактировать</value></data>
+<data name='Edits_Edit_Duplicate' xml:space='preserve'><value>Дубликат</value></data>
+<data name='Edits_Edit_Copy' xml:space='preserve'><value>Копировать</value></data>
+<data name='Edits_Group' xml:space='preserve'><value>Группа</value></data>
+<data name='Edits_Group_Group' xml:space='preserve'><value>Группа</value></data>
+<data name='Operates_Transform' xml:space='preserve'><value>Преобразовать</value></data>
+<data name='Operates_Horizontally_Left' xml:space='preserve'><value>Выровнять по левому краю</value></data>
+<data name='Operates_Horizontally_Center' xml:space='preserve'><value>Выровнять по центру</value></data>
+<data name='Operates_Horizontally_Right' xml:space='preserve'><value>Выровнять по правому краю</value></data>
+<data name='Adjustments_Exposure' xml:space='preserve'><value>Контакт</value></data>
+<data name='Adjustments_Exposure_Exposure' xml:space='preserve'><value>Контакт</value></data>
+<data name='Adjustments_Saturation' xml:space='preserve'><value>Насыщенность</value></data>
+<data name='Adjustments_Saturation_Saturation' xml:space='preserve'><value>Насыщенность</value></data>
+<data name='Adjustments_HueRotation_Angle' xml:space='preserve'><value>Угол</value></data>
+<data name='Adjustments_Contrast' xml:space='preserve'><value>Контраст</value></data>
+<data name='Adjustments_Contrast_Contrast' xml:space='preserve'><value>Контраст</value></data>
+<data name='Adjustments_Temperature' xml:space='preserve'><value>Температура</value></data>
+<data name='Adjustments_Temperature_Temperature' xml:space='preserve'><value>Температура</value></data>
+<data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>Количество</value></data>
+<data name='Adjustments_Vignette_Color' xml:space='preserve'><value>Цвет</value></data>
+<data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>Радиус</value></data>
+<data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>Радиус</value></data>
+<data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>Угол</value></data>
+<data name='Effects_Sharpen_Amount' xml:space='preserve'><value>Количество</value></data>
+<data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>Радиус</value></data>
+<data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>Непрозрачность</value></data>
+<data name='Effects_OuterShadow_Offset' xml:space='preserve'><value>Компенсировать</value></data>
+<data name='Effects_OuterShadow_Angle' xml:space='preserve'><value>Угол</value></data>
+<data name='Effects_OuterShadow_Color' xml:space='preserve'><value>Цвет</value></data>
+<data name='Effects_Edge_Amount' xml:space='preserve'><value>Количество</value></data>
+<data name='Effects_Edge_Radius' xml:space='preserve'><value>Радиус</value></data>
+<data name='Effects_Emboss_Radius' xml:space='preserve'><value>Радиус</value></data>
+<data name='Effects_Emboss_Angle' xml:space='preserve'><value>Угол</value></data>
+<data name='Effects_Straighten_Angle' xml:space='preserve'><value>Угол</value></data>
+<data name='Texts_FontAlignment_Left' xml:space='preserve'><value>Выровнять по левому краю</value></data>
+<data name='Texts_FontAlignment_Center' xml:space='preserve'><value>Выровнять по центру</value></data>
+<data name='Texts_FontAlignment_Right' xml:space='preserve'><value>Выровнять по правому краю</value></data>
+<data name='Strokes_Dash' xml:space='preserve'><value>Бросаться</value></data>
+<data name='Strokes_Dash_Dash' xml:space='preserve'><value>Бросаться</value></data>
+<data name='Strokes_Width' xml:space='preserve'><value>Ширина</value></data>
+<data name='Strokes_Cap_Triangle' xml:space='preserve'><value>Треугольник</value></data>
+<data name='Strokes_Offset' xml:space='preserve'><value>Компенсировать</value></data>
+<data name='Blends_Saturation' xml:space='preserve'><value>Насыщенность</value></data>
+<data name='Blends_Color' xml:space='preserve'><value>Цвет</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_ConvertToCurves' xml:space='preserve'><value>Преобразовать в кривые</value></data>
+
+ </root>

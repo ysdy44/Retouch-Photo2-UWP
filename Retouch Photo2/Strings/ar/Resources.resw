@@ -1,0 +1,668 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <xsd:schema id='root' xmlns='' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'>
+    <xsd:import namespace='http://www.w3.org/XML/1998/namespace' />
+    <xsd:element name='root' msdata:IsDataSet='true'>
+      <xsd:complexType>
+        <xsd:choice maxOccurs='unbounded'>
+          <xsd:element name='metadata'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' />
+              </xsd:sequence>
+              <xsd:attribute name='name' use='required' type='xsd:string' />
+              <xsd:attribute name='type' type='xsd:string' />
+              <xsd:attribute name='mimetype' type='xsd:string' />
+              <xsd:attribute ref='xml:space' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='assembly'>
+            <xsd:complexType>
+              <xsd:attribute name='alias' type='xsd:string' />
+              <xsd:attribute name='name' type='xsd:string' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='data'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' msdata:Ordinal='1' />
+                <xsd:element name='comment' type='xsd:string' minOccurs='0' msdata:Ordinal='2' />
+              </xsd:sequence>
+              <xsd:attribute name='name' type='xsd:string' use='required' msdata:Ordinal='1' />
+              <xsd:attribute name='type' type='xsd:string' msdata:Ordinal='3' />
+              <xsd:attribute name='mimetype' type='xsd:string' msdata:Ordinal='4' />
+              <xsd:attribute ref='xml:space' />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name='resheader'>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name='value' type='xsd:string' minOccurs='0' msdata:Ordinal='1' />
+              </xsd:sequence>
+              <xsd:attribute name='name' type='xsd:string' use='required' />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name='resmimetype'>
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name='version'>
+    <value>2.0</value>
+  </resheader>
+  <resheader name='reader'>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name='writer'>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+<data name='$Loading_Loading' xml:space='preserve'><value>جار التحميل</value></data>
+<data name='$Loading_LoadFailed' xml:space='preserve'><value>فشل في التحميل</value></data>
+<data name='$Loading_FileCorrupt' xml:space='preserve'><value>الملف تالف</value></data>
+<data name='$Loading_FileNull' xml:space='preserve'><value>الملف فارغ</value></data>
+<data name='$Loading_Saving' xml:space='preserve'><value>إنقاذ</value></data>
+<data name='$Loading_SaveSuccess' xml:space='preserve'><value>حفظ بنجاح</value></data>
+<data name='$Loading_SaveFailed' xml:space='preserve'><value>فشل الحفظ</value></data>
+<data name='$Untitled' xml:space='preserve'><value>بدون عنوان</value></data>
+<data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
+<data name='$SettingPage_Title' xml:space='preserve'><value>ضبط</value></data>
+<data name='$SettingPage_About' xml:space='preserve'><value>حول...</value></data>
+<data name='$SettingPage_Theme' xml:space='preserve'><value>سمة</value></data>
+<data name='$SettingPage_Theme_Light' xml:space='preserve'><value>خفيفة</value></data>
+<data name='$SettingPage_Theme_Dark' xml:space='preserve'><value>داكن</value></data>
+<data name='$SettingPage_Theme_UseSystem' xml:space='preserve'><value>استخدم النظام</value></data>
+<data name='$SettingPage_DeviceLayout' xml:space='preserve'><value>تخطيط الجهاز</value></data>
+<data name='$SettingPage_DeviceLayout_Phone' xml:space='preserve'><value>هاتف</value></data>
+<data name='$SettingPage_DeviceLayout_Pad' xml:space='preserve'><value>ضمادة</value></data>
+<data name='$SettingPage_DeviceLayout_PC' xml:space='preserve'><value>جهاز كمبيوتر</value></data>
+<data name='$SettingPage_DeviceLayout_Adaptive' xml:space='preserve'><value>التكيف</value></data>
+<data name='$SettingPage_DeviceLayout_AdaptiveWidth' xml:space='preserve'><value>العرض التكيفي</value></data>
+<data name='$SettingPage_DeviceLayout_ResetAdaptiveWidth' xml:space='preserve'><value>إعادة تعيين العرض التكيفي</value></data>
+<data name='$SettingPage_LayersHeight' xml:space='preserve'><value>ارتفاع الطبقات</value></data>
+<data name='$SettingPage_LayersHeightTip' xml:space='preserve'><value>انقر لتغيير ارتفاع عنصر تحكم الطبقة</value></data>
+<data name='$SettingPage_MenuType' xml:space='preserve'><value>نوع القائمة</value></data>
+<data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>قم بإلغاء التحديد لإخفاء زر القائمة</value></data>
+<data name='$SettingPage_Key' xml:space='preserve'><value>الاختصارات</value></data>
+<data name='$SettingPage_Key_Rotate' xml:space='preserve'><value>حرك عجلة التمرير لتدوير اللوحة القماشية</value></data>
+<data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>انقل اللوحة إلى اليسار</value></data>
+<data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>قماش يتحرك لأعلى</value></data>
+<data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>انقل اللوحة إلى اليمين</value></data>
+<data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>قماش يتحرك لأسفل</value></data>
+<data name='$SettingPage_LocalFolder' xml:space='preserve'><value>مجلد محلي</value></data>
+<data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>فتح</value></data>
+<data name='$MainPage_DocumentationTip' xml:space='preserve'><value>افتح صفحة ويب المستند</value></data>
+<data name='$MainPage_SettingTip' xml:space='preserve'><value>افتح صفحة الإعدادات</value></data>
+<data name='$MainPage_Select_ClickTip' xml:space='preserve'><value>انقر لتحديد العناصر:</value></data>
+<data name='$MainPage_Select_All' xml:space='preserve'><value>اختر الكل</value></data>
+<data name='$MainPage_InitialTip' xml:space='preserve'><value>لا يوجد مشروع؟ أنت تستطيع...</value></data>
+<data name='$MainPage_Initial_Sample' xml:space='preserve'><value>افتح نماذج المشاريع</value></data>
+<data name='$MainPage_Initial_New' xml:space='preserve'><value>أنشئ مشروعًا جديدًا</value></data>
+<data name='$MainPage_Initial_Photo' xml:space='preserve'><value>قم بإنشاء مشروع جديد من المعرض</value></data>
+<data name='$MainPage_Initial_Destop' xml:space='preserve'><value>قم بإنشاء مشروع جديد من سطح المكتب</value></data>
+<data name='$MainPage_New' xml:space='preserve'><value>جديد</value></data>
+<data name='$MainPage_NewDialog_Title' xml:space='preserve'><value>اضافة مشروع جديد</value></data>
+<data name='$MainPage_Pictures' xml:space='preserve'><value>الصور</value></data>
+<data name='$MainPage_Pictures_Photo' xml:space='preserve'><value>صورة</value></data>
+<data name='$MainPage_Pictures_Destop' xml:space='preserve'><value>ديستوب</value></data>
+<data name='$MainPage_Rename_Subtitle' xml:space='preserve'><value>حدد المشروع الذي تريد إعادة تسميته.</value></data>
+<data name='$MainPage_RenameDialog_TextBoxTip' xml:space='preserve'><value>الاسم مشغول بالفعل!</value></data>
+<data name='$MainPage_Delete_Title' xml:space='preserve'><value>حذف المشاريع</value></data>
+<data name='$MainPage_Delete_Subtitle' xml:space='preserve'><value>حدد المشروع (المشاريع) الذي تريد حذفه.</value></data>
+<data name='$MainPage_Duplicate_Title' xml:space='preserve'><value>مشروع (مشاريع) مكرر</value></data>
+<data name='$MainPage_Duplicate_Subtitle' xml:space='preserve'><value>حدد المشروع (المشاريع) الذي تريد تكراره.</value></data>
+<data name='$DrawPage_Document' xml:space='preserve'><value>توثيق</value></data>
+<data name='$DrawPage_DocumentUnSave' xml:space='preserve'><value>لا تحفظ والعودة</value></data>
+<data name='$DrawPage_Undo' xml:space='preserve'><value>الغاء التحميل</value></data>
+<data name='$DrawPage_Redo' xml:space='preserve'><value>إعادة</value></data>
+<data name='$DrawPage_Setup' xml:space='preserve'><value>يثبت</value></data>
+<data name='$DrawPage_Snap' xml:space='preserve'><value>العض</value></data>
+<data name='$DrawPage_Ruler' xml:space='preserve'><value>مسطرة</value></data>
+<data name='$DrawPage_FullScreen' xml:space='preserve'><value>تكبير الشاشة</value></data>
+<data name='$DrawPage_Tip' xml:space='preserve'><value>تلميح</value></data>
+<data name='$DrawPage_Gallery' xml:space='preserve'><value>صالة عرض</value></data>
+<data name='$DrawPage_WidthTip' xml:space='preserve'><value>عرض تخطيط التبديل</value></data>
+<data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>إعدادات المستند</value></data>
+<data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>مثبت على قماش</value></data>
+<data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>تصدير الى...</value></data>
+<data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>جودة</value></data>
+<data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>تنسيق الملف</value></data>
+<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>إعادة تسمية الطبقة (الطبقات)</value></data>
+<data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>إضافة الصور)</value></data>
+<data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>التكبير النسبي</value></data>
+<data name='Tools_MoreTransform_Center' xml:space='preserve'><value>تكبير المركز</value></data>
+<data name='Tools_MoreCreate_Square' xml:space='preserve'><value>العرض والارتفاع متساويان</value></data>
+<data name='Tools_MoreCreate_Center' xml:space='preserve'><value>تكبير المركز</value></data>
+<data name='Tools_Cursor' xml:space='preserve'><value>المؤشر</value></data>
+<data name='Tools_Cursor_CompositeMode_New' xml:space='preserve'><value>جديد</value></data>
+<data name='Tools_Cursor_CompositeMode_Add' xml:space='preserve'><value>يضيف</value></data>
+<data name='Tools_Cursor_CompositeMode_Subtract' xml:space='preserve'><value>طرح او خصم</value></data>
+<data name='Tools_View' xml:space='preserve'><value>رأي</value></data>
+<data name='Tools_View_Radian' xml:space='preserve'><value>راديان</value></data>
+<data name='Tools_View_RadianClear' xml:space='preserve'><value>أعد تعيين راديان الدوران</value></data>
+<data name='Tools_View_Scale' xml:space='preserve'><value>مقياس</value></data>
+<data name='Tools_View_ScaleClear' xml:space='preserve'><value>إعادة ضبط المقياس</value></data>
+<data name='Tools_Brush_FillOrStroke' xml:space='preserve'><value>التعبئة أو السكتة الدماغية</value></data>
+<data name='Tools_Brush_Type_LinearGradient' xml:space='preserve'><value>خطي</value></data>
+<data name='Tools_Brush_Type_RadialGradient' xml:space='preserve'><value>شعاعي</value></data>
+<data name='Tools_Brush_Type_EllipticalGradient' xml:space='preserve'><value>بيضاوي الشكل</value></data>
+<data name='Tools_Brush_Extend' xml:space='preserve'><value>تمديد</value></data>
+<data name='Tools_Brush_Extend_Clamp' xml:space='preserve'><value>المشبك</value></data>
+<data name='Tools_Brush_Extend_Wrap' xml:space='preserve'><value>لف</value></data>
+<data name='Tools_Brush_Stop_Offset' xml:space='preserve'><value>عوض</value></data>
+<data name='Tools_Brush_Stop_Alpha' xml:space='preserve'><value>ألفا</value></data>
+<data name='Tools_Brush_Stop_Reverse' xml:space='preserve'><value>يعكس</value></data>
+<data name='Tools_Transparency' xml:space='preserve'><value>الشفافية</value></data>
+<data name='Tools_Pen' xml:space='preserve'><value>قلم جاف</value></data>
+<data name='Tools_Node' xml:space='preserve'><value>العقدة</value></data>
+<data name='Tools_Node_Insert' xml:space='preserve'><value>إدراج</value></data>
+<data name='Tools_Node_Sharp' xml:space='preserve'><value>حاد</value></data>
+<data name='Tools_Node_Smooth' xml:space='preserve'><value>سلس</value></data>
+<data name='Tools_Node_NodeMode_Restriction' xml:space='preserve'><value>قيود نقطة التحكم</value></data>
+<data name='Tools_Node_NodeMode_Restriction_Length' xml:space='preserve'><value>طول</value></data>
+<data name='Tools_Node_NodeMode_Mode' xml:space='preserve'><value>وضع نقطة التحكم</value></data>
+<data name='Tools_Node_NodeMode_Mode_Mirrored' xml:space='preserve'><value>معكوسة</value></data>
+<data name='Tools_Node_NodeMode_Mode_Disconnected' xml:space='preserve'><value>انقطع الاتصال</value></data>
+<data name='Tools_Node_NodeMode_Mode_Asymmetric' xml:space='preserve'><value>غير متماثل</value></data>
+<data name='Tools_Text_PlaceholderText' xml:space='preserve'><value>أدخل نصآ...</value></data>
+<data name='Tools_Image_Select' xml:space='preserve'><value>يختار</value></data>
+<data name='Tools_Image_Replace' xml:space='preserve'><value>يحل محل</value></data>
+<data name='Tools_Image_Clear' xml:space='preserve'><value>واضح</value></data>
+<data name='Tools_Crop' xml:space='preserve'><value>محصول ناقل</value></data>
+<data name='Tools_Crop_Reset' xml:space='preserve'><value>إعادة تعيين المحاصيل</value></data>
+<data name='Tools_Crop_Fit' xml:space='preserve'><value>تناسب المحاصيل</value></data>
+<data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>خطوة</value></data>
+<data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>ركن</value></data>
+<data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>نقطة المركز</value></data>
+<data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>ميد بوينت</value></data>
+<data name='Tools_GeometryCog_Count' xml:space='preserve'><value>عدد</value></data>
+<data name='Tools_GeometryCog_Tooth' xml:space='preserve'><value>سن</value></data>
+<data name='Tools_GeometryCog_Notch' xml:space='preserve'><value>الشق</value></data>
+<data name='Tools_GeometryDount_HoleRadius' xml:space='preserve'><value>نصف قطر الحفرة</value></data>
+<data name='Tools_GeometryArrow_LeftTail' xml:space='preserve'><value>الذيل الأيسر</value></data>
+<data name='Tools_GeometryArrow_RightTail' xml:space='preserve'><value>الذيل الأيمن</value></data>
+<data name='Tools_GeometryArrow_Value' xml:space='preserve'><value>عرض</value></data>
+<data name='Tools_GeometryHeart_Spread' xml:space='preserve'><value>الانتشار</value></data>
+<data name='Layers_Curve' xml:space='preserve'><value>منحنى</value></data>
+<data name='Layers_CurveMulti' xml:space='preserve'><value>متعدد منحنى</value></data>
+<data name='Menus_Keyboard' xml:space='preserve'><value>لوحة المفاتيح</value></data>
+<data name='Menus_Operate' xml:space='preserve'><value>العمل</value></data>
+<data name='Menus_Adjustment' xml:space='preserve'><value>التعديلات</value></data>
+<data name='Menus_Adjustment_Add' xml:space='preserve'><value>اضف إليه</value></data>
+<data name='Menus_Adjustment_Filters' xml:space='preserve'><value>منقي</value></data>
+<data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>لا تعديل</value></data>
+<data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>الرجاء تحديد طبقة</value></data>
+<data name='Menus_Effect' xml:space='preserve'><value>طبقة FX</value></data>
+<data name='Menus_Text' xml:space='preserve'><value>نص</value></data>
+<data name='Menus_Style' xml:space='preserve'><value>الأنماط</value></data>
+<data name='Menus_History' xml:space='preserve'><value>تاريخ</value></data>
+<data name='Menus_Transformer_Rotate' xml:space='preserve'><value>استدارة</value></data>
+<data name='Menus_Transformer_Skew' xml:space='preserve'><value>انحراف</value></data>
+<data name='Menus_Transformer_X' xml:space='preserve'><value>المحور السيني</value></data>
+<data name='Menus_Transformer_Y' xml:space='preserve'><value>المحور ص</value></data>
+<data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>التكبير النسبي</value></data>
+<data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>تردد الخطوة</value></data>
+<data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>التحكم عن بعد في الموقف</value></data>
+<data name='Menus_Transformer_Anchor' xml:space='preserve'><value>مرساة</value></data>
+<data name='Menus_Color_Swatches' xml:space='preserve'><value>حوامل</value></data>
+<data name='Menus_Color_Wheel' xml:space='preserve'><value>عجلة</value></data>
+<data name='Menus_Color_RGB' xml:space='preserve'><value>RGB</value></data>
+<data name='Menus_Color_HSV' xml:space='preserve'><value>HSV</value></data>
+<data name='Menus_Color_PaletteHue' xml:space='preserve'><value>لوحة هيو</value></data>
+<data name='Menus_Color_PaletteSaturation' xml:space='preserve'><value>تشبع لوح الألوان</value></data>
+<data name='Menus_Color_PaletteValue' xml:space='preserve'><value>قيمة لوحة</value></data>
+<data name='Menus_Color_Circle' xml:space='preserve'><value>دائرة</value></data>
+<data name='Menus_Layer' xml:space='preserve'><value>طبقة</value></data>
+<data name='Menus_Layer_Name' xml:space='preserve'><value>اسم</value></data>
+<data name='Menus_Layer_BlendMode' xml:space='preserve'><value>وضع المزج</value></data>
+<data name='Menus_Layer_Visibility' xml:space='preserve'><value>الرؤية</value></data>
+<data name='Menus_Layer_TagType' xml:space='preserve'><value>نوع العلامة</value></data>
+<data name='Edits_Edit_Cut' xml:space='preserve'><value>يقطع</value></data>
+<data name='Edits_Edit_Paste' xml:space='preserve'><value>معجون</value></data>
+<data name='Edits_Edit_Clear' xml:space='preserve'><value>واضح</value></data>
+<data name='Edits_Select' xml:space='preserve'><value>يختار</value></data>
+<data name='Edits_Select_All' xml:space='preserve'><value>اختر الكل</value></data>
+<data name='Edits_Select_Deselect' xml:space='preserve'><value>إلغاء</value></data>
+<data name='Edits_Select_Invert' xml:space='preserve'><value>عكس</value></data>
+<data name='Edits_Group_Ungroup' xml:space='preserve'><value>فك التجميع</value></data>
+<data name='Edits_Group_Release' xml:space='preserve'><value>إطلاق سراح</value></data>
+<data name='Edits_Combine_Xor' xml:space='preserve'><value>Xor</value></data>
+<data name='Edits_Combine' xml:space='preserve'><value>يجمع</value></data>
+<data name='Edits_Combine_Union' xml:space='preserve'><value>اتحاد</value></data>
+<data name='Edits_Combine_Exclude' xml:space='preserve'><value>استبعاد</value></data>
+<data name='Edits_Combine_Intersect' xml:space='preserve'><value>تتقاطع</value></data>
+<data name='Edits_Combine_ExpandStroke' xml:space='preserve'><value>توسيع السكتة الدماغية</value></data>
+<data name='Operates_Transform_FlipHorizontal' xml:space='preserve'><value>انعكاس أفقي</value></data>
+<data name='Operates_Transform_FlipVertical' xml:space='preserve'><value>انعكاس عمودي</value></data>
+<data name='Operates_Transform_RotateLeft' xml:space='preserve'><value>استدر يسارا</value></data>
+<data name='Operates_Transform_RotateRight' xml:space='preserve'><value>استدارة لليمين</value></data>
+<data name='Operates_Arrange' xml:space='preserve'><value>يرتب</value></data>
+<data name='Operates_Arrange_MoveFront' xml:space='preserve'><value>تحرك إلى الأمام</value></data>
+<data name='Operates_Arrange_BackOne' xml:space='preserve'><value>العودة واحد</value></data>
+<data name='Operates_Arrange_ForwardOne' xml:space='preserve'><value>إلى الأمام واحد</value></data>
+<data name='Operates_Arrange_MoveBack' xml:space='preserve'><value>الانتقال إلى الخلف</value></data>
+<data name='Operates_Horizontally' xml:space='preserve'><value>محاذاة أفقيًا</value></data>
+<data name='Operates_Horizontally_Space' xml:space='preserve'><value>الفضاء أفقيًا</value></data>
+<data name='Operates_Vertically' xml:space='preserve'><value>محاذاة رأسية</value></data>
+<data name='Operates_Vertically_Top' xml:space='preserve'><value>محاذاة للأعلى</value></data>
+<data name='Operates_Vertically_Middle' xml:space='preserve'><value>محاذاة الأوسط</value></data>
+<data name='Operates_Vertically_Bottom' xml:space='preserve'><value>محاذاة لأسفل</value></data>
+<data name='Operates_Vertically_Space' xml:space='preserve'><value>مسافة عمودي</value></data>
+<data name='Adjustments_Gray' xml:space='preserve'><value>رمادي</value></data>
+<data name='Adjustments_Invert' xml:space='preserve'><value>عكس</value></data>
+<data name='Adjustments_Brightness' xml:space='preserve'><value>سطوع</value></data>
+<data name='Adjustments_Brightness_WhiteToLight' xml:space='preserve'><value>الأبيض للضوء</value></data>
+<data name='Adjustments_Brightness_WhiteToDark' xml:space='preserve'><value>أبيض إلى غامق</value></data>
+<data name='Adjustments_Brightness_BlackToLight' xml:space='preserve'><value>أسود للضوء</value></data>
+<data name='Adjustments_Brightness_BlackToDark' xml:space='preserve'><value>أسود إلى غامق</value></data>
+<data name='Adjustments_HueRotation' xml:space='preserve'><value>دوران هوى</value></data>
+<data name='Adjustments_Temperature_Tint' xml:space='preserve'><value>لون</value></data>
+<data name='Adjustments_HighlightsAndShadows' xml:space='preserve'><value>تسليط الضوء والظل</value></data>
+<data name='Adjustments_HighlightsAndShadows_Shadows' xml:space='preserve'><value>الظلال</value></data>
+<data name='Adjustments_HighlightsAndShadows_Highlights' xml:space='preserve'><value>يسلط الضوء</value></data>
+<data name='Adjustments_HighlightsAndShadows_Clarity' xml:space='preserve'><value>وضوح</value></data>
+<data name='Adjustments_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>كمية طمس القناع</value></data>
+<data name='Adjustments_GammaTransfer' xml:space='preserve'><value>نقل جاما</value></data>
+<data name='Adjustments_GammaTransfer_Offset' xml:space='preserve'><value>عوض</value></data>
+<data name='Adjustments_GammaTransfer_Exponent' xml:space='preserve'><value>الأس</value></data>
+<data name='Adjustments_GammaTransfer_Amplitude' xml:space='preserve'><value>السعة</value></data>
+<data name='Adjustments_GammaTransfer_Alpha' xml:space='preserve'><value>ألفا</value></data>
+<data name='Adjustments_GammaTransfer_Red' xml:space='preserve'><value>أحمر</value></data>
+<data name='Adjustments_GammaTransfer_Green' xml:space='preserve'><value>لون أخضر</value></data>
+<data name='Adjustments_GammaTransfer_Blue' xml:space='preserve'><value>أزرق</value></data>
+<data name='Adjustments_Vignette' xml:space='preserve'><value>المقالة القصيرة</value></data>
+<data name='Adjustments_Vignette_Curve' xml:space='preserve'><value>منحنى</value></data>
+<data name='Effects_GaussianBlur' xml:space='preserve'><value>التمويه الضبابي</value></data>
+<data name='Effects_DirectionalBlur' xml:space='preserve'><value>طمس الاتجاه</value></data>
+<data name='Effects_Sharpen' xml:space='preserve'><value>شحذ</value></data>
+<data name='Effects_OuterShadow' xml:space='preserve'><value>الظل الخارجي</value></data>
+<data name='Effects_Edge' xml:space='preserve'><value>حافة</value></data>
+<data name='Effects_Morphology' xml:space='preserve'><value>علم التشكل المورفولوجيا</value></data>
+<data name='Effects_Morphology_Size' xml:space='preserve'><value>مقاس</value></data>
+<data name='Effects_Emboss' xml:space='preserve'><value>زخرف</value></data>
+<data name='Effects_Straighten' xml:space='preserve'><value>تسوية</value></data>
+<data name='Texts_FontAlignment' xml:space='preserve'><value>محاذاة</value></data>
+<data name='Texts_FontAlignment_Justified' xml:space='preserve'><value>مبرر</value></data>
+<data name='Texts_FontStyle' xml:space='preserve'><value>نوع الخط</value></data>
+<data name='Texts_FontStyle_Bold' xml:space='preserve'><value>بالخط العريض</value></data>
+<data name='Texts_FontStyle_Italic' xml:space='preserve'><value>مائل</value></data>
+<data name='Texts_FontStyle_UnderLine' xml:space='preserve'><value>خط سفلي</value></data>
+<data name='Texts_FontWeight' xml:space='preserve'><value>وزن الخط</value></data>
+<data name='Texts_FontWeight_Black' xml:space='preserve'><value>أسود</value></data>
+<data name='Texts_FontWeight_Bold' xml:space='preserve'><value>بالخط العريض</value></data>
+<data name='Texts_FontWeight_ExtraBlack' xml:space='preserve'><value>ExtraBlack</value></data>
+<data name='Texts_FontWeight_ExtraBold' xml:space='preserve'><value>ExtraBold</value></data>
+<data name='Texts_FontWeight_ExtraLight' xml:space='preserve'><value>المزيد من الإضاءة</value></data>
+<data name='Texts_FontWeight_Light' xml:space='preserve'><value>خفيفة</value></data>
+<data name='Texts_FontWeight_Medium' xml:space='preserve'><value>واسطة</value></data>
+<data name='Texts_FontWeight_Normal' xml:space='preserve'><value>طبيعي</value></data>
+<data name='Texts_FontWeight_SemiBold' xml:space='preserve'><value>شبه بولد</value></data>
+<data name='Texts_FontWeight_SemiLight' xml:space='preserve'><value>سيمي لايت</value></data>
+<data name='Texts_FontWeight_Thin' xml:space='preserve'><value>نحيف</value></data>
+<data name='Texts_FontFamily' xml:space='preserve'><value>خط العائلة</value></data>
+<data name='Texts_FontSize' xml:space='preserve'><value>حجم الخط</value></data>
+<data name='Strokes_Dash_Solid' xml:space='preserve'><value>صلب</value></data>
+<data name='Strokes_Dash_Dot' xml:space='preserve'><value>نقطة</value></data>
+<data name='Strokes_Dash_DashDot' xml:space='preserve'><value>داش دوت</value></data>
+<data name='Strokes_Cap' xml:space='preserve'><value>قبعة</value></data>
+<data name='Strokes_Cap_Flat' xml:space='preserve'><value>عريضة</value></data>
+<data name='Strokes_Cap_Square' xml:space='preserve'><value>مربع</value></data>
+<data name='Strokes_Cap_Round' xml:space='preserve'><value>مستدير</value></data>
+<data name='Strokes_Join' xml:space='preserve'><value>ينضم</value></data>
+<data name='Strokes_Join_Miter' xml:space='preserve'><value>ميتري</value></data>
+<data name='Strokes_Join_Bevel' xml:space='preserve'><value>شطبة</value></data>
+<data name='Strokes_Join_Round' xml:space='preserve'><value>مستدير</value></data>
+<data name='Strokes_Join_MiterOrBevel' xml:space='preserve'><value>ميتري أو شطبة</value></data>
+<data name='Strokes_IsFollowTransform' xml:space='preserve'><value>تحويل النمط مع الطبقة</value></data>
+<data name='Strokes_IsStrokeBehindFill' xml:space='preserve'><value>ضربة خلف Fill</value></data>
+<data name='Strokes_IsStrokeWidthFollowScale' xml:space='preserve'><value>مقياس عرض السكتة الدماغية مع طبقة</value></data>
+<data name='Blends_None' xml:space='preserve'><value>طبيعي</value></data>
+<data name='Blends_Multiply' xml:space='preserve'><value>تتضاعف</value></data>
+<data name='Blends_Screen' xml:space='preserve'><value>شاشة</value></data>
+<data name='Blends_Darken' xml:space='preserve'><value>أغمق</value></data>
+<data name='Blends_Lighten' xml:space='preserve'><value>تفتيح</value></data>
+<data name='Blends_Dissolve' xml:space='preserve'><value>تذوب</value></data>
+<data name='Blends_ColorBurn' xml:space='preserve'><value>احتراق الالوان</value></data>
+<data name='Blends_LinearBurn' xml:space='preserve'><value>حرق الخطي</value></data>
+<data name='Blends_DarkerColor' xml:space='preserve'><value>لون أغمق</value></data>
+<data name='Blends_LighterColor' xml:space='preserve'><value>لون أفتح</value></data>
+<data name='Blends_ColorDodge' xml:space='preserve'><value>انقاص كثافة اللون</value></data>
+<data name='Blends_LinearDodge' xml:space='preserve'><value>دودج الخطي</value></data>
+<data name='Blends_Overlay' xml:space='preserve'><value>تراكب</value></data>
+<data name='Blends_SoftLight' xml:space='preserve'><value>ضوء خافت</value></data>
+<data name='Blends_HardLight' xml:space='preserve'><value>ضوء الثابت</value></data>
+<data name='Blends_VividLight' xml:space='preserve'><value>فيفيدلايت</value></data>
+<data name='Blends_LinearLight' xml:space='preserve'><value>ضوء خطي</value></data>
+<data name='Blends_PinLight' xml:space='preserve'><value>خفة الدبوس</value></data>
+<data name='Blends_HardMix' xml:space='preserve'><value>مزيج صلب</value></data>
+<data name='Blends_Difference' xml:space='preserve'><value>اختلاف</value></data>
+<data name='Blends_Exclusion' xml:space='preserve'><value>استبعاد</value></data>
+<data name='Blends_Hue' xml:space='preserve'><value>مسحة</value></data>
+<data name='Blends_Luminosity' xml:space='preserve'><value>لمعان</value></data>
+<data name='Blends_Subtract' xml:space='preserve'><value>طرح او خصم</value></data>
+<data name='Blends_Division' xml:space='preserve'><value>قسم</value></data>
+<data name='Historys_LayersSetupTransformAdd_Move' xml:space='preserve'><value>تعيين حجم اللوحة القماشية</value></data>
+<data name='Historys_LayersSetupTransformMultiplies_Transform' xml:space='preserve'><value>تعيين حجم اللوحة القماشية</value></data>
+<data name='Historys_LayeragesArrange_LayersArrange' xml:space='preserve'><value>طبقات ترتيب</value></data>
+<data name='Historys_LayeragesArrange_RemoveLayers' xml:space='preserve'><value>قم بإزالة الطبقات</value></data>
+<data name='Historys_LayeragesArrange_AddLayer' xml:space='preserve'><value>أضف طبقة</value></data>
+<data name='Historys_LayersTransformAdd_Move' xml:space='preserve'><value>يتحرك</value></data>
+<data name='Historys_LayersTransformMultiplies_Transform' xml:space='preserve'><value>تحول</value></data>
+<data name='Historys_LayersProperty_SetTransform_IsCrop' xml:space='preserve'><value>حدد ما إذا كان التحويل سيتم اقتصاصه أم لا</value></data>
+<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>تعيين اقتصاص التحويل</value></data>
+<data name='Historys_LayersProperty_SetStyle' xml:space='preserve'><value>اضبط النمط</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill' xml:space='preserve'><value>تعيين التعبئة</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill_Extend' xml:space='preserve'><value>تعيين تمديد التعبئة</value></data>
+<data name='Historys_LayersProperty_SetStyle_Fill_Type' xml:space='preserve'><value>تعيين نوع التعبئة</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke' xml:space='preserve'><value>ضبط السكتة الدماغية</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke_Extend' xml:space='preserve'><value>تعيين تمديد السكتة الدماغية</value></data>
+<data name='Historys_LayersProperty_SetStyle_Stroke_Type' xml:space='preserve'><value>تعيين نوع السكتة الدماغية</value></data>
+<data name='Historys_LayersProperty_SetStyle_Transparency' xml:space='preserve'><value>اضبط الشفافية</value></data>
+<data name='Historys_LayersProperty_SetStyle_Transparency_Type' xml:space='preserve'><value>تعيين نوع الشفافية</value></data>
+<data name='Historys_LayersProperty_Set_MoveNodes' xml:space='preserve'><value>نقل العقد</value></data>
+<data name='Historys_LayersProperty_Set_MoveNode_ControlPoint' xml:space='preserve'><value>نقل نقطة التحكم في العقدة</value></data>
+<data name='Historys_LayersProperty_Set_MoveNode_IsChecked' xml:space='preserve'><value>حدد ما إذا كانت العقدة محددة أم لا</value></data>
+<data name='Historys_LayersProperty_Set_AddNode' xml:space='preserve'><value>أضف العقدة</value></data>
+<data name='Historys_LayersProperty_Set_RemoveNodes' xml:space='preserve'><value>قم بإزالة العقد</value></data>
+<data name='Historys_LayersProperty_Set_InsertNodes' xml:space='preserve'><value>أدخل العقد</value></data>
+<data name='Historys_LayersProperty_Set_SharpNodes' xml:space='preserve'><value>عقد حادة</value></data>
+<data name='Historys_LayersProperty_Set_SmoothNodes' xml:space='preserve'><value>عقد ناعمة</value></data>
+<data name='Historys_LayersProperty_SetPhotocopier' xml:space='preserve'><value>تعيين الصورة</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_GridType' xml:space='preserve'><value>اضبط نوع طبقة الشبكة</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_HorizontalStep' xml:space='preserve'><value>اضبط الخطوة الأفقية لطبقة الشبكة</value></data>
+<data name='Historys_LayersProperty_Set_PatternGridLayer_VerticalStep' xml:space='preserve'><value>تعيين الخطوة العمودية لطبقة الشبكة</value></data>
+<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_Offset' xml:space='preserve'><value>اضبط إزاحة الطبقة القطرية</value></data>
+<data name='Historys_LayersProperty_Set_PatternDiagonalLayer_HorizontalStep' xml:space='preserve'><value>اضبط الخطوة الأفقية للطبقة القطرية</value></data>
+<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Radius' xml:space='preserve'><value>اضبط نصف قطر الطبقة المرقطة</value></data>
+<data name='Historys_LayersProperty_Set_PatternSpottedLayer_Step' xml:space='preserve'><value>خطوات لضبط الطبقة المرقطة</value></data>
+<data name='Historys_LayersProperty_Set_GeometryRoundRectLayer_Corner' xml:space='preserve'><value>تعيين زوايا مستطيلة مستديرة الزوايا</value></data>
+<data name='Historys_LayersProperty_Set_GeometryTriangleLayer_Center' xml:space='preserve'><value>اضبط مركز طبقة المثلث</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_Mid' xml:space='preserve'><value>اضبط النقطة الوسطى للطبقة الماسية</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDiamondLayer_HoleRadius' xml:space='preserve'><value>تعيين نصف قطر ثقب طبقة الماس</value></data>
+<data name='Historys_LayersProperty_Set_GeometryPentagonLayer_Points' xml:space='preserve'><value>اضبط نقاط نقاط الطبقة الخماسية</value></data>
+<data name='Historys_LayersProperty_Set_GeometryStarLayer_Points' xml:space='preserve'><value>عيّن نقاط نقاط طبقة النجوم</value></data>
+<data name='Historys_LayersProperty_Set_GeometryStarLayer_InnerRadius' xml:space='preserve'><value>اضبط نصف القطر الداخلي لطبقة النجمة</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Count' xml:space='preserve'><value>اضبط نقاط الطبقات المسننة</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_InnerRadius' xml:space='preserve'><value>اضبط نصف القطر الداخلي لطبقة الترس</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Tooth' xml:space='preserve'><value>اضبط سن طبقة الترس</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCogLayer_Notch' xml:space='preserve'><value>اضبط الشق في طبقة التروس</value></data>
+<data name='Historys_LayersProperty_Set_GeometryDountLayer_HoleRadius' xml:space='preserve'><value>اضبط نصف قطر فتحة طبقة الدونات</value></data>
+<data name='Historys_LayersProperty_Set_GeometryPieLayer_SweepAngle' xml:space='preserve'><value>اضبط زاوية المسح لطبقة الفطيرة</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCookieLayer_InnerRadius' xml:space='preserve'><value>اضبط نصف قطر طبقة ملفات تعريف الارتباط</value></data>
+<data name='Historys_LayersProperty_Set_GeometryCookieLayer_SweepAngle' xml:space='preserve'><value>اضبط زاوية المسح لطبقة ملفات تعريف الارتباط</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_LeftTail' xml:space='preserve'><value>تعيين الذيل الأيسر لطبقة السهم</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_RightTail' xml:space='preserve'><value>اضبط الذيل الأيمن لطبقة السهم</value></data>
+<data name='Historys_LayersProperty_Set_GeometryArrowLayer_Value' xml:space='preserve'><value>تعيين قيمة طبقة السهم</value></data>
+<data name='Historys_LayersProperty_Set_GeometryHeartLayer_Spread' xml:space='preserve'><value>ضبط انتشار طبقة القلب</value></data>
+<data name='Historys_LayersProperty_SetName' xml:space='preserve'><value>اسم مجموعة</value></data>
+<data name='Historys_LayersProperty_SetBlendMode' xml:space='preserve'><value>ضبط وضع المزج</value></data>
+<data name='Historys_LayersProperty_SetOpacity' xml:space='preserve'><value>ضبط التعتيم</value></data>
+<data name='Historys_LayersProperty_SetOpacity_000' xml:space='preserve'><value>ضبط التعتيم على 0٪</value></data>
+<data name='Historys_LayersProperty_SetOpacity_025' xml:space='preserve'><value>ضبط التعتيم على 0٪</value></data>
+<data name='Historys_LayersProperty_SetOpacity_050' xml:space='preserve'><value>ضبط التعتيم على 50٪</value></data>
+<data name='Historys_LayersProperty_SetOpacity_075' xml:space='preserve'><value>ضبط التعتيم على 75٪</value></data>
+<data name='Historys_LayersProperty_SetOpacity_100' xml:space='preserve'><value>ضبط التعتيم على 100٪</value></data>
+<data name='Historys_LayersProperty_SetVisibility' xml:space='preserve'><value>ضبط الرؤية</value></data>
+<data name='Historys_LayersProperty_SetIsSelected' xml:space='preserve'><value>حدد ما إذا كنت تريد التحديد</value></data>
+<data name='Historys_LayersProperty_SetTagType' xml:space='preserve'><value>تعيين نوع العلامة</value></data>
+<data name='Historys_LayeragesArrange_CutLayers' xml:space='preserve'><value>قطع الطبقات</value></data>
+<data name='Historys_LayeragesArrange_DuplicateLayer' xml:space='preserve'><value>طبقة مكررة</value></data>
+<data name='Historys_LayeragesArrange_DuplicateLayers' xml:space='preserve'><value>طبقات مكررة</value></data>
+<data name='Historys_LayeragesArrange_PasteLayers' xml:space='preserve'><value>طبقات لصق</value></data>
+<data name='Historys_LayeragesArrange_ClearLayers' xml:space='preserve'><value>طبقات واضحة</value></data>
+<data name='Historys_LayeragesArrange_GroupLayers' xml:space='preserve'><value>طبقات التجميع</value></data>
+<data name='Historys_LayeragesArrange_UngroupLayers' xml:space='preserve'><value>فك تجميع الطبقات</value></data>
+<data name='Historys_LayeragesArrange_ReleaseLayers' xml:space='preserve'><value>طبقة التحرير</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_Combine' xml:space='preserve'><value>أضف طبقة منحنى مجمعة</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_ExpandStroke' xml:space='preserve'><value>أضف طبقة منحنى تمدد الحد</value></data>
+<data name='Historys_LayeragesArrange_AddLayers_ExpandStroke' xml:space='preserve'><value>أضف طبقة منحنى تمدد الحد</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Exposure' xml:space='preserve'><value>إعادة ضبط ضبط التعريض</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Exposure_Exposure' xml:space='preserve'><value>ضبط التعرض لتعديل التعريض</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Brightness' xml:space='preserve'><value>إعادة ضبط ضبط السطوع</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteLight' xml:space='preserve'><value>مجموعة من تعديل سطوع الضوء الأبيض</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_WhiteDark' xml:space='preserve'><value>مجموعة من تعديل سطوع الظلام الأبيض</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackLight' xml:space='preserve'><value>ضبط الضوء الأسود لتعديل السطوع</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Brightness_BlackDark' xml:space='preserve'><value>ضبط اللون الأسود الداكن لتعديل السطوع</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Saturation' xml:space='preserve'><value>إعادة ضبط ضبط التشبع</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Saturation_Saturation' xml:space='preserve'><value>ضبط تشبع ضبط التشبع</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_HueRotation' xml:space='preserve'><value>إعادة ضبط ضبط التدوير</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HueRotation_Angle' xml:space='preserve'><value>ضبط زاوية ضبط دوران الصبغة</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Contrast' xml:space='preserve'><value>إعادة ضبط ضبط التباين</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Contrast_Contrast' xml:space='preserve'><value>ضبط تباين ضبط التباين</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Temperature' xml:space='preserve'><value>إعادة ضبط ضبط درجة الحرارة</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Temperature_Temperature' xml:space='preserve'><value>اضبط درجة حرارة تعديل درجة الحرارة</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Temperature_Tint' xml:space='preserve'><value>ضبط لون تعديل درجة الحرارة</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_HighlightsAndShadows' xml:space='preserve'><value>إعادة ضبط الإبرازات والظلال</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Shadows' xml:space='preserve'><value>ضبط ظلال الإبرازات وضبط الظلال</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Highlights' xml:space='preserve'><value>ضبط الإبرازات وضبط الظلال</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_Clarity' xml:space='preserve'><value>ضبط وضوح الإبرازات وضبط الظلال</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_HighlightsAndShadows_MaskBlurAmount' xml:space='preserve'><value>ضبط مقدار تمويه القناع لتعديل الإبرازات والظلال</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_GammaTransfer' xml:space='preserve'><value>إعادة تعيين تعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaDisable' xml:space='preserve'><value>تبديل تعديل نقل ألفا من جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaOffset' xml:space='preserve'><value>تعيين إزاحة ألفا لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaExponent' xml:space='preserve'><value>تعيين الأس ألفا لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_AlphaAmplitude' xml:space='preserve'><value>تعيين سعة ألفا لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedDisable' xml:space='preserve'><value>التبديل باللون الأحمر لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedOffset' xml:space='preserve'><value>تعيين الإزاحة الحمراء لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedExponent' xml:space='preserve'><value>تعيين الأس الأحمر لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_RedAmplitude' xml:space='preserve'><value>تعيين السعة الحمراء لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenDisable' xml:space='preserve'><value>التبديل إلى اللون الأخضر لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenOffset' xml:space='preserve'><value>تعيين الإزاحة الخضراء لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenExponent' xml:space='preserve'><value>تعيين الأس الأخضر لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_GreenAmplitude' xml:space='preserve'><value>تعيين السعة الخضراء لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueDisable' xml:space='preserve'><value>التبديل الأزرق لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueOffset' xml:space='preserve'><value>تعيين الإزاحة الزرقاء لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueExponent' xml:space='preserve'><value>تعيين الأس الأزرق لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_GammaTransfer_BlueAmplitude' xml:space='preserve'><value>تعيين السعة الزرقاء لتعديل نقل جاما</value></data>
+<data name='Historys_LayersProperty_ResetAdjustment_Vignette' xml:space='preserve'><value>إعادة تعيين ضبط نقوش الصورة النصفية</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Amount' xml:space='preserve'><value>اضبط مقدار ضبط نقوش الصورة النصفية</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Curve' xml:space='preserve'><value>ضبط منحنى تعديل نقوش الصورة النصفية</value></data>
+<data name='Historys_LayersProperty_SetAdjustment_Vignette_Color' xml:space='preserve'><value>اضبط لون ضبط نقوش الصورة النصفية</value></data>
+<data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>إعادة تعيين تأثير التمويه gaussian</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>تبديل تأثير التمويه الغاوسي</value></data>
+<data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>اضبط مقدار تأثير التمويه الغاوسي</value></data>
+<data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>إعادة تعيين تأثير التمويه الاتجاهي</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>تبديل تأثير التمويه الاتجاهي</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>ضبط نصف قطر تأثير التمويه الاتجاهي</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>ضبط زاوية تأثير التمويه الاتجاهي</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>إعادة تعيين تأثير شحذ</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>تبديل تأثير شحذ</value></data>
+<data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>تعيين مقدار تأثير شحذ</value></data>
+<data name='Historys_LayersProperty_ResetEffect_OuterShadow' xml:space='preserve'><value>إعادة تعيين تأثير الظل الخارجي</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_OuterShadow' xml:space='preserve'><value>تبديل تأثير الظل الخارجي</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Radius' xml:space='preserve'><value>تعيين نصف قطر تأثير الظل الخارجي</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Opacity' xml:space='preserve'><value>ضبط عتامة تأثير الظل الخارجي</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Offset' xml:space='preserve'><value>اضبط إزاحة تأثير الظل الخارجي</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Angle' xml:space='preserve'><value>ضبط زاوية تأثير الظل الخارجي</value></data>
+<data name='Historys_LayersProperty_SetEffect_OuterShadow_Color' xml:space='preserve'><value>اضبط لون تأثير الظل الخارجي</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Edge' xml:space='preserve'><value>إعادة تعيين تأثير الحافة</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Edge' xml:space='preserve'><value>تبديل تأثير الحافة</value></data>
+<data name='Historys_LayersProperty_SetEffect_Edge_Amount' xml:space='preserve'><value>تعيين مقدار تأثير الحافة</value></data>
+<data name='Historys_LayersProperty_SetEffect_Edge_Radius' xml:space='preserve'><value>تعيين نصف قطر تأثير الحافة</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Mmorphology' xml:space='preserve'><value>إعادة تعيين تأثير التشكل</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Mmorphology' xml:space='preserve'><value>تبديل تأثير التشكل</value></data>
+<data name='Historys_LayersProperty_SetEffect_Mmorphology_Size' xml:space='preserve'><value>تعيين حجم تأثير مورفولوجيا</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Emboss' xml:space='preserve'><value>إعادة تعيين تأثير الزخرفة</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Emboss' xml:space='preserve'><value>تبديل تأثير الزخرفة</value></data>
+<data name='Historys_LayersProperty_SetEffect_Emboss_Radius' xml:space='preserve'><value>تعيين نصف قطر تأثير النقش</value></data>
+<data name='Historys_LayersProperty_SetEffect_Emboss_Angle' xml:space='preserve'><value>تعيين إشعاع تأثير الزخرفة</value></data>
+<data name='Historys_LayersProperty_ResetEffect_Straighten' xml:space='preserve'><value>إعادة ضبط تأثير التسوية</value></data>
+<data name='Historys_LayersProperty_SwitchEffect_Straighten' xml:space='preserve'><value>تبديل تأثير التسوية</value></data>
+<data name='Historys_LayersProperty_SetEffect_Straighten_Angle' xml:space='preserve'><value>ضبط زاوية تأثير التسوية</value></data>
+<data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>تعيين نص الخط</value></data>
+<data name='Historys_LayersProperty_SetFontAlignment' xml:space='preserve'><value>اضبط محاذاة الخط</value></data>
+<data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>تعيين نمط الخط</value></data>
+<data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>تعيين وزن الخط</value></data>
+<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>تعيين عائلة الخطوط</value></data>
+<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>تعيين حجم الخط</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>تعيين شرطة نمط السكتة الدماغية</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeWidth' xml:space='preserve'><value>ضبط عرض الشوط</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Cap' xml:space='preserve'><value>تعيين غطاء لنمط السكتة الدماغية</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Join' xml:space='preserve'><value>تعيين ربط نمط ضربة الفرشاة</value></data>
+<data name='Historys_LayersProperty_SetStyle_StrokeStyle_Offset' xml:space='preserve'><value>تعيين إزاحة نمط ضربة الفرشاة</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsFollowTransform' xml:space='preserve'><value>نمط المجموعة هو اتباع التحويل</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsStrokeBehindFill' xml:space='preserve'><value>نمط المجموعة هو الشطب خلف التعبئة</value></data>
+<data name='Historys_LayersProperty_SetStyle_IsStrokeWidthFollowScale' xml:space='preserve'><value>نمط المجموعة هو مقياس Stroke Width مع Layer</value></data>
+<data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>تعيين مرشح</value></data>
+<data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$SettingPage_Back' xml:space='preserve'><value>خلف</value></data>
+<data name='$MainPage_Title' xml:space='preserve'><value>Retouch Photo2</value></data>
+<data name='$MainPage_NewDialog_Close' xml:space='preserve'><value>يلغي</value></data>
+<data name='$MainPage_NewDialog_Primary' xml:space='preserve'><value>موافق</value></data>
+<data name='$MainPage_SizePicker_Width' xml:space='preserve'><value>عرض</value></data>
+<data name='$MainPage_SizePicker_Height' xml:space='preserve'><value>ارتفاع</value></data>
+<data name='$MainPage_Pictures_Close' xml:space='preserve'><value>يلغي</value></data>
+<data name='$MainPage_Rename' xml:space='preserve'><value>إعادة تسمية</value></data>
+<data name='$MainPage_Rename_Title' xml:space='preserve'><value>إعادة تسمية المشروع</value></data>
+<data name='$MainPage_Rename_Close' xml:space='preserve'><value>يلغي</value></data>
+<data name='$MainPage_RenameDialog_Title' xml:space='preserve'><value>إعادة تسمية المشروع</value></data>
+<data name='$MainPage_RenameDialog_Close' xml:space='preserve'><value>يلغي</value></data>
+<data name='$MainPage_RenameDialog_Primary' xml:space='preserve'><value>إعادة تسمية</value></data>
+<data name='$MainPage_RenameDialog_TextBox_PlaceholderText' xml:space='preserve'><value>أدخل اسمًا هنا.</value></data>
+<data name='$MainPage_Delete' xml:space='preserve'><value>حذف</value></data>
+<data name='$MainPage_Delete_Close' xml:space='preserve'><value>يلغي</value></data>
+<data name='$MainPage_Delete_Primary' xml:space='preserve'><value>حذف</value></data>
+<data name='$MainPage_Duplicate' xml:space='preserve'><value>ينسخ</value></data>
+<data name='$MainPage_Duplicate_Close' xml:space='preserve'><value>يلغي</value></data>
+<data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>ينسخ</value></data>
+<data name='$DrawPage_Export' xml:space='preserve'><value>يصدر</value></data>
+<data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>يلغي</value></data>
+<data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>موافق</value></data>
+<data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>عرض</value></data>
+<data name='$DrawPage_SetupDialog_SizePicker_Height' xml:space='preserve'><value>ارتفاع</value></data>
+<data name='$DrawPage_ExportDialog_Close' xml:space='preserve'><value>يلغي</value></data>
+<data name='$DrawPage_ExportDialog_Primary' xml:space='preserve'><value>يصدر</value></data>
+<data name='$DrawPage_ExportDialog_SizePicker_Width' xml:space='preserve'><value>عرض</value></data>
+<data name='$DrawPage_ExportDialog_SizePicker_Height' xml:space='preserve'><value>ارتفاع</value></data>
+<data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>أدخل اسمًا هنا.</value></data>
+<data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>يلغي</value></data>
+<data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>إعادة تسمية</value></data>
+<data name='Tools_Fill' xml:space='preserve'><value>ملء</value></data>
+<data name='Tools_Stroke' xml:space='preserve'><value>ضربة</value></data>
+<data name='Tools_ConvertToCurves' xml:space='preserve'><value>تحويل إلى منحنيات</value></data>
+<data name='Tools_Brush' xml:space='preserve'><value>فرشاة</value></data>
+<data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>ملء</value></data>
+<data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>ضربة</value></data>
+<data name='Tools_Brush_Type' xml:space='preserve'><value>اكتب</value></data>
+<data name='Tools_Brush_Type_None' xml:space='preserve'><value>لا أحد</value></data>
+<data name='Tools_Brush_Type_Color' xml:space='preserve'><value>اللون</value></data>
+<data name='Tools_Brush_Type_Image' xml:space='preserve'><value>صورة</value></data>
+<data name='Tools_Brush_Brush' xml:space='preserve'><value>فرشاة</value></data>
+<data name='Tools_Brush_Extend_Mirror' xml:space='preserve'><value>مرآة</value></data>
+<data name='Tools_Brush_Stop_Remove' xml:space='preserve'><value>يزيل</value></data>
+<data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value>ينسخ</value></data>
+<data name='Tools_GeometryRectangle' xml:space='preserve'><value>مستطيل</value></data>
+<data name='Tools_GeometryEllipse' xml:space='preserve'><value>الشكل البيضاوي</value></data>
+<data name='Tools_Node_Remove' xml:space='preserve'><value>يزيل</value></data>
+<data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>زاوية</value></data>
+<data name='Tools_TextArtistic' xml:space='preserve'><value>نص فني</value></data>
+<data name='Tools_TextFrame' xml:space='preserve'><value>نص الإطار</value></data>
+<data name='Tools_Image' xml:space='preserve'><value>صورة</value></data>
+<data name='Tools_PatternGrid' xml:space='preserve'><value>شبكة</value></data>
+<data name='Tools_PatternGrid_Type' xml:space='preserve'><value>اكتب</value></data>
+<data name='Tools_PatternGrid_Grid' xml:space='preserve'><value>شبكة</value></data>
+<data name='Tools_PatternGrid_HorizontalStep' xml:space='preserve'><value>خطوة أفقية</value></data>
+<data name='Tools_PatternGrid_VerticalStep' xml:space='preserve'><value>خطوة عمودية</value></data>
+<data name='Tools_PatternDiagonal' xml:space='preserve'><value>قطري</value></data>
+<data name='Tools_PatternDiagonal_Offset' xml:space='preserve'><value>عوض</value></data>
+<data name='Tools_PatternDiagonal_HorizontalStep' xml:space='preserve'><value>خطوة أفقية</value></data>
+<data name='Tools_PatternSpotted' xml:space='preserve'><value>مراقب</value></data>
+<data name='Tools_PatternSpotted_Radius' xml:space='preserve'><value>نصف القطر</value></data>
+<data name='Tools_GeometryRoundRect' xml:space='preserve'><value>مستدير</value></data>
+<data name='Tools_GeometryTriangle' xml:space='preserve'><value>مثلث</value></data>
+<data name='Tools_GeometryTriangle_Mirror' xml:space='preserve'><value>مرآة</value></data>
+<data name='Tools_GeometryDiamond' xml:space='preserve'><value>الماس</value></data>
+<data name='Tools_GeometryDiamond_Mirror' xml:space='preserve'><value>مرآة</value></data>
+<data name='Tools_GeometryPentagon' xml:space='preserve'><value>خماسي الاضلاع</value></data>
+<data name='Tools_GeometryPentagon_Points' xml:space='preserve'><value>نقاط</value></data>
+<data name='Tools_GeometryStar' xml:space='preserve'><value>نجمة</value></data>
+<data name='Tools_GeometryStar_Points' xml:space='preserve'><value>نقاط</value></data>
+<data name='Tools_GeometryStar_InnerRadius' xml:space='preserve'><value>دائرة نصف قطرها الداخلي</value></data>
+<data name='Tools_GeometryCog' xml:space='preserve'><value>ترس</value></data>
+<data name='Tools_GeometryCog_InnerRadius' xml:space='preserve'><value>دائرة نصف قطرها الداخلي</value></data>
+<data name='Tools_GeometryDount' xml:space='preserve'><value>دونت</value></data>
+<data name='Tools_GeometryPie' xml:space='preserve'><value>فطيرة</value></data>
+<data name='Tools_GeometryPie_SweepAngle' xml:space='preserve'><value>زاوية الاجتياح</value></data>
+<data name='Tools_GeometryCookie' xml:space='preserve'><value>بسكويت</value></data>
+<data name='Tools_GeometryCookie_InnerRadius' xml:space='preserve'><value>دائرة نصف قطرها الداخلي</value></data>
+<data name='Tools_GeometryCookie_SweepAngle' xml:space='preserve'><value>زاوية الاجتياح</value></data>
+<data name='Tools_GeometryArrow' xml:space='preserve'><value>سهم</value></data>
+<data name='Tools_GeometryArrow_ArrowTail_None' xml:space='preserve'><value>لا أحد</value></data>
+<data name='Tools_GeometryCapsule' xml:space='preserve'><value>كبسولة</value></data>
+<data name='Tools_GeometryHeart' xml:space='preserve'><value>قلب</value></data>
+<data name='Layers_Group' xml:space='preserve'><value>مجموعة</value></data>
+<data name='Layers_GeometryRectangle' xml:space='preserve'><value>مستطيل</value></data>
+<data name='Layers_GeometryEllipse' xml:space='preserve'><value>الشكل البيضاوي</value></data>
+<data name='Layers_TextArtistic' xml:space='preserve'><value>نص فني</value></data>
+<data name='Layers_TextFrame' xml:space='preserve'><value>نص الإطار</value></data>
+<data name='Layers_Image' xml:space='preserve'><value>صورة</value></data>
+<data name='Layers_PatternGrid' xml:space='preserve'><value>شبكة</value></data>
+<data name='Layers_PatternDiagonal' xml:space='preserve'><value>قطري</value></data>
+<data name='Layers_PatternSpotted' xml:space='preserve'><value>مراقب</value></data>
+<data name='Layers_GeometryRoundRect' xml:space='preserve'><value>مستدير</value></data>
+<data name='Layers_GeometryTriangle' xml:space='preserve'><value>مثلث</value></data>
+<data name='Layers_GeometryDiamond' xml:space='preserve'><value>الماس</value></data>
+<data name='Layers_GeometryPentagon' xml:space='preserve'><value>خماسي الاضلاع</value></data>
+<data name='Layers_GeometryStar' xml:space='preserve'><value>نجمة</value></data>
+<data name='Layers_GeometryCog' xml:space='preserve'><value>ترس</value></data>
+<data name='Layers_GeometryDount' xml:space='preserve'><value>دونت</value></data>
+<data name='Layers_GeometryPie' xml:space='preserve'><value>فطيرة</value></data>
+<data name='Layers_GeometryCookie' xml:space='preserve'><value>بسكويت</value></data>
+<data name='Layers_GeometryArrow' xml:space='preserve'><value>سهم</value></data>
+<data name='Layers_GeometryCapsule' xml:space='preserve'><value>كبسولة</value></data>
+<data name='Layers_GeometryHeart' xml:space='preserve'><value>قلب</value></data>
+<data name='Menus_Edit' xml:space='preserve'><value>يحرر</value></data>
+<data name='Menus_Stroke' xml:space='preserve'><value>ضربة</value></data>
+<data name='Menus_Transformer' xml:space='preserve'><value>محول</value></data>
+<data name='Menus_Transformer_Width' xml:space='preserve'><value>عرض</value></data>
+<data name='Menus_Transformer_Height' xml:space='preserve'><value>ارتفاع</value></data>
+<data name='Menus_Color' xml:space='preserve'><value>اللون</value></data>
+<data name='Menus_Layer_Opacity' xml:space='preserve'><value>العتامة</value></data>
+<data name='Edits_Edit' xml:space='preserve'><value>يحرر</value></data>
+<data name='Edits_Edit_Duplicate' xml:space='preserve'><value>ينسخ</value></data>
+<data name='Edits_Edit_Copy' xml:space='preserve'><value>ينسخ</value></data>
+<data name='Edits_Group' xml:space='preserve'><value>مجموعة</value></data>
+<data name='Edits_Group_Group' xml:space='preserve'><value>مجموعة</value></data>
+<data name='Operates_Transform' xml:space='preserve'><value>تحول</value></data>
+<data name='Operates_Horizontally_Left' xml:space='preserve'><value>محاذاة لليسار</value></data>
+<data name='Operates_Horizontally_Center' xml:space='preserve'><value>مركز المحاذاة</value></data>
+<data name='Operates_Horizontally_Right' xml:space='preserve'><value>محاذاة اليمين</value></data>
+<data name='Adjustments_Exposure' xml:space='preserve'><value>مكشوف</value></data>
+<data name='Adjustments_Exposure_Exposure' xml:space='preserve'><value>مكشوف</value></data>
+<data name='Adjustments_Saturation' xml:space='preserve'><value>التشبع</value></data>
+<data name='Adjustments_Saturation_Saturation' xml:space='preserve'><value>التشبع</value></data>
+<data name='Adjustments_HueRotation_Angle' xml:space='preserve'><value>زاوية</value></data>
+<data name='Adjustments_Contrast' xml:space='preserve'><value>مقابلة</value></data>
+<data name='Adjustments_Contrast_Contrast' xml:space='preserve'><value>مقابلة</value></data>
+<data name='Adjustments_Temperature' xml:space='preserve'><value>درجة الحرارة</value></data>
+<data name='Adjustments_Temperature_Temperature' xml:space='preserve'><value>درجة الحرارة</value></data>
+<data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>كمية</value></data>
+<data name='Adjustments_Vignette_Color' xml:space='preserve'><value>اللون</value></data>
+<data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>نصف القطر</value></data>
+<data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>نصف القطر</value></data>
+<data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>زاوية</value></data>
+<data name='Effects_Sharpen_Amount' xml:space='preserve'><value>كمية</value></data>
+<data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>نصف القطر</value></data>
+<data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>العتامة</value></data>
+<data name='Effects_OuterShadow_Offset' xml:space='preserve'><value>عوض</value></data>
+<data name='Effects_OuterShadow_Angle' xml:space='preserve'><value>زاوية</value></data>
+<data name='Effects_OuterShadow_Color' xml:space='preserve'><value>اللون</value></data>
+<data name='Effects_Edge_Amount' xml:space='preserve'><value>كمية</value></data>
+<data name='Effects_Edge_Radius' xml:space='preserve'><value>نصف القطر</value></data>
+<data name='Effects_Emboss_Radius' xml:space='preserve'><value>نصف القطر</value></data>
+<data name='Effects_Emboss_Angle' xml:space='preserve'><value>زاوية</value></data>
+<data name='Effects_Straighten_Angle' xml:space='preserve'><value>زاوية</value></data>
+<data name='Texts_FontAlignment_Left' xml:space='preserve'><value>محاذاة لليسار</value></data>
+<data name='Texts_FontAlignment_Center' xml:space='preserve'><value>مركز المحاذاة</value></data>
+<data name='Texts_FontAlignment_Right' xml:space='preserve'><value>محاذاة اليمين</value></data>
+<data name='Strokes_Dash' xml:space='preserve'><value>اندفاع</value></data>
+<data name='Strokes_Dash_Dash' xml:space='preserve'><value>اندفاع</value></data>
+<data name='Strokes_Width' xml:space='preserve'><value>عرض</value></data>
+<data name='Strokes_Cap_Triangle' xml:space='preserve'><value>مثلث</value></data>
+<data name='Strokes_Offset' xml:space='preserve'><value>عوض</value></data>
+<data name='Blends_Saturation' xml:space='preserve'><value>التشبع</value></data>
+<data name='Blends_Color' xml:space='preserve'><value>اللون</value></data>
+<data name='Historys_LayeragesArrange_AddLayer_ConvertToCurves' xml:space='preserve'><value>تحويل إلى منحنيات</value></data>
+
+ </root>
