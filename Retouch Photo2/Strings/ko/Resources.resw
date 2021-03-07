@@ -589,6 +589,7 @@
 <data name='Tools_GeometryCookie_SweepAngle' xml:space='preserve'><value>스윕 각도</value></data>
 <data name='Tools_GeometryArrow' xml:space='preserve'><value>화살</value></data>
 <data name='Tools_GeometryArrow_ArrowTail_None' xml:space='preserve'><value>없음</value></data>
+<data name='Tools_GeometryArrow_ArrowTail_Arrow' xml:space='preserve'><value>화살</value></data>
 <data name='Tools_GeometryCapsule' xml:space='preserve'><value>캡슐</value></data>
 <data name='Tools_GeometryHeart' xml:space='preserve'><value>심장</value></data>
 <data name='Layers_Group' xml:space='preserve'><value>그룹</value></data>

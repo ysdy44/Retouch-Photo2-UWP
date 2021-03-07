@@ -589,6 +589,7 @@
 <data name='Tools_GeometryCookie_SweepAngle' xml:space='preserve'><value>扫描角度</value></data>
 <data name='Tools_GeometryArrow' xml:space='preserve'><value>箭头</value></data>
 <data name='Tools_GeometryArrow_ArrowTail_None' xml:space='preserve'><value>无</value></data>
+<data name='Tools_GeometryArrow_ArrowTail_Arrow' xml:space='preserve'><value>箭头</value></data>
 <data name='Tools_GeometryCapsule' xml:space='preserve'><value>胶囊</value></data>
 <data name='Tools_GeometryHeart' xml:space='preserve'><value>心</value></data>
 <data name='Layers_Group' xml:space='preserve'><value>分组</value></data>

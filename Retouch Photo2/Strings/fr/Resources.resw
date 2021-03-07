@@ -589,6 +589,7 @@
 <data name='Tools_GeometryCookie_SweepAngle' xml:space='preserve'><value>Angle de balayage</value></data>
 <data name='Tools_GeometryArrow' xml:space='preserve'><value>Flèche</value></data>
 <data name='Tools_GeometryArrow_ArrowTail_None' xml:space='preserve'><value>Aucun</value></data>
+<data name='Tools_GeometryArrow_ArrowTail_Arrow' xml:space='preserve'><value>Flèche</value></data>
 <data name='Tools_GeometryCapsule' xml:space='preserve'><value>Capsule</value></data>
 <data name='Tools_GeometryHeart' xml:space='preserve'><value>Cœur</value></data>
 <data name='Layers_Group' xml:space='preserve'><value>Grouper</value></data>

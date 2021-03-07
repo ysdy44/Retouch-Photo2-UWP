@@ -589,6 +589,7 @@
 <data name='Tools_GeometryCookie_SweepAngle' xml:space='preserve'><value>Угол развертки</value></data>
 <data name='Tools_GeometryArrow' xml:space='preserve'><value>Стрелка</value></data>
 <data name='Tools_GeometryArrow_ArrowTail_None' xml:space='preserve'><value>Никто</value></data>
+<data name='Tools_GeometryArrow_ArrowTail_Arrow' xml:space='preserve'><value>Стрелка</value></data>
 <data name='Tools_GeometryCapsule' xml:space='preserve'><value>Капсула</value></data>
 <data name='Tools_GeometryHeart' xml:space='preserve'><value>Сердце</value></data>
 <data name='Layers_Group' xml:space='preserve'><value>Группа</value></data>

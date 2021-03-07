@@ -589,6 +589,7 @@
 <data name='Tools_GeometryCookie_SweepAngle' xml:space='preserve'><value>Schwenkwinkel</value></data>
 <data name='Tools_GeometryArrow' xml:space='preserve'><value>Pfeil</value></data>
 <data name='Tools_GeometryArrow_ArrowTail_None' xml:space='preserve'><value>Keiner</value></data>
+<data name='Tools_GeometryArrow_ArrowTail_Arrow' xml:space='preserve'><value>Pfeil</value></data>
 <data name='Tools_GeometryCapsule' xml:space='preserve'><value>Kapsel</value></data>
 <data name='Tools_GeometryHeart' xml:space='preserve'><value>Herz</value></data>
 <data name='Layers_Group' xml:space='preserve'><value>Gruppe</value></data>

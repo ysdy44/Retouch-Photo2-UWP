@@ -589,6 +589,7 @@
 <data name='Tools_GeometryCookie_SweepAngle' xml:space='preserve'><value>後退角</value></data>
 <data name='Tools_GeometryArrow' xml:space='preserve'><value>矢印</value></data>
 <data name='Tools_GeometryArrow_ArrowTail_None' xml:space='preserve'><value>なし</value></data>
+<data name='Tools_GeometryArrow_ArrowTail_Arrow' xml:space='preserve'><value>矢印</value></data>
 <data name='Tools_GeometryCapsule' xml:space='preserve'><value>カプセル</value></data>
 <data name='Tools_GeometryHeart' xml:space='preserve'><value>ハート</value></data>
 <data name='Layers_Group' xml:space='preserve'><value>グループ</value></data>

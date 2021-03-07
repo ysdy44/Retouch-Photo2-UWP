@@ -90,11 +90,11 @@ namespace Retouch_Photo2.Brushs
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ConstructGroup(this.NoneButton, resource.GetString("Tools_BrushType_None"), new NoneIcon(), BrushType.None);
+            this.ConstructGroup(this.NoneButton, resource.GetString("Tools_Brush_Type_None"), new NoneIcon(), BrushType.None);
 
-            this.ConstructGroup(this.LinearGradientButton, resource.GetString("Tools_BrushType_LinearGradient"), new LinearGradientIcon(), BrushType.LinearGradient);
-            this.ConstructGroup(this.RadialGradientButton, resource.GetString("Tools_BrushType_RadialGradient"), new RadialGradientIcon(), BrushType.RadialGradient);
-            this.ConstructGroup(this.EllipticalGradientButton, resource.GetString("Tools_BrushType_EllipticalGradient"), new EllipticalGradientIcon(), BrushType.EllipticalGradient);
+            this.ConstructGroup(this.LinearGradientButton, resource.GetString("Tools_Brush_Type_LinearGradient"), new LinearGradientIcon(), BrushType.LinearGradient);
+            this.ConstructGroup(this.RadialGradientButton, resource.GetString("Tools_Brush_Type_RadialGradient"), new RadialGradientIcon(), BrushType.RadialGradient);
+            this.ConstructGroup(this.EllipticalGradientButton, resource.GetString("Tools_Brush_Type_EllipticalGradient"), new EllipticalGradientIcon(), BrushType.EllipticalGradient);
         }
 
         //Group
