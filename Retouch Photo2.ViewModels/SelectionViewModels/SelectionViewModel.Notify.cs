@@ -5,7 +5,6 @@ using Retouch_Photo2.Filters;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Photos;
-using Retouch_Photo2.Tools;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -15,19 +14,6 @@ namespace Retouch_Photo2.ViewModels
 {
     public partial class ViewModel : INotifyPropertyChanged
     {
-
-        /// <summary> Gets or sets the tool type. </summary>
-        public ToolType ToolType
-        {
-            get => this.toolType;
-            set
-            {
-                if (this.toolType == value) return;
-                this.toolType = value;
-                this.OnPropertyChanged(nameof(ToolType));//Notify 
-            }
-        }
-        private ToolType toolType = ToolType.Cursor;
 
 
         /// <summary> Gets or sets the layer type. </summary>

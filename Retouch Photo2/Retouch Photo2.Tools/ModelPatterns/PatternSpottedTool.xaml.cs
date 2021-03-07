@@ -24,6 +24,7 @@ namespace Retouch_Photo2.Tools.Models
 
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
 
         //@Content
@@ -48,12 +49,12 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void Started(Vector2 startingPoint, Vector2 point) => ToolManager.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => ToolManager.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => ToolManager.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => ToolManager.MoveTool.Clicke(point);
+        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
+        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
-        public void Draw(CanvasDrawingSession drawingSession) => ToolManager.CreateTool.Draw(drawingSession);
+        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
 
         
         public void OnNavigatedTo() { }

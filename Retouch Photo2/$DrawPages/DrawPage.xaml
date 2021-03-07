@@ -68,7 +68,13 @@
                CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"             
                DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
                IsFullScreen="True"
+                             
+               FootPage="{x:Bind TipViewModel.ToolPage, Mode=OneWay}"
                >
+            <!--LeftIcon-->
+            <elements:DrawLayout.LeftIcon>
+                <ContentControl Template="{x:Bind TipViewModel.ToolIcon, Mode=OneWay}"/>
+            </elements:DrawLayout.LeftIcon>
 
             <!--RightPane-->
             <elements:DrawLayout.RightPanel>
@@ -81,6 +87,7 @@
             <elements:DrawLayout.LeftPanel>
                 <local:ToolsControl x:Name="ToolsControl"
                             Tools="{x:Bind TipViewModel.Tools, Mode=OneTime}"
+                            Type="{x:Bind TipViewModel.ToolType, Mode=TwoWay}"
                             IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}"
                             DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
                             />

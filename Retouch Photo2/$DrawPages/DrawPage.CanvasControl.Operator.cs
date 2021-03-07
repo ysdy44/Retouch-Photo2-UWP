@@ -96,7 +96,7 @@ namespace Retouch_Photo2
                     case InputDevice.Single:
                         {
                             //Tool
-                            ToolManager.Instance.Draw(args.DrawingSession);
+                            this.TipViewModel.Tool.Draw(args.DrawingSession);
                         }
                         break;
                 }
@@ -131,7 +131,7 @@ namespace Retouch_Photo2
                 if (this._isSingleStarted)
                 {
                     //Tool
-                    ToolManager.Instance.Delta(this._singleStartingPoint, point);//Delta
+                    this.TipViewModel.Tool.Delta(this._singleStartingPoint, point);//Delta
 
                     return;
                 }
@@ -143,7 +143,7 @@ namespace Retouch_Photo2
                     this._isSingleStarted = true;
 
                     //Tool
-                    ToolManager.Instance.Started(this._singleStartingPoint, point);//Started
+                    this.TipViewModel.Tool.Started(this._singleStartingPoint, point);//Started
                 }
             };
             canvasOperator.Single_Complete += (point) =>
@@ -153,13 +153,13 @@ namespace Retouch_Photo2
                 if (this._isSingleStarted == false)
                 {
                     //Tool
-                    ToolManager.Instance.Clicke(this._singleStartingPoint);//Complete
+                    this.TipViewModel.Tool.Clicke(this._singleStartingPoint);//Complete
                 }
                 else
                 {
                     //Tool
                     bool isOutNodeDistance = FanKit.Math.OutNodeDistance(this._singleStartingPoint, point);
-                    ToolManager.Instance.Complete(this._singleStartingPoint, point, isOutNodeDistance);//Complete
+                    this.TipViewModel.Tool.Complete(this._singleStartingPoint, point, isOutNodeDistance);//Complete
                 }
 
                 this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible

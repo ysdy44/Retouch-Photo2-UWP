@@ -3,11 +3,8 @@
 // Difficult:         ★★★★★
 // Only:              ★★★★★
 // Complete:      ★★★★★
-using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Retouch_Photo2.ViewModels

@@ -232,6 +232,9 @@ namespace Retouch_Photo2
         public static TipViewModel TipViewModel = new TipViewModel
         {
             //Tool
+            MoveTool = new MoveTool(),
+            TransformerTool = new TransformerTool(),
+            CreateTool = new CreateTool(),
             Tools = new List<ITool>
             {                   
                         

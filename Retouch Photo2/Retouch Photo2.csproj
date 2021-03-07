@@ -213,9 +213,11 @@
     <Compile Include="Retouch Photo2.Menus\TextMenu.xaml.cs">
       <DependentUpon>TextMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Menus\TransformerMenu.Construct.cs" />
     <Compile Include="Retouch Photo2.Menus\TransformerMenu.xaml.cs">
       <DependentUpon>TransformerMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Menus\TransformerStateControl.cs" />
     <Compile Include="Retouch Photo2.Tools\Elements\FillColorEllipse.xaml.cs">
       <DependentUpon>FillColorEllipse.xaml</DependentUpon>
     </Compile>
@@ -237,10 +239,6 @@
     <Compile Include="Retouch Photo2.Tools\Models\PenTool.Method.cs" />
     <Compile Include="Retouch Photo2.Tools\MoveTool.cs" />
     <Compile Include="Retouch Photo2.Tools\Models\NodeTool.Method.cs" />
-    <Compile Include="Retouch Photo2.Tools\ToolManager.cs" />
-    <Compile Include="%24DrawPages\ToolsControl.xaml.cs">
-      <DependentUpon>ToolsControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Retouch Photo2.Tools\TransformerTool.cs" />
     <Compile Include="%24SettingPages\SettingPage.Construct.cs" />
     <Compile Include="XMLs\XML.Bitmap.cs" />
@@ -375,7 +373,9 @@
     <Content Include="FileUtils\MFY.photo2pk.zip" />
     <None Include="Retouch Photo2_StoreKey.pfx" />
     <None Include="Retouch Photo_TemporaryKey.pfx" />
+    <PRIResource Include="Strings\de\Resources.resw" />
     <PRIResource Include="Strings\ar\Resources.resw" />
+    <PRIResource Include="Strings\zh-CN\resources.resw" />
     <PRIResource Include="Strings\ru\Resources.resw" />
     <PRIResource Include="Strings\pt\Resources.resw" />
     <PRIResource Include="Strings\nl\Resources.resw" />
@@ -384,12 +384,8 @@
     <PRIResource Include="Strings\it\Resources.resw" />
     <PRIResource Include="Strings\fr\Resources.resw" />
     <PRIResource Include="Strings\es\Resources.resw" />
-    <PRIResource Include="Strings\de\Resources.resw" />
-    <PRIResource Include="Strings\en-US\Resources.resw" />
-    <PRIResource Include="Strings\zh-CN\Resources.resw" />
+    <PRIResource Include="Strings\en-US\resources.resw" />
     <PRIResource Include="Strings\dimensions\dimensions.resw" />
-    <PRIResource Include="Strings\ja-JP\resources.resw" />
-    <PRIResource Include="Strings\fr-FR\resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\BadgeLogo.scale-100.png" />
@@ -710,10 +706,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Retouch Photo2.Tools\Models\ViewTool.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="%24DrawPages\ToolsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

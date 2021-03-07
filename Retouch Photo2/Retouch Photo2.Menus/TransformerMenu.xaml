@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorpickers="using:HSVColorPickers"
-    xmlns:transformers="using:FanKit.Transformers"
+    xmlns:transformers="using:FanKit.Transformers" xmlns:models="using:Retouch_Photo2.Menus.Models"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
@@ -93,9 +93,15 @@
             <FontIcon FontSize="14" Glyph="&#xE970;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
                       MirroredWhenRightToLeft="True"/>
         </Button>
+        
 
+        <models:TransformerStateControl x:Name="TransformerStateControl" Grid.Row="6"
+                                        Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}"
+                                        Transformer="{x:Bind SelectionViewModel.Transformer, Mode=OneWay}"
+                                        ToolType="{x:Bind TipViewModel.ToolType, Mode=OneWay}"
+                                        />
 
-
+        
         <!--IndicatorControl-->
         <transformers:IndicatorControl x:Name="IndicatorControl" Grid.ColumnSpan="3" Grid.Row="6" Background="{ThemeResource AppForeground}" BorderBrush="{ThemeResource AppStroke}"
                                        FlowDirection="LeftToRight">

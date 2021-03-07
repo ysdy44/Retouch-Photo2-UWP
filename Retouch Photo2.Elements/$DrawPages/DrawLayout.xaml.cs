@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Elements
 
         //Foot
         /// <summary> Gets or sets RadiusAnimaPanel's content. </summary>
-        public FrameworkElement FootPage { set => this.FootPanel.Content = value; }
+        public object FootPage { set => this.FootPanel.Content = value; }
         /// <summary> _LeftIcon's content. </summary>
         public object LeftIcon { get => this._LeftIcon.Content; set => this._LeftIcon.Content = value; }
         /// <summary> _RightIcon's content. </summary>

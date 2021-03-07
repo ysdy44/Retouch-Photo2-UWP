@@ -26,6 +26,7 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
         Layerage MezzanineLayerage = null;
 
@@ -159,7 +160,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point) => ToolManager.MoveTool.Clicke(point);
+        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)

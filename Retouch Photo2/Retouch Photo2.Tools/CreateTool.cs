@@ -26,6 +26,7 @@ namespace Retouch_Photo2.Tools
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
@@ -40,7 +41,7 @@ namespace Retouch_Photo2.Tools
 
         public void Started(Func<Transformer, ILayer> createLayer, Vector2 startingPoint, Vector2 point)
         {
-            if (ToolManager.TransformerTool.Started(startingPoint, point)) return;//TransformerTool
+            if (this.TipViewModel.TransformerTool.Started(startingPoint, point)) return;//TransformerTool
 
             //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
@@ -105,7 +106,7 @@ namespace Retouch_Photo2.Tools
                 this.ViewModel.Invalidate();//Invalidate
             }
 
-            if (ToolManager.TransformerTool.Delta(startingPoint, point)) return;//TransformerTool
+            if (this.TipViewModel.TransformerTool.Delta(startingPoint, point)) return;//TransformerTool
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
@@ -156,7 +157,7 @@ namespace Retouch_Photo2.Tools
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             }
 
-            if (ToolManager.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool
+            if (this.TipViewModel.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool
         }
 
 
@@ -173,7 +174,7 @@ namespace Retouch_Photo2.Tools
                     ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
                     drawingSession.DrawLayerBound(layer2, matrix, this.ViewModel.AccentColor);
 
-                    ToolManager.TransformerTool.Draw(drawingSession); //TransformerTool
+                    this.TipViewModel.TransformerTool.Draw(drawingSession); //TransformerTool
                     break;
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage layerage in this.ViewModel.SelectionLayerages)
@@ -182,7 +183,7 @@ namespace Retouch_Photo2.Tools
                         drawingSession.DrawLayerBound(layer, matrix, this.ViewModel.AccentColor);
                     }
 
-                    ToolManager.TransformerTool.Draw(drawingSession); //TransformerTool
+                    this.TipViewModel.TransformerTool.Draw(drawingSession); //TransformerTool
                     break;
                 case ListViewSelectionMode.Extended:
                     drawingSession.DrawBound(this.Transformer, matrix, this.ViewModel.AccentColor);

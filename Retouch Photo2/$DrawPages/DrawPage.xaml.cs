@@ -75,9 +75,7 @@ namespace Retouch_Photo2
             this.ConstructDragAndDrop();
 
             //DrawLayout
-            this.DrawLayout.LeftIcon = ToolManager.IconControl;
             this.DrawLayout.RightIcon = new Retouch_Photo2.Layers.Icon();
-            this.DrawLayout.FootPage = ToolManager.PageBorder;
             this.DrawLayout.TouchbarPicker = TouchbarButton.PickerBorder;
             this.DrawLayout.TouchbarSlider = TouchbarButton.SliderBorder;
             this.DrawLayout.GalleryButton.Click += (s, e) => this.ShowGalleryDialog(GalleryMode.AddImage);

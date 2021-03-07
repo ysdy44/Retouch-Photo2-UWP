@@ -128,6 +128,7 @@
     <Compile Include="SelectionViewModels\SelectionViewModel.SetValue.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="SettingViewModels\SettingViewModel.Setting.cs" />
+    <Compile Include="TipViewModels\TipViewModel.Tool.cs" />
     <Compile Include="TipViewModels\TipViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.Notify.cs" />

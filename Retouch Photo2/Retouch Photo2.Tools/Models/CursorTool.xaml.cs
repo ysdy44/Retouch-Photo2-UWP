@@ -37,6 +37,7 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
 
         //@Content      
@@ -58,13 +59,13 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.CursorMode = CursorMode.None;
 
-            if (ToolManager.TransformerTool.Started(startingPoint, point))//TransformerTool
+            if (this.TipViewModel.TransformerTool.Started(startingPoint, point))//TransformerTool
             {
                 this.CursorMode = CursorMode.Transformer;
                 return;
             }
 
-            if (ToolManager.MoveTool.Started(startingPoint, point))//MoveTool
+            if (this.TipViewModel.MoveTool.Started(startingPoint, point))//MoveTool
             {
                 this.CursorMode = CursorMode.Move;
                 return;
@@ -85,10 +86,10 @@ namespace Retouch_Photo2.Tools.Models
             switch (this.CursorMode)
             {
                 case CursorMode.Transformer:
-                    ToolManager.TransformerTool.Delta(startingPoint, point);//TransformerTool
+                    this.TipViewModel.TransformerTool.Delta(startingPoint, point);//TransformerTool
                     break;
                 case CursorMode.Move:
-                    ToolManager.MoveTool.Delta(startingPoint, point);//MoveTool
+                    this.TipViewModel.MoveTool.Delta(startingPoint, point);//MoveTool
                     break;
                 case CursorMode.BoxChoose:
                     {
@@ -110,10 +111,10 @@ namespace Retouch_Photo2.Tools.Models
             switch (cursorMode)
             {
                 case CursorMode.Transformer:
-                    ToolManager.TransformerTool.Complete(startingPoint, point); //TransformerTool
+                    this.TipViewModel.TransformerTool.Complete(startingPoint, point); //TransformerTool
                     break;
                 case CursorMode.Move:
-                    ToolManager.MoveTool.Complete(startingPoint, point);//MoveTool
+                    this.TipViewModel.MoveTool.Complete(startingPoint, point);//MoveTool
                     break;
                 case CursorMode.BoxChoose:
                     {
@@ -134,7 +135,7 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
         }
-        public void Clicke(Vector2 point) => ToolManager.MoveTool.Clicke(point);
+        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)
@@ -150,7 +151,7 @@ namespace Retouch_Photo2.Tools.Models
                     ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
                     drawingSession.DrawLayerBound(layer2, matrix, this.ViewModel.AccentColor);
 
-                    ToolManager.TransformerTool.Draw(drawingSession); //TransformerTool
+                    this.TipViewModel.TransformerTool.Draw(drawingSession); //TransformerTool
                     break;
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage layerage in this.ViewModel.SelectionLayerages)
@@ -159,7 +160,7 @@ namespace Retouch_Photo2.Tools.Models
                         drawingSession.DrawLayerBound(layer, matrix, this.ViewModel.AccentColor);
                     }
 
-                    ToolManager.TransformerTool.Draw(drawingSession); //TransformerTool
+                    this.TipViewModel.TransformerTool.Draw(drawingSession); //TransformerTool
                     break;
             }
 
@@ -168,10 +169,10 @@ namespace Retouch_Photo2.Tools.Models
             {
                 case CursorMode.None:
                 case CursorMode.Transformer:
-                    ToolManager.TransformerTool.Draw(drawingSession);//TransformerTool
+                    this.TipViewModel.TransformerTool.Draw(drawingSession);//TransformerTool
                     break;
                 case CursorMode.Move:
-                    ToolManager.MoveTool.Draw(drawingSession);//MoveTool
+                    this.TipViewModel.MoveTool.Draw(drawingSession);//MoveTool
                     break;
                 case CursorMode.BoxChoose:
                     CanvasGeometry geometry = this.BoxRect.ToRectangle(LayerManager.CanvasDevice, matrix);

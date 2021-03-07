@@ -20,6 +20,7 @@ namespace Retouch_Photo2.ViewModels
     public partial class TipViewModel : INotifyPropertyChanged
     {
 
+
         /// <summary> Gets or sets the <see cref="ToolTip.IsOpen"/>. </summary>
         public bool IsOpen
         {
@@ -30,7 +31,6 @@ namespace Retouch_Photo2.ViewModels
                 this.OnPropertyChanged(nameof(this.IsOpen));//Notify 
 
                 this.MenusIsOpen = value;
-                this.ToolsIsOpen = value;
             }
         }
         private bool isOpen;
@@ -112,29 +112,6 @@ namespace Retouch_Photo2.ViewModels
                         menu.State = ExpanderState.FlyoutShow;
                     }
 
-                }
-            }
-        }
-
-
-        #endregion
-
-
-        #region Tool
-
-
-        /// <summary> Gets or sets the all tools. </summary>   
-        public IList<ITool> Tools { get; set; } = new List<ITool>();
-
-        private bool ToolsIsOpen
-        {
-            set
-            {
-                foreach (ITool tool in this.Tools)
-                {
-                    if (tool == null) continue;
-
-                    tool.IsOpen = value;
                 }
             }
         }
