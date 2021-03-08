@@ -119,11 +119,11 @@ namespace Retouch_Photo2.Effects.Models
                 this.ToggleButton.IsChecked = isOn;
                 this.MethodViewModel.EffectChanged<bool>
                 (
-                   set: (effect) => effect.Straighten_IsOn = isOn,
+                   set: (effect) => effect.Sharpen_IsOn = isOn,
 
                    type: HistoryType.LayersProperty_SwitchEffect_Sharpen,
-                   getUndo: (effect) => effect.Straighten_IsOn,
-                   setUndo: (effect, previous) => effect.Straighten_IsOn = previous
+                   getUndo: (effect) => effect.Sharpen_IsOn,
+                   setUndo: (effect, previous) => effect.Sharpen_IsOn = previous
                 );
             };
         }
