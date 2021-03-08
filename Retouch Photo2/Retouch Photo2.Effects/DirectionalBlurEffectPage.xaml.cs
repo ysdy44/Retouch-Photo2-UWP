@@ -3,6 +3,7 @@
 // Difficult:         ★★★
 // Only:              
 // Complete:      ★★★
+using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Effects.Icons;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
@@ -39,6 +40,23 @@ namespace Retouch_Photo2.Effects.Models
                 this.AnglePicker2.Radians = value;
             }
         }
+        private EffectBorderMode BorderMode
+        {
+            set
+            {
+                switch (value)
+                {
+                    case EffectBorderMode.Soft:
+                        this.IsHardBorderCheckBox.IsChecked = false;
+                        break;
+                    case EffectBorderMode.Hard:
+                        this.IsHardBorderCheckBox.IsChecked = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
 
         //@Construct
@@ -57,6 +75,8 @@ namespace Retouch_Photo2.Effects.Models
 
             this.ConstructAngle1();
             this.ConstructAngle2();
+
+            this.ConstructIsHard();
         }
     }
 
@@ -75,6 +95,8 @@ namespace Retouch_Photo2.Effects.Models
 
             this.RadiusTextBlock.Text = resource.GetString("Effects_DirectionalBlur_Radius");
             this.AngleTextBlock.Text = resource.GetString("Effects_DirectionalBlur_Angle");
+
+            this.IsHardBorderCheckBox.Content = resource.GetString("Effects_DirectionalBlur_IsHardBorder");
         }
 
         //@Content
@@ -94,24 +116,28 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.Radius = 0.0f;
             this.Angle = 0.0f;
+            this.BorderMode = EffectBorderMode.Soft;
 
-            this.MethodViewModel.EffectChanged<(float, float)>
+            this.MethodViewModel.EffectChanged<(float, float, EffectBorderMode)>
             (
                 set: (effect) =>
                 {
                     effect.DirectionalBlur_Radius = 0.0f;
-                    effect.DirectionalBlur_Angle = 0.5f;
+                    effect.DirectionalBlur_Angle = 0.0f;
+                    effect.DirectionalBlur_BorderMode = EffectBorderMode.Soft;
                 },
                 type: HistoryType.LayersProperty_ResetEffect_DirectionalBlur,
                 getUndo: (effect) =>
                 (
                     effect.DirectionalBlur_Radius,
-                    effect.DirectionalBlur_Angle
+                    effect.DirectionalBlur_Angle,
+                    effect.DirectionalBlur_BorderMode
                 ),
                 setUndo: (effect, previous) =>
                 {
                     effect.DirectionalBlur_Radius = previous.Item1;
                     effect.DirectionalBlur_Angle = previous.Item2;
+                    effect.DirectionalBlur_BorderMode = previous.Item3;
                 }
             );
         }
@@ -123,6 +149,7 @@ namespace Retouch_Photo2.Effects.Models
         {
             this.Radius = effect.DirectionalBlur_Radius;
             this.Angle = effect.DirectionalBlur_Angle;
+            this.BorderMode = effect.DirectionalBlur_BorderMode;
         }
     }
     
@@ -250,6 +277,25 @@ namespace Retouch_Photo2.Effects.Models
                    getUndo: (effect) => effect.StartingDirectionalBlur_Angle,
                    setUndo: (effect, previous) => effect.DirectionalBlur_Angle = previous
                );
+            };
+        }
+
+        //IsHardBorder
+        private void ConstructIsHard()
+        {
+            this.IsHardBorderCheckBox.Tapped += (s, e) =>
+            {
+                EffectBorderMode borderMode = this.IsHardBorderCheckBox.IsChecked == true ? EffectBorderMode.Soft : EffectBorderMode.Hard;
+                this.BorderMode = borderMode;
+
+                this.MethodViewModel.EffectChangeCompleted<EffectBorderMode>
+                (
+                   set: (effect) => effect.DirectionalBlur_BorderMode = borderMode,
+
+                   type: HistoryType.LayersProperty_SetEffect_GaussianBlur_BoderMode,
+                   getUndo: (effect) => effect.DirectionalBlur_BorderMode,
+                   setUndo: (effect, previous) => effect.DirectionalBlur_BorderMode = previous
+                );
             };
         }
 

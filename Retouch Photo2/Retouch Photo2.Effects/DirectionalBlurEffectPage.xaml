@@ -41,7 +41,12 @@
         </RelativePanel>
         <elements:RadiansPicker x:Name="AnglePicker2"/>
 
-        <ContentControl Height="12"/>
+
+        <!--IsHardBorder-->
+        <elements:CheckControl x:Name="IsHardBorderCheckBox" Margin="4,0" Foreground="{ThemeResource AppText}"/>
+
         
+        <ContentControl Height="12"/>
+
     </StackPanel>    
 </Page>

@@ -58,6 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+
+
 <data name='$Loading_Loading' xml:space='preserve'><value>로딩 중</value></data>
 <data name='$Loading_LoadFailed' xml:space='preserve'><value>불러 오지 못했습니다</value></data>
 <data name='$Loading_FileCorrupt' xml:space='preserve'><value>파일이 손상되었습니다</value></data>
@@ -462,10 +464,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>가우시안 흐림 효과 재설정</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>가우스 흐림 효과 전환</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>가우시안 블러 효과의 양 설정</value></data>
+<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>가우시안 블러 효과의 테두리 모드 설정</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>방향 흐림 효과 재설정</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>방향 흐림 효과 전환</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>방향 흐림 효과의 반경 설정</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>방향 흐림 효과 각도 설정</value></data>
+<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>방향 흐림 효과의 테두리 모드 설정</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>선명 효과 재설정</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>선명 효과 전환</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>선명 효과의 양 설정</value></data>
@@ -641,8 +645,10 @@
 <data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>양</value></data>
 <data name='Adjustments_Vignette_Color' xml:space='preserve'><value>색깔</value></data>
 <data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>반지름</value></data>
+<data name='Effects_GaussianBlur_IsHardBorder' xml:space='preserve'><value>하드 테두리</value></data>
 <data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>반지름</value></data>
 <data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>각도</value></data>
+<data name='Effects_DirectionalBlur_IsHardBorder' xml:space='preserve'><value>하드 테두리</value></data>
 <data name='Effects_Sharpen_Amount' xml:space='preserve'><value>양</value></data>
 <data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>반지름</value></data>
 <data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>불투명</value></data>

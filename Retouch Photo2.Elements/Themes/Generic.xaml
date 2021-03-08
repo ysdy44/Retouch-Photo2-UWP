@@ -4,6 +4,8 @@
 
 
     <ResourceDictionary.MergedDictionaries>
+        <!--CheckControl-->
+        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/CheckControl.xaml"/>
         <!--Dialog-->
         <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/Dialog.xaml"/>
         <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/DialogWide.xaml"/>

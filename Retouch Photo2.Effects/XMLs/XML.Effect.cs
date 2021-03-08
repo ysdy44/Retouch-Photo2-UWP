@@ -3,6 +3,7 @@
 // Difficult:         
 // Only:              
 // Complete:      ★
+using Microsoft.Graphics.Canvas.Effects;
 using System.Xml.Linq;
 
 namespace Retouch_Photo2.Effects
@@ -28,7 +29,8 @@ namespace Retouch_Photo2.Effects
                 element.Add(new XElement
                (
                    "GaussianBlur",
-                   new XAttribute("Radius", effect.GaussianBlur_Radius)
+                   new XAttribute("Radius", effect.GaussianBlur_Radius),
+                   new XAttribute("BorderMode", effect.GaussianBlur_BorderMode)
                 ));
             }
 
@@ -108,12 +110,14 @@ namespace Retouch_Photo2.Effects
             {
                 effect.GaussianBlur_IsOn = true;
                 if (gaussianBlur.Attribute("Radius") is XAttribute radius) effect.GaussianBlur_Radius = (float)radius;
+                if (gaussianBlur.Attribute("BorderMode") is XAttribute borderMode) effect.GaussianBlur_BorderMode = borderMode.Value == EffectBorderMode.Hard.ToString() ? EffectBorderMode.Hard : EffectBorderMode.Soft;
             }
             if (element.Element("DirectionalBlur") is XElement directionalBlur)
             {
                 effect.DirectionalBlur_IsOn = true;
                 if (directionalBlur.Attribute("Radius") is XAttribute radius) effect.DirectionalBlur_Radius = (float)radius;
                 if (directionalBlur.Attribute("Angle") is XAttribute angle) effect.DirectionalBlur_Angle = (float)angle;
+                if (directionalBlur.Attribute("BorderMode") is XAttribute borderMode) effect.DirectionalBlur_BorderMode = borderMode.Value == EffectBorderMode.Hard.ToString() ? EffectBorderMode.Hard : EffectBorderMode.Soft;
             }
             if (element.Element("Sharpen") is XElement sharpen)
             {

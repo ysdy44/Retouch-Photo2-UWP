@@ -58,6 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+
+
 <data name='$Loading_Loading' xml:space='preserve'><value>読み込み中</value></data>
 <data name='$Loading_LoadFailed' xml:space='preserve'><value>読み込みに失敗しました</value></data>
 <data name='$Loading_FileCorrupt' xml:space='preserve'><value>ファイルが破損しています</value></data>
@@ -462,10 +464,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>ガウスぼかし効果をリセットする</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>ガウスぼかし効果を切り替えます</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>ガウスぼかし効果の量を設定します</value></data>
+<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>ガウスぼかし効果の境界モードを設定します</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>指向性ブラー効果をリセット</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>方向性ぼかし効果を切り替える</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>指向性ブラー効果の半径を設定します</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>指向性ブラー効果の角度を設定します</value></data>
+<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>指向性ブラー効果のボーダーモードを設定します</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>シャープ効果をリセット</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>スイッチシャープ効果</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>シャープ効果の量を設定する</value></data>
@@ -641,8 +645,10 @@
 <data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>量</value></data>
 <data name='Adjustments_Vignette_Color' xml:space='preserve'><value>色</value></data>
 <data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>半径</value></data>
+<data name='Effects_GaussianBlur_IsHardBorder' xml:space='preserve'><value>ハードボーダー</value></data>
 <data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>半径</value></data>
 <data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>角度</value></data>
+<data name='Effects_DirectionalBlur_IsHardBorder' xml:space='preserve'><value>ハードボーダー</value></data>
 <data name='Effects_Sharpen_Amount' xml:space='preserve'><value>量</value></data>
 <data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>半径</value></data>
 <data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>不透明度</value></data>

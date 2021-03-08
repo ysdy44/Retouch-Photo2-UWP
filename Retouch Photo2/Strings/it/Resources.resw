@@ -58,6 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+
+
 <data name='$Loading_Loading' xml:space='preserve'><value>Caricamento in corso</value></data>
 <data name='$Loading_LoadFailed' xml:space='preserve'><value>Caricamento fallito</value></data>
 <data name='$Loading_FileCorrupt' xml:space='preserve'><value>Il file è danneggiato</value></data>
@@ -462,10 +464,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Ripristina l'effetto sfocatura gaussiana</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Cambia l'effetto sfocatura gaussiana</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Imposta la quantità di effetto sfocatura gaussiana</value></data>
+<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>Imposta la modalità bordo dell'effetto sfocatura gaussiana</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Ripristina l'effetto sfocatura direzionale</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Cambia l'effetto sfocatura direzionale</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Imposta il raggio dell'effetto di sfocatura direzionale</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Imposta l'angolo dell'effetto di sfocatura direzionale</value></data>
+<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>Imposta la modalità bordo dell'effetto sfocatura direzionale</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Ripristina l'effetto di nitidezza</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Cambia effetto di nitidezza</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Imposta la quantità di effetto di nitidezza</value></data>
@@ -641,8 +645,10 @@
 <data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>Quantità</value></data>
 <data name='Adjustments_Vignette_Color' xml:space='preserve'><value>Colore</value></data>
 <data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>Raggio</value></data>
+<data name='Effects_GaussianBlur_IsHardBorder' xml:space='preserve'><value>Bordo duro</value></data>
 <data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>Raggio</value></data>
 <data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>Angolo</value></data>
+<data name='Effects_DirectionalBlur_IsHardBorder' xml:space='preserve'><value>Bordo duro</value></data>
 <data name='Effects_Sharpen_Amount' xml:space='preserve'><value>Quantità</value></data>
 <data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>Raggio</value></data>
 <data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>Opacità</value></data>

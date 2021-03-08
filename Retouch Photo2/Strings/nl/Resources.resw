@@ -58,6 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+
+
 <data name='$Loading_Loading' xml:space='preserve'><value>Bezig met laden</value></data>
 <data name='$Loading_LoadFailed' xml:space='preserve'><value>Laden mislukt</value></data>
 <data name='$Loading_FileCorrupt' xml:space='preserve'><value>Bestand is beschadigd</value></data>
@@ -462,10 +464,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Gaussiaans vervagingseffect resetten</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Gaussiaans vervagingseffect wisselen</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Stel de hoeveelheid Gaussiaans vervagingseffect in</value></data>
+<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>Stel de randmodus van het gaussiaanse vervagingseffect in</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Stel het directionele vervagingseffect opnieuw in</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Wissel van directioneel vervagingseffect</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Stel de straal van het directionele vervagingseffect in</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Stel de hoek van het directionele vervagingseffect in</value></data>
+<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>Stel de randmodus van het directionele vervagingseffect in</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Stel het verscherpingseffect opnieuw in</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Schakel het verscherpingseffect in</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Stel de hoeveelheid verscherpingseffect in</value></data>
@@ -641,8 +645,10 @@
 <data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>Bedrag</value></data>
 <data name='Adjustments_Vignette_Color' xml:space='preserve'><value>Kleur</value></data>
 <data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>Straal</value></data>
+<data name='Effects_GaussianBlur_IsHardBorder' xml:space='preserve'><value>Harde rand</value></data>
 <data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>Straal</value></data>
 <data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>Hoek</value></data>
+<data name='Effects_DirectionalBlur_IsHardBorder' xml:space='preserve'><value>Harde rand</value></data>
 <data name='Effects_Sharpen_Amount' xml:space='preserve'><value>Bedrag</value></data>
 <data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>Straal</value></data>
 <data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>Ondoorzichtigheid</value></data>

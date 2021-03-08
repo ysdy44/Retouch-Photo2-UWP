@@ -346,7 +346,7 @@ namespace Retouch_Photo2.Menus.Models
         //IsFollowTransform
         private void ConstructIsFollowTransform()
         {
-            this.IsFollowTransformCheckBox.Click += (s, e) =>
+            this.IsFollowTransformCheckBox.Tapped += (s, e) =>
             {
                 bool isFollowTransform = !this.SelectionViewModel.IsFollowTransform;
                 this.SelectionViewModel.IsFollowTransform = isFollowTransform;
@@ -366,7 +366,7 @@ namespace Retouch_Photo2.Menus.Models
         //IsStrokeBehindFill
         private void ConstructIsStrokeBehindFill()
         {
-            this.IsStrokeBehindFillCheckBox.Click += (s, e) =>
+            this.IsStrokeBehindFillCheckBox.Tapped += (s, e) =>
             {
                 bool IsStrokeBehindFill = !this.SelectionViewModel.IsStrokeBehindFill;
                 this.SelectionViewModel.IsStrokeBehindFill = IsStrokeBehindFill;
@@ -386,7 +386,7 @@ namespace Retouch_Photo2.Menus.Models
         //IsStrokeWidthFollowScale
         private void ConstructIsStrokeWidthFollowScale()
         {
-            this.IsStrokeWidthFollowScaleCheckBox.Click += (s, e) =>
+            this.IsStrokeWidthFollowScaleCheckBox.Tapped += (s, e) =>
             {
                 bool IsStrokeWidthFollowScale = !this.SelectionViewModel.IsStrokeWidthFollowScale;
                 this.SelectionViewModel.IsStrokeWidthFollowScale = IsStrokeWidthFollowScale;

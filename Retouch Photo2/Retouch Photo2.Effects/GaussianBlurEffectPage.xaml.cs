@@ -3,13 +3,13 @@
 // Difficult:         ★★★
 // Only:              
 // Complete:      ★★★
+using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Effects.Icons;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
-using Retouch_Photo2.Historys;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Retouch_Photo2.Layers;
 
 namespace Retouch_Photo2.Effects.Models
 {
@@ -32,7 +32,24 @@ namespace Retouch_Photo2.Effects.Models
                 this.RadiusSlider.Value = value;
             }
         }
-        
+        private EffectBorderMode BorderMode
+        {
+            set
+            {
+                switch (value)
+                {
+                    case EffectBorderMode.Soft:
+                        this.IsHardBorderCheckBox.IsChecked = false;
+                        break;
+                    case EffectBorderMode.Hard:
+                        this.IsHardBorderCheckBox.IsChecked = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
 
         //@Construct
         /// <summary>
@@ -47,6 +64,8 @@ namespace Retouch_Photo2.Effects.Models
 
             this.ConstructRadius1();
             this.ConstructRadius2();
+
+            this.ConstructIsHard();
         }
     }
 
@@ -64,7 +83,10 @@ namespace Retouch_Photo2.Effects.Models
             this.Button.Style = this.IconButton;
 
             this.RadiusTextBlock.Text = resource.GetString("Effects_GaussianBlur_Radius");
+
+            this.IsHardBorderCheckBox.Content = resource.GetString("Effects_GaussianBlur_IsHardBorder");
         }
+        
 
         //@Content
         /// <summary> Gets the type. </summary>
@@ -83,14 +105,26 @@ namespace Retouch_Photo2.Effects.Models
         public void Reset()
         {
             this.Radius = 0.0f;
+            this.BorderMode = EffectBorderMode.Soft;
 
-            this.MethodViewModel.EffectChanged<float>
+            this.MethodViewModel.EffectChanged<(float, EffectBorderMode)>
             (
-                set: (effect) => effect.GaussianBlur_Radius = 0.0f,
-
+                set: (effect) =>
+                {
+                    effect.GaussianBlur_Radius = 0.0f;
+                    effect.GaussianBlur_BorderMode = EffectBorderMode.Soft;
+                },
                 type: HistoryType.LayersProperty_ResetEffect_GaussianBlur,
-                getUndo: (effect) => effect.GaussianBlur_Radius,
-                setUndo: (effect, previous) => effect.GaussianBlur_Radius = previous
+                getUndo: (effect) =>
+                (
+                    effect.GaussianBlur_Radius,
+                    effect.GaussianBlur_BorderMode
+                ),
+                setUndo: (effect, previous) =>
+                {
+                    effect.GaussianBlur_Radius = previous.Item1;
+                    effect.GaussianBlur_BorderMode = previous.Item2;
+                }
             );
         }
         public void FollowButton(Effect effect)
@@ -100,6 +134,7 @@ namespace Retouch_Photo2.Effects.Models
         public void FollowPage(Effect effect)
         {
             this.RadiusSlider.Value = effect.GaussianBlur_Radius;
+            this.BorderMode = effect.GaussianBlur_BorderMode;
         }
     }
     
@@ -176,6 +211,25 @@ namespace Retouch_Photo2.Effects.Models
                     type: HistoryType.LayersProperty_SetEffect_GaussianBlur_Amount,
                     getUndo: (effect) => effect.StartingGaussianBlur_Radius,
                     setUndo: (effect, previous) => effect.GaussianBlur_Radius = previous
+                );
+            };
+        }
+
+        //IsHardBorder
+        private void ConstructIsHard()
+        {
+            this.IsHardBorderCheckBox.Tapped += (s, e) =>
+            {
+                EffectBorderMode borderMode = this.IsHardBorderCheckBox.IsChecked == true ? EffectBorderMode.Soft : EffectBorderMode.Hard;
+                this.BorderMode = borderMode;
+
+                this.MethodViewModel.EffectChangeCompleted<EffectBorderMode>
+                (
+                   set: (effect) => effect.GaussianBlur_BorderMode = borderMode,
+
+                   type: HistoryType.LayersProperty_SetEffect_GaussianBlur_BoderMode,
+                   getUndo: (effect) => effect.GaussianBlur_BorderMode,
+                   setUndo: (effect, previous) => effect.GaussianBlur_BorderMode = previous
                 );
             };
         }

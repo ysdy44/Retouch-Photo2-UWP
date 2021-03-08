@@ -58,6 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+
+
 <data name='$Loading_Loading' xml:space='preserve'><value>Loading</value></data>
 <data name='$Loading_LoadFailed' xml:space='preserve'><value>Failed to load</value></data>
 <data name='$Loading_FileCorrupt' xml:space='preserve'><value>File is corrupted</value></data>
@@ -462,10 +464,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Reset gaussian blur effect</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Switch gaussian blur effect</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Set amount of gaussian blur effect</value></data>
+<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>Set border mode of gaussian blur effect</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Reset directional blur effect</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Switch directional blur effect</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Set radius of directional blur effect</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Set angle of directional blur effect</value></data>
+<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>Set border mode of directional blur effect</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Reset sharpen effect</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Switch sharpen effect</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Set amount of  sharpen effect</value></data>
@@ -641,8 +645,10 @@
 <data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>Amount</value></data>
 <data name='Adjustments_Vignette_Color' xml:space='preserve'><value>Color</value></data>
 <data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>Radius</value></data>
+<data name='Effects_GaussianBlur_IsHardBorder' xml:space='preserve'><value>Hard border</value></data>
 <data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>Radius</value></data>
 <data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>Angle</value></data>
+<data name='Effects_DirectionalBlur_IsHardBorder' xml:space='preserve'><value>Hard border</value></data>
 <data name='Effects_Sharpen_Amount' xml:space='preserve'><value>Amount</value></data>
 <data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>Radius</value></data>
 <data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>Opacity</value></data>

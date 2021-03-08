@@ -58,6 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+
+
 <data name='$Loading_Loading' xml:space='preserve'><value>Chargement</value></data>
 <data name='$Loading_LoadFailed' xml:space='preserve'><value>Échec du chargement</value></data>
 <data name='$Loading_FileCorrupt' xml:space='preserve'><value>Le fichier est corrompu</value></data>
@@ -462,10 +464,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Réinitialiser l'effet de flou gaussien</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Changer l'effet de flou gaussien</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Définir la quantité d'effet de flou gaussien</value></data>
+<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>Définir le mode de bordure de l'effet de flou gaussien</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Réinitialiser l'effet de flou directionnel</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Changer l'effet de flou directionnel</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Définir le rayon de l'effet de flou directionnel</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Définir l'angle de l'effet de flou directionnel</value></data>
+<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>Définir le mode de bordure de l'effet de flou directionnel</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Réinitialiser l'effet d'accentuation</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Changer d'effet de netteté</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Définir la quantité d'effet de netteté</value></data>
@@ -641,8 +645,10 @@
 <data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>Quantité</value></data>
 <data name='Adjustments_Vignette_Color' xml:space='preserve'><value>Couleur</value></data>
 <data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>Rayon</value></data>
+<data name='Effects_GaussianBlur_IsHardBorder' xml:space='preserve'><value>Bordure dure</value></data>
 <data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>Rayon</value></data>
 <data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>Angle</value></data>
+<data name='Effects_DirectionalBlur_IsHardBorder' xml:space='preserve'><value>Bordure dure</value></data>
 <data name='Effects_Sharpen_Amount' xml:space='preserve'><value>Quantité</value></data>
 <data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>Rayon</value></data>
 <data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>Opacité</value></data>

@@ -22,6 +22,7 @@ namespace Retouch_Photo2.Effects
         public bool GaussianBlur_IsOn;
         public float GaussianBlur_Radius = 0;
         public float StartingGaussianBlur_Radius { get; private set; }
+        public EffectBorderMode GaussianBlur_BorderMode = EffectBorderMode.Soft;
         public void CacheGaussianBlur()
         {
             this.StartingGaussianBlur_Radius = this.GaussianBlur_Radius;
@@ -37,6 +38,7 @@ namespace Retouch_Photo2.Effects
         public float StartingDirectionalBlur_Radius { get; private set; }
         public float DirectionalBlur_Angle = 0;
         public float StartingDirectionalBlur_Angle { get; private set; }
+        public EffectBorderMode DirectionalBlur_BorderMode = EffectBorderMode.Soft;
         public void CacheDirectionalBlur()
         {
             this.StartingDirectionalBlur_Radius = this.DirectionalBlur_Radius;
@@ -194,11 +196,13 @@ namespace Retouch_Photo2.Effects
                 //GaussianBlur
                 GaussianBlur_IsOn = this.GaussianBlur_IsOn,
                 GaussianBlur_Radius = this.GaussianBlur_Radius,
-
+                GaussianBlur_BorderMode = this.GaussianBlur_BorderMode,
+                
                 //DirectionalBlur
                 DirectionalBlur_IsOn = this.DirectionalBlur_IsOn,
                 DirectionalBlur_Radius = this.DirectionalBlur_Radius,
                 DirectionalBlur_Angle = this.DirectionalBlur_Angle,
+                DirectionalBlur_BorderMode = this.DirectionalBlur_BorderMode,
 
                 //Sharpen
                 Sharpen_IsOn = this.Sharpen_IsOn,
@@ -249,7 +253,8 @@ namespace Retouch_Photo2.Effects
                 image = new Microsoft.Graphics.Canvas.Effects.GaussianBlurEffect
                 {
                     Source = image,
-                    BlurAmount = effect.GaussianBlur_Radius
+                    BlurAmount = effect.GaussianBlur_Radius,
+                    BorderMode = effect.GaussianBlur_BorderMode,
                 };
             }
 
@@ -261,6 +266,7 @@ namespace Retouch_Photo2.Effects
                     Source = image,
                     BlurAmount = effect.DirectionalBlur_Radius,
                     Angle = -effect.DirectionalBlur_Angle,
+                    BorderMode = effect.DirectionalBlur_BorderMode,
                 };
             }
 

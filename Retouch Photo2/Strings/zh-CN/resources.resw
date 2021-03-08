@@ -58,6 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+
+
 <data name='$Loading_Loading' xml:space='preserve'><value>加载中</value></data>
 <data name='$Loading_LoadFailed' xml:space='preserve'><value>加载失败</value></data>
 <data name='$Loading_FileCorrupt' xml:space='preserve'><value>文件已损坏</value></data>
@@ -462,10 +464,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>重置高斯模糊特效</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>切换高斯模糊特效</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>设置高斯模糊特效数值</value></data>
+<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>设置高斯模糊特效边缘模式</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>重置定向模糊特效</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>切换定向模糊特效</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>设置定向模糊特效半径</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>设置定向模糊特效角度</value></data>
+<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>设置定向模糊特效边缘模式</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>重置锐化特效</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>切换锐化特效</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>设置锐化特效数值</value></data>
@@ -641,8 +645,10 @@
 <data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>量</value></data>
 <data name='Adjustments_Vignette_Color' xml:space='preserve'><value>颜色</value></data>
 <data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>半径</value></data>
+<data name='Effects_GaussianBlur_IsHardBorder' xml:space='preserve'><value>硬边缘</value></data>
 <data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>半径</value></data>
 <data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>角度</value></data>
+<data name='Effects_DirectionalBlur_IsHardBorder' xml:space='preserve'><value>硬边缘</value></data>
 <data name='Effects_Sharpen_Amount' xml:space='preserve'><value>量</value></data>
 <data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>半径</value></data>
 <data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>不透明度</value></data>

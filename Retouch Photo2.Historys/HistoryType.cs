@@ -171,11 +171,13 @@ namespace Retouch_Photo2.Historys
         LayersProperty_ResetEffect_GaussianBlur,
         LayersProperty_SwitchEffect_GaussianBlur,
         LayersProperty_SetEffect_GaussianBlur_Amount,
+        LayersProperty_SetEffect_GaussianBlur_BoderMode,
 
         LayersProperty_ResetEffect_DirectionalBlur,
         LayersProperty_SwitchEffect_DirectionalBlur,
         LayersProperty_SetEffect_DirectionalBlur_Radius,
         LayersProperty_SetEffect_DirectionalBlur_Angle,
+        LayersProperty_SetEffect_DirectionalBlur_BoderMode,
 
         LayersProperty_ResetEffect_Sharpen,
         LayersProperty_SwitchEffect_Sharpen,

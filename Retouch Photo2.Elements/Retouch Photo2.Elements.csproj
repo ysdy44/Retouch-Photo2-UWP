@@ -123,6 +123,9 @@
       <DependentUpon>AdaptiveWidthLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationTitleBarExtension.cs" />
+    <Compile Include="CheckControl.xaml.cs">
+      <DependentUpon>CheckControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog.BackRequested.cs" />
     <Compile Include="DialogWide.BackRequested.cs" />
     <Compile Include="DialogWide.xaml.cs">
@@ -248,6 +251,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="%24SettingPages\PhoneLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CheckControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

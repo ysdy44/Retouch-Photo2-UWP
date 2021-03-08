@@ -58,6 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+
+
 <data name='$Loading_Loading' xml:space='preserve'><value>Загрузка</value></data>
 <data name='$Loading_LoadFailed' xml:space='preserve'><value>Ошибка загрузки</value></data>
 <data name='$Loading_FileCorrupt' xml:space='preserve'><value>Файл поврежден</value></data>
@@ -462,10 +464,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Сбросить эффект размытия по Гауссу</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Включить эффект размытия по Гауссу</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Установите количество эффекта размытия по Гауссу</value></data>
+<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>Установить режим границы для эффекта размытия по Гауссу</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Сбросить эффект направленного размытия</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Включить эффект направленного размытия</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Установить радиус эффекта направленного размытия</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Установить угол эффекта направленного размытия</value></data>
+<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>Установить режим границы для эффекта направленного размытия</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Сбросить эффект резкости</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Эффект переключения резкости</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Установите количество эффекта резкости</value></data>
@@ -641,8 +645,10 @@
 <data name='Adjustments_Vignette_Amount' xml:space='preserve'><value>Количество</value></data>
 <data name='Adjustments_Vignette_Color' xml:space='preserve'><value>Цвет</value></data>
 <data name='Effects_GaussianBlur_Radius' xml:space='preserve'><value>Радиус</value></data>
+<data name='Effects_GaussianBlur_IsHardBorder' xml:space='preserve'><value>Жесткая граница</value></data>
 <data name='Effects_DirectionalBlur_Radius' xml:space='preserve'><value>Радиус</value></data>
 <data name='Effects_DirectionalBlur_Angle' xml:space='preserve'><value>Угол</value></data>
+<data name='Effects_DirectionalBlur_IsHardBorder' xml:space='preserve'><value>Жесткая граница</value></data>
 <data name='Effects_Sharpen_Amount' xml:space='preserve'><value>Количество</value></data>
 <data name='Effects_OuterShadow_Radius' xml:space='preserve'><value>Радиус</value></data>
 <data name='Effects_OuterShadow_Opacity' xml:space='preserve'><value>Непрозрачность</value></data>

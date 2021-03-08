@@ -262,6 +262,7 @@ namespace Retouch_Photo2.Menus.Models
             //Layers
             IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
             Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayerages);
+            if (outermost == null) return;
             ILayer layer = outermost.Self;
 
             Effect effect = layer.Effect;
