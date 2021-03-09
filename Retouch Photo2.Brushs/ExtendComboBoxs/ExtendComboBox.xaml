@@ -12,10 +12,10 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Button x:Name="ClampButton" Style="{StaticResource AppIconSelectedButton}"/>
-                <Button x:Name="WrapButton" Style="{StaticResource AppIconSelectedButton}"/>
-                <Button x:Name="MirrorButton" Style="{StaticResource AppIconSelectedButton}"/>
+            <StackPanel x:Name="StackPanel" Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button x:Name="Clamp" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="Wrap" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="Mirror" Style="{StaticResource AppIconSelectedButton}"/>
             </StackPanel>
         </Flyout>
     </UserControl.Resources>

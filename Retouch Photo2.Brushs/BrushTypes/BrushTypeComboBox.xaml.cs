@@ -3,7 +3,6 @@
 // Difficult:         ★★
 // Only:              ★★
 // Complete:      ★★
-using Retouch_Photo2.Brushs.BrushTypeIcons;
 using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -162,45 +161,74 @@ namespace Retouch_Photo2.Brushs
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ConstructGroup(this.NoneButton, resource.GetString("Tools_Brush_Type_None"), new NoneIcon(), BrushType.None);
 
-            this.ConstructGroup(this.ColorButton, resource.GetString("Tools_Brush_Type_Color"), new ColorIcon(), BrushType.Color);
+            foreach (UIElement child in this.StackPanel.Children)
+            {
+                if (child is Button button)
+                {
 
-            this.ConstructGroup(this.LinearGradientButton, resource.GetString("Tools_Brush_Type_LinearGradient"), new LinearGradientIcon(), BrushType.LinearGradient);
-            this.ConstructGroup(this.RadialGradientButton, resource.GetString("Tools_Brush_Type_RadialGradient"), new RadialGradientIcon(), BrushType.RadialGradient);
-            this.ConstructGroup(this.EllipticalGradientButton, resource.GetString("Tools_Brush_Type_EllipticalGradient"), new EllipticalGradientIcon(), BrushType.EllipticalGradient);
+                    //@Group
+                    //void constructGroup(Button button)
+                    {
+                        string key = button.Name;
+                        BrushType type = XML.CreateBrushType(key);
+                        string title = resource.GetString($"Tools_Brush_Type_{key}");
 
-            this.ConstructGroup(this.ImageButton, resource.GetString("Tools_Brush_Type_Image"), new ImageIcon(), BrushType.Image);
+
+                        //Button
+                        this.ConstructButton(button, key, type, title);
+
+
+                        //Group
+                        switch (this.FillOrStroke)
+                        {
+                            case FillOrStroke.Fill:
+                                group(this.FillType);
+                                break;
+                            case FillOrStroke.Stroke:
+                                group(this.StrokeType);
+                                break;
+                        }
+                        this.Group += (s, groupMode) => group(groupMode);
+
+                        void group(BrushType groupType)
+                        {
+                            if (groupType == type)
+                            {
+                                button.IsEnabled = false;
+
+                                this.Button.Content = title;
+                            }
+                            else button.IsEnabled = true;
+                        }
+                    }
+                }
+            }
         }
 
-        //Group
-        private void ConstructGroup(Button button, string text, UserControl icon, BrushType type)
+        private void ConstructButton(Button button, string key, BrushType type, string title)
         {
-            void group(BrushType groupType)
+            /*                
+             <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}">
+                 <Button.Resources>
+                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs\BrushTypes\BrushTypeIcons\NoneIcon.xaml"/>
+                 </Button.Resources>
+                 <Button.Tag>
+                     <ContentControl Template="{StaticResource NoneIcon}"/>
+                 </Button.Tag>
+             </Button> 
+           */
+            button.Content = title;
+            button.Resources = new ResourceDictionary
             {
-                if (groupType == type)
-                {
-                    button.IsEnabled = false;
-
-                    this.Button.Content = text;
-                }
-                else button.IsEnabled = true;
-            }
-
-            //NoneButton
-            switch (this.FillOrStroke)
+                //@Template
+                Source = new Uri($@"ms-appx:///Retouch Photo2.Brushs\BrushTypes\BrushTypeIcons\{key}Icon.xaml")
+            };
+            button.Tag = new ContentControl
             {
-                case FillOrStroke.Fill:
-                    group(this.FillType);
-                    break;
-                case FillOrStroke.Stroke:
-                    group(this.StrokeType);
-                    break;
-            }
-
-            //Buttons
-            button.Content = text;
-            button.Tag = icon;
+                //@Template
+                Template = button.Resources[$"{key}Icon"] as ControlTemplate
+            };
             button.Click += (s, e) =>
             {
                 switch (this.FillOrStroke)
@@ -214,9 +242,6 @@ namespace Retouch_Photo2.Brushs
                 }
                 this.Flyout.Hide();
             };
-
-            //Group
-            this.Group += (s, e) => group(e);
         }
 
     }

@@ -1,18 +1,13 @@
-﻿<UserControl
-    x:Class="Retouch_Photo2.Brushs.BrushTypeIcons.ColorIcon"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="50"
-    d:DesignWidth="50"
-    >
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Ellipse Width="24" Height="24" StrokeThickness="1" Stroke="{ThemeResource AppStroke}">
-        <Ellipse.Fill>
-            <SolidColorBrush Color="#00A5FF"/>
-        </Ellipse.Fill>
-    </Ellipse>
-    
-</UserControl>
+    <ControlTemplate x:Key="ColorIcon" TargetType="ContentControl">
+        <Ellipse Width="24" Height="24" StrokeThickness="1" Stroke="{ThemeResource AppStroke}">
+            <Ellipse.Fill>
+                <SolidColorBrush Color="#00A5FF"/>
+            </Ellipse.Fill>
+        </Ellipse>
+    </ControlTemplate>
+
+</ResourceDictionary>

@@ -121,9 +121,6 @@ namespace Retouch_Photo2.Blends
                     }
                 }
             }
-
-
-            
         }
 
 

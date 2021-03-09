@@ -12,9 +12,9 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Button x:Name="FillButton" Style="{StaticResource AppIconSelectedButton}"/>
-                <Button x:Name="StrokeButton" Style="{StaticResource AppIconSelectedButton}"/>
+            <StackPanel x:Name="StackPanel" Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button x:Name="Fill" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="Stroke" Style="{StaticResource AppIconSelectedButton}"/>
             </StackPanel>
         </Flyout>
     </UserControl.Resources>

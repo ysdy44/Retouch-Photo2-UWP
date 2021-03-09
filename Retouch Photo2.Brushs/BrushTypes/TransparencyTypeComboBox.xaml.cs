@@ -3,7 +3,6 @@
 // Difficult:         ★★
 // Only:              ★★
 // Complete:      ★★
-using Retouch_Photo2.Brushs.TransparencyTypeIcons;
 using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -32,7 +31,7 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets or sets the transparency. </summary>
         public IBrush Transparency
         {
-            get  => (IBrush)base.GetValue(TransparencyProperty);
+            get => (IBrush)base.GetValue(TransparencyProperty);
             set => base.SetValue(TransparencyProperty, value);
         }
         /// <summary> Identifies the <see cref = "BrushTypeComboBox.Fill" /> dependency property. </summary>
@@ -90,42 +89,72 @@ namespace Retouch_Photo2.Brushs
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ConstructGroup(this.NoneButton, resource.GetString("Tools_Brush_Type_None"), new NoneIcon(), BrushType.None);
 
-            this.ConstructGroup(this.LinearGradientButton, resource.GetString("Tools_Brush_Type_LinearGradient"), new LinearGradientIcon(), BrushType.LinearGradient);
-            this.ConstructGroup(this.RadialGradientButton, resource.GetString("Tools_Brush_Type_RadialGradient"), new RadialGradientIcon(), BrushType.RadialGradient);
-            this.ConstructGroup(this.EllipticalGradientButton, resource.GetString("Tools_Brush_Type_EllipticalGradient"), new EllipticalGradientIcon(), BrushType.EllipticalGradient);
+            foreach (UIElement child in this.StackPanel.Children)
+            {
+                if (child is Button button)
+                {
+
+                    //@Group
+                    //void constructGroup(Button button)
+                    {
+                        string key = button.Name;
+                        BrushType type = XML.CreateBrushType(key);
+                        string title = resource.GetString($"Tools_Brush_Type_{key}");
+
+
+                        //Button
+                        this.ConstructButton(button, key, type, title);
+
+
+                        //Group
+                        group(this.Type);
+                        this.Group += (s, groupMode) => group(groupMode);
+
+                        void group(BrushType groupType)
+                        {
+                            if (groupType == type)
+                            {
+                                button.IsEnabled = false;
+
+                                this.Button.Content = title;
+                            }
+                            else button.IsEnabled = true;
+                        }
+                    }
+                }
+            }
         }
 
-        //Group
-        private void ConstructGroup(Button button, string text, UserControl icon, BrushType type)
+        private void ConstructButton(Button button, string key, BrushType type, string title)
         {
-            void group(BrushType groupType)
+            /*                
+             <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}">
+                 <Button.Resources>
+                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs\BrushTypes\TransparencyTypeIcons\NoneIcon.xaml"/>
+                 </Button.Resources>
+                 <Button.Tag>
+                     <ContentControl Template="{StaticResource NoneIcon}"/>
+                 </Button.Tag>
+             </Button> 
+           */
+            button.Content = title;
+            button.Resources = new ResourceDictionary
             {
-                if (groupType == type)
-                {
-                    button.IsEnabled = false;
-
-                    this.Button.Content = text;
-                }
-                else button.IsEnabled = true;
-            }
-
-            //NoneButton
-            group(this.Type);
-
-            //Buttons
-            button.Content = text;
-            button.Tag = icon;
+                //@Template
+                Source = new Uri($@"ms-appx:///Retouch Photo2.Brushs\BrushTypes\TransparencyTypeIcons\{key}Icon.xaml")
+            };
+            button.Tag = new ContentControl
+            {
+                //@Template
+                Template = button.Resources[$"{key}Icon"] as ControlTemplate
+            };
             button.Click += (s, e) =>
             {
                 this.TypeChanged?.Invoke(this, type);//Delegate
 
                 this.Flyout.Hide();
             };
-
-            //Group
-            this.Group += (s, e) => group(e);
         }
 
     }

@@ -1,14 +1,9 @@
-﻿<UserControl
-    x:Class="Retouch_Photo2.Brushs.ExtendIcons.WrapIcon"
+﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="50"
-    d:DesignWidth="50"
-    >
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <FontIcon Glyph="&#x25C9;" FontSize="26" FontFamily="Segoe UI Symbol"/>
-    
-</UserControl>
+    <ControlTemplate x:Key="WrapIcon" TargetType="ContentControl">
+        <FontIcon Glyph="&#x25C9;" FontSize="26" FontFamily="Segoe UI Symbol"/>
+    </ControlTemplate>
+
+</ResourceDictionary>

@@ -3,7 +3,6 @@
 // Difficult:         ★★
 // Only:              ★★
 // Complete:      ★★
-using Retouch_Photo2.Brushs.FillOrStrokeIcons;
 using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -31,7 +30,7 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets or sets the fill or stroke. </summary>
         public FillOrStroke FillOrStroke
         {
-            get  => (FillOrStroke)base.GetValue(FillOrStrokeProperty);
+            get => (FillOrStroke)base.GetValue(FillOrStrokeProperty);
             set => base.SetValue(FillOrStrokeProperty, value);
         }
         /// <summary> Identifies the <see cref = "FillOrStrokeComboBox.FillOrStroke" /> dependency property. </summary>
@@ -73,38 +72,67 @@ namespace Retouch_Photo2.Brushs
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ConstructGroup(this.FillButton, resource.GetString("Tools_Fill"), new FillIcon(), FillOrStroke.Fill);
-            this.ConstructGroup(this.StrokeButton, resource.GetString("Tools_Stroke"), new StrokeIcon(), FillOrStroke.Stroke);
+
+            foreach (UIElement child in this.StackPanel.Children)
+            {
+                if (child is Button button)
+                {
+
+                    //@Group
+                    //void constructGroup(Button button)
+                    {
+                        string key = button.Name;
+                        FillOrStroke fillOrStroke = key == "Fill" ? FillOrStroke.Fill : FillOrStroke.Stroke;
+                        string title = resource.GetString($"Tools_{key}");
+
+
+                        //Button
+                        this.ConstructButton(button, key, fillOrStroke, title);
+
+
+                        //Group
+                        group(this.FillOrStroke);
+                        this.Group += (s, groupMode) => group(groupMode);
+
+                        void group(FillOrStroke groupMode)
+                        {
+                            if (groupMode == fillOrStroke)
+                            {
+                                button.IsEnabled = false;
+
+                                this.Button.Content = title;
+                            }
+                            else button.IsEnabled = true;
+                        }
+                    }
+                }
+            }
         }
 
-        //Group
-        private void ConstructGroup(Button button, string text, UserControl icon, FillOrStroke fillOrStroke)
+        private void ConstructButton(Button button, string key, FillOrStroke fillOrStroke, string title)
         {
-            void group(FillOrStroke groupFillOrStroke)
+            /*             
+                 <Button x:Name="Fill" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs\FillOrStrokes\FillOrStrokeIcons\FillIcon.xaml"/
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource FillIcon}"/>
+                    </Button.Tag>
+                </Button>
+           */
+            button.Content = title;
+            button.Resources = new ResourceDictionary
             {
-                if (groupFillOrStroke == fillOrStroke)
-                {
-                    button.IsEnabled = false;
-
-                    this.Button.Content = text;
-                }
-                else button.IsEnabled = true;
-            }
-
-            //NoneButton
-            group(this.FillOrStroke);
-
-            //Buttons
-            button.Content = text;
-            button.Tag = icon;
-            button.Click += (s, e) =>
-            {
-                this.FillOrStrokeChanged?.Invoke(this, fillOrStroke); //Delegate
-                this.Flyout.Hide();
+                //@Template
+                Source = new Uri($@"ms-appx:///Retouch Photo2.Brushs\FillOrStrokes\FillOrStrokeIcons\{key}Icon.xaml")
             };
-
-            //Group
-            this.Group += (s, e) => group(e);
+            button.Tag = new ContentControl
+            {
+                //@Template
+                Template = button.Resources[$"{key}Icon"] as ControlTemplate
+            };
+            button.Click += (s, e) => this.FillOrStrokeChanged?.Invoke(this, fillOrStroke);//Delegate
         }
 
     }

@@ -4,7 +4,6 @@
 // Only:              ★★
 // Complete:      ★★
 using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Brushs.ExtendIcons;
 using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -25,7 +24,7 @@ namespace Retouch_Photo2.Brushs
         //@Group
         /// <summary> Occurs when group change. </summary>
         private EventHandler<CanvasEdgeBehavior> Group;
-        
+
 
         #region DependencyProperty
 
@@ -63,7 +62,7 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets or sets the edge behavior. </summary>
         public CanvasEdgeBehavior Extend
         {
-            get  => (CanvasEdgeBehavior)base.GetValue(ExtendProperty);
+            get => (CanvasEdgeBehavior)base.GetValue(ExtendProperty);
             set => base.SetValue(ExtendProperty, value);
         }
         /// <summary> Identifies the <see cref = "ExtendComboBox.Extend" /> dependency property. </summary>
@@ -120,44 +119,72 @@ namespace Retouch_Photo2.Brushs
     public sealed partial class ExtendComboBox : UserControl
     {
 
-        //Strings
+        //Strings 
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ConstructGroup(this.ClampButton, resource.GetString("Tools_Brush_Extend_Clamp"), new ClampIcon(), CanvasEdgeBehavior.Clamp);
-            this.ConstructGroup(this.WrapButton, resource.GetString("Tools_Brush_Extend_Wrap"), new WrapIcon(), CanvasEdgeBehavior.Wrap);
-            this.ConstructGroup(this.MirrorButton, resource.GetString("Tools_Brush_Extend_Mirror"), new MirrorIcon(), CanvasEdgeBehavior.Mirror);
-        }
-        
-        //Group
-        private void ConstructGroup(Button button, string text, UserControl icon, CanvasEdgeBehavior behavior)
-        {
-            void group(CanvasEdgeBehavior groupCanvasEdgeBehavior)
+
+            foreach (UIElement child in this.StackPanel.Children)
             {
-                if (groupCanvasEdgeBehavior == behavior)
+                if (child is Button button)
                 {
-                    button.IsEnabled = false;
 
-                    this.Button.Content = text;
+                    //@Group
+                    //void constructGroup(Button button)
+                    {
+                        string key = button.Name;
+                        CanvasEdgeBehavior extend = XML.CreateExtend(key);
+                        string title = resource.GetString($"Tools_Brush_Extend_{key}");
+
+
+                        //Button
+                        this.ConstructButton(button, key, extend, title);
+
+
+                        //Group
+                        group(this.Extend);
+                        this.Group += (s, groupMode) => group(groupMode);
+
+                        void group(CanvasEdgeBehavior groupMode)
+                        {
+                            if (groupMode == extend)
+                            {
+                                button.IsEnabled = false;
+
+                                this.Button.Content = title;
+                            }
+                            else button.IsEnabled = true;
+                        }
+                    }
                 }
-                else button.IsEnabled = true;
             }
+        }
 
-            //NoneButton
-            group(this.Extend);
-
-            //Buttons
-            button.Content = text;
-            button.Tag = icon;
-            button.Click += (s, e) =>
+        private void ConstructButton(Button button, string key, CanvasEdgeBehavior extend, string title)
+        {
+            /*             
+                 <Button x:Name="Fill" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs\ExtendComboBoxs\ExtendIcons\FillIcon.xaml"/
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource FillIcon}"/>
+                    </Button.Tag>
+                </Button>
+           */
+            button.Content = title;
+            button.Resources = new ResourceDictionary
             {
-                this.ExtendChanged?.Invoke(this, behavior); //Delegate
-                this.Flyout.Hide();
+                //@Template
+                Source = new Uri($@"ms-appx:///Retouch Photo2.Brushs\ExtendComboBoxs\ExtendIcons\{key}Icon.xaml")
             };
-
-            //Group
-            this.Group += (s, e) => group(e);
+            button.Tag = new ContentControl
+            {
+                //@Template
+                Template = button.Resources[$"{key}Icon"] as ControlTemplate
+            };
+            button.Click += (s, e) => this.ExtendChanged?.Invoke(this, extend);//Delegate
         }
 
     }

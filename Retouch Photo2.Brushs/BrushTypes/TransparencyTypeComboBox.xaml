@@ -19,20 +19,19 @@
                 </ColorAnimation.EasingFunction>
             </ColorAnimation>
         </Storyboard>
-        
+
         <!--Flyout-->
         <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-               
-                <Button x:Name="NoneButton" Style="{StaticResource AppIconSelectedButton}"/>
-                
-                              
+            <StackPanel x:Name="StackPanel" Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}"/>
+
                 <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-                
-                <Button x:Name="LinearGradientButton" Style="{StaticResource AppIconSelectedButton}"/>
-                <Button x:Name="RadialGradientButton" Style="{StaticResource AppIconSelectedButton}"/>
-                <Button x:Name="EllipticalGradientButton" Style="{StaticResource AppIconSelectedButton}"/>
-                             
+
+                <Button x:Name="LinearGradient" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="RadialGradient" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="EllipticalGradient" Style="{StaticResource AppIconSelectedButton}"/>
+
             </StackPanel>
         </Flyout>
     </UserControl.Resources>
@@ -43,7 +42,7 @@
             <!--Storyboard-->
             <SolidColorBrush x:Name="ButtonBorderBrush" Color="{ThemeResource AppStrokeColor}"/>
         </Button.BorderBrush>
-        
+
         <Button.Tag>
             <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
         </Button.Tag>

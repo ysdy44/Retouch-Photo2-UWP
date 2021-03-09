@@ -22,23 +22,23 @@
         
         <!--Flyout-->
         <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel x:Name="StackPanel" Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                
-                <Button x:Name="NoneButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}"/>
                 
                 <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
                
-                <Button x:Name="ColorButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="Color" Style="{StaticResource AppIconSelectedButton}"/>
                 
                 <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
                 
-                <Button x:Name="LinearGradientButton" Style="{StaticResource AppIconSelectedButton}"/>
-                <Button x:Name="RadialGradientButton" Style="{StaticResource AppIconSelectedButton}"/>
-                <Button x:Name="EllipticalGradientButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="LinearGradient" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="RadialGradient" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="EllipticalGradient" Style="{StaticResource AppIconSelectedButton}"/>
                
                 <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
               
-                <Button x:Name="ImageButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="Image" Style="{StaticResource AppIconSelectedButton}"/>
 
             </StackPanel>
         </Flyout>
