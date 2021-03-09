@@ -3,7 +3,7 @@
 // Difficult:         ★★★
 // Only:              
 // Complete:      ★★★
-using Retouch_Photo2.Effects.Icons;
+
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
@@ -70,9 +70,6 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Content = resource.GetString("Effects_Edge");
-            this.Button.Style = this.IconButton;
-
             this.AmountTextBlock.Text = resource.GetString("Effects_Edge_Amount");
             this.RadiusTextBlock.Text = resource.GetString("Effects_Edge_Radius");
         }
@@ -83,10 +80,7 @@ namespace Retouch_Photo2.Effects.Models
         /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
         /// <summary> Gets the button. </summary>
-        public Button Button { get; } = new Button
-        {
-            Tag = new EdgeIcon()
-        };
+        public Button Button { get; } = new Button();
         /// <summary> Gets the ToggleButton. </summary>
         public SelectedToggleButton ToggleButton { get; } = new SelectedToggleButton();
 
@@ -116,10 +110,7 @@ namespace Retouch_Photo2.Effects.Models
                 }
             );
         }
-        public void FollowButton(Effect effect)
-        {
-            this.ToggleButton.IsChecked = effect.Edge_IsOn;
-        }
+        public bool FollowButton(Effect effect) => effect.Edge_IsOn;
         public void FollowPage(Effect effect)
         {
             this.Amount = effect.Edge_Amount;

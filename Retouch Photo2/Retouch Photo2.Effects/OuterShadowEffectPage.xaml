@@ -14,10 +14,7 @@
     
     
     <Page.Resources>
-        <!--Style-->
-        <Style x:Name="IconButton" TargetType="Button" BasedOn="{StaticResource AppIconButton}">
-            <Setter Property="Height" Value="50"/>
-        </Style>        <!--Flyout-->
+        <!--Flyout-->
         <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:ColorPicker2 x:Name="ColorPicker" Width="222"/>
         </Flyout>

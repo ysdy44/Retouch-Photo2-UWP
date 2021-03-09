@@ -3,7 +3,7 @@
 // Difficult:         ★★★
 // Only:              
 // Complete:      ★★★
-using Retouch_Photo2.Effects.Icons;
+
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
@@ -71,9 +71,6 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Content = resource.GetString("Effects_Emboss");
-            this.Button.Style = this.IconButton;
-
             this.RadiusTextBlock.Text = resource.GetString("Effects_Emboss_Radius");
             this.AngleTextBlock.Text = resource.GetString("Effects_Emboss_Angle");
         }
@@ -84,10 +81,7 @@ namespace Retouch_Photo2.Effects.Models
         /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
         /// <summary> Gets the button. </summary>
-        public Button Button { get; } = new Button
-        {
-            Tag = new EmbossIcon()
-        };
+        public Button Button { get; } = new Button();
         /// <summary> Gets the ToggleButton. </summary>
         public SelectedToggleButton ToggleButton { get; } = new SelectedToggleButton();
 
@@ -116,10 +110,7 @@ namespace Retouch_Photo2.Effects.Models
                 }
             );
         }
-        public void FollowButton(Effect effect)
-        {
-            this.ToggleButton.IsChecked = effect.Emboss_IsOn;
-        }
+        public bool FollowButton(Effect effect) => effect.Emboss_IsOn;
         public void FollowPage(Effect effect)
         {
             this.Radius = effect.Emboss_Radius;

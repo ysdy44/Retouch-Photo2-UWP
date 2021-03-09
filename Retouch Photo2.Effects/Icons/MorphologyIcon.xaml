@@ -1,20 +1,15 @@
-﻿<UserControl
-    x:Class="Retouch_Photo2.Effects.Icons.MorphologyIcon"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-   d:DesignHeight="50"
-   d:DesignWidth="50"
-    >
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Viewbox Width="24">
-        <PathIcon Foreground="{ThemeResource SystemControlBackgroundBaseHighBrush}">
-            <PathIcon.Data>
-                M83.298,33.678L41.649,33.678L41.649,59.139L83.298,59.139L83.298,33.678ZM41.649,0L0,0L0,25.461L41.649,25.461L41.649,0Z
-            </PathIcon.Data>
-        </PathIcon>
-    </Viewbox>
-    
-</UserControl>
+    <ControlTemplate x:Key="MorphologyIcon" TargetType="ContentControl">
+        <Viewbox Width="24">
+            <Path Fill="{TemplateBinding Foreground}">
+                <Path.Data>
+                    M83.298,33.678L41.649,33.678L41.649,59.139L83.298,59.139L83.298,33.678ZM41.649,0L0,0L0,25.461L41.649,25.461L41.649,0Z
+                </Path.Data>
+            </Path>
+        </Viewbox>
+    </ControlTemplate>
+
+</ResourceDictionary>

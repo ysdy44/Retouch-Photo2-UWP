@@ -1,0 +1,37 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Effects.EffectsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="200"
+    d:DesignHeight="400"
+    >
+
+    <UserControl.Resources>
+        <!--Style-->
+        <Style x:Name="SeparatorRectangle" TargetType="Rectangle" BasedOn="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+        <Style x:Name="SeparatorRectangle2" TargetType="Rectangle" BasedOn="{StaticResource AppSeparatorRectangleVerticalStyle}">
+            <Setter Property="Fill" Value="Transparent"/>
+        </Style>
+
+        <Style x:Name="IconButton" TargetType="Button" BasedOn="{StaticResource AppIconButton}">
+            <Setter Property="Height" Value="50"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid MinHeight="165">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel x:Name="ButtonsStackPanel" >
+            <!--Effects-->
+        </StackPanel>
+        <StackPanel x:Name="ToggleButtonsStackPanel" Grid.Column="1">
+            <!--Effects-->
+        </StackPanel>
+    </Grid>
+
+</UserControl>

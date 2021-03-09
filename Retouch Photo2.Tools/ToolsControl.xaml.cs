@@ -1,8 +1,12 @@
-﻿using Retouch_Photo2.Elements;
+﻿// Core:              ★★★★
+// Referenced:   
+// Difficult:         ★★★★★
+// Only:              
+// Complete:      ★★★★★
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Tools;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

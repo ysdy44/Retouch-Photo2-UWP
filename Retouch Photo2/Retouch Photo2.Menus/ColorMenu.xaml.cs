@@ -47,9 +47,7 @@ namespace Retouch_Photo2.Menus.Models
 
     }
 
-    /// <summary>
-    /// Menu of <see cref = "HSVColorPickers.ColorPicker"/>.
-    /// </summary>
+
     public sealed partial class ColorMenu : Expander, IMenu
     {
 

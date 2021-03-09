@@ -3,7 +3,7 @@
 // Difficult:         ★★★
 // Only:              
 // Complete:      ★★★
-using Retouch_Photo2.Effects.Icons;
+
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
@@ -59,9 +59,6 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Content = resource.GetString("Effects_Straighten");
-            this.Button.Style = this.IconButton;
-
             this.AngleTextBlock.Text = resource.GetString("Effects_Straighten_Angle");
         }
 
@@ -71,10 +68,7 @@ namespace Retouch_Photo2.Effects.Models
         /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
         /// <summary> Gets the button. </summary>
-        public Button Button { get; } = new Button
-        {
-            Tag = new StraightenIcon()
-        };
+        public Button Button { get; } = new Button();
         /// <summary> Gets the ToggleButton. </summary>
         public SelectedToggleButton ToggleButton { get; } = new SelectedToggleButton();
 
@@ -92,10 +86,7 @@ namespace Retouch_Photo2.Effects.Models
                 setUndo: (effect, previous) => effect.Straighten_Angle = previous
             );
         }
-        public void FollowButton(Effect effect)
-        {
-            this.ToggleButton.IsChecked = effect.Straighten_IsOn;
-        }
+        public bool FollowButton(Effect effect) => effect.Straighten_IsOn;
         public void FollowPage(Effect effect)
         {
             this.Angle = effect.Straighten_Angle;

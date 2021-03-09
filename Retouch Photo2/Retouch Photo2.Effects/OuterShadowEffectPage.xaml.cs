@@ -3,7 +3,7 @@
 // Difficult:         ★★★
 // Only:              
 // Complete:      ★★★
-using Retouch_Photo2.Effects.Icons;
+
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Retouch_Photo2.Historys;
@@ -108,9 +108,6 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Content = resource.GetString("Effects_OuterShadow");
-            this.Button.Style = this.IconButton;
-
             this.RadiusTextBlock.Text = resource.GetString("Effects_OuterShadow_Radius");
             this.OpacityTextBlock.Text = resource.GetString("Effects_OuterShadow_Opacity");
             this.OffsetTextBlock.Text = resource.GetString("Effects_OuterShadow_Offset");
@@ -125,10 +122,7 @@ namespace Retouch_Photo2.Effects.Models
         /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
         /// <summary> Gets the button. </summary>
-        public Button Button { get; } = new Button
-        {
-            Tag = new OuterShadowIcon()
-        };
+        public Button Button { get; } = new Button();
         /// <summary> Gets the ToggleButton. </summary>
         public SelectedToggleButton ToggleButton { get; } = new SelectedToggleButton();
 
@@ -170,10 +164,7 @@ namespace Retouch_Photo2.Effects.Models
                 }
             );
         }
-        public void FollowButton(Effect effect)
-        {
-            this.ToggleButton.IsChecked = effect.OuterShadow_IsOn;
-        }
+        public bool FollowButton(Effect effect) => effect.OuterShadow_IsOn;
         public void FollowPage(Effect effect)
         {
             this.Radius = effect.OuterShadow_Radius;

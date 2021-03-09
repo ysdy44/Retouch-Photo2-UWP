@@ -27,10 +27,10 @@ namespace Retouch_Photo2.Effects
         /// </summary>
         void Reset();
         /// <summary>
-        /// <see cref="Button"/>'s value follows the <see cref="Effect"/>.
+        /// IsChecked follows the <see cref="Effect"/>.
         /// </summary>
         /// <param name="effect"> The effect. </param>
-        void FollowButton(Effect effect);
+        bool FollowButton(Effect effect);
         /// <summary>
         /// <see cref="IEffectPage"/>'s value follows the <see cref="Effect"/>.
         /// </summary>

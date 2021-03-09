@@ -11,6 +11,11 @@ using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
+using System.Collections.Generic;
+using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Shapes;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
@@ -23,12 +28,16 @@ namespace Retouch_Photo2.Menus.Models
     /// </summary>
     public sealed partial class EffectMenu : Expander, IMenu
     {
+        //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
 
         //@Content     
         public bool IsOpen { set { } }
         public override UIElement MainPage => this.EffectMainPage;
 
         readonly EffectMainPage EffectMainPage = new EffectMainPage();
+       
+        IEffectPage EffectPage = null;
 
 
         //@Construct
@@ -40,14 +49,12 @@ namespace Retouch_Photo2.Menus.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.EffectMainPage.IsSecondPageChanged += (s, isSecondPage) => this.Back();
-            this.EffectMainPage.SecondPageChanged += (title, secondPage) =>
+            foreach (IEffectPage  effectPage in this.EffectMainPage.EffectPages)
             {
-                if (this.Page != secondPage) this.Page = secondPage;
-                this.IsSecondPage = true;
-                this.Title = (string)title;
-                this.ResetButtonVisibility = Visibility.Visible;
-            };
+                if (effectPage == null) continue;
+
+                effectPage.Button.Click += (s, e) => this.Navigate(effectPage);
+            }
         }
     }
 
@@ -77,7 +84,37 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary> Reset Expander. </summary>
         public override void Reset()
         {
-            this.EffectMainPage.Reset();
+            if (this.EffectPage is IEffectPage effectPage)
+            {
+                effectPage.Reset();
+                this.ViewModel.Invalidate();//Invalidate
+            }
+        }
+
+        //Navigate
+        public void Navigate(IEffectPage effectPage)
+        {
+            //Layers
+            IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
+            Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayerages);
+            if (outermost == null) return;
+            ILayer layer = outermost.Self;
+
+            Effect effect = layer.Effect;
+            effectPage.FollowPage(effect);
+            this.EffectPage = effectPage;
+
+            string title = (string)effectPage.Button.Content;
+            UIElement secondPage = effectPage.Page;
+            this.SecondPageChanged(title, secondPage);//Delegate
+        }
+
+        private void SecondPageChanged(string title, UIElement secondPage)
+        {
+            if (this.Page != secondPage) this.Page = secondPage;
+            this.IsSecondPage = true;
+            this.Title = (string)title;
+            this.ResetButtonVisibility = Visibility.Visible;
         }
 
     }
@@ -89,20 +126,8 @@ namespace Retouch_Photo2.Menus.Models
     {
 
         //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
-
-        //@Delegate
-        /// <summary> Occurs when is-second-page change. </summary>
-        public event EventHandler<bool> IsSecondPageChanged;
-        /// <summary> Occurs when second-page change. </summary>
-        public event EventHandler<UIElement> SecondPageChanged;
-
-
-        IEffectPage EffectPage = null;
-
-        /// <summary> Gets the effect pages. </summary>
         public IList<IEffectPage> EffectPages { get; } = new List<IEffectPage>
         {
             new GaussianBlurEffectPage(),
@@ -124,52 +149,6 @@ namespace Retouch_Photo2.Menus.Models
             new StraightenEffectPage(),
         };
 
-        #region DependencyProperty
-
-        /// <summary> Gets or sets <see cref = "EffectMainPage" />'s Effect. </summary>
-        public Effect Effect
-        {
-            get => (Effect)base.GetValue(EffectProperty);
-            set => base.SetValue(EffectProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "EffectMainPage.Effect" /> dependency property. </summary>
-        public static readonly DependencyProperty EffectProperty = DependencyProperty.Register(nameof(Effect), typeof(Effect), typeof(EffectMainPage), new PropertyMetadata(null, (sender, e) =>
-        {
-            EffectMainPage control = (EffectMainPage)sender;
-
-            if (e.NewValue is Effect value)
-            {
-                foreach (IEffectPage effectPage in control.EffectPages)
-                {
-                    if (effectPage == null) continue;
-
-                    effectPage.ToggleButton.IsEnabled = true;
-                    effectPage.Button.IsEnabled = effectPage.ToggleButton.IsChecked;
-                    effectPage.FollowButton(value);
-
-                    if (effectPage == control.EffectPage)
-                    {
-                        effectPage.FollowPage(value);
-                    }
-                }
-            }
-            else
-            {
-                foreach (IEffectPage effectPage in control.EffectPages)
-                {
-                    if (effectPage == null) continue;
-
-                    effectPage.Button.IsEnabled = false;
-                    effectPage.ToggleButton.IsEnabled = false;
-                }
-            }
-
-            control.IsSecondPageChanged?.Invoke(control, false);//Delegate
-        }));
-
-        #endregion
-
-
         //@Construct
         /// <summary>
         /// Initializes a EffectMainPage. 
@@ -177,101 +156,13 @@ namespace Retouch_Photo2.Menus.Models
         public EffectMainPage()
         {
             this.InitializeComponent();
-            this.ConstructDataContext
-            (
-                 dataContext: this.SelectionViewModel,
-                 path: nameof(this.SelectionViewModel.Effect),
-                 dp: EffectMainPage.EffectProperty
-            );
-
-            this.ConstructEffects();
-        }
-    }
-
-    /// <summary>
-    /// MainPage of <see cref = "EffectMenu"/>.
-    /// </summary>
-    public sealed partial class EffectMainPage : UserControl
-    {
-
-        //DataContext
-        private void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
-        {
-            this.DataContext = dataContext;
-
-            // Create the binding description.
-            Binding binding = new Binding
-            {
-                Mode = BindingMode.OneWay,
-                Path = new PropertyPath(path)
-            };
-
-            // Attach the binding to the target.
-            this.SetBinding(dp, binding);
+            this.EffectControl.EffectPages = this.EffectPages;
+            this.EffectControl.ConstructString(this.EffectPages);
+            this.EffectControl.ConstructButton(this.EffectPages);
+            this.EffectControl.ConstructToggleButton(this.EffectPages);
         }
 
-    }
 
-    /// <summary>
-    /// MainPage of <see cref = "EffectMenu"/>.
-    /// </summary>
-    public sealed partial class EffectMainPage : UserControl
-    {
 
-        //Effects
-        private void ConstructEffects()
-        {
-            foreach (IEffectPage effectPage in this.EffectPages)
-            {
-                if (effectPage == null)
-                {
-                    this.ButtonsStackPanel.Children.Add(new Rectangle
-                    {
-                        Style = this.SeparatorRectangle
-                    });
-                    this.ToggleButtonsStackPanel.Children.Add(new Rectangle
-                    {
-                        Style = this.SeparatorRectangle2
-                    });
-                }
-                else
-                {
-                    this.ButtonsStackPanel.Children.Add(effectPage.Button);
-                    this.ToggleButtonsStackPanel.Children.Add(effectPage.ToggleButton);
-
-                    effectPage.Button.Tapped += (s, e) => this.Navigate(effectPage);
-                }
-            }
-        }
-
-        //Reset
-        public void Reset()
-        {
-            if (this.EffectPage is IEffectPage effectPage)
-            {
-                effectPage.Reset();
-                this.ViewModel.Invalidate();//Invalidate
-            }
-        }
-
-        //Navigate
-        public void Navigate(IEffectPage effectPage)
-        {
-            if (effectPage == null) return;
-
-            //Layers
-            IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();
-            Layerage outermost = LayerManager.FindOutermostLayerage(selectedLayerages);
-            if (outermost == null) return;
-            ILayer layer = outermost.Self;
-
-            Effect effect = layer.Effect;
-            effectPage.FollowPage(effect);
-            this.EffectPage = effectPage;
-
-            string title = (string)effectPage.Button.Content;
-            UIElement secondPage = effectPage.Page;
-            this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
-        }
     }
 }

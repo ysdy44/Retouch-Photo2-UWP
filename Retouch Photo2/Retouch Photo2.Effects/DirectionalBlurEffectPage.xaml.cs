@@ -4,9 +4,9 @@
 // Only:              
 // Complete:      ★★★
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Effects.Icons;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
+using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -90,9 +90,6 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Content = resource.GetString("Effects_DirectionalBlur");
-            this.Button.Style = this.IconButton;
-
             this.RadiusTextBlock.Text = resource.GetString("Effects_DirectionalBlur_Radius");
             this.AngleTextBlock.Text = resource.GetString("Effects_DirectionalBlur_Angle");
 
@@ -105,10 +102,7 @@ namespace Retouch_Photo2.Effects.Models
         /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
         /// <summary> Gets the button. </summary>
-        public Button Button { get; } = new Button
-        {
-            Tag = new DirectionalBlurIcon(),
-        };
+        public Button Button { get; } = new Button();
         /// <summary> Gets the ToggleButton. </summary>
         public SelectedToggleButton ToggleButton { get; } = new SelectedToggleButton();
 
@@ -141,10 +135,7 @@ namespace Retouch_Photo2.Effects.Models
                 }
             );
         }
-        public void FollowButton(Effect effect)
-        {
-            this.ToggleButton.IsChecked = effect.DirectionalBlur_IsOn;
-        }
+        public bool FollowButton(Effect effect) => effect.DirectionalBlur_IsOn;
         public void FollowPage(Effect effect)
         {
             this.Radius = effect.DirectionalBlur_Radius;

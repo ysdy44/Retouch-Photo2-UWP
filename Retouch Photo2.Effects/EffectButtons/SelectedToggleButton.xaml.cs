@@ -41,7 +41,8 @@ namespace Retouch_Photo2.Effects
         
         //@VisualState
         ClickMode _vsClickMode;
-        bool _vsIsChecked = false; 
+        bool _vsIsChecked = false;
+        bool _vsIsEnabled = true;
         /// <summary> 
         /// Represents the visual appearance of UI elements in a specific state.
         /// </summary>
@@ -51,6 +52,8 @@ namespace Retouch_Photo2.Effects
             {
                 if (this._vsIsChecked == false)
                 {
+                    if (this._vsIsEnabled == false) return this.Disable;
+
                     switch (this._vsClickMode)
                     {
                         case ClickMode.Release: return this.Normal;
@@ -61,6 +64,8 @@ namespace Retouch_Photo2.Effects
 
                 if (this._vsIsChecked)
                 {
+                    if (this._vsIsEnabled == false) return this.CheckedDisable;
+
                     switch (this._vsClickMode)
                     {
                         case ClickMode.Release: return this.Checked;
@@ -91,6 +96,11 @@ namespace Retouch_Photo2.Effects
         {
             this.InitializeComponent();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State 
+            this.IsEnabledChanged += (s, e) =>
+            {
+                this._vsIsEnabled = this.IsEnabled;
+                this.VisualState = this.VisualState;//State 
+            };
 
             this.PointerEntered += (s, e) => this.ClickMode = ClickMode.Hover;
             this.PointerPressed += (s, e) => this.ClickMode = ClickMode.Press;

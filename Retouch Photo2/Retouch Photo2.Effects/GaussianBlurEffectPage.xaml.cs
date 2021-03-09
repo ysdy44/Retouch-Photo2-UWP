@@ -4,7 +4,7 @@
 // Only:              
 // Complete:      ★★★
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Effects.Icons;
+
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
@@ -79,9 +79,6 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Button.Content = resource.GetString("Effects_GaussianBlur");
-            this.Button.Style = this.IconButton;
-
             this.RadiusTextBlock.Text = resource.GetString("Effects_GaussianBlur_Radius");
 
             this.IsHardBorderCheckBox.Content = resource.GetString("Effects_GaussianBlur_IsHardBorder");
@@ -94,10 +91,7 @@ namespace Retouch_Photo2.Effects.Models
         /// <summary> Gets the page. </summary>
         public FrameworkElement Page => this;
         /// <summary> Gets the button. </summary>
-        public Button Button { get; } = new Button
-        {
-            Tag = new GaussianBlurIcon()
-        };
+        public Button Button { get; } = new Button();
         /// <summary> Gets the ToggleButton. </summary>
         public SelectedToggleButton ToggleButton { get; } = new SelectedToggleButton();
 
@@ -127,10 +121,7 @@ namespace Retouch_Photo2.Effects.Models
                 }
             );
         }
-        public void FollowButton(Effect effect)
-        {
-            this.ToggleButton.IsChecked = effect.GaussianBlur_IsOn;
-        }
+        public bool FollowButton(Effect effect) => effect.GaussianBlur_IsOn;
         public void FollowPage(Effect effect)
         {
             this.RadiusSlider.Value = effect.GaussianBlur_Radius;
