@@ -566,6 +566,8 @@
 <data name='Tools_PatternGrid' xml:space='preserve'><value>Grille</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>Taper</value></data>
 <data name='Tools_PatternGrid_Grid' xml:space='preserve'><value>Grille</value></data>
+<data name='Tools_PatternGrid_Horizontal' xml:space='preserve'><value>Horizontal</value></data>
+<data name='Tools_PatternGrid_Vertical' xml:space='preserve'><value>Verticale</value></data>
 <data name='Tools_PatternGrid_HorizontalStep' xml:space='preserve'><value>Étape horizontale</value></data>
 <data name='Tools_PatternGrid_VerticalStep' xml:space='preserve'><value>Étape verticale</value></data>
 <data name='Tools_PatternDiagonal' xml:space='preserve'><value>Diagonale</value></data>

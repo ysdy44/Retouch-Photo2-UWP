@@ -184,7 +184,11 @@ namespace Retouch_Photo2.Brushs
                 //@Template
                 Template = button.Resources[$"{key}Icon"] as ControlTemplate
             };
-            button.Click += (s, e) => this.ExtendChanged?.Invoke(this, extend);//Delegate
+            button.Click += (s, e) =>
+            {
+                this.ExtendChanged?.Invoke(this, extend);//Delegate
+                this.Flyout.Hide();
+            };
         }
 
     }

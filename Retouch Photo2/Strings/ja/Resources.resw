@@ -566,6 +566,8 @@
 <data name='Tools_PatternGrid' xml:space='preserve'><value>グリッド</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>タイプ</value></data>
 <data name='Tools_PatternGrid_Grid' xml:space='preserve'><value>グリッド</value></data>
+<data name='Tools_PatternGrid_Horizontal' xml:space='preserve'><value>水平</value></data>
+<data name='Tools_PatternGrid_Vertical' xml:space='preserve'><value>垂直</value></data>
 <data name='Tools_PatternGrid_HorizontalStep' xml:space='preserve'><value>水平ステップ</value></data>
 <data name='Tools_PatternGrid_VerticalStep' xml:space='preserve'><value>垂直ステップ</value></data>
 <data name='Tools_PatternDiagonal' xml:space='preserve'><value>対角線</value></data>

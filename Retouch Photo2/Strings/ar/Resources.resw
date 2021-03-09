@@ -566,6 +566,8 @@
 <data name='Tools_PatternGrid' xml:space='preserve'><value>شبكة</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>اكتب</value></data>
 <data name='Tools_PatternGrid_Grid' xml:space='preserve'><value>شبكة</value></data>
+<data name='Tools_PatternGrid_Horizontal' xml:space='preserve'><value>أفقي</value></data>
+<data name='Tools_PatternGrid_Vertical' xml:space='preserve'><value>رأسي</value></data>
 <data name='Tools_PatternGrid_HorizontalStep' xml:space='preserve'><value>خطوة أفقية</value></data>
 <data name='Tools_PatternGrid_VerticalStep' xml:space='preserve'><value>خطوة عمودية</value></data>
 <data name='Tools_PatternDiagonal' xml:space='preserve'><value>قطري</value></data>

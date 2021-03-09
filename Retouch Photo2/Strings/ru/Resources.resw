@@ -566,6 +566,8 @@
 <data name='Tools_PatternGrid' xml:space='preserve'><value>Сетка</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>Тип</value></data>
 <data name='Tools_PatternGrid_Grid' xml:space='preserve'><value>Сетка</value></data>
+<data name='Tools_PatternGrid_Horizontal' xml:space='preserve'><value>По горизонтали</value></data>
+<data name='Tools_PatternGrid_Vertical' xml:space='preserve'><value>Вертикальный</value></data>
 <data name='Tools_PatternGrid_HorizontalStep' xml:space='preserve'><value>Горизонтальный шаг</value></data>
 <data name='Tools_PatternGrid_VerticalStep' xml:space='preserve'><value>Вертикальный шаг</value></data>
 <data name='Tools_PatternDiagonal' xml:space='preserve'><value>Диагональ</value></data>

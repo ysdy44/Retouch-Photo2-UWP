@@ -566,6 +566,8 @@
 <data name='Tools_PatternGrid' xml:space='preserve'><value>网格</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>类型</value></data>
 <data name='Tools_PatternGrid_Grid' xml:space='preserve'><value>网格</value></data>
+<data name='Tools_PatternGrid_Horizontal' xml:space='preserve'><value>水平</value></data>
+<data name='Tools_PatternGrid_Vertical' xml:space='preserve'><value>垂直</value></data>
 <data name='Tools_PatternGrid_HorizontalStep' xml:space='preserve'><value>水平步</value></data>
 <data name='Tools_PatternGrid_VerticalStep' xml:space='preserve'><value>垂直步</value></data>
 <data name='Tools_PatternDiagonal' xml:space='preserve'><value>斜线</value></data>

@@ -133,6 +133,9 @@ namespace Retouch_Photo2
         public ToolsControl()
         {
             this.InitializeComponent();
+
+            // Select the first Tool by default. 
+            this.Loaded += (s, e) => this.Type = ToolType.Cursor;
         }
 
 
@@ -220,10 +223,6 @@ namespace Retouch_Photo2
                 Flyout = this.MoreFlyout,
                 Content = new SymbolIcon(Symbol.More)
             });
-
-
-            // Select the first Tool by default. 
-            this.Type = ToolType.Cursor;
         }
 
     }

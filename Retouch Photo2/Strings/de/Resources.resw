@@ -566,6 +566,8 @@
 <data name='Tools_PatternGrid' xml:space='preserve'><value>Gitter</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>Art</value></data>
 <data name='Tools_PatternGrid_Grid' xml:space='preserve'><value>Gitter</value></data>
+<data name='Tools_PatternGrid_Horizontal' xml:space='preserve'><value>Horizontal</value></data>
+<data name='Tools_PatternGrid_Vertical' xml:space='preserve'><value>Vertikal</value></data>
 <data name='Tools_PatternGrid_HorizontalStep' xml:space='preserve'><value>Horizontaler Schritt</value></data>
 <data name='Tools_PatternGrid_VerticalStep' xml:space='preserve'><value>Vertikaler Schritt</value></data>
 <data name='Tools_PatternDiagonal' xml:space='preserve'><value>Diagonale</value></data>

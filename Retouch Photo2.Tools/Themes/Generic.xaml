@@ -10,9 +10,9 @@
     </ResourceDictionary.MergedDictionaries>
     -->
     <Style TargetType="local:TouchbarButton">
-        <Setter Property="Width" Value="{StaticResource AppCircleHeight}"/>
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="MinWidth" Value="{StaticResource AppCircleHeight}"/>
         <Setter Property="Height" Value="{StaticResource AppCircleHeight}"/>
-        <Setter Property="MinWidth" Value="80"/>
         <Setter Property="Padding" Value="14,0"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
         <Setter Property="Background" Value="{ThemeResource AppFill}"/>
