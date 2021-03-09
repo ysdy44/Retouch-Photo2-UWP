@@ -3,6 +3,7 @@
 // Difficult:         ★★★★★
 // Only:              
 // Complete:      ★★★★★
+using Retouch_Photo2.Elements;
 using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
@@ -37,8 +38,8 @@ namespace Retouch_Photo2.Effects
                     {
                         if (effectPage == null) continue;
 
-                        effectPage.ToggleButton.IsEnabled = true;
-                        effectPage.Button.IsEnabled = effectPage.ToggleButton.IsChecked = effectPage.FollowButton(value);
+                        effectPage.CheckControl.IsEnabled = true;
+                        effectPage.Button.IsEnabled = effectPage.CheckControl.IsChecked = effectPage.FollowButton(value);
                     }
                 }
                 else
@@ -47,8 +48,8 @@ namespace Retouch_Photo2.Effects
                     {
                         if (effectPage == null) continue;
 
-                        effectPage.ToggleButton.IsEnabled = false;
-                        effectPage.Button.IsEnabled = effectPage.ToggleButton.IsChecked = false;
+                        effectPage.CheckControl.IsEnabled = false;
+                        effectPage.Button.IsEnabled = effectPage.CheckControl.IsChecked = false;
                     }
                 }
             }
@@ -76,8 +77,9 @@ namespace Retouch_Photo2.Effects
             {
                 if (effectPage == null) continue;
 
-                Button button = effectPage.Button;
                 EffectType type = effectPage.Type;
+                Button button = effectPage.Button;
+                CheckControl checkControl = effectPage.CheckControl;
 
                 button.IsEnabled = false;
                 button.Style = this.IconButton;
@@ -92,6 +94,8 @@ namespace Retouch_Photo2.Effects
                     //@Template
                     Template = button.Resources[$"{type}Icon"] as ControlTemplate
                 };
+
+                checkControl.Height = button.Height;
             }
         }
 
@@ -114,12 +118,12 @@ namespace Retouch_Photo2.Effects
             foreach (IEffectPage effectPage in effectPages)
             {
                 if (effectPage == null)
-                    this.ToggleButtonsStackPanel.Children.Add(new Rectangle
+                    this.CheckControlsStackPanel.Children.Add(new Rectangle
                     {
                         Style = this.SeparatorRectangle2
                     });
                 else
-                    this.ToggleButtonsStackPanel.Children.Add(effectPage.ToggleButton);
+                    this.CheckControlsStackPanel.Children.Add(effectPage.CheckControl);
             }
         }
 

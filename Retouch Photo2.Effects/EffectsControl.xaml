@@ -29,7 +29,7 @@
         <StackPanel x:Name="ButtonsStackPanel" >
             <!--Effects-->
         </StackPanel>
-        <StackPanel x:Name="ToggleButtonsStackPanel" Grid.Column="1">
+        <StackPanel x:Name="CheckControlsStackPanel" Grid.Column="1">
             <!--Effects-->
         </StackPanel>
     </Grid>

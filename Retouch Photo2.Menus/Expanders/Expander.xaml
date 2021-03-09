@@ -59,40 +59,40 @@
         </Storyboard>
 
         <Storyboard x:Name="WidthStoryboard222" >
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PageBorder" Storyboard.TargetProperty="Margin">
-                <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PageBorder" Storyboard.TargetProperty="Width">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="222"/>
             </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimation x:Name="WidthKeyFrames222" To="222" Duration="0:0:0.1" EnableDependentAnimation ="True">
+            <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Width" To="222" Duration="0:0:0.1" EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Name="WidthStoryboard272" >
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PageBorder" Storyboard.TargetProperty="Margin">
-                <DiscreteObjectKeyFrame KeyTime="0" Value="12,0"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PageBorder" Storyboard.TargetProperty="Width">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="248"/>
             </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimation x:Name="WidthKeyFrames272" To="272" Duration="0:0:0.1" EnableDependentAnimation ="True">
+            <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Width" To="272" Duration="0:0:0.1" EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Name="WidthStoryboard322" >
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PageBorder" Storyboard.TargetProperty="Margin">
-                <DiscreteObjectKeyFrame KeyTime="0" Value="24,0"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PageBorder" Storyboard.TargetProperty="Width">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="274"/>
             </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimation x:Name="WidthKeyFrames322" To="322" Duration="0:0:0.1" EnableDependentAnimation ="True">
+            <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Width" To="322" Duration="0:0:0.1" EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Name="WidthStoryboard372" >
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PageBorder" Storyboard.TargetProperty="Margin">
-                <DiscreteObjectKeyFrame KeyTime="0" Value="36,0"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PageBorder" Storyboard.TargetProperty="Width">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="300"/>
             </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimation x:Name="WidthKeyFrames372" To="372" Duration="0:0:0.1" EnableDependentAnimation ="True">
+            <DoubleAnimation Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Width" To="372" Duration="0:0:0.1" EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
@@ -100,7 +100,7 @@
         </Storyboard>
 
         <Storyboard x:Name="HeightStoryboard" >
-            <DoubleAnimation x:Name="HeightKeyFrames" Duration="0:0:0.2" EnableDependentAnimation ="True">
+            <DoubleAnimation x:Name="HeightKeyFrames" Storyboard.TargetName ="HeightRectangle" Storyboard.TargetProperty="Height" Duration="0:0:0.2" EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
@@ -205,7 +205,7 @@
                 <Rectangle x:Name="HeightRectangle" Grid.RowSpan="2" Height="222" VerticalAlignment="top" 
                           apiContractNotPresent5:Fill="{ThemeResource AppForeground}"
                           apiContractPresent5:Fill="{ThemeResource AppAcrylicElementBrush}" />
-                <Border x:Name="PageBorder" Grid.Row="1" Margin="12,0" Padding="{StaticResource AppPanelPadding}" Height="Auto" VerticalAlignment="Top">
+                <Border x:Name="PageBorder" Grid.Row="1" Padding="{StaticResource AppPanelPadding}" Height="Auto" VerticalAlignment="Top">
                     <!--Content-->
                 </Border>
 
@@ -223,7 +223,7 @@
                         <FontIcon Glyph="&#xE830;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                   MirroredWhenRightToLeft="True"/>
                     </Button>
-                    <TextBlock x:Name="TitleTextBlock" Grid.Column="1" Margin="8,0" FontWeight="Medium" TextTrimming="CharacterEllipsis" FontSize="20" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
+                    <TextBlock x:Name="TitleTextBlock" Grid.Column="1" Margin="14,0" FontWeight="Medium" TextTrimming="CharacterEllipsis" FontSize="20" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}">
                         <TextBlock.RenderTransform>
                             <TranslateTransform x:Name="TitleTransform" X="-40"/>
                         </TextBlock.RenderTransform>

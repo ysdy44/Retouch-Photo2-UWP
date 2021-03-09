@@ -4,6 +4,7 @@
 // Only:              
 // Complete:      ★★★
 using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -103,8 +104,8 @@ namespace Retouch_Photo2.Effects.Models
         public FrameworkElement Page => this;
         /// <summary> Gets the button. </summary>
         public Button Button { get; } = new Button();
-        /// <summary> Gets the ToggleButton. </summary>
-        public SelectedToggleButton ToggleButton { get; } = new SelectedToggleButton();
+        /// <summary> Gets the CheckControl. </summary>
+        public CheckControl CheckControl { get; } = new CheckControl();
 
         public void Reset()
         {
@@ -153,12 +154,12 @@ namespace Retouch_Photo2.Effects.Models
         //IsOn
         private void ConstructIsOn()
         {
-            this.ToggleButton.Tapped += (s, e) =>
+            this.CheckControl.Tapped += (s, e) =>
             {
-                bool isOn = !this.ToggleButton.IsChecked;
+                bool isOn = !this.CheckControl.IsChecked;
 
                 this.Button.IsEnabled = isOn;
-                this.ToggleButton.IsChecked = isOn;
+                this.CheckControl.IsChecked = isOn;
                 this.MethodViewModel.EffectChanged<bool>
                 (
                    set: (effect) => effect.DirectionalBlur_IsOn = isOn,

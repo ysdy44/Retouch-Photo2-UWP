@@ -28,7 +28,7 @@ namespace Retouch_Photo2
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.DocumentButton.Content = resource.GetString("$DrawPage_Document");
+            this.DocumentTextBlock.Text = resource.GetString("$DrawPage_Document");
             this.DocumentUnSaveButton.Content = resource.GetString("$DrawPage_DocumentUnSave");
             {
                 this.ExportToolTip.Content = this.OverflowExportButton.Content = resource.GetString("$DrawPage_Export");

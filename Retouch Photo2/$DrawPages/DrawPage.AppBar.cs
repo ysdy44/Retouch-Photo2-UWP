@@ -81,7 +81,7 @@ namespace Retouch_Photo2
             double overflowWidth = this.OverflowButton.ActualWidth;
             double rightWidth = this.MenuButtonsControl.ActualWidth;
             double leftWidth = width - overflowWidth - rightWidth;
-            int count = (int)(leftWidth / 40.0d);
+            int count = (int)(leftWidth / 40.0d) - 1;
 
             //Overflow
             this.OverflowButton.Visibility = (count < this.LeftStackPanel.Children.Count) ? Visibility.Visible : Visibility.Collapsed;

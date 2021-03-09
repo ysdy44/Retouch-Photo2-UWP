@@ -3,6 +3,7 @@
 // Difficult:         
 // Only:              ★★★
 // Complete:      ★★★
+using Retouch_Photo2.Elements;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -19,8 +20,8 @@ namespace Retouch_Photo2.Effects
         FrameworkElement Page { get; }
         /// <summary> Gets the button. </summary>
         Button Button { get; }
-        /// <summary> Gets the ToggleButton. </summary>
-        SelectedToggleButton ToggleButton { get; }
+        /// <summary> Gets the CheckControl. </summary>
+        CheckControl CheckControl { get; }
 
         /// <summary>
         /// Reset the <see cref="Effect"/> and <see cref="IEffectPage"/>'s data.

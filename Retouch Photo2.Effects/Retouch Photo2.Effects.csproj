@@ -107,9 +107,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="EffectButtons\SelectedToggleButton.xaml.cs">
-      <DependentUpon>SelectedToggleButton.xaml</DependentUpon>
-    </Compile>
     <Compile Include="EffectsControl.xaml.cs">
       <DependentUpon>EffectsControl.xaml</DependentUpon>
     </Compile>
@@ -135,10 +132,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="EffectButtons\SelectedToggleButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="EffectsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

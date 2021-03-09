@@ -34,7 +34,7 @@
 
             <!--Flyout-->
             <Flyout x:Name="DocumentFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <Button x:Name="DocumentUnSaveButton" Width="180" Style="{StaticResource AppIconButton}">
+                <Button x:Name="DocumentUnSaveButton" Style="{StaticResource AppIconButton}">
                     <Button.Tag>
                         <FontIcon Glyph="&#xF78A;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                     </Button.Tag>
@@ -97,7 +97,7 @@
             <elements:DrawLayout.HeadChild>
                 <Grid x:Name="AppBarGrid">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition x:Name="DocumentColumnDefinition" MinWidth="50" MaxWidth="80"/>
+                        <ColumnDefinition x:Name="DocumentColumnDefinition" MinWidth="50" MaxWidth="140"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
@@ -105,16 +105,18 @@
 
 
                     <!--Document-->
-                    <Button x:Name="DocumentButton" Style="{StaticResource AppButtonStyle}"/>
+                    <Button x:Name="DocumentButton" Style="{StaticResource AppButtonStyle}">
+                        <TextBlock x:Name="DocumentTextBlock" TextTrimming="CharacterEllipsis"/>
+                    </Button>
 
 
                     <!--Left-->
                     <StackPanel x:Name="LeftStackPanel" Grid.Column="1" Orientation="Horizontal">
-                        <Button x:Name="ExportButton" Style="{StaticResource AppCircleButtonStyle}">
+                        <Button x:Name="ExportButton" Foreground="Black" Background="#FFC003" Style="{StaticResource AppRoundedButtonStyle}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="ExportToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
-                            <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </Button>
                         <Button x:Name="UndoButton" IsEnabled="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}" Style="{StaticResource AppCircleButtonStyle}">
                             <ToolTipService.ToolTip>
@@ -132,7 +134,7 @@
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="SetupToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
-                            <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </Button>
                         <ToggleButton x:Name="SnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
                             <ToolTipService.ToolTip>
@@ -167,9 +169,9 @@
                         <Button.Flyout>
                             <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                 <StackPanel x:Name="OverflowStackPanel">
-                                    <Button x:Name="OverflowExportButton" Style="{StaticResource AppIconSelectedButton}">
+                                    <Button x:Name="OverflowExportButton" Foreground="Black" Background="#FFC003" Style="{StaticResource AppIconSelectedButton}">
                                         <Button.Tag>
-                                            <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                            <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </Button.Tag>
                                     </Button>
                                     <Button x:Name="OverflowUndoButton" IsEnabled="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}" Style="{StaticResource AppIconSelectedButton}">
@@ -184,7 +186,7 @@
                                     </Button>-->
                                     <Button x:Name="OverflowSetupButton" Style="{StaticResource AppIconSelectedButton}">
                                         <Button.Tag>
-                                            <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" Foreground="{ThemeResource AppText}" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                            <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </Button.Tag>
                                     </Button>
                                     <ToggleButton x:Name="OverflowSnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">

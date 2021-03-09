@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Elements
             set => base.SetValue(IsCheckedProperty, value);
         }
         /// <summary> Identifies the <see cref = "CheckControl.IsChecked" /> dependency property. </summary>
-        public static readonly DependencyProperty IsCheckedProperty = DependencyProperty.Register(nameof(IsChecked), typeof(bool), typeof(CheckControl), new PropertyMetadata(false, (sender, e)=>
+        public static readonly DependencyProperty IsCheckedProperty = DependencyProperty.Register(nameof(IsChecked), typeof(bool), typeof(CheckControl), new PropertyMetadata(false, (sender, e) =>
         {
             CheckControl control = (CheckControl)sender;
 
@@ -126,6 +126,7 @@ namespace Retouch_Photo2.Elements
             this.CheckedNormal = base.GetTemplateChild(nameof(CheckedNormal)) as VisualState;
             this.CheckedPointerOver = base.GetTemplateChild(nameof(CheckedPointerOver)) as VisualState;
             this.CheckedPressed = base.GetTemplateChild(nameof(CheckedPressed)) as VisualState;
+            this.VisualState = this.VisualState;//State
         }
 
     }

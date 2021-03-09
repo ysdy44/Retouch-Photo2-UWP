@@ -1,6 +1,4 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
+﻿using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus
 {
@@ -44,16 +42,6 @@ namespace Retouch_Photo2.Menus
 
         private void ConstructWidthStoryboard()
         {
-            // Binding own DependencyProperty to the Storyboard
-            Storyboard.SetTarget(this.WidthKeyFrames222, this.RootGrid);
-            Storyboard.SetTargetProperty(this.WidthKeyFrames222, "(UIElement.Width)");
-            Storyboard.SetTarget(this.WidthStoryboard272, this.RootGrid);
-            Storyboard.SetTargetProperty(this.WidthKeyFrames272, "(UIElement.Width)");
-            Storyboard.SetTarget(this.WidthKeyFrames322, this.RootGrid);
-            Storyboard.SetTargetProperty(this.WidthKeyFrames322, "(UIElement.Width)");
-            Storyboard.SetTarget(this.WidthKeyFrames372, this.RootGrid);
-            Storyboard.SetTargetProperty(this.WidthKeyFrames372, "(UIElement.Width)");
-
             this.WidthFlyoutItem272.IsChecked = true;
             this.WidthFlyoutItem222.Click += (s, e) => this.WidthMode = ExpanderWidth.Width222;
             this.WidthFlyoutItem272.Click += (s, e) => this.WidthMode = ExpanderWidth.Width272;
@@ -68,10 +56,6 @@ namespace Retouch_Photo2.Menus
         //Height        
         private void ConstructHeightStoryboard()
         {
-            // Binding own DependencyProperty to the Storyboard
-            Storyboard.SetTarget(this.HeightKeyFrames, this.HeightRectangle);
-            Storyboard.SetTargetProperty(this.HeightKeyFrames, "(UIElement.Height)");
-
             this.HeightKeyFrames.Completed += (s, e) =>
             {
                 this.HeightKeyFrames.From = this.HeightKeyFrames.To;

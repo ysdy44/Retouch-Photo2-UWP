@@ -197,7 +197,7 @@
                             <ColumnDefinition Width="20" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Grid VerticalAlignment="Top" Height="32">
+                        <Grid VerticalAlignment="Center" Height="32">
                             <Rectangle x:Name="NormalRectangle" RadiusX="2" RadiusY="2"
                                 Fill="{ThemeResource CheckBoxCheckBackgroundFillUnchecked}"
                                 Stroke="{ThemeResource CheckBoxCheckBackgroundStrokeUnchecked}"

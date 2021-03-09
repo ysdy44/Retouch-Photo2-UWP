@@ -180,6 +180,7 @@
                         <Setter Target = "RightGrid.Margin" Value="0,20"/>
                         <Setter Target = "RightGrid.BorderThickness" Value="1,1,0,1"/>
 
+                        <Setter Target = "RightGrid.Padding" Value="{StaticResource AppPanelPadding}"/>
                         <Setter Target = "_WidthButton.Visibility" Value="Visible"/>
 
                     </VisualState.Setters>
@@ -216,6 +217,11 @@
                              apiContractNotPresent5:Value="{ThemeResource AppForeground}"
                              apiContractPresent5:Value="{ThemeResource AppAcrylicWindowBrush}"
                         />
+
+                        <Setter Target = "_GalleryBoder.Visibility" Value="Visible"/>
+                        <Setter Target = "_GalleryButton.Width" Value="90"/>
+                        <Setter Target = "_GalleryButton.Background" Value="{ThemeResource AppForeground}"/>
+                        <Setter Target = "_GalleryButton.Style" Value="{StaticResource AppRoundedButtonStyle}"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -1035,6 +1041,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="42"/>
                 </Grid.RowDefinitions>
+
+                <Border x:Name = "_GalleryBoder" Visibility="Collapsed" Background="{ThemeResource AppLinearBrush}"/>
                 <Button x:Name="_GalleryButton" Style="{StaticResource AppButtonStyle}">
                     <ToolTipService.ToolTip>
                         <ToolTip x:Name="_RightPhotosToolTip" Placement="Left" Style="{StaticResource AppToolTipStyle}"/>
