@@ -26,16 +26,9 @@ namespace Retouch_Photo2.Elements
 
         //Touchbar
         /// <summary> TouchbarPickerBorder's child. </summary>
-        public FrameworkElement TouchbarPicker { set => this.TouchbarBorder.Children.Add(value); }
+        public FrameworkElement TouchbarPicker { set => this.TouchbarPickerBorder.Child = value; }
         /// <summary> TouchbarSliderBorder's child. </summary>
-        public FrameworkElement TouchbarSlider
-        {
-            set
-            {
-                Grid.SetColumn(value, 2);
-                this.TouchbarBorder.Children.Add(value);
-            }
-        }
+        public FrameworkElement TouchbarSlider { set => this.TouchbarSliderBorder.Child = value; }
 
 
         //Foot
@@ -58,6 +51,8 @@ namespace Retouch_Photo2.Elements
         public UIElement RightPanel { get => this.RightBorder.Child; set => this.RightBorder.Child = value; }
         /// <summary> Gallery button. </summary>   
         public Button GalleryButton => this._GalleryButton;
+        /// <summary> PC Gallery button. </summary>   
+        public Button PCGalleryButton => this._PCGalleryButton;
         /// <summary> Gallery ToolTip. </summary>   
         public ToolTip GalleryToolTip => this._RightPhotosToolTip;
         /// <summary> Width button. </summary>   

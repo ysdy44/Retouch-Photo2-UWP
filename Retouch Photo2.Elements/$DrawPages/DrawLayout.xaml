@@ -16,48 +16,48 @@
     <UserControl.Resources>
         <!--Storyboard-->
         <Storyboard x:Name="WidthToWideStoryboard" >
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_GalleryButton" Storyboard.TargetProperty = "IsHitTestVisible" Duration="0:0:0.2">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_GalleryButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0.2">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="True"/>
             </ObjectAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_WidthButton" Storyboard.TargetProperty = "IsHitTestVisible" Duration="0:0:0.2">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_WidthButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0.2">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="True"/>
             </ObjectAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WidthIcon" Storyboard.TargetProperty = "Glyph" Duration="0">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WidthIcon" Storyboard.TargetProperty="Glyph" Duration="0">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="&#xE126;"/>
             </ObjectAnimationUsingKeyFrames>
 
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightBorder" Storyboard.TargetProperty = "(UIElement.Width)" Duration="0:0:0.2">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightBorder" Storyboard.TargetProperty="(UIElement.Width)" Duration="0:0:0.2">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="220"/>
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Auto"/>
             </ObjectAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "(UIElement.Width)" From="70" To="220" Duration="0:0:0.2" EnableDependentAnimation ="True">
+            <DoubleAnimation Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(UIElement.Width)" From="70" To="220" Duration="0:0:0.2" EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseInOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Name="WideToWidthStoryboard">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_GalleryButton" Storyboard.TargetProperty = "IsHitTestVisible" Duration="0:0:0.2">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_GalleryButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0.2">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="True"/>
             </ObjectAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_WidthButton" Storyboard.TargetProperty = "IsHitTestVisible" Duration="0:0:0.2">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_WidthButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0.2">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="True"/>
             </ObjectAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WidthIcon" Storyboard.TargetProperty = "Glyph" Duration="0">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WidthIcon" Storyboard.TargetProperty="Glyph" Duration="0">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="&#xE127;"/>
             </ObjectAnimationUsingKeyFrames>
 
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightBorder" Storyboard.TargetProperty = "(UIElement.Width)" Duration="0:0:0.2">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightBorder" Storyboard.TargetProperty="(UIElement.Width)" Duration="0:0:0.2">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="220"/>
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Auto"/>
             </ObjectAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "(UIElement.Width)" From="220" To="70" Duration="0:0:0.2"  EnableDependentAnimation ="True">
+            <DoubleAnimation Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(UIElement.Width)" From="220" To="70" Duration="0:0:0.2"  EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseInOut"/>
                 </DoubleAnimation.EasingFunction>
@@ -218,10 +218,7 @@
                              apiContractPresent5:Value="{ThemeResource AppAcrylicWindowBrush}"
                         />
 
-                        <Setter Target = "_GalleryBoder.Visibility" Value="Visible"/>
-                        <Setter Target = "_GalleryButton.Width" Value="90"/>
-                        <Setter Target = "_GalleryButton.Background" Value="{ThemeResource AppForeground}"/>
-                        <Setter Target = "_GalleryButton.Style" Value="{StaticResource AppRoundedButtonStyle}"/>
+                        <Setter Target = "GalleryBoder.Visibility" Value="Visible"/>
 
                     </VisualState.Setters>
                 </VisualState>
@@ -238,23 +235,23 @@
                         <Storyboard>
 
                             <!--Left-->
-                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty = "X" From="-70" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTransform" Storyboard.TargetProperty = "X" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="220"/>
                             </ObjectAnimationUsingKeyFrames>
 
                             <!--DismissOverlay-->
-                            <DoubleAnimation Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty = "Opacity" From="0" To="1" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty = "Visibility" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Visibility" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                             </ObjectAnimationUsingKeyFrames>
 
@@ -268,23 +265,23 @@
                         <Storyboard>
 
                             <!--Left-->
-                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty = "X" From="0" To="-70" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="0" To="-70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTransform" Storyboard.TargetProperty = "X" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="220"/>
                             </ObjectAnimationUsingKeyFrames>
 
                             <!--DismissOverlay-->
-                            <DoubleAnimation Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty = "Opacity" From="1" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty = "Visibility" Duration="0:0:0.2">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Visibility" Duration="0:0:0.2">
                                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Collapsed"/>
                             </ObjectAnimationUsingKeyFrames>
 
@@ -299,23 +296,23 @@
                         <Storyboard>
 
                             <!--Left-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty = "X" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="-70"/>
                             </ObjectAnimationUsingKeyFrames>
                             <!--Right-->
-                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty = "X" From="220" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="220" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--DismissOverlay-->
-                            <DoubleAnimation Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty = "Opacity" From="0" To="1" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty = "Visibility" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Visibility" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                             </ObjectAnimationUsingKeyFrames>
 
@@ -329,23 +326,23 @@
                         <Storyboard>
 
                             <!--Left-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty = "X" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="-70"/>
                             </ObjectAnimationUsingKeyFrames>
                             <!--Right-->
-                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty = "X" From="0" To="220" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="0" To="220" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--DismissOverlay-->
-                            <DoubleAnimation Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty = "Opacity" From="1" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty = "Visibility" Duration="0:0:0.2">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Visibility" Duration="0:0:0.2">
                                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Collapsed"/>
                             </ObjectAnimationUsingKeyFrames>
 
@@ -361,35 +358,35 @@
                         <Storyboard>
 
                             <!--Left-->
-                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty = "X" From="0" To="-70" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="0" To="-70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
-                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty = "X" From="0" To="70" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="0" To="70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Foot-->
-                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty = "ScaleX" From="0" To="1" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleX" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty = "ScaleY" From="0" To="1" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleY" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty = "ScaleX" From="0" To="1" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleX" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty = "ScaleY" From="0" To="1" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleY" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -398,42 +395,42 @@
 
 
                             <!--Left-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "(Grid.Row)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.Row)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "(Grid.RowSpan)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.RowSpan)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "CornerRadius" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="CornerRadius" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,8,0"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "Margin" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="Margin" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,20"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "BorderThickness" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="BorderThickness" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,1,1,1"/>
                             </ObjectAnimationUsingKeyFrames>
                             <!--Right-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "Width" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="Width" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="70"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "(Grid.Row)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(Grid.Row)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "(Grid.RowSpan)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(Grid.RowSpan)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "CornerRadius" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="CornerRadius" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="8,0,0,8"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "Margin" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="Margin" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,20"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "BorderThickness" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="BorderThickness" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1,1,0,1"/>
                             </ObjectAnimationUsingKeyFrames>
 
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_WidthButton" Storyboard.TargetProperty = "Visibility" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_WidthButton" Storyboard.TargetProperty="Visibility" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                             </ObjectAnimationUsingKeyFrames>
 
@@ -447,35 +444,35 @@
                         <Storyboard>
 
                             <!--Left-->
-                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty = "X" From="-70" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
-                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty = "X" From="70" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Foot-->
-                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty = "ScaleX" From="1" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleX" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty = "ScaleY" From="1" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleY" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty = "ScaleX" From="1" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleX" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty = "ScaleY" From="1" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleY" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -484,47 +481,47 @@
 
 
                             <!--Touchbar-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TouchbarBorder" Storyboard.TargetProperty = "Margin" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TouchbarBorder" Storyboard.TargetProperty="Margin" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="82,0,82,70"/>
                             </ObjectAnimationUsingKeyFrames>
 
                             <!--Left-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "(Grid.Row)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.Row)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "(Grid.RowSpan)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.RowSpan)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "CornerRadius" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="CornerRadius" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,8,0"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "Margin" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="Margin" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,20"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "BorderThickness" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="BorderThickness" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,1,1,1"/>
                             </ObjectAnimationUsingKeyFrames>
                             <!--Right-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "Width" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="Width" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="70"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "(Grid.Row)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(Grid.Row)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "(Grid.RowSpan)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(Grid.RowSpan)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "CornerRadius" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="CornerRadius" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="8,0,0,8"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "Margin" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="Margin" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,20"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "BorderThickness" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="BorderThickness" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1,1,0,1"/>
                             </ObjectAnimationUsingKeyFrames>
 
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_WidthButton" Storyboard.TargetProperty = "Visibility" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_WidthButton" Storyboard.TargetProperty="Visibility" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                             </ObjectAnimationUsingKeyFrames>
 
@@ -541,34 +538,34 @@
                         <Storyboard>
 
                             <!--Foot-->
-                            <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty = "Y" From="0" To="70" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty="Y" From="0" To="70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty = "ScaleX" From="1" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleX" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty = "ScaleY" From="1" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleY" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty = "ScaleX" From="1" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleX" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty = "ScaleY" From="1" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleY" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Head-->
-                            <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty = "Y" From="0" To="-70" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="0" To="-70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -584,34 +581,34 @@
                         <Storyboard>
 
                             <!--Foot-->
-                            <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty = "Y" From="70" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty="Y" From="70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty = "ScaleX" From="0" To="1" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleX" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty = "ScaleY" From="0" To="1" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleY" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty = "ScaleX" From="0" To="1" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleX" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty = "ScaleY" From="0" To="1" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleY" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Head-->
-                            <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty = "Y" From="-70" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -629,27 +626,27 @@
                         <Storyboard>
 
                             <!--Foot-->
-                            <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty = "Y" From="0" To="70" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty="Y" From="0" To="70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Head-->
-                            <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty = "Y" From="0" To="-70" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="0" To="-70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Left-->
-                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty = "X" From="0" To="-70" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="0" To="-70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
-                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty = "X" From="0" To="220" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="0" To="220" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -658,42 +655,42 @@
 
 
                             <!--Left-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "(Grid.Row)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.Row)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "(Grid.RowSpan)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.RowSpan)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "CornerRadius" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="CornerRadius" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,8,0"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "Margin" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="Margin" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,20"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "BorderThickness" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="BorderThickness" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,1,1,1"/>
                             </ObjectAnimationUsingKeyFrames>
                             <!--Right-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "Width" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="Width" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="70"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "(Grid.Row)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(Grid.Row)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "(Grid.RowSpan)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(Grid.RowSpan)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "CornerRadius" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="CornerRadius" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="8,0,0,8"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "Margin" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="Margin" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,20"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "BorderThickness" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="BorderThickness" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1,1,0,1"/>
                             </ObjectAnimationUsingKeyFrames>
 
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_WidthButton" Storyboard.TargetProperty = "Visibility" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_WidthButton" Storyboard.TargetProperty="Visibility" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                             </ObjectAnimationUsingKeyFrames>
 
@@ -707,27 +704,27 @@
                         <Storyboard>
 
                             <!--Foot-->
-                            <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty = "Y" From="70" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty="Y" From="70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Head-->
-                            <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty = "Y" From="-70" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Left-->
-                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty = "X" From="-70" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
-                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty = "X" From="220" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="220" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -736,42 +733,42 @@
 
 
                             <!--Left-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "(Grid.Row)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.Row)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "(Grid.RowSpan)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.RowSpan)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "CornerRadius" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="CornerRadius" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,8,8,0"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "Margin" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="Margin" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,20"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "BorderThickness" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="BorderThickness" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,1,1,1"/>
                             </ObjectAnimationUsingKeyFrames>
                             <!--Right-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "Width" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="Width" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="70"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "(Grid.Row)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(Grid.Row)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "(Grid.RowSpan)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(Grid.RowSpan)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "CornerRadius" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="CornerRadius" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="8,0,0,8"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "Margin" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="Margin" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0,20"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "BorderThickness" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="BorderThickness" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1,1,0,1"/>
                             </ObjectAnimationUsingKeyFrames>
 
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_WidthButton" Storyboard.TargetProperty = "Visibility" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_WidthButton" Storyboard.TargetProperty="Visibility" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                             </ObjectAnimationUsingKeyFrames>
 
@@ -787,27 +784,27 @@
                         <Storyboard>
 
                             <!--Foot-->
-                            <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty = "Y" From="0" To="70" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty="Y" From="0" To="70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Head-->
-                            <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty = "Y" From="0" To="-70" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="0" To="-70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Left-->
-                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty = "X" From="0" To="-70" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="0" To="-70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
-                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty = "X" From="0" To="220" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="0" To="220" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -816,40 +813,40 @@
 
 
                             <!--Foot-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty = "(Grid.Column)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty="(Grid.Column)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty = "(Grid.ColumnSpan)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty="(Grid.ColumnSpan)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="3"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_LeftIcon" Storyboard.TargetProperty = "Visibility" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_LeftIcon" Storyboard.TargetProperty="Visibility" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_RightIcon" Storyboard.TargetProperty = "Visibility" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_RightIcon" Storyboard.TargetProperty="Visibility" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
                             </ObjectAnimationUsingKeyFrames>
 
                             <!--Head-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeadBorder" Storyboard.TargetProperty = "(Grid.Column)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeadBorder" Storyboard.TargetProperty="(Grid.Column)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeadBorder" Storyboard.TargetProperty = "(Grid.ColumnSpan)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeadBorder" Storyboard.TargetProperty="(Grid.ColumnSpan)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="2"/>
                             </ObjectAnimationUsingKeyFrames>
 
                             <!--Left-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "(Grid.Column)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.Column)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "(Grid.Row)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.Row)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "(Grid.RowSpan)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.RowSpan)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
 
                             <!--Right-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "(Grid.Column)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(Grid.Column)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="2"/>
                             </ObjectAnimationUsingKeyFrames>
 
@@ -864,27 +861,27 @@
                         <Storyboard>
 
                             <!--Foot-->
-                            <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty = "Y" From="70" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty="Y" From="70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Head-->
-                            <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty = "Y" From="-70" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Left-->
-                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty = "X" From="-70" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
-                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty = "X" From="220" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="220" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -893,40 +890,40 @@
 
 
                             <!--Foot-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty = "(Grid.Column)" Duration="0:0:0.2">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty="(Grid.Column)" Duration="0:0:0.2">
                                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="0"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty = "(Grid.ColumnSpan)" Duration="0:0:0.2">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty="(Grid.ColumnSpan)" Duration="0:0:0.2">
                                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="3"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_LeftIcon" Storyboard.TargetProperty = "Visibility" Duration="0:0:0.2">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_LeftIcon" Storyboard.TargetProperty="Visibility" Duration="0:0:0.2">
                                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Collapsed"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_RightIcon" Storyboard.TargetProperty = "Visibility" Duration="0:0:0.2">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_RightIcon" Storyboard.TargetProperty="Visibility" Duration="0:0:0.2">
                                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Collapsed"/>
                             </ObjectAnimationUsingKeyFrames>
 
                             <!--Head-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeadBorder" Storyboard.TargetProperty = "(Grid.Column)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeadBorder" Storyboard.TargetProperty="(Grid.Column)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeadBorder" Storyboard.TargetProperty = "(Grid.ColumnSpan)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeadBorder" Storyboard.TargetProperty="(Grid.ColumnSpan)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="2"/>
                             </ObjectAnimationUsingKeyFrames>
 
                             <!--Left-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "(Grid.Column)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.Column)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "(Grid.Row)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.Row)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty = "(Grid.RowSpan)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftBorder" Storyboard.TargetProperty="(Grid.RowSpan)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                             </ObjectAnimationUsingKeyFrames>
 
                             <!--Right-->
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty = "(Grid.Column)" Duration="0">
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(Grid.Column)" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="2"/>
                             </ObjectAnimationUsingKeyFrames>
 
@@ -966,6 +963,8 @@
                 <ColumnDefinition Width="4"/>
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
+            <Border x:Name="TouchbarPickerBorder"/>
+            <Border x:Name="TouchbarSliderBorder" Grid.Column="2"/>            
         </Grid>
         <!--Foot-->
         <Grid MinHeight="70" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom">
@@ -1041,8 +1040,6 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="42"/>
                 </Grid.RowDefinitions>
-
-                <Border x:Name = "_GalleryBoder" Visibility="Collapsed" Background="{ThemeResource AppLinearBrush}"/>
                 <Button x:Name="_GalleryButton" Style="{StaticResource AppButtonStyle}">
                     <ToolTipService.ToolTip>
                         <ToolTip x:Name="_RightPhotosToolTip" Placement="Left" Style="{StaticResource AppToolTipStyle}"/>
@@ -1056,6 +1053,12 @@
                     </ToolTipService.ToolTip>
                     <FontIcon x:Name="WidthIcon" Glyph="&#xE127;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>
+                <Border x:Name = "GalleryBoder" Visibility="Collapsed" Background="{ThemeResource AppLinearBrush}">
+                    <Button x:Name="_PCGalleryButton" Width="90" Style="{StaticResource AppRoundedButtonStyle}">
+                        <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    </Button>
+                </Border>
+
             </Grid>
 
         </Border>

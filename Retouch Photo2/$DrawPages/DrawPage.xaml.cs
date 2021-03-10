@@ -79,7 +79,8 @@ namespace Retouch_Photo2
             this.DrawLayout.TouchbarPicker = TouchbarButton.PickerBorder;
             this.DrawLayout.TouchbarSlider = TouchbarButton.SliderBorder;
             this.DrawLayout.GalleryButton.Click += (s, e) => this.ShowGalleryDialog(GalleryMode.AddImage);
-
+            this.DrawLayout.PCGalleryButton.Click += (s, e) => this.ShowGalleryDialog(GalleryMode.AddImage);
+            
             //FlyoutTool
             Retouch_Photo2.Tools.Elements.MoreTransformButton.Flyout = this.MoreTransformFlyout;
             Retouch_Photo2.Tools.Elements.MoreCreateButton.Flyout = this.MoreCreateFlyout;
