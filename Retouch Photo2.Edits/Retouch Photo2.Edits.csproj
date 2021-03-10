@@ -107,64 +107,13 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CombineIcons\ExpandStrokeIcon.xaml.cs">
-      <DependentUpon>ExpandStrokeIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CombineIcons\UnionIcon.xaml.cs">
-      <DependentUpon>UnionIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CombineIcons\XorIcon.xaml.cs">
-      <DependentUpon>XorIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CombineIcons\IntersectIcon.xaml.cs">
-      <DependentUpon>IntersectIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CombineIcons\ExcludeIcon.xaml.cs">
-      <DependentUpon>ExcludeIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditIcons\ClearIcon.xaml.cs">
-      <DependentUpon>ClearIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditIcons\CopyIcon.xaml.cs">
-      <DependentUpon>CopyIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditIcons\CutIcon.xaml.cs">
-      <DependentUpon>CutIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditIcons\DuplicateIcon.xaml.cs">
-      <DependentUpon>DuplicateIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditIcons\ExtractIcon.xaml.cs">
-      <DependentUpon>ExtractIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditIcons\MergeIcon.xaml.cs">
-      <DependentUpon>MergeIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditIcons\PasteIcon.xaml.cs">
-      <DependentUpon>PasteIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GroupIcons\GroupIcon.xaml.cs">
-      <DependentUpon>GroupIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GroupIcons\ReleaseIcon.xaml.cs">
-      <DependentUpon>ReleaseIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GroupIcons\UngroupIcon.xaml.cs">
-      <DependentUpon>UngroupIcon.xaml</DependentUpon>
+    <Compile Include="EditControl.xaml.cs">
+      <DependentUpon>EditControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SelectIcons\AllIcon.xaml.cs">
-      <DependentUpon>AllIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SelectIcons\DeselectIcon.xaml.cs">
-      <DependentUpon>DeselectIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SelectIcons\InvertIcon.xaml.cs">
-      <DependentUpon>InvertIcon.xaml</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\Retouch_Photo2.Edits.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -173,9 +122,17 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CombineIcons\ExpandStrokeIcon.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="CombineIcons\ExcludeIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CombineIcons\ExpandStrokeIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CombineIcons\IntersectIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="CombineIcons\UnionIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -185,13 +142,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CombineIcons\IntersectIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="EditControl.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="CombineIcons\ExcludeIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="EditIcons\ClearIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -246,6 +199,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SelectIcons\InvertIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

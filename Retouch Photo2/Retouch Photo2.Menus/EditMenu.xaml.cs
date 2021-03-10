@@ -6,10 +6,6 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Edits.CombineIcons;
-using Retouch_Photo2.Edits.EditIcons;
-using Retouch_Photo2.Edits.GroupIcons;
-using Retouch_Photo2.Edits.SelectIcons;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
@@ -22,6 +18,8 @@ using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo2.Edits;
+using System;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -100,28 +98,28 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructStrings();
 
             //Edit
-            this.CutButton.Click += (s, e) => this.MethodViewModel.MethodEditCut();
-            this.DuplicateButton.Click += (s, e) => this.MethodViewModel.MethodEditDuplicate();
-            this.CopyButton.Click += (s, e) => this.MethodViewModel.MethodEditCopy();
-            this.PasteButton.Click += (s, e) => this.MethodViewModel.MethodEditPaste();
-            this.ClearButton.Click += (s, e) => this.MethodViewModel.MethodEditClear();
+            this.Cut.Click += (s, e) => this.MethodViewModel.MethodEditCut();
+            this.Duplicate.Click += (s, e) => this.MethodViewModel.MethodEditDuplicate();
+            this.Copy.Click += (s, e) => this.MethodViewModel.MethodEditCopy();
+            this.Paste.Click += (s, e) => this.MethodViewModel.MethodEditPaste();
+            this.Clear.Click += (s, e) => this.MethodViewModel.MethodEditClear();
 
             //Select
-            this.AllButton.Click += (s, e) => this.MethodViewModel.MethodSelectAll();
-            this.DeselectButton.Click += (s, e) => this.MethodViewModel.MethodSelectDeselect();
-            this.InvertButton.Click += (s, e) => this.MethodViewModel.MethodSelectInvert();
+            this.All.Click += (s, e) => this.MethodViewModel.MethodSelectAll();
+            this.Deselect.Click += (s, e) => this.MethodViewModel.MethodSelectDeselect();
+            this.Invert.Click += (s, e) => this.MethodViewModel.MethodSelectInvert();
 
             //Group
-            this.GroupButton.Click += (s, e) => this.MethodViewModel.MethodGroupGroup();
-            this.UngroupButton.Click += (s, e) => this.MethodViewModel.MethodGroupUngroup();
-            this.ReleaseButton.Click += (s, e) => this.MethodViewModel.MethodGroupRelease();
+            this.Group.Click += (s, e) => this.MethodViewModel.MethodGroupGroup();
+            this.Ungroup.Click += (s, e) => this.MethodViewModel.MethodGroupUngroup();
+            this.Release.Click += (s, e) => this.MethodViewModel.MethodGroupRelease();
 
             //Combine
-            this.UnionButton.Click += (s, e) => this.Combine(CanvasGeometryCombine.Union);
-            this.ExcludeButton.Click += (s, e) => this.Combine(CanvasGeometryCombine.Exclude);
-            this.XorButton.Click += (s, e) => this.Combine(CanvasGeometryCombine.Xor);
-            this.IntersectButton.Click += (s, e) => this.Combine(CanvasGeometryCombine.Intersect);
-            this.ExpandStrokeButton.Click += (s, e) => this.ExpandStroke();
+            this.Union.Click += (s, e) => this.Combine(CanvasGeometryCombine.Union);
+            this.Exclude.Click += (s, e) => this.Combine(CanvasGeometryCombine.Exclude);
+            this.Xor.Click += (s, e) => this.Combine(CanvasGeometryCombine.Xor);
+            this.Intersect.Click += (s, e) => this.Combine(CanvasGeometryCombine.Intersect);
+            this.ExpandStroke.Click += (s, e) => this.ExpandStrokeCore();
         }
 
     }
@@ -138,51 +136,47 @@ namespace Retouch_Photo2.Menus.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.EditTextBlock.Text = resource.GetString("Edits_Edit");
-            this.CutButton.Content = resource.GetString("Edits_Edit_Cut");
-            this.CutButton.Tag = new CutIcon();
-            this.DuplicateButton.Content = resource.GetString("Edits_Edit_Duplicate");
-            this.DuplicateButton.Tag = new DuplicateIcon();
-            this.CopyButton.Content = resource.GetString("Edits_Edit_Copy");
-            this.CopyButton.Tag = new CopyIcon();
-            this.PasteButton.Content = resource.GetString("Edits_Edit_Paste");
-            this.PasteButton.Tag = new PasteIcon();
-            this.ClearButton.Content = resource.GetString("Edits_Edit_Clear");
-            this.ClearButton.Tag = new ClearIcon();
-
             this.GroupTextBlock.Text = resource.GetString("Edits_Group");
-            this.GroupButton.Content = resource.GetString("Edits_Group_Group");
-            this.GroupButton.Tag = new GroupIcon();
-            this.UngroupButton.Content = resource.GetString("Edits_Group_Ungroup");
-            this.UngroupButton.Tag = new UngroupIcon();
-            this.ReleaseButton.Content = resource.GetString("Edits_Group_Release");
-            this.ReleaseButton.Tag = new ReleaseIcon();
-
             this.SelectTextBlock.Text = resource.GetString("Edits_Select");
-            this.AllButton.Content = resource.GetString("Edits_Select_All");
-            this.AllButton.Tag = new AllIcon();
-            this.DeselectButton.Content = resource.GetString("Edits_Select_Deselect");
-            this.DeselectButton.Tag = new DeselectIcon();
-            this.InvertButton.Content = resource.GetString("Edits_Select_Invert");
-            this.InvertButton.Tag = new InvertIcon();
-
             this.CombineTextBlock.Text = resource.GetString("Edits_Combine");
-            this.UnionButton.Content = resource.GetString("Edits_Combine_Union");
-            this.UnionButton.Tag = new UnionIcon();
-            this.ExcludeButton.Content = resource.GetString("Edits_Combine_Exclude");
-            this.ExcludeButton.Tag = new ExcludeIcon();
-            this.XorButton.Content = resource.GetString("Edits_Combine_Xor");
-            this.XorButton.Tag = new XorIcon();
-            this.IntersectButton.Content = resource.GetString("Edits_Combine_Intersect");
-            this.IntersectButton.Tag = new IntersectIcon();
-            this.ExpandStrokeButton.Content = resource.GetString("Edits_Combine_ExpandStroke");
-            this.ExpandStrokeButton.Tag = new ExpandStrokeIcon();
+
+
+            //@Group
+            void constructGroup(Button button, string folder)
+            {
+                string key = button.Name;
+                button.Content = resource.GetString($"Edits_{folder}_{key}");
+                button.Tag = new EditControl(key, folder);
+            }
+
+
+            constructGroup(this.Cut, "Edit");
+            constructGroup(this.Duplicate, "Edit");
+            constructGroup(this.Copy, "Edit");
+            constructGroup(this.Paste, "Edit");
+            constructGroup(this.Clear, "Edit");
+
+            constructGroup(this.Group, "Group");
+            constructGroup(this.Ungroup, "Group");
+            constructGroup(this.Release, "Group");
+
+
+            constructGroup(this.All, "Select");
+            constructGroup(this.Deselect, "Select");
+            constructGroup(this.Invert, "Select");
+
+            constructGroup(this.Union, "Combine");
+            constructGroup(this.Exclude, "Combine");
+            constructGroup(this.Xor, "Combine");
+            constructGroup(this.Intersect, "Combine");
+            constructGroup(this.ExpandStroke, "Combine");
         }
 
 
         /// <summary>
         /// Expand Stroke.
         /// </summary>
-        private void ExpandStroke()
+        private void ExpandStrokeCore()
         {
             IList<Layerage> layerages = new List<Layerage>();
 
