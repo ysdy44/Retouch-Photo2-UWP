@@ -135,11 +135,6 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.EditTextBlock.Text = resource.GetString("Edits_Edit");
-            this.GroupTextBlock.Text = resource.GetString("Edits_Group");
-            this.SelectTextBlock.Text = resource.GetString("Edits_Select");
-            this.CombineTextBlock.Text = resource.GetString("Edits_Combine");
-
 
             //@Group
             void constructGroup(Button button, string folder)
@@ -149,27 +144,34 @@ namespace Retouch_Photo2.Menus.Models
                 button.Tag = new EditControl(key, folder);
             }
 
+            string edit = "Edit";
+            this.EditTextBlock.Text = resource.GetString($"Edits_{edit}");
+            constructGroup(this.Cut, edit);
+            constructGroup(this.Duplicate, edit);
+            constructGroup(this.Copy, edit);
+            constructGroup(this.Paste, edit);
+            constructGroup(this.Clear, edit);
 
-            constructGroup(this.Cut, "Edit");
-            constructGroup(this.Duplicate, "Edit");
-            constructGroup(this.Copy, "Edit");
-            constructGroup(this.Paste, "Edit");
-            constructGroup(this.Clear, "Edit");
-
-            constructGroup(this.Group, "Group");
-            constructGroup(this.Ungroup, "Group");
-            constructGroup(this.Release, "Group");
+            string group = "Group";
+            this.GroupTextBlock.Text = resource.GetString($"Edits_{group}");
+            constructGroup(this.Group, group);
+            constructGroup(this.Ungroup, group);
+            constructGroup(this.Release, group);
 
 
-            constructGroup(this.All, "Select");
-            constructGroup(this.Deselect, "Select");
-            constructGroup(this.Invert, "Select");
+            string select = "Select";
+            this.SelectTextBlock.Text = resource.GetString($"Edits_{select}");
+            constructGroup(this.All, select);
+            constructGroup(this.Deselect, select);
+            constructGroup(this.Invert, select);
 
-            constructGroup(this.Union, "Combine");
-            constructGroup(this.Exclude, "Combine");
-            constructGroup(this.Xor, "Combine");
-            constructGroup(this.Intersect, "Combine");
-            constructGroup(this.ExpandStroke, "Combine");
+            string combine = "Combine";
+            this.CombineTextBlock.Text = resource.GetString($"Edits_{combine}");
+            constructGroup(this.Union, combine);
+            constructGroup(this.Exclude, combine);
+            constructGroup(this.Xor, combine);
+            constructGroup(this.Intersect, combine);
+            constructGroup(this.ExpandStroke, combine);
         }
 
 

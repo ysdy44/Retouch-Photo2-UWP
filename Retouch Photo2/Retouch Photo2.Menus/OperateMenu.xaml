@@ -9,7 +9,12 @@
     d:DesignHeight="400"
     >
 
-    <Grid MinHeight="165" Padding="1,4">
+    <UserControl.Resources>
+        <!--Style-->
+        <Style x:Key="ToolTipStyle" TargetType="ToolTip" BasedOn="{StaticResource AppToolTipStyle}"/>
+    </UserControl.Resources>
+
+    <Grid x:Name="Grid" MinHeight="165" Padding="1,4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -30,98 +35,34 @@
 
         <!--Transform-->
         <TextBlock x:Name="TransformTextBlock" Grid.ColumnSpan="4" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="FlipHorizontalButton" Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="FlipHorizontalToolTip" Placement="Left" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
-        <Button x:Name="FlipVerticalButton" Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="FlipVerticalToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
-        <Button x:Name="RotateLeftButton" Grid.Column="2" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="RotateLeftToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
-        <Button x:Name="RotateRightButton" Grid.Column="3" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="RotateRightToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
+        <Button x:Name="FlipHorizontal" Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}"/>
+        <Button x:Name="FlipVertical" Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}"/>
+        <Button x:Name="RotateLeft" Grid.Column="2" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}"/>
+        <Button x:Name="RotateRight" Grid.Column="3" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}"/>
 
 
         <!--Arrange-->
         <TextBlock x:Name="ArrangeTextBlock" Grid.ColumnSpan="4" Grid.Row="2" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="MoveBackButton" Grid.Column="0" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="MoveBackToolTip" Placement="Left" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
-        <Button x:Name="BackOneButton" Grid.Column="1" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="BackOneToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
-        <Button x:Name="ForwardOneButton" Grid.Column="2" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="ForwardOneToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
-        <Button x:Name="MoveFrontButton" Grid.Column="3" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="MoveFrontToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
+        <Button x:Name="MoveBack" Grid.Column="0" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}"/>
+        <Button x:Name="BackOne" Grid.Column="1" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}"/>
+        <Button x:Name="ForwardOne" Grid.Column="2" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}"/>
+        <Button x:Name="MoveFront" Grid.Column="3" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}"/>
 
 
         <!--Horizontally-->
         <TextBlock x:Name="HorizontallyTextBlock" Grid.ColumnSpan="4" Grid.Row="4" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="LeftButton" Grid.Column="0" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="LeftToolTip" Placement="Left" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
-        <Button x:Name="CenterButton" Grid.Column="1" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="CenterToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
-        <Button x:Name="RightButton" Grid.Column="2" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="RightToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
-        <Button x:Name="HorizontallySpaceButton" Grid.Column="3" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="HorizontallySpaceToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
+        <Button x:Name="Left" Grid.Column="0" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}"/>
+        <Button x:Name="Center" Grid.Column="1" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}"/>
+        <Button x:Name="Right" Grid.Column="2" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}"/>
+        <Button x:Name="HorizontallySpace" Grid.Column="3" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}"/>
 
 
         <!--Vertically-->
         <TextBlock x:Name="VerticallyTextBlock" Grid.ColumnSpan="4" Grid.Row="6" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="TopButton" Grid.Column="0" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="TopToolTip" Placement="Left" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
-        <Button x:Name="MiddleButton" Grid.Column="1" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="MiddleToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
-        <Button x:Name="BottomButton" Grid.Column="2" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="BottomToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
-        <Button x:Name="VerticallySpaceButton" Grid.Column="3" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="VerticallySpaceToolTip" Placement="Right" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-        </Button>
+        <Button x:Name="Top" Grid.Column="0" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}"/>
+        <Button x:Name="Middle" Grid.Column="1" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}"/>
+        <Button x:Name="Bottom" Grid.Column="2" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}"/>
+        <Button x:Name="VerticallySpace" Grid.Column="3" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}"/>
 
 
     </Grid>

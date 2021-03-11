@@ -4,7 +4,6 @@
 // Only:              
 // Complete:      ★★★★★
 using FanKit.Transformers;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Operates;
@@ -15,7 +14,7 @@ using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2.Menus.Models
 {
@@ -87,20 +86,23 @@ namespace Retouch_Photo2.Menus.Models
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
 
 
-        #region DependencyProperty
-
-
         /// <summary> Gets or sets <see cref = "OperateMenu" />'s IsOpen. </summary>
         public bool IsOpen
         {
-            get => (bool)base.GetValue(IsOpenProperty);
-            set => base.SetValue(IsOpenProperty, value);
+            set
+            {
+                foreach (UIElement child in this.Grid.Children)
+                {
+                    if (child is Button button)
+                    {
+                        if (ToolTipService.GetToolTip(button) is ToolTip toolTip)
+                        {
+                            toolTip.IsOpen = value;
+                        }
+                    }
+                }
+            }
         }
-        /// <summary> Identifies the <see cref = "OperateMenu.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(OperateMenu), new PropertyMetadata(false));
-
-
-        #endregion
 
 
         //@Construct
@@ -125,66 +127,53 @@ namespace Retouch_Photo2.Menus.Models
     public sealed partial class OperateMainPage : UserControl
     {
 
-        //DataContext
-        private void ConstructDataContext(object dataContext, string path, DependencyProperty dp)
-        {
-            this.DataContext = dataContext;
-
-            // Create the binding description.
-            Binding binding = new Binding
-            {
-                Mode = BindingMode.OneWay,
-                Path = new PropertyPath(path)
-            };
-
-            // Attach the binding to the target.
-            this.SetBinding(dp, binding);
-        }
-
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.TransformTextBlock.Text = resource.GetString("Operates_Transform");
-            this.FlipHorizontalToolTip.Content = resource.GetString("Operates_Transform_FlipHorizontal");
-            this.FlipHorizontalButton.Content = new FlipHorizontalIcon();
-            this.FlipVerticalToolTip.Content = resource.GetString("Operates_Transform_FlipVertical");
-            this.FlipVerticalButton.Content = new FlipVerticalIcon();
-            this.RotateLeftToolTip.Content = resource.GetString("Operates_Transform_RotateLeft");
-            this.RotateLeftButton.Content = new RotateLeftIcon();
-            this.RotateRightToolTip.Content = resource.GetString("Operates_Transform_RotateRight");
-            this.RotateRightButton.Content = new RotateRightIcon();
 
-            this.ArrangeTextBlock.Text = resource.GetString("Operates_Arrange");
-            this.MoveBackToolTip.Content = resource.GetString("Operates_Arrange_MoveBack");
-            this.MoveBackButton.Content = new MoveBackIcon();
-            this.BackOneToolTip.Content = resource.GetString("Operates_Arrange_BackOne");
-            this.BackOneButton.Content = new BackOneIcon();
-            this.ForwardOneToolTip.Content = resource.GetString("Operates_Arrange_ForwardOne");
-            this.ForwardOneButton.Content = new ForwardOneIcon();
-            this.MoveFrontToolTip.Content = resource.GetString("Operates_Arrange_MoveFront");
-            this.MoveFrontButton.Content = new MoveFrontIcon();
+            //@Group
+            void constructGroup(Button button, string folder)
+            {
+                string key = button.Name;
 
-            this.HorizontallyTextBlock.Text = resource.GetString("Operates_Horizontally");
-            this.LeftToolTip.Content = resource.GetString("Operates_Horizontally_Left");
-            this.LeftButton.Content = new LeftIcon();
-            this.CenterToolTip.Content = resource.GetString("Operates_Horizontally_Center");
-            this.CenterButton.Content = new CenterIcon();
-            this.RightToolTip.Content = resource.GetString("Operates_Horizontally_Right");
-            this.RightButton.Content = new RightIcon();
-            this.HorizontallySpaceToolTip.Content = resource.GetString("Operates_Horizontally_Space");
-            this.HorizontallySpaceButton.Content = new HorizontallySpaceIcon();
+                ToolTipService.SetToolTip(button, new ToolTip
+                {
+                    Placement = PlacementMode.Top,
+                    Content = resource.GetString($"Operates_{folder}_{key}"),
+                });
+                button.Content = new OperateControl(key, folder);
+            }
 
-            this.VerticallyTextBlock.Text = resource.GetString("Operates_Vertically");
-            this.TopToolTip.Content = resource.GetString("Operates_Vertically_Top");
-            this.TopButton.Content = new TopIcon();
-            this.MiddleToolTip.Content = resource.GetString("Operates_Vertically_Middle");
-            this.MiddleButton.Content = new MiddleIcon();
-            this.BottomToolTip.Content = resource.GetString("Operates_Vertically_Bottom");
-            this.BottomButton.Content = new BottomIcon();
-            this.VerticallySpaceToolTip.Content = resource.GetString("Operates_Vertically_Space");
-            this.VerticallySpaceButton.Content = new VerticallySpaceIcon();
+            string transform = "Transform"; 
+            this.TransformTextBlock.Text = resource.GetString($"Operates_{transform}");
+            constructGroup(this.FlipHorizontal, transform);
+            constructGroup(this.FlipVertical, transform);
+            constructGroup(this.RotateLeft, transform);
+            constructGroup(this.RotateRight, transform);
+
+            string arrange = "Arrange";
+            this.ArrangeTextBlock.Text = resource.GetString($"Operates_{arrange}");
+            constructGroup(this.MoveBack, arrange);
+            constructGroup(this.BackOne, arrange);
+            constructGroup(this.ForwardOne, arrange);
+            constructGroup(this.MoveFront, arrange);
+
+
+            string horizontally = "Horizontally"; 
+            this.HorizontallyTextBlock.Text = resource.GetString($"Operates_{horizontally}");
+            constructGroup(this.Left, horizontally);
+            constructGroup(this.Center, horizontally);
+            constructGroup(this.Right, horizontally);
+            constructGroup(this.HorizontallySpace, horizontally);
+
+            string vertically = "Vertically";
+            this.VerticallyTextBlock.Text = resource.GetString($"Operates_{vertically}");
+            constructGroup(this.Top, vertically);
+            constructGroup(this.Middle, vertically);
+            constructGroup(this.Bottom, vertically);
+            constructGroup(this.VerticallySpace, vertically);
         }
 
     }
@@ -199,28 +188,28 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructTransform()
         {
 
-            this.FlipHorizontalButton.Click += (s, e) =>
+            this.FlipHorizontal.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
                 this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
-            this.FlipVerticalButton.Click += (s, e) =>
+            this.FlipVertical.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
                 this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
-            this.RotateLeftButton.Click += (s, e) =>
+            this.RotateLeft.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(-FanKit.Math.PiOver2, transformer.Center);
                 this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
-            this.RotateRightButton.Click += (s, e) =>
+            this.RotateRight.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(FanKit.Math.PiOver2, transformer.Center);
@@ -233,7 +222,7 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructArrange()
         {
 
-            this.MoveBackButton.Click += (s, e) =>
+            this.MoveBack.Click += (s, e) =>
             {
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
@@ -252,7 +241,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.BackOneButton.Click += (s, e) =>
+            this.BackOne.Click += (s, e) =>
             {
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
@@ -277,7 +266,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.ForwardOneButton.Click += (s, e) =>
+            this.ForwardOne.Click += (s, e) =>
             {
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
@@ -302,7 +291,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.MoveFrontButton.Click += (s, e) =>
+            this.MoveFront.Click += (s, e) =>
             {
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
@@ -326,19 +315,19 @@ namespace Retouch_Photo2.Menus.Models
         //Horizontally
         private void ConstructHorizontally()
         {
-            this.LeftButton.Click += (s, e) => this.TransformAlign(BorderMode.MinX, Orientation.Horizontal);
-            this.CenterButton.Click += (s, e) => this.TransformAlign(BorderMode.CenterX, Orientation.Horizontal);
-            this.RightButton.Click += (s, e) => this.TransformAlign(BorderMode.MaxX, Orientation.Horizontal);
-            this.HorizontallySpaceButton.Click += (s, e) => this.TransformSapce(Orientation.Horizontal);
+            this.Left.Click += (s, e) => this.TransformAlign(BorderMode.MinX, Orientation.Horizontal);
+            this.Center.Click += (s, e) => this.TransformAlign(BorderMode.CenterX, Orientation.Horizontal);
+            this.Right.Click += (s, e) => this.TransformAlign(BorderMode.MaxX, Orientation.Horizontal);
+            this.HorizontallySpace.Click += (s, e) => this.TransformSapce(Orientation.Horizontal);
         }
 
         //Vertical
         private void ConstructVertically()
         {
-            this.TopButton.Click += (s, e) => this.TransformAlign(BorderMode.MinY, Orientation.Vertical);
-            this.MiddleButton.Click += (s, e) => this.TransformAlign(BorderMode.CenterY, Orientation.Vertical);
-            this.BottomButton.Click += (s, e) => this.TransformAlign(BorderMode.MaxY, Orientation.Vertical);
-            this.VerticallySpaceButton.Click += (s, e) => this.TransformSapce(Orientation.Vertical);
+            this.Top.Click += (s, e) => this.TransformAlign(BorderMode.MinY, Orientation.Vertical);
+            this.Middle.Click += (s, e) => this.TransformAlign(BorderMode.CenterY, Orientation.Vertical);
+            this.Bottom.Click += (s, e) => this.TransformAlign(BorderMode.MaxY, Orientation.Vertical);
+            this.VerticallySpace.Click += (s, e) => this.TransformSapce(Orientation.Vertical);
         }
 
     }

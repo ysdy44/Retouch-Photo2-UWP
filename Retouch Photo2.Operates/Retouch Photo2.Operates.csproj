@@ -107,53 +107,8 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Arrange\BackOneIcon.xaml.cs">
-      <DependentUpon>BackOneIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Arrange\ForwardOneIcon.xaml.cs">
-      <DependentUpon>ForwardOneIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Arrange\MoveBackIcon.xaml.cs">
-      <DependentUpon>MoveBackIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Arrange\MoveFrontIcon.xaml.cs">
-      <DependentUpon>MoveFrontIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Horizontally\CenterIcon.xaml.cs">
-      <DependentUpon>CenterIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Horizontally\LeftIcon.xaml.cs">
-      <DependentUpon>LeftIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Horizontally\RightIcon.xaml.cs">
-      <DependentUpon>RightIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Horizontally\HorizontallySpaceIcon.xaml.cs">
-      <DependentUpon>HorizontallySpaceIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Transform\FlipVerticalIcon.xaml.cs">
-      <DependentUpon>FlipVerticalIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Transform\FlipHorizontalIcon.xaml.cs">
-      <DependentUpon>FlipHorizontalIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Transform\RotateRightIcon.xaml.cs">
-      <DependentUpon>RotateRightIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Transform\RotateLeftIcon.xaml.cs">
-      <DependentUpon>RotateLeftIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vertically\BottomIcon.xaml.cs">
-      <DependentUpon>BottomIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vertically\MiddleIcon.xaml.cs">
-      <DependentUpon>MiddleIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vertically\VerticallySpaceIcon.xaml.cs">
-      <DependentUpon>VerticallySpaceIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vertically\TopIcon.xaml.cs">
-      <DependentUpon>TopIcon.xaml</DependentUpon>
+    <Compile Include="OperateControl.xaml.cs">
+      <DependentUpon>OperateControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
@@ -167,71 +122,79 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Arrange\BackOneIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Arrange\ForwardOneIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Arrange\MoveBackIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Arrange\MoveFrontIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Horizontally\CenterIcon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Horizontally\LeftIcon.xaml">
+    <Page Include="ArrangeIcons\BackOneIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Horizontally\RightIcon.xaml">
+    <Page Include="ArrangeIcons\ForwardOneIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Horizontally\HorizontallySpaceIcon.xaml">
+    <Page Include="ArrangeIcons\MoveBackIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Transform\FlipVerticalIcon.xaml">
+    <Page Include="ArrangeIcons\MoveFrontIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Transform\FlipHorizontalIcon.xaml">
+    <Page Include="HorizontallyIcons\CenterIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Transform\RotateRightIcon.xaml">
+    <Page Include="HorizontallyIcons\HorizontallySpaceIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Transform\RotateLeftIcon.xaml">
+    <Page Include="HorizontallyIcons\LeftIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Vertically\BottomIcon.xaml">
+    <Page Include="HorizontallyIcons\RightIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Vertically\MiddleIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Vertically\VerticallySpaceIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Vertically\TopIcon.xaml">
+    <Page Include="OperateControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Icon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransformIcons\FlipHorizontalIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransformIcons\FlipVerticalIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransformIcons\RotateLeftIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransformIcons\RotateRightIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VerticallyIcons\BottomIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VerticallyIcons\MiddleIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VerticallyIcons\TopIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VerticallyIcons\VerticallySpaceIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
