@@ -39,11 +39,16 @@ namespace Retouch_Photo2.Edits
         public EditControl(string key, string folder)
         {
             this.DefaultStyleKey = typeof(EditControl);
+
+            this._vsIsEnabled = this.IsEnabled;
+            this.VisualState = this.VisualState;//State
+
             this.IsEnabledChanged += (s, e) =>
             {
                 this._vsIsEnabled = this.IsEnabled;
                 this.VisualState = this.VisualState;//State
             };
+
             this.Loaded += (s, e) =>
             {
                 this.Resources = new ResourceDictionary
@@ -55,8 +60,6 @@ namespace Retouch_Photo2.Edits
                     //@Template
                     this.Template = this.Resources[$"{key}Icon"] as ControlTemplate;
                 }
-
-                this.VisualState = this.VisualState;//State
             };
         }
 
@@ -69,6 +72,8 @@ namespace Retouch_Photo2.Edits
             this.CommonStates = base.GetTemplateChild(nameof(CommonStates)) as VisualStateGroup;
             this.Normal = base.GetTemplateChild(nameof(Normal)) as VisualState;
             this.Disabled = base.GetTemplateChild(nameof(Disabled)) as VisualState;
+            this._vsIsEnabled = this.IsEnabled;
+            this.VisualState = this.VisualState;//State
         }
 
     }

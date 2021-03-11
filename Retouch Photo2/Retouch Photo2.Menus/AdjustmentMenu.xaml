@@ -20,20 +20,19 @@
 
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
-                        <Setter Property="Height" Value="36" />
+                        <Setter Property="Height" Value="Auto" />
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="Margin" Value="0" />
                     </Style>
                 </ListView.ItemContainerStyle>
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="adjustments:IAdjustmentPage">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="36"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <ContentPresenter Content="{x:Bind Icon}"/>
-                            <TextBlock Text="{x:Bind Text}" Grid.Column="1" Foreground="{ThemeResource SystemBaseHighColor}" Style="{StaticResource AppTextBlockStyle}"/>
-                        </Grid>
+                        <Button IsHitTestVisible="False" Content="{x:Bind Text}" Style="{StaticResource AppIconButton}">
+                            <Button.Tag>
+                                <ContentControl Content="{x:Bind Icon}"/>
+                            </Button.Tag>
+                        </Button> 
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
