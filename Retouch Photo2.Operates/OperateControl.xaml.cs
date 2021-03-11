@@ -62,19 +62,6 @@ namespace Retouch_Photo2.Operates
                 }
             };
         }
-        public OperateControl()
-        {
-            this.DefaultStyleKey = typeof(OperateControl);
-
-            this._vsIsEnabled = this.IsEnabled;
-            this.VisualState = this.VisualState;//State
-
-            this.IsEnabledChanged += (s, e) =>
-            {
-                this._vsIsEnabled = this.IsEnabled;
-                this.VisualState = this.VisualState;//State
-            };
-        }
 
 
         /// <inheritdoc/>
