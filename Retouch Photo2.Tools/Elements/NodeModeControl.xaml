@@ -27,9 +27,30 @@
         <TextBlock x:Name="ModeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <Border Height="Auto" MaxHeight="120" Style="{ThemeResource AppRoundedBorderStyle}">
             <StackPanel Orientation="Horizontal">
-                <RadioButton x:Name="MirroredRadioButton" IsChecked="True" Style="{StaticResource AppIconRadioButtonStyle}"/>
-                <RadioButton x:Name="DisconnectedRadioButton" IsChecked="False" Style="{StaticResource AppIconRadioButtonStyle}"/>
-                <RadioButton x:Name="AsymmetricRadioButton" IsChecked="False" Style="{StaticResource AppIconRadioButtonStyle}"/>
+                <RadioButton x:Name="MirroredRadioButton" IsChecked="True" Style="{StaticResource AppIconRadioButtonStyle}">
+                    <RadioButton.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModeIcons/MirroredIcon.xaml"/>
+                    </RadioButton.Resources>
+                    <RadioButton.Tag>
+                        <ContentControl Template="{StaticResource MirroredIcon}"/>
+                    </RadioButton.Tag>
+                </RadioButton>
+                <RadioButton x:Name="DisconnectedRadioButton" IsChecked="False" Style="{StaticResource AppIconRadioButtonStyle}">
+                    <RadioButton.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModeIcons/DisconnectedIcon.xaml"/>
+                    </RadioButton.Resources>
+                    <RadioButton.Tag>
+                        <ContentControl Template="{StaticResource DisconnectedIcon}"/>
+                    </RadioButton.Tag>
+                </RadioButton>
+                <RadioButton x:Name="AsymmetricRadioButton" IsChecked="False" Style="{StaticResource AppIconRadioButtonStyle}">
+                    <RadioButton.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModeIcons/AsymmetricIcon.xaml"/>
+                    </RadioButton.Resources>
+                    <RadioButton.Tag>
+                        <ContentControl Template="{StaticResource AsymmetricIcon}"/>
+                    </RadioButton.Tag>
+                </RadioButton>
             </StackPanel>
         </Border>
 

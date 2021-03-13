@@ -10,40 +10,12 @@
     >
 
     <UserControl.Resources>
-        <!--Style-->
-        <Style x:Name="ContentControlStyle" TargetType="ContentControl">
-            <Setter Property="MinWidth" Value="26"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Background" Value="Black"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Padding" Value="2,0"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ContentControl">
-                        <Border x:Name="RootGrid"
-                                CornerRadius="2"
-                                BorderThickness="{TemplateBinding BorderThickness}"                               
-                                BorderBrush="{TemplateBinding BorderBrush}"                               
-                                Background="{TemplateBinding Background}"                               
-                                >
-                            <ContentPresenter x:Name="ContentPresenter"
-                                      Content="{TemplateBinding Content}"
-                                      Margin="{TemplateBinding Padding}"
-                                      FontSize="{TemplateBinding FontSize}"
-                                      Foreground="{TemplateBinding Foreground}" 
-                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <!--Template-->
+        <ControlTemplate x:Name="ContentControlTemplate" TargetType="ContentControl">
+            <Border CornerRadius="2" Background="Black">
+                <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Content}" Margin="2,0" FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+        </ControlTemplate>
     </UserControl.Resources>
 
 

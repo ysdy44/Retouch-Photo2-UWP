@@ -13,8 +13,22 @@
         <!--Flyout-->
         <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Button x:Name="NoneButton" Style="{StaticResource AppIconSelectedButton}"/>
-                <Button x:Name="ArrowButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="NoneButton" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypeIcons/NoneIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource NoneIcon}"/>
+                    </Button.Tag>
+                </Button>
+                <Button x:Name="ArrowButton" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypeIcons/ArrowIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource ArrowIcon}"/>
+                    </Button.Tag>
+                </Button>
             </StackPanel>
         </Flyout>
     </UserControl.Resources>
@@ -47,10 +61,10 @@
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        
+
         <Button.Tag>
             <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
-        </Button.Tag>        
+        </Button.Tag>
     </Button>
 
 </UserControl>

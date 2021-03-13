@@ -5,10 +5,10 @@
 
     <!--Touchbar
     <ResourceDictionary.MergedDictionaries>
-
         <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Tools/Touchbars/TouchbarButton.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     -->
+
     <Style TargetType="local:TouchbarButton">
         <Setter Property="Width" Value="Auto"/>
         <Setter Property="MinWidth" Value="{StaticResource AppCircleHeight}"/>

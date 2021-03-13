@@ -1,5 +1,4 @@
 ﻿using FanKit.Transformers;
-using Retouch_Photo2.Tools.Elements.NodeModeIcons;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -75,54 +74,6 @@ namespace Retouch_Photo2.Tools.Elements
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructControlPointMode();
-            this.ConstructControlLengthAngleMode();
-        }
-
-
-        //ControlPointMode
-        private void ConstructControlPointMode()
-        {
-            this.AngleCheckBox.Click += (s, e) =>
-            {
-                switch (this.ControlPointMode)
-                {
-                    case SelfControlPointMode.None: this.ControlPointMode = SelfControlPointMode.Angle; break;
-                    case SelfControlPointMode.Length: this.ControlPointMode = SelfControlPointMode.Angle; break;
-                    case SelfControlPointMode.Angle: this.ControlPointMode = SelfControlPointMode.None; break;
-                    case SelfControlPointMode.Disable: this.ControlPointMode = SelfControlPointMode.None; break;
-                }
-            };
-            this.LengthCheckBox.Click += (s, e) =>
-            {
-                switch (this.ControlPointMode)
-                {
-                    case SelfControlPointMode.None: this.ControlPointMode = SelfControlPointMode.Length; break;
-                    case SelfControlPointMode.Length: this.ControlPointMode = SelfControlPointMode.None; break;
-                    case SelfControlPointMode.Angle: this.ControlPointMode = SelfControlPointMode.Length; break;
-                    case SelfControlPointMode.Disable: this.ControlPointMode = SelfControlPointMode.None; break;
-                }
-            };
-        }
-
-        //ControlLengthAngleMode
-        private void ConstructControlLengthAngleMode()
-        {
-            this.MirroredRadioButton.Checked += (s, e) =>
-            {
-                this.ControlLengthMode = EachControlPointLengthMode.Equal;
-                this.ControlAngleMode = EachControlPointAngleMode.Asymmetric;
-            };
-            this.DisconnectedRadioButton.Checked += (s, e) =>
-            {
-                this.ControlLengthMode = EachControlPointLengthMode.None;
-                this.ControlAngleMode = EachControlPointAngleMode.None;
-            };
-            this.AsymmetricRadioButton.Checked += (s, e) =>
-            {
-                this.ControlLengthMode = EachControlPointLengthMode.None;
-                this.ControlAngleMode = EachControlPointAngleMode.Asymmetric;
-            };
         }
 
 
@@ -133,15 +84,47 @@ namespace Retouch_Photo2.Tools.Elements
 
             this.RestrictionTextBlock.Text = resource.GetString("Tools_Node_NodeMode_Restriction");
             this.AngleCheckBox.Content = resource.GetString("Tools_Node_NodeMode_Restriction_Angle");
+            this.AngleCheckBox.Click += (s, e) =>
+            {
+                switch (this.ControlPointMode)
+                {
+                    case SelfControlPointMode.None: this.ControlPointMode = SelfControlPointMode.Angle; break;
+                    case SelfControlPointMode.Length: this.ControlPointMode = SelfControlPointMode.Angle; break;
+                    case SelfControlPointMode.Angle: this.ControlPointMode = SelfControlPointMode.None; break;
+                    case SelfControlPointMode.Disable: this.ControlPointMode = SelfControlPointMode.None; break;
+                }
+            };
             this.LengthCheckBox.Content = resource.GetString("Tools_Node_NodeMode_Restriction_Length");
+            this.LengthCheckBox.Click += (s, e) =>
+            {
+                switch (this.ControlPointMode)
+                {
+                    case SelfControlPointMode.None: this.ControlPointMode = SelfControlPointMode.Length; break;
+                    case SelfControlPointMode.Length: this.ControlPointMode = SelfControlPointMode.None; break;
+                    case SelfControlPointMode.Angle: this.ControlPointMode = SelfControlPointMode.Length; break;
+                    case SelfControlPointMode.Disable: this.ControlPointMode = SelfControlPointMode.None; break;
+                }
+            };
 
-            this.ModeTextBlock.Text = resource.GetString("Tools_Node_NodeMode_Mode");
+            this.ModeTextBlock.Text = resource.GetString("Tools_Node_NodeMode_Mode");        
             this.MirroredRadioButton.Content = resource.GetString("Tools_Node_NodeMode_Mode_Mirrored");
-            this.MirroredRadioButton.Tag = new MirroredIcon();
+            this.MirroredRadioButton.Checked += (s, e) =>
+            {
+                this.ControlLengthMode = EachControlPointLengthMode.Equal;
+                this.ControlAngleMode = EachControlPointAngleMode.Asymmetric;
+            };
             this.DisconnectedRadioButton.Content = resource.GetString("Tools_Node_NodeMode_Mode_Disconnected");
-            this.DisconnectedRadioButton.Tag = new DisconnectedIcon();
+            this.DisconnectedRadioButton.Checked += (s, e) =>
+            {
+                this.ControlLengthMode = EachControlPointLengthMode.None;
+                this.ControlAngleMode = EachControlPointAngleMode.None;
+            };
             this.AsymmetricRadioButton.Content = resource.GetString("Tools_Node_NodeMode_Mode_Asymmetric");
-            this.AsymmetricRadioButton.Tag = new AsymmetricIcon();
+            this.AsymmetricRadioButton.Checked += (s, e) =>
+            {
+                this.ControlLengthMode = EachControlPointLengthMode.None;
+                this.ControlAngleMode = EachControlPointAngleMode.Asymmetric;
+            };
         }
 
     }

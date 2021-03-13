@@ -121,7 +121,7 @@ namespace Retouch_Photo2.Texts
             button.Tag = new ContentControl
             {
                 Content = weight.Weight,
-                Style = this.ContentControlStyle
+                Template = this.ContentControlTemplate
             };
             button.Click += (s, e) => this.WeightChanged?.Invoke(this, weight);//Delegate
 

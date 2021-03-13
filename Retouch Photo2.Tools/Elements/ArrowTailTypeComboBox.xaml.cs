@@ -1,5 +1,4 @@
 ﻿using FanKit.Transformers;
-using Retouch_Photo2.Tools.Elements.ArrowTailTypeIcons;
 using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -75,22 +74,20 @@ namespace Retouch_Photo2.Tools.Elements
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
 
-        
+
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.NoneButton.Content = resource.GetString("Tools_GeometryArrow_ArrowTail_None");
-            this.NoneButton.Tag = new NoneIcon();
+            this.NoneButton.Content = resource.GetString($"Tools_GeometryArrow_ArrowTail_{GeometryArrowTailType.None}");
             this.NoneButton.Click += (s, e) =>
             {
                 this.TypeChanged?.Invoke(this, GeometryArrowTailType.None); //Delegate
                 this.Flyout.Hide();
             };
 
-            this.ArrowButton.Content = resource.GetString("Tools_GeometryArrow_ArrowTail_Arrow");
-            this.ArrowButton.Tag = new ArrowIcon();
+            this.ArrowButton.Content = resource.GetString($"Tools_GeometryArrow_ArrowTail_{GeometryArrowTailType.Arrow}");
             this.ArrowButton.Click += (s, e) =>
             {
                 this.TypeChanged?.Invoke(this, GeometryArrowTailType.Arrow); //Delegate
