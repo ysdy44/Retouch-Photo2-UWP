@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Numerics;
 using Windows.UI.Xaml;
 using Windows.UI.Core;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -48,6 +49,34 @@ namespace Retouch_Photo2.ViewModels
             }
         }
 
+
+        /// <summary>
+        /// Show flyout by <see cref="SettingViewModel.DeviceLayoutType"/>.
+        /// </summary>
+        /// <param name="flyout"> The flyout. </param>
+        /// <param name="content"> The content for flyout. </param>
+        /// <param name="page"> The page. </param>
+        /// <param name="button"> The button. </param>
+        public void ShowFlyout(Flyout flyout, FrameworkElement content, FrameworkElement page, FrameworkElement button)
+        {
+            switch (this.DeviceLayoutType)
+            {
+                case DeviceLayoutType.PC:
+                    content.Width = double.NaN;
+                    flyout.ShowAt(button);
+                    break;
+                case DeviceLayoutType.Pad:
+                    content.Width = double.NaN;
+                    flyout.ShowAt(page);
+                    break;
+                case DeviceLayoutType.Phone:
+                    content.Width = page.ActualWidth - 40;
+                    flyout.ShowAt(page);
+                    break;
+                default:
+                    break;
+            }
+        }
 
         /// <summary> Gets or sets the device layout type. </summary>
         public DeviceLayoutType DeviceLayoutType

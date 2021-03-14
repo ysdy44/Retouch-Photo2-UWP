@@ -101,8 +101,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.RadiusButton.Content = resource.GetString("Tools_PatternSpotted_Radius");
-            this.StepButton.Content = resource.GetString("Tools_PatternSpotted_Step");
+            this.RadiusTextBlock.Text = resource.GetString("Tools_PatternSpotted_Radius");
+            this.StepTextBlock.Text = resource.GetString("Tools_PatternSpotted_Step");
         }
 
     }

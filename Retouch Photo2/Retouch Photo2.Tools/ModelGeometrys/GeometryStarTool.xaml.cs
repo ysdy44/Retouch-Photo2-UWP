@@ -95,8 +95,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.PointsButton.Content = resource.GetString("Tools_GeometryStar_Points");
-            this.InnerRadiusButton.Content = resource.GetString("Tools_GeometryStar_InnerRadius");
+            this.PointsTextBlock.Text = resource.GetString("Tools_GeometryStar_Points");
+            this.InnerRadiusTextBlock.Text = resource.GetString("Tools_GeometryStar_InnerRadius");
         }
     }
 

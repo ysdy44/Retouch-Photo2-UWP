@@ -10,52 +10,68 @@
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
+    d:RequestedTheme="Dark"
+    d:Background="{StaticResource AppForeground}"
     >
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
-            <ContentControl Width="8"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
 
-            <!--Type-->
-            <TextBlock x:Name="TypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:PatternGridTypeComboBox x:Name="TypeComboBox"
-                 GridType="{x:Bind SelectionViewModel.PatternGrid_Type, Mode=OneWay}"
-                />
+        <Border Width="50">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconPatterns/PatternGridIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource PatternGridIcon}"/>
+            </Border.Child>
+        </Border>
 
-            <ContentControl Width="4"
-                            Visibility="{x:Bind HorizontalStepVisibilityConverter(SelectionViewModel.PatternGrid_Type), Mode=OneWay}"/>
+        <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <!--Step-->
-            <tools:TouchbarButton x:Name="HorizontalStepButton" 
-                            Visibility="{x:Bind HorizontalStepVisibilityConverter(SelectionViewModel.PatternGrid_Type), Mode=OneWay}">
-                <tools:TouchbarButton.Picker>
-                    <hSVColorPickers:NumberPicker x:Name="HorizontalStepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+        <!--Type-->
+        <TextBlock x:Name="TypeTextBlock" Grid.Column="2" Style="{StaticResource AppTextBlockStyle}"/>
+        <toolsElements:PatternGridTypeComboBox x:Name="TypeComboBox" Grid.Column="3" Grid.ColumnSpan="2"
+                 GridType="{x:Bind SelectionViewModel.PatternGrid_Type, Mode=OneWay}" />
+
+        <!--Step-->
+        <TextBlock x:Name="HorizontalStepTextBlock" Grid.Column="6" Style="{StaticResource AppTextBlockStyle}"/>
+        <tools:TouchbarButton x:Name="HorizontalStepButton" Grid.Column="7"
+                             Content="{x:Bind StepToNumberConverter(SelectionViewModel.PatternGrid_HorizontalStep), Mode=OneWay}">
+            <tools:TouchbarButton.Picker>
+                <hSVColorPickers:NumberPicker x:Name="HorizontalStepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind StepToNumberConverter(SelectionViewModel.PatternGrid_HorizontalStep), Mode=OneWay}"/>
-                </tools:TouchbarButton.Picker>
-                <tools:TouchbarButton.Slider>
-                    <tools:TouchbarSlider x:Name="HorizontalStepSlider" 
+            </tools:TouchbarButton.Picker>
+            <tools:TouchbarButton.Slider>
+                <tools:TouchbarSlider x:Name="HorizontalStepSlider" 
                              Value="{x:Bind SelectionViewModel.PatternGrid_HorizontalStep, Mode=OneWay}"/>
-                </tools:TouchbarButton.Slider>
-            </tools:TouchbarButton>
+            </tools:TouchbarButton.Slider>
+        </tools:TouchbarButton>
 
-            <ContentControl Width="4"
-                            Visibility="{x:Bind VerticalStepVisibilityConverter(SelectionViewModel.PatternGrid_Type), Mode=OneWay}"/>
-
-            <!--Step-->
-            <tools:TouchbarButton x:Name="VerticalStepButton" 
+        <!--Step-->
+        <TextBlock x:Name="VerticalStepTextBlock" Grid.Column="8" Style="{StaticResource AppTextBlockStyle}"/>
+        <tools:TouchbarButton x:Name="VerticalStepButton" Grid.Column="9"
+                                  Content="{x:Bind StepToNumberConverter(SelectionViewModel.PatternGrid_VerticalStep), Mode=OneWay}"
                             Visibility="{x:Bind VerticalStepVisibilityConverter(SelectionViewModel.PatternGrid_Type), Mode=OneWay}">
-                <tools:TouchbarButton.Picker>
-                    <hSVColorPickers:NumberPicker x:Name="VerticalStepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+            <tools:TouchbarButton.Picker>
+                <hSVColorPickers:NumberPicker x:Name="VerticalStepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind StepToNumberConverter(SelectionViewModel.PatternGrid_VerticalStep), Mode=OneWay}"/>
-                </tools:TouchbarButton.Picker>
-                <tools:TouchbarButton.Slider>
-                    <tools:TouchbarSlider x:Name="VerticalStepSlider" 
+            </tools:TouchbarButton.Picker>
+            <tools:TouchbarButton.Slider>
+                <tools:TouchbarSlider x:Name="VerticalStepSlider" 
                              Value="{x:Bind SelectionViewModel.PatternGrid_VerticalStep, Mode=OneWay}"/>
-                </tools:TouchbarButton.Slider>
-            </tools:TouchbarButton>
+            </tools:TouchbarButton.Slider>
+        </tools:TouchbarButton>
 
-            <ContentControl Width="4"/>
-        </StackPanel>
-    </ScrollViewer>
-
+    </Grid>
 </Page>

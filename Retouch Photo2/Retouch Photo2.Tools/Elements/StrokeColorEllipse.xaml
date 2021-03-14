@@ -14,6 +14,6 @@
         <Style x:Name="FlyoutPresenterStyle" x:Key="FlyoutPresenterStyleKey" TargetType="FlyoutPresenter" BasedOn="{StaticResource AppFlyoutPresenterStyle}"/>
     </UserControl.Resources>
 
-    <brushs:ColorEllipse x:Name="ColorEllipse" Brush="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}"/>
+    <brushs:BrushShowControl x:Name="ColorEllipse" FillOrStroke="Stroke" Fill="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}"/>
 
 </UserControl>

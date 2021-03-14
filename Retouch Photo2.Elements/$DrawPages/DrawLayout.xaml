@@ -80,6 +80,12 @@
                 <VisualState x:Name="FullScreen">
                     <VisualState.Setters>
 
+                        <!--LeftIcon-->
+                        <Setter Target = "_LeftIcon.Visibility" Value="Collapsed"/>
+
+                        <!--RightIcon-->
+                        <Setter Target = "_RightIcon.Visibility" Value="Collapsed"/>
+
                         <!--Body-->
                         <Setter Target = "_LayerRenderCanvasControl.(Grid.Row)" Value="0"/>
                         <Setter Target = "_LayerRenderCanvasControl.(Grid.RowSpan)" Value="2"/>
@@ -88,8 +94,6 @@
 
                         <!--Foot-->
                         <Setter Target = "FootPanel.Visibility" Value="Collapsed"/>
-                        <Setter Target = "_LeftIcon.Visibility" Value="Collapsed"/>
-                        <Setter Target = "_RightIcon.Visibility" Value="Collapsed"/>
 
                         <!--Touchbar-->
                         <Setter Target = "TouchbarBorder.Visibility" Value="Collapsed"/>
@@ -123,7 +127,8 @@
                 <VisualState x:Name="PhoneShowLeft">
                     <VisualState.Setters >
 
-                        <!--Foot-->
+                        <!--LeftIcon-->
+                        <Setter Target = "LeftIconTransform.TranslateX" Value="70"/>
                         <Setter Target = "_LeftIcon.Background" Value="{ThemeResource SystemAccentColor}"/>
 
                         <!--DismissOverlay-->
@@ -140,7 +145,8 @@
                 <VisualState x:Name="PhoneShowRight">
                     <VisualState.Setters>
 
-                        <!--Foot-->
+                        <!--LeftIcon-->
+                        <Setter Target = "RightIconTransform.TranslateX" Value="-220"/>
                         <Setter Target = "_RightIcon.Background" Value="{ThemeResource SystemAccentColor}"/>
 
                         <!--DismissOverlay-->
@@ -159,9 +165,16 @@
                 <VisualState x:Name="Pad">
                     <VisualState.Setters>
 
-                        <!--Foot-->
+                        <!--LeftIcon-->
                         <Setter Target = "_LeftIcon.Visibility" Value="Collapsed"/>
+
+                        <!--RightIcon-->
                         <Setter Target = "_RightIcon.Visibility" Value="Collapsed"/>
+
+                        <!--Foot-->
+                        <Setter Target = "FootPanel.HorizontalAlignment" Value="Center"/>
+                        <Setter Target = "FootPanel.MinWidth" Value="100"/>
+                        <Setter Target = "FootPanel.CornerRadius" Value="6,6,0,0"/>
 
                         <!--Touchbar-->
                         <Setter Target="TouchbarBorder.Margin" Value="82,0,82,70"/>
@@ -191,11 +204,21 @@
                 <VisualState x:Name="PC">
                     <VisualState.Setters >
 
+                        <!--LeftIcon-->
+                        <Setter Target = "_LeftIcon.Visibility" Value="Collapsed"/>
+
+                        <!--RightIcon-->
+                        <Setter Target = "_RightIcon.Visibility" Value="Collapsed"/>
+
+                        <!--Foot-->
+                        <Setter Target = "FootPanel.HorizontalAlignment" Value="Center"/>
+                        <Setter Target = "FootPanel.MinWidth" Value="100"/>
+                        <Setter Target = "FootPanel.CornerRadius" Value="6"/>
+                        <Setter Target = "FootPanel.Margin" Value="0,10"/>
+
                         <!--Foot-->
                         <Setter Target = "FootPanel.(Grid.Column)" Value="0"/>
                         <Setter Target = "FootPanel.(Grid.ColumnSpan)" Value="3"/>
-                        <Setter Target = "_LeftIcon.Visibility" Value="Collapsed"/>
-                        <Setter Target = "_RightIcon.Visibility" Value="Collapsed"/>
 
                         <!--Head-->
                         <Setter Target = "HeadBorder.(Grid.Column)" Value="0"/>
@@ -234,6 +257,16 @@
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
 
+                            <!--LeftIcon-->
+                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="TranslateX" From="0" To="70" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_LeftIcon" Storyboard.TargetProperty="Background" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                            </ObjectAnimationUsingKeyFrames>
+
                             <!--Left-->
                             <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
@@ -263,6 +296,13 @@
                             <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
+
+                            <!--LeftIcon-->
+                            <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="TranslateX" From="70" To="0" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
 
                             <!--Left-->
                             <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="0" To="-70" Duration="0:0:0.2">
@@ -295,6 +335,16 @@
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
 
+                            <!--RightIcon-->
+                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="TranslateX" From="0" To="-220" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_RightIcon" Storyboard.TargetProperty="Background" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                            </ObjectAnimationUsingKeyFrames>
+
                             <!--Left-->
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="-70"/>
@@ -324,6 +374,13 @@
                             <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
+
+                            <!--RightIcon-->
+                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="TranslateX" From="-220" To="0" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseInOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
 
                             <!--Left-->
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" Duration="0">
@@ -631,6 +688,9 @@
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty="MinWidth" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="100"/>
+                            </ObjectAnimationUsingKeyFrames>
 
                             <!--Head-->
                             <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="0" To="-70" Duration="0:0:0.2">
@@ -709,6 +769,9 @@
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty="MinWidth" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="100"/>
+                            </ObjectAnimationUsingKeyFrames>
 
                             <!--Head-->
                             <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="-70" To="0" Duration="0:0:0.2">
@@ -789,6 +852,9 @@
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty="MinWidth" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="100"/>
+                            </ObjectAnimationUsingKeyFrames>
 
                             <!--Head-->
                             <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="0" To="-70" Duration="0:0:0.2">
@@ -866,6 +932,9 @@
                                     <CircleEase EasingMode="EaseInOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty="MinWidth" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="100"/>
+                            </ObjectAnimationUsingKeyFrames>
 
                             <!--Head-->
                             <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="-70" To="0" Duration="0:0:0.2">
@@ -964,42 +1033,17 @@
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
             <Border x:Name="TouchbarPickerBorder"/>
-            <Border x:Name="TouchbarSliderBorder" Grid.Column="2"/>            
+            <Border x:Name="TouchbarSliderBorder" Grid.Column="2"/>
         </Grid>
         <!--Foot-->
-        <Grid MinHeight="70" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="70"/>
-            </Grid.ColumnDefinitions>
-
-            <local:RadiusAnimaPanel x:Name="FootPanel" Grid.Column="1">
-                <local:RadiusAnimaPanel.RenderTransformOrigin>0.5, 0.5</local:RadiusAnimaPanel.RenderTransformOrigin>
-                <local:RadiusAnimaPanel.RenderTransform>
-                    <TranslateTransform x:Name="FootPanelTransform" Y="0"/>
-                </local:RadiusAnimaPanel.RenderTransform>
-            </local:RadiusAnimaPanel>
-            <local:RadiusAnimaIcon x:Name="_LeftIcon" Grid.Column="0">
-                <local:RadiusAnimaIcon.RenderTransformOrigin>0.5, 0.5</local:RadiusAnimaIcon.RenderTransformOrigin>
-                <local:RadiusAnimaIcon.RenderTransform>
-                    <ScaleTransform x:Name="LeftIconTransform" ScaleX="1" ScaleY="1"/>
-                </local:RadiusAnimaIcon.RenderTransform>
-            </local:RadiusAnimaIcon>
-            <local:RadiusAnimaIcon x:Name="_RightIcon" Grid.Column="2">
-                <local:RadiusAnimaIcon.RenderTransformOrigin>0.5, 0.5</local:RadiusAnimaIcon.RenderTransformOrigin>
-                <local:RadiusAnimaIcon.RenderTransform>
-                    <ScaleTransform x:Name="RightIconTransform" ScaleX="1" ScaleY="1"/>
-                </local:RadiusAnimaIcon.RenderTransform>
-            </local:RadiusAnimaIcon>
-
-            <!--
-            <Border Grid.Column="0" BorderThickness="1" BorderBrush="Yellow"/>
-            <Border Grid.Column="1" BorderThickness="1" BorderBrush="Yellow"/>
-            <Border Grid.Column="2" BorderThickness="1" BorderBrush="Yellow"/>
-            -->
-
-        </Grid>
+        <Border x:Name="FootPanel" Grid.Column="1" Grid.Row="1" MinHeight="50" Padding="10,0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                             apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                             apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
+            <Border.RenderTransformOrigin>0.5, 0.5</Border.RenderTransformOrigin>
+            <Border.RenderTransform>
+                <TranslateTransform x:Name="FootPanelTransform" Y="0"/>
+            </Border.RenderTransform>
+        </Border>
 
 
         <!--Head-->
@@ -1063,6 +1107,26 @@
 
         </Border>
 
+
+        <!--Foot-->
+        <Border x:Name="_LeftIcon" Grid.Column="1" Grid.Row="1" CornerRadius="0,12,12,0" Width="32" Height="120" HorizontalAlignment="Left" 
+                         apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                         apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
+            <Border.RenderTransformOrigin>0, 0.5</Border.RenderTransformOrigin>
+            <Border.RenderTransform>
+                <CompositeTransform x:Name="LeftIconTransform" ScaleX="1" ScaleY="1" TranslateX="0"/>
+            </Border.RenderTransform>
+            <ContentControl x:Name="LeftContentControl" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <Border x:Name="_RightIcon" Grid.Column="1" Grid.Row="1" CornerRadius="12,0,0,12" Width="32" Height="120" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                         apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                         apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
+            <Border.RenderTransformOrigin>1, 0.5</Border.RenderTransformOrigin>
+            <Border.RenderTransform>
+                <CompositeTransform x:Name="RightIconTransform" ScaleX="1" ScaleY="1" TranslateX="0"/>
+            </Border.RenderTransform>
+            <ContentControl x:Name="RightContentControl" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
 
         <!--
         <Border Grid.Column="0" BorderThickness="1" BorderBrush="Red"/>

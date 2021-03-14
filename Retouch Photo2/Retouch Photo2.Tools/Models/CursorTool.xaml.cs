@@ -242,9 +242,9 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             //this.ConstructStrings();
 
-            this.CountButton.Click += (s, e) =>
+            this.OperateButton.Click += (s, e) =>
             {
-                this.TipViewModel.ShowMenuLayoutAt(MenuType.Operate, this.CountButton);
+                this.TipViewModel.ShowMenuLayoutAt(MenuType.Operate, this.OperateButton);
             };
         }
 

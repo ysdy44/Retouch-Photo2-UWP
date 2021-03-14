@@ -6,8 +6,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     mc:Ignorable="d"
-    Width="70"
-    Height="34" 
+    Width="Auto"
+    Height="{StaticResource AppRoundedHeight}" 
+    Margin="{StaticResource AppMargin}" 
     d:DesignWidth="100"
     d:DesignHeight="50"
     >
@@ -39,7 +40,7 @@
     </UserControl.Resources>
 
 
-    <Grid x:Name="RootGrid" Background="Transparent">
+    <Grid x:Name="RootGrid" Width="80" Background="Transparent">
         <Rectangle RadiusX="4" RadiusY="4" IsHitTestVisible="False" StrokeThickness="1" Stroke="{ThemeResource AppText}">
             <Rectangle.Fill>
                 <ImageBrush>

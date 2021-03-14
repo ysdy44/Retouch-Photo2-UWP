@@ -4,6 +4,7 @@
 // Only:              ★★★★
 // Complete:      ★★★★
 using Microsoft.Graphics.Canvas.UI.Xaml;
+using Windows.Devices.Input;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -33,11 +34,11 @@ namespace Retouch_Photo2.Elements
 
         //Foot
         /// <summary> Gets or sets RadiusAnimaPanel's content. </summary>
-        public object FootPage { set => this.FootPanel.Content = value; }
+        public UIElement FootPage { set => this.FootPanel.Child = value; }
         /// <summary> _LeftIcon's content. </summary>
-        public object LeftIcon { get => this._LeftIcon.Content; set => this._LeftIcon.Content = value; }
+        public object LeftIcon { get => this.LeftContentControl.Content; set => this.LeftContentControl.Content = value; }
         /// <summary> _RightIcon's content. </summary>
-        public object RightIcon { get => this._RightIcon.Content; set => this._RightIcon.Content = value; }
+        public object RightIcon { get => this.RightContentControl.Content; set => this.RightContentControl.Content = value; }
 
         //Head
         /// <summary> HeadBorder's child. </summary>
@@ -71,8 +72,22 @@ namespace Retouch_Photo2.Elements
             this.Loaded += (s, e) => this.VisualStateCore = this.VisualState;//State
 
             //Foot
-            this._LeftIcon.Toggled += (s, e) => this.PhoneType = PhoneLayoutType.ShowLeft;
-            this._RightIcon.Toggled += (s, e) => this.PhoneType = PhoneLayoutType.ShowRight;
+            this._LeftIcon.Tapped += (s, e) => this.PhoneType = PhoneLayoutType.ShowLeft;
+            this._LeftIcon.PointerEntered += (s, e) =>
+            {
+                if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
+                {
+                    this.PhoneType = PhoneLayoutType.ShowLeft;
+                }
+            };
+            this._RightIcon.Tapped += (s, e) => this.PhoneType = PhoneLayoutType.ShowRight;
+            this._RightIcon.PointerEntered += (s, e) =>
+            {
+                if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
+                {
+                    this.PhoneType = PhoneLayoutType.ShowRight;
+                }
+            };
 
             //DismissOverlay
             this.DismissOverlay.PointerPressed += (s, e) => this.PhoneType = PhoneLayoutType.Hided;

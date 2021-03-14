@@ -8,9 +8,13 @@
     d:DesignHeight="50"
     d:DesignWidth="50"
     >
+    
+    <ToolTipService.ToolTip>
+        <ToolTip x:Name="ToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+    </ToolTipService.ToolTip>
 
 
-    <Button x:Name="Button" Style="{StaticResource AppCircleButtonStyle}">
+    <Button x:Name="Button" Width="50" Style="{StaticResource AppRoundedButtonStyle}">
         <PathIcon>
             <PathIcon.Data>
                 M15.712,3.231l3.231,-3.231l3.734,3.734l-2.873,2.873l0,10.481l2.873,2.873l-3.734,3.734l-3.242,-3.242l-10.651,-0.684l-2.165,2.164l-2.885,-2.885l2.044,-2.043l0,-10.379l-2.044,-2.044l2.885,-2.885l2.244,2.244l10.583,-0.71Zm5.268,16.73l-2.037,-2.036l-2.036,2.036l2.036,2.036l2.037,-2.036Zm-16.323,-14.266l-0.941,0.941l0,10.358l1.009,1.009l11.543,0.9l1.864,-1.864l0,-10.383l-1.882,-1.882l-11.593,0.921Zm16.323,-1.961l-2.037,-2.037l-2.036,2.037l2.036,2.036l2.037,-2.036Z

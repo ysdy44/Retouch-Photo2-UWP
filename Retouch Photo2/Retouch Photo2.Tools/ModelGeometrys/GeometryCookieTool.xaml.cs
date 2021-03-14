@@ -97,8 +97,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.InnerRadiusButton.Content = resource.GetString("Tools_GeometryCookie_InnerRadius");
-            this.SweepAngleButton.Content = resource.GetString("Tools_GeometryCookie_SweepAngle");
+            this.InnerRadiusTextBlock.Text = resource.GetString("Tools_GeometryCookie_InnerRadius");
+            this.SweepAngleTextBlock.Text = resource.GetString("Tools_GeometryCookie_SweepAngle");
         }
     }
 

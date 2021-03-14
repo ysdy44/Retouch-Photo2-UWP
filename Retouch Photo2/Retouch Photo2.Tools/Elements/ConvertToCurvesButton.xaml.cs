@@ -32,14 +32,14 @@ namespace Retouch_Photo2.Tools.Elements
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets the title of <see cref = "ConvertToCurvesButton" />. </summary>
-        public string Title
+        /// <summary> Gets or sets the IsOpen of <see cref = "ConvertToCurvesButton" />. </summary>
+        public bool IsOpen
         {
-            get => (string)base.GetValue(TitleProperty);
-            set => base.SetValue(TitleProperty, value);
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
         }
-        /// <summary> Identifies the <see cref = "ConvertToCurvesButton.Title" /> dependency property. </summary>
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(string), typeof(ConvertToCurvesButton), new PropertyMetadata(null));
+        /// <summary> Identifies the <see cref = "ConvertToCurvesButton.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(ConvertToCurvesButton), new PropertyMetadata(false));
 
 
         #endregion
@@ -109,7 +109,7 @@ namespace Retouch_Photo2.Tools.Elements
 
                 ConvertToCurvesButton.title = resource.GetString("Tools_ConvertToCurves");
             }
-            this.Title = ConvertToCurvesButton.title;
+            this.ToolTip.Content = ConvertToCurvesButton.title;
         }
 
         //Create curve layer

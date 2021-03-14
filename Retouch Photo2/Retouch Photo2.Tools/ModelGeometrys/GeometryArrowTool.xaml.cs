@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ValueButton.Content = resource.GetString("Tools_GeometryArrow_Value");
+            this.ValueTextBlock.Text = resource.GetString("Tools_GeometryArrow_Value");
 
             this.LeftTailTextBlock.Text = resource.GetString("Tools_GeometryArrow_LeftTail");
             this.RightTailTextBlock.Text = resource.GetString("Tools_GeometryArrow_RightTail");

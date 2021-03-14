@@ -22,17 +22,32 @@
     </Page.Resources>
 
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
-            <ContentControl Width="4"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
 
-            <TextBlock Text="{x:Bind SelectionViewModel.Photocopier, Mode=OneWay}" Style="{StaticResource AppTextBlockStyle}"/>
+        <Border Width="50">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/ImageIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ImageIcon}"/>
+            </Border.Child>
+        </Border>
 
-            <ContentControl Width="4"/>
+        <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
             <!--Select-->
-            <TextBlock x:Name="SelectTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="SelectButton" Style="{StaticResource AppCircleButtonStyle}">
+            <TextBlock x:Name="SelectTextBlock" Grid.Column="2" Style="{StaticResource AppTextBlockStyle}"/>
+            <Button x:Name="SelectButton" Grid.Column="3" Style="{StaticResource AppRoundedButtonStyle}">
                 <Button.BorderBrush>
                     <!--Storyboard-->
                     <SolidColorBrush x:Name="SelectBorderBorderBrush" Color="{ThemeResource AppStrokeColor}"/>
@@ -40,30 +55,24 @@
                 <FontIcon Glyph="&#xE109;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
 
-            <ContentControl Width="4"/>
-
             <!--Replace-->
-            <TextBlock x:Name="ReplaceTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="ReplaceButton" Style="{StaticResource AppCircleButtonStyle}"
+            <TextBlock x:Name="ReplaceTextBlock" Grid.Column="4" Style="{StaticResource AppTextBlockStyle}"/>
+            <Button x:Name="ReplaceButton" Grid.Column="5" Style="{StaticResource AppRoundedButtonStyle}"
                  IsEnabled="{x:Bind SelectionViewModel.IsImageLayer, Mode=OneWay}">
                 <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
 
-            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+            <Rectangle Grid.Column="6" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
             <!--Select-->
-            <TextBlock x:Name="ClearTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="ClearButton" Style="{StaticResource AppCircleButtonStyle}">
+            <TextBlock x:Name="ClearTextBlock" Grid.Column="7" Style="{StaticResource AppTextBlockStyle}"/>
+            <Button x:Name="ClearButton" Grid.Column="8" Style="{StaticResource AppRoundedButtonStyle}">
                 <FontIcon Glyph="&#xE106;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
+        
+        <Rectangle Grid.Column="9" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <ContentControl Width="4"/>
+        <toolsElements:ConvertToCurvesButton x:Name="ConvertButton" Grid.Column="10"/>
 
-            <TextBlock Text="{x:Bind ConvertButton.Title}" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:ConvertToCurvesButton x:Name="ConvertButton"/>
-
-            <ContentControl Width="4"/>
-        </StackPanel>
-    </ScrollViewer>
-
+    </Grid>
 </Page>

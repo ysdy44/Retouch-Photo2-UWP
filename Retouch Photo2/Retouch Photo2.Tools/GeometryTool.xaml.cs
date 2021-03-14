@@ -10,8 +10,10 @@ using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
+using System;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools
@@ -64,10 +66,34 @@ namespace Retouch_Photo2.Tools
         /// <summary>
         /// Initializes a GeometryPage. 
         /// </summary>
-        public GeometryPage()
+        public GeometryPage(ToolType toolType)
         {
             this.InitializeComponent();
             this.ConstructStrings();
+
+
+            /*
+            < Border.Resources >
+                < ResourceDictionary Source = "ms-appx:///Retouch Photo2.Tools/Icons/ViewIcon.xaml" />
+             </ Border.Resources >
+             < Border.Child >
+                 < ContentControl HorizontalAlignment = "Center" VerticalAlignment = "Center" Template = "{StaticResource ViewIcon}" />
+             </ Border.Child >
+             */
+            if (this.IconBorder is Border border)
+            {
+                border.Resources = new ResourceDictionary
+                {
+                    Source = new Uri($@"ms-appx:///Retouch Photo2.Tools/Icons/{toolType}Icon.xaml")
+                };
+                border.Child = new ContentControl
+                {
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Template = border.Resources[$"{toolType}Icon"] as ControlTemplate
+                };
+            }
+
 
             this.StrokeShowControl.Tapped += (s, e) =>
             {

@@ -85,8 +85,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.OffsetButton.Content = resource.GetString("Tools_PatternDiagonal_Offset");
-            this.HorizontalStepButton.Content = resource.GetString("Tools_PatternDiagonal_HorizontalStep");
+            this.OffsetTextBlock.Text = resource.GetString("Tools_PatternDiagonal_Offset");
+            this.HorizontalStepTextBlock.Text = resource.GetString("Tools_PatternDiagonal_HorizontalStep");
         }
     }
 

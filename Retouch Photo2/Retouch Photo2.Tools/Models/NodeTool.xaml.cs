@@ -285,7 +285,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ConstructNodes();
             this.ConstructSmooth();
-            this.MoreButton.Click += (s, e) => this.Flyout.ShowAt(this);
+            this.MoreButton.Click += (s, e) => this.SettingViewModel.ShowFlyout(this.Flyout, this._PenFlyout, this, this.MoreButton);
         }
 
     }

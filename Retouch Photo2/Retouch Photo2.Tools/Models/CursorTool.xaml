@@ -4,29 +4,49 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:operates="using:Retouch_Photo2.Operates"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
+    d:RequestedTheme="Dark"
+    d:Background="{StaticResource AppForeground}"
     >
 
-    <StackPanel Orientation="Horizontal">
-        <ContentControl Width="4"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" MinWidth="210"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
 
-        <Button x:Name="CountButton" Style="{StaticResource AppCircleButtonStyle}">
-            <FontIcon Glyph="&#xEB05;" FontFamily="Segoe MDL2 Assets"/>
+        <Border Width="50">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/CursorIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource CursorIcon}"/>
+            </Border.Child>
+        </Border>
+        
+        <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+
+        <Button x:Name="OperateButton" Grid.Column="2" Style="{StaticResource AppRoundedButtonStyle}">
+            <operates:Icon/>
         </Button>
-
-        <ContentControl Width="4"/>
+        
+        <Rectangle Grid.Column="3" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
         <!--Multi-Mode-->
-        <toolsElements:CompositeModeSegmented x:Name="_ModeSegmented" Mode="{x:Bind SettingViewModel.CompositeMode, Mode=TwoWay}"/>
+        <toolsElements:CompositeModeSegmented x:Name="_ModeSegmented" Grid.Column="4" Mode="{x:Bind SettingViewModel.CompositeMode, Mode=TwoWay}"/>
+     
+        <Rectangle Grid.Column="5" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <ContentControl Width="4"/>
+        <toolsElements:MoreTransformButton Grid.Column="6"/>
 
-        <toolsElements:MoreTransformButton/>
-
-        <ContentControl Width="4"/>
-    </StackPanel>
-    
+    </Grid>
 </Page>

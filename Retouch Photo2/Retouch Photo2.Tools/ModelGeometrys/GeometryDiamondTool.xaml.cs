@@ -81,8 +81,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.MirrorTextBlock.Text = resource.GetString("Tools_GeometryDiamond_Mirror");
-            this.MidButton.Content = resource.GetString("Tools_GeometryDiamond_Mid");
+            this.MidTextBlock.Text = resource.GetString("Tools_GeometryDiamond_Mirror");
+            this.MirrorTextBlock.Text = resource.GetString("Tools_GeometryDiamond_Mid");
         }
     }
 

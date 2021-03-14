@@ -80,7 +80,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.SpreadButton.Content = resource.GetString("Tools_GeometryHeart_Spread");
+            this.SpreadTextBlock.Text = resource.GetString("Tools_GeometryHeart_Spread");
         }
     }
 

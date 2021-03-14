@@ -10,43 +10,65 @@
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
+    d:RequestedTheme="Dark"
+    d:Background="{StaticResource AppForeground}"
     >
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
-            <ContentControl Width="4"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
 
-            <!--Center-->
-            <tools:TouchbarButton x:Name="CenterButton">
-                <tools:TouchbarButton.Picker>
-                    <hSVColorPickers:NumberPicker x:Name="CenterPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+        <Border Width="50">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryTriangleIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource GeometryTriangleIcon}"/>
+            </Border.Child>
+        </Border>
+        
+        <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+
+        <!--Center-->
+        <TextBlock x:Name="CenterTextBlock" Grid.Column="2" Style="{StaticResource AppTextBlockStyle}"/>
+        <tools:TouchbarButton x:Name="CenterButton" Grid.Column="3"
+                            Content="{x:Bind CenterToNumberConverter(SelectionViewModel.GeometryTriangle_Center), Mode=OneWay}">
+            <tools:TouchbarButton.Picker>
+                <hSVColorPickers:NumberPicker x:Name="CenterPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                             Value="{x:Bind CenterToNumberConverter(SelectionViewModel.GeometryTriangle_Center), Mode=OneWay}"/>
-                </tools:TouchbarButton.Picker>
-                <tools:TouchbarButton.Slider>
-                    <tools:TouchbarSlider x:Name="CenterSlider" 
+            </tools:TouchbarButton.Picker>
+            <tools:TouchbarButton.Slider>
+                <tools:TouchbarSlider x:Name="CenterSlider" 
                             Value="{x:Bind SelectionViewModel.GeometryTriangle_Center, Mode=OneWay}"/>
-                </tools:TouchbarButton.Slider>
-            </tools:TouchbarButton>
+            </tools:TouchbarButton.Slider>
+        </tools:TouchbarButton>
 
-            <ContentControl Width="4"/>
+        <Rectangle Grid.Column="4" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <!--Mirror-->
-            <TextBlock x:Name="MirrorTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="MirrorButton" Style="{StaticResource AppCircleButtonStyle}">
-                <FontIcon Glyph="&#xF1CB;" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
-            </Button>
+        <!--Mirror-->
+        <TextBlock x:Name="MirrorTextBlock" Grid.Column="5" Style="{StaticResource AppTextBlockStyle}"/>
+        <Button x:Name="MirrorButton" Grid.Column="6" Style="{StaticResource AppRoundedButtonStyle}">
+            <FontIcon Glyph="&#xF1CB;" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
+        </Button>
 
-            <ContentControl Width="4"/>
+        <Rectangle Grid.Column="7" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <TextBlock Text="{x:Bind ConvertButton.Title}" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:ConvertToCurvesButton x:Name="ConvertButton"/>
+        <toolsElements:ConvertToCurvesButton x:Name="ConvertButton" Grid.Column="8"/>
 
-            <ContentControl Width="4"/>
+        <Rectangle Grid.Column="9" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <toolsElements:MoreCreateButton/>
+        <toolsElements:MoreCreateButton Grid.Column="10"/>
 
-            <ContentControl Width="4"/>
-        </StackPanel>
-    </ScrollViewer>
-
+    </Grid>
 </Page>

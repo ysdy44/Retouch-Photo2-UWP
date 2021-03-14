@@ -10,14 +10,28 @@
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
+    d:RequestedTheme="Dark"
+    d:Background="{StaticResource AppForeground}"
     >
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
-            <ContentControl Width="4"/>
+
+            <Border Width="50">
+                <Border.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryCogIcon.xaml"/>
+                </Border.Resources>
+                <Border.Child>
+                    <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource GeometryCogIcon}"/>
+                </Border.Child>
+            </Border>
+
+            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
             <!--Count-->
-            <tools:TouchbarButton x:Name="CountButton">
+            <TextBlock x:Name="CountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <tools:TouchbarButton x:Name="CountButton" 
+                             Content="{x:Bind SelectionViewModel.GeometryCog_Count, Mode=OneWay}">
                 <tools:TouchbarButton.Picker>
                     <hSVColorPickers:NumberPicker x:Name="CountPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind SelectionViewModel.GeometryCog_Count, Mode=OneWay}"/>
@@ -28,10 +42,10 @@
                 </tools:TouchbarButton.Slider>
             </tools:TouchbarButton>
 
-            <ContentControl Width="4"/>
-
             <!--InnerRadius-->
-            <tools:TouchbarButton x:Name="InnerRadiusButton">
+            <TextBlock x:Name="InnerRadiusTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <tools:TouchbarButton x:Name="InnerRadiusButton" 
+                          Content="{x:Bind InnerRadiusToNumberConverter(SelectionViewModel.GeometryCog_InnerRadius), Mode=OneWay}">
                 <tools:TouchbarButton.Picker>
                     <hSVColorPickers:NumberPicker x:Name="InnerRadiusPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                           Value="{x:Bind InnerRadiusToNumberConverter(SelectionViewModel.GeometryCog_InnerRadius), Mode=OneWay}"/>
@@ -42,10 +56,10 @@
                 </tools:TouchbarButton.Slider>
             </tools:TouchbarButton>
 
-            <ContentControl Width="4"/>
-
             <!--Tooth-->
-            <tools:TouchbarButton x:Name="ToothButton">
+            <TextBlock x:Name="ToothTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <tools:TouchbarButton x:Name="ToothButton" 
+                          Content="{x:Bind ToothToNumberConverter(SelectionViewModel.GeometryCog_Tooth), Mode=OneWay}">
                 <tools:TouchbarButton.Picker>
                     <hSVColorPickers:NumberPicker x:Name="ToothPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                           Value="{x:Bind ToothToNumberConverter(SelectionViewModel.GeometryCog_Tooth), Mode=OneWay}"/>
@@ -56,10 +70,10 @@
                 </tools:TouchbarButton.Slider>
             </tools:TouchbarButton>
 
-            <ContentControl Width="4"/>
-
             <!--Notch-->
-            <tools:TouchbarButton x:Name="NotchButton">
+            <TextBlock x:Name="NotchTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <tools:TouchbarButton x:Name="NotchButton" 
+                          Content="{x:Bind NotchToNumberConverter(SelectionViewModel.GeometryCog_Notch), Mode=OneWay}">
                 <tools:TouchbarButton.Picker>
                     <hSVColorPickers:NumberPicker x:Name="NotchPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                           Value="{x:Bind NotchToNumberConverter(SelectionViewModel.GeometryCog_Notch), Mode=OneWay}"/>
@@ -70,17 +84,14 @@
                 </tools:TouchbarButton.Slider>
             </tools:TouchbarButton>
 
-            <ContentControl Width="4"/>
+            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <TextBlock Text="{x:Bind ConvertButton.Title}" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:ConvertToCurvesButton x:Name="ConvertButton"/>
+            <toolsElements:ConvertToCurvesButton x:Name="ConvertButton" />
 
-            <ContentControl Width="4"/>
+            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <toolsElements:MoreCreateButton/>
+            <toolsElements:MoreCreateButton />
 
-            <ContentControl Width="4"/>
         </StackPanel>
     </ScrollViewer>
-    
 </Page>

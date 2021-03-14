@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Tools.Models
         public ToolGroupType GroupType => ToolGroupType.Tool;
         public string Title { get; set; }
         public ControlTemplate Icon { get; set; }
-        public FrameworkElement Page { get; } = new GeometryPage();
+        public FrameworkElement Page { get; } = new GeometryPage(ToolType.GeometryRectangle);
         public bool IsSelected { get; set; }
         public bool IsOpen { get; set; }
 

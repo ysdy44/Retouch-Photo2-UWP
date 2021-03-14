@@ -32,13 +32,38 @@ namespace Retouch_Photo2.Tools.Elements
 
                 if (this.Parent is FrameworkElement placementTarget)
                 {
+                    this.Register();
                     MoreTransformButton.Flyout.ShowAt(placementTarget);
                 }
                 else
                 {
+                    this.Register();
                     MoreTransformButton.Flyout.ShowAt(this);
                 }
             };
+        }
+
+        private void Register()
+        {
+            if (MoreTransformButton.Flyout == null) return;
+            MoreTransformButton.Flyout.Opened += this.Flyout_Opened;
+            MoreTransformButton.Flyout.Closed += this.Flyout_Closed;
+        }
+        private void UnRegister()
+        {
+            if (MoreTransformButton.Flyout == null) return;
+            MoreTransformButton.Flyout.Opened -= this.Flyout_Opened;
+            MoreTransformButton.Flyout.Closed -= this.Flyout_Closed;
+        }
+
+        private void Flyout_Opened(object sender, object e)
+        {
+            this.Button.IsEnabled = false;
+        }
+        private void Flyout_Closed(object sender, object e)
+        {
+            this.Button.IsEnabled = true;
+            this.UnRegister();
         }
     }
 }

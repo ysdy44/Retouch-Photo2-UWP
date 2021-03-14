@@ -80,7 +80,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.CornerButton.Content = resource.GetString("Tools_GeometryRoundRect_Corner");
+            this.CornerTextBlock.Text = resource.GetString("Tools_GeometryRoundRect_Corner");
         }
     }
 

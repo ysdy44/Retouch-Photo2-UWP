@@ -185,10 +185,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.RadianButton.Content = resource.GetString("Tools_View_Radian");
+            this.RadianTextBlock.Text = resource.GetString("Tools_View_Radian");
             this.RadianClearToolTip.Content = resource.GetString("Tools_View_RadianClear");
 
-            this.ScaleButton.Content = resource.GetString("Tools_View_Scale");
+            this.ScaleTextBlock.Text = resource.GetString("Tools_View_Scale");
             this.ScaleClearToolTip.Content = resource.GetString("Tools_View_ScaleClear");
         }
 

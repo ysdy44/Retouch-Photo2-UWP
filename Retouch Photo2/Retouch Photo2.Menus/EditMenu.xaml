@@ -38,7 +38,7 @@
 
         </StackPanel>
 
-        <Rectangle Grid.Column="1" Margin="0" Style="{ThemeResource AppSeparatorRectangleHorizontalStyle}" />
+        <Rectangle Grid.Column="1" Style="{ThemeResource AppSeparatorRectangleHorizontalStyle}" />
 
         <StackPanel Grid.Column="2">
 

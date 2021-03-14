@@ -81,7 +81,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.CenterButton.Content = resource.GetString("Tools_GeometryTriangle_Center");
+            this.CenterTextBlock.Text = resource.GetString("Tools_GeometryTriangle_Center");
             this.MirrorTextBlock.Text = resource.GetString("Tools_GeometryTriangle_Mirror");
         }
     }

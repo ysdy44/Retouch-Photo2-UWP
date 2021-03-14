@@ -8,19 +8,35 @@
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
+    d:RequestedTheme="Dark"
+    d:Background="{StaticResource AppForeground}"
     >
 
-    <StackPanel Orientation="Horizontal">
-        <ContentControl Width="8"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        
+        <Border Width="50">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryCapsuleIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource GeometryCapsuleIcon}"/>
+            </Border.Child>
+        </Border>
+      
+        <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <TextBlock Text="{x:Bind ConvertButton.Title}" Style="{StaticResource AppTextBlockStyle}"/>
-        <toolsElements:ConvertToCurvesButton x:Name="ConvertButton"/>
+        <toolsElements:ConvertToCurvesButton x:Name="ConvertButton" Grid.Column="2"/>
+   
+        <Rectangle Grid.Column="3" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <ContentControl Width="4"/>
+        <toolsElements:MoreCreateButton Grid.Column="4"/>
 
-        <toolsElements:MoreCreateButton/>
-
-        <ContentControl Width="4"/>
-    </StackPanel>
-    
+    </Grid>
 </Page>

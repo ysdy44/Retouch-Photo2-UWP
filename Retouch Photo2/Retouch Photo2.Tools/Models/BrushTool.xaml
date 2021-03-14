@@ -8,6 +8,8 @@
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
+    d:RequestedTheme="Dark"
+    d:Background="{StaticResource AppForeground}"
     >
 
     <Page.Resources>
@@ -20,34 +22,40 @@
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
-            <ContentControl Width="8"/>
 
+            <Border Width="50">
+                <Border.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/BrushIcon.xaml"/>
+                </Border.Resources>
+                <Border.Child>
+                    <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource BrushIcon}"/>
+                </Border.Child>
+            </Border>
+
+            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
             <!--FillOrStroke-->
             <TextBlock x:Name="FillOrStrokeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <brushs:FillOrStrokeComboBox x:Name="FillOrStrokeComboBox"
-                 FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
-                />
-           
-            <ContentControl Width="4"/>
+            <brushs:FillOrStrokeComboBox x:Name="FillOrStrokeComboBox" 
+                 FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"/>
+
+            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
             <!--Type-->
-            <TextBlock x:Name="TypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <TextBlock x:Name="TypeTextBlock" Grid.Column="5" Style="{StaticResource AppTextBlockStyle}"/>
             <brushs:BrushTypeComboBox x:Name="TypeComboBox" 
                  FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
                  Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
                  Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
-           
-            <ContentControl Width="4"/>
 
             <!--ShowControl-->
-            <TextBlock x:Name="ShowTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <TextBlock x:Name="ShowTextBlock"  Style="{StaticResource AppTextBlockStyle}"/>
             <brushs:BrushShowControl x:Name="ShowControl" 
                      FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
                      Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
                      Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
 
-            <ContentControl Width="4"/>
+            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
             <!--Extend-->
             <TextBlock x:Name="ExtendTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
@@ -56,8 +64,6 @@
                      Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
                      Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
 
-            <ContentControl Width="12"/>
         </StackPanel>
     </ScrollViewer>
-
 </Page>

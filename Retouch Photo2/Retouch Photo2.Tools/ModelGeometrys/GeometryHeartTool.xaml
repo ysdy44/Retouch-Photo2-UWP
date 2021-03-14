@@ -10,35 +10,44 @@
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
+    d:RequestedTheme="Dark"
+    d:Background="{StaticResource AppForeground}"
     >
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
-            <ContentControl Width="4"/>
+    <StackPanel Orientation="Horizontal">
 
-            <!--Spread-->
-            <tools:TouchbarButton x:Name="SpreadButton">
-                <tools:TouchbarButton.Picker>
-                    <hSVColorPickers:NumberPicker x:Name="SpreadPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+        <Border Width="50">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryHeartIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource GeometryHeartIcon}"/>
+            </Border.Child>
+        </Border>
+        
+        <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+
+        <!--Spread-->
+        <TextBlock x:Name="SpreadTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <tools:TouchbarButton x:Name="SpreadButton" 
+                           Content="{x:Bind SpreadToNumberConverter(SelectionViewModel.GeometryHeart_Spread), Mode=OneWay}">
+        <tools:TouchbarButton.Picker>
+                <hSVColorPickers:NumberPicker x:Name="SpreadPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                            Value="{x:Bind SpreadToNumberConverter(SelectionViewModel.GeometryHeart_Spread), Mode=OneWay}"/>
-                </tools:TouchbarButton.Picker>
-                <tools:TouchbarButton.Slider>
-                    <tools:TouchbarSlider x:Name="SpreadSlider" 
+            </tools:TouchbarButton.Picker>
+            <tools:TouchbarButton.Slider>
+                <tools:TouchbarSlider x:Name="SpreadSlider" 
                            Value="{x:Bind SelectionViewModel.GeometryHeart_Spread, Mode=OneWay}"/>
-                </tools:TouchbarButton.Slider>
-            </tools:TouchbarButton>
+            </tools:TouchbarButton.Slider>
+        </tools:TouchbarButton>
 
-            <ContentControl Width="4"/>
+        <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <TextBlock Text="{x:Bind ConvertButton.Title}" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:ConvertToCurvesButton x:Name="ConvertButton"/>
+        <toolsElements:ConvertToCurvesButton x:Name="ConvertButton" />
 
-            <ContentControl Width="4"/>
+        <Rectangle Grid.Column="6" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <toolsElements:MoreCreateButton/>
+        <toolsElements:MoreCreateButton />
 
-            <ContentControl Width="4"/>
-        </StackPanel>
-    </ScrollViewer>
-
+    </StackPanel>
 </Page>

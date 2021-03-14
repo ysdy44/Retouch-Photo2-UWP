@@ -8,6 +8,8 @@
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
+    d:RequestedTheme="Dark"
+    d:Background="{StaticResource AppForeground}"
     >
 
     <Page.Resources>
@@ -18,24 +20,36 @@
     </Page.Resources>
 
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
-            <ContentControl Width="8"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="80"/>
+        </Grid.ColumnDefinitions>
 
-            <!--Type-->
-            <TextBlock x:Name="TypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <brushs:TransparencyTypeComboBox x:Name="TypeComboBox" 
+        <Border Width="50">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/TransparencyIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource TransparencyIcon}"/>
+            </Border.Child>
+        </Border>
+
+        <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+
+        <!--Type-->
+        <TextBlock x:Name="TypeTextBlock" Grid.Column="2" Style="{StaticResource AppTextBlockStyle}"/>
+        <brushs:TransparencyTypeComboBox x:Name="TypeComboBox"  Grid.Column="3"
                  Transparency="{x:Bind SelectionViewModel.Transparency, Mode=OneWay}" />
 
-            <ContentControl Width="4"/>
-
-            <!--ShowControl-->
-            <TextBlock x:Name="ShowTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <brushs:TransparencyShowControl x:Name="ShowControl" 
+        <!--ShowControl-->
+        <TextBlock x:Name="ShowTextBlock" Grid.Column="4" Style="{StaticResource AppTextBlockStyle}"/>
+        <brushs:TransparencyShowControl x:Name="ShowControl" Grid.Column="5"
                      Transparency="{x:Bind SelectionViewModel.Transparency, Mode=OneWay}" />
 
-            <ContentControl Width="12"/>
-        </StackPanel>
-    </ScrollViewer>
-
+    </Grid>
 </Page>

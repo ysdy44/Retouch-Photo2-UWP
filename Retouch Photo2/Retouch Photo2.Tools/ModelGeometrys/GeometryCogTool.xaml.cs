@@ -115,10 +115,10 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.CountButton.Content = resource.GetString("Tools_GeometryCog_Count");
-            this.InnerRadiusButton.Content = resource.GetString("Tools_GeometryCog_InnerRadius");
-            this.ToothButton.Content = resource.GetString("Tools_GeometryCog_Tooth");
-            this.NotchButton.Content = resource.GetString("Tools_GeometryCog_Notch");
+            this.CountTextBlock.Text = resource.GetString("Tools_GeometryCog_Count");
+            this.InnerRadiusTextBlock.Text = resource.GetString("Tools_GeometryCog_InnerRadius");
+            this.ToothTextBlock.Text = resource.GetString("Tools_GeometryCog_Tooth");
+            this.NotchTextBlock.Text = resource.GetString("Tools_GeometryCog_Notch");
         }
     }
 

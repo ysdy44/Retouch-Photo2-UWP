@@ -4,9 +4,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     xmlns:strokes="using:Retouch_Photo2.Strokes"
-    xmlns:brushs="using:Retouch_Photo2.Brushs"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -14,31 +13,35 @@
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
-            <ContentControl Width="8"/>
+
+            <Border x:Name="IconBorder" Width="50">
+                <!--
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/ViewIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ViewIcon}"/>
+            </Border.Child>-->
+            </Border>
+
+            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
             <TextBlock x:Name="FillTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:FillColorEllipse/>
-            
-            <ContentControl Width="4"/>
+            <toolsElements:FillColorEllipse />
 
             <TextBlock x:Name="StrokeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:StrokeColorEllipse/>
-
-            <ContentControl Width="8"/>
+            <toolsElements:StrokeColorEllipse />
 
             <strokes:StrokeShowControl x:Name="StrokeShowControl" StrokeStyle="{x:Bind SelectionViewModel.StrokeStyle, Mode=OneWay}"/>
 
-            <ContentControl Width="4"/>
+            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <TextBlock Text="{x:Bind ConvertButton.Title}" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:ConvertToCurvesButton x:Name="ConvertButton"/>
+            <toolsElements:ConvertToCurvesButton x:Name="ConvertButton" />
 
-            <ContentControl Width="4"/>
+            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <toolsElements:MoreCreateButton/>
+            <toolsElements:MoreCreateButton />
 
-            <ContentControl Width="4"/>
         </StackPanel>
     </ScrollViewer>
-
 </Page>

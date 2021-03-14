@@ -80,7 +80,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.HoleRadiusButton.Content = resource.GetString("Tools_GeometryDount_HoleRadius");
+            this.HoleRadiusTextBlock.Text = resource.GetString("Tools_GeometryDount_HoleRadius");
         }
     }
 

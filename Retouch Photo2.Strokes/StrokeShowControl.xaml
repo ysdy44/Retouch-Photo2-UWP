@@ -5,13 +5,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Width="70"
-    Height="34" 
+    Width="Auto"
+    Height="{StaticResource AppRoundedHeight}" 
+    Margin="{StaticResource AppMargin}" 
     d:DesignWidth="100"
     d:DesignHeight="50"
     >
 
-    <Border x:Name="RootGrid" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource AppText}" Background="{ThemeResource AppBackground}">
+    <Border x:Name="RootGrid" Width="80" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource AppText}" Background="{ThemeResource AppBackground}">
         <Line x:Name="Line" X1="6" Y1="17" X2="61" Y2="17" StrokeThickness="4" Stroke="{ThemeResource SystemBaseHighColor}" />
     </Border>
 

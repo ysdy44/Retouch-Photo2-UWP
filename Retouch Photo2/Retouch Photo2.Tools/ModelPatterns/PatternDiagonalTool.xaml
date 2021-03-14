@@ -9,38 +9,58 @@
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
+    d:RequestedTheme="Dark"
+    d:Background="{StaticResource AppForeground}"
     >
 
-    <StackPanel Orientation="Horizontal">
-        <ContentControl Width="8"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Width="50">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconPatterns/PatternDiagonalIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource PatternDiagonalIcon}"/>
+            </Border.Child>
+        </Border>
+
+        <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
         <!--Offset-->
-            <tools:TouchbarButton x:Name="OffsetButton">
-                <tools:TouchbarButton.Picker>
+        <TextBlock x:Name="OffsetTextBlock" Grid.Column="2" Style="{StaticResource AppTextBlockStyle}"/>
+        <tools:TouchbarButton x:Name="OffsetButton" Grid.Column="3"
+                              Content="{x:Bind OffsetToNumberConverter(SelectionViewModel.PatternDiagonal_Offset), Mode=OneWay}">
+            <tools:TouchbarButton.Picker>
                 <hSVColorPickers:NumberPicker x:Name="OffsetPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind OffsetToNumberConverter(SelectionViewModel.PatternDiagonal_Offset), Mode=OneWay}"/>
-                </tools:TouchbarButton.Picker>
-                <tools:TouchbarButton.Slider>
-                    <tools:TouchbarSlider x:Name="OffsetSlider" 
+            </tools:TouchbarButton.Picker>
+            <tools:TouchbarButton.Slider>
+                <tools:TouchbarSlider x:Name="OffsetSlider" 
                              Value="{x:Bind SelectionViewModel.PatternDiagonal_Offset, Mode=OneWay}"/>
-                </tools:TouchbarButton.Slider>
-            </tools:TouchbarButton>
-            
-            <ContentControl Width="4"/>
-            
-            <!--Step-->
-            <tools:TouchbarButton x:Name="HorizontalStepButton">
-                <tools:TouchbarButton.Picker>
-                    <hSVColorPickers:NumberPicker x:Name="HorizontalStepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+            </tools:TouchbarButton.Slider>
+        </tools:TouchbarButton>
+
+        <!--Step-->
+        <TextBlock x:Name="HorizontalStepTextBlock" Grid.Column="4" Style="{StaticResource AppTextBlockStyle}"/>
+        <tools:TouchbarButton x:Name="HorizontalStepButton" Grid.Column="5"
+                              Content="{x:Bind StepToNumberConverter(SelectionViewModel.PatternDiagonal_HorizontalStep), Mode=OneWay}">
+            <tools:TouchbarButton.Picker>
+                <hSVColorPickers:NumberPicker x:Name="HorizontalStepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind StepToNumberConverter(SelectionViewModel.PatternDiagonal_HorizontalStep), Mode=OneWay}"/>
-                </tools:TouchbarButton.Picker>
-                <tools:TouchbarButton.Slider>
-                    <tools:TouchbarSlider x:Name="HorizontalStepSlider" 
+            </tools:TouchbarButton.Picker>
+            <tools:TouchbarButton.Slider>
+                <tools:TouchbarSlider x:Name="HorizontalStepSlider" 
                              Value="{x:Bind SelectionViewModel.PatternDiagonal_HorizontalStep, Mode=OneWay}"/>
-                </tools:TouchbarButton.Slider>
-            </tools:TouchbarButton>
+            </tools:TouchbarButton.Slider>
+        </tools:TouchbarButton>
 
-        <ContentControl Width="4"/>
-    </StackPanel>
-
+    </Grid>
 </Page>

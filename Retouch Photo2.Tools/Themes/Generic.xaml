@@ -10,9 +10,9 @@
     -->
 
     <Style TargetType="local:TouchbarButton">
-        <Setter Property="Width" Value="Auto"/>
-        <Setter Property="MinWidth" Value="{StaticResource AppCircleHeight}"/>
-        <Setter Property="Height" Value="{StaticResource AppCircleHeight}"/>
+        <Setter Property="Width" Value="70"/>
+        <Setter Property="Height" Value="{StaticResource AppRoundedHeight}"/>
+        <Setter Property="Margin" Value="{ThemeResource AppMargin}"/>
         <Setter Property="Padding" Value="14,0"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
         <Setter Property="Background" Value="{ThemeResource AppFill}"/>
@@ -21,10 +21,11 @@
             <Setter.Value>
                 <ControlTemplate TargetType="local:TouchbarButton">
                     <Border x:Name="RootGrid"      
-                            CornerRadius="{StaticResource AppCircleCornerRadius}"
+                            CornerRadius="{StaticResource AppCornerRadius}"
                             Width="{TemplateBinding Width}" 
                             Height="{TemplateBinding Height}" 
                             MinWidth="{TemplateBinding MinWidth}"
+                            Margin="{TemplateBinding Margin}"
                             BorderThickness="{TemplateBinding BorderThickness}" 
                             BorderBrush="{TemplateBinding BorderBrush}" 
                             Background="{TemplateBinding Background}" 
@@ -97,5 +98,5 @@
         </Setter>
     </Style>
 
-    
+
 </ResourceDictionary>

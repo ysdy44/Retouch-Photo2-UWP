@@ -70,6 +70,8 @@ namespace Retouch_Photo2.Elements
                 if (this._vsIsFullScreen == value) return;
 
                 this.UnFullScreenButtonVisibility = value ? Visibility.Visible : Visibility.Collapsed;
+
+                this._vsPhoneType = PhoneLayoutType.Hided;
                 this._vsIsFullScreen = value;
                 this.VisualState = this.VisualState;//State
             }
@@ -79,6 +81,7 @@ namespace Retouch_Photo2.Elements
         {            
             set
             {
+                this._vsPhoneType = PhoneLayoutType.Hided;
                 this._vsDeviceLayoutType = value;
                 this.VisualState = this.VisualState;//State
             }

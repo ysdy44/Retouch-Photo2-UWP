@@ -9,40 +9,58 @@
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
+    d:RequestedTheme="Dark"
+    d:Background="{StaticResource AppForeground}"
     >
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
-            <ContentControl Width="8"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
 
-            <!--Radius-->
-            <tools:TouchbarButton x:Name="RadiusButton">
-                <tools:TouchbarButton.Picker>
-                    <hSVColorPickers:NumberPicker x:Name="RadiusPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+        <Border Width="50">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconPatterns/PatternSpottedIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource PatternSpottedIcon}"/>
+            </Border.Child>
+        </Border>
+
+        <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+
+        <!--Radius-->
+        <TextBlock x:Name="RadiusTextBlock" Grid.Column="2" Style="{StaticResource AppTextBlockStyle}"/>
+        <tools:TouchbarButton x:Name="RadiusButton" Grid.Column="3"
+                            Content="{x:Bind Converter(SelectionViewModel.PatternSpotted_Radius), Mode=OneWay}">
+            <tools:TouchbarButton.Picker>
+                <hSVColorPickers:NumberPicker x:Name="RadiusPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind Converter(SelectionViewModel.PatternSpotted_Radius), Mode=OneWay}"/>
-                </tools:TouchbarButton.Picker>
-                <tools:TouchbarButton.Slider>
-                    <tools:TouchbarSlider x:Name="RadiusSlider" 
+            </tools:TouchbarButton.Picker>
+            <tools:TouchbarButton.Slider>
+                <tools:TouchbarSlider x:Name="RadiusSlider" 
                              Value="{x:Bind SelectionViewModel.PatternSpotted_Radius, Mode=OneWay}"/>
-                </tools:TouchbarButton.Slider>
-            </tools:TouchbarButton>
+            </tools:TouchbarButton.Slider>
+        </tools:TouchbarButton>
 
-            <ContentControl Width="4"/>
-
-            <!---->
-            <tools:TouchbarButton x:Name="StepButton">
-                <tools:TouchbarButton.Picker>
-                    <hSVColorPickers:NumberPicker x:Name="StepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+        <!--Step-->
+        <TextBlock x:Name="StepTextBlock" Grid.Column="4" Style="{StaticResource AppTextBlockStyle}"/>
+        <tools:TouchbarButton x:Name="StepButton" Grid.Column="5"
+                            Content="{x:Bind Converter(SelectionViewModel.PatternSpotted_Step), Mode=OneWay}">
+            <tools:TouchbarButton.Picker>
+                <hSVColorPickers:NumberPicker x:Name="StepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind Converter(SelectionViewModel.PatternSpotted_Step), Mode=OneWay}"/>
-                </tools:TouchbarButton.Picker>
-                <tools:TouchbarButton.Slider>
-                    <tools:TouchbarSlider x:Name="StepSlider" 
+            </tools:TouchbarButton.Picker>
+            <tools:TouchbarButton.Slider>
+                <tools:TouchbarSlider x:Name="StepSlider" 
                              Value="{x:Bind SelectionViewModel.PatternSpotted_Step, Mode=OneWay}"/>
-                </tools:TouchbarButton.Slider>
-            </tools:TouchbarButton>
-            
-            <ContentControl Width="4"/>
-        </StackPanel>
-    </ScrollViewer>
+            </tools:TouchbarButton.Slider>
+        </tools:TouchbarButton>
 
+    </Grid>
 </Page>
