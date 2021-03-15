@@ -290,7 +290,8 @@ namespace Retouch_Photo2
                 Transform = new Transform(transformerSource)
             };
             Layerage imageLayerage = imageLayer.ToLayerage();
-            LayerBase.Instances.Add(imageLayer);
+            string id = imageLayerage.Id;
+            LayerBase.Instances.Add(id, imageLayer);
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>

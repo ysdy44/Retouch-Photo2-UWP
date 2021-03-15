@@ -108,7 +108,8 @@ namespace Retouch_Photo2
             {
                 foreach (ILayer layer in layers)
                 {
-                    LayerBase.Instances.Add(layer);
+                    string id = layer.Id;
+                    LayerBase.Instances.Add(id, layer);
                 }
             }
 
@@ -183,7 +184,8 @@ namespace Retouch_Photo2
                 Photocopier = photocopier,
             };
             Layerage imageLayerage = imageLayer.ToLayerage();
-            LayerBase.Instances.Add(imageLayer);
+            string id = imageLayerage.Id;
+            LayerBase.Instances.Add(id, imageLayer);
 
             //Project
             Project project = new Project

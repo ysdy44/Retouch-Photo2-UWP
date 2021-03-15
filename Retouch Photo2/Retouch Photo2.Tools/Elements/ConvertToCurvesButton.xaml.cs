@@ -71,7 +71,8 @@ namespace Retouch_Photo2.Tools.Elements
                     if (curveLayer != null)
                     {
                         Layerage curveLayerage = curveLayer.ToLayerage();
-                        LayerBase.Instances.Add(curveLayer);
+                        string id = curveLayerage.Id;
+                        LayerBase.Instances.Add(id, curveLayer);
 
                         //set image brush
                         if (layer.Type == LayerType.Image)

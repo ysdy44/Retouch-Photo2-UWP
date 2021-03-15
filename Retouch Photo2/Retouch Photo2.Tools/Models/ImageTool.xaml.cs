@@ -88,7 +88,8 @@ namespace Retouch_Photo2.Tools.Models
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
             Layerage imageLayerage = imageLayer.ToLayerage();
-            LayerBase.Instances.Add(imageLayer);
+            string id = imageLayerage.Id;
+            LayerBase.Instances.Add(id, imageLayer);
 
 
             this.MezzanineLayerage = imageLayerage;

@@ -11,8 +11,8 @@ namespace Retouch_Photo2.Layers
     {
 
         //@Static
-        /// <summary> Collection <see cref="Layerage"/>s instances. </summary>
-        public static readonly ObservableCollection<ILayer> Instances = new ObservableCollection<ILayer>();
+        /// <summary> Dictionary <see cref="Layerage"/>s instances. </summary>
+        public static readonly Dictionary<string, ILayer> Instances = new Dictionary<string, ILayer>();
         
 
         /// <summary>
@@ -23,15 +23,15 @@ namespace Retouch_Photo2.Layers
         public static ILayer FindFirstLayer(Layerage layerage)
         {
             string id = layerage.Id;
-            return LayerBase.Instances.FirstOrDefault(i => i.Id == id);
+            return LayerBase.Instances[id];
         }
 
 
-        static int IIIII;
         /// <summary>
         /// ID
         /// </summary>
         public string Id { get; set; }
+        static int idIndex;
 
 
         /// <summary>
@@ -42,9 +42,9 @@ namespace Retouch_Photo2.Layers
         {
             do
             {
-                this.Id = IIIII.ToString();
-                IIIII++;
-            } while (LayerBase.Instances.All(l => l.Id != this.Id) == false);
+                this.Id = LayerBase.idIndex.ToString();
+                LayerBase.idIndex++;
+            } while (LayerBase.Instances.ContainsKey(this.Id));
 
             return new Layerage
             {

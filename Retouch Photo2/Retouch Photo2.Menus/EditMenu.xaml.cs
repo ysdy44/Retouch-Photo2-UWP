@@ -209,7 +209,8 @@ namespace Retouch_Photo2.Menus.Models
                     if (curveLayer != null)
                     {
                         Layerage curveLayerage = curveLayer.ToLayerage();
-                        LayerBase.Instances.Add(curveLayer);
+                        string id = curveLayerage.Id;
+                        LayerBase.Instances.Add(id, curveLayer);
 
                         layerages.Add(curveLayerage);
                     }
@@ -303,7 +304,8 @@ namespace Retouch_Photo2.Menus.Models
                 if (curveLayer != null)
                 {
                     Layerage curveLayerage = curveLayer.ToLayerage();
-                    LayerBase.Instances.Add(curveLayer);
+                    string id = curveLayerage.Id;
+                    LayerBase.Instances.Add(id, curveLayer);
 
                     //History
                     LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer_Combine);

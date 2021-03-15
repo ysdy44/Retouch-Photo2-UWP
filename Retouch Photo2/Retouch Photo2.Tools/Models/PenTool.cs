@@ -177,7 +177,8 @@ namespace Retouch_Photo2.Tools.Models
                 Style = this.SelectionViewModel.StandCurveStyle,
             };
             Layerage curveLayerage = curveLayer.ToLayerage();
-            LayerBase.Instances.Add(curveLayer);
+            string id = curveLayerage.Id;
+            LayerBase.Instances.Add(id, curveLayer);
 
             //Mezzanine
             LayerManager.Mezzanine(curveLayerage);

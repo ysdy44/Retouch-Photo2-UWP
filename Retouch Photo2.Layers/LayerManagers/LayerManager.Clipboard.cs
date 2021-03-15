@@ -64,16 +64,17 @@ namespace Retouch_Photo2.Layers
             Layerage child = layerage.Clone();
 
             //
-            ILayer child2 = child.ClipboardSelf;
-            ILayer clone2 = child2.Clone();
-            Layerage clone = clone2.ToLayerage();
-            LayerBase.Instances.Add(clone2);
+            ILayer childCopy = child.ClipboardSelf;
+            ILayer cloneLayer = childCopy.Clone();
+            Layerage cloneLayerage = cloneLayer.ToLayerage();
+            string id = cloneLayerage.Id;
+            LayerBase.Instances.Add(id, cloneLayer);
             //
 
-            clone.Children = child.Children;
+            cloneLayerage.Children = child.Children;
             child.Children = null;
-            LayerManager._pasteLayerage(clone.Children);
-            return clone;
+            LayerManager._pasteLayerage(cloneLayerage.Children);
+            return cloneLayerage;
         }
 
         /// <summary>
@@ -94,13 +95,14 @@ namespace Retouch_Photo2.Layers
                 LayerManager._pasteLayerage(child.Children);
 
                 //
-                ILayer child2 = child.ClipboardSelf;
-                ILayer clone2 = child2.Clone();
-                Layerage clone = clone2.ToLayerage();
-                LayerBase.Instances.Add(clone2);
+                ILayer childCopy = child.ClipboardSelf;
+                ILayer cloneLayer = childCopy.Clone();
+                Layerage cloneLayerage = cloneLayer.ToLayerage();
+                string id = cloneLayerage.Id;
+                LayerBase.Instances.Add(id, cloneLayer);
                 //
 
-                children[i].Id = clone.Id;
+                children[i].Id = cloneLayerage.Id;
             }
         }
 
