@@ -223,7 +223,7 @@ namespace Retouch_Photo2
                     Group = 3,
                     Modifiers = VirtualKeyModifiers2.Control,
                     Key = VirtualKey.P,
-                    Invoked = () => Retouch_Photo2.DrawPage.ShowGallery?.Invoke(GalleryMode.AddImage)
+                    Invoked = () => Retouch_Photo2.DrawPage.ShowGallery?.Invoke()
                 },
             }
         };

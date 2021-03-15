@@ -106,16 +106,14 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructFillType()
         {
-            Retouch_Photo2.DrawPage.FillImage += (photo) =>
-            {
-                this.FillTypeChanged(BrushType.Image, photo);
-                this.BrushShowControl.Invalidate();
-            };
-            this.TypeComboBox.FillTypeChanged += (s, brushType) =>
+            this.TypeComboBox.FillTypeChanged += async (s, brushType) =>
             {
                 if (brushType == BrushType.Image)
                 {
-                    Retouch_Photo2.DrawPage.ShowGallery?.Invoke(GalleryMode.FillImage);//Delegate
+                    Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
+
+                    this.FillTypeChanged(BrushType.Image, photo);
+                    this.BrushShowControl.Invalidate();
                 }
                 else
                 {

@@ -1,97 +1,31 @@
-﻿using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Layers;
+﻿using Retouch_Photo2.Layers;
 using Retouch_Photo2.Photos;
-using Retouch_Photo2.Tools.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.Foundation;
 using Windows.Storage;
-using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2
 {
-    /// <summary>
-    /// Mode of <see cref="PhotosPage"/>
-    /// </summary>
-    public enum GalleryMode
-    {
-        /// <summary> Normal. </summary>
-        None,
-
-        /// <summary> Add a <see cref="ImageLayer"/>. </summary>
-        AddImage,
-
-        /// <summary> Make <see cref="Retouch_Photo2.Styles.IStyle.Fill"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
-        FillImage,
-        /// <summary> Make <see cref="Retouch_Photo2.Styles.IStyle.Stroke"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
-        StrokeImage,
-
-        /// <summary> Select a image in <see cref= "ImageTool" />. </summary>
-        SelectImage,
-        /// <summary> Replace a image in <see cref= "ImageTool" />. </summary>
-        ReplaceImage
-    }
-
     public sealed partial class DrawPage : Page
     {
 
         //@Static       
-        /// <summary> Add a <see cref="ImageLayer"/>. </summary>
-        public static Action<Photo> AddImage;
-
-        /// <summary> Make <see cref="Retouch_Photo2.Styles.IStyle.Fill"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
-        public static Action<Photo> FillImage;
-        /// <summary> Make <see cref="Retouch_Photo2.Styles.IStyle.Stroke"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
-        public static Action<Photo> StrokeImage;
-
-        /// <summary> Select a image in <see cref= "ImageTool" />. </summary>
-        public static Action<Photo> SelectImage;
-        /// <summary> Replace a image in <see cref= "ImageTool" />. </summary>
-        public static Action<Photo> ReplaceImage;
+        private TaskCompletionSource<Photo> taskSource;
 
 
-        private GalleryMode GalleryMode { get; set; } = GalleryMode.None;
-
-
-        private void ConstructGallery()
+        private async Task<Photo> ShowGalleryDialogFunc()
         {
-            this.GalleryGridView.ItemsSource = Photo.Instances;
-
-            this.GalleryDialog.CloseButtonClick += (s, e) => this.GalleryDialog.Hide();
-            this.GalleryDialog.PrimaryButtonClick += async (s, e) =>
-            {
-                //Files
-                IReadOnlyList<StorageFile> files = await FileUtil.PickMultipleImageFilesAsync(PickerLocationId.Desktop);
-                await this.CopyMultipleImageFilesAsync(files);
-            };
-        }
-
-        private void ShowGalleryDialog(GalleryMode mode)
-        {
-            this.GalleryMode = mode;
             this.GalleryDialog.Show();
+
+            this.taskSource = new TaskCompletionSource<Photo>();
+            Photo resultPhoto = await this.taskSource.Task;
+            this.taskSource = null;
+            return resultPhoto;
         }
-
-
-        private void RegisterGallery()
-        {
-            Photo.FlyoutShow += this.PhotoFlyoutShow;
-            Photo.ItemClick += this.PhotoItemClick;
-
-            Retouch_Photo2.DrawPage.AddImage += this.AddImagePhoto;
-        }
-        private void UnregisterGallery()
-        {
-            Photo.FlyoutShow -= this.PhotoFlyoutShow;
-            Photo.ItemClick -= this.PhotoItemClick;
-
-            Retouch_Photo2.DrawPage.AddImage -= this.AddImagePhoto;
-        }
-
 
         private void PhotoFlyoutShow(FrameworkElement element, Photo photo)
         {
@@ -99,31 +33,9 @@ namespace Retouch_Photo2
         }
         private void PhotoItemClick(FrameworkElement element, Photo photo)
         {
-            GalleryMode mode = this.GalleryMode;
-
-            switch (mode)
+            if (this.taskSource != null && this.taskSource.Task.IsCanceled == false)
             {
-                case GalleryMode.None:
-                    return;
-                case GalleryMode.AddImage:
-                    Retouch_Photo2.DrawPage.AddImage?.Invoke(photo);//Delegate
-                    break;
-
-                case GalleryMode.FillImage:
-                    Retouch_Photo2.DrawPage.FillImage?.Invoke(photo);//Delegate
-                    break;
-                case GalleryMode.StrokeImage:
-                    Retouch_Photo2.DrawPage.StrokeImage?.Invoke(photo);//Delegate
-                    break;
-
-                case GalleryMode.SelectImage:
-                    Retouch_Photo2.DrawPage.SelectImage?.Invoke(photo);//Delegate
-                    break;
-                case GalleryMode.ReplaceImage:
-                    Retouch_Photo2.DrawPage.ReplaceImage?.Invoke(photo);//Delegate
-                    break;
-                default:
-                    return;
+                this.taskSource.TrySetResult(photo);
             }
 
             this.GalleryDialog.Hide();
@@ -149,8 +61,7 @@ namespace Retouch_Photo2
             };
         }
 
-
-         
+                 
         private async Task CopyMultipleImageFilesAsync(IReadOnlyList<StorageFile> files)
         {
             if (files == null) return;

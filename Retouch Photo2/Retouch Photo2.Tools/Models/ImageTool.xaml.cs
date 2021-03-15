@@ -244,9 +244,10 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructSelect()
         {
-            this.SelectButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowGallery?.Invoke(GalleryMode.SelectImage);//Delegate
-            Retouch_Photo2.DrawPage.SelectImage += (photo) =>
+            this.SelectButton.Click += async (s, e) =>
             {
+                Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
+
                 if (photo == null) return;
                 Photocopier photocopier = photo.ToPhotocopier();
                 this.SelectionViewModel.Photocopier = photocopier;
@@ -255,9 +256,10 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructReplace()
         {
-            this.ReplaceButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowGallery?.Invoke(GalleryMode.ReplaceImage);//Delegate
-            Retouch_Photo2.DrawPage.ReplaceImage += (photo) =>
+            this.ReplaceButton.Click += async (s, e) =>
             {
+                Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
+
                 if (photo == null) return;
                 Photocopier photocopier = photo.ToPhotocopier();
                 this.SelectionViewModel.Photocopier = photocopier;

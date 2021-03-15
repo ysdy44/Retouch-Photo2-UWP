@@ -4,16 +4,15 @@
 // Only:              ★★★★★
 // Complete:      ★★★★★
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.Photos;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
+using System.Threading.Tasks;
 using Windows.Foundation;
-using System.ComponentModel;
-using System.Numerics;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
-using Windows.UI.Core;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -43,7 +42,10 @@ namespace Retouch_Photo2
         /// <summary> Show <see cref="DrawLayout.IsFullScreen"/> </summary>
         public static Action FullScreen;
         /// <summary> Show <see cref="GalleryDialog"/> </summary>
-        public static Action<GalleryMode> ShowGallery;
+        public static Action ShowGallery;
+
+        /// <summary> Show <see cref="GalleryDialog"/> </summary>
+        public static Func<Task<Photo>> ShowGalleryFunc;
 
         /// <summary> Show <see cref="FillFlyout"/> </summary>
         public static Action<FrameworkElement, FrameworkElement> ShowFill;
@@ -73,22 +75,22 @@ namespace Retouch_Photo2
             this.ConstructCanvasControl();
             this.ConstructCanvasOperator();
 
-            this.ConstructLayersControl();
+            //LayerManager
             this.ConstructLayerManager();
 
             //Dialog
             this.ConstructExportDialog();
             this.ConstructSetupDialog();
             this.ConstructRenameDialog();
-
-            //Gallery
-            this.ConstructGallery();
-            this.ConstructDragAndDrop();
+            this.ConstructGalleryDialog();
 
             //DrawLayout
             this.DrawLayout.RightIcon = new Retouch_Photo2.Layers.Icon();
-            this.DrawLayout.GalleryButton.Click += (s, e) => this.ShowGalleryDialog(GalleryMode.AddImage);
-            this.DrawLayout.PCGalleryButton.Click += (s, e) => this.ShowGalleryDialog(GalleryMode.AddImage);
+
+            //Gallery
+            this.DrawLayout.GalleryButton.Click += (s, e) => this.ShowGalleryDialog();
+            this.DrawLayout.PCGalleryButton.Click += (s, e) => this.ShowGalleryDialog();
+            this.ConstructDragAndDrop();
 
             //Flyout
             this.ConstructFillFlyout();
@@ -97,17 +99,32 @@ namespace Retouch_Photo2
 
         private void RegisterDrawPage()
         {
+            //LayerManager
+            this.LayersScrollViewer.Content = LayerManager.RootStackPanel;
+            LayerManager.ItemClick += this.LayerItemClick;
+            LayerManager.RightTapped += this.LayerRightTapped;
+            LayerManager.VisibilityChanged += this.LayerVisibilityChanged;
+            LayerManager.IsExpandChanged += this.LayerIsExpandChanged;
+            LayerManager.IsSelectedChanged += this.LayerIsSelectedChanged;
+            LayerManager.DragItemsStarted += this.LayerDragItemsStarted;
+            LayerManager.DragItemsDelta += this.LayerDragItemsDelta;
+            LayerManager.DragItemsCompleted += this.LayerDragItemsCompleted;
+
             //Dialog
             DrawPage.ShowExport = this.ShowExportDialog;
             DrawPage.ShowSetup = this.ShowSetupDialog;
             DrawPage.ShowRename = this.ShowRenameDialog;
             DrawPage.FullScreen = this.FullScreenChanged;
-            //Gallery
             DrawPage.ShowGallery = this.ShowGalleryDialog;
 
             //DrawLayout
             this.DrawLayout.TouchbarPicker = TouchbarButton.PickerBorder;
             this.DrawLayout.TouchbarSlider = TouchbarButton.SliderBorder;
+
+            //Gallery
+            DrawPage.ShowGalleryFunc = this.ShowGalleryDialogFunc;
+            Photo.FlyoutShow += this.PhotoFlyoutShow;
+            Photo.ItemClick += this.PhotoItemClick;
 
             //Flyout
             DrawPage.ShowFill = this.ShowFillFlyout;
@@ -118,17 +135,31 @@ namespace Retouch_Photo2
         }
         private void UnregisterDrawPage()
         {
+            //LayerManager
+            this.LayersScrollViewer.Content = null;
+            LayerManager.ItemClick -= this.LayerItemClick;
+            LayerManager.RightTapped -= this.LayerRightTapped;
+            LayerManager.VisibilityChanged -= this.LayerVisibilityChanged;
+            LayerManager.IsExpandChanged -= this.LayerIsExpandChanged;
+            LayerManager.IsSelectedChanged -= this.LayerIsSelectedChanged;
+            LayerManager.DragItemsStarted -= this.LayerDragItemsStarted;
+            LayerManager.DragItemsDelta -= this.LayerDragItemsDelta;
+            LayerManager.DragItemsCompleted -= this.LayerDragItemsCompleted;
+
             //Dialog
             DrawPage.ShowExport = null;
             DrawPage.ShowSetup = null;
             DrawPage.ShowRename = null;
             DrawPage.FullScreen = null;
-            //Gallery
-            DrawPage.ShowGallery = null;
 
             //DrawLayout
             this.DrawLayout.TouchbarPicker = null;
             this.DrawLayout.TouchbarSlider = null;
+
+            //Gallery
+            DrawPage.ShowGalleryFunc = null;
+            Photo.FlyoutShow -= this.PhotoFlyoutShow;
+            Photo.ItemClick -= this.PhotoItemClick;
 
             //Flyout
             DrawPage.ShowFill = null;
@@ -149,7 +180,6 @@ namespace Retouch_Photo2
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.RegisterDrawPage();
-            this.RegisterGallery();
             
             //Extension
             this.ApplicationView.Color = this.ApplicationView.Color;
@@ -185,7 +215,6 @@ namespace Retouch_Photo2
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             this.UnregisterDrawPage();
-            this.UnregisterGallery();
 
             //Extension
             this.ApplicationView.Title = string.Empty;

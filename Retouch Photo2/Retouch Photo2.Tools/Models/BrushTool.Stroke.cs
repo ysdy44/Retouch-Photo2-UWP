@@ -104,16 +104,14 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructStrokeType()
         {
-            Retouch_Photo2.DrawPage.StrokeImage += (photo) =>
-            {
-                this.StrokeTypeChanged(BrushType.Image, photo);
-                this.BrushShowControl.Invalidate();
-            };
-            this.TypeComboBox.StrokeTypeChanged += (s, brushType) =>
+            this.TypeComboBox.StrokeTypeChanged += async (s, brushType) =>
             {
                 if (brushType == BrushType.Image)
                 {
-                    Retouch_Photo2.DrawPage.ShowGallery?.Invoke(GalleryMode.StrokeImage);//Delegate
+                    Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
+
+                    this.StrokeTypeChanged(BrushType.Image, photo);
+                    this.BrushShowControl.Invalidate();
                 }
                 else
                 {
