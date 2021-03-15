@@ -11,7 +11,7 @@
 
     <UserControl.Resources>
         <!--Style-->
-        <Style x:Key="ToolTipStyle" TargetType="ToolTip" BasedOn="{StaticResource AppToolTipStyle}"/>
+        <Style x:Name="ToolTipStyle" TargetType="ToolTip" BasedOn="{StaticResource AppToolTipStyle}"/>
     </UserControl.Resources>
 
     <Grid x:Name="Grid" MinHeight="165" Padding="1,4">

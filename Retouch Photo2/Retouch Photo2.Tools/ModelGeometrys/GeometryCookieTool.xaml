@@ -73,7 +73,9 @@
 
         <Rectangle Grid.Column="8" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <toolsElements:MoreCreateButton Grid.Column="9"/>
+        <Button x:Name="MoreCreateButton" Grid.Column="9" Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+            <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+        </Button>
 
     </Grid>
 </Page>

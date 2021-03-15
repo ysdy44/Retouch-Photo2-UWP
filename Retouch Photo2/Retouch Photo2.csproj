@@ -279,18 +279,6 @@
     <Compile Include="%24MainPages\MainPage.Construct.cs" />
     <Compile Include="%24MainPages\MainPage.NewAndOpen.cs" />
     <Compile Include="%24MainPages\MainPage.ProjectViewItems.cs" />
-    <Compile Include="Retouch Photo2.Tools\Elements\MoreCreateButton.xaml.cs">
-      <DependentUpon>MoreCreateButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Elements\MoreCreateControl.xaml.cs">
-      <DependentUpon>MoreCreateControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Elements\MoreTransformButton.xaml.cs">
-      <DependentUpon>MoreTransformButton.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Retouch Photo2.Tools\Elements\MoreTransformControl.xaml.cs">
-      <DependentUpon>MoreTransformControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Retouch Photo2.Tools\Elements\ConvertToCurvesButton.xaml.cs">
       <DependentUpon>ConvertToCurvesButton.xaml</DependentUpon>
@@ -620,22 +608,6 @@
     <Page Include="%24SettingPages\SettingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\MoreCreateButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\MoreCreateControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\MoreTransformButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\MoreTransformControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Tools\Elements\ConvertToCurvesButton.xaml">
       <SubType>Designer</SubType>

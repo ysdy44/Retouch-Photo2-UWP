@@ -45,11 +45,47 @@
                 <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
             </Flyout>
 
-            <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <toolElements:MoreTransformControl/>
+            <Flyout x:Name="_MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <StackPanel x:Name="_MoreTransformContent" Padding="2" MinWidth="300">
+
+                    <!--Ratio-->
+                    <TextBlock x:Name="RatioTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <ToggleButton HorizontalAlignment="Left" Margin="12,0" Style="{StaticResource AppCircleToggleButtonStyle}"
+                                  IsChecked="{x:Bind SettingViewModel.IsRatio, Mode=TwoWay}">
+                        <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                    </ToggleButton>
+
+                    <ContentControl Width="4"/>
+
+                    <!--Center-->
+                    <TextBlock x:Name="CenterTextBlock2" Style="{StaticResource AppTextBlockStyle}"/>
+                    <ToggleButton HorizontalAlignment="Left" Margin="12,0" Style="{StaticResource AppCircleToggleButtonStyle}"
+                                  IsChecked="{x:Bind SettingViewModel.IsCenter, Mode=TwoWay}">
+                        <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                    </ToggleButton>
+
+                </StackPanel>
             </Flyout>
-            <Flyout x:Name="MoreCreateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <toolElements:MoreCreateControl/>
+            <Flyout x:Name="_MoreCreateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <StackPanel x:Name="_MoreCreateContent" Padding="2" MinWidth="300" Orientation="Vertical">
+
+                    <!--Square-->
+                    <TextBlock x:Name="SquareTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <ToggleButton HorizontalAlignment="Left" Margin="12,0" Style="{StaticResource AppCircleToggleButtonStyle}"
+                                  IsChecked="{x:Bind SettingViewModel.IsSquare, Mode=TwoWay}">
+                        <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                    </ToggleButton>
+
+                    <ContentControl Width="4"/>
+
+                    <!--Center-->
+                    <TextBlock x:Name="CenterTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <ToggleButton HorizontalAlignment="Left" Margin="12,0" Style="{StaticResource AppCircleToggleButtonStyle}"
+                                  IsChecked="{x:Bind SettingViewModel.IsCenter, Mode=TwoWay}">
+                        <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                    </ToggleButton>
+
+                </StackPanel>
             </Flyout>
 
 

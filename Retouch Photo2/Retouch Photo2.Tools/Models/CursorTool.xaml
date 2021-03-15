@@ -46,7 +46,9 @@
      
         <Rectangle Grid.Column="5" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <toolsElements:MoreTransformButton Grid.Column="6"/>
+        <Button x:Name="MoreTransformButton" Grid.Column="6" Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+            <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+        </Button>
 
     </Grid>
 </Page>

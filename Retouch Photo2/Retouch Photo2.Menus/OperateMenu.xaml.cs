@@ -142,6 +142,7 @@ namespace Retouch_Photo2.Menus.Models
                 {
                     Placement = PlacementMode.Top,
                     Content = resource.GetString($"Operates_{folder}_{key}"),
+                    Style = this.ToolTipStyle
                 });
                 button.Content = new OperateControl(key, folder);
             }

@@ -90,7 +90,9 @@
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <toolsElements:MoreCreateButton />
+            <Button x:Name="MoreCreateButton" Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+                <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+            </Button>
 
         </StackPanel>
     </ScrollViewer>

@@ -79,6 +79,13 @@ namespace Retouch_Photo2
 
             this.DrawLayout.GalleryToolTip.Content = resource.GetString("$DrawPage_Gallery");
             this.DrawLayout.WidthToolTip.Content = resource.GetString("$DrawPage_WidthTip");
+            {
+                this.SquareTextBlock.Text = resource.GetString("Tools_MoreCreate_Square");
+                this.CenterTextBlock.Text = resource.GetString("Tools_MoreCreate_Center");
+
+                this.RatioTextBlock.Text = resource.GetString("Tools_MoreTransform_Ratio ");
+                this.CenterTextBlock2.Text = resource.GetString("Tools_MoreTransform_Center");
+            }
         }
 
 

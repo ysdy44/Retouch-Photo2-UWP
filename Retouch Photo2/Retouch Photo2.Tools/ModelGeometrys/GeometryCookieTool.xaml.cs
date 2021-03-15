@@ -69,6 +69,7 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Converter
@@ -90,6 +91,11 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ConstructSweepAngle1();
             this.ConstructSweepAngle2();
+
+            this.MoreCreateButton.Click += (s, e) =>
+            {
+                this.SettingViewModel.ShowFlyout(DrawPage.MoreCreateFlyout, DrawPage.MoreCreateContent, this, this.MoreCreateButton);
+            };
         }
 
         //Strings

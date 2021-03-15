@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Tools
 
         //@ViewModel
         TipViewModel TipViewModel => App.TipViewModel;
-
+        
         /// <summary>
         /// Create a <see cref="GeometryLayer"/>.
         /// </summary>
@@ -60,6 +60,7 @@ namespace Retouch_Photo2.Tools
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Construct
@@ -72,25 +73,27 @@ namespace Retouch_Photo2.Tools
             this.ConstructStrings();
 
 
-            /*
-            < Border.Resources >
-                < ResourceDictionary Source = "ms-appx:///Retouch Photo2.Tools/Icons/ViewIcon.xaml" />
-             </ Border.Resources >
-             < Border.Child >
-                 < ContentControl HorizontalAlignment = "Center" VerticalAlignment = "Center" Template = "{StaticResource ViewIcon}" />
-             </ Border.Child >
-             */
             if (this.IconBorder is Border border)
             {
+                /*
+                < Border.Resources >
+                    < ResourceDictionary Source = "ms-appx:///Retouch Photo2.Tools/Icons/ViewIcon.xaml" />
+                 </ Border.Resources >
+                 < Border.Child >
+                     < ContentControl HorizontalAlignment = "Center" VerticalAlignment = "Center" Template = "{StaticResource ViewIcon}" />
+                 </ Border.Child >
+                 */
                 border.Resources = new ResourceDictionary
                 {
+                    //@Template
                     Source = new Uri($@"ms-appx:///Retouch Photo2.Tools/Icons/{toolType}Icon.xaml")
                 };
                 border.Child = new ContentControl
                 {
+                    //@Template
+                    Template = border.Resources[$"{toolType}Icon"] as ControlTemplate,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
-                    Template = border.Resources[$"{toolType}Icon"] as ControlTemplate
                 };
             }
 
@@ -98,6 +101,11 @@ namespace Retouch_Photo2.Tools
             this.StrokeShowControl.Tapped += (s, e) =>
             {
                 this.TipViewModel.ShowMenuLayoutAt(MenuType.Stroke, this.StrokeShowControl);
+            };
+
+            this.MoreCreateButton.Click += (s, e) =>
+            {
+                this.SettingViewModel.ShowFlyout(DrawPage.MoreCreateFlyout, DrawPage.MoreCreateContent, this, this.MoreCreateButton);
             };
         }
 

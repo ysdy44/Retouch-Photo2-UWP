@@ -8,6 +8,11 @@ using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
 using Windows.Foundation;
+using System.ComponentModel;
+using System.Numerics;
+using Windows.UI.Xaml;
+using Windows.UI.Core;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -39,6 +44,11 @@ namespace Retouch_Photo2
         public static Action FullScreen;
         /// <summary> Show <see cref="GalleryDialog"/> </summary>
         public static Action<GalleryMode> ShowGallery;
+
+        public static Flyout MoreTransformFlyout;
+        public static FrameworkElement MoreTransformContent;
+        public static Flyout MoreCreateFlyout;
+        public static FrameworkElement MoreCreateContent;
 
 
         //@Construct
@@ -80,10 +90,12 @@ namespace Retouch_Photo2
             this.DrawLayout.TouchbarSlider = TouchbarButton.SliderBorder;
             this.DrawLayout.GalleryButton.Click += (s, e) => this.ShowGalleryDialog(GalleryMode.AddImage);
             this.DrawLayout.PCGalleryButton.Click += (s, e) => this.ShowGalleryDialog(GalleryMode.AddImage);
-            
+
             //FlyoutTool
-            Retouch_Photo2.Tools.Elements.MoreTransformButton.Flyout = this.MoreTransformFlyout;
-            Retouch_Photo2.Tools.Elements.MoreCreateButton.Flyout = this.MoreCreateFlyout;
+            DrawPage.MoreTransformFlyout = this._MoreTransformFlyout; 
+            DrawPage.MoreTransformContent = this._MoreTransformContent; 
+            DrawPage.MoreCreateFlyout = this._MoreCreateFlyout; 
+            DrawPage.MoreCreateContent = this._MoreCreateContent; 
         }
     }
 
