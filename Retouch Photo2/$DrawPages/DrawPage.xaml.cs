@@ -45,10 +45,15 @@ namespace Retouch_Photo2
         /// <summary> Show <see cref="GalleryDialog"/> </summary>
         public static Action<GalleryMode> ShowGallery;
 
-        public static Flyout MoreTransformFlyout;
-        public static FrameworkElement MoreTransformContent;
-        public static Flyout MoreCreateFlyout;
-        public static FrameworkElement MoreCreateContent;
+        /// <summary> Show <see cref="FillFlyout"/> </summary>
+        public static Action<FrameworkElement, FrameworkElement> ShowFill;
+        /// <summary> Show <see cref="StrokeFlyout"/> </summary>
+        public static Action<FrameworkElement, FrameworkElement> ShowStroke;
+
+        /// <summary> Show <see cref="MoreTransformFlyout"/> </summary>
+        public static Action<FrameworkElement, FrameworkElement> ShowMoreTransform;
+        /// <summary> Show <see cref="MoreCreateFlyout"/> </summary>
+        public static Action<FrameworkElement, FrameworkElement> ShowMoreCreate;
 
 
         //@Construct
@@ -72,31 +77,67 @@ namespace Retouch_Photo2
             this.ConstructLayerManager();
 
             //Dialog
-            if (DrawPage.ShowExport == null) DrawPage.ShowExport = this.ShowExportDialog;
             this.ConstructExportDialog();
-            if (DrawPage.ShowSetup == null) DrawPage.ShowSetup = this.ShowSetupDialog;
             this.ConstructSetupDialog();
-            if (DrawPage.ShowRename == null) DrawPage.ShowRename = this.ShowRenameDialog;
             this.ConstructRenameDialog();
-            if (DrawPage.FullScreen == null) DrawPage.FullScreen += () => this.DrawLayout.IsFullScreen = !this.DrawLayout.IsFullScreen;
+
             //Gallery
-            if (DrawPage.ShowGallery == null) DrawPage.ShowGallery = this.ShowGalleryDialog;
             this.ConstructGallery();
             this.ConstructDragAndDrop();
 
             //DrawLayout
             this.DrawLayout.RightIcon = new Retouch_Photo2.Layers.Icon();
-            this.DrawLayout.TouchbarPicker = TouchbarButton.PickerBorder;
-            this.DrawLayout.TouchbarSlider = TouchbarButton.SliderBorder;
             this.DrawLayout.GalleryButton.Click += (s, e) => this.ShowGalleryDialog(GalleryMode.AddImage);
             this.DrawLayout.PCGalleryButton.Click += (s, e) => this.ShowGalleryDialog(GalleryMode.AddImage);
 
-            //FlyoutTool
-            DrawPage.MoreTransformFlyout = this._MoreTransformFlyout; 
-            DrawPage.MoreTransformContent = this._MoreTransformContent; 
-            DrawPage.MoreCreateFlyout = this._MoreCreateFlyout; 
-            DrawPage.MoreCreateContent = this._MoreCreateContent; 
+            //Flyout
+            this.ConstructFillFlyout();
+            this.ConstructStrokeFlyout();
         }
+
+        private void RegisterDrawPage()
+        {
+            //Dialog
+            DrawPage.ShowExport = this.ShowExportDialog;
+            DrawPage.ShowSetup = this.ShowSetupDialog;
+            DrawPage.ShowRename = this.ShowRenameDialog;
+            DrawPage.FullScreen = this.FullScreenChanged;
+            //Gallery
+            DrawPage.ShowGallery = this.ShowGalleryDialog;
+
+            //DrawLayout
+            this.DrawLayout.TouchbarPicker = TouchbarButton.PickerBorder;
+            this.DrawLayout.TouchbarSlider = TouchbarButton.SliderBorder;
+
+            //Flyout
+            DrawPage.ShowFill = this.ShowFillFlyout;
+            DrawPage.ShowStroke = this.ShowStrokeFlyout;
+            //More
+            DrawPage.ShowMoreTransform = this.ShowMoreTransformFlyout;
+            DrawPage.ShowMoreCreate = this.ShowMoreCreateFlyout;
+        }
+        private void UnregisterDrawPage()
+        {
+            //Dialog
+            DrawPage.ShowExport = null;
+            DrawPage.ShowSetup = null;
+            DrawPage.ShowRename = null;
+            DrawPage.FullScreen = null;
+            //Gallery
+            DrawPage.ShowGallery = null;
+
+            //DrawLayout
+            this.DrawLayout.TouchbarPicker = null;
+            this.DrawLayout.TouchbarSlider = null;
+
+            //Flyout
+            DrawPage.ShowFill = null;
+            DrawPage.ShowStroke = null;
+            //More
+            DrawPage.ShowMoreTransform = null;
+            DrawPage.ShowMoreCreate = null;
+        }
+
     }
 
 
@@ -107,6 +148,9 @@ namespace Retouch_Photo2
         /// <summary> The current page becomes the active page. </summary>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            this.RegisterDrawPage();
+            this.RegisterGallery();
+            
             //Extension
             this.ApplicationView.Color = this.ApplicationView.Color;
 
@@ -140,6 +184,10 @@ namespace Retouch_Photo2
         /// <summary> The current page no longer becomes an active page. </summary>
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            this.UnregisterDrawPage();
+            this.UnregisterGallery();
+
+            //Extension
             this.ApplicationView.Title = string.Empty;
 
             //Key

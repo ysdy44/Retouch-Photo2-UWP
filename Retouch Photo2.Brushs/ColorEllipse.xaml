@@ -5,8 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Width="{StaticResource AppCircleHeight}" 
-    Height="{StaticResource AppCircleHeight}" 
+    Width="34" 
+    Height="34" 
     d:DesignHeight="50"
     d:DesignWidth="50"
     >

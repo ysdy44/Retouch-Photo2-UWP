@@ -247,7 +247,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructShowControl()
         {
-            this.ShowControl.Tapped += (s, e) =>
+            this.BrushShowControl.Tapped += (s, e) =>
             {
                 switch (this.FillOrStroke)
                 {

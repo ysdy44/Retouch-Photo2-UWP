@@ -50,7 +50,7 @@
 
             <!--ShowControl-->
             <TextBlock x:Name="ShowTextBlock"  Style="{StaticResource AppTextBlockStyle}"/>
-            <brushs:BrushShowControl x:Name="ShowControl" 
+            <brushs:BrushShowControl x:Name="BrushShowControl" 
                      FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
                      Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
                      Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />

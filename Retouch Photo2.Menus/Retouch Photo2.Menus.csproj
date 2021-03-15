@@ -110,7 +110,7 @@
   <ItemGroup>
     <Compile Include="Expanders\Expander.Construct.cs" />
     <Compile Include="Expanders\Expander.Content.cs" />
-    <Compile Include="Expanders\Expander.Menthon.cs" />
+    <Compile Include="Expanders\Expander.Method.cs" />
     <Compile Include="Expanders\Expander.xaml.cs">
       <DependentUpon>Expander.xaml</DependentUpon>
     </Compile>

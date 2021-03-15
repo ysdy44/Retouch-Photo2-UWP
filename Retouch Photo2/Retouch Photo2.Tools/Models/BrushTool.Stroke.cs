@@ -104,10 +104,10 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructStrokeType()
         {
-            Retouch_Photo2.DrawPage.StrokeImageCallBack += (photo) =>
+            Retouch_Photo2.DrawPage.StrokeImage += (photo) =>
             {
                 this.StrokeTypeChanged(BrushType.Image, photo);
-                this.ShowControl.Invalidate();
+                this.BrushShowControl.Invalidate();
             };
             this.TypeComboBox.StrokeTypeChanged += (s, brushType) =>
             {
@@ -118,7 +118,7 @@ namespace Retouch_Photo2.Tools.Models
                 else
                 {
                     this.StrokeTypeChanged(brushType);
-                    this.ShowControl.Invalidate();
+                    this.BrushShowControl.Invalidate();
                 }
             };
         }
@@ -165,7 +165,7 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.None: break;
 
                 case BrushType.Color:
-                    StrokeColorEllipse.ShowAt(this.ShowControl);
+                    Retouch_Photo2.DrawPage.ShowStroke?.Invoke(this, this.BrushShowControl);
                     break;
 
                 case BrushType.LinearGradient:

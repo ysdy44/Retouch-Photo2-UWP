@@ -6,7 +6,7 @@
     <Thickness x:Key="AppPanelPadding">0,4</Thickness>
 
     <x:Double x:Key="AppCircleHeight">40</x:Double>
-    <x:Double x:Key="AppRoundedHeight">36</x:Double>
+    <x:Double x:Key="AppRoundedHeight">38</x:Double>
 
 
     <Thickness x:Key="AppThickness">0.5,0.5,0.5,1.5</Thickness>

@@ -28,46 +28,45 @@ namespace Retouch_Photo2
             this.LayersScrollViewer.Tapped += (s, e) => this.MethodViewModel.MethodSelectedNone();//Method
             this.LayersScrollViewer.RightTapped += (s, e) => this.ShowLayerMenu();
             this.LayersScrollViewer.Holding += (s, e) => this.ShowLayerMenu();
+        }
 
+        private void AddImagePhoto(Photo photo)
+        {
+            if (photo == null) return;
 
-            Retouch_Photo2.DrawPage.AddImageCallBack += (photo) =>
+            //History
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
+            this.ViewModel.HistoryPush(history);
+
+            //Transformer
+            Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
+
+            //Layer
+            Photocopier photocopier = photo.ToPhotocopier();
+            ImageLayer imageLayer = new ImageLayer
             {
-                if (photo == null) return;
-
-                //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
-                this.ViewModel.HistoryPush(history);
-
-                //Transformer
-                Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
-
-                //Layer
-                Photocopier photocopier = photo.ToPhotocopier();
-                ImageLayer imageLayer = new ImageLayer
-                {
-                    Photocopier = photocopier,
-                    IsSelected = true,
-                    Transform = new Transform(transformerSource)
-                };
-                Layerage imageLayerage = imageLayer.ToLayerage();
-                LayerBase.Instances.Add(imageLayer);
-
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    layer.IsSelected = false;
-                });
-
-                //Mezzanine
-                LayerManager.Mezzanine(imageLayerage);
-
-                this.SelectionViewModel.SetMode();//Selection
-                LayerManager.ArrangeLayers();
-                LayerManager.ArrangeLayersBackground();
-                this.ViewModel.Invalidate();//Invalidate
+                Photocopier = photocopier,
+                IsSelected = true,
+                Transform = new Transform(transformerSource)
             };
+            Layerage imageLayerage = imageLayer.ToLayerage();
+            LayerBase.Instances.Add(imageLayer);
+
+            //Selection
+            this.SelectionViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                layer.IsSelected = false;
+            });
+
+            //Mezzanine
+            LayerManager.Mezzanine(imageLayerage);
+
+            this.SelectionViewModel.SetMode();//Selection
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
+            this.ViewModel.Invalidate();//Invalidate
         }
 
         private void ShowLayerMenu()

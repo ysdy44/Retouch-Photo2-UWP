@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
@@ -240,6 +241,139 @@ namespace Retouch_Photo2
             this.RenameTextBox.Text = this.SelectionViewModel.LayerName;
 
             this.RenameDialog.Show();
+        }
+
+
+        //FullScreen
+        private void FullScreenChanged()
+        {
+            this.DrawLayout.IsFullScreen = !this.DrawLayout.IsFullScreen;
+        }
+
+
+        //Fill
+        private void ShowFillFlyout(FrameworkElement page, FrameworkElement button)
+        {
+            switch (this.SelectionViewModel.Fill.Type)
+            {
+                case BrushType.Color:
+                    this.FilPicker.Color = this.SelectionViewModel.Fill.Color;
+                    break;
+            }
+
+            switch (this.SettingViewModel.DeviceLayoutType)
+            {
+                case DeviceLayoutType.PC:
+                    this.FillFlyout.ShowAt(button);
+                    break;
+                case DeviceLayoutType.Pad:
+                case DeviceLayoutType.Phone:
+                    this.FillFlyout.ShowAt(page);
+                    break;
+            }
+        }
+        private void ConstructFillFlyout()
+        {
+            //@Focus
+            // Before Flyout Showed, Don't let TextBox Got Focus.
+            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
+            if (this.FilPicker.HexPicker is TextBox textBox)
+            {
+                textBox.IsEnabled = false;
+                this.FillFlyout.Opened += (s, e) => textBox.IsEnabled = true;
+                this.FillFlyout.Closed += (s, e) => textBox.IsEnabled = false;
+                textBox.GotFocus += (s, e) => this.SettingViewModel.UnRegisteKey();
+                textBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
+            }
+
+            this.FilPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodFillColorChanged(value);
+
+            this.FilPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.MethodFillColorChangeStarted(value);
+            this.FilPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.MethodFillColorChangeDelta(value);
+            this.FilPicker.ColorChangeCompleted += (s, value) => this.MethodViewModel.MethodFillColorChangeCompleted(value);
+        }
+
+        //Stroke
+        private void ShowStrokeFlyout(FrameworkElement page, FrameworkElement button)
+        {
+            switch (this.SelectionViewModel.Stroke.Type)
+            {
+                case BrushType.Color:
+                    this.StrokePicker.Color = this.SelectionViewModel.Stroke.Color;
+                    break;
+            }
+
+            switch (this.SettingViewModel.DeviceLayoutType)
+            {
+                case DeviceLayoutType.PC:
+                    this.StrokeFlyout.ShowAt(button);
+                    break;
+                case DeviceLayoutType.Pad:
+                case DeviceLayoutType.Phone:
+                    this.StrokeFlyout.ShowAt(page);
+                    break;
+            }
+        }
+        private void ConstructStrokeFlyout()
+        {
+            //@Focus
+            // Before Flyout Showed, Don't let TextBox Got Focus.
+            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
+            if (this.FilPicker.HexPicker is TextBox textBox)
+            {
+                textBox.IsEnabled = false;
+                this.StrokeFlyout.Opened += (s, e) => textBox.IsEnabled = true;
+                this.StrokeFlyout.Closed += (s, e) => textBox.IsEnabled = false;
+                textBox.GotFocus += (s, e) => this.SettingViewModel.UnRegisteKey();
+                textBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
+            }
+
+            this.FilPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodStrokeColorChanged(value);
+
+            this.FilPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeStarted(value);
+            this.FilPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.MethodStrokeColorChangeDelta(value);
+            this.FilPicker.ColorChangeCompleted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeCompleted(value);
+        }
+
+
+        //MoreTransform
+        private void ShowMoreTransformFlyout(FrameworkElement page, FrameworkElement button)
+        {
+            switch (this.SettingViewModel.DeviceLayoutType)
+            {
+                case DeviceLayoutType.PC:
+                    this.MoreTransformContent.Width = double.NaN;
+                    this.MoreTransformFlyout.ShowAt(button);
+                    break;
+                case DeviceLayoutType.Pad:
+                    this.MoreTransformContent.Width = double.NaN;
+                    this.MoreTransformFlyout.ShowAt(page);
+                    break;
+                case DeviceLayoutType.Phone:
+                    this.MoreTransformContent.Width = page.ActualWidth - 40;
+                    this.MoreTransformFlyout.ShowAt(page);
+                    break;
+            }
+        }
+
+        //MoreCreate
+        private void ShowMoreCreateFlyout(FrameworkElement page, FrameworkElement button)
+        {
+            switch (this.SettingViewModel.DeviceLayoutType)
+            {
+                case DeviceLayoutType.PC:
+                    this.MoreCreateContent.Width = double.NaN;
+                    this.MoreCreateFlyout.ShowAt(button);
+                    break;
+                case DeviceLayoutType.Pad:
+                    this.MoreCreateContent.Width = double.NaN;
+                    this.MoreCreateFlyout.ShowAt(page);
+                    break;
+                case DeviceLayoutType.Phone:
+                    this.MoreCreateContent.Width = page.ActualWidth - 40;
+                    this.MoreCreateFlyout.ShowAt(page);
+                    break;
+            }
         }
 
     }

@@ -10,7 +10,7 @@
     -->
 
     <Style TargetType="local:TouchbarButton">
-        <Setter Property="Width" Value="70"/>
+        <Setter Property="MinWidth" Value="70"/>
         <Setter Property="Height" Value="{StaticResource AppRoundedHeight}"/>
         <Setter Property="Margin" Value="{ThemeResource AppMargin}"/>
         <Setter Property="Padding" Value="14,0"/>

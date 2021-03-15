@@ -98,15 +98,12 @@ namespace Retouch_Photo2.Tools
             }
 
 
-            this.StrokeShowControl.Tapped += (s, e) =>
-            {
-                this.TipViewModel.ShowMenuLayoutAt(MenuType.Stroke, this.StrokeShowControl);
-            };
+            //Flyout
+            this.FillBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowFill?.Invoke(this, this.FillBrushButton);
+            this.StrokeBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStroke?.Invoke(this, this.StrokeBrushButton);
+            this.StrokeShowControl.Tapped += (s, e) => this.TipViewModel.ShowMenuLayoutAt(MenuType.Stroke, this.StrokeShowControl);
 
-            this.MoreCreateButton.Click += (s, e) =>
-            {
-                this.SettingViewModel.ShowFlyout(DrawPage.MoreCreateFlyout, DrawPage.MoreCreateContent, this, this.MoreCreateButton);
-            };
+            this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);
         }
 
 

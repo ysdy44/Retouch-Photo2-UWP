@@ -91,10 +91,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructLeftTail();
             this.ConstructRightTail();
 
-            this.MoreCreateButton.Click += (s, e) =>
-            {
-                this.SettingViewModel.ShowFlyout(DrawPage.MoreCreateFlyout, DrawPage.MoreCreateContent, this, this.MoreCreateButton);
-            };
+            this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);
         }
 
         //Strings

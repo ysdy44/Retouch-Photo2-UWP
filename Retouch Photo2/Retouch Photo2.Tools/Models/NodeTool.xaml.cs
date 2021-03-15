@@ -6,6 +6,7 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Elements;
@@ -285,7 +286,25 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ConstructNodes();
             this.ConstructSmooth();
-            this.MoreButton.Click += (s, e) => this.SettingViewModel.ShowFlyout(this.Flyout, this._PenFlyout, this, this.MoreButton);
+
+            this.MoreButton.Click += (s, e) =>
+            {
+                switch (this.SettingViewModel.DeviceLayoutType)
+                {
+                    case DeviceLayoutType.PC:
+                        this._PenFlyout.Width = double.NaN;
+                        this.Flyout.ShowAt(this.MoreButton);
+                        break;
+                    case DeviceLayoutType.Pad:
+                        this._PenFlyout.Width = double.NaN;
+                        this.Flyout.ShowAt(this);
+                        break;
+                    case DeviceLayoutType.Phone:
+                        this._PenFlyout.Width = this.ActualWidth - 40;
+                        this.Flyout.ShowAt(this);
+                        break;
+                }
+            };
         }
 
     }

@@ -31,6 +31,8 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
 
@@ -62,17 +64,15 @@
                 <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
 
-            <Rectangle Grid.Column="6" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
-
             <!--Select-->
-            <TextBlock x:Name="ClearTextBlock" Grid.Column="7" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="ClearButton" Grid.Column="8" Style="{StaticResource AppRoundedButtonStyle}">
+            <TextBlock x:Name="ClearTextBlock" Grid.Column="6" Style="{StaticResource AppTextBlockStyle}"/>
+            <Button x:Name="ClearButton" Grid.Column="7" Style="{StaticResource AppRoundedButtonStyle}">
                 <FontIcon Glyph="&#xE106;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
             </Button>
         
-        <Rectangle Grid.Column="9" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+        <Rectangle Grid.Column="8" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <toolsElements:ConvertToCurvesButton x:Name="ConvertButton" Grid.Column="10"/>
+        <toolsElements:ConvertToCurvesButton x:Name="ConvertButton" Grid.Column="9"/>
 
     </Grid>
 </Page>

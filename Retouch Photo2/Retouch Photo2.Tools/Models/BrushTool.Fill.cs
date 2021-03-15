@@ -106,10 +106,10 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructFillType()
         {
-            Retouch_Photo2.DrawPage.FillImageCallBack += (photo) =>
+            Retouch_Photo2.DrawPage.FillImage += (photo) =>
             {
                 this.FillTypeChanged(BrushType.Image, photo);
-                this.ShowControl.Invalidate();
+                this.BrushShowControl.Invalidate();
             };
             this.TypeComboBox.FillTypeChanged += (s, brushType) =>
             {
@@ -120,7 +120,7 @@ namespace Retouch_Photo2.Tools.Models
                 else
                 {
                     this.FillTypeChanged(brushType);
-                    this.ShowControl.Invalidate();
+                    this.BrushShowControl.Invalidate();
                 }
             };
         }
@@ -167,7 +167,7 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.None: break;
 
                 case BrushType.Color:
-                    FillColorEllipse.ShowAt(this.ShowControl);
+                    Retouch_Photo2.DrawPage.ShowFill?.Invoke(this, this.BrushShowControl);
                     break;
 
                 case BrushType.LinearGradient:

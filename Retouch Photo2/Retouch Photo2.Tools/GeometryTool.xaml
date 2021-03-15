@@ -6,13 +6,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:strokes="using:Retouch_Photo2.Strokes"
     xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:brushs="using:Retouch_Photo2.Brushs"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
     >
 
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Height="50">
 
             <Border x:Name="IconBorder" Width="50">
                 <!--
@@ -27,11 +28,14 @@
             <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
             <TextBlock x:Name="FillTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:FillColorEllipse />
+            <Button x:Name="FillBrushButton" Style="{StaticResource AppRoundedButtonStyle}">
+                <brushs:ColorEllipse Brush="{x:Bind SelectionViewModel.Fill, Mode=OneWay}"/>
+            </Button>
 
             <TextBlock x:Name="StrokeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <toolsElements:StrokeColorEllipse />
-
+            <Button x:Name="StrokeBrushButton" Style="{StaticResource AppRoundedButtonStyle}">
+                <brushs:ColorEllipse Brush="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}"/>
+            </Button>            
             <strokes:StrokeShowControl x:Name="StrokeShowControl" StrokeStyle="{x:Bind SelectionViewModel.StrokeStyle, Mode=OneWay}"/>
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>

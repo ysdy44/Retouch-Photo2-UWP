@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
@@ -40,17 +41,17 @@ namespace Retouch_Photo2
 
         //@Static       
         /// <summary> Add a <see cref="ImageLayer"/>. </summary>
-        public static Action<Photo> AddImageCallBack;
+        public static Action<Photo> AddImage;
 
         /// <summary> Make <see cref="Retouch_Photo2.Styles.IStyle.Fill"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
-        public static Action<Photo> FillImageCallBack;
+        public static Action<Photo> FillImage;
         /// <summary> Make <see cref="Retouch_Photo2.Styles.IStyle.Stroke"/> to <see cref="IBrush"/> in <see cref="BrushTool"/>. </summary>
-        public static Action<Photo> StrokeImageCallBack;
+        public static Action<Photo> StrokeImage;
 
         /// <summary> Select a image in <see cref= "ImageTool" />. </summary>
-        public static Action<Photo> SelectImageCallBack;
+        public static Action<Photo> SelectImage;
         /// <summary> Replace a image in <see cref= "ImageTool" />. </summary>
-        public static Action<Photo> ReplaceImageCallBack;
+        public static Action<Photo> ReplaceImage;
 
 
         private GalleryMode GalleryMode { get; set; } = GalleryMode.None;
@@ -67,44 +68,65 @@ namespace Retouch_Photo2
                 IReadOnlyList<StorageFile> files = await FileUtil.PickMultipleImageFilesAsync(PickerLocationId.Desktop);
                 await this.CopyMultipleImageFilesAsync(files);
             };
-
-            Photo.FlyoutShow += this.BillboardCanvas.Show;
-            Photo.ItemClick += (sender, photo) =>
-            {
-                GalleryMode mode = this.GalleryMode;
-
-                switch (mode)
-                {
-                    case GalleryMode.None:
-                        return;
-                    case GalleryMode.AddImage:
-                        Retouch_Photo2.DrawPage.AddImageCallBack?.Invoke(photo);//Delegate
-                        break;
-
-                    case GalleryMode.FillImage:
-                        Retouch_Photo2.DrawPage.FillImageCallBack?.Invoke(photo);//Delegate
-                        break;
-                    case GalleryMode.StrokeImage:
-                        Retouch_Photo2.DrawPage.StrokeImageCallBack?.Invoke(photo);//Delegate
-                        break;
-
-                    case GalleryMode.SelectImage:
-                        Retouch_Photo2.DrawPage.SelectImageCallBack?.Invoke(photo);//Delegate
-                        break;
-                    case GalleryMode.ReplaceImage:
-                        Retouch_Photo2.DrawPage.ReplaceImageCallBack?.Invoke(photo);//Delegate
-                        break;
-                    default:
-                        return;
-                }
-
-                this.GalleryDialog.Hide();
-            };
         }
+
         private void ShowGalleryDialog(GalleryMode mode)
         {
             this.GalleryMode = mode;
             this.GalleryDialog.Show();
+        }
+
+
+        private void RegisterGallery()
+        {
+            Photo.FlyoutShow += this.PhotoFlyoutShow;
+            Photo.ItemClick += this.PhotoItemClick;
+
+            Retouch_Photo2.DrawPage.AddImage += this.AddImagePhoto;
+        }
+        private void UnregisterGallery()
+        {
+            Photo.FlyoutShow -= this.PhotoFlyoutShow;
+            Photo.ItemClick -= this.PhotoItemClick;
+
+            Retouch_Photo2.DrawPage.AddImage -= this.AddImagePhoto;
+        }
+
+
+        private void PhotoFlyoutShow(FrameworkElement element, Photo photo)
+        {
+            this.BillboardCanvas.Show(element, photo);
+        }
+        private void PhotoItemClick(FrameworkElement element, Photo photo)
+        {
+            GalleryMode mode = this.GalleryMode;
+
+            switch (mode)
+            {
+                case GalleryMode.None:
+                    return;
+                case GalleryMode.AddImage:
+                    Retouch_Photo2.DrawPage.AddImage?.Invoke(photo);//Delegate
+                    break;
+
+                case GalleryMode.FillImage:
+                    Retouch_Photo2.DrawPage.FillImage?.Invoke(photo);//Delegate
+                    break;
+                case GalleryMode.StrokeImage:
+                    Retouch_Photo2.DrawPage.StrokeImage?.Invoke(photo);//Delegate
+                    break;
+
+                case GalleryMode.SelectImage:
+                    Retouch_Photo2.DrawPage.SelectImage?.Invoke(photo);//Delegate
+                    break;
+                case GalleryMode.ReplaceImage:
+                    Retouch_Photo2.DrawPage.ReplaceImage?.Invoke(photo);//Delegate
+                    break;
+                default:
+                    return;
+            }
+
+            this.GalleryDialog.Hide();
         }
 
 

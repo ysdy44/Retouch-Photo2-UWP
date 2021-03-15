@@ -13,7 +13,7 @@
     >
 
     <Border x:Name="RootGrid" Width="80" CornerRadius="4" BorderThickness="1" BorderBrush="{ThemeResource AppText}" Background="{ThemeResource AppBackground}">
-        <Line x:Name="Line" X1="6" Y1="17" X2="61" Y2="17" StrokeThickness="4" Stroke="{ThemeResource SystemBaseHighColor}" />
+        <Line x:Name="Line" X1="8" Y1="17" X2="68" Y2="17" StrokeThickness="4" Stroke="{ThemeResource SystemBaseHighColor}" />
     </Border>
 
 </UserControl>

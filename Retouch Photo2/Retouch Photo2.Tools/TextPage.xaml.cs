@@ -67,10 +67,8 @@ namespace Retouch_Photo2.Tools
                 this.SetFontText(fontText);
             };
 
-            this.TextButton.Click += (s, e) =>
-            {
-                this.TipViewModel.ShowMenuLayoutAt(MenuType.Text, this.TextButton);
-            };
+            this.TextButton.Click += (s, e) => this.TipViewModel.ShowMenuLayoutAt(MenuType.Text, this.TextButton);
+            
             this.FullScreenButton.Click += (s, e) =>
             {
                 this._vsIsFullScreen = !this._vsIsFullScreen;

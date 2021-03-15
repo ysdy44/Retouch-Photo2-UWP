@@ -75,10 +75,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructHoleRadius1();
             this.ConstructHoleRadius2();
 
-            this.MoreCreateButton.Click += (s, e) =>
-            {
-                this.SettingViewModel.ShowFlyout(DrawPage.MoreCreateFlyout, DrawPage.MoreCreateContent, this, this.MoreCreateButton);
-            };
+            this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);
         }
 
         //Strings

@@ -41,12 +41,15 @@
                 </Button>
             </Flyout>
 
-            <Flyout x:Name="StrokeColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
+            <Flyout x:Name="FillFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <elements:ColorPicker2 x:Name="FilPicker"/>
+            </Flyout>
+            <Flyout x:Name="StrokeFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <elements:ColorPicker2 x:Name="StrokePicker"/>
             </Flyout>
 
-            <Flyout x:Name="_MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <StackPanel x:Name="_MoreTransformContent" Padding="2" MinWidth="300">
+            <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <StackPanel x:Name="MoreTransformContent" Padding="2" MinWidth="300">
 
                     <!--Ratio-->
                     <TextBlock x:Name="RatioTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
@@ -66,8 +69,8 @@
 
                 </StackPanel>
             </Flyout>
-            <Flyout x:Name="_MoreCreateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <StackPanel x:Name="_MoreCreateContent" Padding="2" MinWidth="300" Orientation="Vertical">
+            <Flyout x:Name="MoreCreateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <StackPanel x:Name="MoreCreateContent" Padding="2" MinWidth="300" Orientation="Vertical">
 
                     <!--Square-->
                     <TextBlock x:Name="SquareTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
@@ -87,7 +90,6 @@
 
                 </StackPanel>
             </Flyout>
-
 
         </ResourceDictionary>
     </Page.Resources>

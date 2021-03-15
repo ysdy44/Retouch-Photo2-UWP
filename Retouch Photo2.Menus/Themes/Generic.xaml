@@ -10,11 +10,9 @@
     </ResourceDictionary.MergedDictionaries>-->
 
     <Style TargetType="local:MenuButton">
-        <Setter Property="Margin" Value="2,4"/>
+        <Setter Property="Margin" Value="{StaticResource AppMargin}"/>
         <Setter Property="Width" Value="60"/>
-        <Setter Property="Height" Value="Auto"/>
-        <Setter Property="MinWidth" Value="50"/>
-        <Setter Property="Padding" Value="4,0"/>
+        <Setter Property="Height" Value="{StaticResource AppRoundedHeight}"/>
         <Setter Property="Foreground" Value="{ThemeResource SystemBaseMediumLowColor}"/>
         <Setter Property="Background" Value="{ThemeResource AppFill}"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
