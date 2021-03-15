@@ -35,7 +35,7 @@
 
             <DoubleAnimation Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(UIElement.Width)" From="70" To="220" Duration="0:0:0.2" EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
-                    <CircleEase EasingMode="EaseInOut"/>
+                    <CircleEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
@@ -59,7 +59,7 @@
 
             <DoubleAnimation Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(UIElement.Width)" From="220" To="70" Duration="0:0:0.2"  EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
-                    <CircleEase EasingMode="EaseInOut"/>
+                    <CircleEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
@@ -253,14 +253,14 @@
                     <!--Phone>PhoneShowLeft-->
                     <VisualTransition From="Phone" To="PhoneShowLeft" GeneratedDuration="0:0:0.2">
                         <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
 
                             <!--LeftIcon-->
                             <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="TranslateX" From="0" To="70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_LeftIcon" Storyboard.TargetProperty="Background" Duration="0">
@@ -270,7 +270,7 @@
                             <!--Left-->
                             <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
@@ -281,7 +281,7 @@
                             <!--DismissOverlay-->
                             <DoubleAnimation Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Visibility" Duration="0">
@@ -293,21 +293,21 @@
                     <!--PhoneShowLeft>Phone-->
                     <VisualTransition From="PhoneShowLeft" To="Phone" GeneratedDuration="0:0:0.2">
                         <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
 
                             <!--LeftIcon-->
                             <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="TranslateX" From="70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Left-->
                             <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="0" To="-70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
@@ -318,7 +318,7 @@
                             <!--DismissOverlay-->
                             <DoubleAnimation Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Visibility" Duration="0:0:0.2">
@@ -331,14 +331,14 @@
                     <!--Phone>PhoneShowRight-->
                     <VisualTransition From="Phone" To="PhoneShowRight" GeneratedDuration="0:0:0.2">
                         <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
 
                             <!--RightIcon-->
                             <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="TranslateX" From="0" To="-220" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_RightIcon" Storyboard.TargetProperty="Background" Duration="0">
@@ -352,14 +352,14 @@
                             <!--Right-->
                             <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="220" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--DismissOverlay-->
                             <DoubleAnimation Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Visibility" Duration="0">
@@ -371,14 +371,14 @@
                     <!--PhoneShowRight>Phone-->
                     <VisualTransition From="PhoneShowRight" To="Phone" GeneratedDuration="0:0:0.2">
                         <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
 
                             <!--RightIcon-->
                             <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="TranslateX" From="-220" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
@@ -389,14 +389,14 @@
                             <!--Right-->
                             <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="0" To="220" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--DismissOverlay-->
                             <DoubleAnimation Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DismissOverlay" Storyboard.TargetProperty="Visibility" Duration="0:0:0.2">
@@ -410,42 +410,42 @@
                     <!--Pad>Phone-->
                     <VisualTransition From="Pad" To="Phone" GeneratedDuration="0:0:0.2">
                         <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
 
                             <!--Left-->
                             <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="0" To="-70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
                             <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="0" To="70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Foot-->
                             <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleX" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleY" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleX" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleY" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
@@ -496,42 +496,42 @@
                     <!--Phone>Pad-->
                     <VisualTransition From="Phone" To="Pad" GeneratedDuration="0:0:0.2">
                         <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
 
                             <!--Left-->
                             <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
                             <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Foot-->
                             <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleX" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleY" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleX" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleY" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
@@ -590,41 +590,41 @@
                     <!--Phone>FullScreen-->
                     <VisualTransition From="Phone" To="FullScreen" GeneratedDuration="0:0:0.2">
                         <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
 
                             <!--Foot-->
                             <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty="Y" From="0" To="70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleX" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleY" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleX" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleY" From="1" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Head-->
                             <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="0" To="-70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
@@ -633,41 +633,41 @@
                     <!--FullScreen>Phone-->
                     <VisualTransition From="FullScreen" To="Phone" GeneratedDuration="0:0:0.2">
                         <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
 
                             <!--Foot-->
                             <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty="Y" From="70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleX" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetName="LeftIconTransform" Storyboard.TargetProperty="ScaleY" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleX" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="ScaleY" From="0" To="1" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Head-->
                             <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
@@ -678,14 +678,14 @@
                     <!--Pad>FullScreen-->
                     <VisualTransition From="Pad" To="FullScreen" GeneratedDuration="0:0:0.2">
                         <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
 
                             <!--Foot-->
                             <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty="Y" From="0" To="70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty="MinWidth" Duration="0">
@@ -695,20 +695,20 @@
                             <!--Head-->
                             <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="0" To="-70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Left-->
                             <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="0" To="-70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
                             <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="0" To="220" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
@@ -759,14 +759,14 @@
                     <!--FullScreen>Pad-->
                     <VisualTransition From="FullScreen" To="Pad" GeneratedDuration="0:0:0.2">
                         <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
 
                             <!--Foot-->
                             <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty="Y" From="70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty="MinWidth" Duration="0">
@@ -776,20 +776,20 @@
                             <!--Head-->
                             <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Left-->
                             <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
                             <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="220" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
@@ -842,14 +842,14 @@
                     <!--PC>FullScreen-->
                     <VisualTransition From="PC" To="FullScreen" GeneratedDuration="0:0:0.2">
                         <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
 
                             <!--Foot-->
                             <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty="Y" From="0" To="70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty="MinWidth" Duration="0">
@@ -859,20 +859,20 @@
                             <!--Head-->
                             <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="0" To="-70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Left-->
                             <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="0" To="-70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
                             <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="0" To="220" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
@@ -922,14 +922,14 @@
                     <!--FullScreen>PC-->
                     <VisualTransition From="FullScreen" To="PC" GeneratedDuration="0:0:0.2">
                         <VisualTransition.GeneratedEasingFunction>
-                            <ExponentialEase Exponent="4.5" EasingMode="EaseIn"/>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
                         </VisualTransition.GeneratedEasingFunction>
                         <Storyboard>
 
                             <!--Foot-->
                             <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty="Y" From="70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty="MinWidth" Duration="0">
@@ -939,20 +939,20 @@
                             <!--Head-->
                             <DoubleAnimation Storyboard.TargetName="HeadTransform" Storyboard.TargetProperty="Y" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
                             <!--Left-->
                             <DoubleAnimation Storyboard.TargetName="LeftTransform" Storyboard.TargetProperty="X" From="-70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
                             <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="220" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
-                                    <CircleEase EasingMode="EaseInOut"/>
+                                    <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
 
