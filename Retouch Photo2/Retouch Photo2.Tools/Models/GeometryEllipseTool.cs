@@ -27,9 +27,11 @@ namespace Retouch_Photo2.Tools.Models
         public ToolGroupType GroupType => ToolGroupType.Tool;
         public string Title { get; set; }
         public ControlTemplate Icon { get; set; }
-        public FrameworkElement Page { get; } = new GeometryPage(ToolType.GeometryEllipse);
+        public FrameworkElement Page => this.GeometryPage;
         public bool IsSelected { get; set; }
-        public bool IsOpen { get; set; }
+        public bool IsOpen { get => this.GeometryPage.IsOpen; set => this.GeometryPage.IsOpen = value; }
+
+        readonly GeometryPage GeometryPage = new GeometryPage(ToolType.GeometryEllipse);
 
 
         public override ILayer CreateLayer(Transformer transformer)

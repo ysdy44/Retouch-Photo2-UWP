@@ -53,11 +53,22 @@
 
         <Rectangle Grid.Column="4" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <toolsElements:ConvertToCurvesButton x:Name="ConvertButton" Grid.Column="5"/>
+        <Button x:Name="ConvertToCurvesButton" Grid.Column="5" Style="{StaticResource AppRoundedButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="ConvertToCurvesToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <Button.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ConvertToCurvesIcon.xaml"/>
+            </Button.Resources>
+            <ContentControl Template="{StaticResource ConvertToCurvesIcon}"/>
+        </Button>
 
         <Rectangle Grid.Column="6" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
         <Button x:Name="MoreCreateButton" Grid.Column="7" Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="MoreCreateToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
         </Button>
 

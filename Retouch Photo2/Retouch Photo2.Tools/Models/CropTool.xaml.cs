@@ -187,7 +187,8 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructStrings();
 
             this.ConstructReset();
-            this.ConstructFit();
+            this.ConstructFit(); 
+            this.ConstructClear();
         }
 
     }
@@ -203,8 +204,9 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ResetTextBlock.Text = resource.GetString("Tools_Crop_Reset");//Reset Crop
-            this.FitTextBlock.Text = resource.GetString("Tools_Crop_Fit");//Fit Crop
+            this.ResetTextBlock.Text = resource.GetString("Tools_Crop_Reset");
+            this.FitTextBlock.Text = resource.GetString("Tools_Crop_Fit");
+            this.ClearTextBlock.Text = resource.GetString("Tools_Crop_Clear");
         }
 
         private void ConstructReset()
@@ -212,7 +214,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ResetButton.Click += (s, e) =>
             {
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_CropTransformer);
+                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_ResetTransformer);
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -252,7 +254,7 @@ namespace Retouch_Photo2.Tools.Models
             this.FitButton.Click += (s, e) =>
             {
                 //History
-                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_CropTransformer);
+                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_FitTransformer);
 
                 //Selection
                 this.SelectionViewModel.SetValue((layerage) =>
@@ -278,6 +280,44 @@ namespace Retouch_Photo2.Tools.Models
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
                         layer.Transform.Transformer = cropTransformer;
+                        layer.Transform.IsCrop = false;
+                    }
+                });
+
+                //History
+                this.ViewModel.HistoryPush(history);
+
+                this.ViewModel.Invalidate();//Invalidate
+            };
+        }
+
+        private void ConstructClear()
+        {
+            this.ClearButton.Click += (s, e) =>
+            {
+                //History
+                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_ClearTransformer);
+
+                //Selection
+                this.SelectionViewModel.SetValue((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+
+                    if (layer.Transform.IsCrop)
+                    {
+                        //History
+                        var previous = true;
+                        history.UndoAction += () =>
+                        {
+                            //Refactoring
+                            layer.IsRefactoringRender = true;
+                            layer.IsRefactoringIconRender = true;
+                            layer.Transform.IsCrop = previous;
+                        };
+
+                        //Refactoring
+                        layer.IsRefactoringRender = true;
+                        layer.IsRefactoringIconRender = true;
                         layer.Transform.IsCrop = false;
                     }
                 });

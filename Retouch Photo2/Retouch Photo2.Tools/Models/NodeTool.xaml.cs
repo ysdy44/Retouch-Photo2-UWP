@@ -43,11 +43,10 @@ namespace Retouch_Photo2.Tools.Models
         public string Title { get; set; }
         public ControlTemplate Icon { get; set; }
         public FrameworkElement Page => this.NodePage;
-
-        readonly NodePage NodePage = new NodePage();
         public bool IsSelected { get; set; }
-        public bool IsOpen { get; set; }
-
+        public bool IsOpen { get => this.NodePage.MoreNodeToolTip.IsOpen; set => this.NodePage.MoreNodeToolTip.IsOpen = value; }
+        readonly NodePage NodePage = new NodePage();
+        
 
         Layerage Layerage;
         NodeCollectionMode NodeCollectionMode;
@@ -274,6 +273,9 @@ namespace Retouch_Photo2.Tools.Models
         /// <summary> PenPage's Flyout. </summary>
         public NodeModeControl PenFlyout => this._PenFlyout;
 
+        /// <summary> MoreNodeButton's ToolTip. </summary>
+        public ToolTip MoreNodeToolTip => this._MoreNodeToolTip;
+        
 
         //@Construct
         /// <summary>
@@ -287,13 +289,13 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructNodes();
             this.ConstructSmooth();
 
-            this.MoreButton.Click += (s, e) =>
+            this.MoreNodeButton.Click += (s, e) =>
             {
                 switch (this.SettingViewModel.DeviceLayoutType)
                 {
                     case DeviceLayoutType.PC:
                         this._PenFlyout.Width = double.NaN;
-                        this.Flyout.ShowAt(this.MoreButton);
+                        this.Flyout.ShowAt(this.MoreNodeButton);
                         break;
                     case DeviceLayoutType.Pad:
                         this._PenFlyout.Width = double.NaN;
@@ -324,6 +326,8 @@ namespace Retouch_Photo2.Tools.Models
             this.InsertTextBlock.Text = resource.GetString("Tools_Node_Insert");
             this.SharpTextBlock.Text = resource.GetString("Tools_Node_Sharp");
             this.SmoothTextBlock.Text = resource.GetString("Tools_Node_Smooth");
+       
+            this._MoreNodeToolTip.Content = resource.GetString("Tools_Node_MoreNode");
         }
 
         private void ConstructNodes()

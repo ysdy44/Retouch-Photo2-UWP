@@ -121,7 +121,6 @@
 <data name='$DrawPage_Setup' xml:space='preserve'><value>设定</value></data>
 <data name='$DrawPage_Snap' xml:space='preserve'><value>吸附</value></data>
 <data name='$DrawPage_Ruler' xml:space='preserve'><value>标尺</value></data>
-<data name='$DrawPage_FullScreen' xml:space='preserve'><value>全屏</value></data>
 <data name='$DrawPage_Tip' xml:space='preserve'><value>提示</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>图库</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>切换布局宽度</value></data>
@@ -174,6 +173,7 @@
 <data name='Tools_Crop' xml:space='preserve'><value>矢量裁剪</value></data>
 <data name='Tools_Crop_Reset' xml:space='preserve'><value>重置裁剪</value></data>
 <data name='Tools_Crop_Fit' xml:space='preserve'><value>适合裁剪</value></data>
+<data name='Tools_Crop_Clear' xml:space='preserve'><value>清除裁切</value></data>
 <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>步</value></data>
 <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>拐角</value></data>
 <data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>中心点</value></data>
@@ -245,12 +245,12 @@
 <data name='Operates_Arrange_ForwardOne' xml:space='preserve'><value>向前移动一个</value></data>
 <data name='Operates_Arrange_MoveBack' xml:space='preserve'><value>移到后面</value></data>
 <data name='Operates_Horizontally' xml:space='preserve'><value>水平对齐</value></data>
-<data name='Operates_Horizontally_Space' xml:space='preserve'><value>水平间隔</value></data>
+<data name='Operates_Horizontally_HorizontallySpace' xml:space='preserve'><value>水平间隔</value></data>
 <data name='Operates_Vertically' xml:space='preserve'><value>垂直对齐</value></data>
 <data name='Operates_Vertically_Top' xml:space='preserve'><value>顶部对齐</value></data>
 <data name='Operates_Vertically_Middle' xml:space='preserve'><value>中间对齐</value></data>
 <data name='Operates_Vertically_Bottom' xml:space='preserve'><value>底部对齐</value></data>
-<data name='Operates_Vertically_Space' xml:space='preserve'><value>垂直间隔</value></data>
+<data name='Operates_Vertically_VerticallySpace' xml:space='preserve'><value>垂直间隔</value></data>
 <data name='Adjustments_Gray' xml:space='preserve'><value>黑白</value></data>
 <data name='Adjustments_Invert' xml:space='preserve'><value>反色</value></data>
 <data name='Adjustments_Brightness' xml:space='preserve'><value>亮度</value></data>
@@ -352,7 +352,10 @@
 <data name='Historys_LayersTransformAdd_Move' xml:space='preserve'><value>移动</value></data>
 <data name='Historys_LayersTransformMultiplies_Transform' xml:space='preserve'><value>变换</value></data>
 <data name='Historys_LayersProperty_SetTransform_IsCrop' xml:space='preserve'><value>设置变换是否裁剪</value></data>
-<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>设置变换裁剪</value></data>
+<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>裁切变换</value></data>
+<data name='Historys_LayersProperty_SetTransform_ResetTransformer' xml:space='preserve'><value>重置变换裁剪</value></data>
+<data name='Historys_LayersProperty_SetTransform_FitTransformer' xml:space='preserve'><value>填充变换裁剪</value></data>
+<data name='Historys_LayersProperty_SetTransform_ClearTransformer' xml:space='preserve'><value>清除变换裁剪</value></data>
 <data name='Historys_LayersProperty_SetStyle' xml:space='preserve'><value>设置样式</value></data>
 <data name='Historys_LayersProperty_SetStyle_Fill' xml:space='preserve'><value>设置填充</value></data>
 <data name='Historys_LayersProperty_SetStyle_Fill_Extend' xml:space='preserve'><value>设置填充扩展</value></data>
@@ -531,6 +534,7 @@
 <data name='$MainPage_Duplicate_Close' xml:space='preserve'><value>取消</value></data>
 <data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>副本</value></data>
 <data name='$DrawPage_Export' xml:space='preserve'><value>导出</value></data>
+<data name='$DrawPage_FullScreen' xml:space='preserve'><value>全屏</value></data>
 <data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>取消</value></data>
 <data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>确定</value></data>
 <data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>宽度</value></data>
@@ -545,6 +549,9 @@
 <data name='Tools_Fill' xml:space='preserve'><value>填充</value></data>
 <data name='Tools_Stroke' xml:space='preserve'><value>描边</value></data>
 <data name='Tools_ConvertToCurves' xml:space='preserve'><value>转换为曲线</value></data>
+<data name='Tools_More' xml:space='preserve'><value>更多</value></data>
+<data name='Tools_MoreTransform' xml:space='preserve'><value>更多</value></data>
+<data name='Tools_MoreCreate' xml:space='preserve'><value>更多</value></data>
 <data name='Tools_Brush' xml:space='preserve'><value>笔刷</value></data>
 <data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>填充</value></data>
 <data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>描边</value></data>
@@ -559,9 +566,11 @@
 <data name='Tools_GeometryRectangle' xml:space='preserve'><value>矩形</value></data>
 <data name='Tools_GeometryEllipse' xml:space='preserve'><value>椭圆</value></data>
 <data name='Tools_Node_Remove' xml:space='preserve'><value>移除</value></data>
+<data name='Tools_Node_MoreNode' xml:space='preserve'><value>更多</value></data>
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>角度</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>艺术文本</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>边框文本</value></data>
+<data name='Tools_Text_FullScreen' xml:space='preserve'><value>全屏</value></data>
 <data name='Tools_Image' xml:space='preserve'><value>图像</value></data>
 <data name='Tools_PatternGrid' xml:space='preserve'><value>网格</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>类型</value></data>

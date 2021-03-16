@@ -121,7 +121,6 @@
 <data name='$DrawPage_Setup' xml:space='preserve'><value>Configurar</value></data>
 <data name='$DrawPage_Snap' xml:space='preserve'><value>Estalando</value></data>
 <data name='$DrawPage_Ruler' xml:space='preserve'><value>Governante</value></data>
-<data name='$DrawPage_FullScreen' xml:space='preserve'><value>Tela cheia</value></data>
 <data name='$DrawPage_Tip' xml:space='preserve'><value>Dica</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>Galeria</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>Mudar a largura do layout</value></data>
@@ -174,6 +173,7 @@
 <data name='Tools_Crop' xml:space='preserve'><value>Colheita de vetor</value></data>
 <data name='Tools_Crop_Reset' xml:space='preserve'><value>Redefinir corte</value></data>
 <data name='Tools_Crop_Fit' xml:space='preserve'><value>Corte adequado</value></data>
+<data name='Tools_Crop_Clear' xml:space='preserve'><value>Corte limpo</value></data>
 <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>Etapa</value></data>
 <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>Canto</value></data>
 <data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>Ponto central</value></data>
@@ -245,12 +245,12 @@
 <data name='Operates_Arrange_ForwardOne' xml:space='preserve'><value>Forward One</value></data>
 <data name='Operates_Arrange_MoveBack' xml:space='preserve'><value>Mover para trás</value></data>
 <data name='Operates_Horizontally' xml:space='preserve'><value>Alinhar horizontalmente</value></data>
-<data name='Operates_Horizontally_Space' xml:space='preserve'><value>Espaço horizontalmente</value></data>
+<data name='Operates_Horizontally_HorizontallySpace' xml:space='preserve'><value>Espaço horizontalmente</value></data>
 <data name='Operates_Vertically' xml:space='preserve'><value>Alinhar verticalmente</value></data>
 <data name='Operates_Vertically_Top' xml:space='preserve'><value>Alinhar no topo</value></data>
 <data name='Operates_Vertically_Middle' xml:space='preserve'><value>Alinhar ao Meio</value></data>
 <data name='Operates_Vertically_Bottom' xml:space='preserve'><value>Alinhar Fundo</value></data>
-<data name='Operates_Vertically_Space' xml:space='preserve'><value>Espaço Verticalmente</value></data>
+<data name='Operates_Vertically_VerticallySpace' xml:space='preserve'><value>Espaço Verticalmente</value></data>
 <data name='Adjustments_Gray' xml:space='preserve'><value>cinza</value></data>
 <data name='Adjustments_Invert' xml:space='preserve'><value>Invertido</value></data>
 <data name='Adjustments_Brightness' xml:space='preserve'><value>Brilho</value></data>
@@ -352,7 +352,10 @@
 <data name='Historys_LayersTransformAdd_Move' xml:space='preserve'><value>Jogada</value></data>
 <data name='Historys_LayersTransformMultiplies_Transform' xml:space='preserve'><value>Transformar</value></data>
 <data name='Historys_LayersProperty_SetTransform_IsCrop' xml:space='preserve'><value>Defina se a transformação é cortada</value></data>
-<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>Definir corte de transformação</value></data>
+<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>Transformação de colheita</value></data>
+<data name='Historys_LayersProperty_SetTransform_ResetTransformer' xml:space='preserve'><value>Redefinir corte de transformação</value></data>
+<data name='Historys_LayersProperty_SetTransform_FitTransformer' xml:space='preserve'><value>Corte de transformação de ajuste</value></data>
+<data name='Historys_LayersProperty_SetTransform_ClearTransformer' xml:space='preserve'><value>Limpar corte de transformação</value></data>
 <data name='Historys_LayersProperty_SetStyle' xml:space='preserve'><value>Definir estilo</value></data>
 <data name='Historys_LayersProperty_SetStyle_Fill' xml:space='preserve'><value>Definir preenchimento</value></data>
 <data name='Historys_LayersProperty_SetStyle_Fill_Extend' xml:space='preserve'><value>Definir extensão de preenchimento</value></data>
@@ -531,6 +534,7 @@
 <data name='$MainPage_Duplicate_Close' xml:space='preserve'><value>Cancelar</value></data>
 <data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>Duplicado</value></data>
 <data name='$DrawPage_Export' xml:space='preserve'><value>Exportar</value></data>
+<data name='$DrawPage_FullScreen' xml:space='preserve'><value>Tela cheia</value></data>
 <data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>Cancelar</value></data>
 <data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>OK</value></data>
 <data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>Largura</value></data>
@@ -545,6 +549,9 @@
 <data name='Tools_Fill' xml:space='preserve'><value>Preencher</value></data>
 <data name='Tools_Stroke' xml:space='preserve'><value>Acidente vascular encefálico</value></data>
 <data name='Tools_ConvertToCurves' xml:space='preserve'><value>Converter para curvas</value></data>
+<data name='Tools_More' xml:space='preserve'><value>Mais</value></data>
+<data name='Tools_MoreTransform' xml:space='preserve'><value>Mais</value></data>
+<data name='Tools_MoreCreate' xml:space='preserve'><value>Mais</value></data>
 <data name='Tools_Brush' xml:space='preserve'><value>Escovar</value></data>
 <data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>Preencher</value></data>
 <data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>Acidente vascular encefálico</value></data>
@@ -559,9 +566,11 @@
 <data name='Tools_GeometryRectangle' xml:space='preserve'><value>Retângulo</value></data>
 <data name='Tools_GeometryEllipse' xml:space='preserve'><value>Elipse</value></data>
 <data name='Tools_Node_Remove' xml:space='preserve'><value>Retirar</value></data>
+<data name='Tools_Node_MoreNode' xml:space='preserve'><value>Mais</value></data>
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>Ângulo</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>Texto Artístico</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>Texto do Quadro</value></data>
+<data name='Tools_Text_FullScreen' xml:space='preserve'><value>Tela cheia</value></data>
 <data name='Tools_Image' xml:space='preserve'><value>Imagem</value></data>
 <data name='Tools_PatternGrid' xml:space='preserve'><value>Rede</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>Modelo</value></data>

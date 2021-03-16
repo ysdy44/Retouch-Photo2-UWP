@@ -63,10 +63,16 @@
                  Text="{x:Bind SelectionViewModel.FontText, Mode=OneWay}"/>
 
         <Button x:Name="TextButton" Grid.Column="0" Grid.Row="1" Style="{StaticResource AppRoundedButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="TextToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE185;" FontSize="24" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
         </Button>
 
         <Button x:Name="FullScreenButton" Grid.Column="2" Grid.Row="1" Style="{StaticResource AppRoundedButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="FullScreenToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
             <FontIcon x:Name="FullScreenFontIcon" Glyph="&#xE740;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
         </Button>
 

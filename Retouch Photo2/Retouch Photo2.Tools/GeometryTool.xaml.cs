@@ -63,6 +63,23 @@ namespace Retouch_Photo2.Tools
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "GeometryPage" />'s IsOpen. </summary>
+        public bool IsOpen
+        {
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "GeometryPage.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(GeometryPage), new PropertyMetadata(false));
+
+
+        #endregion
+
+
         //@Construct
         /// <summary>
         /// Initializes a GeometryPage. 
@@ -114,6 +131,12 @@ namespace Retouch_Photo2.Tools
 
             this.FillTextBlock.Text = resource.GetString("Tools_Fill");
             this.StrokeTextBlock.Text = resource.GetString("Tools_Stroke");
+            
+            this.StrokeShowToolTip.Content = resource.GetString("Menus_Stroke");
+
+            this.ConvertToCurvesToolTip.Content = resource.GetString("Tools_ConvertToCurves");
+
+            this.MoreCreateToolTip.Content = resource.GetString("Tools_MoreCreate");
         }
 
     }

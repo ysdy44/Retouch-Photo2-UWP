@@ -274,9 +274,6 @@
     <Compile Include="%24MainPages\MainPage.NewAndOpen.cs" />
     <Compile Include="%24MainPages\MainPage.ProjectViewItems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Retouch Photo2.Tools\Elements\ConvertToCurvesButton.xaml.cs">
-      <DependentUpon>ConvertToCurvesButton.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Retouch Photo2.Tools\ModelGeometrys\GeometryArrowTool.xaml.cs">
       <DependentUpon>GeometryArrowTool.xaml</DependentUpon>
     </Compile>
@@ -592,10 +589,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="%24SettingPages\SettingPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Retouch Photo2.Tools\Elements\ConvertToCurvesButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

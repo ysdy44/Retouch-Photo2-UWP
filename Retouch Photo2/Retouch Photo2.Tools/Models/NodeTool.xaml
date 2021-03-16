@@ -88,7 +88,10 @@
 
         <Rectangle Grid.Column="11" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <Button x:Name="MoreButton" Grid.Column="12" Style="{StaticResource AppRoundedButtonStyle}">
+        <Button x:Name="MoreNodeButton" Grid.Column="12" Style="{StaticResource AppRoundedButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="_MoreNodeToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
         </Button>
 

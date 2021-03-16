@@ -121,7 +121,6 @@
 <data name='$DrawPage_Setup' xml:space='preserve'><value>セットアップ</value></data>
 <data name='$DrawPage_Snap' xml:space='preserve'><value>スナップ</value></data>
 <data name='$DrawPage_Ruler' xml:space='preserve'><value>ルーラー</value></data>
-<data name='$DrawPage_FullScreen' xml:space='preserve'><value>全画面表示</value></data>
 <data name='$DrawPage_Tip' xml:space='preserve'><value>ヒント</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>ギャラリー</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>スイッチのレイアウト幅</value></data>
@@ -174,6 +173,7 @@
 <data name='Tools_Crop' xml:space='preserve'><value>ベクトル作物</value></data>
 <data name='Tools_Crop_Reset' xml:space='preserve'><value>作物をリセット</value></data>
 <data name='Tools_Crop_Fit' xml:space='preserve'><value>フィットクロップ</value></data>
+<data name='Tools_Crop_Clear' xml:space='preserve'><value>明確な作物</value></data>
 <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>ステップ</value></data>
 <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>コーナー</value></data>
 <data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>中心点</value></data>
@@ -245,12 +245,12 @@
 <data name='Operates_Arrange_ForwardOne' xml:space='preserve'><value>フォワードワン</value></data>
 <data name='Operates_Arrange_MoveBack' xml:space='preserve'><value>戻る</value></data>
 <data name='Operates_Horizontally' xml:space='preserve'><value>水平に揃える</value></data>
-<data name='Operates_Horizontally_Space' xml:space='preserve'><value>水平方向のスペース</value></data>
+<data name='Operates_Horizontally_HorizontallySpace' xml:space='preserve'><value>水平方向のスペース</value></data>
 <data name='Operates_Vertically' xml:space='preserve'><value>垂直に揃える</value></data>
 <data name='Operates_Vertically_Top' xml:space='preserve'><value>上を揃える</value></data>
 <data name='Operates_Vertically_Middle' xml:space='preserve'><value>中央に揃える</value></data>
 <data name='Operates_Vertically_Bottom' xml:space='preserve'><value>下に揃える</value></data>
-<data name='Operates_Vertically_Space' xml:space='preserve'><value>垂直方向のスペース</value></data>
+<data name='Operates_Vertically_VerticallySpace' xml:space='preserve'><value>垂直方向のスペース</value></data>
 <data name='Adjustments_Gray' xml:space='preserve'><value>グレー</value></data>
 <data name='Adjustments_Invert' xml:space='preserve'><value>反転</value></data>
 <data name='Adjustments_Brightness' xml:space='preserve'><value>輝度</value></data>
@@ -352,7 +352,10 @@
 <data name='Historys_LayersTransformAdd_Move' xml:space='preserve'><value>移動</value></data>
 <data name='Historys_LayersTransformMultiplies_Transform' xml:space='preserve'><value>変換</value></data>
 <data name='Historys_LayersProperty_SetTransform_IsCrop' xml:space='preserve'><value>変換をトリミングするかどうかを設定します</value></data>
-<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>変換作物を設定する</value></data>
+<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>作物変換</value></data>
+<data name='Historys_LayersProperty_SetTransform_ResetTransformer' xml:space='preserve'><value>変換クロップをリセット</value></data>
+<data name='Historys_LayersProperty_SetTransform_FitTransformer' xml:space='preserve'><value>変換作物に合わせる</value></data>
+<data name='Historys_LayersProperty_SetTransform_ClearTransformer' xml:space='preserve'><value>明確な変換作物</value></data>
 <data name='Historys_LayersProperty_SetStyle' xml:space='preserve'><value>スタイルを設定する</value></data>
 <data name='Historys_LayersProperty_SetStyle_Fill' xml:space='preserve'><value>塗りつぶしを設定</value></data>
 <data name='Historys_LayersProperty_SetStyle_Fill_Extend' xml:space='preserve'><value>塗りつぶし延長を設定</value></data>
@@ -531,6 +534,7 @@
 <data name='$MainPage_Duplicate_Close' xml:space='preserve'><value>キャンセル</value></data>
 <data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>複製</value></data>
 <data name='$DrawPage_Export' xml:space='preserve'><value>書き出す</value></data>
+<data name='$DrawPage_FullScreen' xml:space='preserve'><value>全画面表示</value></data>
 <data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>キャンセル</value></data>
 <data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>OK</value></data>
 <data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>幅</value></data>
@@ -545,6 +549,9 @@
 <data name='Tools_Fill' xml:space='preserve'><value>塗りつぶし</value></data>
 <data name='Tools_Stroke' xml:space='preserve'><value>脳卒中</value></data>
 <data name='Tools_ConvertToCurves' xml:space='preserve'><value>曲線に変換する</value></data>
+<data name='Tools_More' xml:space='preserve'><value>もっと</value></data>
+<data name='Tools_MoreTransform' xml:space='preserve'><value>もっと</value></data>
+<data name='Tools_MoreCreate' xml:space='preserve'><value>もっと</value></data>
 <data name='Tools_Brush' xml:space='preserve'><value>みがきます</value></data>
 <data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>塗りつぶし</value></data>
 <data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>脳卒中</value></data>
@@ -559,9 +566,11 @@
 <data name='Tools_GeometryRectangle' xml:space='preserve'><value>矩形</value></data>
 <data name='Tools_GeometryEllipse' xml:space='preserve'><value>楕円</value></data>
 <data name='Tools_Node_Remove' xml:space='preserve'><value>削除する</value></data>
+<data name='Tools_Node_MoreNode' xml:space='preserve'><value>もっと</value></data>
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>角度</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>芸術的なテキスト</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>フレームテキスト</value></data>
+<data name='Tools_Text_FullScreen' xml:space='preserve'><value>全画面表示</value></data>
 <data name='Tools_Image' xml:space='preserve'><value>画像</value></data>
 <data name='Tools_PatternGrid' xml:space='preserve'><value>グリッド</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>タイプ</value></data>

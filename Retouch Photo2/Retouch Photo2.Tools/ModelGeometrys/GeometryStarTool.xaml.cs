@@ -41,9 +41,10 @@ namespace Retouch_Photo2.Tools.Models
         public ToolGroupType GroupType => ToolGroupType.Geometry;
         public string Title { get; set; }
         public ControlTemplate Icon { get; set; }
-        public FrameworkElement Page { get; } = new GeometryStarPage();
+        public FrameworkElement Page => this.GeometryStarPage;
         public bool IsSelected { get; set; }
-        public bool IsOpen { get; set; }
+        public bool IsOpen { get => this.GeometryStarPage.IsOpen; set => this.GeometryStarPage.IsOpen = value; }
+        readonly GeometryStarPage GeometryStarPage = new GeometryStarPage();
 
 
         public override ILayer CreateLayer(Transformer transformer)
@@ -69,11 +70,28 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Converter
         private int InnerRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
+
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "GeometryStarPage" />'s IsOpen. </summary>
+        public bool IsOpen
+        {
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "GeometryStarPage.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(GeometryStarPage), new PropertyMetadata(false));
+
+
+        #endregion
 
 
         //@Construct
@@ -89,6 +107,16 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructPoints2();
             this.ConstructInnerRadius1();
             this.ConstructInnerRadius2();
+
+            this.ConvertToCurvesButton.Click += (s, e) =>
+            {
+                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
+
+                this.MethodViewModel.MethodConvertToCurves();
+
+                //Change tools group value.
+                this.TipViewModel.ToolType = ToolType.Node;
+            };
 
             this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);
         }

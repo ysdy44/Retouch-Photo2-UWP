@@ -29,9 +29,10 @@ namespace Retouch_Photo2.Tools.Models
         public ToolGroupType GroupType => ToolGroupType.Geometry;
         public string Title { get; set; }
         public ControlTemplate Icon { get; set; }
-        public FrameworkElement Page { get; } = new GeometryRoundRectPage();
+        public FrameworkElement Page => this.GeometryRoundRectPage;
         public bool IsSelected { get; set; }
-        public bool IsOpen { get; set; }
+        public bool IsOpen { get => this.GeometryRoundRectPage.IsOpen; set => this.GeometryRoundRectPage.IsOpen = value; }
+        readonly GeometryRoundRectPage GeometryRoundRectPage = new GeometryRoundRectPage();
 
 
         public override ILayer CreateLayer(Transformer transformer)
@@ -57,10 +58,27 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
 
         //@Converter
         private int CornerToNumberConverter(float corner) => (int)(corner * 100.0f);
+
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "GeometryRoundRectPage" />'s IsOpen. </summary>
+        public bool IsOpen
+        {
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "GeometryRoundRectPage.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(GeometryRoundRectPage), new PropertyMetadata(false));
+
+
+        #endregion
 
 
         //@Construct
@@ -75,6 +93,16 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructCorner1();
             this.ConstructCorner2();
 
+            this.ConvertToCurvesButton.Click += (s, e) =>
+            {
+                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
+
+                this.MethodViewModel.MethodConvertToCurves();
+
+                //Change tools group value.
+                this.TipViewModel.ToolType = ToolType.Node;
+            };
+
             this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);
         }
 
@@ -84,6 +112,10 @@ namespace Retouch_Photo2.Tools.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.CornerTextBlock.Text = resource.GetString("Tools_GeometryRoundRect_Corner");
+            
+            this.ConvertToCurvesToolTip.Content = resource.GetString("Tools_ConvertToCurves");
+
+            this.MoreCreateToolTip.Content = resource.GetString("Tools_MoreCreate");
         }
     }
 

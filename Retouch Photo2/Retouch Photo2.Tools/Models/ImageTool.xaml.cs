@@ -37,10 +37,9 @@ namespace Retouch_Photo2.Tools.Models
         public string Title { get; set; }
         public ControlTemplate Icon { get; set; }
         public FrameworkElement Page => this.ImagePage;
-
-        readonly ImagePage ImagePage = new ImagePage();
         public bool IsSelected { get; set; }
-        public bool IsOpen { get; set; }
+        public bool IsOpen { get => this.ImagePage.ConvertToCurvesToolTip.IsOpen; set => this.ImagePage.ConvertToCurvesToolTip.IsOpen = value; }
+        readonly ImagePage ImagePage = new ImagePage();
 
 
         private float _sizeWidth;
@@ -209,7 +208,10 @@ namespace Retouch_Photo2.Tools.Models
 
         /// <summary> Tip. </summary>
         public void TipSelect() => this.EaseStoryboard.Begin();//Storyboard
-        
+
+        /// <summary> ConvertToCurvesButton's ToolTip. </summary>
+        public ToolTip ConvertToCurvesToolTip => this._ConvertToCurvesToolTip;
+
 
         //@Construct
         /// <summary>
@@ -241,6 +243,8 @@ namespace Retouch_Photo2.Tools.Models
             this.SelectTextBlock.Text = resource.GetString("Tools_Image_Select");
             this.ReplaceTextBlock.Text = resource.GetString("Tools_Image_Replace");
             this.ClearTextBlock.Text = resource.GetString("Tools_Image_Clear");
+
+            this._ConvertToCurvesToolTip.Content = resource.GetString("Tools_ConvertToCurves");
         }
 
         private void ConstructSelect()

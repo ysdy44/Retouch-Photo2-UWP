@@ -196,7 +196,7 @@
                             </ToolTipService.ToolTip>
                             <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </Button>
-                        <ToggleButton x:Name="TipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=TwoWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
+                        <ToggleButton x:Name="TipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
                             <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </ToggleButton>
                     </StackPanel>
@@ -246,7 +246,7 @@
                                             <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </Button.Tag>
                                     </Button>
-                                    <ToggleButton x:Name="OverflowTipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
+                                    <ToggleButton x:Name="OverflowTipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Style="{StaticResource AppIconToggleButtonStyle}">
                                         <ToggleButton.Tag>
                                             <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </ToggleButton.Tag>

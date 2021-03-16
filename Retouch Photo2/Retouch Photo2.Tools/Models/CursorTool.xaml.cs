@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Tools.Models
 {
@@ -49,7 +50,7 @@ namespace Retouch_Photo2.Tools.Models
 
         readonly CursorPage CursorPage = new CursorPage();
         public bool IsSelected { get; set; }
-        public bool IsOpen { get => this.CursorPage.ModeSegmented.IsOpen; set => this.CursorPage.ModeSegmented.IsOpen = value; }
+        public bool IsOpen { get => this.CursorPage.IsOpen; set => this.CursorPage.IsOpen = value; }
 
 
         CursorMode CursorMode;
@@ -233,6 +234,21 @@ namespace Retouch_Photo2.Tools.Models
         public CompositeModeSegmented ModeSegmented => this._ModeSegmented;
 
 
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "CursorPage" />'s IsOpen. </summary>
+        public bool IsOpen
+        {
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "CursorPage.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(CursorPage), new PropertyMetadata(false));
+
+
+        #endregion
+
         //@Construct
         /// <summary>
         /// Initializes a CursorPage. 
@@ -240,11 +256,21 @@ namespace Retouch_Photo2.Tools.Models
         public CursorPage()
         {
             this.InitializeComponent();
-            //this.ConstructStrings();
+            this.ConstructStrings();
 
             this.OperateButton.Click += (s, e) => this.TipViewModel.ShowMenuLayoutAt(MenuType.Operate, this.OperateButton);
 
             this.MoreTransformButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreTransform?.Invoke(this, this.MoreTransformButton);
+        }
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.OperateToolTip.Content = resource.GetString("Menus_Operate");
+
+            this.MoreTransformToolTip.Content = resource.GetString("Tools_MoreTransform");
         }
 
     }

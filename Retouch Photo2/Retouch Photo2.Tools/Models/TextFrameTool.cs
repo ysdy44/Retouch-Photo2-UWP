@@ -27,9 +27,10 @@ namespace Retouch_Photo2.Tools.Models
         public ToolGroupType GroupType => ToolGroupType.Tool;
         public string Title { get; set; }
         public ControlTemplate Icon { get; set; }
-        public FrameworkElement Page { get; } = new TextPage();
+        public FrameworkElement Page => this.TextPage;
         public bool IsSelected { get; set; }
-        public bool IsOpen { get; set; }
+        public bool IsOpen { get => this.TextPage.IsOpen; set => this.TextPage.IsOpen = value; }
+        readonly TextPage TextPage = new TextPage();
 
 
         public override ILayer CreateLayer(Transformer transformer)

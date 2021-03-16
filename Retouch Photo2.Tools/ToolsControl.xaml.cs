@@ -217,12 +217,15 @@ namespace Retouch_Photo2
 
 
             //More
-            this.Children.Add(new Button
+            Button moreButton = new Button
             {
                 Style = this.SelectedButtonStyle,
                 Flyout = this.MoreFlyout,
                 Content = new SymbolIcon(Symbol.More)
-            });
+            };
+            string moreTitle = resource.GetString("Tools_More");
+            this.ConstructToolTip(moreButton, moreTitle);
+            this.Children.Add(moreButton);
         }
 
     }
@@ -240,20 +243,21 @@ namespace Retouch_Photo2
          </Button> 
        */
 
+        private void ConstructToolTip(Button button, string title)
+        {
+            ToolTip toolTip = new ToolTip
+            {
+                Content = title,
+                Placement = PlacementMode.Right,
+                Style = this.ToolTipStyle
+            };
+            ToolTipService.SetToolTip(button, toolTip);
+            this.IsOpenChanged += (s, isOpen) => toolTip.IsOpen = isOpen;//Delegate
+        }
+
         private ControlTemplate ConstructButton(Button button, ToolType type, string title)
         {
-            //ToolTip
-            {
-                ToolTip toolTip = new ToolTip
-                {
-                    Content = title,
-                    Placement = PlacementMode.Right,
-                    Style = this.ToolTipStyle
-                };
-                ToolTipService.SetToolTip(button, toolTip);
-                this.IsOpenChanged += (s, isOpen) => toolTip.IsOpen = isOpen;//Delegate
-            }
-
+            this.ConstructToolTip(button, title);
 
             button.Style = this.SelectedButtonStyle;
             button.Resources = new ResourceDictionary

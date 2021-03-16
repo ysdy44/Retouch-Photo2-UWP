@@ -31,6 +31,9 @@ namespace Retouch_Photo2.Historys
 
         LayersProperty_SetTransform_IsCrop,
         LayersProperty_SetTransform_CropTransformer,
+        LayersProperty_SetTransform_ResetTransformer,
+        LayersProperty_SetTransform_FitTransformer,
+        LayersProperty_SetTransform_ClearTransformer,
 
         LayersProperty_SetStyle,
         LayersProperty_SetStyle_Fill,

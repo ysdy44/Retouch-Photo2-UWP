@@ -236,16 +236,7 @@ namespace Retouch_Photo2
             TransformerTool = new TransformerTool(),
             CreateTool = new CreateTool(),
             Tools = new List<ITool>
-            {                   
-                        
-                /*                        
-                new CursorTool(),                         
-                new ViewTool(),
-                new GeometryRectangleTool(),
-                */
-
-                /*
-                */
+            {
                 new CursorTool(),
                 null,
 
@@ -267,7 +258,6 @@ namespace Retouch_Photo2
 
                 new ImageTool(),
                 new CropTool(),
-
 
                 new PatternGridTool(),
                 new PatternDiagonalTool(),

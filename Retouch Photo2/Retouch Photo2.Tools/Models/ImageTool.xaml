@@ -62,17 +62,25 @@
             <Button x:Name="ReplaceButton" Grid.Column="5" Style="{StaticResource AppRoundedButtonStyle}"
                  IsEnabled="{x:Bind SelectionViewModel.IsImageLayer, Mode=OneWay}">
                 <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </Button>
+        </Button>
 
-            <!--Select-->
-            <TextBlock x:Name="ClearTextBlock" Grid.Column="6" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="ClearButton" Grid.Column="7" Style="{StaticResource AppRoundedButtonStyle}">
-                <FontIcon Glyph="&#xE106;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </Button>
-        
+        <!--Clear-->
+        <TextBlock x:Name="ClearTextBlock" Grid.Column="6" Style="{StaticResource AppTextBlockStyle}"/>
+        <Button x:Name="ClearButton" Grid.Column="7" Style="{StaticResource AppRoundedButtonStyle}">
+            <FontIcon Glyph="&#xE106;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+        </Button>
+
         <Rectangle Grid.Column="8" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <toolsElements:ConvertToCurvesButton x:Name="ConvertButton" Grid.Column="9"/>
+        <Button x:Name="ConvertToCurvesButton" Grid.Column="9" Style="{StaticResource AppRoundedButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="_ConvertToCurvesToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <Button.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ConvertToCurvesIcon.xaml"/>
+            </Button.Resources>
+            <ContentControl Template="{StaticResource ConvertToCurvesIcon}"/>
+        </Button>
 
     </Grid>
 </Page>

@@ -121,7 +121,6 @@
 <data name='$DrawPage_Setup' xml:space='preserve'><value>Installer</value></data>
 <data name='$DrawPage_Snap' xml:space='preserve'><value>Claquer</value></data>
 <data name='$DrawPage_Ruler' xml:space='preserve'><value>Règle</value></data>
-<data name='$DrawPage_FullScreen' xml:space='preserve'><value>Plein écran</value></data>
 <data name='$DrawPage_Tip' xml:space='preserve'><value>Conseil</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>Galerie</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>Changer la largeur de mise en page</value></data>
@@ -174,6 +173,7 @@
 <data name='Tools_Crop' xml:space='preserve'><value>Récolte de vecteur</value></data>
 <data name='Tools_Crop_Reset' xml:space='preserve'><value>Réinitialiser le recadrage</value></data>
 <data name='Tools_Crop_Fit' xml:space='preserve'><value>Coupe ajustée</value></data>
+<data name='Tools_Crop_Clear' xml:space='preserve'><value>Effacer la récolte</value></data>
 <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>Étape</value></data>
 <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>Coin</value></data>
 <data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>Point central</value></data>
@@ -245,12 +245,12 @@
 <data name='Operates_Arrange_ForwardOne' xml:space='preserve'><value>En avant un</value></data>
 <data name='Operates_Arrange_MoveBack' xml:space='preserve'><value>Déplacer vers l'arrière</value></data>
 <data name='Operates_Horizontally' xml:space='preserve'><value>Aligner horizontalement</value></data>
-<data name='Operates_Horizontally_Space' xml:space='preserve'><value>Espace horizontalement</value></data>
+<data name='Operates_Horizontally_HorizontallySpace' xml:space='preserve'><value>Espace horizontalement</value></data>
 <data name='Operates_Vertically' xml:space='preserve'><value>Aligner verticalement</value></data>
 <data name='Operates_Vertically_Top' xml:space='preserve'><value>Aligner en haut</value></data>
 <data name='Operates_Vertically_Middle' xml:space='preserve'><value>Aligner au milieu</value></data>
 <data name='Operates_Vertically_Bottom' xml:space='preserve'><value>Aligner en bas</value></data>
-<data name='Operates_Vertically_Space' xml:space='preserve'><value>Espacer verticalement</value></data>
+<data name='Operates_Vertically_VerticallySpace' xml:space='preserve'><value>Espacer verticalement</value></data>
 <data name='Adjustments_Gray' xml:space='preserve'><value>grise</value></data>
 <data name='Adjustments_Invert' xml:space='preserve'><value>Inverser</value></data>
 <data name='Adjustments_Brightness' xml:space='preserve'><value>Luminosité</value></data>
@@ -352,7 +352,10 @@
 <data name='Historys_LayersTransformAdd_Move' xml:space='preserve'><value>Bouge toi</value></data>
 <data name='Historys_LayersTransformMultiplies_Transform' xml:space='preserve'><value>Transformer</value></data>
 <data name='Historys_LayersProperty_SetTransform_IsCrop' xml:space='preserve'><value>Définir si la transformation est rognée</value></data>
-<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>Définir la culture de transformation</value></data>
+<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>Transformation de culture</value></data>
+<data name='Historys_LayersProperty_SetTransform_ResetTransformer' xml:space='preserve'><value>Réinitialiser le recadrage de la transformation</value></data>
+<data name='Historys_LayersProperty_SetTransform_FitTransformer' xml:space='preserve'><value>Ajuster la culture de transformation</value></data>
+<data name='Historys_LayersProperty_SetTransform_ClearTransformer' xml:space='preserve'><value>Effacer la culture de transformation</value></data>
 <data name='Historys_LayersProperty_SetStyle' xml:space='preserve'><value>Définir le style</value></data>
 <data name='Historys_LayersProperty_SetStyle_Fill' xml:space='preserve'><value>Définir le remplissage</value></data>
 <data name='Historys_LayersProperty_SetStyle_Fill_Extend' xml:space='preserve'><value>Définir l'extension de remplissage</value></data>
@@ -531,6 +534,7 @@
 <data name='$MainPage_Duplicate_Close' xml:space='preserve'><value>Annuler</value></data>
 <data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>Dupliquer</value></data>
 <data name='$DrawPage_Export' xml:space='preserve'><value>Exportation</value></data>
+<data name='$DrawPage_FullScreen' xml:space='preserve'><value>Plein écran</value></data>
 <data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>Annuler</value></data>
 <data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>d'accord</value></data>
 <data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>Largeur</value></data>
@@ -545,6 +549,9 @@
 <data name='Tools_Fill' xml:space='preserve'><value>Remplir</value></data>
 <data name='Tools_Stroke' xml:space='preserve'><value>Accident vasculaire cérébral</value></data>
 <data name='Tools_ConvertToCurves' xml:space='preserve'><value>Convertir en courbes</value></data>
+<data name='Tools_More' xml:space='preserve'><value>Suite</value></data>
+<data name='Tools_MoreTransform' xml:space='preserve'><value>Suite</value></data>
+<data name='Tools_MoreCreate' xml:space='preserve'><value>Suite</value></data>
 <data name='Tools_Brush' xml:space='preserve'><value>Brosser</value></data>
 <data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>Remplir</value></data>
 <data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>Accident vasculaire cérébral</value></data>
@@ -559,9 +566,11 @@
 <data name='Tools_GeometryRectangle' xml:space='preserve'><value>Rectangle</value></data>
 <data name='Tools_GeometryEllipse' xml:space='preserve'><value>Ellipse</value></data>
 <data name='Tools_Node_Remove' xml:space='preserve'><value>Supprimer</value></data>
+<data name='Tools_Node_MoreNode' xml:space='preserve'><value>Suite</value></data>
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>Angle</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>Texte artistique</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>Texte du cadre</value></data>
+<data name='Tools_Text_FullScreen' xml:space='preserve'><value>Plein écran</value></data>
 <data name='Tools_Image' xml:space='preserve'><value>Image</value></data>
 <data name='Tools_PatternGrid' xml:space='preserve'><value>Grille</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>Taper</value></data>

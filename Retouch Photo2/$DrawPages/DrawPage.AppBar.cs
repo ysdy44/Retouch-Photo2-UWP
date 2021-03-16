@@ -1,8 +1,10 @@
 ﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
+using Windows.Devices.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2
 {
@@ -70,6 +72,31 @@ namespace Retouch_Photo2
             this.OverflowFullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = true;
 
             this.UnFullScreenButton.Click += (s, e) => this.DrawLayout.IsFullScreen = false;
+
+            this.OverflowTipButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = true;
+
+            this.ConstructAppBar_TipButton(this.TipButton);
+            this.ConstructAppBar_TipButton(this.OverflowTipButton);
+        }
+        private void ConstructAppBar_TipButton(ButtonBase tipButton)
+        {
+            tipButton.PointerPressed += (s, e) => this.TipViewModel.IsOpen = true;
+            tipButton.PointerReleased += (s, e) => this.TipViewModel.IsOpen = false;
+            tipButton.PointerCanceled += (s, e) => this.TipViewModel.IsOpen = false;
+            tipButton.PointerEntered += (s, e) =>
+            {
+                if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
+                {
+                    this.TipViewModel.IsOpen = true;
+                }
+            };
+            tipButton.PointerExited += (s, e) =>
+            {
+                if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
+                {
+                    this.TipViewModel.IsOpen = false;
+                }
+            };
         }
 
 

@@ -121,7 +121,6 @@
 <data name='$DrawPage_Setup' xml:space='preserve'><value>설정</value></data>
 <data name='$DrawPage_Snap' xml:space='preserve'><value>스냅</value></data>
 <data name='$DrawPage_Ruler' xml:space='preserve'><value>지배자</value></data>
-<data name='$DrawPage_FullScreen' xml:space='preserve'><value>전체 화면</value></data>
 <data name='$DrawPage_Tip' xml:space='preserve'><value>팁</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>갤러리</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>레이아웃 너비 전환</value></data>
@@ -174,6 +173,7 @@
 <data name='Tools_Crop' xml:space='preserve'><value>벡터 자르기</value></data>
 <data name='Tools_Crop_Reset' xml:space='preserve'><value>자르기 재설정</value></data>
 <data name='Tools_Crop_Fit' xml:space='preserve'><value>작물 맞추기</value></data>
+<data name='Tools_Crop_Clear' xml:space='preserve'><value>명확한 작물</value></data>
 <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>단계</value></data>
 <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>모서리</value></data>
 <data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>중심점</value></data>
@@ -245,12 +245,12 @@
 <data name='Operates_Arrange_ForwardOne' xml:space='preserve'><value>앞으로 하나</value></data>
 <data name='Operates_Arrange_MoveBack' xml:space='preserve'><value>뒤로 이동</value></data>
 <data name='Operates_Horizontally' xml:space='preserve'><value>수평으로 정렬</value></data>
-<data name='Operates_Horizontally_Space' xml:space='preserve'><value>수평 간격</value></data>
+<data name='Operates_Horizontally_HorizontallySpace' xml:space='preserve'><value>수평 간격</value></data>
 <data name='Operates_Vertically' xml:space='preserve'><value>수직 정렬</value></data>
 <data name='Operates_Vertically_Top' xml:space='preserve'><value>상단 정렬</value></data>
 <data name='Operates_Vertically_Middle' xml:space='preserve'><value>중간 정렬</value></data>
 <data name='Operates_Vertically_Bottom' xml:space='preserve'><value>하단 정렬</value></data>
-<data name='Operates_Vertically_Space' xml:space='preserve'><value>수직 간격</value></data>
+<data name='Operates_Vertically_VerticallySpace' xml:space='preserve'><value>수직 간격</value></data>
 <data name='Adjustments_Gray' xml:space='preserve'><value>회색</value></data>
 <data name='Adjustments_Invert' xml:space='preserve'><value>거꾸로 하다</value></data>
 <data name='Adjustments_Brightness' xml:space='preserve'><value>명도</value></data>
@@ -352,7 +352,10 @@
 <data name='Historys_LayersTransformAdd_Move' xml:space='preserve'><value>움직임</value></data>
 <data name='Historys_LayersTransformMultiplies_Transform' xml:space='preserve'><value>변환</value></data>
 <data name='Historys_LayersProperty_SetTransform_IsCrop' xml:space='preserve'><value>변형이 잘리는 지 여부 설정</value></data>
-<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>변형 자르기 설정</value></data>
+<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>자르기 변형</value></data>
+<data name='Historys_LayersProperty_SetTransform_ResetTransformer' xml:space='preserve'><value>변형 자르기 재설정</value></data>
+<data name='Historys_LayersProperty_SetTransform_FitTransformer' xml:space='preserve'><value>변형 자르기 맞추기</value></data>
+<data name='Historys_LayersProperty_SetTransform_ClearTransformer' xml:space='preserve'><value>변형 자르기 지우기</value></data>
 <data name='Historys_LayersProperty_SetStyle' xml:space='preserve'><value>스타일 설정</value></data>
 <data name='Historys_LayersProperty_SetStyle_Fill' xml:space='preserve'><value>채우기 설정</value></data>
 <data name='Historys_LayersProperty_SetStyle_Fill_Extend' xml:space='preserve'><value>채우기 확장 설정</value></data>
@@ -531,6 +534,7 @@
 <data name='$MainPage_Duplicate_Close' xml:space='preserve'><value>취소</value></data>
 <data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>복제</value></data>
 <data name='$DrawPage_Export' xml:space='preserve'><value>수출</value></data>
+<data name='$DrawPage_FullScreen' xml:space='preserve'><value>전체 화면</value></data>
 <data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>취소</value></data>
 <data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>확인</value></data>
 <data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>폭</value></data>
@@ -545,6 +549,9 @@
 <data name='Tools_Fill' xml:space='preserve'><value>가득 따르다</value></data>
 <data name='Tools_Stroke' xml:space='preserve'><value>뇌졸중</value></data>
 <data name='Tools_ConvertToCurves' xml:space='preserve'><value>곡선으로 변환</value></data>
+<data name='Tools_More' xml:space='preserve'><value>더</value></data>
+<data name='Tools_MoreTransform' xml:space='preserve'><value>더</value></data>
+<data name='Tools_MoreCreate' xml:space='preserve'><value>더</value></data>
 <data name='Tools_Brush' xml:space='preserve'><value>브러시</value></data>
 <data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>가득 따르다</value></data>
 <data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>뇌졸중</value></data>
@@ -559,9 +566,11 @@
 <data name='Tools_GeometryRectangle' xml:space='preserve'><value>직사각형</value></data>
 <data name='Tools_GeometryEllipse' xml:space='preserve'><value>타원</value></data>
 <data name='Tools_Node_Remove' xml:space='preserve'><value>없애다</value></data>
+<data name='Tools_Node_MoreNode' xml:space='preserve'><value>더</value></data>
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>각도</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>예술적 텍스트</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>프레임 텍스트</value></data>
+<data name='Tools_Text_FullScreen' xml:space='preserve'><value>전체 화면</value></data>
 <data name='Tools_Image' xml:space='preserve'><value>영상</value></data>
 <data name='Tools_PatternGrid' xml:space='preserve'><value>그리드</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>유형</value></data>

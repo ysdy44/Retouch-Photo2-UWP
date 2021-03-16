@@ -121,7 +121,6 @@
 <data name='$DrawPage_Setup' xml:space='preserve'><value>Настраивать</value></data>
 <data name='$DrawPage_Snap' xml:space='preserve'><value>Привязка</value></data>
 <data name='$DrawPage_Ruler' xml:space='preserve'><value>Линейка</value></data>
-<data name='$DrawPage_FullScreen' xml:space='preserve'><value>Полноэкранный</value></data>
 <data name='$DrawPage_Tip' xml:space='preserve'><value>Кончик</value></data>
 <data name='$DrawPage_Gallery' xml:space='preserve'><value>Галерея</value></data>
 <data name='$DrawPage_WidthTip' xml:space='preserve'><value>Переключить ширину макета</value></data>
@@ -174,6 +173,7 @@
 <data name='Tools_Crop' xml:space='preserve'><value>Векторный урожай</value></data>
 <data name='Tools_Crop_Reset' xml:space='preserve'><value>Сбросить урожай</value></data>
 <data name='Tools_Crop_Fit' xml:space='preserve'><value>Подходящий урожай</value></data>
+<data name='Tools_Crop_Clear' xml:space='preserve'><value>Очистить урожай</value></data>
 <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>Шаг</value></data>
 <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>Угол</value></data>
 <data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>Центральная точка</value></data>
@@ -245,12 +245,12 @@
 <data name='Operates_Arrange_ForwardOne' xml:space='preserve'><value>Нападающий</value></data>
 <data name='Operates_Arrange_MoveBack' xml:space='preserve'><value>Перейти назад</value></data>
 <data name='Operates_Horizontally' xml:space='preserve'><value>Выровнять по горизонтали</value></data>
-<data name='Operates_Horizontally_Space' xml:space='preserve'><value>Пространство по горизонтали</value></data>
+<data name='Operates_Horizontally_HorizontallySpace' xml:space='preserve'><value>Пространство по горизонтали</value></data>
 <data name='Operates_Vertically' xml:space='preserve'><value>Выровнять по вертикали</value></data>
 <data name='Operates_Vertically_Top' xml:space='preserve'><value>Выровнять по верху</value></data>
 <data name='Operates_Vertically_Middle' xml:space='preserve'><value>Выровнять по центру</value></data>
 <data name='Operates_Vertically_Bottom' xml:space='preserve'><value>Выровнять по низу</value></data>
-<data name='Operates_Vertically_Space' xml:space='preserve'><value>Пространство по вертикали</value></data>
+<data name='Operates_Vertically_VerticallySpace' xml:space='preserve'><value>Пространство по вертикали</value></data>
 <data name='Adjustments_Gray' xml:space='preserve'><value>серый</value></data>
 <data name='Adjustments_Invert' xml:space='preserve'><value>Инвертировать</value></data>
 <data name='Adjustments_Brightness' xml:space='preserve'><value>Яркость</value></data>
@@ -352,7 +352,10 @@
 <data name='Historys_LayersTransformAdd_Move' xml:space='preserve'><value>Двигаться</value></data>
 <data name='Historys_LayersTransformMultiplies_Transform' xml:space='preserve'><value>Преобразовать</value></data>
 <data name='Historys_LayersProperty_SetTransform_IsCrop' xml:space='preserve'><value>Установите, будет ли преобразование обрезано</value></data>
-<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>Установить преобразование кадрирования</value></data>
+<data name='Historys_LayersProperty_SetTransform_CropTransformer' xml:space='preserve'><value>Обрезать преобразование</value></data>
+<data name='Historys_LayersProperty_SetTransform_ResetTransformer' xml:space='preserve'><value>Сбросить преобразование кадрирования</value></data>
+<data name='Historys_LayersProperty_SetTransform_FitTransformer' xml:space='preserve'><value>Подогнать трансформируемую культуру</value></data>
+<data name='Historys_LayersProperty_SetTransform_ClearTransformer' xml:space='preserve'><value>Очистить преобразование кадрирования</value></data>
 <data name='Historys_LayersProperty_SetStyle' xml:space='preserve'><value>Установить стиль</value></data>
 <data name='Historys_LayersProperty_SetStyle_Fill' xml:space='preserve'><value>Установить заливку</value></data>
 <data name='Historys_LayersProperty_SetStyle_Fill_Extend' xml:space='preserve'><value>Установить расширение заполнения</value></data>
@@ -531,6 +534,7 @@
 <data name='$MainPage_Duplicate_Close' xml:space='preserve'><value>Отмена</value></data>
 <data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>Дубликат</value></data>
 <data name='$DrawPage_Export' xml:space='preserve'><value>Экспорт</value></data>
+<data name='$DrawPage_FullScreen' xml:space='preserve'><value>Полноэкранный</value></data>
 <data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>Отмена</value></data>
 <data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>Ok</value></data>
 <data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>Ширина</value></data>
@@ -545,6 +549,9 @@
 <data name='Tools_Fill' xml:space='preserve'><value>Наполнять</value></data>
 <data name='Tools_Stroke' xml:space='preserve'><value>Гладить</value></data>
 <data name='Tools_ConvertToCurves' xml:space='preserve'><value>Преобразовать в кривые</value></data>
+<data name='Tools_More' xml:space='preserve'><value>Более</value></data>
+<data name='Tools_MoreTransform' xml:space='preserve'><value>Более</value></data>
+<data name='Tools_MoreCreate' xml:space='preserve'><value>Более</value></data>
 <data name='Tools_Brush' xml:space='preserve'><value>Щетка</value></data>
 <data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>Наполнять</value></data>
 <data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>Гладить</value></data>
@@ -559,9 +566,11 @@
 <data name='Tools_GeometryRectangle' xml:space='preserve'><value>Прямоугольник</value></data>
 <data name='Tools_GeometryEllipse' xml:space='preserve'><value>Эллипс</value></data>
 <data name='Tools_Node_Remove' xml:space='preserve'><value>Удалять</value></data>
+<data name='Tools_Node_MoreNode' xml:space='preserve'><value>Более</value></data>
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>Угол</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>Художественный текст</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>Текст рамки</value></data>
+<data name='Tools_Text_FullScreen' xml:space='preserve'><value>Полноэкранный</value></data>
 <data name='Tools_Image' xml:space='preserve'><value>Изображение</value></data>
 <data name='Tools_PatternGrid' xml:space='preserve'><value>Сетка</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>Тип</value></data>

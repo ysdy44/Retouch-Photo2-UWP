@@ -41,9 +41,10 @@ namespace Retouch_Photo2.Tools.Models
         public ToolGroupType GroupType => ToolGroupType.Geometry;
         public string Title { get; set; }
         public ControlTemplate Icon { get; set; }
-        public FrameworkElement Page { get; } = new GeometryCookiePage();
+        public FrameworkElement Page => this.GeometryCookiePage;
         public bool IsSelected { get; set; }
-        public bool IsOpen { get; set; }
+        public bool IsOpen { get => this.GeometryCookiePage.IsOpen; set => this.GeometryCookiePage.IsOpen = value; }
+        readonly GeometryCookiePage GeometryCookiePage = new GeometryCookiePage();
 
 
         public override ILayer CreateLayer(Transformer transformer)
@@ -70,11 +71,28 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
 
         //@Converter
         private int InnerRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
         private int SweepAngleToNumberConverter(float sweepAngle) => (int)(sweepAngle / FanKit.Math.Pi * 180f);
+
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "GeometryCookiePage" />'s IsOpen. </summary>
+        public bool IsOpen
+        {
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "GeometryCookiePage.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(GeometryCookiePage), new PropertyMetadata(false));
+
+
+        #endregion
 
 
         //@Construct
@@ -92,6 +110,16 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructSweepAngle1();
             this.ConstructSweepAngle2();
 
+            this.ConvertToCurvesButton.Click += (s, e) =>
+            {
+                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
+
+                this.MethodViewModel.MethodConvertToCurves();
+
+                //Change tools group value.
+                this.TipViewModel.ToolType = ToolType.Node;
+            };
+
             this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);
         }
 
@@ -102,6 +130,10 @@ namespace Retouch_Photo2.Tools.Models
 
             this.InnerRadiusTextBlock.Text = resource.GetString("Tools_GeometryCookie_InnerRadius");
             this.SweepAngleTextBlock.Text = resource.GetString("Tools_GeometryCookie_SweepAngle");
+
+            this.ConvertToCurvesToolTip.Content = resource.GetString("Tools_ConvertToCurves");
+
+            this.MoreCreateToolTip.Content = resource.GetString("Tools_MoreCreate");
         }
     }
 

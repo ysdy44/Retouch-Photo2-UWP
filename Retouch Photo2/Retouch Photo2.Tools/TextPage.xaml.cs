@@ -24,7 +24,23 @@ namespace Retouch_Photo2.Tools
         ViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
-        
+
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "TextPage" />'s IsOpen. </summary>
+        public bool IsOpen
+        {
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "TextPage.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(TextPage), new PropertyMetadata(false));
+
+
+        #endregion
+
 
         //@VisualState
         bool _vsIsFullScreen;
@@ -76,14 +92,6 @@ namespace Retouch_Photo2.Tools
             };
         }
 
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.TextBox.PlaceholderText = resource.GetString("Tools_Text_PlaceholderText");
-        }
-
     }
 
     /// <summary>
@@ -91,7 +99,19 @@ namespace Retouch_Photo2.Tools
     /// </summary>
     internal sealed partial class TextPage : Page
     {
-        
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.TextBox.PlaceholderText = resource.GetString("Tools_Text_PlaceholderText");
+
+            this.TextToolTip.Content = resource.GetString("Menus_Text");
+
+            this.FullScreenToolTip.Content = resource.GetString("Tools_Text_FullScreen");
+        }
+
         private void SetFontText(string fontText)
         {
             //History

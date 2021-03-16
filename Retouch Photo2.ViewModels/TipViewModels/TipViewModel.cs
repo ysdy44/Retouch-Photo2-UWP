@@ -30,6 +30,7 @@ namespace Retouch_Photo2.ViewModels
                 this.isOpen = value;
                 this.OnPropertyChanged(nameof(this.IsOpen));//Notify 
 
+                this.Tool.IsOpen = value;
                 this.MenusIsOpen = value;
             }
         }

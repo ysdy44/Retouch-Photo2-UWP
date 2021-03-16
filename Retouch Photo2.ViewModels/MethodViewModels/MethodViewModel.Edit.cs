@@ -3,6 +3,15 @@ using Retouch_Photo2.Layers;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
+using FanKit.Transformers;
+using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.ViewModels;
+using System.Linq;
+using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -280,6 +289,71 @@ namespace Retouch_Photo2.ViewModels
             this.Invalidate();//Invalidate
         }
 
+
+
+        //ConvertToCurves
+        public void MethodConvertToCurves()
+        {
+            //History
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer_ConvertToCurves);
+            this.HistoryPush(history);
+
+            this.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                //Turn to curve layer
+                ILayer curveLayer = this.MethodConvertToCurves_CreateCurveLayer(layerage);
+
+                if (curveLayer != null)
+                {
+                    Layerage curveLayerage = curveLayer.ToLayerage();
+                    string id = curveLayerage.Id;
+                    LayerBase.Instances.Add(id, curveLayer);
+
+                    //set image brush
+                    if (layer.Type == LayerType.Image)
+                    {
+                        ImageLayer imageLayer = (ImageLayer)layer;
+                        curveLayer.Style.Fill = imageLayer.ToBrush();
+                    }
+
+                    this.MethodConvertToCurves_ReplaceLayerage(curveLayerage, layerage);
+                }
+            });
+
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
+            this.SetMode();//Selection
+        }
+
+        //Create curve layer
+        private ILayer MethodConvertToCurves_CreateCurveLayer(Layerage layerage)
+        {
+            ILayer layer = layerage.Self;
+
+            NodeCollection nodes = layer.ConvertToCurves(LayerManager.CanvasDevice);
+            if (nodes == null) return null;
+
+            if (nodes.Count > 3)
+            {
+                CurveLayer curveLayer = new CurveLayer(nodes)
+                {
+                    IsSelected = true,
+                };
+                LayerBase.CopyWith(curveLayer, layer);
+                return curveLayer;
+            }
+
+            return null;
+        }
+        //Replace curveLayerage to layerage
+        private void MethodConvertToCurves_ReplaceLayerage(Layerage curveLayerage, Layerage layerage)
+        {
+            Layerage parents = LayerManager.GetParentsChildren(layerage);
+            int index = parents.Children.IndexOf(layerage);
+            parents.Children[index] = curveLayerage;
+        }
 
 
     }

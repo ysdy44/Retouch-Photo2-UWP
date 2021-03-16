@@ -36,17 +36,23 @@
         <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
         <Button x:Name="OperateButton" Grid.Column="2" Style="{StaticResource AppRoundedButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="OperateToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
             <operates:Icon/>
         </Button>
         
         <Rectangle Grid.Column="3" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
         <!--Multi-Mode-->
-        <toolsElements:CompositeModeSegmented x:Name="_ModeSegmented" Grid.Column="4" Mode="{x:Bind SettingViewModel.CompositeMode, Mode=TwoWay}"/>
+        <toolsElements:CompositeModeSegmented x:Name="_ModeSegmented" Grid.Column="4" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Mode="{x:Bind SettingViewModel.CompositeMode, Mode=TwoWay}"/>
      
         <Rectangle Grid.Column="5" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
         <Button x:Name="MoreTransformButton" Grid.Column="6" Style="{StaticResource AppRoundedButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip x:Name="MoreTransformToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
         </Button>
 

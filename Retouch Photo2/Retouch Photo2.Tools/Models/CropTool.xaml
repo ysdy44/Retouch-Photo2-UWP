@@ -20,6 +20,8 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <Border Width="50">
@@ -43,6 +45,12 @@
         <TextBlock x:Name="FitTextBlock" Grid.Column="4" Style="{StaticResource AppTextBlockStyle}"/>
         <Button x:Name="FitButton" Grid.Column="5" Style="{StaticResource AppRoundedButtonStyle}">
             <FontIcon Glyph="&#xE9A6;" FontSize="22" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
+        </Button>
+
+        <!--Clear-->
+        <TextBlock x:Name="ClearTextBlock" Grid.Column="6" Style="{StaticResource AppTextBlockStyle}"/>
+        <Button x:Name="ClearButton" Grid.Column="7" Style="{StaticResource AppRoundedButtonStyle}">
+            <FontIcon Glyph="&#xE106;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
 
     </Grid>
