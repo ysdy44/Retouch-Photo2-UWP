@@ -33,8 +33,7 @@
                                        MinHeight="50" MinWidth="100" 
                                        StrokeThickness="1" 
                                        Stroke="{ThemeResource AppStroke}"
-                                       apiContractNotPresent5:Fill="{ThemeResource AppForeground}"
-                                       apiContractPresent5:Fill="{ThemeResource AppAcrylicElementBrush}"
+                                       Fill="{ThemeResource AppFill}"
                                         />
                         </controls:DropShadowPanel>
 

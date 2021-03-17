@@ -65,10 +65,10 @@
     <!--TextBlock-->
     <Style x:Key="AppDropShadowPanelStyle" TargetType="controls:DropShadowPanel">
         <Setter Property="Color" Value="{ThemeResource AppStrokeColor}"/>
-        <Setter Property="OffsetX" Value="4"/>
-        <Setter Property="OffsetY" Value="6"/>
-        <Setter Property="BlurRadius" Value="12"/>
-        <Setter Property="ShadowOpacity" Value="0"/>
+        <Setter Property="OffsetX" Value="2"/>
+        <Setter Property="OffsetY" Value="4"/>
+        <Setter Property="BlurRadius" Value="10"/>
+        <Setter Property="ShadowOpacity" Value="1"/>
     </Style>
 
     
@@ -86,8 +86,6 @@
 
                         <!--@Acrylic-->
                         <Border CornerRadius="{StaticResource AppCornerRadius}" 
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
             
                                     apiContractNotPresent5:Background = "{ThemeResource AppBackground}"
                                     apiContractPresent5:Background = "{ThemeResource AppAcrylicElementBrush}">

@@ -110,7 +110,7 @@
                         <Border x:Name="RootGrid" 
               HorizontalAlignment="Center"
               VerticalAlignment="Center"
-              MinWidth="320"
+              MinWidth="380"
               MaxWidth="414"
               MinHeight="240"
               BorderThickness="1"

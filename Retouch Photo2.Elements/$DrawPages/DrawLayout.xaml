@@ -113,6 +113,9 @@
                 <!--Phone-->
                 <VisualState x:Name="Phone">
                     <VisualState.Setters>
+                        
+                        <!--Foot-->
+                        <Setter Target = "FootPanel.HorizontalAlignment" Value="Stretch"/>
 
                         <!--Left-->
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
@@ -126,6 +129,9 @@
                 <!--PhoneShowLeft-->
                 <VisualState x:Name="PhoneShowLeft">
                     <VisualState.Setters >
+
+                        <!--Foot-->
+                        <Setter Target = "FootPanel.HorizontalAlignment" Value="Stretch"/>
 
                         <!--LeftIcon-->
                         <Setter Target = "LeftIconTransform.TranslateX" Value="70"/>
@@ -144,6 +150,9 @@
                 <!--PhoneShowRight-->
                 <VisualState x:Name="PhoneShowRight">
                     <VisualState.Setters>
+
+                        <!--Foot-->
+                        <Setter Target = "FootPanel.HorizontalAlignment" Value="Stretch"/>
 
                         <!--LeftIcon-->
                         <Setter Target = "RightIconTransform.TranslateX" Value="-220"/>
@@ -172,7 +181,6 @@
                         <Setter Target = "_RightIcon.Visibility" Value="Collapsed"/>
 
                         <!--Foot-->
-                        <Setter Target = "FootPanel.HorizontalAlignment" Value="Center"/>
                         <Setter Target = "FootPanel.MinWidth" Value="100"/>
                         <Setter Target = "FootPanel.CornerRadius" Value="6,6,0,0"/>
 
@@ -211,7 +219,6 @@
                         <Setter Target = "_RightIcon.Visibility" Value="Collapsed"/>
 
                         <!--Foot-->
-                        <Setter Target = "FootPanel.HorizontalAlignment" Value="Center"/>
                         <Setter Target = "FootPanel.MinWidth" Value="100"/>
                         <Setter Target = "FootPanel.CornerRadius" Value="6"/>
                         <Setter Target = "FootPanel.Margin" Value="0,10"/>
@@ -595,6 +602,9 @@
                         <Storyboard>
 
                             <!--Foot-->
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty="HorizontalAlignment" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch"/>
+                            </ObjectAnimationUsingKeyFrames>
                             <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty="Y" From="0" To="70" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut"/>
@@ -638,6 +648,9 @@
                         <Storyboard>
 
                             <!--Foot-->
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FootPanel" Storyboard.TargetProperty="HorizontalAlignment" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch"/>
+                            </ObjectAnimationUsingKeyFrames>
                             <DoubleAnimation Storyboard.TargetName="FootPanelTransform" Storyboard.TargetProperty="Y" From="70" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut"/>
@@ -1017,7 +1030,7 @@
         </Grid.RowDefinitions>
 
         <!--AlignmentGrid-->
-        <developerTools:AlignmentGrid Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray"/>
+        <developerTools:AlignmentGrid Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray" Visibility="{ThemeResource AppGridVisibility}" />
 
 
         <!--Body-->
@@ -1036,7 +1049,7 @@
             <Border x:Name="TouchbarSliderBorder" Grid.Column="2"/>
         </Grid>
         <!--Foot-->
-        <Border x:Name="FootPanel" Grid.Column="1" Grid.Row="1" MinHeight="50" Padding="10,0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+        <Border x:Name="FootPanel" Grid.Column="1" Grid.Row="1" MinHeight="50" Padding="10,0" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                              apiContractNotPresent5:Background="{ThemeResource AppForeground}"
                              apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
             <Border.RenderTransformOrigin>0.5, 0.5</Border.RenderTransformOrigin>
@@ -1080,25 +1093,25 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="42"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="42"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="_GalleryButton" Style="{StaticResource AppButtonStyle}">
+                <Button x:Name="_GalleryButton" Height="42" Style="{StaticResource AppButtonStyle}">
                     <ToolTipService.ToolTip>
                         <ToolTip x:Name="_RightPhotosToolTip" Placement="Left" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
                     <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>
                 <Border x:Name="RightBorder" Grid.Row="1"/>
-                <Button x:Name="_WidthButton" Visibility="Collapsed" Grid.Row="2" Style="{StaticResource AppButtonStyle}">
+                <Button x:Name="_WidthButton" Height="42" Visibility="Collapsed" Grid.Row="2" Style="{StaticResource AppButtonStyle}">
                     <ToolTipService.ToolTip>
                         <ToolTip x:Name="_WidthToolTip" Placement="Left" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
                     <FontIcon x:Name="WidthIcon" Glyph="&#xE127;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>
-                <Border x:Name = "GalleryBoder" Visibility="Collapsed" Background="{ThemeResource AppLinearBrush}">
-                    <Button x:Name="_PCGalleryButton" Width="90" Style="{StaticResource AppRoundedButtonStyle}">
+                <Border x:Name = "GalleryBoder" Height="50" Visibility="Collapsed" Background="{ThemeResource AppLinearBrush}">
+                    <Button x:Name="_PCGalleryButton" Width="90" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedButtonStyle}">
                         <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                     </Button>
                 </Border>
@@ -1116,7 +1129,7 @@
             <Border.RenderTransform>
                 <CompositeTransform x:Name="LeftIconTransform" ScaleX="1" ScaleY="1" TranslateX="0"/>
             </Border.RenderTransform>
-            <ContentControl x:Name="LeftContentControl" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ContentControl x:Name="LeftContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemAltHighColor}"/>
         </Border>
         <Border x:Name="_RightIcon" Grid.Column="1" Grid.Row="1" CornerRadius="12,0,0,12" Width="32" Height="120" HorizontalAlignment="Right" VerticalAlignment="Center" 
                          apiContractNotPresent5:Background="{ThemeResource AppForeground}"
@@ -1125,7 +1138,7 @@
             <Border.RenderTransform>
                 <CompositeTransform x:Name="RightIconTransform" ScaleX="1" ScaleY="1" TranslateX="0"/>
             </Border.RenderTransform>
-            <ContentControl x:Name="RightContentControl" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ContentControl x:Name="RightContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemAltHighColor}"/>
         </Border>
 
         <!--

@@ -15,7 +15,7 @@
         <Setter Property="Margin" Value="{ThemeResource AppMargin}"/>
         <Setter Property="Padding" Value="14,0"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
-        <Setter Property="Background" Value="{ThemeResource AppFill}"/>
+        <Setter Property="Background" Value="{ThemeResource AppForeground}"/>
         <Setter Property="BorderThickness" Value="{StaticResource AppThickness}"/>
         <Setter Property="Template">
             <Setter.Value>

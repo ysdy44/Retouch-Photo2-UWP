@@ -187,9 +187,7 @@
 
 
         <Border x:Name="RootGrid" 
-                Width="272" 
-                BorderThickness="1"    
-                BorderBrush="{ThemeResource AppStroke}"               
+                Width="272"           
                 Background="Transparent"
                 CornerRadius="{StaticResource AppCornerRadius}" 
                 >

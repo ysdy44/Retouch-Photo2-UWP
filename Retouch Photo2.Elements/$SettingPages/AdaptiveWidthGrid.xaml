@@ -5,14 +5,14 @@
 
 
     <Style TargetType="local:AdaptiveWidthGrid">
-        <Setter Property = "Background" Value="Transparent"/>
+        <Setter Property = "Background" Value="{ThemeResource AppFill}"/>
         <Setter Property = "Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:AdaptiveWidthGrid">
                     <Grid x:Name="RootGrid"                          
                           HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
                           VerticalAlignment="{TemplateBinding VerticalAlignment}" 
-                          Background="{TemplateBinding Background}" >
+                          Background="Transparent" >
 
                         <Grid.Resources>
                             <!--Style-->
@@ -121,26 +121,26 @@
                         </Grid.RowDefinitions>
 
                         <!--Top-->
-                        <Border Grid.Column="0" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Grid.Column="0" Background="{TemplateBinding Background}" Style="{StaticResource AppRoundedBorderStyle}">
                             <Grid>
                                 <Rectangle x:Name="PhoneRectangle" StrokeDashArray="1 2" Stroke="{ThemeResource SystemAccentColor}" Style="{StaticResource RectangleStyle}"/>
-                                <Border Padding="4,0" HorizontalAlignment="Center" Background="{ThemeResource AppForeground}">
+                                <Border Padding="4,0" HorizontalAlignment="Center" Background="{TemplateBinding Background}">
                                     <FontIcon x:Name="PhoneIcon" Glyph="&#xE8EA;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </Border>
                             </Grid>
                         </Border>
-                        <Border Grid.Column="2" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Grid.Column="2" Background="{TemplateBinding Background}" Style="{StaticResource AppRoundedBorderStyle}">
                             <Grid>
                                 <Rectangle x:Name="PadRectangle" StrokeDashArray="1 2" Stroke="{ThemeResource SystemAccentColor}" Style="{StaticResource RectangleStyle}"/>
-                                <Border Padding="4,0" HorizontalAlignment="Center" Background="{ThemeResource AppForeground}">
+                                <Border Padding="4,0" HorizontalAlignment="Center" Background="{TemplateBinding Background}">
                                     <FontIcon x:Name="PadIcon" Glyph="&#xE70A;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </Border>
                             </Grid>
                         </Border>
-                        <Border Grid.Column="4" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Grid.Column="4" Background="{TemplateBinding Background}" Style="{StaticResource AppRoundedBorderStyle}">
                             <Grid>
                                 <Rectangle x:Name="PCRectangle" StrokeDashArray="1 2" Stroke="{ThemeResource SystemAccentColor}" Style="{StaticResource RectangleStyle}"/>
-                                <Border Padding="4,0" HorizontalAlignment="Center" Background="{ThemeResource AppForeground}">
+                                <Border Padding="4,0" HorizontalAlignment="Center" Background="{TemplateBinding Background}">
                                     <FontIcon x:Name="PCIcon" Glyph="&#xF71E;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </Border>
                             </Grid>
