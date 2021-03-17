@@ -92,6 +92,9 @@
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>Canvas move up</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>Move the canvas to the right</value></data>
 <data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>Canvas move down</value></data>
+<data name='$SettingPage_Language' xml:space='preserve'><value>Language</value></data>
+<data name='$SettingPage_LanguageTip' xml:space='preserve'><value>Restart the app to see your changes.</value></data>
+<data name='$SettingPage_Language_UseSystemSetting' xml:space='preserve'><value>Use system setting</value></data>
 <data name='$SettingPage_LocalFolder' xml:space='preserve'><value>Local folder</value></data>
 <data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>Open</value></data>
 <data name='$MainPage_DocumentationTip' xml:space='preserve'><value>Open document webpage</value></data>

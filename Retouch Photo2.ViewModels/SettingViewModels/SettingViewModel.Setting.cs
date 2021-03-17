@@ -4,6 +4,8 @@ using Retouch_Photo2.Menus;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
+using Windows.Globalization;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.ViewModels
@@ -13,6 +15,34 @@ namespace Retouch_Photo2.ViewModels
 
         /// <summary> Gets or sets the setting. </summary>
         public Setting Setting { get; set; } = new Setting();
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes the all settings.
+        /// </summary>
+        public void ConstructSetting(Setting setting, IEnumerable<IMenu> menus)
+        {
+            if (setting == null) return;
+            this.Setting = setting;
+
+            //Theme
+            this.ConstructTheme();
+
+            //DeviceLayout
+            this.ConstructDeviceLayout();
+            this.RegisteDeviceLayout();
+
+            //DeviceLayout
+            this.ConstructLayersHeight();
+
+            //MenuType
+            this.ConstructMenuType(menus);
+
+            //Language
+            this.ConstructLanguage();
+        }
+
 
         //@Construct
         /// <summary>
@@ -42,13 +72,26 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Initializes the menu-type.
         /// </summary>
-        public void ConstructMenuType(IEnumerable<IMenu > menus)
+        public void ConstructMenuType(IEnumerable<IMenu> menus)
         {
             foreach (IMenu menu in menus)
             {
                 bool isVisible = this.Setting.MenuTypes.Any(m => m == menu.Type);
                 menu.Button.Self.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
             }
+        }
+
+        //@Construct
+        /// <summary>
+        /// Initializes the language.
+        /// </summary>
+        public void ConstructLanguage()
+        {
+            string language = this.Setting.Language;
+            if (string.IsNullOrEmpty(language)) return;
+            if (ApplicationLanguages.ManifestLanguages.All(l => l != language)) return;
+
+            ApplicationLanguages.PrimaryLanguageOverride = language;
         }
 
     }

@@ -92,6 +92,9 @@
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>キャンバスが上に移動します</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>キャンバスを右に移動します</value></data>
 <data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>キャンバスが下に移動します</value></data>
+<data name='$SettingPage_Language' xml:space='preserve'><value>言語</value></data>
+<data name='$SettingPage_LanguageTip' xml:space='preserve'><value>アプリを再起動して変更内容を表示します。</value></data>
+<data name='$SettingPage_Language_UseSystemSetting' xml:space='preserve'><value>システム設定を使用する</value></data>
 <data name='$SettingPage_LocalFolder' xml:space='preserve'><value>ローカルフォルダ</value></data>
 <data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>開いた</value></data>
 <data name='$MainPage_DocumentationTip' xml:space='preserve'><value>ドキュメントのWebページを開く</value></data>

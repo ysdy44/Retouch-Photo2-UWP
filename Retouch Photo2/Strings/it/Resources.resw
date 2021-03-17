@@ -92,6 +92,9 @@
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>La tela si alza</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>Sposta la tela a destra</value></data>
 <data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>La tela si sposta verso il basso</value></data>
+<data name='$SettingPage_Language' xml:space='preserve'><value>linguaggio</value></data>
+<data name='$SettingPage_LanguageTip' xml:space='preserve'><value>Riavviare l'app per visualizzare le modifiche.</value></data>
+<data name='$SettingPage_Language_UseSystemSetting' xml:space='preserve'><value>Usa le impostazioni di sistema</value></data>
 <data name='$SettingPage_LocalFolder' xml:space='preserve'><value>Cartella locale</value></data>
 <data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>Aperto</value></data>
 <data name='$MainPage_DocumentationTip' xml:space='preserve'><value>Apri la pagina web del documento</value></data>

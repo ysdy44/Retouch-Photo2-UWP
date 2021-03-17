@@ -327,7 +327,7 @@ namespace Retouch_Photo2
         /// 将在启动应用程序以打开特定文件等情况下使用。
         /// </summary>
         /// <param name="e">有关启动请求和过程的详细信息。</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -353,6 +353,10 @@ namespace Retouch_Photo2
             {
                 if (rootFrame.Content == null)
                 {
+                    //Setting
+                    Setting setting = await XML.ConstructSettingFile();
+                    App.SettingViewModel.ConstructSetting(setting, App.TipViewModel.Menus);
+
                     // 当导航堆栈尚未还原时，导航到第一页，
                     // 并通过将所需信息作为导航参数传入来配置
                     // 参数

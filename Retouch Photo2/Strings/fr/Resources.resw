@@ -92,6 +92,9 @@
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>Monter la toile</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>Déplacez le canevas vers la droite</value></data>
 <data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>Déplacer la toile vers le bas</value></data>
+<data name='$SettingPage_Language' xml:space='preserve'><value>Langue</value></data>
+<data name='$SettingPage_LanguageTip' xml:space='preserve'><value>Relancez l’application pour voir vos modifications.</value></data>
+<data name='$SettingPage_Language_UseSystemSetting' xml:space='preserve'><value>Utiliser les paramètres du système</value></data>
 <data name='$SettingPage_LocalFolder' xml:space='preserve'><value>Dossier local</value></data>
 <data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>Ouvert</value></data>
 <data name='$MainPage_DocumentationTip' xml:space='preserve'><value>Ouvrir la page Web du document</value></data>

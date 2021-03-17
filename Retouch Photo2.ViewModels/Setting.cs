@@ -46,5 +46,9 @@ namespace Retouch_Photo2.ViewModels
              //MenuType.Keyboard,
          };
 
+        /// <summary> Gets or sets the anguage. </summary>
+        public string Language = null;
+
+        
     }
 }

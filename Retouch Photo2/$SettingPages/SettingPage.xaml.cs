@@ -68,6 +68,8 @@ namespace Retouch_Photo2
 
             this.ConstructMenuType();
 
+            this.ConstructLanguage();
+
             this.LocalFolderButton.Click += async (s, e) =>
             {
                 IStorageFolder folder = ApplicationData.Current.LocalFolder;

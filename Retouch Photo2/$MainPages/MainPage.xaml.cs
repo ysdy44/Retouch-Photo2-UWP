@@ -74,7 +74,6 @@ namespace Retouch_Photo2
 
             this.Loaded += async (s, e) =>
             {
-                await this.ConstructSetting();
                 await this._lockLoaded();
 
                 //FileUtil

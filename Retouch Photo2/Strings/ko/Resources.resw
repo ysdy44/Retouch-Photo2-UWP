@@ -92,6 +92,9 @@
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>캔버스 위로 이동</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>캔버스를 오른쪽으로 이동</value></data>
 <data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>캔버스 아래로 이동</value></data>
+<data name='$SettingPage_Language' xml:space='preserve'><value>언어</value></data>
+<data name='$SettingPage_LanguageTip' xml:space='preserve'><value>앱을 다시 시작하여 변경 내용을 확인하세요.</value></data>
+<data name='$SettingPage_Language_UseSystemSetting' xml:space='preserve'><value>시스템 설정 사용</value></data>
 <data name='$SettingPage_LocalFolder' xml:space='preserve'><value>로컬 폴더</value></data>
 <data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>열다</value></data>
 <data name='$MainPage_DocumentationTip' xml:space='preserve'><value>문서 웹 페이지 열기</value></data>

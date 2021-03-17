@@ -92,6 +92,9 @@
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>Canvas gaat omhoog</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>Verplaats het canvas naar rechts</value></data>
 <data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>Canvas gaat naar beneden</value></data>
+<data name='$SettingPage_Language' xml:space='preserve'><value>Taal</value></data>
+<data name='$SettingPage_LanguageTip' xml:space='preserve'><value>Start de app om uw wijzigingen te zien.</value></data>
+<data name='$SettingPage_Language_UseSystemSetting' xml:space='preserve'><value>Gebruik de systeeminstelling</value></data>
 <data name='$SettingPage_LocalFolder' xml:space='preserve'><value>Lokale map</value></data>
 <data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>Open</value></data>
 <data name='$MainPage_DocumentationTip' xml:space='preserve'><value>Open de webpagina van het document</value></data>

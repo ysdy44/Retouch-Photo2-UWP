@@ -75,7 +75,9 @@
         <Button x:Name="FontWeightButton" Style="{StaticResource AppIconRoundedButtonStyle}"
                         Content="{x:Bind FontWeightComboBox.Title, Mode=OneWay}">
             <Button.Tag>
-                <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                          RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"
+                          MirroredWhenRightToLeft="True"/>
             </Button.Tag>
         </Button>
 
@@ -85,7 +87,8 @@
         <Button x:Name="FontFamilyButton" Style="{StaticResource AppIconRoundedButtonStyle}"
                         Content="{x:Bind SelectionViewModel.FontFamily, Mode=OneWay}">
             <Button.Tag>
-                <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                          MirroredWhenRightToLeft="True"/>
             </Button.Tag>
         </Button>
 
@@ -102,7 +105,9 @@
                              Value="{x:Bind FontSizeConverter(SelectionViewModel.FontSize), Mode=OneWay}" />
 
             <Button x:Name="FontSizeButton" Grid.Column="1" Style="{StaticResource AppRoundedButtonStyle}">
-                <FontIcon Margin="4,0" Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                <FontIcon Margin="4,0" Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                          RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"
+                          MirroredWhenRightToLeft="True"/>
             </Button>
 
         </Grid>

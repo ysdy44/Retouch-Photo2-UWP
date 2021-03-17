@@ -92,6 +92,9 @@
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>قماش يتحرك لأعلى</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>انقل اللوحة إلى اليمين</value></data>
 <data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>قماش يتحرك لأسفل</value></data>
+<data name='$SettingPage_Language' xml:space='preserve'><value>لغة</value></data>
+<data name='$SettingPage_LanguageTip' xml:space='preserve'><value>أعد تشغيل التطبيق لمشاهدة التغييرات.</value></data>
+<data name='$SettingPage_Language_UseSystemSetting' xml:space='preserve'><value>استخدم إعدادات النظام</value></data>
 <data name='$SettingPage_LocalFolder' xml:space='preserve'><value>مجلد محلي</value></data>
 <data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>فتح</value></data>
 <data name='$MainPage_DocumentationTip' xml:space='preserve'><value>افتح صفحة ويب المستند</value></data>

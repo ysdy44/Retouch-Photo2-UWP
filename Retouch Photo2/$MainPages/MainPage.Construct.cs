@@ -103,31 +103,6 @@ namespace Retouch_Photo2
         }
 
 
-        //Setting
-        private async Task ConstructSetting()
-        {
-            //Setting
-            Setting setting = await XML.ConstructSettingFile();
-            if (setting != null)
-            {
-                this.SettingViewModel.Setting = setting;
-            }
-
-            //Theme
-            this.SettingViewModel.ConstructTheme();
-
-            //DeviceLayout
-            this.SettingViewModel.ConstructDeviceLayout();
-            this.SettingViewModel.RegisteDeviceLayout();
-
-            //DeviceLayout
-            this.SettingViewModel.ConstructLayersHeight();
-
-            //MenuType
-            this.SettingViewModel.ConstructMenuType(this.TipViewModel.Menus);
-        }
-
-
         //InitialControl
         private void ConstructInitialControl()
         {

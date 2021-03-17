@@ -92,6 +92,9 @@
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>Leinwand nach oben bewegen</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>Bewegen Sie die Leinwand nach rechts</value></data>
 <data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>Leinwand nach unten bewegen</value></data>
+<data name='$SettingPage_Language' xml:space='preserve'><value>Sprache</value></data>
+<data name='$SettingPage_LanguageTip' xml:space='preserve'><value>Starten Sie die App neu, um Ihre Änderungen anzuzeigen.</value></data>
+<data name='$SettingPage_Language_UseSystemSetting' xml:space='preserve'><value>Verwenden Sie die Systemeinstellung</value></data>
 <data name='$SettingPage_LocalFolder' xml:space='preserve'><value>Lokaler Ordner</value></data>
 <data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>Öffnen</value></data>
 <data name='$MainPage_DocumentationTip' xml:space='preserve'><value>Dokumentwebseite öffnen</value></data>

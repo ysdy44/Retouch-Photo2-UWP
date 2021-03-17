@@ -92,6 +92,9 @@
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>画布向上移动</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>画布向右移动</value></data>
 <data name='$SettingPage_Key_Move_Bottom' xml:space='preserve'><value>画布向下移动</value></data>
+<data name='$SettingPage_Language' xml:space='preserve'><value>语言</value></data>
+<data name='$SettingPage_LanguageTip' xml:space='preserve'><value>重启应用以查看更改。</value></data>
+<data name='$SettingPage_Language_UseSystemSetting' xml:space='preserve'><value>使用系统设置</value></data>
 <data name='$SettingPage_LocalFolder' xml:space='preserve'><value>本地文件夹</value></data>
 <data name='$SettingPage_LocalFolder_Open' xml:space='preserve'><value>打开</value></data>
 <data name='$MainPage_DocumentationTip' xml:space='preserve'><value>打开文档网页</value></data>

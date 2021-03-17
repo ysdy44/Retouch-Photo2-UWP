@@ -6,11 +6,25 @@ using System.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.Globalization;
+using System.Globalization;
 
 namespace Retouch_Photo2
 {
     public sealed partial class SettingPage : Page
     {
+        int index = 0;
+        Style getStyle()
+        {
+            index++;
+            return (index % 2 == 0) ? this.MenuBorderStyle2 : this.MenuBorderStyle1;
+        }
+        Style getStyle2()
+        {
+            index++;
+            return (index % 2 == 0) ? this.KeyContentControlBackgroundStyle : this.KeyContentControlStyle;
+        }
+
 
         //FlowDirection
         private void ConstructFlowDirection()
@@ -52,16 +66,6 @@ namespace Retouch_Photo2
             this.LayersHeightTextBlock.Text = resource.GetString("$SettingPage_LayersHeight");
             this.LayersHeightTipTextBlock.Text = resource.GetString("$SettingPage_LayersHeightTip");
 
-
-
-            int index = 0;
-            Style getStyle()
-            {
-                index++;
-                return (index % 2 == 0) ? this.KeyContentControlBackgroundStyle : this.KeyContentControlStyle;
-            }
-
-
             this.KeyTextBlock.Text = resource.GetString("$SettingPage_Key");
             this.Key00Border.Child = new StackPanel
             {
@@ -71,62 +75,77 @@ namespace Retouch_Photo2
                     {
                         Tag = "Shift",
                         Content = resource.GetString("Tools_MoreTransform_Ratio"),
-                        Style = getStyle()
+                        Style = this.getStyle2()
                     },
                     new ContentControl
                     {
                         Tag = "Shift",
                         Content = resource.GetString("Tools_MoreCreate_Square"),
-                        Style = getStyle()
+                        Style = this.getStyle2()
                     },
                     new ContentControl
                     {
                         Tag = "Ctrl",
                         Content = resource.GetString("Tools_MoreCreate_Center"),
-                        Style = getStyle()
+                        Style = this.getStyle2()
                     },
                     new ContentControl
                     {
                         Tag = "Space",
                         Content = resource.GetString("Menus_Transformer_StepFrequency"),
-                        Style = getStyle()
+                        Style = this.getStyle2()
                     },
                     new ContentControl
                     {
                         Tag = "Space",
                         Content = resource.GetString("$SettingPage_Key_Rotate"),
-                        Style = getStyle()
+                        Style = this.getStyle2()
                     }
                 }
             };
 
-            foreach (var item in from key
-                in this.SettingViewModel.KeyboardAccelerators
-                                 where key.Group == 1
-                                 select new ContentControl { Tag = key.ToString(), Content = resource.GetString(key.TitleResource), Style = getStyle() })
+            if (this.SettingViewModel.KeyboardAccelerators is IList<KeyboardAccelerator2> keys)
             {
-                this.Key01StackPanel.Children.Add(item);
-            }
+                foreach (var key in from k in keys where k.Group == 1 select k)
+                {
+                    this.Key01StackPanel.Children.Add(new ContentControl
+                    {
+                        Tag = key.ToString(),
+                        Content = resource.GetString(key.TitleResource),
+                        Style = this.getStyle2()
+                    });
+                }
 
-            foreach (var item in from key
-                in this.SettingViewModel.KeyboardAccelerators
-                                 where key.Group == 2
-                                 select new ContentControl { Tag = key.ToString(), Content = resource.GetString(key.TitleResource), Style = getStyle() })
-            {
-                this.Key02StackPanel.Children.Add(item);
-            }
+                foreach (var key in from k in keys where k.Group == 2 select k)
+                {
+                    this.Key02StackPanel.Children.Add(new ContentControl
+                    {
+                        Tag = key.ToString(),
+                        Content = resource.GetString(key.TitleResource),
+                        Style = this.getStyle2()
+                    });
+                }
 
-            foreach (var item in from key
-                in this.SettingViewModel.KeyboardAccelerators
-                                 where key.Group == 3
-                                 select new ContentControl { Tag = key.ToString(), Content = resource.GetString(key.TitleResource), Style = getStyle() })
-            {
-                this.Key03StackPanel.Children.Add(item);
+                foreach (var key in from k in keys where k.Group == 3 select k)
+                {
+                    this.Key03StackPanel.Children.Add(new ContentControl
+                    {
+                        Tag = key.ToString(),
+                        Content = resource.GetString(key.TitleResource),
+                        Style = this.getStyle2()
+                    });
+                }
             }
 
 
             this.MenuTypeTextBlock.Text = resource.GetString("$SettingPage_MenuType");
             this.MenuTypeTipTextBlock.Text = resource.GetString("$SettingPage_MenuTypeTip");
+
+
+            this.LanguageTextBlock.Text = resource.GetString("$SettingPage_Language");
+            this.LanguageTipTextBlock.Text = resource.GetString("$SettingPage_LanguageTip");
+            this.UseSystemSettingRadioButton.Content = resource.GetString("$SettingPage_Language_UseSystemSetting");
+
 
             this.LocalFolderTextBlock.Text = resource.GetString("$SettingPage_LocalFolder");
             this.OpenTextBlock.Text = resource.GetString("$SettingPage_LocalFolder_Open");
@@ -245,7 +264,6 @@ namespace Retouch_Photo2
             this.ConstructLayersHeightButton(this.Height70Button, 70, height);
             this.ConstructLayersHeightButton(this.Height80Button, 80, height);
         }
-
         private void ConstructLayersHeightButton(RadioButton radioButton, int value, int groupValue)
         {
             string type = this.LayersHeightTextBlock.Text;
@@ -262,41 +280,86 @@ namespace Retouch_Photo2
         //MenuType
         private void ConstructMenuType()
         {
-            int index = 0;
-            Style getStyle()
-            {
-                index++;
-                return (index % 2 == 0) ? this.MenuBorderStyle2 : this.MenuBorderStyle1;
-            }
-
-
             IList<MenuType> menuTypes = this.SettingViewModel.Setting.MenuTypes;
-            CheckBox createMenuCheckBox(IMenu menu)
-            {
-                bool isContains = menuTypes.Contains(menu.Type);
-
-                CheckBox checkBox = new CheckBox
-                {
-                    Content = menu.Button.Title,
-                    IsChecked = isContains,
-                };
-                checkBox.Checked += async (s, e) => await this.AddMenu(menu.Type);
-                checkBox.Unchecked += async (s, e) => await this.RemoveMenu(menu.Type);
-
-                return checkBox;
-            }
-
 
             foreach (IMenu menu in this.TipViewModel.Menus)
             {
                 this.MenusStackPanel.Children.Add(new Border
                 {
-                    Child = createMenuCheckBox(menu),
-                    Style = getStyle(),
+                    Child = this.ConstructMenuTypeCheckBox(menu, menuTypes),
+                    Style = this.getStyle()
                 });
             }
         }
+        private CheckBox ConstructMenuTypeCheckBox(IMenu menu, IList<MenuType> menuTypes)
+        {
+            bool isContains = menuTypes.Contains(menu.Type);
 
+            CheckBox checkBox = new CheckBox
+            {
+                Content = menu.Button.Title,
+                IsChecked = isContains,
+            };
+            checkBox.Checked += async (s, e) => await this.AddMenu(menu.Type);
+            checkBox.Unchecked += async (s, e) => await this.RemoveMenu(menu.Type);
+
+            return checkBox;
+        }
+
+
+
+        //Language
+        private void ConstructLanguage()
+        {
+            string groupLanguage = this.SettingViewModel.Setting.Language;
+
+            this.UseSystemSettingRadioButton.GroupName = "Language";
+            this.UseSystemSettingRadioButton.IsChecked = string.IsNullOrEmpty(groupLanguage);
+
+            List<string> languages = new List<string>(ApplicationLanguages.ManifestLanguages);
+            languages.Sort();
+            foreach (string language in languages)
+            {
+                CultureInfo culture = new CultureInfo(language);
+                this.ConstructLanguageRadioButton(language, new RadioButton
+                {
+                    GroupName = "Language",
+                    IsChecked = groupLanguage == language,
+                    Content = new StackPanel
+                    {
+                        Orientation = Orientation.Horizontal,
+                        Children=
+                        {
+                            new TextBlock
+                            {
+                                Text = culture.NativeName,
+                            },
+                            new TextBlock
+                            {
+                                Text = culture.DisplayName,
+                                Margin = new Thickness(12, 0, 0, 0),
+                                Opacity = 0.5d
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        private void ConstructLanguageRadioButton(string language, RadioButton radioButton)
+        {
+            radioButton.Checked += async (s, e) => await this.SetLanguage(language);
+
+            ToolTipService.SetToolTip(radioButton, new ToolTip
+            {
+                Content = language,
+                Style = this.ToolTipStyle
+            });
+            this.LanguageStackPanel.Children.Add(new Border
+            {
+                Child = radioButton,
+                Style = this.getStyle()
+            });
+        }
 
 
     }

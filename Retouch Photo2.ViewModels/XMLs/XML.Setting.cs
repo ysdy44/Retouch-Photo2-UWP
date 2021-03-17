@@ -37,7 +37,8 @@ namespace Retouch_Photo2.ViewModels
                          from menuType
                          in setting.MenuTypes
                          select new XElement("MenuType", menuType)
-                     ))
+                     )),
+                     new XElement("Language", setting.Language)
                 )
             );
         }
@@ -68,6 +69,7 @@ namespace Retouch_Photo2.ViewModels
                         ).ToList();
                     }
                 }
+                if (root.Element("Language") is XElement language) setting.Language = language.Value;
 
                 return setting;
             }
