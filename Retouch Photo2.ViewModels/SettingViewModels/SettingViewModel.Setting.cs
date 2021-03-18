@@ -38,9 +38,6 @@ namespace Retouch_Photo2.ViewModels
 
             //MenuType
             this.ConstructMenuType(menus);
-
-            //Language
-            this.ConstructLanguage();
         }
 
 
@@ -79,19 +76,6 @@ namespace Retouch_Photo2.ViewModels
                 bool isVisible = this.Setting.MenuTypes.Any(m => m == menu.Type);
                 menu.Button.Self.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
             }
-        }
-
-        //@Construct
-        /// <summary>
-        /// Initializes the language.
-        /// </summary>
-        public void ConstructLanguage()
-        {
-            string language = this.Setting.Language;
-            if (string.IsNullOrEmpty(language)) return;
-            if (ApplicationLanguages.ManifestLanguages.All(l => l != language)) return;
-
-            ApplicationLanguages.PrimaryLanguageOverride = language;
         }
 
     }

@@ -67,13 +67,5 @@ namespace Retouch_Photo2
             await this.Save();
         }
 
-        private async Task SetLanguage(string language)
-        {
-            //Setting
-            this.SettingViewModel.Setting.Language = language;
-            this.SettingViewModel.ConstructTheme();//Construct
-            await this.Save();//Write
-        }
-
     }
 }

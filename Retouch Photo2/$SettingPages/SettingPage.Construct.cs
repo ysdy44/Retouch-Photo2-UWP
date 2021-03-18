@@ -311,7 +311,7 @@ namespace Retouch_Photo2
         //Language
         private void ConstructLanguage()
         {
-            string groupLanguage = this.SettingViewModel.Setting.Language;
+            string groupLanguage = ApplicationLanguages.PrimaryLanguageOverride;
 
             this.UseSystemSettingRadioButton.GroupName = "Language";
             this.UseSystemSettingRadioButton.IsChecked = string.IsNullOrEmpty(groupLanguage);
@@ -347,7 +347,7 @@ namespace Retouch_Photo2
         }
         private void ConstructLanguageRadioButton(string language, RadioButton radioButton)
         {
-            radioButton.Checked += async (s, e) => await this.SetLanguage(language);
+            radioButton.Checked += (s, e) => ApplicationLanguages.PrimaryLanguageOverride = language;
 
             ToolTipService.SetToolTip(radioButton, new ToolTip
             {
