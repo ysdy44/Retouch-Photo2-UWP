@@ -9,7 +9,7 @@ namespace Retouch_Photo2.Operates
     /// </summary>
     [TemplateVisualState(Name = nameof(Normal), GroupName = nameof(CommonStates))]
     [TemplateVisualState(Name = nameof(Disabled), GroupName = nameof(CommonStates))]
-    public sealed class OperateControl : Control
+    public sealed class OperateControl : ContentControl
     {
 
         VisualStateGroup CommonStates;
@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Operates
                 this.Resources = new ResourceDictionary
                 {                       
                     //@Template
-                    Source = new Uri($@"ms-appx:///Retouch_Photo2.Operates\{folder}Icons\{key}Icon.xaml")
+                    Source = new Uri($@"ms-appx:///Retouch Photo2.Operates\{folder}Icons\{key}Icon.xaml")
                 };
                 {
                     //@Template

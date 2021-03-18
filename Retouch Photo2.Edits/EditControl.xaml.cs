@@ -9,7 +9,7 @@ namespace Retouch_Photo2.Edits
     /// </summary>
     [TemplateVisualState(Name = nameof(Normal), GroupName = nameof(CommonStates))]
     [TemplateVisualState(Name = nameof(Disabled), GroupName = nameof(CommonStates))]
-    public sealed class EditControl : Control
+    public sealed class EditControl : ContentControl
     {
 
         VisualStateGroup CommonStates;
