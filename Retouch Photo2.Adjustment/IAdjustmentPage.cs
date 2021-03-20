@@ -4,6 +4,7 @@
 // Only:              
 // Complete:      ★★
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments
 {
@@ -15,7 +16,7 @@ namespace Retouch_Photo2.Adjustments
         /// <summary> Gets the type. </summary>
         AdjustmentType Type { get; }
         /// <summary> Gets the icon. </summary>
-        FrameworkElement Icon { get; }
+        ControlTemplate Icon { get; set; }
         /// <summary> Gets the self. </summary>
         FrameworkElement Self { get; }
         /// <summary> Gets the text. </summary>

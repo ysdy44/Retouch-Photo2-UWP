@@ -4,8 +4,10 @@
 // Only:              
 // Complete:      ★★★
 using Microsoft.Graphics.Canvas;
+using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments
 {
@@ -20,8 +22,13 @@ namespace Retouch_Photo2.Adjustments
         Visibility PageVisibility { get; }
         /// <summary> Gets the page. </summary>
         IAdjustmentPage Page { get; }
+        /// <summary> Gets the icon. </summary>
+        ControlTemplate Icon { get; }
         /// <summary> Gets the text. </summary>
         string Text { get; }
+
+        ICommand Edit { get; }
+        ICommand Remove { get; }
 
         /// <summary>
         /// Get own copy.

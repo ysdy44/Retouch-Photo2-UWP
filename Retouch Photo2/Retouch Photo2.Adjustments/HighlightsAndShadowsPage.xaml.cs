@@ -3,7 +3,7 @@
 // Difficult:         ★★
 // Only:              
 // Complete:      ★★★
-using Retouch_Photo2.Adjustments.Icons;
+using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
@@ -68,7 +68,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            HighlightsAndShadowsAdjustment.GenericText = this.Text;
             HighlightsAndShadowsAdjustment.GenericPage = this;
 
             this.ConstructShadows1();
@@ -108,12 +107,12 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.HighlightsAndShadows;
         /// <summary> Gets the icon. </summary>
-        public FrameworkElement Icon { get; } = new HighlightsAndShadowsIcon();
+        public ControlTemplate Icon { get => HighlightsAndShadowsAdjustment.GenericIcon; set => HighlightsAndShadowsAdjustment.GenericIcon = value; }
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Text { get; private set; }
-        
+        public string Text { get => HighlightsAndShadowsAdjustment.GenericText; private set => HighlightsAndShadowsAdjustment.GenericText = value; }
+
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new HighlightsAndShadowsAdjustment();
        

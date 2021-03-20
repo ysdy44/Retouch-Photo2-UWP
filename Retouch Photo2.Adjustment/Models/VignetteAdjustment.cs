@@ -5,9 +5,12 @@
 // Complete:      ★★★★
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+
 
 namespace Retouch_Photo2.Adjustments.Models
 {
@@ -19,14 +22,24 @@ namespace Retouch_Photo2.Adjustments.Models
         //@Static
         //@Generic
         public static string GenericText = "Vignette";
+        public static ControlTemplate GenericIcon;
         public static IAdjustmentPage GenericPage;// = new VignettePage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Vignette;
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page { get; } = VignetteAdjustment.GenericPage;
+        public IAdjustmentPage Page =>VignetteAdjustment.GenericPage;
+        public ControlTemplate Icon => VignetteAdjustment.GenericIcon;
         public string Text => VignetteAdjustment.GenericText;
 
+        public ICommand Edit { get; private set; }
+        public ICommand Remove { get; private set; }
+
+        public VignetteAdjustment()
+        {
+            this.Edit = new AdjustmentCommand(() => AdjustmentCommand.Edit(this));
+            this.Remove = new AdjustmentCommand(() => AdjustmentCommand.Remove(this));
+        }
 
         /// <summary> Specifies the size of the vignette region as a percentage of the full image. </summary>
         public float Amount = 0.0f;

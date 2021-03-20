@@ -3,7 +3,7 @@
 // Difficult:         ★★
 // Only:              
 // Complete:      ★★★
-using Retouch_Photo2.Adjustments.Icons;
+using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.Adjustments.Models;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -22,7 +22,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         public GrayPage()
         {
             this.ConstructStrings();
-            GrayAdjustment.GenericText = this.Text;
         }
     }
 
@@ -43,11 +42,11 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Gray;
         /// <summary> Gets the icon. </summary>
-        public FrameworkElement Icon { get; } = new GrayIcon();
+        public ControlTemplate Icon { get => GrayAdjustment.GenericIcon; set => GrayAdjustment.GenericIcon = value; }
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => null;
         /// <summary> Gets the text. </summary>
-        public string Text { get; private set; }
+        public string Text { get => GrayAdjustment.GenericText; private set => GrayAdjustment.GenericText = value; }
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new GrayAdjustment();

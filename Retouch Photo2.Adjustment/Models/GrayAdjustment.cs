@@ -5,8 +5,10 @@
 // Complete:      ★★★★
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
@@ -18,13 +20,24 @@ namespace Retouch_Photo2.Adjustments.Models
         //@Static
         //@Generic
         public static string GenericText = "Gray";
+        public static ControlTemplate GenericIcon;
         public static IAdjustmentPage GenericPage;// = new GrayPage();
         
         //@Content
         public AdjustmentType Type => AdjustmentType.Gray;
         public Visibility PageVisibility => Visibility.Collapsed;
         public IAdjustmentPage Page { get; } = GrayAdjustment.GenericPage;
+        public ControlTemplate Icon => GrayAdjustment.GenericIcon;
         public string Text => GrayAdjustment.GenericText;
+
+        public ICommand Edit { get; private set; }
+        public ICommand Remove { get; private set; }
+
+        public GrayAdjustment()
+        {
+            this.Edit = new AdjustmentCommand(() => AdjustmentCommand.Edit(this));
+            this.Remove = new AdjustmentCommand(() => AdjustmentCommand.Remove(this));
+        }
 
 
         public IAdjustment Clone()

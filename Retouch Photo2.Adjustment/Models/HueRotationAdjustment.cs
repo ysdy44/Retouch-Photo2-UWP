@@ -5,8 +5,10 @@
 // Complete:      ★★★★
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
@@ -18,13 +20,24 @@ namespace Retouch_Photo2.Adjustments.Models
         //@Static
         //@Generic
         public static string GenericText = "HueRotation";
+        public static ControlTemplate GenericIcon;
         public static IAdjustmentPage GenericPage;// = new HueRotationPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.HueRotation;
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = HueRotationAdjustment.GenericPage;
-        public string Text => HueRotationAdjustment.GenericText;
+        public ControlTemplate Icon => HueRotationAdjustment.GenericIcon;
+        public string Text => HueRotationAdjustment.GenericText; 
+        
+        public ICommand Edit { get; private set; }
+        public ICommand Remove { get; private set; }
+
+        public HueRotationAdjustment()
+        {
+            this.Edit = new AdjustmentCommand(() => AdjustmentCommand.Edit(this));
+            this.Remove = new AdjustmentCommand(() => AdjustmentCommand.Remove(this));
+        }
 
 
         /// <summary> Angle to rotate the hue, in radians. Default value 0, range 0 to 2*pi. </summary>

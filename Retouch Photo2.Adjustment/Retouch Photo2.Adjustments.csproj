@@ -111,42 +111,10 @@
     <Compile Include="IAdjustment.cs" />
     <Compile Include="AdjustmentType.cs" />
     <Compile Include="IAdjustmentPage.cs" />
-    <Compile Include="Icons\BrightnessIcon.xaml.cs">
-      <DependentUpon>BrightnessIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\ContrastIcon.xaml.cs">
-      <DependentUpon>ContrastIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\ExposureIcon.xaml.cs">
-      <DependentUpon>ExposureIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\GammaTransferIcon.xaml.cs">
-      <DependentUpon>GammaTransferIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\GrayIcon.xaml.cs">
-      <DependentUpon>GrayIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\HighlightsAndShadowsIcon.xaml.cs">
-      <DependentUpon>HighlightsAndShadowsIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\HueRotationIcon.xaml.cs">
-      <DependentUpon>HueRotationIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\InvertIcon.xaml.cs">
-      <DependentUpon>InvertIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\SaturationIcon.xaml.cs">
-      <DependentUpon>SaturationIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\TemperatureIcon.xaml.cs">
-      <DependentUpon>TemperatureIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Icons\VignetteIcon.xaml.cs">
-      <DependentUpon>VignetteIcon.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdjustmentCommand.cs" />
     <Compile Include="Models\BrightnessAdjustment.cs" />
     <Compile Include="Models\ContrastAdjustment.cs" />
     <Compile Include="Models\ExposureAdjustment.cs" />

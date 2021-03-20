@@ -3,7 +3,7 @@
 // Difficult:         ★★
 // Only:              
 // Complete:      ★★★
-using Retouch_Photo2.Adjustments.Icons;
+using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.Adjustments.Models;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -22,7 +22,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         public InvertPage()
         {
             this.ConstructStrings();
-            InvertAdjustment.GenericText = this.Text;
             InvertAdjustment.GenericPage = this;
         }
     }
@@ -44,11 +43,11 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Invert;
         /// <summary> Gets the icon. </summary>
-        public FrameworkElement Icon { get; } = new InvertIcon();
+        public ControlTemplate Icon { get => InvertAdjustment.GenericIcon; set => InvertAdjustment.GenericIcon = value; }
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => null;
         /// <summary> Gets the text. </summary>
-        public string Text { get; private set; }
+        public string Text { get => InvertAdjustment.GenericText; private set => InvertAdjustment.GenericText = value; }
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new InvertAdjustment();

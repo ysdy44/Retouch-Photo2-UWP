@@ -13,6 +13,7 @@ using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -111,7 +112,7 @@ namespace Retouch_Photo2.Menus.Models
             MaxHeight = 300
         };
 
-        private IEnumerable<IAdjustmentPage> AdjustmentPages = new List<IAdjustmentPage>()
+        private readonly IEnumerable<IAdjustmentPage> AdjustmentPages = new List<IAdjustmentPage>()
         {
             new GrayPage(),
             new InvertPage(),
@@ -165,8 +166,8 @@ namespace Retouch_Photo2.Menus.Models
         {
             if (this._vsAdjustments == null) return;
 
-            this.ItemsControl.ItemsSource = null;
-            this.ItemsControl.ItemsSource = this._vsAdjustments;
+            this.ListView.ItemsSource = null;
+            this.ListView.ItemsSource = this._vsAdjustments;
         }
 
 
@@ -235,15 +236,14 @@ namespace Retouch_Photo2.Menus.Models
 
                 this.VisualState = this.VisualState;//State
             };
+
+            AdjustmentCommand.Edit = this.EditAction;
+            AdjustmentCommand.Remove = this.RemoveAction;
         }
 
 
-        //@DataTemplate
-        /// <summary> DataTemplate's EditButton Tapped. </summary>
-        private void EditButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void EditAction(IAdjustment adjustment)
         {
-            IAdjustment adjustment = this.GetGridDataContext(sender);
-            if (adjustment == null) return;
             if (adjustment.PageVisibility == Visibility.Collapsed) return;
 
             if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
@@ -260,12 +260,8 @@ namespace Retouch_Photo2.Menus.Models
                 this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
             }
         }
-        /// <summary> DataTemplate's RemoveButton Tapped. </summary>
-        private void RemoveButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void RemoveAction(IAdjustment adjustment)
         {
-            IAdjustment adjustment = this.GetGridDataContext(sender);
-            if (adjustment == null) return;
-
             this.FilterRemove(adjustment);
         }
 
@@ -303,6 +299,20 @@ namespace Retouch_Photo2.Menus.Models
 
             this.AddButton.Content = resource.GetString("Menus_Adjustment_Add");
             this.FilterButton.Content = resource.GetString("Menus_Adjustment_Filters");
+
+
+            foreach (IAdjustmentPage adjustmentPage in this.AdjustmentPages)
+            {
+                AdjustmentType type = adjustmentPage.Type;
+
+                ResourceDictionary resources = new ResourceDictionary
+                {
+                    //@Template
+                    Source = new Uri($@"ms-appx:///Retouch Photo2.Adjustments\Icons\{type}Icon.xaml")
+                };
+                adjustmentPage.Icon = resources[$"{type}Icon"] as ControlTemplate;
+            }
+
         }
 
         public void Reset()

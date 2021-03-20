@@ -3,13 +3,13 @@
 // Difficult:         ★★
 // Only:              
 // Complete:      ★★★
-using Retouch_Photo2.Adjustments.Icons;
 using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
@@ -43,7 +43,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            ExposureAdjustment.GenericText = this.Text;
             ExposureAdjustment.GenericPage = this;
 
             this.ConstructExposure1();
@@ -71,11 +70,11 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Exposure;
         /// <summary> Gets the icon. </summary>
-        public FrameworkElement Icon { get; } = new ExposureIcon();
+        public ControlTemplate Icon { get => ExposureAdjustment.GenericIcon; set => ExposureAdjustment.GenericIcon = value; }
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Text { get; private set; }
+        public string Text { get => ExposureAdjustment.GenericText; private set => ExposureAdjustment.GenericText = value; }
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new ExposureAdjustment();

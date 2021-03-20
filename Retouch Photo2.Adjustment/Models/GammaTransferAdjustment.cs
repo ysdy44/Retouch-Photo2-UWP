@@ -5,8 +5,10 @@
 // Complete:      ★★★★
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
@@ -18,13 +20,24 @@ namespace Retouch_Photo2.Adjustments.Models
         //@Static
         //@Generic
         public static string GenericText = "GammaTransfer";
+        public static ControlTemplate GenericIcon;
         public static IAdjustmentPage GenericPage;// = new GammaTransferPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.GammaTransfer;
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = GammaTransferAdjustment.GenericPage;
+        public ControlTemplate Icon => GammaTransferAdjustment.GenericIcon;
         public string Text => GammaTransferAdjustment.GenericText;
+
+        public ICommand Edit { get; private set; }
+        public ICommand Remove { get; private set; }
+
+        public GammaTransferAdjustment()
+        {
+            this.Edit = new AdjustmentCommand(() => AdjustmentCommand.Edit(this));
+            this.Remove = new AdjustmentCommand(() => AdjustmentCommand.Remove(this));
+        }
 
         public bool ClampOutput = false;
 

@@ -16,7 +16,7 @@
 
         <!--Flyout-->
         <Flyout x:Name="AdjustmentPageFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ListView x:Name="AdjustmentPageListView" Width="190" MaxHeight="400" SelectionMode="None" IsItemClickEnabled="True">
+            <ListView x:Name="AdjustmentPageListView" MaxHeight="400" SelectionMode="None" IsItemClickEnabled="True">
 
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -28,11 +28,19 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="adjustments:IAdjustmentPage">
-                        <Button IsHitTestVisible="False" Content="{x:Bind Text}" Style="{StaticResource AppIconButton}">
-                            <Button.Tag>
-                                <ContentControl Content="{x:Bind Icon}"/>
-                            </Button.Tag>
-                        </Button> 
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--Icon-->
+                            <ContentControl Template="{x:Bind Icon}"/>
+
+                            <!--Text-->
+                            <TextBlock Grid.Column="1" Text="{x:Bind Text}" Style="{StaticResource AppTextBlockStyle}"/>
+
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
@@ -41,25 +49,29 @@
 
         <!--DataTemplate-->
         <DataTemplate x:Key="DataTemplate" x:DataType="adjustments:IAdjustment">
-            <Grid Height="32" Background="{ThemeResource AppBackground}">
+            <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="40"/>
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
 
+                <!--Icon-->
+                <ContentControl Template="{x:Bind Icon}"/>
+
                 <!--Text-->
-                <TextBlock Text="{x:Bind Text}" Foreground="{StaticResource AppText}" Style="{StaticResource AppTextBlockStyle}"/>
+                <TextBlock Grid.Column="1" Text="{x:Bind Text}" Style="{StaticResource AppTextBlockStyle}"/>
 
                 <!--Edit-->
-                <Button x:Name="EditButton" Grid.Column="1" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                   Visibility="{x:Bind PageVisibility}" Tapped="EditButton_Tapped">
+                <Button x:Name="EditButton" Grid.Column="2" Style="{StaticResource AppRoundedButtonStyle}"
+                                   Visibility="{x:Bind PageVisibility}" Command="{x:Bind Edit}">
                     <FontIcon FontSize="16" Glyph="&#xE104;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
                 </Button>
 
                 <!--Remove-->
-                <Button x:Name="RemoveButton" Grid.Column="2" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                           Tapped="RemoveButton_Tapped">
+                <Button x:Name="RemoveButton" Grid.Column="3" Style="{StaticResource AppRoundedButtonStyle}"
+                           Command="{x:Bind Remove}">
                     <FontIcon FontSize="14" Glyph="&#xE8BB;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
                 </Button>
 
@@ -129,7 +141,7 @@
             <VisualState x:Name="Adjustments">
                 <VisualState.Setters >
 
-                    <Setter Target = "ItemsControl.Visibility" Value="Visible"/>
+                    <Setter Target = "ListView.Visibility" Value="Visible"/>
 
                 </VisualState.Setters>
             </VisualState>
@@ -151,20 +163,36 @@
        </VisualStateManager.VisualStateGroups>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" MinHeight="165"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="*" MinHeight="165" MaxHeight="300"/>
         </Grid.RowDefinitions>
 
 
         <!--Body-->
-        <Border />
-        <ItemsControl x:Name="ItemsControl" Visibility="Collapsed" Margin="0,2" VerticalAlignment="Top" ItemTemplate="{StaticResource DataTemplate}"/>
-        <TextBlock x:Name="ZeroTextBlock" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
-        <TextBlock x:Name="DisableTextBlock" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
+        <Border  Grid.Row="1"/>
+        <ListView x:Name="ListView" Grid.Row="1" Visibility="Collapsed"
+                  IsItemClickEnabled="True"
+                  SelectionMode="None"
+                  ItemTemplate="{StaticResource DataTemplate}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                    <Setter Property="BorderThickness" Value="0,1,0,0"/>
+                    <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemContainerTransitions>
+                <TransitionCollection/>
+            </ListView.ItemContainerTransitions>
+        </ListView>
+        <TextBlock x:Name="ZeroTextBlock" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
+        <TextBlock x:Name="DisableTextBlock" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
 
 
         <!--Foot-->
-        <Grid x:Name="BottomGrid" Grid.Row="1">
+        <Grid x:Name="BottomGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -173,8 +201,12 @@
                 <ColumnDefinition Width="4"/>
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="TextBlock" Margin="12,0" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="AddButton" Grid.Column="1" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-            <Button x:Name="FilterButton" Grid.Column="3" Padding="16,0" Height="30" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            <Button x:Name="AddButton" Grid.Column="1" Style="{StaticResource AppIconRoundedButtonStyle}">
+                <Button.Tag>
+                    <FontIcon Glyph="&#xE109;" FontFamily="Segoe MDL2 Assets"/>
+                </Button.Tag>
+            </Button>
+            <Button x:Name="FilterButton" Grid.Column="3" Style="{StaticResource AppRoundedButtonStyle}"/>
         </Grid>
 
 

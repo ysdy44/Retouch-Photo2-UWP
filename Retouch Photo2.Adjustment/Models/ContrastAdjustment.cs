@@ -5,8 +5,10 @@
 // Complete:      ★★★★
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
@@ -18,13 +20,24 @@ namespace Retouch_Photo2.Adjustments.Models
         //@Static
         //@Generic
         public static string GenericText = "Contrast";
+        public static ControlTemplate GenericIcon;
         public static IAdjustmentPage GenericPage;// = new ContrastPage();
         
         //@Content
         public AdjustmentType Type => AdjustmentType.Contrast;
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page { get; } = ContrastAdjustment.GenericPage;
+        public IAdjustmentPage Page =>ContrastAdjustment.GenericPage;
+        public ControlTemplate Icon => ContrastAdjustment.GenericIcon;
         public string Text => ContrastAdjustment.GenericText;
+
+        public ICommand Edit { get; private set; }
+        public ICommand Remove { get; private set; }
+
+        public ContrastAdjustment()
+        {
+            this.Edit = new AdjustmentCommand(() => AdjustmentCommand.Edit(this));
+            this.Remove = new AdjustmentCommand(() => AdjustmentCommand.Remove(this));
+        }
 
 
         /// <summary> Amount by which to adjust the contrast of the image. Default value 0,  -1 -> 1. </summary>

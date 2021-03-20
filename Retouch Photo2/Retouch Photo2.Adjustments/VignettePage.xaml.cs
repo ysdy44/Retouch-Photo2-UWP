@@ -3,7 +3,7 @@
 // Difficult:         ★★
 // Only:              
 // Complete:      ★★★
-using Retouch_Photo2.Adjustments.Icons;
+using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
@@ -67,7 +67,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            VignetteAdjustment.GenericText = this.Text;
             VignetteAdjustment.GenericPage = this;
 
             this.ConstructAmount1();
@@ -103,11 +102,11 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Vignette;
         /// <summary> Gets the icon. </summary>
-        public FrameworkElement Icon { get; } = new VignetteIcon();
+        public ControlTemplate Icon { get => VignetteAdjustment.GenericIcon; set => VignetteAdjustment.GenericIcon = value; }
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Text { get; private set; }
+        public string Text { get => VignetteAdjustment.GenericText; private set => VignetteAdjustment.GenericText = value; }
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new VignetteAdjustment();

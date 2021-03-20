@@ -5,8 +5,11 @@
 // Complete:      ★★★★
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+
 
 namespace Retouch_Photo2.Adjustments.Models
 {
@@ -18,13 +21,24 @@ namespace Retouch_Photo2.Adjustments.Models
         //@Static
         //@Generic
         public static string GenericText = "HighlightsAndShadows";
+        public static ControlTemplate GenericIcon;
         public static IAdjustmentPage GenericPage;// = new HighlightsAndShadowsPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.HighlightsAndShadows;
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = HighlightsAndShadowsAdjustment.GenericPage;
+        public ControlTemplate Icon => HighlightsAndShadowsAdjustment.GenericIcon;
         public string Text => HighlightsAndShadowsAdjustment.GenericText;
+
+        public ICommand Edit { get; private set; }
+        public ICommand Remove { get; private set; }
+
+        public HighlightsAndShadowsAdjustment()
+        {
+            this.Edit = new AdjustmentCommand(() => AdjustmentCommand.Edit(this));
+            this.Remove = new AdjustmentCommand(() => AdjustmentCommand.Remove(this));
+        }
 
 
         /// <summary> How much to increase or decrease the darker parts of the image.Default value 0, range -1 to 1. </summary>

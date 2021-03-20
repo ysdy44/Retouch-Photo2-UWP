@@ -5,8 +5,10 @@
 // Complete:      ★★★★
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
@@ -18,13 +20,24 @@ namespace Retouch_Photo2.Adjustments.Models
         //@Static
         //@Generic
         public static string GenericText = "Invert";
+        public static ControlTemplate GenericIcon;
         public static IAdjustmentPage GenericPage;// = new InvertPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Invert;
         public Visibility PageVisibility => Visibility.Collapsed;
         public IAdjustmentPage Page { get; } = InvertAdjustment.GenericPage;
+        public ControlTemplate Icon => InvertAdjustment.GenericIcon;
         public string Text => InvertAdjustment.GenericText;
+
+        public ICommand Edit { get; private set; }
+        public ICommand Remove { get; private set; }
+
+        public InvertAdjustment()
+        {
+            this.Edit = new AdjustmentCommand(() => AdjustmentCommand.Edit(this));
+            this.Remove = new AdjustmentCommand(() => AdjustmentCommand.Remove(this));
+        }
 
 
         public void Reset() { }
