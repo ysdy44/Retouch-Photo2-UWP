@@ -283,204 +283,199 @@
 
         <!--Body-->
         <ScrollViewer x:Name="ScrollViewer" Grid.RowSpan="2" Padding="20,0">
-            <Border>               
+            <Border>
                 <StackPanel MaxWidth="800">
-                <StackPanel.ChildrenTransitions>
-                    <TransitionCollection>
-                        <EntranceThemeTransition IsStaggeringEnabled="True"/>
-                    </TransitionCollection>
-                </StackPanel.ChildrenTransitions>
+                    <StackPanel.ChildrenTransitions>
+                        <TransitionCollection>
+                            <EntranceThemeTransition IsStaggeringEnabled="True"/>
+                        </TransitionCollection>
+                    </StackPanel.ChildrenTransitions>
 
-                <StackPanel.Children>
-
-
-                    <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseHeader}"/>
+                    <StackPanel.Children>
 
 
-                    <ContentControl Height="12"/>
+                        <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseHeader}"/>
 
 
-                    <!--Layout-->
-                    <Border x:Name="LayoutBorder" Width="330" Height="210" Background="White" HorizontalAlignment="Left">
-                        <elements:AdaptiveWidthLayout Type="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"/>
-                    </Border>
+                        <ContentControl Height="12"/>
 
 
-                    <ContentControl Height="12"/>
+                        <!--Layout-->
+                        <Border x:Name="LayoutBorder" Width="330" Height="210" Background="White" HorizontalAlignment="Left">
+                            <elements:AdaptiveWidthLayout Type="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"/>
+                        </Border>
 
 
-                    <!--Theme-->
-                    <TextBlock x:Name="ThemeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                    <Border Height="Auto" HorizontalAlignment="Left" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
-                        <StackPanel Orientation="Horizontal">
-
-                            <RadioButton x:Name="LightRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
-                                <RadioButton.Tag>
-                                    <FontIcon Glyph="&#xE708;" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                                </RadioButton.Tag>
-                            </RadioButton>
-                            <RadioButton x:Name="DarkRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
-                                <RadioButton.Tag>
-                                    <FontIcon Glyph="&#xE706;" FontSize="26" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                                </RadioButton.Tag>
-                            </RadioButton>
-                            <RadioButton x:Name="UseSystemRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
-                                <RadioButton.Tag>
-                                    <FontIcon Glyph="&#xE7E8;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                                </RadioButton.Tag>
-                            </RadioButton>
-
-                        </StackPanel>
-                    </Border>
+                        <ContentControl Height="12"/>
 
 
-                    <ContentControl Height="12"/>
+                        <!--Theme-->
+                        <TextBlock x:Name="ThemeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Height="Auto" HorizontalAlignment="Left" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel Orientation="Horizontal">
+
+                                <RadioButton x:Name="LightRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
+                                    <RadioButton.Tag>
+                                        <FontIcon Glyph="&#xE708;" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                    </RadioButton.Tag>
+                                </RadioButton>
+                                <RadioButton x:Name="DarkRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
+                                    <RadioButton.Tag>
+                                        <FontIcon Glyph="&#xE706;" FontSize="26" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                    </RadioButton.Tag>
+                                </RadioButton>
+                                <RadioButton x:Name="UseSystemRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
+                                    <RadioButton.Tag>
+                                        <FontIcon Glyph="&#xE7E8;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                    </RadioButton.Tag>
+                                </RadioButton>
+
+                            </StackPanel>
+                        </Border>
 
 
-                    <!--Layout-->
-                    <TextBlock x:Name="DeviceLayoutTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                    <Border Height="Auto" HorizontalAlignment="Left" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
-                        <StackPanel Orientation="Horizontal">
-
-                            <RadioButton x:Name="PhoneButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
-                                <RadioButton.Tag>
-                                    <FontIcon Glyph="&#xE8EA;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                                </RadioButton.Tag>
-                            </RadioButton>
-                            <RadioButton x:Name="PadButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
-                                <RadioButton.Tag>
-                                    <FontIcon Glyph="&#xE70A;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                                </RadioButton.Tag>
-                            </RadioButton>
-                            <RadioButton x:Name="PCButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
-                                <RadioButton.Tag>
-                                    <FontIcon Glyph="&#xF71E;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                                </RadioButton.Tag>
-                            </RadioButton>
-                            <Rectangle Width="1" Fill="{ThemeResource AppBorderBrush}"/>
-                            <RadioButton x:Name="AdaptiveButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
-                                <RadioButton.Tag>
-                                    <FontIcon FontSize="32" Glyph="&#xEBC6;" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                                </RadioButton.Tag>
-                            </RadioButton>
-
-                        </StackPanel>
-                    </Border>
+                        <ContentControl Height="12"/>
 
 
-                    <ContentControl Height="12"/>
+                        <!--Layout-->
+                        <TextBlock x:Name="DeviceLayoutTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Height="Auto" HorizontalAlignment="Left" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel Orientation="Horizontal">
+
+                                <RadioButton x:Name="PhoneButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
+                                    <RadioButton.Tag>
+                                        <FontIcon Glyph="&#xE8EA;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                    </RadioButton.Tag>
+                                </RadioButton>
+                                <RadioButton x:Name="PadButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
+                                    <RadioButton.Tag>
+                                        <FontIcon Glyph="&#xE70A;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                    </RadioButton.Tag>
+                                </RadioButton>
+                                <RadioButton x:Name="PCButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
+                                    <RadioButton.Tag>
+                                        <FontIcon Glyph="&#xF71E;" FontSize="22" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                    </RadioButton.Tag>
+                                </RadioButton>
+                                <Rectangle Width="1" Fill="{ThemeResource AppBorderBrush}"/>
+                                <RadioButton x:Name="AdaptiveButton" GroupName="Layout" Style="{StaticResource AppIconRadioButtonStyle}">
+                                    <RadioButton.Tag>
+                                        <FontIcon FontSize="32" Glyph="&#xEBC6;" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                    </RadioButton.Tag>
+                                </RadioButton>
+
+                            </StackPanel>
+                        </Border>
 
 
-                    <!--Adaptive-->
-                    <Grid>
-                        <TextBlock x:Name="AdaptiveWidthTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <TextBlock x:Name="AdaptiveWidthCountTextBlock" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}">
-                            0
+                        <ContentControl Height="12"/>
+
+
+                        <!--Adaptive-->
+                        <TextBlock Margin="0,8" Style="{StaticResource TitleTextBlockStyle}">
+                            <Run x:Name="AdaptiveWidthTextBlock"/>
+                            <Run x:Name="AdaptiveWidthCountTextBlock" FontSize="16" Foreground="{ThemeResource AppText}"/>
                         </TextBlock>
-                    </Grid>
-                    <elements:AdaptiveWidthGrid x:Name="AdaptiveWidthGrid"/>
-                    <HyperlinkButton x:Name="ResetAdaptiveWidthButton"/>
+                        <elements:AdaptiveWidthGrid x:Name="AdaptiveWidthGrid" IsEnabled="{x:Bind BoolConverter(AdaptiveButton.IsChecked), Mode=OneWay}"/>
+                        <HyperlinkButton x:Name="ResetAdaptiveWidthButton" IsEnabled="{x:Bind BoolConverter(AdaptiveButton.IsChecked), Mode=OneWay}"/>
 
 
 
-                    <ContentControl Height="12"/>
+                        <ContentControl Height="12"/>
 
 
-                    <!--LayersHeight-->
-                    <TextBlock x:Name="LayersHeightTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                    <Border Height="Auto" HorizontalAlignment="Stretch" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
-                        <StackPanel Orientation="Vertical">
-                            <RadioButton x:Name="Height30Button" GroupName="Height" Style="{StaticResource LayerHeightRadioButton}"/>
-                            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-                            <RadioButton x:Name="Height40Button" GroupName="Height" Style="{StaticResource LayerHeightRadioButton}"/>
-                            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-                            <RadioButton x:Name="Height50Button" GroupName="Height" Style="{StaticResource LayerHeightRadioButton}"/>
-                            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-                            <RadioButton x:Name="Height60Button" GroupName="Height" Style="{StaticResource LayerHeightRadioButton}"/>
-                            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-                            <RadioButton x:Name="Height70Button" GroupName="Height" Style="{StaticResource LayerHeightRadioButton}"/>
-                            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-                            <RadioButton x:Name="Height80Button" GroupName="Height" Style="{StaticResource LayerHeightRadioButton}"/>
-                        </StackPanel>
-                    </Border>
-                    <TextBlock x:Name="LayersHeightTipTextBlock" Margin="0,8" Style="{StaticResource AppTextBlockStyle}"/>
+                        <!--LayersHeight-->
+                        <TextBlock x:Name="LayersHeightTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Height="Auto" HorizontalAlignment="Stretch" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel Orientation="Vertical">
+                                <RadioButton x:Name="Height30Button" GroupName="Height" Style="{StaticResource LayerHeightRadioButton}"/>
+                                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                                <RadioButton x:Name="Height40Button" GroupName="Height" Style="{StaticResource LayerHeightRadioButton}"/>
+                                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                                <RadioButton x:Name="Height50Button" GroupName="Height" Style="{StaticResource LayerHeightRadioButton}"/>
+                                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                                <RadioButton x:Name="Height60Button" GroupName="Height" Style="{StaticResource LayerHeightRadioButton}"/>
+                                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                                <RadioButton x:Name="Height70Button" GroupName="Height" Style="{StaticResource LayerHeightRadioButton}"/>
+                                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                                <RadioButton x:Name="Height80Button" GroupName="Height" Style="{StaticResource LayerHeightRadioButton}"/>
+                            </StackPanel>
+                        </Border>
+                        <TextBlock x:Name="LayersHeightTipTextBlock" Margin="0,8" Style="{StaticResource AppTextBlockStyle}"/>
 
 
-                    <ContentControl Height="12"/>
+                        <ContentControl Height="12"/>
 
 
-                    <!--Menu-->
-                    <TextBlock x:Name="MenuTypeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                    <Border Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
-                        <StackPanel x:Name="MenusStackPanel" >
-                        </StackPanel>
-                    </Border>
-                    <TextBlock x:Name="MenuTypeTipTextBlock" Margin="0,8" Style="{StaticResource AppTextBlockStyle}"/>
+                        <!--Menu-->
+                        <TextBlock x:Name="MenuTypeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel x:Name="MenusStackPanel" >
+                            </StackPanel>
+                        </Border>
+                        <TextBlock x:Name="MenuTypeTipTextBlock" Margin="0,8" Style="{StaticResource AppTextBlockStyle}"/>
 
 
-                    <ContentControl Height="12"/>
+                        <ContentControl Height="12"/>
 
 
-                    <!--Key-->
-                    <TextBlock x:Name="KeyTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <!--Key-->
+                        <TextBlock x:Name="KeyTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                         <Border x:Name="Key00Border" Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
-                    </Border>
+                        </Border>
 
-                    <ContentControl Height="12"/>
+                        <ContentControl Height="12"/>
 
-                    <Border Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
-                        <StackPanel x:Name="Key01StackPanel">
-                        </StackPanel>
-                    </Border>
+                        <Border Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel x:Name="Key01StackPanel">
+                            </StackPanel>
+                        </Border>
 
-                    <ContentControl Height="12"/>
+                        <ContentControl Height="12"/>
 
-                    <Border Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
-                        <StackPanel x:Name="Key02StackPanel">
-                        </StackPanel>
-                    </Border>
+                        <Border Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel x:Name="Key02StackPanel">
+                            </StackPanel>
+                        </Border>
 
-                    <ContentControl Height="12"/>
+                        <ContentControl Height="12"/>
 
-                    <Border Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
-                        <StackPanel x:Name="Key03StackPanel">
-                        </StackPanel>
-                    </Border>
+                        <Border Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel x:Name="Key03StackPanel">
+                            </StackPanel>
+                        </Border>
 
-                    <ContentControl Height="12"/>
-
-
-                    <!--Language-->
-                    <TextBlock x:Name="LanguageTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                    <Border Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
-                        <StackPanel x:Name="LanguageStackPanel">
-                            <Border Style="{StaticResource MenuBorderStyle1}">
-                                <RadioButton x:Name="UseSystemSettingRadioButton"/>
-                            </Border>
-                        </StackPanel>
-                    </Border>
-                    <TextBlock x:Name="LanguageTipTextBlock" Margin="0,8" Style="{StaticResource AppTextBlockStyle}"/>
+                        <ContentControl Height="12"/>
 
 
-                    <ContentControl Height="12"/>
+                        <!--Language-->
+                        <TextBlock x:Name="LanguageTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Border Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel x:Name="LanguageStackPanel">
+                            </StackPanel>
+                        </Border>
+                        <TextBlock x:Name="LanguageTipTextBlock" Margin="0,8" Style="{StaticResource AppTextBlockStyle}"/>
 
 
-                    <!--LocalFolder-->
-                    <TextBlock x:Name="LocalFolderTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                    <Button x:Name="LocalFolderButton" HorizontalAlignment="Left" Style="{ThemeResource AppIconLineCircleButton}">
-                        <StackPanel Orientation="Horizontal">
-                            <FontIcon Glyph="&#xE17C;" FontSize="24" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                            <ContentControl Width="8"/>
-                            <TextBlock x:Name="OpenTextBlock" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
+                        <ContentControl Height="12"/>
 
 
-                    <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseFooter}"/>
+                        <!--LocalFolder-->
+                        <TextBlock x:Name="LocalFolderTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <Button x:Name="LocalFolderButton" HorizontalAlignment="Left" Style="{ThemeResource AppIconLineCircleButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="&#xE17C;" FontSize="24" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                <ContentControl Width="8"/>
+                                <TextBlock x:Name="OpenTextBlock" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
 
 
-                </StackPanel.Children>
-            </StackPanel>
+                        <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseFooter}"/>
+
+
+                    </StackPanel.Children>
+                </StackPanel>
             </Border>
         </ScrollViewer>
 
@@ -510,7 +505,7 @@
 
                 <StackPanel.Children>
 
-                    <Image Width="180" Height="180" Source="ms-appx:///Icons\AppRender.png"/>
+                    <Image x:Name="AboutImage" Width="180" Height="180" Source="ms-appx:///Icons\AppRender.png"/>
 
                     <Border Padding="12,0" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
                         <TextBlock>                    

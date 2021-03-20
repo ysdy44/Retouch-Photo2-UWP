@@ -106,6 +106,7 @@ namespace Retouch_Photo2
 
             if (this.SettingViewModel.KeyboardAccelerators is IList<KeyboardAccelerator2> keys)
             {
+                this.Key01StackPanel.Children.Clear();
                 foreach (var key in from k in keys where k.Group == 1 select k)
                 {
                     this.Key01StackPanel.Children.Add(new ContentControl
@@ -116,6 +117,7 @@ namespace Retouch_Photo2
                     });
                 }
 
+                this.Key02StackPanel.Children.Clear();
                 foreach (var key in from k in keys where k.Group == 2 select k)
                 {
                     this.Key02StackPanel.Children.Add(new ContentControl
@@ -126,6 +128,7 @@ namespace Retouch_Photo2
                     });
                 }
 
+                this.Key03StackPanel.Children.Clear();
                 foreach (var key in from k in keys where k.Group == 3 select k)
                 {
                     this.Key03StackPanel.Children.Add(new ContentControl
@@ -144,7 +147,6 @@ namespace Retouch_Photo2
 
             this.LanguageTextBlock.Text = resource.GetString("$SettingPage_Language");
             this.LanguageTipTextBlock.Text = resource.GetString("$SettingPage_LanguageTip");
-            this.UseSystemSettingRadioButton.Content = resource.GetString("$SettingPage_Language_UseSystemSetting");
 
 
             this.LocalFolderTextBlock.Text = resource.GetString("$SettingPage_LocalFolder");
@@ -179,7 +181,6 @@ namespace Retouch_Photo2
 
         private void ConstructDeviceLayoutType(DeviceLayoutType type, bool isAdaptive)
         {
-            this.IsAdaptive = isAdaptive;
             this.PhoneButton.IsChecked = (isAdaptive == false && type == DeviceLayoutType.Phone);
             this.PadButton.IsChecked = (isAdaptive == false && type == DeviceLayoutType.Pad);
             this.PCButton.IsChecked = (isAdaptive == false && type == DeviceLayoutType.PC);
@@ -266,9 +267,8 @@ namespace Retouch_Photo2
         }
         private void ConstructLayersHeightButton(RadioButton radioButton, int value, int groupValue)
         {
-            string type = this.LayersHeightTextBlock.Text;
             radioButton.IsChecked = groupValue == value;
-            radioButton.Content = new LayerControl(value, $"{type} {value}")
+            radioButton.Content = new LayerControl(value, $"{value}")
             {
                 IsHitTestVisible = false
             };
@@ -282,6 +282,7 @@ namespace Retouch_Photo2
         {
             IList<MenuType> menuTypes = this.SettingViewModel.Setting.MenuTypes;
 
+            this.MenusStackPanel.Children.Clear();
             foreach (IMenu menu in this.TipViewModel.Menus)
             {
                 this.MenusStackPanel.Children.Add(new Border
@@ -293,15 +294,16 @@ namespace Retouch_Photo2
         }
         private CheckBox ConstructMenuTypeCheckBox(IMenu menu, IList<MenuType> menuTypes)
         {
-            bool isContains = menuTypes.Contains(menu.Type);
-
+            MenuType type = menu.Type;
+            bool isContains = menuTypes.Contains(type);
+            ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView();
             CheckBox checkBox = new CheckBox
             {
-                Content = menu.Button.Title,
+                Content = resourceLoader.GetString($"Menus_{type}"),
                 IsChecked = isContains,
             };
-            checkBox.Checked += async (s, e) => await this.AddMenu(menu.Type);
-            checkBox.Unchecked += async (s, e) => await this.RemoveMenu(menu.Type);
+            checkBox.Checked += async (s, e) => await this.AddMenu(type);
+            checkBox.Unchecked += async (s, e) => await this.RemoveMenu(type);
 
             return checkBox;
         }
@@ -313,11 +315,19 @@ namespace Retouch_Photo2
         {
             string groupLanguage = ApplicationLanguages.PrimaryLanguageOverride;
 
-            this.UseSystemSettingRadioButton.GroupName = "Language";
-            this.UseSystemSettingRadioButton.IsChecked = string.IsNullOrEmpty(groupLanguage);
-
             List<string> languages = new List<string>(ApplicationLanguages.ManifestLanguages);
             languages.Sort();
+            this.LanguageStackPanel.Children.Clear();
+            ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView();
+            this.ConstructLanguageRadioButton(string.Empty, new RadioButton
+            {
+                GroupName = "Language",
+                IsChecked = groupLanguage == string.Empty,
+                Content = new TextBlock 
+                {
+                    Text = resourceLoader.GetString("$SettingPage_Language_UseSystemSetting") 
+                }
+            });
             foreach (string language in languages)
             {
                 CultureInfo culture = new CultureInfo(language);
@@ -347,9 +357,17 @@ namespace Retouch_Photo2
         }
         private void ConstructLanguageRadioButton(string language, RadioButton radioButton)
         {
-            radioButton.Checked += (s, e) => ApplicationLanguages.PrimaryLanguageOverride = language;
+            radioButton.Checked += (s, e) =>
+            {
+                ApplicationLanguages.PrimaryLanguageOverride = language;
+                if (string.IsNullOrEmpty(language) == false) this.Language = language;
 
-            ToolTipService.SetToolTip(radioButton, new ToolTip
+                this.ConstructMenuType();
+                this.ConstructFlowDirection();
+                this.ConstructStrings();
+            };
+
+            if (string.IsNullOrEmpty(language) == false) ToolTipService.SetToolTip(radioButton, new ToolTip
             {
                 Content = language,
                 Style = this.ToolTipStyle

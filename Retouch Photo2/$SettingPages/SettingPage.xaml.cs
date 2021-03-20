@@ -27,15 +27,9 @@ namespace Retouch_Photo2
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
-        private bool IsAdaptive
-        {
-            set
-            {
-                this.AdaptiveWidthCountTextBlock.Opacity = value ? 1.0 : 0.6;
-                this.AdaptiveWidthGrid.IsEnabled = value;
-                this.ResetAdaptiveWidthButton.IsEnabled = value;
-            }
-        }
+
+        //@Converter
+        private bool BoolConverter(bool? boolean) => boolean == true;
 
 
         //@Construct
@@ -51,10 +45,20 @@ namespace Retouch_Photo2
             this.Head.RightButtonClick += (s, e) => this.AboutDialog.Show();
             this.ScrollViewer.ViewChanged += (s, e) => this.Head.Move(this.ScrollViewer.VerticalOffset);
 
+            int about=0;
             this.AboutDialog.SecondaryButtonClick += (s, e) => this.AboutDialog.Hide();
             this.AboutDialog.PrimaryButtonClick += (s, e) => this.AboutDialog.Hide();
+            this.AboutImage.Tapped += (s, e) =>
+            {
+                about++;
+                if (about>5)
+                {
+                    about = 0;
+                    this.Frame.Navigate(typeof(DebugPage));//Navigate
+                }
+            };
 
-            this.ConstructTheme();
+             this.ConstructTheme();
 
             this.ConstructDeviceLayout();
             this.SizeChanged += (s, e) =>

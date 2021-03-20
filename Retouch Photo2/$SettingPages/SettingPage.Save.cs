@@ -23,14 +23,12 @@ namespace Retouch_Photo2
             await this.Save();//Write
         }
 
-        private async Task SetType(DeviceLayoutType type2, bool isAdaptive2)
+        private async Task SetType(DeviceLayoutType type2, bool isAdaptive)
         {
-            this.IsAdaptive = isAdaptive2;
-
             //Setting
             DeviceLayout layout = this.SettingViewModel.Setting.DeviceLayout;
             {
-                layout.IsAdaptive = isAdaptive2;
+                layout.IsAdaptive = isAdaptive;
                 layout.FallBackType = type2;
                 DeviceLayoutType type = layout.GetActualType(this.ActualWidth);
                 this.SettingViewModel.DeviceLayoutType = type;

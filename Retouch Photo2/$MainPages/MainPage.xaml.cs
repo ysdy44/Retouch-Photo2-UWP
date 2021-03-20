@@ -7,6 +7,7 @@ using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Linq;
+using Windows.Globalization;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -107,6 +108,15 @@ namespace Retouch_Photo2
         /// <summary> The current page becomes the active page. </summary>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
+            {
+                if (ApplicationLanguages.PrimaryLanguageOverride != this.Language)
+                {
+                    this.ConstructFlowDirection();
+                    this.ConstructStrings();
+                }
+            }
+
             //Extension
             this.ApplicationView.Color = this.ApplicationView.Color;
 
