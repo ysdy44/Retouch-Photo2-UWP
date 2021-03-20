@@ -9,6 +9,7 @@
     d:DesignHeight="40"
     d:DesignWidth="200"
     Height="40"
+    IsTabStop="True"
     Background="{ThemeResource AppBarItemDisabledForegroundThemeBrush}"
     >
 

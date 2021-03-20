@@ -10,6 +10,7 @@
     -->
 
     <Style TargetType="local:TouchbarButton">
+        <Setter Property="IsTabStop" Value="True"/>
         <Setter Property="MinWidth" Value="70"/>
         <Setter Property="Height" Value="{StaticResource AppRoundedHeight}"/>
         <Setter Property="Margin" Value="{ThemeResource AppMargin}"/>

@@ -187,7 +187,7 @@
 
 
         <Border x:Name="RootGrid" 
-                Width="272"           
+                Width="322"           
                 Background="Transparent"
                 CornerRadius="{StaticResource AppCornerRadius}" 
                 >
@@ -203,7 +203,7 @@
                 <Rectangle x:Name="HeightRectangle" Grid.RowSpan="2" Height="222" VerticalAlignment="top" 
                           apiContractNotPresent5:Fill="{ThemeResource AppForeground}"
                           apiContractPresent5:Fill="{ThemeResource AppAcrylicElementBrush}" />
-                <Border x:Name="PageBorder" Grid.Row="1" Padding="{StaticResource AppPanelPadding}" Height="Auto" VerticalAlignment="Top">
+                <Border x:Name="PageBorder" Grid.Row="1" Padding="{StaticResource AppPanelPadding}" Width="300" Height="Auto" VerticalAlignment="Top">
                     <!--Content-->
                 </Border>
 

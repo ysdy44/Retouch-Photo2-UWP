@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:blends="using:Retouch_Photo2.Blends"
     xmlns:elements="using:Retouch_Photo2.Elements"
-    xmlns:hsvColorPickers="using:HSVColorPickers"
+    xmlns:hsvColorPickers="using:HSVColorPickers" xmlns:adjustments="using:Retouch_Photo2.Adjustments"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
@@ -87,6 +87,26 @@
                           MirroredWhenRightToLeft="True" />
             </ToggleButton>
         </RelativePanel>
+
+        
+        <!--Adjustments-->
+        <TextBlock x:Name="AdjustmentsTextBlock" Style="{StaticResource AppTextBlockStyle}">
+            Adjustments
+        </TextBlock>
+        <Border Style="{StaticResource AppRoundedBorderStyle}">
+            <ItemsControl ItemsSource="{x:Bind SelectionViewModel.Filter.Adjustments, Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="adjustments:IAdjustment">
+                        <ContentControl Width="30" Template="{x:Bind Icon}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
         
 
         <!--Tag Type-->

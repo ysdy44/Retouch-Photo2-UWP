@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Menus
 
         private void ConstructWidthStoryboard()
         {
-            this.WidthFlyoutItem272.IsChecked = true;
+            this.WidthFlyoutItem322.IsChecked = true;
             this.WidthFlyoutItem222.Click += (s, e) => this.WidthMode = ExpanderWidth.Width222;
             this.WidthFlyoutItem272.Click += (s, e) => this.WidthMode = ExpanderWidth.Width272;
             this.WidthFlyoutItem322.Click += (s, e) => this.WidthMode = ExpanderWidth.Width322;

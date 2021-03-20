@@ -178,6 +178,8 @@ namespace Retouch_Photo2.Menus.Models
             this.BlendModeTextBlock.Text = resource.GetString("Menus_Layer_BlendMode");
             this.VisibilityTextBlock.Text = resource.GetString("Menus_Layer_Visibility");
             this.TagTypeTextBlock.Text = resource.GetString("Menus_Layer_TagType");
+
+            this.AdjustmentsTextBlock.Text= resource.GetString("Menus_Adjustment");
         }
 
     }
