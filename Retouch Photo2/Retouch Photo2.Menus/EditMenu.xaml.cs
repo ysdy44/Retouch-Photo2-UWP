@@ -98,28 +98,28 @@ namespace Retouch_Photo2.Menus.Models
             this.ConstructStrings();
 
             //Edit
-            this.Cut.Click += (s, e) => this.MethodViewModel.MethodEditCut();
-            this.Duplicate.Click += (s, e) => this.MethodViewModel.MethodEditDuplicate();
-            this.Copy.Click += (s, e) => this.MethodViewModel.MethodEditCopy();
-            this.Paste.Click += (s, e) => this.MethodViewModel.MethodEditPaste();
-            this.Clear.Click += (s, e) => this.MethodViewModel.MethodEditClear();
+            this.Edit_Cut.Click += (s, e) => this.MethodViewModel.MethodEditCut();
+            this.Edit_Duplicate.Click += (s, e) => this.MethodViewModel.MethodEditDuplicate();
+            this.Edit_Copy.Click += (s, e) => this.MethodViewModel.MethodEditCopy();
+            this.Edit_Paste.Click += (s, e) => this.MethodViewModel.MethodEditPaste();
+            this.Edit_Clear.Click += (s, e) => this.MethodViewModel.MethodEditClear();
 
             //Select
-            this.All.Click += (s, e) => this.MethodViewModel.MethodSelectAll();
-            this.Deselect.Click += (s, e) => this.MethodViewModel.MethodSelectDeselect();
-            this.Invert.Click += (s, e) => this.MethodViewModel.MethodSelectInvert();
+            this.Select_All.Click += (s, e) => this.MethodViewModel.MethodSelectAll();
+            this.Select_Deselect.Click += (s, e) => this.MethodViewModel.MethodSelectDeselect();
+            this.Select_Invert.Click += (s, e) => this.MethodViewModel.MethodSelectInvert();
 
             //Group
-            this.Group.Click += (s, e) => this.MethodViewModel.MethodGroupGroup();
-            this.Ungroup.Click += (s, e) => this.MethodViewModel.MethodGroupUngroup();
-            this.Release.Click += (s, e) => this.MethodViewModel.MethodGroupRelease();
+            this.Group_Group.Click += (s, e) => this.MethodViewModel.MethodGroupGroup();
+            this.Group_Ungroup.Click += (s, e) => this.MethodViewModel.MethodGroupUngroup();
+            this.Group_Release.Click += (s, e) => this.MethodViewModel.MethodGroupRelease();
 
             //Combine
-            this.Union.Click += (s, e) => this.Combine(CanvasGeometryCombine.Union);
-            this.Exclude.Click += (s, e) => this.Combine(CanvasGeometryCombine.Exclude);
-            this.Xor.Click += (s, e) => this.Combine(CanvasGeometryCombine.Xor);
-            this.Intersect.Click += (s, e) => this.Combine(CanvasGeometryCombine.Intersect);
-            this.ExpandStroke.Click += (s, e) => this.ExpandStrokeCore();
+            this.Combine_Union.Click += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Union);
+            this.Combine_Exclude.Click += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Exclude);
+            this.Combine_Xor.Click += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Xor);
+            this.Combine_Intersect.Click += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Intersect);
+            this.Combine_ExpandStroke.Click += (s, e) => this.ExpandStrokeCore();
         }
 
     }
@@ -135,43 +135,24 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-
-            //@Group
-            void constructGroup(Button button, string folder)
+            
+            foreach (UIElement childPanel in this.LayoutRoot.Children)
             {
-                string key = button.Name;
-                button.Content = resource.GetString($"Edits_{folder}_{key}");
-                button.Tag = new EditControl(key, folder);
+                if (childPanel is StackPanel stackPanel)
+                {
+                    foreach (UIElement child in stackPanel.Children)
+                    {
+                        if (child is Button button)
+                        {
+                            button.Content = resource.GetString($"Edits_{button.Name}");
+                        }
+                        if (child is TextBlock textBlock)
+                        {
+                            textBlock.Text = resource.GetString($"Edits_{textBlock.Name}");
+                        }
+                    }
+                }
             }
-
-            string edit = "Edit";
-            this.EditTextBlock.Text = resource.GetString($"Edits_{edit}");
-            constructGroup(this.Cut, edit);
-            constructGroup(this.Duplicate, edit);
-            constructGroup(this.Copy, edit);
-            constructGroup(this.Paste, edit);
-            constructGroup(this.Clear, edit);
-
-            string group = "Group";
-            this.GroupTextBlock.Text = resource.GetString($"Edits_{group}");
-            constructGroup(this.Group, group);
-            constructGroup(this.Ungroup, group);
-            constructGroup(this.Release, group);
-
-
-            string select = "Select";
-            this.SelectTextBlock.Text = resource.GetString($"Edits_{select}");
-            constructGroup(this.All, select);
-            constructGroup(this.Deselect, select);
-            constructGroup(this.Invert, select);
-
-            string combine = "Combine";
-            this.CombineTextBlock.Text = resource.GetString($"Edits_{combine}");
-            constructGroup(this.Union, combine);
-            constructGroup(this.Exclude, combine);
-            constructGroup(this.Xor, combine);
-            constructGroup(this.Intersect, combine);
-            constructGroup(this.ExpandStroke, combine);
         }
 
 
@@ -265,10 +246,10 @@ namespace Retouch_Photo2.Menus.Models
         /// Combine.
         /// </summary>
         /// <param name="combine"> The combine mode. </param>
-        private void Combine(CanvasGeometryCombine combine)
+        private void GeometryCombine(CanvasGeometryCombine combine)
         {
             CanvasGeometry geometry = null;
-            Styles.IStyle style = null;
+            IStyle style = null;
 
             CanvasGeometry other = null;
 

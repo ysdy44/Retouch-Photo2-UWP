@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Edits
         /// <summary>
         /// Initializes a EditControl. 
         /// </summary>
-        public EditControl(string key, string folder)
+        public EditControl()
         {
             this.DefaultStyleKey = typeof(EditControl);
 
@@ -47,19 +47,6 @@ namespace Retouch_Photo2.Edits
             {
                 this._vsIsEnabled = this.IsEnabled;
                 this.VisualState = this.VisualState;//State
-            };
-
-            this.Loaded += (s, e) =>
-            {
-                this.Resources = new ResourceDictionary
-                {
-                    //@Template
-                    Source = new Uri($@"ms-appx:///Retouch Photo2.Edits\{folder}Icons\{key}Icon.xaml")
-                };
-                {
-                    //@Template
-                    this.Template = this.Resources[$"{key}Icon"] as ControlTemplate;
-                }
             };
         }
 

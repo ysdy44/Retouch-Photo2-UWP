@@ -8,7 +8,7 @@ namespace Retouch_Photo2.Effects
     /// <summary> 
     /// Type of <see cref="Effect"/>.
     /// </summary>
-public enum EffectType
+    public enum EffectType
     {
         /// <summary> Nornal </summary>
         None,
@@ -36,5 +36,5 @@ public enum EffectType
 
         /// <summary> Straighten </summary>
         Straighten
-    }       
+    }
 }

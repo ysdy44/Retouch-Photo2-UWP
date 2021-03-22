@@ -3,13 +3,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:edits="using:Retouch_Photo2.Edits"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
     >
 
-    <Grid>
+    <Grid x:Name="LayoutRoot">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="Auto"/>
@@ -19,22 +19,78 @@
         <StackPanel Grid.Column="0">
 
             <!--Edit-->
-            <TextBlock x:Name="EditTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="Cut" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
-            <Button x:Name="Duplicate" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
-            <Button x:Name="Copy" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
-            <Button x:Name="Paste" IsEnabled="{x:Bind MethodViewModel.ClipboardEnable, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+            <TextBlock x:Name="Edit" Style="{StaticResource AppTextBlockStyle}"/>
+            <Button x:Name="Edit_Cut" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/EditIcons/CutIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource CutIcon}"/>
+                </Button.Tag>
+            </Button>
+            <Button x:Name="Edit_Duplicate" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/EditIcons/DuplicateIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource DuplicateIcon}"/>
+                </Button.Tag>
+            </Button>
+            <Button x:Name="Edit_Copy" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/EditIcons/CopyIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource CopyIcon}"/>
+                </Button.Tag> 
+            </Button>
+            <Button x:Name="Edit_Paste" IsEnabled="{x:Bind MethodViewModel.ClipboardEnable, Mode=OneWay}" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/EditIcons/PasteIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource PasteIcon}"/>
+                </Button.Tag>
+            </Button>
             <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
-            <Button x:Name="Clear" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+            <Button x:Name="Edit_Clear" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/EditIcons/ClearIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource ClearIcon}"/>
+                </Button.Tag>
+            </Button>
 
             <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
 
             <!--Group-->
-            <TextBlock x:Name="GroupTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="Group" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
-            <Button x:Name="Ungroup" IsEnabled="{x:Bind SelectionViewModel.IsGroupLayer, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+            <TextBlock x:Name="Group" Style="{StaticResource AppTextBlockStyle}"/>
+            <Button x:Name="Group_Group" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/GroupIcons/GroupIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource GroupIcon}"/>
+                </Button.Tag>
+            </Button>
+            <Button x:Name="Group_Ungroup" IsEnabled="{x:Bind SelectionViewModel.IsGroupLayer, Mode=OneWay}" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/GroupIcons/UngroupIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource UngroupIcon}"/>
+                </Button.Tag>
+            </Button>
             <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
-            <Button x:Name="Release" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+            <Button x:Name="Group_Release" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/GroupIcons/ReleaseIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource ReleaseIcon}"/>
+                </Button.Tag>
+            </Button>
 
         </StackPanel>
 
@@ -43,22 +99,78 @@
         <StackPanel Grid.Column="2">
 
             <!--Select-->
-            <TextBlock x:Name="SelectTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="All" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
-            <Button x:Name="Deselect" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+            <TextBlock x:Name="Select" Style="{StaticResource AppTextBlockStyle}"/>
+            <Button x:Name="Select_All" IsEnabled="True" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/SelectIcons/AllIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource AllIcon}"/>
+                </Button.Tag>
+            </Button>
+            <Button x:Name="Select_Deselect" IsEnabled="True" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/SelectIcons/DeselectIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource DeselectIcon}"/>
+                </Button.Tag>
+            </Button>
             <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
-            <Button x:Name="Invert" IsEnabled="True" Style="{StaticResource AppIconButton}"/>
+            <Button x:Name="Select_Invert" IsEnabled="True" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/SelectIcons/InvertIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource InvertIcon}"/>
+                </Button.Tag>
+            </Button>
 
             <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
 
             <!--Combine-->
-            <TextBlock x:Name="CombineTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="Union" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
-            <Button x:Name="Exclude" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
-            <Button x:Name="Xor" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
-            <Button x:Name="Intersect" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+            <TextBlock x:Name="Combine" Style="{StaticResource AppTextBlockStyle}"/>
+            <Button x:Name="Combine_Union" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/CombineIcons/UnionIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource UnionIcon}"/>
+                </Button.Tag>
+            </Button>
+            <Button x:Name="Combine_Exclude" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/CombineIcons/ExcludeIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource ExcludeIcon}"/>
+                </Button.Tag>
+            </Button>
+            <Button x:Name="Combine_Xor" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/CombineIcons/XorIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource XorIcon}"/>
+                </Button.Tag>
+            </Button>
+            <Button x:Name="Combine_Intersect" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/CombineIcons/IntersectIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource IntersectIcon}"/>
+                </Button.Tag>
+            </Button>
             <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
-            <Button x:Name="ExpandStroke" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}"/>
+            <Button x:Name="Combine_ExpandStroke" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppIconButton}">
+                <Button.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/CombineIcons/ExpandStrokeIcon.xaml"/>
+                </Button.Resources>
+                <Button.Tag>
+                    <edits:EditControl Template="{StaticResource ExpandStrokeIcon}"/>
+                </Button.Tag>
+            </Button>
 
         </StackPanel>
 
