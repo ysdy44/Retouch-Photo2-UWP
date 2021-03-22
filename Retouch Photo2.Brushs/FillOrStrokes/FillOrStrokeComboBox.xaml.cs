@@ -87,7 +87,12 @@ namespace Retouch_Photo2.Brushs
 
 
                         //Button
-                        this.ConstructButton(button, key, fillOrStroke, title);
+                        button.Content = title;
+                        button.Click += (s, e) =>
+                        {
+                            this.FillOrStrokeChanged?.Invoke(this, fillOrStroke);//Delegate
+                            this.Flyout.Hide();
+                        };
 
 
                         //Group
@@ -107,36 +112,6 @@ namespace Retouch_Photo2.Brushs
                     }
                 }
             }
-        }
-
-        private void ConstructButton(Button button, string key, FillOrStroke fillOrStroke, string title)
-        {
-            /*             
-                 <Button x:Name="Fill" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs\FillOrStrokes\FillOrStrokeIcons\FillIcon.xaml"/
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource FillIcon}"/>
-                    </Button.Tag>
-                </Button>
-           */
-            button.Content = title;
-            button.Resources = new ResourceDictionary
-            {
-                //@Template
-                Source = new Uri($@"ms-appx:///Retouch Photo2.Brushs\FillOrStrokes\FillOrStrokeIcons\{key}Icon.xaml")
-            };
-            button.Tag = new ContentControl
-            {
-                //@Template
-                Template = button.Resources[$"{key}Icon"] as ControlTemplate
-            };
-            button.Click += (s, e) =>
-            {
-                this.FillOrStrokeChanged?.Invoke(this, fillOrStroke);//Delegate
-                this.Flyout.Hide();
-            };
         }
 
     }

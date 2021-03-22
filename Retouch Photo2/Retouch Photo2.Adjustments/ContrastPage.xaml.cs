@@ -73,7 +73,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Text { get => BrightnessAdjustment.GenericText; private set => BrightnessAdjustment.GenericText = value; }
+        public string Text { get => ContrastAdjustment.GenericText; private set => ContrastAdjustment.GenericText = value; }
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new ContrastAdjustment();
 

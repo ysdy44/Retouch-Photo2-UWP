@@ -13,8 +13,22 @@
         <!--Flyout-->
         <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <StackPanel x:Name="StackPanel" Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Button x:Name="Fill" Style="{StaticResource AppIconSelectedButton}"/>
-                <Button x:Name="Stroke" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="Fill" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/FillOrStrokes/FillOrStrokeIcons/FillIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource FillIcon}"/>
+                    </Button.Tag>
+                </Button>
+                <Button x:Name="Stroke" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/FillOrStrokes/FillOrStrokeIcons/StrokeIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource StrokeIcon}"/>
+                    </Button.Tag>
+                </Button>
             </StackPanel>
         </Flyout>
     </UserControl.Resources>
