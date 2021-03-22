@@ -1,0 +1,9 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="InsertIcon" TargetType="ContentControl">
+        <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
+    </ControlTemplate>
+
+</ResourceDictionary>

@@ -60,7 +60,7 @@
         </Grid.ColumnDefinitions>
         
         <!--New-->
-        <Button x:Name="NewButton" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonStyle}">
+        <Button x:Name="NewButton" Grid.Column="0" Style="{StaticResource AppRoundedButtonLeftStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="NewToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
@@ -68,7 +68,7 @@
         </Button>
 
         <!--Add-->
-        <Button x:Name="AddButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+        <Button x:Name="AddButton" Grid.Column="1" Style="{StaticResource AppRoundedButtonCenterStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="AddToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
