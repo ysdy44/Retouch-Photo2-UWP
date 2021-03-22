@@ -91,7 +91,7 @@ namespace Retouch_Photo2.Menus.Models
         {
             set
             {
-                foreach (UIElement child in this.Grid.Children)
+                foreach (UIElement child in this.LayoutRoot.Children)
                 {
                     if (child is Button button)
                     {
@@ -132,49 +132,22 @@ namespace Retouch_Photo2.Menus.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-
-            //@Group
-            void constructGroup(Button button, string folder)
+            foreach (UIElement child in this.LayoutRoot.Children)
             {
-                string key = button.Name;
-
-                ToolTipService.SetToolTip(button, new ToolTip
+                if (child is Button button)
                 {
-                    Placement = PlacementMode.Top,
-                    Content = resource.GetString($"Operates_{folder}_{key}"),
-                    Style = this.ToolTipStyle
-                });
-                button.Content = new OperateControl(key, folder);
+                    ToolTipService.SetToolTip(button, new ToolTip
+                    {
+                        Placement = PlacementMode.Top,
+                        Content = resource.GetString($"Operates_{button.Name}"),
+                        Style = this.ToolTipStyle
+                    });
+                }
+                if (child is TextBlock textBlock)
+                {
+                    textBlock.Text = resource.GetString($"Operates_{textBlock.Name}");
+                }
             }
-
-            string transform = "Transform"; 
-            this.TransformTextBlock.Text = resource.GetString($"Operates_{transform}");
-            constructGroup(this.FlipHorizontal, transform);
-            constructGroup(this.FlipVertical, transform);
-            constructGroup(this.RotateLeft, transform);
-            constructGroup(this.RotateRight, transform);
-
-            string arrange = "Arrange";
-            this.ArrangeTextBlock.Text = resource.GetString($"Operates_{arrange}");
-            constructGroup(this.MoveBack, arrange);
-            constructGroup(this.BackOne, arrange);
-            constructGroup(this.ForwardOne, arrange);
-            constructGroup(this.MoveFront, arrange);
-
-
-            string horizontally = "Horizontally"; 
-            this.HorizontallyTextBlock.Text = resource.GetString($"Operates_{horizontally}");
-            constructGroup(this.Left, horizontally);
-            constructGroup(this.Center, horizontally);
-            constructGroup(this.Right, horizontally);
-            constructGroup(this.HorizontallySpace, horizontally);
-
-            string vertically = "Vertically";
-            this.VerticallyTextBlock.Text = resource.GetString($"Operates_{vertically}");
-            constructGroup(this.Top, vertically);
-            constructGroup(this.Middle, vertically);
-            constructGroup(this.Bottom, vertically);
-            constructGroup(this.VerticallySpace, vertically);
         }
 
     }
@@ -189,28 +162,28 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructTransform()
         {
 
-            this.FlipHorizontal.Click += (s, e) =>
+            this.Transform_FlipHorizontal.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
                 this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
-            this.FlipVertical.Click += (s, e) =>
+            this.Transform_FlipVertical.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
                 this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
-            this.RotateLeft.Click += (s, e) =>
+            this.Transform_RotateLeft.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(-FanKit.Math.PiOver2, transformer.Center);
                 this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
-            this.RotateRight.Click += (s, e) =>
+            this.Transform_RotateRight.Click += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(FanKit.Math.PiOver2, transformer.Center);
@@ -223,7 +196,7 @@ namespace Retouch_Photo2.Menus.Models
         private void ConstructArrange()
         {
 
-            this.MoveBack.Click += (s, e) =>
+            this.Arrange_MoveBack.Click += (s, e) =>
             {
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
@@ -242,7 +215,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.BackOne.Click += (s, e) =>
+            this.Arrange_BackOne.Click += (s, e) =>
             {
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
@@ -267,7 +240,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.ForwardOne.Click += (s, e) =>
+            this.Arrange_ForwardOne.Click += (s, e) =>
             {
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
@@ -292,7 +265,7 @@ namespace Retouch_Photo2.Menus.Models
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.MoveFront.Click += (s, e) =>
+            this.Arrange_MoveFront.Click += (s, e) =>
             {
                 if (this.Mode != ListViewSelectionMode.Single) return;
 
@@ -316,19 +289,19 @@ namespace Retouch_Photo2.Menus.Models
         //Horizontally
         private void ConstructHorizontally()
         {
-            this.Left.Click += (s, e) => this.TransformAlign(BorderMode.MinX, Orientation.Horizontal);
-            this.Center.Click += (s, e) => this.TransformAlign(BorderMode.CenterX, Orientation.Horizontal);
-            this.Right.Click += (s, e) => this.TransformAlign(BorderMode.MaxX, Orientation.Horizontal);
-            this.HorizontallySpace.Click += (s, e) => this.TransformSapce(Orientation.Horizontal);
+            this.Horizontally_Left.Click += (s, e) => this.TransformAlign(BorderMode.MinX, Orientation.Horizontal);
+            this.Horizontally_Center.Click += (s, e) => this.TransformAlign(BorderMode.CenterX, Orientation.Horizontal);
+            this.Horizontally_Right.Click += (s, e) => this.TransformAlign(BorderMode.MaxX, Orientation.Horizontal);
+            this.Horizontally_HorizontallySpace.Click += (s, e) => this.TransformSapce(Orientation.Horizontal);
         }
 
         //Vertical
         private void ConstructVertically()
         {
-            this.Top.Click += (s, e) => this.TransformAlign(BorderMode.MinY, Orientation.Vertical);
-            this.Middle.Click += (s, e) => this.TransformAlign(BorderMode.CenterY, Orientation.Vertical);
-            this.Bottom.Click += (s, e) => this.TransformAlign(BorderMode.MaxY, Orientation.Vertical);
-            this.VerticallySpace.Click += (s, e) => this.TransformSapce(Orientation.Vertical);
+            this.Vertically_Top.Click += (s, e) => this.TransformAlign(BorderMode.MinY, Orientation.Vertical);
+            this.Vertically_Middle.Click += (s, e) => this.TransformAlign(BorderMode.CenterY, Orientation.Vertical);
+            this.Vertically_Bottom.Click += (s, e) => this.TransformAlign(BorderMode.MaxY, Orientation.Vertical);
+            this.Vertically_VerticallySpace.Click += (s, e) => this.TransformSapce(Orientation.Vertical);
         }
 
     }

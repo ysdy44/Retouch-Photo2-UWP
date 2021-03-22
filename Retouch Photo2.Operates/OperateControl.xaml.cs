@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Operates
         /// <summary>
         /// Initializes a OperateControl. 
         /// </summary>
-        public OperateControl(string key, string folder)
+        public OperateControl()
         {
             this.DefaultStyleKey = typeof(OperateControl);
 
@@ -47,19 +47,6 @@ namespace Retouch_Photo2.Operates
             {
                 this._vsIsEnabled = this.IsEnabled;
                 this.VisualState = this.VisualState;//State
-            };
-
-            this.Loaded += (s, e) =>
-            {
-                this.Resources = new ResourceDictionary
-                {                       
-                    //@Template
-                    Source = new Uri($@"ms-appx:///Retouch Photo2.Operates\{folder}Icons\{key}Icon.xaml")
-                };
-                {
-                    //@Template
-                    this.Template = this.Resources[$"{key}Icon"] as ControlTemplate;
-                }
             };
         }
 
