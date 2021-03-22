@@ -23,22 +23,64 @@
         <!--Flyout-->
         <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <StackPanel x:Name="StackPanel" Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-               
-                <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}"/>
+
+                <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/NoneIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource NoneIcon}"/>
+                    </Button.Tag>
+                </Button>
                 
                 <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-               
-                <Button x:Name="Color" Style="{StaticResource AppIconSelectedButton}"/>
-                
+
+                <Button x:Name="Color" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/ColorIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource ColorIcon}"/>
+                    </Button.Tag>
+                </Button>
+
                 <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
                 
-                <Button x:Name="LinearGradient" Style="{StaticResource AppIconSelectedButton}"/>
-                <Button x:Name="RadialGradient" Style="{StaticResource AppIconSelectedButton}"/>
-                <Button x:Name="EllipticalGradient" Style="{StaticResource AppIconSelectedButton}"/>
-               
+                <Button x:Name="LinearGradient" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/LinearGradientIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource LinearGradientIcon}"/>
+                    </Button.Tag>
+                </Button>
+                <Button x:Name="RadialGradient" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/RadialGradientIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource RadialGradientIcon}"/>
+                    </Button.Tag>
+                </Button>
+                <Button x:Name="EllipticalGradient" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/EllipticalGradientIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource EllipticalGradientIcon}"/>
+                    </Button.Tag>
+                </Button>
+                
                 <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-              
-                <Button x:Name="Image" Style="{StaticResource AppIconSelectedButton}"/>
+
+                <Button x:Name="Image" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/ImageIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource ImageIcon}"/>
+                    </Button.Tag>
+                </Button>
 
             </StackPanel>
         </Flyout>

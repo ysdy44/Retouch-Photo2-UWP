@@ -126,7 +126,7 @@
     <Compile Include="ColorEllipse.xaml.cs">
       <DependentUpon>ColorEllipse.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ExtendComboBoxs\ExtendComboBox.xaml.cs">
+    <Compile Include="Extends\ExtendComboBox.xaml.cs">
       <DependentUpon>ExtendComboBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="FillOrStrokes\FillOrStrokeComboBox.xaml.cs">
@@ -219,19 +219,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ExtendComboBoxs\ExtendComboBox.xaml">
+    <Page Include="Extends\ExtendComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ExtendComboBoxs\ExtendIcons\ClampIcon.xaml">
+    <Page Include="Extends\ExtendIcons\ClampIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ExtendComboBoxs\ExtendIcons\MirrorIcon.xaml">
+    <Page Include="Extends\ExtendIcons\MirrorIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ExtendComboBoxs\ExtendIcons\WrapIcon.xaml">
+    <Page Include="Extends\ExtendIcons\WrapIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

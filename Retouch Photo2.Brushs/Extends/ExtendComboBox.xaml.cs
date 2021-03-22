@@ -137,10 +137,12 @@ namespace Retouch_Photo2.Brushs
                         CanvasEdgeBehavior extend = XML.CreateExtend(key);
                         string title = resource.GetString($"Tools_Brush_Extend_{key}");
 
-
                         //Button
-                        this.ConstructButton(button, key, extend, title);
-
+                        button.Click += (s, e) =>
+                        {
+                            this.ExtendChanged?.Invoke(this, extend);//Delegate
+                            this.Flyout.Hide();
+                        };
 
                         //Group
                         group(this.Extend);
@@ -159,36 +161,6 @@ namespace Retouch_Photo2.Brushs
                     }
                 }
             }
-        }
-
-        private void ConstructButton(Button button, string key, CanvasEdgeBehavior extend, string title)
-        {
-            /*             
-                 <Button x:Name="Fill" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs\ExtendComboBoxs\ExtendIcons\FillIcon.xaml"/
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource FillIcon}"/>
-                    </Button.Tag>
-                </Button>
-           */
-            button.Content = title;
-            button.Resources = new ResourceDictionary
-            {
-                //@Template
-                Source = new Uri($@"ms-appx:///Retouch Photo2.Brushs\ExtendComboBoxs\ExtendIcons\{key}Icon.xaml")
-            };
-            button.Tag = new ContentControl
-            {
-                //@Template
-                Template = button.Resources[$"{key}Icon"] as ControlTemplate
-            };
-            button.Click += (s, e) =>
-            {
-                this.ExtendChanged?.Invoke(this, extend);//Delegate
-                this.Flyout.Hide();
-            };
         }
 
     }

@@ -174,10 +174,21 @@ namespace Retouch_Photo2.Brushs
                         BrushType type = XML.CreateBrushType(key);
                         string title = resource.GetString($"Tools_Brush_Type_{key}");
 
-
                         //Button
-                        this.ConstructButton(button, key, type, title);
-
+                        button.Content = title;
+                        button.Click += (s, e) =>
+                        {
+                            switch (this.FillOrStroke)
+                            {
+                                case FillOrStroke.Fill:
+                                    this.FillTypeChanged?.Invoke(this, type);//Delegate
+                                    break;
+                                case FillOrStroke.Stroke:
+                                    this.StrokeTypeChanged?.Invoke(this, type);//Delegate
+                                    break;
+                            }
+                            this.Flyout.Hide();
+                        };
 
                         //Group
                         switch (this.FillOrStroke)
@@ -204,44 +215,6 @@ namespace Retouch_Photo2.Brushs
                     }
                 }
             }
-        }
-
-        private void ConstructButton(Button button, string key, BrushType type, string title)
-        {
-            /*                
-             <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}">
-                 <Button.Resources>
-                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs\BrushTypes\BrushTypeIcons\NoneIcon.xaml"/>
-                 </Button.Resources>
-                 <Button.Tag>
-                     <ContentControl Template="{StaticResource NoneIcon}"/>
-                 </Button.Tag>
-             </Button> 
-           */
-            button.Content = title;
-            button.Resources = new ResourceDictionary
-            {
-                //@Template
-                Source = new Uri($@"ms-appx:///Retouch Photo2.Brushs\BrushTypes\BrushTypeIcons\{key}Icon.xaml")
-            };
-            button.Tag = new ContentControl
-            {
-                //@Template
-                Template = button.Resources[$"{key}Icon"] as ControlTemplate
-            };
-            button.Click += (s, e) =>
-            {
-                switch (this.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        this.FillTypeChanged?.Invoke(this, type);//Delegate
-                        break;
-                    case FillOrStroke.Stroke:
-                        this.StrokeTypeChanged?.Invoke(this, type);//Delegate
-                        break;
-                }
-                this.Flyout.Hide();
-            };
         }
 
     }
