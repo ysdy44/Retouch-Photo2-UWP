@@ -5,9 +5,9 @@
 
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/$SettingPages/PCLayout.xaml"/>
-        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/$SettingPages/PadLayout.xaml"/>
-        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/$SettingPages/PhoneLayout.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/$SettingPages/PCLayout.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/$SettingPages/PadLayout.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/$SettingPages/PhoneLayout.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 

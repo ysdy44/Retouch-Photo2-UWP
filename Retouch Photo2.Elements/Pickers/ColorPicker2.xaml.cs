@@ -5,10 +5,8 @@
 // Complete:      ★★
 using HSVColorPickers;
 using Microsoft.Graphics.Canvas.UI.Xaml;
-using Retouch_Photo2.Elements.ColorPicker2Icons;
 using System;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -45,7 +43,7 @@ namespace Retouch_Photo2.Elements
         /// <summary> Gets or sets <see cref = "ColorPicker2" />'s Mode. </summary>
         public ColorPicker2Mode Mode
         {
-            get  => (ColorPicker2Mode)base.GetValue(ModeProperty);
+            get => (ColorPicker2Mode)base.GetValue(ModeProperty);
             set => base.SetValue(ModeProperty, value);
         }
         /// <summary> Identifies the <see cref = "ColorPicker2.Mode" /> dependency property. </summary>
@@ -177,7 +175,7 @@ namespace Retouch_Photo2.Elements
 
 
         #endregion
-        
+
 
         //@Construct
         /// <summary>
@@ -226,7 +224,7 @@ namespace Retouch_Photo2.Elements
         private void ConstructFlowDirection()
         {
             bool isRightToLeft = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
-            
+
             base.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
 
@@ -240,7 +238,6 @@ namespace Retouch_Photo2.Elements
             this.PaletteHuePicker.FlowDirection = FlowDirection.LeftToRight;
             this.PaletteSaturationPicker.FlowDirection = FlowDirection.LeftToRight;
             this.PaletteValuePicker.FlowDirection = FlowDirection.LeftToRight;
-
             this.CirclePicker.FlowDirection = FlowDirection.LeftToRight;
 
             this.ConstructFlowDirectionCore(this.AlphaPicker);
@@ -274,78 +271,75 @@ namespace Retouch_Photo2.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            void constructGroup(Button button, IColorPicker colorPicker, UserControl icon, ColorPicker2Mode mode)
-            {
-                this.ConstructGroup(button, colorPicker, resource.GetString($"Menus_Color_{mode}"), icon, mode);
-            }
 
             //Swatches
-            constructGroup(this.SwatchesButton, this.SwatchesPicker, new SwatchesIcon(), ColorPicker2Mode.Swatches);
+            constructGroup(this.SwatchesButton, this.SwatchesPicker, ColorPicker2Mode.Swatches);
 
             //Wheel
-            constructGroup(this.WheelButton, this.WheelPicker, new WheelIcon(), ColorPicker2Mode.Wheel);
+            constructGroup(this.WheelButton, this.WheelPicker, ColorPicker2Mode.Wheel);
 
             //RGB          
-           constructGroup(this.RGBButton, this.RGBPicker, new RGBIcon(), ColorPicker2Mode.RGB);
+            constructGroup(this.RGBButton, this.RGBPicker, ColorPicker2Mode.RGB);
             //HSV
-            constructGroup(this.HSVButton, this.HSVPicker, new HSVIcon(), ColorPicker2Mode.HSV);
+            constructGroup(this.HSVButton, this.HSVPicker, ColorPicker2Mode.HSV);
 
             //PaletteHue
-            constructGroup(this.PaletteHueButton, this.PaletteHuePicker, new PaletteHueIcon(), ColorPicker2Mode.PaletteHue);
+            constructGroup(this.PaletteHueButton, this.PaletteHuePicker, ColorPicker2Mode.PaletteHue);
             //PaletteSaturation
-            constructGroup(this.PaletteSaturationButton, this.PaletteSaturationPicker, new PaletteSaturationIcon(), ColorPicker2Mode.PaletteSaturation);
+            constructGroup(this.PaletteSaturationButton, this.PaletteSaturationPicker, ColorPicker2Mode.PaletteSaturation);
             //PaletteValue
-            constructGroup(this.PaletteValueButton, this.PaletteValuePicker, new PaletteValueIcon(), ColorPicker2Mode.PaletteValue);
+            constructGroup(this.PaletteValueButton, this.PaletteValuePicker, ColorPicker2Mode.PaletteValue);
 
             //Circle
-            constructGroup(this.CircleButton, this.CirclePicker, new CircleIcon(), ColorPicker2Mode.Circle);
-        }
+            constructGroup(this.CircleButton, this.CirclePicker, ColorPicker2Mode.Circle);
 
-        //Group
-        private void ConstructGroup(Button button, IColorPicker colorPicker, string text, UserControl icon, ColorPicker2Mode mode)
-        {
-            void group(ColorPicker2Mode groupMode)
-            {            
-                if (groupMode == mode)
-                {
-                    button.IsEnabled = false;
-                    colorPicker.Self.Visibility = Visibility.Visible;
 
-                    colorPicker.Color = this.Color;
-                    this.Button.Content = text;
-                }
-                else
+            void constructGroup(Button button, IColorPicker colorPicker, ColorPicker2Mode mode)
+            {
+                string text = resource.GetString($"Menus_Color_{mode}");
+
+                void group(ColorPicker2Mode groupMode)
                 {
-                    button.IsEnabled = true;
-                    colorPicker.Self.Visibility = Visibility.Collapsed;
+                    if (groupMode == mode)
+                    {
+                        button.IsEnabled = false;
+                        colorPicker.Self.Visibility = Visibility.Visible;
+
+                        colorPicker.Color = this.Color;
+                        this.Button.Content = text;
+                    }
+                    else
+                    {
+                        button.IsEnabled = true;
+                        colorPicker.Self.Visibility = Visibility.Collapsed;
+                    }
                 }
+
+                //NoneButton
+                group(this.Mode);
+
+                //Buttons
+                button.Content = text;
+                button.Click += (s, e) =>
+                {
+                    this.Mode = mode;
+                    this.Flyout.Hide();
+                };
+                colorPicker.ColorChanged += (s, value) => this._Color = value;
+                colorPicker.ColorChangeStarted += (s, value) => this._ColorStarted = value;
+                colorPicker.ColorChangeDelta += (s, value) => this._ColorDelta = value;
+                colorPicker.ColorChangeCompleted += (s, value) => this._ColorCompleted = value;
+
+                //Change
+                this.Group += (s, e) => group(e);
+                this.ChangeColor += (s, color) =>
+                {
+                    if (this.Mode == mode)
+                    {
+                        colorPicker.Color = color;
+                    }
+                };
             }
-            
-            //NoneButton
-            group(this.Mode);
-
-            //Buttons
-            button.Content = text;
-            button.Tag = icon;
-            button.Click += (s, e) =>
-            {
-                this.Mode = mode;
-                this.Flyout.Hide();
-            };
-            colorPicker.ColorChanged += (s, value) => this._Color = value;
-            colorPicker.ColorChangeStarted += (s, value) => this._ColorStarted = value;
-            colorPicker.ColorChangeDelta += (s, value) => this._ColorDelta = value;
-            colorPicker.ColorChangeCompleted += (s, value) => this._ColorCompleted = value;
-
-            //Change
-            this.Group += (s, e) => group(e);
-            this.ChangeColor += (s, color) =>
-            {
-                if (this.Mode == mode)
-                {
-                    colorPicker.Color = color;
-                }
-            };
         }
 
     }

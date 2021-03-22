@@ -17,26 +17,82 @@
         <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <StackPanel x:Name="FlyoutStackPanel">
 
-                <Button x:Name="SwatchesButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="SwatchesButton" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/SwatchesIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource SwatchesIcon}"/>
+                    </Button.Tag>
+                </Button>
 
                 <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="WheelButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="WheelButton" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/SwatchesIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource SwatchesIcon}"/>
+                    </Button.Tag>
+                </Button>
 
                 <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="RGBButton" Style="{StaticResource AppIconSelectedButton}"/>
-                <Button x:Name="HSVButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="RGBButton" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/RGBIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource RGBIcon}"/>
+                    </Button.Tag>
+                </Button>
+                <Button x:Name="HSVButton" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/HSVIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource HSVIcon}"/>
+                    </Button.Tag>
+                </Button>
 
                 <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="PaletteHueButton" Style="{StaticResource AppIconSelectedButton}"/>
-                <Button x:Name="PaletteSaturationButton" Style="{StaticResource AppIconSelectedButton}"/>
-                <Button x:Name="PaletteValueButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="PaletteHueButton" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/PaletteHueIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource PaletteHueIcon}"/>
+                    </Button.Tag>
+                </Button>
+                <Button x:Name="PaletteSaturationButton" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/PaletteSaturationIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource PaletteSaturationIcon}"/>
+                    </Button.Tag>
+                </Button>
+                <Button x:Name="PaletteValueButton" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/PaletteValueIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource PaletteValueIcon}"/>
+                    </Button.Tag>
+                </Button>
 
                 <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="CircleButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="CircleButton" Style="{StaticResource AppIconSelectedButton}">
+                    <Button.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/CircleIcon.xaml"/>
+                    </Button.Resources>
+                    <Button.Tag>
+                        <ContentControl Template="{StaticResource CircleIcon}"/>
+                    </Button.Tag>
+                </Button>
 
             </StackPanel>
         </Flyout>
@@ -83,7 +139,7 @@
             <hsvColorPickers:PaletteSaturationPicker x:Name="PaletteSaturationPicker"/>
             <hsvColorPickers:PaletteValuePicker x:Name="PaletteValuePicker"/>
             <local:CirclePicker x:Name="CirclePicker"/>
-      
+
         </Grid>
 
         <!--Alpha-->

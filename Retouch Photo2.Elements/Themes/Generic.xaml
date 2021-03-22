@@ -1,23 +1,21 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-
-
-
+    
     <ResourceDictionary.MergedDictionaries>
         <!--CheckControl-->
-        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/CheckControl.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/CheckControl.xaml"/>
         <!--Dialog-->
-        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/Dialog.xaml"/>
-        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/DialogWide.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Dialog.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/DialogWide.xaml"/>
         <!--ExpanedHead-->
-        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/ExpanedHead.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/ExpanedHead.xaml"/>
         <!--$SettingPages-->
-        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/$SettingPages/AdaptiveWidthGrid.xaml"/>
-        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/$SettingPages/AdaptiveWidthLayout.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/$SettingPages/AdaptiveWidthGrid.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/$SettingPages/AdaptiveWidthLayout.xaml"/>
         <!--RadiusAnimas-->
-        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/RadiusAnimas/RadiusAnimaIcon.xaml" />
-        <ResourceDictionary Source="ms-appx:///Retouch_Photo2.Elements/RadiusAnimas/RadiusAnimaPanel.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-
-
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/RadiusAnimas/RadiusAnimaIcon.xaml" />
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/RadiusAnimas/RadiusAnimaPanel.xaml" />
+    </ResourceDictionary.MergedDictionaries>    
+    
+    
 </ResourceDictionary>

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Retouch_Photo2.Elements</RootNamespace>
-    <AssemblyName>Retouch_Photo2.Elements</AssemblyName>
+    <AssemblyName>Retouch Photo2.Elements</AssemblyName>
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
@@ -147,30 +147,6 @@
     </Compile>
     <Compile Include="FileFormatComboBox.xaml.cs">
       <DependentUpon>FileFormatComboBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pickers\ColorPicker2Icons\CircleIcon.xaml.cs">
-      <DependentUpon>CircleIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pickers\ColorPicker2Icons\HSVIcon.xaml.cs">
-      <DependentUpon>HSVIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pickers\ColorPicker2Icons\PaletteHueIcon.xaml.cs">
-      <DependentUpon>PaletteHueIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pickers\ColorPicker2Icons\PaletteSaturationIcon.xaml.cs">
-      <DependentUpon>PaletteSaturationIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pickers\ColorPicker2Icons\PaletteValueIcon.xaml.cs">
-      <DependentUpon>PaletteValueIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pickers\ColorPicker2Icons\RGBIcon.xaml.cs">
-      <DependentUpon>RGBIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pickers\ColorPicker2Icons\SwatchesIcon.xaml.cs">
-      <DependentUpon>SwatchesIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pickers\ColorPicker2Icons\WheelIcon.xaml.cs">
-      <DependentUpon>WheelIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pickers\ColorPicker2Mode.cs" />
     <Compile Include="Pickers\SilderPicker.xaml.cs">
