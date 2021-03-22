@@ -186,10 +186,10 @@ namespace Retouch_Photo2.Tools.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.RadianTextBlock.Text = resource.GetString("Tools_View_Radian");
-            this.RadianClearToolTip.Content = resource.GetString("Tools_View_RadianClear");
+            this.ResetRadianToolTip.Content = resource.GetString("Tools_View_ResetRadian");
 
             this.ScaleTextBlock.Text = resource.GetString("Tools_View_Scale");
-            this.ScaleClearToolTip.Content = resource.GetString("Tools_View_ScaleClear");
+            this.ResetScaleToolTip.Content = resource.GetString("Tools_View_ResetScale");
         }
 
 
@@ -199,8 +199,8 @@ namespace Retouch_Photo2.Tools.Models
             Storyboard.SetTarget(this.RadianKeyFrames, this);
             Storyboard.SetTargetProperty(this.RadianKeyFrames, "Radian");
             this.RadianStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-            this.RadianClearButton.Click += (s, e) =>
-            {
+            this.ResetRadianButton.Click += (s, e) =>
+            {                
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
                 this.Radian = this.ViewModel.CanvasTransformer.Radian;
@@ -242,8 +242,8 @@ namespace Retouch_Photo2.Tools.Models
             Storyboard.SetTarget(this.ScaleKeyFrames, this);
             Storyboard.SetTargetProperty(this.ScaleKeyFrames, "Scale");
             this.ScaleStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-            this.ScaleClearButton.Click += (s, e) =>
-            {
+            this.ResetScaleButton.Click += (s, e) =>
+            {                
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
                 this.Scale = this.ViewModel.CanvasTransformer.Scale;
