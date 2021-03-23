@@ -195,9 +195,6 @@
     <Compile Include="Retouch Photo2.Menus\HistoryMenu.xaml.cs">
       <DependentUpon>HistoryMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\KeyboardMenu.xaml.cs">
-      <DependentUpon>KeyboardMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Retouch Photo2.Menus\LayerMenu.xaml.cs">
       <DependentUpon>LayerMenu.xaml</DependentUpon>
     </Compile>
@@ -532,10 +529,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Menus\KeyboardMenu.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Retouch Photo2.Menus\LayerMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -736,6 +729,10 @@
       <Project>{c14d4618-e234-4d91-8ced-49cbd9f6f3c7}</Project>
       <Name>Retouch Photo2.Effects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Retouch Photo2.Elements\Retouch Photo2.Elements.csproj">
+      <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
+      <Name>Retouch Photo2.Elements</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Filters\Retouch Photo2.Filters.csproj">
       <Project>{71870425-d0e7-453d-b221-eb740acaae74}</Project>
       <Name>Retouch Photo2.Filters</Name>
@@ -747,10 +744,6 @@
     <ProjectReference Include="..\Retouch Photo2.Layers\Retouch Photo2.Layers.csproj">
       <Project>{15cbf0a7-0953-49f5-b541-f8bcaab40053}</Project>
       <Name>Retouch Photo2.Layers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Elements\Retouch Photo2.Elements.csproj">
-      <Project>{0e5ac58e-36bf-44fe-877e-830f024b7109}</Project>
-      <Name>Retouch Photo2.Elements</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Menus\Retouch Photo2.Menus.csproj">
       <Project>{f8c6dda8-afba-4cae-8f28-e795547eeced}</Project>

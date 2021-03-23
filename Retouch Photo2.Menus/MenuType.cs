@@ -44,7 +44,5 @@ namespace Retouch_Photo2.Menus
         Layer,
         /// <summary> Color. </summary>
         Color,
-        /// <summary> Keyboard. </summary>
-        Keyboard,
     }
 }

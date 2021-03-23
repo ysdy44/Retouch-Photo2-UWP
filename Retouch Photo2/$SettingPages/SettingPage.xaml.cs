@@ -54,7 +54,7 @@ namespace Retouch_Photo2
                 if (about>5)
                 {
                     about = 0;
-                    this.Frame.Navigate(typeof(DebugPage));//Navigate
+                    //this.Frame.Navigate(typeof(DebugPage));//Navigate
                 }
             };
 

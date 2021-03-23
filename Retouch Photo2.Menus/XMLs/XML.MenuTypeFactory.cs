@@ -40,9 +40,8 @@ namespace Retouch_Photo2.Menus
 
                 case "Layer": return MenuType.Layer;
                 case "Color": return MenuType.Color;
-                case "Keyboard": return MenuType.Keyboard;
 
-                default: return MenuType.Keyboard;
+                default: return MenuType.Debug;
             }
         }
 
