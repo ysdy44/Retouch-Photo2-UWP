@@ -40,12 +40,12 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.GeometryArrow;
         public ToolGroupType GroupType => ToolGroupType.Geometry;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
+        public string Title => this.GeometryArrowPage.Title;
+        public ControlTemplate Icon => this.GeometryArrowPage.Icon;
         public FrameworkElement Page => this.GeometryArrowPage;
+        readonly GeometryArrowPage GeometryArrowPage = new GeometryArrowPage();
         public bool IsSelected { get; set; }
         public bool IsOpen { get => this.GeometryArrowPage.IsOpen; set => this.GeometryArrowPage.IsOpen = value; }
-        readonly GeometryArrowPage GeometryArrowPage = new GeometryArrowPage();
 
 
         public override ILayer CreateLayer(Transformer transformer)
@@ -71,13 +71,17 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
 
         //@Converter
         private int ValueToNumberConverter(float value) => (int)(value * 100.0f);
 
+
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
+            
 
         #region DependencyProperty
 
@@ -127,6 +131,8 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString("Tools_GeometryArrow");
 
             this.ValueTextBlock.Text = resource.GetString("Tools_GeometryArrow_Value");
 

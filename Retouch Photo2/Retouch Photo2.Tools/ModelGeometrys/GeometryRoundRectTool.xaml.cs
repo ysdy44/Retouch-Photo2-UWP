@@ -27,12 +27,12 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.GeometryRoundRect;
         public ToolGroupType GroupType => ToolGroupType.Geometry;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
+        public string Title => this.GeometryRoundRectPage.Title;
+        public ControlTemplate Icon => this.GeometryRoundRectPage.Icon;
         public FrameworkElement Page => this.GeometryRoundRectPage;
+        readonly GeometryRoundRectPage GeometryRoundRectPage = new GeometryRoundRectPage();
         public bool IsSelected { get; set; }
         public bool IsOpen { get => this.GeometryRoundRectPage.IsOpen; set => this.GeometryRoundRectPage.IsOpen = value; }
-        readonly GeometryRoundRectPage GeometryRoundRectPage = new GeometryRoundRectPage();
 
 
         public override ILayer CreateLayer(Transformer transformer)
@@ -57,7 +57,6 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
 
@@ -79,6 +78,11 @@ namespace Retouch_Photo2.Tools.Models
 
 
         #endregion
+
+
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
 
 
         //@Construct
@@ -110,6 +114,8 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString("Tools_GeometryRoundRect");
 
             this.CornerTextBlock.Text = resource.GetString("Tools_GeometryRoundRect_Corner");
             

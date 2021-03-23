@@ -21,9 +21,9 @@ namespace Retouch_Photo2.Tools
         ToolGroupType GroupType { get; }        
 
         /// <summary> Gets the title. </summary>
-        string Title { get; set; }
+        string Title { get; }
         /// <summary> Gets the icon. </summary>
-        ControlTemplate Icon { get; set; }
+        ControlTemplate Icon { get; }
         /// <summary> Gets the page. </summary>
         FrameworkElement Page { get; }
 

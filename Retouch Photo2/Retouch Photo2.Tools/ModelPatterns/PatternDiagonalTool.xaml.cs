@@ -27,9 +27,10 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.PatternDiagonal;
         public ToolGroupType GroupType => ToolGroupType.Pattern;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
-        public FrameworkElement Page { get; } = new PatternDiagonalPage();
+        public string Title => this.PatternDiagonalPage.Title;
+        public ControlTemplate Icon => this.PatternDiagonalPage.Icon;
+        public FrameworkElement Page => this.PatternDiagonalPage;
+        readonly PatternDiagonalPage PatternDiagonalPage = new PatternDiagonalPage();
         public bool IsSelected { get; set; }
         public bool IsOpen { get; set; }
 
@@ -64,6 +65,11 @@ namespace Retouch_Photo2.Tools.Models
         private int StepToNumberConverter(float value) => (int)value;
 
 
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
+
+
         //@Construct
         /// <summary>
         /// Initializes a PatternDiagonalPage. 
@@ -84,6 +90,8 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString("Tools_PatternDiagonal");
 
             this.OffsetTextBlock.Text = resource.GetString("Tools_PatternDiagonal_Offset");
             this.HorizontalStepTextBlock.Text = resource.GetString("Tools_PatternDiagonal_HorizontalStep");

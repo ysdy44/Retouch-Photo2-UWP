@@ -33,7 +33,7 @@
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconPatterns/PatternGridIcon.xaml"/>
             </Border.Resources>
             <Border.Child>
-                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource PatternGridIcon}"/>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource PatternGridIcon}"/>
             </Border.Child>
         </Border>
 

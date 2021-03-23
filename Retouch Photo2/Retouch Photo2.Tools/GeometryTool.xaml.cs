@@ -60,8 +60,11 @@ namespace Retouch_Photo2.Tools
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
 
+
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
 
 
         #region DependencyProperty
@@ -87,34 +90,10 @@ namespace Retouch_Photo2.Tools
         public GeometryPage(ToolType toolType)
         {
             this.InitializeComponent();
-            this.ConstructStrings();
-
-
-            if (this.IconBorder is Border border)
-            {
-                /*
-                < Border.Resources >
-                    < ResourceDictionary Source = "ms-appx:///Retouch Photo2.Tools/Icons/ViewIcon.xaml" />
-                 </ Border.Resources >
-                 < Border.Child >
-                     < ContentControl HorizontalAlignment = "Center" VerticalAlignment = "Center" Template = "{StaticResource ViewIcon}" />
-                 </ Border.Child >
-                 */
-                border.Resources = new ResourceDictionary
-                {
-                    //@Template
-                    Source = new Uri($@"ms-appx:///Retouch Photo2.Tools/Icons/{toolType}Icon.xaml")
-                };
-                border.Child = new ContentControl
-                {
-                    //@Template
-                    Template = border.Resources[$"{toolType}Icon"] as ControlTemplate,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                };
-            }
-
-
+            this.ResourceDictionary.Source = new Uri($@"ms-appx:///Retouch Photo2.Tools/Icons/{toolType}Icon.xaml");
+            this.IconContentControl.Template = this.ResourceDictionary[$"{toolType}Icon"] as ControlTemplate;
+            this.ConstructStrings(toolType);
+                        
             //Flyout
             this.FillBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowFill?.Invoke(this, this.FillBrushButton);
             this.StrokeBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStroke?.Invoke(this, this.StrokeBrushButton);
@@ -125,9 +104,11 @@ namespace Retouch_Photo2.Tools
 
 
         //Strings
-        private void ConstructStrings()
+        private void ConstructStrings(ToolType toolType)
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString($"Tools_{toolType}");
 
             this.FillTextBlock.Text = resource.GetString("Tools_Fill");
             this.StrokeTextBlock.Text = resource.GetString("Tools_Stroke");

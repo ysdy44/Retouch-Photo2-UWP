@@ -25,8 +25,8 @@ namespace Retouch_Photo2.Tools.Models
         //@Content 
         public ToolType Type => ToolType.GeometryEllipse;
         public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
+        public string Title => this.GeometryPage.Title;
+        public ControlTemplate Icon => this.GeometryPage.Icon;
         public FrameworkElement Page => this.GeometryPage;
         public bool IsSelected { get; set; }
         public bool IsOpen { get => this.GeometryPage.IsOpen; set => this.GeometryPage.IsOpen = value; }

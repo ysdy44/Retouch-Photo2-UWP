@@ -38,8 +38,8 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.Brush;
         public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
+        public string Title => this.BrushPage.Title;
+        public ControlTemplate Icon => this.BrushPage.Icon;
         public FrameworkElement Page => this.BrushPage;
 
         readonly BrushPage BrushPage = new BrushPage();
@@ -200,6 +200,11 @@ namespace Retouch_Photo2.Tools.Models
 
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
         FillOrStroke FillOrStroke { get => this.SelectionViewModel.FillOrStroke; set => this.SelectionViewModel.FillOrStroke = value; }
+
+
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
 
 
         //@Construct

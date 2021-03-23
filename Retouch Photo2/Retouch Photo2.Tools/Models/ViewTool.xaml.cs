@@ -36,8 +36,8 @@ namespace Retouch_Photo2.Tools.Models
         //@Content 
         public ToolType Type => ToolType.View;
         public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
+        public string Title => this.ViewPage.Title;
+        public ControlTemplate Icon => this.ViewPage.Icon;
         public FrameworkElement Page => this.ViewPage;
 
         readonly ViewPage ViewPage = new ViewPage();
@@ -100,6 +100,11 @@ namespace Retouch_Photo2.Tools.Models
 
         private int RadianToNumberConverter(float radian) => ViewRadianConverter.RadianToNumber(radian);
         private double RadianToValueConverter(float radian) => ViewRadianConverter.RadianToValue(radian);
+
+
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
 
 
         #region DependencyProperty
@@ -184,6 +189,8 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString("Tools_View");
 
             this.RadianTextBlock.Text = resource.GetString("Tools_View_Radian");
             this.ResetRadianToolTip.Content = resource.GetString("Tools_View_ResetRadian");

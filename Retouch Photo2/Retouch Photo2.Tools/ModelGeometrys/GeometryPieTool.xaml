@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hSVColorPickers="using:HSVColorPickers"
     xmlns:tools="using:Retouch_Photo2.Tools"
-    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -31,7 +30,7 @@
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryPieIcon.xaml"/>
             </Border.Resources>
             <Border.Child>
-                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource GeometryPieIcon}"/>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource GeometryPieIcon}"/>
             </Border.Child>
         </Border>
         

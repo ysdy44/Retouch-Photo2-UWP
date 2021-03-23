@@ -4,9 +4,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:strokes="using:Retouch_Photo2.Strokes"
-    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     xmlns:brushs="using:Retouch_Photo2.Brushs"
+    xmlns:strokes="using:Retouch_Photo2.Strokes"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -15,14 +14,13 @@
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal" Height="50">
 
-            <Border x:Name="IconBorder" Width="50">
-                <!--
-            <Border.Resources>
-                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/ViewIcon.xaml"/>
-            </Border.Resources>
-            <Border.Child>
-                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ViewIcon}"/>
-            </Border.Child>-->
+            <Border Width="50">
+                <Border.Resources>
+                    <ResourceDictionary x:Name="ResourceDictionary"/>
+                </Border.Resources>
+                <Border.Child>
+                    <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border.Child>
             </Border>
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>

@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:hsvColorpickers="using:HSVColorPickers"
+    xmlns:hsvColorPickers="using:HSVColorPickers"
     xmlns:tools="using:Retouch_Photo2.Tools"
     mc:Ignorable="d"
     d:DesignHeight="50"
@@ -47,7 +47,7 @@
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/ViewIcon.xaml"/>
             </Border.Resources>
             <Border.Child>
-                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ViewIcon}"/>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ViewIcon}"/>
             </Border.Child>
         </Border>
         
@@ -58,7 +58,7 @@
         <tools:TouchbarButton x:Name="RadianButton" Grid.Column="3"
                              Content="{x:Bind RadianToNumberConverter(ViewModel.CanvasTransformerRadian), Mode=OneWay}">
             <tools:TouchbarButton.Picker>
-                <hsvColorpickers:NumberPicker x:Name="RadianPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                <hsvColorPickers:NumberPicker x:Name="RadianPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind RadianToNumberConverter(ViewModel.CanvasTransformerRadian), Mode=OneWay}"/>
             </tools:TouchbarButton.Picker>
             <tools:TouchbarButton.Slider>
@@ -86,7 +86,7 @@
         <tools:TouchbarButton x:Name="ScaleButton" Grid.Column="7"
                              Content="{x:Bind ScaleToNumberConverter(ViewModel.CanvasTransformerScale), Mode=OneWay}">
             <tools:TouchbarButton.Picker>
-                <hsvColorpickers:NumberPicker x:Name="ScalePicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                <hsvColorPickers:NumberPicker x:Name="ScalePicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind ScaleToNumberConverter(ViewModel.CanvasTransformerScale), Mode=OneWay}"/>
             </tools:TouchbarButton.Picker>
             <tools:TouchbarButton.Slider>

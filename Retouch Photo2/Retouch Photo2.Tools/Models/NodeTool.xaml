@@ -42,7 +42,7 @@
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/NodeIcon.xaml"/>
             </Border.Resources>
             <Border.Child>
-                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource NodeIcon}"/>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource NodeIcon}"/>
             </Border.Child>
         </Border>
 

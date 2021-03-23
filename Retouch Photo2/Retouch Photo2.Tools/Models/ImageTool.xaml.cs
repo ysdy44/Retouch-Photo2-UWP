@@ -34,8 +34,8 @@ namespace Retouch_Photo2.Tools.Models
         //@Content 
         public ToolType Type => ToolType.Image;
         public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
+        public string Title => this.ImagePage.Title;
+        public ControlTemplate Icon => this.ImagePage.Icon;
         public FrameworkElement Page => this.ImagePage;
         public bool IsSelected { get; set; }
         public bool IsOpen { get => this.ImagePage.ConvertToCurvesToolTip.IsOpen; set => this.ImagePage.ConvertToCurvesToolTip.IsOpen = value; }
@@ -192,7 +192,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             TouchbarButton.Instance = null;
         }
-        
+
     }
 
 
@@ -205,6 +205,11 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+
+
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
 
         /// <summary> Tip. </summary>
         public void TipSelect() => this.EaseStoryboard.Begin();//Storyboard
@@ -239,6 +244,8 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString("Tools_Image");
 
             this.SelectTextBlock.Text = resource.GetString("Tools_Image_Select");
             this.ReplaceTextBlock.Text = resource.GetString("Tools_Image_Replace");

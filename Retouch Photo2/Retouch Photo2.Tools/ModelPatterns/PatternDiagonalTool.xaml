@@ -28,7 +28,7 @@
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconPatterns/PatternDiagonalIcon.xaml"/>
             </Border.Resources>
             <Border.Child>
-                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource PatternDiagonalIcon}"/>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource PatternDiagonalIcon}"/>
             </Border.Child>
         </Border>
 

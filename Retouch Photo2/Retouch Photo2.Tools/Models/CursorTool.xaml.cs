@@ -9,13 +9,12 @@ using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.Tools.Elements;
-using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Numerics;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.ApplicationModel.Resources;
 
 namespace Retouch_Photo2.Tools.Models
 {
@@ -44,8 +43,8 @@ namespace Retouch_Photo2.Tools.Models
         //@Content      
         public ToolType Type => ToolType.Cursor;
         public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
+        public string Title => this.CursorPage.Title;
+        public ControlTemplate Icon => this.CursorPage.Icon;
         public FrameworkElement Page => this.CursorPage;
 
         readonly CursorPage CursorPage = new CursorPage();
@@ -234,6 +233,11 @@ namespace Retouch_Photo2.Tools.Models
         public CompositeModeSegmented ModeSegmented => this._ModeSegmented;
 
 
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
+
+
         #region DependencyProperty
 
 
@@ -267,6 +271,8 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString("Tools_Cursor");
 
             this.OperateToolTip.Content = resource.GetString("Menus_Operate");
 

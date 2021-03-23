@@ -28,7 +28,7 @@
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/BrushIcon.xaml"/>
                 </Border.Resources>
                 <Border.Child>
-                    <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource BrushIcon}"/>
+                    <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource BrushIcon}"/>
                 </Border.Child>
             </Border>
 

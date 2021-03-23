@@ -29,7 +29,7 @@
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/CropIcon.xaml"/>
             </Border.Resources>
             <Border.Child>
-                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource CropIcon}"/>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource CropIcon}"/>
             </Border.Child>
         </Border>
 

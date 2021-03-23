@@ -30,9 +30,10 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.PatternSpotted;
         public ToolGroupType GroupType => ToolGroupType.Pattern;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
-        public FrameworkElement Page { get; } = new PatternSpottedPage();
+        public string Title => this.PatternSpottedPage.Title;
+        public ControlTemplate Icon => this.PatternSpottedPage.Icon;
+        public FrameworkElement Page => this.PatternSpottedPage;
+        readonly PatternSpottedPage PatternSpottedPage = new PatternSpottedPage();
         public bool IsSelected { get; set; }
         public bool IsOpen { get; set; }
 
@@ -80,6 +81,11 @@ namespace Retouch_Photo2.Tools.Models
         private int Converter(float value) => (int)value;
 
 
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
+
+
         //@Construct
         /// <summary>
         /// Initializes a PatternSpottedPage. 
@@ -100,6 +106,8 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString("Tools_PatternSpotted");
 
             this.RadiusTextBlock.Text = resource.GetString("Tools_PatternSpotted_Radius");
             this.StepTextBlock.Text = resource.GetString("Tools_PatternSpotted_Step");

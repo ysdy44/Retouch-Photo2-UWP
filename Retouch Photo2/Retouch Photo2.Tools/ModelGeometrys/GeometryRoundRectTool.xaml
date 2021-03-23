@@ -30,7 +30,7 @@
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryRoundRectIcon.xaml"/>
             </Border.Resources>
             <Border.Child>
-                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource GeometryRoundRectIcon}"/>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource GeometryRoundRectIcon}"/>
             </Border.Child>
         </Border>
 

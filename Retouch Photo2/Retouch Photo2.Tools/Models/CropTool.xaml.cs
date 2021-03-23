@@ -41,8 +41,8 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.Crop;
         public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
+        public string Title => this.CropPage.Title;
+        public ControlTemplate Icon => this.CropPage.Icon;
         public FrameworkElement Page => this.CropPage;
 
         readonly CropPage CropPage = new CropPage();
@@ -177,6 +177,11 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
 
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
+
+
         //@Construct
         /// <summary>
         /// Initializes a CropPage. 
@@ -203,6 +208,8 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString("Tools_Crop");
 
             this.ResetTextBlock.Text = resource.GetString("Tools_Crop_Reset");
             this.FitTextBlock.Text = resource.GetString("Tools_Crop_Fit");

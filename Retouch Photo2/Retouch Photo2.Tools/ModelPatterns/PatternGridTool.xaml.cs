@@ -40,10 +40,11 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.PatternGrid;
-        public ToolGroupType GroupType => ToolGroupType.Pattern;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
-        public FrameworkElement Page { get; } = new PatternGridPage();
+        public ToolGroupType GroupType => ToolGroupType.Pattern; 
+        public string Title => this.PatternGridPage.Title;
+        public ControlTemplate Icon => this.PatternGridPage.Icon;
+        public FrameworkElement Page => this.PatternGridPage;
+        readonly PatternGridPage PatternGridPage = new PatternGridPage();
         public bool IsSelected { get; set; }
         public bool IsOpen { get; set; }
                 
@@ -79,6 +80,11 @@ namespace Retouch_Photo2.Tools.Models
         private Visibility VerticalStepVisibilityConverter(PatternGridType value) => value == PatternGridType.Horizontal ? Visibility.Collapsed : Visibility.Visible;
 
 
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
+
+
         //@Construct
         /// <summary>
         /// Initializes a PatternGridPage. 
@@ -101,6 +107,8 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString("Tools_PatternGrid");
 
             this.TypeTextBlock.Text = resource.GetString("Tools_PatternGrid_Type");
             this.HorizontalStepTextBlock.Text = resource.GetString("Tools_PatternGrid_HorizontalStep");

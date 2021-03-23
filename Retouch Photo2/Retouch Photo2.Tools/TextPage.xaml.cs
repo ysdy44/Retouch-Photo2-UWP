@@ -7,6 +7,7 @@ using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
+using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -24,6 +25,11 @@ namespace Retouch_Photo2.Tools
         ViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
+
+
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
 
 
         #region DependencyProperty
@@ -58,10 +64,12 @@ namespace Retouch_Photo2.Tools
         /// <summary>
         /// Initializes a TextPage. 
         /// </summary>
-        public TextPage()
+        public TextPage(ToolType toolType)
         {
             this.InitializeComponent();
-            this.ConstructStrings();
+            this.ResourceDictionary.Source = new Uri($@"ms-appx:///Retouch Photo2.Tools/Icons/{toolType}Icon.xaml");
+            this.IconContentControl.Template = this.ResourceDictionary[$"{toolType}Icon"] as ControlTemplate;
+            this.ConstructStrings(toolType);
 
             //@Focus
             // Before Flyout Showed, Don't let TextBox Got Focus.
@@ -101,9 +109,11 @@ namespace Retouch_Photo2.Tools
     {
 
         //Strings
-        private void ConstructStrings()
+        private void ConstructStrings(ToolType toolType)
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString($"Tools_{toolType}");
 
             this.TextBox.PlaceholderText = resource.GetString("Tools_Text_PlaceholderText");
 

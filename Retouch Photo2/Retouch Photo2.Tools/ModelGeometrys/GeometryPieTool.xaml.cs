@@ -28,12 +28,12 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.GeometryPie;
         public ToolGroupType GroupType => ToolGroupType.Geometry;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
+        public string Title => this.GeometryPiePage.Title;
+        public ControlTemplate Icon => this.GeometryPiePage.Icon;
         public FrameworkElement Page => this.GeometryPiePage;
+        readonly GeometryPiePage GeometryPiePage = new GeometryPiePage();
         public bool IsSelected { get; set; }
         public bool IsOpen { get => this.GeometryPiePage.IsOpen; set => this.GeometryPiePage.IsOpen = value; }
-        readonly GeometryPiePage GeometryPiePage = new GeometryPiePage();
 
 
         public override ILayer CreateLayer(Transformer transformer)
@@ -58,7 +58,6 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
 
 
@@ -80,6 +79,11 @@ namespace Retouch_Photo2.Tools.Models
 
 
         #endregion
+
+
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
 
 
         //@Construct
@@ -111,6 +115,8 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString("Tools_GeometryPie");
 
             this.SweepAngleTextBlock.Text = resource.GetString("Tools_GeometryPie_SweepAngle");
 

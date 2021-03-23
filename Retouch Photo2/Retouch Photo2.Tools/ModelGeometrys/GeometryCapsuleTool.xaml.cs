@@ -26,12 +26,12 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.GeometryCapsule;
         public ToolGroupType GroupType => ToolGroupType.Geometry;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
+        public string Title => this.GeometryCapsulePage.Title;
+        public ControlTemplate Icon => this.GeometryCapsulePage.Icon;
         public FrameworkElement Page => this.GeometryCapsulePage;
+        readonly GeometryCapsulePage GeometryCapsulePage = new GeometryCapsulePage();
         public bool IsSelected { get; set; }
         public bool IsOpen { get => this.GeometryCapsulePage.IsOpen; set => this.GeometryCapsulePage.IsOpen = value; }
-        readonly GeometryCapsulePage GeometryCapsulePage = new GeometryCapsulePage();
 
 
         public override ILayer CreateLayer(Transformer transformer)
@@ -74,6 +74,11 @@ namespace Retouch_Photo2.Tools.Models
         #endregion
 
 
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
+
+
         //@Construct
         /// <summary>
         /// Initializes a GeometryCapsulePage. 
@@ -100,6 +105,8 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString("Tools_GeometryCapsule");
 
             this.ConvertToCurvesToolTip.Content = resource.GetString("Tools_ConvertToCurves");
 

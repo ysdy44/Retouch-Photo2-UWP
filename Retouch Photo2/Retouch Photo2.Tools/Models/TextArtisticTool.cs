@@ -25,12 +25,12 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.TextArtistic;
         public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
+        public string Title => this.TextPage.Title;
+        public ControlTemplate Icon => this.TextPage.Icon;
         public FrameworkElement Page => this.TextPage;
         public bool IsSelected { get; set; }
         public bool IsOpen { get => this.TextPage.IsOpen; set => this.TextPage.IsOpen = value; }
-        readonly TextPage TextPage = new TextPage();
+        readonly TextPage TextPage = new TextPage(ToolType.TextArtistic);
 
 
         public override ILayer CreateLayer(Transformer transformer)

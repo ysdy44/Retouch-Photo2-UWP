@@ -37,8 +37,8 @@ namespace Retouch_Photo2.Tools.Models
         //@Content 
         public ToolType Type => ToolType.Transparency;
         public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
+        public string Title => this.TransparencyPage.Title;
+        public ControlTemplate Icon => this.TransparencyPage.Icon;
         public FrameworkElement Page => this.TransparencyPage;
 
         readonly TransparencyPage TransparencyPage = new TransparencyPage();
@@ -163,6 +163,11 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
+
+
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
 
 
         //@Construct

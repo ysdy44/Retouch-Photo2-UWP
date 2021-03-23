@@ -40,8 +40,8 @@ namespace Retouch_Photo2.Tools.Models
         //@Content
         public ToolType Type => ToolType.Node;
         public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title { get; set; }
-        public ControlTemplate Icon { get; set; }
+        public string Title => this.NodePage.Title;
+        public ControlTemplate Icon => this.NodePage.Icon;
         public FrameworkElement Page => this.NodePage;
         public bool IsSelected { get; set; }
         public bool IsOpen { get => this.NodePage.MoreNodeToolTip.IsOpen; set => this.NodePage.MoreNodeToolTip.IsOpen = value; }
@@ -275,7 +275,12 @@ namespace Retouch_Photo2.Tools.Models
 
         /// <summary> MoreNodeButton's ToolTip. </summary>
         public ToolTip MoreNodeToolTip => this._MoreNodeToolTip;
-        
+
+
+        //@Content 
+        public string Title { get; private set; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
+
 
         //@Construct
         /// <summary>
@@ -321,6 +326,8 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString("Tools_Node");
 
             this.RemoveTextBlock.Text = resource.GetString("Tools_Node_Remove");
             this.InsertTextBlock.Text = resource.GetString("Tools_Node_Insert");
