@@ -101,7 +101,8 @@ namespace Retouch_Photo2.Blends
 
 
                         //Button
-                        this.ConstructButton(button, key, mode, title);
+                        button.Content = title;
+                        button.Click += (s, e) => this.ModeChanged?.Invoke(this, mode);//Delegate
 
 
                         //Group
@@ -121,34 +122,6 @@ namespace Retouch_Photo2.Blends
                     }
                 }
             }
-        }
-
-
-        private void ConstructButton(Button button, string key, BlendEffectMode? mode, string title)
-        {
-            /*                
-             <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}">
-                 <Button.Resources>
-                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends\Icons\NoneIcon.xaml"/>
-                 </Button.Resources>
-                 <Button.Tag>
-                     <ContentControl Template="{StaticResource NoneIcon}"/>
-                 </Button.Tag>
-             </Button> 
-           */
-            button.Content = title;
-            button.Resources = new ResourceDictionary
-            {
-                //@Template
-                Source = new Uri($@"ms-appx:///Retouch Photo2.Blends\Icons\{key}Icon.xaml")
-            };
-            button.Tag = new ContentControl
-            {
-                //@Template
-                Template = button.Resources[$"{key}Icon"] as ControlTemplate
-            };
-            button.Click += (s, e) => this.ModeChanged?.Invoke(this, mode);//Delegate
-
         }
 
     }
