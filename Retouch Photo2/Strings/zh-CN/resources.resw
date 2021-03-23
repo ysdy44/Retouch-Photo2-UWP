@@ -58,8 +58,13 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-
-
+<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
+<data name='$Untitled' xml:space='preserve'><value>未命名</value></data>
+<data name='$DocumentationLink' xml:space='preserve'><value>https://gitee.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-ZH.md</value></data>
+<data name='$GithubLink' xml:space='preserve'><value>https://github.com/ysdy44</value></data>
+<data name='$FeedbackLink' xml:space='preserve'><value>ysdy44@outlook.com</value></data>
 <data name='$Loading_Loading' xml:space='preserve'><value>加载中</value></data>
 <data name='$Loading_LoadFailed' xml:space='preserve'><value>加载失败</value></data>
 <data name='$Loading_FileCorrupt' xml:space='preserve'><value>文件已损坏</value></data>
@@ -67,10 +72,10 @@
 <data name='$Loading_Saving' xml:space='preserve'><value>保存中</value></data>
 <data name='$Loading_SaveSuccess' xml:space='preserve'><value>保存成功</value></data>
 <data name='$Loading_SaveFailed' xml:space='preserve'><value>保存失败</value></data>
-<data name='$Untitled' xml:space='preserve'><value>未命名</value></data>
-<data name='$DocumentationLink' xml:space='preserve'><value>https://gitee.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-ZH.md</value></data>
 <data name='$SettingPage_Title' xml:space='preserve'><value>设置</value></data>
-<data name='$SettingPage_About' xml:space='preserve'><value>关于...</value></data>
+<data name='$SettingPage_Documentation' xml:space='preserve'><value>文档</value></data>
+<data name='$SettingPage_Github' xml:space='preserve'><value>Github</value></data>
+<data name='$SettingPage_Feedback' xml:space='preserve'><value>反馈</value></data>
 <data name='$SettingPage_Theme' xml:space='preserve'><value>主题</value></data>
 <data name='$SettingPage_Theme_Light' xml:space='preserve'><value>浅色</value></data>
 <data name='$SettingPage_Theme_Dark' xml:space='preserve'><value>深色</value></data>
@@ -517,6 +522,10 @@
 <data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>设置滤镜</value></data>
 <data name='$DisplayName' xml:space='preserve'><value>修图2</value></data>
 <data name='$SettingPage_Back' xml:space='preserve'><value>返回</value></data>
+<data name='$SettingPage_About' xml:space='preserve'><value>关于...</value></data>
+<data name='$SettingPage_About_Title' xml:space='preserve'><value>关于...</value></data>
+<data name='$SettingPage_AboutDialog_Close' xml:space='preserve'><value>取消</value></data>
+<data name='$SettingPage_AboutDialog_Primary' xml:space='preserve'><value>确定</value></data>
 <data name='$MainPage_Title' xml:space='preserve'><value>修图2</value></data>
 <data name='$MainPage_NewDialog_Close' xml:space='preserve'><value>取消</value></data>
 <data name='$MainPage_NewDialog_Primary' xml:space='preserve'><value>确定</value></data>

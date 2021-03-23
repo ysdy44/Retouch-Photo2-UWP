@@ -58,8 +58,13 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-
-
+<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
+<data name='$Untitled' xml:space='preserve'><value>Sans titre</value></data>
+<data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
+<data name='$GithubLink' xml:space='preserve'><value>https://github.com/ysdy44</value></data>
+<data name='$FeedbackLink' xml:space='preserve'><value>ysdy44@outlook.com</value></data>
 <data name='$Loading_Loading' xml:space='preserve'><value>Chargement</value></data>
 <data name='$Loading_LoadFailed' xml:space='preserve'><value>Échec du chargement</value></data>
 <data name='$Loading_FileCorrupt' xml:space='preserve'><value>Le fichier est corrompu</value></data>
@@ -67,10 +72,10 @@
 <data name='$Loading_Saving' xml:space='preserve'><value>Économie</value></data>
 <data name='$Loading_SaveSuccess' xml:space='preserve'><value>Enregistré avec succès</value></data>
 <data name='$Loading_SaveFailed' xml:space='preserve'><value>Échec de l'enregistrement</value></data>
-<data name='$Untitled' xml:space='preserve'><value>Sans titre</value></data>
-<data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
 <data name='$SettingPage_Title' xml:space='preserve'><value>Réglage</value></data>
-<data name='$SettingPage_About' xml:space='preserve'><value>À propos de...</value></data>
+<data name='$SettingPage_Documentation' xml:space='preserve'><value>Documentation</value></data>
+<data name='$SettingPage_Github' xml:space='preserve'><value>Github</value></data>
+<data name='$SettingPage_Feedback' xml:space='preserve'><value>Retour d'information</value></data>
 <data name='$SettingPage_Theme' xml:space='preserve'><value>Thème</value></data>
 <data name='$SettingPage_Theme_Light' xml:space='preserve'><value>Lumière</value></data>
 <data name='$SettingPage_Theme_Dark' xml:space='preserve'><value>Foncé</value></data>
@@ -517,6 +522,10 @@
 <data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>Définir le filtre</value></data>
 <data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
 <data name='$SettingPage_Back' xml:space='preserve'><value>Retour</value></data>
+<data name='$SettingPage_About' xml:space='preserve'><value>À propos de...</value></data>
+<data name='$SettingPage_About_Title' xml:space='preserve'><value>À propos de...</value></data>
+<data name='$SettingPage_AboutDialog_Close' xml:space='preserve'><value>Annuler</value></data>
+<data name='$SettingPage_AboutDialog_Primary' xml:space='preserve'><value>d'accord</value></data>
 <data name='$MainPage_Title' xml:space='preserve'><value>Retouch Photo2</value></data>
 <data name='$MainPage_NewDialog_Close' xml:space='preserve'><value>Annuler</value></data>
 <data name='$MainPage_NewDialog_Primary' xml:space='preserve'><value>d'accord</value></data>

@@ -243,6 +243,8 @@ namespace Retouch_Photo2.Tools.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
+            this.Title = resource.GetString("Tools_Brush");
+
             this.FillOrStrokeTextBlock.Text = resource.GetString("Tools_Brush_FillOrStroke");
             this.TypeTextBlock.Text = resource.GetString("Tools_Brush_Type");
             this.ShowTextBlock.Text = resource.GetString("Tools_Brush_Brush");

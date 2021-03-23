@@ -58,8 +58,13 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-
-
+<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+<data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
+<data name='$Untitled' xml:space='preserve'><value>بدون عنوان</value></data>
+<data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
+<data name='$GithubLink' xml:space='preserve'><value>https://github.com/ysdy44</value></data>
+<data name='$FeedbackLink' xml:space='preserve'><value>ysdy44@outlook.com</value></data>
 <data name='$Loading_Loading' xml:space='preserve'><value>جار التحميل</value></data>
 <data name='$Loading_LoadFailed' xml:space='preserve'><value>فشل في التحميل</value></data>
 <data name='$Loading_FileCorrupt' xml:space='preserve'><value>الملف تالف</value></data>
@@ -67,10 +72,10 @@
 <data name='$Loading_Saving' xml:space='preserve'><value>إنقاذ</value></data>
 <data name='$Loading_SaveSuccess' xml:space='preserve'><value>حفظ بنجاح</value></data>
 <data name='$Loading_SaveFailed' xml:space='preserve'><value>فشل الحفظ</value></data>
-<data name='$Untitled' xml:space='preserve'><value>بدون عنوان</value></data>
-<data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
 <data name='$SettingPage_Title' xml:space='preserve'><value>ضبط</value></data>
-<data name='$SettingPage_About' xml:space='preserve'><value>حول...</value></data>
+<data name='$SettingPage_Documentation' xml:space='preserve'><value>توثيق</value></data>
+<data name='$SettingPage_Github' xml:space='preserve'><value>جيثب</value></data>
+<data name='$SettingPage_Feedback' xml:space='preserve'><value>استجابة</value></data>
 <data name='$SettingPage_Theme' xml:space='preserve'><value>سمة</value></data>
 <data name='$SettingPage_Theme_Light' xml:space='preserve'><value>خفيفة</value></data>
 <data name='$SettingPage_Theme_Dark' xml:space='preserve'><value>داكن</value></data>
@@ -517,6 +522,10 @@
 <data name='Historys_LayersProperty_SetFilter' xml:space='preserve'><value>تعيين مرشح</value></data>
 <data name='$DisplayName' xml:space='preserve'><value>Retouch Photo2</value></data>
 <data name='$SettingPage_Back' xml:space='preserve'><value>خلف</value></data>
+<data name='$SettingPage_About' xml:space='preserve'><value>حول...</value></data>
+<data name='$SettingPage_About_Title' xml:space='preserve'><value>حول...</value></data>
+<data name='$SettingPage_AboutDialog_Close' xml:space='preserve'><value>يلغي</value></data>
+<data name='$SettingPage_AboutDialog_Primary' xml:space='preserve'><value>موافق</value></data>
 <data name='$MainPage_Title' xml:space='preserve'><value>Retouch Photo2</value></data>
 <data name='$MainPage_NewDialog_Close' xml:space='preserve'><value>يلغي</value></data>
 <data name='$MainPage_NewDialog_Primary' xml:space='preserve'><value>موافق</value></data>

@@ -102,6 +102,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="%24DebugPage\DebugPage.xaml.cs">
+      <DependentUpon>DebugPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="%24DrawPages\DrawPage.AppBar.cs" />
     <Compile Include="%24DrawPages\DrawPage.Gallery.cs" />
     <Compile Include="%24DrawPages\DrawPage.LayerManager.cs" />
@@ -425,6 +428,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="%24DebugPage\DebugPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="%24DrawPages\DrawPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

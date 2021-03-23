@@ -495,6 +495,16 @@
         <!--Dialog-->
         <elements:Dialog x:Name="AboutDialog" Grid.RowSpan="2">
             <StackPanel>
+                <StackPanel.Resources>
+                    <!--Storyboard-->
+                    <Storyboard x:Name="AboutStoryboard">
+                        <DoubleAnimation Storyboard.TargetName="AboutRotateTransform" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:0.8">
+                            <DoubleAnimation.EasingFunction>
+                                <CircleEase EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </StackPanel.Resources>
 
                 <StackPanel.ChildrenTransitions>
                     <TransitionCollection>
@@ -505,49 +515,28 @@
 
                 <StackPanel.Children>
 
-                    <Image x:Name="AboutImage" Width="180" Height="180" Source="ms-appx:///Icons\AppRender.png"/>
+                    <Image x:Name="AboutImage" Width="180" Height="180" Source="ms-appx:///Icons\AppRender.png">
+                        <Image.RenderTransformOrigin>0.5, 0.5</Image.RenderTransformOrigin>
+                        <Image.RenderTransform>
+                            <RotateTransform x:Name="AboutRotateTransform" Angle="0"/>
+                        </Image.RenderTransform>
+                    </Image>
 
                     <Border Padding="12,0" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
-                        <TextBlock>                    
-                            1.1.9
-                        </TextBlock>
+                        <TextBlock x:Name="VersionTextBlock"/>
                     </Border>
 
                     <ContentControl Height="12"/>
-
-                    <TextBlock HorizontalAlignment="Center">                   
-                        Documentation
-                    </TextBlock>
-                    <HyperlinkButton HorizontalAlignment="Center">
-                        <HyperlinkButton.NavigateUri>
-                            https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation
-                        </HyperlinkButton.NavigateUri>
-                        https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation
-                    </HyperlinkButton>
+                    <TextBlock x:Name="DocumentationTextBlock" HorizontalAlignment="Center"/>
+                    <HyperlinkButton x:Name="DocumentationHyperlinkButton" HorizontalAlignment="Center"/>
 
                     <ContentControl Height="12"/>
-
-                    <TextBlock HorizontalAlignment="Center">
-                        Github
-                    </TextBlock>
-                    <HyperlinkButton HorizontalAlignment="Center">
-                        <HyperlinkButton.NavigateUri>
-                            https://github.com/ysdy44
-                        </HyperlinkButton.NavigateUri>
-                        https://github.com/ysdy44
-                    </HyperlinkButton>
+                    <TextBlock x:Name="GithubTextBlock" HorizontalAlignment="Center"/>
+                    <HyperlinkButton x:Name="GithubHyperlinkButton" HorizontalAlignment="Center"/>
 
                     <ContentControl Height="12"/>
-
-                    <TextBlock HorizontalAlignment="Center">               
-                        Feedback
-                    </TextBlock>
-                    <HyperlinkButton HorizontalAlignment="Center">
-                        <HyperlinkButton.NavigateUri>
-                            mailto:ysdy44@outlook.com
-                        </HyperlinkButton.NavigateUri>
-                        ysdy44@outlook.com
-                    </HyperlinkButton>
+                    <TextBlock x:Name="FeedbackTextBlock" HorizontalAlignment="Center"/>
+                    <HyperlinkButton x:Name="FeedbackHyperlinkButton" HorizontalAlignment="Center"/>
 
                 </StackPanel.Children>
 

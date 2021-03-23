@@ -1,28 +1,29 @@
 ﻿using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Menus;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Windows.ApplicationModel.Resources;
+using Windows.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.Globalization;
-using System.Globalization;
 
 namespace Retouch_Photo2
 {
     public sealed partial class SettingPage : Page
     {
         int index = 0;
-        Style getStyle()
+        private Style GetStyle()
         {
-            index++;
-            return (index % 2 == 0) ? this.MenuBorderStyle2 : this.MenuBorderStyle1;
+            this.index++;
+            return (this.index % 2 == 0) ? this.MenuBorderStyle2 : this.MenuBorderStyle1;
         }
-        Style getStyle2()
+        private Style GetStyle2()
         {
-            index++;
-            return (index % 2 == 0) ? this.KeyContentControlBackgroundStyle : this.KeyContentControlStyle;
+            this.index++;
+            return (this.index % 2 == 0) ? this.KeyContentControlBackgroundStyle : this.KeyContentControlStyle;
         }
 
 
@@ -45,6 +46,29 @@ namespace Retouch_Photo2
                 this.Head.RightButtonToolTip = resource.GetString("$SettingPage_About");
             }
 
+            //this.AboutDialog.Title = resource.GetString("$SettingPage_About_Title");
+            {
+                this.AboutDialog.SecondaryButtonText = resource.GetString("$SettingPage_AboutDialog_Close");
+                this.AboutDialog.PrimaryButtonText = resource.GetString("$SettingPage_AboutDialog_Primary");
+
+                this.VersionTextBlock.Text = resource.GetString("$Version");
+          
+                this.DocumentationTextBlock.Text = resource.GetString("$SettingPage_Documentation");
+                string documentationLink = resource.GetString("$DocumentationLink");
+                this.DocumentationHyperlinkButton.Content = documentationLink;
+                this.DocumentationHyperlinkButton.NavigateUri = new Uri(documentationLink);
+
+                this.GithubTextBlock.Text = resource.GetString("$SettingPage_Github");
+                string githubLink = resource.GetString("$GithubLink");
+                this.GithubHyperlinkButton.Content = githubLink;
+                this.GithubHyperlinkButton.NavigateUri = new Uri(githubLink);
+
+                this.FeedbackTextBlock.Text = resource.GetString("$SettingPage_Feedback");
+                string feedbackLink = resource.GetString("$FeedbackLink");
+                this.FeedbackHyperlinkButton.Content = feedbackLink;
+                this.FeedbackHyperlinkButton.NavigateUri = new Uri("mailto:"+feedbackLink);
+            }
+
             this.ThemeTextBlock.Text = resource.GetString("$SettingPage_Theme");
             {
                 this.LightRadioButton.Content = resource.GetString("$SettingPage_Theme_Light");
@@ -54,9 +78,9 @@ namespace Retouch_Photo2
 
             this.DeviceLayoutTextBlock.Text = resource.GetString("$SettingPage_DeviceLayout");
             {
-                this.PhoneButton.Content = resource.GetString("$SettingPage_DeviceLayout_Phone");
-                this.PadButton.Content = resource.GetString("$SettingPage_DeviceLayout_Pad");
-                this.PCButton.Content = resource.GetString("$SettingPage_DeviceLayout_PC");
+                this.PhoneButton.Content = this.AdaptiveWidthGrid.PhoneText = resource.GetString("$SettingPage_DeviceLayout_Phone");
+                this.PadButton.Content = this.AdaptiveWidthGrid.PadText = resource.GetString("$SettingPage_DeviceLayout_Pad");
+                this.PCButton.Content = this.AdaptiveWidthGrid.PCText = resource.GetString("$SettingPage_DeviceLayout_PC");
                 this.AdaptiveButton.Content = resource.GetString("$SettingPage_DeviceLayout_Adaptive");
             }
 
@@ -75,31 +99,31 @@ namespace Retouch_Photo2
                     {
                         Tag = "Shift",
                         Content = resource.GetString("Tools_MoreTransform_Ratio"),
-                        Style = this.getStyle2()
+                        Style = this.GetStyle2()
                     },
                     new ContentControl
                     {
                         Tag = "Shift",
                         Content = resource.GetString("Tools_MoreCreate_Square"),
-                        Style = this.getStyle2()
+                        Style = this.GetStyle2()
                     },
                     new ContentControl
                     {
                         Tag = "Ctrl",
                         Content = resource.GetString("Tools_MoreCreate_Center"),
-                        Style = this.getStyle2()
+                        Style = this.GetStyle2()
                     },
                     new ContentControl
                     {
                         Tag = "Space",
                         Content = resource.GetString("Menus_Transformer_StepFrequency"),
-                        Style = this.getStyle2()
+                        Style = this.GetStyle2()
                     },
                     new ContentControl
                     {
                         Tag = "Space",
                         Content = resource.GetString("$SettingPage_Key_Rotate"),
-                        Style = this.getStyle2()
+                        Style = this.GetStyle2()
                     }
                 }
             };
@@ -113,7 +137,7 @@ namespace Retouch_Photo2
                     {
                         Tag = key.ToString(),
                         Content = resource.GetString(key.TitleResource),
-                        Style = this.getStyle2()
+                        Style = this.GetStyle2()
                     });
                 }
 
@@ -124,7 +148,7 @@ namespace Retouch_Photo2
                     {
                         Tag = key.ToString(),
                         Content = resource.GetString(key.TitleResource),
-                        Style = this.getStyle2()
+                        Style = this.GetStyle2()
                     });
                 }
 
@@ -135,7 +159,7 @@ namespace Retouch_Photo2
                     {
                         Tag = key.ToString(),
                         Content = resource.GetString(key.TitleResource),
-                        Style = this.getStyle2()
+                        Style = this.GetStyle2()
                     });
                 }
             }
@@ -153,6 +177,26 @@ namespace Retouch_Photo2
             this.OpenTextBlock.Text = resource.GetString("$SettingPage_LocalFolder_Open");
         }
 
+
+
+        //About
+        int about = 3;
+        private void ConstructAbout()
+        {
+            this.AboutDialog.SecondaryButtonClick += (s, e) => this.AboutDialog.Hide();
+            this.AboutDialog.PrimaryButtonClick += (s, e) => this.AboutDialog.Hide();
+
+            this.AboutImage.DoubleTapped += (s, e) => this.AboutStoryboard.Begin();//Storyboard
+            this.AboutStoryboard.Completed += (s, e) =>
+            {
+                this.about--;
+                if (this.about <= 0)
+                {
+                    this.about = 3;
+                    this.Frame.Navigate(typeof(DebugPage));//Navigate
+                }
+            };
+        }
 
 
         //Theme
@@ -288,7 +332,7 @@ namespace Retouch_Photo2
                 this.MenusStackPanel.Children.Add(new Border
                 {
                     Child = this.ConstructMenuTypeCheckBox(menu, menuTypes),
-                    Style = this.getStyle()
+                    Style = this.GetStyle()
                 });
             }
         }
@@ -375,7 +419,7 @@ namespace Retouch_Photo2
             this.LanguageStackPanel.Children.Add(new Border
             {
                 Child = radioButton,
-                Style = this.getStyle()
+                Style = this.GetStyle()
             });
         }
 
