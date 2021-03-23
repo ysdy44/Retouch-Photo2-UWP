@@ -153,7 +153,7 @@
     <Compile Include="XMLs\XML.IBrush.cs" />
     <Compile Include="XMLs\XML.BrushTypeFactory.cs" />
     <Compile Include="XMLs\XML.ExtendFactory.cs" />
-    <EmbeddedResource Include="Properties\Retouch_Photo.Brushs.rd.xml" />
+    <EmbeddedResource Include="Properties\Retouch_Photo2.Brushs.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FanKit.Transformers">

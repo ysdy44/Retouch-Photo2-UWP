@@ -115,7 +115,7 @@
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\Retouch_Photo.Operates.rd.xml" />
+    <EmbeddedResource Include="Properties\Retouch_Photo2.Operates.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">

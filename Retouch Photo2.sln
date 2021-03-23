@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Brushs", "Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Effects", "Retouch Photo2.Effects\Retouch Photo2.Effects.csproj", "{C14D4618-E234-4D91-8CED-49CBD9F6F3C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Elements", "Retouch Photo2.Elements\Retouch Photo2.Elements.csproj", "{0E5AC58E-36BF-44FE-877E-830F024B7109}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Layers", "Retouch Photo2.Layers\Retouch Photo2.Layers.csproj", "{15CBF0A7-0953-49F5-B541-F8BCAAB40053}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Operates", "Retouch Photo2.Operates\Retouch Photo2.Operates.csproj", "{C5A52472-53D8-4885-8488-0CF77A985794}"
@@ -38,6 +36,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Menus", "Retouch Photo2.Menus\Retouch Photo2.Menus.csproj", "{F8C6DDA8-AFBA-4CAE-8F28-E795547EECED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Photos", "Retouch Photo2.Photos\Retouch Photo2.Photos.csproj", "{D5159F6F-9108-4B01-A761-FF98A74D9DA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retouch Photo2.Elements", "Retouch Photo2.Elements\Retouch Photo2.Elements.csproj", "{0E5AC58E-36BF-44FE-877E-830F024B7109}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -173,26 +173,6 @@ Global
 		{C14D4618-E234-4D91-8CED-49CBD9F6F3C7}.Release|x64.Build.0 = Release|x64
 		{C14D4618-E234-4D91-8CED-49CBD9F6F3C7}.Release|x86.ActiveCfg = Release|x86
 		{C14D4618-E234-4D91-8CED-49CBD9F6F3C7}.Release|x86.Build.0 = Release|x86
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|ARM.ActiveCfg = Debug|ARM
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|ARM.Build.0 = Debug|ARM
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|ARM64.ActiveCfg = Debug|Any CPU
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|x64.ActiveCfg = Debug|x64
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|x64.Build.0 = Debug|x64
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|x86.ActiveCfg = Debug|x86
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|x86.Build.0 = Debug|x86
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|ARM.ActiveCfg = Release|ARM
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|ARM.Build.0 = Release|ARM
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|ARM64.ActiveCfg = Release|Any CPU
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|ARM64.Build.0 = Release|Any CPU
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|x64.ActiveCfg = Release|x64
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|x64.Build.0 = Release|x64
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|x86.ActiveCfg = Release|x86
-		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|x86.Build.0 = Release|x86
 		{15CBF0A7-0953-49F5-B541-F8BCAAB40053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{15CBF0A7-0953-49F5-B541-F8BCAAB40053}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15CBF0A7-0953-49F5-B541-F8BCAAB40053}.Debug|ARM.ActiveCfg = Debug|ARM
@@ -415,6 +395,26 @@ Global
 		{D5159F6F-9108-4B01-A761-FF98A74D9DA3}.Release|x64.Build.0 = Release|x64
 		{D5159F6F-9108-4B01-A761-FF98A74D9DA3}.Release|x86.ActiveCfg = Release|x86
 		{D5159F6F-9108-4B01-A761-FF98A74D9DA3}.Release|x86.Build.0 = Release|x86
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|ARM.ActiveCfg = Debug|ARM
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|ARM.Build.0 = Debug|ARM
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|ARM64.Build.0 = Debug|ARM64
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|x64.ActiveCfg = Debug|x64
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|x64.Build.0 = Debug|x64
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|x86.ActiveCfg = Debug|x86
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Debug|x86.Build.0 = Debug|x86
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|ARM.ActiveCfg = Release|ARM
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|ARM.Build.0 = Release|ARM
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|ARM64.ActiveCfg = Release|ARM64
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|ARM64.Build.0 = Release|ARM64
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|x64.ActiveCfg = Release|x64
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|x64.Build.0 = Release|x64
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|x86.ActiveCfg = Release|x86
+		{0E5AC58E-36BF-44FE-877E-830F024B7109}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

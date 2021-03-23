@@ -38,6 +38,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo2
 {
+    /// <summary>
+    /// Provides application-specific behavior to supplement the default Application class.
+    /// </summary>
     public sealed partial class App : Application
     {
 
@@ -54,16 +57,16 @@ namespace Retouch_Photo2
         public static SettingViewModel SettingViewModel = new SettingViewModel
         {
             KeyboardAccelerators = new List<KeyboardAccelerator2>
-            {                         
+            {
                 new KeyboardAccelerator2
-                {                           
-                    TitleResource = ("$SettingPage_Key_Move_Left"),                              
-                    Group = 1,                               
-                    Key = VirtualKey.Left,                              
-                    Invoked = () =>                              
-                    {                             
-                        App.ViewModel.CanvasTransformer.Position += new Vector2(50, 0);                                
-                        App.ViewModel.CanvasTransformer.ReloadMatrix();                                
+                {
+                    TitleResource = ("$SettingPage_Key_Move_Left"),
+                    Group = 1,
+                    Key = VirtualKey.Left,
+                    Invoked = () =>
+                    {
+                        App.ViewModel.CanvasTransformer.Position += new Vector2(50, 0);
+                        App.ViewModel.CanvasTransformer.ReloadMatrix();
                         App.ViewModel.Invalidate();//Invalidate                          
                     }
                 },
@@ -77,7 +80,7 @@ namespace Retouch_Photo2
                         App.ViewModel.CanvasTransformer.Position += new Vector2(0, 50);
                         App.ViewModel.CanvasTransformer.ReloadMatrix();
                         App.ViewModel.Invalidate();//Invalidate
-                    }                
+                    }
                 },
                 new KeyboardAccelerator2
                 {
@@ -97,7 +100,7 @@ namespace Retouch_Photo2
                     Group = 1,
                     Key = VirtualKey.Down,
                     Invoked = () =>
-                    {                               
+                    {
                         App.ViewModel.CanvasTransformer.Position -= new Vector2(50, 0);
                         App.ViewModel.CanvasTransformer.ReloadMatrix();
                         App.ViewModel.Invalidate();//Invalidate
@@ -227,7 +230,7 @@ namespace Retouch_Photo2
                 },
             }
         };
-                  
+
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.TipViewModel" />. </summary>
         public static TipViewModel TipViewModel = new TipViewModel
         {
@@ -315,37 +318,48 @@ namespace Retouch_Photo2
         };
 
 
+        /// <summary>
+        /// Initializes the singleton application object.  This is the first line of authored code
+        /// executed, and as such is the logical equivalent of main() or WinMain().
+        /// </summary>
         public App()
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
 
-
         /// <summary>
-        /// 在应用程序由最终用户正常启动时进行调用。
-        /// 将在启动应用程序以打开特定文件等情况下使用。
+        /// Invoked when the application is launched normally by the end user.  Other entry points
+        /// will be used when the application is launched to open a specific file, to display
+        /// search results, and so forth.
         /// </summary>
-        /// <param name="e">有关启动请求和过程的详细信息。</param>
+        /// <param name="e">Details about the launch request and process.</param>
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
+#if DEBUG
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                this.DebugSettings.EnableFrameRateCounter = true;
+            }
+#endif
+
             Frame rootFrame = Window.Current.Content as Frame;
 
-            // 不要在窗口已包含内容时重复应用程序初始化，
-            // 只需确保窗口处于活动状态
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
             if (rootFrame == null)
             {
-                // 创建要充当导航上下文的框架，并导航到第一页
+                // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    //TODO: 从之前挂起的应用程序加载状态
+                    // Load state from previously suspended application
                 }
 
-                // 将框架放在当前窗口中
+                // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
 
@@ -357,38 +371,41 @@ namespace Retouch_Photo2
                     Setting setting = await XML.ConstructSettingFile();
                     App.SettingViewModel.ConstructSetting(setting, App.TipViewModel.Menus);
 
-                    // 当导航堆栈尚未还原时，导航到第一页，
-                    // 并通过将所需信息作为导航参数传入来配置
-                    // 参数
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    // When the navigation stack isn't restored navigate to the first page,
+                    // configuring the new page by passing required information as a navigation
+                    // parameter
+                    if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
+                    {
+                        throw new Exception("Failed to create initial page");
+                    }
+                    // Ensure the current window is active
+                    Window.Current.Activate();
                 }
-                // 确保当前窗口处于活动状态
-                Window.Current.Activate();
             }
         }
 
         /// <summary>
-        /// 导航到特定页失败时调用
+        /// Invoked when Navigation to a certain page fails
         /// </summary>
-        ///<param name="sender">导航失败的框架</param>
-        ///<param name="e">有关导航失败的详细信息</param>
+        /// <param name="sender">The Frame which failed navigation</param>
+        /// <param name="e">Details about the navigation failure</param>
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
         /// <summary>
-        /// 在将要挂起应用程序执行时调用。  在不知道应用程序
-        /// 无需知道应用程序会被终止还是会恢复，
-        /// 并让内存内容保持不变。
+        /// Invoked when application execution is being suspended.  Application state is saved
+        /// without knowing whether the application will be terminated or resumed with the contents
+        /// of memory still intact.
         /// </summary>
-        /// <param name="sender">挂起的请求的源。</param>
-        /// <param name="e">有关挂起请求的详细信息。</param>
+        /// <param name="sender">The source of the suspend request.</param>
+        /// <param name="e">Details about the suspend request.</param>
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: 保存应用程序状态并停止任何后台活动
+
             deferral.Complete();
-        }
+        }   
     }
 }

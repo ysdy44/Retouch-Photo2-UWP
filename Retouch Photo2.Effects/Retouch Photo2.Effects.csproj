@@ -119,7 +119,7 @@
     <Compile Include="EffectType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMLs\XML.Effect.cs" />
-    <EmbeddedResource Include="Properties\Retouch_Photo.Effects.rd.xml" />
+    <EmbeddedResource Include="Properties\Retouch_Photo2.Effects.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FanKit.Transformers">
@@ -180,7 +180,6 @@
       <Name>Retouch Photo2.Elements</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

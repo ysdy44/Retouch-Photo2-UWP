@@ -16,7 +16,7 @@
      https://devdiv.visualstudio.com/DevDiv/Default/_git/CoreFxTools?path=%2Fsrc%2Fapps%2FWinRTClosureFinder
 -->
 <Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
-  <Library Name="Retouch_Photo2.Filters">
+  <Library Name="Retouch_Photo2.Blends">
 
     <!-- Child elements go here -->
 

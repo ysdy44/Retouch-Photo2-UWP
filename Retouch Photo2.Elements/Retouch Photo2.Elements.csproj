@@ -184,7 +184,7 @@
     <Compile Include="XMLs\XML.ThemeFactory.cs" />
     <Compile Include="XMLs\XML.DeviceLayout.cs" />
     <Compile Include="XMLs\XML.DeviceLayoutTypeFactory.cs" />
-    <EmbeddedResource Include="Properties\Retouch_Photo.Elements.rd.xml" />
+    <EmbeddedResource Include="Properties\Retouch_Photo2.Elements.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FanKit.Transformers">
