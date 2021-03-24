@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
-    xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:elements="using:Retouch_Photo2.Elements" xmlns:globalization="using:System.Globalization"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     NavigationCacheMode="Required"    
@@ -22,8 +22,7 @@
     <Page.Resources>
 
         <!--Style-->
-        <Style x:Name="ToolTipStyle" TargetType="ToolTip" BasedOn="{StaticResource AppToolTipStyle}">
-        </Style>
+        <Style x:Name="ToolTipStyle" TargetType="ToolTip" BasedOn="{StaticResource AppToolTipStyle}"/>
 
         <Style x:Name="KeyContentControlStyle" TargetType="ContentControl">
             <Setter Property="Padding" Value="12,0"/>
@@ -263,6 +262,15 @@
             <Setter Property="Background" Value="{ThemeResource AppTitle}"/>
         </Style>
 
+        <!--Template-->
+        <DataTemplate x:Name="LanguageTemplate" x:DataType="globalization:CultureInfo">
+            <TextBlock>                  
+                <Run Text="{Binding NativeName, Mode=OneTime}"/>              
+                <Run Text=" "/>                
+                <Run Text="{Binding DisplayName, Mode=OneTime}" Foreground="{ThemeResource AppText}"/>
+            </TextBlock>
+        </DataTemplate>    
+
     </Page.Resources>
 
 
@@ -421,7 +429,9 @@
 
                         <!--Key-->
                         <TextBlock x:Name="KeyTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border x:Name="Key00Border" Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
+                            <StackPanel x:Name="Key00StackPanel">
+                            </StackPanel>
                         </Border>
 
                         <ContentControl Height="12"/>

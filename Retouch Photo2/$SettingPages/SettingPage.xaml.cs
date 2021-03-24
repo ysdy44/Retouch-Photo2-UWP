@@ -40,34 +40,38 @@ namespace Retouch_Photo2
         {
             this.InitializeComponent();
             this.ConstructFlowDirection();
+            {
+                this.Head.LeftButtonClick += (s, e) => this.Frame.GoBack();
+                this.Head.RightButtonClick += (s, e) => this.AboutDialog.Show();
+                this.ScrollViewer.ViewChanged += (s, e) => this.Head.Move(this.ScrollViewer.VerticalOffset);
+
+                this.ConstructAbout();
+
+                this.ConstructTheme();
+
+                this.ConstructDeviceLayout();
+                this.SizeChanged += (s, e) =>
+                {
+                    if (e.NewSize == e.PreviousSize) return;
+                    int width = (int)e.NewSize.Width;
+                    this.AdaptiveWidthCountTextBlock.Text = width.ToString();
+                };
+
+                this.ConstructLayersHeight();
+
+                this.ConstructMenuType();
+
+                this.ConstructKey();
+
+                this.ConstructLanguage();
+
+                this.LocalFolderButton.Click += async (s, e) =>
+                {
+                    IStorageFolder folder = ApplicationData.Current.LocalFolder;
+                    await Launcher.LaunchFolderAsync(folder);
+                };
+            }
             this.ConstructStrings();
-            this.Head.LeftButtonClick += (s, e) => this.Frame.GoBack();
-            this.Head.RightButtonClick += (s, e) => this.AboutDialog.Show();
-            this.ScrollViewer.ViewChanged += (s, e) => this.Head.Move(this.ScrollViewer.VerticalOffset);
-
-            this.ConstructAbout();
-            
-             this.ConstructTheme();
-
-            this.ConstructDeviceLayout();
-            this.SizeChanged += (s, e) =>
-            {
-                if (e.NewSize == e.PreviousSize) return;
-                int width = (int)e.NewSize.Width;
-                this.AdaptiveWidthCountTextBlock.Text = width.ToString();
-            };
-
-            this.ConstructLayersHeight();
-
-            this.ConstructMenuType();
-
-            this.ConstructLanguage();
-
-            this.LocalFolderButton.Click += async (s, e) =>
-            {
-                IStorageFolder folder = ApplicationData.Current.LocalFolder;
-                await Launcher.LaunchFolderAsync(folder);
-            };
         }
 
     }

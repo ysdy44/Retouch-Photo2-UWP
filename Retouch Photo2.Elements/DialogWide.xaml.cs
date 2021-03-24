@@ -84,7 +84,6 @@ namespace Retouch_Photo2.Elements
         public DialogWide()
         {
             this.DefaultStyleKey = typeof(DialogWide);
-            this.ConstructFlowDirection();
         }
 
         /// <inheritdoc/>
@@ -119,14 +118,6 @@ namespace Retouch_Photo2.Elements
         private void PrimaryButton_Click(object sender, RoutedEventArgs e)
         {
             this.PrimaryButtonClick?.Invoke(this, e);//Delegate
-        }
-
-        //FlowDirection
-        private void ConstructFlowDirection()
-        {
-            bool isRightToLeft = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
-            
-            base.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
         }
 
     }
