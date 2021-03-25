@@ -7,8 +7,11 @@ using System.Globalization;
 using System.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.Globalization;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Shapes;
+using Retouch_Photo2.Brushs;
 
 namespace Retouch_Photo2
 {
@@ -26,6 +29,7 @@ namespace Retouch_Photo2
         //Strings
         public EventHandler<ResourceLoader> MenuStringsChanged;
         public EventHandler<ResourceLoader> KeyStringsChanged;
+        public EventHandler<ResourceLoader> CanvasBackgroundChanged;
         public EventHandler<ResourceLoader> LanguageStringsChanged;
         private void ConstructStrings()
         {
@@ -77,6 +81,9 @@ namespace Retouch_Photo2
 
             this.AdaptiveWidthTextBlock.Text = resource.GetString("$SettingPage_DeviceLayout_AdaptiveWidth");
             this.ResetAdaptiveWidthButton.Content = resource.GetString("$SettingPage_DeviceLayout_ResetAdaptiveWidth");
+
+            this.CanvasBackgroundTextBlock.Text = resource.GetString("$SettingPage_CanvasBackground");
+            this.CanvasBackgroundChanged?.Invoke(this, resource);//Delegate
 
             this.LayersHeightTextBlock.Text = resource.GetString("$SettingPage_LayersHeight");
             this.LayersHeightTipTextBlock.Text = resource.GetString("$SettingPage_LayersHeightTip");
@@ -146,10 +153,10 @@ namespace Retouch_Photo2
                 this.PCButton.IsChecked = (isAdaptive == false && type == DeviceLayoutType.PC);
                 this.AdaptiveButton.IsChecked = (isAdaptive);
 
-                this.PhoneButton.Click += async (s, e) => await this.SetType(DeviceLayoutType.Phone, false);
-                this.PadButton.Click += async (s, e) => await this.SetType(DeviceLayoutType.Pad, false);
-                this.PCButton.Click += async (s, e) => await this.SetType(DeviceLayoutType.PC, false);
-                this.AdaptiveButton.Click += async (s, e) => await this.SetType(DeviceLayoutType.PC, true);
+                this.PhoneButton.Click += async (s, e) => await this.SetDeviceLayoutType(DeviceLayoutType.Phone, false);
+                this.PadButton.Click += async (s, e) => await this.SetDeviceLayoutType(DeviceLayoutType.Pad, false);
+                this.PCButton.Click += async (s, e) => await this.SetDeviceLayoutType(DeviceLayoutType.PC, false);
+                this.AdaptiveButton.Click += async (s, e) => await this.SetDeviceLayoutType(DeviceLayoutType.PC, true);
             }
 
             //Adaptive
@@ -215,6 +222,57 @@ namespace Retouch_Photo2
         }
 
 
+        //CanvasBackground        
+        private void ConstructCanvasBackground()
+        {
+            //CanvasBackgrounds
+            byte? cannnel = this.SettingViewModel.Setting.CanvasBaclground;
+
+            //UIElementCollection 
+            this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(0, cannnel));
+            this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(46, cannnel));
+            this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(92, cannnel));
+            this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(138, cannnel));
+            this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(177, cannnel));
+            this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(216, cannnel));
+            this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(255, cannnel));
+            this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(null, cannnel));
+
+            //Construct
+            RadioButton constructLayersHeightButton(byte? value, byte? groupValue)
+            {
+                RadioButton radioButton = new RadioButton
+                {
+                    GroupName = "CanvasBackground",
+                    Style = this.RadioButtonStyle,
+                    IsChecked = groupValue == value,
+                };
+
+                if (value is byte cannel)
+                {
+                    radioButton.Content = value;
+                    radioButton.Tag = new ColorEllipse
+                    {
+                        Color = Color.FromArgb(255, cannel, cannel, cannel)
+                    };
+                }
+                else
+                {
+                    //Strings
+                    this.MenuStringsChanged += (s, resource) => radioButton.Content = resource.GetString("$SettingPage_CanvasBackground_None");//Delegate
+
+                    radioButton.Tag = new ColorEllipse
+                    {
+                        Color = Colors.Transparent
+                    };
+                }
+
+                radioButton.Click += async (s, e) => await this.SetCanvasBackground(value);
+                return radioButton;
+            }
+        }
+
+
         //LayersHeight        
         private void ConstructLayersHeight()
         {
@@ -222,22 +280,34 @@ namespace Retouch_Photo2
             int layersHeight = this.SettingViewModel.Setting.LayersHeight;
 
             //UIElementCollection 
-            constructLayersHeightButton(this.Height30Button, 30, layersHeight);
-            constructLayersHeightButton(this.Height40Button, 40, layersHeight);
-            constructLayersHeightButton(this.Height50Button, 50, layersHeight);
-            constructLayersHeightButton(this.Height60Button, 60, layersHeight);
-            constructLayersHeightButton(this.Height70Button, 70, layersHeight);
-            constructLayersHeightButton(this.Height80Button, 80, layersHeight);
+            this.LayersHeightStackPanel.Children.Add(constructLayersHeightButton(30, layersHeight));
+            this.LayersHeightStackPanel.Children.Add(new Rectangle { Style = this.RectangleStyle });
+            this.LayersHeightStackPanel.Children.Add(constructLayersHeightButton(40, layersHeight));
+            this.LayersHeightStackPanel.Children.Add(new Rectangle { Style = this.RectangleStyle });
+            this.LayersHeightStackPanel.Children.Add(constructLayersHeightButton(50, layersHeight));
+            this.LayersHeightStackPanel.Children.Add(new Rectangle { Style = this.RectangleStyle });
+            this.LayersHeightStackPanel.Children.Add(constructLayersHeightButton(60, layersHeight));
+            this.LayersHeightStackPanel.Children.Add(new Rectangle { Style = this.RectangleStyle });
+            this.LayersHeightStackPanel.Children.Add(constructLayersHeightButton(70, layersHeight));
+            this.LayersHeightStackPanel.Children.Add(new Rectangle { Style = this.RectangleStyle });
+            this.LayersHeightStackPanel.Children.Add(constructLayersHeightButton(80, layersHeight));
 
             //Construct
-            void constructLayersHeightButton(RadioButton radioButton, int value, int groupValue)
+            RadioButton constructLayersHeightButton(int value, int groupValue)
             {
-                radioButton.IsChecked = groupValue == value;
-                radioButton.Content = new LayerControl(value, $"{value}")
+                RadioButton radioButton = new RadioButton
                 {
-                    IsHitTestVisible = false
+                    GroupName = "LayersHeight",
+                    Style = this.LayerHeightRadioButtonStyle,
+                    IsChecked = groupValue == value,
+                    Content = new LayerControl(value, $"{value}")
+                    {
+                        IsHitTestVisible = false
+                    },
                 };
-                radioButton.Click += async (s, e) => await this.SetHeight(value);
+
+                radioButton.Click += async (s, e) => await this.SetLayersHeight(value);
+                return radioButton;
             }
         }
 

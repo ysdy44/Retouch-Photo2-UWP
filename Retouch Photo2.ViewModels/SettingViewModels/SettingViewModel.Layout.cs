@@ -4,6 +4,7 @@ using System.Numerics;
 using Windows.UI.Xaml;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -61,6 +62,19 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private DeviceLayoutType deviceLayoutType = DeviceLayoutType.PC;
+
+
+        /// <summary> Gets the center child canvas background. </summary>
+        public SolidColorBrush CanvasBackground
+        {
+            get => this.canvasBackground;
+            set
+            {
+                this.canvasBackground = value;
+                this.OnPropertyChanged(nameof(this.CanvasBackground));//Notify 
+            }
+        }
+        private SolidColorBrush canvasBackground;
 
 
         /// <summary>

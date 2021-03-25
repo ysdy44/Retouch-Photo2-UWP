@@ -57,6 +57,8 @@ namespace Retouch_Photo2
                     this.AdaptiveWidthCountTextBlock.Text = width.ToString();
                 };
 
+                this.ConstructCanvasBackground();
+
                 this.ConstructLayersHeight();
 
                 this.ConstructMenuType();

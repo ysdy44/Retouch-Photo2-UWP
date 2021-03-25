@@ -31,8 +31,9 @@ namespace Retouch_Photo2.ViewModels
                     "Root",
                      new XElement("Theme", setting.Theme),
                      Retouch_Photo2.Elements.XML.SaveDeviceLayout("DeviceLayout", setting.DeviceLayout),
+                     new XElement("CanvasBaclground", setting.CanvasBaclground),
                      new XElement("LayersHeight", setting.LayersHeight),
-                     new XElement("MenuTypes", 
+                     new XElement("MenuTypes",
                      (
                          from menuType
                          in setting.MenuTypes
@@ -55,6 +56,7 @@ namespace Retouch_Photo2.ViewModels
 
                 if (root.Element("Theme") is XElement theme) setting.Theme = Retouch_Photo2.Elements.XML.CreateTheme(theme.Value);
                 if (root.Element("DeviceLayout") is XElement deviceLayout) setting.DeviceLayout = Retouch_Photo2.Elements.XML.LoadDeviceLayout(deviceLayout);
+                if (root.Element("CanvasBaclground") is XElement canvasBaclground && string.IsNullOrEmpty(canvasBaclground.Value) == false) setting.CanvasBaclground = (byte)(double)canvasBaclground;
                 if (root.Element("LayersHeight") is XElement layersHeight) setting.LayersHeight = (int)layersHeight;
                 if (root.Element("MenuTypes") is XElement menuTypes)
                 {

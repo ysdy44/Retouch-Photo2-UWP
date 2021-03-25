@@ -21,7 +21,10 @@ namespace Retouch_Photo2.ViewModels
         /// <summary> Gets or sets the device layout. </summary>
         public DeviceLayout DeviceLayout = DeviceLayout.Default;
 
-        /// <summary> Gets or sets the layer-control height. </summary>    
+        /// <summary> Gets or sets the canvas background. </summary>    
+        public byte? CanvasBaclground = null;
+
+        /// <summary> Gets or sets the layer height. </summary>    
         public int LayersHeight = 40;
 
         /// <summary> Gets or sets the menu-types. </summary>
@@ -43,7 +46,6 @@ namespace Retouch_Photo2.ViewModels
 
              //MenuType.Layer,
              MenuType.Color,
-             //MenuType.Keyboard,
          };
         
     }

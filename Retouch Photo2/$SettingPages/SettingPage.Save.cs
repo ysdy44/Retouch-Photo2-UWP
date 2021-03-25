@@ -23,7 +23,7 @@ namespace Retouch_Photo2
             await this.Save();//Write
         }
 
-        private async Task SetType(DeviceLayoutType type2, bool isAdaptive)
+        private async Task SetDeviceLayoutType(DeviceLayoutType type2, bool isAdaptive)
         {
             //Setting
             DeviceLayout layout = this.SettingViewModel.Setting.DeviceLayout;
@@ -36,11 +36,20 @@ namespace Retouch_Photo2
             await this.Save();
         }
 
-        private async Task SetHeight(int height)
+        private async Task SetLayersHeight(int height)
         {
             //Setting
             this.SettingViewModel.Setting.LayersHeight = height;
             this.SettingViewModel.ConstructLayersHeight();
+
+            await this.Save();
+        }
+
+        private async Task SetCanvasBackground(byte? cannel)
+        {
+            //Setting
+            this.SettingViewModel.Setting.CanvasBaclground = cannel;
+            this.SettingViewModel.ConstructCanvasBackground();
 
             await this.Save();
         }

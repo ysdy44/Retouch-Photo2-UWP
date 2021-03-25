@@ -10,7 +10,6 @@
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:menus="using:Retouch_Photo2.Menus"
     xmlns:photos="using:Retouch_Photo2.Photos"
-    xmlns:toolElements="using:Retouch_Photo2.Tools.Elements"
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -105,6 +104,7 @@
         <elements:DrawLayout x:Name="DrawLayout" 
                CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"             
                DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
+               Background="{x:Bind SettingViewModel.CanvasBackground, Mode=OneWay}"
                IsFullScreen="True"
                              
                FootPage="{x:Bind TipViewModel.ToolPage, Mode=OneWay}"

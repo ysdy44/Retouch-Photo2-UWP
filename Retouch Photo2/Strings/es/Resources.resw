@@ -87,6 +87,7 @@
 <data name='$SettingPage_DeviceLayout_Adaptive' xml:space='preserve'><value>Adaptado</value></data>
 <data name='$SettingPage_DeviceLayout_AdaptiveWidth' xml:space='preserve'><value>Ancho adaptable</value></data>
 <data name='$SettingPage_DeviceLayout_ResetAdaptiveWidth' xml:space='preserve'><value>Restablecer ancho adaptativo</value></data>
+<data name='$SettingPage_CanvasBackground' xml:space='preserve'><value>Fondo de lienzo</value></data>
 <data name='$SettingPage_LayersHeight' xml:space='preserve'><value>Altura de las capas</value></data>
 <data name='$SettingPage_LayersHeightTip' xml:space='preserve'><value>Haga clic para cambiar la altura del control de capa</value></data>
 <data name='$SettingPage_MenuType' xml:space='preserve'><value>Tipo de menú</value></data>
@@ -526,6 +527,7 @@
 <data name='$SettingPage_About_Title' xml:space='preserve'><value>Sobre...</value></data>
 <data name='$SettingPage_AboutDialog_Close' xml:space='preserve'><value>Cancelar</value></data>
 <data name='$SettingPage_AboutDialog_Primary' xml:space='preserve'><value>OK</value></data>
+<data name='$SettingPage_CanvasBackground_None' xml:space='preserve'><value>Ninguno</value></data>
 <data name='$MainPage_Title' xml:space='preserve'><value>Retouch Photo2</value></data>
 <data name='$MainPage_NewDialog_Close' xml:space='preserve'><value>Cancelar</value></data>
 <data name='$MainPage_NewDialog_Primary' xml:space='preserve'><value>OK</value></data>

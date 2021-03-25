@@ -87,6 +87,7 @@
 <data name='$SettingPage_DeviceLayout_Adaptive' xml:space='preserve'><value>적응</value></data>
 <data name='$SettingPage_DeviceLayout_AdaptiveWidth' xml:space='preserve'><value>적응 폭</value></data>
 <data name='$SettingPage_DeviceLayout_ResetAdaptiveWidth' xml:space='preserve'><value>적응 폭 재설정</value></data>
+<data name='$SettingPage_CanvasBackground' xml:space='preserve'><value>캔버스 배경</value></data>
 <data name='$SettingPage_LayersHeight' xml:space='preserve'><value>레이어 높이</value></data>
 <data name='$SettingPage_LayersHeightTip' xml:space='preserve'><value>레이어 컨트롤의 높이를 변경하려면 클릭하십시오.</value></data>
 <data name='$SettingPage_MenuType' xml:space='preserve'><value>메뉴 유형</value></data>
@@ -526,6 +527,7 @@
 <data name='$SettingPage_About_Title' xml:space='preserve'><value>약...</value></data>
 <data name='$SettingPage_AboutDialog_Close' xml:space='preserve'><value>취소</value></data>
 <data name='$SettingPage_AboutDialog_Primary' xml:space='preserve'><value>확인</value></data>
+<data name='$SettingPage_CanvasBackground_None' xml:space='preserve'><value>없음</value></data>
 <data name='$MainPage_Title' xml:space='preserve'><value>Retouch Photo2</value></data>
 <data name='$MainPage_NewDialog_Close' xml:space='preserve'><value>취소</value></data>
 <data name='$MainPage_NewDialog_Primary' xml:space='preserve'><value>확인</value></data>

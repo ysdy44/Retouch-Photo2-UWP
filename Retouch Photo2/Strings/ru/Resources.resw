@@ -87,6 +87,7 @@
 <data name='$SettingPage_DeviceLayout_Adaptive' xml:space='preserve'><value>Адаптивная</value></data>
 <data name='$SettingPage_DeviceLayout_AdaptiveWidth' xml:space='preserve'><value>Адаптивная ширина</value></data>
 <data name='$SettingPage_DeviceLayout_ResetAdaptiveWidth' xml:space='preserve'><value>Сбросить адаптивную ширину</value></data>
+<data name='$SettingPage_CanvasBackground' xml:space='preserve'><value>Фон холста</value></data>
 <data name='$SettingPage_LayersHeight' xml:space='preserve'><value>Высота слоев</value></data>
 <data name='$SettingPage_LayersHeightTip' xml:space='preserve'><value>Щелкните, чтобы изменить высоту элемента управления слоем</value></data>
 <data name='$SettingPage_MenuType' xml:space='preserve'><value>Тип меню</value></data>
@@ -526,6 +527,7 @@
 <data name='$SettingPage_About_Title' xml:space='preserve'><value>О...</value></data>
 <data name='$SettingPage_AboutDialog_Close' xml:space='preserve'><value>Отмена</value></data>
 <data name='$SettingPage_AboutDialog_Primary' xml:space='preserve'><value>Ok</value></data>
+<data name='$SettingPage_CanvasBackground_None' xml:space='preserve'><value>Никто</value></data>
 <data name='$MainPage_Title' xml:space='preserve'><value>Retouch Photo2</value></data>
 <data name='$MainPage_NewDialog_Close' xml:space='preserve'><value>Отмена</value></data>
 <data name='$MainPage_NewDialog_Primary' xml:space='preserve'><value>Ok</value></data>

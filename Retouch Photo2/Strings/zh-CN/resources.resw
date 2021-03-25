@@ -87,6 +87,7 @@
 <data name='$SettingPage_DeviceLayout_Adaptive' xml:space='preserve'><value>自适应</value></data>
 <data name='$SettingPage_DeviceLayout_AdaptiveWidth' xml:space='preserve'><value>自适应宽度</value></data>
 <data name='$SettingPage_DeviceLayout_ResetAdaptiveWidth' xml:space='preserve'><value>重置自适应宽度</value></data>
+<data name='$SettingPage_CanvasBackground' xml:space='preserve'><value>画布背景</value></data>
 <data name='$SettingPage_LayersHeight' xml:space='preserve'><value>图层高度</value></data>
 <data name='$SettingPage_LayersHeightTip' xml:space='preserve'><value>单击以更改图层控件高度</value></data>
 <data name='$SettingPage_MenuType' xml:space='preserve'><value>菜单类型</value></data>
@@ -526,6 +527,7 @@
 <data name='$SettingPage_About_Title' xml:space='preserve'><value>关于...</value></data>
 <data name='$SettingPage_AboutDialog_Close' xml:space='preserve'><value>取消</value></data>
 <data name='$SettingPage_AboutDialog_Primary' xml:space='preserve'><value>确定</value></data>
+<data name='$SettingPage_CanvasBackground_None' xml:space='preserve'><value>无</value></data>
 <data name='$MainPage_Title' xml:space='preserve'><value>修图2</value></data>
 <data name='$MainPage_NewDialog_Close' xml:space='preserve'><value>取消</value></data>
 <data name='$MainPage_NewDialog_Primary' xml:space='preserve'><value>确定</value></data>

@@ -8,7 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
-    xmlns:local="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     >
 
@@ -66,7 +65,7 @@
     </UserControl.Resources>
 
 
-    <Grid x:Name="RootGrid">
+    <Grid x:Name="RootGrid" Background="{x:Bind Background, Mode=OneWay}">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>

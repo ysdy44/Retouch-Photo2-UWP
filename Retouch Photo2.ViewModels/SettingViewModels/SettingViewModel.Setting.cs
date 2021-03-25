@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Windows.Globalization;
+using Windows.UI.Xaml.Media;
+using Windows.UI;
 using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.ViewModels
@@ -33,6 +34,9 @@ namespace Retouch_Photo2.ViewModels
             this.ConstructDeviceLayout();
             this.RegisteDeviceLayout();
 
+            //CanvasBackground
+            this.ConstructCanvasBackground();
+
             //DeviceLayout
             this.ConstructLayersHeight();
 
@@ -58,7 +62,24 @@ namespace Retouch_Photo2.ViewModels
 
         //@Construct
         /// <summary>
-        /// Initializes the layers-height.
+        /// Initializes the canvas background.
+        /// </summary>
+        public void ConstructCanvasBackground()
+        {
+            if (this.Setting.CanvasBaclground is byte cannel)
+            {
+                Color color = Color.FromArgb(255, cannel, cannel, cannel);
+                this.CanvasBackground = new SolidColorBrush(color);
+            }
+            else
+            {
+                this.CanvasBackground = null;
+            }
+        }
+
+        //@Construct
+        /// <summary>
+        /// Initializes the layers height.
         /// </summary>
         public void ConstructLayersHeight()
         {
