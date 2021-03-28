@@ -6,7 +6,6 @@
 using FanKit.Transformers;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Operates;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,65 +15,12 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
-namespace Retouch_Photo2.Menus.Models
+namespace Retouch_Photo2.Menus
 {
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
     /// </summary>
-    public sealed partial class OperateMenu : Expander, IMenu
-    {
-
-        //@Content
-        public bool IsOpen { set => this.OperateMainPage.IsOpen = value; }
-        public override UIElement MainPage => this.OperateMainPage;
-
-        readonly OperateMainPage OperateMainPage = new OperateMainPage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a OperateMenu. 
-        /// </summary>
-        public OperateMenu()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-        }
-
-    }
-
-    /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Operates"/>.
-    /// </summary>
-    public sealed partial class OperateMenu : Expander, IMenu
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title =
-            this.Title = resource.GetString("Menus_Operate");
-        }
-
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Operate;
-        /// <summary> Gets or sets the button. </summary>
-        public override IExpanderButton Button { get; } = new MenuButton
-        {
-            Content = new Retouch_Photo2.Operates.Icon()
-        };
-        /// <summary> Reset Expander. </summary>
-        public override void Reset() { }
-
-    }
-
-    /// <summary>
-    /// MainPag of <see cref = "OperateMenu"/>.
-    /// </summary>
-    public sealed partial class OperateMainPage : UserControl
+    public sealed partial class OperateMenu : UserControl
     {
 
         //@ViewModel
@@ -107,9 +53,9 @@ namespace Retouch_Photo2.Menus.Models
 
         //@Construct
         /// <summary>
-        /// Initializes a OperateMainPage. 
+        /// Initializes a OperateMenu. 
         /// </summary>
-        public OperateMainPage()
+        public OperateMenu()
         {
             this.InitializeComponent();
             this.ConstructStrings();
@@ -124,7 +70,7 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// MainPag of <see cref = "OperateMenu"/>.
     /// </summary>
-    public sealed partial class OperateMainPage : UserControl
+    public sealed partial class OperateMenu : UserControl
     {
 
         //Strings
@@ -155,7 +101,7 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// MainPag of <see cref = "OperateMenu"/>.
     /// </summary>
-    public sealed partial class OperateMainPage : UserControl
+    public sealed partial class OperateMenu : UserControl
     {
 
         //Transform
@@ -309,7 +255,7 @@ namespace Retouch_Photo2.Menus.Models
     /// <summary>
     /// MainPag of <see cref = "OperateMenu"/>.
     /// </summary>
-    public sealed partial class OperateMainPage : UserControl
+    public sealed partial class OperateMenu : UserControl
     {
 
         private void TransformAlign(BorderMode borderMode, Orientation orientation)

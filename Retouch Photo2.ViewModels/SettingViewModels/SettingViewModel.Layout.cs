@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Windows.Foundation;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -30,18 +31,23 @@ namespace Retouch_Photo2.ViewModels
         /// </summary>
         public void RegisteDeviceLayout()
         {
-            Window.Current.SizeChanged += this.Current_SizeChanged;
+            Rect rect = Window.Current.Bounds;
+            this.WindowWidth = rect.Width;
+            this.WindowHeight = rect.Height;
+            Window.Current.SizeChanged += this.Window_SizeChanged;
         }
         /// <summary>
         /// UnRegiste the device-layout.
         /// </summary>
         public void UnRegisteDeviceLayout()
         {
-            Window.Current.SizeChanged -= this.Current_SizeChanged;
+            Window.Current.SizeChanged -= this.Window_SizeChanged;
         }
-        private void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
+        private void Window_SizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
-            //Width
+            this.WindowWidth = e.Size.Width;
+            this.WindowHeight = e.Size.Height;
+
             DeviceLayout layout = this.Setting.DeviceLayout;
             {
                 double width = e.Size.Width;
@@ -49,6 +55,31 @@ namespace Retouch_Photo2.ViewModels
                 this.DeviceLayoutType = type;
             }
         }
+
+
+        /// <summary> Gets or sets the device windows width. </summary>
+        public double WindowWidth
+        {
+            get => this.windowWidth;
+            set
+            {
+                this.windowWidth = value;
+                this.OnPropertyChanged(nameof(this.WindowWidth));//Notify 
+            }
+        }
+        private double windowWidth = 400;
+
+        /// <summary> Gets or sets the device windows height. </summary>
+        public double WindowHeight
+        {
+            get => this.windowHeight;
+            set
+            {
+                this.windowHeight = value;
+                this.OnPropertyChanged(nameof(this.WindowHeight));//Notify 
+            }
+        }
+        private double windowHeight = 400;
 
 
         /// <summary> Gets or sets the device layout type. </summary>

@@ -384,7 +384,8 @@
                         <!--Adaptive-->
                         <TextBlock Margin="0,8" Style="{StaticResource TitleTextBlockStyle}">
                             <Run x:Name="AdaptiveWidthTextBlock"/>
-                            <Run x:Name="AdaptiveWidthCountTextBlock" FontSize="16" Foreground="{ThemeResource AppText}"/>
+                            <Run FontSize="16" Foreground="{ThemeResource AppText}"
+                                 Text="{x:Bind DoubleConverter(SettingViewModel.WindowWidth), Mode=OneWay}"/>
                         </TextBlock>
                         <elements:AdaptiveWidthGrid x:Name="AdaptiveWidthGrid" IsEnabled="{x:Bind BoolConverter(AdaptiveButton.IsChecked), Mode=OneWay}"/>
                         <HyperlinkButton x:Name="ResetAdaptiveWidthButton" IsEnabled="{x:Bind BoolConverter(AdaptiveButton.IsChecked), Mode=OneWay}"/>
@@ -420,7 +421,7 @@
                         <!--Menu-->
                         <TextBlock x:Name="MenuTypeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                         <Border Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
-                            <StackPanel x:Name="MenusStackPanel" >
+                            <StackPanel x:Name="MenusStackPanel">
                             </StackPanel>
                         </Border>
                         <TextBlock x:Name="MenuTypeTipTextBlock" Margin="0,8" Style="{StaticResource AppTextBlockStyle}"/>

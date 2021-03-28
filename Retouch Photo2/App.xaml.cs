@@ -19,9 +19,9 @@
 // Complete:      ★★★★★   // This class is complete.
 // Complete:                       // This class is not completed.
 
+using Retouch_Photo2.Adjustments;
+using Retouch_Photo2.Adjustments.Pages;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Menus;
-using Retouch_Photo2.Menus.Models;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
@@ -30,7 +30,6 @@ using System.Collections.Generic;
 using System.Numerics;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.Resources;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -290,31 +289,6 @@ namespace Retouch_Photo2
                 new GeometryCapsuleTool(),
                 new GeometryHeartTool(),
             },
-
-            //Menu
-            Menus = new List<IMenu>
-            {
-                //new DebugMenu(),
-
-                new EditMenu(),
-                new OperateMenu(),
-
-                new AdjustmentMenu(),
-                new EffectMenu(),
-
-                new TextMenu(),
-                //new ParagraphMenu(),
-
-                new StrokeMenu(),
-                new StyleMenu(),
-
-                new HistoryMenu(),
-                new TransformerMenu(),
-
-                new LayerMenu(),
-                new ColorMenu(),
-                //new KeyboardMenu(),
-            },
         };
 
 
@@ -406,6 +380,6 @@ namespace Retouch_Photo2
             var deferral = e.SuspendingOperation.GetDeferral();
 
             deferral.Complete();
-        }   
+        }
     }
 }

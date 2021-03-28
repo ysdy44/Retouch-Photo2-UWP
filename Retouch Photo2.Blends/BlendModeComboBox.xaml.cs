@@ -50,16 +50,6 @@ namespace Retouch_Photo2.Blends
         }));
 
 
-        /// <summary> Gets or sets the title. </summary>
-        public object Title
-        {
-            get  => (object)base.GetValue(TitleProperty);
-            set => base.SetValue(TitleProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "BlendModeComboBox.Title" /> dependency property. </summary>
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(object), typeof(BlendModeComboBox), new PropertyMetadata(null));
-
-
         #endregion
 
 
@@ -71,6 +61,7 @@ namespace Retouch_Photo2.Blends
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
         }
 
     }
@@ -115,7 +106,7 @@ namespace Retouch_Photo2.Blends
                             {
                                 button.IsEnabled = false;
 
-                                this.Title = title;
+                                this.Button.Content = title;
                             }
                             else button.IsEnabled = true;
                         }

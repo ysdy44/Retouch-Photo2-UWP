@@ -4,76 +4,15 @@
 // Only:              
 // Complete:      ★★★★★
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
-using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Menus.Models
+namespace Retouch_Photo2.Menus
 {
     /// <summary>
-    /// Menu of <see cref = "HSVColorPickers.ColorPicker"/>.
+    /// Menu of <see cref="Windows.UI.Color"/>.
     /// </summary>
-    public sealed partial class ColorMenu : Expander, IMenu
-    {
-
-        //@ViewModel
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-
-
-        //@Content
-        public bool IsOpen { set { } }
-        public override UIElement MainPage => this.ColorMainPage;
-
-        readonly ColorMainPage ColorMainPage = new ColorMainPage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a ColorMenu. 
-        /// </summary>
-        public ColorMenu()
-        {
-            this.InitializeComponent();
-            this.Button.Content = new ColorEllipse
-            (
-                 dataContext: this.SelectionViewModel,
-                 path: nameof(this.SelectionViewModel.Color),
-                 dp: ColorEllipse.ColorProperty
-            );
-            this.ConstructStrings();
-        }
-
-    }
-
-
-    public sealed partial class ColorMenu : Expander, IMenu
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title =
-            base.Title = resource.GetString("Menus_Color");
-        }
-
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Transformer;
-        /// <summary> Gets or sets the button. </summary>
-        public override IExpanderButton Button { get; } = new MenuButton();
-        /// <summary> Reset Expander. </summary>
-        public override void Reset() { }
-
-    }
-
-    /// <summary>
-    /// MainPage of <see cref="ColorMenu"/>.
-    /// </summary>
-    public sealed partial class ColorMainPage : UserControl
+    public sealed partial class ColorMenu : UserControl
     {
 
         //@ViewModel
@@ -86,7 +25,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary>
         /// Initializes a ColorMainPage. 
         /// </summary>
-        public ColorMainPage()
+        public ColorMenu()
         {
             this.InitializeComponent();
 

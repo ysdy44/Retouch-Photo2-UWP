@@ -4,14 +4,11 @@
 // Only:              ★★★★★
 // Complete:      ★★★
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using System;
-using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI.Core;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -30,6 +27,7 @@ namespace Retouch_Photo2
 
         //@Converter
         private bool BoolConverter(bool? boolean) => boolean == true;
+        private string DoubleConverter(double value) => ((int)value).ToString();
 
 
         //@Construct
@@ -50,12 +48,6 @@ namespace Retouch_Photo2
                 this.ConstructTheme();
 
                 this.ConstructDeviceLayout();
-                this.SizeChanged += (s, e) =>
-                {
-                    if (e.NewSize == e.PreviousSize) return;
-                    int width = (int)e.NewSize.Width;
-                    this.AdaptiveWidthCountTextBlock.Text = width.ToString();
-                };
 
                 this.ConstructCanvasBackground();
 

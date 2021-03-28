@@ -1,12 +1,16 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
     
+    
     <ResourceDictionary.MergedDictionaries>
         <!--CheckControl-->
         <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/CheckControl.xaml"/>
         <!--Dialog-->
         <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Dialog.xaml"/>
         <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/DialogWide.xaml"/>
+        <!--Expanders-->
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Expander.xaml" />
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/ExpanderButton.xaml" />
         <!--ExpanedHead-->
         <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/ExpanedHead.xaml"/>
         <!--$SettingPages-->

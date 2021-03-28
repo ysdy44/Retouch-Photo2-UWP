@@ -1,13 +1,10 @@
-﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Layers;
-using Retouch_Photo2.Menus;
+﻿using Retouch_Photo2.Layers;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Media;
 using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -22,7 +19,7 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Initializes the all settings.
         /// </summary>
-        public void ConstructSetting(Setting setting, IEnumerable<IMenu> menus)
+        public void ConstructSetting(Setting setting, IEnumerable<MenuViewModel> menus)
         {
             if (setting == null) return;
             this.Setting = setting;
@@ -90,12 +87,12 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Initializes the menu-type.
         /// </summary>
-        public void ConstructMenuType(IEnumerable<IMenu> menus)
+        public void ConstructMenuType(IEnumerable<MenuViewModel> menus)
         {
-            foreach (IMenu menu in menus)
+            foreach (MenuViewModel menu in menus)
             {
                 bool isVisible = this.Setting.MenuTypes.Any(m => m == menu.Type);
-                menu.Button.Self.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
+                menu.ButtonVisibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 

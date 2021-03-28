@@ -5,114 +5,24 @@
 // Complete:      ★★★★★
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Blends;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
-using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
 
-namespace Retouch_Photo2.Menus.Models
+namespace Retouch_Photo2.Menus
 {
     /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Layers.ILayer"/>.
+    /// Menu of <see cref = "Retouch_Photo2.Layers"/>.
     /// </summary>
-    public sealed partial class LayerMenu : Expander, IMenu
-    {
-
-        //@Content
-        public bool IsOpen { set { } }
-        public override UIElement MainPage => this.LayerMainPage;
-
-        readonly LayerMainPage LayerMainPage = new LayerMainPage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a LayerMenu. 
-        /// </summary>
-        public LayerMenu()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.LayerMainPage.SecondPageChanged += (title, secondPage) =>
-            {
-                if (this.Page != secondPage) this.Page = secondPage;
-                this.IsSecondPage = true;
-                this.Title = (string)title;
-            };
-        }
-
-    }
-
-    /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Layers.ILayer"/>.
-    /// </summary>
-    public sealed partial class LayerMenu : Expander, IMenu
-    {
-
-        //DataContext
-        private void ConstructDataContext(string path, DependencyProperty dp)
-        {
-            // Create the binding description.
-            Binding binding = new Binding
-            {
-                Mode = BindingMode.OneWay,
-                Path = new PropertyPath(path)
-            };
-
-            // Attach the binding to the target.
-            this.SetBinding(dp, binding);
-        }
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title =
-            this.Title = resource.GetString("Menus_Layer");
-        }
-
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Layer;
-        /// <summary> Gets or sets the button. </summary>
-        public override IExpanderButton Button { get; } = new MenuButton
-        {
-            Content = new Retouch_Photo2.Layers.Icon()
-        };
-        /// <summary> Reset Expander. </summary>
-        public override void Reset() { }
-
-    }
-
-    /// <summary>
-    /// MainPage of <see cref = "LayerMenu"/>.
-    /// </summary>
-    public sealed partial class LayerMainPage : UserControl
+    public sealed partial class LayerMenu : UserControl
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-
-
-        //@Delegate
-        /// <summary> Occurs when second-page change. </summary>
-        public event EventHandler<UIElement> SecondPageChanged;
-
-
-        //@Content
-        BlendModeComboBox BlendModeComboBox = new BlendModeComboBox
-        {
-            MinHeight = 165,
-            MaxHeight = 300
-        };
 
 
         //@Converter
@@ -122,17 +32,11 @@ namespace Retouch_Photo2.Menus.Models
 
         //@Construct
         /// <summary>
-        /// Initializes a LayerMainPage. 
+        /// Initializes a LayerMenu. 
         /// </summary>
-        public LayerMainPage()
+        public LayerMenu()
         {
             this.InitializeComponent();
-            this.ConstructBlendModeDataContext
-            (
-                 dataContext: this.SelectionViewModel,
-                 path: nameof(this.SelectionViewModel.BlendMode),
-                 dp: BlendModeComboBox.ModeProperty
-            );
             this.ConstructStrings();
 
             this.NameButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowRename?.Invoke();
@@ -146,27 +50,8 @@ namespace Retouch_Photo2.Menus.Models
 
     }
 
-    /// <summary>
-    /// MainPage of <see cref = "LayerMenu"/>.
-    /// </summary>
-    public sealed partial class LayerMainPage : UserControl
+    public sealed partial class LayerMenu : UserControl
     {
-
-        //DataContext
-        private void ConstructBlendModeDataContext(object dataContext, string path, DependencyProperty dp)
-        {
-            this.BlendModeComboBox.DataContext = dataContext;
-
-            // Create the binding description.
-            Binding binding = new Binding
-            {
-                Mode = BindingMode.OneWay,
-                Path = new PropertyPath(path)
-            };
-
-            // Attach the binding to the target.
-            this.BlendModeComboBox.SetBinding(dp, binding);
-        }
 
         //Strings
         private void ConstructStrings()
@@ -182,13 +67,6 @@ namespace Retouch_Photo2.Menus.Models
             this.AdjustmentsTextBlock.Text= resource.GetString("Menus_Adjustment");
         }
 
-    }
-
-    /// <summary>
-    /// MainPage of <see cref = "LayerMenu"/>.
-    /// </summary>
-    public sealed partial class LayerMainPage : UserControl
-    {
 
         //Opacity
         private void ConstructOpacity1()
@@ -322,13 +200,6 @@ namespace Retouch_Photo2.Menus.Models
         //Blend Mode
         private void ConstructBlendMode()
         {
-            this.BlendModeButton.Click += (s, e) =>
-            {
-                string title = this.BlendModeTextBlock.Text;
-                UIElement secondPage = this.BlendModeComboBox;
-                this.SecondPageChanged?.Invoke(title, secondPage);//Delegate
-            };
-
             this.BlendModeComboBox.ModeChanged += (s, mode) =>
             {
                 BlendEffectMode? blendMode = mode;

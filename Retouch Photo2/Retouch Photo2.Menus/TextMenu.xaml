@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Retouch_Photo2.Menus.Models.TextMainPage"
+    x:Class="Retouch_Photo2.Menus.TextMenu"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -14,17 +14,40 @@
 
     <UserControl.Resources>
 
-        <DataTemplate x:Name="FontFamilyDataTemplate" x:DataType="x:String">
-            <TextBlock FontFamily="{x:Bind}" Text="{x:Bind}" Foreground="{StaticResource SystemBaseHighColor}" Style="{StaticResource AppTextBlockStyle}"/>
-        </DataTemplate>
-
-        <DataTemplate x:Name="FontSizeDataTemplate" x:DataType="x:Int32">
-            <TextBlock Foreground="{StaticResource SystemBaseHighColor}" Style="{StaticResource AppTextBlockStyle}">
-                <Run Text="{x:Bind}"/>                            
-                <Run> px</Run>
-            </TextBlock>
-        </DataTemplate>
+        <!--Flyout-->
+        <Flyout x:Name="FontWeightFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListView x:Name="FontWeightListView" IsItemClickEnabled="True" SelectionMode="Single">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <TextBlock FontFamily="{x:Bind}" Text="{x:Bind}" Foreground="{StaticResource SystemBaseHighColor}" Style="{StaticResource AppTextBlockStyle}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Flyout>
         
+        <Flyout x:Name="FontFamilyFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListView x:Name="FontFamilyListView" IsItemClickEnabled="True" SelectionMode="Single">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <TextBlock FontFamily="{x:Bind}" Text="{x:Bind}" Foreground="{StaticResource SystemBaseHighColor}" Style="{StaticResource AppTextBlockStyle}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Flyout>
+
+        <Flyout x:Name="FontSizeFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListView x:Name="FontSizeListView" IsItemClickEnabled="True" SelectionMode="Single">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="x:Int32">
+                        <TextBlock Foreground="{StaticResource SystemBaseHighColor}" Style="{StaticResource AppTextBlockStyle}">
+                            <Run Text="{x:Bind}"/>                            
+                            <Run> px</Run>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Flyout>
+
     </UserControl.Resources>
 
     
@@ -72,14 +95,9 @@
 
         <!--FontWeight-->
         <TextBlock x:Name="FontWeightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="FontWeightButton" Style="{StaticResource AppIconRoundedButtonStyle}"
-                        Content="{x:Bind FontWeightComboBox.Title, Mode=OneWay}">
-            <Button.Tag>
-                <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
-                          RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"
-                          MirroredWhenRightToLeft="True"/>
-            </Button.Tag>
-        </Button>
+        <texts:FontWeightComboBox x:Name="FontWeightComboBox"
+                       Weight ="{x:Bind SelectionViewModel.FontWeight, Mode=OneWay}">
+        </texts:FontWeightComboBox>
 
 
         <!--FontFamily-->

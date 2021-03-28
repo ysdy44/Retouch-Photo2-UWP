@@ -4,72 +4,18 @@
 // Only:              
 // Complete:      ★★★★★
 using Microsoft.Graphics.Canvas.Geometry;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Menus.Models
+namespace Retouch_Photo2.Menus
 {
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Strokes"/>.
     /// </summary>
-    public sealed partial class StrokeMenu : Expander, IMenu
-    {
-
-        //@Content
-        public bool IsOpen { set => this.StrokeMainPage.IsOpen = value; }
-        public override UIElement MainPage => this.StrokeMainPage;
-
-        readonly StrokeMainPage StrokeMainPage = new StrokeMainPage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a StrokeMenu. 
-        /// </summary>
-        public StrokeMenu()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-        }
-
-    }
-
-    /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Strokes"/>.
-    /// </summary>
-    public sealed partial class StrokeMenu : Expander, IMenu
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title =
-            this.Title = resource.GetString("Menus_Stroke");
-        }
-
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Stroke;
-        /// <summary> Gets or sets the button. </summary>
-        public override IExpanderButton Button { get; } = new MenuButton
-        {
-            Content = new Retouch_Photo2.Strokes.Icon()
-        };
-        /// <summary> Reset Expander. </summary>
-        public override void Reset() { }
-
-    }
-
-    /// <summary>
-    /// MainPage of <see cref = "StrokeMenu"/>.
-    /// </summary>
-    public sealed partial class StrokeMainPage : UserControl
+    public sealed partial class StrokeMenu : UserControl
     {
 
         //@ViewModel
@@ -85,14 +31,14 @@ namespace Retouch_Photo2.Menus.Models
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets <see cref = "StrokeMainPage" />'s IsOpen. </summary>
+        /// <summary> Gets or sets <see cref = "StrokeMenu" />'s IsOpen. </summary>
         public bool IsOpen
         {
             get => (bool)base.GetValue(IsOpenProperty);
             set => base.SetValue(IsOpenProperty, value);
         }
-        /// <summary> Identifies the <see cref = "StrokeMainPage.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(StrokeMainPage), new PropertyMetadata(false));
+        /// <summary> Identifies the <see cref = "StrokeMenu.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(StrokeMenu), new PropertyMetadata(false));
 
 
         #endregion
@@ -100,9 +46,9 @@ namespace Retouch_Photo2.Menus.Models
 
         //@Construct
         /// <summary>
-        /// Initializes a StrokeMainPage. 
+        /// Initializes a StrokeMenu. 
         /// </summary>
-        public StrokeMainPage()
+        public StrokeMenu()
         {
             this.InitializeComponent();
             this.ConstructStrings();
@@ -121,10 +67,7 @@ namespace Retouch_Photo2.Menus.Models
         }
     }
 
-    /// <summary>
-    /// MainPage of <see cref = "StrokeMenu"/>.
-    /// </summary>
-    public sealed partial class StrokeMainPage : UserControl
+    public sealed partial class StrokeMenu : UserControl
     {
 
         //Strings
@@ -145,10 +88,7 @@ namespace Retouch_Photo2.Menus.Models
 
     }
 
-    /// <summary>
-    /// MainPage of <see cref = "StrokeMenu"/>.
-    /// </summary>
-    public sealed partial class StrokeMainPage : UserControl
+    public sealed partial class StrokeMenu : UserControl
     {
 
         //Dash
@@ -355,7 +295,7 @@ namespace Retouch_Photo2.Menus.Models
                 (
                     set: (layer) => layer.Style.IsFollowTransform = isFollowTransform,
 
-                    type:  HistoryType.LayersProperty_SetStyle_IsFollowTransform,
+                    type: HistoryType.LayersProperty_SetStyle_IsFollowTransform,
                     getUndo: (layer) => layer.Style.IsFollowTransform,
                     setUndo: (layer, previous) => layer.Style.IsFollowTransform = previous
                 );

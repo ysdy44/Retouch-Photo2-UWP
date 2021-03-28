@@ -5,7 +5,6 @@
 // Complete:      ★★
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Menus;
 using Retouch_Photo2.ViewModels;
 using System;
 using Windows.ApplicationModel.Resources;
@@ -90,8 +89,6 @@ namespace Retouch_Photo2.Tools
 
                 this.SetFontText(fontText);
             };
-
-            this.TextButton.Click += (s, e) => this.TipViewModel.ShowMenuLayoutAt(MenuType.Text, this.TextButton);
             
             this.FullScreenButton.Click += (s, e) =>
             {

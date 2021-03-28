@@ -224,6 +224,11 @@ namespace Retouch_Photo2
         /// <summary> The current page no longer becomes an active page. </summary>
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            foreach (MenuViewModel menu in this.TipViewModel.Menus)
+            {
+                menu.Visibility = Visibility.Collapsed;
+            }
+
             this.UnregisterDrawPage();
 
             //Extension

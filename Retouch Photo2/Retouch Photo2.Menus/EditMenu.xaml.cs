@@ -6,7 +6,6 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -18,68 +17,13 @@ using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Retouch_Photo2.Edits;
-using System;
 
-namespace Retouch_Photo2.Menus.Models
+namespace Retouch_Photo2.Menus
 {
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Edits"/>.
     /// </summary>
-    public sealed partial class EditMenu : Expander, IMenu
-    {
-
-        //@Content       
-        public bool IsOpen { set { } }
-        public override UIElement MainPage => this.EditMainPage;
-
-        readonly EditMainPage EditMainPage = new EditMainPage();
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a EditMenu. 
-        /// </summary>
-        public EditMenu()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-        }
-
-    }
-
-    /// <summary>
-    /// Menu of <see cref = "Retouch_Photo2.Edits"/>.
-    /// </summary>
-    public sealed partial class EditMenu : Expander, IMenu
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Button.Title =
-            this.Title = resource.GetString("Menus_Edit");
-        }
-
-        //Menu
-        /// <summary> Gets the type. </summary>
-        public MenuType Type => MenuType.Edit;
-        /// <summary> Gets or sets the button. </summary>
-        public override IExpanderButton Button { get; } = new MenuButton
-        {
-            Content = new Retouch_Photo2.Edits.Icon()
-        };
-        /// <summary> Reset Expander. </summary>
-        public override void Reset() { }
-
-    }
-
-    /// <summary>
-    /// MainPage of <see cref = "EditMenu"/>.
-    /// </summary>
-    public sealed partial class EditMainPage : UserControl
+    public sealed partial class EditMenu : UserControl
     {
 
         //@ViewModel
@@ -92,7 +36,7 @@ namespace Retouch_Photo2.Menus.Models
         /// <summary>
         /// Initializes a EditMainPage. 
         /// </summary>
-        public EditMainPage()
+        public EditMenu()
         {
             this.InitializeComponent();
             this.ConstructStrings();
@@ -124,10 +68,7 @@ namespace Retouch_Photo2.Menus.Models
 
     }
 
-    /// <summary>
-    /// MainPage of <see cref = "EditMenu"/>.
-    /// </summary>
-    public sealed partial class EditMainPage : UserControl
+    public sealed partial class EditMenu : UserControl
     {
 
         //Strings

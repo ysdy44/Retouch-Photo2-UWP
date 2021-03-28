@@ -1,6 +1,6 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Menus;
 using Retouch_Photo2.Photos;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -95,11 +95,6 @@ namespace Retouch_Photo2
         /// </summary>
         private async Task Exit()
         {
-            foreach (IMenu menu in this.TipViewModel.Menus)
-            {
-                menu.State = ExpanderState.Hide;
-            }
-
             //Clear photos
             Photo.Instances.Clear();
 

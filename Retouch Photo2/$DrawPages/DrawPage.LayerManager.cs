@@ -1,6 +1,5 @@
 ﻿using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Menus;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,8 +21,8 @@ namespace Retouch_Photo2
         private void ConstructLayerManager()
         {
             this.LayersScrollViewer.Tapped += (s, e) => this.MethodViewModel.MethodSelectedNone();//Method
-            this.LayersScrollViewer.RightTapped += (s, e) => this.TipViewModel.ShowMenuLayoutAt(MenuType.Layer, this.LayersScrollViewer, FlyoutPlacementMode.Left);
-            this.LayersScrollViewer.Holding += (s, e) => this.TipViewModel.ShowMenuLayoutAt(MenuType.Layer, this.LayersScrollViewer, FlyoutPlacementMode.Left);
+            this.LayersScrollViewer.Holding += (s, e) => this.LayersRightTapped();
+            this.LayersScrollViewer.RightTapped += (s, e) => this.LayersRightTapped();
         }
 
 
@@ -34,8 +33,12 @@ namespace Retouch_Photo2
             this.ItemClick(layerage);
         }
         private void LayerRightTapped(ILayer layer)
+        {              
+            this.TipViewModel.Menus[9].Show(layer.Control, this.SettingViewModel.WindowWidth, this.SettingViewModel.WindowHeight, FlyoutPlacementMode.Left);
+        }
+        private void LayersRightTapped()
         {
-            this.TipViewModel.ShowMenuLayoutAt(MenuType.Layer, layer.Control, FlyoutPlacementMode.Left);
+            this.TipViewModel.Menus[9].Show(this.LayersScrollViewer, this.SettingViewModel.WindowWidth, this.SettingViewModel.WindowHeight, FlyoutPlacementMode.Left);
         }
         private void LayerVisibilityChanged(ILayer layer2)
         {
@@ -96,7 +99,7 @@ namespace Retouch_Photo2
             Layerage layerage = LayerManager.FindFirstLayerage(layer);
             this.MethodViewModel.MethodSelectedNot(layerage);//Method
         }
-        private void LayerDragItemsStarted(ILayer layer, ManipulationModes  manipulationModes)
+        private void LayerDragItemsStarted(ILayer layer, ManipulationModes manipulationModes)
         {
             Layerage layerage = LayerManager.FindFirstLayerage(layer);
 

@@ -5,13 +5,13 @@ using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Menus.Models
+namespace Retouch_Photo2.Menus
 {
 
     /// <summary>
     /// Menu of <see cref = "FanKit.Transformers.Transformer"/>.
     /// </summary>
-    public sealed partial class TransformerMainPage : UserControl
+    public sealed partial class TransformerMenu : UserControl
     {
 
         //Strings

@@ -6,6 +6,7 @@ using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Photos;
+using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Threading.Tasks;
@@ -91,6 +92,14 @@ namespace Retouch_Photo2
 
                 this.RatioTextBlock.Text = resource.GetString("Tools_MoreTransform_Ratio ");
                 this.CenterTextBlock2.Text = resource.GetString("Tools_MoreTransform_Center");
+            }
+
+            foreach (MenuViewModel menu in this.TipViewModel.Menus)
+            {
+                string type = menu.Type;
+                string title = resource.GetString($"Menus_{type}");
+
+                menu.Title = title;
             }
         }
 

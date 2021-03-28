@@ -65,7 +65,7 @@ namespace Retouch_Photo2.Layers.Models
 
             if (element.Element("HorizontalAlignment") is XElement horizontalAlignment) this.FontAlignment = Retouch_Photo2.Texts.XML.CreateHorizontalAlignment(horizontalAlignment.Value);
             if (element.Element("FontStyle") is XElement fontStyle) this.FontStyle = Retouch_Photo2.Texts.XML.CreateFontStyle(fontStyle.Value);
-            if (element.Element("FontWeight") is XElement fontWeight) this.FontWeight= Retouch_Photo2.Texts.XML.CreateFontWeight(fontWeight.Value);
+            if (element.Element("FontWeight") is XElement fontWeight) this.FontWeight = Retouch_Photo2.Texts.XML.CreateFontWeight(fontWeight.Value);
         }
 
 
@@ -94,7 +94,7 @@ namespace Retouch_Photo2.Layers.Models
             TransformerRect rect = new TransformerRect(width, height, Vector2.Zero);
             Matrix3x2 matrix = Transformer.FindHomography(rect, transformer);
 
-            CanvasTextLayout textLayout = new CanvasTextLayout(resourceCreator, this.FontText, textFormat, width, height);
+            CanvasTextLayout textLayout = new CanvasTextLayout(resourceCreator, this.FontText ?? string.Empty, textFormat, width, height);
             CanvasGeometry geometry = CanvasGeometry.CreateText(textLayout).Transform(matrix);
 
 

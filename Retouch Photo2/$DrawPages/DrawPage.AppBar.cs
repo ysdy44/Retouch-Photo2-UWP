@@ -106,7 +106,7 @@ namespace Retouch_Photo2
         private void AppBarOverflow(double width)
         {
             double overflowWidth = this.OverflowButton.ActualWidth;
-            double rightWidth = this.MenuButtonsControl.ActualWidth;
+            double rightWidth = this.ExpanderButtonsStackPanel.ActualWidth;
             double leftWidth = width - overflowWidth - rightWidth;
             int count = (int)(leftWidth / 40.0d) - 1;
 

@@ -3,19 +3,17 @@
 // Difficult:         ★★★★★
 // Only:              ★★★★★
 // Complete:      ★★★★★
-using Retouch_Photo2.Elements;
-using Retouch_Photo2.Menus;
+using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Tools;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2.ViewModels
 {
     /// <summary> 
-    /// Represents an ViewModel that contains <see cref="ITool"/> <see cref="IMenu"/> and <see cref="ToolTip.IsOpen"/>
+    /// Represents an ViewModel that contains <see cref="ITool"/> Menu and <see cref="ToolTip.IsOpen"/>
     /// </summary>
     public partial class TipViewModel : INotifyPropertyChanged
     {
@@ -30,95 +28,15 @@ namespace Retouch_Photo2.ViewModels
                 this.isOpen = value;
                 this.OnPropertyChanged(nameof(this.IsOpen));//Notify 
 
+                foreach (MenuViewModel menu in this.Menus)
+                {
+                    menu.IsOpen = menu.ButtonVisibility == Visibility.Visible && value;
+                }
+
                 this.Tool.IsOpen = value;
-                this.MenusIsOpen = value;
             }
         }
         private bool isOpen;
-
-
-        #region Menu
-
-
-        /// <summary> Gets or sets the all menus. </summary>   
-        public IList<IMenu> Menus { get; set; } = new List<IMenu>();
-
-        private bool MenusIsOpen
-        {
-            set
-            {
-                foreach (IMenu menu in this.Menus)
-                {
-                    if (menu == null) continue;
-                    if (menu.Button == null) continue;
-                    if (menu.Button.Self.Visibility == Visibility.Collapsed) continue;
-
-                    //MenuButton
-                    menu.Button.IsOpen = value;
-
-                    //Menu
-                    if (value)
-                    {
-                        if (menu.IsSecondPage) continue;
-                        if (menu.State != ExpanderState.Overlay) continue;
-                        menu.IsOpen = true;
-                    }
-                    else menu.IsOpen = false;
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// Show the layout.
-        /// </summary>
-        /// <param name="type"> The menu type. </param>
-        public void ShowMenuLayout(MenuType type = MenuType.Layer)
-        {
-            foreach (IMenu menu in this.Menus)
-            {
-                if (menu.Type == type)
-                {
-                    switch (menu.State)
-                    {
-                        case ExpanderState.Hide:
-                            menu.State = ExpanderState.FlyoutShow;
-                            break;
-                        case ExpanderState.OverlayNotExpanded:
-                            menu.State = ExpanderState.Overlay;
-                            break;
-                    }
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// Show the layout relative to the placement target.
-        /// </summary>
-        /// <param name="type"> The menu type. </param>
-        /// <param name="placementTarget"> The  placement target.</param>
-        /// <param name="placementMode"> The  placement mode.</param>
-        public void ShowMenuLayoutAt(MenuType type, FrameworkElement placementTarget, FlyoutPlacementMode placementMode = FlyoutPlacementMode.Top)
-        {
-            foreach (IMenu menu in this.Menus)
-            {
-                if (menu.Type == type)
-                {
-
-                    if (menu.State == ExpanderState.Hide)
-                    {
-                        menu.CalculatePostion(placementTarget, placementMode);
-
-                        menu.State = ExpanderState.FlyoutShow;
-                    }
-
-                }
-            }
-        }
-
-
-        #endregion
 
 
         //@Notify 

@@ -10,124 +10,135 @@
     >
 
     <UserControl.Resources>
+        
         <!--Template-->
         <ControlTemplate x:Name="ContentControlTemplate" TargetType="ContentControl">
             <Border CornerRadius="2" Background="Black">
                 <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Content}" Margin="2,0" FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
         </ControlTemplate>
+
+        <!--Flyout-->
+        <Flyout x:Name="Flyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                <Button x:Name="BlackButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="BoldButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+                <Button x:Name="ExtraBlackButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="ExtraBoldButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="ExtraLightButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+                <Button x:Name="LightButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="MediumButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="NormalButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+                <Button x:Name="SemiBoldButton" Style="{StaticResource AppIconSelectedButton}"/>
+                <Button x:Name="SemiLightButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+                <Button x:Name="ThinButton" Style="{StaticResource AppIconSelectedButton}"/>
+
+            </StackPanel>
+        </Flyout>
     </UserControl.Resources>
 
 
-    <ScrollViewer>
-        <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Button x:Name="Button" Style="{StaticResource AppIconRoundedButtonStyle}">
 
-            <!--VisualState-->
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroup x:Name="VisualStateGroup">
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
 
-                    <!--Normal-->
-                    <VisualState x:Name="Normal"/>
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
 
-                    <!--Black-->
-                    <VisualState x:Name="Black">
-                        <VisualState.Setters>
-                            <Setter Target = "BlackButton.IsEnabled" Value="False"/>
-                        </VisualState.Setters>
-                    </VisualState>
-                    <!--Bold-->
-                    <VisualState x:Name="Bold">
-                        <VisualState.Setters>
-                            <Setter Target = "BoldButton.IsEnabled" Value="False"/>
-                        </VisualState.Setters>
-                    </VisualState>
+                <!--Black-->
+                <VisualState x:Name="Black">
+                    <VisualState.Setters>
+                        <Setter Target = "BlackButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--Bold-->
+                <VisualState x:Name="Bold">
+                    <VisualState.Setters>
+                        <Setter Target = "BoldButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
 
-                    <!--ExtraBlack-->
-                    <VisualState x:Name="ExtraBlack">
-                        <VisualState.Setters>
-                            <Setter Target = "ExtraBlackButton.IsEnabled" Value="False"/>
-                        </VisualState.Setters>
-                    </VisualState>
-                    <!--ExtraBold-->
-                    <VisualState x:Name="ExtraBold">
-                        <VisualState.Setters>
-                            <Setter Target = "ExtraBoldButton.IsEnabled" Value="False"/>
-                        </VisualState.Setters>
-                    </VisualState>
-                    <!--ExtraLight-->
-                    <VisualState x:Name="ExtraLight">
-                        <VisualState.Setters>
-                            <Setter Target = "ExtraLightButton.IsEnabled" Value="False"/>
-                        </VisualState.Setters>
-                    </VisualState>
+                <!--ExtraBlack-->
+                <VisualState x:Name="ExtraBlack">
+                    <VisualState.Setters>
+                        <Setter Target = "ExtraBlackButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--ExtraBold-->
+                <VisualState x:Name="ExtraBold">
+                    <VisualState.Setters>
+                        <Setter Target = "ExtraBoldButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--ExtraLight-->
+                <VisualState x:Name="ExtraLight">
+                    <VisualState.Setters>
+                        <Setter Target = "ExtraLightButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
 
-                    <!--Light-->
-                    <VisualState x:Name="Light">
-                        <VisualState.Setters>
-                            <Setter Target = "LightButton.IsEnabled" Value="False"/>
-                        </VisualState.Setters>
-                    </VisualState>
-                    <!--Medium-->
-                    <VisualState x:Name="Medium">
-                        <VisualState.Setters>
-                            <Setter Target = "MediumButton.IsEnabled" Value="False"/>
-                        </VisualState.Setters>
-                    </VisualState>
-                    <!--None-->
-                    <VisualState x:Name="None">
-                        <VisualState.Setters>
-                            <Setter Target = "NormalButton.IsEnabled" Value="False"/>
-                        </VisualState.Setters>
-                    </VisualState>
+                <!--Light-->
+                <VisualState x:Name="Light">
+                    <VisualState.Setters>
+                        <Setter Target = "LightButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--Medium-->
+                <VisualState x:Name="Medium">
+                    <VisualState.Setters>
+                        <Setter Target = "MediumButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--None-->
+                <VisualState x:Name="None">
+                    <VisualState.Setters>
+                        <Setter Target = "NormalButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
 
-                    <!--SemiBold-->
-                    <VisualState x:Name="SemiBold">
-                        <VisualState.Setters>
-                            <Setter Target = "SemiBoldButton.IsEnabled" Value="False"/>
-                        </VisualState.Setters>
-                    </VisualState>
-                    <!--SemiLight-->
-                    <VisualState x:Name="SemiLight">
-                        <VisualState.Setters>
-                            <Setter Target = "SemiLightButton.IsEnabled" Value="False"/>
-                        </VisualState.Setters>
-                    </VisualState>
+                <!--SemiBold-->
+                <VisualState x:Name="SemiBold">
+                    <VisualState.Setters>
+                        <Setter Target = "SemiBoldButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--SemiLight-->
+                <VisualState x:Name="SemiLight">
+                    <VisualState.Setters>
+                        <Setter Target = "SemiLightButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
 
-                    <!--Thin-->
-                    <VisualState x:Name="Thin">
-                        <VisualState.Setters>
-                            <Setter Target = "ThinButton.IsEnabled" Value="False"/>
-                        </VisualState.Setters>
-                    </VisualState>
+                <!--Thin-->
+                <VisualState x:Name="Thin">
+                    <VisualState.Setters>
+                        <Setter Target = "ThinButton.IsEnabled" Value="False"/>
+                    </VisualState.Setters>
+                </VisualState>
 
-                </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
-            <Button x:Name="BlackButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name="BoldButton" Style="{StaticResource AppIconSelectedButton}"/>
+        <Button.Tag>
+            <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"
+                          MirroredWhenRightToLeft="True"/>
+        </Button.Tag>
+    </Button>
 
-            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-
-            <Button x:Name="ExtraBlackButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name="ExtraBoldButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name="ExtraLightButton" Style="{StaticResource AppIconSelectedButton}"/>
-
-            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-
-            <Button x:Name="LightButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name="MediumButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name="NormalButton" Style="{StaticResource AppIconSelectedButton}"/>
-
-            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-
-            <Button x:Name="SemiBoldButton" Style="{StaticResource AppIconSelectedButton}"/>
-            <Button x:Name="SemiLightButton" Style="{StaticResource AppIconSelectedButton}"/>
-
-            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-
-            <Button x:Name="ThinButton" Style="{StaticResource AppIconSelectedButton}"/>
-
-        </StackPanel>
-    </ScrollViewer>
 
 </UserControl>

@@ -1,17 +1,16 @@
-﻿using Retouch_Photo2.Elements;
+﻿using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Menus;
+using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.Globalization;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Shapes;
-using Retouch_Photo2.Brushs;
 
 namespace Retouch_Photo2
 {
@@ -320,11 +319,11 @@ namespace Retouch_Photo2
             Style getStyle() => ((index++) % 2 == 0) ? this.MenuBorderStyle2 : this.MenuBorderStyle1;
 
             //MenuTypes
-            IList<MenuType> menuTypes = this.SettingViewModel.Setting.MenuTypes;
+            IList<string> menuTypes = this.SettingViewModel.Setting.MenuTypes;
 
             //UIElementCollection 
             this.MenusStackPanel.Children.Clear();
-            foreach (IMenu menu in this.TipViewModel.Menus)
+            foreach (MenuViewModel menu in this.TipViewModel.Menus)
             {
                 this.MenusStackPanel.Children.Add(new Border
                 {
@@ -334,9 +333,9 @@ namespace Retouch_Photo2
             }
 
             //Construct
-            CheckBox constructMenuTypeCheckBox(IMenu menu, IList<MenuType> menuTypes2)
+            CheckBox constructMenuTypeCheckBox(MenuViewModel menu, IList<string> menuTypes2)
             {
-                MenuType type = menu.Type;
+                string type = menu.Type;
                 bool isContains = menuTypes2.Contains(type);
 
                 CheckBox checkBox = new CheckBox

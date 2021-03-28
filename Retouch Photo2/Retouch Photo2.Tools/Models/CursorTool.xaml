@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:operates="using:Retouch_Photo2.Operates"
-    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements" xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -35,12 +35,12 @@
         
         <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <Button x:Name="OperateButton" Grid.Column="2" Style="{StaticResource AppRoundedButtonStyle}">
+        <elements:ExpanderButton Grid.Column="2" Width="Auto"  Visibility2="{x:Bind TipViewModel.Menus[1].Visibility, Mode=TwoWay}" Left="{x:Bind TipViewModel.Menus[1].Left, Mode=TwoWay}" Top="{x:Bind TipViewModel.Menus[1].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[1].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[1].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}" PlacementMode="Top">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="OperateToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <operates:Icon/>
-        </Button>
+        </elements:ExpanderButton>
         
         <Rectangle Grid.Column="3" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 

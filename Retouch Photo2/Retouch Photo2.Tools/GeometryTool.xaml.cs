@@ -5,16 +5,17 @@
 // Complete:      ★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Menus;
-using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Retouch_Photo2.Tools
 {
@@ -26,7 +27,7 @@ namespace Retouch_Photo2.Tools
 
         //@ViewModel
         TipViewModel TipViewModel => App.TipViewModel;
-        
+
         /// <summary>
         /// Create a <see cref="GeometryLayer"/>.
         /// </summary>
@@ -60,6 +61,7 @@ namespace Retouch_Photo2.Tools
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Content 
@@ -93,11 +95,11 @@ namespace Retouch_Photo2.Tools
             this.ResourceDictionary.Source = new Uri($@"ms-appx:///Retouch Photo2.Tools/Icons/{toolType}Icon.xaml");
             this.IconContentControl.Template = this.ResourceDictionary[$"{toolType}Icon"] as ControlTemplate;
             this.ConstructStrings(toolType);
-                        
+
             //Flyout
             this.FillBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowFill?.Invoke(this, this.FillBrushButton);
             this.StrokeBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStroke?.Invoke(this, this.StrokeBrushButton);
-            this.StrokeShowControl.Tapped += (s, e) => this.TipViewModel.ShowMenuLayoutAt(MenuType.Stroke, this.StrokeShowControl);
+            this.StrokeShowControl.Tapped += (s, e) => this.TipViewModel.Menus[5].Show(this.StrokeShowControl, this.SettingViewModel.WindowWidth, this.SettingViewModel.WindowHeight, FlyoutPlacementMode.Top);
 
             this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);
         }
@@ -112,7 +114,7 @@ namespace Retouch_Photo2.Tools
 
             this.FillTextBlock.Text = resource.GetString("Tools_Fill");
             this.StrokeTextBlock.Text = resource.GetString("Tools_Stroke");
-            
+
             this.StrokeShowToolTip.Content = resource.GetString("Menus_Stroke");
 
             this.ConvertToCurvesToolTip.Content = resource.GetString("Tools_ConvertToCurves");

@@ -79,7 +79,7 @@ namespace Retouch_Photo2.Layers.Models
         }
 
 
-        public bool FillContainsPoint(Layerage layerage, Vector2 point)
+        public override bool FillContainsPoint(Layerage layerage, Vector2 point)
         {
             if (this.Visibility == Visibility.Collapsed) return false;
 

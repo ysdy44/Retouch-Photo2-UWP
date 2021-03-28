@@ -67,6 +67,7 @@ namespace Retouch_Photo2.Texts
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
         }
 
     }
@@ -108,7 +109,7 @@ namespace Retouch_Photo2.Texts
                 {
                     button.IsEnabled = false;
 
-                    this.Title = text;
+                    this.Button.Content = text;
                 }
                 else button.IsEnabled = true;
             }

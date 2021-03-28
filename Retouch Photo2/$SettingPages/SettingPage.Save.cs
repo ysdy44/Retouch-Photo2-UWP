@@ -1,5 +1,4 @@
 ﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.Menus;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -54,7 +53,7 @@ namespace Retouch_Photo2
             await this.Save();
         }
 
-        private async Task AddMenu(MenuType type)
+        private async Task AddMenu(string type)
         {
             //Setting
             this.SettingViewModel.Setting.MenuTypes.Add(type);
@@ -62,7 +61,7 @@ namespace Retouch_Photo2
             await this.Save();
         }
 
-        private async Task RemoveMenu(MenuType type)
+        private async Task RemoveMenu(string type)
         {
             //Setting
             do

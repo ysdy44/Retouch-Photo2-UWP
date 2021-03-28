@@ -4,7 +4,6 @@
 // Only:              
 // Complete:      ★★★★★
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Tools;
 using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
@@ -13,7 +12,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Shapes;
 
-namespace Retouch_Photo2
+namespace Retouch_Photo2.Tools
 {
     /// <summary>
     /// Represents a tools control, that containing some buttons.

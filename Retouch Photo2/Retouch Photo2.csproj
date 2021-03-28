@@ -186,9 +186,6 @@
     <Compile Include="Retouch Photo2.Menus\ColorMenu.xaml.cs">
       <DependentUpon>ColorMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\DebugMenu.xaml.cs">
-      <DependentUpon>DebugMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Retouch Photo2.Menus\EditMenu.xaml.cs">
       <DependentUpon>EditMenu.xaml</DependentUpon>
     </Compile>
@@ -214,10 +211,10 @@
       <DependentUpon>TextMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Retouch Photo2.Menus\TransformerMenu.Construct.cs" />
+    <Compile Include="Retouch Photo2.Menus\TransformerMenu.State.cs" />
     <Compile Include="Retouch Photo2.Menus\TransformerMenu.xaml.cs">
       <DependentUpon>TransformerMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\TransformerStateControl.cs" />
     <Compile Include="Retouch Photo2.Tools\ModelPatterns\PatternDiagonalTool.xaml.cs">
       <DependentUpon>PatternDiagonalTool.xaml</DependentUpon>
     </Compile>
@@ -520,10 +517,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Retouch Photo2.Menus\DebugMenu.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Retouch Photo2.Menus\EditMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -751,10 +744,6 @@
     <ProjectReference Include="..\Retouch Photo2.Layers\Retouch Photo2.Layers.csproj">
       <Project>{15cbf0a7-0953-49f5-b541-f8bcaab40053}</Project>
       <Name>Retouch Photo2.Layers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Retouch Photo2.Menus\Retouch Photo2.Menus.csproj">
-      <Project>{f8c6dda8-afba-4cae-8f28-e795547eeced}</Project>
-      <Name>Retouch Photo2.Menus</Name>
     </ProjectReference>
     <ProjectReference Include="..\Retouch Photo2.Operates\Retouch Photo2.Operates.csproj">
       <Project>{c5a52472-53d8-4885-8488-0cf77a985794}</Project>
