@@ -108,9 +108,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="EffectsControl.xaml.cs">
-      <DependentUpon>EffectsControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="IEffectPage.cs" />
     <Compile Include="Effect.cs" />
     <Compile Include="Icon.xaml.cs">
@@ -133,10 +130,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="EffectsControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Icon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
