@@ -1,32 +1,35 @@
-﻿<UserControl
-    x:Class="Retouch_Photo2.Brushs.ColorEllipse"
+﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Width="34" 
-    Height="34" 
-    d:DesignHeight="50"
-    d:DesignWidth="50"
-    >
+    xmlns:local="using:Retouch_Photo2.Brushs">
 
-    <Grid x:Name="RootGrid" Background="Transparent">
-        <Ellipse IsHitTestVisible="False" StrokeThickness="1" Stroke="{ThemeResource AppText}">
-            <Ellipse.Fill>
-                <ImageBrush>
-                    <ImageBrush.ImageSource>
-                        ms-appx:///Icons\GrayAndWhite.jpg
-                    </ImageBrush.ImageSource>
-                </ImageBrush>
-            </Ellipse.Fill>
-        </Ellipse>
 
-        <Ellipse IsHitTestVisible="False" Margin="1">
-            <Ellipse.Fill>
-                <SolidColorBrush Color="{x:Bind Color, Mode=OneWay}"/>
-            </Ellipse.Fill>
-        </Ellipse>
-    </Grid>
+    <Style TargetType="local:ColorEllipse">
+        <Setter Property="Width" Value="34"/>
+        <Setter Property="Height" Value="34"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource AppText}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ColorEllipse">
+                    <Grid x:Name="LayoutRoot">
 
-</UserControl>
+                        <Ellipse IsHitTestVisible="False" StrokeThickness="1" Stroke="{TemplateBinding BorderBrush}">
+                            <Ellipse.Fill>
+                                <ImageBrush>
+                                    <ImageBrush.ImageSource>
+                                        ms-appx:///Icons\GrayAndWhite.jpg
+                                    </ImageBrush.ImageSource>
+                                </ImageBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <Ellipse IsHitTestVisible="False" Margin="1" Fill="{TemplateBinding SolidColorBrush}"/>
+                    </Grid>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

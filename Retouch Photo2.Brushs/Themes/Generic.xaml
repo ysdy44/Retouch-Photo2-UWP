@@ -1,0 +1,11 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <!--ColorEllipse-->
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/ColorEllipse.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+
+</ResourceDictionary>

@@ -4,7 +4,7 @@
 // Only:              ★★★
 // Complete:      ★★★★
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Stroke;
+using Retouch_Photo2.Strokes;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

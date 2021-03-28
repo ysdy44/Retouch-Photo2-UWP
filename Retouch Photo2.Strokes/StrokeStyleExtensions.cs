@@ -7,7 +7,7 @@ using Microsoft.Graphics.Canvas.Geometry;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 
-namespace Retouch_Photo2.Stroke
+namespace Retouch_Photo2.Strokes
 {
     /// <summary>
     /// Extensions of <see cref="CanvasStrokeStyle"/>.

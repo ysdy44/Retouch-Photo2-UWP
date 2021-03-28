@@ -6,7 +6,7 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
-using Retouch_Photo2.Stroke;
+using Retouch_Photo2.Strokes;
 using System.Numerics;
 
 namespace Retouch_Photo2.Styles
