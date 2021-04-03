@@ -82,32 +82,18 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="FlyoutPresenter">
-                    <controls:DropShadowPanel Style="{StaticResource AppDropShadowPanelStyle}">
-
-                        <!--@Acrylic-->
-                        <Border CornerRadius="{StaticResource AppCornerRadius}" 
-            
+                    <!--@Acrylic-->
+                    <Border CornerRadius="{StaticResource AppCornerRadius}"             
                                     apiContractNotPresent5:Background = "{ThemeResource AppBackground}"
                                     apiContractPresent5:Background = "{ThemeResource AppAcrylicElementBrush}">
-                            <ScrollViewer x:Name="ScrollViewer"
-                            ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"
-                            HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
-                            HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                            VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
-                            VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-                            AutomationProperties.AccessibilityView="Raw">
-                                <ContentPresenter Content="{TemplateBinding Content}"
+                        <ContentPresenter Content="{TemplateBinding Content}"
                                 MinWidth="200"
                                 ContentTemplate="{TemplateBinding ContentTemplate}"
                                 ContentTransitions="{TemplateBinding ContentTransitions}"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                            </ScrollViewer>
-
-                        </Border>
-
-                    </controls:DropShadowPanel>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

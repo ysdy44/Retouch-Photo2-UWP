@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers
             set => base.SetValue(IsCheckedProperty, value);
         }
         /// <summary> Identifies the <see cref = "VisualToggleButton.IsChecked" /> dependency property. </summary>
-        public static readonly DependencyProperty IsCheckedProperty = DependencyProperty.Register(nameof(IsChecked), typeof(bool), typeof(VisualToggleButton), new PropertyMetadata(false, (sender, e) =>
+        public static readonly DependencyProperty IsCheckedProperty = DependencyProperty.Register(nameof(IsChecked), typeof(bool), typeof(VisualToggleButton), new PropertyMetadata(true, (sender, e) =>
         {
             VisualToggleButton control = (VisualToggleButton)sender;
 
@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Layers
 
         //@VisualState
         ClickMode _vsClickMode;
-        bool _vsIsChecked = false; 
+        bool _vsIsChecked = true; 
         /// <summary> 
         /// Represents the visual appearance of UI elements in a specific state.
         /// </summary>

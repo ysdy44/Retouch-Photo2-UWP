@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Elements
 
         private void Root_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            this.Hide();
+            e.Handled = true;
         }
 
     }

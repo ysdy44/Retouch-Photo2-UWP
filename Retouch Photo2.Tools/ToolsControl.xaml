@@ -25,9 +25,11 @@
 
         <!--Flyout-->
         <Flyout x:Name="MoreFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel x:Name="MoreStackPanel">
-                <!--MoreChildren-->
-            </StackPanel>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
+                <StackPanel x:Name="MoreStackPanel" Padding="{StaticResource AppPanelPadding}" HorizontalAlignment="Stretch">
+                    <!--MoreChildren-->
+                </StackPanel>
+            </ScrollViewer>
         </Flyout>
         
     </UserControl.Resources>
@@ -37,6 +39,6 @@
         <StackPanel x:Name="StackPanel" Padding="{StaticResource AppPanelPadding}" HorizontalAlignment="Stretch">
             <!--Children-->
         </StackPanel>
-    </ScrollViewer >
+    </ScrollViewer>
 
 </UserControl>
