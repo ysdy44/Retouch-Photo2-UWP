@@ -32,9 +32,9 @@ namespace Retouch_Photo2.Menus
     public sealed partial class HistoryMenu : UserControl
     {
 
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-
+        //@Content
+        /// <summary> ListView's ItemsSource. </summary>
+        public object ItemsSource { get => this.ListView.ItemsSource; set => this.ListView.ItemsSource = value; }
 
         //@Construct
         /// <summary>
@@ -43,7 +43,6 @@ namespace Retouch_Photo2.Menus
         public HistoryMenu()
         {
             this.InitializeComponent();
-            this.ListView.ItemsSource = this.ViewModel.Historys;
         }
     }
 }

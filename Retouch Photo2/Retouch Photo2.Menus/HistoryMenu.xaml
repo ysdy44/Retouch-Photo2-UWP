@@ -7,14 +7,12 @@
     xmlns:historys="using:Retouch_Photo2.Historys"
     xmlns:menus="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"                      
-    MinHeight="165" 
-    MaxHeight="300"
+    MinHeight="165"
     d:DesignWidth="200"
     d:DesignHeight="400"
     >
 
-    <ListView x:Name="ListView" SelectionMode="None"
-                      IsItemClickEnabled="True">
+    <ListView x:Name="ListView" SelectionMode="None" IsItemClickEnabled="True">
 
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="historys:IHistory">

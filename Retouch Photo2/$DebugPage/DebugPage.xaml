@@ -975,31 +975,31 @@
         <!--Body-->
         <ScrollViewer x:Name="ScrollViewer" Grid.RowSpan="2" Padding="20,0">
             <Border>
-                <ListView x:Name="ListView" ItemsSource="{x:Bind CollectionViewSource.View}" MaxWidth="800" IsItemClickEnabled="False" SelectionMode="None">
+                <GridView x:Name="ListView" ItemsSource="{x:Bind CollectionViewSource.View}" MaxWidth="800" IsItemClickEnabled="False" SelectionMode="None">
 
-                    <ListView.ItemContainerTransitions>
+                    <GridView.ItemContainerTransitions>
                         <TransitionCollection>
                             <EntranceThemeTransition IsStaggeringEnabled="True"/>
                         </TransitionCollection>
-                    </ListView.ItemContainerTransitions>
+                    </GridView.ItemContainerTransitions>
 
-                    <ListView.ItemsPanel>
+                    <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <ItemsWrapGrid Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
+                    </GridView.ItemsPanel>
 
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
                             <Setter Property="Margin" Value="1"/>
                             <Setter Property="Width" Value="100"/>
                             <Setter Property="Height" Value="Auto"/>
                             <Setter Property="Padding" Value="12,6"/>
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         </Style>
-                    </ListView.ItemContainerStyle>
+                    </GridView.ItemContainerStyle>
 
-                    <ListView.GroupStyle>
+                    <GridView.GroupStyle>
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>
                                 <DataTemplate x:DataType="local:UIElementGrouping">
@@ -1007,17 +1007,17 @@
                                 </DataTemplate>
                             </GroupStyle.HeaderTemplate>
                         </GroupStyle>
-                    </ListView.GroupStyle>
+                    </GridView.GroupStyle>
 
-                    <ListView.Header>
+                    <GridView.Header>
                         <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseHeader}"/>
-                    </ListView.Header>
+                    </GridView.Header>
 
-                    <ListView.Footer>
+                    <GridView.Footer>
                         <ContentControl HorizontalAlignment="Center" ContentTemplate="{StaticResource AppListViewBaseFooter}"/>
-                    </ListView.Footer>
+                    </GridView.Footer>
 
-                </ListView>
+                </GridView>
             </Border>
         </ScrollViewer>
 

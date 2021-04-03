@@ -34,17 +34,12 @@ namespace Retouch_Photo2.Menus
 
             this.Loaded += async (s, e) =>
             {
-                if (this.StylesGridView.ItemsSource == null)
+                if (this.CollectionViewSource.Source == null)
                 {
-                    IEnumerable<StyleCategory> StyleCategorys = await Retouch_Photo2.XML.ConstructStylesFile();
-                    if (StyleCategorys != null)
+                    IEnumerable<StyleCategory> categorys = await Retouch_Photo2.XML.ConstructStylesFile();
+                    if (categorys != null)
                     {
-                        StyleCategory styleCategory = StyleCategorys.FirstOrDefault();
-                        if (styleCategory != null)
-                        {
-                            IEnumerable<Retouch_Photo2.Styles.IStyle> Styles = styleCategory.Styles;
-                            this.StylesGridView.ItemsSource = Styles.ToList();
-                        }
+                        this.CollectionViewSource.Source = categorys;
                     }
                 }
             };

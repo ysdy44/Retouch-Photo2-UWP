@@ -26,10 +26,10 @@ namespace Retouch_Photo2
         }
 
         //Strings
-        public EventHandler<ResourceLoader> MenuStringsChanged;
-        public EventHandler<ResourceLoader> KeyStringsChanged;
-        public EventHandler<ResourceLoader> CanvasBackgroundChanged;
-        public EventHandler<ResourceLoader> LanguageStringsChanged;
+        public IList<Action<ResourceLoader>> MenuStringsChanged = new List<Action<ResourceLoader>>();
+        public IList<Action<ResourceLoader>> KeyStringsChanged = new List<Action<ResourceLoader>>();
+        public IList<Action<ResourceLoader>> CanvasBackgroundChanged = new List<Action<ResourceLoader>>();
+        public IList<Action<ResourceLoader>> LanguageStringsChanged = new List<Action<ResourceLoader>>();
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
@@ -82,20 +82,20 @@ namespace Retouch_Photo2
             this.ResetAdaptiveWidthButton.Content = resource.GetString("$SettingPage_DeviceLayout_ResetAdaptiveWidth");
 
             this.CanvasBackgroundTextBlock.Text = resource.GetString("$SettingPage_CanvasBackground");
-            this.CanvasBackgroundChanged?.Invoke(this, resource);//Delegate
+            foreach (var item in this.CanvasBackgroundChanged) item(resource);
 
             this.LayersHeightTextBlock.Text = resource.GetString("$SettingPage_LayersHeight");
             this.LayersHeightTipTextBlock.Text = resource.GetString("$SettingPage_LayersHeightTip");
 
             this.MenuTypeTextBlock.Text = resource.GetString("$SettingPage_MenuType");
-            this.MenuStringsChanged?.Invoke(this, resource);//Delegate
+            foreach (var item in this.MenuStringsChanged) item(resource);
             this.MenuTypeTipTextBlock.Text = resource.GetString("$SettingPage_MenuTypeTip");
 
             this.KeyTextBlock.Text = resource.GetString("$SettingPage_Key");
-            this.KeyStringsChanged?.Invoke(this, resource);//Delegate
+            foreach (var item in this.KeyStringsChanged) item(resource);
 
             this.LanguageTextBlock.Text = resource.GetString("$SettingPage_Language");
-            this.LanguageStringsChanged?.Invoke(this, resource);//Delegate
+            foreach (var item in this.LanguageStringsChanged) item(resource);
             this.LanguageTipTextBlock.Text = resource.GetString("$SettingPage_LanguageTip");
 
             this.LocalFolderTextBlock.Text = resource.GetString("$SettingPage_LocalFolder");
@@ -228,6 +228,8 @@ namespace Retouch_Photo2
             byte? cannnel = this.SettingViewModel.Setting.CanvasBaclground;
 
             //UIElementCollection 
+            this.MenuStringsChanged.Clear();
+            this.CanvasBackgroundStackPanel.Children.Clear();
             this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(0, cannnel));
             this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(46, cannnel));
             this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(92, cannnel));
@@ -258,7 +260,7 @@ namespace Retouch_Photo2
                 else
                 {
                     //Strings
-                    this.MenuStringsChanged += (s, resource) => radioButton.Content = resource.GetString("$SettingPage_CanvasBackground_None");//Delegate
+                    this.MenuStringsChanged.Add((resource) => radioButton.Content = resource.GetString("$SettingPage_CanvasBackground_None"));
 
                     radioButton.Tag = new ColorEllipse
                     {
@@ -322,6 +324,7 @@ namespace Retouch_Photo2
             IList<string> menuTypes = this.SettingViewModel.Setting.MenuTypes;
 
             //UIElementCollection 
+            this.MenuStringsChanged.Clear();
             this.MenusStackPanel.Children.Clear();
             foreach (MenuViewModel menu in this.TipViewModel.Menus)
             {
@@ -346,7 +349,7 @@ namespace Retouch_Photo2
                 checkBox.Unchecked += async (s, e) => await this.RemoveMenu(type);
 
                 //Strings
-                this.MenuStringsChanged += (s, resource) => checkBox.Content = resource.GetString($"Menus_{type}");//Delegate
+                this.MenuStringsChanged.Add((resource) => checkBox.Content = resource.GetString($"Menus_{type}"));
 
                 return checkBox;
             }
@@ -364,6 +367,7 @@ namespace Retouch_Photo2
             IList<KeyboardAccelerator2> keys = this.SettingViewModel.KeyboardAccelerators;
 
             //UIElementCollection 
+            this.KeyStringsChanged.Clear();
             this.Key00StackPanel.Children.Clear();
             this.Key01StackPanel.Children.Clear();
             this.Key02StackPanel.Children.Clear();
@@ -395,7 +399,7 @@ namespace Retouch_Photo2
                 };
 
                 //Strings
-                this.KeyStringsChanged += (s, resource) => contentControl.Content = resource.GetString(titleResource);//Delegate
+                this.MenuStringsChanged.Add((resource) => contentControl.Content = resource.GetString(titleResource));
 
                 return contentControl;
             }
@@ -415,6 +419,7 @@ namespace Retouch_Photo2
             languages.Sort();
 
             //UIElementCollection 
+            this.LanguageStringsChanged.Clear();
             this.LanguageStackPanel.Children.Clear();
             this.LanguageStackPanel.Children.Add(new Border
             {
@@ -443,7 +448,7 @@ namespace Retouch_Photo2
                 if (string.IsNullOrEmpty(language))
                 {
                     //Strings
-                    this.LanguageStringsChanged += (s, resource) => radioButton.Content = resource.GetString("$SettingPage_Language_UseSystemSetting");//Delegate
+                    this.LanguageStringsChanged.Add((resource) => radioButton.Content = resource.GetString("$SettingPage_Language_UseSystemSetting"));
                 }
                 else
                 {

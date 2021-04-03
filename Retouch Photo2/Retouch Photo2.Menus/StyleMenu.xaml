@@ -5,14 +5,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:styles="using:Retouch_Photo2.Styles"
-    mc:Ignorable="d"                
-    MinHeight="165" 
-    MaxHeight="300"
+    mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
     >
+    
 
-    <GridView x:Name="StylesGridView" SelectionMode="None" IsItemClickEnabled="True" >
+    <UserControl.Resources>
+
+        <CollectionViewSource x:Name="CollectionViewSource" IsSourceGrouped="True"/>
+
+    </UserControl.Resources>
+
+
+    <GridView x:Name="StylesGridView" SelectionMode="None" IsItemClickEnabled="True" 
+                     ItemsSource="{x:Bind CollectionViewSource.View, Mode=OneWay}">
 
         <GridView.ItemContainerStyle>
             <Style TargetType="GridViewItem">
@@ -25,6 +32,16 @@
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
             </Style>
         </GridView.ItemContainerStyle>
+
+        <GridView.GroupStyle>
+            <GroupStyle>
+                <GroupStyle.HeaderTemplate>
+                    <DataTemplate x:DataType="styles:StyleCategory">
+                        <TextBlock Text="{x:Bind Name}" Style="{StaticResource AppTabTextBlockStyle}"/>
+                    </DataTemplate>
+                </GroupStyle.HeaderTemplate>
+            </GroupStyle>
+        </GridView.GroupStyle>
 
         <GridView.ItemTemplate>
             <DataTemplate x:DataType="styles:Style">
