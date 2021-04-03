@@ -24,8 +24,8 @@ namespace Retouch_Photo2.Adjustments
         IAdjustmentPage Page { get; }
         /// <summary> Gets the icon. </summary>
         ControlTemplate Icon { get; }
-        /// <summary> Gets the text. </summary>
-        string Text { get; }
+        /// <summary> Gets the title. </summary>
+        string Title { get; }
 
         ICommand Edit { get; }
         ICommand Remove { get; }

@@ -43,37 +43,39 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            ContrastAdjustment.GenericPage = this;
 
             this.ConstructContrast1();
             this.ConstructContrast2();
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "ContrastAdjustment"/>.
-    /// </summary>
     public sealed partial class ContrastPage : IAdjustmentPage
     {
+
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("Adjustments_Contrast");
+            this.Title = resource.GetString("Adjustments_Contrast");
 
             this.ContrastTextBlock.Text = resource.GetString("Adjustments_Contrast_Contrast");
+
+            ContrastAdjustment.GenericIcon = this.IconContentControl.Template;
+            ContrastAdjustment.GenericText = this.Title;
+            ContrastAdjustment.GenericPage = this;
         }
 
         //@Content
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Contrast;
         /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon { get => ContrastAdjustment.GenericIcon; set => ContrastAdjustment.GenericIcon = value; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Text { get => ContrastAdjustment.GenericText; private set => ContrastAdjustment.GenericText = value; }
+        public string Title { get; private set; }
+
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new ContrastAdjustment();
 
@@ -116,9 +118,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
     }
 
-    /// <summary>
-    /// Page of <see cref = "ContrastAdjustment"/>.
-    /// </summary>
     public sealed partial class ContrastPage : IAdjustmentPage
     {
 

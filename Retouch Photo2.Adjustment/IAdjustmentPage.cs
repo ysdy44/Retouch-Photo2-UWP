@@ -15,12 +15,13 @@ namespace Retouch_Photo2.Adjustments
     {
         /// <summary> Gets the type. </summary>
         AdjustmentType Type { get; }
+
+        /// <summary> Gets the title. </summary>
+        string Title { get; }
         /// <summary> Gets the icon. </summary>
-        ControlTemplate Icon { get; set; }
+        ControlTemplate Icon { get; }
         /// <summary> Gets the self. </summary>
         FrameworkElement Self { get; }
-        /// <summary> Gets the text. </summary>
-        string Text { get; }
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         IAdjustment GetNewAdjustment();

@@ -3,7 +3,6 @@
 // Difficult:         ★★
 // Only:              
 // Complete:      ★★★
-using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.Adjustments.Models;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
@@ -67,7 +66,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            VignetteAdjustment.GenericPage = this;
 
             this.ConstructAmount1();
             this.ConstructAmount2();
@@ -81,32 +79,34 @@ namespace Retouch_Photo2.Adjustments.Pages
 
     }
 
-    /// <summary>
-    /// Page of <see cref = "VignetteAdjustment"/>.
-    /// </summary>
     public sealed partial class VignettePage : IAdjustmentPage
-    {
+    {      
+        
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("Adjustments_Vignette");
+            this.Title = resource.GetString("Adjustments_Vignette");
 
             this.AmountTextBlock.Text = resource.GetString("Adjustments_Vignette_Amount");
             this.CurveTextBlock.Text = resource.GetString("Adjustments_Vignette_Curve");
             this.ColorTextBlock.Text = resource.GetString("Adjustments_Vignette_Color");
+
+            VignetteAdjustment.GenericIcon = this.IconContentControl.Template;
+            VignetteAdjustment.GenericText = this.Title;
+            VignetteAdjustment.GenericPage = this;
         }
 
         //@Content
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Vignette;
         /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon { get => VignetteAdjustment.GenericIcon; set => VignetteAdjustment.GenericIcon = value; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Text { get => VignetteAdjustment.GenericText; private set => VignetteAdjustment.GenericText = value; }
+        public string Title { get; private set; }
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new VignetteAdjustment();
@@ -188,9 +188,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
     }
 
-    /// <summary>
-    /// Page of <see cref = "VignetteAdjustment"/>.
-    /// </summary>
     public sealed partial class VignettePage : IAdjustmentPage
     {
 

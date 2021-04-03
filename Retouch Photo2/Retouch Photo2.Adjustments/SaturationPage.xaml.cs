@@ -43,37 +43,38 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            SaturationAdjustment.GenericPage = this;
 
             this.ConstructSaturation1();
             this.ConstructSaturation2();
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "SaturationAdjustment"/>.
-    /// </summary>
     public sealed partial class SaturationPage : IAdjustmentPage
     {
+
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("Adjustments_Saturation");
+            this.Title = resource.GetString("Adjustments_Saturation");
 
             this.SaturationTextBlock.Text = resource.GetString("Adjustments_Saturation_Saturation");
+
+            SaturationAdjustment.GenericIcon = this.IconContentControl.Template;
+            SaturationAdjustment.GenericText = this.Title;
+            SaturationAdjustment.GenericPage = this;
         }
 
         //@Content
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Saturation;
         /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon { get => SaturationAdjustment.GenericIcon; set => SaturationAdjustment.GenericIcon = value; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Text { get => SaturationAdjustment.GenericText; private set => SaturationAdjustment.GenericText = value; }
+        public string Title { get; private set; }
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new SaturationAdjustment();
@@ -117,9 +118,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
     }
 
-    /// <summary>
-    /// Page of <see cref = "SaturationAdjustment"/>.
-    /// </summary>
     public sealed partial class SaturationPage : IAdjustmentPage
     {
 

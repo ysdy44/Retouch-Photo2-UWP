@@ -1,4 +1,4 @@
-﻿// Core:              
+﻿// Core:              ★
 // Referenced:   
 // Difficult:         ★★
 // Only:              
@@ -21,32 +21,35 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// </summary>
         public GrayPage()
         {
+            this.InitializeComponent();
             this.ConstructStrings();
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "GrayAdjustment"/>.
-    /// </summary>
     public sealed partial class GrayPage : IAdjustmentPage
     {
+
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("Adjustments_Gray");
+            this.Title = resource.GetString("Adjustments_Gray");
+
+            GrayAdjustment.GenericIcon = this.IconContentControl.Template;
+            GrayAdjustment.GenericText = this.Title;
+            GrayAdjustment.GenericPage = this;
         }
 
         //@Content
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Gray;
         /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon { get => GrayAdjustment.GenericIcon; set => GrayAdjustment.GenericIcon = value; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
         /// <summary> Gets the self. </summary>
-        public FrameworkElement Self => null;
+        public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Text { get => GrayAdjustment.GenericText; private set => GrayAdjustment.GenericText = value; }
+        public string Title { get; private set; }
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new GrayAdjustment();

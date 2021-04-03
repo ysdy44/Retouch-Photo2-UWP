@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Adjustments.Models
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page =>ContrastAdjustment.GenericPage;
         public ControlTemplate Icon => ContrastAdjustment.GenericIcon;
-        public string Text => ContrastAdjustment.GenericText;
+        public string Title => ContrastAdjustment.GenericText;
 
         public ICommand Edit { get; private set; }
         public ICommand Remove { get; private set; }

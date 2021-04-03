@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Adjustments.Models
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = ExposureAdjustment.GenericPage;
         public ControlTemplate Icon => ExposureAdjustment.GenericIcon;
-        public string Text => ExposureAdjustment.GenericText;
+        public string Title => ExposureAdjustment.GenericText;
 
         public ICommand Edit { get; private set; }
         public ICommand Remove { get; private set; }

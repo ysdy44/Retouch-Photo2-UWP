@@ -1,0 +1,21 @@
+﻿<Page
+    x:Class="Retouch_Photo2.Adjustments.Pages.InvertPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    >
+
+    <StackPanel Padding="2,0">
+        <Border Width="50" Visibility="Visible">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/InvertIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource InvertIcon}"/>
+            </Border.Child>
+        </Border>
+    </StackPanel>
+
+</Page>

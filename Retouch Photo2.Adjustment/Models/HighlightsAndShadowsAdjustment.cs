@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Adjustments.Models
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = HighlightsAndShadowsAdjustment.GenericPage;
         public ControlTemplate Icon => HighlightsAndShadowsAdjustment.GenericIcon;
-        public string Text => HighlightsAndShadowsAdjustment.GenericText;
+        public string Title => HighlightsAndShadowsAdjustment.GenericText;
 
         public ICommand Edit { get; private set; }
         public ICommand Remove { get; private set; }

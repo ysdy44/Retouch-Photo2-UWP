@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Adjustments.Models
         public Visibility PageVisibility => Visibility.Collapsed;
         public IAdjustmentPage Page { get; } = GrayAdjustment.GenericPage;
         public ControlTemplate Icon => GrayAdjustment.GenericIcon;
-        public string Text => GrayAdjustment.GenericText;
+        public string Title => GrayAdjustment.GenericText;
 
         public ICommand Edit { get; private set; }
         public ICommand Remove { get; private set; }

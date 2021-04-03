@@ -23,6 +23,15 @@
 
     <StackPanel Padding="2,0">
 
+        <Border Width="50" Visibility="Collapsed">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/ExposureIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ExposureIcon}"/>
+            </Border.Child>
+        </Border>
+
         <!--Exposure-->
         <RelativePanel>
             <TextBlock x:Name="ExposureTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

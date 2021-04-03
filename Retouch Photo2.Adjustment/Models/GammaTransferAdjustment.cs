@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Adjustments.Models
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = GammaTransferAdjustment.GenericPage;
         public ControlTemplate Icon => GammaTransferAdjustment.GenericIcon;
-        public string Text => GammaTransferAdjustment.GenericText;
+        public string Title => GammaTransferAdjustment.GenericText;
 
         public ICommand Edit { get; private set; }
         public ICommand Remove { get; private set; }

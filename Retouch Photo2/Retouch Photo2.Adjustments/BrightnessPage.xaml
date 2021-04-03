@@ -43,6 +43,15 @@
 
     <StackPanel Padding="2,0">
 
+        <Border Width="50" Visibility="Collapsed">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/BrightnessIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource BrightnessIcon}"/>
+            </Border.Child>
+        </Border>
+        
         <!--WhiteLight-->
         <RelativePanel>
             <TextBlock x:Name="WhiteLightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

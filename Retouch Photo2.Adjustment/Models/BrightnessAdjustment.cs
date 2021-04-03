@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Adjustments.Models
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page => BrightnessAdjustment.GenericPage;
         public ControlTemplate Icon => BrightnessAdjustment.GenericIcon;
-        public string Text => BrightnessAdjustment.GenericText;
+        public string Title => BrightnessAdjustment.GenericText;
 
         public ICommand Edit { get; private set; }
         public ICommand Remove { get; private set; }

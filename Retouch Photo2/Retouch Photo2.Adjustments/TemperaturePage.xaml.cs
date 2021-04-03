@@ -52,7 +52,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            TemperatureAdjustment.GenericPage = this;
 
             this.ConstructTemperature1();
             this.ConstructTemperature2();
@@ -62,9 +61,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "TemperatureAdjustment"/>.
-    /// </summary>
     public sealed partial class TemperaturePage : IAdjustmentPage
     {
 
@@ -73,21 +69,25 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("Adjustments_Temperature");
+            this.Title = resource.GetString("Adjustments_Temperature");
 
             this.TemperatureTextBlock.Text = resource.GetString("Adjustments_Temperature_Temperature");
             this.TintTextBlock.Text = resource.GetString("Adjustments_Temperature_Tint");
+
+            TemperatureAdjustment.GenericIcon = this.IconContentControl.Template;
+            TemperatureAdjustment.GenericText = this.Title;
+            TemperatureAdjustment.GenericPage = this;
         }
 
         //@Content
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Temperature;
         /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon { get => TemperatureAdjustment.GenericIcon; set => TemperatureAdjustment.GenericIcon = value; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Text { get => TemperatureAdjustment.GenericText; private set => TemperatureAdjustment.GenericText = value; }
+        public string Title { get; private set; }
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new TemperatureAdjustment();
@@ -164,9 +164,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
     }
 
-    /// <summary>
-    /// Page of <see cref = "TemperatureAdjustment"/>.
-    /// </summary>
     public sealed partial class TemperaturePage : IAdjustmentPage
     {
 

@@ -68,7 +68,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            HighlightsAndShadowsAdjustment.GenericPage = this;
 
             this.ConstructShadows1();
             this.ConstructShadows2();
@@ -84,9 +83,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "HighlightsAndShadowsAdjustment"/>.
-    /// </summary>
     public sealed partial class HighlightsAndShadowsPage : IAdjustmentPage
     {
 
@@ -95,23 +91,27 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("Adjustments_HighlightsAndShadows");
+            this.Title = resource.GetString("Adjustments_HighlightsAndShadows");
 
             this.ShadowsTextBlock.Text = resource.GetString("Adjustments_HighlightsAndShadows_Shadows");
             this.HighlightsTextBlock.Text = resource.GetString("Adjustments_HighlightsAndShadows_Highlights");
             this.ClarityTextBlock.Text = resource.GetString("Adjustments_HighlightsAndShadows_Clarity");
             this.MaskBlurAmountTextBlock.Text = resource.GetString("Adjustments_HighlightsAndShadows_MaskBlurAmount");
+
+            HighlightsAndShadowsAdjustment.GenericIcon = this.IconContentControl.Template;
+            HighlightsAndShadowsAdjustment.GenericText = this.Title;
+            HighlightsAndShadowsAdjustment.GenericPage = this;
         }
 
         //@Content
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.HighlightsAndShadows;
         /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon { get => HighlightsAndShadowsAdjustment.GenericIcon; set => HighlightsAndShadowsAdjustment.GenericIcon = value; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Text { get => HighlightsAndShadowsAdjustment.GenericText; private set => HighlightsAndShadowsAdjustment.GenericText = value; }
+        public string Title { get; private set; }
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new HighlightsAndShadowsAdjustment();
@@ -196,9 +196,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "HighlightsAndShadowsAdjustment"/>.
-    /// </summary>
     public sealed partial class HighlightsAndShadowsPage : IAdjustmentPage
     {
 

@@ -43,16 +43,12 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            ExposureAdjustment.GenericPage = this;
 
             this.ConstructExposure1();
             this.ConstructExposure2();
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "ExposureAdjustment"/>.
-    /// </summary>
     public sealed partial class ExposurePage : IAdjustmentPage
     {
 
@@ -61,20 +57,24 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("Adjustments_Exposure");
+            this.Title = resource.GetString("Adjustments_Exposure");
 
             this.ExposureTextBlock.Text = resource.GetString("Adjustments_Exposure_Exposure");
+
+            ExposureAdjustment.GenericIcon = this.IconContentControl.Template;
+            ExposureAdjustment.GenericText = this.Title;
+            ExposureAdjustment.GenericPage = this;
         }
 
         //@Content
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Exposure;
         /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon { get => ExposureAdjustment.GenericIcon; set => ExposureAdjustment.GenericIcon = value; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Text { get => ExposureAdjustment.GenericText; private set => ExposureAdjustment.GenericText = value; }
+        public string Title { get; private set; }
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new ExposureAdjustment();
@@ -118,9 +118,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
     }
 
-    /// <summary>
-    /// Page of <see cref = "ExposureAdjustment"/>.
-    /// </summary>
     public sealed partial class ExposurePage : IAdjustmentPage
     {
 

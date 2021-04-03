@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Adjustments.Models
         public Visibility PageVisibility => Visibility.Visible;
         public IAdjustmentPage Page { get; } = HueRotationAdjustment.GenericPage;
         public ControlTemplate Icon => HueRotationAdjustment.GenericIcon;
-        public string Text => HueRotationAdjustment.GenericText; 
+        public string Title => HueRotationAdjustment.GenericText; 
         
         public ICommand Edit { get; private set; }
         public ICommand Remove { get; private set; }

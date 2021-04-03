@@ -25,6 +25,15 @@
 
     <StackPanel Padding="2,0">
 
+        <Border Width="50" Visibility="Collapsed">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/SaturationIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource SaturationIcon}"/>
+            </Border.Child>
+        </Border>
+
         <!--Saturation-->
         <RelativePanel>
             <TextBlock x:Name="SaturationTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

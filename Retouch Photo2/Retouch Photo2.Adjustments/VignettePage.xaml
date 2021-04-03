@@ -37,6 +37,15 @@
 
     <StackPanel Padding="2,0">
 
+        <Border Width="50" Visibility="Collapsed">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/VignetteIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource VignetteIcon}"/>
+            </Border.Child>
+        </Border>
+
         <!--Amount-->
         <RelativePanel>
             <TextBlock x:Name="AmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

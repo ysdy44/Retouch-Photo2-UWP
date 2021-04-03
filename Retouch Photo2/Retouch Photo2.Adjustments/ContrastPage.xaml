@@ -33,6 +33,15 @@
 
     <StackPanel Padding="2,0">
 
+        <Border Width="50" Visibility="Collapsed">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/ContrastIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource ContrastIcon}"/>
+            </Border.Child>
+        </Border>
+        
         <!--Contrast-->
         <RelativePanel>
             <TextBlock x:Name="ContrastTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

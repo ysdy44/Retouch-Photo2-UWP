@@ -43,16 +43,12 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            HueRotationAdjustment.GenericPage = this;
 
             this.ConstructHueRotation1();
             this.ConstructHueRotation2();
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "HueRotationAdjustment"/>.
-    /// </summary>
     public sealed partial class HueRotationPage : IAdjustmentPage
     {
 
@@ -61,20 +57,24 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("Adjustments_HueRotation");
+            this.Title = resource.GetString("Adjustments_HueRotation");
 
             this.AngleTextBlock.Text = resource.GetString("Adjustments_HueRotation_Angle");
+
+            HueRotationAdjustment.GenericIcon = this.IconContentControl.Template;
+            HueRotationAdjustment.GenericText = this.Title;
+            HueRotationAdjustment.GenericPage = this;
         }
 
         //@Content
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.HueRotation;
         /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon { get => HueRotationAdjustment.GenericIcon; set => HueRotationAdjustment.GenericIcon = value; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Text { get => HueRotationAdjustment.GenericText; private set => HueRotationAdjustment.GenericText = value; }
+        public string Title { get; private set; }
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new HueRotationAdjustment();
@@ -118,9 +118,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
     }
 
-    /// <summary>
-    /// Page of <see cref = "HueRotationAdjustment"/>.
-    /// </summary>
     public sealed partial class HueRotationPage : IAdjustmentPage
     {
 

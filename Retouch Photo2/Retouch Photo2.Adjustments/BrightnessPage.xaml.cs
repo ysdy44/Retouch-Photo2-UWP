@@ -68,7 +68,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            BrightnessAdjustment.GenericPage = this;
 
             this.ConstructWhiteLight1();
             this.ConstructWhiteLight2();
@@ -84,9 +83,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "BrightnessAdjustment"/>.
-    /// </summary>
     public sealed partial class BrightnessPage : IAdjustmentPage
     {
 
@@ -95,25 +91,28 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("Adjustments_Brightness");
+            this.Title = resource.GetString("Adjustments_Brightness");
 
             this.WhiteLightTextBlock.Text = resource.GetString("Adjustments_Brightness_WhiteToLight");
             this.WhiteDarkTextBlock.Text = resource.GetString("Adjustments_Brightness_WhiteToDark");
 
             this.BlackLightTextBlock.Text = resource.GetString("Adjustments_Brightness_BlackToLight");
             this.BlackDarkTextBlock.Text = resource.GetString("Adjustments_Brightness_BlackToDark");
-        }
 
+            BrightnessAdjustment.GenericIcon = this.IconContentControl.Template; ;
+            BrightnessAdjustment.GenericText = this.Title;
+            BrightnessAdjustment.GenericPage = this;
+        }
 
         //@Content
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Brightness;
         /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon { get => BrightnessAdjustment.GenericIcon; set => BrightnessAdjustment.GenericIcon = value; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Text { get => BrightnessAdjustment.GenericText; private set => BrightnessAdjustment.GenericText = value; }
+        public string Title { get; private set; }
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new BrightnessAdjustment();
@@ -141,7 +140,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                     //History
                     LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_ResetAdjustment_Brightness);
 
-                    var previous = layer.Filter.Adjustments.IndexOf(adjustment); 
+                    var previous = layer.Filter.Adjustments.IndexOf(adjustment);
                     var previous1 = adjustment.WhiteLight;
                     var previous2 = adjustment.WhiteDark;
                     var previous3 = adjustment.BlackLight;
@@ -201,9 +200,6 @@ namespace Retouch_Photo2.Adjustments.Pages
 
     }
 
-    /// <summary>
-    /// Page of <see cref = "BrightnessAdjustment"/>.
-    /// </summary>
     public sealed partial class BrightnessPage : IAdjustmentPage
     {
 
@@ -217,7 +213,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             {
                 float whiteLight = (float)value / 100.0f;
                 this.WhiteLight = whiteLight;
-                
+
                 if (whiteLight < 0.0f) whiteLight = 0.0f;
                 if (whiteLight > 1.0f) whiteLight = 1.0f;
 
@@ -349,7 +345,7 @@ namespace Retouch_Photo2.Adjustments.Pages
                 (
                     index: this.Index,
                     set: (tAdjustment) => tAdjustment.BlackLight = blackLight,
-                                    
+
                     type: HistoryType.LayersProperty_SetAdjustment_Brightness_BlackLight,
                     getUndo: (tAdjustment) => tAdjustment.BlackLight,
                     setUndo: (tAdjustment, previous) => tAdjustment.BlackLight = previous

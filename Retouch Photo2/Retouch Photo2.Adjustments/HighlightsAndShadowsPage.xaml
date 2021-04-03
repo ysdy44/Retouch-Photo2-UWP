@@ -37,6 +37,15 @@
 
     <StackPanel Padding="2,0">
 
+        <Border Width="50" Visibility="Collapsed">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/HighlightsAndShadowsIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource HighlightsAndShadowsIcon}"/>
+            </Border.Child>
+        </Border>
+
         <!--Shadows-->
         <RelativePanel>
             <TextBlock x:Name="ShadowsTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

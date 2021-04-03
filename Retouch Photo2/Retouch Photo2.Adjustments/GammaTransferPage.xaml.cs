@@ -37,7 +37,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            GammaTransferAdjustment.GenericPage = this;
 
 
             //Alpha
@@ -93,9 +92,6 @@ namespace Retouch_Photo2.Adjustments.Pages
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "GammaTransferAdjustment"/>.
-    /// </summary>
     public sealed partial class GammaTransferPage : IAdjustmentPage
     {
 
@@ -104,7 +100,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Text = resource.GetString("Adjustments_GammaTransfer");
+            this.Title = resource.GetString("Adjustments_GammaTransfer");
 
             string offset = resource.GetString("Adjustments_GammaTransfer_Offset");
             string exponent = resource.GetString("Adjustments_GammaTransfer_Exponent");
@@ -118,17 +114,21 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ConstructStringsGreen(green, offset, exponent, amplitude);
             string blue = resource.GetString("Adjustments_GammaTransfer_Blue");
             this.ConstructStringsBlue(blue, offset, exponent, amplitude);
+
+            GammaTransferAdjustment.GenericIcon = this.IconContentControl.Template;
+            GammaTransferAdjustment.GenericText = this.Title;
+            GammaTransferAdjustment.GenericPage = this;
         }
 
         //@Content
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.GammaTransfer;
         /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon { get => GammaTransferAdjustment.GenericIcon; set => GammaTransferAdjustment.GenericIcon = value; }
+        public ControlTemplate Icon => this.IconContentControl.Template;
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Text { get => GammaTransferAdjustment.GenericText; private set => GammaTransferAdjustment.GenericText = value; }
+        public string Title { get; private set; }
 
         /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
         public IAdjustment GetNewAdjustment() => new GammaTransferAdjustment();
