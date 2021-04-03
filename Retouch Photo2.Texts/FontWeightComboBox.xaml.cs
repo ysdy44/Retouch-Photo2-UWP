@@ -101,7 +101,7 @@ namespace Retouch_Photo2.Texts
         }
 
         //Group
-        private void ConstructGroup(Button button, string text, FontWeight weight)
+        private void ConstructGroup(Button button, string title, FontWeight weight)
         {
             void group(FontWeight groupWeight)
             {
@@ -109,7 +109,7 @@ namespace Retouch_Photo2.Texts
                 {
                     button.IsEnabled = false;
 
-                    this.Button.Content = text;
+                    this.Button.Content = title;
                 }
                 else button.IsEnabled = true;
             }
@@ -118,7 +118,7 @@ namespace Retouch_Photo2.Texts
             group(this.Weight);
 
             //Buttons
-            button.Content = text;
+            button.Content = title;
             button.Tag = new ContentControl
             {
                 Content = weight.Weight,

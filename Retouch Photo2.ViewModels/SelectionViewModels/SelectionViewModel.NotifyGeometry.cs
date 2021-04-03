@@ -9,7 +9,7 @@ namespace Retouch_Photo2.ViewModels
     {
 
 
-        /// <summary> Sets the GeometryLayer. </summary>     
+        /// <summary> Sets the <see cref="GeometryLayer"/>. </summary>     
         private void SetGeometryLayer(ILayer layer)
         {
             if (layer == null) return;
@@ -65,7 +65,7 @@ namespace Retouch_Photo2.ViewModels
         #region Geometry1
 
 
-        /// <summary> GeometryRoundRectLayer's corner. </summary>     
+        /// <summary> <see cref="GeometryRoundRectLayer"/>'s corner. </summary>     
         public float GeometryRoundRect_Corner
         {
             get => this.geometryRoundRect_Corner;
@@ -79,7 +79,7 @@ namespace Retouch_Photo2.ViewModels
         private float geometryRoundRect_Corner = 0.12f;
 
 
-        /// <summary> GeometryTriangle's center-point. </summary>     
+        /// <summary> <see cref="GeometryTriangleLayer"/>'s center-point. </summary>     
         public float GeometryTriangle_Center
         {
             get => this.geometryTriangle_Center;
@@ -93,7 +93,7 @@ namespace Retouch_Photo2.ViewModels
         private float geometryTriangle_Center = 0.5f;
 
 
-        /// <summary> GeometryDiamond's mid-point. </summary>     
+        /// <summary> <see cref="GeometryDiamondLayer"/>'s mid-point. </summary>     
         public float GeometryDiamond_Mid
         {
             get => this.geometryDiamond_Mid;
@@ -113,7 +113,7 @@ namespace Retouch_Photo2.ViewModels
         #region Geometry2
 
 
-        /// <summary> GeometryPentagon's points. </summary>     
+        /// <summary> <see cref="GeometryPentagonLayer"/>'s points. </summary>     
         public int GeometryPentagon_Points
         {
             get => this.geometryPentagon_Points;
@@ -127,7 +127,7 @@ namespace Retouch_Photo2.ViewModels
         private int geometryPentagon_Points = 5;
 
 
-        /// <summary> GeometryStar's points. </summary>     
+        /// <summary> <see cref="GeometryStarLayer"/>'s points. </summary>     
         public int GeometryStar_Points
         {
             get => this.geometryStar_Points;
@@ -139,7 +139,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private int geometryStar_Points = 5;
-        /// <summary> GeometryStar's inner-radius. </summary>     
+        /// <summary> <see cref="GeometryStarLayer"/>'s inner-radius. </summary>     
         public float GeometryStar_InnerRadius
         {
             get => this.geometryStar_InnerRadius;
@@ -153,7 +153,7 @@ namespace Retouch_Photo2.ViewModels
         private float geometryStar_InnerRadius = 0.4f;
 
 
-        /// <summary> GeometryCog's count. </summary>     
+        /// <summary> <see cref="GeometryCogLayer"/>'s count. </summary>     
         public int GeometryCog_Count
         {
             get => this.geometryCog_Count;
@@ -165,7 +165,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private int geometryCog_Count = 8;
-        /// <summary> GeometryCog's inner-radius. </summary>     
+        /// <summary> <see cref="GeometryCogLayer"/>'s inner-radius. </summary>     
         public float GeometryCog_InnerRadius
         {
             get => this.geometryCog_InnerRadius;
@@ -177,7 +177,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float geometryCog_InnerRadius = 0.7f;
-        /// <summary> GeometryCog's tooth. </summary>     
+        /// <summary> <see cref="GeometryCogLayer"/>'s tooth. </summary>     
         public float GeometryCog_Tooth
         {
             get => this.geometryCog_Tooth;
@@ -189,7 +189,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float geometryCog_Tooth = 0.3f;
-        /// <summary> GeometryCog's notch. </summary>     
+        /// <summary> <see cref="GeometryCogLayer"/>'s notch. </summary>     
         public float GeometryCog_Notch
         {
             get => this.geometryCog_Notch;
@@ -209,7 +209,7 @@ namespace Retouch_Photo2.ViewModels
         #region Geometry3
 
 
-        /// <summary> GeometryPie's sweep-angle. </summary>     
+        /// <summary> <see cref="GeometryPieLayer"/>'s sweep-angle. </summary>     
         public float GeometryPie_SweepAngle
         {
             get => this.geometryPie_SweepAngle;
@@ -221,9 +221,9 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float geometryPie_SweepAngle = FanKit.Math.Pi / 2f;
-        
 
-        /// <summary> GeometryDount's hole-radius. </summary>     
+
+        /// <summary> <see cref="GeometryDountLayer"/>'s hole-radius. </summary>     
         public float GeometryDount_HoleRadius
         {
             get => this.geometryDount_HoleRadius;
@@ -237,7 +237,7 @@ namespace Retouch_Photo2.ViewModels
         private float geometryDount_HoleRadius = 0.5f;
 
 
-        /// <summary> GeometryCookie's inner-radius. </summary>     
+        /// <summary> <see cref="GeometryCookieLayer"/>'s inner-radius. </summary>     
         public float GeometryCookie_InnerRadius
         {
             get => this.geometryCookie_InnerRadius;
@@ -249,7 +249,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float geometryCookie_InnerRadius = 0.5f;
-        /// <summary> GeometryCookie's sweep-angle. </summary>     
+        /// <summary> <see cref="GeometryCookieLayer"/>'s sweep-angle. </summary>     
         public float GeometryCookie_SweepAngle
         {
             get => this.geometryCookie_SweepAngle;
@@ -269,7 +269,7 @@ namespace Retouch_Photo2.ViewModels
         #region Geometry4
 
 
-        /// <summary> GeometryArrow's value. </summary>     
+        /// <summary> <see cref="GeometryArrowLayer"/>'s value. </summary>     
         public float GeometryArrow_Value
         {
             get => this.geometryArrow_Value;
@@ -281,7 +281,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private float geometryArrow_Value = 0.5f;
-        /// <summary> GeometryArrow's left-tail. </summary>     
+        /// <summary> <see cref="GeometryArrowLayer"/>'s left-tail. </summary>     
         public GeometryArrowTailType GeometryArrow_LeftTail
         {
             get => this.geometryArrow_LeftTail;
@@ -293,7 +293,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private GeometryArrowTailType geometryArrow_LeftTail = GeometryArrowTailType.None;
-        /// <summary> GeometryArrow's right-tail. </summary>     
+        /// <summary> <see cref="GeometryArrowLayer"/>'s right-tail. </summary>     
         public GeometryArrowTailType GeometryArrow_RightTail
         {
             get => this.geometryArrow_RightTail;
@@ -307,7 +307,7 @@ namespace Retouch_Photo2.ViewModels
         private GeometryArrowTailType geometryArrow_RightTail = GeometryArrowTailType.Arrow;
 
 
-        /// <summary> GeometryArrow's spread. </summary>     
+        /// <summary> <see cref="GeometryArrowLayer"/>'s spread. </summary>     
         public float GeometryHeart_Spread
         {
             get => this.geometryHeart_Spread;

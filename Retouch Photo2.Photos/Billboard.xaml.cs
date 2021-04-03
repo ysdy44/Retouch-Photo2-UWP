@@ -29,7 +29,7 @@ namespace Retouch_Photo2.Photos
         /// <summary> Identifies the <see cref = "Billboard.Photo" /> dependency property. </summary>
         public static readonly DependencyProperty PhotoProperty = DependencyProperty.Register(nameof(Photo), typeof(Photo), typeof(Billboard), new PropertyMetadata(new Photo()));
 
-        /// <summary> Gets or sets whether <see cref="Billboard"/> is showed.. </summary>
+        /// <summary> Gets or sets whether <see cref="Billboard"/> is showed. </summary>
         public bool IsShow
         {
             set

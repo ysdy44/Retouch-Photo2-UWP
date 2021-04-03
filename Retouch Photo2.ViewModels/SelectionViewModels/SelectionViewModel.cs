@@ -61,15 +61,15 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Gets selection-mode is not ""None"". 
         /// </summary>
-        public bool SelectionUnNone;
+        public bool SelectionUnNone { get; private set; }
         /// <summary>
         /// Gets selection-mode is ""Single"". 
         /// </summary>
-        public bool SelectionSingle;
+        public bool SelectionSingle { get; private set; }
         /// <summary>
         /// Gets selection-mode is ""Multiple"". 
         /// </summary>
-        public bool SelectionMultiple;
+        public bool SelectionMultiple { get; private set; }
 
 
         //////////////////////////

@@ -8,8 +8,8 @@ namespace Retouch_Photo2.ViewModels
 {
     public partial class ViewModel : INotifyPropertyChanged, ITextLayer
     {
-      
-        /// <summary> Gets or sets the font text. </summary>     
+
+        /// <summary> <see cref="ITextLayer"/>'s font text. </summary>     
         public string FontText
         {
             get => this.fontText;
@@ -22,7 +22,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private string fontText = null;
 
-        /// <summary> Gets or sets the font family.. </summary>     
+        /// <summary> <see cref="ITextLayer"/>'s font family.. </summary>     
         public string FontFamily
         {
             get => this.fontFamily;
@@ -34,7 +34,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private string fontFamily = "Arial";
         
-        /// <summary> Gets or sets the font size. </summary>
+        /// <summary> <see cref="ITextLayer"/>'s font size. </summary>
         public float FontSize
         {
             get => this.fontSize;
@@ -46,7 +46,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private float fontSize = 22;
 
-        /// <summary> Gets or sets the font alignment. </summary>
+        /// <summary> <see cref="ITextLayer"/>'s font alignment. </summary>
         public CanvasHorizontalAlignment FontAlignment
         {
             get => this.fontAlignment;
@@ -58,7 +58,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private CanvasHorizontalAlignment fontAlignment = CanvasHorizontalAlignment.Left;
 
-        /// <summary> Gets or sets the font style. </summary>
+        /// <summary> <see cref="ITextLayer"/>'s font style. </summary>
         public FontStyle FontStyle
         {
             get => this.fontStyle;
@@ -70,7 +70,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private FontStyle fontStyle = FontStyle.Normal;
 
-        /// <summary> Gets or sets the font weight. </summary>
+        /// <summary> <see cref="ITextLayer"/>'s font weight. </summary>
         public FontWeight FontWeight
         {
             get => this.fontWeight;
@@ -82,18 +82,19 @@ namespace Retouch_Photo2.ViewModels
         }
         private FontWeight fontWeight = FontWeights.Normal;
 
-        
-        /// <summary> Sets the FontLayer. </summary>     
-        private void SetFontLayer(ILayer layer)
+
+        /// <summary> Sets the <see cref="ITextLayer"/>. </summary>     
+        private void SetTextLayer(ILayer layer)
         {
             if (layer == null) return;
 
-            ITextLayer fextLayer = this.GetFontLayer(layer);
+            ITextLayer fextLayer = this.GetTextLayer(layer);
             if (fextLayer == null) return;
             
             TextLayer.FontCopyWith(this, fextLayer);
         }
-        private ITextLayer GetFontLayer(ILayer layer)
+        /// <summary> Gets the <see cref="ITextLayer"/>. </summary>     
+        private ITextLayer GetTextLayer(ILayer layer)
         {
             if (layer == null) return null;
 

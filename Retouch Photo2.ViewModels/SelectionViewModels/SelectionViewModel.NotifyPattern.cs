@@ -1,5 +1,4 @@
-﻿using FanKit.Transformers;
-using Retouch_Photo2.Layers;
+﻿using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using System.ComponentModel;
 
@@ -41,7 +40,7 @@ namespace Retouch_Photo2.ViewModels
         #region Pattern
 
 
-        /// <summary> PatternGridLayer's Type. </summary>     
+        /// <summary> <see cref="PatternGridLayer"/>'s Type. </summary>     
         public PatternGridType PatternGrid_Type
         {
             get => this.patternGrid_Type;
@@ -53,8 +52,8 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private PatternGridType patternGrid_Type = PatternGridType.Grid;
-                
-        /// <summary> PatternGridLayer's HorizontalStep. </summary>     
+
+        /// <summary> <see cref="PatternGridLayer"/>'s HorizontalStep. </summary>     
         public float PatternGrid_HorizontalStep
         {
             get => this.patternGrid_HorizontalStep;
@@ -67,7 +66,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private float patternGrid_HorizontalStep = 30.0f;
 
-        /// <summary> PatternGridLayer's VerticalStep. </summary>     
+        /// <summary> <see cref="PatternGridLayer"/>'s VerticalStep. </summary>     
         public float PatternGrid_VerticalStep
         {
             get => this.patternGrid_VerticalStep;
@@ -82,7 +81,7 @@ namespace Retouch_Photo2.ViewModels
 
 
 
-        /// <summary> PatternSpottedLayer's offset. </summary>     
+        /// <summary> <see cref="PatternSpottedLayer"/>'s offset. </summary>     
         public float PatternDiagonal_Offset
         {
             get => this.patternDiagonal_Offset;
@@ -95,7 +94,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private float patternDiagonal_Offset = 30.0f;
 
-        /// <summary> PatternDiagonalLayer's HorizontalStep. </summary>     
+        /// <summary> <see cref="PatternDiagonalLayer"/>'s HorizontalStep. </summary>     
         public float PatternDiagonal_HorizontalStep
         {
             get => this.patternDiagonal_HorizontalStep;
@@ -110,7 +109,7 @@ namespace Retouch_Photo2.ViewModels
 
 
 
-        /// <summary> PatternSpottedLayer's radius. </summary>     
+        /// <summary> <see cref="PatternSpottedLayer"/>'s radius. </summary>     
         public float PatternSpotted_Radius
         {
             get => this.patternSpotted_Radius;
@@ -123,7 +122,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private float patternSpotted_Radius = 8.0f;
 
-        /// <summary> PatternSpottedLayer's step. </summary>     
+        /// <summary> <see cref="PatternSpottedLayer"/>'s step. </summary>     
         public float PatternSpotted_Step
         {
             get => this.patternSpotted_Step;

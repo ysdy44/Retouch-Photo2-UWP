@@ -48,7 +48,7 @@ namespace Retouch_Photo2.ViewModels
         public void SetModeNone()
         {
             this.SelectionMode = ListViewSelectionMode.None;
-            
+
             this.Transformer = new Transformer();
 
             this.SelectionLayerage = null;
@@ -74,12 +74,12 @@ namespace Retouch_Photo2.ViewModels
             this.SetGroupLayer();
             this.SetImageLayer(null);
             this.SetCurveLayer();
-            this.SetFontLayer(null);
+            this.SetTextLayer(null);
 
             //////////////////////////
 
             this.SetPatternLayer(null);
-            this.SetGeometryLayer(null);            
+            this.SetGeometryLayer(null);
         }
 
 
@@ -121,7 +121,7 @@ namespace Retouch_Photo2.ViewModels
             this.SetGroupLayer(layer);
             this.SetImageLayer(layer);
             this.SetCurveLayer(layerage, layer);
-            this.SetFontLayer(layer);
+            this.SetTextLayer(layer);
 
             //////////////////////////
 
@@ -170,7 +170,7 @@ namespace Retouch_Photo2.ViewModels
             this.SetGroupLayer(layerages);
             this.SetImageLayer(outermostLayer);
             this.SetCurveLayer();
-            this.SetFontLayer(null);
+            this.SetTextLayer(null);
 
             //////////////////////////
 
@@ -178,7 +178,7 @@ namespace Retouch_Photo2.ViewModels
             this.SetGeometryLayer(outermostLayer);
         }
 
-        
+
         //////////////////////////
 
 

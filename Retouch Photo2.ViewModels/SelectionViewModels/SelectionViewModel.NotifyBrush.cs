@@ -52,7 +52,7 @@ namespace Retouch_Photo2.ViewModels
         }
         private bool isFollowTransform = true;
 
-        /// <summary> Gets or sets whether the stroke is behind the fill.. </summary>
+        /// <summary> Gets or sets whether the stroke is behind the fill. </summary>
         public bool IsStrokeBehindFill
         {
             get => this.isStrokeBehindFill;
