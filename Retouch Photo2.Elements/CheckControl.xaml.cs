@@ -3,7 +3,6 @@
 // Difficult:         ★*
 // Only:              ★★
 // Complete:      ★★
-using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Markup;
@@ -52,11 +51,14 @@ namespace Retouch_Photo2.Elements
         VisualState UncheckedNormal;
         VisualState UncheckedPointerOver;
         VisualState UncheckedPressed;
+        VisualState UncheckedDisabled;
         VisualState CheckedNormal;
         VisualState CheckedPointerOver;
         VisualState CheckedPressed;
+        VisualState CheckedDisabled;
 
         //@VisualState
+        bool _vsIsEnabled;
         bool _vsIsChecked;
         ClickMode _vsClickMode;
         /// <summary> 
@@ -68,16 +70,20 @@ namespace Retouch_Photo2.Elements
             {
                 if (this._vsIsChecked)
                 {
+                    if (this._vsIsEnabled == false) return this.CheckedDisabled;
+
                     switch (this._vsClickMode)
                     {
                         case ClickMode.Release: return this.CheckedNormal;
                         case ClickMode.Hover: return this.CheckedPointerOver;
                         case ClickMode.Press: return this.CheckedPressed;
-                        default: return this.UncheckedNormal;
+                        default: return this.CheckedNormal;
                     }
                 }
                 else
                 {
+                    if (this._vsIsEnabled == false) return this.UncheckedDisabled;
+
                     switch (this._vsClickMode)
                     {
                         case ClickMode.Release: return this.UncheckedNormal;
@@ -112,6 +118,12 @@ namespace Retouch_Photo2.Elements
             this.PointerPressed += (s, e) => this.ClickMode = ClickMode.Press;
             this.PointerReleased += (s, e) => this.ClickMode = ClickMode.Release;
             this.PointerExited += (s, e) => this.ClickMode = ClickMode.Release;
+
+            this.IsEnabledChanged += (s, e) =>
+            {
+                this._vsIsEnabled = this.IsEnabled;
+                this.VisualState = this.VisualState;//State
+            };
         }
 
         /// <inheritdoc/>
@@ -123,9 +135,12 @@ namespace Retouch_Photo2.Elements
             this.UncheckedNormal = base.GetTemplateChild(nameof(UncheckedNormal)) as VisualState;
             this.UncheckedPointerOver = base.GetTemplateChild(nameof(UncheckedPointerOver)) as VisualState;
             this.UncheckedPressed = base.GetTemplateChild(nameof(UncheckedPressed)) as VisualState;
+            this.UncheckedDisabled = base.GetTemplateChild(nameof(UncheckedDisabled)) as VisualState;
             this.CheckedNormal = base.GetTemplateChild(nameof(CheckedNormal)) as VisualState;
             this.CheckedPointerOver = base.GetTemplateChild(nameof(CheckedPointerOver)) as VisualState;
             this.CheckedPressed = base.GetTemplateChild(nameof(CheckedPressed)) as VisualState;
+            this.CheckedDisabled = base.GetTemplateChild(nameof(CheckedDisabled)) as VisualState;
+            this._vsIsEnabled = this.IsEnabled;
             this.VisualState = this.VisualState;//State
         }
 

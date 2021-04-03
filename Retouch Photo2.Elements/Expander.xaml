@@ -8,6 +8,8 @@
 
 
     <Style TargetType="local:Expander">
+        <Setter Property="MaxWidth" Value="400"/>
+        <Setter Property="MaxHeight" Value="400"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:Expander">
@@ -142,9 +144,7 @@
 
 
                                 <!--Body-->
-                                <ScrollViewer Grid.Row="1" Padding="{StaticResource AppPanelPadding}">
-                                    <ContentPresenter x:Name="ContentPresenter" Width="274" Height="Auto"/>
-                                </ScrollViewer>
+                                <ContentPresenter x:Name="ContentPresenter" Grid.Row="1" Width="274" MaxHeight="{TemplateBinding MaxHeight}" Height="Auto" Padding="{StaticResource AppPanelPadding}"/>
 
 
                             </Grid>

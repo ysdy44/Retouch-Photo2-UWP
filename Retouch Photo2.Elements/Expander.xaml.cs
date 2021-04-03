@@ -101,10 +101,10 @@ namespace Retouch_Photo2.Elements
 
 
         /// <summary> Gets or sets <see cref = "Expander" />'s window width. </summary>
-        public double WindowWidth { get; set; } = 400.0d;
+        public double WindowWidth { get => this.MaxWidth; set => this.MaxWidth = value; }
         /// <summary> Gets or sets <see cref = "Expander" />'s window height. </summary>
-        public double WindowHeight { get; set; } = 400.0d;
-       
+        public double WindowHeight { get => this.MaxHeight; set => this.MaxHeight = value; }
+
 
         #endregion
 
@@ -118,96 +118,13 @@ namespace Retouch_Photo2.Elements
 
 
         MenuFlyout WidthMenuFlyout;
-        private ToggleMenuFlyoutItem widthFlyoutItem222;
-        public ToggleMenuFlyoutItem WidthFlyoutItem222
-        {
-            get => this.widthFlyoutItem222;
-            private set
-            {
-                if (this.widthFlyoutItem222 != null) this.widthFlyoutItem222.Click -= this.WidthFlyoutItem222_Click;
-                this.widthFlyoutItem222 = value;
-                if (this.widthFlyoutItem222 != null) this.widthFlyoutItem222.Click += this.WidthFlyoutItem222_Click;
-            }
-        }
+        ToggleMenuFlyoutItem WidthFlyoutItem222;
+        ToggleMenuFlyoutItem WidthFlyoutItem272;
+        ToggleMenuFlyoutItem WidthFlyoutItem322;
+        ToggleMenuFlyoutItem WidthFlyoutItem372;
 
-        private ToggleMenuFlyoutItem widthFlyoutItem272;
-        public ToggleMenuFlyoutItem WidthFlyoutItem272
-        {
-            get => this.widthFlyoutItem272;
-            private set
-            {
-                if (this.widthFlyoutItem272 != null) this.widthFlyoutItem272.Click -= this.WidthFlyoutItem272_Click;
-                this.widthFlyoutItem272 = value;
-                if (this.widthFlyoutItem272 != null) this.widthFlyoutItem272.Click += this.WidthFlyoutItem272_Click;
-            }
-        }
-
-        private ToggleMenuFlyoutItem widthFlyoutItem322;
-        public ToggleMenuFlyoutItem WidthFlyoutItem322
-        {
-            get => this.widthFlyoutItem322;
-            private set
-            {
-                if (this.widthFlyoutItem322 != null) this.widthFlyoutItem322.Click -= this.WidthFlyoutItem322_Click;
-                this.widthFlyoutItem322 = value;
-                if (this.widthFlyoutItem322 != null) this.widthFlyoutItem322.Click += this.WidthFlyoutItem322_Click;
-            }
-        }
-
-        private ToggleMenuFlyoutItem widthFlyoutItem372;
-        public ToggleMenuFlyoutItem WidthFlyoutItem372
-        {
-            get => this.widthFlyoutItem372;
-            private set
-            {
-                if (this.widthFlyoutItem372 != null) this.widthFlyoutItem372.Click -= this.WidthFlyoutItem372_Click;
-                this.widthFlyoutItem372 = value;
-                if (this.widthFlyoutItem372 != null) this.widthFlyoutItem372.Click += this.WidthFlyoutItem372_Click;
-            }
-        }
-
-
-        private Grid titleGrid;
-        public Grid TitleGrid
-        {
-            get => this.titleGrid;
-            private set
-            {
-                if (this.titleGrid != null)
-                {
-                    this.titleGrid.Holding -= this.TitleGrid_Holding;
-                    this.titleGrid.DoubleTapped -= this.TitleGrid_DoubleTapped;
-                    this.titleGrid.RightTapped -= this.TitleGrid_RightTapped;
-                    this.titleGrid.ManipulationStarted -= this.TitleGrid_ManipulationStarted;
-                    this.titleGrid.ManipulationDelta -= this.TitleGrid_ManipulationDelta;
-                    this.titleGrid.ManipulationCompleted -= this.TitleGrid_ManipulationCompleted;
-                }
-
-                this.titleGrid = value;
-
-                if (this.titleGrid != null)
-                {
-                    this.titleGrid.Holding += this.TitleGrid_Holding;
-                    this.titleGrid.DoubleTapped += this.TitleGrid_DoubleTapped;
-                    this.titleGrid.RightTapped += this.TitleGrid_RightTapped;
-                    this.titleGrid.ManipulationStarted += this.TitleGrid_ManipulationStarted;
-                    this.titleGrid.ManipulationDelta += this.TitleGrid_ManipulationDelta;
-                    this.titleGrid.ManipulationCompleted += this.TitleGrid_ManipulationCompleted;
-                }
-            }
-        }
-
-        private Button closeButton;
-        public Button CloseButton
-        {
-            get => this.closeButton;
-            private set
-            {
-                if (this.closeButton != null) this.closeButton.Tapped -= this.CloseButton_Tapped;
-                this.closeButton = value;
-                if (this.closeButton != null) this.closeButton.Tapped += this.CloseButton_Tapped;
-            }
-        }
+        Grid TitleGrid;
+        Button CloseButton;
 
 
         //@Construct     
@@ -238,13 +155,47 @@ namespace Retouch_Photo2.Elements
             this.Width372 = base.GetTemplateChild(nameof(Width372)) as VisualState;
 
             this.WidthMenuFlyout = base.GetTemplateChild(nameof(WidthMenuFlyout)) as MenuFlyout;
-            this.WidthFlyoutItem222 = base.GetTemplateChild(nameof(WidthFlyoutItem222)) as ToggleMenuFlyoutItem;
-            this.WidthFlyoutItem272 = base.GetTemplateChild(nameof(WidthFlyoutItem272)) as ToggleMenuFlyoutItem;
-            this.WidthFlyoutItem322 = base.GetTemplateChild(nameof(WidthFlyoutItem322)) as ToggleMenuFlyoutItem;
-            this.WidthFlyoutItem372 = base.GetTemplateChild(nameof(WidthFlyoutItem372)) as ToggleMenuFlyoutItem;
 
+            if (this.WidthFlyoutItem222 != null) this.WidthFlyoutItem222.Click -= this.WidthFlyoutItem222_Click;
+            this.WidthFlyoutItem222 = base.GetTemplateChild(nameof(WidthFlyoutItem222)) as ToggleMenuFlyoutItem;
+            if (this.WidthFlyoutItem222 != null) this.WidthFlyoutItem222.Click += this.WidthFlyoutItem222_Click;
+
+            if (this.WidthFlyoutItem272 != null) this.WidthFlyoutItem272.Click -= this.WidthFlyoutItem272_Click;
+            this.WidthFlyoutItem272 = base.GetTemplateChild(nameof(WidthFlyoutItem272)) as ToggleMenuFlyoutItem;
+            if (this.WidthFlyoutItem272 != null) this.WidthFlyoutItem272.Click += this.WidthFlyoutItem272_Click;
+
+            if (this.WidthFlyoutItem322 != null) this.WidthFlyoutItem322.Click -= this.WidthFlyoutItem322_Click;
+            this.WidthFlyoutItem322 = base.GetTemplateChild(nameof(WidthFlyoutItem322)) as ToggleMenuFlyoutItem;
+            if (this.WidthFlyoutItem322 != null) this.WidthFlyoutItem322.Click += this.WidthFlyoutItem322_Click;
+
+            if (this.WidthFlyoutItem372 != null) this.WidthFlyoutItem372.Click -= this.WidthFlyoutItem372_Click;
+            this.WidthFlyoutItem372 = base.GetTemplateChild(nameof(WidthFlyoutItem372)) as ToggleMenuFlyoutItem;
+            if (this.WidthFlyoutItem372 != null) this.WidthFlyoutItem372.Click += this.WidthFlyoutItem372_Click;
+
+
+            if (this.TitleGrid != null)
+            {
+                this.TitleGrid.Holding -= this.TitleGrid_Holding;
+                this.TitleGrid.DoubleTapped -= this.TitleGrid_DoubleTapped;
+                this.TitleGrid.RightTapped -= this.TitleGrid_RightTapped;
+                this.TitleGrid.ManipulationStarted -= this.TitleGrid_ManipulationStarted;
+                this.TitleGrid.ManipulationDelta -= this.TitleGrid_ManipulationDelta;
+                this.TitleGrid.ManipulationCompleted -= this.TitleGrid_ManipulationCompleted;
+            }
             this.TitleGrid = base.GetTemplateChild(nameof(TitleGrid)) as Grid;
+            if (this.TitleGrid != null)
+            {
+                this.TitleGrid.Holding += this.TitleGrid_Holding;
+                this.TitleGrid.DoubleTapped += this.TitleGrid_DoubleTapped;
+                this.TitleGrid.RightTapped += this.TitleGrid_RightTapped;
+                this.TitleGrid.ManipulationStarted += this.TitleGrid_ManipulationStarted;
+                this.TitleGrid.ManipulationDelta += this.TitleGrid_ManipulationDelta;
+                this.TitleGrid.ManipulationCompleted += this.TitleGrid_ManipulationCompleted;
+            }
+
+            if (this.CloseButton != null) this.CloseButton.Tapped -= this.CloseButton_Tapped;
             this.CloseButton = base.GetTemplateChild(nameof(CloseButton)) as Button;
+            if (this.CloseButton != null) this.CloseButton.Tapped += this.CloseButton_Tapped;
         }
 
 

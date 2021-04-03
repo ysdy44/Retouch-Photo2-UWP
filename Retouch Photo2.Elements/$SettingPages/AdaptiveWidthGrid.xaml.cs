@@ -60,7 +60,57 @@ namespace Retouch_Photo2.Elements
         }
         /// <summary> Identifies the <see cref = "AdaptiveWidthGrid.PCText" /> dependency property. </summary>
         public static readonly DependencyProperty PCTextProperty = DependencyProperty.Register(nameof(PCText), typeof(string), typeof(AdaptiveWidthGrid), new PropertyMetadata("PC"));
-                
+
+
+        /// <summary> Gets or sets <see cref = "AdaptiveWidthGrid" />'s phone width. </summary>
+        public string PhoneCount
+        {
+            get => (string)base.GetValue(PhoneCountProperty);
+            set => base.SetValue(PhoneCountProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "AdaptiveWidthGrid.PhoneCount" /> dependency property. </summary>
+        public static readonly DependencyProperty PhoneCountProperty = DependencyProperty.Register(nameof(PhoneCount), typeof(string), typeof(AdaptiveWidthGrid), new PropertyMetadata("0"));
+
+
+        /// <summary> Gets or sets <see cref = "AdaptiveWidthGrid" />'s Pad width. </summary>
+        public string PadCount
+        {
+            get => (string)base.GetValue(PadCountProperty);
+            set => base.SetValue(PadCountProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "AdaptiveWidthGrid.PadCount" /> dependency property. </summary>
+        public static readonly DependencyProperty PadCountProperty = DependencyProperty.Register(nameof(PadCount), typeof(string), typeof(AdaptiveWidthGrid), new PropertyMetadata("0"));
+
+
+        /// <summary> Gets or sets <see cref = "AdaptiveLengthGrid" />'s phone length. </summary>
+        public GridLength PhoneLength
+        {
+            get => (GridLength)base.GetValue(PhoneLengthProperty);
+            set => base.SetValue(PhoneLengthProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "AdaptiveLengthGrid.PhoneLength" /> dependency property. </summary>
+        public static readonly DependencyProperty PhoneLengthProperty = DependencyProperty.Register(nameof(PhoneLength), typeof(GridLength), typeof(AdaptiveWidthGrid), new PropertyMetadata(new GridLength(1, GridUnitType.Star)));
+
+
+        /// <summary> Gets or sets <see cref = "AdaptiveLengthGrid" />'s Pad length. </summary>
+        public GridLength PadLength
+        {
+            get => (GridLength)base.GetValue(PadLengthProperty);
+            set => base.SetValue(PadLengthProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "AdaptiveLengthGrid.PadLength" /> dependency property. </summary>
+        public static readonly DependencyProperty PadLengthProperty = DependencyProperty.Register(nameof(PadLength), typeof(GridLength), typeof(AdaptiveWidthGrid), new PropertyMetadata(new GridLength(1, GridUnitType.Star)));
+
+
+        /// <summary> Gets or sets <see cref = "AdaptiveLengthGrid" />'s PC length. </summary>
+        public GridLength PCLength
+        {
+            get => (GridLength)base.GetValue(PCLengthProperty);
+            set => base.SetValue(PCLengthProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "AdaptiveLengthGrid.PCLength" /> dependency property. </summary>
+        public static readonly DependencyProperty PCLengthProperty = DependencyProperty.Register(nameof(PCLength), typeof(GridLength), typeof(AdaptiveWidthGrid), new PropertyMetadata(new GridLength(1, GridUnitType.Star)));
+
 
         #endregion
 
@@ -68,8 +118,6 @@ namespace Retouch_Photo2.Elements
         VisualStateGroup CommonStates;
         VisualState Normal;
         VisualState Disable;
-        TextBlock PhoneTextBlock;
-        TextBlock PadTextBlock;
         ColumnDefinition PhoneGridLength;
         ColumnDefinition PadGridLength;
         ColumnDefinition PCGridLength;
@@ -101,8 +149,8 @@ namespace Retouch_Photo2.Elements
 
         private void SetWidthCore(int phoneWidth, int padWidth, int pcWidth = 2000)
         {
-            if (this.PhoneTextBlock != null) this.PhoneTextBlock.Text = phoneWidth.ToString();
-            if (this.PadTextBlock != null) this.PadTextBlock.Text = padWidth.ToString();
+            this.PhoneCount = phoneWidth.ToString();
+            this.PadCount = padWidth.ToString();
 
             double phoneLength = phoneWidth;
             double padLength = padWidth - phoneWidth;
@@ -122,8 +170,8 @@ namespace Retouch_Photo2.Elements
 
         double _horizontal;
 
-        int _startingPhoneWidth;
-        int _startingPadWidth;
+        int _startingPhoneWidthCore;
+        int _startingPadWidthCore;
 
         double _startingPhoneLength;
         double _startingPadLength;
@@ -134,8 +182,8 @@ namespace Retouch_Photo2.Elements
         {
             this._horizontal = 0;
 
-            this._startingPhoneWidth = this.PhoneWidth;
-            this._startingPadWidth = this.PadWidth;
+            this._startingPhoneWidthCore = this.PhoneWidth;
+            this._startingPadWidthCore = this.PadWidth;
 
             this._startingPhoneLength = this.PhoneGridLength.Width.Value;
             this._startingPadLength = this.PadGridLength.Width.Value;
@@ -175,61 +223,88 @@ namespace Retouch_Photo2.Elements
             this.Disable = base.GetTemplateChild(nameof(Disable)) as VisualState;
             this.VisualState = this.VisualState;//State
 
-            this.PhoneTextBlock = base.GetTemplateChild(nameof(PhoneTextBlock)) as TextBlock;
-            this.PadTextBlock = base.GetTemplateChild(nameof(PadTextBlock)) as TextBlock;
             this.PhoneGridLength = base.GetTemplateChild(nameof(PhoneGridLength)) as ColumnDefinition;
             this.PadGridLength = base.GetTemplateChild(nameof(PadGridLength)) as ColumnDefinition;
             this.PCGridLength = base.GetTemplateChild(nameof(PCGridLength)) as ColumnDefinition;
             this.SetWidth();
 
             //Phone
+            if (this.PhoneThumb != null)
+            {
+                this.PhoneThumb.DragStarted -= this.PhoneThumb_DragStarted;
+                this.PhoneThumb.DragDelta -= this.PhoneThumb_DragDelta;
+                this.PhoneThumb.DragCompleted -= this.PhoneThumb_DragCompleted;
+            }
             this.PhoneThumb = base.GetTemplateChild(nameof(PhoneThumb)) as Thumb;
-            this.PhoneThumb.DragStarted += (s, e) =>
+            if (this.PhoneThumb!=null)
             {
-                this.DragStarted();
-                this.ScrollModeChanged?.Invoke(this, ScrollMode.Disabled);//Delegate
-            };
-            this.PhoneThumb.DragDelta += (s, e) =>
-            {
-                double changedLength = this.DragDelta(e.HorizontalChange);
-                double phoneLength = this._startingPhoneLength + changedLength;
-                double scale = phoneLength / this._startingPhoneLength;
-
-                this.PhoneWidth = (int)(this._startingPhoneWidth * scale);
-                if (this.PhoneWidth < 300) this.PhoneWidth = 300;
-                if (this.PhoneWidth > this.PadWidth - 100) this.PhoneWidth = this.PadWidth - 100;
-                this.SetWidth();
-            };
-            this.PhoneThumb.DragCompleted += (s, e) =>
-            {
-                this.ScrollModeChanged?.Invoke(this, ScrollMode.Enabled);//Delegate
-                this.PhoneWidthChanged?.Invoke(this, this.PhoneWidth);//Delegate
-            };
+                this.PhoneThumb.DragStarted += this.PhoneThumb_DragStarted;
+                this.PhoneThumb.DragDelta += this.PhoneThumb_DragDelta;
+                this.PhoneThumb.DragCompleted += this.PhoneThumb_DragCompleted;
+            }
 
             //Pad
+            if (this.PadThumb != null)
+            {
+                this.PadThumb.DragStarted -= this.PadThumb_DragStarted;
+                this.PadThumb.DragDelta -= this.PadThumb_DragDelta;
+                this.PadThumb.DragCompleted -= this.PadThumb_DragCompleted;
+            }
             this.PadThumb = base.GetTemplateChild(nameof(PadThumb)) as Thumb;
-            this.PadThumb.DragStarted += (s, e) =>
+            if (this.PadThumb != null)
             {
-                this.DragStarted();
-                this.ScrollModeChanged?.Invoke(this, ScrollMode.Disabled);//Delegate
-            };
-            this.PadThumb.DragDelta += (s, e) =>
-            {
-                double changedLength = this.DragDelta(e.HorizontalChange);
-                double padLength = this._startingPadLength + changedLength;
-                double scale = padLength / this._startingPadLength;
-
-                this.PadWidth = (int)((this._startingPadWidth - this._startingPhoneWidth) * scale) + this._startingPhoneWidth;
-                if (this.PadWidth < this.PhoneWidth + 100) this.PadWidth = this.PhoneWidth + 100;
-                if (this.PadWidth > 1800) this.PadWidth = 1800;
-                this.SetWidth();
-            };
-            this.PadThumb.DragCompleted += (s, e) =>
-            {
-                this.ScrollModeChanged?.Invoke(this, ScrollMode.Enabled);//Delegate
-                this.PadWidthChanged?.Invoke(this, this.PadWidth);//Delegate
-            };
+                this.PadThumb.DragStarted += this.PadThumb_DragStarted;
+                this.PadThumb.DragDelta += this.PadThumb_DragDelta;
+                this.PadThumb.DragCompleted += this.PadThumb_DragCompleted;
+            }
         }
+
+
+        private void PhoneThumb_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            this.DragStarted();
+            this.ScrollModeChanged?.Invoke(this, ScrollMode.Disabled);//Delegate
+        }
+        private void PhoneThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            double changedLength = this.DragDelta(e.HorizontalChange);
+            double phoneLength = this._startingPhoneLength + changedLength;
+            double scale = phoneLength / this._startingPhoneLength;
+
+            this.PhoneWidth = (int)(this._startingPhoneWidthCore * scale);
+            if (this.PhoneWidth < 300) this.PhoneWidth = 300;
+            if (this.PhoneWidth > this.PadWidth - 100) this.PhoneWidth = this.PadWidth - 100;
+            this.SetWidth();
+        }
+        private void PhoneThumb_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            this.ScrollModeChanged?.Invoke(this, ScrollMode.Enabled);//Delegate
+            this.PhoneWidthChanged?.Invoke(this, this.PhoneWidth);//Delegate
+        }
+
+        private void PadThumb_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            this.DragStarted();
+            this.ScrollModeChanged?.Invoke(this, ScrollMode.Disabled);//Delegate
+        }
+        private void PadThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            double changedLength = this.DragDelta(e.HorizontalChange);
+            double padLength = this._startingPadLength + changedLength;
+            double scale = padLength / this._startingPadLength;
+
+            this.PadWidth = (int)((this._startingPadWidthCore - this._startingPhoneWidthCore) * scale) + this._startingPhoneWidthCore;
+            if (this.PadWidth < this.PhoneWidth + 100) this.PadWidth = this.PhoneWidth + 100;
+            if (this.PadWidth > 1800) this.PadWidth = 1800;
+            this.SetWidth();
+        }
+        private void PadThumb_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            this.ScrollModeChanged?.Invoke(this, ScrollMode.Enabled);//Delegate
+            this.PadWidthChanged?.Invoke(this, this.PadWidth);//Delegate
+        }
+
+
 
     }
 }

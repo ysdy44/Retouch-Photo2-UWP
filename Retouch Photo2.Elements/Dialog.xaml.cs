@@ -6,6 +6,7 @@
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Markup;
 
 namespace Retouch_Photo2.Elements
@@ -25,9 +26,9 @@ namespace Retouch_Photo2.Elements
 
         //@Delegate
         /// <summary> Occurs when the clicking the s secondary button. </summary>
-        public event TypedEventHandler<object, RoutedEventArgs> SecondaryButtonClick;
+        public event RoutedEventHandler SecondaryButtonClick;
         /// <summary> Occurs when the clicking the s primary button. </summary>
-        public event TypedEventHandler<object, RoutedEventArgs> PrimaryButtonClick;
+        public event RoutedEventHandler PrimaryButtonClick;
 
 
         #region DependencyProperty
@@ -106,28 +107,30 @@ namespace Retouch_Photo2.Elements
             this.DialogHidden = base.GetTemplateChild(nameof(DialogHidden)) as VisualState;
             this.VisualState = this.VisualState;//State
 
+            if (this.LayoutRoot != null) this.LayoutRoot.Tapped -= this.LayoutRoot_Tapped;
             this.LayoutRoot = base.GetTemplateChild(nameof(LayoutRoot)) as Border;
-            this.LayoutRoot.Tapped += (s, e) => this.Hide();
+            if (this.LayoutRoot != null) this.LayoutRoot.Tapped += this.LayoutRoot_Tapped;
 
+            if (this.RootGrid != null) this.RootGrid.Tapped -= this.RootGrid_Tapped;
             this.RootGrid = base.GetTemplateChild(nameof(RootGrid)) as Border;
-            this.RootGrid.Tapped += (s, e) => e.Handled = true;
+            if (this.RootGrid != null) this.RootGrid.Tapped += this.RootGrid_Tapped;
 
+            if (this.SecondaryButton != null) this.SecondaryButton.Click -= this.SecondaryButtonClick;
             this.SecondaryButton = base.GetTemplateChild(nameof(SecondaryButton)) as Button;
-            this.SecondaryButton.Click -= this.SecondaryButton_Click;
-            this.SecondaryButton.Click += this.SecondaryButton_Click;
+            if (this.SecondaryButton != null) this.SecondaryButton.Click += this.SecondaryButtonClick;
 
+            if (this.PrimaryButton != null) this.PrimaryButton.Click -= this.PrimaryButtonClick;
             this.PrimaryButton = base.GetTemplateChild(nameof(PrimaryButton)) as Button;
-            this.PrimaryButton.Click -= this.PrimaryButton_Click;
-            this.PrimaryButton.Click += this.PrimaryButton_Click;
+            if (this.PrimaryButton != null) this.PrimaryButton.Click += this.PrimaryButtonClick;
         }
 
-        private void SecondaryButton_Click(object sender, RoutedEventArgs e)
-        {            
-            this.SecondaryButtonClick?.Invoke(this, e);//Delegate
+        private void LayoutRoot_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Hide();
         }
-        private void PrimaryButton_Click(object sender, RoutedEventArgs e)
-        {            
-            this.PrimaryButtonClick?.Invoke(this, e);//Delegate
+        private void RootGrid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            e.Handled = true;
         }
 
     }

@@ -296,7 +296,7 @@ namespace Retouch_Photo2.Elements
 
             void constructGroup(Button button, IColorPicker colorPicker, ColorPicker2Mode mode)
             {
-                string text = resource.GetString($"Menus_Color_{mode}");
+                string title = resource.GetString($"Menus_Color_{mode}");
 
                 void group(ColorPicker2Mode groupMode)
                 {
@@ -306,7 +306,7 @@ namespace Retouch_Photo2.Elements
                         colorPicker.Self.Visibility = Visibility.Visible;
 
                         colorPicker.Color = this.Color;
-                        this.Button.Content = text;
+                        this.Button.Content = title;
                     }
                     else
                     {
@@ -319,7 +319,7 @@ namespace Retouch_Photo2.Elements
                 group(this.Mode);
 
                 //Buttons
-                button.Content = text;
+                button.Content = title;
                 button.Click += (s, e) =>
                 {
                     this.Mode = mode;

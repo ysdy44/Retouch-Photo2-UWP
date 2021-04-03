@@ -108,11 +108,11 @@
 
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="PhoneGridLength" Width="1*" MinWidth="50"/>
+                            <ColumnDefinition Width="{TemplateBinding PhoneLength}" MinWidth="50"/>
                             <ColumnDefinition Width="30"/>
-                            <ColumnDefinition x:Name="PadGridLength" Width="1*" MinWidth="50"/>
+                            <ColumnDefinition Width="{TemplateBinding PadLength}" MinWidth="50"/>
                             <ColumnDefinition Width="30"/>
-                            <ColumnDefinition x:Name="PCGridLength" Width="1*" MinWidth="50"/>
+                            <ColumnDefinition Width="{TemplateBinding PCLength}" MinWidth="50"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -156,11 +156,13 @@
                         <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" 
                                    Text="{TemplateBinding PhoneText}"
                                    Style="{StaticResource AppTextBlockStyle}"/>
-                        <TextBlock x:Name="PhoneTextBlock" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center"
+                                   Text="{TemplateBinding PhoneCount}"/>
                         <TextBlock Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" 
                                    Text="{TemplateBinding PadText}"
                                    Style="{StaticResource AppTextBlockStyle}"/>
-                        <TextBlock x:Name="PadTextBlock" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center"
+                                   Text="{TemplateBinding PadCount}"/>
                         <TextBlock Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" 
                                    Text="{TemplateBinding PCText}"
                                    Style="{StaticResource AppTextBlockStyle}"/>

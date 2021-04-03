@@ -58,12 +58,10 @@ namespace Retouch_Photo2.Elements
 
             this.Storyboard = base.GetTemplateChild(nameof(Storyboard)) as Storyboard;
             this.Frame = base.GetTemplateChild(nameof(Frame)) as SplineDoubleKeyFrame;
+
+            if (this.ContentPresenter != null) this.ContentPresenter.SizeChanged -= this.ContentPresenter_SizeChanged;
             this.ContentPresenter = base.GetTemplateChild(nameof(ContentPresenter)) as ContentPresenter;
-            if (this.ContentPresenter!=null)
-            {
-                this.ContentPresenter.SizeChanged -= this.ContentPresenter_SizeChanged;
-                this.ContentPresenter.SizeChanged += this.ContentPresenter_SizeChanged;
-            }    
+            if (this.ContentPresenter != null) this.ContentPresenter.SizeChanged += this.ContentPresenter_SizeChanged;
         }
 
         private void ContentPresenter_SizeChanged(object sender, SizeChangedEventArgs e)

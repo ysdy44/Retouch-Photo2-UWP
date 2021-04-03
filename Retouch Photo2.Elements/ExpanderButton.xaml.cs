@@ -286,8 +286,11 @@ namespace Retouch_Photo2.Elements
             if (width < 200) width = 200;
 
             if (postionX < 0) return 0;
+            if (width >= windowWidth) return 0;
+
             double right = windowWidth - width;
             if (postionX > right) return right;
+
             return postionX;
         }
         /// <summary>
@@ -301,8 +304,11 @@ namespace Retouch_Photo2.Elements
             if (height < 200) height = 200;
 
             if (postionY < 0) return 0;
+            if (height >= windowHeight) return 0;
+
             double bottom = windowHeight - height;
             if (postionY > bottom) return bottom;
+
             return postionY;
         }
 

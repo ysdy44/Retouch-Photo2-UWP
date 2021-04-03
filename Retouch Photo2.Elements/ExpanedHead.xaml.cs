@@ -27,9 +27,9 @@ namespace Retouch_Photo2.Elements
 
         //@Delegate
         /// <summary> Occurs when the clicking the left button. </summary>
-        public event TypedEventHandler<object, RoutedEventArgs> LeftButtonClick;
+        public event RoutedEventHandler LeftButtonClick;
         /// <summary> Occurs when the clicking the right button. </summary>
-        public event TypedEventHandler<object, RoutedEventArgs> RightButtonClick;
+        public event RoutedEventHandler RightButtonClick;
 
 
         #region DependencyProperty
@@ -91,7 +91,6 @@ namespace Retouch_Photo2.Elements
         VisualStateGroup CommonStates;
         VisualState Normal;
         VisualState UnExpaned;
-        TextBlock TitleTextBlock;
         Button LeftButton;
         Button RightButton;
 
@@ -129,22 +128,14 @@ namespace Retouch_Photo2.Elements
             this.CommonStates = base.GetTemplateChild(nameof(CommonStates)) as VisualStateGroup;
             this.Normal = base.GetTemplateChild(nameof(Normal)) as VisualState;
             this.UnExpaned = base.GetTemplateChild(nameof(UnExpaned)) as VisualState;
-            this.TitleTextBlock = base.GetTemplateChild(nameof(TitleTextBlock)) as TextBlock;
-            this.LeftButton = base.GetTemplateChild(nameof(LeftButton)) as Button;
-            this.LeftButton.Click -= this.LeftButton_Click;
-            this.LeftButton.Click += this.LeftButton_Click;
-            this.RightButton = base.GetTemplateChild(nameof(RightButton)) as Button;
-            this.RightButton.Click -= this.RightButton_Click;
-            this.RightButton.Click += this.RightButton_Click;
-        }
 
-        private void LeftButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.LeftButtonClick?.Invoke(this, e);//Delegate
-        }
-        private void RightButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.RightButtonClick?.Invoke(this, e);//Delegate
+            if (this.LeftButton != null) this.LeftButton.Click -= this.LeftButtonClick;
+            this.LeftButton = base.GetTemplateChild(nameof(LeftButton)) as Button;
+            if (this.LeftButton != null) this.LeftButton.Click += this.LeftButtonClick;
+
+            if (this.RightButton != null) this.RightButton.Click -= this.RightButtonClick;
+            this.RightButton = base.GetTemplateChild(nameof(RightButton)) as Button;
+            if (this.RightButton != null) this.RightButton.Click += this.RightButtonClick;
         }
 
 

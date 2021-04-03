@@ -3,9 +3,9 @@
 // Difficult:         
 // Only:              ★★★
 // Complete:      
-using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Markup;
 
 namespace Retouch_Photo2.Elements
@@ -25,9 +25,9 @@ namespace Retouch_Photo2.Elements
 
         //@Delegate
         /// <summary> Occurs when the clicking the s close button. </summary>
-        public event TypedEventHandler<object, RoutedEventArgs> CloseButtonClick;
+        public event RoutedEventHandler CloseButtonClick;
         /// <summary> Occurs when the clicking the s primary button. </summary>
-        public event TypedEventHandler<object, RoutedEventArgs> PrimaryButtonClick;
+        public event RoutedEventHandler PrimaryButtonClick;
 
 
         #region DependencyProperty
@@ -96,28 +96,26 @@ namespace Retouch_Photo2.Elements
             this.DialogHidden = base.GetTemplateChild(nameof(DialogHidden)) as VisualState;
             this.VisualState = this.VisualState;//State
 
+            if (this.LayoutRoot != null) this.LayoutRoot.Tapped -= this.Root_Tapped;
             this.LayoutRoot = base.GetTemplateChild(nameof(LayoutRoot)) as Border;
-            this.LayoutRoot.Tapped += (s, e) => this.Hide();
+            if (this.LayoutRoot != null) this.LayoutRoot.Tapped += this.Root_Tapped;
 
+            if (this.RootGrid != null) this.RootGrid.Tapped -= this.Root_Tapped;
             this.RootGrid = base.GetTemplateChild(nameof(RootGrid)) as Border;
-            this.RootGrid.Tapped += (s, e) => e.Handled = true;
+            if (this.RootGrid != null) this.RootGrid.Tapped += this.Root_Tapped;
 
+            if (this.CloseButton != null) this.CloseButton.Click -= this.CloseButtonClick;
             this.CloseButton = base.GetTemplateChild(nameof(CloseButton)) as Button;
-            this.CloseButton.Click -= this.CloseButton_Click;
-            this.CloseButton.Click += this.CloseButton_Click;
+            if (this.CloseButton != null) this.CloseButton.Click += this.CloseButtonClick;
 
+            if (this.PrimaryButton != null) this.PrimaryButton.Click -= this.PrimaryButtonClick;
             this.PrimaryButton = base.GetTemplateChild(nameof(PrimaryButton)) as Button;
-            this.PrimaryButton.Click -= this.PrimaryButton_Click;
-            this.PrimaryButton.Click += this.PrimaryButton_Click;
+            if (this.PrimaryButton != null) this.PrimaryButton.Click += this.PrimaryButtonClick;
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        private void Root_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            this.CloseButtonClick?.Invoke(this, e);//Delegate
-        }
-        private void PrimaryButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.PrimaryButtonClick?.Invoke(this, e);//Delegate
+            this.Hide();
         }
 
     }
