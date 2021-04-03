@@ -56,11 +56,71 @@ namespace Retouch_Photo2.Menus
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructAlign();
-            this.ConstructFontStyle();
-            this.ConstructFontWeight();
-            this.ConstructFontFamily();
-            this.ConstructFontSize();
+            this.FontAlignmentSegmented.AlignmentChanged += (s, fontAlignment) => this.SetFontAlignment(fontAlignment);
+
+            this.BoldButton.Click += (s, e) =>
+            {
+                //Whether the judgment is small or large.
+                bool isBold = this.SelectionViewModel.FontWeight.Weight == FontWeights.Bold.Weight;
+                // isBold ? ""Normal"" : ""Bold""
+                FontWeight fontWeight = isBold ? FontWeights.Normal : FontWeights.Bold;
+
+                this.SetFontWeight(fontWeight);
+            };
+            this.ItalicButton.Click += (s, e) =>
+            {
+                //Whether the judgment is Normal or Italic.
+                bool isNormal = this.SelectionViewModel.FontStyle == FontStyle.Normal;
+                // isNormal ? ""Italic"" : ""Normal""
+                FontStyle fontStyle = isNormal ? FontStyle.Italic : FontStyle.Normal;
+
+                this.SetFontStyle(fontStyle);
+            };
+            this.UnderLineButton.Click += (s, e) => { };
+
+            this.FontWeightComboBox.WeightChanged += (s, fontWeight) => this.SetFontWeight(fontWeight);
+
+            // Get all FontFamilys in your device.
+            this.FontFamilyListView.ItemsSource = CanvasTextFormat.GetSystemFontFamilies(ApplicationLanguages.Languages).OrderBy(k => k);
+            this.FontFamilyButton.Click += (s, e) =>
+            {
+                this.FontFamilyListView.Visibility = Visibility.Visible;
+                this.SplitView.IsPaneOpen = false;
+            };
+            this.FontFamilyListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is string value)
+                {
+                    this.SetFontFamily(value);
+                }
+            };
+
+            // Get all fontSizes in your device.
+            this.FontSizeListView.ItemsSource = new List<int>
+            {
+                5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 24, 30, 36, 48, 64, 72, 96, 144, 288,
+            };
+            this.FontSizePicker.ValueChanged += (s, value) => this.SetFontSize(value);
+            this.FontSizeListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is int value)
+                {
+                    this.FontSizePicker.Value = value;
+
+                    this.SetFontSize(value);
+                }
+            };
+
+            base.SizeChanged += (s, e) =>
+            {
+                if (e.NewSize == e.PreviousSize) return;
+                this.SplitView.OpenPaneLength = e.NewSize.Width;
+            };
+            this.CloseButton.Click += (s, e) =>
+            {
+                this.FontFamilyListView.Visibility = Visibility.Collapsed;
+                this.SplitView.IsPaneOpen = true;
+            };
         }
     }
 
@@ -84,103 +144,10 @@ namespace Retouch_Photo2.Menus
             this.FontFamilyTextBlock.Text = resource.GetString("Texts_FontFamily");
 
             this.FontSizeTextBlock.Text = resource.GetString("Texts_FontSize");
+
+            this.CloseButton.Content = resource.GetString("Menus_Close");
         }
 
-    }
-
-    public sealed partial class TextMenu : UserControl
-    {
-
-        //FontAlignment
-        private void ConstructAlign()
-        {
-            this.FontAlignmentSegmented.AlignmentChanged += (s, fontAlignment) =>
-            {
-                this.SetFontAlignment(fontAlignment);
-            };
-        }
-
-
-        //FontStyle
-        private void ConstructFontStyle()
-        {
-            this.BoldButton.Click += (s, e) =>
-            {
-                //Whether the judgment is small or large.
-                bool isBold = this.SelectionViewModel.FontWeight.Weight == FontWeights.Bold.Weight;
-                // isBold ? ""Normal"" : ""Bold""
-                FontWeight fontWeight = isBold ? FontWeights.Normal : FontWeights.Bold;
-
-                this.SetFontWeight(fontWeight);
-            };
-
-            this.ItalicButton.Click += (s, e) =>
-            {
-                //Whether the judgment is Normal or Italic.
-                bool isNormal = this.SelectionViewModel.FontStyle == FontStyle.Normal;
-                // isNormal ? ""Italic"" : ""Normal""
-                FontStyle fontStyle = isNormal ? FontStyle.Italic : FontStyle.Normal;
-
-                this.SetFontStyle(fontStyle);
-            };
-
-            this.UnderLineButton.Click += (s, e) =>
-            {
-            };
-        }
-
-
-        //FontWeight
-        private void ConstructFontWeight()
-        {
-            this.FontWeightComboBox.WeightChanged += (s, fontWeight) => this.SetFontWeight(fontWeight);
-        }
-
-
-        //FontFamily
-        private void ConstructFontFamily()
-        {
-            // Get all FontFamilys in your device.
-            this.FontFamilyListView.ItemsSource = CanvasTextFormat.GetSystemFontFamilies(ApplicationLanguages.Languages).OrderBy(k => k);
-
-            this.FontFamilyButton.Click += (s, e) => this.FontFamilyFlyout.ShowAt(this.FontFamilyButton);
-
-            this.FontFamilyListView.ItemClick += (s, e) =>
-            {
-                if (e.ClickedItem is string value)
-                {
-                    this.SetFontFamily(value);
-                }
-            };
-        }
-
-
-        //FontSize
-        private void ConstructFontSize()
-        {
-            // Get all fontSizes in your device.
-            this.FontSizeListView.ItemsSource = new List<int>
-            {
-                5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 24, 30, 36, 48, 64, 72, 96, 144, 288,
-            };
-
-            this.FontSizeButton.Click += (s, e) => this.FontSizeFlyout.ShowAt(this.FontSizeButton);
-
-            this.FontSizePicker.ValueChanged += (s, value) => this.SetFontSize(value);
-            this.FontSizeListView.ItemClick += (s, e) =>
-            {
-                if (e.ClickedItem is int value)
-                {
-                    this.FontSizePicker.Value = value;
-
-                    this.SetFontSize(value);
-                }
-            };
-        }
-    }
-
-    public sealed partial class TextMenu : UserControl
-    {
 
         private void SetFontAlignment(CanvasHorizontalAlignment fontAlignment)
         {

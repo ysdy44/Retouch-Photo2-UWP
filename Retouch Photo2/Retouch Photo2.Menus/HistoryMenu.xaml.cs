@@ -4,24 +4,19 @@
 // Only:              
 // Complete:      ★★★★★
 using Retouch_Photo2.Historys;
-using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Menus
 {
     internal class HistoryTextBlock : ContentControl
-    {             
-        public HistoryType Type
-        {
-            set => this.Content = this.StringConverter(value);
-        }
+    {
+        public HistoryType Type { set => this.Content = this.StringConverter(value); }
 
         //@String
+        static readonly ResourceLoader resource = ResourceLoader.GetForCurrentView();
         private string StringConverter(HistoryType value)
         {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
             return resource.GetString($"Historys_{value}");
         }
     }

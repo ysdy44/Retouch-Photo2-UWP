@@ -644,6 +644,7 @@
 <data name='Layers_GeometryHeart' xml:space='preserve'><value>Cœur</value></data>
 <data name='Menus_Edit' xml:space='preserve'><value>Éditer</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>Accident vasculaire cérébral</value></data>
+<data name='Menus_Close' xml:space='preserve'><value>Retour</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>Transformateur</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>Largeur</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>Hauteur</value></data>

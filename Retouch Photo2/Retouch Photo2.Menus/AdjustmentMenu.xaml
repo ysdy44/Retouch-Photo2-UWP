@@ -159,15 +159,15 @@
         </VisualStateManager.VisualStateGroups>
 
         <SplitView.Pane>
-            <Grid x:Name="RootGrid" MaxHeight="{x:Bind MaxHeight, Mode=OneWay}">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
-                    <RowDefinition Height="Auto" MinHeight="165"/>
+                    <RowDefinition Height="*" MinHeight="165"/>
                 </Grid.RowDefinitions>
 
 
                 <!--Head-->
-                <Grid x:Name="AppbarGrid">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
@@ -185,10 +185,7 @@
 
 
                 <!--Body-->
-                <ListView x:Name="ListView" Grid.Row="1"
-                  IsItemClickEnabled="True"
-                  SelectionMode="None"
-                  ItemTemplate="{StaticResource DataTemplate}">
+                <ListView x:Name="ListView" Grid.Row="1" IsItemClickEnabled="True" SelectionMode="None" ItemTemplate="{StaticResource DataTemplate}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Padding" Value="0"/>
@@ -202,6 +199,7 @@
                         <TransitionCollection/>
                     </ListView.ItemContainerTransitions>
                 </ListView>
+                
                 <TextBlock x:Name="ZeroTextBlock" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
                 <TextBlock x:Name="DisableTextBlock" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
 
@@ -211,7 +209,7 @@
         <SplitView.Content>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 <ContentPresenter x:Name="ContentPresenter" VerticalAlignment="Top"/>

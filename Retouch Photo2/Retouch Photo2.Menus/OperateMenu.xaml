@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:edits="using:Retouch_Photo2.Edits"
     mc:Ignorable="d"   
     d:DesignWidth="200"
     d:DesignHeight="400"
@@ -39,25 +39,25 @@
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/TransformIcons/FlipHorizontalIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource FlipHorizontalIcon}"/>
+            <edits:EditControl Template="{StaticResource FlipHorizontalIcon}"/>
         </Button>
         <Button x:Name="Transform_FlipVertical" Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/TransformIcons/FlipVerticalIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource FlipVerticalIcon}"/>
+            <edits:EditControl Template="{StaticResource FlipVerticalIcon}"/>
         </Button>
         <Button x:Name="Transform_RotateLeft" Grid.Column="2" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}">
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/TransformIcons/RotateLeftIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource RotateLeftIcon}"/>
+            <edits:EditControl Template="{StaticResource RotateLeftIcon}"/>
         </Button>
         <Button x:Name="Transform_RotateRight" Grid.Column="3" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/TransformIcons/RotateRightIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource RotateRightIcon}"/>
+            <edits:EditControl Template="{StaticResource RotateRightIcon}"/>
         </Button>
 
 
@@ -67,25 +67,25 @@
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/ArrangeIcons/MoveBackIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource MoveBackIcon}"/>
+            <edits:EditControl Template="{StaticResource MoveBackIcon}"/>
         </Button>
         <Button x:Name="Arrange_BackOne" Grid.Column="1" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}">
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/ArrangeIcons/BackOneIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource BackOneIcon}"/>
+            <edits:EditControl Template="{StaticResource BackOneIcon}"/>
         </Button>
         <Button x:Name="Arrange_ForwardOne" Grid.Column="2" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}">
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/ArrangeIcons/ForwardOneIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource ForwardOneIcon}"/>
+            <edits:EditControl Template="{StaticResource ForwardOneIcon}"/>
         </Button>
         <Button x:Name="Arrange_MoveFront" Grid.Column="3" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/ArrangeIcons/MoveFrontIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource MoveFrontIcon}"/>
+            <edits:EditControl Template="{StaticResource MoveFrontIcon}"/>
         </Button>
 
 
@@ -95,25 +95,25 @@
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/HorizontallyIcons/LeftIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource LeftIcon}"/>
+            <edits:EditControl Template="{StaticResource LeftIcon}"/>
         </Button>
         <Button x:Name="Horizontally_Center" Grid.Column="1" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}">
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/HorizontallyIcons/CenterIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource CenterIcon}"/>
+            <edits:EditControl Template="{StaticResource CenterIcon}"/>
         </Button>
         <Button x:Name="Horizontally_Right" Grid.Column="2" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/HorizontallyIcons/RightIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource RightIcon}"/>
+            <edits:EditControl Template="{StaticResource RightIcon}"/>
         </Button>
         <Button x:Name="Horizontally_HorizontallySpace" Grid.Column="3" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}">
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/HorizontallyIcons/HorizontallySpaceIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource HorizontallySpaceIcon}"/>
+            <edits:EditControl Template="{StaticResource HorizontallySpaceIcon}"/>
         </Button>
 
 
@@ -123,25 +123,25 @@
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/VerticallyIcons/TopIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource TopIcon}"/>
+            <edits:EditControl Template="{StaticResource TopIcon}"/>
         </Button>
         <Button x:Name="Vertically_Middle" Grid.Column="1" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}">
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/VerticallyIcons/MiddleIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource MiddleIcon}"/>
+            <edits:EditControl Template="{StaticResource MiddleIcon}"/>
         </Button>
         <Button x:Name="Vertically_Bottom" Grid.Column="2" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/VerticallyIcons/BottomIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource BottomIcon}"/>
+            <edits:EditControl Template="{StaticResource BottomIcon}"/>
         </Button>
         <Button x:Name="Vertically_VerticallySpace" Grid.Column="3" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}">
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/VerticallyIcons/VerticallySpaceIcon.xaml"/>
             </Button.Resources>
-            <ContentControl Template="{StaticResource VerticallySpaceIcon}"/>
+            <edits:EditControl Template="{StaticResource VerticallySpaceIcon}"/>
         </Button>
 
 

@@ -72,7 +72,7 @@ namespace Retouch_Photo2.Menus
             if (e.NewValue is Filter value)
             {
                 control._vsIsEnabled = true;
-                control._vsIsZeroAdjustments = value.Adjustments.Count==0;
+                control._vsIsZeroAdjustments = value.Adjustments.Count == 0;
                 control.VisualState = control.VisualState;//State
             }
             else
@@ -92,6 +92,7 @@ namespace Retouch_Photo2.Menus
         /// <summary> Gets or sets the current adjustment page. </summary>
         public IAdjustmentPage AdjustmentPage;
 
+
         //@Construct
         /// <summary>
         /// Initializes a AdjustmentMenu. 
@@ -100,7 +101,10 @@ namespace Retouch_Photo2.Menus
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            AdjustmentCommand.Edit = this.EditAction;
+            AdjustmentCommand.Remove = this.RemoveAction;
 
+            base.SizeChanged += (s, e) => this.SplitView.OpenPaneLength = e.NewSize.Width;
             base.Loaded += async (s, e) =>
             {
                 if (this.CollectionViewSource.Source == null)
@@ -114,21 +118,12 @@ namespace Retouch_Photo2.Menus
                 this.VisualState = this.VisualState;//State
             };
 
-            base.SizeChanged += (s, e) =>
-            {
-                this.SplitView.OpenPaneLength = e.NewSize.Width;
-            };
 
             this.CloseButton.Click += (s, e) =>
             {
                 this.ContentPresenter.Content = null;
-                this.SplitView.IsPaneOpen = false;
                 this.SplitView.IsPaneOpen = true;
             };
-
-
-            AdjustmentCommand.Edit = this.EditAction;
-            AdjustmentCommand.Remove = this.RemoveAction;
 
 
             this.FilterButton.Click += (s, e) => this.FilterFlyout.ShowAt(this.FilterButton);
@@ -157,20 +152,21 @@ namespace Retouch_Photo2.Menus
         {
             if (adjustment.PageVisibility == Visibility.Collapsed) return;
 
+            IAdjustmentPage effectPage = adjustment.Page;
+            if (effectPage == null) return;
+            this.AdjustmentPage = adjustment.Page;
+
             if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
             {
                 ILayer layer = layerage.Self;
 
-                IAdjustmentPage effectPage = adjustment.Page;
-                this.AdjustmentPage = adjustment.Page;
-
                 int index = layer.Filter.Adjustments.IndexOf(adjustment);
                 effectPage.Index = index;
                 effectPage.Follow();
-
-                this.ContentPresenter.Content = effectPage?.Self;
-                this.SplitView.IsPaneOpen = false;
             }
+
+            this.ContentPresenter.Content = effectPage.Self;
+            this.SplitView.IsPaneOpen = false;
         }
         private void RemoveAction(IAdjustment adjustment)
         {
@@ -192,7 +188,7 @@ namespace Retouch_Photo2.Menus
 
             this.AddButton.Content = resource.GetString("Menus_Adjustment_Add");
             this.FilterButton.Content = resource.GetString("Menus_Adjustment_Filters");
-     
+
             this.CloseButton.Content = resource.GetString("Menus_Close");
         }
 
@@ -302,7 +298,7 @@ namespace Retouch_Photo2.Menus
                 layerage.RefactoringParentsRender();
                 layerage.RefactoringParentsIconRender();
                 layer.Filter = filter.Clone();
-                
+
                 this._vsIsZeroAdjustments = layer.Filter.Adjustments.Count == 0;
             });
 

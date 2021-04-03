@@ -644,6 +644,7 @@
 <data name='Layers_GeometryHeart' xml:space='preserve'><value>ハート</value></data>
 <data name='Menus_Edit' xml:space='preserve'><value>編集</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>脳卒中</value></data>
+<data name='Menus_Close' xml:space='preserve'><value>バック</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>変成器</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>幅</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>高さ</value></data>

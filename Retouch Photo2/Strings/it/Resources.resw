@@ -644,6 +644,7 @@
 <data name='Layers_GeometryHeart' xml:space='preserve'><value>Cuore</value></data>
 <data name='Menus_Edit' xml:space='preserve'><value>modificare</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>Colpo</value></data>
+<data name='Menus_Close' xml:space='preserve'><value>Indietro</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>Trasformatore</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>Larghezza</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>Altezza</value></data>

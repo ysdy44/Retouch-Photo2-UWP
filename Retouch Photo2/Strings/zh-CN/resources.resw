@@ -644,6 +644,7 @@
 <data name='Layers_GeometryHeart' xml:space='preserve'><value>心</value></data>
 <data name='Menus_Edit' xml:space='preserve'><value>编辑</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>描边</value></data>
+<data name='Menus_Close' xml:space='preserve'><value>返回</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>变换</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>宽度</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>高度</value></data>

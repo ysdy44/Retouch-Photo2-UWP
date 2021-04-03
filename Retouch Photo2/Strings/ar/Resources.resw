@@ -644,6 +644,7 @@
 <data name='Layers_GeometryHeart' xml:space='preserve'><value>قلب</value></data>
 <data name='Menus_Edit' xml:space='preserve'><value>يحرر</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>ضربة</value></data>
+<data name='Menus_Close' xml:space='preserve'><value>خلف</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>محول</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>عرض</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>ارتفاع</value></data>

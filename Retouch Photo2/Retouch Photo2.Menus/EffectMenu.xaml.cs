@@ -165,16 +165,17 @@ namespace Retouch_Photo2.Menus
         public EffectMenu()
         {
             this.InitializeComponent();
+            this.ConstructStringsss();
 
             base.SizeChanged += (s, e) =>
             {
+                if (e.NewSize == e.PreviousSize) return;
                 this.SplitView.OpenPaneLength = e.NewSize.Width;
             };
 
             this.CloseButton.Click += (s, e) =>
             {
                 this.ContentPresenter.Content = null;
-                this.SplitView.IsPaneOpen = false;
                 this.SplitView.IsPaneOpen = true;
             };
         }

@@ -644,6 +644,7 @@
 <data name='Layers_GeometryHeart' xml:space='preserve'><value>심장</value></data>
 <data name='Menus_Edit' xml:space='preserve'><value>편집하다</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>뇌졸중</value></data>
+<data name='Menus_Close' xml:space='preserve'><value>뒤</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>변신 로봇</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>폭</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>신장</value></data>

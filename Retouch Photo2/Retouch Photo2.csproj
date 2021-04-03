@@ -214,8 +214,6 @@
     <Compile Include="Retouch Photo2.Menus\TextMenu.xaml.cs">
       <DependentUpon>TextMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Retouch Photo2.Menus\TransformerMenu.Construct.cs" />
-    <Compile Include="Retouch Photo2.Menus\TransformerMenu.State.cs" />
     <Compile Include="Retouch Photo2.Menus\TransformerMenu.xaml.cs">
       <DependentUpon>TransformerMenu.xaml</DependentUpon>
     </Compile>

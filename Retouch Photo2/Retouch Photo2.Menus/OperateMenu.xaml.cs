@@ -60,16 +60,48 @@ namespace Retouch_Photo2.Menus
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructTransform();
-            this.ConstructArrange();
-            this.ConstructHorizontally();
-            this.ConstructVertically();
+            this.Transform_FlipHorizontal.Click += (s, e) =>
+            {
+                Transformer transformer = this.Transformer;
+                Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
+                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
+            };
+            this.Transform_FlipVertical.Click += (s, e) =>
+            {
+                Transformer transformer = this.Transformer;
+                Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
+                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
+            };
+            this.Transform_RotateLeft.Click += (s, e) =>
+            {
+                Transformer transformer = this.Transformer;
+                Matrix3x2 matrix = Matrix3x2.CreateRotation(-FanKit.Math.PiOver2, transformer.Center);
+                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
+            };
+            this.Transform_RotateRight.Click += (s, e) =>
+            {
+                Transformer transformer = this.Transformer;
+                Matrix3x2 matrix = Matrix3x2.CreateRotation(FanKit.Math.PiOver2, transformer.Center);
+                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
+            };
+
+            this.Arrange_MoveBack.Click += (s, e) => this.MoveBack();
+            this.Arrange_BackOne.Click += (s, e) => this.BackOne();
+            this.Arrange_ForwardOne.Click += (s, e) => this.ForwardOne();
+            this.Arrange_MoveFront.Click += (s, e) => this.MoveFront();
+
+            this.Horizontally_Left.Click += (s, e) => this.TransformAlign(BorderMode.MinX, Orientation.Horizontal);
+            this.Horizontally_Center.Click += (s, e) => this.TransformAlign(BorderMode.CenterX, Orientation.Horizontal);
+            this.Horizontally_Right.Click += (s, e) => this.TransformAlign(BorderMode.MaxX, Orientation.Horizontal);
+            this.Horizontally_HorizontallySpace.Click += (s, e) => this.TransformSapce(Orientation.Horizontal);
+
+            this.Vertically_Top.Click += (s, e) => this.TransformAlign(BorderMode.MinY, Orientation.Vertical);
+            this.Vertically_Middle.Click += (s, e) => this.TransformAlign(BorderMode.CenterY, Orientation.Vertical);
+            this.Vertically_Bottom.Click += (s, e) => this.TransformAlign(BorderMode.MaxY, Orientation.Vertical);
+            this.Vertically_VerticallySpace.Click += (s, e) => this.TransformSapce(Orientation.Vertical);
         }
     }
 
-    /// <summary>
-    /// MainPag of <see cref = "OperateMenu"/>.
-    /// </summary>
     public sealed partial class OperateMenu : UserControl
     {
 
@@ -96,167 +128,92 @@ namespace Retouch_Photo2.Menus
             }
         }
 
-    }
 
-    /// <summary>
-    /// MainPag of <see cref = "OperateMenu"/>.
-    /// </summary>
-    public sealed partial class OperateMenu : UserControl
-    {
-
-        //Transform
-        private void ConstructTransform()
+        private void MoveBack()
         {
+            if (this.Mode != ListViewSelectionMode.Single) return;
 
-            this.Transform_FlipHorizontal.Click += (s, e) =>
-            {
-                Transformer transformer = this.Transformer;
-                Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
-                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
-            };
+            //History
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
+            this.ViewModel.HistoryPush(history);
 
-            this.Transform_FlipVertical.Click += (s, e) =>
-            {
-                Transformer transformer = this.Transformer;
-                Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
-                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
-            };
+            Layerage destination = this.SelectionViewModel.SelectionLayerage;
+            Layerage parents = LayerManager.GetParentsChildren(destination);
+            if (parents.Children.Count < 2) return;
 
-            this.Transform_RotateLeft.Click += (s, e) =>
-            {
-                Transformer transformer = this.Transformer;
-                Matrix3x2 matrix = Matrix3x2.CreateRotation(-FanKit.Math.PiOver2, transformer.Center);
-                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
-            };
+            parents.Children.Remove(destination);
+            parents.Children.Add(destination);
 
-            this.Transform_RotateRight.Click += (s, e) =>
-            {
-                Transformer transformer = this.Transformer;
-                Matrix3x2 matrix = Matrix3x2.CreateRotation(FanKit.Math.PiOver2, transformer.Center);
-                this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
-            };
+            LayerManager.ArrangeLayers();
+            this.ViewModel.Invalidate();//Invalidate
+        }
+        private void BackOne()
+        {
+            if (this.Mode != ListViewSelectionMode.Single) return;
 
+            //History
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
+            this.ViewModel.HistoryPush(history);
+
+            Layerage destination = this.SelectionViewModel.SelectionLayerage;
+            Layerage parents = LayerManager.GetParentsChildren(destination);
+            if (parents.Children.Count < 2) return;
+
+            int index = parents.Children.IndexOf(destination);
+            index++;
+
+            if (index < 0) index = 0;
+            if (index > parents.Children.Count - 1) index = parents.Children.Count - 1;
+
+            parents.Children.Remove(destination);
+            parents.Children.Insert(index, destination);
+
+            LayerManager.ArrangeLayers();
+            this.ViewModel.Invalidate();//Invalidate
+        }
+        private void ForwardOne()
+        {
+            if (this.Mode != ListViewSelectionMode.Single) return;
+
+            //History
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
+            this.ViewModel.HistoryPush(history);
+
+            Layerage destination = this.SelectionViewModel.SelectionLayerage;
+            Layerage parents = LayerManager.GetParentsChildren(destination);
+            if (parents.Children.Count < 2) return;
+
+            int index = parents.Children.IndexOf(destination);
+            index--;
+
+            if (index < 0) index = 0;
+            if (index > parents.Children.Count - 1) index = parents.Children.Count - 1;
+
+            parents.Children.Remove(destination);
+            parents.Children.Insert(index, destination);
+
+            LayerManager.ArrangeLayers();
+            this.ViewModel.Invalidate();//Invalidate
+        }
+        private void MoveFront()
+        {
+            if (this.Mode != ListViewSelectionMode.Single) return;
+
+            //History
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
+            this.ViewModel.HistoryPush(history);
+
+            Layerage destination = this.SelectionViewModel.SelectionLayerage;
+            Layerage parents = LayerManager.GetParentsChildren(destination);
+            if (parents.Children.Count < 2) return;
+
+            parents.Children.Remove(destination);
+            parents.Children.Insert(0, destination);
+
+            LayerManager.ArrangeLayers();
+            this.ViewModel.Invalidate();//Invalidate
         }
 
-        //Arrange
-        private void ConstructArrange()
-        {
-
-            this.Arrange_MoveBack.Click += (s, e) =>
-            {
-                if (this.Mode != ListViewSelectionMode.Single) return;
-
-                //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
-                this.ViewModel.HistoryPush(history);
-
-                Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                Layerage parents = LayerManager.GetParentsChildren(destination);
-                if (parents.Children.Count < 2) return;
-
-                parents.Children.Remove(destination);
-                parents.Children.Add(destination);
-
-                LayerManager.ArrangeLayers();
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
-            this.Arrange_BackOne.Click += (s, e) =>
-            {
-                if (this.Mode != ListViewSelectionMode.Single) return;
-
-                //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
-                this.ViewModel.HistoryPush(history);
-
-                Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                Layerage parents = LayerManager.GetParentsChildren(destination);
-                if (parents.Children.Count < 2) return;
-
-                int index = parents.Children.IndexOf(destination);
-                index++;
-
-                if (index < 0) index = 0;
-                if (index > parents.Children.Count - 1) index = parents.Children.Count - 1;
-
-                parents.Children.Remove(destination);
-                parents.Children.Insert(index, destination);
-
-                LayerManager.ArrangeLayers();
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
-            this.Arrange_ForwardOne.Click += (s, e) =>
-            {
-                if (this.Mode != ListViewSelectionMode.Single) return;
-
-                //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
-                this.ViewModel.HistoryPush(history);
-
-                Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                Layerage parents = LayerManager.GetParentsChildren(destination);
-                if (parents.Children.Count < 2) return;
-
-                int index = parents.Children.IndexOf(destination);
-                index--;
-
-                if (index < 0) index = 0;
-                if (index > parents.Children.Count - 1) index = parents.Children.Count - 1;
-
-                parents.Children.Remove(destination);
-                parents.Children.Insert(index, destination);
-
-                LayerManager.ArrangeLayers();
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
-            this.Arrange_MoveFront.Click += (s, e) =>
-            {
-                if (this.Mode != ListViewSelectionMode.Single) return;
-
-                //History
-                LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_LayersArrange);
-                this.ViewModel.HistoryPush(history);
-
-                Layerage destination = this.SelectionViewModel.SelectionLayerage;
-                Layerage parents = LayerManager.GetParentsChildren(destination);
-                if (parents.Children.Count < 2) return;
-
-                parents.Children.Remove(destination);
-                parents.Children.Insert(0, destination);
-
-                LayerManager.ArrangeLayers();
-                this.ViewModel.Invalidate();//Invalidate
-            };
-
-        }
-
-        //Horizontally
-        private void ConstructHorizontally()
-        {
-            this.Horizontally_Left.Click += (s, e) => this.TransformAlign(BorderMode.MinX, Orientation.Horizontal);
-            this.Horizontally_Center.Click += (s, e) => this.TransformAlign(BorderMode.CenterX, Orientation.Horizontal);
-            this.Horizontally_Right.Click += (s, e) => this.TransformAlign(BorderMode.MaxX, Orientation.Horizontal);
-            this.Horizontally_HorizontallySpace.Click += (s, e) => this.TransformSapce(Orientation.Horizontal);
-        }
-
-        //Vertical
-        private void ConstructVertically()
-        {
-            this.Vertically_Top.Click += (s, e) => this.TransformAlign(BorderMode.MinY, Orientation.Vertical);
-            this.Vertically_Middle.Click += (s, e) => this.TransformAlign(BorderMode.CenterY, Orientation.Vertical);
-            this.Vertically_Bottom.Click += (s, e) => this.TransformAlign(BorderMode.MaxY, Orientation.Vertical);
-            this.Vertically_VerticallySpace.Click += (s, e) => this.TransformSapce(Orientation.Vertical);
-        }
-
-    }
-
-    /// <summary>
-    /// MainPag of <see cref = "OperateMenu"/>.
-    /// </summary>
-    public sealed partial class OperateMenu : UserControl
-    {
 
         private void TransformAlign(BorderMode borderMode, Orientation orientation)
         {
@@ -322,10 +279,10 @@ namespace Retouch_Photo2.Menus
 
             this.ViewModel.Invalidate();//Invalidate}
         }
+    }
 
-
-        ///////////////////////////////
-
+    public sealed partial class OperateMenu : UserControl
+    {
 
         private void TransformSapce(Orientation orientation)
         {

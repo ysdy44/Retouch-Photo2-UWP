@@ -1,4 +1,5 @@
-﻿<UserControl
+﻿<UserControl 
+    x:Name="UserControl"
     x:Class="Retouch_Photo2.Menus.HistoryMenu"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -13,24 +14,23 @@
     >
 
     <ListView x:Name="ListView" SelectionMode="None" IsItemClickEnabled="True">
-
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="BorderThickness" Value="0,1,0,0"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
+            </Style>
+        </ListView.ItemContainerStyle>
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="historys:IHistory">
-                <menus:HistoryTextBlock Type="{x:Bind Type, Mode=OneTime}"/>
+                <menus:HistoryTextBlock Grid.Column="1" Type="{x:Bind Type, Mode=OneTime}" VerticalAlignment="Center" />
             </DataTemplate>
         </ListView.ItemTemplate>
-
         <ListView.ItemContainerTransitions>
-            <TransitionCollection>
-                <!--
-                        <AddDeleteThemeTransition />
-                        <ContentThemeTransition />
-                        <ReorderThemeTransition />
-                        <EntranceThemeTransition IsStaggeringEnabled="False" />
-                        -->
-            </TransitionCollection>
+            <TransitionCollection/>
         </ListView.ItemContainerTransitions>
-
     </ListView>
 
 </UserControl>

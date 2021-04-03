@@ -86,10 +86,6 @@ namespace Retouch_Photo2.Menus
             this.IsStrokeWidthFollowScaleCheckBox.Content = resource.GetString("Strokes_IsStrokeWidthFollowScale");
         }
 
-    }
-
-    public sealed partial class StrokeMenu : UserControl
-    {
 
         //Dash
         private void ConstructDash()

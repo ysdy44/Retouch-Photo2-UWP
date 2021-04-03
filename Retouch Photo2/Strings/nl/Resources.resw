@@ -644,6 +644,7 @@
 <data name='Layers_GeometryHeart' xml:space='preserve'><value>Hart</value></data>
 <data name='Menus_Edit' xml:space='preserve'><value>Bewerk</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>Beroerte</value></data>
+<data name='Menus_Close' xml:space='preserve'><value>Terug</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>Transformator</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>Breedte</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>Hoogte</value></data>
