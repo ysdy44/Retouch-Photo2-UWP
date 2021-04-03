@@ -8,16 +8,6 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
 
         //@Content
-        bool _alphaLock;
-        private bool AlphaDisable
-        {
-            set
-            {
-                this._alphaLock = true;
-                this.AlphaToggleSwitch.IsOn = !value;
-                this._alphaLock = false;
-            }
-        }
         private float AlphaOffset
         {
             set
@@ -47,14 +37,14 @@ namespace Retouch_Photo2.Adjustments.Pages
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets <see cref = "GammaTransferPage" />'s alpha visibility. </summary>
-        public Visibility AlphaIsExpaned
+        /// <summary> Gets or sets <see cref = "GammaTransferPage" />'s alpha IsEnabled. </summary>
+        public bool AlphaIsEnabled
         {
-            get => (Visibility)base.GetValue(AlphaIsExpanedProperty);
-            set => base.SetValue(AlphaIsExpanedProperty, value);
+            get => (bool)base.GetValue(AlphaIsEnabledProperty);
+            set => base.SetValue(AlphaIsEnabledProperty, value);
         }
         /// <summary> Identifies the <see cref = "GammaTransferPage.AlphaIsExpaned" /> dependency property. </summary>
-        public static readonly DependencyProperty AlphaIsExpanedProperty = DependencyProperty.Register(nameof(AlphaIsExpaned), typeof(Visibility), typeof(GammaTransferPage), new PropertyMetadata(Visibility.Collapsed));
+        public static readonly DependencyProperty AlphaIsEnabledProperty = DependencyProperty.Register(nameof(AlphaIsEnabled), typeof(bool), typeof(GammaTransferPage), new PropertyMetadata(false));
 
 
         #endregion
@@ -62,14 +52,14 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ResetAlpha()
         {
-            this.AlphaDisable = false;
+            this.AlphaIsEnabled = false;
             this.AlphaOffset = 0.0f;
             this.AlphaExponent = 1.0f;
             this.AlphaAmplitude = 1.0f;
         }
         private void FollowAlpha(GammaTransferAdjustment adjustment)
         {
-            this.AlphaDisable = adjustment.AlphaDisable;
+            this.AlphaIsEnabled = !adjustment.AlphaDisable;
             this.AlphaOffset = adjustment.AlphaOffset;
             this.AlphaExponent = adjustment.AlphaExponent;
             this.AlphaAmplitude = adjustment.AlphaAmplitude;
@@ -77,7 +67,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructStringsAlpha(string title, string offset, string exponent, string amplitude)
         {
-            this.AlphaTextBlock.Text = title;
+            this.AlphaCheckControl.Content = title;
             this.AlphaOffsetTextBlock.Text = offset;
             this.AlphaExponentTextBlock.Text = exponent;
             this.AlphaAmplitudeTextBlock.Text = amplitude;
@@ -87,17 +77,15 @@ namespace Retouch_Photo2.Adjustments.Pages
         //AlphaDisable
         private void ConstructAlphaDisable()
         {
-            this.AlphaTitleGrid.Tapped += (s, e) => this.AlphaIsExpaned = this.AlphaIsExpaned == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-            this.AlphaToggleSwitch.Toggled += (s, e) =>
+            this.AlphaCheckControl.Tapped += (s, e) =>
             {
-                if (this._alphaLock) return;
-                bool alphaDisable = !this.AlphaToggleSwitch.IsOn;
-                //this.AlphaDisable = alphaDisable;
+                bool disable = this.AlphaIsEnabled;
+                this.AlphaIsEnabled = !disable;
 
                 this.MethodViewModel.TAdjustmentChanged<bool, GammaTransferAdjustment>
                 (
                     index: this.Index,
-                    set: (tAdjustment) => tAdjustment.AlphaDisable = alphaDisable,
+                    set: (tAdjustment) => tAdjustment.AlphaDisable = disable,
 
                     type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_AlphaDisable,
                     getUndo: (tAdjustment) => tAdjustment.AlphaDisable,

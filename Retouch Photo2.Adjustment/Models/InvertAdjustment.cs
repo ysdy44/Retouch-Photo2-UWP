@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Adjustments.Models
         //@Content
         public AdjustmentType Type => AdjustmentType.Invert;
         public Visibility PageVisibility => Visibility.Collapsed;
-        public IAdjustmentPage Page { get; } = InvertAdjustment.GenericPage;
+        public IAdjustmentPage Page => InvertAdjustment.GenericPage;
         public ControlTemplate Icon => InvertAdjustment.GenericIcon;
         public string Title => InvertAdjustment.GenericText;
 

@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Adjustments.Models
         //@Content
         public AdjustmentType Type => AdjustmentType.Saturation;
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page { get; } = SaturationAdjustment.GenericPage;
+        public IAdjustmentPage Page => SaturationAdjustment.GenericPage;
         public ControlTemplate Icon => SaturationAdjustment.GenericIcon;
         public string Title => SaturationAdjustment.GenericText;
 

@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
 
         //@Converter
-        private string VisibilityToGlyphConverter(Visibility visibility) => visibility == Visibility.Visible ? "\xEDDC" : "\xEDDA";
+        private bool ReverseBoolConverter(bool value) => !value;
 
 
         //@Construct

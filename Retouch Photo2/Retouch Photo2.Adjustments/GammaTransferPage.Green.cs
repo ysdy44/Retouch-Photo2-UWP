@@ -8,16 +8,6 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
 
         //@Content
-        bool _greenLock;
-        private bool GreenDisable
-        {
-            set
-            {
-                this._greenLock = true;
-                this.GreenToggleSwitch.IsOn = !value;
-                this._greenLock = false;
-            }
-        }
         private float GreenOffset
         {
             set
@@ -47,14 +37,14 @@ namespace Retouch_Photo2.Adjustments.Pages
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets <see cref = "GammaTransferPage" />'s green visibility. </summary>
-        public Visibility GreenIsExpaned
+        /// <summary> Gets or sets <see cref = "GammaTransferPage" />'s green IsEnabled. </summary>
+        public bool GreenIsEnabled
         {
-            get => (Visibility)base.GetValue(GreenIsExpanedProperty);
-            set => base.SetValue(GreenIsExpanedProperty, value);
+            get => (bool)base.GetValue(GreenIsEnabledProperty);
+            set => base.SetValue(GreenIsEnabledProperty, value);
         }
-        /// <summary> Identifies the <see cref = "GammaTransferPage.GreenIsExpaned" /> dependency property. </summary>
-        public static readonly DependencyProperty GreenIsExpanedProperty = DependencyProperty.Register(nameof(GreenIsExpaned), typeof(Visibility), typeof(GammaTransferPage), new PropertyMetadata(Visibility.Collapsed));
+        /// <summary> Identifies the <see cref = "GammaTransferPage.GreenIsEnabled" /> dependency property. </summary>
+        public static readonly DependencyProperty GreenIsEnabledProperty = DependencyProperty.Register(nameof(GreenIsEnabled), typeof(bool), typeof(GammaTransferPage), new PropertyMetadata(false));
 
 
         #endregion
@@ -62,14 +52,14 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ResetGreen()
         {
-            this.GreenDisable = false;
+            this.GreenIsEnabled = false;
             this.GreenOffset = 0.0f;
             this.GreenExponent = 1.0f;
             this.GreenAmplitude = 1.0f;
         }
         private void FollowGreen(GammaTransferAdjustment adjustment)
         {
-            this.GreenDisable = adjustment.GreenDisable;
+            this.GreenIsEnabled = !adjustment.GreenDisable;
             this.GreenOffset = adjustment.GreenOffset;
             this.GreenExponent = adjustment.GreenExponent;
             this.GreenAmplitude = adjustment.GreenAmplitude;
@@ -77,7 +67,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructStringsGreen(string title, string offset, string exponent, string amplitude)
         {
-            this.GreenTextBlock.Text = title;
+            this.GreenCheckControl.Content = title;
             this.GreenOffsetTextBlock.Text = offset;
             this.GreenExponentTextBlock.Text = exponent;
             this.GreenAmplitudeTextBlock.Text = amplitude;
@@ -87,17 +77,15 @@ namespace Retouch_Photo2.Adjustments.Pages
         //GreenDisable
         private void ConstructGreenDisable()
         {
-            this.GreenTitleGrid.Tapped += (s, e) => this.GreenIsExpaned = this.GreenIsExpaned == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-            this.GreenToggleSwitch.Toggled += (s, e) =>
+            this.GreenCheckControl.Tapped += (s, e) =>
             {
-                if (this._greenLock) return;
-                bool greenDisable = !this.GreenToggleSwitch.IsOn;
-                //this.GreenDisable = greenDisable;
+                bool disable = this.GreenIsEnabled; 
+                this.GreenIsEnabled = !disable;
 
                 this.MethodViewModel.TAdjustmentChanged<bool, GammaTransferAdjustment>
                 (
                     index: this.Index,
-                    set: (tAdjustment) => tAdjustment.GreenDisable = greenDisable,
+                    set: (tAdjustment) => tAdjustment.GreenDisable = disable,
 
                     type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_GreenDisable,
                     getUndo: (tAdjustment) => tAdjustment.GreenDisable,

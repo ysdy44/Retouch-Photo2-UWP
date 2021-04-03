@@ -22,11 +22,11 @@ namespace Retouch_Photo2.Adjustments.Models
         public static string GenericText = "Contrast";
         public static ControlTemplate GenericIcon;
         public static IAdjustmentPage GenericPage;// = new ContrastPage();
-        
+
         //@Content
         public AdjustmentType Type => AdjustmentType.Contrast;
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page =>ContrastAdjustment.GenericPage;
+        public IAdjustmentPage Page => ContrastAdjustment.GenericPage;
         public ControlTemplate Icon => ContrastAdjustment.GenericIcon;
         public string Title => ContrastAdjustment.GenericText;
 

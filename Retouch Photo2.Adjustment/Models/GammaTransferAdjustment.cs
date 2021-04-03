@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Adjustments.Models
         //@Content
         public AdjustmentType Type => AdjustmentType.GammaTransfer;
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page { get; } = GammaTransferAdjustment.GenericPage;
+        public IAdjustmentPage Page => GammaTransferAdjustment.GenericPage;
         public ControlTemplate Icon => GammaTransferAdjustment.GenericIcon;
         public string Title => GammaTransferAdjustment.GenericText;
 

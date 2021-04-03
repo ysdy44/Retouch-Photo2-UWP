@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Adjustments.Models
         //@Content
         public AdjustmentType Type => AdjustmentType.HighlightsAndShadows;
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page { get; } = HighlightsAndShadowsAdjustment.GenericPage;
+        public IAdjustmentPage Page => HighlightsAndShadowsAdjustment.GenericPage;
         public ControlTemplate Icon => HighlightsAndShadowsAdjustment.GenericIcon;
         public string Title => HighlightsAndShadowsAdjustment.GenericText;
 

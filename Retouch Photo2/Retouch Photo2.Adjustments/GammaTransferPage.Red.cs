@@ -8,16 +8,6 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
 
         //@Content
-        bool _redLock;
-        private bool RedDisable
-        {
-            set
-            {
-                this._redLock = true;
-                this.RedToggleSwitch.IsOn = !value;
-                this._redLock = false;
-            }
-        }
         private float RedOffset
         {
             set
@@ -47,14 +37,14 @@ namespace Retouch_Photo2.Adjustments.Pages
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets <see cref = "GammaTransferPage" />'s red visibility. </summary>
-        public Visibility RedIsExpaned
+        /// <summary> Gets or sets <see cref = "GammaTransferPage" />'s red IsEnabled. </summary>
+        public bool RedIsEnabled
         {
-            get => (Visibility)base.GetValue(RedIsExpanedProperty);
-            set => base.SetValue(RedIsExpanedProperty, value);
+            get => (bool)base.GetValue(RedIsEnabledProperty);
+            set => base.SetValue(RedIsEnabledProperty, value);
         }
-        /// <summary> Identifies the <see cref = "GammaTransferPage.RedIsExpaned" /> dependency property. </summary>
-        public static readonly DependencyProperty RedIsExpanedProperty = DependencyProperty.Register(nameof(RedIsExpaned), typeof(Visibility), typeof(GammaTransferPage), new PropertyMetadata(Visibility.Collapsed));
+        /// <summary> Identifies the <see cref = "GammaTransferPage.RedIsEnabled" /> dependency property. </summary>
+        public static readonly DependencyProperty RedIsEnabledProperty = DependencyProperty.Register(nameof(RedIsEnabled), typeof(bool), typeof(GammaTransferPage), new PropertyMetadata(false));
 
 
         #endregion
@@ -62,14 +52,14 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ResetRed()
         {
-            this.RedDisable = false;
+            this.RedIsEnabled = true;
             this.RedOffset = 0.0f;
             this.RedExponent = 1.0f;
             this.RedAmplitude = 1.0f;
         }
         private void FollowRed(GammaTransferAdjustment adjustment)
         {
-            this.RedDisable = adjustment.RedDisable;
+            this.RedIsEnabled = !adjustment.RedDisable;
             this.RedOffset = adjustment.RedOffset;
             this.RedExponent = adjustment.RedExponent;
             this.RedAmplitude = adjustment.RedAmplitude;
@@ -77,7 +67,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructStringsRed(string title, string offset, string exponent, string amplitude)
         {
-            this.RedTextBlock.Text = title;
+            this.RedCheckControl.Content = title;
             this.RedOffsetTextBlock.Text = offset;
             this.RedExponentTextBlock.Text = exponent;
             this.RedAmplitudeTextBlock.Text = amplitude;
@@ -87,17 +77,15 @@ namespace Retouch_Photo2.Adjustments.Pages
         //RedDisable
         private void ConstructRedDisable()
         {
-            this.RedTitleGrid.Tapped += (s, e) => this.RedIsExpaned = this.RedIsExpaned == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-            this.RedToggleSwitch.Toggled += (s, e) =>
+            this.RedCheckControl.Tapped += (s, e) =>
             {
-                if (this._redLock) return;
-                bool redDisable = !this.RedToggleSwitch.IsOn;
-                //this.RedDisable = redDisable;
-
+                bool disable = this.RedIsEnabled;
+                this.RedIsEnabled = !disable;
+                
                 this.MethodViewModel.TAdjustmentChanged<bool, GammaTransferAdjustment>
                 (
                     index: this.Index,
-                    set: (tAdjustment) => tAdjustment.RedDisable = redDisable,
+                    set: (tAdjustment) => tAdjustment.RedDisable = disable,
 
                     type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_RedDisable,
                     getUndo: (tAdjustment) => tAdjustment.RedDisable,

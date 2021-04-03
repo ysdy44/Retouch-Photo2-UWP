@@ -8,16 +8,6 @@ namespace Retouch_Photo2.Adjustments.Pages
     {
 
         //@Content
-        bool _blueLock;
-        private bool BlueDisable
-        {
-            set
-            {
-                this._blueLock = true;
-                this.BlueToggleSwitch.IsOn = !value;
-                this._blueLock = false;
-            }
-        }
         private float BlueOffset
         {
             set
@@ -47,14 +37,14 @@ namespace Retouch_Photo2.Adjustments.Pages
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets <see cref = "GammaTransferPage" />'s blue visibility. </summary>
-        public Visibility BlueIsExpaned
+        /// <summary> Gets or sets <see cref = "GammaTransferPage" />'s blue IsEnabled. </summary>
+        public bool BlueIsEnabled
         {
-            get => (Visibility)base.GetValue(BlueIsExpanedProperty);
-            set => base.SetValue(BlueIsExpanedProperty, value);
+            get => (bool)base.GetValue(BlueIsEnabledProperty);
+            set => base.SetValue(BlueIsEnabledProperty, value);
         }
-        /// <summary> Identifies the <see cref = "GammaTransferPage.BlueIsExpaned" /> dependency property. </summary>
-        public static readonly DependencyProperty BlueIsExpanedProperty = DependencyProperty.Register(nameof(BlueIsExpaned), typeof(Visibility), typeof(GammaTransferPage), new PropertyMetadata(Visibility.Collapsed));
+        /// <summary> Identifies the <see cref = "GammaTransferPage.BlueIsEnabled" /> dependency property. </summary>
+        public static readonly DependencyProperty BlueIsEnabledProperty = DependencyProperty.Register(nameof(BlueIsEnabled), typeof(bool), typeof(GammaTransferPage), new PropertyMetadata(false));
 
 
         #endregion
@@ -62,14 +52,14 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ResetBlue()
         {
-            this.BlueDisable = false;
+            this.BlueIsEnabled = false;
             this.BlueOffset = 0.0f;
             this.BlueExponent = 1.0f;
             this.BlueAmplitude = 1.0f;
         }
         private void FollowBlue(GammaTransferAdjustment adjustment)
         {
-            this.BlueDisable = adjustment.BlueDisable;
+            this.BlueIsEnabled = !adjustment.BlueDisable;
             this.BlueOffset = adjustment.BlueOffset;
             this.BlueExponent = adjustment.BlueExponent;
             this.BlueAmplitude = adjustment.BlueAmplitude;
@@ -77,7 +67,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructStringsBlue(string title, string offset, string exponent, string amplitude)
         {
-            this.BlueTextBlock.Text = title;
+            this.BlueCheckControl.Content = title;
             this.BlueOffsetTextBlock.Text = offset;
             this.BlueExponentTextBlock.Text = exponent;
             this.BlueAmplitudeTextBlock.Text = amplitude;
@@ -87,17 +77,15 @@ namespace Retouch_Photo2.Adjustments.Pages
         //BlueDisable
         private void ConstructBlueDisable()
         {
-            this.BlueTitleGrid.Tapped += (s, e) => this.BlueIsExpaned = this.BlueIsExpaned == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-            this.BlueToggleSwitch.Toggled += (s, e) =>
+            this.BlueCheckControl.Tapped += (s, e) =>
             {
-                if (this._blueLock) return;
-                bool blueDisable = !this.BlueToggleSwitch.IsOn;
-                //this.BlueDisable = blueDisable;
+                bool disable = this.BlueIsEnabled;
+                this.BlueIsEnabled = !disable;
 
                 this.MethodViewModel.TAdjustmentChanged<bool, GammaTransferAdjustment>
                 (
                     index: this.Index,
-                    set: (tAdjustment) => tAdjustment.BlueDisable = blueDisable,
+                    set: (tAdjustment) => tAdjustment.BlueDisable = disable,
 
                     type: HistoryType.LayersProperty_SetAdjustment_GammaTransfer_BlueDisable,
                     getUndo: (tAdjustment) => tAdjustment.BlueDisable,

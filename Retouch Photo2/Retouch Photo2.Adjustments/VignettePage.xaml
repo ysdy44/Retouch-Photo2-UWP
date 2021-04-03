@@ -6,9 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPickers="using:HSVColorPickers"
     xmlns:elements="using:Retouch_Photo2.Elements"
-    mc:Ignorable="d"              
-    MinHeight="165" 
-    MaxHeight="300"
+    mc:Ignorable="d"
     d:DesignHeight="400"
     d:DesignWidth="200"
     >

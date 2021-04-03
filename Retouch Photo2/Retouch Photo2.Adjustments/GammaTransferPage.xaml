@@ -4,10 +4,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:hsvColorPickers="using:HSVColorPickers"
-    mc:Ignorable="d"              
-    MinHeight="165" 
-    MaxHeight="300"
+    xmlns:hsvColorPickers="using:HSVColorPickers" xmlns:elements="using:Retouch_Photo2.Elements"
+    mc:Ignorable="d"
     d:DesignHeight="400"
     d:DesignWidth="200"
     >
@@ -97,182 +95,140 @@
             </Border>
 
             <!--Alpha-->
-            <Grid x:Name="AlphaTitleGrid" Background="{ThemeResource AppForeground}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="50"/>
-                </Grid.ColumnDefinitions>
-                <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
-                          HorizontalAlignment="Center" VerticalAlignment="Center"
-                          Glyph="{x:Bind VisibilityToGlyphConverter(AlphaIsExpaned), Mode=OneWay}"/>
-                <TextBlock x:Name="AlphaTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>
-                <ToggleSwitch x:Name="AlphaToggleSwitch" Grid.Column="2">
-                    <ToggleSwitch.Clip>
-                        <RectangleGeometry Rect="0,0,50,50"/>
-                    </ToggleSwitch.Clip>
-                </ToggleSwitch>
-            </Grid>
+            <Border BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppBorderBrush}">
+                <elements:CheckControl x:Name="AlphaCheckControl" IsChecked="{x:Bind AlphaIsEnabled, Mode=OneWay}"/>
+            </Border>
 
 
-            <RelativePanel Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}">
+            <RelativePanel>
                 <TextBlock x:Name="AlphaOffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <hsvColorPickers:NumberPicker x:Name="AlphaOffsetPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
+                         IsEnabled="{x:Bind AlphaIsEnabled, Mode=OneWay}"
+                         RelativePanel.AlignRightWithPanel="True"/>
             </RelativePanel>
-            <hsvColorPickers:TouchSlider x:Name="AlphaOffsetSlider" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}" />
+            <hsvColorPickers:TouchSlider x:Name="AlphaOffsetSlider" IsEnabled="{x:Bind AlphaIsEnabled, Mode=OneWay}" />
 
 
-            <RelativePanel Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}">
+            <RelativePanel>
                 <TextBlock x:Name="AlphaExponentTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <hsvColorPickers:NumberPicker x:Name="AlphaExponentPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           IsEnabled="{x:Bind AlphaIsEnabled, Mode=OneWay}"
                            RelativePanel.AlignRightWithPanel="True"/>
             </RelativePanel>
-            <hsvColorPickers:TouchSlider x:Name="AlphaExponentSlider" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}"/>
+            <hsvColorPickers:TouchSlider x:Name="AlphaExponentSlider" IsEnabled="{x:Bind AlphaIsEnabled, Mode=OneWay}"/>
 
 
-            <RelativePanel Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}">
+            <RelativePanel>
                 <TextBlock x:Name="AlphaAmplitudeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <hsvColorPickers:NumberPicker x:Name="AlphaAmplitudePicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                           IsEnabled="{x:Bind AlphaIsEnabled, Mode=OneWay}"
                            RelativePanel.AlignRightWithPanel="True"/>
             </RelativePanel>
-            <hsvColorPickers:TouchSlider x:Name="AlphaAmplitudeSlider" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}"/>
+            <hsvColorPickers:TouchSlider x:Name="AlphaAmplitudeSlider" IsEnabled="{x:Bind AlphaIsEnabled, Mode=OneWay}"/>
 
-            
-            <ContentControl Height="12" Visibility="{x:Bind AlphaIsExpaned, Mode=OneWay}"/>
-            <ContentControl Height="1"/>
+
+            <ContentControl Height="12"/>
 
 
             <!--Red-->
-            <Grid x:Name="RedTitleGrid" Background="{ThemeResource AppForeground}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="50"/>
-                </Grid.ColumnDefinitions>
-                <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
-                          HorizontalAlignment="Center" VerticalAlignment="Center"
-                          Glyph="{x:Bind VisibilityToGlyphConverter(RedIsExpaned), Mode=OneWay}"/>
-                <TextBlock x:Name="RedTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>
-                <ToggleSwitch x:Name="RedToggleSwitch" Grid.Column="2">
-                    <ToggleSwitch.Clip>
-                        <RectangleGeometry Rect="0,0,50,50"/>
-                    </ToggleSwitch.Clip>
-                </ToggleSwitch>
-            </Grid>
+            <Border BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppBorderBrush}">
+                <elements:CheckControl x:Name="RedCheckControl" IsChecked="{x:Bind RedIsEnabled, Mode=OneWay}"/>
+            </Border>
 
 
-            <RelativePanel Visibility="{x:Bind RedIsExpaned, Mode=OneWay}">
+            <RelativePanel>
                 <TextBlock x:Name="RedOffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <hsvColorPickers:NumberPicker x:Name="RedOffsetPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
+                         IsEnabled="{x:Bind RedIsEnabled, Mode=OneWay}"
+                         RelativePanel.AlignRightWithPanel="True"/>
             </RelativePanel>
-            <hsvColorPickers:TouchSlider x:Name="RedOffsetSlider" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}" />
+            <hsvColorPickers:TouchSlider x:Name="RedOffsetSlider" IsEnabled="{x:Bind RedIsEnabled, Mode=OneWay}" />
 
-            <RelativePanel Visibility="{x:Bind RedIsExpaned, Mode=OneWay}">
+            <RelativePanel>
                 <TextBlock x:Name="RedExponentTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <hsvColorPickers:NumberPicker x:Name="RedExponentPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
+                         IsEnabled="{x:Bind RedIsEnabled, Mode=OneWay}"
+                         RelativePanel.AlignRightWithPanel="True"/>
             </RelativePanel>
-            <hsvColorPickers:TouchSlider x:Name="RedExponentSlider" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}"/>
+            <hsvColorPickers:TouchSlider x:Name="RedExponentSlider" IsEnabled="{x:Bind RedIsEnabled, Mode=OneWay}"/>
 
-            <RelativePanel Visibility="{x:Bind RedIsExpaned, Mode=OneWay}">
+            <RelativePanel>
                 <TextBlock x:Name="RedAmplitudeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <hsvColorPickers:NumberPicker x:Name="RedAmplitudePicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
+                         IsEnabled="{x:Bind RedIsEnabled, Mode=OneWay}"
+                         RelativePanel.AlignRightWithPanel="True"/>
             </RelativePanel>
-            <hsvColorPickers:TouchSlider x:Name="RedAmplitudeSlider" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}"/>
+            <hsvColorPickers:TouchSlider x:Name="RedAmplitudeSlider" IsEnabled="{x:Bind RedIsEnabled, Mode=OneWay}"/>
 
 
-            <ContentControl Height="12" Visibility="{x:Bind RedIsExpaned, Mode=OneWay}"/>
-            <ContentControl Height="1"/>
+            <ContentControl Height="12"/>
 
 
             <!--Green-->
-            <Grid x:Name="GreenTitleGrid" Background="{ThemeResource AppForeground}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="50"/>
-                </Grid.ColumnDefinitions>
-                <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
-                          HorizontalAlignment="Center" VerticalAlignment="Center"
-                          Glyph="{x:Bind VisibilityToGlyphConverter(GreenIsExpaned), Mode=OneWay}"/>
-                <TextBlock x:Name="GreenTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>
-                <ToggleSwitch x:Name="GreenToggleSwitch" Grid.Column="2">
-                    <ToggleSwitch.Clip>
-                        <RectangleGeometry Rect="0,0,50,50"/>
-                    </ToggleSwitch.Clip>
-                </ToggleSwitch>
-            </Grid>
+            <Border BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppBorderBrush}">
+                <elements:CheckControl x:Name="GreenCheckControl" IsChecked="{x:Bind GreenIsEnabled, Mode=OneWay}"/>
+            </Border>
 
-            <RelativePanel Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}">
+            <RelativePanel>
                 <TextBlock x:Name="GreenOffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <hsvColorPickers:NumberPicker x:Name="GreenOffsetPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
+                          IsEnabled="{x:Bind GreenIsEnabled, Mode=OneWay}"
+                          RelativePanel.AlignRightWithPanel="True"/>
             </RelativePanel>
-            <hsvColorPickers:TouchSlider x:Name="GreenOffsetSlider" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}" />
+            <hsvColorPickers:TouchSlider x:Name="GreenOffsetSlider" IsEnabled="{x:Bind GreenIsEnabled, Mode=OneWay}" />
 
-            <RelativePanel Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}">
+            <RelativePanel>
                 <TextBlock x:Name="GreenExponentTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <hsvColorPickers:NumberPicker x:Name="GreenExponentPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
+                          IsEnabled="{x:Bind GreenIsEnabled, Mode=OneWay}"
+                          RelativePanel.AlignRightWithPanel="True"/>
             </RelativePanel>
-            <hsvColorPickers:TouchSlider x:Name="GreenExponentSlider" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}"/>
+            <hsvColorPickers:TouchSlider x:Name="GreenExponentSlider" IsEnabled="{x:Bind GreenIsEnabled, Mode=OneWay}"/>
 
-            <RelativePanel Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}">
+            <RelativePanel>
                 <TextBlock x:Name="GreenAmplitudeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <hsvColorPickers:NumberPicker x:Name="GreenAmplitudePicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
+                          IsEnabled="{x:Bind GreenIsEnabled, Mode=OneWay}"
+                          RelativePanel.AlignRightWithPanel="True"/>
             </RelativePanel>
-            <hsvColorPickers:TouchSlider x:Name="GreenAmplitudeSlider" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}"/>
+            <hsvColorPickers:TouchSlider x:Name="GreenAmplitudeSlider" IsEnabled="{x:Bind GreenIsEnabled, Mode=OneWay}"/>
 
 
-            <ContentControl Height="12" Visibility="{x:Bind GreenIsExpaned, Mode=OneWay}"/>
-            <ContentControl Height="1"/>
+            <ContentControl Height="12"/>
+
 
 
             <!--Blue-->
-            <Grid x:Name="BlueTitleGrid" Background="{ThemeResource AppForeground}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="50"/>
-                </Grid.ColumnDefinitions>
-                <FontIcon FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
-                          HorizontalAlignment="Center" VerticalAlignment="Center"
-                          Glyph="{x:Bind VisibilityToGlyphConverter(BlueIsExpaned), Mode=OneWay}"/>
-                <TextBlock x:Name="BlueTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>
-                <ToggleSwitch x:Name="BlueToggleSwitch" Grid.Column="2">
-                    <ToggleSwitch.Clip>
-                        <RectangleGeometry Rect="0,0,50,50"/>
-                    </ToggleSwitch.Clip>
-                </ToggleSwitch>
-            </Grid>
+            <Border BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppBorderBrush}">
+                <elements:CheckControl x:Name="BlueCheckControl" IsChecked="{x:Bind BlueIsEnabled, Mode=OneWay}"/>
+            </Border>
 
-            <RelativePanel Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}">
+            <RelativePanel>
                 <TextBlock x:Name="BlueOffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <hsvColorPickers:NumberPicker x:Name="BlueOffsetPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
+                          IsEnabled="{x:Bind BlueIsEnabled, Mode=OneWay}"
+                          RelativePanel.AlignRightWithPanel="True"/>
             </RelativePanel>
-            <hsvColorPickers:TouchSlider x:Name="BlueOffsetSlider" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}" />
+            <hsvColorPickers:TouchSlider x:Name="BlueOffsetSlider" IsEnabled="{x:Bind BlueIsEnabled, Mode=OneWay}" />
 
-            <RelativePanel Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}">
+            <RelativePanel>
                 <TextBlock x:Name="BlueExponentTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <hsvColorPickers:NumberPicker x:Name="BlueExponentPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
+                          IsEnabled="{x:Bind BlueIsEnabled, Mode=OneWay}"
+                          RelativePanel.AlignRightWithPanel="True"/>
             </RelativePanel>
-            <hsvColorPickers:TouchSlider x:Name="BlueExponentSlider" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}"/>
+            <hsvColorPickers:TouchSlider x:Name="BlueExponentSlider" IsEnabled="{x:Bind BlueIsEnabled, Mode=OneWay}"/>
 
-            <RelativePanel Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}">
+            <RelativePanel>
                 <TextBlock x:Name="BlueAmplitudeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <hsvColorPickers:NumberPicker x:Name="BlueAmplitudePicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
+                          IsEnabled="{x:Bind BlueIsEnabled, Mode=OneWay}"
+                          RelativePanel.AlignRightWithPanel="True"/>
             </RelativePanel>
-            <hsvColorPickers:TouchSlider x:Name="BlueAmplitudeSlider" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}"/>
+            <hsvColorPickers:TouchSlider x:Name="BlueAmplitudeSlider" IsEnabled="{x:Bind BlueIsEnabled, Mode=OneWay}"/>
 
-            
-            <ContentControl Height="12" Visibility="{x:Bind BlueIsExpaned, Mode=OneWay}"/>
+
+            <ContentControl Height="12"/>
 
 
         </StackPanel>

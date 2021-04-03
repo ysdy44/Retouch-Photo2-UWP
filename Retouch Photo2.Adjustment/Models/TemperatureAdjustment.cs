@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Adjustments.Models
         //@Content
         public AdjustmentType Type => AdjustmentType.Temperature;
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page { get; } = TemperatureAdjustment.GenericPage;
+        public IAdjustmentPage Page => TemperatureAdjustment.GenericPage;
         public ControlTemplate Icon => TemperatureAdjustment.GenericIcon;
         public string Title => TemperatureAdjustment.GenericText;
 
