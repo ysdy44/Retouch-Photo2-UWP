@@ -19,10 +19,12 @@ namespace Retouch_Photo2.ViewModels
         /// <summary>
         /// Initializes the all settings.
         /// </summary>
-        public void ConstructSetting(Setting setting, IEnumerable<MenuViewModel> menus)
+        public void ConstructSetting(Setting setting)
         {
-            if (setting == null) return;
-            this.Setting = setting;
+            if (setting != null)
+            {
+                this.Setting = setting;
+            }
 
             //Theme
             this.ConstructTheme();
@@ -36,9 +38,6 @@ namespace Retouch_Photo2.ViewModels
 
             //DeviceLayout
             this.ConstructLayersHeight();
-
-            //MenuType
-            this.ConstructMenuType(menus);
         }
 
 
@@ -81,19 +80,6 @@ namespace Retouch_Photo2.ViewModels
         public void ConstructLayersHeight()
         {
             LayerManager.ControlsHeight = this.Setting.LayersHeight;
-        }
-
-        //@Construct
-        /// <summary>
-        /// Initializes the menu-type.
-        /// </summary>
-        public void ConstructMenuType(IEnumerable<MenuViewModel> menus)
-        {
-            foreach (MenuViewModel menu in menus)
-            {
-                bool isVisible = this.Setting.MenuTypes.Any(m => m == menu.Type);
-                menu.ButtonVisibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
-            }
         }
 
     }

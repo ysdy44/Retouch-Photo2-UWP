@@ -57,7 +57,6 @@ namespace Retouch_Photo2
         {
             //Setting
             this.SettingViewModel.Setting.MenuTypes.Add(type);
-            this.SettingViewModel.ConstructMenuType(this.TipViewModel.Menus);
             await this.Save();
         }
 
@@ -69,7 +68,6 @@ namespace Retouch_Photo2
                 this.SettingViewModel.Setting.MenuTypes.Remove(type);
             }
             while (this.SettingViewModel.Setting.MenuTypes.Contains(type));
-            this.SettingViewModel.ConstructMenuType(this.TipViewModel.Menus);
             await this.Save();
         }
 

@@ -26,7 +26,6 @@ namespace Retouch_Photo2
         }
 
         //Strings
-        public IList<Action<ResourceLoader>> MenuStringsChanged = new List<Action<ResourceLoader>>();
         public IList<Action<ResourceLoader>> KeyStringsChanged = new List<Action<ResourceLoader>>();
         public IList<Action<ResourceLoader>> CanvasBackgroundChanged = new List<Action<ResourceLoader>>();
         public IList<Action<ResourceLoader>> LanguageStringsChanged = new List<Action<ResourceLoader>>();
@@ -88,7 +87,16 @@ namespace Retouch_Photo2
             this.LayersHeightTipTextBlock.Text = resource.GetString("$SettingPage_LayersHeightTip");
 
             this.MenuTypeTextBlock.Text = resource.GetString("$SettingPage_MenuType");
-            foreach (var item in this.MenuStringsChanged) item(resource);
+            {
+                foreach (UIElement child in this.MenusStackPanel.Children)
+                {
+                    if (child is Border border && border.Child is CheckBox check)
+                    {
+                        string type = check.Name;
+                        check.Content = resource.GetString($"Menus_{type}");
+                    }
+                }
+            }
             this.MenuTypeTipTextBlock.Text = resource.GetString("$SettingPage_MenuTypeTip");
 
             this.KeyTextBlock.Text = resource.GetString("$SettingPage_Key");
@@ -228,7 +236,7 @@ namespace Retouch_Photo2
             byte? cannnel = this.SettingViewModel.Setting.CanvasBaclground;
 
             //UIElementCollection 
-            this.MenuStringsChanged.Clear();
+            this.CanvasBackgroundChanged.Clear();
             this.CanvasBackgroundStackPanel.Children.Clear();
             this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(0, cannnel));
             this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(46, cannnel));
@@ -254,13 +262,13 @@ namespace Retouch_Photo2
                     radioButton.Content = value;
                     radioButton.Tag = new ColorEllipse
                     {
-                        Color = Color.FromArgb(255, cannel, cannel, cannel)
+                        Color = Windows.UI.Color.FromArgb(255, cannel, cannel, cannel)
                     };
                 }
                 else
                 {
                     //Strings
-                    this.MenuStringsChanged.Add((resource) => radioButton.Content = resource.GetString("$SettingPage_CanvasBackground_None"));
+                    this.CanvasBackgroundChanged.Add((resource) => radioButton.Content = resource.GetString("$SettingPage_CanvasBackground_None"));
 
                     radioButton.Tag = new ColorEllipse
                     {
@@ -316,42 +324,18 @@ namespace Retouch_Photo2
         //MenuType
         private void ConstructMenuType()
         {
-            //Style
-            int index = 0;
-            Style getStyle() => ((index++) % 2 == 0) ? this.MenuBorderStyle2 : this.MenuBorderStyle1;
-
-            //MenuTypes
-            IList<string> menuTypes = this.SettingViewModel.Setting.MenuTypes;
-
             //UIElementCollection 
-            this.MenuStringsChanged.Clear();
-            this.MenusStackPanel.Children.Clear();
-            foreach (MenuViewModel menu in this.TipViewModel.Menus)
+            foreach (UIElement child in this.MenusStackPanel.Children)
             {
-                this.MenusStackPanel.Children.Add(new Border
+                if (child is Border border && border.Child is CheckBox check)
                 {
-                    Child = constructMenuTypeCheckBox(menu, menuTypes),
-                    Style = getStyle()
-                });
-            }
+                    string type = check.Name;
+                    bool isContains = this.SettingViewModel.Setting.MenuTypes.Contains(type);
 
-            //Construct
-            CheckBox constructMenuTypeCheckBox(MenuViewModel menu, IList<string> menuTypes2)
-            {
-                string type = menu.Type;
-                bool isContains = menuTypes2.Contains(type);
-
-                CheckBox checkBox = new CheckBox
-                {
-                    IsChecked = isContains
-                };
-                checkBox.Checked += async (s, e) => await this.AddMenu(type);
-                checkBox.Unchecked += async (s, e) => await this.RemoveMenu(type);
-
-                //Strings
-                this.MenuStringsChanged.Add((resource) => checkBox.Content = resource.GetString($"Menus_{type}"));
-
-                return checkBox;
+                    check.IsChecked = isContains;
+                    check.Checked += async (s, e) => await this.AddMenu(type);
+                    check.Unchecked += async (s, e) => await this.RemoveMenu(type);
+                }
             }
         }
 
@@ -397,9 +381,6 @@ namespace Retouch_Photo2
                     Tag = key.ToString(),
                     Style = getStyle2()
                 };
-
-                //Strings
-                this.MenuStringsChanged.Add((resource) => contentControl.Content = resource.GetString(titleResource));
 
                 return contentControl;
             }

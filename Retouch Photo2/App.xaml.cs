@@ -343,7 +343,7 @@ namespace Retouch_Photo2
                 {
                     //Setting
                     Setting setting = await XML.ConstructSettingFile();
-                    App.SettingViewModel.ConstructSetting(setting, App.TipViewModel.Menus);
+                    App.SettingViewModel.ConstructSetting(setting);
 
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation

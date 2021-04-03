@@ -252,7 +252,7 @@
             </Setter>
         </Style>
 
-        <Style x:Name="MenuBorderStyle1" TargetType="Border">
+        <Style x:Name="MenuBorderStyle1"  TargetType="Border">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="Height" Value="44"/>
             <Setter Property="Padding" Value="12,0"/>
@@ -347,7 +347,7 @@
                         <ContentControl Height="12"/>
 
 
-                        <!--DeviceLayoutT-->
+                        <!--DeviceLayout-->
                         <TextBlock x:Name="DeviceLayoutTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                         <Border Height="Auto" HorizontalAlignment="Left" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
@@ -422,6 +422,43 @@
                         <TextBlock x:Name="MenuTypeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
                         <Border Height="Auto" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel x:Name="MenusStackPanel">
+                                <Border Style="{StaticResource MenuBorderStyle1}">
+                                    <CheckBox x:Name="Edit"/>
+                                </Border>
+                                <Border Style="{StaticResource MenuBorderStyle2}">
+                                    <CheckBox x:Name="Operate"/>
+                                </Border>
+
+                                <Border Style="{StaticResource MenuBorderStyle1}">
+                                    <CheckBox x:Name="Adjustment"/>
+                                </Border>
+                                <Border Style="{StaticResource MenuBorderStyle2}">
+                                    <CheckBox x:Name="EffectExpander"/>
+                                </Border>
+
+                                <Border Style="{StaticResource MenuBorderStyle1}">
+                                    <CheckBox x:Name="Text"/>
+                                </Border>
+                                <Border Style="{StaticResource MenuBorderStyle2}">
+                                    <CheckBox x:Name="Stroke"/>
+                                </Border>
+                                <Border Style="{StaticResource MenuBorderStyle1}">
+                                    <CheckBox x:Name="Style"/>
+                                </Border>
+
+                                <Border Style="{StaticResource MenuBorderStyle2}">
+                                    <CheckBox x:Name="History"/>
+                                </Border>
+                                <Border Style="{StaticResource MenuBorderStyle1}">
+                                    <CheckBox x:Name="Transformer"/>
+                                </Border>
+                                <Border Style="{StaticResource MenuBorderStyle2}">
+                                    <CheckBox x:Name="Layer"/>
+                                </Border>
+
+                                <Border Style="{StaticResource MenuBorderStyle1}">
+                                    <CheckBox x:Name="Color"/>
+                                </Border>
                             </StackPanel>
                         </Border>
                         <TextBlock x:Name="MenuTypeTipTextBlock" Margin="0,8" Style="{StaticResource AppTextBlockStyle}"/>
