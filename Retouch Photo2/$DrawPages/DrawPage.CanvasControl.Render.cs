@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.ViewModels;
 using System;
 using System.Numerics;
 using Windows.Graphics.Imaging;
@@ -13,6 +14,33 @@ namespace Retouch_Photo2
     public sealed partial class DrawPage : Page
     {
 
+
+        //CanvasControl
+        private void CanvasControlInvalidate(InvalidateMode mode)
+        {
+            //High-Display screen
+            if (this.LayerRenderCanvasControl.Dpi > 96.0f)
+            {
+                switch (mode)
+                {
+                    case InvalidateMode.Thumbnail:
+                        float dpiScale = 96.0f / this.LayerRenderCanvasControl.Dpi;
+                        if (dpiScale < 0.4f) dpiScale = 0.4f;
+                        if (dpiScale > 1.0f) dpiScale = 1.0f;
+
+                        this.LayerRenderCanvasControl.DpiScale = dpiScale;
+                        break;
+                    case InvalidateMode.HD:
+                        this.LayerRenderCanvasControl.DpiScale = 1.0f;
+                        break;
+                }
+            }
+
+            this.LayerRenderCanvasControl.Invalidate();
+            this.ToolDrawCanvasControl.Invalidate();
+        }
+
+
         /// <summary>
         /// Render.
         /// </summary>
@@ -23,13 +51,13 @@ namespace Retouch_Photo2
         }
 
 
-        private void _drawRenderAndCrad(CanvasDrawingSession drawingSession)
+        private void DrawRenderAndCrad(CanvasDrawingSession drawingSession)
         {
             drawingSession.DrawCard(new ColorSourceEffect
             {
-                Color = Colors.White 
-            }, 
-            this.ViewModel.CanvasTransformer, 
+                Color = Colors.White
+            },
+            this.ViewModel.CanvasTransformer,
             this.ShadowColor);
 
             ICanvasImage canvasImage = this.Render();

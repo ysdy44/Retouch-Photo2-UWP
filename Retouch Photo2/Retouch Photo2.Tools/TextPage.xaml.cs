@@ -70,6 +70,8 @@ namespace Retouch_Photo2.Tools
             this.IconContentControl.Template = this.ResourceDictionary[$"{toolType}Icon"] as ControlTemplate;
             this.ConstructStrings(toolType);
 
+            this.TextButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowTextFlyout?.Invoke(this.TextButton);
+
             //@Focus
             // Before Flyout Showed, Don't let TextBox Got Focus.
             // After TextBox Gots focus, disable Shortcuts in SettingViewModel.

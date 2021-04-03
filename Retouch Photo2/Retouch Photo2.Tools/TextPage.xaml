@@ -73,12 +73,12 @@
                  Text="{x:Bind SelectionViewModel.FontText, Mode=OneWay}"/>
 
 
-        <elements:ExpanderButton x:Name="TextButton" Grid.Column="0" Grid.Row="1" Width="Auto" Visibility2="{x:Bind TipViewModel.Menus[4].Visibility, Mode=TwoWay}" Left="{x:Bind TipViewModel.Menus[4].Left, Mode=TwoWay}" Top="{x:Bind TipViewModel.Menus[4].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[4].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[4].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}" PlacementMode="Top">
+        <Button x:Name="TextButton" Grid.Column="0" Grid.Row="1" Width="Auto" Style="{StaticResource AppRoundedButtonStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="TextToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <texts:Icon/>
-        </elements:ExpanderButton>
+        </Button>
 
         <Button x:Name="FullScreenButton" Grid.Column="2" Grid.Row="1" Style="{StaticResource AppRoundedButtonStyle}">
             <ToolTipService.ToolTip>

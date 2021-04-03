@@ -35,12 +35,12 @@
         
         <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <elements:ExpanderButton Grid.Column="2" Width="Auto"  Visibility2="{x:Bind TipViewModel.Menus[1].Visibility, Mode=TwoWay}" Left="{x:Bind TipViewModel.Menus[1].Left, Mode=TwoWay}" Top="{x:Bind TipViewModel.Menus[1].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[1].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[1].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}" PlacementMode="Top">
+        <Button x:Name="OperateButton" Grid.Column="2" Width="Auto" Style="{StaticResource AppRoundedButtonStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="OperateToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <operates:Icon/>
-        </elements:ExpanderButton>
+        </Button>
         
         <Rectangle Grid.Column="3" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 

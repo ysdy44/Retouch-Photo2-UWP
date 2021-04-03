@@ -261,6 +261,8 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
+            this.OperateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowOperateFlyout?.Invoke(this.OperateButton);
+
             this.MoreTransformButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreTransform?.Invoke(this, this.MoreTransformButton);
         }
 

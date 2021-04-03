@@ -222,10 +222,6 @@
                         <Setter Target = "FootPanel.CornerRadius" Value="6"/>
                         <Setter Target = "FootPanel.Margin" Value="0,10"/>
 
-                        <!--Foot-->
-                        <Setter Target = "FootPanel.(Grid.Column)" Value="0"/>
-                        <Setter Target = "FootPanel.(Grid.ColumnSpan)" Value="3"/>
-
                         <!--Head-->
                         <Setter Target = "HeadBorder.(Grid.Column)" Value="0"/>
                         <Setter Target = "HeadBorder.(Grid.ColumnSpan)" Value="2"/>
@@ -1022,6 +1018,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -1148,6 +1145,10 @@
         <Border Grid.Column="1" Grid.Row="1" BorderThickness="1" BorderBrush="Red"/>
         <Border Grid.Column="2" Grid.Row="1" BorderThickness="1" BorderBrush="Red"/>
             -->
+
+        <StackPanel x:Name="_PinStackPanel" Grid.Column="3" Grid.RowSpan="2" Orientation="Horizontal"
+                         apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                         apiContractPresent5:Background="{ThemeResource AppAcrylicWindowBrush}"/>
 
     </Grid>
 </UserControl>

@@ -26,7 +26,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     >
-    
+
 
     <Page.Transitions>
         <TransitionCollection>
@@ -52,11 +52,11 @@
                 </Button>
             </Flyout>
 
-            <Flyout x:Name="FillFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <elements:ColorPicker2 x:Name="FilPicker"/>
+            <Flyout x:Name="FillColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <elements:ColorPicker2 x:Name="FilColorPicker"/>
             </Flyout>
-            <Flyout x:Name="StrokeFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <elements:ColorPicker2 x:Name="StrokePicker"/>
+            <Flyout x:Name="StrokeColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
             </Flyout>
 
             <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
@@ -161,7 +161,7 @@
 
                     <!--Left-->
                     <StackPanel x:Name="LeftStackPanel" Grid.Column="1" Orientation="Horizontal">
-                        <Button x:Name="ExportButton" Foreground="Black" Background="#FFC003" Style="{StaticResource AppRoundedButtonStyle}">
+                        <Button x:Name="ExportButton" Foreground="Black" Background="#FFC003" Width="50" Style="{StaticResource AppRoundedButtonStyle}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="ExportToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
@@ -273,76 +273,178 @@
                     <ScrollViewer x:Name="RightScrollViewer" Grid.Column="3" HorizontalAlignment="Right" Style="{StaticResource AppHorizontalScrollViewerStyle}">
                         <StackPanel x:Name="ExpanderButtonsStackPanel" Orientation="Horizontal">
 
-                            <elements:ExpanderButton Visibility="{x:Bind TipViewModel.Menus[0].ButtonVisibility, Mode=OneWay}" Visibility2="{x:Bind TipViewModel.Menus[0].Visibility, Mode=TwoWay}" Left="{x:Bind TipViewModel.Menus[0].Left, Mode=TwoWay}" Top="{x:Bind TipViewModel.Menus[0].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[0].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[0].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
+                            <Button Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+                                <Button.Flyout>
+                                    <Flyout x:Name="EditFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                                        <elements:Expander x:Name="EditExpander" Flyout="{x:Bind EditFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                                            <menus:EditMenu/>
+                                        </elements:Expander>
+                                    </Flyout>
+                                </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind TipViewModel.Menus[0].Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.Menus[0].IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <edits:Icon/>
-                            </elements:ExpanderButton>
-                            <elements:ExpanderButton Visibility="{x:Bind TipViewModel.Menus[1].ButtonVisibility, Mode=OneWay}" Visibility2="{x:Bind TipViewModel.Menus[1].Visibility, Mode=TwoWay}" Left="{x:Bind TipViewModel.Menus[1].Left, Mode=TwoWay}" Top="{x:Bind TipViewModel.Menus[1].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[1].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[1].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
+                            </Button>
+                            <Button Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+                                <Button.Flyout>
+                                    <Flyout x:Name="OperateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                                        <elements:Expander x:Name="OperateExpander" Flyout="{x:Bind OperateFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                                            <menus:OperateMenu/>
+                                        </elements:Expander>
+                                    </Flyout>
+                                </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind TipViewModel.Menus[1].Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.Menus[1].IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <operates:Icon/>
-                            </elements:ExpanderButton>
+                            </Button>
 
-                            <elements:ExpanderButton Visibility="{x:Bind TipViewModel.Menus[2].ButtonVisibility, Mode=OneWay}" Visibility2="{x:Bind TipViewModel.Menus[2].Visibility, Mode=TwoWay}" Left="{x:Bind TipViewModel.Menus[2].Left, Mode=TwoWay}" Top="{x:Bind TipViewModel.Menus[2].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[2].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[2].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
+                            <Button Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+                                <Button.Flyout>
+                                    <Flyout x:Name="AdjustmentFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                                        <elements:Expander x:Name="AdjustmentExpander" Flyout="{x:Bind AdjustmentFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                                            <menus:AdjustmentMenu Filter="{x:Bind SelectionViewModel.Filter, Mode=OneWay}">
+                                                <menus:AdjustmentMenu.AdjustmentPages>
+                                                    <adjustmentsPages:GrayPage/>
+                                                    <adjustmentsPages:InvertPage/>
+                                                    <adjustmentsPages:ExposurePage/>
+                                                    <adjustmentsPages:BrightnessPage/>
+                                                    <adjustmentsPages:SaturationPage/>
+                                                    <adjustmentsPages:HueRotationPage/>
+                                                    <adjustmentsPages:ContrastPage/>
+                                                    <adjustmentsPages:TemperaturePage/>
+                                                    <adjustmentsPages:HighlightsAndShadowsPage/>
+                                                    <adjustmentsPages:GammaTransferPage/>
+                                                    <adjustmentsPages:VignettePage/>
+                                                </menus:AdjustmentMenu.AdjustmentPages>
+                                            </menus:AdjustmentMenu>
+                                        </elements:Expander>
+                                    </Flyout>
+                                </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind TipViewModel.Menus[2].Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.Menus[2].IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <adjustments:Icon/>
-                            </elements:ExpanderButton>
-                            <elements:ExpanderButton Visibility="{x:Bind TipViewModel.Menus[3].ButtonVisibility, Mode=OneWay}" Visibility2="{x:Bind TipViewModel.Menus[3].Visibility, Mode=TwoWay}" Left="{x:Bind TipViewModel.Menus[3].Left, Mode=TwoWay}" Top="{x:Bind TipViewModel.Menus[3].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[3].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[3].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
+                            </Button>
+                            <Button Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+                                <Button.Flyout>
+                                    <Flyout x:Name="EffectFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                                        <elements:Expander x:Name="EffectExpander" Flyout="{x:Bind EffectFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                                            <menus:EffectMenu Effect="{x:Bind SelectionViewModel.Effect, Mode=OneWay}">
+                                                <menus:EffectMenu.EffectPages>
+                                                    <effectsPages:GaussianBlurEffectPage/>
+                                                    <effectsPages:DirectionalBlurEffectPage/>
+                                                    <effectsPages:SharpenEffectPage/>
+                                                    <effectsPages:OuterShadowEffectPage/>
+                                                    <effectsPages:EdgeEffectPage/>
+                                                    <effectsPages:MorphologyEffectPage/>
+                                                    <effectsPages:EmbossEffectPage/>
+                                                    <effectsPages:StraightenEffectPage/>
+                                                </menus:EffectMenu.EffectPages>
+                                            </menus:EffectMenu>
+                                        </elements:Expander>
+                                    </Flyout>
+                                </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind TipViewModel.Menus[3].Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.Menus[3].IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <effects:Icon/>
-                            </elements:ExpanderButton>
+                            </Button>
 
-                            <elements:ExpanderButton Visibility="{x:Bind TipViewModel.Menus[4].ButtonVisibility, Mode=OneWay}" Visibility2="{x:Bind TipViewModel.Menus[4].Visibility, Mode=TwoWay}" Left="{x:Bind TipViewModel.Menus[4].Left, Mode=TwoWay}" Top="{x:Bind TipViewModel.Menus[4].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[4].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[4].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
+                            <Button Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+                                <Button.Flyout>
+                                    <Flyout x:Name="TextFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                                        <elements:Expander x:Name="TextExpander" Flyout="{x:Bind TextFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                                            <menus:TextMenu/>
+                                        </elements:Expander>
+                                    </Flyout>
+                                </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind TipViewModel.Menus[4].Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.Menus[4].IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <texts:Icon/>
-                            </elements:ExpanderButton>
-                            <elements:ExpanderButton Visibility="{x:Bind TipViewModel.Menus[5].ButtonVisibility, Mode=OneWay}" Visibility2="{x:Bind TipViewModel.Menus[5].Visibility, Mode=TwoWay}" Left="{x:Bind TipViewModel.Menus[5].Left, Mode=TwoWay}" Top="{x:Bind TipViewModel.Menus[5].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[5].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[5].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
+                            </Button>
+                            <Button Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+                                <Button.Flyout>
+                                    <Flyout x:Name="StrokeFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                                        <elements:Expander x:Name="StrokeExpander" Flyout="{x:Bind StrokeFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                                            <menus:StrokeMenu/>
+                                        </elements:Expander>
+                                    </Flyout>
+                                </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind TipViewModel.Menus[5].Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.Menus[5].IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <strokes:Icon/>
-                            </elements:ExpanderButton>
-                            <elements:ExpanderButton Visibility="{x:Bind TipViewModel.Menus[6].ButtonVisibility, Mode=OneWay}" Visibility2="{x:Bind TipViewModel.Menus[6].Visibility, Mode=TwoWay}" Left="{x:Bind TipViewModel.Menus[6].Left, Mode=TwoWay}" Top="{x:Bind TipViewModel.Menus[6].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[6].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[6].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
+                            </Button>
+                            <Button Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+                                <Button.Flyout>
+                                    <Flyout x:Name="StyleFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                                        <elements:Expander x:Name="StyleExpander" Flyout="{x:Bind StyleFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                                            <menus:StyleMenu/>
+                                        </elements:Expander>
+                                    </Flyout>
+                                </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind TipViewModel.Menus[6].Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.Menus[6].IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <styles:Icon/>
-                            </elements:ExpanderButton>
+                            </Button>
 
-                            <elements:ExpanderButton Visibility="{x:Bind TipViewModel.Menus[7].ButtonVisibility, Mode=OneWay}" Visibility2="{x:Bind TipViewModel.Menus[7].Visibility, Mode=TwoWay}" Left="{x:Bind TipViewModel.Menus[7].Left, Mode=TwoWay}" Top="{x:Bind TipViewModel.Menus[7].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[7].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[7].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
+                            <Button Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+                                <Button.Flyout>
+                                    <Flyout x:Name="HistoryFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                                        <elements:Expander x:Name="HistoryExpander" Flyout="{x:Bind HistoryFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                                            <menus:HistoryMenu ItemsSource="{x:Bind ViewModel.Historys, Mode=OneWay}"/>
+                                        </elements:Expander>
+                                    </Flyout>
+                                </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind TipViewModel.Menus[7].Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.Menus[7].IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <historys:Icon/>
-                            </elements:ExpanderButton>
-                            <elements:ExpanderButton Visibility="{x:Bind TipViewModel.Menus[8].ButtonVisibility, Mode=OneWay}" Visibility2="{x:Bind TipViewModel.Menus[8].Visibility, Mode=TwoWay}" Left="{x:Bind TipViewModel.Menus[8].Left, Mode=TwoWay}" Top="{x:Bind TipViewModel.Menus[8].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[8].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[8].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
+                            </Button>
+                            <Button Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+                                <Button.Flyout>
+                                    <Flyout x:Name="TransformerFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                                        <elements:Expander x:Name="TransformerExpander" Flyout="{x:Bind TransformerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                                            <menus:TransformerMenu Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}" Transformer="{x:Bind SelectionViewModel.Transformer, Mode=OneWay}" ToolType="{x:Bind TipViewModel.ToolType, Mode=OneWay}"/>
+                                        </elements:Expander>
+                                    </Flyout>
+                                </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind TipViewModel.Menus[8].Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.Menus[8].IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <transformers:Icon/>
-                            </elements:ExpanderButton>
-                            <elements:ExpanderButton Visibility="{x:Bind TipViewModel.Menus[9].ButtonVisibility, Mode=OneWay}" Visibility2="{x:Bind TipViewModel.Menus[9].Visibility, Mode=TwoWay}" Left="{x:Bind TipViewModel.Menus[9].Left, Mode=TwoWay}" Top="{x:Bind TipViewModel.Menus[9].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[9].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[9].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
+                            </Button>
+                            <Button Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+                                <Button.Flyout>
+                                    <Flyout x:Name="LayerFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                                        <elements:Expander x:Name="LayerExpander" Flyout="{x:Bind LayerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                                            <menus:LayerMenu/>
+                                        </elements:Expander>
+                                    </Flyout>
+                                </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind TipViewModel.Menus[9].Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.Menus[9].IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <layers:Icon/>
-                            </elements:ExpanderButton>
+                            </Button>
 
-                            <elements:ExpanderButton Visibility="{x:Bind TipViewModel.Menus[10].ButtonVisibility, Mode=OneWay}" Visibility2="{x:Bind TipViewModel.Menus[10].Visibility, Mode=TwoWay}" Left="{x:Bind TipViewModel.Menus[10].Left, Mode=TwoWay}" Top="{x:Bind TipViewModel.Menus[10].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[10].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[10].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
+                            <Button Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+                                <Button.Flyout>
+                                    <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                                        <elements:Expander x:Name="ColorExpander" Flyout="{x:Bind ColorFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                                            <menus:ColorMenu/>
+                                        </elements:Expander>
+                                    </Flyout>
+                                </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind TipViewModel.Menus[10].Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.Menus[10].IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <brushs:ColorEllipse Color="{x:Bind SelectionViewModel.Color, Mode=OneWay}"/>
-                            </elements:ExpanderButton>
+                            </Button>
 
                         </StackPanel>
                     </ScrollViewer>
@@ -366,77 +468,11 @@
 
 
         <!--Menu-->
-        <Canvas IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}">
-
-            <elements:Expander Title="{x:Bind TipViewModel.Menus[0].Title, Mode=TwoWay}" Visibility = "{x:Bind TipViewModel.Menus[0].Visibility, Mode=TwoWay}" Canvas.Left="{x:Bind TipViewModel.Menus[0].Left, Mode=TwoWay}" Canvas.Top="{x:Bind TipViewModel.Menus[0].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[0].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[0].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
-                <menus:EditMenu/>
-            </elements:Expander>
-            <elements:Expander Title="{x:Bind TipViewModel.Menus[1].Title, Mode=TwoWay}" Visibility = "{x:Bind TipViewModel.Menus[1].Visibility, Mode=TwoWay}" Canvas.Left="{x:Bind TipViewModel.Menus[1].Left, Mode=TwoWay}" Canvas.Top="{x:Bind TipViewModel.Menus[1].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[1].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[1].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
-                <menus:OperateMenu IsOpen="{x:Bind TipViewModel.Menus[1].IsOpen, Mode=OneWay}"/>
-            </elements:Expander>
-
-            <elements:Expander Title="{x:Bind TipViewModel.Menus[2].Title, Mode=TwoWay}" Visibility = "{x:Bind TipViewModel.Menus[2].Visibility, Mode=TwoWay}" Canvas.Left="{x:Bind TipViewModel.Menus[2].Left, Mode=TwoWay}" Canvas.Top="{x:Bind TipViewModel.Menus[2].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[2].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[2].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
-                <menus:AdjustmentMenu Filter="{x:Bind SelectionViewModel.Filter, Mode=OneWay}">
-                    <menus:AdjustmentMenu.AdjustmentPages>
-                        <adjustmentsPages:GrayPage/>
-                        <adjustmentsPages:InvertPage/>
-                        <adjustmentsPages:ExposurePage/>
-                        <adjustmentsPages:BrightnessPage/>
-                        <adjustmentsPages:SaturationPage/>
-                        <adjustmentsPages:HueRotationPage/>
-                        <adjustmentsPages:ContrastPage/>
-                        <adjustmentsPages:TemperaturePage/>
-                        <adjustmentsPages:HighlightsAndShadowsPage/>
-                        <adjustmentsPages:GammaTransferPage/>
-                        <adjustmentsPages:VignettePage/>
-                    </menus:AdjustmentMenu.AdjustmentPages>
-                </menus:AdjustmentMenu>
-            </elements:Expander>
-            <elements:Expander Title="{x:Bind TipViewModel.Menus[3].Title, Mode=TwoWay}" Visibility = "{x:Bind TipViewModel.Menus[3].Visibility, Mode=TwoWay}" Canvas.Left="{x:Bind TipViewModel.Menus[3].Left, Mode=TwoWay}" Canvas.Top="{x:Bind TipViewModel.Menus[3].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[3].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[3].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
-                <menus:EffectMenu Effect="{x:Bind SelectionViewModel.Effect, Mode=OneWay}">
-                    <menus:EffectMenu.EffectPages>
-                        <effectsPages:GaussianBlurEffectPage/>
-                        <effectsPages:DirectionalBlurEffectPage/>
-                        <effectsPages:SharpenEffectPage/>
-                        <effectsPages:OuterShadowEffectPage/>
-                        <effectsPages:EdgeEffectPage/>
-                        <effectsPages:MorphologyEffectPage/>
-                        <effectsPages:EmbossEffectPage/>
-                        <effectsPages:StraightenEffectPage/>
-                    </menus:EffectMenu.EffectPages>
-                </menus:EffectMenu>
-            </elements:Expander>
-
-            <elements:Expander Title="{x:Bind TipViewModel.Menus[4].Title, Mode=TwoWay}" Visibility = "{x:Bind TipViewModel.Menus[4].Visibility, Mode=TwoWay}" Canvas.Left="{x:Bind TipViewModel.Menus[4].Left, Mode=TwoWay}" Canvas.Top="{x:Bind TipViewModel.Menus[4].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[4].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[4].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
-                <menus:TextMenu IsOpen="{x:Bind TipViewModel.Menus[4].IsOpen, Mode=OneWay}"/>
-            </elements:Expander>
-            <elements:Expander Title="{x:Bind TipViewModel.Menus[5].Title, Mode=TwoWay}" Visibility = "{x:Bind TipViewModel.Menus[5].Visibility, Mode=TwoWay}" Canvas.Left="{x:Bind TipViewModel.Menus[5].Left, Mode=TwoWay}" Canvas.Top="{x:Bind TipViewModel.Menus[5].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[5].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[5].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
-                <menus:StrokeMenu IsOpen="{x:Bind TipViewModel.Menus[5].IsOpen, Mode=OneWay}"/>
-            </elements:Expander>
-            <elements:Expander Title="{x:Bind TipViewModel.Menus[6].Title, Mode=TwoWay}" Visibility = "{x:Bind TipViewModel.Menus[6].Visibility, Mode=TwoWay}" Canvas.Left="{x:Bind TipViewModel.Menus[6].Left, Mode=TwoWay}" Canvas.Top="{x:Bind TipViewModel.Menus[6].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[6].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[6].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
-                <menus:StyleMenu/>
-            </elements:Expander>
-
-            <elements:Expander Title="{x:Bind TipViewModel.Menus[7].Title, Mode=TwoWay}" Visibility = "{x:Bind TipViewModel.Menus[7].Visibility, Mode=TwoWay}" Canvas.Left="{x:Bind TipViewModel.Menus[7].Left, Mode=TwoWay}" Canvas.Top="{x:Bind TipViewModel.Menus[7].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[7].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[7].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
-                <menus:HistoryMenu ItemsSource="{x:Bind ViewModel.Historys, Mode=OneWay}"/>
-            </elements:Expander>
-            <elements:Expander Title="{x:Bind TipViewModel.Menus[8].Title, Mode=TwoWay}" Visibility = "{x:Bind TipViewModel.Menus[8].Visibility, Mode=TwoWay}" Canvas.Left="{x:Bind TipViewModel.Menus[8].Left, Mode=TwoWay}" Canvas.Top="{x:Bind TipViewModel.Menus[8].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[8].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[8].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
-                <menus:TransformerMenu IsOpen="{x:Bind TipViewModel.Menus[8].IsOpen, Mode=OneWay}" Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}" Transformer="{x:Bind SelectionViewModel.Transformer, Mode=OneWay}" ToolType="{x:Bind TipViewModel.ToolType, Mode=OneWay}"/>
-            </elements:Expander>
-            <elements:Expander Title="{x:Bind TipViewModel.Menus[9].Title, Mode=TwoWay}" Visibility = "{x:Bind TipViewModel.Menus[9].Visibility, Mode=TwoWay}" Canvas.Left="{x:Bind TipViewModel.Menus[9].Left, Mode=TwoWay}" Canvas.Top="{x:Bind TipViewModel.Menus[9].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[9].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[9].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
-                <menus:LayerMenu/>
-            </elements:Expander>
-
-            <elements:Expander Title="{x:Bind TipViewModel.Menus[10].Title, Mode=TwoWay}" Visibility = "{x:Bind TipViewModel.Menus[10].Visibility, Mode=TwoWay}" Canvas.Left="{x:Bind TipViewModel.Menus[10].Left, Mode=TwoWay}" Canvas.Top="{x:Bind TipViewModel.Menus[10].Top, Mode=TwoWay}" Width2="{x:Bind TipViewModel.Menus[10].Width, Mode=TwoWay}" Height2="{x:Bind TipViewModel.Menus[10].Height, Mode=TwoWay}" WindowWidth="{x:Bind SettingViewModel.WindowWidth, Mode=OneWay}" WindowHeight="{x:Bind SettingViewModel.WindowHeight, Mode=OneWay}">
-                <menus:ColorMenu/>
-            </elements:Expander>
-
-        </Canvas>
+        <Canvas x:Name="MenuOverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"/>
 
 
         <!--Tip-->
-        <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" 
-                        Visibility="{x:Bind ViewModel.TipTextVisibility, Mode=OneWay}">
+        <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" Visibility="{x:Bind ViewModel.TipTextVisibility, Mode=OneWay}">
             <ToolTip Style="{StaticResource AppToolTipStyle}">
                 <TextBlock Text="{x:Bind ViewModel.TipText, Mode=OneWay}" TextWrapping="Wrap"/>
             </ToolTip>
@@ -484,15 +520,13 @@
 
         <!--Gallery-->
         <elements:DialogWide x:Name="GalleryDialog">
-            <GridView x:Name="GalleryGridView" Grid.Row="2" Padding="14,0"
-                           IsItemClickEnabled="False" ReorderMode="Disabled" SelectionMode="None"/>
+            <GridView x:Name="GalleryGridView" Grid.Row="2" Padding="14,0" IsItemClickEnabled="False" ReorderMode="Disabled" SelectionMode="None"/>
         </elements:DialogWide>
         <photos:PhotoBillboardCanvas x:Name="BillboardCanvas"/>
 
 
         <!--Transition-->
         <Border x:Name="TransitionBorder" IsHitTestVisible="False" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
-
             <Border.Resources>
                 <!--Transition-->
                 <Storyboard x:Name="TransitionStoryboard">
@@ -505,9 +539,7 @@
                     </DoubleAnimationUsingKeyFrames>
                 </Storyboard>
             </Border.Resources>
-
             <ProgressBar x:Name="TransitionSlider" Width="200" Minimum="0" Maximum="1"/>
-
         </Border>
 
 

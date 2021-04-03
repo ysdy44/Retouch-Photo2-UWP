@@ -3,7 +3,7 @@
 // Difficult:         ★★
 // Only:              ★★
 // Complete:      ★★★
-using Windows.UI;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -13,30 +13,34 @@ using Windows.UI.Xaml.Media;
 namespace Retouch_Photo2.Elements
 {
     /// <summary> 
-    /// Width of <see cref="Expander"/>.
+    /// Width state of <see cref="Expander"/>.
     /// </summary>
     public enum ExpanderWidth
     {
-        Width222 = 222,
-        Width272 = 272,
-        Width322 = 322,
-        Width372 = 372,
+        Width200,
+        Width250,
+        Width300,
+        Width350,
     }
 
     /// <summary> 
     /// Represents the control that a drawer can be folded.
     /// </summary>
     [TemplateVisualState(Name = nameof(Normal), GroupName = nameof(VisualStateGroup))]
-    [TemplateVisualState(Name = nameof(Width222), GroupName = nameof(VisualStateGroup))]
-    [TemplateVisualState(Name = nameof(Width272), GroupName = nameof(VisualStateGroup))]
-    [TemplateVisualState(Name = nameof(Width322), GroupName = nameof(VisualStateGroup))]
-    [TemplateVisualState(Name = nameof(Width372), GroupName = nameof(VisualStateGroup))]
+    [TemplateVisualState(Name = nameof(Overlay), GroupName = nameof(VisualStateGroup))]
+    [TemplateVisualState(Name = nameof(Pin), GroupName = nameof(VisualStateGroup))]
+    [TemplateVisualState(Name = nameof(Width200), GroupName = nameof(WidthStates))]
+    [TemplateVisualState(Name = nameof(Width250), GroupName = nameof(WidthStates))]
+    [TemplateVisualState(Name = nameof(Width300), GroupName = nameof(WidthStates))]
+    [TemplateVisualState(Name = nameof(Width350), GroupName = nameof(WidthStates))]
     [ContentProperty(Name = nameof(Content))]
-    public sealed class Expander : ContentControl
+    public sealed partial class Expander : ContentControl
     {
 
         //@VisualState
-        ExpanderWidth _vsWidth;
+        bool _vsIsOverlay = false;
+        bool _vsIsPin = false;
+        ExpanderWidth _vsWidth = ExpanderWidth.Width300;
         /// <summary> 
         /// Represents the visual appearance of UI elements in a specific state.
         /// </summary>
@@ -44,13 +48,23 @@ namespace Retouch_Photo2.Elements
         {
             get
             {
+                if (this._vsIsPin) return this.Pin;
+                if (this._vsIsOverlay) return this.Overlay;
+                return this.Normal;
+            }
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
+        public VisualState WidthVisualState
+        {
+            get
+            {
                 switch (this._vsWidth)
                 {
-                    case ExpanderWidth.Width222: return this.Width222;
-                    case ExpanderWidth.Width272: return this.Width272;
-                    case ExpanderWidth.Width322: return this.Width322;
-                    case ExpanderWidth.Width372: return this.Width372;
-                    default: return this.Normal;
+                    case ExpanderWidth.Width200: return this.Width200;
+                    case ExpanderWidth.Width250: return this.Width250;
+                    case ExpanderWidth.Width300: return this.Width300;
+                    case ExpanderWidth.Width350: return this.Width350;
+                    default: return this.Width300;
                 }
 
             }
@@ -62,7 +76,7 @@ namespace Retouch_Photo2.Elements
             set
             {
                 this._vsWidth = value;
-                this.VisualState = this.VisualState;//State
+                this.WidthVisualState = this.WidthVisualState;//State
             }
         }
 
@@ -79,31 +93,9 @@ namespace Retouch_Photo2.Elements
         /// <summary> Identifies the <see cref = "Expander.Title" /> dependency property. </summary>
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(string), typeof(Expander), new PropertyMetadata(string.Empty));
 
-
-        /// <summary> Gets or sets <see cref = "Expander" />'s width. </summary>
-        public double Width2
-        {
-            get => (double)base.GetValue(Width2Property);
-            set => base.SetValue(Width2Property, value);
-        }
-        /// <summary> Identifies the <see cref = "Expander.Width2" /> dependency property. </summary>
-        public static readonly DependencyProperty Width2Property = DependencyProperty.Register(nameof(Width2), typeof(double), typeof(Expander), new PropertyMetadata(200.0d));
-
-
-        /// <summary> Gets or sets <see cref = "Expander" />'s height. </summary>
-        public double Height2
-        {
-            get => (double)base.GetValue(Height2Property);
-            set => base.SetValue(Height2Property, value);
-        }
-        /// <summary> Identifies the <see cref = "Expander.Height2" /> dependency property. </summary>
-        public static readonly DependencyProperty Height2Property = DependencyProperty.Register(nameof(Height2), typeof(double), typeof(Expander), new PropertyMetadata(200.0d));
-
-
-        /// <summary> Gets or sets <see cref = "Expander" />'s window width. </summary>
-        public double WindowWidth { get => this.MaxWidth; set => this.MaxWidth = value; }
-        /// <summary> Gets or sets <see cref = "Expander" />'s window height. </summary>
-        public double WindowHeight { get => this.MaxHeight; set => this.MaxHeight = value; }
+        public Flyout Flyout { get; set; }
+        public Canvas OverlayCanvas { get; set; }
+        public StackPanel PinStackPanel { get; set; }
 
 
         #endregion
@@ -111,19 +103,26 @@ namespace Retouch_Photo2.Elements
 
         VisualStateGroup VisualStateGroup;
         VisualState Normal;
-        VisualState Width222;
-        VisualState Width272;
-        VisualState Width322;
-        VisualState Width372;
+        VisualState Overlay;
+        VisualState Pin;
+
+        VisualStateGroup WidthStates;
+        VisualState Width200;
+        VisualState Width250;
+        VisualState Width300;
+        VisualState Width350;
 
 
         MenuFlyout WidthMenuFlyout;
-        ToggleMenuFlyoutItem WidthFlyoutItem222;
-        ToggleMenuFlyoutItem WidthFlyoutItem272;
-        ToggleMenuFlyoutItem WidthFlyoutItem322;
-        ToggleMenuFlyoutItem WidthFlyoutItem372;
+        ToggleMenuFlyoutItem WidthFlyoutItem200;
+        ToggleMenuFlyoutItem WidthFlyoutItem250;
+        ToggleMenuFlyoutItem WidthFlyoutItem300;
+        ToggleMenuFlyoutItem WidthFlyoutItem350;
+
 
         Grid TitleGrid;
+        Button OverlayButton;
+        Button PinButton;
         Button CloseButton;
 
 
@@ -137,8 +136,8 @@ namespace Retouch_Photo2.Elements
             this.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
-                this.Width2 = e.NewSize.Width;
-                this.Height2 = e.NewSize.Height;
+                this.MaxWidth = this.OverlayCanvas.ActualWidth;
+                this.MaxHeight = this.OverlayCanvas.ActualHeight;
             };
         }
 
@@ -149,28 +148,33 @@ namespace Retouch_Photo2.Elements
 
             this.VisualStateGroup = base.GetTemplateChild(nameof(VisualStateGroup)) as VisualStateGroup;
             this.Normal = base.GetTemplateChild(nameof(Normal)) as VisualState;
-            this.Width222 = base.GetTemplateChild(nameof(Width222)) as VisualState;
-            this.Width272 = base.GetTemplateChild(nameof(Width272)) as VisualState;
-            this.Width322 = base.GetTemplateChild(nameof(Width322)) as VisualState;
-            this.Width372 = base.GetTemplateChild(nameof(Width372)) as VisualState;
+            this.Overlay = base.GetTemplateChild(nameof(Overlay)) as VisualState;
+            this.Pin = base.GetTemplateChild(nameof(Pin)) as VisualState;
+
+            this.WidthStates = base.GetTemplateChild(nameof(WidthStates)) as VisualStateGroup;
+            this.Width200 = base.GetTemplateChild(nameof(Width200)) as VisualState;
+            this.Width250 = base.GetTemplateChild(nameof(Width250)) as VisualState;
+            this.Width300 = base.GetTemplateChild(nameof(Width300)) as VisualState;
+            this.Width350 = base.GetTemplateChild(nameof(Width350)) as VisualState;
+
 
             this.WidthMenuFlyout = base.GetTemplateChild(nameof(WidthMenuFlyout)) as MenuFlyout;
 
-            if (this.WidthFlyoutItem222 != null) this.WidthFlyoutItem222.Click -= this.WidthFlyoutItem222_Click;
-            this.WidthFlyoutItem222 = base.GetTemplateChild(nameof(WidthFlyoutItem222)) as ToggleMenuFlyoutItem;
-            if (this.WidthFlyoutItem222 != null) this.WidthFlyoutItem222.Click += this.WidthFlyoutItem222_Click;
+            if (this.WidthFlyoutItem200 != null) this.WidthFlyoutItem200.Click -= this.WidthFlyoutItem200_Click;
+            this.WidthFlyoutItem200 = base.GetTemplateChild(nameof(WidthFlyoutItem200)) as ToggleMenuFlyoutItem;
+            if (this.WidthFlyoutItem200 != null) this.WidthFlyoutItem200.Click += this.WidthFlyoutItem200_Click;
 
-            if (this.WidthFlyoutItem272 != null) this.WidthFlyoutItem272.Click -= this.WidthFlyoutItem272_Click;
-            this.WidthFlyoutItem272 = base.GetTemplateChild(nameof(WidthFlyoutItem272)) as ToggleMenuFlyoutItem;
-            if (this.WidthFlyoutItem272 != null) this.WidthFlyoutItem272.Click += this.WidthFlyoutItem272_Click;
+            if (this.WidthFlyoutItem250 != null) this.WidthFlyoutItem250.Click -= this.WidthFlyoutItem250_Click;
+            this.WidthFlyoutItem250 = base.GetTemplateChild(nameof(WidthFlyoutItem250)) as ToggleMenuFlyoutItem;
+            if (this.WidthFlyoutItem250 != null) this.WidthFlyoutItem250.Click += this.WidthFlyoutItem250_Click;
 
-            if (this.WidthFlyoutItem322 != null) this.WidthFlyoutItem322.Click -= this.WidthFlyoutItem322_Click;
-            this.WidthFlyoutItem322 = base.GetTemplateChild(nameof(WidthFlyoutItem322)) as ToggleMenuFlyoutItem;
-            if (this.WidthFlyoutItem322 != null) this.WidthFlyoutItem322.Click += this.WidthFlyoutItem322_Click;
+            if (this.WidthFlyoutItem300 != null) this.WidthFlyoutItem300.Click -= this.WidthFlyoutItem300_Click;
+            this.WidthFlyoutItem300 = base.GetTemplateChild(nameof(WidthFlyoutItem300)) as ToggleMenuFlyoutItem;
+            if (this.WidthFlyoutItem300 != null) this.WidthFlyoutItem300.Click += this.WidthFlyoutItem300_Click;
 
-            if (this.WidthFlyoutItem372 != null) this.WidthFlyoutItem372.Click -= this.WidthFlyoutItem372_Click;
-            this.WidthFlyoutItem372 = base.GetTemplateChild(nameof(WidthFlyoutItem372)) as ToggleMenuFlyoutItem;
-            if (this.WidthFlyoutItem372 != null) this.WidthFlyoutItem372.Click += this.WidthFlyoutItem372_Click;
+            if (this.WidthFlyoutItem350 != null) this.WidthFlyoutItem350.Click -= this.WidthFlyoutItem350_Click;
+            this.WidthFlyoutItem350 = base.GetTemplateChild(nameof(WidthFlyoutItem350)) as ToggleMenuFlyoutItem;
+            if (this.WidthFlyoutItem350 != null) this.WidthFlyoutItem350.Click += this.WidthFlyoutItem350_Click;
 
 
             if (this.TitleGrid != null)
@@ -193,16 +197,24 @@ namespace Retouch_Photo2.Elements
                 this.TitleGrid.ManipulationCompleted += this.TitleGrid_ManipulationCompleted;
             }
 
+            if (this.OverlayButton != null) this.OverlayButton.Tapped -= this.OverlayButton_Tapped;
+            this.OverlayButton = base.GetTemplateChild(nameof(OverlayButton)) as Button;
+            if (this.OverlayButton != null) this.OverlayButton.Tapped += this.OverlayButton_Tapped;
+
+            if (this.PinButton != null) this.PinButton.Tapped -= this.PinButton_Tapped;
+            this.PinButton = base.GetTemplateChild(nameof(PinButton)) as Button;
+            if (this.PinButton != null) this.PinButton.Tapped += this.PinButton_Tapped;
+
             if (this.CloseButton != null) this.CloseButton.Tapped -= this.CloseButton_Tapped;
             this.CloseButton = base.GetTemplateChild(nameof(CloseButton)) as Button;
             if (this.CloseButton != null) this.CloseButton.Tapped += this.CloseButton_Tapped;
         }
 
 
-        private void WidthFlyoutItem222_Click(object sender, RoutedEventArgs e) => this.ExpanderWidth = ExpanderWidth.Width222;
-        private void WidthFlyoutItem272_Click(object sender, RoutedEventArgs e) => this.ExpanderWidth = ExpanderWidth.Width272;
-        private void WidthFlyoutItem322_Click(object sender, RoutedEventArgs e) => this.ExpanderWidth = ExpanderWidth.Width322;
-        private void WidthFlyoutItem372_Click(object sender, RoutedEventArgs e) => this.ExpanderWidth = ExpanderWidth.Width372;
+        private void WidthFlyoutItem200_Click(object sender, RoutedEventArgs e) => this.ExpanderWidth = ExpanderWidth.Width200;
+        private void WidthFlyoutItem250_Click(object sender, RoutedEventArgs e) => this.ExpanderWidth = ExpanderWidth.Width250;
+        private void WidthFlyoutItem300_Click(object sender, RoutedEventArgs e) => this.ExpanderWidth = ExpanderWidth.Width300;
+        private void WidthFlyoutItem350_Click(object sender, RoutedEventArgs e) => this.ExpanderWidth = ExpanderWidth.Width350;
 
 
         private void TitleGrid_Holding(object sender, HoldingRoutedEventArgs e) => this.WidthMenuFlyout.ShowAt(this.TitleGrid);
@@ -212,12 +224,16 @@ namespace Retouch_Photo2.Elements
         double left, top;
         private void TitleGrid_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
+            if (this._vsIsOverlay == false) return;
+
             this.left = Canvas.GetLeft(this);
             this.top = Canvas.GetTop(this);
-            this.Move(); //Delegate
+            this.MoveToTop(); //Delegate
         }
         private void TitleGrid_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
+            if (this._vsIsOverlay == false) return;
+
             switch (base.FlowDirection)
             {
                 case FlowDirection.LeftToRight:
@@ -231,100 +247,134 @@ namespace Retouch_Photo2.Elements
             }
             this.top += e.Delta.Translation.Y;
 
-            double left = ExpanderButton.GetBoundPostionX(this.left, this.Width2, this.WindowWidth);
-            double top = ExpanderButton.GetBoundPostionY(this.top, this.Height2, this.WindowHeight);
+
+            double left = this.GetBoundPostionX(this.left, base.ActualWidth, this.OverlayCanvas.ActualWidth);
+            double top = this.GetBoundPostionY(this.top, base.ActualHeight, this.OverlayCanvas.ActualHeight);
             Canvas.SetLeft(this, left);
             Canvas.SetTop(this, top);
         }
         private void TitleGrid_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
+            if (this._vsIsOverlay == false) return;
+
             this.left = Canvas.GetLeft(this);
             this.top = Canvas.GetTop(this);
         }
 
-        private void CloseButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void OverlayButton_Tapped(object sender, TappedRoutedEventArgs e) => this.AsOverlay();
+        private void PinButton_Tapped(object sender, TappedRoutedEventArgs e) => this.AsPin();
+        private void CloseButton_Tapped(object sender, TappedRoutedEventArgs e) => this.AsFlyout();
+    }
+
+    public sealed partial class Expander : ContentControl
+    {
+
+        public void FlyoutShowAt(FrameworkElement element)
         {
-            this.Visibility = Visibility.Collapsed;
+            this.AsFlyout();
+            this.Flyout.ShowAt(element);
+        }
+        private void AsFlyout()
+        {
+            {
+                this.OverlayCanvas.Children.Remove(this);
+                this.Flyout.Content = null;
+                this.PinStackPanel.Children.Remove(this);
+            }
+            this.Flyout.Content = this;
+
+
+            this._vsIsOverlay = false;
+            this._vsIsPin = false;
+            this.VisualState = this.VisualState;//State
+        }
+        private void AsOverlay()
+        {
+            if (this._vsIsPin == false)
+            {
+                GeneralTransform ttv = base.TransformToVisual(this.OverlayCanvas);
+                Point screenCoords = ttv.TransformPoint(new Point());
+                Canvas.SetLeft(this, screenCoords.X);
+                Canvas.SetTop(this, screenCoords.Y);
+            }
+            this.Flyout.Hide();
+
+
+            {
+                this.OverlayCanvas.Children.Remove(this);
+                this.Flyout.Content = null;
+                this.PinStackPanel.Children.Remove(this);
+            }
+            this.OverlayCanvas.Children.Add(this);
+
+
+            this._vsIsOverlay = true;
+            this._vsIsPin = false;
+            this.VisualState = this.VisualState;//State
+        }
+        private void AsPin()
+        {
+            this.Flyout.Hide();
+
+            {
+                this.OverlayCanvas.Children.Remove(this);
+                this.Flyout.Content = null;
+                this.PinStackPanel.Children.Remove(this);
+            }
+            this.PinStackPanel.Children.Add(this);
+
+
+            this._vsIsOverlay = false;
+            this._vsIsPin = true;
+            this.VisualState = this.VisualState;//State
         }
 
 
-        /// <summary> 
-        /// Occurs when the position changes, Move the menu to top.
-        /// </summary>
-        private void Move()
+        private double GetBoundPostionX(double postionX, double width, double canvasWidth)
+        {
+            if (canvasWidth < 400) canvasWidth = 400;
+            if (width < 200) width = 200;
+
+            if (postionX < 0) return 0;
+            if (width >= canvasWidth) return 0;
+
+            double right = canvasWidth - width;
+            if (postionX > right) return right;
+
+            return postionX;
+        }
+        private double GetBoundPostionY(double postionY, double height, double canvasHeight)
+        {
+            if (canvasHeight < 400) canvasHeight = 400;
+            if (height < 200) height = 200;
+
+            if (postionY < 0) return 0;
+            if (height >= canvasHeight) return 0;
+
+            double bottom = canvasHeight - height;
+            if (postionY > bottom) return bottom;
+
+            return postionY;
+        }
+
+        private void MoveToTop()
         {
             if (this.Parent is Canvas canvas)
             {
                 if (canvas.Children.Contains(this))
                 {
-                    int index = canvas.Children.IndexOf(this);
-                    int count = canvas.Children.Count;
-                    canvas.Children.Move((uint)index, (uint)count - 1); ;
+                    int max = 0;
+
+                    foreach (UIElement child in canvas.Children)
+                    {
+                        int index = Canvas.GetZIndex(child);
+                        Canvas.SetZIndex(child, index - 1);
+
+                        if (max > index) max = index;
+                    }
+
+                    Canvas.SetZIndex(this, max);
                 }
-            }
-        }
-
-        /// <summary>
-        /// Occurs when the flyout opened, Disable all menus, except the current menu.
-        /// </summary>
-        private void Opened()
-        {
-            if (this.Parent is Canvas canvas)
-            {
-                foreach (UIElement menu in canvas.Children)
-                {
-                    menu.IsHitTestVisible = false;
-                }
-                this.IsHitTestVisible = true;
-
-                this.Move();
-
-                canvas.Background = new SolidColorBrush(Colors.Transparent);
-                canvas.Tapped += this.Canvas_Tapped;
-            }
-        }
-
-        private void Canvas_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
-        {
-            if (sender is Canvas canvas)
-            {
-                canvas.Tapped -= this.Canvas_Tapped;
-                canvas.Background = null;
-
-                this.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        /// <summary> 
-        /// Occurs when the flyout closed, Enable all menus.     
-        /// </summary>
-        private void Closed()
-        {
-            if (this.Parent is Canvas canvas)
-            {
-                foreach (UIElement menu in canvas.Children)
-                {
-                    menu.IsHitTestVisible = true;
-                }
-
-                this.Visibility = Visibility.Collapsed;
-                canvas.Background = null;
-            }
-        }
-
-        /// <summary>
-        /// Occurs when the flyout overlaid, Enable all menus.  
-        /// </summary>
-        private void Overlaid()
-        {
-            if (this.Parent is Canvas canvas)
-            {
-                foreach (UIElement menu in canvas.Children)
-                {
-                    menu.IsHitTestVisible = true;
-                }
-
-                canvas.Background = null;
             }
         }
 

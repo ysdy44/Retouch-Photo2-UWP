@@ -139,9 +139,6 @@
     <Compile Include="Expander.xaml.cs">
       <DependentUpon>Expander.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ExpanderButton.xaml.cs">
-      <DependentUpon>ExpanderButton.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ExpanedHead.xaml.cs">
       <DependentUpon>ExpanedHead.xaml</DependentUpon>
     </Compile>
@@ -252,10 +249,6 @@
     <Page Include="Expander.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ExpanderButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="ExpanedHead.xaml">
       <SubType>Designer</SubType>

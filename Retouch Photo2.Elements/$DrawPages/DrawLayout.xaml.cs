@@ -61,6 +61,10 @@ namespace Retouch_Photo2.Elements
         /// <summary> Width ToolTip. </summary>   
         public ToolTip WidthToolTip => this._WidthToolTip;
 
+        //Pin
+        /// <summary> Pin StackPanel. </summary>   
+        public StackPanel PinStackPanel => this._PinStackPanel;
+
 
         //@Construct
         /// <summary>

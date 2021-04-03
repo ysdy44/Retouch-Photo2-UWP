@@ -34,6 +34,16 @@ namespace Retouch_Photo2
 
 
         //@Static
+        /// <summary> Show <see cref="OperateFlyout"/> </summary>
+        public static Action<FrameworkElement> ShowOperateFlyout;
+        /// <summary> Show <see cref="TextFlyout"/> </summary>
+        public static Action<FrameworkElement> ShowTextFlyout;
+        /// <summary> Show <see cref="StrokeFlyout"/> </summary>
+        public static Action<FrameworkElement> ShowStrokeFlyout;
+        /// <summary> Show <see cref="LayerFlyout"/> </summary>
+        public static Action<FrameworkElement> ShowLayerFlyout;
+
+
         /// <summary> Show <see cref="SetupDialog"/> </summary>
         public static Action ShowSetup;
         /// <summary> Show <see cref="ExportDialog"/> </summary>
@@ -44,6 +54,7 @@ namespace Retouch_Photo2
         public static Action FullScreen;
         /// <summary> Show <see cref="GalleryDialog"/> </summary>
         public static Action ShowGallery;
+
 
         /// <summary> Show <see cref="GalleryDialog"/> </summary>
         public static Func<Task<Photo>> ShowGalleryFunc;
@@ -72,7 +83,7 @@ namespace Retouch_Photo2
             this.RegisteTransition();
             this.ConstructAppBar();
 
-            this.ConstructInvalidateAction();
+            //CanvasControl
             this.ConstructCanvasControl();
             this.ConstructCanvasOperator();
 
@@ -94,12 +105,15 @@ namespace Retouch_Photo2
             this.ConstructDragAndDrop();
 
             //Flyout
-            this.ConstructFillFlyout();
-            this.ConstructStrokeFlyout();
+            this.ConstructFillColorFlyout();
+            this.ConstructStrokeColorFlyout();
         }
 
         private void RegisterDrawPage()
         {
+            //CanvasControl
+            this.ViewModel.InvalidateAction += this.CanvasControlInvalidate;
+
             //LayerManager
             this.LayersScrollViewer.Content = LayerManager.RootStackPanel;
             LayerManager.ItemClick += this.LayerItemClick;
@@ -110,6 +124,12 @@ namespace Retouch_Photo2
             LayerManager.DragItemsStarted += this.LayerDragItemsStarted;
             LayerManager.DragItemsDelta += this.LayerDragItemsDelta;
             LayerManager.DragItemsCompleted += this.LayerDragItemsCompleted;
+
+            //Menu
+            DrawPage.ShowOperateFlyout += this.OperateExpander.FlyoutShowAt;
+            DrawPage.ShowTextFlyout += this.TextExpander.FlyoutShowAt;
+            DrawPage.ShowStrokeFlyout += this.StrokeExpander.FlyoutShowAt;
+            DrawPage.ShowLayerFlyout += this.LayerExpander.FlyoutShowAt;
 
             //Dialog
             DrawPage.ShowExport = this.ShowExportDialog;
@@ -128,14 +148,17 @@ namespace Retouch_Photo2
             Photo.ItemClick += this.PhotoItemClick;
 
             //Flyout
-            DrawPage.ShowFill = this.ShowFillFlyout;
-            DrawPage.ShowStroke = this.ShowStrokeFlyout;
+            DrawPage.ShowFill = this.ShowFillColorFlyout;
+            DrawPage.ShowStroke = this.ShowStrokeColorFlyout;
             //More
             DrawPage.ShowMoreTransform = this.ShowMoreTransformFlyout;
             DrawPage.ShowMoreCreate = this.ShowMoreCreateFlyout;
         }
         private void UnregisterDrawPage()
         {
+            //CanvasControl
+            this.ViewModel.InvalidateAction -= this.CanvasControlInvalidate;
+
             //LayerManager
             this.LayersScrollViewer.Content = null;
             LayerManager.ItemClick -= this.LayerItemClick;
@@ -146,6 +169,12 @@ namespace Retouch_Photo2
             LayerManager.DragItemsStarted -= this.LayerDragItemsStarted;
             LayerManager.DragItemsDelta -= this.LayerDragItemsDelta;
             LayerManager.DragItemsCompleted -= this.LayerDragItemsCompleted;
+
+            //Menu
+            DrawPage.ShowOperateFlyout -= this.OperateExpander.FlyoutShowAt;
+            DrawPage.ShowTextFlyout -= this.TextExpander.FlyoutShowAt;
+            DrawPage.ShowStrokeFlyout -= this.StrokeExpander.FlyoutShowAt;
+            DrawPage.ShowLayerFlyout -= this.LayerExpander.FlyoutShowAt;
 
             //Dialog
             DrawPage.ShowExport = null;
@@ -190,7 +219,7 @@ namespace Retouch_Photo2
             }
 
             this.RegisterDrawPage();
-            
+
             //Extension
             this.ApplicationView.Color = this.ApplicationView.Color;
 
@@ -224,11 +253,6 @@ namespace Retouch_Photo2
         /// <summary> The current page no longer becomes an active page. </summary>
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            foreach (MenuViewModel menu in this.TipViewModel.Menus)
-            {
-                menu.Visibility = Visibility.Collapsed;
-            }
-
             this.UnregisterDrawPage();
 
             //Extension

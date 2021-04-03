@@ -33,12 +33,12 @@ namespace Retouch_Photo2
             this.ItemClick(layerage);
         }
         private void LayerRightTapped(ILayer layer)
-        {              
-            this.TipViewModel.Menus[9].Show(layer.Control, this.SettingViewModel.WindowWidth, this.SettingViewModel.WindowHeight, FlyoutPlacementMode.Left);
+        {
+            Retouch_Photo2.DrawPage.ShowLayerFlyout?.Invoke(layer.Control);
         }
         private void LayersRightTapped()
         {
-            this.TipViewModel.Menus[9].Show(this.LayersScrollViewer, this.SettingViewModel.WindowWidth, this.SettingViewModel.WindowHeight, FlyoutPlacementMode.Left);
+            Retouch_Photo2.DrawPage.ShowLayerFlyout?.Invoke(this.LayersScrollViewer);
         }
         private void LayerVisibilityChanged(ILayer layer2)
         {

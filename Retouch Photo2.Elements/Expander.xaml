@@ -3,18 +3,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:apiContractNotPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
     xmlns:apiContractPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:local="using:Retouch_Photo2.Elements">
 
 
     <Style TargetType="local:Expander">
-        <Setter Property="MaxWidth" Value="400"/>
-        <Setter Property="MaxHeight" Value="400"/>
+        <Setter Property="MaxWidth" Value="NaN"/>
+        <Setter Property="MaxHeight" Value="NaN"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:Expander">
-                    <controls:DropShadowPanel Style="{StaticResource AppDropShadowPanelStyle}">
-
+                    <Border x:Name="RootGrid" Width="322" Height="Auto" Background="Transparent">
 
                         <!--VisualState-->
                         <VisualStateManager.VisualStateGroups>
@@ -23,55 +21,87 @@
                                 <!--Normal-->
                                 <VisualState x:Name="Normal"/>
 
+                                <!--Overlay-->
+                                <VisualState x:Name="Overlay">
+                                    <VisualState.Setters>
+                                        <!--@Acrylic-->
+                                        <Setter Target = "RootGrid.Background" 
+                                                apiContractNotPresent5:Value="{ThemeResource AppForeground}"
+                                                apiContractPresent5:Value="{ThemeResource AppAcrylicElementBrush}"
+                                                />
+                                        <Setter Target = "RootGrid.CornerRadius" Value="{StaticResource AppCornerRadius}"/>
 
-                                <!--Width222-->
-                                <VisualState x:Name="Width222">
+                                        <Setter Target = "PinButton.Visibility" Value="Visible"/>
+                                        <Setter Target = "OverlayButton.Visibility" Value="Collapsed"/>
+                                        <Setter Target = "CloseButton.Visibility" Value="Visible"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <!--Pin-->
+                                <VisualState x:Name="Pin">
+                                    <VisualState.Setters>
+                                        <Setter Target = "TitleGrid.Height" Value="50"/>
+                                        <Setter Target = "TitleGrid.Background" Value="{ThemeResource AppLinearBrush}"/>
+
+                                        <Setter Target = "PinButton.Visibility" Value="Collapsed"/>
+                                        <Setter Target = "OverlayButton.Visibility" Value="Visible"/>
+                                        <Setter Target = "CloseButton.Visibility" Value="Visible"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+
+
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="WidthStates">
+
+
+                                <!--Width200-->
+                                <VisualState x:Name="Width200">
                                     <VisualState.Setters>
                                         <Setter Target = "RootGrid.Width" Value="222"/>
                                         <Setter Target = "ContentPresenter.Width" Value="222"/>
-                                        <Setter Target = "WidthFlyoutItem222.IsChecked" Value="True"/>
-                                        <Setter Target = "WidthFlyoutItem272.IsChecked" Value="False"/>
-                                        <Setter Target = "WidthFlyoutItem322.IsChecked" Value="False"/>
-                                        <Setter Target = "WidthFlyoutItem372.IsChecked" Value="False"/>
+                                        <Setter Target = "WidthFlyoutItem200.IsChecked" Value="True"/>
+                                        <Setter Target = "WidthFlyoutItem250.IsChecked" Value="False"/>
+                                        <Setter Target = "WidthFlyoutItem300.IsChecked" Value="False"/>
+                                        <Setter Target = "WidthFlyoutItem350.IsChecked" Value="False"/>
                                     </VisualState.Setters>
                                 </VisualState>
 
 
-                                <!--Width272-->
-                                <VisualState x:Name="Width272">
+                                <!--Width250-->
+                                <VisualState x:Name="Width250">
                                     <VisualState.Setters>
                                         <Setter Target = "RootGrid.Width" Value="272"/>
                                         <Setter Target = "ContentPresenter.Width" Value="248"/>
-                                        <Setter Target = "WidthFlyoutItem222.IsChecked" Value="False"/>
-                                        <Setter Target = "WidthFlyoutItem272.IsChecked" Value="True"/>
-                                        <Setter Target = "WidthFlyoutItem322.IsChecked" Value="False"/>
-                                        <Setter Target = "WidthFlyoutItem372.IsChecked" Value="False"/>
+                                        <Setter Target = "WidthFlyoutItem200.IsChecked" Value="False"/>
+                                        <Setter Target = "WidthFlyoutItem250.IsChecked" Value="True"/>
+                                        <Setter Target = "WidthFlyoutItem300.IsChecked" Value="False"/>
+                                        <Setter Target = "WidthFlyoutItem350.IsChecked" Value="False"/>
                                     </VisualState.Setters>
                                 </VisualState>
 
 
-                                <!--Width322-->
-                                <VisualState x:Name="Width322">
+                                <!--Width300-->
+                                <VisualState x:Name="Width300">
                                     <VisualState.Setters>
                                         <Setter Target = "RootGrid.Width" Value="322"/>
                                         <Setter Target = "ContentPresenter.Width" Value="274"/>
-                                        <Setter Target = "WidthFlyoutItem222.IsChecked" Value="False"/>
-                                        <Setter Target = "WidthFlyoutItem272.IsChecked" Value="False"/>
-                                        <Setter Target = "WidthFlyoutItem322.IsChecked" Value="True"/>
-                                        <Setter Target = "WidthFlyoutItem372.IsChecked" Value="False"/>
+                                        <Setter Target = "WidthFlyoutItem200.IsChecked" Value="False"/>
+                                        <Setter Target = "WidthFlyoutItem250.IsChecked" Value="False"/>
+                                        <Setter Target = "WidthFlyoutItem300.IsChecked" Value="True"/>
+                                        <Setter Target = "WidthFlyoutItem350.IsChecked" Value="False"/>
                                     </VisualState.Setters>
                                 </VisualState>
 
 
-                                <!--Width372-->
-                                <VisualState x:Name="Width372">
+                                <!--Width350-->
+                                <VisualState x:Name="Width350">
                                     <VisualState.Setters>
                                         <Setter Target = "RootGrid.Width" Value="372"/>
                                         <Setter Target = "ContentPresenter.Width" Value="300"/>
-                                        <Setter Target = "WidthFlyoutItem222.IsChecked" Value="False"/>
-                                        <Setter Target = "WidthFlyoutItem272.IsChecked" Value="False"/>
-                                        <Setter Target = "WidthFlyoutItem322.IsChecked" Value="False"/>
-                                        <Setter Target = "WidthFlyoutItem372.IsChecked" Value="True"/>
+                                        <Setter Target = "WidthFlyoutItem200.IsChecked" Value="False"/>
+                                        <Setter Target = "WidthFlyoutItem250.IsChecked" Value="False"/>
+                                        <Setter Target = "WidthFlyoutItem300.IsChecked" Value="False"/>
+                                        <Setter Target = "WidthFlyoutItem350.IsChecked" Value="True"/>
                                     </VisualState.Setters>
                                 </VisualState>
 
@@ -80,77 +110,76 @@
                         </VisualStateManager.VisualStateGroups>
 
 
-                        <!--@Acrylic-->
-                        <Border x:Name="RootGrid" 
-                                Width="322"  
-                                Height="Auto" 
-                                apiContractNotPresent5:Background="{ThemeResource AppForeground}"
-                                apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}"
-                                CornerRadius="{StaticResource AppCornerRadius}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="40" MinHeight="40" MaxHeight="40"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
 
-                                <!--Head-->
-                                <Grid x:Name="TitleGrid" Grid.Row="0" ManipulationMode="TranslateX,TranslateY"  Background="Transparent">
+                            <!--Head-->
+                            <Grid x:Name="TitleGrid" Height="40" Grid.Row="0" ManipulationMode="TranslateX,TranslateY" Background="Transparent">
 
-                                    <Grid.Resources>
-                                        <!--Style-->
-                                        <Style x:Key="ButtonStyle" TargetType="Button">
-                                            <Setter Property="Padding" Value="0"/>
-                                            <Setter Property="BorderThickness" Value="0"/>
-                                            <Setter Property="BorderBrush" Value="Transparent"/>
-                                            <Setter Property="Background" Value="Transparent"/>
-                                            <Setter Property="Foreground" Value="{ThemeResource AppText}"/>
-                                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                            <Setter Property="VerticalAlignment" Value="Stretch"/>
-                                        </Style>
-                                    </Grid.Resources>
+                                <Grid.Resources>
+                                    <!--Style-->
+                                    <Style x:Key="ButtonStyle" TargetType="Button">
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="{ThemeResource AppText}"/>
+                                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                        <Setter Property="VerticalAlignment" Value="Stretch"/>
+                                    </Style>
+                                </Grid.Resources>
 
-                                    <Grid.ContextFlyout>
-                                        <!--Flyout-->
-                                        <MenuFlyout x:Name="WidthMenuFlyout" Placement="Bottom">
-                                            <MenuFlyout.MenuFlyoutPresenterStyle>
-                                                <Style TargetType="MenuFlyoutPresenter">
-                                                    <Setter Property="Padding" Value="0"/>
-                                                    <Setter Property="Margin" Value="0"/>
-                                                    <Setter Property="Background" Value="{ThemeResource AppForeground}"/>
-                                                    <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
-                                                </Style>
-                                            </MenuFlyout.MenuFlyoutPresenterStyle>
-                                            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem222" Text="200" MinWidth="140" FontWeight="Medium"/>
-                                            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem272" Text="250" MinWidth="140" FontWeight="Medium"/>
-                                            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem322" IsChecked="True" Text="300" MinWidth="140" FontWeight="Medium"/>
-                                            <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem372" Text="350" MinWidth="140" FontWeight="Medium"/>
-                                        </MenuFlyout>
-                                    </Grid.ContextFlyout>
+                                <Grid.ContextFlyout>
+                                    <!--Flyout-->
+                                    <MenuFlyout x:Name="WidthMenuFlyout" Placement="Bottom">
+                                        <MenuFlyout.MenuFlyoutPresenterStyle>
+                                            <Style TargetType="MenuFlyoutPresenter">
+                                                <Setter Property="Padding" Value="0"/>
+                                                <Setter Property="Margin" Value="0"/>
+                                                <Setter Property="Background" Value="{ThemeResource AppForeground}"/>
+                                                <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
+                                            </Style>
+                                        </MenuFlyout.MenuFlyoutPresenterStyle>
+                                        <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem200" Text="200" MinWidth="140" FontWeight="Medium"/>
+                                        <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem250" Text="250" MinWidth="140" FontWeight="Medium"/>
+                                        <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem300" IsChecked="True" Text="300" MinWidth="140" FontWeight="Medium"/>
+                                        <ToggleMenuFlyoutItem x:Name="WidthFlyoutItem350" Text="350" MinWidth="140" FontWeight="Medium"/>
+                                    </MenuFlyout>
+                                </Grid.ContextFlyout>
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
 
-                                    <TextBlock Margin="14,0" FontWeight="Medium" TextTrimming="CharacterEllipsis" FontSize="20" Grid.ColumnSpan="3" TextWrapping="Wrap" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"
+                                <TextBlock Margin="14,0" FontWeight="Medium" TextTrimming="CharacterEllipsis" FontSize="20" Grid.ColumnSpan="3" TextWrapping="Wrap" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"
                                                Text="{TemplateBinding Title}"/>
 
-                                    <Button x:Name="CloseButton" Grid.Column="1" Width="40" Style="{StaticResource ButtonStyle}">
-                                        <FontIcon Glyph="&#xF78A;" FontSize="14" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                                    </Button>
-
-                                </Grid>
-
-
-                                <!--Body-->
-                                <ContentPresenter x:Name="ContentPresenter" Grid.Row="1" Width="274" MaxHeight="{TemplateBinding MaxHeight}" Height="Auto" Padding="{StaticResource AppPanelPadding}"/>
-
+                                <Button x:Name="PinButton" Grid.Column="1" Width="40" Style="{StaticResource ButtonStyle}">
+                                    <FontIcon Glyph="&#xE840;" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                </Button>
+                                <Button x:Name="OverlayButton" Grid.Column="2" Width="40" Style="{StaticResource ButtonStyle}">
+                                    <FontIcon Glyph="&#xF156;" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                </Button>
+                                <Button x:Name="CloseButton" Grid.Column="3" Visibility="Collapsed" Width="40" Style="{StaticResource ButtonStyle}">
+                                    <FontIcon Glyph="&#xF78A;" FontSize="14" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                                </Button>
 
                             </Grid>
-                        </Border>
 
-                    </controls:DropShadowPanel>
+
+                            <!--Body-->
+                            <ContentPresenter x:Name="ContentPresenter" Grid.Row="1" Width="274" Height="Auto" Padding="{StaticResource AppPanelPadding}"/>
+
+
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

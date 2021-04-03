@@ -1,8 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Tools;
-using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.UI;
@@ -25,43 +23,6 @@ namespace Retouch_Photo2
         InputDevice _inputDevice = InputDevice.None;
 
 
-        //MainCanvasControl
-        private void ConstructInvalidateAction()
-        {
-            //High-Display screen
-            if (this.LayerRenderCanvasControl.Dpi > 96.0f)
-            {
-                float dpiScale = 96.0f / this.LayerRenderCanvasControl.Dpi;
-                if (dpiScale < 0.4f) dpiScale = 0.4f;
-                if (dpiScale > 1.0f) dpiScale = 1.0f;
-
-                this.ViewModel.InvalidateAction += (InvalidateMode mode) =>
-                {
-                    switch (mode)
-                    {
-                        case InvalidateMode.Thumbnail:
-                            this.LayerRenderCanvasControl.DpiScale = dpiScale;
-                            break;
-                        case InvalidateMode.HD:
-                            this.LayerRenderCanvasControl.DpiScale = 1.0f;
-                            break;
-                    }
-
-                    this.LayerRenderCanvasControl.Invalidate();
-                    this.ToolDrawCanvasControl.Invalidate();
-                };
-            }
-            //Low-Display screen
-            else
-            {
-                this.ViewModel.InvalidateAction += (_) =>
-                {
-                    this.LayerRenderCanvasControl.Invalidate();
-                    this.ToolDrawCanvasControl.Invalidate();
-                };
-            }
-        }
-
         // LayerRender & ToolDraw
         private void ConstructCanvasControl()
         {
@@ -80,7 +41,7 @@ namespace Retouch_Photo2
             this.LayerRenderCanvasControl.Draw += (sender, args) =>
             {
                 //Render & Crad
-                this._drawRenderAndCrad(args.DrawingSession);
+                this.DrawRenderAndCrad(args.DrawingSession);
             };
 
 
@@ -246,6 +207,6 @@ namespace Retouch_Photo2
             };
 
         }
-    
+
     }
 }
