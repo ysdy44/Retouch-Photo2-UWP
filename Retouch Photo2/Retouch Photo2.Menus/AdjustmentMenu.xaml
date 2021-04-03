@@ -14,9 +14,12 @@
 
     <UserControl.Resources>
 
+        <CollectionViewSource x:Name="CollectionViewSource" IsSourceGrouped="True"/>
+
+
         <!--Flyout-->
         <Flyout x:Name="AdjustmentPageFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ListView x:Name="AdjustmentPageListView" MaxHeight="400" SelectionMode="None" IsItemClickEnabled="True">
+            <ListView x:Name="AdjustmentPageListView" SelectionMode="None" IsItemClickEnabled="True">
 
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -28,19 +31,50 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="adjustments:IAdjustmentPage">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                        <Button IsHitTestVisible="False" Content="{x:Bind Title}" Style="{StaticResource AppIconButton}">
+                            <Button.Tag>
+                                <ContentControl Template="{x:Bind Icon}"/>
+                            </Button.Tag>
+                        </Button>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
-                            <!--Icon-->
-                            <ContentControl Template="{x:Bind Icon}"/>
+            </ListView>
+        </Flyout>
 
-                            <!--Text-->
-                            <TextBlock Grid.Column="1" Text="{x:Bind Text}" Style="{StaticResource AppTextBlockStyle}"/>
+        <Flyout x:Name="FilterFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListView x:Name="FilterListView" SelectionMode="None" IsItemClickEnabled="True"
+                      ItemsSource="{x:Bind CollectionViewSource.View, Mode=OneWay}">
 
-                        </Grid>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Margin" Value="2" />
+                        <Setter Property="Padding" Value="8,0" />
+                        <Setter Property="FontWeight" Value="Normal" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="VerticalAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate x:DataType="filters:FilterCategory">
+                                <TextBlock Text="{x:Bind Name}" Style="{StaticResource AppTabTextBlockStyle}"/>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="filters:Filter">
+                        <Button IsHitTestVisible="False" Content="{x:Bind Name}" Style="{StaticResource AppIconButton}">
+                            <Button.Tag>
+                                <FontIcon Glyph="&#xE9E9;" FontFamily="Segoe MDL2 Assets"/>
+                            </Button.Tag>
+                        </Button>
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
@@ -61,7 +95,7 @@
                 <ContentControl Template="{x:Bind Icon}"/>
 
                 <!--Text-->
-                <TextBlock Grid.Column="1" Text="{x:Bind Text}" Style="{StaticResource AppTextBlockStyle}"/>
+                <TextBlock Grid.Column="1" Text="{x:Bind Title}" Style="{StaticResource AppTextBlockStyle}"/>
 
                 <!--Edit-->
                 <Button x:Name="EditButton" Grid.Column="2" Style="{StaticResource AppRoundedButtonStyle}"
@@ -79,137 +113,111 @@
         </DataTemplate>
 
 
-        <!--Style-->
-        <Style x:Name="FilterItemStyle" TargetType="ListViewItem">
-            <Setter Property="Margin" Value="2" />
-            <Setter Property="Padding" Value="8,0" />
-            <Setter Property="FontWeight" Value="Normal" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Stretch" />
-        </Style>
-
-        <!--DataTemplate-->
-        <DataTemplate x:Name="FilterDataTemplate" x:DataType="filters:Filter">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="36"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <FontIcon Glyph="&#xE9E9;" FontFamily="Segoe MDL2 Assets"/>
-                <TextBlock Text="{x:Bind Name}" Grid.Column="1" FontWeight="Normal" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
-            </Grid>
-        </DataTemplate>
-
     </UserControl.Resources>
 
 
-    <Grid>
+    <SplitView x:Name="SplitView"
+               DisplayMode="Inline" 
+               OpenPaneLength="200" 
+               PanePlacement="Left"
+               IsPaneOpen="True"
+               PaneBackground="Transparent"
+               >
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
 
-            <!--Normal-->
-            <VisualState x:Name="Normal"/>
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
 
-            <!--Disable-->
-            <VisualState x:Name="Disable">
-                <VisualState.Setters>
+                <!--Disable-->
+                <VisualState x:Name="Disable">
+                    <VisualState.Setters>
+                        <Setter Target = "AddButton.IsEnabled" Value="False"/>
+                        <Setter Target = "FilterButton.IsEnabled" Value="False"/>
+                        <Setter Target = "AddButton.Visibility" Value="Collapsed"/>
+                        <Setter Target = "FilterButton.Visibility" Value="Collapsed"/>
 
-                    <Setter Target = "AddButton.IsEnabled" Value="False"/>
-                    <Setter Target = "FilterButton.IsEnabled" Value="False"/>
+                        <Setter Target = "DisableTextBlock.Visibility" Value="Visible"/>
 
-                    <Setter Target = "DisableTextBlock.Visibility" Value="Visible"/>
-
-                </VisualState.Setters>
-            </VisualState>
-
-
-            <!--ZeroAdjustments-->
-            <VisualState x:Name="ZeroAdjustments">
-                <VisualState.Setters >
+                        <Setter Target = "ListView.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
 
 
-                    <Setter Target = "ZeroTextBlock.Visibility" Value="Visible"/>
+                <!--ZeroAdjustments-->
+                <VisualState x:Name="ZeroAdjustments">
+                    <VisualState.Setters >
+                        <Setter Target = "ZeroTextBlock.Visibility" Value="Visible"/>
 
-                </VisualState.Setters>
-            </VisualState>
+                        <Setter Target = "ListView.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
 
-            <!--Adjustments-->
-            <VisualState x:Name="Adjustments">
-                <VisualState.Setters >
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
-                    <Setter Target = "ListView.Visibility" Value="Visible"/>
-
-                </VisualState.Setters>
-            </VisualState>
-
-
-            <!--Edit-->
-            <VisualState x:Name="Edit">
-                <VisualState.Setters >
-
-                    <Setter Target = "AdjustmentPageBorder.Visibility" Value="Visible"/>
-
-                    <Setter Target = "AddButton.Visibility" Value="Collapsed"/>
-                    <Setter Target = "FilterButton.Visibility" Value="Collapsed"/>
-
-                </VisualState.Setters>
-            </VisualState>
-
-        </VisualStateGroup>
-       </VisualStateManager.VisualStateGroups>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*" MinHeight="165" MaxHeight="300"/>
-        </Grid.RowDefinitions>
+        <SplitView.Pane>
+            <Grid x:Name="RootGrid" MaxHeight="{x:Bind MaxHeight, Mode=OneWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="Auto" MinHeight="165"/>
+                </Grid.RowDefinitions>
 
 
-        <!--Body-->
-        <Border  Grid.Row="1"/>
-        <ListView x:Name="ListView" Grid.Row="1" Visibility="Collapsed"
+                <!--Head-->
+                <Grid x:Name="AppbarGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="4"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="4"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="AddButton" Grid.Column="1" Style="{StaticResource AppIconRoundedButtonStyle}">
+                        <Button.Tag>
+                            <FontIcon Glyph="&#xE109;" FontFamily="Segoe MDL2 Assets"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="FilterButton" Grid.Column="3" Style="{StaticResource AppRoundedButtonStyle}"/>
+                </Grid>
+
+
+                <!--Body-->
+                <ListView x:Name="ListView" Grid.Row="1"
                   IsItemClickEnabled="True"
                   SelectionMode="None"
                   ItemTemplate="{StaticResource DataTemplate}">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Padding" Value="0"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                    <Setter Property="BorderThickness" Value="0,1,0,0"/>
-                    <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemContainerTransitions>
-                <TransitionCollection/>
-            </ListView.ItemContainerTransitions>
-        </ListView>
-        <TextBlock x:Name="ZeroTextBlock" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
-        <TextBlock x:Name="DisableTextBlock" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                            <Setter Property="BorderThickness" Value="0,1,0,0"/>
+                            <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemContainerTransitions>
+                        <TransitionCollection/>
+                    </ListView.ItemContainerTransitions>
+                </ListView>
+                <TextBlock x:Name="ZeroTextBlock" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
+                <TextBlock x:Name="DisableTextBlock" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
 
+            </Grid>
+        </SplitView.Pane>
 
-        <!--Foot-->
-        <Grid x:Name="BottomGrid">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="4"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="4"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock x:Name="TextBlock" Margin="12,0" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="AddButton" Grid.Column="1" Style="{StaticResource AppIconRoundedButtonStyle}">
-                <Button.Tag>
-                    <FontIcon Glyph="&#xE109;" FontFamily="Segoe MDL2 Assets"/>
-                </Button.Tag>
-            </Button>
-            <Button x:Name="FilterButton" Grid.Column="3" Style="{StaticResource AppRoundedButtonStyle}"/>
-        </Grid>
-
-
-    </Grid>
+        <SplitView.Content>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <ContentPresenter x:Name="ContentPresenter" VerticalAlignment="Top"/>
+                <Button x:Name="CloseButton" Grid.Row="2" Style="{StaticResource AppRoundedButtonStyle}"/>
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
 
 </UserControl>    

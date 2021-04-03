@@ -20,21 +20,41 @@
             <Setter Property="Height" Value="50"/>
         </Style>
     </UserControl.Resources>
-    
 
-    <Grid MinHeight="165">
-        <Grid x:Name="MainPage">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="30"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel x:Name="ButtonsStackPanel" >
-                <!--Effects-->
-            </StackPanel>
-            <StackPanel x:Name="CheckControlsStackPanel" Grid.Column="1">
-                <!--Effects-->
-            </StackPanel>
-        </Grid>
-    </Grid>
+    
+    <SplitView x:Name="SplitView"
+               DisplayMode="Inline" 
+               OpenPaneLength="200" 
+               PanePlacement="Left"
+               IsPaneOpen="True"
+               PaneBackground="Transparent"
+               >
+        
+        <SplitView.Pane>
+            <Grid x:Name="RootGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel x:Name="ButtonsStackPanel" >
+                    <!--Effects-->
+                </StackPanel>
+                <StackPanel x:Name="ChecksStackPanel" Grid.Column="1">
+                    <!--Effects-->
+                </StackPanel>
+            </Grid>
+        </SplitView.Pane>
+        
+        <SplitView.Content>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <ContentPresenter x:Name="ContentPresenter" VerticalAlignment="Top"/>
+                <Button x:Name="CloseButton" Grid.Row="2" Style="{StaticResource AppRoundedButtonStyle}"/>
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
 
 </UserControl>
