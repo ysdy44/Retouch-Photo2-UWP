@@ -8,7 +8,6 @@ using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.UI.Xaml;

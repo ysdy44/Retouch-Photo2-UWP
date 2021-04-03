@@ -1,16 +1,9 @@
-﻿using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Windows.UI.Xaml.Controls;
-using FanKit.Transformers;
+﻿using FanKit.Transformers;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.ViewModels;
-using System.Linq;
-using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml;
+using System.Collections.Generic;
+using System.ComponentModel;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.ViewModels
