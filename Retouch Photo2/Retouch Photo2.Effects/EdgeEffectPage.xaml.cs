@@ -3,15 +3,13 @@
 // Difficult:         ★★★
 // Only:              
 // Complete:      ★★★
-
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Effects.Models
+namespace Retouch_Photo2.Effects.Pages
 {
     /// <summary>
     /// Page of <see cref = "Effect.Edge_IsOn"/>.
@@ -22,7 +20,7 @@ namespace Retouch_Photo2.Effects.Models
         //@ViewModel
         ViewModel MethodViewModel => App.MethodViewModel;
 
-        
+
         //@Content
         private float Amount
         {
@@ -51,8 +49,6 @@ namespace Retouch_Photo2.Effects.Models
             this.InitializeComponent();
             this.ConstructString();
 
-            this.ConstructIsOn();
-
             this.ConstructAmount1();
             this.ConstructAmount2();
 
@@ -71,6 +67,8 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
+            this.Title = resource.GetString("Effects_Edge");
+
             this.AmountTextBlock.Text = resource.GetString("Effects_Edge_Amount");
             this.RadiusTextBlock.Text = resource.GetString("Effects_Edge_Radius");
         }
@@ -78,12 +76,12 @@ namespace Retouch_Photo2.Effects.Models
         //@Content
         /// <summary> Gets the type. </summary>
         public EffectType Type => EffectType.Edge;
+        /// <summary> Gets the title. </summary>
+        public string Title { get; private set; }
+        /// <summary> Gets the icon. </summary>
+        public ControlTemplate Icon => this.IconContentControl.Template;
         /// <summary> Gets the page. </summary>
-        public FrameworkElement Page => this;
-        /// <summary> Gets the button. </summary>
-        public Button Button { get; } = new Button();
-        /// <summary> Gets the CheckControl. </summary>
-        public CheckControl CheckControl { get; } = new CheckControl();
+        public FrameworkElement Self => this;
 
 
         public void Reset()
@@ -111,6 +109,17 @@ namespace Retouch_Photo2.Effects.Models
                 }
             );
         }
+        public void Switch(bool isOn)
+        {
+            this.MethodViewModel.EffectChanged<bool>
+                (
+                   set: (effect) => effect.Edge_IsOn = isOn,
+
+                   type: HistoryType.LayersProperty_SwitchEffect_Edge,
+                   getUndo: (effect) => effect.Edge_IsOn,
+                   setUndo: (effect, previous) => effect.Edge_IsOn = previous
+                );
+        }
         public bool FollowButton(Effect effect) => effect.Edge_IsOn;
         public void FollowPage(Effect effect)
         {
@@ -124,27 +133,6 @@ namespace Retouch_Photo2.Effects.Models
     /// </summary>
     public sealed partial class EdgeEffectPage : Page, IEffectPage
     {
-
-        //IsOn
-        private void ConstructIsOn()
-        {
-            this.CheckControl.Tapped += (s, e) =>
-            {
-                bool isOn = !this.CheckControl.IsChecked;
-
-                this.Button.IsEnabled = isOn;
-                this.CheckControl.IsChecked = isOn;
-                this.MethodViewModel.EffectChanged<bool>
-                (
-                   set: (effect) => effect.Edge_IsOn = isOn,
-
-                   type: HistoryType.LayersProperty_SwitchEffect_Edge,
-                   getUndo: (effect) => effect.Edge_IsOn,
-                   setUndo: (effect, previous) => effect.Edge_IsOn = previous
-                );
-            };
-        }
-
 
         //Amount
         private void ConstructAmount1()

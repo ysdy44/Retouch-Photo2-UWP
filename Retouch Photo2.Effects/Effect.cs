@@ -19,10 +19,15 @@ namespace Retouch_Photo2.Effects
 
         #region GaussianBlur
 
+        /// <summary> GaussianBlur's IsOn. </summary>
         public bool GaussianBlur_IsOn;
+        /// <summary> GaussianBlur's radius. </summary>
         public float GaussianBlur_Radius = 0;
+        /// <summary> Starting gaussianBlur's radius. </summary>
         public float StartingGaussianBlur_Radius { get; private set; }
+        /// <summary> Starting gaussianBlur's border mode. </summary>
         public EffectBorderMode GaussianBlur_BorderMode = EffectBorderMode.Soft;
+        /// <summary> Cache gaussianBlur. </summary>
         public void CacheGaussianBlur()
         {
             this.StartingGaussianBlur_Radius = this.GaussianBlur_Radius;
@@ -33,12 +38,19 @@ namespace Retouch_Photo2.Effects
 
         #region DirectionalBlur
 
+        /// <summary> DirectionalBlur's IsOn. </summary>
         public bool DirectionalBlur_IsOn;
+        /// <summary> DirectionalBlur's radius. </summary>
         public float DirectionalBlur_Radius = 0;
+        /// <summary> Starting directionalBlur's radius. </summary>
         public float StartingDirectionalBlur_Radius { get; private set; }
+        /// <summary> DirectionalBlur's angle. </summary>
         public float DirectionalBlur_Angle = 0;
+        /// <summary> Starting directionalBlur's angle. </summary>
         public float StartingDirectionalBlur_Angle { get; private set; }
+        /// <summary> Starting directionalBlur's border mode. </summary>
         public EffectBorderMode DirectionalBlur_BorderMode = EffectBorderMode.Soft;
+        /// <summary> Cache directionalBlur. </summary>
         public void CacheDirectionalBlur()
         {
             this.StartingDirectionalBlur_Radius = this.DirectionalBlur_Radius;
@@ -46,13 +58,17 @@ namespace Retouch_Photo2.Effects
         }
 
         #endregion
-        
+
 
         #region Sharpen
 
+        /// <summary> Sharpen's IsOn. </summary>
         public bool Sharpen_IsOn;
+        /// <summary> Sharpen's amount. </summary>
         public float Sharpen_Amount = 0;
+        /// <summary> Starting sharpen's angle. </summary> 
         public float StartingSharpen_Amount { get; private set; }
+        /// <summary> Cache sharpen. </summary>
         public void CacheSharpen()
         {
             this.StartingSharpen_Amount = this.Sharpen_Amount;
@@ -63,16 +79,21 @@ namespace Retouch_Photo2.Effects
 
         #region OuterShadow
 
+        /// <summary> Outer-shadow's IsOn. </summary>
         public bool OuterShadow_IsOn;
+        /// <summary> Outer-shadow's radius. </summary>
         public float OuterShadow_Radius = 12.0f;
+        /// <summary> Starting outer-shadow's radius. </summary>
         public float StartingOuterShadow_Radius { get; private set; }
+        /// <summary> Outer-shadow's opacity. </summary>
         public float OuterShadow_Opacity = 0.5f;
+        /// <summary> Starting outer-shadow's opacity. </summary>
         public float StartingOuterShadow_Opacity { get; private set; }
+        /// <summary> Outer-shadow's color. </summary>
         public Color OuterShadow_Color = Colors.Black;
-        public Color StartingOuterShadow_Color { get; private set; } 
-
-        public float outerShadow_Offset = 0;
-        public float StartingOuterShadow_Offset { get; private set; }
+        /// <summary> Starting outer-shadow's color. </summary>
+        public Color StartingOuterShadow_Color { get; private set; }
+        /// <summary> Outer-shadow's offset. </summary>
         public float OuterShadow_Offset
         {
             get => this.outerShadow_Offset;
@@ -82,8 +103,10 @@ namespace Retouch_Photo2.Effects
                 this.outerShadow_Offset = value;
             }
         }
-        public float outerShadow_Angle = FanKit.Math.PiOver4;
-        public float StartingOuterShadow_Angle { get; private set; }
+        private float outerShadow_Offset = 0;
+        /// <summary> Starting outer-shadow's offset. </summary>
+        public float StartingOuterShadow_Offset { get; private set; }
+        /// <summary> Outer-shadow's angle. </summary>
         public float OuterShadow_Angle
         {
             get => this.outerShadow_Angle;
@@ -93,7 +116,11 @@ namespace Retouch_Photo2.Effects
                 this.outerShadow_Angle = value;
             }
         }
-        Vector2 OuterShadow_Position = Vector2.Zero;
+        private float outerShadow_Angle = FanKit.Math.PiOver4;
+        /// <summary> Starting outer-shadow's angle. </summary>
+        public float StartingOuterShadow_Angle { get; private set; }    
+        private Vector2 OuterShadow_Position = Vector2.Zero;
+        /// <summary> Cache outer-shadow. </summary>
         public void CacheOuterShadow()
         {
             this.StartingOuterShadow_Radius = this.OuterShadow_Radius;
@@ -109,11 +136,17 @@ namespace Retouch_Photo2.Effects
 
         #region Edge
 
+        /// <summary> Edge's IsOn. </summary>
         public bool Edge_IsOn;
+        /// <summary> Edge's amount. </summary>
         public float Edge_Amount = 0.5f;
+        /// <summary> Starting edge's amount. </summary>
         public float StartingEdge_Amount { get; private set; }
+        /// <summary> Edge's radius. </summary>
         public float Edge_Radius = 0.0f;
+        /// <summary> Starting edge's radius. </summary>
         public float StartingEdge_Radius { get; private set; }
+        /// <summary> Cache edge. </summary>
         public void CacheEdge()
         {
             this.StartingEdge_Radius = this.Edge_Radius;
@@ -125,9 +158,9 @@ namespace Retouch_Photo2.Effects
 
         #region Morphology
 
+        /// <summary> Morphology's IsOn. </summary>
         public bool Morphology_IsOn;
-        public int morphology_Size = 1;
-        public int StartingMorphology_Size { get; private set; }
+        /// <summary> Morphology's size. </summary>
         public int Morphology_Size
         {
             get => this.morphology_Size;
@@ -144,10 +177,16 @@ namespace Retouch_Photo2.Effects
                 this.morphology_Size = value;
             }
         }
-
+        private int morphology_Size = 1;
+        /// <summary> Morphology's mode. </summary>
         public MorphologyEffectMode Morphology_Mode { get; private set; }
+        /// <summary> Morphology's width. </summary>
         public int Morphology_Width { get; private set; } = 1;
+        /// <summary> Morphology's height. </summary>
         public int Morphology_Height { get; private set; } = 1;
+        /// <summary> Morphology's size. </summary>
+        public int StartingMorphology_Size { get; private set; }
+        /// <summary> Cache morphology. </summary>
         public void CacheMorphology()
         {
             this.StartingMorphology_Size = this.Morphology_Size;
@@ -158,11 +197,17 @@ namespace Retouch_Photo2.Effects
 
         #region Emboss
 
+        /// <summary> Emboss's IsOn. </summary>
         public bool Emboss_IsOn;
+        /// <summary> Emboss's radius. </summary>
         public float Emboss_Radius = 1;
+        /// <summary> Starting emboss's radius. </summary>
         public float StartingEmboss_Radius { get; private set; }
+        /// <summary> Emboss's angle. </summary>
         public float Emboss_Angle = 0;
+        /// <summary> Starting emboss's angle. </summary>
         public float StartingEmboss_Angle { get; private set; }
+        /// <summary> Cache emboss. </summary>
         public void CacheEmboss()
         {
             this.StartingEmboss_Radius = this.Emboss_Radius;
@@ -174,9 +219,13 @@ namespace Retouch_Photo2.Effects
 
         #region Straighten
 
+        /// <summary> Straighten's IsOn. </summary>
         public bool Straighten_IsOn;
+        /// <summary> Straighten's angle. </summary>
         public float Straighten_Angle = 0;
+        /// <summary> Starting straighten's angle. </summary>
         public float StartingStraighten_Angle { get; private set; }
+        /// <summary> Cache straighten. </summary>
         public void CacheStraighten()
         {
             this.StartingStraighten_Angle = this.Straighten_Angle;

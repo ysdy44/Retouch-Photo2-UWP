@@ -3,7 +3,6 @@
 // Difficult:         
 // Only:              ★★★
 // Complete:      ★★★
-using Retouch_Photo2.Elements;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -16,17 +15,20 @@ namespace Retouch_Photo2.Effects
     {
         /// <summary> Gets the type. </summary>
         EffectType Type { get; }
-        /// <summary> Gets the page. </summary>
-        FrameworkElement Page { get; }
-        /// <summary> Gets the button. </summary>
-        Button Button { get; }
-        /// <summary> Gets the CheckControl. </summary>
-        CheckControl CheckControl { get; }
+
+        /// <summary> Gets the title. </summary>
+        string Title { get; }
+        /// <summary> Gets the icon. </summary>
+        ControlTemplate Icon { get; }
+        /// <summary> Gets the self. </summary>
+        FrameworkElement Self { get; }
 
         /// <summary>
         /// Reset the <see cref="Effect"/> and <see cref="IEffectPage"/>'s data.
         /// </summary>
         void Reset();
+
+        void Switch(bool isOn);
         /// <summary>
         /// IsChecked follows the <see cref="Effect"/>.
         /// </summary>

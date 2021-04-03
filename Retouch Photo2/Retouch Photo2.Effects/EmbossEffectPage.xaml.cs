@@ -3,16 +3,13 @@
 // Difficult:         ★★★
 // Only:              
 // Complete:      ★★★
-
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
-using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Effects.Models
+namespace Retouch_Photo2.Effects.Pages
 {
     /// <summary>
     /// Page of <see cref = "Effect.Emboss_IsOn"/>.
@@ -52,8 +49,6 @@ namespace Retouch_Photo2.Effects.Models
             this.InitializeComponent();
             this.ConstructString();
 
-            this.ConstructIsOn();
-
             this.ConstructRadius1();
             this.ConstructRadius2();
 
@@ -72,6 +67,8 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
+            this.Title = resource.GetString("Effects_Emboss");
+
             this.RadiusTextBlock.Text = resource.GetString("Effects_Emboss_Radius");
             this.AngleTextBlock.Text = resource.GetString("Effects_Emboss_Angle");
         }
@@ -79,12 +76,12 @@ namespace Retouch_Photo2.Effects.Models
         //@Content
         /// <summary> Gets the type. </summary>
         public EffectType Type => EffectType.Emboss;
+        /// <summary> Gets the title. </summary>
+        public string Title { get; private set; }
+        /// <summary> Gets the icon. </summary>
+        public ControlTemplate Icon => this.IconContentControl.Template;
         /// <summary> Gets the page. </summary>
-        public FrameworkElement Page => this;
-        /// <summary> Gets the button. </summary>
-        public Button Button { get; } = new Button();
-        /// <summary> Gets the CheckControl. </summary>
-        public CheckControl CheckControl { get; } = new CheckControl();
+        public FrameworkElement Self => this;
 
         public void Reset()
         {
@@ -111,6 +108,17 @@ namespace Retouch_Photo2.Effects.Models
                 }
             );
         }
+        public void Switch(bool isOn)
+        {
+            this.MethodViewModel.EffectChanged<bool>
+          (
+              set: (effect) => effect.Emboss_IsOn = isOn,
+
+              type: HistoryType.LayersProperty_SwitchEffect_Emboss,
+              getUndo: (effect) => effect.Emboss_IsOn,
+              setUndo: (effect, previous) => effect.Emboss_IsOn = previous
+          );
+        }
         public bool FollowButton(Effect effect) => effect.Emboss_IsOn;
         public void FollowPage(Effect effect)
         {
@@ -124,27 +132,6 @@ namespace Retouch_Photo2.Effects.Models
     /// </summary>
     public sealed partial class EmbossEffectPage : Page, IEffectPage
     {
-
-        //IsOn
-        private void ConstructIsOn()
-        {
-            this.CheckControl.Tapped += (s, e) =>
-            {
-                bool isOn = !this.CheckControl.IsChecked;
-
-                this.Button.IsEnabled = isOn;
-                this.CheckControl.IsChecked = isOn;
-                this.MethodViewModel.EffectChanged<bool>
-                (
-                    set: (effect) => effect.Emboss_IsOn = isOn,
-
-                    type: HistoryType.LayersProperty_SwitchEffect_Emboss,
-                    getUndo: (effect) => effect.Emboss_IsOn,
-                    setUndo: (effect, previous) => effect.Emboss_IsOn = previous
-                );
-            };
-        }
-
 
         //Radius
         private void ConstructRadius1()

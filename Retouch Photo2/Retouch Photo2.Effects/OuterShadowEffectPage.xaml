@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Retouch_Photo2.Effects.Models.OuterShadowEffectPage"
+    x:Class="Retouch_Photo2.Effects.Pages.OuterShadowEffectPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -22,6 +22,15 @@
 
     
     <StackPanel Padding="2,0">
+
+        <Border Width="50" Visibility="Collapsed">
+            <Border.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/OuterShadowIcon.xaml"/>
+            </Border.Resources>
+            <Border.Child>
+                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource OuterShadowIcon}"/>
+            </Border.Child>
+        </Border>
 
         <!--Radius-->
         <RelativePanel>

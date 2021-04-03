@@ -4,15 +4,13 @@
 // Only:              
 // Complete:      ★★★
 using Microsoft.Graphics.Canvas.Effects;
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
-using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Effects.Models
+namespace Retouch_Photo2.Effects.Pages
 {
     /// <summary>
     /// Page of <see cref = "Effect.DirectionalBlur_IsOn"/>.
@@ -69,8 +67,6 @@ namespace Retouch_Photo2.Effects.Models
             this.InitializeComponent();
             this.ConstructString();
 
-            this.ConstructIsOn();
-
             this.ConstructRadius1();
             this.ConstructRadius2();
 
@@ -86,10 +82,13 @@ namespace Retouch_Photo2.Effects.Models
     /// </summary>
     public sealed partial class DirectionalBlurEffectPage : Page, IEffectPage
     {
+
         //String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString("Effects_DirectionalBlur");
 
             this.RadiusTextBlock.Text = resource.GetString("Effects_DirectionalBlur_Radius");
             this.AngleTextBlock.Text = resource.GetString("Effects_DirectionalBlur_Angle");
@@ -97,15 +96,17 @@ namespace Retouch_Photo2.Effects.Models
             this.IsHardBorderCheckBox.Content = resource.GetString("Effects_DirectionalBlur_IsHardBorder");
         }
 
+
         //@Content
         /// <summary> Gets the type. </summary>
         public EffectType Type => EffectType.DirectionalBlur;
-        /// <summary> Gets the page. </summary>
-        public FrameworkElement Page => this;
-        /// <summary> Gets the button. </summary>
-        public Button Button { get; } = new Button();
-        /// <summary> Gets the CheckControl. </summary>
-        public CheckControl CheckControl { get; } = new CheckControl();
+        /// <summary> Gets the title. </summary>
+        public string Title { get; private set; }
+        /// <summary> Gets the icon. </summary>
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        /// <summary> Gets the self. </summary>
+        public FrameworkElement Self => this;
+
 
         public void Reset()
         {
@@ -136,6 +137,17 @@ namespace Retouch_Photo2.Effects.Models
                 }
             );
         }
+        public void Switch(bool isOn)
+        {
+            this.MethodViewModel.EffectChanged<bool>
+            (
+               set: (effect) => effect.DirectionalBlur_IsOn = isOn,
+
+               type: HistoryType.LayersProperty_SwitchEffect_DirectionalBlur,
+               getUndo: (effect) => effect.DirectionalBlur_IsOn,
+               setUndo: (effect, previous) => effect.DirectionalBlur_IsOn = previous
+            );
+        }
         public bool FollowButton(Effect effect) => effect.DirectionalBlur_IsOn;
         public void FollowPage(Effect effect)
         {
@@ -143,34 +155,14 @@ namespace Retouch_Photo2.Effects.Models
             this.Angle = effect.DirectionalBlur_Angle;
             this.BorderMode = effect.DirectionalBlur_BorderMode;
         }
+
     }
-    
+
     /// <summary>
     /// Page of <see cref = "Effect.DirectionalBlur_IsOn"/>.
     /// </summary>
     public sealed partial class DirectionalBlurEffectPage : Page, IEffectPage
     {
-
-        //IsOn
-        private void ConstructIsOn()
-        {
-            this.CheckControl.Tapped += (s, e) =>
-            {
-                bool isOn = !this.CheckControl.IsChecked;
-
-                this.Button.IsEnabled = isOn;
-                this.CheckControl.IsChecked = isOn;
-                this.MethodViewModel.EffectChanged<bool>
-                (
-                   set: (effect) => effect.DirectionalBlur_IsOn = isOn,
-
-                   type: HistoryType.LayersProperty_SwitchEffect_DirectionalBlur,
-                   getUndo: (effect) => effect.DirectionalBlur_IsOn,
-                   setUndo: (effect, previous) => effect.DirectionalBlur_IsOn = previous
-                );
-            };
-        }
-
 
         //Radius
         private void ConstructRadius1()
@@ -185,14 +177,14 @@ namespace Retouch_Photo2.Effects.Models
                 this.MethodViewModel.EffectChanged<float>
                 (
                     set: (effect) => effect.DirectionalBlur_Radius = radius,
-                               
+
                     type: HistoryType.LayersProperty_SetEffect_DirectionalBlur_Radius,
                     getUndo: (effect) => effect.DirectionalBlur_Radius,
                     setUndo: (effect, previous) => effect.DirectionalBlur_Radius = previous
                 );
             };
         }
-        
+
         private void ConstructRadius2()
         {
             this.RadiusSlider.Minimum = 0.0d;
@@ -221,7 +213,7 @@ namespace Retouch_Photo2.Effects.Models
             };
         }
 
-        
+
         //Angle
         private void ConstructAngle1()
         {

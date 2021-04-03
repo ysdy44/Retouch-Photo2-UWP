@@ -3,15 +3,13 @@
 // Difficult:         ★★★
 // Only:              
 // Complete:      ★★★
-
-using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Effects.Models
+namespace Retouch_Photo2.Effects.Pages
 {
     /// <summary>
     /// Page of <see cref = "Effect.Straighten_IsOn"/>.
@@ -22,7 +20,7 @@ namespace Retouch_Photo2.Effects.Models
         //@ViewModel
         ViewModel MethodViewModel => App.MethodViewModel;
 
-        
+
         //@Content
         private float Angle
         {
@@ -43,8 +41,6 @@ namespace Retouch_Photo2.Effects.Models
             this.InitializeComponent();
             this.ConstructString();
 
-            this.ConstructIsOn();
-
             this.ConstructStraighten_Angle1();
             this.ConstructStraighten_Angle2();
         }
@@ -60,19 +56,20 @@ namespace Retouch_Photo2.Effects.Models
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
+            this.Title = resource.GetString("Effects_Straighten");
+
             this.AngleTextBlock.Text = resource.GetString("Effects_Straighten_Angle");
         }
 
         //@Content
         /// <summary> Gets the type. </summary>
         public EffectType Type => EffectType.Straighten;
+        /// <summary> Gets the title. </summary>
+        public string Title { get; private set; }
+        /// <summary> Gets the icon. </summary>
+        public ControlTemplate Icon => this.IconContentControl.Template;
         /// <summary> Gets the page. </summary>
-        public FrameworkElement Page => this;
-        /// <summary> Gets the button. </summary>
-        public Button Button { get; } = new Button();
-        /// <summary> Gets the CheckControl. </summary>
-        public CheckControl CheckControl { get; } = new CheckControl();
-
+        public FrameworkElement Self => this;
 
         public void Reset()
         {
@@ -87,6 +84,17 @@ namespace Retouch_Photo2.Effects.Models
                 setUndo: (effect, previous) => effect.Straighten_Angle = previous
             );
         }
+        public void Switch(bool isOn)
+        {
+            this.MethodViewModel.EffectChanged<bool>
+            (
+                set: (effect) => effect.Straighten_IsOn = isOn,
+
+                type: HistoryType.LayersProperty_SwitchEffect_Straighten,
+                getUndo: (effect) => effect.Straighten_IsOn,
+                setUndo: (effect, previous) => effect.Straighten_IsOn = previous
+            );
+        }
         public bool FollowButton(Effect effect) => effect.Straighten_IsOn;
         public void FollowPage(Effect effect)
         {
@@ -99,27 +107,6 @@ namespace Retouch_Photo2.Effects.Models
     /// </summary>
     public sealed partial class StraightenEffectPage : Page, IEffectPage
     {
-
-        //IsOn
-        private void ConstructIsOn()
-        {
-            this.CheckControl.Tapped += (s, e) =>
-            {
-                bool isOn = !this.CheckControl.IsChecked;
-
-                this.Button.IsEnabled = isOn;
-                this.CheckControl.IsChecked = isOn;
-                this.MethodViewModel.EffectChanged<bool>
-                (
-                    set: (effect) => effect.Straighten_IsOn = isOn,
-
-                    type: HistoryType.LayersProperty_SwitchEffect_Straighten,
-                    getUndo: (effect) => effect.Straighten_IsOn,
-                    setUndo: (effect, previous) => effect.Straighten_IsOn = previous
-                );
-            };
-        }
-
 
         //Straighten_Angle
         private void ConstructStraighten_Angle1()
