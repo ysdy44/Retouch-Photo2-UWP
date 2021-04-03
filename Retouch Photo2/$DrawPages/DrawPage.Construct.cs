@@ -93,6 +93,18 @@ namespace Retouch_Photo2
                 this.RatioTextBlock.Text = resource.GetString("Tools_MoreTransform_Ratio ");
                 this.CenterTextBlock2.Text = resource.GetString("Tools_MoreTransform_Center");
             }
+
+            this.EditExpander.Title = resource.GetString("Menus_Edit");
+            this.OperateExpander.Title = resource.GetString("Menus_Operate");
+            this.AdjustmentExpander.Title = resource.GetString("Menus_ Adjustment");
+            this.EffectExpander.Title = resource.GetString("Menus_Effect");
+            this.TextExpander.Title = resource.GetString("Menus_Text");
+            this.StrokeExpander.Title = resource.GetString("Menus_Stroke");
+            this.StyleExpander.Title = resource.GetString("Menus_Style");
+            this.HistoryExpander.Title = resource.GetString("Menus_History");
+            this.TransformerExpander.Title = resource.GetString("Menus_Transformer");
+            this.LayerExpander.Title = resource.GetString("Menus_Layer");
+            this.ColorExpander.Title = resource.GetString("Menus_Color");
         }
 
 

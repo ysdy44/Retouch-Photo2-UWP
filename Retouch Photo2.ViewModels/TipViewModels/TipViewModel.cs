@@ -28,11 +28,6 @@ namespace Retouch_Photo2.ViewModels
                 this.isOpen = value;
                 this.OnPropertyChanged(nameof(this.IsOpen));//Notify 
 
-                foreach (MenuViewModel menu in this.Menus)
-                {
-                    menu.IsOpen = menu.ButtonVisibility == Visibility.Visible && value;
-                }
-
                 this.Tool.IsOpen = value;
             }
         }

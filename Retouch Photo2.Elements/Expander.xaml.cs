@@ -271,6 +271,9 @@ namespace Retouch_Photo2.Elements
 
         public void FlyoutShowAt(FrameworkElement element)
         {
+            if (this._vsIsOverlay) return;
+            if (this._vsIsPin) return;
+
             this.AsFlyout();
             this.Flyout.ShowAt(element);
         }
