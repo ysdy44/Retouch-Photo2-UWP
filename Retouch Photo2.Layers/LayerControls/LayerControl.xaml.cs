@@ -33,7 +33,7 @@ namespace Retouch_Photo2.Layers
         public LayerControl(ILayer layer)
         {
             this.InitializeComponent();
-            this.ConstructStrings(layer);
+            this.ConstructStringsCore(layer);
             this.ControlHeight = LayerManager.ControlsHeight;
 
             this.ConstructIcon(LayerManager.CanvasDevice);

@@ -17,7 +17,7 @@ namespace Retouch_Photo2.Tools
     /// <summary>
     /// Represents a tools control, that containing some buttons.
     /// </summary>
-    public sealed class ToolsControl : ContentControl
+    public sealed class ToolsControl : UserControl
     {
 
         /// <summary>

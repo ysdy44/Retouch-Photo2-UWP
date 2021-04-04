@@ -23,20 +23,18 @@ namespace Retouch_Photo2.Elements
             set
             {
                 this.Visibility = value == LoadingState.None ? Visibility.Collapsed : Visibility.Visible;
-                this.TextBlock.Text = this.StringConverter(value);
+                this.TextBlock.Text = this.ConstructStringsCore(value);
                 this.state = value;
             }
         }
         private LoadingState state;
 
 
-        //@String
-        private string StringConverter(LoadingState value)
+        //String
+        readonly static ResourceLoader resource = ResourceLoader.GetForCurrentView();
+        private string ConstructStringsCore(LoadingState value)
         {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            return resource.GetString($"$Loading_{value}");
-            //return resource.GetString($"$Loading_Loading");
+            return LoadingControl.resource.GetString($"$Loading_{value}");
         }
 
 
@@ -47,7 +45,7 @@ namespace Retouch_Photo2.Elements
         {
             get => (bool)base.GetValue(IsActiveProperty);
             set => base.SetValue(IsActiveProperty, value);
-        }       
+        }
         /// <summary> Identifies the <see cref = "LoadingControl.IsActive" /> dependency property. </summary>
         public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(nameof(IsActive), typeof(bool), typeof(LoadingControl), new PropertyMetadata(false));
 

@@ -52,7 +52,7 @@ namespace Retouch_Photo2.Elements
                 if (this._vsIsOverlay) return this.Overlay;
                 return this.Normal;
             }
-            set => VisualStateManager.GoToState(this, value.Name, false);
+            set => VisualStateManager.GoToState(this, value?.Name ?? "Normal", false);
         }
         public VisualState WidthVisualState
         {

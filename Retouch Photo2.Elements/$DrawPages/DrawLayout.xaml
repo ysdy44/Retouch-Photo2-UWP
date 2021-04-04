@@ -135,6 +135,7 @@
                         <!--LeftIcon-->
                         <Setter Target = "LeftIconTransform.TranslateX" Value="70"/>
                         <Setter Target = "_LeftIcon.Background" Value="{ThemeResource SystemAccentColor}"/>
+                        <Setter Target = "LeftContentControl.Foreground" Value="White"/>
 
                         <!--DismissOverlay-->
                         <Setter Target = "DismissOverlay.Visibility" Value="Visible"/>
@@ -156,6 +157,7 @@
                         <!--LeftIcon-->
                         <Setter Target = "RightIconTransform.TranslateX" Value="-220"/>
                         <Setter Target = "_RightIcon.Background" Value="{ThemeResource SystemAccentColor}"/>
+                        <Setter Target = "RightContentControl.Foreground" Value="White"/>
 
                         <!--DismissOverlay-->
                         <Setter Target = "DismissOverlay.Visibility" Value="Visible"/>
@@ -1117,7 +1119,7 @@
         </Border>
 
 
-        <!--Foot-->
+        <!--Icon-->
         <Border x:Name="_LeftIcon" Grid.Column="1" Grid.Row="1" CornerRadius="0,12,12,0" Width="32" Height="120" HorizontalAlignment="Left" 
                          apiContractNotPresent5:Background="{ThemeResource AppForeground}"
                          apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
@@ -1125,7 +1127,7 @@
             <Border.RenderTransform>
                 <CompositeTransform x:Name="LeftIconTransform" ScaleX="1" ScaleY="1" TranslateX="0"/>
             </Border.RenderTransform>
-            <ContentControl x:Name="LeftContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemAltHighColor}"/>
+            <ContentControl x:Name="LeftContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemBaseHighColor}"/>
         </Border>
         <Border x:Name="_RightIcon" Grid.Column="1" Grid.Row="1" CornerRadius="12,0,0,12" Width="32" Height="120" HorizontalAlignment="Right" VerticalAlignment="Center" 
                          apiContractNotPresent5:Background="{ThemeResource AppForeground}"
@@ -1134,7 +1136,7 @@
             <Border.RenderTransform>
                 <CompositeTransform x:Name="RightIconTransform" ScaleX="1" ScaleY="1" TranslateX="0"/>
             </Border.RenderTransform>
-            <ContentControl x:Name="RightContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemAltHighColor}"/>
+            <ContentControl x:Name="RightContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemBaseHighColor}"/>
         </Border>
 
         <!--

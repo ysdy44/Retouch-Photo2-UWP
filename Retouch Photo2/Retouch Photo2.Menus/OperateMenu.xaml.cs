@@ -32,23 +32,20 @@ namespace Retouch_Photo2.Menus
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
 
 
+        #region DependencyProperty
+
+
         /// <summary> Gets or sets <see cref = "OperateMenu" />'s IsOpen. </summary>
         public bool IsOpen
         {
-            set
-            {
-                foreach (UIElement child in this.LayoutRoot.Children)
-                {
-                    if (child is Button button)
-                    {
-                        if (ToolTipService.GetToolTip(button) is ToolTip toolTip)
-                        {
-                            toolTip.IsOpen = value;
-                        }
-                    }
-                }
-            }
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
         }
+        /// <summary> Identifies the <see cref = "OperateMenu.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(OperateMenu), new PropertyMetadata(false));
+
+
+        #endregion
 
 
         //@Construct
@@ -114,12 +111,10 @@ namespace Retouch_Photo2.Menus
             {
                 if (child is Button button)
                 {
-                    ToolTipService.SetToolTip(button, new ToolTip
+                    if (ToolTipService.GetToolTip(button) is ToolTip toolTip)
                     {
-                        Placement = PlacementMode.Top,
-                        Content = resource.GetString($"Operates_{button.Name}"),
-                        Style = this.ToolTipStyle
-                    });
+                        toolTip.Content = resource.GetString($"Operates_{button.Name}");
+                    }
                 }
                 if (child is TextBlock textBlock)
                 {

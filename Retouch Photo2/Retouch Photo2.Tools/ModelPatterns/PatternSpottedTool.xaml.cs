@@ -112,7 +112,6 @@ namespace Retouch_Photo2.Tools.Models
             this.RadiusTextBlock.Text = resource.GetString("Tools_PatternSpotted_Radius");
             this.StepTextBlock.Text = resource.GetString("Tools_PatternSpotted_Step");
         }
-
     }
 
     /// <summary>

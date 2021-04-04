@@ -12,11 +12,10 @@ namespace Retouch_Photo2.Layers
     {
 
         //Strings
-        private void ConstructStrings(ILayer layer)
+        readonly static ResourceLoader resource = ResourceLoader.GetForCurrentView();
+        private void ConstructStringsCore(ILayer layer)
         {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Type = resource.GetString($"Layers_{layer.Type}");
+            this.Type = LayerControl.resource.GetString($"Layers_{layer.Type}");
         }
 
         private void ConstructIcon(CanvasDevice customDevice2)

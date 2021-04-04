@@ -75,6 +75,7 @@
     <!--Flyout-->
     <Style x:Key="AppFlyoutPresenterStyle" TargetType="FlyoutPresenter">
         <Setter Property="MaxWidth" Value="1000"/>
+        <Setter Property="MinWidth" Value="200"/>
         <Setter Property="MinHeight" Value="40"/>
         <Setter Property="Padding" Value="{StaticResource AppPanelPadding}"/>
         <Setter Property="Margin" Value="0"/>
@@ -84,10 +85,11 @@
                 <ControlTemplate TargetType="FlyoutPresenter">
                     <!--@Acrylic-->
                     <Border CornerRadius="{StaticResource AppCornerRadius}"             
-                                    apiContractNotPresent5:Background = "{ThemeResource AppBackground}"
-                                    apiContractPresent5:Background = "{ThemeResource AppAcrylicElementBrush}">
+                                  BorderThickness="{TemplateBinding BorderThickness}"
+                                  BorderBrush="{TemplateBinding BorderBrush}"
+                                  apiContractNotPresent5:Background = "{ThemeResource AppBackground}"
+                                  apiContractPresent5:Background = "{ThemeResource AppAcrylicElementBrush}">
                         <ContentPresenter Content="{TemplateBinding Content}"
-                                MinWidth="200"
                                 ContentTemplate="{TemplateBinding ContentTemplate}"
                                 ContentTransitions="{TemplateBinding ContentTransitions}"
                                 Margin="{TemplateBinding Padding}"
