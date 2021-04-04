@@ -133,12 +133,6 @@ namespace Retouch_Photo2.Elements
         public Expander()
         {
             this.DefaultStyleKey = typeof(Expander);
-            this.SizeChanged += (s, e) =>
-            {
-                if (e.NewSize == e.PreviousSize) return;
-                this.MaxWidth = this.OverlayCanvas.ActualWidth;
-                this.MaxHeight = this.OverlayCanvas.ActualHeight;
-            };
         }
 
         /// <inheritdoc/>
@@ -285,6 +279,8 @@ namespace Retouch_Photo2.Elements
                 this.PinStackPanel.Children.Remove(this);
             }
             this.Flyout.Content = this;
+            this.MaxWidth = double.PositiveInfinity;
+            this.MaxHeight = double.PositiveInfinity;
 
 
             this._vsIsOverlay = false;
@@ -309,6 +305,8 @@ namespace Retouch_Photo2.Elements
                 this.PinStackPanel.Children.Remove(this);
             }
             this.OverlayCanvas.Children.Add(this);
+            this.MaxWidth = this.OverlayCanvas.ActualWidth;
+            this.MaxHeight = this.OverlayCanvas.ActualHeight;
 
 
             this._vsIsOverlay = true;
@@ -325,6 +323,8 @@ namespace Retouch_Photo2.Elements
                 this.PinStackPanel.Children.Remove(this);
             }
             this.PinStackPanel.Children.Add(this);
+            this.MaxWidth = double.PositiveInfinity;
+            this.MaxHeight = double.PositiveInfinity;
 
 
             this._vsIsOverlay = false;

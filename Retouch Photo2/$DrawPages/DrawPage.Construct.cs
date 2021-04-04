@@ -96,7 +96,7 @@ namespace Retouch_Photo2
 
             this.EditExpander.Title = resource.GetString("Menus_Edit");
             this.OperateExpander.Title = resource.GetString("Menus_Operate");
-            this.AdjustmentExpander.Title = resource.GetString("Menus_ Adjustment");
+            this.AdjustmentExpander.Title = resource.GetString("Menus_Adjustment");
             this.EffectExpander.Title = resource.GetString("Menus_Effect");
             this.TextExpander.Title = resource.GetString("Menus_Text");
             this.StrokeExpander.Title = resource.GetString("Menus_Stroke");

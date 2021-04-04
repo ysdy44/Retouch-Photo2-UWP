@@ -282,7 +282,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind EditExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <edits:Icon/>
                             </Button>
@@ -295,7 +295,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind OperateExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <operates:Icon/>
                             </Button>
@@ -323,7 +323,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind AdjustmentExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <adjustments:Icon/>
                             </Button>
@@ -347,7 +347,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind EffectExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <effects:Icon/>
                             </Button>
@@ -361,7 +361,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind TextExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <texts:Icon/>
                             </Button>
@@ -374,7 +374,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind StrokeExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <strokes:Icon/>
                             </Button>
@@ -387,7 +387,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind StyleExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <styles:Icon/>
                             </Button>
@@ -401,7 +401,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind HistoryExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <historys:Icon/>
                             </Button>
@@ -414,7 +414,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind TransformerExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <transformers:Icon/>
                             </Button>
@@ -427,7 +427,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind LayerExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <layers:Icon/>
                             </Button>
@@ -441,7 +441,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind ColorExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <brushs:ColorEllipse Color="{x:Bind SelectionViewModel.Color, Mode=OneWay}"/>
                             </Button>

@@ -73,8 +73,6 @@ namespace Retouch_Photo2
 
             this.UnFullScreenButton.Click += (s, e) => this.DrawLayout.IsFullScreen = false;
 
-            this.OverflowTipButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = true;
-
             this.ConstructAppBar_TipButton(this.TipButton);
             this.ConstructAppBar_TipButton(this.OverflowTipButton);
         }

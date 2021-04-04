@@ -75,7 +75,7 @@ namespace Retouch_Photo2.Tools
                     {
                         case DeviceLayoutType.PC:
                         case DeviceLayoutType.Pad:
-                            this.IsOpen = value;
+                            this.ToolsControlCore.IsOpen = value;
                             break;
                     }
                 }
