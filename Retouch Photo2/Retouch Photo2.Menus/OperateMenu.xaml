@@ -9,11 +9,6 @@
     d:DesignHeight="400"
     >
 
-    <UserControl.Resources>
-        <!--Style-->
-        <Style x:Name="ToolTipStyle" TargetType="ToolTip" BasedOn="{StaticResource AppToolTipStyle}"/>
-    </UserControl.Resources>
-
     <Grid x:Name="LayoutRoot" MinHeight="165" Padding="1,4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

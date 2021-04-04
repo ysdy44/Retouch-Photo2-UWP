@@ -290,6 +290,7 @@
                                 <Button.Flyout>
                                     <Flyout x:Name="OperateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="OperateExpander" Flyout="{x:Bind OperateFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                                            <menus:OperateMenu IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}"/>
                                         </elements:Expander>
                                     </Flyout>
                                 </Button.Flyout>
@@ -355,7 +356,7 @@
                                 <Button.Flyout>
                                     <Flyout x:Name="TextFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="TextExpander" Flyout="{x:Bind TextFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:TextMenu/>
+                                            <menus:TextMenu IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}"/>
                                         </elements:Expander>
                                     </Flyout>
                                 </Button.Flyout>
@@ -368,7 +369,7 @@
                                 <Button.Flyout>
                                     <Flyout x:Name="StrokeFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="StrokeExpander" Flyout="{x:Bind StrokeFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:StrokeMenu/>
+                                            <menus:StrokeMenu IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}"/>
                                         </elements:Expander>
                                     </Flyout>
                                 </Button.Flyout>
@@ -408,7 +409,7 @@
                                 <Button.Flyout>
                                     <Flyout x:Name="TransformerFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="TransformerExpander" Flyout="{x:Bind TransformerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:TransformerMenu Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}" Transformer="{x:Bind SelectionViewModel.Transformer, Mode=OneWay}" ToolType="{x:Bind TipViewModel.ToolType, Mode=OneWay}"/>
+                                            <menus:TransformerMenu IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}" Transformer="{x:Bind SelectionViewModel.Transformer, Mode=OneWay}" ToolType="{x:Bind TipViewModel.ToolType, Mode=OneWay}"/>
                                         </elements:Expander>
                                     </Flyout>
                                 </Button.Flyout>
