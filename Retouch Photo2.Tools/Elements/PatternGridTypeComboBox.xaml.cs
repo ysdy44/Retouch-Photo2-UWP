@@ -16,6 +16,25 @@ namespace Retouch_Photo2.Tools.Elements
         /// <summary> Occurs when type change. </summary>
         public EventHandler<PatternGridType> TypeChanged;
 
+        //@VisualState
+        PatternGridType _vsType;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
+        public VisualState VisualState
+        {
+            get
+            {
+                switch (this._vsType)
+                {
+                    case PatternGridType.Grid: return this.Grid;
+                    case PatternGridType.Horizontal: return this.Horizontal;
+                    case PatternGridType.Vertical: return this.Vertical;
+                    default: return this.Normal;
+                }
+            }
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
 
         #region DependencyProperty
 
@@ -41,28 +60,6 @@ namespace Retouch_Photo2.Tools.Elements
 
         #endregion
 
-
-        //@VisualState
-        PatternGridType _vsType;
-        /// <summary> 
-        /// Represents the visual appearance of UI elements in a specific state.
-        /// </summary>
-        public VisualState VisualState
-        {
-            get
-            {
-                switch (this._vsType)
-                {
-                    case PatternGridType.Grid: return this.Grid;
-                    case PatternGridType.Horizontal: return this.Horizontal;
-                    case PatternGridType.Vertical: return this.Vertical;
-                    default: return this.Normal;
-                }
-            }
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
-
-
         //@Construct
         /// <summary>
         /// Initializes a PatternGridTypeComboBox. 
@@ -71,6 +68,23 @@ namespace Retouch_Photo2.Tools.Elements
         {
             this.InitializeComponent();
             this.ConstructStrings();
+
+            this.GridButton.Click += (s, e) =>
+            {
+                this.TypeChanged?.Invoke(this, PatternGridType.Grid); //Delegate
+                this.Flyout.Hide();
+            };
+            this.HorizontalButton.Click += (s, e) =>
+            {
+                this.TypeChanged?.Invoke(this, PatternGridType.Horizontal); //Delegate
+                this.Flyout.Hide();
+            };
+            this.VerticalButton.Click += (s, e) =>
+            {
+                this.TypeChanged?.Invoke(this, PatternGridType.Vertical); //Delegate
+                this.Flyout.Hide();
+            };
+
             this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
@@ -81,30 +95,9 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-
-            this.GridButton.Content = resource.GetString($"Tools_PatternGrid_{PatternGridType.Grid}");
-            this.GridButton.Click += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, PatternGridType.Grid); //Delegate
-                this.Flyout.Hide();
-            };
-
-
-            this.HorizontalButton.Content = resource.GetString($"Tools_PatternGrid_{PatternGridType.Horizontal}");
-            this.HorizontalButton.Click += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, PatternGridType.Horizontal); //Delegate
-                this.Flyout.Hide();
-            };
-
-
-            this.VerticalButton.Content = resource.GetString($"Tools_PatternGrid_{PatternGridType.Vertical}");
-            this.VerticalButton.Click += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, PatternGridType.Vertical); //Delegate
-                this.Flyout.Hide();
-            };
+            this.GridButton.Content = resource.GetString($"Tools_PatternGrid_Grid");
+            this.HorizontalButton.Content = resource.GetString($"Tools_PatternGrid_Horizontal");
+            this.VerticalButton.Content = resource.GetString($"Tools_PatternGrid_Vertical");
         }
-
     }
 }

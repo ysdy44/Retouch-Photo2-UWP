@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel x:Name="StackPanel" Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Button x:Name="Clamp" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
                         <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/ExtendIcons/ClampIcon.xaml"/>
@@ -43,6 +43,41 @@
 
 
     <Button x:Name="Button" Style="{StaticResource AppIconRoundedButtonStyle}">
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--Clamp-->
+                <VisualState x:Name="ClampState">
+                    <VisualState.Setters>
+                        <Setter Target = "Clamp.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind Clamp.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Wrap-->
+                <VisualState x:Name="WrapState">
+                    <VisualState.Setters>
+                        <Setter Target = "Wrap.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind Wrap.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+                
+                <!--Mirror-->
+                <VisualState x:Name="MirrorState">
+                    <VisualState.Setters>
+                        <Setter Target = "Mirror.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind Mirror.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
         <Button.Tag>
             <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
         </Button.Tag>

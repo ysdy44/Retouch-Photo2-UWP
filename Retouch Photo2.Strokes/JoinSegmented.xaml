@@ -19,33 +19,33 @@
                 <VisualState x:Name="Normal"/>
 
                 <!--Miter-->
-                <VisualState x:Name="Miter">
+                <VisualState x:Name="MiterState">
                     <VisualState.Setters>
-                        <Setter Target = "MiterButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Miter.IsEnabled" Value="False"/>
                         <Setter Target = "MiterIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Bevel-->
-                <VisualState x:Name="Bevel">
+                <VisualState x:Name="BevelState">
                     <VisualState.Setters>
-                        <Setter Target = "BevelButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Bevel.IsEnabled" Value="False"/>
                         <Setter Target = "BevelIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Round-->
-                <VisualState x:Name="Round">
+                <VisualState x:Name="RoundState">
                     <VisualState.Setters>
-                        <Setter Target = "RoundButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Round.IsEnabled" Value="False"/>
                         <Setter Target = "RoundIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--MiterOrBevel-->
-                <VisualState x:Name="MiterOrBevel">
+                <VisualState x:Name="MiterOrBevelState">
                     <VisualState.Setters>
-                        <Setter Target = "MiterOrBevelButton.IsEnabled" Value="False"/>
+                        <Setter Target = "MiterOrBevel.IsEnabled" Value="False"/>
                         <Setter Target = "MiterOrBevelIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -62,33 +62,33 @@
         </Grid.ColumnDefinitions>
 
         <!--Miter-->
-        <Button x:Name="MiterButton" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonStyle}">
+        <Button x:Name="Miter" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip x:Name="MiterToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <Polyline x:Name="MiterIcon" Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Miter" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
 
         <!--Bevel-->
-        <Button x:Name="BevelButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+        <Button x:Name="Bevel" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip x:Name="BevelToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <Polyline x:Name="BevelIcon" Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Bevel" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
 
         <!--Round-->
-        <Button x:Name="RoundButton" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <Button x:Name="Round" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip x:Name="RoundToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <Polyline x:Name="RoundIcon" Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Round" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>
 
         <!--MiterOrBevel-->
-        <Button x:Name="MiterOrBevelButton" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+        <Button x:Name="MiterOrBevel" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip x:Name="MiterOrBevelToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <Polyline x:Name="MiterOrBevelIcon" Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Bevel" Stroke="{ThemeResource SystemBaseHighColor}"/>
         </Button>

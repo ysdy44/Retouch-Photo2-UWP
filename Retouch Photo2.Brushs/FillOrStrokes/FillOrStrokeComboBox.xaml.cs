@@ -20,9 +20,24 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Occurs when fill or stroke change. </summary>
         public EventHandler<FillOrStroke> FillOrStrokeChanged;
 
-        //@Group
-        /// <summary> Occurs when group change. </summary>
-        private EventHandler<FillOrStroke> Group;
+        //@VisualState
+        FillOrStroke _vsFillOrStroke;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
+        public VisualState VisualState
+        {
+            get
+            {
+                switch (this._vsFillOrStroke)
+                {
+                    case FillOrStroke.Fill: return this.FillState;
+                    case FillOrStroke.Stroke: return this.StrokeState;
+                    default: return this.Normal;
+                }
+            }
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
 
         #region DependencyProperty
 
@@ -40,7 +55,8 @@ namespace Retouch_Photo2.Brushs
 
             if (e.NewValue is FillOrStroke value)
             {
-                control.Group?.Invoke(control, value);
+                control._vsFillOrStroke = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 
@@ -56,63 +72,30 @@ namespace Retouch_Photo2.Brushs
         {
             this.InitializeComponent();
             this.ConstructStrings();
+
+            this.Fill.Click += (s, e) =>
+            {
+                this.FillOrStrokeChanged?.Invoke(this, FillOrStroke.Fill);//Delegate
+                this.Flyout.Hide();
+            };
+            this.Stroke.Click += (s, e) =>
+            {
+                this.FillOrStrokeChanged?.Invoke(this, FillOrStroke.Stroke);//Delegate
+                this.Flyout.Hide();
+            };
+
             this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
+            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
 
-    }
-
-    /// <summary>
-    /// Represents the combo box that is used to select fill or stroke.
-    /// </summary>
-    public sealed partial class FillOrStrokeComboBox : UserControl
-    {
 
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-
-            foreach (UIElement child in this.StackPanel.Children)
-            {
-                if (child is Button button)
-                {
-
-                    //@Group
-                    //void constructGroup(Button button)
-                    {
-                        string key = button.Name;
-                        FillOrStroke fillOrStroke = key == "Fill" ? FillOrStroke.Fill : FillOrStroke.Stroke;
-                        string title = resource.GetString($"Tools_{key}");
-
-
-                        //Button
-                        button.Content = title;
-                        button.Click += (s, e) =>
-                        {
-                            this.FillOrStrokeChanged?.Invoke(this, fillOrStroke);//Delegate
-                            this.Flyout.Hide();
-                        };
-
-
-                        //Group
-                        group(this.FillOrStroke);
-                        this.Group += (s, groupMode) => group(groupMode);
-
-                        void group(FillOrStroke groupMode)
-                        {
-                            if (groupMode == fillOrStroke)
-                            {
-                                button.IsEnabled = false;
-
-                                this.Button.Content = title;
-                            }
-                            else button.IsEnabled = true;
-                        }
-                    }
-                }
-            }
+            this.Fill.Content = resource.GetString($"Tools_Fill");
+            this.Stroke.Content = resource.GetString($"Tools_Stroke");
         }
-
     }
 }

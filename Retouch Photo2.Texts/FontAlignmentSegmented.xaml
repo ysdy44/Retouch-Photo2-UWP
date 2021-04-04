@@ -19,30 +19,30 @@
                 <VisualState x:Name="Normal"/>
 
                 <!--Left-->
-                <VisualState x:Name="Left">
+                <VisualState x:Name="LeftState">
                     <VisualState.Setters>
-                        <Setter Target = "LeftButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Left.IsEnabled" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Center-->
-                <VisualState x:Name="Center">
+                <VisualState x:Name="CenterState">
                     <VisualState.Setters>
-                        <Setter Target = "CenterButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Center.IsEnabled" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Right-->
-                <VisualState x:Name="Right">
+                <VisualState x:Name="RightState">
                     <VisualState.Setters>
-                        <Setter Target = "RightButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Right.IsEnabled" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Justified-->
-                <VisualState x:Name="Justified">
+                <VisualState x:Name="JustifiedState">
                     <VisualState.Setters>
-                        <Setter Target = "JustifiedButton.IsEnabled" Value="False"/>
+                        <Setter Target = "Justified.IsEnabled" Value="False"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -58,33 +58,33 @@
         </Grid.ColumnDefinitions>
 
         <!--Left-->
-        <Button x:Name="LeftButton" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+        <Button x:Name="Left" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip x:Name="LeftToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE8E4;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
         </Button>
 
         <!--Center-->
-        <Button x:Name="CenterButton" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <Button x:Name="Center" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip x:Name="CenterToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE8E3;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
         </Button>
 
         <!--Right-->
-        <Button x:Name="RightButton" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+        <Button x:Name="Right" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip x:Name="RightToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE8E2;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
         </Button>
 
         <!--Justified-->
-        <Button x:Name="JustifiedButton" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonStyle}">
+        <Button x:Name="Justified" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip x:Name="JustifiedToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE700;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
         </Button>

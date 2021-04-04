@@ -32,10 +32,10 @@ namespace Retouch_Photo2.Strokes
             {
                 switch (this._vsJoin)
                 {
-                    case CanvasLineJoin.Miter: return this.Miter;
-                    case CanvasLineJoin.Bevel: return this.Bevel;
-                    case CanvasLineJoin.Round: return this.Round;
-                    case CanvasLineJoin.MiterOrBevel: return this.MiterOrBevel;
+                    case CanvasLineJoin.Miter: return this.MiterState;
+                    case CanvasLineJoin.Bevel: return this.BevelState;
+                    case CanvasLineJoin.Round: return this.RoundState;
+                    case CanvasLineJoin.MiterOrBevel: return this.MiterOrBevelState;
                     default: return this.Normal;
                 }
             }
@@ -85,28 +85,37 @@ namespace Retouch_Photo2.Strokes
         {
             this.InitializeComponent();
             this.ConstructStrings();
+
+            this.Miter.Click += (s, e) => this.JoinChanged?.Invoke(this, CanvasLineJoin.Miter);//Delegate
+            this.Bevel.Click += (s, e) => this.JoinChanged?.Invoke(this, CanvasLineJoin.Bevel);//Delegate
+            this.Round.Click += (s, e) => this.JoinChanged?.Invoke(this, CanvasLineJoin.Round);//Delegate
+            this.MiterOrBevel.Click += (s, e) => this.JoinChanged?.Invoke(this, CanvasLineJoin.MiterOrBevel);//Delegate
+
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
+
 
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            void constructGroup(Button button, ToolTip toolTip, CanvasLineJoin lineJoin)
+            if (ToolTipService.GetToolTip(this.Miter) is ToolTip toolTip0)
             {
-                toolTip.Content = resource.GetString($"Strokes_Join_{lineJoin}");
-                button.Click += (s, e) =>
-                {
-                    this.JoinChanged?.Invoke(this, lineJoin);//Delegate
-                };
+                toolTip0.Content = resource.GetString($"Strokes_Join_Miter");
             }
-
-            constructGroup(this.MiterButton, this.MiterToolTip, CanvasLineJoin.Miter);
-            constructGroup(this.BevelButton, this.BevelToolTip, CanvasLineJoin.Bevel);
-            constructGroup(this.RoundButton, this.RoundToolTip, CanvasLineJoin.Round);
-            constructGroup(this.MiterOrBevelButton, this.MiterOrBevelToolTip, CanvasLineJoin.MiterOrBevel);
+            if (ToolTipService.GetToolTip(this.Bevel) is ToolTip toolTip1)
+            {
+                toolTip1.Content = resource.GetString($"Strokes_Join_Bevel");
+            }
+            if (ToolTipService.GetToolTip(this.Round) is ToolTip toolTip2)
+            {
+                toolTip2.Content = resource.GetString($"Strokes_Join_Round");
+            }
+            if (ToolTipService.GetToolTip(this.MiterOrBevel) is ToolTip toolTip3)
+            {
+                toolTip3.Content = resource.GetString($"Strokes_Join_MiterOrBevel");
+            }
         }
-
     }
 }

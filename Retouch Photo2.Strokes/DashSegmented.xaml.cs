@@ -32,10 +32,10 @@ namespace Retouch_Photo2.Strokes
             {
                 switch (this._vsDash)
                 {
-                    case CanvasDashStyle.Solid: return this.Solid;
-                    case CanvasDashStyle.Dash: return this.Dash2;
-                    case CanvasDashStyle.Dot: return this.Dot;
-                    case CanvasDashStyle.DashDot: return this.DashDot;
+                    case CanvasDashStyle.Solid: return this.SolidState;
+                    case CanvasDashStyle.Dash: return this.DashState;
+                    case CanvasDashStyle.Dot: return this.DotState;
+                    case CanvasDashStyle.DashDot: return this.DashDotState;
                     default: return this.Normal;
                 }
             }
@@ -48,7 +48,7 @@ namespace Retouch_Photo2.Strokes
         /// <summary> Gets or set ash style of <see cref = "DashSegmented" />. </summary>
         public CanvasDashStyle Dash
         {
-            get  => (CanvasDashStyle)base.GetValue(DashProperty);
+            get => (CanvasDashStyle)base.GetValue(DashProperty);
             set => base.SetValue(DashProperty, value);
         }
         /// <summary> Identifies the <see cref = "DashSegmented.Dash" /> dependency property. </summary>
@@ -85,28 +85,37 @@ namespace Retouch_Photo2.Strokes
         {
             this.InitializeComponent();
             this.ConstructStrings();
+
+            this.Solid.Click += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Solid);//Delegate
+            this.Dash2.Click += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Dash);//Delegate
+            this.Dot.Click += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Dot);//Delegate
+            this.DashDot.Click += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.DashDot);//Delegate
+
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
+
 
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            void constructGroup(Button button, ToolTip toolTip, CanvasDashStyle dashStyle)
+            if (ToolTipService.GetToolTip(this.Solid) is ToolTip toolTip0)
             {
-                toolTip.Content = resource.GetString($"Strokes_Dash_{dashStyle}");
-                button.Click += (s, e) =>
-                {
-                    this.DashChanged?.Invoke(this, dashStyle);//Delegate
-                };
+                toolTip0.Content = resource.GetString($"Strokes_Dash_Solid");
             }
-
-            constructGroup(this.SolidButton, this.SolidToolTip, CanvasDashStyle.Solid);
-            constructGroup(this.DashButton, this.DashToolTip, CanvasDashStyle.Dash);
-            constructGroup(this.DotButton, this.DotToolTip, CanvasDashStyle.Dot);
-            constructGroup(this.DashDotButton, this.DashDotToolTip, CanvasDashStyle.DashDot);
+            if (ToolTipService.GetToolTip(this.Dash2) is ToolTip toolTip1)
+            {
+                toolTip1.Content = resource.GetString($"Strokes_Dash_Dash");
+            }
+            if (ToolTipService.GetToolTip(this.Dot) is ToolTip toolTip2)
+            {
+                toolTip2.Content = resource.GetString($"Strokes_Dash_Dot");
+            }
+            if (ToolTipService.GetToolTip(this.DashDot) is ToolTip toolTip3)
+            {
+                toolTip3.Content = resource.GetString($"Strokes_Dash_DashDot");
+            }
         }
-
     }
 }

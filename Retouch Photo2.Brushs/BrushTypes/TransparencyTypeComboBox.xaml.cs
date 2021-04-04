@@ -20,10 +20,26 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Occurs when type change. </summary>
         public EventHandler<BrushType> TypeChanged;
 
-        //@Group
-        /// <summary> Occurs when group change. </summary>
-        private EventHandler<BrushType> Group;
-
+        //@VisualState
+        BrushType _vsType;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
+        public VisualState VisualState
+        {
+            get
+            {
+                switch (this._vsType)
+                {
+                    case BrushType.None: return this.NoneState;
+                    case BrushType.LinearGradient: return this.LinearGradientState;
+                    case BrushType.RadialGradient: return this.RadialGradientState;
+                    case BrushType.EllipticalGradient: return this.EllipticalGradientState;
+                    default: return this.Normal;
+                }
+            }
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
 
         #region DependencyProperty
 
@@ -41,26 +57,15 @@ namespace Retouch_Photo2.Brushs
 
             if (e.NewValue is IBrush value)
             {
-                control.Type = value.Type;
+                control._vsType = value.Type;
+                control.VisualState = control.VisualState;//State
             }
             else
             {
-                control.Type = BrushType.None;
+                control._vsType = BrushType.None;
+                control.VisualState = control.VisualState;//State
             }
         }));
-
-        /// <summary> Gets or sets the transparency type. </summary>
-        public BrushType Type
-        {
-            get => this.type;
-            set
-            {
-                this.Group?.Invoke(this, value);//Delegate
-                this.type = value;
-            }
-        }
-        private BrushType type = BrushType.None;
-
 
         #endregion
 
@@ -73,64 +78,42 @@ namespace Retouch_Photo2.Brushs
         {
             this.InitializeComponent();
             this.ConstructStrings();
+
+            this.None.Click += (s, e) =>
+            {
+                this.TypeChanged?.Invoke(this, BrushType.None);//Delegate
+                this.Flyout.Hide();
+            };
+            this.LinearGradient.Click += (s, e) =>
+            {
+                this.TypeChanged?.Invoke(this, BrushType.LinearGradient);//Delegate
+                this.Flyout.Hide();
+            };
+            this.RadialGradient.Click += (s, e) =>
+            {
+                this.TypeChanged?.Invoke(this, BrushType.RadialGradient);//Delegate
+                this.Flyout.Hide();
+            };
+            this.EllipticalGradient.Click += (s, e) =>
+            {
+                this.TypeChanged?.Invoke(this, BrushType.EllipticalGradient);//Delegate
+                this.Flyout.Hide();
+            };
+
             this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
+            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
 
-    }
-
-    /// <summary>
-    /// ComboBox of Transparency<see cref="BrushType"/>
-    /// </summary>
-    public sealed partial class TransparencyTypeComboBox : UserControl
-    {
 
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-
-            foreach (UIElement child in this.StackPanel.Children)
-            {
-                if (child is Button button)
-                {
-
-                    //@Group
-                    //void constructGroup(Button button)
-                    {
-                        string key = button.Name;
-                        BrushType type = XML.CreateBrushType(key);
-                        string title = resource.GetString($"Tools_Brush_Type_{key}");
-
-
-                        //Button
-                        button.Content = title;
-                        button.Click += (s, e) =>
-                        {
-                            this.TypeChanged?.Invoke(this, type);//Delegate
-
-                            this.Flyout.Hide();
-                        };
-
-
-                        //Group
-                        group(this.Type);
-                        this.Group += (s, groupMode) => group(groupMode);
-
-                        void group(BrushType groupType)
-                        {
-                            if (groupType == type)
-                            {
-                                button.IsEnabled = false;
-
-                                this.Button.Content = title;
-                            }
-                            else button.IsEnabled = true;
-                        }
-                    }
-                }
-            }
+            this.None.Content = resource.GetString($"Tools_Brush_Type_None");
+            this.LinearGradient.Content = resource.GetString($"Tools_Brush_Type_LinearGradient");
+            this.RadialGradient.Content = resource.GetString($"Tools_Brush_Type_RadialGradient");
+            this.EllipticalGradient.Content = resource.GetString($"Tools_Brush_Type_EllipticalGradient");
         }
-
     }
 }

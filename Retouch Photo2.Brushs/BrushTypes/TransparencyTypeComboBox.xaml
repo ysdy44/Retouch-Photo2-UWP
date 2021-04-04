@@ -22,7 +22,7 @@
 
         <!--Flyout-->
         <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel x:Name="StackPanel" Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
                 <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
@@ -66,6 +66,47 @@
 
 
     <Button x:Name="Button" Style="{StaticResource AppIconRoundedButtonStyle}">
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--None-->
+                <VisualState x:Name="NoneState">
+                    <VisualState.Setters>
+                        <Setter Target = "None.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind None.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--LinearGradient-->
+                <VisualState x:Name="LinearGradientState">
+                    <VisualState.Setters>
+                        <Setter Target = "LinearGradient.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind LinearGradient.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--RadialGradient-->
+                <VisualState x:Name="RadialGradientState">
+                    <VisualState.Setters>
+                        <Setter Target = "RadialGradient.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind RadialGradient.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--EllipticalGradient-->
+                <VisualState x:Name="EllipticalGradientState">
+                    <VisualState.Setters>
+                        <Setter Target = "EllipticalGradient.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind EllipticalGradient.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
         <Button.BorderBrush>
             <!--Storyboard-->
             <SolidColorBrush x:Name="ButtonBorderBrush" Color="{ThemeResource AppStrokeColor}"/>

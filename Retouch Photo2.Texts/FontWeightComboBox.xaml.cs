@@ -21,9 +21,33 @@ namespace Retouch_Photo2.Texts
         /// <summary> Occurs when weight change. </summary>
         public EventHandler<FontWeight> WeightChanged;
 
-        //@Group
-        /// <summary> Occurs when group change. </summary>
-        private EventHandler<FontWeight> Group;
+        //@VisualState
+        FontWeight _vsWeight;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
+        public VisualState VisualState
+        {
+            get
+            {
+                switch (this._vsWeight.Weight)
+                {
+                    case 900: return this.BlackState;
+                    case 700: return this.BoldState;
+                    case 950: return this.ExtraBlackState;
+                    case 800: return this.ExtraBoldState;
+                    case 200: return this.ExtraLightState;
+                    case 300: return this.LightState;
+                    case 500: return this.MediumState;
+                    case 400: return this.NoneState;
+                    case 600: return this.SemiBoldState;
+                    case 350: return this.SemiLightState;
+                    case 100: return this.ThinState;
+                    default: return this.Normal;
+                }
+            }
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
 
         #region DependencyProperty
 
@@ -41,7 +65,8 @@ namespace Retouch_Photo2.Texts
 
             if (e.NewValue is FontWeight value)
             {
-                control.Group?.Invoke(control, value);//Delegate
+                control._vsWeight = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 
@@ -49,7 +74,7 @@ namespace Retouch_Photo2.Texts
         /// <summary> Gets or sets the title. </summary>
         public object Title
         {
-            get  => (object)base.GetValue(TitleProperty);
+            get => (object)base.GetValue(TitleProperty);
             set => base.SetValue(TitleProperty, value);
         }
         /// <summary> Identifies the <see cref = "FontWeightComboBox.Title" /> dependency property. </summary>
@@ -67,68 +92,49 @@ namespace Retouch_Photo2.Texts
         {
             this.InitializeComponent();
             this.ConstructStrings();
+
+            this.Black.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.Black);//Delegate
+            this.Bold.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.Bold);//Delegate
+
+            this.ExtraBlack.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.ExtraBlack);//Delegate
+            this.ExtraBold.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.ExtraBold);//Delegate
+            this.ExtraLight.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.ExtraLight);//Delegate
+
+            this.Light.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.Light);//Delegate
+            this.Medium.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.Medium);//Delegate
+            this.None.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.Normal);//Delegate
+
+            this.SemiBold.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.SemiBold);//Delegate
+            this.SemiLight.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.SemiLight);//Delegate
+
+            this.Thin.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.Thin);//Delegate
+
             this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
+            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
 
-    }
-
-    /// <summary>
-    /// Represents the combo box that is used to select font weight.
-    /// </summary>
-    public sealed partial class FontWeightComboBox : UserControl
-    {
 
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.ConstructGroup(this.BlackButton, resource.GetString("Texts_FontWeight_Black"), FontWeights.Black);
-            this.ConstructGroup(this.BoldButton, resource.GetString("Texts_FontWeight_Bold"), FontWeights.Bold);
+            this.Black.Content = resource.GetString("Texts_FontWeight_Black");
+            this.Black.Content = resource.GetString("Texts_FontWeight_Black");
+            this.Bold.Content = resource.GetString("Texts_FontWeight_Bold");
 
-            this.ConstructGroup(this.ExtraBlackButton, resource.GetString("Texts_FontWeight_ExtraBlack"), FontWeights.ExtraBlack);
-            this.ConstructGroup(this.ExtraBoldButton, resource.GetString("Texts_FontWeight_ExtraBold"), FontWeights.ExtraBold);
-            this.ConstructGroup(this.ExtraLightButton, resource.GetString("Texts_FontWeight_ExtraLight"), FontWeights.ExtraLight);
+            this.ExtraBlack.Content = resource.GetString("Texts_FontWeight_ExtraBlack");
+            this.ExtraBold.Content = resource.GetString("Texts_FontWeight_ExtraBold");
+            this.ExtraLight.Content = resource.GetString("Texts_FontWeight_ExtraLight");
 
-            this.ConstructGroup(this.LightButton, resource.GetString("Texts_FontWeight_Light"), FontWeights.Light);
-            this.ConstructGroup(this.MediumButton, resource.GetString("Texts_FontWeight_Medium"), FontWeights.Medium);
-            this.ConstructGroup(this.NormalButton, resource.GetString("Texts_FontWeight_Normal"), FontWeights.Normal);
+            this.Light.Content = resource.GetString("Texts_FontWeight_Light");
+            this.Medium.Content = resource.GetString("Texts_FontWeight_Medium");
+            this.None.Content = resource.GetString("Texts_FontWeight_Normal");
 
-            this.ConstructGroup(this.SemiBoldButton, resource.GetString("Texts_FontWeight_SemiBold"), FontWeights.SemiBold);
-            this.ConstructGroup(this.SemiLightButton, resource.GetString("Texts_FontWeight_SemiLight"), FontWeights.SemiLight);
+            this.SemiBold.Content = resource.GetString("Texts_FontWeight_SemiBold");
+            this.SemiLight.Content = resource.GetString("Texts_FontWeight_SemiLight");
 
-            this.ConstructGroup(this.ThinButton, resource.GetString("Texts_FontWeight_Thin"), FontWeights.Thin);
+            this.Thin.Content = resource.GetString("Texts_FontWeight_Thin");
         }
-
-        //Group
-        private void ConstructGroup(Button button, string title, FontWeight weight)
-        {
-            void group(FontWeight groupWeight)
-            {
-                if (groupWeight.Weight == weight.Weight)
-                {
-                    button.IsEnabled = false;
-
-                    this.Button.Content = title;
-                }
-                else button.IsEnabled = true;
-            }
-
-            //NoneButton
-            group(this.Weight);
-
-            //Buttons
-            button.Content = title;
-            button.Tag = new ContentControl
-            {
-                Content = weight.Weight,
-                Template = this.ContentControlTemplate
-            };
-            button.Click += (s, e) => this.WeightChanged?.Invoke(this, weight);//Delegate
-
-            //Group
-            this.Group += (s, e) => group(e);
-        }
-
     }
 }

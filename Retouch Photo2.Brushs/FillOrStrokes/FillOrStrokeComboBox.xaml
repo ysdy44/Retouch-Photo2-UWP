@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel x:Name="StackPanel" Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Button x:Name="Fill" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
                         <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/FillOrStrokes/FillOrStrokeIcons/FillIcon.xaml"/>
@@ -35,6 +35,33 @@
 
 
     <Button x:Name="Button" Style="{StaticResource AppIconRoundedButtonStyle}">
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--Fill-->
+                <VisualState x:Name="FillState">
+                    <VisualState.Setters>
+                        <Setter Target = "Fill.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind Fill.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Stroke-->
+                <VisualState x:Name="StrokeState">
+                    <VisualState.Setters>
+                        <Setter Target = "Stroke.IsEnabled" Value="False"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind Stroke.Content}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
         <Button.Tag>
             <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
         </Button.Tag>        

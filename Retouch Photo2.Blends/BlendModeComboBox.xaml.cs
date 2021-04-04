@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Blends
         //@Group
         /// <summary> Occurs when group change. </summary>
         private EventHandler<BlendEffectMode?> Group;
-        
+
         #region DependencyProperty
 
 
@@ -61,9 +61,10 @@ namespace Retouch_Photo2.Blends
         {
             this.InitializeComponent();
             this.ConstructStrings();
+            this.ConstructGroup();
+
             this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
         }
-
     }
 
     /// <summary>
@@ -77,43 +78,50 @@ namespace Retouch_Photo2.Blends
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-
             foreach (UIElement child in this.StackPanel.Children)
             {
                 if (child is Button button)
                 {
+                    string key = button.Name; 
+                    string title = resource.GetString($"Blends_{key}");
 
-                    //@Group
-                    //void constructGroup(Button button)
-                    {
-                        string key = button.Name;
-                        BlendEffectMode? mode = XML.CreateBlendMode(key);
-                        string title = resource.GetString($"Blends_{key}");
-
-
-                        //Button
-                        button.Content = title;
-                        button.Click += (s, e) => this.ModeChanged?.Invoke(this, mode);//Delegate
-
-
-                        //Group
-                        group(this.Mode);
-                        this.Group += (s, groupMode) => group(groupMode);
-
-                        void group(BlendEffectMode? groupMode)
-                        {
-                            if (groupMode == mode)
-                            {
-                                button.IsEnabled = false;
-
-                                this.Button.Content = title;
-                            }
-                            else button.IsEnabled = true;
-                        }
-                    }
+                    button.Content = title;
                 }
             }
         }
 
+
+        //@Group
+        private void ConstructGroup()
+        {
+            foreach (UIElement child in this.StackPanel.Children)
+            {
+                if (child is Button button)
+                {
+                    string key = button.Name;
+                    BlendEffectMode? mode = XML.CreateBlendMode(key);
+
+
+                    //Button
+                    button.Click += (s, e) => this.ModeChanged?.Invoke(this, mode);//Delegate
+
+
+                    //Group
+                    group(this.Mode);
+                    this.Group += (s, groupMode) => group(groupMode);
+
+                    void group(BlendEffectMode? groupMode)
+                    {
+                        if (groupMode == mode)
+                        {
+                            button.IsEnabled = false;
+
+                            this.Button.Content = button.Content as string;
+                        }
+                        else button.IsEnabled = true;
+                    }
+                }
+            }
+        }
     }
 }

@@ -32,10 +32,10 @@ namespace Retouch_Photo2.Texts
             {
                 switch (this._vsAlignment)
                 {
-                    case CanvasHorizontalAlignment.Left: return this.Left;
-                    case CanvasHorizontalAlignment.Center: return this.Center;
-                    case CanvasHorizontalAlignment.Right: return this.Right;
-                    case CanvasHorizontalAlignment.Justified: return this.Justified;
+                    case CanvasHorizontalAlignment.Left: return this.LeftState;
+                    case CanvasHorizontalAlignment.Center: return this.CenterState;
+                    case CanvasHorizontalAlignment.Right: return this.RightState;
+                    case CanvasHorizontalAlignment.Justified: return this.JustifiedState;
                     default: return this.Normal;
                 }
             }
@@ -85,28 +85,37 @@ namespace Retouch_Photo2.Texts
         {
             this.InitializeComponent();
             this.ConstructStrings();
+
+            this.Left.Click += (s, e) => this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Left);//Delegate
+            this.Center.Click += (s, e) => this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Center);//Delegate
+            this.Right.Click += (s, e) => this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Right);//Delegate
+            this.Justified.Click += (s, e) => this.AlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Justified);//Delegate
+
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
+
 
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            void constructGroup(Button button, ToolTip toolTip, CanvasHorizontalAlignment alignment)
+            if (ToolTipService.GetToolTip(this.Left) is ToolTip toolTip0)
             {
-                toolTip.Content = resource.GetString($"Texts_FontAlignment_{alignment}");
-                button.Click += (s, e) =>
-                {
-                    this.AlignmentChanged?.Invoke(this, alignment);//Delegate
-                };
+                toolTip0.Content = resource.GetString($"Texts_FontAlignment_Left");
             }
-
-            constructGroup(this.LeftButton, this.LeftToolTip, CanvasHorizontalAlignment.Left);
-            constructGroup(this.CenterButton, this.CenterToolTip, CanvasHorizontalAlignment.Center);
-            constructGroup(this.RightButton, this.RightToolTip, CanvasHorizontalAlignment.Right);
-            constructGroup(this.JustifiedButton, this.JustifiedToolTip, CanvasHorizontalAlignment.Justified);
+            if (ToolTipService.GetToolTip(this.Center) is ToolTip toolTip1)
+            {
+                toolTip1.Content = resource.GetString($"Texts_FontAlignment_Center");
+            }
+            if (ToolTipService.GetToolTip(this.Right) is ToolTip toolTip2)
+            {
+                toolTip2.Content = resource.GetString($"Texts_FontAlignment_Right");
+            }
+            if (ToolTipService.GetToolTip(this.Justified) is ToolTip toolTip3)
+            {
+                toolTip3.Content = resource.GetString($"Texts_FontAlignment_Justified");
+            }
         }
-
     }
 }

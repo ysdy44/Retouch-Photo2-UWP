@@ -16,6 +16,24 @@ namespace Retouch_Photo2.Tools.Elements
         /// <summary> Occurs when type change. </summary>
         public EventHandler<GeometryArrowTailType> TypeChanged;
 
+        //@VisualState
+        GeometryArrowTailType _vsType;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
+        public VisualState VisualState
+        {
+            get
+            {
+                switch (this._vsType)
+                {
+                    case GeometryArrowTailType.None: return this.None;
+                    case GeometryArrowTailType.Arrow: return this.Arrow;
+                    default: return this.Normal;
+                }
+            }
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
 
         #region DependencyProperty
 
@@ -41,27 +59,6 @@ namespace Retouch_Photo2.Tools.Elements
 
         #endregion
 
-
-        //@VisualState
-        GeometryArrowTailType _vsType;
-        /// <summary> 
-        /// Represents the visual appearance of UI elements in a specific state.
-        /// </summary>
-        public VisualState VisualState
-        {
-            get
-            {
-                switch (this._vsType)
-                {
-                    case GeometryArrowTailType.None: return this.None;
-                    case GeometryArrowTailType.Arrow: return this.Arrow;
-                    default: return this.Normal;
-                }
-            }
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
-
-
         //@Construct
         /// <summary>
         /// Initializes a ArrowTailTypeComboBox. 
@@ -70,6 +67,18 @@ namespace Retouch_Photo2.Tools.Elements
         {
             this.InitializeComponent();
             this.ConstructStrings();
+
+            this.NoneButton.Click += (s, e) =>
+            {
+                this.TypeChanged?.Invoke(this, GeometryArrowTailType.None); //Delegate
+                this.Flyout.Hide();
+            };
+            this.ArrowButton.Click += (s, e) =>
+            {
+                this.TypeChanged?.Invoke(this, GeometryArrowTailType.Arrow); //Delegate
+                this.Flyout.Hide();
+            };
+
             this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
@@ -80,20 +89,8 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.NoneButton.Content = resource.GetString($"Tools_GeometryArrow_ArrowTail_{GeometryArrowTailType.None}");
-            this.NoneButton.Click += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, GeometryArrowTailType.None); //Delegate
-                this.Flyout.Hide();
-            };
-
-            this.ArrowButton.Content = resource.GetString($"Tools_GeometryArrow_ArrowTail_{GeometryArrowTailType.Arrow}");
-            this.ArrowButton.Click += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, GeometryArrowTailType.Arrow); //Delegate
-                this.Flyout.Hide();
-            };
+            this.NoneButton.Content = resource.GetString($"Tools_GeometryArrow_ArrowTail_None");
+            this.ArrowButton.Content = resource.GetString($"Tools_GeometryArrow_ArrowTail_Arrow");
         }
-
     }
 }

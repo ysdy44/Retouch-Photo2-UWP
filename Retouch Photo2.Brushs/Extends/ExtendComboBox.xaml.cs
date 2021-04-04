@@ -21,43 +21,28 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Occurs when extend change. </summary>
         public EventHandler<CanvasEdgeBehavior> ExtendChanged;
 
-        //@Group
-        /// <summary> Occurs when group change. </summary>
-        private EventHandler<CanvasEdgeBehavior> Group;
-
+        //@VisualState
+        CanvasEdgeBehavior _vsExtend;
+        /// <summary> 
+        /// Represents the visual appearance of UI elements in a specific state.
+        /// </summary>
+        public VisualState VisualState
+        {
+            get
+            {
+                switch (this._vsExtend)
+                {
+                    case CanvasEdgeBehavior.Clamp: return this.ClampState;
+                    case CanvasEdgeBehavior.Wrap: return this.WrapState;
+                    case CanvasEdgeBehavior.Mirror: return this.MirrorState;
+                    default: return this.Normal;
+                }
+            }
+            set => VisualStateManager.GoToState(this, value.Name, false);
+        }
 
         #region DependencyProperty
 
-
-        /// <summary> Gets or sets the fill or stroke. </summary>
-        public FillOrStroke FillOrStroke
-        {
-            set
-            {
-                this._vsFillOrStroke = value;
-                this.Invalidate();//Invalidate
-            }
-        }
-
-        /// <summary> Gets or sets the fill. </summary>
-        public IBrush Fill
-        {
-            set
-            {
-                this._vsFill = value;
-                this.Invalidate();//Invalidate
-            }
-        }
-
-        /// <summary> Gets or sets the stroke. </summary>
-        public IBrush Stroke
-        {
-            set
-            {
-                this._vsStroke = value;
-                this.Invalidate();//Invalidate
-            }
-        }
 
         /// <summary> Gets or sets the edge behavior. </summary>
         public CanvasEdgeBehavior Extend
@@ -72,32 +57,64 @@ namespace Retouch_Photo2.Brushs
 
             if (e.NewValue is CanvasEdgeBehavior value)
             {
-                control.Group?.Invoke(control, value);
+                control._vsExtend = value;
+                control.VisualState = control.VisualState;//State
             }
         }));
 
-
-        #endregion
-
-        //@VisualState
-        FillOrStroke _vsFillOrStroke;
-        IBrush _vsFill;
-        IBrush _vsStroke;
-        /// <summary>
-        /// Invalidate. 
-        /// </summary>
-        public void Invalidate()
+        /// <summary> Gets or sets the fill or stroke. </summary>
+        public FillOrStroke FillOrStroke
         {
-            switch (this._vsFillOrStroke)
+            get => this.fillOrStroke;
+            set
             {
-                case FillOrStroke.Fill:
-                    if (this._vsFill != null) this.Extend = this._vsFill.Extend;
-                    break;
-                case FillOrStroke.Stroke:
-                    if (this._vsStroke != null) this.Extend = this._vsStroke.Extend;
-                    break;
+                switch (value)
+                {
+                    case FillOrStroke.Fill: this.Extend = this.Fill?.Extend ?? CanvasEdgeBehavior.Clamp; ; break;
+                    case FillOrStroke.Stroke: this.Extend = this.Stroke?.Extend ?? CanvasEdgeBehavior.Clamp; ; break;
+                }
+
+                this.fillOrStroke = value;
             }
         }
+        private FillOrStroke fillOrStroke;
+
+        /// <summary> Gets or sets the fill. </summary>
+        public IBrush Fill
+        {
+            get => this.fill;
+            set
+            {
+                switch (this.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        this.Extend = value?.Extend ?? CanvasEdgeBehavior.Clamp;
+                        break;
+                }
+                this.fill = value;
+            }
+        }
+        private IBrush fill;
+
+        /// <summary> Gets or sets the stroke. </summary>
+        public IBrush Stroke
+        {
+            get => this.stroke;
+            set
+            {
+                switch (this.FillOrStroke)
+                {
+                    case FillOrStroke.Stroke:
+                        this.Extend = value?.Extend ?? CanvasEdgeBehavior.Clamp;
+                        break;
+                }
+                this.stroke = value;
+            }
+        }
+        private IBrush stroke;
+
+
+        #endregion
 
 
         //@Construct
@@ -108,60 +125,36 @@ namespace Retouch_Photo2.Brushs
         {
             this.InitializeComponent();
             this.ConstructStrings();
+
+            this.Clamp.Click += (s, e) =>
+            {
+                this.ExtendChanged?.Invoke(this, CanvasEdgeBehavior.Clamp);//Delegate
+                this.Flyout.Hide();
+            };
+            this.Wrap.Click += (s, e) =>
+            {
+                this.ExtendChanged?.Invoke(this, CanvasEdgeBehavior.Wrap);//Delegate
+                this.Flyout.Hide();
+            };
+            this.Mirror.Click += (s, e) =>
+            {
+                this.ExtendChanged?.Invoke(this, CanvasEdgeBehavior.Mirror);//Delegate
+                this.Flyout.Hide();
+            };
+
             this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
+            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
 
-    }
 
-    /// <summary>
-    /// Represents the combo box that is used to select CanvasEdgeBehavior.
-    /// </summary>
-    public sealed partial class ExtendComboBox : UserControl
-    {
-
-        //Strings 
+        //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-
-            foreach (UIElement child in this.StackPanel.Children)
-            {
-                if (child is Button button)
-                {
-
-                    //@Group
-                    //void constructGroup(Button button)
-                    {
-                        string key = button.Name;
-                        CanvasEdgeBehavior extend = XML.CreateExtend(key);
-                        string title = resource.GetString($"Tools_Brush_Extend_{key}");
-
-                        //Button
-                        button.Click += (s, e) =>
-                        {
-                            this.ExtendChanged?.Invoke(this, extend);//Delegate
-                            this.Flyout.Hide();
-                        };
-
-                        //Group
-                        group(this.Extend);
-                        this.Group += (s, groupMode) => group(groupMode);
-
-                        void group(CanvasEdgeBehavior groupMode)
-                        {
-                            if (groupMode == extend)
-                            {
-                                button.IsEnabled = false;
-
-                                this.Button.Content = title;
-                            }
-                            else button.IsEnabled = true;
-                        }
-                    }
-                }
-            }
+            this.Clamp.Content = resource.GetString($"Tools_Brush_Extend_Clamp");
+            this.Wrap.Content = resource.GetString($"Tools_Brush_Extend_Wrap");
+            this.Mirror.Content = resource.GetString($"Tools_Brush_Extend_Mirror");
         }
-
     }
 }

@@ -32,10 +32,10 @@ namespace Retouch_Photo2.Strokes
             {
                 switch (this._vsCap)
                 {
-                    case CanvasCapStyle.Flat: return this.Flat;
-                    case CanvasCapStyle.Square: return this.Square;
-                    case CanvasCapStyle.Round: return this.Round;
-                    case CanvasCapStyle.Triangle: return this.Triangle;
+                    case CanvasCapStyle.Flat: return this.FlatState;
+                    case CanvasCapStyle.Square: return this.SquareState;
+                    case CanvasCapStyle.Round: return this.RoundState;
+                    case CanvasCapStyle.Triangle: return this.TriangleState;
                     default: return this.Normal;
                 }
             }
@@ -85,28 +85,37 @@ namespace Retouch_Photo2.Strokes
         {
             this.InitializeComponent();
             this.ConstructStrings();
+
+            this.Flat.Click += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Flat);//Delegate
+            this.Square.Click += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Square);//Delegate
+            this.Round.Click += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Round);//Delegate
+            this.Triangle.Click += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Triangle);//Delegate
+
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
+
 
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            void constructGroup(Button button, ToolTip toolTip, CanvasCapStyle capStyle)
+            if (ToolTipService.GetToolTip(this.Flat) is ToolTip toolTip0)
             {
-                toolTip.Content = resource.GetString($"Strokes_Cap_{capStyle}");
-                button.Click += (s, e) =>
-                {
-                    this.CapChanged?.Invoke(this, capStyle);//Delegate
-                };
+                toolTip0.Content = resource.GetString($"Strokes_Cap_Flat");
             }
-
-            constructGroup(this.FlatButton, this.FlatToolTip, CanvasCapStyle.Flat);
-            constructGroup(this.SquareButton, this.SquareToolTip, CanvasCapStyle.Square);
-            constructGroup(this.RoundButton, this.RoundToolTip, CanvasCapStyle.Round);
-            constructGroup(this.TriangleButton, this.TriangleToolTip, CanvasCapStyle.Triangle);
+            if (ToolTipService.GetToolTip(this.Square) is ToolTip toolTip1)
+            {
+                toolTip1.Content = resource.GetString($"Strokes_Cap_Square");
+            }
+            if (ToolTipService.GetToolTip(this.Round) is ToolTip toolTip2)
+            {
+                toolTip2.Content = resource.GetString($"Strokes_Cap_Round");
+            }
+            if (ToolTipService.GetToolTip(this.Triangle) is ToolTip toolTip3)
+            {
+                toolTip3.Content = resource.GetString($"Strokes_Cap_Triangle");
+            }
         }
-
     }
 }
