@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Layers
                     object obj = Activator.CreateInstance(typeInfo.AsType());
                     if (obj is ILayer layer)
                     {
-                        return new GroupLayer();
+                       return layer;
                     }
                 }
             }
