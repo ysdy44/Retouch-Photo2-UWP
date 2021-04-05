@@ -26,7 +26,7 @@
 
                 <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/NoneIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/NoneIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource NoneIcon}"/>
@@ -37,7 +37,7 @@
 
                 <Button x:Name="Color" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/ColorIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/ColorIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource ColorIcon}"/>
@@ -48,7 +48,7 @@
                 
                 <Button x:Name="LinearGradient" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/LinearGradientIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/LinearGradientIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource LinearGradientIcon}"/>
@@ -56,7 +56,7 @@
                 </Button>
                 <Button x:Name="RadialGradient" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/RadialGradientIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/RadialGradientIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource RadialGradientIcon}"/>
@@ -64,7 +64,7 @@
                 </Button>
                 <Button x:Name="EllipticalGradient" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/EllipticalGradientIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/EllipticalGradientIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource EllipticalGradientIcon}"/>
@@ -75,7 +75,7 @@
 
                 <Button x:Name="Image" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/ImageIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/ImageIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource ImageIcon}"/>

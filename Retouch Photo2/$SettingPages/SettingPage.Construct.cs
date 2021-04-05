@@ -376,11 +376,14 @@ namespace Retouch_Photo2
             //Construct
             ContentControl constructKeyContentControl(string key, string titleResource)
             {
-                ContentControl contentControl = new ContentControl
-                {
-                    Tag = key.ToString(),
-                    Style = getStyle2()
+                ContentControl contentControl = new ContentControl    
+                {         
+                    Tag = key.ToString(),        
+                    Style = getStyle2()            
                 };
+
+                //Strings
+                this.KeyStringsChanged.Add((resource) => contentControl.Content = resource.GetString(titleResource));
 
                 return contentControl;
             }

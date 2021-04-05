@@ -40,11 +40,16 @@ namespace Retouch_Photo2
             this.ConstructDragAndDrop();
 
 
-            //ProjectViewItem
-            ProjectViewItem.ItemClick = this.ItemClick;
-
             //MainLayout
             this.MainLayout.GridView.ItemsSource = this.Items;
+            this.MainLayout.GridView.IsItemClickEnabled = true;
+            this.MainLayout.GridView.ItemClick += (s, e) =>
+             {
+                 if (e.ClickedItem is ProjectViewItem item)
+                 {
+                     this.ItemClick(item);
+                 }
+             };
             this.MainLayout.SelectCheckBox.Unchecked += (s, e) =>
             {
                 foreach (IProjectViewItem item in this.Items)
@@ -67,7 +72,7 @@ namespace Retouch_Photo2
 
             //Select
             this.AllButton.Click += (s, e) => this.SelectAllAndDeselectIcon();
- 
+
             //Head
             this.Head.LeftButtonClick += async (s, e) => await Launcher.LaunchUriAsync(new Uri(this.DocumentationLink));
             this.Head.RightButtonClick += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
@@ -108,6 +113,7 @@ namespace Retouch_Photo2
         /// <summary> The current page becomes the active page. </summary>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            //Setting
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
             {
                 if (ApplicationLanguages.PrimaryLanguageOverride != this.Language)

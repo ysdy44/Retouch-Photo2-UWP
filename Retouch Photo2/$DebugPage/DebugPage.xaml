@@ -266,37 +266,37 @@
                         <local:UIElementGrouping.Items>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/NoneIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/NoneIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource NoneIcon}"/>
                             </Button>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/ColorIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/ColorIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource ColorIcon}"/>
                             </Button>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/LinearGradientIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/LinearGradientIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource LinearGradientIcon}"/>
                             </Button>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/RadialGradientIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/RadialGradientIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource RadialGradientIcon}"/>
                             </Button>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/EllipticalGradientIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/EllipticalGradientIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource EllipticalGradientIcon}"/>
                             </Button>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/BrushTypeIcons/ImageIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/ImageIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource ImageIcon}"/>
                             </Button>
@@ -326,25 +326,25 @@
                         <local:UIElementGrouping.Items>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/TransparencyTypeIcons/NoneIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/NoneIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource NoneIcon}"/>
                             </Button>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/TransparencyTypeIcons/LinearGradientIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/LinearGradientIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource LinearGradientIcon}"/>
                             </Button>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/TransparencyTypeIcons/RadialGradientIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/RadialGradientIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource RadialGradientIcon}"/>
                             </Button>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/TransparencyTypeIcons/EllipticalGradientIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/EllipticalGradientIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource EllipticalGradientIcon}"/>
                             </Button>
@@ -392,19 +392,19 @@
                             </Button>
                             <Button Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModeIcons/MirroredIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons//MirroredIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource MirroredIcon}"/>
                             </Button>
                             <Button Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModeIcons/DisconnectedIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons//DisconnectedIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource DisconnectedIcon}"/>
                             </Button>
                             <Button Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModeIcons/AsymmetricIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons//AsymmetricIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource AsymmetricIcon}"/>
                             </Button>
@@ -416,19 +416,19 @@
                         <local:UIElementGrouping.Items>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypeIcons/GridIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/GridIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource GridIcon}"/>
                             </Button>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypeIcons/HorizontalIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/HorizontalIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource HorizontalIcon}"/>
                             </Button>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypeIcons/VerticalIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/VerticalIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource VerticalIcon}"/>
                             </Button>
@@ -440,13 +440,13 @@
                         <local:UIElementGrouping.Items>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypeIcons/NoneIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypes/Icons/NoneIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource NoneIcon}"/>
                             </Button>
                             <Button Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypeIcons/ArrowIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypes/Icons/ArrowIcon.xaml"/>
                                 </Button.Resources>
                                 <ContentControl Template="{StaticResource ArrowIcon}"/>
                             </Button>

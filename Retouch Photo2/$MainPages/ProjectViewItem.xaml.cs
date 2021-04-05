@@ -17,12 +17,8 @@ namespace Retouch_Photo2
     /// </summary>
     public sealed partial class ProjectViewItem : UserControl, IProjectViewItem
     {
-        
-        //@Static
-        /// <summary> Occurs when tapped the project-control. </summary>
-        public static Action<IProjectViewItem> ItemClick;
 
-
+        //@Content
         /// <summary> Gets or sets the name. </summary>
         //public string Name { get; set; } 
         /// <summary> Gets or sets the thumbnail path. </summary>
@@ -84,7 +80,6 @@ namespace Retouch_Photo2
         public ProjectViewItem()
         {
             this.InitializeComponent();
-            this._RootGrid.Tapped += (s, e) => ProjectViewItem.ItemClick?.Invoke(this);//Delegate
         }
 
 
