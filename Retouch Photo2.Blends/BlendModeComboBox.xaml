@@ -14,253 +14,255 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel x:Name="StackPanel">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
+                <StackPanel x:Name="StackPanel" Padding="{StaticResource AppPanelPadding}" HorizontalAlignment="Stretch">
 
-                <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/NoneIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource NoneIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/NoneIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource NoneIcon}"/>
+                        </Button.Tag>
+                    </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="Multiply" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/MultiplyIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource MultiplyIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="Screen" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ScreenIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource ScreenIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="Multiply" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/MultiplyIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource MultiplyIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="Screen" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ScreenIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource ScreenIcon}"/>
+                        </Button.Tag>
+                    </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="Darken" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DarkenIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource DarkenIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="Lighten" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LightenIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource LightenIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="Darken" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DarkenIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource DarkenIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="Lighten" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LightenIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource LightenIcon}"/>
+                        </Button.Tag>
+                    </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="Dissolve" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DissolveIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource DissolveIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="ColorBurn" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ColorBurnIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource ColorBurnIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="LinearBurn" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LinearBurnIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource LinearBurnIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="Dissolve" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DissolveIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource DissolveIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="ColorBurn" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ColorBurnIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource ColorBurnIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="LinearBurn" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LinearBurnIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource LinearBurnIcon}"/>
+                        </Button.Tag>
+                    </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="DarkerColor" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DarkerColorIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource DarkerColorIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="LighterColor" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LighterColorIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource LighterColorIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="DarkerColor" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DarkerColorIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource DarkerColorIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="LighterColor" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LighterColorIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource LighterColorIcon}"/>
+                        </Button.Tag>
+                    </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="ColorDodge" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ColorDodgeIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource ColorDodgeIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="LinearDodge" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LinearDodgeIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource LinearDodgeIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="ColorDodge" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ColorDodgeIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource ColorDodgeIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="LinearDodge" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LinearDodgeIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource LinearDodgeIcon}"/>
+                        </Button.Tag>
+                    </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="Overlay" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/OverlayIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource OverlayIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="SoftLight" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/SoftLightIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource SoftLightIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="HardLight" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/HardLightIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource HardLightIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="VividLight" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/VividLightIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource VividLightIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="LinearLight" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LinearLightIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource LinearLightIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="PinLight" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/PinLightIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource PinLightIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="Overlay" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/OverlayIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource OverlayIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="SoftLight" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/SoftLightIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource SoftLightIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="HardLight" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/HardLightIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource HardLightIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="VividLight" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/VividLightIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource VividLightIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="LinearLight" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LinearLightIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource LinearLightIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="PinLight" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/PinLightIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource PinLightIcon}"/>
+                        </Button.Tag>
+                    </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="HardMix" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/HardMixIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource HardMixIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="Difference" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DifferenceIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource DifferenceIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="Exclusion" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ExclusionIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource ExclusionIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="HardMix" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/HardMixIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource HardMixIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="Difference" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DifferenceIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource DifferenceIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="Exclusion" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ExclusionIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource ExclusionIcon}"/>
+                        </Button.Tag>
+                    </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="Hue" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/HueIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource HueIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="Saturation" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/SaturationIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource SaturationIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="Color" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ColorIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource ColorIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="Hue" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/HueIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource HueIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="Saturation" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/SaturationIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource SaturationIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="Color" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ColorIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource ColorIcon}"/>
+                        </Button.Tag>
+                    </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="Luminosity" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LuminosityIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource LuminosityIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="Subtract" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/SubtractIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource SubtractIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="Division" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DivisionIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource DivisionIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="Luminosity" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LuminosityIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource LuminosityIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="Subtract" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/SubtractIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource SubtractIcon}"/>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="Division" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DivisionIcon.xaml"/>
+                        </Button.Resources>
+                        <Button.Tag>
+                            <ContentControl Template="{StaticResource DivisionIcon}"/>
+                        </Button.Tag>
+                    </Button>
 
-            </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
         </Flyout>
     </UserControl.Resources>
 

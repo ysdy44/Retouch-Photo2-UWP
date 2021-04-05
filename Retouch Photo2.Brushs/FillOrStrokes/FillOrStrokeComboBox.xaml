@@ -15,7 +15,7 @@
             <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Button x:Name="Fill" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/FillOrStrokes/FillOrStrokeIcons/FillIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/FillOrStrokes/Icons/FillIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource FillIcon}"/>
@@ -23,7 +23,7 @@
                 </Button>
                 <Button x:Name="Stroke" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/FillOrStrokes/FillOrStrokeIcons/StrokeIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/FillOrStrokes/Icons/StrokeIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource StrokeIcon}"/>

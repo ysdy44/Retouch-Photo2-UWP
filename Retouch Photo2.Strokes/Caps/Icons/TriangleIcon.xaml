@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="TriangleIcon" TargetType="ContentControl">
-        <PathIcon>
+        <PathIcon HorizontalAlignment="Center">
             <PathIcon.Data>
                 M5,0L25,0L30,5L25,10L5,10L0,5L5,0Z
             </PathIcon.Data>

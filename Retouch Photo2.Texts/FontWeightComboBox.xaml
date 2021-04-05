@@ -12,121 +12,123 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
+                <StackPanel Padding="{StaticResource AppPanelPadding}" HorizontalAlignment="Stretch">
 
-                <Button x:Name="Black" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Tag>
-                        <Border CornerRadius="2" Padding="2,0" Background="Black">
-                            <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                900
-                            </TextBlock>
-                        </Border>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="Bold" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Tag>
-                        <Border CornerRadius="2" Padding="2,0" Background="Black">
-                            <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                700
-                            </TextBlock>
-                        </Border>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="Black" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Tag>
+                            <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    900
+                                </TextBlock>
+                            </Border>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="Bold" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Tag>
+                            <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    700
+                                </TextBlock>
+                            </Border>
+                        </Button.Tag>
+                    </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="ExtraBlack" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Tag>
-                        <Border CornerRadius="2" Padding="2,0" Background="Black">
-                            <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                950
-                            </TextBlock>
-                        </Border>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="ExtraBold" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Tag>
-                        <Border CornerRadius="2" Padding="2,0" Background="Black">
-                            <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                800
-                            </TextBlock>
-                        </Border>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="ExtraLight" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Tag>
-                        <Border CornerRadius="2" Padding="2,0" Background="Black">
-                            <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                200
-                            </TextBlock>
-                        </Border>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="ExtraBlack" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Tag>
+                            <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    950
+                                </TextBlock>
+                            </Border>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="ExtraBold" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Tag>
+                            <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    800
+                                </TextBlock>
+                            </Border>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="ExtraLight" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Tag>
+                            <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    200
+                                </TextBlock>
+                            </Border>
+                        </Button.Tag>
+                    </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="Light" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Tag>
-                        <Border CornerRadius="2" Padding="2,0" Background="Black">
-                            <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                300
-                            </TextBlock>
-                        </Border>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="Medium" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Tag>
-                        <Border CornerRadius="2" Padding="2,0" Background="Black">
-                            <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                500
-                            </TextBlock>
-                        </Border>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Tag>
-                        <Border CornerRadius="2" Padding="2,0" Background="Black">
-                            <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                400
-                            </TextBlock>
-                        </Border>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="Light" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Tag>
+                            <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    300
+                                </TextBlock>
+                            </Border>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="Medium" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Tag>
+                            <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    500
+                                </TextBlock>
+                            </Border>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Tag>
+                            <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    400
+                                </TextBlock>
+                            </Border>
+                        </Button.Tag>
+                    </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="SemiBold" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Tag>
-                        <Border CornerRadius="2" Padding="2,0" Background="Black">
-                            <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                600
-                            </TextBlock>
-                        </Border>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="SemiLight" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Tag>
-                        <Border CornerRadius="2" Padding="2,0" Background="Black">
-                            <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                350
-                            </TextBlock>
-                        </Border>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="SemiBold" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Tag>
+                            <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    600
+                                </TextBlock>
+                            </Border>
+                        </Button.Tag>
+                    </Button>
+                    <Button x:Name="SemiLight" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Tag>
+                            <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    350
+                                </TextBlock>
+                            </Border>
+                        </Button.Tag>
+                    </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                <Button x:Name="Thin" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Tag>
-                        <Border CornerRadius="2" Padding="2,0" Background="Black">
-                            <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                100
-                            </TextBlock>
-                        </Border>
-                    </Button.Tag>
-                </Button>
+                    <Button x:Name="Thin" Style="{StaticResource AppIconSelectedButton}">
+                        <Button.Tag>
+                            <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    100
+                                </TextBlock>
+                            </Border>
+                        </Button.Tag>
+                    </Button>
 
-            </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
         </Flyout>
     </UserControl.Resources>
 

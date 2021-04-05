@@ -37,7 +37,7 @@
                 <local:UIElementGroupingList>
 
                     <!--Menus-->
-                    <local:UIElementGrouping Key="Menus">
+                    <local:UIElementGrouping Key="">
                         <local:UIElementGrouping.Items>
                             <Border>
                                 <edits:Icon/>
@@ -76,7 +76,7 @@
                     </local:UIElementGrouping>
 
                     <!--Tools-->
-                    <local:UIElementGrouping Key="Tools">
+                    <local:UIElementGrouping Key="">
                         <local:UIElementGrouping.Items>
                             <Border>
                                 <Border.Resources>
@@ -244,7 +244,7 @@
                     </local:UIElementGrouping>
 
                     <!--ViewTool-->
-                    <local:UIElementGrouping Key="ViewTool">
+                    <local:UIElementGrouping Key="Tools_View">
                         <local:UIElementGrouping.Items>
                             <Border>
                                 <Border.Resources>
@@ -261,8 +261,56 @@
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
+                    <!--CursorTool-->
+                    <local:UIElementGrouping Key="Tools_Cursor">
+                        <local:UIElementGrouping.Items>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/CompositeModes/Icons/NewIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource NewIcon}"/>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/CompositeModes/Icons/AddIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource AddIcon}"/>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/CompositeModes/Icons/SubtractIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource SubtractIcon}"/>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/CompositeModes/Icons/IntersectIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource IntersectIcon}"/>
+                            </Border>
+                        </local:UIElementGrouping.Items>
+                    </local:UIElementGrouping>
+
+                    <!--FillOrStroke-->
+                    <local:UIElementGrouping Key="Tools_Brush_FillOrStroke">
+                        <local:UIElementGrouping.Items>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/FillOrStrokes/Icons/FillIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource FillIcon}"/>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/FillOrStrokes/Icons/StrokeIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource StrokeIcon}"/>
+                            </Border>
+                        </local:UIElementGrouping.Items>
+                    </local:UIElementGrouping>
+                    
                     <!--BrushTool-->
-                    <local:UIElementGrouping Key="BrushTool">
+                    <local:UIElementGrouping Key="Tools_Brush">
                         <local:UIElementGrouping.Items>
                             <Border>
                                 <Border.Resources>
@@ -300,21 +348,27 @@
                                 </Border.Resources>
                                 <ContentControl Template="{StaticResource ImageIcon}"/>
                             </Border>
+                        </local:UIElementGrouping.Items>
+                    </local:UIElementGrouping>
+
+                    <!--Extend-->
+                    <local:UIElementGrouping Key="Tools_Brush_Extend">
+                        <local:UIElementGrouping.Items>
                             <Border>
                                 <Border.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/ExtendIcons/ClampIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/ClampIcon.xaml"/>
                                 </Border.Resources>
                                 <ContentControl Template="{StaticResource ClampIcon}"/>
                             </Border>
                             <Border>
                                 <Border.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/ExtendIcons/WrapIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/WrapIcon.xaml"/>
                                 </Border.Resources>
                                 <ContentControl Template="{StaticResource WrapIcon}"/>
                             </Border>
                             <Border>
                                 <Border.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/ExtendIcons/MirrorIcon.xaml"/>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/MirrorIcon.xaml"/>
                                 </Border.Resources>
                                 <ContentControl Template="{StaticResource MirrorIcon}"/>
                             </Border>
@@ -322,7 +376,7 @@
                     </local:UIElementGrouping>
 
                     <!--TransparencyTool-->
-                    <local:UIElementGrouping Key="TransparencyTool">
+                    <local:UIElementGrouping Key="Tools_Transparency">
                         <local:UIElementGrouping.Items>
                             <Border>
                                 <Border.Resources>
@@ -352,7 +406,7 @@
                     </local:UIElementGrouping>
 
                     <!--ConvertToCurves-->
-                    <local:UIElementGrouping Key="ConvertToCurves">
+                    <local:UIElementGrouping Key="Tools_ConvertToCurves">
                         <local:UIElementGrouping.Items>
                             <Border>
                                 <Border.Resources>
@@ -364,7 +418,7 @@
                     </local:UIElementGrouping>
 
                     <!--NodeTool-->
-                    <local:UIElementGrouping Key="NodeTool">
+                    <local:UIElementGrouping Key="Tools_Node">
                         <local:UIElementGrouping.Items>
                             <Border>
                                 <Border.Resources>
@@ -412,7 +466,7 @@
                     </local:UIElementGrouping>
 
                     <!--PatternGridTool-->
-                    <local:UIElementGrouping Key="PatternGridTool">
+                    <local:UIElementGrouping Key="Tools_PatternGrid">
                         <local:UIElementGrouping.Items>
                             <Border>
                                 <Border.Resources>
@@ -436,7 +490,7 @@
                     </local:UIElementGrouping>
 
                     <!--GeometryArrowTool-->
-                    <local:UIElementGrouping Key="GeometryArrowTool">
+                    <local:UIElementGrouping Key="Tools_GeometryArrow">
                         <local:UIElementGrouping.Items>
                             <Border>
                                 <Border.Resources>
@@ -454,7 +508,7 @@
                     </local:UIElementGrouping>
 
                     <!--Edits-->
-                    <local:UIElementGrouping Key="Edits">
+                    <local:UIElementGrouping Key="Edits_Edit">
                         <local:UIElementGrouping.Items>
                             <Border>
                                 <Border.Resources>
@@ -556,7 +610,7 @@
                     </local:UIElementGrouping>
 
                     <!--Operates-->
-                    <local:UIElementGrouping Key="Operates">
+                    <local:UIElementGrouping Key="Menus_Operate">
                         <local:UIElementGrouping.Items>
                             <Border>
                                 <Border.Resources>
@@ -658,7 +712,7 @@
                     </local:UIElementGrouping>
 
                     <!--Adjustments-->
-                    <local:UIElementGrouping Key="Adjustments">
+                    <local:UIElementGrouping Key="Menus_Adjustment">
                         <local:UIElementGrouping.Items>
                             <Border>
                                 <Border.Resources>
@@ -730,7 +784,7 @@
                     </local:UIElementGrouping>
 
                     <!--Effects-->
-                    <local:UIElementGrouping Key="Effects">
+                    <local:UIElementGrouping Key="Menus_Effect">
                         <local:UIElementGrouping.Items>
                             <Border>
                                 <Border.Resources>
@@ -783,8 +837,98 @@
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
+                    <!--Dash-->
+                    <local:UIElementGrouping Key="Strokes_Dash">
+                        <local:UIElementGrouping.Items>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Caps/Icons/FlatIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource FlatIcon}"/>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Caps/Icons/SquareIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource SquareIcon}"/>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Caps/Icons/RoundIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource RoundIcon}"/>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Caps/Icons/TriangleIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource TriangleIcon}"/>
+                            </Border>
+                        </local:UIElementGrouping.Items>
+                    </local:UIElementGrouping>
+
+                    <!--Dash-->
+                    <local:UIElementGrouping Key="Strokes_Dash">
+                        <local:UIElementGrouping.Items>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Dashs/Icons/SolidIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource SolidIcon}"/>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Dashs/Icons/DashIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource DashIcon}"/>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Dashs/Icons/DotIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource DotIcon}"/>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Dashs/Icons/DashDotIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource DashDotIcon}"/>
+                            </Border>
+                        </local:UIElementGrouping.Items>
+                    </local:UIElementGrouping>
+
+                    <!--Join-->
+                    <local:UIElementGrouping Key="Strokes_Join">
+                        <local:UIElementGrouping.Items>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Joins/Icons/MiterIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource MiterIcon}"/>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Joins/Icons/BevelIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource BevelIcon}"/>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Joins/Icons/RoundIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource RoundIcon}"/>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Joins/Icons/MiterOrBevelIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource MiterOrBevelIcon}"/>
+                            </Border>
+                        </local:UIElementGrouping.Items>
+                    </local:UIElementGrouping>
+                        
                     <!--Blends-->
-                    <local:UIElementGrouping Key="Blends">
+                    <local:UIElementGrouping Key="Menus_Layer_BlendMode">
                         <local:UIElementGrouping.Items>
                             <Border>
                                 <Border.Resources>
@@ -1007,7 +1151,7 @@
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>
                                 <DataTemplate x:DataType="local:UIElementGrouping">
-                                    <TextBlock Text="{x:Bind Key}" Style="{StaticResource AppTabTextBlockStyle}"/>
+                                    <TextBlock Text="{x:Bind Title}" Style="{StaticResource AppTabTextBlockStyle}"/>
                                 </DataTemplate>
                             </GroupStyle.HeaderTemplate>
                         </GroupStyle>

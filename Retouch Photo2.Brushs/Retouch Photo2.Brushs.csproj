@@ -221,15 +221,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Extends\ExtendIcons\ClampIcon.xaml">
+    <Page Include="Extends\Icons\ClampIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Extends\ExtendIcons\MirrorIcon.xaml">
+    <Page Include="Extends\Icons\MirrorIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Extends\ExtendIcons\WrapIcon.xaml">
+    <Page Include="Extends\Icons\WrapIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -241,11 +241,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FillOrStrokes\FillOrStrokeIcons\FillIcon.xaml">
+    <Page Include="FillOrStrokes\Icons\FillIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="FillOrStrokes\FillOrStrokeIcons\StrokeIcon.xaml">
+    <Page Include="FillOrStrokes\Icons\StrokeIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

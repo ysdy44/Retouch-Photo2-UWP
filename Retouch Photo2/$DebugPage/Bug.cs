@@ -9,9 +9,9 @@ namespace Retouch_Photo2
     {
         private static readonly Random Random = new Random(123213213);
 
-        public Vector2 Position { get; private set; }
+        public Vector2 Position;
         private Vector2 Flat;
-        public Color Color { get; private set; }
+        public Color Color;
 
         public Bug(int width, int height)
         {
@@ -22,16 +22,32 @@ namespace Retouch_Photo2
 
         public void UpdatePosition(float width, float height)
         {
-            if (this.Position.X < 0 || this.Position.X > width)
+            if (this.Position.X < 0)
             {
+                this.Position.X = 1;
                 this.Flat.X = -this.Flat.X;
                 this.UpdateColor();
             }
-            if (this.Position.Y < 0 || this.Position.Y > height)
+            else if (this.Position.X > width)
             {
+                this.Position.X = width - 1;
+                this.Flat.X = -this.Flat.X;
+                this.UpdateColor();
+            }
+
+            if (this.Position.Y < 0)
+            {
+                this.Position.Y = 1;
                 this.Flat.Y = -this.Flat.Y;
                 this.UpdateColor();
             }
+            else if (this.Position.Y > height)
+            {
+                this.Position.Y = height - 1;
+                this.Flat.Y = -this.Flat.Y;
+                this.UpdateColor();
+            }
+
             this.Position += this.Flat;
         }
 

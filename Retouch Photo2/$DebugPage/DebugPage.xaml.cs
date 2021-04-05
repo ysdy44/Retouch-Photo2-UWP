@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,6 +13,10 @@ namespace Retouch_Photo2
     internal class UIElementGroupingList : List<UIElementGrouping> { }
     internal class UIElementGrouping : IGrouping<string, UIElement>
     {
+        //@String
+        static readonly ResourceLoader resource = ResourceLoader.GetForCurrentView();
+        public string Title => string.IsNullOrEmpty(Key) ? string.Empty : UIElementGrouping.resource.GetString($"{Key}");
+
         public string Key { set; get; }
         public List<UIElement> Items { get; set; } = new List<UIElement>();
 

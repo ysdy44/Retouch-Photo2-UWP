@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="DotIcon" TargetType="ContentControl">
-        <PathIcon>
+        <PathIcon HorizontalAlignment="Center">
             <PathIcon.Data>
                 M20.119,18.101L17.98,20.227L20.271,22.532L22.41,20.405L20.119,18.101ZM12.022,9.954L9.882,12.08L12.168,14.379L14.307,12.253L12.022,9.954ZM3.92,1.803L1.781,3.929L4.046,6.208L6.185,4.081L3.92,1.803Z
             </PathIcon.Data>

@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="RoundIcon" TargetType="ContentControl">
-        <PathIcon>
+        <PathIcon HorizontalAlignment="Center">
             <PathIcon.Data>
                 M30,5C30,2.24 27.76,0 25,0L5,0C2.24,0 0,2.24 0,5C0,7.76 2.24,10 5,10L25,10C27.76,10 30,7.76 30,5Z
             </PathIcon.Data>

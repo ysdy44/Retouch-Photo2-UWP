@@ -15,7 +15,7 @@
             <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Button x:Name="Clamp" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/ExtendIcons/ClampIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/ClampIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource ClampIcon}"/>
@@ -23,7 +23,7 @@
                 </Button>
                 <Button x:Name="Wrap" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/ExtendIcons/WrapIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/WrapIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource WrapIcon}"/>
@@ -31,7 +31,7 @@
                 </Button>
                 <Button x:Name="Mirror" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/ExtendIcons/MirrorIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/MirrorIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource MirrorIcon}"/>

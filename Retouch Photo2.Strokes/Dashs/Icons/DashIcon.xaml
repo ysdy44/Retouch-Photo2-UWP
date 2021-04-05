@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="DashIcon" TargetType="ContentControl">
-        <PathIcon>
+        <PathIcon HorizontalAlignment="Center">
             <PathIcon.Data>
                 M16.997,15.048L14.858,17.175L21.164,23.519L23.303,21.393L16.997,15.048ZM8.964,6.967L6.825,9.093L13.061,15.367L15.2,13.24L8.964,6.967ZM2.04,0L-0.099,2.126L4.939,7.195L7.078,5.069L2.04,0Z
             </PathIcon.Data>
