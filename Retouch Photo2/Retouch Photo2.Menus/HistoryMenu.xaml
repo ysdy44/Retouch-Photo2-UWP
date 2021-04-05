@@ -32,9 +32,7 @@
         </ListView.ItemContainerStyle>
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="historys:IHistory">
-                <TextBlock
-                    VerticalAlignment="Center"           
-                    Foreground="{ThemeResource AppText}"
+                <TextBlock Style="{StaticResource AppTextBlockStyle}"
                     Text="{x:Bind Type, Mode=OneWay, Converter={StaticResource HistoryTypeConverter}}"/>
             </DataTemplate>
         </ListView.ItemTemplate>

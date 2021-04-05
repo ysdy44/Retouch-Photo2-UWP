@@ -21,7 +21,6 @@ namespace Retouch_Photo2
     {
 
         //@ViewModel
-        TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
 

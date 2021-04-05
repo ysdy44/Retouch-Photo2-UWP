@@ -7,6 +7,7 @@
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     xmlns:local="using:Retouch_Photo2"
     xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     xmlns:edits="using:Retouch_Photo2.Edits"
     xmlns:operates="using:Retouch_Photo2.Operates"
     xmlns:adjustments="using:Retouch_Photo2.Adjustments"
@@ -972,6 +973,10 @@
         <developerTools:AlignmentGrid Grid.RowSpan="2" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray" Visibility="{ThemeResource AppGridVisibility}" />
 
 
+        <!--Animated-->
+        <canvas:CanvasAnimatedControl x:Name="CanvasAnimatedControl" Grid.RowSpan="2"/>
+
+
         <!--Body-->
         <ScrollViewer x:Name="ScrollViewer" Grid.RowSpan="2" Padding="20,0">
             <Border>
@@ -1028,6 +1033,10 @@
                 <FontIcon Glyph="&#xE830;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
                           MirroredWhenRightToLeft="True"/>
             </elements:ExpanedHead.LeftButtonContent>
+            <elements:ExpanedHead.RightButtonContent>
+                <FontIcon Glyph="&#xED59;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                          MirroredWhenRightToLeft="True"/>
+            </elements:ExpanedHead.RightButtonContent>
         </elements:ExpanedHead>
 
     </Grid>

@@ -433,7 +433,7 @@
                                     <CheckBox x:Name="Adjustment"/>
                                 </Border>
                                 <Border Style="{StaticResource MenuBorderStyle2}">
-                                    <CheckBox x:Name="EffectExpander"/>
+                                    <CheckBox x:Name="Effect"/>
                                 </Border>
 
                                 <Border Style="{StaticResource MenuBorderStyle1}">

@@ -117,16 +117,16 @@ namespace Retouch_Photo2
             this.AboutDialog.SecondaryButtonClick += (s, e) => this.AboutDialog.Hide();
             this.AboutDialog.PrimaryButtonClick += (s, e) => this.AboutDialog.Hide();
 
-            int about = 3;
-            this.AboutImage.DoubleTapped += (s, e) => this.AboutStoryboard.Begin();//Storyboard
-            this.AboutStoryboard.Completed += (s, e) =>
+            int about = 4;
+            this.AboutImage.Tapped += (s, e) =>
             {
-                about--;
-                if (about <= 0)
+                if (about <= -1)
                 {
                     about = 3;
                     this.Frame.Navigate(typeof(DebugPage));//Navigate
                 }
+                else if (about <= 3) this.AboutStoryboard.Begin();//Storyboard
+                about--;
             };
         }
 
@@ -376,10 +376,10 @@ namespace Retouch_Photo2
             //Construct
             ContentControl constructKeyContentControl(string key, string titleResource)
             {
-                ContentControl contentControl = new ContentControl    
-                {         
-                    Tag = key.ToString(),        
-                    Style = getStyle2()            
+                ContentControl contentControl = new ContentControl
+                {
+                    Tag = key.ToString(),
+                    Style = getStyle2()
                 };
 
                 //Strings
