@@ -15,7 +15,7 @@ namespace Retouch_Photo2.Tools.Elements
     /// </summary>
     public sealed partial class CompositeModeSegmented : UserControl
     {
-        
+
         //@VisualState
         MarqueeCompositeMode _vsMode;
         /// <summary> 
@@ -27,10 +27,10 @@ namespace Retouch_Photo2.Tools.Elements
             {
                 switch (this._vsMode)
                 {
-                    case MarqueeCompositeMode.New: return this.New;
-                    case MarqueeCompositeMode.Add: return this.Add;
-                    case MarqueeCompositeMode.Subtract: return this.Subtract;
-                    //case MarqueeCompositeMode.Intersect: return this.Intersect;
+                    case MarqueeCompositeMode.New: return this.NewState;
+                    case MarqueeCompositeMode.Add: return this.AddState;
+                    case MarqueeCompositeMode.Subtract: return this.SubtractState;
+                    //case MarqueeCompositeMode.Intersect: return this.IntersectState;
                     default: return this.Normal;
                 }
             }
@@ -43,21 +43,21 @@ namespace Retouch_Photo2.Tools.Elements
         /// <summary> Mode of <see cref = "CompositeModeSegmented" />. </summary>
         public MarqueeCompositeMode Mode
         {
-            get  => (MarqueeCompositeMode)base.GetValue(ModeProperty);
+            get => (MarqueeCompositeMode)base.GetValue(ModeProperty);
             set => base.SetValue(ModeProperty, value);
         }
         /// <summary> Identifies the <see cref = "CompositeModeSegmented.Mode" /> dependency property. </summary>
-        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(MarqueeCompositeMode), typeof(CompositeModeSegmented), new PropertyMetadata(MarqueeCompositeMode.New,(sender,e)=>
-        {
-            CompositeModeSegmented control = (CompositeModeSegmented)sender;
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(MarqueeCompositeMode), typeof(CompositeModeSegmented), new PropertyMetadata(MarqueeCompositeMode.New, (sender, e) =>
+         {
+             CompositeModeSegmented control = (CompositeModeSegmented)sender;
 
-            if (e.NewValue is MarqueeCompositeMode value)
-            {
-                control._vsMode = value;
-                control.VisualState = control.VisualState;//State
+             if (e.NewValue is MarqueeCompositeMode value)
+             {
+                 control._vsMode = value;
+                 control.VisualState = control.VisualState;//State
             }
-        }));
-               
+         }));
+
 
         /// <summary> IsOpen of <see cref = "CompositeModeSegmented" />. </summary>
         public bool IsOpen
@@ -81,24 +81,36 @@ namespace Retouch_Photo2.Tools.Elements
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.NewButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.New;
-            this.AddButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.Add;
-            this.SubtractButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.Subtract;
-            //this.IntersectButton.Click += (s, e) => this.Mode = MarqueeCompositeMode.Intersect;
+            this.New.Click += (s, e) => this.Mode = MarqueeCompositeMode.New;
+            this.Add.Click += (s, e) => this.Mode = MarqueeCompositeMode.Add;
+            this.Subtract.Click += (s, e) => this.Mode = MarqueeCompositeMode.Subtract;
+            //this.Intersect.Click += (s, e) => this.Mode = MarqueeCompositeMode.Intersect;
 
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
-        
+
 
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.NewToolTip.Content = resource.GetString("Tools_Cursor_CompositeMode_New");
-            this.AddToolTip.Content = resource.GetString("Tools_Cursor_CompositeMode_Add");
-            this.SubtractToolTip.Content = resource.GetString("Tools_Cursor_CompositeMode_Subtract");
-            //this.IntersectToolTip.Content = resource.GetString("Tools_Cursor_CompositeMode_Intersect");
+            if (ToolTipService.GetToolTip(this.New) is ToolTip toolTip0)
+            {
+                toolTip0.Content = resource.GetString($"Tools_Cursor_CompositeMode_New");
+            }
+            if (ToolTipService.GetToolTip(this.Add) is ToolTip toolTip1)
+            {
+                toolTip1.Content = resource.GetString($"Tools_Cursor_CompositeMode_Add");
+            }
+            if (ToolTipService.GetToolTip(this.Subtract) is ToolTip toolTip2)
+            {
+                toolTip2.Content = resource.GetString($"Tools_Cursor_CompositeMode_Subtract");
+            }
+            //if (ToolTipService.GetToolTip(this.Intersect) is ToolTip toolTip3)
+            //{
+            //    toolTip3.Content = resource.GetString($"Tools_Cursor_CompositeMode_Intersect");
+            //}
         }
     }
 }

@@ -15,7 +15,7 @@
             <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Button x:Name="GridButton" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypeIcons/GridIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/GridIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource GridIcon}"/>
@@ -23,7 +23,7 @@
                 </Button>
                 <Button x:Name="HorizontalButton" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypeIcons/HorizontalIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/HorizontalIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource HorizontalIcon}"/>
@@ -31,7 +31,7 @@
                 </Button>
                 <Button x:Name="VerticalButton" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypeIcons/VerticalIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/VerticalIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource VerticalIcon}"/>

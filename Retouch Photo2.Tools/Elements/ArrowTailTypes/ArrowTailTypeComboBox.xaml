@@ -15,7 +15,7 @@
             <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Button x:Name="NoneButton" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypeIcons/NoneIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypes/Icons/NoneIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource NoneIcon}"/>
@@ -23,7 +23,7 @@
                 </Button>
                 <Button x:Name="ArrowButton" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypeIcons/ArrowIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypes/Icons/ArrowIcon.xaml"/>
                     </Button.Resources>
                     <Button.Tag>
                         <ContentControl Template="{StaticResource ArrowIcon}"/>

@@ -29,7 +29,7 @@
             <StackPanel Orientation="Horizontal">
                 <RadioButton x:Name="MirroredRadioButton" IsChecked="True" Style="{StaticResource AppIconRadioButtonStyle}">
                     <RadioButton.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModeIcons/MirroredIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons/MirroredIcon.xaml"/>
                     </RadioButton.Resources>
                     <RadioButton.Tag>
                         <ContentControl Template="{StaticResource MirroredIcon}"/>
@@ -37,7 +37,7 @@
                 </RadioButton>
                 <RadioButton x:Name="DisconnectedRadioButton" IsChecked="False" Style="{StaticResource AppIconRadioButtonStyle}">
                     <RadioButton.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModeIcons/DisconnectedIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons/DisconnectedIcon.xaml"/>
                     </RadioButton.Resources>
                     <RadioButton.Tag>
                         <ContentControl Template="{StaticResource DisconnectedIcon}"/>
@@ -45,7 +45,7 @@
                 </RadioButton>
                 <RadioButton x:Name="AsymmetricRadioButton" IsChecked="False" Style="{StaticResource AppIconRadioButtonStyle}">
                     <RadioButton.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModeIcons/AsymmetricIcon.xaml"/>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons/AsymmetricIcon.xaml"/>
                     </RadioButton.Resources>
                     <RadioButton.Tag>
                         <ContentControl Template="{StaticResource AsymmetricIcon}"/>

@@ -108,16 +108,16 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Elements\ArrowTailTypeComboBox.xaml.cs">
+    <Compile Include="Elements\ArrowTailTypes\ArrowTailTypeComboBox.xaml.cs">
       <DependentUpon>ArrowTailTypeComboBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Elements\CompositeModeSegmented.xaml.cs">
+    <Compile Include="Elements\CompositeModes\CompositeModeSegmented.xaml.cs">
       <DependentUpon>CompositeModeSegmented.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Elements\PatternGridTypeComboBox.xaml.cs">
+    <Compile Include="Elements\PatternGridTypes\PatternGridTypeComboBox.xaml.cs">
       <DependentUpon>PatternGridTypeComboBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Elements\NodeModeControl.xaml.cs">
+    <Compile Include="Elements\NodeModes\NodeModeControl.xaml.cs">
       <DependentUpon>NodeModeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Icon.xaml.cs">
@@ -154,19 +154,35 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Elements\ArrowTailTypeComboBox.xaml">
+    <Page Include="Elements\ArrowTailTypes\ArrowTailTypeComboBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Elements\ArrowTailTypeIcons\ArrowIcon.xaml">
+    <Page Include="Elements\ArrowTailTypes\Icons\ArrowIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Elements\ArrowTailTypeIcons\NoneIcon.xaml">
+    <Page Include="Elements\ArrowTailTypes\Icons\NoneIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Elements\CompositeModeSegmented.xaml">
+    <Page Include="Elements\CompositeModes\Icons\NewIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Elements\CompositeModes\Icons\SubtractIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Elements\CompositeModes\Icons\IntersectIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Elements\CompositeModes\Icons\AddIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Elements\CompositeModes\CompositeModeSegmented.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -198,35 +214,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Elements\NodeModeIcons\AsymmetricIcon.xaml">
+    <Page Include="Elements\NodeModes\Icons\AsymmetricIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Elements\NodeModeIcons\DisconnectedIcon.xaml">
+    <Page Include="Elements\NodeModes\Icons\DisconnectedIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Elements\NodeModeIcons\MirroredIcon.xaml">
+    <Page Include="Elements\NodeModes\Icons\MirroredIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Elements\PatternGridTypeComboBox.xaml">
+    <Page Include="Elements\PatternGridTypes\PatternGridTypeComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Elements\NodeModeControl.xaml">
+    <Page Include="Elements\NodeModes\NodeModeControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Elements\PatternGridTypeIcons\GridIcon.xaml">
+    <Page Include="Elements\PatternGridTypes\Icons\GridIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Elements\PatternGridTypeIcons\HorizontalIcon.xaml">
+    <Page Include="Elements\PatternGridTypes\Icons\HorizontalIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Elements\PatternGridTypeIcons\VerticalIcon.xaml">
+    <Page Include="Elements\PatternGridTypes\Icons\VerticalIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

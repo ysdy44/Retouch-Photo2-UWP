@@ -9,12 +9,6 @@
     d:DesignWidth="200"
     >
 
-    <UserControl.Resources>
-        <SolidColorBrush x:Name="CheckBrush" Color="White"/>
-        <SolidColorBrush x:Name="UnCheckBrush" Color="{ThemeResource SystemBaseHighColor}"/>
-    </UserControl.Resources>
-
-
     <Grid>
 
         <!--VisualState-->
@@ -28,7 +22,6 @@
                 <VisualState x:Name="SolidState">
                     <VisualState.Setters>
                         <Setter Target = "Solid.IsEnabled" Value="False"/>
-                        <Setter Target = "SolidIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -36,7 +29,6 @@
                 <VisualState x:Name="DashState">
                     <VisualState.Setters>
                         <Setter Target = "Dash2.IsEnabled" Value="False"/>
-                        <Setter Target = "DashIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -44,7 +36,6 @@
                 <VisualState x:Name="DotState">
                     <VisualState.Setters>
                         <Setter Target = "Dot.IsEnabled" Value="False"/>
-                        <Setter Target = "DotIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -52,7 +43,6 @@
                 <VisualState x:Name="DashDotState">
                     <VisualState.Setters>
                         <Setter Target = "DashDot.IsEnabled" Value="False"/>
-                        <Setter Target = "DashDotIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -69,34 +59,46 @@
 
         <!--Solid-->
         <Button x:Name="Solid" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonStyle}">
+            <Button.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Dashs/Icons/SolidIcon.xaml"/>
+            </Button.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line x:Name="SolidIcon" X1="22" X2="0" Y1="22" Y2="0" StrokeThickness="3" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <ContentControl Template="{StaticResource SolidIcon}"/>
         </Button>
 
         <!--Dash-->
         <Button x:Name="Dash2" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+            <Button.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Dashs/Icons/DashIcon.xaml"/>
+            </Button.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line x:Name="DashIcon" X1="22" X2="0" Y1="22" Y2="0" StrokeDashArray="3 1" StrokeThickness="3" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <ContentControl Template="{StaticResource DashIcon}"/>
         </Button>
 
         <!--Dot-->
         <Button x:Name="Dot" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+            <Button.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Dashs/Icons/DotIcon.xaml"/>
+            </Button.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line x:Name="DotIcon" X1="22" X2="0" Y1="22" Y2="0" StrokeDashArray="1 3" StrokeThickness="3" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <ContentControl Template="{StaticResource DotIcon}"/>
         </Button>
 
         <!--DashDot-->
         <Button x:Name="DashDot" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+            <Button.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Dashs/Icons/DashDotIcon.xaml"/>
+            </Button.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line x:Name="DashDotIcon" X1="22" X2="0" Y1="22" Y2="0" StrokeDashArray="1 2 1" StrokeThickness="3" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <ContentControl Template="{StaticResource DashDotIcon}"/>
         </Button>
 
     </Grid>

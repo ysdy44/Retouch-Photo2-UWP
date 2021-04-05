@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="RoundIcon" TargetType="ContentControl">
+        <PathIcon>
+            <PathIcon.Data>
+                M12.753,-0.01L22.737,21.482C23.108,22.281 22.928,23.229 22.289,23.837C21.651,24.445 20.695,24.578 19.915,24.167L-0.04,13.672L1.63,9.714L16.436,17.686L9.081,1.981L12.753,-0.01Z
+            </PathIcon.Data>
+        </PathIcon>
+    </ControlTemplate>
+
+</ResourceDictionary>

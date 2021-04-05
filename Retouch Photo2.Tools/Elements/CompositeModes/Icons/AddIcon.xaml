@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="AddIcon" TargetType="ContentControl">
+        <PathIcon>
+            <PathIcon.Data>
+                M16.011,7.671C20.327,7.789 23.794,11.33 23.794,15.673C23.794,20.092 20.207,23.679 15.789,23.679C11.483,23.679 7.967,20.273 7.79,16.011L0,16.011L0,0L16.011,0L16.011,7.671ZM16.572,15.451L16.572,12.649L15.451,12.649L15.451,15.451L12.649,15.451L12.649,16.572L15.451,16.572L15.451,19.374L16.572,19.374L16.572,16.572L19.374,16.572L19.374,15.451L16.572,15.451Z
+            </PathIcon.Data>
+        </PathIcon>
+    </ControlTemplate>
+
+</ResourceDictionary>

@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="MiterIcon" TargetType="ContentControl">
+        <PathIcon>
+            <PathIcon.Data>
+                M12.753,-0.01L25.3,27L-0.04,13.672L1.63,9.714L16.436,17.686L9.081,1.981L12.753,-0.01Z
+            </PathIcon.Data>
+        </PathIcon>
+    </ControlTemplate>
+
+</ResourceDictionary>

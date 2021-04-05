@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="SolidIcon" TargetType="ContentControl">
+        <PathIcon>
+            <PathIcon.Data>
+                M2.141,0L0,2.128L21.082,23.338L23.223,21.21L2.141,0Z
+            </PathIcon.Data>
+        </PathIcon>
+    </ControlTemplate>
+
+</ResourceDictionary>

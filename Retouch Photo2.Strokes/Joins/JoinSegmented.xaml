@@ -22,7 +22,6 @@
                 <VisualState x:Name="MiterState">
                     <VisualState.Setters>
                         <Setter Target = "Miter.IsEnabled" Value="False"/>
-                        <Setter Target = "MiterIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -30,7 +29,6 @@
                 <VisualState x:Name="BevelState">
                     <VisualState.Setters>
                         <Setter Target = "Bevel.IsEnabled" Value="False"/>
-                        <Setter Target = "BevelIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -38,7 +36,6 @@
                 <VisualState x:Name="RoundState">
                     <VisualState.Setters>
                         <Setter Target = "Round.IsEnabled" Value="False"/>
-                        <Setter Target = "RoundIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -46,7 +43,6 @@
                 <VisualState x:Name="MiterOrBevelState">
                     <VisualState.Setters>
                         <Setter Target = "MiterOrBevel.IsEnabled" Value="False"/>
-                        <Setter Target = "MiterOrBevelIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -63,34 +59,46 @@
 
         <!--Miter-->
         <Button x:Name="Miter" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonStyle}">
+            <Button.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Joins/Icons/MiterIcon.xaml"/>
+            </Button.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Polyline x:Name="MiterIcon" Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Miter" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <ContentControl Template="{StaticResource MiterIcon}"/>
         </Button>
 
         <!--Bevel-->
         <Button x:Name="Bevel" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+            <Button.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Joins/Icons/BevelIcon.xaml"/>
+            </Button.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Polyline x:Name="BevelIcon" Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Bevel" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <ContentControl Template="{StaticResource BevelIcon}"/>
         </Button>
 
         <!--Round-->
         <Button x:Name="Round" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+            <Button.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Joins/Icons/RoundIcon.xaml"/>
+            </Button.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Polyline x:Name="RoundIcon" Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Round" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <ContentControl Template="{StaticResource RoundIcon}"/>
         </Button>
 
         <!--MiterOrBevel-->
         <Button x:Name="MiterOrBevel" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+            <Button.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Joins/Icons/MiterOrBevelIcon.xaml"/>
+            </Button.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Polyline x:Name="MiterOrBevelIcon" Points="10,0 20,20 0,10" StrokeThickness="4" StrokeLineJoin="Bevel" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <ContentControl Template="{StaticResource MiterOrBevelIcon}"/>
         </Button>
 
     </Grid>

@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="DashDotIcon" TargetType="ContentControl">
+        <PathIcon>
+            <PathIcon.Data>
+                M19.552,17.618L17.413,19.745L19.733,22.079L21.872,19.953L19.552,17.618ZM13.537,11.567L11.397,13.693L13.654,15.964L15.794,13.837L13.537,11.567ZM7.622,5.616L5.483,7.742L9.433,11.717L11.572,9.59L7.622,5.616ZM3.471,1.44L1.332,3.566L3.596,5.844L5.736,3.718L3.471,1.44Z
+            </PathIcon.Data>
+        </PathIcon>
+    </ControlTemplate>
+
+</ResourceDictionary>

@@ -8,7 +8,7 @@
     d:DesignHeight="50"
     d:DesignWidth="200"
     >
-    
+
     <Grid>
 
         <!--VisualState-->
@@ -22,7 +22,6 @@
                 <VisualState x:Name="FlatState">
                     <VisualState.Setters>
                         <Setter Target = "Flat.IsEnabled" Value="False"/>
-                        <Setter Target = "FlatIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -30,7 +29,6 @@
                 <VisualState x:Name="SquareState">
                     <VisualState.Setters>
                         <Setter Target = "Square.IsEnabled" Value="False"/>
-                        <Setter Target = "SquareIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -38,7 +36,6 @@
                 <VisualState x:Name="RoundState">
                     <VisualState.Setters>
                         <Setter Target = "Round.IsEnabled" Value="False"/>
-                        <Setter Target = "RoundIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -46,10 +43,9 @@
                 <VisualState x:Name="TriangleState">
                     <VisualState.Setters>
                         <Setter Target = "Triangle.IsEnabled" Value="False"/>
-                        <Setter Target = "TriangleIcon.Stroke" Value="White"/>
                     </VisualState.Setters>
                 </VisualState>
-                
+
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
@@ -63,34 +59,46 @@
 
         <!--Flat-->
         <Button x:Name="Flat" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonStyle}">
+            <Button.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Caps/Icons/FlatIcon.xaml"/>
+            </Button.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line x:Name="FlatIcon" X1="5" Y1="8" X2="25" Y2="8" StrokeThickness="10" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <ContentControl Template="{StaticResource FlatIcon}"/>
         </Button>
-        
+
         <!--Square-->
         <Button x:Name="Square" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
-            <ToolTipService.ToolTip>
+            <Button.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Caps/Icons/SquareIcon.xaml"/>
+            </Button.Resources>
+                <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line x:Name="SquareIcon" X1="5" Y1="8" X2="25" Y2="8" StrokeThickness="10" StrokeStartLineCap="Square" StrokeEndLineCap="Square" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <ContentControl Template="{StaticResource SquareIcon}"/>
         </Button>
-        
+
         <!--Round-->
         <Button x:Name="Round" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+            <Button.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Caps/Icons/RoundIcon.xaml"/>
+            </Button.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line x:Name="RoundIcon" X1="5" Y1="8" X2="25" Y2="8" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <ContentControl Template="{StaticResource RoundIcon}"/>
         </Button>
 
         <!--Triangle-->
         <Button x:Name="Triangle" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+            <Button.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Caps/Icons/TriangleIcon.xaml"/>
+            </Button.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Line x:Name="TriangleIcon" X1="5" Y1="8" X2="25" Y2="8" StrokeThickness="10" StrokeStartLineCap="Triangle" StrokeEndLineCap="Triangle" Stroke="{ThemeResource SystemBaseHighColor}"/>
+            <ContentControl Template="{StaticResource TriangleIcon}"/>
         </Button>
 
     </Grid>
