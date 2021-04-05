@@ -3,9 +3,12 @@
 // Difficult:         
 // Only:              
 // Complete:      ★
+using Retouch_Photo2.Elements;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using Windows.UI.Xaml;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -54,7 +57,14 @@ namespace Retouch_Photo2.ViewModels
             {
                 Setting setting = new Setting();
 
-                if (root.Element("Theme") is XElement theme) setting.Theme = Retouch_Photo2.Elements.XML.CreateTheme(theme.Value);
+                if (root.Element("Theme") is XElement theme)
+                {
+                    try
+                    {
+                        setting.Theme = (ElementTheme)Enum.Parse(typeof(ElementTheme), theme.Value);
+                    }
+                    catch (Exception) { }
+                }
                 if (root.Element("DeviceLayout") is XElement deviceLayout) setting.DeviceLayout = Retouch_Photo2.Elements.XML.LoadDeviceLayout(deviceLayout);
                 if (root.Element("CanvasBaclground") is XElement canvasBaclground && string.IsNullOrEmpty(canvasBaclground.Value) == false) setting.CanvasBaclground = (byte)(double)canvasBaclground;
                 if (root.Element("LayersHeight") is XElement layersHeight) setting.LayersHeight = (int)layersHeight;

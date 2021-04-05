@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using Microsoft.Graphics.Canvas;
+using System;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace Retouch_Photo2.Brushs
@@ -107,7 +109,14 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.RadialGradient:
                 case BrushType.EllipticalGradient:
                 case BrushType.Image:
-                    if (element.Element("Extend") is XElement extend) this.Extend = Retouch_Photo2.Brushs.XML.CreateExtend(extend.Value);
+                    if (element.Element("Extend") is XElement extend)
+                    {
+                        try
+                        {
+                            this.Extend = (CanvasEdgeBehavior)Enum.Parse(typeof(CanvasEdgeBehavior), extend.Value);
+                        }
+                        catch (Exception) { }
+                    }
                     break;
             }
 

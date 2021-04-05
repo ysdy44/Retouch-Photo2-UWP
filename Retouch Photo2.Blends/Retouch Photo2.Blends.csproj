@@ -117,8 +117,6 @@
     <Compile Include="TagTypeSegmented.xaml.cs">
       <DependentUpon>TagTypeSegmented.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XMLs\XML.BlendModeFactory.cs" />
-    <Compile Include="XMLs\XML.TagTypeFactory.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Blends.rd.xml" />
   </ItemGroup>
   <ItemGroup>

@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Filters
         /// <param name="elementName"> The element name. </param>
         /// <param name="filterCategory"> The source data. </param>
         /// <returns> The saved XDocument. </returns>
-        public static XElement SaveFilterCategory(string elementName, FilterCategory filterCategory)
+        private static XElement SaveFilterCategory(string elementName, FilterCategory filterCategory)
         {
             XElement element = new XElement(elementName);
             element.Add(new XAttribute("Name", filterCategory.Name));
@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Filters
         /// </summary>
         /// <param name="element"> The source XElement. </param>
         /// <returns> The loaded <see cref="Filter"/>s. </returns>
-        public static FilterCategory LoadFilterCategory(XElement element)
+        private static FilterCategory LoadFilterCategory(XElement element)
         {
             FilterCategory filterCategory = new FilterCategory();
             if (element.Attribute("Name") is XAttribute name) filterCategory.Name = name.Value;

@@ -184,9 +184,7 @@
     <Compile Include="RadiusAnimas\RadiusAnimaPanel.xaml.cs">
       <DependentUpon>RadiusAnimaPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XMLs\XML.ThemeFactory.cs" />
     <Compile Include="XMLs\XML.DeviceLayout.cs" />
-    <Compile Include="XMLs\XML.DeviceLayoutTypeFactory.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Elements.rd.xml" />
   </ItemGroup>
   <ItemGroup>

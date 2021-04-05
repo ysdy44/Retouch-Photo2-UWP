@@ -3,6 +3,7 @@
 // Difficult:         
 // Only:              
 // Complete:      ★
+using System;
 using System.Xml.Linq;
 
 namespace Retouch_Photo2.Elements
@@ -42,7 +43,14 @@ namespace Retouch_Photo2.Elements
             if (element.Attribute("IsAdaptive") is XAttribute isAdaptive) deviceLayout.IsAdaptive = (bool)isAdaptive;
             if (element.Attribute("PhoneMaxWidth") is XAttribute phoneMaxWidth) deviceLayout.PhoneMaxWidth = (int)phoneMaxWidth;
             if (element.Attribute("PadMaxWidth") is XAttribute padMaxWidth) deviceLayout.PadMaxWidth = (int)padMaxWidth;
-            if (element.Attribute("FallBackType") is XAttribute fallBackType) deviceLayout.FallBackType = XML.CreateDeviceLayoutType(fallBackType.Value);
+            if (element.Attribute("FallBackType") is XAttribute fallBackType) 
+            {
+                try
+                {
+                    deviceLayout.FallBackType = (DeviceLayoutType)Enum.Parse(typeof(DeviceLayoutType), fallBackType.Value);
+                }
+                catch (Exception) { }
+            }
             
             return deviceLayout;
         }

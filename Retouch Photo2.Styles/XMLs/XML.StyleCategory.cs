@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Styles
         /// <param name="elementName"> The element name. </param>
         /// <param name="StyleCategory"> The source data. </param>
         /// <returns> The saved XDocument. </returns>
-        public static XElement SaveStyleCategory(string elementName, StyleCategory StyleCategory)
+        private static XElement SaveStyleCategory(string elementName, StyleCategory StyleCategory)
         {
             XElement element = new XElement(elementName);
             element.Add(new XAttribute("Name", StyleCategory.Name));
@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Styles
         /// </summary>
         /// <param name="element"> The source XElement. </param>
         /// <returns> The loaded <see cref="IStyle"/>s. </returns>
-        public static StyleCategory LoadStyleCategory(XElement element)
+        private static StyleCategory LoadStyleCategory(XElement element)
         {
             StyleCategory StyleCategory = new StyleCategory();
             if (element.Attribute("Name") is XAttribute name) StyleCategory.Name = name.Value;

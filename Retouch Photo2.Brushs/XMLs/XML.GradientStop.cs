@@ -20,7 +20,7 @@ namespace Retouch_Photo2.Brushs
         /// <param name="elementName"> The element name. </param>
         /// <param name="stop"> The source data. </param>
         /// <returns> The saved XElement. </returns>
-        public static XElement SaveStop(string elementName, CanvasGradientStop stop)
+        private static XElement SaveStop(string elementName, CanvasGradientStop stop)
         {
             return new XElement
             (
@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Brushs
         /// </summary>
         /// <param name="element"> The source XElement. </param>
         /// <returns> The loaded <see cref="CanvasGradientStop"/>. </returns>
-        public static CanvasGradientStop LoadStop(XElement element)
+        private static CanvasGradientStop LoadStop(XElement element)
         {
             CanvasGradientStop stop = new CanvasGradientStop();
 

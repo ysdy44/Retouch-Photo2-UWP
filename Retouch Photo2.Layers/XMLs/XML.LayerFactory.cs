@@ -3,9 +3,11 @@
 // Difficult:         
 // Only:              
 // Complete:      ★
-using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Layers.Models;
-using System.Xml.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Retouch_Photo2.Layers
 {
@@ -20,51 +22,25 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <param name="type"> The source string. </param>
         /// <returns> The created <see cref="Layerage"/>. </returns>
-        public static ILayer CreateLayer(string type)
+        private static ILayer CreateLayer(string type)
         {
-            switch (type)
+            if (string.IsNullOrEmpty(type) == false)
             {
-                //Geometry0
-                case "GeometryRectangle": return new GeometryRectangleLayer();
-                case "GeometryEllipse": return new GeometryEllipseLayer();
+                Assembly assembly = typeof(ILayer).GetTypeInfo().Assembly;
+                IEnumerable<TypeInfo> typeInfos = from t in assembly.DefinedTypes where t.IsClass select t;
 
-                case "Curve": return new CurveLayer();
-
-                case "TextArtistic": return new TextArtisticLayer();
-                case "TextFrame": return new TextFrameLayer();
-
-                case "Image": return new ImageLayer();
-                case "Group": return new GroupLayer();
-
-
-                //Pattern
-                case "PatternGrid": return new PatternGridLayer();
-                case "PatternDiagonal": return new PatternDiagonalLayer();
-                case "PatternSpotted": return new PatternSpottedLayer();
-
-
-                //Geometry1
-                case "GeometryRoundRect": return new GeometryRoundRectLayer();
-                case "GeometryTriangle": return new GeometryTriangleLayer();
-                case "GeometryDiamond": return new GeometryDiamondLayer();
-
-                //Geometry2
-                case "GeometryPentagon": return new GeometryPentagonLayer();
-                case "GeometryStar": return new GeometryStarLayer();
-                case "GeometryCog": return new GeometryCogLayer();
-
-                //Geometry3
-                case "GeometryDount": return new GeometryDountLayer();
-                case "GeometryPie": return new GeometryPieLayer();
-                case "GeometryCookie": return new GeometryCookieLayer();
-
-                //Geometry4
-                case "GeometryArrow": return new GeometryArrowLayer();
-                case "GeometryCapsule": return new GeometryCapsuleLayer();
-                case "GeometryHeart": return new GeometryHeartLayer();
-
-                default: return new GroupLayer();
+                TypeInfo typeInfo = typeInfos.FirstOrDefault(t => t.Name == $"{type}Layer");
+                if (typeInfo != null)
+                {
+                    object obj = Activator.CreateInstance(typeInfo.AsType());
+                    if (obj is ILayer layer)
+                    {
+                        return new GroupLayer();
+                    }
+                }
             }
+
+            return new GroupLayer();
         }
 
     }

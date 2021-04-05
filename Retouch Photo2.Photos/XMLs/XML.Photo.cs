@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Photos
         /// <param name="elementName"> The element name. </param>
         /// <param name="photo"> The source data. </param>
         /// <returns> The saved XElement. </returns>
-        public static XElement SavePhoto(string elementName, Photo photo)
+        private static XElement SavePhoto(string elementName, Photo photo)
         {
             return new XElement
             (
@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Photos
         /// </summary>
         /// <param name="element"> The source XElement. </param>
         /// <returns> The loaded <see cref="Photo"/>. </returns>
-        public static Photo LoadPhoto(XElement element)
+        private static Photo LoadPhoto(XElement element)
         {
             Photo photo = new Photo();
 

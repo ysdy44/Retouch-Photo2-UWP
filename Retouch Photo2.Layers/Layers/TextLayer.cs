@@ -8,6 +8,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Texts;
+using System;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.UI.Text;
@@ -63,8 +64,22 @@ namespace Retouch_Photo2.Layers.Models
             if (element.Element("FontSize") is XElement fontSize) this.FontSize = (float)fontSize;
             if (element.Element("FontFamily") is XElement fontFamily) this.FontFamily = fontFamily.Value;
 
-            if (element.Element("HorizontalAlignment") is XElement horizontalAlignment) this.FontAlignment = Retouch_Photo2.Texts.XML.CreateHorizontalAlignment(horizontalAlignment.Value);
-            if (element.Element("FontStyle") is XElement fontStyle) this.FontStyle = Retouch_Photo2.Texts.XML.CreateFontStyle(fontStyle.Value);
+            if (element.Element("HorizontalAlignment") is XElement horizontalAlignment)
+            {
+                try
+                {
+                    this.FontAlignment = (CanvasHorizontalAlignment)Enum.Parse(typeof(CanvasHorizontalAlignment), horizontalAlignment.Value);
+                }
+                catch (Exception) { }
+            }
+            if (element.Element("FontStyle") is XElement fontStyle)
+            {
+                try
+                {
+                    this.FontStyle = (FontStyle)Enum.Parse(typeof(FontStyle), fontStyle.Value);
+                }
+                catch (Exception) { }
+            }
             if (element.Element("FontWeight") is XElement fontWeight) this.FontWeight = Retouch_Photo2.Texts.XML.CreateFontWeight(fontWeight.Value);
         }
 

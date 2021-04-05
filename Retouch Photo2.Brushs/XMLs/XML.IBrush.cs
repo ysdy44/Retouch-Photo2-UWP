@@ -3,6 +3,7 @@
 // Difficult:         
 // Only:              
 // Complete:      ★
+using System;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -40,7 +41,14 @@ namespace Retouch_Photo2.Brushs
         public static IBrush LoadBrush(XElement element)
         {
             BrushBase brush = new BrushBase();
-            if (element.Attribute("Type") is XAttribute type) brush.Type = XML.CreateBrushType(type.Value);
+            if (element.Attribute("Type") is XAttribute type)
+            {
+                try
+                {
+                    brush.Type = (BrushType)Enum.Parse(typeof(BrushType), type.Value);
+                }
+                catch (Exception) { }
+            }
 
             //Load
             {

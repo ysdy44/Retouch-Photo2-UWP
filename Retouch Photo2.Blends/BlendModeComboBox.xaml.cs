@@ -82,7 +82,7 @@ namespace Retouch_Photo2.Blends
             {
                 if (child is Button button)
                 {
-                    string key = button.Name; 
+                    string key = button.Name;
                     string title = resource.GetString($"Blends_{key}");
 
                     button.Content = title;
@@ -99,7 +99,12 @@ namespace Retouch_Photo2.Blends
                 if (child is Button button)
                 {
                     string key = button.Name;
-                    BlendEffectMode? mode = XML.CreateBlendMode(key);
+                    BlendEffectMode? mode = null;
+                    try
+                    {
+                        mode = (BlendEffectMode)Enum.Parse(typeof(BlendEffectMode), key);
+                    }
+                    catch (Exception) { }
 
 
                     //Button

@@ -7,6 +7,7 @@ using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
+using System;
 using System.Xml.Linq;
 
 namespace Retouch_Photo2.Layers.Models
@@ -62,7 +63,14 @@ namespace Retouch_Photo2.Layers.Models
         }
         public override void Load(XElement element)
         {
-            if (element.Element("GridType") is XElement gridType) this.GridType = XML.CreatePatternGridMode(gridType.Value);
+            if (element.Element("GridType") is XElement gridType)
+            {
+                try
+                {
+                    this.GridType = (PatternGridType)Enum.Parse(typeof(PatternGridType), gridType.Value);
+                }
+                catch (Exception) { }
+            }
             if (element.Element("HorizontalStep") is XElement horizontalStep) this.HorizontalStep = (float)horizontalStep;
             if (element.Element("VerticalStep") is XElement verticalStep) this.VerticalStep = (float)verticalStep;
         }

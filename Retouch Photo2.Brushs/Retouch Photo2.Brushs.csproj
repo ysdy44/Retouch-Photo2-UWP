@@ -109,11 +109,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BrushExtensions.cs" />
-    <Compile Include="BrushTypes\BrushType.cs" />
+    <Compile Include="BrushType.cs" />
     <Compile Include="BrushTypes\BrushTypeComboBox.xaml.cs">
       <DependentUpon>BrushTypeComboBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BrushTypes\TransparencyTypeComboBox.xaml.cs">
+    <Compile Include="TransparencyTypes\TransparencyTypeComboBox.xaml.cs">
       <DependentUpon>TransparencyTypeComboBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\BrushBase.SaveLoad.cs" />
@@ -142,7 +142,7 @@
     <Compile Include="StopsPickers\StopsPicker.xaml.cs">
       <DependentUpon>StopsPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FillOrStrokes\FillOrStroke.cs" />
+    <Compile Include="FillOrStroke.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StopsPickers\StopsManager.cs" />
     <Compile Include="StopsPickers\StopsSize.cs" />
@@ -151,8 +151,6 @@
     </Compile>
     <Compile Include="XMLs\XML.GradientStop.cs" />
     <Compile Include="XMLs\XML.IBrush.cs" />
-    <Compile Include="XMLs\XML.BrushTypeFactory.cs" />
-    <Compile Include="XMLs\XML.ExtendFactory.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Brushs.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -171,47 +169,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BrushTypes\BrushTypeIcons\ColorIcon.xaml">
+    <Page Include="BrushTypes\Icons\ColorIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BrushTypes\BrushTypeIcons\EllipticalGradientIcon.xaml">
+    <Page Include="BrushTypes\Icons\EllipticalGradientIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BrushTypes\BrushTypeIcons\ImageIcon.xaml">
+    <Page Include="BrushTypes\Icons\ImageIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BrushTypes\BrushTypeIcons\LinearGradientIcon.xaml">
+    <Page Include="BrushTypes\Icons\LinearGradientIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BrushTypes\BrushTypeIcons\NoneIcon.xaml">
+    <Page Include="BrushTypes\Icons\NoneIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BrushTypes\BrushTypeIcons\RadialGradientIcon.xaml">
+    <Page Include="BrushTypes\Icons\RadialGradientIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BrushTypes\TransparencyTypeComboBox.xaml">
+    <Page Include="TransparencyTypes\TransparencyTypeComboBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BrushTypes\TransparencyTypeIcons\EllipticalGradientIcon.xaml">
+    <Page Include="TransparencyTypes\Icons\EllipticalGradientIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BrushTypes\TransparencyTypeIcons\LinearGradientIcon.xaml">
+    <Page Include="TransparencyTypes\Icons\LinearGradientIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BrushTypes\TransparencyTypeIcons\NoneIcon.xaml">
+    <Page Include="TransparencyTypes\Icons\NoneIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="BrushTypes\TransparencyTypeIcons\RadialGradientIcon.xaml">
+    <Page Include="TransparencyTypes\Icons\RadialGradientIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

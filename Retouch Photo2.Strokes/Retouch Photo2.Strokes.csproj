@@ -125,9 +125,6 @@
       <DependentUpon>StrokeShowControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="StrokeStyleExtensions.cs" />
-    <Compile Include="XMLs\XML.CapFactory.cs" />
-    <Compile Include="XMLs\XML.DashFactory.cs" />
-    <Compile Include="XMLs\XML.JoinFactory.cs" />
     <Compile Include="XMLs\XML.StrokeStyle.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Strokes.rd.xml" />
   </ItemGroup>

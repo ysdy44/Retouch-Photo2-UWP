@@ -4,7 +4,10 @@
 // Only:              
 // Complete:      ★
 using Retouch_Photo2.Adjustments.Models;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
 
 namespace Retouch_Photo2.Adjustments
@@ -38,18 +41,17 @@ namespace Retouch_Photo2.Adjustments
         /// <returns> The loaded <see cref="IAdjustment"/>. </returns>
         public static IAdjustment LoadIAdjustment(XElement element)
         {
-            if (element.Attribute("Type") is XAttribute type2)
+            //Load
+            IAdjustment adjustment = XML.CreateAdjustment
+            (
+                element.Attribute("Type") is XAttribute type ?
+                    type.Value :
+                    null
+            );
             {
-                string type = type2.Value;
-
-                //Load
-                IAdjustment adjustment = XML.CreateAdjustment(type);
-                {
-                    adjustment.Load(element);
-                }
-                return adjustment;
+                adjustment.Load(element);
             }
-            else return new GrayAdjustment();
+            return adjustment;
         }
 
     }

@@ -22,7 +22,14 @@ namespace Retouch_Photo2.Layers.Models
         public override LayerType Type => LayerType.Curve;
 
         //@Construct
-        internal CurveLayer() { }
+        /// <summary>
+        /// Initializes a curve-layer.
+        /// 
+        /// Warning, 
+        /// please do not call it.
+        /// Because this constructor is only for the reflection of <see cref="Retouch_Photo2.Layers.XML.LoadILayer(XElement)"/>, 
+        /// </summary>
+        public CurveLayer() { }
         /// <summary>
         /// Initializes a curve-layer.
         /// </summary>     
