@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="GeometryArrowIcon" TargetType="ContentControl">
-        <Polygon StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB">
+        <Polygon HorizontalAlignment="Center" StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB">
             <Polygon.Points>
                 4,5 26,5 26,2 34,7.5 26,13 26,10 4,10
             </Polygon.Points>

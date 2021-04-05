@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="NodeIcon" TargetType="ContentControl">
-        <Polygon StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="DeepSkyBlue">
+        <Polygon StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="DeepSkyBlue" HorizontalAlignment="Center">
             <Polygon.Points>
                 0,24 12,2 14,12 23,16
             </Polygon.Points>

@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="CursorIcon" TargetType="ContentControl">
-        <Polygon StrokeThickness="1" Stroke="White" Fill="Black">
+        <Polygon StrokeThickness="1" Stroke="White" Fill="Black" HorizontalAlignment="Center">
             <Polygon.Points>
                 0,0 0,23 6,16 16,15
             </Polygon.Points>

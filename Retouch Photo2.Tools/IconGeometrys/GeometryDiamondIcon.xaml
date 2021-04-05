@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="GeometryDiamondIcon" TargetType="ContentControl">
-        <Polygon StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB">
+        <Polygon HorizontalAlignment="Center" StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB">
             <Polygon.Points>
                 12,0 24,12 12,24 0,12
             </Polygon.Points>

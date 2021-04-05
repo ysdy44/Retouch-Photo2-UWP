@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="GeometryPieIcon" TargetType="ContentControl">
-        <Path StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB">
+        <Path HorizontalAlignment="Center" StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB">
             <Path.Data>
                 M11.072,22.144c-6.115,0 -11.072,-4.957 -11.072,-11.072c0,-6.111 4.961,-11.072 11.072,-11.072c6.115,0 11.072,4.957 11.072,11.072l-11.072,0l0,11.072Z
             </Path.Data>

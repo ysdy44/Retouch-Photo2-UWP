@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="TransparencyIcon" TargetType="ContentControl">
-        <Path StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" >
+        <Path StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" HorizontalAlignment="Center">
             <Path.Fill>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStopCollection>

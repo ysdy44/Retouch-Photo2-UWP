@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="ArrowIcon" TargetType="ContentControl">
-        <Path StrokeThickness="1" Stroke="White" Fill="Black">
+        <Path StrokeThickness="1" Stroke="White" Fill="Black" HorizontalAlignment="Center">
             <Path.Data>
                 M0,11.054l0,-7.369l9.507,0l0,-3.685l13.355,7.369l-13.355,7.37l0,-3.685l-9.507,0Z
             </Path.Data>

@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="GeometryPentagonIcon" TargetType="ContentControl">
-        <Polygon StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB">
+        <Polygon HorizontalAlignment="Center" StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB">
             <Polygon.Points>
                 10,0 20,9 16,20 4,20 0,9
             </Polygon.Points>

@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="PatternSpottedIcon" TargetType="ContentControl">
-        <Border BorderThickness="1" BorderBrush="{ThemeResource SystemAltHighColor}" Background="{ThemeResource SystemAltHighColor}" >
+        <Border Padding="2" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource SystemAltHighColor}" Background="{ThemeResource SystemAltHighColor}">
             <Canvas Width="19" Height="19">
                 <Ellipse Canvas.Left="0" Canvas.Top="0" Width="4" Height="4" Fill="DeepSkyBlue" />
                 <Ellipse Canvas.Left="7.5" Canvas.Top="0" Width="4" Height="4" Fill="DeepSkyBlue" />

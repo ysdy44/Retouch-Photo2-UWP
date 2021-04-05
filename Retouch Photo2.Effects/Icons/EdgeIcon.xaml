@@ -3,11 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="EdgeIcon" TargetType="ContentControl">
-        <Path Fill="{TemplateBinding Foreground}">
-            <Path.Data>
+        <PathIcon HorizontalAlignment="Center">
+            <PathIcon.Data>
                 M19.992,0l0,14.193l-19.992,0l0,-14.193l19.992,0Zm-1.715,1.71l-16.562,0l0,10.774l16.562,0l0,-10.774Z
-            </Path.Data>
-        </Path>
+            </PathIcon.Data>
+        </PathIcon>
     </ControlTemplate>
 
 </ResourceDictionary>

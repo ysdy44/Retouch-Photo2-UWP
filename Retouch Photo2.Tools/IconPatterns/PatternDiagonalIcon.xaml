@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="PatternDiagonalIcon" TargetType="ContentControl">
-        <Border BorderThickness="1" BorderBrush="{ThemeResource SystemAltHighColor}" Background="{ThemeResource SystemAltHighColor}" >
+        <Border Padding="2" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource SystemAltHighColor}" Background="{ThemeResource SystemAltHighColor}">
             <Canvas Width="19" Height="19">
                 <Line X1="0" Y1="0" X2="4" Y2="19" StrokeThickness="2" Stroke="DeepSkyBlue" />
                 <Line X1="5" Y1="0" X2="9" Y2="19" StrokeThickness="2" Stroke="DeepSkyBlue" />

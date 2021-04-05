@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="GeometryCookieIcon" TargetType="ContentControl">
-        <Path StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB">
+        <Path HorizontalAlignment="Center" StrokeThickness="1" Stroke="{ThemeResource SystemControlBackgroundAltHighBrush}" Fill="#439EFB">
             <Path.Data>
                 M22.144,11.072l-5.536,0c0,-3.058 -2.479,-5.536 -5.536,-5.536c-3.056,0 -5.536,2.48 -5.536,5.536c0,3.057 2.478,5.536 5.536,5.536l0,5.536c-6.115,0 -11.072,-4.957 -11.072,-11.072c0,-6.111 4.961,-11.072 11.072,-11.072c6.115,0 11.072,4.957 11.072,11.072Z
             </Path.Data>

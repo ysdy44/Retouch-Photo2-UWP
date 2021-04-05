@@ -39,916 +39,915 @@
                     <!--Menus-->
                     <local:UIElementGrouping Key="Menus">
                         <local:UIElementGrouping.Items>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
+                            <Border>
                                 <edits:Icon/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
+                            </Border>
+                            <Border>
                                 <operates:Icon/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
+                            </Border>
+                            <Border>
                                 <adjustments:Icon/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
+                            </Border>
+                            <Border>
                                 <effects:Icon/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
+                            </Border>
+                            <Border>
                                 <texts:Icon/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
+                            </Border>
+                            <Border>
                                 <strokes:Icon/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
+                            </Border>
+                            <Border>
                                 <styles:Icon/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
+                            </Border>
+                            <Border>
                                 <historys:Icon/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
+                            </Border>
+                            <Border>
                                 <transformers:Icon/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
+                            </Border>
+                            <Border>
                                 <layers:Icon/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
+                            </Border>
+                            <Border>
                                 <brushs:ColorEllipse/>
-                            </Button>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
                     <!--Tools-->
                     <local:UIElementGrouping Key="Tools">
                         <local:UIElementGrouping.Items>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/CursorIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource CursorIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/ViewIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ViewIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/BrushIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource BrushIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/TransparencyIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource TransparencyIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/GeometryRectangleIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GeometryRectangleIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/GeometryEllipseIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GeometryEllipseIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/PenIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource PenIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/NodeIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource NodeIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/TextFrameIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource TextFrameIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/TextArtisticIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource TextArtisticIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/ImageIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ImageIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/CropIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource CropIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconPatterns/PatternGridIcon.xaml"/>
-                                </Button.Resources>
-
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource PatternGridIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconPatterns/PatternDiagonalIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource PatternDiagonalIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconPatterns/PatternSpottedIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource PatternSpottedIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryRoundRectIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GeometryRoundRectIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryTriangleIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GeometryTriangleIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryDiamondIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GeometryDiamondIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryPentagonIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GeometryPentagonIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryStarIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GeometryStarIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryCogIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GeometryCogIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryDountIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GeometryDountIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryPieIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GeometryPieIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryCookieIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GeometryCookieIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryArrowIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GeometryArrowIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryCapsuleIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GeometryCapsuleIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryHeartIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GeometryHeartIcon}"/>
-                            </Button>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
                     <!--ViewTool-->
                     <local:UIElementGrouping Key="ViewTool">
                         <local:UIElementGrouping.Items>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ResetRadianIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ResetRadianIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ResetScaleIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ResetScaleIcon}"/>
-                            </Button>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
                     <!--BrushTool-->
                     <local:UIElementGrouping Key="BrushTool">
                         <local:UIElementGrouping.Items>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/NoneIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource NoneIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/ColorIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ColorIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/LinearGradientIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource LinearGradientIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/RadialGradientIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource RadialGradientIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/EllipticalGradientIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource EllipticalGradientIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/ImageIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ImageIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/ExtendIcons/ClampIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ClampIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/ExtendIcons/WrapIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource WrapIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/ExtendIcons/MirrorIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource MirrorIcon}"/>
-                            </Button>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
                     <!--TransparencyTool-->
                     <local:UIElementGrouping Key="TransparencyTool">
                         <local:UIElementGrouping.Items>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/NoneIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource NoneIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/LinearGradientIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource LinearGradientIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/RadialGradientIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource RadialGradientIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/EllipticalGradientIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource EllipticalGradientIcon}"/>
-                            </Button>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
                     <!--ConvertToCurves-->
                     <local:UIElementGrouping Key="ConvertToCurves">
                         <local:UIElementGrouping.Items>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ConvertToCurvesIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ConvertToCurvesIcon}"/>
-                            </Button>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
                     <!--NodeTool-->
                     <local:UIElementGrouping Key="NodeTool">
                         <local:UIElementGrouping.Items>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeIcons/RemoveIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource RemoveIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeIcons/InsertIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource InsertIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeIcons/SharpIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource SharpIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeIcons/SmoothIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource SmoothIcon}"/>
-                            </Button>
-                            <Button Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons//MirroredIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource MirroredIcon}"/>
-                            </Button>
-                            <Button Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons//DisconnectedIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource DisconnectedIcon}"/>
-                            </Button>
-                            <Button Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeModes/Icons//AsymmetricIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource AsymmetricIcon}"/>
-                            </Button>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
                     <!--PatternGridTool-->
                     <local:UIElementGrouping Key="PatternGridTool">
                         <local:UIElementGrouping.Items>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/GridIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GridIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/HorizontalIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource HorizontalIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/VerticalIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource VerticalIcon}"/>
-                            </Button>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
                     <!--GeometryArrowTool-->
                     <local:UIElementGrouping Key="GeometryArrowTool">
                         <local:UIElementGrouping.Items>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypes/Icons/NoneIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource NoneIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypes/Icons/ArrowIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ArrowIcon}"/>
-                            </Button>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
                     <!--Edits-->
                     <local:UIElementGrouping Key="Edits">
                         <local:UIElementGrouping.Items>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/EditIcons/CutIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource CutIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/EditIcons/DuplicateIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource DuplicateIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/EditIcons/CopyIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource CopyIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/EditIcons/PasteIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource PasteIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/EditIcons/ClearIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ClearIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/GroupIcons/GroupIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GroupIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/GroupIcons/UngroupIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource UngroupIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/GroupIcons/ReleaseIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ReleaseIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/SelectIcons/AllIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource AllIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/SelectIcons/DeselectIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource DeselectIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/SelectIcons/InvertIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource InvertIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/CombineIcons/UnionIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource UnionIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/CombineIcons/ExcludeIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ExcludeIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/CombineIcons/XorIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource XorIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/CombineIcons/IntersectIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource IntersectIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Edits/CombineIcons/ExpandStrokeIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ExpandStrokeIcon}"/>
-                            </Button>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
                     <!--Operates-->
                     <local:UIElementGrouping Key="Operates">
                         <local:UIElementGrouping.Items>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/TransformIcons/FlipHorizontalIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource FlipHorizontalIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/TransformIcons/FlipVerticalIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource FlipVerticalIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/TransformIcons/RotateLeftIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource RotateLeftIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/TransformIcons/RotateRightIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource RotateRightIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/ArrangeIcons/MoveBackIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource MoveBackIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/ArrangeIcons/BackOneIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource BackOneIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/ArrangeIcons/ForwardOneIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ForwardOneIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/ArrangeIcons/MoveFrontIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource MoveFrontIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/HorizontallyIcons/LeftIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource LeftIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/HorizontallyIcons/CenterIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource CenterIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/HorizontallyIcons/RightIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource RightIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/HorizontallyIcons/HorizontallySpaceIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource HorizontallySpaceIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/VerticallyIcons/TopIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource TopIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/VerticallyIcons/MiddleIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource MiddleIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/VerticallyIcons/BottomIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource BottomIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/VerticallyIcons/VerticallySpaceIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource VerticallySpaceIcon}"/>
-                            </Button>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
                     <!--Adjustments-->
                     <local:UIElementGrouping Key="Adjustments">
                         <local:UIElementGrouping.Items>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/GrayIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GrayIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/InvertIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource InvertIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/ExposureIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ExposureIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/BrightnessIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource BrightnessIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/SaturationIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource SaturationIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/HueRotationIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource HueRotationIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/ContrastIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ContrastIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/TemperatureIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource TemperatureIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/HighlightsAndShadowsIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource HighlightsAndShadowsIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/GammaTransferIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GammaTransferIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/VignetteIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource VignetteIcon}"/>
-                            </Button>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
                     <!--Effects-->
                     <local:UIElementGrouping Key="Effects">
                         <local:UIElementGrouping.Items>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/GaussianBlurIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource GaussianBlurIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/DirectionalBlurIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource DirectionalBlurIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/SharpenIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource SharpenIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/OuterShadowIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource OuterShadowIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/EdgeIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource EdgeIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/MorphologyIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource MorphologyIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/EmbossIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource EmbossIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/StraightenIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource StraightenIcon}"/>
-                            </Button>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
                     <!--Blends-->
                     <local:UIElementGrouping Key="Blends">
                         <local:UIElementGrouping.Items>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/NoneIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource NoneIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/MultiplyIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource MultiplyIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ScreenIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ScreenIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DarkenIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource DarkenIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LightenIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource LightenIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DissolveIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource DissolveIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ColorBurnIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ColorBurnIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LinearBurnIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource LinearBurnIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DarkerColorIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource DarkerColorIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LighterColorIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource LighterColorIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ColorDodgeIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ColorDodgeIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LinearDodgeIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource LinearDodgeIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/OverlayIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource OverlayIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/SoftLightIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource SoftLightIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/HardLightIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource HardLightIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/VividLightIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource VividLightIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LinearLightIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource LinearLightIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/PinLightIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource PinLightIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/HardMixIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource HardMixIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DifferenceIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource DifferenceIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ExclusionIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ExclusionIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/HueIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource HueIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/SaturationIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource SaturationIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/ColorIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource ColorIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/LuminosityIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource LuminosityIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/SubtractIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource SubtractIcon}"/>
-                            </Button>
-                            <Button Style="{StaticResource AppRoundedButtonStyle}">
-                                <Button.Resources>
+                            </Border>
+                            <Border>
+                                <Border.Resources>
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Blends/Icons/DivisionIcon.xaml"/>
-                                </Button.Resources>
+                                </Border.Resources>
                                 <ContentControl Template="{StaticResource DivisionIcon}"/>
-                            </Button>
+                            </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
@@ -999,7 +998,7 @@
                             <Setter Property="Margin" Value="1"/>
                             <Setter Property="Width" Value="100"/>
                             <Setter Property="Height" Value="Auto"/>
-                            <Setter Property="Padding" Value="12,6"/>
+                            <Setter Property="Padding" Value="12,2"/>
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         </Style>
                     </GridView.ItemContainerStyle>

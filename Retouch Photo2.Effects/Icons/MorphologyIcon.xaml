@@ -3,13 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="MorphologyIcon" TargetType="ContentControl">
-        <Viewbox Width="24">
-            <Path Fill="{TemplateBinding Foreground}">
-                <Path.Data>
-                    M83.298,33.678L41.649,33.678L41.649,59.139L83.298,59.139L83.298,33.678ZM41.649,0L0,0L0,25.461L41.649,25.461L41.649,0Z
-                </Path.Data>
-            </Path>
-        </Viewbox>
+        <PathIcon HorizontalAlignment="Center">
+            <PathIcon.Data>
+                M26.681,10.788L26.681,18.943L13.341,18.943L13.341,10.788L26.681,10.788ZM13.341,0L13.341,8.155L0,8.155L0,0L13.341,0Z
+            </PathIcon.Data>
+        </PathIcon>
     </ControlTemplate>
 
 </ResourceDictionary>
