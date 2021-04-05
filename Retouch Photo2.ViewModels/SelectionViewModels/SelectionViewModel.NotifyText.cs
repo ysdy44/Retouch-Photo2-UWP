@@ -1,6 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Texts;
 using System.ComponentModel;
 using Windows.UI.Text;
 
@@ -71,7 +72,7 @@ namespace Retouch_Photo2.ViewModels
         private FontStyle fontStyle = FontStyle.Normal;
 
         /// <summary> <see cref="ITextLayer"/>'s font weight. </summary>
-        public FontWeight FontWeight
+        public FontWeight2 FontWeight
         {
             get => this.fontWeight;
             set
@@ -80,7 +81,7 @@ namespace Retouch_Photo2.ViewModels
                 this.OnPropertyChanged(nameof(FontWeight));//Notify 
             }
         }
-        private FontWeight fontWeight = FontWeights.Normal;
+        private FontWeight2 fontWeight = FontWeight2.Normal;
 
 
         /// <summary> Sets the <see cref="ITextLayer"/>. </summary>     

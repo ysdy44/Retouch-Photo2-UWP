@@ -12,17 +12,17 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Texts
 {
     /// <summary>
-    /// Segmented of <see cref="FontWeight"/>.
+    /// Segmented of <see cref="FontWeight2"/>.
     /// </summary>
     public sealed partial class FontWeightComboBox : UserControl
     {
 
         //@Delegate
         /// <summary> Occurs when weight change. </summary>
-        public EventHandler<FontWeight> WeightChanged;
+        public EventHandler<FontWeight2> WeightChanged;
 
         //@VisualState
-        FontWeight _vsWeight;
+        FontWeight2 _vsWeight;
         /// <summary> 
         /// Represents the visual appearance of UI elements in a specific state.
         /// </summary>
@@ -30,19 +30,25 @@ namespace Retouch_Photo2.Texts
         {
             get
             {
-                switch (this._vsWeight.Weight)
+
+                switch (this._vsWeight)
                 {
-                    case 900: return this.BlackState;
-                    case 700: return this.BoldState;
-                    case 950: return this.ExtraBlackState;
-                    case 800: return this.ExtraBoldState;
-                    case 200: return this.ExtraLightState;
-                    case 300: return this.LightState;
-                    case 500: return this.MediumState;
-                    case 400: return this.NoneState;
-                    case 600: return this.SemiBoldState;
-                    case 350: return this.SemiLightState;
-                    case 100: return this.ThinState;
+                    case FontWeight2.Black: return this.BlackState;
+                    case FontWeight2.Bold: return this.BoldState;
+
+                    case FontWeight2.ExtraBlack: return this.ExtraBlackState;
+                    case FontWeight2.ExtraBold: return this.ExtraBoldState;
+                    case FontWeight2.ExtraLight: return this.ExtraLightState;
+
+                    case FontWeight2.Light: return this.LightState;
+                    case FontWeight2.Medium: return this.MediumState;
+                    case FontWeight2.Normal: return this.NoneState;
+
+                    case FontWeight2.SemiBold: return this.SemiBoldState;
+                    case FontWeight2.SemiLight: return this.SemiLightState;
+
+                    case FontWeight2.Thin: return this.ThinState;
+
                     default: return this.Normal;
                 }
             }
@@ -53,17 +59,17 @@ namespace Retouch_Photo2.Texts
 
 
         /// <summary> Gets or sets the fontvweight. </summary>
-        public FontWeight Weight
+        public FontWeight2 Weight
         {
-            get => (FontWeight)base.GetValue(FontWeight2Property);
+            get => (FontWeight2)base.GetValue(FontWeight2Property);
             set => base.SetValue(FontWeight2Property, value);
         }
         /// <summary> Identifies the <see cref = "FontWeightComboBox.Weight" /> dependency property. </summary>
-        public static readonly DependencyProperty FontWeight2Property = DependencyProperty.Register(nameof(Weight), typeof(FontWeight), typeof(FontWeightComboBox), new PropertyMetadata(FontWeights.Normal, (sender, e) =>
+        public static readonly DependencyProperty FontWeight2Property = DependencyProperty.Register(nameof(Weight), typeof(FontWeight), typeof(FontWeightComboBox), new PropertyMetadata(FontWeight2.Normal, (sender, e) =>
         {
             FontWeightComboBox control = (FontWeightComboBox)sender;
 
-            if (e.NewValue is FontWeight value)
+            if (e.NewValue is FontWeight2 value)
             {
                 control._vsWeight = value;
                 control.VisualState = control.VisualState;//State
@@ -93,21 +99,21 @@ namespace Retouch_Photo2.Texts
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.Black.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.Black);//Delegate
-            this.Bold.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.Bold);//Delegate
+            this.Black.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Black);//Delegate
+            this.Bold.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Bold);//Delegate
 
-            this.ExtraBlack.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.ExtraBlack);//Delegate
-            this.ExtraBold.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.ExtraBold);//Delegate
-            this.ExtraLight.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.ExtraLight);//Delegate
+            this.ExtraBlack.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.ExtraBlack);//Delegate
+            this.ExtraBold.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.ExtraBold);//Delegate
+            this.ExtraLight.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.ExtraLight);//Delegate
 
-            this.Light.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.Light);//Delegate
-            this.Medium.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.Medium);//Delegate
-            this.None.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.Normal);//Delegate
+            this.Light.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Light);//Delegate
+            this.Medium.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Medium);//Delegate
+            this.None.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Normal);//Delegate
 
-            this.SemiBold.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.SemiBold);//Delegate
-            this.SemiLight.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.SemiLight);//Delegate
+            this.SemiBold.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.SemiBold);//Delegate
+            this.SemiLight.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.SemiLight);//Delegate
 
-            this.Thin.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeights.Thin);//Delegate
+            this.Thin.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Thin);//Delegate
 
             this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State

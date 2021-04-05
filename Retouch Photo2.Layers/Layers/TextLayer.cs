@@ -34,10 +34,7 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary> Gets or sets the style. </summary>
         public FontStyle FontStyle { get; set; } = FontStyle.Normal;
         /// <summary> Gets or sets the weight. </summary>
-        public FontWeight FontWeight { get; set; } = new FontWeight
-        {
-            Weight = 100,
-        };
+        public FontWeight2 FontWeight { get; set; } = FontWeight2.Normal;
 
 
         /// <summary>
@@ -52,7 +49,7 @@ namespace Retouch_Photo2.Layers.Models
 
             element.Add(new XElement("HorizontalAlignment", this.FontAlignment));
             element.Add(new XElement("FontStyle", this.FontStyle));
-            element.Add(new XElement("FontWeight", this.FontWeight.ToWeightsString()));
+            element.Add(new XElement("FontWeight", this.FontWeight));
         }
         /// <summary>
         /// Load the entire <see cref="ILayer"/> form a XElement.
@@ -80,7 +77,14 @@ namespace Retouch_Photo2.Layers.Models
                 }
                 catch (Exception) { }
             }
-            if (element.Element("FontWeight") is XElement fontWeight) this.FontWeight = Retouch_Photo2.Texts.XML.CreateFontWeight(fontWeight.Value);
+            if (element.Element("FontWeight") is XElement fontWeight)
+            {
+                try
+                {
+                    this.FontWeight = (FontWeight2)Enum.Parse(typeof(FontWeight2), fontWeight.Value);
+                }
+                catch (Exception) { }
+            }
         }
 
 
@@ -101,7 +105,7 @@ namespace Retouch_Photo2.Layers.Models
 
                 HorizontalAlignment = this.FontAlignment,
                 FontStyle = this.FontStyle,
-                FontWeight = this.FontWeight,
+                FontWeight = this.FontWeight.ToFontWeight(),
             };
 
             float width = transformer.Horizontal.Length();

@@ -5,6 +5,7 @@
 // Complete:      ★★★★★
 using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Historys;
+using Retouch_Photo2.Texts;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,10 +61,9 @@ namespace Retouch_Photo2.Menus
 
             this.BoldButton.Click += (s, e) =>
             {
-                //Whether the judgment is small or large.
-                bool isBold = this.SelectionViewModel.FontWeight.Weight == FontWeights.Bold.Weight;
                 // isBold ? ""Normal"" : ""Bold""
-                FontWeight fontWeight = isBold ? FontWeights.Normal : FontWeights.Bold;
+                bool isBold = this.SelectionViewModel.FontWeight == FontWeight2.Bold;
+                FontWeight2 fontWeight = isBold ? FontWeight2.Normal : FontWeight2.Bold;
 
                 this.SetFontWeight(fontWeight);
             };
@@ -163,10 +163,10 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        private void SetFontWeight(FontWeight fontWeight)
+        private void SetFontWeight(FontWeight2 fontWeight)
         {
             this.SelectionViewModel.FontWeight = fontWeight;
-            this.MethodViewModel.ITextLayerChanged<FontWeight>
+            this.MethodViewModel.ITextLayerChanged<FontWeight2>
             (
                 set: (textLayer) => textLayer.FontWeight = fontWeight,
 
