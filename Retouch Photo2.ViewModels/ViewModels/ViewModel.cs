@@ -3,6 +3,7 @@
 // Difficult:         ★★★★★
 // Only:              ★★★★★
 // Complete:      ★★★★★
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using System;
 using System.ComponentModel;
@@ -14,6 +15,37 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
+
+
+        #region History
+
+
+        /// <summary> Gets or sets the availability of undo. </summary>
+        public bool IsUndoEnabled
+        {
+            get => this.isUndoEnabled;
+            set
+            {
+                this.isUndoEnabled = value;
+                this.OnPropertyChanged(nameof(IsUndoEnabled));//Notify 
+            }
+        }
+        private bool isUndoEnabled;
+
+
+        /// <summary>
+        /// Undo a history into the historys.
+        /// </summary>
+        /// <param name="history"> The history. </param>
+        public void HistoryPush(IHistory history)
+        {
+            HistoryBase.Push(history);
+            this.IsUndoEnabled = HistoryBase.IsUndoEnabled;
+        }
+
+
+        #endregion
+
 
         /// <summary>
         /// Load from a project.
@@ -53,7 +85,7 @@ namespace Retouch_Photo2.ViewModels
         public void Invalidate(InvalidateMode mode = InvalidateMode.None) => this.InvalidateAction?.Invoke(mode);
         /// <summary> <see cref = "Action" /> of the <see cref = "ViewModel.Invalidate" />. </summary>
         public Action<InvalidateMode> InvalidateAction { get; set; }
-        
+
 
         //@Notify 
         /// <summary> Multicast event for property change notifications. </summary>

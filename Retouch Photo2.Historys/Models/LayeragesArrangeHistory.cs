@@ -15,8 +15,8 @@ namespace Retouch_Photo2.Historys
     public class LayeragesArrangeHistory : HistoryBase, IHistory
     {
 
-        private readonly Action UndoAction;
-        private readonly IList<Layerage> Layerages = new List<Layerage>();
+        private Action UndoAction;
+        private IList<Layerage> Layerages = new List<Layerage>();
 
         //@Construct
         /// <summary>
@@ -27,7 +27,7 @@ namespace Retouch_Photo2.Historys
         {
             base.Type = type;
 
-            foreach (Layerage  layerage in LayerManager.RootLayerage.Children)
+            foreach (Layerage layerage in LayerManager.RootLayerage.Children)
             {
                 this.Layerages.Add(layerage.Clone());
             }
@@ -46,6 +46,18 @@ namespace Retouch_Photo2.Historys
         public override void Undo()
         {
             this.UndoAction?.Invoke();
+        }
+
+        public void Dispose()
+        {
+            this.UndoAction = null;
+
+            foreach (Layerage layerage in this.Layerages)
+            {
+                layerage.Children.Clear();
+            }
+            this.Layerages.Clear();
+            this.Layerages = null;
         }
     }
 }

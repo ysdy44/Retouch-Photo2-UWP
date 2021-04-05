@@ -39,7 +39,7 @@ namespace Retouch_Photo2.ViewModels
 
         public void MethodEditUndo()
         {
-            bool isUndo = this.HistoryUndo();//History
+            bool isUndo = HistoryBase.Pull();
 
             if (isUndo)
             {
@@ -49,6 +49,8 @@ namespace Retouch_Photo2.ViewModels
 
                 this.Invalidate();//Invalidate
             }
+
+            this.IsUndoEnabled = HistoryBase.IsUndoEnabled;
         }
 
         public void MethodEditCut()
@@ -112,7 +114,7 @@ namespace Retouch_Photo2.ViewModels
             this.Clipboard.SetMode();//Clipboard
             this.ClipboardEnable = this.Clipboard.CanPaste;//PasteButton
         }
-        
+
         public void MethodEditPaste()
         {
             //Clipboard
@@ -165,7 +167,7 @@ namespace Retouch_Photo2.ViewModels
             this.Invalidate();//Invalidate
         }
 
-        
+
 
         //Select
         private void SelectAllCore(bool isSelected)
@@ -199,7 +201,7 @@ namespace Retouch_Photo2.ViewModels
             LayerManager.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
-        
+
         public void MethodSelectAll() => this.SelectAllCore(true);
 
         public void MethodSelectDeselect() => this.SelectAllCore(false);
@@ -232,7 +234,7 @@ namespace Retouch_Photo2.ViewModels
             LayerManager.ArrangeLayersBackground();
             this.Invalidate();//Invalidate
         }
-        
+
 
 
         //Group

@@ -16,7 +16,7 @@ namespace Retouch_Photo2.Historys
     public class LayersTransformMultipliesHistory : HistoryBase, IHistory
     {
 
-        readonly IDictionary<ILayer, Transformer> UndoActions = new Dictionary<ILayer, Transformer>();
+        private IDictionary<ILayer, Transformer> UndoActions = new Dictionary<ILayer, Transformer>();
 
         //@Construct
         /// <summary>
@@ -70,5 +70,10 @@ namespace Retouch_Photo2.Historys
             }
         }
 
+        public void Dispose()
+        {
+            this.UndoActions.Clear();
+            this.UndoActions = null;
+        }
     }
 }

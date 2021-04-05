@@ -396,7 +396,7 @@
                                 <Button.Flyout>
                                     <Flyout x:Name="HistoryFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="HistoryExpander" Flyout="{x:Bind HistoryFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:HistoryMenu ItemsSource="{x:Bind ViewModel.Historys, Mode=OneWay}"/>
+                                            <menus:HistoryMenu/>
                                         </elements:Expander>
                                     </Flyout>
                                 </Button.Flyout>

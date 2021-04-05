@@ -14,9 +14,9 @@ namespace Retouch_Photo2.Historys
     public class LayersSetupTransformMultipliesHistory : LayersTransformMultipliesHistory
     {
 
-        private int Width = 1024;
-        private int Height = 1024;
-        private readonly Action SizeAction;
+        private readonly int Width = 1024;
+        private readonly int Height = 1024;
+        private Action SizeAction;
 
 
         //@Construct
@@ -46,5 +46,9 @@ namespace Retouch_Photo2.Historys
             this.SizeAction?.Invoke();
         }
 
+        public void Dispose()
+        {
+            this.SizeAction = null;
+        }
     }
 }

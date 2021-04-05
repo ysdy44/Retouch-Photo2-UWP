@@ -6,12 +6,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:historys="using:Retouch_Photo2.Historys"
-    xmlns:menus="using:Retouch_Photo2.Menus"
+    xmlns:local="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"                      
     MinHeight="165"
     d:DesignWidth="200"
     d:DesignHeight="400"
     >
+
+
+    <UserControl.Resources>
+        <!--Converter -->
+        <local:HistoryTypeConverter x:Key="HistoryTypeConverter"/>
+    </UserControl.Resources>
+
 
     <ListView x:Name="ListView" SelectionMode="None" IsItemClickEnabled="True">
         <ListView.ItemContainerStyle>
@@ -25,7 +32,10 @@
         </ListView.ItemContainerStyle>
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="historys:IHistory">
-                <menus:HistoryTextBlock Grid.Column="1" Type="{x:Bind Type, Mode=OneTime}" VerticalAlignment="Center" />
+                <TextBlock
+                    VerticalAlignment="Center"           
+                    Foreground="{ThemeResource AppText}"
+                    Text="{x:Bind Type, Mode=OneWay, Converter={StaticResource HistoryTypeConverter}}"/>
             </DataTemplate>
         </ListView.ItemTemplate>
         <ListView.ItemContainerTransitions>

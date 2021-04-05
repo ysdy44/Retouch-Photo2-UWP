@@ -120,6 +120,7 @@
     <Compile Include="Models\LayersSetupTransformMultipliesHistory.cs" />
     <Compile Include="Models\LayersTransformAddHistory.cs" />
     <Compile Include="Models\LayersTransformMultipliesHistory.cs" />
+    <Compile Include="HistoryBase.Instance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Historys.rd.xml" />
   </ItemGroup>

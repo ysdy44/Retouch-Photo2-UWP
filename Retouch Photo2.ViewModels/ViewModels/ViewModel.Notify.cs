@@ -20,7 +20,7 @@ namespace Retouch_Photo2.ViewModels
             get => this.canvasHitTestVisible;
             set
             {
-                this.canvasHitTestVisible = value; 
+                this.canvasHitTestVisible = value;
                 this.OnPropertyChanged(nameof(CanvasHitTestVisible));//Notify 
             }
         }
@@ -33,6 +33,7 @@ namespace Retouch_Photo2.ViewModels
             get => this.tipText;
             set
             {
+                if (this.tipText == value) return;
                 this.tipText = value;
                 this.OnPropertyChanged(nameof(TipText));//Notify 
             }
@@ -44,6 +45,7 @@ namespace Retouch_Photo2.ViewModels
             get => this.tipTextVisibility;
             set
             {
+                if (this.tipTextVisibility == value) return;
                 this.tipTextVisibility = value;
                 this.OnPropertyChanged(nameof(TipTextVisibility));//Notify 
             }
@@ -58,15 +60,8 @@ namespace Retouch_Photo2.ViewModels
             await Task.Delay(2000);
             this.TipTextVisibility = Visibility.Collapsed;
         }
-        public void SetTipText()
-        {
-            if (this.TipText.Length > 44) this.TipText = string.Empty;
-            else this.TipText += "O";
-        }
 
 
-        int _width;
-        int _height;
         public void SetTipTextWidthHeight(Transformer transformer)
         {
             Vector2 horizontal = transformer.Horizontal;
@@ -75,41 +70,23 @@ namespace Retouch_Photo2.ViewModels
             int width = (int)horizontal.Length();
             int height = (int)vertical.Length();
 
-            if (this._width != width || this._height != height)
-            {
-                this._width = width;
-                this._height = height;
-                this.TipText = $"W: {width} px  H:{height} px";
-            }
+            this.TipText = $"W: {width} px  H:{height} px";
         }
 
-        int _x;
-        int _y;
         public void SetTipTextPosition()
         {
             int x = (int)this.CanvasTransformer.Position.X;
             int y = (int)this.CanvasTransformer.Position.X;
 
-            if (this._x != x || this._y != y)
-            {
-                this._x = x;
-                this._y = y;
-                this.TipText = $"X: {x} px  Y:{y} px";
-            }
+            this.TipText = $"X: {x} px  Y:{y} px";
         }
 
-        int _percent;
         public void SetTipTextScale()
         {
-            int percent = (int)(this.CanvasTransformer.Scale * 100);
+            int percent = (int)(this.CanvasTransformer.Scale * 100.0f);
 
-            if (this._percent != percent)
-            {
-                this._percent = percent;
-                this.TipText = $"{percent} %";
-            }
+            this.TipText = $"{percent} %";
         }
-        
 
     }
 }

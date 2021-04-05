@@ -1,4 +1,5 @@
 ﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using Windows.Devices.Input;
@@ -38,7 +39,7 @@ namespace Retouch_Photo2
             this.DocumentUnSaveButton.Click += (s, e) => this.DocumentUnSave();
             this.DocumentButton.Click += (s, e) =>
             {
-                int countHistorys = this.ViewModel.Historys.Count;
+                int countHistorys = HistoryBase.Instances.Count;
                 int countLayerages = LayerManager.RootLayerage.Children.Count;
 
                 if (countHistorys == 0 && countLayerages > 1)

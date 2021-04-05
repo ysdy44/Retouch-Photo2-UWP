@@ -1,5 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Photos;
 using Retouch_Photo2.ViewModels;
@@ -101,12 +101,13 @@ namespace Retouch_Photo2
             //Clear layers
             LayerBase.Instances.Clear();
 
+            //Clear historys
+            HistoryBase.Instances.Clear();
+
             //FileUtil
             await FileUtil.DeleteInTemporaryFolder();
 
-
             //Clear
-            this.ViewModel.Historys.Clear();
             this.SelectionViewModel.SetModeNone();
             LayerManager.RootLayerage.Children.Clear();
             LayerManager.RootStackPanel.Children.Clear();

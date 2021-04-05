@@ -4,20 +4,30 @@
 // Only:              
 // Complete:      ★★★★★
 using Retouch_Photo2.Historys;
+using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 
 namespace Retouch_Photo2.Menus
 {
-    internal class HistoryTextBlock : ContentControl
+    internal class HistoryTypeConverter : IValueConverter
     {
-        public HistoryType Type { set => this.Content = this.StringConverter(value); }
-
         //@String
         static readonly ResourceLoader resource = ResourceLoader.GetForCurrentView();
-        private string StringConverter(HistoryType value)
+
+        public object Convert(object value, Type targetType, object parameter, string culture)
         {
-            return resource.GetString($"Historys_{value}");
+            if (value is HistoryType type)
+            {
+                return HistoryTypeConverter.resource.GetString($"Historys_{type}");
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -26,11 +36,6 @@ namespace Retouch_Photo2.Menus
     /// </summary>
     public sealed partial class HistoryMenu : UserControl
     {
-
-        //@Content
-        /// <summary> ListView's ItemsSource. </summary>
-        public object ItemsSource { get => this.ListView.ItemsSource; set => this.ListView.ItemsSource = value; }
-
         //@Construct
         /// <summary>
         /// Initializes a HistoryMainPage. 
@@ -38,6 +43,7 @@ namespace Retouch_Photo2.Menus
         public HistoryMenu()
         {
             this.InitializeComponent();
+            this.ListView.ItemsSource = HistoryBase.Instances;
         }
     }
 }

@@ -32,5 +32,10 @@ namespace Retouch_Photo2.Historys
         {
             this.UndoAction?.Invoke();
         }
+
+        public void Dispose()
+        {
+            this.UndoAction = null;
+        }
     }
 }

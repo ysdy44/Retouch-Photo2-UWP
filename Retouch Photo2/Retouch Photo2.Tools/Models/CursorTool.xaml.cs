@@ -6,6 +6,7 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Elements;
 using Retouch_Photo2.ViewModels;
@@ -184,6 +185,9 @@ namespace Retouch_Photo2.Tools.Models
         //Box
         private void BoxChoose(IList<Layerage> layerages)
         {
+            //History 
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetIsSelected);
+
             foreach (Layerage layerage in layerages)
             {
                 ILayer layer = layerage.Self;
@@ -194,19 +198,52 @@ namespace Retouch_Photo2.Tools.Models
                 switch (this.CursorPage.ModeSegmented.Mode)
                 {
                     case MarqueeCompositeMode.New:
-                        layer.IsSelected = contained;
+                        if (layer.IsSelected != contained)
+                        {
+                            var previous = layer.IsSelected;
+                            history.UndoAction += () =>
+                            {
+                                layer.IsSelected = previous;
+                            };
+
+                            layer.IsSelected = contained;
+                        }
                         break;
                     case MarqueeCompositeMode.Add:
-                        if (contained) layer.IsSelected = true;
+                        if (contained && layer.IsSelected == false)
+                        {
+                            var previous = false;
+                            history.UndoAction += () =>
+                            {
+                                layer.IsSelected = previous;
+                            };
+
+                            layer.IsSelected = true;
+                        }
                         break;
                     case MarqueeCompositeMode.Subtract:
-                        if (contained) layer.IsSelected = false;
+                        if (contained && layer.IsSelected == true)
+                        {
+                            var previous = true;
+                            history.UndoAction += () =>
+                            {
+                                layer.IsSelected = previous;
+                            };
+
+                            layer.IsSelected = false;
+                        }
                         break;
-                        //case MarqueeCompositeMode.Intersect:
-                        //if (contained == false) layer.IsSelected = false;
-                        //break;
+                    case MarqueeCompositeMode.Intersect:
+                        if (contained == false && layer.IsSelected == true)
+                        {
+                            layer.IsSelected = false;
+                        }
+                        break;
                 }
             }
+
+            //History 
+            this.ViewModel.HistoryPush(history);
         }
 
 
@@ -226,9 +263,8 @@ namespace Retouch_Photo2.Tools.Models
     {
 
         //@ViewModel
-        TipViewModel TipViewModel => App.TipViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
-        
+
         public CompositeModeSegmented ModeSegmented => this._ModeSegmented;
 
 
