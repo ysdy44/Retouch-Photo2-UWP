@@ -4,12 +4,10 @@
 // Only:              
 // Complete:      ★★★
 using FanKit.Transformers;
-using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
-using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -19,12 +17,11 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s PatternSpottedTool.
     /// </summary>
-    public class PatternSpottedTool : ITool
+    public class PatternSpottedTool : GeometryTool, ITool
     {
 
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
 
 
         //@Content
@@ -38,7 +35,7 @@ namespace Retouch_Photo2.Tools.Models
         public bool IsOpen { get; set; }
 
 
-        private ILayer CreateLayer(Transformer transformer)
+        public override ILayer CreateLayer(Transformer transformer)
         {
             return new PatternSpottedLayer
             {
@@ -47,21 +44,6 @@ namespace Retouch_Photo2.Tools.Models
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandCurveStyle
             };
-        }
-
-
-        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
-
-        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
-
-        
-        public void OnNavigatedTo() { }
-        public void OnNavigatedFrom()
-        {
-            TouchbarButton.Instance = null;
         }
 
     }
@@ -165,7 +147,7 @@ namespace Retouch_Photo2.Tools.Models
                     layerType: LayerType.PatternSpotted,
                     set: (tLayer) => tLayer.Radius = radius,
 
-                    type: HistoryType.LayersProperty_Set_PatternSpottedLayer_Radius, 
+                    type: HistoryType.LayersProperty_Set_PatternSpottedLayer_Radius,
                     getUndo: (tLayer) => tLayer.StartingRadius,
                     setUndo: (tLayer, previous) => tLayer.Radius = previous
                 );
