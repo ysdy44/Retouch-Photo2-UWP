@@ -208,6 +208,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="%24DrawPages\SnapIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="%24Loading\LoadingControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

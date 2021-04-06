@@ -186,14 +186,13 @@
                             <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </Button>
                         <ToggleButton x:Name="SnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
+                            <ToggleButton.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/$DrawPages/SnapIcon.xaml"/>
+                            </ToggleButton.Resources>
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="SnapToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
-                            <PathIcon>
-                                <PathIcon.Data>
-                                    M4.294,14.039l2.773,-2.773l3.747,3.747c1.159,1.159 3.04,1.159 4.199,0c1.159,-1.159 1.159,-3.04 0,-4.199l-3.747,-3.747l2.773,-2.773l4.144,4.143c2.689,2.69 2.689,7.057 0,9.746c-2.689,2.689 -7.056,2.689 -9.746,0l-4.143,-4.144Zm8.09,-11.401l-2.773,2.773l-2.639,-2.638l2.773,-2.773l2.639,2.638Zm-6.973,6.973l-2.773,2.773l-2.638,-2.639l2.773,-2.773l2.638,2.639Z
-                                </PathIcon.Data>
-                            </PathIcon>
+                            <ContentControl Template="{StaticResource SnapIcon}"/>
                         </ToggleButton>
                         <ToggleButton x:Name="RulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
                             <ToolTipService.ToolTip>
@@ -239,12 +238,11 @@
                                         </Button.Tag>
                                     </Button>
                                     <ToggleButton x:Name="OverflowSnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
+                                        <ToggleButton.Resources>
+                                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/$DrawPages/SnapIcon.xaml"/>
+                                        </ToggleButton.Resources>
                                         <ToggleButton.Tag>
-                                            <PathIcon>
-                                                <PathIcon.Data>
-                                                    M4.294,14.039l2.773,-2.773l3.747,3.747c1.159,1.159 3.04,1.159 4.199,0c1.159,-1.159 1.159,-3.04 0,-4.199l-3.747,-3.747l2.773,-2.773l4.144,4.143c2.689,2.69 2.689,7.057 0,9.746c-2.689,2.689 -7.056,2.689 -9.746,0l-4.143,-4.144Zm8.09,-11.401l-2.773,2.773l-2.639,-2.638l2.773,-2.773l2.639,2.638Zm-6.973,6.973l-2.773,2.773l-2.638,-2.639l2.773,-2.773l2.638,2.639Z
-                                                </PathIcon.Data>
-                                            </PathIcon>
+                                            <ContentControl Template="{StaticResource SnapIcon}"/>
                                         </ToggleButton.Tag>
                                     </ToggleButton>
                                     <ToggleButton x:Name="OverflowRulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">

@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="SnapIcon" TargetType="ContentControl">
+        <PathIcon HorizontalAlignment="Center">
+            <PathIcon.Data>
+                M4.294,14.039l2.773,-2.773l3.747,3.747c1.159,1.159 3.04,1.159 4.199,0c1.159,-1.159 1.159,-3.04 0,-4.199l-3.747,-3.747l2.773,-2.773l4.144,4.143c2.689,2.69 2.689,7.057 0,9.746c-2.689,2.689 -7.056,2.689 -9.746,0l-4.143,-4.144Zm8.09,-11.401l-2.773,2.773l-2.639,-2.638l2.773,-2.773l2.639,2.638Zm-6.973,6.973l-2.773,2.773l-2.638,-2.639l2.773,-2.773l2.638,2.639Z
+            </PathIcon.Data>
+        </PathIcon>
+    </ControlTemplate>
+
+</ResourceDictionary>
