@@ -77,8 +77,8 @@ namespace Retouch_Photo2
             }
 
             //FileUtil
-            await FileUtil.DeleteInTemporaryFolder();
-            bool isExists = await FileUtil.MoveAllAndReturn(name);
+            await FileUtil.DeleteAllInTemporaryFolder();
+            bool isExists = await FileUtil.MoveAllInZipFolderToTemporaryFolder(name);
             if (isExists == false)
             {
                 this.LoadingControl.IsActive = false;

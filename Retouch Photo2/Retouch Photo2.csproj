@@ -112,7 +112,6 @@
     <Compile Include="%24DrawPages\DrawPage.CanvasControl.Render.cs" />
     <Compile Include="%24DrawPages\DrawPage.CanvasControl.Operator.cs" />
     <Compile Include="%24MainPages\IProjectViewItem.cs" />
-    <Compile Include="%24MainPages\MainPage.Items.cs" />
     <Compile Include="%24MainPages\ProjectViewItem.xaml.cs">
       <DependentUpon>ProjectViewItem.xaml</DependentUpon>
     </Compile>
@@ -123,6 +122,7 @@
     <Compile Include="%24DrawPages\DrawPage.xaml.cs">
       <DependentUpon>DrawPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FileUtils\FileUtil.PickAndCopy.cs" />
     <Compile Include="FileUtils\FileUtil.Sample.cs" />
     <Compile Include="Retouch Photo2.Adjustments\BrightnessPage.xaml.cs">
       <DependentUpon>BrightnessPage.xaml</DependentUpon>

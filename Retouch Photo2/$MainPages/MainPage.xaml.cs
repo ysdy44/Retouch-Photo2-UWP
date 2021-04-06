@@ -6,12 +6,11 @@
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Windows.Globalization;
 using Windows.System;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace Retouch_Photo2
@@ -23,7 +22,8 @@ namespace Retouch_Photo2
     {
 
         //@ViewModel
-        TipViewModel TipViewModel => App.TipViewModel;
+        IList<IProjectViewItem> Items => App.Projects;
+        IEnumerable<IProjectViewItem> SelectedItems => from i in this.Items where i.IsSelected select i;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
@@ -36,6 +36,7 @@ namespace Retouch_Photo2
             this.InitializeComponent();
             this.ConstructFlowDirection();
             this.ConstructStrings();
+            this.Loaded += (s, e) => this.LoadAllProjectViewItems();
             this.ConstructInitialControl();
             this.ConstructDragAndDrop();
 
@@ -45,9 +46,23 @@ namespace Retouch_Photo2
             this.MainLayout.GridView.IsItemClickEnabled = true;
             this.MainLayout.GridView.ItemClick += (s, e) =>
              {
-                 if (e.ClickedItem is ProjectViewItem item)
+                 if (e.ClickedItem is IProjectViewItem item)
                  {
-                     this.ItemClick(item);
+                     switch (this.MainLayout.State)
+                     {
+                         case MainPageState.Main:
+                         case MainPageState.Pictures:
+                             this.OpenFromProjectViewItem(item);
+                             break;
+                         case MainPageState.Rename:
+                             this.ShowRenameDialog(item);
+                             break;
+                         case MainPageState.Delete:
+                         case MainPageState.Duplicate:
+                             item.IsSelected = !item.IsSelected;
+                             this.RefreshSelectCount();
+                             break;
+                     }
                  }
              };
             this.MainLayout.SelectCheckBox.Unchecked += (s, e) =>
@@ -71,25 +86,25 @@ namespace Retouch_Photo2
 
 
             //Select
-            this.AllButton.Click += (s, e) => this.SelectAllAndDeselectIcon();
+            this.AllButton.Click += (s, e) =>
+            {
+                bool isAnyUnSelected = this.Items.Any(p => p.IsSelected == false);
 
+                //Refresh all items select-mode.
+                foreach (IProjectViewItem item in this.Items)
+                {
+                    item.IsMultiple = true;
+                    item.IsSelected = isAnyUnSelected;
+                }
+
+                this.RefreshSelectCount();
+            };
             //Head
             this.Head.LeftButtonClick += async (s, e) => await Launcher.LaunchUriAsync(new Uri(this.DocumentationLink));
             this.Head.RightButtonClick += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
-            this.ModifyXamlStyle(this.MainLayout.GridView);
-
-            this.Loaded += async (s, e) =>
-            {
-                await this._lockLoaded();
-
-                //FileUtil
-                await FileUtil.DeleteInTemporaryFolder();
-            };
 
 
-            #region Foot
-
-
+            //Foot
             this.ConstructAddDialog();
             this.NewButton.Click += (s, e) => this.ShowAddDialog();
 
@@ -98,20 +113,22 @@ namespace Retouch_Photo2
 
             this.ConstructRenameDialog();
             this.RenameCloseButton.Click += (s, e) => this.MainLayout.State = MainPageState.Main;
-            this.RenameButton.Click += (s, e) => this.MainLayout.State = MainPageState.Rename;
+            this.RenameButton.Click += async (s, e) => this.MainLayout.State = MainPageState.Rename;
 
             this.ConstructDeleteControl();
             this.DeleteButton.Click += (s, e) => this.MainLayout.State = MainPageState.Delete;
 
             this.ConstructDuplicateControl();
             this.DuplicateButton.Click += (s, e) => this.MainLayout.State = MainPageState.Duplicate;
-
-
-            #endregion
         }
+    }
+
+
+    public sealed partial class MainPage : Page
+    {
 
         /// <summary> The current page becomes the active page. </summary>
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //Setting
             if (string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) == false)
@@ -125,28 +142,9 @@ namespace Retouch_Photo2
 
             //Extension
             this.ApplicationView.Color = this.ApplicationView.Color;
-
-            await this._lockOnNavigatedTo();
         }
         /// <summary> The current page no longer becomes an active page. </summary>
         protected override void OnNavigatedFrom(NavigationEventArgs e) { }
-
-        private void ModifyXamlStyle(GridView gridView)
-        {
-            gridView.Loaded += (s, e) =>
-            {
-                if (VisualTreeHelper.GetChild(gridView, 0) is FrameworkElement element)
-                {
-                    if (element.FindName("ScrollViewer") is ScrollViewer scrollViewer)
-                    {
-                        scrollViewer.ViewChanged += (s2, e2) =>
-                        {
-                            this.Head.Move(scrollViewer.VerticalOffset);
-                        };
-                    }
-                }
-            };
-        }
 
     }
 }

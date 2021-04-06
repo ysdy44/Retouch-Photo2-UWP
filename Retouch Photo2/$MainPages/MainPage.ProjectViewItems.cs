@@ -13,65 +13,52 @@ namespace Retouch_Photo2
     public sealed partial class MainPage : Page
     {
 
-        //@Static
-        /// <summary> Is this Loaded? </summary>
-        private static bool _lockIsLoaded = false;
 
-        #region Lock
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "MainPage" />'s selected count. </summary>
+        public int SelectedCount
+        {
+            get => (int)base.GetValue(SelectedCountProperty);
+            set => base.SetValue(SelectedCountProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "MainPage.SelectedCount" /> dependency property. </summary>
+        public static readonly DependencyProperty SelectedCountProperty = DependencyProperty.Register(nameof(SelectedCount), typeof(int), typeof(MainPage), new PropertyMetadata(0));
+
+
+        /// <summary> Gets or sets <see cref = "MainPage" />'s selected is enable. </summary>
+        public bool SelectedIsEnabled
+        {
+            get => (bool)base.GetValue(SelectedIsEnabledProperty);
+            set => base.SetValue(SelectedIsEnabledProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "MainPage.SelectedCount" /> dependency property. </summary>
+        public static readonly DependencyProperty SelectedIsEnabledProperty = DependencyProperty.Register(nameof(SelectedIsEnabled), typeof(bool), typeof(MainPage), new PropertyMetadata(false));
 
 
         /// <summary>
-        /// Loaded.
+        /// Refresh the selected count.
         /// </summary>
-        private async Task _lockLoaded()
+        public void RefreshSelectCount()
         {
-            if (MainPage._lockIsLoaded == false)
-            {
-                MainPage._lockIsLoaded = true;
-                await this.LoadAllProjectViewItems();
-            }
+            int count = this.Items.Count(p => p.IsSelected);
+            this.SelectedCount = count;
+
+            bool isEnable = (count != 0);
+            this.SelectedIsEnabled = isEnable;
         }
-
-        /// <summary>
-        /// OnNavigatedTo.
-        /// </summary>
-        private async Task _lockOnNavigatedTo()
-        {
-            if (MainPage._lockIsLoaded)
-            {
-                await this.LoadAllProjectViewItems();
-            }
-        }
-
-
-        #endregion
-
 
         /// <summary>
         /// Load all ProjectViewItems in GridView children.
         /// </summary>
-        public async Task LoadAllProjectViewItems()
+        public void LoadAllProjectViewItems()
         {
-            IEnumerable<StorageFolder> zipFolders = await FileUtil.FIndZipFolders();
-
-            //Refresh, when the count is not equal.
-            if (zipFolders.Count() != this.Items.Count)
-            {
-                this.Items.Clear(); //Notify
-
-                foreach (StorageFolder folder in zipFolders)
-                {
-                    // [StorageFolder] --> [projectViewItem]
-                    IProjectViewItem item = FileUtil.ConstructProjectViewItem(folder);
-                    if (item != null) this.Items.Add(item); //Notify
-                }
-            }
-
-            if (this.Items.Count == 0)
-                this.MainLayout.State = MainPageState.Initial;
-            else
-                this.MainLayout.State = MainPageState.Main;
+            this.MainLayout.State = (this.Items.Count == 0) ? MainPageState.Initial : MainPageState.Main;
         }
+
+
+        #endregion
 
 
         /// <summary>
@@ -135,11 +122,39 @@ namespace Retouch_Photo2
             {
                 string oldName = item.Name;
                 string newName = this.UntitledRenameByRecursive(oldName);
-                StorageFolder storageFolder = await FileUtil.DuplicateZipFolder(oldName, newName);
 
-                IProjectViewItem newItem = FileUtil.ConstructProjectViewItem(newName, storageFolder);
+                StorageFolder storageFolder = await FileUtil.DuplicateZipFolder(oldName, newName);
+                IProjectViewItem newItem = await FileUtil.ConstructProjectViewItem(storageFolder);
                 this.Items.Add(newItem);//Notify
             }
+        }
+
+
+        /// <summary>
+        /// Get a name that doesn't have a rename.
+        /// If there are, add the number.
+        /// [Untitled] --> [Untitled1]   
+        /// </summary>
+        /// <param name="name"> The previous name. </param>
+        /// <returns> The new name. </returns>
+        public string UntitledRenameByRecursive(string name)
+        {
+            // Is there a re-named item?
+            if (this.Items.All(i => i.Name != name))
+                return name;
+
+            int num = 0;
+            string newName;
+
+            do
+            {
+                num++;
+                newName = $"{name}{num}";
+            }
+            // Is there a re-named item?
+            while (this.Items.Any(i => i.Name == newName));
+
+            return newName;
         }
 
     }

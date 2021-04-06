@@ -19,8 +19,8 @@
 // Complete:      ★★★★★   // This class is complete.
 // Complete:                       // This class is not completed.
 
-using Retouch_Photo2.Adjustments;
-using Retouch_Photo2.Adjustments.Pages;
+using System.Collections.ObjectModel;
+using Windows.Storage;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.Tools.Models;
@@ -42,6 +42,9 @@ namespace Retouch_Photo2
     /// </summary>
     public sealed partial class App : Application
     {
+
+        /// <summary> Retouch_Photo2's the only <see cref = "Retouch_Photo2.IProjectViewItem" />. </summary>
+        public static ObservableCollection<IProjectViewItem> Projects { get; } = new ObservableCollection<IProjectViewItem>();
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.ViewModel" />. </summary>
         public static ViewModel ViewModel { get; } = new ViewModel();
@@ -342,6 +345,17 @@ namespace Retouch_Photo2
             {
                 if (rootFrame.Content == null)
                 {
+                    //FileUtil
+                    await FileUtil.DeleteAllInTemporaryFolder();
+
+                    //Projects 
+                    foreach (StorageFolder folder in await FileUtil.FIndAllZipFolders())
+                    {
+                        // [StorageFolder] --> [projectViewItem]
+                        IProjectViewItem project = await FileUtil.ConstructProjectViewItem(folder);
+                        App.Projects.Add(project);
+                    }
+
                     //Setting
                     Setting setting = await XML.ConstructSettingFile();
                     App.SettingViewModel.ConstructSetting(setting);

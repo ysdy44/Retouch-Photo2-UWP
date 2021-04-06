@@ -1,16 +1,12 @@
 ﻿using Retouch_Photo2.Elements;
-using Retouch_Photo2.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
-using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -18,6 +14,7 @@ namespace Retouch_Photo2
 {
     public sealed partial class MainPage : Page
     {
+
         //private string DisplayName = "Retouch Photo2";
         private string Untitled = "Untitled";
         private string DocumentationLink = "https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README.md";
@@ -27,7 +24,7 @@ namespace Retouch_Photo2
         private void ConstructFlowDirection()
         {
             bool isRightToLeft = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
-            
+
             base.FlowDirection = isRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
         }
 
@@ -108,8 +105,15 @@ namespace Retouch_Photo2
         {
             this.InitialSampleButton.Click += async (s, e) =>
             {
-                await FileUtil.ConstructSampleFile();
-                await this.LoadAllProjectViewItems();
+                await FileUtil.SaveSampleFile();
+
+                //Projects 
+                foreach (StorageFolder folder in await FileUtil.FIndAllZipFolders())
+                {
+                    // [StorageFolder] --> [projectViewItem]
+                    IProjectViewItem project = await FileUtil.ConstructProjectViewItem(folder);
+                    this.Items.Add(project);
+                }
             };
             this.InitialAddButton.Click += (s, e) => this.ShowAddDialog();
             this.InitialPhotoButton.Click += async (s, e) => await this.NewFromPicture(PickerLocationId.PicturesLibrary);
@@ -139,7 +143,6 @@ namespace Retouch_Photo2
                 //e.DragUIOverride.Caption = App.resourceLoader.GetString("DropAcceptable_");//可以接受的图片
                 e.DragUIOverride.IsCaptionVisible = e.DragUIOverride.IsContentVisible = e.DragUIOverride.IsGlyphVisible = true;
             };
-
         }
 
 
@@ -156,10 +159,7 @@ namespace Retouch_Photo2
                 this.NewFromSize(size);
             };
         }
-        private void ShowAddDialog()
-        {
-            this.AddDialog.Show();
-        }
+        private void ShowAddDialog() => this.AddDialog.Show();
         private void HideAddDialog()
         {
             if (this.Items.Count == 0)

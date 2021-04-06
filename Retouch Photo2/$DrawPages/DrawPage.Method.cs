@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2
 {
     public sealed partial class DrawPage : Page
-    {        
+    {
 
         /// <summary>
         /// Export to ...
@@ -49,7 +49,7 @@ namespace Retouch_Photo2
             string name = this.ApplicationView.Title;
             int width = this.ViewModel.CanvasTransformer.Width;
             int height = this.ViewModel.CanvasTransformer.Height;
-            StorageFolder zipFolder = await FileUtil.DeleteAllAndReturn(name);
+            StorageFolder zipFolder = await FileUtil.DeleteAllInZipFolder(name);
 
 
             //Save project file.
@@ -62,8 +62,13 @@ namespace Retouch_Photo2
             await Retouch_Photo2.XML.SaveProjectFile(zipFolder, project);
 
             //Save thumbnail file.
-            CanvasRenderTarget thumbnail = this.Render(width, height);
-            Uri imageSource = await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
+            IProjectViewItem item = this.Items.FirstOrDefault(p => p.Name == name);
+            if (item != null)
+            {
+                CanvasRenderTarget thumbnail = this.Render(width, height);
+                string url = await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
+                item.ImageSource = await FileUtil.DisplayThumbnailFile(url);
+            }
 
             //Save layers file.
             IEnumerable<Layerage> savedLayerages = LayerManager.GetUnUestingLayerages(LayerManager.RootLayerage);
@@ -83,8 +88,8 @@ namespace Retouch_Photo2
                 //@Release: case Release
                 {
                     //Move photo file.
-                    StorageFile item = await StorageFile.GetFileFromPathAsync(photo.ImageFilePath);
-                    await item.CopyAsync(zipFolder);
+                    StorageFile file = await StorageFile.GetFileFromPathAsync(photo.ImageFilePath);
+                    await file.CopyAsync(zipFolder);
                 }
             }
         }
@@ -105,7 +110,7 @@ namespace Retouch_Photo2
             HistoryBase.Instances.Clear();
 
             //FileUtil
-            await FileUtil.DeleteInTemporaryFolder();
+            await FileUtil.DeleteAllInTemporaryFolder();
 
             //Clear
             this.SelectionViewModel.SetModeNone();

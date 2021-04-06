@@ -9,6 +9,7 @@ using Retouch_Photo2.Photos;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Globalization;
@@ -26,6 +27,7 @@ namespace Retouch_Photo2
     {
 
         //@ViewModel
+        IList<IProjectViewItem> Items => App.Projects;
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
