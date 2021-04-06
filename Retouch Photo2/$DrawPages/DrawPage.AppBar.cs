@@ -2,6 +2,7 @@
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
+using System.Collections.Generic;
 using Windows.Devices.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -11,6 +12,18 @@ namespace Retouch_Photo2
 {
     public sealed partial class DrawPage : Page
     {
+
+        // Menu
+        private void ConstructMenuTypes(IList<string> menuTypes)
+        {
+            foreach (FrameworkElement button in this.MenuButtonsStackPanel.Children)
+            {
+                string key = button.Name;
+                bool isContains = menuTypes.Contains(key);
+                button.Visibility = isContains ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
 
         // AppBar. 
         private void ConstructAppBar()
@@ -55,22 +68,38 @@ namespace Retouch_Photo2
 
             //Appbar
             this.ExportButton.Tapped += (s, e) => this.ShowExportDialog();
-            this.OverflowExportButton.Tapped += (s, e) => this.ShowExportDialog();
+            this.OverflowExportButton.Tapped += (s, e) =>
+            {
+                this.ShowExportDialog();
+                this.OverflowFlyout.Hide();
+            };
 
             this.UndoButton.Tapped += (s, e) => this.MethodViewModel.MethodEditUndo();
             this.OverflowUndoButton.Tapped += (s, e) => this.MethodViewModel.MethodEditUndo();
 
             //this.RedoButton.Click += (s, e) => { };
-            //this.OverflowButton.Click += (s, e) => { };
+            //this.OverflowRedoButton.Click += (s, e) => { };
 
             this.SetupButton.Tapped += (s, e) => this.ShowSetupDialog();
-            this.OverflowSetupButton.Tapped += (s, e) => this.ShowSetupDialog();
+            this.OverflowSetupButton.Tapped += (s, e) =>
+            {
+                this.ShowSetupDialog();
+                this.OverflowFlyout.Hide();
+            };
 
             this.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
-            this.OverflowRulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
+            this.OverflowRulerButton.Tapped += (s, e) =>
+            {
+                this.ViewModel.Invalidate();//Invalidate
+                this.OverflowFlyout.Hide();
+            };
 
             this.FullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = true;
-            this.OverflowFullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = true;
+            this.OverflowFullScreenButton.Tapped += (s, e) =>
+            {
+                this.DrawLayout.IsFullScreen = true;
+                this.OverflowFlyout.Hide();
+            };
 
             this.UnFullScreenButton.Click += (s, e) => this.DrawLayout.IsFullScreen = false;
 
@@ -105,7 +134,7 @@ namespace Retouch_Photo2
         private void AppBarOverflow(double width)
         {
             double overflowWidth = this.OverflowButton.ActualWidth;
-            double rightWidth = this.ExpanderButtonsStackPanel.ActualWidth;
+            double rightWidth = this.MenuButtonsStackPanel.ActualWidth;
             double leftWidth = width - overflowWidth - rightWidth;
             int count = (int)(leftWidth / 40.0d) - 1;
 

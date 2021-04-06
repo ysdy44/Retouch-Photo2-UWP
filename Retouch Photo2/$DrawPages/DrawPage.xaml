@@ -215,7 +215,7 @@
                     <!--Overflow-->
                     <Button x:Name="OverflowButton" Grid.Column="2" Style="{StaticResource AppCircleButtonStyle}">
                         <Button.Flyout>
-                            <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                            <Flyout x:Name="OverflowFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                 <StackPanel x:Name="OverflowStackPanel">
                                     <Button x:Name="OverflowExportButton" Foreground="Black" Background="#FFC003" Style="{StaticResource AppIconSelectedButton}">
                                         <Button.Tag>
@@ -269,9 +269,9 @@
 
                     <!--Right-->
                     <ScrollViewer x:Name="RightScrollViewer" Grid.Column="3" HorizontalAlignment="Right" Style="{StaticResource AppHorizontalScrollViewerStyle}">
-                        <StackPanel x:Name="ExpanderButtonsStackPanel" Orientation="Horizontal">
+                        <StackPanel x:Name="MenuButtonsStackPanel" Orientation="Horizontal">
 
-                            <Button Width="54" Style="{StaticResource AppRoundedButtonStyle}">
+                            <Button x:Name="Edit" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
                                     <Flyout x:Name="EditFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="EditExpander" Flyout="{x:Bind EditFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
@@ -284,7 +284,7 @@
                                 </ToolTipService.ToolTip>
                                 <edits:Icon/>
                             </Button>
-                            <Button Width="54" Style="{StaticResource AppRoundedButtonStyle}">
+                            <Button x:Name="Operate" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
                                     <Flyout x:Name="OperateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="OperateExpander" Flyout="{x:Bind OperateFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
@@ -298,7 +298,7 @@
                                 <operates:Icon/>
                             </Button>
 
-                            <Button Width="54" Style="{StaticResource AppRoundedButtonStyle}">
+                            <Button x:Name="Adjustment" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
                                     <Flyout x:Name="AdjustmentFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="AdjustmentExpander" Flyout="{x:Bind AdjustmentFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
@@ -325,7 +325,7 @@
                                 </ToolTipService.ToolTip>
                                 <adjustments:Icon/>
                             </Button>
-                            <Button Width="54" Style="{StaticResource AppRoundedButtonStyle}">
+                            <Button x:Name="Effect" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
                                     <Flyout x:Name="EffectFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="EffectExpander" Flyout="{x:Bind EffectFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
@@ -350,7 +350,7 @@
                                 <effects:Icon/>
                             </Button>
 
-                            <Button Width="54" Style="{StaticResource AppRoundedButtonStyle}">
+                            <Button x:Name="Text" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
                                     <Flyout x:Name="TextFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="TextExpander" Flyout="{x:Bind TextFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
@@ -363,7 +363,7 @@
                                 </ToolTipService.ToolTip>
                                 <texts:Icon/>
                             </Button>
-                            <Button Width="54" Style="{StaticResource AppRoundedButtonStyle}">
+                            <Button x:Name="Stroke" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
                                     <Flyout x:Name="StrokeFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="StrokeExpander" Flyout="{x:Bind StrokeFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
@@ -376,7 +376,7 @@
                                 </ToolTipService.ToolTip>
                                 <strokes:Icon/>
                             </Button>
-                            <Button Width="54" Style="{StaticResource AppRoundedButtonStyle}">
+                            <Button x:Name="Style" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
                                     <Flyout x:Name="StyleFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="StyleExpander" Flyout="{x:Bind StyleFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
@@ -390,7 +390,7 @@
                                 <styles:Icon/>
                             </Button>
 
-                            <Button Width="54" Style="{StaticResource AppRoundedButtonStyle}">
+                            <Button x:Name="History" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
                                     <Flyout x:Name="HistoryFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="HistoryExpander" Flyout="{x:Bind HistoryFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
@@ -403,7 +403,7 @@
                                 </ToolTipService.ToolTip>
                                 <historys:Icon/>
                             </Button>
-                            <Button Width="54" Style="{StaticResource AppRoundedButtonStyle}">
+                            <Button x:Name="Transformer" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
                                     <Flyout x:Name="TransformerFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="TransformerExpander" Flyout="{x:Bind TransformerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
@@ -416,7 +416,7 @@
                                 </ToolTipService.ToolTip>
                                 <transformers:Icon/>
                             </Button>
-                            <Button Width="54" Style="{StaticResource AppRoundedButtonStyle}">
+                            <Button x:Name="Layer" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
                                     <Flyout x:Name="LayerFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="LayerExpander" Flyout="{x:Bind LayerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
@@ -430,7 +430,7 @@
                                 <layers:Icon/>
                             </Button>
 
-                            <Button Width="54" Style="{StaticResource AppRoundedButtonStyle}">
+                            <Button x:Name="Color" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
                                     <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="ColorExpander" Flyout="{x:Bind ColorFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >

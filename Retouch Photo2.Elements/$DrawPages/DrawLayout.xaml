@@ -104,7 +104,9 @@
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
                         <!--Right-->
                         <Setter Target = "RightGrid.Visibility" Value="Collapsed"/>
-
+                        
+                        <Setter Target = "_PinStackPanel.Visibility" Value="Collapsed"/>
+                        
                     </VisualState.Setters>
                 </VisualState>
 

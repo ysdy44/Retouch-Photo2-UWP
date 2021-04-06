@@ -218,6 +218,8 @@ namespace Retouch_Photo2
                 }
             }
 
+            this.ConstructMenuTypes(this.SettingViewModel.Setting.MenuTypes);
+
             this.RegisterDrawPage();
 
             //Extension
