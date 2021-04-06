@@ -1,9 +1,9 @@
-﻿using Retouch_Photo2.Elements;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace Retouch_Photo2
 {
@@ -14,7 +14,7 @@ namespace Retouch_Photo2
         /// Find all zip folders in local folder.
         /// </summary>
         /// <returns> The all zip folders. </returns>
-        public static async Task<IEnumerable<StorageFolder>> FIndZipFolders()
+        public static async Task<IEnumerable<StorageFolder>> FIndAllZipFolders()
         {
             //get all folders.
             IReadOnlyList<StorageFolder> folders = await ApplicationData.Current.LocalFolder.GetFoldersAsync();
@@ -33,8 +33,23 @@ namespace Retouch_Photo2
         }
 
 
+        /// <summary>
+        /// Initializes ProjectViewItem by zip folder.
+        /// </summary>
+        /// <param name="zipFolder"> The zip folder. </param>
+        /// <returns> The product ProjectViewItem. </returns>
+        public static async Task<IProjectViewItem> ConstructProjectViewItem(StorageFolder zipFolder)
+        {
+            string name = zipFolder.DisplayName.Replace(".photo2pk", "");
+            string url = $"{zipFolder.Path}\\Thumbnail.png";
+            WriteableBitmap imageSource = await FileUtil.DisplayThumbnailFile(url); 
 
-        #region ZipFolder
+            return new ProjectViewItem
+            {
+                Name = name,
+                ImageSource = imageSource
+            };
+        }
 
 
         /// <summary>
@@ -47,10 +62,12 @@ namespace Retouch_Photo2
         {
             StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{oldName}.photo2pk");
             await zipFolder.RenameAsync($"{newName}.photo2pk");
+            
+            string url = $"{zipFolder.Path}\\Thumbnail.png";
+            WriteableBitmap imageSource = await FileUtil.DisplayThumbnailFile(url);
 
-            //Rename thumbnail.       
             item.Name = newName;
-            item.ImageSource = new Uri($"{zipFolder.Path}\\Thumbnail.png", UriKind.Relative);
+            item.ImageSource = imageSource;
         }
 
 
@@ -88,62 +105,6 @@ namespace Retouch_Photo2
             }
 
             return zipFolderNew;
-        }
-
-
-        #endregion
-
-
-        /// <summary>
-        /// Move all files to temporary folder.
-        /// </summary>
-        /// <param name="name"> The zip folder name. </param>
-        /// <retrun> The exists. </retrun>
-        public static async Task<bool> MoveAllAndReturn(string name)
-        {
-            StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{name}.photo2pk");
-            {
-                bool isZipFolderPhotosFileExists = await FileUtil.IsFileExists($"Photos.xml", zipFolder);
-                if (isZipFolderPhotosFileExists == false) return false;
-
-                bool isZipFolderProjectFileExists = await FileUtil.IsFileExists($"Project.xml", zipFolder);
-                if (isZipFolderProjectFileExists == false) return false;
-            }
-
-
-            IReadOnlyList<StorageFile> files = await zipFolder.GetFilesAsync();
-            foreach (StorageFile item in files)
-            {
-                //Move to temporary folder
-                await item.CopyAsync(ApplicationData.Current.TemporaryFolder);
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// Delete all files in zip folder and return zip folder.
-        /// If not exists, create a new zip folder.
-        /// </summary>
-        /// <param name="name"> The zip folder name. </param>
-        public static async Task<StorageFolder> DeleteAllAndReturn(string name)
-        {
-            bool isZipFolderExists = await FileUtil.IsFileExistsInLocalFolder($"{name}.photo2pk");
-
-            if (isZipFolderExists == false)
-            {
-                return await ApplicationData.Current.LocalFolder.CreateFolderAsync($"{name}.photo2pk");
-            }
-
-            //Delete all in zip folder.
-            StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{name}.photo2pk");
-
-            IReadOnlyList<StorageFile> items = await zipFolder.GetFilesAsync();
-            foreach (StorageFile item in items)
-            {
-                await item.DeleteAsync();
-            }
-
-            return zipFolder;
         }
 
 

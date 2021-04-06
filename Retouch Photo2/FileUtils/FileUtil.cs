@@ -3,15 +3,10 @@
 // Difficult:         ★★
 // Only:              ★★★★★
 // Complete:      ★★★
-using Microsoft.Graphics.Canvas;
-using Retouch_Photo2.Elements;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
 
 namespace Retouch_Photo2
 {
@@ -24,7 +19,7 @@ namespace Retouch_Photo2
         /// <summary>
         /// Delet all files in temporary folder.
         /// </summary>
-        public static async Task DeleteInTemporaryFolder()
+        public static async Task DeleteAllInTemporaryFolder()
         {
             try
             {
@@ -38,206 +33,61 @@ namespace Retouch_Photo2
         }
 
 
-        #region ProjectViewItem
-
-
         /// <summary>
-        /// Initializes ProjectViewItem by zip folder.
+        /// Move all files in local golder to temporary folder.
         /// </summary>
-        /// <param name="zipFolder"> The zip folder. </param>
-        /// <returns> The product ProjectViewItem. </returns>
-        public static IProjectViewItem ConstructProjectViewItem(StorageFolder zipFolder)
+        /// <param name="name"> The zip folder name. </param>
+        /// <retrun> The exists. </retrun>
+        public static async Task<bool> MoveAllInZipFolderToTemporaryFolder(string name)
         {
-            string name = zipFolder.DisplayName.Replace(".photo2pk", "");
-
-            return FileUtil.ConstructProjectViewItem(name, zipFolder);
-        }
-        /// <summary>
-        /// Initializes a ProjectViewItem by zip folder.
-        /// </summary>
-        /// <param name="name"> The name. </param>
-        /// <param name="zipFolder"> The zip folder. </param>
-        /// <returns> The product ProjectViewItem. </returns>
-        public static IProjectViewItem ConstructProjectViewItem(string name, StorageFolder zipFolder)
-        {
-            return new ProjectViewItem
+            StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{name}.photo2pk");
             {
-                Name = name,
-                ImageSource = new Uri($"{zipFolder.Path}\\Thumbnail.png", UriKind.Relative)
-            };
-        }
+                bool isZipFolderPhotosFileExists = await FileUtil.IsFileExists($"Photos.xml", zipFolder);
+                if (isZipFolderPhotosFileExists == false) return false;
 
-
-        #endregion
-
-
-
-        #region Save
-
-
-        /// <summary>
-        /// Save thumbnail file to zip folder.
-        /// </summary>
-        /// <param name="zipFolder"> The zip folder.</param>
-        /// <param name="renderTarget"> The render target.</param>
-        /// <returns> Return Image Path. </returns>
-        public static async Task<Uri> SaveThumbnailFile(StorageFolder zipFolder, CanvasRenderTarget renderTarget)
-        {
-            StorageFile thumbnailFile = await zipFolder.CreateFileAsync("Thumbnail.png");
-
-            using (IRandomAccessStream fileStream = await thumbnailFile.OpenAsync(FileAccessMode.ReadWrite))
-            {
-                await renderTarget.SaveAsync(fileStream, CanvasBitmapFileFormat.Png);
+                bool isZipFolderProjectFileExists = await FileUtil.IsFileExists($"Project.xml", zipFolder);
+                if (isZipFolderProjectFileExists == false) return false;
             }
 
-            return new Uri(thumbnailFile.Path, UriKind.Relative);
-        }
 
-
-        /// <summary>
-        /// Saves the entire bitmap to the specified stream
-        /// with the specified file format and quality level.
-        /// </summary>
-        /// <param name="renderTarget"> The render target.</param>
-        /// <param name="fileChoices"> The file choices. </param>
-        /// <param name="suggestedFileName"> The suggested name of file. </param>
-        /// <param name="fileFormat"> The file format. </param>
-        /// <param name="quality"> The file quality. </param>
-        /// <returns> Saved successful? </returns>
-        public static async Task<bool> SaveCanvasBitmapFile(CanvasRenderTarget renderTarget, string fileChoices = ".Jpeg", string suggestedFileName = "Untitled", CanvasBitmapFileFormat fileFormat = CanvasBitmapFileFormat.Jpeg, float quality = 1.0f)
-        {
-            //FileSavePicker
-            FileSavePicker savePicker = new FileSavePicker
+            IReadOnlyList<StorageFile> files = await zipFolder.GetFilesAsync();
+            foreach (StorageFile item in files)
             {
-                SuggestedStartLocation = PickerLocationId.Desktop,
-                SuggestedFileName = suggestedFileName,
-            };
-            savePicker.FileTypeChoices.Add("DB", new[] { fileChoices });
-
-
-            //PickSaveFileAsync
-            StorageFile file = await savePicker.PickSaveFileAsync();
-            if (file == null) return false;
-
-            try
-            {
-                using (IRandomAccessStream accessStream = await file.OpenAsync(FileAccessMode.ReadWrite))
-                {
-                    await renderTarget.SaveAsync(accessStream, fileFormat, quality);
-                }
-
-                renderTarget.Dispose();
-                return true;
+                //Move to temporary folder
+                await item.CopyAsync(ApplicationData.Current.TemporaryFolder);
             }
-            catch (Exception)
-            {
-                renderTarget.Dispose();
-                return false;
-            }
+            return true;
         }
-
-
-        #endregion
-
-
-        #region Pick and Copy
-
-
-        /// <summary>
-        /// Copy file to the temporary folder, and return the copy.
-        /// </summary>
-        /// <param name="file"> The destination file. </param>
-        /// <returns> The copied  file. </returns>
-        public async static Task<StorageFile> CopySingleImageFileAsync(StorageFile file)
-        { 
-            if (file == null) return null;
-
-            StorageFile copyFile = await file.CopyAsync(ApplicationData.Current.TemporaryFolder, file.Name, NameCollisionOption.ReplaceExisting);
-            return copyFile;
-        }
-        /// <summary>
-        /// The file picker is displayed so that the user can select a file.
-        /// </summary>
-        /// <param name="location"> The destination locationId. </param>
-        /// <returns> The product file. </returns>
-        public async static Task<StorageFile> PickSingleImageFileAsync(PickerLocationId location)
-        {
-            //Picker
-            FileOpenPicker openPicker = new FileOpenPicker
-            {
-                ViewMode = PickerViewMode.Thumbnail,
-                SuggestedStartLocation = location,
-                FileTypeFilter =
-                {
-                    ".jpg",
-                    ".jpeg",
-                    ".png",
-                    ".bmp"
-                }
-            };
-
-            //File
-            StorageFile file = await openPicker.PickSingleFileAsync();
-            return file;
-        }
-        /// <summary>
-        /// The files picker is displayed so that the user can select a files.
-        /// </summary>
-        /// <param name="location"> The destination locationId. </param>
-        /// <returns> The product files. </returns>
-        public async static Task<IReadOnlyList<StorageFile>> PickMultipleImageFilesAsync(PickerLocationId location)
-        {
-            //Picker
-            FileOpenPicker openPicker = new FileOpenPicker
-            {
-                ViewMode = PickerViewMode.Thumbnail,
-                SuggestedStartLocation = location,
-                FileTypeFilter =
-                {
-                    ".jpg",
-                    ".jpeg",
-                    ".png",
-                    ".bmp"
-                }
-            };
-
-            //File
-            IReadOnlyList<StorageFile> files = await openPicker.PickMultipleFilesAsync();
-            return files;
-        }
-
-        /// <summary>
-        /// Filter files that are not pictures.
-        /// Then copy to the temporary folder, and return the copy.
-        /// </summary>
-        /// <param name="item"> The destination item. </param>
-        /// <returns> The product file. </returns>
-        public async static Task<StorageFile> CopySingleImageFileAsync(IStorageItem item)
-        {
-            if (item is StorageFile file)
-            {
-                if (file == null) return null;
-
-                string fileType = file.FileType.ToUpper();
-                switch (fileType)
-                {
-                    case ".JPG":
-                    case ".JPEG":
-                    case ".PNG":
-                    case ".GIF":
-                    case ".BMP":
-                        StorageFile copyFile = await file.CopyAsync(ApplicationData.Current.TemporaryFolder, file.Name, NameCollisionOption.ReplaceExisting);
-                        return copyFile;
-                }
-            }
-            return null;
-        }
-      
         
-        #endregion
+        /// <summary>
+        /// Delete all files in zip folder and return zip folder.
+        /// If not exists, create a new zip folder.
+        /// </summary>
+        /// <param name="name"> The zip folder name. </param>
+        public static async Task<StorageFolder> DeleteAllInZipFolder(string name)
+        {
+            bool isZipFolderExists = await FileUtil.IsFileExistsInLocalFolder($"{name}.photo2pk");
+
+            if (isZipFolderExists == false)
+            {
+                return await ApplicationData.Current.LocalFolder.CreateFolderAsync($"{name}.photo2pk");
+            }
+
+            //Delete all in zip folder.
+            StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{name}.photo2pk");
+
+            IReadOnlyList<StorageFile> items = await zipFolder.GetFilesAsync();
+            foreach (StorageFile item in items)
+            {
+                await item.DeleteAsync();
+            }
+
+            return zipFolder;
+        }
 
 
-        #region Exists
+
+        #region  IsExists
 
 
         /// <summary>
@@ -268,6 +118,7 @@ namespace Retouch_Photo2
 
 
         #endregion
+
 
     }
 }
