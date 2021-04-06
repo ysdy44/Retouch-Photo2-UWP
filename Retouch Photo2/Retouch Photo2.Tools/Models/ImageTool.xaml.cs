@@ -153,14 +153,16 @@ namespace Retouch_Photo2.Tools.Models
             }
             else LayerManager.RemoveMezzanine(this.MezzanineLayerage);//Mezzanine
 
-            //         this.SelectionViewModel.SetMode();//Selection
+            // this.SelectionViewModel.SetMode();//Selection
 
             LayerManager.ArrangeLayers();
             LayerManager.ArrangeLayersBackground();
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
+        public void Clicke(Vector2 point) => this.TipViewModel.ClickeTool.Clicke(point);
+
+        public void Cursor(Vector2 point) => this.TipViewModel.ClickeTool.Cursor(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)

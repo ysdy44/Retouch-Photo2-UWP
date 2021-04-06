@@ -120,6 +120,7 @@
     <Compile Include="Elements\NodeModes\NodeModeControl.xaml.cs">
       <DependentUpon>NodeModeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IClickeTool.cs" />
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>

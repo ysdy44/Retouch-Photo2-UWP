@@ -72,6 +72,16 @@ namespace Retouch_Photo2
 
         private void ConstructCanvasOperator()
         {
+            this.ToolDrawCanvasControl.PointerMoved += (s, e) =>
+            {
+                this.TipViewModel.pointerDeviceType = e.Pointer.PointerDeviceType;
+
+                //Tool
+                Vector2 position = e.GetCurrentPoint(this.ToolDrawCanvasControl).Position.ToVector2();
+                this.TipViewModel.Tool.Cursor(position);//Move
+            };
+
+
             CanvasOperator canvasOperator = new CanvasOperator
             {
                 DestinationControl = this.ToolDrawCanvasControl

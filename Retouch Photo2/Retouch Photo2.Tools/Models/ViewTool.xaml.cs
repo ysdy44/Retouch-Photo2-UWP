@@ -50,6 +50,8 @@ namespace Retouch_Photo2.Tools.Models
             //Tip
             this.ViewModel.SetTipTextPosition();
             this.ViewModel.TipTextVisibility = Visibility.Visible;
+            this.TipViewModel.hand_Is = true;
+            this.TipViewModel.CoreCursorType = this.TipViewModel.CoreCursorType;//CoreCursorType
 
             this.ViewModel.CanvasTransformer.CacheMove(startingPoint);
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
@@ -66,11 +68,15 @@ namespace Retouch_Photo2.Tools.Models
         {
             //Tip
             this.ViewModel.TipTextVisibility = Visibility.Collapsed;
+            this.TipViewModel.hand_Is = false;
+            this.TipViewModel.CoreCursorType = this.TipViewModel.CoreCursorType;//CoreCursorType
 
             if (isOutNodeDistance) this.ViewModel.CanvasTransformer.Move(point);
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
+        public void Clicke(Vector2 point) { }
+
+        public void Cursor(Vector2 point) { }
 
         public void Draw(CanvasDrawingSession drawingSession) { }
 
@@ -89,7 +95,7 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>
     internal partial class ViewPage : Page
     {
-        
+
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
 
@@ -207,7 +213,7 @@ namespace Retouch_Photo2.Tools.Models
             Storyboard.SetTargetProperty(this.RadianKeyFrames, "Radian");
             this.RadianStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             this.ResetRadianButton.Click += (s, e) =>
-            {                
+            {
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
                 this.Radian = this.ViewModel.CanvasTransformer.Radian;
@@ -250,7 +256,7 @@ namespace Retouch_Photo2.Tools.Models
             Storyboard.SetTargetProperty(this.ScaleKeyFrames, "Scale");
             this.ScaleStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             this.ResetScaleButton.Click += (s, e) =>
-            {                
+            {
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
                 this.Scale = this.ViewModel.CanvasTransformer.Scale;

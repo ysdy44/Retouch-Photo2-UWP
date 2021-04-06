@@ -74,7 +74,8 @@ namespace Retouch_Photo2.Tools
             //Tip
             this.ViewModel.SetTipTextWidthHeight(transformer);
             this.ViewModel.TipTextVisibility = Visibility.Visible;
-     
+            this.TipViewModel.Cursor_ManipulationStarted_Tool();
+
             //Selection
             this.Transformer = transformer;
             this.SelectionViewModel.SetModeExtended();
@@ -155,6 +156,8 @@ namespace Retouch_Photo2.Tools
 
                 this.MezzanineLayerage = null;
                 this.ViewModel.TipTextVisibility = Visibility.Collapsed;//Tip
+                this.TipViewModel.Cursor_ManipulationStarted_None();
+
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             }
 

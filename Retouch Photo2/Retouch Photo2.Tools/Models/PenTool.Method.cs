@@ -21,13 +21,13 @@ namespace Retouch_Photo2.Tools.Models
 
         private void PreviewStart(Vector2 startingPoint)
         {
-            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasPoint = Vector2.Transform(startingPoint, inverseMatrix);
 
             if (this._hasPreviewTempLeftPoint == false) this._previewLeft = canvasPoint;
             this._previewRight = canvasPoint;
 
+            this.TipViewModel.Cursor_ManipulationStarted_Tool();
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         private void PreviewDelta(Vector2 canvasPoint)
@@ -52,6 +52,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 this._hasPreviewTempLeftPoint = true;
 
+                this.TipViewModel.Cursor_ManipulationStarted_None();
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             }
         }
@@ -91,6 +92,7 @@ namespace Retouch_Photo2.Tools.Models
             this._addEndNode = layer.Nodes.Last(n => n.Type == NodeType.Node);
             this._addLastNode = layer.Nodes.Last(n => n.Type == NodeType.Node);
 
+            this.TipViewModel.Cursor_ManipulationStarted_Tool();
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         private void AddDelta(Vector2 canvasPoint)
@@ -114,7 +116,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             ILayer layer = this.CurveLayer;
             Layerage layerage = this.CurveLayerage;
-            
+
             //Snap
             if (this.IsSnap)
             {
@@ -139,7 +141,7 @@ namespace Retouch_Photo2.Tools.Models
 
             //History
             this.ViewModel.HistoryPush(history);
-                       
+
 
 
             Node node = new Node
@@ -161,24 +163,25 @@ namespace Retouch_Photo2.Tools.Models
             layerage.RefactoringParentsRender();
             layerage.RefactoringParentsIconRender();
 
+            this.TipViewModel.Cursor_ManipulationStarted_None();
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
 
         private void AddDraw(CanvasDrawingSession drawingSession)
         {
             ILayer layer = this.CurveLayer;
-            
+
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             Vector2 lastPoint = Vector2.Transform(this._addLastNode.Point, matrix);
             Vector2 endPoint = Vector2.Transform(this._addEndNode.Point, matrix);
-            
+
 
             //Geometry
             ICanvasBrush canvasBrush = layer.Style.Stroke.GetICanvasBrush(LayerManager.CanvasDevice);
             float strokeWidth = layer.Style.StrokeWidth;
             CanvasStrokeStyle strokeStyle = layer.Style.StrokeStyle;
             drawingSession.DrawLine(lastPoint, endPoint, canvasBrush, strokeWidth, strokeStyle);
-            
+
 
             //Draw
             drawingSession.DrawLine(lastPoint, endPoint, this.ViewModel.AccentColor);
@@ -186,7 +189,7 @@ namespace Retouch_Photo2.Tools.Models
 
             drawingSession.DrawNode3(endPoint);
             drawingSession.DrawNodeCollection(layer.Nodes, matrix, this.ViewModel.AccentColor);
-            
+
 
             //Snapping
             if (this.IsSnap)

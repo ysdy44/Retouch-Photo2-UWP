@@ -30,6 +30,8 @@ namespace Retouch_Photo2.Tools.Models
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) { }
         public void Clicke(Vector2 point) { }
 
+        public void Cursor(Vector2 point) { }
+
         public void Draw(CanvasDrawingSession drawingSession) { }
 
         public void OnNavigatedTo() { }

@@ -237,6 +237,7 @@ namespace Retouch_Photo2
             MoveTool = new MoveTool(),
             TransformerTool = new TransformerTool(),
             CreateTool = new CreateTool(),
+            ClickeTool = new ClickeTool(),
             Tools = new List<ITool>
             {
                 new CursorTool(),

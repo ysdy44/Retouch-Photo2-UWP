@@ -11,11 +11,14 @@ namespace Retouch_Photo2.ViewModels
     {
 
         /// <summary> Gets or sets the move tool. </summary>   
-        public IMoveTool MoveTool { get; set; } 
+        public IMoveTool MoveTool { get; set; }
         /// <summary> Gets or sets the transformer tool. </summary>   
         public ITransformerTool TransformerTool { get; set; }
         /// <summary> Gets or sets the create tool. </summary>   
         public ICreateTool CreateTool { get; set; }
+        /// <summary> Gets or sets the clicke tool. </summary>   
+        public IClickeTool ClickeTool { get; set; }
+
 
 
         /// <summary> Gets or sets the tool type. </summary>

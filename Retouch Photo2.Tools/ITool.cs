@@ -58,6 +58,11 @@ namespace Retouch_Photo2.Tools
         void Clicke(Vector2 point);
 
         /// <summary>
+        ///Occurs when the pointer is moved.
+        /// </summary>
+        void Cursor(Vector2 point);
+
+        /// <summary>
         /// Occurs when the canvas is drawn.
         /// </summary>
         /// <param name="drawingSession"> The drawing-session. </param>

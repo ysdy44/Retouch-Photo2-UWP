@@ -56,6 +56,41 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
+        private NodeCollectionMode GetNodeCollectionMode(Vector2 startingPoint, Matrix3x2 matrix)
+        {
+            switch (this.SelectionMode)
+            {
+                case ListViewSelectionMode.None: return NodeCollectionMode.None;
+
+                case ListViewSelectionMode.Single:
+                    {
+                        Layerage layerage = this.SelectionViewModel.SelectionLayerage;
+                        if (layerage == null) return NodeCollectionMode.None;
+                        ILayer layer = layerage.Self;
+
+                        if (layer.Type == LayerType.Curve)
+                        {
+                            return NodeCollection.ContainsNodeCollectionMode(startingPoint, layer.Nodes, matrix);
+                        }
+                    }
+                    break;
+
+                case ListViewSelectionMode.Multiple:
+                    foreach (Layerage layerage in this.SelectionViewModel.SelectionLayerages)
+                    {
+                        ILayer layer = layerage.Self;
+
+                        if (layer.Type == LayerType.Curve)
+                        {
+                            return NodeCollection.ContainsNodeCollectionMode(startingPoint, layer.Nodes, matrix);
+                        }
+                    }
+                    break;
+            }
+            return NodeCollectionMode.None;
+        }
+
+
         private void MoveStarted()
         {
             //Selection

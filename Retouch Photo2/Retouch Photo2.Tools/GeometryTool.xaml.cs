@@ -39,7 +39,9 @@ namespace Retouch_Photo2.Tools
         public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
         public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
+        public void Clicke(Vector2 point) => this.TipViewModel.ClickeTool.Clicke(point);
+
+        public void Cursor(Vector2 point) => this.TipViewModel.ClickeTool.Cursor(point);
 
         public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
 
@@ -60,8 +62,6 @@ namespace Retouch_Photo2.Tools
 
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Content 

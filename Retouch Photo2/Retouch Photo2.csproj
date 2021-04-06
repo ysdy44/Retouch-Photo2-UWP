@@ -218,6 +218,7 @@
     <Compile Include="Retouch Photo2.Menus\TransformerMenu.xaml.cs">
       <DependentUpon>TransformerMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Tools\ClickeTool.cs" />
     <Compile Include="Retouch Photo2.Tools\ModelPatterns\PatternDiagonalTool.xaml.cs">
       <DependentUpon>PatternDiagonalTool.xaml</DependentUpon>
     </Compile>

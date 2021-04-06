@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
+using System.Numerics;
 
 namespace Retouch_Photo2.ViewModels
 {
@@ -107,12 +108,12 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary>
-        /// Get the selected layerage.
+        /// Get the first layerage.
         /// None: null;
         /// Single: layer;
         /// Multiple: first layer;
         /// </summary>
-        /// <returns> The selected layerage. </returns>
+        /// <returns> The first layerage. </returns>
         public Layerage GetFirstSelectedLayerage()
         {
             switch (this.SelectionMode)
@@ -124,6 +125,24 @@ namespace Retouch_Photo2.ViewModels
                     return this.SelectionLayerages.FirstOrDefault();
                 default: return null;
             }
+        }
+
+        /// <summary>
+        /// Get the selected layerage.
+        /// <returns> The selected layerage. </returns>
+        public Layerage GetClickSelectedLayerage(Vector2 canvasPoint)
+        {
+            //Select a layer of the same depth
+            Layerage selectedLayerage = this.GetFirstSelectedLayerage();
+            Layerage parents = LayerManager.GetParentsChildren(selectedLayerage);
+
+            return parents.Children.FirstOrDefault(layerage => this.GetClickSelectedLayerage_FillContainsPoint(layerage, canvasPoint));
+        }
+        private bool GetClickSelectedLayerage_FillContainsPoint(Layerage layerage, Vector2 canvasPoint)
+        {
+            ILayer layer = layerage.Self;
+
+            return layer.FillContainsPoint(layerage, canvasPoint);
         }
 
     }

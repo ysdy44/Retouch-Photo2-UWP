@@ -30,6 +30,7 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
         ListViewSelectionMode SelectionMode => this.SelectionViewModel.SelectionMode;
 
@@ -46,7 +47,7 @@ namespace Retouch_Photo2.Tools.Models
         public bool IsSelected { get; set; }
         public bool IsOpen { get => this.NodePage.MoreNodeToolTip.IsOpen; set => this.NodePage.MoreNodeToolTip.IsOpen = value; }
         readonly NodePage NodePage = new NodePage();
-        
+
 
         Layerage Layerage;
         NodeCollectionMode NodeCollectionMode;
@@ -65,6 +66,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
                 this.NodeCollectionMode = NodeCollectionMode.RectChoose;
+                this.TipViewModel.Cursor_ManipulationStarted_Tool();
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
                 return;
             }
@@ -73,16 +75,20 @@ namespace Retouch_Photo2.Tools.Models
             {
                 case NodeCollectionMode.Move:
                     this.MoveStarted();
+                    this.TipViewModel.Cursor_ManipulationStarted_Tool();
                     break;
                 case NodeCollectionMode.MoveSingleNodePoint:
                     this.MoveSingleNodePointStarted(startingPoint, matrix);
+                    this.TipViewModel.Cursor_ManipulationStarted_Tool();
                     break;
                 case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
                 case NodeCollectionMode.MoveSingleNodeRightControlPoint:
                     this.MoveSingleNodeControlPointStarted();
+                    this.TipViewModel.Cursor_ManipulationStarted_Tool();
                     break;
                 case NodeCollectionMode.RectChoose:
                     this.RectChooseStarted(startingPoint, point);
+                    this.TipViewModel.Cursor_ManipulationStarted_Tool();
                     break;
             }
 
@@ -128,6 +134,8 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
+            this.TipViewModel.Cursor_ManipulationStarted_None();
+
             if (this.Layerage == null)
             {
                 this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
@@ -162,6 +170,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
+
         public void Clicke(Vector2 point)
         {
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
@@ -193,6 +202,37 @@ namespace Retouch_Photo2.Tools.Models
             this.ViewModel.HistoryPush(history);
 
             this.ViewModel.Invalidate();//Invalidate
+        }
+
+        public void Cursor(Vector2 point)
+        {
+            Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
+
+            NodeCollectionMode mode = this.GetNodeCollectionMode(point, matrix);
+            switch (mode)
+            {
+                case NodeCollectionMode.None:
+                    this.TipViewModel.Cursor_PointerEntered_None();
+                    break;
+                case NodeCollectionMode.Preview:
+                    break;
+                case NodeCollectionMode.Add:
+                    break;
+                case NodeCollectionMode.Move:
+                    this.TipViewModel.Cursor_PointerEntered_Tool();
+                    break;
+                case NodeCollectionMode.MoveSingleNodePoint:
+                case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
+                case NodeCollectionMode.MoveSingleNodeRightControlPoint:
+                    this.TipViewModel.Cursor_PointerEntered_Tool();
+                    break;
+                case NodeCollectionMode.RectChoose:
+                    this.TipViewModel.Cursor_PointerEntered_None();
+                    break;
+                default:
+                    this.TipViewModel.Cursor_PointerEntered_None();
+                    break;
+            }
         }
 
         public void Draw(CanvasDrawingSession drawingSession)
@@ -333,7 +373,7 @@ namespace Retouch_Photo2.Tools.Models
             this.InsertTextBlock.Text = resource.GetString("Tools_Node_Insert");
             this.SharpTextBlock.Text = resource.GetString("Tools_Node_Sharp");
             this.SmoothTextBlock.Text = resource.GetString("Tools_Node_Smooth");
-       
+
             this._MoreNodeToolTip.Content = resource.GetString("Tools_Node_MoreNode");
         }
 

@@ -73,6 +73,7 @@ namespace Retouch_Photo2.Tools.Models
 
             //Box
             this.CursorMode = CursorMode.BoxChoose;
+            this.TipViewModel.Cursor_ManipulationStarted_Tool();
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canavsStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
@@ -107,6 +108,7 @@ namespace Retouch_Photo2.Tools.Models
         {
             CursorMode cursorMode = this.CursorMode;
             this.CursorMode = CursorMode.None;
+            this.TipViewModel.Cursor_ManipulationStarted_None();
 
             switch (cursorMode)
             {
@@ -135,7 +137,9 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
         }
-        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
+        public void Clicke(Vector2 point) => this.TipViewModel.ClickeTool.Clicke(point);
+
+        public void Cursor(Vector2 point) => this.TipViewModel.ClickeTool.Cursor(point);
 
 
         public void Draw(CanvasDrawingSession drawingSession)

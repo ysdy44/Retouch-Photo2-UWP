@@ -25,6 +25,7 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
         Layerage CurveLayerage => this.SelectionViewModel.CurveLayerage;
         CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
@@ -127,6 +128,8 @@ namespace Retouch_Photo2.Tools.Models
                     break;
             }
         }
+
+        public void Cursor(Vector2 point) { }
 
         public void Draw(CanvasDrawingSession drawingSession)
         {

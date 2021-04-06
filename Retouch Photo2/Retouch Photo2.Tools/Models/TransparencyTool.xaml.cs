@@ -58,6 +58,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.TransparencyStarted(startingPoint, point);
 
+            this.TipViewModel.Cursor_ManipulationStarted_Tool();
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
@@ -95,9 +96,12 @@ namespace Retouch_Photo2.Tools.Models
             this.TransparencyComplete(canvasStartingPoint, canvasPoint);
 
             this.HandleMode = BrushHandleMode.None;
+            this.TipViewModel.Cursor_ManipulationStarted_None();
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point) => this.TipViewModel.MoveTool.Clicke(point);
+        public void Clicke(Vector2 point) => this.TipViewModel.ClickeTool.Clicke(point);
+
+        public void Cursor(Vector2 point) { }
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
