@@ -4,7 +4,7 @@
 // Only:              ★
 // Complete:      ★
 using Retouch_Photo2.ViewModels;
-using System;
+using Windows.UI.Xaml.Media;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 
@@ -19,7 +19,7 @@ namespace Retouch_Photo2
         /// <summary> Gets or sets the name. </summary>
         string Name { get; set; }
         /// <summary> Gets or sets the thumbnail path. </summary>
-        Uri ImageSource { get; set; }
+        ImageSource ImageSource { get; set; }
         /// <summary> Gets or sets the project. </summary>
         Project Project { get; set; }
         /// <summary> Gets or sets the rect of image visual area. </summary>
@@ -32,7 +32,6 @@ namespace Retouch_Photo2
         bool IsMultiple { get; set; }
         /// <summary> Gets or sets the weather is selected. </summary>
         bool IsSelected { get; set; }
-
 
         /// <summary>
         /// Get the position and size of the image element relative to the visual element. 

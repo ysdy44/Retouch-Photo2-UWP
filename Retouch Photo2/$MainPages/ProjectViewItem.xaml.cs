@@ -4,7 +4,7 @@
 // Only:              ★★★
 // Complete:      
 using Retouch_Photo2.ViewModels;
-using System;
+using Windows.UI.Xaml.Media;
 using Windows.Foundation;
 using Windows.Storage;
 using Windows.UI.Xaml;
@@ -21,8 +21,8 @@ namespace Retouch_Photo2
         //@Content
         /// <summary> Gets or sets the name. </summary>
         //public string Name { get; set; } 
-        /// <summary> Gets or sets the thumbnail path. </summary>
-        public Uri ImageSource { get => this.BitmapImage.UriSource; set => this.BitmapImage.UriSource = value; }
+        /// <summary> Gets or sets the image source. </summary>
+        public ImageSource ImageSource { get => this.ImageEx.Source; set => this.ImageEx.Source = value; }
         /// <summary> Gets or sets the rect of image visual area. </summary>
         public Rect ImageVisualRect { get; private set; } = Rect.Empty;
         /// <summary> Gets or sets the project. </summary>
@@ -41,12 +41,12 @@ namespace Retouch_Photo2
             {
                 if (this._vsIsMultiple)
                 {
-                    if (this._vsIsSelected) 
+                    if (this._vsIsSelected)
                         return this.Selected;
-                    else 
+                    else
                         return this.UnSelected;
                 }
-                else 
+                else
                     return this.Normal;
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
