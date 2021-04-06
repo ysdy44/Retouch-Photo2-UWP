@@ -39,6 +39,12 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+
             </ListView>
         </Flyout>
 

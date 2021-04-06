@@ -21,6 +21,7 @@
 
 
     <ListView x:Name="ListView" SelectionMode="None" IsItemClickEnabled="True">
+        
         <ListView.ItemContainerStyle>
             <Style TargetType="ListViewItem">
                 <Setter Property="Padding" Value="0"/>
@@ -30,15 +31,24 @@
                 <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
             </Style>
         </ListView.ItemContainerStyle>
+        
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="historys:IHistory">
                 <TextBlock Style="{StaticResource AppTextBlockStyle}"
                     Text="{x:Bind Type, Mode=OneWay, Converter={StaticResource HistoryTypeConverter}}"/>
             </DataTemplate>
         </ListView.ItemTemplate>
+        
+        <ListView.ItemsPanel>
+            <ItemsPanelTemplate>
+                <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView"/>
+            </ItemsPanelTemplate>
+        </ListView.ItemsPanel>
+
         <ListView.ItemContainerTransitions>
             <TransitionCollection/>
         </ListView.ItemContainerTransitions>
+        
     </ListView>
 
 </UserControl>
