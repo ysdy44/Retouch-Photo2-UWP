@@ -66,8 +66,7 @@ namespace Retouch_Photo2
             if (item != null)
             {
                 CanvasRenderTarget thumbnail = this.Render(width, height);
-                string url = await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
-                item.ImageSource = await FileUtil.DisplayThumbnailFile(url);
+                item.ImageSource = await FileUtil.SaveThumbnailFile(zipFolder, thumbnail);
             }
 
             //Save layers file.

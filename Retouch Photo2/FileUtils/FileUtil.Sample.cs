@@ -29,13 +29,12 @@ namespace Retouch_Photo2
             await FileUtil.ExtractToDirectory(file1);
             await FileUtil.ExtractToDirectory(file2);
         }
-
         /// <summary>
         /// Load project and extract zip to local folder.
         /// </summary>
         /// <param name="file"> The file. </param>
         /// <returns> The extract project. </returns>
-        public static async Task ExtractToDirectory(StorageFile file)
+        private static async Task ExtractToDirectory(StorageFile file)
         {
             //Read the file stream
             using (Stream stream = await file.OpenStreamForReadAsync())
@@ -48,44 +47,38 @@ namespace Retouch_Photo2
 
 
         /// <summary>
-        /// Display the image from the uri to the bitmap in the UI. 
-        /// </summary>
-        /// <param name="imageSource"> The thumbnail url. </param>
-        /// <returns> Return image source. </returns>
-        public static async Task<WriteableBitmap> DisplayThumbnailFile(string url)
-        {
-            StorageFile file = await StorageFile.GetFileFromPathAsync(url);
-
-            using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read))
-            {
-                BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
-
-                using (SoftwareBitmap bitmap = await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied))
-                {
-                    WriteableBitmap source = new WriteableBitmap(bitmap.PixelWidth, bitmap.PixelHeight);
-                    bitmap.CopyToBuffer(source.PixelBuffer);
-                    return source;
-                }
-            }
-        }
-
-
-        /// <summary>
         /// Save thumbnail file to zip folder.
         /// </summary>
         /// <param name="zipFolder"> The zip folder.</param>
         /// <param name="renderTarget"> The render target.</param>
-        /// <returns> Return thumbnail url. </returns>
-        public static async Task<string> SaveThumbnailFile(StorageFolder zipFolder, CanvasRenderTarget renderTarget)
+        /// <returns> Return image source. </returns>
+        public static async Task<WriteableBitmap> SaveThumbnailFile(StorageFolder zipFolder, CanvasRenderTarget renderTarget)
         {
             StorageFile thumbnailFile = await zipFolder.CreateFileAsync("Thumbnail.png");
 
-            using (IRandomAccessStream fileStream = await thumbnailFile.OpenAsync(FileAccessMode.ReadWrite))
+            using (IRandomAccessStream stream = await thumbnailFile.OpenAsync(FileAccessMode.ReadWrite))
             {
-                await renderTarget.SaveAsync(fileStream, CanvasBitmapFileFormat.Png);
-            }
+                await renderTarget.SaveAsync(stream, CanvasBitmapFileFormat.Png);
 
-            return thumbnailFile.Path;
+                return await FileUtil.GetImageSource(stream);
+            }
+        }
+        /// <summary>
+        /// Get image source by steam.
+        /// </summary>
+        /// <param name="stream"> The steam. </param>
+        /// <returns> Return image source. </returns>
+        private static async Task<WriteableBitmap> GetImageSource(IRandomAccessStream stream)
+        {
+            //Display
+            BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
+
+            using (SoftwareBitmap bitmap = await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied))
+            {
+                WriteableBitmap source = new WriteableBitmap(bitmap.PixelWidth, bitmap.PixelHeight);
+                bitmap.CopyToBuffer(source.PixelBuffer);
+                return source;
+            }
         }
 
 

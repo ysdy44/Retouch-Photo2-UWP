@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
-using Windows.UI.Xaml.Media.Imaging;
+using Windows.Storage.Streams;
 
 namespace Retouch_Photo2
 {
@@ -24,10 +24,10 @@ namespace Retouch_Photo2
 
             //Ordered
             IEnumerable<StorageFolder> zipFolders =
-                from folder
+                from zipFolder
                 in orderedFolders
-                where folder.Name.EndsWith(".photo2pk")
-                select folder;
+                where zipFolder.Name.EndsWith(".photo2pk")
+                select zipFolder;
 
             return zipFolders;
         }
@@ -42,32 +42,27 @@ namespace Retouch_Photo2
         {
             string name = zipFolder.DisplayName.Replace(".photo2pk", "");
             string url = $"{zipFolder.Path}\\Thumbnail.png";
-            WriteableBitmap imageSource = await FileUtil.DisplayThumbnailFile(url); 
+            StorageFile file = await StorageFile.GetFileFromPathAsync(url);
 
-            return new ProjectViewItem
+            using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read))
             {
-                Name = name,
-                ImageSource = imageSource
-            };
+                return new ProjectViewItem
+                {
+                    Name = name,
+                    ImageSource = await FileUtil.GetImageSource(stream)
+                };
+            }
         }
-
 
         /// <summary>
         /// Rename zip folder and thumbnail.
         /// </summary>
         /// <param name="oldName"> The old name. </param>
         /// <param name="newName"> The new name. </param>
-        /// <param name="item"> The IProjectViewItem. </param>
-        public static async Task RenameZipFolder(string oldName, string newName, IProjectViewItem item)
+        public static async Task RenameZipFolder(string oldName, string newName)
         {
             StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{oldName}.photo2pk");
             await zipFolder.RenameAsync($"{newName}.photo2pk");
-            
-            string url = $"{zipFolder.Path}\\Thumbnail.png";
-            WriteableBitmap imageSource = await FileUtil.DisplayThumbnailFile(url);
-
-            item.Name = newName;
-            item.ImageSource = imageSource;
         }
 
 
@@ -75,15 +70,22 @@ namespace Retouch_Photo2
         /// Delete zip folder.
         /// </summary>
         /// <param name="name"> The zip folder name. </param>
-        public static async Task DeleteZipFolder(string name)
+        /// <returns> Deleted successful? </returns>
+        public static async Task<bool> DeleteZipFolder(string name)
         {
             try
             {
                 //Delete zip folder.
                 StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{name}.photo2pk");
-                if (zipFolder != null) await zipFolder.DeleteAsync();
+                if (zipFolder == null) return false;
+
+                await zipFolder.DeleteAsync();
+                return true;
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
 
@@ -92,8 +94,14 @@ namespace Retouch_Photo2
         /// </summary>
         /// <param name="oldName"> The old name.</param>
         /// <param name="newName"> The new name.</param>
-        public static async Task<StorageFolder> DuplicateZipFolder(string oldName, string newName)
+        /// <returns> The product ProjectViewItem. </returns>
+        public static async Task<IProjectViewItem> DuplicateZipFolder(string oldName, string newName)
         {
+            ProjectViewItem item = new ProjectViewItem
+            {
+                Name = newName
+            };
+
             //Duplicate zip folder.
             StorageFolder zipFolder = await ApplicationData.Current.LocalFolder.GetFolderAsync($"{oldName}.photo2pk");
             StorageFolder zipFolderNew = await ApplicationData.Current.LocalFolder.CreateFolderAsync($"{newName}.photo2pk", CreationCollisionOption.ReplaceExisting);
@@ -102,9 +110,17 @@ namespace Retouch_Photo2
             foreach (StorageFile file in files)
             {
                 await file.CopyAsync(zipFolderNew);
+
+                if (file.Name == "Thumbnail.png")
+                {
+                    using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read))
+                    {
+                        item.ImageSource = await FileUtil.GetImageSource(stream);
+                    }
+                }
             }
 
-            return zipFolderNew;
+            return item;
         }
 
 

@@ -85,7 +85,8 @@ namespace Retouch_Photo2
 
             //Rename
             IProjectViewItem item = this.Items.First(p => p.Name == oldName);
-            await FileUtil.RenameZipFolder(oldName, newName, item);
+            item.Name = newName;
+            await FileUtil.RenameZipFolder(oldName, newName);
 
             this.HideRenameDialog();
             this.MainLayout.State = MainPageState.Main;
@@ -102,12 +103,16 @@ namespace Retouch_Photo2
             {
                 //Delete
                 string name = item.Name;
-                await FileUtil.DeleteZipFolder(name);
+                bool result = await FileUtil.DeleteZipFolder(name);
+                if (result)
+                {
+                    item.Visibility = Visibility.Collapsed;
+                    item.ImageSource = null;
+                    item.Project = null;
+                    this.Items.Remove(item);//Notify
 
-                item.Visibility = Visibility.Collapsed;
-                this.Items.Remove(item);//Notify
-
-                await Task.Delay(300);
+                    await Task.Delay(300);
+                }
             }
         }
 
@@ -123,8 +128,7 @@ namespace Retouch_Photo2
                 string oldName = item.Name;
                 string newName = this.UntitledRenameByRecursive(oldName);
 
-                StorageFolder storageFolder = await FileUtil.DuplicateZipFolder(oldName, newName);
-                IProjectViewItem newItem = await FileUtil.ConstructProjectViewItem(storageFolder);
+                IProjectViewItem newItem = await FileUtil.DuplicateZipFolder(oldName, newName);
                 this.Items.Add(newItem);//Notify
             }
         }

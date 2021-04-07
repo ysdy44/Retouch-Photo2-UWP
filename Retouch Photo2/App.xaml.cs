@@ -349,11 +349,11 @@ namespace Retouch_Photo2
                     await FileUtil.DeleteAllInTemporaryFolder();
 
                     //Projects 
-                    foreach (StorageFolder folder in await FileUtil.FIndAllZipFolders())
+                    foreach (StorageFolder zipFolder in await FileUtil.FIndAllZipFolders())
                     {
                         // [StorageFolder] --> [projectViewItem]
-                        IProjectViewItem project = await FileUtil.ConstructProjectViewItem(folder);
-                        App.Projects.Add(project);
+                        IProjectViewItem item = await FileUtil.ConstructProjectViewItem(zipFolder);
+                        App.Projects.Add(item);
                     }
 
                     //Setting

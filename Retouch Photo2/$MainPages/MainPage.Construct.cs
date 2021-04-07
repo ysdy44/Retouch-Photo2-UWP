@@ -108,11 +108,11 @@ namespace Retouch_Photo2
                 await FileUtil.SaveSampleFile();
 
                 //Projects 
-                foreach (StorageFolder folder in await FileUtil.FIndAllZipFolders())
+                foreach (StorageFolder zipFolder in await FileUtil.FIndAllZipFolders())
                 {
                     // [StorageFolder] --> [projectViewItem]
-                    IProjectViewItem project = await FileUtil.ConstructProjectViewItem(folder);
-                    this.Items.Add(project);
+                    IProjectViewItem item = await FileUtil.ConstructProjectViewItem(zipFolder);
+                    this.Items.Add(item);
                 }
             };
             this.InitialAddButton.Click += (s, e) => this.ShowAddDialog();
