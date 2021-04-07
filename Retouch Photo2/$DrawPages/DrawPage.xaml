@@ -216,7 +216,8 @@
                     <Button x:Name="OverflowButton" Grid.Column="2" Style="{StaticResource AppCircleButtonStyle}">
                         <Button.Flyout>
                             <Flyout x:Name="OverflowFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                <StackPanel x:Name="OverflowStackPanel">
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
+                                    <StackPanel x:Name="OverflowStackPanel">
                                     <Button x:Name="OverflowExportButton" Foreground="Black" Background="#FFC003" Style="{StaticResource AppIconSelectedButton}">
                                         <Button.Tag>
                                             <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -261,6 +262,7 @@
                                         </ToggleButton.Tag>
                                     </ToggleButton>
                                 </StackPanel>
+                                </ScrollViewer>
                             </Flyout>
                         </Button.Flyout>
                         <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>

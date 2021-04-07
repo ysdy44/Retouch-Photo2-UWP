@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:brushs="using:Retouch_Photo2.Brushs"
+    xmlns:brushs="using:Retouch_Photo2.Brushs" xmlns:strokes="using:Retouch_Photo2.Strokes"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
@@ -54,6 +54,8 @@
                      FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
                      Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
                      Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
+            <strokes:StrokeShowControl x:Name="StrokeShowControl" StrokeStyle="{x:Bind SelectionViewModel.StrokeStyle, Mode=OneWay}"
+                                       Visibility="{x:Bind FillOrStrokeToVisibilityConverter(SelectionViewModel.FillOrStroke), Mode=OneWay}"/>
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 

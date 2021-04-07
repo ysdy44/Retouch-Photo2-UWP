@@ -97,8 +97,8 @@ namespace Retouch_Photo2.Tools
             this.ConstructStrings(toolType);
 
             //Flyout
-            this.FillBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowFill?.Invoke(this, this.FillBrushButton);
-            this.StrokeBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStroke?.Invoke(this, this.StrokeBrushButton);
+            this.FillBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.FillBrushButton);
+            this.StrokeBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeColorFlyout?.Invoke(this, this.StrokeBrushButton);
             this.StrokeShowControl.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeFlyout?.Invoke(this.StrokeShowControl);
 
             this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);

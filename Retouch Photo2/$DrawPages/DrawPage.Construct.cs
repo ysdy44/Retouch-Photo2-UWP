@@ -325,7 +325,7 @@ namespace Retouch_Photo2
 
 
         //Fill
-        private void ShowFillColorFlyout(FrameworkElement page, FrameworkElement button)
+        private void ShowFillColorFlyout2(FrameworkElement page, FrameworkElement button)
         {
             switch (this.SelectionViewModel.Fill.Type)
             {
@@ -367,7 +367,7 @@ namespace Retouch_Photo2
         }
 
         //Stroke
-        private void ShowStrokeColorFlyout(FrameworkElement page, FrameworkElement button)
+        private void ShowStrokeColorFlyout2(FrameworkElement page, FrameworkElement button)
         {
             switch (this.SelectionViewModel.Stroke.Type)
             {
@@ -392,7 +392,7 @@ namespace Retouch_Photo2
             //@Focus
             // Before Flyout Showed, Don't let TextBox Got Focus.
             // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
-            if (this.FilColorPicker.HexPicker is TextBox textBox)
+            if (this.StrokeColorPicker.HexPicker is TextBox textBox)
             {
                 textBox.IsEnabled = false;
                 this.StrokeColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
@@ -401,11 +401,11 @@ namespace Retouch_Photo2
                 textBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             }
 
-            this.FilColorPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodStrokeColorChanged(value);
+            this.StrokeColorPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodStrokeColorChanged(value);
 
-            this.FilColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeStarted(value);
-            this.FilColorPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.MethodStrokeColorChangeDelta(value);
-            this.FilColorPicker.ColorChangeCompleted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeCompleted(value);
+            this.StrokeColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeStarted(value);
+            this.StrokeColorPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.MethodStrokeColorChangeDelta(value);
+            this.StrokeColorPicker.ColorChangeCompleted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeCompleted(value);
         }
 
 

@@ -202,8 +202,11 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
-        ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
         FillOrStroke FillOrStroke { get => this.SelectionViewModel.FillOrStroke; set => this.SelectionViewModel.FillOrStroke = value; }
+
+
+        //@Converter
+        public Visibility FillOrStrokeToVisibilityConverter(FillOrStroke fillOrStroke) => fillOrStroke == FillOrStroke.Stroke ? Visibility.Visible : Visibility.Collapsed;
 
 
         //@Content 
@@ -221,6 +224,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructStrings();
 
             this.ConstructShowControl();
+            this.StrokeShowControl.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeFlyout?.Invoke(this.StrokeShowControl);
 
             //FillOrStroke
             this.FillOrStrokeComboBox.FillOrStrokeChanged += (s, fillOrStroke) =>

@@ -165,7 +165,7 @@ namespace Retouch_Photo2.Tools.Models
                 case BrushType.None: break;
 
                 case BrushType.Color:
-                    Retouch_Photo2.DrawPage.ShowFill?.Invoke(this, this.BrushShowControl);
+                    Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.BrushShowControl);
                     break;
 
                 case BrushType.LinearGradient:

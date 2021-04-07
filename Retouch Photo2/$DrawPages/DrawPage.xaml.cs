@@ -61,10 +61,10 @@ namespace Retouch_Photo2
         /// <summary> Show <see cref="GalleryDialog"/> </summary>
         public static Func<Task<Photo>> ShowGalleryFunc;
 
-        /// <summary> Show <see cref="FillFlyout"/> </summary>
-        public static Action<FrameworkElement, FrameworkElement> ShowFill;
-        /// <summary> Show <see cref="StrokeFlyout"/> </summary>
-        public static Action<FrameworkElement, FrameworkElement> ShowStroke;
+        /// <summary> Show <see cref="FillColorFlyout"/> </summary>
+        public static Action<FrameworkElement, FrameworkElement> ShowFillColorFlyout; 
+        /// <summary> Show <see cref="StrokeColorFlyout"/> </summary>
+        public static Action<FrameworkElement, FrameworkElement> ShowStrokeColorFlyout; 
 
         /// <summary> Show <see cref="MoreTransformFlyout"/> </summary>
         public static Action<FrameworkElement, FrameworkElement> ShowMoreTransform;
@@ -150,8 +150,8 @@ namespace Retouch_Photo2
             Photo.ItemClick += this.PhotoItemClick;
 
             //Flyout
-            DrawPage.ShowFill = this.ShowFillColorFlyout;
-            DrawPage.ShowStroke = this.ShowStrokeColorFlyout;
+            DrawPage.ShowFillColorFlyout = this.ShowFillColorFlyout2;
+            DrawPage.ShowStrokeColorFlyout = this.ShowStrokeColorFlyout2;
             //More
             DrawPage.ShowMoreTransform = this.ShowMoreTransformFlyout;
             DrawPage.ShowMoreCreate = this.ShowMoreCreateFlyout;
@@ -194,8 +194,8 @@ namespace Retouch_Photo2
             Photo.ItemClick -= this.PhotoItemClick;
 
             //Flyout
-            DrawPage.ShowFill = null;
-            DrawPage.ShowStroke = null;
+            DrawPage.ShowFillColorFlyout = null;
+            DrawPage.ShowStrokeColorFlyout = null;
             //More
             DrawPage.ShowMoreTransform = null;
             DrawPage.ShowMoreCreate = null;
