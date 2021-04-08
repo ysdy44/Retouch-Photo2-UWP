@@ -163,7 +163,6 @@ namespace Retouch_Photo2
         private async void Document()
         {
             this.LoadingControl.State = LoadingState.Saving;
-            this.LoadingControl.IsActive = true;
 
             await this.Save();
 
@@ -172,7 +171,6 @@ namespace Retouch_Photo2
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
 
             this.LoadingControl.State = LoadingState.None;
-            this.LoadingControl.IsActive = false;
             this.Frame.GoBack();
         }
 
@@ -182,14 +180,12 @@ namespace Retouch_Photo2
         private async void DocumentUnSave()
         {
             this.LoadingControl.State = LoadingState.Saving;
-            this.LoadingControl.IsActive = true;
 
             await this.Exit();
             this.DrawLayout.IsFullScreen = true;
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
             this.LoadingControl.State = LoadingState.None;
-            this.LoadingControl.IsActive = false;
             this.Frame.GoBack();
         }
 

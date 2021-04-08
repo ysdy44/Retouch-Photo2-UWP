@@ -4,26 +4,36 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Visibility="Collapsed"
     d:DesignHeight="400"
     d:DesignWidth="400"
     mc:Ignorable="d"
     >
 
-    <!--Root-->
-    <Border Background="Transparent">
+    <!--Dismiss-->
+    <Border Background="Transparent" Visibility="{x:Bind VisibilityConverter(State), Mode=OneWay}">
 
         <!--Root-->
         <Border CornerRadius="3" Width="140" Height="120" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <ContentControl Height="6"/>
-                <ProgressRing x:Name="ProgressRing" Width="40" Height="40" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}"
-                              IsActive="{x:Bind IsActive, Mode=OneWay}"/>
-                <ContentControl Height="6"/>
-                <TextBlock x:Name="TextBlock" HorizontalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
-            </StackPanel>
+            <Grid Padding="6" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="6"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <ProgressRing x:Name="ProgressRing" Width="34" Height="34" Foreground="{ThemeResource AppText}"
+                           IsActive="{x:Bind ProgressBooleanConverter(State), Mode=OneWay}"
+                           Visibility="{x:Bind ProgressVisibilityConverter(State), Mode=OneWay}"/>
+                <FontIcon x:Name="CorrectIcon" Glyph="&#xEC61;" FontSize="32" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"
+                           Visibility="{x:Bind CorrectVisibilityConverter(State), Mode=OneWay}"/>
+                <FontIcon x:Name="ErrorIcon" Glyph="&#xEB90;" FontSize="32" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"
+                           Visibility="{x:Bind ErrorVisibilityConverter(State), Mode=OneWay}"/>
+
+                <TextBlock x:Name="TextBlock" Grid.Row="2" HorizontalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"
+                            Text="{x:Bind StringsConverter(State), Mode=OneWay}"/>
+                
+            </Grid>
         </Border>
 
     </Border>
-
 </UserControl>

@@ -238,7 +238,7 @@
 
 
         <!--Loading-->
-        <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3" IsActive="False"/>
+        <elements:LoadingControl x:Name="LoadingControl" Grid.RowSpan="3"/>
 
         <!--Dialog-->
         <elements:Dialog x:Name="RenameDialog" Grid.Row="1" Grid.RowSpan="2">

@@ -188,12 +188,10 @@ namespace Retouch_Photo2
             this.RenameDialog.PrimaryButtonClick += async (s, e) =>
             {
                 this.LoadingControl.State = LoadingState.Loading;
-                this.LoadingControl.IsActive = true;
 
                 await this.RenameProjectViewItem(this._rename, this.TextBox.Text);
 
                 this.LoadingControl.State = LoadingState.None;
-                this.LoadingControl.IsActive = false;
             };
         }
         private void ShowRenameDialog(IProjectViewItem item)
@@ -223,12 +221,10 @@ namespace Retouch_Photo2
             this.DeletePrimaryButton.Click += async (s, e) =>
             {
                 this.LoadingControl.State = LoadingState.Loading;
-                this.LoadingControl.IsActive = true;
 
                 await this.DeleteProjectViewItems(this.SelectedItems);
 
                 this.LoadingControl.State = LoadingState.None;
-                this.LoadingControl.IsActive = false;
 
                 if (this.Items.Count == 0)
                     this.MainLayout.State = MainPageState.Initial;
@@ -246,12 +242,10 @@ namespace Retouch_Photo2
             this.DuplicatePrimaryButton.Click += async (s, e) =>
             {
                 this.LoadingControl.State = LoadingState.Loading;
-                this.LoadingControl.IsActive = true;
 
                 await this.DuplicateProjectViewItems(this.SelectedItems);
 
                 this.LoadingControl.State = LoadingState.None;
-                this.LoadingControl.IsActive = false;
 
                 this.MainLayout.State = MainPageState.Main;
             };

@@ -146,7 +146,6 @@ namespace Retouch_Photo2
                 this.ExportDialog.Hide();
 
                 this.LoadingControl.State = LoadingState.Saving;
-                this.LoadingControl.IsActive = true;
 
                 bool isSuccesful = await this.Export();
 
@@ -154,7 +153,6 @@ namespace Retouch_Photo2
                 await Task.Delay(400);
 
                 this.LoadingControl.State = LoadingState.None;
-                this.LoadingControl.IsActive = false;
             };
         }
         private void ShowExportDialog()
