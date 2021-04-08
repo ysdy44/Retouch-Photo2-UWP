@@ -80,12 +80,15 @@ namespace Retouch_Photo2.Blends
 
             foreach (UIElement child in this.StackPanel.Children)
             {
-                if (child is Button button)
+                if (child is ListViewItem item)
                 {
-                    string key = button.Name;
-                    string title = resource.GetString($"Blends_{key}");
+                    if (item.Content is ContentControl control)
+                    {
+                        string key = control.Name;
+                        string title = resource.GetString($"Blends_{key}");
 
-                    button.Content = title;
+                        control.Content = title;
+                    }
                 }
             }
         }
@@ -96,34 +99,37 @@ namespace Retouch_Photo2.Blends
         {
             foreach (UIElement child in this.StackPanel.Children)
             {
-                if (child is Button button)
+                if (child is ListViewItem item)
                 {
-                    string key = button.Name;
-                    BlendEffectMode? mode = null;
-                    try
+                    if (item.Content is ContentControl control)
                     {
-                        mode = (BlendEffectMode)Enum.Parse(typeof(BlendEffectMode), key);
-                    }
-                    catch (Exception) { }
-
-
-                    //Button
-                    button.Click += (s, e) => this.ModeChanged?.Invoke(this, mode);//Delegate
-
-
-                    //Group
-                    group(this.Mode);
-                    this.Group += (s, groupMode) => group(groupMode);
-
-                    void group(BlendEffectMode? groupMode)
-                    {
-                        if (groupMode == mode)
+                        string key = control.Name;
+                        BlendEffectMode? mode = null;
+                        try
                         {
-                            button.IsEnabled = false;
-
-                            this.Button.Content = button.Content as string;
+                            mode = (BlendEffectMode)Enum.Parse(typeof(BlendEffectMode), key);
                         }
-                        else button.IsEnabled = true;
+                        catch (Exception) { }
+
+
+                        //Button
+                        item.Tapped += (s, e) => this.ModeChanged?.Invoke(this, mode);//Delegate
+
+
+                        //Group
+                        group(this.Mode);
+                        this.Group += (s, groupMode) => group(groupMode);
+
+                        void group(BlendEffectMode? groupMode)
+                        {
+                            if (groupMode == mode)
+                            {
+                                item.IsSelected = true;
+
+                                this.Button.Content = control.Content as string;
+                            }
+                            else item.IsSelected = false;
+                        }
                     }
                 }
             }

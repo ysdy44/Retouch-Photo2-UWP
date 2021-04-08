@@ -21,21 +21,13 @@
         <Flyout x:Name="AdjustmentPageFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ListView x:Name="AdjustmentPageListView" SelectionMode="None" IsItemClickEnabled="True">
 
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="Height" Value="Auto" />
-                        <Setter Property="Padding" Value="0" />
-                        <Setter Property="Margin" Value="0" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="adjustments:IAdjustmentPage">
-                        <Button IsHitTestVisible="False" Content="{x:Bind Title}" Style="{StaticResource AppIconButton}">
-                            <Button.Tag>
+                        <ContentControl Content="{x:Bind Title}" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
                                 <ContentControl Template="{x:Bind Icon}"/>
-                            </Button.Tag>
-                        </Button>
+                            </ContentControl.Tag>
+                        </ContentControl>
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
@@ -54,13 +46,11 @@
 
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
-                        <Setter Property="Margin" Value="2" />
-                        <Setter Property="Padding" Value="8,0" />
-                        <Setter Property="FontWeight" Value="Normal" />
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        <Setter Property="VerticalContentAlignment" Value="Center" />
-                        <Setter Property="HorizontalAlignment" Value="Stretch" />
-                        <Setter Property="VerticalAlignment" Value="Stretch" />
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="BorderThickness" Value="0,1,0,0"/>
+                        <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
                     </Style>
                 </ListView.ItemContainerStyle>
 
@@ -76,11 +66,7 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="filters:Filter">
-                        <Button IsHitTestVisible="False" Content="{x:Bind Name}" Style="{StaticResource AppIconButton}">
-                            <Button.Tag>
-                                <FontIcon Glyph="&#xE9E9;" FontFamily="Segoe MDL2 Assets"/>
-                            </Button.Tag>
-                        </Button>
+                        <TextBlock Text="{x:Bind Name}" Style="{StaticResource AppTabTextBlockStyle}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
@@ -90,30 +76,29 @@
         <!--DataTemplate-->
         <DataTemplate x:Key="DataTemplate" x:DataType="adjustments:IAdjustment">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
 
-                <!--Icon-->
-                <ContentControl Template="{x:Bind Icon}"/>
+                <ContentControl Content="{x:Bind Title}" Style="{StaticResource AppIconContentControlStyle}">
+                    <ContentControl.Tag>
+                        <ContentControl Template="{x:Bind Icon}"/>
+                    </ContentControl.Tag>
+                </ContentControl>
+                
+                
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 
-                <!--Text-->
-                <TextBlock Grid.Column="1" Text="{x:Bind Title}" Style="{StaticResource AppTextBlockStyle}"/>
-
-                <!--Edit-->
-                <Button x:Name="EditButton" Grid.Column="2" Style="{StaticResource AppRoundedButtonStyle}"
+                    <!--Edit-->
+                    <Button x:Name="EditButton" Style="{StaticResource AppRoundedButtonStyle}"
                                    Visibility="{x:Bind PageVisibility}" Command="{x:Bind Edit}">
-                    <FontIcon FontSize="16" Glyph="&#xE104;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
-                </Button>
+                        <FontIcon FontSize="16" Glyph="&#xE104;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                    </Button>
 
-                <!--Remove-->
-                <Button x:Name="RemoveButton" Grid.Column="3" Style="{StaticResource AppRoundedButtonStyle}"
+                    <!--Remove-->
+                    <Button x:Name="RemoveButton" Style="{StaticResource AppRoundedButtonStyle}"
                            Command="{x:Bind Remove}">
-                    <FontIcon FontSize="14" Glyph="&#xE8BB;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
-                </Button>
+                        <FontIcon FontSize="14" Glyph="&#xE8BB;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                    </Button>
+                    
+                </StackPanel>
 
             </Grid>
         </DataTemplate>

@@ -96,7 +96,13 @@
 
             </ResourceDictionary.ThemeDictionaries>
 
-            
+
+            <!--StaticResource-->
+            <StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="SystemControlBackgroundAccentBrush"/>
+            <StaticResource x:Key="ListViewItemBackgroundSelectedPointerOver" ResourceKey="SystemControlBackgroundAccentBrush"/>
+            <StaticResource x:Key="ListViewItemBackgroundSelectedPressed" ResourceKey="SystemControlBackgroundAccentBrush"/>
+
+
             <!--Merged-->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Style/Brush.xaml"/>

@@ -15,117 +15,139 @@
             <ScrollViewer  Style="{StaticResource AppVerticalScrollViewerStyle}">
                 <StackPanel Padding="{StaticResource AppPanelPadding}" HorizontalAlignment="Stretch">
 
-                    <Button x:Name="Black" Style="{StaticResource AppIconSelectedButton}">
-                        <Button.Tag>
-                            <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    900
-                                </TextBlock>
-                            </Border>
-                        </Button.Tag>
-                    </Button>
-                    <Button x:Name="Bold" Style="{StaticResource AppIconSelectedButton}">
-                        <Button.Tag>
-                            <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    700
-                                </TextBlock>
-                            </Border>
-                        </Button.Tag>
-                    </Button>
+                    <ListViewItem x:Name="BlackItem">
+                        <ContentControl x:Name="Black" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        900
+                                    </TextBlock>
+                                </Border>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="BoldItem">
+                        <ContentControl x:Name="Bold" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        700
+                                    </TextBlock>
+                                </Border>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
 
                     <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                    <Button x:Name="ExtraBlack" Style="{StaticResource AppIconSelectedButton}">
-                        <Button.Tag>
-                            <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    950
-                                </TextBlock>
-                            </Border>
-                        </Button.Tag>
-                    </Button>
-                    <Button x:Name="ExtraBold" Style="{StaticResource AppIconSelectedButton}">
-                        <Button.Tag>
-                            <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    800
-                                </TextBlock>
-                            </Border>
-                        </Button.Tag>
-                    </Button>
-                    <Button x:Name="ExtraLight" Style="{StaticResource AppIconSelectedButton}">
-                        <Button.Tag>
-                            <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    200
-                                </TextBlock>
-                            </Border>
-                        </Button.Tag>
-                    </Button>
+                    <ListViewItem x:Name="ExtraBlackItem">
+                        <ContentControl x:Name="ExtraBlack" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        950
+                                    </TextBlock>
+                                </Border>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ExtraBoldItem">
+                        <ContentControl x:Name="ExtraBold" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        800
+                                    </TextBlock>
+                                </Border>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ExtraLightItem">
+                        <ContentControl x:Name="ExtraLight" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        200
+                                    </TextBlock>
+                                </Border>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
 
                     <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                    <Button x:Name="Light" Style="{StaticResource AppIconSelectedButton}">
-                        <Button.Tag>
-                            <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    300
-                                </TextBlock>
-                            </Border>
-                        </Button.Tag>
-                    </Button>
-                    <Button x:Name="Medium" Style="{StaticResource AppIconSelectedButton}">
-                        <Button.Tag>
-                            <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    500
-                                </TextBlock>
-                            </Border>
-                        </Button.Tag>
-                    </Button>
-                    <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}">
-                        <Button.Tag>
-                            <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    400
-                                </TextBlock>
-                            </Border>
-                        </Button.Tag>
-                    </Button>
+                    <ListViewItem x:Name="LightItem">
+                        <ContentControl x:Name="Light" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        300
+                                    </TextBlock>
+                                </Border>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="MediumItem">
+                        <ContentControl x:Name="Medium" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        500
+                                    </TextBlock>
+                                </Border>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="NoneItem">
+                        <ContentControl x:Name="None" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        400
+                                    </TextBlock>
+                                </Border>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
 
                     <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                    <Button x:Name="SemiBold" Style="{StaticResource AppIconSelectedButton}">
-                        <Button.Tag>
-                            <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    600
-                                </TextBlock>
-                            </Border>
-                        </Button.Tag>
-                    </Button>
-                    <Button x:Name="SemiLight" Style="{StaticResource AppIconSelectedButton}">
-                        <Button.Tag>
-                            <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    350
-                                </TextBlock>
-                            </Border>
-                        </Button.Tag>
-                    </Button>
+                    <ListViewItem x:Name="SemiBoldItem">
+                        <ContentControl x:Name="SemiBold" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        600
+                                    </TextBlock>
+                                </Border>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="SemiLightItem">
+                        <ContentControl x:Name="SemiLight" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        350
+                                    </TextBlock>
+                                </Border>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
 
                     <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                    <Button x:Name="Thin" Style="{StaticResource AppIconSelectedButton}">
-                        <Button.Tag>
-                            <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    100
-                                </TextBlock>
-                            </Border>
-                        </Button.Tag>
-                    </Button>
+                    <ListViewItem x:Name="ThinItem">
+                        <ContentControl x:Name="Thin" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <Border CornerRadius="2" Padding="2,0" Background="Black">
+                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        100
+                                    </TextBlock>
+                                </Border>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
 
                 </StackPanel>
             </ScrollViewer>
@@ -145,14 +167,14 @@
                 <!--Black-->
                 <VisualState x:Name="BlackState">
                     <VisualState.Setters>
-                        <Setter Target = "Black.IsEnabled" Value="False"/>
+                        <Setter Target = "BlackItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind Black.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--Bold-->
                 <VisualState x:Name="BoldState">
                     <VisualState.Setters>
-                        <Setter Target = "Bold.IsEnabled" Value="False"/>
+                        <Setter Target = "BoldItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind Bold.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -160,21 +182,21 @@
                 <!--ExtraBlack-->
                 <VisualState x:Name="ExtraBlackState">
                     <VisualState.Setters>
-                        <Setter Target = "ExtraBlack.IsEnabled" Value="False"/>
+                        <Setter Target = "ExtraBlackItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind ExtraBlack.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--ExtraBold-->
                 <VisualState x:Name="ExtraBoldState">
                     <VisualState.Setters>
-                        <Setter Target = "ExtraBold.IsEnabled" Value="False"/>
+                        <Setter Target = "ExtraBoldItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind ExtraBold.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--ExtraLight-->
                 <VisualState x:Name="ExtraLightState">
                     <VisualState.Setters>
-                        <Setter Target = "ExtraLight.IsEnabled" Value="False"/>
+                        <Setter Target = "ExtraLight.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind ExtraLight.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -182,21 +204,21 @@
                 <!--Light-->
                 <VisualState x:Name="LightState">
                     <VisualState.Setters>
-                        <Setter Target = "Light.IsEnabled" Value="False"/>
+                        <Setter Target = "LightItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind Light.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--Medium-->
                 <VisualState x:Name="MediumState">
                     <VisualState.Setters>
-                        <Setter Target = "Medium.IsEnabled" Value="False"/>
+                        <Setter Target = "MediumItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind Medium.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--None-->
                 <VisualState x:Name="NoneState">
                     <VisualState.Setters>
-                        <Setter Target = "None.IsEnabled" Value="False"/>
+                        <Setter Target = "NoneItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind None.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -204,14 +226,14 @@
                 <!--SemiBold-->
                 <VisualState x:Name="SemiBoldState">
                     <VisualState.Setters>
-                        <Setter Target = "SemiBold.IsEnabled" Value="False"/>
+                        <Setter Target = "SemiBoldItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind SemiBold.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--SemiLight-->
                 <VisualState x:Name="SemiLightState">
                     <VisualState.Setters>
-                        <Setter Target = "SemiLight.IsEnabled" Value="False"/>
+                        <Setter Target = "SemiLightItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind SemiLight.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -219,7 +241,7 @@
                 <!--Thin-->
                 <VisualState x:Name="ThinState">
                     <VisualState.Setters>
-                        <Setter Target = "Thin.IsEnabled" Value="False"/>
+                        <Setter Target = "ThinItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind Thin.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
