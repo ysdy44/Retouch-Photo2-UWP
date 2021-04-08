@@ -72,6 +72,8 @@ namespace Retouch_Photo2
 
         private void ConstructCanvasOperator()
         {
+            this.ToolDrawCanvasControl.PointerExited += (s, e) => this.TipViewModel.Cursor_PointerEntered_None();
+            this.ToolDrawCanvasControl.PointerCanceled += (s, e) => this.TipViewModel.Cursor_PointerEntered_None();
             this.ToolDrawCanvasControl.PointerMoved += (s, e) =>
             {
                 this.TipViewModel.pointerDeviceType = e.Pointer.PointerDeviceType;
