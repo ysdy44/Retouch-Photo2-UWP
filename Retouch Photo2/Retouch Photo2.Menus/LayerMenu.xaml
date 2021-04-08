@@ -46,19 +46,24 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="Opacity0Button" Grid.Column="0" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
+                <Button x:Name="Opacity0Button" Grid.Column="0" Padding="0" Style="{StaticResource AppRoundedButtonStyle}"
+                           IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" >
                     0%
                 </Button>
-                <Button x:Name="Opacity25Button" Grid.Column="1" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
+                <Button x:Name="Opacity25Button" Grid.Column="1" Padding="0" Style="{StaticResource AppRoundedButtonStyle}"
+                           IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" >
                     25%
                 </Button>
-                <Button x:Name="Opacity50Button" Grid.Column="2" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
+                <Button x:Name="Opacity50Button" Grid.Column="2" Padding="0" Style="{StaticResource AppRoundedButtonStyle}"
+                           IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" >
                     50%
                 </Button>
-                <Button x:Name="Opacity75Button" Grid.Column="3" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
+                <Button x:Name="Opacity75Button" Grid.Column="3" Padding="0" Style="{StaticResource AppRoundedButtonStyle}"
+                           IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" >
                     75%
                 </Button>
-                <Button x:Name="Opacity100Button" Grid.Column="4" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
+                <Button x:Name="Opacity100Button" Grid.Column="4" Padding="0" Style="{StaticResource AppRoundedButtonStyle}"
+                           IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" >
                     100%
                 </Button>
             </Grid>
@@ -90,9 +95,9 @@
 
             <!--Adjustments-->
             <TextBlock x:Name="AdjustmentsTextBlock" Style="{StaticResource AppTextBlockStyle}">
-            Adjustments
+                Adjustments
             </TextBlock>
-            <Border Style="{StaticResource AppRoundedBorderStyle}">
+            <Border Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
                 <ItemsControl ItemsSource="{x:Bind SelectionViewModel.Filter.Adjustments, Mode=OneWay}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -110,7 +115,9 @@
 
             <!--Tag Type-->
             <TextBlock x:Name="TagTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <blends:TagTypeSegmented x:Name="TagTypeSegmented" Type="{x:Bind SelectionViewModel.TagType, Mode=OneWay}" />
+            <blends:TagTypeSegmented x:Name="TagTypeSegmented" 
+                                     Type="{x:Bind SelectionViewModel.TagType, Mode=OneWay}" 
+                                     IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" />
 
 
         </StackPanel>
