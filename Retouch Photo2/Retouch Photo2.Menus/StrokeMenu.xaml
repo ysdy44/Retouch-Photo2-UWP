@@ -12,64 +12,67 @@
     d:DesignHeight="400"
     >
 
-    <StackPanel MinHeight="165" Padding="2,2">
 
-        <!--Dash-->
-        <TextBlock x:Name="DashTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <strokes:DashSegmented x:Name="DashSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}"
+    <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
+        <StackPanel MinHeight="165" Padding="2,2">
+
+            <!--Dash-->
+            <TextBlock x:Name="DashTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <strokes:DashSegmented x:Name="DashSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}"
                          Dash="{x:Bind SelectionViewModel.StrokeStyle_Dash, Mode=OneWay}"/>
 
 
-        <!--Width-->
-        <RelativePanel>
-            <TextBlock x:Name="WidthTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="WidthPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+            <!--Width-->
+            <RelativePanel>
+                <TextBlock x:Name="WidthTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <hsvColorPickers:NumberPicker x:Name="WidthPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                            RelativePanel.AlignRightWithPanel="True"
                            Value="{x:Bind StrokeWidthToNumberConverter(SelectionViewModel.StrokeWidth), Mode=OneWay}"/>
-        </RelativePanel>
-        <elements:SliderPicker x:Name="WidthSlider"
+            </RelativePanel>
+            <elements:SliderPicker x:Name="WidthSlider"
                          Value="{x:Bind SelectionViewModel.StrokeWidth, Mode=OneWay}"/>
 
 
-        <!--Cap-->
-        <TextBlock x:Name="CapTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <strokes:CapSegmented x:Name="CapSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}"
+            <!--Cap-->
+            <TextBlock x:Name="CapTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <strokes:CapSegmented x:Name="CapSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}"
                          Cap="{x:Bind SelectionViewModel.StrokeStyle_Cap, Mode=OneWay}"/>
 
 
-        <!--Join-->
-        <TextBlock x:Name="JoinTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <strokes:JoinSegmented x:Name="JoinSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}"
+            <!--Join-->
+            <TextBlock x:Name="JoinTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <strokes:JoinSegmented x:Name="JoinSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}"
                          Join="{x:Bind SelectionViewModel.StrokeStyle_Join, Mode=OneWay}"/>
 
 
-        <!--Offset-->
-        <RelativePanel>
-            <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="OffsetPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+            <!--Offset-->
+            <RelativePanel>
+                <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <hsvColorPickers:NumberPicker x:Name="OffsetPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                            RelativePanel.AlignRightWithPanel="True"
                            Value="{x:Bind StyleOffsetToNumberConverter(SelectionViewModel.StrokeStyle_Offset), Mode=OneWay}"/>
-        </RelativePanel>
-        <elements:SliderPicker x:Name="OffsetSlider"
+            </RelativePanel>
+            <elements:SliderPicker x:Name="OffsetSlider"
                         Value="{x:Bind SelectionViewModel.StrokeStyle_Offset, Mode=OneWay}"/>
 
 
-        <!--IsFollowTransform-->
-        <elements:CheckControl x:Name="IsFollowTransformCheckBox" Margin="4,0" Foreground="{ThemeResource AppText}"
+            <!--IsFollowTransform-->
+            <elements:CheckControl x:Name="IsFollowTransformCheckBox" Margin="4,0" Foreground="{ThemeResource AppText}"
                   IsChecked="{x:Bind SelectionViewModel.IsFollowTransform, Mode=OneWay}" />
 
 
-        <!--IsStrokeBehindFill-->
-        <elements:CheckControl x:Name="IsStrokeBehindFillCheckBox" Margin="4,0" Foreground="{ThemeResource AppText}"
+            <!--IsStrokeBehindFill-->
+            <elements:CheckControl x:Name="IsStrokeBehindFillCheckBox" Margin="4,0" Foreground="{ThemeResource AppText}"
                   IsChecked="{x:Bind SelectionViewModel.IsStrokeBehindFill, Mode=OneWay}" />
-        
 
-        <!--IsStrokeWidthFollowScale-->
-        <elements:CheckControl x:Name="IsStrokeWidthFollowScaleCheckBox" Margin="4,0" Foreground="{ThemeResource AppText}"
+
+            <!--IsStrokeWidthFollowScale-->
+            <elements:CheckControl x:Name="IsStrokeWidthFollowScaleCheckBox" Margin="4,0" Foreground="{ThemeResource AppText}"
                   IsChecked="{x:Bind SelectionViewModel.IsStrokeWidthFollowScale, Mode=OneWay}" />
 
 
-        <ContentControl Height="2"/>
+            <ContentControl Height="2"/>
+        </StackPanel>
+    </ScrollViewer>
 
-    </StackPanel>
 </UserControl>

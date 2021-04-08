@@ -8,8 +8,8 @@
     d:DesignWidth="200"
     d:DesignHeight="400"
     >
-    
-    
+
+
     <UserControl.Resources>
         <!--Style-->
         <Style x:Name="SeparatorRectangle" TargetType="Rectangle" BasedOn="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
@@ -21,7 +21,7 @@
         </Style>
     </UserControl.Resources>
 
-    
+
     <SplitView x:Name="SplitView"
                DisplayMode="Inline" 
                OpenPaneLength="200" 
@@ -29,29 +29,33 @@
                IsPaneOpen="True"
                PaneBackground="Transparent"
                >
-        
+
         <SplitView.Pane>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="30"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel x:Name="ButtonsStackPanel" >
-                    <!--Effects-->
-                </StackPanel>
-                <StackPanel x:Name="ChecksStackPanel" Grid.Column="1">
-                    <!--Effects-->
-                </StackPanel>
-            </Grid>
+            <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel x:Name="ButtonsStackPanel" >
+                        <!--Effects-->
+                    </StackPanel>
+                    <StackPanel x:Name="ChecksStackPanel" Grid.Column="1">
+                        <!--Effects-->
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
         </SplitView.Pane>
-        
+
         <SplitView.Content>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
-                <ContentPresenter x:Name="ContentPresenter" VerticalAlignment="Top"/>
+                <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
+                    <ContentPresenter x:Name="ContentPresenter" VerticalAlignment="Top"/>
+                </ScrollViewer>
                 <Button x:Name="CloseButton" Grid.Row="2" Style="{StaticResource AppRoundedButtonStyle}"/>
             </Grid>
         </SplitView.Content>

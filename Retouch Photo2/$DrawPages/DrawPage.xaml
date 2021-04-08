@@ -128,7 +128,7 @@
 
             <!--RightPane-->
             <elements:DrawLayout.RightPanel>
-                <ScrollViewer x:Name="LayersScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                <ScrollViewer x:Name="LayersScrollViewer" Style="{StaticResource AppVerticalScrollViewerStyle}">
                     <!--Layers-->
                 </ScrollViewer>
             </elements:DrawLayout.RightPanel>
@@ -216,7 +216,7 @@
                     <Button x:Name="OverflowButton" Grid.Column="2" Style="{StaticResource AppCircleButtonStyle}">
                         <Button.Flyout>
                             <Flyout x:Name="OverflowFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
+                                <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
                                     <StackPanel x:Name="OverflowStackPanel">
                                     <Button x:Name="OverflowExportButton" Foreground="Black" Background="#FFC003" Style="{StaticResource AppIconSelectedButton}">
                                         <Button.Tag>

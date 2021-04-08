@@ -4,111 +4,116 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hsvColorPickers="using:HSVColorPickers"
+    xmlns:adjustments="using:Retouch_Photo2.Adjustments"
     xmlns:blends="using:Retouch_Photo2.Blends"
     xmlns:elements="using:Retouch_Photo2.Elements"
-    xmlns:hsvColorPickers="using:HSVColorPickers" xmlns:adjustments="using:Retouch_Photo2.Adjustments"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
     >
 
-    <StackPanel MinHeight="165" Padding="2,2">
 
-        <!--Name-->
-        <TextBlock x:Name="NameTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="NameButton" Height="26" Width="Auto" MinWidth="100" MaxWidth="600" HorizontalAlignment="Stretch"
+    <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
+        <StackPanel MinHeight="165" Padding="2,2">
+
+            <!--Name-->
+            <TextBlock x:Name="NameTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <Button x:Name="NameButton" Height="26" Width="Auto" MinWidth="100" MaxWidth="600" HorizontalAlignment="Stretch"
                         Style="{StaticResource AppNumberButtonStyle}"
                         IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                         Content="{x:Bind SelectionViewModel.LayerName, Mode=OneWay}"/>
 
-               
-        <!--Opacity-->
-        <RelativePanel>
-            <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="OpacityPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+
+            <!--Opacity-->
+            <RelativePanel>
+                <TextBlock x:Name="OpacityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <hsvColorPickers:NumberPicker x:Name="OpacityPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                            RelativePanel.AlignRightWithPanel="True"
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                            Value="{x:Bind OpacityToNumberConverter(SelectionViewModel.Opacity), Mode=OneWay}"/>
-        </RelativePanel>
-        <Border>
-            <elements:SliderPicker x:Name="OpacitySlider"
+            </RelativePanel>
+            <Border>
+                <elements:SliderPicker x:Name="OpacitySlider"
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                            Value="{x:Bind SelectionViewModel.Opacity, Mode=OneWay}"/>
-        </Border>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="Opacity0Button" Grid.Column="0" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
-                0%
-            </Button>
-            <Button x:Name="Opacity25Button" Grid.Column="1" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
-                25%
-            </Button>
-            <Button x:Name="Opacity50Button" Grid.Column="2" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
-                50%
-            </Button>
-            <Button x:Name="Opacity75Button" Grid.Column="3" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
-                75%
-            </Button>
-            <Button x:Name="Opacity100Button" Grid.Column="4" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
-                100%
-            </Button>
-        </Grid>
-        
-        
-        <!--Blend Mode-->
-        <TextBlock x:Name="BlendModeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <blends:BlendModeComboBox x:Name="BlendModeComboBox"
+            </Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="Opacity0Button" Grid.Column="0" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
+                    0%
+                </Button>
+                <Button x:Name="Opacity25Button" Grid.Column="1" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
+                    25%
+                </Button>
+                <Button x:Name="Opacity50Button" Grid.Column="2" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
+                    50%
+                </Button>
+                <Button x:Name="Opacity75Button" Grid.Column="3" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
+                    75%
+                </Button>
+                <Button x:Name="Opacity100Button" Grid.Column="4" Padding="0" Style="{StaticResource AppRoundedButtonStyle}">
+                    100%
+                </Button>
+            </Grid>
+
+
+            <!--Blend Mode-->
+            <TextBlock x:Name="BlendModeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <blends:BlendModeComboBox x:Name="BlendModeComboBox"
                                   IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}"
                                   Mode="{x:Bind SelectionViewModel.BlendMode, Mode=OneWay}"
                                   />
 
 
-        <ContentControl Height="4"/>
+            <ContentControl Height="4"/>
 
 
-        <!--Visibility-->
-        <RelativePanel>
-            <TextBlock x:Name="VisibilityTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
-            <ToggleButton x:Name="VisibilityButton" RelativePanel.AlignRightWithPanel="True"
+            <!--Visibility-->
+            <RelativePanel>
+                <TextBlock x:Name="VisibilityTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+                <ToggleButton x:Name="VisibilityButton" RelativePanel.AlignRightWithPanel="True"
                                Style="{StaticResource AppCircleToggleButtonStyle}"
                                IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                                IsChecked="{x:Bind VisibilityToBoolConverter(ViewModel.Visibility), Mode=OneWay}" >
-                <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"
+                    <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"
                           MirroredWhenRightToLeft="True" />
-            </ToggleButton>
-        </RelativePanel>
+                </ToggleButton>
+            </RelativePanel>
 
-        
-        <!--Adjustments-->
-        <TextBlock x:Name="AdjustmentsTextBlock" Style="{StaticResource AppTextBlockStyle}">
+
+            <!--Adjustments-->
+            <TextBlock x:Name="AdjustmentsTextBlock" Style="{StaticResource AppTextBlockStyle}">
             Adjustments
-        </TextBlock>
-        <Border Style="{StaticResource AppRoundedBorderStyle}">
-            <ItemsControl ItemsSource="{x:Bind SelectionViewModel.Filter.Adjustments, Mode=OneWay}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsStackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="adjustments:IAdjustment">
-                        <ContentControl Width="30" Template="{x:Bind Icon}"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </Border>
-        
+            </TextBlock>
+            <Border Style="{StaticResource AppRoundedBorderStyle}">
+                <ItemsControl ItemsSource="{x:Bind SelectionViewModel.Filter.Adjustments, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="adjustments:IAdjustment">
+                            <ContentControl Width="30" Template="{x:Bind Icon}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Border>
 
-        <!--Tag Type-->
-        <TextBlock x:Name="TagTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <blends:TagTypeSegmented x:Name="TagTypeSegmented" Type="{x:Bind SelectionViewModel.TagType, Mode=OneWay}" />
 
-        
-    </StackPanel>
+            <!--Tag Type-->
+            <TextBlock x:Name="TagTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <blends:TagTypeSegmented x:Name="TagTypeSegmented" Type="{x:Bind SelectionViewModel.TagType, Mode=OneWay}" />
+
+
+        </StackPanel>
+    </ScrollViewer>
+
 </UserControl>

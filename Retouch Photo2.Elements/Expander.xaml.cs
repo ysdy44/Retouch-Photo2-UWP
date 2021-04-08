@@ -279,8 +279,8 @@ namespace Retouch_Photo2.Elements
                 this.PinStackPanel.Children.Remove(this);
             }
             this.Flyout.Content = this;
-            this.MaxWidth = double.PositiveInfinity;
-            this.MaxHeight = double.PositiveInfinity;
+            base.MaxWidth = double.PositiveInfinity;
+            base.MaxHeight = double.PositiveInfinity;
 
 
             this._vsIsOverlay = false;
@@ -305,8 +305,8 @@ namespace Retouch_Photo2.Elements
                 this.PinStackPanel.Children.Remove(this);
             }
             this.OverlayCanvas.Children.Add(this);
-            this.MaxWidth = this.OverlayCanvas.ActualWidth;
-            this.MaxHeight = this.OverlayCanvas.ActualHeight;
+            base.MaxWidth = this.OverlayCanvas.ActualWidth;
+            base.MaxHeight = this.OverlayCanvas.ActualHeight;
 
 
             this._vsIsOverlay = true;
@@ -323,8 +323,8 @@ namespace Retouch_Photo2.Elements
                 this.PinStackPanel.Children.Remove(this);
             }
             this.PinStackPanel.Children.Add(this);
-            this.MaxWidth = double.PositiveInfinity;
-            this.MaxHeight = double.PositiveInfinity;
+            base.MaxWidth = double.PositiveInfinity;
+            base.MaxHeight = double.PositiveInfinity;
 
 
             this._vsIsOverlay = false;
@@ -362,8 +362,13 @@ namespace Retouch_Photo2.Elements
 
         private void MoveToTop()
         {
-            if (this.Parent is Canvas canvas)
+            if (base.Parent == null) return;
+
+            if (this.OverlayCanvas is Canvas canvas)
             {
+                base.MaxWidth = canvas.ActualWidth;
+                base.MaxHeight = canvas.ActualHeight;
+
                 if (canvas.Children.Contains(this))
                 {
                     int max = 0;

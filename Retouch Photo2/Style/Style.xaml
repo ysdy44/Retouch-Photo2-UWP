@@ -15,6 +15,11 @@
         <Setter Property="VerticalScrollMode" Value="Disabled"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
     </Style>
+    <Style x:Key="AppVerticalScrollViewerStyle" TargetType="ScrollViewer">
+        <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+    </Style>
+
 
     <!--ToolTip-->
     <Style x:Key="AppToolTipStyle" TargetType="ToolTip">
