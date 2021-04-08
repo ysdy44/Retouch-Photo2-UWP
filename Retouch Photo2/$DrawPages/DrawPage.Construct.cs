@@ -251,12 +251,16 @@ namespace Retouch_Photo2
                 //History
                 this.ViewModel.HistoryPush(history);
             };
+
+            this.RenameTextBox.Loaded += (s, e) => this.RenameTextBox.Focus(FocusState.Programmatic);
         }
         private void ShowRenameDialog()
         {
-            this.RenameTextBox.Text = this.SelectionViewModel.LayerName;
-
             this.RenameDialog.Show();
+
+            this.RenameTextBox.Text = this.SelectionViewModel.LayerName;
+            this.RenameTextBox.SelectAll();
+            this.RenameTextBox.Focus(FocusState.Programmatic);
         }
 
 

@@ -78,7 +78,7 @@ namespace Retouch_Photo2
                 this.RenameDialog.Title = resource.GetString("$MainPage_RenameDialog_Title");
                 this.RenameDialog.SecondaryButtonText = resource.GetString("$MainPage_RenameDialog_Close");
                 this.RenameDialog.PrimaryButtonText = resource.GetString("$MainPage_RenameDialog_Primary");
-                this.TextBox.PlaceholderText = resource.GetString("$MainPage_RenameDialog_TextBox_PlaceholderText");
+                this.RenameTextBox.PlaceholderText = resource.GetString("$MainPage_RenameDialog_TextBox_PlaceholderText");
                 this.TextBoxTipTextBlock.Text = resource.GetString("$MainPage_RenameDialog_TextBoxTip");
             }
 
@@ -189,19 +189,21 @@ namespace Retouch_Photo2
             {
                 this.LoadingControl.State = LoadingState.Loading;
 
-                await this.RenameProjectViewItem(this._rename, this.TextBox.Text);
+                await this.RenameProjectViewItem(this._rename, this.RenameTextBox.Text);
 
                 this.LoadingControl.State = LoadingState.None;
             };
+
+            this.RenameTextBox.Loaded += (s, e) => this.RenameTextBox.Focus(FocusState.Programmatic);
         }
         private void ShowRenameDialog(IProjectViewItem item)
         {
             this.RenameDialog.Show();
 
             this._rename = item.Name;
-            this.TextBox.Text = item.Name;
-            this.TextBox.Focus(FocusState.Keyboard);
-            this.TextBox.SelectAll();
+            this.RenameTextBox.Text = item.Name;
+            this.RenameTextBox.SelectAll();
+            this.RenameTextBox.Focus(FocusState.Programmatic);
         }
         private void HideRenameDialog()
         {

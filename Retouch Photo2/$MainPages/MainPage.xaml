@@ -244,7 +244,7 @@
         <elements:Dialog x:Name="RenameDialog" Grid.Row="1" Grid.RowSpan="2">
             <StackPanel>
                 <ContentControl Height="2"/>
-                <TextBox x:Name="TextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0"/>
+                <TextBox x:Name="RenameTextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0"/>
                 <TextBlock x:Name="TextBoxTipTextBlock" Visibility="Collapsed" FontSize="14" Foreground="{ThemeResource AppText}"/>
             </StackPanel>
         </elements:Dialog>
