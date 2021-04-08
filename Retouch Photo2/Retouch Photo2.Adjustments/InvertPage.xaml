@@ -5,6 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    MinHeight="165" 
+    MaxHeight="300"
+    d:DesignHeight="400"
+    d:DesignWidth="200"
     >
 
     <StackPanel Padding="2,0">
