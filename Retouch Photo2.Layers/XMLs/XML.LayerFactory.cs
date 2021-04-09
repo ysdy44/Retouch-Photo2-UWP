@@ -18,24 +18,25 @@ namespace Retouch_Photo2.Layers
     {
 
         /// <summary>
-        /// Create a Layer from an string and XElement.
+        /// Create a ILayer from an string and XElement.
         /// </summary>
+        /// <param name="assemblyType"> The type for assembly. </param>
         /// <param name="type"> The source string. </param>
-        /// <returns> The created <see cref="Layerage"/>. </returns>
-        private static ILayer CreateLayer(string type)
+        /// <returns> The created ILayer. </returns>
+        private static ILayer CreateLayer(Type assemblyType, string type)
         {
             if (string.IsNullOrEmpty(type) == false)
             {
-                Assembly assembly = typeof(ILayer).GetTypeInfo().Assembly;
-                IEnumerable<TypeInfo> typeInfos = from t in assembly.DefinedTypes where t.IsClass select t;
+                Assembly assembly = assemblyType.GetTypeInfo().Assembly;
+                IEnumerable<TypeInfo> typeInfos = assembly.DefinedTypes;
 
-                TypeInfo typeInfo = typeInfos.FirstOrDefault(t => t.Name == $"{type}Layer");
+                TypeInfo typeInfo = typeInfos.FirstOrDefault(t => t.FullName == $"Retouch_Photo2.Layers.Models.{type}Layer");
                 if (typeInfo != null)
                 {
                     object obj = Activator.CreateInstance(typeInfo.AsType());
                     if (obj is ILayer layer)
                     {
-                       return layer;
+                        return layer;
                     }
                 }
             }

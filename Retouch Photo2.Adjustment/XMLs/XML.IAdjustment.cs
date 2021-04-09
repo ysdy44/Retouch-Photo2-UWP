@@ -42,12 +42,8 @@ namespace Retouch_Photo2.Adjustments
         public static IAdjustment LoadIAdjustment(XElement element)
         {
             //Load
-            IAdjustment adjustment = XML.CreateAdjustment
-            (
-                element.Attribute("Type") is XAttribute type ?
-                    type.Value :
-                    null
-            );
+            string type2 = element.Attribute("Type") is XAttribute type ? type.Value : null;
+            IAdjustment adjustment = XML.CreateAdjustment(typeof(IAdjustment), type2);
             {
                 adjustment.Load(element);
             }

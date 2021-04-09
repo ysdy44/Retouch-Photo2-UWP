@@ -58,12 +58,8 @@ namespace Retouch_Photo2.Layers
         private static ILayer LoadILayer(XElement element)
         {
             //Load
-            ILayer layer = XML.CreateLayer
-            (
-                element.Attribute("Type") is XAttribute type ?
-                    type.Value :
-                    null
-            );
+            string type2 = element.Attribute("Type") is XAttribute type ? type.Value : null;
+            ILayer layer = XML.CreateLayer(typeof(ILayer), type2);
             {
                 if (element.Attribute("Id") is XAttribute id) layer.Id = id.Value;
                 //if (element.Attribute("Type") is XAttribute type) layer.Type = type.Value;

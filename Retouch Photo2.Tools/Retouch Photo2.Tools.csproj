@@ -144,6 +144,7 @@
     <Compile Include="Touchbars\TouchbarSlider.xaml.cs">
       <DependentUpon>TouchbarSlider.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XMLs\XML.ToolFactory.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Tools.rd.xml" />
   </ItemGroup>
   <ItemGroup>
