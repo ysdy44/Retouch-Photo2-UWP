@@ -67,35 +67,35 @@ namespace Retouch_Photo2
 
 
             //Appbar
-            this.ExportButton.Tapped += (s, e) => this.ShowExportDialog();
-            this.OverflowExportButton.Tapped += (s, e) =>
+            this.ExportButton.Click += (s, e) => this.ShowExportDialog();
+            this.OverflowExportButton.Click += (s, e) =>
             {
                 this.ShowExportDialog();
                 this.OverflowFlyout.Hide();
             };
 
-            this.UndoButton.Tapped += (s, e) => this.MethodViewModel.MethodEditUndo();
-            this.OverflowUndoButton.Tapped += (s, e) => this.MethodViewModel.MethodEditUndo();
+            this.UndoButton.Click += (s, e) => this.MethodViewModel.MethodEditUndo();
+            this.OverflowUndoButton.Click += (s, e) => this.MethodViewModel.MethodEditUndo();
 
             //this.RedoButton.Click += (s, e) => { };
             //this.OverflowRedoButton.Click += (s, e) => { };
 
-            this.SetupButton.Tapped += (s, e) => this.ShowSetupDialog();
-            this.OverflowSetupButton.Tapped += (s, e) =>
+            this.SetupButton.Click += (s, e) => this.ShowSetupDialog();
+            this.OverflowSetupButton.Click += (s, e) =>
             {
                 this.ShowSetupDialog();
                 this.OverflowFlyout.Hide();
             };
 
             this.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
-            this.OverflowRulerButton.Tapped += (s, e) =>
+            this.OverflowRulerButton.Click += (s, e) =>
             {
                 this.ViewModel.Invalidate();//Invalidate
                 this.OverflowFlyout.Hide();
             };
 
-            this.FullScreenButton.Tapped += (s, e) => this.DrawLayout.IsFullScreen = true;
-            this.OverflowFullScreenButton.Tapped += (s, e) =>
+            this.FullScreenButton.Click += (s, e) => this.DrawLayout.IsFullScreen = true;
+            this.OverflowFullScreenButton.Click += (s, e) =>
             {
                 this.DrawLayout.IsFullScreen = true;
                 this.OverflowFlyout.Hide();

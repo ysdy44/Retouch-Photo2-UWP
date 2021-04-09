@@ -191,17 +191,17 @@ namespace Retouch_Photo2.Elements
                 this.TitleGrid.ManipulationCompleted += this.TitleGrid_ManipulationCompleted;
             }
 
-            if (this.OverlayButton != null) this.OverlayButton.Tapped -= this.OverlayButton_Tapped;
+            if (this.OverlayButton != null) this.OverlayButton.Click -= this.OverlayButton_Click;
             this.OverlayButton = base.GetTemplateChild(nameof(OverlayButton)) as Button;
-            if (this.OverlayButton != null) this.OverlayButton.Tapped += this.OverlayButton_Tapped;
+            if (this.OverlayButton != null) this.OverlayButton.Click += this.OverlayButton_Click;
 
-            if (this.PinButton != null) this.PinButton.Tapped -= this.PinButton_Tapped;
+            if (this.PinButton != null) this.PinButton.Click -= this.PinButton_Click;
             this.PinButton = base.GetTemplateChild(nameof(PinButton)) as Button;
-            if (this.PinButton != null) this.PinButton.Tapped += this.PinButton_Tapped;
+            if (this.PinButton != null) this.PinButton.Click += this.PinButton_Click;
 
-            if (this.CloseButton != null) this.CloseButton.Tapped -= this.CloseButton_Tapped;
+            if (this.CloseButton != null) this.CloseButton.Click -= this.CloseButton_Click;
             this.CloseButton = base.GetTemplateChild(nameof(CloseButton)) as Button;
-            if (this.CloseButton != null) this.CloseButton.Tapped += this.CloseButton_Tapped;
+            if (this.CloseButton != null) this.CloseButton.Click += this.CloseButton_Click;
         }
 
 
@@ -255,9 +255,9 @@ namespace Retouch_Photo2.Elements
             this.top = Canvas.GetTop(this);
         }
 
-        private void OverlayButton_Tapped(object sender, TappedRoutedEventArgs e) => this.AsOverlay();
-        private void PinButton_Tapped(object sender, TappedRoutedEventArgs e) => this.AsPin();
-        private void CloseButton_Tapped(object sender, TappedRoutedEventArgs e) => this.AsFlyout();
+        private void OverlayButton_Click(object sender, RoutedEventArgs e) => this.AsOverlay();
+        private void PinButton_Click(object sender, RoutedEventArgs e) => this.AsPin();
+        private void CloseButton_Click(object sender, RoutedEventArgs e) => this.AsFlyout();
     }
 
     public sealed partial class Expander : ContentControl

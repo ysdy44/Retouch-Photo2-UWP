@@ -62,6 +62,7 @@ namespace Retouch_Photo2.Tools
 
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
 
 
         //@Content 
@@ -97,9 +98,12 @@ namespace Retouch_Photo2.Tools
             this.ConstructStrings(toolType);
 
             //Flyout
-            this.FillBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.FillBrushButton);
-            this.StrokeBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeColorFlyout?.Invoke(this, this.StrokeBrushButton);
+            this.FillBrushButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.FillBrushButton);
+            this.StrokeBrushButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeColorFlyout?.Invoke(this, this.StrokeBrushButton);
             this.StrokeShowControl.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeFlyout?.Invoke(this.StrokeShowControl);
+
+            //ConvertToCurves
+            this.ConvertToCurvesButton.Click += (s, e) => this.MethodViewModel.MethodConvertToCurves();
 
             this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);
         }
