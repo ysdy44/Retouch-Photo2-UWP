@@ -3,11 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="GaussianBlurIcon" TargetType="ContentControl">
-        <PathIcon HorizontalAlignment="Center">
-            <PathIcon.Data>
-                M6.792,0.419c-2.614,4.966 -6.893,12.762 -6.79,16.169c0.104,3.481 2.842,7.245 7.403,7.372c4.418,0.124 7.332,-3.889 7.403,-7.372c0.071,-3.42 -4.254,-11.16 -6.825,-16.169c-0.109,-0.211 -0.299,-0.412 -0.578,-0.419c-0.266,-0.006 -0.512,0.209 -0.613,0.419l0,0Zm0.637,1.681c0,0 -6.074,11.414 -6.022,14.333c0.059,3.312 2.163,6.116 6.282,6.065c3.615,-0.046 5.706,-3.234 5.714,-6.065c0.008,-2.973 -5.974,-14.333 -5.974,-14.333l0,0Z
-            </PathIcon.Data>
-        </PathIcon>
+        <Border Width="30" Height="30" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource SystemAltHighColor}" Background="{ThemeResource SystemAltHighColor}">
+            <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center">
+                <PathIcon.Data>
+                    M6.792,0.419c-2.614,4.966 -6.893,12.762 -6.79,16.169c0.104,3.481 2.842,7.245 7.403,7.372c4.418,0.124 7.332,-3.889 7.403,-7.372c0.071,-3.42 -4.254,-11.16 -6.825,-16.169c-0.109,-0.211 -0.299,-0.412 -0.578,-0.419c-0.266,-0.006 -0.512,0.209 -0.613,0.419l0,0Zm0.637,1.681c0,0 -6.074,11.414 -6.022,14.333c0.059,3.312 2.163,6.116 6.282,6.065c3.615,-0.046 5.706,-3.234 5.714,-6.065c0.008,-2.973 -5.974,-14.333 -5.974,-14.333l0,0Z
+                </PathIcon.Data>
+            </PathIcon>
+        </Border>
     </ControlTemplate>
 
 </ResourceDictionary>

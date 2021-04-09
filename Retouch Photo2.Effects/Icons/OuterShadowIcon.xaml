@@ -3,11 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="OuterShadowIcon" TargetType="ContentControl">
-        <PathIcon HorizontalAlignment="Center">
-            <PathIcon.Data>
-                M0,0l19.987,0l0,2.453l3.095,0l0,13.492l-19.988,0l0,-2.453l-3.094,0l0,-13.492Zm21.482,4.051l-1.495,0l0,9.441l-15.293,0l0,1.07l16.788,0l0,-10.511Z
-            </PathIcon.Data>
-        </PathIcon>
+        <Border Width="30" Height="30" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource SystemAltHighColor}" Background="{ThemeResource SystemAltHighColor}">
+            <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center">
+                <PathIcon.Data>
+                    M0,0l19.987,0l0,2.453l3.095,0l0,13.492l-19.988,0l0,-2.453l-3.094,0l0,-13.492Zm21.482,4.051l-1.495,0l0,9.441l-15.293,0l0,1.07l16.788,0l0,-10.511Z
+                </PathIcon.Data>
+            </PathIcon>
+        </Border>
     </ControlTemplate>
 
 </ResourceDictionary>

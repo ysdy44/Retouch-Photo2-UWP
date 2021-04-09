@@ -3,11 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="MorphologyIcon" TargetType="ContentControl">
-        <PathIcon HorizontalAlignment="Center">
-            <PathIcon.Data>
-                M26.681,10.788L26.681,18.943L13.341,18.943L13.341,10.788L26.681,10.788ZM13.341,0L13.341,8.155L0,8.155L0,0L13.341,0Z
-            </PathIcon.Data>
-        </PathIcon>
+        <Border Width="30" Height="30" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource SystemAltHighColor}" Background="{ThemeResource SystemAltHighColor}">
+            <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center">
+                <PathIcon.Data>
+                    M26.681,10.788L26.681,18.943L13.341,18.943L13.341,10.788L26.681,10.788ZM13.341,0L13.341,8.155L0,8.155L0,0L13.341,0Z
+                </PathIcon.Data>
+            </PathIcon>
+        </Border>
     </ControlTemplate>
 
 </ResourceDictionary>
