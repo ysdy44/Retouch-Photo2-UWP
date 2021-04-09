@@ -27,9 +27,9 @@ namespace Retouch_Photo2.Tools.Elements
             {
                 switch (this._vsType)
                 {
-                    case PatternGridType.Grid: return this.Grid;
-                    case PatternGridType.Horizontal: return this.Horizontal;
-                    case PatternGridType.Vertical: return this.Vertical;
+                    case PatternGridType.Grid: return this.GridState;
+                    case PatternGridType.Horizontal: return this.HorizontalState;
+                    case PatternGridType.Vertical: return this.VerticalState;
                     default: return this.Normal;
                 }
             }
@@ -69,17 +69,17 @@ namespace Retouch_Photo2.Tools.Elements
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.GridButton.Click += (s, e) =>
+            this.GridItem.Tapped += (s, e) =>
             {
                 this.TypeChanged?.Invoke(this, PatternGridType.Grid); //Delegate
                 this.Flyout.Hide();
             };
-            this.HorizontalButton.Click += (s, e) =>
+            this.HorizontalItem.Tapped += (s, e) =>
             {
                 this.TypeChanged?.Invoke(this, PatternGridType.Horizontal); //Delegate
                 this.Flyout.Hide();
             };
-            this.VerticalButton.Click += (s, e) =>
+            this.VerticalItem.Tapped += (s, e) =>
             {
                 this.TypeChanged?.Invoke(this, PatternGridType.Vertical); //Delegate
                 this.Flyout.Hide();
@@ -95,9 +95,9 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.GridButton.Content = resource.GetString($"Tools_PatternGrid_Grid");
-            this.HorizontalButton.Content = resource.GetString($"Tools_PatternGrid_Horizontal");
-            this.VerticalButton.Content = resource.GetString($"Tools_PatternGrid_Vertical");
+            this.Grid.Content = resource.GetString($"Tools_PatternGrid_Grid");
+            this.Horizontal.Content = resource.GetString($"Tools_PatternGrid_Horizontal");
+            this.Vertical.Content = resource.GetString($"Tools_PatternGrid_Vertical");
         }
     }
 }

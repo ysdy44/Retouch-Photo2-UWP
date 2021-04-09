@@ -13,30 +13,36 @@
         <!--Flyout-->
         <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Button x:Name="GridButton" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/GridIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource GridIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="HorizontalButton" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/HorizontalIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource HorizontalIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="VerticalButton" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/VerticalIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource VerticalIcon}"/>
-                    </Button.Tag>
-                </Button>
+                <ListViewItem x:Name="GridItem">
+                    <ContentControl x:Name="Grid" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/GridIcon.xaml"/>
+                        </ContentControl.Resources>
+                        <ContentControl.Tag>
+                            <ContentControl Template="{StaticResource GridIcon}"/>
+                        </ContentControl.Tag>
+                    </ContentControl>
+                </ListViewItem>
+                <ListViewItem x:Name="HorizontalItem">
+                    <ContentControl x:Name="Horizontal" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/HorizontalIcon.xaml"/>
+                        </ContentControl.Resources>
+                        <ContentControl.Tag>
+                            <ContentControl Template="{StaticResource HorizontalIcon}"/>
+                        </ContentControl.Tag>
+                    </ContentControl>
+                </ListViewItem>
+                <ListViewItem x:Name="VerticalItem">
+                    <ContentControl x:Name="Vertical" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/VerticalIcon.xaml"/>
+                        </ContentControl.Resources>
+                        <ContentControl.Tag>
+                            <ContentControl Template="{StaticResource VerticalIcon}"/>
+                        </ContentControl.Tag>
+                    </ContentControl>
+                </ListViewItem>
             </StackPanel>
         </Flyout>
     </UserControl.Resources>
@@ -52,26 +58,26 @@
                 <VisualState x:Name="Normal"/>
 
                 <!--Grid-->
-                <VisualState x:Name="Grid">
+                <VisualState x:Name="GridState">
                     <VisualState.Setters>
-                        <Setter Target = "GridButton.IsEnabled" Value="False"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind GridButton.Content}"/>
+                        <Setter Target = "GridItem.IsSelected" Value="True"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind Grid.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Horizontal-->
-                <VisualState x:Name="Horizontal">
+                <VisualState x:Name="HorizontalState">
                     <VisualState.Setters>
-                        <Setter Target = "HorizontalButton.IsEnabled" Value="False"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind HorizontalButton.Content}"/>
+                        <Setter Target = "HorizontalItem.IsSelected" Value="True"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind Horizontal.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Vertical-->
-                <VisualState x:Name="Vertical">
+                <VisualState x:Name="VerticalState">
                     <VisualState.Setters>
-                        <Setter Target = "VerticalButton.IsEnabled" Value="False"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind VerticalButton.Content}"/>
+                        <Setter Target = "VerticalItem.IsSelected" Value="True"/>
+                        <Setter Target = "Button.Content" Value="{x:Bind Vertical.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
 

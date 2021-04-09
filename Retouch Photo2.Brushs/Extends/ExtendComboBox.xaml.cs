@@ -126,17 +126,17 @@ namespace Retouch_Photo2.Brushs
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.Clamp.Click += (s, e) =>
+            this.ClampItem.Tapped += (s, e) =>
             {
                 this.ExtendChanged?.Invoke(this, CanvasEdgeBehavior.Clamp);//Delegate
                 this.Flyout.Hide();
             };
-            this.Wrap.Click += (s, e) =>
+            this.WrapItem.Tapped += (s, e) =>
             {
                 this.ExtendChanged?.Invoke(this, CanvasEdgeBehavior.Wrap);//Delegate
                 this.Flyout.Hide();
             };
-            this.Mirror.Click += (s, e) =>
+            this.MirrorItem.Tapped += (s, e) =>
             {
                 this.ExtendChanged?.Invoke(this, CanvasEdgeBehavior.Mirror);//Delegate
                 this.Flyout.Hide();

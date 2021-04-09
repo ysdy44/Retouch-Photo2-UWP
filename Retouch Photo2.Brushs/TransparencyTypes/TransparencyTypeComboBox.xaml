@@ -24,41 +24,50 @@
         <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-                <Button x:Name="None" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/NoneIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource NoneIcon}"/>
-                    </Button.Tag>
-                </Button>
+                <ListViewItem x:Name="NoneItem">
+                    <ContentControl x:Name="None" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/NoneIcon.xaml"/>
+                        </ContentControl.Resources>
+                        <ContentControl.Tag>
+                            <ContentControl Template="{StaticResource NoneIcon}"/>
+                        </ContentControl.Tag>
+                    </ContentControl>
+                </ListViewItem>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
-                <Button x:Name="LinearGradient" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/LinearGradientIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource LinearGradientIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="RadialGradient" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/RadialGradientIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource RadialGradientIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="EllipticalGradient" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/EllipticalGradientIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource EllipticalGradientIcon}"/>
-                    </Button.Tag>
-                </Button>
+
+                <ListViewItem x:Name="LinearGradientItem">
+                    <ContentControl x:Name="LinearGradient" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/LinearGradientIcon.xaml"/>
+                        </ContentControl.Resources>
+                        <ContentControl.Tag>
+                            <ContentControl Template="{StaticResource LinearGradientIcon}"/>
+                        </ContentControl.Tag>
+                    </ContentControl>
+                </ListViewItem>
+                <ListViewItem x:Name="RadialGradientItem">
+                    <ContentControl x:Name="RadialGradient" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/RadialGradientIcon.xaml"/>
+                        </ContentControl.Resources>
+                        <ContentControl.Tag>
+                            <ContentControl Template="{StaticResource RadialGradientIcon}"/>
+                        </ContentControl.Tag>
+                    </ContentControl>
+                </ListViewItem>
+                <ListViewItem x:Name="EllipticalGradientItem">
+                    <ContentControl x:Name="EllipticalGradient" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/TransparencyTypes/Icons/EllipticalGradientIcon.xaml"/>
+                        </ContentControl.Resources>
+                        <ContentControl.Tag>
+                            <ContentControl Template="{StaticResource EllipticalGradientIcon}"/>
+                        </ContentControl.Tag>
+                    </ContentControl>
+                </ListViewItem>
 
             </StackPanel>
         </Flyout>
@@ -77,7 +86,7 @@
                 <!--None-->
                 <VisualState x:Name="NoneState">
                     <VisualState.Setters>
-                        <Setter Target = "None.IsEnabled" Value="False"/>
+                        <Setter Target = "NoneItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind None.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -85,21 +94,21 @@
                 <!--LinearGradient-->
                 <VisualState x:Name="LinearGradientState">
                     <VisualState.Setters>
-                        <Setter Target = "LinearGradient.IsEnabled" Value="False"/>
+                        <Setter Target = "LinearGradientItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind LinearGradient.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--RadialGradient-->
                 <VisualState x:Name="RadialGradientState">
                     <VisualState.Setters>
-                        <Setter Target = "RadialGradient.IsEnabled" Value="False"/>
+                        <Setter Target = "RadialGradientItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind RadialGradient.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--EllipticalGradient-->
                 <VisualState x:Name="EllipticalGradientState">
                     <VisualState.Setters>
-                        <Setter Target = "EllipticalGradient.IsEnabled" Value="False"/>
+                        <Setter Target = "EllipticalGradientItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind EllipticalGradient.Content}"/>
                     </VisualState.Setters>
                 </VisualState>

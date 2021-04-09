@@ -73,12 +73,12 @@ namespace Retouch_Photo2.Brushs
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.Fill.Click += (s, e) =>
+            this.FillItem.Tapped += (s, e) =>
             {
                 this.FillOrStrokeChanged?.Invoke(this, FillOrStroke.Fill);//Delegate
                 this.Flyout.Hide();
             };
-            this.Stroke.Click += (s, e) =>
+            this.StrokeItem.Tapped += (s, e) =>
             {
                 this.FillOrStrokeChanged?.Invoke(this, FillOrStroke.Stroke);//Delegate
                 this.Flyout.Hide();

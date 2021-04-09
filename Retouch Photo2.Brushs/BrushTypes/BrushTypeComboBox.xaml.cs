@@ -168,7 +168,7 @@ namespace Retouch_Photo2.Brushs
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.None.Click += (s, e) =>
+            this.NoneItem.Tapped += (s, e) =>
             {
                 switch (this.FillOrStroke)
                 {
@@ -181,7 +181,7 @@ namespace Retouch_Photo2.Brushs
                 }
                 this.Flyout.Hide();
             };
-            this.Color.Click += (s, e) =>
+            this.ColorItem.Tapped += (s, e) =>
             {
                 switch (this.FillOrStroke)
                 {
@@ -194,7 +194,7 @@ namespace Retouch_Photo2.Brushs
                 }
                 this.Flyout.Hide();
             };
-            this.LinearGradient.Click += (s, e) =>
+            this.LinearGradientItem.Tapped += (s, e) =>
             {
                 switch (this.FillOrStroke)
                 {
@@ -207,7 +207,7 @@ namespace Retouch_Photo2.Brushs
                 }
                 this.Flyout.Hide();
             };
-            this.RadialGradient.Click += (s, e) =>
+            this.RadialGradientItem.Tapped += (s, e) =>
             {
                 switch (this.FillOrStroke)
                 {
@@ -220,7 +220,7 @@ namespace Retouch_Photo2.Brushs
                 }
                 this.Flyout.Hide();
             };
-            this.EllipticalGradient.Click += (s, e) =>
+            this.EllipticalGradientItem.Tapped += (s, e) =>
             {
                 switch (this.FillOrStroke)
                 {
@@ -233,7 +233,7 @@ namespace Retouch_Photo2.Brushs
                 }
                 this.Flyout.Hide();
             };
-            this.Image.Click += (s, e) =>
+            this.ImageItem.Tapped += (s, e) =>
             {
                 switch (this.FillOrStroke)
                 {
@@ -247,7 +247,7 @@ namespace Retouch_Photo2.Brushs
                 this.Flyout.Hide();
             };
 
-            this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
+            this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
 

@@ -13,22 +13,28 @@
         <!--Flyout-->
         <Flyout x:Name="Flyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Button x:Name="Fill" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/FillOrStrokes/Icons/FillIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource FillIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="Stroke" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/FillOrStrokes/Icons/StrokeIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource StrokeIcon}"/>
-                    </Button.Tag>
-                </Button>
+
+                <ListViewItem x:Name="FillItem">
+                    <ContentControl x:Name="Fill" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/FillOrStrokes/Icons/FillIcon.xaml"/>
+                        </ContentControl.Resources>
+                        <ContentControl.Tag>
+                            <ContentControl Template="{StaticResource FillIcon}"/>
+                        </ContentControl.Tag>
+                    </ContentControl>
+                </ListViewItem>
+                <ListViewItem x:Name="StrokeItem">
+                    <ContentControl x:Name="Stroke" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/FillOrStrokes/Icons/StrokeIcon.xaml"/>
+                        </ContentControl.Resources>
+                        <ContentControl.Tag>
+                            <ContentControl Template="{StaticResource StrokeIcon}"/>
+                        </ContentControl.Tag>
+                    </ContentControl>
+                </ListViewItem>
+                
             </StackPanel>
         </Flyout>
     </UserControl.Resources>
@@ -46,7 +52,7 @@
                 <!--Fill-->
                 <VisualState x:Name="FillState">
                     <VisualState.Setters>
-                        <Setter Target = "Fill.IsEnabled" Value="False"/>
+                        <Setter Target = "FillItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind Fill.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -54,7 +60,7 @@
                 <!--Stroke-->
                 <VisualState x:Name="StrokeState">
                     <VisualState.Setters>
-                        <Setter Target = "Stroke.IsEnabled" Value="False"/>
+                        <Setter Target = "StrokeItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind Stroke.Content}"/>
                     </VisualState.Setters>
                 </VisualState>

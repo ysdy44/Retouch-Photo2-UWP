@@ -13,30 +13,38 @@
         <!--Flyout-->
         <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Button x:Name="Clamp" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/ClampIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource ClampIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="Wrap" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/WrapIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource WrapIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="Mirror" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/MirrorIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource MirrorIcon}"/>
-                    </Button.Tag>
-                </Button>
+
+                <ListViewItem x:Name="ClampItem">
+                    <ContentControl x:Name="Clamp" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/ClampIcon.xaml"/>
+                        </ContentControl.Resources>
+                        <ContentControl.Tag>
+                            <ContentControl Template="{StaticResource ClampIcon}"/>
+                        </ContentControl.Tag>
+                    </ContentControl>
+                </ListViewItem>
+                <ListViewItem x:Name="WrapItem">
+                    <ContentControl x:Name="Wrap" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/WrapIcon.xaml"/>
+                        </ContentControl.Resources>
+                        <ContentControl.Tag>
+                            <ContentControl Template="{StaticResource WrapIcon}"/>
+                        </ContentControl.Tag>
+                    </ContentControl>
+                </ListViewItem>
+                <ListViewItem x:Name="MirrorItem">
+                    <ContentControl x:Name="Mirror" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl.Resources>
+                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/MirrorIcon.xaml"/>
+                        </ContentControl.Resources>
+                        <ContentControl.Tag>
+                            <ContentControl Template="{StaticResource MirrorIcon}"/>
+                        </ContentControl.Tag>
+                    </ContentControl>
+                </ListViewItem>
+
             </StackPanel>
         </Flyout>
     </UserControl.Resources>
@@ -54,7 +62,7 @@
                 <!--Clamp-->
                 <VisualState x:Name="ClampState">
                     <VisualState.Setters>
-                        <Setter Target = "Clamp.IsEnabled" Value="False"/>
+                        <Setter Target = "ClampItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind Clamp.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -62,22 +70,22 @@
                 <!--Wrap-->
                 <VisualState x:Name="WrapState">
                     <VisualState.Setters>
-                        <Setter Target = "Wrap.IsEnabled" Value="False"/>
+                        <Setter Target = "WrapItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind Wrap.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
-                
+
                 <!--Mirror-->
                 <VisualState x:Name="MirrorState">
                     <VisualState.Setters>
-                        <Setter Target = "Mirror.IsEnabled" Value="False"/>
+                        <Setter Target = "MirrorItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind Mirror.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        
+
         <Button.Tag>
             <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
         </Button.Tag>

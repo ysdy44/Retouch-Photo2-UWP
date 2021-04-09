@@ -79,22 +79,22 @@ namespace Retouch_Photo2.Brushs
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.None.Click += (s, e) =>
+            this.NoneItem.Tapped += (s, e) =>
             {
                 this.TypeChanged?.Invoke(this, BrushType.None);//Delegate
                 this.Flyout.Hide();
             };
-            this.LinearGradient.Click += (s, e) =>
+            this.LinearGradientItem.Tapped += (s, e) =>
             {
                 this.TypeChanged?.Invoke(this, BrushType.LinearGradient);//Delegate
                 this.Flyout.Hide();
             };
-            this.RadialGradient.Click += (s, e) =>
+            this.RadialGradientItem.Tapped += (s, e) =>
             {
                 this.TypeChanged?.Invoke(this, BrushType.RadialGradient);//Delegate
                 this.Flyout.Hide();
             };
-            this.EllipticalGradient.Click += (s, e) =>
+            this.EllipticalGradientItem.Tapped += (s, e) =>
             {
                 this.TypeChanged?.Invoke(this, BrushType.EllipticalGradient);//Delegate
                 this.Flyout.Hide();

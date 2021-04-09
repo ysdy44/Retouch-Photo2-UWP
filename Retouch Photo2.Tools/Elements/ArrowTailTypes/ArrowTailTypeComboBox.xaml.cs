@@ -27,8 +27,8 @@ namespace Retouch_Photo2.Tools.Elements
             {
                 switch (this._vsType)
                 {
-                    case GeometryArrowTailType.None: return this.None;
-                    case GeometryArrowTailType.Arrow: return this.Arrow;
+                    case GeometryArrowTailType.None: return this.NoneState;
+                    case GeometryArrowTailType.Arrow: return this.ArrowState;
                     default: return this.Normal;
                 }
             }
@@ -68,12 +68,12 @@ namespace Retouch_Photo2.Tools.Elements
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.NoneButton.Click += (s, e) =>
+            this.NoneItem.Tapped += (s, e) =>
             {
                 this.TypeChanged?.Invoke(this, GeometryArrowTailType.None); //Delegate
                 this.Flyout.Hide();
             };
-            this.ArrowButton.Click += (s, e) =>
+            this.ArrowItem.Tapped += (s, e) =>
             {
                 this.TypeChanged?.Invoke(this, GeometryArrowTailType.Arrow); //Delegate
                 this.Flyout.Hide();
@@ -89,8 +89,8 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.NoneButton.Content = resource.GetString($"Tools_GeometryArrow_ArrowTail_None");
-            this.ArrowButton.Content = resource.GetString($"Tools_GeometryArrow_ArrowTail_Arrow");
+            this.None.Content = resource.GetString($"Tools_GeometryArrow_ArrowTail_None");
+            this.Arrow.Content = resource.GetString($"Tools_GeometryArrow_ArrowTail_Arrow");
         }
     }
 }
