@@ -21,12 +21,12 @@ namespace Retouch_Photo2.Menus
     public sealed partial class EffectMenu : UserControl, ICollection<IEffectPage>
     {
 
-        private readonly IList<IEffectPage> items = new List<IEffectPage>();
-        private readonly IList<(EffectType, IEffectPage, Button, CheckControl)> itemsCore = new List<(EffectType, IEffectPage, Button, CheckControl)>();
+        private readonly IList<IEffectPage> Items = new List<IEffectPage>();
+        private readonly IList<(EffectType, IEffectPage, Button, CheckControl)> ItemsCore = new List<(EffectType, IEffectPage, Button, CheckControl)>();
 
+        
 
-
-        public int Count => this.items.Count;
+        public int Count => this.Items.Count;
         public bool IsReadOnly => false;
 
 
@@ -56,18 +56,18 @@ namespace Retouch_Photo2.Menus
             check.Tapped += this.Check_Tapped;
             this.ChecksStackPanel.Children.Add(check);
 
-            this.itemsCore.Add((type, effectPage, button, check));
-            this.items.Add(effectPage);
+            this.ItemsCore.Add((type, effectPage, button, check));
+            this.Items.Add(effectPage);
         }
 
         public bool Remove(IEffectPage effectPage)
         {
             if (effectPage == null) return false;
 
-            bool isContains = this.items.Contains(effectPage);
+            bool isContains = this.Items.Contains(effectPage);
             if (isContains == false) return false;
 
-            var item = this.itemsCore.First(e => e.Item2 == effectPage);
+            var item = this.ItemsCore.First(e => e.Item2 == effectPage);
 
             Button button = item.Item3;
             button.Click -= this.Button_Click;
@@ -77,14 +77,14 @@ namespace Retouch_Photo2.Menus
             check.Tapped -= this.Check_Tapped;
             this.ChecksStackPanel.Children.Remove(check);
 
-            this.itemsCore.Remove(item);
-            this.items.Remove(effectPage);
+            this.ItemsCore.Remove(item);
+            this.Items.Remove(effectPage);
             return true;
         }
 
         public void Clear()
         {
-            foreach (var item in this.itemsCore)
+            foreach (var item in this.ItemsCore)
             {
                 Button button = item.Item3;
                 button.Click -= this.Button_Click;
@@ -97,16 +97,16 @@ namespace Retouch_Photo2.Menus
 
             this.ChecksStackPanel.Children.Clear();
 
-            this.itemsCore.Clear();
-            this.items.Clear();
+            this.ItemsCore.Clear();
+            this.Items.Clear();
         }
 
 
-        public bool Contains(IEffectPage item) => this.items.Contains(item);
-        public void CopyTo(IEffectPage[] array, int arrayIndex) => this.items.CopyTo(array, arrayIndex);
+        public bool Contains(IEffectPage item) => this.Items.Contains(item);
+        public void CopyTo(IEffectPage[] array, int arrayIndex) => this.Items.CopyTo(array, arrayIndex);
 
-        public IEnumerator<IEffectPage> GetEnumerator() => this.items.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => this.items.GetEnumerator();
+        public IEnumerator<IEffectPage> GetEnumerator() => this.Items.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => this.Items.GetEnumerator();
 
     }
 
@@ -126,7 +126,7 @@ namespace Retouch_Photo2.Menus
             {
                 if (value != null)
                 {
-                    foreach (var item in itemsCore)
+                    foreach (var item in ItemsCore)
                     {
                         IEffectPage effectPage = item.Item2;
                         bool isOn = effectPage.FollowButton(value);
@@ -141,7 +141,7 @@ namespace Retouch_Photo2.Menus
                 }
                 else
                 {
-                    foreach (var item in itemsCore)
+                    foreach (var item in ItemsCore)
                     {
                         Button button = item.Item3;
                         button.IsEnabled = false;
@@ -185,7 +185,7 @@ namespace Retouch_Photo2.Menus
         {
             if (sender is Button button)
             {
-                IEffectPage effectPage = this.itemsCore.First(p => p.Item3 == button).Item2;
+                IEffectPage effectPage = this.ItemsCore.First(p => p.Item3 == button).Item2;
 
                 this.ContentPresenter.Content = effectPage?.Self;
                 this.SplitView.IsPaneOpen = false;
@@ -197,7 +197,7 @@ namespace Retouch_Photo2.Menus
             {
                 bool isOn = !check.IsChecked;
 
-                var item = this.itemsCore.First(p => p.Item4 == check);
+                var item = this.ItemsCore.First(p => p.Item4 == check);
                 IEffectPage effectPage = item.Item2;
                 effectPage?.Switch(isOn);
 

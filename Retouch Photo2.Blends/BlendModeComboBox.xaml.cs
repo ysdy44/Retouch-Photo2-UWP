@@ -67,9 +67,6 @@ namespace Retouch_Photo2.Blends
         }
     }
 
-    /// <summary>
-    /// Represents the combo box that is used to select blend mode.
-    /// </summary>
     public sealed partial class BlendModeComboBox : UserControl
     {
 

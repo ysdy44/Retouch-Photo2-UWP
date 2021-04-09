@@ -38,7 +38,7 @@
                         </ContentControl>
                     </ListViewItem>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
                     <ListViewItem x:Name="ExtraBlackItem">
                         <ContentControl x:Name="ExtraBlack" Style="{StaticResource AppIconContentControlStyle}">
@@ -74,7 +74,7 @@
                         </ContentControl>
                     </ListViewItem>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
                     <ListViewItem x:Name="LightItem">
                         <ContentControl x:Name="Light" Style="{StaticResource AppIconContentControlStyle}">
@@ -110,7 +110,7 @@
                         </ContentControl>
                     </ListViewItem>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
                     <ListViewItem x:Name="SemiBoldItem">
                         <ContentControl x:Name="SemiBold" Style="{StaticResource AppIconContentControlStyle}">
@@ -135,7 +135,7 @@
                         </ContentControl>
                     </ListViewItem>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
                     <ListViewItem x:Name="ThinItem">
                         <ContentControl x:Name="Thin" Style="{StaticResource AppIconContentControlStyle}">

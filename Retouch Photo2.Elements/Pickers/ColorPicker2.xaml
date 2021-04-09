@@ -26,7 +26,7 @@
                     </Button.Tag>
                 </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
                 <Button x:Name="WheelButton" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
@@ -37,7 +37,7 @@
                     </Button.Tag>
                 </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
                 <Button x:Name="RGBButton" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
@@ -56,7 +56,7 @@
                     </Button.Tag>
                 </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
                 <Button x:Name="PaletteHueButton" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
@@ -83,7 +83,7 @@
                     </Button.Tag>
                 </Button>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
                 <Button x:Name="CircleButton" Style="{StaticResource AppIconSelectedButton}">
                     <Button.Resources>
