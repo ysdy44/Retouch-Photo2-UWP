@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="PatternGridIcon" TargetType="ContentControl">
-        <Border Padding="2" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource SystemAltHighColor}" Background="{ThemeResource SystemAltHighColor}">
+        <Border Width="26" Height="26" Padding="2" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource SystemAltHighColor}" Background="{ThemeResource SystemAltHighColor}">
             <FontIcon Glyph="&#xE80A;" FontSize="19" FontFamily="Segoe MDL2 Assets" Foreground="DeepSkyBlue" />
         </Border>
     </ControlTemplate>

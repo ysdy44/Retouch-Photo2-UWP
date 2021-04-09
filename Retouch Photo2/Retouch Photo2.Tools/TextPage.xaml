@@ -32,7 +32,7 @@
                         <Setter Target = "TextBox.Margin" Value="0,4,0,4"/>
                         <Setter Target = "TextBox.MaxHeight" Value="1200"/>
                         <Setter Target = "TextBox.MinHeight" Value="100"/>
-                        <Setter Target = "TextBox.MinWidth" Value="284"/>
+                        <Setter Target = "TextBox.MinWidth" Value="384"/>
 
                         <Setter Target = "TextButton.(Grid.Row)" Value="0"/>
                         <Setter Target = "FullScreenButton.(Grid.Row)" Value="0"/>
@@ -68,7 +68,7 @@
 
         <TextBox x:Name="TextBox" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" Margin="2, 0"
                  TextWrapping="Wrap" 
-                 MinWidth="200" MinHeight="40" MaxHeight="40" VerticalAlignment="Center"
+                 MinWidth="300" MinHeight="40" MaxHeight="40" VerticalAlignment="Center"
                  BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}"
                  Text="{x:Bind SelectionViewModel.FontText, Mode=OneWay}"/>
 
