@@ -42,28 +42,28 @@ namespace Retouch_Photo2.Menus
             this.ConstructStrings();
 
             //Edit
-            this.Edit_Cut.Click += (s, e) => this.MethodViewModel.MethodEditCut();
-            this.Edit_Duplicate.Click += (s, e) => this.MethodViewModel.MethodEditDuplicate();
-            this.Edit_Copy.Click += (s, e) => this.MethodViewModel.MethodEditCopy();
-            this.Edit_Paste.Click += (s, e) => this.MethodViewModel.MethodEditPaste();
-            this.Edit_Clear.Click += (s, e) => this.MethodViewModel.MethodEditClear();
+            this.Edit_CutItem.Tapped += (s, e) => this.MethodViewModel.MethodEditCut();
+            this.Edit_DuplicateItem.Tapped += (s, e) => this.MethodViewModel.MethodEditDuplicate();
+            this.Edit_CopyItem.Tapped += (s, e) => this.MethodViewModel.MethodEditCopy();
+            this.Edit_PasteItem.Tapped += (s, e) => this.MethodViewModel.MethodEditPaste();
+            this.Edit_ClearItem.Tapped += (s, e) => this.MethodViewModel.MethodEditClear();
 
             //Select
-            this.Select_All.Click += (s, e) => this.MethodViewModel.MethodSelectAll();
-            this.Select_Deselect.Click += (s, e) => this.MethodViewModel.MethodSelectDeselect();
-            this.Select_Invert.Click += (s, e) => this.MethodViewModel.MethodSelectInvert();
+            this.Select_AllItem.Tapped += (s, e) => this.MethodViewModel.MethodSelectAll();
+            this.Select_DeselectItem.Tapped += (s, e) => this.MethodViewModel.MethodSelectDeselect();
+            this.Select_InvertItem.Tapped += (s, e) => this.MethodViewModel.MethodSelectInvert();
 
             //Group
-            this.Group_Group.Click += (s, e) => this.MethodViewModel.MethodGroupGroup();
-            this.Group_Ungroup.Click += (s, e) => this.MethodViewModel.MethodGroupUngroup();
-            this.Group_Release.Click += (s, e) => this.MethodViewModel.MethodGroupRelease();
+            this.Group_GroupItem.Tapped += (s, e) => this.MethodViewModel.MethodGroupGroup();
+            this.Group_UngroupItem.Tapped += (s, e) => this.MethodViewModel.MethodGroupUngroup();
+            this.Group_ReleaseItem.Tapped += (s, e) => this.MethodViewModel.MethodGroupRelease();
 
             //Combine
-            this.Combine_Union.Click += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Union);
-            this.Combine_Exclude.Click += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Exclude);
-            this.Combine_Xor.Click += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Xor);
-            this.Combine_Intersect.Click += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Intersect);
-            this.Combine_ExpandStroke.Click += (s, e) => this.ExpandStrokeCore();
+            this.Combine_UnionItem.Tapped += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Union);
+            this.Combine_ExcludeItem.Tapped += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Exclude);
+            this.Combine_XorItem.Tapped += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Xor);
+            this.Combine_IntersectItem.Tapped += (s, e) => this.GeometryCombine(CanvasGeometryCombine.Intersect);
+            this.Combine_ExpandStrokeItem.Tapped += (s, e) => this.ExpandStrokeCore();
         }
 
     }
@@ -76,23 +76,37 @@ namespace Retouch_Photo2.Menus
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            
-            foreach (UIElement childPanel in this.LayoutRoot.Children)
+            constructStrings2(this.Edit);
+            constructStrings1(this.Edit_Cut);
+            constructStrings1(this.Edit_Duplicate);
+            constructStrings1(this.Edit_Copy);
+            constructStrings1(this.Edit_Paste);
+            constructStrings1(this.Edit_Clear);
+
+            constructStrings2(this.Group);
+            constructStrings1(this.Group_Group);
+            constructStrings1(this.Group_Ungroup);
+            constructStrings1(this.Group_Release);
+
+            constructStrings2(this.Select);
+            constructStrings1(this.Select_All);
+            constructStrings1(this.Select_Deselect);
+            constructStrings1(this.Select_Invert);
+
+            constructStrings2(this.Combine);
+            constructStrings1(this.Combine_Union);
+            constructStrings1(this.Combine_Exclude);
+            constructStrings1(this.Combine_Xor);
+            constructStrings1(this.Combine_Intersect);
+            constructStrings1(this.Combine_ExpandStroke);
+
+            void constructStrings1(ContentControl control)
             {
-                if (childPanel is StackPanel stackPanel)
-                {
-                    foreach (UIElement child in stackPanel.Children)
-                    {
-                        if (child is Button button)
-                        {
-                            button.Content = resource.GetString($"Edits_{button.Name}");
-                        }
-                        if (child is TextBlock textBlock)
-                        {
-                            textBlock.Text = resource.GetString($"Edits_{textBlock.Name}");
-                        }
-                    }
-                }
+                control.Content = resource.GetString($"Edits_{control.Name}");
+            }
+            void constructStrings2(TextBlock textBlock)
+            {
+                textBlock.Text = resource.GetString($"Edits_{textBlock.Name}");
             }
         }
 

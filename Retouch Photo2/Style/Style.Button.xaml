@@ -45,6 +45,7 @@
 
 
     <Style x:Key="ButtonBase" TargetType="ButtonBase">
+        <Setter Property="MinWidth" Value="40" />
         <Setter Property="Padding" Value="8,0" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />

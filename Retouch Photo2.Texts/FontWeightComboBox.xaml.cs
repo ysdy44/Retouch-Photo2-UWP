@@ -99,21 +99,21 @@ namespace Retouch_Photo2.Texts
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.Black.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Black);//Delegate
-            this.Bold.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Bold);//Delegate
+            this.BlackItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Black);//Delegate
+            this.BoldItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Bold);//Delegate
 
-            this.ExtraBlack.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.ExtraBlack);//Delegate
-            this.ExtraBold.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.ExtraBold);//Delegate
-            this.ExtraLight.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.ExtraLight);//Delegate
+            this.ExtraBlackItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.ExtraBlack);//Delegate
+            this.ExtraBoldItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.ExtraBold);//Delegate
+            this.ExtraLightItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.ExtraLight);//Delegate
 
-            this.Light.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Light);//Delegate
-            this.Medium.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Medium);//Delegate
-            this.None.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Normal);//Delegate
+            this.LightItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Light);//Delegate
+            this.MediumItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Medium);//Delegate
+            this.NoneItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Normal);//Delegate
 
-            this.SemiBold.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.SemiBold);//Delegate
-            this.SemiLight.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.SemiLight);//Delegate
+            this.SemiBoldItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.SemiBold);//Delegate
+            this.SemiLightItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.SemiLight);//Delegate
 
-            this.Thin.Click += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Thin);//Delegate
+            this.ThinItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Thin);//Delegate
 
             this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
