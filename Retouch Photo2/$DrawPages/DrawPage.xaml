@@ -262,7 +262,7 @@
                                                 </ContentControl.Tag>
                                             </ContentControl>
                                         </ListViewItem>
-                                        <ListViewItem x:Name="OverflowSnapButton" IsSelected="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
+                                        <ListViewItem x:Name="OverflowSnapButton" IsSelected="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}">
                                             <ContentControl Style="{StaticResource AppIconContentControlStyle}">
                                                 <ContentControl.Resources>
                                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/$DrawPages/SnapIcon.xaml"/>
@@ -272,7 +272,7 @@
                                                 </ContentControl.Tag>
                                             </ContentControl>
                                         </ListViewItem>
-                                        <ListViewItem x:Name="OverflowRulerButton" IsSelected="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
+                                        <ListViewItem x:Name="OverflowRulerButton" IsSelected="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}">
                                             <ContentControl Style="{StaticResource AppIconContentControlStyle}">
                                                 <ContentControl.Tag>
                                                     <FontIcon Glyph="&#xECC6;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -286,7 +286,7 @@
                                                 </ContentControl.Tag>
                                             </ContentControl>
                                         </ListViewItem>
-                                        <ListViewItem x:Name="OverflowTipButton" IsSelected="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Style="{StaticResource AppIconToggleButtonStyle}">
+                                        <ListViewItem x:Name="OverflowTipButton" IsSelected="{x:Bind TipViewModel.IsOpen, Mode=OneWay}">
                                             <ContentControl Style="{StaticResource AppIconContentControlStyle}">
                                                 <ContentControl.Tag>
                                                     <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
