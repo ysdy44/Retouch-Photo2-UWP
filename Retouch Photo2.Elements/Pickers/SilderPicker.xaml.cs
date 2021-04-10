@@ -81,29 +81,6 @@ namespace Retouch_Photo2.Elements
             this.PointerExited += (s, e) => this.ClickMode = ClickMode.Release;
 
 
-            this.SizeChanged += (s, e) =>
-            {
-                if (e.NewSize == e.PreviousSize) return;
-
-                //width
-                double width = e.NewSize.Width;
-                this.Rectangle2.Width = width - 20;
-                Canvas.SetLeft(this.Rectangle2, 10);
-                Canvas.SetLeft(this.Rectangle1, 10);
-
-
-                //height
-                double height = e.NewSize.Height;
-                double heightHalf = height / 2;
-
-                Canvas.SetTop(this.Rectangle2, heightHalf - 2);
-                Canvas.SetTop(this.Rectangle1, heightHalf - 2);
-
-                Canvas.SetTop(this.Thumb2, heightHalf - 10);
-                Canvas.SetTop(this.Thumb1, heightHalf - 9);
-            };
-
-
             //Manipulation
             //htis.RootGrid.ManipulationMode = ManipulationModes.All;
             this.RootGrid.ManipulationStarted += (sender, e) =>

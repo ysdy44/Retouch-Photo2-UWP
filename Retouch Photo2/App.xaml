@@ -31,7 +31,7 @@
                     <Color x:Key="AppTextColor" >#AA000000</Color>
 
                     <Color x:Key="AppTitleColor" >#E7E8E8</Color>
-                    <Color x:Key="AppAcrylicEColor" >#E7E8E8</Color>
+                    <Color x:Key="AppAcrylicColor" >#E7E8E8</Color>
                     
                     <LinearGradientBrush x:Key="AppLinearBrush" StartPoint="0.5,0" EndPoint="0.5,1">
                         <GradientStop Color="#FFFFFF" Offset="0"/>
@@ -61,14 +61,14 @@
 
                     <Color x:Key="AppForegroundColor" >#111111</Color>
                     <Color x:Key="AppBackgroundColor" >#0E0E0E</Color>
-                    <Color x:Key="AppBorderBrushColor" >#303030</Color>
+                    <Color x:Key="AppBorderBrushColor" >#88888888</Color>
 
                     <Color x:Key="AppFillColor" >#1E1E1E</Color>
                     <Color x:Key="AppStrokeColor" >#AA050005</Color>
                     <Color x:Key="AppTextColor" >#BBFFFFFF</Color>
 
                     <Color x:Key="AppTitleColor" >#171717</Color>
-                    <Color x:Key="AppAcrylicEColor" >#111111</Color>
+                    <Color x:Key="AppAcrylicColor" >#111111</Color>
                     
                     <LinearGradientBrush x:Key="AppLinearBrush" StartPoint="0.5,0" EndPoint="0.5,1">
                         <GradientStop Color="#111111" Offset="0"/>
@@ -95,12 +95,6 @@
                 </ResourceDictionary>
 
             </ResourceDictionary.ThemeDictionaries>
-
-
-            <!--StaticResource-->
-            <StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="SystemControlBackgroundAccentBrush"/>
-            <StaticResource x:Key="ListViewItemBackgroundSelectedPointerOver" ResourceKey="SystemControlBackgroundAccentBrush"/>
-            <StaticResource x:Key="ListViewItemBackgroundSelectedPressed" ResourceKey="SystemControlBackgroundAccentBrush"/>
 
 
             <!--Merged-->

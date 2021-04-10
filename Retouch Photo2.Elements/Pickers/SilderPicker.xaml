@@ -6,7 +6,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Height="26"
+    Height="32"
     MinWidth="120"
     Background="Transparent"
     >
@@ -26,10 +26,10 @@
 
                 <VisualState x:Name="PointerOver">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle2" Storyboard.TargetProperty="Fill">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TrackRectangle" Storyboard.TargetProperty="Fill">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackFillPointerOver}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle1" Storyboard.TargetProperty="Fill">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DecreaseRectangle" Storyboard.TargetProperty="Fill">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackValueFillPointerOver}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
@@ -37,10 +37,10 @@
 
                 <VisualState x:Name="Pressed">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle2" Storyboard.TargetProperty="Fill">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TrackRectangle" Storyboard.TargetProperty="Fill">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackFillPressed}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle1" Storyboard.TargetProperty="Fill">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DecreaseRectangle" Storyboard.TargetProperty="Fill">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackValueFillPressed}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
@@ -48,13 +48,16 @@
 
                 <VisualState x:Name="Disabled">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle2" Storyboard.TargetProperty="Fill">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TrackRectangle" Storyboard.TargetProperty="Fill">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderHeaderForegroundDisabled}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Rectangle1" Storyboard.TargetProperty="Fill">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DecreaseRectangle" Storyboard.TargetProperty="Fill">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderTrackValueFillDisabled}" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Thumb1" Storyboard.TargetProperty="Fill">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Thumb" Storyboard.TargetProperty="Stroke">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderThumbBackgroundDisabled}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Thumb" Storyboard.TargetProperty="Fill">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SliderThumbBackgroundDisabled}" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
@@ -63,11 +66,10 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Rectangle x:Name="Rectangle2" Grid.ColumnSpan="3" Width="Auto" Height="4" Fill="{ThemeResource SliderTrackFill}"/>
-        <Rectangle x:Name="Rectangle1" Grid.Column="0" Width="Auto" Height="4" Fill="{ThemeResource SliderTrackValueFill}"/>
+        <Rectangle x:Name="TrackRectangle" Grid.ColumnSpan="3" Width="Auto" Height="2" Fill="{ThemeResource SliderTrackFill}"/>
+        <Rectangle x:Name="DecreaseRectangle" Grid.Column="0" Width="Auto" Height="2" Fill="{ThemeResource SliderTrackValueFill}"/>
 
-        <Ellipse x:Name="Thumb2" Grid.Column="1" Width="20" Height="20" Fill="Black" Opacity="0.9"/>
-        <Ellipse x:Name="Thumb1" Grid.Column="1" Width="18" Height="18" Fill="White"/>
+        <Ellipse x:Name="Thumb" Grid.Column="1" Width="20" Height="20" StrokeThickness="2" Stroke="{ThemeResource SliderTrackValueFill}" Fill="White" />
 
     </Grid>
 </hsvcolorpickers:TouchSliderBase>

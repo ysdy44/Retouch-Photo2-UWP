@@ -21,28 +21,19 @@
 
                 <VisualState x:Name="Normal"/>
 
-                <VisualState x:Name="PointerOver">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ellipse" Storyboard.TargetProperty="StrokeThickness">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="3" />
-                        </ObjectAnimationUsingKeyFrames>
-                    </Storyboard>
-                </VisualState>
+                <VisualState x:Name="PointerOver"/>
 
-                <VisualState x:Name="Pressed">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ellipse" Storyboard.TargetProperty="StrokeThickness">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="3" />
-                        </ObjectAnimationUsingKeyFrames>
-                    </Storyboard>
-                </VisualState>
+                <VisualState x:Name="Pressed"/>
 
                 <VisualState x:Name="Disabled">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Ellipse" Storyboard.TargetProperty="Stroke">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Gray" />
                         </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Thumb1" Storyboard.TargetProperty="Fill">
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Thumb" Storyboard.TargetProperty="Fill">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Gray" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Thumb" Storyboard.TargetProperty="Stroke">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Gray" />
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
@@ -59,8 +50,7 @@
         <Line x:Name="WhiteLine" StrokeThickness="1" Stroke="White"/>
         -->
 
-        <Ellipse x:Name="Thumb2" Width="20" Height="20" Fill="Black"/>
-        <Ellipse x:Name="Thumb1" Width="18" Height="18" Fill="White"/>
+        <Ellipse x:Name="Thumb" Width="20" Height="20" StrokeThickness="2" Stroke="{ThemeResource SystemAccentColor}" Fill="White"/>
 
     </Canvas>
 

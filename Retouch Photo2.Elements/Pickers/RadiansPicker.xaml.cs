@@ -77,10 +77,8 @@ namespace Retouch_Photo2.Elements
                 //this.WhiteLine.X2 = this.BlackLine.X2 = value.X;
                 //this.WhiteLine.Y2 = this.BlackLine.Y2 = value.Y;
 
-                Canvas.SetLeft(this.Thumb2, value.X - 10);
-                Canvas.SetTop(this.Thumb2, value.Y - 10);
-                Canvas.SetLeft(this.Thumb1, value.X - 9);
-                Canvas.SetTop(this.Thumb1, value.Y - 9);
+                Canvas.SetLeft(this.Thumb, value.X - 10);
+                Canvas.SetTop(this.Thumb, value.Y - 10);
 
                 this.arrow = value;
             }

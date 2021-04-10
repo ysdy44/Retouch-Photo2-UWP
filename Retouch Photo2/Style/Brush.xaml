@@ -17,9 +17,9 @@
     <SolidColorBrush x:Key="AppTitle" Color="{ThemeResource AppTitleColor}"/>
 
     <apiContractPresent5:AcrylicBrush x:Key="AppAcrylicElementBrush" BackgroundSource="Backdrop" 
-         TintColor="{ThemeResource AppAcrylicEColor}" TintOpacity="0.8" FallbackColor="{ThemeResource AppAcrylicEColor}" />
+         TintColor="{ThemeResource AppAcrylicColor}" TintOpacity="0.8" FallbackColor="{ThemeResource AppAcrylicColor}" />
     <apiContractPresent5:AcrylicBrush x:Key="AppAcrylicWindowBrush" BackgroundSource="HostBackdrop" 
-         TintColor="{ThemeResource AppAcrylicEColor}" TintOpacity="0.7" FallbackColor="{ThemeResource AppAcrylicEColor}" />
+         TintColor="{ThemeResource AppAcrylicColor}" TintOpacity="0.7" FallbackColor="{ThemeResource AppAcrylicColor}" />
 
     
 </ResourceDictionary>

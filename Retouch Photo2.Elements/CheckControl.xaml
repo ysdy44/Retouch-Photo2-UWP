@@ -8,11 +8,11 @@
         <Setter Property="Background" Value="{ThemeResource CheckBoxBackgroundUnchecked}" />
         <Setter Property="Foreground" Value="{ThemeResource AppText}" />
         <Setter Property="BorderBrush" Value="{ThemeResource CheckBoxBorderBrushUnchecked}" />
-        <Setter Property="Padding" Value="8,5,0,0" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
         <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
         <Setter Property="MinWidth" Value="120" />
@@ -20,7 +20,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:CheckControl">
-                    <Grid x:Name="RootGrid" 
+                    <Border x:Name="RootGrid" 
                         Background="{TemplateBinding Background}" 
                         BorderBrush="{TemplateBinding BorderBrush}" 
                         BorderThickness="{TemplateBinding BorderThickness}">
@@ -243,38 +243,41 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid VerticalAlignment="Center" Height="32">
-                            <Rectangle x:Name="NormalRectangle" RadiusX="2" RadiusY="2"
+                        <Grid
+                            Margin="{TemplateBinding Padding}"               
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid                
+                              >
+                                <Rectangle x:Name="NormalRectangle" RadiusX="2" RadiusY="2"
                                 Fill="{ThemeResource CheckBoxCheckBackgroundFillUnchecked}"
                                 Stroke="{ThemeResource CheckBoxCheckBackgroundStrokeUnchecked}"
                                 StrokeThickness="{ThemeResource CheckBoxBorderThemeThickness}"
                                 UseLayoutRounding="False"
                                 Height="20"
                                 Width="20" />
-                            <FontIcon x:Name="CheckGlyph"
+                                <FontIcon x:Name="CheckGlyph"
                                 FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                 Glyph="&#xE001;"
                                 FontSize="20"
                                 Foreground="{ThemeResource CheckBoxCheckGlyphForegroundUnchecked}"
                                 Opacity="0" />
-                        </Grid>
-                        <ContentPresenter x:Name="ContentPresenter"
+                            </Grid>
+                            <ContentPresenter x:Name="ContentPresenter"
                             Foreground="{TemplateBinding Foreground}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
                             ContentTransitions="{TemplateBinding ContentTransitions}"
                             Content="{TemplateBinding Content}"
-                            Margin="{TemplateBinding Padding}"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Grid.Column="1"
                             AutomationProperties.AccessibilityView="Raw"
                             TextWrapping="Wrap" />
 
-                    </Grid>
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

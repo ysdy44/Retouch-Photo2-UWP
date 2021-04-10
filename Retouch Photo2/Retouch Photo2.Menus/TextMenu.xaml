@@ -97,9 +97,18 @@
                             <Button.Flyout>
                                 <Flyout Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                     <ListView x:Name="FontSizeListView" IsItemClickEnabled="True" SelectionMode="Single">
+                                        <ListView.Resources>
+                                            <!--StaticResource-->
+                                            <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
+                                            <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
+                                            <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
+                                            <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
+                                            <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
+                                            <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
+                                        </ListView.Resources>
                                         <ListView.ItemTemplate>
                                             <DataTemplate x:DataType="x:Int32">
-                                                <TextBlock Foreground="{StaticResource SystemBaseHighColor}" Style="{StaticResource AppTextBlockStyle}">
+                                                <TextBlock Style="{StaticResource AppTextBlockStyle}">
                                                 <Run Text="{x:Bind}"/>                            
                                                 <Run> px</Run>
                                                 </TextBlock>
@@ -128,9 +137,18 @@
                 </Grid.RowDefinitions>
                 <ListView x:Name="FontFamilyListView" IsItemClickEnabled="True" SelectionMode="Single"
                           Visibility="Collapsed">
+                    <ListView.Resources>
+                        <!--StaticResource-->
+                        <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
+                        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
+                        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
+                        <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
+                        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
+                        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
+                    </ListView.Resources>
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="x:String">
-                            <TextBlock FontFamily="{x:Bind}" Text="{x:Bind}" Foreground="{StaticResource SystemBaseHighColor}" Style="{StaticResource AppTextBlockStyle}"/>
+                            <TextBlock FontFamily="{x:Bind}" Text="{x:Bind}" Style="{StaticResource AppTextBlockStyle}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

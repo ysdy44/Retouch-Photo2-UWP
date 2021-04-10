@@ -13,6 +13,15 @@
         <!--Flyout-->
         <Flyout x:Name="Flyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ScrollViewer  Style="{StaticResource AppVerticalScrollViewerStyle}">
+                <ScrollViewer.Resources>
+                    <!--StaticResource-->
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
+                    <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
+                    <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
+                    <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
+                </ScrollViewer.Resources>
                 <StackPanel Padding="{StaticResource AppPanelPadding}" HorizontalAlignment="Stretch">
 
                     <ListViewItem x:Name="BlackItem">
@@ -196,7 +205,7 @@
                 <!--ExtraLight-->
                 <VisualState x:Name="ExtraLightState">
                     <VisualState.Setters>
-                        <Setter Target = "ExtraLight.IsSelected" Value="True"/>
+                        <Setter Target = "ExtraLightItem.IsSelected" Value="True"/>
                         <Setter Target = "Button.Content" Value="{x:Bind ExtraLight.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
