@@ -51,13 +51,7 @@ namespace Retouch_Photo2.Tools
             {
                 control.Group?.Invoke(control, value);//Delegate
 
-                ITool tool = control.Tools.FirstOrDefault(t => t.Type == value);
-                if (tool == null)
-                {
-                    tool = Retouch_Photo2.Tools.XML.CreateTool(control.AssemblyType, $"{value}");
-                    control.Tools.Add(tool);
-                }
-                control.Tool = tool;
+                control.Tool = Retouch_Photo2.Tools.XML.CreateTool(control.AssemblyType, value);
             }
         }));
 
@@ -123,10 +117,6 @@ namespace Retouch_Photo2.Tools
 
 
         #endregion
-
-
-        /// <summary> Gets or sets the all tools. </summary>   
-        private readonly IList<ITool> Tools = new List<ITool>();
 
 
         //@Construct
@@ -220,7 +210,7 @@ namespace Retouch_Photo2.Tools
 
 
                 //Button
-                item.Tapped += (s, e) => this.Type = type;// this.ModeChanged?.Invoke(this, mode);//Delegate
+                item.Tapped += (s, e) => this.Type = type;
 
 
                 //Group
@@ -232,8 +222,6 @@ namespace Retouch_Photo2.Tools
                     if (groupType == type)
                     {
                         item.IsSelected = true;
-
-                        // this.Button.Content = control.Content as string;
                     }
                     else item.IsSelected = false;
                 }

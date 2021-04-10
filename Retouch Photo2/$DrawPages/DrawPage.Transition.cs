@@ -103,12 +103,7 @@ namespace Retouch_Photo2
             //Transition
             this.ViewModel.CanvasTransformer.Transition(1.0f);
 
-            //Destination
-            Vector2 destinationPostion = this.SettingViewModel.FullScreenOffset;
-            this.ViewModel.CanvasTransformer.Position -= destinationPostion;
-            this.ViewModel.CanvasTransformer.ReloadMatrix();
-
-            this.DrawLayout.IsFullScreen = false;
+            this.FullScreenChanged();
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             this.TransitionBorder.Visibility = Windows.UI.Xaml.Visibility.Collapsed;

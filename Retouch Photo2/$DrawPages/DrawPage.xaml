@@ -20,8 +20,6 @@
     xmlns:transformers="using:FanKit.Transformers"
     xmlns:layers="using:Retouch_Photo2.Layers" 
     xmlns:brushs="using:Retouch_Photo2.Brushs" 
-    xmlns:adjustmentsPages="using:Retouch_Photo2.Adjustments.Pages"
-    xmlns:effectsPages="using:Retouch_Photo2.Effects.Pages"
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -218,50 +216,50 @@
                             <Flyout x:Name="OverflowFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                 <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
                                     <StackPanel x:Name="OverflowStackPanel">
-                                    <Button x:Name="OverflowExportButton" Foreground="Black" Background="#FFC003" Style="{StaticResource AppIconSelectedButton}">
-                                        <Button.Tag>
-                                            <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                        </Button.Tag>
-                                    </Button>
-                                    <Button x:Name="OverflowUndoButton" IsEnabled="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}" Style="{StaticResource AppIconSelectedButton}">
-                                        <Button.Tag>
-                                            <FontIcon Glyph="&#xE10E;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                        </Button.Tag>
-                                    </Button>
-                                    <!--<Button x:Name="OverflowRedoButton" Style="{StaticResource AppIconSelectedButton}">
+                                        <Button x:Name="OverflowExportButton" Foreground="Black" Background="#FFC003" Style="{StaticResource AppIconSelectedButton}">
+                                            <Button.Tag>
+                                                <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                            </Button.Tag>
+                                        </Button>
+                                        <Button x:Name="OverflowUndoButton" IsEnabled="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}" Style="{StaticResource AppIconSelectedButton}">
+                                            <Button.Tag>
+                                                <FontIcon Glyph="&#xE10E;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                            </Button.Tag>
+                                        </Button>
+                                        <!--<Button x:Name="OverflowRedoButton" Style="{StaticResource AppIconSelectedButton}">
                                        <Button.Tag>    
                                     <FontIcon Glyph="&#xE10D;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                         </Button.Tag>
                                     </Button>-->
-                                    <Button x:Name="OverflowSetupButton" Style="{StaticResource AppIconSelectedButton}">
-                                        <Button.Tag>
-                                            <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                        </Button.Tag>
-                                    </Button>
-                                    <ToggleButton x:Name="OverflowSnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
-                                        <ToggleButton.Resources>
-                                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/$DrawPages/SnapIcon.xaml"/>
-                                        </ToggleButton.Resources>
-                                        <ToggleButton.Tag>
-                                            <ContentControl Template="{StaticResource SnapIcon}"/>
-                                        </ToggleButton.Tag>
-                                    </ToggleButton>
-                                    <ToggleButton x:Name="OverflowRulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
-                                        <ToggleButton.Tag>
-                                            <FontIcon Glyph="&#xECC6;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                        </ToggleButton.Tag>
-                                    </ToggleButton>
-                                    <Button x:Name="OverflowFullScreenButton" Style="{StaticResource AppIconSelectedButton}">
-                                        <Button.Tag>
-                                            <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                        </Button.Tag>
-                                    </Button>
-                                    <ToggleButton x:Name="OverflowTipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Style="{StaticResource AppIconToggleButtonStyle}">
-                                        <ToggleButton.Tag>
-                                            <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                        </ToggleButton.Tag>
-                                    </ToggleButton>
-                                </StackPanel>
+                                        <Button x:Name="OverflowSetupButton" Style="{StaticResource AppIconSelectedButton}">
+                                            <Button.Tag>
+                                                <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                            </Button.Tag>
+                                        </Button>
+                                        <ToggleButton x:Name="OverflowSnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
+                                            <ToggleButton.Resources>
+                                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/$DrawPages/SnapIcon.xaml"/>
+                                            </ToggleButton.Resources>
+                                            <ToggleButton.Tag>
+                                                <ContentControl Template="{StaticResource SnapIcon}"/>
+                                            </ToggleButton.Tag>
+                                        </ToggleButton>
+                                        <ToggleButton x:Name="OverflowRulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
+                                            <ToggleButton.Tag>
+                                                <FontIcon Glyph="&#xECC6;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                            </ToggleButton.Tag>
+                                        </ToggleButton>
+                                        <Button x:Name="OverflowFullScreenButton" Style="{StaticResource AppIconSelectedButton}">
+                                            <Button.Tag>
+                                                <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                            </Button.Tag>
+                                        </Button>
+                                        <ToggleButton x:Name="OverflowTipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Style="{StaticResource AppIconToggleButtonStyle}">
+                                            <ToggleButton.Tag>
+                                                <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                            </ToggleButton.Tag>
+                                        </ToggleButton>
+                                    </StackPanel>
                                 </ScrollViewer>
                             </Flyout>
                         </Button.Flyout>
@@ -304,21 +302,7 @@
                                 <Button.Flyout>
                                     <Flyout x:Name="AdjustmentFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="AdjustmentExpander" Flyout="{x:Bind AdjustmentFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:AdjustmentMenu Filter="{x:Bind SelectionViewModel.Filter, Mode=OneWay}">
-                                                <menus:AdjustmentMenu.AdjustmentPages>
-                                                    <adjustmentsPages:GrayPage/>
-                                                    <adjustmentsPages:InvertPage/>
-                                                    <adjustmentsPages:ExposurePage/>
-                                                    <adjustmentsPages:BrightnessPage/>
-                                                    <adjustmentsPages:SaturationPage/>
-                                                    <adjustmentsPages:HueRotationPage/>
-                                                    <adjustmentsPages:ContrastPage/>
-                                                    <adjustmentsPages:TemperaturePage/>
-                                                    <adjustmentsPages:HighlightsAndShadowsPage/>
-                                                    <adjustmentsPages:GammaTransferPage/>
-                                                    <adjustmentsPages:VignettePage/>
-                                                </menus:AdjustmentMenu.AdjustmentPages>
-                                            </menus:AdjustmentMenu>
+                                            <menus:AdjustmentMenu x:Name="AdjustmentMenu" Filter="{x:Bind SelectionViewModel.Filter, Mode=OneWay}"/>
                                         </elements:Expander>
                                     </Flyout>
                                 </Button.Flyout>
@@ -331,18 +315,7 @@
                                 <Button.Flyout>
                                     <Flyout x:Name="EffectFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="EffectExpander" Flyout="{x:Bind EffectFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:EffectMenu Effect="{x:Bind SelectionViewModel.Effect, Mode=OneWay}">
-                                                <menus:EffectMenu.EffectPages>
-                                                    <effectsPages:GaussianBlurEffectPage/>
-                                                    <effectsPages:DirectionalBlurEffectPage/>
-                                                    <effectsPages:SharpenEffectPage/>
-                                                    <effectsPages:OuterShadowEffectPage/>
-                                                    <effectsPages:EdgeEffectPage/>
-                                                    <effectsPages:MorphologyEffectPage/>
-                                                    <effectsPages:EmbossEffectPage/>
-                                                    <effectsPages:StraightenEffectPage/>
-                                                </menus:EffectMenu.EffectPages>
-                                            </menus:EffectMenu>
+                                            <menus:EffectMenu x:Name="EffectMenu" Effect="{x:Bind SelectionViewModel.Effect, Mode=OneWay}"/>
                                         </elements:Expander>
                                     </Flyout>
                                 </Button.Flyout>
@@ -461,8 +434,7 @@
 
 
         <!--FullScreen-->
-        <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}"
-              Visibility="{x:Bind DrawLayout.UnFullScreenButtonVisibility, Mode=OneWay}">
+        <Button x:Name="UnFullScreenButton" Visibility="Collapsed" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}">
             <FontIcon Glyph="&#xE92C;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
 

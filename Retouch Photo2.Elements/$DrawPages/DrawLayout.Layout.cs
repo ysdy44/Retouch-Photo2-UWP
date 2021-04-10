@@ -6,20 +6,6 @@ namespace Retouch_Photo2.Elements
     public sealed partial class DrawLayout : UserControl
     {
 
-        #region DependencyProperty
-
-        /// <summary> Gets or sets whether the <see cref = "DrawLayout" /> visibility for UnFullScreenButton. </summary>
-        public Visibility UnFullScreenButtonVisibility
-        {
-            get => (Visibility)base.GetValue(UnFullScreenButtonVisibilityProperty);
-            set => base.SetValue(UnFullScreenButtonVisibilityProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "DrawLayout.UnFullScreenButtonVisibility" /> dependency property. </summary>
-        public static readonly DependencyProperty UnFullScreenButtonVisibilityProperty = DependencyProperty.Register(nameof(UnFullScreenButtonVisibility), typeof(Visibility), typeof(DrawLayout), new PropertyMetadata(Visibility.Visible));
-
-        #endregion
-
-
         //@VisualState
         bool _vsIsFullScreen = true;
         DeviceLayoutType _vsDeviceLayoutType = DeviceLayoutType.PC;
@@ -64,8 +50,6 @@ namespace Retouch_Photo2.Elements
             set
             {
                 if (this._vsIsFullScreen == value) return;
-
-                this.UnFullScreenButtonVisibility = value ? Visibility.Visible : Visibility.Collapsed;
 
                 this._vsPhoneType = PhoneLayoutType.Hided;
                 this._vsIsFullScreen = value;

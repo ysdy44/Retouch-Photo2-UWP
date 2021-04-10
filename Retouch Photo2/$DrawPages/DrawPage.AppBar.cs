@@ -94,14 +94,14 @@ namespace Retouch_Photo2
                 this.OverflowFlyout.Hide();
             };
 
-            this.FullScreenButton.Click += (s, e) => this.DrawLayout.IsFullScreen = true;
+            this.FullScreenButton.Click += (s, e) => this.FullScreenChanged();
             this.OverflowFullScreenButton.Click += (s, e) =>
             {
-                this.DrawLayout.IsFullScreen = true;
+                this.FullScreenChanged();
                 this.OverflowFlyout.Hide();
             };
 
-            this.UnFullScreenButton.Click += (s, e) => this.DrawLayout.IsFullScreen = false;
+            this.UnFullScreenButton.Click += (s, e) => this.FullScreenChanged();
 
             this.ConstructAppBar_TipButton(this.TipButton);
             this.ConstructAppBar_TipButton(this.OverflowTipButton);
@@ -167,7 +167,7 @@ namespace Retouch_Photo2
             await this.Save();
 
             await this.Exit();
-            this.DrawLayout.IsFullScreen = true;
+            this.FullScreenChanged();
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate}
 
             this.LoadingControl.State = LoadingState.None;
@@ -182,7 +182,7 @@ namespace Retouch_Photo2
             this.LoadingControl.State = LoadingState.Saving;
 
             await this.Exit();
-            this.DrawLayout.IsFullScreen = true;
+            this.FullScreenChanged();
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
             this.LoadingControl.State = LoadingState.None;
