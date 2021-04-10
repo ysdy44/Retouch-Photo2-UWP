@@ -8,8 +8,6 @@ using Microsoft.Graphics.Canvas.Effects;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-
 
 namespace Retouch_Photo2.Adjustments.Models
 {
@@ -18,18 +16,10 @@ namespace Retouch_Photo2.Adjustments.Models
     /// </summary>
     public class HighlightsAndShadowsAdjustment : IAdjustment
     {
-        //@Static
-        //@Generic
-        public static string GenericText = "HighlightsAndShadows";
-        public static ControlTemplate GenericIcon;
-        public static IAdjustmentPage GenericPage;// = new HighlightsAndShadowsPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.HighlightsAndShadows;
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page => HighlightsAndShadowsAdjustment.GenericPage;
-        public ControlTemplate Icon => HighlightsAndShadowsAdjustment.GenericIcon;
-        public string Title => HighlightsAndShadowsAdjustment.GenericText;
 
         public ICommand Edit { get; private set; }
         public ICommand Remove { get; private set; }

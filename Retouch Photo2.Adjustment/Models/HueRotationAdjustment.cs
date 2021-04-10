@@ -8,7 +8,6 @@ using Microsoft.Graphics.Canvas.Effects;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
@@ -17,19 +16,11 @@ namespace Retouch_Photo2.Adjustments.Models
     /// </summary>
     public class HueRotationAdjustment : IAdjustment
     {
-        //@Static
-        //@Generic
-        public static string GenericText = "HueRotation";
-        public static ControlTemplate GenericIcon;
-        public static IAdjustmentPage GenericPage;// = new HueRotationPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.HueRotation;
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page => HueRotationAdjustment.GenericPage;
-        public ControlTemplate Icon => HueRotationAdjustment.GenericIcon;
-        public string Title => HueRotationAdjustment.GenericText; 
-        
+
         public ICommand Edit { get; private set; }
         public ICommand Remove { get; private set; }
 

@@ -8,7 +8,6 @@ using Microsoft.Graphics.Canvas.Effects;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
@@ -17,18 +16,10 @@ namespace Retouch_Photo2.Adjustments.Models
     /// </summary>
     public class InvertAdjustment : IAdjustment
     {
-        //@Static
-        //@Generic
-        public static string GenericText = "Invert";
-        public static ControlTemplate GenericIcon;
-        public static IAdjustmentPage GenericPage;// = new InvertPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Invert;
         public Visibility PageVisibility => Visibility.Collapsed;
-        public IAdjustmentPage Page => InvertAdjustment.GenericPage;
-        public ControlTemplate Icon => InvertAdjustment.GenericIcon;
-        public string Title => InvertAdjustment.GenericText;
 
         public ICommand Edit { get; private set; }
         public ICommand Remove { get; private set; }

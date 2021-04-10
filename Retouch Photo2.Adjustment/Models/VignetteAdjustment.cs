@@ -9,8 +9,6 @@ using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-
 
 namespace Retouch_Photo2.Adjustments.Models
 {
@@ -19,18 +17,10 @@ namespace Retouch_Photo2.Adjustments.Models
     /// </summary>
     public class VignetteAdjustment : IAdjustment
     {
-        //@Static
-        //@Generic
-        public static string GenericText = "Vignette";
-        public static ControlTemplate GenericIcon;
-        public static IAdjustmentPage GenericPage;// = new VignettePage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Vignette;
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page =>VignetteAdjustment.GenericPage;
-        public ControlTemplate Icon => VignetteAdjustment.GenericIcon;
-        public string Title => VignetteAdjustment.GenericText;
 
         public ICommand Edit { get; private set; }
         public ICommand Remove { get; private set; }

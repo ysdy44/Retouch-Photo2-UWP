@@ -8,7 +8,6 @@ using Microsoft.Graphics.Canvas.Effects;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
@@ -17,18 +16,10 @@ namespace Retouch_Photo2.Adjustments.Models
     /// </summary>
     public class TemperatureAdjustment : IAdjustment
     {
-        //@Static
-        //@Generic
-        public static string GenericText = "Temperature";
-        public static ControlTemplate GenericIcon;
-        public static IAdjustmentPage GenericPage;// = new TemperaturePage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Temperature;
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page => TemperatureAdjustment.GenericPage;
-        public ControlTemplate Icon => TemperatureAdjustment.GenericIcon;
-        public string Title => TemperatureAdjustment.GenericText;
 
         public ICommand Edit { get; private set; }
         public ICommand Remove { get; private set; }

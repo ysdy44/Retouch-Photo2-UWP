@@ -4,17 +4,57 @@
 // Only:              
 // Complete:      ★★★★★
 using Retouch_Photo2.Adjustments;
+using Retouch_Photo2.Adjustments.Pages;
 using Retouch_Photo2.Filters;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
+using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 
 namespace Retouch_Photo2.Menus
 {
+    internal class AdjustmentTitleConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string culture)
+        {
+            if (value is AdjustmentType type)
+            {
+                IAdjustmentPage adjustmentPage = Retouch_Photo2.Adjustments.XML.CreateAdjustmentPage(typeof(BrightnessPage), type);
+                return adjustmentPage.Title;
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    internal class AdjustmentIconConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string culture)
+        {
+            if (value is AdjustmentType type)
+            {
+                IAdjustmentPage adjustmentPage = Retouch_Photo2.Adjustments.XML.CreateAdjustmentPage(typeof(BrightnessPage), type);
+                return adjustmentPage.Icon;
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Adjustments"/>.
     /// </summary>
@@ -25,7 +65,12 @@ namespace Retouch_Photo2.Menus
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
-        public ItemCollection AdjustmentPages => this.AdjustmentPageListView.Items;
+
+        //@Delegate
+        /// <summary> Occurs after the splitview pane is closed. </summary>
+        public event TypedEventHandler<SplitView, object> PaneClosed { add => this.SplitView.PaneClosed += value; remove => this.SplitView.PaneClosed -= value; }
+        /// <summary> Occurs when the splitview pane is opened. </summary>
+        public event TypedEventHandler<SplitView, object> PaneOpened { add => this.SplitView.PaneOpened += value; remove => this.SplitView.PaneOpened -= value; }
 
 
         //@VisualState
@@ -89,10 +134,6 @@ namespace Retouch_Photo2.Menus
         #endregion
 
 
-        /// <summary> Gets or sets the current adjustment page. </summary>
-        public IAdjustmentPage AdjustmentPage;
-
-
         //@Construct
         /// <summary>
         /// Initializes a AdjustmentMenu. 
@@ -100,9 +141,10 @@ namespace Retouch_Photo2.Menus
         public AdjustmentMenu()
         {
             this.InitializeComponent();
-            this.ConstructStrings();
-            AdjustmentCommand.Edit = this.EditAction;
-            AdjustmentCommand.Remove = this.RemoveAction;
+            this.ConstructStrings(); 
+            this.ConstructGroup(); 
+            AdjustmentCommand.Edit = this.Edit;
+            AdjustmentCommand.Remove = this.Remove;
 
             base.SizeChanged += (s, e) => this.SplitView.OpenPaneLength = e.NewSize.Width;
             base.Loaded += async (s, e) =>
@@ -131,48 +173,12 @@ namespace Retouch_Photo2.Menus
             {
                 if (e.ClickedItem is Filter filter)
                 {
-                    this.FilterChanged(filter);
+                    this.SetFilter(filter);
                 }
             };
 
             this.AddButton.Click += (s, e) => this.AdjustmentPageFlyout.ShowAt(this.AddButton);
-            this.AdjustmentPageListView.ItemClick += (s, e) =>
-            {
-                this.AdjustmentPageFlyout.Hide();
-
-                if (e.ClickedItem is IAdjustmentPage item)
-                {
-                    this.FilterAdd(item);
-                }
-            };
         }
-
-
-        private void EditAction(IAdjustment adjustment)
-        {
-            if (adjustment.PageVisibility == Visibility.Collapsed) return;
-
-            IAdjustmentPage effectPage = adjustment.Page;
-            if (effectPage == null) return;
-            this.AdjustmentPage = adjustment.Page;
-
-            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-            {
-                ILayer layer = layerage.Self;
-
-                int index = layer.Filter.Adjustments.IndexOf(adjustment);
-                effectPage.Index = index;
-                effectPage.Follow();
-            }
-
-            this.ContentPresenter.Content = effectPage.Self;
-            this.SplitView.IsPaneOpen = false;
-        }
-        private void RemoveAction(IAdjustment adjustment)
-        {
-            this.FilterRemove(adjustment);
-        }
-
     }
 
     public sealed partial class AdjustmentMenu : UserControl
@@ -190,10 +196,60 @@ namespace Retouch_Photo2.Menus
             this.FilterButton.Content = resource.GetString("Menus_Adjustment_Filters");
 
             this.CloseButton.Content = resource.GetString("Menus_Close");
+
+            foreach (UIElement child in this.StackPanel.Children)
+            {
+                if (child is ListViewItem item)
+                {
+                    if (item.Content is ContentControl control)
+                    {
+                        string key = control.Name;
+                        string title = resource.GetString($"Adjustments_{key}");
+
+                        control.Content = title;
+                    }
+                }
+            }
         }
 
 
-        private void FilterAdd(IAdjustmentPage adjustmentPage)
+        //@Group
+        private void ConstructGroup()
+        {
+            foreach (UIElement child in this.StackPanel.Children)
+            {
+                if (child is ListViewItem item)
+                {
+                    if (item.Content is ContentControl control)
+                    {
+                        string key = control.Name;
+                        AdjustmentType mode = AdjustmentType.Gray;
+                        try
+                        {
+                            mode = (AdjustmentType)Enum.Parse(typeof(AdjustmentType), key);
+                        }
+                        catch (Exception) { }
+
+
+                        //Button
+                        item.Tapped += (s, e) =>
+                        {
+                            this.AdjustmentPageFlyout.Hide();
+
+                            IAdjustment adjustment = Retouch_Photo2.Adjustments.XML.CreateAdjustment(key);
+                            this.Add(adjustment);
+
+                            if (adjustment.PageVisibility== Visibility.Visible)
+                            {
+                                this.Edit(adjustment);
+                            }   
+                        };
+                    }
+                }
+            }
+        }
+
+        private void Add(IAdjustment adjustment)
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetFilter);
@@ -218,7 +274,7 @@ namespace Retouch_Photo2.Menus
                 layer.IsRefactoringIconRender = true;
                 layerage.RefactoringParentsRender();
                 layerage.RefactoringParentsIconRender();
-                layer.Filter.Adjustments.Add(adjustmentPage.GetNewAdjustment());
+                layer.Filter.Adjustments.Add(adjustment);
 
                 this._vsIsZeroAdjustments = layer.Filter.Adjustments.Count == 0;
             });
@@ -233,7 +289,7 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        private void FilterRemove(IAdjustment removeAdjustment)
+        private void Remove(IAdjustment removeAdjustment)
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetFilter);
@@ -273,7 +329,27 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        private void FilterChanged(Filter filter)
+        private void Edit(IAdjustment adjustment)
+        {
+            if (adjustment.PageVisibility == Visibility.Collapsed) return;
+
+            IAdjustmentPage adjustmentPage = Retouch_Photo2.Adjustments.XML.CreateAdjustmentPage(typeof(BrightnessPage), adjustment.Type);
+
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
+            {
+                ILayer layer = layerage.Self;
+
+                int index = layer.Filter.Adjustments.IndexOf(adjustment);
+                adjustmentPage.Index = index;
+                adjustmentPage.Follow();
+            }
+
+            this.ContentPresenter.Content = adjustmentPage.Self;
+            this.SplitView.IsPaneOpen = false;
+        }
+
+
+        private void SetFilter(Filter filter)
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetFilter);

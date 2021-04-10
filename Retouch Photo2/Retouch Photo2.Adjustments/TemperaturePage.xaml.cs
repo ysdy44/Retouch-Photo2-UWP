@@ -26,6 +26,18 @@ namespace Retouch_Photo2.Adjustments.Pages
 
 
         //@Content
+        /// <summary> Gets the type. </summary>
+        public AdjustmentType Type => AdjustmentType.Temperature;
+        /// <summary> Gets the icon. </summary>
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        /// <summary> Gets the self. </summary>
+        public FrameworkElement Self => this;
+        /// <summary> Gets the text. </summary>
+        public string Title { get; private set; }
+
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
+
         private float Temperature
         {
             set
@@ -73,28 +85,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.TemperatureTextBlock.Text = resource.GetString("Adjustments_Temperature_Temperature");
             this.TintTextBlock.Text = resource.GetString("Adjustments_Temperature_Tint");
-
-            TemperatureAdjustment.GenericIcon = this.IconContentControl.Template;
-            TemperatureAdjustment.GenericText = this.Title;
-            TemperatureAdjustment.GenericPage = this;
         }
-
-        //@Content
-        /// <summary> Gets the type. </summary>
-        public AdjustmentType Type => AdjustmentType.Temperature;
-        /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon => this.IconContentControl.Template;
-        /// <summary> Gets the self. </summary>
-        public FrameworkElement Self => this;
-        /// <summary> Gets the text. </summary>
-        public string Title { get; private set; }
-
-        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
-        public IAdjustment GetNewAdjustment() => new TemperatureAdjustment();
-
-
-        /// <summary> Gets the adjustment index. </summary>
-        public int Index { get; set; }
 
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.

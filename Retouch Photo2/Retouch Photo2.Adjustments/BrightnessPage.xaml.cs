@@ -26,6 +26,18 @@ namespace Retouch_Photo2.Adjustments.Pages
 
 
         //@Content
+        /// <summary> Gets the type. </summary>
+        public AdjustmentType Type => AdjustmentType.Brightness;
+        /// <summary> Gets the icon. </summary>
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        /// <summary> Gets the self. </summary>
+        public FrameworkElement Self => this;
+        /// <summary> Gets the text. </summary>
+        public string Title { get; private set; }
+
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
+
         private float WhiteLight
         {
             set
@@ -98,28 +110,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
             this.BlackLightTextBlock.Text = resource.GetString("Adjustments_Brightness_BlackToLight");
             this.BlackDarkTextBlock.Text = resource.GetString("Adjustments_Brightness_BlackToDark");
-
-            BrightnessAdjustment.GenericIcon = this.IconContentControl.Template; ;
-            BrightnessAdjustment.GenericText = this.Title;
-            BrightnessAdjustment.GenericPage = this;
         }
-
-        //@Content
-        /// <summary> Gets the type. </summary>
-        public AdjustmentType Type => AdjustmentType.Brightness;
-        /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon => this.IconContentControl.Template;
-        /// <summary> Gets the self. </summary>
-        public FrameworkElement Self => this;
-        /// <summary> Gets the text. </summary>
-        public string Title { get; private set; }
-
-        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
-        public IAdjustment GetNewAdjustment() => new BrightnessAdjustment();
-
-
-        /// <summary> Gets the adjustment index. </summary>
-        public int Index { get; set; }
 
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.
@@ -231,6 +222,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructWhiteLight2()
         {
+            this.WhiteLightSlider.SliderBrush = this.WhiteLightBrush;
             this.WhiteLightSlider.Minimum = 0.5d;
             this.WhiteLightSlider.Maximum = 1.0d;
             this.WhiteLightSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<BrightnessAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheWhiteLight());
@@ -293,6 +285,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructWhiteDark2()
         {
+            this.WhiteDarkSlider.SliderBrush = this.WhiteDarkBrush;
             this.WhiteDarkSlider.Minimum = 0.5d;
             this.WhiteDarkSlider.Maximum = 1.0d;
             this.WhiteDarkSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<BrightnessAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheWhiteDark());
@@ -355,6 +348,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructBlackLight2()
         {
+            this.BlackLightSlider.SliderBrush = this.BlackLightBrush;
             this.BlackLightSlider.Minimum = 0.0d;
             this.BlackLightSlider.Maximum = 0.5d;
             this.BlackLightSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<BrightnessAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheBlackLight());
@@ -417,6 +411,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructBlackDark2()
         {
+            this.BlackDarkSlider.SliderBrush = this.BlackDarkBrush;
             this.BlackDarkSlider.Minimum = 0.0d;
             this.BlackDarkSlider.Maximum = 0.5d;
             this.BlackDarkSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<BrightnessAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheBlackDark());

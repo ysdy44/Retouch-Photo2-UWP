@@ -26,6 +26,18 @@ namespace Retouch_Photo2.Adjustments.Pages
 
 
         //@Content
+        /// <summary> Gets the type. </summary>
+        public AdjustmentType Type => AdjustmentType.HighlightsAndShadows;
+        /// <summary> Gets the icon. </summary>
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        /// <summary> Gets the self. </summary>
+        public FrameworkElement Self => this;
+        /// <summary> Gets the text. </summary>
+        public string Title { get; private set; }
+
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
+
         private float Shadows
         {
             set
@@ -97,28 +109,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.HighlightsTextBlock.Text = resource.GetString("Adjustments_HighlightsAndShadows_Highlights");
             this.ClarityTextBlock.Text = resource.GetString("Adjustments_HighlightsAndShadows_Clarity");
             this.MaskBlurAmountTextBlock.Text = resource.GetString("Adjustments_HighlightsAndShadows_MaskBlurAmount");
-
-            HighlightsAndShadowsAdjustment.GenericIcon = this.IconContentControl.Template;
-            HighlightsAndShadowsAdjustment.GenericText = this.Title;
-            HighlightsAndShadowsAdjustment.GenericPage = this;
         }
-
-        //@Content
-        /// <summary> Gets the type. </summary>
-        public AdjustmentType Type => AdjustmentType.HighlightsAndShadows;
-        /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon => this.IconContentControl.Template;
-        /// <summary> Gets the self. </summary>
-        public FrameworkElement Self => this;
-        /// <summary> Gets the text. </summary>
-        public string Title { get; private set; }
-
-        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
-        public IAdjustment GetNewAdjustment() => new HighlightsAndShadowsAdjustment();
-       
-        
-        /// <summary> Gets the adjustment index. </summary>
-        public int Index { get; set; }
 
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.

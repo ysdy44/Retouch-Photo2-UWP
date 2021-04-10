@@ -8,7 +8,6 @@ using Microsoft.Graphics.Canvas.Effects;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments.Models
 {
@@ -17,18 +16,10 @@ namespace Retouch_Photo2.Adjustments.Models
     /// </summary>
     public class SaturationAdjustment : IAdjustment
     {
-        //@Static      
-        //@Generic
-        public static string GenericText = "Saturation";
-        public static ControlTemplate GenericIcon;
-        public static IAdjustmentPage GenericPage;// = new SaturationPage();
 
         //@Content
         public AdjustmentType Type => AdjustmentType.Saturation;
         public Visibility PageVisibility => Visibility.Visible;
-        public IAdjustmentPage Page => SaturationAdjustment.GenericPage;
-        public ControlTemplate Icon => SaturationAdjustment.GenericIcon;
-        public string Title => SaturationAdjustment.GenericText;
 
         public ICommand Edit { get; private set; }
         public ICommand Remove { get; private set; }

@@ -25,6 +25,18 @@ namespace Retouch_Photo2.Adjustments.Pages
 
 
         //@Content
+        /// <summary> Gets the type. </summary>
+        public AdjustmentType Type => AdjustmentType.Contrast;
+        /// <summary> Gets the icon. </summary>
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        /// <summary> Gets the self. </summary>
+        public FrameworkElement Self => this;
+        /// <summary> Gets the text. </summary>
+        public string Title { get; private set; }
+
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
+
         private float Contrast
         {
             set
@@ -60,28 +72,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.Title = resource.GetString("Adjustments_Contrast");
 
             this.ContrastTextBlock.Text = resource.GetString("Adjustments_Contrast_Contrast");
-
-            ContrastAdjustment.GenericIcon = this.IconContentControl.Template;
-            ContrastAdjustment.GenericText = this.Title;
-            ContrastAdjustment.GenericPage = this;
         }
-
-        //@Content
-        /// <summary> Gets the type. </summary>
-        public AdjustmentType Type => AdjustmentType.Contrast;
-        /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon => this.IconContentControl.Template;
-        /// <summary> Gets the self. </summary>
-        public FrameworkElement Self => this;
-        /// <summary> Gets the text. </summary>
-        public string Title { get; private set; }
-
-        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
-        public IAdjustment GetNewAdjustment() => new ContrastAdjustment();
-
-
-        /// <summary> Gets the adjustment index. </summary>
-        public int Index { get; set; }
 
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.
@@ -146,6 +137,7 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructContrast2()
         {
+            this.ContrastSlider.SliderBrush = this.ContrastBrush;
             this.ContrastSlider.Minimum = -1.0d;
             this.ContrastSlider.Maximum = 1.0d;
             this.ContrastSlider.ValueChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<ContrastAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheContrast());

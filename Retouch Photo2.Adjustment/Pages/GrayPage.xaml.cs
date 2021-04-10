@@ -3,43 +3,18 @@
 // Difficult:         ★★
 // Only:              
 // Complete:      ★★★
-using Windows.UI.Xaml.Controls;
 using Retouch_Photo2.Adjustments.Models;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments.Pages
 {
     /// <summary>
     /// Page of <see cref = "GrayAdjustment"/>.
     /// </summary>
-    public sealed partial class GrayPage : IAdjustmentPage
+    public sealed partial class GrayPage : Page, IAdjustmentPage
     {
-        //@Construct
-        /// <summary>
-        /// Initializes a GrayPage. 
-        /// </summary>
-        public GrayPage()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-        }
-    }
-
-    public sealed partial class GrayPage : IAdjustmentPage
-    {
-
-        //Strings
-        private void ConstructStrings()
-        {
-            ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Title = resource.GetString("Adjustments_Gray");
-
-            GrayAdjustment.GenericIcon = this.IconContentControl.Template;
-            GrayAdjustment.GenericText = this.Title;
-            GrayAdjustment.GenericPage = this;
-        }
 
         //@Content
         /// <summary> Gets the type. </summary>
@@ -51,12 +26,31 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary> Gets the text. </summary>
         public string Title { get; private set; }
 
-        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
-        public IAdjustment GetNewAdjustment() => new GrayAdjustment();
-
-
         /// <summary> Gets the adjustment index. </summary>
         public int Index { get; set; }
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a GrayPage. 
+        /// </summary>
+        public GrayPage()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+        }
+    }
+
+    public sealed partial class GrayPage : Page, IAdjustmentPage
+    {
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.Title = resource.GetString("Adjustments_Gray");
+        }
 
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.

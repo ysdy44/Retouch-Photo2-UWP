@@ -28,6 +28,18 @@ namespace Retouch_Photo2.Adjustments.Pages
 
 
         //@Content
+        /// <summary> Gets the type. </summary>
+        public AdjustmentType Type => AdjustmentType.Vignette;
+        /// <summary> Gets the icon. </summary>
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        /// <summary> Gets the self. </summary>
+        public FrameworkElement Self => this;
+        /// <summary> Gets the text. </summary>
+        public string Title { get; private set; }
+                
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
+
         private float Amount
         {
             set
@@ -76,12 +88,11 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.ConstructColor1();
             this.ConstructColor2();
         }
-
     }
 
     public sealed partial class VignettePage : IAdjustmentPage
-    {      
-        
+    {
+
         //Strings
         private void ConstructStrings()
         {
@@ -92,28 +103,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.AmountTextBlock.Text = resource.GetString("Adjustments_Vignette_Amount");
             this.CurveTextBlock.Text = resource.GetString("Adjustments_Vignette_Curve");
             this.ColorTextBlock.Text = resource.GetString("Adjustments_Vignette_Color");
-
-            VignetteAdjustment.GenericIcon = this.IconContentControl.Template;
-            VignetteAdjustment.GenericText = this.Title;
-            VignetteAdjustment.GenericPage = this;
         }
-
-        //@Content
-        /// <summary> Gets the type. </summary>
-        public AdjustmentType Type => AdjustmentType.Vignette;
-        /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon => this.IconContentControl.Template;
-        /// <summary> Gets the self. </summary>
-        public FrameworkElement Self => this;
-        /// <summary> Gets the text. </summary>
-        public string Title { get; private set; }
-
-        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
-        public IAdjustment GetNewAdjustment() => new VignetteAdjustment();
-
-
-        /// <summary> Gets the adjustment index. </summary>
-        public int Index { get; set; }
 
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.

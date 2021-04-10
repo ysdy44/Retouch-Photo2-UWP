@@ -23,8 +23,20 @@ namespace Retouch_Photo2.Adjustments.Pages
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
 
-        
+
         //@Content
+        /// <summary> Gets the type. </summary>
+        public AdjustmentType Type => AdjustmentType.Exposure;
+        /// <summary> Gets the icon. </summary>
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        /// <summary> Gets the self. </summary>
+        public FrameworkElement Self => this;
+        /// <summary> Gets the text. </summary>
+        public string Title { get; private set; }
+
+        /// <summary> Gets the adjustment index. </summary>
+        public int Index { get; set; }
+
         private float Exposure
         {
             set
@@ -60,28 +72,7 @@ namespace Retouch_Photo2.Adjustments.Pages
             this.Title = resource.GetString("Adjustments_Exposure");
 
             this.ExposureTextBlock.Text = resource.GetString("Adjustments_Exposure_Exposure");
-
-            ExposureAdjustment.GenericIcon = this.IconContentControl.Template;
-            ExposureAdjustment.GenericText = this.Title;
-            ExposureAdjustment.GenericPage = this;
         }
-
-        //@Content
-        /// <summary> Gets the type. </summary>
-        public AdjustmentType Type => AdjustmentType.Exposure;
-        /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon => this.IconContentControl.Template;
-        /// <summary> Gets the self. </summary>
-        public FrameworkElement Self => this;
-        /// <summary> Gets the text. </summary>
-        public string Title { get; private set; }
-
-        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
-        public IAdjustment GetNewAdjustment() => new ExposureAdjustment();
-
-
-        /// <summary> Gets the adjustment index. </summary>
-        public int Index { get; set; }
 
         /// <summary>
         /// Reset the <see cref="IAdjustmentPage"/>'s data.

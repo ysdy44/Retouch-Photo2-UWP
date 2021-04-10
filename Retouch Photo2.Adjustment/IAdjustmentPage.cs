@@ -23,9 +23,6 @@ namespace Retouch_Photo2.Adjustments
         /// <summary> Gets the self. </summary>
         FrameworkElement Self { get; }
 
-        /// <summary> Return a new <see cref = "IAdjustment"/>. </summary>
-        IAdjustment GetNewAdjustment();
-
 
         /// <summary> Gets the adjustment index. </summary>
         int Index { get; set; }

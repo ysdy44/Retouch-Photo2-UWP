@@ -7,7 +7,6 @@ using Microsoft.Graphics.Canvas;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Adjustments
 {
@@ -20,12 +19,6 @@ namespace Retouch_Photo2.Adjustments
         AdjustmentType Type { get; }
         /// <summary> Gets whether page is visible. </summary>
         Visibility PageVisibility { get; }
-        /// <summary> Gets the page. </summary>
-        IAdjustmentPage Page { get; }
-        /// <summary> Gets the icon. </summary>
-        ControlTemplate Icon { get; }
-        /// <summary> Gets the title. </summary>
-        string Title { get; }
 
         ICommand Edit { get; }
         ICommand Remove { get; }
