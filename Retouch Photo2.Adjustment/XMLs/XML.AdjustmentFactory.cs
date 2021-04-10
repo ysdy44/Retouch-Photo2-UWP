@@ -20,14 +20,13 @@ namespace Retouch_Photo2.Adjustments
         /// <summary>
         /// Create a IAdjustment from the string.
         /// </summary>    
-        /// <param name="assemblyType"> The type for assembly. </param>
         /// <param name="type"> The source string. </param>
         /// <returns> The created IAdjustment. </returns>
-        private static IAdjustment CreateAdjustment(Type assemblyType, string type)
+        public static IAdjustment CreateAdjustment(string type)
         {
             if (string.IsNullOrEmpty(type) == false)
             {
-                Assembly assembly = assemblyType.GetTypeInfo().Assembly;
+                Assembly assembly = typeof(IAdjustment).GetTypeInfo().Assembly;
                 IEnumerable<TypeInfo> typeInfos = assembly.DefinedTypes;
 
                 TypeInfo typeInfo = typeInfos.FirstOrDefault(t => t.FullName == $"Retouch_Photo2.Adjustments.Models.{type}Adjustment");

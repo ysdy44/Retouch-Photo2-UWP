@@ -3,11 +3,6 @@
 // Difficult:         
 // Only:              
 // Complete:      ★
-using Retouch_Photo2.Adjustments.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Xml.Linq;
 
 namespace Retouch_Photo2.Adjustments
@@ -43,7 +38,7 @@ namespace Retouch_Photo2.Adjustments
         {
             //Load
             string type2 = element.Attribute("Type") is XAttribute type ? type.Value : null;
-            IAdjustment adjustment = XML.CreateAdjustment(typeof(IAdjustment), type2);
+            IAdjustment adjustment = XML.CreateAdjustment(type2);
             {
                 adjustment.Load(element);
             }
