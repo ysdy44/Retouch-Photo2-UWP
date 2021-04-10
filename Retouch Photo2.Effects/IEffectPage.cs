@@ -16,10 +16,6 @@ namespace Retouch_Photo2.Effects
         /// <summary> Gets the type. </summary>
         EffectType Type { get; }
 
-        /// <summary> Gets the title. </summary>
-        string Title { get; }
-        /// <summary> Gets the icon. </summary>
-        ControlTemplate Icon { get; }
         /// <summary> Gets the self. </summary>
         FrameworkElement Self { get; }
 

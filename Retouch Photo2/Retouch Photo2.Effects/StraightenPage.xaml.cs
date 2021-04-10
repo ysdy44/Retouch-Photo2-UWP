@@ -14,7 +14,7 @@ namespace Retouch_Photo2.Effects.Pages
     /// <summary>
     /// Page of <see cref = "Effect.Straighten_IsOn"/>.
     /// </summary>
-    public sealed partial class StraightenEffectPage : Page, IEffectPage
+    public sealed partial class StraightenPage : Page, IEffectPage
     {
 
         //@ViewModel
@@ -22,6 +22,11 @@ namespace Retouch_Photo2.Effects.Pages
 
 
         //@Content
+        /// <summary> Gets the type. </summary>
+        public EffectType Type => EffectType.Straighten;
+        /// <summary> Gets the page. </summary>
+        public FrameworkElement Self => this;
+
         private float Angle
         {
             set
@@ -34,9 +39,9 @@ namespace Retouch_Photo2.Effects.Pages
 
         //@Construct
         /// <summary>
-        /// Initializes a StraightenEffectPage. 
+        /// Initializes a StraightenPage.
         /// </summary>
-        public StraightenEffectPage()
+        public StraightenPage()
         {
             this.InitializeComponent();
             this.ConstructString();
@@ -46,30 +51,16 @@ namespace Retouch_Photo2.Effects.Pages
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "StraightenEffectPage"/>.
-    /// </summary>
-    public sealed partial class StraightenEffectPage : Page, IEffectPage
+    public sealed partial class StraightenPage : Page, IEffectPage
     {
+
         //String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Title = resource.GetString("Effects_Straighten");
-
             this.AngleTextBlock.Text = resource.GetString("Effects_Straighten_Angle");
         }
-
-        //@Content
-        /// <summary> Gets the type. </summary>
-        public EffectType Type => EffectType.Straighten;
-        /// <summary> Gets the title. </summary>
-        public string Title { get; private set; }
-        /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon => this.IconContentControl.Template;
-        /// <summary> Gets the page. </summary>
-        public FrameworkElement Self => this;
 
         public void Reset()
         {
@@ -103,9 +94,9 @@ namespace Retouch_Photo2.Effects.Pages
     }
 
     /// <summary>
-    /// Page of <see cref = "StraightenEffectPage"/>.
+    /// Page of <see cref = "StraightenPage"/>.
     /// </summary>
-    public sealed partial class StraightenEffectPage : Page, IEffectPage
+    public sealed partial class StraightenPage : Page, IEffectPage
     {
 
         //Straighten_Angle

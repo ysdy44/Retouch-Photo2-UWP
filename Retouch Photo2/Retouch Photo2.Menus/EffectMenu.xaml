@@ -3,22 +3,18 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
     >
-
-
+    
+    
     <UserControl.Resources>
-        <!--Style-->
-        <Style x:Name="SeparatorRectangle" TargetType="Rectangle" BasedOn="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-        <Style x:Name="SeparatorRectangle2" TargetType="Rectangle" BasedOn="{StaticResource AppSeparatorRectangleVerticalStyle}">
-            <Setter Property="Fill" Value="Transparent"/>
-        </Style>
-        <Style x:Name="IconButton" TargetType="Button" BasedOn="{StaticResource AppIconButton}">
-            <Setter Property="Height" Value="50"/>
-        </Style>
+        <!--StaticResource-->
+        <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemListLowColor}"/>
+        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemListLowColor}"/>
+        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemListLowColor}"/>
     </UserControl.Resources>
 
 
@@ -32,18 +28,169 @@
 
         <SplitView.Pane>
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="30"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel x:Name="ButtonsStackPanel" >
-                        <!--Effects-->
-                    </StackPanel>
-                    <StackPanel x:Name="ChecksStackPanel" Grid.Column="1">
-                        <!--Effects-->
-                    </StackPanel>
-                </Grid>
+                <StackPanel x:Name="StackPanel" Grid.ColumnSpan="2">
+
+                    <ListViewItem x:Name="GaussianBlur" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/GaussianBlurIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource GaussianBlurIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                            <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+                            <elements:CheckControl Grid.Column="2" IsChecked="{x:Bind GaussianBlur.IsSelected, Mode=TwoWay}"/>
+                        </Grid>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="DirectionalBlur" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/DirectionalBlurIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource DirectionalBlurIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                            <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+                            <elements:CheckControl Grid.Column="2" IsChecked="{x:Bind DirectionalBlur.IsSelected, Mode=TwoWay}"/>
+                        </Grid>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="Sharpen" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/SharpenIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource SharpenIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                            <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+                            <elements:CheckControl Grid.Column="2" IsChecked="{x:Bind Sharpen.IsSelected, Mode=TwoWay}"/>
+                        </Grid>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="OuterShadow" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/OuterShadowIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource OuterShadowIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                            <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+                            <elements:CheckControl Grid.Column="2" IsChecked="{x:Bind OuterShadow.IsSelected, Mode=TwoWay}"/>
+                        </Grid>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="Edge" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/EdgeIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource EdgeIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                            <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+                            <elements:CheckControl Grid.Column="2" IsChecked="{x:Bind Edge.IsSelected, Mode=TwoWay}"/>
+                        </Grid>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="Morphology" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/MorphologyIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource MorphologyIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                            <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+                            <elements:CheckControl Grid.Column="2" IsChecked="{x:Bind Morphology.IsSelected, Mode=TwoWay}"/>
+                        </Grid>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="Emboss" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/EmbossIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource EmbossIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                            <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+                            <elements:CheckControl Grid.Column="2" IsChecked="{x:Bind Emboss.IsSelected, Mode=TwoWay}"/>
+                        </Grid>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="Straighten" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/StraightenIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource StraightenIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                            <Rectangle Grid.Column="1" Margin="0" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+                            <elements:CheckControl Grid.Column="2" IsChecked="{x:Bind Straighten.IsSelected, Mode=TwoWay}"/>
+                        </Grid>
+                    </ListViewItem>
+
+                </StackPanel>
             </ScrollViewer>
         </SplitView.Pane>
 

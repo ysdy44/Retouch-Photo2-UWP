@@ -15,7 +15,7 @@ namespace Retouch_Photo2.Effects.Pages
     /// <summary>
     /// Page of <see cref = "Effect.OuterShadow_IsOn"/>.
     /// </summary>
-    public sealed partial class OuterShadowEffectPage : Page, IEffectPage
+    public sealed partial class OuterShadowPage : Page, IEffectPage
     {
 
         //@ViewModel
@@ -24,6 +24,11 @@ namespace Retouch_Photo2.Effects.Pages
 
 
         //@Content
+        /// <summary> Gets the type. </summary>
+        public EffectType Type => EffectType.OuterShadow;
+        /// <summary> Gets the page. </summary>
+        public FrameworkElement Self => this;
+
         private float Radius
         {
             set
@@ -70,9 +75,9 @@ namespace Retouch_Photo2.Effects.Pages
 
         //@Construct
         /// <summary>
-        /// Initializes a OuterShadowEffectPage. 
+        /// Initializes a OuterShadowPage.
         /// </summary>
-        public OuterShadowEffectPage()
+        public OuterShadowPage()
         {
             this.InitializeComponent();
             this.ConstructString();
@@ -94,17 +99,13 @@ namespace Retouch_Photo2.Effects.Pages
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "Effect.OuterShadow_IsOn"/>.
-    /// </summary>
-    public sealed partial class OuterShadowEffectPage : Page, IEffectPage
+    public sealed partial class OuterShadowPage : Page, IEffectPage
     {
+
         //String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Title = resource.GetString("Effects_OuterShadow");
 
             this.RadiusTextBlock.Text = resource.GetString("Effects_OuterShadow_Radius");
             this.OpacityTextBlock.Text = resource.GetString("Effects_OuterShadow_Opacity");
@@ -113,17 +114,6 @@ namespace Retouch_Photo2.Effects.Pages
             this.AngleTextBlock.Text = resource.GetString("Effects_OuterShadow_Angle");
             this.ColorTextBlock.Text = resource.GetString("Effects_OuterShadow_Color");
         }
-
-        //@Content
-        /// <summary> Gets the type. </summary>
-        public EffectType Type => EffectType.OuterShadow;
-        /// <summary> Gets the title. </summary>
-        public string Title { get; private set; }
-        /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon => this.IconContentControl.Template;
-        /// <summary> Gets the page. </summary>
-        public FrameworkElement Self => this;
-
 
         public void Reset()
         {
@@ -187,7 +177,7 @@ namespace Retouch_Photo2.Effects.Pages
     /// <summary>
     /// Page of <see cref = "Effect.OuterShadow_IsOn"/>.
     /// </summary>
-    public sealed partial class OuterShadowEffectPage : Page, IEffectPage
+    public sealed partial class OuterShadowPage : Page, IEffectPage
     {
 
         //Radius

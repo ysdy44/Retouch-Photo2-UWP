@@ -15,7 +15,7 @@ namespace Retouch_Photo2.Effects.Pages
     /// <summary>
     /// Page of <see cref = "Effect.DirectionalBlur_IsOn"/>.
     /// </summary>
-    public sealed partial class DirectionalBlurEffectPage : Page, IEffectPage
+    public sealed partial class DirectionalBlurPage : Page, IEffectPage
     {
 
         //@ViewModel
@@ -23,6 +23,11 @@ namespace Retouch_Photo2.Effects.Pages
 
 
         //@Content
+        /// <summary> Gets the type. </summary>
+        public EffectType Type => EffectType.DirectionalBlur;
+        /// <summary> Gets the page. </summary>
+        public FrameworkElement Self => this;
+
         private float Radius
         {
             set
@@ -60,9 +65,9 @@ namespace Retouch_Photo2.Effects.Pages
 
         //@Construct
         /// <summary>
-        /// Initializes a DirectionalBlurEffectPage. 
+        /// Initializes a DirectionalBlurPage.
         /// </summary>
-        public DirectionalBlurEffectPage()
+        public DirectionalBlurPage()
         {
             this.InitializeComponent();
             this.ConstructString();
@@ -77,10 +82,7 @@ namespace Retouch_Photo2.Effects.Pages
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "Effect.DirectionalBlur_IsOn"/>.
-    /// </summary>
-    public sealed partial class DirectionalBlurEffectPage : Page, IEffectPage
+    public sealed partial class DirectionalBlurPage : Page, IEffectPage
     {
 
         //String
@@ -88,25 +90,11 @@ namespace Retouch_Photo2.Effects.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Title = resource.GetString("Effects_DirectionalBlur");
-
             this.RadiusTextBlock.Text = resource.GetString("Effects_DirectionalBlur_Radius");
             this.AngleTextBlock.Text = resource.GetString("Effects_DirectionalBlur_Angle");
 
             this.IsHardBorderCheckBox.Content = resource.GetString("Effects_DirectionalBlur_IsHardBorder");
         }
-
-
-        //@Content
-        /// <summary> Gets the type. </summary>
-        public EffectType Type => EffectType.DirectionalBlur;
-        /// <summary> Gets the title. </summary>
-        public string Title { get; private set; }
-        /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon => this.IconContentControl.Template;
-        /// <summary> Gets the self. </summary>
-        public FrameworkElement Self => this;
-
 
         public void Reset()
         {
@@ -161,7 +149,7 @@ namespace Retouch_Photo2.Effects.Pages
     /// <summary>
     /// Page of <see cref = "Effect.DirectionalBlur_IsOn"/>.
     /// </summary>
-    public sealed partial class DirectionalBlurEffectPage : Page, IEffectPage
+    public sealed partial class DirectionalBlurPage : Page, IEffectPage
     {
 
         //Radius

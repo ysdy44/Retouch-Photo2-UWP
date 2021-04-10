@@ -1,16 +1,16 @@
 ﻿<Page
-    x:Class="Retouch_Photo2.Effects.Pages.EdgeEffectPage"
+    x:Class="Retouch_Photo2.Effects.Pages.SharpenPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPickers="using:HSVColorPickers"
     xmlns:elements="using:Retouch_Photo2.Elements"
-    mc:Ignorable="d"              
     MinHeight="165" 
     MaxHeight="300"
     d:DesignWidth="200"
     d:DesignHeight="400"
+    mc:Ignorable="d"              
     >
 
 
@@ -18,10 +18,10 @@
 
         <Border Width="50" Visibility="Collapsed">
             <Border.Resources>
-                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/EdgeIcon.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/SharpenIcon.xaml"/>
             </Border.Resources>
             <Border.Child>
-                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource EdgeIcon}"/>
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource SharpenIcon}"/>
             </Border.Child>
         </Border>
 
@@ -32,15 +32,6 @@
                            RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
         <elements:SliderPicker x:Name="AmountSlider"/>
-        
-
-        <!--Radius-->
-        <RelativePanel>
-            <TextBlock x:Name="RadiusTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="RadiusPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
-        </RelativePanel>
-        <elements:SliderPicker x:Name="RadiusSlider"/>
 
     </StackPanel>    
 </Page>

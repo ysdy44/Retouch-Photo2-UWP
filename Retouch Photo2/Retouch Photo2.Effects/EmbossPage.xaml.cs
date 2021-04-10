@@ -14,14 +14,19 @@ namespace Retouch_Photo2.Effects.Pages
     /// <summary>
     /// Page of <see cref = "Effect.Emboss_IsOn"/>.
     /// </summary>
-    public sealed partial class EmbossEffectPage : Page, IEffectPage
+    public sealed partial class EmbossPage : Page, IEffectPage
     {
 
         //@ViewModel
         ViewModel MethodViewModel => App.MethodViewModel;
-        
+
 
         //@Content
+        /// <summary> Gets the type. </summary>
+        public EffectType Type => EffectType.Emboss;
+        /// <summary> Gets the page. </summary>
+        public FrameworkElement Self => this;
+
         private float Radius
         {
             set
@@ -42,9 +47,9 @@ namespace Retouch_Photo2.Effects.Pages
 
         //@Construct
         /// <summary>
-        /// Initializes a EmbossEffectPage. 
+        /// Initializes a EmbossPage.
         /// </summary>
-        public EmbossEffectPage()
+        public EmbossPage()
         {
             this.InitializeComponent();
             this.ConstructString();
@@ -57,31 +62,17 @@ namespace Retouch_Photo2.Effects.Pages
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "Effect.Emboss_IsOn"/>.
-    /// </summary>
-    public sealed partial class EmbossEffectPage : Page, IEffectPage
+    public sealed partial class EmbossPage : Page, IEffectPage
     {
+
         //String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Title = resource.GetString("Effects_Emboss");
-
             this.RadiusTextBlock.Text = resource.GetString("Effects_Emboss_Radius");
             this.AngleTextBlock.Text = resource.GetString("Effects_Emboss_Angle");
         }
-
-        //@Content
-        /// <summary> Gets the type. </summary>
-        public EffectType Type => EffectType.Emboss;
-        /// <summary> Gets the title. </summary>
-        public string Title { get; private set; }
-        /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon => this.IconContentControl.Template;
-        /// <summary> Gets the page. </summary>
-        public FrameworkElement Self => this;
 
         public void Reset()
         {
@@ -130,7 +121,7 @@ namespace Retouch_Photo2.Effects.Pages
     /// <summary>
     /// Page of <see cref = "Effect.Emboss_IsOn"/>.
     /// </summary>
-    public sealed partial class EmbossEffectPage : Page, IEffectPage
+    public sealed partial class EmbossPage : Page, IEffectPage
     {
 
         //Radius

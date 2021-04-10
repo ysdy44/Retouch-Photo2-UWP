@@ -4,118 +4,34 @@
 // Only:              
 // Complete:      ★★★★★
 using Retouch_Photo2.Effects;
+using Retouch_Photo2.Effects.Pages;
 using Retouch_Photo2.Elements;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using Windows.ApplicationModel.Resources;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Menus
 {
     /// <summary>
     /// Menu of <see cref = "Retouch_Photo2.Effects"/>.
     /// </summary>
-    public sealed partial class EffectMenu : UserControl, ICollection<IEffectPage>
+    public sealed partial class EffectMenu : UserControl
     {
 
-        private readonly IList<IEffectPage> Items = new List<IEffectPage>();
-        private readonly IList<(EffectType, IEffectPage, Button, CheckControl)> ItemsCore = new List<(EffectType, IEffectPage, Button, CheckControl)>();
+        //@Delegate
+        /// <summary> Occurs after the splitview pane is closed. </summary>
+        public event TypedEventHandler<SplitView, object> PaneClosed { add => this.SplitView.PaneClosed += value; remove => this.SplitView.PaneClosed -= value; }
+        /// <summary> Occurs when the splitview pane is opened. </summary>
+        public event TypedEventHandler<SplitView, object> PaneOpened { add => this.SplitView.PaneOpened += value; remove => this.SplitView.PaneOpened -= value; }
 
-        
-
-        public int Count => this.Items.Count;
-        public bool IsReadOnly => false;
-
-
-        public void Add(IEffectPage effectPage)
-        {
-            if (effectPage == null) return;
-
-            EffectType type = effectPage.Type;
-
-            Button button = new Button
-            {
-                IsEnabled = false,
-                Content = effectPage.Title,
-                Style = this.IconButton,
-                Tag = new ContentControl
-                {
-                    Template = effectPage.Icon
-                }
-            };
-            button.Click += this.Button_Click;
-            this.ButtonsStackPanel.Children.Add(button);
-
-            CheckControl check = new CheckControl
-            {
-                Height = button.Height
-            };
-            check.Tapped += this.Check_Tapped;
-            this.ChecksStackPanel.Children.Add(check);
-
-            this.ItemsCore.Add((type, effectPage, button, check));
-            this.Items.Add(effectPage);
-        }
-
-        public bool Remove(IEffectPage effectPage)
-        {
-            if (effectPage == null) return false;
-
-            bool isContains = this.Items.Contains(effectPage);
-            if (isContains == false) return false;
-
-            var item = this.ItemsCore.First(e => e.Item2 == effectPage);
-
-            Button button = item.Item3;
-            button.Click -= this.Button_Click;
-            this.ButtonsStackPanel.Children.Remove(button);
-
-            CheckControl check = item.Item4;
-            check.Tapped -= this.Check_Tapped;
-            this.ChecksStackPanel.Children.Remove(check);
-
-            this.ItemsCore.Remove(item);
-            this.Items.Remove(effectPage);
-            return true;
-        }
-
-        public void Clear()
-        {
-            foreach (var item in this.ItemsCore)
-            {
-                Button button = item.Item3;
-                button.Click -= this.Button_Click;
-
-                CheckControl check = item.Item4;
-                check.Tapped -= this.Check_Tapped;
-            }
-
-            this.ButtonsStackPanel.Children.Clear();
-
-            this.ChecksStackPanel.Children.Clear();
-
-            this.ItemsCore.Clear();
-            this.Items.Clear();
-        }
+        /// <summary> Occurs when type change. </summary>
+        public EventHandler<EffectType> TypeChanged;
 
 
-        public bool Contains(IEffectPage item) => this.Items.Contains(item);
-        public void CopyTo(IEffectPage[] array, int arrayIndex) => this.Items.CopyTo(array, arrayIndex);
-
-        public IEnumerator<IEffectPage> GetEnumerator() => this.Items.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => this.Items.GetEnumerator();
-
-    }
-
-
-    public sealed partial class EffectMenu : UserControl, ICollection<IEffectPage>
-    {
-
-        /// <summary> Gets or sets <see cref = "EffectMenu" />'s effect pages. </summary>
-        public ICollection<IEffectPage> EffectPages => this;
+        #region DependencyProperty
 
 
         /// <summary> Gets or sets <see cref = "EffectMenu" />'s effect. </summary>
@@ -124,33 +40,23 @@ namespace Retouch_Photo2.Menus
             get => this.effect;
             set
             {
-                if (value != null)
+                if (value == null)
                 {
-                    foreach (var item in ItemsCore)
-                    {
-                        IEffectPage effectPage = item.Item2;
-                        bool isOn = effectPage.FollowButton(value);
-
-                        Button button = item.Item3;
-                        button.IsEnabled = isOn;
-
-                        CheckControl check = item.Item4;
-                        check.IsEnabled = true;
-                        check.IsChecked = isOn;
-                    }
+                    this.IsEnabled = false;
                 }
                 else
                 {
-                    foreach (var item in ItemsCore)
-                    {
-                        Button button = item.Item3;
-                        button.IsEnabled = false;
+                    this.IsEnabled = true;
 
-                        CheckControl check = item.Item4;
-                        check.IsEnabled = false;
-                    }
+                    this.GaussianBlur.IsSelected = value.GaussianBlur_IsOn;
+                    this.DirectionalBlur.IsSelected = value.DirectionalBlur_IsOn;
+                    this.Sharpen.IsSelected = value.Sharpen_IsOn;
+                    this.OuterShadow.IsSelected = value.OuterShadow_IsOn;
+                    this.Edge.IsSelected = value.Edge_IsOn;
+                    this.Morphology.IsSelected = value.Morphology_IsOn;
+                    this.Emboss.IsSelected = value.Emboss_IsOn;
+                    this.Straighten.IsSelected = value.Straighten_IsOn;
                 }
-
 
                 this.effect = value;
             }
@@ -158,65 +64,111 @@ namespace Retouch_Photo2.Menus
         private Effect effect;
 
 
+        #endregion
+
+
         //@Construct
         /// <summary>
-        /// Initializes a EffectMainPage. 
+        /// Initializes a EffectMenu. 
         /// </summary>
         public EffectMenu()
         {
             this.InitializeComponent();
-            this.ConstructStringsss();
+            this.ConstructStrings();
+            this.ConstructGroup();
 
             base.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
                 this.SplitView.OpenPaneLength = e.NewSize.Width;
             };
-
             this.CloseButton.Click += (s, e) =>
             {
                 this.ContentPresenter.Content = null;
                 this.SplitView.IsPaneOpen = true;
             };
         }
+    }
 
+    public sealed partial class EffectMenu : UserControl
+    {
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button button)
-            {
-                IEffectPage effectPage = this.ItemsCore.First(p => p.Item3 == button).Item2;
-
-                this.ContentPresenter.Content = effectPage?.Self;
-                this.SplitView.IsPaneOpen = false;
-            }
-        }
-        private void Check_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (sender is CheckControl check)
-            {
-                bool isOn = !check.IsChecked;
-
-                var item = this.ItemsCore.First(p => p.Item4 == check);
-                IEffectPage effectPage = item.Item2;
-                effectPage?.Switch(isOn);
-
-                Button button = item.Item3;
-                button.IsEnabled = isOn;
-
-                check.IsEnabled = true;
-                check.IsChecked = isOn;
-                check.IsChecked = isOn;
-            }
-        }
-
-
-        public void ConstructStringsss()
+        //Strings
+        private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            foreach (UIElement child in this.StackPanel.Children)
+            {
+                if (child is ListViewItem item)
+                {
+                    if (item.Content is Grid grid)
+                    {
+                        if (grid.Children.First() is ContentControl control)
+                        {
+                            string key = item.Name;
+                            string title = resource.GetString($"Effects_{key}");
+
+                            control.Content = title;
+                        }
+                    }
+                }
+            }
 
             this.CloseButton.Content = resource.GetString("Menus_Close");
         }
 
+
+        //@Group
+        private void ConstructGroup()
+        {
+            foreach (UIElement child in this.StackPanel.Children)
+            {
+                if (child is ListViewItem item)
+                {
+                    if (item.Content is Grid grid)
+                    {
+                        string key = item.Name;
+                        EffectType type = EffectType.None;
+                        try
+                        {
+                            type = (EffectType)Enum.Parse(typeof(EffectType), key);
+                        }
+                        catch (Exception) { }
+
+                        if (grid.Children.First() is ContentControl control)
+                        {
+                            //Button
+                            item.Tapped += (s, e) =>
+                            {
+                                if (item.IsSelected) 
+                                {
+                                    IEffectPage effectPage = Retouch_Photo2.Effects.XML.CreateEffectPage(typeof(GaussianBlurPage), type);
+                                    effectPage.FollowPage(this.Effect);
+                                    this.ContentPresenter.Content = effectPage.Self;
+                                    this.SplitView.IsPaneOpen = false;
+                                }
+                                else item.IsSelected = true;
+                            };
+                        }
+
+                        if (grid.Children.Last() is CheckControl check)
+                        {
+                            //Button
+                            check.Tapped += (s, e) =>
+                            {
+                                e.Handled = true;
+                                bool isOn = !check.IsChecked;
+
+                                IEffectPage effectPage = Retouch_Photo2.Effects.XML.CreateEffectPage(typeof(GaussianBlurPage), type);
+                                effectPage?.Switch(isOn);
+
+                                check.IsChecked = isOn;
+                            };
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace Retouch_Photo2.Effects.Pages
     /// <summary>
     /// Page of <see cref = "Effect.GaussianBlur_IsOn"/>.
     /// </summary>
-    public sealed partial class GaussianBlurEffectPage : Page, IEffectPage
+    public sealed partial class GaussianBlurPage : Page, IEffectPage
     {
 
         //@ViewModel
@@ -23,6 +23,11 @@ namespace Retouch_Photo2.Effects.Pages
 
 
         //@Content
+        /// <summary> Gets the type. </summary>
+        public EffectType Type => EffectType.GaussianBlur;
+        /// <summary> Gets the page. </summary>
+        public FrameworkElement Self => this;
+
         private float Radius
         {
             set
@@ -52,9 +57,9 @@ namespace Retouch_Photo2.Effects.Pages
 
         //@Construct
         /// <summary>
-        /// Initializes a GaussianBlurEffectPage. 
+        /// Initializes a GaussianBlurPage.
         /// </summary>
-        public GaussianBlurEffectPage()
+        public GaussianBlurPage()
         {
             this.InitializeComponent();
             this.ConstructString();
@@ -66,34 +71,18 @@ namespace Retouch_Photo2.Effects.Pages
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "Effect.GaussianBlur_IsOn"/>.
-    /// </summary>
-    public sealed partial class GaussianBlurEffectPage : Page, IEffectPage
+    public sealed partial class GaussianBlurPage : Page, IEffectPage
     {
+
         //String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Title = resource.GetString("Effects_GaussianBlur");
-
             this.RadiusTextBlock.Text = resource.GetString("Effects_GaussianBlur_Radius");
 
             this.IsHardBorderCheckBox.Content = resource.GetString("Effects_GaussianBlur_IsHardBorder");
         }
-        
-
-        //@Content
-        /// <summary> Gets the type. </summary>
-        public EffectType Type => EffectType.GaussianBlur;
-        /// <summary> Gets the title. </summary>
-        public string Title { get; private set; }
-        /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon => this.IconContentControl.Template;
-        /// <summary> Gets the page. </summary>
-        public FrameworkElement Self => this;
-
 
         public void Reset()
         {
@@ -142,7 +131,7 @@ namespace Retouch_Photo2.Effects.Pages
     /// <summary>
     /// Page of <see cref = "Effect.GaussianBlur_IsOn"/>.
     /// </summary>
-    public sealed partial class GaussianBlurEffectPage : Page, IEffectPage
+    public sealed partial class GaussianBlurPage : Page, IEffectPage
     {
 
 

@@ -14,7 +14,7 @@ namespace Retouch_Photo2.Effects.Pages
     /// <summary>
     /// Page of <see cref = "Effect.Sharpen_IsOn"/>.
     /// </summary>
-    public sealed partial class SharpenEffectPage : Page, IEffectPage
+    public sealed partial class SharpenPage : Page, IEffectPage
     {
 
         //@ViewModel
@@ -22,6 +22,11 @@ namespace Retouch_Photo2.Effects.Pages
 
 
         //@Content
+        /// <summary> Gets the type. </summary>
+        public EffectType Type => EffectType.Sharpen;
+        /// <summary> Gets the page. </summary>
+        public FrameworkElement Self => this;
+
         private float Amount
         {
             set
@@ -34,9 +39,9 @@ namespace Retouch_Photo2.Effects.Pages
 
         //@Construct
         /// <summary>
-        /// Initializes a SharpenEffectPage. 
+        /// Initializes a SharpenPage.
         /// </summary>
-        public SharpenEffectPage()
+        public SharpenPage()
         {
             this.InitializeComponent();
             this.ConstructString();
@@ -46,30 +51,16 @@ namespace Retouch_Photo2.Effects.Pages
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "Effect.Sharpen_IsOn"/>.
-    /// </summary>
-    public sealed partial class SharpenEffectPage : Page, IEffectPage
+    public sealed partial class SharpenPage : Page, IEffectPage
     {
+
         //String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Title = resource.GetString("Effects_Sharpen");
-
             this.AmountTextBlock.Text = resource.GetString("Effects_Sharpen_Amount");
         }
-
-        //@Content
-        /// <summary> Gets the type. </summary>
-        public EffectType Type => EffectType.Sharpen;
-        /// <summary> Gets the title. </summary>
-        public string Title { get; private set; }
-        /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon => this.IconContentControl.Template;
-        /// <summary> Gets the page. </summary>
-        public FrameworkElement Self => this;
 
         public void Reset()
         {
@@ -105,7 +96,7 @@ namespace Retouch_Photo2.Effects.Pages
     /// <summary>
     /// Page of <see cref = "Effect.Sharpen_IsOn"/>.
     /// </summary>
-    public sealed partial class SharpenEffectPage : Page, IEffectPage
+    public sealed partial class SharpenPage : Page, IEffectPage
     {
 
         //Amount

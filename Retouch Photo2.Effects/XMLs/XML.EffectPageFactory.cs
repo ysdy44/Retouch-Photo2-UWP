@@ -3,6 +3,7 @@
 // Difficult:         
 // Only:              
 // Complete:      ★
+using Retouch_Photo2.Effects.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace Retouch_Photo2.Effects
                 Assembly assembly = assemblyType.GetTypeInfo().Assembly;
                 IEnumerable<TypeInfo> typeInfos = assembly.DefinedTypes;
 
-                TypeInfo typeInfo = typeInfos.FirstOrDefault(t => t.FullName == $"Retouch_Photo2.Effects.Pages.{type}EffectPage");
+                TypeInfo typeInfo = typeInfos.FirstOrDefault(t => t.FullName == $"Retouch_Photo2.Effects.Pages.{type}Page");
                 if (typeInfo != null)
                 {
                     object obj = Activator.CreateInstance(typeInfo.AsType());
@@ -46,7 +47,7 @@ namespace Retouch_Photo2.Effects
                 }
             }
 
-            return new NoneEffectPage();
+            return new NonePage();
         }
 
     }

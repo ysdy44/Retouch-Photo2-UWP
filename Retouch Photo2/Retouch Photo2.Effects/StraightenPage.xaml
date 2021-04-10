@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Retouch_Photo2.Effects.Pages.StraightenEffectPage"
+    x:Class="Retouch_Photo2.Effects.Pages.StraightenPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -21,7 +21,7 @@
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Effects/Icons/SharpenIcon.xaml"/>
             </Border.Resources>
             <Border.Child>
-                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource SharpenIcon}"/>
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource SharpenIcon}"/>
             </Border.Child>
         </Border>
 

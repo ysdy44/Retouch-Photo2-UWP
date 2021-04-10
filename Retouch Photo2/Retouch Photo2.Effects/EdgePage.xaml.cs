@@ -14,14 +14,19 @@ namespace Retouch_Photo2.Effects.Pages
     /// <summary>
     /// Page of <see cref = "Effect.Edge_IsOn"/>.
     /// </summary>
-    public sealed partial class EdgeEffectPage : Page, IEffectPage
+    public sealed partial class EdgePage : Page, IEffectPage
     {
-
+        
         //@ViewModel
         ViewModel MethodViewModel => App.MethodViewModel;
 
 
         //@Content
+        /// <summary> Gets the type. </summary>
+        public EffectType Type => EffectType.Edge;
+        /// <summary> Gets the page. </summary>
+        public FrameworkElement Self => this;
+
         private float Amount
         {
             set
@@ -42,9 +47,9 @@ namespace Retouch_Photo2.Effects.Pages
 
         //@Construct
         /// <summary>
-        /// Initializes a EdgeEffectPage. 
+        /// Initializes a EdgePage.
         /// </summary>
-        public EdgeEffectPage()
+        public EdgePage()
         {
             this.InitializeComponent();
             this.ConstructString();
@@ -57,32 +62,17 @@ namespace Retouch_Photo2.Effects.Pages
         }
     }
 
-    /// <summary>
-    /// Page of <see cref = "Effect.Edge_IsOn"/>.
-    /// </summary>
-    public sealed partial class EdgeEffectPage : Page, IEffectPage
+    public sealed partial class EdgePage : Page, IEffectPage
     {
+
         //String
         private void ConstructString()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Title = resource.GetString("Effects_Edge");
-
             this.AmountTextBlock.Text = resource.GetString("Effects_Edge_Amount");
             this.RadiusTextBlock.Text = resource.GetString("Effects_Edge_Radius");
         }
-
-        //@Content
-        /// <summary> Gets the type. </summary>
-        public EffectType Type => EffectType.Edge;
-        /// <summary> Gets the title. </summary>
-        public string Title { get; private set; }
-        /// <summary> Gets the icon. </summary>
-        public ControlTemplate Icon => this.IconContentControl.Template;
-        /// <summary> Gets the page. </summary>
-        public FrameworkElement Self => this;
-
 
         public void Reset()
         {
@@ -131,7 +121,7 @@ namespace Retouch_Photo2.Effects.Pages
     /// <summary>
     /// Page of <see cref = "Effect.Edge_IsOn"/>.
     /// </summary>
-    public sealed partial class EdgeEffectPage : Page, IEffectPage
+    public sealed partial class EdgePage : Page, IEffectPage
     {
 
         //Amount
