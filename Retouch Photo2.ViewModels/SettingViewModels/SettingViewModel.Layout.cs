@@ -121,9 +121,9 @@ namespace Retouch_Photo2.ViewModels
                 switch (type)
                 {
                     case DeviceLayoutType.PC:
-                        return new Vector2(70, 50);
+                        return new Vector2(70, 42);
                     default:
-                        return new Vector2(0, 50);
+                        return new Vector2(0, 42);
                 }
             }
         }

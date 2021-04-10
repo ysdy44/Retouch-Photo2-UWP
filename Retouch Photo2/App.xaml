@@ -61,7 +61,7 @@
 
                     <Color x:Key="AppForegroundColor" >#111111</Color>
                     <Color x:Key="AppBackgroundColor" >#0E0E0E</Color>
-                    <Color x:Key="AppBorderBrushColor" >#88888888</Color>
+                    <Color x:Key="AppBorderBrushColor" >#33888888</Color>
 
                     <Color x:Key="AppFillColor" >#1E1E1E</Color>
                     <Color x:Key="AppStrokeColor" >#AA050005</Color>

@@ -68,45 +68,50 @@ namespace Retouch_Photo2
 
             //Appbar
             this.ExportButton.Click += (s, e) => this.ShowExportDialog();
-            this.OverflowExportButton.Click += (s, e) =>
+            this.OverflowExportButton.Tapped += (s, e) =>
             {
                 this.ShowExportDialog();
                 this.OverflowFlyout.Hide();
             };
 
             this.UndoButton.Click += (s, e) => this.MethodViewModel.MethodEditUndo();
-            this.OverflowUndoButton.Click += (s, e) => this.MethodViewModel.MethodEditUndo();
+            this.OverflowUndoButton.Tapped += (s, e) => this.MethodViewModel.MethodEditUndo();
 
             //this.RedoButton.Click += (s, e) => { };
-            //this.OverflowRedoButton.Click += (s, e) => { };
+            //this.OverflowRedoButton.Tapped += (s, e) => { };
 
             this.SetupButton.Click += (s, e) => this.ShowSetupDialog();
-            this.OverflowSetupButton.Click += (s, e) =>
+            this.OverflowSetupButton.Tapped += (s, e) =>
             {
                 this.ShowSetupDialog();
                 this.OverflowFlyout.Hide();
             };
 
-            this.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
-            this.OverflowRulerButton.Click += (s, e) =>
+            this.OverflowSnapButton.Tapped += (s, e) =>
             {
+                this.OverflowSnapButton.IsSelected = !this.OverflowSnapButton.IsSelected;
+            };
+
+            this.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
+            this.OverflowRulerButton.Tapped += (s, e) =>
+            {
+                this.OverflowRulerButton.IsSelected = !this.OverflowRulerButton.IsSelected;
                 this.ViewModel.Invalidate();//Invalidate
-                this.OverflowFlyout.Hide();
             };
 
             this.FullScreenButton.Click += (s, e) => this.FullScreenChanged();
-            this.OverflowFullScreenButton.Click += (s, e) =>
+            this.OverflowFullScreenButton.Tapped += (s, e) =>
             {
                 this.FullScreenChanged();
                 this.OverflowFlyout.Hide();
-            };
+            }; 
 
             this.UnFullScreenButton.Click += (s, e) => this.FullScreenChanged();
 
             this.ConstructAppBar_TipButton(this.TipButton);
             this.ConstructAppBar_TipButton(this.OverflowTipButton);
         }
-        private void ConstructAppBar_TipButton(ButtonBase tipButton)
+        private void ConstructAppBar_TipButton(UIElement tipButton)
         {
             tipButton.PointerPressed += (s, e) => this.TipViewModel.IsOpen = true;
             tipButton.PointerReleased += (s, e) => this.TipViewModel.IsOpen = false;

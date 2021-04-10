@@ -215,50 +215,85 @@
                         <Button.Flyout>
                             <Flyout x:Name="OverflowFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                 <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
+                                    <ScrollViewer.Resources>
+                                        <!--StaticResource-->
+                                        <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
+                                        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
+                                        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
+                                        <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
+                                        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
+                                        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
+                                    </ScrollViewer.Resources>
                                     <StackPanel x:Name="OverflowStackPanel">
-                                        <Button x:Name="OverflowExportButton" Foreground="Black" Background="#FFC003" Style="{StaticResource AppIconSelectedButton}">
-                                            <Button.Tag>
-                                                <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                            </Button.Tag>
-                                        </Button>
-                                        <Button x:Name="OverflowUndoButton" IsEnabled="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}" Style="{StaticResource AppIconSelectedButton}">
-                                            <Button.Tag>
-                                                <FontIcon Glyph="&#xE10E;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                            </Button.Tag>
-                                        </Button>
-                                        <!--<Button x:Name="OverflowRedoButton" Style="{StaticResource AppIconSelectedButton}">
-                                       <Button.Tag>    
-                                    <FontIcon Glyph="&#xE10D;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                        </Button.Tag>
-                                    </Button>-->
-                                        <Button x:Name="OverflowSetupButton" Style="{StaticResource AppIconSelectedButton}">
-                                            <Button.Tag>
-                                                <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                            </Button.Tag>
-                                        </Button>
-                                        <ToggleButton x:Name="OverflowSnapButton" IsChecked="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
-                                            <ToggleButton.Resources>
-                                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/$DrawPages/SnapIcon.xaml"/>
-                                            </ToggleButton.Resources>
-                                            <ToggleButton.Tag>
-                                                <ContentControl Template="{StaticResource SnapIcon}"/>
-                                            </ToggleButton.Tag>
-                                        </ToggleButton>
-                                        <ToggleButton x:Name="OverflowRulerButton" IsChecked="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
-                                            <ToggleButton.Tag>
-                                                <FontIcon Glyph="&#xECC6;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                            </ToggleButton.Tag>
-                                        </ToggleButton>
-                                        <Button x:Name="OverflowFullScreenButton" Style="{StaticResource AppIconSelectedButton}">
-                                            <Button.Tag>
-                                                <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                            </Button.Tag>
-                                        </Button>
-                                        <ToggleButton x:Name="OverflowTipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Style="{StaticResource AppIconToggleButtonStyle}">
-                                            <ToggleButton.Tag>
-                                                <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                            </ToggleButton.Tag>
-                                        </ToggleButton>
+
+                                        <ListViewItem x:Name="OverflowExportButton" Foreground="Black" Background="#FFC003">
+                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                                <ContentControl.Tag>
+                                                    <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                                </ContentControl.Tag>
+                                            </ContentControl>
+                                        </ListViewItem>
+                                        <ListViewItem Foreground="Black" Background="#FFC003">
+                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                                <ContentControl.Tag>
+                                                    <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                                </ContentControl.Tag>
+                                            </ContentControl>
+                                        </ListViewItem>
+                                        <ListViewItem x:Name="OverflowUndoButton" IsEnabled="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}">
+                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                                <ContentControl.Tag>
+                                                    <FontIcon Glyph="&#xE10E;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                                </ContentControl.Tag>
+                                            </ContentControl>
+                                        </ListViewItem>
+                                        <!--
+                                        <ListViewItem x:Name="OverflowRedoButton">
+                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                                <ContentControl.Tag>
+                                                    <FontIcon Glyph="&#xE10D;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                                </ContentControl.Tag>
+                                            </ContentControl>
+                                        </ListViewItem>-->
+                                        <ListViewItem x:Name="OverflowSetupButton">
+                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                                <ContentControl.Tag>
+                                                    <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                                </ContentControl.Tag>
+                                            </ContentControl>
+                                        </ListViewItem>
+                                        <ListViewItem x:Name="OverflowSnapButton" IsSelected="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
+                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                                <ContentControl.Resources>
+                                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/$DrawPages/SnapIcon.xaml"/>
+                                                </ContentControl.Resources>
+                                                <ContentControl.Tag>
+                                                    <ContentControl Template="{StaticResource SnapIcon}"/>
+                                                </ContentControl.Tag>
+                                            </ContentControl>
+                                        </ListViewItem>
+                                        <ListViewItem x:Name="OverflowRulerButton" IsSelected="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}" Style="{StaticResource AppIconToggleButtonStyle}">
+                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                                <ContentControl.Tag>
+                                                    <FontIcon Glyph="&#xECC6;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                                </ContentControl.Tag>
+                                            </ContentControl>
+                                        </ListViewItem>
+                                        <ListViewItem x:Name="OverflowFullScreenButton">
+                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                                <ContentControl.Tag>
+                                                    <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                                </ContentControl.Tag>
+                                            </ContentControl>
+                                        </ListViewItem>
+                                        <ListViewItem x:Name="OverflowTipButton" IsSelected="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Style="{StaticResource AppIconToggleButtonStyle}">
+                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                                <ContentControl.Tag>
+                                                    <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                                </ContentControl.Tag>
+                                            </ContentControl>
+                                        </ListViewItem>
+
                                     </StackPanel>
                                 </ScrollViewer>
                             </Flyout>
@@ -282,7 +317,7 @@
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind EditExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <edits:Icon/>
+                                <edits:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
                             <Button x:Name="Operate" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
@@ -295,7 +330,7 @@
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind OperateExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <operates:Icon/>
+                                <operates:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
 
                             <Button x:Name="Adjustment" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
@@ -309,7 +344,7 @@
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind AdjustmentExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <adjustments:Icon/>
+                                <adjustments:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
                             <Button x:Name="Effect" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
@@ -322,7 +357,7 @@
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind EffectExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <effects:Icon/>
+                                <effects:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
 
                             <Button x:Name="Text" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
@@ -336,7 +371,7 @@
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind TextExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <texts:Icon/>
+                                <texts:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
                             <Button x:Name="Stroke" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
@@ -349,7 +384,7 @@
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind StrokeExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <strokes:Icon/>
+                                <strokes:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
                             <Button x:Name="Style" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
@@ -362,7 +397,7 @@
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind StyleExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <styles:Icon/>
+                                <styles:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
 
                             <Button x:Name="History" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
@@ -376,7 +411,7 @@
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind HistoryExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <historys:Icon/>
+                                <historys:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
                             <Button x:Name="Transformer" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
@@ -389,7 +424,7 @@
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind TransformerExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <transformers:Icon/>
+                                <transformers:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
                             <Button x:Name="Layer" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
                                 <Button.Flyout>
@@ -402,7 +437,7 @@
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind LayerExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <layers:Icon/>
+                                <layers:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
 
                             <Button x:Name="Color" Width="54" Style="{StaticResource AppRoundedButtonStyle}">
@@ -444,7 +479,7 @@
 
 
         <!--Tip-->
-        <ContentControl Grid.Row="1" IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" Visibility="{x:Bind ViewModel.TipTextVisibility, Mode=OneWay}">
+        <ContentControl IsHitTestVisible="False" Margin="0,60,0,0" HorizontalAlignment="Center" Visibility="{x:Bind ViewModel.TipTextVisibility, Mode=OneWay}">
             <ToolTip Style="{StaticResource AppToolTipStyle}">
                 <TextBlock Text="{x:Bind ViewModel.TipText, Mode=OneWay}" TextWrapping="Wrap"/>
             </ToolTip>
@@ -492,7 +527,7 @@
 
         <!--Gallery-->
         <elements:DialogWide x:Name="GalleryDialog">
-            <GridView x:Name="GalleryGridView" Grid.Row="2" Padding="14,0" IsItemClickEnabled="False" ReorderMode="Disabled" SelectionMode="None"/>
+            <GridView x:Name="GalleryGridView" Padding="14,0" IsItemClickEnabled="False" ReorderMode="Disabled" SelectionMode="None"/>
         </elements:DialogWide>
         <photos:PhotoBillboardCanvas x:Name="BillboardCanvas"/>
 

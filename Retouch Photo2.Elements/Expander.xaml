@@ -127,7 +127,7 @@
 
 
                             <!--Head-->
-                            <Grid x:Name="TitleGrid" Height="40" Grid.Row="0" ManipulationMode="TranslateX,TranslateY" Background="Transparent">
+                            <Grid x:Name="TitleGrid" Height="42" Grid.Row="0" Padding="{StaticResource AppPanelPadding}" ManipulationMode="TranslateX,TranslateY" Background="Transparent">
 
                                 <Grid.Resources>
                                     <!--Style-->

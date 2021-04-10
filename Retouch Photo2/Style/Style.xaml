@@ -382,7 +382,7 @@
 
     <!--Button-->
     <Style x:Key="AppIconLineCircleButtonBase" TargetType="Button">
-        <Setter Property="Height" Value="40" />
+        <Setter Property="Height" Value="{ThemeResource AppCircleHeight}" />
         <Setter Property="Margin" Value="0,6" />
         <Setter Property="Padding" Value="6,0" />
         <Setter Property="MinWidth" Value="40"/>
@@ -399,7 +399,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="RootGrid" 
-                            CornerRadius="20"
+                            CornerRadius="{ThemeResource AppCircleCornerRadius}"
                             Padding="2,0"
                             BorderThickness="{TemplateBinding BorderThickness}" 
                             BorderBrush="{TemplateBinding BorderBrush}" 

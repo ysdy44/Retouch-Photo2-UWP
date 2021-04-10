@@ -1014,7 +1014,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="42"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -1082,7 +1082,7 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="42"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
@@ -1099,7 +1099,7 @@
                     </ToolTipService.ToolTip>
                     <FontIcon x:Name="WidthIcon" Glyph="&#xE127;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>
-                <Border x:Name = "GalleryBoder" Height="50" Visibility="Collapsed" Background="{ThemeResource AppLinearBrush}">
+                <Border x:Name = "GalleryBoder" Height="42" Visibility="Collapsed" Background="{ThemeResource AppLinearBrush}">
                     <Button x:Name="_PCGalleryButton" Width="90" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedButtonStyle}">
                         <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                     </Button>
