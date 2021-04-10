@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Tools
         {
             if (XML.Tools.ContainsKey(type)) return XML.Tools[type];
 
-            if (type != ToolType.Node)
+            if (type != ToolType.None)
             {
                 Assembly assembly = assemblyType.GetTypeInfo().Assembly;
                 IEnumerable<TypeInfo> typeInfos = assembly.DefinedTypes;

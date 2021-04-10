@@ -9,7 +9,6 @@ using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Tools.Elements;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +22,7 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s NodeTool.
     /// </summary>
-    public partial class NodeTool : ITool
+    public partial class NodeTool : Page, ITool
     {
 
         //@ViewModel
@@ -38,13 +37,49 @@ namespace Retouch_Photo2.Tools.Models
         bool IsSnap => this.SettingViewModel.IsSnap;
 
 
+        //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+
+
         //@Content
         public ToolType Type => ToolType.Node;
-        public ControlTemplate Icon => this.NodePage.Icon;
-        public FrameworkElement Page => this.NodePage;
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        public FrameworkElement Page => this;
         public bool IsSelected { get; set; }
-        public bool IsOpen { get => this.NodePage.MoreNodeToolTip.IsOpen; set => this.NodePage.MoreNodeToolTip.IsOpen = value; }
-        readonly NodePage NodePage = new NodePage();
+        public bool IsOpen { get => this.MoreNodeToolTip.IsOpen; set => this.MoreNodeToolTip.IsOpen = value; }
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a NodeTool. 
+        /// </summary>
+        public NodeTool()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.ConstructNodes();
+            this.ConstructSmooth();
+
+            this.MoreNodeButton.Click += (s, e) =>
+            {
+                switch (this.SettingViewModel.DeviceLayoutType)
+                {
+                    case DeviceLayoutType.PC:
+                        this.PenFlyout.Width = double.NaN;
+                        this.Flyout.ShowAt(this.MoreNodeButton);
+                        break;
+                    case DeviceLayoutType.Pad:
+                        this.PenFlyout.Width = double.NaN;
+                        this.Flyout.ShowAt(this);
+                        break;
+                    case DeviceLayoutType.Phone:
+                        this.PenFlyout.Width = this.ActualWidth - 40;
+                        this.Flyout.ShowAt(this);
+                        break;
+                }
+            };
+        }
 
 
         Layerage Layerage;
@@ -293,75 +328,9 @@ namespace Retouch_Photo2.Tools.Models
         {
             this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
         }
-
     }
 
-
-    /// <summary>
-    /// Page of <see cref="NodeTool"/>.
-    /// </summary>
-    internal partial class NodePage : Page
-    {
-
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
-
-
-        //@Converter
-        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
-
-
-        /// <summary> PenPage's Flyout. </summary>
-        public NodeModeControl PenFlyout => this._PenFlyout;
-
-        /// <summary> MoreNodeButton's ToolTip. </summary>
-        public ToolTip MoreNodeToolTip => this._MoreNodeToolTip;
-
-
-        //@Content
-        public ControlTemplate Icon => this.IconContentControl.Template;
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a NodePage. 
-        /// </summary>
-        public NodePage()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.ConstructNodes();
-            this.ConstructSmooth();
-
-            this.MoreNodeButton.Click += (s, e) =>
-            {
-                switch (this.SettingViewModel.DeviceLayoutType)
-                {
-                    case DeviceLayoutType.PC:
-                        this._PenFlyout.Width = double.NaN;
-                        this.Flyout.ShowAt(this.MoreNodeButton);
-                        break;
-                    case DeviceLayoutType.Pad:
-                        this._PenFlyout.Width = double.NaN;
-                        this.Flyout.ShowAt(this);
-                        break;
-                    case DeviceLayoutType.Phone:
-                        this._PenFlyout.Width = this.ActualWidth - 40;
-                        this.Flyout.ShowAt(this);
-                        break;
-                }
-            };
-        }
-
-    }
-
-    /// <summary>
-    /// Page of <see cref="NodeTool"/>.
-    /// </summary>
-    internal partial class NodePage : Page
+    public partial class NodeTool : Page, ITool
     {
 
         //Strings
@@ -374,7 +343,7 @@ namespace Retouch_Photo2.Tools.Models
             this.SharpTextBlock.Text = resource.GetString("Tools_Node_Sharp");
             this.SmoothTextBlock.Text = resource.GetString("Tools_Node_Smooth");
 
-            this._MoreNodeToolTip.Content = resource.GetString("Tools_Node_MoreNode");
+            this.MoreNodeToolTip.Content = resource.GetString("Tools_Node_MoreNode");
         }
 
         private void ConstructNodes()

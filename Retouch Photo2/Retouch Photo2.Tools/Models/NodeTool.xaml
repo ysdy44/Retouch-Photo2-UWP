@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Retouch_Photo2.Tools.Models.NodePage"
+    x:Class="Retouch_Photo2.Tools.Models.NodeTool"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -15,7 +15,7 @@
     <Page.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <toolElements:NodeModeControl x:Name="_PenFlyout" />
+            <toolElements:NodeModeControl x:Name="PenFlyout" />
         </Flyout>
     </Page.Resources>
 
@@ -90,7 +90,7 @@
 
         <Button x:Name="MoreNodeButton" Grid.Column="12" Style="{StaticResource AppRoundedButtonStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip x:Name="_MoreNodeToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
+                <ToolTip x:Name="MoreNodeToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
         </Button>

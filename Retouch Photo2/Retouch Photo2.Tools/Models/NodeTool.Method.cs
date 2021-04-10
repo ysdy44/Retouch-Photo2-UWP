@@ -277,7 +277,7 @@ namespace Retouch_Photo2.Tools.Models
                 //Refactoring
                 layer.IsRefactoringRender = true;
                 this.Layerage.RefactoringParentsRender();
-                Node.Controller(this.NodePage.PenFlyout.ControlPointMode, this.NodePage.PenFlyout.ControlLengthMode, this.NodePage.PenFlyout.ControlAngleMode, canvasPoint, node, isLeftControlPoint);
+                Node.Controller(this.PenFlyout.ControlPointMode, this.PenFlyout.ControlLengthMode, this.PenFlyout.ControlAngleMode, canvasPoint, node, isLeftControlPoint);
             }
         }
         private void MoveSingleNodeControlPointComplete(Vector2 canvasPoint, bool isLeftControlPoint)
@@ -313,7 +313,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.Layerage.RefactoringParentsTransformer();
                 this.Layerage.RefactoringParentsRender();
                 this.Layerage.RefactoringParentsIconRender();
-                Node.Controller(this.NodePage.PenFlyout.ControlPointMode, this.NodePage.PenFlyout.ControlLengthMode, this.NodePage.PenFlyout.ControlAngleMode, canvasPoint, node, isLeftControlPoint);
+                Node.Controller(this.PenFlyout.ControlPointMode, this.PenFlyout.ControlLengthMode, this.PenFlyout.ControlAngleMode, canvasPoint, node, isLeftControlPoint);
 
                 //History
                 this.ViewModel.HistoryPush(history);
