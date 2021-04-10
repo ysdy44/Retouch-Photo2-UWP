@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPickers="using:HSVColorPickers"
+    xmlns:brushs="using:Retouch_Photo2.Brushs"
     xmlns:elements="using:Retouch_Photo2.Elements"
     MinHeight="165" 
     d:DesignWidth="200"
@@ -77,11 +78,9 @@
 
             <!--Color-->
             <TextBlock x:Name="ColorTextBlock" Grid.Column="1" Style="{StaticResource AppTextBlockStyle}"/>
-            <Border x:Name="ColorBorder" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{ThemeResource AppText}" Style="{StaticResource AppCircleBorderStyle}">
-                <Border.Background>
-                    <SolidColorBrush x:Name="SolidColorBrush" Color="Black"/>
-                </Border.Background>
-            </Border>
+            <Button x:Name="ColorButton" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource AppRoundedButtonStyle}">
+                <brushs:ColorEllipse x:Name="ColorEllipse" Color="Black"/>
+            </Button>
 
         </Grid>
 

@@ -15,86 +15,113 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel x:Name="FlyoutStackPanel">
+            <ScrollViewer>
+                <ScrollViewer.Resources>
+                    <!--StaticResource-->
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
+                    <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
+                    <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
+                    <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
+                </ScrollViewer.Resources>
+                <StackPanel x:Name="FlyoutStackPanel">
 
-                <Button x:Name="SwatchesButton" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/SwatchesIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource SwatchesIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <ListViewItem x:Name="SwatchesItem">
+                        <ContentControl x:Name="SwatchesControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/SwatchesIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource SwatchesIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
-                <Button x:Name="WheelButton" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/SwatchesIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource SwatchesIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <ListViewItem x:Name="WheelItem">
+                        <ContentControl x:Name="WheelControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/WheelIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource WheelIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
-                <Button x:Name="RGBButton" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/RGBIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource RGBIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="HSVButton" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/HSVIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource HSVIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <ListViewItem x:Name="RGBItem">
+                        <ContentControl x:Name="RGBControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/RGBIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource RGBIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="HSVItem">
+                        <ContentControl x:Name="HSVControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/HSVIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource HSVIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
-                <Button x:Name="PaletteHueButton" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/PaletteHueIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource PaletteHueIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="PaletteSaturationButton" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/PaletteSaturationIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource PaletteSaturationIcon}"/>
-                    </Button.Tag>
-                </Button>
-                <Button x:Name="PaletteValueButton" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/PaletteValueIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource PaletteValueIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <ListViewItem x:Name="PaletteHueItem">
+                        <ContentControl x:Name="PaletteHueControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/PaletteHueIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource PaletteHueIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="PaletteSaturationItem">
+                        <ContentControl x:Name="PaletteSaturationControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/PaletteSaturationIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource PaletteSaturationIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="PaletteValueItem">
+                        <ContentControl x:Name="PaletteValueControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/PaletteValueIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource PaletteValueIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
-                <Button x:Name="CircleButton" Style="{StaticResource AppIconSelectedButton}">
-                    <Button.Resources>
-                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/CircleIcon.xaml"/>
-                    </Button.Resources>
-                    <Button.Tag>
-                        <ContentControl Template="{StaticResource CircleIcon}"/>
-                    </Button.Tag>
-                </Button>
+                    <ListViewItem x:Name="CircleItem">
+                        <ContentControl x:Name="CircleControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Pickers/ColorPicker2Icons/CircleIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource CircleIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
 
-            </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
         </Flyout>
     </UserControl.Resources>
 
@@ -118,10 +145,12 @@
         </Grid>
 
         <!--Group-->
-        <Button x:Name="Button" Style="{StaticResource AppIconRoundedButtonStyle}">
-            <Button.Tag>
-                <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
-            </Button.Tag>
+        <Button x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppRoundedButtonStyle}">
+            <ContentControl x:Name="Control" Style="{StaticResource AppIconReverseContentControlStyle}">
+                <ContentControl.Tag>
+                    <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                </ContentControl.Tag>
+            </ContentControl>
         </Button>
 
         <ContentControl Height="4"/>

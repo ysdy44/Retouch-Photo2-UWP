@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ScrollViewer  Style="{StaticResource AppVerticalScrollViewerStyle}">
+            <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
                 <ScrollViewer.Resources>
                     <!--StaticResource-->
                     <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
@@ -164,7 +164,7 @@
     </UserControl.Resources>
 
 
-    <Button x:Name="Button" Style="{StaticResource AppIconRoundedButtonStyle}">
+    <Button x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppRoundedButtonStyle}">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -177,14 +177,14 @@
                 <VisualState x:Name="BlackState">
                     <VisualState.Setters>
                         <Setter Target = "BlackItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind Black.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind Black.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--Bold-->
                 <VisualState x:Name="BoldState">
                     <VisualState.Setters>
                         <Setter Target = "BoldItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind Bold.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind Bold.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -192,21 +192,21 @@
                 <VisualState x:Name="ExtraBlackState">
                     <VisualState.Setters>
                         <Setter Target = "ExtraBlackItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind ExtraBlack.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind ExtraBlack.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--ExtraBold-->
                 <VisualState x:Name="ExtraBoldState">
                     <VisualState.Setters>
                         <Setter Target = "ExtraBoldItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind ExtraBold.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind ExtraBold.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--ExtraLight-->
                 <VisualState x:Name="ExtraLightState">
                     <VisualState.Setters>
                         <Setter Target = "ExtraLightItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind ExtraLight.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind ExtraLight.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -214,21 +214,21 @@
                 <VisualState x:Name="LightState">
                     <VisualState.Setters>
                         <Setter Target = "LightItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind Light.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind Light.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--Medium-->
                 <VisualState x:Name="MediumState">
                     <VisualState.Setters>
                         <Setter Target = "MediumItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind Medium.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind Medium.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--None-->
                 <VisualState x:Name="NoneState">
                     <VisualState.Setters>
                         <Setter Target = "NoneItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind None.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind None.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -236,14 +236,14 @@
                 <VisualState x:Name="SemiBoldState">
                     <VisualState.Setters>
                         <Setter Target = "SemiBoldItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind SemiBold.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind SemiBold.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--SemiLight-->
                 <VisualState x:Name="SemiLightState">
                     <VisualState.Setters>
                         <Setter Target = "SemiLightItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind SemiLight.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind SemiLight.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -251,17 +251,19 @@
                 <VisualState x:Name="ThinState">
                     <VisualState.Setters>
                         <Setter Target = "ThinItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind Thin.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind Thin.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Button.Tag>
-            <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"
+        <ContentControl x:Name="Control" Style="{StaticResource AppIconReverseContentControlStyle}">
+            <ContentControl.Tag>
+                <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"
                           MirroredWhenRightToLeft="True"/>
-        </Button.Tag>
+            </ContentControl.Tag>
+        </ContentControl>
     </Button>
 
 </UserControl>

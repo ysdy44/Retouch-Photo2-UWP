@@ -74,8 +74,8 @@
     </UserControl.Resources>
 
 
-    <Button x:Name="Button" Style="{StaticResource AppIconRoundedButtonStyle}">
-
+    <Button x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppRoundedButtonStyle}">
+        
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
@@ -87,7 +87,7 @@
                 <VisualState x:Name="NoneState">
                     <VisualState.Setters>
                         <Setter Target = "NoneItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind None.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind None.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -95,21 +95,21 @@
                 <VisualState x:Name="LinearGradientState">
                     <VisualState.Setters>
                         <Setter Target = "LinearGradientItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind LinearGradient.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind LinearGradient.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--RadialGradient-->
                 <VisualState x:Name="RadialGradientState">
                     <VisualState.Setters>
                         <Setter Target = "RadialGradientItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind RadialGradient.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind RadialGradient.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--EllipticalGradient-->
                 <VisualState x:Name="EllipticalGradientState">
                     <VisualState.Setters>
                         <Setter Target = "EllipticalGradientItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind EllipticalGradient.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind EllipticalGradient.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -121,9 +121,11 @@
             <SolidColorBrush x:Name="ButtonBorderBrush" Color="{ThemeResource AppStrokeColor}"/>
         </Button.BorderBrush>
 
-        <Button.Tag>
-            <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
-        </Button.Tag>
+        <ContentControl x:Name="Control" Style="{StaticResource AppIconReverseContentControlStyle}">
+            <ContentControl.Tag>
+                <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+            </ContentControl.Tag>
+        </ContentControl>
     </Button>
 
 </UserControl>

@@ -43,11 +43,13 @@
 
             <!--Flyout-->
             <Flyout x:Name="DocumentFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <Button x:Name="DocumentUnSaveButton" Style="{StaticResource AppIconButton}">
-                    <Button.Tag>
-                        <FontIcon Glyph="&#xF78A;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                    </Button.Tag>
-                </Button>
+                <ListViewItem x:Name="DocumentUnSaveItem">
+                    <ContentControl x:Name="DocumentUnSaveControl" Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl.Tag>
+                            <FontIcon Glyph="&#xF78A;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                        </ContentControl.Tag>
+                    </ContentControl>
+                </ListViewItem>
             </Flyout>
 
             <Flyout x:Name="FillColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
@@ -226,44 +228,37 @@
                                     </ScrollViewer.Resources>
                                     <StackPanel x:Name="OverflowStackPanel">
 
-                                        <ListViewItem x:Name="OverflowExportButton" Foreground="Black" Background="#FFC003">
-                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                        <ListViewItem x:Name="OverflowExportItem" Foreground="Black" Background="#FFC003">
+                                            <ContentControl x:Name="OverflowExportControl" Style="{StaticResource AppIconContentControlStyle}">
                                                 <ContentControl.Tag>
                                                     <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                                 </ContentControl.Tag>
                                             </ContentControl>
                                         </ListViewItem>
-                                        <ListViewItem Foreground="Black" Background="#FFC003">
-                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
-                                                <ContentControl.Tag>
-                                                    <FontIcon Glyph="&#xE78B;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                                                </ContentControl.Tag>
-                                            </ContentControl>
-                                        </ListViewItem>
-                                        <ListViewItem x:Name="OverflowUndoButton" IsEnabled="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}">
-                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                        <ListViewItem x:Name="OverflowUndoItem" IsEnabled="{x:Bind ViewModel.IsUndoEnabled, Mode=OneWay}">
+                                            <ContentControl x:Name="OverflowUndoControl" Style="{StaticResource AppIconContentControlStyle}">
                                                 <ContentControl.Tag>
                                                     <FontIcon Glyph="&#xE10E;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                                 </ContentControl.Tag>
                                             </ContentControl>
                                         </ListViewItem>
                                         <!--
-                                        <ListViewItem x:Name="OverflowRedoButton">
-                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                        <ListViewItem x:Name="OverflowRedoItem">
+                                            <ContentControl x:Name="OverflowRedoControl" Style="{StaticResource AppIconContentControlStyle}">
                                                 <ContentControl.Tag>
                                                     <FontIcon Glyph="&#xE10D;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                                 </ContentControl.Tag>
                                             </ContentControl>
                                         </ListViewItem>-->
-                                        <ListViewItem x:Name="OverflowSetupButton">
-                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                        <ListViewItem x:Name="OverflowSetupItem">
+                                            <ContentControl x:Name="OverflowSetupControl" Style="{StaticResource AppIconContentControlStyle}">
                                                 <ContentControl.Tag>
                                                     <FontIcon Glyph="&#xE123;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                                 </ContentControl.Tag>
                                             </ContentControl>
                                         </ListViewItem>
-                                        <ListViewItem x:Name="OverflowSnapButton" IsSelected="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}">
-                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                        <ListViewItem x:Name="OverflowSnapItem" IsSelected="{x:Bind SettingViewModel.IsSnap, Mode=TwoWay}">
+                                            <ContentControl x:Name="OverflowSnapControl" Style="{StaticResource AppIconContentControlStyle}">
                                                 <ContentControl.Resources>
                                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/$DrawPages/SnapIcon.xaml"/>
                                                 </ContentControl.Resources>
@@ -272,22 +267,22 @@
                                                 </ContentControl.Tag>
                                             </ContentControl>
                                         </ListViewItem>
-                                        <ListViewItem x:Name="OverflowRulerButton" IsSelected="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}">
-                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                        <ListViewItem x:Name="OverflowRulerItem" IsSelected="{x:Bind SettingViewModel.IsRuler, Mode=TwoWay}">
+                                            <ContentControl x:Name="OverflowRulerControl" Style="{StaticResource AppIconContentControlStyle}">
                                                 <ContentControl.Tag>
                                                     <FontIcon Glyph="&#xECC6;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                                 </ContentControl.Tag>
                                             </ContentControl>
                                         </ListViewItem>
-                                        <ListViewItem x:Name="OverflowFullScreenButton">
-                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                        <ListViewItem x:Name="OverflowFullScreenItem">
+                                            <ContentControl x:Name="OverflowFullScreenControl" Style="{StaticResource AppIconContentControlStyle}">
                                                 <ContentControl.Tag>
                                                     <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                                 </ContentControl.Tag>
                                             </ContentControl>
                                         </ListViewItem>
-                                        <ListViewItem x:Name="OverflowTipButton" IsSelected="{x:Bind TipViewModel.IsOpen, Mode=OneWay}">
-                                            <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                                        <ListViewItem x:Name="OverflowTipItem" IsSelected="{x:Bind TipViewModel.IsOpen, Mode=OneWay}">
+                                            <ContentControl x:Name="OverflowTipControl" Style="{StaticResource AppIconContentControlStyle}">
                                                 <ContentControl.Tag>
                                                     <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                                 </ContentControl.Tag>

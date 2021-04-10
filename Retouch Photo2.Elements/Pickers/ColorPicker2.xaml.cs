@@ -269,41 +269,41 @@ namespace Retouch_Photo2.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.SwatchesButton.Content = resource.GetString($"Menus_Color_Swatches");
+            this.SwatchesControl.Content = resource.GetString($"Menus_Color_Swatches");
 
-            this.WheelButton.Content = resource.GetString($"Menus_Color_Wheel");
+            this.WheelControl.Content = resource.GetString($"Menus_Color_Wheel");
 
-            this.RGBButton.Content = resource.GetString($"Menus_Color_RGB");
-            this.HSVButton.Content = resource.GetString($"Menus_Color_HSV");
+            this.RGBControl.Content = resource.GetString($"Menus_Color_RGB");
+            this.HSVControl.Content = resource.GetString($"Menus_Color_HSV");
 
-            this.PaletteHueButton.Content = resource.GetString($"Menus_Color_PaletteHue");
-            this.PaletteSaturationButton.Content = resource.GetString($"Menus_Color_PaletteSaturation");
-            this.PaletteValueButton.Content = resource.GetString($"Menus_Color_PaletteValue");
+            this.PaletteHueControl.Content = resource.GetString($"Menus_Color_PaletteHue");
+            this.PaletteSaturationControl.Content = resource.GetString($"Menus_Color_PaletteSaturation");
+            this.PaletteValueControl.Content = resource.GetString($"Menus_Color_PaletteValue");
 
-            this.CircleButton.Content = resource.GetString($"Menus_Color_Circle");
+            this.CircleControl.Content = resource.GetString($"Menus_Color_Circle");
         }
 
 
         //@Group
         private void ConstructGroup()
         {
-            this.ConstructGroupCore(this.SwatchesButton, this.SwatchesPicker, ColorPicker2Mode.Swatches);
+            this.ConstructGroupCore(this.SwatchesItem, this.SwatchesPicker, ColorPicker2Mode.Swatches);
 
-            this.ConstructGroupCore(this.WheelButton, this.WheelPicker, ColorPicker2Mode.Wheel);
+            this.ConstructGroupCore(this.WheelItem, this.WheelPicker, ColorPicker2Mode.Wheel);
 
-            this.ConstructGroupCore(this.RGBButton, this.RGBPicker, ColorPicker2Mode.RGB);
-            this.ConstructGroupCore(this.HSVButton, this.HSVPicker, ColorPicker2Mode.HSV);
+            this.ConstructGroupCore(this.RGBItem, this.RGBPicker, ColorPicker2Mode.RGB);
+            this.ConstructGroupCore(this.HSVItem, this.HSVPicker, ColorPicker2Mode.HSV);
 
-            this.ConstructGroupCore(this.PaletteHueButton, this.PaletteHuePicker, ColorPicker2Mode.PaletteHue);
-            this.ConstructGroupCore(this.PaletteSaturationButton, this.PaletteSaturationPicker, ColorPicker2Mode.PaletteSaturation);
-            this.ConstructGroupCore(this.PaletteValueButton, this.PaletteValuePicker, ColorPicker2Mode.PaletteValue);
+            this.ConstructGroupCore(this.PaletteHueItem, this.PaletteHuePicker, ColorPicker2Mode.PaletteHue);
+            this.ConstructGroupCore(this.PaletteSaturationItem, this.PaletteSaturationPicker, ColorPicker2Mode.PaletteSaturation);
+            this.ConstructGroupCore(this.PaletteValueItem, this.PaletteValuePicker, ColorPicker2Mode.PaletteValue);
 
-            this.ConstructGroupCore(this.CircleButton, this.CirclePicker, ColorPicker2Mode.Circle);
+            this.ConstructGroupCore(this.CircleItem, this.CirclePicker, ColorPicker2Mode.Circle);
         }
-        private void ConstructGroupCore(Button button, IColorPicker colorPicker, ColorPicker2Mode mode)
+        private void ConstructGroupCore(ListViewItem button, IColorPicker colorPicker, ColorPicker2Mode mode)
         {
             //Button
-            button.Click += (s, e) =>
+            button.Tapped += (s, e) =>
             {
                 this.Mode = mode;
                 this.Flyout.Hide();
@@ -333,7 +333,7 @@ namespace Retouch_Photo2.Elements
                     colorPicker.Self.Visibility = Visibility.Visible;
 
                     colorPicker.Color = this.Color;
-                    this.Button.Content = button.Content as string;
+                    this.Control.Content = button.Content as string;
                 }
                 else
                 {

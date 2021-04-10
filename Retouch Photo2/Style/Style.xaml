@@ -8,7 +8,7 @@
 
 
     <!--ContentControl-->
-    <Style x:Key="AppIconContentControlStyle" TargetType="ContentControl">
+    <Style x:Key="IconContentControlStyleBase" TargetType="ContentControl">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
@@ -17,6 +17,8 @@
         <Setter Property="Height" Value="{StaticResource AppRoundedHeight}"/>
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="AppIconContentControlStyle" TargetType="ContentControl" BasedOn="{StaticResource IconContentControlStyleBase}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ContentControl">
@@ -45,7 +47,36 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+    <Style x:Key="AppIconReverseContentControlStyle" TargetType="ContentControl" BasedOn="{StaticResource IconContentControlStyleBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="36"/>
+                        </Grid.ColumnDefinitions>
+
+                        <ContentControl x:Name="ContentControl" Grid.Column="1"
+                            Content="{TemplateBinding Tag}" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center"/>
+
+                        <ContentPresenter x:Name="ContentPresenter"
+                            Content="{TemplateBinding Content}"
+                            Padding="{TemplateBinding Padding}"
+                            ContentTransitions="{TemplateBinding ContentTransitions}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            AutomationProperties.AccessibilityView="Raw" />
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
     <!--ScrollViewer-->
     <Style x:Key="AppHorizontalScrollViewerStyle" TargetType="ScrollViewer">
@@ -381,7 +412,7 @@
 
 
     <!--Button-->
-    <Style x:Key="AppIconLineCircleButtonBase" TargetType="Button">
+    <Style x:Key="IconLineCircleButtonBase" TargetType="Button">
         <Setter Property="Height" Value="{ThemeResource AppCircleHeight}" />
         <Setter Property="Margin" Value="0,6" />
         <Setter Property="Padding" Value="6,0" />
@@ -393,7 +424,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FontWeight" Value="Normal" />
     </Style>
-    <Style x:Key="AppIconLineCircleButton" TargetType="Button" BasedOn="{StaticResource AppIconLineCircleButtonBase}">
+    <Style x:Key="AppIconLineCircleButton" TargetType="Button" BasedOn="{StaticResource IconLineCircleButtonBase}">
         <Setter Property="BorderBrush" Value="{ThemeResource AppText}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -474,7 +505,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="AppIconAccentLineCircleButton" TargetType="Button" BasedOn="{StaticResource AppIconLineCircleButtonBase}">
+    <Style x:Key="AppIconAccentLineCircleButton" TargetType="Button" BasedOn="{StaticResource IconLineCircleButtonBase}">
         <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
         <Setter Property="Template">
             <Setter.Value>

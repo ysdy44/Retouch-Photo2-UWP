@@ -36,40 +36,16 @@ namespace Retouch_Photo2
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.DocumentTextBlock.Text = resource.GetString("$DrawPage_Document");
-            this.DocumentUnSaveButton.Content = resource.GetString("$DrawPage_DocumentUnSave");
+            this.DocumentUnSaveControl.Content = resource.GetString("$DrawPage_DocumentUnSave");
             {
-                if (this.OverflowExportButton.Content is ContentControl control)
-                {
-                    this.ExportToolTip.Content = control.Content = resource.GetString("$DrawPage_Export");
-                }
-                if (this.OverflowUndoButton.Content is ContentControl control2)
-                {
-                    this.UndoToolTip.Content = control2.Content = resource.GetString("$DrawPage_Undo");
-                }
-                //if (this.OverflowRedoButton.Content is ContentControl control3)
-                //{
-                //    this.RedoToolTip.Content = control3.Content = resource.GetString("$DrawPage_Redo");
-                //}
-                if (this.OverflowSetupButton.Content is ContentControl control4)
-                {
-                    this.SetupToolTip.Content = control4.Content = resource.GetString("$DrawPage_Setup");
-                }
-                if (this.OverflowSnapButton.Content is ContentControl control5)
-                {
-                    this.SnapToolTip.Content = control5.Content = resource.GetString("$DrawPage_Snap");
-                }
-                if (this.OverflowRulerButton.Content is ContentControl control6)
-                {
-                    this.RulerToolTip.Content = control6.Content = resource.GetString("$DrawPage_Ruler");
-                }
-                if (this.OverflowFullScreenButton.Content is ContentControl control7)
-                {
-                    this.FullScreenToolTip.Content = control7.Content = resource.GetString("$DrawPage_FullScreen");
-                }
-                if (this.OverflowTipButton.Content is ContentControl control8)
-                {
-                    control8.Content = resource.GetString("$DrawPage_Tip");
-                }
+                this.ExportToolTip.Content = this.OverflowExportControl.Content = resource.GetString("$DrawPage_Export");
+                this.UndoToolTip.Content = this.OverflowUndoControl.Content = resource.GetString("$DrawPage_Undo");
+                //this.RedoToolTip.Content = this.OverflowRedoControl.Content = resource.GetString("$DrawPage_Redo");
+                this.SetupToolTip.Content = this.OverflowSetupControl.Content = resource.GetString("$DrawPage_Setup");
+                this.SnapToolTip.Content = this.OverflowSnapControl.Content = resource.GetString("$DrawPage_Snap");
+                this.RulerToolTip.Content = this.OverflowRulerControl.Content = resource.GetString("$DrawPage_Ruler");
+                this.FullScreenToolTip.Content = this.OverflowFullScreenControl.Content = resource.GetString("$DrawPage_FullScreen");
+                this.OverflowTipControl.Content = resource.GetString("$DrawPage_Tip");
             }
 
             this.SetupDialog.Title = resource.GetString("$DrawPage_SetupDialog_Title");

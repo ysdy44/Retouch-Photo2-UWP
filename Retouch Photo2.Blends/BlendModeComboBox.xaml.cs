@@ -123,7 +123,7 @@ namespace Retouch_Photo2.Blends
                             {
                                 item.IsSelected = true;
 
-                                this.Button.Content = control.Content as string;
+                                this.Control.Content = control.Content as string;
                             }
                             else item.IsSelected = false;
                         }

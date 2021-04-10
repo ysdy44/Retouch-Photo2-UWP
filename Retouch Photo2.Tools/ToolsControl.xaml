@@ -30,7 +30,7 @@
                     <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
                 </ScrollViewer.Resources>
                 <StackPanel x:Name="MoreStackPanel" Padding="{StaticResource AppPanelPadding}" HorizontalAlignment="Stretch">
-         
+
                     <!--Pattern-->
                     <ListViewItem x:Name="PatternGrid">
                         <ContentControl Style="{StaticResource AppIconContentControlStyle}">
@@ -201,15 +201,15 @@
                                 <ContentControl Template="{StaticResource GeometryHeartIcon}"/>
                             </ContentControl.Tag>
                         </ContentControl>
-                    </ListViewItem>                    
-                    
+                    </ListViewItem>
+
                 </StackPanel>
             </ScrollViewer>
         </Flyout>
     </UserControl.Resources>
 
 
-    <ScrollViewer  Style="{StaticResource AppVerticalScrollViewerStyle}">
+    <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
         <StackPanel x:Name="StackPanel" Padding="{StaticResource AppPanelPadding}">
 
             <ListViewItem x:Name="Cursor" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
@@ -244,8 +244,18 @@
                 <ContentControl Template="{StaticResource BrushIcon}"/>
             </ListViewItem>
 
+            <ListViewItem x:Name="Transparency" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
+                <ListViewItem.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/TransparencyIcon.xaml"/>
+                </ListViewItem.Resources>
+                <ToolTipService.ToolTip>
+                    <ToolTip Placement="Right" IsOpen="{x:Bind IsOpenCore, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <ContentControl Template="{StaticResource TransparencyIcon}"/>
+            </ListViewItem>
+
             <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-            
+
             <!--Geometry0-->
             <ListViewItem x:Name="GeometryRectangle" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
                 <ListViewItem.Resources>

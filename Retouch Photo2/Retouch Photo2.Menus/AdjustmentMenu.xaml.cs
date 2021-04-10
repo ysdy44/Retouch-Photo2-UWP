@@ -192,7 +192,7 @@ namespace Retouch_Photo2.Menus
             this.ZeroTextBlock.Text = resource.GetString("Menus_Adjustment_ZeroTip");
             this.DisableTextBlock.Text = resource.GetString("Menus_Adjustment_DisableTip");
 
-            this.AddButton.Content = resource.GetString("Menus_Adjustment_Add");
+            this.AddControl.Content = resource.GetString("Menus_Adjustment_Add");
             this.FilterButton.Content = resource.GetString("Menus_Adjustment_Filters");
 
             this.CloseButton.Content = resource.GetString("Menus_Close");

@@ -64,11 +64,10 @@ namespace Retouch_Photo2.Effects.Pages
         /// <summary> Color </summary>
         public Color Color
         {
-            get => this.SolidColorBrush.Color;
+            get => this.ColorEllipse.Color;
             set
             {
-                this.SolidColorBrush.Color = value;
-                this.ColorPicker.Color = value;
+                this.ColorEllipse.Color = value;
             }
         }
 
@@ -387,9 +386,9 @@ namespace Retouch_Photo2.Effects.Pages
         //Color
         private void ConstructColor1()
         {
-            this.ColorBorder.Tapped += (s, e) =>
+            this.ColorButton.Click += (s, e) =>
             {
-                this.ColorFlyout.ShowAt(this.ColorBorder);
+                this.ColorFlyout.ShowAt(this.ColorButton);
                 this.ColorPicker.Color = this.Color;
             };
             

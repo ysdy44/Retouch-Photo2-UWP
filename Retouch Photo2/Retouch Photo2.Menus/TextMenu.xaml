@@ -73,12 +73,14 @@
 
                     <!--FontFamily-->
                     <TextBlock x:Name="FontFamilyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <Button x:Name="FontFamilyButton" Style="{StaticResource AppIconRoundedButtonStyle}"
-                        Content="{x:Bind SelectionViewModel.FontFamily, Mode=OneWay}">
-                        <Button.Tag>
-                            <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                          MirroredWhenRightToLeft="True"/>
-                        </Button.Tag>
+                    <Button x:Name="FontFamilyButton" HorizontalContentAlignment="Stretch" Style="{StaticResource AppRoundedButtonStyle}">
+                        <ContentControl Style="{StaticResource AppIconReverseContentControlStyle}"
+                                        Content="{x:Bind SelectionViewModel.FontFamily, Mode=OneWay}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                          MirroredWhenRightToLeft="True"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
                     </Button>
 
 

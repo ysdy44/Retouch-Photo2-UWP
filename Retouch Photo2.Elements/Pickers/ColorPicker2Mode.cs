@@ -8,7 +8,7 @@ namespace Retouch_Photo2.Elements
     /// <summary>
     /// Enum of <see cref="ColorPicker2"/>.
     /// </summary>
-public enum ColorPicker2Mode
+    public enum ColorPicker2Mode
     {
         /// <summary> Normal </summary>
         None,
@@ -25,9 +25,9 @@ public enum ColorPicker2Mode
         HSV,
 
         /// <summary> Hue Palette </summary>
-        PaletteHue,       
+        PaletteHue,
         /// <summary> Saturation Palette </summary>
-        PaletteSaturation,       
+        PaletteSaturation,
         /// <summary> Value Palette </summary>
         PaletteValue,
 

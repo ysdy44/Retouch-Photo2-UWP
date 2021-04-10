@@ -40,7 +40,7 @@
     </UserControl.Resources>
 
 
-    <Button x:Name="Button" Style="{StaticResource AppIconRoundedButtonStyle}">
+    <Button x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppRoundedButtonStyle}">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -53,7 +53,7 @@
                 <VisualState x:Name="FillState">
                     <VisualState.Setters>
                         <Setter Target = "FillItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind Fill.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind Fill.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -61,16 +61,18 @@
                 <VisualState x:Name="StrokeState">
                     <VisualState.Setters>
                         <Setter Target = "StrokeItem.IsSelected" Value="True"/>
-                        <Setter Target = "Button.Content" Value="{x:Bind Stroke.Content}"/>
+                        <Setter Target = "Control.Content" Value="{x:Bind Stroke.Content}"/>
                     </VisualState.Setters>
                 </VisualState>
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        
-        <Button.Tag>
-            <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
-        </Button.Tag>        
+
+        <ContentControl x:Name="Control" Style="{StaticResource AppIconReverseContentControlStyle}">
+            <ContentControl.Tag>
+                <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+            </ContentControl.Tag>
+        </ContentControl>
     </Button>
 
 </UserControl>

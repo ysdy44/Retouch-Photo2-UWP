@@ -49,7 +49,7 @@ namespace Retouch_Photo2
             this.DocumentButton.RightTapped += (s, e) => this.DocumentFlyout.ShowAt(this.DocumentButton);
 
 
-            this.DocumentUnSaveButton.Click += (s, e) => this.DocumentUnSave();
+            this.DocumentUnSaveItem.Tapped += (s, e) => this.DocumentUnSave();
             this.DocumentButton.Click += (s, e) =>
             {
                 int countHistorys = HistoryBase.Instances.Count;
@@ -68,39 +68,39 @@ namespace Retouch_Photo2
 
             //Appbar
             this.ExportButton.Click += (s, e) => this.ShowExportDialog();
-            this.OverflowExportButton.Tapped += (s, e) =>
+            this.OverflowExportItem.Tapped += (s, e) =>
             {
                 this.ShowExportDialog();
                 this.OverflowFlyout.Hide();
             };
 
             this.UndoButton.Click += (s, e) => this.MethodViewModel.MethodEditUndo();
-            this.OverflowUndoButton.Tapped += (s, e) => this.MethodViewModel.MethodEditUndo();
+            this.OverflowUndoItem.Tapped += (s, e) => this.MethodViewModel.MethodEditUndo();
 
             //this.RedoButton.Click += (s, e) => { };
             //this.OverflowRedoButton.Tapped += (s, e) => { };
 
             this.SetupButton.Click += (s, e) => this.ShowSetupDialog();
-            this.OverflowSetupButton.Tapped += (s, e) =>
+            this.OverflowSetupItem.Tapped += (s, e) =>
             {
                 this.ShowSetupDialog();
                 this.OverflowFlyout.Hide();
             };
 
-            this.OverflowSnapButton.Tapped += (s, e) =>
+            this.OverflowSnapItem.Tapped += (s, e) =>
             {
-                this.OverflowSnapButton.IsSelected = !this.OverflowSnapButton.IsSelected;
+                this.OverflowSnapItem.IsSelected = !this.OverflowSnapItem.IsSelected;
             };
 
             this.RulerButton.Tapped += (s, e) => this.ViewModel.Invalidate();//Invalidate
-            this.OverflowRulerButton.Tapped += (s, e) =>
+            this.OverflowRulerItem.Tapped += (s, e) =>
             {
-                this.OverflowRulerButton.IsSelected = !this.OverflowRulerButton.IsSelected;
+                this.OverflowRulerItem.IsSelected = !this.OverflowRulerItem.IsSelected;
                 this.ViewModel.Invalidate();//Invalidate
             };
 
             this.FullScreenButton.Click += (s, e) => this.FullScreenChanged();
-            this.OverflowFullScreenButton.Tapped += (s, e) =>
+            this.OverflowFullScreenItem.Tapped += (s, e) =>
             {
                 this.FullScreenChanged();
                 this.OverflowFlyout.Hide();
@@ -109,7 +109,7 @@ namespace Retouch_Photo2
             this.UnFullScreenButton.Click += (s, e) => this.FullScreenChanged();
 
             this.ConstructAppBar_TipButton(this.TipButton);
-            this.ConstructAppBar_TipButton(this.OverflowTipButton);
+            this.ConstructAppBar_TipButton(this.OverflowTipItem);
         }
         private void ConstructAppBar_TipButton(UIElement tipButton)
         {

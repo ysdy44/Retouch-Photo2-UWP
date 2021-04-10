@@ -23,7 +23,7 @@
 
         <!--Flyout-->
         <Flyout x:Name="AdjustmentPageFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ScrollViewer  Style="{StaticResource AppVerticalScrollViewerStyle}">
+            <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
                 <ScrollViewer.Resources>
                     <!--StaticResource-->
                     <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
@@ -285,10 +285,12 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="4"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="AddButton" Grid.Column="1" Style="{StaticResource AppIconRoundedButtonStyle}">
-                        <Button.Tag>
-                            <FontIcon Glyph="&#xE109;" FontFamily="Segoe MDL2 Assets"/>
-                        </Button.Tag>
+                    <Button x:Name="AddButton" Grid.Column="1" Style="{StaticResource AppRoundedButtonStyle}">
+                        <ContentControl x:Name="AddControl" Style="{StaticResource AppIconReverseContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xE109;" FontFamily="Segoe MDL2 Assets"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
                     </Button>
                     <Button x:Name="FilterButton" Grid.Column="3" Style="{StaticResource AppRoundedButtonStyle}"/>
                 </Grid>
