@@ -40,8 +40,6 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.Node;
-        public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title => this.NodePage.Title;
         public ControlTemplate Icon => this.NodePage.Icon;
         public FrameworkElement Page => this.NodePage;
         public bool IsSelected { get; set; }
@@ -310,6 +308,11 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
+
+        //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+
+
         /// <summary> PenPage's Flyout. </summary>
         public NodeModeControl PenFlyout => this._PenFlyout;
 
@@ -317,8 +320,7 @@ namespace Retouch_Photo2.Tools.Models
         public ToolTip MoreNodeToolTip => this._MoreNodeToolTip;
 
 
-        //@Content 
-        public string Title { get; private set; }
+        //@Content
         public ControlTemplate Icon => this.IconContentControl.Template;
 
 
@@ -366,8 +368,6 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Title = resource.GetString("Tools_Node");
 
             this.RemoveTextBlock.Text = resource.GetString("Tools_Node_Remove");
             this.InsertTextBlock.Text = resource.GetString("Tools_Node_Insert");

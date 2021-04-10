@@ -241,58 +241,6 @@ namespace Retouch_Photo2
             TransformerTool = new TransformerTool(),
             CreateTool = new CreateTool(),
             ClickeTool = new ClickeTool(),
-            Tools = new List<ITool>
-            {
-                new CursorTool(),
-                null,
-
-                new ViewTool(),
-                new BrushTool(),
-                new TransparencyTool(),
-                null,
-
-                //Geometry0
-                new GeometryRectangleTool(),
-                new GeometryEllipseTool(),
-                new PenTool(),
-                new NodeTool(),
-                null,
-
-                new TextArtisticTool(),
-                new TextFrameTool(),
-                null,
-
-                new ImageTool(),
-                new CropTool(),
-
-                new PatternGridTool(),
-                new PatternDiagonalTool(),
-                new PatternSpottedTool(),
-                null,
-
-                //Geometry1
-                new GeometryRoundRectTool(),
-                new GeometryTriangleTool(),
-                new GeometryDiamondTool(),
-                null,
-
-                //Geometry2
-                new GeometryPentagonTool(),
-                new GeometryStarTool(),
-                new GeometryCogTool(),
-                null,
-
-                //Geometry3
-                new GeometryDountTool(),
-                new GeometryPieTool(),
-                new GeometryCookieTool(),
-                null,
-
-                //Geometry4
-                new GeometryArrowTool(),
-                new GeometryCapsuleTool(),
-                new GeometryHeartTool(),
-            },
         };
 
 

@@ -119,11 +119,11 @@
                Background="{x:Bind SettingViewModel.CanvasBackground, Mode=OneWay}"
                IsFullScreen="True"
                              
-               FootPage="{x:Bind TipViewModel.ToolPage, Mode=OneWay}"
+               FootPage="{x:Bind ToolsControl.Tool.Page, Mode=OneWay}"
                >
             <!--LeftIcon-->
             <elements:DrawLayout.LeftIcon>
-                <ContentControl Template="{x:Bind TipViewModel.ToolIcon, Mode=OneWay}"/>
+                <ContentControl Template="{x:Bind ToolsControl.Tool.Icon, Mode=OneWay}"/>
             </elements:DrawLayout.LeftIcon>
 
             <!--RightPane-->
@@ -136,11 +136,11 @@
             <!--LeftPanel-->
             <elements:DrawLayout.LeftPanel>
                 <tools:ToolsControl x:Name="ToolsControl"
-                            Tools="{x:Bind TipViewModel.Tools, Mode=OneTime}"
-                            Type="{x:Bind TipViewModel.ToolType, Mode=TwoWay}"
+                                    
+                            Type="{x:Bind TipViewModel.ToolType, Mode=OneWay}"
                             IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}"
                             DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
-                            />
+                             />
             </elements:DrawLayout.LeftPanel>
 
             <!--Head-->

@@ -1,8 +1,8 @@
-﻿// Core:              ★★★
+﻿// Core:              ★★★★
 // Referenced:   
-// Difficult:         ★★★
+// Difficult:         ★★★★
 // Only:              
-// Complete:      ★★★
+// Complete:      ★★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
@@ -17,9 +17,9 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools.Models
 {
     /// <summary>
-    /// <see cref="ITool"/>'s GeometryCapsuleTool.
+    /// <see cref="ITool"/>'s GeometryEllipseTool.
     /// </summary>
-    public partial class GeometryCapsuleTool : Page, ITool
+    public partial class GeometryEllipseTool : Page, ITool
     {
 
         //@ViewModel
@@ -33,8 +33,8 @@ namespace Retouch_Photo2.Tools.Models
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
 
 
-        //@Content
-        public ToolType Type => ToolType.GeometryCapsule;
+        //@Content 
+        public ToolType Type => ToolType.GeometryEllipse;
         public ControlTemplate Icon => this.IconContentControl.Template;
         public FrameworkElement Page => this;
         public bool IsSelected { get; set; }
@@ -43,14 +43,14 @@ namespace Retouch_Photo2.Tools.Models
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets <see cref = "GeometryCapsuleTool" />'s IsOpen. </summary>
+        /// <summary> Gets or sets <see cref = "GeometryEllipseTool" />'s IsOpen. </summary>
         public bool IsOpen
         {
             get => (bool)base.GetValue(IsOpenProperty);
             set => base.SetValue(IsOpenProperty, value);
         }
-        /// <summary> Identifies the <see cref = "GeometryCapsuleTool.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(GeometryCapsuleTool), new PropertyMetadata(false));
+        /// <summary> Identifies the <see cref = "GeometryEllipseTool.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(GeometryEllipseTool), new PropertyMetadata(false));
 
 
         #endregion
@@ -58,22 +58,20 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Construct
         /// <summary>
-        /// Initializes a GeometryCapsuleTool. 
+        /// Initializes a GeometryEllipseTool. 
         /// </summary>
-        public GeometryCapsuleTool()
+        public GeometryEllipseTool()
         {
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConvertToCurvesButton.Click += (s, e) =>
-            {
-                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
+            //Flyout
+            this.FillBrushButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.FillBrushButton);
+            this.StrokeBrushButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeColorFlyout?.Invoke(this, this.StrokeBrushButton);
+            this.StrokeShowControl.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeFlyout?.Invoke(this.StrokeShowControl);
 
-                this.MethodViewModel.MethodConvertToCurves();
-
-                //Change tools group value.
-                this.TipViewModel.ToolType = ToolType.Node;
-            };
+            //ConvertToCurves
+            this.ConvertToCurvesButton.Click += (s, e) => this.MethodViewModel.MethodConvertToCurves();
 
             this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);
         }
@@ -86,8 +84,9 @@ namespace Retouch_Photo2.Tools.Models
         /// <returns> The producted ILayer. </returns>
         public ILayer CreateLayer(Transformer transformer)
         {
-            return new GeometryCapsuleLayer
+            return new GeometryEllipseLayer
             {
+                IsSelected = true,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
@@ -115,6 +114,11 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.FillTextBlock.Text = resource.GetString("Tools_Fill");
+            this.StrokeTextBlock.Text = resource.GetString("Tools_Stroke");
+
+            this.StrokeShowToolTip.Content = resource.GetString("Menus_Stroke");
 
             this.ConvertToCurvesToolTip.Content = resource.GetString("Tools_ConvertToCurves");
 

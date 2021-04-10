@@ -5,11 +5,13 @@
 // Complete:      ★★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -18,14 +20,16 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s PenTool.
     /// </summary>
-    public partial class PenTool : ITool
+    public partial class PenTool : Page, ITool
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
+
 
         Layerage CurveLayerage => this.SelectionViewModel.CurveLayerage;
         CurveLayer CurveLayer => this.SelectionViewModel.CurveLayer;
@@ -34,16 +38,52 @@ namespace Retouch_Photo2.Tools.Models
         bool IsSnap => this.SettingViewModel.IsSnap;
 
 
-        //@Content 
-        public ToolType Type => ToolType.Pen;
-        public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title => this.GeometryPage.Title;
-        public ControlTemplate Icon => this.GeometryPage.Icon;
-        public FrameworkElement Page => this.GeometryPage;
-        public bool IsSelected { get; set; }
-        public bool IsOpen { get => this.GeometryPage.IsOpen; set => this.GeometryPage.IsOpen = value; }
+        //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
 
-        readonly GeometryPage GeometryPage = new GeometryPage(ToolType.Pen);
+
+        //@Content 
+        public ToolType Type => ToolType.Pen; 
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        public FrameworkElement Page => this;
+        public bool IsSelected { get; set; }
+
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "PenTool" />'s IsOpen. </summary>
+        public bool IsOpen
+        {
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "PenTool.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(PenTool), new PropertyMetadata(false));
+
+
+        #endregion
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a PenTool. 
+        /// </summary>
+        public PenTool()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            //Flyout
+            this.FillBrushButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.FillBrushButton);
+            this.StrokeBrushButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeColorFlyout?.Invoke(this, this.StrokeBrushButton);
+            this.StrokeShowControl.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeFlyout?.Invoke(this.StrokeShowControl);
+
+            //ConvertToCurves
+            this.ConvertToCurvesButton.Click += (s, e) => this.MethodViewModel.MethodConvertToCurves();
+
+            this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);
+        }
 
 
         NodeCollectionMode Mode = NodeCollectionMode.None;
@@ -202,5 +242,20 @@ namespace Retouch_Photo2.Tools.Models
             this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
         }
 
+
+        //Strings
+        private void ConstructStrings()
+        {
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
+
+            this.FillTextBlock.Text = resource.GetString("Tools_Fill");
+            this.StrokeTextBlock.Text = resource.GetString("Tools_Stroke");
+
+            this.StrokeShowToolTip.Content = resource.GetString("Menus_Stroke");
+
+            this.ConvertToCurvesToolTip.Content = resource.GetString("Tools_ConvertToCurves");
+
+            this.MoreCreateToolTip.Content = resource.GetString("Tools_MoreCreate");
+        }
     }
 }

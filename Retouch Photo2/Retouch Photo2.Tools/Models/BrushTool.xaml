@@ -23,7 +23,7 @@
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
 
-            <Border Width="50">
+            <Border Width="50" Visibility="{x:Bind DeviceLayoutTypeConverter(SettingViewModel.DeviceLayoutType), Mode=OneWay}">
                 <Border.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/BrushIcon.xaml"/>
                 </Border.Resources>

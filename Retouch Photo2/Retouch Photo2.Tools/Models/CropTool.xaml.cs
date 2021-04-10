@@ -5,6 +5,7 @@
 // Complete:      ★★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
@@ -29,7 +30,6 @@ namespace Retouch_Photo2.Tools.Models
 
         ListViewSelectionMode SelectionMode => this.SelectionViewModel.SelectionMode;
 
-        MarqueeCompositeMode MarqueeCompositeMode => this.SettingViewModel.CompositeMode;
         bool IsRatio => this.SettingViewModel.IsRatio;
         bool IsCenter => this.SettingViewModel.IsCenter;
         bool IsStepFrequency => this.SettingViewModel.IsStepFrequency;
@@ -40,8 +40,6 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.Crop;
-        public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title => this.CropPage.Title;
         public ControlTemplate Icon => this.CropPage.Icon;
         public FrameworkElement Page => this.CropPage;
 
@@ -176,11 +174,14 @@ namespace Retouch_Photo2.Tools.Models
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel SelectionViewModel => App.SelectionViewModel; SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
-        //@Content 
-        public string Title { get; private set; }
+        //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+
+
+        //@Content
         public ControlTemplate Icon => this.IconContentControl.Template;
 
 
@@ -210,8 +211,6 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Title = resource.GetString("Tools_Crop");
 
             this.ResetTextBlock.Text = resource.GetString("Tools_Crop_Reset");
             this.FitTextBlock.Text = resource.GetString("Tools_Crop_Fit");

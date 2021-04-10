@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Retouch_Photo2.Tools.Models.GeometryCogPage"
+    x:Class="Retouch_Photo2.Tools.Models.GeometryCogTool"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -16,7 +16,7 @@
     <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
         <StackPanel Orientation="Horizontal">
 
-            <Border Width="50">
+            <Border Width="50" Visibility="{x:Bind DeviceLayoutTypeConverter(SettingViewModel.DeviceLayoutType), Mode=OneWay}">
                 <Border.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryCogIcon.xaml"/>
                 </Border.Resources>

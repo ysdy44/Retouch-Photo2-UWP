@@ -16,12 +16,8 @@ namespace Retouch_Photo2.Tools
     public interface ITool
     {
         /// <summary> Gets the type. </summary>
-        ToolType Type { get; }
-        /// <summary> Gets the group type. </summary>
-        ToolGroupType GroupType { get; }        
+        ToolType Type { get; } 
 
-        /// <summary> Gets the title. </summary>
-        string Title { get; }
         /// <summary> Gets the icon. </summary>
         ControlTemplate Icon { get; }
         /// <summary> Gets the page. </summary>

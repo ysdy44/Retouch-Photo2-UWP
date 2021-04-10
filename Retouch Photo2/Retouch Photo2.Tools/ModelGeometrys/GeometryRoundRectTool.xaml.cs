@@ -4,10 +4,13 @@
 // Only:              
 // Complete:      ★★★
 using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
+using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -15,81 +18,52 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Tools.Models
 {
     /// <summary>
-    /// <see cref="GeometryTool"/>'s GeometryRoundRectTool.
+    /// <see cref="ITool"/>'s GeometryRoundRectTool.
     /// </summary>
-    public partial class GeometryRoundRectTool : GeometryTool, ITool
-    {
-
-        //@ViewModel
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-
-
-        //@Content
-        public ToolType Type => ToolType.GeometryRoundRect;
-        public ToolGroupType GroupType => ToolGroupType.Geometry;
-        public string Title => this.GeometryRoundRectPage.Title;
-        public ControlTemplate Icon => this.GeometryRoundRectPage.Icon;
-        public FrameworkElement Page => this.GeometryRoundRectPage;
-        readonly GeometryRoundRectPage GeometryRoundRectPage = new GeometryRoundRectPage();
-        public bool IsSelected { get; set; }
-        public bool IsOpen { get => this.GeometryRoundRectPage.IsOpen; set => this.GeometryRoundRectPage.IsOpen = value; }
-
-
-        public override ILayer CreateLayer(Transformer transformer)
-        {
-            return new GeometryRoundRectLayer
-            {
-                Corner = this.SelectionViewModel.GeometryRoundRect_Corner,
-                Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandGeometryStyle
-            };
-        }
-
-    }
-
-
-    /// <summary>
-    /// Page of <see cref="GeometryRoundRectTool"/>.
-    /// </summary>
-    public partial class GeometryRoundRectPage : Page
+    public partial class GeometryRoundRectTool : Page, ITool
     {
 
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+
         private int CornerToNumberConverter(float corner) => (int)(corner * 100.0f);
+
+
+        //@Content
+        public ToolType Type => ToolType.GeometryRoundRect;
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        public FrameworkElement Page => this;
+        public bool IsSelected { get; set; }
 
 
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets <see cref = "GeometryRoundRectPage" />'s IsOpen. </summary>
+        /// <summary> Gets or sets <see cref = "GeometryRoundRectTool" />'s IsOpen. </summary>
         public bool IsOpen
         {
             get => (bool)base.GetValue(IsOpenProperty);
             set => base.SetValue(IsOpenProperty, value);
         }
-        /// <summary> Identifies the <see cref = "GeometryRoundRectPage.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(GeometryRoundRectPage), new PropertyMetadata(false));
+        /// <summary> Identifies the <see cref = "GeometryRoundRectTool.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(GeometryRoundRectTool), new PropertyMetadata(false));
 
 
         #endregion
 
 
-        //@Content 
-        public string Title { get; private set; }
-        public ControlTemplate Icon => this.IconContentControl.Template;
-
-
         //@Construct
         /// <summary>
-        /// Initializes a GeometryRoundRectPage. 
+        /// Initializes a GeometryRoundRectTool. 
         /// </summary>
-        public GeometryRoundRectPage()
+        public GeometryRoundRectTool()
         {
             this.InitializeComponent();
             this.ConstructStrings();
@@ -110,12 +84,47 @@ namespace Retouch_Photo2.Tools.Models
             this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);
         }
 
+
+        /// <summary>
+        /// Create a ILayer.
+        /// </summary>
+        /// <param name="transformer"> The transformer. </param>
+        /// <returns> The producted ILayer. </returns>
+        public ILayer CreateLayer(Transformer transformer)
+        {
+            return new GeometryRoundRectLayer
+            {
+                Corner = this.SelectionViewModel.GeometryRoundRect_Corner,
+                Transform = new Transform(transformer),
+                Style = this.SelectionViewModel.StandGeometryStyle
+            };
+        }
+
+        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
+        public void Clicke(Vector2 point) => this.TipViewModel.ClickeTool.Clicke(point);
+
+        public void Cursor(Vector2 point) => this.TipViewModel.ClickeTool.Cursor(point);
+
+        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom()
+        {
+            TouchbarButton.Instance = null;
+        }
+    }
+
+
+    public partial class GeometryRoundRectTool : Page, ITool
+    {
+
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Title = resource.GetString("Tools_GeometryRoundRect");
 
             this.CornerTextBlock.Text = resource.GetString("Tools_GeometryRoundRect_Corner");
             
@@ -123,11 +132,6 @@ namespace Retouch_Photo2.Tools.Models
 
             this.MoreCreateToolTip.Content = resource.GetString("Tools_MoreCreate");
         }
-    }
-
-
-    public partial class GeometryRoundRectPage : Page
-    {
 
         //Corner
         private void ConstructCorner1()

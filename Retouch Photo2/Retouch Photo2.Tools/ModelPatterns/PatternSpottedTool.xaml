@@ -15,7 +15,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="1*"/>
@@ -23,7 +23,7 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Width="50">
+        <Border Width="50" Visibility="{x:Bind DeviceLayoutTypeConverter(SettingViewModel.DeviceLayoutType), Mode=OneWay}">
             <Border.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconPatterns/PatternSpottedIcon.xaml"/>
             </Border.Resources>

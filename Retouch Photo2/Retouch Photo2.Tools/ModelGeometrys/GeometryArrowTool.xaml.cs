@@ -4,10 +4,13 @@
 // Only:              
 // Complete:      ★★★
 using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
+using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -25,75 +28,45 @@ namespace Retouch_Photo2.Tools.Models
         /// <summary> Value (IsAbsolute = false). </summary>
         Value
     }
-       
-
-    /// <summary>
-    /// <see cref="GeometryTool"/>'s GeometryArrowTool.
-    /// </summary>
-    public partial class GeometryArrowTool : GeometryTool, ITool
-    {
-
-        //@ViewModel
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-
-
-        //@Content
-        public ToolType Type => ToolType.GeometryArrow;
-        public ToolGroupType GroupType => ToolGroupType.Geometry;
-        public string Title => this.GeometryArrowPage.Title;
-        public ControlTemplate Icon => this.GeometryArrowPage.Icon;
-        public FrameworkElement Page => this.GeometryArrowPage;
-        readonly GeometryArrowPage GeometryArrowPage = new GeometryArrowPage();
-        public bool IsSelected { get; set; }
-        public bool IsOpen { get => this.GeometryArrowPage.IsOpen; set => this.GeometryArrowPage.IsOpen = value; }
-
-
-        public override ILayer CreateLayer(Transformer transformer)
-        {
-            return new GeometryArrowLayer
-            {
-                LeftTail = this.SelectionViewModel.GeometryArrow_LeftTail,
-                RightTail = this.SelectionViewModel.GeometryArrow_RightTail,
-                Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandGeometryStyle
-            };
-        }
-
-    }
 
 
     /// <summary>
-    /// Page of <see cref="GeometryArrowTool"/>.
+    /// <see cref="ITool"/>'s GeometryArrowTool.
     /// </summary>
-    internal partial class GeometryArrowPage : Page
+    public partial class GeometryArrowTool : Page, ITool
     {
 
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+
         private int ValueToNumberConverter(float value) => (int)(value * 100.0f);
 
 
-        //@Content 
-        public string Title { get; private set; }
+        //@Content
+        public ToolType Type => ToolType.GeometryArrow;
         public ControlTemplate Icon => this.IconContentControl.Template;
-            
+        public FrameworkElement Page => this;
+        public bool IsSelected { get; set; }
+
 
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets <see cref = "GeometryArrowPage" />'s IsOpen. </summary>
+        /// <summary> Gets or sets <see cref = "GeometryArrowTool" />'s IsOpen. </summary>
         public bool IsOpen
         {
             get => (bool)base.GetValue(IsOpenProperty);
             set => base.SetValue(IsOpenProperty, value);
         }
-        /// <summary> Identifies the <see cref = "GeometryArrowPage.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(GeometryArrowPage), new PropertyMetadata(false));
+        /// <summary> Identifies the <see cref = "GeometryArrowTool.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(GeometryArrowTool), new PropertyMetadata(false));
 
 
         #endregion
@@ -101,9 +74,9 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Construct
         /// <summary>
-        /// Initializes a GeometryArrowPage. 
+        /// Initializes a GeometryArrowTool. 
         /// </summary>
-        public GeometryArrowPage()
+        public GeometryArrowTool()
         {
             this.InitializeComponent();
             this.ConstructStrings();
@@ -127,12 +100,49 @@ namespace Retouch_Photo2.Tools.Models
             this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);
         }
 
+
+        /// <summary>
+        /// Create a ILayer.
+        /// </summary>
+        /// <param name="transformer"> The transformer. </param>
+        /// <returns> The producted ILayer. </returns>
+        public ILayer CreateLayer(Transformer transformer)
+        {
+            return new GeometryArrowLayer
+            {
+                LeftTail = this.SelectionViewModel.GeometryArrow_LeftTail,
+                RightTail = this.SelectionViewModel.GeometryArrow_RightTail,
+                Transform = new Transform(transformer),
+                Style = this.SelectionViewModel.StandGeometryStyle
+            };
+        }
+
+
+        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
+        public void Clicke(Vector2 point) => this.TipViewModel.ClickeTool.Clicke(point);
+
+        public void Cursor(Vector2 point) => this.TipViewModel.ClickeTool.Cursor(point);
+
+        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom()
+        {
+            TouchbarButton.Instance = null;
+        }
+    }
+
+
+    public partial class GeometryArrowTool : Page, ITool
+    {
+
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Title = resource.GetString("Tools_GeometryArrow");
 
             this.ValueTextBlock.Text = resource.GetString("Tools_GeometryArrow_Value");
 
@@ -143,13 +153,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.MoreCreateToolTip.Content = resource.GetString("Tools_MoreCreate");
         }
-    }
 
-    /// <summary>
-    /// Page of <see cref="GeometryArrowTool"/>.
-    /// </summary>
-    internal partial class GeometryArrowPage : Page
-    {
 
         //Value
         private void ConstructValue1()

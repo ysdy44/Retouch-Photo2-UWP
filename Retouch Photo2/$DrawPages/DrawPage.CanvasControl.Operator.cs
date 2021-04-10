@@ -57,7 +57,7 @@ namespace Retouch_Photo2
                     case InputDevice.Single:
                         {
                             //Tool
-                            this.TipViewModel.Tool.Draw(args.DrawingSession);
+                            this.ToolsControl.Tool.Draw(args.DrawingSession);
                         }
                         break;
                 }
@@ -80,7 +80,7 @@ namespace Retouch_Photo2
 
                 //Tool
                 Vector2 position = e.GetCurrentPoint(this.ToolDrawCanvasControl).Position.ToVector2();
-                this.TipViewModel.Tool.Cursor(position);//Move
+                this.ToolsControl.Tool.Cursor(position);//Move
             };
 
 
@@ -104,7 +104,7 @@ namespace Retouch_Photo2
                 if (this._isSingleStarted)
                 {
                     //Tool
-                    this.TipViewModel.Tool.Delta(this._singleStartingPoint, point);//Delta
+                    this.ToolsControl.Tool.Delta(this._singleStartingPoint, point);//Delta
 
                     return;
                 }
@@ -116,7 +116,7 @@ namespace Retouch_Photo2
                     this._isSingleStarted = true;
 
                     //Tool
-                    this.TipViewModel.Tool.Started(this._singleStartingPoint, point);//Started
+                    this.ToolsControl.Tool.Started(this._singleStartingPoint, point);//Started
                 }
             };
             canvasOperator.Single_Complete += (point) =>
@@ -126,13 +126,13 @@ namespace Retouch_Photo2
                 if (this._isSingleStarted == false)
                 {
                     //Tool
-                    this.TipViewModel.Tool.Clicke(this._singleStartingPoint);//Complete
+                    this.ToolsControl.Tool.Clicke(this._singleStartingPoint);//Complete
                 }
                 else
                 {
                     //Tool
                     bool isOutNodeDistance = FanKit.Math.OutNodeDistance(this._singleStartingPoint, point);
-                    this.TipViewModel.Tool.Complete(this._singleStartingPoint, point, isOutNodeDistance);//Complete
+                    this.ToolsControl.Tool.Complete(this._singleStartingPoint, point, isOutNodeDistance);//Complete
                 }
 
                 this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible

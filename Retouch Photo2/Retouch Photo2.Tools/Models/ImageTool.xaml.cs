@@ -5,6 +5,7 @@
 // Complete:      ★★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -33,8 +34,6 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content 
         public ToolType Type => ToolType.Image;
-        public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title => this.ImagePage.Title;
         public ControlTemplate Icon => this.ImagePage.Icon;
         public FrameworkElement Page => this.ImagePage;
         public bool IsSelected { get; set; }
@@ -206,11 +205,14 @@ namespace Retouch_Photo2.Tools.Models
 
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel; SettingViewModel SettingViewModel => App.SettingViewModel;
+
+
+        //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
 
 
         //@Content 
-        public string Title { get; private set; }
         public ControlTemplate Icon => this.IconContentControl.Template;
 
         /// <summary> Tip. </summary>
@@ -246,8 +248,6 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Title = resource.GetString("Tools_Image");
 
             this.SelectTextBlock.Text = resource.GetString("Tools_Image_Select");
             this.ReplaceTextBlock.Text = resource.GetString("Tools_Image_Replace");

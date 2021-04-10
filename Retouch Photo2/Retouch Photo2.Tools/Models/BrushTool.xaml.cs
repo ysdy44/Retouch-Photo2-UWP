@@ -6,6 +6,7 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -37,8 +38,6 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content
         public ToolType Type => ToolType.Brush;
-        public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title => this.BrushPage.Title;
         public ControlTemplate Icon => this.BrushPage.Icon;
         public FrameworkElement Page => this.BrushPage;
 
@@ -200,17 +199,19 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel; 
 
+
+        //@Content
         FillOrStroke FillOrStroke { get => this.SelectionViewModel.FillOrStroke; set => this.SelectionViewModel.FillOrStroke = value; }
 
 
         //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
         public Visibility FillOrStrokeToVisibilityConverter(FillOrStroke fillOrStroke) => fillOrStroke == FillOrStroke.Stroke ? Visibility.Visible : Visibility.Collapsed;
 
 
         //@Content 
-        public string Title { get; private set; }
         public ControlTemplate Icon => this.IconContentControl.Template;
 
 
@@ -250,8 +251,6 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Title = resource.GetString("Tools_Brush");
 
             this.FillOrStrokeTextBlock.Text = resource.GetString("Tools_Brush_FillOrStroke");
             this.TypeTextBlock.Text = resource.GetString("Tools_Brush_Type");

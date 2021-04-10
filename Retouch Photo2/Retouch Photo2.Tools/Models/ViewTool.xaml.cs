@@ -4,6 +4,7 @@
 // Only:              
 // Complete:      ★★★★
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
@@ -35,8 +36,6 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content 
         public ToolType Type => ToolType.View;
-        public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title => this.ViewPage.Title;
         public ControlTemplate Icon => this.ViewPage.Icon;
         public FrameworkElement Page => this.ViewPage;
 
@@ -98,9 +97,12 @@ namespace Retouch_Photo2.Tools.Models
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+
         private int ScaleToNumberConverter(float scale) => ViewScaleConverter.ScaleToNumber(scale);
         private double ScaleToValueConverter(float scale) => ViewScaleConverter.ScaleToValue(scale);
 
@@ -109,7 +111,6 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content 
-        public string Title { get; private set; }
         public ControlTemplate Icon => this.IconContentControl.Template;
 
 
@@ -195,8 +196,6 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Title = resource.GetString("Tools_View");
 
             this.RadianTextBlock.Text = resource.GetString("Tools_View_Radian");
             this.ResetRadianToolTip.Content = resource.GetString("Tools_View_ResetRadian");

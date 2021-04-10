@@ -7,10 +7,11 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Linq;
 using System.Numerics;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    public partial class PenTool : ITool
+    public partial class PenTool : Page, ITool
     {
 
         Vector2 _previewLeft;

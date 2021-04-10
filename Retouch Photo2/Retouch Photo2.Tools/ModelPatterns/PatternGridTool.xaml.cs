@@ -4,10 +4,13 @@
 // Only:              
 // Complete:      ★★★
 using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
+using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -29,65 +32,37 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s PatternGridTool.
     /// </summary>
-    public partial class PatternGridTool : GeometryTool, ITool
-    {
-
-        //@ViewModel
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-
-
-        //@Content
-        public ToolType Type => ToolType.PatternGrid;
-        public ToolGroupType GroupType => ToolGroupType.Pattern; 
-        public string Title => this.PatternGridPage.Title;
-        public ControlTemplate Icon => this.PatternGridPage.Icon;
-        public FrameworkElement Page => this.PatternGridPage;
-        readonly PatternGridPage PatternGridPage = new PatternGridPage();
-        public bool IsSelected { get; set; }
-        public bool IsOpen { get; set; }
-                
-
-        public override ILayer CreateLayer(Transformer transformer)
-        {
-            return new PatternGridLayer
-            {
-                HorizontalStep = this.SelectionViewModel.PatternGrid_HorizontalStep,
-                VerticalStep = this.SelectionViewModel.PatternGrid_VerticalStep,
-                Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandCurveStyle
-            };
-        }
-
-    }
-
-
-    /// <summary>
-    /// Page of <see cref="PatternGridTool"/>.
-    /// </summary>
-    internal partial class PatternGridPage : Page
+    public partial class PatternGridTool : Page, ITool
     {
 
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+
         private int StepToNumberConverter(float value) => (int)value;
         private Visibility HorizontalStepVisibilityConverter(PatternGridType value) => value == PatternGridType.Vertical ? Visibility.Collapsed : Visibility.Visible;
         private Visibility VerticalStepVisibilityConverter(PatternGridType value) => value == PatternGridType.Horizontal ? Visibility.Collapsed : Visibility.Visible;
 
 
-        //@Content 
-        public string Title { get; private set; }
+        //@Content
+        public ToolType Type => ToolType.PatternGrid;
         public ControlTemplate Icon => this.IconContentControl.Template;
+        public FrameworkElement Page => this;
+        public bool IsSelected { get; set; }
+        public bool IsOpen { get; set; }
 
 
         //@Construct
         /// <summary>
-        /// Initializes a PatternGridPage. 
+        /// Initializes a PatternGridTool. 
         /// </summary>
-        public PatternGridPage()
+        public PatternGridTool()
         {
             this.InitializeComponent();
             this.ConstructStrings();
@@ -101,24 +76,54 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructVerticalStep2();
         }
 
+
+        /// <summary>
+        /// Create a ILayer.
+        /// </summary>
+        /// <param name="transformer"> The transformer. </param>
+        /// <returns> The producted ILayer. </returns>
+        public ILayer CreateLayer(Transformer transformer)
+        {
+            return new PatternGridLayer
+            {
+                HorizontalStep = this.SelectionViewModel.PatternGrid_HorizontalStep,
+                VerticalStep = this.SelectionViewModel.PatternGrid_VerticalStep,
+                Transform = new Transform(transformer),
+                Style = this.SelectionViewModel.StandCurveStyle
+            };
+        }
+
+
+        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
+        public void Clicke(Vector2 point) => this.TipViewModel.ClickeTool.Clicke(point);
+
+        public void Cursor(Vector2 point) => this.TipViewModel.ClickeTool.Cursor(point);
+
+        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom()
+        {
+            TouchbarButton.Instance = null;
+        }
+    }
+
+
+    public partial class PatternGridTool : Page, ITool
+    {
+
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Title = resource.GetString("Tools_PatternGrid");
-
             this.TypeTextBlock.Text = resource.GetString("Tools_PatternGrid_Type");
             this.HorizontalStepTextBlock.Text = resource.GetString("Tools_PatternGrid_HorizontalStep");
             this.VerticalStepTextBlock.Text = resource.GetString("Tools_PatternGrid_VerticalStep");
         }
-    }
-
-    /// <summary>
-    /// Page of <see cref="PatternGridTool"/>.
-    /// </summary>
-    internal partial class PatternGridPage : Page
-    {
 
         //GridType
         private void ConstructGridType()

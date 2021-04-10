@@ -1,22 +1,25 @@
-﻿// Core:              ★★★
-// Referenced:   ★
-// Difficult:         ★★
-// Only:              ★★
-// Complete:      ★★
+﻿// Core:              ★★★★
+// Referenced:   
+// Difficult:         ★★★★
+// Only:              
+// Complete:      ★★★★
+using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
-using System;
+using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Retouch_Photo2.Tools
+namespace Retouch_Photo2.Tools.Models
 {
     /// <summary>
-    /// Page of <see cref="TextTool"/>.
+    /// <see cref="ITool"/>'s TextArtisticTool.
     /// </summary>
-    internal sealed partial class TextPage : Page
+    public partial class TextArtisticTool : ITool
     {
 
         //@ViewModel
@@ -27,21 +30,24 @@ namespace Retouch_Photo2.Tools
 
 
         //@Content 
-        public string Title { get; private set; }
+        public ToolType Type => ToolType.TextArtistic;
         public ControlTemplate Icon => this.IconContentControl.Template;
+        public FrameworkElement Page => this;
+        public bool IsSelected { get; set; }
+
 
 
         #region DependencyProperty
 
 
-        /// <summary> Gets or sets <see cref = "TextPage" />'s IsOpen. </summary>
+        /// <summary> Gets or sets <see cref = "TextArtisticTool" />'s IsOpen. </summary>
         public bool IsOpen
         {
             get => (bool)base.GetValue(IsOpenProperty);
             set => base.SetValue(IsOpenProperty, value);
         }
-        /// <summary> Identifies the <see cref = "TextPage.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(TextPage), new PropertyMetadata(false));
+        /// <summary> Identifies the <see cref = "TextArtisticTool.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(TextArtisticTool), new PropertyMetadata(false));
 
 
         #endregion
@@ -61,14 +67,12 @@ namespace Retouch_Photo2.Tools
 
         //@Construct
         /// <summary>
-        /// Initializes a TextPage. 
+        /// Initializes a TextArtisticTool. 
         /// </summary>
-        public TextPage(ToolType toolType)
+        public TextArtisticTool()
         {
             this.InitializeComponent();
-            this.ResourceDictionary.Source = new Uri($@"ms-appx:///Retouch Photo2.Tools/Icons/{toolType}Icon.xaml");
-            this.IconContentControl.Template = this.ResourceDictionary[$"{toolType}Icon"] as ControlTemplate;
-            this.ConstructStrings(toolType);
+            this.ConstructStrings();
 
             this.TextButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowTextFlyout?.Invoke(this.TextButton);
 
@@ -91,7 +95,7 @@ namespace Retouch_Photo2.Tools
 
                 this.SetFontText(fontText);
             };
-            
+
             this.FullScreenButton.Click += (s, e) =>
             {
                 this._vsIsFullScreen = !this._vsIsFullScreen;
@@ -99,20 +103,47 @@ namespace Retouch_Photo2.Tools
             };
         }
 
+
+        /// <summary>
+        /// Create a ILayer.
+        /// </summary>
+        /// <param name="transformer"> The transformer. </param>
+        /// <returns> The producted ILayer. </returns>
+        public ILayer CreateLayer(Transformer transformer)
+        {
+            return new TextArtisticLayer
+            {
+                IsSelected = true,
+                Transform = new Transform(transformer),
+                Style = this.SelectionViewModel.StandTextStyle,
+            };
+        }
+
+
+        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
+        public void Clicke(Vector2 point) => this.TipViewModel.ClickeTool.Clicke(point);
+
+        public void Cursor(Vector2 point) => this.TipViewModel.ClickeTool.Cursor(point);
+
+        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom()
+        {
+            TouchbarButton.Instance = null;
+        }
     }
 
-    /// <summary>
-    /// Page of <see cref="TextTool"/>.
-    /// </summary>
-    internal sealed partial class TextPage : Page
+    public partial class TextArtisticTool : ITool
     {
 
         //Strings
-        private void ConstructStrings(ToolType toolType)
+        private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Title = resource.GetString($"Tools_{toolType}");
 
             this.TextBox.PlaceholderText = resource.GetString("Tools_Text_PlaceholderText");
 
@@ -135,7 +166,7 @@ namespace Retouch_Photo2.Tools
                 if (layer.Type.IsText())
                 {
                     ITextLayer textLayer = (ITextLayer)layer;
-                    
+
                     var previous = textLayer.FontText;
                     history.UndoAction += () =>
                     {

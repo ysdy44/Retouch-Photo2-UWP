@@ -4,10 +4,13 @@
 // Only:              
 // Complete:      ★★★
 using FanKit.Transformers;
+using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
+using System.Numerics;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -17,17 +20,16 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s PatternSpottedTool.
     /// </summary>
-    public class PatternSpottedTool : GeometryTool, ITool
+    public class PatternSpottedTool : ITool
     {
 
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        TipViewModel TipViewModel => App.TipViewModel;
 
 
         //@Content
         public ToolType Type => ToolType.PatternSpotted;
-        public ToolGroupType GroupType => ToolGroupType.Pattern;
-        public string Title => this.PatternSpottedPage.Title;
         public ControlTemplate Icon => this.PatternSpottedPage.Icon;
         public FrameworkElement Page => this.PatternSpottedPage;
         readonly PatternSpottedPage PatternSpottedPage = new PatternSpottedPage();
@@ -35,7 +37,12 @@ namespace Retouch_Photo2.Tools.Models
         public bool IsOpen { get; set; }
 
 
-        public override ILayer CreateLayer(Transformer transformer)
+        /// <summary>
+        /// Create a ILayer.
+        /// </summary>
+        /// <param name="transformer"> The transformer. </param>
+        /// <returns> The producted ILayer. </returns>
+        public ILayer CreateLayer(Transformer transformer)
         {
             return new PatternSpottedLayer
             {
@@ -46,6 +53,22 @@ namespace Retouch_Photo2.Tools.Models
             };
         }
 
+
+        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
+        public void Clicke(Vector2 point) => this.TipViewModel.ClickeTool.Clicke(point);
+
+        public void Cursor(Vector2 point) => this.TipViewModel.ClickeTool.Cursor(point);
+
+        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+
+
+        public void OnNavigatedTo() { }
+        public void OnNavigatedFrom()
+        {
+            TouchbarButton.Instance = null;
+        }
     }
 
     /// <summary>
@@ -56,15 +79,15 @@ namespace Retouch_Photo2.Tools.Models
 
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel; SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
         private int Converter(float value) => (int)value;
 
 
         //@Content 
-        public string Title { get; private set; }
         public ControlTemplate Icon => this.IconContentControl.Template;
 
 
@@ -88,8 +111,6 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Title = resource.GetString("Tools_PatternSpotted");
 
             this.RadiusTextBlock.Text = resource.GetString("Tools_PatternSpotted_Radius");
             this.StepTextBlock.Text = resource.GetString("Tools_PatternSpotted_Step");

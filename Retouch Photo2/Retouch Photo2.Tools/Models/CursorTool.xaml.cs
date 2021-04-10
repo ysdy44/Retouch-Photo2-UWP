@@ -6,6 +6,7 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Tools.Elements;
@@ -42,8 +43,6 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content      
         public ToolType Type => ToolType.Cursor;
-        public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title => this.CursorPage.Title;
         public ControlTemplate Icon => this.CursorPage.Icon;
         public FrameworkElement Page => this.CursorPage;
 
@@ -269,11 +268,15 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
+
+        //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+
+
         public CompositeModeSegmented ModeSegmented => this._ModeSegmented;
 
 
         //@Content 
-        public string Title { get; private set; }
         public ControlTemplate Icon => this.IconContentControl.Template;
 
 
@@ -310,8 +313,6 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Title = resource.GetString("Tools_Cursor");
 
             this.OperateToolTip.Content = resource.GetString("Menus_Operate");
 

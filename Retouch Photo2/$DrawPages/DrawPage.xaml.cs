@@ -62,9 +62,9 @@ namespace Retouch_Photo2
         public static Func<Task<Photo>> ShowGalleryFunc;
 
         /// <summary> Show <see cref="FillColorFlyout"/> </summary>
-        public static Action<FrameworkElement, FrameworkElement> ShowFillColorFlyout; 
+        public static Action<FrameworkElement, FrameworkElement> ShowFillColorFlyout;
         /// <summary> Show <see cref="StrokeColorFlyout"/> </summary>
-        public static Action<FrameworkElement, FrameworkElement> ShowStrokeColorFlyout; 
+        public static Action<FrameworkElement, FrameworkElement> ShowStrokeColorFlyout;
 
         /// <summary> Show <see cref="MoreTransformFlyout"/> </summary>
         public static Action<FrameworkElement, FrameworkElement> ShowMoreTransform;
@@ -88,6 +88,9 @@ namespace Retouch_Photo2
             //CanvasControl
             this.ConstructCanvasControl();
             this.ConstructCanvasOperator();
+
+            //ToolsControl
+            this.ToolsControl.AssemblyType = typeof(Retouch_Photo2.Tools.Models.CursorTool);
 
             //LayerManager
             this.ConstructLayerManager();

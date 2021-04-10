@@ -38,6 +38,8 @@
         /// <summary> Vector crop tool. </summary>
         Crop,
 
+        /// <summary> More. </summary>
+        More,
 
         //Pattern
         /// <summary> Grid pattern. </summary>

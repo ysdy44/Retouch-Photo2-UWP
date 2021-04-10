@@ -4,38 +4,36 @@
 // Only:              
 // Complete:      ★★★★★
 using Retouch_Photo2.Elements;
+using Retouch_Photo2.Tools.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Shapes;
 
 namespace Retouch_Photo2.Tools
 {
     /// <summary>
     /// Represents a tools control, that containing some buttons.
     /// </summary>
-    public sealed class ToolsControl : UserControl
+    public sealed partial class ToolsControl : UserControl
     {
 
-        /// <summary>
-        /// Gets or sets the tools.
-        /// </summary>
-        public IList<ITool> Tools
-        {
-            get => this.tools;
-            set
-            {
-                this.tools = value;
-                if (this.isLoaded) this.ToolsControlCore = new ToolsControlCore(value);
-            }
-        }
-        private IList<ITool> tools;
+        //@Delegate
+        /// <summary> Occurs when type change. </summary>
+        public EventHandler<ToolType> TypeChanged;
+
+        //@Group
+        /// <summary> Occurs when group change. </summary>
+        private EventHandler<ToolType> Group;
 
 
         #region DependencyProperty
+
+
+        /// <summary> Gets or sets the assembly type. </summary>
+        public Type AssemblyType { get; set; }
 
 
         /// <summary> Gets or sets the tool-type. </summary>
@@ -51,15 +49,52 @@ namespace Retouch_Photo2.Tools
 
             if (e.NewValue is ToolType value)
             {
-                if (control.ToolsControlCore != null)
+                control.Group?.Invoke(control, value);//Delegate
+
+                ITool tool = control.Tools.FirstOrDefault(t => t.Type == value);
+                if (tool == null)
                 {
-                    control.ToolsControlCore.Type = value;
+                    tool = Retouch_Photo2.Tools.XML.CreateTool(control.AssemblyType, $"{value}");
+                    control.Tools.Add(tool);
                 }
+                control.Tool = tool;
             }
         }));
 
 
-        #endregion
+        /// <summary> Gets or sets the tool. </summary>
+        public ITool Tool
+        {
+            get => (ITool)base.GetValue(ToolProperty);
+            set => base.SetValue(ToolProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "ToolsControl.Tool" /> dependency property. </summary>
+        public static readonly DependencyProperty ToolProperty = DependencyProperty.Register(nameof(Tool), typeof(ITool), typeof(ToolsControl), new PropertyMetadata(new NoneTool(), (sender, e) =>
+        {
+            ToolsControl control = (ToolsControl)sender;
+
+            //The current tool becomes the active tool.
+            if (e.OldValue is ITool oldTool)
+            {
+                oldTool.OnNavigatedFrom();
+            }
+
+            //The current tool does not become an active tool.
+            if (e.NewValue is ITool newTool)
+            {
+                newTool.OnNavigatedTo();
+            }
+        }));
+
+
+        /// <summary> Gets or sets the tool-type. </summary>
+        public bool IsOpenCore
+        {
+            get => (bool)base.GetValue(IsOpenCoreProperty);
+            set => base.SetValue(IsOpenCoreProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "ToolsControl.IsOpenCore" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenCoreProperty = DependencyProperty.Register(nameof(IsOpenCore), typeof(bool), typeof(ToolsControl), new PropertyMetadata(false));
 
 
         /// <summary>
@@ -69,195 +104,123 @@ namespace Retouch_Photo2.Tools
         {
             set
             {
-                if (this.ToolsControlCore != null)
+                switch (this.DeviceLayoutType)
                 {
-                    switch (this.DeviceLayoutType)
-                    {
-                        case DeviceLayoutType.PC:
-                        case DeviceLayoutType.Pad:
-                            this.ToolsControlCore.IsOpen = value;
-                            break;
-                    }
+                    case DeviceLayoutType.PC:
+                    case DeviceLayoutType.Pad:
+                        {
+                            this.IsOpenCore = value;
+                            this.Tool.IsOpen = value;
+                        }
+                        break;
                 }
             }
         }
+
 
         /// <summary> Gets or sets the device layout type. </summary>
         public DeviceLayoutType DeviceLayoutType { get; set; }
 
 
-        bool isLoaded;
-        public ToolsControl()
-        {
-            this.HorizontalContentAlignment = HorizontalAlignment.Stretch;
-            this.Loaded += (s, e) =>
-            {
-                this.isLoaded = true;
-
-                if (this.Tools != null) this.ToolsControlCore = new ToolsControlCore(this.Tools);
-            };
-        }
+        #endregion
 
 
-        private ToolsControlCore ToolsControlCore
-        {
-            get => this.toolsControlCore;
-            set
-            {
-                if (this.toolsControlCore != null)
-                {
-                    this.Content = null;
-                    this.toolsControlCore.TypeChanged -= this.ToolsControlCore_TypeChanged;
-                }
-
-                this.toolsControlCore = value;
-
-                if (this.toolsControlCore != null)
-                {
-                    this.Content = this.ToolsControlCore;
-                    this.toolsControlCore.TypeChanged += this.ToolsControlCore_TypeChanged;
-                }
-            }
-        }
-        private ToolsControlCore toolsControlCore;
-
-        private void ToolsControlCore_TypeChanged(object sender, ToolType toolType)
-        {
-            this.Type = toolType;
-        }
-
-    }
-
-
-    internal sealed partial class ToolsControlCore : UserControl
-    {
-
-        //@Delegate
-        /// <summary> Occurs when type change. </summary>
-        internal EventHandler<ToolType> TypeChanged;
-
-
-        //@Group
-        /// <summary> Occurs when IsOpen change. </summary>
-        private EventHandler<bool> IsOpenChanged;
-        /// <summary> Occurs when group change. </summary>
-        private EventHandler<ToolType> Group;
-
-
-        //@Content
-        internal bool IsOpen
-        {
-            set
-            {
-                this.IsOpenChanged?.Invoke(this, value);//Delegate
-            }
-        }
-        internal ToolType Type
-        {
-            get => this.type;
-            set
-            {
-                this.Group?.Invoke(this, value);//Delegate
-                this.type = value;
-            }
-        }
-        private ToolType type= ToolType.Node;
-
-
-        /// <summary> Children. </summary>
-        private UIElementCollection Children => this.StackPanel.Children;
-        /// <summary> More button's flyout panel's children. </summary>
-        private UIElementCollection MoreChildren => this.MoreStackPanel.Children;
+        /// <summary> Gets or sets the all tools. </summary>   
+        private readonly IList<ITool> Tools = new List<ITool>();
 
 
         //@Construct
         /// <summary>
-        /// Initializes a ToolsControlCore. 
+        /// Initializes a ToolsControl. 
         /// </summary>
-        public ToolsControlCore(IList<ITool> tools)
+        public ToolsControl()
         {
             this.InitializeComponent();
-            this.ConstructStrings(tools);
+            this.ConstructStrings();
+            this.ConstructGroup();
 
-            // Select the first Tool by default. 
-            this.Loaded += (s, e) => this.TypeChanged?.Invoke(this, ToolType.Cursor); //Delegate
+            this.More.Tapped += (s, e) => this.MoreFlyout.ShowAt(this.More);
         }
+    }
 
-
+    public sealed partial class ToolsControl : UserControl
+    {
 
         //Strings
-        private void ConstructStrings(IList<ITool> tools)
+        private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-
-            ToolGroupType toolGroupType = ToolGroupType.None;
-            this.Children.Clear();
-            this.MoreChildren.Clear();
-
-
-            foreach (ITool tool in tools)
+            foreach (UIElement child in this.StackPanel.Children)
             {
-                if (tool == null)
+                if (child is ListViewItem item)
                 {
-                    switch (toolGroupType)
+                    if (ToolTipService.GetToolTip(item) is ToolTip toolTip)
                     {
-                        case ToolGroupType.Tool:
-                            this.Children.Add(new Rectangle
-                            {
-                                Style = this.SeparatorRectangle
-                            });
-                            continue;
-                        case ToolGroupType.Pattern:
-                        case ToolGroupType.Geometry:
-                            this.MoreChildren.Add(new Rectangle
-                            {
-                                Style = this.SeparatorRectangle
-                            });
-                            continue;
+                        string key = item.Name;
+                        string title = resource.GetString($"Tools_{key}");
+
+                        toolTip.Content = title;
                     }
                 }
+            }
+
+            {
+                if (ToolTipService.GetToolTip(this.More) is ToolTip toolTip)
+                {
+                    string key = this.More.Name;
+                    string title = resource.GetString($"Tools_{key}");
+
+                    toolTip.Content = title;
+                }
+            }
+
+            foreach (UIElement child in this.MoreStackPanel.Children)
+            {
+                if (child is ListViewItem item)
+                {
+                    if (item.Content is ContentControl control)
+                    {
+                        string key = item.Name;
+                        string title = resource.GetString($"Tools_{key}");
+
+                        control.Content = title;
+                    }
+                }
+            }
+        }
 
 
-                ToolType type = tool.Type;
-                string title = tool.Title;
+        //@Group
+        private void ConstructGroup()
+        {
+            foreach (UIElement child in this.StackPanel.Children)
+            {
+                this.ConstructGroupCore(child);
+            }
+
+            foreach (UIElement child in this.MoreStackPanel.Children)
+            {
+                this.ConstructGroupCore(child);
+            }
+        }
+        private void ConstructGroupCore(UIElement child)
+        {
+            if (child is ListViewItem item)
+            {
+                if (item == this.More) return;
+
+                string key = item.Name;
+                ToolType type = ToolType.None;
+                try
+                {
+                    type = (ToolType)Enum.Parse(typeof(ToolType), key);
+                }
+                catch (Exception) { }
 
 
                 //Button
-                Button button = null;
-                {
-                    toolGroupType = tool.GroupType;
-                    switch (toolGroupType)
-                    {
-                        case ToolGroupType.Tool:
-                            button = new Button
-                            {
-                                Style = this.SelectedButtonStyle,
-                                Content = new ContentControl
-                                {
-                                    Template = tool.Icon
-                                }
-                            };
-                            this.ConstructToolTip(button, title);
-                            this.Children.Add(button);
-                            button.Click += (s, e) => this.TypeChanged?.Invoke(this, type); //Delegate 
-                            break;
-                        case ToolGroupType.Pattern:
-                        case ToolGroupType.Geometry:
-                            button = new Button
-                            {
-                                Content = title,
-                                Style = this.IconSelectedButtonStyle,
-                                Tag = new ContentControl
-                                {
-                                    Template = tool.Icon
-                                }
-                            };
-                            this.MoreChildren.Add(button);
-                            button.Click += (s, e) => this.TypeChanged?.Invoke(this, type); //Delegate 
-                            break;
-                    }
-                }
+                item.Tapped += (s, e) => this.Type = type;// this.ModeChanged?.Invoke(this, mode);//Delegate
 
 
                 //Group
@@ -268,38 +231,13 @@ namespace Retouch_Photo2.Tools
                 {
                     if (groupType == type)
                     {
-                        button.IsEnabled = false;
+                        item.IsSelected = true;
 
-                        //this.Title = title;
+                        // this.Button.Content = control.Content as string;
                     }
-                    else button.IsEnabled = true;
+                    else item.IsSelected = false;
                 }
             }
-
-
-            //More
-            Button moreButton = new Button
-            {
-                Style = this.SelectedButtonStyle,
-                Flyout = this.MoreFlyout,
-                Content = new SymbolIcon(Symbol.More)
-            };
-            string moreTitle = resource.GetString("Tools_More");
-            this.ConstructToolTip(moreButton, moreTitle);
-            this.Children.Add(moreButton);
         }
-
-        private void ConstructToolTip(Button button, string title)
-        {
-            ToolTip toolTip = new ToolTip
-            {
-                Content = title,
-                Placement = PlacementMode.Right,
-                Style = this.ToolTipStyle
-            };
-            ToolTipService.SetToolTip(button, toolTip);
-            this.IsOpenChanged += (s, isOpen) => toolTip.IsOpen = isOpen;//Delegate
-        }
-
     }
 }

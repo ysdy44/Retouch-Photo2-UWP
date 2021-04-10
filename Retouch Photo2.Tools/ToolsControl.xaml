@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Retouch_Photo2.Tools.ToolsControlCore"
+    x:Class="Retouch_Photo2.Tools.ToolsControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -10,34 +10,322 @@
     >
 
     <UserControl.Resources>
-        <!--Style-->
-        <Style x:Name="SeparatorRectangle" TargetType="Rectangle" BasedOn="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-
-        <Style x:Name="ToolTipStyle" TargetType="ToolTip" BasedOn="{StaticResource AppToolTipStyle}"/>
-
-        <Style x:Name="IconSelectedButtonStyle" TargetType="Button" BasedOn="{StaticResource AppIconSelectedButton}"/>
-        <Style x:Name="SelectedButtonStyle" TargetType="Button" BasedOn="{StaticResource AppSelectedButtonStyle}">
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="VerticalAlignment" Value="Stretch"/>
-        </Style>
-
         <!--Flyout-->
         <Flyout x:Name="MoreFlyout" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
                 <StackPanel x:Name="MoreStackPanel" Padding="{StaticResource AppPanelPadding}" HorizontalAlignment="Stretch">
-                    <!--MoreChildren-->
+
+                    <!--Pattern-->
+                    <ListViewItem x:Name="PatternGrid">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconPatterns/PatternGridIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource PatternGridIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="PatternDiagonal">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconPatterns/PatternDiagonalIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource PatternDiagonalIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="PatternSpotted">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconPatterns/PatternSpottedIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource PatternSpottedIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+                    <!--Geometry1-->
+                    <ListViewItem x:Name="GeometryRoundRect">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryRoundRectIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource GeometryRoundRectIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="GeometryTriangle">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryTriangleIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource GeometryTriangleIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="GeometryDiamond">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryDiamondIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource GeometryDiamondIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+
+                    <!--Geometry2-->
+                    <ListViewItem x:Name="GeometryPentagon">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryPentagonIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource GeometryPentagonIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="GeometryStar">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryStarIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource GeometryStarIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="GeometryCog">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryCogIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource GeometryCogIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+
+                    <!--Geometry3-->
+                    <ListViewItem x:Name="GeometryDount">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryDountIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource GeometryDountIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="GeometryPie">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryPieIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource GeometryPieIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="GeometryCookie">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryCookieIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource GeometryCookieIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+
+                    <!--Geometry4-->
+                    <ListViewItem x:Name="GeometryArrow">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryArrowIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource GeometryArrowIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="GeometryCapsule">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryCapsuleIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource GeometryCapsuleIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="GeometryHeart">
+                        <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/IconGeometrys/GeometryHeartIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource GeometryHeartIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>                    
+                    
                 </StackPanel>
             </ScrollViewer>
         </Flyout>
-        
     </UserControl.Resources>
 
 
     <ScrollViewer  Style="{StaticResource AppVerticalScrollViewerStyle}">
         <StackPanel x:Name="StackPanel" Padding="{StaticResource AppPanelPadding}">
-            <!--Children-->
+
+            <ListViewItem x:Name="Cursor" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
+                <ListViewItem.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/CursorIcon.xaml"/>
+                </ListViewItem.Resources>
+                <ToolTipService.ToolTip>
+                    <ToolTip Placement="Right" IsOpen="{x:Bind IsOpenCore, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <ContentControl Template="{StaticResource CursorIcon}"/>
+            </ListViewItem>
+
+            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+            <ListViewItem x:Name="View" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
+                <ListViewItem.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/ViewIcon.xaml"/>
+                </ListViewItem.Resources>
+                <ToolTipService.ToolTip>
+                    <ToolTip Placement="Right" IsOpen="{x:Bind IsOpenCore, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <ContentControl Template="{StaticResource ViewIcon}"/>
+            </ListViewItem>
+
+            <ListViewItem x:Name="Brush" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
+                <ListViewItem.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/BrushIcon.xaml"/>
+                </ListViewItem.Resources>
+                <ToolTipService.ToolTip>
+                    <ToolTip Placement="Right" IsOpen="{x:Bind IsOpenCore, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <ContentControl Template="{StaticResource BrushIcon}"/>
+            </ListViewItem>
+
+            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+            
+            <!--Geometry0-->
+            <ListViewItem x:Name="GeometryRectangle" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
+                <ListViewItem.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/GeometryRectangleIcon.xaml"/>
+                </ListViewItem.Resources>
+                <ToolTipService.ToolTip>
+                    <ToolTip Placement="Right" IsOpen="{x:Bind IsOpenCore, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <ContentControl Template="{StaticResource GeometryRectangleIcon}"/>
+            </ListViewItem>
+
+            <ListViewItem x:Name="GeometryEllipse" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
+                <ListViewItem.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/GeometryEllipseIcon.xaml"/>
+                </ListViewItem.Resources>
+                <ToolTipService.ToolTip>
+                    <ToolTip Placement="Right" IsOpen="{x:Bind IsOpenCore, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <ContentControl Template="{StaticResource GeometryEllipseIcon}"/>
+            </ListViewItem>
+
+            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+            <ListViewItem x:Name="Pen" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
+                <ListViewItem.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/PenIcon.xaml"/>
+                </ListViewItem.Resources>
+                <ToolTipService.ToolTip>
+                    <ToolTip Placement="Right" IsOpen="{x:Bind IsOpenCore, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <ContentControl Template="{StaticResource PenIcon}"/>
+            </ListViewItem>
+
+            <ListViewItem x:Name="Node" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
+                <ListViewItem.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/NodeIcon.xaml"/>
+                </ListViewItem.Resources>
+                <ToolTipService.ToolTip>
+                    <ToolTip Placement="Right" IsOpen="{x:Bind IsOpenCore, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <ContentControl Template="{StaticResource NodeIcon}"/>
+            </ListViewItem>
+
+            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+            <ListViewItem x:Name="TextArtistic" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
+                <ListViewItem.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/TextArtisticIcon.xaml"/>
+                </ListViewItem.Resources>
+                <ToolTipService.ToolTip>
+                    <ToolTip Placement="Right" IsOpen="{x:Bind IsOpenCore, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <ContentControl Template="{StaticResource TextArtisticIcon}"/>
+            </ListViewItem>
+
+            <ListViewItem x:Name="TextFrame" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
+                <ListViewItem.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/TextFrameIcon.xaml"/>
+                </ListViewItem.Resources>
+                <ToolTipService.ToolTip>
+                    <ToolTip Placement="Right" IsOpen="{x:Bind IsOpenCore, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <ContentControl Template="{StaticResource TextFrameIcon}"/>
+            </ListViewItem>
+
+            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+            <ListViewItem x:Name="Image" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
+                <ListViewItem.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/ImageIcon.xaml"/>
+                </ListViewItem.Resources>
+                <ToolTipService.ToolTip>
+                    <ToolTip Placement="Right" IsOpen="{x:Bind IsOpenCore, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <ContentControl Template="{StaticResource ImageIcon}"/>
+            </ListViewItem>
+
+            <ListViewItem x:Name="Crop" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
+                <ListViewItem.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/CropIcon.xaml"/>
+                </ListViewItem.Resources>
+                <ToolTipService.ToolTip>
+                    <ToolTip Placement="Right" IsOpen="{x:Bind IsOpenCore, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <ContentControl Template="{StaticResource CropIcon}"/>
+            </ListViewItem>
+
+            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+
+            <ListViewItem x:Name="More" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
+                <ToolTipService.ToolTip>
+                    <ToolTip Placement="Right" IsOpen="{x:Bind IsOpenCore, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                </ToolTipService.ToolTip>
+                <SymbolIcon Symbol="More"/>
+            </ListViewItem>
+
         </StackPanel>
     </ScrollViewer>
 

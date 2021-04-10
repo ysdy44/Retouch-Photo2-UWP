@@ -6,6 +6,7 @@
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Brushs;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -36,8 +37,6 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Content 
         public ToolType Type => ToolType.Transparency;
-        public ToolGroupType GroupType => ToolGroupType.Tool;
-        public string Title => this.TransparencyPage.Title;
         public ControlTemplate Icon => this.TransparencyPage.Icon;
         public FrameworkElement Page => this.TransparencyPage;
 
@@ -169,8 +168,11 @@ namespace Retouch_Photo2.Tools.Models
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
+        //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+
+
         //@Content 
-        public string Title { get; private set; }
         public ControlTemplate Icon => this.IconContentControl.Template;
 
 
@@ -198,8 +200,6 @@ namespace Retouch_Photo2.Tools.Models
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
-
-            this.Title = resource.GetString("Tools_Transparency");
 
             this.TypeTextBlock.Text = resource.GetString("Tools_Brush_Type");
             this.ShowTextBlock.Text = resource.GetString("Tools_Brush_Brush");
