@@ -103,7 +103,7 @@ namespace Retouch_Photo2
             //Transition
             this.ViewModel.CanvasTransformer.Transition(1.0f);
 
-            this.FullScreenChanged();
+            this.FullScreenChanged(false);
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             this.TransitionBorder.Visibility = Windows.UI.Xaml.Visibility.Collapsed;

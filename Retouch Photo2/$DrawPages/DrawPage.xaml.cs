@@ -96,10 +96,10 @@ namespace Retouch_Photo2
             this.ConstructLayerManager();
 
             //Menus
-            this.AdjustmentMenu.PaneOpened += (s, e) => this.FullScreenChanged();
-            this.AdjustmentMenu.PaneClosed += (s, e) => this.FullScreenChanged();
-            this.EffectMenu.PaneOpened += (s, e) => this.FullScreenChanged();
-            this.EffectMenu.PaneClosed += (s, e) => this.FullScreenChanged();
+            this.AdjustmentMenu.PaneOpened += (s, e) => this.FullScreenChanged(false);
+            this.AdjustmentMenu.PaneClosed += (s, e) => this.FullScreenChanged(true);
+            this.EffectMenu.PaneOpened += (s, e) => this.FullScreenChanged(false);
+            this.EffectMenu.PaneClosed += (s, e) => this.FullScreenChanged(true);
 
             //Dialog
             this.ConstructExportDialog();

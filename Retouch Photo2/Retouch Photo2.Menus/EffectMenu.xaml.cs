@@ -58,6 +58,7 @@ namespace Retouch_Photo2.Menus
                     this.Straighten.IsSelected = value.Straighten_IsOn;
                 }
 
+                this.SplitView.IsPaneOpen = true;
                 this.effect = value;
             }
         }
