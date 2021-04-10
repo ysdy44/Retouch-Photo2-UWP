@@ -110,10 +110,7 @@
                                         </ListView.Resources>
                                         <ListView.ItemTemplate>
                                             <DataTemplate x:DataType="x:Int32">
-                                                <TextBlock Style="{StaticResource AppTextBlockStyle}">
-                                                <Run Text="{x:Bind}"/>                            
-                                                <Run> px</Run>
-                                                </TextBlock>
+                                                <TextBlock Text="{x:Bind}"/>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
@@ -150,7 +147,7 @@
                     </ListView.Resources>
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="x:String">
-                            <TextBlock FontFamily="{x:Bind}" Text="{x:Bind}" Style="{StaticResource AppTextBlockStyle}"/>
+                            <TextBlock FontFamily="{x:Bind}" Text="{x:Bind}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

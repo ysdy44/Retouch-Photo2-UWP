@@ -287,20 +287,20 @@ namespace Retouch_Photo2.Elements
         //@Group
         private void ConstructGroup()
         {
-            this.ConstructGroupCore(this.SwatchesItem, this.SwatchesPicker, ColorPicker2Mode.Swatches);
+            this.ConstructGroupCore(this.SwatchesItem, this.SwatchesControl, this.SwatchesPicker, ColorPicker2Mode.Swatches);
 
-            this.ConstructGroupCore(this.WheelItem, this.WheelPicker, ColorPicker2Mode.Wheel);
+            this.ConstructGroupCore(this.WheelItem, this.WheelControl, this.WheelPicker, ColorPicker2Mode.Wheel);
 
-            this.ConstructGroupCore(this.RGBItem, this.RGBPicker, ColorPicker2Mode.RGB);
-            this.ConstructGroupCore(this.HSVItem, this.HSVPicker, ColorPicker2Mode.HSV);
+            this.ConstructGroupCore(this.RGBItem, this.RGBControl, this.RGBPicker, ColorPicker2Mode.RGB);
+            this.ConstructGroupCore(this.HSVItem, this.HSVControl, this.HSVPicker, ColorPicker2Mode.HSV);
 
-            this.ConstructGroupCore(this.PaletteHueItem, this.PaletteHuePicker, ColorPicker2Mode.PaletteHue);
-            this.ConstructGroupCore(this.PaletteSaturationItem, this.PaletteSaturationPicker, ColorPicker2Mode.PaletteSaturation);
-            this.ConstructGroupCore(this.PaletteValueItem, this.PaletteValuePicker, ColorPicker2Mode.PaletteValue);
+            this.ConstructGroupCore(this.PaletteHueItem, this.PaletteHueControl, this.PaletteHuePicker, ColorPicker2Mode.PaletteHue);
+            this.ConstructGroupCore(this.PaletteSaturationItem, this.PaletteSaturationControl, this.PaletteSaturationPicker, ColorPicker2Mode.PaletteSaturation);
+            this.ConstructGroupCore(this.PaletteValueItem, this.PaletteValueControl, this.PaletteValuePicker, ColorPicker2Mode.PaletteValue);
 
-            this.ConstructGroupCore(this.CircleItem, this.CirclePicker, ColorPicker2Mode.Circle);
+            this.ConstructGroupCore(this.CircleItem, this.CircleControl, this.CirclePicker, ColorPicker2Mode.Circle);
         }
-        private void ConstructGroupCore(ListViewItem button, IColorPicker colorPicker, ColorPicker2Mode mode)
+        private void ConstructGroupCore(ListViewItem button, ContentControl control, IColorPicker colorPicker, ColorPicker2Mode mode)
         {
             //Button
             button.Tapped += (s, e) =>
@@ -329,15 +329,15 @@ namespace Retouch_Photo2.Elements
             {
                 if (groupMode == mode)
                 {
-                    button.IsEnabled = false;
+                    button.IsSelected = true;
                     colorPicker.Self.Visibility = Visibility.Visible;
 
                     colorPicker.Color = this.Color;
-                    this.Control.Content = button.Content as string;
+                    this.Control.Content = control.Content as string;
                 }
                 else
                 {
-                    button.IsEnabled = true;
+                    button.IsSelected = false;
                     colorPicker.Self.Visibility = Visibility.Collapsed;
                 }
             }

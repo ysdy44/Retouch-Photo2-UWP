@@ -12,46 +12,57 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
+                <ScrollViewer.Resources>
+                    <!--StaticResource-->
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
+                    <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
+                    <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
+                    <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
+                </ScrollViewer.Resources>
+                <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-                <ListViewItem x:Name="ClampItem">
-                    <ContentControl x:Name="Clamp" Style="{StaticResource AppIconContentControlStyle}">
-                        <ContentControl.Resources>
-                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/ClampIcon.xaml"/>
-                        </ContentControl.Resources>
-                        <ContentControl.Tag>
-                            <ContentControl Template="{StaticResource ClampIcon}"/>
-                        </ContentControl.Tag>
-                    </ContentControl>
-                </ListViewItem>
-                <ListViewItem x:Name="WrapItem">
-                    <ContentControl x:Name="Wrap" Style="{StaticResource AppIconContentControlStyle}">
-                        <ContentControl.Resources>
-                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/WrapIcon.xaml"/>
-                        </ContentControl.Resources>
-                        <ContentControl.Tag>
-                            <ContentControl Template="{StaticResource WrapIcon}"/>
-                        </ContentControl.Tag>
-                    </ContentControl>
-                </ListViewItem>
-                <ListViewItem x:Name="MirrorItem">
-                    <ContentControl x:Name="Mirror" Style="{StaticResource AppIconContentControlStyle}">
-                        <ContentControl.Resources>
-                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/MirrorIcon.xaml"/>
-                        </ContentControl.Resources>
-                        <ContentControl.Tag>
-                            <ContentControl Template="{StaticResource MirrorIcon}"/>
-                        </ContentControl.Tag>
-                    </ContentControl>
-                </ListViewItem>
+                    <ListViewItem x:Name="ClampItem">
+                        <ContentControl x:Name="Clamp" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/ClampIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource ClampIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="WrapItem">
+                        <ContentControl x:Name="Wrap" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/WrapIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource WrapIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="MirrorItem">
+                        <ContentControl x:Name="Mirror" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/Extends/Icons/MirrorIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource MirrorIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
 
-            </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
         </Flyout>
     </UserControl.Resources>
 
 
     <Button x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppRoundedButtonStyle}">
-        
+
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
