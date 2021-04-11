@@ -28,8 +28,7 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;        
 
         ListViewSelectionMode SelectionMode => this.SelectionViewModel.SelectionMode;
 
@@ -99,7 +98,7 @@ namespace Retouch_Photo2.Tools.Models
 
                 this.TransformerRect = new TransformerRect(canvasStartingPoint, canvasPoint);
                 this.NodeCollectionMode = NodeCollectionMode.RectChoose;
-                this.TipViewModel.Cursor_ManipulationStarted_Tool();
+                CoreCursorExtension.Tool_ManipulationStarted();
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
                 return;
             }
@@ -108,20 +107,20 @@ namespace Retouch_Photo2.Tools.Models
             {
                 case NodeCollectionMode.Move:
                     this.MoveStarted();
-                    this.TipViewModel.Cursor_ManipulationStarted_Tool();
+                    CoreCursorExtension.Tool_ManipulationStarted();
                     break;
                 case NodeCollectionMode.MoveSingleNodePoint:
                     this.MoveSingleNodePointStarted(startingPoint, matrix);
-                    this.TipViewModel.Cursor_ManipulationStarted_Tool();
+                    CoreCursorExtension.Tool_ManipulationStarted();
                     break;
                 case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
                 case NodeCollectionMode.MoveSingleNodeRightControlPoint:
                     this.MoveSingleNodeControlPointStarted();
-                    this.TipViewModel.Cursor_ManipulationStarted_Tool();
+                    CoreCursorExtension.Tool_ManipulationStarted();
                     break;
                 case NodeCollectionMode.RectChoose:
                     this.RectChooseStarted(startingPoint, point);
-                    this.TipViewModel.Cursor_ManipulationStarted_Tool();
+                    CoreCursorExtension.Tool_ManipulationStarted();
                     break;
             }
 
@@ -167,7 +166,7 @@ namespace Retouch_Photo2.Tools.Models
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
-            this.TipViewModel.Cursor_ManipulationStarted_None();
+            CoreCursorExtension.None_ManipulationStarted();
 
             if (this.Layerage == null)
             {
@@ -245,25 +244,25 @@ namespace Retouch_Photo2.Tools.Models
             switch (mode)
             {
                 case NodeCollectionMode.None:
-                    this.TipViewModel.Cursor_PointerEntered_None();
+                    CoreCursorExtension.None_PointerEntered();
                     break;
                 case NodeCollectionMode.Preview:
                     break;
                 case NodeCollectionMode.Add:
                     break;
                 case NodeCollectionMode.Move:
-                    this.TipViewModel.Cursor_PointerEntered_Tool();
+                    CoreCursorExtension.Tool_PointerEntered();
                     break;
                 case NodeCollectionMode.MoveSingleNodePoint:
                 case NodeCollectionMode.MoveSingleNodeLeftControlPoint:
                 case NodeCollectionMode.MoveSingleNodeRightControlPoint:
-                    this.TipViewModel.Cursor_PointerEntered_Tool();
+                    CoreCursorExtension.Tool_PointerEntered();
                     break;
                 case NodeCollectionMode.RectChoose:
-                    this.TipViewModel.Cursor_PointerEntered_None();
+                    CoreCursorExtension.None_PointerEntered();
                     break;
                 default:
-                    this.TipViewModel.Cursor_PointerEntered_None();
+                    CoreCursorExtension.None_PointerEntered();
                     break;
             }
         }

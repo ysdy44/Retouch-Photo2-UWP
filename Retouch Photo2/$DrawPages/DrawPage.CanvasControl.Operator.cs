@@ -1,5 +1,6 @@
 ﻿using FanKit.Transformers;
 using Microsoft.Graphics.Canvas.UI.Xaml;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -72,11 +73,11 @@ namespace Retouch_Photo2
 
         private void ConstructCanvasOperator()
         {
-            this.ToolDrawCanvasControl.PointerExited += (s, e) => this.TipViewModel.Cursor_PointerEntered_None();
-            this.ToolDrawCanvasControl.PointerCanceled += (s, e) => this.TipViewModel.Cursor_PointerEntered_None();
+            this.ToolDrawCanvasControl.PointerExited += (s, e) => CoreCursorExtension.None_PointerEntered();
+            this.ToolDrawCanvasControl.PointerCanceled += (s, e) => CoreCursorExtension.None_PointerEntered();
             this.ToolDrawCanvasControl.PointerMoved += (s, e) =>
             {
-                this.TipViewModel.pointerDeviceType = e.Pointer.PointerDeviceType;
+                CoreCursorExtension.PointerDeviceType = e.Pointer.PointerDeviceType;
 
                 //Tool
                 Vector2 position = e.GetCurrentPoint(this.ToolDrawCanvasControl).Position.ToVector2();
@@ -148,6 +149,8 @@ namespace Retouch_Photo2
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
                 this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
+
+                CoreCursorExtension.Hand_Is = true;//CoreCursorType
             };
             canvasOperator.Right_Delta += (point) =>
             {
@@ -162,6 +165,8 @@ namespace Retouch_Photo2
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
 
                 this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
+
+                CoreCursorExtension.Hand_Is = false;//CoreCursorType
             };
 
 

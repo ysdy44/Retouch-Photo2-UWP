@@ -137,8 +137,8 @@
             <elements:DrawLayout.LeftPanel>
                 <tools:ToolsControl x:Name="ToolsControl"
                                     
-                            Type="{x:Bind TipViewModel.ToolType, Mode=OneWay}"
-                            IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}"
+                            Type="{x:Bind ViewModel.ToolType, Mode=OneWay}"
+                            IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"
                             DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
                              />
             </elements:DrawLayout.LeftPanel>
@@ -206,7 +206,7 @@
                             </ToolTipService.ToolTip>
                             <FontIcon Glyph="&#xE92D;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </Button>
-                        <ToggleButton x:Name="TipButton" IsChecked="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
+                        <ToggleButton x:Name="TipButton" IsChecked="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Style="{StaticResource AppCircleToggleButtonStyle}">
                             <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                         </ToggleButton>
                     </StackPanel>
@@ -281,7 +281,7 @@
                                                 </ContentControl.Tag>
                                             </ContentControl>
                                         </ListViewItem>
-                                        <ListViewItem x:Name="OverflowTipItem" IsSelected="{x:Bind TipViewModel.IsOpen, Mode=OneWay}">
+                                        <ListViewItem x:Name="OverflowTipItem" IsSelected="{x:Bind ViewModel.IsOpen, Mode=OneWay}">
                                             <ContentControl x:Name="OverflowTipControl" Style="{StaticResource AppIconContentControlStyle}">
                                                 <ContentControl.Tag>
                                                     <FontIcon Glyph="&#xE897;" FontSize="18" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -310,7 +310,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind EditExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind EditExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <edits:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
@@ -318,12 +318,12 @@
                                 <Button.Flyout>
                                     <Flyout x:Name="OperateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="OperateExpander" Flyout="{x:Bind OperateFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:OperateMenu IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}"/>
+                                            <menus:OperateMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
                                         </elements:Expander>
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind OperateExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind OperateExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <operates:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
@@ -337,7 +337,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind AdjustmentExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind AdjustmentExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <adjustments:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
@@ -350,7 +350,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind EffectExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind EffectExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <effects:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
@@ -359,12 +359,12 @@
                                 <Button.Flyout>
                                     <Flyout x:Name="TextFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="TextExpander" Flyout="{x:Bind TextFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:TextMenu IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}"/>
+                                            <menus:TextMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
                                         </elements:Expander>
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind TextExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind TextExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <texts:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
@@ -372,12 +372,12 @@
                                 <Button.Flyout>
                                     <Flyout x:Name="StrokeFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="StrokeExpander" Flyout="{x:Bind StrokeFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:StrokeMenu IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}"/>
+                                            <menus:StrokeMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
                                         </elements:Expander>
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind StrokeExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind StrokeExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <strokes:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
@@ -390,7 +390,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind StyleExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind StyleExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <styles:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
@@ -404,7 +404,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind HistoryExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind HistoryExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <historys:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
@@ -412,12 +412,12 @@
                                 <Button.Flyout>
                                     <Flyout x:Name="TransformerFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                         <elements:Expander x:Name="TransformerExpander" Flyout="{x:Bind TransformerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:TransformerMenu IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}" Transformer="{x:Bind SelectionViewModel.Transformer, Mode=OneWay}" ToolType="{x:Bind TipViewModel.ToolType, Mode=OneWay}"/>
+                                            <menus:TransformerMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}" Transformer="{x:Bind SelectionViewModel.Transformer, Mode=OneWay}" ToolType="{x:Bind ViewModel.ToolType, Mode=OneWay}"/>
                                         </elements:Expander>
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind TransformerExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind TransformerExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <transformers:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
@@ -430,7 +430,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind LayerExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind LayerExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <layers:Icon Foreground="{ThemeResource AppText}"/>
                             </Button>
@@ -444,7 +444,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                                 <ToolTipService.ToolTip>
-                                    <ToolTip Content="{x:Bind ColorExpander.Title, Mode=OneWay}" IsOpen="{x:Bind TipViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                                    <ToolTip Content="{x:Bind ColorExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <brushs:ColorEllipse Color="{x:Bind SelectionViewModel.Color, Mode=OneWay}"/>
                             </Button>

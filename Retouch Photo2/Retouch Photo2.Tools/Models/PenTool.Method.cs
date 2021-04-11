@@ -2,6 +2,7 @@
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
@@ -28,7 +29,7 @@ namespace Retouch_Photo2.Tools.Models
             if (this._hasPreviewTempLeftPoint == false) this._previewLeft = canvasPoint;
             this._previewRight = canvasPoint;
 
-            this.TipViewModel.Cursor_ManipulationStarted_Tool();
+            CoreCursorExtension.Tool_ManipulationStarted();
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         private void PreviewDelta(Vector2 canvasPoint)
@@ -53,7 +54,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 this._hasPreviewTempLeftPoint = true;
 
-                this.TipViewModel.Cursor_ManipulationStarted_None();
+                CoreCursorExtension.None_ManipulationStarted();
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             }
         }
@@ -93,7 +94,7 @@ namespace Retouch_Photo2.Tools.Models
             this._addEndNode = layer.Nodes.Last(n => n.Type == NodeType.Node);
             this._addLastNode = layer.Nodes.Last(n => n.Type == NodeType.Node);
 
-            this.TipViewModel.Cursor_ManipulationStarted_Tool();
+            CoreCursorExtension.Tool_ManipulationStarted();
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         private void AddDelta(Vector2 canvasPoint)
@@ -164,7 +165,7 @@ namespace Retouch_Photo2.Tools.Models
             layerage.RefactoringParentsRender();
             layerage.RefactoringParentsIconRender();
 
-            this.TipViewModel.Cursor_ManipulationStarted_None();
+            CoreCursorExtension.None_ManipulationStarted();
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
 

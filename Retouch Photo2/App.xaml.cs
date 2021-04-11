@@ -47,7 +47,14 @@ namespace Retouch_Photo2
         public static ObservableCollection<IProjectViewItem> Projects { get; } = new ObservableCollection<IProjectViewItem>();
 
         /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.ViewModel" />. </summary>
-        public static ViewModel ViewModel { get; } = new ViewModel();
+        public static ViewModel ViewModel { get; } = new ViewModel
+        {
+            //Tool
+            MoveTool = new MoveTool(),
+            TransformerTool = new TransformerTool(),
+            CreateTool = new CreateTool(),
+            ClickeTool = new ClickeTool(),
+        };
 
         /// <summary> Retouch_Photo2's the only Selection<see cref = "ViewModels.ViewModel" />. </summary>
         public static ViewModel SelectionViewModel => App.ViewModel;
@@ -231,16 +238,6 @@ namespace Retouch_Photo2
                     Invoked = () => Retouch_Photo2.DrawPage.ShowGallery?.Invoke()
                 },
             }
-        };
-
-        /// <summary> Retouch_Photo2's the only <see cref = "ViewModels.TipViewModel" />. </summary>
-        public static TipViewModel TipViewModel = new TipViewModel
-        {
-            //Tool
-            MoveTool = new MoveTool(),
-            TransformerTool = new TransformerTool(),
-            CreateTool = new CreateTool(),
-            ClickeTool = new ClickeTool(),
         };
 
 

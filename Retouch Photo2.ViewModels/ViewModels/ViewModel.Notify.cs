@@ -14,6 +14,19 @@ namespace Retouch_Photo2.ViewModels
         public Color AccentColor { get; set; } = Colors.DodgerBlue;
 
 
+        /// <summary> Gets or sets the <see cref="ToolTip.IsOpen"/>. </summary>
+        public bool IsOpen
+        {
+            get => this.isOpen;
+            set
+            {
+                this.isOpen = value;
+                this.OnPropertyChanged(nameof(this.IsOpen));//Notify 
+            }
+        }
+        private bool isOpen;
+
+
         /// <summary> Gets or sets the on state of the IsHitTestVisible on the canvas. </summary>
         public bool CanvasHitTestVisible
         {

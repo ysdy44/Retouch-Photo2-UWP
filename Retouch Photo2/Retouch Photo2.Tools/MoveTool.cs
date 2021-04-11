@@ -5,6 +5,7 @@
 // Complete:      ★★★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -23,7 +24,6 @@ namespace Retouch_Photo2.Tools
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
@@ -40,7 +40,9 @@ namespace Retouch_Photo2.Tools
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             bool isFillContainsPoint = this.GetIsSelectedLayer(canvasStartingPoint);
             if (isFillContainsPoint == false) return false;
-            this.TipViewModel.Cursor_ManipulationStarted_Move();
+
+            //Cursor
+            CoreCursorExtension.Move_ManipulationStarted();
 
             //Snap
             if (this.IsSnap) this.ViewModel.BorderBorderSnapInitiate(this.SelectionViewModel.GetFirstSelectedLayerage());
@@ -71,7 +73,9 @@ namespace Retouch_Photo2.Tools
         public bool Complete(Vector2 startingPoint, Vector2 point)
         {
             if (this.Mode == ListViewSelectionMode.None) return false;
-            this.TipViewModel.Cursor_ManipulationStarted_None();
+
+            //Cursor
+            CoreCursorExtension.None_ManipulationStarted();
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);

@@ -25,8 +25,7 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;        
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
@@ -57,7 +56,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.TransparencyStarted(startingPoint, point);
 
-            this.TipViewModel.Cursor_ManipulationStarted_Tool();
+            CoreCursorExtension.Tool_ManipulationStarted();
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
@@ -95,10 +94,10 @@ namespace Retouch_Photo2.Tools.Models
             this.TransparencyComplete(canvasStartingPoint, canvasPoint);
 
             this.HandleMode = BrushHandleMode.None;
-            this.TipViewModel.Cursor_ManipulationStarted_None();
+            CoreCursorExtension.None_ManipulationStarted();
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
         }
-        public void Clicke(Vector2 point) => this.TipViewModel.ClickeTool.Clicke(point);
+        public void Clicke(Vector2 point) => this.ViewModel.ClickeTool.Clicke(point);
 
         public void Cursor(Vector2 point) { }
 

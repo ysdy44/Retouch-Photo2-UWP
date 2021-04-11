@@ -1,6 +1,4 @@
-﻿
-
-// Core:              ★★★★★
+﻿// Core:              ★★★★★
 // Referenced:   ★★★
 // Difficult:         
 // Only:              ★★★★
@@ -25,7 +23,7 @@ namespace Retouch_Photo2.Tools
         /// <summary>
         /// Occurs when the cursor pointer is moved.
         /// </summary>
-        bool Cursor(Vector2 point);
+        void Cursor(Vector2 point);
 
     }
 }

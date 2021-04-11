@@ -30,8 +30,7 @@ namespace Retouch_Photo2.Tools.Models
     {
 
         //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
+        ViewModel ViewModel => App.ViewModel;        
 
 
         //@Content 
@@ -49,11 +48,11 @@ namespace Retouch_Photo2.Tools.Models
             //Tip
             this.ViewModel.SetTipTextPosition();
             this.ViewModel.TipTextVisibility = Visibility.Visible;
-            this.TipViewModel.hand_Is = true;
-            this.TipViewModel.CoreCursorType = this.TipViewModel.CoreCursorType;//CoreCursorType
 
             this.ViewModel.CanvasTransformer.CacheMove(startingPoint);
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+
+            CoreCursorExtension.Hand_Is = true;//CoreCursorType
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -67,11 +66,11 @@ namespace Retouch_Photo2.Tools.Models
         {
             //Tip
             this.ViewModel.TipTextVisibility = Visibility.Collapsed;
-            this.TipViewModel.hand_Is = false;
-            this.TipViewModel.CoreCursorType = this.TipViewModel.CoreCursorType;//CoreCursorType
 
             if (isOutNodeDistance) this.ViewModel.CanvasTransformer.Move(point);
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+
+            CoreCursorExtension.Hand_Is = false;//CoreCursorType
         }
         public void Clicke(Vector2 point) { }
 

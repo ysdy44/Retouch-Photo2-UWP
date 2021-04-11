@@ -22,10 +22,11 @@ namespace Retouch_Photo2.Tools.Models
     /// </summary>  
     public partial class GeometryPentagonTool : Page, ITool
     {
+
         //@ViewModel
+        ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;        
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
@@ -75,7 +76,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.MethodViewModel.MethodConvertToCurves();
 
                 //Change tools group value.
-                this.TipViewModel.ToolType = ToolType.Node;
+                this.ViewModel.ToolType = ToolType.Node;
             };
 
             this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);
@@ -97,14 +98,14 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void Started(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
-        public void Delta(Vector2 startingPoint, Vector2 point) => this.TipViewModel.CreateTool.Delta(startingPoint, point);
-        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.TipViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
-        public void Clicke(Vector2 point) => this.TipViewModel.ClickeTool.Clicke(point);
+        public void Started(Vector2 startingPoint, Vector2 point) => this.ViewModel.CreateTool.Started(this.CreateLayer, startingPoint, point);
+        public void Delta(Vector2 startingPoint, Vector2 point) => this.ViewModel.CreateTool.Delta(startingPoint, point);
+        public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance) => this.ViewModel.CreateTool.Complete(startingPoint, point, isOutNodeDistance);
+        public void Clicke(Vector2 point) => this.ViewModel.ClickeTool.Clicke(point);
 
-        public void Cursor(Vector2 point) => this.TipViewModel.ClickeTool.Cursor(point);
+        public void Cursor(Vector2 point) => this.ViewModel.ClickeTool.Cursor(point);
 
-        public void Draw(CanvasDrawingSession drawingSession) => this.TipViewModel.CreateTool.Draw(drawingSession);
+        public void Draw(CanvasDrawingSession drawingSession) => this.ViewModel.CreateTool.Draw(drawingSession);
 
 
         public void OnNavigatedTo() { }

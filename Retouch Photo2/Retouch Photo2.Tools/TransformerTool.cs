@@ -5,6 +5,7 @@
 // Complete:      ★★★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -22,8 +23,7 @@ namespace Retouch_Photo2.Tools
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;        
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
@@ -44,7 +44,8 @@ namespace Retouch_Photo2.Tools
 
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
             this.TransformerMode = Transformer.ContainsNodeMode(startingPoint, this.Transformer, matrix);
-            this.TipViewModel.Cursor_ManipulationStarted_RotateSkewScale(this.TransformerMode);
+            //Cursor
+            CoreCursorExtension.RotateSkewScale_ManipulationStarted(this.TransformerMode);
             if (this.TransformerMode == TransformerMode.None) return false;
 
             //Snap
@@ -77,7 +78,8 @@ namespace Retouch_Photo2.Tools
         {
             if (this.Mode == ListViewSelectionMode.None) return false;
             if (this.TransformerMode == TransformerMode.None) return false;
-            this.TipViewModel.Cursor_ManipulationStarted_None();
+            //Cursor
+            CoreCursorExtension.None_ManipulationStarted();
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);

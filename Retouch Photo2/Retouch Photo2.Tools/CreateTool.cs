@@ -5,9 +5,9 @@
 // Complete:      ★★★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Tools.Models;
 using Retouch_Photo2.ViewModels;
 using System;
 using System.Numerics;
@@ -26,7 +26,6 @@ namespace Retouch_Photo2.Tools
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
@@ -41,7 +40,7 @@ namespace Retouch_Photo2.Tools
 
         public void Started(Func<Transformer, ILayer> createLayer, Vector2 startingPoint, Vector2 point)
         {
-            if (this.TipViewModel.TransformerTool.Started(startingPoint, point)) return;//TransformerTool
+            if (this.ViewModel.TransformerTool.Started(startingPoint, point)) return;//TransformerTool
 
             //Transformer
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
@@ -74,12 +73,14 @@ namespace Retouch_Photo2.Tools
             //Tip
             this.ViewModel.SetTipTextWidthHeight(transformer);
             this.ViewModel.TipTextVisibility = Visibility.Visible;
-            this.TipViewModel.Cursor_ManipulationStarted_Tool();
 
             //Selection
             this.Transformer = transformer;
             this.SelectionViewModel.SetModeExtended();
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
+
+            //Cursor
+            CoreCursorExtension.Tool_ManipulationStarted();
         }
         public void Delta(Vector2 startingPoint, Vector2 point)
         {
@@ -108,7 +109,7 @@ namespace Retouch_Photo2.Tools
                 this.ViewModel.Invalidate();//Invalidate
             }
 
-            if (this.TipViewModel.TransformerTool.Delta(startingPoint, point)) return;//TransformerTool
+            if (this.ViewModel.TransformerTool.Delta(startingPoint, point)) return;//TransformerTool
         }
         public void Complete(Vector2 startingPoint, Vector2 point, bool isOutNodeDistance)
         {
@@ -156,12 +157,14 @@ namespace Retouch_Photo2.Tools
 
                 this.MezzanineLayerage = null;
                 this.ViewModel.TipTextVisibility = Visibility.Collapsed;//Tip
-                this.TipViewModel.Cursor_ManipulationStarted_None();
 
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
+
+                //Cursor
+                CoreCursorExtension.None_ManipulationStarted();
             }
 
-            if (this.TipViewModel.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool
+            if (this.ViewModel.TransformerTool.Complete(startingPoint, point)) return;//TransformerTool
         }
 
 
@@ -178,7 +181,7 @@ namespace Retouch_Photo2.Tools
                     ILayer layer2 = this.SelectionViewModel.SelectionLayerage.Self;
                     drawingSession.DrawLayerBound(layer2, matrix, this.ViewModel.AccentColor);
 
-                    this.TipViewModel.TransformerTool.Draw(drawingSession); //TransformerTool
+                    this.ViewModel.TransformerTool.Draw(drawingSession); //TransformerTool
                     break;
                 case ListViewSelectionMode.Multiple:
                     foreach (Layerage layerage in this.ViewModel.SelectionLayerages)
@@ -187,7 +190,7 @@ namespace Retouch_Photo2.Tools
                         drawingSession.DrawLayerBound(layer, matrix, this.ViewModel.AccentColor);
                     }
 
-                    this.TipViewModel.TransformerTool.Draw(drawingSession); //TransformerTool
+                    this.ViewModel.TransformerTool.Draw(drawingSession); //TransformerTool
                     break;
                 case ListViewSelectionMode.Extended:
                     drawingSession.DrawBound(this.Transformer, matrix, this.ViewModel.AccentColor);

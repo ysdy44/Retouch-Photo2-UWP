@@ -4,6 +4,7 @@
 // Only:              ★★★
 // Complete:      ★★★★★
 using FanKit.Transformers;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
@@ -22,7 +23,6 @@ namespace Retouch_Photo2.Tools
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
-        TipViewModel TipViewModel => App.TipViewModel;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
@@ -55,13 +55,14 @@ namespace Retouch_Photo2.Tools
         }
 
 
-        public bool Cursor(Vector2 point)
+        public void Cursor(Vector2 point)
         {
-            if (this.Mode == ListViewSelectionMode.None) return this.TipViewModel.Cursor_PointerEntered_None();
-            if (this.TipViewModel.tool_IsManipulationStarted) return true;
-            if (this.TipViewModel.move_IsManipulationStarted) return true;
-            if (this.TipViewModel.skew_IsManipulationStarted) return true;
-            if (this.TipViewModel.scale_IsManipulationStarted) return true;
+            if (this.Mode == ListViewSelectionMode.None)
+            {
+                CoreCursorExtension.None_PointerEntered();
+                return;
+            }
+            if (CoreCursorExtension.IsManipulationStarted()) return;
 
 
             Matrix3x2 matrix = this.ViewModel.CanvasTransformer.GetMatrix();
@@ -69,9 +70,9 @@ namespace Retouch_Photo2.Tools
 
 
             float radians = 90 + Transformer.GetRadians(point - Vector2.Transform(this.Transformer.Center, matrix));
-            this.TipViewModel.pointer_Angle = radians;
+            CoreCursorExtension.Pointer_Angle = radians;
 
-            return this.TipViewModel.Cursor_PointerEntered_RotateSkewScale(mode);
+            CoreCursorExtension.RotateSkewScale_PointerEntered(mode);
         }
 
     }

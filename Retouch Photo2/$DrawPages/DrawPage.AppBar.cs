@@ -113,21 +113,21 @@ namespace Retouch_Photo2
         }
         private void ConstructAppBar_TipButton(UIElement tipButton)
         {
-            tipButton.PointerPressed += (s, e) => this.TipViewModel.IsOpen = true;
-            tipButton.PointerReleased += (s, e) => this.TipViewModel.IsOpen = false;
-            tipButton.PointerCanceled += (s, e) => this.TipViewModel.IsOpen = false;
+            tipButton.PointerPressed += (s, e) => this.ViewModel.IsOpen = true;
+            tipButton.PointerReleased += (s, e) => this.ViewModel.IsOpen = false;
+            tipButton.PointerCanceled += (s, e) => this.ViewModel.IsOpen = false;
             tipButton.PointerEntered += (s, e) =>
             {
                 if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
                 {
-                    this.TipViewModel.IsOpen = true;
+                    this.ViewModel.IsOpen = true;
                 }
             };
             tipButton.PointerExited += (s, e) =>
             {
                 if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
                 {
-                    this.TipViewModel.IsOpen = false;
+                    this.ViewModel.IsOpen = false;
                 }
             };
         }

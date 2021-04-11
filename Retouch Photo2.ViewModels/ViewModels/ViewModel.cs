@@ -5,6 +5,7 @@
 // Complete:      ★★★★★
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Tools;
 using System;
 using System.ComponentModel;
 
@@ -15,6 +16,37 @@ namespace Retouch_Photo2.ViewModels
     /// </summary>
     public partial class ViewModel : INotifyPropertyChanged
     {
+
+        #region Tool
+
+
+        /// <summary> Gets or sets the move tool. </summary>   
+        public IMoveTool MoveTool { get; set; }
+        /// <summary> Gets or sets the transformer tool. </summary>   
+        public ITransformerTool TransformerTool { get; set; }
+        /// <summary> Gets or sets the create tool. </summary>   
+        public ICreateTool CreateTool { get; set; }
+        /// <summary> Gets or sets the clicke tool. </summary>   
+        public IClickeTool ClickeTool { get; set; }
+
+
+
+        /// <summary> Gets or sets the tool type. </summary>
+        public ToolType ToolType
+        {
+            get => this.toolType;
+            set
+            {
+                if (this.toolType == value) return;
+
+                this.toolType = value;
+                this.OnPropertyChanged(nameof(ToolType));//Notify  
+            }
+        }
+        private ToolType toolType = ToolType.Cursor;
+
+
+        #endregion
 
 
         #region History
