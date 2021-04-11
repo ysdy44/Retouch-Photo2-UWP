@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPickers="using:HSVColorPickers"
     mc:Ignorable="d"
-    MinHeight="165" 
     MaxHeight="300"
     d:DesignHeight="400"
     d:DesignWidth="200"
@@ -30,24 +29,33 @@
     </Page.Resources>
 
 
-    <StackPanel Padding="2,0">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
 
-        <Border Width="50" Visibility="Collapsed">
-            <Border.Resources>
+        <ContentControl Visibility="Collapsed" Grid.ColumnSpan="2" Height="{StaticResource AppTitleHeight}" Style="{StaticResource AppIconContentControlStyle}">
+            <ContentControl.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/HueRotationIcon.xaml"/>
-            </Border.Resources>
-            <Border.Child>
-                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource HueRotationIcon}"/>
-            </Border.Child>
-        </Border>
+            </ContentControl.Resources>
+            <ContentControl.Tag>
+                <ContentControl x:Name="IconContentControl" Template="{StaticResource HueRotationIcon}"/>
+            </ContentControl.Tag>
+            <ContentControl.Content>
+                <TextBlock x:Name="TextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            </ContentControl.Content>
+        </ContentControl>
 
         <!--Angle-->
-        <RelativePanel>
-            <TextBlock x:Name="AngleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="AnglePicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
-        </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="AngleSlider"/>
+        <TextBlock x:Name="AngleTextBlock" Grid.Row="1" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="AnglePicker" Grid.Column="2" Grid.Row="1" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:TouchSlider x:Name="AngleSlider" Grid.Column="1" Grid.Row="1" Margin="4,0"/>
 
-    </StackPanel>
+    </Grid>
 </Page>

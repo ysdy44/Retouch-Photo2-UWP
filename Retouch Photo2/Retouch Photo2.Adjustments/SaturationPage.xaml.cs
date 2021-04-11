@@ -27,12 +27,12 @@ namespace Retouch_Photo2.Adjustments.Pages
         //@Content
         /// <summary> Gets the type. </summary>
         public AdjustmentType Type => AdjustmentType.Saturation;
+        /// <summary> Gets the text. </summary>
+        public string Title => this.TextBlock.Text;
         /// <summary> Gets the icon. </summary>
         public ControlTemplate Icon => this.IconContentControl.Template;
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
-        /// <summary> Gets the text. </summary>
-        public string Title { get; private set; }
 
         /// <summary> Gets the adjustment index. </summary>
         public int Index { get; set; }
@@ -69,7 +69,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Title = resource.GetString("Adjustments_Saturation");
+            this.TextBlock.Text = resource.GetString("Adjustments_Saturation");
 
             this.SaturationTextBlock.Text = resource.GetString("Adjustments_Saturation_Saturation");
         }

@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPickers="using:HSVColorPickers"
     mc:Ignorable="d"
-    MinHeight="165" 
     MaxHeight="300"
     d:DesignHeight="400"
     d:DesignWidth="200"
@@ -35,49 +34,51 @@
     </Page.Resources>
 
 
-    <StackPanel Padding="2,0">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
 
-        <Border Width="50" Visibility="Collapsed">
-            <Border.Resources>
+        <ContentControl Visibility="Collapsed" Grid.ColumnSpan="2" Height="{StaticResource AppTitleHeight}" Style="{StaticResource AppIconContentControlStyle}">
+            <ContentControl.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/HighlightsAndShadowsIcon.xaml"/>
-            </Border.Resources>
-            <Border.Child>
-                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource HighlightsAndShadowsIcon}"/>
-            </Border.Child>
-        </Border>
+            </ContentControl.Resources>
+            <ContentControl.Tag>
+                <ContentControl x:Name="IconContentControl" Template="{StaticResource HighlightsAndShadowsIcon}"/>
+            </ContentControl.Tag>
+            <ContentControl.Content>
+                <TextBlock x:Name="TextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            </ContentControl.Content>
+        </ContentControl>
 
         <!--Shadows-->
-        <RelativePanel>
-            <TextBlock x:Name="ShadowsTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="ShadowsPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
-        </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="ShadowsSlider" Minimum="-100" Maximum="100"/>
+        <TextBlock x:Name="ShadowsTextBlock" Grid.Row="1" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="ShadowsPicker" Grid.Column="2" Grid.Row="1" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:TouchSlider x:Name="ShadowsSlider" Grid.Column="1" Grid.Row="1" Margin="4,0"/>
 
         <!--Highlights-->
-        <RelativePanel>
-            <TextBlock x:Name="HighlightsTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="HighlightsPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
-        </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="HighlightsSlider"/>
+        <TextBlock x:Name="HighlightsTextBlock" Grid.Row="2" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="HighlightsPicker" Grid.Column="2" Grid.Row="2" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:TouchSlider x:Name="HighlightsSlider" Grid.Column="1" Grid.Row="2" Margin="4,0"/>
 
         <!--Clarity-->
-        <RelativePanel>
-            <TextBlock x:Name="ClarityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="ClarityPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
-        </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="ClaritySlider"/>
+        <TextBlock x:Name="ClarityTextBlock" Grid.Row="3" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="ClarityPicker" Grid.Column="2" Grid.Row="3" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:TouchSlider x:Name="ClaritySlider" Grid.Column="1" Grid.Row="3" Margin="4,0"/>
 
         <!--MaskBlurAmount-->
-        <RelativePanel>
-            <TextBlock x:Name="MaskBlurAmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="MaskBlurAmountPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
-        </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="MaskBlurAmountSlider"/>
+        <TextBlock x:Name="MaskBlurAmountTextBlock" Grid.Row="4" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="MaskBlurAmountPicker" Grid.Column="2" Grid.Row="4" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:TouchSlider x:Name="MaskBlurAmountSlider" Grid.Column="1" Grid.Row="4" Margin="4,0"/>
 
-        <ContentControl Height="4"/>
-    </StackPanel>
+    </Grid>    
 </Page>

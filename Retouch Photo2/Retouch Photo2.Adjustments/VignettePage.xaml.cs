@@ -35,7 +35,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         /// <summary> Gets the self. </summary>
         public FrameworkElement Self => this;
         /// <summary> Gets the text. </summary>
-        public string Title { get; private set; }
+        public string Title => this.TextBlock.Text;
                 
         /// <summary> Gets the adjustment index. </summary>
         public int Index { get; set; }
@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Title = resource.GetString("Adjustments_Vignette");
+            this.TextBlock.Text = resource.GetString("Adjustments_Vignette");
 
             this.AmountTextBlock.Text = resource.GetString("Adjustments_Vignette_Amount");
             this.CurveTextBlock.Text = resource.GetString("Adjustments_Vignette_Curve");

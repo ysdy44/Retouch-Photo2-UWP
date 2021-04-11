@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPickers="using:HSVColorPickers"
     mc:Ignorable="d"
-    MinHeight="165" 
     MaxHeight="300"
     d:DesignHeight="400"
     d:DesignWidth="200"
@@ -19,7 +18,7 @@
             <GradientStop Color="White" Offset="0"/>
             <GradientStop Color="DimGray" Offset="1"/>
         </LinearGradientBrush>
-        
+
         <!--White to Dark-->
         <LinearGradientBrush x:Name="WhiteDarkBrush" StartPoint="0,0.5" EndPoint="1,0.5">
             <GradientStop Color="DimGray" Offset="0"/>
@@ -37,53 +36,55 @@
             <GradientStop Color="Gainsboro" Offset="0"/>
             <GradientStop Color="Black" Offset="1"/>
         </LinearGradientBrush>
-        
+
     </Page.Resources>
 
 
-    <StackPanel Padding="2,0">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
 
-        <Border Width="50" Visibility="Collapsed">
-            <Border.Resources>
+        <ContentControl Visibility="Collapsed" Grid.ColumnSpan="2" Height="{StaticResource AppTitleHeight}" Style="{StaticResource AppIconContentControlStyle}">
+            <ContentControl.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/BrightnessIcon.xaml"/>
-            </Border.Resources>
-            <Border.Child>
-                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource BrightnessIcon}"/>
-            </Border.Child>
-        </Border>
-        
+            </ContentControl.Resources>
+            <ContentControl.Tag>
+                <ContentControl x:Name="IconContentControl" Template="{StaticResource BrightnessIcon}"/>
+            </ContentControl.Tag>
+            <ContentControl.Content>
+                <TextBlock x:Name="TextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            </ContentControl.Content>
+        </ContentControl>
+
         <!--WhiteLight-->
-        <RelativePanel>
-            <TextBlock x:Name="WhiteLightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="WhiteLightPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
-        </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="WhiteLightSlider"/>
+        <TextBlock x:Name="WhiteLightTextBlock" Grid.Row="1" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="WhiteLightPicker" Grid.Column="2" Grid.Row="1" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:TouchSlider x:Name="WhiteLightSlider" Grid.Column="1" Grid.Row="1" Margin="4,0"/>
 
         <!--WhiteDark-->
-        <RelativePanel>
-            <TextBlock x:Name="WhiteDarkTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="WhiteDarkPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
-        </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="WhiteDarkSlider"/>
+        <TextBlock x:Name="WhiteDarkTextBlock" Grid.Row="2" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="WhiteDarkPicker" Grid.Column="2" Grid.Row="2" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:TouchSlider x:Name="WhiteDarkSlider" Grid.Column="1" Grid.Row="2" Margin="4,0"/>
 
         <!--BlackLight-->
-        <RelativePanel>
-            <TextBlock x:Name="BlackLightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="BlackLightPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
-        </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="BlackLightSlider"/>
+        <TextBlock x:Name="BlackLightTextBlock" Grid.Row="3" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="BlackLightPicker" Grid.Column="2" Grid.Row="3" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:TouchSlider x:Name="BlackLightSlider" Grid.Column="1" Grid.Row="3" Margin="4,0"/>
 
         <!--BlackDark-->
-        <RelativePanel>
-            <TextBlock x:Name="BlackDarkTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="BlackDarkPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
-        </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="BlackDarkSlider"/>
+        <TextBlock x:Name="BlackDarkTextBlock" Grid.Row="4" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="BlackDarkPicker" Grid.Column="2" Grid.Row="4" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:TouchSlider x:Name="BlackDarkSlider" Grid.Column="1" Grid.Row="4" Margin="4,0"/>
 
-        <ContentControl Height="4"/>
-    </StackPanel>
+    </Grid>
 </Page>

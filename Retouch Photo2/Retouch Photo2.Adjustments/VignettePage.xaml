@@ -8,7 +8,6 @@
     xmlns:brushs="using:Retouch_Photo2.Brushs"
     xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
-    MinHeight="165" 
     MaxHeight="300"
     d:DesignHeight="400"
     d:DesignWidth="200"
@@ -36,39 +35,46 @@
     </Page.Resources>
 
 
-    <StackPanel Padding="2,0">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
 
-        <Border Width="50" Visibility="Collapsed">
-            <Border.Resources>
+        <ContentControl Visibility="Collapsed" Grid.ColumnSpan="2" Height="{StaticResource AppTitleHeight}" Style="{StaticResource AppIconContentControlStyle}">
+            <ContentControl.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/VignetteIcon.xaml"/>
-            </Border.Resources>
-            <Border.Child>
-                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource VignetteIcon}"/>
-            </Border.Child>
-        </Border>
+            </ContentControl.Resources>
+            <ContentControl.Tag>
+                <ContentControl x:Name="IconContentControl" Template="{StaticResource VignetteIcon}"/>
+            </ContentControl.Tag>
+            <ContentControl.Content>
+                <TextBlock x:Name="TextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            </ContentControl.Content>
+        </ContentControl>
 
         <!--Amount-->
-        <RelativePanel>
-            <TextBlock x:Name="AmountTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="AmountPicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
-        </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="AmountSlider"/>
+        <TextBlock x:Name="AmountTextBlock" Grid.Row="1" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="AmountPicker" Grid.Column="2" Grid.Row="1" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:TouchSlider x:Name="AmountSlider" Grid.Column="1" Grid.Row="1" Margin="4,0"/>
 
         <!--Curve-->
-        <RelativePanel>
-            <TextBlock x:Name="CurveTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <hsvColorPickers:NumberPicker x:Name="CurvePicker" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
-                           RelativePanel.AlignRightWithPanel="True"/>
-        </RelativePanel>
-        <hsvColorPickers:TouchSlider x:Name="CurveSlider"/>
+        <TextBlock x:Name="CurveTextBlock" Grid.Row="2" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <hsvColorPickers:NumberPicker x:Name="CurvePicker" Grid.Column="2" Grid.Row="2" ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+        <hsvColorPickers:TouchSlider x:Name="CurveSlider" Grid.Column="1" Grid.Row="2" Margin="4,0"/>
 
         <!--Color-->
-        <TextBlock x:Name="ColorTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="ColorButton" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource AppRoundedButtonStyle}">
+        <TextBlock x:Name="ColorTextBlock" Grid.Row="3" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
+        <Button x:Name="ColorButton" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Style="{StaticResource AppRoundedButtonStyle}">
             <brushs:ColorEllipse x:Name="ColorEllipse" Color="Black"/>
         </Button>
 
-        <ContentControl Height="4"/>
-    </StackPanel>
+    </Grid>
 </Page>

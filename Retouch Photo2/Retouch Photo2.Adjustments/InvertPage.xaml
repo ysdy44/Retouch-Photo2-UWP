@@ -5,21 +5,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    MinHeight="165" 
     MaxHeight="300"
     d:DesignHeight="400"
     d:DesignWidth="200"
     >
 
-    <StackPanel Padding="2,0">
-        <Border Width="50" Visibility="Visible">
-            <Border.Resources>
-                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/InvertIcon.xaml"/>
-            </Border.Resources>
-            <Border.Child>
-                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource InvertIcon}"/>
-            </Border.Child>
-        </Border>
-    </StackPanel>
+    <Border>
 
+        <ContentControl Visibility="Collapsed" Grid.ColumnSpan="2" Height="{StaticResource AppTitleHeight}" Style="{StaticResource AppIconContentControlStyle}">
+            <ContentControl.Resources>
+                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/InvertIcon.xaml"/>
+            </ContentControl.Resources>
+            <ContentControl.Tag>
+                <ContentControl x:Name="IconContentControl" Template="{StaticResource InvertIcon}"/>
+            </ContentControl.Tag>
+            <ContentControl.Content>
+                <TextBlock x:Name="TextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            </ContentControl.Content>
+        </ContentControl>
+
+    </Border>
 </Page>
