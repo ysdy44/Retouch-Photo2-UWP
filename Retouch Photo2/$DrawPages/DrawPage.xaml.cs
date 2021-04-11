@@ -3,6 +3,7 @@
 // Difficult:         ★★★★
 // Only:              ★★★★★
 // Complete:      ★★★★★
+using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Photos;
@@ -72,6 +73,12 @@ namespace Retouch_Photo2
         public static Action<FrameworkElement, FrameworkElement> ShowMoreCreate;
 
 
+        /// <summary> Show <see cref="DrawLayout.IsWritable"/> </summary>
+        public static Action<ControlTemplate, string, object> ShowWritable;
+        /// <summary> Hide <see cref="DrawLayout.IsWritable"/> </summary>
+        public static Action HideWritable;
+
+
         //@Construct
         /// <summary>
         /// Initializes a DrawPage. 
@@ -96,8 +103,6 @@ namespace Retouch_Photo2
             this.ConstructLayerManager();
 
             //Menus
-            this.AdjustmentMenu.PaneOpened += (s, e) => this.FullScreenChanged(false);
-            this.AdjustmentMenu.PaneClosed += (s, e) => this.FullScreenChanged(true);
             this.EffectMenu.PaneOpened += (s, e) => this.FullScreenChanged(false);
             this.EffectMenu.PaneClosed += (s, e) => this.FullScreenChanged(true);
 
@@ -111,13 +116,15 @@ namespace Retouch_Photo2
             this.DrawLayout.RightIcon = new Retouch_Photo2.Layers.Icon();
 
             //Gallery
-            this.DrawLayout.GalleryButton.Click += (s, e) => this.ShowGalleryDialog();
-            this.DrawLayout.PCGalleryButton.Click += (s, e) => this.ShowGalleryDialog();
+            this.DrawLayout.GalleryButtonClick += (s, e) => this.ShowGalleryDialog();
             this.ConstructDragAndDrop();
 
             //Flyout
             this.ConstructFillColorFlyout();
             this.ConstructStrokeColorFlyout();
+
+            //Writable
+            this.DrawLayout.WritableCancelButtonClick += (s, e) => this.DrawLayout.HideWritable();
         }
 
         private void RegisterDrawPage()
@@ -143,27 +150,33 @@ namespace Retouch_Photo2
             DrawPage.ShowLayerFlyout += this.LayerExpander.FlyoutShowAt;
 
             //Dialog
-            DrawPage.ShowExport = this.ShowExportDialog;
-            DrawPage.ShowSetup = this.ShowSetupDialog;
-            DrawPage.ShowRename = this.ShowRenameDialog;
-            DrawPage.FullScreen = this.FullScreenChanged;
-            DrawPage.ShowGallery = this.ShowGalleryDialog;
+            DrawPage.ShowExport += this.ShowExportDialog;
+            DrawPage.ShowSetup += this.ShowSetupDialog;
+            DrawPage.ShowRename += this.ShowRenameDialog;
+            DrawPage.FullScreen += this.FullScreenChanged;
+            DrawPage.ShowGallery += this.ShowGalleryDialog;
 
             //DrawLayout
-            this.DrawLayout.TouchbarPicker = TouchbarButton.PickerBorder;
-            this.DrawLayout.TouchbarSlider = TouchbarButton.SliderBorder;
+            TouchbarButton.PickerBorder = this.DrawLayout.TouchbarPicker;
+            TouchbarButton.SliderBorder = this.DrawLayout.TouchbarSlider;
 
             //Gallery
-            DrawPage.ShowGalleryFunc = this.ShowGalleryDialogFunc;
+            DrawPage.ShowGalleryFunc += this.ShowGalleryDialogFunc;
             Photo.FlyoutShow += this.PhotoFlyoutShow;
             Photo.ItemClick += this.PhotoItemClick;
 
             //Flyout
-            DrawPage.ShowFillColorFlyout = this.ShowFillColorFlyout2;
-            DrawPage.ShowStrokeColorFlyout = this.ShowStrokeColorFlyout2;
+            DrawPage.ShowFillColorFlyout += this.ShowFillColorFlyout2;
+            DrawPage.ShowStrokeColorFlyout += this.ShowStrokeColorFlyout2;
             //More
-            DrawPage.ShowMoreTransform = this.ShowMoreTransformFlyout;
-            DrawPage.ShowMoreCreate = this.ShowMoreCreateFlyout;
+            DrawPage.ShowMoreTransform += this.ShowMoreTransformFlyout;
+            DrawPage.ShowMoreCreate += this.ShowMoreCreateFlyout;
+
+            //Writable
+            DrawPage.ShowWritable += this.DrawLayout.ShowWritable;
+            DrawPage.HideWritable += this.DrawLayout.HideWritable;
+            AdjustmentCommand.Edit += this.AdjustmentMenu.Edit;
+            AdjustmentCommand.Remove += this.AdjustmentMenu.Remove;
         }
         private void UnregisterDrawPage()
         {
@@ -188,14 +201,15 @@ namespace Retouch_Photo2
             DrawPage.ShowLayerFlyout -= this.LayerExpander.FlyoutShowAt;
 
             //Dialog
-            DrawPage.ShowExport = null;
-            DrawPage.ShowSetup = null;
-            DrawPage.ShowRename = null;
-            DrawPage.FullScreen = null;
+            DrawPage.ShowExport -= this.ShowExportDialog;
+            DrawPage.ShowSetup -= this.ShowSetupDialog;
+            DrawPage.ShowRename -= this.ShowRenameDialog;
+            DrawPage.FullScreen -= this.FullScreenChanged;
+            DrawPage.ShowGallery -= this.ShowGalleryDialog;
 
             //DrawLayout
-            this.DrawLayout.TouchbarPicker = null;
-            this.DrawLayout.TouchbarSlider = null;
+            TouchbarButton.PickerBorder = null;
+            TouchbarButton.SliderBorder = null;
 
             //Gallery
             DrawPage.ShowGalleryFunc = null;
@@ -203,13 +217,18 @@ namespace Retouch_Photo2
             Photo.ItemClick -= this.PhotoItemClick;
 
             //Flyout
-            DrawPage.ShowFillColorFlyout = null;
-            DrawPage.ShowStrokeColorFlyout = null;
+            DrawPage.ShowFillColorFlyout -= this.ShowFillColorFlyout2;
+            DrawPage.ShowStrokeColorFlyout -= this.ShowStrokeColorFlyout2;
             //More
-            DrawPage.ShowMoreTransform = null;
-            DrawPage.ShowMoreCreate = null;
-        }
+            DrawPage.ShowMoreTransform -= this.ShowMoreTransformFlyout;
+            DrawPage.ShowMoreCreate -= this.ShowMoreCreateFlyout;
 
+            //Writable
+            DrawPage.ShowWritable -= this.DrawLayout.ShowWritable;
+            DrawPage.HideWritable -= this.DrawLayout.HideWritable;
+            AdjustmentCommand.Edit -= this.AdjustmentMenu.Edit;
+            AdjustmentCommand.Remove -= this.AdjustmentMenu.Remove;
+        }
     }
 
 

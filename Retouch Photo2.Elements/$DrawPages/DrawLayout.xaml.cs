@@ -5,8 +5,6 @@
 // Complete:      ★★★★
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Windows.Devices.Input;
-using Windows.System;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -15,6 +13,17 @@ namespace Retouch_Photo2.Elements
     /// <summary> 
     /// <see cref = "DrawPage" />'s layout. 
     /// </summary>
+    [TemplateVisualState(Name = nameof(WritableCollapsed), GroupName = nameof(WritableVisualStateGroup))]
+    [TemplateVisualState(Name = nameof(WritablePhone), GroupName = nameof(WritableVisualStateGroup))]
+    [TemplateVisualState(Name = nameof(WritablePad), GroupName = nameof(WritableVisualStateGroup))]
+    [TemplateVisualState(Name = nameof(WritablePC), GroupName = nameof(WritableVisualStateGroup))]
+    [TemplateVisualState(Name = nameof(Normal), GroupName = nameof(VisualStateGroup))]
+    [TemplateVisualState(Name = nameof(FullScreen), GroupName = nameof(VisualStateGroup))]
+    [TemplateVisualState(Name = nameof(Phone), GroupName = nameof(VisualStateGroup))]
+    [TemplateVisualState(Name = nameof(PhoneShowLeft), GroupName = nameof(VisualStateGroup))]
+    [TemplateVisualState(Name = nameof(PhoneShowRight), GroupName = nameof(VisualStateGroup))]
+    [TemplateVisualState(Name = nameof(Pad), GroupName = nameof(VisualStateGroup))]
+    [TemplateVisualState(Name = nameof(PC), GroupName = nameof(VisualStateGroup))]
     public sealed partial class DrawLayout : UserControl
     {
 
@@ -27,9 +36,9 @@ namespace Retouch_Photo2.Elements
 
         //Touchbar
         /// <summary> TouchbarPickerBorder's child. </summary>
-        public FrameworkElement TouchbarPicker { set => this.TouchbarPickerBorder.Child = value; }
+        public Border TouchbarPicker => this.TouchbarPickerBorder;
         /// <summary> TouchbarSliderBorder's child. </summary>
-        public FrameworkElement TouchbarSlider { set => this.TouchbarSliderBorder.Child = value; }
+        public Border TouchbarSlider => this.TouchbarSliderBorder;
 
 
         //Foot
@@ -50,20 +59,36 @@ namespace Retouch_Photo2.Elements
         //Right
         /// <summary> RightBorder's child. </summary>
         public UIElement RightPanel { get => this.RightBorder.Child; set => this.RightBorder.Child = value; }
-        /// <summary> Gallery button. </summary>   
-        public Button GalleryButton => this._GalleryButton;
-        /// <summary> PC Gallery button. </summary>   
-        public Button PCGalleryButton => this._PCGalleryButton;
-        /// <summary> Gallery ToolTip. </summary>   
-        public ToolTip GalleryToolTip => this._RightPhotosToolTip;
-        /// <summary> Width button. </summary>   
-        public Button WidthButton => this._WidthButton;
-        /// <summary> Width ToolTip. </summary>   
-        public ToolTip WidthToolTip => this._WidthToolTip;
+        /// <summary> GalleryToolTip's content. </summary>   
+        public object GalleryToolTipContent { get => this.GalleryToolTip.Content; set => this.GalleryToolTip.Content = value; }
+        /// <summary> WidthToolTip's content. </summary>   
+        public object WidthToolTipContent { get => this.WidthToolTip.Content; set => this.WidthToolTip.Content = value; }
 
         //Pin
         /// <summary> Pin StackPanel. </summary>   
         public StackPanel PinStackPanel => this._PinStackPanel;
+
+
+        /// <summary> GalleryButton's click. </summary>
+        public event RoutedEventHandler GalleryButtonClick
+        {
+            add
+            {
+                this.GalleryButton.Click += value;
+                this.PCGalleryButton.Click += value;
+            }
+            remove
+            {
+                this.GalleryButton.Click -= value;
+                this.PCGalleryButton.Click -= value;
+            }
+        }
+        /// <summary> WritableCancelButton's click. </summary>
+        public event RoutedEventHandler WritableCancelButtonClick
+        {
+            add => this.WritableCancelButton.Click += value;
+            remove => this.WritableCancelButton.Click -= value;
+        }
 
 
         //@Construct
@@ -106,5 +131,31 @@ namespace Retouch_Photo2.Elements
             };
         }
 
+
+        public void ShowWritable(ControlTemplate icon, string title, object content)
+        {
+            this.WritableIconContentControl.Template = icon;
+            this.WritableTextBlock.Text = title;
+            this.WritableContentPresenter.Content = content;
+
+            this._vsIsWritable = true;
+            this.WritableVisualState = this.WritableVisualState;//State
+
+            this._vsIsFullScreen = true;
+            this.VisualStateCore = this.VisualState;//State
+        }
+
+        public void HideWritable()
+        {
+            this.WritableIconContentControl.Template = null;
+            this.WritableTextBlock.Text = string.Empty;
+            this.WritableContentPresenter.Content = null;
+
+            this._vsIsWritable = false;
+            this.WritableVisualState = this.WritableVisualState;//State
+
+            this._vsIsFullScreen = false;
+            this.VisualState = this.VisualState;//State
+        }
     }
 }

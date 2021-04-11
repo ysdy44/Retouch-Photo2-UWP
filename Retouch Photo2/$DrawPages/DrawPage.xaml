@@ -156,7 +156,7 @@
 
                     <!--Document-->
                     <Button x:Name="DocumentButton" Style="{StaticResource AppButtonStyle}">
-                        <TextBlock x:Name="DocumentTextBlock" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock x:Name="DocumentTextBlock" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
                     </Button>
 
                     <!--Left-->

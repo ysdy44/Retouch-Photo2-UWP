@@ -7,6 +7,7 @@ namespace Retouch_Photo2.Elements
     {
 
         //@VisualState
+        bool _vsIsWritable = false;
         bool _vsIsFullScreen = true;
         DeviceLayoutType _vsDeviceLayoutType = DeviceLayoutType.PC;
         PhoneLayoutType _vsPhoneType = PhoneLayoutType.Hided;
@@ -40,6 +41,26 @@ namespace Retouch_Photo2.Elements
             set => VisualStateManager.GoToState(this, value.Name, true);
         }
         private VisualState VisualStateCore { set => VisualStateManager.GoToState(this, value.Name, false); }
+        /// <summary> 
+        /// Represents the writable visual appearance of UI elements in a specific state.
+        /// </summary>
+        public VisualState WritableVisualState
+        {
+            get
+            {
+                if (this._vsIsWritable == false) return this.WritableCollapsed;
+
+                switch (this._vsDeviceLayoutType)
+                {
+                    case DeviceLayoutType.PC: return this.WritablePC;
+                    case DeviceLayoutType.Pad: return this.WritablePad;
+                    case DeviceLayoutType.Phone: return this.WritablePhone;
+                }
+
+                return this.WritableCollapsed;
+            }
+            set => VisualStateManager.GoToState(this, value.Name, true);
+        }
 
 
 
@@ -58,11 +79,12 @@ namespace Retouch_Photo2.Elements
         }
         /// <summary> Gets or sets the device layout type. </summary>
         public DeviceLayoutType DeviceLayoutType
-        {            
+        {
             set
             {
                 this._vsPhoneType = PhoneLayoutType.Hided;
                 this._vsDeviceLayoutType = value;
+                this.WritableVisualState = this.WritableVisualState;//State
                 this.VisualState = this.VisualState;//State
             }
         }

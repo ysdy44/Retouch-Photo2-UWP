@@ -18,14 +18,14 @@ namespace Retouch_Photo2.Tools
     [TemplateVisualState(Name = nameof(Pressed), GroupName = nameof(CommonStates))]
     [TemplateVisualState(Name = nameof(Selected), GroupName = nameof(CommonStates))]
     [ContentProperty(Name = nameof(Content))]
-    public sealed partial class TouchbarButton  : ContentControl
+    public sealed partial class TouchbarButton : ContentControl
     {
-        
+
         //@Static  
         /// <summary> A border, contains a <see cref="TouchbarButton.Picker"/>. </summary>
-        public static Border PickerBorder = new Border();
+        public static Border PickerBorder { get; set; }
         /// <summary> A border, contains a <see cref="TouchbarButton.Slider"/>. </summary>
-        public static Border SliderBorder = new Border();
+        public static Border SliderBorder { get; set; }
         /// <summary> Instance </summary>
         public static TouchbarButton Instance
         {

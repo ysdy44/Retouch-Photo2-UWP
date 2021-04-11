@@ -15,7 +15,7 @@
     <UserControl.Resources>
         <!--Storyboard-->
         <Storyboard x:Name="WidthToWideStoryboard" >
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_GalleryButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0.2">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="GalleryButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0.2">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="True"/>
             </ObjectAnimationUsingKeyFrames>
@@ -39,7 +39,7 @@
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Name="WideToWidthStoryboard">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="_GalleryButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0.2">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="GalleryButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0.2">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="True"/>
             </ObjectAnimationUsingKeyFrames>
@@ -69,7 +69,118 @@
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WritableVisualStateGroup">
+
+                <!--Collapsed-->
+                <VisualState x:Name="WritableCollapsed"/>
+
+                <!--Phone-->
+                <VisualState x:Name="WritablePhone">
+                    <VisualState.Setters>
+                        <Setter Target = "WritableBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "WritableTransform.Y" Value="0"/>
+                        <Setter Target = "WritableBorder.HorizontalAlignment" Value="Stretch"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--Pad-->
+                <VisualState x:Name="WritablePad">
+                    <VisualState.Setters>
+                        <Setter Target = "WritableBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "WritableTransform.Y" Value="0"/>
+                        <Setter Target = "WritableBorder.Width" Value="500"/>
+                        <Setter Target = "WritableBorder.CornerRadius" Value="6,6,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--PC-->
+                <VisualState x:Name="WritablePC">
+                    <VisualState.Setters>
+                        <Setter Target = "WritableBorder.Visibility" Value="Visible"/>
+                        <Setter Target = "WritableTransform.Y" Value="0"/>
+                        <Setter Target = "WritableBorder.Width" Value="600"/>
+                        <Setter Target = "WritableBorder.CornerRadius" Value="6"/>
+                        <Setter Target = "WritableBorder.Margin" Value="0,10"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualStateGroup.Transitions>
+                    
+                    <!--WritableCollapsed>WritablePhone-->
+                    <VisualTransition From="WritableCollapsed" To="WritablePhone" GeneratedDuration="0:0:0.2">
+                        <VisualTransition.GeneratedEasingFunction>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="Visibility" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="HorizontalAlignment" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            
+                            <DoubleAnimation Storyboard.TargetName="WritableTransform" Storyboard.TargetProperty="Y" From="50" To="0" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </VisualTransition>
+                    <!--WritableCollapsed>WritablePad-->
+                    <VisualTransition From="WritableCollapsed" To="WritablePad" GeneratedDuration="0:0:0.2">
+                        <VisualTransition.GeneratedEasingFunction>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="Visibility" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="Width" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="500"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="CornerRadius" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="6,6,0,0"/>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <DoubleAnimation Storyboard.TargetName="WritableTransform" Storyboard.TargetProperty="Y" From="50" To="0" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </VisualTransition>
+                    <!--WritableCollapsed>WritablePC-->
+                    <VisualTransition From="WritableCollapsed" To="WritablePC" GeneratedDuration="0:0:0.2">
+                        <VisualTransition.GeneratedEasingFunction>
+                            <ExponentialEase Exponent="4.5" EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="Visibility" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="Width" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="600"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="CornerRadius" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="6"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="Margin" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="0,10"/>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <DoubleAnimation Storyboard.TargetName="WritableTransform" Storyboard.TargetProperty="Y" From="50" To="0" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </VisualTransition>
+
+                </VisualStateGroup.Transitions>
+
+            </VisualStateGroup>
             <VisualStateGroup x:Name="VisualStateGroup">
+
 
                 <!--Normal-->
                 <VisualState x:Name="Normal"/>
@@ -104,7 +215,9 @@
                         <Setter Target = "LeftBorder.Visibility" Value="Collapsed"/>
                         <!--Right-->
                         <Setter Target = "RightGrid.Visibility" Value="Collapsed"/>
-                        
+
+                        <Setter Target = "_PinStackPanel.Visibility" Value="Collapsed"/>
+
                     </VisualState.Setters>
                 </VisualState>
 
@@ -112,7 +225,7 @@
                 <!--Phone-->
                 <VisualState x:Name="Phone">
                     <VisualState.Setters>
-                        
+
                         <!--Foot-->
                         <Setter Target = "FootPanel.HorizontalAlignment" Value="Stretch"/>
 
@@ -1014,7 +1127,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="42"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -1082,25 +1195,25 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="42"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="_GalleryButton" Height="42" Style="{StaticResource AppButtonStyle}">
+                <Button x:Name="GalleryButton" Height="{StaticResource AppTitleHeight}" Style="{StaticResource AppButtonStyle}">
                     <ToolTipService.ToolTip>
-                        <ToolTip x:Name="_RightPhotosToolTip" Placement="Left" Style="{StaticResource AppToolTipStyle}"/>
+                        <ToolTip x:Name="GalleryToolTip" Placement="Left" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
                     <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>
                 <Border x:Name="RightBorder" Grid.Row="1"/>
-                <Button x:Name="_WidthButton" Height="42" Visibility="Collapsed" Grid.Row="2" Style="{StaticResource AppButtonStyle}">
+                <Button x:Name="_WidthButton" Visibility="Collapsed" Grid.Row="2" Height="{StaticResource AppTitleHeight}" Style="{StaticResource AppButtonStyle}">
                     <ToolTipService.ToolTip>
-                        <ToolTip x:Name="_WidthToolTip" Placement="Left" Style="{StaticResource AppToolTipStyle}"/>
+                        <ToolTip x:Name="WidthToolTip" Placement="Left" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
                     <FontIcon x:Name="WidthIcon" Glyph="&#xE127;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>
-                <Border x:Name = "GalleryBoder" Height="42" Visibility="Collapsed" Background="{ThemeResource AppLinearBrush}">
-                    <Button x:Name="_PCGalleryButton" Width="90" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedButtonStyle}">
+                <Border x:Name = "GalleryBoder" Visibility="Collapsed" Height="{StaticResource AppTitleHeight}" Background="{ThemeResource AppLinearBrush}">
+                    <Button x:Name="PCGalleryButton" Width="90" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedButtonStyle}">
                         <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                     </Button>
                 </Border>
@@ -1142,6 +1255,46 @@
         <StackPanel x:Name="_PinStackPanel" Grid.Column="3" Grid.RowSpan="2" Orientation="Horizontal"
                          apiContractNotPresent5:Background="{ThemeResource AppForeground}"
                          apiContractPresent5:Background="{ThemeResource AppAcrylicWindowBrush}"/>
+
+
+        <Border x:Name="WritableBorder" Grid.Column="1" Grid.Row="1" MinHeight="50" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Collapsed"
+                         apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                         apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
+            <Border.RenderTransformOrigin>1, 0.5</Border.RenderTransformOrigin>
+            <Border.RenderTransform>
+                <TranslateTransform x:Name="WritableTransform" Y="50"/>
+            </Border.RenderTransform>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.ColumnSpan="3" Padding="10,0" BorderThickness="0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+                    <ContentControl Style="{StaticResource AppIconContentControlStyle}">
+                        <ContentControl.Tag>
+                            <ContentControl x:Name="WritableIconContentControl"/>
+                        </ContentControl.Tag>
+                        <ContentControl.Content>
+                            <TextBlock x:Name="WritableTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                        </ContentControl.Content>
+                    </ContentControl>
+                    <Button x:Name="WritableOKButton" Visibility="Collapsed" Grid.Column="1" Style="{StaticResource AppRoundedButtonStyle}">
+                        <FontIcon Glyph="&#xEC61;" FontFamily="Segoe MDL2 Assets"/>
+                    </Button>
+                    <Button x:Name="WritableCancelButton" Grid.Column="2" Style="{StaticResource AppRoundedButtonStyle}">
+                        <FontIcon Glyph="&#xEB90;" FontFamily="Segoe MDL2 Assets"/>
+                    </Button>
+                </Grid>
+                <ContentPresenter x:Name="WritableContentPresenter" Grid.Column="1" Grid.Row="1" Padding="10,0" VerticalAlignment="Top"/>
+            </Grid>
+        </Border>
+
 
     </Grid>
 </UserControl>

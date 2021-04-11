@@ -226,13 +226,7 @@
     </UserControl.Resources>
 
 
-    <SplitView x:Name="SplitView"
-               DisplayMode="Inline" 
-               OpenPaneLength="200" 
-               PanePlacement="Left"
-               IsPaneOpen="True"
-               PaneBackground="Transparent"
-               >
+    <Grid>
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -267,9 +261,7 @@
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-
-        <SplitView.Pane>
-            <Grid>
+           
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="*" MinHeight="165"/>
@@ -316,18 +308,5 @@
                 <TextBlock x:Name="DisableTextBlock" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
 
             </Grid>
-        </SplitView.Pane>
-
-        <SplitView.Content>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-                <ContentPresenter x:Name="ContentPresenter" VerticalAlignment="Top"/>
-                <Button x:Name="CloseButton" Grid.Row="2" Style="{StaticResource AppRoundedButtonStyle}"/>
-            </Grid>
-        </SplitView.Content>
-    </SplitView>
 
 </UserControl>    

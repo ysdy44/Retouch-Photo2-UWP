@@ -66,13 +66,6 @@ namespace Retouch_Photo2.Menus
         ViewModel SelectionViewModel => App.SelectionViewModel;
 
 
-        //@Delegate
-        /// <summary> Occurs after the splitview pane is closed. </summary>
-        public event TypedEventHandler<SplitView, object> PaneClosed { add => this.SplitView.PaneClosed += value; remove => this.SplitView.PaneClosed -= value; }
-        /// <summary> Occurs when the splitview pane is opened. </summary>
-        public event TypedEventHandler<SplitView, object> PaneOpened { add => this.SplitView.PaneOpened += value; remove => this.SplitView.PaneOpened -= value; }
-
-
         //@VisualState
         bool _vsIsEnabled = false;
         bool _vsIsZeroAdjustments = true;
@@ -127,7 +120,7 @@ namespace Retouch_Photo2.Menus
             }
 
             control.InvalidateItemsControl();//Invalidate
-            control.SplitView.IsPaneOpen = true;
+            Retouch_Photo2.DrawPage.HideWritable?.Invoke();//Delegat
         }));
 
 
@@ -141,12 +134,9 @@ namespace Retouch_Photo2.Menus
         public AdjustmentMenu()
         {
             this.InitializeComponent();
-            this.ConstructStrings(); 
-            this.ConstructGroup(); 
-            AdjustmentCommand.Edit = this.Edit;
-            AdjustmentCommand.Remove = this.Remove;
+            this.ConstructStrings();
+            this.ConstructGroup();
 
-            base.SizeChanged += (s, e) => this.SplitView.OpenPaneLength = e.NewSize.Width;
             base.Loaded += async (s, e) =>
             {
                 if (this.CollectionViewSource.Source == null)
@@ -158,13 +148,6 @@ namespace Retouch_Photo2.Menus
                     }
                 }
                 this.VisualState = this.VisualState;//State
-            };
-
-
-            this.CloseButton.Click += (s, e) =>
-            {
-                this.ContentPresenter.Content = null;
-                this.SplitView.IsPaneOpen = true;
             };
 
 
@@ -194,8 +177,6 @@ namespace Retouch_Photo2.Menus
 
             this.AddControl.Content = resource.GetString("Menus_Adjustment_Add");
             this.FilterButton.Content = resource.GetString("Menus_Adjustment_Filters");
-
-            this.CloseButton.Content = resource.GetString("Menus_Close");
 
             foreach (UIElement child in this.StackPanel.Children)
             {
@@ -239,10 +220,10 @@ namespace Retouch_Photo2.Menus
                             IAdjustment adjustment = Retouch_Photo2.Adjustments.XML.CreateAdjustment(key);
                             this.Add(adjustment);
 
-                            if (adjustment.PageVisibility== Visibility.Visible)
+                            if (adjustment.PageVisibility == Visibility.Visible)
                             {
                                 this.Edit(adjustment);
-                            }   
+                            }
                         };
                     }
                 }
@@ -289,7 +270,11 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        private void Remove(IAdjustment removeAdjustment)
+        /// <summary>
+        /// Remove the adjustment.
+        /// </summary>
+        /// <param name="adjustment"> The removed adjustment. </param>
+        public void Remove(IAdjustment removeAdjustment)
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetFilter);
@@ -326,13 +311,16 @@ namespace Retouch_Photo2.Menus
 
             this.InvalidateItemsControl();//Invalidate
             this.ViewModel.Invalidate();//Invalidate     
+            Retouch_Photo2.DrawPage.HideWritable?.Invoke();//Delegat
         }
 
 
-        private void Edit(IAdjustment adjustment)
+        /// <summary>
+        /// Edit the adjustment.
+        /// </summary>
+        /// <param name="adjustment"> The adjustment. </param>
+        public void Edit(IAdjustment adjustment)
         {
-            if (adjustment.PageVisibility == Visibility.Collapsed) return;
-
             IAdjustmentPage adjustmentPage = Retouch_Photo2.Adjustments.XML.CreateAdjustmentPage(typeof(BrightnessPage), adjustment.Type);
 
             if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
@@ -344,8 +332,7 @@ namespace Retouch_Photo2.Menus
                 adjustmentPage.Follow();
             }
 
-            this.ContentPresenter.Content = adjustmentPage.Self;
-            this.SplitView.IsPaneOpen = false;
+            Retouch_Photo2.DrawPage.ShowWritable?.Invoke(adjustmentPage.Icon, adjustmentPage.Title, adjustmentPage.Self);//Delegat
         }
 
 
