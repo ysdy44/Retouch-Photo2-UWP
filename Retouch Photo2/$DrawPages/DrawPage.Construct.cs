@@ -265,7 +265,7 @@ namespace Retouch_Photo2
 
 
         //FullScreen
-        private void FullScreenChanged() => this.FullScreenChanged();
+        private void FullScreenChanged() => this.FullScreenChanged(null);
         private void FullScreenChanged(bool? isFullScreen)
         {
             if (isFullScreen == false || (isFullScreen == null && this.DrawLayout.IsFullScreen))
