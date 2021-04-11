@@ -9,55 +9,80 @@ namespace Retouch_Photo2.Elements
     public sealed partial class DrawLayout : UserControl
     {
 
-        private PhoneLayoutType PhoneType
+        /// <summary>
+        /// Show the phone layout.
+        /// </summary>
+        /// <param name="type"> The type. </param>
+        private void ShowPhone(PhoneLayoutType type)
         {
-            set
+            if (this._vsPhoneType != PhoneLayoutType.Hided) return;
+
+            //Phone
             {
-                PhoneLayoutType oldValue = this._vsPhoneType;
-                PhoneLayoutType newValue = value;
-
-                this._vsPhoneType = value;
+                this._vsPhoneType = type;
                 this.VisualState = this.VisualState;//State
-
-                switch (newValue)
-                {
-                    case PhoneLayoutType.ShowLeft:
-                    case PhoneLayoutType.ShowRight:
-                        switch (oldValue)
-                        {
-                            case PhoneLayoutType.Hided:
-                                this.Show();
-                                break;
-                        }
-                        break;
-                    case PhoneLayoutType.Hided:
-                        switch (oldValue)
-                        {
-                            case PhoneLayoutType.ShowLeft:
-                            case PhoneLayoutType.ShowRight:
-                                this.Hide();
-                                break;
-                        }
-                        break;
-                }
             }
-        }
 
-
-        /// <summary> Show the dialog. </summary>
-        private void Show()
-        {
             BackRequestedExtension.LayoutIsShow = true;
             BackRequestedExtension.Current.BackRequested += this.BackRequested;
             Window.Current.CoreWindow.KeyDown += this.CoreWindow_KeyDown;
         }
-        /// <summary> Hide the dialog. </summary>
-        private void Hide()
+
+        /// <summary>
+        /// Show writable layout.
+        /// </summary>
+        /// <param name="icon"> The icon. </param>
+        /// <param name="title"> The title. </param>
+        /// <param name="content"> The content. </param>
+        public void ShowWritable(ControlTemplate icon, string title, object content)
         {
+            if (this._vsIsWritable) return;
+
+            //Writable
+            {
+                this.WritableIconContentControl.Template = icon;
+                this.WritableTextBlock.Text = title;
+                this.WritableContentPresenter.Content = content;
+
+                this._vsIsWritable = true;
+                this.WritableVisualState = this.WritableVisualState;//State
+
+                this._vsIsFullScreen = true;
+                this.VisualStateCore = this.VisualState;//State
+            }
+
+            BackRequestedExtension.LayoutIsShow = true;
+            BackRequestedExtension.Current.BackRequested += this.BackRequested;
+            Window.Current.CoreWindow.KeyDown += this.CoreWindow_KeyDown;
+        }
+       
+        /// <summary> Hide the layout. </summary>
+        public void Hide()
+        {
+            //Phone
+            {
+                this._vsPhoneType = PhoneLayoutType.Hided;
+                //this.VisualState = this.VisualState;//State
+            }
+
+            //Writable
+            {
+                this.WritableIconContentControl.Template = null;
+                this.WritableTextBlock.Text = string.Empty;
+                this.WritableContentPresenter.Content = null;
+
+                this._vsIsWritable = false;
+                this.WritableVisualState = this.WritableVisualState;//State
+
+                this._vsIsFullScreen = false;
+                this.VisualState = this.VisualState;//State
+            }
+
             BackRequestedExtension.LayoutIsShow = false;
             BackRequestedExtension.Current.BackRequested -= this.BackRequested;
             Window.Current.CoreWindow.KeyDown -= this.CoreWindow_KeyDown;
         }
+
 
         private void BackRequested(object sender, BackRequestedEventArgs e)
         {

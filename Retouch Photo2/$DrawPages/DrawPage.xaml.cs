@@ -124,7 +124,7 @@ namespace Retouch_Photo2
             this.ConstructStrokeColorFlyout();
 
             //Writable
-            this.DrawLayout.WritableCancelButtonClick += (s, e) => this.DrawLayout.HideWritable();
+            this.DrawLayout.WritableCancelButtonClick += (s, e) => this.DrawLayout.Hide();
         }
 
         private void RegisterDrawPage()
@@ -174,7 +174,7 @@ namespace Retouch_Photo2
 
             //Writable
             DrawPage.ShowWritable += this.DrawLayout.ShowWritable;
-            DrawPage.HideWritable += this.DrawLayout.HideWritable;
+            DrawPage.HideWritable += this.DrawLayout.Hide;
             AdjustmentCommand.Edit += this.AdjustmentMenu.Edit;
             AdjustmentCommand.Remove += this.AdjustmentMenu.Remove;
         }
@@ -225,7 +225,7 @@ namespace Retouch_Photo2
 
             //Writable
             DrawPage.ShowWritable -= this.DrawLayout.ShowWritable;
-            DrawPage.HideWritable -= this.DrawLayout.HideWritable;
+            DrawPage.HideWritable -= this.DrawLayout.Hide;
             AdjustmentCommand.Edit -= this.AdjustmentMenu.Edit;
             AdjustmentCommand.Remove -= this.AdjustmentMenu.Remove;
         }

@@ -101,61 +101,34 @@ namespace Retouch_Photo2.Elements
             this.Loaded += (s, e) => this.VisualStateCore = this.VisualState;//State
 
             //Foot
-            this._LeftIcon.Tapped += (s, e) => this.PhoneType = PhoneLayoutType.ShowLeft;
+            this._LeftIcon.Tapped += (s, e) => this.ShowPhone(PhoneLayoutType.ShowLeft);
             this._LeftIcon.PointerEntered += (s, e) =>
             {
                 if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
                 {
-                    this.PhoneType = PhoneLayoutType.ShowLeft;
+                    this.ShowPhone(PhoneLayoutType.ShowLeft);
                 }
             };
-            this._RightIcon.Tapped += (s, e) => this.PhoneType = PhoneLayoutType.ShowRight;
+            this._RightIcon.Tapped += (s, e) => this.ShowPhone(PhoneLayoutType.ShowRight);
             this._RightIcon.PointerEntered += (s, e) =>
             {
                 if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
                 {
-                    this.PhoneType = PhoneLayoutType.ShowRight;
+                    this.ShowPhone(PhoneLayoutType.ShowRight);
                 }
             };
 
             //DismissOverlay
-            this.DismissOverlay.PointerPressed += (s, e) => this.PhoneType = PhoneLayoutType.Hided;
+            this.DismissOverlay.PointerPressed += (s, e) => this.Hide();
 
             //Width
-            this._WidthButton.Click += (s, e) =>
+            this.WidthButton.Click += (s, e) =>
             {
                 if (this.RightGrid.ActualWidth < 100)
                     this.WidthToWideStoryboard.Begin();//Storyboard
                 else
                     this.WideToWidthStoryboard.Begin();//Storyboard
             };
-        }
-
-
-        public void ShowWritable(ControlTemplate icon, string title, object content)
-        {
-            this.WritableIconContentControl.Template = icon;
-            this.WritableTextBlock.Text = title;
-            this.WritableContentPresenter.Content = content;
-
-            this._vsIsWritable = true;
-            this.WritableVisualState = this.WritableVisualState;//State
-
-            this._vsIsFullScreen = true;
-            this.VisualStateCore = this.VisualState;//State
-        }
-
-        public void HideWritable()
-        {
-            this.WritableIconContentControl.Template = null;
-            this.WritableTextBlock.Text = string.Empty;
-            this.WritableContentPresenter.Content = null;
-
-            this._vsIsWritable = false;
-            this.WritableVisualState = this.WritableVisualState;//State
-
-            this._vsIsFullScreen = false;
-            this.VisualState = this.VisualState;//State
         }
     }
 }
