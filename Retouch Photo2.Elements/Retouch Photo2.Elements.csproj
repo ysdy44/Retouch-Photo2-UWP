@@ -127,6 +127,7 @@
     <Compile Include="CheckControl.xaml.cs">
       <DependentUpon>CheckControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CoreCursorExtension.cs" />
     <Compile Include="Dialog.BackRequested.cs" />
     <Compile Include="DialogWide.BackRequested.cs" />
     <Compile Include="DialogWide.xaml.cs">
