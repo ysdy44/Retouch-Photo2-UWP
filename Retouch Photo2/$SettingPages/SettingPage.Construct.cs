@@ -361,7 +361,7 @@ namespace Retouch_Photo2
             this.Key00StackPanel.Children.Add(constructKeyContentControl("Shift", "Tools_MoreTransform_Ratio"));
             this.Key00StackPanel.Children.Add(constructKeyContentControl("Shift", "Tools_MoreCreate_Square"));
             this.Key00StackPanel.Children.Add(constructKeyContentControl("Ctrl", "Tools_MoreCreate_Center"));
-            this.Key00StackPanel.Children.Add(constructKeyContentControl("Space", "Menus_Transformer_StepFrequency"));
+            this.Key00StackPanel.Children.Add(constructKeyContentControl("Space", "Menus_Transformer_SnapToTick"));
             this.Key00StackPanel.Children.Add(constructKeyContentControl("Space", "$SettingPage_Key_Rotate"));
 
             foreach (KeyboardAccelerator2 key in keys)

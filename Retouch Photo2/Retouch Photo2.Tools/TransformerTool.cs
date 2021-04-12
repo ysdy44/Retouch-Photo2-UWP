@@ -32,7 +32,7 @@ namespace Retouch_Photo2.Tools
         bool IsSnap => this.SettingViewModel.IsSnap;
         bool IsRatio => this.SettingViewModel.IsRatio;
         bool IsCenter => this.SettingViewModel.IsCenter;
-        bool IsStepFrequency => this.SettingViewModel.IsStepFrequency;
+        bool IsSnapToTick => this.SettingViewModel.IsSnapToTick;
 
 
         TransformerMode TransformerMode = TransformerMode.None;
@@ -70,7 +70,7 @@ namespace Retouch_Photo2.Tools
             //Selection
             /// Scaling <see cref="TextArtisticLayer"/> equally.
             bool isRatio = this.IsRatio || this.SelectionViewModel.LayerType == LayerType.TextArtistic;
-            Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.SelectionViewModel.StartingTransformer, isRatio, this.IsCenter, this.IsStepFrequency);
+            Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.SelectionViewModel.StartingTransformer, isRatio, this.IsCenter, this.IsSnapToTick);
 
             //Method
             this.MethodViewModel.MethodTransformMultipliesDelta(transformer);
@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Tools
             //Selection
             /// Scaling <see cref="TextArtisticLayer"/> equally.
             bool isRatio = this.IsRatio || this.SelectionViewModel.LayerType == LayerType.TextArtistic;
-            Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.SelectionViewModel.StartingTransformer, isRatio, this.IsCenter, this.IsStepFrequency);
+            Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.SelectionViewModel.StartingTransformer, isRatio, this.IsCenter, this.IsSnapToTick);
 
             //Method
             this.MethodViewModel.MethodTransformMultipliesComplete(transformer);

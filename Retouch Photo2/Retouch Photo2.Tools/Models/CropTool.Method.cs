@@ -75,7 +75,7 @@ namespace Retouch_Photo2.Tools.Models
             if (this.IsMove == false)//Transformer
             {
                 //Transformer
-                Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, layer.Transform.StartingCropTransformer, this.IsRatio, this.IsCenter, this.IsStepFrequency);
+                Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, layer.Transform.StartingCropTransformer, this.IsRatio, this.IsCenter, this.IsSnapToTick);
 
                 //Refactoring
                 layer.IsRefactoringRender = true;

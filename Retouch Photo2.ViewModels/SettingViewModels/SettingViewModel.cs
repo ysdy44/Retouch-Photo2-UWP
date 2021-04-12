@@ -74,17 +74,17 @@ namespace Retouch_Photo2.ViewModels
         }
         private bool isSquare;
 
-        /// <summary> Step Frequency when spinning. </summary>
-        public bool IsStepFrequency
+        /// <summary> Snap to tick when spinning. </summary>
+        public bool IsSnapToTick
         {
-            get => this.isStepFrequency;
+            get => this.isSnapToTick; 
             set
             {
-                this.isStepFrequency = value;
-                this.OnPropertyChanged(nameof(this.IsStepFrequency));//Notify 
+                this.isSnapToTick = value;
+                this.OnPropertyChanged(nameof(this.IsSnapToTick));//Notify 
             }
         }
-        private bool isStepFrequency;
+        private bool isSnapToTick;
 
         /// <summary> Mode of composite between layers. </summary>
         public MarqueeCompositeMode CompositeMode

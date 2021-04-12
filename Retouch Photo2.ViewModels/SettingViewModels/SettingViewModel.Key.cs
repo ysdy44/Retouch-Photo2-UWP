@@ -41,7 +41,7 @@ namespace Retouch_Photo2.ViewModels
             switch (e.VirtualKey)
             {
                 case VirtualKey.Shift: if (this.KeyShift == false) this.KeyShift = this.IsRatio = this.IsSquare = true; break;
-                case VirtualKey.Space: if (this.KeySpace == false) this.KeySpace = this.IsStepFrequency = true; break;
+                case VirtualKey.Space: if (this.KeySpace == false) this.KeySpace = this.IsSnapToTick = true; break;
                 case VirtualKey.Control: if (this.KeyCtrl == false) this.KeyCtrl = this.IsCenter = true; break;
                 default: break;
             }
@@ -76,7 +76,7 @@ namespace Retouch_Photo2.ViewModels
             switch (e.VirtualKey)
             {
                 case VirtualKey.Shift: if (this.KeyShift) this.KeyShift = this.IsRatio = this.IsSquare = false; break;
-                case VirtualKey.Space: if (this.KeySpace) this.KeySpace = this.IsStepFrequency = false; break;
+                case VirtualKey.Space: if (this.KeySpace) this.KeySpace = this.IsSnapToTick = false; break;
                 case VirtualKey.Control: if (this.KeyCtrl) this.KeyCtrl = this.IsCenter = false; break;
                 default: break;
             }

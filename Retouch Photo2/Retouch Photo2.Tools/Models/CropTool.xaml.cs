@@ -31,7 +31,7 @@ namespace Retouch_Photo2.Tools.Models
 
         bool IsRatio => this.SettingViewModel.IsRatio;
         bool IsCenter => this.SettingViewModel.IsCenter;
-        bool IsStepFrequency => this.SettingViewModel.IsStepFrequency;
+        bool IsSnapToTick => this.SettingViewModel.IsSnapToTick;
 
         VectorBorderSnap Snap => this.ViewModel.VectorBorderSnap;
         bool IsSnap => this.SettingViewModel.IsSnap;

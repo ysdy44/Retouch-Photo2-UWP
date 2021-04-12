@@ -227,7 +227,7 @@ namespace Retouch_Photo2.Menus
                             this.YPicker.IsEnabled = true;
 
                             this.RatioToggleControl.IsEnabled = true;
-                            this.StepFrequencyButton.IsEnabled = true;
+                            this.SnapToTickButton.IsEnabled = true;
 
                             this.IndicatorControl.Mode = this.IndicatorMode;
                             this.PositionRemoteButton.IsEnabled = true;
@@ -268,7 +268,7 @@ namespace Retouch_Photo2.Menus
                             this.IndicatorControl.Mode = IndicatorMode.None;
                             this.PositionRemoteButton.IsEnabled = false;
                             this.RatioToggleControl.IsEnabled = false;
-                            this.StepFrequencyButton.IsEnabled = false;
+                            this.SnapToTickButton.IsEnabled = false;
                         }
                     }
                     break;
@@ -322,7 +322,7 @@ namespace Retouch_Photo2.Menus
 
             this.RotateTextBlock.Text = resource.GetString("Menus_Transformer_Rotate");
             this.SkewTextBlock.Text = resource.GetString("Menus_Transformer_Skew");
-            this.StepFrequencyToolTip.Content = resource.GetString("Menus_Transformer_StepFrequency");
+            this.SnapToTickToolTip.Content = resource.GetString("Menus_Transformer_SnapToTick");
 
             this.XTextBlock.Text = resource.GetString("Menus_Transformer_X");
             this.YTextBlock.Text = resource.GetString("Menus_Transformer_Y");
