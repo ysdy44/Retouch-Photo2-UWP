@@ -239,6 +239,7 @@ namespace Retouch_Photo2
             this.CanvasBackgroundChanged.Clear();
             this.CanvasBackgroundStackPanel.Children.Clear();
             this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(0, cannnel));
+            this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(22, cannnel));
             this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(46, cannnel));
             this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(92, cannnel));
             this.CanvasBackgroundStackPanel.Children.Add(constructLayersHeightButton(138, cannnel));
