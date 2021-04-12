@@ -167,6 +167,14 @@ namespace Retouch_Photo2.Tools
 
             foreach (UIElement child in this.MoreStackPanel.Children)
             {
+                if (child is TextBlock textBlock)
+                {
+                    string key = textBlock.Name;
+                    string title = resource.GetString($"Tools_{key}");
+
+                    textBlock.Text = title;
+                }
+
                 if (child is ListViewItem item)
                 {
                     if (item.Content is ContentControl control)

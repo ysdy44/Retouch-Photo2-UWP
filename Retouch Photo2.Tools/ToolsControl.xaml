@@ -32,6 +32,7 @@
                 <StackPanel x:Name="MoreStackPanel" Padding="{StaticResource AppPanelPadding}" HorizontalAlignment="Stretch">
 
                     <!--Pattern-->
+                    <TextBlock x:Name="Pattern" Style="{StaticResource AppTextBlockStyle}"/>
                     <ListViewItem x:Name="PatternGrid">
                         <ContentControl Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
@@ -102,6 +103,7 @@
                     </ListViewItem>
 
                     <!--Geometry2-->
+                    <TextBlock x:Name="Geometry" Style="{StaticResource AppTextBlockStyle}"/>
                     <ListViewItem x:Name="GeometryPentagon">
                         <ContentControl Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
