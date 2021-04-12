@@ -318,7 +318,7 @@ namespace Retouch_Photo2
             this.ApplicationView.Title = string.Empty;
 
             //Key
-            this.SettingViewModel.UnRegisteKey();
+            this.SettingViewModel.UnregisteKey();
 
             SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
         }

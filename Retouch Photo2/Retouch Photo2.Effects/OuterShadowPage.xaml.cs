@@ -400,7 +400,7 @@ namespace Retouch_Photo2.Effects.Pages
                 textBox.IsEnabled = false;
                 this.ColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
                 this.ColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
-                textBox.GotFocus += (s, e) => this.SettingViewModel.UnRegisteKey();
+                textBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
                 textBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             }
 

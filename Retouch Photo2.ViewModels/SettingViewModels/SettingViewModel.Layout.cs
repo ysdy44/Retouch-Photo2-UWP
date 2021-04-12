@@ -37,9 +37,9 @@ namespace Retouch_Photo2.ViewModels
             Window.Current.SizeChanged += this.Window_SizeChanged;
         }
         /// <summary>
-        /// UnRegiste the device-layout.
+        /// Unregiste the device-layout.
         /// </summary>
-        public void UnRegisteDeviceLayout()
+        public void UnregisteDeviceLayout()
         {
             Window.Current.SizeChanged -= this.Window_SizeChanged;
         }

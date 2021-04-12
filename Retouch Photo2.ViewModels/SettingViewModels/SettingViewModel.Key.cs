@@ -25,9 +25,9 @@ namespace Retouch_Photo2.ViewModels
             Window.Current.CoreWindow.KeyUp += this.CoreWindow_KeyUp;
         }
         /// <summary>
-        /// UnRegiste the key.
+        /// Unregiste the key.
         /// </summary>
-        public void UnRegisteKey()
+        public void UnregisteKey()
         {            
             Window.Current.CoreWindow.KeyDown -= this.CoreWindow_KeyDown;
             Window.Current.CoreWindow.KeyUp -= this.CoreWindow_KeyUp;

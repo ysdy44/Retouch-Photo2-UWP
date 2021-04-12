@@ -216,7 +216,7 @@ namespace Retouch_Photo2
                 //textBox.IsEnabled = false;
                 //this.ColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
                 //this.ColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
-                textBox.GotFocus += (s, e) => this.SettingViewModel.UnRegisteKey();
+                textBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
                 textBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             }
 
@@ -366,7 +366,7 @@ namespace Retouch_Photo2
                 textBox.IsEnabled = false;
                 this.FillColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
                 this.FillColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
-                textBox.GotFocus += (s, e) => this.SettingViewModel.UnRegisteKey();
+                textBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
                 textBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             }
 
@@ -408,7 +408,7 @@ namespace Retouch_Photo2
                 textBox.IsEnabled = false;
                 this.StrokeColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
                 this.StrokeColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
-                textBox.GotFocus += (s, e) => this.SettingViewModel.UnRegisteKey();
+                textBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
                 textBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             }
 
