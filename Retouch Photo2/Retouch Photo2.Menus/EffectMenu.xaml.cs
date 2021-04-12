@@ -129,43 +129,47 @@ namespace Retouch_Photo2.Menus
                 {
                     if (item.Content is Grid grid)
                     {
-                        string key = item.Name;
-                        EffectType type = EffectType.None;
-                        try
-                        {
-                            type = (EffectType)Enum.Parse(typeof(EffectType), key);
-                        }
-                        catch (Exception) { }
-
                         if (grid.Children.First() is ContentControl control)
                         {
-                            //Button
-                            item.Tapped += (s, e) =>
+                            if (grid.Children.Last() is CheckControl check)
                             {
-                                if (item.IsSelected) 
+                                string key = item.Name;
+                                EffectType type = EffectType.None;
+                                try
                                 {
-                                    IEffectPage effectPage = Retouch_Photo2.Effects.XML.CreateEffectPage(typeof(GaussianBlurPage), type);
-                                    effectPage.FollowPage(this.Effect);
-                                    this.ContentPresenter.Content = effectPage.Self;
-                                    this.SplitView.IsPaneOpen = false;
+                                    type = (EffectType)Enum.Parse(typeof(EffectType), key);
                                 }
-                                else item.IsSelected = true;
-                            };
-                        }
+                                catch (Exception) { }
 
-                        if (grid.Children.Last() is CheckControl check)
-                        {
-                            //Button
-                            check.Tapped += (s, e) =>
-                            {
-                                e.Handled = true;
-                                bool isOn = !check.IsChecked;
 
-                                IEffectPage effectPage = Retouch_Photo2.Effects.XML.CreateEffectPage(typeof(GaussianBlurPage), type);
-                                effectPage?.Switch(isOn);
+                                //Button
+                                item.Tapped += (s, e) =>
+                                {
+                                    if (item.IsSelected)
+                                    {
+                                        IEffectPage effectPage = Retouch_Photo2.Effects.XML.CreateEffectPage(typeof(GaussianBlurPage), type);
+                                        effectPage.FollowPage(this.Effect);
+                                        this.ContentPresenter.Content = effectPage.Self;
+                                        this.SplitView.IsPaneOpen = false;
+                                    }
+                                    else Switch();
+                                };
 
-                                check.IsChecked = isOn;
-                            };
+
+                                //Button
+                                check.Tapped += (s, e) => { Switch(); e.Handled = true; };
+
+
+                                void Switch()
+                                {
+                                    bool isOn = !check.IsChecked;
+
+                                    IEffectPage effectPage = Retouch_Photo2.Effects.XML.CreateEffectPage(typeof(GaussianBlurPage), type);
+                                    effectPage?.Switch(isOn);
+
+                                    check.IsChecked = isOn;
+                                }
+                            }
                         }
                     }
                 }
