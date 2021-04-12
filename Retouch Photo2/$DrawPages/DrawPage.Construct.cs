@@ -265,26 +265,15 @@ namespace Retouch_Photo2
 
 
         //FullScreen
-        private void FullScreenChanged() => this.FullScreenChanged(null);
-        private void FullScreenChanged(bool? isFullScreen)
+        private void FullScreenChanged()
         {
-            if (isFullScreen == false || (isFullScreen == null && this.DrawLayout.IsFullScreen))
+            if (this.DrawLayout.IsFullScreen)
             {
-                //Destination
-                Vector2 destinationPostion = this.SettingViewModel.FullScreenOffset;
-                this.ViewModel.CanvasTransformer.Position -= destinationPostion;
-                this.ViewModel.CanvasTransformer.ReloadMatrix();
-
                 this.DrawLayout.IsFullScreen = false;
                 this.UnFullScreenButton.Visibility = Visibility.Collapsed;
             }
-            else if (isFullScreen == true || (isFullScreen == null && this.DrawLayout.IsFullScreen == false))
+            else 
             {
-                //Destination
-                Vector2 destinationPostion = this.SettingViewModel.FullScreenOffset;
-                this.ViewModel.CanvasTransformer.Position += destinationPostion;
-                this.ViewModel.CanvasTransformer.ReloadMatrix();
-
                 this.DrawLayout.IsFullScreen = true;
                 this.UnFullScreenButton.Visibility = Visibility.Visible;
             }
