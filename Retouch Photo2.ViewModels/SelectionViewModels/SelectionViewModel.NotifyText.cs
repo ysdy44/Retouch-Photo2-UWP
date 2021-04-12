@@ -34,7 +34,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private string fontFamily = "Arial";
-        
+
         /// <summary> <see cref="ITextLayer"/>'s font size. </summary>
         public float FontSize
         {
@@ -91,8 +91,8 @@ namespace Retouch_Photo2.ViewModels
 
             ITextLayer fextLayer = this.GetTextLayer(layer);
             if (fextLayer == null) return;
-            
-            TextLayer.FontCopyWith(this, fextLayer);
+
+            TextLayer.FontCopyWith(fextLayer, this);
         }
         /// <summary> Gets the <see cref="ITextLayer"/>. </summary>     
         private ITextLayer GetTextLayer(ILayer layer)
