@@ -13,7 +13,6 @@ namespace Retouch_Photo2.Layers
     public partial class LayerControl : UserControl
     {
 
-
         //@Construct
         /// <summary>
         /// Initializes a layer-control.
@@ -25,6 +24,11 @@ namespace Retouch_Photo2.Layers
             this.InitializeComponent();
             this.ControlHeight = controlHeight;
             this.Type = type;
+
+            this.Unloaded += (s, e) =>
+            {
+                this.IconCanvasControl.RemoveFromVisualTree();
+            };
         }
         /// <summary>
         /// Initializes a layer-control.
@@ -33,7 +37,7 @@ namespace Retouch_Photo2.Layers
         public LayerControl(ILayer layer)
         {
             this.InitializeComponent();
-            this.ConstructStringsCore(layer);
+            this.ConstructStringsCore(layer.Type);
             this.ControlHeight = LayerManager.ControlsHeight;
 
             this.ConstructIcon(LayerManager.CanvasDevice);
@@ -41,6 +45,11 @@ namespace Retouch_Photo2.Layers
             this.ConstructButton(layer);
             this.ConstructManipulation(layer);
             this.ConstructPointer(layer);
+
+            this.Unloaded += (s, e) =>
+            {
+                this.IconCanvasControl.RemoveFromVisualTree();
+            };
         }
 
     }

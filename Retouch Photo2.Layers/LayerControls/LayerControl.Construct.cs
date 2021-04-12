@@ -13,9 +13,9 @@ namespace Retouch_Photo2.Layers
 
         //Strings
         readonly static ResourceLoader resource = ResourceLoader.GetForCurrentView();
-        private void ConstructStringsCore(ILayer layer)
+        private void ConstructStringsCore(LayerType type)
         {
-            this.Type = LayerControl.resource.GetString($"Layers_{layer.Type}");
+            this.Type = LayerControl.resource.GetString($"Layers_{type}");
         }
 
         private void ConstructIcon(CanvasDevice customDevice2)
