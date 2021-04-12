@@ -17,13 +17,13 @@ namespace Retouch_Photo2.Tools
     /// <see cref="ITransformerTool"/>'s TransformerTool.
     /// </summary>
     public partial class TransformerTool : ITransformerTool
-    {        
+    {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;        
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
         Transformer Transformer { get => this.SelectionViewModel.Transformer; set => this.SelectionViewModel.Transformer = value; }
         ListViewSelectionMode Mode => this.SelectionViewModel.SelectionMode;
@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Tools
 
 
         TransformerMode TransformerMode = TransformerMode.None;
-        
+
 
         public bool Started(Vector2 startingPoint, Vector2 point)
         {
@@ -59,17 +59,19 @@ namespace Retouch_Photo2.Tools
         {
             if (this.Mode == ListViewSelectionMode.None) return false;
             if (this.TransformerMode == TransformerMode.None) return false;
-            
+
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
             Vector2 canvasPoint = Vector2.Transform(point, inverseMatrix);
 
             //Snap
             if (this.IsSnap && this.TransformerMode.IsScale()) canvasPoint = this.Snap.Snap(canvasPoint);
-            
+
             //Selection
-            Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.SelectionViewModel.StartingTransformer, this.IsRatio, this.IsCenter, this.IsStepFrequency);
-      
+            /// Scaling <see cref="TextArtisticLayer"/> equally.
+            bool isRatio = this.IsRatio || this.SelectionViewModel.LayerType == LayerType.TextArtistic;
+            Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.SelectionViewModel.StartingTransformer, isRatio, this.IsCenter, this.IsStepFrequency);
+
             //Method
             this.MethodViewModel.MethodTransformMultipliesDelta(transformer);
             return true;
@@ -93,7 +95,9 @@ namespace Retouch_Photo2.Tools
             }
 
             //Selection
-            Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.SelectionViewModel.StartingTransformer, this.IsRatio, this.IsCenter, this.IsStepFrequency);
+            /// Scaling <see cref="TextArtisticLayer"/> equally.
+            bool isRatio = this.IsRatio || this.SelectionViewModel.LayerType == LayerType.TextArtistic;
+            Transformer transformer = Transformer.Controller(this.TransformerMode, canvasStartingPoint, canvasPoint, this.SelectionViewModel.StartingTransformer, isRatio, this.IsCenter, this.IsStepFrequency);
 
             //Method
             this.MethodViewModel.MethodTransformMultipliesComplete(transformer);
