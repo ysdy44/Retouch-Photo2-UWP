@@ -80,8 +80,8 @@
     </UserControl.Resources>
 
 
-    <Grid Padding="4,0">
-        
+    <Grid x:Name="RootGrid" Padding="4,0">
+
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
@@ -90,52 +90,52 @@
                 <VisualState x:Name="Normal"/>
 
                 <!--None-->
-                <VisualState x:Name="None">
+                <VisualState x:Name="NoneState">
                     <VisualState.Setters>
-                        <Setter Target = "NoneButton.IsChecked" Value="True"/>
+                        <Setter Target = "None.IsChecked" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--Red-->
-                <VisualState x:Name="Red">
+                <VisualState x:Name="RedState">
                     <VisualState.Setters>
-                        <Setter Target = "RedButton.IsChecked" Value="True"/>
+                        <Setter Target = "Red.IsChecked" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--Orange-->
-                <VisualState x:Name="Orange">
+                <VisualState x:Name="OrangeState">
                     <VisualState.Setters>
-                        <Setter Target = "OrangeButton.IsChecked" Value="True"/>
+                        <Setter Target = "Orange.IsChecked" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--Yellow-->
-                <VisualState x:Name="Yellow">
+                <VisualState x:Name="YellowState">
                     <VisualState.Setters>
-                        <Setter Target = "YellowButton.IsChecked" Value="True"/>
+                        <Setter Target = "Yellow.IsChecked" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--Green-->
-                <VisualState x:Name="Green">
+                <VisualState x:Name="GreenState">
                     <VisualState.Setters>
-                        <Setter Target = "GreenButton.IsChecked" Value="True"/>
+                        <Setter Target = "Green.IsChecked" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--Blue-->
-                <VisualState x:Name="Blue">
+                <VisualState x:Name="BlueState">
                     <VisualState.Setters>
-                        <Setter Target = "BlueButton.IsChecked" Value="True"/>
+                        <Setter Target = "Blue.IsChecked" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
                 <!--Purple-->
-                <VisualState x:Name="Purple">
+                <VisualState x:Name="PurpleState">
                     <VisualState.Setters>
-                        <Setter Target = "PurpleButton.IsChecked" Value="True"/>
+                        <Setter Target = "Purple.IsChecked" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        
-        
+
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -145,15 +145,43 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        
-        <RadioButton x:Name="NoneButton" Grid.Column="0" Style="{StaticResource RadioButtonStyle}"/>
-        <RadioButton x:Name="RedButton" Grid.Column="1" Style="{StaticResource RadioButtonStyle}"/>
-        <RadioButton x:Name="OrangeButton" Grid.Column="2" Style="{StaticResource RadioButtonStyle}"/>
-        <RadioButton x:Name="YellowButton" Grid.Column="3" Style="{StaticResource RadioButtonStyle}"/>
-        <RadioButton x:Name="GreenButton" Grid.Column="4" Style="{StaticResource RadioButtonStyle}"/>
-        <RadioButton x:Name="BlueButton" Grid.Column="5" Style="{StaticResource RadioButtonStyle}"/>
-        <RadioButton x:Name="PurpleButton" Grid.Column="6" Style="{StaticResource RadioButtonStyle}"/>
-   
+
+        <RadioButton x:Name="None" Grid.Column="0" Style="{StaticResource RadioButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+        </RadioButton>
+        <RadioButton x:Name="Red" Grid.Column="1" Style="{StaticResource RadioButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+        </RadioButton>
+        <RadioButton x:Name="Orange" Grid.Column="2" Style="{StaticResource RadioButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+        </RadioButton>
+        <RadioButton x:Name="Yellow" Grid.Column="3" Style="{StaticResource RadioButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+        </RadioButton>
+        <RadioButton x:Name="Green" Grid.Column="4" Style="{StaticResource RadioButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+        </RadioButton>
+        <RadioButton x:Name="Blue" Grid.Column="5" Style="{StaticResource RadioButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+        </RadioButton>
+        <RadioButton x:Name="Purple" Grid.Column="6" Style="{StaticResource RadioButtonStyle}">
+            <ToolTipService.ToolTip>
+                <ToolTip Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+        </RadioButton>
+
     </Grid>
 
 </UserControl>

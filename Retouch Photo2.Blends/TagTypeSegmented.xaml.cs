@@ -4,6 +4,7 @@
 // Only:              ★★
 // Complete:      ★★
 using System;
+using Windows.ApplicationModel.Resources;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -32,26 +33,26 @@ namespace Retouch_Photo2.Blends
             {
                 switch (this._vsTagType)
                 {
-                    case TagType.None: return this.None;
-                    case TagType.Red: return this.Red;
-                    case TagType.Orange: return this.Orange;
-                    case TagType.Yellow: return this.Yellow;
-                    case TagType.Green: return this.Green;
-                    case TagType.Blue: return this.Blue;
-                    case TagType.Purple: return this.Purple;
+                    case TagType.None: return this.NoneState;
+                    case TagType.Red: return this.RedState;
+                    case TagType.Orange: return this.OrangeState;
+                    case TagType.Yellow: return this.YellowState;
+                    case TagType.Green: return this.GreenState;
+                    case TagType.Blue: return this.BlueState;
+                    case TagType.Purple: return this.PurpleState;
                     default: return this.Normal;
                 }
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-        
+
         #region DependencyProperty
 
 
         /// <summary> Gets or sets the tag type. </summary>
         public TagType Type
         {
-            get  => (TagType)base.GetValue(TypeProperty);
+            get => (TagType)base.GetValue(TypeProperty);
             set => base.SetValue(TypeProperty, value);
         }
         /// <summary> Identifies the <see cref = "TagTypeSegmented.Type" /> dependency property. </summary>
@@ -77,29 +78,61 @@ namespace Retouch_Photo2.Blends
         public TagTypeSegmented()
         {
             this.InitializeComponent();
-
-            this.ConstructGroup(this.NoneButton, TagType.None);
-            this.ConstructGroup(this.RedButton, TagType.Red);
-            this.ConstructGroup(this.OrangeButton, TagType.Orange);
-            this.ConstructGroup(this.YellowButton, TagType.Yellow);
-            this.ConstructGroup(this.GreenButton, TagType.Green);
-            this.ConstructGroup(this.BlueButton, TagType.Blue);
-            this.ConstructGroup(this.PurpleButton, TagType.Purple);
+            this.ConstructStrings();
+            this.ConstructGroup();
 
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
+    }
 
+    public sealed partial class TagTypeSegmented : UserControl
+    {
 
-        private void ConstructGroup(RadioButton radioButton, TagType tagType)
+        //Strings
+        private void ConstructStrings()
         {
-            Color color = tagType.ToColor();
+            ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            radioButton.Background = new SolidColorBrush(color);
-            radioButton.Click += (s, e) =>
+            foreach (UIElement child in this.RootGrid.Children)
             {
-                this.TypeChanged?.Invoke(this, tagType); //Delegate
-            };
+                if (child is RadioButton button)
+                {
+                    if (ToolTipService.GetToolTip(button) is ToolTip toolTip)
+                    {
+                        string key = button.Name;
+                        string title = resource.GetString($"TagType_{key}");
+
+                        toolTip.Content = title;
+                    }
+                }
+            }
         }
 
+
+        //@Group
+        private void ConstructGroup()
+        {
+            foreach (UIElement child in this.RootGrid.Children)
+            {
+                if (child is RadioButton button)
+                {
+                    string key = button.Name;
+                    TagType type = TagType.None;
+                    try
+                    {
+                        type = (TagType)Enum.Parse(typeof(TagType), key);
+                    }
+                    catch (Exception) { }
+
+
+                    //Button
+                    button.Click += (s, e) => this.TypeChanged?.Invoke(this, type);//Delegate
+
+
+                    Color color = type.ToColor();
+                    button.Background = new SolidColorBrush(color);
+                }
+            }
+        }
     }
 }
