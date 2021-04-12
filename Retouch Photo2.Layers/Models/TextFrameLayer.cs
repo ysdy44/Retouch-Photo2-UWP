@@ -15,6 +15,9 @@ namespace Retouch_Photo2.Layers.Models
         //@Override     
         public override LayerType Type => LayerType.TextFrame;
 
+        /// <summary> Gets or sets the text. </summary>
+        public override string FontText { get; set; } = string.Empty;
+        /// <summary> Gets or sets the size. </summary>
         public override float FontSize { get; set; } = 22.0f;
 
 

@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers.Models
 
         //@Content       
         /// <summary> Gets or sets the text. </summary>
-        public string FontText { get; set; } = string.Empty;
+        public abstract string FontText { get; set; } 
         /// <summary> Gets or sets the size. </summary>
         public abstract float FontSize { get; set; }
         /// <summary> Gets or sets the FontFamily. </summary>
