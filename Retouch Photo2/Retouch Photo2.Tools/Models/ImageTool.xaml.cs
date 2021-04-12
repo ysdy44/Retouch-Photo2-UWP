@@ -73,15 +73,14 @@ namespace Retouch_Photo2.Tools.Models
             //Transformer
             this._sizeWidth = photo.Width;
             this._sizeHeight = photo.Height;
-            Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
-            Transformer transformerDestination = this.CreateTransformer(startingPoint, point, photo.Width, photo.Height);
+            Transformer transformer = this.CreateTransformer(startingPoint, point, photo.Width, photo.Height);
 
             //Mezzanine         
             ImageLayer imageLayer = new ImageLayer
             {
                 Photocopier = photocopier,
                 IsSelected = true,
-                Transform = new Transform(transformerSource, transformerDestination),
+                Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandGeometryStyle
             };
             Layerage imageLayerage = imageLayer.ToLayerage();
@@ -92,7 +91,7 @@ namespace Retouch_Photo2.Tools.Models
             this.MezzanineLayerage = imageLayerage;
             LayerManager.Mezzanine(this.MezzanineLayerage);
 
-            this.SelectionViewModel.Transformer = transformerDestination;//Selection
+            this.SelectionViewModel.Transformer = transformer;//Selection
 
             this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
         }

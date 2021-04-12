@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Layers
         public Transformer Transformer { get; set; }
         /// <summary> The cache of <see cref="Transform.Transformer"/>. </summary>
         public Transformer StartingTransformer { get; private set; }
-        
+
 
         /// <summary> Is cropped? </summary>
         public bool IsCrop { get; set; }
@@ -48,16 +48,7 @@ namespace Retouch_Photo2.Layers
         {
             this.Transformer = transformer;
         }
-        /// <summary>
-        /// Initialize a <see cref = "Transform" />.
-        /// </summary>
-        /// <param name="source"> The source transformer. </param>
-        /// <param name="destination"> The destination transformer. </param>
-        public Transform(Transformer source, Transformer destination)
-        {
-            this.Transformer = destination;
-        }
-        
+
         /// <summary>
         /// Get own copy.
         /// </summary>
@@ -68,7 +59,6 @@ namespace Retouch_Photo2.Layers
             {
                 Transformer = this.Transformer,
                 StartingTransformer = this.StartingTransformer,
-
 
                 IsCrop = this.IsCrop,
                 StartingIsCrop = this.StartingIsCrop,
@@ -156,7 +146,7 @@ namespace Retouch_Photo2.Layers
         {
             if (transform.IsCrop == false) return image;
 
-            
+
             CanvasGeometry canvasGeometry = transform.CropTransformer.ToRectangle(resourceCreator, matrix);
             CanvasCommandList canvasCommandList = new CanvasCommandList(resourceCreator);
 
