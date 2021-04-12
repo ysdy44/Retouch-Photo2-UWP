@@ -183,7 +183,9 @@
 <data name='Tools_Crop_Reset' xml:space='preserve'><value>作物をリセット</value></data>
 <data name='Tools_Crop_Fit' xml:space='preserve'><value>フィットクロップ</value></data>
 <data name='Tools_Crop_Clear' xml:space='preserve'><value>明確な作物</value></data>
+<data name='Tools_Pattern' xml:space='preserve'><value>パターン</value></data>
 <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>ステップ</value></data>
+<data name='Tools_Geometry' xml:space='preserve'><value>ジオメトリ</value></data>
 <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>コーナー</value></data>
 <data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>中心点</value></data>
 <data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>中点</value></data>
@@ -213,7 +215,7 @@
 <data name='Menus_Transformer_X' xml:space='preserve'><value>X軸</value></data>
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Y軸</value></data>
 <data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>比例ズーム</value></data>
-<data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>ステップ周波数</value></data>
+<data name='Menus_Transformer_SnapToTick' xml:space='preserve'><value>ティックにスナップ</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>リモコンの位置</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>アンカー</value></data>
 <data name='Menus_Color_Swatches' xml:space='preserve'><value>見本</value></data>
@@ -353,6 +355,12 @@
 <data name='Blends_Luminosity' xml:space='preserve'><value>輝度</value></data>
 <data name='Blends_Subtract' xml:space='preserve'><value>減算</value></data>
 <data name='Blends_Division' xml:space='preserve'><value>分割</value></data>
+<data name='TagType_Red' xml:space='preserve'><value>赤 オレンジ 黄 緑 青 紫の</value></data>
+<data name='TagType_Orange' xml:space='preserve'><value>オレンジ</value></data>
+<data name='TagType_Yellow' xml:space='preserve'><value>黄</value></data>
+<data name='TagType_Green' xml:space='preserve'><value>緑</value></data>
+<data name='TagType_Blue' xml:space='preserve'><value>青</value></data>
+<data name='TagType_Purple' xml:space='preserve'><value>紫の</value></data>
 <data name='Historys_LayersSetupTransformAdd_Move' xml:space='preserve'><value>キャンバスサイズを設定する</value></data>
 <data name='Historys_LayersSetupTransformMultiplies_Transform' xml:space='preserve'><value>キャンバスサイズを設定する</value></data>
 <data name='Historys_LayeragesArrange_LayersArrange' xml:space='preserve'><value>レイヤーアレンジ</value></data>
@@ -696,6 +704,7 @@
 <data name='Strokes_Offset' xml:space='preserve'><value>オフセット</value></data>
 <data name='Blends_Saturation' xml:space='preserve'><value>飽和</value></data>
 <data name='Blends_Color' xml:space='preserve'><value>色</value></data>
+<data name='TagType_None' xml:space='preserve'><value>なし</value></data>
 <data name='Historys_LayeragesArrange_AddLayer_ConvertToCurves' xml:space='preserve'><value>曲線に変換する</value></data>
 
  </root>

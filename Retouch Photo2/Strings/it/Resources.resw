@@ -183,7 +183,9 @@
 <data name='Tools_Crop_Reset' xml:space='preserve'><value>Reimposta ritaglio</value></data>
 <data name='Tools_Crop_Fit' xml:space='preserve'><value>Fit crop</value></data>
 <data name='Tools_Crop_Clear' xml:space='preserve'><value>Cancella raccolto</value></data>
+<data name='Tools_Pattern' xml:space='preserve'><value>Modello</value></data>
 <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>Passo</value></data>
+<data name='Tools_Geometry' xml:space='preserve'><value>Geometria</value></data>
 <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>Angolo</value></data>
 <data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>Punto centrale</value></data>
 <data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>Punto medio</value></data>
@@ -213,7 +215,7 @@
 <data name='Menus_Transformer_X' xml:space='preserve'><value>Asse X.</value></data>
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Asse Y.</value></data>
 <data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>Zoom proporzionale</value></data>
-<data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>Frequenza del passo</value></data>
+<data name='Menus_Transformer_SnapToTick' xml:space='preserve'><value>Aggancia al segno di spunta</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Posizionare il telecomando</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Ancora</value></data>
 <data name='Menus_Color_Swatches' xml:space='preserve'><value>Campioni</value></data>
@@ -353,6 +355,12 @@
 <data name='Blends_Luminosity' xml:space='preserve'><value>Luminosità</value></data>
 <data name='Blends_Subtract' xml:space='preserve'><value>Sottrarre</value></data>
 <data name='Blends_Division' xml:space='preserve'><value>Divisione</value></data>
+<data name='TagType_Red' xml:space='preserve'><value>Rosso</value></data>
+<data name='TagType_Orange' xml:space='preserve'><value>arancia</value></data>
+<data name='TagType_Yellow' xml:space='preserve'><value>Giallo</value></data>
+<data name='TagType_Green' xml:space='preserve'><value>verde</value></data>
+<data name='TagType_Blue' xml:space='preserve'><value>Blu</value></data>
+<data name='TagType_Purple' xml:space='preserve'><value>Viola</value></data>
 <data name='Historys_LayersSetupTransformAdd_Move' xml:space='preserve'><value>Imposta le dimensioni della tela</value></data>
 <data name='Historys_LayersSetupTransformMultiplies_Transform' xml:space='preserve'><value>Imposta le dimensioni della tela</value></data>
 <data name='Historys_LayeragesArrange_LayersArrange' xml:space='preserve'><value>Gli strati si dispongono</value></data>
@@ -696,6 +704,7 @@
 <data name='Strokes_Offset' xml:space='preserve'><value>Compensare</value></data>
 <data name='Blends_Saturation' xml:space='preserve'><value>Saturazione</value></data>
 <data name='Blends_Color' xml:space='preserve'><value>Colore</value></data>
+<data name='TagType_None' xml:space='preserve'><value>Nessuna</value></data>
 <data name='Historys_LayeragesArrange_AddLayer_ConvertToCurves' xml:space='preserve'><value>Converti in curve</value></data>
 
  </root>

@@ -69,6 +69,7 @@
                     <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
                     <!--Geometry1-->
+                    <TextBlock x:Name="Geometry" Style="{StaticResource AppTextBlockStyle}"/>
                     <ListViewItem x:Name="GeometryRoundRect">
                         <ContentControl Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
@@ -101,9 +102,10 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
+                    
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
                     <!--Geometry2-->
-                    <TextBlock x:Name="Geometry" Style="{StaticResource AppTextBlockStyle}"/>
                     <ListViewItem x:Name="GeometryPentagon">
                         <ContentControl Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
@@ -136,6 +138,8 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
+                    
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
                     <!--Geometry3-->
                     <ListViewItem x:Name="GeometryDount">
@@ -170,6 +174,8 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
+
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
                     <!--Geometry4-->
                     <ListViewItem x:Name="GeometryArrow">

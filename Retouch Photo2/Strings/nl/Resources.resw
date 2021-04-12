@@ -183,7 +183,9 @@
 <data name='Tools_Crop_Reset' xml:space='preserve'><value>Uitsnede resetten</value></data>
 <data name='Tools_Crop_Fit' xml:space='preserve'><value>Pasvorm gewas</value></data>
 <data name='Tools_Crop_Clear' xml:space='preserve'><value>Wis gewas</value></data>
+<data name='Tools_Pattern' xml:space='preserve'><value>Patroon</value></data>
 <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>Stap</value></data>
+<data name='Tools_Geometry' xml:space='preserve'><value>Geometrie</value></data>
 <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>Hoek</value></data>
 <data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>Middelpunt</value></data>
 <data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>Middelpunt</value></data>
@@ -213,7 +215,7 @@
 <data name='Menus_Transformer_X' xml:space='preserve'><value>X-as</value></data>
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Y-as</value></data>
 <data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>Proportionele zoom</value></data>
-<data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>Stapfrequentie</value></data>
+<data name='Menus_Transformer_SnapToTick' xml:space='preserve'><value>Klik op Tick</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Plaats de afstandsbediening</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Anker</value></data>
 <data name='Menus_Color_Swatches' xml:space='preserve'><value>Stalen</value></data>
@@ -353,6 +355,12 @@
 <data name='Blends_Luminosity' xml:space='preserve'><value>Helderheid</value></data>
 <data name='Blends_Subtract' xml:space='preserve'><value>Aftrekken</value></data>
 <data name='Blends_Division' xml:space='preserve'><value>Divisie</value></data>
+<data name='TagType_Red' xml:space='preserve'><value>Rood</value></data>
+<data name='TagType_Orange' xml:space='preserve'><value>Oranje</value></data>
+<data name='TagType_Yellow' xml:space='preserve'><value>Geel</value></data>
+<data name='TagType_Green' xml:space='preserve'><value>Groen</value></data>
+<data name='TagType_Blue' xml:space='preserve'><value>Blauw</value></data>
+<data name='TagType_Purple' xml:space='preserve'><value>Purper</value></data>
 <data name='Historys_LayersSetupTransformAdd_Move' xml:space='preserve'><value>Stel de canvasgrootte in</value></data>
 <data name='Historys_LayersSetupTransformMultiplies_Transform' xml:space='preserve'><value>Stel de canvasgrootte in</value></data>
 <data name='Historys_LayeragesArrange_LayersArrange' xml:space='preserve'><value>Lagen rangschikken</value></data>
@@ -696,6 +704,7 @@
 <data name='Strokes_Offset' xml:space='preserve'><value>Compensatie</value></data>
 <data name='Blends_Saturation' xml:space='preserve'><value>Verzadiging</value></data>
 <data name='Blends_Color' xml:space='preserve'><value>Kleur</value></data>
+<data name='TagType_None' xml:space='preserve'><value>Geen</value></data>
 <data name='Historys_LayeragesArrange_AddLayer_ConvertToCurves' xml:space='preserve'><value>Converteren naar curven</value></data>
 
  </root>

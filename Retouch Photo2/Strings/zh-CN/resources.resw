@@ -183,7 +183,9 @@
 <data name='Tools_Crop_Reset' xml:space='preserve'><value>重置裁剪</value></data>
 <data name='Tools_Crop_Fit' xml:space='preserve'><value>适合裁剪</value></data>
 <data name='Tools_Crop_Clear' xml:space='preserve'><value>清除裁切</value></data>
+<data name='Tools_Pattern' xml:space='preserve'><value>图案</value></data>
 <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>步</value></data>
+<data name='Tools_Geometry' xml:space='preserve'><value>几何图形</value></data>
 <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>拐角</value></data>
 <data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>中心点</value></data>
 <data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>中间点</value></data>
@@ -213,7 +215,7 @@
 <data name='Menus_Transformer_X' xml:space='preserve'><value>X-轴</value></data>
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Y-轴</value></data>
 <data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>等比例缩放</value></data>
-<data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>步频</value></data>
+<data name='Menus_Transformer_SnapToTick' xml:space='preserve'><value>吸附到刻度</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>位置遥控</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>锚点</value></data>
 <data name='Menus_Color_Swatches' xml:space='preserve'><value>预设</value></data>
@@ -353,6 +355,12 @@
 <data name='Blends_Luminosity' xml:space='preserve'><value>光度</value></data>
 <data name='Blends_Subtract' xml:space='preserve'><value>减去</value></data>
 <data name='Blends_Division' xml:space='preserve'><value>反色</value></data>
+<data name='TagType_Red' xml:space='preserve'><value>红</value></data>
+<data name='TagType_Orange' xml:space='preserve'><value>橙</value></data>
+<data name='TagType_Yellow' xml:space='preserve'><value>黄</value></data>
+<data name='TagType_Green' xml:space='preserve'><value>绿</value></data>
+<data name='TagType_Blue' xml:space='preserve'><value>蓝</value></data>
+<data name='TagType_Purple' xml:space='preserve'><value>紫</value></data>
 <data name='Historys_LayersSetupTransformAdd_Move' xml:space='preserve'><value>设置画布尺寸</value></data>
 <data name='Historys_LayersSetupTransformMultiplies_Transform' xml:space='preserve'><value>设置画布尺寸</value></data>
 <data name='Historys_LayeragesArrange_LayersArrange' xml:space='preserve'><value>图层排列</value></data>
@@ -696,6 +704,7 @@
 <data name='Strokes_Offset' xml:space='preserve'><value>偏移</value></data>
 <data name='Blends_Saturation' xml:space='preserve'><value>饱和度</value></data>
 <data name='Blends_Color' xml:space='preserve'><value>颜色</value></data>
+<data name='TagType_None' xml:space='preserve'><value>无</value></data>
 <data name='Historys_LayeragesArrange_AddLayer_ConvertToCurves' xml:space='preserve'><value>转换为曲线</value></data>
 
  </root>

@@ -183,7 +183,9 @@
 <data name='Tools_Crop_Reset' xml:space='preserve'><value>자르기 재설정</value></data>
 <data name='Tools_Crop_Fit' xml:space='preserve'><value>작물 맞추기</value></data>
 <data name='Tools_Crop_Clear' xml:space='preserve'><value>명확한 작물</value></data>
+<data name='Tools_Pattern' xml:space='preserve'><value>무늬</value></data>
 <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>단계</value></data>
+<data name='Tools_Geometry' xml:space='preserve'><value>기하학</value></data>
 <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>모서리</value></data>
 <data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>중심점</value></data>
 <data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>중간 점</value></data>
@@ -213,7 +215,7 @@
 <data name='Menus_Transformer_X' xml:space='preserve'><value>X 축</value></data>
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Y 축</value></data>
 <data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>비례 줌</value></data>
-<data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>단계 주파수</value></data>
+<data name='Menus_Transformer_SnapToTick' xml:space='preserve'><value>눈금에 맞추기</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>위치 원격 제어</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>닻</value></data>
 <data name='Menus_Color_Swatches' xml:space='preserve'><value>견본</value></data>
@@ -353,6 +355,12 @@
 <data name='Blends_Luminosity' xml:space='preserve'><value>밝기</value></data>
 <data name='Blends_Subtract' xml:space='preserve'><value>덜다</value></data>
 <data name='Blends_Division' xml:space='preserve'><value>분할</value></data>
+<data name='TagType_Red' xml:space='preserve'><value>빨간</value></data>
+<data name='TagType_Orange' xml:space='preserve'><value>주황색</value></data>
+<data name='TagType_Yellow' xml:space='preserve'><value>노랑</value></data>
+<data name='TagType_Green' xml:space='preserve'><value>초록</value></data>
+<data name='TagType_Blue' xml:space='preserve'><value>푸른</value></data>
+<data name='TagType_Purple' xml:space='preserve'><value>보라색</value></data>
 <data name='Historys_LayersSetupTransformAdd_Move' xml:space='preserve'><value>캔버스 크기 설정</value></data>
 <data name='Historys_LayersSetupTransformMultiplies_Transform' xml:space='preserve'><value>캔버스 크기 설정</value></data>
 <data name='Historys_LayeragesArrange_LayersArrange' xml:space='preserve'><value>레이어 정렬</value></data>
@@ -696,6 +704,7 @@
 <data name='Strokes_Offset' xml:space='preserve'><value>오프셋</value></data>
 <data name='Blends_Saturation' xml:space='preserve'><value>포화</value></data>
 <data name='Blends_Color' xml:space='preserve'><value>색깔</value></data>
+<data name='TagType_None' xml:space='preserve'><value>없음</value></data>
 <data name='Historys_LayeragesArrange_AddLayer_ConvertToCurves' xml:space='preserve'><value>곡선으로 변환</value></data>
 
  </root>

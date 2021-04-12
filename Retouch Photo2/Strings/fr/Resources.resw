@@ -183,7 +183,9 @@
 <data name='Tools_Crop_Reset' xml:space='preserve'><value>Réinitialiser le recadrage</value></data>
 <data name='Tools_Crop_Fit' xml:space='preserve'><value>Coupe ajustée</value></data>
 <data name='Tools_Crop_Clear' xml:space='preserve'><value>Effacer la récolte</value></data>
+<data name='Tools_Pattern' xml:space='preserve'><value>Schéma</value></data>
 <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>Étape</value></data>
+<data name='Tools_Geometry' xml:space='preserve'><value>Géométrie</value></data>
 <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>Coin</value></data>
 <data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>Point central</value></data>
 <data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>Point médian</value></data>
@@ -213,7 +215,7 @@
 <data name='Menus_Transformer_X' xml:space='preserve'><value>Axe X</value></data>
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Axe Y</value></data>
 <data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>Zoom proportionnel</value></data>
-<data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>Fréquence de pas</value></data>
+<data name='Menus_Transformer_SnapToTick' xml:space='preserve'><value>Accrocher à la tique</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Télécommande de position</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Ancre</value></data>
 <data name='Menus_Color_Swatches' xml:space='preserve'><value>Nuancier</value></data>
@@ -353,6 +355,12 @@
 <data name='Blends_Luminosity' xml:space='preserve'><value>Luminosité</value></data>
 <data name='Blends_Subtract' xml:space='preserve'><value>Soustraire</value></data>
 <data name='Blends_Division' xml:space='preserve'><value>Division</value></data>
+<data name='TagType_Red' xml:space='preserve'><value>rouge</value></data>
+<data name='TagType_Orange' xml:space='preserve'><value>Orange</value></data>
+<data name='TagType_Yellow' xml:space='preserve'><value>Jaune</value></data>
+<data name='TagType_Green' xml:space='preserve'><value>Vert</value></data>
+<data name='TagType_Blue' xml:space='preserve'><value>Bleu</value></data>
+<data name='TagType_Purple' xml:space='preserve'><value>Mauve</value></data>
 <data name='Historys_LayersSetupTransformAdd_Move' xml:space='preserve'><value>Définir la taille de la toile</value></data>
 <data name='Historys_LayersSetupTransformMultiplies_Transform' xml:space='preserve'><value>Définir la taille de la toile</value></data>
 <data name='Historys_LayeragesArrange_LayersArrange' xml:space='preserve'><value>Les calques arrangent</value></data>
@@ -696,6 +704,7 @@
 <data name='Strokes_Offset' xml:space='preserve'><value>Décalage</value></data>
 <data name='Blends_Saturation' xml:space='preserve'><value>Saturation</value></data>
 <data name='Blends_Color' xml:space='preserve'><value>Couleur</value></data>
+<data name='TagType_None' xml:space='preserve'><value>Aucun</value></data>
 <data name='Historys_LayeragesArrange_AddLayer_ConvertToCurves' xml:space='preserve'><value>Convertir en courbes</value></data>
 
  </root>

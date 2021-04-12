@@ -183,7 +183,9 @@
 <data name='Tools_Crop_Reset' xml:space='preserve'><value>Ernte zurücksetzen</value></data>
 <data name='Tools_Crop_Fit' xml:space='preserve'><value>Ernte anpassen</value></data>
 <data name='Tools_Crop_Clear' xml:space='preserve'><value>Klare Ernte</value></data>
+<data name='Tools_Pattern' xml:space='preserve'><value>Muster</value></data>
 <data name='Tools_PatternSpotted_Step' xml:space='preserve'><value>Schritt</value></data>
+<data name='Tools_Geometry' xml:space='preserve'><value>Geometrie</value></data>
 <data name='Tools_GeometryRoundRect_Corner' xml:space='preserve'><value>Ecke</value></data>
 <data name='Tools_GeometryTriangle_Center' xml:space='preserve'><value>Mittelpunkt</value></data>
 <data name='Tools_GeometryDiamond_Mid' xml:space='preserve'><value>Mittelpunkt</value></data>
@@ -213,7 +215,7 @@
 <data name='Menus_Transformer_X' xml:space='preserve'><value>X-Achse</value></data>
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Y-Achse</value></data>
 <data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>Proportionalzoom</value></data>
-<data name='Menus_Transformer_StepFrequency' xml:space='preserve'><value>Schrittfrequenz</value></data>
+<data name='Menus_Transformer_SnapToTick' xml:space='preserve'><value>Zum Ankreuzen einrasten</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Fernbedienung positionieren</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Anker</value></data>
 <data name='Menus_Color_Swatches' xml:space='preserve'><value>Farbfelder</value></data>
@@ -353,6 +355,12 @@
 <data name='Blends_Luminosity' xml:space='preserve'><value>Helligkeit</value></data>
 <data name='Blends_Subtract' xml:space='preserve'><value>Subtrahieren</value></data>
 <data name='Blends_Division' xml:space='preserve'><value>Teilung</value></data>
+<data name='TagType_Red' xml:space='preserve'><value>rot</value></data>
+<data name='TagType_Orange' xml:space='preserve'><value>Orange</value></data>
+<data name='TagType_Yellow' xml:space='preserve'><value>Gelb</value></data>
+<data name='TagType_Green' xml:space='preserve'><value>Grün</value></data>
+<data name='TagType_Blue' xml:space='preserve'><value>Blau</value></data>
+<data name='TagType_Purple' xml:space='preserve'><value>Lila</value></data>
 <data name='Historys_LayersSetupTransformAdd_Move' xml:space='preserve'><value>Legen Sie die Leinwandgröße fest</value></data>
 <data name='Historys_LayersSetupTransformMultiplies_Transform' xml:space='preserve'><value>Legen Sie die Leinwandgröße fest</value></data>
 <data name='Historys_LayeragesArrange_LayersArrange' xml:space='preserve'><value>Schichten anordnen</value></data>
@@ -696,6 +704,7 @@
 <data name='Strokes_Offset' xml:space='preserve'><value>Offset</value></data>
 <data name='Blends_Saturation' xml:space='preserve'><value>Sättigung</value></data>
 <data name='Blends_Color' xml:space='preserve'><value>Farbe</value></data>
+<data name='TagType_None' xml:space='preserve'><value>Keiner</value></data>
 <data name='Historys_LayeragesArrange_AddLayer_ConvertToCurves' xml:space='preserve'><value>In Kurven konvertieren</value></data>
 
  </root>
