@@ -120,7 +120,7 @@ namespace Retouch_Photo2.Menus
             }
 
             control.InvalidateItemsControl();//Invalidate
-            Retouch_Photo2.DrawPage.HideWritable?.Invoke();//Delegat
+            AdjustmentCommand.Edit(null);//Delegate
         }));
 
 
@@ -220,10 +220,7 @@ namespace Retouch_Photo2.Menus
                             IAdjustment adjustment = Retouch_Photo2.Adjustments.XML.CreateAdjustment(key);
                             this.Add(adjustment);
 
-                            if (adjustment.PageVisibility == Visibility.Visible)
-                            {
-                                this.Edit(adjustment);
-                            }
+                            AdjustmentCommand.Edit(adjustment);//Delegate
                         };
                     }
                 }
@@ -311,28 +308,8 @@ namespace Retouch_Photo2.Menus
 
             this.InvalidateItemsControl();//Invalidate
             this.ViewModel.Invalidate();//Invalidate     
-            Retouch_Photo2.DrawPage.HideWritable?.Invoke();//Delegat
-        }
 
-
-        /// <summary>
-        /// Edit the adjustment.
-        /// </summary>
-        /// <param name="adjustment"> The adjustment. </param>
-        public void Edit(IAdjustment adjustment)
-        {
-            IAdjustmentPage adjustmentPage = Retouch_Photo2.Adjustments.XML.CreateAdjustmentPage(typeof(BrightnessPage), adjustment.Type);
-
-            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-            {
-                ILayer layer = layerage.Self;
-
-                int index = layer.Filter.Adjustments.IndexOf(adjustment);
-                adjustmentPage.Index = index;
-                adjustmentPage.Follow();
-            }
-
-            Retouch_Photo2.DrawPage.ShowWritable?.Invoke(adjustmentPage.Icon, adjustmentPage.Title, adjustmentPage.Self);//Delegat
+            AdjustmentCommand.Edit(null);//Delegate
         }
 
 

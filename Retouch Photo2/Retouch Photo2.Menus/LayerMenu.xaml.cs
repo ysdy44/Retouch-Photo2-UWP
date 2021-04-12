@@ -10,6 +10,7 @@ using Retouch_Photo2.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Retouch_Photo2.Adjustments;
 
 namespace Retouch_Photo2.Menus
 {
@@ -47,7 +48,6 @@ namespace Retouch_Photo2.Menus
             this.ConstructVisibility();
             this.ConstructTagType();
         }
-
     }
 
     public sealed partial class LayerMenu : UserControl
@@ -63,8 +63,6 @@ namespace Retouch_Photo2.Menus
             this.BlendModeTextBlock.Text = resource.GetString("Menus_Layer_BlendMode");
             this.VisibilityTextBlock.Text = resource.GetString("Menus_Layer_Visibility");
             this.TagTypeTextBlock.Text = resource.GetString("Menus_Layer_TagType");
-
-            this.AdjustmentsTextBlock.Text= resource.GetString("Menus_Adjustment");
         }
 
 
@@ -208,7 +206,7 @@ namespace Retouch_Photo2.Menus
                 this.MethodViewModel.ILayerChanged<BlendEffectMode?>
                 (
                     set: (layer) => layer.BlendMode = blendMode,
-                                     
+
                     type: HistoryType.LayersProperty_SetBlendMode,
                     getUndo: (layer) => layer.BlendMode,
                     setUndo: (layer, previous) => layer.BlendMode = previous

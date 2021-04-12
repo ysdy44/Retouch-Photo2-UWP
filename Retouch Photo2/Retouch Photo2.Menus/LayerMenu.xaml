@@ -14,11 +14,6 @@
     d:DesignHeight="400"
     >
 
-    <UserControl.Resources>
-        <!--Converter -->
-        <local:AdjustmentIconConverter x:Key="AdjustmentIconConverter"/>
-    </UserControl.Resources>
-
 
     <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
         <StackPanel MinHeight="165" Padding="2,2">
@@ -97,27 +92,7 @@
                           MirroredWhenRightToLeft="True" />
                 </ToggleButton>
             </RelativePanel>
-
-
-            <!--Adjustments-->
-            <TextBlock x:Name="AdjustmentsTextBlock" Style="{StaticResource AppTextBlockStyle}">
-                Adjustments
-            </TextBlock>
-            <Border Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedBorderStyle}">
-                <ItemsControl ItemsSource="{x:Bind SelectionViewModel.Filter.Adjustments, Mode=OneWay}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <ItemsStackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate x:DataType="adjustments:IAdjustment">
-                            <ContentControl Width="30" Template="{x:Bind Type, Converter={StaticResource AdjustmentIconConverter}}"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </Border>
-
+            
 
             <!--Tag Type-->
             <TextBlock x:Name="TagTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

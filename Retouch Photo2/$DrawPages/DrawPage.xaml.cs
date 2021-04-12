@@ -4,6 +4,7 @@
 // Only:              ★★★★★
 // Complete:      ★★★★★
 using Retouch_Photo2.Adjustments;
+using Retouch_Photo2.Adjustments.Pages;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Photos;
@@ -70,12 +71,6 @@ namespace Retouch_Photo2
         public static Action<FrameworkElement, FrameworkElement> ShowMoreTransform;
         /// <summary> Show <see cref="MoreCreateFlyout"/> </summary>
         public static Action<FrameworkElement, FrameworkElement> ShowMoreCreate;
-
-
-        /// <summary> Show <see cref="DrawLayout.IsWritable"/> </summary>
-        public static Action<ControlTemplate, string, object> ShowWritable;
-        /// <summary> Hide <see cref="DrawLayout.IsWritable"/> </summary>
-        public static Action HideWritable;
 
 
         //@Construct
@@ -172,9 +167,7 @@ namespace Retouch_Photo2
             DrawPage.ShowMoreCreate += this.ShowMoreCreateFlyout;
 
             //Writable
-            DrawPage.ShowWritable += this.DrawLayout.ShowWritable;
-            DrawPage.HideWritable += this.DrawLayout.Hide;
-            AdjustmentCommand.Edit += this.AdjustmentMenu.Edit;
+            AdjustmentCommand.Edit += this.AdjustmentMenuEdit;
             AdjustmentCommand.Remove += this.AdjustmentMenu.Remove;
         }
         private void UnregisterDrawPage()
@@ -223,10 +216,45 @@ namespace Retouch_Photo2
             DrawPage.ShowMoreCreate -= this.ShowMoreCreateFlyout;
 
             //Writable
-            DrawPage.ShowWritable -= this.DrawLayout.ShowWritable;
-            DrawPage.HideWritable -= this.DrawLayout.Hide;
-            AdjustmentCommand.Edit -= this.AdjustmentMenu.Edit;
+            AdjustmentCommand.Edit -= this.AdjustmentMenuEdit;
             AdjustmentCommand.Remove -= this.AdjustmentMenu.Remove;
+        }
+
+
+        /// <summary>
+        /// Edit the adjustment.
+        /// </summary>
+        /// <param name="adjustment"> The adjustment. </param>
+        public void AdjustmentMenuEdit(IAdjustment adjustment)
+        {
+            if (adjustment == null)
+            {
+                this.DrawLayout.Hide();
+                return;
+            }
+            if (adjustment.PageVisibility == Visibility.Collapsed)
+            {
+                this.DrawLayout.Hide();
+                return;
+            }
+
+            {
+                this.AdjustmentFlyout.Hide();
+                this.LayerFlyout.Hide();
+            }
+
+            IAdjustmentPage adjustmentPage = Retouch_Photo2.Adjustments.XML.CreateAdjustmentPage(typeof(BrightnessPage), adjustment.Type);
+
+            if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
+            {
+                ILayer layer = layerage.Self;
+
+                int index = layer.Filter.Adjustments.IndexOf(adjustment);
+                adjustmentPage.Index = index;
+                adjustmentPage.Follow();
+            }
+
+            this.DrawLayout.ShowWritable(adjustmentPage.Icon, adjustmentPage.Title, adjustmentPage.Self);//Delegat
         }
     }
 
