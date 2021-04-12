@@ -105,6 +105,7 @@ namespace Retouch_Photo2
         {
             this.InitialSampleButton.Click += async (s, e) =>
             {
+                this.MainLayout.State = MainPageState.Main;
                 await FileUtil.SaveSampleFile();
 
                 //Projects 
