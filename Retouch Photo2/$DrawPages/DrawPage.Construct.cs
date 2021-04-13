@@ -93,8 +93,8 @@ namespace Retouch_Photo2
                 this.CreateTextBlock.Text = resource.GetString("More_Create");
                 this.SquareControl.Content = resource.GetString("More_Create_Square");     
                 this.CenterControl.Content = resource.GetString("More_Create_Center");
-                this.WheelToRotateControl.Content = resource.GetString("More_Operate_WheelToRotate");
                 this.OperateTextBlock.Text = resource.GetString("More_Operate");
+                this.WheelToRotateControl.Content = resource.GetString("More_Operate_WheelToRotate");
             }
 
             this.EditExpander.Title = resource.GetString("Menus_Edit");

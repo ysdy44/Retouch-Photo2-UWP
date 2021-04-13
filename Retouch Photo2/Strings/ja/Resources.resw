@@ -93,7 +93,6 @@
 <data name='$SettingPage_MenuType' xml:space='preserve'><value>メニュータイプ</value></data>
 <data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>メニューボタンを非表示にするには、チェックを外します</value></data>
 <data name='$SettingPage_Key' xml:space='preserve'><value>ショートカット</value></data>
-<data name='$SettingPage_Key_Rotate' xml:space='preserve'><value>スクロールホイールをスライドさせてキャンバスを回転させます</value></data>
 <data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>キャンバスを左に移動します</value></data>
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>キャンバスが上に移動します</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>キャンバスを右に移動します</value></data>
@@ -140,10 +139,14 @@
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>ファイル形式</value></data>
 <data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>レイヤーの名前を変更する</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>写真を追加する</value></data>
+<data name='More_Transform_Ratio' xml:space='preserve'><value>比例ズーム</value></data>
+<data name='More_Transform_SnapToTick' xml:space='preserve'><value>ティックにスナップ</value></data>
+<data name='More_Create' xml:space='preserve'><value></value></data>
+<data name='More_Create_Square' xml:space='preserve'><value>幅と高さが等しい</value></data>
+<data name='More_Create_Center' xml:space='preserve'><value>センターズーム</value></data>
+<data name='More_Operate_WheelToRotate' xml:space='preserve'><value>スクロールホイールをスライドさせてキャンバスを回転させます</value></data>
 <data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>比例ズーム</value></data>
 <data name='Tools_MoreTransform_Center' xml:space='preserve'><value>センターズーム</value></data>
-<data name='Tools_MoreCreate_Square' xml:space='preserve'><value>幅と高さが等しい</value></data>
-<data name='Tools_MoreCreate_Center' xml:space='preserve'><value>センターズーム</value></data>
 <data name='Tools_Cursor' xml:space='preserve'><value>カーソル</value></data>
 <data name='Tools_Cursor_CompositeMode_New' xml:space='preserve'><value>新着</value></data>
 <data name='Tools_Cursor_CompositeMode_Add' xml:space='preserve'><value>追加</value></data>
@@ -199,8 +202,6 @@
 <data name='Tools_GeometryHeart_Spread' xml:space='preserve'><value>展開する</value></data>
 <data name='Layers_Curve' xml:space='preserve'><value>曲線</value></data>
 <data name='Layers_CurveMulti' xml:space='preserve'><value>マルチカーブ</value></data>
-<data name='Menus_Keyboard' xml:space='preserve'><value>キーボード</value></data>
-<data name='Menus_Operate' xml:space='preserve'><value>操作する</value></data>
 <data name='Menus_Adjustment' xml:space='preserve'><value>調整</value></data>
 <data name='Menus_Adjustment_Add' xml:space='preserve'><value>追加</value></data>
 <data name='Menus_Adjustment_Filters' xml:space='preserve'><value>フィルタ</value></data>
@@ -214,8 +215,6 @@
 <data name='Menus_Transformer_Skew' xml:space='preserve'><value>斜め</value></data>
 <data name='Menus_Transformer_X' xml:space='preserve'><value>X軸</value></data>
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Y軸</value></data>
-<data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>比例ズーム</value></data>
-<data name='Menus_Transformer_SnapToTick' xml:space='preserve'><value>ティックにスナップ</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>リモコンの位置</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>アンカー</value></data>
 <data name='Menus_Color_Swatches' xml:space='preserve'><value>見本</value></data>
@@ -568,12 +567,13 @@
 <data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>ここに名前を入力します。</value></data>
 <data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>キャンセル</value></data>
 <data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>名前を変更する</value></data>
+<data name='More_Transform' xml:space='preserve'><value>変換</value></data>
+<data name='More_Operate' xml:space='preserve'><value>操作する</value></data>
 <data name='Tools_Fill' xml:space='preserve'><value>塗りつぶし</value></data>
 <data name='Tools_Stroke' xml:space='preserve'><value>脳卒中</value></data>
 <data name='Tools_ConvertToCurves' xml:space='preserve'><value>曲線に変換する</value></data>
 <data name='Tools_More' xml:space='preserve'><value>もっと</value></data>
 <data name='Tools_MoreTransform' xml:space='preserve'><value>もっと</value></data>
-<data name='Tools_MoreCreate' xml:space='preserve'><value>もっと</value></data>
 <data name='Tools_Brush' xml:space='preserve'><value>みがきます</value></data>
 <data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>塗りつぶし</value></data>
 <data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>脳卒中</value></data>
@@ -651,6 +651,7 @@
 <data name='Layers_GeometryCapsule' xml:space='preserve'><value>カプセル</value></data>
 <data name='Layers_GeometryHeart' xml:space='preserve'><value>ハート</value></data>
 <data name='Menus_Edit' xml:space='preserve'><value>編集</value></data>
+<data name='Menus_Operate' xml:space='preserve'><value>操作する</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>脳卒中</value></data>
 <data name='Menus_Close' xml:space='preserve'><value>バック</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>変成器</value></data>

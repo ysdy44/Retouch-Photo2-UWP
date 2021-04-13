@@ -93,7 +93,6 @@
 <data name='$SettingPage_MenuType' xml:space='preserve'><value>Тип меню</value></data>
 <data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>Снимите флажок, чтобы скрыть кнопку меню</value></data>
 <data name='$SettingPage_Key' xml:space='preserve'><value>Ярлыки</value></data>
-<data name='$SettingPage_Key_Rotate' xml:space='preserve'><value>Сдвиньте колесо прокрутки, чтобы повернуть холст</value></data>
 <data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>Переместите холст влево</value></data>
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>Холст двигаться вверх</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>Переместите холст вправо</value></data>
@@ -140,10 +139,14 @@
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>Формат файла</value></data>
 <data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>Переименовать слой (и)</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>Добавить фотографии)</value></data>
+<data name='More_Transform_Ratio' xml:space='preserve'><value>Пропорциональный зум</value></data>
+<data name='More_Transform_SnapToTick' xml:space='preserve'><value>Привязать к отметке</value></data>
+<data name='More_Create' xml:space='preserve'><value></value></data>
+<data name='More_Create_Square' xml:space='preserve'><value>Одинаковая ширина и высота</value></data>
+<data name='More_Create_Center' xml:space='preserve'><value>Центр зума</value></data>
+<data name='More_Operate_WheelToRotate' xml:space='preserve'><value>Сдвиньте колесо прокрутки, чтобы повернуть холст</value></data>
 <data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>Пропорциональный зум</value></data>
 <data name='Tools_MoreTransform_Center' xml:space='preserve'><value>Центр зума</value></data>
-<data name='Tools_MoreCreate_Square' xml:space='preserve'><value>Одинаковая ширина и высота</value></data>
-<data name='Tools_MoreCreate_Center' xml:space='preserve'><value>Центр зума</value></data>
 <data name='Tools_Cursor' xml:space='preserve'><value>Курсор</value></data>
 <data name='Tools_Cursor_CompositeMode_New' xml:space='preserve'><value>Новый</value></data>
 <data name='Tools_Cursor_CompositeMode_Add' xml:space='preserve'><value>Добавлять</value></data>
@@ -199,8 +202,6 @@
 <data name='Tools_GeometryHeart_Spread' xml:space='preserve'><value>Распространять</value></data>
 <data name='Layers_Curve' xml:space='preserve'><value>Изгиб</value></data>
 <data name='Layers_CurveMulti' xml:space='preserve'><value>Мульти-кривая</value></data>
-<data name='Menus_Keyboard' xml:space='preserve'><value>Клавиатура</value></data>
-<data name='Menus_Operate' xml:space='preserve'><value>Работать</value></data>
 <data name='Menus_Adjustment' xml:space='preserve'><value>Корректировки</value></data>
 <data name='Menus_Adjustment_Add' xml:space='preserve'><value>Добавить к</value></data>
 <data name='Menus_Adjustment_Filters' xml:space='preserve'><value>Фильтр</value></data>
@@ -214,8 +215,6 @@
 <data name='Menus_Transformer_Skew' xml:space='preserve'><value>Перекос</value></data>
 <data name='Menus_Transformer_X' xml:space='preserve'><value>Ось X</value></data>
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Ось Y</value></data>
-<data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>Пропорциональный зум</value></data>
-<data name='Menus_Transformer_SnapToTick' xml:space='preserve'><value>Привязать к отметке</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Позиционное дистанционное управление</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Якорь</value></data>
 <data name='Menus_Color_Swatches' xml:space='preserve'><value>Образцы</value></data>
@@ -568,12 +567,13 @@
 <data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>Введите здесь имя.</value></data>
 <data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>Отмена</value></data>
 <data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>Переименовать</value></data>
+<data name='More_Transform' xml:space='preserve'><value>Преобразовать</value></data>
+<data name='More_Operate' xml:space='preserve'><value>Работать</value></data>
 <data name='Tools_Fill' xml:space='preserve'><value>Наполнять</value></data>
 <data name='Tools_Stroke' xml:space='preserve'><value>Гладить</value></data>
 <data name='Tools_ConvertToCurves' xml:space='preserve'><value>Преобразовать в кривые</value></data>
 <data name='Tools_More' xml:space='preserve'><value>Более</value></data>
 <data name='Tools_MoreTransform' xml:space='preserve'><value>Более</value></data>
-<data name='Tools_MoreCreate' xml:space='preserve'><value>Более</value></data>
 <data name='Tools_Brush' xml:space='preserve'><value>Щетка</value></data>
 <data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>Наполнять</value></data>
 <data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>Гладить</value></data>
@@ -651,6 +651,7 @@
 <data name='Layers_GeometryCapsule' xml:space='preserve'><value>Капсула</value></data>
 <data name='Layers_GeometryHeart' xml:space='preserve'><value>Сердце</value></data>
 <data name='Menus_Edit' xml:space='preserve'><value>Редактировать</value></data>
+<data name='Menus_Operate' xml:space='preserve'><value>Работать</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>Гладить</value></data>
 <data name='Menus_Close' xml:space='preserve'><value>Назад</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>Трансформатор</value></data>

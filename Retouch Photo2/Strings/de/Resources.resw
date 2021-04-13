@@ -93,7 +93,6 @@
 <data name='$SettingPage_MenuType' xml:space='preserve'><value>Menütyp</value></data>
 <data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>Deaktivieren Sie diese Option, um die Menüschaltfläche auszublenden</value></data>
 <data name='$SettingPage_Key' xml:space='preserve'><value>Verknüpfungen</value></data>
-<data name='$SettingPage_Key_Rotate' xml:space='preserve'><value>Schieben Sie das Scrollrad, um die Leinwand zu drehen</value></data>
 <data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>Bewegen Sie die Leinwand nach links</value></data>
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>Leinwand nach oben bewegen</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>Bewegen Sie die Leinwand nach rechts</value></data>
@@ -140,10 +139,14 @@
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>Datei Format</value></data>
 <data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>Ebene (n) umbenennen</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>Fotos hinzufügen)</value></data>
+<data name='More_Transform_Ratio' xml:space='preserve'><value>Proportionalzoom</value></data>
+<data name='More_Transform_SnapToTick' xml:space='preserve'><value>Zum Ankreuzen einrasten</value></data>
+<data name='More_Create' xml:space='preserve'><value></value></data>
+<data name='More_Create_Square' xml:space='preserve'><value>Gleiche Breite und Höhe</value></data>
+<data name='More_Create_Center' xml:space='preserve'><value>Zentraler Zoom</value></data>
+<data name='More_Operate_WheelToRotate' xml:space='preserve'><value>Schieben Sie das Scrollrad, um die Leinwand zu drehen</value></data>
 <data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>Proportionalzoom</value></data>
 <data name='Tools_MoreTransform_Center' xml:space='preserve'><value>Zentraler Zoom</value></data>
-<data name='Tools_MoreCreate_Square' xml:space='preserve'><value>Gleiche Breite und Höhe</value></data>
-<data name='Tools_MoreCreate_Center' xml:space='preserve'><value>Zentraler Zoom</value></data>
 <data name='Tools_Cursor' xml:space='preserve'><value>Mauszeiger</value></data>
 <data name='Tools_Cursor_CompositeMode_New' xml:space='preserve'><value>Neu</value></data>
 <data name='Tools_Cursor_CompositeMode_Add' xml:space='preserve'><value>Hinzufügen</value></data>
@@ -199,8 +202,6 @@
 <data name='Tools_GeometryHeart_Spread' xml:space='preserve'><value>Ausbreitung</value></data>
 <data name='Layers_Curve' xml:space='preserve'><value>Kurve</value></data>
 <data name='Layers_CurveMulti' xml:space='preserve'><value>Multi-Kurve</value></data>
-<data name='Menus_Keyboard' xml:space='preserve'><value>Tastatur</value></data>
-<data name='Menus_Operate' xml:space='preserve'><value>Arbeiten</value></data>
 <data name='Menus_Adjustment' xml:space='preserve'><value>Anpassungen</value></data>
 <data name='Menus_Adjustment_Add' xml:space='preserve'><value>Hinzufügen</value></data>
 <data name='Menus_Adjustment_Filters' xml:space='preserve'><value>Filter</value></data>
@@ -214,8 +215,6 @@
 <data name='Menus_Transformer_Skew' xml:space='preserve'><value>Schrägstellung</value></data>
 <data name='Menus_Transformer_X' xml:space='preserve'><value>X-Achse</value></data>
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Y-Achse</value></data>
-<data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>Proportionalzoom</value></data>
-<data name='Menus_Transformer_SnapToTick' xml:space='preserve'><value>Zum Ankreuzen einrasten</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Fernbedienung positionieren</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Anker</value></data>
 <data name='Menus_Color_Swatches' xml:space='preserve'><value>Farbfelder</value></data>
@@ -568,12 +567,13 @@
 <data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>Geben Sie hier einen Namen ein.</value></data>
 <data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>Stornieren</value></data>
 <data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>Umbenennen</value></data>
+<data name='More_Transform' xml:space='preserve'><value>Verwandeln</value></data>
+<data name='More_Operate' xml:space='preserve'><value>Arbeiten</value></data>
 <data name='Tools_Fill' xml:space='preserve'><value>Füllen</value></data>
 <data name='Tools_Stroke' xml:space='preserve'><value>Streicheln</value></data>
 <data name='Tools_ConvertToCurves' xml:space='preserve'><value>In Kurven konvertieren</value></data>
 <data name='Tools_More' xml:space='preserve'><value>Mehr</value></data>
 <data name='Tools_MoreTransform' xml:space='preserve'><value>Mehr</value></data>
-<data name='Tools_MoreCreate' xml:space='preserve'><value>Mehr</value></data>
 <data name='Tools_Brush' xml:space='preserve'><value>Bürste</value></data>
 <data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>Füllen</value></data>
 <data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>Streicheln</value></data>
@@ -651,6 +651,7 @@
 <data name='Layers_GeometryCapsule' xml:space='preserve'><value>Kapsel</value></data>
 <data name='Layers_GeometryHeart' xml:space='preserve'><value>Herz</value></data>
 <data name='Menus_Edit' xml:space='preserve'><value>Bearbeiten</value></data>
+<data name='Menus_Operate' xml:space='preserve'><value>Arbeiten</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>Streicheln</value></data>
 <data name='Menus_Close' xml:space='preserve'><value>Zurück</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>Transformator</value></data>

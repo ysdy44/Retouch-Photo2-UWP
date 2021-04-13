@@ -93,7 +93,6 @@
 <data name='$SettingPage_MenuType' xml:space='preserve'><value>메뉴 유형</value></data>
 <data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>메뉴 버튼을 숨기려면 선택 취소</value></data>
 <data name='$SettingPage_Key' xml:space='preserve'><value>바로 가기</value></data>
-<data name='$SettingPage_Key_Rotate' xml:space='preserve'><value>스크롤 휠을 밀어 캔버스 회전</value></data>
 <data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>캔버스를 왼쪽으로 이동</value></data>
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>캔버스 위로 이동</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>캔버스를 오른쪽으로 이동</value></data>
@@ -140,10 +139,14 @@
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>파일 형식</value></data>
 <data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>레이어 이름 변경</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>사진 추가</value></data>
+<data name='More_Transform_Ratio' xml:space='preserve'><value>비례 줌</value></data>
+<data name='More_Transform_SnapToTick' xml:space='preserve'><value>눈금에 맞추기</value></data>
+<data name='More_Create' xml:space='preserve'><value></value></data>
+<data name='More_Create_Square' xml:space='preserve'><value>동일한 너비와 높이</value></data>
+<data name='More_Create_Center' xml:space='preserve'><value>센터 줌</value></data>
+<data name='More_Operate_WheelToRotate' xml:space='preserve'><value>스크롤 휠을 밀어 캔버스 회전</value></data>
 <data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>비례 줌</value></data>
 <data name='Tools_MoreTransform_Center' xml:space='preserve'><value>센터 줌</value></data>
-<data name='Tools_MoreCreate_Square' xml:space='preserve'><value>동일한 너비와 높이</value></data>
-<data name='Tools_MoreCreate_Center' xml:space='preserve'><value>센터 줌</value></data>
 <data name='Tools_Cursor' xml:space='preserve'><value>커서</value></data>
 <data name='Tools_Cursor_CompositeMode_New' xml:space='preserve'><value>새로운</value></data>
 <data name='Tools_Cursor_CompositeMode_Add' xml:space='preserve'><value>더하다</value></data>
@@ -199,8 +202,6 @@
 <data name='Tools_GeometryHeart_Spread' xml:space='preserve'><value>확산</value></data>
 <data name='Layers_Curve' xml:space='preserve'><value>곡선</value></data>
 <data name='Layers_CurveMulti' xml:space='preserve'><value>다중 곡선</value></data>
-<data name='Menus_Keyboard' xml:space='preserve'><value>건반</value></data>
-<data name='Menus_Operate' xml:space='preserve'><value>작동</value></data>
 <data name='Menus_Adjustment' xml:space='preserve'><value>조정</value></data>
 <data name='Menus_Adjustment_Add' xml:space='preserve'><value>추가</value></data>
 <data name='Menus_Adjustment_Filters' xml:space='preserve'><value>필터</value></data>
@@ -214,8 +215,6 @@
 <data name='Menus_Transformer_Skew' xml:space='preserve'><value>비스듬한</value></data>
 <data name='Menus_Transformer_X' xml:space='preserve'><value>X 축</value></data>
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Y 축</value></data>
-<data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>비례 줌</value></data>
-<data name='Menus_Transformer_SnapToTick' xml:space='preserve'><value>눈금에 맞추기</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>위치 원격 제어</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>닻</value></data>
 <data name='Menus_Color_Swatches' xml:space='preserve'><value>견본</value></data>
@@ -568,12 +567,13 @@
 <data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>여기에 이름을 입력하십시오.</value></data>
 <data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>취소</value></data>
 <data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>이름 바꾸기</value></data>
+<data name='More_Transform' xml:space='preserve'><value>변환</value></data>
+<data name='More_Operate' xml:space='preserve'><value>작동</value></data>
 <data name='Tools_Fill' xml:space='preserve'><value>가득 따르다</value></data>
 <data name='Tools_Stroke' xml:space='preserve'><value>뇌졸중</value></data>
 <data name='Tools_ConvertToCurves' xml:space='preserve'><value>곡선으로 변환</value></data>
 <data name='Tools_More' xml:space='preserve'><value>더</value></data>
 <data name='Tools_MoreTransform' xml:space='preserve'><value>더</value></data>
-<data name='Tools_MoreCreate' xml:space='preserve'><value>더</value></data>
 <data name='Tools_Brush' xml:space='preserve'><value>브러시</value></data>
 <data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>가득 따르다</value></data>
 <data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>뇌졸중</value></data>
@@ -651,6 +651,7 @@
 <data name='Layers_GeometryCapsule' xml:space='preserve'><value>캡슐</value></data>
 <data name='Layers_GeometryHeart' xml:space='preserve'><value>심장</value></data>
 <data name='Menus_Edit' xml:space='preserve'><value>편집하다</value></data>
+<data name='Menus_Operate' xml:space='preserve'><value>작동</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>뇌졸중</value></data>
 <data name='Menus_Close' xml:space='preserve'><value>뒤</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>변신 로봇</value></data>

@@ -16,6 +16,8 @@
         <Setter Property = "Height" Value="210"/>
         <Setter Property = "HorizontalAlignment" Value="Left"/>
         <Setter Property = "Background" Value="Transparent"/>
+        <Setter Property = "BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
+        <Setter Property = "BorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:AdaptiveWidthLayout">

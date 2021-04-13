@@ -93,7 +93,6 @@
 <data name='$SettingPage_MenuType' xml:space='preserve'><value>Tipo de menú</value></data>
 <data name='$SettingPage_MenuTypeTip' xml:space='preserve'><value>Desmarque para ocultar el botón de menú</value></data>
 <data name='$SettingPage_Key' xml:space='preserve'><value>Atajos</value></data>
-<data name='$SettingPage_Key_Rotate' xml:space='preserve'><value>Desliza la rueda de desplazamiento para rotar el lienzo.</value></data>
 <data name='$SettingPage_Key_Move_Left' xml:space='preserve'><value>Mueve el lienzo a la izquierda</value></data>
 <data name='$SettingPage_Key_Move_Top' xml:space='preserve'><value>El lienzo se mueve hacia arriba</value></data>
 <data name='$SettingPage_Key_Move_Right' xml:space='preserve'><value>Mueve el lienzo a la derecha</value></data>
@@ -140,10 +139,14 @@
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>Formato de archivo</value></data>
 <data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>Cambiar el nombre de la (s) capa (s)</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>Agregar fotos)</value></data>
+<data name='More_Transform_Ratio' xml:space='preserve'><value>Zoom proporcional</value></data>
+<data name='More_Transform_SnapToTick' xml:space='preserve'><value>Ajustar al tic</value></data>
+<data name='More_Create' xml:space='preserve'><value></value></data>
+<data name='More_Create_Square' xml:space='preserve'><value>Igual ancho y alto</value></data>
+<data name='More_Create_Center' xml:space='preserve'><value>Zoom central</value></data>
+<data name='More_Operate_WheelToRotate' xml:space='preserve'><value>Desliza la rueda de desplazamiento para rotar el lienzo.</value></data>
 <data name='Tools_MoreTransform_Ratio' xml:space='preserve'><value>Zoom proporcional</value></data>
 <data name='Tools_MoreTransform_Center' xml:space='preserve'><value>Zoom central</value></data>
-<data name='Tools_MoreCreate_Square' xml:space='preserve'><value>Igual ancho y alto</value></data>
-<data name='Tools_MoreCreate_Center' xml:space='preserve'><value>Zoom central</value></data>
 <data name='Tools_Cursor' xml:space='preserve'><value>Cursor</value></data>
 <data name='Tools_Cursor_CompositeMode_New' xml:space='preserve'><value>Nuevo</value></data>
 <data name='Tools_Cursor_CompositeMode_Add' xml:space='preserve'><value>Agregar</value></data>
@@ -199,8 +202,6 @@
 <data name='Tools_GeometryHeart_Spread' xml:space='preserve'><value>Propagar</value></data>
 <data name='Layers_Curve' xml:space='preserve'><value>Curva</value></data>
 <data name='Layers_CurveMulti' xml:space='preserve'><value>Multicurva</value></data>
-<data name='Menus_Keyboard' xml:space='preserve'><value>Teclado</value></data>
-<data name='Menus_Operate' xml:space='preserve'><value>Funcionar</value></data>
 <data name='Menus_Adjustment' xml:space='preserve'><value>Ajustes</value></data>
 <data name='Menus_Adjustment_Add' xml:space='preserve'><value>añadir</value></data>
 <data name='Menus_Adjustment_Filters' xml:space='preserve'><value>Filtrar</value></data>
@@ -214,8 +215,6 @@
 <data name='Menus_Transformer_Skew' xml:space='preserve'><value>Sesgar</value></data>
 <data name='Menus_Transformer_X' xml:space='preserve'><value>Eje X</value></data>
 <data name='Menus_Transformer_Y' xml:space='preserve'><value>Eje Y</value></data>
-<data name='Menus_Transformer_RatioScaling' xml:space='preserve'><value>Zoom proporcional</value></data>
-<data name='Menus_Transformer_SnapToTick' xml:space='preserve'><value>Ajustar al tic</value></data>
 <data name='Menus_Transformer_PositionRemote' xml:space='preserve'><value>Posición del mando a distancia</value></data>
 <data name='Menus_Transformer_Anchor' xml:space='preserve'><value>Ancla</value></data>
 <data name='Menus_Color_Swatches' xml:space='preserve'><value>Muestras</value></data>
@@ -568,12 +567,13 @@
 <data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>Ingrese un nombre aquí.</value></data>
 <data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>Cancelar</value></data>
 <data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>Rebautizar</value></data>
+<data name='More_Transform' xml:space='preserve'><value>Transformar</value></data>
+<data name='More_Operate' xml:space='preserve'><value>Funcionar</value></data>
 <data name='Tools_Fill' xml:space='preserve'><value>Llenar</value></data>
 <data name='Tools_Stroke' xml:space='preserve'><value>Golpe</value></data>
 <data name='Tools_ConvertToCurves' xml:space='preserve'><value>Convertir a curvas</value></data>
 <data name='Tools_More' xml:space='preserve'><value>Más</value></data>
 <data name='Tools_MoreTransform' xml:space='preserve'><value>Más</value></data>
-<data name='Tools_MoreCreate' xml:space='preserve'><value>Más</value></data>
 <data name='Tools_Brush' xml:space='preserve'><value>Cepillo</value></data>
 <data name='Tools_Brush_FillOrStroke_Fill' xml:space='preserve'><value>Llenar</value></data>
 <data name='Tools_Brush_FillOrStroke_Stroke' xml:space='preserve'><value>Golpe</value></data>
@@ -651,6 +651,7 @@
 <data name='Layers_GeometryCapsule' xml:space='preserve'><value>Cápsula</value></data>
 <data name='Layers_GeometryHeart' xml:space='preserve'><value>Corazón</value></data>
 <data name='Menus_Edit' xml:space='preserve'><value>Editar</value></data>
+<data name='Menus_Operate' xml:space='preserve'><value>Funcionar</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>Golpe</value></data>
 <data name='Menus_Close' xml:space='preserve'><value>atrás</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>Transformador</value></data>
