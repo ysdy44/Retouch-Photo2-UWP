@@ -70,9 +70,8 @@
                   Background="{ThemeResource AppBackground}"
                   >
                 <!--Image-->
-                <controls:ImageEx x:Name="Image"
+                <Image x:Name="Image"
                IsHitTestVisible="False" Grid.Row="1" Stretch="UniformToFill"
-               Background="White"
                Source="{x:Bind ImageFilePath}"/>
 
                     <!--Name-->

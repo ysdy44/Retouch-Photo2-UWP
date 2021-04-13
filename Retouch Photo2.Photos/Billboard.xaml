@@ -76,14 +76,15 @@
             Background="{x:Bind UserControl.Background, Mode=OneWay}"
             >
             <StackPanel>
-                <controls:ImageEx x:Name="Image" Stretch="Uniform" Background="White"
-                          Source="{x:Bind Photo.ImageFilePath, Mode=OneWay}"/>
+                <Image Stretch="Uniform">
+                    <Image.Source>
+                        <BitmapImage x:Name="BitmapImage"/>
+                    </Image.Source>
+                </Image>
                 <ContentControl Height="12"/>
-                <TextBlock x:Name="NameTextbolck" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"
-                          Text="{x:Bind Photo.Name, Mode=OneWay}"/>
+                <TextBlock x:Name="NameTextbolck" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
                 <ContentControl Height="6"/>
-                <TextBlock x:Name="SummaryTextBlock" TextWrapping="Wrap"
-                          Text="{x:Bind Photo, Mode=OneWay}"/>
+                <TextBlock x:Name="SummaryTextBlock" TextWrapping="Wrap"/>
             </StackPanel>
         </Border>
         

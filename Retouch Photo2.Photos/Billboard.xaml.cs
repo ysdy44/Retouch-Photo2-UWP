@@ -6,7 +6,6 @@
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 
 namespace Retouch_Photo2.Photos
 {
@@ -23,11 +22,21 @@ namespace Retouch_Photo2.Photos
         /// <summary> Gets or sets the <see cref="Billboard"/>'s photo. </summary>
         public Photo Photo
         {
-            get  => (Photo)base.GetValue(PhotoProperty);
+            get => (Photo)base.GetValue(PhotoProperty);
             set => base.SetValue(PhotoProperty, value);
         }
         /// <summary> Identifies the <see cref = "Billboard.Photo" /> dependency property. </summary>
-        public static readonly DependencyProperty PhotoProperty = DependencyProperty.Register(nameof(Photo), typeof(Photo), typeof(Billboard), new PropertyMetadata(new Photo()));
+        public static readonly DependencyProperty PhotoProperty = DependencyProperty.Register(nameof(Photo), typeof(Photo), typeof(Billboard), new PropertyMetadata(null, (sender, e) =>
+        {
+            Billboard control = (Billboard)sender;
+
+            if (e.NewValue is Photo value)
+            {
+                control.BitmapImage.UriSource = new System.Uri(value.ImageFilePath);
+                control.NameTextbolck.Text = value.Name;
+                control.SummaryTextBlock.Text = value.ToString();
+            }
+        }));
 
         /// <summary> Gets or sets whether <see cref="Billboard"/> is showed. </summary>
         public bool IsShow
@@ -73,7 +82,7 @@ namespace Retouch_Photo2.Photos
             }
 
             double centerCoordsX = buttonPostion.X + placementTarget.ActualWidth / 2;
-            double centerCoordsY =buttonPostion.Y + placementTarget.ActualHeight / 2;
+            double centerCoordsY = buttonPostion.Y + placementTarget.ActualHeight / 2;
 
             double x = centerCoordsX - this.actualWidth / 2;
             double y = centerCoordsY - (this.actualHeight - 70) / 2;
