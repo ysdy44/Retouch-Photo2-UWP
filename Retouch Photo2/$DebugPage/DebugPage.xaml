@@ -1125,7 +1125,7 @@
 
 
         <!--Developer-->
-        <developerTools:AlignmentGrid Grid.RowSpan="2" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="Gray" Visibility="{ThemeResource AppGridVisibility}" />
+        <developerTools:AlignmentGrid Grid.RowSpan="2" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="White" Visibility="{ThemeResource AppGridVisibility}" />
 
 
         <!--Animated-->

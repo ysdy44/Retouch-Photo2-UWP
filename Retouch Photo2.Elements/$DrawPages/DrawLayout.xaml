@@ -295,8 +295,10 @@
                         <Setter Target = "_RightIcon.Visibility" Value="Collapsed"/>
 
                         <!--Foot-->
+                        <Setter Target = "FootPanel.Margin" Value="80,0"/>
                         <Setter Target = "FootPanel.MinWidth" Value="100"/>
                         <Setter Target = "FootPanel.CornerRadius" Value="6,6,0,0"/>
+                        <Setter Target = "FootPanel.BorderThickness" Value="1,1,1,0"/>
 
                         <!--Touchbar-->
                         <Setter Target="TouchbarBorder.Margin" Value="82,0,82,70"/>
@@ -335,8 +337,9 @@
                         <!--Foot-->
                         <Setter Target = "FootPanel.MinWidth" Value="100"/>
                         <Setter Target = "FootPanel.CornerRadius" Value="6"/>
-                        <Setter Target = "FootPanel.Margin" Value="0,10"/>
-
+                        <Setter Target = "FootPanel.Margin" Value="10,10"/>
+                        <Setter Target = "FootPanel.BorderThickness" Value="1"/>
+                        
                         <!--Head-->
                         <Setter Target = "HeadBorder.(Grid.Column)" Value="0"/>
                         <Setter Target = "HeadBorder.(Grid.ColumnSpan)" Value="2"/>
@@ -1153,6 +1156,7 @@
         </Grid>
         <!--Foot-->
         <Border x:Name="FootPanel" Grid.Column="1" Grid.Row="1" MinHeight="50" Padding="10,0" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                BorderThickness="0,1,0,0" BorderBrush="{ThemeResource AppBorderBrush}"
                              apiContractNotPresent5:Background="{ThemeResource AppForeground}"
                              apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
             <Border.RenderTransformOrigin>0.5, 0.5</Border.RenderTransformOrigin>
