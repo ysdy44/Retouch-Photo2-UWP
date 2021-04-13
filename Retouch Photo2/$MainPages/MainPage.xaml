@@ -105,7 +105,7 @@
                         <Run x:Name="SelectCountRun" FontWeight="Bold"
                              Text="{x:Bind SelectedCount, Mode=OneWay}"/>
                     </TextBlock>
-                    <Button x:Name="AllButton" HorizontalAlignment="Right" Style="{StaticResource AppButtonStyle}"/>
+                    <ListViewItem x:Name="AllButton" HorizontalAlignment="Right"/>
                 </Grid>
             </elements:MainLayout.SelectChild>
 
@@ -113,55 +113,70 @@
             <!--MainChild-->
             <elements:MainLayout.MainChild>
                 <StackPanel Orientation="Horizontal" Padding="18,0" HorizontalAlignment="Center">
-                    <Button x:Name="NewButton" Style="{StaticResource AppTabButtonStyle}">
-                        <Button.Tag>
-                            <FontIcon Glyph="&#xE109;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </Button.Tag>
-                    </Button>
-                    <Button x:Name="PicturesButton" Style="{StaticResource AppTabButtonStyle}">
-                        <Button.Tag>
-                            <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </Button.Tag>
-                    </Button>
+                    <ListViewItem x:Name="NewButton" Padding="2,0" MinWidth="50">
+                        <ContentControl x:Name="NewControl" Style="{StaticResource AppTabIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xE109;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="PicturesButton" Padding="2,0" MinWidth="50">
+                        <ContentControl x:Name="PicturesControl" Style="{StaticResource AppTabIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
                     <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
-                    <Button x:Name="RenameButton" Style="{StaticResource AppTabButtonStyle}">
-                        <Button.Tag>
-                            <FontIcon Glyph="&#xE104;" FontSize="20" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </Button.Tag>
-                    </Button>
+                    <ListViewItem x:Name="RenameButton" Padding="2,0" MinWidth="50">
+                        <ContentControl x:Name="RenameControl" Style="{StaticResource AppTabIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xE104;" FontSize="20" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
                     <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
-                    <Button x:Name="DeleteButton" Style="{StaticResource AppTabButtonStyle}">
-                        <Button.Tag>
-                            <FontIcon Glyph="&#xE107;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </Button.Tag>
-                    </Button>
-                    <Button x:Name="DuplicateButton" Style="{StaticResource AppTabButtonStyle}">
-                        <Button.Tag>
-                            <FontIcon Glyph="&#xE16F;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </Button.Tag>
-                    </Button>
+                    <ListViewItem x:Name="DeleteButton" Padding="2,0" MinWidth="50">
+                        <ContentControl x:Name="DeleteControl" Style="{StaticResource AppTabIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xE107;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="DuplicateButton" Padding="2,0" MinWidth="50">
+                        <ContentControl x:Name="DuplicateControl" Style="{StaticResource AppTabIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xE16F;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
                 </StackPanel>
             </elements:MainLayout.MainChild>
 
             <!--PicturesChild-->
             <elements:MainLayout.PicturesChild>
                 <StackPanel Orientation="Horizontal" Padding="18,0">
-                    <Button x:Name="PicturesPhotoButton" Style="{StaticResource AppTabButtonStyle}">
-                        <Button.Tag>
-                            <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </Button.Tag>
-                    </Button>
-                    <Button x:Name="PicturesDestopButton" Style="{StaticResource AppTabButtonStyle}">
-                        <Button.Tag>
-                            <FontIcon Glyph="&#xEC4E;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </Button.Tag>
-                    </Button>
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
-                    <Button x:Name="PicturesCloseButton" Style="{StaticResource AppTabButtonStyle}">
-                        <Button.Tag>
-                            <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </Button.Tag>
-                    </Button>
+                    <ListViewItem x:Name="PicturesPhotoButton" Padding="2,0" MinWidth="50">
+                        <ContentControl x:Name="PicturesPhotoControl" Style="{StaticResource AppTabIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="PicturesDestopButton" Padding="2,0" MinWidth="50">
+                        <ContentControl x:Name="PicturesDestopControl" Style="{StaticResource AppTabIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xEC4E;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <ListViewItem x:Name="PicturesCloseButton" Padding="2,0" MinWidth="50">
+                        <ContentControl x:Name="PicturesCloseControl" Style="{StaticResource AppTabIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
                 </StackPanel>
             </elements:MainLayout.PicturesChild>
 
@@ -174,11 +189,13 @@
                         <Run x:Name="RenameSubtitleTextBlock" FontSize="14" FontWeight="Normal" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
                     <Border HorizontalAlignment="Right">
-                        <Button x:Name="RenameCloseButton" Style="{StaticResource AppTabButtonStyle}">
-                            <Button.Tag>
-                                <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </Button.Tag>
-                        </Button>
+                        <ListViewItem x:Name="RenameCloseButton" Padding="2,0" MinWidth="50">
+                            <ContentControl x:Name="RenameCloseControl" Style="{StaticResource AppTabIconContentControlStyle}">
+                                <ContentControl.Tag>
+                                    <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </ListViewItem>
                     </Border>
 
                 </StackPanel>
@@ -194,17 +211,20 @@
                         <Run x:Name="DeleteSubtitleTextBlock" FontSize="14" FontWeight="Normal" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="DeletePrimaryButton" Style="{StaticResource AppTabButtonStyle}"
-                                IsEnabled="{x:Bind SelectedIsEnabled, Mode=OneWay}">
-                            <Button.Tag>
-                                <FontIcon Glyph="&#xF78C;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </Button.Tag>
-                        </Button>
-                        <Button x:Name="DeleteCloseButton" Style="{StaticResource AppTabButtonStyle}">
-                            <Button.Tag>
-                                <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </Button.Tag>
-                        </Button>
+                        <ListViewItem x:Name="DeletePrimaryButton" Padding="2,0" MinWidth="50">
+                            <ContentControl x:Name="DeletePrimaryControl" Style="{StaticResource AppTabIconContentControlStyle}">
+                                <ContentControl.Tag>
+                                    <FontIcon Glyph="&#xF78C;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </ListViewItem>
+                        <ListViewItem x:Name="DeleteCloseButton" Padding="2,0" MinWidth="50">
+                            <ContentControl x:Name="DeleteCloseControl" Style="{StaticResource AppTabIconContentControlStyle}">
+                                <ContentControl.Tag>
+                                    <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </ListViewItem>
                     </StackPanel>
                 </StackPanel>
             </elements:MainLayout.DeleteChild>
@@ -219,17 +239,20 @@
                         <Run x:Name="DuplicateSubtitleTextBlock" FontSize="14" FontWeight="Normal" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="DuplicatePrimaryButton" Style="{StaticResource AppTabButtonStyle}"
-                                IsEnabled="{x:Bind SelectedIsEnabled, Mode=OneWay}">
-                            <Button.Tag>
-                                <FontIcon Glyph="&#xF78C;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </Button.Tag>
-                        </Button>
-                        <Button x:Name="DuplicateCloseButton" Style="{StaticResource AppTabButtonStyle}">
-                            <Button.Tag>
-                                <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                            </Button.Tag>
-                        </Button>
+                        <ListViewItem x:Name="DuplicatePrimaryButton" Padding="2,0" MinWidth="50">
+                            <ContentControl x:Name="DuplicatePrimaryControl" Style="{StaticResource AppTabIconContentControlStyle}">
+                                <ContentControl.Tag>
+                                    <FontIcon Glyph="&#xF78C;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </ListViewItem>
+                        <ListViewItem x:Name="DuplicateCloseButton" Padding="2,0" MinWidth="50">
+                            <ContentControl x:Name="DuplicateCloseControl" Style="{StaticResource AppTabIconContentControlStyle}">
+                                <ContentControl.Tag>
+                                    <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </ListViewItem>
                     </StackPanel>
                 </StackPanel>
             </elements:MainLayout.DuplicateChild>

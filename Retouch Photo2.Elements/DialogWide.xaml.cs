@@ -24,8 +24,8 @@ namespace Retouch_Photo2.Elements
     {
 
         //@Delegate
-        /// <summary> Occurs when the clicking the s close button. </summary>
-        public event RoutedEventHandler CloseButtonClick;
+        /// <summary> Occurs when the tapped the s close button. </summary>
+        public event TappedEventHandler CloseButtonTapped;
         /// <summary> Occurs when the clicking the s primary button. </summary>
         public event RoutedEventHandler PrimaryButtonClick;
 
@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Elements
         VisualState DialogHidden;
         Border LayoutRoot;
         Border RootGrid;
-        Button CloseButton;
+        ListViewItem CloseButton;
         Button PrimaryButton;
 
 
@@ -104,9 +104,9 @@ namespace Retouch_Photo2.Elements
             this.RootGrid = base.GetTemplateChild(nameof(RootGrid)) as Border;
             if (this.RootGrid != null) this.RootGrid.Tapped += this.Root_Tapped;
 
-            if (this.CloseButton != null) this.CloseButton.Click -= this.CloseButtonClick;
-            this.CloseButton = base.GetTemplateChild(nameof(CloseButton)) as Button;
-            if (this.CloseButton != null) this.CloseButton.Click += this.CloseButtonClick;
+            if (this.CloseButton != null) this.CloseButton.Tapped -= this.CloseButtonTapped;
+            this.CloseButton = base.GetTemplateChild(nameof(CloseButton)) as ListViewItem;
+            if (this.CloseButton != null) this.CloseButton.Tapped += this.CloseButtonTapped;
 
             if (this.PrimaryButton != null) this.PrimaryButton.Click -= this.PrimaryButtonClick;
             this.PrimaryButton = base.GetTemplateChild(nameof(PrimaryButton)) as Button;

@@ -109,7 +109,7 @@ namespace Retouch_Photo2
             this.DrawLayout.RightIcon = new Retouch_Photo2.Layers.Icon();
 
             //Gallery
-            this.DrawLayout.GalleryButtonClick += (s, e) => this.ShowGalleryDialog();
+            this.DrawLayout.GalleryButtonTapped += (s, e) => this.ShowGalleryDialog();
             this.ConstructDragAndDrop();
 
             //Flyout

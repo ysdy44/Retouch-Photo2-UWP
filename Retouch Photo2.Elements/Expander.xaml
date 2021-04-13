@@ -125,20 +125,6 @@
 
                             <!--Head-->
                             <Grid x:Name="TitleGrid" Height="{StaticResource AppTitleHeight}" Grid.Row="0" Padding="{StaticResource AppPanelPadding}" ManipulationMode="TranslateX,TranslateY" Background="Transparent">
-
-                                <Grid.Resources>
-                                    <!--Style-->
-                                    <Style x:Key="ButtonStyle" TargetType="Button">
-                                        <Setter Property="Padding" Value="0"/>
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="Foreground" Value="{ThemeResource AppText}"/>
-                                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                        <Setter Property="VerticalAlignment" Value="Stretch"/>
-                                    </Style>
-                                </Grid.Resources>
-
                                 <Grid.ContextFlyout>
                                     <!--Flyout-->
                                     <MenuFlyout x:Name="WidthMenuFlyout" Placement="Bottom">
@@ -167,15 +153,15 @@
                                 <TextBlock x:Name="TitleTextBlock" Margin="30,0" FontWeight="Medium" TextTrimming="CharacterEllipsis" FontSize="20" Grid.ColumnSpan="3" TextWrapping="Wrap" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"
                                                Text="{TemplateBinding Title}"/>
 
-                                <Button x:Name="PinButton" Grid.Column="1" Width="40" Style="{StaticResource ButtonStyle}">
+                                <ListViewItem x:Name="PinButton" Grid.Column="1" Padding="2" Width="40" MinWidth="30"  MinHeight="30"  HorizontalContentAlignment="Center">
                                     <FontIcon Glyph="&#xE840;" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                                </Button>
-                                <Button x:Name="OverlayButton" Grid.Column="2" Width="40" Style="{StaticResource ButtonStyle}">
+                                </ListViewItem>
+                                <ListViewItem x:Name="OverlayButton" Grid.Column="2" Padding="2" Width="40" MinWidth="30"  MinHeight="30"  HorizontalContentAlignment="Center">
                                     <FontIcon Glyph="&#xF156;" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                                </Button>
-                                <Button x:Name="CloseButton" Grid.Column="3" Visibility="Collapsed" Width="40" Style="{StaticResource ButtonStyle}">
+                                </ListViewItem>
+                                <ListViewItem x:Name="CloseButton" Grid.Column="3" Visibility="Collapsed" Padding="2" Width="40" MinWidth="30"  MinHeight="30"  HorizontalContentAlignment="Center">
                                     <FontIcon Glyph="&#xF78A;" FontSize="14" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                                </Button>
+                                </ListViewItem>
 
                             </Grid>
 

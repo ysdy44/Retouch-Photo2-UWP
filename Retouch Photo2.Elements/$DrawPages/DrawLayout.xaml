@@ -1206,19 +1206,19 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="GalleryButton" Height="{StaticResource AppTitleHeight}" Style="{StaticResource AppButtonStyle}">
+                <ListViewItem x:Name="GalleryButton" Height="{StaticResource AppTitleHeight}" MinWidth="50" HorizontalContentAlignment="Center">
                     <ToolTipService.ToolTip>
                         <ToolTip x:Name="GalleryToolTip" Placement="Left" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
                     <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                </Button>
+                </ListViewItem>
                 <Border x:Name="RightBorder" Grid.Row="1"/>
-                <Button x:Name="WidthButton" Visibility="Collapsed" Grid.Row="2" Height="{StaticResource AppTitleHeight}" Style="{StaticResource AppButtonStyle}">
+                <ListViewItem x:Name="WidthButton" Visibility="Collapsed" Grid.Row="2" Height="{StaticResource AppTitleHeight}" MinWidth="50" HorizontalContentAlignment="Center">
                     <ToolTipService.ToolTip>
                         <ToolTip x:Name="WidthToolTip" Placement="Left" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
                     <FontIcon x:Name="WidthIcon" Glyph="&#xE127;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                </Button>
+                </ListViewItem>
                 <Button x:Name="PCGalleryButton" Visibility="Collapsed" Width="90" Style="{StaticResource AppIconLineCircleButton}">
                     <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>

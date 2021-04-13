@@ -7,6 +7,7 @@ using System;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Elements
 {
@@ -26,10 +27,10 @@ namespace Retouch_Photo2.Elements
     {
 
         //@Delegate
-        /// <summary> Occurs when the clicking the left button. </summary>
-        public event RoutedEventHandler LeftButtonClick;
-        /// <summary> Occurs when the clicking the right button. </summary>
-        public event RoutedEventHandler RightButtonClick;
+        /// <summary> Occurs when the tapped the left button. </summary>
+        public event TappedEventHandler LeftButtonTapped;
+        /// <summary> Occurs when the tapped the right button. </summary>
+        public event TappedEventHandler RightButtonTapped;
 
 
         #region DependencyProperty
@@ -91,8 +92,8 @@ namespace Retouch_Photo2.Elements
         VisualStateGroup CommonStates;
         VisualState Normal;
         VisualState UnExpaned;
-        Button LeftButton;
-        Button RightButton;
+        ListViewItem LeftButton;
+        ListViewItem RightButton;
 
 
         //@VisualState
@@ -129,13 +130,13 @@ namespace Retouch_Photo2.Elements
             this.Normal = base.GetTemplateChild(nameof(Normal)) as VisualState;
             this.UnExpaned = base.GetTemplateChild(nameof(UnExpaned)) as VisualState;
 
-            if (this.LeftButton != null) this.LeftButton.Click -= this.LeftButtonClick;
-            this.LeftButton = base.GetTemplateChild(nameof(LeftButton)) as Button;
-            if (this.LeftButton != null) this.LeftButton.Click += this.LeftButtonClick;
+            if (this.LeftButton != null) this.LeftButton.Tapped -= this.LeftButtonTapped;
+            this.LeftButton = base.GetTemplateChild(nameof(LeftButton)) as ListViewItem;
+            if (this.LeftButton != null) this.LeftButton.Tapped += this.LeftButtonTapped;
 
-            if (this.RightButton != null) this.RightButton.Click -= this.RightButtonClick;
-            this.RightButton = base.GetTemplateChild(nameof(RightButton)) as Button;
-            if (this.RightButton != null) this.RightButton.Click += this.RightButtonClick;
+            if (this.RightButton != null) this.RightButton.Tapped -= this.RightButtonTapped;
+            this.RightButton = base.GetTemplateChild(nameof(RightButton)) as ListViewItem;
+            if (this.RightButton != null) this.RightButton.Tapped += this.RightButtonTapped;
         }
 
 

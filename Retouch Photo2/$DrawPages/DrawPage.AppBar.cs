@@ -50,7 +50,7 @@ namespace Retouch_Photo2
 
 
             this.DocumentUnSaveItem.Tapped += (s, e) => this.DocumentUnSave();
-            this.DocumentButton.Click += (s, e) =>
+            this.DocumentButton.Tapped += (s, e) =>
             {
                 int countHistorys = HistoryBase.Instances.Count;
                 int countLayerages = LayerManager.RootLayerage.Children.Count;

@@ -38,8 +38,8 @@ namespace Retouch_Photo2
             this.InitializeComponent();
             this.ConstructFlowDirection();
             {
-                this.Head.LeftButtonClick += (s, e) => this.Frame.GoBack();
-                this.Head.RightButtonClick += (s, e) => this.AboutDialog.Show();
+                this.Head.LeftButtonTapped += (s, e) => this.Frame.GoBack();
+                this.Head.RightButtonTapped += (s, e) => this.AboutDialog.Show();
                 this.ScrollViewer.ViewChanged += (s, e) => this.Head.Move(this.ScrollViewer.VerticalOffset);
 
                 this.ConstructAbout();

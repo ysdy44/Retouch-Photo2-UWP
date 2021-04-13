@@ -86,7 +86,7 @@ namespace Retouch_Photo2
 
 
             //Select
-            this.AllButton.Click += (s, e) =>
+            this.AllButton.Tapped += (s, e) =>
             {
                 bool isAnyUnSelected = this.Items.Any(p => p.IsSelected == false);
 
@@ -100,26 +100,26 @@ namespace Retouch_Photo2
                 this.RefreshSelectCount();
             };
             //Head
-            this.Head.LeftButtonClick += async (s, e) => await Launcher.LaunchUriAsync(new Uri(this.DocumentationLink));
-            this.Head.RightButtonClick += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
+            this.Head.LeftButtonTapped += async (s, e) => await Launcher.LaunchUriAsync(new Uri(this.DocumentationLink));
+            this.Head.RightButtonTapped += (s, e) => this.Frame.Navigate(typeof(SettingPage));//Navigate     
 
 
             //Foot
             this.ConstructAddDialog();
-            this.NewButton.Click += (s, e) => this.ShowAddDialog();
+            this.NewButton.Tapped += (s, e) => this.ShowAddDialog();
 
             this.ConstructPicturesControl();
-            this.PicturesButton.Click += (s, e) => this.MainLayout.State = MainPageState.Pictures;
+            this.PicturesButton.Tapped += (s, e) => this.MainLayout.State = MainPageState.Pictures;
 
             this.ConstructRenameDialog();
-            this.RenameCloseButton.Click += (s, e) => this.MainLayout.State = MainPageState.Main;
-            this.RenameButton.Click += async (s, e) => this.MainLayout.State = MainPageState.Rename;
+            this.RenameCloseButton.Tapped += (s, e) => this.MainLayout.State = MainPageState.Main;
+            this.RenameButton.Tapped += async (s, e) => this.MainLayout.State = MainPageState.Rename;
 
             this.ConstructDeleteControl();
-            this.DeleteButton.Click += (s, e) => this.MainLayout.State = MainPageState.Delete;
+            this.DeleteButton.Tapped += (s, e) => this.MainLayout.State = MainPageState.Delete;
 
             this.ConstructDuplicateControl();
-            this.DuplicateButton.Click += (s, e) => this.MainLayout.State = MainPageState.Duplicate;
+            this.DuplicateButton.Tapped += (s, e) => this.MainLayout.State = MainPageState.Duplicate;
         }
     }
 

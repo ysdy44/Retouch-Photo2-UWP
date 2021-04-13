@@ -309,7 +309,7 @@ namespace Retouch_Photo2
         {
             this.GalleryGridView.ItemsSource = Photo.Instances;
 
-            this.GalleryDialog.CloseButtonClick += (s, e) => this.GalleryDialog.Hide();
+            this.GalleryDialog.CloseButtonTapped += (s, e) => this.GalleryDialog.Hide();
             this.GalleryDialog.PrimaryButtonClick += async (s, e) =>
             {
                 //Files

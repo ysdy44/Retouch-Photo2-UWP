@@ -125,20 +125,19 @@
                         </Grid.ColumnDefinitions>
 
 
-                        <Button x:Name="LeftButton" 
-                                Content="{TemplateBinding LeftButtonContent}"
-                                Style="{StaticResource AppButtonStyle}">
+                        <ListViewItem x:Name="LeftButton" MinWidth="50" HorizontalContentAlignment="Center"
+                                Content="{TemplateBinding LeftButtonContent}">
                             <ToolTipService.ToolTip>
                                 <ToolTip Placement="Bottom" 
                                           Content="{TemplateBinding LeftButtonToolTip}"
                                           Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
-                            <Button.Transitions>
+                            <ListViewItem.Transitions>
                                 <TransitionCollection>
                                     <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
                                 </TransitionCollection>
-                            </Button.Transitions>
-                        </Button>
+                            </ListViewItem.Transitions>
+                        </ListViewItem>
 
                         <TextBlock x:Name="TitleTextBlock" Grid.Column="1" HorizontalAlignment="Center" 
                                        Text="{TemplateBinding Title}"
@@ -159,20 +158,19 @@
                             </TextBlock.Transitions>
                         </TextBlock>
 
-                        <Button x:Name="RightButton" Grid.Column="2" 
-                                Content="{TemplateBinding RightButtonContent}"
-                                Style="{StaticResource AppButtonStyle}">
+                        <ListViewItem x:Name="RightButton" Grid.Column="2" MinWidth="50" HorizontalContentAlignment="Center"
+                                Content="{TemplateBinding RightButtonContent}">
                             <ToolTipService.ToolTip>
                                 <ToolTip Placement="Bottom" 
                                           Content="{TemplateBinding RightButtonToolTip}"
                                           Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
-                            <Button.Transitions>
+                            <ListViewItem.Transitions>
                                 <TransitionCollection>
                                     <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
                                 </TransitionCollection>
-                            </Button.Transitions>
-                        </Button>
+                            </ListViewItem.Transitions>
+                        </ListViewItem>
 
                     </Grid>
                 </ControlTemplate>

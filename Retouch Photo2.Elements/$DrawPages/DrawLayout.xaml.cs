@@ -7,6 +7,7 @@ using Microsoft.Graphics.Canvas.UI.Xaml;
 using Windows.Devices.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2.Elements
 {
@@ -69,18 +70,18 @@ namespace Retouch_Photo2.Elements
         public StackPanel PinStackPanel => this._PinStackPanel;
 
 
-        /// <summary> GalleryButton's click. </summary>
-        public event RoutedEventHandler GalleryButtonClick
+        /// <summary> GalleryButton's tapped. </summary>
+        public event TappedEventHandler GalleryButtonTapped
         {
             add
             {
-                this.GalleryButton.Click += value;
-                this.PCGalleryButton.Click += value;
+                this.GalleryButton.Tapped += value;
+                this.PCGalleryButton.Tapped += value;
             }
             remove
             {
-                this.GalleryButton.Click -= value;
-                this.PCGalleryButton.Click -= value;
+                this.GalleryButton.Tapped -= value;
+                this.PCGalleryButton.Tapped -= value;
             }
         }
         /// <summary> WritableCancelButton's click. </summary>
@@ -122,7 +123,7 @@ namespace Retouch_Photo2.Elements
             this.DismissOverlay.PointerPressed += (s, e) => this.Hide();
 
             //Width
-            this.WidthButton.Click += (s, e) =>
+            this.WidthButton.Tapped += (s, e) =>
             {
                 if (this.RightGrid.ActualWidth < 100)
                     this.WidthToWideStoryboard.Begin();//Storyboard

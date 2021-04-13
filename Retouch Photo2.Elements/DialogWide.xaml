@@ -153,9 +153,9 @@
                                     <Button x:Name="PrimaryButton" Grid.Column="2" HorizontalAlignment="Stretch" Style="{StaticResource AppIconAccentLineCircleButton}"
                                             Content="{TemplateBinding PrimaryButtonText}"/>
 
-                                    <Button x:Name="CloseButton" Grid.Column="0" Width="40" Height="40" HorizontalAlignment="Stretch" Style="{StaticResource AppButtonStyle}">
+                                    <ListViewItem x:Name="CloseButton" Grid.Column="0" Padding="2" MinWidth="32" Width="40" Height="40" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
                                         <FontIcon Glyph="&#xE10A;" FontSize="16" FontFamily="Segoe MDL2 Assets"/>
-                                    </Button>
+                                    </ListViewItem>
                                 </Grid>
 
 

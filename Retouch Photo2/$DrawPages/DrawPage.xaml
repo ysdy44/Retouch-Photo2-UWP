@@ -239,9 +239,9 @@
 
 
                     <!--Document-->
-                    <Button x:Name="DocumentButton" Style="{StaticResource AppButtonStyle}">
+                    <ListViewItem x:Name="DocumentButton" HorizontalContentAlignment="Center">
                         <TextBlock x:Name="DocumentTextBlock" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
-                    </Button>
+                    </ListViewItem>
 
                     <!--Left-->
                     <StackPanel x:Name="LeftStackPanel" Grid.Column="1" Orientation="Horizontal">
