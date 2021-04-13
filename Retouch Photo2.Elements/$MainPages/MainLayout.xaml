@@ -254,7 +254,7 @@
         <Border x:Name="HeadBorder" >
         </Border>
 
-        <Border x:Name="SelectBorder" Visibility="Collapsed" HorizontalAlignment="Stretch" Background="{ThemeResource AppBorderBrush}">
+        <Border x:Name="SelectBorder" Visibility="Collapsed" RequestedTheme="Dark" HorizontalAlignment="Stretch" Background="{ThemeResource SystemAccentColor}">
         </Border>
 
 

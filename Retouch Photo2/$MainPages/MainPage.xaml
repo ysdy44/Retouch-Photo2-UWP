@@ -100,9 +100,9 @@
             <!--SelectChild-->
             <elements:MainLayout.SelectChild>
                 <Grid x:Name="SelectGrid">
-                    <TextBlock Style="{StaticResource AppTextBlockStyle}">                        
+                    <TextBlock Foreground="{ThemeResource SystemBaseHighColor}" Style="{StaticResource AppTextBlockStyle}">                        
                         <Run x:Name="ClickTipTextBlock"/>
-                        <Run x:Name="SelectCountRun" Foreground="{ThemeResource SystemBaseHighColor}"
+                        <Run x:Name="SelectCountRun" FontWeight="Bold"
                              Text="{x:Bind SelectedCount, Mode=OneWay}"/>
                     </TextBlock>
                     <Button x:Name="AllButton" HorizontalAlignment="Right" Style="{StaticResource AppButtonStyle}"/>

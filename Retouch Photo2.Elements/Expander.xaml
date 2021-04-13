@@ -45,9 +45,6 @@
                                         <Setter Target = "RootGrid.BorderThickness" Value="1,0"/>
                                         <Setter Target = "RootGrid.BorderBrush" Value="{ThemeResource AppStroke}"/>
 
-                                        <Setter Target = "TitleGrid.Height" Value="50"/>
-                                        <Setter Target = "TitleGrid.Background" Value="{ThemeResource AppLinearBrush}"/>
-
                                         <Setter Target = "PinButton.Visibility" Value="Collapsed"/>
                                         <Setter Target = "OverlayButton.Visibility" Value="Visible"/>
                                         <Setter Target = "CloseButton.Visibility" Value="Visible"/>
@@ -127,7 +124,7 @@
 
 
                             <!--Head-->
-                            <Grid x:Name="TitleGrid" Height="42" Grid.Row="0" Padding="{StaticResource AppPanelPadding}" ManipulationMode="TranslateX,TranslateY" Background="Transparent">
+                            <Grid x:Name="TitleGrid" Height="{StaticResource AppTitleHeight}" Grid.Row="0" Padding="{StaticResource AppPanelPadding}" ManipulationMode="TranslateX,TranslateY" Background="Transparent">
 
                                 <Grid.Resources>
                                     <!--Style-->

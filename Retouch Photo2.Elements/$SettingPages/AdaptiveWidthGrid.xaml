@@ -5,7 +5,7 @@
 
 
     <Style TargetType="local:AdaptiveWidthGrid">
-        <Setter Property = "Background" Value="{ThemeResource AppFill}"/>
+        <Setter Property = "Background" Value="{ThemeResource AppForeground}"/>
         <Setter Property = "Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:AdaptiveWidthGrid">

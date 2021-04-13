@@ -358,8 +358,9 @@
                              apiContractPresent5:Value="{ThemeResource AppAcrylicWindowBrush}"
                         />
 
-                        <Setter Target = "GalleryBoder.Visibility" Value="Visible"/>
-
+                        <Setter Target = "GalleryButton.Visibility" Value="Collapsed"/>
+                        <Setter Target = "PCGalleryButton.Visibility" Value="Visible"/>
+                        
                     </VisualState.Setters>
                 </VisualState>
 
@@ -1162,7 +1163,7 @@
 
 
         <!--Head-->
-        <Border x:Name="HeadBorder" Grid.Column="1" Grid.ColumnSpan="1" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppLinearBrush}">
+        <Border x:Name="HeadBorder" Grid.Column="1" Grid.ColumnSpan="1" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppTitle}">
             <Border.RenderTransformOrigin>0.5, 0.5</Border.RenderTransformOrigin>
             <Border.RenderTransform>
                 <TranslateTransform x:Name="HeadTransform" Y="0"/>
@@ -1212,11 +1213,9 @@
                     </ToolTipService.ToolTip>
                     <FontIcon x:Name="WidthIcon" Glyph="&#xE127;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>
-                <Border x:Name = "GalleryBoder" Visibility="Collapsed" Height="{StaticResource AppTitleHeight}" Background="{ThemeResource AppLinearBrush}">
-                    <Button x:Name="PCGalleryButton" Width="90" Background="{ThemeResource AppFill}" Style="{StaticResource AppRoundedButtonStyle}">
-                        <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                    </Button>
-                </Border>
+                <Button x:Name="PCGalleryButton" Visibility="Collapsed" Width="90" Style="{StaticResource AppIconLineCircleButton}">
+                    <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                </Button>
 
             </Grid>
 

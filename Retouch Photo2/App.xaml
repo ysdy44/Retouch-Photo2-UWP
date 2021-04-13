@@ -22,8 +22,8 @@
 
                 <ResourceDictionary x:Key="Light">
 
-                    <Color x:Key="AppForegroundColor" >#F8F8F8</Color>
-                    <Color x:Key="AppBackgroundColor" >#F2F3F5</Color>
+                    <Color x:Key="AppForegroundColor" >#F2F3F5</Color>
+                    <Color x:Key="AppBackgroundColor" >#FFFFFF</Color>
                     <Color x:Key="AppBorderBrushColor" >#BEBCC7</Color>
 
                     <Color x:Key="AppFillColor" >#FFFFFF</Color>
@@ -32,26 +32,13 @@
 
                     <Color x:Key="AppTitleColor" >#E7E8E8</Color>
                     <Color x:Key="AppAcrylicColor" >#E7E8E8</Color>
-                    
-                    <LinearGradientBrush x:Key="AppLinearBrush" StartPoint="0.5,0" EndPoint="0.5,1">
-                        <GradientStop Color="#FFFFFF" Offset="0"/>
-                        <GradientStop Color="#f7f7f7" Offset="0.25"/>
-                        <GradientStop Color="#f5f5f5" Offset="0.5"/>
-                        <GradientStop Color="#EEEEEE" Offset="0.75"/>
-                        <GradientStop Color="#E0E0E0" Offset="1"/>
-                    </LinearGradientBrush>
-                    
+
                     <LinearGradientBrush x:Key="AppHorizontalShadowBrush" StartPoint="0,0.5" EndPoint="1,0.5">
                         <GradientStop Color="#22000000" Offset="0"/>
                         <GradientStop Color="#09000000" Offset="0.2"/>
                         <GradientStop Color="#00000000" Offset="1"/>
                     </LinearGradientBrush>
-                    <LinearGradientBrush x:Key="AppVerticalShadowBrush" StartPoint="0.5,0" EndPoint="0.5,1">
-                        <GradientStop Color="#22000000" Offset="0"/>
-                        <GradientStop Color="#09000000" Offset="0.2"/>
-                        <GradientStop Color="#00000000" Offset="1"/>
-                    </LinearGradientBrush>
-                    
+
                     <Visibility x:Key="AppGridVisibility">Collapsed</Visibility>
                     <Visibility x:Key="AppShadowVisibility">Visible</Visibility>
 
@@ -59,8 +46,8 @@
 
                 <ResourceDictionary x:Key="Dark">
 
-                    <Color x:Key="AppForegroundColor" >#111111</Color>
-                    <Color x:Key="AppBackgroundColor" >#0E0E0E</Color>
+                    <Color x:Key="AppForegroundColor" >#1E1E1E</Color>
+                    <Color x:Key="AppBackgroundColor" >#000000</Color>
                     <Color x:Key="AppBorderBrushColor" >#33888888</Color>
 
                     <Color x:Key="AppFillColor" >#1E1E1E</Color>
@@ -69,21 +56,8 @@
 
                     <Color x:Key="AppTitleColor" >#171717</Color>
                     <Color x:Key="AppAcrylicColor" >#111111</Color>
-                    
-                    <LinearGradientBrush x:Key="AppLinearBrush" StartPoint="0.5,0" EndPoint="0.5,1">
-                        <GradientStop Color="#111111" Offset="0"/>
-                        <GradientStop Color="#101010" Offset="0.25"/>
-                        <GradientStop Color="#0F0F0F" Offset="0.5"/>
-                        <GradientStop Color="#0E0E0E" Offset="0.75"/>
-                        <GradientStop Color="#030303" Offset="1"/>
-                    </LinearGradientBrush>
 
                     <LinearGradientBrush x:Key="AppHorizontalShadowBrush" StartPoint="0,0.5" EndPoint="1,0.5">
-                        <GradientStop Color="#66000000" Offset="0"/>
-                        <GradientStop Color="#44000000" Offset="0.2"/>
-                        <GradientStop Color="#00000000" Offset="1"/>
-                    </LinearGradientBrush>
-                    <LinearGradientBrush x:Key="AppVerticalShadowBrush" StartPoint="0.5,0" EndPoint="0.5,1">
                         <GradientStop Color="#66000000" Offset="0"/>
                         <GradientStop Color="#44000000" Offset="0.2"/>
                         <GradientStop Color="#00000000" Offset="1"/>

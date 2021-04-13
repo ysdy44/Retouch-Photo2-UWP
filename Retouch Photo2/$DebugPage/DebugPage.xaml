@@ -413,7 +413,7 @@
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ConvertToCurvesIcon.xaml"/>
                                 </Border.Resources>
                                 <ContentControl Template="{StaticResource ConvertToCurvesIcon}"/>
-                            </Border>
+                            </Border> 
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
 
@@ -503,6 +503,18 @@
                                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypes/Icons/ArrowIcon.xaml"/>
                                 </Border.Resources>
                                 <ContentControl Template="{StaticResource ArrowIcon}"/>
+                            </Border>
+                        </local:UIElementGrouping.Items>
+                    </local:UIElementGrouping>
+
+                    <!--ConvertToCurves-->
+                    <local:UIElementGrouping Key="More_Transform_SnapToTick">
+                        <local:UIElementGrouping.Items>
+                            <Border>
+                                <Border.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/SnapToTickIcon.xaml"/>
+                                </Border.Resources>
+                                <ContentControl Template="{StaticResource SnapToTickIcon}"/>
                             </Border>
                         </local:UIElementGrouping.Items>
                     </local:UIElementGrouping>
