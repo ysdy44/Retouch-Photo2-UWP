@@ -49,7 +49,7 @@
      
         <Rectangle Grid.Column="5" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <Button x:Name="MoreTransformButton" Grid.Column="6" Style="{StaticResource AppRoundedButtonStyle}">
+        <Button x:Name="MoreButton" Grid.Column="6" Style="{StaticResource AppRoundedButtonStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="MoreTransformToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>

@@ -3,7 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:elements="using:Retouch_Photo2.Elements"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Elements"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
@@ -28,7 +29,7 @@
 
         <SplitView.Pane>
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
-                <StackPanel x:Name="StackPanel" Grid.ColumnSpan="2">
+                <StackPanel x:Name="StackPanel">
 
                     <ListViewItem x:Name="GaussianBlur" Padding="8,0,0,0" HorizontalContentAlignment="Stretch">
                         <Grid>

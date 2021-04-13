@@ -40,7 +40,6 @@ namespace Retouch_Photo2.Tools.Models
         ViewModel SelectionViewModel => App.SelectionViewModel;
         
 
-
         //@Content      
         public ToolType Type => ToolType.Cursor;
         public ControlTemplate Icon => this.CursorPage.Icon;
@@ -306,7 +305,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.OperateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowOperateFlyout?.Invoke(this.OperateButton);
 
-            this.MoreTransformButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreTransform?.Invoke(this, this.MoreTransformButton);
+            this.MoreButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
         }
 
         //Strings
@@ -316,7 +315,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.OperateToolTip.Content = resource.GetString("Menus_Operate");
 
-            this.MoreTransformToolTip.Content = resource.GetString("Tools_MoreTransform");
+            this.MoreTransformToolTip.Content = resource.GetString("Tools_More");
         }
 
     }

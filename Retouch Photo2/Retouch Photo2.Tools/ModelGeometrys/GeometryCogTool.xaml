@@ -97,7 +97,7 @@
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <Button x:Name="MoreCreateButton" Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+            <Button x:Name="MoreButton" Width="50" Style="{StaticResource AppRoundedButtonStyle}">
                 <ToolTipService.ToolTip>
                     <ToolTip x:Name="MoreCreateToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>

@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.ViewModel.ToolType = ToolType.Node;
             };
 
-            this.MoreCreateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreCreate?.Invoke(this, this.MoreCreateButton);
+            this.MoreButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
         }
 
 
@@ -151,7 +151,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ConvertToCurvesToolTip.Content = resource.GetString("Tools_ConvertToCurves");
 
-            this.MoreCreateToolTip.Content = resource.GetString("Tools_MoreCreate");
+            this.MoreCreateToolTip.Content = resource.GetString("Tools_More");
         }
 
 

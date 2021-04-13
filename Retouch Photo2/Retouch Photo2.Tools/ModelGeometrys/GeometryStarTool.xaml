@@ -80,7 +80,7 @@
 
         <Rectangle Grid.Column="8" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <Button x:Name="MoreCreateButton" Grid.Column="9" Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+        <Button x:Name="MoreButton" Grid.Column="9" Width="50" Style="{StaticResource AppRoundedButtonStyle}">
             <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
         </Button>
 
