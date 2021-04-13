@@ -87,11 +87,14 @@ namespace Retouch_Photo2
             this.DrawLayout.GalleryToolTipContent = resource.GetString("$DrawPage_Gallery");
             this.DrawLayout.WidthToolTipContent = resource.GetString("$DrawPage_WidthTip");
             {
-                this.SquareTextBlock.Text = resource.GetString("Tools_MoreCreate_Square");
-                this.CenterTextBlock.Text = resource.GetString("Tools_MoreCreate_Center");
-
-                this.RatioTextBlock.Text = resource.GetString("Tools_MoreTransform_Ratio ");
-                this.CenterTextBlock2.Text = resource.GetString("Tools_MoreTransform_Center");
+                this.TransformTextBlock.Text = resource.GetString("More_Transform");
+                this.RatioControl.Content = resource.GetString("More_Transform_Ratio");      
+                this.SnapToTickControl.Content = resource.GetString("More_Transform_SnapToTick");
+                this.CreateTextBlock.Text = resource.GetString("More_Create");
+                this.SquareControl.Content = resource.GetString("More_Create_Square");     
+                this.CenterControl.Content = resource.GetString("More_Create_Center");
+                this.WheelToRotateControl.Content = resource.GetString("More_Operate_WheelToRotate");
+                this.OperateTextBlock.Text = resource.GetString("More_Operate");
             }
 
             this.EditExpander.Title = resource.GetString("Menus_Edit");
@@ -272,7 +275,7 @@ namespace Retouch_Photo2
                 this.DrawLayout.IsFullScreen = false;
                 this.UnFullScreenButton.Visibility = Visibility.Collapsed;
             }
-            else 
+            else
             {
                 this.DrawLayout.IsFullScreen = true;
                 this.UnFullScreenButton.Visibility = Visibility.Visible;
@@ -420,44 +423,18 @@ namespace Retouch_Photo2
         }
 
 
-        //MoreTransform
-        private void ShowMoreTransformFlyout(FrameworkElement page, FrameworkElement button)
+        //More
+        private void ConstructMore()
         {
-            switch (this.SettingViewModel.DeviceLayoutType)
-            {
-                case DeviceLayoutType.PC:
-                    this.MoreTransformContent.Width = double.NaN;
-                    this.MoreTransformFlyout.ShowAt(button);
-                    break;
-                case DeviceLayoutType.Pad:
-                    this.MoreTransformContent.Width = double.NaN;
-                    this.MoreTransformFlyout.ShowAt(page);
-                    break;
-                case DeviceLayoutType.Phone:
-                    this.MoreTransformContent.Width = page.ActualWidth - 40;
-                    this.MoreTransformFlyout.ShowAt(page);
-                    break;
-            }
+            this.RatioItem.Tapped += (s, e) => this.RatioItem.IsSelected = !this.RatioItem.IsSelected;
+            this.SnapToTickItem.Tapped += (s, e) => this.SnapToTickItem.IsSelected = !this.SnapToTickItem.IsSelected;
+            this.SquareItem.Tapped += (s, e) => this.SquareItem.IsSelected = !this.SquareItem.IsSelected;
+            this.CenterItem.Tapped += (s, e) => this.CenterItem.IsSelected = !this.CenterItem.IsSelected;
+            this.WheelToRotateItem.Tapped += (s, e) => this.WheelToRotateItem.IsSelected = !this.WheelToRotateItem.IsSelected;
         }
-
-        //MoreCreate
-        private void ShowMoreCreateFlyout(FrameworkElement page, FrameworkElement button)
+        private void ShowMoreFlyout2(FrameworkElement button)
         {
-            switch (this.SettingViewModel.DeviceLayoutType)
-            {
-                case DeviceLayoutType.PC:
-                    this.MoreCreateContent.Width = double.NaN;
-                    this.MoreCreateFlyout.ShowAt(button);
-                    break;
-                case DeviceLayoutType.Pad:
-                    this.MoreCreateContent.Width = double.NaN;
-                    this.MoreCreateFlyout.ShowAt(page);
-                    break;
-                case DeviceLayoutType.Phone:
-                    this.MoreCreateContent.Width = page.ActualWidth - 40;
-                    this.MoreCreateFlyout.ShowAt(page);
-                    break;
-            }
+            this.MoreFlyout.ShowAt(button);
         }
 
     }

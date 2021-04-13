@@ -59,47 +59,71 @@
                 <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
             </Flyout>
 
-            <Flyout x:Name="MoreTransformFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <StackPanel x:Name="MoreTransformContent" Padding="2" MinWidth="300">
-
-                    <!--Ratio-->
-                    <TextBlock x:Name="RatioTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <ToggleButton HorizontalAlignment="Left" Margin="12,0" Style="{StaticResource AppCircleToggleButtonStyle}"
-                                  IsChecked="{x:Bind SettingViewModel.IsRatio, Mode=TwoWay}">
-                        <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-                    </ToggleButton>
-
-                    <ContentControl Width="4"/>
-
-                    <!--Center-->
-                    <TextBlock x:Name="CenterTextBlock2" Style="{StaticResource AppTextBlockStyle}"/>
-                    <ToggleButton HorizontalAlignment="Left" Margin="12,0" Style="{StaticResource AppCircleToggleButtonStyle}"
-                                  IsChecked="{x:Bind SettingViewModel.IsCenter, Mode=TwoWay}">
-                        <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-                    </ToggleButton>
-
-                </StackPanel>
-            </Flyout>
-            <Flyout x:Name="MoreCreateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <StackPanel x:Name="MoreCreateContent" Padding="2" MinWidth="300" Orientation="Vertical">
-
-                    <!--Square-->
-                    <TextBlock x:Name="SquareTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <ToggleButton HorizontalAlignment="Left" Margin="12,0" Style="{StaticResource AppCircleToggleButtonStyle}"
-                                  IsChecked="{x:Bind SettingViewModel.IsSquare, Mode=TwoWay}">
-                        <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-                    </ToggleButton>
-
-                    <ContentControl Width="4"/>
-
-                    <!--Center-->
-                    <TextBlock x:Name="CenterTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <ToggleButton HorizontalAlignment="Left" Margin="12,0" Style="{StaticResource AppCircleToggleButtonStyle}"
-                                  IsChecked="{x:Bind SettingViewModel.IsCenter, Mode=TwoWay}">
-                        <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-                    </ToggleButton>
-
-                </StackPanel>
+            <Flyout x:Name="MoreFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
+                    <ScrollViewer.Resources>
+                        <!--StaticResource-->
+                        <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
+                        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
+                        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
+                        <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
+                        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
+                        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
+                    </ScrollViewer.Resources>
+                    <StackPanel>                        
+                        <!--Transform-->
+                        <TextBlock x:Name="TransformTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                        <!--Ratio-->
+                        <ListViewItem x:Name="RatioItem" IsSelected="{x:Bind SettingViewModel.IsRatio, Mode=TwoWay}">
+                            <ContentControl x:Name="RatioControl" Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Tag>
+                                    <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </ListViewItem>
+                        <!--SnapToTick-->
+                        <ListViewItem x:Name="SnapToTickItem" IsSelected="{x:Bind SettingViewModel.IsSnapToTick, Mode=TwoWay}">
+                            <ContentControl x:Name="SnapToTickControl" Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/SnapToTickIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource SnapToTickIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </ListViewItem>
+                        <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                        <!--Transform-->
+                        <TextBlock x:Name="CreateTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                        <!--Square-->
+                        <ListViewItem x:Name="SquareItem" IsSelected="{x:Bind SettingViewModel.IsSquare, Mode=TwoWay}">
+                            <ContentControl x:Name="SquareControl" Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Tag>
+                                    <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </ListViewItem>
+                        <!--Center-->
+                        <ListViewItem x:Name="CenterItem" IsSelected="{x:Bind SettingViewModel.IsCenter, Mode=TwoWay}">
+                            <ContentControl x:Name="CenterControl" Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Tag>
+                                    <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </ListViewItem>
+                        <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                        <!--Operate-->
+                        <TextBlock x:Name="OperateTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                        <!--WheelToRotate-->
+                        <ListViewItem x:Name="WheelToRotateItem" IsSelected="{x:Bind SettingViewModel.IsWheelToRotate, Mode=TwoWay}">
+                            <ContentControl x:Name="WheelToRotateControl" Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Tag>
+                                    <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </ListViewItem>
+                    </StackPanel>
+                </ScrollViewer>
             </Flyout>
 
         </ResourceDictionary>

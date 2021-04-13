@@ -318,11 +318,11 @@ namespace Retouch_Photo2.Menus
 
             this.WidthTextBlock.Text = resource.GetString("Menus_Transformer_Width");
             this.HeightTextBlock.Text = resource.GetString("Menus_Transformer_Height");
-            this.RatioScalingToolTip.Content = resource.GetString("Menus_Transformer_RatioScaling");
+            this.RatioToolTip.Content = resource.GetString("Tools_More_Ratio");
 
             this.RotateTextBlock.Text = resource.GetString("Menus_Transformer_Rotate");
             this.SkewTextBlock.Text = resource.GetString("Menus_Transformer_Skew");
-            this.SnapToTickToolTip.Content = resource.GetString("Menus_Transformer_SnapToTick");
+            this.SnapToTickToolTip.Content = resource.GetString("Tools_More_SnapToTick");
 
             this.XTextBlock.Text = resource.GetString("Menus_Transformer_X");
             this.YTextBlock.Text = resource.GetString("Menus_Transformer_Y");

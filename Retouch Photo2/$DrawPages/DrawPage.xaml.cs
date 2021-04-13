@@ -67,10 +67,8 @@ namespace Retouch_Photo2
         /// <summary> Show <see cref="StrokeColorFlyout"/> </summary>
         public static Action<FrameworkElement, FrameworkElement> ShowStrokeColorFlyout;
 
-        /// <summary> Show <see cref="MoreTransformFlyout"/> </summary>
-        public static Action<FrameworkElement, FrameworkElement> ShowMoreTransform;
-        /// <summary> Show <see cref="MoreCreateFlyout"/> </summary>
-        public static Action<FrameworkElement, FrameworkElement> ShowMoreCreate;
+        /// <summary> Show <see cref="MoreFlyout"/> </summary>
+        public static Action<FrameworkElement> ShowMoreFlyout;
 
 
         //@Construct
@@ -117,6 +115,9 @@ namespace Retouch_Photo2
             this.ConstructFillColorFlyout();
             this.ConstructStrokeColorFlyout();
 
+            //More
+            this.ConstructMore();
+
             //Writable
             this.DrawLayout.WritableCancelButtonClick += (s, e) => this.DrawLayout.Hide();
         }
@@ -159,12 +160,12 @@ namespace Retouch_Photo2
             Photo.FlyoutShow += this.PhotoFlyoutShow;
             Photo.ItemClick += this.PhotoItemClick;
 
-            //Flyout
+            //Color
             DrawPage.ShowFillColorFlyout += this.ShowFillColorFlyout2;
             DrawPage.ShowStrokeColorFlyout += this.ShowStrokeColorFlyout2;
+         
             //More
-            DrawPage.ShowMoreTransform += this.ShowMoreTransformFlyout;
-            DrawPage.ShowMoreCreate += this.ShowMoreCreateFlyout;
+            DrawPage.ShowMoreFlyout += this.ShowMoreFlyout2;
 
             //Writable
             AdjustmentCommand.Edit += this.AdjustmentMenuEdit;
@@ -208,12 +209,12 @@ namespace Retouch_Photo2
             Photo.FlyoutShow -= this.PhotoFlyoutShow;
             Photo.ItemClick -= this.PhotoItemClick;
 
-            //Flyout
+            //Color
             DrawPage.ShowFillColorFlyout -= this.ShowFillColorFlyout2;
             DrawPage.ShowStrokeColorFlyout -= this.ShowStrokeColorFlyout2;
+         
             //More
-            DrawPage.ShowMoreTransform -= this.ShowMoreTransformFlyout;
-            DrawPage.ShowMoreCreate -= this.ShowMoreCreateFlyout;
+            DrawPage.ShowMoreFlyout -= this.ShowMoreFlyout2;
 
             //Writable
             AdjustmentCommand.Edit -= this.AdjustmentMenuEdit;
