@@ -113,14 +113,14 @@
             <!--MainChild-->
             <elements:MainLayout.MainChild>
                 <StackPanel Orientation="Horizontal" Padding="18,0" HorizontalAlignment="Center">
-                    <ListViewItem x:Name="NewButton" Padding="2,0" MinWidth="50">
+                    <ListViewItem x:Name="NewButton" Padding="2,0" MinWidth="50" HorizontalContentAlignment="Center">
                         <ContentControl x:Name="NewControl" Style="{StaticResource AppTabIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Glyph="&#xE109;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
-                    <ListViewItem x:Name="PicturesButton" Padding="2,0" MinWidth="50">
+                    <ListViewItem x:Name="PicturesButton" Padding="2,0" MinWidth="50" HorizontalContentAlignment="Center">
                         <ContentControl x:Name="PicturesControl" Style="{StaticResource AppTabIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -128,7 +128,7 @@
                         </ContentControl>
                     </ListViewItem>
                     <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
-                    <ListViewItem x:Name="RenameButton" Padding="2,0" MinWidth="50">
+                    <ListViewItem x:Name="RenameButton" Padding="2,0" MinWidth="50" HorizontalContentAlignment="Center">
                         <ContentControl x:Name="RenameControl" Style="{StaticResource AppTabIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Glyph="&#xE104;" FontSize="20" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -136,14 +136,14 @@
                         </ContentControl>
                     </ListViewItem>
                     <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
-                    <ListViewItem x:Name="DeleteButton" Padding="2,0" MinWidth="50">
+                    <ListViewItem x:Name="DeleteButton" Padding="2,0" MinWidth="50" HorizontalContentAlignment="Center">
                         <ContentControl x:Name="DeleteControl" Style="{StaticResource AppTabIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Glyph="&#xE107;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
-                    <ListViewItem x:Name="DuplicateButton" Padding="2,0" MinWidth="50">
+                    <ListViewItem x:Name="DuplicateButton" Padding="2,0" MinWidth="50" HorizontalContentAlignment="Center">
                         <ContentControl x:Name="DuplicateControl" Style="{StaticResource AppTabIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Glyph="&#xE16F;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -156,21 +156,21 @@
             <!--PicturesChild-->
             <elements:MainLayout.PicturesChild>
                 <StackPanel Orientation="Horizontal" Padding="18,0">
-                    <ListViewItem x:Name="PicturesPhotoButton" Padding="2,0" MinWidth="50">
+                    <ListViewItem x:Name="PicturesPhotoButton" Padding="2,0" MinWidth="50" HorizontalContentAlignment="Center">
                         <ContentControl x:Name="PicturesPhotoControl" Style="{StaticResource AppTabIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
-                    <ListViewItem x:Name="PicturesDestopButton" Padding="2,0" MinWidth="50">
+                    <ListViewItem x:Name="PicturesDestopButton" Padding="2,0" MinWidth="50" HorizontalContentAlignment="Center">
                         <ContentControl x:Name="PicturesDestopControl" Style="{StaticResource AppTabIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Glyph="&#xEC4E;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
-                    <ListViewItem x:Name="PicturesCloseButton" Padding="2,0" MinWidth="50">
+                    <ListViewItem x:Name="PicturesCloseButton" Padding="2,0" MinWidth="50" HorizontalContentAlignment="Center">
                         <ContentControl x:Name="PicturesCloseControl" Style="{StaticResource AppTabIconContentControlStyle}">
                             <ContentControl.Tag>
                                 <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -189,7 +189,7 @@
                         <Run x:Name="RenameSubtitleTextBlock" FontSize="14" FontWeight="Normal" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
                     <Border HorizontalAlignment="Right">
-                        <ListViewItem x:Name="RenameCloseButton" Padding="2,0" MinWidth="50">
+                        <ListViewItem x:Name="RenameCloseButton" Padding="2,0" MinWidth="50" HorizontalContentAlignment="Center">
                             <ContentControl x:Name="RenameCloseControl" Style="{StaticResource AppTabIconContentControlStyle}">
                                 <ContentControl.Tag>
                                     <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -211,14 +211,14 @@
                         <Run x:Name="DeleteSubtitleTextBlock" FontSize="14" FontWeight="Normal" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <ListViewItem x:Name="DeletePrimaryButton" Padding="2,0" MinWidth="50">
+                        <ListViewItem x:Name="DeletePrimaryButton" Padding="2,0" MinWidth="50" HorizontalContentAlignment="Center">
                             <ContentControl x:Name="DeletePrimaryControl" Style="{StaticResource AppTabIconContentControlStyle}">
                                 <ContentControl.Tag>
                                     <FontIcon Glyph="&#xF78C;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                 </ContentControl.Tag>
                             </ContentControl>
                         </ListViewItem>
-                        <ListViewItem x:Name="DeleteCloseButton" Padding="2,0" MinWidth="50">
+                        <ListViewItem x:Name="DeleteCloseButton" Padding="2,0" MinWidth="50" HorizontalContentAlignment="Center">
                             <ContentControl x:Name="DeleteCloseControl" Style="{StaticResource AppTabIconContentControlStyle}">
                                 <ContentControl.Tag>
                                     <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
@@ -239,14 +239,14 @@
                         <Run x:Name="DuplicateSubtitleTextBlock" FontSize="14" FontWeight="Normal" Foreground="{ThemeResource AppText}"/>
                     </TextBlock>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <ListViewItem x:Name="DuplicatePrimaryButton" Padding="2,0" MinWidth="50">
+                        <ListViewItem x:Name="DuplicatePrimaryButton" Padding="2,0" MinWidth="50" HorizontalContentAlignment="Center">
                             <ContentControl x:Name="DuplicatePrimaryControl" Style="{StaticResource AppTabIconContentControlStyle}">
                                 <ContentControl.Tag>
                                     <FontIcon Glyph="&#xF78C;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                                 </ContentControl.Tag>
                             </ContentControl>
                         </ListViewItem>
-                        <ListViewItem x:Name="DuplicateCloseButton" Padding="2,0" MinWidth="50">
+                        <ListViewItem x:Name="DuplicateCloseButton" Padding="2,0" MinWidth="50" HorizontalContentAlignment="Center">
                             <ContentControl x:Name="DuplicateCloseControl" Style="{StaticResource AppTabIconContentControlStyle}">
                                 <ContentControl.Tag>
                                     <FontIcon Glyph="&#xF78A;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>

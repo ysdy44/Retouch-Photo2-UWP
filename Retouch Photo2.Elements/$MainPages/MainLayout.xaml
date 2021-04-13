@@ -162,7 +162,7 @@
                       Padding="0,20"
                       ReorderMode="Disabled" 
                       SelectionMode="None"
-                      animations:ReorderGridAnimation.Duration="300"
+                      animations:ItemsReorderAnimation.Duration="0:0:0.3"
                       >
 
                 <GridView.Header>
