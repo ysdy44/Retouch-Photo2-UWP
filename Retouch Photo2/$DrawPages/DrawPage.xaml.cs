@@ -78,7 +78,7 @@ namespace Retouch_Photo2
         public DrawPage()
         {
             this.InitializeComponent();
-            this.Loaded += (s, e) => this._lockLoaded();
+            this.Loaded += (s, e) => this.TransitionStaring();
             this.ConstructFlowDirection();
             this.ConstructStrings();
             this.RegisteTransition();
@@ -164,7 +164,7 @@ namespace Retouch_Photo2
             //Color
             DrawPage.ShowFillColorFlyout += this.ShowFillColorFlyout2;
             DrawPage.ShowStrokeColorFlyout += this.ShowStrokeColorFlyout2;
-         
+
             //More
             DrawPage.ShowMoreFlyout += this.ShowMoreFlyout2;
 
@@ -213,7 +213,7 @@ namespace Retouch_Photo2
             //Color
             DrawPage.ShowFillColorFlyout -= this.ShowFillColorFlyout2;
             DrawPage.ShowStrokeColorFlyout -= this.ShowStrokeColorFlyout2;
-         
+
             //More
             DrawPage.ShowMoreFlyout -= this.ShowMoreFlyout2;
 
@@ -300,12 +300,12 @@ namespace Retouch_Photo2
                 //ImageVisualRect
                 if (item.ImageVisualRect != Rect.Empty)
                 {
-                    this._lockOnNavigatedTo(item.ImageVisualRect);
+                    this._lockSourceRect = item.ImageVisualRect;
                     this.SelectionViewModel.SetMode();
                 }
                 else
                 {
-                    this._lockOnNavigatedTo(null);
+                    this._lockSourceRect = null;
                 }
             }
 

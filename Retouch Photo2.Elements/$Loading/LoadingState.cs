@@ -18,6 +18,9 @@ namespace Retouch_Photo2.Elements
         /// <summary> Load failed </summary>
         LoadFailed,
 
+        /// <summary> Loading with progress. </summary>
+        LoadingWithProgress,
+
         /// <summary> File corrupt </summary>
         FileCorrupt,
         /// <summary> File null </summary>

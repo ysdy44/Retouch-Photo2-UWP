@@ -1,4 +1,5 @@
-﻿using Retouch_Photo2.ViewModels;
+﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
@@ -7,86 +8,44 @@ namespace Retouch_Photo2
 {
     public sealed partial class DrawPage : Page
     {
-        /// <summary>
-        /// Loaded.
-        /// </summary>
-        private void _lockLoaded()
-        {
-            if (DrawPage._lockIsLoaded == false)
-            {
-                DrawPage._lockIsLoaded = true;
 
-                this.Transition();
-            }
-        }
-        /// <summary>
-        /// OnNavigatedTo.
-        /// </summary>
-        /// <param name="data"> The data. </param>
-        private void _lockOnNavigatedTo(Rect? data)
-        {           
-            this._lockSourceRect = data;
-
-            if (DrawPage._lockIsLoaded == true)
-            {
-                this.Transition();
-            }
-        }
-
-        //@Static
-        /// <summary>     
-        /// Is this Loaded? 
-        /// 
-        /// The first time the page is loaded, 
-        /// <see cref="Page.OnNavigatedTo"/> is executed before <see cref="Page.Loaded"/>
-        /// <see cref="Page.Loaded"/> Responsible for <see cref="Page.NavigatedTo"/>
-        /// </summary>
-        static bool _lockIsLoaded = false;
         /// <summary> The transition data. </summary>
         Rect? _lockSourceRect;
-        
 
 
-        //Transition
         private void RegisteTransition()
         {
-            this.TransitionKeyFrames.Completed += (s, e) => this.TransitionComplete();
-            
-            this.TransitionSlider.ValueChanged += (s, e) =>
+            this.LoadingControl.Completed += (s, e) => this.TransitionComplete();
+
+            this.LoadingControl.ValueChanged += (s, e) =>
             {
                 float value = (float)e.NewValue;
                 this.TransitionDelta(value);
             };
         }
 
-        private void Transition()
+
+        //Staring
+        private void TransitionStaring()
         {
+            this.LoadingControl.State = LoadingState.LoadingWithProgress;
+
             //Destination
-            float destinationWidth = this.SettingViewModel.CanvasWidth; 
+            Vector2 destinationPostion = this.SettingViewModel.FullScreenOffset;
+            float destinationWidth = this.SettingViewModel.CanvasWidth;
             float destinationHeight = this.SettingViewModel.CanvasHeight;
-            this.ViewModel.CanvasTransformer.TransitionDestination(Vector2.Zero, destinationWidth, destinationHeight);
+            this.ViewModel.CanvasTransformer.TransitionDestination(destinationPostion, destinationWidth, destinationHeight);
+
 
             if (this._lockSourceRect is Rect data)
             {
                 //Source
                 this.ViewModel.CanvasTransformer.TransitionSource(data);
-                this.TransitionStaring();
+                this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
-                this.TransitionSlider.Value = 0.0d;
-                this.TransitionStoryboard.Begin();//Storyboard}
+                this.LoadingControl.Begin();//Storyboard
             }
             else this.TransitionComplete();
-        }
-
-
-
-        //Staring
-        private void TransitionStaring()
-        {
-            //  this.ViewModel.CanvasTransformer.Radian(0.0f);
-            //  this.ViewModel.CanvasTransformer.Transition(0.0f);
-            this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
-            this.TransitionBorder.Visibility = Windows.UI.Xaml.Visibility.Visible;
         }
 
         //Delta
@@ -99,13 +58,19 @@ namespace Retouch_Photo2
         //Complete
         private void TransitionComplete()
         {
+            this.LoadingControl.State = LoadingState.None;
+
             //Transition
             this.ViewModel.CanvasTransformer.Transition(1.0f);
+
+            //Destination
+            Vector2 destinationPostion = this.SettingViewModel.FullScreenOffset;
+            this.ViewModel.CanvasTransformer.Position -= destinationPostion;
+            this.ViewModel.CanvasTransformer.ReloadMatrix();
 
             this.DrawLayout.IsFullScreen = false;
 
             this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-            this.TransitionBorder.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
 
 

@@ -543,23 +543,5 @@
         <photos:PhotoBillboardCanvas x:Name="BillboardCanvas"/>
 
 
-        <!--Transition-->
-        <Border x:Name="TransitionBorder" IsHitTestVisible="False" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Border.Resources>
-                <!--Transition-->
-                <Storyboard x:Name="TransitionStoryboard">
-                    <DoubleAnimationUsingKeyFrames x:Name="TransitionKeyFrames" Storyboard.TargetName="TransitionSlider" Storyboard.TargetProperty="Value" EnableDependentAnimation ="True">
-                        <EasingDoubleKeyFrame KeyTime="00:00:0.8" Value="1.0">
-                            <EasingDoubleKeyFrame.EasingFunction>
-                                <QuinticEase EasingMode="EaseInOut"/>
-                            </EasingDoubleKeyFrame.EasingFunction>
-                        </EasingDoubleKeyFrame>
-                    </DoubleAnimationUsingKeyFrames>
-                </Storyboard>
-            </Border.Resources>
-            <ProgressBar x:Name="TransitionSlider" Width="200" Minimum="0" Maximum="1"/>
-        </Border>
-
-
     </Grid>
 </Page>
