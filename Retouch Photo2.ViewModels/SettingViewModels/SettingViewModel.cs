@@ -86,6 +86,18 @@ namespace Retouch_Photo2.ViewModels
         }
         private bool isSnapToTick;
 
+        /// <summary> Slide the scroll wheel to rotate the canvas. </summary>
+        public bool IsWheelToRotate
+        {
+            get => this.isWheelToRotate;
+            set
+            {
+                this.isWheelToRotate = value;
+                this.OnPropertyChanged(nameof(this.IsWheelToRotate));//Notify 
+            }
+        }
+        private bool isWheelToRotate;
+
         /// <summary> Mode of composite between layers. </summary>
         public MarqueeCompositeMode CompositeMode
         {

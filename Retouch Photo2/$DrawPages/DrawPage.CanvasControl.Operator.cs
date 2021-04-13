@@ -202,7 +202,7 @@ namespace Retouch_Photo2
             //Wheel
             canvasOperator.Wheel_Changed += (point, space) =>
             {
-                if (this.SettingViewModel.IsSnapToTick)
+                if (this.SettingViewModel.IsWheelToRotate)
                 {
                     if (space > 0)
                         this.ViewModel.CanvasTransformerLeftRotate();

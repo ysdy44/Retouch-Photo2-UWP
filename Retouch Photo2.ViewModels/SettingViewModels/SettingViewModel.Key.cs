@@ -28,7 +28,7 @@ namespace Retouch_Photo2.ViewModels
         /// Unregiste the key.
         /// </summary>
         public void UnregisteKey()
-        {            
+        {
             Window.Current.CoreWindow.KeyDown -= this.CoreWindow_KeyDown;
             Window.Current.CoreWindow.KeyUp -= this.CoreWindow_KeyUp;
         }
@@ -41,14 +41,14 @@ namespace Retouch_Photo2.ViewModels
             switch (e.VirtualKey)
             {
                 case VirtualKey.Shift: if (this.KeyShift == false) this.KeyShift = this.IsRatio = this.IsSquare = true; break;
-                case VirtualKey.Space: if (this.KeySpace == false) this.KeySpace = this.IsSnapToTick = true; break;
+                case VirtualKey.Space: if (this.KeySpace == false) this.KeySpace = this.IsSnapToTick = this.IsWheelToRotate = true; break;
                 case VirtualKey.Control: if (this.KeyCtrl == false) this.KeyCtrl = this.IsCenter = true; break;
                 default: break;
             }
             this.KeyUpAndDown();
 
 
-            if (this.KeyboardAccelerators != null) 
+            if (this.KeyboardAccelerators != null)
             {
                 foreach (KeyboardAccelerator2 key in this.KeyboardAccelerators)
                 {
@@ -76,16 +76,16 @@ namespace Retouch_Photo2.ViewModels
             switch (e.VirtualKey)
             {
                 case VirtualKey.Shift: if (this.KeyShift) this.KeyShift = this.IsRatio = this.IsSquare = false; break;
-                case VirtualKey.Space: if (this.KeySpace) this.KeySpace = this.IsSnapToTick = false; break;
+                case VirtualKey.Space: if (this.KeySpace) this.KeySpace = this.IsSnapToTick = this.isWheelToRotate = false; break;
                 case VirtualKey.Control: if (this.KeyCtrl) this.KeyCtrl = this.IsCenter = false; break;
                 default: break;
             }
             this.KeyUpAndDown();
 
 
-            if (this.KeyboardAccelerators != null) 
+            if (this.KeyboardAccelerators != null)
             {
-                foreach(KeyboardAccelerator2 key in this.KeyboardAccelerators)
+                foreach (KeyboardAccelerator2 key in this.KeyboardAccelerators)
                 {
                     if (key.IsEnabled == false && e.VirtualKey == key.Key)
                     {
@@ -124,7 +124,7 @@ namespace Retouch_Photo2.ViewModels
                 //this.CompositeMode = MarqueeCompositeMode.Intersect;//CompositeMode
             }
         }
-                
+
 
         /// <summary> keyboard's the **SHIFT** key. </summary>
         public bool KeyShift
