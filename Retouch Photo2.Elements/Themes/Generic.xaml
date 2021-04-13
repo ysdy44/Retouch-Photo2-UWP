@@ -18,6 +18,8 @@
         <!--RadiusAnimas-->
         <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/RadiusAnimas/RadiusAnimaIcon.xaml" />
         <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/RadiusAnimas/RadiusAnimaPanel.xaml" />
+        <!--Toolkit-->
+        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Elements/Toolkit/DropShadowPanel/DropShadowPanel.xaml" />
     </ResourceDictionary.MergedDictionaries>    
     
     
