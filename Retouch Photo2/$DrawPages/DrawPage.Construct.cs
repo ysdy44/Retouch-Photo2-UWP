@@ -111,6 +111,27 @@ namespace Retouch_Photo2
         }
 
 
+        //Menus
+        private void ConstructMenus()
+        {
+            this.Edit.Tapped += (s, e) => this.EditExpander.FlyoutShowAt(this.Edit);
+            this.Operate.Tapped += (s, e) => this.OperateExpander.FlyoutShowAt(this.Operate);
+
+            this.Adjustment.Tapped += (s, e) => this.AdjustmentExpander.FlyoutShowAt(this.Adjustment);
+            this.Effect.Tapped += (s, e) => this.EffectExpander.FlyoutShowAt(this.Effect);
+
+            this.Text.Tapped += (s, e) => this.TextExpander.FlyoutShowAt(this.Text);
+            this.Stroke.Tapped += (s, e) => this.StrokeExpander.FlyoutShowAt(this.Stroke);
+            this.Style.Tapped += (s, e) => this.StyleExpander.FlyoutShowAt(this.Style);
+
+            this.History.Tapped += (s, e) => this.HistoryExpander.FlyoutShowAt(this.History);
+            this.Transformer.Tapped += (s, e) => this.TransformerExpander.FlyoutShowAt(this.Transformer);
+            this.Layer.Tapped += (s, e) => this.LayerExpander.FlyoutShowAt(this.Layer);
+         
+            this.Color.Tapped += (s, e) => this.ColorExpander.FlyoutShowAt(this.Color);
+        }
+
+
         //Export
         private float ExportQuality
         {

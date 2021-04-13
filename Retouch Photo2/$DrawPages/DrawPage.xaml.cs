@@ -95,6 +95,7 @@ namespace Retouch_Photo2
             this.ConstructLayerManager();
 
             //Menus
+            this.ConstructMenus();
             this.EffectMenu.PaneOpened += (s, e) => this.DrawLayout.IsFullScreen = false;
             this.EffectMenu.PaneClosed += (s, e) => this.DrawLayout.IsFullScreen = true;
 

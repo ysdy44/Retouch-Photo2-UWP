@@ -34,99 +34,159 @@
 
 
     <Page.Resources>
-        <ResourceDictionary>
 
-            <!--Color-->
-            <SolidColorBrush x:Name="AccentColorBrush" Color="{ThemeResource SystemAccentColor}" />
-            <SolidColorBrush x:Name="ShadowColorBrush" Color="{ThemeResource AppStrokeColor}" />
+        <!--Color-->
+        <SolidColorBrush x:Name="AccentColorBrush" Color="{ThemeResource SystemAccentColor}" />
+        <SolidColorBrush x:Name="ShadowColorBrush" Color="{ThemeResource AppStrokeColor}" />
 
 
-            <!--Flyout-->
-            <Flyout x:Name="DocumentFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <ListViewItem x:Name="DocumentUnSaveItem">
-                    <ContentControl x:Name="DocumentUnSaveControl" Style="{StaticResource AppIconContentControlStyle}">
-                        <ContentControl.Tag>
-                            <FontIcon Glyph="&#xF78A;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-                        </ContentControl.Tag>
-                    </ContentControl>
-                </ListViewItem>
-            </Flyout>
+        <!--Flyout-->
+        <Flyout x:Name="DocumentFlyout" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListViewItem x:Name="DocumentUnSaveItem">
+                <ContentControl x:Name="DocumentUnSaveControl" Style="{StaticResource AppIconContentControlStyle}">
+                    <ContentControl.Tag>
+                        <FontIcon Glyph="&#xF78A;" FontSize="16" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    </ContentControl.Tag>
+                </ContentControl>
+            </ListViewItem>
+        </Flyout>
 
-            <Flyout x:Name="FillColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <elements:ColorPicker2 x:Name="FilColorPicker"/>
-            </Flyout>
-            <Flyout x:Name="StrokeColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
-            </Flyout>
 
-            <Flyout x:Name="MoreFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
-                    <ScrollViewer.Resources>
-                        <!--StaticResource-->
-                        <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
-                        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
-                        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
-                        <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
-                        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
-                        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
-                    </ScrollViewer.Resources>
-                    <StackPanel>                        
-                        <!--Transform-->
-                        <TextBlock x:Name="TransformTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                        <!--Ratio-->
-                        <ListViewItem x:Name="RatioItem" IsSelected="{x:Bind SettingViewModel.IsRatio, Mode=TwoWay}">
-                            <ContentControl x:Name="RatioControl" Style="{StaticResource AppIconContentControlStyle}">
-                                <ContentControl.Tag>
-                                    <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-                                </ContentControl.Tag>
-                            </ContentControl>
-                        </ListViewItem>
-                        <!--SnapToTick-->
-                        <ListViewItem x:Name="SnapToTickItem" IsSelected="{x:Bind SettingViewModel.IsSnapToTick, Mode=TwoWay}">
-                            <ContentControl x:Name="SnapToTickControl" Style="{StaticResource AppIconContentControlStyle}">
-                                <ContentControl.Resources>
-                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/SnapToTickIcon.xaml"/>
-                                </ContentControl.Resources>
-                                <ContentControl.Tag>
-                                    <ContentControl Template="{StaticResource SnapToTickIcon}"/>
-                                </ContentControl.Tag>
-                            </ContentControl>
-                        </ListViewItem>
-                        <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
-                        <!--Transform-->
-                        <TextBlock x:Name="CreateTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                        <!--Square-->
-                        <ListViewItem x:Name="SquareItem" IsSelected="{x:Bind SettingViewModel.IsSquare, Mode=TwoWay}">
-                            <ContentControl x:Name="SquareControl" Style="{StaticResource AppIconContentControlStyle}">
-                                <ContentControl.Tag>
-                                    <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-                                </ContentControl.Tag>
-                            </ContentControl>
-                        </ListViewItem>
-                        <!--Center-->
-                        <ListViewItem x:Name="CenterItem" IsSelected="{x:Bind SettingViewModel.IsCenter, Mode=TwoWay}">
-                            <ContentControl x:Name="CenterControl" Style="{StaticResource AppIconContentControlStyle}">
-                                <ContentControl.Tag>
-                                    <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-                                </ContentControl.Tag>
-                            </ContentControl>
-                        </ListViewItem>
-                        <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
-                        <!--Operate-->
-                        <TextBlock x:Name="OperateTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                        <!--WheelToRotate-->
-                        <ListViewItem x:Name="WheelToRotateItem" IsSelected="{x:Bind SettingViewModel.IsWheelToRotate, Mode=TwoWay}">
-                            <ContentControl x:Name="WheelToRotateControl" Style="{StaticResource AppIconContentControlStyle}">
-                                <ContentControl.Tag>
-                                    <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-                                </ContentControl.Tag>
-                            </ContentControl>
-                        </ListViewItem>
-                    </StackPanel>
-                </ScrollViewer>
-            </Flyout>
+        <Flyout x:Name="FillColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:ColorPicker2 x:Name="FilColorPicker"/>
+        </Flyout>
+        <Flyout x:Name="StrokeColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
+        </Flyout>
 
-        </ResourceDictionary>
+
+        <Flyout x:Name="MoreFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
+                <ScrollViewer.Resources>
+                    <!--StaticResource-->
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
+                    <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
+                    <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
+                    <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
+                </ScrollViewer.Resources>
+                <StackPanel>
+                    <!--Transform-->
+                    <TextBlock x:Name="TransformTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <!--Ratio-->
+                    <ListViewItem x:Name="RatioItem" IsSelected="{x:Bind SettingViewModel.IsRatio, Mode=TwoWay}">
+                        <ContentControl x:Name="RatioControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <!--SnapToTick-->
+                    <ListViewItem x:Name="SnapToTickItem" IsSelected="{x:Bind SettingViewModel.IsSnapToTick, Mode=TwoWay}">
+                        <ContentControl x:Name="SnapToTickControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/SnapToTickIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource SnapToTickIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                    <!--Transform-->
+                    <TextBlock x:Name="CreateTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <!--Square-->
+                    <ListViewItem x:Name="SquareItem" IsSelected="{x:Bind SettingViewModel.IsSquare, Mode=TwoWay}">
+                        <ContentControl x:Name="SquareControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <!--Center-->
+                    <ListViewItem x:Name="CenterItem" IsSelected="{x:Bind SettingViewModel.IsCenter, Mode=TwoWay}">
+                        <ContentControl x:Name="CenterControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                    <!--Operate-->
+                    <TextBlock x:Name="OperateTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <!--WheelToRotate-->
+                    <ListViewItem x:Name="WheelToRotateItem" IsSelected="{x:Bind SettingViewModel.IsWheelToRotate, Mode=TwoWay}">
+                        <ContentControl x:Name="WheelToRotateControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#x1F512;" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                </StackPanel>
+            </ScrollViewer>
+        </Flyout>
+
+
+        <Flyout x:Name="EditFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:Expander x:Name="EditExpander" Flyout="{x:Bind EditFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                <menus:EditMenu/>
+            </elements:Expander>
+        </Flyout>
+        <Flyout x:Name="OperateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:Expander x:Name="OperateExpander" Flyout="{x:Bind OperateFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                <menus:OperateMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
+            </elements:Expander>
+        </Flyout>
+        <Flyout x:Name="AdjustmentFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:Expander x:Name="AdjustmentExpander" Flyout="{x:Bind AdjustmentFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                <menus:AdjustmentMenu x:Name="AdjustmentMenu" Filter="{x:Bind SelectionViewModel.Filter, Mode=OneWay}"/>
+            </elements:Expander>
+        </Flyout>
+        <Flyout x:Name="EffectFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:Expander x:Name="EffectExpander" Flyout="{x:Bind EffectFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                <menus:EffectMenu x:Name="EffectMenu" Effect="{x:Bind SelectionViewModel.Effect, Mode=OneWay}"/>
+            </elements:Expander>
+        </Flyout>
+
+        <Flyout x:Name="TextFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:Expander x:Name="TextExpander" Flyout="{x:Bind TextFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                <menus:TextMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
+            </elements:Expander>
+        </Flyout>
+        <Flyout x:Name="StrokeFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:Expander x:Name="StrokeExpander" Flyout="{x:Bind StrokeFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                <menus:StrokeMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
+            </elements:Expander>
+        </Flyout>
+        <Flyout x:Name="StyleFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:Expander x:Name="StyleExpander" Flyout="{x:Bind StyleFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                <menus:StyleMenu/>
+            </elements:Expander>
+        </Flyout>
+
+        <Flyout x:Name="HistoryFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:Expander x:Name="HistoryExpander" Flyout="{x:Bind HistoryFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                <menus:HistoryMenu/>
+            </elements:Expander>
+        </Flyout>
+        <Flyout x:Name="TransformerFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:Expander x:Name="TransformerExpander" Flyout="{x:Bind TransformerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                <menus:TransformerMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}" Transformer="{x:Bind SelectionViewModel.Transformer, Mode=OneWay}" ToolType="{x:Bind ViewModel.ToolType, Mode=OneWay}"/>
+            </elements:Expander>
+        </Flyout>
+        <Flyout x:Name="LayerFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:Expander x:Name="LayerExpander" Flyout="{x:Bind LayerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                <menus:LayerMenu/>
+            </elements:Expander>
+        </Flyout>
+
+        <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:Expander x:Name="ColorExpander" Flyout="{x:Bind ColorFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                <menus:ColorMenu/>
+            </elements:Expander>
+        </Flyout>
+
     </Page.Resources>
 
 
@@ -323,155 +383,87 @@
 
                     <!--Right-->
                     <ScrollViewer x:Name="RightScrollViewer" Grid.Column="3" HorizontalAlignment="Right" Style="{StaticResource AppHorizontalScrollViewerStyle}">
+                        <ScrollViewer.Resources>
+                            <!--StaticResource-->
+                            <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
+                            <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
+                            <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
+                            <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
+                            <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
+                            <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
+                        </ScrollViewer.Resources>
                         <StackPanel x:Name="MenuButtonsStackPanel" Orientation="Horizontal">
 
-                            <Button x:Name="Edit" Width="54" Style="{StaticResource AppButtonStyle}">
-                                <Button.Flyout>
-                                    <Flyout x:Name="EditFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                        <elements:Expander x:Name="EditExpander" Flyout="{x:Bind EditFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:EditMenu/>
-                                        </elements:Expander>
-                                    </Flyout>
-                                </Button.Flyout>
+                            <ListViewItem x:Name="Edit" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind EditExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <edits:Icon Foreground="{ThemeResource AppText}"/>
-                            </Button>
-                            <Button x:Name="Operate" Width="54" Style="{StaticResource AppButtonStyle}">
-                                <Button.Flyout>
-                                    <Flyout x:Name="OperateFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                        <elements:Expander x:Name="OperateExpander" Flyout="{x:Bind OperateFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:OperateMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
-                                        </elements:Expander>
-                                    </Flyout>
-                                </Button.Flyout>
+                            </ListViewItem>
+                            <ListViewItem x:Name="Operate" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind OperateExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <operates:Icon Foreground="{ThemeResource AppText}"/>
-                            </Button>
+                            </ListViewItem>
 
-                            <Button x:Name="Adjustment" Width="54" Style="{StaticResource AppButtonStyle}">
-                                <Button.Flyout>
-                                    <Flyout x:Name="AdjustmentFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                        <elements:Expander x:Name="AdjustmentExpander" Flyout="{x:Bind AdjustmentFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:AdjustmentMenu x:Name="AdjustmentMenu" Filter="{x:Bind SelectionViewModel.Filter, Mode=OneWay}"/>
-                                        </elements:Expander>
-                                    </Flyout>
-                                </Button.Flyout>
+                            <ListViewItem x:Name="Adjustment" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind AdjustmentExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <adjustments:Icon Foreground="{ThemeResource AppText}"/>
-                            </Button>
-                            <Button x:Name="Effect" Width="54" Style="{StaticResource AppButtonStyle}">
-                                <Button.Flyout>
-                                    <Flyout x:Name="EffectFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                        <elements:Expander x:Name="EffectExpander" Flyout="{x:Bind EffectFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:EffectMenu x:Name="EffectMenu" Effect="{x:Bind SelectionViewModel.Effect, Mode=OneWay}"/>
-                                        </elements:Expander>
-                                    </Flyout>
-                                </Button.Flyout>
+                            </ListViewItem>
+                            <ListViewItem x:Name="Effect" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind EffectExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <effects:Icon Foreground="{ThemeResource AppText}"/>
-                            </Button>
+                            </ListViewItem>
 
-                            <Button x:Name="Text" Width="54" Style="{StaticResource AppButtonStyle}">
-                                <Button.Flyout>
-                                    <Flyout x:Name="TextFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                        <elements:Expander x:Name="TextExpander" Flyout="{x:Bind TextFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:TextMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
-                                        </elements:Expander>
-                                    </Flyout>
-                                </Button.Flyout>
+                            <ListViewItem x:Name="Text" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind TextExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <texts:Icon Foreground="{ThemeResource AppText}"/>
-                            </Button>
-                            <Button x:Name="Stroke" Width="54" Style="{StaticResource AppButtonStyle}">
-                                <Button.Flyout>
-                                    <Flyout x:Name="StrokeFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                        <elements:Expander x:Name="StrokeExpander" Flyout="{x:Bind StrokeFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:StrokeMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
-                                        </elements:Expander>
-                                    </Flyout>
-                                </Button.Flyout>
+                            </ListViewItem>
+                            <ListViewItem x:Name="Stroke" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind StrokeExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <strokes:Icon Foreground="{ThemeResource AppText}"/>
-                            </Button>
-                            <Button x:Name="Style" Width="54" Style="{StaticResource AppButtonStyle}">
-                                <Button.Flyout>
-                                    <Flyout x:Name="StyleFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                        <elements:Expander x:Name="StyleExpander" Flyout="{x:Bind StyleFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:StyleMenu/>
-                                        </elements:Expander>
-                                    </Flyout>
-                                </Button.Flyout>
+                            </ListViewItem>
+                            <ListViewItem x:Name="Style" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind StyleExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <styles:Icon Foreground="{ThemeResource AppText}"/>
-                            </Button>
+                            </ListViewItem>
 
-                            <Button x:Name="History" Width="54" Style="{StaticResource AppButtonStyle}">
-                                <Button.Flyout>
-                                    <Flyout x:Name="HistoryFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                        <elements:Expander x:Name="HistoryExpander" Flyout="{x:Bind HistoryFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:HistoryMenu/>
-                                        </elements:Expander>
-                                    </Flyout>
-                                </Button.Flyout>
+                            <ListViewItem x:Name="History" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind HistoryExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <historys:Icon Foreground="{ThemeResource AppText}"/>
-                            </Button>
-                            <Button x:Name="Transformer" Width="54" Style="{StaticResource AppButtonStyle}">
-                                <Button.Flyout>
-                                    <Flyout x:Name="TransformerFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                        <elements:Expander x:Name="TransformerExpander" Flyout="{x:Bind TransformerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:TransformerMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}" Transformer="{x:Bind SelectionViewModel.Transformer, Mode=OneWay}" ToolType="{x:Bind ViewModel.ToolType, Mode=OneWay}"/>
-                                        </elements:Expander>
-                                    </Flyout>
-                                </Button.Flyout>
+                            </ListViewItem>
+                            <ListViewItem x:Name="Transformer" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind TransformerExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <transformers:Icon Foreground="{ThemeResource AppText}"/>
-                            </Button>
-                            <Button x:Name="Layer" Width="54" Style="{StaticResource AppButtonStyle}">
-                                <Button.Flyout>
-                                    <Flyout x:Name="LayerFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                        <elements:Expander x:Name="LayerExpander" Flyout="{x:Bind LayerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:LayerMenu/>
-                                        </elements:Expander>
-                                    </Flyout>
-                                </Button.Flyout>
+                            </ListViewItem>
+                            <ListViewItem x:Name="Layer" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind LayerExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <layers:Icon Foreground="{ThemeResource AppText}"/>
-                            </Button>
+                            </ListViewItem>
 
-                            <Button x:Name="Color" Width="54" Style="{StaticResource AppButtonStyle}">
-                                <Button.Flyout>
-                                    <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                        <elements:Expander x:Name="ColorExpander" Flyout="{x:Bind ColorFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                                            <menus:ColorMenu/>
-                                        </elements:Expander>
-                                    </Flyout>
-                                </Button.Flyout>
+                            <ListViewItem x:Name="Color" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind ColorExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
                                 <brushs:ColorEllipse Color="{x:Bind SelectionViewModel.Color, Mode=OneWay}"/>
-                            </Button>
+                            </ListViewItem>
 
                         </StackPanel>
                     </ScrollViewer>

@@ -90,6 +90,7 @@
                         <Setter Target = "WritableTransform.Y" Value="0"/>
                         <Setter Target = "WritableBorder.Width" Value="500"/>
                         <Setter Target = "WritableBorder.CornerRadius" Value="6,6,0,0"/>
+                        <Setter Target = "WritableBorder.BorderThickness" Value="1,1,1,0"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -101,6 +102,7 @@
                         <Setter Target = "WritableBorder.Width" Value="600"/>
                         <Setter Target = "WritableBorder.CornerRadius" Value="6"/>
                         <Setter Target = "WritableBorder.Margin" Value="0,10"/>
+                        <Setter Target = "WritableBorder.BorderThickness" Value="1"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -1156,7 +1158,7 @@
         </Grid>
         <!--Foot-->
         <Border x:Name="FootPanel" Grid.Column="1" Grid.Row="1" MinHeight="50" Padding="10,0" HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                BorderThickness="0,1,0,0" BorderBrush="{ThemeResource AppBorderBrush}"
+                             BorderThickness="0,1,0,0" BorderBrush="{ThemeResource AppStroke}"
                              apiContractNotPresent5:Background="{ThemeResource AppForeground}"
                              apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
             <Border.RenderTransformOrigin>0.5, 0.5</Border.RenderTransformOrigin>
@@ -1261,6 +1263,7 @@
 
 
         <Border x:Name="WritableBorder" Grid.Column="1" Grid.Row="1" MinHeight="50" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Collapsed"
+                         BorderThickness="0,1,0,0" BorderBrush="{ThemeResource AppStroke}" 
                          apiContractNotPresent5:Background="{ThemeResource AppForeground}"
                          apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
             <Border.RenderTransformOrigin>1, 0.5</Border.RenderTransformOrigin>
@@ -1273,7 +1276,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Grid Grid.ColumnSpan="3" Padding="10,0" BorderThickness="0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
+                <Grid Grid.ColumnSpan="3" Padding="10,0" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppTitle}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="50"/>
