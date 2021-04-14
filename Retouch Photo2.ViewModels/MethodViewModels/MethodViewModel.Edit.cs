@@ -298,7 +298,7 @@ namespace Retouch_Photo2.ViewModels
                 ILayer layer = layerage.Self;
 
                 //Turn to curve layer
-                ILayer curveLayer = this.MethodConvertToCurves_CreateCurveLayer(layerage);
+                ILayer curveLayer = this.MethodConvertToCurves_CreateCurveLayer(layer);
 
                 if (curveLayer != null)
                 {
@@ -323,10 +323,8 @@ namespace Retouch_Photo2.ViewModels
         }
 
         //Create curve layer
-        private ILayer MethodConvertToCurves_CreateCurveLayer(Layerage layerage)
+        private ILayer MethodConvertToCurves_CreateCurveLayer(ILayer layer)
         {
-            ILayer layer = layerage.Self;
-
             NodeCollection nodes = layer.ConvertToCurves(LayerManager.CanvasDevice);
             if (nodes == null) return null;
 
@@ -336,7 +334,7 @@ namespace Retouch_Photo2.ViewModels
                 {
                     IsSelected = true,
                 };
-                LayerBase.CopyWith(curveLayer, layer);
+                LayerBase.CopyWith(layer, curveLayer);
                 return curveLayer;
             }
 

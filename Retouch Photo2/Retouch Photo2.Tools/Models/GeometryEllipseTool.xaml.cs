@@ -70,8 +70,15 @@ namespace Retouch_Photo2.Tools.Models
             this.StrokeBrushButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeColorFlyout?.Invoke(this, this.StrokeBrushButton);
             this.StrokeShowControl.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeFlyout?.Invoke(this.StrokeShowControl);
 
-            //ConvertToCurves
-            this.ConvertToCurvesButton.Click += (s, e) => this.MethodViewModel.MethodConvertToCurves();
+            this.ConvertToCurvesButton.Click += (s, e) =>
+            {
+                if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
+
+                this.MethodViewModel.MethodConvertToCurves();
+
+                //Change tools group value.
+                this.ViewModel.ToolType = ToolType.Node;
+            };
 
             this.MoreButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
         }

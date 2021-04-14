@@ -24,13 +24,6 @@ namespace Retouch_Photo2.Layers
             this.InitializeComponent();
             this.ControlHeight = controlHeight;
             this.Type = type;
-
-            this.Unloaded += (s, e) =>
-            {
-                // Explicitly remove references to allow the Win2D controls to get garbage collected
-                this.IconCanvasControl.RemoveFromVisualTree();
-                this.IconCanvasControl = null;
-            };
         }
         /// <summary>
         /// Initializes a layer-control.
@@ -47,11 +40,6 @@ namespace Retouch_Photo2.Layers
             this.ConstructButton(layer);
             this.ConstructManipulation(layer);
             this.ConstructPointer(layer);
-
-            this.Unloaded += (s, e) =>
-            {
-                this.IconCanvasControl.RemoveFromVisualTree();
-            };
         }
 
     }

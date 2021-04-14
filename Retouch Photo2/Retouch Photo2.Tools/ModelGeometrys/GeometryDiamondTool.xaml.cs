@@ -81,7 +81,6 @@ namespace Retouch_Photo2.Tools.Models
                 //Change tools group value.
                 this.ViewModel.ToolType = ToolType.Node;
             };
-            this.MoreButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
 
             this.MoreButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
         }
