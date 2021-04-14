@@ -27,7 +27,7 @@
 
                     <!--Align-->
                     <TextBlock x:Name="FontAlignmentTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <texts:FontAlignmentSegmented x:Name="FontAlignmentSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Alignment="{x:Bind SelectionViewModel.FontAlignment, Mode=OneWay}"/>
+                    <texts:FontAlignmentSegmented x:Name="FontAlignmentSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Alignment="{x:Bind SelectionViewModel.HorizontalAlignment, Mode=OneWay}"/>
 
 
                     <!--FontStyle-->

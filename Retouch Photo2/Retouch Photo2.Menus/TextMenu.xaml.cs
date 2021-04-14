@@ -165,14 +165,14 @@ namespace Retouch_Photo2.Menus
 
         private void SetFontAlignment(CanvasHorizontalAlignment fontAlignment)
         {
-            this.SelectionViewModel.FontAlignment = fontAlignment;
+            this.SelectionViewModel.HorizontalAlignment = fontAlignment;
             this.MethodViewModel.ITextLayerChanged<CanvasHorizontalAlignment>
             (
-                set: (textLayer) => textLayer.FontAlignment = fontAlignment,
+                set: (textLayer) => textLayer.HorizontalAlignment = fontAlignment,
 
                 type: HistoryType.LayersProperty_SetFontAlignment,
-                getUndo: (textLayer) => textLayer.FontAlignment,
-                setUndo: (textLayer, previous) => textLayer.FontAlignment = previous
+                getUndo: (textLayer) => textLayer.HorizontalAlignment,
+                setUndo: (textLayer, previous) => textLayer.HorizontalAlignment = previous
            );
         }
 

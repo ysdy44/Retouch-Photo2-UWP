@@ -22,18 +22,18 @@ namespace Retouch_Photo2.Layers.Models
     {
 
         //@Content       
-        /// <summary> Gets or sets the text. </summary>
-        public abstract string FontText { get; set; } 
-        /// <summary> Gets or sets the size. </summary>
+        /// <summary> Gets or sets the font text. </summary>
+        public abstract string FontText { get; set; }
+        /// <summary> Gets or sets the font size. </summary>
         public abstract float FontSize { get; set; }
-        /// <summary> Gets or sets the FontFamily. </summary>
+        /// <summary> Gets or sets the font family. </summary>
         public string FontFamily { get; set; } = "Arial";
 
-        /// <summary> Gets or sets the HorizontalAlignment. </summary>
-        public CanvasHorizontalAlignment FontAlignment { get; set; } = CanvasHorizontalAlignment.Left;
-        /// <summary> Gets or sets the style. </summary>
+        /// <summary> Gets or sets the font horizontal alignment. </summary>
+        public CanvasHorizontalAlignment HorizontalAlignment { get; set; } = CanvasHorizontalAlignment.Left;
+        /// <summary> Gets or sets the font style. </summary>
         public FontStyle FontStyle { get; set; } = FontStyle.Normal;
-        /// <summary> Gets or sets the weight. </summary>
+        /// <summary> Gets or sets the font weight. </summary>
         public FontWeight2 FontWeight { get; set; } = FontWeight2.Normal;
 
 
@@ -47,7 +47,7 @@ namespace Retouch_Photo2.Layers.Models
             element.Add(new XElement("FontSize", this.FontSize));
             element.Add(new XElement("FontFamily", this.FontFamily));
 
-            element.Add(new XElement("HorizontalAlignment", this.FontAlignment));
+            element.Add(new XElement("HorizontalAlignment", this.HorizontalAlignment));
             element.Add(new XElement("FontStyle", this.FontStyle));
             element.Add(new XElement("FontWeight", this.FontWeight));
         }
@@ -65,7 +65,7 @@ namespace Retouch_Photo2.Layers.Models
             {
                 try
                 {
-                    this.FontAlignment = (CanvasHorizontalAlignment)Enum.Parse(typeof(CanvasHorizontalAlignment), horizontalAlignment.Value);
+                    this.HorizontalAlignment = (CanvasHorizontalAlignment)Enum.Parse(typeof(CanvasHorizontalAlignment), horizontalAlignment.Value);
                 }
                 catch (Exception) { }
             }
@@ -103,7 +103,7 @@ namespace Retouch_Photo2.Layers.Models
                 FontSize = this.FontSize,
                 FontFamily = this.FontFamily,
 
-                HorizontalAlignment = this.FontAlignment,
+                HorizontalAlignment = this.HorizontalAlignment,
                 FontStyle = this.FontStyle,
                 FontWeight = this.FontWeight.ToFontWeight(),
             };
@@ -158,7 +158,7 @@ namespace Retouch_Photo2.Layers.Models
             destination.FontSize = source.FontSize;
             destination.FontFamily = source.FontFamily;
 
-            destination.FontAlignment = source.FontAlignment;
+            destination.HorizontalAlignment = source.HorizontalAlignment;
             destination.FontStyle = source.FontStyle;
             destination.FontWeight = source.FontWeight;
             return destination;

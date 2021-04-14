@@ -47,17 +47,17 @@ namespace Retouch_Photo2.ViewModels
         }
         private float fontSize = 22;
 
-        /// <summary> <see cref="ITextLayer"/>'s font alignment. </summary>
-        public CanvasHorizontalAlignment FontAlignment
+        /// <summary> <see cref="ITextLayer"/>'s horizontal alignment. </summary>
+        public CanvasHorizontalAlignment HorizontalAlignment
         {
-            get => this.fontAlignment;
+            get => this.horizontalAlignment;
             set
             {
-                this.fontAlignment = value;
-                this.OnPropertyChanged(nameof(FontAlignment));//Notify 
+                this.horizontalAlignment = value; 
+                this.OnPropertyChanged(nameof(HorizontalAlignment));//Notify 
             }
         }
-        private CanvasHorizontalAlignment fontAlignment = CanvasHorizontalAlignment.Left;
+        private CanvasHorizontalAlignment horizontalAlignment = CanvasHorizontalAlignment.Left;
 
         /// <summary> <see cref="ITextLayer"/>'s font style. </summary>
         public FontStyle FontStyle

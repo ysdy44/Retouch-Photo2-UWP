@@ -22,7 +22,7 @@ namespace Retouch_Photo2.Layers
         string FontFamily { get; set; }
 
         /// <summary> Gets or sets the font horizontal alignment. </summary>
-        CanvasHorizontalAlignment FontAlignment { get; set; }
+        CanvasHorizontalAlignment HorizontalAlignment { get; set; }
         /// <summary> Gets or sets the font style. </summary>
         FontStyle FontStyle { get; set; }
         /// <summary> Gets or sets the font weight. </summary>
