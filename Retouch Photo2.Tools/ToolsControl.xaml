@@ -32,7 +32,11 @@
                 <StackPanel x:Name="MoreStackPanel" Padding="{StaticResource AppPanelPadding}" HorizontalAlignment="Stretch">
 
                     <!--Pattern-->
-                    <TextBlock x:Name="Pattern" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Border Background="{ThemeResource SystemControlHighlightListLowBrush}">
+                        <TextBlock x:Name="Pattern" Style="{StaticResource AppTextBlockStyle}"/>
+                    </Border>
+                    
+                    <!--Pattern-->
                     <ListViewItem x:Name="PatternGrid">
                         <ContentControl Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
@@ -66,10 +70,13 @@
                         </ContentControl>
                     </ListViewItem>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <!--Geometry-->
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                    <Border Background="{ThemeResource SystemControlHighlightListLowBrush}">
+                        <TextBlock x:Name="Geometry" Style="{StaticResource AppTextBlockStyle}"/>
+                    </Border>
 
                     <!--Geometry1-->
-                    <TextBlock x:Name="Geometry" Style="{StaticResource AppTextBlockStyle}"/>
                     <ListViewItem x:Name="GeometryRoundRect">
                         <ContentControl Style="{StaticResource AppIconContentControlStyle}">
                             <ContentControl.Resources>
@@ -103,7 +110,7 @@
                         </ContentControl>
                     </ListViewItem>
                     
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
                     <!--Geometry2-->
                     <ListViewItem x:Name="GeometryPentagon">
@@ -139,7 +146,7 @@
                         </ContentControl>
                     </ListViewItem>
                     
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
                     <!--Geometry3-->
                     <ListViewItem x:Name="GeometryDount">
@@ -175,7 +182,7 @@
                         </ContentControl>
                     </ListViewItem>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
                     <!--Geometry4-->
                     <ListViewItem x:Name="GeometryArrow">
@@ -230,7 +237,7 @@
                 <ContentControl Template="{StaticResource CursorIcon}"/>
             </ListViewItem>
 
-            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+            <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
             <ListViewItem x:Name="View" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
                 <ListViewItem.Resources>
@@ -262,7 +269,7 @@
                 <ContentControl Template="{StaticResource TransparencyIcon}"/>
             </ListViewItem>
 
-            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+            <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
             <!--Geometry0-->
             <ListViewItem x:Name="GeometryRectangle" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
@@ -285,7 +292,7 @@
                 <ContentControl Template="{StaticResource GeometryEllipseIcon}"/>
             </ListViewItem>
 
-            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+            <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
             <ListViewItem x:Name="Pen" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
                 <ListViewItem.Resources>
@@ -307,7 +314,7 @@
                 <ContentControl Template="{StaticResource NodeIcon}"/>
             </ListViewItem>
 
-            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+            <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
             <ListViewItem x:Name="TextArtistic" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
                 <ListViewItem.Resources>
@@ -329,7 +336,7 @@
                 <ContentControl Template="{StaticResource TextFrameIcon}"/>
             </ListViewItem>
 
-            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+            <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
             <ListViewItem x:Name="Image" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
                 <ListViewItem.Resources>
@@ -351,13 +358,14 @@
                 <ContentControl Template="{StaticResource CropIcon}"/>
             </ListViewItem>
 
-            <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+            <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
 
             <ListViewItem x:Name="More" MinWidth="50" Height="50" HorizontalContentAlignment="Center">
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Right" IsOpen="{x:Bind IsOpenCore, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-                <SymbolIcon Symbol="More"/>
+                <SymbolIcon Symbol="More"                      
+                            Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
             </ListViewItem>
 
         </StackPanel>

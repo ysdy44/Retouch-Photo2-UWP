@@ -21,7 +21,9 @@
             <StackPanel Grid.Column="0">
 
                 <!--Edit-->
-                <TextBlock x:Name="Edit" Style="{StaticResource AppTextBlockStyle}"/>
+                <Border Background="{ThemeResource SystemControlHighlightListLowBrush}">
+                    <TextBlock x:Name="Edit" Style="{StaticResource AppTextBlockStyle}"/>
+                </Border>
                 <ListViewItem x:Name="Edit_CutItem" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}">
                     <ContentControl x:Name="Edit_Cut" Style="{StaticResource AppIconContentControlStyle}">
                         <ContentControl.Resources>
@@ -77,7 +79,9 @@
                 <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
 
                 <!--Group-->
-                <TextBlock x:Name="Group" Style="{StaticResource AppTextBlockStyle}"/>
+                <Border Background="{ThemeResource SystemControlHighlightListLowBrush}">
+                    <TextBlock x:Name="Group" Style="{StaticResource AppTextBlockStyle}"/>
+                </Border>
                 <ListViewItem x:Name="Group_GroupItem" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}">
                     <ContentControl x:Name="Group_Group" Style="{StaticResource AppIconContentControlStyle}">
                         <ContentControl.Resources>
@@ -112,12 +116,14 @@
 
             </StackPanel>
 
-            <Rectangle Grid.Column="1" Margin="0" Style="{ThemeResource AppSeparatorRectangleHorizontalStyle}" />
+            <Rectangle Grid.Column="1" Style="{ThemeResource AppSeparatorRectangleHorizontalStyle}" />
 
             <StackPanel Grid.Column="2">
 
                 <!--Select-->
-                <TextBlock x:Name="Select" Style="{StaticResource AppTextBlockStyle}"/>
+                <Border Background="{ThemeResource SystemControlHighlightListLowBrush}">
+                    <TextBlock x:Name="Select" Style="{StaticResource AppTextBlockStyle}"/>
+                </Border>
                 <ListViewItem x:Name="Select_AllItem" IsEnabled="True">
                     <ContentControl x:Name="Select_All" Style="{StaticResource AppIconContentControlStyle}">
                         <ContentControl.Resources>
@@ -153,7 +159,9 @@
                 <Rectangle Style="{ThemeResource AppSeparatorRectangleVerticalStyle}" />
 
                 <!--Combine-->
-                <TextBlock x:Name="Combine" Style="{StaticResource AppTextBlockStyle}"/>
+                <Border Background="{ThemeResource SystemControlHighlightListLowBrush}">
+                    <TextBlock x:Name="Combine" Style="{StaticResource AppTextBlockStyle}"/>
+                </Border>
                 <ListViewItem x:Name="Combine_UnionItem" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}">
                     <ContentControl x:Name="Combine_Union" Style="{StaticResource AppIconContentControlStyle}">
                         <ContentControl.Resources>

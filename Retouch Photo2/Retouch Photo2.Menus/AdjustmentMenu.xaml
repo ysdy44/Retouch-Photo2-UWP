@@ -56,6 +56,8 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
+                    
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
                     <ListViewItem>
                         <ContentControl x:Name="Exposure" Style="{StaticResource AppIconContentControlStyle}">
@@ -78,6 +80,8 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
+                    
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
                     <ListViewItem>
                         <ContentControl x:Name="Saturation" Style="{StaticResource AppIconContentControlStyle}">
@@ -100,6 +104,8 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
+                    
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
                     <ListViewItem>
                         <ContentControl x:Name="Contrast" Style="{StaticResource AppIconContentControlStyle}">
@@ -122,6 +128,8 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
+                    
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
                     <ListViewItem>
                         <ContentControl x:Name="HighlightsAndShadows" Style="{StaticResource AppIconContentControlStyle}">

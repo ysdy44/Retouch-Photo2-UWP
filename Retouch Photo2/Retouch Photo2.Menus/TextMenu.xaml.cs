@@ -29,6 +29,21 @@ namespace Retouch_Photo2.Menus
 
 
         //@Converter
+        private bool FontWeightConverter(FontWeight2 fontWeight)
+        {
+            switch (fontWeight)
+            {
+                case FontWeight2.Black:
+                case FontWeight2.Bold:
+                case FontWeight2.ExtraBlack:
+                case FontWeight2.ExtraBold:
+                case FontWeight2.SemiBold:
+                    return true;
+                default: 
+                    return false;
+            }
+        }
+        private bool FontStyleConverter(FontStyle fontStyle) => fontStyle == FontStyle.Italic;
         private int FontSizeConverter(float fontSize) => (int)fontSize;
 
 
@@ -62,17 +77,16 @@ namespace Retouch_Photo2.Menus
             this.BoldButton.Click += (s, e) =>
             {
                 // isBold ? ""Normal"" : ""Bold""
-                bool isBold = this.SelectionViewModel.FontWeight == FontWeight2.Bold;
+                bool isBold = this.FontWeightConverter(this.SelectionViewModel.FontWeight);
                 FontWeight2 fontWeight = isBold ? FontWeight2.Normal : FontWeight2.Bold;
 
                 this.SetFontWeight(fontWeight);
             };
             this.ItalicButton.Click += (s, e) =>
             {
-                //Whether the judgment is Normal or Italic.
-                bool isNormal = this.SelectionViewModel.FontStyle == FontStyle.Normal;
-                // isNormal ? ""Italic"" : ""Normal""
-                FontStyle fontStyle = isNormal ? FontStyle.Italic : FontStyle.Normal;
+                // isNormal ? ""Normal"" : ""Italic""
+                bool isNormal = this.FontStyleConverter(this.SelectionViewModel.FontStyle);
+                FontStyle fontStyle = isNormal ? FontStyle.Normal : FontStyle.Italic;
 
                 this.SetFontStyle(fontStyle);
             };

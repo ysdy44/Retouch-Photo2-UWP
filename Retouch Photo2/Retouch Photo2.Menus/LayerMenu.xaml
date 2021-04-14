@@ -82,17 +82,15 @@
 
 
             <!--Visibility-->
-            <RelativePanel>
-                <TextBlock x:Name="VisibilityTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
-                <ToggleButton x:Name="VisibilityButton" RelativePanel.AlignRightWithPanel="True"
+            <TextBlock x:Name="VisibilityTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+            <ToggleButton x:Name="VisibilityButton" RelativePanel.AlignRightWithPanel="True"
                                Style="{StaticResource AppCircleToggleButtonStyle}"
                                IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
                                IsChecked="{x:Bind VisibilityToBoolConverter(ViewModel.Visibility), Mode=OneWay}" >
-                    <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"
+                <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"
                           MirroredWhenRightToLeft="True" />
-                </ToggleButton>
-            </RelativePanel>
-            
+            </ToggleButton>
+
 
             <!--Tag Type-->
             <TextBlock x:Name="TagTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

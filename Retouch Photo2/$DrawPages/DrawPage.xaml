@@ -73,7 +73,9 @@
                 </ScrollViewer.Resources>
                 <StackPanel>
                     <!--Transform-->
-                    <TextBlock x:Name="TransformTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Border Background="{ThemeResource SystemControlHighlightListLowBrush}">
+                        <TextBlock x:Name="TransformTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    </Border>                
                     <!--Ratio-->
                     <ListViewItem x:Name="RatioItem" IsSelected="{x:Bind SettingViewModel.IsRatio, Mode=TwoWay}">
                         <ContentControl x:Name="RatioControl" Style="{StaticResource AppIconContentControlStyle}">
@@ -95,7 +97,9 @@
                     </ListViewItem>
                     <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
                     <!--Transform-->
-                    <TextBlock x:Name="CreateTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Border Background="{ThemeResource SystemControlHighlightListLowBrush}">
+                        <TextBlock x:Name="CreateTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    </Border>
                     <!--Square-->
                     <ListViewItem x:Name="SquareItem" IsSelected="{x:Bind SettingViewModel.IsSquare, Mode=TwoWay}">
                         <ContentControl x:Name="SquareControl" Style="{StaticResource AppIconContentControlStyle}">
@@ -114,7 +118,9 @@
                     </ListViewItem>
                     <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
                     <!--Operate-->
-                    <TextBlock x:Name="OperateTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <Border Background="{ThemeResource SystemControlHighlightListLowBrush}">
+                        <TextBlock x:Name="OperateTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    </Border>
                     <!--WheelToRotate-->
                     <ListViewItem x:Name="WheelToRotateItem" IsSelected="{x:Bind SettingViewModel.IsWheelToRotate, Mode=TwoWay}">
                         <ContentControl x:Name="WheelToRotateControl" Style="{StaticResource AppIconContentControlStyle}">

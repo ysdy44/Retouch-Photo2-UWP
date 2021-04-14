@@ -40,21 +40,23 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Button x:Name="BoldButton" Grid.Column="0" Style="{StaticResource AppRoundedButtonLeftStyle}">
+                        <ToggleButton x:Name="BoldButton" Grid.Column="0" Style="{StaticResource AppCircleToggleButtonStyle}"
+                                      IsChecked="{x:Bind FontWeightConverter(SelectionViewModel.FontWeight), Mode=OneWay}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="BoldToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8DD;" FontSize="18" FontWeight="Bold" />
-                        </Button>
+                        </ToggleButton>
 
-                        <Button x:Name="ItalicButton" Grid.Column="1" Style="{StaticResource AppRoundedButtonCenterStyle}">
+                        <ToggleButton x:Name="ItalicButton" Grid.Column="1" Style="{StaticResource AppCircleToggleButtonStyle}"
+                                      IsChecked="{x:Bind FontStyleConverter(SelectionViewModel.FontStyle), Mode=OneWay}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="ItalicToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE199;" FontSize="18" FontWeight="Bold" />
-                        </Button>
+                        </ToggleButton>
 
-                        <Button x:Name="UnderLineButton" IsEnabled="False" Grid.Column="2" Style="{StaticResource AppRoundedButtonRightStyle}">
+                        <Button x:Name="UnderLineButton" Visibility="Collapsed" IsEnabled="False" Grid.Column="2" Style="{StaticResource AppRoundedButtonRightStyle}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="UnderLineToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>

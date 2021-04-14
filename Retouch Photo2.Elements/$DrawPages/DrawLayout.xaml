@@ -1210,16 +1210,18 @@
                     <ToolTipService.ToolTip>
                         <ToolTip x:Name="GalleryToolTip" Placement="Left" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
-                    <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                              Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
                 </ListViewItem>
                 <Border x:Name="RightBorder" Grid.Row="1"/>
                 <ListViewItem x:Name="WidthButton" Visibility="Collapsed" Grid.Row="2" Height="{StaticResource AppTitleHeight}" MinWidth="50" HorizontalContentAlignment="Center">
                     <ToolTipService.ToolTip>
                         <ToolTip x:Name="WidthToolTip" Placement="Left" Style="{StaticResource AppToolTipStyle}"/>
                     </ToolTipService.ToolTip>
-                    <FontIcon x:Name="WidthIcon" Glyph="&#xE127;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                    <FontIcon x:Name="WidthIcon" Glyph="&#xE127;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                              Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
                 </ListViewItem>
-                <Button x:Name="PCGalleryButton" Visibility="Collapsed" Width="90" Style="{StaticResource AppIconLineCircleButton}">
+                <Button x:Name="PCGalleryButton" Visibility="Collapsed" Width="90" Style="{StaticResource AppIconAccentLineCircleButton}">
                     <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>
 
@@ -1294,7 +1296,8 @@
                         <FontIcon Glyph="&#xEC61;" FontFamily="Segoe MDL2 Assets"/>
                     </Button>
                     <Button x:Name="WritableCancelButton" Grid.Column="2" Style="{StaticResource AppRoundedButtonStyle}">
-                        <FontIcon Glyph="&#xEB90;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xEB90;" FontFamily="Segoe MDL2 Assets" 
+                                  Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
                     </Button>
                 </Grid>
                 <ContentPresenter x:Name="WritableContentPresenter" Grid.Column="1" Grid.Row="1" Padding="10,0" VerticalAlignment="Top"/>

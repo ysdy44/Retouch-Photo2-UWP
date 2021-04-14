@@ -153,13 +153,13 @@
                                 <TextBlock x:Name="TitleTextBlock" Margin="30,0" FontWeight="Medium" TextTrimming="CharacterEllipsis" FontSize="20" Grid.ColumnSpan="3" TextWrapping="Wrap" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"
                                                Text="{TemplateBinding Title}"/>
 
-                                <ListViewItem x:Name="PinButton" Grid.Column="1" Padding="2" Width="40" MinWidth="30"  MinHeight="30"  HorizontalContentAlignment="Center">
+                                <ListViewItem x:Name="PinButton" Grid.Column="1" Padding="2" Width="40" MinWidth="30" MinHeight="30" HorizontalContentAlignment="Center" Foreground="{ThemeResource AppText}">
                                     <FontIcon Glyph="&#xE840;" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </ListViewItem>
-                                <ListViewItem x:Name="OverlayButton" Grid.Column="2" Padding="2" Width="40" MinWidth="30"  MinHeight="30"  HorizontalContentAlignment="Center">
+                                <ListViewItem x:Name="OverlayButton" Grid.Column="2" Padding="2" Width="40" MinWidth="30" MinHeight="30" HorizontalContentAlignment="Center" Foreground="{ThemeResource AppText}">
                                     <FontIcon Glyph="&#xF156;" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </ListViewItem>
-                                <ListViewItem x:Name="CloseButton" Grid.Column="3" Visibility="Collapsed" Padding="2" Width="40" MinWidth="30"  MinHeight="30"  HorizontalContentAlignment="Center">
+                                <ListViewItem x:Name="CloseButton" Grid.Column="3" Visibility="Collapsed" Padding="2" Width="40" MinWidth="30" MinHeight="30" HorizontalContentAlignment="Center" Foreground="{ThemeResource AppText}">
                                     <FontIcon Glyph="&#xF78A;" FontSize="14" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </ListViewItem>
 
