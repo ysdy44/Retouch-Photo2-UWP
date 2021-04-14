@@ -76,7 +76,7 @@ namespace Retouch_Photo2.ViewModels
             switch (e.VirtualKey)
             {
                 case VirtualKey.Shift: if (this.KeyShift) this.KeyShift = this.IsRatio = this.IsSquare = false; break;
-                case VirtualKey.Space: if (this.KeySpace) this.KeySpace = this.IsSnapToTick = this.isWheelToRotate = false; break;
+                case VirtualKey.Space: if (this.KeySpace) this.KeySpace = this.IsSnapToTick = this.IsWheelToRotate = false; break;
                 case VirtualKey.Control: if (this.KeyCtrl) this.KeyCtrl = this.IsCenter = false; break;
                 default: break;
             }
