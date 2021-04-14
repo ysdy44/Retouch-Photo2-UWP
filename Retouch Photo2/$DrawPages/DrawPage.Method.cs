@@ -42,7 +42,7 @@ namespace Retouch_Photo2
 
 
         /// <summary>
-        /// Save the current Project.
+        /// Save the current project.
         /// </summary>
         private async Task Save()
         {

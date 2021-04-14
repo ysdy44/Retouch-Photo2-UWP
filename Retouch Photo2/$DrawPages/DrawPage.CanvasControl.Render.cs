@@ -19,12 +19,12 @@ namespace Retouch_Photo2
         private void CanvasControlInvalidate(InvalidateMode mode)
         {
             //High-Display screen
-            if (this.LayerRenderCanvasControl.Dpi > 96.0f)
+            if (this.ToolDrawCanvasControl.Dpi > 96.0f)
             {
                 switch (mode)
                 {
                     case InvalidateMode.Thumbnail:
-                        float dpiScale = 96.0f / this.LayerRenderCanvasControl.Dpi;
+                        float dpiScale = 96.0f / this.ToolDrawCanvasControl.Dpi;
                         if (dpiScale < 0.4f) dpiScale = 0.4f;
                         if (dpiScale > 1.0f) dpiScale = 1.0f;
 
