@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;        
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
         ListViewSelectionMode SelectionMode => this.SelectionViewModel.SelectionMode;
 
@@ -322,7 +322,7 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void OnNavigatedTo() 
+        public void OnNavigatedTo()
         {
             this.ViewModel.Invalidate();//Invalidate
         }

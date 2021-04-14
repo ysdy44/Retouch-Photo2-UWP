@@ -26,7 +26,7 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;        
+        ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
         Layerage CurveLayerage => this.SelectionViewModel.CurveLayerage;
@@ -41,7 +41,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Content 
-        public ToolType Type => ToolType.Pen; 
+        public ToolType Type => ToolType.Pen;
         public ControlTemplate Icon => this.IconContentControl.Template;
         public FrameworkElement Page => this;
         public bool IsSelected { get; set; }
@@ -76,7 +76,7 @@ namespace Retouch_Photo2.Tools.Models
             this.FillBrushButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.FillBrushButton);
             this.StrokeBrushButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeColorFlyout?.Invoke(this, this.StrokeBrushButton);
             this.StrokeShowControl.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeFlyout?.Invoke(this.StrokeShowControl);
-         
+
             this.ConvertToCurvesButton.Click += (s, e) =>
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
@@ -240,7 +240,10 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void OnNavigatedTo() { }
+        public void OnNavigatedTo()
+        {
+            this.ViewModel.Invalidate();//Invalidate
+        }
         public void OnNavigatedFrom()
         {
             //Refactoring

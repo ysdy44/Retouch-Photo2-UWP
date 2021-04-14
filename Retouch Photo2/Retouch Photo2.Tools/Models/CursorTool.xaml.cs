@@ -249,7 +249,10 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void OnNavigatedTo() { }
+        public void OnNavigatedTo()
+        {
+            this.ViewModel.Invalidate();//Invalidate
+        }
         public void OnNavigatedFrom()
         {
             this.CursorMode = CursorMode.None;

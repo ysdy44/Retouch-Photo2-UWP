@@ -182,6 +182,7 @@ namespace Retouch_Photo2.Tools.Models
                 ILayer layer = layerage.Self;
                 this.SelectionViewModel.SetStyle(layer.Style);
             }
+            this.ViewModel.Invalidate();//Invalidate
         }
         public void OnNavigatedFrom() { }
 
