@@ -76,7 +76,7 @@ namespace Retouch_Photo2.Layers.Models
                 catch (Exception) { }
             }
 
-            if (element.Element("Underline") is XElement Underline) this.Underline = (bool)Underline;
+            if (element.Element("Underline") is XElement underline) this.Underline = (bool)underline;
             if (element.Element("FontStyle") is XElement fontStyle)
             {
                 try
@@ -105,7 +105,7 @@ namespace Retouch_Photo2.Layers.Models
         {
             Transformer transformer = base.Transform.Transformer;
 
-            if (string.IsNullOrEmpty(this.FontText)) return transformer.ToRectangle(resourceCreator);
+            if (string.IsNullOrEmpty(this.FontText)) return CanvasGeometry.CreateText(new CanvasTextLayout(resourceCreator, string.Empty, new CanvasTextFormat(), 0, 0));
 
             using (CanvasTextFormat textFormat = new CanvasTextFormat
             {
@@ -118,7 +118,9 @@ namespace Retouch_Photo2.Layers.Models
             })
             {
                 float width = transformer.Horizontal.Length();
+                if (width < 1 || float.IsNaN(width)) width = 10;
                 float height = transformer.Vertical.Length();
+                if (height < 1 || float.IsNaN(height)) height = 10;
                 using (CanvasTextLayout textLayout = new CanvasTextLayout(resourceCreator, this.FontText, textFormat, width, height))
                 {
                     int fontLength = this.FontText.Length;
@@ -174,8 +176,11 @@ namespace Retouch_Photo2.Layers.Models
             destination.FontFamily = source.FontFamily;
 
             destination.HorizontalAlignment = source.HorizontalAlignment;
+
+            destination.Underline = source.Underline;
             destination.FontStyle = source.FontStyle;
             destination.FontWeight = source.FontWeight;
+
             return destination;
         }
 

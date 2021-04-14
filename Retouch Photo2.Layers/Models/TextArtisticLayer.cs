@@ -42,7 +42,7 @@ namespace Retouch_Photo2.Layers.Models
         private float GetFontSize()
         {
             float height = base.Transform.Transformer.Vertical.Length();
-            if (height < 1) height = 1;
+            if (height < 1 || float.IsNaN(height)) height = 1;
 
             this.fontSize = height;
             return this.fontSize;
@@ -55,20 +55,6 @@ namespace Retouch_Photo2.Layers.Models
             TextLayer.FontCopyWith(this, layer);
             LayerBase.CopyWith(this, layer);
             return layer;
-        }
-
-
-        public override void CacheTransform()
-        {
-            base.CacheTransform();
-        }
-        public override void TransformMultiplies(Matrix3x2 matrix)
-        {
-            base.TransformMultiplies(matrix);
-        }
-        public override void TransformAdd(Vector2 vector)
-        {
-            base.TransformAdd(vector);
         }
 
     }
