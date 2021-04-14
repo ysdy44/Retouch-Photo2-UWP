@@ -294,12 +294,12 @@
 <data name='Effects_Morphology_Size' xml:space='preserve'><value>Размер</value></data>
 <data name='Effects_Emboss' xml:space='preserve'><value>Тиснение</value></data>
 <data name='Effects_Straighten' xml:space='preserve'><value>Выпрямить</value></data>
-<data name='Texts_FontAlignment' xml:space='preserve'><value>Выровнять</value></data>
-<data name='Texts_FontAlignment_Justified' xml:space='preserve'><value>Оправдано</value></data>
+<data name='Texts_Alignment' xml:space='preserve'><value>Выровнять</value></data>
+<data name='Texts_HorizontalAlignment_Justified' xml:space='preserve'><value>Оправдано</value></data>
 <data name='Texts_FontStyle' xml:space='preserve'><value>Стиль шрифта</value></data>
 <data name='Texts_FontStyle_Bold' xml:space='preserve'><value>Смелый</value></data>
 <data name='Texts_FontStyle_Italic' xml:space='preserve'><value>Курсив</value></data>
-<data name='Texts_FontStyle_UnderLine' xml:space='preserve'><value>UnderLine</value></data>
+<data name='Texts_FontStyle_Underline' xml:space='preserve'><value>UnderLine</value></data>
 <data name='Texts_FontWeight' xml:space='preserve'><value>Толщина шрифта</value></data>
 <data name='Texts_FontWeight_Black' xml:space='preserve'><value>Чернить</value></data>
 <data name='Texts_FontWeight_Bold' xml:space='preserve'><value>Смелый</value></data>
@@ -514,11 +514,12 @@
 <data name='Historys_LayersProperty_SwitchEffect_Straighten' xml:space='preserve'><value>Эффект выпрямления переключателя</value></data>
 <data name='Historys_LayersProperty_SetEffect_Straighten_Angle' xml:space='preserve'><value>Установить эффект выпрямления под углом</value></data>
 <data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>Установить шрифт текста</value></data>
-<data name='Historys_LayersProperty_SetFontAlignment' xml:space='preserve'><value>Установить выравнивание шрифта</value></data>
+<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Установить размер шрифта</value></data>
+<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Установить семейство шрифтов</value></data>
+<data name='LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>Установить горизонтальное выравнивание</value></data>
+<data name='LayersProperty_SetUnderline' xml:space='preserve'><value>Установить подчеркивание</value></data>
 <data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>Установить стиль шрифта</value></data>
 <data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>Установить толщину шрифта</value></data>
-<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Установить семейство шрифтов</value></data>
-<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Установить размер шрифта</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>Установить черту стиля штриха</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeWidth' xml:space='preserve'><value>Установить ширину штриха</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Cap' xml:space='preserve'><value>Установить ограничение стиля штриха</value></data>
@@ -695,9 +696,9 @@
 <data name='Effects_Emboss_Radius' xml:space='preserve'><value>Радиус</value></data>
 <data name='Effects_Emboss_Angle' xml:space='preserve'><value>Угол</value></data>
 <data name='Effects_Straighten_Angle' xml:space='preserve'><value>Угол</value></data>
-<data name='Texts_FontAlignment_Left' xml:space='preserve'><value>Выровнять по левому краю</value></data>
-<data name='Texts_FontAlignment_Center' xml:space='preserve'><value>Выровнять по центру</value></data>
-<data name='Texts_FontAlignment_Right' xml:space='preserve'><value>Выровнять по правому краю</value></data>
+<data name='Texts_HorizontalAlignment_Left' xml:space='preserve'><value>Выровнять по левому краю</value></data>
+<data name='Texts_HorizontalAlignment_Center' xml:space='preserve'><value>Выровнять по центру</value></data>
+<data name='Texts_HorizontalAlignment_Right' xml:space='preserve'><value>Выровнять по правому краю</value></data>
 <data name='Strokes_Dash' xml:space='preserve'><value>Бросаться</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>Бросаться</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>Ширина</value></data>

@@ -256,7 +256,7 @@
 
 
                     <!--Document-->
-                    <ListViewItem x:Name="DocumentButton" HorizontalContentAlignment="Center">
+                    <ListViewItem x:Name="DocumentButton" MinWidth="50" HorizontalContentAlignment="Center">
                         <TextBlock x:Name="DocumentTextBlock" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
                     </ListViewItem>
 

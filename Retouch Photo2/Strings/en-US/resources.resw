@@ -294,12 +294,12 @@
 <data name='Effects_Morphology_Size' xml:space='preserve'><value>Size</value></data>
 <data name='Effects_Emboss' xml:space='preserve'><value>Emboss</value></data>
 <data name='Effects_Straighten' xml:space='preserve'><value>Straighten</value></data>
-<data name='Texts_FontAlignment' xml:space='preserve'><value>Align</value></data>
-<data name='Texts_FontAlignment_Justified' xml:space='preserve'><value>Justified</value></data>
+<data name='Texts_Alignment' xml:space='preserve'><value>Align</value></data>
+<data name='Texts_HorizontalAlignment_Justified' xml:space='preserve'><value>Justified</value></data>
 <data name='Texts_FontStyle' xml:space='preserve'><value>Font Style</value></data>
 <data name='Texts_FontStyle_Bold' xml:space='preserve'><value>Bold</value></data>
 <data name='Texts_FontStyle_Italic' xml:space='preserve'><value>Italic</value></data>
-<data name='Texts_FontStyle_UnderLine' xml:space='preserve'><value>UnderLine</value></data>
+<data name='Texts_FontStyle_Underline' xml:space='preserve'><value>Underline</value></data>
 <data name='Texts_FontWeight' xml:space='preserve'><value>Font Weight</value></data>
 <data name='Texts_FontWeight_Black' xml:space='preserve'><value>Black</value></data>
 <data name='Texts_FontWeight_Bold' xml:space='preserve'><value>Bold</value></data>
@@ -514,11 +514,12 @@
 <data name='Historys_LayersProperty_SwitchEffect_Straighten' xml:space='preserve'><value>Switch straighten effect</value></data>
 <data name='Historys_LayersProperty_SetEffect_Straighten_Angle' xml:space='preserve'><value>Set angle of straighten effect</value></data>
 <data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>Set font text</value></data>
-<data name='Historys_LayersProperty_SetFontAlignment' xml:space='preserve'><value>Set font alignment</value></data>
+<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Set font size</value></data>
+<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Set font family</value></data>
+<data name='LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>Set horizontal alignment</value></data>
+<data name='LayersProperty_SetUnderline' xml:space='preserve'><value>Set underline</value></data>
 <data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>Set font style</value></data>
 <data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>Set font weight</value></data>
-<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Set font family</value></data>
-<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Set font size</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>Set stroke style dash</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeWidth' xml:space='preserve'><value>Set stroke width</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Cap' xml:space='preserve'><value>Set cap of stroke style</value></data>
@@ -695,9 +696,9 @@
 <data name='Effects_Emboss_Radius' xml:space='preserve'><value>Radius</value></data>
 <data name='Effects_Emboss_Angle' xml:space='preserve'><value>Angle</value></data>
 <data name='Effects_Straighten_Angle' xml:space='preserve'><value>Angle</value></data>
-<data name='Texts_FontAlignment_Left' xml:space='preserve'><value>Align Left</value></data>
-<data name='Texts_FontAlignment_Center' xml:space='preserve'><value>Align Center</value></data>
-<data name='Texts_FontAlignment_Right' xml:space='preserve'><value>Align Right</value></data>
+<data name='Texts_HorizontalAlignment_Left' xml:space='preserve'><value>Align Left</value></data>
+<data name='Texts_HorizontalAlignment_Center' xml:space='preserve'><value>Align Center</value></data>
+<data name='Texts_HorizontalAlignment_Right' xml:space='preserve'><value>Align Right</value></data>
 <data name='Strokes_Dash' xml:space='preserve'><value>Dash</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>Dash</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>Width</value></data>

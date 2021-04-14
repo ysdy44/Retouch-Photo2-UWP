@@ -294,12 +294,12 @@
 <data name='Effects_Morphology_Size' xml:space='preserve'><value>Größe</value></data>
 <data name='Effects_Emboss' xml:space='preserve'><value>Prägen</value></data>
 <data name='Effects_Straighten' xml:space='preserve'><value>Begradigen</value></data>
-<data name='Texts_FontAlignment' xml:space='preserve'><value>Ausrichten</value></data>
-<data name='Texts_FontAlignment_Justified' xml:space='preserve'><value>Gerechtfertigt</value></data>
+<data name='Texts_Alignment' xml:space='preserve'><value>Ausrichten</value></data>
+<data name='Texts_HorizontalAlignment_Justified' xml:space='preserve'><value>Gerechtfertigt</value></data>
 <data name='Texts_FontStyle' xml:space='preserve'><value>Schriftstil</value></data>
 <data name='Texts_FontStyle_Bold' xml:space='preserve'><value>Fett gedruckt</value></data>
 <data name='Texts_FontStyle_Italic' xml:space='preserve'><value>Kursiv</value></data>
-<data name='Texts_FontStyle_UnderLine' xml:space='preserve'><value>Unterstreichen</value></data>
+<data name='Texts_FontStyle_Underline' xml:space='preserve'><value>Unterstreichen</value></data>
 <data name='Texts_FontWeight' xml:space='preserve'><value>Schriftgewicht</value></data>
 <data name='Texts_FontWeight_Black' xml:space='preserve'><value>Schwarz</value></data>
 <data name='Texts_FontWeight_Bold' xml:space='preserve'><value>Fett gedruckt</value></data>
@@ -514,11 +514,12 @@
 <data name='Historys_LayersProperty_SwitchEffect_Straighten' xml:space='preserve'><value>Schalter begradigen Effekt</value></data>
 <data name='Historys_LayersProperty_SetEffect_Straighten_Angle' xml:space='preserve'><value>Stellen Sie den Winkel des Begradigungseffekts ein</value></data>
 <data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>Stellen Sie den Schrifttext ein</value></data>
-<data name='Historys_LayersProperty_SetFontAlignment' xml:space='preserve'><value>Stellen Sie die Schriftausrichtung ein</value></data>
+<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Stellen Sie die Schriftgröße ein</value></data>
+<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Stellen Sie die Schriftfamilie ein</value></data>
+<data name='LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>Stellen Sie die horizontale Ausrichtung ein</value></data>
+<data name='LayersProperty_SetUnderline' xml:space='preserve'><value>Unterstreichen setzen</value></data>
 <data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>Stellen Sie den Schriftstil ein</value></data>
 <data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>Stellen Sie die Schriftstärke ein</value></data>
-<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Stellen Sie die Schriftfamilie ein</value></data>
-<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Stellen Sie die Schriftgröße ein</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>Stellen Sie den Strich im Strichstil ein</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeWidth' xml:space='preserve'><value>Hubbreite einstellen</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Cap' xml:space='preserve'><value>Stellen Sie die Kappe des Strichstils ein</value></data>
@@ -695,9 +696,9 @@
 <data name='Effects_Emboss_Radius' xml:space='preserve'><value>Radius</value></data>
 <data name='Effects_Emboss_Angle' xml:space='preserve'><value>Winkel</value></data>
 <data name='Effects_Straighten_Angle' xml:space='preserve'><value>Winkel</value></data>
-<data name='Texts_FontAlignment_Left' xml:space='preserve'><value>Linksbündig</value></data>
-<data name='Texts_FontAlignment_Center' xml:space='preserve'><value>Im Zentrum anordnen</value></data>
-<data name='Texts_FontAlignment_Right' xml:space='preserve'><value>Rechts ausrichten</value></data>
+<data name='Texts_HorizontalAlignment_Left' xml:space='preserve'><value>Linksbündig</value></data>
+<data name='Texts_HorizontalAlignment_Center' xml:space='preserve'><value>Im Zentrum anordnen</value></data>
+<data name='Texts_HorizontalAlignment_Right' xml:space='preserve'><value>Rechts ausrichten</value></data>
 <data name='Strokes_Dash' xml:space='preserve'><value>Strich</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>Strich</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>Breite</value></data>

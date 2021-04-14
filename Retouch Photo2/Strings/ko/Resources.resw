@@ -294,12 +294,12 @@
 <data name='Effects_Morphology_Size' xml:space='preserve'><value>크기</value></data>
 <data name='Effects_Emboss' xml:space='preserve'><value>엠 보스</value></data>
 <data name='Effects_Straighten' xml:space='preserve'><value>바르게 되다</value></data>
-<data name='Texts_FontAlignment' xml:space='preserve'><value>정렬</value></data>
-<data name='Texts_FontAlignment_Justified' xml:space='preserve'><value>양쪽 맞춤</value></data>
+<data name='Texts_Alignment' xml:space='preserve'><value>정렬</value></data>
+<data name='Texts_HorizontalAlignment_Justified' xml:space='preserve'><value>양쪽 맞춤</value></data>
 <data name='Texts_FontStyle' xml:space='preserve'><value>글꼴 스타일</value></data>
 <data name='Texts_FontStyle_Bold' xml:space='preserve'><value>굵게</value></data>
 <data name='Texts_FontStyle_Italic' xml:space='preserve'><value>이탤릭체</value></data>
-<data name='Texts_FontStyle_UnderLine' xml:space='preserve'><value>밑줄</value></data>
+<data name='Texts_FontStyle_Underline' xml:space='preserve'><value>밑줄</value></data>
 <data name='Texts_FontWeight' xml:space='preserve'><value>글꼴 두께</value></data>
 <data name='Texts_FontWeight_Black' xml:space='preserve'><value>검정</value></data>
 <data name='Texts_FontWeight_Bold' xml:space='preserve'><value>굵게</value></data>
@@ -514,11 +514,12 @@
 <data name='Historys_LayersProperty_SwitchEffect_Straighten' xml:space='preserve'><value>직선화 효과 전환</value></data>
 <data name='Historys_LayersProperty_SetEffect_Straighten_Angle' xml:space='preserve'><value>직선 효과 각도 설정</value></data>
 <data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>글꼴 텍스트 설정</value></data>
-<data name='Historys_LayersProperty_SetFontAlignment' xml:space='preserve'><value>글꼴 정렬 설정</value></data>
+<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>글꼴 크기 설정</value></data>
+<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>글꼴 모음 설정</value></data>
+<data name='LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>수평 정렬 설정</value></data>
+<data name='LayersProperty_SetUnderline' xml:space='preserve'><value>밑줄 설정</value></data>
 <data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>글꼴 스타일 설정</value></data>
 <data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>글꼴 두께 설정</value></data>
-<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>글꼴 모음 설정</value></data>
-<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>글꼴 크기 설정</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>획 스타일 대시 설정</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeWidth' xml:space='preserve'><value>획 너비 설정</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Cap' xml:space='preserve'><value>획 스타일의 한도 설정</value></data>
@@ -695,9 +696,9 @@
 <data name='Effects_Emboss_Radius' xml:space='preserve'><value>반지름</value></data>
 <data name='Effects_Emboss_Angle' xml:space='preserve'><value>각도</value></data>
 <data name='Effects_Straighten_Angle' xml:space='preserve'><value>각도</value></data>
-<data name='Texts_FontAlignment_Left' xml:space='preserve'><value>왼쪽 정렬</value></data>
-<data name='Texts_FontAlignment_Center' xml:space='preserve'><value>중앙 정렬</value></data>
-<data name='Texts_FontAlignment_Right' xml:space='preserve'><value>오른쪽 정렬</value></data>
+<data name='Texts_HorizontalAlignment_Left' xml:space='preserve'><value>왼쪽 정렬</value></data>
+<data name='Texts_HorizontalAlignment_Center' xml:space='preserve'><value>중앙 정렬</value></data>
+<data name='Texts_HorizontalAlignment_Right' xml:space='preserve'><value>오른쪽 정렬</value></data>
 <data name='Strokes_Dash' xml:space='preserve'><value>대시</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>대시</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>폭</value></data>

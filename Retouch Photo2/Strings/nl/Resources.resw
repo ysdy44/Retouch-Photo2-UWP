@@ -294,12 +294,12 @@
 <data name='Effects_Morphology_Size' xml:space='preserve'><value>Grootte</value></data>
 <data name='Effects_Emboss' xml:space='preserve'><value>Reliëf</value></data>
 <data name='Effects_Straighten' xml:space='preserve'><value>Rechtzetten</value></data>
-<data name='Texts_FontAlignment' xml:space='preserve'><value>Uitlijnen</value></data>
-<data name='Texts_FontAlignment_Justified' xml:space='preserve'><value>Gerechtvaardigd</value></data>
+<data name='Texts_Alignment' xml:space='preserve'><value>Uitlijnen</value></data>
+<data name='Texts_HorizontalAlignment_Justified' xml:space='preserve'><value>Gerechtvaardigd</value></data>
 <data name='Texts_FontStyle' xml:space='preserve'><value>Lettertype</value></data>
 <data name='Texts_FontStyle_Bold' xml:space='preserve'><value>Stoutmoedig</value></data>
 <data name='Texts_FontStyle_Italic' xml:space='preserve'><value>Cursief</value></data>
-<data name='Texts_FontStyle_UnderLine' xml:space='preserve'><value>Onderstrepen</value></data>
+<data name='Texts_FontStyle_Underline' xml:space='preserve'><value>Onderstrepen</value></data>
 <data name='Texts_FontWeight' xml:space='preserve'><value>Lettertype dikte</value></data>
 <data name='Texts_FontWeight_Black' xml:space='preserve'><value>Zwart</value></data>
 <data name='Texts_FontWeight_Bold' xml:space='preserve'><value>Stoutmoedig</value></data>
@@ -514,11 +514,12 @@
 <data name='Historys_LayersProperty_SwitchEffect_Straighten' xml:space='preserve'><value>Schakel het rechttrekken-effect om</value></data>
 <data name='Historys_LayersProperty_SetEffect_Straighten_Angle' xml:space='preserve'><value>Hoek voor rechttrekken instellen</value></data>
 <data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>Lettertypetekst instellen</value></data>
-<data name='Historys_LayersProperty_SetFontAlignment' xml:space='preserve'><value>Lettertype-uitlijning instellen</value></data>
+<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Stel de lettergrootte in</value></data>
+<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Stel lettertypefamilie in</value></data>
+<data name='LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>Stel horizontale uitlijning in</value></data>
+<data name='LayersProperty_SetUnderline' xml:space='preserve'><value>Onderstrepen</value></data>
 <data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>Lettertypestijl instellen</value></data>
 <data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>Lettertypegewicht instellen</value></data>
-<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Stel lettertypefamilie in</value></data>
-<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Stel de lettergrootte in</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>Streepstijl instellen</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeWidth' xml:space='preserve'><value>Stel de lijndikte in</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Cap' xml:space='preserve'><value>Stel de dop van de lijnstijl in</value></data>
@@ -695,9 +696,9 @@
 <data name='Effects_Emboss_Radius' xml:space='preserve'><value>Straal</value></data>
 <data name='Effects_Emboss_Angle' xml:space='preserve'><value>Hoek</value></data>
 <data name='Effects_Straighten_Angle' xml:space='preserve'><value>Hoek</value></data>
-<data name='Texts_FontAlignment_Left' xml:space='preserve'><value>Links uitlijnen</value></data>
-<data name='Texts_FontAlignment_Center' xml:space='preserve'><value>Tekst in het midden uitlijnen</value></data>
-<data name='Texts_FontAlignment_Right' xml:space='preserve'><value>Rechts uitlijnen</value></data>
+<data name='Texts_HorizontalAlignment_Left' xml:space='preserve'><value>Links uitlijnen</value></data>
+<data name='Texts_HorizontalAlignment_Center' xml:space='preserve'><value>Tekst in het midden uitlijnen</value></data>
+<data name='Texts_HorizontalAlignment_Right' xml:space='preserve'><value>Rechts uitlijnen</value></data>
 <data name='Strokes_Dash' xml:space='preserve'><value>Dash</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>Dash</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>Breedte</value></data>

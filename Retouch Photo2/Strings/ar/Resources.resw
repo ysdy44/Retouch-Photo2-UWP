@@ -294,12 +294,12 @@
 <data name='Effects_Morphology_Size' xml:space='preserve'><value>مقاس</value></data>
 <data name='Effects_Emboss' xml:space='preserve'><value>زخرف</value></data>
 <data name='Effects_Straighten' xml:space='preserve'><value>تسوية</value></data>
-<data name='Texts_FontAlignment' xml:space='preserve'><value>محاذاة</value></data>
-<data name='Texts_FontAlignment_Justified' xml:space='preserve'><value>مبرر</value></data>
+<data name='Texts_Alignment' xml:space='preserve'><value>محاذاة</value></data>
+<data name='Texts_HorizontalAlignment_Justified' xml:space='preserve'><value>مبرر</value></data>
 <data name='Texts_FontStyle' xml:space='preserve'><value>نوع الخط</value></data>
 <data name='Texts_FontStyle_Bold' xml:space='preserve'><value>بالخط العريض</value></data>
 <data name='Texts_FontStyle_Italic' xml:space='preserve'><value>مائل</value></data>
-<data name='Texts_FontStyle_UnderLine' xml:space='preserve'><value>خط سفلي</value></data>
+<data name='Texts_FontStyle_Underline' xml:space='preserve'><value>خط سفلي</value></data>
 <data name='Texts_FontWeight' xml:space='preserve'><value>وزن الخط</value></data>
 <data name='Texts_FontWeight_Black' xml:space='preserve'><value>أسود</value></data>
 <data name='Texts_FontWeight_Bold' xml:space='preserve'><value>بالخط العريض</value></data>
@@ -514,11 +514,12 @@
 <data name='Historys_LayersProperty_SwitchEffect_Straighten' xml:space='preserve'><value>تبديل تأثير التسوية</value></data>
 <data name='Historys_LayersProperty_SetEffect_Straighten_Angle' xml:space='preserve'><value>ضبط زاوية تأثير التسوية</value></data>
 <data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>تعيين نص الخط</value></data>
-<data name='Historys_LayersProperty_SetFontAlignment' xml:space='preserve'><value>اضبط محاذاة الخط</value></data>
+<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>تعيين حجم الخط</value></data>
+<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>تعيين عائلة الخطوط</value></data>
+<data name='LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>اضبط المحاذاة الأفقية</value></data>
+<data name='LayersProperty_SetUnderline' xml:space='preserve'><value>تعيين التسطير</value></data>
 <data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>تعيين نمط الخط</value></data>
 <data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>تعيين وزن الخط</value></data>
-<data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>تعيين عائلة الخطوط</value></data>
-<data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>تعيين حجم الخط</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>تعيين شرطة نمط السكتة الدماغية</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeWidth' xml:space='preserve'><value>ضبط عرض الشوط</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Cap' xml:space='preserve'><value>تعيين غطاء لنمط السكتة الدماغية</value></data>
@@ -695,9 +696,9 @@
 <data name='Effects_Emboss_Radius' xml:space='preserve'><value>نصف القطر</value></data>
 <data name='Effects_Emboss_Angle' xml:space='preserve'><value>زاوية</value></data>
 <data name='Effects_Straighten_Angle' xml:space='preserve'><value>زاوية</value></data>
-<data name='Texts_FontAlignment_Left' xml:space='preserve'><value>محاذاة لليسار</value></data>
-<data name='Texts_FontAlignment_Center' xml:space='preserve'><value>مركز المحاذاة</value></data>
-<data name='Texts_FontAlignment_Right' xml:space='preserve'><value>محاذاة اليمين</value></data>
+<data name='Texts_HorizontalAlignment_Left' xml:space='preserve'><value>محاذاة لليسار</value></data>
+<data name='Texts_HorizontalAlignment_Center' xml:space='preserve'><value>مركز المحاذاة</value></data>
+<data name='Texts_HorizontalAlignment_Right' xml:space='preserve'><value>محاذاة اليمين</value></data>
 <data name='Strokes_Dash' xml:space='preserve'><value>اندفاع</value></data>
 <data name='Strokes_Dash_Dash' xml:space='preserve'><value>اندفاع</value></data>
 <data name='Strokes_Width' xml:space='preserve'><value>عرض</value></data>
