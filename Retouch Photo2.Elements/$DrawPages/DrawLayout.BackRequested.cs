@@ -55,17 +55,19 @@ namespace Retouch_Photo2.Elements
             BackRequestedExtension.Current.BackRequested += this.BackRequested;
             Window.Current.CoreWindow.KeyDown += this.CoreWindow_KeyDown;
         }
-       
+
         /// <summary> Hide the layout. </summary>
         public void Hide()
         {
             //Phone
+            if (this._vsPhoneType != PhoneLayoutType.Hided)
             {
                 this._vsPhoneType = PhoneLayoutType.Hided;
-                //this.VisualState = this.VisualState;//State
+                this.VisualState = this.VisualState;//State
             }
 
             //Writable
+            if (this._vsIsWritable)
             {
                 this.WritableIconContentControl.Template = null;
                 this.WritableTextBlock.Text = string.Empty;
