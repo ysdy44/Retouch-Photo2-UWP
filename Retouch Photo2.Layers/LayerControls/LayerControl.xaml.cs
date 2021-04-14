@@ -15,7 +15,7 @@ namespace Retouch_Photo2.Layers
 
         //@Construct
         /// <summary>
-        /// Initializes a layer-control.
+        /// Initializes a LayerControl.
         /// </summary>      
         /// <param name="controlHeight"> The control-height. </param>
         /// <param name="type"> The type. </param>
@@ -27,7 +27,9 @@ namespace Retouch_Photo2.Layers
 
             this.Unloaded += (s, e) =>
             {
+                // Explicitly remove references to allow the Win2D controls to get garbage collected
                 this.IconCanvasControl.RemoveFromVisualTree();
+                this.IconCanvasControl = null;
             };
         }
         /// <summary>
