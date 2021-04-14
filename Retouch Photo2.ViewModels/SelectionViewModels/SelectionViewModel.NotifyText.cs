@@ -47,17 +47,31 @@ namespace Retouch_Photo2.ViewModels
         }
         private float fontSize = 22;
 
+
         /// <summary> <see cref="ITextLayer"/>'s horizontal alignment. </summary>
         public CanvasHorizontalAlignment HorizontalAlignment
         {
             get => this.horizontalAlignment;
             set
             {
-                this.horizontalAlignment = value; 
+                this.horizontalAlignment = value;
                 this.OnPropertyChanged(nameof(HorizontalAlignment));//Notify 
             }
         }
         private CanvasHorizontalAlignment horizontalAlignment = CanvasHorizontalAlignment.Left;
+
+
+        /// <summary> <see cref="ITextLayer"/>'s underline. </summary>
+        public bool Underline
+        {
+            get => this.underline;
+            set
+            {
+                this.underline = value;
+                this.OnPropertyChanged(nameof(Underline));//Notify 
+            }
+        }
+        private bool underline;
 
         /// <summary> <see cref="ITextLayer"/>'s font style. </summary>
         public FontStyle FontStyle

@@ -218,7 +218,7 @@ namespace Retouch_Photo2.Historys
         LayersProperty_SetFontSize,
         LayersProperty_SetFontFamily,
         LayersProperty_SetHorizontalAlignment,
-        LayersProperty_SetUnderLine,
+        LayersProperty_SetUnderline,
         LayersProperty_SetFontStyle,
         LayersProperty_SetFontWeight,
 

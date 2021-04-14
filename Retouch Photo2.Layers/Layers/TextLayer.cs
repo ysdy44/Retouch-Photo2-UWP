@@ -29,6 +29,10 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary> Gets or sets the font family. </summary>
         public string FontFamily { get; set; } = "Arial";
 
+
+        /// <summary> Gets or sets the underline. </summary>
+        public bool Underline { get; set; }
+
         /// <summary> Gets or sets the font horizontal alignment. </summary>
         public CanvasHorizontalAlignment HorizontalAlignment { get; set; } = CanvasHorizontalAlignment.Left;
         /// <summary> Gets or sets the font style. </summary>
@@ -48,6 +52,8 @@ namespace Retouch_Photo2.Layers.Models
             element.Add(new XElement("FontFamily", this.FontFamily));
 
             element.Add(new XElement("HorizontalAlignment", this.HorizontalAlignment));
+
+            element.Add(new XElement("Underline", this.Underline));
             element.Add(new XElement("FontStyle", this.FontStyle));
             element.Add(new XElement("FontWeight", this.FontWeight));
         }
@@ -69,6 +75,8 @@ namespace Retouch_Photo2.Layers.Models
                 }
                 catch (Exception) { }
             }
+
+            if (element.Element("Underline") is XElement Underline) this.Underline = (bool)Underline;
             if (element.Element("FontStyle") is XElement fontStyle)
             {
                 try
@@ -97,8 +105,9 @@ namespace Retouch_Photo2.Layers.Models
         {
             Transformer transformer = base.Transform.Transformer;
 
+            if (string.IsNullOrEmpty(this.FontText)) return transformer.ToRectangle(resourceCreator);
 
-            CanvasTextFormat textFormat = new CanvasTextFormat
+            using (CanvasTextFormat textFormat = new CanvasTextFormat
             {
                 FontSize = this.FontSize,
                 FontFamily = this.FontFamily,
@@ -106,18 +115,24 @@ namespace Retouch_Photo2.Layers.Models
                 HorizontalAlignment = this.HorizontalAlignment,
                 FontStyle = this.FontStyle,
                 FontWeight = this.FontWeight.ToFontWeight(),
-            };
+            })
+            {
+                float width = transformer.Horizontal.Length();
+                float height = transformer.Vertical.Length();
+                using (CanvasTextLayout textLayout = new CanvasTextLayout(resourceCreator, this.FontText, textFormat, width, height))
+                {
+                    int fontLength = this.FontText.Length;
+                    if (this.Underline) textLayout.SetUnderline(0, fontLength, true);
 
-            float width = transformer.Horizontal.Length();
-            float height = transformer.Vertical.Length();
-            TransformerRect rect = new TransformerRect(width, height, Vector2.Zero);
-            Matrix3x2 matrix = Transformer.FindHomography(rect, transformer);
 
-            CanvasTextLayout textLayout = new CanvasTextLayout(resourceCreator, this.FontText ?? string.Empty, textFormat, width, height);
-            CanvasGeometry geometry = CanvasGeometry.CreateText(textLayout).Transform(matrix);
+                    TransformerRect rect = new TransformerRect(width, height, Vector2.Zero);
+                    Matrix3x2 matrix = Transformer.FindHomography(rect, transformer);
+                    CanvasGeometry geometry = CanvasGeometry.CreateText(textLayout).Transform(matrix);
 
 
-            return geometry;
+                    return geometry;
+                }
+            }
         }
         /// <summary>
         /// Create a specific geometry.

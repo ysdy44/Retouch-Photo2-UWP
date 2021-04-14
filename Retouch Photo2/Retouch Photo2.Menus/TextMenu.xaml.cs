@@ -90,7 +90,7 @@ namespace Retouch_Photo2.Menus
 
                 this.SetFontStyle(fontStyle);
             };
-            this.UnderLineButton.Click += (s, e) => { };
+            this.UnderlineButton.Click += (s, e) => this.SetUnderline(!this.SelectionViewModel.Underline);
 
             this.FontWeightComboBox.WeightChanged += (s, fontWeight) => this.SetFontWeight(fontWeight);
 
@@ -151,7 +151,7 @@ namespace Retouch_Photo2.Menus
             this.FontStyleTextBlock.Text = resource.GetString("Texts_FontStyle");
             this.BoldToolTip.Content = resource.GetString("Texts_FontStyle_Bold");
             this.ItalicToolTip.Content = resource.GetString("Texts_FontStyle_Italic");
-            this.UnderLineToolTip.Content = resource.GetString("Texts_FontStyle_UnderLine");
+            this.UnderlineToolTip.Content = resource.GetString("Texts_FontStyle_Underline");
 
             this.FontWeightTextBlock.Text = resource.GetString("Texts_FontWeight");
 
@@ -190,7 +190,6 @@ namespace Retouch_Photo2.Menus
            );
         }
 
-
         private void SetFontStyle(FontStyle fontStyle)
         {
             this.SelectionViewModel.FontStyle = fontStyle;
@@ -201,6 +200,19 @@ namespace Retouch_Photo2.Menus
                 type: HistoryType.LayersProperty_SetFontStyle,
                 getUndo: (textLayer) => textLayer.FontStyle,
                 setUndo: (textLayer, previous) => textLayer.FontStyle = previous
+           );
+        }
+
+        private void SetUnderline(bool underline)
+        {
+            this.SelectionViewModel.Underline = underline;
+            this.MethodViewModel.ITextLayerChanged<bool>
+            (
+                set: (textLayer) => textLayer.Underline = underline,
+
+                type: HistoryType.LayersProperty_SetUnderline,
+                getUndo: (textLayer) => textLayer.Underline,
+                setUndo: (textLayer, previous) => textLayer.Underline = previous
            );
         }
 

@@ -56,12 +56,13 @@
                             <SymbolIcon Symbol="Italic"/>
                         </ToggleButton>
 
-                        <Button x:Name="UnderLineButton" Visibility="Collapsed" IsEnabled="False" Grid.Column="2" Style="{StaticResource AppRoundedButtonRightStyle}">
+                        <ToggleButton x:Name="UnderlineButton" Grid.Column="2" Style="{StaticResource AppCircleToggleButtonStyle}"
+                                      IsChecked="{x:Bind SelectionViewModel.Underline, Mode=OneWay}">
                             <ToolTipService.ToolTip>
-                                <ToolTip x:Name="UnderLineToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                                <ToolTip x:Name="UnderlineToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
-                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE19A;" FontSize="18" FontWeight="Bold" />
-                        </Button>
+                            <SymbolIcon Symbol="Underline"/>
+                        </ToggleButton>
 
                     </Grid>
 

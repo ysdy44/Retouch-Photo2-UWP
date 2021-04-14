@@ -23,6 +23,9 @@ namespace Retouch_Photo2.Layers
 
         /// <summary> Gets or sets the font horizontal alignment. </summary>
         CanvasHorizontalAlignment HorizontalAlignment { get; set; }
+
+        /// <summary> Gets or sets the underline. </summary>
+        bool Underline { get; set; }
         /// <summary> Gets or sets the font style. </summary>
         FontStyle FontStyle { get; set; }
         /// <summary> Gets or sets the font weight. </summary>

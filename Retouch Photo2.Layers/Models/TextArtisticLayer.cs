@@ -42,8 +42,9 @@ namespace Retouch_Photo2.Layers.Models
         private float GetFontSize()
         {
             float height = base.Transform.Transformer.Vertical.Length();
-            this.fontSize = height;
+            if (height < 1) height = 1;
 
+            this.fontSize = height;
             return this.fontSize;
         }
 
