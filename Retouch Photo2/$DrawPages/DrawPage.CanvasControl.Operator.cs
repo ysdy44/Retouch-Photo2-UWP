@@ -15,8 +15,6 @@ namespace Retouch_Photo2
         //@Content
         private Color AccentColor => this.AccentColorBrush.Color;
         private Color ShadowColor => this.ShadowColorBrush.Color;
-        private CanvasControl LayerRenderCanvasControl => this.DrawLayout.LayerRenderCanvasControl;
-        private CanvasControl ToolDrawCanvasControl => this.DrawLayout.ToolDrawCanvasControl;
 
 
         bool _isSingleStarted;

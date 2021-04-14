@@ -3,6 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPickers="using:HSVColorPickers"
     xmlns:menus="using:Retouch_Photo2.Menus"
@@ -201,6 +203,15 @@
 
         <!--Extension-->
         <elements:ApplicationTitleBarExtension x:Name="ApplicationView" TitleBarColor="{ThemeResource AppTitleColor}"/>
+
+
+        <!--AlignmentGrid-->
+        <developerTools:AlignmentGrid Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="White" Visibility="{ThemeResource AppGridVisibility}" />
+
+
+        <!--Body-->
+        <canvas:CanvasControl x:Name="LayerRenderCanvasControl" FlowDirection="LeftToRight"/>
+        <canvas:CanvasControl x:Name="ToolDrawCanvasControl" FlowDirection="LeftToRight"/>
 
 
         <elements:DrawLayout x:Name="DrawLayout" 

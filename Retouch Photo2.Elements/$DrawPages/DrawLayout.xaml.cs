@@ -29,11 +29,6 @@ namespace Retouch_Photo2.Elements
     {
 
         //@Content
-        //Body
-        /// <summary> CanvasControl of <see cref="ILayer.Render"/>. </summary>
-        public CanvasControl LayerRenderCanvasControl => this._LayerRenderCanvasControl;
-        /// <summary> CanvasControl of <see cref="ITool.Draw"/>. </summary>
-        public CanvasControl ToolDrawCanvasControl => this._ToolDrawCanvasControl;
 
         //Touchbar
         /// <summary> TouchbarPickerBorder's child. </summary>

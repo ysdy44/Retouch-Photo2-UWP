@@ -6,8 +6,6 @@
     xmlns:apiContractNotPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
     xmlns:apiContractPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
-    xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
     mc:Ignorable="d"
     >
 
@@ -197,13 +195,7 @@
 
                         <!--RightIcon-->
                         <Setter Target = "_RightIcon.Visibility" Value="Collapsed"/>
-
-                        <!--Body-->
-                        <Setter Target = "_LayerRenderCanvasControl.(Grid.Row)" Value="0"/>
-                        <Setter Target = "_LayerRenderCanvasControl.(Grid.RowSpan)" Value="2"/>
-                        <Setter Target = "_ToolDrawCanvasControl.(Grid.Row)" Value="0"/>
-                        <Setter Target = "_ToolDrawCanvasControl.(Grid.RowSpan)" Value="2"/>
-
+                        
                         <!--Foot-->
                         <Setter Target = "FootPanel.Visibility" Value="Collapsed"/>
 
@@ -964,6 +956,10 @@
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                             </ObjectAnimationUsingKeyFrames>
 
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="Padding" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AppPanelPadding}"/>
+                            </ObjectAnimationUsingKeyFrames>
+
                         </Storyboard>
                     </VisualTransition>
 
@@ -1116,6 +1112,14 @@
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="2"/>
                             </ObjectAnimationUsingKeyFrames>
 
+
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="GalleryButton" Storyboard.TargetProperty="Visibility" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PCGalleryButton" Storyboard.TargetProperty="Visibility" Duration="0">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            
                         </Storyboard>
                     </VisualTransition>
 
@@ -1136,15 +1140,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <!--AlignmentGrid-->
-        <developerTools:AlignmentGrid Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="White" Visibility="{ThemeResource AppGridVisibility}" />
-
-
-        <!--Body-->
-        <canvas:CanvasControl x:Name="_LayerRenderCanvasControl" Grid.Column="1" Grid.Row="1" FlowDirection="LeftToRight"/>
-        <canvas:CanvasControl x:Name="_ToolDrawCanvasControl" Grid.Column="1" Grid.Row="1" FlowDirection="LeftToRight"/>
-
 
         <!--Touchbar-->
         <Grid x:Name="TouchbarBorder" Grid.Column="1" Grid.Row="1" Margin="12,0,12,70" MinWidth="200" MaxWidth="800" VerticalAlignment="Bottom" >
