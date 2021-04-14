@@ -109,8 +109,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FontWeightExtensions.cs" />
-    <Compile Include="FontAlignmentSegmented.xaml.cs">
-      <DependentUpon>FontAlignmentSegmented.xaml</DependentUpon>
+    <Compile Include="HorizontalAlignmentSegmented.xaml.cs">
+      <DependentUpon>HorizontalAlignmentSegmented.xaml</DependentUpon>
     </Compile>
     <Compile Include="FontWeight.cs" />
     <Compile Include="FontWeightComboBox.xaml.cs">
@@ -131,7 +131,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="FontAlignmentSegmented.xaml">
+    <Page Include="HorizontalAlignmentSegmented.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

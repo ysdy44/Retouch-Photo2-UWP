@@ -25,9 +25,9 @@
                 <StackPanel>
 
 
-                    <!--Align-->
-                    <TextBlock x:Name="FontAlignmentTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <texts:FontAlignmentSegmented x:Name="FontAlignmentSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Alignment="{x:Bind SelectionViewModel.HorizontalAlignment, Mode=OneWay}"/>
+                    <!--Alignment-->
+                    <TextBlock x:Name="AlignmentTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <texts:HorizontalAlignmentSegmented x:Name="HorizontalAlignmentSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}" HorizontalAlignment2="{x:Bind SelectionViewModel.HorizontalAlignment, Mode=OneWay}"/>
 
 
                     <!--FontStyle-->
@@ -45,7 +45,7 @@
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="BoldToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
-                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8DD;" FontSize="18" FontWeight="Bold" />
+                            <SymbolIcon Symbol="Bold"/>
                         </ToggleButton>
 
                         <ToggleButton x:Name="ItalicButton" Grid.Column="1" Style="{StaticResource AppCircleToggleButtonStyle}"
@@ -53,7 +53,7 @@
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="ItalicToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
-                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE199;" FontSize="18" FontWeight="Bold" />
+                            <SymbolIcon Symbol="Italic"/>
                         </ToggleButton>
 
                         <Button x:Name="UnderLineButton" Visibility="Collapsed" IsEnabled="False" Grid.Column="2" Style="{StaticResource AppRoundedButtonRightStyle}">

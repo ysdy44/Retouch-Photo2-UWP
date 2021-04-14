@@ -39,7 +39,7 @@ namespace Retouch_Photo2.Menus
                 case FontWeight2.ExtraBold:
                 case FontWeight2.SemiBold:
                     return true;
-                default: 
+                default:
                     return false;
             }
         }
@@ -72,7 +72,7 @@ namespace Retouch_Photo2.Menus
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.FontAlignmentSegmented.AlignmentChanged += (s, fontAlignment) => this.SetFontAlignment(fontAlignment);
+            this.HorizontalAlignmentSegmented.HorizontalAlignmentChanged += (s, alignment) => this.SetHorizontalAlignment(alignment);
 
             this.BoldButton.Click += (s, e) =>
             {
@@ -146,7 +146,7 @@ namespace Retouch_Photo2.Menus
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.FontAlignmentTextBlock.Text = resource.GetString("Texts_FontAlignment");
+            this.AlignmentTextBlock.Text = resource.GetString("Texts_Alignment");
 
             this.FontStyleTextBlock.Text = resource.GetString("Texts_FontStyle");
             this.BoldToolTip.Content = resource.GetString("Texts_FontStyle_Bold");
@@ -163,14 +163,14 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        private void SetFontAlignment(CanvasHorizontalAlignment fontAlignment)
+        private void SetHorizontalAlignment(CanvasHorizontalAlignment horizontalAlignment)
         {
-            this.SelectionViewModel.HorizontalAlignment = fontAlignment;
+            this.SelectionViewModel.HorizontalAlignment = horizontalAlignment;
             this.MethodViewModel.ITextLayerChanged<CanvasHorizontalAlignment>
             (
-                set: (textLayer) => textLayer.HorizontalAlignment = fontAlignment,
+                set: (textLayer) => textLayer.HorizontalAlignment = horizontalAlignment,
 
-                type: HistoryType.LayersProperty_SetFontAlignment,
+                type: HistoryType.LayersProperty_SetHorizontalAlignment,
                 getUndo: (textLayer) => textLayer.HorizontalAlignment,
                 setUndo: (textLayer, previous) => textLayer.HorizontalAlignment = previous
            );

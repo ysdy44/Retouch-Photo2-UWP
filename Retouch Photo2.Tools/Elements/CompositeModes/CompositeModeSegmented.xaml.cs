@@ -40,7 +40,7 @@ namespace Retouch_Photo2.Tools.Elements
         #region DependencyProperty
 
 
-        /// <summary> Mode of <see cref = "CompositeModeSegmented" />. </summary>
+        /// <summary> Gets or sets the mode. </summary>
         public MarqueeCompositeMode Mode
         {
             get => (MarqueeCompositeMode)base.GetValue(ModeProperty);
@@ -59,7 +59,7 @@ namespace Retouch_Photo2.Tools.Elements
          }));
 
 
-        /// <summary> IsOpen of <see cref = "CompositeModeSegmented" />. </summary>
+        /// <summary> Gets or sets the IsOpen. </summary>
         public bool IsOpen
         {
             get => (bool)base.GetValue(IsOpenProperty);

@@ -215,11 +215,12 @@ namespace Retouch_Photo2.Historys
 
         //Text
         LayersProperty_SetFontText,
-        LayersProperty_SetFontAlignment,
+        LayersProperty_SetFontSize,
+        LayersProperty_SetFontFamily,
+        LayersProperty_SetHorizontalAlignment,
+        LayersProperty_SetUnderLine,
         LayersProperty_SetFontStyle,
         LayersProperty_SetFontWeight,
-        LayersProperty_SetFontFamily,
-        LayersProperty_SetFontSize,
 
 
         //Stroke
