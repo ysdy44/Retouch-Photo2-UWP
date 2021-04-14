@@ -98,7 +98,7 @@ namespace Retouch_Photo2.Brushs
                 if (isSucces) this.StopsChangeCompleted?.Invoke(this, this.array);//Delegate
             };
 
-            this.ColorEllipse.Tapped += (s, e) =>
+            this.ColorButton.Click += (s, e) =>
             {
                 if (this.array == null) return;
 

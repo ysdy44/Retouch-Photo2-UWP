@@ -11,17 +11,19 @@
 
     <Style TargetType="local:TouchbarButton">
         <Setter Property="IsTabStop" Value="True"/>
+        <Setter Property="TabIndex" Value="1"/>
+        <Setter Property="TabFocusNavigation" Value="Once"/>
         <Setter Property="MinWidth" Value="70"/>
         <Setter Property="Height" Value="{StaticResource AppRoundedHeight}"/>
         <Setter Property="Margin" Value="{ThemeResource AppMargin}"/>
         <Setter Property="Padding" Value="14,0"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
-        <Setter Property="Background" Value="{ThemeResource AppForeground}"/>
+        <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
         <Setter Property="BorderThickness" Value="{StaticResource AppThickness}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:TouchbarButton">
-                    <Border x:Name="RootGrid"      
+                    <Border x:Name="RootGrid"
                             CornerRadius="{StaticResource AppCornerRadius}"
                             Width="{TemplateBinding Width}" 
                             Height="{TemplateBinding Height}" 
