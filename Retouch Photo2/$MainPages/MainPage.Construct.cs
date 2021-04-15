@@ -141,7 +141,7 @@ namespace Retouch_Photo2
             this.DragOver += (s, e) =>
             {
                 e.AcceptedOperation = DataPackageOperation.Copy;
-                //e.DragUIOverride.Caption = App.resourceLoader.GetString("DropAcceptable_");//可以接受的图片
+                //e.DragUIOverride.Caption = App.resourceLoader.GetString("DropAcceptable_");
                 e.DragUIOverride.IsCaptionVisible = e.DragUIOverride.IsContentVisible = e.DragUIOverride.IsGlyphVisible = true;
             };
         }

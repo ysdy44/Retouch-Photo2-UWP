@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Media;
 namespace Retouch_Photo2.Photos
 {
     /// <summary>
-    /// Represents a canvas control, that containing some <see cref="Retouch_Photo2.Photos.Billboard"/>。
+    /// Represents a canvas control, that containing some <see cref="Retouch_Photo2.Photos.Billboard"/>.
     /// </summary>
     public class PhotoBillboardCanvas : Canvas
     {
