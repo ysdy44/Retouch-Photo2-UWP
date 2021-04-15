@@ -17,10 +17,26 @@ namespace Retouch_Photo2.Elements
     {
 
         private static readonly ApplicationView View = ApplicationView.GetForCurrentView();
+        private Color Color
+        {
+            set
+            {
+                ApplicationTitleBarExtension.View.TitleBar.BackgroundColor = value;
+                ApplicationTitleBarExtension.View.TitleBar.InactiveBackgroundColor = value;
+                ApplicationTitleBarExtension.View.TitleBar.ButtonBackgroundColor = value;
+                ApplicationTitleBarExtension.View.TitleBar.ButtonInactiveBackgroundColor = value;
+            }
+        }
+
 
         #region DependencyProperty
 
-        /// <summary> Color of <see cref="ApplicationViewTitleBar"/>. </summary>
+
+        /// <summary> Gets or sets <see cref="ApplicationTitleBarExtension"/>'s title. </summary>
+        public string Title { get => ApplicationTitleBarExtension.View.Title; set => ApplicationTitleBarExtension.View.Title = value; }
+
+
+        /// <summary> Gets or set the color for <see cref="ApplicationViewTitleBar"/>. </summary>
         public Color TitleBarColor
         {
             get => (Color)base.GetValue(TitleBarColorProperty);
@@ -33,35 +49,50 @@ namespace Retouch_Photo2.Elements
 
             if (e.NewValue is Color value)
             {
-                control.Color = value;
+                if (control.IsAccent == false) control.Color = value;
             }
         }));
 
+
+        /// <summary> Gets or set the accent color for <see cref="ApplicationViewTitleBar"/>. </summary>
+        public Color AccentTitleBarColor
+        {
+            get => (Color)base.GetValue(AccentTitleBarColorProperty);
+            set => SetValue(AccentTitleBarColorProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "ApplicationTitleBarExtension.AccentTitleBarColor" /> dependency property. </summary>
+        public static readonly DependencyProperty AccentTitleBarColorProperty = DependencyProperty.Register(nameof(AccentTitleBarColor), typeof(Color), typeof(ApplicationTitleBarExtension), new PropertyMetadata(Colors.DodgerBlue, (sender, e) =>
+        {
+            ApplicationTitleBarExtension control = (ApplicationTitleBarExtension)sender;
+
+            if (e.NewValue is Color value)
+            {
+                if (control.IsAccent == true) control.Color = value;
+            }
+        }));
+
+
+        /// <summary> Gets or set the state for <see cref="ApplicationViewTitleBar"/>. </summary>
+        public bool IsAccent
+        {
+            get => (bool)base.GetValue(IsAccentProperty);
+            set => SetValue(IsAccentProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "ApplicationTitleBarExtension.IsAccent" /> dependency property. </summary>
+        public static readonly DependencyProperty IsAccentProperty = DependencyProperty.Register(nameof(IsAccent), typeof(bool), typeof(ApplicationTitleBarExtension), new PropertyMetadata(false, (sender, e) =>
+        {
+            ApplicationTitleBarExtension control = (ApplicationTitleBarExtension)sender;
+
+            if (e.NewValue is bool value)
+            {
+                if (value) control.Color = control.AccentTitleBarColor;
+                else control.Color = control.TitleBarColor;
+            }
+        }));
+
+
         #endregion
 
-
-        /// <summary> Gets or sets <see cref="ApplicationTitleBarExtension"/>'s color. </summary>
-        public Color Color
-        {
-            get => this.color;
-            set
-            {
-                View.TitleBar.BackgroundColor = value;
-                View.TitleBar.InactiveBackgroundColor = value;
-                View.TitleBar.ButtonBackgroundColor = value;
-                View.TitleBar.ButtonInactiveBackgroundColor = value;
-
-                this.color = value;
-            }
-        }
-        private Color color = Colors.Gray;
-
-        /// <summary> Gets or sets <see cref="ApplicationTitleBarExtension"/>'s title. </summary>
-        public string Title
-        {
-            get => View.Title;
-            set => View.Title = value;
-        }
 
     }
 }

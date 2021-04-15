@@ -141,7 +141,7 @@ namespace Retouch_Photo2
             }
 
             //Extension
-            this.ApplicationView.Color = this.ApplicationView.Color;
+            this.ApplicationView.IsAccent = false;
         }
         /// <summary> The current page no longer becomes an active page. </summary>
         protected override void OnNavigatedFrom(NavigationEventArgs e) { }

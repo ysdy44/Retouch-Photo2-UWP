@@ -282,7 +282,7 @@ namespace Retouch_Photo2
             this.RegisterDrawPage();
 
             //Extension
-            this.ApplicationView.Color = this.ApplicationView.Color;
+            this.ApplicationView.IsAccent = false;
 
             //Key
             this.SettingViewModel.RegisteKey();

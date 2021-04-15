@@ -22,7 +22,10 @@
 
 
         <!--Extensions-->
-        <elements:ApplicationTitleBarExtension x:Name="ApplicationView" TitleBarColor="{ThemeResource AppTitleColor}"/>
+        <elements:ApplicationTitleBarExtension x:Name="ApplicationView" TitleBarColor="{ThemeResource AppTitleColor}" 
+                                               AccentTitleBarColor="{ThemeResource SystemAccentColor}"
+                                               IsAccent="{x:Bind MainLayout.IsAccent, Mode=OneWay}"
+                                               />
 
 
         <elements:MainLayout x:Name="MainLayout"
