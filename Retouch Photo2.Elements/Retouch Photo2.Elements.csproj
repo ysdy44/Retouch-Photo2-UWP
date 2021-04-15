@@ -143,6 +143,11 @@
     <Compile Include="ExpanedHead.xaml.cs">
       <DependentUpon>ExpanedHead.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Eyedropper\Eyedropper.Method.cs" />
+    <Compile Include="Eyedropper\Eyedropper.xaml.cs">
+      <DependentUpon>Eyedropper.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Eyedropper\EyedropperToolButton .cs" />
     <Compile Include="Pickers\CirclePicker.xaml.cs">
       <DependentUpon>CirclePicker.xaml</DependentUpon>
     </Compile>
@@ -211,6 +216,9 @@
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.0.180724003-prerelease</Version>
     </PackageReference>
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.5.0</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="%24DrawPages\SnapIcon.xaml">
@@ -260,6 +268,10 @@
     <Page Include="ExpanedHead.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Eyedropper\Eyedropper.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pickers\CirclePicker.xaml">
       <SubType>Designer</SubType>

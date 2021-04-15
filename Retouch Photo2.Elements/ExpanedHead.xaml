@@ -132,11 +132,11 @@
                                           Content="{TemplateBinding LeftButtonToolTip}"
                                           Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
-                            <ListViewItem.Transitions>
+                            <ListViewItem.ContentTransitions>
                                 <TransitionCollection>
                                     <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
                                 </TransitionCollection>
-                            </ListViewItem.Transitions>
+                            </ListViewItem.ContentTransitions>
                         </ListViewItem>
 
                         <TextBlock x:Name="TitleTextBlock" Grid.Column="1" HorizontalAlignment="Center" 
@@ -165,11 +165,11 @@
                                           Content="{TemplateBinding RightButtonToolTip}"
                                           Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
-                            <ListViewItem.Transitions>
+                            <ListViewItem.ContentTransitions>
                                 <TransitionCollection>
                                     <EntranceThemeTransition FromHorizontalOffset="25" FromVerticalOffset="0"/>
                                 </TransitionCollection>
-                            </ListViewItem.Transitions>
+                            </ListViewItem.ContentTransitions>
                         </ListViewItem>
 
                     </Grid>

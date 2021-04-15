@@ -141,7 +141,9 @@
                 #
             </ContentControl>
             <hsvColorPickers:HexPicker x:Name="_HexPicker" Grid.Column="1" Height="24" BorderThickness="0" />
-            <hsvColorPickers:StrawPicker x:Name="_StrawPicker" Grid.Column="3" Width="74" Background="{ThemeResource AppForeground}"/>
+            <local:EyedropperToolButton  x:Name="_StrawPicker" Grid.Column="3" Style="{StaticResource AppCircleButtonStyle}">
+                <FontIcon Glyph="&#xEF3C;" FontFamily="Segoe MDL2 Assets" />
+            </local:EyedropperToolButton>
         </Grid>
 
         <!--Group-->

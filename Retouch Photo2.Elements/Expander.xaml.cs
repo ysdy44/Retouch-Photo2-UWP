@@ -17,7 +17,6 @@ namespace Retouch_Photo2.Elements
     /// </summary>
     public enum ExpanderWidth
     {
-        Width200,
         Width250,
         Width300,
         Width350,
@@ -29,7 +28,6 @@ namespace Retouch_Photo2.Elements
     [TemplateVisualState(Name = nameof(Normal), GroupName = nameof(VisualStateGroup))]
     [TemplateVisualState(Name = nameof(Overlay), GroupName = nameof(VisualStateGroup))]
     [TemplateVisualState(Name = nameof(Pin), GroupName = nameof(VisualStateGroup))]
-    [TemplateVisualState(Name = nameof(Width200), GroupName = nameof(WidthStates))]
     [TemplateVisualState(Name = nameof(Width250), GroupName = nameof(WidthStates))]
     [TemplateVisualState(Name = nameof(Width300), GroupName = nameof(WidthStates))]
     [TemplateVisualState(Name = nameof(Width350), GroupName = nameof(WidthStates))]
@@ -60,7 +58,6 @@ namespace Retouch_Photo2.Elements
             {
                 switch (this._vsWidth)
                 {
-                    case ExpanderWidth.Width200: return this.Width200;
                     case ExpanderWidth.Width250: return this.Width250;
                     case ExpanderWidth.Width300: return this.Width300;
                     case ExpanderWidth.Width350: return this.Width350;
@@ -114,7 +111,6 @@ namespace Retouch_Photo2.Elements
 
 
         MenuFlyout WidthMenuFlyout;
-        ToggleMenuFlyoutItem WidthFlyoutItem200;
         ToggleMenuFlyoutItem WidthFlyoutItem250;
         ToggleMenuFlyoutItem WidthFlyoutItem300;
         ToggleMenuFlyoutItem WidthFlyoutItem350;
@@ -153,10 +149,6 @@ namespace Retouch_Photo2.Elements
 
 
             this.WidthMenuFlyout = base.GetTemplateChild(nameof(WidthMenuFlyout)) as MenuFlyout;
-
-            if (this.WidthFlyoutItem200 != null) this.WidthFlyoutItem200.Click -= this.WidthFlyoutItem200_Click;
-            this.WidthFlyoutItem200 = base.GetTemplateChild(nameof(WidthFlyoutItem200)) as ToggleMenuFlyoutItem;
-            if (this.WidthFlyoutItem200 != null) this.WidthFlyoutItem200.Click += this.WidthFlyoutItem200_Click;
 
             if (this.WidthFlyoutItem250 != null) this.WidthFlyoutItem250.Click -= this.WidthFlyoutItem250_Click;
             this.WidthFlyoutItem250 = base.GetTemplateChild(nameof(WidthFlyoutItem250)) as ToggleMenuFlyoutItem;
@@ -205,7 +197,6 @@ namespace Retouch_Photo2.Elements
         }
 
 
-        private void WidthFlyoutItem200_Click(object sender, RoutedEventArgs e) => this.ExpanderWidth = ExpanderWidth.Width200;
         private void WidthFlyoutItem250_Click(object sender, RoutedEventArgs e) => this.ExpanderWidth = ExpanderWidth.Width250;
         private void WidthFlyoutItem300_Click(object sender, RoutedEventArgs e) => this.ExpanderWidth = ExpanderWidth.Width300;
         private void WidthFlyoutItem350_Click(object sender, RoutedEventArgs e) => this.ExpanderWidth = ExpanderWidth.Width350;
