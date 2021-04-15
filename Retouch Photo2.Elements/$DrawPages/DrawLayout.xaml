@@ -26,11 +26,11 @@
             </ObjectAnimationUsingKeyFrames>
 
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightBorder" Storyboard.TargetProperty="(UIElement.Width)" Duration="0:0:0.2">
-                <DiscreteObjectKeyFrame KeyTime="0" Value="220"/>
+                <DiscreteObjectKeyFrame KeyTime="0" Value="264"/>
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Auto"/>
             </ObjectAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(UIElement.Width)" From="70" To="220" Duration="0:0:0.2" EnableDependentAnimation ="True">
+            <DoubleAnimation Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(UIElement.Width)" From="70" To="264" Duration="0:0:0.2" EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
@@ -50,11 +50,11 @@
             </ObjectAnimationUsingKeyFrames>
 
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightBorder" Storyboard.TargetProperty="(UIElement.Width)" Duration="0:0:0.2">
-                <DiscreteObjectKeyFrame KeyTime="0" Value="220"/>
+                <DiscreteObjectKeyFrame KeyTime="0" Value="264"/>
                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Auto"/>
             </ObjectAnimationUsingKeyFrames>
 
-            <DoubleAnimation Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(UIElement.Width)" From="220" To="70" Duration="0:0:0.2"  EnableDependentAnimation ="True">
+            <DoubleAnimation Storyboard.TargetName="RightGrid" Storyboard.TargetProperty="(UIElement.Width)" From="264" To="70" Duration="0:0:0.2"  EnableDependentAnimation ="True">
                 <DoubleAnimation.EasingFunction>
                     <CircleEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
@@ -262,7 +262,7 @@
                         <Setter Target = "FootPanel.HorizontalAlignment" Value="Stretch"/>
 
                         <!--LeftIcon-->
-                        <Setter Target = "RightIconTransform.TranslateX" Value="-220"/>
+                        <Setter Target = "RightIconTransform.TranslateX" Value="-264"/>
                         <Setter Target = "_RightIcon.Background" Value="{ThemeResource SystemAccentColor}"/>
                         <Setter Target = "RightContentControl.Foreground" Value="White"/>
 
@@ -390,7 +390,7 @@
                             </DoubleAnimation>
                             <!--Right-->
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" Duration="0">
-                                <DiscreteObjectKeyFrame KeyTime="0" Value="220"/>
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="264"/>
                             </ObjectAnimationUsingKeyFrames>
 
                             <!--DismissOverlay-->
@@ -427,7 +427,7 @@
                             </DoubleAnimation>
                             <!--Right-->
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" Duration="0">
-                                <DiscreteObjectKeyFrame KeyTime="0" Value="220"/>
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="264"/>
                             </ObjectAnimationUsingKeyFrames>
 
                             <!--DismissOverlay-->
@@ -451,7 +451,7 @@
                         <Storyboard>
 
                             <!--RightIcon-->
-                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="TranslateX" From="0" To="-220" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="TranslateX" From="0" To="-264" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -465,7 +465,7 @@
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="-70"/>
                             </ObjectAnimationUsingKeyFrames>
                             <!--Right-->
-                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="220" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="264" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -491,7 +491,7 @@
                         <Storyboard>
 
                             <!--RightIcon-->
-                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="TranslateX" From="-220" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightIconTransform" Storyboard.TargetProperty="TranslateX" From="-264" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -502,7 +502,7 @@
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="-70"/>
                             </ObjectAnimationUsingKeyFrames>
                             <!--Right-->
-                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="0" To="220" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="0" To="264" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -827,7 +827,7 @@
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
-                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="0" To="220" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="0" To="264" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -908,7 +908,7 @@
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
-                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="220" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="264" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -995,7 +995,7 @@
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
-                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="0" To="220" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="0" To="264" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -1069,7 +1069,7 @@
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                             <!--Right-->
-                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="220" To="0" Duration="0:0:0.2">
+                            <DoubleAnimation Storyboard.TargetName="RightTransform" Storyboard.TargetProperty="X" From="264" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut"/>
                                 </DoubleAnimation.EasingFunction>
@@ -1187,7 +1187,7 @@
         </Border>
         <!--@Acrylic-->
         <!--Right-->
-        <Border x:Name="RightGrid" Width="220" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Right" BorderThickness="1,0,0,0" BorderBrush="{ThemeResource AppStroke}" 
+        <Border x:Name="RightGrid" Width="264" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Right" BorderThickness="1,0,0,0" BorderBrush="{ThemeResource AppStroke}" 
                          apiContractNotPresent5:Background="{ThemeResource AppForeground}"
                          apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
             <Border.RenderTransformOrigin>0.5, 0.5</Border.RenderTransformOrigin>

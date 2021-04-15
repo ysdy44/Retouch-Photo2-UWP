@@ -140,7 +140,7 @@ namespace Retouch_Photo2.ViewModels
                 switch (type)
                 {
                     case DeviceLayoutType.PC:
-                        return rootWidth - 70 - 220;
+                        return rootWidth - 70 - 264;
                     default:
                         return rootWidth;
                 }

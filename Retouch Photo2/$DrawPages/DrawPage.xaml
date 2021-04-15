@@ -24,7 +24,7 @@
     xmlns:brushs="using:Retouch_Photo2.Brushs" 
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="{ThemeResource AppBackground}"
     >
 
 
@@ -198,7 +198,7 @@
     </Page.Resources>
 
 
-    <Grid x:Name="RootGrid" Background="{ThemeResource AppBackground}">
+    <Grid x:Name="RootGrid" Background="{x:Bind SettingViewModel.CanvasBackground, Mode=OneWay}">
 
 
         <!--Extension-->
@@ -217,7 +217,6 @@
         <elements:DrawLayout x:Name="DrawLayout" 
                CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"             
                DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
-               Background="{x:Bind SettingViewModel.CanvasBackground, Mode=OneWay}"
                IsFullScreen="True"
                              
                FootPage="{x:Bind ToolsControl.Tool.Page, Mode=OneWay}"
