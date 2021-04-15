@@ -19,6 +19,7 @@
   <Library Name="Retouch_Photo2.Tools">
 
     <!-- Child elements go here -->
+    <Namespace Name="Retouch_Photo2.Tools.Models" Serialize="Required Public" />
 
   </Library>
 </Directives>

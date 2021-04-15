@@ -19,6 +19,7 @@
   <Library Name="Retouch_Photo2.Adjustments">
 
     <!-- Child elements go here -->
+    <Namespace Name="Retouch_Photo2.Adjustments.Pages" Serialize="Required Public" />
 
   </Library>
 </Directives>
