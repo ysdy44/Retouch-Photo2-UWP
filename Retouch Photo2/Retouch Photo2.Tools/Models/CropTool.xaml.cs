@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s CropTool.
     /// </summary>
-    public partial class CropTool : ITool
+    public partial class CropTool : Page, ITool
     {
 
         //@ViewModel
@@ -37,14 +37,32 @@ namespace Retouch_Photo2.Tools.Models
         bool IsSnap => this.SettingViewModel.IsSnap;
 
 
+
+        //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+
+
         //@Content
         public ToolType Type => ToolType.Crop;
-        public ControlTemplate Icon => this.CropPage.Icon;
-        public FrameworkElement Page => this.CropPage;
-
-        readonly CropPage CropPage = new CropPage();
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        public FrameworkElement Page => this;
         public bool IsSelected { get; set; }
         public bool IsOpen { get; set; }
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a CropTool. 
+        /// </summary>
+        public CropTool()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.ConstructReset();
+            this.ConstructFit();
+            this.ConstructClear();
+        }
 
 
         Layerage Layerage;
@@ -168,45 +186,7 @@ namespace Retouch_Photo2.Tools.Models
     }
 
 
-    /// <summary>
-    /// Page of <see cref="CropTool"/>.
-    /// </summary>
-    internal partial class CropPage : Page
-    {
-
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel; SettingViewModel SettingViewModel => App.SettingViewModel;
-
-
-        //@Converter
-        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
-
-
-        //@Content
-        public ControlTemplate Icon => this.IconContentControl.Template;
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a CropPage. 
-        /// </summary>
-        public CropPage()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.ConstructReset();
-            this.ConstructFit();
-            this.ConstructClear();
-        }
-
-    }
-
-    /// <summary>
-    /// Page of <see cref="CropTool"/>.
-    /// </summary>
-    internal partial class CropPage : Page
+    public partial class CropTool : Page, ITool
     {
 
         //Strings

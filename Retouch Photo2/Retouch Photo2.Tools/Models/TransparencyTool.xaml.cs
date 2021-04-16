@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s TransparencyTool.
     /// </summary>
-    public partial class TransparencyTool : ITool
+    public partial class TransparencyTool : Page, ITool
     {
 
         //@ViewModel
@@ -34,14 +34,32 @@ namespace Retouch_Photo2.Tools.Models
         bool IsSnap => this.SettingViewModel.IsSnap;
 
 
+        //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+
+
         //@Content 
         public ToolType Type => ToolType.Transparency;
-        public ControlTemplate Icon => this.TransparencyPage.Icon;
-        public FrameworkElement Page => this.TransparencyPage;
-
-        readonly TransparencyPage TransparencyPage = new TransparencyPage();
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        public FrameworkElement Page => this;
         public bool IsSelected { get; set; }
         public bool IsOpen { get; set; }
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a TransparencyTool. 
+        /// </summary>
+        public TransparencyTool()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.ConstructShowControl();
+
+            //Type
+            this.ConstructTransparencyType();
+        }
 
 
         BrushHandleMode HandleMode = BrushHandleMode.None;
@@ -156,44 +174,7 @@ namespace Retouch_Photo2.Tools.Models
     }
 
 
-    /// <summary>
-    /// Page of <see cref="TransparencyTool"/>.
-    /// </summary>
-    internal partial class TransparencyPage : Page
-    {
-
-        //@ViewModel
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
-
-
-        //@Converter
-        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
-
-
-        //@Content 
-        public ControlTemplate Icon => this.IconContentControl.Template;
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a TransparencyPage. 
-        /// </summary>
-        public TransparencyPage()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.ConstructShowControl();
-
-            //Type
-            this.ConstructTransparencyType();
-        }
-
-    }
-
-    internal partial class TransparencyPage : Page
+    public partial class TransparencyTool : Page, ITool
     {
 
         //Strings

@@ -32,22 +32,55 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s CursorTool.
     /// </summary>
-    public partial class CursorTool : ITool
+    public partial class CursorTool : Page, ITool
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        
+        SettingViewModel SettingViewModel => App.SettingViewModel;
+
+
+        //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+
 
         //@Content      
         public ToolType Type => ToolType.Cursor;
-        public ControlTemplate Icon => this.CursorPage.Icon;
-        public FrameworkElement Page => this.CursorPage;
-
-        readonly CursorPage CursorPage = new CursorPage();
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        public FrameworkElement Page => this;
         public bool IsSelected { get; set; }
-        public bool IsOpen { get => this.CursorPage.IsOpen; set => this.CursorPage.IsOpen = value; }
+
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets <see cref = "CursorTool" />'s IsOpen. </summary>
+        public bool IsOpen
+        {
+            get => (bool)base.GetValue(IsOpenProperty);
+            set => base.SetValue(IsOpenProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "CursorTool.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(CursorTool), new PropertyMetadata(false));
+
+
+        #endregion
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a CursorTool. 
+        /// </summary>
+        public CursorTool()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.OperateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowOperateFlyout?.Invoke(this.OperateButton);
+
+            this.MoreButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
+        }
 
 
         CursorMode CursorMode;
@@ -197,7 +230,7 @@ namespace Retouch_Photo2.Tools.Models
                 Transformer transformer = layerage.GetActualTransformer();
                 bool contained = transformer.Contained(this.BoxRect);
 
-                switch (this.CursorPage.ModeSegmented.Mode)
+                switch (this.ModeSegmented.Mode)
                 {
                     case MarqueeCompositeMode.New:
                         if (layer.IsSelected != contained)
@@ -261,55 +294,8 @@ namespace Retouch_Photo2.Tools.Models
     }
 
 
-    /// <summary>
-    /// Page of <see cref="CursorTool"/>.
-    /// </summary>
-    internal partial class CursorPage : Page
+    public partial class CursorTool : Page, ITool
     {
-
-        //@ViewModel
-        SettingViewModel SettingViewModel => App.SettingViewModel;
-
-
-        //@Converter
-        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
-
-
-        public CompositeModeSegmented ModeSegmented => this._ModeSegmented;
-
-
-        //@Content 
-        public ControlTemplate Icon => this.IconContentControl.Template;
-
-
-        #region DependencyProperty
-
-
-        /// <summary> Gets or sets <see cref = "CursorPage" />'s IsOpen. </summary>
-        public bool IsOpen
-        {
-            get => (bool)base.GetValue(IsOpenProperty);
-            set => base.SetValue(IsOpenProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "CursorPage.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(CursorPage), new PropertyMetadata(false));
-
-
-        #endregion
-
-        //@Construct
-        /// <summary>
-        /// Initializes a CursorPage. 
-        /// </summary>
-        public CursorPage()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.OperateButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowOperateFlyout?.Invoke(this.OperateButton);
-
-            this.MoreButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
-        }
 
         //Strings
         private void ConstructStrings()

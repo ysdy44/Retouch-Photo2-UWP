@@ -20,21 +20,44 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s PatternSpottedTool.
     /// </summary>
-    public class PatternSpottedTool : ITool
+    public partial class PatternSpottedTool : Page, ITool
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        
+        ViewModel MethodViewModel => App.MethodViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
+
+
+        //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+        private int Converter(float value) => (int)value;
+
 
         //@Content
         public ToolType Type => ToolType.PatternSpotted;
-        public ControlTemplate Icon => this.PatternSpottedPage.Icon;
-        public FrameworkElement Page => this.PatternSpottedPage;
-        readonly PatternSpottedPage PatternSpottedPage = new PatternSpottedPage();
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        public FrameworkElement Page => this;
         public bool IsSelected { get; set; }
         public bool IsOpen { get; set; }
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a PatternSpottedTool. 
+        /// </summary>
+        public PatternSpottedTool()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.ConstructRadius1();
+            this.ConstructRadius2();
+
+            this.ConstructStep1();
+            this.ConstructStep2();
+        }
 
 
         /// <summary>
@@ -74,41 +97,9 @@ namespace Retouch_Photo2.Tools.Models
         }
     }
 
-    /// <summary>
-    /// Page of <see cref="PatternSpottedTool"/>.
-    /// </summary>
-    internal sealed partial class PatternSpottedPage : Page
+
+    public partial class PatternSpottedTool : Page, ITool
     {
-
-        //@ViewModel
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel; SettingViewModel SettingViewModel => App.SettingViewModel;
-
-
-        //@Converter
-        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
-        private int Converter(float value) => (int)value;
-
-
-        //@Content 
-        public ControlTemplate Icon => this.IconContentControl.Template;
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a PatternSpottedPage. 
-        /// </summary>
-        public PatternSpottedPage()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.ConstructRadius1();
-            this.ConstructRadius2();
-
-            this.ConstructStep1();
-            this.ConstructStep2();
-        }
 
         //Strings
         private void ConstructStrings()
@@ -118,13 +109,7 @@ namespace Retouch_Photo2.Tools.Models
             this.RadiusTextBlock.Text = resource.GetString("Tools_PatternSpotted_Radius");
             this.StepTextBlock.Text = resource.GetString("Tools_PatternSpotted_Step");
         }
-    }
 
-    /// <summary>
-    /// Page of <see cref="PatternSpottedTool"/>.
-    /// </summary>
-    internal sealed partial class PatternSpottedPage : Page
-    {
 
         //Radius
         private void ConstructRadius1()

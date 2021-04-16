@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Retouch_Photo2.Tools.Models.CursorPage"
+    x:Class="Retouch_Photo2.Tools.Models.CursorTool"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -45,7 +45,7 @@
         <Rectangle Grid.Column="3" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
         <!--Multi-Mode-->
-        <toolsElements:CompositeModeSegmented x:Name="_ModeSegmented" Grid.Column="4" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Mode="{x:Bind SettingViewModel.CompositeMode, Mode=TwoWay}"/>
+        <toolsElements:CompositeModeSegmented x:Name="ModeSegmented" Grid.Column="4" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Mode="{x:Bind SettingViewModel.CompositeMode, Mode=TwoWay}"/>
      
         <Rectangle Grid.Column="5" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 

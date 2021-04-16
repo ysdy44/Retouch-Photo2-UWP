@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Retouch_Photo2.Tools.Models.ImagePage"
+    x:Class="Retouch_Photo2.Tools.Models.ImageTool"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -73,7 +73,7 @@
 
         <Button x:Name="ConvertToCurvesButton" Grid.Column="9" Style="{StaticResource AppRoundedButtonStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip x:Name="_ConvertToCurvesToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
+                <ToolTip x:Name="ConvertToCurvesToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <Button.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ConvertToCurvesIcon.xaml"/>

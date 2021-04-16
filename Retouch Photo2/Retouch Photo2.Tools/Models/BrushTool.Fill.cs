@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    public partial class BrushTool : ITool
+    public partial class BrushTool : Page, ITool
     {
         //@ViewModel
         IBrush Fill { get => this.SelectionViewModel.Fill; set => this.SelectionViewModel.Fill = value; }
@@ -94,14 +94,8 @@ namespace Retouch_Photo2.Tools.Models
     }
 
 
-    /// <summary>
-    /// Page of <see cref="BrushTool"/>.
-    /// </summary>
-    internal partial class BrushPage : Page
+    public partial class BrushTool : Page, ITool
     {
-
-        //@ViewModel
-        IBrush Fill { get => this.SelectionViewModel.Fill; set => this.SelectionViewModel.Fill = value; }
 
 
         private void ConstructFillType()

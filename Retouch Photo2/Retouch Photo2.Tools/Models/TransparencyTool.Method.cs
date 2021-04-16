@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Models
 {
-    public partial class TransparencyTool : ITool
+    public partial class TransparencyTool : Page, ITool
     {
         //@ViewModel
         IBrush Transparency { get => this.SelectionViewModel.Transparency; set => this.SelectionViewModel.Transparency = value; }
@@ -92,15 +92,8 @@ namespace Retouch_Photo2.Tools.Models
     }
 
 
-    /// <summary>
-    /// Page of <see cref="TransparencyTool"/>.
-    /// </summary>
-    internal partial class TransparencyPage : Page
+    public partial class TransparencyTool : Page, ITool
     {
-
-        //@ViewModel
-        IBrush Transparency { get => this.SelectionViewModel.Transparency; set => this.SelectionViewModel.Transparency = value; }
-
 
         private void ConstructTransparencyType()
         {

@@ -21,23 +21,46 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s ImageTool.
     /// </summary>
-    public partial class ImageTool : ITool
+    public partial class ImageTool : Page, ITool
     {
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;        
+        ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel; 
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
         Layerage MezzanineLayerage = null;
+        /// <summary> Tip. </summary>
+        public void TipSelect() => this.EaseStoryboard.Begin();//Storyboard
+
+
+        //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+
 
 
         //@Content 
         public ToolType Type => ToolType.Image;
-        public ControlTemplate Icon => this.ImagePage.Icon;
-        public FrameworkElement Page => this.ImagePage;
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        public FrameworkElement Page => this;
         public bool IsSelected { get; set; }
-        public bool IsOpen { get => this.ImagePage.ConvertToCurvesToolTip.IsOpen; set => this.ImagePage.ConvertToCurvesToolTip.IsOpen = value; }
-        readonly ImagePage ImagePage = new ImagePage();
+        public bool IsOpen { get => this.ConvertToCurvesToolTip.IsOpen; set => this.ConvertToCurvesToolTip.IsOpen = value; }
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a ImageTool. 
+        /// </summary>
+        public ImageTool()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.ConstructSelect();
+            this.ConstructReplace();
+            this.ClearButton.Click += (s, e) => this.SelectionViewModel.Photocopier = new Photocopier();//Photocopier
+        }
 
 
         private float _sizeWidth;
@@ -55,14 +78,14 @@ namespace Retouch_Photo2.Tools.Models
             Photocopier photocopier = this.SelectionViewModel.Photocopier;
             if (photocopier.FolderRelativeId == null)
             {
-                this.ImagePage.TipSelect();
+                this.TipSelect();
                 return;
             }
 
             Photo photo = Photo.FindFirstPhoto(photocopier);
             if (photo == null)
             {
-                this.ImagePage.TipSelect();
+                this.TipSelect();
                 return;
             }
 
@@ -198,51 +221,7 @@ namespace Retouch_Photo2.Tools.Models
     }
 
 
-    /// <summary>
-    /// Page of <see cref="ImageTool"/>.
-    /// </summary>
-    internal partial class ImagePage : Page
-    {
-
-        //@ViewModel
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel; SettingViewModel SettingViewModel => App.SettingViewModel;
-
-
-        //@Converter
-        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
-
-
-        //@Content 
-        public ControlTemplate Icon => this.IconContentControl.Template;
-
-        /// <summary> Tip. </summary>
-        public void TipSelect() => this.EaseStoryboard.Begin();//Storyboard
-
-        /// <summary> ConvertToCurvesButton's ToolTip. </summary>
-        public ToolTip ConvertToCurvesToolTip => this._ConvertToCurvesToolTip;
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a ImagePage. 
-        /// </summary>
-        public ImagePage()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.ConstructSelect();
-            this.ConstructReplace();
-            this.ClearButton.Click += (s, e) => this.SelectionViewModel.Photocopier = new Photocopier();//Photocopier
-        }
-
-    }
-
-    /// <summary>
-    /// Page of <see cref="ImageTool"/>.
-    /// </summary>
-    internal partial class ImagePage : Page
+    public partial class ImageTool : Page, ITool
     {
 
         //Strings
@@ -254,7 +233,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ReplaceTextBlock.Text = resource.GetString("Tools_Image_Replace");
             this.ClearTextBlock.Text = resource.GetString("Tools_Image_Clear");
 
-            this._ConvertToCurvesToolTip.Content = resource.GetString("Tools_ConvertToCurves");
+            this.ConvertToCurvesToolTip.Content = resource.GetString("Tools_ConvertToCurves");
         }
 
         private void ConstructSelect()

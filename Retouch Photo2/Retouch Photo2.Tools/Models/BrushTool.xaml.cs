@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Tools.Models
     /// <summary>
     /// <see cref="ITool"/>'s BrushTool.
     /// </summary>
-    public partial class BrushTool : ITool
+    public partial class BrushTool : Page, ITool
     {
 
         //@ViewModel
@@ -35,14 +35,42 @@ namespace Retouch_Photo2.Tools.Models
         bool IsSnap => this.SettingViewModel.IsSnap;
 
 
+        //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+        public Visibility FillOrStrokeToVisibilityConverter(FillOrStroke fillOrStroke) => fillOrStroke == FillOrStroke.Stroke ? Visibility.Visible : Visibility.Collapsed;
+
+
         //@Content
         public ToolType Type => ToolType.Brush;
-        public ControlTemplate Icon => this.BrushPage.Icon;
-        public FrameworkElement Page => this.BrushPage;
-
-        readonly BrushPage BrushPage = new BrushPage();
+        public ControlTemplate Icon => this.IconContentControl.Template;
+        public FrameworkElement Page => this;
         public bool IsSelected { get; set; }
         public bool IsOpen { get; set; }
+
+
+        //@Construct
+        /// <summary>
+        /// Initializes a BrushTool. 
+        /// </summary>
+        public BrushTool()
+        {
+            this.InitializeComponent();
+            this.ConstructStrings();
+
+            this.ConstructShowControl();
+            this.StrokeShowControl.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeFlyout?.Invoke(this.StrokeShowControl);
+
+            //FillOrStroke
+            this.FillOrStrokeComboBox.FillOrStrokeChanged += (s, fillOrStroke) =>
+            {
+                this.FillOrStroke = fillOrStroke;
+                this.ViewModel.Invalidate(); //Invalidate
+            };
+
+            //Type
+            this.ConstructFillType();
+            this.ConstructStrokeType();
+        }
 
 
         BrushHandleMode HandleMode = BrushHandleMode.None;
@@ -189,62 +217,7 @@ namespace Retouch_Photo2.Tools.Models
     }
 
 
-    /// <summary>
-    /// Page of <see cref="BrushTool"/>.
-    /// </summary>
-    internal partial class BrushPage : Page
-    {
-
-        //@ViewModel
-        ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel;
-        SettingViewModel SettingViewModel => App.SettingViewModel;
-
-
-        //@Content
-        FillOrStroke FillOrStroke { get => this.SelectionViewModel.FillOrStroke; set => this.SelectionViewModel.FillOrStroke = value; }
-
-
-        //@Converter
-        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
-        public Visibility FillOrStrokeToVisibilityConverter(FillOrStroke fillOrStroke) => fillOrStroke == FillOrStroke.Stroke ? Visibility.Visible : Visibility.Collapsed;
-
-
-        //@Content 
-        public ControlTemplate Icon => this.IconContentControl.Template;
-
-
-        //@Construct
-        /// <summary>
-        /// Initializes a BrushPage. 
-        /// </summary>
-        public BrushPage()
-        {
-            this.InitializeComponent();
-            this.ConstructStrings();
-
-            this.ConstructShowControl();
-            this.StrokeShowControl.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeFlyout?.Invoke(this.StrokeShowControl);
-
-            //FillOrStroke
-            this.FillOrStrokeComboBox.FillOrStrokeChanged += (s, fillOrStroke) =>
-            {
-                this.FillOrStroke = fillOrStroke;
-                this.ViewModel.Invalidate(); //Invalidate
-            };
-
-            //Type
-            this.ConstructFillType();
-            this.ConstructStrokeType();
-        }
-
-    }
-
-    /// <summary>
-    /// Page of <see cref="BrushTool"/>.
-    /// </summary>
-    internal partial class BrushPage : Page
+    public partial class BrushTool : Page, ITool
     {
 
         //Strings
