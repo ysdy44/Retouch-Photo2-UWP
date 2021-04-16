@@ -14,7 +14,7 @@
 
     <Page.Resources>
         <!--Flyout-->
-        <Flyout x:Name="Flyout" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="Flyout" LightDismissOverlayMode="On" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <toolElements:NodeModeControl x:Name="PenFlyout" />
         </Flyout>
     </Page.Resources>

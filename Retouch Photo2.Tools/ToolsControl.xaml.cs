@@ -104,10 +104,10 @@ namespace Retouch_Photo2.Tools
                     case DeviceLayoutType.Pad:
                         {
                             this.IsOpenCore = value;
-                            this.Tool.IsOpen = value;
                         }
                         break;
                 }
+                this.Tool.IsOpen = value;
             }
         }
 

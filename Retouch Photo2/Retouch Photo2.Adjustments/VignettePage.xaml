@@ -28,7 +28,7 @@
         </LinearGradientBrush>
 
         <!--Flyout-->
-        <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="ColorFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:ColorPicker2 x:Name="ColorPicker" Width="Auto"/>
         </Flyout>
         

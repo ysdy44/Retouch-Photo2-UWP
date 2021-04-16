@@ -100,7 +100,7 @@
 
                         <Button x:Name="FontSizeButton" Grid.Column="1" Style="{StaticResource AppRoundedButtonStyle}">
                             <Button.Flyout>
-                                <Flyout Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                                <Flyout Placement="Right" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                     <ListView x:Name="FontSizeListView" IsItemClickEnabled="True" SelectionMode="Single">
                                         <ListView.Resources>
                                             <!--StaticResource-->
