@@ -75,21 +75,14 @@ namespace Retouch_Photo2.Elements
         /// <summary> Gets or set the state for <see cref="ApplicationViewTitleBar"/>. </summary>
         public bool IsAccent
         {
-            get => (bool)base.GetValue(IsAccentProperty);
-            set => SetValue(IsAccentProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "ApplicationTitleBarExtension.IsAccent" /> dependency property. </summary>
-        public static readonly DependencyProperty IsAccentProperty = DependencyProperty.Register(nameof(IsAccent), typeof(bool), typeof(ApplicationTitleBarExtension), new PropertyMetadata(false, (sender, e) =>
-        {
-            ApplicationTitleBarExtension control = (ApplicationTitleBarExtension)sender;
-
-            if (e.NewValue is bool value)
+            get => this.isAccent;
+            set
             {
-                if (value) control.Color = control.AccentTitleBarColor;
-                else control.Color = control.TitleBarColor;
+                this.Color = value ? this.AccentTitleBarColor : this.TitleBarColor;
+                this.isAccent = value;
             }
-        }));
-
+        }
+        private bool isAccent;
 
         #endregion
 

@@ -75,9 +75,7 @@
                 </ScrollViewer.Resources>
                 <StackPanel>
                     <!--Transform-->
-                    <Border Background="{ThemeResource SystemControlHighlightListLowBrush}">
-                        <TextBlock x:Name="TransformTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    </Border>                
+                    <TextBlock x:Name="TransformTextBlock" FontWeight="Bold" Style="{StaticResource AppTextBlockStyle}"/>
                     <!--Ratio-->
                     <ListViewItem x:Name="RatioItem" IsSelected="{x:Bind SettingViewModel.IsRatio, Mode=TwoWay}">
                         <ContentControl x:Name="RatioControl" Style="{StaticResource AppIconContentControlStyle}">
@@ -99,9 +97,7 @@
                     </ListViewItem>
                     <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
                     <!--Transform-->
-                    <Border Background="{ThemeResource SystemControlHighlightListLowBrush}">
-                        <TextBlock x:Name="CreateTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    </Border>
+                    <TextBlock x:Name="CreateTextBlock" FontWeight="Bold" Style="{StaticResource AppTextBlockStyle}"/>
                     <!--Square-->
                     <ListViewItem x:Name="SquareItem" IsSelected="{x:Bind SettingViewModel.IsSquare, Mode=TwoWay}">
                         <ContentControl x:Name="SquareControl" Style="{StaticResource AppIconContentControlStyle}">
@@ -120,9 +116,7 @@
                     </ListViewItem>
                     <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
                     <!--Operate-->
-                    <Border Background="{ThemeResource SystemControlHighlightListLowBrush}">
-                        <TextBlock x:Name="OperateTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    </Border>
+                    <TextBlock x:Name="OperateTextBlock" FontWeight="Bold" Style="{StaticResource AppTextBlockStyle}"/>
                     <!--WheelToRotate-->
                     <ListViewItem x:Name="WheelToRotateItem" IsSelected="{x:Bind SettingViewModel.IsWheelToRotate, Mode=TwoWay}">
                         <ContentControl x:Name="WheelToRotateControl" Style="{StaticResource AppIconContentControlStyle}">
@@ -202,7 +196,7 @@
 
 
         <!--Extension-->
-        <elements:ApplicationTitleBarExtension x:Name="ApplicationView" TitleBarColor="{ThemeResource AppTitleColor}"/>
+        <elements:ApplicationTitleBarExtension x:Name="ApplicationView" TitleBarColor="{ThemeResource ApplicationTitleColor}"/>
 
 
         <!--AlignmentGrid-->

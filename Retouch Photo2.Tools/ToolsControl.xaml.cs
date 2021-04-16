@@ -167,15 +167,12 @@ namespace Retouch_Photo2.Tools
 
             foreach (UIElement child in this.MoreStackPanel.Children)
             {
-                if (child is Border border)
+                if (child is TextBlock textBlock)
                 {
-                    if (border.Child is TextBlock textBlock)
-                    {
-                        string key = textBlock.Name;
-                        string title = resource.GetString($"Tools_{key}");
+                    string key = textBlock.Name;
+                    string title = resource.GetString($"Tools_{key}");
 
-                        textBlock.Text = title;
-                    }
+                    textBlock.Text = title;
                 }
 
                 if (child is ListViewItem item)

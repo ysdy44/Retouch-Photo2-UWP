@@ -32,9 +32,7 @@
                 <StackPanel x:Name="MoreStackPanel" Padding="{StaticResource AppPanelPadding}" HorizontalAlignment="Stretch">
 
                     <!--Pattern-->
-                    <Border Background="{ThemeResource SystemControlHighlightListLowBrush}">
-                        <TextBlock x:Name="Pattern" Style="{StaticResource AppTextBlockStyle}"/>
-                    </Border>
+                    <TextBlock x:Name="Pattern" FontWeight="Bold" Style="{StaticResource AppTextBlockStyle}"/>
                     
                     <!--Pattern-->
                     <ListViewItem x:Name="PatternGrid">
@@ -72,9 +70,7 @@
 
                     <!--Geometry-->
                     <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
-                    <Border Background="{ThemeResource SystemControlHighlightListLowBrush}">
-                        <TextBlock x:Name="Geometry" Style="{StaticResource AppTextBlockStyle}"/>
-                    </Border>
+                    <TextBlock x:Name="Geometry" FontWeight="Bold" Style="{StaticResource AppTextBlockStyle}"/>
 
                     <!--Geometry1-->
                     <ListViewItem x:Name="GeometryRoundRect">
