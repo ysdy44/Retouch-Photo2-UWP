@@ -30,5 +30,7 @@ namespace Retouch_Photo2.Layers
         FontStyle FontStyle { get; set; }
         /// <summary> Gets or sets the font weight. </summary>
         FontWeight2 FontWeight { get; set; }
+        /// <summary> Gets or sets the direction. </summary>
+        CanvasTextDirection Direction { get; set; }
     }
 }

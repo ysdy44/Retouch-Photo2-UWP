@@ -127,6 +127,13 @@
                     </Grid>
 
 
+                    <!--Direction-->
+                    <TextBlock x:Name="DirectionTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                    <texts:DirectionSegmented x:Name="DirectionComboBox"
+                       Direction ="{x:Bind SelectionViewModel.Direction, Mode=OneWay}">
+                    </texts:DirectionSegmented>
+
+
                 </StackPanel>
             </ScrollViewer>
         </SplitView.Pane>

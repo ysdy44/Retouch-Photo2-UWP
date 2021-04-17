@@ -60,6 +60,18 @@ namespace Retouch_Photo2.ViewModels
         }
         private CanvasHorizontalAlignment horizontalAlignment = CanvasHorizontalAlignment.Left;
 
+        /// <summary> <see cref="ITextLayer"/>'s direction. </summary>
+        public CanvasTextDirection Direction
+        {
+            get => this.direction;
+            set
+            {
+                this.direction = value;
+                this.OnPropertyChanged(nameof(Direction));//Notify 
+            }
+        }
+        private CanvasTextDirection direction = CanvasTextDirection.LeftToRightThenTopToBottom;
+
 
         /// <summary> <see cref="ITextLayer"/>'s underline. </summary>
         public bool Underline
@@ -103,26 +115,14 @@ namespace Retouch_Photo2.ViewModels
         {
             if (layer == null) return;
 
-            ITextLayer fextLayer = this.GetTextLayer(layer);
-            if (fextLayer == null) return;
-
-            TextLayer.FontCopyWith(fextLayer, this);
-        }
-        /// <summary> Gets the <see cref="ITextLayer"/>. </summary>     
-        private ITextLayer GetTextLayer(ILayer layer)
-        {
-            if (layer == null) return null;
-
-            if (layer.Type == LayerType.TextArtistic)
+            switch (layer.Type)
             {
-                return (TextArtisticLayer)layer;
+                case LayerType.TextArtistic:
+                case LayerType.TextFrame:
+                    ITextLayer fextLayer = (ITextLayer)layer;
+                    TextLayer.FontCopyWith(fextLayer, this);
+                    break;
             }
-            else if (layer.Type == LayerType.TextFrame)
-            {
-                return (TextFrameLayer)layer;
-            }
-
-            return null;
         }
 
     }

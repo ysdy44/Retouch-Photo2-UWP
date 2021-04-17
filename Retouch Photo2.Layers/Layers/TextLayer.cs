@@ -29,12 +29,14 @@ namespace Retouch_Photo2.Layers.Models
         /// <summary> Gets or sets the font family. </summary>
         public string FontFamily { get; set; } = "Arial";
 
+        /// <summary> Gets or sets the font horizontal alignment. </summary>
+        public CanvasHorizontalAlignment HorizontalAlignment { get; set; } = CanvasHorizontalAlignment.Left;
+        /// <summary> Gets or sets the direction. </summary>
+        public CanvasTextDirection Direction { get; set; } = CanvasTextDirection.LeftToRightThenTopToBottom;
+
 
         /// <summary> Gets or sets the underline. </summary>
         public bool Underline { get; set; }
-
-        /// <summary> Gets or sets the font horizontal alignment. </summary>
-        public CanvasHorizontalAlignment HorizontalAlignment { get; set; } = CanvasHorizontalAlignment.Left;
         /// <summary> Gets or sets the font style. </summary>
         public FontStyle FontStyle { get; set; } = FontStyle.Normal;
         /// <summary> Gets or sets the font weight. </summary>
@@ -52,6 +54,7 @@ namespace Retouch_Photo2.Layers.Models
             element.Add(new XElement("FontFamily", this.FontFamily));
 
             element.Add(new XElement("HorizontalAlignment", this.HorizontalAlignment));
+            element.Add(new XElement("Direction", this.Direction));
 
             element.Add(new XElement("Underline", this.Underline));
             element.Add(new XElement("FontStyle", this.FontStyle));
@@ -72,6 +75,14 @@ namespace Retouch_Photo2.Layers.Models
                 try
                 {
                     this.HorizontalAlignment = (CanvasHorizontalAlignment)Enum.Parse(typeof(CanvasHorizontalAlignment), horizontalAlignment.Value);
+                }
+                catch (Exception) { }
+            }
+            if (element.Element("Direction") is XElement direction)
+            {
+                try
+                {
+                    this.Direction = (CanvasTextDirection)Enum.Parse(typeof(CanvasTextDirection), direction.Value);
                 }
                 catch (Exception) { }
             }
@@ -113,6 +124,8 @@ namespace Retouch_Photo2.Layers.Models
                 FontFamily = this.FontFamily,
 
                 HorizontalAlignment = this.HorizontalAlignment,
+                Direction = this.Direction,
+
                 FontStyle = this.FontStyle,
                 FontWeight = this.FontWeight.ToFontWeight(),
             })
@@ -176,6 +189,7 @@ namespace Retouch_Photo2.Layers.Models
             destination.FontFamily = source.FontFamily;
 
             destination.HorizontalAlignment = source.HorizontalAlignment;
+            destination.Direction = source.Direction;
 
             destination.Underline = source.Underline;
             destination.FontStyle = source.FontStyle;

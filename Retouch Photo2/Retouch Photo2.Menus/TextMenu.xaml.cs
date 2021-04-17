@@ -125,6 +125,9 @@ namespace Retouch_Photo2.Menus
                 }
             };
 
+            //Direction
+            this.DirectionComboBox.DirectionChanged += (s, direction) => this.SetDirection(direction);
+
             base.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize) return;
@@ -158,6 +161,8 @@ namespace Retouch_Photo2.Menus
             this.FontFamilyTextBlock.Text = resource.GetString("Texts_FontFamily");
 
             this.FontSizeTextBlock.Text = resource.GetString("Texts_FontSize");
+
+            this.DirectionTextBlock.Text = resource.GetString("Texts_Direction");
 
             this.CloseButton.Content = resource.GetString("Menus_Close");
         }
@@ -245,6 +250,20 @@ namespace Retouch_Photo2.Menus
 
             //Refactoring
             this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
+        }
+
+
+        private void SetDirection(CanvasTextDirection direction)
+        {
+            this.SelectionViewModel.Direction = direction;
+            this.MethodViewModel.ITextLayerChanged<CanvasTextDirection>
+            (
+                set: (textLayer) => textLayer.Direction = direction,
+
+                type: HistoryType.LayersProperty_SetDirection,
+                getUndo: (textLayer) => textLayer.Direction,
+                setUndo: (textLayer, previous) => textLayer.Direction = previous
+           );
         }
 
     }
