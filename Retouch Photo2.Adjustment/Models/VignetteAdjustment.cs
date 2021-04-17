@@ -66,8 +66,8 @@ namespace Retouch_Photo2.Adjustments.Models
         }
         public void Load(XElement element)
         {
-            if (element.Element("Amount") is XElement amount) this.Amount = (float)amount;
-            if (element.Element("Curve") is XElement curve) this.Curve = (float)curve;
+            if (element.Attribute("Amount") is XAttribute amount) this.Amount = (float)amount;
+            if (element.Attribute("Curve") is XAttribute curve) this.Curve = (float)curve;
             if (element.Element("Color") is XElement color) this.Color = FanKit.Transformers.XML.LoadColor(color);
         }
 
