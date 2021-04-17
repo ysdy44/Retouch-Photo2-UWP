@@ -27,21 +27,22 @@ namespace Retouch_Photo2.Effects
             if (effect.GaussianBlur_IsOn)
             {
                 element.Add(new XElement
-               (
-                   "GaussianBlur",
-                   new XAttribute("Radius", effect.GaussianBlur_Radius),
-                   new XAttribute("BorderMode", effect.GaussianBlur_BorderMode)
-                ));
+                (
+                    "GaussianBlur",
+                    new XAttribute("Radius", effect.GaussianBlur_Radius),
+                    new XAttribute("BorderMode", effect.GaussianBlur_BorderMode)
+                 ));
             }
 
             if (effect.DirectionalBlur_IsOn)
             {
                 element.Add(new XElement
-               (
-                   "DirectionalBlur",
-                   new XAttribute("Radius", effect.DirectionalBlur_Radius),
-                   new XAttribute("Angle", effect.DirectionalBlur_Angle)
-               ));
+                (
+                    "DirectionalBlur",
+                    new XAttribute("Radius", effect.DirectionalBlur_Radius),
+                    new XAttribute("Angle", effect.DirectionalBlur_Angle),
+                    new XAttribute("BorderMode", effect.DirectionalBlur_BorderMode)
+                ));
             }
 
             if (effect.Sharpen_IsOn)
