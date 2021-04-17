@@ -128,8 +128,8 @@
             </ContentControl>
 
             <!--Alpha-->
-            <Border BorderThickness="0,0,0,1" Grid.Row="1" Grid.ColumnSpan="3" BorderBrush="{ThemeResource AppBorderBrush}">
-                <elements:CheckControl x:Name="AlphaCheckControl" IsChecked="{x:Bind AlphaIsEnabled, Mode=OneWay}"/>
+            <Border BorderThickness="0,0,0,1" Grid.Row="1" Grid.Column="1" BorderBrush="{ThemeResource AppBorderBrush}">
+                <elements:CheckControl x:Name="AlphaCheckControl" HorizontalAlignment="Stretch" IsChecked="{x:Bind AlphaIsEnabled, Mode=OneWay}"/>
             </Border>
 
             <!--Offset-->
@@ -156,8 +156,8 @@
 
 
             <!--Red-->
-            <Border BorderThickness="0,0,0,1" Grid.Row="5" Grid.ColumnSpan="3" BorderBrush="{ThemeResource AppBorderBrush}">
-                <elements:CheckControl x:Name="RedCheckControl" IsChecked="{x:Bind RedIsEnabled, Mode=OneWay}"/>
+            <Border BorderThickness="0,0,0,1" Grid.Row="5" Grid.Column="1" BorderBrush="{ThemeResource AppBorderBrush}">
+                <elements:CheckControl x:Name="RedCheckControl" HorizontalAlignment="Stretch" IsChecked="{x:Bind RedIsEnabled, Mode=OneWay}"/>
             </Border>
 
             <!--Offset-->
@@ -184,8 +184,8 @@
 
 
             <!--Green-->
-            <Border BorderThickness="0,0,0,1" Grid.Row="9" Grid.ColumnSpan="3" BorderBrush="{ThemeResource AppBorderBrush}">
-                <elements:CheckControl x:Name="GreenCheckControl" IsChecked="{x:Bind GreenIsEnabled, Mode=OneWay}"/>
+            <Border BorderThickness="0,0,0,1" Grid.Row="9" Grid.Column="1" BorderBrush="{ThemeResource AppBorderBrush}">
+                <elements:CheckControl x:Name="GreenCheckControl" HorizontalAlignment="Stretch" IsChecked="{x:Bind GreenIsEnabled, Mode=OneWay}"/>
             </Border>
 
             <!--Offset-->
@@ -212,8 +212,8 @@
 
 
             <!--Blue-->
-            <Border BorderThickness="0,0,0,1" Grid.Row="13" Grid.ColumnSpan="3" BorderBrush="{ThemeResource AppBorderBrush}">
-                <elements:CheckControl x:Name="BlueCheckControl" IsChecked="{x:Bind BlueIsEnabled, Mode=OneWay}"/>
+            <Border BorderThickness="0,0,0,1" Grid.Row="13" Grid.Column="1" BorderBrush="{ThemeResource AppBorderBrush}">
+                <elements:CheckControl x:Name="BlueCheckControl" HorizontalAlignment="Stretch" IsChecked="{x:Bind BlueIsEnabled, Mode=OneWay}"/>
             </Border>
 
             <!--Offset-->
