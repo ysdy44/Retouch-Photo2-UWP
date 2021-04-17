@@ -58,8 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
-<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+
+
 <data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>未命名</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://gitee.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-ZH.md</value></data>
@@ -314,6 +314,15 @@
 <data name='Texts_FontWeight_Thin' xml:space='preserve'><value>瘦体</value></data>
 <data name='Texts_FontFamily' xml:space='preserve'><value>字体</value></data>
 <data name='Texts_FontSize' xml:space='preserve'><value>字体大小</value></data>
+<data name='Texts_Direction' xml:space='preserve'><value>方向</value></data>
+<data name='Texts_Direction_LeftToRightThenTopToBottom' xml:space='preserve'><value>从左到右然后从上到下</value></data>
+<data name='Texts_Direction_RightToLeftThenTopToBottom' xml:space='preserve'><value>从右到左然后从上到下</value></data>
+<data name='Texts_Direction_LeftToRightThenBottomToTop' xml:space='preserve'><value>从左到右然后从下到上</value></data>
+<data name='Texts_Direction_RightToLeftThenBottomToTop' xml:space='preserve'><value>从右到左然后从下到上</value></data>
+<data name='Texts_Direction_TopToBottomThenLeftToRight' xml:space='preserve'><value>从上到下然后从左到右</value></data>
+<data name='Texts_Direction_BottomToTopThenLeftToRight' xml:space='preserve'><value>从下到上然后从左到右</value></data>
+<data name='Texts_Direction_TopToBottomThenRightToLeft' xml:space='preserve'><value>从上到下然后从右到左</value></data>
+<data name='Texts_Direction_BottomToTopThenRightToLeft' xml:space='preserve'><value>从下到上然后从右到左</value></data>
 <data name='Strokes_Dash_Solid' xml:space='preserve'><value>固体</value></data>
 <data name='Strokes_Dash_Dot' xml:space='preserve'><value>端点</value></data>
 <data name='Strokes_Dash_DashDot' xml:space='preserve'><value>破折 端点</value></data>
@@ -483,12 +492,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>重置高斯模糊特效</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>切换高斯模糊特效</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>设置高斯模糊特效数值</value></data>
-<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>设置高斯模糊特效边缘模式</value></data>
+<data name='Historys_LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>设置高斯模糊特效边缘模式</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>重置定向模糊特效</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>切换定向模糊特效</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>设置定向模糊特效半径</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>设置定向模糊特效角度</value></data>
-<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>设置定向模糊特效边缘模式</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>设置定向模糊特效边缘模式</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>重置锐化特效</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>切换锐化特效</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>设置锐化特效数值</value></data>
@@ -516,8 +525,9 @@
 <data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>设置字体文本</value></data>
 <data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>设置字体尺寸</value></data>
 <data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>设置字体</value></data>
-<data name='LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>设置水平对齐</value></data>
-<data name='LayersProperty_SetUnderline' xml:space='preserve'><value>设置下划线</value></data>
+<data name='Historys_LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>设置水平对齐</value></data>
+<data name='Historys_LayersProperty_SetDirection' xml:space='preserve'><value>设置方向</value></data>
+<data name='Historys_LayersProperty_SetUnderline' xml:space='preserve'><value>设置下划线</value></data>
 <data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>设置字体样式</value></data>
 <data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>设置字体粗细</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>设置描边样式破折</value></data>

@@ -58,8 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
-<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+
+
 <data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>بدون عنوان</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
@@ -314,6 +314,15 @@
 <data name='Texts_FontWeight_Thin' xml:space='preserve'><value>نحيف</value></data>
 <data name='Texts_FontFamily' xml:space='preserve'><value>خط العائلة</value></data>
 <data name='Texts_FontSize' xml:space='preserve'><value>حجم الخط</value></data>
+<data name='Texts_Direction' xml:space='preserve'><value>اتجاه</value></data>
+<data name='Texts_Direction_LeftToRightThenTopToBottom' xml:space='preserve'><value>من اليسار إلى اليمين ثم من أعلى إلى أسفل</value></data>
+<data name='Texts_Direction_RightToLeftThenTopToBottom' xml:space='preserve'><value>من اليمين إلى اليسار ثم من أعلى إلى أسفل</value></data>
+<data name='Texts_Direction_LeftToRightThenBottomToTop' xml:space='preserve'><value>من اليسار إلى اليمين ثم من الأسفل إلى الأعلى</value></data>
+<data name='Texts_Direction_RightToLeftThenBottomToTop' xml:space='preserve'><value>من اليمين إلى اليسار ثم من الأسفل إلى الأعلى</value></data>
+<data name='Texts_Direction_TopToBottomThenLeftToRight' xml:space='preserve'><value>من أعلى إلى أسفل ثم من اليسار إلى اليمين</value></data>
+<data name='Texts_Direction_BottomToTopThenLeftToRight' xml:space='preserve'><value>من الأسفل إلى الأعلى ثم من اليسار إلى اليمين</value></data>
+<data name='Texts_Direction_TopToBottomThenRightToLeft' xml:space='preserve'><value>من أعلى إلى أسفل ثم من اليمين إلى اليسار</value></data>
+<data name='Texts_Direction_BottomToTopThenRightToLeft' xml:space='preserve'><value>من الأسفل إلى الأعلى ثم من اليمين إلى اليسار</value></data>
 <data name='Strokes_Dash_Solid' xml:space='preserve'><value>صلب</value></data>
 <data name='Strokes_Dash_Dot' xml:space='preserve'><value>نقطة</value></data>
 <data name='Strokes_Dash_DashDot' xml:space='preserve'><value>داش دوت</value></data>
@@ -483,12 +492,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>إعادة تعيين تأثير التمويه gaussian</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>تبديل تأثير التمويه الغاوسي</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>اضبط مقدار تأثير التمويه الغاوسي</value></data>
-<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>اضبط وضع الحدود لتأثير gaussian blur</value></data>
+<data name='Historys_LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>اضبط وضع الحدود لتأثير gaussian blur</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>إعادة تعيين تأثير التمويه الاتجاهي</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>تبديل تأثير التمويه الاتجاهي</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>ضبط نصف قطر تأثير التمويه الاتجاهي</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>ضبط زاوية تأثير التمويه الاتجاهي</value></data>
-<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>ضبط وضع الحدود لتأثير التمويه الاتجاهي</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>ضبط وضع الحدود لتأثير التمويه الاتجاهي</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>إعادة تعيين تأثير شحذ</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>تبديل تأثير شحذ</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>تعيين مقدار تأثير شحذ</value></data>
@@ -516,8 +525,9 @@
 <data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>تعيين نص الخط</value></data>
 <data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>تعيين حجم الخط</value></data>
 <data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>تعيين عائلة الخطوط</value></data>
-<data name='LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>اضبط المحاذاة الأفقية</value></data>
-<data name='LayersProperty_SetUnderline' xml:space='preserve'><value>تعيين التسطير</value></data>
+<data name='Historys_LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>اضبط المحاذاة الأفقية</value></data>
+<data name='Historys_LayersProperty_SetDirection' xml:space='preserve'><value>تحديد الاتجاه</value></data>
+<data name='Historys_LayersProperty_SetUnderline' xml:space='preserve'><value>تعيين التسطير</value></data>
 <data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>تعيين نمط الخط</value></data>
 <data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>تعيين وزن الخط</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>تعيين شرطة نمط السكتة الدماغية</value></data>

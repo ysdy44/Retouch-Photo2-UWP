@@ -58,8 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
-<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+
+
 <data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>Ongetiteld</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
@@ -314,6 +314,15 @@
 <data name='Texts_FontWeight_Thin' xml:space='preserve'><value>Dun</value></data>
 <data name='Texts_FontFamily' xml:space='preserve'><value>Lettertypefamilie</value></data>
 <data name='Texts_FontSize' xml:space='preserve'><value>Lettertypegrootte</value></data>
+<data name='Texts_Direction' xml:space='preserve'><value>Richting</value></data>
+<data name='Texts_Direction_LeftToRightThenTopToBottom' xml:space='preserve'><value>Van links naar rechts en dan van boven naar beneden</value></data>
+<data name='Texts_Direction_RightToLeftThenTopToBottom' xml:space='preserve'><value>Van rechts naar links en dan van boven naar beneden</value></data>
+<data name='Texts_Direction_LeftToRightThenBottomToTop' xml:space='preserve'><value>Van links naar rechts en dan van onder naar boven</value></data>
+<data name='Texts_Direction_RightToLeftThenBottomToTop' xml:space='preserve'><value>Van rechts naar links en dan van onder naar boven</value></data>
+<data name='Texts_Direction_TopToBottomThenLeftToRight' xml:space='preserve'><value>Van boven naar beneden en dan van links naar rechts</value></data>
+<data name='Texts_Direction_BottomToTopThenLeftToRight' xml:space='preserve'><value>Van onder naar boven en dan van links naar rechts</value></data>
+<data name='Texts_Direction_TopToBottomThenRightToLeft' xml:space='preserve'><value>Van boven naar beneden en dan van rechts naar links</value></data>
+<data name='Texts_Direction_BottomToTopThenRightToLeft' xml:space='preserve'><value>Van onder naar boven en dan van rechts naar links</value></data>
 <data name='Strokes_Dash_Solid' xml:space='preserve'><value>Solide</value></data>
 <data name='Strokes_Dash_Dot' xml:space='preserve'><value>Punt</value></data>
 <data name='Strokes_Dash_DashDot' xml:space='preserve'><value>Dash Dot</value></data>
@@ -483,12 +492,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Gaussiaans vervagingseffect resetten</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Gaussiaans vervagingseffect wisselen</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Stel de hoeveelheid Gaussiaans vervagingseffect in</value></data>
-<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>Stel de randmodus van het gaussiaanse vervagingseffect in</value></data>
+<data name='Historys_LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>Stel de randmodus van het gaussiaanse vervagingseffect in</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Stel het directionele vervagingseffect opnieuw in</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Wissel van directioneel vervagingseffect</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Stel de straal van het directionele vervagingseffect in</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Stel de hoek van het directionele vervagingseffect in</value></data>
-<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>Stel de randmodus van het directionele vervagingseffect in</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>Stel de randmodus van het directionele vervagingseffect in</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Stel het verscherpingseffect opnieuw in</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Schakel het verscherpingseffect in</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Stel de hoeveelheid verscherpingseffect in</value></data>
@@ -516,8 +525,9 @@
 <data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>Lettertypetekst instellen</value></data>
 <data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Stel de lettergrootte in</value></data>
 <data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Stel lettertypefamilie in</value></data>
-<data name='LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>Stel horizontale uitlijning in</value></data>
-<data name='LayersProperty_SetUnderline' xml:space='preserve'><value>Onderstrepen</value></data>
+<data name='Historys_LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>Stel horizontale uitlijning in</value></data>
+<data name='Historys_LayersProperty_SetDirection' xml:space='preserve'><value>Richting bepalen</value></data>
+<data name='Historys_LayersProperty_SetUnderline' xml:space='preserve'><value>Onderstrepen</value></data>
 <data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>Lettertypestijl instellen</value></data>
 <data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>Lettertypegewicht instellen</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>Streepstijl instellen</value></data>

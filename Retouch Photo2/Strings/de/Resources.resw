@@ -58,8 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
-<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+
+
 <data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>Ohne Titel</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
@@ -314,6 +314,15 @@
 <data name='Texts_FontWeight_Thin' xml:space='preserve'><value>Dünn</value></data>
 <data name='Texts_FontFamily' xml:space='preserve'><value>Schriftfamilie</value></data>
 <data name='Texts_FontSize' xml:space='preserve'><value>Schriftgröße</value></data>
+<data name='Texts_Direction' xml:space='preserve'><value>Richtung</value></data>
+<data name='Texts_Direction_LeftToRightThenTopToBottom' xml:space='preserve'><value>Von links nach rechts, dann von oben nach unten</value></data>
+<data name='Texts_Direction_RightToLeftThenTopToBottom' xml:space='preserve'><value>Von rechts nach links, dann von oben nach unten</value></data>
+<data name='Texts_Direction_LeftToRightThenBottomToTop' xml:space='preserve'><value>Von links nach rechts, dann von unten nach oben</value></data>
+<data name='Texts_Direction_RightToLeftThenBottomToTop' xml:space='preserve'><value>Von rechts nach links, dann von unten nach oben</value></data>
+<data name='Texts_Direction_TopToBottomThenLeftToRight' xml:space='preserve'><value>Von oben nach unten, dann von links nach rechts</value></data>
+<data name='Texts_Direction_BottomToTopThenLeftToRight' xml:space='preserve'><value>Von unten nach oben, dann von links nach rechts</value></data>
+<data name='Texts_Direction_TopToBottomThenRightToLeft' xml:space='preserve'><value>Von oben nach unten, dann von rechts nach links</value></data>
+<data name='Texts_Direction_BottomToTopThenRightToLeft' xml:space='preserve'><value>Von unten nach oben, dann von rechts nach links</value></data>
 <data name='Strokes_Dash_Solid' xml:space='preserve'><value>Solide</value></data>
 <data name='Strokes_Dash_Dot' xml:space='preserve'><value>Punkt</value></data>
 <data name='Strokes_Dash_DashDot' xml:space='preserve'><value>Strich Punkt</value></data>
@@ -483,12 +492,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Setzen Sie den Gaußschen Unschärfeeffekt zurück</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Schalten Sie den Gaußschen Unschärfeeffekt um</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Stellen Sie den Gaußschen Unschärfeeffekt ein</value></data>
-<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>Stellen Sie den Rahmenmodus für den Gaußschen Unschärfeeffekt ein</value></data>
+<data name='Historys_LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>Stellen Sie den Rahmenmodus für den Gaußschen Unschärfeeffekt ein</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Richtungsunschärfeeffekt zurücksetzen</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Richtungsunschärfeeffekt umschalten</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Stellen Sie den Radius des Richtungsunschärfeeffekts ein</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Stellen Sie den Winkel des Richtungsunschärfeeffekts ein</value></data>
-<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>Stellen Sie den Randmodus für den Richtungsunschärfeeffekt ein</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>Stellen Sie den Randmodus für den Richtungsunschärfeeffekt ein</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Schärfeeffekt zurücksetzen</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Schärfeeffekt umschalten</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Stellen Sie den Schärfeeffekt ein</value></data>
@@ -516,8 +525,9 @@
 <data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>Stellen Sie den Schrifttext ein</value></data>
 <data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Stellen Sie die Schriftgröße ein</value></data>
 <data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Stellen Sie die Schriftfamilie ein</value></data>
-<data name='LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>Stellen Sie die horizontale Ausrichtung ein</value></data>
-<data name='LayersProperty_SetUnderline' xml:space='preserve'><value>Unterstreichen setzen</value></data>
+<data name='Historys_LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>Stellen Sie die horizontale Ausrichtung ein</value></data>
+<data name='Historys_LayersProperty_SetDirection' xml:space='preserve'><value>Richtung einstellen</value></data>
+<data name='Historys_LayersProperty_SetUnderline' xml:space='preserve'><value>Unterstreichen setzen</value></data>
 <data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>Stellen Sie den Schriftstil ein</value></data>
 <data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>Stellen Sie die Schriftstärke ein</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>Stellen Sie den Strich im Strichstil ein</value></data>

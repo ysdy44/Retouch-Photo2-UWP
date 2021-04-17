@@ -58,8 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
-<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+
+
 <data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>無題</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
@@ -314,6 +314,15 @@
 <data name='Texts_FontWeight_Thin' xml:space='preserve'><value>薄い</value></data>
 <data name='Texts_FontFamily' xml:space='preserve'><value>フォントファミリー</value></data>
 <data name='Texts_FontSize' xml:space='preserve'><value>フォントサイズ</value></data>
+<data name='Texts_Direction' xml:space='preserve'><value>方向</value></data>
+<data name='Texts_Direction_LeftToRightThenTopToBottom' xml:space='preserve'><value>左から右、次に上から下</value></data>
+<data name='Texts_Direction_RightToLeftThenTopToBottom' xml:space='preserve'><value>右から左、次に上から下</value></data>
+<data name='Texts_Direction_LeftToRightThenBottomToTop' xml:space='preserve'><value>左から右、次に下から上</value></data>
+<data name='Texts_Direction_RightToLeftThenBottomToTop' xml:space='preserve'><value>右から左、次に下から上</value></data>
+<data name='Texts_Direction_TopToBottomThenLeftToRight' xml:space='preserve'><value>上から下、次に左から右</value></data>
+<data name='Texts_Direction_BottomToTopThenLeftToRight' xml:space='preserve'><value>下から上、次に左から右</value></data>
+<data name='Texts_Direction_TopToBottomThenRightToLeft' xml:space='preserve'><value>上から下、次に右から左</value></data>
+<data name='Texts_Direction_BottomToTopThenRightToLeft' xml:space='preserve'><value>下から上、次に右から左</value></data>
 <data name='Strokes_Dash_Solid' xml:space='preserve'><value>固体</value></data>
 <data name='Strokes_Dash_Dot' xml:space='preserve'><value>ドット</value></data>
 <data name='Strokes_Dash_DashDot' xml:space='preserve'><value>ダッシュドット</value></data>
@@ -483,12 +492,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>ガウスぼかし効果をリセットする</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>ガウスぼかし効果を切り替えます</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>ガウスぼかし効果の量を設定します</value></data>
-<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>ガウスぼかし効果の境界モードを設定します</value></data>
+<data name='Historys_LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>ガウスぼかし効果の境界モードを設定します</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>指向性ブラー効果をリセット</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>方向性ぼかし効果を切り替える</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>指向性ブラー効果の半径を設定します</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>指向性ブラー効果の角度を設定します</value></data>
-<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>指向性ブラー効果のボーダーモードを設定します</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>指向性ブラー効果のボーダーモードを設定します</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>シャープ効果をリセット</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>スイッチシャープ効果</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>シャープ効果の量を設定する</value></data>
@@ -516,8 +525,9 @@
 <data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>フォントテキストを設定する</value></data>
 <data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>フォントサイズを設定する</value></data>
 <data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>フォントファミリーを設定する</value></data>
-<data name='LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>水平方向の配置を設定する</value></data>
-<data name='LayersProperty_SetUnderline' xml:space='preserve'><value>アンダースコアを設定</value></data>
+<data name='Historys_LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>水平方向の配置を設定する</value></data>
+<data name='Historys_LayersProperty_SetDirection' xml:space='preserve'><value>方向を設定する</value></data>
+<data name='Historys_LayersProperty_SetUnderline' xml:space='preserve'><value>アンダースコアを設定</value></data>
 <data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>フォントスタイルを設定する</value></data>
 <data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>フォントの太さを設定する</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>ストロークスタイルダッシュを設定する</value></data>

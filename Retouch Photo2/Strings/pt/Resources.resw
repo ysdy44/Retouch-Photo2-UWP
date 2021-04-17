@@ -58,8 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
-<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+
+
 <data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>Sem título</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
@@ -314,6 +314,15 @@
 <data name='Texts_FontWeight_Thin' xml:space='preserve'><value>Fino</value></data>
 <data name='Texts_FontFamily' xml:space='preserve'><value>Família de fontes</value></data>
 <data name='Texts_FontSize' xml:space='preserve'><value>Tamanho da fonte</value></data>
+<data name='Texts_Direction' xml:space='preserve'><value>Direção</value></data>
+<data name='Texts_Direction_LeftToRightThenTopToBottom' xml:space='preserve'><value>Da esquerda para a direita e de cima para baixo</value></data>
+<data name='Texts_Direction_RightToLeftThenTopToBottom' xml:space='preserve'><value>Da direita para a esquerda e de cima para baixo</value></data>
+<data name='Texts_Direction_LeftToRightThenBottomToTop' xml:space='preserve'><value>Da esquerda para a direita e de baixo para cima</value></data>
+<data name='Texts_Direction_RightToLeftThenBottomToTop' xml:space='preserve'><value>Da direita para a esquerda e de baixo para cima</value></data>
+<data name='Texts_Direction_TopToBottomThenLeftToRight' xml:space='preserve'><value>De cima para baixo e da esquerda para a direita</value></data>
+<data name='Texts_Direction_BottomToTopThenLeftToRight' xml:space='preserve'><value>De baixo para cima e depois da esquerda para a direita</value></data>
+<data name='Texts_Direction_TopToBottomThenRightToLeft' xml:space='preserve'><value>De cima para baixo e da direita para a esquerda</value></data>
+<data name='Texts_Direction_BottomToTopThenRightToLeft' xml:space='preserve'><value>De baixo para cima e depois da direita para a esquerda</value></data>
 <data name='Strokes_Dash_Solid' xml:space='preserve'><value>Sólido</value></data>
 <data name='Strokes_Dash_Dot' xml:space='preserve'><value>Ponto</value></data>
 <data name='Strokes_Dash_DashDot' xml:space='preserve'><value>Dash Dot</value></data>
@@ -483,12 +492,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Redefinir efeito de desfoque gaussiano</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Mudar efeito de desfoque gaussiano</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Definir a quantidade de efeito de desfoque gaussiano</value></data>
-<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>Definir o modo de borda do efeito de desfoque gaussiano</value></data>
+<data name='Historys_LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>Definir o modo de borda do efeito de desfoque gaussiano</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Redefinir o efeito de desfoque direcional</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Mudar o efeito de desfoque direcional</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Defina o raio do efeito de desfoque direcional</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Definir o ângulo do efeito de desfoque direcional</value></data>
-<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>Definir o modo de borda do efeito de desfoque direcional</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>Definir o modo de borda do efeito de desfoque direcional</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Redefinir o efeito de nitidez</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Mudar efeito de nitidez</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Definir a quantidade de efeito de nitidez</value></data>
@@ -516,8 +525,9 @@
 <data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>Definir o texto da fonte</value></data>
 <data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Definir tamanho da fonte</value></data>
 <data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Definir família de fontes</value></data>
-<data name='LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>Definir alinhamento horizontal</value></data>
-<data name='LayersProperty_SetUnderline' xml:space='preserve'><value>Definir sublinhado</value></data>
+<data name='Historys_LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>Definir alinhamento horizontal</value></data>
+<data name='Historys_LayersProperty_SetDirection' xml:space='preserve'><value>Definir direção</value></data>
+<data name='Historys_LayersProperty_SetUnderline' xml:space='preserve'><value>Definir sublinhado</value></data>
 <data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>Definir o estilo da fonte</value></data>
 <data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>Definir o peso da fonte</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>Definir estilo de traço traço</value></data>

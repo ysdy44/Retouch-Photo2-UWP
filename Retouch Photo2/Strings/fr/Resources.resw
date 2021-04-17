@@ -58,8 +58,8 @@
   <resheader name='writer'>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-<data name='AppDisplayName' xml:space='preserve'><value>FilmForth</value></data>
-<data name='PkgDisplayName' xml:space='preserve'><value>FilmForth</value></data>
+
+
 <data name='$Version' xml:space='preserve'><value>2.0.0</value></data>
 <data name='$Untitled' xml:space='preserve'><value>Sans titre</value></data>
 <data name='$DocumentationLink' xml:space='preserve'><value>https://github.com/ysdy44/Retouch-Photo2-UWP-Documentation/blob/master/README-EN.md</value></data>
@@ -314,6 +314,15 @@
 <data name='Texts_FontWeight_Thin' xml:space='preserve'><value>Mince</value></data>
 <data name='Texts_FontFamily' xml:space='preserve'><value>Famille de polices</value></data>
 <data name='Texts_FontSize' xml:space='preserve'><value>Taille de police</value></data>
+<data name='Texts_Direction' xml:space='preserve'><value>Direction</value></data>
+<data name='Texts_Direction_LeftToRightThenTopToBottom' xml:space='preserve'><value>De gauche à droite puis de haut en bas</value></data>
+<data name='Texts_Direction_RightToLeftThenTopToBottom' xml:space='preserve'><value>De droite à gauche puis de haut en bas</value></data>
+<data name='Texts_Direction_LeftToRightThenBottomToTop' xml:space='preserve'><value>De gauche à droite puis de bas en haut</value></data>
+<data name='Texts_Direction_RightToLeftThenBottomToTop' xml:space='preserve'><value>De droite à gauche puis de bas en haut</value></data>
+<data name='Texts_Direction_TopToBottomThenLeftToRight' xml:space='preserve'><value>De haut en bas puis de gauche à droite</value></data>
+<data name='Texts_Direction_BottomToTopThenLeftToRight' xml:space='preserve'><value>De bas en haut puis de gauche à droite</value></data>
+<data name='Texts_Direction_TopToBottomThenRightToLeft' xml:space='preserve'><value>De haut en bas puis de droite à gauche</value></data>
+<data name='Texts_Direction_BottomToTopThenRightToLeft' xml:space='preserve'><value>De bas en haut puis de droite à gauche</value></data>
 <data name='Strokes_Dash_Solid' xml:space='preserve'><value>Solide</value></data>
 <data name='Strokes_Dash_Dot' xml:space='preserve'><value>Point</value></data>
 <data name='Strokes_Dash_DashDot' xml:space='preserve'><value>Point de tiret</value></data>
@@ -483,12 +492,12 @@
 <data name='Historys_LayersProperty_ResetEffect_GaussianBlur' xml:space='preserve'><value>Réinitialiser l'effet de flou gaussien</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_GaussianBlur' xml:space='preserve'><value>Changer l'effet de flou gaussien</value></data>
 <data name='Historys_LayersProperty_SetEffect_GaussianBlur_Amount' xml:space='preserve'><value>Définir la quantité d'effet de flou gaussien</value></data>
-<data name='LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>Définir le mode de bordure de l'effet de flou gaussien</value></data>
+<data name='Historys_LayersProperty_SetEffect_GaussianBlur_BoderMode' xml:space='preserve'><value>Définir le mode de bordure de l'effet de flou gaussien</value></data>
 <data name='Historys_LayersProperty_ResetEffect_DirectionalBlur' xml:space='preserve'><value>Réinitialiser l'effet de flou directionnel</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_DirectionalBlur' xml:space='preserve'><value>Changer l'effet de flou directionnel</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Radius' xml:space='preserve'><value>Définir le rayon de l'effet de flou directionnel</value></data>
 <data name='Historys_LayersProperty_SetEffect_DirectionalBlur_Angle' xml:space='preserve'><value>Définir l'angle de l'effet de flou directionnel</value></data>
-<data name='LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>Définir le mode de bordure de l'effet de flou directionnel</value></data>
+<data name='Historys_LayersProperty_SetEffect_DirectionalBlur_BoderMode' xml:space='preserve'><value>Définir le mode de bordure de l'effet de flou directionnel</value></data>
 <data name='Historys_LayersProperty_ResetEffect_Sharpen' xml:space='preserve'><value>Réinitialiser l'effet d'accentuation</value></data>
 <data name='Historys_LayersProperty_SwitchEffect_Sharpen' xml:space='preserve'><value>Changer d'effet de netteté</value></data>
 <data name='Historys_LayersProperty_SetEffect_Sharpen_Amount' xml:space='preserve'><value>Définir la quantité d'effet de netteté</value></data>
@@ -516,8 +525,9 @@
 <data name='Historys_LayersProperty_SetFontText' xml:space='preserve'><value>Définir le texte de la police</value></data>
 <data name='Historys_LayersProperty_SetFontSize' xml:space='preserve'><value>Définir la taille de la police</value></data>
 <data name='Historys_LayersProperty_SetFontFamily' xml:space='preserve'><value>Définir la famille de polices</value></data>
-<data name='LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>Définir l'alignement horizontal</value></data>
-<data name='LayersProperty_SetUnderline' xml:space='preserve'><value>Définir le soulignement</value></data>
+<data name='Historys_LayersProperty_SetHorizontalAlignment' xml:space='preserve'><value>Définir l'alignement horizontal</value></data>
+<data name='Historys_LayersProperty_SetDirection' xml:space='preserve'><value>Définir la direction</value></data>
+<data name='Historys_LayersProperty_SetUnderline' xml:space='preserve'><value>Définir le soulignement</value></data>
 <data name='Historys_LayersProperty_SetFontStyle' xml:space='preserve'><value>Définir le style de police</value></data>
 <data name='Historys_LayersProperty_SetFontWeight' xml:space='preserve'><value>Définir l'épaisseur de la police</value></data>
 <data name='Historys_LayersProperty_SetStyle_StrokeStyle_Dash' xml:space='preserve'><value>Définir le tiret de style de trait</value></data>
