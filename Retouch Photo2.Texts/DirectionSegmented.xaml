@@ -1,0 +1,205 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Texts.DirectionSegmented"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="100"
+    d:DesignWidth="200"
+    >
+    
+    <UserControl.Resources>
+        <!--StaticResource-->
+        <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
+        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
+        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
+        <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
+        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
+        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
+    </UserControl.Resources>
+    
+
+    <Grid>
+        
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--LeftToRightThenTopToBottom-->
+                <VisualState x:Name="LeftToRightThenTopToBottomState">
+                    <VisualState.Setters>
+                        <Setter Target = "LeftToRightThenTopToBottom.IsSelected" Value="True"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--RightToLeftThenTopToBottom-->
+                <VisualState x:Name="RightToLeftThenTopToBottomState">
+                    <VisualState.Setters>
+                        <Setter Target = "RightToLeftThenTopToBottom.IsSelected" Value="True"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--LeftToRightThenBottomToTop-->
+                <VisualState x:Name="LeftToRightThenBottomToTopState">
+                    <VisualState.Setters>
+                        <Setter Target = "LeftToRightThenBottomToTop.IsSelected" Value="True"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--RightToLeftThenBottomToTop-->
+                <VisualState x:Name="RightToLeftThenBottomToTopState">
+                    <VisualState.Setters>
+                        <Setter Target = "RightToLeftThenBottomToTop.IsSelected" Value="True"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+
+                <!--TopToBottomThenLeftToRight-->
+                <VisualState x:Name="TopToBottomThenLeftToRightState">
+                    <VisualState.Setters>
+                        <Setter Target = "TopToBottomThenLeftToRight.IsSelected" Value="True"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--BottomToTopThenLeftToRight-->
+                <VisualState x:Name="BottomToTopThenLeftToRightState">
+                    <VisualState.Setters>
+                        <Setter Target = "BottomToTopThenLeftToRight.IsSelected" Value="True"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <!--TopToBottomThenRightToLeft-->
+                <VisualState x:Name="TopToBottomThenRightToLeftState">
+                    <VisualState.Setters>
+                        <Setter Target = "TopToBottomThenRightToLeft.IsSelected" Value="True"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <!--BottomToTopThenRightToLeft-->
+                <VisualState x:Name="BottomToTopThenRightToLeftState">
+                    <VisualState.Setters>
+                        <Setter Target = "BottomToTopThenRightToLeft.IsSelected" Value="True"/>
+                    </VisualState.Setters>
+                </VisualState>
+                
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <!--LeftToRightThenTopToBottom-->
+        <ListViewItem x:Name="LeftToRightThenTopToBottom" Grid.Column="0" Margin="1,1,0,1" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+            <ToolTipService.ToolTip>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <FontIcon Glyph="&#xE71D;" FontFamily="Segoe MDL2 Assets"/>
+        </ListViewItem>
+        <!--RightToLeftThenTopToBottom-->
+        <ListViewItem x:Name="RightToLeftThenTopToBottom" Grid.Column="1" Margin="0,1,1,1" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+            <ToolTipService.ToolTip>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <FontIcon Glyph="&#xE1EC;" FontFamily="Segoe MDL2 Assets"/>
+        </ListViewItem>
+
+        <!--LeftToRightThenBottomToTop-->
+        <ListViewItem x:Name="LeftToRightThenBottomToTop" Grid.Column="0" Grid.Row="1" Margin="1,1,0,1" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+            <ToolTipService.ToolTip>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <ContentControl>
+                <FontIcon Glyph="&#xE1EC;" FontFamily="Segoe MDL2 Assets">
+                    <FontIcon.RenderTransformOrigin>0.5, 0.5</FontIcon.RenderTransformOrigin>
+                    <FontIcon.RenderTransform>
+                        <RotateTransform Angle="180"/>
+                    </FontIcon.RenderTransform>
+                </FontIcon>
+            </ContentControl>
+        </ListViewItem>
+        <!--RightToLeftThenBottomToTop-->
+        <ListViewItem x:Name="RightToLeftThenBottomToTop" Grid.Column="1" Grid.Row="1" Margin="0,1,1,1" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+            <ToolTipService.ToolTip>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <ContentControl>
+                <FontIcon Glyph="&#xE71D;" FontFamily="Segoe MDL2 Assets">
+                    <FontIcon.RenderTransformOrigin>0.5, 0.5</FontIcon.RenderTransformOrigin>
+                    <FontIcon.RenderTransform>
+                        <RotateTransform Angle="180"/>
+                    </FontIcon.RenderTransform>
+                </FontIcon>
+            </ContentControl>
+        </ListViewItem>
+
+
+        <!--TopToBottomThenLeftToRight-->
+        <ListViewItem x:Name="TopToBottomThenLeftToRight" Grid.Column="2" Margin="1,1,1,0" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+            <ToolTipService.ToolTip>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <ContentControl>
+                <FontIcon Glyph="&#xE1EC;" FontFamily="Segoe MDL2 Assets">
+                    <FontIcon.RenderTransformOrigin>0.5, 0.5</FontIcon.RenderTransformOrigin>
+                    <FontIcon.RenderTransform>
+                        <RotateTransform Angle="-90"/>
+                    </FontIcon.RenderTransform>
+                </FontIcon>
+            </ContentControl>
+        </ListViewItem>
+        <!--BottomToTopThenLeftToRight-->
+        <ListViewItem x:Name="BottomToTopThenLeftToRight" Grid.Column="2" Grid.Row="1" Margin="1,0,1,1" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+            <ToolTipService.ToolTip>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <ContentControl>
+                <FontIcon Glyph="&#xE71D;" FontFamily="Segoe MDL2 Assets">
+                    <FontIcon.RenderTransformOrigin>0.5, 0.5</FontIcon.RenderTransformOrigin>
+                    <FontIcon.RenderTransform>
+                        <RotateTransform Angle="-90"/>
+                    </FontIcon.RenderTransform>
+                </FontIcon>
+            </ContentControl>
+        </ListViewItem>
+
+        <!--TopToBottomThenRightToLeft-->
+        <ListViewItem x:Name="TopToBottomThenRightToLeft" Grid.Column="3" Margin="1,1,1,0" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+            <ToolTipService.ToolTip>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <ContentControl>
+                <FontIcon Glyph="&#xE71D;" FontFamily="Segoe MDL2 Assets">
+                    <FontIcon.RenderTransformOrigin>0.5, 0.5</FontIcon.RenderTransformOrigin>
+                    <FontIcon.RenderTransform>
+                        <RotateTransform Angle="90"/>
+                    </FontIcon.RenderTransform>
+                </FontIcon>
+            </ContentControl>
+        </ListViewItem>
+        <!--BottomToTopThenRightToLeft-->
+        <ListViewItem x:Name="BottomToTopThenRightToLeft" Grid.Column="3" Grid.Row="1" Margin="1,0,1,1" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+            <ToolTipService.ToolTip>
+                <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+            </ToolTipService.ToolTip>
+            <ContentControl>
+                <FontIcon Glyph="&#xE1EC;" FontFamily="Segoe MDL2 Assets">
+                    <FontIcon.RenderTransformOrigin>0.5, 0.5</FontIcon.RenderTransformOrigin>
+                    <FontIcon.RenderTransform>
+                        <RotateTransform Angle="90"/>
+                    </FontIcon.RenderTransform>
+                </FontIcon>
+            </ContentControl>
+        </ListViewItem>
+        
+    </Grid>  
+
+</UserControl>

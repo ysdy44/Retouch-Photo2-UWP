@@ -126,7 +126,6 @@ namespace Retouch_Photo2.Texts
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.Black.Content = resource.GetString("Texts_FontWeight_Black");
-            this.Black.Content = resource.GetString("Texts_FontWeight_Black");
             this.Bold.Content = resource.GetString("Texts_FontWeight_Bold");
 
             this.ExtraBlack.Content = resource.GetString("Texts_FontWeight_ExtraBlack");
