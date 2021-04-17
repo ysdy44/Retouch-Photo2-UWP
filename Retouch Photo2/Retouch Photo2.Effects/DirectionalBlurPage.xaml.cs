@@ -264,7 +264,7 @@ namespace Retouch_Photo2.Effects.Pages
                 (
                    set: (effect) => effect.DirectionalBlur_BorderMode = borderMode,
 
-                   type: HistoryType.LayersProperty_SetEffect_GaussianBlur_BoderMode,
+                   type: HistoryType.LayersProperty_SetEffect_DirectionalBlur_BoderMode,
                    getUndo: (effect) => effect.DirectionalBlur_BorderMode,
                    setUndo: (effect, previous) => effect.DirectionalBlur_BorderMode = previous
                 );
