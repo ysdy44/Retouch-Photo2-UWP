@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Adjustments.Models
 
 
         #endregion
-        
+
 
         public IAdjustment Clone()
         {
@@ -149,39 +149,35 @@ namespace Retouch_Photo2.Adjustments.Models
         public void SaveWith(XElement element)
         {
             element.Add(new XElement("ClampOutput", this.ClampOutput));
-            
 
-            if (this.AlphaDisable) element.Add(new XAttribute("AlphaDisable", false));
-            else
+            element.Add(new XAttribute("AlphaDisable", this.AlphaDisable));
+            if (this.AlphaDisable == false)
             {
-                element.Add(new XAttribute("AlphaDisable", true));
+                element.Add(new XAttribute("AlphaDisable", false));
                 element.Add(new XAttribute("AlphaOffset", this.AlphaOffset));
                 element.Add(new XAttribute("AlphaExponent", this.AlphaExponent));
                 element.Add(new XAttribute("AlphaAmplitude", this.AlphaAmplitude));
             }
 
-            if (this.RedDisable) element.Add(new XAttribute("RedDisable", false));
-            else
+            element.Add(new XAttribute("RedDisable", this.RedDisable));
+            if (this.RedDisable == false)
             {
-                element.Add(new XAttribute("RedDisable", true));
                 element.Add(new XAttribute("RedOffset", this.RedOffset));
                 element.Add(new XAttribute("RedExponent", this.RedExponent));
                 element.Add(new XAttribute("RedAmplitude", this.RedAmplitude));
             }
 
-            if (this.GreenDisable) element.Add(new XAttribute("GreenDisable", false));
-            else
+            element.Add(new XAttribute("GreenDisable", this.GreenDisable));
+            if (this.GreenDisable == false)
             {
-                element.Add(new XAttribute("GreenDisable", true));
                 element.Add(new XAttribute("GreenOffset", this.GreenOffset));
                 element.Add(new XAttribute("GreenExponent", this.GreenExponent));
                 element.Add(new XAttribute("GreenAmplitude", this.GreenAmplitude));
             }
 
-            if (this.BlueDisable) element.Add(new XAttribute("BlueDisable", false));
-            else
+            element.Add(new XAttribute("BlueDisable", this.BlueDisable));
+            if (this.BlueDisable == false)
             {
-                element.Add(new XAttribute("BlueDisable", true));
                 element.Add(new XAttribute("BlueOffset", this.BlueOffset));
                 element.Add(new XAttribute("BlueExponent", this.BlueExponent));
                 element.Add(new XAttribute("BlueAmplitude", this.BlueAmplitude));
