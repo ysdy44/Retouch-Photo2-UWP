@@ -114,10 +114,12 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
+            this.RadianButton.Tapped += (s, e) => TouchbarExtension.Instance = this.RadianButton;
             this.ConstructRadianStoryboard();
             this.ConstructRadian1();
             this.ConstructRadian2();
 
+            this.ScaleButton.Tapped += (s, e) => TouchbarExtension.Instance = this.ScaleButton;
             this.ConstructScaleStoryboard();
             this.ConstructScale1();
             this.ConstructScale2();
@@ -163,7 +165,7 @@ namespace Retouch_Photo2.Tools.Models
         public void OnNavigatedTo() { }
         public void OnNavigatedFrom()
         {
-            TouchbarButton.Instance = null;
+            TouchbarExtension.Instance = null;
         }
 
     }
@@ -178,10 +180,10 @@ namespace Retouch_Photo2.Tools.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.RadianTextBlock.Text = resource.GetString("Tools_View_Radian");
-            this.ResetRadianToolTip.Content = resource.GetString("Tools_View_ResetRadian");
+            this.RadianClearToolTip.Content = resource.GetString("Tools_View_RadianClear");
 
             this.ScaleTextBlock.Text = resource.GetString("Tools_View_Scale");
-            this.ResetScaleToolTip.Content = resource.GetString("Tools_View_ResetScale");
+            this.ScaleClearToolTip.Content = resource.GetString("Tools_View_ScaleClear");
         }
 
 
@@ -191,7 +193,7 @@ namespace Retouch_Photo2.Tools.Models
             Storyboard.SetTarget(this.RadianKeyFrames, this);
             Storyboard.SetTargetProperty(this.RadianKeyFrames, "Radian");
             this.RadianStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-            this.ResetRadianButton.Click += (s, e) =>
+            this.RadianClearButton.Tapped += (s, e) =>
             {
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
@@ -234,8 +236,8 @@ namespace Retouch_Photo2.Tools.Models
             Storyboard.SetTarget(this.ScaleKeyFrames, this);
             Storyboard.SetTargetProperty(this.ScaleKeyFrames, "Scale");
             this.ScaleStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
-            this.ResetScaleButton.Click += (s, e) =>
-            {
+            this.ScaleClearButton.Tapped += (s, e) =>
+            {                
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
                 this.Scale = this.ViewModel.CanvasTransformer.Scale;

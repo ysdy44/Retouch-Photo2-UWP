@@ -68,10 +68,11 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
+            this.SpreadButton.Tapped += (s, e) => TouchbarExtension.Instance = this.SpreadButton;
             this.ConstructSpread1();
             this.ConstructSpread2();
 
-            this.ConvertToCurvesButton.Click += (s, e) =>
+            this.ConvertToCurvesButton.Tapped += (s, e) =>
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
@@ -81,7 +82,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.ViewModel.ToolType = ToolType.Node;
             };
 
-            this.MoreButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
+            this.MoreButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
         }
 
 
@@ -116,7 +117,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void OnNavigatedFrom()
         {
-            TouchbarButton.Instance = null;
+            TouchbarExtension.Instance = null;
         }
     }
 

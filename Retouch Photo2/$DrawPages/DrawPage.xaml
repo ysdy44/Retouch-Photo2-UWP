@@ -64,15 +64,6 @@
 
         <Flyout x:Name="MoreFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
-                <ScrollViewer.Resources>
-                    <!--StaticResource-->
-                    <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
-                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
-                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
-                    <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
-                    <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
-                    <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
-                </ScrollViewer.Resources>
                 <StackPanel>
                     <!--Transform-->
                     <TextBlock x:Name="TransformTextBlock" FontWeight="Bold" Style="{StaticResource AppTextBlockStyle}"/>
@@ -255,7 +246,7 @@
 
                     <!--Left-->
                     <StackPanel x:Name="LeftStackPanel" Grid.Column="1" Orientation="Horizontal">
-                        <Button x:Name="ExportButton" Foreground="Black" Background="#FFC003" Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+                        <Button x:Name="ExportButton" Foreground="Black" Background="#FFC003" Style="{StaticResource AppRoundedButtonStyle}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="ExportToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
@@ -311,15 +302,6 @@
                         <Button.Flyout>
                             <Flyout x:Name="OverflowFlyout" LightDismissOverlayMode="On" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                 <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
-                                    <ScrollViewer.Resources>
-                                        <!--StaticResource-->
-                                        <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
-                                        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
-                                        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
-                                        <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
-                                        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
-                                        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
-                                    </ScrollViewer.Resources>
                                     <StackPanel x:Name="OverflowStackPanel">
 
                                         <ListViewItem x:Name="OverflowExportItem" Foreground="Black" Background="#FFC003">
@@ -393,15 +375,6 @@
 
                     <!--Right-->
                     <ScrollViewer x:Name="RightScrollViewer" Grid.Column="3" HorizontalAlignment="Right" Style="{StaticResource AppHorizontalScrollViewerStyle}">
-                        <ScrollViewer.Resources>
-                            <!--StaticResource-->
-                            <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
-                            <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
-                            <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
-                            <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
-                            <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
-                            <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
-                        </ScrollViewer.Resources>
                         <StackPanel x:Name="MenuButtonsStackPanel" Orientation="Horizontal">
 
                             <ListViewItem x:Name="Edit" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">

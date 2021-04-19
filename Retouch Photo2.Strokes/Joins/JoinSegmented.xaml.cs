@@ -86,10 +86,10 @@ namespace Retouch_Photo2.Strokes
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.Miter.Click += (s, e) => this.JoinChanged?.Invoke(this, CanvasLineJoin.Miter);//Delegate
-            this.Bevel.Click += (s, e) => this.JoinChanged?.Invoke(this, CanvasLineJoin.Bevel);//Delegate
-            this.Round.Click += (s, e) => this.JoinChanged?.Invoke(this, CanvasLineJoin.Round);//Delegate
-            this.MiterOrBevel.Click += (s, e) => this.JoinChanged?.Invoke(this, CanvasLineJoin.MiterOrBevel);//Delegate
+            this.Miter.Tapped += (s, e) => this.JoinChanged?.Invoke(this, CanvasLineJoin.Miter);//Delegate
+            this.Bevel.Tapped += (s, e) => this.JoinChanged?.Invoke(this, CanvasLineJoin.Bevel);//Delegate
+            this.Round.Tapped += (s, e) => this.JoinChanged?.Invoke(this, CanvasLineJoin.Round);//Delegate
+            this.MiterOrBevel.Tapped += (s, e) => this.JoinChanged?.Invoke(this, CanvasLineJoin.MiterOrBevel);//Delegate
 
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }

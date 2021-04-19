@@ -52,9 +52,11 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
+            this.RadiusButton.Tapped += (s, e) => TouchbarExtension.Instance = this.RadiusButton;
             this.ConstructRadius1();
             this.ConstructRadius2();
 
+            this.StepButton.Tapped += (s, e) => TouchbarExtension.Instance = this.StepButton;
             this.ConstructStep1();
             this.ConstructStep2();
         }
@@ -93,7 +95,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void OnNavigatedFrom()
         {
-            TouchbarButton.Instance = null;
+            TouchbarExtension.Instance = null;
         }
     }
 

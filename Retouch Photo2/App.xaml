@@ -23,7 +23,7 @@
                 <ResourceDictionary x:Key="Light">
 
                     <Color x:Key="AppForegroundColor" >#F2F3F5</Color>
-                    <Color x:Key="AppBackgroundColor" >#FFFFFF</Color>
+                    <Color x:Key="AppBackgroundColor" >#F2F4F5</Color>
                     <Color x:Key="AppBorderBrushColor" >#BEBCC7</Color>
 
                     <Color x:Key="AppFillColor" >#FFFFFF</Color>
@@ -35,6 +35,11 @@
 
                     <Color x:Key="ApplicationTitleColor" >#E7E8E8</Color>
                     <LinearGradientBrush x:Key="AppHorizontalShadowBrush" StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Color="#22000000" Offset="0"/>
+                        <GradientStop Color="#09000000" Offset="0.2"/>
+                        <GradientStop Color="#00000000" Offset="1"/>
+                    </LinearGradientBrush>
+                    <LinearGradientBrush x:Key="AppVerticalShadowBrush" StartPoint="0.5,0" EndPoint="0.5,1">
                         <GradientStop Color="#22000000" Offset="0"/>
                         <GradientStop Color="#09000000" Offset="0.2"/>
                         <GradientStop Color="#00000000" Offset="1"/>
@@ -51,7 +56,7 @@
                     <Color x:Key="AppBackgroundColor" >#000000</Color>
                     <Color x:Key="AppBorderBrushColor" >#33888888</Color>
 
-                    <Color x:Key="AppFillColor" >#1E1E1E</Color>
+                    <Color x:Key="AppFillColor" >#000000</Color>
                     <Color x:Key="AppStrokeColor" >#AA050005</Color>
                     <Color x:Key="AppTextColor" >#BBFFFFFF</Color>
 
@@ -64,6 +69,11 @@
                         <GradientStop Color="#44000000" Offset="0.2"/>
                         <GradientStop Color="#00000000" Offset="1"/>
                     </LinearGradientBrush>
+                    <LinearGradientBrush x:Key="AppVerticalShadowBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="#66000000" Offset="0"/>
+                        <GradientStop Color="#44000000" Offset="0.2"/>
+                        <GradientStop Color="#00000000" Offset="1"/>
+                    </LinearGradientBrush>
 
                     <Visibility x:Key="AppGridVisibility">Visible</Visibility>
                     <Visibility x:Key="AppShadowVisibility">Collapsed</Visibility>
@@ -71,6 +81,15 @@
                 </ResourceDictionary>
 
             </ResourceDictionary.ThemeDictionaries>
+
+
+            <!--StaticResource-->
+            <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
+            <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
+            <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
 
 
             <!--Merged-->

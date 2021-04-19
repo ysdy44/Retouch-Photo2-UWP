@@ -81,10 +81,10 @@ namespace Retouch_Photo2.Tools.Elements
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.New.Click += (s, e) => this.Mode = MarqueeCompositeMode.New;
-            this.Add.Click += (s, e) => this.Mode = MarqueeCompositeMode.Add;
-            this.Subtract.Click += (s, e) => this.Mode = MarqueeCompositeMode.Subtract;
-            //this.Intersect.Click += (s, e) => this.Mode = MarqueeCompositeMode.Intersect;
+            this.New.Tapped += (s, e) => this.Mode = MarqueeCompositeMode.New;
+            this.Add.Tapped += (s, e) => this.Mode = MarqueeCompositeMode.Add;
+            this.Subtract.Tapped += (s, e) => this.Mode = MarqueeCompositeMode.Subtract;
+            //this.Intersect.Tapped += (s, e) => this.Mode = MarqueeCompositeMode.Intersect;
 
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }

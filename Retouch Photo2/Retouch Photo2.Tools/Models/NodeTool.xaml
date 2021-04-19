@@ -50,50 +50,50 @@
 
         <!--Remove-->
         <TextBlock x:Name="RemoveTextBlock" Grid.Column="2" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="RemoveButton" Grid.Column="3" Style="{StaticResource AppRoundedButtonStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="RemoveButton" Grid.Column="3" Style="{StaticResource AppListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeIcons/RemoveIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ContentControl Template="{StaticResource RemoveIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <!--Insert-->
         <TextBlock x:Name="InsertTextBlock" Grid.Column="4" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="InsertButton" Grid.Column="5" Style="{StaticResource AppRoundedButtonStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="InsertButton" Grid.Column="5" Style="{StaticResource AppListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeIcons/InsertIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ContentControl Template="{StaticResource InsertIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <Rectangle Grid.Column="6" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
         <!--Sharp-->
         <TextBlock x:Name="SharpTextBlock" Grid.Column="7" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="SharpButton" Grid.Column="8" Style="{StaticResource AppRoundedButtonStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="SharpButton" Grid.Column="8" Style="{StaticResource AppListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeIcons/SharpIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ContentControl Template="{StaticResource SharpIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <!--Smooth-->
         <TextBlock x:Name="SmoothTextBlock" Grid.Column="9" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="SmoothButton" Grid.Column="10" Style="{StaticResource AppRoundedButtonStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="SmoothButton" Grid.Column="10" Style="{StaticResource AppListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/NodeIcons/SmoothIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ContentControl Template="{StaticResource SmoothIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <Rectangle Grid.Column="11" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <Button x:Name="MoreNodeButton" Grid.Column="12" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="MoreNodeButton" Grid.Column="12" Style="{StaticResource AppListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="MoreNodeToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-        </Button>
+        </ListViewItem>
 
     </Grid>
 </Page>

@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Menus
 
             this.HorizontalAlignmentSegmented.HorizontalAlignmentChanged += (s, alignment) => this.SetHorizontalAlignment(alignment);
 
-            this.BoldButton.Click += (s, e) =>
+            this.BoldButton.Tapped += (s, e) =>
             {
                 // isBold ? ""Normal"" : ""Bold""
                 bool isBold = this.FontWeightConverter(this.SelectionViewModel.FontWeight);
@@ -82,7 +82,7 @@ namespace Retouch_Photo2.Menus
 
                 this.SetFontWeight(fontWeight);
             };
-            this.ItalicButton.Click += (s, e) =>
+            this.ItalicButton.Tapped += (s, e) =>
             {
                 // isNormal ? ""Normal"" : ""Italic""
                 bool isNormal = this.FontStyleConverter(this.SelectionViewModel.FontStyle);
@@ -90,13 +90,13 @@ namespace Retouch_Photo2.Menus
 
                 this.SetFontStyle(fontStyle);
             };
-            this.UnderlineButton.Click += (s, e) => this.SetUnderline(!this.SelectionViewModel.Underline);
+            this.UnderlineButton.Tapped += (s, e) => this.SetUnderline(!this.SelectionViewModel.Underline);
 
             this.FontWeightComboBox.WeightChanged += (s, fontWeight) => this.SetFontWeight(fontWeight);
 
             // Get all FontFamilys in your device.
             this.FontFamilyListView.ItemsSource = CanvasTextFormat.GetSystemFontFamilies(ApplicationLanguages.Languages).OrderBy(k => k);
-            this.FontFamilyButton.Click += (s, e) =>
+            this.FontFamilyButton.Tapped += (s, e) =>
             {
                 this.FontFamilyListView.Visibility = Visibility.Visible;
                 this.SplitView.IsPaneOpen = false;
@@ -114,6 +114,7 @@ namespace Retouch_Photo2.Menus
             {
                 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 24, 30, 36, 48, 64, 72, 96, 144, 288,
             };
+            this.FontSizeButton.Tapped += (s, e) => this.FontSizeFlyout.ShowAt(this.FontSizeButton);
             this.FontSizePicker.ValueChanged += (s, value) => this.SetFontSize(value);
             this.FontSizeListView.ItemClick += (s, e) =>
             {
@@ -125,6 +126,7 @@ namespace Retouch_Photo2.Menus
                 }
             };
 
+
             //Direction
             this.DirectionComboBox.DirectionChanged += (s, direction) => this.SetDirection(direction);
 
@@ -133,7 +135,7 @@ namespace Retouch_Photo2.Menus
                 if (e.NewSize == e.PreviousSize) return;
                 this.SplitView.OpenPaneLength = e.NewSize.Width;
             };
-            this.CloseButton.Click += (s, e) =>
+            this.CloseButton.Tapped += (s, e) =>
             {
                 this.FontFamilyListView.Visibility = Visibility.Collapsed;
                 this.SplitView.IsPaneOpen = true;

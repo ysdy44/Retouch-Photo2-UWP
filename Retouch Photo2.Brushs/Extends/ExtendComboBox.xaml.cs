@@ -142,7 +142,7 @@ namespace Retouch_Photo2.Brushs
                 this.Flyout.Hide();
             };
 
-            this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
+            this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
 

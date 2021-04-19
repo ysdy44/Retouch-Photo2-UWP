@@ -20,15 +20,7 @@
     </Page.Resources>
 
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+    <StackPanel Orientation="Horizontal">
 
         <Border Width="50" Visibility="{x:Bind DeviceLayoutTypeConverter(SettingViewModel.DeviceLayoutType), Mode=OneWay}">
             <Border.Resources>
@@ -39,17 +31,17 @@
             </Border.Child>
         </Border>
 
-        <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+        <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
         <!--Type-->
-        <TextBlock x:Name="TypeTextBlock" Grid.Column="2" Style="{StaticResource AppTextBlockStyle}"/>
-        <brushs:TransparencyTypeComboBox x:Name="TypeComboBox"  Grid.Column="3"
+        <TextBlock x:Name="TypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <brushs:TransparencyTypeComboBox x:Name="TypeComboBox"
                  Transparency="{x:Bind SelectionViewModel.Transparency, Mode=OneWay}" />
 
         <!--ShowControl-->
-        <TextBlock x:Name="ShowTextBlock" Grid.Column="4" Style="{StaticResource AppTextBlockStyle}"/>
-        <brushs:TransparencyShowControl x:Name="ShowControl" Grid.Column="5"
+        <TextBlock x:Name="ShowTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+        <brushs:TransparencyShowControl x:Name="ShowControl"
                      Transparency="{x:Bind SelectionViewModel.Transparency, Mode=OneWay}" />
 
-    </Grid>
+    </StackPanel>
 </Page>

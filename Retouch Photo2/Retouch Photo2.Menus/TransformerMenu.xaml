@@ -127,7 +127,7 @@
                 </Grid.RowDefinitions>
                 <transformers:RemoteControl x:Name="PositionRemoteControl" Width="Auto" Height="Auto" Margin="4"
                                         FlowDirection="LeftToRight"/>
-                <Button x:Name="CloseButton" Grid.Row="2" Style="{StaticResource AppRoundedButtonStyle}"/>
+                <ListViewItem x:Name="CloseButton" Grid.Row="2" Style="{StaticResource AppListViewItemStyle}"/>
             </Grid>
         </SplitView.Content>
     </SplitView>

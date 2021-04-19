@@ -14,7 +14,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:ExpanedHead">
-                    <Grid x:Name="RootGrid" 
+                    <Grid x:Name="RootGrid"
                         Height="{TemplateBinding Height}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
@@ -46,6 +46,9 @@
                                         <Setter Target = "LeftButton.Opacity" Value="0"/>
                                         <Setter Target = "RightButton.Visibility" Value="Collapsed"/>
                                         <Setter Target = "RightButton.Opacity" Value="0"/>
+
+                                        <!--Shadow-->
+                                        <Setter Target = "ShadowTransform.Y" Value="25"/>
 
                                     </VisualState.Setters>
                                 </VisualState>
@@ -79,6 +82,12 @@
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
 
+                                            <!--Button-->
+                                            <DoubleAnimation Storyboard.TargetName="ShadowTransform" Storyboard.TargetProperty = "Y" From="50" To="25" Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
                                         </Storyboard>
                                     </VisualTransition>
 
@@ -104,6 +113,13 @@
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
                                             <DoubleAnimation Storyboard.TargetName="RightButton" Storyboard.TargetProperty = "Opacity" From="0" To="1" Duration="0:0:0.2">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CircleEase EasingMode="EaseInOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+
+                                            <!--Button-->
+                                            <DoubleAnimation Storyboard.TargetName="ShadowTransform" Storyboard.TargetProperty = "Y" From="25" To="50" Duration="0:0:0.2">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CircleEase EasingMode="EaseInOut"/>
                                                 </DoubleAnimation.EasingFunction>
@@ -172,6 +188,12 @@
                             </ListViewItem.ContentTransitions>
                         </ListViewItem>
 
+                        <Rectangle IsHitTestVisible="False" Grid.ColumnSpan="3" Fill="{ThemeResource AppVerticalShadowBrush}" Visibility="{ThemeResource AppShadowVisibility}">
+                            <Rectangle.RenderTransformOrigin>0.5, 0.5</Rectangle.RenderTransformOrigin>
+                            <Rectangle.RenderTransform>
+                                <TranslateTransform x:Name="ShadowTransform" Y="50"/>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

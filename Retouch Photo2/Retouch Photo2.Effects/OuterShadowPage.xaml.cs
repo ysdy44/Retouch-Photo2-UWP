@@ -386,7 +386,7 @@ namespace Retouch_Photo2.Effects.Pages
         //Color
         private void ConstructColor1()
         {
-            this.ColorButton.Click += (s, e) =>
+            this.ColorButton.Tapped += (s, e) =>
             {
                 this.ColorFlyout.ShowAt(this.ColorButton);
                 this.ColorPicker.Color = this.Color;

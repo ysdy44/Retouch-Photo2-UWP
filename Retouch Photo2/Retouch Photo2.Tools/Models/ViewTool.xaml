@@ -35,11 +35,11 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <Border Width="50" Visibility="{x:Bind DeviceLayoutTypeConverter(SettingViewModel.DeviceLayoutType), Mode=OneWay}">
@@ -55,57 +55,53 @@
 
         <!--Radian-->
         <TextBlock x:Name="RadianTextBlock" Grid.Column="2" Style="{StaticResource AppTextBlockStyle}"/>
-        <tools:TouchbarButton x:Name="RadianButton" Grid.Column="3"
+        <ListViewItem x:Name="RadianButton" Grid.Column="3" MinWidth="70" Style="{StaticResource AppListViewItemStyle}"
                              Content="{x:Bind RadianToNumberConverter(ViewModel.CanvasTransformerRadian), Mode=OneWay}">
-            <tools:TouchbarButton.Picker>
+            <tools:TouchbarExtension.Picker>
                 <hsvColorPickers:NumberPicker x:Name="RadianPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind RadianToNumberConverter(ViewModel.CanvasTransformerRadian), Mode=OneWay}"/>
-            </tools:TouchbarButton.Picker>
-            <tools:TouchbarButton.Slider>
+            </tools:TouchbarExtension.Picker>
+            <tools:TouchbarExtension.Slider>
                 <tools:TouchbarSlider x:Name="RadianSlider" 
                              Value="{x:Bind RadianToValueConverter(ViewModel.CanvasTransformerRadian), Mode=OneWay}"/>
-            </tools:TouchbarButton.Slider>
-        </tools:TouchbarButton>
+            </tools:TouchbarExtension.Slider>
+        </ListViewItem>
 
-        <Button x:Name="ResetRadianButton" Grid.Column="4" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="RadianClearButton" Grid.Column="4" Style="{StaticResource AppListViewItemStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip x:Name="ResetRadianToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                <ToolTip x:Name="RadianClearToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Button.Resources>
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ResetRadianIcon.xaml"/>
-            </Button.Resources>
-            <Button.Content>
-                <ContentControl Template="{StaticResource ResetRadianIcon}"/>
-            </Button.Content>
-        </Button>
+            </ListViewItem.Resources>
+            <ContentControl Template="{StaticResource ResetRadianIcon}"/>
+        </ListViewItem>
 
         <Rectangle Grid.Column="5" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
         <!--Scale-->
         <TextBlock x:Name="ScaleTextBlock" Grid.Column="6" Style="{StaticResource AppTextBlockStyle}"/>
-        <tools:TouchbarButton x:Name="ScaleButton" Grid.Column="7"
+        <ListViewItem x:Name="ScaleButton" Grid.Column="7" MinWidth="70" Style="{StaticResource AppListViewItemStyle}"
                              Content="{x:Bind ScaleToNumberConverter(ViewModel.CanvasTransformerScale), Mode=OneWay}">
-            <tools:TouchbarButton.Picker>
+            <tools:TouchbarExtension.Picker>
                 <hsvColorPickers:NumberPicker x:Name="ScalePicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind ScaleToNumberConverter(ViewModel.CanvasTransformerScale), Mode=OneWay}"/>
-            </tools:TouchbarButton.Picker>
-            <tools:TouchbarButton.Slider>
+            </tools:TouchbarExtension.Picker>
+            <tools:TouchbarExtension.Slider>
                 <tools:TouchbarSlider x:Name="ScaleSlider"
                              Value="{x:Bind ScaleToValueConverter(ViewModel.CanvasTransformerScale), Mode=OneWay}"/>
-            </tools:TouchbarButton.Slider>
-        </tools:TouchbarButton>
+            </tools:TouchbarExtension.Slider>
+        </ListViewItem>
 
-        <Button x:Name="ResetScaleButton" Grid.Column="8" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="ScaleClearButton" Grid.Column="8" Style="{StaticResource AppListViewItemStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip x:Name="ResetScaleToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                <ToolTip x:Name="ScaleClearToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Button.Resources>
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ResetScaleIcon.xaml"/>
-            </Button.Resources>
-            <Button.Content>
-                <ContentControl Template="{StaticResource ResetScaleIcon}"/>
-            </Button.Content>
-        </Button>
+            </ListViewItem.Resources>
+            <ContentControl Template="{StaticResource ResetScaleIcon}"/>
+        </ListViewItem>
 
     </Grid>
 </Page>

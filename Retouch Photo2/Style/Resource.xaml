@@ -10,24 +10,95 @@
     <x:Double x:Key="AppRoundedHeight">36</x:Double>
 
 
+    <!--Thickness-->
     <Thickness x:Key="AppThickness">0.5,0.5,0.5,1.5</Thickness>
+    
     <Thickness x:Key="AppLeftThickness">0.5,0.5,0,1.5</Thickness>
     <Thickness x:Key="AppCenterThickness">0,0.5,0,1.5</Thickness>
     <Thickness x:Key="AppRightThickness">0,0.5,0.5,1.5</Thickness>
+    
+    <Thickness x:Key="AppTopThickness">0.5,0.5,0.5,0</Thickness>
+    <Thickness x:Key="AppMiddleThickness">0.5,0,0.5,0</Thickness>
+    <Thickness x:Key="AppBottomThickness">0.5,0,0.5,1.5</Thickness>
 
 
+    <!--Margin-->
     <Thickness x:Key="AppMargin">1,0</Thickness>
-    <Thickness x:Key="AppLeftMargin">1,0,0,0</Thickness>
-    <Thickness x:Key="AppCenterMargin">0</Thickness>
-    <Thickness x:Key="AppRightMargin">0,0,1,0</Thickness>
+    
+    <Thickness x:Key="AppLeftMargin">1,1,0,1</Thickness>
+    <Thickness x:Key="AppCenterMargin">0,1</Thickness>
+    <Thickness x:Key="AppRightMargin">0,1,1,1</Thickness>
+
+    <Thickness x:Key="AppTopMargin">1,1,1,0</Thickness>
+    <Thickness x:Key="AppMiddleMargin">1,0</Thickness>
+    <Thickness x:Key="AppBottomMargin">1,0,1,1</Thickness>
 
 
+    <!--CornerRadius-->
     <CornerRadius x:Key="AppCornerRadius">4</CornerRadius>
+   
     <CornerRadius x:Key="AppLeftCornerRadius">4,0,0,4</CornerRadius>
     <CornerRadius x:Key="AppCenterCornerRadius">0</CornerRadius>
     <CornerRadius x:Key="AppRightCornerRadius">0,4,4,0</CornerRadius>
-
-    <CornerRadius x:Key="AppCircleCornerRadius">20</CornerRadius>
     
+    <CornerRadius x:Key="AppTopCornerRadius">4,4,0,0</CornerRadius>
+    <CornerRadius x:Key="AppMiddleCornerRadius">0</CornerRadius>
+    <CornerRadius x:Key="AppBottomCornerRadius">0,0,4,4</CornerRadius>
+    
+    
+    <CornerRadius x:Key="AppCircleCornerRadius">20</CornerRadius>
+
+
+    
+    <!--ListViewItem-->
+    <Style x:Key="ListViewItemBase" TargetType="ListViewItem">
+        <Setter Property="Height" Value="{ThemeResource AppRoundedHeight}"/>
+        <Setter Property="MinWidth" Value="36"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
+        <Setter Property="Background" Value="{ThemeResource AppFill}"/>
+    </Style>
+    
+    
+    <Style x:Key="AppListViewItemStyle" TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemBase}">
+        <Setter Property="Margin" Value="{ThemeResource AppMargin}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource AppThickness}"/>
+    </Style>
+    
+    <Style x:Key="AppLeftListViewItemStyle" TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemBase}">
+        <Setter Property="Margin" Value="{ThemeResource AppLeftMargin}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource AppLeftThickness}"/>
+    </Style>
+    <Style x:Key="AppCenterListViewItemStyle" TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemBase}">
+        <Setter Property="Margin" Value="{ThemeResource AppCenterMargin}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource AppCenterThickness}"/>
+    </Style>
+    <Style x:Key="AppRightListViewItemStyle" TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemBase}">
+        <Setter Property="Margin" Value="{ThemeResource AppRightMargin}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource AppRightThickness}"/>
+    </Style>
+
+    <Style x:Key="AppTopListViewItemStyle" TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemBase}">
+        <Setter Property="Margin" Value="{ThemeResource AppTopMargin}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource AppTopThickness}"/>
+    </Style>
+    <Style x:Key="AppMiddleListViewItemStyle" TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemBase}">
+        <Setter Property="Margin" Value="{ThemeResource AppMiddleMargin}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource AppMiddleThickness}"/>
+    </Style>
+    <Style x:Key="AppBottomListViewItemStyle" TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemBase}">
+        <Setter Property="Margin" Value="{ThemeResource AppBottomMargin}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource AppBottomThickness}"/>
+    </Style>
+
+
+
+    <Style x:Key="AppCircleListViewItemStyle" TargetType="ListViewItem" BasedOn="{StaticResource AppListViewItemStyle}">
+        <Setter Property="Width" Value="{StaticResource AppCircleHeight}"/>
+        <Setter Property="Height" Value="{StaticResource AppCircleHeight}"/>
+    </Style>
+
 
 </ResourceDictionary>

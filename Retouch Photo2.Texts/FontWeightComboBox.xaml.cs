@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Texts
 
             this.ThinItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Thin);//Delegate
 
-            this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
+            this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
 

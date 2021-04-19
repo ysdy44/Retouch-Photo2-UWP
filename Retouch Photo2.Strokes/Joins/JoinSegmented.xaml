@@ -21,28 +21,28 @@
                 <!--Miter-->
                 <VisualState x:Name="MiterState">
                     <VisualState.Setters>
-                        <Setter Target = "Miter.IsEnabled" Value="False"/>
+                        <Setter Target = "Miter.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Bevel-->
                 <VisualState x:Name="BevelState">
                     <VisualState.Setters>
-                        <Setter Target = "Bevel.IsEnabled" Value="False"/>
+                        <Setter Target = "Bevel.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Round-->
                 <VisualState x:Name="RoundState">
                     <VisualState.Setters>
-                        <Setter Target = "Round.IsEnabled" Value="False"/>
+                        <Setter Target = "Round.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--MiterOrBevel-->
                 <VisualState x:Name="MiterOrBevelState">
                     <VisualState.Setters>
-                        <Setter Target = "MiterOrBevel.IsEnabled" Value="False"/>
+                        <Setter Target = "MiterOrBevel.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -58,48 +58,48 @@
         </Grid.ColumnDefinitions>
 
         <!--Miter-->
-        <Button x:Name="Miter" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="Miter" Grid.Column="0" Style="{StaticResource AppListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Joins/Icons/MiterIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource MiterIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <!--Bevel-->
-        <Button x:Name="Bevel" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="Bevel" Grid.Column="1" Style="{StaticResource AppLeftListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Joins/Icons/BevelIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource BevelIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <!--Round-->
-        <Button x:Name="Round" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="Round" Grid.Column="2" Style="{StaticResource AppCenterListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Joins/Icons/RoundIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource RoundIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <!--MiterOrBevel-->
-        <Button x:Name="MiterOrBevel" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="MiterOrBevel" Grid.Column="3" Style="{StaticResource AppRightListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Joins/Icons/MiterOrBevelIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource MiterOrBevelIcon}"/>
-        </Button>
+        </ListViewItem>
 
     </Grid>
 

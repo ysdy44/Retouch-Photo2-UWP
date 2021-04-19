@@ -21,28 +21,28 @@
                 <!--Flat-->
                 <VisualState x:Name="FlatState">
                     <VisualState.Setters>
-                        <Setter Target = "Flat.IsEnabled" Value="False"/>
+                        <Setter Target = "Flat.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Square-->
                 <VisualState x:Name="SquareState">
                     <VisualState.Setters>
-                        <Setter Target = "Square.IsEnabled" Value="False"/>
+                        <Setter Target = "Square.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Round-->
                 <VisualState x:Name="RoundState">
                     <VisualState.Setters>
-                        <Setter Target = "Round.IsEnabled" Value="False"/>
+                        <Setter Target = "Round.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Triangle-->
                 <VisualState x:Name="TriangleState">
                     <VisualState.Setters>
-                        <Setter Target = "Triangle.IsEnabled" Value="False"/>
+                        <Setter Target = "Triangle.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -58,48 +58,48 @@
         </Grid.ColumnDefinitions>
 
         <!--Flat-->
-        <Button x:Name="Flat" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="Flat" Grid.Column="0" Style="{StaticResource AppListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Caps/Icons/FlatIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource FlatIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <!--Square-->
-        <Button x:Name="Square" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="Square" Grid.Column="1" Style="{StaticResource AppLeftListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Caps/Icons/SquareIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
                 <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource SquareIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <!--Round-->
-        <Button x:Name="Round" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="Round" Grid.Column="2" Style="{StaticResource AppCenterListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Caps/Icons/RoundIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource RoundIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <!--Triangle-->
-        <Button x:Name="Triangle" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="Triangle" Grid.Column="3" Style="{StaticResource AppRightListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Caps/Icons/TriangleIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource TriangleIcon}"/>
-        </Button>
+        </ListViewItem>
 
     </Grid>
 

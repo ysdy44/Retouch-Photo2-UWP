@@ -291,7 +291,7 @@ namespace Retouch_Photo2.Adjustments.Pages
         //Color
         private void ConstructColor1()
         {
-            this.ColorButton.Click += (s, e) =>
+            this.ColorButton.Tapped += (s, e) =>
             {
                 if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {

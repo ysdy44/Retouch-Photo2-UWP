@@ -79,7 +79,7 @@ namespace Retouch_Photo2.Tools.Elements
                 this.Flyout.Hide();
             };
 
-            this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
+            this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }
 

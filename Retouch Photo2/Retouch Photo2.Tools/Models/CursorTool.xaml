@@ -17,11 +17,11 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*" MinWidth="210"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <Border Width="50" Visibility="{x:Bind DeviceLayoutTypeConverter(SettingViewModel.DeviceLayoutType), Mode=OneWay}">
@@ -35,12 +35,12 @@
         
         <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <Button x:Name="OperateButton" Grid.Column="2" Width="Auto" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="OperateButton" Grid.Column="2" Style="{StaticResource AppListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="OperateToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <operates:Icon/>
-        </Button>
+        </ListViewItem>
         
         <Rectangle Grid.Column="3" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
@@ -49,12 +49,12 @@
      
         <Rectangle Grid.Column="5" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <Button x:Name="MoreButton" Grid.Column="6" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="MoreButton" Grid.Column="6" Style="{StaticResource AppListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="MoreTransformToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-        </Button>
+        </ListViewItem>
 
     </Grid>
 </Page>

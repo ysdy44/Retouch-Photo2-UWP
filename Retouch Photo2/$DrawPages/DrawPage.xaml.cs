@@ -153,8 +153,8 @@ namespace Retouch_Photo2
             DrawPage.ShowGallery += this.ShowGalleryDialog;
 
             //DrawLayout
-            TouchbarButton.PickerBorder = this.DrawLayout.TouchbarPicker;
-            TouchbarButton.SliderBorder = this.DrawLayout.TouchbarSlider;
+            TouchbarExtension.PickerBorder = this.DrawLayout.TouchbarPicker;
+            TouchbarExtension.SliderBorder = this.DrawLayout.TouchbarSlider;
 
             //Gallery
             DrawPage.ShowGalleryFunc += this.ShowGalleryDialogFunc;
@@ -202,8 +202,8 @@ namespace Retouch_Photo2
             DrawPage.ShowGallery -= this.ShowGalleryDialog;
 
             //DrawLayout
-            TouchbarButton.PickerBorder = null;
-            TouchbarButton.SliderBorder = null;
+            TouchbarExtension.PickerBorder = null;
+            TouchbarExtension.SliderBorder = null;
 
             //Gallery
             DrawPage.ShowGalleryFunc = null;

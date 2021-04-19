@@ -57,45 +57,45 @@ namespace Retouch_Photo2.Menus
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.Transform_FlipHorizontal.Click += (s, e) =>
+            this.Transform_FlipHorizontal.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(-1, 1, transformer.Center);
                 this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
-            this.Transform_FlipVertical.Click += (s, e) =>
+            this.Transform_FlipVertical.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateScale(1, -1, transformer.Center);
                 this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
-            this.Transform_RotateLeft.Click += (s, e) =>
+            this.Transform_RotateLeft.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(-FanKit.Math.PiOver2, transformer.Center);
                 this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
-            this.Transform_RotateRight.Click += (s, e) =>
+            this.Transform_RotateRight.Tapped += (s, e) =>
             {
                 Transformer transformer = this.Transformer;
                 Matrix3x2 matrix = Matrix3x2.CreateRotation(FanKit.Math.PiOver2, transformer.Center);
                 this.MethodViewModel.MethodTransformMultiplies(matrix);//Method
             };
 
-            this.Arrange_MoveBack.Click += (s, e) => this.MoveBack();
-            this.Arrange_BackOne.Click += (s, e) => this.BackOne();
-            this.Arrange_ForwardOne.Click += (s, e) => this.ForwardOne();
-            this.Arrange_MoveFront.Click += (s, e) => this.MoveFront();
+            this.Arrange_MoveBack.Tapped += (s, e) => this.MoveBack();
+            this.Arrange_BackOne.Tapped += (s, e) => this.BackOne();
+            this.Arrange_ForwardOne.Tapped += (s, e) => this.ForwardOne();
+            this.Arrange_MoveFront.Tapped += (s, e) => this.MoveFront();
 
-            this.Horizontally_Left.Click += (s, e) => this.TransformAlign(BorderMode.MinX, Orientation.Horizontal);
-            this.Horizontally_Center.Click += (s, e) => this.TransformAlign(BorderMode.CenterX, Orientation.Horizontal);
-            this.Horizontally_Right.Click += (s, e) => this.TransformAlign(BorderMode.MaxX, Orientation.Horizontal);
-            this.Horizontally_HorizontallySpace.Click += (s, e) => this.TransformSapce(Orientation.Horizontal);
+            this.Horizontally_Left.Tapped += (s, e) => this.TransformAlign(BorderMode.MinX, Orientation.Horizontal);
+            this.Horizontally_Center.Tapped += (s, e) => this.TransformAlign(BorderMode.CenterX, Orientation.Horizontal);
+            this.Horizontally_Right.Tapped += (s, e) => this.TransformAlign(BorderMode.MaxX, Orientation.Horizontal);
+            this.Horizontally_HorizontallySpace.Tapped += (s, e) => this.TransformSapce(Orientation.Horizontal);
 
-            this.Vertically_Top.Click += (s, e) => this.TransformAlign(BorderMode.MinY, Orientation.Vertical);
-            this.Vertically_Middle.Click += (s, e) => this.TransformAlign(BorderMode.CenterY, Orientation.Vertical);
-            this.Vertically_Bottom.Click += (s, e) => this.TransformAlign(BorderMode.MaxY, Orientation.Vertical);
-            this.Vertically_VerticallySpace.Click += (s, e) => this.TransformSapce(Orientation.Vertical);
+            this.Vertically_Top.Tapped += (s, e) => this.TransformAlign(BorderMode.MinY, Orientation.Vertical);
+            this.Vertically_Middle.Tapped += (s, e) => this.TransformAlign(BorderMode.CenterY, Orientation.Vertical);
+            this.Vertically_Bottom.Tapped += (s, e) => this.TransformAlign(BorderMode.MaxY, Orientation.Vertical);
+            this.Vertically_VerticallySpace.Tapped += (s, e) => this.TransformSapce(Orientation.Vertical);
         }
     }
 
@@ -109,7 +109,7 @@ namespace Retouch_Photo2.Menus
 
             foreach (UIElement child in this.LayoutRoot.Children)
             {
-                if (child is Button button)
+                if (child is ListViewItem button)
                 {
                     if (ToolTipService.GetToolTip(button) is ToolTip toolTip)
                     {

@@ -9,16 +9,6 @@
     d:DesignWidth="200"
     >
     
-    <UserControl.Resources>
-        <!--StaticResource-->
-        <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
-        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
-        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
-        <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
-        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
-        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
-    </UserControl.Resources>
-    
 
     <Grid>
         
@@ -98,14 +88,14 @@
         </Grid.RowDefinitions>
 
         <!--LeftToRightThenTopToBottom-->
-        <ListViewItem x:Name="LeftToRightThenTopToBottom" Grid.Column="0" Margin="1,1,0,1" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+        <ListViewItem x:Name="LeftToRightThenTopToBottom" Grid.Column="0" Style="{StaticResource AppLeftListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE71D;" FontFamily="Segoe MDL2 Assets"/>
         </ListViewItem>
         <!--RightToLeftThenTopToBottom-->
-        <ListViewItem x:Name="RightToLeftThenTopToBottom" Grid.Column="1" Margin="0,1,1,1" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+        <ListViewItem x:Name="RightToLeftThenTopToBottom" Grid.Column="1" Style="{StaticResource AppRightListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
@@ -113,7 +103,7 @@
         </ListViewItem>
 
         <!--LeftToRightThenBottomToTop-->
-        <ListViewItem x:Name="LeftToRightThenBottomToTop" Grid.Column="0" Grid.Row="1" Margin="1,1,0,1" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+        <ListViewItem x:Name="LeftToRightThenBottomToTop" Grid.Column="0" Grid.Row="1" Style="{StaticResource AppLeftListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
@@ -127,7 +117,7 @@
             </ContentControl>
         </ListViewItem>
         <!--RightToLeftThenBottomToTop-->
-        <ListViewItem x:Name="RightToLeftThenBottomToTop" Grid.Column="1" Grid.Row="1" Margin="0,1,1,1" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+        <ListViewItem x:Name="RightToLeftThenBottomToTop" Grid.Column="1" Grid.Row="1" Style="{StaticResource AppRightListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
@@ -143,7 +133,7 @@
 
 
         <!--TopToBottomThenLeftToRight-->
-        <ListViewItem x:Name="TopToBottomThenLeftToRight" Grid.Column="2" Margin="1,1,1,0" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+        <ListViewItem x:Name="TopToBottomThenLeftToRight" Grid.Column="2" Style="{StaticResource AppTopListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
@@ -157,7 +147,7 @@
             </ContentControl>
         </ListViewItem>
         <!--BottomToTopThenLeftToRight-->
-        <ListViewItem x:Name="BottomToTopThenLeftToRight" Grid.Column="2" Grid.Row="1" Margin="1,0,1,1" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+        <ListViewItem x:Name="BottomToTopThenLeftToRight" Grid.Column="2" Grid.Row="1" Style="{StaticResource AppBottomListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
@@ -172,7 +162,7 @@
         </ListViewItem>
 
         <!--TopToBottomThenRightToLeft-->
-        <ListViewItem x:Name="TopToBottomThenRightToLeft" Grid.Column="3" Margin="1,1,1,0" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+        <ListViewItem x:Name="TopToBottomThenRightToLeft" Grid.Column="3" Style="{StaticResource AppTopListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
@@ -186,7 +176,7 @@
             </ContentControl>
         </ListViewItem>
         <!--BottomToTopThenRightToLeft-->
-        <ListViewItem x:Name="BottomToTopThenRightToLeft" Grid.Column="3" Grid.Row="1" Margin="1,0,1,1" MinWidth="50" HorizontalContentAlignment="Center" Background="{ThemeResource AppBackground}">
+        <ListViewItem x:Name="BottomToTopThenRightToLeft" Grid.Column="3" Grid.Row="1" Style="{StaticResource AppBottomListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>

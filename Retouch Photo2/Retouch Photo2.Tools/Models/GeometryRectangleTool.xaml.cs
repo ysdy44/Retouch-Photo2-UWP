@@ -66,11 +66,11 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructStrings();
 
             //Flyout
-            this.FillBrushButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.FillBrushButton);
-            this.StrokeBrushButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeColorFlyout?.Invoke(this, this.StrokeBrushButton);
+            this.FillBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.FillBrushButton);
+            this.StrokeBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeColorFlyout?.Invoke(this, this.StrokeBrushButton);
             this.StrokeShowControl.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeFlyout?.Invoke(this.StrokeShowControl);
 
-            this.ConvertToCurvesButton.Click += (s, e) =>
+            this.ConvertToCurvesButton.Tapped += (s, e) =>
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
@@ -80,7 +80,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.ViewModel.ToolType = ToolType.Node;
             };
 
-            this.MoreButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
+            this.MoreButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
         }
 
 
@@ -116,7 +116,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void OnNavigatedFrom()
         {
-            TouchbarButton.Instance = null;
+            TouchbarExtension.Instance = null;
         }
 
 

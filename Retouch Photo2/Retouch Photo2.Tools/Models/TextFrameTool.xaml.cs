@@ -72,7 +72,7 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.TextButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowTextFlyout?.Invoke(this.TextButton);
+            this.TextButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowTextFlyout?.Invoke(this.TextButton);
 
             //@Focus
             // Before Flyout Showed, Don't let TextBox Got Focus.
@@ -94,7 +94,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.SetFontText(fontText);
             };
 
-            this.FullScreenButton.Click += (s, e) =>
+            this.FullScreenButton.Tapped += (s, e) =>
             {
                 this._vsIsFullScreen = !this._vsIsFullScreen;
                 this.VisualState = this.VisualState;//State
@@ -134,7 +134,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void OnNavigatedFrom()
         {
-            TouchbarButton.Instance = null;
+            TouchbarExtension.Instance = null;
         }
     }
 

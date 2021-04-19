@@ -11,14 +11,7 @@
     d:Background="{StaticResource AppForeground}"
     >
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="50"/>
-        </Grid.ColumnDefinitions>
+    <StackPanel Orientation="Horizontal">
         
         <Border Width="50" Visibility="{x:Bind DeviceLayoutTypeConverter(SettingViewModel.DeviceLayoutType), Mode=OneWay}">
             <Border.Resources>
@@ -29,26 +22,26 @@
             </Border.Child>
         </Border>
       
-        <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+        <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <Button x:Name="ConvertToCurvesButton" Grid.Column="2" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="ConvertToCurvesButton" Style="{StaticResource AppListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="ConvertToCurvesToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Button.Resources>
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ConvertToCurvesIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ContentControl Template="{StaticResource ConvertToCurvesIcon}"/>
-        </Button>
+        </ListViewItem>
 
-        <Rectangle Grid.Column="3" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+        <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <Button x:Name="MoreButton" Grid.Column="4" Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="MoreButton" Style="{StaticResource AppListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="MoreCreateToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-        </Button>
+        </ListViewItem>
 
-    </Grid>
+    </StackPanel>
 </Page>

@@ -136,9 +136,7 @@
       <DependentUpon>ToolsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ToolType.cs" />
-    <Compile Include="Touchbars\TouchbarButton.xaml.cs">
-      <DependentUpon>TouchbarButton.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Touchbars\TouchbarExtension.cs" />
     <Compile Include="Touchbars\TouchbarSlider.xaml.cs">
       <DependentUpon>TouchbarSlider.xaml</DependentUpon>
     </Compile>
@@ -362,15 +360,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="ToolsControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Touchbars\TouchbarButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -37,21 +37,21 @@
 
         <!--Reset-->
         <TextBlock x:Name="ResetTextBlock" Grid.Column="2" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="ResetButton" Grid.Column="3" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="ResetButton" Grid.Column="3" Style="{StaticResource AppListViewItemStyle}">
             <FontIcon Glyph="&#xF617;" FontSize="24" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
-        </Button>
+        </ListViewItem>
 
         <!--Fit-->
         <TextBlock x:Name="FitTextBlock" Grid.Column="4" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="FitButton" Grid.Column="5" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="FitButton" Grid.Column="5" Style="{StaticResource AppListViewItemStyle}">
             <FontIcon Glyph="&#xE9A6;" FontSize="22" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
-        </Button>
+        </ListViewItem>
 
         <!--Clear-->
         <TextBlock x:Name="ClearTextBlock" Grid.Column="6" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="ClearButton" Grid.Column="7" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="ClearButton" Grid.Column="7" Style="{StaticResource AppListViewItemStyle}">
             <FontIcon Glyph="&#xE106;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
+        </ListViewItem>
 
     </Grid>
 </Page>

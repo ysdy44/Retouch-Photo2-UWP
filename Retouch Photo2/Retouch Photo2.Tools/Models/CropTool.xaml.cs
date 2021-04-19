@@ -59,9 +59,9 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructReset();
-            this.ConstructFit();
-            this.ConstructClear();
+            this.ResetButton.Tapped += (s, e) => this.Reset();
+            this.FitButton.Tapped += (s, e) => this.Fit();
+            this.ClearButton.Tapped += (s, e) => this.Clear();
         }
 
 
@@ -174,13 +174,13 @@ namespace Retouch_Photo2.Tools.Models
         }
 
 
-        public void OnNavigatedTo() 
+        public void OnNavigatedTo()
         {
             this.ViewModel.Invalidate();//Invalidate
         }
         public void OnNavigatedFrom()
         {
-            TouchbarButton.Instance = null;
+            TouchbarExtension.Instance = null;
         }
 
     }
@@ -199,124 +199,115 @@ namespace Retouch_Photo2.Tools.Models
             this.ClearTextBlock.Text = resource.GetString("Tools_Crop_Clear");
         }
 
-        private void ConstructReset()
+        private void Reset()
         {
-            this.ResetButton.Click += (s, e) =>
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_ResetTransformer);
+
+            //Selection
+            this.SelectionViewModel.SetValue((layerage) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_ResetTransformer);
+                ILayer layer = layerage.Self;
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
+                if (layer.Transform.IsCrop)
                 {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Transform.IsCrop)
+                    //History
+                    var previous = layer.Transform.IsCrop;
+                    history.UndoAction += () =>
                     {
-                        //History
-                        var previous = layer.Transform.IsCrop;
-                        history.UndoAction += () =>
-                        {
-                            //Refactoring
-                            layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            layer.Transform.IsCrop = previous;
-                        };
-
                         //Refactoring
                         layer.IsRefactoringRender = true;
                         layer.IsRefactoringIconRender = true;
-                        layerage.RefactoringParentsRender();
-                        layerage.RefactoringParentsIconRender();
-                        layer.Transform.IsCrop = false;
-                    }
-                });
+                        layer.Transform.IsCrop = previous;
+                    };
 
-                //History
-                this.ViewModel.HistoryPush(history);
+                    //Refactoring
+                    layer.IsRefactoringRender = true;
+                    layer.IsRefactoringIconRender = true;
+                    layerage.RefactoringParentsRender();
+                    layerage.RefactoringParentsIconRender();
+                    layer.Transform.IsCrop = false;
+                }
+            });
 
-                this.ViewModel.Invalidate();//Invalidate
-            };
+            //History
+            this.ViewModel.HistoryPush(history);
+
+            this.ViewModel.Invalidate();//Invalidate
         }
 
-        private void ConstructFit()
+        private void Fit()
         {
-            this.FitButton.Click += (s, e) =>
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_FitTransformer);
+
+            //Selection
+            this.SelectionViewModel.SetValue((layerage) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_FitTransformer);
+                ILayer layer = layerage.Self;
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
+                if (layer.Transform.IsCrop)
                 {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Transform.IsCrop)
-                    {
                         //History
                         var previous1 = layer.Transform.Transformer;
-                        var previous2 = layer.Transform.IsCrop;
-                        history.UndoAction += () =>
-                        {
+                    var previous2 = layer.Transform.IsCrop;
+                    history.UndoAction += () =>
+                    {
                             //Refactoring
                             layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            layer.Transform.Transformer = previous1;
-                            layer.Transform.IsCrop = previous2;
-                        };
+                        layer.IsRefactoringIconRender = true;
+                        layer.Transform.Transformer = previous1;
+                        layer.Transform.IsCrop = previous2;
+                    };
 
-                        Transformer cropTransformer = layer.Transform.CropTransformer;
+                    Transformer cropTransformer = layer.Transform.CropTransformer;
                         //Refactoring
                         layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Transform.Transformer = cropTransformer;
-                        layer.Transform.IsCrop = false;
-                    }
-                });
+                    layer.IsRefactoringIconRender = true;
+                    layer.Transform.Transformer = cropTransformer;
+                    layer.Transform.IsCrop = false;
+                }
+            });
 
-                //History
-                this.ViewModel.HistoryPush(history);
+            //History
+            this.ViewModel.HistoryPush(history);
 
-                this.ViewModel.Invalidate();//Invalidate
-            };
+            this.ViewModel.Invalidate();//Invalidate
         }
 
-        private void ConstructClear()
+        private void Clear()
         {
-            this.ClearButton.Click += (s, e) =>
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_ClearTransformer);
+
+            //Selection
+            this.SelectionViewModel.SetValue((layerage) =>
             {
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetTransform_ClearTransformer);
+                ILayer layer = layerage.Self;
 
-                //Selection
-                this.SelectionViewModel.SetValue((layerage) =>
+                if (layer.Transform.IsCrop)
                 {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Transform.IsCrop)
-                    {
                         //History
                         var previous = true;
-                        history.UndoAction += () =>
-                        {
+                    history.UndoAction += () =>
+                    {
                             //Refactoring
                             layer.IsRefactoringRender = true;
-                            layer.IsRefactoringIconRender = true;
-                            layer.Transform.IsCrop = previous;
-                        };
+                        layer.IsRefactoringIconRender = true;
+                        layer.Transform.IsCrop = previous;
+                    };
 
                         //Refactoring
                         layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        layer.Transform.IsCrop = false;
-                    }
-                });
+                    layer.IsRefactoringIconRender = true;
+                    layer.Transform.IsCrop = false;
+                }
+            });
 
-                //History
-                this.ViewModel.HistoryPush(history);
+            //History
+            this.ViewModel.HistoryPush(history);
 
-                this.ViewModel.Invalidate();//Invalidate
-            };
+            this.ViewModel.Invalidate();//Invalidate
         }
 
     }

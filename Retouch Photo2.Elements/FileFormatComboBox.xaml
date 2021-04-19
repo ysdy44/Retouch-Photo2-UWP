@@ -22,42 +22,42 @@
                 <!--Jpeg-->
                 <VisualState x:Name="Jpeg">
                     <VisualState.Setters>
-                        <Setter Target = "JpegButton.IsEnabled" Value="False"/>
+                        <Setter Target = "JpegButton.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Png-->
                 <VisualState x:Name="Png">
                     <VisualState.Setters>
-                        <Setter Target = "PngButton.IsEnabled" Value="False"/>
+                        <Setter Target = "PngButton.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Bmp-->
                 <VisualState x:Name="Bmp">
                     <VisualState.Setters>
-                        <Setter Target = "BmpButton.IsEnabled" Value="False"/>
+                        <Setter Target = "BmpButton.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Gif-->
                 <VisualState x:Name="Gif">
                     <VisualState.Setters>
-                        <Setter Target = "GifButton.IsEnabled" Value="False"/>
+                        <Setter Target = "GifButton.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Tiff-->
                 <VisualState x:Name="Tiff">
                     <VisualState.Setters>
-                        <Setter Target = "TiffButton.IsEnabled" Value="False"/>
+                        <Setter Target = "TiffButton.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--JpegXR-->
                 <VisualState x:Name="JpegXR">
                     <VisualState.Setters>
-                        <Setter Target = "JpegXRButton.IsEnabled" Value="False"/>
+                        <Setter Target = "JpegXRButton.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState> 
 
@@ -75,34 +75,34 @@
 
 
         <!--Jpeg-->
-        <Button x:Name="JpegButton" Grid.Column="0" Padding="4,0" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+        <ListViewItem x:Name="JpegButton" Grid.Column="0" Padding="4,0" Style="{StaticResource AppLeftListViewItemStyle}">
             JPEG
-        </Button>
+        </ListViewItem>
 
         <!--Png-->
-        <Button x:Name="PngButton" Grid.Column="1" Padding="4,0" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <ListViewItem x:Name="PngButton" Grid.Column="1" Padding="4,0" Style="{StaticResource AppCenterListViewItemStyle}">
             PNG
-        </Button>
+        </ListViewItem>
 
         <!--Bmp-->
-        <Button x:Name="BmpButton" Grid.Column="2" Padding="4,0" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <ListViewItem x:Name="BmpButton" Grid.Column="2" Padding="4,0" Style="{StaticResource AppCenterListViewItemStyle}">
             BMP
-        </Button>
+        </ListViewItem>
 
         <!--Gif-->
-        <Button x:Name="GifButton" Grid.Column="3" Padding="4,0" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <ListViewItem x:Name="GifButton" Grid.Column="3" Padding="4,0" Style="{StaticResource AppCenterListViewItemStyle}">
             GIF
-        </Button>
+        </ListViewItem>
 
         <!--Tiff-->
-        <Button x:Name="TiffButton" Grid.Column="4" Padding="4,0" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <ListViewItem x:Name="TiffButton" Grid.Column="4" Padding="4,0" Style="{StaticResource AppCenterListViewItemStyle}">
             TIFF
-        </Button>
+        </ListViewItem>
 
         <!--JpegXR-->
-        <Button x:Name="JpegXRButton" Grid.Column="5" Padding="4,0" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+        <ListViewItem x:Name="JpegXRButton" Grid.Column="5" Padding="4,0" Style="{StaticResource AppRightListViewItemStyle}">
             JPEG XR
-        </Button>
+        </ListViewItem>
         
         
 

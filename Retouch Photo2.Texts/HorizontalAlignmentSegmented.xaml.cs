@@ -86,10 +86,10 @@ namespace Retouch_Photo2.Texts
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.Left.Click += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Left);//Delegate
-            this.Center.Click += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Center);//Delegate
-            this.Right.Click += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Right);//Delegate
-            this.Justified.Click += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Justified);//Delegate
+            this.Left.Tapped += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Left);//Delegate
+            this.Center.Tapped += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Center);//Delegate
+            this.Right.Tapped += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Right);//Delegate
+            this.Justified.Tapped += (s, e) => this.HorizontalAlignmentChanged?.Invoke(this, CanvasHorizontalAlignment.Justified);//Delegate
 
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }

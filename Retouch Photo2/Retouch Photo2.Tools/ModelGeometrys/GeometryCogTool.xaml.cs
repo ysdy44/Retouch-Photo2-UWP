@@ -89,19 +89,23 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
+            this.CountButton.Tapped += (s, e) => TouchbarExtension.Instance = this.CountButton;
             this.ConstructCount1();
             this.ConstructCount2();
 
+            this.InnerRadiusButton.Tapped += (s, e) => TouchbarExtension.Instance = this.InnerRadiusButton;
             this.ConstructInnerRadius1();
             this.ConstructInnerRadius2();
 
+            this.ToothButton.Tapped += (s, e) => TouchbarExtension.Instance = this.ToothButton;
             this.ConstructTooth1();
             this.ConstructTooth2();
 
+            this.NotchButton.Tapped += (s, e) => TouchbarExtension.Instance = this.NotchButton;
             this.ConstructNotch1();
             this.ConstructNotch2();
 
-            this.ConvertToCurvesButton.Click += (s, e) =>
+            this.ConvertToCurvesButton.Tapped += (s, e) =>
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
@@ -111,7 +115,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.ViewModel.ToolType = ToolType.Node;
             };
 
-            this.MoreButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
+            this.MoreButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
         }
 
 
@@ -150,7 +154,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void OnNavigatedFrom()
         {
-            TouchbarButton.Instance = null;
+            TouchbarExtension.Instance = null;
         }
     }
 

@@ -118,7 +118,7 @@ namespace Retouch_Photo2.Menus
 
         private void ConstructOpacity3()
         {
-            this.Opacity0Button.Click += (s, e) =>
+            this.Opacity0Button.Tapped += (s, e) =>
             {
                 float opacity = 0.0f;
                 this.SelectionViewModel.Opacity = opacity;
@@ -133,7 +133,7 @@ namespace Retouch_Photo2.Menus
                 );
             };
 
-            this.Opacity25Button.Click += (s, e) =>
+            this.Opacity25Button.Tapped += (s, e) =>
             {
                 float opacity = 0.25f;
                 this.SelectionViewModel.Opacity = opacity;
@@ -148,7 +148,7 @@ namespace Retouch_Photo2.Menus
                 );
             };
 
-            this.Opacity50Button.Click += (s, e) =>
+            this.Opacity50Button.Tapped += (s, e) =>
             {
                 float opacity = 0.5f;
                 this.SelectionViewModel.Opacity = opacity;
@@ -163,7 +163,7 @@ namespace Retouch_Photo2.Menus
                 );
             };
 
-            this.Opacity75Button.Click += (s, e) =>
+            this.Opacity75Button.Tapped += (s, e) =>
             {
                 float opacity = 0.75f;
                 this.SelectionViewModel.Opacity = opacity;
@@ -178,7 +178,7 @@ namespace Retouch_Photo2.Menus
                 );
             };
 
-            this.Opacity100Button.Click += (s, e) =>
+            this.Opacity100Button.Tapped += (s, e) =>
             {
                 float opacity = 1.0f;
                 this.SelectionViewModel.Opacity = opacity;
@@ -218,7 +218,7 @@ namespace Retouch_Photo2.Menus
         //Visibility
         private void ConstructVisibility()
         {
-            this.VisibilityButton.Click += (s, e) =>
+            this.VisibilityButton.Tapped += (s, e) =>
             {
                 Visibility value = (this.SelectionViewModel.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
                 this.SelectionViewModel.Visibility = value;

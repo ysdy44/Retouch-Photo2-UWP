@@ -13,15 +13,6 @@
         <!--Flyout-->
         <Flyout x:Name="Flyout" LightDismissOverlayMode="On" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
-                <ScrollViewer.Resources>
-                    <!--StaticResource-->
-                    <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
-                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
-                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
-                    <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
-                    <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
-                    <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
-                </ScrollViewer.Resources>
                 <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
                     <ListViewItem x:Name="FillItem">
@@ -51,7 +42,7 @@
     </UserControl.Resources>
 
 
-    <Button x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppRoundedButtonStyle}">
+    <ListViewItem x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -84,6 +75,6 @@
                 <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </ContentControl.Tag>
         </ContentControl>
-    </Button>
+    </ListViewItem>
 
 </UserControl>

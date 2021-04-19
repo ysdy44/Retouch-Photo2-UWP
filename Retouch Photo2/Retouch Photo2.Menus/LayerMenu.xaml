@@ -47,26 +47,26 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="Opacity0Button" Grid.Column="0" Padding="0" Style="{StaticResource AppRoundedButtonStyle}"
+                <ListViewItem x:Name="Opacity0Button" Grid.Column="0" Padding="0" Style="{StaticResource AppListViewItemStyle}"
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" >
                     0%
-                </Button>
-                <Button x:Name="Opacity25Button" Grid.Column="1" Padding="0" Style="{StaticResource AppRoundedButtonStyle}"
+                </ListViewItem>
+                <ListViewItem x:Name="Opacity25Button" Grid.Column="1" Padding="0" Style="{StaticResource AppListViewItemStyle}"
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" >
                     25%
-                </Button>
-                <Button x:Name="Opacity50Button" Grid.Column="2" Padding="0" Style="{StaticResource AppRoundedButtonStyle}"
+                </ListViewItem>
+                <ListViewItem x:Name="Opacity50Button" Grid.Column="2" Padding="0" Style="{StaticResource AppListViewItemStyle}"
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" >
                     50%
-                </Button>
-                <Button x:Name="Opacity75Button" Grid.Column="3" Padding="0" Style="{StaticResource AppRoundedButtonStyle}"
+                </ListViewItem>
+                <ListViewItem x:Name="Opacity75Button" Grid.Column="3" Padding="0" Style="{StaticResource AppListViewItemStyle}"
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" >
                     75%
-                </Button>
-                <Button x:Name="Opacity100Button" Grid.Column="4" Padding="0" Style="{StaticResource AppRoundedButtonStyle}"
+                </ListViewItem>
+                <ListViewItem x:Name="Opacity100Button" Grid.Column="4" Padding="0" Style="{StaticResource AppListViewItemStyle}"
                            IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" >
                     100%
-                </Button>
+                </ListViewItem>
             </Grid>
 
 
@@ -82,15 +82,22 @@
 
 
             <!--Visibility-->
-            <TextBlock x:Name="VisibilityTextBlock" Style="{StaticResource AppTextBlockStyle}" RelativePanel.AlignVerticalCenterWithPanel="True"/>
-            <ToggleButton x:Name="VisibilityButton" RelativePanel.AlignRightWithPanel="True"
-                               Style="{StaticResource AppCircleToggleButtonStyle}"
+            <TextBlock x:Name="VisibilityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <ListViewItem x:Name="VisibilityButton" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
                                IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
-                               IsChecked="{x:Bind VisibilityToBoolConverter(ViewModel.Visibility), Mode=OneWay}" >
-                <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"
+                               IsSelected="{x:Bind VisibilityToBoolConverter(ViewModel.Visibility), Mode=OneWay}" >
+                    <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"
                           MirroredWhenRightToLeft="True" />
-            </ToggleButton>
-
+                </ListViewItem>
+            </Grid>
+            
 
             <!--Tag Type-->
             <TextBlock x:Name="TagTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

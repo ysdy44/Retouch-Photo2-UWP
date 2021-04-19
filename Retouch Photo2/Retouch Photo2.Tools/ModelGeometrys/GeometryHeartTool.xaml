@@ -28,38 +28,38 @@
 
         <!--Spread-->
         <TextBlock x:Name="SpreadTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <tools:TouchbarButton x:Name="SpreadButton" 
+        <ListViewItem x:Name="SpreadButton" MinWidth="70" Style="{StaticResource AppListViewItemStyle}"
                            Content="{x:Bind SpreadToNumberConverter(SelectionViewModel.GeometryHeart_Spread), Mode=OneWay}">
-        <tools:TouchbarButton.Picker>
+            <tools:TouchbarExtension.Picker>
                 <hSVColorPickers:NumberPicker x:Name="SpreadPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                            Value="{x:Bind SpreadToNumberConverter(SelectionViewModel.GeometryHeart_Spread), Mode=OneWay}"/>
-            </tools:TouchbarButton.Picker>
-            <tools:TouchbarButton.Slider>
+            </tools:TouchbarExtension.Picker>
+            <tools:TouchbarExtension.Slider>
                 <tools:TouchbarSlider x:Name="SpreadSlider" 
                            Value="{x:Bind SelectionViewModel.GeometryHeart_Spread, Mode=OneWay}"/>
-            </tools:TouchbarButton.Slider>
-        </tools:TouchbarButton>
+            </tools:TouchbarExtension.Slider>
+        </ListViewItem>
 
         <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <Button x:Name="ConvertToCurvesButton"  Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="ConvertToCurvesButton"  Style="{StaticResource AppListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="ConvertToCurvesToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Button.Resources>
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ConvertToCurvesIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ContentControl Template="{StaticResource ConvertToCurvesIcon}"/>
-        </Button>
+        </ListViewItem>
 
-        <Rectangle Grid.Column="6" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+        <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <Button x:Name="MoreButton" Grid.Column="7" Width="50" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="MoreButton" Style="{StaticResource AppListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="MoreCreateToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
-        </Button>
+        </ListViewItem>
 
     </StackPanel>
 </Page>

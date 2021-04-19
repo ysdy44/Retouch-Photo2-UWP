@@ -86,10 +86,10 @@ namespace Retouch_Photo2.Strokes
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.Flat.Click += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Flat);//Delegate
-            this.Square.Click += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Square);//Delegate
-            this.Round.Click += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Round);//Delegate
-            this.Triangle.Click += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Triangle);//Delegate
+            this.Flat.Tapped += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Flat);//Delegate
+            this.Square.Tapped += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Square);//Delegate
+            this.Round.Tapped += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Round);//Delegate
+            this.Triangle.Tapped += (s, e) => this.CapChanged?.Invoke(this, CanvasCapStyle.Triangle);//Delegate
 
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }

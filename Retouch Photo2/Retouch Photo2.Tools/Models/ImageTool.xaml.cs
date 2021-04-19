@@ -12,6 +12,7 @@ using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Photos;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -27,7 +28,7 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
-        ViewModel MethodViewModel => App.MethodViewModel; 
+        ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
         Layerage MezzanineLayerage = null;
@@ -57,9 +58,9 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructSelect();
-            this.ConstructReplace();
-            this.ClearButton.Click += (s, e) => this.SelectionViewModel.Photocopier = new Photocopier();//Photocopier
+            this.SelectButton.Tapped += async (s, e) => this.Select();
+            this.ReplaceButton.Tapped += async (s, e) => this.Replace();
+            this.ClearButton.Tapped += (s, e) => this.SelectionViewModel.Photocopier = new Photocopier();//Photocopier
         }
 
 
@@ -215,7 +216,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void OnNavigatedFrom()
         {
-            TouchbarButton.Instance = null;
+            TouchbarExtension.Instance = null;
         }
 
     }
@@ -236,38 +237,32 @@ namespace Retouch_Photo2.Tools.Models
             this.ConvertToCurvesToolTip.Content = resource.GetString("Tools_ConvertToCurves");
         }
 
-        private void ConstructSelect()
+        private async Task Select()
         {
-            this.SelectButton.Click += async (s, e) =>
-            {
-                Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
+            Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
 
-                if (photo == null) return;
-                Photocopier photocopier = photo.ToPhotocopier();
-                this.SelectionViewModel.Photocopier = photocopier;
-            };
+            if (photo == null) return;
+            Photocopier photocopier = photo.ToPhotocopier();
+            this.SelectionViewModel.Photocopier = photocopier;
         }
 
-        private void ConstructReplace()
+        private async Task Replace()
         {
-            this.ReplaceButton.Click += async (s, e) =>
-            {
-                Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
+            Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
 
-                if (photo == null) return;
-                Photocopier photocopier = photo.ToPhotocopier();
-                this.SelectionViewModel.Photocopier = photocopier;
+            if (photo == null) return;
+            Photocopier photocopier = photo.ToPhotocopier();
+            this.SelectionViewModel.Photocopier = photocopier;
 
-                this.MethodViewModel.TLayerChanged<Photocopier, ImageLayer>
-                (
-                    layerType: LayerType.Image,
-                    set: (imageLayer) => imageLayer.Photocopier = photocopier,
+            this.MethodViewModel.TLayerChanged<Photocopier, ImageLayer>
+            (
+                layerType: LayerType.Image,
+                set: (imageLayer) => imageLayer.Photocopier = photocopier,
 
-                    type: HistoryType.LayersProperty_SetPhotocopier,
-                    getUndo: (imageLayer) => imageLayer.Photocopier,
-                    setUndo: (imageLayer, previous) => imageLayer.Photocopier = previous
-                );
-            };
+                type: HistoryType.LayersProperty_SetPhotocopier,
+                getUndo: (imageLayer) => imageLayer.Photocopier,
+                setUndo: (imageLayer, previous) => imageLayer.Photocopier = previous
+            );
         }
 
     }

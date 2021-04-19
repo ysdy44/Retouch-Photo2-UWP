@@ -86,10 +86,10 @@ namespace Retouch_Photo2.Strokes
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.Solid.Click += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Solid);//Delegate
-            this.Dash2.Click += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Dash);//Delegate
-            this.Dot.Click += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Dot);//Delegate
-            this.DashDot.Click += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.DashDot);//Delegate
+            this.Solid.Tapped += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Solid);//Delegate
+            this.Dash2.Tapped += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Dash);//Delegate
+            this.Dot.Tapped += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.Dot);//Delegate
+            this.DashDot.Tapped += (s, e) => this.DashChanged?.Invoke(this, CanvasDashStyle.DashDot);//Delegate
 
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
         }

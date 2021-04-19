@@ -68,11 +68,12 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
+            this.MidButton.Tapped += (s, e) => TouchbarExtension.Instance = this.MidButton;
             this.ConstructMid1();
             this.ConstructMid2();
             this.ConstructMirror();
 
-            this.ConvertToCurvesButton.Click += (s, e) =>
+            this.ConvertToCurvesButton.Tapped += (s, e) =>
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
@@ -82,7 +83,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.ViewModel.ToolType = ToolType.Node;
             };
 
-            this.MoreButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
+            this.MoreButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
         }
 
         /// <summary>
@@ -116,7 +117,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void OnNavigatedFrom()
         {
-            TouchbarButton.Instance = null;
+            TouchbarExtension.Instance = null;
         }
     }
 
@@ -192,7 +193,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructMirror()
         {
-            this.MirrorButton.Click += (s, e) =>
+            this.MirrorButton.Tapped += (s, e) =>
             {
                 float mid = 1.0f - this.SelectionViewModel.GeometryDiamond_Mid;
                 this.SelectionViewModel.GeometryDiamond_Mid = mid;

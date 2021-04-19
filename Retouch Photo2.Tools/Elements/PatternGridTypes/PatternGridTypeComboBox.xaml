@@ -48,7 +48,7 @@
     </UserControl.Resources>
 
 
-    <Button x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppRoundedButtonStyle}">
+    <ListViewItem x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
         
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -89,6 +89,6 @@
                 <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
             </ContentControl.Tag>
         </ContentControl>
-    </Button>
+    </ListViewItem>
 
 </UserControl>

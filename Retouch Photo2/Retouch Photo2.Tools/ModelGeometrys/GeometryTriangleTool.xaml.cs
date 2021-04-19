@@ -68,11 +68,13 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
+            this.CenterButton.Tapped += (s, e) => TouchbarExtension.Instance = this.CenterButton;
             this.ConstructCenter1();
             this.ConstructCenter2();
+
             this.ConstructMirror();
 
-            this.ConvertToCurvesButton.Click += (s, e) =>
+            this.ConvertToCurvesButton.Tapped += (s, e) =>
             {
                 if (this.SelectionViewModel.SelectionMode == ListViewSelectionMode.None) return;
 
@@ -82,7 +84,7 @@ namespace Retouch_Photo2.Tools.Models
                 this.ViewModel.ToolType = ToolType.Node;
             };
 
-            this.MoreButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
+            this.MoreButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowMoreFlyout?.Invoke(this.MoreButton);
         }
 
 
@@ -118,7 +120,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void OnNavigatedFrom()
         {
-            TouchbarButton.Instance = null;
+            TouchbarExtension.Instance = null;
         }
     }
 
@@ -193,7 +195,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructMirror()
         {
-            this.MirrorButton.Click += (s, e) =>
+            this.MirrorButton.Tapped += (s, e) =>
             {
                 float center = 1.0f - this.SelectionViewModel.GeometryTriangle_Center;
                 this.SelectionViewModel.GeometryTriangle_Center = center;

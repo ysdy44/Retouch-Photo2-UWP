@@ -187,7 +187,7 @@ namespace Retouch_Photo2.Elements
             this.ConstructFlowDirection();
             this.ConstructStrings();
             this.ConstructGroup();
-            this.Button.Click += (s, e) => this.Flyout.ShowAt(this.HeadGrid);
+            this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this.HeadGrid);
             this.Button.SizeChanged += (s, e) => this.FlyoutStackPanel.Width = e.NewSize.Width;
 
             //Alpha

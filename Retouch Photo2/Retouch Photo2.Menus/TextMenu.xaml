@@ -11,6 +11,19 @@
     d:DesignHeight="400"
     >
 
+    <UserControl.Resources>
+        <!--Flyout-->
+        <Flyout x:Name="FontSizeFlyout" Placement="Right" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListView x:Name="FontSizeListView" IsItemClickEnabled="True" SelectionMode="Single">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="x:Int32">
+                        <TextBlock Text="{x:Bind}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Flyout>
+    </UserControl.Resources>
+
 
     <SplitView x:Name="SplitView"
                DisplayMode="Inline" 
@@ -40,29 +53,29 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <ToggleButton x:Name="BoldButton" Grid.Column="0" Style="{StaticResource AppCircleToggleButtonStyle}"
-                                      IsChecked="{x:Bind FontWeightConverter(SelectionViewModel.FontWeight), Mode=OneWay}">
+                        <ListViewItem x:Name="BoldButton" Grid.Column="0" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
+                                      IsSelected="{x:Bind FontWeightConverter(SelectionViewModel.FontWeight), Mode=OneWay}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="BoldToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <SymbolIcon Symbol="Bold"/>
-                        </ToggleButton>
+                        </ListViewItem>
 
-                        <ToggleButton x:Name="ItalicButton" Grid.Column="1" Style="{StaticResource AppCircleToggleButtonStyle}"
-                                      IsChecked="{x:Bind FontStyleConverter(SelectionViewModel.FontStyle), Mode=OneWay}">
+                        <ListViewItem x:Name="ItalicButton" Grid.Column="1" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
+                                      IsSelected="{x:Bind FontStyleConverter(SelectionViewModel.FontStyle), Mode=OneWay}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="ItalicToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <SymbolIcon Symbol="Italic"/>
-                        </ToggleButton>
+                        </ListViewItem>
 
-                        <ToggleButton x:Name="UnderlineButton" Grid.Column="2" Style="{StaticResource AppCircleToggleButtonStyle}"
-                                      IsChecked="{x:Bind SelectionViewModel.Underline, Mode=OneWay}">
+                        <ListViewItem x:Name="UnderlineButton" Grid.Column="2" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
+                                      IsSelected="{x:Bind SelectionViewModel.Underline, Mode=OneWay}">
                             <ToolTipService.ToolTip>
                                 <ToolTip x:Name="UnderlineToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                             </ToolTipService.ToolTip>
                             <SymbolIcon Symbol="Underline"/>
-                        </ToggleButton>
+                        </ListViewItem>
 
                     </Grid>
 
@@ -76,7 +89,7 @@
 
                     <!--FontFamily-->
                     <TextBlock x:Name="FontFamilyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <Button x:Name="FontFamilyButton" HorizontalContentAlignment="Stretch" Style="{StaticResource AppRoundedButtonStyle}">
+                    <ListViewItem x:Name="FontFamilyButton" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
                         <ContentControl Style="{StaticResource AppIconReverseContentControlStyle}"
                                         Content="{x:Bind SelectionViewModel.FontFamily, Mode=OneWay}">
                             <ContentControl.Tag>
@@ -84,7 +97,7 @@
                                           MirroredWhenRightToLeft="True"/>
                             </ContentControl.Tag>
                         </ContentControl>
-                    </Button>
+                    </ListViewItem>
 
 
                     <!--FontSize-->
@@ -98,31 +111,11 @@
                         <hsvColorpickers:NumberPicker x:Name="FontSizePicker" Minimum="4" Maximum="1000" ButtonStyle="{StaticResource AppRoundedButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind FontSizeConverter(SelectionViewModel.FontSize), Mode=OneWay}" />
 
-                        <Button x:Name="FontSizeButton" Grid.Column="1" Style="{StaticResource AppRoundedButtonStyle}">
-                            <Button.Flyout>
-                                <Flyout Placement="Right" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-                                    <ListView x:Name="FontSizeListView" IsItemClickEnabled="True" SelectionMode="Single">
-                                        <ListView.Resources>
-                                            <!--StaticResource-->
-                                            <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
-                                            <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
-                                            <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
-                                            <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
-                                            <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
-                                            <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
-                                        </ListView.Resources>
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate x:DataType="x:Int32">
-                                                <TextBlock Text="{x:Bind}"/>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
-                                </Flyout>
-                            </Button.Flyout>
+                        <ListViewItem x:Name="FontSizeButton" Grid.Column="1" Style="{StaticResource AppListViewItemStyle}">
                             <FontIcon Margin="4,0" Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
                           RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"
                           MirroredWhenRightToLeft="True"/>
-                        </Button>
+                        </ListViewItem>
 
                     </Grid>
 
@@ -146,22 +139,13 @@
                 </Grid.RowDefinitions>
                 <ListView x:Name="FontFamilyListView" IsItemClickEnabled="True" SelectionMode="Single"
                           Visibility="Collapsed">
-                    <ListView.Resources>
-                        <!--StaticResource-->
-                        <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
-                        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
-                        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
-                        <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
-                        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
-                        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
-                    </ListView.Resources>
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="x:String">
                             <TextBlock FontFamily="{x:Bind}" Text="{x:Bind}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Button x:Name="CloseButton" Grid.Row="2" Style="{StaticResource AppRoundedButtonStyle}"/>
+                <ListViewItem x:Name="CloseButton" Grid.Row="2" Style="{StaticResource AppListViewItemStyle}"/>
             </Grid>
         </SplitView.Content>
     </SplitView>

@@ -16,15 +16,6 @@
         <!--Flyout-->
         <Flyout x:Name="Flyout" LightDismissOverlayMode="On" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ScrollViewer>
-                <ScrollViewer.Resources>
-                    <!--StaticResource-->
-                    <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}"/>
-                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}"/>
-                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}"/>
-                    <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
-                    <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
-                    <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
-                </ScrollViewer.Resources>
                 <StackPanel x:Name="FlyoutStackPanel">
 
                     <ListViewItem x:Name="SwatchesItem">
@@ -147,13 +138,13 @@
         </Grid>
 
         <!--Group-->
-        <Button x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
             <ContentControl x:Name="Control" Style="{StaticResource AppIconReverseContentControlStyle}">
                 <ContentControl.Tag>
                     <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
                 </ContentControl.Tag>
             </ContentControl>
-        </Button>
+        </ListViewItem>
 
         <ContentControl Height="4"/>
 

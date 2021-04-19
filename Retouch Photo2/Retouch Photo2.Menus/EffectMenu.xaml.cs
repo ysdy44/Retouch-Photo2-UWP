@@ -83,7 +83,7 @@ namespace Retouch_Photo2.Menus
                 if (e.NewSize == e.PreviousSize) return;
                 this.SplitView.OpenPaneLength = e.NewSize.Width;
             };
-            this.CloseButton.Click += (s, e) =>
+            this.CloseButton.Tapped += (s, e) =>
             {
                 this.ContentPresenter.Content = null;
                 this.SplitView.IsPaneOpen = true;

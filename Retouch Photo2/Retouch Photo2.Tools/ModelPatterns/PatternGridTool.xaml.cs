@@ -69,9 +69,11 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ConstructGridType();
 
+            this.HorizontalStepButton.Tapped += (s, e) => TouchbarExtension.Instance = this.HorizontalStepButton;
             this.ConstructHorizontalStep1();
             this.ConstructHorizontalStep2();
 
+            this.VerticalStepButton.Tapped += (s, e) => TouchbarExtension.Instance = this.VerticalStepButton;
             this.ConstructVerticalStep1();
             this.ConstructVerticalStep2();
         }
@@ -110,7 +112,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void OnNavigatedFrom()
         {
-            TouchbarButton.Instance = null;
+            TouchbarExtension.Instance = null;
         }
     }
 

@@ -46,40 +46,40 @@
 
         <Rectangle Grid.Column="1" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <!--Select-->
-            <TextBlock x:Name="SelectTextBlock" Grid.Column="2" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="SelectButton" Grid.Column="3" Style="{StaticResource AppRoundedButtonStyle}">
-                <Button.BorderBrush>
-                    <!--Storyboard-->
-                    <SolidColorBrush x:Name="SelectBorderBorderBrush" Color="{ThemeResource AppStrokeColor}"/>
-                </Button.BorderBrush>
-                <FontIcon Glyph="&#xE109;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-            </Button>
+        <!--Select-->
+        <TextBlock x:Name="SelectTextBlock" Grid.Column="2" Style="{StaticResource AppTextBlockStyle}"/>
+        <ListViewItem x:Name="SelectButton" Grid.Column="3" Style="{StaticResource AppListViewItemStyle}">
+            <ListViewItem.BorderBrush>
+                <!--Storyboard-->
+                <SolidColorBrush x:Name="SelectBorderBorderBrush" Color="{ThemeResource AppStrokeColor}"/>
+            </ListViewItem.BorderBrush>
+            <FontIcon Glyph="&#xE109;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+        </ListViewItem>
 
-            <!--Replace-->
-            <TextBlock x:Name="ReplaceTextBlock" Grid.Column="4" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="ReplaceButton" Grid.Column="5" Style="{StaticResource AppRoundedButtonStyle}"
+        <!--Replace-->
+        <TextBlock x:Name="ReplaceTextBlock" Grid.Column="4" Style="{StaticResource AppTextBlockStyle}"/>
+        <ListViewItem x:Name="ReplaceButton" Grid.Column="5" Style="{StaticResource AppListViewItemStyle}"
                  IsEnabled="{x:Bind SelectionViewModel.IsImageLayer, Mode=OneWay}">
-                <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
+            <FontIcon Glyph="&#xEB9F;" FontSize="22" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+        </ListViewItem>
 
         <!--Clear-->
         <TextBlock x:Name="ClearTextBlock" Grid.Column="6" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="ClearButton" Grid.Column="7" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="ClearButton" Grid.Column="7" Style="{StaticResource AppListViewItemStyle}">
             <FontIcon Glyph="&#xE106;" FontSize="20" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
-        </Button>
+        </ListViewItem>
 
         <Rectangle Grid.Column="8" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <Button x:Name="ConvertToCurvesButton" Grid.Column="9" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="ConvertToCurvesButton" Grid.Column="9" Style="{StaticResource AppListViewItemStyle}">
             <ToolTipService.ToolTip>
                 <ToolTip x:Name="ConvertToCurvesToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <Button.Resources>
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ConvertToCurvesIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ContentControl Template="{StaticResource ConvertToCurvesIcon}"/>
-        </Button>
+        </ListViewItem>
 
     </Grid>
 </Page>

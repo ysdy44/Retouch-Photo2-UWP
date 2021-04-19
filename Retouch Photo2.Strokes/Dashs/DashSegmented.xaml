@@ -21,28 +21,28 @@
                 <!--Solid-->
                 <VisualState x:Name="SolidState">
                     <VisualState.Setters>
-                        <Setter Target = "Solid.IsEnabled" Value="False"/>
+                        <Setter Target = "Solid.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Dash-->
                 <VisualState x:Name="DashState">
                     <VisualState.Setters>
-                        <Setter Target = "Dash2.IsEnabled" Value="False"/>
+                        <Setter Target = "Dash2.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Dot-->
                 <VisualState x:Name="DotState">
                     <VisualState.Setters>
-                        <Setter Target = "Dot.IsEnabled" Value="False"/>
+                        <Setter Target = "Dot.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--DashDot-->
                 <VisualState x:Name="DashDotState">
                     <VisualState.Setters>
-                        <Setter Target = "DashDot.IsEnabled" Value="False"/>
+                        <Setter Target = "DashDot.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -58,48 +58,48 @@
         </Grid.ColumnDefinitions>
 
         <!--Solid-->
-        <Button x:Name="Solid" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="Solid" Grid.Column="0" Style="{StaticResource AppListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Dashs/Icons/SolidIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource SolidIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <!--Dash-->
-        <Button x:Name="Dash2" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="Dash2" Grid.Column="1" Style="{StaticResource AppLeftListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Dashs/Icons/DashIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource DashIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <!--Dot-->
-        <Button x:Name="Dot" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="Dot" Grid.Column="2" Style="{StaticResource AppCenterListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Dashs/Icons/DotIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource DotIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <!--DashDot-->
-        <Button x:Name="DashDot" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="DashDot" Grid.Column="3" Style="{StaticResource AppRightListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Strokes/Dashs/Icons/DashDotIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource DashDotIcon}"/>
-        </Button>
+        </ListViewItem>
 
     </Grid>
 

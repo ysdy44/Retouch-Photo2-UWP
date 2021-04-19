@@ -55,9 +55,11 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
+            this.OffsetButton.Tapped += (s, e) => TouchbarExtension.Instance = this.OffsetButton;
             this.ConstructOffset1();
             this.ConstructOffset2();
 
+            this.HorizontalStepButton.Tapped += (s, e) => TouchbarExtension.Instance = this.HorizontalStepButton;
             this.ConstructHorizontalStep1();
             this.ConstructHorizontalStep2();
         }
@@ -96,7 +98,7 @@ namespace Retouch_Photo2.Tools.Models
         }
         public void OnNavigatedFrom()
         {
-            TouchbarButton.Instance = null;
+            TouchbarExtension.Instance = null;
         }
     }
 

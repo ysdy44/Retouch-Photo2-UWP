@@ -151,7 +151,7 @@ namespace Retouch_Photo2.Menus
             };
 
 
-            this.FilterButton.Click += (s, e) => this.FilterFlyout.ShowAt(this.FilterButton);
+            this.FilterButton.Tapped += (s, e) => this.FilterFlyout.ShowAt(this.FilterButton);
             this.FilterListView.ItemClick += (s, e) =>
             {
                 if (e.ClickedItem is Filter filter)
@@ -160,7 +160,7 @@ namespace Retouch_Photo2.Menus
                 }
             };
 
-            this.AddButton.Click += (s, e) => this.AdjustmentPageFlyout.ShowAt(this.AddButton);
+            this.AddButton.Tapped += (s, e) => this.AdjustmentPageFlyout.ShowAt(this.AddButton);
         }
     }
 

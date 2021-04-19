@@ -23,28 +23,28 @@
                 <!--New-->
                 <VisualState x:Name="NewState">
                     <VisualState.Setters>
-                        <Setter Target = "New.IsEnabled" Value="False"/>
+                        <Setter Target = "New.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Add-->
                 <VisualState x:Name="AddState">
                     <VisualState.Setters>
-                        <Setter Target = "Add.IsEnabled" Value="False"/>
+                        <Setter Target = "Add.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Subtract-->
                 <VisualState x:Name="SubtractState">
                     <VisualState.Setters>
-                        <Setter Target = "Subtract.IsEnabled" Value="False"/>
+                        <Setter Target = "Subtract.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--Intersect
                 <VisualState x:Name="IntersectState">
                     <VisualState.Setters>
-                        <Setter Target = "Intersect.IsEnabled" Value="False"/>
+                        <Setter Target = "Intersect.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
                 -->
@@ -60,48 +60,48 @@
         </Grid.ColumnDefinitions>
 
         <!--New-->
-        <Button x:Name="New" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="New" Grid.Column="0" Style="{StaticResource AppLeftListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/CompositeModes/Icons/NewIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource NewIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <!--Add-->
-        <Button x:Name="Add" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="Add" Grid.Column="1" Style="{StaticResource AppCenterListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/CompositeModes/Icons/AddIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource AddIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <!--Subtract-->
-        <Button x:Name="Subtract" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="Subtract" Grid.Column="2" Style="{StaticResource AppRightListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/CompositeModes/Icons/SubtractIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource SubtractIcon}"/>
-        </Button>
+        </ListViewItem>
 
         <!--Intersect     
-        <Button x:Name="Intersect" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
-            <Button.Resources>
+        <ListViewItem x:Name="Intersect" Grid.Column="3" Style="{StaticResource AppRightListViewItemStyle}">
+            <ListViewItem.Resources>
                 <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/CompositeModes/Icons/IntersectIcon.xaml"/>
-            </Button.Resources>
+            </ListViewItem.Resources>
             <ToolTipService.ToolTip>
                 <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <ContentControl Template="{StaticResource IntersectIcon}"/>
-        </Button>
+        </ListViewItem>
         -->
 
     </Grid>

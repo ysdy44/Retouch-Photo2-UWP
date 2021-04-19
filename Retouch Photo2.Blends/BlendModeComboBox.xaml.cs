@@ -63,7 +63,7 @@ namespace Retouch_Photo2.Blends
             this.ConstructStrings();
             this.ConstructGroup();
 
-            this.Button.Click += (s, e) => this.Flyout.ShowAt(this);
+            this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
         }
     }
 

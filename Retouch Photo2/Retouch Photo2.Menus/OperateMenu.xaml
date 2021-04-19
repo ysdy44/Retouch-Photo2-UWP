@@ -32,162 +32,162 @@
 
             <!--Transform-->
             <TextBlock x:Name="Transform" Grid.ColumnSpan="4" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="Transform_FlipHorizontal" Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}">
-                <Button.Resources>
+            <ListViewItem x:Name="Transform_FlipHorizontal" Grid.Column="0" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppLeftListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/TransformIcons/FlipHorizontalIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource FlipHorizontalIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
-            <Button x:Name="Transform_FlipVertical" Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
-                <Button.Resources>
+            </ListViewItem>
+            <ListViewItem x:Name="Transform_FlipVertical" Grid.Column="1" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRightListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/TransformIcons/FlipVerticalIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource FlipVerticalIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
-            <Button x:Name="Transform_RotateLeft" Grid.Column="2" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}">
-                <Button.Resources>
+            </ListViewItem>
+            <ListViewItem x:Name="Transform_RotateLeft" Grid.Column="2" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppLeftListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/TransformIcons/RotateLeftIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource RotateLeftIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
-            <Button x:Name="Transform_RotateRight" Grid.Column="3" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
-                <Button.Resources>
+            </ListViewItem>
+            <ListViewItem x:Name="Transform_RotateRight" Grid.Column="3" Grid.Row="1" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRightListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/TransformIcons/RotateRightIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource RotateRightIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
+            </ListViewItem>
 
 
             <!--Arrange-->
             <TextBlock x:Name="Arrange" Grid.ColumnSpan="4" Grid.Row="2" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="Arrange_MoveBack" Grid.Column="0" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}">
-                <Button.Resources>
+            <ListViewItem x:Name="Arrange_MoveBack" Grid.Column="0" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppLeftListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/ArrangeIcons/MoveBackIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource MoveBackIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
-            <Button x:Name="Arrange_BackOne" Grid.Column="1" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}">
-                <Button.Resources>
+            </ListViewItem>
+            <ListViewItem x:Name="Arrange_BackOne" Grid.Column="1" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppCenterListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/ArrangeIcons/BackOneIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource BackOneIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
-            <Button x:Name="Arrange_ForwardOne" Grid.Column="2" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}">
-                <Button.Resources>
+            </ListViewItem>
+            <ListViewItem x:Name="Arrange_ForwardOne" Grid.Column="2" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppCenterListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/ArrangeIcons/ForwardOneIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource ForwardOneIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
-            <Button x:Name="Arrange_MoveFront" Grid.Column="3" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
-                <Button.Resources>
+            </ListViewItem>
+            <ListViewItem x:Name="Arrange_MoveFront" Grid.Column="3" Grid.Row="3" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}" Style="{StaticResource AppRightListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/ArrangeIcons/MoveFrontIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource MoveFrontIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
+            </ListViewItem>
 
 
             <!--Horizontally-->
             <TextBlock x:Name="Horizontally" Grid.ColumnSpan="4" Grid.Row="4" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="Horizontally_Left" Grid.Column="0" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}">
-                <Button.Resources>
+            <ListViewItem x:Name="Horizontally_Left" Grid.Column="0" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppLeftListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/HorizontallyIcons/LeftIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource LeftIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
-            <Button x:Name="Horizontally_Center" Grid.Column="1" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}">
-                <Button.Resources>
+            </ListViewItem>
+            <ListViewItem x:Name="Horizontally_Center" Grid.Column="1" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppCenterListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/HorizontallyIcons/CenterIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource CenterIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
-            <Button x:Name="Horizontally_Right" Grid.Column="2" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
-                <Button.Resources>
+            </ListViewItem>
+            <ListViewItem x:Name="Horizontally_Right" Grid.Column="2" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRightListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/HorizontallyIcons/RightIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource RightIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
-            <Button x:Name="Horizontally_HorizontallySpace" Grid.Column="3" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}">
-                <Button.Resources>
+            </ListViewItem>
+            <ListViewItem x:Name="Horizontally_HorizontallySpace" Grid.Column="3" Grid.Row="5" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/HorizontallyIcons/HorizontallySpaceIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource HorizontallySpaceIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
+            </ListViewItem>
 
 
             <!--Vertically-->
             <TextBlock x:Name="Vertically" Grid.ColumnSpan="4" Grid.Row="6" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="Vertically_Top" Grid.Column="0" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonLeftStyle}">
-                <Button.Resources>
+            <ListViewItem x:Name="Vertically_Top" Grid.Column="0" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppLeftListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/VerticallyIcons/TopIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource TopIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
-            <Button x:Name="Vertically_Middle" Grid.Column="1" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonCenterStyle}">
-                <Button.Resources>
+            </ListViewItem>
+            <ListViewItem x:Name="Vertically_Middle" Grid.Column="1" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppCenterListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/VerticallyIcons/MiddleIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource MiddleIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
-            <Button x:Name="Vertically_Bottom" Grid.Column="2" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRoundedButtonRightStyle}">
-                <Button.Resources>
+            </ListViewItem>
+            <ListViewItem x:Name="Vertically_Bottom" Grid.Column="2" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" Style="{StaticResource AppRightListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/VerticallyIcons/BottomIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource BottomIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
-            <Button x:Name="Vertically_VerticallySpace" Grid.Column="3" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppRoundedButtonStyle}">
-                <Button.Resources>
+            </ListViewItem>
+            <ListViewItem x:Name="Vertically_VerticallySpace" Grid.Column="3" Grid.Row="7" IsEnabled="{x:Bind SelectionViewModel.SelectionMultiple, Mode=OneWay}" Style="{StaticResource AppListViewItemStyle}">
+                <ListViewItem.Resources>
                     <ResourceDictionary Source="ms-appx:///Retouch Photo2.Operates/VerticallyIcons/VerticallySpaceIcon.xaml"/>
-                </Button.Resources>
+                </ListViewItem.Resources>
                 <edits:EditControl Template="{StaticResource VerticallySpaceIcon}"/>
                 <ToolTipService.ToolTip>
                     <ToolTip Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
                 </ToolTipService.ToolTip>
-            </Button>
+            </ListViewItem>
 
         </Grid>
     </ScrollViewer>

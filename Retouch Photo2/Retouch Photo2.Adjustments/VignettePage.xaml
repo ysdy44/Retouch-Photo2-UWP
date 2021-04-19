@@ -72,9 +72,9 @@
 
         <!--Color-->
         <TextBlock x:Name="ColorTextBlock" Grid.Row="3" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
-        <Button x:Name="ColorButton" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Style="{StaticResource AppRoundedButtonStyle}">
+        <ListViewItem x:Name="ColorButton" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Style="{StaticResource AppListViewItemStyle}">
             <brushs:ColorEllipse x:Name="ColorEllipse" Color="Black"/>
-        </Button>
+        </ListViewItem>
 
     </Grid>
 </Page>
