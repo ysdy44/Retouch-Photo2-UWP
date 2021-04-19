@@ -22,42 +22,42 @@
                 <!--DPI72-->
                 <VisualState x:Name="DPI72">
                     <VisualState.Setters>
-                        <Setter Target = "DPI72Button.IsEnabled" Value="False"/>
+                        <Setter Target = "DPI72Button.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--DPI96-->
                 <VisualState x:Name="DPI96">
                     <VisualState.Setters>
-                        <Setter Target = "DPI96Button.IsEnabled" Value="False"/>
+                        <Setter Target = "DPI96Button.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--DPI144-->
                 <VisualState x:Name="DPI144">
                     <VisualState.Setters>
-                        <Setter Target = "DPI144Button.IsEnabled" Value="False"/>
+                        <Setter Target = "DPI144Button.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--DPI192-->
                 <VisualState x:Name="DPI192">
                     <VisualState.Setters>
-                        <Setter Target = "DPI192Button.IsEnabled" Value="False"/>
+                        <Setter Target = "DPI192Button.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--DPI300-->
                 <VisualState x:Name="DPI300">
                     <VisualState.Setters>
-                        <Setter Target = "DPI300Button.IsEnabled" Value="False"/>
+                        <Setter Target = "DPI300Button.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
                 <!--DPI400-->
                 <VisualState x:Name="DPI400">
                     <VisualState.Setters>
-                        <Setter Target = "DPI400Button.IsEnabled" Value="False"/>
+                        <Setter Target = "DPI400Button.IsSelected" Value="True"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -75,34 +75,34 @@
 
 
         <!--DPI72-->
-        <Button x:Name="DPI72Button" Grid.Column="0" Style="{StaticResource AppRoundedSelectedButtonLeftStyle}">
+        <ListViewItem x:Name="DPI72Button" Grid.Column="0" Style="{StaticResource AppLeftListViewItemStyle}">
             72
-        </Button>
+        </ListViewItem>
 
         <!--DPI96-->
-        <Button x:Name="DPI96Button" Grid.Column="1" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <ListViewItem x:Name="DPI96Button" Grid.Column="1" Style="{StaticResource AppCenterListViewItemStyle}">
             96
-        </Button>
+        </ListViewItem>
 
         <!--DPI144-->
-        <Button x:Name="DPI144Button" Grid.Column="2" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <ListViewItem x:Name="DPI144Button" Grid.Column="2" Style="{StaticResource AppCenterListViewItemStyle}">
             144
-        </Button>
+        </ListViewItem>
 
         <!--DPI192-->
-        <Button x:Name="DPI192Button" Grid.Column="3" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <ListViewItem x:Name="DPI192Button" Grid.Column="3" Style="{StaticResource AppCenterListViewItemStyle}">
             192
-        </Button>
+        </ListViewItem>
 
         <!--DPI300-->
-        <Button x:Name="DPI300Button" Grid.Column="4" Style="{StaticResource AppRoundedSelectedButtonCenterStyle}">
+        <ListViewItem x:Name="DPI300Button" Grid.Column="4" Style="{StaticResource AppCenterListViewItemStyle}">
             300
-        </Button>
+        </ListViewItem>
 
         <!--DPI400-->
-        <Button x:Name="DPI400Button" Grid.Column="5" Style="{StaticResource AppRoundedSelectedButtonRightStyle}">
+        <ListViewItem x:Name="DPI400Button" Grid.Column="5" Style="{StaticResource AppRightListViewItemStyle}">
             400
-        </Button>
+        </ListViewItem>
 
     </Grid>
 

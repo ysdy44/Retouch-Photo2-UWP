@@ -3,7 +3,6 @@
 // Difficult:         ★★
 // Only:              ★★
 // Complete:      ★★
-using Microsoft.Graphics.Canvas;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -35,7 +34,7 @@ namespace Retouch_Photo2.Elements
     {
 
         //@VisualState
-        DPI _vsDPI;
+        private DPI _vsDPI;
         /// <summary> 
         /// Represents the visual appearance of UI elements in a specific state.
         /// </summary>
@@ -57,29 +56,16 @@ namespace Retouch_Photo2.Elements
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
 
-        #region DependencyProperty
-
-
         /// <summary> Gets or sets the dots-per-inch (DPI). </summary>
         public DPI DPI
         {
-            get  => (DPI)base.GetValue(DPIProperty);
-            set => base.SetValue(DPIProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "DPIComboBox.DPI" /> dependency property. </summary>
-        public static readonly DependencyProperty DPIProperty = DependencyProperty.Register(nameof(DPI), typeof(DPI), typeof(DPIComboBox), new PropertyMetadata(DPI.DPI144, (sender, e) =>
-        {
-            DPIComboBox control = (DPIComboBox)sender;
-
-            if (e.NewValue is DPI value)
+            get => this._vsDPI;
+            set
             {
-                control._vsDPI = value;
-                control.VisualState = control.VisualState;//State
+                this._vsDPI = value;
+                this.VisualState = this.VisualState;//State
             }
-        }));
-
-
-        #endregion
+        }
 
 
         //@Construct
@@ -89,11 +75,11 @@ namespace Retouch_Photo2.Elements
         {
             this.InitializeComponent();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
-            this.DPI72Button.Click += (s, e) => this.DPI = DPI.DPI72;
-            this.DPI96Button.Click += (s, e) => this.DPI = DPI.DPI96;
-            this.DPI144Button.Click += (s, e) => this.DPI = DPI.DPI144;
-            this.DPI192Button.Click += (s, e) => this.DPI = DPI.DPI192;
-            this.DPI300Button.Click += (s, e) => this.DPI = DPI.DPI300;
+            this.DPI72Button.Tapped += (s, e) => this.DPI = DPI.DPI72;
+            this.DPI96Button.Tapped += (s, e) => this.DPI = DPI.DPI96;
+            this.DPI144Button.Tapped += (s, e) => this.DPI = DPI.DPI144;
+            this.DPI192Button.Tapped += (s, e) => this.DPI = DPI.DPI192;
+            this.DPI300Button.Tapped += (s, e) => this.DPI = DPI.DPI300;
         }
 
     }

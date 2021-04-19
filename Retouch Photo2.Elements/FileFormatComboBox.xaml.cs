@@ -37,7 +37,7 @@ namespace Retouch_Photo2.Elements
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
-
+        
         #region DependencyProperty
 
 
@@ -71,12 +71,12 @@ namespace Retouch_Photo2.Elements
         {
             this.InitializeComponent();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
-            this.JpegButton.Click += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Jpeg;
-            this.PngButton.Click += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Png;
-            this.BmpButton.Click += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Bmp;
-            this.GifButton.Click += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Gif;
-            this.TiffButton.Click += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Tiff;
-            this.JpegXRButton.Click += (s, e) => this.FileFormat = CanvasBitmapFileFormat.JpegXR;
+            this.JpegButton.Tapped += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Jpeg;
+            this.PngButton.Tapped += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Png;
+            this.BmpButton.Tapped += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Bmp;
+            this.GifButton.Tapped += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Gif;
+            this.TiffButton.Tapped += (s, e) => this.FileFormat = CanvasBitmapFileFormat.Tiff;
+            this.JpegXRButton.Tapped += (s, e) => this.FileFormat = CanvasBitmapFileFormat.JpegXR;
         }
 
 

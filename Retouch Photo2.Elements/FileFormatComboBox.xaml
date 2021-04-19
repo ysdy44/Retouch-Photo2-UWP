@@ -65,12 +65,11 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="7*"/>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="8*"/>
-            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
 
@@ -100,7 +99,7 @@
         </ListViewItem>
 
         <!--JpegXR-->
-        <ListViewItem x:Name="JpegXRButton" Grid.Column="5" Padding="4,0" Style="{StaticResource AppRightListViewItemStyle}">
+        <ListViewItem x:Name="JpegXRButton" Visibility="Collapsed" Grid.Column="5" Padding="4,0" Style="{StaticResource AppRightListViewItemStyle}">
             JPEG XR
         </ListViewItem>
         
