@@ -297,6 +297,8 @@ namespace Retouch_Photo2
         }
         private void ShowRenameDialog()
         {
+            this.LayerFlyout.Hide();
+
             this.RenameDialog.Show();
 
             this.RenameTextBox.Text = this.SelectionViewModel.LayerName;

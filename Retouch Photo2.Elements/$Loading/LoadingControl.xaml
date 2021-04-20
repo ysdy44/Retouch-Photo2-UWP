@@ -28,7 +28,7 @@
     <Border Background="Transparent" Visibility="{x:Bind VisibilityConverter(State), Mode=OneWay}">
 
         <!--Root-->
-        <Border CornerRadius="3" Width="140" Height="120" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}">
+        <Border CornerRadius="3" Width="140" Height="120" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}">
             <Grid Padding="6" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
