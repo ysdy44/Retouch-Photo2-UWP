@@ -200,6 +200,12 @@
     <Compile Include="Toolkit\DropShadowPanel\DropShadowPanel.Properties.cs" />
     <Compile Include="Toolkit\Helpers\DesignTimeHelpers.cs" />
     <Compile Include="Toolkit\ItemsReorderAnimation.cs" />
+    <Compile Include="Toolkit\StringExtensions.cs" />
+    <Compile Include="Toolkit\TextBox\TextBoxExtensions.Mask.Internals.cs" />
+    <Compile Include="Toolkit\TextBox\TextBoxExtensions.Mask.Properties.cs" />
+    <Compile Include="Toolkit\TextBox\TextBoxExtensions.Regex.Data.cs" />
+    <Compile Include="Toolkit\TextBox\TextBoxExtensions.Regex.Internals.cs" />
+    <Compile Include="Toolkit\TextBox\TextBoxExtensions.Regex.Properties.cs" />
     <Compile Include="XMLs\XML.DeviceLayout.cs" />
     <EmbeddedResource Include="Properties\Retouch_Photo2.Elements.rd.xml" />
   </ItemGroup>
