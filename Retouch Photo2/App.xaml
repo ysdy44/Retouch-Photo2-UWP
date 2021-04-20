@@ -22,7 +22,7 @@
 
                 <ResourceDictionary x:Key="Light">
 
-                    <Color x:Key="AppForegroundColor" >#F2F3F5</Color>
+                    <Color x:Key="AppForegroundColor" >#FFFFFF</Color>
                     <Color x:Key="AppBackgroundColor" >#F2F4F5</Color>
                     <Color x:Key="AppBorderBrushColor" >#BEBCC7</Color>
 
