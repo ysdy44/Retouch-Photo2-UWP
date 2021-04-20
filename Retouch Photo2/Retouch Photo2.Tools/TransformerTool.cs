@@ -7,6 +7,7 @@ using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.ViewModels;
 using System.Numerics;
 using Windows.UI.Xaml.Controls;
@@ -66,7 +67,7 @@ namespace Retouch_Photo2.Tools
 
             //Snap
             if (this.IsSnap && this.TransformerMode.IsScale()) canvasPoint = this.Snap.Snap(canvasPoint);
-
+            
             //Selection
             /// Scaling <see cref="TextArtisticLayer"/> equally.
             bool isRatio = this.IsRatio || this.SelectionViewModel.LayerType == LayerType.TextArtistic;

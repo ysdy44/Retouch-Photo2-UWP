@@ -31,6 +31,8 @@ namespace Retouch_Photo2.Tools
         BorderBorderSnap Snap => this.ViewModel.BorderBorderSnap;
         bool IsSnap => this.SettingViewModel.IsSnap;
 
+        bool IsMove = false;
+
 
         public bool Started(Vector2 startingPoint, Vector2 point)
         {
@@ -38,8 +40,8 @@ namespace Retouch_Photo2.Tools
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
             Vector2 canvasStartingPoint = Vector2.Transform(startingPoint, inverseMatrix);
-            bool isFillContainsPoint = this.GetIsSelectedLayer(canvasStartingPoint);
-            if (isFillContainsPoint == false) return false;
+            this.IsMove = this.GetIsFillContainsPointWithSelectedLayer(canvasStartingPoint);
+            if (this.IsMove == false) return false;
 
             //Cursor
             CoreCursorExtension.Move_ManipulationStarted();
@@ -56,6 +58,7 @@ namespace Retouch_Photo2.Tools
         }
         public bool Delta(Vector2 startingPoint, Vector2 point)
         {
+            if (this.IsMove == false) return false;
             if (this.Mode == ListViewSelectionMode.None) return false;
 
             Matrix3x2 inverseMatrix = this.ViewModel.CanvasTransformer.GetInverseMatrix();
@@ -72,6 +75,7 @@ namespace Retouch_Photo2.Tools
         }
         public bool Complete(Vector2 startingPoint, Vector2 point)
         {
+            if (this.IsMove == false) return false;
             if (this.Mode == ListViewSelectionMode.None) return false;
 
             //Cursor
@@ -97,6 +101,7 @@ namespace Retouch_Photo2.Tools
 
         public void Draw(CanvasDrawingSession drawingSession)
         {
+            if (this.IsMove == false) return;
             if (this.Mode == ListViewSelectionMode.None) return;
 
             //Transformer
@@ -108,7 +113,7 @@ namespace Retouch_Photo2.Tools
         }
 
 
-        private bool GetIsSelectedLayer(Vector2 canvasStartingPoint)
+        private bool GetIsFillContainsPointWithSelectedLayer(Vector2 canvasStartingPoint)
         {
             switch (this.Mode)
             {
