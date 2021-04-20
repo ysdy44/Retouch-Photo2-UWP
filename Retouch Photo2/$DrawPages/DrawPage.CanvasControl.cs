@@ -1,5 +1,4 @@
 ﻿using FanKit.Transformers;
-using Microsoft.Graphics.Canvas.UI.Xaml;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
@@ -22,6 +21,32 @@ namespace Retouch_Photo2
         InputDevice _inputDevice = InputDevice.None;
 
 
+        //CanvasControl
+        private void CanvasControlInvalidate(InvalidateMode mode)
+        {
+            //High-Display screen
+            if (this.ToolDrawCanvasControl.Dpi > 96.0f)
+            {
+                switch (mode)
+                {
+                    case InvalidateMode.Thumbnail:
+                        float dpiScale = 96.0f / this.ToolDrawCanvasControl.Dpi;
+                        if (dpiScale < 0.4f) dpiScale = 0.4f;
+                        if (dpiScale > 1.0f) dpiScale = 1.0f;
+
+                        this.LayerRenderCanvasControl.DpiScale = dpiScale;
+                        break;
+                    case InvalidateMode.HD:
+                        this.LayerRenderCanvasControl.DpiScale = 1.0f;
+                        break;
+                }
+            }
+
+            this.LayerRenderCanvasControl.Invalidate();
+            this.ToolDrawCanvasControl.Invalidate();
+        }
+
+
         // LayerRender & ToolDraw
         private void ConstructCanvasControl()
         {
@@ -40,7 +65,7 @@ namespace Retouch_Photo2
             this.LayerRenderCanvasControl.Draw += (sender, args) =>
             {
                 //Render & Crad
-                this.DrawRenderAndCrad(args.DrawingSession);
+                this.ViewModel.DrawRenderAndCrad(args.DrawingSession, this.ShadowColor);
             };
 
 

@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:local="using:Retouch_Photo2"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
@@ -1135,7 +1136,12 @@
         <!--Body-->
         <ScrollViewer x:Name="ScrollViewer" Grid.RowSpan="2" Padding="20,0">
             <Border>
-                <GridView x:Name="ListView" ItemsSource="{x:Bind CollectionViewSource.View}" MaxWidth="800" IsItemClickEnabled="False" SelectionMode="None">
+                <GridView                      
+                    MaxWidth="800"                       
+                    IsItemClickEnabled="False"                       
+                    SelectionMode="None"                     
+                    ItemsSource="{x:Bind CollectionViewSource.View}" 
+                    animations:ItemsReorderAnimation.Duration="0:0:0.3">
 
                     <GridView.ItemContainerTransitions>
                         <TransitionCollection>

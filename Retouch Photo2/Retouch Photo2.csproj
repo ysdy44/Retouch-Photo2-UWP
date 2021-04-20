@@ -109,8 +109,7 @@
     <Compile Include="%24DrawPages\DrawPage.AppBar.cs" />
     <Compile Include="%24DrawPages\DrawPage.Gallery.cs" />
     <Compile Include="%24DrawPages\DrawPage.LayerManager.cs" />
-    <Compile Include="%24DrawPages\DrawPage.CanvasControl.Render.cs" />
-    <Compile Include="%24DrawPages\DrawPage.CanvasControl.Operator.cs" />
+    <Compile Include="%24DrawPages\DrawPage.CanvasControl.cs" />
     <Compile Include="%24MainPages\IProjectViewItem.cs" />
     <Compile Include="%24MainPages\ProjectViewItem.xaml.cs">
       <DependentUpon>ProjectViewItem.xaml</DependentUpon>
