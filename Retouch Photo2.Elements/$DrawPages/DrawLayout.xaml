@@ -105,7 +105,7 @@
                 </VisualState>
 
                 <VisualStateGroup.Transitions>
-                    
+
                     <!--WritableCollapsed>WritablePhone-->
                     <VisualTransition From="WritableCollapsed" To="WritablePhone" GeneratedDuration="0:0:0.2">
                         <VisualTransition.GeneratedEasingFunction>
@@ -118,7 +118,7 @@
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WritableBorder" Storyboard.TargetProperty="HorizontalAlignment" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="Stretch"/>
                             </ObjectAnimationUsingKeyFrames>
-                            
+
                             <DoubleAnimation Storyboard.TargetName="WritableTransform" Storyboard.TargetProperty="Y" From="50" To="0" Duration="0:0:0.2">
                                 <DoubleAnimation.EasingFunction>
                                     <CircleEase EasingMode="EaseOut"/>
@@ -195,7 +195,7 @@
 
                         <!--RightIcon-->
                         <Setter Target = "_RightIcon.Visibility" Value="Collapsed"/>
-                        
+
                         <!--Foot-->
                         <Setter Target = "FootPanel.Visibility" Value="Collapsed"/>
 
@@ -333,7 +333,7 @@
                         <Setter Target = "FootPanel.CornerRadius" Value="6"/>
                         <Setter Target = "FootPanel.Margin" Value="10,10"/>
                         <Setter Target = "FootPanel.BorderThickness" Value="1"/>
-                        
+
                         <!--Head-->
                         <Setter Target = "HeadBorder.(Grid.Column)" Value="0"/>
                         <Setter Target = "HeadBorder.(Grid.ColumnSpan)" Value="2"/>
@@ -357,7 +357,7 @@
 
                         <Setter Target = "GalleryButton.Visibility" Value="Collapsed"/>
                         <Setter Target = "PCGalleryButton.Visibility" Value="Visible"/>
-                        
+
                     </VisualState.Setters>
                 </VisualState>
 
@@ -1119,7 +1119,7 @@
                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PCGalleryButton" Storyboard.TargetProperty="Visibility" Duration="0">
                                 <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                             </ObjectAnimationUsingKeyFrames>
-                            
+
                         </Storyboard>
                     </VisualTransition>
 
@@ -1267,13 +1267,8 @@
             <Border.RenderTransform>
                 <TranslateTransform x:Name="WritableTransform" Y="50"/>
             </Border.RenderTransform>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.ColumnSpan="3" Padding="10,0" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppTitle}">
+            <StackPanel>
+                <Grid Height="50" Padding="10,0" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="50"/>
@@ -1296,7 +1291,7 @@
                     </Button>
                 </Grid>
                 <ContentPresenter x:Name="WritableContentPresenter" Grid.Column="1" Grid.Row="1" Padding="10,0" VerticalAlignment="Top"/>
-            </Grid>
+            </StackPanel>
         </Border>
 
 

@@ -23,6 +23,7 @@ namespace Retouch_Photo2
 
         //@ViewModel
         IList<IProjectViewItem> Items => App.Projects;
+        int Count => this.Items.Count;
         IEnumerable<IProjectViewItem> SelectedItems => from i in this.Items where i.IsSelected select i;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
@@ -36,7 +37,11 @@ namespace Retouch_Photo2
             this.InitializeComponent();
             this.ConstructFlowDirection();
             this.ConstructStrings();
-            this.Loaded += (s, e) => this.LoadAllProjectViewItems();
+            this.Loaded += (s, e) =>
+            {
+                this.MainLayout.Count = this.Count;
+                this.MainLayout.State = MainPageState.Main;
+            };
             this.ConstructInitialControl();
             this.ConstructDragAndDrop();
 

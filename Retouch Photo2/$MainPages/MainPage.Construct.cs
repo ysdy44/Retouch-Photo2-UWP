@@ -105,6 +105,7 @@ namespace Retouch_Photo2
         {
             this.InitialSampleButton.Click += async (s, e) =>
             {
+                this.MainLayout.Count = 3;
                 this.MainLayout.State = MainPageState.Main;
                 await FileUtil.SaveSampleFile();
 
@@ -163,10 +164,8 @@ namespace Retouch_Photo2
         private void ShowAddDialog() => this.AddDialog.Show();
         private void HideAddDialog()
         {
-            if (this.Items.Count == 0)
-                this.MainLayout.State = MainPageState.Initial;
-            else
-                this.MainLayout.State = MainPageState.Main;
+            this.MainLayout.Count = this.Items.Count;
+            this.MainLayout.State = MainPageState.Main;
 
             this.AddDialog.Hide();
         }
@@ -229,10 +228,8 @@ namespace Retouch_Photo2
 
                 this.LoadingControl.State = LoadingState.None;
 
-                if (this.Items.Count == 0)
-                    this.MainLayout.State = MainPageState.Initial;
-                else
-                    this.MainLayout.State = MainPageState.Main;
+                this.MainLayout.Count = this.Items.Count;
+                this.MainLayout.State = MainPageState.Main;
             };
         }
 

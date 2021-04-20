@@ -13,9 +13,6 @@ namespace Retouch_Photo2.Elements
         /// <summary> Normal. </summary>
         None,
 
-        /// <summary> Initial page( 0 project). </summary>
-        Initial,
-
         /// <summary> Main page. </summary>
         Main,
 

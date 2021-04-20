@@ -49,14 +49,6 @@ namespace Retouch_Photo2
             this.SelectedIsEnabled = isEnable;
         }
 
-        /// <summary>
-        /// Load all ProjectViewItems in GridView children.
-        /// </summary>
-        public void LoadAllProjectViewItems()
-        {
-            this.MainLayout.State = (this.Items.Count == 0) ? MainPageState.Initial : MainPageState.Main;
-        }
-
 
         #endregion
 

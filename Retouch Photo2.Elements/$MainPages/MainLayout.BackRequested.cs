@@ -44,8 +44,6 @@ namespace Retouch_Photo2.Elements
                     case MainPageState.Duplicate:
                         switch (oldValue)
                         {
-                            case MainPageState.None:
-                            case MainPageState.Initial:
                             case MainPageState.Main:
                                 control.IsAccent = true;
                                 control.Show(value);

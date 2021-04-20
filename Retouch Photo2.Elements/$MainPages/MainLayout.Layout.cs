@@ -56,6 +56,7 @@ namespace Retouch_Photo2.Elements
         }
 
         //@VisualState
+        int _vsCount = 0;
         MainPageState _vsState = MainPageState.None;
         /// <summary> 
         /// Represents the visual appearance of UI elements in a specific state.
@@ -64,10 +65,11 @@ namespace Retouch_Photo2.Elements
         {
             get
             {
+                if (this._vsCount == 0) return this.Initial;
+
                 switch (this._vsState)
                 {
                     case MainPageState.None: return this.Normal;
-                    case MainPageState.Initial: return this.Initial;
                     case MainPageState.Main: return this.Main;
                     case MainPageState.Pictures: return this.Pictures;
                     case MainPageState.Rename: return this.Rename;
@@ -77,6 +79,14 @@ namespace Retouch_Photo2.Elements
                 }
             }
             set => VisualStateManager.GoToState(this, value.Name, true);
+        }
+        public int Count
+        {
+            set
+            {
+                this._vsCount = value;
+                this.VisualState = this.VisualState;//State
+            }
         }
 
     }
