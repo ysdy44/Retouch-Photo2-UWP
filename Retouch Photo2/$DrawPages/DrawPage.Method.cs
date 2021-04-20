@@ -22,10 +22,11 @@ namespace Retouch_Photo2
         private async Task<bool> Export()
         {
             //Render
-            BitmapSize size = this.ExportSizePicker.Size;
+            float width = (float)this.ExportSizePicker.SizeWith;
+            float height = (float)this.ExportSizePicker.SizeHeight;
             int dpi = (int)this.DPIComboBox.DPI;
             bool isClearWhite = this.FileFormatComboBox.IsClearWhite;
-            CanvasRenderTarget renderTarget = this.ViewModel.Render(size, dpi, isClearWhite);
+            CanvasRenderTarget renderTarget = this.ViewModel.Render(width, height, dpi, isClearWhite);
 
             //Export
             return await FileUtil.SaveCanvasBitmapFile

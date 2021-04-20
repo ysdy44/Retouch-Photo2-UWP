@@ -23,15 +23,14 @@ namespace Retouch_Photo2
         /// <summary>
         /// New from size.
         /// </summary>
-        /// <param name="pixels"> The bitmap size. </param>
-        public void NewFromSize(BitmapSize pixels)
+        /// <param name="width"> The width for size. </param>
+        /// <param name="height"> The height for size. </param>
+        public void NewFromSize(int width, int height)
         {
             this.LoadingControl.State = LoadingState.Loading;
 
             string untitled = this.Untitled;
             string name = this.UntitledRenameByRecursive(untitled);
-            int width = (int)pixels.Width;
-            int height = (int)pixels.Height;
 
             //Project
             Project project = new Project

@@ -132,44 +132,39 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="dpi"> The dpi. </param>
         /// <param name="isClearWhite"> Clears to the white color. </param>
         /// <returns> The image. </returns>
-        public CanvasRenderTarget Render(BitmapSize size, float dpi, bool isClearWhite = true)
+        public CanvasRenderTarget Render(float width, float height , float dpi, bool isClearWhite = true)
         {
-            ICanvasImage canvasImage = LayerBase.Render(LayerManager.CanvasDevice, LayerManager.RootLayerage);
-
-            int canvasWidth = this.CanvasTransformer.Width;
-            int canvasHeight = this.CanvasTransformer.Height;
-
-            int fileWidth = (int)size.Width;
-            int fileHeight = (int)size.Height;
-
-            CanvasRenderTarget renderTarget = new CanvasRenderTarget(LayerManager.CanvasDevice, fileWidth, fileHeight, dpi);
-            if (canvasImage == null) return renderTarget;
-
-
-            if (canvasWidth == fileWidth && canvasHeight == fileHeight)
-            {
-                using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
-                {
-                    if (isClearWhite) drawingSession.Clear(Colors.White);
-
-                    drawingSession.DrawImage(canvasImage);
-                }
-                return renderTarget;
-            }
-
-
-            float scaleX = fileWidth / canvasWidth;
-            float scaleY = fileHeight / canvasHeight;
-            Matrix3x2 matrix = Matrix3x2.CreateScale(scaleX, scaleY);
+            CanvasRenderTarget renderTarget = new CanvasRenderTarget(LayerManager.CanvasDevice, width, height, dpi);
 
             using (CanvasDrawingSession drawingSession = renderTarget.CreateDrawingSession())
             {
-                drawingSession.DrawImage(new Transform2DEffect
+                if (isClearWhite) drawingSession.Clear(Colors.White);
+
+                ICanvasImage canvasImage = LayerBase.Render(LayerManager.CanvasDevice, LayerManager.RootLayerage);
+                if (canvasImage != null)
                 {
-                    TransformMatrix = matrix,
-                    Source = canvasImage
-                });
+                    int canvasWidth = this.CanvasTransformer.Width;
+                    int canvasHeight = this.CanvasTransformer.Height;
+
+                    if (canvasWidth == width && canvasHeight == height)
+                    {
+                        drawingSession.DrawImage(canvasImage);
+                    }
+                    else
+                    {
+                        float scaleX = width / canvasWidth;
+                        float scaleY = height / canvasHeight;
+                        Matrix3x2 matrix = Matrix3x2.CreateScale(scaleX, scaleY);
+
+                        drawingSession.DrawImage(new Transform2DEffect
+                        {
+                            TransformMatrix = matrix,
+                            Source = canvasImage
+                        });
+                    }                        
+                }
             }
+
             return renderTarget;
         }
 

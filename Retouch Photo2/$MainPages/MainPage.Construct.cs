@@ -157,8 +157,9 @@ namespace Retouch_Photo2
             {
                 this.HideAddDialog();
 
-                BitmapSize size = this.SizePicker.Size;
-                this.NewFromSize(size);
+                int width = (int)this.SizePicker.SizeWith;
+                int height = (int)this.SizePicker.SizeHeight;
+                this.NewFromSize(width, height);
             };
         }
         private void ShowAddDialog() => this.AddDialog.Show();

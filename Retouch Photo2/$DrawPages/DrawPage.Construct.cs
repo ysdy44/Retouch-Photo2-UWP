@@ -56,7 +56,7 @@ namespace Retouch_Photo2
                 this.SetupSizePicker.WidthText = resource.GetString("$DrawPage_SetupDialog_SizePicker_Width");
                 this.SetupSizePicker.HeightText = resource.GetString("$DrawPage_SetupDialog_SizePicker_Height");
 
-                this.SetupAnchorCheckBox.Content = resource.GetString("$DrawPage_SetupDialog_Anchor");
+                this.SetupAnchorCheckControl.Content = resource.GetString("$DrawPage_SetupDialog_Anchor");
             }
 
             this.ExportDialog.Title = resource.GetString("$DrawPage_ExportDialog_Title");
@@ -88,10 +88,10 @@ namespace Retouch_Photo2
             this.DrawLayout.WidthToolTipContent = resource.GetString("$DrawPage_WidthTip");
             {
                 this.TransformTextBlock.Text = resource.GetString("More_Transform");
-                this.RatioControl.Content = resource.GetString("More_Transform_Ratio");      
+                this.RatioControl.Content = resource.GetString("More_Transform_Ratio");
                 this.SnapToTickControl.Content = resource.GetString("More_Transform_SnapToTick");
                 this.CreateTextBlock.Text = resource.GetString("More_Create");
-                this.SquareControl.Content = resource.GetString("More_Create_Square");     
+                this.SquareControl.Content = resource.GetString("More_Create_Square");
                 this.CenterControl.Content = resource.GetString("More_Create_Center");
                 this.OperateTextBlock.Text = resource.GetString("More_Operate");
                 this.WheelToRotateControl.Content = resource.GetString("More_Operate_WheelToRotate");
@@ -127,7 +127,7 @@ namespace Retouch_Photo2
             this.History.Tapped += (s, e) => this.HistoryExpander.FlyoutShowAt(this.History);
             this.Transformer.Tapped += (s, e) => this.TransformerExpander.FlyoutShowAt(this.Transformer);
             this.Layer.Tapped += (s, e) => this.LayerExpander.FlyoutShowAt(this.Layer);
-         
+
             this.Color.Tapped += (s, e) => this.ColorExpander.FlyoutShowAt(this.Color);
         }
 
@@ -171,7 +171,25 @@ namespace Retouch_Photo2
 
                 this.LoadingControl.State = LoadingState.Saving;
 
-                bool isSuccesful = await this.Export();
+                //     bool isSuccesful = await this.Export();
+                //Render
+                float width = (float)this.ExportSizePicker.SizeWith;
+                float height = (float)this.ExportSizePicker.SizeHeight;
+                int dpi = (int)this.DPIComboBox.DPI;
+                bool isClearWhite = this.FileFormatComboBox.IsClearWhite;
+                CanvasRenderTarget renderTarget = this.ViewModel.Render(width, height, dpi, isClearWhite);
+
+                //Export
+                bool isSuccesful = await FileUtil.SaveCanvasBitmapFile
+                (
+                    renderTarget: renderTarget,
+
+                    fileChoices: this.FileFormatComboBox.FileChoices,
+                    suggestedFileName: this.ApplicationView.Title,
+
+                    fileFormat: this.FileFormatComboBox.FileFormat,
+                    quality: this.ExportQuality
+                );
 
                 this.LoadingControl.State = isSuccesful ? LoadingState.SaveSuccess : LoadingState.SaveFailed;
                 await Task.Delay(400);
@@ -181,12 +199,8 @@ namespace Retouch_Photo2
         }
         private void ShowExportDialog()
         {
-            BitmapSize size = new BitmapSize
-            {
-                Width = (uint)this.ViewModel.CanvasTransformer.Width,
-                Height = (uint)this.ViewModel.CanvasTransformer.Height,
-            };
-            this.ExportSizePicker.Size = size;
+            this.ExportSizePicker.SizeWith = this.ViewModel.CanvasTransformer.Width;
+            this.ExportSizePicker.SizeHeight = this.ViewModel.CanvasTransformer.Height;
             this.ExportQuality = this.ExportQuality;
             this.ExportDialog.Show();
         }
@@ -197,8 +211,13 @@ namespace Retouch_Photo2
         {
             this.SetupIndicatorControl.Mode = IndicatorMode.LeftTop;
 
-            this.SetupAnchorCheckBox.Checked += (sender, args) => this.SetupIndicatorControl.Visibility = Visibility.Visible;
-            this.SetupAnchorCheckBox.Unchecked += (sender, args) => this.SetupIndicatorControl.Visibility = Visibility.Collapsed;
+            this.SetupAnchorCheckControl.Tapped += (sender, args) =>
+            {
+                bool isChecked = this.SetupAnchorCheckControl.IsChecked;
+
+                this.SetupAnchorCheckControl.IsChecked = !isChecked;
+                this.SetupIndicatorControl.Visibility = isChecked ? Visibility.Collapsed : Visibility.Visible;
+            };
 
             this.SetupDialog.SecondaryButtonClick += (sender, args) => this.SetupDialog.Hide();
             this.SetupDialog.PrimaryButtonClick += (_, __) =>
@@ -207,9 +226,11 @@ namespace Retouch_Photo2
 
                 BitmapSize size = this.SetupSizePicker.Size;
 
-                if (this.SetupAnchorCheckBox.IsChecked == true)
+                if (this.SetupAnchorCheckControl.IsChecked == true)
+                {
                     this.MethodViewModel.MethodSetup(size);
-                else if (this.SetupAnchorCheckBox.IsChecked == false)
+                }
+                else
                 {
                     IndicatorMode mode = this.SetupIndicatorControl.Mode;
                     this.MethodViewModel.MethodSetup(size, mode);
@@ -218,12 +239,8 @@ namespace Retouch_Photo2
         }
         private void ShowSetupDialog()
         {
-            BitmapSize size = new BitmapSize
-            {
-                Width = (uint)this.ViewModel.CanvasTransformer.Width,
-                Height = (uint)this.ViewModel.CanvasTransformer.Height,
-            };
-            this.SetupSizePicker.Size = size;
+            this.SetupSizePicker.SizeWith = this.ViewModel.CanvasTransformer.Width;
+            this.SetupSizePicker.SizeHeight = this.ViewModel.CanvasTransformer.Height;
 
             this.SetupDialog.Show();
         }
