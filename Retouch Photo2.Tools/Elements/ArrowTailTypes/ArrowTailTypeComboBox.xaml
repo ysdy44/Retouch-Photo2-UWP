@@ -11,7 +11,7 @@
 
     <UserControl.Resources>
         <!--Flyout-->
-        <Flyout x:Name="Flyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="Flyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <ListViewItem x:Name="NoneItem">
                     <ContentControl x:Name="None" Style="{StaticResource AppIconContentControlStyle}">

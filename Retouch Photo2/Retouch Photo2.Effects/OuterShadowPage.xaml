@@ -16,7 +16,7 @@
     
     <Page.Resources>
         <!--Flyout-->
-        <Flyout x:Name="ColorFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="ColorFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:ColorPicker2 x:Name="ColorPicker" Width="222"/>
         </Flyout>
     </Page.Resources>

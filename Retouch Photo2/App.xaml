@@ -91,7 +91,9 @@
             <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
             <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
 
-
+            <LightDismissOverlayMode x:Key="AppLightDismissOverlayMode">Off</LightDismissOverlayMode>
+        
+            
             <!--Merged-->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Style/Brush.xaml"/>

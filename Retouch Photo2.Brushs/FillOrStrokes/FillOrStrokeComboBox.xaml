@@ -11,7 +11,7 @@
 
     <UserControl.Resources>
         <!--Flyout-->
-        <Flyout x:Name="Flyout" LightDismissOverlayMode="On" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="Flyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
                 <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 

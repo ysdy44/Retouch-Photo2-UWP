@@ -14,7 +14,7 @@
 
     <Page.Resources>
         <!--Flyout-->
-        <Flyout x:Name="StopsFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="StopsFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <brushs:StopsPicker x:Name="StopsPicker" Width="320"/>
         </Flyout>
     </Page.Resources>

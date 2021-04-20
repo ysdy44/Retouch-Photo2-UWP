@@ -13,7 +13,7 @@
 
     <UserControl.Resources>
         <!--Flyout-->
-        <Flyout x:Name="FontSizeFlyout" Placement="Right" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="FontSizeFlyout" Placement="Right" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ListView x:Name="FontSizeListView" IsItemClickEnabled="True" SelectionMode="Single">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="x:Int32">

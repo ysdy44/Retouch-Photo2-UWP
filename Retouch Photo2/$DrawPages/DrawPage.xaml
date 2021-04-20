@@ -43,7 +43,7 @@
 
 
         <!--Flyout-->
-        <Flyout x:Name="DocumentFlyout" LightDismissOverlayMode="On" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="DocumentFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ListViewItem x:Name="DocumentUnSaveItem">
                 <ContentControl x:Name="DocumentUnSaveControl" Style="{StaticResource AppIconContentControlStyle}">
                     <ContentControl.Tag>
@@ -54,15 +54,15 @@
         </Flyout>
 
 
-        <Flyout x:Name="FillColorFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="FillColorFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:ColorPicker2 x:Name="FilColorPicker"/>
         </Flyout>
-        <Flyout x:Name="StrokeColorFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="StrokeColorFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
         </Flyout>
 
 
-        <Flyout x:Name="MoreFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="MoreFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
                 <StackPanel>
                     <!--Transform-->
@@ -121,60 +121,60 @@
         </Flyout>
 
 
-        <Flyout x:Name="EditFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="EditFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:Expander x:Name="EditExpander" Flyout="{x:Bind EditFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
                 <menus:EditMenu/>
             </elements:Expander>
         </Flyout>
-        <Flyout x:Name="OperateFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="OperateFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:Expander x:Name="OperateExpander" Flyout="{x:Bind OperateFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
                 <menus:OperateMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
             </elements:Expander>
         </Flyout>
-        <Flyout x:Name="AdjustmentFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="AdjustmentFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:Expander x:Name="AdjustmentExpander" Flyout="{x:Bind AdjustmentFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
                 <menus:AdjustmentMenu x:Name="AdjustmentMenu" Filter="{x:Bind SelectionViewModel.Filter, Mode=OneWay}"/>
             </elements:Expander>
         </Flyout>
-        <Flyout x:Name="EffectFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="EffectFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:Expander x:Name="EffectExpander" Flyout="{x:Bind EffectFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
                 <menus:EffectMenu x:Name="EffectMenu" Effect="{x:Bind SelectionViewModel.Effect, Mode=OneWay}"/>
             </elements:Expander>
         </Flyout>
 
-        <Flyout x:Name="TextFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="TextFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:Expander x:Name="TextExpander" Flyout="{x:Bind TextFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
                 <menus:TextMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
             </elements:Expander>
         </Flyout>
-        <Flyout x:Name="StrokeFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="StrokeFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:Expander x:Name="StrokeExpander" Flyout="{x:Bind StrokeFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
                 <menus:StrokeMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"/>
             </elements:Expander>
         </Flyout>
-        <Flyout x:Name="StyleFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="StyleFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:Expander x:Name="StyleExpander" Flyout="{x:Bind StyleFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
                 <menus:StyleMenu/>
             </elements:Expander>
         </Flyout>
 
-        <Flyout x:Name="HistoryFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="HistoryFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:Expander x:Name="HistoryExpander" Flyout="{x:Bind HistoryFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
                 <menus:HistoryMenu/>
             </elements:Expander>
         </Flyout>
-        <Flyout x:Name="TransformerFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="TransformerFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:Expander x:Name="TransformerExpander" Flyout="{x:Bind TransformerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
                 <menus:TransformerMenu IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Mode="{x:Bind SelectionViewModel.SelectionMode, Mode=OneWay}" Transformer="{x:Bind SelectionViewModel.Transformer, Mode=OneWay}" ToolType="{x:Bind ViewModel.ToolType, Mode=OneWay}"/>
             </elements:Expander>
         </Flyout>
-        <Flyout x:Name="LayerFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="LayerFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:Expander x:Name="LayerExpander" Flyout="{x:Bind LayerFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
                 <menus:LayerMenu/>
             </elements:Expander>
         </Flyout>
 
-        <Flyout x:Name="ColorFlyout" LightDismissOverlayMode="On" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="ColorFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:Expander x:Name="ColorExpander" Flyout="{x:Bind ColorFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
                 <menus:ColorMenu/>
             </elements:Expander>
@@ -300,7 +300,7 @@
                     <!--Overflow-->
                     <Button x:Name="OverflowButton" Grid.Column="2" Style="{StaticResource AppCircleButtonStyle}">
                         <Button.Flyout>
-                            <Flyout x:Name="OverflowFlyout" LightDismissOverlayMode="On" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+                            <Flyout x:Name="OverflowFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                 <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
                                     <StackPanel x:Name="OverflowStackPanel">
 

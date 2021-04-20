@@ -22,7 +22,7 @@
         <local:AdjustmentIconConverter x:Key="AdjustmentIconConverter"/>
 
         <!--Flyout-->
-        <Flyout x:Name="AdjustmentPageFlyout" LightDismissOverlayMode="On" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="AdjustmentPageFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
                 <StackPanel x:Name="StackPanel" Padding="{StaticResource AppPanelPadding}">
 
@@ -159,7 +159,7 @@
             </ScrollViewer>
         </Flyout>
 
-        <Flyout x:Name="FilterFlyout" LightDismissOverlayMode="On" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="FilterFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ListView x:Name="FilterListView" SelectionMode="None" IsItemClickEnabled="True"
                       ItemsSource="{x:Bind CollectionViewSource.View, Mode=OneWay}">
 
