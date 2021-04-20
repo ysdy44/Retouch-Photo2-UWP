@@ -5,19 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:transformers="using:FanKit.Transformers"
-    xmlns:hsvColorpickers="using:HSVColorPickers"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
     >
-
-
-    <UserControl.Resources>
-        <!--SolidColorBrush-->
-        <SolidColorBrush x:Name="RemoteBackground" Color="{ThemeResource AppForegroundColor}"/>
-        <SolidColorBrush x:Name="RemoteBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
-        <SolidColorBrush x:Name="RemoteForeground" Color="{ThemeResource AppTextColor}"/>
-    </UserControl.Resources>
 
 
     <SplitView x:Name="SplitView"
@@ -45,15 +37,34 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+                    <TextBox IsTapEnabled="True" Width="0" Height="0" MinWidth="0" MinHeight="0" IsHitTestVisible="False">
+                        <TextBox.Text>
+                            IsTapEnabled
+                        </TextBox.Text>
+                    </TextBox>
 
 
                     <!--Width-->
                     <TextBlock x:Name="WidthTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}"/>
-                    <hsvColorpickers:NumberPicker x:Name="WPicker" Grid.Column="0" Grid.Row="1" Width="Auto" Unit="px" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                    <TextBox x:Name="WidthTextBox" Grid.Column="0" Grid.Row="1"
+                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                             ui:TextBoxExtensions.ValidationMode="Forced"
+                             ui:TextBoxExtensions.ValidationType="Decimal">
+                        <TextBox.Resources>
+                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
+                        </TextBox.Resources>
+                    </TextBox>
 
                     <!--Height-->
                     <TextBlock x:Name="HeightTextBlock" Grid.Column="2" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}"/>
-                    <hsvColorpickers:NumberPicker x:Name="HPicker" Grid.Column="2" Grid.Row="1" Width="Auto" Unit="px" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                    <TextBox x:Name="HeightTextBox" Grid.Column="2" Grid.Row="1"               
+                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                             ui:TextBoxExtensions.ValidationMode="Forced"
+                             ui:TextBoxExtensions.ValidationType="Decimal">
+                        <TextBox.Resources>
+                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
+                        </TextBox.Resources>
+                    </TextBox>
 
                     <!--Ratio-->
                     <ToggleButton x:Name="RatioToggleControl" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Style="{StaticResource AppCircleToggleButtonStyle}"
@@ -68,11 +79,25 @@
 
                     <!--Rotate-->
                     <TextBlock x:Name="RotateTextBlock" Grid.Column="0" Grid.Row="2" Style="{StaticResource AppTextBlockStyle}"/>
-                    <hsvColorpickers:NumberPicker x:Name="RPicker" Grid.Column="0" Grid.Row="3" Width="Auto" Unit="px" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                    <TextBox x:Name="RotateTextBox" Grid.Column="0" Grid.Row="3" 
+                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                             ui:TextBoxExtensions.ValidationMode="Forced"
+                             ui:TextBoxExtensions.ValidationType="Decimal">
+                        <TextBox.Resources>
+                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
+                        </TextBox.Resources>
+                    </TextBox>
 
                     <!--Skew-->
                     <TextBlock x:Name="SkewTextBlock" Grid.Column="2" Grid.Row="2" Style="{StaticResource AppTextBlockStyle}"/>
-                    <hsvColorpickers:NumberPicker x:Name="SPicker" Grid.Column="2" Grid.Row="3" Width="Auto" Unit="px" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                    <TextBox x:Name="SkewTextBox" Grid.Column="2" Grid.Row="3" 
+                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                             ui:TextBoxExtensions.ValidationMode="Forced"
+                             ui:TextBoxExtensions.ValidationType="Decimal">
+                        <TextBox.Resources>
+                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
+                        </TextBox.Resources>
+                    </TextBox>
 
                     <!--SnapToTick-->
                     <ToggleButton x:Name="SnapToTickButton" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Style="{StaticResource AppCircleToggleButtonStyle}"
@@ -90,11 +115,25 @@
 
                     <!--X-->
                     <TextBlock x:Name="XTextBlock" Grid.Column="0" Grid.Row="4" Style="{StaticResource AppTextBlockStyle}"/>
-                    <hsvColorpickers:NumberPicker x:Name="XPicker" Grid.Column="0" Grid.Row="5" Width="Auto" Unit="px" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                    <TextBox x:Name="XTextBox" Grid.Column="0" Grid.Row="5" 
+                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                             ui:TextBoxExtensions.ValidationMode="Forced"
+                             ui:TextBoxExtensions.ValidationType="Decimal">
+                        <TextBox.Resources>
+                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
+                        </TextBox.Resources>
+                    </TextBox>
 
                     <!--Y-->
                     <TextBlock x:Name="YTextBlock" Grid.Column="2" Grid.Row="4" Style="{StaticResource AppTextBlockStyle}"/>
-                    <hsvColorpickers:NumberPicker x:Name="YPicker" Grid.Column="2" Grid.Row="5" Width="Auto" Unit="px" ButtonStyle="{StaticResource AppNumberBoldButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+                    <TextBox x:Name="YTextBox" Grid.Column="2" Grid.Row="5" 
+                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                             ui:TextBoxExtensions.ValidationMode="Forced"
+                             ui:TextBoxExtensions.ValidationType="Decimal">
+                        <TextBox.Resources>
+                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
+                        </TextBox.Resources>
+                    </TextBox>
 
                     <!--RemoteButton-->
                     <Button x:Name="PositionRemoteButton" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" Style="{StaticResource AppCircleButtonStyle}">
@@ -107,7 +146,7 @@
 
 
                     <!--IndicatorControl-->
-                    <transformers:IndicatorControl x:Name="IndicatorControl" Grid.ColumnSpan="3" Grid.Row="6" Background="{ThemeResource AppBackground}" BorderBrush="{ThemeResource AppBorderBrush}"
+                    <transformers:IndicatorControl x:Name="IndicatorControl" Grid.ColumnSpan="3" Grid.Row="6" Background="{ThemeResource AppFill}" BorderBrush="{ThemeResource AppStroke}"
                                        FlowDirection="LeftToRight">
                         <ToolTipService.ToolTip>
                             <ToolTip x:Name="IndicatorToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
@@ -125,8 +164,11 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
-                <transformers:RemoteControl x:Name="PositionRemoteControl" Width="Auto" Height="Auto" Margin="4"
-                                        FlowDirection="LeftToRight"/>
+                <transformers:RemoteControl x:Name="PositionRemoteControl" 
+                                            Width="Auto" Height="Auto" Margin="4"
+                                            BorderBrush="{ThemeResource AppStroke}"
+                                            Background="{ThemeResource AppFill}"
+                                            FlowDirection="LeftToRight"/>
                 <ListViewItem x:Name="CloseButton" Grid.Row="2" Style="{StaticResource AppListViewItemStyle}"/>
             </Grid>
         </SplitView.Content>

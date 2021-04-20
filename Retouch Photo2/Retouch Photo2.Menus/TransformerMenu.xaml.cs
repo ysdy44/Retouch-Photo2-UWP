@@ -4,6 +4,7 @@
 // Only:              
 // Complete:      ★★★★★
 using FanKit.Transformers;
+using Microsoft.Toolkit.Uwp.UI;
 using Retouch_Photo2.Tools;
 using Retouch_Photo2.ViewModels;
 using System;
@@ -194,8 +195,8 @@ namespace Retouch_Photo2.Menus
                             //Radians Skew
                             float radians = Transformer.GetRadians(horizontal);
                             float skew = Transformer.GetSkew(vertical, radians);
-                            this.RPicker.Value = (int)radians;
-                            this.SPicker.Value = (int)skew;
+                            this.RotateTextBox.Text = $"{Math.Round(radians, 2)} º";
+                            this.SkewTextBox.Text = $"{Math.Round(skew, 2)} º";
 
                             //@Release: case Debug
                             //Width Height
@@ -204,27 +205,27 @@ namespace Retouch_Photo2.Menus
                             //@Release: case Release
                             double width = Math.Sqrt(horizontal.X * horizontal.X + horizontal.Y * horizontal.Y);
                             double height = Math.Sqrt(vertical.X * vertical.X + vertical.Y * vertical.Y);
-                            this.WPicker.Value = (int)width;
-                            this.HPicker.Value = (int)height;
+                            this.WidthTextBox.Text = $"{Math.Round(width, 2)}";
+                            this.HeightTextBox.Text = $"{Math.Round(height, 2)}";
 
                             //X Y
                             Vector2 vector = transformer.GetIndicatorVector(this.IndicatorMode);
-                            this.XPicker.Value = (int)vector.X;
-                            this.YPicker.Value = (int)vector.Y;
+                            this.XTextBox.Text = $"{Math.Round(vector.X, 2)}";
+                            this.YTextBox.Text = $"{Math.Round(vector.Y, 2)}";
 
                             //Indicator
                             this.IndicatorControl.Radians = radians;
                         }
                         //IsEnabled
                         {
-                            this.RPicker.IsEnabled = true;
-                            this.SPicker.IsEnabled = true;
+                            this.RotateTextBox.IsEnabled = true;
+                            this.SkewTextBox.IsEnabled = true;
 
-                            this.WPicker.IsEnabled = true;
-                            this.HPicker.IsEnabled = true;
+                            this.WidthTextBox.IsEnabled = true;
+                            this.HeightTextBox.IsEnabled = true;
 
-                            this.XPicker.IsEnabled = true;
-                            this.YPicker.IsEnabled = true;
+                            this.XTextBox.IsEnabled = true;
+                            this.YTextBox.IsEnabled = true;
 
                             this.RatioToggleControl.IsEnabled = true;
                             this.SnapToTickButton.IsEnabled = true;
@@ -240,30 +241,29 @@ namespace Retouch_Photo2.Menus
                         //Value
                         {
                             //Radians Skew
-                            this.RPicker.Value = 0;
-                            this.SPicker.Value = 0;
-
+                            this.RotateTextBox.Text = $"{0} º";
+                            this.SkewTextBox.Text = $"{0} º";
                             //Width Height
-                            this.WPicker.Value = 0;
-                            this.HPicker.Value = 0;
+                            this.WidthTextBox.Text = $"{0}";
+                            this.HeightTextBox.Text = $"{0}";
 
                             //X Y
-                            this.XPicker.Value = 0;
-                            this.YPicker.Value = 0;
+                            this.XTextBox.Text = $"{0}";
+                            this.YTextBox.Text = $"{0}";
 
                             //Indicator
                             this.IndicatorControl.Radians = 0;
                         }
                         //IsEnabled
                         {
-                            this.WPicker.IsEnabled = false;
-                            this.HPicker.IsEnabled = false;
+                            this.RotateTextBox.IsEnabled = false;
+                            this.SkewTextBox.IsEnabled = false;
 
-                            this.RPicker.IsEnabled = false;
-                            this.SPicker.IsEnabled = false;
+                            this.WidthTextBox.IsEnabled = false;
+                            this.HeightTextBox.IsEnabled = false;
 
-                            this.XPicker.IsEnabled = false;
-                            this.YPicker.IsEnabled = false;
+                            this.XTextBox.IsEnabled = false;
+                            this.YTextBox.IsEnabled = false;
 
                             this.IndicatorControl.Mode = IndicatorMode.None;
                             this.PositionRemoteButton.IsEnabled = false;
@@ -285,7 +285,7 @@ namespace Retouch_Photo2.Menus
         public TransformerMenu()
         {
             this.InitializeComponent();
-            this.ConstructStrings(); 
+            this.ConstructStrings();
 
             this.ConstructWidthHeight();
             this.ConstructRadianSkew();
@@ -337,9 +337,6 @@ namespace Retouch_Photo2.Menus
         //RemoteControl
         private void ConstructPositionRemoteControl()
         {
-            this.PositionRemoteControl.Background = this.RemoteBackground;
-            this.PositionRemoteControl.BorderBrush = this.RemoteBorderBrush;
-            this.PositionRemoteControl.Foreground = this.RemoteForeground;
             this.PositionRemoteButton.Click += (s, e) =>
             {
                 this.SplitView.IsPaneOpen = false;
@@ -369,8 +366,8 @@ namespace Retouch_Photo2.Menus
                 Transformer transformer = this.SelectionTransformer;
                 Vector2 vector = transformer.GetIndicatorVector(this.IndicatorMode);
 
-                this.XPicker.Value = (int)vector.X;
-                this.YPicker.Value = (int)vector.Y;
+                this.XTextBox.Text = vector.X.ToString();
+                this.YTextBox.Text = vector.Y.ToString();
             };
         }
 
@@ -378,26 +375,52 @@ namespace Retouch_Photo2.Menus
         //Width Height
         private void ConstructWidthHeight()
         {
-            this.WPicker.Minimum = 1;
-            this.WPicker.Maximum = int.MaxValue;
-            this.WPicker.ValueChanged += (sender, value) =>
+            this.WidthTextBox.Text = $"{1}";
+            TextBoxExtensions.SetDefault(this.WidthTextBox, $"{1}");
+            this.WidthTextBox.LostFocus += (s, e) =>
             {
-                Transformer transformer = this.SelectionTransformer;
-                Matrix3x2 matrix = transformer.TransformWidth(value, this.IndicatorMode, this.IsRatio);
+                if (this.WidthTextBox.Text is string value)
+                {
+                    if (string.IsNullOrEmpty(value) == false)
+                    {
+                        double width = double.Parse(value);
+                        if (width < 1)
+                        {
+                            width = 1;
+                            this.WidthTextBox.Text = $"{1}";
+                        }
 
-                //Method
-                this.MethodViewModel.MethodTransformMultiplies(matrix);
+                        Transformer transformer = this.SelectionTransformer;
+                        Matrix3x2 matrix = transformer.TransformWidth((float)width, this.IndicatorMode, this.IsRatio);
+
+                        //Method
+                        this.MethodViewModel.MethodTransformMultiplies(matrix);
+                    }
+                }
             };
 
-            this.HPicker.Minimum = 1;
-            this.HPicker.Maximum = int.MaxValue;
-            this.HPicker.ValueChanged += (s, value) =>
+            this.HeightTextBox.Text = $"{1}";
+            TextBoxExtensions.SetDefault(this.HeightTextBox, $"{1}");
+            this.HeightTextBox.LostFocus += (s, e) =>
             {
-                Transformer transformer = this.SelectionTransformer;
-                Matrix3x2 matrix = transformer.TransformHeight(value, this.IndicatorMode, this.IsRatio);
+                if (this.HeightTextBox.Text is string value)
+                {
+                    if (string.IsNullOrEmpty(value) == false)
+                    {
+                        double height = double.Parse(value);
+                        if (height < 1)
+                        {
+                            height = 1;
+                            this.HeightTextBox.Text = $"{1}";
+                        }
 
-                //Method
-                this.MethodViewModel.MethodTransformMultiplies(matrix);
+                        Transformer transformer = this.SelectionTransformer;
+                        Matrix3x2 matrix = transformer.TransformHeight((float)height, this.IndicatorMode, this.IsRatio);
+
+                        //Method
+                        this.MethodViewModel.MethodTransformMultiplies(matrix);
+                    }
+                }
             };
         }
 
@@ -405,26 +428,67 @@ namespace Retouch_Photo2.Menus
         //Radian Skew
         private void ConstructRadianSkew()
         {
-            this.RPicker.Minimum = -180;
-            this.RPicker.Maximum = 180;
-            this.RPicker.ValueChanged += (s, value) =>
+            this.RotateTextBox.Text = $"{0} º";
+            TextBoxExtensions.SetDefault(this.RotateTextBox, $"{0} º");
+            this.RotateTextBox.LostFocus += (s, e) =>
             {
-                Transformer transformer = this.SelectionTransformer;
-                Matrix3x2 matrix = transformer.TransformRotate(value, this.IndicatorMode);
+                if (this.RotateTextBox.Text is string value)
+                {
+                    if (string.IsNullOrEmpty(value) == false)
+                    {
+                        value = value.Replace("º", string.Empty);
 
-                //Method
-                this.MethodViewModel.MethodTransformMultiplies(matrix);
+                        double angle = double.Parse(value);
+                        if (angle < -180)
+                        {
+                            angle = -180;
+                            this.RotateTextBox.Text = $"{180} º";
+                        }
+                        else if (angle > 180)
+                        {
+                            angle = 180;
+                            this.RotateTextBox.Text = $"{-180} º";
+                        }
+
+                        Transformer transformer = this.SelectionTransformer;
+                        Matrix3x2 matrix = transformer.TransformRotate((float)angle, this.IndicatorMode);
+
+                        //Method
+                        this.MethodViewModel.MethodTransformMultiplies(matrix);
+                    }
+                }
             };
 
-            this.SPicker.Minimum = -90;
-            this.SPicker.Maximum = 90;
-            this.SPicker.ValueChanged += (s, value) =>
-            {
-                Transformer transformer = this.SelectionTransformer;
-                Matrix3x2 matrix = transformer.TransformSkew(value, this.IndicatorMode);
 
-                //Method
-                this.MethodViewModel.MethodTransformMultiplies(matrix);
+            this.SkewTextBox.Text = $"{0} º";
+            TextBoxExtensions.SetDefault(this.SkewTextBox, $"{0} º");
+            this.SkewTextBox.LostFocus += (s, e) =>
+            {
+                if (this.SkewTextBox.Text is string value)
+                {
+                    if (string.IsNullOrEmpty(value) == false)
+                    {
+                        value = value.Replace("º", string.Empty);
+
+                        double angle = double.Parse(value);
+                        if (angle < -90)
+                        {
+                            angle = -90;
+                            this.SkewTextBox.Text = $"{90} º";
+                        }
+                        else if (angle > 90)
+                        {
+                            angle = 90;
+                            this.SkewTextBox.Text = $"{-90} º";
+                        }
+
+                        Transformer transformer = this.SelectionTransformer;
+                        Matrix3x2 matrix = transformer.TransformSkew((float)angle, this.IndicatorMode);
+
+                        //Method
+                        this.MethodViewModel.MethodTransformMultiplies(matrix);
+                    }
+                }
             };
         }
 
@@ -432,26 +496,43 @@ namespace Retouch_Photo2.Menus
         //X Y
         private void ConstructXY()
         {
-            this.XPicker.Minimum = int.MinValue;
-            this.XPicker.Maximum = int.MaxValue;
-            this.XPicker.ValueChanged += (s, value) =>
+            this.XTextBox.Text = $"{0}";
+            TextBoxExtensions.SetDefault(this.XTextBox, $"{0}");
+            this.XTextBox.LostFocus += (s, e) =>
             {
-                Transformer transformer = this.SelectionTransformer;
-                Vector2 vector = transformer.TransformX(value, this.IndicatorMode);
+                if (this.XTextBox.Text is string value)
+                {
+                    if (string.IsNullOrEmpty(value) == false)
+                    {
+                        double x = double.Parse(value);
 
-                //Method
-                this.MethodViewModel.MethodTransformAdd(vector);
+                        Transformer transformer = this.SelectionTransformer;
+                        Vector2 vector = transformer.TransformX((float)x, this.IndicatorMode);
+
+                        //Method
+                        this.MethodViewModel.MethodTransformAdd(vector);
+                    }
+                }
             };
 
-            this.YPicker.Minimum = int.MinValue;
-            this.YPicker.Maximum = int.MaxValue;
-            this.YPicker.ValueChanged += (s, value) =>
-            {
-                Transformer transformer = this.SelectionTransformer;
-                Vector2 vector = transformer.TransformY(value, this.IndicatorMode);
 
-                //Method
-                this.MethodViewModel.MethodTransformAdd(vector);
+            this.YTextBox.Text = $"{0}";
+            TextBoxExtensions.SetDefault(this.YTextBox, $"{0}");
+            this.YTextBox.LostFocus += (s, e) =>
+            {
+                if (this.YTextBox.Text is string value)
+                {
+                    if (string.IsNullOrEmpty(value) == false)
+                    {
+                        double y = double.Parse(value);
+
+                        Transformer transformer = this.SelectionTransformer;
+                        Vector2 vector = transformer.TransformY((float)y, this.IndicatorMode);
+
+                        //Method
+                        this.MethodViewModel.MethodTransformAdd(vector);
+                    }
+                }
             };
         }
 
