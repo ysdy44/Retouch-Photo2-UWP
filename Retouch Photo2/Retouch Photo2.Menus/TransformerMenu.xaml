@@ -43,7 +43,7 @@
                         </TextBox.Text>
                     </TextBox>
 
-
+                    
                     <!--Width-->
                     <TextBlock x:Name="WidthTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}"/>
                     <TextBox x:Name="WidthTextBox" Grid.Column="0" Grid.Row="1"

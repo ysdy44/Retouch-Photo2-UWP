@@ -366,8 +366,8 @@ namespace Retouch_Photo2.Menus
                 Transformer transformer = this.SelectionTransformer;
                 Vector2 vector = transformer.GetIndicatorVector(this.IndicatorMode);
 
-                this.XTextBox.Text = vector.X.ToString();
-                this.YTextBox.Text = vector.Y.ToString();
+                this.XTextBox.Text = $"{ vector.X}";
+                this.YTextBox.Text = $"{vector.Y}";
             };
         }
 

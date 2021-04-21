@@ -96,8 +96,8 @@ namespace Retouch_Photo2
 
         private void ConstructCanvasOperator()
         {
+            this.ToolDrawCanvasControl.PointerEntered += (s, e) => CoreCursorExtension.None_PointerEntered();
             this.ToolDrawCanvasControl.PointerExited += (s, e) => CoreCursorExtension.None_PointerEntered();
-            this.ToolDrawCanvasControl.PointerCanceled += (s, e) => CoreCursorExtension.None_PointerEntered();
             this.ToolDrawCanvasControl.PointerMoved += (s, e) =>
             {
                 CoreCursorExtension.PointerDeviceType = e.Pointer.PointerDeviceType;
