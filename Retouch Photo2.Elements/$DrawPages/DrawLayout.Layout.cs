@@ -89,24 +89,5 @@ namespace Retouch_Photo2.Elements
             }
         }
 
-
-        /// <summary>
-        /// Sets or Gets the on state of the IsHitTestVisible on the canvas. 
-        /// </summary>
-        public bool CanvasHitTestVisible
-        {
-            set
-            {
-                this.LeftBorder.IsHitTestVisible = value;
-                this.RightBorder.IsHitTestVisible = value;
-
-                this.TouchbarBorder.IsHitTestVisible = value;
-
-                this.FootPanel.IsHitTestVisible = value;
-                this._LeftIcon.IsHitTestVisible = value;
-                this._RightIcon.IsHitTestVisible = value;
-            }
-        }
-
     }
 }

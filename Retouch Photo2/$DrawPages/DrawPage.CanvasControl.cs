@@ -120,7 +120,7 @@ namespace Retouch_Photo2
                 this._isSingleStarted = false;
                 this._singleStartingPoint = point;
 
-                this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
+                this.MenuOverlayCanvas.IsHitTestVisible = this.DrawLayout.IsHitTestVisible = false;//IsHitTestVisible
             };
             canvasOperator.Single_Delta += (point) =>
             {
@@ -159,7 +159,7 @@ namespace Retouch_Photo2
                     this.ToolsControl.Tool.Complete(this._singleStartingPoint, point, isOutNodeDistance);//Complete
                 }
 
-                this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
+                this.MenuOverlayCanvas.IsHitTestVisible = this.DrawLayout.IsHitTestVisible = true;//IsHitTestVisible
             };
 
 
@@ -171,7 +171,7 @@ namespace Retouch_Photo2
                 this.ViewModel.CanvasTransformer.CacheMove(point);
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
-                this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
+                this.MenuOverlayCanvas.IsHitTestVisible = this.DrawLayout.IsHitTestVisible = false;//IsHitTestVisible
 
                 CoreCursorExtension.Hand_Is = true;//CoreCursorType
             };
@@ -187,7 +187,7 @@ namespace Retouch_Photo2
                 this.ViewModel.CanvasTransformer.Move(point);
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
 
-                this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
+                this.MenuOverlayCanvas.IsHitTestVisible = this.DrawLayout.IsHitTestVisible = true;//IsHitTestVisible
 
                 CoreCursorExtension.Hand_Is = false;//CoreCursorType
             };
@@ -203,7 +203,7 @@ namespace Retouch_Photo2
                 this.ViewModel.NotifyCanvasTransformerScale();//Notify
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
-                this.ViewModel.CanvasHitTestVisible = false;//IsHitTestVisible
+                this.MenuOverlayCanvas.IsHitTestVisible = this.DrawLayout.IsHitTestVisible = false;//IsHitTestVisible
             };
             canvasOperator.Double_Delta += (center, space) =>
             {
@@ -219,7 +219,7 @@ namespace Retouch_Photo2
                 this.ViewModel.NotifyCanvasTransformerScale();//Notify
                 this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
 
-                this.ViewModel.CanvasHitTestVisible = true;//IsHitTestVisible
+                this.MenuOverlayCanvas.IsHitTestVisible = this.DrawLayout.IsHitTestVisible = true;//IsHitTestVisible
             };
 
             //Wheel

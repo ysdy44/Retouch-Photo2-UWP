@@ -27,19 +27,6 @@ namespace Retouch_Photo2.ViewModels
         private bool isOpen;
 
 
-        /// <summary> Gets or sets the on state of the IsHitTestVisible on the canvas. </summary>
-        public bool CanvasHitTestVisible
-        {
-            get => this.canvasHitTestVisible;
-            set
-            {
-                this.canvasHitTestVisible = value;
-                this.OnPropertyChanged(nameof(CanvasHitTestVisible));//Notify 
-            }
-        }
-        private bool canvasHitTestVisible = true;
-
-
         /// <summary> Gets or sets the tip text. </summary>
         public string TipText
         {

@@ -200,7 +200,6 @@
 
 
         <elements:DrawLayout x:Name="DrawLayout" 
-               CanvasHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"             
                DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
                IsFullScreen="True"
                              
@@ -469,7 +468,7 @@
 
 
         <!--Menu-->
-        <Canvas x:Name="MenuOverlayCanvas" IsHitTestVisible="{x:Bind ViewModel.CanvasHitTestVisible, Mode=OneWay}"/>
+        <Canvas x:Name="MenuOverlayCanvas"/>
 
 
         <!--Tip-->
