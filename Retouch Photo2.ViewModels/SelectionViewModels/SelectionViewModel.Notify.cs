@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas.Effects;
+using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Filters;
@@ -6,6 +7,7 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Photos;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using Windows.UI.Xaml;
@@ -122,11 +124,32 @@ namespace Retouch_Photo2.ViewModels
             get => this.filter;
             set
             {
+                if (value == null)
+                {
+                    this.Adjustments.Clear();
+                }
+                else if (value.Adjustments.Count == 0)
+                {
+                    this.Adjustments.Clear();
+                }
+                else
+                {
+                    this.Adjustments.Clear();
+                    foreach (IAdjustment adjustment in value.Adjustments)
+                    {
+                        this.Adjustments.Add(adjustment);
+                    }
+                }
+
                 this.filter = value;
                 this.OnPropertyChanged(nameof(Filter));//Notify 
             }
         }
         private Filter filter;
+
+
+        /// <summary> Gets or sets the layer filter adjustments. </summary>
+        public ObservableCollection<IAdjustment> Adjustments { get; set; } = new ObservableCollection<IAdjustment>();
 
 
         //////////////////////////

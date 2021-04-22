@@ -27,8 +27,11 @@ namespace Retouch_Photo2.Menus
 
 
         //@Converter
+        private Visibility NameToVisibilitylConverter(string name) => string.IsNullOrEmpty(name) ? Visibility.Visible : Visibility.Collapsed;
         private bool VisibilityToBoolConverter(Visibility visibility) => visibility == Visibility.Visible;
         private int OpacityToNumberConverter(float opacity) => (int)(opacity * 100.0f);
+        private Visibility SelectionUnSingleToVisibilitylConverter(bool isSingle) => isSingle == false ? Visibility.Visible : Visibility.Collapsed;
+        private Visibility SelectionSingleToVisibilitylConverter(bool isSingle) => isSingle ? Visibility.Visible : Visibility.Collapsed;
 
 
         //@Construct
@@ -40,12 +43,12 @@ namespace Retouch_Photo2.Menus
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.NameButton.Click += (s, e) => Retouch_Photo2.DrawPage.ShowRename?.Invoke();
+            this.NameButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowRename?.Invoke();
+            this.ConstructVisibility();
             this.ConstructOpacity1();
             this.ConstructOpacity2();
             this.ConstructOpacity3();
             this.ConstructBlendMode();
-            this.ConstructVisibility();
             this.ConstructTagType();
         }
     }
@@ -63,6 +66,31 @@ namespace Retouch_Photo2.Menus
             this.BlendModeTextBlock.Text = resource.GetString("Menus_Layer_BlendMode");
             this.VisibilityTextBlock.Text = resource.GetString("Menus_Layer_Visibility");
             this.TagTypeTextBlock.Text = resource.GetString("Menus_Layer_TagType");
+
+            this.NamePlaceholderTextBlock.Text = resource.GetString("$DrawPage_RenameDialog_PlaceholderText");
+
+            this.AdjustmentTextBlock.Text = resource.GetString("Menus_Adjustment");
+            this.AdjustmentDisableTextBlock.Text = resource.GetString("Menus_Adjustment_DisableTip");
+        }
+
+
+        //Visibility
+        private void ConstructVisibility()
+        {
+            this.VisibilityButton.Tapped += (s, e) =>
+            {
+                Visibility value = (this.SelectionViewModel.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+                this.SelectionViewModel.Visibility = value;
+
+                this.MethodViewModel.ILayerChanged<Visibility>
+                (
+                    set: (layer) => layer.Visibility = value,
+
+                    type: HistoryType.LayersProperty_SetVisibility,
+                    getUndo: (layer) => layer.Visibility,
+                    setUndo: (layer, previous) => layer.Visibility = previous
+                );
+            };
         }
 
 
@@ -210,26 +238,6 @@ namespace Retouch_Photo2.Menus
                     type: HistoryType.LayersProperty_SetBlendMode,
                     getUndo: (layer) => layer.BlendMode,
                     setUndo: (layer, previous) => layer.BlendMode = previous
-                );
-            };
-        }
-
-
-        //Visibility
-        private void ConstructVisibility()
-        {
-            this.VisibilityButton.Tapped += (s, e) =>
-            {
-                Visibility value = (this.SelectionViewModel.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
-                this.SelectionViewModel.Visibility = value;
-
-                this.MethodViewModel.ILayerChanged<Visibility>
-                (
-                    set: (layer) => layer.Visibility = value,
-
-                    type: HistoryType.LayersProperty_SetVisibility,
-                    getUndo: (layer) => layer.Visibility,
-                    setUndo: (layer, previous) => layer.Visibility = previous
                 );
             };
         }

@@ -4,308 +4,143 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:adjustments="using:Retouch_Photo2.Adjustments"
-    xmlns:filters="using:Retouch_Photo2.Filters"
-    xmlns:local="using:Retouch_Photo2.Menus"
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
+    IsEnabled="False"
     >
 
+    <StackPanel x:Name="StackPanel" Padding="{StaticResource AppPanelPadding}">
 
-    <UserControl.Resources>
+        <ListViewItem>
+            <ContentControl x:Name="Gray" Style="{StaticResource AppIconContentControlStyle}">
+                <ContentControl.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/GrayIcon.xaml"/>
+                </ContentControl.Resources>
+                <ContentControl.Tag>
+                    <ContentControl Template="{StaticResource GrayIcon}"/>
+                </ContentControl.Tag>
+            </ContentControl>
+        </ListViewItem>
 
-        <CollectionViewSource x:Name="CollectionViewSource" IsSourceGrouped="True"/>
+        <ListViewItem>
+            <ContentControl x:Name="Invert" Style="{StaticResource AppIconContentControlStyle}">
+                <ContentControl.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/InvertIcon.xaml"/>
+                </ContentControl.Resources>
+                <ContentControl.Tag>
+                    <ContentControl Template="{StaticResource InvertIcon}"/>
+                </ContentControl.Tag>
+            </ContentControl>
+        </ListViewItem>
 
-        <!--Converter -->
-        <local:AdjustmentTitleConverter x:Key="AdjustmentTitleConverter"/>
-        <local:AdjustmentIconConverter x:Key="AdjustmentIconConverter"/>
+        <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-        <!--Flyout-->
-        <Flyout x:Name="AdjustmentPageFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
-                <StackPanel x:Name="StackPanel" Padding="{StaticResource AppPanelPadding}">
+        <ListViewItem>
+            <ContentControl x:Name="Exposure" Style="{StaticResource AppIconContentControlStyle}">
+                <ContentControl.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/ExposureIcon.xaml"/>
+                </ContentControl.Resources>
+                <ContentControl.Tag>
+                    <ContentControl Template="{StaticResource ExposureIcon}"/>
+                </ContentControl.Tag>
+            </ContentControl>
+        </ListViewItem>
 
-                    <ListViewItem>
-                        <ContentControl x:Name="Gray" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/GrayIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource GrayIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+        <ListViewItem>
+            <ContentControl x:Name="Brightness" Style="{StaticResource AppIconContentControlStyle}">
+                <ContentControl.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/BrightnessIcon.xaml"/>
+                </ContentControl.Resources>
+                <ContentControl.Tag>
+                    <ContentControl Template="{StaticResource BrightnessIcon}"/>
+                </ContentControl.Tag>
+            </ContentControl>
+        </ListViewItem>
 
-                    <ListViewItem>
-                        <ContentControl x:Name="Invert" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/InvertIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource InvertIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+        <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+        <ListViewItem>
+            <ContentControl x:Name="Saturation" Style="{StaticResource AppIconContentControlStyle}">
+                <ContentControl.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/SaturationIcon.xaml"/>
+                </ContentControl.Resources>
+                <ContentControl.Tag>
+                    <ContentControl Template="{StaticResource SaturationIcon}"/>
+                </ContentControl.Tag>
+            </ContentControl>
+        </ListViewItem>
 
-                    <ListViewItem>
-                        <ContentControl x:Name="Exposure" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/ExposureIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource ExposureIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+        <ListViewItem>
+            <ContentControl x:Name="HueRotation" Style="{StaticResource AppIconContentControlStyle}">
+                <ContentControl.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/HueRotationIcon.xaml"/>
+                </ContentControl.Resources>
+                <ContentControl.Tag>
+                    <ContentControl Template="{StaticResource HueRotationIcon}"/>
+                </ContentControl.Tag>
+            </ContentControl>
+        </ListViewItem>
 
-                    <ListViewItem>
-                        <ContentControl x:Name="Brightness" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/BrightnessIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource BrightnessIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+        <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+        <ListViewItem>
+            <ContentControl x:Name="Contrast" Style="{StaticResource AppIconContentControlStyle}">
+                <ContentControl.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/ContrastIcon.xaml"/>
+                </ContentControl.Resources>
+                <ContentControl.Tag>
+                    <ContentControl Template="{StaticResource ContrastIcon}"/>
+                </ContentControl.Tag>
+            </ContentControl>
+        </ListViewItem>
 
-                    <ListViewItem>
-                        <ContentControl x:Name="Saturation" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/SaturationIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource SaturationIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+        <ListViewItem>
+            <ContentControl x:Name="Temperature" Style="{StaticResource AppIconContentControlStyle}">
+                <ContentControl.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/TemperatureIcon.xaml"/>
+                </ContentControl.Resources>
+                <ContentControl.Tag>
+                    <ContentControl Template="{StaticResource TemperatureIcon}"/>
+                </ContentControl.Tag>
+            </ContentControl>
+        </ListViewItem>
 
-                    <ListViewItem>
-                        <ContentControl x:Name="HueRotation" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/HueRotationIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource HueRotationIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+        <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
+        <ListViewItem>
+            <ContentControl x:Name="HighlightsAndShadows" Style="{StaticResource AppIconContentControlStyle}">
+                <ContentControl.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/HighlightsAndShadowsIcon.xaml"/>
+                </ContentControl.Resources>
+                <ContentControl.Tag>
+                    <ContentControl Template="{StaticResource HighlightsAndShadowsIcon}"/>
+                </ContentControl.Tag>
+            </ContentControl>
+        </ListViewItem>
 
-                    <ListViewItem>
-                        <ContentControl x:Name="Contrast" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/ContrastIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource ContrastIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+        <ListViewItem>
+            <ContentControl x:Name="GammaTransfer" Style="{StaticResource AppIconContentControlStyle}">
+                <ContentControl.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/GammaTransferIcon.xaml"/>
+                </ContentControl.Resources>
+                <ContentControl.Tag>
+                    <ContentControl Template="{StaticResource GammaTransferIcon}"/>
+                </ContentControl.Tag>
+            </ContentControl>
+        </ListViewItem>
 
-                    <ListViewItem>
-                        <ContentControl x:Name="Temperature" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/TemperatureIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource TemperatureIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+        <ListViewItem>
+            <ContentControl x:Name="Vignette" Style="{StaticResource AppIconContentControlStyle}">
+                <ContentControl.Resources>
+                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/VignetteIcon.xaml"/>
+                </ContentControl.Resources>
+                <ContentControl.Tag>
+                    <ContentControl Template="{StaticResource VignetteIcon}"/>
+                </ContentControl.Tag>
+            </ContentControl>
+        </ListViewItem>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
-
-                    <ListViewItem>
-                        <ContentControl x:Name="HighlightsAndShadows" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/HighlightsAndShadowsIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource HighlightsAndShadowsIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
-
-                    <ListViewItem>
-                        <ContentControl x:Name="GammaTransfer" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/GammaTransferIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource GammaTransferIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
-
-                    <ListViewItem>
-                        <ContentControl x:Name="Vignette" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Adjustments/Icons/VignetteIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource VignetteIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
-
-                </StackPanel>
-            </ScrollViewer>
-        </Flyout>
-
-        <Flyout x:Name="FilterFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ListView x:Name="FilterListView" SelectionMode="None" IsItemClickEnabled="True"
-                      ItemsSource="{x:Bind CollectionViewSource.View, Mode=OneWay}">
-
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="Padding" Value="0"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                        <Setter Property="BorderThickness" Value="0,1,0,0"/>
-                        <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
-                    </Style>
-                </ListView.ItemContainerStyle>
-
-                <ListView.GroupStyle>
-                    <GroupStyle>
-                        <GroupStyle.HeaderTemplate>
-                            <DataTemplate x:DataType="filters:FilterCategory">
-                                <TextBlock Text="{x:Bind Name}" Style="{StaticResource AppTabTextBlockStyle}"/>
-                            </DataTemplate>
-                        </GroupStyle.HeaderTemplate>
-                    </GroupStyle>
-                </ListView.GroupStyle>
-
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="filters:Filter">
-                        <TextBlock Text="{x:Bind Name}" Style="{StaticResource AppTabTextBlockStyle}"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-
-            </ListView>
-        </Flyout>
-
-        <!--DataTemplate-->
-        <DataTemplate x:Key="DataTemplate" x:DataType="adjustments:IAdjustment">
-            <Grid>
-
-                <ContentControl Content="{x:Bind Type, Converter={StaticResource AdjustmentTitleConverter}}" Style="{StaticResource AppIconContentControlStyle}">
-                    <ContentControl.Tag>
-                        <ContentControl Template="{x:Bind Type, Converter={StaticResource AdjustmentIconConverter}}" />
-                    </ContentControl.Tag>
-                </ContentControl>
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-
-                    <!--Edit-->
-                    <Button x:Name="EditButton" Style="{StaticResource AppRoundedButtonStyle}"
-                                   Visibility="{x:Bind PageVisibility}" Command="{x:Bind Edit}">
-                        <FontIcon FontSize="16" Glyph="&#xE104;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
-                    </Button>
-
-                    <!--Remove-->
-                    <Button x:Name="RemoveButton" Style="{StaticResource AppRoundedButtonStyle}"
-                           Command="{x:Bind Remove}">
-                        <FontIcon FontSize="18" Glyph="&#xE108;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
-                    </Button>
-
-                </StackPanel>
-
-            </Grid>
-        </DataTemplate>
-
-
-    </UserControl.Resources>
-
-
-    <Grid>
-
-        <!--VisualState-->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-
-                <!--Normal-->
-                <VisualState x:Name="Normal"/>
-
-                <!--Disable-->
-                <VisualState x:Name="Disable">
-                    <VisualState.Setters>
-                        <Setter Target = "AddButton.IsEnabled" Value="False"/>
-                        <Setter Target = "FilterButton.IsEnabled" Value="False"/>
-                        <Setter Target = "AddButton.Visibility" Value="Collapsed"/>
-                        <Setter Target = "FilterButton.Visibility" Value="Collapsed"/>
-
-                        <Setter Target = "DisableTextBlock.Visibility" Value="Visible"/>
-
-                        <Setter Target = "ListView.Visibility" Value="Collapsed"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-
-                <!--ZeroAdjustments-->
-                <VisualState x:Name="ZeroAdjustments">
-                    <VisualState.Setters >
-                        <Setter Target = "ZeroTextBlock.Visibility" Value="Visible"/>
-
-                        <Setter Target = "ListView.Visibility" Value="Collapsed"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*" MinHeight="165"/>
-        </Grid.RowDefinitions>
-
-
-        <!--Head-->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="4"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="4"/>
-            </Grid.ColumnDefinitions>
-            <ListViewItem x:Name="AddButton" Grid.Column="1" Style="{StaticResource AppListViewItemStyle}">
-                <ContentControl x:Name="AddControl" Style="{StaticResource AppIconReverseContentControlStyle}">
-                    <ContentControl.Tag>
-                        <FontIcon Glyph="&#xE109;" FontFamily="Segoe MDL2 Assets"/>
-                    </ContentControl.Tag>
-                </ContentControl>
-            </ListViewItem>
-            <ListViewItem x:Name="FilterButton" Grid.Column="3" Style="{StaticResource AppListViewItemStyle}"/>
-        </Grid>
-
-
-        <!--Body-->
-        <ListView x:Name="ListView" Grid.Row="1" IsItemClickEnabled="True" SelectionMode="None" ItemTemplate="{StaticResource DataTemplate}">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Padding" Value="0"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                    <Setter Property="BorderThickness" Value="0,1,0,0"/>
-                    <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemContainerTransitions>
-                <TransitionCollection/>
-            </ListView.ItemContainerTransitions>
-        </ListView>
-
-        <TextBlock x:Name="ZeroTextBlock" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
-        <TextBlock x:Name="DisableTextBlock" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"/>
-
-    </Grid>
+    </StackPanel>
 
 </UserControl>    

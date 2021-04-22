@@ -14,16 +14,76 @@
     d:DesignHeight="400"
     >
 
+    <UserControl.Resources>
+        <!--Converter -->
+        <local:AdjustmentTitleConverter x:Key="AdjustmentTitleConverter"/>
+        <local:AdjustmentIconConverter x:Key="AdjustmentIconConverter"/>
+        <!--DataTemplate-->
+        <DataTemplate x:Key="AdjustmentDataTemplate" x:DataType="adjustments:IAdjustment">
+            <Grid>
+
+                <ContentControl Content="{x:Bind Type, Converter={StaticResource AdjustmentTitleConverter}}" Style="{StaticResource AppIconContentControlStyle}">
+                    <ContentControl.Tag>
+                        <ContentControl Template="{x:Bind Type, Converter={StaticResource AdjustmentIconConverter}}" />
+                    </ContentControl.Tag>
+                </ContentControl>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Padding="4,0">
+
+                    <!--Edit-->
+                    <Button x:Name="EditButton" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedButtonStyle}"
+                                   Visibility="{x:Bind PageVisibility}" Command="{x:Bind Edit}">
+                        <FontIcon FontSize="16" Glyph="&#xE104;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                    </Button>
+
+                    <!--Remove-->
+                    <Button x:Name="RemoveButton" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedButtonStyle}"
+                           Command="{x:Bind Remove}">
+                        <FontIcon FontSize="18" Glyph="&#xE108;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                    </Button>
+
+                </StackPanel>
+
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
 
     <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
         <StackPanel MinHeight="165" Padding="2,2">
 
-            <!--Name-->
-            <TextBlock x:Name="NameTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <Button x:Name="NameButton" Height="26" Width="Auto" MinWidth="100" MaxWidth="600" HorizontalAlignment="Stretch"
-                        Style="{StaticResource AppNumberButtonStyle}"
-                        IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
-                        Content="{x:Bind SelectionViewModel.LayerName, Mode=OneWay}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="Auto" MinWidth="50"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!--Name-->
+                <TextBlock x:Name="NameTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <ListViewItem x:Name="NameButton" Grid.Row="1" Height="26" Width="Auto" MinWidth="100" MaxWidth="600" HorizontalAlignment="Stretch"
+                        Style="{StaticResource AppListViewItemStyle}"
+                        IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}">
+                    <TextBlock TextTrimming="WordEllipsis" Text="{x:Bind SelectionViewModel.LayerName, Mode=OneWay}"/>
+                </ListViewItem>
+                <TextBlock x:Name="NamePlaceholderTextBlock" IsHitTestVisible="False" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource AppText}"
+                        Visibility="{x:Bind NameToVisibilitylConverter(SelectionViewModel.LayerName), Mode=OneWay}"/>
+
+
+                <!--Visibility-->
+                <TextBlock x:Name="VisibilityTextBlock" Grid.Column="2" Style="{StaticResource AppTextBlockStyle}"/>
+                <ListViewItem x:Name="VisibilityButton" Grid.Column="2" Grid.Row="1" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
+                              IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
+                              IsSelected="{x:Bind VisibilityToBoolConverter(ViewModel.Visibility), Mode=OneWay}" >
+                    <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"
+                          MirroredWhenRightToLeft="True" />
+                </ListViewItem>
+
+            </Grid>
 
 
             <!--Opacity-->
@@ -81,23 +141,32 @@
             <ContentControl Height="4"/>
 
 
-            <!--Visibility-->
-            <TextBlock x:Name="VisibilityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <ListViewItem x:Name="VisibilityButton" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
-                               IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
-                               IsSelected="{x:Bind VisibilityToBoolConverter(ViewModel.Visibility), Mode=OneWay}" >
-                    <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"
-                          MirroredWhenRightToLeft="True" />
-                </ListViewItem>
-            </Grid>
-            
+            <!--Adjustment-->
+            <TextBlock x:Name="AdjustmentTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <Border Height="Auto" Padding="{StaticResource AppPanelPadding}" Background="{ThemeResource AppBackground}" Style="{StaticResource AppRoundedBorderStyle}">
+                <Grid>
+
+                    <TextBlock x:Name="AdjustmentDisableTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"
+                                 Visibility="{x:Bind SelectionUnSingleToVisibilitylConverter(SelectionViewModel.SelectionSingle), Mode=OneWay}"/>
+
+                    <ListView x:Name="AdjustmentListView" IsItemClickEnabled="True" SelectionMode="None" ItemTemplate="{StaticResource AdjustmentDataTemplate}"
+                              ItemsSource="{x:Bind SelectionViewModel.Adjustments}"
+                              Visibility="{x:Bind SelectionSingleToVisibilitylConverter(SelectionViewModel.SelectionSingle), Mode=OneWay}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemContainerTransitions>
+                            <TransitionCollection/>
+                        </ListView.ItemContainerTransitions>
+                    </ListView>
+
+                </Grid>
+            </Border>
+
 
             <!--Tag Type-->
             <TextBlock x:Name="TagTypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

@@ -133,7 +133,7 @@
         </Flyout>
         <Flyout x:Name="AdjustmentFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:Expander x:Name="AdjustmentExpander" Flyout="{x:Bind AdjustmentFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
-                <menus:AdjustmentMenu x:Name="AdjustmentMenu" Filter="{x:Bind SelectionViewModel.Filter, Mode=OneWay}"/>
+                <menus:AdjustmentMenu x:Name="AdjustmentMenu" IsEnabled="{x:Bind SelectionViewModel.SelectionSingle, Mode=OneWay}"/>
             </elements:Expander>
         </Flyout>
         <Flyout x:Name="EffectFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
