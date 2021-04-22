@@ -14,7 +14,7 @@ namespace Retouch_Photo2.Filters
     /// Represents a filter that contains many adjustments.
     /// </summary>
     public class Filter
-    {      
+    {
 
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; } = string.Empty;
@@ -32,8 +32,8 @@ namespace Retouch_Photo2.Filters
         {
             return new Filter
             {
-                Name= this.Name,
-                Adjustments=
+                Name = this.Name,
+                Adjustments =
                 (
                     from adjustment
                     in this.Adjustments

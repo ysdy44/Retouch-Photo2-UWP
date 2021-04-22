@@ -22,7 +22,7 @@
     xmlns:brushs="using:Retouch_Photo2.Brushs"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    NavigationCacheMode="Required"    
+    NavigationCacheMode="Required" 
     >
 
 
@@ -1126,7 +1126,7 @@
 
 
         <!--Developer-->
-        <developerTools:AlignmentGrid Grid.RowSpan="2" Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="White" Visibility="{ThemeResource AppGridVisibility}" />
+        <developerTools:AlignmentGrid Grid.RowSpan="2" Opacity="0.15" HorizontalStep="20" VerticalStep="20" LineBrush="Gray" Visibility="{ThemeResource AppGridVisibility}" />
 
 
         <!--Animated-->
@@ -1137,9 +1137,13 @@
         <ScrollViewer x:Name="ScrollViewer" Grid.RowSpan="2" Padding="20,0">
             <Border>
                 <GridView                      
-                    MaxWidth="800"                       
-                    IsItemClickEnabled="False"                       
-                    SelectionMode="None"                     
+                    MaxWidth="800" 
+                    IsItemClickEnabled="False" 
+                    SelectionMode="None" 
+                    ReorderMode="Enabled" 
+                    CanReorderItems="True"
+                    CanDragItems="True" 
+                    AllowDrop="True"
                     ItemsSource="{x:Bind CollectionViewSource.View}" 
                     animations:ItemsReorderAnimation.Duration="0:0:0.3">
 
