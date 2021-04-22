@@ -237,9 +237,9 @@ namespace Retouch_Photo2
                 else
                 {
                     if (space > 0)
-                        this.ViewModel.CanvasTransformer.ZoomIn(point);
+                        this.ViewModel.CanvasTransformer.ZoomIn(point, 1.05f);
                     else
-                        this.ViewModel.CanvasTransformer.ZoomOut(point);
+                        this.ViewModel.CanvasTransformer.ZoomOut(point, 1.05f);
 
                     this.ViewModel.NotifyCanvasTransformerScale();//Notify
                     this.ViewModel.Invalidate();//Invalidate

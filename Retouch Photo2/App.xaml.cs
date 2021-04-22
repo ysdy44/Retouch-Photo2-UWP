@@ -74,7 +74,7 @@ namespace Retouch_Photo2
                     Key = VirtualKey.Left,
                     Invoked = () =>
                     {
-                        App.ViewModel.CanvasTransformer.Position += new Vector2(50, 0);
+                        App.ViewModel.CanvasTransformer.Position -= new Vector2(20, 0);
                         App.ViewModel.CanvasTransformer.ReloadMatrix();
                         App.ViewModel.Invalidate();//Invalidate                          
                     }
@@ -86,7 +86,7 @@ namespace Retouch_Photo2
                     Key = VirtualKey.Up,
                     Invoked = () =>
                     {
-                        App.ViewModel.CanvasTransformer.Position += new Vector2(0, 50);
+                        App.ViewModel.CanvasTransformer.Position -= new Vector2(0, 20);
                         App.ViewModel.CanvasTransformer.ReloadMatrix();
                         App.ViewModel.Invalidate();//Invalidate
                     }
@@ -98,7 +98,7 @@ namespace Retouch_Photo2
                     Key = VirtualKey.Right,
                     Invoked = () =>
                     {
-                        App.ViewModel.CanvasTransformer.Position -= new Vector2(50, 0);
+                        App.ViewModel.CanvasTransformer.Position += new Vector2(20, 0);
                         App.ViewModel.CanvasTransformer.ReloadMatrix();
                         App.ViewModel.Invalidate();//Invalidate
                     }
@@ -110,7 +110,7 @@ namespace Retouch_Photo2
                     Key = VirtualKey.Down,
                     Invoked = () =>
                     {
-                        App.ViewModel.CanvasTransformer.Position -= new Vector2(50, 0);
+                        App.ViewModel.CanvasTransformer.Position += new Vector2(0, 20);
                         App.ViewModel.CanvasTransformer.ReloadMatrix();
                         App.ViewModel.Invalidate();//Invalidate
                     }
