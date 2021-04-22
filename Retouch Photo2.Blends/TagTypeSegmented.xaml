@@ -48,6 +48,9 @@
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterEllipse" Storyboard.TargetProperty="Stroke">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonOuterEllipseStrokeDisabled}" />
                                             </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource RadioButtonDisabledBackgroundThemeBrush}" />
+                                            </ObjectAnimationUsingKeyFrames> 
                                         </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>

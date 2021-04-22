@@ -53,14 +53,14 @@
                 <ResourceDictionary x:Key="Dark">
 
                     <Color x:Key="AppForegroundColor" >#1E1E1E</Color>
-                    <Color x:Key="AppBackgroundColor" >#000000</Color>
+                    <Color x:Key="AppBackgroundColor" >#0C0C0C</Color>
                     <Color x:Key="AppBorderBrushColor" >#33888888</Color>
 
                     <Color x:Key="AppFillColor" >#000000</Color>
                     <Color x:Key="AppStrokeColor" >#AA050005</Color>
                     <Color x:Key="AppTextColor" >#BBFFFFFF</Color>
 
-                    <Color x:Key="AppTitleColor" >#171717</Color>
+                    <Color x:Key="AppTitleColor" >#212121</Color>
                     <Color x:Key="AppAcrylicColor" >#111111</Color>
 
                     <Color x:Key="ApplicationTitleColor" >#070707</Color>

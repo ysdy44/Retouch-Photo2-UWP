@@ -191,7 +191,7 @@
 
 
         <!--AlignmentGrid-->
-        <developerTools:AlignmentGrid Opacity="0.1" HorizontalStep="20" VerticalStep="20" LineBrush="White" Visibility="{ThemeResource AppGridVisibility}" />
+        <developerTools:AlignmentGrid Opacity="0.15" HorizontalStep="20" VerticalStep="20" LineBrush="Gray" Visibility="{ThemeResource AppGridVisibility}" />
 
 
         <!--Body-->
@@ -514,7 +514,7 @@
         </elements:Dialog>
 
         <elements:Dialog x:Name="RenameDialog">
-            <TextBox x:Name="RenameTextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0" Background="{ThemeResource AppBackground}"/>
+            <TextBox x:Name="RenameTextBox" AcceptsReturn="True" TextWrapping="Wrap" Margin="0" VerticalAlignment="Center" BorderThickness="0" Background="{ThemeResource AppBackground}"/>
         </elements:Dialog>
 
 
