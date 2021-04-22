@@ -322,7 +322,7 @@
 
                         <!--Theme-->
                         <TextBlock x:Name="ThemeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" HorizontalAlignment="Left" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
                                 <RadioButton x:Name="LightRadioButton" GroupName="Theme" Style="{StaticResource AppIconRadioButtonStyle}">
@@ -350,7 +350,7 @@
 
                         <!--DeviceLayout-->
                         <TextBlock x:Name="DeviceLayoutTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" HorizontalAlignment="Left" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel Orientation="Horizontal">
 
                                 <RadioButton x:Name="PhoneButton" GroupName="DeviceLayoutT" Style="{StaticResource AppIconRadioButtonStyle}">
@@ -397,7 +397,7 @@
 
                         <!--CanvasBackground-->
                         <TextBlock x:Name="CanvasBackgroundTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" HorizontalAlignment="Left" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" HorizontalAlignment="Left" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
                                 <StackPanel x:Name="CanvasBackgroundStackPanel" Orientation="Horizontal">
                                 </StackPanel>
@@ -409,7 +409,7 @@
 
                         <!--LayersHeight-->
                         <TextBlock x:Name="LayersHeightTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" HorizontalAlignment="Stretch" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" HorizontalAlignment="Stretch" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel x:Name="LayersHeightStackPanel" Orientation="Vertical">
                             </StackPanel>
                         </Border>
@@ -421,7 +421,7 @@
 
                         <!--Menu-->
                         <TextBlock x:Name="MenuTypeTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel x:Name="MenusStackPanel">
                                 <Border Style="{StaticResource MenuBorderStyle1}">
                                     <CheckBox x:Name="Edit"/>
@@ -470,28 +470,28 @@
 
                         <!--Key-->
                         <TextBlock x:Name="KeyTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel x:Name="Key00StackPanel">
                             </StackPanel>
                         </Border>
 
                         <ContentControl Height="12"/>
 
-                        <Border Height="Auto" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel x:Name="Key01StackPanel">
                             </StackPanel>
                         </Border>
 
                         <ContentControl Height="12"/>
 
-                        <Border Height="Auto" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel x:Name="Key02StackPanel">
                             </StackPanel>
                         </Border>
 
                         <ContentControl Height="12"/>
 
-                        <Border Height="Auto" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel x:Name="Key03StackPanel">
                             </StackPanel>
                         </Border>
@@ -501,7 +501,7 @@
 
                         <!--Language-->
                         <TextBlock x:Name="LanguageTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Border Height="Auto" Style="{StaticResource AppRoundedBorderStyle}">
+                        <Border Height="Auto" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedBorderStyle}">
                             <StackPanel x:Name="LanguageStackPanel">
                             </StackPanel>
                         </Border>
