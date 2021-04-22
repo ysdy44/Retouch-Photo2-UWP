@@ -121,8 +121,21 @@ namespace Retouch_Photo2.Layers
         private void ConstructPointer(ILayer layer)
         {
             this.PointerEntered += (s, e) => this.ClickMode = ClickMode.Hover;
-            this.PointerPressed += (s, e) => this.ClickMode = ClickMode.Press;
-            this.PointerExited += (s, e) => this.ClickMode = ClickMode.Release;
+            this.PointerExited += (s, e) =>
+            {
+                this.ClickMode = ClickMode.Release;
+                this.OverlayMode = OverlayMode.None;
+            };
+            this.PointerPressed += (s, e) =>
+            {
+                base.CapturePointer(e.Pointer);
+                this.ClickMode = ClickMode.Press;
+            };
+            this.PointerReleased += (s, e) =>
+            {
+                base.ReleasePointerCapture(e.Pointer);
+                this.OverlayMode = OverlayMode.None;
+            };
 
             this.PointerMoved += (s, e) =>
             {
@@ -135,8 +148,6 @@ namespace Retouch_Photo2.Layers
                     LayerManager.DragItemsDelta?.Invoke(layer, overlayMode);//Delegate
                 }
             };
-            this.PointerExited += (s, e) => this.OverlayMode = OverlayMode.None;
-            this.PointerReleased += (s, e) => this.OverlayMode = OverlayMode.None;
         }
 
     }

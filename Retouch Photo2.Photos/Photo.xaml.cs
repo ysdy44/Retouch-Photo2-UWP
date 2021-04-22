@@ -31,9 +31,17 @@ namespace Retouch_Photo2.Photos
 
             this.RootGrid.PointerEntered += (s, e) => this.Entered();
             this.RootGrid.PointerExited += (s, e) => this.Exited();
-            this.RootGrid.PointerPressed += (s, e) => this.Exited();
-            this.RootGrid.PointerReleased += (s, e) => this.Exited();
-            this.RootGrid.PointerCanceled += (s, e) => this.Exited();
+            this.RootGrid.PointerCanceled += (s, e) => this.Exited(); 
+            this.PointerPressed += (s, e) =>
+            {
+                base.CapturePointer(e.Pointer);
+                this.Exited();
+            };
+            this.PointerReleased += (s, e) =>
+            {
+                base.ReleasePointerCapture(e.Pointer);
+                this.Exited();
+            };
 
             this.RootGrid.Tapped += (s, e) =>
             {

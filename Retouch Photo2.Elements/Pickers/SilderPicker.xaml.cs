@@ -76,9 +76,17 @@ namespace Retouch_Photo2.Elements
             this.Loaded += (s, e) => this.IsEnabledChange();
 
             this.PointerEntered += (s, e) => this.ClickMode = ClickMode.Hover;
-            this.PointerPressed += (s, e) => this.ClickMode = ClickMode.Press;
-            this.PointerReleased += (s, e) => this.ClickMode = ClickMode.Release;
             this.PointerExited += (s, e) => this.ClickMode = ClickMode.Release;
+            this.PointerPressed += (s, e) =>
+            {
+                base.CapturePointer(e.Pointer);
+                this.ClickMode = ClickMode.Press;
+            };
+            this.PointerReleased += (s, e) =>
+            {
+                base.ReleasePointerCapture(e.Pointer);
+                this.ClickMode = ClickMode.Release;
+            };
 
 
             //Manipulation

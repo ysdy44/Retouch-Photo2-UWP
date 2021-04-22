@@ -93,8 +93,16 @@ namespace Retouch_Photo2.Layers
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State 
 
             this.PointerEntered += (s, e) => this.ClickMode = ClickMode.Hover;
-            this.PointerPressed += (s, e) => this.ClickMode = ClickMode.Press;
             this.PointerExited += (s, e) => this.ClickMode = ClickMode.Release;
+            this.PointerPressed += (s, e) =>
+            {
+                base.CapturePointer(e.Pointer);
+                this.ClickMode = ClickMode.Press;
+            };
+            this.PointerReleased += (s, e) =>
+            {
+                base.ReleasePointerCapture(e.Pointer);
+            };
         }
     }
 }
