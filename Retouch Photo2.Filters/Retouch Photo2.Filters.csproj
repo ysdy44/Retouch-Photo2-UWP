@@ -110,6 +110,9 @@
   <ItemGroup>
     <Compile Include="Filter.cs" />
     <Compile Include="FilterCategory.cs" />
+    <Compile Include="Icon.xaml.cs">
+      <DependentUpon>Icon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMLs\XML.Filter.cs" />
     <Compile Include="XMLs\XML.FilterCategory.cs" />
@@ -129,6 +132,12 @@
       <Project>{7256c005-0e5d-4c38-9115-e4eef9978233}</Project>
       <Name>Retouch Photo2.Adjustments</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Icon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

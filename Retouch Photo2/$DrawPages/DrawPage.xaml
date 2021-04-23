@@ -18,6 +18,7 @@
     xmlns:texts="using:Retouch_Photo2.Texts"
     xmlns:strokes="using:Retouch_Photo2.Strokes"
     xmlns:styles="using:Retouch_Photo2.Styles"
+    xmlns:filters="using:Retouch_Photo2.Filters"
     xmlns:historys="using:Retouch_Photo2.Historys"
     xmlns:transformers="using:FanKit.Transformers"
     xmlns:layers="using:Retouch_Photo2.Layers" 
@@ -155,6 +156,11 @@
         <Flyout x:Name="StyleFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <elements:Expander x:Name="StyleExpander" Flyout="{x:Bind StyleFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
                 <menus:StyleMenu/>
+            </elements:Expander>
+        </Flyout>
+        <Flyout x:Name="FilterFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <elements:Expander x:Name="FilterExpander" Flyout="{x:Bind FilterFlyout}" OverlayCanvas="{x:Bind MenuOverlayCanvas}" PinStackPanel="{x:Bind DrawLayout.PinStackPanel}" >
+                <menus:FilterMenu/>
             </elements:Expander>
         </Flyout>
 

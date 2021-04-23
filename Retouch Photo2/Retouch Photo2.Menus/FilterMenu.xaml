@@ -1,0 +1,51 @@
+﻿<UserControl
+    x:Class="Retouch_Photo2.Menus.FilterMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:filters="using:Retouch_Photo2.Filters"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    
+    <UserControl.Resources>
+        <CollectionViewSource x:Name="CollectionViewSource" IsSourceGrouped="True"/>
+    </UserControl.Resources>
+    
+
+    <ListView x:Name="ListView" 
+              SelectionMode="None" 
+              IsItemClickEnabled="True"
+              ItemsSource="{x:Bind CollectionViewSource.View, Mode=OneWay}">
+
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="BorderThickness" Value="0,1,0,0"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource AppBorderBrush}"/>
+            </Style>
+        </ListView.ItemContainerStyle>
+
+        <ListView.GroupStyle>
+            <GroupStyle>
+                <GroupStyle.HeaderTemplate>
+                    <DataTemplate x:DataType="filters:FilterCategory">
+                        <TextBlock Text="{x:Bind Name}" Style="{StaticResource AppTabTextBlockStyle}"/>
+                    </DataTemplate>
+                </GroupStyle.HeaderTemplate>
+            </GroupStyle>
+        </ListView.GroupStyle>
+
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="filters:Filter">
+                <TextBlock Text="{x:Bind Name}" Style="{StaticResource AppTabTextBlockStyle}"/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>
+    
+</UserControl>

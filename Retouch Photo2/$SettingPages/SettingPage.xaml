@@ -446,18 +446,21 @@
                                 <Border Style="{StaticResource MenuBorderStyle1}">
                                     <CheckBox x:Name="Style"/>
                                 </Border>
-
                                 <Border Style="{StaticResource MenuBorderStyle2}">
+                                    <CheckBox x:Name="Filter"/>
+                                </Border>
+
+                                <Border Style="{StaticResource MenuBorderStyle1}">
                                     <CheckBox x:Name="History"/>
                                 </Border>
-                                <Border Style="{StaticResource MenuBorderStyle1}">
+                                <Border Style="{StaticResource MenuBorderStyle2}">
                                     <CheckBox x:Name="Transformer"/>
                                 </Border>
-                                <Border Style="{StaticResource MenuBorderStyle2}">
+                                <Border Style="{StaticResource MenuBorderStyle1}">
                                     <CheckBox x:Name="Layer"/>
                                 </Border>
 
-                                <Border Style="{StaticResource MenuBorderStyle1}">
+                                <Border Style="{StaticResource MenuBorderStyle2}">
                                     <CheckBox x:Name="Color"/>
                                 </Border>
                             </StackPanel>

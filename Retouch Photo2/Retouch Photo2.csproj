@@ -193,6 +193,9 @@
     <Compile Include="Retouch Photo2.Menus\EffectMenu.xaml.cs">
       <DependentUpon>EffectMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Retouch Photo2.Menus\FilterMenu.xaml.cs">
+      <DependentUpon>FilterMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Retouch Photo2.Menus\HistoryMenu.xaml.cs">
       <DependentUpon>HistoryMenu.xaml</DependentUpon>
     </Compile>
@@ -530,6 +533,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Retouch Photo2.Menus\EffectMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Retouch Photo2.Menus\FilterMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
