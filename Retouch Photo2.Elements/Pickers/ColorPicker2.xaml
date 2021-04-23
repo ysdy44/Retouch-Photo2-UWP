@@ -127,7 +127,7 @@
                 <ColumnDefinition Width="4"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <!--Grab the focus for HexPicker TextBox-->
+            <!--Grab the focus for TextBox-->
             <ContentControl IsTabStop="True" IsTapEnabled="True" HorizontalContentAlignment="Center" VerticalAlignment="Center">
                 #
             </ContentControl>

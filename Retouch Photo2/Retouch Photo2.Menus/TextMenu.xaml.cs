@@ -4,9 +4,11 @@
 // Only:              
 // Complete:      ★★★★★
 using Microsoft.Graphics.Canvas.Text;
+using Microsoft.Toolkit.Uwp.UI;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Texts;
 using Retouch_Photo2.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.Resources;
@@ -44,7 +46,7 @@ namespace Retouch_Photo2.Menus
             }
         }
         private bool FontStyleConverter(FontStyle fontStyle) => fontStyle == FontStyle.Italic;
-        private int FontSizeConverter(float fontSize) => (int)fontSize;
+        private string Round2Converter(float value) => $"{(float)Math.Round(value, 2)}";
 
 
         #region DependencyProperty
@@ -110,18 +112,34 @@ namespace Retouch_Photo2.Menus
             };
 
             // Get all fontSizes in your device.
-            this.FontSizeListView.ItemsSource = new List<int>
+            this.FontSizeListView.ItemsSource = new List<float>
             {
-                5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 24, 30, 36, 48, 64, 72, 96, 144, 288,
+                5f, 6f, 7f, 8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f, 16f, 18f, 20f, 24f, 30f, 36f, 48f, 64f, 72f, 96f, 144f, 288f,
             };
             this.FontSizeButton.Tapped += (s, e) => this.FontSizeFlyout.ShowAt(this.FontSizeButton);
-            this.FontSizePicker.ValueChanged += (s, value) => this.SetFontSize(value);
+
+            TextBoxExtensions.SetDefault(this.FontSizeTextBox, $"{22.0f}");
+            this.FontSizeTextBox.LostFocus += (s, e) =>
+            {
+                if (this.FontSizeTextBox.Text is string value)
+                {
+                    if (string.IsNullOrEmpty(value) == false)
+                    {
+                        float size = float.Parse(value);
+                        if (size < 1)
+                        {
+                            size = 1;
+                        }
+
+                        this.SetFontSize(size);
+                    }
+                }
+            };
+
             this.FontSizeListView.ItemClick += (s, e) =>
             {
-                if (e.ClickedItem is int value)
+                if (e.ClickedItem is float value)
                 {
-                    this.FontSizePicker.Value = value;
-
                     this.SetFontSize(value);
                 }
             };

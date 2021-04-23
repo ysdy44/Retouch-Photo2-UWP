@@ -7,7 +7,7 @@
     <x:Double x:Key="AppTitleHeight">42</x:Double>
 
     <x:Double x:Key="AppCircleHeight">40</x:Double>
-    <x:Double x:Key="AppRoundedHeight">36</x:Double>
+    <x:Double x:Key="AppRoundedHeight">32</x:Double>
 
 
     <!--Thickness-->
@@ -53,8 +53,8 @@
     <!--ListViewItem-->
     <Style x:Key="ListViewItemBase" TargetType="ListViewItem">
         <Setter Property="Height" Value="{ThemeResource AppRoundedHeight}"/>
-        <Setter Property="MinWidth" Value="36"/>
-        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="MinWidth" Value="32"/>
+        <Setter Property="MinHeight" Value="32"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>

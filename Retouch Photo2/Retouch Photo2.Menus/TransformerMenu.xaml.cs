@@ -33,6 +33,10 @@ namespace Retouch_Photo2.Menus
         private IndicatorMode IndicatorMode = IndicatorMode.LeftTop;
 
 
+        //@Converter
+        private string Round2Converter(float value) => $"{(float)Math.Round(value, 2)}";
+
+
         #region DependencyProperty
 
 
@@ -195,23 +199,27 @@ namespace Retouch_Photo2.Menus
                             //Radians Skew
                             float radians = Transformer.GetRadians(horizontal);
                             float skew = Transformer.GetSkew(vertical, radians);
-                            this.RotateTextBox.Text = $"{Math.Round(radians, 2)} º";
-                            this.SkewTextBox.Text = $"{Math.Round(skew, 2)} º";
+                            this.RotateTextBox.Text = this.Round2Converter(radians) + " º";
+                            this.SkewTextBox.Text = this.Round2Converter(skew) + " º";
 
                             //@Release: case Debug
-                            //Width Height
-                            //float width = horizontal.Length();
-                            //float height = vertical.Length();
+                            {
+                                //Width Height
+                                //float width = horizontal.Length();
+                                //float height = vertical.Length();
+                            }
                             //@Release: case Release
-                            double width = Math.Sqrt(horizontal.X * horizontal.X + horizontal.Y * horizontal.Y);
-                            double height = Math.Sqrt(vertical.X * vertical.X + vertical.Y * vertical.Y);
-                            this.WidthTextBox.Text = $"{Math.Round(width, 2)}";
-                            this.HeightTextBox.Text = $"{Math.Round(height, 2)}";
+                            {
+                                float width = (float)Math.Sqrt(horizontal.X * horizontal.X + horizontal.Y * horizontal.Y);
+                                float height = (float)Math.Sqrt(vertical.X * vertical.X + vertical.Y * vertical.Y);
+                                this.WidthTextBox.Text = this.Round2Converter(width);
+                                this.HeightTextBox.Text = this.Round2Converter(height);
+                            }
 
                             //X Y
                             Vector2 vector = transformer.GetIndicatorVector(this.IndicatorMode);
-                            this.XTextBox.Text = $"{Math.Round(vector.X, 2)}";
-                            this.YTextBox.Text = $"{Math.Round(vector.Y, 2)}";
+                            this.XTextBox.Text = this.Round2Converter(vector.X);
+                            this.YTextBox.Text = this.Round2Converter(vector.Y);
 
                             //Indicator
                             this.IndicatorControl.Radians = radians;
@@ -383,7 +391,7 @@ namespace Retouch_Photo2.Menus
                 {
                     if (string.IsNullOrEmpty(value) == false)
                     {
-                        double width = double.Parse(value);
+                        float width = float.Parse(value);
                         if (width < 1)
                         {
                             width = 1;
@@ -407,7 +415,7 @@ namespace Retouch_Photo2.Menus
                 {
                     if (string.IsNullOrEmpty(value) == false)
                     {
-                        double height = double.Parse(value);
+                        float height = float.Parse(value);
                         if (height < 1)
                         {
                             height = 1;
@@ -438,7 +446,7 @@ namespace Retouch_Photo2.Menus
                     {
                         value = value.Replace("º", string.Empty);
 
-                        double angle = double.Parse(value);
+                        float angle = float.Parse(value);
                         if (angle < -180)
                         {
                             angle = -180;
@@ -470,7 +478,7 @@ namespace Retouch_Photo2.Menus
                     {
                         value = value.Replace("º", string.Empty);
 
-                        double angle = double.Parse(value);
+                        float angle = float.Parse(value);
                         if (angle < -90)
                         {
                             angle = -90;
@@ -504,7 +512,7 @@ namespace Retouch_Photo2.Menus
                 {
                     if (string.IsNullOrEmpty(value) == false)
                     {
-                        double x = double.Parse(value);
+                        float x = float.Parse(value);
 
                         Transformer transformer = this.SelectionTransformer;
                         Vector2 vector = transformer.TransformX((float)x, this.IndicatorMode);
@@ -524,7 +532,7 @@ namespace Retouch_Photo2.Menus
                 {
                     if (string.IsNullOrEmpty(value) == false)
                     {
-                        double y = double.Parse(value);
+                        float y = float.Parse(value);
 
                         Transformer transformer = this.SelectionTransformer;
                         Vector2 vector = transformer.TransformY((float)y, this.IndicatorMode);

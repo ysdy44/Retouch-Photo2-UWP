@@ -37,13 +37,11 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBox IsTapEnabled="True" Width="0" Height="0" MinWidth="0" MinHeight="0" IsHitTestVisible="False">
-                        <TextBox.Text>
-                            IsTapEnabled
-                        </TextBox.Text>
-                    </TextBox>
 
-                    
+                    <!--Grab the focus for TextBox-->
+                    <ContentControl IsTabStop="True" IsTapEnabled="True"/>
+
+
                     <!--Width-->
                     <TextBlock x:Name="WidthTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}"/>
                     <TextBox x:Name="WidthTextBox" Grid.Column="0" Grid.Row="1"

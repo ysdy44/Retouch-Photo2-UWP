@@ -56,7 +56,13 @@ namespace Retouch_Photo2.Layers.Models
                 this.IsRefactoringTransformer = false;
 
 
-                //@Release
+                //@Release: case Debug
+                {
+                    //TransformerBorder border = new TransformerBorder(base.Nodes);
+                    //Transformer transformer = border.ToTransformer();
+                }
+                //@Release: case Release
+                //{
                 float left = float.MaxValue;
                 float top = float.MaxValue;
                 float right = float.MinValue;
@@ -79,13 +85,9 @@ namespace Retouch_Photo2.Layers.Models
                             break;
                     }
                 }
-                
+
                 Transformer transformer = new Transformer(left, top, right, bottom);
-                //@Release
-
-
-                //TransformerBorder border = new TransformerBorder(base.Nodes);
-                //Transformer transformer = border.ToTransformer();
+                //}
 
 
                 this.Transform.Transformer = transformer;
@@ -138,6 +140,6 @@ namespace Retouch_Photo2.Layers.Models
 
 
         public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator) => null;
-        
+
     }
 }

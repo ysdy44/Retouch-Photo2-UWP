@@ -84,7 +84,9 @@ namespace Retouch_Photo2
             foreach (Photo photo in savedPhotos)
             {
                 //@Release: case Debug
-                //await photo.MoveFile(zipFolder);
+                {
+                    //await photo.MoveFile(zipFolder);
+                }
                 //@Release: case Release
                 {
                     //Move photo file.
