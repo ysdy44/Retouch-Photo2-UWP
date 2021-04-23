@@ -158,7 +158,7 @@ namespace Retouch_Photo2.ViewModels
         private int adjustmentsCount = -1;
 
         /// <summary> Gets or sets the layer filter adjustments. </summary>
-        public ObservableCollection<IAdjustment> Adjustments { get; set; } = new ObservableCollection<IAdjustment>();
+        public ObservableCollection<IAdjustment> Adjustments { get; } = new ObservableCollection<IAdjustment>();
 
 
         //////////////////////////

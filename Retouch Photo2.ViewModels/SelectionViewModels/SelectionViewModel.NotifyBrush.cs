@@ -8,7 +8,7 @@ namespace Retouch_Photo2.ViewModels
 {
     public partial class ViewModel : INotifyPropertyChanged
     {
-        
+
         /// <summary> Brush's Fill or Stroke. </summary>     
         public FillOrStroke FillOrStroke
         {
@@ -21,7 +21,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private FillOrStroke fillOrStroke = FillOrStroke.Fill;
-                        
+
 
         /// <summary> Gets or sets the current color. </summary>
         public Color Color
@@ -88,7 +88,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private IBrush stroke = new BrushBase();
-        
+
         /// <summary> Gets or sets the style.IsStrokeWidthFollowScale. </summary>
         public bool IsStrokeWidthFollowScale
         {
@@ -101,7 +101,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
         private bool isStrokeWidthFollowScale = false;
-                
+
         /// <summary> Gets or sets the current stroke-width. </summary>
         public float StrokeWidth
         {
@@ -119,64 +119,56 @@ namespace Retouch_Photo2.ViewModels
 
 
         /// <summary> Gets the current stroke-style. </summary>
-        public CanvasStrokeStyle StrokeStyle { get; private set; } = new CanvasStrokeStyle();
+        public CanvasStrokeStyle StrokeStyle { get; } = new CanvasStrokeStyle();
 
 
         /// <summary> Gets or sets the current stroke-style's <see cref="CanvasStrokeStyle.DashStyle"/>. </summary>
         public CanvasDashStyle StrokeStyle_Dash
         {
-            get => this.strokeStyle_Dash;
+            get => this.StrokeStyle.DashStyle;
             set
             {
-                this.strokeStyle_Dash = value;
-                this.OnPropertyChanged(nameof(StrokeStyle_Dash));//Notify 
                 this.StrokeStyle.DashStyle = value;
+                this.OnPropertyChanged(nameof(StrokeStyle_Dash));//Notify 
                 this.OnPropertyChanged(nameof(StrokeStyle));//Notify 
             }
         }
-        private CanvasDashStyle strokeStyle_Dash = CanvasDashStyle.Solid;
-        
+
         /// <summary> Gets or sets the current stroke-style's <see cref="CanvasStrokeStyle.DashCap"/>. </summary>
         public CanvasCapStyle StrokeStyle_Cap
         {
-            get => this.strokeStyle_Cap;
+            get => this.StrokeStyle.DashCap;
             set
             {
-                this.strokeStyle_Cap = value;
-                this.OnPropertyChanged(nameof(StrokeStyle_Cap));//Notify 
                 this.StrokeStyle.DashCap = value;
+                this.OnPropertyChanged(nameof(StrokeStyle_Cap));//Notify 
                 this.OnPropertyChanged(nameof(StrokeStyle));//Notify 
             }
         }
-        private CanvasCapStyle strokeStyle_Cap = CanvasCapStyle.Flat;
-        
+
         /// <summary> Gets or sets the current stroke-style's <see cref="CanvasStrokeStyle.LineJoin"/>. </summary>
         public CanvasLineJoin StrokeStyle_Join
         {
-            get => this.strokeStyle_Join;
+            get => this.StrokeStyle.LineJoin;
             set
             {
-                this.strokeStyle_Join = value;
-                this.OnPropertyChanged(nameof(StrokeStyle_Join));//Notify 
                 this.StrokeStyle.LineJoin = value;
+                this.OnPropertyChanged(nameof(StrokeStyle_Join));//Notify 
                 this.OnPropertyChanged(nameof(StrokeStyle));//Notify 
             }
         }
-        private CanvasLineJoin strokeStyle_Join = CanvasLineJoin.Miter;
-        
+
         /// <summary> Gets or sets the current stroke-style's <see cref="CanvasStrokeStyle.DashOffset"/>. </summary>
         public float StrokeStyle_Offset
         {
-            get => this.strokeStyle_Offset;
+            get => this.StrokeStyle.DashOffset;
             set
             {
-                this.strokeStyle_Offset = value;
-                this.OnPropertyChanged(nameof(StrokeStyle_Offset));//Notify 
                 this.StrokeStyle.DashOffset = value;
+                this.OnPropertyChanged(nameof(StrokeStyle_Offset));//Notify 
                 this.OnPropertyChanged(nameof(StrokeStyle));//Notify 
             }
         }
-        private float strokeStyle_Offset = 0.0f;
 
 
         //////////////////////////
@@ -207,7 +199,7 @@ namespace Retouch_Photo2.ViewModels
             this.IsFollowTransform = style.IsFollowTransform;
 
             this.IsStrokeBehindFill = style.IsStrokeBehindFill;
-            
+
             this.Fill = style.Fill;
             this.Stroke = style.Stroke;
 
@@ -215,12 +207,15 @@ namespace Retouch_Photo2.ViewModels
 
             this.StrokeWidth = style.StrokeWidth;
 
-            this.StrokeStyle = style.StrokeStyle;
-
-            this.StrokeStyle_Dash = style.StrokeStyle.DashStyle;
-            this.StrokeStyle_Cap = style.StrokeStyle.DashCap;
-            this.strokeStyle_Join = style.StrokeStyle.LineJoin;
-            this.StrokeStyle_Offset = style.StrokeStyle.DashOffset;
+            this.StrokeStyle.DashStyle = style.StrokeStyle.DashStyle;
+            this.OnPropertyChanged(nameof(StrokeStyle_Dash));//Notify 
+            this.StrokeStyle.DashCap = style.StrokeStyle.DashCap;
+            this.OnPropertyChanged(nameof(StrokeStyle_Cap));//Notify 
+            this.StrokeStyle.LineJoin = style.StrokeStyle.LineJoin;
+            this.OnPropertyChanged(nameof(StrokeStyle_Join));//Notify 
+            this.StrokeStyle.DashOffset = style.StrokeStyle.DashOffset;
+            this.OnPropertyChanged(nameof(StrokeStyle_Offset));//Notify 
+            this.OnPropertyChanged(nameof(StrokeStyle));//Notify 
 
             this.Transparency = style.Transparency;
 
