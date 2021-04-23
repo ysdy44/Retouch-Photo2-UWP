@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Tools.Models
                 Step = this.SelectionViewModel.PatternSpotted_Step,
                 Radius = this.SelectionViewModel.PatternSpotted_Radius,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandCurveStyle
+                Style = this.SelectionViewModel.StandardCurveStyle
             };
         }
 

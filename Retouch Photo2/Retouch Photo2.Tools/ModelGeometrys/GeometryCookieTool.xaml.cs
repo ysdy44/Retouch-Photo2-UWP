@@ -115,7 +115,7 @@ namespace Retouch_Photo2.Tools.Models
                 InnerRadius = this.SelectionViewModel.GeometryCookie_InnerRadius,
                 SweepAngle = this.SelectionViewModel.GeometryCookie_SweepAngle,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandGeometryStyle
+                Style = this.SelectionViewModel.StandardGeometryStyle
             };
         }
 

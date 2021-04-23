@@ -91,7 +91,7 @@ namespace Retouch_Photo2.Tools.Models
                 HorizontalStep = this.SelectionViewModel.PatternGrid_HorizontalStep,
                 VerticalStep = this.SelectionViewModel.PatternGrid_VerticalStep,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandCurveStyle
+                Style = this.SelectionViewModel.StandardCurveStyle
             };
         }
 

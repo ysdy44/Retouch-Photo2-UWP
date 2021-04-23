@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Spread = this.SelectionViewModel.GeometryHeart_Spread,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandGeometryStyle
+                Style = this.SelectionViewModel.StandardGeometryStyle
             };
         }
 

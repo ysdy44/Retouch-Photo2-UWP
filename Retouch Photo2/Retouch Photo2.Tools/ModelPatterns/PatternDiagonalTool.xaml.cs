@@ -77,7 +77,7 @@ namespace Retouch_Photo2.Tools.Models
                 HorizontalStep = this.SelectionViewModel.PatternDiagonal_HorizontalStep,
                 Offset = this.SelectionViewModel.PatternDiagonal_Offset,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandCurveStyle
+                Style = this.SelectionViewModel.StandardCurveStyle
             };
         }
 

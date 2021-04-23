@@ -223,7 +223,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 IsSelected = true,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandCurveStyle,
+                Style = this.SelectionViewModel.StandardCurveStyle,
             };
             Layerage curveLayerage = curveLayer.ToLayerage();
             string id = curveLayerage.Id;

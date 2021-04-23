@@ -114,7 +114,7 @@ namespace Retouch_Photo2.Tools.Models
                 LeftTail = this.SelectionViewModel.GeometryArrow_LeftTail,
                 RightTail = this.SelectionViewModel.GeometryArrow_RightTail,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandGeometryStyle
+                Style = this.SelectionViewModel.StandardGeometryStyle
             };
         }
 

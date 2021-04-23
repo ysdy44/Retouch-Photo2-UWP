@@ -44,7 +44,7 @@ namespace Retouch_Photo2.ViewModels
                 layerage.RefactoringParentsIconRender();
                 layer.Style.Fill = BrushBase.ColorBrush(value);
 
-                this.StandStyleLayerage = layerage;
+                this.StandardStyleLayerage = layerage;
             });
 
             //History
@@ -116,7 +116,7 @@ namespace Retouch_Photo2.ViewModels
                 layerage.RefactoringParentsIconRender();
                 layer.Style.Fill = BrushBase.ColorBrush(value);
 
-                this.StandStyleLayerage = layerage;
+                this.StandardStyleLayerage = layerage;
             });
 
             //History
@@ -163,7 +163,7 @@ namespace Retouch_Photo2.ViewModels
                 layerage.RefactoringParentsIconRender();
                 layer.Style.Stroke = BrushBase.ColorBrush(value);
 
-                this.StandStyleLayerage = layerage;
+                this.StandardStyleLayerage = layerage;
             });
 
             //History
@@ -235,7 +235,7 @@ namespace Retouch_Photo2.ViewModels
                 layerage.RefactoringParentsIconRender();
                 layer.Style.Stroke = BrushBase.ColorBrush(value);
 
-                this.StandStyleLayerage = layerage;
+                this.StandardStyleLayerage = layerage;
             });
 
             //History

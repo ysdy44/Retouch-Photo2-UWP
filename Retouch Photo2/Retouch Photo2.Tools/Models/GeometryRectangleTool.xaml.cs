@@ -95,7 +95,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 IsSelected = true,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandGeometryStyle
+                Style = this.SelectionViewModel.StandardGeometryStyle
             };
         }
 

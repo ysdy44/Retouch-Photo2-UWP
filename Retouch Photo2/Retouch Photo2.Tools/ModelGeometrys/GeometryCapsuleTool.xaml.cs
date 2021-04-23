@@ -89,7 +89,7 @@ namespace Retouch_Photo2.Tools.Models
             return new GeometryCapsuleLayer
             {
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandGeometryStyle
+                Style = this.SelectionViewModel.StandardGeometryStyle
             };
         }
 

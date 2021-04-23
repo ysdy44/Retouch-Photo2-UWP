@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Corner = this.SelectionViewModel.GeometryRoundRect_Corner,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandGeometryStyle
+                Style = this.SelectionViewModel.StandardGeometryStyle
             };
         }
 

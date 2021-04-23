@@ -100,7 +100,7 @@ namespace Retouch_Photo2.Menus
                     set: (layer) =>
                     {
                         layer.Style.StrokeStyle.DashStyle = strokeStyleDash;
-                        this.SelectionViewModel.StandStyleLayer = layer;
+                        this.SelectionViewModel.StandardStyleLayer = layer;
                     },
 
                     type: HistoryType.LayersProperty_SetStyle_StrokeStyle_Dash,
@@ -127,7 +127,7 @@ namespace Retouch_Photo2.Menus
                     set: (layer) =>
                     {
                         layer.Style.StrokeWidth = strokeWidth;
-                        this.SelectionViewModel.StandStyleLayer = layer;
+                        this.SelectionViewModel.StandardStyleLayer = layer;
                     },
 
                     type: HistoryType.LayersProperty_SetStyle_StrokeWidth,
@@ -159,7 +159,7 @@ namespace Retouch_Photo2.Menus
                     set: (layer) =>
                     {
                         layer.Style.StrokeWidth = strokeWidth;
-                        this.SelectionViewModel.StandStyleLayer = layer;
+                        this.SelectionViewModel.StandardStyleLayer = layer;
                     },
 
                     type: HistoryType.LayersProperty_SetStyle_StrokeWidth,
@@ -185,7 +185,7 @@ namespace Retouch_Photo2.Menus
                         layer.Style.StrokeStyle.DashCap = strokeStyleCap;
                         layer.Style.StrokeStyle.StartCap = strokeStyleCap;
                         layer.Style.StrokeStyle.EndCap = strokeStyleCap;
-                        this.SelectionViewModel.StandStyleLayer = layer;
+                        this.SelectionViewModel.StandardStyleLayer = layer;
                     },
 
                     type: HistoryType.LayersProperty_SetStyle_StrokeStyle_Cap,
@@ -209,7 +209,7 @@ namespace Retouch_Photo2.Menus
                     set: (layer) =>
                     {
                         layer.Style.StrokeStyle.LineJoin = strokeStyleJoin;
-                        this.SelectionViewModel.StandStyleLayer = layer;
+                        this.SelectionViewModel.StandardStyleLayer = layer;
                     },
 
                     type: HistoryType.LayersProperty_SetStyle_StrokeStyle_Join,
@@ -236,7 +236,7 @@ namespace Retouch_Photo2.Menus
                     set: (layer) =>
                     {
                         layer.Style.StrokeStyle.DashOffset = strokeOffset;
-                        this.SelectionViewModel.StandStyleLayer = layer;
+                        this.SelectionViewModel.StandardStyleLayer = layer;
                     },
 
                     type: HistoryType.LayersProperty_SetStyle_StrokeStyle_Offset,
@@ -268,7 +268,7 @@ namespace Retouch_Photo2.Menus
                     set: (layer) =>
                     {
                         layer.Style.StrokeStyle.DashOffset = strokeOffset;
-                        this.SelectionViewModel.StandStyleLayer = layer;
+                        this.SelectionViewModel.StandardStyleLayer = layer;
                     },
 
                     type: HistoryType.LayersProperty_SetStyle_StrokeStyle_Offset,

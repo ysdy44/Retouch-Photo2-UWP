@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 Mid = this.SelectionViewModel.GeometryDiamond_Mid,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandGeometryStyle
+                Style = this.SelectionViewModel.StandardGeometryStyle
             };
         }
 

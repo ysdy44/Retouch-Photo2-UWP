@@ -97,7 +97,7 @@ namespace Retouch_Photo2.Tools.Models
             {
                 HoleRadius = this.SelectionViewModel.GeometryDount_HoleRadius,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandGeometryStyle
+                Style = this.SelectionViewModel.StandardGeometryStyle
             };
         }
 

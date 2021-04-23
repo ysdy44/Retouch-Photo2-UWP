@@ -61,7 +61,7 @@ namespace Retouch_Photo2.Menus
                             layer.Style = style2;
 
                             transformer = transformer2;
-                            this.SelectionViewModel.StandStyleLayer = layer;
+                            this.SelectionViewModel.StandardStyleLayer = layer;
                         },
 
                         type: HistoryType.LayersProperty_SetStyle,

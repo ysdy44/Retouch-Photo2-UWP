@@ -133,7 +133,7 @@ namespace Retouch_Photo2.Tools.Models
                 Tooth = this.SelectionViewModel.GeometryCog_Tooth,
                 Notch = this.SelectionViewModel.GeometryCog_Notch,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandGeometryStyle
+                Style = this.SelectionViewModel.StandardGeometryStyle
             };
         }
 

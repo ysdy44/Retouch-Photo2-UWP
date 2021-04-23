@@ -625,7 +625,7 @@ namespace Retouch_Photo2.ViewModels
                 layerage.RefactoringParentsRender();
                 layerage.RefactoringParentsIconRender();
                 set(layer.Style, layer.Transform.Transformer);
-                this.StandStyleLayer = layer;
+                this.StandardStyleLayer = layer;
             });
 
             //History
@@ -695,7 +695,7 @@ namespace Retouch_Photo2.ViewModels
                 layerage.RefactoringParentsRender();
                 layerage.RefactoringParentsIconRender();
                 set(layer.Style);
-                this.StandStyleLayer = layer;
+                this.StandardStyleLayer = layer;
             });
 
             //History

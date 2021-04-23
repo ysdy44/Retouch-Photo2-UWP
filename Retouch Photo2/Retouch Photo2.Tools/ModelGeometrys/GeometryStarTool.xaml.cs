@@ -114,7 +114,7 @@ namespace Retouch_Photo2.Tools.Models
                 Points = this.SelectionViewModel.GeometryStar_Points,
                 InnerRadius = this.SelectionViewModel.GeometryStar_InnerRadius,
                 Transform = new Transform(transformer),
-                Style = this.SelectionViewModel.StandGeometryStyle
+                Style = this.SelectionViewModel.StandardGeometryStyle
             };
         }
 

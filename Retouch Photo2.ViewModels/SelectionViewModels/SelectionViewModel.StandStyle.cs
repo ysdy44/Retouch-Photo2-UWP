@@ -12,29 +12,29 @@ namespace Retouch_Photo2.ViewModels
     {
 
         /// <summary>
-        /// Sets the stand style
+        /// Sets the standard style
         /// switch by <see cref="Retouch_Photo2.Layers.LayerType"/> to
-        /// <see cref="ViewModel.StandGeometryStyle"/>
-        /// <see cref="ViewModel.StandCurveStyle"/>
-        /// <see cref="ViewModel.StandTextStyle"/>
+        /// <see cref="ViewModel.StandardGeometryStyle"/>
+        /// <see cref="ViewModel.StandardCurveStyle"/>
+        /// <see cref="ViewModel.StandardTextStyle"/>
         /// </summary>
-        public Layerage StandStyleLayerage
+        public Layerage StandardStyleLayerage
         {
             set
             {
                 ILayer layer = value.Self;
-                this.StandStyleLayer = layer;
+                this.StandardStyleLayer = layer;
             }
         }
 
         /// <summary>
-        /// Sets the stand style
+        /// Sets the standard style
         /// switch by <see cref="Retouch_Photo2.Layers.LayerType"/> to
-        /// <see cref="ViewModel.StandGeometryStyle"/>
-        /// <see cref="ViewModel.StandCurveStyle"/>
-        /// <see cref="ViewModel.StandTextStyle"/>
+        /// <see cref="ViewModel.StandardGeometryStyle"/>
+        /// <see cref="ViewModel.StandardCurveStyle"/>
+        /// <see cref="ViewModel.StandardTextStyle"/>
         /// </summary>
-        public ILayer StandStyleLayer
+        public ILayer StandardStyleLayer
         {
             set
             {
@@ -47,40 +47,40 @@ namespace Retouch_Photo2.ViewModels
                     case LayerType.Curve:
                     case LayerType.PatternGrid:
                     case LayerType.PatternSpotted:
-                        if (value != standStyleCurveLayer)
-                            this.standStyleCurveLayer = layer;
+                        if (value != standardStyleCurveLayer)
+                            this.standardStyleCurveLayer = layer;
                         break;
 
                     //Text
                     case LayerType.TextFrame:
                     case LayerType.TextArtistic:
-                        if (value != standStyleTextLayer)
-                            this.standStyleTextLayer = layer;
+                        if (value != standardStyleTextLayer)
+                            this.standardStyleTextLayer = layer;
                         break;
 
                     //Geometry
                     default:
-                        if (value != StandStyleGeometryLayer)
-                            this.StandStyleGeometryLayer = layer;
+                        if (value != standardStyleGeometryLayer)
+                            this.standardStyleGeometryLayer = layer;
                         break;
                 }
             }
         }
 
 
-        private ILayer StandStyleGeometryLayer;
-        private ILayer standStyleCurveLayer;
-        private ILayer standStyleTextLayer;
-                    
+        private ILayer standardStyleGeometryLayer;
+        private ILayer standardStyleCurveLayer;
+        private ILayer standardStyleTextLayer;
+
 
         /// <summary>
-        /// Gets the stand geometry style.
+        /// Gets the standard geometry style.
         /// </summary>
-        public IStyle StandGeometryStyle
+        public IStyle StandardGeometryStyle
         {
             get
             {
-                if (this.StandStyleGeometryLayer is ILayer layer)
+                if (this.standardStyleGeometryLayer is ILayer layer)
                 {
                     //CacheBrush
                     Transformer transformer = layer.Transform.Transformer;
@@ -104,13 +104,13 @@ namespace Retouch_Photo2.ViewModels
         }
 
         /// <summary>
-        /// Gets the stand curve style.
+        /// Gets the standard curve style.
         /// </summary>
-        public IStyle StandCurveStyle
+        public IStyle StandardCurveStyle
         {
             get
             {
-                if (this.standStyleCurveLayer is ILayer layer)
+                if (this.standardStyleCurveLayer is ILayer layer)
                 {
                     //CacheBrush
                     Transformer transformer = layer.Transform.Transformer;
@@ -134,13 +134,13 @@ namespace Retouch_Photo2.ViewModels
         }
 
         /// <summary>
-        /// Gets the stand text style.
+        /// Gets the standard text style.
         /// </summary>
-        public IStyle StandTextStyle
+        public IStyle StandardTextStyle
         {
             get
             {
-                if (this.standStyleTextLayer is ILayer layer)
+                if (this.standardStyleTextLayer is ILayer layer)
                 {
                     //CacheBrush
                     Transformer transformer = layer.Transform.Transformer;
