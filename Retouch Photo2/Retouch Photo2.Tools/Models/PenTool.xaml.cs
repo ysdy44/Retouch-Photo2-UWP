@@ -75,7 +75,7 @@ namespace Retouch_Photo2.Tools.Models
             //Flyout
             this.FillBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.FillBrushButton);
             this.StrokeBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeColorFlyout?.Invoke(this, this.StrokeBrushButton);
-            this.StrokeShowControl.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeFlyout?.Invoke(this.StrokeShowControl);
+            this.StrokeShowControl.Tapped += (s, e) => Expander.ShowAt("Stroke", this.StrokeShowControl);
 
             this.ConvertToCurvesButton.Tapped += (s, e) =>
             {

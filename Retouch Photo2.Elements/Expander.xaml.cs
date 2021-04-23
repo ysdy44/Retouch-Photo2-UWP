@@ -3,6 +3,7 @@
 // Difficult:         ★★
 // Only:              ★★
 // Complete:      ★★★
+using System;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -34,6 +35,15 @@ namespace Retouch_Photo2.Elements
     [ContentProperty(Name = nameof(Content))]
     public sealed partial class Expander : ContentControl
     {
+
+        //@Static
+        /// <summary>
+        /// Show a flyout with a specific name.
+        /// </summary>
+        /// <param name="key"> The key is AA. </param>
+        /// <param name="expander"> The expander name is AAExpander. </param>
+        public static Action<string, FrameworkElement> ShowAt { get; set; }
+
 
         //@VisualState
         bool _vsIsOverlay = false;
@@ -129,7 +139,11 @@ namespace Retouch_Photo2.Elements
         public Expander()
         {
             this.DefaultStyleKey = typeof(Expander);
+
+            Expander.ShowAt += this.Expander_ShowAt;
         }
+        ~Expander() => Expander.ShowAt -= this.Expander_ShowAt;
+
 
         /// <inheritdoc/>
         protected override void OnApplyTemplate()
@@ -253,14 +267,16 @@ namespace Retouch_Photo2.Elements
 
     public sealed partial class Expander : ContentControl
     {
-
-        public void FlyoutShowAt(FrameworkElement element)
+        private void Expander_ShowAt(string key, FrameworkElement placementTarget)
         {
-            if (this._vsIsOverlay) return;
-            if (this._vsIsPin) return;
+            if ($"{key}Expander" == base.Name)
+            {
+                if (this._vsIsOverlay) return;
+                if (this._vsIsPin) return;
 
-            this.AsFlyout();
-            this.Flyout.ShowAt(element);
+                this.AsFlyout();
+                this.Flyout.ShowAt(placementTarget);
+            }
         }
         private void AsFlyout()
         {

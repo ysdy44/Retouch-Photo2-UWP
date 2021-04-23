@@ -58,7 +58,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructStrings();
 
             this.ConstructShowControl();
-            this.StrokeShowControl.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeFlyout?.Invoke(this.StrokeShowControl);
+            this.StrokeShowControl.Tapped += (s, e) => Expander.ShowAt("Stroke", this.StrokeShowControl);
 
             //FillOrStroke
             this.FillOrStrokeComboBox.FillOrStrokeChanged += (s, fillOrStroke) =>

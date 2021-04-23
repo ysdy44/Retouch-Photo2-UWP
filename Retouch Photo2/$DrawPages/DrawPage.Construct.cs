@@ -97,6 +97,7 @@ namespace Retouch_Photo2
                 this.WheelToRotateControl.Content = resource.GetString("More_Operate_WheelToRotate");
             }
 
+            //Menus
             this.EditExpander.Title = resource.GetString("Menus_Edit");
             this.OperateExpander.Title = resource.GetString("Menus_Operate");
             this.AdjustmentExpander.Title = resource.GetString("Menus_Adjustment");
@@ -108,27 +109,27 @@ namespace Retouch_Photo2
             this.TransformerExpander.Title = resource.GetString("Menus_Transformer");
             this.LayerExpander.Title = resource.GetString("Menus_Layer");
             this.ColorExpander.Title = resource.GetString("Menus_Color");
+            foreach (FrameworkElement button in this.MenuButtonsStackPanel.Children)
+            {
+                string key = button.Name;
+                string title = resource.GetString($"Menus_{key}");
+
+                if (ToolTipService.GetToolTip(button) is ToolTip toolTip)
+                {
+                    toolTip.Content = title;
+                }
+            }
         }
 
 
         //Menus
         private void ConstructMenus()
         {
-            this.Edit.Tapped += (s, e) => this.EditExpander.FlyoutShowAt(this.Edit);
-            this.Operate.Tapped += (s, e) => this.OperateExpander.FlyoutShowAt(this.Operate);
-
-            this.Adjustment.Tapped += (s, e) => this.AdjustmentExpander.FlyoutShowAt(this.Adjustment);
-            this.Effect.Tapped += (s, e) => this.EffectExpander.FlyoutShowAt(this.Effect);
-
-            this.Text.Tapped += (s, e) => this.TextExpander.FlyoutShowAt(this.Text);
-            this.Stroke.Tapped += (s, e) => this.StrokeExpander.FlyoutShowAt(this.Stroke);
-            this.Style.Tapped += (s, e) => this.StyleExpander.FlyoutShowAt(this.Style);
-
-            this.History.Tapped += (s, e) => this.HistoryExpander.FlyoutShowAt(this.History);
-            this.Transformer.Tapped += (s, e) => this.TransformerExpander.FlyoutShowAt(this.Transformer);
-            this.Layer.Tapped += (s, e) => this.LayerExpander.FlyoutShowAt(this.Layer);
-
-            this.Color.Tapped += (s, e) => this.ColorExpander.FlyoutShowAt(this.Color);
+            foreach (FrameworkElement button in this.MenuButtonsStackPanel.Children)
+            {
+                string key = button.Name;
+                button.Tapped += (s, e) => Expander.ShowAt(key, button);
+            }
         }
 
 
@@ -171,25 +172,7 @@ namespace Retouch_Photo2
 
                 this.LoadingControl.State = LoadingState.Saving;
 
-                //     bool isSuccesful = await this.Export();
-                //Render
-                float width = (float)this.ExportSizePicker.SizeWith;
-                float height = (float)this.ExportSizePicker.SizeHeight;
-                int dpi = (int)this.DPIComboBox.DPI;
-                bool isClearWhite = this.FileFormatComboBox.IsClearWhite;
-                CanvasRenderTarget renderTarget = this.ViewModel.Render(width, height, dpi, isClearWhite);
-
-                //Export
-                bool isSuccesful = await FileUtil.SaveCanvasBitmapFile
-                (
-                    renderTarget: renderTarget,
-
-                    fileChoices: this.FileFormatComboBox.FileChoices,
-                    suggestedFileName: this.ApplicationView.Title,
-
-                    fileFormat: this.FileFormatComboBox.FileFormat,
-                    quality: this.ExportQuality
-                );
+                bool isSuccesful = await this.Export();
 
                 this.LoadingControl.State = isSuccesful ? LoadingState.SaveSuccess : LoadingState.SaveFailed;
                 await Task.Delay(400);

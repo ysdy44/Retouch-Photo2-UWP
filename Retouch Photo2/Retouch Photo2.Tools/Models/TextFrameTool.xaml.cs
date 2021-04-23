@@ -5,6 +5,7 @@
 // Complete:      ★★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
@@ -24,7 +25,7 @@ namespace Retouch_Photo2.Tools.Models
 
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
-        ViewModel SelectionViewModel => App.SelectionViewModel;        
+        ViewModel SelectionViewModel => App.SelectionViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
@@ -72,7 +73,7 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.TextButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowTextFlyout?.Invoke(this.TextButton);
+            this.TextButton.Tapped += (s, e) => Expander.ShowAt("Text", this.TextButton);
 
             //@Focus
             // Before Flyout Showed, Don't let TextBox Got Focus.

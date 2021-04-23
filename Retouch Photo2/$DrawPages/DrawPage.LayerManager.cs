@@ -2,7 +2,7 @@
 using Retouch_Photo2.Layers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
+using Retouch_Photo2.Elements;
 using Windows.UI.Xaml.Input;
 
 namespace Retouch_Photo2
@@ -34,11 +34,11 @@ namespace Retouch_Photo2
         }
         private void LayerRightTapped(ILayer layer)
         {
-            Retouch_Photo2.DrawPage.ShowLayerFlyout?.Invoke(layer.Control);
+            Expander.ShowAt("Layer", layer.Control);
         }
         private void LayersRightTapped()
         {
-            Retouch_Photo2.DrawPage.ShowLayerFlyout?.Invoke(this.LayersScrollViewer);
+            Expander.ShowAt("Layer", this.LayersScrollViewer);
         }
         private void LayerVisibilityChanged(ILayer layer2)
         {

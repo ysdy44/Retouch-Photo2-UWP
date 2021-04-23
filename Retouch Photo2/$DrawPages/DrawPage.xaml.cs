@@ -37,16 +37,6 @@ namespace Retouch_Photo2
 
 
         //@Static
-        /// <summary> Show <see cref="OperateFlyout"/> </summary>
-        public static Action<FrameworkElement> ShowOperateFlyout;
-        /// <summary> Show <see cref="TextFlyout"/> </summary>
-        public static Action<FrameworkElement> ShowTextFlyout;
-        /// <summary> Show <see cref="StrokeFlyout"/> </summary>
-        public static Action<FrameworkElement> ShowStrokeFlyout;
-        /// <summary> Show <see cref="LayerFlyout"/> </summary>
-        public static Action<FrameworkElement> ShowLayerFlyout;
-
-
         /// <summary> Show <see cref="SetupDialog"/> </summary>
         public static Action ShowSetup;
         /// <summary> Show <see cref="ExportDialog"/> </summary>
@@ -139,12 +129,6 @@ namespace Retouch_Photo2
             LayerManager.DragItemsDelta += this.LayerDragItemsDelta;
             LayerManager.DragItemsCompleted += this.LayerDragItemsCompleted;
 
-            //Menu
-            DrawPage.ShowOperateFlyout += this.OperateExpander.FlyoutShowAt;
-            DrawPage.ShowTextFlyout += this.TextExpander.FlyoutShowAt;
-            DrawPage.ShowStrokeFlyout += this.StrokeExpander.FlyoutShowAt;
-            DrawPage.ShowLayerFlyout += this.LayerExpander.FlyoutShowAt;
-
             //Dialog
             DrawPage.ShowExport += this.ShowExportDialog;
             DrawPage.ShowSetup += this.ShowSetupDialog;
@@ -187,12 +171,6 @@ namespace Retouch_Photo2
             LayerManager.DragItemsStarted -= this.LayerDragItemsStarted;
             LayerManager.DragItemsDelta -= this.LayerDragItemsDelta;
             LayerManager.DragItemsCompleted -= this.LayerDragItemsCompleted;
-
-            //Menu
-            DrawPage.ShowOperateFlyout -= this.OperateExpander.FlyoutShowAt;
-            DrawPage.ShowTextFlyout -= this.TextExpander.FlyoutShowAt;
-            DrawPage.ShowStrokeFlyout -= this.StrokeExpander.FlyoutShowAt;
-            DrawPage.ShowLayerFlyout -= this.LayerExpander.FlyoutShowAt;
 
             //Dialog
             DrawPage.ShowExport -= this.ShowExportDialog;
