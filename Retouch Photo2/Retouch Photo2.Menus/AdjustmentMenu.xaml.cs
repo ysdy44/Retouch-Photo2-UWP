@@ -139,10 +139,11 @@ namespace Retouch_Photo2.Menus
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetFilter);
 
             //Selection
-            this.SelectionViewModel.Adjustments.Add(adjustment);
+            ILayer outermostLayer = null;
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
+                if (outermostLayer == null) outermostLayer = layer;
 
                 var previous = layer.Filter.Clone();
                 history.UndoAction += () =>
@@ -161,6 +162,7 @@ namespace Retouch_Photo2.Menus
                 layerage.RefactoringParentsIconRender();
                 layer.Filter.Adjustments.Add(adjustment);
             });
+            this.SelectionViewModel.SetFilter(outermostLayer?.Filter);
 
             //History
             this.ViewModel.HistoryPush(history);
@@ -179,11 +181,11 @@ namespace Retouch_Photo2.Menus
             LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetFilter);
 
             //Selection
-            this.SelectionViewModel.Adjustments.Remove(removeAdjustment);
+            ILayer outermostLayer = null;
             this.SelectionViewModel.SetValue((layerage) =>
             {
                 ILayer layer = layerage.Self;
-
+                if (outermostLayer == null) outermostLayer = layer;
 
                 var previous = layer.Filter.Clone();
                 history.UndoAction += () =>
@@ -201,6 +203,7 @@ namespace Retouch_Photo2.Menus
                 layerage.RefactoringParentsIconRender();
                 layer.Filter.Adjustments.Remove(removeAdjustment);
             });
+            this.SelectionViewModel.SetFilter(outermostLayer?.Filter);
 
             //History
             this.ViewModel.HistoryPush(history);

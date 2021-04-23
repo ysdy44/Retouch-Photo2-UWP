@@ -31,6 +31,7 @@ namespace Retouch_Photo2.Menus
         private bool VisibilityToBoolConverter(Visibility visibility) => visibility == Visibility.Visible;
         private int OpacityToNumberConverter(float opacity) => (int)(opacity * 100.0f);
         private Visibility SelectionUnSingleToVisibilitylConverter(bool isSingle) => isSingle == false ? Visibility.Visible : Visibility.Collapsed;
+        private Visibility ZeroToVisibilitylConverter(int count) => count == 0 ? Visibility.Visible : Visibility.Collapsed;
         private Visibility SelectionSingleToVisibilitylConverter(bool isSingle) => isSingle ? Visibility.Visible : Visibility.Collapsed;
 
 
@@ -71,6 +72,7 @@ namespace Retouch_Photo2.Menus
 
             this.AdjustmentTextBlock.Text = resource.GetString("Menus_Adjustment");
             this.AdjustmentDisableTextBlock.Text = resource.GetString("Menus_Adjustment_DisableTip");
+            this.AdjustmentZeroTextBlock.Text = resource.GetString("Menus_Adjustment_ZeroTip");
         }
 
 

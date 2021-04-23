@@ -118,35 +118,44 @@ namespace Retouch_Photo2.ViewModels
         private Effect effect;
 
 
-        /// <summary> Gets or sets the layer filter. </summary>
-        public Filter Filter
+        /// <summary> Sets the filter. </summary>  
+        public void SetFilter(Filter filter)
         {
-            get => this.filter;
-            set
+            if (filter == null)
             {
-                if (value == null)
-                {
-                    this.Adjustments.Clear();
-                }
-                else if (value.Adjustments.Count == 0)
-                {
-                    this.Adjustments.Clear();
-                }
-                else
-                {
-                    this.Adjustments.Clear();
-                    foreach (IAdjustment adjustment in value.Adjustments)
-                    {
-                        this.Adjustments.Add(adjustment);
-                    }
-                }
+                this.AdjustmentsCount = -1;
+                this.Adjustments.Clear();
+                return;
+            }
 
-                this.filter = value;
-                this.OnPropertyChanged(nameof(Filter));//Notify 
+            int count = filter.Adjustments.Count;
+            if (count == 0)
+            {
+                this.AdjustmentsCount = 0;
+                this.Adjustments.Clear();
+            }
+            else
+            {
+                this.AdjustmentsCount = count;
+                this.Adjustments.Clear();
+                foreach (IAdjustment adjustment in filter.Adjustments)
+                {
+                    this.Adjustments.Add(adjustment);
+                }
             }
         }
-        private Filter filter;
 
+        /// <summary> Gets or sets the layer filter adjustments count. </summary>
+        public int AdjustmentsCount
+        {
+            get => this.adjustmentsCount;
+            set
+            {
+                this.adjustmentsCount = value;
+                this.OnPropertyChanged(nameof(AdjustmentsCount));//Notify 
+            }
+        }
+        private int adjustmentsCount = -1;
 
         /// <summary> Gets or sets the layer filter adjustments. </summary>
         public ObservableCollection<IAdjustment> Adjustments { get; set; } = new ObservableCollection<IAdjustment>();

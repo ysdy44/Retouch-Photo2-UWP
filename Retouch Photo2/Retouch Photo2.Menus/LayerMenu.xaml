@@ -148,7 +148,8 @@
 
                     <TextBlock x:Name="AdjustmentDisableTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"
                                  Visibility="{x:Bind SelectionUnSingleToVisibilitylConverter(SelectionViewModel.SelectionSingle), Mode=OneWay}"/>
-
+                    <TextBlock x:Name="AdjustmentZeroTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"
+                                 Visibility="{x:Bind ZeroToVisibilitylConverter(SelectionViewModel.AdjustmentsCount), Mode=OneWay}"/>
                     <ListView x:Name="AdjustmentListView" IsItemClickEnabled="True" SelectionMode="None" ItemTemplate="{StaticResource AdjustmentDataTemplate}"
                               ItemsSource="{x:Bind SelectionViewModel.Adjustments}"
                               Visibility="{x:Bind SelectionSingleToVisibilitylConverter(SelectionViewModel.SelectionSingle), Mode=OneWay}">

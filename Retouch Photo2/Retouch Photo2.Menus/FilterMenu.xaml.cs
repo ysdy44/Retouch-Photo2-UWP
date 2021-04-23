@@ -87,12 +87,7 @@ namespace Retouch_Photo2.Menus
                     layer.Filter.Adjustments.Add(adjustment.Clone());
                 }
             });
-
-            this.SelectionViewModel.Adjustments.Clear();
-            foreach (IAdjustment adjustment in outermostLayer.Filter.Adjustments)
-            {
-                this.SelectionViewModel.Adjustments.Add(adjustment);
-            }
+            this.SelectionViewModel.SetFilter(outermostLayer?.Filter);
 
             //History
             this.ViewModel.HistoryPush(history);

@@ -66,7 +66,7 @@ namespace Retouch_Photo2.ViewModels
             //////////////////////////
 
             this.Effect = null;
-            this.Filter = null;
+            this.SetFilter(null);
             this.SetStyle(null);
 
             //////////////////////////
@@ -113,7 +113,7 @@ namespace Retouch_Photo2.ViewModels
             //////////////////////////
 
             this.Effect = layer.Effect;
-            this.Filter = layer.Filter;
+            this.SetFilter(layer.Filter);
             this.SetStyle(layer.Style);
 
             //////////////////////////
@@ -162,7 +162,7 @@ namespace Retouch_Photo2.ViewModels
             //////////////////////////
 
             this.Effect = outermostLayer?.Effect;
-            this.Filter = null;
+            this.SetFilter(null);
             this.SetStyle(outermostLayer?.Style);
 
             //////////////////////////
