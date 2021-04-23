@@ -109,16 +109,27 @@ namespace Retouch_Photo2.Menus
 
             foreach (UIElement child in this.LayoutRoot.Children)
             {
-                if (child is ListViewItem button)
+                switch (child)
                 {
-                    if (ToolTipService.GetToolTip(button) is ToolTip toolTip)
-                    {
-                        toolTip.Content = resource.GetString($"Operates_{button.Name}");
-                    }
-                }
-                if (child is TextBlock textBlock)
-                {
-                    textBlock.Text = resource.GetString($"Operates_{textBlock.Name}");
+                    case TextBlock textBlock:
+                        {
+                            string key = textBlock.Name;
+                            string title = resource.GetString($"Operates_{key}");
+
+                            textBlock.Text = title;
+                        }
+                        break;
+                    case ListViewItem item:
+                        {
+                            if (ToolTipService.GetToolTip(item) is ToolTip toolTip)
+                            {
+                                string key = item.Name;
+                                string title = resource.GetString($"Operates_{key}");
+
+                                toolTip.Content = title;
+                            }
+                        }
+                        break;
                 }
             }
         }

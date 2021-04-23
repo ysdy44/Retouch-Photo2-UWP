@@ -10,7 +10,7 @@
     >
     
 
-    <Grid>
+    <Grid x:Name="RootGrid">
         
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>

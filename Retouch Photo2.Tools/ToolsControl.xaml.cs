@@ -141,49 +141,29 @@ namespace Retouch_Photo2.Tools
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            foreach (UIElement child in this.StackPanel.Children)
+            foreach (UIElement child in this.StackPanel.Children.Concat(this.MoreStackPanel.Children))
             {
-                if (child is ListViewItem item)
+                switch (child)
                 {
-                    if (ToolTipService.GetToolTip(item) is ToolTip toolTip)
-                    {
-                        string key = item.Name;
-                        string title = resource.GetString($"Tools_{key}");
+                    case TextBlock textBlock:
+                        {
+                            string key = textBlock.Name;
+                            string title = resource.GetString($"Tools_{key}");
 
-                        toolTip.Content = title;
-                    }
-                }
-            }
+                            textBlock.Text = title;
+                        }
+                        break;
+                    case ListViewItem item:
+                        {
+                            if (item.Content is ContentControl control)
+                            {
+                                string key = item.Name;
+                                string title = resource.GetString($"Tools_{key}");
 
-            {
-                if (ToolTipService.GetToolTip(this.More) is ToolTip toolTip)
-                {
-                    string key = this.More.Name;
-                    string title = resource.GetString($"Tools_{key}");
-
-                    toolTip.Content = title;
-                }
-            }
-
-            foreach (UIElement child in this.MoreStackPanel.Children)
-            {
-                if (child is TextBlock textBlock)
-                {
-                    string key = textBlock.Name;
-                    string title = resource.GetString($"Tools_{key}");
-
-                    textBlock.Text = title;
-                }
-
-                if (child is ListViewItem item)
-                {
-                    if (item.Content is ContentControl control)
-                    {
-                        string key = item.Name;
-                        string title = resource.GetString($"Tools_{key}");
-
-                        control.Content = title;
-                    }
+                                control.Content = title;
+                            }
+                        }
+                        break;
                 }
             }
         }

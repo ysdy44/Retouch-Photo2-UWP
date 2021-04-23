@@ -118,41 +118,18 @@ namespace Retouch_Photo2.Texts
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            if (ToolTipService.GetToolTip(this.LeftToRightThenTopToBottom) is ToolTip toolTip0)
+            foreach (UIElement child in this.RootGrid.Children)
             {
-                toolTip0.Content = resource.GetString("Texts_Direction_LeftToRightThenTopToBottom");
-            }
-            if (ToolTipService.GetToolTip(this.RightToLeftThenTopToBottom) is ToolTip toolTip1)
-            {
-                toolTip1.Content = resource.GetString("Texts_Direction_RightToLeftThenTopToBottom");
-            }
+                if (child is ListViewItem item)
+                {
+                    if (ToolTipService.GetToolTip(item) is ToolTip toolTip)
+                    {
+                        string key = item.Name;
+                        string title = resource.GetString($"Texts_Direction_{key}");
 
-            if (ToolTipService.GetToolTip(this.LeftToRightThenBottomToTop) is ToolTip toolTip2)
-            {
-                toolTip2.Content = resource.GetString("Texts_Direction_LeftToRightThenBottomToTop");
-            }
-            if (ToolTipService.GetToolTip(this.RightToLeftThenBottomToTop) is ToolTip toolTip3)
-            {
-                toolTip3.Content = resource.GetString("Texts_Direction_RightToLeftThenBottomToTop");
-            }
-
-
-            if (ToolTipService.GetToolTip(this.TopToBottomThenLeftToRight) is ToolTip toolTip4)
-            {
-                toolTip4.Content = resource.GetString("Texts_Direction_TopToBottomThenLeftToRight");
-            }
-            if (ToolTipService.GetToolTip(this.BottomToTopThenLeftToRight) is ToolTip toolTip5)
-            {
-                toolTip5.Content = resource.GetString("Texts_Direction_BottomToTopThenLeftToRight");
-            }
-
-            if (ToolTipService.GetToolTip(this.TopToBottomThenRightToLeft) is ToolTip toolTip6)
-            {
-                toolTip6.Content = resource.GetString("Texts_Direction_TopToBottomThenRightToLeft");
-            }
-            if (ToolTipService.GetToolTip(this.BottomToTopThenRightToLeft) is ToolTip toolTip7)
-            {
-                toolTip7.Content = resource.GetString("Texts_Direction_BottomToTopThenRightToLeft");
+                        toolTip.Content = title;
+                    }
+                }
             }
         }
     }
