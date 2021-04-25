@@ -35,6 +35,7 @@ namespace Retouch_Photo2.Tools.Models
 
 
         //@Converter
+        private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
         private bool FontWeightConverter(FontWeight2 fontWeight) => this.MethodViewModel.FontWeightConverter(fontWeight);
         private bool FontStyleConverter(FontStyle fontStyle) => this.MethodViewModel.FontStyleConverter(fontStyle);
 

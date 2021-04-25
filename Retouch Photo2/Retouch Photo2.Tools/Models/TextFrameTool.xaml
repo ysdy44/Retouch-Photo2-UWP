@@ -27,15 +27,17 @@
             <RowDefinition Height="4"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        
         <TextBox x:Name="TextBox" Grid.Row="2"
                  TextWrapping="Wrap" AcceptsReturn="True"
                  MinWidth="384" MinHeight="40" MaxHeight="1200" VerticalAlignment="Stretch"
                  BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}"
                  Text="{x:Bind SelectionViewModel.FontText, Mode=OneWay}"/>
+        
         <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
             <StackPanel Orientation="Horizontal">
 
-                <Border Width="50" Visibility="Collapsed">
+                <Border Width="50" Visibility="{x:Bind DeviceLayoutTypeConverter(SettingViewModel.DeviceLayoutType), Mode=OneWay}">
                     <Border.Resources>
                         <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/TextFrameIcon.xaml"/>
                     </Border.Resources>
@@ -43,10 +45,11 @@
                         <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource TextFrameIcon}"/>
                     </Border.Child>
                 </Border>
+                
+                <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
                 <!--Grab the focus for TextBox-->
                 <ContentControl IsTabStop="True" IsTapEnabled="True"/>
-
 
                 <!--FontStyle-->
                 <TextBlock x:Name="FontStyleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
@@ -74,9 +77,7 @@
                     <SymbolIcon Symbol="Underline"/>
                 </ListViewItem>
 
-
                 <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
-
 
                 <!--FontFamily-->
                 <TextBlock x:Name="FontFamilyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
@@ -88,9 +89,7 @@
                 <ListViewItem x:Name="FontSizeButton" Style="{StaticResource AppListViewItemStyle}" Width="50"
                               Content="{x:Bind SelectionViewModel.FontSize, Mode=OneWay}"/>
 
-
                 <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
-
 
                 <ListViewItem x:Name="TextButton" Width="50" Padding="2" Style="{StaticResource AppListViewItemStyle}">
                     <ToolTipService.ToolTip>
@@ -99,9 +98,7 @@
                     <texts:Icon/>
                 </ListViewItem>
 
-
             </StackPanel>
         </ScrollViewer>
     </Grid>
-
 </Page>
