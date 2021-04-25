@@ -21,7 +21,7 @@
         </Storyboard>
 
         <!--Flyout-->
-        <Flyout x:Name="Flyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+        <Flyout x:Name="Flyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" Placement="Top" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
                 <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 

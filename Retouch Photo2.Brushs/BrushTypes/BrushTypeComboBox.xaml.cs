@@ -51,29 +51,24 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets or sets the fill or stroke. </summary>
         public FillOrStroke FillOrStroke
         {
-            get => (FillOrStroke)base.GetValue(FillOrStrokeProperty);
-            set => base.SetValue(FillOrStrokeProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "BrushTypeComboBox.FillOrStroke" /> dependency property. </summary>
-        public static readonly DependencyProperty FillOrStrokeProperty = DependencyProperty.Register(nameof(FillOrStroke), typeof(FillOrStroke), typeof(BrushTypeComboBox), new PropertyMetadata(FillOrStroke.Fill, (sender, e) =>
-        {
-            BrushTypeComboBox control = (BrushTypeComboBox)sender;
-
-            if (e.NewValue is FillOrStroke value)
+            get => this.fillOrStroke;
+            set
             {
                 switch (value)
                 {
                     case FillOrStroke.Fill:
-                        control._vsType = control.FillType;
-                        control.VisualState = control.VisualState;//State
+                        this._vsType = this.FillType;
+                        this.VisualState = this.VisualState;//State
                         break;
                     case FillOrStroke.Stroke:
-                        control._vsType = control.StrokeType;
-                        control.VisualState = control.VisualState;//State
+                        this._vsType = this.StrokeType;
+                        this.VisualState = this.VisualState;//State
                         break;
                 }
+                this.fillOrStroke = value;
             }
-        }));
+        }
+        private FillOrStroke fillOrStroke = FillOrStroke.Fill;
 
 
         /// <summary> Gets or sets the fill. </summary>
