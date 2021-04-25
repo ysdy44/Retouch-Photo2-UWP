@@ -16,138 +16,112 @@
         <Flyout x:Name="FontSizeFlyout" Placement="Right" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ListView x:Name="FontSizeListView" IsItemClickEnabled="True" SelectionMode="Single"/>
         </Flyout>
+        <Flyout x:Name="FontFamilyFlyout" Placement="Right" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListView x:Name="FontFamilyListView" IsItemClickEnabled="True" SelectionMode="Single"/>
+        </Flyout>
     </UserControl.Resources>
 
 
-    <SplitView x:Name="SplitView"
-               DisplayMode="Inline" 
-               OpenPaneLength="200" 
-               PanePlacement="Left"
-               IsPaneOpen="True"
-               PaneBackground="Transparent"
-               >
+    <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
+        <StackPanel>
 
-        <SplitView.Pane>
-            <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
-                <StackPanel>
-
-                    <!--Alignment-->
-                    <TextBlock x:Name="AlignmentTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <texts:HorizontalAlignmentSegmented x:Name="HorizontalAlignmentSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}" HorizontalAlignment2="{x:Bind SelectionViewModel.HorizontalAlignment, Mode=OneWay}"/>
+            <!--Alignment-->
+            <TextBlock x:Name="AlignmentTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <texts:HorizontalAlignmentSegmented x:Name="HorizontalAlignmentSegmented" IsOpen="{x:Bind IsOpen, Mode=OneWay}" HorizontalAlignment2="{x:Bind SelectionViewModel.HorizontalAlignment, Mode=OneWay}"/>
 
 
-                    <!--FontStyle-->
-                    <TextBlock x:Name="FontStyleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
+            <!--FontStyle-->
+            <TextBlock x:Name="FontStyleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
 
-                        <ListViewItem x:Name="BoldButton" Grid.Column="0" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
+                <ListViewItem x:Name="BoldButton" Grid.Column="0" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
                                       IsSelected="{x:Bind FontWeightConverter(SelectionViewModel.FontWeight), Mode=OneWay}">
-                            <ToolTipService.ToolTip>
-                                <ToolTip x:Name="BoldToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-                            </ToolTipService.ToolTip>
-                            <SymbolIcon Symbol="Bold"/>
-                        </ListViewItem>
+                    <ToolTipService.ToolTip>
+                        <ToolTip x:Name="BoldToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                    </ToolTipService.ToolTip>
+                    <SymbolIcon Symbol="Bold"/>
+                </ListViewItem>
 
-                        <ListViewItem x:Name="ItalicButton" Grid.Column="1" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
+                <ListViewItem x:Name="ItalicButton" Grid.Column="1" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
                                       IsSelected="{x:Bind FontStyleConverter(SelectionViewModel.FontStyle), Mode=OneWay}">
-                            <ToolTipService.ToolTip>
-                                <ToolTip x:Name="ItalicToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-                            </ToolTipService.ToolTip>
-                            <SymbolIcon Symbol="Italic"/>
-                        </ListViewItem>
+                    <ToolTipService.ToolTip>
+                        <ToolTip x:Name="ItalicToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                    </ToolTipService.ToolTip>
+                    <SymbolIcon Symbol="Italic"/>
+                </ListViewItem>
 
-                        <ListViewItem x:Name="UnderlineButton" Grid.Column="2" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
+                <ListViewItem x:Name="UnderlineButton" Grid.Column="2" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
                                       IsSelected="{x:Bind SelectionViewModel.Underline, Mode=OneWay}">
-                            <ToolTipService.ToolTip>
-                                <ToolTip x:Name="UnderlineToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-                            </ToolTipService.ToolTip>
-                            <SymbolIcon Symbol="Underline"/>
-                        </ListViewItem>
+                    <ToolTipService.ToolTip>
+                        <ToolTip x:Name="UnderlineToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                    </ToolTipService.ToolTip>
+                    <SymbolIcon Symbol="Underline"/>
+                </ListViewItem>
 
-                    </Grid>
+            </Grid>
 
 
-                    <!--FontWeight-->
-                    <TextBlock x:Name="FontWeightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <texts:FontWeightComboBox x:Name="FontWeightComboBox"
+            <!--FontWeight-->
+            <TextBlock x:Name="FontWeightTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <texts:FontWeightComboBox x:Name="FontWeightComboBox"
                        Weight ="{x:Bind SelectionViewModel.FontWeight, Mode=OneWay}">
-                    </texts:FontWeightComboBox>
+            </texts:FontWeightComboBox>
 
 
-                    <!--FontFamily-->
-                    <TextBlock x:Name="FontFamilyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <ListViewItem x:Name="FontFamilyButton" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
-                        <ContentControl Style="{StaticResource AppIconReverseContentControlStyle}"
+            <!--FontFamily-->
+            <TextBlock x:Name="FontFamilyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <ListViewItem x:Name="FontFamilyButton" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
+                <ContentControl Style="{StaticResource AppIconReverseContentControlStyle}"
                                         Content="{x:Bind SelectionViewModel.FontFamily, Mode=OneWay}">
-                            <ContentControl.Tag>
-                                <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                    <ContentControl.Tag>
+                        <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                           MirroredWhenRightToLeft="True"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+                    </ContentControl.Tag>
+                </ContentControl>
+            </ListViewItem>
 
 
-                    <!--FontSize-->
-                    <TextBlock x:Name="FontSizeTextBlock" Grid.ColumnSpan="4" Grid.Row="6" Style="{StaticResource AppTextBlockStyle}"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
+            <!--FontSize-->
+            <TextBlock x:Name="FontSizeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
 
-                        <TextBox x:Name="FontSizeTextBox" Margin="1,0" 
+                <TextBox x:Name="FontSizeTextBox" Margin="1,0" 
                              Text="{x:Bind Round2Converter(SelectionViewModel.FontSize), Mode=OneWay}"
                              FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
                              ui:TextBoxExtensions.ValidationMode="Forced"
                              ui:TextBoxExtensions.ValidationType="Decimal">
-                            <TextBox.Resources>
-                                <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
-                            </TextBox.Resources>
-                        </TextBox>
+                    <TextBox.Resources>
+                        <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
+                    </TextBox.Resources>
+                </TextBox>
 
-                        <ListViewItem x:Name="FontSizeButton" Grid.Column="1" Style="{StaticResource AppListViewItemStyle}">
-                            <FontIcon Margin="4,0" Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                <ListViewItem x:Name="FontSizeButton" Grid.Column="1" Style="{StaticResource AppListViewItemStyle}">
+                    <FontIcon Margin="4,0" Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" 
                           RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"
                           MirroredWhenRightToLeft="True"/>
-                        </ListViewItem>
+                </ListViewItem>
 
-                    </Grid>
-
-
-                    <!--Direction-->
-                    <TextBlock x:Name="DirectionTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                    <texts:DirectionSegmented x:Name="DirectionComboBox"
-                       Direction ="{x:Bind SelectionViewModel.Direction, Mode=OneWay}">
-                    </texts:DirectionSegmented>
-
-
-                </StackPanel>
-            </ScrollViewer>
-        </SplitView.Pane>
-
-        <SplitView.Content>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-                <ListView x:Name="FontFamilyListView" IsItemClickEnabled="True" SelectionMode="Single"
-                          Visibility="Collapsed">
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="x:String">
-                            <TextBlock FontFamily="{x:Bind}" Text="{x:Bind}"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <ListViewItem x:Name="CloseButton" Grid.Row="2" Style="{StaticResource AppListViewItemStyle}"/>
             </Grid>
-        </SplitView.Content>
-    </SplitView>
+
+
+            <!--Direction-->
+            <TextBlock x:Name="DirectionTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+            <texts:DirectionSegmented x:Name="DirectionComboBox"
+                       Direction ="{x:Bind SelectionViewModel.Direction, Mode=OneWay}">
+            </texts:DirectionSegmented>
+
+
+        </StackPanel>
+    </ScrollViewer>
 
 </UserControl>

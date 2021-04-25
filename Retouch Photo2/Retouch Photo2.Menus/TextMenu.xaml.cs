@@ -5,11 +5,9 @@
 // Complete:      ★★★★★
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Toolkit.Uwp.UI;
-using Retouch_Photo2.Historys;
 using Retouch_Photo2.Texts;
 using Retouch_Photo2.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.Globalization;
@@ -31,21 +29,8 @@ namespace Retouch_Photo2.Menus
 
 
         //@Converter
-        private bool FontWeightConverter(FontWeight2 fontWeight)
-        {
-            switch (fontWeight)
-            {
-                case FontWeight2.Black:
-                case FontWeight2.Bold:
-                case FontWeight2.ExtraBlack:
-                case FontWeight2.ExtraBold:
-                case FontWeight2.SemiBold:
-                    return true;
-                default:
-                    return false;
-            }
-        }
-        private bool FontStyleConverter(FontStyle fontStyle) => fontStyle == FontStyle.Italic;
+        private bool FontWeightConverter(FontWeight2 fontWeight) => this.MethodViewModel.FontWeightConverter(fontWeight);
+        private bool FontStyleConverter(FontStyle fontStyle) => this.MethodViewModel.FontStyleConverter(fontStyle);
         private string Round2Converter(float value) => $"{(float)Math.Round(value, 2)}";
 
 
@@ -74,48 +59,27 @@ namespace Retouch_Photo2.Menus
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.HorizontalAlignmentSegmented.HorizontalAlignmentChanged += (s, alignment) => this.SetHorizontalAlignment(alignment);
+            this.HorizontalAlignmentSegmented.HorizontalAlignmentChanged += (s, alignment) => this.MethodViewModel.MethodSetHorizontalAlignment(alignment);
 
-            this.BoldButton.Tapped += (s, e) =>
-            {
-                // isBold ? ""Normal"" : ""Bold""
-                bool isBold = this.FontWeightConverter(this.SelectionViewModel.FontWeight);
-                FontWeight2 fontWeight = isBold ? FontWeight2.Normal : FontWeight2.Bold;
+            this.BoldButton.Tapped += (s, e) => this.MethodViewModel.MethodSetFontWeight();
+            this.ItalicButton.Tapped += (s, e) => this.MethodViewModel.MethodSetFontStyle();
+            this.UnderlineButton.Tapped += (s, e) => this.MethodViewModel.MethodSetUnderline();
 
-                this.SetFontWeight(fontWeight);
-            };
-            this.ItalicButton.Tapped += (s, e) =>
-            {
-                // isNormal ? ""Normal"" : ""Italic""
-                bool isNormal = this.FontStyleConverter(this.SelectionViewModel.FontStyle);
-                FontStyle fontStyle = isNormal ? FontStyle.Normal : FontStyle.Italic;
-
-                this.SetFontStyle(fontStyle);
-            };
-            this.UnderlineButton.Tapped += (s, e) => this.SetUnderline(!this.SelectionViewModel.Underline);
-
-            this.FontWeightComboBox.WeightChanged += (s, fontWeight) => this.SetFontWeight(fontWeight);
+            this.FontWeightComboBox.WeightChanged += (s, fontWeight) => this.MethodViewModel.MethodSetFontWeight(fontWeight);
 
             // Get all FontFamilys in your device.
             this.FontFamilyListView.ItemsSource = CanvasTextFormat.GetSystemFontFamilies(ApplicationLanguages.Languages).OrderBy(k => k);
-            this.FontFamilyButton.Tapped += (s, e) =>
-            {
-                this.FontFamilyListView.Visibility = Visibility.Visible;
-                this.SplitView.IsPaneOpen = false;
-            };
+            this.FontFamilyButton.Tapped += (s, e) => this.FontFamilyFlyout.ShowAt(this.FontFamilyButton);
             this.FontFamilyListView.ItemClick += (s, e) =>
             {
                 if (e.ClickedItem is string value)
                 {
-                    this.SetFontFamily(value);
+                    this.MethodViewModel.MethodSetFontFamily(value);
                 }
             };
 
-            // Get all fontSizes in your device.
-            this.FontSizeListView.ItemsSource = new List<float>
-            {
-                5f, 6f, 7f, 8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f, 16f, 18f, 20f, 24f, 30f, 36f, 48f, 64f, 72f, 96f, 144f, 288f,
-            };
+            // Get fontSizes.
+            this.FontSizeListView.ItemsSource = new float[] { 5f, 6f, 7f, 8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f, 16f, 18f, 20f, 24f, 30f, 36f, 48f, 64f, 72f, 96f, 144f, 288f };
             this.FontSizeButton.Tapped += (s, e) => this.FontSizeFlyout.ShowAt(this.FontSizeButton);
 
             TextBoxExtensions.SetDefault(this.FontSizeTextBox, $"{22.0f}");
@@ -123,16 +87,12 @@ namespace Retouch_Photo2.Menus
             {
                 if (this.FontSizeTextBox.Text is string value)
                 {
-                    if (string.IsNullOrEmpty(value) == false)
-                    {
-                        float size = float.Parse(value);
-                        if (size < 1)
-                        {
-                            size = 1;
-                        }
+                    if (string.IsNullOrEmpty(value)) return;
 
-                        this.SetFontSize(size);
-                    }
+                    float size = float.Parse(value);
+                    if (size < 1) size = 1;
+
+                    this.MethodViewModel.MethodSetFontSize(size);
                 }
             };
 
@@ -140,29 +100,12 @@ namespace Retouch_Photo2.Menus
             {
                 if (e.ClickedItem is float value)
                 {
-                    this.SetFontSize(value);
+                    this.MethodViewModel.MethodSetFontSize(value);
                 }
             };
 
-
-            //Direction
-            this.DirectionComboBox.DirectionChanged += (s, direction) => this.SetDirection(direction);
-
-            base.SizeChanged += (s, e) =>
-            {
-                if (e.NewSize == e.PreviousSize) return;
-                this.SplitView.OpenPaneLength = e.NewSize.Width;
-            };
-            this.CloseButton.Tapped += (s, e) =>
-            {
-                this.FontFamilyListView.Visibility = Visibility.Collapsed;
-                this.SplitView.IsPaneOpen = true;
-            };
+            this.DirectionComboBox.DirectionChanged += (s, direction) => this.MethodViewModel.MethodSetDirection(direction);
         }
-    }
-
-    public sealed partial class TextMenu : UserControl
-    {
 
         //Strings
         private void ConstructStrings()
@@ -183,108 +126,6 @@ namespace Retouch_Photo2.Menus
             this.FontSizeTextBlock.Text = resource.GetString("Texts_FontSize");
 
             this.DirectionTextBlock.Text = resource.GetString("Texts_Direction");
-
-            this.CloseButton.Content = resource.GetString("Menus_Close");
         }
-
-
-        private void SetHorizontalAlignment(CanvasHorizontalAlignment horizontalAlignment)
-        {
-            this.SelectionViewModel.HorizontalAlignment = horizontalAlignment;
-            this.MethodViewModel.ITextLayerChanged<CanvasHorizontalAlignment>
-            (
-                set: (textLayer) => textLayer.HorizontalAlignment = horizontalAlignment,
-
-                type: HistoryType.LayersProperty_SetHorizontalAlignment,
-                getUndo: (textLayer) => textLayer.HorizontalAlignment,
-                setUndo: (textLayer, previous) => textLayer.HorizontalAlignment = previous
-           );
-        }
-
-
-        private void SetFontWeight(FontWeight2 fontWeight)
-        {
-            this.SelectionViewModel.FontWeight = fontWeight;
-            this.MethodViewModel.ITextLayerChanged<FontWeight2>
-            (
-                set: (textLayer) => textLayer.FontWeight = fontWeight,
-
-                type: HistoryType.LayersProperty_SetFontWeight,
-                getUndo: (textLayer) => textLayer.FontWeight,
-                setUndo: (textLayer, previous) => textLayer.FontWeight = previous
-           );
-        }
-
-        private void SetFontStyle(FontStyle fontStyle)
-        {
-            this.SelectionViewModel.FontStyle = fontStyle;
-            this.MethodViewModel.ITextLayerChanged<FontStyle>
-            (
-                set: (textLayer) => textLayer.FontStyle = fontStyle,
-
-                type: HistoryType.LayersProperty_SetFontStyle,
-                getUndo: (textLayer) => textLayer.FontStyle,
-                setUndo: (textLayer, previous) => textLayer.FontStyle = previous
-           );
-        }
-
-        private void SetUnderline(bool underline)
-        {
-            this.SelectionViewModel.Underline = underline;
-            this.MethodViewModel.ITextLayerChanged<bool>
-            (
-                set: (textLayer) => textLayer.Underline = underline,
-
-                type: HistoryType.LayersProperty_SetUnderline,
-                getUndo: (textLayer) => textLayer.Underline,
-                setUndo: (textLayer, previous) => textLayer.Underline = previous
-           );
-        }
-
-
-        private void SetFontFamily(string fontFamily)
-        {
-            this.SelectionViewModel.FontFamily = fontFamily;
-            this.MethodViewModel.ITextLayerChanged<string>
-            (
-                set: (textLayer) => textLayer.FontFamily = fontFamily,
-
-                type: HistoryType.LayersProperty_SetFontFamily,
-                getUndo: (textLayer) => textLayer.FontFamily,
-                setUndo: (textLayer, previous) => textLayer.FontFamily = previous
-           );
-        }
-
-
-        private void SetFontSize(float fontSize)
-        {
-            this.SelectionViewModel.FontSize = fontSize;
-            this.MethodViewModel.ITextLayerChanged<float>
-            (
-                set: (textLayer) => textLayer.FontSize = fontSize,
-
-                type: HistoryType.LayersProperty_SetFontSize,
-                getUndo: (textLayer) => textLayer.FontSize,
-                setUndo: (textLayer, previous) => textLayer.FontSize = previous
-           );
-
-            //Refactoring
-            this.SelectionViewModel.Transformer = this.SelectionViewModel.RefactoringTransformer();
-        }
-
-
-        private void SetDirection(CanvasTextDirection direction)
-        {
-            this.SelectionViewModel.Direction = direction;
-            this.MethodViewModel.ITextLayerChanged<CanvasTextDirection>
-            (
-                set: (textLayer) => textLayer.Direction = direction,
-
-                type: HistoryType.LayersProperty_SetDirection,
-                getUndo: (textLayer) => textLayer.Direction,
-                setUndo: (textLayer, previous) => textLayer.Direction = previous
-           );
-        }
-
     }
 }
