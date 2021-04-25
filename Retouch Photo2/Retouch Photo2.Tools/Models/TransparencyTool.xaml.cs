@@ -188,41 +188,19 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructShowControl()
         {
-            this.ShowControl.Tapped += (s, e) =>
-            {
-                this.TransparencyShow();
-            };
-
+            this.ShowControl.Tapped += (s, e) => this.TransparencyShow();
 
             //@Focus
             // Before Flyout Showed, Don't let TextBox Got Focus.
             // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
-            if (this.StopsPicker.ColorPicker.HexPicker is TextBox textBox)
-            {
-                textBox.IsEnabled = false;
-                this.StopsPicker.ColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
-                this.StopsPicker.ColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
-                textBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
-                textBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
-            }
+            this.StopsPicker.ColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
+            this.StopsPicker.ColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
 
-            this.StopsPicker.StopsChanged += (s, array) =>
-            {
-                this.TransparencyStopsChanged(array);
-            };
+            this.StopsPicker.StopsChanged += (s, array) => this.TransparencyStopsChanged(array);
 
-            this.StopsPicker.StopsChangeStarted += (s, array) =>
-            {
-                this.TransparencyStopsChangeStarted(array);
-            };
-            this.StopsPicker.StopsChangeDelta += (s, array) =>
-            {
-                this.TransparencyStopsChangeDelta(array);
-            };
-            this.StopsPicker.StopsChangeCompleted += (s, array) =>
-            {
-                this.TransparencyStopsChangeCompleted(array);
-            };
+            this.StopsPicker.StopsChangeStarted += (s, array) => this.TransparencyStopsChangeStarted(array);
+            this.StopsPicker.StopsChangeDelta += (s, array) => this.TransparencyStopsChangeDelta(array);
+            this.StopsPicker.StopsChangeCompleted += (s, array) => this.TransparencyStopsChangeCompleted(array);
         }
 
     }
