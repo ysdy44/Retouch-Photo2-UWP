@@ -244,6 +244,5 @@ namespace Retouch_Photo2.ViewModels
             this.Invalidate(InvalidateMode.HD);//Invalidate 
         }
 
-
     }
 }

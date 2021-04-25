@@ -31,13 +31,7 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="type"> The history type. </param>
         /// <param name="getUndo"> The gets of history undo T. </param>
         /// <param name="setUndo"> The sets of history undo T. </param>
-        public void ILayerChanged<T>
-        (
-            Action<ILayer> set,
-            HistoryType type, 
-            Func<ILayer, T> getUndo, 
-            Action<ILayer, T> setUndo
-        )
+        public void ILayerChanged<T>(Action<ILayer> set, HistoryType type, Func<ILayer, T> getUndo, Action<ILayer, T> setUndo)
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
@@ -99,14 +93,7 @@ namespace Retouch_Photo2.ViewModels
             this.Invalidate();//Invalidate
         }
 
-        public void ILayerChangeCompleted<T>
-        (
-            Action<ILayer> set,
-
-            HistoryType type,
-            Func<ILayer, T> getUndo,
-            Action<ILayer, T> setUndo
-        )
+        public void ILayerChangeCompleted<T>(Action<ILayer> set, HistoryType type, Func<ILayer, T> getUndo, Action<ILayer, T> setUndo)
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
@@ -157,16 +144,8 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="type"> The history type. </param>
         /// <param name="getUndo"> The gets of history undo T. </param>
         /// <param name="setUndo"> The sets of history undo T. </param>
-        public void TLayerChanged<T, TLayer>
-        (
-            LayerType layerType,
-            Action<TLayer> set,
-
-            HistoryType type, 
-            Func<TLayer, T> getUndo, 
-            Action<TLayer, T> setUndo
-        )
-        where TLayer : ILayer
+        public void TLayerChanged<T, TLayer>(LayerType layerType, Action<TLayer> set, HistoryType type, Func<TLayer, T> getUndo, Action<TLayer, T> setUndo)
+            where TLayer : ILayer
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
@@ -245,16 +224,8 @@ namespace Retouch_Photo2.ViewModels
             this.Invalidate();//Invalidate
         }
 
-        public void TLayerChangeCompleted<T, TLayer>
-        (
-            LayerType layerType,
-            Action<TLayer> set,
-
-            HistoryType type,
-            Func<TLayer, T> getUndo,
-            Action<TLayer, T> setUndo
-        )
-         where TLayer : ILayer
+        public void TLayerChangeCompleted<T, TLayer>(LayerType layerType, Action<TLayer> set, HistoryType type, Func<TLayer, T> getUndo, Action<TLayer, T> setUndo)
+            where TLayer : ILayer
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
@@ -308,14 +279,7 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="type"> The history type. </param>
         /// <param name="getUndo"> The gets of history undo T. </param>
         /// <param name="setUndo"> The sets of history undo T. </param>
-        public void EffectChanged<T>
-        (
-            Action<Effect> set,
-
-            HistoryType type, 
-            Func<Effect, T> getUndo, 
-            Action<Effect, T> setUndo
-        )
+        public void EffectChanged<T>(Action<Effect> set, HistoryType type, Func<Effect, T> getUndo, Action<Effect, T> setUndo)
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
@@ -347,7 +311,6 @@ namespace Retouch_Photo2.ViewModels
 
             this.Invalidate();//Invalidate
         }
-
 
 
         public void EffectChangeStarted(Action<Effect> cache)
@@ -437,16 +400,8 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="type"> The history type. </param>
         /// <param name="getUndo"> The gets of history undo T. </param>
         /// <param name="setUndo"> The sets of history undo T. </param>
-        public void TAdjustmentChanged<T,TAdjustment>
-        (
-            int index,
-            Action<TAdjustment> set,
-
-            HistoryType type, 
-            Func<TAdjustment, T> getUndo, 
-            Action<TAdjustment, T> setUndo
-        )
-        where TAdjustment : IAdjustment
+        public void TAdjustmentChanged<T, TAdjustment>(int index, Action<TAdjustment> set, HistoryType type, Func<TAdjustment, T> getUndo, Action<TAdjustment, T> setUndo)
+            where TAdjustment : IAdjustment
         {
             if (this.SelectionLayerage is Layerage layerage)
             {
@@ -525,15 +480,7 @@ namespace Retouch_Photo2.ViewModels
             }
         }
 
-        public void TAdjustmentChangeCompleted<T, TAdjustment>
-        (
-            int index,
-            Action<TAdjustment> set,
-
-            HistoryType type,
-            Func<TAdjustment, T> getUndo,
-            Action<TAdjustment, T> setUndo
-        )
+        public void TAdjustmentChangeCompleted<T, TAdjustment>(int index, Action<TAdjustment> set, HistoryType type, Func<TAdjustment, T> getUndo, Action<TAdjustment, T> setUndo)
             where TAdjustment : IAdjustment
         {
             if (this.SelectionLayerage is Layerage layerage)
@@ -593,14 +540,7 @@ namespace Retouch_Photo2.ViewModels
         /// <param name="type"> The history type. </param>
         /// <param name="getUndo"> The gets of history undo T. </param>
         /// <param name="setUndo"> The sets of history undo T. </param>
-        public void StyleChanged<T>
-        (
-            Action<IStyle, Transformer> set,
-
-            HistoryType type, 
-            Func<IStyle, T> getUndo, 
-            Action<IStyle, T> setUndo
-        )
+        public void StyleChanged<T>(Action<IStyle, Transformer> set, HistoryType type, Func<IStyle, T> getUndo, Action<IStyle, T> setUndo)
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
@@ -663,14 +603,7 @@ namespace Retouch_Photo2.ViewModels
             this.Invalidate();//Invalidate
         }
 
-        public void StyleChangeCompleted<T>
-        (
-            Action<IStyle> set,
-
-            HistoryType type,
-            Func<IStyle, T> getUndo,
-            Action<IStyle, T> setUndo
-        )
+        public void StyleChangeCompleted<T>(Action<IStyle> set, HistoryType type, Func<IStyle, T> getUndo, Action<IStyle, T> setUndo)
         {
             //History
             LayersPropertyHistory history = new LayersPropertyHistory(type);
@@ -706,69 +639,6 @@ namespace Retouch_Photo2.ViewModels
 
 
         #endregion
-
-
-
-        #region ITextLayer<T>
-
-
-        /// <summary>
-        /// Change T type for ITextLayer, save history, invalidate canvas.
-        /// </summary>
-        /// <typeparam name="T"> The T type property. </typeparam>
-        /// <param name="set"> The sets of T. </param>
-        /// <param name="type"> The history type. </param>
-        /// <param name="getUndo"> The gets of history undo T. </param>
-        /// <param name="setUndo"> The sets of history undo T. </param>
-        public void ITextLayerChanged<T>
-        (
-            Action<ITextLayer> set,
-
-            HistoryType type, 
-            Func<ITextLayer, T> getUndo, 
-            Action<ITextLayer, T> setUndo
-        )
-        {
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory(type);
-
-            //Selection
-            this.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type.IsText())
-                {
-                    ITextLayer textLayer = (ITextLayer)layer;
-
-                    var previous = getUndo(textLayer);
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        setUndo(textLayer, previous);
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    set(textLayer);
-                }
-            });
-
-            //History
-            this.HistoryPush(history);
-
-            this.Invalidate();//Invalidate
-        }
-        
-
-        #endregion
-
-
 
     }
 }
