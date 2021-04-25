@@ -81,6 +81,8 @@ namespace Retouch_Photo2.Tools.Models
                 layer.IsRefactoringRender = true;
                 this.Layerage.RefactoringParentsRender();
                 layer.Transform.CropTransformer = transformer;
+
+                this.SelectionViewModel.Transformer = transformer;//Selection
             }
             else//Move
             {
@@ -90,6 +92,8 @@ namespace Retouch_Photo2.Tools.Models
                 layer.IsRefactoringRender = true;
                 this.Layerage.RefactoringParentsRender();
                 layer.Transform.CropTransformAdd(canvasMove);
+
+                this.SelectionViewModel.Transformer = layer.Transform.CropTransformer;//Selection
             }
         }
 
