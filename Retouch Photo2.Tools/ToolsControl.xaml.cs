@@ -141,7 +141,21 @@ namespace Retouch_Photo2.Tools
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            foreach (UIElement child in this.StackPanel.Children.Concat(this.MoreStackPanel.Children))
+            foreach (UIElement child in this.StackPanel.Children)
+            {
+                if (child is ListViewItem item)
+                {
+                    if (ToolTipService.GetToolTip(item) is ToolTip toolTip)
+                    {
+                        string key = item.Name;
+                        string title = resource.GetString($"Tools_{key}");
+
+                        toolTip.Content = title;
+                    }
+                }
+            }
+
+            foreach (UIElement child in this.MoreStackPanel.Children)
             {
                 switch (child)
                 {
