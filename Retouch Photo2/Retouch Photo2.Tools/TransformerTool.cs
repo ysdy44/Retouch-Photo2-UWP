@@ -67,7 +67,7 @@ namespace Retouch_Photo2.Tools
 
             //Snap
             if (this.IsSnap && this.TransformerMode.IsScale()) canvasPoint = this.Snap.Snap(canvasPoint);
-            
+
             //Selection
             /// Scaling <see cref="TextArtisticLayer"/> equally.
             bool isRatio = this.IsRatio || this.SelectionViewModel.LayerType == LayerType.TextArtistic;
@@ -103,6 +103,25 @@ namespace Retouch_Photo2.Tools
             //Method
             this.MethodViewModel.MethodTransformMultipliesComplete(transformer);
             this.TransformerMode = TransformerMode.None;//TransformerMode
+
+
+            /// Gets font size for <see cref="TextArtisticLayer"/>.
+            if (this.SelectionViewModel.LayerType == LayerType.TextArtistic)
+            {
+                //Selection
+                this.SelectionViewModel.SetValueWithChildren((layerage) =>
+                {
+                    ILayer layer = layerage.Self;
+                    if (layer.Type.IsText())
+                    {
+                        if (layer is TextArtisticLayer textArtisticLayer)
+                        {
+                            this.SelectionViewModel.FontSize = textArtisticLayer.FontSize;
+                        }
+                    }
+                });
+            }
+
             return true;
         }
 
