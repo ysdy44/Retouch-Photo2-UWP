@@ -26,12 +26,12 @@
             <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
             <TextBlock x:Name="FillTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <ListViewItem x:Name="FillBrushButton" Style="{StaticResource AppListViewItemStyle}">
+            <ListViewItem x:Name="FillBrushButton" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                 <brushs:ColorEllipse Brush="{x:Bind SelectionViewModel.Fill, Mode=OneWay}"/>
             </ListViewItem>
 
             <TextBlock x:Name="StrokeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <ListViewItem x:Name="StrokeBrushButton" Style="{StaticResource AppListViewItemStyle}">
+            <ListViewItem x:Name="StrokeBrushButton" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                 <brushs:ColorEllipse Brush="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}"/>
             </ListViewItem>
             <strokes:StrokeShowControl x:Name="StrokeShowControl" StrokeStyle="{x:Bind SelectionViewModel.StrokeStyle, Mode=OneWay}">
