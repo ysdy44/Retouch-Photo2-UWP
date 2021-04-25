@@ -98,8 +98,9 @@ namespace Retouch_Photo2.Tools.Models
     {
 
 
-        private void ConstructFillType()
+        private void ConstructFill()
         {
+            this.FillBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.FillBrushButton);
             this.TypeComboBox.FillTypeChanged += async (s, brushType) =>
             {
                 if (brushType == BrushType.Image)
@@ -107,12 +108,10 @@ namespace Retouch_Photo2.Tools.Models
                     Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
 
                     this.FillTypeChanged(BrushType.Image, photo);
-                    this.BrushShowControl.Invalidate();
                 }
                 else
                 {
                     this.FillTypeChanged(brushType);
-                    this.BrushShowControl.Invalidate();
                 }
             };
         }
@@ -147,27 +146,6 @@ namespace Retouch_Photo2.Tools.Models
                 this.Fill = brush.Clone();
 
                 if (brush.Type == BrushType.Color) this.SelectionViewModel.Color = this.Fill.Color;
-            }
-        }
-
-        private void FillShow()
-        {
-            if (this.Fill == null) return;
-
-            switch (this.Fill.Type)
-            {
-                case BrushType.None: break;
-
-                case BrushType.Color:
-                    Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.BrushShowControl);
-                    break;
-
-                case BrushType.LinearGradient:
-                case BrushType.RadialGradient:
-                case BrushType.EllipticalGradient:
-                    this.StopsPicker.SetArray(this.Fill.Stops);
-                    this.StopsFlyout.ShowAt(this);//Flyout
-                    break;
             }
         }
 

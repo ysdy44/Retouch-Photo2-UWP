@@ -37,7 +37,20 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Converter
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
-        public Visibility FillOrStrokeToVisibilityConverter(FillOrStroke fillOrStroke) => fillOrStroke == FillOrStroke.Stroke ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility FillOrStrokeToVisibilityConverter(FillOrStroke fillOrStroke) => fillOrStroke == FillOrStroke.Fill ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility FillOrStrokeToCollapsedConverter(FillOrStroke fillOrStroke) => fillOrStroke == FillOrStroke.Fill ? Visibility.Collapsed : Visibility.Visible;
+        public Visibility GradientToCollapsedConverter(BrushType  type)
+        {
+            switch (type)
+            {
+                case BrushType.LinearGradient:
+                case BrushType.RadialGradient:
+                case BrushType.EllipticalGradient:
+                    return Visibility.Visible;
+                default:
+                    return Visibility.Collapsed;
+            }
+        }
 
 
         //@Content
@@ -57,19 +70,29 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructShowControl();
+            this.ConstructStopsPicker();
+            this.ConstructFill();
+            this.ConstructStroke();
             this.StrokeShowControl.Tapped += (s, e) => Expander.ShowAt("Stroke", this.StrokeShowControl);
-
-            //FillOrStroke
+        
             this.FillOrStrokeComboBox.FillOrStrokeChanged += (s, fillOrStroke) =>
             {
                 this.FillOrStroke = fillOrStroke;
                 this.ViewModel.Invalidate(); //Invalidate
             };
 
-            //Type
-            this.ConstructFillType();
-            this.ConstructStrokeType();
+            this.ExtendComboBox.ExtendChanged += (s, extend) =>
+            {
+                switch (this.FillOrStroke)
+                {
+                    case FillOrStroke.Fill:
+                        this.FillExtendChanged(extend);
+                        break;
+                    case FillOrStroke.Stroke:
+                        this.StrokeExtendChanged(extend);
+                        break;
+                }
+            };
         }
 
 
@@ -227,27 +250,12 @@ namespace Retouch_Photo2.Tools.Models
 
             this.FillOrStrokeTextBlock.Text = resource.GetString("Tools_Brush_FillOrStroke");
             this.TypeTextBlock.Text = resource.GetString("Tools_Brush_Type");
-            this.ShowTextBlock.Text = resource.GetString("Tools_Brush_Brush");
 
             this.ExtendTextBlock.Text = resource.GetString("Tools_Brush_Extend");
         }
 
-        private void ConstructShowControl()
+        private void ConstructStopsPicker()
         {
-            this.BrushShowControl.Tapped += (s, e) =>
-            {
-                switch (this.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        this.FillShow();
-                        break;
-                    case FillOrStroke.Stroke:
-                        this.StrokeShow();
-                        break;
-                }
-            };
-
-
             //@Focus
             this.StopsPicker.ColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.StopsPicker.ColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
@@ -298,20 +306,6 @@ namespace Retouch_Photo2.Tools.Models
                         break;
                     case FillOrStroke.Stroke:
                         this.StrokeStopsChangeCompleted(array);
-                        break;
-                }
-            };
-
-
-            this.ExtendComboBox.ExtendChanged += (s, extend) =>
-            {
-                switch (this.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        this.FillExtendChanged(extend);
-                        break;
-                    case FillOrStroke.Stroke:
-                        this.StrokeExtendChanged(extend);
                         break;
                 }
             };

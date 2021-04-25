@@ -13,60 +13,68 @@
     d:Background="{StaticResource AppForeground}"
     >
 
-    <Page.Resources>
-        <!--Flyout-->
-        <Flyout x:Name="StopsFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <brushs:StopsPicker x:Name="StopsPicker" Width="320"/>
-        </Flyout>
-    </Page.Resources>
 
+    <Grid Margin="0,4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-    <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-        <StackPanel Orientation="Horizontal">
+        <brushs:StopsPicker x:Name="StopsPicker" Grid.Row="2" />
 
-            <Border Width="50" Visibility="{x:Bind DeviceLayoutTypeConverter(SettingViewModel.DeviceLayoutType), Mode=OneWay}">
-                <Border.Resources>
-                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/BrushIcon.xaml"/>
-                </Border.Resources>
-                <Border.Child>
-                    <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource BrushIcon}"/>
-                </Border.Child>
-            </Border>
+        <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
+            <StackPanel Orientation="Horizontal">
 
-            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+                <Border Width="50" Visibility="{x:Bind DeviceLayoutTypeConverter(SettingViewModel.DeviceLayoutType), Mode=OneWay}">
+                    <Border.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/BrushIcon.xaml"/>
+                    </Border.Resources>
+                    <Border.Child>
+                        <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource BrushIcon}"/>
+                    </Border.Child>
+                </Border>
 
-            <!--FillOrStroke-->
-            <TextBlock x:Name="FillOrStrokeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <brushs:FillOrStrokeComboBox x:Name="FillOrStrokeComboBox" 
-                 FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"/>
+                <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+                <!--FillOrStroke-->
+                <TextBlock x:Name="FillOrStrokeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <brushs:FillOrStrokeComboBox x:Name="FillOrStrokeComboBox" 
+                     FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"/>
 
-            <!--Type-->
-            <TextBlock x:Name="TypeTextBlock" Grid.Column="5" Style="{StaticResource AppTextBlockStyle}"/>
-            <brushs:BrushTypeComboBox x:Name="TypeComboBox" 
-                 FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
-                 Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
-                 Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
+                <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-            <!--ShowControl-->
-            <TextBlock x:Name="ShowTextBlock"  Style="{StaticResource AppTextBlockStyle}"/>
-            <brushs:BrushShowControl x:Name="BrushShowControl" 
-                     FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
-                     Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
-                     Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
-            <strokes:StrokeShowControl x:Name="StrokeShowControl" StrokeStyle="{x:Bind SelectionViewModel.StrokeStyle, Mode=OneWay}"
-                                       Visibility="{x:Bind FillOrStrokeToVisibilityConverter(SelectionViewModel.FillOrStroke), Mode=OneWay}"/>
-
-            <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
-
-            <!--Extend-->
-            <TextBlock x:Name="ExtendTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-            <brushs:ExtendComboBox x:Name="ExtendComboBox" 
+                <!--Type-->
+                <TextBlock x:Name="TypeTextBlock" Grid.Column="5" Style="{StaticResource AppTextBlockStyle}"/>
+                <brushs:BrushTypeComboBox x:Name="TypeComboBox" 
                      FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
                      Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
                      Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
 
-        </StackPanel>
-    </ScrollViewer>
+                <!--ShowControl-->
+                <TextBlock x:Name="ShowTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <ListViewItem x:Name="FillBrushButton" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center"
+                              Visibility="{x:Bind FillOrStrokeToVisibilityConverter(SelectionViewModel.FillOrStroke), Mode=OneWay}">
+                    <brushs:ColorEllipse Brush="{x:Bind SelectionViewModel.Fill, Mode=OneWay}"/>
+                </ListViewItem>
+                <ListViewItem x:Name="StrokeBrushButton" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center"
+                              Visibility="{x:Bind FillOrStrokeToCollapsedConverter(SelectionViewModel.FillOrStroke), Mode=OneWay}">
+                    <brushs:ColorEllipse Brush="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}"/>
+                </ListViewItem>
+                <strokes:StrokeShowControl x:Name="StrokeShowControl" StrokeStyle="{x:Bind SelectionViewModel.StrokeStyle, Mode=OneWay}"
+                      Visibility="{x:Bind FillOrStrokeToCollapsedConverter(SelectionViewModel.FillOrStroke), Mode=OneWay}"/>
+
+                <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+
+                <!--Extend-->
+                <TextBlock x:Name="ExtendTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <brushs:ExtendComboBox x:Name="ExtendComboBox" 
+                     FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
+                     Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
+                     Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
 </Page>

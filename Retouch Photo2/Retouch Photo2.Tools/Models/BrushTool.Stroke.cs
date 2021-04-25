@@ -96,8 +96,9 @@ namespace Retouch_Photo2.Tools.Models
     {
 
 
-        private void ConstructStrokeType()
+        private void ConstructStroke()
         {
+            this.StrokeBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.StrokeBrushButton);
             this.TypeComboBox.StrokeTypeChanged += async (s, brushType) =>
             {
                 if (brushType == BrushType.Image)
@@ -105,12 +106,10 @@ namespace Retouch_Photo2.Tools.Models
                     Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
 
                     this.StrokeTypeChanged(BrushType.Image, photo);
-                    this.BrushShowControl.Invalidate();
                 }
                 else
                 {
                     this.StrokeTypeChanged(brushType);
-                    this.BrushShowControl.Invalidate();
                 }
             };
         }
@@ -145,27 +144,6 @@ namespace Retouch_Photo2.Tools.Models
                 this.Stroke = brush.Clone();
 
                 if (brush.Type == BrushType.Color) this.SelectionViewModel.Color = this.Stroke.Color;
-            }
-        }
-
-        private void StrokeShow()
-        {
-            if (this.Stroke == null) return;
-
-            switch (this.Stroke.Type)
-            {
-                case BrushType.None: break;
-
-                case BrushType.Color:
-                    Retouch_Photo2.DrawPage.ShowStrokeColorFlyout?.Invoke(this, this.BrushShowControl);
-                    break;
-
-                case BrushType.LinearGradient:
-                case BrushType.RadialGradient:
-                case BrushType.EllipticalGradient:
-                    this.StopsPicker.SetArray(this.Stroke.Stops);
-                    this.StopsFlyout.ShowAt(this);//Flyout
-                    break;
             }
         }
 
