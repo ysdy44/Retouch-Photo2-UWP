@@ -3,6 +3,7 @@
 // Difficult:         ★★★
 // Only:              ★★★
 // Complete:      ★★★★
+using HSVColorPickers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Retouch_Photo2.Elements;
@@ -40,10 +41,10 @@ namespace Retouch_Photo2.Brushs
         CanvasRenderTarget GrayAndWhiteBackground;
 
         readonly StopsSize Size = new StopsSize();
-        StopsManager Manager = new StopsManager();
+        readonly StopsManager Manager = new StopsManager();
 
 
-        private CanvasGradientStop[] array;
+        private CanvasGradientStop[] array = GreyWhiteMeshHelpher.GetGradientStopArray();
         /// <summary>
         /// Set a brush value for the control.
         /// </summary>
@@ -98,7 +99,7 @@ namespace Retouch_Photo2.Brushs
                 if (isSucces) this.StopsChangeCompleted?.Invoke(this, this.array);//Delegate
             };
 
-            this.ColorButton.Click += (s, e) =>
+            this.ColorButton.Tapped += (s, e) =>
             {
                 if (this.array == null) return;
 
@@ -113,7 +114,7 @@ namespace Retouch_Photo2.Brushs
             //Offset         
             this.OffsetPicker.ValueChanged += (s, value) =>
             {
-                float offset = value / 100.0f;               
+                float offset = value / 100.0f;
                 bool isSucces = this.SetOffset(offset);
                 if (isSucces) this.StopsChanged?.Invoke(this, this.array);//Delegate
             };

@@ -11,10 +11,10 @@
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:brushs="using:Retouch_Photo2.Brushs"
     Padding="0"
-    Width="480" 
+    Width="Auto" 
     Height="Auto"
     MinWidth="300" 
-    MaxWidth="600" 
+    MaxWidth="1200" 
     MinHeight="60" 
     MaxHeight="280"
     d:DesignHeight="200"
@@ -34,82 +34,68 @@
 
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="54"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="4"/>
         </Grid.RowDefinitions>
 
 
         <!--Canvas-->
-        <canvas:CanvasControl x:Name="CanvasControl" Grid.Row="0" Grid.ColumnSpan="2"/>
+        <canvas:CanvasControl x:Name="CanvasControl" Grid.Row="0" ClearColor="Black"/>
 
 
-        <!--Color-->
-        <Button x:Name="ColorButton" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource AppRoundedButtonStyle}">
-            <brushs:ColorEllipse x:Name="ColorEllipse" Color="White"/>
-        </Button>
-
-
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="53"/>
-            </Grid.ColumnDefinitions>
-
-            <!--Offset-->
-            <TextBlock x:Name="OffsetTextBlock" Grid.Column="0" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
-            <hSVColorPickers:NumberPicker x:Name="OffsetPicker" Grid.Column="1" Minimum="0" Maximum="100" Unit="%" 
-                         ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-
-            <!--A-->
-            <TextBlock x:Name="AlphaTextBlock" Grid.Column="2" HorizontalAlignment="Right" Style="{StaticResource AppTextBlockStyle}"/>
-            <hSVColorPickers:NumberPicker x:Name="AlphaPicker" Grid.Column="3" Minimum="0" Maximum="255" 
-                         ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
-
-        </Grid>
-
-
-        <ScrollViewer Grid.Row="2"  Style="{StaticResource AppHorizontalScrollViewerStyle}">
+        <ScrollViewer Grid.Row="1" Style="{StaticResource AppHorizontalScrollViewerStyle}">
             <StackPanel Orientation="Horizontal">
 
+                <!--Offset-->
+                <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <hSVColorPickers:NumberPicker x:Name="OffsetPicker" Maximum="100" Unit="%" 
+                         ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+
                 <ContentControl Width="4"/>
-               
+
+                <!--A-->
+                <TextBlock x:Name="AlphaTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <hSVColorPickers:NumberPicker x:Name="AlphaPicker" Minimum="0" Maximum="255" 
+                         ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
+
+                <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+
+                <!--Remove-->
                 <TextBlock x:Name="RemoveTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <Button x:Name="RemoveButton" Style="{StaticResource AppCircleButtonStyle}">
+                <ListViewItem x:Name="RemoveButton" Style="{StaticResource AppListViewItemStyle}">
                     <PathIcon>
                         <PathIcon.Data>
                             M17.28,4.56l0,13.92c0,0.509 -0.202,0.998 -0.562,1.358c-0.36,0.36 -0.849,0.562 -1.358,0.562c-2.275,0 -5.76,0 -5.76,0c0,0 -3.374,0 -5.577,0c-1.038,0 -2.128,-0.825 -2.159,-1.862c-0.127,-4.186 -0.184,-13.978 -0.184,-13.978l-1.68,0l0,-1.68l5.52,0c0,0 0,-0.72 0,-1.44c0,-0.382 0.152,-0.748 0.422,-1.018c0.27,-0.27 0.636,-0.422 1.018,-0.422c1.598,0 4.162,0 5.76,0c0.382,0 0.748,0.152 1.018,0.422c0.27,0.27 0.422,0.636 0.422,1.018l0,1.44l4.8,0l0,1.68l-1.68,0Zm-4.68,3.84l0,10.56c0,0 1.325,0 2.28,0c0.255,0 0.499,-0.101 0.679,-0.281c0.18,-0.18 0.281,-0.424 0.281,-0.679l0,-13.44l-12.48,0l0,13.451c0,0.252 0.1,0.493 0.278,0.671c0.178,0.178 0.419,0.278 0.671,0.278c0.956,0 2.291,0 2.291,0l0,-10.56l1.56,0l0,10.56l2.88,0l0,-10.56l1.56,0Zm0.24,-5.52c0,0 0,-0.703 0,-1.2c0,-0.127 -0.051,-0.249 -0.141,-0.339c-0.09,-0.09 -0.212,-0.141 -0.339,-0.141c-1.124,0 -3.916,0 -5.04,0c-0.127,0 -0.249,0.051 -0.339,0.141c-0.09,0.09 -0.141,0.212 -0.141,0.339l0,1.2l6,0l0,0Z
                         </PathIcon.Data>
                     </PathIcon>
-                </Button>
+                </ListViewItem>
 
                 <ContentControl Width="4"/>
 
+                <!--Copy-->
                 <TextBlock x:Name="CopyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <Button x:Name="CopyButton" Style="{StaticResource AppCircleButtonStyle}">
+                <ListViewItem x:Name="CopyButton" Style="{StaticResource AppListViewItemStyle}">
                     <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
-                </Button>
+                </ListViewItem>
 
                 <ContentControl Width="4"/>
 
+                <!--Reserve-->
                 <TextBlock x:Name="ReserveTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <Button x:Name="ReserveButton" Style="{StaticResource AppCircleButtonStyle}">
+                <ListViewItem x:Name="ReserveButton" Style="{StaticResource AppListViewItemStyle}">
                     <FontIcon Glyph="&#xF1CB;" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
-                </Button>
+                </ListViewItem>
+
+                <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+
+                <!--Color-->
+                <ListViewItem x:Name="ColorButton" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
+                    <brushs:ColorEllipse x:Name="ColorEllipse" Color="White"/>
+                </ListViewItem>
 
             </StackPanel>
         </ScrollViewer>
-
-
     </Grid>
 
 </UserControl>
