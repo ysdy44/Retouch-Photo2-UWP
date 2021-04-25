@@ -74,15 +74,15 @@ namespace Retouch_Photo2
     {
 
         //@BackRequested
-        /// <summary> The current page becomes the active page. </summary>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
-        }
         /// <summary> The current page no longer becomes an active page. </summary>
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
+            SystemNavigationManager.GetForCurrentView().BackRequested -= this.BackRequested;
+        }
+        /// <summary> The current page becomes the active page. </summary>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().BackRequested += this.BackRequested;
         }
         private void BackRequested(object sender, BackRequestedEventArgs e)
         {
