@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers.Models
 
         public override ILayer Clone()
         {
-            TextArtisticLayer layer = new TextArtisticLayer();
+            TextFrameLayer layer = new TextFrameLayer();
             TextLayer.FontCopyWith(this, layer);
             LayerBase.CopyWith(this, layer);
             return layer;
