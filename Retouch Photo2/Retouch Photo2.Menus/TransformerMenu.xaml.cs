@@ -389,21 +389,16 @@ namespace Retouch_Photo2.Menus
             {
                 if (this.WidthTextBox.Text is string value)
                 {
-                    if (string.IsNullOrEmpty(value) == false)
-                    {
-                        float width = float.Parse(value);
-                        if (width < 1)
-                        {
-                            width = 1;
-                            this.WidthTextBox.Text = $"{1}";
-                        }
+                    if (string.IsNullOrEmpty(value)) return;
 
-                        Transformer transformer = this.SelectionTransformer;
-                        Matrix3x2 matrix = transformer.TransformWidth((float)width, this.IndicatorMode, this.IsRatio);
+                    float width = float.Parse(value);
+                    if (width < 1) { width = 1; this.WidthTextBox.Text = $"{1}"; }
 
-                        //Method
-                        this.MethodViewModel.MethodTransformMultiplies(matrix);
-                    }
+                    Transformer transformer = this.SelectionTransformer;
+                    Matrix3x2 matrix = transformer.TransformWidth((float)width, this.IndicatorMode, this.IsRatio);
+
+                    //Method
+                    this.MethodViewModel.MethodTransformMultiplies(matrix);
                 }
             };
 
@@ -413,21 +408,16 @@ namespace Retouch_Photo2.Menus
             {
                 if (this.HeightTextBox.Text is string value)
                 {
-                    if (string.IsNullOrEmpty(value) == false)
-                    {
-                        float height = float.Parse(value);
-                        if (height < 1)
-                        {
-                            height = 1;
-                            this.HeightTextBox.Text = $"{1}";
-                        }
+                    if (string.IsNullOrEmpty(value)) return;
 
-                        Transformer transformer = this.SelectionTransformer;
-                        Matrix3x2 matrix = transformer.TransformHeight((float)height, this.IndicatorMode, this.IsRatio);
+                    float height = float.Parse(value);
+                    if (height < 1) { height = 1; this.HeightTextBox.Text = $"{1}"; }
 
-                        //Method
-                        this.MethodViewModel.MethodTransformMultiplies(matrix);
-                    }
+                    Transformer transformer = this.SelectionTransformer;
+                    Matrix3x2 matrix = transformer.TransformHeight((float)height, this.IndicatorMode, this.IsRatio);
+
+                    //Method
+                    this.MethodViewModel.MethodTransformMultiplies(matrix);
                 }
             };
         }
@@ -442,28 +432,18 @@ namespace Retouch_Photo2.Menus
             {
                 if (this.RotateTextBox.Text is string value)
                 {
-                    if (string.IsNullOrEmpty(value) == false)
-                    {
-                        value = value.Replace("º", string.Empty);
+                    if (string.IsNullOrEmpty(value)) return;
+                    value = value.Replace("º", string.Empty);
 
-                        float angle = float.Parse(value);
-                        if (angle < -180)
-                        {
-                            angle = -180;
-                            this.RotateTextBox.Text = $"{180} º";
-                        }
-                        else if (angle > 180)
-                        {
-                            angle = 180;
-                            this.RotateTextBox.Text = $"{-180} º";
-                        }
+                    float angle = float.Parse(value);
+                    if (angle < -180) { angle = -180; this.RotateTextBox.Text = $"{180} º"; }
+                    else if (angle > 180) { angle = 180; this.RotateTextBox.Text = $"{-180} º"; }
 
-                        Transformer transformer = this.SelectionTransformer;
-                        Matrix3x2 matrix = transformer.TransformRotate((float)angle, this.IndicatorMode);
+                    Transformer transformer = this.SelectionTransformer;
+                    Matrix3x2 matrix = transformer.TransformRotate((float)angle, this.IndicatorMode);
 
-                        //Method
-                        this.MethodViewModel.MethodTransformMultiplies(matrix);
-                    }
+                    //Method
+                    this.MethodViewModel.MethodTransformMultiplies(matrix);
                 }
             };
 
@@ -474,28 +454,18 @@ namespace Retouch_Photo2.Menus
             {
                 if (this.SkewTextBox.Text is string value)
                 {
-                    if (string.IsNullOrEmpty(value) == false)
-                    {
-                        value = value.Replace("º", string.Empty);
+                    if (string.IsNullOrEmpty(value)) return;
+                    value = value.Replace("º", string.Empty);
 
-                        float angle = float.Parse(value);
-                        if (angle < -90)
-                        {
-                            angle = -90;
-                            this.SkewTextBox.Text = $"{90} º";
-                        }
-                        else if (angle > 90)
-                        {
-                            angle = 90;
-                            this.SkewTextBox.Text = $"{-90} º";
-                        }
+                    float angle = float.Parse(value);
+                    if (angle < -90) { angle = -90; this.SkewTextBox.Text = $"{90} º"; }
+                    else if (angle > 90) { angle = 90; this.SkewTextBox.Text = $"{-90} º"; }
 
-                        Transformer transformer = this.SelectionTransformer;
-                        Matrix3x2 matrix = transformer.TransformSkew((float)angle, this.IndicatorMode);
+                    Transformer transformer = this.SelectionTransformer;
+                    Matrix3x2 matrix = transformer.TransformSkew((float)angle, this.IndicatorMode);
 
-                        //Method
-                        this.MethodViewModel.MethodTransformMultiplies(matrix);
-                    }
+                    //Method
+                    this.MethodViewModel.MethodTransformMultiplies(matrix);
                 }
             };
         }
@@ -510,16 +480,14 @@ namespace Retouch_Photo2.Menus
             {
                 if (this.XTextBox.Text is string value)
                 {
-                    if (string.IsNullOrEmpty(value) == false)
-                    {
-                        float x = float.Parse(value);
+                    if (string.IsNullOrEmpty(value)) return;
+                    float x = float.Parse(value);
 
-                        Transformer transformer = this.SelectionTransformer;
-                        Vector2 vector = transformer.TransformX((float)x, this.IndicatorMode);
+                    Transformer transformer = this.SelectionTransformer;
+                    Vector2 vector = transformer.TransformX((float)x, this.IndicatorMode);
 
-                        //Method
-                        this.MethodViewModel.MethodTransformAdd(vector);
-                    }
+                    //Method
+                    this.MethodViewModel.MethodTransformAdd(vector);
                 }
             };
 
@@ -530,16 +498,14 @@ namespace Retouch_Photo2.Menus
             {
                 if (this.YTextBox.Text is string value)
                 {
-                    if (string.IsNullOrEmpty(value) == false)
-                    {
-                        float y = float.Parse(value);
+                    if (string.IsNullOrEmpty(value)) return;
+                    float y = float.Parse(value);
 
-                        Transformer transformer = this.SelectionTransformer;
-                        Vector2 vector = transformer.TransformY((float)y, this.IndicatorMode);
+                    Transformer transformer = this.SelectionTransformer;
+                    Vector2 vector = transformer.TransformY((float)y, this.IndicatorMode);
 
-                        //Method
-                        this.MethodViewModel.MethodTransformAdd(vector);
-                    }
+                    //Method
+                    this.MethodViewModel.MethodTransformAdd(vector);
                 }
             };
         }

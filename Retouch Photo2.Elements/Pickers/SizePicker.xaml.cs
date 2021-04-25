@@ -57,6 +57,8 @@ namespace Retouch_Photo2.Elements
             }
         }
 
+        private double CacheWidth = 1024;
+        private double CacheHeight = 1024;
 
         //@Construct
         /// <summary>
@@ -72,11 +74,21 @@ namespace Retouch_Photo2.Elements
             {
                 if (this.WidthTextBox.Text is string value)
                 {
-                    if (string.IsNullOrEmpty(value) == false)
+                    if (string.IsNullOrEmpty(value)) return;
+
+                    double width = double.Parse(value);
+
+                    if (this.RatioToggleControl.IsChecked == false)
                     {
-                        double width = double.Parse(value);
                         if (width < this.Minimum) this.WidthTextBox.Text = this.Minimum.ToString();
                         else if (width > this.Maximum) this.WidthTextBox.Text = this.Maximum.ToString();
+                    }
+                    else
+                    {
+                        double height = width / this.CacheWidth * this.SizeHeight;
+
+                        this.CacheWidth = width;
+                        this.SizeHeight = this.CacheHeight = height;
                     }
                 }
             };
@@ -87,50 +99,24 @@ namespace Retouch_Photo2.Elements
             {
                 if (this.HeightTextBlock.Text is string value)
                 {
-                    if (string.IsNullOrEmpty(value) == false)
+                    if (string.IsNullOrEmpty(value)) return;
+
+                    double height = double.Parse(value);
+
+                    if (this.RatioToggleControl.IsChecked == false)
                     {
-                        double height = double.Parse(value);
                         if (height < this.Minimum) this.HeightTextBlock.Text = this.Minimum.ToString();
                         else if (height > this.Maximum) this.HeightTextBlock.Text = this.Maximum.ToString();
                     }
+                    else
+                    {
+                        double width = height / this.CacheHeight * this.SizeWith;
+
+                        this.CacheHeight = height;
+                        this.SizeHeight = this.CacheHeight = width;
+                    }
                 }
             };
-
-            /*
-        int cacheWidth = 1024;
-        int cacheHeight = 1024;
-            this.WidthPicker.Unit = "px";
-            this.HeighPicker.Unit = "px";
-            this.WidthPicker.Minimum = 16;
-            this.HeighPicker.Minimum = 16;
-            this.WidthPicker.Maximum = 16384;
-            this.HeighPicker.Maximum = 16384;
-
-            this.WidthPicker.Value = 1024;
-            this.HeighPicker.Value = 1024;
-            this.WidthPicker.ValueChanged += (s, value) =>
-            {
-                if (this.RatioToggleControl.IsChecked == false) return;
-
-                double width = value;
-                double height = value / (double)this.cacheWidth * this.HeighPicker.Value;
-
-                this.cacheWidth = (int)width;
-                this.HeighPicker.Value = this.cacheHeight = (int)height;
-            };
-
-            this.HeighPicker.ValueChanged += (s, value) =>
-            {
-                if (this.RatioToggleControl.IsChecked == false) return;
-
-                double width = value / (double)this.cacheHeight * this.WidthPicker.Value;
-                double height = value;
-
-                this.WidthPicker.Value = this.cacheWidth = (int)width;
-                this.cacheHeight = (int)height;
-            };
-             */
-
         }
     }
 }
