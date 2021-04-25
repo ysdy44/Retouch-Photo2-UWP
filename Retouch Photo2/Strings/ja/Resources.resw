@@ -203,12 +203,11 @@
 <data name='Layers_Curve' xml:space='preserve'><value>曲線</value></data>
 <data name='Layers_CurveMulti' xml:space='preserve'><value>マルチカーブ</value></data>
 <data name='Menus_Adjustment' xml:space='preserve'><value>調整</value></data>
-<data name='Menus_Adjustment_Add' xml:space='preserve'><value>追加</value></data>
-<data name='Menus_Adjustment_Filters' xml:space='preserve'><value>フィルタ</value></data>
 <data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>調整なし</value></data>
 <data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>レイヤーを選択してください</value></data>
 <data name='Menus_Effect' xml:space='preserve'><value>レイヤーFX</value></data>
 <data name='Menus_Text' xml:space='preserve'><value>テキスト</value></data>
+<data name='Menus_Filter' xml:space='preserve'><value>フィルタ</value></data>
 <data name='Menus_Style' xml:space='preserve'><value>スタイル</value></data>
 <data name='Menus_History' xml:space='preserve'><value>歴史</value></data>
 <data name='Menus_Transformer_Rotate' xml:space='preserve'><value>回転する</value></data>
@@ -603,7 +602,6 @@
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>角度</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>芸術的なテキスト</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>フレームテキスト</value></data>
-<data name='Tools_Text_FullScreen' xml:space='preserve'><value>全画面表示</value></data>
 <data name='Tools_Image' xml:space='preserve'><value>画像</value></data>
 <data name='Tools_PatternGrid' xml:space='preserve'><value>グリッド</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>タイプ</value></data>

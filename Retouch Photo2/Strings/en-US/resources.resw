@@ -203,12 +203,11 @@
 <data name='Layers_Curve' xml:space='preserve'><value>Curve</value></data>
 <data name='Layers_CurveMulti' xml:space='preserve'><value>Multi-curve</value></data>
 <data name='Menus_Adjustment' xml:space='preserve'><value>Adjustments</value></data>
-<data name='Menus_Adjustment_Add' xml:space='preserve'><value>Add to</value></data>
-<data name='Menus_Adjustment_Filters' xml:space='preserve'><value>Filter</value></data>
 <data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>No adjustment</value></data>
 <data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>Please select a layer</value></data>
 <data name='Menus_Effect' xml:space='preserve'><value>Layer FX</value></data>
 <data name='Menus_Text' xml:space='preserve'><value>Text</value></data>
+<data name='Menus_Filter' xml:space='preserve'><value>Filter</value></data>
 <data name='Menus_Style' xml:space='preserve'><value>Styles</value></data>
 <data name='Menus_History' xml:space='preserve'><value>History</value></data>
 <data name='Menus_Transformer_Rotate' xml:space='preserve'><value>Rotate</value></data>
@@ -603,7 +602,6 @@
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>Angle</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>Artistic Text</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>Frame Text</value></data>
-<data name='Tools_Text_FullScreen' xml:space='preserve'><value>Full screen</value></data>
 <data name='Tools_Image' xml:space='preserve'><value>Image</value></data>
 <data name='Tools_PatternGrid' xml:space='preserve'><value>Grid</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>Type</value></data>

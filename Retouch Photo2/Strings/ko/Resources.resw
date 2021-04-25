@@ -203,12 +203,11 @@
 <data name='Layers_Curve' xml:space='preserve'><value>곡선</value></data>
 <data name='Layers_CurveMulti' xml:space='preserve'><value>다중 곡선</value></data>
 <data name='Menus_Adjustment' xml:space='preserve'><value>조정</value></data>
-<data name='Menus_Adjustment_Add' xml:space='preserve'><value>추가</value></data>
-<data name='Menus_Adjustment_Filters' xml:space='preserve'><value>필터</value></data>
 <data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>조정 없음</value></data>
 <data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>레이어를 선택하세요</value></data>
 <data name='Menus_Effect' xml:space='preserve'><value>레이어 FX</value></data>
 <data name='Menus_Text' xml:space='preserve'><value>본문</value></data>
+<data name='Menus_Filter' xml:space='preserve'><value>필터</value></data>
 <data name='Menus_Style' xml:space='preserve'><value>스타일</value></data>
 <data name='Menus_History' xml:space='preserve'><value>역사</value></data>
 <data name='Menus_Transformer_Rotate' xml:space='preserve'><value>회전</value></data>
@@ -603,7 +602,6 @@
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>각도</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>예술적 텍스트</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>프레임 텍스트</value></data>
-<data name='Tools_Text_FullScreen' xml:space='preserve'><value>전체 화면</value></data>
 <data name='Tools_Image' xml:space='preserve'><value>영상</value></data>
 <data name='Tools_PatternGrid' xml:space='preserve'><value>그리드</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>유형</value></data>

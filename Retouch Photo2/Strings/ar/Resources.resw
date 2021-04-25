@@ -203,12 +203,11 @@
 <data name='Layers_Curve' xml:space='preserve'><value>منحنى</value></data>
 <data name='Layers_CurveMulti' xml:space='preserve'><value>متعدد منحنى</value></data>
 <data name='Menus_Adjustment' xml:space='preserve'><value>التعديلات</value></data>
-<data name='Menus_Adjustment_Add' xml:space='preserve'><value>اضف إليه</value></data>
-<data name='Menus_Adjustment_Filters' xml:space='preserve'><value>منقي</value></data>
 <data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>لا تعديل</value></data>
 <data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>الرجاء تحديد طبقة</value></data>
 <data name='Menus_Effect' xml:space='preserve'><value>طبقة FX</value></data>
 <data name='Menus_Text' xml:space='preserve'><value>نص</value></data>
+<data name='Menus_Filter' xml:space='preserve'><value>منقي</value></data>
 <data name='Menus_Style' xml:space='preserve'><value>الأنماط</value></data>
 <data name='Menus_History' xml:space='preserve'><value>تاريخ</value></data>
 <data name='Menus_Transformer_Rotate' xml:space='preserve'><value>استدارة</value></data>
@@ -603,7 +602,6 @@
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>زاوية</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>نص فني</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>نص الإطار</value></data>
-<data name='Tools_Text_FullScreen' xml:space='preserve'><value>تكبير الشاشة</value></data>
 <data name='Tools_Image' xml:space='preserve'><value>صورة</value></data>
 <data name='Tools_PatternGrid' xml:space='preserve'><value>شبكة</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>اكتب</value></data>

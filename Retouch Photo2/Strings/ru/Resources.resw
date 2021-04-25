@@ -203,12 +203,11 @@
 <data name='Layers_Curve' xml:space='preserve'><value>Изгиб</value></data>
 <data name='Layers_CurveMulti' xml:space='preserve'><value>Мульти-кривая</value></data>
 <data name='Menus_Adjustment' xml:space='preserve'><value>Корректировки</value></data>
-<data name='Menus_Adjustment_Add' xml:space='preserve'><value>Добавить к</value></data>
-<data name='Menus_Adjustment_Filters' xml:space='preserve'><value>Фильтр</value></data>
 <data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>Без регулировки</value></data>
 <data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>Пожалуйста, выберите слой</value></data>
 <data name='Menus_Effect' xml:space='preserve'><value>Слой FX</value></data>
 <data name='Menus_Text' xml:space='preserve'><value>Текст</value></data>
+<data name='Menus_Filter' xml:space='preserve'><value>Фильтр</value></data>
 <data name='Menus_Style' xml:space='preserve'><value>Стили</value></data>
 <data name='Menus_History' xml:space='preserve'><value>История</value></data>
 <data name='Menus_Transformer_Rotate' xml:space='preserve'><value>Повернуть</value></data>
@@ -603,7 +602,6 @@
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>Угол</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>Художественный текст</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>Текст рамки</value></data>
-<data name='Tools_Text_FullScreen' xml:space='preserve'><value>Полноэкранный</value></data>
 <data name='Tools_Image' xml:space='preserve'><value>Изображение</value></data>
 <data name='Tools_PatternGrid' xml:space='preserve'><value>Сетка</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>Тип</value></data>

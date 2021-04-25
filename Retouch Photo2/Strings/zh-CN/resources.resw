@@ -203,12 +203,11 @@
 <data name='Layers_Curve' xml:space='preserve'><value>曲线</value></data>
 <data name='Layers_CurveMulti' xml:space='preserve'><value>多曲线</value></data>
 <data name='Menus_Adjustment' xml:space='preserve'><value>调整</value></data>
-<data name='Menus_Adjustment_Add' xml:space='preserve'><value>添加</value></data>
-<data name='Menus_Adjustment_Filters' xml:space='preserve'><value>滤镜</value></data>
 <data name='Menus_Adjustment_ZeroTip' xml:space='preserve'><value>无调整</value></data>
 <data name='Menus_Adjustment_DisableTip' xml:space='preserve'><value>请选择一个图层</value></data>
 <data name='Menus_Effect' xml:space='preserve'><value>图层FX</value></data>
 <data name='Menus_Text' xml:space='preserve'><value>文本</value></data>
+<data name='Menus_Filter' xml:space='preserve'><value>滤镜</value></data>
 <data name='Menus_Style' xml:space='preserve'><value>样式</value></data>
 <data name='Menus_History' xml:space='preserve'><value>历史</value></data>
 <data name='Menus_Transformer_Rotate' xml:space='preserve'><value>旋转</value></data>
@@ -603,7 +602,6 @@
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>角度</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>艺术文本</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>边框文本</value></data>
-<data name='Tools_Text_FullScreen' xml:space='preserve'><value>全屏</value></data>
 <data name='Tools_Image' xml:space='preserve'><value>图像</value></data>
 <data name='Tools_PatternGrid' xml:space='preserve'><value>网格</value></data>
 <data name='Tools_PatternGrid_Type' xml:space='preserve'><value>类型</value></data>
