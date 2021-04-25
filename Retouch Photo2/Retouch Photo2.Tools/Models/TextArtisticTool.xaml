@@ -10,83 +10,98 @@
     d:DesignWidth="400"
     >
 
-    <Grid x:Name="RootGrid" VerticalAlignment="Center" Padding="4,0">
+    <UserControl.Resources>
+        <!--Flyout-->
+        <Flyout x:Name="FontSizeFlyout" Placement="Top" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListView x:Name="FontSizeListView" IsItemClickEnabled="True" SelectionMode="Single"/>
+        </Flyout>
+        <Flyout x:Name="FontFamilyFlyout" Placement="Top" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListView x:Name="FontFamilyListView" IsItemClickEnabled="True" SelectionMode="Single"/>
+        </Flyout>
+    </UserControl.Resources>
 
-        <!--VisualState-->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
 
-                <!--Normal-->
-                <VisualState x:Name="Normal"/>
-
-                <!--FullScreen-->
-                <VisualState x:Name="FullScreen">
-                    <VisualState.Setters>
-
-                        <Setter Target = "TextBox.(Grid.Column)" Value="0"/>
-                        <Setter Target = "TextBox.(Grid.Row)" Value="0"/>
-                        <Setter Target = "TextBox.(Grid.ColumnSpan)" Value="3"/>
-                        <Setter Target = "TextBox.(Grid.Row)" Value="1"/>
-
-                        <Setter Target = "TextBox.VerticalAlignment" Value="Stretch"/>
-                        <Setter Target = "TextBox.Margin" Value="0,4,0,4"/>
-                        <Setter Target = "TextBox.MaxHeight" Value="1200"/>
-                        <Setter Target = "TextBox.MinHeight" Value="100"/>
-                        <Setter Target = "TextBox.MinWidth" Value="384"/>
-
-                        <Setter Target = "TextButton.(Grid.Row)" Value="0"/>
-                        <Setter Target = "FullScreenButton.(Grid.Row)" Value="0"/>
-                        <Setter Target = "FullScreenFontIcon.Glyph" Value="&#xE1D8;"/>
-
-                        <Setter Target = "RootGrid.VerticalAlignment" Value="Stretch"/>
-                        <Setter Target = "RootGrid.Margin" Value="4"/>
-
-                    </VisualState.Setters>
-                </VisualState>
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" MinWidth="50"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="1*" MinWidth="50"/>
-        </Grid.ColumnDefinitions>
+    <Grid Margin="0,4">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="4"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-        <Border Width="50" Visibility="Collapsed">
-            <Border.Resources>
-                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/TextArtisticIcon.xaml"/>
-            </Border.Resources>
-            <Border.Child>
-                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource TextArtisticIcon}"/>
-            </Border.Child>
-        </Border>
-
-        <TextBox x:Name="TextBox" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" Margin="2, 0"
+        <TextBox x:Name="TextBox" Grid.Row="2"
                  TextWrapping="Wrap" AcceptsReturn="True"
-                 MinWidth="300" MinHeight="40" MaxHeight="40" VerticalAlignment="Center"
+                 MinWidth="384" MinHeight="40" MaxHeight="1200" VerticalAlignment="Stretch"
                  BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}"
                  Text="{x:Bind SelectionViewModel.FontText, Mode=OneWay}"/>
+        <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
+            <StackPanel Orientation="Horizontal">
+
+                <Border Width="50" Visibility="Collapsed">
+                    <Border.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/TextArtisticIcon.xaml"/>
+                    </Border.Resources>
+                    <Border.Child>
+                        <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource TextArtisticIcon}"/>
+                    </Border.Child>
+                </Border>
+
+                <!--Grab the focus for TextBox-->
+                <ContentControl IsTabStop="True" IsTapEnabled="True"/>
 
 
-        <ListViewItem x:Name="TextButton" Grid.Column="0" Grid.Row="1" Width="Auto" Style="{StaticResource AppListViewItemStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="TextToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-            <texts:Icon/>
-        </ListViewItem>
+                <!--FontStyle-->
+                <TextBlock x:Name="FontStyleTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <ListViewItem x:Name="BoldButton" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
+                                      IsSelected="{x:Bind FontWeightConverter(SelectionViewModel.FontWeight), Mode=OneWay}">
+                    <ToolTipService.ToolTip>
+                        <ToolTip x:Name="BoldToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                    </ToolTipService.ToolTip>
+                    <SymbolIcon Symbol="Bold"/>
+                </ListViewItem>
 
-        <ListViewItem x:Name="FullScreenButton" Grid.Column="2" Grid.Row="1" Style="{StaticResource AppListViewItemStyle}">
-            <ToolTipService.ToolTip>
-                <ToolTip x:Name="FullScreenToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
-            </ToolTipService.ToolTip>
-            <FontIcon x:Name="FullScreenFontIcon" Glyph="&#xE740;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
-        </ListViewItem>
+                <ListViewItem x:Name="ItalicButton" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
+                                      IsSelected="{x:Bind FontStyleConverter(SelectionViewModel.FontStyle), Mode=OneWay}">
+                    <ToolTipService.ToolTip>
+                        <ToolTip x:Name="ItalicToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                    </ToolTipService.ToolTip>
+                    <SymbolIcon Symbol="Italic"/>
+                </ListViewItem>
 
+                <ListViewItem x:Name="UnderlineButton" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
+                                      IsSelected="{x:Bind SelectionViewModel.Underline, Mode=OneWay}">
+                    <ToolTipService.ToolTip>
+                        <ToolTip x:Name="UnderlineToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                    </ToolTipService.ToolTip>
+                    <SymbolIcon Symbol="Underline"/>
+                </ListViewItem>
+
+
+                <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+
+
+                <!--FontFamily-->
+                <TextBlock x:Name="FontFamilyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <ListViewItem x:Name="FontFamilyButton" Style="{StaticResource AppListViewItemStyle}" MinWidth="100"
+                              Content="{x:Bind SelectionViewModel.FontFamily, Mode=OneWay}"/>
+
+                <!--FontSize-->
+                <TextBlock x:Name="FontSizeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <ListViewItem x:Name="FontSizeButton" Style="{StaticResource AppListViewItemStyle}" Width="50"
+                              Content="{x:Bind SelectionViewModel.FontSize, Mode=OneWay}"/>
+
+
+                <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+
+
+                <ListViewItem x:Name="TextButton" Width="50" Padding="2" Style="{StaticResource AppListViewItemStyle}">
+                    <ToolTipService.ToolTip>
+                        <ToolTip x:Name="TextToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                    </ToolTipService.ToolTip>
+                    <texts:Icon/>
+                </ListViewItem>
+
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 
 </Page>

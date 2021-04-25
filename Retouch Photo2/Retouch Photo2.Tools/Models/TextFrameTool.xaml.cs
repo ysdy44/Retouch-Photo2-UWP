@@ -5,13 +5,17 @@
 // Complete:      ★★★★
 using FanKit.Transformers;
 using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Text;
 using Retouch_Photo2.Elements;
-using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
+using Retouch_Photo2.Texts;
 using Retouch_Photo2.ViewModels;
+using System.Linq;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
+using Windows.Globalization;
+using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -26,7 +30,13 @@ namespace Retouch_Photo2.Tools.Models
         //@ViewModel
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
+        ViewModel MethodViewModel => App.MethodViewModel;
         SettingViewModel SettingViewModel => App.SettingViewModel;
+
+
+        //@Converter
+        private bool FontWeightConverter(FontWeight2 fontWeight) => this.MethodViewModel.FontWeightConverter(fontWeight);
+        private bool FontStyleConverter(FontStyle fontStyle) => this.MethodViewModel.FontStyleConverter(fontStyle);
 
 
         //@Content 
@@ -52,18 +62,6 @@ namespace Retouch_Photo2.Tools.Models
         #endregion
 
 
-        //@VisualState
-        bool _vsIsFullScreen;
-        /// <summary> 
-        /// Represents the visual appearance of UI elements in a specific state.
-        /// </summary>
-        public VisualState VisualState
-        {
-            get => this._vsIsFullScreen ? this.FullScreen : this.Normal;
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
-
-
         //@Construct
         /// <summary>
         /// Initializes a TextFrameTool. 
@@ -73,32 +71,47 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
+            this.BoldButton.Tapped += (s, e) => this.MethodViewModel.MethodSetFontWeight();
+            this.ItalicButton.Tapped += (s, e) => this.MethodViewModel.MethodSetFontStyle();
+            this.UnderlineButton.Tapped += (s, e) => this.MethodViewModel.MethodSetUnderline();
+
+            // Get all FontFamilys in your device.
+            this.FontFamilyListView.ItemsSource = CanvasTextFormat.GetSystemFontFamilies(ApplicationLanguages.Languages).OrderBy(k => k);
+            this.FontFamilyButton.Tapped += (s, e) => this.FontFamilyFlyout.ShowAt(this.FontFamilyButton);
+            this.FontFamilyListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is string value)
+                {
+                    this.MethodViewModel.MethodSetFontFamily(value);
+                }
+            };
+
+            // Get fontSizes.
+            this.FontSizeListView.ItemsSource = new float[] { 5f, 6f, 7f, 8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f, 16f, 18f, 20f, 24f, 30f, 36f, 48f, 64f, 72f, 96f, 144f, 288f };
+            this.FontSizeButton.Tapped += (s, e) => this.FontSizeFlyout.ShowAt(this.FontSizeButton);
+
+            this.FontSizeListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is float value)
+                {
+                    this.MethodViewModel.MethodSetFontSize(value);
+                }
+            };
+
+
             this.TextButton.Tapped += (s, e) => Expander.ShowAt("Text", this.TextButton);
 
             //@Focus
             // Before Flyout Showed, Don't let TextBox Got Focus.
             // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
-            if (this.TextBox is TextBox textBox)
-            {
-                //textBox.IsEnabled = false;
-                //this.ColorFlyout.Opened += (s, e) => textBox.IsEnabled = true;
-                //this.ColorFlyout.Closed += (s, e) => textBox.IsEnabled = false;
-                textBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
-                textBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
-            }
-
+            this.TextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
+            this.TextBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             this.TextBox.TextChanged += (s, e) =>
             {
                 if (this.TextBox.FocusState == FocusState.Unfocused) return;
+
                 string fontText = this.TextBox.Text;
-
-                this.SetFontText(fontText);
-            };
-
-            this.FullScreenButton.Tapped += (s, e) =>
-            {
-                this._vsIsFullScreen = !this._vsIsFullScreen;
-                this.VisualState = this.VisualState;//State
+                this.MethodViewModel.MethodSetFontText(fontText);
             };
         }
 
@@ -137,61 +150,25 @@ namespace Retouch_Photo2.Tools.Models
         {
             TouchbarExtension.Instance = null;
         }
-    }
 
-    public partial class TextFrameTool : ITool
-    {
 
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.TextBox.PlaceholderText = resource.GetString("Tools_Text_PlaceholderText");
+            this.FontStyleTextBlock.Text = resource.GetString("Texts_FontStyle");
+            this.BoldToolTip.Content = resource.GetString("Texts_FontStyle_Bold");
+            this.ItalicToolTip.Content = resource.GetString("Texts_FontStyle_Italic");
+            this.UnderlineToolTip.Content = resource.GetString("Texts_FontStyle_Underline");
+
+            this.FontFamilyTextBlock.Text = resource.GetString("Texts_FontFamily");
+
+            this.FontSizeTextBlock.Text = resource.GetString("Texts_FontSize");
 
             this.TextToolTip.Content = resource.GetString("Menus_Text");
 
-            this.FullScreenToolTip.Content = resource.GetString("Tools_Text_FullScreen");
+            this.TextBox.PlaceholderText = resource.GetString("Tools_Text_PlaceholderText");
         }
-
-        private void SetFontText(string fontText)
-        {
-            //History
-            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetFontText);
-
-            //Selection
-            this.SelectionViewModel.FontText = fontText;
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                if (layer.Type.IsText())
-                {
-                    ITextLayer textLayer = (ITextLayer)layer;
-
-                    var previous = textLayer.FontText;
-                    history.UndoAction += () =>
-                    {
-                        //Refactoring
-                        layer.IsRefactoringRender = true;
-                        layer.IsRefactoringIconRender = true;
-                        textLayer.FontText = previous;
-                    };
-
-                    //Refactoring
-                    layer.IsRefactoringRender = true;
-                    layer.IsRefactoringIconRender = true;
-                    layerage.RefactoringParentsRender();
-                    layerage.RefactoringParentsIconRender();
-                    textLayer.FontText = fontText;
-                }
-            });
-
-            //History
-            this.ViewModel.HistoryPush(history);
-
-            this.ViewModel.Invalidate();//Invalidate
-        }
-
     }
 }
