@@ -392,9 +392,7 @@ namespace Retouch_Photo2.Effects.Pages
                 this.ColorPicker.Color = this.Color;
             };
 
-            //@Focus
-            // Before Flyout Showed, Don't let TextBox Got Focus.
-            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
+            //@Focus 
             this.ColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.ColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
 

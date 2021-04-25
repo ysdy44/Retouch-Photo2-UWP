@@ -26,6 +26,7 @@ namespace Retouch_Photo2.Menus
         //@ViewModel
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Converter
@@ -82,9 +83,12 @@ namespace Retouch_Photo2.Menus
             this.FontSizeListView.ItemsSource = new float[] { 5f, 6f, 7f, 8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f, 16f, 18f, 20f, 24f, 30f, 36f, 48f, 64f, 72f, 96f, 144f, 288f };
             this.FontSizeButton.Tapped += (s, e) => this.FontSizeFlyout.ShowAt(this.FontSizeButton);
 
+            //@Focus
             TextBoxExtensions.SetDefault(this.FontSizeTextBox, $"{22.0f}");
+            this.FontSizeTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.FontSizeTextBox.LostFocus += (s, e) =>
             {
+                this.SettingViewModel.RegisteKey();
                 if (this.FontSizeTextBox.Text is string value)
                 {
                     if (string.IsNullOrEmpty(value)) return;

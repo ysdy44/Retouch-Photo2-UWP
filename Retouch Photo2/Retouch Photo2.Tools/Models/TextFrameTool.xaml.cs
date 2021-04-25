@@ -102,8 +102,6 @@ namespace Retouch_Photo2.Tools.Models
             this.TextButton.Tapped += (s, e) => Expander.ShowAt("Text", this.TextButton);
 
             //@Focus
-            // Before Flyout Showed, Don't let TextBox Got Focus.
-            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
             this.TextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.TextBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
             this.TextBox.TextChanged += (s, e) =>

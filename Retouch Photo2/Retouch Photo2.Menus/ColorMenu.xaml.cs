@@ -37,8 +37,6 @@ namespace Retouch_Photo2.Menus
         private void ConstructColor1()
         {
             //@Focus
-            // Before Flyout Showed, Don't let TextBox Got Focus.
-            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
             this.ColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.ColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
 

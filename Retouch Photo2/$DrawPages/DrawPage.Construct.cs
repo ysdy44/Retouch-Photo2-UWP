@@ -233,12 +233,6 @@ namespace Retouch_Photo2
         //Rename
         private void ConstructRenameDialog()
         {
-            //@Focus
-            // Before Flyout Showed, Don't let TextBox Got Focus.
-            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
-            this.RenameTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
-            this.RenameTextBox.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
-
             this.RenameDialog.SecondaryButtonClick += (sender, args) => this.RenameDialog.Hide();
             this.RenameDialog.PrimaryButtonClick += (_, __) =>
             {
@@ -380,8 +374,6 @@ namespace Retouch_Photo2
         private void ConstructFillColorFlyout()
         {
             //@Focus
-            // Before Flyout Showed, Don't let TextBox Got Focus.
-            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
             this.FilColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.FilColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
 
@@ -416,8 +408,6 @@ namespace Retouch_Photo2
         private void ConstructStrokeColorFlyout()
         {
             //@Focus
-            // Before Flyout Showed, Don't let TextBox Got Focus.
-            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
             this.StrokeColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.StrokeColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
 

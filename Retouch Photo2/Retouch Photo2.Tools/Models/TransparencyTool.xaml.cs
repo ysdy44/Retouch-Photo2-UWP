@@ -191,8 +191,6 @@ namespace Retouch_Photo2.Tools.Models
             this.ShowControl.Tapped += (s, e) => this.TransparencyShow();
 
             //@Focus
-            // Before Flyout Showed, Don't let TextBox Got Focus.
-            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
             this.StopsPicker.ColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.StopsPicker.ColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
 

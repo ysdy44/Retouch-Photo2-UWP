@@ -17,20 +17,26 @@ namespace Retouch_Photo2.ViewModels
 
         //@Construct
         /// <summary>
-        /// Registe the key.
-        /// </summary>
-        public void RegisteKey()
-        {
-            Window.Current.CoreWindow.KeyDown += this.CoreWindow_KeyDown;
-            Window.Current.CoreWindow.KeyUp += this.CoreWindow_KeyUp;
-        }
-        /// <summary>
         /// Unregiste the key.
         /// </summary>
         public void UnregisteKey()
         {
+            //@Focus 
+            // Before Flyout Showed, Don't let TextBox Got Focus.
+            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
             Window.Current.CoreWindow.KeyDown -= this.CoreWindow_KeyDown;
             Window.Current.CoreWindow.KeyUp -= this.CoreWindow_KeyUp;
+        }
+        /// <summary>
+        /// Registe the key.
+        /// </summary>
+        public void RegisteKey()
+        {
+            //@Focus
+            // Before Flyout Showed, Don't let TextBox Got Focus.
+            // After TextBox Gots focus, disable Shortcuts in SettingViewModel.
+            Window.Current.CoreWindow.KeyDown += this.CoreWindow_KeyDown;
+            Window.Current.CoreWindow.KeyUp += this.CoreWindow_KeyUp;
         }
 
         private void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs e)

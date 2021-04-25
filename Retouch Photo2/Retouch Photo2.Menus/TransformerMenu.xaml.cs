@@ -383,10 +383,13 @@ namespace Retouch_Photo2.Menus
         //Width Height
         private void ConstructWidthHeight()
         {
-            this.WidthTextBox.Text = $"{1}";
+            //@Focus
             TextBoxExtensions.SetDefault(this.WidthTextBox, $"{1}");
+            this.WidthTextBox.Text = $"{1}";
+            this.WidthTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.WidthTextBox.LostFocus += (s, e) =>
             {
+                this.SettingViewModel.RegisteKey();
                 if (this.WidthTextBox.Text is string value)
                 {
                     if (string.IsNullOrEmpty(value)) return;
@@ -402,10 +405,13 @@ namespace Retouch_Photo2.Menus
                 }
             };
 
-            this.HeightTextBox.Text = $"{1}";
+            //@Focus
             TextBoxExtensions.SetDefault(this.HeightTextBox, $"{1}");
+            this.HeightTextBox.Text = $"{1}";
+            this.HeightTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.HeightTextBox.LostFocus += (s, e) =>
             {
+                this.SettingViewModel.RegisteKey();
                 if (this.HeightTextBox.Text is string value)
                 {
                     if (string.IsNullOrEmpty(value)) return;
@@ -426,10 +432,13 @@ namespace Retouch_Photo2.Menus
         //Radian Skew
         private void ConstructRadianSkew()
         {
-            this.RotateTextBox.Text = $"{0} º";
+            //@Focus
             TextBoxExtensions.SetDefault(this.RotateTextBox, $"{0} º");
+            this.RotateTextBox.Text = $"{0} º";
+            this.RotateTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.RotateTextBox.LostFocus += (s, e) =>
             {
+                this.SettingViewModel.RegisteKey();
                 if (this.RotateTextBox.Text is string value)
                 {
                     if (string.IsNullOrEmpty(value)) return;
@@ -448,10 +457,13 @@ namespace Retouch_Photo2.Menus
             };
 
 
-            this.SkewTextBox.Text = $"{0} º";
+            //@Focus
             TextBoxExtensions.SetDefault(this.SkewTextBox, $"{0} º");
+            this.SkewTextBox.Text = $"{0} º";
+            this.SkewTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.SkewTextBox.LostFocus += (s, e) =>
             {
+                this.SettingViewModel.RegisteKey();
                 if (this.SkewTextBox.Text is string value)
                 {
                     if (string.IsNullOrEmpty(value)) return;
@@ -474,10 +486,13 @@ namespace Retouch_Photo2.Menus
         //X Y
         private void ConstructXY()
         {
-            this.XTextBox.Text = $"{0}";
+            //@Focus
             TextBoxExtensions.SetDefault(this.XTextBox, $"{0}");
+            this.XTextBox.Text = $"{0}";
+            this.XTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.XTextBox.LostFocus += (s, e) =>
             {
+                this.SettingViewModel.RegisteKey();
                 if (this.XTextBox.Text is string value)
                 {
                     if (string.IsNullOrEmpty(value)) return;
@@ -492,10 +507,13 @@ namespace Retouch_Photo2.Menus
             };
 
 
-            this.YTextBox.Text = $"{0}";
+            //@Focus
             TextBoxExtensions.SetDefault(this.YTextBox, $"{0}");
+            this.YTextBox.Text = $"{0}";
+            this.XTextBox.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.YTextBox.LostFocus += (s, e) =>
             {
+                this.SettingViewModel.RegisteKey();
                 if (this.YTextBox.Text is string value)
                 {
                     if (string.IsNullOrEmpty(value)) return;
