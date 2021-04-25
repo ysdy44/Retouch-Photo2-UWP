@@ -81,13 +81,13 @@
 
                 <!--FontFamily-->
                 <TextBlock x:Name="FontFamilyTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <ListViewItem x:Name="FontFamilyButton" Style="{StaticResource AppListViewItemStyle}" MinWidth="100"
+                <ListViewItem x:Name="FontFamilyButton" MinWidth="100" Style="{StaticResource AppListViewItemStyle}"
                               Content="{x:Bind SelectionViewModel.FontFamily, Mode=OneWay}"/>
 
                 <!--FontSize-->
                 <TextBlock x:Name="FontSizeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <ListViewItem x:Name="FontSizeButton" Style="{StaticResource AppListViewItemStyle}" Width="50"
-                              Content="{x:Bind SelectionViewModel.FontSize, Mode=OneWay}"/>
+                <ListViewItem x:Name="FontSizeButton" MinWidth="50" Style="{StaticResource AppListViewItemStyle}"
+                              Content="{x:Bind Round2Converter(SelectionViewModel.FontSize), Mode=OneWay}"/>
 
                 <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 

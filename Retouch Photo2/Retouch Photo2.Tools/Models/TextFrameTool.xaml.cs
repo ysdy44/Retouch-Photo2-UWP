@@ -11,6 +11,7 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Texts;
 using Retouch_Photo2.ViewModels;
+using System;
 using System.Linq;
 using System.Numerics;
 using Windows.ApplicationModel.Resources;
@@ -38,6 +39,7 @@ namespace Retouch_Photo2.Tools.Models
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
         private bool FontWeightConverter(FontWeight2 fontWeight) => this.MethodViewModel.FontWeightConverter(fontWeight);
         private bool FontStyleConverter(FontStyle fontStyle) => this.MethodViewModel.FontStyleConverter(fontStyle);
+        private string Round2Converter(float value) => $"{(float)Math.Round(value, 2)}";
 
 
         //@Content 
