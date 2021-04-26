@@ -89,16 +89,19 @@
                                 <VisualState x:Name="Disable">
                                     <VisualState.Setters >
 
-                                        <Setter Target = "PhoneRectangle.Stroke" Value="Gray"/>
-                                        <Setter Target = "PadRectangle.Stroke" Value="Gray"/>
-                                        <Setter Target = "PCRectangle.Stroke" Value="Gray"/>
+                                        <Setter Target = "PhoneRectangle.Stroke" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
+                                        <Setter Target = "PadRectangle.Stroke" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
+                                        <Setter Target = "PCRectangle.Stroke" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
 
-                                        <Setter Target = "PhoneIcon.Foreground" Value="Gray"/>
-                                        <Setter Target = "PadIcon.Foreground" Value="Gray"/>
-                                        <Setter Target = "PCIcon.Foreground" Value="Gray"/>
+                                        <Setter Target = "PhoneIcon.Foreground" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
+                                        <Setter Target = "PadIcon.Foreground" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
+                                        <Setter Target = "PCIcon.Foreground" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
 
-                                        <Setter Target = "PhoneTextBlock.Foreground" Value="Gray"/>
-                                        <Setter Target = "PadTextBlock.Foreground" Value="Gray"/>
+                                        <Setter Target = "PhoneTextBlock.Foreground" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
+                                        <Setter Target = "PhoneCountTextBlock.Foreground" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
+                                        <Setter Target = "PadTextBlock.Foreground" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
+                                        <Setter Target = "PadCountTextBlock.Foreground" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
+                                        <Setter Target = "PCTextBlock.Foreground" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
 
                                     </VisualState.Setters>
                                 </VisualState>
@@ -153,17 +156,17 @@
 
 
                         <!--Bottom-->
-                        <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" 
+                        <TextBlock x:Name="PhoneTextBlock" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" 
                                    Text="{TemplateBinding PhoneText}"
                                    Style="{StaticResource AppTextBlockStyle}"/>
-                        <TextBlock Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center"
+                        <TextBlock x:Name="PhoneCountTextBlock" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center"
                                    Text="{TemplateBinding PhoneCount}"/>
-                        <TextBlock Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" 
+                        <TextBlock x:Name="PadTextBlock" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" 
                                    Text="{TemplateBinding PadText}"
                                    Style="{StaticResource AppTextBlockStyle}"/>
-                        <TextBlock Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center"
+                        <TextBlock x:Name="PadCountTextBlock"  Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center"
                                    Text="{TemplateBinding PadCount}"/>
-                        <TextBlock Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" 
+                        <TextBlock x:Name="PCTextBlock" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" 
                                    Text="{TemplateBinding PCText}"
                                    Style="{StaticResource AppTextBlockStyle}"/>
 
