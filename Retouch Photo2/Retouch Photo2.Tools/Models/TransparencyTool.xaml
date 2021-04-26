@@ -12,36 +12,38 @@
     d:Background="{StaticResource AppForeground}"
     >
 
-    <Page.Resources>
-        <!--Flyout-->
-        <Flyout x:Name="StopsFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <brushs:StopsPicker x:Name="StopsPicker" Width="320"/>
-        </Flyout>
-    </Page.Resources>
 
+    <Grid Margin="0,4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-    <StackPanel Orientation="Horizontal">
+        <brushs:TransparencyStopsPickers x:Name="StopsPicker" Grid.Row="2" 
+                Transparency="{x:Bind SelectionViewModel.Transparency, Mode=OneWay}"
+                IsEnabled="{x:Bind GradientToTrueConverter(TypeComboBox.Type), Mode=OneWay}"/>
 
-        <Border Width="50" Visibility="{x:Bind DeviceLayoutTypeConverter(SettingViewModel.DeviceLayoutType), Mode=OneWay}">
-            <Border.Resources>
-                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/TransparencyIcon.xaml"/>
-            </Border.Resources>
-            <Border.Child>
-                <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource TransparencyIcon}"/>
-            </Border.Child>
-        </Border>
+        <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
+            <StackPanel Orientation="Horizontal" Height="44">
 
-        <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+                <Border Width="50" Visibility="{x:Bind DeviceLayoutTypeConverter(SettingViewModel.DeviceLayoutType), Mode=OneWay}">
+                    <Border.Resources>
+                        <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Icons/TransparencyIcon.xaml"/>
+                    </Border.Resources>
+                    <Border.Child>
+                        <ContentControl x:Name="IconContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource TransparencyIcon}"/>
+                    </Border.Child>
+                </Border>
 
-        <!--Type-->
-        <TextBlock x:Name="TypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <brushs:TransparencyTypeComboBox x:Name="TypeComboBox"
-                 Transparency="{x:Bind SelectionViewModel.Transparency, Mode=OneWay}" />
+                <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <!--ShowControl-->
-        <TextBlock x:Name="ShowTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-        <brushs:TransparencyShowControl x:Name="ShowControl"
-                     Transparency="{x:Bind SelectionViewModel.Transparency, Mode=OneWay}" />
+                <!--Type-->
+                <TextBlock x:Name="TypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <brushs:TransparencyTypeComboBox x:Name="TypeComboBox"
+                      Transparency="{x:Bind SelectionViewModel.Transparency, Mode=OneWay}" />
 
-    </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </Page>

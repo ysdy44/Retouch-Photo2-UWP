@@ -95,24 +95,11 @@ namespace Retouch_Photo2.Tools.Models
     public partial class TransparencyTool : Page, ITool
     {
 
-        private void ConstructTransparencyType()
+        private void ConstructTransparency()
         {
-            //Retouch_Photo2.PhotosPage.TransparencyImageCallBack += (photo) =>
-            //{
-            //    this.TransparencyTypeChanged(BrushType.Image, photo);
-            //    this.ShowControl.Invalidate();
-            //};
             this.TypeComboBox.TypeChanged += (s, brushType) =>
             {
-                //if (brushType == BrushType.Image)
-                //{
-                //    Retouch_Photo2.DrawPage.FrameNavigatePhotosPage?.Invoke(PhotosPageMode.TransparencyImage);//Delegate
-                //}
-                //else
-                //{
                 this.TransparencyTypeChanged(brushType);
-                this.ShowControl.Invalidate();
-                //}
             };
         }
 
@@ -146,27 +133,6 @@ namespace Retouch_Photo2.Tools.Models
                 this.Transparency = brush.Clone();
 
                 if (brush.Type == BrushType.Color) this.SelectionViewModel.Color = this.Transparency.Color;
-            }
-        }
-
-        private void TransparencyShow()
-        {
-            if (this.Transparency == null) return;
-
-            switch (this.Transparency.Type)
-            {
-                case BrushType.None: break;
-
-                //case BrushType.Color:
-                //    DrawPage.TransparencyColorShowAt(this.ShowControl);
-                //    break;
-
-                case BrushType.LinearGradient:
-                case BrushType.RadialGradient:
-                case BrushType.EllipticalGradient:
-                    this.StopsPicker.SetArray(this.Transparency.Stops);
-                    this.StopsFlyout.ShowAt(this);//Flyout
-                    break;
             }
         }
 
@@ -210,18 +176,5 @@ namespace Retouch_Photo2.Tools.Models
             );
         }
 
-        //private void TransparencyExtendChanged(CanvasEdgeBehavior extend)
-        //{
-        //    this.Transparency.Extend = extend;
-        //    this.ExtendComboBox.Extend = extend;
-        //
-        //    this.MethodViewModel.StyleChanged<CanvasEdgeBehavior>
-        //    (
-        //       set: (style, transformer) => style.Transparency.Extend = extend,
-        //       type: "Set transparency extend",
-        //       getUndo: (style) => style.Transparency.Extend,
-        //       setUndo: (style, previous) => style.Transparency.Extend = previous
-        //   );
     }
-
 }

@@ -36,6 +36,18 @@ namespace Retouch_Photo2.Tools.Models
 
         //@Converter
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
+        public bool GradientToTrueConverter(BrushType type)
+        {
+            switch (type)
+            {
+                case BrushType.LinearGradient:
+                case BrushType.RadialGradient:
+                case BrushType.EllipticalGradient:
+                    return true;
+                default:
+                    return false;
+            }
+        }
 
 
         //@Content 
@@ -55,10 +67,10 @@ namespace Retouch_Photo2.Tools.Models
             this.InitializeComponent();
             this.ConstructStrings();
 
-            this.ConstructShowControl();
+            this.ConstructStopsPicker();
 
             //Type
-            this.ConstructTransparencyType();
+            this.ConstructTransparency();
         }
 
 
@@ -183,13 +195,10 @@ namespace Retouch_Photo2.Tools.Models
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
             this.TypeTextBlock.Text = resource.GetString("Tools_Brush_Type");
-            this.ShowTextBlock.Text = resource.GetString("Tools_Brush_Brush");
         }
 
-        private void ConstructShowControl()
+        private void ConstructStopsPicker()
         {
-            this.ShowControl.Tapped += (s, e) => this.TransparencyShow();
-
             //@Focus
             this.StopsPicker.ColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.StopsPicker.ColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
