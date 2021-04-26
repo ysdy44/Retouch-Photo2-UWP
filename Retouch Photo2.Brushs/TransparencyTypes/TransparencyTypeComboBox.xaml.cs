@@ -50,22 +50,35 @@ namespace Retouch_Photo2.Brushs
             get => (IBrush)base.GetValue(TransparencyProperty);
             set => base.SetValue(TransparencyProperty, value);
         }
-        /// <summary> Identifies the <see cref = "BrushTypeComboBox.Fill" /> dependency property. </summary>
+        /// <summary> Identifies the <see cref = "TransparencyTypeComboBox.Fill" /> dependency property. </summary>
         public static readonly DependencyProperty TransparencyProperty = DependencyProperty.Register(nameof(Transparency), typeof(IBrush), typeof(TransparencyTypeComboBox), new PropertyMetadata(null, (sender, e) =>
         {
             TransparencyTypeComboBox control = (TransparencyTypeComboBox)sender;
 
             if (e.NewValue is IBrush value)
             {
+                control.Type =
                 control._vsType = value.Type;
                 control.VisualState = control.VisualState;//State
             }
             else
             {
+                control.Type =
                 control._vsType = BrushType.None;
                 control.VisualState = control.VisualState;//State
             }
         }));
+
+
+        /// <summary> Gets or sets the type.</summary>
+        public BrushType Type
+        {
+            get => (BrushType)base.GetValue(TypeProperty);
+            set => base.SetValue(TypeProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "TransparencyTypeComboBox.Type" /> dependency property. </summary>
+        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(BrushType), typeof(TransparencyTypeComboBox), new PropertyMetadata(BrushType.None));
+
 
         #endregion
 

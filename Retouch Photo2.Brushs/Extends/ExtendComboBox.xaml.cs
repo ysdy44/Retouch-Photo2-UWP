@@ -70,8 +70,8 @@ namespace Retouch_Photo2.Brushs
             {
                 switch (value)
                 {
-                    case FillOrStroke.Fill: this.Extend = this.Fill?.Extend ?? CanvasEdgeBehavior.Clamp; ; break;
-                    case FillOrStroke.Stroke: this.Extend = this.Stroke?.Extend ?? CanvasEdgeBehavior.Clamp; ; break;
+                    case FillOrStroke.Fill: this.Extend = this.Fill?.Extend ?? CanvasEdgeBehavior.Clamp; break;
+                    case FillOrStroke.Stroke: this.Extend = this.Stroke?.Extend ?? CanvasEdgeBehavior.Clamp; break;
                 }
 
                 this.fillOrStroke = value;

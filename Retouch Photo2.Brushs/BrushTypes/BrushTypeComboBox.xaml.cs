@@ -57,10 +57,12 @@ namespace Retouch_Photo2.Brushs
                 switch (value)
                 {
                     case FillOrStroke.Fill:
+                        this.Type =
                         this._vsType = this.FillType;
                         this.VisualState = this.VisualState;//State
                         break;
                     case FillOrStroke.Stroke:
+                        this.Type =
                         this._vsType = this.StrokeType;
                         this.VisualState = this.VisualState;//State
                         break;
@@ -101,6 +103,7 @@ namespace Retouch_Photo2.Brushs
                 switch (this.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
+                        this.Type =
                         this._vsType = value;
                         this.VisualState = this.VisualState;//State
                         break;
@@ -141,6 +144,7 @@ namespace Retouch_Photo2.Brushs
                 switch (this.FillOrStroke)
                 {
                     case FillOrStroke.Stroke:
+                        this.Type =
                         this._vsType = value;
                         this.VisualState = this.VisualState;//State
                         break;
@@ -149,6 +153,16 @@ namespace Retouch_Photo2.Brushs
             }
         }
         private BrushType strokeType = BrushType.None;
+
+
+        /// <summary> Gets or sets the type.</summary>
+        public BrushType Type
+        {
+            get => (BrushType)base.GetValue(TypeProperty);
+            set => base.SetValue(TypeProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "BrushTypeComboBox.Type" /> dependency property. </summary>
+        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(BrushType), typeof(BrushTypeComboBox), new PropertyMetadata(BrushType.None));
 
 
         #endregion
