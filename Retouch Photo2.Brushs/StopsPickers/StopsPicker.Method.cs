@@ -4,12 +4,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Brushs
 {
-    /// <summary>
-    /// Stops picker.
-    /// </summary>
-    public sealed partial class StopsPicker : UserControl
+    public partial class StopsPicker : UserControl
     {
-        
+
         /// <summary>
         ///  Occur when the stop changed.
         /// </summary>

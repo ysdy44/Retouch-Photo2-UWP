@@ -17,7 +17,7 @@ namespace Retouch_Photo2.Brushs
     /// <summary>
     /// Stops picker.
     /// </summary>
-    public sealed partial class StopsPicker : UserControl
+    public partial class StopsPicker : UserControl
     {
         //@Delegate
         /// <summary> Occurs when the stops value changed. </summary>
@@ -59,6 +59,7 @@ namespace Retouch_Photo2.Brushs
             }
 
             this.array = value;
+            this.CanvasControl.Invalidate();//Invalidate
         }
 
 
@@ -74,7 +75,10 @@ namespace Retouch_Photo2.Brushs
             this.ConstructCanvasOperator();
 
             this.ConstructStop();
-
+            base.IsEnabledChanged += (s, e) =>
+            {
+                this.CanvasControl.Invalidate();//Invalidate
+            };
 
             //Color    
             this._ColorPicker.ColorChanged += (s, color) =>

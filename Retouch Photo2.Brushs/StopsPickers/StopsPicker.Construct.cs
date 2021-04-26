@@ -8,10 +8,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Brushs
 {
-    /// <summary>
-    /// Stops picker.
-    /// </summary>
-    public sealed partial class StopsPicker : UserControl
+    public partial class StopsPicker : UserControl
     {
 
         //Strings
@@ -51,6 +48,7 @@ namespace Retouch_Photo2.Brushs
 
             this.CanvasControl.Draw += (sender, args) =>
             {
+                if (base.IsEnabled == false) return;
                 if (this.array == null) return;
 
                 //Background

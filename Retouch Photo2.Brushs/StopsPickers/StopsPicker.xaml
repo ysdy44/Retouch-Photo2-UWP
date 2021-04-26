@@ -45,7 +45,7 @@
 
 
         <ScrollViewer Grid.Row="1" Style="{StaticResource AppHorizontalScrollViewerStyle}">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Height="44">
 
                 <!--Offset-->
                 <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
