@@ -21,10 +21,14 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <brushs:StopsPicker x:Name="StopsPicker" Grid.Row="2" />
+        <brushs:BrushStopsPicker x:Name="StopsPicker" Grid.Row="2" 
+                FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
+                Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
+                Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" 
+                IsEnabled="{x:Bind GradientToTrueConverter(TypeComboBox.Type), Mode=OneWay}"/>
 
         <ScrollViewer Style="{StaticResource AppHorizontalScrollViewerStyle}">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Height="44">
 
                 <Border Width="50" Visibility="{x:Bind DeviceLayoutTypeConverter(SettingViewModel.DeviceLayoutType), Mode=OneWay}">
                     <Border.Resources>
@@ -51,27 +55,33 @@
                      Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
                      Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
 
-                <!--ShowControl-->
-                <TextBlock x:Name="ShowTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <ListViewItem x:Name="FillBrushButton" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center"
-                              Visibility="{x:Bind FillOrStrokeToVisibilityConverter(SelectionViewModel.FillOrStroke), Mode=OneWay}">
-                    <brushs:ColorEllipse Brush="{x:Bind SelectionViewModel.Fill, Mode=OneWay}"/>
-                </ListViewItem>
-                <ListViewItem x:Name="StrokeBrushButton" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center"
-                              Visibility="{x:Bind FillOrStrokeToCollapsedConverter(SelectionViewModel.FillOrStroke), Mode=OneWay}">
-                    <brushs:ColorEllipse Brush="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}"/>
-                </ListViewItem>
+                <!--Show-->
+                <Border Visibility="{x:Bind FillOrStrokeToVisibilityConverter(SelectionViewModel.FillOrStroke), Mode=OneWay}">
+                    <ListViewItem x:Name="FillBrushButton" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center"
+                            Visibility="{x:Bind ColorToVisibilityConverter(TypeComboBox.Type), Mode=OneWay}">
+                        <brushs:ColorEllipse Brush="{x:Bind SelectionViewModel.Fill, Mode=OneWay}"/>
+                    </ListViewItem>
+                </Border>
+                <Border Visibility="{x:Bind FillOrStrokeToCollapsedConverter(SelectionViewModel.FillOrStroke), Mode=OneWay}">
+                    <ListViewItem x:Name="StrokeBrushButton" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center"
+                            Visibility="{x:Bind ColorToVisibilityConverter(TypeComboBox.Type), Mode=OneWay}">
+                        <brushs:ColorEllipse Brush="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}"/>
+                    </ListViewItem>
+                </Border>
                 <strokes:StrokeShowControl x:Name="StrokeShowControl" StrokeStyle="{x:Bind SelectionViewModel.StrokeStyle, Mode=OneWay}"
                       Visibility="{x:Bind FillOrStrokeToCollapsedConverter(SelectionViewModel.FillOrStroke), Mode=OneWay}"/>
 
-                <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
+                <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"
+                     Visibility="{x:Bind NoneToCollapsedConverter(TypeComboBox.Type), Mode=OneWay}"/>
 
                 <!--Extend-->
-                <TextBlock x:Name="ExtendTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
+                <TextBlock x:Name="ExtendTextBlock" Style="{StaticResource AppTextBlockStyle}"
+                     Visibility="{x:Bind NoneToCollapsedConverter(TypeComboBox.Type), Mode=OneWay}"/>
                 <brushs:ExtendComboBox x:Name="ExtendComboBox" 
                      FillOrStroke="{x:Bind SelectionViewModel.FillOrStroke, Mode=OneWay}"
                      Fill="{x:Bind SelectionViewModel.Fill, Mode=OneWay}" 
-                     Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" />
+                     Stroke="{x:Bind SelectionViewModel.Stroke, Mode=OneWay}" 
+                     Visibility="{x:Bind NoneToCollapsedConverter(TypeComboBox.Type), Mode=OneWay}"/>
 
             </StackPanel>
         </ScrollViewer>

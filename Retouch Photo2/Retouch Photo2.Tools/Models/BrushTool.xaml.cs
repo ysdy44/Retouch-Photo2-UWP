@@ -39,16 +39,28 @@ namespace Retouch_Photo2.Tools.Models
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
         public Visibility FillOrStrokeToVisibilityConverter(FillOrStroke fillOrStroke) => fillOrStroke == FillOrStroke.Fill ? Visibility.Visible : Visibility.Collapsed;
         public Visibility FillOrStrokeToCollapsedConverter(FillOrStroke fillOrStroke) => fillOrStroke == FillOrStroke.Fill ? Visibility.Collapsed : Visibility.Visible;
-        public Visibility GradientToCollapsedConverter(BrushType  type)
+        public Visibility ColorToVisibilityConverter(BrushType type) => type == BrushType.Color ? Visibility.Visible : Visibility.Collapsed;
+        public bool GradientToTrueConverter(BrushType type)
         {
             switch (type)
             {
                 case BrushType.LinearGradient:
                 case BrushType.RadialGradient:
                 case BrushType.EllipticalGradient:
-                    return Visibility.Visible;
+                    return true;
                 default:
+                    return false;
+            }
+        }
+        public Visibility NoneToCollapsedConverter(BrushType type)
+        {
+            switch (type)
+            {
+                case BrushType.None:
+                case BrushType.Color:
                     return Visibility.Collapsed;
+                default:
+                    return Visibility.Visible;
             }
         }
 
@@ -74,7 +86,7 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructFill();
             this.ConstructStroke();
             this.StrokeShowControl.Tapped += (s, e) => Expander.ShowAt("Stroke", this.StrokeShowControl);
-        
+
             this.FillOrStrokeComboBox.FillOrStrokeChanged += (s, fillOrStroke) =>
             {
                 this.FillOrStroke = fillOrStroke;
