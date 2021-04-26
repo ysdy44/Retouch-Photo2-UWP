@@ -15,7 +15,7 @@ namespace Retouch_Photo2.Photos
     /// </summary>
     public class PhotoBillboardCanvas : Canvas
     {
-        
+
         private Billboard Billboard { get; } = new Billboard();
         private bool IsOverlayDismiss
         {
@@ -35,14 +35,14 @@ namespace Retouch_Photo2.Photos
         public PhotoBillboardCanvas()
         {
             this.IsHitTestVisible = false;
-            this.Children.Add(this.Billboard);            
+            this.Children.Add(this.Billboard);
             this.Tapped += (s, e) =>
             {
                 this.Billboard.IsShow = this.IsHitTestVisible = this.IsOverlayDismiss = false;
             };
         }
 
-        public void Show(FrameworkElement element , Photo photo)
+        public void Show(FrameworkElement element, Photo photo)
         {
             this.Billboard.CalculatePostion(element);
             this.Billboard.Photo = photo;

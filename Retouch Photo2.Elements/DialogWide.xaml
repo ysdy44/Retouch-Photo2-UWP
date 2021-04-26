@@ -12,10 +12,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:DialogWide">
-                    <Border x:Name="LayoutRoot" 
-            IsHitTestVisible="False"
-            Visibility="Collapsed"
-            Background="{ThemeResource AppStroke}">
+                    <Border x:Name="LayoutRoot"           
+                            IsHitTestVisible="False"       
+                            Visibility="Collapsed"        
+                            Background="{ThemeResource AppStroke}">
 
                         <!--VisualState-->
                         <VisualStateManager.VisualStateGroups>
@@ -108,17 +108,17 @@
 
                         <!--@Acrylic-->
                         <Border x:Name="RootGrid" 
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              MinWidth="380"
-              MaxWidth="414"
-              MinHeight="240"
-              BorderThickness="1"
-              BorderBrush="{ThemeResource AppStroke}" 
-              apiContractNotPresent5:Background="{ThemeResource AppForeground}"
-              apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}"                     
-              CornerRadius="{StaticResource AppCornerRadius}"              
-              >
+                                HorizontalAlignment="Center"      
+                                VerticalAlignment="Center"          
+                                MinWidth="380"           
+                                MaxWidth="1200"            
+                                MinHeight="320"            
+                                BorderThickness="1"             
+                                BorderBrush="{ThemeResource AppStroke}"             
+                                apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                                apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}"                     
+                                CornerRadius="{StaticResource AppCornerRadius}"           
+                                >
                             <Border.RenderTransformOrigin>0.5,0.5</Border.RenderTransformOrigin>
                             <Border.RenderTransform>
                                 <ScaleTransform x:Name="ScaleTransform"/>
@@ -132,9 +132,7 @@
                                 </Grid.RowDefinitions>
 
                                 <!--Body-->
-                                <ScrollViewer Grid.Row="2" Padding="14,0">
-                                    <ContentPresenter x:Name="ContentPresenter"/>
-                                </ScrollViewer>
+                                <ContentPresenter x:Name="ContentPresenter" Grid.Row="2" Padding="14,0"/>
 
                                 <!--Foot-->
                                 <Grid Grid.Row="0" Margin="14,14">

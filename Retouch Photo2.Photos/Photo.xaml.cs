@@ -25,37 +25,23 @@ namespace Retouch_Photo2.Photos
 
             this.FlyoutButton.Tapped += (s, e) =>
             {
-                Photo.FlyoutShow?.Invoke(this.Image, this);//Delegate
+                Photo.FlyoutShow?.Invoke(this.RootGrid, this);//Delegate
                 e.Handled = true;
             };
 
-            this.RootGrid.PointerEntered += (s, e) => this.Entered();
-            this.RootGrid.PointerExited += (s, e) => this.Exited();
-            this.RootGrid.PointerCanceled += (s, e) => this.Exited(); 
             this.PointerPressed += (s, e) =>
             {
                 base.CapturePointer(e.Pointer);
-                this.Exited();
             };
             this.PointerReleased += (s, e) =>
             {
                 base.ReleasePointerCapture(e.Pointer);
-                this.Exited();
             };
 
-            this.RootGrid.Tapped += (s, e) =>
+            this.Tapped += (s, e) =>
             {
-                Photo.ItemClick?.Invoke(this.Image, this);//Delegate
+                Photo.ItemClick?.Invoke(this.RootGrid, this);//Delegate
             };
-        }
-        
-        private void Entered()
-        {
-            this.ShowStoryboard.Begin();
-        }
-        private void Exited()
-        {
-            this.HideStoryboard.Begin();
         }
     }
 }

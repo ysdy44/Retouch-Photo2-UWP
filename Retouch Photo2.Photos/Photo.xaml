@@ -13,87 +13,32 @@
     Margin="2,0"
     >
 
-
-    <UserControl.Resources>
-        <!--Storyboard-->
-        <Storyboard x:Name="ShowStoryboard">
-            <DoubleAnimation Storyboard.TargetName="BackgroundDropShadowPanel" Storyboard.TargetProperty="ShadowOpacity" To="1" Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX" From="1.0" To="1.04" Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CircleEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY" From="1.0" To="1.04" Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-        <Storyboard x:Name="HideStoryboard">
-            <DoubleAnimation Storyboard.TargetName="BackgroundDropShadowPanel" Storyboard.TargetProperty="ShadowOpacity" To="0" Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX" From="1.04"  To="1.0" Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY" From="1.04"  To="1.0" Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-    </UserControl.Resources>
-
-
-    <Border x:Name="RootGrid" Background="Transparent">
-
-        <!--Shadow-->
-        <controls:DropShadowPanel x:Name="BackgroundDropShadowPanel" Grid.Row="1"
-                 BlurRadius="32" ShadowOpacity="0.0" OffsetX="0" OffsetY="2"
-                 Color="{ThemeResource AppStrokeColor}">
-            <controls:DropShadowPanel.RenderTransformOrigin>0.5,0.5</controls:DropShadowPanel.RenderTransformOrigin>
-            <controls:DropShadowPanel.RenderTransform>
-                <ScaleTransform x:Name="ScaleTransform" ScaleX="1" ScaleY="1"/>
-            </controls:DropShadowPanel.RenderTransform>
-
-            <Grid Width="120" Height="80" 
+    <Grid x:Name="RootGrid" Width="120" Height="80" 
                   BorderThickness="1"
                   BorderBrush="{ThemeResource AppBackground}"
                   Background="{ThemeResource AppBackground}"
                   >
-                <!--Image-->
-                <Image x:Name="Image"
-               IsHitTestVisible="False" Grid.Row="1" Stretch="UniformToFill"
+        <!--Image-->
+        <Image x:Name="Image" Grid.Row="1" Stretch="UniformToFill"
                Source="{x:Bind ImageFilePath}"/>
 
-                    <!--Name-->
-                <Border Height="20" Padding="4,0" VerticalAlignment="Bottom" >
-                    <Border.Background>
-                        <SolidColorBrush Opacity="0.7" Color="{ThemeResource AppBackgroundColor}"/>
-                    </Border.Background>
-                    <TextBlock x:Name="NameTextBlock" FontWeight="Bold" TextTrimming="CharacterEllipsis"
+        <!--Name-->
+        <Border IsHitTestVisible="False" Height="20" Padding="4,0" VerticalAlignment="Bottom" >
+            <Border.Background>
+                <SolidColorBrush Opacity="0.7" Color="{ThemeResource AppBackgroundColor}"/>
+            </Border.Background>
+            <TextBlock x:Name="NameTextBlock" FontWeight="Bold" TextTrimming="CharacterEllipsis"
                                HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}"
                                Text="{x:Bind Name}"/>
-                </Border>
+        </Border>
 
-                <!--Button-->
-                <Button x:Name="FlyoutButton" Width="28" Height="28" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top"
+        <!--Button-->
+        <Button x:Name="FlyoutButton" Width="28" Height="28" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top"
                         RequestedTheme="Dark"
                         HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{ThemeResource EllipsisButton}">
-                    <FontIcon Glyph="&#xE946;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
-                </Button>
+            <FontIcon Glyph="&#xE946;" FontSize="18" FontWeight="Bold" FontFamily="Segoe MDL2 Assets"/>
+        </Button>
 
-            </Grid>
-            
-        </controls:DropShadowPanel>
+    </Grid>
 
-    </Border>
 </UserControl>
