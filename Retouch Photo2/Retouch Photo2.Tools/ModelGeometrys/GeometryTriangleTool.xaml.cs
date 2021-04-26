@@ -33,6 +33,7 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
 
+        private string CenterToStringConverter(float center) => $"{this.CenterToNumberConverter(center)}%";
         private int CenterToNumberConverter(float center) => (int)(center * 100.0f);
 
 
@@ -144,7 +145,6 @@ namespace Retouch_Photo2.Tools.Models
         //Center
         private void ConstructCenter1()
         {
-            this.CenterPicker.Unit = "%";
             this.CenterPicker.Minimum = 0;
             this.CenterPicker.Maximum = 100;
             this.CenterPicker.ValueChanged += (sender, value) =>

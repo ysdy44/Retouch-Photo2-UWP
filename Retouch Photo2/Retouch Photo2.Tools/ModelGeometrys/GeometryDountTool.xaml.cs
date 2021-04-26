@@ -33,6 +33,7 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
 
+        private string HoleRadiusToStringConverter(float innerRadius) => $"{this.HoleRadiusToNumberConverter(innerRadius)}%";
         private int HoleRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
 
 

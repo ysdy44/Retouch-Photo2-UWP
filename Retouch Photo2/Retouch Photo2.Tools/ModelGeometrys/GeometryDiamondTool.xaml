@@ -29,7 +29,7 @@
         <!--Mid-->
         <TextBlock x:Name="MidTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <ListViewItem x:Name="MidButton" MinWidth="70" Style="{StaticResource AppListViewItemStyle}"
-                             Content="{x:Bind MidToNumberConverter(SelectionViewModel.GeometryDiamond_Mid), Mode=OneWay}">
+                             Content="{x:Bind MidToStringConverter(SelectionViewModel.GeometryDiamond_Mid), Mode=OneWay}">
             <tools:TouchbarExtension.Picker>
                 <hSVColorPickers:NumberPicker x:Name="MidPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind MidToNumberConverter(SelectionViewModel.GeometryDiamond_Mid), Mode=OneWay}"/>

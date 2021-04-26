@@ -52,8 +52,11 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
 
+        private string InnerRadiusToStringConverter(float innerRadius) => $"{this.InnerRadiusToNumberConverter(innerRadius)}%";
         private int InnerRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
+        private string ToothToStringConverter(float tooth) => $"{this.ToothToNumberConverter(tooth)}%";
         private int ToothToNumberConverter(float tooth) => (int)(tooth * 100.0f);
+        private string NotchToStringConverter(float notch) => $"{this.NotchToNumberConverter(notch)}%";
         private int NotchToNumberConverter(float notch) => (int)(notch * 100.0f);
 
 

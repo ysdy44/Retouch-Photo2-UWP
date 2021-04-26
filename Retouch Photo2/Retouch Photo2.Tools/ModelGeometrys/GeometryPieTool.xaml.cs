@@ -33,6 +33,7 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
 
+        private string SweepAngleToStringConverter(float sweepAngle) => $"{this.SweepAngleToNumberConverter(sweepAngle)}º";
         private int SweepAngleToNumberConverter(float sweepAngle) => (int)(sweepAngle / FanKit.Math.Pi * 180f);
 
 
@@ -141,7 +142,6 @@ namespace Retouch_Photo2.Tools.Models
         //SweepAngle
         private void ConstructSweepAngle1()
         {
-            this.SweepAnglePicker.Unit = "º";
             this.SweepAnglePicker.Minimum = 0;
             this.SweepAnglePicker.Maximum = 360;
             this.SweepAnglePicker.ValueChanged += (sender, value) =>

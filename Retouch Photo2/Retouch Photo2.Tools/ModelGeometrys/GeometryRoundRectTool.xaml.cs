@@ -33,6 +33,7 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
 
+        private string CornerToStringConverter(float corner) => $"{this.CornerToNumberConverter(corner)}%";
         private int CornerToNumberConverter(float corner) => (int)(corner * 100.0f);
 
 
@@ -140,7 +141,6 @@ namespace Retouch_Photo2.Tools.Models
         //Corner
         private void ConstructCorner1()
         {
-            this.CornerPicker.Unit = "%";
             this.CornerPicker.Minimum = 0;
             this.CornerPicker.Maximum = 50;
             this.CornerPicker.ValueChanged += (sender, value) =>

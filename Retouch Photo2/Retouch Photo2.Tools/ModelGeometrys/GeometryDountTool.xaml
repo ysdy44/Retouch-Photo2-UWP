@@ -29,7 +29,7 @@
         <!--HoleRadius-->
         <TextBlock x:Name="HoleRadiusTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <ListViewItem x:Name="HoleRadiusButton" MinWidth="70" Style="{StaticResource AppListViewItemStyle}"
-                          Content="{x:Bind HoleRadiusToNumberConverter(SelectionViewModel.GeometryDount_HoleRadius), Mode=OneWay}">
+                          Content="{x:Bind HoleRadiusToStringConverter(SelectionViewModel.GeometryDount_HoleRadius), Mode=OneWay}">
             <tools:TouchbarExtension.Picker>
                 <hSVColorPickers:NumberPicker x:Name="HoleRadiusPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                           Value="{x:Bind HoleRadiusToNumberConverter(SelectionViewModel.GeometryDount_HoleRadius), Mode=OneWay}"/>

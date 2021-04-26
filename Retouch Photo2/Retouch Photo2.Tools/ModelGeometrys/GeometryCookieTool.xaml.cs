@@ -45,7 +45,9 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
 
+        private string InnerRadiusToStringConverter(float innerRadius) => $"{this.InnerRadiusToNumberConverter(innerRadius)}%";
         private int InnerRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
+        private string SweepAngleToStringConverter(float sweepAngle) => $"{this.SweepAngleToNumberConverter(sweepAngle)}%";
         private int SweepAngleToNumberConverter(float sweepAngle) => (int)(sweepAngle / FanKit.Math.Pi * 180f);
 
 

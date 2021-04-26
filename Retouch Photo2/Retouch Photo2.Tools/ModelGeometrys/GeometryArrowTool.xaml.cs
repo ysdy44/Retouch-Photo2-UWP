@@ -46,6 +46,7 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
 
+        private string ValueToStringConverter(float sweepAngle) => $"{this.ValueToNumberConverter(sweepAngle)}%";
         private int ValueToNumberConverter(float value) => (int)(value * 100.0f);
 
 

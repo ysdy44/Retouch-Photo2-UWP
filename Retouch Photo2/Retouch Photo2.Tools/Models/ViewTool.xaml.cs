@@ -37,9 +37,11 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
 
+        private string ScaleToStringConverter(float scale) => $"{this.ScaleToNumberConverter(scale)}%";
         private int ScaleToNumberConverter(float scale) => ViewScaleConverter.ScaleToNumber(scale);
         private double ScaleToValueConverter(float scale) => ViewScaleConverter.ScaleToValue(scale);
 
+        private string RadianToStringConverter(float radian) => $"{this.RadianToNumberConverter(radian)}º";
         private int RadianToNumberConverter(float radian) => ViewRadianConverter.RadianToNumber(radian);
         private double RadianToValueConverter(float radian) => ViewRadianConverter.RadianToValue(radian);
 
@@ -204,7 +206,6 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructRadian1()
         {
-            this.RadianPicker.Unit = "º";
             this.RadianPicker.Minimum = ViewRadianConverter.MinNumber;
             this.RadianPicker.Maximum = ViewRadianConverter.MaxNumber;
             this.RadianPicker.ValueChanged += (sender, value) =>
@@ -237,7 +238,7 @@ namespace Retouch_Photo2.Tools.Models
             Storyboard.SetTargetProperty(this.ScaleKeyFrames, "Scale");
             this.ScaleStoryboard.Completed += (s, e) => this.ViewModel.Invalidate(InvalidateMode.HD);//Invalidate
             this.ScaleClearButton.Tapped += (s, e) =>
-            {                
+            {
                 this.ViewModel.Invalidate(InvalidateMode.Thumbnail);//Invalidate
 
                 this.Scale = this.ViewModel.CanvasTransformer.Scale;
@@ -247,7 +248,6 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructScale1()
         {
-            this.ScalePicker.Unit = "%";
             this.ScalePicker.Minimum = ViewScaleConverter.MinNumber;
             this.ScalePicker.Maximum = ViewScaleConverter.MaxNumber;
             this.ScalePicker.ValueChanged += (sender, value) =>

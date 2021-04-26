@@ -45,6 +45,7 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
 
+        private string InnerRadiusToStringConverter(float innerRadius) => $"{this.InnerRadiusToNumberConverter(innerRadius)}%";
         private int InnerRadiusToNumberConverter(float innerRadius) => (int)(innerRadius * 100.0f);
 
 
@@ -155,7 +156,6 @@ namespace Retouch_Photo2.Tools.Models
         //Points
         private void ConstructPoints1()
         {
-            this.PointsPicker.Unit = null;
             this.PointsPicker.Minimum = 3;
             this.PointsPicker.Maximum = 36;
             this.PointsPicker.ValueChanged += (sender, value) =>
@@ -208,7 +208,6 @@ namespace Retouch_Photo2.Tools.Models
         //InnerRadius
         private void ConstructInnerRadius1()
         {
-            this.InnerRadiusPicker.Unit = "%";
             this.InnerRadiusPicker.Minimum = 0;
             this.InnerRadiusPicker.Maximum = 100;
             this.InnerRadiusPicker.ValueChanged += (sender, value) =>

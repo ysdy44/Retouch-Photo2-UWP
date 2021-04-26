@@ -33,6 +33,7 @@ namespace Retouch_Photo2.Tools.Models
         //@Converter
         private Visibility DeviceLayoutTypeConverter(DeviceLayoutType type) => type == DeviceLayoutType.Phone ? Visibility.Collapsed : Visibility.Visible;
 
+        private string MidToStringConverter(float mid) => $"{this.MidToNumberConverter(mid)}%";
         private int MidToNumberConverter(float mid) => (int)(mid * 100.0f);
 
 
@@ -142,7 +143,6 @@ namespace Retouch_Photo2.Tools.Models
         //Mid
         private void ConstructMid1()
         {
-            this.MidPicker.Unit = "%";
             this.MidPicker.Minimum = 0;
             this.MidPicker.Maximum = 100;
             this.MidPicker.ValueChanged += (sender, value) =>

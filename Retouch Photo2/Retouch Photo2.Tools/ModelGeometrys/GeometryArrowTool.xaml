@@ -31,7 +31,7 @@
             <!--Value-->
             <TextBlock x:Name="ValueTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <ListViewItem x:Name="ValueButton" MinWidth="70" Style="{StaticResource AppListViewItemStyle}"
-                              Content="{x:Bind ValueToNumberConverter(SelectionViewModel.GeometryArrow_Value), Mode=OneWay}">
+                              Content="{x:Bind ValueToStringConverter(SelectionViewModel.GeometryArrow_Value), Mode=OneWay}">
                 <tools:TouchbarExtension.Picker>
                     <hSVColorPickers:NumberPicker x:Name="ValuePicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                           Value="{x:Bind ValueToNumberConverter(SelectionViewModel.GeometryArrow_Value), Mode=OneWay}"/>

@@ -29,7 +29,7 @@
         <!--Center-->
         <TextBlock x:Name="CenterTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <ListViewItem x:Name="CenterButton" MinWidth="70" Style="{StaticResource AppListViewItemStyle}"
-                            Content="{x:Bind CenterToNumberConverter(SelectionViewModel.GeometryTriangle_Center), Mode=OneWay}">
+                            Content="{x:Bind CenterToStringConverter(SelectionViewModel.GeometryTriangle_Center), Mode=OneWay}">
             <tools:TouchbarExtension.Picker>
                 <hSVColorPickers:NumberPicker x:Name="CenterPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                             Value="{x:Bind CenterToNumberConverter(SelectionViewModel.GeometryTriangle_Center), Mode=OneWay}"/>

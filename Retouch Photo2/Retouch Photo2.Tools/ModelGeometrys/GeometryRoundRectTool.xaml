@@ -29,7 +29,7 @@
         <!--Corner-->
         <TextBlock x:Name="CornerTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <ListViewItem x:Name="CornerButton" MinWidth="70" Style="{StaticResource AppListViewItemStyle}"
-                              Content="{x:Bind CornerToNumberConverter(SelectionViewModel.GeometryRoundRect_Corner), Mode=OneWay}">
+                              Content="{x:Bind CornerToStringConverter(SelectionViewModel.GeometryRoundRect_Corner), Mode=OneWay}">
             <tools:TouchbarExtension.Picker>
                 <hSVColorPickers:NumberPicker x:Name="CornerPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind CornerToNumberConverter(SelectionViewModel.GeometryRoundRect_Corner), Mode=OneWay}"/>
