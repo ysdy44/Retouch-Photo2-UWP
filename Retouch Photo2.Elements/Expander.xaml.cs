@@ -271,6 +271,13 @@ namespace Retouch_Photo2.Elements
         {
             if ($"{key}Expander" == base.Name)
             {
+                this.left = Canvas.GetLeft(this);
+                this.top = Canvas.GetTop(this);
+                double left = this.GetBoundPostionX(this.left, base.ActualWidth, this.OverlayCanvas.ActualWidth);
+                double top = this.GetBoundPostionY(this.top, base.ActualHeight, this.OverlayCanvas.ActualHeight);
+                Canvas.SetLeft(this, left);
+                Canvas.SetTop(this, top);
+
                 if (this._vsIsOverlay) return;
                 if (this._vsIsPin) return;
 

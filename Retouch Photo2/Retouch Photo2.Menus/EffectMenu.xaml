@@ -16,6 +16,9 @@
         <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemListLowColor}"/>
         <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemListLowColor}"/>
         <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemListLowColor}"/>
+        <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="{ThemeResource SystemBaseHighColor}"/>
+        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="{ThemeResource SystemBaseHighColor}"/>
+        <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="{ThemeResource SystemBaseHighColor}"/>
     </UserControl.Resources>
 
 

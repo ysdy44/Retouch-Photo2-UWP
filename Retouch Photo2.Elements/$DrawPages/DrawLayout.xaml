@@ -63,7 +63,7 @@
     </UserControl.Resources>
 
 
-    <Grid x:Name="RootGrid" Background="{x:Bind Background, Mode=OneWay}">
+    <Grid x:Name="RootGrid" Background="{x:Null}">
 
         <!--VisualState-->
         <VisualStateManager.VisualStateGroups>
@@ -78,6 +78,7 @@
                         <Setter Target = "WritableBorder.Visibility" Value="Visible"/>
                         <Setter Target = "WritableTransform.Y" Value="0"/>
                         <Setter Target = "WritableBorder.HorizontalAlignment" Value="Stretch"/>
+                        <Setter Target = "RootGrid.Background" Value="Transparent"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -89,6 +90,7 @@
                         <Setter Target = "WritableBorder.Width" Value="500"/>
                         <Setter Target = "WritableBorder.CornerRadius" Value="6,6,0,0"/>
                         <Setter Target = "WritableBorder.BorderThickness" Value="1,1,1,0"/>
+                        <Setter Target = "RootGrid.Background" Value="Transparent"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -101,6 +103,7 @@
                         <Setter Target = "WritableBorder.CornerRadius" Value="6"/>
                         <Setter Target = "WritableBorder.Margin" Value="0,10"/>
                         <Setter Target = "WritableBorder.BorderThickness" Value="1"/>
+                        <Setter Target = "RootGrid.Background" Value="Transparent"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -1282,12 +1285,11 @@
                             <TextBlock x:Name="WritableTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                         </ContentControl.Content>
                     </ContentControl>
-                    <Button x:Name="WritableOKButton" Visibility="Collapsed" Grid.Column="1" Style="{StaticResource AppRoundedButtonStyle}">
+                    <Button x:Name="WritableOKButton" Visibility="Collapsed" Grid.Column="1" Background="{ThemeResource SystemColorControlAccentBrush}" Style="{StaticResource AppRoundedButtonStyle}">
                         <FontIcon Glyph="&#xEC61;" FontFamily="Segoe MDL2 Assets"/>
                     </Button>
-                    <Button x:Name="WritableCancelButton" Grid.Column="2" Style="{StaticResource AppRoundedButtonStyle}">
-                        <FontIcon Glyph="&#xEB90;" FontFamily="Segoe MDL2 Assets" 
-                                  Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                    <Button x:Name="WritableCancelButton" Grid.Column="2" Background="{ThemeResource SystemColorControlAccentBrush}" Style="{StaticResource AppRoundedButtonStyle}">
+                        <SymbolIcon Symbol="Accept" Foreground="White"/>
                     </Button>
                 </Grid>
                 <ContentPresenter x:Name="WritableContentPresenter" Grid.Column="1" Grid.Row="1" Padding="10,0" VerticalAlignment="Top"/>
