@@ -154,7 +154,6 @@ namespace Retouch_Photo2.Tools.Models
         //HorizontalStep
         private void ConstructHorizontalStep1()
         {
-            this.HorizontalStepPicker.Unit = null;
             this.HorizontalStepPicker.Minimum = 5;
             this.HorizontalStepPicker.Maximum = 100;
             this.HorizontalStepPicker.ValueChanged += (sender, value) =>
@@ -207,7 +206,6 @@ namespace Retouch_Photo2.Tools.Models
         //VerticalStep
         private void ConstructVerticalStep1()
         {
-            this.VerticalStepPicker.Unit = null;
             this.VerticalStepPicker.Minimum = 5;
             this.VerticalStepPicker.Maximum = 100;
             this.VerticalStepPicker.ValueChanged += (sender, value) =>

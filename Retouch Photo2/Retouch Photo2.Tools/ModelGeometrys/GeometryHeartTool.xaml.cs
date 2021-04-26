@@ -141,7 +141,6 @@ namespace Retouch_Photo2.Tools.Models
         //Spead
         private void ConstructSpread1()
         {
-            this.SpreadPicker.Unit = "%";
             this.SpreadPicker.Minimum = 0;
             this.SpreadPicker.Maximum = 100;
             this.SpreadPicker.ValueChanged += (sender, value) =>

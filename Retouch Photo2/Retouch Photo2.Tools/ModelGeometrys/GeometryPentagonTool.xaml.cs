@@ -139,7 +139,6 @@ namespace Retouch_Photo2.Tools.Models
         //Points
         private void ConstructPoints1()
         {
-            this.PointsPicker.Unit = null;
             this.PointsPicker.Minimum = 3;
             this.PointsPicker.Maximum = 36;
             this.PointsPicker.ValueChanged += (sender, value) =>

@@ -163,7 +163,6 @@ namespace Retouch_Photo2.Tools.Models
         //Value
         private void ConstructValue1()
         {
-            this.ValuePicker.Unit = "%";
             this.ValuePicker.Minimum = 0;
             this.ValuePicker.Maximum = 100;
             this.ValuePicker.ValueChanged += (sender, value) =>

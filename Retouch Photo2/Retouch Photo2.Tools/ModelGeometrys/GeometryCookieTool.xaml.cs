@@ -163,7 +163,6 @@ namespace Retouch_Photo2.Tools.Models
         //InnerRadius
         private void ConstructInnerRadius1()
         {
-            this.InnerRadiusPicker.Unit = "%";
             this.InnerRadiusPicker.Minimum = 0;
             this.InnerRadiusPicker.Maximum = 100;
             this.InnerRadiusPicker.ValueChanged += (sender, value) =>
@@ -216,7 +215,6 @@ namespace Retouch_Photo2.Tools.Models
         //SweepAngle
         private void ConstructSweepAngle1()
         {
-            this.SweepAnglePicker.Unit = "º";
             this.SweepAnglePicker.Minimum = 0;
             this.SweepAnglePicker.Maximum = 360;
             this.SweepAnglePicker.ValueChanged += (sender, value) =>

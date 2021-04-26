@@ -184,7 +184,6 @@ namespace Retouch_Photo2.Tools.Models
         //Count
         private void ConstructCount1()
         {
-            this.CountPicker.Unit = null;
             this.CountPicker.Minimum = 4;
             this.CountPicker.Maximum = 36;
             this.CountPicker.ValueChanged += (sender, value) =>
@@ -237,7 +236,6 @@ namespace Retouch_Photo2.Tools.Models
         //InnerRadius
         private void ConstructInnerRadius1()
         {
-            this.InnerRadiusPicker.Unit = "%";
             this.InnerRadiusPicker.Minimum = 0;
             this.InnerRadiusPicker.Maximum = 100;
             this.InnerRadiusPicker.ValueChanged += (sender, value) =>
@@ -290,7 +288,6 @@ namespace Retouch_Photo2.Tools.Models
         //Tooth
         private void ConstructTooth1()
         {
-            this.ToothPicker.Unit = "%";
             this.ToothPicker.Minimum = 0;
             this.ToothPicker.Maximum = 50;
             this.ToothPicker.ValueChanged += (sender, value) =>
@@ -343,7 +340,6 @@ namespace Retouch_Photo2.Tools.Models
         //Notch
         private void ConstructNotch1()
         {
-            this.NotchPicker.Unit = "%";
             this.NotchPicker.Minimum = 0;
             this.NotchPicker.Maximum = 60;
             this.NotchPicker.ValueChanged += (sender, value) =>

@@ -116,7 +116,6 @@ namespace Retouch_Photo2.Tools.Models
         //Radius
         private void ConstructRadius1()
         {
-            this.RadiusPicker.Unit = null;
             this.RadiusPicker.Minimum = 5;
             this.RadiusPicker.Maximum = 100;
             this.RadiusPicker.ValueChanged += (sender, value) =>
@@ -169,7 +168,6 @@ namespace Retouch_Photo2.Tools.Models
         //Step
         private void ConstructStep1()
         {
-            this.StepPicker.Unit = null;
             this.StepPicker.Minimum = 5;
             this.StepPicker.Maximum = 100;
             this.StepPicker.ValueChanged += (sender, value) =>

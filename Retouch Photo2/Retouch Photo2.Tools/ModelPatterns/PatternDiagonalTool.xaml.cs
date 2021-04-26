@@ -118,7 +118,6 @@ namespace Retouch_Photo2.Tools.Models
         //Offset
         private void ConstructOffset1()
         {
-            this.OffsetPicker.Unit = null;
             this.OffsetPicker.Minimum = -100;
             this.OffsetPicker.Maximum = 100;
             this.OffsetPicker.ValueChanged += (sender, value) =>
@@ -171,7 +170,6 @@ namespace Retouch_Photo2.Tools.Models
         //HorizontalStep
         private void ConstructHorizontalStep1()
         {
-            this.HorizontalStepPicker.Unit = null;
             this.HorizontalStepPicker.Minimum = 5;
             this.HorizontalStepPicker.Maximum = 100;
             this.HorizontalStepPicker.ValueChanged += (sender, value) =>

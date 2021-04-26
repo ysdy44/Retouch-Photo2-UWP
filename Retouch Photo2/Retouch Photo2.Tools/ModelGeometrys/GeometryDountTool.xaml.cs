@@ -142,7 +142,6 @@ namespace Retouch_Photo2.Tools.Models
         //HoleRadius
         private void ConstructHoleRadius1()
         {
-            this.HoleRadiusPicker.Unit = "%";
             this.HoleRadiusPicker.Minimum = 0;
             this.HoleRadiusPicker.Maximum = 100;
             this.HoleRadiusPicker.ValueChanged += (sender, value) =>
