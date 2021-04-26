@@ -14,76 +14,21 @@ namespace Retouch_Photo2.Brushs
     /// <summary>
     /// A control used to show a brush.
     /// </summary>
-    public sealed partial class BrushShowControl : UserControl
+    public partial class ShowControl : UserControl
     {
 
-        #region DependencyProperty
-
-
-        /// <summary> Gets or sets the fill or stroke. </summary>
-        public FillOrStroke FillOrStroke
-        {
-            set
-            {
-                this._vsFillOrStroke = value;
-                this.Invalidate();//Invalidate
-            }
-        }
-
-        /// <summary> Gets or sets the fill. </summary>
-        public IBrush Fill
-        {
-            set
-            {
-                this._vsFill = value;
-                this.Invalidate();//Invalidate
-            }
-        }
-
-        /// <summary> Gets or sets the stroke. </summary>
-        public IBrush Stroke
-        {
-            set
-            {
-                this._vsStroke = value;
-                this.Invalidate();//Invalidate
-            }
-        }
-
-
-        #endregion
-        
-        //@VisualState
-        FillOrStroke _vsFillOrStroke;
-        IBrush _vsFill;
-        IBrush _vsStroke;
-        /// <summary>
-        /// Invalidate.
-        /// </summary>
-        public void Invalidate()
-        {
-            switch (this._vsFillOrStroke)
-            {
-                case FillOrStroke.Fill:
-                    this.Rectangle.Fill = this.ToBrush(this._vsFill);
-                    break;
-                case FillOrStroke.Stroke:
-                    this.Rectangle.Fill = this.ToBrush(this._vsStroke);
-                    break;
-            }
-        }
-
+        protected Brush RectangleFill { set => this.Rectangle.Fill = value; }
 
         //@Construct
         /// <summary>
-        /// Initializes a BrushShowControl. 
+        /// Initializes a ShowControl. 
         /// </summary>
-        public BrushShowControl()
+        public ShowControl()
         {
             this.InitializeComponent();
         }
 
-        private Brush ToBrush(IBrush brush)
+        protected Brush ToBrush(IBrush brush)
         {
             if (brush==null) return this.NoneBrush;
 
