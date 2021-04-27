@@ -23,14 +23,14 @@
                 <ResourceDictionary x:Key="Light">
 
                     <Color x:Key="AppForegroundColor" >#FFFFFF</Color>
-                    <Color x:Key="AppBackgroundColor" >#F2F4F5</Color>
+                    <Color x:Key="AppBackgroundColor" >#EBEBED</Color>
                     <Color x:Key="AppBorderBrushColor" >#BEBCC7</Color>
 
                     <Color x:Key="AppFillColor" >#FFFFFF</Color>
                     <Color x:Key="AppStrokeColor" >#66817F91</Color>
                     <Color x:Key="AppTextColor" >#AA000000</Color>
 
-                    <Color x:Key="AppTitleColor" >#E7E8E8</Color>
+                    <Color x:Key="AppTitleColor" >#FCFCFF</Color>
                     <Color x:Key="AppAcrylicColor" >#E7E8E8</Color>
 
                     <LinearGradientBrush x:Key="AppHorizontalShadowBrush" StartPoint="0,0.5" EndPoint="1,0.5">
@@ -44,8 +44,9 @@
                         <GradientStop Color="#00000000" Offset="1"/>
                     </LinearGradientBrush>
 
-                    <Visibility x:Key="AppGridVisibility">Collapsed</Visibility>
+                    <Visibility x:Key="AppGridVisibility">Visible</Visibility>
                     <Visibility x:Key="AppShadowVisibility">Visible</Visibility>
+                    <LightDismissOverlayMode x:Key="AppLightDismissOverlayMode">Off</LightDismissOverlayMode>
 
                 </ResourceDictionary>
 
@@ -75,6 +76,7 @@
 
                     <Visibility x:Key="AppGridVisibility">Visible</Visibility>
                     <Visibility x:Key="AppShadowVisibility">Collapsed</Visibility>
+                    <LightDismissOverlayMode x:Key="AppLightDismissOverlayMode">Off</LightDismissOverlayMode>
 
                 </ResourceDictionary>
 
@@ -89,9 +91,7 @@
             <SolidColorBrush x:Key="ListViewItemForegroundSelectedPointerOver" Color="White"/>
             <SolidColorBrush x:Key="ListViewItemForegroundSelectedPressed" Color="White"/>
 
-            <LightDismissOverlayMode x:Key="AppLightDismissOverlayMode">Off</LightDismissOverlayMode>
-        
-            
+
             <!--Merged-->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Style/Brush.xaml"/>
