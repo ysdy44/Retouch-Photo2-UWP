@@ -71,14 +71,14 @@
                     <TextBlock TextTrimming="WordEllipsis" Text="{x:Bind SelectionViewModel.LayerName, Mode=OneWay}"/>
                 </ListViewItem>
                 <TextBlock x:Name="NamePlaceholderTextBlock" IsHitTestVisible="False" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource AppText}"
-                        Visibility="{x:Bind NameToVisibilitylConverter(SelectionViewModel.LayerName), Mode=OneWay}"/>
+                        Visibility="{x:Bind NameToVisibilityConverter(SelectionViewModel.LayerName), Mode=OneWay}"/>
 
 
                 <!--Visibility-->
                 <TextBlock x:Name="VisibilityTextBlock" Grid.Column="2" Style="{StaticResource AppTextBlockStyle}"/>
                 <ListViewItem x:Name="VisibilityButton" Grid.Column="2" Grid.Row="1" Padding="2" Style="{StaticResource AppCircleListViewItemStyle}"
                               IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}" 
-                              IsSelected="{x:Bind VisibilityToBoolConverter(ViewModel.Visibility), Mode=OneWay}" >
+                              IsSelected="{x:Bind VisibilityToBooConverter(ViewModel.Visibility), Mode=OneWay}" >
                     <FontIcon Glyph="&#xE7B3;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"
                           MirroredWhenRightToLeft="True" />
                 </ListViewItem>
@@ -147,12 +147,12 @@
                 <Grid>
 
                     <TextBlock x:Name="AdjustmentDisableTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"
-                                 Visibility="{x:Bind SelectionUnSingleToVisibilitylConverter(SelectionViewModel.SelectionSingle), Mode=OneWay}"/>
+                                 Visibility="{x:Bind SelectionUnSingleToVisibilityConverter(SelectionViewModel.SelectionSingle), Mode=OneWay}"/>
                     <TextBlock x:Name="AdjustmentZeroTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource AppTextBlockStyle}"
-                                 Visibility="{x:Bind ZeroToVisibilitylConverter(SelectionViewModel.AdjustmentsCount), Mode=OneWay}"/>
+                                 Visibility="{x:Bind ZeroToVisibilityConverter(SelectionViewModel.AdjustmentsCount), Mode=OneWay}"/>
                     <ListView x:Name="AdjustmentListView" IsItemClickEnabled="True" SelectionMode="None" ItemTemplate="{StaticResource AdjustmentDataTemplate}"
                               ItemsSource="{x:Bind SelectionViewModel.Adjustments}"
-                              Visibility="{x:Bind SelectionSingleToVisibilitylConverter(SelectionViewModel.SelectionSingle), Mode=OneWay}">
+                              Visibility="{x:Bind SelectionSingleToVisibilityConverter(SelectionViewModel.SelectionSingle), Mode=OneWay}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Padding" Value="0"/>

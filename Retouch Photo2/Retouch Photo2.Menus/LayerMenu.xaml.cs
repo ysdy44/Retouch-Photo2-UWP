@@ -27,12 +27,12 @@ namespace Retouch_Photo2.Menus
 
 
         //@Converter
-        private Visibility NameToVisibilitylConverter(string name) => string.IsNullOrEmpty(name) ? Visibility.Visible : Visibility.Collapsed;
-        private bool VisibilityToBoolConverter(Visibility visibility) => visibility == Visibility.Visible;
+        private Visibility NameToVisibilityConverter(string name) => string.IsNullOrEmpty(name) ? Visibility.Visible : Visibility.Collapsed;
+        private bool VisibilityToBooConverter(Visibility visibility) => visibility == Visibility.Visible;
         private int OpacityToNumberConverter(float opacity) => (int)(opacity * 100.0f);
-        private Visibility SelectionUnSingleToVisibilitylConverter(bool isSingle) => isSingle == false ? Visibility.Visible : Visibility.Collapsed;
-        private Visibility ZeroToVisibilitylConverter(int count) => count == 0 ? Visibility.Visible : Visibility.Collapsed;
-        private Visibility SelectionSingleToVisibilitylConverter(bool isSingle) => isSingle ? Visibility.Visible : Visibility.Collapsed;
+        private Visibility SelectionUnSingleToVisibilityConverter(bool isSingle) => isSingle == false ? Visibility.Visible : Visibility.Collapsed;
+        private Visibility ZeroToVisibilityConverter(int count) => count == 0 ? Visibility.Visible : Visibility.Collapsed;
+        private Visibility SelectionSingleToVisibilityConverter(bool isSingle) => isSingle ? Visibility.Visible : Visibility.Collapsed;
 
 
         //@Construct

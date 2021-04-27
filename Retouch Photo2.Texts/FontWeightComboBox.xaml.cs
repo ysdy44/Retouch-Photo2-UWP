@@ -65,7 +65,7 @@ namespace Retouch_Photo2.Texts
             set => base.SetValue(FontWeight2Property, value);
         }
         /// <summary> Identifies the <see cref = "FontWeightComboBox.Weight" /> dependency property. </summary>
-        public static readonly DependencyProperty FontWeight2Property = DependencyProperty.Register(nameof(Weight), typeof(FontWeight), typeof(FontWeightComboBox), new PropertyMetadata(FontWeight2.Normal, (sender, e) =>
+        public static readonly DependencyProperty FontWeight2Property = DependencyProperty.Register(nameof(Weight), typeof(FontWeight2), typeof(FontWeightComboBox), new PropertyMetadata(FontWeight2.Normal, (sender, e) =>
         {
             FontWeightComboBox control = (FontWeightComboBox)sender;
 
