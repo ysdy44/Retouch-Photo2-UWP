@@ -33,7 +33,6 @@
                     <Color x:Key="AppTitleColor" >#E7E8E8</Color>
                     <Color x:Key="AppAcrylicColor" >#E7E8E8</Color>
 
-                    <Color x:Key="ApplicationTitleColor" >#E7E8E8</Color>
                     <LinearGradientBrush x:Key="AppHorizontalShadowBrush" StartPoint="0,0.5" EndPoint="1,0.5">
                         <GradientStop Color="#22000000" Offset="0"/>
                         <GradientStop Color="#09000000" Offset="0.2"/>
@@ -60,10 +59,9 @@
                     <Color x:Key="AppStrokeColor" >#AA050005</Color>
                     <Color x:Key="AppTextColor" >#BBFFFFFF</Color>
 
-                    <Color x:Key="AppTitleColor" >#212121</Color>
+                    <Color x:Key="AppTitleColor" >#191919</Color>
                     <Color x:Key="AppAcrylicColor" >#111111</Color>
 
-                    <Color x:Key="ApplicationTitleColor" >#070707</Color>
                     <LinearGradientBrush x:Key="AppHorizontalShadowBrush" StartPoint="0,0.5" EndPoint="1,0.5">
                         <GradientStop Color="#66000000" Offset="0"/>
                         <GradientStop Color="#44000000" Offset="0.2"/>
