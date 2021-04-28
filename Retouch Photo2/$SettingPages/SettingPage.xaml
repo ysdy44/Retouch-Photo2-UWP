@@ -516,7 +516,7 @@
 
                         <!--LocalFolder-->
                         <TextBlock x:Name="LocalFolderTextBlock" Margin="0,8" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <Button x:Name="LocalFolderButton" HorizontalAlignment="Left" Style="{ThemeResource AppIconLineCircleButton}">
+                        <Button x:Name="LocalFolderButton" HorizontalAlignment="Left" Style="{ThemeResource AppOutlineButton}">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE17C;" FontSize="24" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>

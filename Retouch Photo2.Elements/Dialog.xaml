@@ -12,10 +12,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:Dialog">
-                    <Border x:Name="LayoutRoot" 
-            IsHitTestVisible="False"
-            Visibility="Collapsed"
-            Background="{ThemeResource AppStroke}">
+                    <Border x:Name="LayoutRoot"         
+                            IsHitTestVisible="False"         
+                            Visibility="Collapsed"           
+                            Background="{ThemeResource AppStroke}">
 
                         <!--VisualState-->
                         <VisualStateManager.VisualStateGroups>
@@ -105,20 +105,20 @@
 
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                      
+
                         <!--@Acrylic-->
                         <Border x:Name="RootGrid" 
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              Width="380"
-              MinHeight="120"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Width="380"
+                                MinHeight="120"
                                 Padding="30,0"
-              BorderThickness="1"
-              BorderBrush="{ThemeResource AppStroke}" 
-              apiContractNotPresent5:Background="{ThemeResource AppForeground}"
-              apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}"                     
-              CornerRadius="{StaticResource AppCornerRadius}"              
-              >
+                                BorderThickness="1"
+                                BorderBrush="{ThemeResource AppStroke}" 
+                                apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                                apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}"                     
+                                CornerRadius="{StaticResource AppCornerRadius}"              
+                                >
                             <Border.RenderTransformOrigin>0.5,0.5</Border.RenderTransformOrigin>
                             <Border.RenderTransform>
                                 <ScaleTransform x:Name="ScaleTransform"/>
@@ -136,7 +136,7 @@
                                 <!--Head-->
                                 <ContentControl x:Name="ContentControl"    
                                                 Margin="14,14" FontSize="20" FontWeight="Medium"
-                                                Content="{TemplateBinding Title}"/> 
+                                                Content="{TemplateBinding Title}"/>
 
                                 <!--Body-->
                                 <ScrollViewer Grid.Row="2" Padding="14,0">
@@ -150,9 +150,9 @@
                                         <ColumnDefinition Width="4"/>
                                         <ColumnDefinition Width="1*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Button x:Name="SecondaryButton" Grid.Column="2" HorizontalAlignment="Stretch" Style="{StaticResource AppIconLineCircleButton}"
-                                            Content="{TemplateBinding SecondaryButtonText}"/> 
-                                    <Button x:Name="PrimaryButton" Grid.Column="0" HorizontalAlignment="Stretch" Style="{StaticResource AppIconAccentLineCircleButton}"
+                                    <Button x:Name="SecondaryButton" Grid.Column="2" HorizontalAlignment="Stretch" Style="{StaticResource AppOutlineButton}"
+                                            Content="{TemplateBinding SecondaryButtonText}"/>
+                                    <Button x:Name="PrimaryButton" Grid.Column="0" HorizontalAlignment="Stretch" Style="{StaticResource AppAccentOutlineButton}"
                                             Content="{TemplateBinding PrimaryButtonText}"/>
                                 </Grid>
 

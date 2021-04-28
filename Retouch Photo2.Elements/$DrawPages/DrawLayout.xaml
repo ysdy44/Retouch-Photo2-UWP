@@ -1219,7 +1219,7 @@
                     <FontIcon x:Name="WidthIcon" Glyph="&#xE127;" FontSize="22" FontFamily="{ThemeResource SymbolThemeFontFamily}"
                               Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
                 </ListViewItem>
-                <Button x:Name="PCGalleryButton" Visibility="Collapsed" Width="90" Style="{StaticResource AppIconAccentLineCircleButton}">
+                <Button x:Name="PCGalleryButton" Visibility="Collapsed" Width="90" Style="{StaticResource AppAccentOutlineButton}">
                     <FontIcon Glyph="&#xE109;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
                 </Button>
 
@@ -1275,8 +1275,10 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="1*" MaxWidth="100"/>
+                        <!--
                         <ColumnDefinition Width="4"/>
                         <ColumnDefinition Width="1*" MaxWidth="100"/>
+                        -->
                     </Grid.ColumnDefinitions>
                     <ContentControl Style="{StaticResource AppIconContentControlStyle}">
                         <ContentControl.Tag>
@@ -1286,12 +1288,14 @@
                             <TextBlock x:Name="WritableTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                         </ContentControl.Content>
                     </ContentControl>
-                    <Button x:Name="WritableOKButton" Visibility="Collapsed" Grid.Column="1" HorizontalAlignment="Stretch" Style="{StaticResource AppIconLineCircleButton}">
-                        <SymbolIcon Symbol="Cancel"/>
-                    </Button>
-                    <Button x:Name="WritableCancelButton" Grid.Column="3" HorizontalAlignment="Stretch" Style="{StaticResource AppIconAccentLineCircleButton}">
+                    <Button x:Name="WritableOKButton" Grid.Column="1" HorizontalAlignment="Stretch" Style="{StaticResource AppAccentOutlineButton}">
                         <SymbolIcon Symbol="Accept"/>
                     </Button>
+                    <!--
+                    <Button x:Name="WritableCancelButton" Visibility="Collapsed" Grid.Column="3" HorizontalAlignment="Stretch" Style="{StaticResource AppOutlineButton}">
+                        <SymbolIcon Symbol="Cancel"/>
+                    </Button>
+                    -->
                 </Grid>
                 <ContentPresenter x:Name="WritableContentPresenter" Grid.Column="1" Grid.Row="1" Padding="10,0" VerticalAlignment="Top"/>
             </StackPanel>

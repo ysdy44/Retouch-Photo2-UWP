@@ -110,7 +110,7 @@ namespace Retouch_Photo2
             this.ConstructMore();
 
             //Writable
-            this.DrawLayout.WritableCancelButtonClick += (s, e) => this.DrawLayout.Hide();
+            this.DrawLayout.WritableOKButtonClick += (s, e) => this.DrawLayout.Hide();
         }
 
         private void UnregisterDrawPage()

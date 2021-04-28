@@ -50,7 +50,7 @@
                         <TextBlock x:Name="InitialTipTextBlock" HorizontalAlignment="Center" Foreground="{ThemeResource AppText}"/>
                         <ContentControl Height="6"/>
 
-                        <Button x:Name="InitialSampleButton" Style="{StaticResource AppIconAccentLineCircleButton}">
+                        <Button x:Name="InitialSampleButton" Style="{StaticResource AppAccentOutlineButton}">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE790;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>
@@ -60,7 +60,7 @@
 
                         <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                        <Button x:Name="InitialAddButton" Style="{StaticResource AppIconAccentLineCircleButton}">
+                        <Button x:Name="InitialAddButton" Style="{StaticResource AppAccentOutlineButton}">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xE109;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>
@@ -70,7 +70,7 @@
 
                         <Rectangle Style="{StaticResource AppSeparatorRectangleVerticalStyle}"/>
 
-                        <Button x:Name="InitialPhotoButton" Style="{StaticResource AppIconAccentLineCircleButton}">
+                        <Button x:Name="InitialPhotoButton" Style="{StaticResource AppAccentOutlineButton}">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xEB9F;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>
@@ -78,7 +78,7 @@
                             </StackPanel>
                         </Button>
 
-                        <Button x:Name="InitialDestopButton" Style="{StaticResource AppIconAccentLineCircleButton}">
+                        <Button x:Name="InitialDestopButton" Style="{StaticResource AppAccentOutlineButton}">
                             <StackPanel Orientation="Horizontal">
                                 <FontIcon Glyph="&#xEC4E;" FontSize="22" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 <ContentControl Width="8"/>

@@ -148,7 +148,7 @@
                                                 Margin="14,14" FontSize="20" FontWeight="Medium"
                                                 Content="{TemplateBinding Title}"/>
 
-                                    <Button x:Name="PrimaryButton" Grid.Column="2" HorizontalAlignment="Stretch" Style="{StaticResource AppIconAccentLineCircleButton}"
+                                    <Button x:Name="PrimaryButton" Grid.Column="2" HorizontalAlignment="Stretch" Style="{StaticResource AppAccentOutlineButton}"
                                             Content="{TemplateBinding PrimaryButtonText}"/>
 
                                     <ListViewItem x:Name="CloseButton" Grid.Column="0" Padding="2" MinWidth="32" Width="40" Height="40" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">

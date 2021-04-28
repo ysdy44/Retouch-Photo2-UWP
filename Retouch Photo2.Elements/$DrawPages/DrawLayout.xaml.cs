@@ -79,11 +79,11 @@ namespace Retouch_Photo2.Elements
                 this.PCGalleryButton.Tapped -= value;
             }
         }
-        /// <summary> WritableCancelButton's click. </summary>
-        public event RoutedEventHandler WritableCancelButtonClick
+        /// <summary> WritableOKButton's click. </summary>
+        public event RoutedEventHandler WritableOKButtonClick
         {
-            add => this.WritableCancelButton.Click += value;
-            remove => this.WritableCancelButton.Click -= value;
+            add => this.WritableOKButton.Click += value;
+            remove => this.WritableOKButton.Click -= value;
         }
 
 

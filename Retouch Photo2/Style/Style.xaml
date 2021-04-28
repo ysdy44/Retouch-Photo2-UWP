@@ -446,7 +446,7 @@
 
 
     <!--Button-->
-    <Style x:Key="IconLineCircleButtonBase" TargetType="Button">
+    <Style x:Key="IconOutlineButtonBase" TargetType="Button">
         <Setter Property="Height" Value="{ThemeResource AppCircleHeight}" />
         <Setter Property="Margin" Value="0,6" />
         <Setter Property="Padding" Value="6,0" />
@@ -458,14 +458,14 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FontWeight" Value="Normal" />
     </Style>
-    <Style x:Key="AppIconLineCircleButton" TargetType="Button" BasedOn="{StaticResource IconLineCircleButtonBase}">
+    <Style x:Key="AppOutlineButton" TargetType="Button" BasedOn="{StaticResource IconOutlineButtonBase}">
         <Setter Property="BorderBrush" Value="{ThemeResource AppText}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="RootGrid" 
                             CornerRadius="{ThemeResource AppCircleCornerRadius}"
-                            Padding="2,0"
+                            Padding="12,0"
                             BorderThickness="{TemplateBinding BorderThickness}" 
                             BorderBrush="{TemplateBinding BorderBrush}" 
                             Background="{TemplateBinding Background}" 
@@ -539,7 +539,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="AppIconAccentLineCircleButton" TargetType="Button" BasedOn="{StaticResource IconLineCircleButtonBase}">
+    <Style x:Key="AppAccentOutlineButton" TargetType="Button" BasedOn="{StaticResource IconOutlineButtonBase}">
         <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
         <Setter Property="Template">
             <Setter.Value>
