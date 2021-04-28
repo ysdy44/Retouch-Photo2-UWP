@@ -59,9 +59,9 @@ namespace Retouch_Photo2.Tools
 
             //Mezzanine
             ILayer layer = createLayer(transformer);
-            Layerage layerage = layer.ToLayerage();
-            string id = layerage.Id;
-            LayerBase.Instances.Add(id, layer);
+            Layerage layerage = Layerage.CreateByGuid();
+            layer.Id = layerage.Id;
+            LayerBase.Instances.Add(layerage.Id, layer);
 
             //Mezzanine
             this.MezzanineLayerage = layerage;

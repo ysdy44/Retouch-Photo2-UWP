@@ -100,16 +100,16 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformer = this.CreateTransformer(startingPoint, point, photo.Width, photo.Height);
 
             //Mezzanine         
+            Layerage imageLayerage = Layerage.CreateByGuid();
             ImageLayer imageLayer = new ImageLayer
             {
+                Id = imageLayerage.Id,
                 Photocopier = photocopier,
                 IsSelected = true,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandardGeometryStyle
             };
-            Layerage imageLayerage = imageLayer.ToLayerage();
-            string id = imageLayerage.Id;
-            LayerBase.Instances.Add(id, imageLayer);
+            LayerBase.Instances.Add(imageLayerage.Id, imageLayer);
 
 
             this.MezzanineLayerage = imageLayerage;

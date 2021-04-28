@@ -144,9 +144,9 @@ namespace Retouch_Photo2.Menus
                     ILayer curveLayer = this.CreateCurveLayer(strokeGeometry, strokeStyleClone);
                     if (curveLayer != null)
                     {
-                        Layerage curveLayerage = curveLayer.ToLayerage();
-                        string id = curveLayerage.Id;
-                        LayerBase.Instances.Add(id, curveLayer);
+                        Layerage curveLayerage = Layerage.CreateByGuid();
+                        curveLayer.Id = curveLayerage.Id;
+                        LayerBase.Instances.Add(curveLayerage.Id, curveLayer);
 
                         layerages.Add(curveLayerage);
                     }
@@ -239,9 +239,9 @@ namespace Retouch_Photo2.Menus
                 ILayer curveLayer = this.CreateCurveLayer(combineGeometry, style);
                 if (curveLayer != null)
                 {
-                    Layerage curveLayerage = curveLayer.ToLayerage();
-                    string id = curveLayerage.Id;
-                    LayerBase.Instances.Add(id, curveLayer);
+                    Layerage curveLayerage = Layerage.CreateByGuid();
+                    curveLayer.Id = curveLayerage.Id;
+                    LayerBase.Instances.Add(curveLayerage.Id, curveLayer);
 
                     //History
                     LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer_Combine);

@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Retouch_Photo2.Layers
 {
@@ -13,7 +12,7 @@ namespace Retouch_Photo2.Layers
         //@Static
         /// <summary> Dictionary <see cref="Layerage"/>s instances. </summary>
         public static readonly Dictionary<string, ILayer> Instances = new Dictionary<string, ILayer>();
-        
+
 
         /// <summary>
         /// Find the first <see cref="LayerBase"/> by <see cref="Layerage"/>.
@@ -27,30 +26,8 @@ namespace Retouch_Photo2.Layers
         }
 
 
-        /// <summary>
-        /// ID
-        /// </summary>
+        /// <summary> ID </summary>
         public string Id { get; set; }
-        static int idIndex;
-
-
-        /// <summary>
-        /// To <see cref="Layerage"/>.
-        /// </summary>
-        /// <returns> The producted layerage. </returns>
-        public Layerage ToLayerage()
-        {
-            do
-            {
-                this.Id = LayerBase.idIndex.ToString();
-                LayerBase.idIndex++;
-            } while (LayerBase.Instances.ContainsKey(this.Id));
-
-            return new Layerage
-            {
-                Id = this.Id,
-            };
-        }
 
 
         /// <summary>

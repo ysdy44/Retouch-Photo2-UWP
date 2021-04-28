@@ -10,7 +10,7 @@ using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Blends;
 using Retouch_Photo2.Effects;
 using Retouch_Photo2.Filters;
-using System.Collections.Generic;
+using Retouch_Photo2.Styles;
 using System.Numerics;
 using System.Xml.Linq;
 using Windows.UI.Xaml;
@@ -32,12 +32,6 @@ namespace Retouch_Photo2.Layers
 
         /// <summary> Gets or sets <see cref="ILayer"/>'s id. </summary>
         string Id { get; set; }
-
-        /// <summary>
-        /// To <see cref="Layerage"/>.
-        /// </summary>
-        /// <returns> The producted layerage. </returns>
-        Layerage ToLayerage();
 
         /// <summary>
         /// Returns a boolean indicating whether the given <see cref="Layerage"/> is equal to this <see cref="ILayer"/> instance.
@@ -94,7 +88,7 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary> Gets or sets the style. </summary>
-        Retouch_Photo2.Styles.IStyle Style { get; set; }
+        IStyle Style { get; set; }
         /// <summary> Gets or sets the transform. </summary>
         Transform Transform { get; set; }
         /// <summary> Gets or sets the effect. </summary>

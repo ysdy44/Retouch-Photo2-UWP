@@ -92,16 +92,16 @@ namespace Retouch_Photo2.Layers
 
 
             //GroupLayer
+            Layerage groupLayerage = Layerage.CreateByGuid();
             GroupLayer groupLayer = new GroupLayer
             {
+                Id = groupLayerage.Id,
                 IsSelected = true,
                 IsExpand = false,
                 //Refactoring
                 IsRefactoringTransformer = true,
             };
-            Layerage groupLayerage = groupLayer.ToLayerage();
-            string id = groupLayerage.Id;
-            LayerBase.Instances.Add(id, groupLayer);
+            LayerBase.Instances.Add(groupLayerage.Id, groupLayer);
 
 
             //Temp

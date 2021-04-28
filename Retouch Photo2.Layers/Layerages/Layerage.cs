@@ -17,6 +17,20 @@ namespace Retouch_Photo2.Layers
     public partial class Layerage : IGetActualTransformer
     {
 
+        //@Static
+        /// <summary>
+        /// Create layerage by GUID.
+        /// </summary>
+        /// <returns> The producted layerage. </returns>
+        public static Layerage CreateByGuid()
+        {
+            return new Layerage
+            {
+                Id = Guid.NewGuid().ToString()
+            };
+        }
+
+
         /// <summary> Find layer from <see cref="LayerBase.Instances"/> </summary>
         public ILayer Self => LayerBase.FindFirstLayer(this);
         /// <summary> Find layer from <see cref="Clipboard.Instances"/> </summary>
@@ -29,7 +43,7 @@ namespace Retouch_Photo2.Layers
         public Layerage Parents { get; internal set; } = LayerManager.RootLayerage;
         /// <summary> Gets or sets the Children. </summary>
         public IList<Layerage> Children { get; internal set; } = new List<Layerage>();
-           
+
 
         /// <summary>
         /// Get own copy.

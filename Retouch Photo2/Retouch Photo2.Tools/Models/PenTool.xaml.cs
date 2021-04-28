@@ -219,15 +219,15 @@ namespace Retouch_Photo2.Tools.Models
             Transformer transformer = new Transformer(canvasPoint, canvasStartingPoint);
 
             //Layer
+            Layerage curveLayerage = Layerage.CreateByGuid();
             CurveLayer curveLayer = new CurveLayer(canvasStartingPoint, canvasPoint)
             {
+                Id = curveLayerage.Id,
                 IsSelected = true,
                 Transform = new Transform(transformer),
                 Style = this.SelectionViewModel.StandardCurveStyle,
             };
-            Layerage curveLayerage = curveLayer.ToLayerage();
-            string id = curveLayerage.Id;
-            LayerBase.Instances.Add(id, curveLayer);
+            LayerBase.Instances.Add(curveLayerage.Id, curveLayer);
 
             //Mezzanine
             LayerManager.Mezzanine(curveLayerage);
