@@ -208,7 +208,6 @@
         <elements:DrawLayout x:Name="DrawLayout" 
                DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
                IsFullScreen="True"
-                             
                FootPage="{x:Bind ToolsControl.Tool.Page, Mode=OneWay}"
                >
             <!--LeftIcon-->

@@ -298,8 +298,6 @@ namespace Retouch_Photo2
         //Gallery
         private void ConstructGalleryDialog()
         {
-            this.GalleryGridView.ItemsSource = Photo.Instances;
-
             this.GalleryDialog.CloseButtonTapped += (s, e) => this.GalleryDialog.Hide();
             this.GalleryDialog.PrimaryButtonClick += async (s, e) =>
             {
@@ -322,15 +320,15 @@ namespace Retouch_Photo2
 
             //Layer
             Photocopier photocopier = photo.ToPhotocopier();
+            Layerage imageLayerage = Layerage.CreateByGuid();
             ImageLayer imageLayer = new ImageLayer
             {
+                Id = imageLayerage.Id,
                 Photocopier = photocopier,
                 IsSelected = true,
                 Transform = new Transform(transformerSource)
             };
-            Layerage imageLayerage = imageLayer.ToLayerage();
-            string id = imageLayerage.Id;
-            LayerBase.Instances.Add(id, imageLayer);
+            LayerBase.Instances.Add(imageLayerage.Id, imageLayer);
 
             //Selection
             this.SelectionViewModel.SetValue((layerage) =>

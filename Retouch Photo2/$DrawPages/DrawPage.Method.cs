@@ -77,7 +77,7 @@ namespace Retouch_Photo2
 
             //Save photos file.
             IEnumerable<Photocopier> savedPhotocopiers = LayerManager.GetPhotocopiers(savedLayerages);
-            IEnumerable<Photo> savedPhotos = from photo in Photo.Instances where savedPhotocopiers.Any(p => photo.Equals(p)) select photo;
+            IEnumerable<Photo> savedPhotos = from photo in Photo.Instances.Values where savedPhotocopiers.Any(p => photo.Equals(p)) select photo;
             await XML.SavePhotosFile(zipFolder, savedPhotos);
 
             //Move photo file.
@@ -104,6 +104,7 @@ namespace Retouch_Photo2
         {
             //Clear photos
             Photo.Instances.Clear();
+            Photo.InstancesCollection.Clear();
 
             //Clear layers
             LayerBase.Instances.Clear();

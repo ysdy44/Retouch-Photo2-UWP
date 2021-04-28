@@ -85,13 +85,16 @@ namespace Retouch_Photo2
 
             //Load all photos file. 
             Photo.Instances.Clear();
+            Photo.InstancesCollection.Clear();
             IEnumerable<Photo> photos = XML.LoadPhotosFile();
             if (photos != null)
             {
                 foreach (Photo photo in photos)
                 {
+                    string id = photo.FolderRelativeId;
                     await photo.ConstructPhotoSource(LayerManager.CanvasDevice);
-                    Photo.Instances.Add(photo);
+                    Photo.Instances.Add(id, photo);
+                    Photo.UpdateInstancesCollection();
                 }
             }
 
@@ -168,14 +171,14 @@ namespace Retouch_Photo2
 
             //ImageLayer 
             Photocopier photocopier = photo.ToPhotocopier();
+            Layerage imageLayerage = Layerage.CreateByGuid();
             ImageLayer imageLayer = new ImageLayer
             {
+                Id = imageLayerage.Id,
                 Transform = new Transform(transformerSource),
                 Photocopier = photocopier,
             };
-            Layerage imageLayerage = imageLayer.ToLayerage();
-            string id = imageLayerage.Id;
-            LayerBase.Instances.Add(id, imageLayer);
+            LayerBase.Instances.Add(imageLayerage.Id, imageLayer);
 
             //Project
             Project project = new Project

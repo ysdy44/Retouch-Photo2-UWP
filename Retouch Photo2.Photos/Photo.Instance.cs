@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
@@ -17,8 +16,23 @@ namespace Retouch_Photo2.Photos
     {
 
         //@Static
+        /// <summary> Dictionary <see cref="Photo"/>s instances. </summary>
+        public static readonly Dictionary<string, Photo> Instances = new Dictionary<string, Photo>();
+
         /// <summary> Collection <see cref="Photo"/>s instances. </summary>
-        public readonly static ObservableCollection<Photo> Instances = new ObservableCollection<Photo>();
+        public readonly static ObservableCollection<Photo> InstancesCollection = new ObservableCollection<Photo>();
+
+        /// <summary>
+        /// Update collection <see cref="Photo"/>s instances.
+        /// </summary>
+        public static void UpdateInstancesCollection()
+        {
+            Photo.InstancesCollection.Clear();
+            foreach (Photo photo in Instances.Values)
+            {
+                Photo.InstancesCollection.Add(photo);
+            }
+        }
 
 
         /// <summary>
@@ -28,18 +42,18 @@ namespace Retouch_Photo2.Photos
         /// <param name="photo"> The source photo. </param>
         public static void DuplicateChecking(Photo photo)
         {
-            foreach (Photo p in Photo.Instances)
+            string id = photo.FolderRelativeId;
+
+            if (Photo.Instances.ContainsKey(id))
             {
-                if (p.FolderRelativeId == photo.FolderRelativeId)
-                {
-                    photo = p;
-                    return;
-                }
+                photo = Photo.Instances[id];
+                return;
             }
 
-            Photo.Instances.Add(photo);//Photos
+            Photo.Instances.Add(id, photo);//Photos
+            Photo.UpdateInstancesCollection();
         }
-        
+
         /// <summary>
         /// Find the first <see cref="Photo"/> by <see cref="Photocopier"/>.
         /// </summary>
@@ -48,7 +62,7 @@ namespace Retouch_Photo2.Photos
         public static Photo FindFirstPhoto(Photocopier photocopier)
         {
             string id = photocopier.FolderRelativeId;
-            return Photo.Instances.FirstOrDefault(i => i.FolderRelativeId == id);
+            return Photo.Instances[id];
         }
 
 
