@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Menus
 
         //@Construct
         /// <summary>
-        /// Initializes a ColorMainPage. 
+        /// Initializes a ColorMenu. 
         /// </summary>
         public ColorMenu()
         {

@@ -184,7 +184,6 @@ namespace Retouch_Photo2.Menus
         }
 
 
-        //TransformerMainPage
         private void SetTransformerState(ListViewReorderMode value, Transformer transformer)
         {
             switch (value)
@@ -288,7 +287,7 @@ namespace Retouch_Photo2.Menus
 
         //@Construct
         /// <summary>
-        /// Initializes a TransformerMainPage. 
+        /// Initializes a TransformerMenu. 
         /// </summary>
         public TransformerMenu()
         {

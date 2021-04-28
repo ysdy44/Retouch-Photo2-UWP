@@ -34,7 +34,7 @@ namespace Retouch_Photo2.Menus
 
         //@Construct
         /// <summary>
-        /// Initializes a EditMainPage. 
+        /// Initializes a EditMenu. 
         /// </summary>
         public EditMenu()
         {

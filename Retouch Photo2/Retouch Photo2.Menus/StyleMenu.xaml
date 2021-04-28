@@ -12,9 +12,7 @@
     
 
     <UserControl.Resources>
-
         <CollectionViewSource x:Name="CollectionViewSource" IsSourceGrouped="True"/>
-
     </UserControl.Resources>
 
 
@@ -55,6 +53,12 @@
                 </Grid>
             </DataTemplate>
         </GridView.ItemTemplate>
+
+        <GridView.Header>
+            <Button Click="Button_Click">
+                Add Current
+            </Button >
+        </GridView.Header>
 
     </GridView>
 

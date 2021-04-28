@@ -38,7 +38,7 @@ namespace Retouch_Photo2.Menus
     {
         //@Construct
         /// <summary>
-        /// Initializes a HistoryMainPage. 
+        /// Initializes a HistoryMenu. 
         /// </summary>
         public HistoryMenu()
         {
