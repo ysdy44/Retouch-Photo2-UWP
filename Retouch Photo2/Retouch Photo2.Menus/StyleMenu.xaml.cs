@@ -9,9 +9,12 @@ using Retouch_Photo2.Layers;
 using Retouch_Photo2.Styles;
 using Retouch_Photo2.ViewModels;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 
 namespace Retouch_Photo2.Menus
 {
@@ -39,18 +42,18 @@ namespace Retouch_Photo2.Menus
 
             this.Loaded += async (s, e) =>
             {
-                if (this.CollectionViewSource.Source == null)
+                if (this.GridView.ItemsSource == null)
                 {
-                    IList<StyleCategory> styleCategorys = (await Retouch_Photo2.XML.ConstructStylesFile()).ToList();
+                    IEnumerable<StyleCategory> styleCategorys = await Retouch_Photo2.XML.ConstructStylesFile();
                     if (styleCategorys != null)
                     {
-                        this.CollectionViewSource.Source = styleCategorys;
-                        this.StyleCategorys = styleCategorys;
+                        this.StyleCategorys = styleCategorys.ToList();
+                        this.Construct();
                     }
                 }
             };
 
-            this.StylesGridView.ItemClick += (s, e) =>
+            this.GridView.ItemClick += (s, e) =>
             {
                 if (e.ClickedItem is IStyle item)
                 {
@@ -82,6 +85,51 @@ namespace Retouch_Photo2.Menus
                 }
             };
 
+            this.AddButton.Click += async (s, e) =>
+             {
+                 if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
+                 {
+                     ILayer layer = layerage.Self;
+                     IStyle style = layer.Style.Clone();
+
+                     StyleCategory styleCategory = this.StyleCategorys.FirstOrDefault(c => c.Name == "Custom");
+                     if (styleCategory != null)
+                     {
+                         styleCategory.Styles.Add(style);
+                         await this.Save();
+                         this.Construct();
+                     }
+                     else
+                     {
+                         this.StyleCategorys.Add(new StyleCategory
+                         {
+                             Name = "Custom",
+                             Styles = new ObservableCollection<IStyle>
+                             {
+                                 style
+                             }
+                         });
+                         await this.Save();
+                         this.Construct();
+                     }
+                 }
+             };
+
+            this.WritableButton.Click += (s, e) =>
+            {
+                VisualStateManager.GoToState(this, this.Writable.Name, false);
+            };
+
+            this.WritableOKButton.Click += (s, e) =>
+            {
+
+
+            };
+
+            this.WritableCancelButton.Click += (s, e) =>
+            {
+                VisualStateManager.GoToState(this, this.Normal.Name, false);
+            };
         }
 
         private async Task Save()
@@ -89,31 +137,14 @@ namespace Retouch_Photo2.Menus
             await XML.SaveStylesFile(this.StyleCategorys);
         }
 
-        private async void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        public void Construct()
         {
-            if (this.SelectionViewModel.SelectionLayerage is ILayer layer)
+            this.GridView.ItemsSource = new CollectionViewSource
             {
-                IStyle style = layer.Style.Clone();
-
-                StyleCategory styleCategory = this.StyleCategorys.FirstOrDefault(c => c.Name == "Custom");
-                if (styleCategory != null)
-                {
-                    styleCategory.Styles.Add(style);
-                    await this.Save();
-                }
-                else
-                {
-                    this.StyleCategorys.Add(new StyleCategory
-                    {
-                        Name = "Custom",
-                        Styles = new List<IStyle>
-                        {
-                            style
-                        }
-                    });
-                    await this.Save();
-                }
-            }
+                IsSourceGrouped = true,
+                Source = this.StyleCategorys
+            }.View;
         }
+
     }
 }

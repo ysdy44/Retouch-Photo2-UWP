@@ -9,23 +9,39 @@
     d:DesignWidth="200"
     d:DesignHeight="400"
     >
-    
-
-    <UserControl.Resources>
-        <CollectionViewSource x:Name="CollectionViewSource" IsSourceGrouped="True"/>
-    </UserControl.Resources>
 
 
-    <GridView x:Name="StylesGridView" SelectionMode="None" IsItemClickEnabled="True" 
-                     ItemsSource="{x:Bind CollectionViewSource.View, Mode=OneWay}">
+    <GridView x:Name="GridView" SelectionMode="None" IsItemClickEnabled="True">
+
+
+        <!--VisualState-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <!--Normal-->
+                <VisualState x:Name="Normal"/>
+
+                <!--Writable-->
+                <VisualState x:Name="Writable">
+                    <VisualState.Setters>
+                        <Setter Target = "GridView.SelectionMode" Value="Multiple"/>
+                        <Setter Target = "GridView.IsItemClickEnabled" Value="False"/>
+                        <Setter Target = "AddButton.Visibility" Value="Collapsed"/>
+                        <Setter Target = "WritableButton.Visibility" Value="Collapsed"/>
+                        <Setter Target = "WritableOKButton.Visibility" Value="Visible"/>
+                        <Setter Target = "WritableCancelButton.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
 
         <GridView.ItemContainerStyle>
             <Style TargetType="GridViewItem">
                 <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Width" Value="70"/>
-                <Setter Property="Height" Value="70"/>
-                <Setter Property="Margin" Value="1"/>
-                <Setter Property="Padding" Value="4,0"/>
+                <Setter Property="Width" Value="74"/>
+                <Setter Property="Height" Value="74"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
             </Style>
@@ -43,21 +59,29 @@
 
         <GridView.ItemTemplate>
             <DataTemplate x:DataType="styles:Style">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="36"/>
-                    </Grid.RowDefinitions>
-                    <styles:StyleShowControl Style2="{x:Bind}" HorizontalAlignment="Center"/>
-                    <TextBlock Text="{x:Bind Name}" Grid.Row="1" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center"/>
-                </Grid>
+                <styles:StyleShowControl Style2="{x:Bind}" HorizontalAlignment="Center">
+                    <ToolTipService.ToolTip>
+                        <ToolTip Content="{x:Bind Name}"/>
+                    </ToolTipService.ToolTip>
+                </styles:StyleShowControl>
             </DataTemplate>
         </GridView.ItemTemplate>
 
         <GridView.Header>
-            <Button Click="Button_Click">
-                Add Current
-            </Button >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Padding="4,0">
+                <Button x:Name="AddButton" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedButtonStyle}">
+                    <SymbolIcon Symbol="Add"/>
+                </Button >
+                <Button x:Name="WritableButton" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedButtonStyle}">
+                    <SymbolIcon Symbol="ShowBcc"/>
+                </Button >
+                <Button x:Name="WritableOKButton" Visibility="Collapsed" Style="{StaticResource AppAccentOutlineButton}">
+                    <SymbolIcon Symbol="Accept"/>
+                </Button>
+                <Button x:Name="WritableCancelButton" Margin="4,0" Visibility="Collapsed" Style="{StaticResource AppOutlineButton}">
+                    <SymbolIcon Symbol="Cancel"/>
+                </Button>
+            </StackPanel>
         </GridView.Header>
 
     </GridView>
