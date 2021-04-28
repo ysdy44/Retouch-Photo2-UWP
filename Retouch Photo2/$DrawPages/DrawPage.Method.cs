@@ -71,7 +71,7 @@ namespace Retouch_Photo2
             }
 
             //Save layers file.
-            IEnumerable<Layerage> savedLayerages = LayerManager.GetUnUestingLayerages(LayerManager.RootLayerage);
+            IEnumerable<Layerage> savedLayerages = LayerManager.GetFlatNestingLayerages(LayerManager.RootLayerage);
             IEnumerable<ILayer> savedLayers = from layer in LayerBase.Instances.Values where savedLayerages.Any(p => layer.Equals(p)) select layer;
             await XML.SaveLayersFile(zipFolder, savedLayers);
 

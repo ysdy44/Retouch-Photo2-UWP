@@ -50,17 +50,17 @@ namespace Retouch_Photo2.Layers
 
 
         /// <summary>
-        /// Gets un-uesting layerages
+        /// Gets flat-nesting layerages
         /// </summary>
         /// <param name="layerage"> The layerage. </param>
         /// <returns> The yield layerages. </returns>
-        public static IEnumerable<Layerage> GetUnUestingLayerages(Layerage layerage)
+        public static IEnumerable<Layerage> GetFlatNestingLayerages(Layerage layerage)
         {
             foreach (Layerage child in layerage.Children)
             {
                 yield return child;
 
-                foreach (Layerage unUesting in LayerManager.GetUnUestingLayerages(child))
+                foreach (Layerage unUesting in LayerManager.GetFlatNestingLayerages(child))
                 {
                     yield return unUesting;
                 }
