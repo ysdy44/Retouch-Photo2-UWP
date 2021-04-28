@@ -30,6 +30,8 @@ namespace Retouch_Photo2.Menus
         ViewModel MethodViewModel => App.MethodViewModel;
 
         IList<StyleCategory> StyleCategorys;
+        readonly ObservableCollection<string> StyleCategoryNames = new ObservableCollection<string>();
+        readonly ObservableCollection<IStyle> Styles = new ObservableCollection<IStyle>();
 
 
         //@Construct
@@ -42,91 +44,134 @@ namespace Retouch_Photo2.Menus
 
             this.Loaded += async (s, e) =>
             {
-                if (this.GridView.ItemsSource == null)
+                if (this.StyleCategorys == null)
                 {
                     IEnumerable<StyleCategory> styleCategorys = await Retouch_Photo2.XML.ConstructStylesFile();
+                    this.StyleCategorys = styleCategorys.ToList();
                     if (styleCategorys != null)
                     {
-                        this.StyleCategorys = styleCategorys.ToList();
-                        this.Construct();
+                        StyleCategory styleCategory = styleCategorys.First();
+
+                        foreach (StyleCategory styleCategory2 in styleCategorys)
+                        {
+                            this.StyleCategoryNames.Add(styleCategory2.Name);
+                        }
+                        this.StyleCategoryNamesListView.SelectedItem = styleCategory.Name;
+
+                        foreach (IStyle style in styleCategory.Styles)
+                        {
+                            this.Styles.Add(style);
+                        }
                     }
                 }
             };
 
+            //StyleCategoryNames
+            this.StyleCategoryNamesButton.Tapped += (s, e) => this.StyleCategoryNamesFlyout.ShowAt(this.StyleCategoryNamesButton);
+            this.StyleCategoryNamesListView.ItemClick += (s, e) =>
+           {
+               this.StyleCategoryNamesFlyout.Hide();
+               if (e.ClickedItem is string name)
+               {
+                   if (this.StyleCategoryNames.Contains(name))
+                   {
+                       StyleCategory styleCategory = this.StyleCategorys.First(c => c.Name == name);
+
+                       this.Styles.Clear();
+                       foreach (IStyle style in styleCategory.Styles)
+                       {
+                           this.Styles.Add(style);
+                       }
+                   }
+               }
+           };
+
             this.GridView.ItemClick += (s, e) =>
+           {
+               if (e.ClickedItem is IStyle item)
+               {
+                   Transformer transformer = this.SelectionViewModel.Transformer;
+
+                   this.MethodViewModel.ILayerChanged<Retouch_Photo2.Styles.IStyle>
+                   (
+                       set: (layer) =>
+                       {
+                           Transformer transformer2 = layer.Transform.Transformer;
+                           IStyle style2 = item.Clone();
+                           style2.CacheTransform();
+                           style2.DeliverBrushPoints(transformer2);
+                           layer.Style = style2;
+
+                           transformer = transformer2;
+                           this.SelectionViewModel.StandardStyleLayer = layer;
+                       },
+
+                       type: HistoryType.LayersProperty_SetStyle,
+                       getUndo: (layer) => layer.Style,
+                       setUndo: (layer, previous) => layer.Style = previous.Clone()
+                   );
+
+                   IStyle style = item.Clone();
+                   style.CacheTransform();
+                   style.DeliverBrushPoints(transformer);
+                   this.SelectionViewModel.SetStyle(style);
+               }
+           };
+
+            this.AddButton.Tapped += async (s, e) =>
             {
-                if (e.ClickedItem is IStyle item)
+                if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
                 {
-                    Transformer transformer = this.SelectionViewModel.Transformer;
+                    ILayer layer = layerage.Self;
 
-                    this.MethodViewModel.ILayerChanged<Retouch_Photo2.Styles.IStyle>
-                    (
-                        set: (layer) =>
-                        {
-                            Transformer transformer2 = layer.Transform.Transformer;
-                            IStyle style2 = item.Clone();
-                            style2.CacheTransform();
-                            style2.DeliverBrushPoints(transformer2);
-                            layer.Style = style2;
-
-                            transformer = transformer2;
-                            this.SelectionViewModel.StandardStyleLayer = layer;
-                        },
-
-                        type: HistoryType.LayersProperty_SetStyle,
-                        getUndo: (layer) => layer.Style,
-                        setUndo: (layer, previous) => layer.Style = previous.Clone()
-                    );
-
-                    IStyle style = item.Clone();
+                    Transformer transformer = layer.Transform.Transformer;
+                    IStyle style = layer.Style.Clone();
                     style.CacheTransform();
-                    style.DeliverBrushPoints(transformer);
-                    this.SelectionViewModel.SetStyle(style);
+                    style.OneBrushPoints(transformer);
+
+                    StyleCategory styleCategory = this.StyleCategorys.FirstOrDefault(c => c.Name == "Custom");
+                    if (styleCategory != null)
+                    {
+                        styleCategory.Styles.Add(style);
+                        await this.Save();
+                    }
+                    else
+                    {
+                        styleCategory = new StyleCategory
+                        {
+                            Name = "Custom",
+                            Styles = new List<IStyle>
+                            {
+                                style
+                            }
+                        };
+
+                        this.StyleCategorys.Add(styleCategory);
+                        this.StyleCategoryNames.Add(styleCategory.Name);
+                        this.StyleCategoryNamesListView.SelectedItem = styleCategory.Name;
+                        await this.Save();
+                    }
+
+                    this.Styles.Clear();
+                    foreach (IStyle style2 in styleCategory.Styles)
+                    {
+                        this.Styles.Add(style2);
+                    }
                 }
             };
 
-            this.AddButton.Click += async (s, e) =>
-             {
-                 if (this.SelectionViewModel.SelectionLayerage is Layerage layerage)
-                 {
-                     ILayer layer = layerage.Self;
-                     IStyle style = layer.Style.Clone();
-
-                     StyleCategory styleCategory = this.StyleCategorys.FirstOrDefault(c => c.Name == "Custom");
-                     if (styleCategory != null)
-                     {
-                         styleCategory.Styles.Add(style);
-                         await this.Save();
-                         this.Construct();
-                     }
-                     else
-                     {
-                         this.StyleCategorys.Add(new StyleCategory
-                         {
-                             Name = "Custom",
-                             Styles = new ObservableCollection<IStyle>
-                             {
-                                 style
-                             }
-                         });
-                         await this.Save();
-                         this.Construct();
-                     }
-                 }
-             };
-
-            this.WritableButton.Click += (s, e) =>
+            this.WritableButton.Tapped += (s, e) =>
             {
                 VisualStateManager.GoToState(this, this.Writable.Name, false);
             };
 
-            this.WritableOKButton.Click += (s, e) =>
+            this.WritableOKButton.Tapped += (s, e) =>
             {
 
 
             };
 
-            this.WritableCancelButton.Click += (s, e) =>
+            this.WritableCancelButton.Tapped += (s, e) =>
             {
                 VisualStateManager.GoToState(this, this.Normal.Name, false);
             };
@@ -135,15 +180,6 @@ namespace Retouch_Photo2.Menus
         private async Task Save()
         {
             await XML.SaveStylesFile(this.StyleCategorys);
-        }
-
-        public void Construct()
-        {
-            this.GridView.ItemsSource = new CollectionViewSource
-            {
-                IsSourceGrouped = true,
-                Source = this.StyleCategorys
-            }.View;
         }
 
     }

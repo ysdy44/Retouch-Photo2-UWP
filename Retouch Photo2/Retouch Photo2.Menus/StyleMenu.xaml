@@ -10,8 +10,17 @@
     d:DesignHeight="400"
     >
 
+    <UserControl.Resources>
+        <!--Flyout-->
+        <Flyout x:Name="StyleCategoryNamesFlyout" Placement="Bottom" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ListView x:Name="StyleCategoryNamesListView" IsItemClickEnabled="True" SelectionMode="Single"
+                       ItemsSource="{x:Bind StyleCategoryNames}"/>
+        </Flyout>
+    </UserControl.Resources>
 
-    <GridView x:Name="GridView" SelectionMode="None" IsItemClickEnabled="True">
+
+    <GridView x:Name="GridView" SelectionMode="None" IsItemClickEnabled="True"
+              ItemsSource="{x:Bind Styles}">
 
 
         <!--VisualState-->
@@ -26,6 +35,9 @@
                     <VisualState.Setters>
                         <Setter Target = "GridView.SelectionMode" Value="Multiple"/>
                         <Setter Target = "GridView.IsItemClickEnabled" Value="False"/>
+
+                        <Setter Target = "StyleCategoryNamesButton.Visibility" Value="Collapsed"/>
+                        
                         <Setter Target = "AddButton.Visibility" Value="Collapsed"/>
                         <Setter Target = "WritableButton.Visibility" Value="Collapsed"/>
                         <Setter Target = "WritableOKButton.Visibility" Value="Visible"/>
@@ -47,16 +59,6 @@
             </Style>
         </GridView.ItemContainerStyle>
 
-        <GridView.GroupStyle>
-            <GroupStyle>
-                <GroupStyle.HeaderTemplate>
-                    <DataTemplate x:DataType="styles:StyleCategory">
-                        <TextBlock Text="{x:Bind Name}" Style="{StaticResource AppTabTextBlockStyle}"/>
-                    </DataTemplate>
-                </GroupStyle.HeaderTemplate>
-            </GroupStyle>
-        </GridView.GroupStyle>
-
         <GridView.ItemTemplate>
             <DataTemplate x:DataType="styles:Style">
                 <styles:StyleShowControl Style2="{x:Bind}" HorizontalAlignment="Center">
@@ -68,20 +70,37 @@
         </GridView.ItemTemplate>
 
         <GridView.Header>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Padding="4,0">
-                <Button x:Name="AddButton" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedButtonStyle}">
-                    <SymbolIcon Symbol="Add"/>
-                </Button >
-                <Button x:Name="WritableButton" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedButtonStyle}">
-                    <SymbolIcon Symbol="ShowBcc"/>
-                </Button >
-                <Button x:Name="WritableOKButton" Visibility="Collapsed" Style="{StaticResource AppAccentOutlineButton}">
-                    <SymbolIcon Symbol="Accept"/>
-                </Button>
-                <Button x:Name="WritableCancelButton" Margin="4,0" Visibility="Collapsed" Style="{StaticResource AppOutlineButton}">
-                    <SymbolIcon Symbol="Cancel"/>
-                </Button>
-            </StackPanel>
+            <Grid MinHeight="{StaticResource AppTitleHeight}" Grid.Row="0" Padding="{StaticResource AppPanelPadding}" ManipulationMode="TranslateX,TranslateY" Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <ListViewItem x:Name="StyleCategoryNamesButton" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
+                    <ContentControl Style="{StaticResource AppIconReverseContentControlStyle}"
+                          Content="{x:Bind StyleCategoryNamesListView.SelectedItem, Mode=OneWay}">
+                        <ContentControl.Tag>
+                            <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                          MirroredWhenRightToLeft="True"/>
+                        </ContentControl.Tag>
+                    </ContentControl>
+                </ListViewItem>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Padding="4,0">
+                    <ListViewItem x:Name="AddButton" Style="{StaticResource AppListViewItemStyle}">
+                        <SymbolIcon Symbol="Add"/>
+                    </ListViewItem >
+                    <ListViewItem x:Name="WritableButton" Style="{StaticResource AppListViewItemStyle}">
+                        <SymbolIcon Symbol="ShowBcc"/>
+                    </ListViewItem >
+                    <ListViewItem x:Name="WritableOKButton" Visibility="Collapsed" Style="{StaticResource AppListViewItemStyle}">
+                        <SymbolIcon Symbol="Delete"/>
+                    </ListViewItem>
+                    <ListViewItem x:Name="WritableCancelButton" Visibility="Collapsed" Style="{StaticResource AppListViewItemStyle}">
+                        <SymbolIcon Symbol="Cancel"/>
+                    </ListViewItem>
+                </StackPanel>
+            </Grid>
         </GridView.Header>
 
     </GridView>
