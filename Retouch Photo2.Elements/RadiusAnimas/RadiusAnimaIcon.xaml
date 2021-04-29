@@ -27,7 +27,7 @@
                                        Width="50" Height="50" 
                                        StrokeThickness="1" 
                                        Stroke="{ThemeResource AppStroke}"
-                                       apiContractNotPresent5:Fill="{ThemeResource AppForeground}"
+                                       apiContractNotPresent5:Fill="{ThemeResource AppBackgroundLight}"
                                        apiContractPresent5:Fill="{ThemeResource AppAcrylicElementBrush}"
                                         />
                         </controls:DropShadowPanel>

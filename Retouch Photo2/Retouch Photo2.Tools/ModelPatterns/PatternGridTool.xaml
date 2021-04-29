@@ -11,7 +11,7 @@
     d:DesignHeight="50"
     d:DesignWidth="400"
     d:RequestedTheme="Dark"
-    d:Background="{StaticResource AppForeground}"
+    d:Background="{StaticResource AppBackgroundLight}"
     >
 
     <StackPanel Orientation="Horizontal">

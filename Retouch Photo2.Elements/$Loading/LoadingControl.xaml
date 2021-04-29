@@ -28,7 +28,8 @@
     <Border Background="Transparent" Visibility="{x:Bind VisibilityConverter(State), Mode=OneWay}">
 
         <!--Root-->
-        <Border CornerRadius="3" Width="140" Height="120" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}">
+        <Border CornerRadius="3" Width="140" Height="120" HorizontalAlignment="Center" VerticalAlignment="Center"
+                BorderThickness="1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppAcrylicOverlayBrush}">
             <Grid Padding="6" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
@@ -36,17 +37,17 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <ProgressRing x:Name="ProgressRing" Width="34" Height="34" Foreground="{ThemeResource AppText}"
+                <ProgressRing x:Name="ProgressRing" Width="34" Height="34" Foreground="{ThemeResource AppForeground}"
                            IsActive="{x:Bind ProgressRingBooleanConverter(State), Mode=OneWay}"
                            Visibility="{x:Bind ProgressRingVisibilityConverter(State), Mode=OneWay}"/>
 
                 <ProgressBar x:Name="ProgressBar" Width="100" Minimum="0" Maximum="1"
                            Visibility="{x:Bind ProgressBarVisibilityConverter(State), Mode=OneWay}"/>
 
-                <FontIcon x:Name="CorrectIcon" Glyph="&#xEC61;" FontSize="32" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"
+                <FontIcon x:Name="CorrectIcon" Glyph="&#xEC61;" FontSize="32" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppForeground}"
                            Visibility="{x:Bind CorrectVisibilityConverter(State), Mode=OneWay}"/>
                 
-                <FontIcon x:Name="ErrorIcon" Glyph="&#xEB90;" FontSize="32" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppText}"
+                <FontIcon x:Name="ErrorIcon" Glyph="&#xEB90;" FontSize="32" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource AppForeground}"
                            Visibility="{x:Bind ErrorVisibilityConverter(State), Mode=OneWay}"/>
                 
                 

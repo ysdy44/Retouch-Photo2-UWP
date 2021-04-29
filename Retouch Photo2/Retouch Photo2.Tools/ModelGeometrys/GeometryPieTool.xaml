@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="400"
-    d:Background="{ThemeResource AppForeground}"
+    d:Background="{ThemeResource AppBackgroundLight}"
     d:RequestedTheme="Dark"
     >
 

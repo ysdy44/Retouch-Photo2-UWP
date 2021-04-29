@@ -1114,7 +1114,7 @@
     </Page.Resources>
 
 
-    <Grid Background="{ThemeResource AppBackground}">
+    <Grid Background="{ThemeResource AppBackgroundDark}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
@@ -1122,7 +1122,7 @@
 
 
         <!--Extensions-->
-        <elements:ApplicationTitleBarExtension x:Name="ApplicationView" TitleBarColor="{ThemeResource AppTitleColor}"/>
+        <elements:ApplicationTitleBarExtension x:Name="ApplicationView" TitleBarColor="{ThemeResource AppBackgroundColorMediumLight}"/>
 
 
         <!--Developer-->

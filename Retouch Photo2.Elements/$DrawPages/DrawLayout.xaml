@@ -347,14 +347,14 @@
                         <Setter Target = "LeftBorder.(Grid.Row)" Value="1"/>
                         <Setter Target = "LeftBorder.(Grid.RowSpan)" Value="1"/>
                         <Setter Target = "LeftBorder.Background"
-                             apiContractNotPresent5:Value="{ThemeResource AppForeground}"
+                             apiContractNotPresent5:Value="{ThemeResource AppBackgroundLight}"
                              apiContractPresent5:Value="{ThemeResource AppAcrylicWindowBrush}"
                         />
                         <!--@Acrylic-->
                         <!--Right-->
                         <Setter Target = "RightGrid.(Grid.Column)" Value="2"/>
                         <Setter Target = "RightGrid.Background"
-                             apiContractNotPresent5:Value="{ThemeResource AppForeground}"
+                             apiContractNotPresent5:Value="{ThemeResource AppBackgroundLight}"
                              apiContractPresent5:Value="{ThemeResource AppAcrylicWindowBrush}"
                         />
 
@@ -1140,7 +1140,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" MinHeight="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -1157,7 +1157,7 @@
         <!--Foot-->
         <Border x:Name="FootPanel" Grid.Column="1" Grid.Row="1" MinHeight="50" Padding="10,0" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                              BorderThickness="0,1,0,0" BorderBrush="{ThemeResource AppStroke}"
-                             apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                             apiContractNotPresent5:Background="{ThemeResource AppBackgroundLight}"
                              apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
             <Border.RenderTransformOrigin>0.5, 0.5</Border.RenderTransformOrigin>
             <Border.RenderTransform>
@@ -1167,7 +1167,7 @@
 
 
         <!--Head-->
-        <Border x:Name="HeadBorder" Grid.Column="1" Grid.ColumnSpan="1" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppTitle}">
+        <Border x:Name="HeadBorder" Grid.Column="1" Grid.ColumnSpan="1" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackgroundMediumLight}">
             <Border.RenderTransformOrigin>0.5, 0.5</Border.RenderTransformOrigin>
             <Border.RenderTransform>
                 <TranslateTransform x:Name="HeadTransform" Y="0"/>
@@ -1180,7 +1180,7 @@
         <!--@Acrylic-->
         <!--Left-->
         <Border x:Name="LeftBorder" Width="70" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" BorderThickness="0,0,1,0" BorderBrush="{ThemeResource AppStroke}" 
-                             apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                             apiContractNotPresent5:Background="{ThemeResource AppBackgroundLight}"
                              apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
             <Border.RenderTransformOrigin>0.5, 0.5</Border.RenderTransformOrigin>
             <Border.RenderTransform>
@@ -1191,7 +1191,7 @@
         <!--@Acrylic-->
         <!--Right-->
         <Border x:Name="RightGrid" Width="264" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Right" BorderThickness="1,0,0,0" BorderBrush="{ThemeResource AppStroke}" 
-                         apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                         apiContractNotPresent5:Background="{ThemeResource AppBackgroundLight}"
                          apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
             <Border.RenderTransformOrigin>0.5, 0.5</Border.RenderTransformOrigin>
             <Border.RenderTransform>
@@ -1230,7 +1230,7 @@
 
         <!--Icon-->
         <Border x:Name="_LeftIcon" Grid.Column="1" Grid.Row="1" CornerRadius="0,12,12,0" Width="32" Height="120" HorizontalAlignment="Left" 
-                         apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                         apiContractNotPresent5:Background="{ThemeResource AppBackgroundLight}"
                          apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
             <Border.RenderTransformOrigin>0, 0.5</Border.RenderTransformOrigin>
             <Border.RenderTransform>
@@ -1239,7 +1239,7 @@
             <ContentControl x:Name="LeftContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemBaseHighColor}"/>
         </Border>
         <Border x:Name="_RightIcon" Grid.Column="1" Grid.Row="1" CornerRadius="12,0,0,12" Width="32" Height="120" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                         apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                         apiContractNotPresent5:Background="{ThemeResource AppBackgroundLight}"
                          apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
             <Border.RenderTransformOrigin>1, 0.5</Border.RenderTransformOrigin>
             <Border.RenderTransform>
@@ -1258,13 +1258,13 @@
             -->
 
         <StackPanel x:Name="_PinStackPanel" Grid.Column="3" Grid.RowSpan="2" Orientation="Horizontal"
-                         apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                         apiContractNotPresent5:Background="{ThemeResource AppBackgroundLight}"
                          apiContractPresent5:Background="{ThemeResource AppAcrylicWindowBrush}"/>
 
 
         <Border x:Name="WritableBorder" Grid.Column="1" Grid.Row="1" MinHeight="50" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Collapsed"
                          BorderThickness="0,1,0,0" BorderBrush="{ThemeResource AppStroke}" 
-                         apiContractNotPresent5:Background="{ThemeResource AppForeground}"
+                         apiContractNotPresent5:Background="{ThemeResource AppBackgroundLight}"
                          apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}">
             <Border.RenderTransformOrigin>1, 0.5</Border.RenderTransformOrigin>
             <Border.RenderTransform>

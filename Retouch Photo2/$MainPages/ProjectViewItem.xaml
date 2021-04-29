@@ -36,7 +36,7 @@
                 <!--Selected-->
                 <VisualState x:Name="Selected">
                     <VisualState.Setters >
-                        <Setter Target = "_RootGrid.Background" Value="{ThemeResource AppForeground}"/>
+                        <Setter Target = "_RootGrid.Background" Value="{ThemeResource AppBackgroundLight}"/>
                         <Setter Target = "ImageBorder.CornerRadius" Value="4"/>
                         <Setter Target = "ImageBorder.BorderThickness" Value="2"/>
                         <Setter Target = "ImageBorder.BorderBrush" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
@@ -83,7 +83,7 @@
         <TextBlock Grid.Row="2" Text="{x:Bind UserControl.Name, Mode=OneWay}"
                    FontWeight="Medium"
                    TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" 
-                   Foreground="{ThemeResource AppText}" 
+                   Foreground="{ThemeResource AppForeground}" 
                    HorizontalAlignment="Center" VerticalAlignment="Center" />
 
 

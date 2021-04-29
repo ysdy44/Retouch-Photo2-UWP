@@ -45,22 +45,22 @@
                     <!--Width-->
                     <TextBlock x:Name="WidthTextBlock" Grid.Column="0" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}"/>
                     <TextBox x:Name="WidthTextBox" Grid.Column="0" Grid.Row="1"
-                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackground}"
                              ui:TextBoxExtensions.ValidationMode="Forced"
                              ui:TextBoxExtensions.ValidationType="Decimal">
                         <TextBox.Resources>
-                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
+                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppBackgroundColor}"/>
                         </TextBox.Resources>
                     </TextBox>
 
                     <!--Height-->
                     <TextBlock x:Name="HeightTextBlock" Grid.Column="2" Grid.Row="0" Style="{StaticResource AppTextBlockStyle}"/>
                     <TextBox x:Name="HeightTextBox" Grid.Column="2" Grid.Row="1"               
-                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackground}"
                              ui:TextBoxExtensions.ValidationMode="Forced"
                              ui:TextBoxExtensions.ValidationType="Decimal">
                         <TextBox.Resources>
-                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
+                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppBackgroundColor}"/>
                         </TextBox.Resources>
                     </TextBox>
 
@@ -78,22 +78,22 @@
                     <!--Rotate-->
                     <TextBlock x:Name="RotateTextBlock" Grid.Column="0" Grid.Row="2" Style="{StaticResource AppTextBlockStyle}"/>
                     <TextBox x:Name="RotateTextBox" Grid.Column="0" Grid.Row="3" 
-                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackground}"
                              ui:TextBoxExtensions.ValidationMode="Forced"
                              ui:TextBoxExtensions.ValidationType="Decimal">
                         <TextBox.Resources>
-                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
+                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppBackgroundColorDark}"/>
                         </TextBox.Resources>
                     </TextBox>
 
                     <!--Skew-->
                     <TextBlock x:Name="SkewTextBlock" Grid.Column="2" Grid.Row="2" Style="{StaticResource AppTextBlockStyle}"/>
                     <TextBox x:Name="SkewTextBox" Grid.Column="2" Grid.Row="3" 
-                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackground}"
                              ui:TextBoxExtensions.ValidationMode="Forced"
                              ui:TextBoxExtensions.ValidationType="Decimal">
                         <TextBox.Resources>
-                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
+                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppBackgroundColorDark}"/>
                         </TextBox.Resources>
                     </TextBox>
 
@@ -114,22 +114,22 @@
                     <!--X-->
                     <TextBlock x:Name="XTextBlock" Grid.Column="0" Grid.Row="4" Style="{StaticResource AppTextBlockStyle}"/>
                     <TextBox x:Name="XTextBox" Grid.Column="0" Grid.Row="5" 
-                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackground}"
                              ui:TextBoxExtensions.ValidationMode="Forced"
                              ui:TextBoxExtensions.ValidationType="Decimal">
                         <TextBox.Resources>
-                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
+                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppBackgroundColorDark}"/>
                         </TextBox.Resources>
                     </TextBox>
 
                     <!--Y-->
                     <TextBlock x:Name="YTextBlock" Grid.Column="2" Grid.Row="4" Style="{StaticResource AppTextBlockStyle}"/>
                     <TextBox x:Name="YTextBox" Grid.Column="2" Grid.Row="5" 
-                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackground}"
                              ui:TextBoxExtensions.ValidationMode="Forced"
                              ui:TextBoxExtensions.ValidationType="Decimal">
                         <TextBox.Resources>
-                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
+                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppBackgroundColorDark}"/>
                         </TextBox.Resources>
                     </TextBox>
 
@@ -144,7 +144,7 @@
 
 
                     <!--IndicatorControl-->
-                    <transformers:IndicatorControl x:Name="IndicatorControl" Grid.ColumnSpan="3" Grid.Row="6" Background="{ThemeResource AppFill}" BorderBrush="{ThemeResource AppStroke}"
+                    <transformers:IndicatorControl x:Name="IndicatorControl" Grid.ColumnSpan="3" Grid.Row="6" Background="{ThemeResource AppBackgroundDark}" BorderBrush="{ThemeResource AppStroke}"
                                        FlowDirection="LeftToRight">
                         <ToolTipService.ToolTip>
                             <ToolTip x:Name="IndicatorToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
@@ -165,7 +165,7 @@
                 <transformers:RemoteControl x:Name="PositionRemoteControl" 
                                             Width="Auto" Height="Auto" Margin="4"
                                             BorderBrush="{ThemeResource AppStroke}"
-                                            Background="{ThemeResource AppFill}"
+                                            Background="{ThemeResource AppBackgroundDark}"
                                             FlowDirection="LeftToRight"/>
                 <ListViewItem x:Name="CloseButton" Grid.Row="2" Style="{StaticResource AppListViewItemStyle}"/>
             </Grid>

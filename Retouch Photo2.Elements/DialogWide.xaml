@@ -4,7 +4,7 @@
     xmlns:apiContractNotPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
     xmlns:apiContractPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
     xmlns:local="using:Retouch_Photo2.Elements">
-
+    
 
     <Style TargetType="local:DialogWide">
         <Setter Property="Width" Value="Auto"/>
@@ -115,8 +115,8 @@
                                 MinHeight="320"            
                                 BorderThickness="1"             
                                 BorderBrush="{ThemeResource AppStroke}"             
-                                apiContractNotPresent5:Background="{ThemeResource AppForeground}"
-                                apiContractPresent5:Background="{ThemeResource AppAcrylicElementBrush}"                     
+                                apiContractNotPresent5:Background="{ThemeResource AppBackground}"
+                                apiContractPresent5:Background="{ThemeResource AppAcrylicOverlayBrush}"                     
                                 CornerRadius="{StaticResource AppCornerRadius}"           
                                 >
                             <Border.RenderTransformOrigin>0.5,0.5</Border.RenderTransformOrigin>

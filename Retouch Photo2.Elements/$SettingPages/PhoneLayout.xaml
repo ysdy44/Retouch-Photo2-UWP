@@ -45,7 +45,7 @@
                         <developerTools:AlignmentGrid Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2" Opacity="0.1" HorizontalStep="10" VerticalStep="10" LineBrush="Gray"/>
 
                         <!--Head-->
-                        <Grid Grid.ColumnSpan="3" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}"/>
+                        <Grid Grid.ColumnSpan="3" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackgroundLight}"/>
 
                         <!--Canvas-->
                         <Border Grid.Column="1" Grid.Row="1" Width="100" Height="100" Background="White">

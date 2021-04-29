@@ -33,7 +33,7 @@
                                        MinHeight="50" MinWidth="100" 
                                        StrokeThickness="1" 
                                        Stroke="{ThemeResource AppBorderBrush}"
-                                       Fill="{ThemeResource AppForeground}"
+                                       Fill="{ThemeResource AppBackgroundLight}"
                                         />
                         </controls:DropShadowPanel>
 

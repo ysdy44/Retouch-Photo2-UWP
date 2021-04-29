@@ -44,7 +44,7 @@
 
 
         <!--IsHardBorder-->
-        <elements:CheckControl x:Name="IsHardBorderCheckBox" Margin="4,0" Foreground="{ThemeResource AppText}"/>
+        <elements:CheckControl x:Name="IsHardBorderCheckBox" Margin="4,0" Foreground="{ThemeResource AppForeground}"/>
 
         
         <ContentControl Height="12"/>

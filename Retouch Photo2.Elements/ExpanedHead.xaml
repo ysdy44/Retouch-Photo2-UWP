@@ -5,7 +5,7 @@
 
 
     <Style TargetType="local:ExpanedHead" >
-        <Setter Property="Background" Value="{ThemeResource AppTitle}"/>
+        <Setter Property="Background" Value="{ThemeResource AppBackgroundMediumLight}"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="Height" Value="50"/>

@@ -125,7 +125,7 @@
         </GridView.ItemTemplate>
 
         <GridView.Header>
-            <Grid Height="{StaticResource AppTitleHeight}" Padding="{StaticResource AppPanelPadding}" ManipulationMode="TranslateX,TranslateY" Background="Transparent">
+            <Grid>
                 <Grid x:Name="HeaderGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>

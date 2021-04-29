@@ -97,11 +97,11 @@
 
                 <TextBox x:Name="FontSizeTextBox" Margin="1,0" 
                              Text="{x:Bind Round2Converter(SelectionViewModel.FontSize), Mode=OneWay}"
-                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                             FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackgroundDark}"
                              ui:TextBoxExtensions.ValidationMode="Forced"
                              ui:TextBoxExtensions.ValidationType="Decimal">
                     <TextBox.Resources>
-                        <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppFillColor}"/>
+                        <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="{ThemeResource AppBackgroundColorDark}"/>
                     </TextBox.Resources>
                 </TextBox>
 

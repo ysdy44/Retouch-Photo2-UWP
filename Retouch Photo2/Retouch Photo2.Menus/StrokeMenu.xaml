@@ -57,17 +57,17 @@
 
 
             <!--IsFollowTransform-->
-            <elements:CheckControl x:Name="IsFollowTransformCheckBox" Margin="4,0" Foreground="{ThemeResource AppText}"
+            <elements:CheckControl x:Name="IsFollowTransformCheckBox" Margin="4,0" Foreground="{ThemeResource AppForeground}"
                   IsChecked="{x:Bind SelectionViewModel.IsFollowTransform, Mode=OneWay}" />
 
 
             <!--IsStrokeBehindFill-->
-            <elements:CheckControl x:Name="IsStrokeBehindFillCheckBox" Margin="4,0" Foreground="{ThemeResource AppText}"
+            <elements:CheckControl x:Name="IsStrokeBehindFillCheckBox" Margin="4,0" Foreground="{ThemeResource AppForeground}"
                   IsChecked="{x:Bind SelectionViewModel.IsStrokeBehindFill, Mode=OneWay}" />
 
 
             <!--IsStrokeWidthFollowScale-->
-            <elements:CheckControl x:Name="IsStrokeWidthFollowScaleCheckBox" Margin="4,0" Foreground="{ThemeResource AppText}"
+            <elements:CheckControl x:Name="IsStrokeWidthFollowScaleCheckBox" Margin="4,0" Foreground="{ThemeResource AppForeground}"
                   IsChecked="{x:Bind SelectionViewModel.IsStrokeWidthFollowScale, Mode=OneWay}" />
 
 

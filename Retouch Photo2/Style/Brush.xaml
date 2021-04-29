@@ -3,23 +3,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:apiContractPresent5="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)">
 
-    
+
     <!--Brush-->
-    <SolidColorBrush x:Key="AppForeground" Color="{ThemeResource AppForegroundColor}"/>
+    <SolidColorBrush x:Key="AppBackgroundDark" Color="{ThemeResource AppBackgroundColorDark}"/>
+    <SolidColorBrush x:Key="AppBackgroundMediumDark" Color="{ThemeResource AppBackgroundColorMediumDark}"/>
     <SolidColorBrush x:Key="AppBackground" Color="{ThemeResource AppBackgroundColor}"/>
+    <SolidColorBrush x:Key="AppBackgroundMediumLight" Color="{ThemeResource AppBackgroundColorMediumLight}"/>
+    <SolidColorBrush x:Key="AppBackgroundLight" Color="{ThemeResource AppBackgroundColorLight}"/>
+
     <SolidColorBrush x:Key="AppBorderBrush" Color="{ThemeResource AppBorderBrushColor}"/>
-
-    
-    <SolidColorBrush x:Key="AppFill" Color="{ThemeResource AppFillColor}"/>
     <SolidColorBrush x:Key="AppStroke" Color="{ThemeResource AppStrokeColor}"/>
-    <SolidColorBrush x:Key="AppText" Color="{ThemeResource AppTextColor}"/>
+    <SolidColorBrush x:Key="AppForeground" Color="{ThemeResource AppForegroundColor}"/>
 
-    <SolidColorBrush x:Key="AppTitle" Color="{ThemeResource AppTitleColor}"/>
-
+    <apiContractPresent5:AcrylicBrush x:Key="AppAcrylicOverlayBrush" BackgroundSource="Backdrop" 
+         TintColor="{ThemeResource AppBackgroundColorDark}" TintOpacity="0.8" FallbackColor="{ThemeResource AppBackgroundColorMediumLight}" />
     <apiContractPresent5:AcrylicBrush x:Key="AppAcrylicElementBrush" BackgroundSource="Backdrop" 
-         TintColor="{ThemeResource AppAcrylicColor}" TintOpacity="0.8" FallbackColor="{ThemeResource AppAcrylicColor}" />
+         TintColor="{ThemeResource AppBackgroundColorLight}" TintOpacity="0.8" FallbackColor="{ThemeResource AppBackgroundColorLight}" />
     <apiContractPresent5:AcrylicBrush x:Key="AppAcrylicWindowBrush" BackgroundSource="HostBackdrop" 
-         TintColor="{ThemeResource AppAcrylicColor}" TintOpacity="0.7" FallbackColor="{ThemeResource AppAcrylicColor}" />
+         TintColor="{ThemeResource AppBackgroundColorLight}" TintOpacity="0.7" FallbackColor="{ThemeResource AppBackgroundColorLight}" />
 
     
 </ResourceDictionary>

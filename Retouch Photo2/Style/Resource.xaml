@@ -58,7 +58,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
-        <Setter Property="Background" Value="{ThemeResource AppFill}"/>
+        <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
     </Style>
     
     

@@ -25,7 +25,7 @@
     xmlns:brushs="using:Retouch_Photo2.Brushs" 
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
-    Background="{ThemeResource AppBackground}"
+    Background="{ThemeResource AppBackgroundDark}"
     >
 
 
@@ -301,7 +301,7 @@
 
 
                     <!--Overflow-->
-                    <Button x:Name="OverflowButton" Grid.Column="2" Style="{StaticResource AppCircleButtonStyle}">
+                    <Button x:Name="OverflowButton" Grid.Column="2" Background="{ThemeResource AppBackgroundLight}" Style="{StaticResource AppCircleButtonStyle}">
                         <ToolTipService.ToolTip>
                             <ToolTip x:Name="OverflowToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                         </ToolTipService.ToolTip>
@@ -387,70 +387,70 @@
                                 <ToolTipService.ToolTip>
                                     <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <edits:Icon Foreground="{ThemeResource AppText}"/>
+                                <edits:Icon Foreground="{ThemeResource AppForeground}"/>
                             </ListViewItem>
                             <ListViewItem x:Name="Operate" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <operates:Icon Foreground="{ThemeResource AppText}"/>
+                                <operates:Icon Foreground="{ThemeResource AppForeground}"/>
                             </ListViewItem>
 
                             <ListViewItem x:Name="Adjustment" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <adjustments:Icon Foreground="{ThemeResource AppText}"/>
+                                <adjustments:Icon Foreground="{ThemeResource AppForeground}"/>
                             </ListViewItem>
                             <ListViewItem x:Name="Effect" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip Content="{x:Bind EffectExpander.Title, Mode=OneWay}" IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <effects:Icon Foreground="{ThemeResource AppText}"/>
+                                <effects:Icon Foreground="{ThemeResource AppForeground}"/>
                             </ListViewItem>
 
                             <ListViewItem x:Name="Text" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <texts:Icon Foreground="{ThemeResource AppText}"/>
+                                <texts:Icon Foreground="{ThemeResource AppForeground}"/>
                             </ListViewItem>
                             <ListViewItem x:Name="Stroke" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <strokes:Icon Foreground="{ThemeResource AppText}"/>
+                                <strokes:Icon Foreground="{ThemeResource AppForeground}"/>
                             </ListViewItem>
                             <ListViewItem x:Name="Style" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <styles:Icon Foreground="{ThemeResource AppText}"/>
+                                <styles:Icon Foreground="{ThemeResource AppForeground}"/>
                             </ListViewItem>
                             <ListViewItem x:Name="Filter" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <filters:Icon Foreground="{ThemeResource AppText}"/>
+                                <filters:Icon Foreground="{ThemeResource AppForeground}"/>
                             </ListViewItem>
 
                             <ListViewItem x:Name="History" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <historys:Icon Foreground="{ThemeResource AppText}"/>
+                                <historys:Icon Foreground="{ThemeResource AppForeground}"/>
                             </ListViewItem>
                             <ListViewItem x:Name="Transformer" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <transformers:Icon Foreground="{ThemeResource AppText}"/>
+                                <transformers:Icon Foreground="{ThemeResource AppForeground}"/>
                             </ListViewItem>
                             <ListViewItem x:Name="Layer" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
                                 <ToolTipService.ToolTip>
                                     <ToolTip IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
                                 </ToolTipService.ToolTip>
-                                <layers:Icon Foreground="{ThemeResource AppText}"/>
+                                <layers:Icon Foreground="{ThemeResource AppForeground}"/>
                             </ListViewItem>
 
                             <ListViewItem x:Name="Color" Padding="2" MinWidth="50" Width="54" HorizontalContentAlignment="Center">
@@ -501,7 +501,7 @@
             <StackPanel>
                 <elements:SizePicker x:Name="SetupSizePicker"/>
                 <ContentControl Height="6"/>
-                <elements:CheckControl x:Name="SetupAnchorCheckControl" Margin="4,0" Foreground="{ThemeResource AppText}"/>
+                <elements:CheckControl x:Name="SetupAnchorCheckControl" Margin="4,0" Foreground="{ThemeResource AppForeground}"/>
                 <transformers:IndicatorControl x:Name="SetupIndicatorControl" Visibility="Collapsed" Background="{ThemeResource AppBackground}" BorderBrush="{ThemeResource AppBorderBrush}"
                                                FlowDirection="LeftToRight"/>
             </StackPanel>

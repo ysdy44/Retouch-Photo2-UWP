@@ -45,10 +45,10 @@
                         <developerTools:AlignmentGrid Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Opacity="0.1" HorizontalStep="10" VerticalStep="10" LineBrush="Gray"/>
 
                         <!--Head-->
-                        <Grid Grid.ColumnSpan="2" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}"/>
+                        <Grid Grid.ColumnSpan="2" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackgroundLight}"/>
 
-                        <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" BorderThickness="0,0,1,0" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}"/>
-                        <Border Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1,0,0,0" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppForeground}"/>
+                        <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" BorderThickness="0,0,1,0" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackgroundLight}"/>
+                        <Border Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1,0,0,0" BorderBrush="{ThemeResource AppBorderBrush}" Background="{ThemeResource AppBackgroundLight}"/>
 
                         <!--Canvas-->
                         <Rectangle Grid.Column="1" Grid.Row="1" Width="110" Height="110" Fill="White"/>

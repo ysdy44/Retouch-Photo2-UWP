@@ -31,15 +31,15 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Padding="4,0">
 
                     <!--Edit-->
-                    <Button x:Name="EditButton" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedButtonStyle}"
+                    <Button x:Name="EditButton" Background="{ThemeResource AppBackgroundLight}" Style="{StaticResource AppRoundedButtonStyle}"
                                    Visibility="{x:Bind PageVisibility}" Command="{x:Bind Edit}">
-                        <FontIcon FontSize="16" Glyph="&#xE104;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                        <FontIcon FontSize="16" Glyph="&#xE104;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppForeground}"/>
                     </Button>
 
                     <!--Remove-->
-                    <Button x:Name="RemoveButton" Background="{ThemeResource AppForeground}" Style="{StaticResource AppRoundedButtonStyle}"
+                    <Button x:Name="RemoveButton" Background="{ThemeResource AppBackgroundLight}" Style="{StaticResource AppRoundedButtonStyle}"
                            Command="{x:Bind Remove}">
-                        <FontIcon FontSize="18" Glyph="&#xE108;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppText}"/>
+                        <FontIcon FontSize="18" Glyph="&#xE108;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource AppForeground}"/>
                     </Button>
 
                 </StackPanel>
@@ -70,7 +70,7 @@
                         IsEnabled="{x:Bind SelectionViewModel.SelectionUnNone, Mode=OneWay}">
                     <TextBlock TextTrimming="WordEllipsis" Text="{x:Bind SelectionViewModel.LayerName, Mode=OneWay}"/>
                 </ListViewItem>
-                <TextBlock x:Name="NamePlaceholderTextBlock" IsHitTestVisible="False" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource AppText}"
+                <TextBlock x:Name="NamePlaceholderTextBlock" IsHitTestVisible="False" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource AppForeground}"
                         Visibility="{x:Bind NameToVisibilityConverter(SelectionViewModel.LayerName), Mode=OneWay}"/>
 
 

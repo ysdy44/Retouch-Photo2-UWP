@@ -7,7 +7,7 @@
     <Style TargetType="local:ColorEllipse">
         <Setter Property="Width" Value="34"/>
         <Setter Property="Height" Value="34"/>
-        <Setter Property="BorderBrush" Value="{ThemeResource AppText}"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource AppForeground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:ColorEllipse">

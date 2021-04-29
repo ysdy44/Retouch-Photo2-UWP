@@ -6,7 +6,7 @@
 
     <Style TargetType="local:CheckControl">
         <Setter Property="Background" Value="{ThemeResource CheckBoxBackgroundUnchecked}" />
-        <Setter Property="Foreground" Value="{ThemeResource AppText}" />
+        <Setter Property="Foreground" Value="{ThemeResource AppForeground}" />
         <Setter Property="BorderBrush" Value="{ThemeResource CheckBoxBorderBrushUnchecked}" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="HorizontalAlignment" Value="Left" />

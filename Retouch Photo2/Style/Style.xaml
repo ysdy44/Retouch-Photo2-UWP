@@ -155,14 +155,14 @@
 
     <!--TextBlock-->
     <Style x:Key="AppTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{ThemeResource AppText}"/>
+        <Setter Property="Foreground" Value="{ThemeResource AppForeground}"/>
         <Setter Property="Margin" Value="4,4"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         <Setter Property="FontWeight" Value="Normal"/>
     </Style>
     <Style x:Key="AppTabTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{ThemeResource AppText}"/>
+        <Setter Property="Foreground" Value="{ThemeResource AppForeground}"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -459,7 +459,7 @@
         <Setter Property="FontWeight" Value="Normal" />
     </Style>
     <Style x:Key="AppOutlineButton" TargetType="Button" BasedOn="{StaticResource IconOutlineButtonBase}">
-        <Setter Property="BorderBrush" Value="{ThemeResource AppText}" />
+        <Setter Property="BorderBrush" Value="{ThemeResource AppForeground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -484,7 +484,7 @@
 
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppText}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppForeground}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
@@ -497,7 +497,7 @@
 
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppText}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppForeground}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
@@ -531,7 +531,7 @@
                               ContentTemplate="{TemplateBinding ContentTemplate}"
                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                              Foreground="{ThemeResource AppText}"
+                              Foreground="{ThemeResource AppForeground}"
                                />
 
                     </Border>
@@ -627,7 +627,7 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="Foreground" Value="{ThemeResource TextControlForeground}"/>
-        <Setter Property="Background" Value="{ThemeResource AppFill}"/>
+        <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>

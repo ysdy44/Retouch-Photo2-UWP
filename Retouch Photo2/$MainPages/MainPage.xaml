@@ -19,17 +19,17 @@
     </Page.Transitions>
 
 
-    <Grid x:Name="RootGrid" Background="{ThemeResource AppBackground}">
+    <Grid x:Name="RootGrid" Background="{ThemeResource AppBackgroundDark}">
 
 
         <!--Extensions-->
-        <elements:ApplicationTitleBarExtension x:Name="ApplicationView" TitleBarColor="{ThemeResource AppTitleColor}" 
+        <elements:ApplicationTitleBarExtension x:Name="ApplicationView" TitleBarColor="{ThemeResource AppBackgroundColorMediumLight}" 
                                                AccentTitleBarColor="{ThemeResource SystemAccentColor}"
                                                IsAccent="{x:Bind MainLayout.IsAccent, Mode=OneWay}"
                                                />
 
         <!--Developer-->
-        <developerTools:AlignmentGrid Opacity="0.15" HorizontalStep="20" VerticalStep="20" LineBrush="Gray" Visibility="{ThemeResource AppGridVisibility}" />
+        <developerTools:AlignmentGrid Opacity="0.12" HorizontalStep="20" VerticalStep="20" LineBrush="Gray" Visibility="{ThemeResource AppGridVisibility}" />
 
 
         <elements:MainLayout x:Name="MainLayout"
@@ -47,7 +47,7 @@
 
                     <StackPanel.Children>
 
-                        <TextBlock x:Name="InitialTipTextBlock" HorizontalAlignment="Center" Foreground="{ThemeResource AppText}"/>
+                        <TextBlock x:Name="InitialTipTextBlock" HorizontalAlignment="Center" Foreground="{ThemeResource AppForeground}"/>
                         <ContentControl Height="6"/>
 
                         <Button x:Name="InitialSampleButton" Style="{StaticResource AppAccentOutlineButton}">
@@ -193,7 +193,7 @@
                     <TextBlock Margin="2,8,4,0">
                         <Run x:Name="RenameTitleTextBlock" FontSize="16" FontWeight="Bold"/>
                         <LineBreak/>           
-                        <Run x:Name="RenameSubtitleTextBlock" FontSize="14" FontWeight="Normal" Foreground="{ThemeResource AppText}"/>
+                        <Run x:Name="RenameSubtitleTextBlock" FontSize="14" FontWeight="Normal" Foreground="{ThemeResource AppForeground}"/>
                     </TextBlock>
                     <Border HorizontalAlignment="Right">
                         <ListViewItem x:Name="RenameCloseButton" Padding="2,0" MinWidth="54" HorizontalContentAlignment="Center">
@@ -215,7 +215,7 @@
                     <TextBlock Margin="2,8,4,0">
                         <Run x:Name="DeleteTitleTextBlock" FontSize="16" FontWeight="Bold"/>
                         <LineBreak/>
-                        <Run x:Name="DeleteSubtitleTextBlock" FontSize="14" FontWeight="Normal" Foreground="{ThemeResource AppText}"/>
+                        <Run x:Name="DeleteSubtitleTextBlock" FontSize="14" FontWeight="Normal" Foreground="{ThemeResource AppForeground}"/>
                     </TextBlock>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <ListViewItem x:Name="DeletePrimaryButton" Padding="2,0" MinWidth="54" HorizontalContentAlignment="Center">
@@ -244,7 +244,7 @@
                     <TextBlock Margin="2,8,4,0">
                         <Run x:Name="DuplicateTitleTextBlock" FontSize="16" FontWeight="Bold"/>
                         <LineBreak/>
-                        <Run x:Name="DuplicateSubtitleTextBlock" FontSize="14" FontWeight="Normal" Foreground="{ThemeResource AppText}"/>
+                        <Run x:Name="DuplicateSubtitleTextBlock" FontSize="14" FontWeight="Normal" Foreground="{ThemeResource AppForeground}"/>
                     </TextBlock>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <ListViewItem x:Name="DuplicatePrimaryButton" Padding="2,0" MinWidth="54" HorizontalContentAlignment="Center">
@@ -276,7 +276,7 @@
             <StackPanel>
                 <ContentControl Height="2"/>
                 <TextBox x:Name="RenameTextBox" Margin="0" VerticalAlignment="Center" BorderThickness="0"/>
-                <TextBlock x:Name="TextBoxTipTextBlock" Visibility="Collapsed" FontSize="14" Foreground="{ThemeResource AppText}"/>
+                <TextBlock x:Name="TextBoxTipTextBlock" Visibility="Collapsed" FontSize="14" Foreground="{ThemeResource AppForeground}"/>
             </StackPanel>
         </elements:Dialog>
         <elements:Dialog x:Name="AddDialog" Grid.Row="1" Grid.RowSpan="2">

@@ -29,7 +29,7 @@
                                         <Setter Target = "RootGrid.BorderBrush" Value="{ThemeResource AppStroke}"/>
                                         <!--@Acrylic-->
                                         <Setter Target = "RootGrid.Background" 
-                                                apiContractNotPresent5:Value="{ThemeResource AppForeground}"
+                                                apiContractNotPresent5:Value="{ThemeResource AppBackgroundLight}"
                                                 apiContractPresent5:Value="{ThemeResource AppAcrylicElementBrush}"
                                                 />
 
@@ -115,7 +115,7 @@
                                             <Style TargetType="MenuFlyoutPresenter">
                                                 <Setter Property="Padding" Value="0"/>
                                                 <Setter Property="Margin" Value="0"/>
-                                                <Setter Property="Background" Value="{ThemeResource AppForeground}"/>
+                                                <Setter Property="Background" Value="{ThemeResource AppBackgroundLight}"/>
                                                 <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
                                             </Style>
                                         </MenuFlyout.MenuFlyoutPresenterStyle>
@@ -135,13 +135,13 @@
                                 <TextBlock x:Name="TitleTextBlock" Margin="16,0" FontWeight="Medium" TextTrimming="CharacterEllipsis" FontSize="20" Grid.ColumnSpan="3" TextWrapping="Wrap" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"
                                                Text="{TemplateBinding Title}"/>
 
-                                <ListViewItem x:Name="PinButton" Grid.Column="1" Padding="2" Width="40" MinWidth="30" MinHeight="30" HorizontalContentAlignment="Center" Foreground="{ThemeResource AppText}">
+                                <ListViewItem x:Name="PinButton" Grid.Column="1" Padding="2" Width="40" MinWidth="30" MinHeight="30" HorizontalContentAlignment="Center" Foreground="{ThemeResource AppForeground}">
                                     <FontIcon Glyph="&#xE840;" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </ListViewItem>
-                                <ListViewItem x:Name="OverlayButton" Grid.Column="2" Padding="2" Width="40" MinWidth="30" MinHeight="30" HorizontalContentAlignment="Center" Foreground="{ThemeResource AppText}">
+                                <ListViewItem x:Name="OverlayButton" Grid.Column="2" Padding="2" Width="40" MinWidth="30" MinHeight="30" HorizontalContentAlignment="Center" Foreground="{ThemeResource AppForeground}">
                                     <FontIcon Glyph="&#xF156;" FontSize="18" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </ListViewItem>
-                                <ListViewItem x:Name="CloseButton" Grid.Column="3" Visibility="Collapsed" Padding="2" Width="40" MinWidth="30" MinHeight="30" HorizontalContentAlignment="Center" Foreground="{ThemeResource AppText}">
+                                <ListViewItem x:Name="CloseButton" Grid.Column="3" Visibility="Collapsed" Padding="2" Width="40" MinWidth="30" MinHeight="30" HorizontalContentAlignment="Center" Foreground="{ThemeResource AppForeground}">
                                     <FontIcon Glyph="&#xF78A;" FontSize="14" FontWeight="Bold" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                                 </ListViewItem>
 

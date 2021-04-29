@@ -31,12 +31,12 @@
         </TextBlock>
 
         <TextBox x:Name="WidthTextBox" Grid.Column="1" Grid.Row="0" 
-                 FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                 FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackgroundDark}"
                  ui:TextBoxExtensions.ValidationMode="Forced"
                  ui:TextBoxExtensions.ValidationType="Decimal"
                  />
         <TextBox x:Name="HeightTextBox" Grid.Column="1" Grid.Row="2" 
-                 FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppFill}"
+                 FontSize="16" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource AppStroke}" Background="{ThemeResource AppBackgroundDark}"
                  ui:TextBoxExtensions.ValidationMode="Forced"
                  ui:TextBoxExtensions.ValidationType="Decimal"
                  />

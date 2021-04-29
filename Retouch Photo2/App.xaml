@@ -8,30 +8,19 @@
         <ResourceDictionary>
 
             <!--Theme-->
-            <!--           
-                AppForeground: Foreground Color,
-                AppBackground: Background Color,
-                AppBorderBrush: Border Color,
-            
-                AppFill: Panel Color,
-                AppStroke: Shadow Color,
-                AppText: Text Color,
-                AppLinearBrush: Linear Brush,
-            -->
             <ResourceDictionary.ThemeDictionaries>
 
                 <ResourceDictionary x:Key="Light">
 
-                    <Color x:Key="AppForegroundColor" >#FFFFFF</Color>
-                    <Color x:Key="AppBackgroundColor" >#EBEBED</Color>
-                    <Color x:Key="AppBorderBrushColor" >#BEBCC7</Color>
+                    <Color x:Key="AppBackgroundColorDark">#EBEBED</Color> 
+                    <Color x:Key="AppBackgroundColorMediumDark">#F0F0F0</Color> 
+                    <Color x:Key="AppBackgroundColor">#F8F8F8</Color>
+                    <Color x:Key="AppBackgroundColorMediumLight">#FCFCFC</Color>
+                    <Color x:Key="AppBackgroundColorLight">#FFFFFF</Color>
 
-                    <Color x:Key="AppFillColor" >#FFFFFF</Color>
+                    <Color x:Key="AppBorderBrushColor" >#33888888</Color>
                     <Color x:Key="AppStrokeColor" >#66817F91</Color>
-                    <Color x:Key="AppTextColor" >#AA000000</Color>
-
-                    <Color x:Key="AppTitleColor" >#FCFCFF</Color>
-                    <Color x:Key="AppAcrylicColor" >#E7E8E8</Color>
+                    <Color x:Key="AppForegroundColor" >#AA000000</Color>
 
                     <LinearGradientBrush x:Key="AppHorizontalShadowBrush" StartPoint="0,0.5" EndPoint="1,0.5">
                         <GradientStop Color="#22000000" Offset="0"/>
@@ -52,16 +41,15 @@
 
                 <ResourceDictionary x:Key="Dark">
 
-                    <Color x:Key="AppForegroundColor" >#1E1E1E</Color>
-                    <Color x:Key="AppBackgroundColor" >#0C0C0C</Color>
+                    <Color x:Key="AppBackgroundColorDark">#0C0C0C</Color>
+                    <Color x:Key="AppBackgroundColorMediumDark">#121212</Color>
+                    <Color x:Key="AppBackgroundColor">#141414</Color>
+                    <Color x:Key="AppBackgroundColorMediumLight">#161616</Color>
+                    <Color x:Key="AppBackgroundColorLight">#222323</Color>
+
                     <Color x:Key="AppBorderBrushColor" >#33888888</Color>
-
-                    <Color x:Key="AppFillColor" >#000000</Color>
                     <Color x:Key="AppStrokeColor" >#AA050005</Color>
-                    <Color x:Key="AppTextColor" >#BBFFFFFF</Color>
-
-                    <Color x:Key="AppTitleColor" >#191919</Color>
-                    <Color x:Key="AppAcrylicColor" >#111111</Color>
+                    <Color x:Key="AppForegroundColor" >#BBFFFFFF</Color>                   
 
                     <LinearGradientBrush x:Key="AppHorizontalShadowBrush" StartPoint="0,0.5" EndPoint="1,0.5">
                         <GradientStop Color="#66000000" Offset="0"/>
@@ -73,11 +61,11 @@
                         <GradientStop Color="#44000000" Offset="0.2"/>
                         <GradientStop Color="#00000000" Offset="1"/>
                     </LinearGradientBrush>
-
+                    
                     <Visibility x:Key="AppGridVisibility">Visible</Visibility>
                     <Visibility x:Key="AppShadowVisibility">Collapsed</Visibility>
                     <LightDismissOverlayMode x:Key="AppLightDismissOverlayMode">Off</LightDismissOverlayMode>
-
+                    
                 </ResourceDictionary>
 
             </ResourceDictionary.ThemeDictionaries>
