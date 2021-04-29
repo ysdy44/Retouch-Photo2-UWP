@@ -302,6 +302,9 @@
 
                     <!--Overflow-->
                     <Button x:Name="OverflowButton" Grid.Column="2" Style="{StaticResource AppCircleButtonStyle}">
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="OverflowToolTip" Placement="Bottom" Style="{StaticResource AppToolTipStyle}"/>
+                        </ToolTipService.ToolTip>
                         <Button.Flyout>
                             <Flyout x:Name="OverflowFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" Placement="Bottom" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
                                 <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">

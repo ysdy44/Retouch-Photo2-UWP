@@ -4,16 +4,9 @@ using Retouch_Photo2.Brushs;
 using Retouch_Photo2.Elements;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
-using Retouch_Photo2.Layers.Models;
-using Retouch_Photo2.Photos;
-using Retouch_Photo2.ViewModels;
-using System.Collections.Generic;
-using System.Numerics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Imaging;
-using Windows.Storage;
-using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -47,6 +40,7 @@ namespace Retouch_Photo2
                 this.FullScreenToolTip.Content = this.OverflowFullScreenControl.Content = resource.GetString("$DrawPage_FullScreen");
                 this.OverflowTipControl.Content = resource.GetString("$DrawPage_Tip");
             }
+            this.OverflowToolTip.Content = resource.GetString("$DrawPage_More");
 
             this.SetupDialog.Title = resource.GetString("$DrawPage_SetupDialog_Title");
             {
@@ -292,59 +286,6 @@ namespace Retouch_Photo2
                 this.DrawLayout.IsFullScreen = true;
                 this.UnFullScreenButton.Visibility = Visibility.Visible;
             }
-        }
-
-
-        //Gallery
-        private void ConstructGalleryDialog()
-        {
-            this.GalleryDialog.CloseButtonTapped += (s, e) => this.GalleryDialog.Hide();
-            this.GalleryDialog.PrimaryButtonClick += async (s, e) =>
-            {
-                //Files
-                IReadOnlyList<StorageFile> files = await FileUtil.PickMultipleImageFilesAsync(PickerLocationId.Desktop);
-                await this.CopyMultipleImageFilesAsync(files);
-            };
-        }
-        private async void ShowGalleryDialog()
-        {
-            Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
-            if (photo == null) return;
-
-            //History
-            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
-            this.ViewModel.HistoryPush(history);
-
-            //Transformer
-            Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
-
-            //Layer
-            Photocopier photocopier = photo.ToPhotocopier();
-            Layerage imageLayerage = Layerage.CreateByGuid();
-            ImageLayer imageLayer = new ImageLayer
-            {
-                Id = imageLayerage.Id,
-                Photocopier = photocopier,
-                IsSelected = true,
-                Transform = new Transform(transformerSource)
-            };
-            LayerBase.Instances.Add(imageLayerage.Id, imageLayer);
-
-            //Selection
-            this.SelectionViewModel.SetValue((layerage) =>
-            {
-                ILayer layer = layerage.Self;
-
-                layer.IsSelected = false;
-            });
-
-            //Mezzanine
-            LayerManager.Mezzanine(imageLayerage);
-
-            this.SelectionViewModel.SetMode();//Selection
-            LayerManager.ArrangeLayers();
-            LayerManager.ArrangeLayersBackground();
-            this.ViewModel.Invalidate();//Invalidate     
         }
 
 

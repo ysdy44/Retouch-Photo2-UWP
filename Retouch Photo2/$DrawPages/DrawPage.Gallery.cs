@@ -1,10 +1,15 @@
-﻿using Retouch_Photo2.Layers;
+﻿using FanKit.Transformers;
+using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
+using Retouch_Photo2.Layers.Models;
 using Retouch_Photo2.Photos;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -13,17 +18,16 @@ namespace Retouch_Photo2
     public sealed partial class DrawPage : Page
     {
 
-        //@Static       
-        private TaskCompletionSource<Photo> taskSource;
-
+        //TaskCompletionSource
+        private TaskCompletionSource<Photo> GalleryTaskSource;
 
         private async Task<Photo> ShowGalleryDialogFunc()
         {
             this.GalleryDialog.Show();
 
-            this.taskSource = new TaskCompletionSource<Photo>();
-            Photo resultPhoto = await this.taskSource.Task;
-            this.taskSource = null;
+            this.GalleryTaskSource = new TaskCompletionSource<Photo>();
+            Photo resultPhoto = await this.GalleryTaskSource.Task;
+            this.GalleryTaskSource = null;
             return resultPhoto;
         }
 
@@ -33,15 +37,75 @@ namespace Retouch_Photo2
         }
         private void PhotoItemClick(FrameworkElement element, Photo photo)
         {
-            if (this.taskSource != null && this.taskSource.Task.IsCanceled == false)
+            if (this.GalleryTaskSource != null && this.GalleryTaskSource.Task.IsCanceled == false)
             {
-                this.taskSource.TrySetResult(photo);
+                this.GalleryTaskSource.TrySetResult(photo);
             }
 
             this.GalleryDialog.Hide();
         }
 
 
+        //////////////////////////
+
+
+        //Gallery
+        private void ConstructGalleryDialog()
+        {
+            this.GalleryDialog.CloseButtonTapped += (s, e) => this.PhotoItemClick(null, null);
+            this.GalleryDialog.PrimaryButtonClick += async (s, e) =>
+            {
+                //Files
+                IReadOnlyList<StorageFile> files = await FileUtil.PickMultipleImageFilesAsync(PickerLocationId.Desktop);
+                await this.CopyMultipleImageFilesAsync(files);
+            };
+        }
+        private async void ShowGalleryDialog()
+        {
+            Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
+            if (photo == null) return;
+
+            //History
+            LayeragesArrangeHistory history = new LayeragesArrangeHistory(HistoryType.LayeragesArrange_AddLayer);
+            this.ViewModel.HistoryPush(history);
+
+            //Transformer
+            Transformer transformerSource = new Transformer(photo.Width, photo.Height, Vector2.Zero);
+
+            //Layer
+            Photocopier photocopier = photo.ToPhotocopier();
+            Layerage imageLayerage = Layerage.CreateByGuid();
+            ImageLayer imageLayer = new ImageLayer
+            {
+                Id = imageLayerage.Id,
+                Photocopier = photocopier,
+                IsSelected = true,
+                Transform = new Transform(transformerSource)
+            };
+            LayerBase.Instances.Add(imageLayerage.Id, imageLayer);
+
+            //Selection
+            this.SelectionViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                layer.IsSelected = false;
+            });
+
+            //Mezzanine
+            LayerManager.Mezzanine(imageLayerage);
+
+            this.SelectionViewModel.SetMode();//Selection
+            LayerManager.ArrangeLayers();
+            LayerManager.ArrangeLayersBackground();
+            this.ViewModel.Invalidate();//Invalidate     
+        }
+
+
+        //////////////////////////
+
+
+        //DragAndDrop
         private void ConstructDragAndDrop()
         {
             this.AllowDrop = true;
@@ -61,7 +125,7 @@ namespace Retouch_Photo2
             };
         }
 
-                 
+
         private async Task CopyMultipleImageFilesAsync(IReadOnlyList<StorageFile> files)
         {
             if (files == null) return;
