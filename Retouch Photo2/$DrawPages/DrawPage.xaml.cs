@@ -37,27 +37,27 @@ namespace Retouch_Photo2
 
 
         //@Static
-        /// <summary> Show <see cref="SetupDialog"/> </summary>
+        /// <summary> Show <see cref="DrawLayout.SetupDialog"/> </summary>
         public static Action ShowSetup;
-        /// <summary> Show <see cref="ExportDialog"/> </summary>
+        /// <summary> Show <see cref="DrawLayout.ExportDialog"/> </summary>
         public static Action ShowExport;
-        /// <summary> Show <see cref="RenameDialog"/> </summary>
+        /// <summary> Show <see cref="DrawLayout.RenameDialog"/> </summary>
         public static Action ShowRename;
         /// <summary> Show <see cref="DrawLayout.IsFullScreen"/> </summary>
         public static Action FullScreen;
-        /// <summary> Show <see cref="GalleryDialog"/> </summary>
+        /// <summary> Show <see cref="DrawLayout.GalleryDialog"/> </summary>
         public static Action ShowGallery;
+        
 
-
-        /// <summary> Show <see cref="GalleryDialog"/> </summary>
+        /// <summary> Show <see cref="DrawLayout.GalleryDialog"/> </summary>
         public static Func<Task<Photo>> ShowGalleryFunc;
 
-        /// <summary> Show <see cref="FillColorFlyout"/> </summary>
+        /// <summary> Show <see cref="DrawLayout.FillColorFlyout"/> </summary>
         public static Action<FrameworkElement, FrameworkElement> ShowFillColorFlyout;
-        /// <summary> Show <see cref="StrokeColorFlyout"/> </summary>
+        /// <summary> Show <see cref="DrawLayout.StrokeColorFlyout"/> </summary>
         public static Action<FrameworkElement, FrameworkElement> ShowStrokeColorFlyout;
 
-        /// <summary> Show <see cref="MoreFlyout"/> </summary>
+        /// <summary> Show <see cref="DrawLayout.MoreFlyout"/> </summary>
         public static Action<FrameworkElement> ShowMoreFlyout;
 
 
@@ -129,6 +129,10 @@ namespace Retouch_Photo2
             LayerManager.DragItemsDelta -= this.LayerDragItemsDelta;
             LayerManager.DragItemsCompleted -= this.LayerDragItemsCompleted;
 
+            //DrawLayout
+            TouchbarExtension.PickerBorder = null;
+            TouchbarExtension.SliderBorder = null;
+
             //Dialog
             DrawPage.ShowExport -= this.ShowExportDialog;
             DrawPage.ShowSetup -= this.ShowSetupDialog;
@@ -136,15 +140,11 @@ namespace Retouch_Photo2
             DrawPage.FullScreen -= this.FullScreenChanged;
             DrawPage.ShowGallery -= this.ShowGalleryDialog;
 
-            //DrawLayout
-            TouchbarExtension.PickerBorder = null;
-            TouchbarExtension.SliderBorder = null;
-
             //Gallery
-            this.GalleryGridView.ItemsSource = null;
-            DrawPage.ShowGalleryFunc = null;
+            this.GalleryGridView.ItemsSource = null; 
+            DrawPage.ShowGalleryFunc -= this.ShowGalleryDialogTask;
+            Photo.ItemClick -= this.ShowGalleryDialogTrySetResult;
             Photo.FlyoutShow -= this.PhotoFlyoutShow;
-            Photo.ItemClick -= this.PhotoItemClick;
 
             //Color
             DrawPage.ShowFillColorFlyout -= this.ShowFillColorFlyout2;
@@ -173,6 +173,10 @@ namespace Retouch_Photo2
             LayerManager.DragItemsDelta += this.LayerDragItemsDelta;
             LayerManager.DragItemsCompleted += this.LayerDragItemsCompleted;
 
+            //DrawLayout
+            TouchbarExtension.PickerBorder = this.DrawLayout.TouchbarPicker;
+            TouchbarExtension.SliderBorder = this.DrawLayout.TouchbarSlider;
+
             //Dialog
             DrawPage.ShowExport += this.ShowExportDialog;
             DrawPage.ShowSetup += this.ShowSetupDialog;
@@ -180,15 +184,11 @@ namespace Retouch_Photo2
             DrawPage.FullScreen += this.FullScreenChanged;
             DrawPage.ShowGallery += this.ShowGalleryDialog;
 
-            //DrawLayout
-            TouchbarExtension.PickerBorder = this.DrawLayout.TouchbarPicker;
-            TouchbarExtension.SliderBorder = this.DrawLayout.TouchbarSlider;
-
             //Gallery
             this.GalleryGridView.ItemsSource = Photo.InstancesCollection;
-            DrawPage.ShowGalleryFunc += this.ShowGalleryDialogFunc;
+            DrawPage.ShowGalleryFunc += this.ShowGalleryDialogTask;
+            Photo.ItemClick += this.ShowGalleryDialogTrySetResult;
             Photo.FlyoutShow += this.PhotoFlyoutShow;
-            Photo.ItemClick += this.PhotoItemClick;
 
             //Color
             DrawPage.ShowFillColorFlyout += this.ShowFillColorFlyout2;

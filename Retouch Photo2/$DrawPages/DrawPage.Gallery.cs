@@ -21,7 +21,7 @@ namespace Retouch_Photo2
         //TaskCompletionSource
         private TaskCompletionSource<Photo> GalleryTaskSource;
 
-        private async Task<Photo> ShowGalleryDialogFunc()
+        private async Task<Photo> ShowGalleryDialogTask()
         {
             this.GalleryDialog.Show();
 
@@ -31,17 +31,13 @@ namespace Retouch_Photo2
             return resultPhoto;
         }
 
-        private void PhotoFlyoutShow(FrameworkElement element, Photo photo)
-        {
-            this.BillboardCanvas.Show(element, photo);
-        }
-        private void PhotoItemClick(FrameworkElement element, Photo photo)
+        private void ShowGalleryDialogTrySetResult(FrameworkElement element, Photo photo)
         {
             if (this.GalleryTaskSource != null && this.GalleryTaskSource.Task.IsCanceled == false)
             {
                 this.GalleryTaskSource.TrySetResult(photo);
             }
-
+            
             this.GalleryDialog.Hide();
         }
 
@@ -52,7 +48,7 @@ namespace Retouch_Photo2
         //Gallery
         private void ConstructGalleryDialog()
         {
-            this.GalleryDialog.CloseButtonTapped += (s, e) => this.PhotoItemClick(null, null);
+            this.GalleryDialog.CloseButtonTapped += (s, e) => this.ShowGalleryDialogTrySetResult(null, null);
             this.GalleryDialog.PrimaryButtonClick += async (s, e) =>
             {
                 //Files
@@ -60,6 +56,14 @@ namespace Retouch_Photo2
                 await this.CopyMultipleImageFilesAsync(files);
             };
         }
+
+
+        private void PhotoFlyoutShow(FrameworkElement element, Photo photo)
+        {
+            this.BillboardCanvas.Show(element, photo);
+        }
+
+
         private async void ShowGalleryDialog()
         {
             Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
