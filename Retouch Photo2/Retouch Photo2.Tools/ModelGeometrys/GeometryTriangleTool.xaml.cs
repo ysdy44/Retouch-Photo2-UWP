@@ -139,7 +139,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.ConvertToCurvesToolTip.Content = resource.GetString("Tools_ConvertToCurves");
 
-            this.MoreCreateToolTip.Content = resource.GetString("Tools_More");
+            this.MoreToolTip.Content = resource.GetString("Tools_More");
         }
 
         //Center

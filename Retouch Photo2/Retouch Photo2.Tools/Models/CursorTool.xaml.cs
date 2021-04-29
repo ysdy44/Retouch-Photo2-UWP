@@ -304,7 +304,7 @@ namespace Retouch_Photo2.Tools.Models
 
             this.OperateToolTip.Content = resource.GetString("Menus_Operate");
 
-            this.MoreTransformToolTip.Content = resource.GetString("Tools_More");
+            this.MoreToolTip.Content = resource.GetString("Tools_More");
         }
 
     }

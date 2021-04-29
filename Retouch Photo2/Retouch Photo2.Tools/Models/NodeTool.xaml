@@ -88,11 +88,11 @@
 
         <Rectangle Grid.Column="11" Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 
-        <ListViewItem x:Name="MoreNodeButton" Grid.Column="12" Style="{StaticResource AppListViewItemStyle}">
+        <ListViewItem x:Name="MoreButton" Grid.Column="12" Style="{StaticResource AppListViewItemStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip x:Name="MoreNodeToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
+                <ToolTip x:Name="MoreToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
-            <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
+            <SymbolIcon Symbol="ShowBcc"/>
         </ListViewItem>
 
     </Grid>

@@ -51,7 +51,7 @@
 
         <ListViewItem x:Name="MoreButton" Grid.Column="6" Style="{StaticResource AppListViewItemStyle}">
             <ToolTipService.ToolTip>
-                <ToolTip x:Name="MoreTransformToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
+                <ToolTip x:Name="MoreToolTip" Placement="Top" IsOpen="{x:Bind IsOpen, Mode=OneWay}" Style="{StaticResource AppToolTipStyle}"/>
             </ToolTipService.ToolTip>
             <FontIcon Glyph="&#xE10C;" FontWeight="Bold" FontFamily="Segoe UI Symbol"/>
         </ListViewItem>

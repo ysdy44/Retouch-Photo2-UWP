@@ -45,7 +45,7 @@ namespace Retouch_Photo2.Tools.Models
         public ControlTemplate Icon => this.IconContentControl.Template;
         public FrameworkElement Page => this;
         public bool IsSelected { get; set; }
-        public bool IsOpen { get => this.MoreNodeToolTip.IsOpen; set => this.MoreNodeToolTip.IsOpen = value; }
+        public bool IsOpen { get => this.MoreToolTip.IsOpen; set => this.MoreToolTip.IsOpen = value; }
 
 
         //@Construct
@@ -63,13 +63,13 @@ namespace Retouch_Photo2.Tools.Models
             this.SharpButton.Tapped += (s, e) => this.Sharp();
             this.SmoothButton.Tapped += (s, e) => this.Smooth();
 
-            this.MoreNodeButton.Tapped += (s, e) =>
+            this.MoreButton.Tapped += (s, e) =>
             {
                 switch (this.SettingViewModel.DeviceLayoutType)
                 {
                     case DeviceLayoutType.PC:
                         this.PenFlyout.Width = double.NaN;
-                        this.Flyout.ShowAt(this.MoreNodeButton);
+                        this.Flyout.ShowAt(this.MoreButton);
                         break;
                     case DeviceLayoutType.Pad:
                         this.PenFlyout.Width = double.NaN;
@@ -348,7 +348,7 @@ namespace Retouch_Photo2.Tools.Models
             this.SharpTextBlock.Text = resource.GetString("Tools_Node_Sharp");
             this.SmoothTextBlock.Text = resource.GetString("Tools_Node_Smooth");
 
-            this.MoreNodeToolTip.Content = resource.GetString("Tools_Node_MoreNode");
+            this.MoreToolTip.Content = resource.GetString("Tools_More");
         }
 
 
