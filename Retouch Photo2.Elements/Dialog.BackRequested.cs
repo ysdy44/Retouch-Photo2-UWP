@@ -33,14 +33,20 @@ namespace Retouch_Photo2.Elements
         private void BackRequested(object sender, BackRequestedEventArgs e)
         {
             e.Handled = true;
-            this.Hide();
+            //this.Hide();
+            this.SecondaryButtonClick?.Invoke(this, null);//Delegate
         }
         private void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs e)
         {
+            e.Handled = true;
             switch (e.VirtualKey)
             {
                 case VirtualKey.Escape:
-                    this.Hide();
+                    //this.Hide();
+                    this.SecondaryButtonClick?.Invoke(this, null);//Delegate
+                    break;
+                case VirtualKey.Enter:
+                    this.PrimaryButtonClick?.Invoke(this, null);//Delegate
                     break;
             }
         }

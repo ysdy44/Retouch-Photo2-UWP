@@ -68,7 +68,7 @@ namespace Retouch_Photo2.Menus
             this.VisibilityTextBlock.Text = resource.GetString("Menus_Layer_Visibility");
             this.TagTypeTextBlock.Text = resource.GetString("Menus_Layer_TagType");
 
-            this.NamePlaceholderTextBlock.Text = resource.GetString("$DrawPage_RenameDialog_PlaceholderText");
+            this.NamePlaceholderTextBlock.Text = resource.GetString("Menus_Layer_Rename");
 
             this.AdjustmentTextBlock.Text = resource.GetString("Menus_Adjustment");
             this.AdjustmentDisableTextBlock.Text = resource.GetString("Menus_Adjustment_DisableTip");
