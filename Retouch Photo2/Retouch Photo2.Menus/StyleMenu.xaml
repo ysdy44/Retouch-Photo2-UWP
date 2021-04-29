@@ -158,16 +158,10 @@
                     </Grid.ColumnDefinitions>
 
                     <ListViewItem x:Name="DeleteStyleOKButton" Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource AppListViewItemStyle}">
-                        <ToolTipService.ToolTip>
-                            <ToolTip x:Name="DeleteStyleOKToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
-                        </ToolTipService.ToolTip>
                         <SymbolIcon Symbol="Accept"/>
                     </ListViewItem>
 
                     <ListViewItem x:Name="DeleteStyleCancelButton" Grid.Column="2" Style="{StaticResource AppListViewItemStyle}">
-                        <ToolTipService.ToolTip>
-                            <ToolTip x:Name="DeleteStyleCancelToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
-                        </ToolTipService.ToolTip>
                         <SymbolIcon Symbol="Cancel"/>
                     </ListViewItem>
 

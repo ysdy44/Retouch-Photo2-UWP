@@ -130,15 +130,14 @@
 <data name='$DrawPage_Snap' xml:space='preserve'><value>العض</value></data>
 <data name='$DrawPage_Ruler' xml:space='preserve'><value>مسطرة</value></data>
 <data name='$DrawPage_Tip' xml:space='preserve'><value>تلميح</value></data>
-<data name='$DrawPage_Gallery' xml:space='preserve'><value>صالة عرض</value></data>
-<data name='$DrawPage_WidthTip' xml:space='preserve'><value>عرض تخطيط التبديل</value></data>
 <data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>إعدادات المستند</value></data>
 <data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>مثبت على قماش</value></data>
 <data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>تصدير الى...</value></data>
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>جودة</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>تنسيق الملف</value></data>
-<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>إعادة تسمية الطبقة (الطبقات)</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>إضافة الصور)</value></data>
+<data name='$DrawPage_WidthTip' xml:space='preserve'><value>عرض تخطيط التبديل</value></data>
+<data name='$DrawPage_Gallery' xml:space='preserve'><value>صالة عرض</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>التكبير النسبي</value></data>
 <data name='More_Transform_SnapToTick' xml:space='preserve'><value>التقط إلى وضع علامة</value></data>
 <data name='More_Create' xml:space='preserve'><value>Создавать</value></data>
@@ -566,6 +565,7 @@
 <data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>ينسخ</value></data>
 <data name='$DrawPage_Export' xml:space='preserve'><value>يصدر</value></data>
 <data name='$DrawPage_FullScreen' xml:space='preserve'><value>تكبير الشاشة</value></data>
+<data name='$DrawPage_More' xml:space='preserve'><value>أكثر</value></data>
 <data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>يلغي</value></data>
 <data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>موافق</value></data>
 <data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>عرض</value></data>
@@ -574,6 +574,7 @@
 <data name='$DrawPage_ExportDialog_Primary' xml:space='preserve'><value>يصدر</value></data>
 <data name='$DrawPage_ExportDialog_SizePicker_Width' xml:space='preserve'><value>عرض</value></data>
 <data name='$DrawPage_ExportDialog_SizePicker_Height' xml:space='preserve'><value>ارتفاع</value></data>
+<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>إعادة تسمية</value></data>
 <data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>أدخل اسمًا هنا.</value></data>
 <data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>يلغي</value></data>
 <data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>إعادة تسمية</value></data>
@@ -591,14 +592,12 @@
 <data name='Tools_Brush_Type_None' xml:space='preserve'><value>لا أحد</value></data>
 <data name='Tools_Brush_Type_Color' xml:space='preserve'><value>اللون</value></data>
 <data name='Tools_Brush_Type_Image' xml:space='preserve'><value>صورة</value></data>
-<data name='Tools_Brush_Brush' xml:space='preserve'><value>فرشاة</value></data>
 <data name='Tools_Brush_Extend_Mirror' xml:space='preserve'><value>مرآة</value></data>
 <data name='Tools_Brush_Stop_Remove' xml:space='preserve'><value>يزيل</value></data>
 <data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value>ينسخ</value></data>
 <data name='Tools_GeometryRectangle' xml:space='preserve'><value>مستطيل</value></data>
 <data name='Tools_GeometryEllipse' xml:space='preserve'><value>الشكل البيضاوي</value></data>
 <data name='Tools_Node_Remove' xml:space='preserve'><value>يزيل</value></data>
-<data name='Tools_Node_MoreNode' xml:space='preserve'><value>أكثر</value></data>
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>زاوية</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>نص فني</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>نص الإطار</value></data>
@@ -663,11 +662,13 @@
 <data name='Menus_Operate' xml:space='preserve'><value>العمل</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>ضربة</value></data>
 <data name='Menus_Close' xml:space='preserve'><value>خلف</value></data>
+<data name='Menus_More' xml:space='preserve'><value>أكثر</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>محول</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>عرض</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>ارتفاع</value></data>
 <data name='Menus_Color' xml:space='preserve'><value>اللون</value></data>
 <data name='Menus_Layer_Opacity' xml:space='preserve'><value>العتامة</value></data>
+<data name='Menus_Layer_Rename' xml:space='preserve'><value>أدخل اسمًا هنا.</value></data>
 <data name='Edits_Edit' xml:space='preserve'><value>يحرر</value></data>
 <data name='Edits_Edit_Duplicate' xml:space='preserve'><value>ينسخ</value></data>
 <data name='Edits_Edit_Copy' xml:space='preserve'><value>ينسخ</value></data>

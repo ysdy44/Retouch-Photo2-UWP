@@ -130,15 +130,14 @@
 <data name='$DrawPage_Snap' xml:space='preserve'><value>Chasquido</value></data>
 <data name='$DrawPage_Ruler' xml:space='preserve'><value>Gobernante</value></data>
 <data name='$DrawPage_Tip' xml:space='preserve'><value>Consejo</value></data>
-<data name='$DrawPage_Gallery' xml:space='preserve'><value>Galería</value></data>
-<data name='$DrawPage_WidthTip' xml:space='preserve'><value>Ancho de diseño del interruptor</value></data>
 <data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>Configuración de documentos</value></data>
 <data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>Anclado al lienzo</value></data>
 <data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>Exportar a...</value></data>
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>Calidad</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>Formato de archivo</value></data>
-<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>Cambiar el nombre de la (s) capa (s)</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>Agregar fotos)</value></data>
+<data name='$DrawPage_WidthTip' xml:space='preserve'><value>Ancho de diseño del interruptor</value></data>
+<data name='$DrawPage_Gallery' xml:space='preserve'><value>Galería</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>Zoom proporcional</value></data>
 <data name='More_Transform_SnapToTick' xml:space='preserve'><value>Ajustar al tic</value></data>
 <data name='More_Create' xml:space='preserve'><value></value></data>
@@ -566,6 +565,7 @@
 <data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>Duplicar</value></data>
 <data name='$DrawPage_Export' xml:space='preserve'><value>Exportar</value></data>
 <data name='$DrawPage_FullScreen' xml:space='preserve'><value>Pantalla completa</value></data>
+<data name='$DrawPage_More' xml:space='preserve'><value>Más</value></data>
 <data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>Cancelar</value></data>
 <data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>OK</value></data>
 <data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>Ancho</value></data>
@@ -574,6 +574,7 @@
 <data name='$DrawPage_ExportDialog_Primary' xml:space='preserve'><value>Exportar</value></data>
 <data name='$DrawPage_ExportDialog_SizePicker_Width' xml:space='preserve'><value>Ancho</value></data>
 <data name='$DrawPage_ExportDialog_SizePicker_Height' xml:space='preserve'><value>Altura</value></data>
+<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>Rebautizar</value></data>
 <data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>Ingrese un nombre aquí.</value></data>
 <data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>Cancelar</value></data>
 <data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>Rebautizar</value></data>
@@ -591,14 +592,12 @@
 <data name='Tools_Brush_Type_None' xml:space='preserve'><value>Ninguno</value></data>
 <data name='Tools_Brush_Type_Color' xml:space='preserve'><value>Color</value></data>
 <data name='Tools_Brush_Type_Image' xml:space='preserve'><value>Imagen</value></data>
-<data name='Tools_Brush_Brush' xml:space='preserve'><value>Cepillo</value></data>
 <data name='Tools_Brush_Extend_Mirror' xml:space='preserve'><value>Espejo</value></data>
 <data name='Tools_Brush_Stop_Remove' xml:space='preserve'><value>Eliminar</value></data>
 <data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value>Dupdo</value></data>
 <data name='Tools_GeometryRectangle' xml:space='preserve'><value>Rectángulo</value></data>
 <data name='Tools_GeometryEllipse' xml:space='preserve'><value>Elipse</value></data>
 <data name='Tools_Node_Remove' xml:space='preserve'><value>Eliminar</value></data>
-<data name='Tools_Node_MoreNode' xml:space='preserve'><value>Más</value></data>
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>Ángulo</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>Texto Artístico</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>Marco de texto</value></data>
@@ -663,11 +662,13 @@
 <data name='Menus_Operate' xml:space='preserve'><value>Funcionar</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>Golpe</value></data>
 <data name='Menus_Close' xml:space='preserve'><value>atrás</value></data>
+<data name='Menus_More' xml:space='preserve'><value>Más</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>Transformador</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>Ancho</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>Altura</value></data>
 <data name='Menus_Color' xml:space='preserve'><value>Color</value></data>
 <data name='Menus_Layer_Opacity' xml:space='preserve'><value>Opacidad</value></data>
+<data name='Menus_Layer_Rename' xml:space='preserve'><value>Ingrese un nombre aquí.</value></data>
 <data name='Edits_Edit' xml:space='preserve'><value>Editar</value></data>
 <data name='Edits_Edit_Duplicate' xml:space='preserve'><value>Duplicar</value></data>
 <data name='Edits_Edit_Copy' xml:space='preserve'><value>Dupdo</value></data>

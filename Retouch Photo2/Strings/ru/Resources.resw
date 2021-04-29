@@ -130,15 +130,14 @@
 <data name='$DrawPage_Snap' xml:space='preserve'><value>Привязка</value></data>
 <data name='$DrawPage_Ruler' xml:space='preserve'><value>Линейка</value></data>
 <data name='$DrawPage_Tip' xml:space='preserve'><value>Кончик</value></data>
-<data name='$DrawPage_Gallery' xml:space='preserve'><value>Галерея</value></data>
-<data name='$DrawPage_WidthTip' xml:space='preserve'><value>Переключить ширину макета</value></data>
 <data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>Параметры документа</value></data>
 <data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>Прикреплен к холсту</value></data>
 <data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>Экспортировать в...</value></data>
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>Качественный</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>Формат файла</value></data>
-<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>Переименовать слой (и)</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>Добавить фотографии)</value></data>
+<data name='$DrawPage_WidthTip' xml:space='preserve'><value>Переключить ширину макета</value></data>
+<data name='$DrawPage_Gallery' xml:space='preserve'><value>Галерея</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>Пропорциональный зум</value></data>
 <data name='More_Transform_SnapToTick' xml:space='preserve'><value>Привязать к отметке</value></data>
 <data name='More_Create' xml:space='preserve'><value></value></data>
@@ -566,6 +565,7 @@
 <data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>Дубликат</value></data>
 <data name='$DrawPage_Export' xml:space='preserve'><value>Экспорт</value></data>
 <data name='$DrawPage_FullScreen' xml:space='preserve'><value>Полноэкранный</value></data>
+<data name='$DrawPage_More' xml:space='preserve'><value>Более</value></data>
 <data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>Отмена</value></data>
 <data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>Ok</value></data>
 <data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>Ширина</value></data>
@@ -574,6 +574,7 @@
 <data name='$DrawPage_ExportDialog_Primary' xml:space='preserve'><value>Экспорт</value></data>
 <data name='$DrawPage_ExportDialog_SizePicker_Width' xml:space='preserve'><value>Ширина</value></data>
 <data name='$DrawPage_ExportDialog_SizePicker_Height' xml:space='preserve'><value>Высота</value></data>
+<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>Переименовать</value></data>
 <data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>Введите здесь имя.</value></data>
 <data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>Отмена</value></data>
 <data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>Переименовать</value></data>
@@ -591,14 +592,12 @@
 <data name='Tools_Brush_Type_None' xml:space='preserve'><value>Никто</value></data>
 <data name='Tools_Brush_Type_Color' xml:space='preserve'><value>Цвет</value></data>
 <data name='Tools_Brush_Type_Image' xml:space='preserve'><value>Изображение</value></data>
-<data name='Tools_Brush_Brush' xml:space='preserve'><value>Щетка</value></data>
 <data name='Tools_Brush_Extend_Mirror' xml:space='preserve'><value>Зеркало</value></data>
 <data name='Tools_Brush_Stop_Remove' xml:space='preserve'><value>Удалять</value></data>
 <data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value>Копировать</value></data>
 <data name='Tools_GeometryRectangle' xml:space='preserve'><value>Прямоугольник</value></data>
 <data name='Tools_GeometryEllipse' xml:space='preserve'><value>Эллипс</value></data>
 <data name='Tools_Node_Remove' xml:space='preserve'><value>Удалять</value></data>
-<data name='Tools_Node_MoreNode' xml:space='preserve'><value>Более</value></data>
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>Угол</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>Художественный текст</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>Текст рамки</value></data>
@@ -663,11 +662,13 @@
 <data name='Menus_Operate' xml:space='preserve'><value>Работать</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>Гладить</value></data>
 <data name='Menus_Close' xml:space='preserve'><value>Назад</value></data>
+<data name='Menus_More' xml:space='preserve'><value>Более</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>Трансформатор</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>Ширина</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>Высота</value></data>
 <data name='Menus_Color' xml:space='preserve'><value>Цвет</value></data>
 <data name='Menus_Layer_Opacity' xml:space='preserve'><value>Непрозрачность</value></data>
+<data name='Menus_Layer_Rename' xml:space='preserve'><value>Введите здесь имя.</value></data>
 <data name='Edits_Edit' xml:space='preserve'><value>Редактировать</value></data>
 <data name='Edits_Edit_Duplicate' xml:space='preserve'><value>Дубликат</value></data>
 <data name='Edits_Edit_Copy' xml:space='preserve'><value>Копировать</value></data>

@@ -151,7 +151,7 @@ namespace Retouch_Photo2.Menus
             this.RenameStyleCategoryControl.Content = "Rename style category";
             this.DeleteStyleCategoryControl.Content = "Delete style category";
 
-            this.MoreToolTip.Content = resource.GetString("Menu_More");
+            this.MoreToolTip.Content = resource.GetString("Menus_More");
         }
 
         private void SetStyle(IStyle style)

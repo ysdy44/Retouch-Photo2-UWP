@@ -130,15 +130,14 @@
 <data name='$DrawPage_Snap' xml:space='preserve'><value>吸附</value></data>
 <data name='$DrawPage_Ruler' xml:space='preserve'><value>标尺</value></data>
 <data name='$DrawPage_Tip' xml:space='preserve'><value>提示</value></data>
-<data name='$DrawPage_Gallery' xml:space='preserve'><value>图库</value></data>
-<data name='$DrawPage_WidthTip' xml:space='preserve'><value>切换布局宽度</value></data>
 <data name='$DrawPage_SetupDialog_Title' xml:space='preserve'><value>文档 设定</value></data>
 <data name='$DrawPage_SetupDialog_Anchor' xml:space='preserve'><value>锚定到画布</value></data>
 <data name='$DrawPage_ExportDialog_Title' xml:space='preserve'><value>导出到...</value></data>
 <data name='$DrawPage_ExportDialog_Quality' xml:space='preserve'><value>质量</value></data>
 <data name='$DrawPage_ExportDialog_FileFormat' xml:space='preserve'><value>文件格式</value></data>
-<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>重命名图层</value></data>
 <data name='$DrawPage_GalleryDialog_Primary' xml:space='preserve'><value>添加图片</value></data>
+<data name='$DrawPage_WidthTip' xml:space='preserve'><value>切换布局宽度</value></data>
+<data name='$DrawPage_Gallery' xml:space='preserve'><value>图库</value></data>
 <data name='More_Transform_Ratio' xml:space='preserve'><value>等比例缩放</value></data>
 <data name='More_Transform_SnapToTick' xml:space='preserve'><value>吸附到刻度</value></data>
 <data name='More_Create' xml:space='preserve'><value>创建</value></data>
@@ -566,6 +565,7 @@
 <data name='$MainPage_Duplicate_Primary' xml:space='preserve'><value>副本</value></data>
 <data name='$DrawPage_Export' xml:space='preserve'><value>导出</value></data>
 <data name='$DrawPage_FullScreen' xml:space='preserve'><value>全屏</value></data>
+<data name='$DrawPage_More' xml:space='preserve'><value>更多</value></data>
 <data name='$DrawPage_SetupDialog_Close' xml:space='preserve'><value>取消</value></data>
 <data name='$DrawPage_SetupDialog_Primary' xml:space='preserve'><value>确定</value></data>
 <data name='$DrawPage_SetupDialog_SizePicker_Width' xml:space='preserve'><value>宽度</value></data>
@@ -574,6 +574,7 @@
 <data name='$DrawPage_ExportDialog_Primary' xml:space='preserve'><value>导出</value></data>
 <data name='$DrawPage_ExportDialog_SizePicker_Width' xml:space='preserve'><value>宽度</value></data>
 <data name='$DrawPage_ExportDialog_SizePicker_Height' xml:space='preserve'><value>高度</value></data>
+<data name='$DrawPage_RenameDialog_Title' xml:space='preserve'><value>重命名</value></data>
 <data name='$DrawPage_RenameDialog_PlaceholderText' xml:space='preserve'><value>在此输入名字。</value></data>
 <data name='$DrawPage_RenameDialog_Close' xml:space='preserve'><value>取消</value></data>
 <data name='$DrawPage_RenameDialog_Primary' xml:space='preserve'><value>重命名</value></data>
@@ -591,14 +592,12 @@
 <data name='Tools_Brush_Type_None' xml:space='preserve'><value>无</value></data>
 <data name='Tools_Brush_Type_Color' xml:space='preserve'><value>颜色</value></data>
 <data name='Tools_Brush_Type_Image' xml:space='preserve'><value>图像</value></data>
-<data name='Tools_Brush_Brush' xml:space='preserve'><value>笔刷</value></data>
 <data name='Tools_Brush_Extend_Mirror' xml:space='preserve'><value>镜像</value></data>
 <data name='Tools_Brush_Stop_Remove' xml:space='preserve'><value>移除</value></data>
 <data name='Tools_Brush_Stop_Copy' xml:space='preserve'><value>复制</value></data>
 <data name='Tools_GeometryRectangle' xml:space='preserve'><value>矩形</value></data>
 <data name='Tools_GeometryEllipse' xml:space='preserve'><value>椭圆</value></data>
 <data name='Tools_Node_Remove' xml:space='preserve'><value>移除</value></data>
-<data name='Tools_Node_MoreNode' xml:space='preserve'><value>更多</value></data>
 <data name='Tools_Node_NodeMode_Restriction_Angle' xml:space='preserve'><value>角度</value></data>
 <data name='Tools_TextArtistic' xml:space='preserve'><value>艺术文本</value></data>
 <data name='Tools_TextFrame' xml:space='preserve'><value>边框文本</value></data>
@@ -663,11 +662,13 @@
 <data name='Menus_Operate' xml:space='preserve'><value>操作</value></data>
 <data name='Menus_Stroke' xml:space='preserve'><value>描边</value></data>
 <data name='Menus_Close' xml:space='preserve'><value>返回</value></data>
+<data name='Menus_More' xml:space='preserve'><value>更多</value></data>
 <data name='Menus_Transformer' xml:space='preserve'><value>变换</value></data>
 <data name='Menus_Transformer_Width' xml:space='preserve'><value>宽度</value></data>
 <data name='Menus_Transformer_Height' xml:space='preserve'><value>高度</value></data>
 <data name='Menus_Color' xml:space='preserve'><value>颜色</value></data>
 <data name='Menus_Layer_Opacity' xml:space='preserve'><value>不透明度</value></data>
+<data name='Menus_Layer_Rename' xml:space='preserve'><value>在此输入名字。</value></data>
 <data name='Edits_Edit' xml:space='preserve'><value>编辑</value></data>
 <data name='Edits_Edit_Duplicate' xml:space='preserve'><value>副本</value></data>
 <data name='Edits_Edit_Copy' xml:space='preserve'><value>复制</value></data>
