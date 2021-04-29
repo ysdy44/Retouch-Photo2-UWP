@@ -224,55 +224,6 @@ namespace Retouch_Photo2
         }
 
 
-        //Rename
-        private void ConstructRenameDialog()
-        {
-            this.RenameDialog.SecondaryButtonClick += (sender, args) => this.RenameDialog.Hide();
-            this.RenameDialog.PrimaryButtonClick += (_, __) =>
-            {
-                this.RenameDialog.Hide();
-                string name = this.RenameTextBox.Text;
-
-                //History
-                LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetName);
-
-                //Selection
-                this.SelectionViewModel.LayerName = name;
-                this.SelectionViewModel.SetValue((layerage) =>
-                {
-                    ILayer layer = layerage.Self;
-
-                    if (layer.Name != name)
-                    {
-                        //History
-                        var previous = layer.Name;
-                        history.UndoAction += () =>
-                        {
-                            layer.Name = previous;
-                        };
-
-                        layer.Name = name;
-                    }
-                });
-
-                //History
-                this.ViewModel.HistoryPush(history);
-            };
-
-            this.RenameTextBox.Loaded += (s, e) => this.RenameTextBox.Focus(FocusState.Programmatic);
-        }
-        private void ShowRenameDialog()
-        {
-            this.LayerFlyout.Hide();
-
-            this.RenameDialog.Show();
-
-            this.RenameTextBox.Text = this.SelectionViewModel.LayerName;
-            this.RenameTextBox.SelectAll();
-            this.RenameTextBox.Focus(FocusState.Programmatic);
-        }
-
-
         //FullScreen
         private void FullScreenChanged()
         {

@@ -1,7 +1,12 @@
 ﻿using Retouch_Photo2.Elements;
+using Retouch_Photo2.Historys;
+using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
+using System;
 using System.Numerics;
+using System.Threading.Tasks;
 using Windows.Foundation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2
@@ -9,6 +14,88 @@ namespace Retouch_Photo2
     public sealed partial class DrawPage : Page
     {
 
+        //TaskCompletionSource
+        private TaskCompletionSource<string> RenameTaskSource;
+
+        private async Task<string> ShowRenameDialogTask(string placeholderText)
+        {
+            this.RenameDialog.Show();
+
+            this.RenameTextBox.Text = placeholderText;
+            this.RenameTextBox.SelectAll();
+            this.RenameTextBox.Focus(FocusState.Programmatic);
+
+            this.RenameTaskSource = new TaskCompletionSource<string>();
+            string resultName = await this.RenameTaskSource.Task;
+            this.RenameTaskSource = null;
+            return resultName;
+        }
+
+        private void RenameDialogTrySetResult(FrameworkElement element, string name)
+        {
+            if (this.RenameTaskSource != null && this.RenameTaskSource.Task.IsCanceled == false)
+            {
+                this.RenameTaskSource.TrySetResult(name);
+            }
+
+            this.RenameDialog.Hide();
+        }
+
+
+        //////////////////////////
+
+
+        //Rename
+        private void ConstructRenameDialog()
+        {
+            this.RenameDialog.SecondaryButtonClick += (s, e) => this.RenameDialogTrySetResult(null, null);
+            this.RenameDialog.PrimaryButtonClick += (s, e) =>
+            {
+                this.RenameDialog.Focus(FocusState.Programmatic);
+                string text = this.RenameTextBox.Text;
+                this.RenameDialogTrySetResult(this.RenameTextBox, text);
+            };
+            this.RenameTextBox.Loaded += (s, e) => this.RenameTextBox.Focus(FocusState.Programmatic);
+        }
+
+
+        private async void ShowRenameDialog()
+        {
+            string placeholderText = this.SelectionViewModel.LayerName;
+            string name = await this.ShowRenameDialogTask(placeholderText);
+            if (string.IsNullOrEmpty(name)) return;
+
+            //History
+            LayersPropertyHistory history = new LayersPropertyHistory(HistoryType.LayersProperty_SetName);
+
+            //Selection
+            this.SelectionViewModel.LayerName = name;
+            this.SelectionViewModel.SetValue((layerage) =>
+            {
+                ILayer layer = layerage.Self;
+
+                if (layer.Name != name)
+                {
+                    //History
+                    var previous = layer.Name;
+                    history.UndoAction += () =>
+                    {
+                        layer.Name = previous;
+                    };
+
+                    layer.Name = name;
+                }
+            });
+
+            //History
+            this.ViewModel.HistoryPush(history);
+        }
+
+
+        //////////////////////////
+
+
+        //Transition
         /// <summary> The transition data. </summary>
         Rect? _lockSourceRect;
 

@@ -47,10 +47,12 @@ namespace Retouch_Photo2
         public static Action FullScreen;
         /// <summary> Show <see cref="DrawLayout.GalleryDialog"/> </summary>
         public static Action ShowGallery;
-        
+
 
         /// <summary> Show <see cref="DrawLayout.GalleryDialog"/> </summary>
         public static Func<Task<Photo>> ShowGalleryFunc;
+        /// <summary> Show <see cref="DrawLayout.RenameDialog"/> </summary>
+        public static Func<string, Task<string>> ShowRenameFunc;
 
         /// <summary> Show <see cref="DrawLayout.FillColorFlyout"/> </summary>
         public static Action<FrameworkElement, FrameworkElement> ShowFillColorFlyout;
@@ -141,10 +143,13 @@ namespace Retouch_Photo2
             DrawPage.ShowGallery -= this.ShowGalleryDialog;
 
             //Gallery
-            this.GalleryGridView.ItemsSource = null; 
+            this.GalleryGridView.ItemsSource = null;
             DrawPage.ShowGalleryFunc -= this.ShowGalleryDialogTask;
-            Photo.ItemClick -= this.ShowGalleryDialogTrySetResult;
+            Photo.ItemClick -= this.GalleryDialogTrySetResult;
             Photo.FlyoutShow -= this.PhotoFlyoutShow;
+
+            //Rename
+            DrawPage.ShowRenameFunc -= this.ShowRenameDialogTask;
 
             //Color
             DrawPage.ShowFillColorFlyout -= this.ShowFillColorFlyout2;
@@ -187,8 +192,11 @@ namespace Retouch_Photo2
             //Gallery
             this.GalleryGridView.ItemsSource = Photo.InstancesCollection;
             DrawPage.ShowGalleryFunc += this.ShowGalleryDialogTask;
-            Photo.ItemClick += this.ShowGalleryDialogTrySetResult;
+            Photo.ItemClick += this.GalleryDialogTrySetResult;
             Photo.FlyoutShow += this.PhotoFlyoutShow;
+
+            //Rename
+            DrawPage.ShowRenameFunc += this.ShowRenameDialogTask;
 
             //Color
             DrawPage.ShowFillColorFlyout += this.ShowFillColorFlyout2;

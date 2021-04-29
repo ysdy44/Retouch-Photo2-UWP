@@ -31,7 +31,7 @@ namespace Retouch_Photo2
             return resultPhoto;
         }
 
-        private void ShowGalleryDialogTrySetResult(FrameworkElement element, Photo photo)
+        private void GalleryDialogTrySetResult(FrameworkElement element, Photo photo)
         {
             if (this.GalleryTaskSource != null && this.GalleryTaskSource.Task.IsCanceled == false)
             {
@@ -48,7 +48,7 @@ namespace Retouch_Photo2
         //Gallery
         private void ConstructGalleryDialog()
         {
-            this.GalleryDialog.CloseButtonTapped += (s, e) => this.ShowGalleryDialogTrySetResult(null, null);
+            this.GalleryDialog.CloseButtonTapped += (s, e) => this.GalleryDialogTrySetResult(null, null);
             this.GalleryDialog.PrimaryButtonClick += async (s, e) =>
             {
                 //Files
@@ -66,7 +66,7 @@ namespace Retouch_Photo2
 
         private async void ShowGalleryDialog()
         {
-            Photo photo = await Retouch_Photo2.DrawPage.ShowGalleryFunc?.Invoke();
+            Photo photo = await this.ShowGalleryDialogTask();
             if (photo == null) return;
 
             //History
