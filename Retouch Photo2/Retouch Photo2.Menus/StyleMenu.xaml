@@ -8,13 +8,72 @@
     mc:Ignorable="d"
     d:DesignWidth="200"
     d:DesignHeight="400"
-    >
+   >
 
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="StyleCategoryNamesFlyout" Placement="Bottom" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ListView x:Name="StyleCategoryNamesListView" IsItemClickEnabled="True" SelectionMode="Single"
+            <ListView x:Name="ListView" IsItemClickEnabled="True" SelectionMode="Single"
                        ItemsSource="{x:Bind StyleCategoryNames}"/>
+        </Flyout>
+        <Flyout x:Name="MoreFlyout" Placement="Bottom" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
+            <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
+                <StackPanel>
+                    <!--Style-->
+                    <TextBlock x:Name="StyleTextBlock" FontWeight="Bold" Style="{StaticResource AppTextBlockStyle}"/>
+                    <!--AddStyle-->
+                    <ListViewItem x:Name="AddStyleButton">
+                        <ContentControl x:Name="AddStyleControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <SymbolIcon Symbol="Add"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <!--RenameStyle-->
+                    <ListViewItem x:Name="RenameStyleButton">
+                        <ContentControl x:Name="RenameStyleControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xE104;" FontSize="20" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <!--DeleteStyle-->
+                    <ListViewItem x:Name="DeleteStyleButton">
+                        <ContentControl x:Name="DeleteStyleControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xE107;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                    <!--StyleCategory-->
+                    <TextBlock x:Name="StyleCategoryTextBlock" FontWeight="Bold" Style="{StaticResource AppTextBlockStyle}"/>
+                    <!--AddStyleCategory-->
+                    <ListViewItem x:Name="AddStyleCategoryButton">
+                        <ContentControl x:Name="AddStyleCategoryControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <SymbolIcon Symbol="Add"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <!--RenameStyleCategory-->
+                    <ListViewItem x:Name="RenameStyleCategoryButton">
+                        <ContentControl x:Name="RenameStyleCategoryControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xE104;" FontSize="20" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                    <!--DeleteStyleCategory-->
+                    <ListViewItem x:Name="DeleteStyleCategoryButton">
+                        <ContentControl x:Name="DeleteStyleCategoryControl" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xE107;" FontSize="22" FontWeight="Normal" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </ListViewItem>
+                </StackPanel>
+            </ScrollViewer>
         </Flyout>
     </UserControl.Resources>
 
@@ -30,18 +89,14 @@
                 <!--Normal-->
                 <VisualState x:Name="Normal"/>
 
-                <!--Writable-->
-                <VisualState x:Name="Writable">
+                <!--DeleteStyle-->
+                <VisualState x:Name="DeleteStyleState">
                     <VisualState.Setters>
                         <Setter Target = "GridView.SelectionMode" Value="Multiple"/>
                         <Setter Target = "GridView.IsItemClickEnabled" Value="False"/>
 
-                        <Setter Target = "StyleCategoryNamesButton.Visibility" Value="Collapsed"/>
-                        
-                        <Setter Target = "AddButton.Visibility" Value="Collapsed"/>
-                        <Setter Target = "WritableButton.Visibility" Value="Collapsed"/>
-                        <Setter Target = "WritableOKButton.Visibility" Value="Visible"/>
-                        <Setter Target = "WritableCancelButton.Visibility" Value="Visible"/>
+                        <Setter Target = "HeaderGrid.Visibility" Value="Collapsed"/>
+                        <Setter Target = "FooterGrid.Visibility" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -70,39 +125,55 @@
         </GridView.ItemTemplate>
 
         <GridView.Header>
-            <Grid MinHeight="{StaticResource AppTitleHeight}" Grid.Row="0" Padding="{StaticResource AppPanelPadding}" ManipulationMode="TranslateX,TranslateY" Background="Transparent">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+            <Grid Height="{StaticResource AppTitleHeight}" Padding="{StaticResource AppPanelPadding}" ManipulationMode="TranslateX,TranslateY" Background="Transparent">
+                <Grid x:Name="HeaderGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                <ListViewItem x:Name="StyleCategoryNamesButton" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
-                    <ContentControl Style="{StaticResource AppIconReverseContentControlStyle}"
-                          Content="{x:Bind StyleCategoryNamesListView.SelectedItem, Mode=OneWay}">
-                        <ContentControl.Tag>
-                            <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                    <ListViewItem x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
+                        <ContentControl Style="{StaticResource AppIconReverseContentControlStyle}"
+                          Content="{x:Bind ListView.SelectedItem, Mode=OneWay}">
+                            <ContentControl.Tag>
+                                <FontIcon Glyph="&#xE09B;" FontSize="14" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                           MirroredWhenRightToLeft="True"/>
-                        </ContentControl.Tag>
-                    </ContentControl>
-                </ListViewItem>
-
-                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Padding="4,0">
-                    <ListViewItem x:Name="AddButton" Style="{StaticResource AppListViewItemStyle}">
-                        <SymbolIcon Symbol="Add"/>
-                    </ListViewItem >
-                    <ListViewItem x:Name="WritableButton" Style="{StaticResource AppListViewItemStyle}">
-                        <SymbolIcon Symbol="ShowBcc"/>
-                    </ListViewItem >
-                    <ListViewItem x:Name="WritableOKButton" Visibility="Collapsed" Style="{StaticResource AppListViewItemStyle}">
-                        <SymbolIcon Symbol="Delete"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
                     </ListViewItem>
-                    <ListViewItem x:Name="WritableCancelButton" Visibility="Collapsed" Style="{StaticResource AppListViewItemStyle}">
+
+                    <ListViewItem x:Name="MoreButton" Grid.Column="1" Style="{StaticResource AppListViewItemStyle}">
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="MoreToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
+                        </ToolTipService.ToolTip>
+                        <SymbolIcon Symbol="ShowBcc"/>
+                    </ListViewItem>
+
+                </Grid>
+                <Grid x:Name="FooterGrid" Visibility="Collapsed">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ListViewItem x:Name="DeleteStyleOKButton" Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource AppListViewItemStyle}">
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="DeleteStyleOKToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
+                        </ToolTipService.ToolTip>
+                        <SymbolIcon Symbol="Accept"/>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="DeleteStyleCancelButton" Grid.Column="2" Style="{StaticResource AppListViewItemStyle}">
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:Name="DeleteStyleCancelToolTip" Placement="Top" Style="{StaticResource AppToolTipStyle}"/>
+                        </ToolTipService.ToolTip>
                         <SymbolIcon Symbol="Cancel"/>
                     </ListViewItem>
-                </StackPanel>
+
+                </Grid>
             </Grid>
         </GridView.Header>
 
     </GridView>
-
 </UserControl>
