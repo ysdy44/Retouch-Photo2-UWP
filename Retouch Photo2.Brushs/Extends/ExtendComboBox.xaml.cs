@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Brushs
 
         //@Delegate
         /// <summary> Occurs when extend change. </summary>
-        public EventHandler<CanvasEdgeBehavior> ExtendChanged;
+        public event EventHandler<CanvasEdgeBehavior> ExtendChanged;
 
         //@VisualState
         CanvasEdgeBehavior _vsExtend;

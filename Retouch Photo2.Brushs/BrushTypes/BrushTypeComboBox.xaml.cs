@@ -18,9 +18,9 @@ namespace Retouch_Photo2.Brushs
 
         //@Delegate
         /// <summary> Occurs when fill type change. </summary>
-        public EventHandler<BrushType> FillTypeChanged;
+        public event EventHandler<BrushType> FillTypeChanged;
         /// <summary> Occurs when stroke type change. </summary>
-        public EventHandler<BrushType> StrokeTypeChanged;
+        public event EventHandler<BrushType> StrokeTypeChanged;
 
         //@VisualState
         BrushType _vsType;

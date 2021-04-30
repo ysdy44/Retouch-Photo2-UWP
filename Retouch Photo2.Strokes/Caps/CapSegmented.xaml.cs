@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Strokes
 
         //@Delegate
         /// <summary> Occurs when cap change. </summary>
-        public EventHandler<CanvasCapStyle> CapChanged;
+        public event EventHandler<CanvasCapStyle> CapChanged;
 
         //@VisualState
         CanvasCapStyle _vsCap;

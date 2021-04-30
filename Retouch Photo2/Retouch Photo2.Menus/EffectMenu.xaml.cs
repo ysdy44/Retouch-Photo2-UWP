@@ -28,7 +28,7 @@ namespace Retouch_Photo2.Menus
         public event TypedEventHandler<SplitView, object> PaneOpened { add => this.SplitView.PaneOpened += value; remove => this.SplitView.PaneOpened -= value; }
 
         /// <summary> Occurs when type change. </summary>
-        public EventHandler<EffectType> TypeChanged;
+        public event EventHandler<EffectType> TypeChanged;
 
 
         #region DependencyProperty

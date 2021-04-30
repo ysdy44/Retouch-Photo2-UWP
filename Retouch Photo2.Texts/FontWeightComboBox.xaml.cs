@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Texts
 
         //@Delegate
         /// <summary> Occurs when weight change. </summary>
-        public EventHandler<FontWeight2> WeightChanged;
+        public event EventHandler<FontWeight2> WeightChanged;
 
         //@VisualState
         FontWeight2 _vsWeight;

@@ -30,8 +30,8 @@ namespace Retouch_Photo2.Elements
 
 
         //@Group
-        private EventHandler<ColorPicker2Mode> Group;
-        private EventHandler<Color> ChangeColor;
+        private event EventHandler<ColorPicker2Mode> Group;
+        private event EventHandler<Color> ChangeColor;
 
         /// <summary> Gets hex picker. </summary>
         public TextBox HexPicker => this._HexPicker;

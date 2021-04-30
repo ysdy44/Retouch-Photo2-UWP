@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Brushs
 
         //@Delegate
         /// <summary> Occurs when fill or stroke change. </summary>
-        public EventHandler<FillOrStroke> FillOrStrokeChanged;
+        public event EventHandler<FillOrStroke> FillOrStrokeChanged;
 
         //@VisualState
         FillOrStroke _vsFillOrStroke;

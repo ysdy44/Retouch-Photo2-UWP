@@ -22,11 +22,11 @@ namespace Retouch_Photo2.Tools
 
         //@Delegate
         /// <summary> Occurs when type change. </summary>
-        public EventHandler<ToolType> TypeChanged;
+        public event EventHandler<ToolType> TypeChanged;
 
         //@Group
         /// <summary> Occurs when group change. </summary>
-        private EventHandler<ToolType> Group;
+        private event EventHandler<ToolType> Group;
 
 
         #region DependencyProperty

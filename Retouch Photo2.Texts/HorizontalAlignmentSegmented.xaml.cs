@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Texts
 
         //@Delegate
         /// <summary> Occurs when horizontal alignment changed. </summary>
-        public EventHandler<CanvasHorizontalAlignment> HorizontalAlignmentChanged;
+        public event EventHandler<CanvasHorizontalAlignment> HorizontalAlignmentChanged;
 
         //@VisualState
         CanvasHorizontalAlignment _vsHorizontalAlignment;

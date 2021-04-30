@@ -22,11 +22,11 @@ namespace Retouch_Photo2.Elements
     {
         //@Delegate  
         /// <summary> Occurs when the scroll-mode changes. </summary>
-        public EventHandler<ScrollMode> ScrollModeChanged;
+        public event EventHandler<ScrollMode> ScrollModeChanged;
         /// <summary> Occurs when the phone-width value changes. </summary>
-        public EventHandler<int> PhoneWidthChanged;
+        public event EventHandler<int> PhoneWidthChanged;
         /// <summary> Occurs when the pad-width value changes. </summary>
-        public EventHandler<int> PadWidthChanged;
+        public event EventHandler<int> PadWidthChanged;
 
 
         #region DependencyProperty

@@ -18,7 +18,7 @@ namespace Retouch_Photo2.Brushs
 
         //@Delegate
         /// <summary> Occurs when type change. </summary>
-        public EventHandler<BrushType> TypeChanged;
+        public event EventHandler<BrushType> TypeChanged;
 
         //@VisualState
         BrushType _vsType;

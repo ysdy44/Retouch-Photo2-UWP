@@ -19,7 +19,7 @@ namespace Retouch_Photo2.Strokes
 
         //@Delegate
         /// <summary> Occurs when dash change. </summary>
-        public EventHandler<CanvasDashStyle> DashChanged;
+        public event EventHandler<CanvasDashStyle> DashChanged;
 
         //@VisualState
         CanvasDashStyle _vsDash;

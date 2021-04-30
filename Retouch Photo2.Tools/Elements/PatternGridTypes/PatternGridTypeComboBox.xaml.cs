@@ -14,7 +14,7 @@ namespace Retouch_Photo2.Tools.Elements
 
         //@Delegate
         /// <summary> Occurs when type change. </summary>
-        public EventHandler<PatternGridType> TypeChanged;
+        public event EventHandler<PatternGridType> TypeChanged;
 
         //@VisualState
         PatternGridType _vsType;

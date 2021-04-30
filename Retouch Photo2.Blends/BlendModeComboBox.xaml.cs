@@ -19,11 +19,11 @@ namespace Retouch_Photo2.Blends
 
         //@Delegate
         /// <summary> Occurs when mode change. </summary>
-        public EventHandler<BlendEffectMode?> ModeChanged;
+        public event EventHandler<BlendEffectMode?> ModeChanged;
 
         //@Group
         /// <summary> Occurs when group change. </summary>
-        private EventHandler<BlendEffectMode?> Group;
+        private event EventHandler<BlendEffectMode?> Group;
 
         #region DependencyProperty
 
