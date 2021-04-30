@@ -141,12 +141,12 @@ namespace Retouch_Photo2.Menus
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.StyleTextBlock.Text = "Style";
+            this.StyleGroupHeader.Content = "Style";
             this.AddStyleControl.Content = "Add style";
             this.RenameStyleControl.Content = "Rename style";
             this.DeleteStyleControl.Content = "Delete style";
 
-            this.StyleCategoryTextBlock.Text = "Style category";
+            this.StyleCategoryGroupHeader.Content = "Style category";
             this.AddStyleCategoryControl.Content = "Add style category";
             this.RenameStyleCategoryControl.Content = "Rename style category";
             this.DeleteStyleCategoryControl.Content = "Delete style category";

@@ -66,8 +66,9 @@
         <Flyout x:Name="MoreFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
                 <StackPanel>
+                    
                     <!--Transform-->
-                    <TextBlock x:Name="TransformTextBlock" FontWeight="Bold" Style="{StaticResource AppTextBlockStyle}"/>
+                    <ListViewItem x:Name="TransformGroupHeader" Style="{StaticResource AppGroupHeaderListViewItemStyle}"/>
                     <!--Ratio-->
                     <ListViewItem x:Name="RatioItem" IsSelected="{x:Bind SettingViewModel.IsRatio, Mode=TwoWay}">
                         <ContentControl x:Name="RatioControl" Style="{StaticResource AppIconContentControlStyle}">
@@ -87,9 +88,11 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                    
+<ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}" />         
+
                     <!--Transform-->
-                    <TextBlock x:Name="CreateTextBlock" FontWeight="Bold" Style="{StaticResource AppTextBlockStyle}"/>
+                    <ListViewItem x:Name="CreateGroupHeader" Style="{StaticResource AppGroupHeaderListViewItemStyle}"/>
                     <!--Square-->
                     <ListViewItem x:Name="SquareItem" IsSelected="{x:Bind SettingViewModel.IsSquare, Mode=TwoWay}">
                         <ContentControl x:Name="SquareControl" Style="{StaticResource AppIconContentControlStyle}">
@@ -106,9 +109,11 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                    
+<ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}" />
+                
                     <!--Operate-->
-                    <TextBlock x:Name="OperateTextBlock" FontWeight="Bold" Style="{StaticResource AppTextBlockStyle}"/>
+                    <ListViewItem x:Name="OperateGroupHeader" Style="{StaticResource AppGroupHeaderListViewItemStyle}"/>
                     <!--WheelToRotate-->
                     <ListViewItem x:Name="WheelToRotateItem" IsSelected="{x:Bind SettingViewModel.IsWheelToRotate, Mode=TwoWay}">
                         <ContentControl x:Name="WheelToRotateControl" Style="{StaticResource AppIconContentControlStyle}">
@@ -117,6 +122,7 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
+                    
                 </StackPanel>
             </ScrollViewer>
         </Flyout>

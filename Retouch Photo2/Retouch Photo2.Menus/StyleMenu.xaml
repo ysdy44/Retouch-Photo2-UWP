@@ -19,8 +19,9 @@
         <Flyout x:Name="MoreFlyout" Placement="Bottom" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
                 <StackPanel>
+
                     <!--Style-->
-                    <TextBlock x:Name="StyleTextBlock" FontWeight="Bold" Style="{StaticResource AppTextBlockStyle}"/>
+                    <ListViewItem x:Name="StyleGroupHeader" Style="{ThemeResource AppGroupHeaderListViewItemStyle}" />
                     <!--AddStyle-->
                     <ListViewItem x:Name="AddStyleButton">
                         <ContentControl x:Name="AddStyleControl" Style="{StaticResource AppIconContentControlStyle}">
@@ -45,9 +46,11 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+
+                    <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}" />
+
                     <!--StyleCategory-->
-                    <TextBlock x:Name="StyleCategoryTextBlock" FontWeight="Bold" Style="{StaticResource AppTextBlockStyle}"/>
+                    <ListViewItem x:Name="StyleCategoryGroupHeader" Style="{ThemeResource AppGroupHeaderListViewItemStyle}" />
                     <!--AddStyleCategory-->
                     <ListViewItem x:Name="AddStyleCategoryButton">
                         <ContentControl x:Name="AddStyleCategoryControl" Style="{StaticResource AppIconContentControlStyle}">
@@ -72,6 +75,7 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
+
                 </StackPanel>
             </ScrollViewer>
         </Flyout>

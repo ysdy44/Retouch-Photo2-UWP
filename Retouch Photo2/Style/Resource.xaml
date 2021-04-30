@@ -12,11 +12,11 @@
 
     <!--Thickness-->
     <Thickness x:Key="AppThickness">0.5,0.5,0.5,1.5</Thickness>
-    
+
     <Thickness x:Key="AppLeftThickness">0.5,0.5,0,1.5</Thickness>
     <Thickness x:Key="AppCenterThickness">0,0.5,0,1.5</Thickness>
     <Thickness x:Key="AppRightThickness">0,0.5,0.5,1.5</Thickness>
-    
+
     <Thickness x:Key="AppTopThickness">0.5,0.5,0.5,0</Thickness>
     <Thickness x:Key="AppMiddleThickness">0.5,0,0.5,0</Thickness>
     <Thickness x:Key="AppBottomThickness">0.5,0,0.5,1.5</Thickness>
@@ -24,7 +24,7 @@
 
     <!--Margin-->
     <Thickness x:Key="AppMargin">1,0</Thickness>
-    
+
     <Thickness x:Key="AppLeftMargin">1,1,0,1</Thickness>
     <Thickness x:Key="AppCenterMargin">0,1</Thickness>
     <Thickness x:Key="AppRightMargin">0,1,1,1</Thickness>
@@ -36,20 +36,20 @@
 
     <!--CornerRadius-->
     <CornerRadius x:Key="AppCornerRadius">4</CornerRadius>
-   
+
     <CornerRadius x:Key="AppLeftCornerRadius">4,0,0,4</CornerRadius>
     <CornerRadius x:Key="AppCenterCornerRadius">0</CornerRadius>
     <CornerRadius x:Key="AppRightCornerRadius">0,4,4,0</CornerRadius>
-    
+
     <CornerRadius x:Key="AppTopCornerRadius">4,4,0,0</CornerRadius>
     <CornerRadius x:Key="AppMiddleCornerRadius">0</CornerRadius>
     <CornerRadius x:Key="AppBottomCornerRadius">0,0,4,4</CornerRadius>
-    
-    
+
+
     <CornerRadius x:Key="AppCircleCornerRadius">20</CornerRadius>
 
 
-    
+
     <!--ListViewItem-->
     <Style x:Key="ListViewItemBase" TargetType="ListViewItem">
         <Setter Property="Height" Value="{ThemeResource AppRoundedHeight}"/>
@@ -60,13 +60,13 @@
         <Setter Property="BorderBrush" Value="{ThemeResource AppStroke}"/>
         <Setter Property="Background" Value="{ThemeResource AppBackground}"/>
     </Style>
-    
-    
+
+
     <Style x:Key="AppListViewItemStyle" TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemBase}">
         <Setter Property="Margin" Value="{ThemeResource AppMargin}"/>
         <Setter Property="BorderThickness" Value="{StaticResource AppThickness}"/>
     </Style>
-    
+
     <Style x:Key="AppLeftListViewItemStyle" TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemBase}">
         <Setter Property="Margin" Value="{ThemeResource AppLeftMargin}"/>
         <Setter Property="BorderThickness" Value="{StaticResource AppLeftThickness}"/>
@@ -99,6 +99,34 @@
         <Setter Property="Width" Value="{StaticResource AppCircleHeight}"/>
         <Setter Property="Height" Value="{StaticResource AppCircleHeight}"/>
     </Style>
+
+
+    <!--Separator-->
+    <Style x:Key="AppSeparatorListViewItemStyle" TargetType="ListViewItem">
+        <Setter Property="IsSelected" Value="False" />
+        <Setter Property="IsEnabled" Value="False" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Height" Value="1" />
+        <Setter Property="MinHeight" Value="1" />
+        <Setter Property="Margin" Value="0,0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Background" Value="{ThemeResource AppStroke}" />
+    </Style>
+    
+    
+    <!--GroupHeader-->
+    <Style x:Key="AppGroupHeaderListViewItemStyle" TargetType="ListViewItem">
+        <Setter Property="IsSelected" Value="False" />
+        <Setter Property="IsEnabled" Value="False" />
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="MinHeight" Value="12" />
+        <Setter Property="Margin" Value="0,0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
 
 
 </ResourceDictionary>

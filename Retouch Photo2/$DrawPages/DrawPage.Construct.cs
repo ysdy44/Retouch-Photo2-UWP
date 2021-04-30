@@ -81,13 +81,15 @@ namespace Retouch_Photo2
             this.DrawLayout.GalleryToolTipContent = resource.GetString("$DrawPage_Gallery");
             this.DrawLayout.WidthToolTipContent = resource.GetString("$DrawPage_WidthTip");
             {
-                this.TransformTextBlock.Text = resource.GetString("More_Transform");
+                this.TransformGroupHeader.Content = resource.GetString("More_Transform");
                 this.RatioControl.Content = resource.GetString("More_Transform_Ratio");
                 this.SnapToTickControl.Content = resource.GetString("More_Transform_SnapToTick");
-                this.CreateTextBlock.Text = resource.GetString("More_Create");
+             
+                this.CreateGroupHeader.Content = resource.GetString("More_Create");
                 this.SquareControl.Content = resource.GetString("More_Create_Square");
                 this.CenterControl.Content = resource.GetString("More_Create_Center");
-                this.OperateTextBlock.Text = resource.GetString("More_Operate");
+         
+                this.OperateGroupHeader.Content = resource.GetString("More_Operate");
                 this.WheelToRotateControl.Content = resource.GetString("More_Operate_WheelToRotate");
             }
 

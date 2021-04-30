@@ -76,38 +76,36 @@ namespace Retouch_Photo2.Menus
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            constructStrings2(this.Edit);
-            constructStrings1(this.Edit_Cut);
-            constructStrings1(this.Edit_Duplicate);
-            constructStrings1(this.Edit_Copy);
-            constructStrings1(this.Edit_Paste);
-            constructStrings1(this.Edit_Clear);
+            this.ConstructStringsCore(resource, this.Edit);
+            this.ConstructStringsCore(resource, this.Edit_Cut);
+            this.ConstructStringsCore(resource, this.Edit_Duplicate);
+            this.ConstructStringsCore(resource, this.Edit_Copy);
+            this.ConstructStringsCore(resource, this.Edit_Paste);
+            this.ConstructStringsCore(resource, this.Edit_Clear);
 
-            constructStrings2(this.Group);
-            constructStrings1(this.Group_Group);
-            constructStrings1(this.Group_Ungroup);
-            constructStrings1(this.Group_Release);
+            this.ConstructStringsCore(resource, this.Group);
+            this.ConstructStringsCore(resource, this.Group_Group);
+            this.ConstructStringsCore(resource, this.Group_Ungroup);
+            this.ConstructStringsCore(resource, this.Group_Release);
 
-            constructStrings2(this.Select);
-            constructStrings1(this.Select_All);
-            constructStrings1(this.Select_Deselect);
-            constructStrings1(this.Select_Invert);
+            this.ConstructStringsCore(resource, this.Select);
+            this.ConstructStringsCore(resource, this.Select_All);
+            this.ConstructStringsCore(resource, this.Select_Deselect);
+            this.ConstructStringsCore(resource, this.Select_Invert);
 
-            constructStrings2(this.Combine);
-            constructStrings1(this.Combine_Union);
-            constructStrings1(this.Combine_Exclude);
-            constructStrings1(this.Combine_Xor);
-            constructStrings1(this.Combine_Intersect);
-            constructStrings1(this.Combine_ExpandStroke);
+            this.ConstructStringsCore(resource, this.Combine);
+            this.ConstructStringsCore(resource, this.Combine_Union);
+            this.ConstructStringsCore(resource, this.Combine_Exclude);
+            this.ConstructStringsCore(resource, this.Combine_Xor);
+            this.ConstructStringsCore(resource, this.Combine_Intersect);
+            this.ConstructStringsCore(resource, this.Combine_ExpandStroke);
+        }
+        private void ConstructStringsCore(ResourceLoader resource, ContentControl control)
+        {
+            string key = control.Name;
+            string title = resource.GetString($"Edits_{key}");
 
-            void constructStrings1(ContentControl control)
-            {
-                control.Content = resource.GetString($"Edits_{control.Name}");
-            }
-            void constructStrings2(TextBlock textBlock)
-            {
-                textBlock.Text = resource.GetString($"Edits_{textBlock.Name}");
-            }
+            control.Content = title;
         }
 
 

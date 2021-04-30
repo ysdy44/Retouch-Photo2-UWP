@@ -422,13 +422,6 @@
 
 
     <!--Rectangle-->
-    <Style x:Key="AppSeparatorRectangleStyle" TargetType="Rectangle">
-        <Setter Property="Width" Value="Auto" />
-        <Setter Property="Height" Value="1" />
-        <Setter Property="Margin" Value="0,0" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="Fill" Value="{ThemeResource AppStroke}" />
-    </Style>
     <Style x:Key="AppSeparatorRectangleHorizontalStyle" TargetType="Rectangle">
         <Setter Property="Width" Value="1" />
         <Setter Property="Height" Value="Auto" />
