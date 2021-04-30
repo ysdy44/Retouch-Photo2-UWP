@@ -10,11 +10,11 @@ using Windows.UI.Xaml.Controls;
 namespace Retouch_Photo2.Elements
 {
     /// <summary>
-    /// ComboBox of <see cref="CanvasBitmapFileFormat"/>.
+    /// Segmented of <see cref="CanvasBitmapFileFormat"/>.
     /// </summary>
-    public sealed partial class FileFormatComboBox : UserControl
+    public sealed partial class FileFormatSegmented : UserControl
     {
-
+        
         //@VisualState
         CanvasBitmapFileFormat _vsFileFormat;
         /// <summary> 
@@ -47,10 +47,10 @@ namespace Retouch_Photo2.Elements
             get => (CanvasBitmapFileFormat)base.GetValue(FileFormatProperty);
             set => base.SetValue(FileFormatProperty, value);
         }
-        /// <summary> Identifies the <see cref = "FileFormatComboBox.FileFormat" /> dependency property. </summary>
-        public static readonly DependencyProperty FileFormatProperty = DependencyProperty.Register(nameof(FileFormat), typeof(CanvasBitmapFileFormat), typeof(FileFormatComboBox), new PropertyMetadata(CanvasBitmapFileFormat.Jpeg, (sender, e) =>
+        /// <summary> Identifies the <see cref = "FileFormatSegmented.FileFormat" /> dependency property. </summary>
+        public static readonly DependencyProperty FileFormatProperty = DependencyProperty.Register(nameof(FileFormat), typeof(CanvasBitmapFileFormat), typeof(FileFormatSegmented), new PropertyMetadata(CanvasBitmapFileFormat.Jpeg, (sender, e) =>
         {
-            FileFormatComboBox control = (FileFormatComboBox)sender;
+            FileFormatSegmented control = (FileFormatSegmented)sender;
 
             if (e.NewValue is CanvasBitmapFileFormat value)
             {
@@ -67,7 +67,7 @@ namespace Retouch_Photo2.Elements
         /// <summary>
         /// Initializes a FileFormatComboBox. 
         /// </summary>
-        public FileFormatComboBox()
+        public FileFormatSegmented()
         {
             this.InitializeComponent();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State

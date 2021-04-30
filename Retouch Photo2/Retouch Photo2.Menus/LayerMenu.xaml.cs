@@ -24,6 +24,7 @@ namespace Retouch_Photo2.Menus
         ViewModel ViewModel => App.ViewModel;
         ViewModel SelectionViewModel => App.SelectionViewModel;
         ViewModel MethodViewModel => App.MethodViewModel;
+        SettingViewModel SettingViewModel => App.SettingViewModel;
 
 
         //@Converter
@@ -242,6 +243,8 @@ namespace Retouch_Photo2.Menus
                     setUndo: (layer, previous) => layer.BlendMode = previous
                 );
             };
+            this.BlendModeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
+            this.BlendModeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
         }
 
 

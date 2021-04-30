@@ -101,6 +101,8 @@ namespace Retouch_Photo2.Tools.Models
             {
                 this.TransparencyTypeChanged(brushType);
             };
+            this.TypeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
+            this.TypeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
         }
 
 

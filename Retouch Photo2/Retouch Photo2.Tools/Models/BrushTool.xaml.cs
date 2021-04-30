@@ -85,6 +85,8 @@ namespace Retouch_Photo2.Tools.Models
             this.ConstructStopsPicker();
             this.ConstructFill();
             this.ConstructStroke();
+            this.TypeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
+            this.TypeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
             this.StrokeShowControl.Tapped += (s, e) => Expander.ShowAt("Stroke", this.StrokeShowControl);
 
             this.FillOrStrokeComboBox.FillOrStrokeChanged += (s, fillOrStroke) =>
@@ -92,6 +94,8 @@ namespace Retouch_Photo2.Tools.Models
                 this.FillOrStroke = fillOrStroke;
                 this.ViewModel.Invalidate(); //Invalidate
             };
+            this.FillOrStrokeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
+            this.FillOrStrokeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
 
             this.ExtendComboBox.ExtendChanged += (s, extend) =>
             {
@@ -105,6 +109,8 @@ namespace Retouch_Photo2.Tools.Models
                         break;
                 }
             };
+            this.ExtendComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
+            this.ExtendComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
         }
 
 

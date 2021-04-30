@@ -20,6 +20,11 @@ namespace Retouch_Photo2.Texts
         //@Delegate
         /// <summary> Occurs when weight change. </summary>
         public event EventHandler<FontWeight2> WeightChanged;
+        /// <summary> Occurs after the flyout is closed. </summary>
+        public event EventHandler<object> Closed { add => this.Flyout.Closed += value; remove => this.Flyout.Closed -= value; }
+        /// <summary> Occurs when the flyout is opened. </summary>
+        public event EventHandler<object> Opened { add => this.Flyout.Opened += value; remove => this.Flyout.Opened -= value; }
+
 
         //@VisualState
         FontWeight2 _vsWeight;
@@ -54,6 +59,7 @@ namespace Retouch_Photo2.Texts
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
+
 
         #region DependencyProperty
 

@@ -250,6 +250,8 @@ namespace Retouch_Photo2.Tools.Models
                     setUndo: (tLayer, previous) => tLayer.RightTail = previous
                 );
             };
+            this.RightTailComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
+            this.RightTailComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
         }
 
     }

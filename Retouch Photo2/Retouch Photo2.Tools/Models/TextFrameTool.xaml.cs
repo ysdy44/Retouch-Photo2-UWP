@@ -58,8 +58,8 @@ namespace Retouch_Photo2.Tools.Models
             get => (bool)base.GetValue(IsOpenProperty);
             set => base.SetValue(IsOpenProperty, value);
         }
-        /// <summary> Identifies the <see cref = "TextFrameTool.IsOpen" /> dependency property. </summary>
-        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(TextFrameTool), new PropertyMetadata(false));
+        /// <summary> Identifies the <see cref = "TextArtisticTool.IsOpen" /> dependency property. </summary>
+        public static readonly DependencyProperty IsOpenProperty = DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(TextArtisticTool), new PropertyMetadata(false));
 
 
         #endregion
@@ -88,11 +88,12 @@ namespace Retouch_Photo2.Tools.Models
                     this.MethodViewModel.MethodSetFontFamily(value);
                 }
             };
+            this.FontFamilyFlyout.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
+            this.FontFamilyFlyout.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
 
             // Get fontSizes.
             this.FontSizeListView.ItemsSource = new float[] { 5f, 6f, 7f, 8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f, 16f, 18f, 20f, 24f, 30f, 36f, 48f, 64f, 72f, 96f, 144f, 288f };
             this.FontSizeButton.Tapped += (s, e) => this.FontSizeFlyout.ShowAt(this.FontSizeButton);
-
             this.FontSizeListView.ItemClick += (s, e) =>
             {
                 if (e.ClickedItem is float value)
@@ -100,6 +101,8 @@ namespace Retouch_Photo2.Tools.Models
                     this.MethodViewModel.MethodSetFontSize(value);
                 }
             };
+            this.FontSizeFlyout.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
+            this.FontSizeFlyout.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
 
 
             this.TextButton.Tapped += (s, e) => Expander.ShowAt("Text", this.TextButton);

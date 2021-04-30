@@ -20,10 +20,16 @@ namespace Retouch_Photo2.Blends
         //@Delegate
         /// <summary> Occurs when mode change. </summary>
         public event EventHandler<BlendEffectMode?> ModeChanged;
+        /// <summary> Occurs after the flyout is closed. </summary>
+        public event EventHandler<object> Closed { add => this.Flyout.Closed += value; remove => this.Flyout.Closed -= value; }
+        /// <summary> Occurs when the flyout is opened. </summary>
+        public event EventHandler<object> Opened { add => this.Flyout.Opened += value; remove => this.Flyout.Opened -= value; }
+
 
         //@Group
         /// <summary> Occurs when group change. </summary>
         private event EventHandler<BlendEffectMode?> Group;
+
 
         #region DependencyProperty
 

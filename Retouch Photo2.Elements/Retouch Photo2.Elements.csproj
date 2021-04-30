@@ -154,8 +154,8 @@
     <Compile Include="Pickers\ColorPicker2.xaml.cs">
       <DependentUpon>ColorPicker2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileFormatComboBox.xaml.cs">
-      <DependentUpon>FileFormatComboBox.xaml</DependentUpon>
+    <Compile Include="FileFormatSegmented.xaml.cs">
+      <DependentUpon>FileFormatSegmented.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pickers\ColorPicker2Mode.cs" />
     <Compile Include="Pickers\SilderPicker.xaml.cs">
@@ -287,7 +287,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FileFormatComboBox.xaml">
+    <Page Include="FileFormatSegmented.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

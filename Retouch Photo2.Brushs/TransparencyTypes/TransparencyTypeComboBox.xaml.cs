@@ -19,6 +19,11 @@ namespace Retouch_Photo2.Brushs
         //@Delegate
         /// <summary> Occurs when type change. </summary>
         public event EventHandler<BrushType> TypeChanged;
+        /// <summary> Occurs after the flyout is closed. </summary>
+        public event EventHandler<object> Closed { add => this.Flyout.Closed += value; remove => this.Flyout.Closed -= value; }
+        /// <summary> Occurs when the flyout is opened. </summary>
+        public event EventHandler<object> Opened { add => this.Flyout.Opened += value; remove => this.Flyout.Opened -= value; }
+
 
         //@VisualState
         BrushType _vsType;
@@ -40,6 +45,7 @@ namespace Retouch_Photo2.Brushs
             }
             set => VisualStateManager.GoToState(this, value.Name, false);
         }
+
 
         #region DependencyProperty
 

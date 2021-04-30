@@ -23,6 +23,11 @@ namespace Retouch_Photo2.Tools
         //@Delegate
         /// <summary> Occurs when type change. </summary>
         public event EventHandler<ToolType> TypeChanged;
+        /// <summary> Occurs after the flyout is closed. </summary>
+        public event EventHandler<object> Closed { add => this.MoreFlyout.Closed += value; remove => this.MoreFlyout.Closed -= value; }
+        /// <summary> Occurs when the flyout is opened. </summary>
+        public event EventHandler<object> Opened { add => this.MoreFlyout.Opened += value; remove => this.MoreFlyout.Opened -= value; }
+
 
         //@Group
         /// <summary> Occurs when group change. </summary>

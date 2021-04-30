@@ -148,6 +148,8 @@ namespace Retouch_Photo2.Tools.Models
                     setUndo: (tLayer, previous) => tLayer.GridType = previous
                 );
             };
+            this.TypeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
+            this.TypeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
         }
 
 

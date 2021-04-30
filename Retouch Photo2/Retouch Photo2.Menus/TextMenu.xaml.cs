@@ -67,6 +67,8 @@ namespace Retouch_Photo2.Menus
             this.UnderlineButton.Tapped += (s, e) => this.MethodViewModel.MethodSetUnderline();
 
             this.FontWeightComboBox.WeightChanged += (s, fontWeight) => this.MethodViewModel.MethodSetFontWeight(fontWeight);
+            this.FontWeightComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
+            this.FontWeightComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
 
             // Get all FontFamilys in your device.
             this.FontFamilyListView.ItemsSource = CanvasTextFormat.GetSystemFontFamilies(ApplicationLanguages.Languages).OrderBy(k => k);
@@ -78,10 +80,14 @@ namespace Retouch_Photo2.Menus
                     this.MethodViewModel.MethodSetFontFamily(value);
                 }
             };
+            this.FontFamilyFlyout.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
+            this.FontFamilyFlyout.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
 
             // Get fontSizes.
             this.FontSizeListView.ItemsSource = new float[] { 5f, 6f, 7f, 8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f, 16f, 18f, 20f, 24f, 30f, 36f, 48f, 64f, 72f, 96f, 144f, 288f };
             this.FontSizeButton.Tapped += (s, e) => this.FontSizeFlyout.ShowAt(this.FontSizeButton);
+            this.FontSizeFlyout.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
+            this.FontSizeFlyout.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
 
             //@Focus
             TextBoxExtensions.SetDefault(this.FontSizeTextBox, $"{22.0f}");

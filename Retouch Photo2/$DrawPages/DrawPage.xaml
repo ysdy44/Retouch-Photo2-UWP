@@ -515,7 +515,7 @@
                 <elements:DPIComboBox x:Name="DPIComboBox"/>
                 <ContentControl Height="6"/>
                 <TextBlock x:Name="ExportFileFormatTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <elements:FileFormatComboBox x:Name="FileFormatComboBox"/>
+                <elements:FileFormatSegmented x:Name="FileFormatComboBox"/>
                 <ContentControl Height="6"/>
                 <RelativePanel>
                     <TextBlock x:Name="ExportQualityTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
