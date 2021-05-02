@@ -56,10 +56,10 @@
 
 
         <Flyout x:Name="FillColorFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:ColorPicker2 x:Name="FilColorPicker"/>
+            <hsvColorPickers:ColorPicker x:Name="FilColorPicker" Background="Transparent" ButtonStyle="{StaticResource AppNumberButtonStyle}"/>
         </Flyout>
         <Flyout x:Name="StrokeColorFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:ColorPicker2 x:Name="StrokeColorPicker"/>
+            <hsvColorPickers:ColorPicker x:Name="StrokeColorPicker" Background="Transparent" ButtonStyle="{StaticResource AppNumberButtonStyle}"/>
         </Flyout>
 
 

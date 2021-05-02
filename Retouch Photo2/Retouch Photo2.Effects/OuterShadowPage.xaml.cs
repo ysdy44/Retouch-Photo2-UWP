@@ -414,15 +414,15 @@ namespace Retouch_Photo2.Effects.Pages
 
         private void ConstructColor2()
         {
-            this.ColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
-            this.ColorPicker.ColorChangeDelta += (s, value) =>
+            this.ColorPicker.ColorChangedStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheOuterShadow());
+            this.ColorPicker.ColorChangedDelta += (s, value) =>
             {
                 Color color = (Color)value;
                 this.Color = color;
 
                 this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.OuterShadow_Color = color);
             };
-            this.ColorPicker.ColorChangeCompleted += (s, value) =>
+            this.ColorPicker.ColorChangedCompleted += (s, value) =>
             {
                 Color color = (Color)value;
                 this.Color = color;

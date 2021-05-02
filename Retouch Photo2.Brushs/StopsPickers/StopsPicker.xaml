@@ -6,9 +6,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:transformers="using:FanKit.Transformers"
-    xmlns:hSVColorPickers="using:HSVColorPickers"
+    xmlns:hsvColorPickers="using:HSVColorPickers"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
-    xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:brushs="using:Retouch_Photo2.Brushs"
     Padding="0"
     Width="Auto" 
@@ -28,7 +27,7 @@
         <transformers:CanvasOperator x:Name="CanvasOperator" DestinationControl="{x:Bind CanvasControl}"/>
         <!--Flyout-->
         <Flyout x:Name="_ColorFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <elements:ColorPicker2 x:Name="_ColorPicker"/>
+            <hsvColorPickers:ColorPicker x:Name="_ColorPicker" Background="Transparent" ButtonStyle="{StaticResource AppNumberButtonStyle}"/>
         </Flyout>
     </UserControl.Resources>
 
@@ -49,14 +48,14 @@
 
                 <!--Offset-->
                 <TextBlock x:Name="OffsetTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <hSVColorPickers:NumberPicker x:Name="OffsetPicker" Maximum="100" Unit="%" 
+                <hsvColorPickers:NumberPicker x:Name="OffsetPicker" Maximum="100" Unit="%" 
                          ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
                 <ContentControl Width="4"/>
 
                 <!--A-->
                 <TextBlock x:Name="AlphaTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
-                <hSVColorPickers:NumberPicker x:Name="AlphaPicker" Minimum="0" Maximum="255" 
+                <hsvColorPickers:NumberPicker x:Name="AlphaPicker" Minimum="0" Maximum="255" 
                          ButtonStyle="{StaticResource AppNumberButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"/>
 
                 <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>

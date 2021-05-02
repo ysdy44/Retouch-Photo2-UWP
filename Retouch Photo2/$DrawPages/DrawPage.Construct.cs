@@ -255,9 +255,9 @@ namespace Retouch_Photo2
 
             this.FilColorPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodFillColorChanged(value);
 
-            this.FilColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.MethodFillColorChangeStarted(value);
-            this.FilColorPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.MethodFillColorChangeDelta(value);
-            this.FilColorPicker.ColorChangeCompleted += (s, value) => this.MethodViewModel.MethodFillColorChangeCompleted(value);
+            this.FilColorPicker.ColorChangedStarted += (s, value) => this.MethodViewModel.MethodFillColorChangeStarted(value);
+            this.FilColorPicker.ColorChangedDelta += (s, value) => this.MethodViewModel.MethodFillColorChangeDelta(value);
+            this.FilColorPicker.ColorChangedCompleted += (s, value) => this.MethodViewModel.MethodFillColorChangeCompleted(value);
         }
 
         //Stroke
@@ -289,9 +289,9 @@ namespace Retouch_Photo2
 
             this.StrokeColorPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodStrokeColorChanged(value);
 
-            this.StrokeColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeStarted(value);
-            this.StrokeColorPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.MethodStrokeColorChangeDelta(value);
-            this.StrokeColorPicker.ColorChangeCompleted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeCompleted(value);
+            this.StrokeColorPicker.ColorChangedStarted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeStarted(value);
+            this.StrokeColorPicker.ColorChangedDelta += (s, value) => this.MethodViewModel.MethodStrokeColorChangeDelta(value);
+            this.StrokeColorPicker.ColorChangedCompleted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeCompleted(value);
         }
 
 

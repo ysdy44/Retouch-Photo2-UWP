@@ -57,7 +57,7 @@ namespace Retouch_Photo2.Menus
         private void ConstructColor2()
         {
             //Color
-            this.ColorPicker.ColorChangeStarted += (s, value) =>
+            this.ColorPicker.ColorChangedStarted += (s, value) =>
             {
                 switch (this.SelectionViewModel.FillOrStroke)
                 {
@@ -69,7 +69,7 @@ namespace Retouch_Photo2.Menus
                         break;
                 }
             };
-            this.ColorPicker.ColorChangeDelta += (s, value) =>
+            this.ColorPicker.ColorChangedDelta += (s, value) =>
             {
                 switch (this.SelectionViewModel.FillOrStroke)
                 {
@@ -81,7 +81,7 @@ namespace Retouch_Photo2.Menus
                         break;
                 }
             };
-            this.ColorPicker.ColorChangeCompleted += (s, value) =>
+            this.ColorPicker.ColorChangedCompleted += (s, value) =>
             {
                 switch (this.SelectionViewModel.FillOrStroke)
                 {

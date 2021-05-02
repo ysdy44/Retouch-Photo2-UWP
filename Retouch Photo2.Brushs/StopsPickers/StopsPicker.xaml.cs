@@ -6,7 +6,6 @@
 using HSVColorPickers;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
-using Retouch_Photo2.Elements;
 using System;
 using System.Linq;
 using Windows.UI;
@@ -32,7 +31,7 @@ namespace Retouch_Photo2.Brushs
 
         //@Content
         /// <summary> StopsPicker's ColorPicker. </summary>
-        public ColorPicker2 ColorPicker => this._ColorPicker;
+        public HSVColorPickers.ColorPicker ColorPicker => this._ColorPicker;
         /// <summary> StopsPicker's ColorFlyout. </summary>
         public Flyout ColorFlyout => this._ColorFlyout;
 
@@ -87,17 +86,17 @@ namespace Retouch_Photo2.Brushs
                 if (isSucces) this.StopsChanged?.Invoke(this, this.array);//Delegate
             };
 
-            this._ColorPicker.ColorChangeStarted += (s, color) =>
+            this._ColorPicker.ColorChangedStarted += (s, color) =>
             {
                 bool isSucces = this.SetColor(color);
                 if (isSucces) this.StopsChangeStarted?.Invoke(this, this.array);//Delegate
             };
-            this._ColorPicker.ColorChangeDelta += (s, color) =>
+            this._ColorPicker.ColorChangedDelta += (s, color) =>
             {
                 bool isSucces = this.SetColor(color);
                 if (isSucces) this.StopsChangeDelta?.Invoke(this, this.array);//Delegate
             };
-            this._ColorPicker.ColorChangeCompleted += (s, color) =>
+            this._ColorPicker.ColorChangedCompleted += (s, color) =>
             {
                 bool isSucces = this.SetColor(color);
                 if (isSucces) this.StopsChangeCompleted?.Invoke(this, this.array);//Delegate

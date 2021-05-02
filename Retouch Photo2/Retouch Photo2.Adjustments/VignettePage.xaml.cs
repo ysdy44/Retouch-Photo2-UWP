@@ -328,9 +328,9 @@ namespace Retouch_Photo2.Adjustments.Pages
 
         private void ConstructColor2()
         {
-            this.ColorPicker.ColorChangeStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<VignetteAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheColor());
-            this.ColorPicker.ColorChangeDelta += (s, value) => this.MethodViewModel.TAdjustmentChangeDelta<VignetteAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.Color = (Color)value);
-            this.ColorPicker.ColorChangeCompleted += (s, value) =>
+            this.ColorPicker.ColorChangedStarted += (s, value) => this.MethodViewModel.TAdjustmentChangeStarted<VignetteAdjustment>(index: this.Index, cache: (tAdjustment) => tAdjustment.CacheColor());
+            this.ColorPicker.ColorChangedDelta += (s, value) => this.MethodViewModel.TAdjustmentChangeDelta<VignetteAdjustment>(index: this.Index, set: (tAdjustment) => tAdjustment.Color = (Color)value);
+            this.ColorPicker.ColorChangedCompleted += (s, value) =>
             {
                 Color color = value;
                 this.Color = color;
