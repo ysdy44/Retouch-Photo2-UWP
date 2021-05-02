@@ -7,13 +7,23 @@ using Retouch_Photo2.Elements;
 using Retouch_Photo2.Tools.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Windows.ApplicationModel.Resources;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools
 {
+    internal class ToolTypeListViewItem : ListViewItem
+    {
+        //public string Name { get; set; }
+        public ToolType Type { get; set; }
+        public int Index { get; set; } = -1;
+        public int MoreIndex { get; set; } = -1;
+        public VirtualKey Key { get; set; }
+        public string Title { get; set; }
+    }
+
     /// <summary>
     /// Represents a tools control, that containing some buttons.
     /// </summary>
@@ -21,8 +31,6 @@ namespace Retouch_Photo2.Tools
     {
 
         //@Delegate
-        /// <summary> Occurs when type change. </summary>
-        public event EventHandler<ToolType> TypeChanged;
         /// <summary> Occurs after the flyout is closed. </summary>
         public event EventHandler<object> Closed { add => this.MoreFlyout.Closed += value; remove => this.MoreFlyout.Closed -= value; }
         /// <summary> Occurs when the flyout is opened. </summary>
@@ -30,8 +38,8 @@ namespace Retouch_Photo2.Tools
 
 
         //@Group
-        /// <summary> Occurs when group change. </summary>
-        private event EventHandler<ToolType> Group;
+        private readonly IDictionary<ToolType, ToolTypeListViewItem> ItemDictionary = new Dictionary<ToolType, ToolTypeListViewItem>();
+        private readonly IDictionary<VirtualKey, ToolTypeListViewItem> KeyDictionary = new Dictionary<VirtualKey, ToolTypeListViewItem>();
 
 
         #region DependencyProperty
@@ -54,7 +62,9 @@ namespace Retouch_Photo2.Tools
 
             if (e.NewValue is ToolType value)
             {
-                control.Group?.Invoke(control, value);//Delegate
+                ToolTypeListViewItem item = control.ItemDictionary[value];
+                item.Focus(FocusState.Programmatic);
+                control.ListView.SelectedIndex = item.Index;
 
                 control.Tool = Retouch_Photo2.Tools.XML.CreateTool(control.AssemblyType, value);
             }
@@ -131,108 +141,97 @@ namespace Retouch_Photo2.Tools
         public ToolsControl()
         {
             this.InitializeComponent();
+            this.InitializeDictionary();
             this.ConstructStrings();
-            this.ConstructGroup();
 
-            this.More.Tapped += (s, e) => this.MoreFlyout.ShowAt(this.More);
+            this.More.Click += (s, e) => this.MoreFlyout.ShowAt(this);
+            this.ListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is ContentControl control)
+                {
+                    if (control.Parent is ToolTypeListViewItem item)
+                    {
+                        ToolType type = item.Type;
+                        this.Type = type;
+                    }
+                }
+            };
+            this.MoreListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is ContentControl control)
+                {
+                    if (control.Parent is ToolTypeListViewItem item)
+                    {
+                        ToolType type = item.Type;
+                        this.Type = type;
+                    }
+                }
+            };
+            this.MoreListView.KeyDown += (s, e) =>
+            {
+                VirtualKey key = e.OriginalKey;
+                if (this.KeyDictionary.ContainsKey(key) == false) return;
+
+                ToolTypeListViewItem item = this.KeyDictionary[key];
+                item.Focus(FocusState.Programmatic);
+                this.MoreListView.SelectedIndex = item.MoreIndex;
+            };
+            this.MoreFlyout.Opened += (s, e) =>
+            {
+                ToolTypeListViewItem item = this.ItemDictionary[this.Type];
+                item.Focus(FocusState.Programmatic);
+                this.MoreListView.SelectedIndex = item.MoreIndex;
+            };
         }
-    }
 
-    public sealed partial class ToolsControl : UserControl
-    {
 
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            foreach (UIElement child in this.StackPanel.Children)
+            this.MoreToolTip.Content = resource.GetString($"Tools_{this.More.Name}");
+            this.Pattern.Content = resource.GetString($"Tools_{this.Pattern.Name}");
+            this.Geometry.Content = resource.GetString($"Tools_{this.Geometry.Name}");
+
+            foreach (var kv in this.ItemDictionary)
             {
-                if (child is ListViewItem item)
-                {
-                    if (ToolTipService.GetToolTip(item) is ToolTip toolTip)
-                    {
-                        string key = item.Name;
-                        string title = resource.GetString($"Tools_{key}");
+                ToolType type = kv.Key;
+                ToolTypeListViewItem item = kv.Value;
+                string title = resource.GetString($"Tools_{type}");
 
-                        toolTip.Content = title;
-                    }
-                }
-            }
-
-            foreach (UIElement child in this.MoreStackPanel.Children)
-            {
-                switch (child)
-                {
-                    case TextBlock textBlock:
-                        {
-                            string key = textBlock.Name;
-                            string title = resource.GetString($"Tools_{key}");
-
-                            textBlock.Text = title;
-                        }
-                        break;
-                    case ListViewItem item:
-                        {
-                            if (item.Content is ContentControl control)
-                            {
-                                string key = item.Name;
-                                string title = resource.GetString($"Tools_{key}");
-
-                                control.Content = title;
-                            }
-                        }
-                        break;
-                }
+                item.Title = title;
             }
         }
 
 
         //@Group
-        private void ConstructGroup()
+        private void InitializeDictionary()
         {
-            foreach (UIElement child in this.StackPanel.Children)
+            foreach (object child in this.ListView.Items)
             {
-                this.ConstructGroupCore(child);
-            }
-
-            foreach (UIElement child in this.MoreStackPanel.Children)
-            {
-                this.ConstructGroupCore(child);
-            }
-        }
-        private void ConstructGroupCore(UIElement child)
-        {
-            if (child is ListViewItem item)
-            {
-                if (item == this.More) return;
-
-                string key = item.Name;
-                ToolType type = ToolType.None;
-                try
+                if (child is ToolTypeListViewItem item)
                 {
-                    type = (ToolType)Enum.Parse(typeof(ToolType), key);
+                    ToolType type = item.Type;
+                    VirtualKey key = item.Key;
+
+                    this.ItemDictionary.Add(type, item);
+                    if (key != default) this.KeyDictionary.Add(key, item);
                 }
-                catch (Exception) { }
+            }
 
-
-                //Button
-                item.Tapped += (s, e) => this.Type = type;
-
-
-                //Group
-                group(this.Type);
-                this.Group += (s, groupType) => group(groupType);
-
-                void group(ToolType groupType)
+            foreach (object child in this.MoreListView.Items)
+            {
+                if (child is ToolTypeListViewItem item)
                 {
-                    if (groupType == type)
-                    {
-                        item.IsSelected = true;
-                    }
-                    else item.IsSelected = false;
+                    ToolType type = item.Type;
+                    VirtualKey key = item.Key;
+
+                    this.ItemDictionary.Add(type, item);
+                    if (key != default) this.KeyDictionary.Add(key, item);
                 }
             }
         }
+
     }
 }

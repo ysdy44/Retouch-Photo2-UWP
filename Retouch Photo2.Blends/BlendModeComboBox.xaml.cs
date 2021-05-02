@@ -5,14 +5,25 @@
 // Complete:      ★★
 using Microsoft.Graphics.Canvas.Effects;
 using System;
+using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Blends
 {
+    internal class BlendModeListViewItem : ListViewItem
+    {
+        //public string Name { get; set; }
+        public BlendEffectMode Mode { get; set; }
+        public int Index { get; set; }
+        public VirtualKey Key { get; set; }
+        public string Title { get; set; }
+    }
+
     /// <summary>
-    /// ComboBox of <see cref="BlendEffect"/>
+    /// ComboBox of <see cref="BlendEffectMode?"/>
     /// </summary>
     public sealed partial class BlendModeComboBox : UserControl
     {
@@ -27,8 +38,9 @@ namespace Retouch_Photo2.Blends
 
 
         //@Group
-        /// <summary> Occurs when group change. </summary>
-        private event EventHandler<BlendEffectMode?> Group;
+        private readonly IDictionary<BlendEffectMode, BlendModeListViewItem> ItemDictionary = new Dictionary<BlendEffectMode, BlendModeListViewItem>();
+        private readonly IDictionary<VirtualKey, BlendModeListViewItem> KeyDictionary = new Dictionary<VirtualKey, BlendModeListViewItem>();
+
 
 
         #region DependencyProperty
@@ -37,23 +49,18 @@ namespace Retouch_Photo2.Blends
         /// <summary> Gets or sets the blend-type. </summary>
         public BlendEffectMode? Mode
         {
-            get => (BlendEffectMode?)base.GetValue(ModeProperty);
-            set => base.SetValue(ModeProperty, value);
+            get => this.mode;
+            set
+            {
+                BlendModeListViewItem item =
+                    (value is BlendEffectMode mode) ?
+                    this.ItemDictionary[mode] :
+                    this.None;
+                this.Control.Content = item.Title;
+                this.mode = value;
+            }
         }
-        /// <summary> Identifies the <see cref = "BlendModeComboBox.Mode" /> dependency property. </summary>
-        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(BlendEffectMode?), typeof(BlendModeComboBox), new PropertyMetadata(null, (sender, e) =>
-        {
-            BlendModeComboBox control = (BlendModeComboBox)sender;
-
-            if (e.NewValue is BlendEffectMode value)
-            {
-                control.Group?.Invoke(control, value);//Delegate
-            }
-            else
-            {
-                control.Group?.Invoke(control, null);//Delegate
-            }
-        }));
+        private BlendEffectMode? mode;
 
 
         #endregion
@@ -66,76 +73,91 @@ namespace Retouch_Photo2.Blends
         public BlendModeComboBox()
         {
             this.InitializeComponent();
+            this.InitializeDictionary();
             this.ConstructStrings();
-            this.ConstructGroup();
 
             this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
-        }
-    }
+            this.ListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is ContentControl control)
+                {
+                    if (control.Parent is BlendModeListViewItem item)
+                    {
+                        if (item == this.None)
+                        {
+                            this.ModeChanged?.Invoke(this, null);//Delegate
+                        }
+                        else
+                        {
+                            BlendEffectMode weight = item.Mode;
+                            this.ModeChanged?.Invoke(this, weight);//Delegate
+                        }
+                    }
+                }
+            };
+            this.ListView.KeyDown += (s, e) =>
+            {
+                VirtualKey key = e.OriginalKey;
+                if (this.KeyDictionary.ContainsKey(key) == false) return;
 
-    public sealed partial class BlendModeComboBox : UserControl
-    {
+                BlendModeListViewItem item = this.KeyDictionary[key];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
+            this.Flyout.Opened += (s, e) =>
+            {
+                BlendModeListViewItem item =
+                    (this.Mode is BlendEffectMode mode) ?
+                    this.ItemDictionary[mode] :
+                    this.None;
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
+        }
+
 
         //Strings
         private void ConstructStrings()
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            foreach (UIElement child in this.StackPanel.Children)
             {
-                if (child is ListViewItem item)
-                {
-                    if (item.Content is ContentControl control)
-                    {
-                        string key = control.Name;
-                        string title = resource.GetString($"Blends_{key}");
+                BlendModeListViewItem item = this.None;
+                string title = resource.GetString($"Blends_None");
 
-                        control.Content = title;
-                    }
-                }
+                item.Title = title;
+                if (this.Mode == null) this.Control.Content = title;
+            }
+
+            foreach (var kv in this.ItemDictionary)
+            {
+                BlendEffectMode weight = kv.Key;
+                BlendModeListViewItem item = kv.Value;
+                string title = resource.GetString($"Blends_{weight}");
+
+                item.Title = title;
+                if (this.Mode == weight) this.Control.Content = title;
             }
         }
 
 
         //@Group
-        private void ConstructGroup()
+        private void InitializeDictionary()
         {
-            foreach (UIElement child in this.StackPanel.Children)
+            foreach (object child in this.ListView.Items)
             {
-                if (child is ListViewItem item)
+                if (child is BlendModeListViewItem item)
                 {
-                    if (item.Content is ContentControl control)
-                    {
-                        string key = control.Name;
-                        BlendEffectMode? mode = null;
-                        try
-                        {
-                            mode = (BlendEffectMode)Enum.Parse(typeof(BlendEffectMode), key);
-                        }
-                        catch (Exception) { }
+                    if (item == this.None) continue;
 
+                    BlendEffectMode weight = item.Mode;
+                    VirtualKey key = item.Key;
 
-                        //Button
-                        item.Tapped += (s, e) => this.ModeChanged?.Invoke(this, mode);//Delegate
-
-
-                        //Group
-                        group(this.Mode);
-                        this.Group += (s, groupMode) => group(groupMode);
-
-                        void group(BlendEffectMode? groupMode)
-                        {
-                            if (groupMode == mode)
-                            {
-                                item.IsSelected = true;
-
-                                this.Control.Content = control.Content as string;
-                            }
-                            else item.IsSelected = false;
-                        }
-                    }
+                    this.ItemDictionary.Add(weight, item);
+                    if (key != default) this.KeyDictionary.Add(key, item);
                 }
             }
         }
+
     }
 }

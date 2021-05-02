@@ -5,15 +5,11 @@
 // Complete:      ★★★★★
 using Retouch_Photo2.Adjustments;
 using Retouch_Photo2.Adjustments.Pages;
-using Retouch_Photo2.Filters;
 using Retouch_Photo2.Historys;
 using Retouch_Photo2.Layers;
 using Retouch_Photo2.ViewModels;
 using System;
-using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 
@@ -74,7 +70,21 @@ namespace Retouch_Photo2.Menus
         {
             this.InitializeComponent();
             this.ConstructStrings();
-            this.ConstructGroup();
+
+            this.ListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is ContentControl control)
+                {
+                    if (control.Parent is ListViewItem item)
+                    {
+                        string key = item.Name;
+                        IAdjustment adjustment = Retouch_Photo2.Adjustments.XML.CreateAdjustment(key);
+                        this.Add(adjustment);
+
+                        AdjustmentCommand.Edit(adjustment);//Delegate
+                    }
+                }
+            };
         }
     }
 
@@ -86,13 +96,13 @@ namespace Retouch_Photo2.Menus
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            foreach (UIElement child in this.StackPanel.Children)
+            foreach (object child in this.ListView.Items)
             {
                 if (child is ListViewItem item)
                 {
                     if (item.Content is ContentControl control)
                     {
-                        string key = control.Name;
+                        string key = item.Name;
                         string title = resource.GetString($"Adjustments_{key}");
 
                         control.Content = title;
@@ -101,37 +111,6 @@ namespace Retouch_Photo2.Menus
             }
         }
 
-
-        //@Group
-        private void ConstructGroup()
-        {
-            foreach (UIElement child in this.StackPanel.Children)
-            {
-                if (child is ListViewItem item)
-                {
-                    if (item.Content is ContentControl control)
-                    {
-                        string key = control.Name;
-                        AdjustmentType mode = AdjustmentType.Gray;
-                        try
-                        {
-                            mode = (AdjustmentType)Enum.Parse(typeof(AdjustmentType), key);
-                        }
-                        catch (Exception) { }
-
-
-                        //Button
-                        item.Tapped += (s, e) =>
-                        {
-                            IAdjustment adjustment = Retouch_Photo2.Adjustments.XML.CreateAdjustment(key);
-                            this.Add(adjustment);
-
-                            AdjustmentCommand.Edit(adjustment);//Delegate
-                        };
-                    }
-                }
-            }
-        }
 
         private void Add(IAdjustment adjustment)
         {
