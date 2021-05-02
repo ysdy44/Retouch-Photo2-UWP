@@ -518,7 +518,7 @@
                 <elements:SizePicker x:Name="ExportSizePicker"/>
                 <ContentControl Height="6"/>
                 <TextBlock Text="DPI" Style="{StaticResource AppTextBlockStyle}"/>
-                <elements:DPIComboBox x:Name="DPIComboBox"/>
+                <elements:DPISegmented x:Name="DPIComboBox"/>
                 <ContentControl Height="6"/>
                 <TextBlock x:Name="ExportFileFormatTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
                 <elements:FileFormatSegmented x:Name="FileFormatComboBox"/>

@@ -134,8 +134,8 @@
       <DependentUpon>DialogWide.xaml</DependentUpon>
     </Compile>
     <Compile Include="DeviceLayout.cs" />
-    <Compile Include="DPIComboBox.xaml.cs">
-      <DependentUpon>DPIComboBox.xaml</DependentUpon>
+    <Compile Include="DPISegmented.xaml.cs">
+      <DependentUpon>DPISegmented.xaml</DependentUpon>
     </Compile>
     <Compile Include="Expander.xaml.cs">
       <DependentUpon>Expander.xaml</DependentUpon>
@@ -263,7 +263,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DPIComboBox.xaml">
+    <Page Include="DPISegmented.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

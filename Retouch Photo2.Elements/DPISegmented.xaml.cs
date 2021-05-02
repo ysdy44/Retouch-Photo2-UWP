@@ -28,9 +28,9 @@ namespace Retouch_Photo2.Elements
     }
 
     /// <summary>
-    /// ComboBox of <see cref="Retouch_Photo2.Elements.DPI"/>.
+    /// Segmented of <see cref="Retouch_Photo2.Elements.DPI"/>.
     /// </summary>
-    public sealed partial class DPIComboBox : UserControl
+    public sealed partial class DPISegmented : UserControl
     {
 
         //@VisualState
@@ -71,7 +71,7 @@ namespace Retouch_Photo2.Elements
         //@Construct
         /// <summary>
         /// Initializes a DPIComboBox.
-        public DPIComboBox()
+        public DPISegmented()
         {
             this.InitializeComponent();
             this.Loaded += (s, e) => this.VisualState = this.VisualState;//State

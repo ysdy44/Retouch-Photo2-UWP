@@ -105,7 +105,6 @@
     <Style x:Key="AppSeparatorListViewItemStyle" TargetType="ListViewItem">
         <Setter Property="IsSelected" Value="False" />
         <Setter Property="IsEnabled" Value="False" />
-        <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="Width" Value="Auto" />
         <Setter Property="Height" Value="1" />
         <Setter Property="MinHeight" Value="1" />
