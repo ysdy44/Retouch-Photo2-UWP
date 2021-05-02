@@ -143,26 +143,11 @@
     <Compile Include="ExpanedHead.xaml.cs">
       <DependentUpon>ExpanedHead.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Eyedropper\Eyedropper.Method.cs" />
-    <Compile Include="Eyedropper\Eyedropper.xaml.cs">
-      <DependentUpon>Eyedropper.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Eyedropper\EyedropperToolButton .cs" />
-    <Compile Include="Pickers\CirclePicker.xaml.cs">
-      <DependentUpon>CirclePicker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pickers\ColorPicker2.xaml.cs">
-      <DependentUpon>ColorPicker2.xaml</DependentUpon>
-    </Compile>
     <Compile Include="FileFormatSegmented.xaml.cs">
       <DependentUpon>FileFormatSegmented.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pickers\ColorPicker2Mode.cs" />
     <Compile Include="Pickers\SilderPicker.xaml.cs">
       <DependentUpon>SilderPicker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pickers\WheelPicker.xaml.cs">
-      <DependentUpon>WheelPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pickers\SizePicker.xaml.cs">
       <DependentUpon>SizePicker.xaml</DependentUpon>
@@ -214,7 +199,7 @@
       <Version>1.5.0</Version>
     </PackageReference>
     <PackageReference Include="HSVColorPickers">
-      <Version>1.4.3</Version>
+      <Version>1.5.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.12</Version>
@@ -275,59 +260,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Eyedropper\Eyedropper.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pickers\CirclePicker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pickers\ColorPicker2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="FileFormatSegmented.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pickers\ColorPicker2Icons\CircleIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pickers\ColorPicker2Icons\HSVIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pickers\ColorPicker2Icons\PaletteHueIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pickers\ColorPicker2Icons\PaletteSaturationIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pickers\ColorPicker2Icons\PaletteValueIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pickers\ColorPicker2Icons\RGBIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pickers\ColorPicker2Icons\SwatchesIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pickers\ColorPicker2Icons\WheelIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Pickers\SilderPicker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pickers\WheelPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
