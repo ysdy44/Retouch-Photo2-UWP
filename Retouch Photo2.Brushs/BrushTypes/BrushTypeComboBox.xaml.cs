@@ -4,12 +4,23 @@
 // Only:              ★★
 // Complete:      ★★
 using System;
+using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Brushs
 {
+    internal class BrushTypeListViewItem : ListViewItem
+    {
+        //public string Name { get; set; }
+        public BrushType Type { get; set; }
+        public int Index { get; set; }
+        public VirtualKey Key { get; set; }
+        public string Title { get; set; }
+    }
+
     /// <summary>
     /// ComboBox of <see cref="BrushType"/>
     /// </summary>
@@ -20,35 +31,16 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Occurs when fill type change. </summary>
         public event EventHandler<BrushType> FillTypeChanged;
         /// <summary> Occurs when stroke type change. </summary>
-        public event EventHandler<BrushType> StrokeTypeChanged;   
+        public event EventHandler<BrushType> StrokeTypeChanged;
         /// <summary> Occurs after the flyout is closed. </summary>
         public event EventHandler<object> Closed { add => this.Flyout.Closed += value; remove => this.Flyout.Closed -= value; }
         /// <summary> Occurs when the flyout is opened. </summary>
         public event EventHandler<object> Opened { add => this.Flyout.Opened += value; remove => this.Flyout.Opened -= value; }
 
 
-        //@VisualState
-        BrushType _vsType;
-        /// <summary> 
-        /// Represents the visual appearance of UI elements in a specific state.
-        /// </summary>
-        public VisualState VisualState
-        {
-            get
-            {
-                switch (this._vsType)
-                {
-                    case BrushType.None: return this.NoneState;
-                    case BrushType.Color: return this.ColorState;
-                    case BrushType.LinearGradient: return this.LinearGradientState;
-                    case BrushType.RadialGradient: return this.RadialGradientState;
-                    case BrushType.EllipticalGradient: return this.EllipticalGradientState;
-                    case BrushType.Image: return this.ImageState;
-                    default: return this.Normal;
-                }
-            }
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
+        //@Group
+        private readonly IDictionary<BrushType, BrushTypeListViewItem> ItemDictionary = new Dictionary<BrushType, BrushTypeListViewItem>();
+        private readonly IDictionary<VirtualKey, BrushTypeListViewItem> KeyDictionary = new Dictionary<VirtualKey, BrushTypeListViewItem>();
 
 
         #region DependencyProperty
@@ -63,14 +55,10 @@ namespace Retouch_Photo2.Brushs
                 switch (value)
                 {
                     case FillOrStroke.Fill:
-                        this.Type =
-                        this._vsType = this.FillType;
-                        this.VisualState = this.VisualState;//State
+                        this.Type = this.FillType;
                         break;
                     case FillOrStroke.Stroke:
-                        this.Type =
-                        this._vsType = this.StrokeType;
-                        this.VisualState = this.VisualState;//State
+                        this.Type = this.StrokeType;
                         break;
                 }
                 this.fillOrStroke = value;
@@ -109,9 +97,7 @@ namespace Retouch_Photo2.Brushs
                 switch (this.FillOrStroke)
                 {
                     case FillOrStroke.Fill:
-                        this.Type =
-                        this._vsType = value;
-                        this.VisualState = this.VisualState;//State
+                        this.Type = value;
                         break;
                 }
                 this.fillType = value;
@@ -150,9 +136,7 @@ namespace Retouch_Photo2.Brushs
                 switch (this.FillOrStroke)
                 {
                     case FillOrStroke.Stroke:
-                        this.Type =
-                        this._vsType = value;
-                        this.VisualState = this.VisualState;//State
+                        this.Type = value;
                         break;
                 }
                 this.strokeType = value;
@@ -168,7 +152,16 @@ namespace Retouch_Photo2.Brushs
             set => base.SetValue(TypeProperty, value);
         }
         /// <summary> Identifies the <see cref = "BrushTypeComboBox.Type" /> dependency property. </summary>
-        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(BrushType), typeof(BrushTypeComboBox), new PropertyMetadata(BrushType.None));
+        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(BrushType), typeof(BrushTypeComboBox), new PropertyMetadata(BrushType.None, (sender, e) =>
+        {
+            BrushTypeComboBox control = (BrushTypeComboBox)sender;
+
+            if (e.NewValue is BrushType value)
+            {
+                BrushTypeListViewItem item = control.ItemDictionary[value];
+                control.Control.Content = item.Title;
+            }
+        }));
 
 
         #endregion
@@ -181,89 +174,45 @@ namespace Retouch_Photo2.Brushs
         public BrushTypeComboBox()
         {
             this.InitializeComponent();
+            this.InitializeDictionary();
             this.ConstructStrings();
 
-            this.NoneItem.Tapped += (s, e) =>
-            {
-                switch (this.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        this.FillTypeChanged?.Invoke(this, BrushType.None);//Delegate
-                        break;
-                    case FillOrStroke.Stroke:
-                        this.StrokeTypeChanged?.Invoke(this, BrushType.None);//Delegate
-                        break;
-                }
-                this.Flyout.Hide();
-            };
-            this.ColorItem.Tapped += (s, e) =>
-            {
-                switch (this.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        this.FillTypeChanged?.Invoke(this, BrushType.Color);//Delegate
-                        break;
-                    case FillOrStroke.Stroke:
-                        this.StrokeTypeChanged?.Invoke(this, BrushType.Color);//Delegate
-                        break;
-                }
-                this.Flyout.Hide();
-            };
-            this.LinearGradientItem.Tapped += (s, e) =>
-            {
-                switch (this.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        this.FillTypeChanged?.Invoke(this, BrushType.LinearGradient);//Delegate
-                        break;
-                    case FillOrStroke.Stroke:
-                        this.StrokeTypeChanged?.Invoke(this, BrushType.LinearGradient);//Delegate
-                        break;
-                }
-                this.Flyout.Hide();
-            };
-            this.RadialGradientItem.Tapped += (s, e) =>
-            {
-                switch (this.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        this.FillTypeChanged?.Invoke(this, BrushType.RadialGradient);//Delegate
-                        break;
-                    case FillOrStroke.Stroke:
-                        this.StrokeTypeChanged?.Invoke(this, BrushType.RadialGradient);//Delegate
-                        break;
-                }
-                this.Flyout.Hide();
-            };
-            this.EllipticalGradientItem.Tapped += (s, e) =>
-            {
-                switch (this.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        this.FillTypeChanged?.Invoke(this, BrushType.EllipticalGradient);//Delegate
-                        break;
-                    case FillOrStroke.Stroke:
-                        this.StrokeTypeChanged?.Invoke(this, BrushType.EllipticalGradient);//Delegate
-                        break;
-                }
-                this.Flyout.Hide();
-            };
-            this.ImageItem.Tapped += (s, e) =>
-            {
-                switch (this.FillOrStroke)
-                {
-                    case FillOrStroke.Fill:
-                        this.FillTypeChanged?.Invoke(this, BrushType.Image);//Delegate
-                        break;
-                    case FillOrStroke.Stroke:
-                        this.StrokeTypeChanged?.Invoke(this, BrushType.Image);//Delegate
-                        break;
-                }
-                this.Flyout.Hide();
-            };
-
             this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.ListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is ContentControl control)
+                {
+                    if (control.Parent is BrushTypeListViewItem item)
+                    {
+                        BrushType type = item.Type;
+                        switch (this.FillOrStroke)
+                        {
+                            case FillOrStroke.Fill:
+                                this.FillTypeChanged?.Invoke(this, type); //Delegate
+                                break;
+                            case FillOrStroke.Stroke:
+                                this.StrokeTypeChanged?.Invoke(this, type); //Delegate
+                                break;
+                        }
+                        this.Flyout.Hide();
+                    }
+                }
+            };
+            this.ListView.KeyDown += (s, e) =>
+            {
+                VirtualKey key = e.OriginalKey;
+                if (this.KeyDictionary.ContainsKey(key) == false) return;
+
+                BrushTypeListViewItem item = this.KeyDictionary[key];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
+            this.Flyout.Opened += (s, e) =>
+            {
+                BrushTypeListViewItem item = this.ItemDictionary[this.Type];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
         }
 
 
@@ -272,12 +221,32 @@ namespace Retouch_Photo2.Brushs
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.None.Content = resource.GetString($"Tools_Brush_Type_None");
-            this.Color.Content = resource.GetString($"Tools_Brush_Type_Color");
-            this.LinearGradient.Content = resource.GetString($"Tools_Brush_Type_LinearGradient");
-            this.RadialGradient.Content = resource.GetString($"Tools_Brush_Type_RadialGradient");
-            this.EllipticalGradient.Content = resource.GetString($"Tools_Brush_Type_EllipticalGradient");
-            this.Image.Content = resource.GetString($"Tools_Brush_Type_Image");
+            foreach (var kv in this.ItemDictionary)
+            {
+                BrushType type = kv.Key;
+                BrushTypeListViewItem item = kv.Value;
+                string title = resource.GetString($"Tools_Brush_Type_{type}");
+
+                item.Title = title;
+            }
         }
+
+
+        //@Group
+        private void InitializeDictionary()
+        {
+            foreach (object child in this.ListView.Items)
+            {
+                if (child is BrushTypeListViewItem item)
+                {
+                     BrushType type = item.Type;
+                    VirtualKey key = item.Key;
+
+                    this.ItemDictionary.Add(type, item);
+                    if (key != default) this.KeyDictionary.Add(key, item);
+                }
+            }
+        }
+
     }
 }

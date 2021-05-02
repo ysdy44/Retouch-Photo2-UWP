@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="200"
     d:DesignWidth="200"
@@ -12,60 +13,37 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <ListViewItem x:Name="NoneItem">
-                    <ContentControl x:Name="None" Style="{StaticResource AppIconContentControlStyle}">
-                        <ContentControl.Resources>
-                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypes/Icons/NoneIcon.xaml"/>
-                        </ContentControl.Resources>
-                        <ContentControl.Tag>
-                            <ContentControl Template="{StaticResource NoneIcon}"/>
-                        </ContentControl.Tag>
-                    </ContentControl>
-                </ListViewItem>
-                <ListViewItem x:Name="ArrowItem">
-                    <ContentControl x:Name="Arrow" Style="{StaticResource AppIconContentControlStyle}">
-                        <ContentControl.Resources>
-                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypes/Icons/ArrowIcon.xaml"/>
-                        </ContentControl.Resources>
-                        <ContentControl.Tag>
-                            <ContentControl Template="{StaticResource ArrowIcon}"/>
-                        </ContentControl.Tag>
-                    </ContentControl>
-                </ListViewItem>
-            </StackPanel>
+            <ListView x:Name="ListView" IsItemClickEnabled="True" SelectionMode="Single">
+                <ListView.Items>
+
+                    <elements:ArrowTailTypeListViewItem x:Name="None" Type="None" Index="0" Key="Number1">
+                        <ContentControl Content="{x:Bind None.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypes/Icons/NoneIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource NoneIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </elements:ArrowTailTypeListViewItem>
+                    <elements:ArrowTailTypeListViewItem x:Name="Arrow" Type="Arrow" Index="1" Key="Number2">
+                        <ContentControl Content="{x:Bind Arrow.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/ArrowTailTypes/Icons/ArrowIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource ArrowIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </elements:ArrowTailTypeListViewItem>
+
+                </ListView.Items>
+            </ListView>
         </Flyout>
     </UserControl.Resources>
 
 
     <ListViewItem x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
-
-        <!--VisualState-->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-
-                <!--Normal-->
-                <VisualState x:Name="Normal"/>
-
-                <!--None-->
-                <VisualState x:Name="NoneState">
-                    <VisualState.Setters>
-                        <Setter Target = "NoneItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind None.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Arrow-->
-                <VisualState x:Name="ArrowState">
-                    <VisualState.Setters>
-                        <Setter Target = "ArrowItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind Arrow.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
         <ContentControl x:Name="Control" Style="{StaticResource AppIconReverseContentControlStyle}">
             <ContentControl.Tag>
                 <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />

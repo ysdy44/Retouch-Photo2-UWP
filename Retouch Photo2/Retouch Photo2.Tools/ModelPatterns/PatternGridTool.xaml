@@ -30,7 +30,7 @@
         <!--Type-->
         <TextBlock x:Name="TypeTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
         <toolsElements:PatternGridTypeComboBox x:Name="TypeComboBox" Grid.Column="3" Grid.ColumnSpan="2"
-                 GridType="{x:Bind SelectionViewModel.PatternGrid_Type, Mode=OneWay}" />
+                 Type="{x:Bind SelectionViewModel.PatternGrid_Type, Mode=OneWay}" />
 
         <!--Step-->
         <TextBlock x:Name="HorizontalStepTextBlock" Style="{StaticResource AppTextBlockStyle}"/>

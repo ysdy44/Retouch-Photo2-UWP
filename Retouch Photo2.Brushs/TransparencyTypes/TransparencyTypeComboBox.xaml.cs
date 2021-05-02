@@ -7,6 +7,12 @@ using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using System;
+using System.Collections.Generic;
+using Windows.ApplicationModel.Resources;
+using Windows.System;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Brushs
 {
@@ -25,26 +31,9 @@ namespace Retouch_Photo2.Brushs
         public event EventHandler<object> Opened { add => this.Flyout.Opened += value; remove => this.Flyout.Opened -= value; }
 
 
-        //@VisualState
-        BrushType _vsType;
-        /// <summary> 
-        /// Represents the visual appearance of UI elements in a specific state.
-        /// </summary>
-        public VisualState VisualState
-        {
-            get
-            {
-                switch (this._vsType)
-                {
-                    case BrushType.None: return this.NoneState;
-                    case BrushType.LinearGradient: return this.LinearGradientState;
-                    case BrushType.RadialGradient: return this.RadialGradientState;
-                    case BrushType.EllipticalGradient: return this.EllipticalGradientState;
-                    default: return this.Normal;
-                }
-            }
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
+        //@Group
+        private readonly IDictionary<BrushType, BrushTypeListViewItem> ItemDictionary = new Dictionary<BrushType, BrushTypeListViewItem>();
+        private readonly IDictionary<VirtualKey, BrushTypeListViewItem> KeyDictionary = new Dictionary<VirtualKey, BrushTypeListViewItem>();
 
 
         #region DependencyProperty
@@ -63,15 +52,11 @@ namespace Retouch_Photo2.Brushs
 
             if (e.NewValue is IBrush value)
             {
-                control.Type =
-                control._vsType = value.Type;
-                control.VisualState = control.VisualState;//State
+                control.Type = value.Type;
             }
             else
             {
-                control.Type =
-                control._vsType = BrushType.None;
-                control.VisualState = control.VisualState;//State
+                control.Type = BrushType.None;
             }
         }));
 
@@ -83,7 +68,16 @@ namespace Retouch_Photo2.Brushs
             set => base.SetValue(TypeProperty, value);
         }
         /// <summary> Identifies the <see cref = "TransparencyTypeComboBox.Type" /> dependency property. </summary>
-        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(BrushType), typeof(TransparencyTypeComboBox), new PropertyMetadata(BrushType.None));
+        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(BrushType), typeof(TransparencyTypeComboBox), new PropertyMetadata(BrushType.None, (sender, e) =>
+        {
+            TransparencyTypeComboBox control = (TransparencyTypeComboBox)sender;
+
+            if (e.NewValue is BrushType value)
+            {
+                BrushTypeListViewItem item = control.ItemDictionary[value];
+                control.Control.Content = item.Title;
+            }
+        }));
 
 
         #endregion
@@ -96,31 +90,37 @@ namespace Retouch_Photo2.Brushs
         public TransparencyTypeComboBox()
         {
             this.InitializeComponent();
+            this.InitializeDictionary();
             this.ConstructStrings();
 
-            this.NoneItem.Tapped += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, BrushType.None);//Delegate
-                this.Flyout.Hide();
-            };
-            this.LinearGradientItem.Tapped += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, BrushType.LinearGradient);//Delegate
-                this.Flyout.Hide();
-            };
-            this.RadialGradientItem.Tapped += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, BrushType.RadialGradient);//Delegate
-                this.Flyout.Hide();
-            };
-            this.EllipticalGradientItem.Tapped += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, BrushType.EllipticalGradient);//Delegate
-                this.Flyout.Hide();
-            };
-
             this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.ListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is ContentControl control)
+                {
+                    if (control.Parent is BrushTypeListViewItem item)
+                    {
+                        BrushType type = item.Type;
+                        this.TypeChanged?.Invoke(this, type); //Delegate
+                        this.Flyout.Hide();
+                    }
+                }
+            };
+            this.ListView.KeyDown += (s, e) =>
+            {
+                VirtualKey key = e.OriginalKey;
+                if (this.KeyDictionary.ContainsKey(key) == false) return;
+
+                BrushTypeListViewItem item = this.KeyDictionary[key];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
+            this.Flyout.Opened += (s, e) =>
+            {
+                BrushTypeListViewItem item = this.ItemDictionary[this.Type];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
         }
 
 
@@ -129,10 +129,32 @@ namespace Retouch_Photo2.Brushs
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.None.Content = resource.GetString($"Tools_Brush_Type_None");
-            this.LinearGradient.Content = resource.GetString($"Tools_Brush_Type_LinearGradient");
-            this.RadialGradient.Content = resource.GetString($"Tools_Brush_Type_RadialGradient");
-            this.EllipticalGradient.Content = resource.GetString($"Tools_Brush_Type_EllipticalGradient");
+            foreach (var kv in this.ItemDictionary)
+            {
+                BrushType type = kv.Key;
+                BrushTypeListViewItem item = kv.Value;
+                string title = resource.GetString($"Tools_Brush_Type_{type}");
+
+                item.Title = title;
+            }
         }
+
+
+        //@Group
+        private void InitializeDictionary()
+        {
+            foreach (object child in this.ListView.Items)
+            {
+                if (child is BrushTypeListViewItem item)
+                {
+                    BrushType type = item.Type;
+                    VirtualKey key = item.Key;
+
+                    this.ItemDictionary.Add(type, item);
+                    if (key != default) this.KeyDictionary.Add(key, item);
+                }
+            }
+        }
+
     }
 }

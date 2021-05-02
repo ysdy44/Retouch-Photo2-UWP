@@ -45,12 +45,12 @@
             <!--LeftTail-->
             <TextBlock x:Name="LeftTailTextBlock"  Style="{StaticResource AppTextBlockStyle}"/>
             <toolsElements:ArrowTailTypeComboBox x:Name="LeftTailComboBox"
-                 ArrowTailType="{x:Bind SelectionViewModel.GeometryArrow_LeftTail, Mode=OneWay}" />
+                 Type="{x:Bind SelectionViewModel.GeometryArrow_LeftTail, Mode=OneWay}" />
 
             <!--RightTail-->
             <TextBlock x:Name="RightTailTextBlock" Style="{StaticResource AppTextBlockStyle}"/>
             <toolsElements:ArrowTailTypeComboBox x:Name="RightTailComboBox" 
-                 ArrowTailType="{x:Bind SelectionViewModel.GeometryArrow_RightTail, Mode=OneWay}"/>
+                 Type="{x:Bind SelectionViewModel.GeometryArrow_RightTail, Mode=OneWay}"/>
 
             <Rectangle Style="{StaticResource AppSeparatorRectangleHorizontalStyle}"/>
 

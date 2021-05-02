@@ -3,252 +3,78 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:texts="using:Retouch_Photo2.Texts"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="200"
     >
 
     <UserControl.Resources>
+        <!--Template-->
+        <ControlTemplate x:Name="TagTemplate" TargetType="ContentControl">
+            <Border CornerRadius="2" Padding="2,0" Background="Black">
+                <ContentPresenter FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+        </ControlTemplate>
         <!--Flyout-->
         <Flyout x:Name="Flyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" Placement="Right" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
-               <StackPanel Padding="{StaticResource AppPanelPadding}" HorizontalAlignment="Stretch">
+            <ListView x:Name="ListView" IsItemClickEnabled="True" SelectionMode="Single">
+                <ListView.Items>
 
-                    <ListViewItem x:Name="BlackItem">
-                        <ContentControl x:Name="Black" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Tag>
-                                <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        900
-                                    </TextBlock>
-                                </Border>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
-                    <ListViewItem x:Name="BoldItem">
-                        <ContentControl x:Name="Bold" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Tag>
-                                <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        700
-                                    </TextBlock>
-                                </Border>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+                    <texts:FontWeightListViewItem x:Name="Black" Weight="Black" Index="0" Key="Number1">
+                        <ContentControl Tag="{x:Bind TagConverter(Black.Weight)}" Content="{x:Bind Black.Title}" Style="{StaticResource AppIconContentControlStyle}"/>
+                    </texts:FontWeightListViewItem>
+                    <texts:FontWeightListViewItem x:Name="Bold" Weight="Bold" Index="1" Key="Number2">
+                        <ContentControl Tag="{x:Bind TagConverter(Bold.Weight)}" Content="{x:Bind Bold.Title}" Style="{StaticResource AppIconContentControlStyle}"                            />
+                    </texts:FontWeightListViewItem>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                    <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}"/>
 
-                    <ListViewItem x:Name="ExtraBlackItem">
-                        <ContentControl x:Name="ExtraBlack" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Tag>
-                                <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        950
-                                    </TextBlock>
-                                </Border>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
-                    <ListViewItem x:Name="ExtraBoldItem">
-                        <ContentControl x:Name="ExtraBold" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Tag>
-                                <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        800
-                                    </TextBlock>
-                                </Border>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
-                    <ListViewItem x:Name="ExtraLightItem">
-                        <ContentControl x:Name="ExtraLight" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Tag>
-                                <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        200
-                                    </TextBlock>
-                                </Border>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+                    <texts:FontWeightListViewItem x:Name="ExtraBlack" Weight="ExtraBlack" Index="3" Key="Number3">
+                        <ContentControl Tag="{x:Bind TagConverter(ExtraBlack.Weight)}" Content="{x:Bind ExtraBlack.Title}" Style="{StaticResource AppIconContentControlStyle}"                                        />
+                    </texts:FontWeightListViewItem>
+                    <texts:FontWeightListViewItem x:Name="ExtraBold" Weight="ExtraBold" Index="4" Key="Number4">
+                        <ContentControl Tag="{x:Bind TagConverter(ExtraBold.Weight)}" Content="{x:Bind ExtraBold.Title}" Style="{StaticResource AppIconContentControlStyle}"                            />
+                    </texts:FontWeightListViewItem>
+                    <texts:FontWeightListViewItem x:Name="ExtraLight" Weight="ExtraLight" Index="5" Key="Number5">
+                        <ContentControl Tag="{x:Bind TagConverter(ExtraLight.Weight)}" Content="{x:Bind ExtraLight.Title}" Style="{StaticResource AppIconContentControlStyle}"                                        />
+                    </texts:FontWeightListViewItem>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                    <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}"/>
 
-                    <ListViewItem x:Name="LightItem">
-                        <ContentControl x:Name="Light" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Tag>
-                                <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        300
-                                    </TextBlock>
-                                </Border>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
-                    <ListViewItem x:Name="MediumItem">
-                        <ContentControl x:Name="Medium" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Tag>
-                                <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        500
-                                    </TextBlock>
-                                </Border>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
-                    <ListViewItem x:Name="NoneItem">
-                        <ContentControl x:Name="None" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Tag>
-                                <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        400
-                                    </TextBlock>
-                                </Border>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+                    <texts:FontWeightListViewItem x:Name="Light" Weight="Light" Index="7" Key="Number6">
+                        <ContentControl                                        Tag="{x:Bind TagConverter(Light.Weight)}" Content="{x:Bind Light.Title}" Style="{StaticResource AppIconContentControlStyle}"                            />
+                    </texts:FontWeightListViewItem>
+                    <texts:FontWeightListViewItem x:Name="Medium" Weight="Medium" Index="8" Key="Number7">
+                        <ContentControl                                        Tag="{x:Bind TagConverter(Medium.Weight)}" Content="{x:Bind Medium.Title}" Style="{StaticResource AppIconContentControlStyle}"                            />
+                    </texts:FontWeightListViewItem>
+                    <texts:FontWeightListViewItem x:Name="Normal" Weight="Normal" Index="9" Key="Number8">
+                        <ContentControl Tag="{x:Bind TagConverter(Normal.Weight)}" Content="{x:Bind Normal.Title}" Style="{StaticResource AppIconContentControlStyle}"                                        />
+                    </texts:FontWeightListViewItem>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                    <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}"/>
 
-                    <ListViewItem x:Name="SemiBoldItem">
-                        <ContentControl x:Name="SemiBold" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Tag>
-                                <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        600
-                                    </TextBlock>
-                                </Border>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
-                    <ListViewItem x:Name="SemiLightItem">
-                        <ContentControl x:Name="SemiLight" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Tag>
-                                <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        350
-                                    </TextBlock>
-                                </Border>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+                    <texts:FontWeightListViewItem x:Name="SemiBold" Weight="SemiBold" Index="11" Key="Number9">
+                        <ContentControl Tag="{x:Bind TagConverter(SemiBold.Weight)}" Content="{x:Bind SemiBold.Title}" Style="{StaticResource AppIconContentControlStyle}"                            />
+                    </texts:FontWeightListViewItem>
+                    <texts:FontWeightListViewItem x:Name="SemiLight" Weight="SemiLight" Index="12" Key="Number0">
+                        <ContentControl Tag="{x:Bind TagConverter(SemiLight.Weight)}" Content="{x:Bind SemiLight.Title}" Style="{StaticResource AppIconContentControlStyle}"                                        />
+                    </texts:FontWeightListViewItem>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                    <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}"/>
 
-                    <ListViewItem x:Name="ThinItem">
-                        <ContentControl x:Name="Thin" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Tag>
-                                <Border CornerRadius="2" Padding="2,0" Background="Black">
-                                    <TextBlock FontSize="12" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        100
-                                    </TextBlock>
-                                </Border>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+                    <texts:FontWeightListViewItem x:Name="Thin" Weight="Thin" Index="14">
+                        <ContentControl Tag="{x:Bind TagConverter(Thin.Weight)}" Content="{x:Bind Thin.Title}" Style="{StaticResource AppIconContentControlStyle}"                            />
+                    </texts:FontWeightListViewItem>
 
-                </StackPanel>
-            </ScrollViewer>
+                </ListView.Items>
+            </ListView>
         </Flyout>
     </UserControl.Resources>
 
 
     <ListViewItem x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
-
-        <!--VisualState-->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-
-                <!--Normal-->
-                <VisualState x:Name="Normal"/>
-
-                <!--Black-->
-                <VisualState x:Name="BlackState">
-                    <VisualState.Setters>
-                        <Setter Target = "BlackItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind Black.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <!--Bold-->
-                <VisualState x:Name="BoldState">
-                    <VisualState.Setters>
-                        <Setter Target = "BoldItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind Bold.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--ExtraBlack-->
-                <VisualState x:Name="ExtraBlackState">
-                    <VisualState.Setters>
-                        <Setter Target = "ExtraBlackItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind ExtraBlack.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <!--ExtraBold-->
-                <VisualState x:Name="ExtraBoldState">
-                    <VisualState.Setters>
-                        <Setter Target = "ExtraBoldItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind ExtraBold.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <!--ExtraLight-->
-                <VisualState x:Name="ExtraLightState">
-                    <VisualState.Setters>
-                        <Setter Target = "ExtraLightItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind ExtraLight.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Light-->
-                <VisualState x:Name="LightState">
-                    <VisualState.Setters>
-                        <Setter Target = "LightItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind Light.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <!--Medium-->
-                <VisualState x:Name="MediumState">
-                    <VisualState.Setters>
-                        <Setter Target = "MediumItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind Medium.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <!--None-->
-                <VisualState x:Name="NoneState">
-                    <VisualState.Setters>
-                        <Setter Target = "NoneItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind None.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--SemiBold-->
-                <VisualState x:Name="SemiBoldState">
-                    <VisualState.Setters>
-                        <Setter Target = "SemiBoldItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind SemiBold.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <!--SemiLight-->
-                <VisualState x:Name="SemiLightState">
-                    <VisualState.Setters>
-                        <Setter Target = "SemiLightItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind SemiLight.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Thin-->
-                <VisualState x:Name="ThinState">
-                    <VisualState.Setters>
-                        <Setter Target = "ThinItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind Thin.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
         <ContentControl x:Name="Control" Style="{StaticResource AppIconReverseContentControlStyle}">
             <ContentControl.Tag>
                 <FontIcon FontSize="14" Glyph="&#xE09B;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignRightWithPanel="True"

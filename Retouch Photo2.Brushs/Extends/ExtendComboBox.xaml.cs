@@ -5,12 +5,23 @@
 // Complete:      ★★
 using Microsoft.Graphics.Canvas;
 using System;
+using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Brushs
 {
+    internal class ExtendListViewItem : ListViewItem
+    {
+        //public string Name { get; set; }
+        public CanvasEdgeBehavior Type { get; set; }
+        public int Index { get; set; }
+        public VirtualKey Key { get; set; }
+        public string Title { get; set; }
+    }
+
     /// <summary>
     /// ComboBox of <see cref="CanvasEdgeBehavior"/>.
     /// </summary>
@@ -26,25 +37,9 @@ namespace Retouch_Photo2.Brushs
         public event EventHandler<object> Opened { add => this.Flyout.Opened += value; remove => this.Flyout.Opened -= value; }
 
 
-        //@VisualState
-        CanvasEdgeBehavior _vsExtend;
-        /// <summary> 
-        /// Represents the visual appearance of UI elements in a specific state.
-        /// </summary>
-        public VisualState VisualState
-        {
-            get
-            {
-                switch (this._vsExtend)
-                {
-                    case CanvasEdgeBehavior.Clamp: return this.ClampState;
-                    case CanvasEdgeBehavior.Wrap: return this.WrapState;
-                    case CanvasEdgeBehavior.Mirror: return this.MirrorState;
-                    default: return this.Normal;
-                }
-            }
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
+        //@Group
+        private readonly IDictionary<CanvasEdgeBehavior, ExtendListViewItem> ItemDictionary = new Dictionary<CanvasEdgeBehavior, ExtendListViewItem>();
+        private readonly IDictionary<VirtualKey, ExtendListViewItem> KeyDictionary = new Dictionary<VirtualKey, ExtendListViewItem>();
 
 
         #region DependencyProperty
@@ -53,20 +48,15 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets or sets the edge behavior. </summary>
         public CanvasEdgeBehavior Extend
         {
-            get => (CanvasEdgeBehavior)base.GetValue(ExtendProperty);
-            set => base.SetValue(ExtendProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "ExtendComboBox.Extend" /> dependency property. </summary>
-        public static readonly DependencyProperty ExtendProperty = DependencyProperty.Register(nameof(Extend), typeof(CanvasEdgeBehavior), typeof(ExtendComboBox), new PropertyMetadata(CanvasEdgeBehavior.Clamp, (sender, e) =>
-        {
-            ExtendComboBox control = (ExtendComboBox)sender;
-
-            if (e.NewValue is CanvasEdgeBehavior value)
+            get => this.extend;
+            set
             {
-                control._vsExtend = value;
-                control.VisualState = control.VisualState;//State
+                ExtendListViewItem item = this.ItemDictionary[value];
+                this.Control.Content = item.Title;
+                this.extend = value;
             }
-        }));
+        }
+        private CanvasEdgeBehavior extend;
 
         /// <summary> Gets or sets the fill or stroke. </summary>
         public FillOrStroke FillOrStroke
@@ -130,26 +120,37 @@ namespace Retouch_Photo2.Brushs
         public ExtendComboBox()
         {
             this.InitializeComponent();
+            this.InitializeDictionary();
             this.ConstructStrings();
 
-            this.ClampItem.Tapped += (s, e) =>
-            {
-                this.ExtendChanged?.Invoke(this, CanvasEdgeBehavior.Clamp);//Delegate
-                this.Flyout.Hide();
-            };
-            this.WrapItem.Tapped += (s, e) =>
-            {
-                this.ExtendChanged?.Invoke(this, CanvasEdgeBehavior.Wrap);//Delegate
-                this.Flyout.Hide();
-            };
-            this.MirrorItem.Tapped += (s, e) =>
-            {
-                this.ExtendChanged?.Invoke(this, CanvasEdgeBehavior.Mirror);//Delegate
-                this.Flyout.Hide();
-            };
-
             this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.ListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is ContentControl control)
+                {
+                    if (control.Parent is ExtendListViewItem item)
+                    {
+                        CanvasEdgeBehavior type = item.Type;
+                        this.ExtendChanged?.Invoke(this, type); //Delegate
+                        this.Flyout.Hide();
+                    }
+                }
+            };
+            this.ListView.KeyDown += (s, e) =>
+            {
+                VirtualKey key = e.OriginalKey;
+                if (this.KeyDictionary.ContainsKey(key) == false) return;
+
+                ExtendListViewItem item = this.KeyDictionary[key];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
+            this.Flyout.Opened += (s, e) =>
+            {
+                ExtendListViewItem item = this.ItemDictionary[this.Extend];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
         }
 
 
@@ -158,9 +159,32 @@ namespace Retouch_Photo2.Brushs
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Clamp.Content = resource.GetString($"Tools_Brush_Extend_Clamp");
-            this.Wrap.Content = resource.GetString($"Tools_Brush_Extend_Wrap");
-            this.Mirror.Content = resource.GetString($"Tools_Brush_Extend_Mirror");
+            foreach (var kv in this.ItemDictionary)
+            {
+                CanvasEdgeBehavior type = kv.Key;
+                ExtendListViewItem item = kv.Value;
+                string title = resource.GetString($"Tools_Brush_Extend_{type}");
+
+                item.Title = title;
+            }
         }
+
+
+        //@Group
+        private void InitializeDictionary()
+        {
+            foreach (object child in this.ListView.Items)
+            {
+                if (child is ExtendListViewItem item)
+                {
+                    CanvasEdgeBehavior type = item.Type;
+                    VirtualKey key = item.Key;
+
+                    this.ItemDictionary.Add(type, item);
+                    if (key != default) this.KeyDictionary.Add(key, item);
+                }
+            }
+        }
+
     }
 }

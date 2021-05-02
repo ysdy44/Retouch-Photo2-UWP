@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:brushs="using:Retouch_Photo2.Brushs"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="200"
@@ -23,142 +24,87 @@
         <!--Flyout-->
         <Flyout x:Name="Flyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" Placement="Top" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
-                <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <ListView x:Name="ListView" IsItemClickEnabled="True" SelectionMode="Single">
+                    <ListView.Items>
 
-                    <ListViewItem x:Name="NoneItem">
-                        <ContentControl x:Name="None" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/NoneIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource NoneIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+                        <brushs:BrushTypeListViewItem x:Name="None" Type="None" Index="0" Key="Number1">
+                            <ContentControl Content="{x:Bind None.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/NoneIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource NoneIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </brushs:BrushTypeListViewItem>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                        <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}" />
 
-                    <ListViewItem x:Name="ColorItem">
-                        <ContentControl x:Name="Color" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/ColorIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource ColorIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+                        <brushs:BrushTypeListViewItem x:Name="Color" Type="Color" Index="2" Key="Number2">
+                            <ContentControl Content="{x:Bind Color.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/ColorIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource ColorIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </brushs:BrushTypeListViewItem>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                        <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}" />
 
-                    <ListViewItem x:Name="LinearGradientItem">
-                        <ContentControl x:Name="LinearGradient" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/LinearGradientIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource LinearGradientIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
-                    <ListViewItem x:Name="RadialGradientItem">
-                        <ContentControl x:Name="RadialGradient" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/RadialGradientIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource RadialGradientIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
-                    <ListViewItem x:Name="EllipticalGradientItem">
-                        <ContentControl x:Name="EllipticalGradient" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/EllipticalGradientIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource EllipticalGradientIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+                        <brushs:BrushTypeListViewItem x:Name="LinearGradient" Type="LinearGradient" Index="4" Key="Number3">
+                            <ContentControl Content="{x:Bind LinearGradient.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/LinearGradientIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource LinearGradientIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </brushs:BrushTypeListViewItem>
+                        <brushs:BrushTypeListViewItem x:Name="RadialGradient" Type="RadialGradient" Index="5" Key="Number4">
+                            <ContentControl Content="{x:Bind RadialGradient.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/RadialGradientIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource RadialGradientIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </brushs:BrushTypeListViewItem>
+                        <brushs:BrushTypeListViewItem x:Name="EllipticalGradient" Type="EllipticalGradient" Index="6" Key="Number5">
+                            <ContentControl Content="{x:Bind EllipticalGradient.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/EllipticalGradientIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource EllipticalGradientIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </brushs:BrushTypeListViewItem>
 
-                    <Rectangle Style="{StaticResource AppSeparatorRectangleStyle}"/>
+                        <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}" />
 
-                    <ListViewItem x:Name="ImageItem">
-                        <ContentControl x:Name="Image" Style="{StaticResource AppIconContentControlStyle}">
-                            <ContentControl.Resources>
-                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/ImageIcon.xaml"/>
-                            </ContentControl.Resources>
-                            <ContentControl.Tag>
-                                <ContentControl Template="{StaticResource ImageIcon}"/>
-                            </ContentControl.Tag>
-                        </ContentControl>
-                    </ListViewItem>
+                        <brushs:BrushTypeListViewItem x:Name="Image" Type="Image" Index="7" Key="Number6">
+                            <ContentControl Content="{x:Bind Image.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                                <ContentControl.Resources>
+                                    <ResourceDictionary Source="ms-appx:///Retouch Photo2.Brushs/BrushTypes/Icons/ImageIcon.xaml"/>
+                                </ContentControl.Resources>
+                                <ContentControl.Tag>
+                                    <ContentControl Template="{StaticResource ImageIcon}"/>
+                                </ContentControl.Tag>
+                            </ContentControl>
+                        </brushs:BrushTypeListViewItem>
 
-                </StackPanel>
+                    </ListView.Items>
+                </ListView>
             </ScrollViewer>
         </Flyout>
     </UserControl.Resources>
 
 
     <ListViewItem x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
-
-        <!--VisualState-->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-
-                <!--Normal-->
-                <VisualState x:Name="Normal"/>
-
-                <!--None-->
-                <VisualState x:Name="NoneState">
-                    <VisualState.Setters>
-                        <Setter Target = "NoneItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind None.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Color-->
-                <VisualState x:Name="ColorState">
-                    <VisualState.Setters>
-                        <Setter Target = "ColorItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind Color.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--LinearGradient-->
-                <VisualState x:Name="LinearGradientState">
-                    <VisualState.Setters>
-                        <Setter Target = "LinearGradientItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind LinearGradient.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <!--RadialGradient-->
-                <VisualState x:Name="RadialGradientState">
-                    <VisualState.Setters>
-                        <Setter Target = "RadialGradientItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind RadialGradient.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <!--EllipticalGradient-->
-                <VisualState x:Name="EllipticalGradientState">
-                    <VisualState.Setters>
-                        <Setter Target = "EllipticalGradientItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind EllipticalGradient.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Image-->
-                <VisualState x:Name="ImageState">
-                    <VisualState.Setters>
-                        <Setter Target = "ImageItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind Image.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
         <ListViewItem.BorderBrush>
             <!--Storyboard-->
             <SolidColorBrush x:Name="ButtonBorderBrush" Color="{ThemeResource AppStrokeColor}"/>

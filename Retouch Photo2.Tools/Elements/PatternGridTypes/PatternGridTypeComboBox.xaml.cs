@@ -1,11 +1,27 @@
-﻿using Retouch_Photo2.Layers.Models;
+﻿// Core:              ★
+// Referenced:   
+// Difficult:         ★★
+// Only:              ★★
+// Complete:      ★★
+using Retouch_Photo2.Layers.Models;
 using System;
+using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Elements
 {
+    internal class PatternGridTypeListViewItem : ListViewItem
+    {
+        //public string Name { get; set; }
+        public PatternGridType Type { get; set; }
+        public int Index { get; set; }
+        public VirtualKey Key { get; set; }
+        public string Title { get; set; }
+    }
+
     /// <summary>
     /// Represents the contorl that is used to select grid, horizontal or vertical.
     /// </summary>
@@ -21,47 +37,26 @@ namespace Retouch_Photo2.Tools.Elements
         public event EventHandler<object> Opened { add => this.Flyout.Opened += value; remove => this.Flyout.Opened -= value; }
 
 
-        //@VisualState
-        PatternGridType _vsType;
-        /// <summary> 
-        /// Represents the visual appearance of UI elements in a specific state.
-        /// </summary>
-        public VisualState VisualState
-        {
-            get
-            {
-                switch (this._vsType)
-                {
-                    case PatternGridType.Grid: return this.GridState;
-                    case PatternGridType.Horizontal: return this.HorizontalState;
-                    case PatternGridType.Vertical: return this.VerticalState;
-                    default: return this.Normal;
-                }
-            }
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
+        //@Group
+        private readonly IDictionary<PatternGridType, PatternGridTypeListViewItem> ItemDictionary = new Dictionary<PatternGridType, PatternGridTypeListViewItem>();
+        private readonly IDictionary<VirtualKey, PatternGridTypeListViewItem> KeyDictionary = new Dictionary<VirtualKey, PatternGridTypeListViewItem>();
 
 
         #region DependencyProperty
 
 
         /// <summary> Gets or sets the grid, horizontal or vertical. </summary>
-        public PatternGridType GridType
+        public PatternGridType Type
         {
-            get => (PatternGridType)base.GetValue(GridTypeProperty);
-            set => base.SetValue(GridTypeProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "PatternGridTypeComboBox.GridType" /> dependency property. </summary>
-        public static readonly DependencyProperty GridTypeProperty = DependencyProperty.Register(nameof(GridType), typeof(PatternGridType), typeof(PatternGridTypeComboBox), new PropertyMetadata(PatternGridType.Grid, (sender, e) =>
-        {
-            PatternGridTypeComboBox control = (PatternGridTypeComboBox)sender;
-
-            if (e.NewValue is PatternGridType value)
+            get => this.type;
+            set
             {
-                control._vsType = value;
-                control.VisualState = control.VisualState;//State
+                PatternGridTypeListViewItem item = this.ItemDictionary[value];
+                this.Control.Content = item.Title;
+                this.type = value;
             }
-        }));
+        }
+        private PatternGridType type;
 
 
         #endregion
@@ -74,26 +69,37 @@ namespace Retouch_Photo2.Tools.Elements
         public PatternGridTypeComboBox()
         {
             this.InitializeComponent();
+            this.InitializeDictionary();
             this.ConstructStrings();
 
-            this.GridItem.Tapped += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, PatternGridType.Grid); //Delegate
-                this.Flyout.Hide();
-            };
-            this.HorizontalItem.Tapped += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, PatternGridType.Horizontal); //Delegate
-                this.Flyout.Hide();
-            };
-            this.VerticalItem.Tapped += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, PatternGridType.Vertical); //Delegate
-                this.Flyout.Hide();
-            };
-
             this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.ListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is ContentControl control)
+                {
+                    if (control.Parent is PatternGridTypeListViewItem item)
+                    {
+                        PatternGridType type = item.Type;
+                        this.TypeChanged?.Invoke(this, type); //Delegate
+                        this.Flyout.Hide();
+                    }
+                }
+            };
+            this.ListView.KeyDown += (s, e) =>
+            {
+                VirtualKey key = e.OriginalKey;
+                if (this.KeyDictionary.ContainsKey(key) == false) return;
+
+                PatternGridTypeListViewItem item = this.KeyDictionary[key];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
+            this.Flyout.Opened += (s, e) =>
+            {
+                PatternGridTypeListViewItem item = this.ItemDictionary[this.Type];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
         }
 
 
@@ -102,9 +108,32 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Grid.Content = resource.GetString($"Tools_PatternGrid_Grid");
-            this.Horizontal.Content = resource.GetString($"Tools_PatternGrid_Horizontal");
-            this.Vertical.Content = resource.GetString($"Tools_PatternGrid_Vertical");
+            foreach (var kv in this.ItemDictionary)
+            {
+                PatternGridType type = kv.Key;
+                PatternGridTypeListViewItem item = kv.Value;
+                string title = resource.GetString($"Tools_PatternGrid_{type}");
+
+                item.Title = title;
+            }
         }
+
+
+        //@Group
+        private void InitializeDictionary()
+        {
+            foreach (object child in this.ListView.Items)
+            {
+                if (child is PatternGridTypeListViewItem item)
+                {
+                    PatternGridType type = item.Type;
+                    VirtualKey key = item.Key;
+
+                    this.ItemDictionary.Add(type, item);
+                    if (key != default) this.KeyDictionary.Add(key, item);
+                }
+            }
+        }
+
     }
 }

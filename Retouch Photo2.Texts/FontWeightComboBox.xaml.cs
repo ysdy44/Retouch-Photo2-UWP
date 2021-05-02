@@ -4,13 +4,23 @@
 // Only:              ★★
 // Complete:      ★★
 using System;
+using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
-using Windows.UI.Text;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Texts
 {
+    internal class FontWeightListViewItem : ListViewItem
+    {
+        //public string Name { get; set; }
+        public FontWeight2 Weight { get; set; }
+        public int Index { get; set; }
+        public VirtualKey Key { get; set; }
+        public string Title { get; set; }
+    }
+
     /// <summary>
     /// Segmented of <see cref="FontWeight2"/>.
     /// </summary>
@@ -26,39 +36,17 @@ namespace Retouch_Photo2.Texts
         public event EventHandler<object> Opened { add => this.Flyout.Opened += value; remove => this.Flyout.Opened -= value; }
 
 
-        //@VisualState
-        FontWeight2 _vsWeight;
-        /// <summary> 
-        /// Represents the visual appearance of UI elements in a specific state.
-        /// </summary>
-        public VisualState VisualState
+        //@Group
+        private readonly IDictionary<FontWeight2, FontWeightListViewItem> ItemDictionary = new Dictionary<FontWeight2, FontWeightListViewItem>();
+        private readonly IDictionary<VirtualKey, FontWeightListViewItem> KeyDictionary = new Dictionary<VirtualKey, FontWeightListViewItem>();
+
+
+        //@Converter
+        private ContentControl TagConverter(FontWeight2 weight2) => new ContentControl
         {
-            get
-            {
-
-                switch (this._vsWeight)
-                {
-                    case FontWeight2.Black: return this.BlackState;
-                    case FontWeight2.Bold: return this.BoldState;
-
-                    case FontWeight2.ExtraBlack: return this.ExtraBlackState;
-                    case FontWeight2.ExtraBold: return this.ExtraBoldState;
-                    case FontWeight2.ExtraLight: return this.ExtraLightState;
-
-                    case FontWeight2.Light: return this.LightState;
-                    case FontWeight2.Medium: return this.MediumState;
-                    case FontWeight2.Normal: return this.NoneState;
-
-                    case FontWeight2.SemiBold: return this.SemiBoldState;
-                    case FontWeight2.SemiLight: return this.SemiLightState;
-
-                    case FontWeight2.Thin: return this.ThinState;
-
-                    default: return this.Normal;
-                }
-            }
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
+            Template = this.TagTemplate,
+            Content = weight2.ToFontWeight().Weight.ToString()
+        };
 
 
         #region DependencyProperty
@@ -67,30 +55,15 @@ namespace Retouch_Photo2.Texts
         /// <summary> Gets or sets the fontvweight. </summary>
         public FontWeight2 Weight
         {
-            get => (FontWeight2)base.GetValue(FontWeight2Property);
-            set => base.SetValue(FontWeight2Property, value);
-        }
-        /// <summary> Identifies the <see cref = "FontWeightComboBox.Weight" /> dependency property. </summary>
-        public static readonly DependencyProperty FontWeight2Property = DependencyProperty.Register(nameof(Weight), typeof(FontWeight2), typeof(FontWeightComboBox), new PropertyMetadata(FontWeight2.Normal, (sender, e) =>
-        {
-            FontWeightComboBox control = (FontWeightComboBox)sender;
-
-            if (e.NewValue is FontWeight2 value)
+            get => this.weight;
+            set
             {
-                control._vsWeight = value;
-                control.VisualState = control.VisualState;//State
+                FontWeightListViewItem item = this.ItemDictionary[value];
+                this.Control.Content = item.Title;
+                this.weight = value;
             }
-        }));
-
-
-        /// <summary> Gets or sets the title. </summary>
-        public object Title
-        {
-            get => (object)base.GetValue(TitleProperty);
-            set => base.SetValue(TitleProperty, value);
         }
-        /// <summary> Identifies the <see cref = "FontWeightComboBox.Title" /> dependency property. </summary>
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(object), typeof(FontWeightComboBox), new PropertyMetadata(null));
+        private FontWeight2 weight;
 
 
         #endregion
@@ -103,26 +76,36 @@ namespace Retouch_Photo2.Texts
         public FontWeightComboBox()
         {
             this.InitializeComponent();
+            this.InitializeDictionary();
             this.ConstructStrings();
 
-            this.BlackItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Black);//Delegate
-            this.BoldItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Bold);//Delegate
-
-            this.ExtraBlackItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.ExtraBlack);//Delegate
-            this.ExtraBoldItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.ExtraBold);//Delegate
-            this.ExtraLightItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.ExtraLight);//Delegate
-
-            this.LightItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Light);//Delegate
-            this.MediumItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Medium);//Delegate
-            this.NoneItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Normal);//Delegate
-
-            this.SemiBoldItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.SemiBold);//Delegate
-            this.SemiLightItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.SemiLight);//Delegate
-
-            this.ThinItem.Tapped += (s, e) => this.WeightChanged?.Invoke(this, FontWeight2.Thin);//Delegate
-
             this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.ListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is ContentControl control)
+                {
+                    if (control.Parent is FontWeightListViewItem item)
+                    {
+                        FontWeight2 weight = item.Weight;
+                        this.WeightChanged?.Invoke(this, weight);//Delegate
+                    }
+                }
+            };
+            this.ListView.KeyDown += (s, e) =>
+            {
+                VirtualKey key = e.OriginalKey;
+                if (this.KeyDictionary.ContainsKey(key) == false) return;
+
+                FontWeightListViewItem item = this.KeyDictionary[key];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
+            this.Flyout.Opened += (s, e) =>
+            {
+                FontWeightListViewItem item = this.ItemDictionary[this.Weight];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
         }
 
 
@@ -131,21 +114,33 @@ namespace Retouch_Photo2.Texts
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Black.Content = resource.GetString("Texts_FontWeight_Black");
-            this.Bold.Content = resource.GetString("Texts_FontWeight_Bold");
+            foreach (var kv in this.ItemDictionary)
+            {
+                FontWeight2 weight = kv.Key;
+                FontWeightListViewItem item = kv.Value;
+                string title = resource.GetString($"Texts_FontWeight_{weight}");
 
-            this.ExtraBlack.Content = resource.GetString("Texts_FontWeight_ExtraBlack");
-            this.ExtraBold.Content = resource.GetString("Texts_FontWeight_ExtraBold");
-            this.ExtraLight.Content = resource.GetString("Texts_FontWeight_ExtraLight");
-
-            this.Light.Content = resource.GetString("Texts_FontWeight_Light");
-            this.Medium.Content = resource.GetString("Texts_FontWeight_Medium");
-            this.None.Content = resource.GetString("Texts_FontWeight_Normal");
-
-            this.SemiBold.Content = resource.GetString("Texts_FontWeight_SemiBold");
-            this.SemiLight.Content = resource.GetString("Texts_FontWeight_SemiLight");
-
-            this.Thin.Content = resource.GetString("Texts_FontWeight_Thin");
+                item.Title = title;
+                if (this.Weight == weight) this.Control.Content = title;
+            }
         }
+
+
+        //@Group
+        private void InitializeDictionary()
+        {
+            foreach (object child in this.ListView.Items)
+            {
+                if (child is FontWeightListViewItem item)
+                {
+                    FontWeight2 weight = item.Weight;
+                    VirtualKey key = item.Key;
+
+                    this.ItemDictionary.Add(weight, item);
+                    if (key != default) this.KeyDictionary.Add(key, item);
+                }
+            }
+        }
+
     }
 }

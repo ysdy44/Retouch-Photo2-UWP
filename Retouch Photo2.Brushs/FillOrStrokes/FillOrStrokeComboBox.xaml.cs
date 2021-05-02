@@ -3,15 +3,27 @@
 // Difficult:         ★★
 // Only:              ★★
 // Complete:      ★★
+using Microsoft.Graphics.Canvas;
 using System;
+using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Brushs
 {
+    internal class FillOrStrokeListViewItem : ListViewItem
+    {
+        //public string Name { get; set; }
+        public FillOrStroke FillOrStroke { get; set; }
+        public int Index { get; set; }
+        public VirtualKey Key { get; set; }
+        public string Title { get; set; }
+    }
+
     /// <summary>
-    /// ComboBox OF <see cref="Retouch_Photo2.Brushs.FillOrStroke"/>.
+    /// ComboBox of <see cref="FillOrStroke"/>.
     /// </summary>
     public sealed partial class FillOrStrokeComboBox : UserControl
     {
@@ -25,24 +37,9 @@ namespace Retouch_Photo2.Brushs
         public event EventHandler<object> Opened { add => this.Flyout.Opened += value; remove => this.Flyout.Opened -= value; }
 
 
-        //@VisualState
-        FillOrStroke _vsFillOrStroke;
-        /// <summary> 
-        /// Represents the visual appearance of UI elements in a specific state.
-        /// </summary>
-        public VisualState VisualState
-        {
-            get
-            {
-                switch (this._vsFillOrStroke)
-                {
-                    case FillOrStroke.Fill: return this.FillState;
-                    case FillOrStroke.Stroke: return this.StrokeState;
-                    default: return this.Normal;
-                }
-            }
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
+        //@Group
+        private readonly IDictionary<FillOrStroke, FillOrStrokeListViewItem> ItemDictionary = new Dictionary<FillOrStroke, FillOrStrokeListViewItem>();
+        private readonly IDictionary<VirtualKey, FillOrStrokeListViewItem> KeyDictionary = new Dictionary<VirtualKey, FillOrStrokeListViewItem>();
 
 
         #region DependencyProperty
@@ -51,20 +48,15 @@ namespace Retouch_Photo2.Brushs
         /// <summary> Gets or sets the fill or stroke. </summary>
         public FillOrStroke FillOrStroke
         {
-            get => (FillOrStroke)base.GetValue(FillOrStrokeProperty);
-            set => base.SetValue(FillOrStrokeProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "FillOrStrokeComboBox.FillOrStroke" /> dependency property. </summary>
-        public static readonly DependencyProperty FillOrStrokeProperty = DependencyProperty.Register(nameof(FillOrStroke), typeof(FillOrStroke), typeof(FillOrStrokeComboBox), new PropertyMetadata(FillOrStroke.Fill, (sender, e) =>
-        {
-            FillOrStrokeComboBox control = (FillOrStrokeComboBox)sender;
-
-            if (e.NewValue is FillOrStroke value)
+            get => this.fillOrStroke;
+            set
             {
-                control._vsFillOrStroke = value;
-                control.VisualState = control.VisualState;//State
+                FillOrStrokeListViewItem item = this.ItemDictionary[value];
+                this.Control.Content = item.Title;
+                this.fillOrStroke = value;
             }
-        }));
+        }
+        private FillOrStroke fillOrStroke;
 
 
         #endregion
@@ -77,21 +69,37 @@ namespace Retouch_Photo2.Brushs
         public FillOrStrokeComboBox()
         {
             this.InitializeComponent();
+            this.InitializeDictionary();
             this.ConstructStrings();
 
-            this.FillItem.Tapped += (s, e) =>
-            {
-                this.FillOrStrokeChanged?.Invoke(this, FillOrStroke.Fill);//Delegate
-                this.Flyout.Hide();
-            };
-            this.StrokeItem.Tapped += (s, e) =>
-            {
-                this.FillOrStrokeChanged?.Invoke(this, FillOrStroke.Stroke);//Delegate
-                this.Flyout.Hide();
-            };
-
             this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.ListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is ContentControl control)
+                {
+                    if (control.Parent is FillOrStrokeListViewItem item)
+                    {
+                        FillOrStroke type = item.FillOrStroke;
+                        this.FillOrStrokeChanged?.Invoke(this, type); //Delegate
+                        this.Flyout.Hide();
+                    }
+                }
+            };
+            this.ListView.KeyDown += (s, e) =>
+            {
+                VirtualKey key = e.OriginalKey;
+                if (this.KeyDictionary.ContainsKey(key) == false) return;
+
+                FillOrStrokeListViewItem item = this.KeyDictionary[key];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
+            this.Flyout.Opened += (s, e) =>
+            {
+                FillOrStrokeListViewItem item = this.ItemDictionary[this.FillOrStroke];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
         }
 
 
@@ -100,8 +108,32 @@ namespace Retouch_Photo2.Brushs
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.Fill.Content = resource.GetString($"Tools_Fill");
-            this.Stroke.Content = resource.GetString($"Tools_Stroke");
+            foreach (var kv in this.ItemDictionary)
+            {
+                FillOrStroke type = kv.Key;
+                FillOrStrokeListViewItem item = kv.Value;
+                string title = resource.GetString($"Tools_{type}");
+
+                item.Title = title;
+            }
         }
+
+
+        //@Group
+        private void InitializeDictionary()
+        {
+            foreach (object child in this.ListView.Items)
+            {
+                if (child is FillOrStrokeListViewItem item)
+                {
+                    FillOrStroke type = item.FillOrStroke;
+                    VirtualKey key = item.Key;
+
+                    this.ItemDictionary.Add(type, item);
+                    if (key != default) this.KeyDictionary.Add(key, item);
+                }
+            }
+        }
+
     }
 }

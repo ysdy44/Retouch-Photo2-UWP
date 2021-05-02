@@ -1,11 +1,27 @@
-﻿using FanKit.Transformers;
+﻿// Core:              ★
+// Referenced:   
+// Difficult:         ★★
+// Only:              ★★
+// Complete:      ★★
+using FanKit.Transformers;
 using System;
+using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Retouch_Photo2.Tools.Elements
 {
+    internal class ArrowTailTypeListViewItem : ListViewItem
+    {
+        //public string Name { get; set; }
+        public GeometryArrowTailType Type { get; set; }
+        public int Index { get; set; }
+        public VirtualKey Key { get; set; }
+        public string Title { get; set; }
+    }
+
     /// <summary>
     /// Represents the contorl that is used to select none or arrow.
     /// </summary>
@@ -21,46 +37,26 @@ namespace Retouch_Photo2.Tools.Elements
         public event EventHandler<object> Opened { add => this.Flyout.Opened += value; remove => this.Flyout.Opened -= value; }
 
 
-        //@VisualState
-        GeometryArrowTailType _vsType;
-        /// <summary> 
-        /// Represents the visual appearance of UI elements in a specific state.
-        /// </summary>
-        public VisualState VisualState
-        {
-            get
-            {
-                switch (this._vsType)
-                {
-                    case GeometryArrowTailType.None: return this.NoneState;
-                    case GeometryArrowTailType.Arrow: return this.ArrowState;
-                    default: return this.Normal;
-                }
-            }
-            set => VisualStateManager.GoToState(this, value.Name, false);
-        }
+        //@Group
+        private readonly IDictionary<GeometryArrowTailType, ArrowTailTypeListViewItem> ItemDictionary = new Dictionary<GeometryArrowTailType, ArrowTailTypeListViewItem>();
+        private readonly IDictionary<VirtualKey, ArrowTailTypeListViewItem> KeyDictionary = new Dictionary<VirtualKey, ArrowTailTypeListViewItem>();
 
 
         #region DependencyProperty
 
 
         /// <summary> Gets or sets the none or arrow. </summary>
-        public GeometryArrowTailType ArrowTailType
+        public GeometryArrowTailType Type
         {
-            get => (GeometryArrowTailType)base.GetValue(ArrowTailTypeProperty);
-            set => base.SetValue(ArrowTailTypeProperty, value);
-        }
-        /// <summary> Identifies the <see cref = "ArrowTailTypeComboBox.ArrowTailType" /> dependency property. </summary>
-        public static readonly DependencyProperty ArrowTailTypeProperty = DependencyProperty.Register(nameof(ArrowTailType), typeof(GeometryArrowTailType), typeof(ArrowTailTypeComboBox), new PropertyMetadata(GeometryArrowTailType.None, (sender, e) =>
-        {
-            ArrowTailTypeComboBox control = (ArrowTailTypeComboBox)sender;
-
-            if (e.NewValue is GeometryArrowTailType value)
+            get => this.type;
+            set
             {
-                control._vsType = value;
-                control.VisualState = control.VisualState;//State
+                ArrowTailTypeListViewItem item = this.ItemDictionary[value];
+                this.Control.Content = item.Title;
+                this.type = value;
             }
-        }));
+        }
+        private GeometryArrowTailType type;
 
 
         #endregion
@@ -73,21 +69,37 @@ namespace Retouch_Photo2.Tools.Elements
         public ArrowTailTypeComboBox()
         {
             this.InitializeComponent();
+            this.InitializeDictionary();
             this.ConstructStrings();
 
-            this.NoneItem.Tapped += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, GeometryArrowTailType.None); //Delegate
-                this.Flyout.Hide();
-            };
-            this.ArrowItem.Tapped += (s, e) =>
-            {
-                this.TypeChanged?.Invoke(this, GeometryArrowTailType.Arrow); //Delegate
-                this.Flyout.Hide();
-            };
-
             this.Button.Tapped += (s, e) => this.Flyout.ShowAt(this);
-            this.Loaded += (s, e) => this.VisualState = this.VisualState;//State
+            this.ListView.ItemClick += (s, e) =>
+            {
+                if (e.ClickedItem is ContentControl control)
+                {
+                    if (control.Parent is ArrowTailTypeListViewItem item)
+                    {
+                        GeometryArrowTailType type = item.Type;
+                        this.TypeChanged?.Invoke(this, type); //Delegate
+                        this.Flyout.Hide();
+                    }
+                }
+            };
+            this.ListView.KeyDown += (s, e) =>
+            {
+                VirtualKey key = e.OriginalKey;
+                if (this.KeyDictionary.ContainsKey(key) == false) return;
+
+                ArrowTailTypeListViewItem item = this.KeyDictionary[key];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
+            this.Flyout.Opened += (s, e) =>
+            {
+                ArrowTailTypeListViewItem item = this.ItemDictionary[this.Type];
+                item.Focus(FocusState.Programmatic);
+                this.ListView.SelectedIndex = item.Index;
+            };
         }
 
 
@@ -96,8 +108,32 @@ namespace Retouch_Photo2.Tools.Elements
         {
             ResourceLoader resource = ResourceLoader.GetForCurrentView();
 
-            this.None.Content = resource.GetString($"Tools_GeometryArrow_ArrowTail_None");
-            this.Arrow.Content = resource.GetString($"Tools_GeometryArrow_ArrowTail_Arrow");
+            foreach (var kv in this.ItemDictionary)
+            {
+                GeometryArrowTailType type = kv.Key;
+                ArrowTailTypeListViewItem item = kv.Value;
+                string title = resource.GetString($"Tools_GeometryArrow_ArrowTail_{type}");
+
+                item.Title = title;
+            }
         }
+
+
+        //@Group
+        private void InitializeDictionary()
+        {
+            foreach (object child in this.ListView.Items)
+            {
+                if (child is ArrowTailTypeListViewItem item)
+                {
+                    GeometryArrowTailType type = item.Type;
+                    VirtualKey key = item.Key;
+
+                    this.ItemDictionary.Add(type, item);
+                    if (key != default) this.KeyDictionary.Add(key, item);
+                }
+            }
+        }
+
     }
 }

@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:elements="using:Retouch_Photo2.Tools.Elements"
     mc:Ignorable="d"
     d:DesignHeight="200"
     d:DesignWidth="200"
@@ -12,78 +13,47 @@
     <UserControl.Resources>
         <!--Flyout-->
         <Flyout x:Name="Flyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <StackPanel Width="Auto" MinWidth="120" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <ListViewItem x:Name="GridItem">
-                    <ContentControl x:Name="Grid" Style="{StaticResource AppIconContentControlStyle}">
-                        <ContentControl.Resources>
-                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/GridIcon.xaml"/>
-                        </ContentControl.Resources>
-                        <ContentControl.Tag>
-                            <ContentControl Template="{StaticResource GridIcon}"/>
-                        </ContentControl.Tag>
-                    </ContentControl>
-                </ListViewItem>
-                <ListViewItem x:Name="HorizontalItem">
-                    <ContentControl x:Name="Horizontal" Style="{StaticResource AppIconContentControlStyle}">
-                        <ContentControl.Resources>
-                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/HorizontalIcon.xaml"/>
-                        </ContentControl.Resources>
-                        <ContentControl.Tag>
-                            <ContentControl Template="{StaticResource HorizontalIcon}"/>
-                        </ContentControl.Tag>
-                    </ContentControl>
-                </ListViewItem>
-                <ListViewItem x:Name="VerticalItem">
-                    <ContentControl x:Name="Vertical" Style="{StaticResource AppIconContentControlStyle}">
-                        <ContentControl.Resources>
-                            <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/VerticalIcon.xaml"/>
-                        </ContentControl.Resources>
-                        <ContentControl.Tag>
-                            <ContentControl Template="{StaticResource VerticalIcon}"/>
-                        </ContentControl.Tag>
-                    </ContentControl>
-                </ListViewItem>
-            </StackPanel>
+            <ListView x:Name="ListView" IsItemClickEnabled="True" SelectionMode="Single">
+                <ListView.Items>
+
+                    <elements:PatternGridTypeListViewItem x:Name="Grid" Type="Grid" Index="0" Key="Number1">
+                        <ContentControl Content="{x:Bind Grid.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/GridIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource GridIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </elements:PatternGridTypeListViewItem>
+                    <elements:PatternGridTypeListViewItem x:Name="Horizontal" Type="Horizontal" Index="1" Key="Number2">
+                        <ContentControl Content="{x:Bind Horizontal.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/HorizontalIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource HorizontalIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </elements:PatternGridTypeListViewItem>
+                    <elements:PatternGridTypeListViewItem x:Name="Vertical" Type="Vertical" Index="2" Key="Number3">
+                        <ContentControl Content="{x:Bind Vertical.Title}" Style="{StaticResource AppIconContentControlStyle}">
+                            <ContentControl.Resources>
+                                <ResourceDictionary Source="ms-appx:///Retouch Photo2.Tools/Elements/PatternGridTypes/Icons/VerticalIcon.xaml"/>
+                            </ContentControl.Resources>
+                            <ContentControl.Tag>
+                                <ContentControl Template="{StaticResource VerticalIcon}"/>
+                            </ContentControl.Tag>
+                        </ContentControl>
+                    </elements:PatternGridTypeListViewItem>
+
+                </ListView.Items>
+            </ListView>
         </Flyout>
     </UserControl.Resources>
 
 
     <ListViewItem x:Name="Button" HorizontalContentAlignment="Stretch" Style="{StaticResource AppListViewItemStyle}">
-        
-        <!--VisualState-->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-
-                <!--Normal-->
-                <VisualState x:Name="Normal"/>
-
-                <!--Grid-->
-                <VisualState x:Name="GridState">
-                    <VisualState.Setters>
-                        <Setter Target = "GridItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind Grid.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Horizontal-->
-                <VisualState x:Name="HorizontalState">
-                    <VisualState.Setters>
-                        <Setter Target = "HorizontalItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind Horizontal.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <!--Vertical-->
-                <VisualState x:Name="VerticalState">
-                    <VisualState.Setters>
-                        <Setter Target = "VerticalItem.IsSelected" Value="True"/>
-                        <Setter Target = "Control.Content" Value="{x:Bind Vertical.Content}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
         <ContentControl x:Name="Control" Style="{StaticResource AppIconReverseContentControlStyle}">
             <ContentControl.Tag>
                 <FontIcon FontSize="14" Glyph="&#xE099;" FontWeight="Bold" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
