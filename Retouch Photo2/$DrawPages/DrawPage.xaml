@@ -66,7 +66,7 @@
         <Flyout x:Name="MoreFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
             <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
                 <StackPanel>
-                    
+
                     <!--Transform-->
                     <ListViewItem x:Name="TransformGroupHeader" Style="{StaticResource AppGroupHeaderListViewItemStyle}"/>
                     <!--Ratio-->
@@ -88,8 +88,8 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
-                    
-<ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}" />         
+
+                    <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}" />
 
                     <!--Transform-->
                     <ListViewItem x:Name="CreateGroupHeader" Style="{StaticResource AppGroupHeaderListViewItemStyle}"/>
@@ -109,9 +109,9 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
-                    
-<ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}" />
-                
+
+                    <ListViewItem Style="{ThemeResource AppSeparatorListViewItemStyle}" />
+
                     <!--Operate-->
                     <ListViewItem x:Name="OperateGroupHeader" Style="{StaticResource AppGroupHeaderListViewItemStyle}"/>
                     <!--WheelToRotate-->
@@ -122,7 +122,7 @@
                             </ContentControl.Tag>
                         </ContentControl>
                     </ListViewItem>
-                    
+
                 </StackPanel>
             </ScrollViewer>
         </Flyout>
@@ -481,13 +481,15 @@
 
 
         <!--FullScreen-->
-        <Button x:Name="UnFullScreenButton" Visibility="Collapsed" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}">
+        <Button x:Name="UnFullScreenButton" Margin="4" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource AppCircleButtonStyle}"
+                 Visibility="{x:Bind DrawLayout.UnFullScreenButtonVisibility,Mode=OneWay}">
             <FontIcon Glyph="&#xE92C;" FontSize="20" FontFamily="{ThemeResource SymbolThemeFontFamily}"/>
         </Button>
 
 
         <!--Menu-->
-        <Canvas x:Name="MenuOverlayCanvas"/>
+        <Canvas x:Name="MenuOverlayCanvas"
+                Visibility="{x:Bind DrawLayout.MenuOverlayCanvasVisibility, Mode=OneWay}"/>
 
 
         <!--Tip-->

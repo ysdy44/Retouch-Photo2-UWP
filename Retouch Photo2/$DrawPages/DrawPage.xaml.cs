@@ -141,14 +141,14 @@ namespace Retouch_Photo2
             DrawPage.ShowExport -= this.ShowExportDialog;
             DrawPage.ShowSetup -= this.ShowSetupDialog;
             DrawPage.ShowRename -= this.ShowRenameDialog;
-            DrawPage.FullScreen -= this.FullScreenChanged;
+            DrawPage.FullScreen -= this.DrawLayout.FullScreenChanged;
             DrawPage.ShowGallery -= this.ShowGalleryDialog;
 
             //Gallery
             this.GalleryGridView.ItemsSource = null;
             DrawPage.ShowGalleryFunc -= this.ShowGalleryDialogTask;
             Photo.ItemClick -= this.GalleryDialogTrySetResult;
-            Photo.FlyoutShow -= this.PhotoFlyoutShow;
+            Photo.FlyoutShow -= this.BillboardCanvas.Show;
 
             //Rename
             DrawPage.ShowRenameFunc -= this.ShowRenameDialogTask;
@@ -158,7 +158,7 @@ namespace Retouch_Photo2
             DrawPage.ShowStrokeColorFlyout -= this.ShowStrokeColorFlyout2;
 
             //More
-            DrawPage.ShowMoreFlyout -= this.ShowMoreFlyout2;
+            DrawPage.ShowMoreFlyout -= this.MoreFlyout.ShowAt;
 
             //Writable
             AdjustmentCommand.Edit -= this.AdjustmentMenuEdit;
@@ -188,14 +188,14 @@ namespace Retouch_Photo2
             DrawPage.ShowExport += this.ShowExportDialog;
             DrawPage.ShowSetup += this.ShowSetupDialog;
             DrawPage.ShowRename += this.ShowRenameDialog;
-            DrawPage.FullScreen += this.FullScreenChanged;
+            DrawPage.FullScreen += this.DrawLayout.FullScreenChanged;
             DrawPage.ShowGallery += this.ShowGalleryDialog;
 
             //Gallery
             this.GalleryGridView.ItemsSource = Photo.InstancesCollection;
             DrawPage.ShowGalleryFunc += this.ShowGalleryDialogTask;
             Photo.ItemClick += this.GalleryDialogTrySetResult;
-            Photo.FlyoutShow += this.PhotoFlyoutShow;
+            Photo.FlyoutShow += this.BillboardCanvas.Show;
 
             //Rename
             DrawPage.ShowRenameFunc += this.ShowRenameDialogTask;
@@ -205,7 +205,7 @@ namespace Retouch_Photo2
             DrawPage.ShowStrokeColorFlyout += this.ShowStrokeColorFlyout2;
 
             //More
-            DrawPage.ShowMoreFlyout += this.ShowMoreFlyout2;
+            DrawPage.ShowMoreFlyout += this.MoreFlyout.ShowAt;
 
             //Writable
             AdjustmentCommand.Edit += this.AdjustmentMenuEdit;

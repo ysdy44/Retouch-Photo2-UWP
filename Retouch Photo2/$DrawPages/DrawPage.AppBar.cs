@@ -99,14 +99,14 @@ namespace Retouch_Photo2
                 this.ViewModel.Invalidate();//Invalidate
             };
 
-            this.FullScreenButton.Click += (s, e) => this.FullScreenChanged();
+            this.FullScreenButton.Click += (s, e) => this.DrawLayout.FullScreenChanged();
             this.OverflowFullScreenItem.Tapped += (s, e) =>
             {
-                this.FullScreenChanged();
+                this.DrawLayout.FullScreenChanged();
                 this.OverflowFlyout.Hide();
             };
 
-            this.UnFullScreenButton.Click += (s, e) => this.FullScreenChanged();
+            this.UnFullScreenButton.Click += (s, e) => this.DrawLayout.FullScreenChanged();
 
             this.ConstructAppBar_TipButton(this.TipButton);
             this.ConstructAppBar_TipButton(this.OverflowTipItem);

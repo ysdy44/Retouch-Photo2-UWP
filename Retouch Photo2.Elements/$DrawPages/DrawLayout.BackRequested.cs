@@ -36,7 +36,7 @@ namespace Retouch_Photo2.Elements
         /// <param name="content"> The content. </param>
         public void ShowWritable(ControlTemplate icon, string title, object content)
         {
-            if (this._vsIsWritable) return;
+            if (this.IsWritable) return;
 
             //Writable
             {
@@ -44,7 +44,7 @@ namespace Retouch_Photo2.Elements
                 this.WritableTextBlock.Text = title;
                 this.WritableContentPresenter.Content = content;
 
-                this._vsIsWritable = true;
+                this.IsWritable = true;
                 this.WritableVisualState = this.WritableVisualState;//State
 
                 this._vsIsFullScreen = true;
@@ -67,13 +67,13 @@ namespace Retouch_Photo2.Elements
             }
 
             //Writable
-            if (this._vsIsWritable)
+            if (this.IsWritable)
             {
                 this.WritableIconContentControl.Template = null;
                 this.WritableTextBlock.Text = string.Empty;
                 this.WritableContentPresenter.Content = null;
 
-                this._vsIsWritable = false;
+                this.IsWritable = false;
                 this.WritableVisualState = this.WritableVisualState;//State
 
                 this._vsIsFullScreen = false;

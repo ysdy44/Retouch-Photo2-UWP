@@ -6,6 +6,33 @@ namespace Retouch_Photo2.Elements
     public sealed partial class DrawLayout : UserControl
     {
 
+
+        #region DependencyProperty
+
+
+        /// <summary> Gets or sets UnFullScreenButton's visibility. </summary>
+        public Visibility UnFullScreenButtonVisibility
+        {
+            get => (Visibility)base.GetValue(UnFullScreenButtonVisibilityProperty);
+            set => base.SetValue(UnFullScreenButtonVisibilityProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "DrawLayout.UnFullScreenButtonVisibility" /> dependency property. </summary>
+        public static readonly DependencyProperty UnFullScreenButtonVisibilityProperty = DependencyProperty.Register(nameof(UnFullScreenButtonVisibility), typeof(Visibility), typeof(DrawLayout), new PropertyMetadata(Visibility.Visible));
+
+
+        /// <summary> Gets or sets MenuOverlayCanvas's visibility. </summary>
+        public Visibility MenuOverlayCanvasVisibility
+        {
+            get => (Visibility)base.GetValue(MenuOverlayCanvasVisibilityProperty);
+            set => base.SetValue(MenuOverlayCanvasVisibilityProperty, value);
+        }
+        /// <summary> Identifies the <see cref = "DrawLayout.MenuOverlayCanvasVisibility" /> dependency property. </summary>
+        public static readonly DependencyProperty MenuOverlayCanvasVisibilityProperty = DependencyProperty.Register(nameof(MenuOverlayCanvasVisibility), typeof(Visibility), typeof(DrawLayout), new PropertyMetadata(Visibility.Visible));
+
+
+        #endregion
+
+
         //@VisualState
         bool _vsIsWritable = false;
         bool _vsIsFullScreen = true;
@@ -63,6 +90,19 @@ namespace Retouch_Photo2.Elements
         }
 
 
+        /// <summary> Gets or sets the page layout is writable. </summary>
+        public bool IsWritable
+        {
+            get => this._vsIsWritable;
+            set
+            {
+                this._vsIsWritable = value;
+                this.WritableVisualState = this.WritableVisualState;//State
+
+                this.MenuOverlayCanvasVisibility = value ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
 
         /// <summary> Gets or sets the page layout is full-screen. </summary>
         public bool IsFullScreen
@@ -75,6 +115,8 @@ namespace Retouch_Photo2.Elements
                 this._vsPhoneType = PhoneLayoutType.Hided;
                 this._vsIsFullScreen = value;
                 this.VisualState = this.VisualState;//State
+
+                this.UnFullScreenButtonVisibility = value ? Visibility.Visible : Visibility.Collapsed;
             }
         }
         /// <summary> Gets or sets the device layout type. </summary>
@@ -88,6 +130,11 @@ namespace Retouch_Photo2.Elements
                 this.VisualState = this.VisualState;//State
             }
         }
+
+        /// <summary>
+        /// Turn full-screen.
+        /// </summary>
+        public void FullScreenChanged() => this.IsFullScreen = !this.IsFullScreen;
 
     }
 }

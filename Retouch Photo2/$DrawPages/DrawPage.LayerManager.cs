@@ -26,12 +26,6 @@ namespace Retouch_Photo2
         }
 
 
-        private void LayerItemClick(ILayer layer)
-        {
-            Layerage layerage = LayerManager.FindFirstLayerage(layer);
-
-            this.ItemClick(layerage);
-        }
         private void LayerRightTapped(ILayer layer)
         {
             Expander.ShowAt("Layer", layer.Control);
@@ -142,8 +136,10 @@ namespace Retouch_Photo2
 
 
 
-        private void ItemClick(Layerage selectedLayerage)
+        private void LayerItemClick(ILayer layer)
         {
+            Layerage selectedLayerage = LayerManager.FindFirstLayerage(layer);
+
             //ILayer selectedLayer = selectedLayerage.Self;
 
             //Is it independent of other layers?

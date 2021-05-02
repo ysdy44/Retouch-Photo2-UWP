@@ -58,12 +58,6 @@ namespace Retouch_Photo2
         }
 
 
-        private void PhotoFlyoutShow(FrameworkElement element, Photo photo)
-        {
-            this.BillboardCanvas.Show(element, photo);
-        }
-
-
         private async void ShowGalleryDialog()
         {
             Photo photo = await this.ShowGalleryDialogTask();

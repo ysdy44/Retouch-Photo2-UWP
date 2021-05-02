@@ -226,22 +226,6 @@ namespace Retouch_Photo2
         }
 
 
-        //FullScreen
-        private void FullScreenChanged()
-        {
-            if (this.DrawLayout.IsFullScreen)
-            {
-                this.DrawLayout.IsFullScreen = false;
-                this.UnFullScreenButton.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                this.DrawLayout.IsFullScreen = true;
-                this.UnFullScreenButton.Visibility = Visibility.Visible;
-            }
-        }
-
-
         //Fill
         private void ShowFillColorFlyout2(FrameworkElement page, FrameworkElement button)
         {
@@ -319,10 +303,6 @@ namespace Retouch_Photo2
             this.SquareItem.Tapped += (s, e) => this.SquareItem.IsSelected = !this.SquareItem.IsSelected;
             this.CenterItem.Tapped += (s, e) => this.CenterItem.IsSelected = !this.CenterItem.IsSelected;
             this.WheelToRotateItem.Tapped += (s, e) => this.WheelToRotateItem.IsSelected = !this.WheelToRotateItem.IsSelected;
-        }
-        private void ShowMoreFlyout2(FrameworkElement button)
-        {
-            this.MoreFlyout.ShowAt(button);
         }
 
     }

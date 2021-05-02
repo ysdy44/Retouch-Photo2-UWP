@@ -65,18 +65,18 @@ namespace Retouch_Photo2.Elements
         public StackPanel PinStackPanel => this._PinStackPanel;
 
 
-        /// <summary> GalleryButton's tapped. </summary>
-        public event TappedEventHandler GalleryButtonTapped
+        /// <summary> GalleryButton's click. </summary>
+        public event RoutedEventHandler GalleryButtonTapped
         {
             add
             {
-                this.GalleryButton.Tapped += value;
-                this.PCGalleryButton.Tapped += value;
+                this.GalleryButton.Click += value;
+                this.PCGalleryButton.Click += value;
             }
             remove
             {
-                this.GalleryButton.Tapped -= value;
-                this.PCGalleryButton.Tapped -= value;
+                this.GalleryButton.Click -= value;
+                this.PCGalleryButton.Click -= value;
             }
         }
         /// <summary> WritableOKButton's click. </summary>
@@ -118,7 +118,7 @@ namespace Retouch_Photo2.Elements
             this.DismissOverlay.PointerPressed += (s, e) => this.Hide();
 
             //Width
-            this.WidthButton.Tapped += (s, e) =>
+            this.WidthButton.Click += (s, e) =>
             {
                 if (this.RightGrid.ActualWidth < 100)
                     this.WidthToWideStoryboard.Begin();//Storyboard
