@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:hSVColorPickers="using:HSVColorPickers"
+    xmlns:hsvColorPickers="using:HSVColorPickers"
     xmlns:tools="using:Retouch_Photo2.Tools"
     mc:Ignorable="d"
     d:DesignHeight="50"
@@ -31,7 +31,7 @@
         <ListViewItem x:Name="OffsetButton" MinWidth="70" Style="{StaticResource AppListViewItemStyle}"
                               Content="{x:Bind OffsetToNumberConverter(SelectionViewModel.PatternDiagonal_Offset), Mode=OneWay}">
             <tools:TouchbarExtension.Picker>
-                <hSVColorPickers:NumberPicker x:Name="OffsetPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                <hsvColorPickers:NumberPicker x:Name="OffsetPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind OffsetToNumberConverter(SelectionViewModel.PatternDiagonal_Offset), Mode=OneWay}"/>
             </tools:TouchbarExtension.Picker>
             <tools:TouchbarExtension.Slider>
@@ -45,7 +45,7 @@
         <ListViewItem x:Name="HorizontalStepButton" MinWidth="70" Style="{StaticResource AppListViewItemStyle}"
                               Content="{x:Bind StepToNumberConverter(SelectionViewModel.PatternDiagonal_HorizontalStep), Mode=OneWay}">
             <tools:TouchbarExtension.Picker>
-                <hSVColorPickers:NumberPicker x:Name="HorizontalStepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                <hsvColorPickers:NumberPicker x:Name="HorizontalStepPicker" ButtonStyle="{StaticResource AppNumberTouchbarButtonStyle}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
                              Value="{x:Bind StepToNumberConverter(SelectionViewModel.PatternDiagonal_HorizontalStep), Mode=OneWay}"/>
             </tools:TouchbarExtension.Picker>
             <tools:TouchbarExtension.Slider>
