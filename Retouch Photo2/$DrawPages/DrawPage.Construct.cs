@@ -252,7 +252,8 @@ namespace Retouch_Photo2
             //@Focus
             this.FilColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.FilColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
-
+            this.FilColorPicker.EyedropperOpened += (s, e) => this.SettingViewModel.UnregisteKey();
+            this.FilColorPicker.EyedropperClosed += (s, e) => this.SettingViewModel.RegisteKey();
             this.FilColorPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodFillColorChanged(value);
 
             this.FilColorPicker.ColorChangedStarted += (s, value) => this.MethodViewModel.MethodFillColorChangeStarted(value);
@@ -286,7 +287,8 @@ namespace Retouch_Photo2
             //@Focus
             this.StrokeColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.StrokeColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
-
+            this.StrokeColorPicker.EyedropperOpened += (s, e) => this.SettingViewModel.UnregisteKey();
+            this.StrokeColorPicker.EyedropperClosed += (s, e) => this.SettingViewModel.RegisteKey();
             this.StrokeColorPicker.ColorChanged += (s, value) => this.MethodViewModel.MethodStrokeColorChanged(value);
 
             this.StrokeColorPicker.ColorChangedStarted += (s, value) => this.MethodViewModel.MethodStrokeColorChangeStarted(value);

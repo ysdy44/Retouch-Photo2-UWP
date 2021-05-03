@@ -12,7 +12,15 @@
 
 
     <ScrollViewer Style="{StaticResource AppVerticalScrollViewerStyle}">
-        <hsvColorPickers:ColorPicker x:Name="ColorPicker" Width="Auto" Background="Transparent" Color="{x:Bind SelectionViewModel.Color, Mode=OneWay}" ButtonStyle="{StaticResource AppNumberButtonStyle}"/>
+        <hsvColorPickers:ColorPicker x:Name="ColorPicker" 
+                                     Width="Auto" 
+                                     Background="Transparent" 
+                                     Color="{x:Bind SelectionViewModel.Color, Mode=OneWay}" 
+                                     TextStyle="{StaticResource AppTextBlockStyle}" 
+                                     FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                                     ButtonStyle="{StaticResource AppNumberButtonStyle}" 
+                                     Stroke="{ThemeResource AppBorderBrush}"
+                                     />
     </ScrollViewer>
-    
+
 </UserControl>

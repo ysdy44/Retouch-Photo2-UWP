@@ -18,12 +18,12 @@ namespace Retouch_Photo2.Elements
     public sealed partial class RadiansPicker : UserControl
     {
         //@Delegate
-        /// <summary> Occurs when the value change starts. </summary>
-        public event TouchValueChangeHandler ValueChangeStarted;
-        /// <summary> Occurs when value change. </summary>
-        public event TouchValueChangeHandler ValueChangeDelta;
-        /// <summary> Occurs when the value change is complete. </summary>
-        public event TouchValueChangeHandler ValueChangeCompleted;
+        /// <summary> Occurs when the value changed starts. </summary>
+        public event TouchValueChangedHandler ValueChangedStarted;
+        /// <summary> Occurs when value changed. </summary>
+        public event TouchValueChangedHandler ValueChangedDelta;
+        /// <summary> Occurs when the value changed is complete. </summary>
+        public event TouchValueChangedHandler ValueChangedCompleted;
 
 
         /// <summary> 5 degree </summary>
@@ -52,26 +52,20 @@ namespace Retouch_Photo2.Elements
                 this.radians = value;
             }
         }
-        private float _Radians
+        private void OnRadiansChanged(float value)
         {
-            get => this.radians;
-            set
+            this.Arrow = RadiansPicker.RadiansToVector(value, this.Radius, this.Center);
+
+            if (Math.Abs(value - this.radians) > this.FiveDegrees)
             {
-                this.Arrow = RadiansPicker.RadiansToVector(value, this.Radius, this.Center);
+                float integer = this.FiveInteger(value);
 
-                if (Math.Abs(value - this.radians) > this.FiveDegrees)
-                {
-                    float integer = this.FiveInteger(value);
-
-                    this.radians = integer;
-                }
+                this.radians = integer;
             }
         }
 
-        private Vector2 arrow;
         private Vector2 Arrow
         {
-            get => this.arrow;
             set
             {
                 //this.WhiteLine.X2 = this.BlackLine.X2 = value.X;
@@ -79,8 +73,6 @@ namespace Retouch_Photo2.Elements
 
                 Canvas.SetLeft(this.Thumb, value.X - 10);
                 Canvas.SetTop(this.Thumb, value.Y - 10);
-
-                this.arrow = value;
             }
         }
 
@@ -200,9 +192,9 @@ namespace Retouch_Photo2.Elements
                 this.InRadians = this.Vector.Length() < this.Radius + 10;
 
                 if (!this.InRadians) return;
-                this._Radians = RadiansPicker.VectorToRadians(this.Vector);
+                this.OnRadiansChanged(RadiansPicker.VectorToRadians(this.Vector));
 
-                this.ValueChangeStarted?.Invoke(this, this.Radians);//Delegate
+                this.ValueChangedStarted?.Invoke(this, this.Radians);//Delegate
 
                 this._vsIsManipulationStarted = true;
                 this.VisualState = this.VisualState;//VisualState
@@ -212,13 +204,13 @@ namespace Retouch_Photo2.Elements
                 this.Vector += e.Delta.Translation.ToVector2();
 
                 if (!this.InRadians) return;
-                this._Radians = RadiansPicker.VectorToRadians(this.Vector);
+                this.OnRadiansChanged(RadiansPicker.VectorToRadians(this.Vector));
 
-                this.ValueChangeDelta?.Invoke(this, this.Radians);//Delegate
+                this.ValueChangedDelta?.Invoke(this, this.Radians);//Delegate
             };
             this.RootGrid.ManipulationCompleted += (sender, e) =>
             {
-                this.ValueChangeCompleted?.Invoke(this, this.Radians);//Delegate
+                this.ValueChangedCompleted?.Invoke(this, this.Radians);//Delegate
 
                 this._vsIsManipulationStarted = false;
                 this.VisualState = this.VisualState;//VisualState

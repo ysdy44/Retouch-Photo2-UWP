@@ -27,7 +27,14 @@
         <transformers:CanvasOperator x:Name="CanvasOperator" DestinationControl="{x:Bind CanvasControl}"/>
         <!--Flyout-->
         <Flyout x:Name="_ColorFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <hsvColorPickers:ColorPicker x:Name="_ColorPicker" Background="Transparent" ButtonStyle="{StaticResource AppNumberButtonStyle}"/>
+            <hsvColorPickers:ColorPicker x:Name="_ColorPicker" 
+                                     Width="Auto" 
+                                     Background="Transparent" 
+                                     TextStyle="{StaticResource AppTextBlockStyle}" 
+                                     FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                                     ButtonStyle="{StaticResource AppNumberButtonStyle}" 
+                                     Stroke="{ThemeResource AppBorderBrush}"
+                                     />
         </Flyout>
     </UserControl.Resources>
 

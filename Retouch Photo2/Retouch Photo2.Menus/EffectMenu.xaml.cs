@@ -27,9 +27,6 @@ namespace Retouch_Photo2.Menus
         /// <summary> Occurs when the splitview pane is opened. </summary>
         public event TypedEventHandler<SplitView, object> PaneOpened { add => this.SplitView.PaneOpened += value; remove => this.SplitView.PaneOpened -= value; }
 
-        /// <summary> Occurs when type change. </summary>
-        public event EventHandler<EffectType> TypeChanged;
-
 
         #region DependencyProperty
 

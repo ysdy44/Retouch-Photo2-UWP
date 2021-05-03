@@ -29,7 +29,14 @@
 
         <!--Flyout-->
         <Flyout x:Name="ColorFlyout" LightDismissOverlayMode="{StaticResource AppLightDismissOverlayMode}" FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}">
-            <hsvColorPickers:ColorPicker x:Name="ColorPicker" Width="Auto" Background="Transparent" ButtonStyle="{StaticResource AppNumberButtonStyle}"/>
+            <hsvColorPickers:ColorPicker x:Name="ColorPicker" 
+                                     Width="Auto" 
+                                     Background="Transparent" 
+                                     TextStyle="{StaticResource AppTextBlockStyle}" 
+                                     FlyoutPresenterStyle="{StaticResource AppFlyoutPresenterStyle}"
+                                     ButtonStyle="{StaticResource AppNumberButtonStyle}" 
+                                     Stroke="{ThemeResource AppBorderBrush}"
+                                     />
         </Flyout>
         
     </Page.Resources>

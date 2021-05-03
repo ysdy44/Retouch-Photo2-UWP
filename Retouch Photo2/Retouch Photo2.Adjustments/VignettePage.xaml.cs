@@ -308,7 +308,8 @@ namespace Retouch_Photo2.Adjustments.Pages
             //@Focus
             this.ColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.ColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
-
+            this.ColorPicker.EyedropperOpened += (s, e) => this.SettingViewModel.UnregisteKey();
+            this.ColorPicker.EyedropperClosed += (s, e) => this.SettingViewModel.RegisteKey();
             this.ColorPicker.ColorChanged += (s, value) =>
             {
                 Color color = value;

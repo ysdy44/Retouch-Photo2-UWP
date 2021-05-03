@@ -277,7 +277,8 @@ namespace Retouch_Photo2.Tools.Models
             //@Focus
             this.StopsPicker.ColorPicker.HexPicker.GotFocus += (s, e) => this.SettingViewModel.UnregisteKey();
             this.StopsPicker.ColorPicker.HexPicker.LostFocus += (s, e) => this.SettingViewModel.RegisteKey();
-
+            this.StopsPicker.ColorPicker.EyedropperOpened += (s, e) => this.SettingViewModel.UnregisteKey();
+            this.StopsPicker.ColorPicker.EyedropperClosed += (s, e) => this.SettingViewModel.RegisteKey();
             this.StopsPicker.StopsChanged += (s, array) =>
             {
                 switch (this.FillOrStroke)

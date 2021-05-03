@@ -125,15 +125,15 @@ namespace Retouch_Photo2.Effects.Pages
         {
             //this.AnglePicker2.Minimum = 0;
             //this.AnglePicker2.Maximum = FanKit.Math.PiTwice;
-            this.AnglePicker2.ValueChangeStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheStraighten());
-            this.AnglePicker2.ValueChangeDelta += (s, value) =>
+            this.AnglePicker2.ValueChangedStarted += (s, value) => this.MethodViewModel.EffectChangeStarted(cache: (effect) => effect.CacheStraighten());
+            this.AnglePicker2.ValueChangedDelta += (s, value) =>
             {
                 float radians = (float)value;
                 this.Angle = radians;
 
                 this.MethodViewModel.EffectChangeDelta(set: (effect) => effect.Straighten_Angle = radians);
             };
-            this.AnglePicker2.ValueChangeCompleted += (s, value) =>
+            this.AnglePicker2.ValueChangedCompleted += (s, value) =>
             {
                 float radians = (float)value;
                 this.Angle = radians;
