@@ -126,12 +126,6 @@
     <EmbeddedResource Include="Properties\Retouch_Photo2.Texts.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FanKit.Transformers">
-      <Version>1.5.0</Version>
-    </PackageReference>
-    <PackageReference Include="HSVColorPickers">
-      <Version>1.5.0</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.12</Version>
     </PackageReference>
