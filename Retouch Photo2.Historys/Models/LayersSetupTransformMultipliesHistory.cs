@@ -48,6 +48,7 @@ namespace Retouch_Photo2.Historys
 
         public void Dispose()
         {
+            base.Dispose();
             this.SizeAction = null;
         }
     }

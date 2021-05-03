@@ -4,10 +4,6 @@
 // Only:              ★★
 // Complete:      ★★
 using System;
-using Windows.ApplicationModel.Resources;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
 using Windows.System;

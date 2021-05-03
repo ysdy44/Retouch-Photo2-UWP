@@ -58,7 +58,7 @@ namespace Retouch_Photo2.Elements
         private static void UpdateCoreCursor()
         {
             CoreCursorType value = CoreCursorExtension.GetCoreCursorType();
-            if (Window.Current.CoreWindow.PointerCursor.Type == value) return;
+            if (Window.Current.CoreWindow.PointerCursor?.Type == value) return;
             Window.Current.CoreWindow.PointerCursor = new CoreCursor(value, 0);
         }
         private static CoreCursorType GetCoreCursorType()
