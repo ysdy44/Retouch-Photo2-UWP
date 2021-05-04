@@ -81,7 +81,7 @@ namespace Retouch_Photo2
                     case InputDevice.Single:
                         {
                             //Tool
-                            this.ToolsControl.Tool.Draw(args.DrawingSession);
+                            this.ToolTypeComboBox.Tool.Draw(args.DrawingSession);
                         }
                         break;
                 }
@@ -104,7 +104,7 @@ namespace Retouch_Photo2
 
                 //Tool
                 Vector2 position = e.GetCurrentPoint(this.ToolDrawCanvasControl).Position.ToVector2();
-                this.ToolsControl.Tool.Cursor(position);//Move
+                this.ToolTypeComboBox.Tool.Cursor(position);//Move
             };
 
 
@@ -128,7 +128,7 @@ namespace Retouch_Photo2
                 if (this._isSingleStarted)
                 {
                     //Tool
-                    this.ToolsControl.Tool.Delta(this._singleStartingPoint, point);//Delta
+                    this.ToolTypeComboBox.Tool.Delta(this._singleStartingPoint, point);//Delta
 
                     return;
                 }
@@ -140,7 +140,7 @@ namespace Retouch_Photo2
                     this._isSingleStarted = true;
 
                     //Tool
-                    this.ToolsControl.Tool.Started(this._singleStartingPoint, point);//Started
+                    this.ToolTypeComboBox.Tool.Started(this._singleStartingPoint, point);//Started
                 }
             };
             canvasOperator.Single_Complete += (point) =>
@@ -150,13 +150,13 @@ namespace Retouch_Photo2
                 if (this._isSingleStarted == false)
                 {
                     //Tool
-                    this.ToolsControl.Tool.Clicke(this._singleStartingPoint);//Complete
+                    this.ToolTypeComboBox.Tool.Clicke(this._singleStartingPoint);//Complete
                 }
                 else
                 {
                     //Tool
                     bool isOutNodeDistance = FanKit.Math.OutNodeDistance(this._singleStartingPoint, point);
-                    this.ToolsControl.Tool.Complete(this._singleStartingPoint, point, isOutNodeDistance);//Complete
+                    this.ToolTypeComboBox.Tool.Complete(this._singleStartingPoint, point, isOutNodeDistance);//Complete
                 }
 
                 this.MenuOverlayCanvas.IsHitTestVisible = this.DrawLayout.IsHitTestVisible = true;//IsHitTestVisible

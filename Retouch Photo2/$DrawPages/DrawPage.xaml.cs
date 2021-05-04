@@ -80,10 +80,10 @@ namespace Retouch_Photo2
             this.ConstructCanvasControl();
             this.ConstructCanvasOperator();
 
-            //ToolsControl
-            this.ToolsControl.AssemblyType = typeof(Retouch_Photo2.Tools.Models.CursorTool);
-            this.ToolsControl.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
-            this.ToolsControl.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
+            //ToolTypeComboBox
+            this.ToolTypeComboBox.AssemblyType = typeof(Retouch_Photo2.Tools.Models.CursorTool);
+            this.ToolTypeComboBox.Closed += (s, e) => this.SettingViewModel.RegisteKey();//Setting
+            this.ToolTypeComboBox.Opened += (s, e) => this.SettingViewModel.UnregisteKey();//Setting
 
             //LayerManager
             this.ConstructLayerManager();

@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hsvColorPickers="using:HSVColorPickers"
     xmlns:menus="using:Retouch_Photo2.Menus"
-    xmlns:tools="using:Retouch_Photo2.Tools"
+    xmlns:toolsElements="using:Retouch_Photo2.Tools.Elements"
     xmlns:edits="using:Retouch_Photo2.Edits"
     xmlns:elements="using:Retouch_Photo2.Elements"
     xmlns:photos="using:Retouch_Photo2.Photos"
@@ -22,7 +22,7 @@
     xmlns:historys="using:Retouch_Photo2.Historys"
     xmlns:transformers="using:FanKit.Transformers"
     xmlns:layers="using:Retouch_Photo2.Layers" 
-    xmlns:brushs="using:Retouch_Photo2.Brushs" 
+    xmlns:brushs="using:Retouch_Photo2.Brushs"
     NavigationCacheMode="Required"    
     mc:Ignorable="d"
     Background="{ThemeResource AppBackgroundDark}"
@@ -228,11 +228,11 @@
         <elements:DrawLayout x:Name="DrawLayout" 
                DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
                IsFullScreen="True"
-               FootPage="{x:Bind ToolsControl.Tool.Page, Mode=OneWay}"
+               FootPage="{x:Bind ToolTypeComboBox.Tool.Page, Mode=OneWay}"
                >
             <!--LeftIcon-->
             <elements:DrawLayout.LeftIcon>
-                <ContentControl Template="{x:Bind ToolsControl.Tool.Icon, Mode=OneWay}"/>
+                <ContentControl Template="{x:Bind ToolTypeComboBox.Tool.Icon, Mode=OneWay}"/>
             </elements:DrawLayout.LeftIcon>
 
             <!--RightPane-->
@@ -244,8 +244,8 @@
 
             <!--LeftPanel-->
             <elements:DrawLayout.LeftPanel>
-                <tools:ToolsControl x:Name="ToolsControl"                                    
-                            Type="{x:Bind ViewModel.ToolType, Mode=OneWay}"
+                <toolsElements:ToolTypeComboBox x:Name="ToolTypeComboBox"                                    
+                            Type="{x:Bind ViewModel.ToolType, Mode=TwoWay}"
                             IsOpen="{x:Bind ViewModel.IsOpen, Mode=OneWay}"
                             DeviceLayoutType="{x:Bind SettingViewModel.DeviceLayoutType, Mode=OneWay}"
                              />
