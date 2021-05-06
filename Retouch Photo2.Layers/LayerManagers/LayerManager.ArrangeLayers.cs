@@ -18,9 +18,9 @@ namespace Retouch_Photo2.Layers
 
             int depth = 0;
             bool isExpand = true;
-            LayerManager._arrangeLayers(LayerManager.RootLayerage, depth, isExpand);
+            LayerManager.ArrangeLayersCore(LayerManager.RootLayerage, depth, isExpand);
         }
-        private static void _arrangeLayers(Layerage layerage, int depth, bool isExpand)
+        private static void ArrangeLayersCore(Layerage layerage, int depth, bool isExpand)
         {
             foreach (Layerage child in layerage.Children)
             {
@@ -35,10 +35,10 @@ namespace Retouch_Photo2.Layers
 
                 int childDepth = depth + 1;
                 bool childIsExpand = layer.IsExpand && isExpand;
-                LayerManager._arrangeLayers(child, childDepth, childIsExpand);
+                LayerManager.ArrangeLayersCore(child, childDepth, childIsExpand);
             }
         }
-         
+
 
         /// <summary>
         /// Arrange all layers's IsExpand.
@@ -48,9 +48,9 @@ namespace Retouch_Photo2.Layers
             ILayer layer = layerage.Self;
 
             bool isExpand = layer.IsExpand;
-            LayerManager._arrangeLayersIsExpand(layerage, isExpand);
+            LayerManager.ArrangeLayersIsExpandCore(layerage, isExpand);
         }
-        private static void _arrangeLayersIsExpand(Layerage layerage, bool isExpand)
+        private static void ArrangeLayersIsExpandCore(Layerage layerage, bool isExpand)
         {
             foreach (Layerage child in layerage.Children)
             {
@@ -59,9 +59,9 @@ namespace Retouch_Photo2.Layers
                 bool childIsExpand = layer.IsExpand && isExpand;
                 layer.Control.Visibility = childIsExpand ? Visibility.Visible : Visibility.Collapsed;
 
-                LayerManager._arrangeLayersIsExpand(child, childIsExpand);
+                LayerManager.ArrangeLayersIsExpandCore(child, childIsExpand);
             }
-        } 
+        }
 
     }
 }

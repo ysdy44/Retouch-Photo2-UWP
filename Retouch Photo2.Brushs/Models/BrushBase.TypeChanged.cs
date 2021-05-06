@@ -14,12 +14,12 @@ namespace Retouch_Photo2.Brushs
     {
 
         /// <summary>
-        /// Change the brush's type.
+        /// Changed the brush's type.
         /// </summary>
         /// <param name="type"> The new type. </param>
         /// <param name="transformer"> The transformer. </param>
         /// <param name="photo"> The photo. </param>
-        public void TypeChange(BrushType type, Transformer transformer, Photo photo = null)
+        public void TypeChanged(BrushType type, Transformer transformer, Photo photo = null)
         {
             switch (type)
             {
@@ -27,17 +27,17 @@ namespace Retouch_Photo2.Brushs
                     break;
 
                 case BrushType.Color:
-                    this._changeColor();
+                    this.ChangeColorCore();
                     break;
 
                 case BrushType.LinearGradient:
                 case BrushType.RadialGradient:
-                    this._changingStops();
-                    this._changingLinearGradientPoints(transformer);
+                    this.ChangingStopsCore();
+                    this.ChangingLinearGradientPointsCore(transformer);
                     break;
                 case BrushType.EllipticalGradient:
-                    this._changingStops();
-                    this._changingEllipticalGradientPoints(transformer);
+                    this.ChangingStopsCore();
+                    this.ChangingEllipticalGradientPointsCore(transformer);
                     break;
 
                 case BrushType.Image:
@@ -57,7 +57,7 @@ namespace Retouch_Photo2.Brushs
                         //this.Center = center;
                         this.XPoint = BrushBase.YToX(yPoint, center, width, height);
                         //this.YPoint = yPoint;
-                        this._changingEllipticalGradientPoints(transformer);
+                        this.ChangingEllipticalGradientPointsCore(transformer);
                     }
                     break;
 
@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Brushs
         /// <param name="transformer"> The transformer. </param>
         /// <param name="color"> The color. </param>
         /// <param name="photo"> The photo. </param>
-        public void TypeChange(BrushType type, Transformer transformer, Color color, Photo photo = null)
+        public void TypeChanged(BrushType type, Transformer transformer, Color color, Photo photo = null)
         {
             switch (type)
             {
@@ -82,17 +82,17 @@ namespace Retouch_Photo2.Brushs
                     break;
 
                 case BrushType.Color:
-                    this._changeColor(color);
+                    this.ChangeColorCore(color);
                     break;
 
                 case BrushType.LinearGradient:
                 case BrushType.RadialGradient:
-                    this._changingStops(color);
-                    this._changingLinearGradientPoints(transformer);
+                    this.ChangingStopsCore(color);
+                    this.ChangingLinearGradientPointsCore(transformer);
                     break;
                 case BrushType.EllipticalGradient:
-                    this._changingStops(color);
-                    this._changingEllipticalGradientPoints(transformer);
+                    this.ChangingStopsCore(color);
+                    this.ChangingEllipticalGradientPointsCore(transformer);
                     break;
 
                 case BrushType.Image:
@@ -112,7 +112,7 @@ namespace Retouch_Photo2.Brushs
                         //this.Center = center;
                         this.XPoint = BrushBase.YToX(yPoint, center, width, height);
                         //this.YPoint = yPoint;
-                        this._changingEllipticalGradientPoints(transformer);
+                        this.ChangingEllipticalGradientPointsCore(transformer);
                     }
                     break;
 
@@ -124,7 +124,7 @@ namespace Retouch_Photo2.Brushs
         }
 
 
-        private void _changeColor()
+        private void ChangeColorCore()
         {
             switch (this.Type)
             {
@@ -136,13 +136,13 @@ namespace Retouch_Photo2.Brushs
                 case BrushType.EllipticalGradient:
                     this.Color = this.Stops.Last().Color;
                     break;
-                    
+
                 default:
                     this.Color = Colors.LightGray;
                     break;
             }
         }
-        private void _changeColor(Color color)
+        private void ChangeColorCore(Color color)
         {
             switch (this.Type)
             {
@@ -161,7 +161,7 @@ namespace Retouch_Photo2.Brushs
             }
         }
 
-        private void _changingStops()
+        private void ChangingStopsCore()
         {
             switch (this.Type)
             {
@@ -179,7 +179,7 @@ namespace Retouch_Photo2.Brushs
                     break;
             }
         }
-        private void _changingStops(Color color)
+        private void ChangingStopsCore(Color color)
         {
             switch (this.Type)
             {
@@ -199,7 +199,7 @@ namespace Retouch_Photo2.Brushs
         }
 
 
-        private void _changingLinearGradientPoints(Transformer transformer)
+        private void ChangingLinearGradientPointsCore(Transformer transformer)
         {
             switch (this.Type)
             {
@@ -211,7 +211,7 @@ namespace Retouch_Photo2.Brushs
             }
         }
 
-        private void _changingEllipticalGradientPoints(Transformer transformer)
+        private void ChangingEllipticalGradientPointsCore(Transformer transformer)
         {
             switch (this.Type)
             {
@@ -227,6 +227,6 @@ namespace Retouch_Photo2.Brushs
                     break;
             }
         }
-        
+
     }
 }

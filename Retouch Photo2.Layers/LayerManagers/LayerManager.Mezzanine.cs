@@ -13,15 +13,15 @@ namespace Retouch_Photo2.Layers
         /// Mezzanine a layerage.
         /// </summary>
         /// <param name="mezzanineLayerage"> The mezzanine layerage. </param>
-        public static void Mezzanine( Layerage mezzanineLayerage) => LayerManager._mezzanine( mezzanineLayerage, null);
+        public static void Mezzanine( Layerage mezzanineLayerage) => LayerManager.MezzanineCore( mezzanineLayerage, null);
 
         /// <summary>
         /// Mezzanine layers.
         /// </summary>
         /// <param name="mezzanineLayerages"> The mezzanine layers. </param>
-        public static void MezzanineRange( IEnumerable<Layerage> mezzanineLayerages) => LayerManager._mezzanine( null, mezzanineLayerages);
+        public static void MezzanineRange( IEnumerable<Layerage> mezzanineLayerages) => LayerManager.MezzanineCore( null, mezzanineLayerages);
 
-        private static void _mezzanine( Layerage mezzanineLayer, IEnumerable<Layerage> mezzanineLayers)
+        private static void MezzanineCore( Layerage mezzanineLayer, IEnumerable<Layerage> mezzanineLayers)
         {
             //Layerages
             IEnumerable<Layerage> selectedLayerages = LayerManager.GetAllSelected();

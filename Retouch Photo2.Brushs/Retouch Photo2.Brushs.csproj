@@ -124,7 +124,7 @@
       <DependentUpon>TransparencyTypeComboBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\BrushBase.SaveLoad.cs" />
-    <Compile Include="Models\BrushBase.TypeChange.cs" />
+    <Compile Include="Models\BrushBase.TypeChanged.cs" />
     <Compile Include="Models\BrushBase.Construct.cs" />
     <Compile Include="Models\BrushBase.Controller.cs" />
     <Compile Include="Models\BrushBase.Draw.cs" />

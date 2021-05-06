@@ -14,8 +14,8 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <param name="layer"> The layer. </param>
         /// <returns> The found layerage. </returns>
-        public static Layerage FindFirstLayerage(ILayer layer) => LayerManager._findFirstLayerage(LayerManager.RootLayerage, layer);
-        private static Layerage _findFirstLayerage(Layerage layerage, ILayer layer)
+        public static Layerage FindFirstLayerage(ILayer layer) => LayerManager.FindFirstLayerageCore(LayerManager.RootLayerage, layer);
+        private static Layerage FindFirstLayerageCore(Layerage layerage, ILayer layer)
         {
             foreach (Layerage child in layerage.Children)
             {
@@ -24,7 +24,7 @@ namespace Retouch_Photo2.Layers
 
                 if (child.Children.Count != 0)
                 {
-                    Layerage find = LayerManager._findFirstLayerage(child, layer);
+                    Layerage find = LayerManager.FindFirstLayerageCore(child, layer);
                     if (find != null) return find;
                 }
             }

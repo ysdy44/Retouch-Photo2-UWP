@@ -120,7 +120,7 @@ namespace Retouch_Photo2.Tools.Models
             (
                 set: (style, transformer) =>
                 {
-                    style.Transparency.TypeChange(brushType, transformer, Colors.Transparent, photo);
+                    style.Transparency.TypeChanged(brushType, transformer, Colors.Transparent, photo);
 
                     brush = style.Transparency;
                 },

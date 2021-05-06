@@ -14,7 +14,7 @@
         {
             foreach (Layerage child in LayerManager.RootLayerage.Children)
             {
-                LayerManager._arrangeLayersBackgroundNullParents(child);
+                LayerManager.ArrangeLayersBackgroundCore(child);
             }
         }
         //public static void ArrangeLayersBackgroundItemClick(Layerage layerage)
@@ -25,7 +25,7 @@
         //}
 
         //Judge Recursive
-        private static void _arrangeLayersBackgroundNullParents(Layerage layerage)
+        private static void ArrangeLayersBackgroundCore(Layerage layerage)
         {
             ILayer layer = layerage.Self;
 
@@ -34,19 +34,19 @@
                 layer.Control.BackgroundMode = BackgroundMode.Selected;
                 foreach (Layerage child in layerage.Children)
                 {
-                    LayerManager._arrangeLayersBackgroundHasParentsSelected(child);
+                    LayerManager.ArrangeLayersBackgroundHasParentsSelectedCore(child);
                 }
             }
             else
             {
-                bool childrenIsSelected = LayerManager._getLayersChildrenIsSelected(layerage);
+                bool childrenIsSelected = LayerManager.GetLayersChildrenIsSelectedCore(layerage);
                 if (childrenIsSelected)
-                    LayerManager._arrangeLayersBackgroundWithoutParentsSelected(layerage);
+                    LayerManager.ArrangeLayersBackgroundWithoutParentsSelectedCore(layerage);
                 else
-                    LayerManager._arrangeLayersBackgroundIsNotSelected(layerage);
+                    LayerManager.ArrangeLayersBackgroundIsNotSelectedCore(layerage);
             }
         }
-        private static void _arrangeLayersBackgroundWithoutParentsSelected(Layerage layerage)
+        private static void ArrangeLayersBackgroundWithoutParentsSelectedCore(Layerage layerage)
         {
             ILayer layer = layerage.Self;
 
@@ -54,12 +54,12 @@
 
             foreach (Layerage child in layerage.Children)
             {
-                LayerManager._arrangeLayersBackgroundNullParents(child);
+                LayerManager.ArrangeLayersBackgroundCore(child);
             }
         }
 
         //Self Recursive
-        private static void _arrangeLayersBackgroundHasParentsSelected(Layerage layerage)
+        private static void ArrangeLayersBackgroundHasParentsSelectedCore(Layerage layerage)
         {
             ILayer layer = layerage.Self;
 
@@ -67,10 +67,10 @@
 
             foreach (Layerage child in layerage.Children)
             {
-                LayerManager._arrangeLayersBackgroundHasParentsSelected(child);
+                LayerManager.ArrangeLayersBackgroundHasParentsSelectedCore(child);
             }
         }
-        private static void _arrangeLayersBackgroundIsNotSelected(Layerage layerage)
+        private static void ArrangeLayersBackgroundIsNotSelectedCore(Layerage layerage)
         {
             ILayer layer = layerage.Self;
 
@@ -78,28 +78,28 @@
 
             foreach (Layerage child in layerage.Children)
             {
-                LayerManager._arrangeLayersBackgroundIsNotSelected(child);
+                LayerManager.ArrangeLayersBackgroundIsNotSelectedCore(child);
             }
         }
 
 
-        private static bool _getLayersChildrenIsSelected(Layerage layerage)
+        private static bool GetLayersChildrenIsSelectedCore(Layerage layerage)
         {
             foreach (Layerage child in layerage.Children)
             {
                 if (child.Self.IsSelected) return true;
 
-                bool childrenIsSelected = LayerManager._getLayersChildrenIsSelected(child);
+                bool childrenIsSelected = LayerManager.GetLayersChildrenIsSelectedCore(child);
                 if (childrenIsSelected == true) return true;
             }
             return false;
         }
-        private static bool _getLayersParentsIsSelected(Layerage layerage)
+        private static bool GetLayersParentsIsSelectedCore(Layerage layerage)
         {
             if (layerage.Parents == LayerManager.RootLayerage) return false;
             if (layerage.Parents.Self.IsSelected == true) return true;
 
-            return LayerManager._getLayersParentsIsSelected(layerage.Parents);
+            return LayerManager.GetLayersParentsIsSelectedCore(layerage.Parents);
         }
 
 

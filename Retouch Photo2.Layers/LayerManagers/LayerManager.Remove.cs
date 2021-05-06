@@ -14,7 +14,7 @@ namespace Retouch_Photo2.Layers
         /// Remove a layerage.
         /// </summary>      
         /// <param name="removeLayerage"> The remove Layerage. </param>
-        public static void Remove( Layerage removeLayerage)
+        public static void Remove(Layerage removeLayerage)
         {
             Layerage parents = LayerManager.GetParentsChildren(removeLayerage);
 
@@ -24,10 +24,10 @@ namespace Retouch_Photo2.Layers
         /// <summary>
         /// Remove all selected layerages.
         /// </summary>
-        public static void RemoveAllSelected( ) => LayerManager._removeAllSelected(LayerManager.RootLayerage);
+        public static void RemoveAllSelected() => LayerManager.RemoveAllSelectedCore(LayerManager.RootLayerage);
 
 
-        private static void _removeAllSelected(Layerage layerage)
+        private static void RemoveAllSelectedCore(Layerage layerage)
         {
             foreach (Layerage child in layerage.Children)
             {
@@ -43,11 +43,11 @@ namespace Retouch_Photo2.Layers
                     child.RefactoringParentsTransformer();
                     child.RefactoringParentsRender();
                     child.RefactoringParentsIconRender();
-                    LayerManager._removeAll(child);
+                    LayerManager.RemoveAllCore(child);
                 }
                 //Recursive
                 else
-                    LayerManager._removeAllSelected(child);
+                    LayerManager.RemoveAllSelectedCore(child);
             }
 
             //Remove
@@ -61,14 +61,14 @@ namespace Retouch_Photo2.Layers
             while (removeLayerage != null);
         }
 
-        private static void _removeAll( Layerage layerage)
+        private static void RemoveAllCore(Layerage layerage)
         {
             foreach (Layerage child in layerage.Children)
             {
                 ILayer layer = child.Self;
 
                 //Recursive
-                LayerManager._removeAll(child);
+                LayerManager.RemoveAllCore(child);
 
                 LayerManager.RootStackPanel.Children.Remove(layer.Control);
             }

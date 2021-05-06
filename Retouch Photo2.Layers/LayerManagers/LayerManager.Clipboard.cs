@@ -10,7 +10,7 @@ namespace Retouch_Photo2.Layers
     /// </summary>
     public static partial class LayerManager
     {
-        
+
         /// <summary>
         /// Copy a layerage ( form Layerbase to Clipboard).
         /// </summary>
@@ -23,7 +23,7 @@ namespace Retouch_Photo2.Layers
             Clipboard.Instances.Add(clone2);
             //
 
-            LayerManager._copyLayerage(layerage.Children);
+            LayerManager.CopyLayeragesCore(layerage.Children);
         }
 
         /// <summary>
@@ -39,11 +39,11 @@ namespace Retouch_Photo2.Layers
         }
 
 
-        private static void _copyLayerage(IList<Layerage> children)
+        private static void CopyLayeragesCore(IList<Layerage> children)
         {
             foreach (Layerage layerage in children)
             {
-                LayerManager._copyLayerage(layerage.Children);
+                LayerManager.CopyLayeragesCore(layerage.Children);
 
                 //
                 ILayer layer = layerage.Self;
@@ -53,7 +53,7 @@ namespace Retouch_Photo2.Layers
             }
         }
 
-       
+
 
         /// <summary>
         /// Paste a layerage ( form Clipboard to Layerbase).
@@ -74,7 +74,7 @@ namespace Retouch_Photo2.Layers
 
             cloneLayerage.Children = child.Children;
             child.Children = null;
-            LayerManager._pasteLayerage(cloneLayerage.Children);
+            LayerManager.PasteLayerageCore(cloneLayerage.Children);
             return cloneLayerage;
         }
 
@@ -88,12 +88,12 @@ namespace Retouch_Photo2.Layers
         }
 
 
-        private static void _pasteLayerage(IList<Layerage> children)
+        private static void PasteLayerageCore(IList<Layerage> children)
         {
             for (int i = 0; i < children.Count; i++)
             {
                 Layerage child = children[i];
-                LayerManager._pasteLayerage(child.Children);
+                LayerManager.PasteLayerageCore(child.Children);
 
                 //
                 ILayer childCopy = child.ClipboardSelf;

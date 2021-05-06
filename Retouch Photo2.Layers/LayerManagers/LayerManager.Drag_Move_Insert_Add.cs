@@ -17,7 +17,7 @@ namespace Retouch_Photo2.Layers
         /// <param name="destinationOverlayMode"> The destination OverlayMode. </param>
         /// <param name="sourceIsSelected"> The source SelectMode. </param>
         public static void DragComplete(Layerage destination, Layerage source, OverlayMode destinationOverlayMode, bool sourceIsSelected)
-        {     
+        {
             if (source == null) return;
             if (destination == null) return;
             ILayer destinationLayer = destination.Self;
@@ -53,13 +53,13 @@ namespace Retouch_Photo2.Layers
                 switch (destinationOverlayMode)
                 {
                     case OverlayMode.Top:
-                        LayerManager.InsertRange( destination, selectedLayerages, isBottomInsert: false);
+                        LayerManager.InsertRange(destination, selectedLayerages, isBottomInsert: false);
                         break;
                     case OverlayMode.Center:
-                        LayerManager.AddRange( destination, selectedLayerages);
+                        LayerManager.AddRange(destination, selectedLayerages);
                         break;
                     case OverlayMode.Bottom:
-                        LayerManager.InsertRange( destination, selectedLayerages, isBottomInsert: true);
+                        LayerManager.InsertRange(destination, selectedLayerages, isBottomInsert: true);
                         break;
                 }
             }
@@ -75,7 +75,7 @@ namespace Retouch_Photo2.Layers
         /// <param name="destination"> The destination layerage. </param>
         /// <param name="source"> The source layerage. </param>
         /// <param name="isBottomInsert"> Insert to the top or bottom. </param>
-        public static void Move( Layerage destination, Layerage source, bool isBottomInsert)
+        public static void Move(Layerage destination, Layerage source, bool isBottomInsert)
         {
             Layerage parents = LayerManager.GetParentsChildren(destination);
             int index = parents.Children.IndexOf(destination);
@@ -99,7 +99,7 @@ namespace Retouch_Photo2.Layers
             parents.Children.Remove(source);
             parents.Children.Insert(index, source);
 
-            
+
             if (destination.Parents != LayerManager.RootLayerage)
             {
                 //Refactoring
@@ -126,7 +126,7 @@ namespace Retouch_Photo2.Layers
         /// <param name="destination"> The destination layerage. </param>
         /// <param name="source"> The source layerage. </param>
         /// <param name="isBottomInsert"> Insert to the top or bottom. </param>
-        public static void Insert(Layerage destination, Layerage source, bool isBottomInsert) => LayerManager._insert(destination, source, null, isBottomInsert);
+        public static void Insert(Layerage destination, Layerage source, bool isBottomInsert) => LayerManager.InsertCore(destination, source, null, isBottomInsert);
 
         /// <summary>
         /// Insert some layers to the top of destination layerage.
@@ -134,10 +134,10 @@ namespace Retouch_Photo2.Layers
         /// <param name="destination"> The destination layerage. </param>
         /// <param name="sources"> The source layers. </param>
         /// <param name="isBottomInsert"> Insert to the top or bottom. </param>
-        public static void InsertRange(Layerage destination, IEnumerable<Layerage> sources, bool isBottomInsert) => LayerManager._insert(destination, null, sources, isBottomInsert);
+        public static void InsertRange(Layerage destination, IEnumerable<Layerage> sources, bool isBottomInsert) => LayerManager.InsertCore(destination, null, sources, isBottomInsert);
 
 
-        private static void _insert( Layerage destination, Layerage source, IEnumerable<Layerage> sources, bool isBottomInsert)
+        private static void InsertCore(Layerage destination, Layerage source, IEnumerable<Layerage> sources, bool isBottomInsert)
         {
             Layerage parents = LayerManager.GetParentsChildren(destination);
             int index = parents.Children.IndexOf(destination);
@@ -200,7 +200,7 @@ namespace Retouch_Photo2.Layers
                     }
                 }
             }
-            
+
 
             if (destination.Parents != LayerManager.RootLayerage)
             {
@@ -227,16 +227,16 @@ namespace Retouch_Photo2.Layers
         /// </summary>
         /// <param name="currentLayerage"> The current layerage. </param>
         /// <param name="layerage"> The source layerage. </param>
-        public static void Add( Layerage currentLayerage, Layerage layerage) => LayerManager._add( currentLayerage, layerage, null);
+        public static void Add(Layerage currentLayerage, Layerage layerage) => LayerManager.AddCore(currentLayerage, layerage, null);
 
         /// <summary>
         /// Add some layerages into children.
         /// </summary>
         /// <param name="currentLayerage"> The current layerages. </param>
         /// <param name="layerages"> The source layerages. </param>
-        public static void AddRange( Layerage currentLayerage, IEnumerable<Layerage> layerages) => LayerManager._add( currentLayerage, null, layerages);
+        public static void AddRange(Layerage currentLayerage, IEnumerable<Layerage> layerages) => LayerManager.AddCore(currentLayerage, null, layerages);
 
-        private static void _add( Layerage currentLayerage, Layerage layerage, IEnumerable<Layerage> layerages)
+        private static void AddCore(Layerage currentLayerage, Layerage layerage, IEnumerable<Layerage> layerages)
         {
             if (layerage != null)
             {

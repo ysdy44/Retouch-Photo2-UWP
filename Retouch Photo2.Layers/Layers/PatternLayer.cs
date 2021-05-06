@@ -8,7 +8,6 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
 using Retouch_Photo2.Brushs;
-using System.Collections.Generic;
 using System.Numerics;
 
 namespace Retouch_Photo2.Layers.Models
@@ -39,15 +38,15 @@ namespace Retouch_Photo2.Layers.Models
                         case CanvasGeometryRelation.Disjoint:
                             return null;
                         case CanvasGeometryRelation.Contained:
-                            this._patternRender(resourceCreator, drawingSession, geometry);
+                            this.PatternRenderCore(resourceCreator, drawingSession, geometry, geometry);
                             break;
                         case CanvasGeometryRelation.Contains:
-                            this._patternRender(resourceCreator, drawingSession, geometryCrop);
+                            this.PatternRenderCore(resourceCreator, drawingSession, geometry, geometryCrop);
                             break;
                         case CanvasGeometryRelation.Overlap:
                             Matrix3x2 zero = Matrix3x2.CreateTranslation(0.0f, 0.0f);
                             CanvasGeometry combine = geometry.CombineWith(geometryCrop, zero, CanvasGeometryCombine.Intersect);
-                            this._patternRender(resourceCreator, drawingSession, combine);
+                            this.PatternRenderCore(resourceCreator, drawingSession, geometry, combine);
                             break;
                         default:
                             return null;
@@ -55,12 +54,12 @@ namespace Retouch_Photo2.Layers.Models
                 }
                 else
                 {
-                    this._patternRender(resourceCreator, drawingSession, geometry);
+                    this.PatternRenderCore(resourceCreator, drawingSession, geometry, geometry);
                 }
             }
             return command;
         }
-        private void _patternRender(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry)
+        private void PatternRenderCore(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry, CanvasGeometry cropGeometry)
         {
 
             switch (base.Style.Transparency.Type)
@@ -71,21 +70,21 @@ namespace Retouch_Photo2.Layers.Models
                     {
                         ICanvasBrush canvasBrush = this.Style.Transparency.GetICanvasBrush(resourceCreator);
 
-                        using (drawingSession.CreateLayer(canvasBrush, geometry))
+                        using (drawingSession.CreateLayer(canvasBrush, cropGeometry))
                         {
-                            this._render(resourceCreator, drawingSession, geometry);
+                            this.RenderCore(resourceCreator, drawingSession, geometry);
                         }
                     }
                     break;
                 default:
-                    using (drawingSession.CreateLayer(1, geometry))
+                    using (drawingSession.CreateLayer(1, cropGeometry))
                     {
-                        this._render(resourceCreator, drawingSession, geometry);
+                        this.RenderCore(resourceCreator, drawingSession, geometry);
                     }
                     break;
             }
         }
-        private void _render(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry)
+        private void RenderCore(ICanvasResourceCreator resourceCreator, CanvasDrawingSession drawingSession, CanvasGeometry geometry)
         {
             //Fill
             // Fill a geometry with style.
@@ -114,6 +113,6 @@ namespace Retouch_Photo2.Layers.Models
 
 
         public override NodeCollection ConvertToCurves(ICanvasResourceCreator resourceCreator) => null;
-        
+
     }
 }

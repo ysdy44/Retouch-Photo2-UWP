@@ -131,7 +131,7 @@ namespace Retouch_Photo2.Tools.Models
             (
                 set: (style, transformer) =>
                 {
-                    style.Fill.TypeChange(brushType, transformer, photo);
+                    style.Fill.TypeChanged(brushType, transformer, photo);
 
                     brush = style.Fill;
                 },
