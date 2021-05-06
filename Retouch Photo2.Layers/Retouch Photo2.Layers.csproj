@@ -133,18 +133,18 @@
     <Compile Include="Layers\LayerBase.Instance.cs" />
     <Compile Include="Layers\PatternLayer.cs" />
     <Compile Include="LayerType.cs" />
-    <Compile Include="ModelsSecond\GeometryArrowLayer.cs" />
-    <Compile Include="ModelsSecond\GeometryCapsuleLayer.cs" />
-    <Compile Include="ModelsSecond\GeometryCogLayer.cs" />
-    <Compile Include="ModelsSecond\GeometryDiamondLayer.cs" />
-    <Compile Include="ModelsSecond\GeometryHeartLayer.cs" />
-    <Compile Include="ModelsSecond\GeometryPentagonLayer.cs" />
-    <Compile Include="ModelsSecond\GeometryDountLayer.cs" />
-    <Compile Include="ModelsSecond\GeometryCookieLayer.cs" />
-    <Compile Include="ModelsSecond\GeometryPieLayer.cs" />
-    <Compile Include="ModelsSecond\GeometryRoundRectLayer.cs" />
-    <Compile Include="ModelsSecond\GeometryStarLayer.cs" />
-    <Compile Include="ModelsSecond\GeometryTriangleLayer.cs" />
+    <Compile Include="ModelGeometrys\GeometryArrowLayer.cs" />
+    <Compile Include="ModelGeometrys\GeometryCapsuleLayer.cs" />
+    <Compile Include="ModelGeometrys\GeometryCogLayer.cs" />
+    <Compile Include="ModelGeometrys\GeometryDiamondLayer.cs" />
+    <Compile Include="ModelGeometrys\GeometryHeartLayer.cs" />
+    <Compile Include="ModelGeometrys\GeometryPentagonLayer.cs" />
+    <Compile Include="ModelGeometrys\GeometryDountLayer.cs" />
+    <Compile Include="ModelGeometrys\GeometryCookieLayer.cs" />
+    <Compile Include="ModelGeometrys\GeometryPieLayer.cs" />
+    <Compile Include="ModelGeometrys\GeometryRoundRectLayer.cs" />
+    <Compile Include="ModelGeometrys\GeometryStarLayer.cs" />
+    <Compile Include="ModelGeometrys\GeometryTriangleLayer.cs" />
     <Compile Include="Icon.xaml.cs">
       <DependentUpon>Icon.xaml</DependentUpon>
     </Compile>
@@ -164,9 +164,9 @@
     <Compile Include="Layers\LayerBase.Render.cs" />
     <Compile Include="Layers\LayerBase.cs" />
     <Compile Include="Layers\TextLayer.cs" />
-    <Compile Include="ModelsSecond\PatternDiagonalLayer.cs" />
-    <Compile Include="ModelsSecond\PatternSpottedLayer.cs" />
-    <Compile Include="ModelsSecond\PatternGridLayer.cs" />
+    <Compile Include="ModelPatterns\PatternDiagonalLayer.cs" />
+    <Compile Include="ModelPatterns\PatternSpottedLayer.cs" />
+    <Compile Include="ModelPatterns\PatternGridLayer.cs" />
     <Compile Include="Models\TextArtisticLayer.cs" />
     <Compile Include="Models\TextFrameLayer.cs" />
     <Compile Include="Transform.cs" />
