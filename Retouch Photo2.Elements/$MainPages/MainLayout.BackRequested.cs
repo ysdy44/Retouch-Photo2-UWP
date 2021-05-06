@@ -12,7 +12,7 @@ namespace Retouch_Photo2.Elements
 
         #region DependencyProperty
 
-        
+
         /// <summary> Gets or set the state for <see cref="ApplicationViewTitleBar"/>. </summary>
         public bool IsAccent
         {
@@ -39,6 +39,14 @@ namespace Retouch_Photo2.Elements
                 switch (value)
                 {
                     case MainPageState.Pictures:
+                        switch (oldValue)
+                        {
+                            case MainPageState.Main:
+                                control.Show(value);
+                                break;
+                        }
+                        break;
+
                     case MainPageState.Rename:
                     case MainPageState.Delete:
                     case MainPageState.Duplicate:
@@ -50,10 +58,12 @@ namespace Retouch_Photo2.Elements
                                 break;
                         }
                         break;
+
                     case MainPageState.Main:
                         control.IsAccent = false;
                         control.Hide();
                         break;
+
                     default:
                         break;
                 }
