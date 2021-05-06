@@ -89,9 +89,9 @@ namespace Retouch_Photo2
         /// Delete all selected ProjectViewItem(s).
         /// </summary>
         /// <param name="items"> The items. </param>
-        public async Task DeleteProjectViewItems(IEnumerable<IProjectViewItem> items)
+        public async Task DeleteProjectViewItems(IProjectViewItem[] items)// You can not remove an item by an IEnumerable
         {
-            foreach (IProjectViewItem item in items.ToList())
+            foreach (IProjectViewItem item in items)
             {
                 //Delete
                 string name = item.Name;
@@ -113,9 +113,9 @@ namespace Retouch_Photo2
         /// Duplicate all selected ProjectViewItem(s).
         /// </summary>     
         /// <param name="items"> The items. </param>
-        public async Task DuplicateProjectViewItems(IEnumerable<IProjectViewItem> items)
+        public async Task DuplicateProjectViewItems(IProjectViewItem[] items)// You can not remove an item by an IEnumerable
         {
-            foreach (IProjectViewItem item in items.ToList())
+            foreach (IProjectViewItem item in items)
             {
                 string oldName = item.Name;
                 string newName = this.UntitledRenameByRecursive(oldName);

@@ -225,7 +225,7 @@ namespace Retouch_Photo2
             {
                 this.LoadingControl.State = LoadingState.Loading;
 
-                await this.DeleteProjectViewItems(this.SelectedItems);
+                await this.DeleteProjectViewItems(this.SelectedItems.ToArray());
 
                 this.LoadingControl.State = LoadingState.None;
 
@@ -244,7 +244,7 @@ namespace Retouch_Photo2
             {
                 this.LoadingControl.State = LoadingState.Loading;
 
-                await this.DuplicateProjectViewItems(this.SelectedItems);
+                await this.DuplicateProjectViewItems(this.SelectedItems.ToArray());
 
                 this.LoadingControl.State = LoadingState.None;
 
