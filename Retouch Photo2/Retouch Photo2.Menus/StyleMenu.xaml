@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:styles="using:Retouch_Photo2.Styles"
-    mc:Ignorable="d"
+    mc:Ignorable="d"              
+    MinHeight="165"
     d:DesignWidth="200"
     d:DesignHeight="400"
    >
@@ -93,16 +94,26 @@
                 <!--Normal-->
                 <VisualState x:Name="Normal"/>
 
+                <!--RenameStyle-->
+                <VisualState x:Name="Rename">
+                    <VisualState.Setters>
+                        <Setter Target = "GridView.SelectionMode" Value="None"/>
+
+                        <Setter Target = "MainGrid.Visibility" Value="Collapsed"/>
+                        <Setter Target = "RenameGrid.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+
                 <!--DeleteStyle-->
-                <VisualState x:Name="DeleteStyleState">
+                <VisualState x:Name="Delete">
                     <VisualState.Setters>
                         <Setter Target = "GridView.SelectionMode" Value="Multiple"/>
                         <Setter Target = "GridView.IsItemClickEnabled" Value="False"/>
 
-                        <Setter Target = "HeaderGrid.Visibility" Value="Collapsed"/>
-                        <Setter Target = "FooterGrid.Visibility" Value="Visible"/>
+                        <Setter Target = "MainGrid.Visibility" Value="Collapsed"/>
+                        <Setter Target = "DeleteGrid.Visibility" Value="Visible"/>
                     </VisualState.Setters>
-                </VisualState>
+                </VisualState> 
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
@@ -112,7 +123,7 @@
             <Style TargetType="GridViewItem">
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="Width" Value="74"/>
-                <Setter Property="Height" Value="74"/>
+                <Setter Property="Height" Value="100"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
             </Style>
@@ -120,17 +131,16 @@
 
         <GridView.ItemTemplate>
             <DataTemplate x:DataType="styles:Style">
-                <styles:StyleShowControl Style2="{x:Bind}" HorizontalAlignment="Center">
-                    <ToolTipService.ToolTip>
-                        <ToolTip Content="{x:Bind Name}"/>
-                    </ToolTipService.ToolTip>
-                </styles:StyleShowControl>
+                <StackPanel>
+                    <styles:StyleShowControl Style2="{x:Bind}" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{x:Bind Name}" Style="{StaticResource AppTextBlockStyle}"/>
+                </StackPanel>
             </DataTemplate>
         </GridView.ItemTemplate>
 
         <GridView.Header>
             <Grid>
-                <Grid x:Name="HeaderGrid">
+                <Grid x:Name="MainGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
@@ -152,23 +162,30 @@
                         </ToolTipService.ToolTip>
                         <SymbolIcon Symbol="ShowBcc"/>
                     </ListViewItem>
-
                 </Grid>
-                <Grid x:Name="FooterGrid" Visibility="Collapsed">
+                
+                <Grid x:Name="RenameGrid" Visibility="Collapsed">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ListViewItem x:Name="RenameStyleCancelButton" Grid.Column="2" Style="{StaticResource AppListViewItemStyle}">
+                        <SymbolIcon Symbol="Cancel"/>
+                    </ListViewItem>
+                </Grid>
+                
+                <Grid x:Name="DeleteGrid" Visibility="Collapsed">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-
                     <ListViewItem x:Name="DeleteStyleOKButton" Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource AppListViewItemStyle}">
                         <SymbolIcon Symbol="Accept"/>
                     </ListViewItem>
-
                     <ListViewItem x:Name="DeleteStyleCancelButton" Grid.Column="2" Style="{StaticResource AppListViewItemStyle}">
                         <SymbolIcon Symbol="Cancel"/>
                     </ListViewItem>
-
                 </Grid>
             </Grid>
         </GridView.Header>
