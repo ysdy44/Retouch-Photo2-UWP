@@ -54,7 +54,7 @@ namespace Retouch_Photo2.Layers.Models
             float strokeWidth = this.Style.StrokeWidth;
             CanvasStrokeStyle strokeStyle = this.Style.StrokeStyle;
 
-            Transformer transformer = base.Transform.GetActualTransformer();
+            Transformer transformer = base.Transform.Transformer;
             TransformerBorder border = new TransformerBorder(transformer);
 
             for (float i = border.Left; i < border.Right; i += this.HorizontalStep)
