@@ -98,7 +98,7 @@ namespace Retouch_Photo2.Tools.Models
 
         private void ConstructStroke()
         {
-            this.StrokeBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowFillColorFlyout?.Invoke(this, this.StrokeBrushButton);
+            this.StrokeBrushButton.Tapped += (s, e) => Retouch_Photo2.DrawPage.ShowStrokeColorFlyout?.Invoke(this, this.StrokeBrushButton);
             this.TypeComboBox.StrokeTypeChanged += async (s, brushType) =>
             {
                 if (brushType == BrushType.Image)
