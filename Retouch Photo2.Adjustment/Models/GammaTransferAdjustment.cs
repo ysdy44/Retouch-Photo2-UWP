@@ -153,7 +153,6 @@ namespace Retouch_Photo2.Adjustments.Models
             element.Add(new XAttribute("AlphaDisable", this.AlphaDisable));
             if (this.AlphaDisable == false)
             {
-                element.Add(new XAttribute("AlphaDisable", false));
                 element.Add(new XAttribute("AlphaOffset", this.AlphaOffset));
                 element.Add(new XAttribute("AlphaExponent", this.AlphaExponent));
                 element.Add(new XAttribute("AlphaAmplitude", this.AlphaAmplitude));
